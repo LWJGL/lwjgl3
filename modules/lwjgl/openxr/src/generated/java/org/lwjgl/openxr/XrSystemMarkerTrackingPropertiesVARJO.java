@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * System property for marker tracking.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>may</b> inspect whether the system is capable of marker tracking by chaining an {@link XrSystemMarkerTrackingPropertiesVARJO} structure to the {@link XrSystemProperties} structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
- * 
- * <p>The runtime <b>should</b> return {@link XR10#XR_TRUE TRUE} for {@code supportsMarkerTracking} when marker tracking is available in the system, otherwise {@link XR10#XR_FALSE FALSE}. Marker tracking calls <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} if marker tracking is not available in the system.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link VARJOMarkerTracking XR_VARJO_marker_tracking} extension <b>must</b> be enabled prior to using {@link XrSystemMarkerTrackingPropertiesVARJO}</li>
- * <li>{@code type} <b>must</b> be {@link VARJOMarkerTracking#XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSystemProperties}, {@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemMarkerTrackingPropertiesVARJO {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsMarkerTracking};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsMarkerTracking;
+ * }}</pre>
  */
 public class XrSystemMarkerTrackingPropertiesVARJO extends Struct<XrSystemMarkerTrackingPropertiesVARJO> implements NativeResource {
 
@@ -96,21 +74,21 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct<XrSystemMarker
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32}, indicating if current system is capable of performing marker tracking. */
+    /** @return the value of the {@code supportsMarkerTracking} field. */
     @NativeType("XrBool32")
     public boolean supportsMarkerTracking() { return nsupportsMarkerTracking(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemMarkerTrackingPropertiesVARJO type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link VARJOMarkerTracking#XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO} value to the {@link #type} field. */
+    /** Sets the {@link VARJOMarkerTracking#XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO} value to the {@code type} field. */
     public XrSystemMarkerTrackingPropertiesVARJO type$Default() { return type(VARJOMarkerTracking.XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemMarkerTrackingPropertiesVARJO next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,21 +280,21 @@ public class XrSystemMarkerTrackingPropertiesVARJO extends Struct<XrSystemMarker
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemMarkerTrackingPropertiesVARJO#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemMarkerTrackingPropertiesVARJO.ntype(address()); }
-        /** @return the value of the {@link XrSystemMarkerTrackingPropertiesVARJO#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemMarkerTrackingPropertiesVARJO.nnext(address()); }
-        /** @return the value of the {@link XrSystemMarkerTrackingPropertiesVARJO#supportsMarkerTracking} field. */
+        /** @return the value of the {@code supportsMarkerTracking} field. */
         @NativeType("XrBool32")
         public boolean supportsMarkerTracking() { return XrSystemMarkerTrackingPropertiesVARJO.nsupportsMarkerTracking(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemMarkerTrackingPropertiesVARJO#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemMarkerTrackingPropertiesVARJO.Buffer type(@NativeType("XrStructureType") int value) { XrSystemMarkerTrackingPropertiesVARJO.ntype(address(), value); return this; }
-        /** Sets the {@link VARJOMarkerTracking#XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO} value to the {@link XrSystemMarkerTrackingPropertiesVARJO#type} field. */
+        /** Sets the {@link VARJOMarkerTracking#XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO} value to the {@code type} field. */
         public XrSystemMarkerTrackingPropertiesVARJO.Buffer type$Default() { return type(VARJOMarkerTracking.XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO); }
-        /** Sets the specified value to the {@link XrSystemMarkerTrackingPropertiesVARJO#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemMarkerTrackingPropertiesVARJO.Buffer next(@NativeType("void *") long value) { XrSystemMarkerTrackingPropertiesVARJO.nnext(address(), value); return this; }
 
     }

@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying vertex motion in a bottom-level acceleration structure.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} is included in the {@code pNext} chain of a {@link VkAccelerationStructureGeometryTrianglesDataKHR} structure, the basic vertex positions are used for the position of the triangles in the geometry at time 0.0 and the {@code vertexData} in {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} is used for the vertex positions at time 1.0, with positions linearly interpolated at intermediate times.</p>
- * 
- * <p>Indexing for {@link VkAccelerationStructureGeometryMotionTrianglesDataNV} {@code vertexData} is equivalent to the basic vertex position data.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceOrHostAddressConstKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureGeometryMotionTrianglesDataNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #vertexData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} vertexData;
+ * }}</pre>
  */
 public class VkAccelerationStructureGeometryMotionTrianglesDataNV extends Struct<VkAccelerationStructureGeometryMotionTrianglesDataNV> implements NativeResource {
 
@@ -94,24 +74,24 @@ public class VkAccelerationStructureGeometryMotionTrianglesDataNV extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to vertex data for this geometry at time 1.0 */
+    /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code vertexData} field. */
     public VkDeviceOrHostAddressConstKHR vertexData() { return nvertexData(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAccelerationStructureGeometryMotionTrianglesDataNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV} value to the {@code sType} field. */
     public VkAccelerationStructureGeometryMotionTrianglesDataNV sType$Default() { return sType(NVRayTracingMotionBlur.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAccelerationStructureGeometryMotionTrianglesDataNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #vertexData} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code vertexData} field. */
     public VkAccelerationStructureGeometryMotionTrianglesDataNV vertexData(VkDeviceOrHostAddressConstKHR value) { nvertexData(address(), value); return this; }
-    /** Passes the {@link #vertexData} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code vertexData} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureGeometryMotionTrianglesDataNV vertexData(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(vertexData()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,24 +287,24 @@ public class VkAccelerationStructureGeometryMotionTrianglesDataNV extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureGeometryMotionTrianglesDataNV.nsType(address()); }
-        /** @return the value of the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureGeometryMotionTrianglesDataNV.npNext(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#vertexData} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code vertexData} field. */
         public VkDeviceOrHostAddressConstKHR vertexData() { return VkAccelerationStructureGeometryMotionTrianglesDataNV.nvertexData(address()); }
 
-        /** Sets the specified value to the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAccelerationStructureGeometryMotionTrianglesDataNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureGeometryMotionTrianglesDataNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV} value to the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#sType} field. */
+        /** Sets the {@link NVRayTracingMotionBlur#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV} value to the {@code sType} field. */
         public VkAccelerationStructureGeometryMotionTrianglesDataNV.Buffer sType$Default() { return sType(NVRayTracingMotionBlur.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV); }
-        /** Sets the specified value to the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAccelerationStructureGeometryMotionTrianglesDataNV.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureGeometryMotionTrianglesDataNV.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#vertexData} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code vertexData} field. */
         public VkAccelerationStructureGeometryMotionTrianglesDataNV.Buffer vertexData(VkDeviceOrHostAddressConstKHR value) { VkAccelerationStructureGeometryMotionTrianglesDataNV.nvertexData(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureGeometryMotionTrianglesDataNV#vertexData} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code vertexData} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureGeometryMotionTrianglesDataNV.Buffer vertexData(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(vertexData()); return this; }
 
     }

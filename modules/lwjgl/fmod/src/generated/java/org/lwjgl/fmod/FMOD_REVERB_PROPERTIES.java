@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_REVERB_PROPERTIES {
  *     float DecayTime;
  *     float EarlyDelay;
@@ -32,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float HighCut;
  *     float EarlyLateMix;
  *     float WetLevel;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_REVERB_PROPERTIES extends Struct<FMOD_REVERB_PROPERTIES> implements NativeResource {
 

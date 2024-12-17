@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@code enteredMainFile} field of the {@link IndexerCallbacks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * CXIdxClientFile (*{@link #invoke}) (
- *     CXClientData client_data,
- *     CXFile mainFile,
- *     void *reserved
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("CXIdxClientFile (*) (CXClientData, CXFile, void *)")
 public interface IndexerEnteredMainFileI extends CallbackI {
@@ -47,7 +36,7 @@ public interface IndexerEnteredMainFileI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /** The {@code IndexerCallbacks.enteredMainFile} callback. */
+    /** {@code CXIdxClientFile (*) (CXClientData client_data, CXFile mainFile, void * reserved)} */
     @NativeType("CXIdxClientFile") long invoke(@NativeType("CXClientData") long client_data, @NativeType("CXFile") long mainFile, @NativeType("void *") long reserved);
 
 }

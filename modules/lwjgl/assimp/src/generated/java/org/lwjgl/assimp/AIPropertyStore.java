@@ -16,14 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents an opaque set of settings to be used during importing.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiPropertyStore {
  *     char sentinel;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct aiPropertyStore")
 public class AIPropertyStore extends Struct<AIPropertyStore> implements NativeResource {

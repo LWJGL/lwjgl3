@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Memory Allocation Info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshBufferSizeML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML TYPE_WORLD_MESH_BUFFER_SIZE_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLWorldMeshDetection#xrAllocateWorldMeshBufferML AllocateWorldMeshBufferML}, {@link MLWorldMeshDetection#xrGetWorldMeshBufferRecommendSizeML GetWorldMeshBufferRecommendSizeML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshBufferSizeML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #size};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t size;
+ * }}</pre>
  */
 public class XrWorldMeshBufferSizeML extends Struct<XrWorldMeshBufferSizeML> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class XrWorldMeshBufferSizeML extends Struct<XrWorldMeshBufferSizeML> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} indicating the number of bytes recommended. */
+    /** @return the value of the {@code size} field. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshBufferSizeML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML TYPE_WORLD_MESH_BUFFER_SIZE_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML TYPE_WORLD_MESH_BUFFER_SIZE_ML} value to the {@code type} field. */
     public XrWorldMeshBufferSizeML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshBufferSizeML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public XrWorldMeshBufferSizeML size(@NativeType("uint32_t") int value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,23 +286,23 @@ public class XrWorldMeshBufferSizeML extends Struct<XrWorldMeshBufferSizeML> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshBufferSizeML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshBufferSizeML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshBufferSizeML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrWorldMeshBufferSizeML.nnext(address()); }
-        /** @return the value of the {@link XrWorldMeshBufferSizeML#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("uint32_t")
         public int size() { return XrWorldMeshBufferSizeML.nsize(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshBufferSizeML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshBufferSizeML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshBufferSizeML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML TYPE_WORLD_MESH_BUFFER_SIZE_ML} value to the {@link XrWorldMeshBufferSizeML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML TYPE_WORLD_MESH_BUFFER_SIZE_ML} value to the {@code type} field. */
         public XrWorldMeshBufferSizeML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshBufferSizeML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshBufferSizeML.Buffer next(@NativeType("void *") long value) { XrWorldMeshBufferSizeML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshBufferSizeML#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public XrWorldMeshBufferSizeML.Buffer size(@NativeType("uint32_t") int value) { XrWorldMeshBufferSizeML.nsize(address(), value); return this; }
 
     }

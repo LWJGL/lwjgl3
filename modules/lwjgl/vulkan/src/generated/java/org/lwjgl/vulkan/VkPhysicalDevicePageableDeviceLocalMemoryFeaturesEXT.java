@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether the implementation supports pageable device-local memory.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTPageableDeviceLocalMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #pageableDeviceLocalMemory};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 pageableDeviceLocalMemory;
+ * }}</pre>
  */
 public class VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT extends Struct<VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports pageable device-local memory and <b>may</b> transparently move device-local memory allocations to host-local memory to better share device-local memory with other applications. */
+    /** @return the value of the {@code pageableDeviceLocalMemory} field. */
     @NativeType("VkBool32")
     public boolean pageableDeviceLocalMemory() { return npageableDeviceLocalMemory(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPageableDeviceLocalMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTPageableDeviceLocalMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT sType$Default() { return sType(EXTPageableDeviceLocalMemory.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pageableDeviceLocalMemory} field. */
+    /** Sets the specified value to the {@code pageableDeviceLocalMemory} field. */
     public VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT pageableDeviceLocalMemory(@NativeType("VkBool32") boolean value) { npageableDeviceLocalMemory(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT#pageableDeviceLocalMemory} field. */
+        /** @return the value of the {@code pageableDeviceLocalMemory} field. */
         @NativeType("VkBool32")
         public boolean pageableDeviceLocalMemory() { return VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.npageableDeviceLocalMemory(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPageableDeviceLocalMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT} value to the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTPageableDeviceLocalMemory#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.Buffer sType$Default() { return sType(EXTPageableDeviceLocalMemory.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT#pageableDeviceLocalMemory} field. */
+        /** Sets the specified value to the {@code pageableDeviceLocalMemory} field. */
         public VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.Buffer pageableDeviceLocalMemory(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT.npageableDeviceLocalMemory(address(), value ? 1 : 0); return this; }
 
     }

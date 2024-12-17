@@ -16,26 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Per frame configuration parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLFrameEndInfo XR_ML_frame_end_info} extension <b>must</b> be enabled prior to using {@link XrFrameEndInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLFrameEndInfo#XR_TYPE_FRAME_END_INFO_ML TYPE_FRAME_END_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrFrameEndInfoFlagBitsML} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFrameEndInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     float {@link #focusDistance};
- *     XrFrameEndInfoFlagsML {@link #flags};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     float focusDistance;
+ *     XrFrameEndInfoFlagsML flags;
+ * }}</pre>
  */
 public class XrFrameEndInfoML extends Struct<XrFrameEndInfoML> implements NativeResource {
 
@@ -91,27 +78,27 @@ public class XrFrameEndInfoML extends Struct<XrFrameEndInfoML> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the distance, in meters, to defined focus point for the client content. The focus distance is interpreted as the positive distance to the client-determined object of interest (relative to the forward vector of the Lightwear). */
+    /** @return the value of the {@code focusDistance} field. */
     public float focusDistance() { return nfocusDistance(address()); }
-    /** a bitmask of {@code XrFrameEndInfoFlagsML} */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrFrameEndInfoFlagsML")
     public long flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFrameEndInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLFrameEndInfo#XR_TYPE_FRAME_END_INFO_ML TYPE_FRAME_END_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLFrameEndInfo#XR_TYPE_FRAME_END_INFO_ML TYPE_FRAME_END_INFO_ML} value to the {@code type} field. */
     public XrFrameEndInfoML type$Default() { return type(MLFrameEndInfo.XR_TYPE_FRAME_END_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFrameEndInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #focusDistance} field. */
+    /** Sets the specified value to the {@code focusDistance} field. */
     public XrFrameEndInfoML focusDistance(float value) { nfocusDistance(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public XrFrameEndInfoML flags(@NativeType("XrFrameEndInfoFlagsML") long value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,27 +300,27 @@ public class XrFrameEndInfoML extends Struct<XrFrameEndInfoML> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFrameEndInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFrameEndInfoML.ntype(address()); }
-        /** @return the value of the {@link XrFrameEndInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFrameEndInfoML.nnext(address()); }
-        /** @return the value of the {@link XrFrameEndInfoML#focusDistance} field. */
+        /** @return the value of the {@code focusDistance} field. */
         public float focusDistance() { return XrFrameEndInfoML.nfocusDistance(address()); }
-        /** @return the value of the {@link XrFrameEndInfoML#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrFrameEndInfoFlagsML")
         public long flags() { return XrFrameEndInfoML.nflags(address()); }
 
-        /** Sets the specified value to the {@link XrFrameEndInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFrameEndInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrFrameEndInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLFrameEndInfo#XR_TYPE_FRAME_END_INFO_ML TYPE_FRAME_END_INFO_ML} value to the {@link XrFrameEndInfoML#type} field. */
+        /** Sets the {@link MLFrameEndInfo#XR_TYPE_FRAME_END_INFO_ML TYPE_FRAME_END_INFO_ML} value to the {@code type} field. */
         public XrFrameEndInfoML.Buffer type$Default() { return type(MLFrameEndInfo.XR_TYPE_FRAME_END_INFO_ML); }
-        /** Sets the specified value to the {@link XrFrameEndInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFrameEndInfoML.Buffer next(@NativeType("void const *") long value) { XrFrameEndInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFrameEndInfoML#focusDistance} field. */
+        /** Sets the specified value to the {@code focusDistance} field. */
         public XrFrameEndInfoML.Buffer focusDistance(float value) { XrFrameEndInfoML.nfocusDistance(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFrameEndInfoML#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public XrFrameEndInfoML.Buffer flags(@NativeType("XrFrameEndInfoFlagsML") long value) { XrFrameEndInfoML.nflags(address(), value); return this; }
 
     }

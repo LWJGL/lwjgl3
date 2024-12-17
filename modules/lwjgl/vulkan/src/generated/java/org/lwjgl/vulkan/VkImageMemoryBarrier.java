@@ -16,120 +16,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters of an image memory barrier.
- * 
- * <h5>Description</h5>
- * 
- * <p>The first <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> is limited to access to memory through the specified image subresource range, via access types in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-access-masks">source access mask</a> specified by {@code srcAccessMask}. If {@code srcAccessMask} includes {@link VK10#VK_ACCESS_HOST_WRITE_BIT ACCESS_HOST_WRITE_BIT}, memory writes performed by that access type are also made visible, as that access type is not performed through a resource.</p>
- * 
- * <p>The second <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> is limited to access to memory through the specified image subresource range, via access types in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-access-masks">destination access mask</a> specified by {@code dstAccessMask}. If {@code dstAccessMask} includes {@link VK10#VK_ACCESS_HOST_WRITE_BIT ACCESS_HOST_WRITE_BIT} or {@link VK10#VK_ACCESS_HOST_READ_BIT ACCESS_HOST_READ_BIT}, available memory writes are also made visible to accesses of those types, as those access types are not performed through a resource.</p>
- * 
- * <p>If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, and {@code srcQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers-release">queue family release operation</a> for the specified image subresource range, and the second synchronization scope of the calling command does not apply to this operation.</p>
- * 
- * <p>If {@code dstQueueFamilyIndex} is not equal to {@code srcQueueFamilyIndex}, and {@code dstQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers-acquire">queue family acquire operation</a> for the specified image subresource range, and the first synchronization scope of the calling command does not apply to this operation.</p>
- * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled or {@code oldLayout} is not equal to {@code newLayout}, {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a> for the specified image subresource range.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is enabled, when the old and new layout are equal, the layout values are ignored - data is preserved no matter what values are specified, or what layout the image is currently in.</p>
- * </div>
- * 
- * <p>If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then including {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} in the {@code aspectMask} member of {@code subresourceRange} is equivalent to including {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT}, and (for three-plane formats only) {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK10#VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK10#VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT} or {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK10#VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_TRANSFER_SRC_BIT IMAGE_USAGE_TRANSFER_SRC_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK10#VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_TRANSFER_DST_BIT IMAGE_USAGE_TRANSFER_DST_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, {@code oldLayout} <b>must</b> be {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED} or the current layout of the image subresources affected by the barrier</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, {@code newLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED} or {@link VK10#VK_IMAGE_LAYOUT_PREINITIALIZED IMAGE_LAYOUT_PREINITIALIZED}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK11#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL} then {@code image} <b>must</b> have been created with at least one of {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}, {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT}, or {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT} set</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL} then {@code image} <b>must</b> have been created with at least one of {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}, {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT}, or {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL} then {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT} set</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, {@code oldLayout} <b>must</b> not be {@link KHRSynchronization2#VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR} or {@link KHRSynchronization2#VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, {@code newLayout} <b>must</b> not be {@link KHRSynchronization2#VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR} or {@link KHRSynchronization2#VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK13#VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_ATTACHMENT_OPTIMAL}, {@code image} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT} or {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK13#VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL IMAGE_LAYOUT_READ_ONLY_OPTIMAL}, {@code image} <b>must</b> have been created with at least one of {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}, {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT}, or {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link KHRFragmentShadingRate#VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR} then {@code image} <b>must</b> have been created with {@link KHRFragmentShadingRate#VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR} set</li>
- * <li>If {@code image} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_EXCLUSIVE SHARING_MODE_EXCLUSIVE}, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are not equal, {@code srcQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}, {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}, or a valid queue family</li>
- * <li>If {@code image} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_EXCLUSIVE SHARING_MODE_EXCLUSIVE}, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are not equal, {@code dstQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}, {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}, or a valid queue family</li>
- * <li>If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, at least one of {@code srcQueueFamilyIndex} or {@code dstQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL} or {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If the {@link KHRExternalMemory VK_KHR_external_memory} extension is not enabled, and the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} is not greater than or equal to Version 1.1, {@code srcQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * <li>If the {@link KHRExternalMemory VK_KHR_external_memory} extension is not enabled, and the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} is not greater than or equal to Version 1.1, {@code dstQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * <li>If the {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} extension is not enabled {@code srcQueueFamilyIndex} <b>must</b> not be {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If the {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} extension is not enabled {@code dstQueueFamilyIndex} <b>must</b> not be {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link KHRVideoDecodeQueue#VK_IMAGE_LAYOUT_VIDEO_DECODE_SRC_KHR IMAGE_LAYOUT_VIDEO_DECODE_SRC_KHR} then {@code image} <b>must</b> have been created with {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link KHRVideoDecodeQueue#VK_IMAGE_LAYOUT_VIDEO_DECODE_DST_KHR IMAGE_LAYOUT_VIDEO_DECODE_DST_KHR} then {@code image} <b>must</b> have been created with {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link KHRVideoDecodeQueue#VK_IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR} then {@code image} <b>must</b> have been created with {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link KHRVideoEncodeQueue#VK_IMAGE_LAYOUT_VIDEO_ENCODE_SRC_KHR IMAGE_LAYOUT_VIDEO_ENCODE_SRC_KHR} then {@code image} <b>must</b> have been created with {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link KHRVideoEncodeQueue#VK_IMAGE_LAYOUT_VIDEO_ENCODE_DST_KHR IMAGE_LAYOUT_VIDEO_ENCODE_DST_KHR} then {@code image} <b>must</b> have been created with {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link KHRVideoEncodeQueue#VK_IMAGE_LAYOUT_VIDEO_ENCODE_DPB_KHR IMAGE_LAYOUT_VIDEO_ENCODE_DPB_KHR} then {@code image} <b>must</b> have been created with {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_LAYOUT_VIDEO_ENCODE_QUANTIZATION_MAP_KHR IMAGE_LAYOUT_VIDEO_ENCODE_QUANTIZATION_MAP_KHR} then {@code image} <b>must</b> have been created with {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR} or {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link EXTAttachmentFeedbackLoopLayout#VK_IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT} then {@code image} <b>must</b> have been created with either the {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT} or {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT} usage bits, and the {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT} or {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT} usage bits, and the {@link EXTAttachmentFeedbackLoopLayout#VK_IMAGE_USAGE_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT IMAGE_USAGE_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT} usage bit</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFeedbackLoopLayout">{@code attachmentFeedbackLoopLayout}</a> feature is not enabled, {@code newLayout} <b>must</b> not be {@link EXTAttachmentFeedbackLoopLayout#VK_IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT}</li>
- * <li>If {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a> or {@code oldLayout} and {@code newLayout} define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>, and {@code oldLayout} or {@code newLayout} is {@link VK14#VK_IMAGE_LAYOUT_RENDERING_LOCAL_READ IMAGE_LAYOUT_RENDERING_LOCAL_READ} then {@code image} <b>must</b> have been created with either {@link VK10#VK_IMAGE_USAGE_STORAGE_BIT IMAGE_USAGE_STORAGE_BIT}, or with both {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT} and either of {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT} or {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, {@code oldLayout} <b>must</b> not be {@link VK14#VK_IMAGE_LAYOUT_RENDERING_LOCAL_READ IMAGE_LAYOUT_RENDERING_LOCAL_READ}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, {@code newLayout} <b>must</b> not be {@link VK14#VK_IMAGE_LAYOUT_RENDERING_LOCAL_READ IMAGE_LAYOUT_RENDERING_LOCAL_READ}</li>
- * </ul>
- * 
- * <ul>
- * <li>{@code subresourceRange.baseMipLevel} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code subresourceRange.levelCount} is not {@link VK10#VK_REMAINING_MIP_LEVELS REMAINING_MIP_LEVELS}, <code>subresourceRange.baseMipLevel + subresourceRange.levelCount</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>{@code subresourceRange.baseArrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code subresourceRange.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, <code>subresourceRange.baseArrayLayer + subresourceRange.layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code image} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If {@code image} has a color format that is single-plane, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
- * <li>If {@code image} has a color format and is not <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
- * <li>If {@code image} has a multi-planar format and the image is <em>disjoint</em>, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include at least one <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a> bit or {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
- * <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is not enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include both {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
- * <li>If {@code image} has a depth/stencil format with both depth and stencil and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is enabled, then the {@code aspectMask} member of {@code subresourceRange} <b>must</b> include either or both {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT} and {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}</li>
- * <li>If the {@code aspectMask} member of {@code subresourceRange} includes {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT}, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If the {@code aspectMask} member of {@code subresourceRange} includes {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, {@code oldLayout} and {@code newLayout} <b>must</b> not be one of {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}</li>
- * <li>{@code subresourceRange.aspectMask} <b>must</b> be valid for the {@code format} the {@code image} was created with</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, and {@code image} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, at least one of {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_IGNORED QUEUE_FAMILY_IGNORED}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, and {@code image} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, {@code srcQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_IGNORED QUEUE_FAMILY_IGNORED} or {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, and {@code image} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, {@code dstQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_IGNORED QUEUE_FAMILY_IGNORED} or {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExternalMemoryAcquireUnmodifiedEXT} or {@link VkSampleLocationsInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code oldLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code newLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>{@code subresourceRange} <b>must</b> be a valid {@link VkImageSubresourceRange} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkImageSubresourceRange}, {@link VK10#vkCmdPipelineBarrier CmdPipelineBarrier}, {@link VK10#vkCmdWaitEvents CmdWaitEvents}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageMemoryBarrier {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkAccessFlags {@link #srcAccessMask};
- *     VkAccessFlags {@link #dstAccessMask};
- *     VkImageLayout {@link #oldLayout};
- *     VkImageLayout {@link #newLayout};
- *     uint32_t {@link #srcQueueFamilyIndex};
- *     uint32_t {@link #dstQueueFamilyIndex};
- *     VkImage {@link #image};
- *     {@link VkImageSubresourceRange VkImageSubresourceRange} {@link #subresourceRange};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkAccessFlags srcAccessMask;
+ *     VkAccessFlags dstAccessMask;
+ *     VkImageLayout oldLayout;
+ *     VkImageLayout newLayout;
+ *     uint32_t srcQueueFamilyIndex;
+ *     uint32_t dstQueueFamilyIndex;
+ *     VkImage image;
+ *     {@link VkImageSubresourceRange VkImageSubresourceRange} subresourceRange;
+ * }}</pre>
  */
 public class VkImageMemoryBarrier extends Struct<VkImageMemoryBarrier> implements NativeResource {
 
@@ -203,63 +102,63 @@ public class VkImageMemoryBarrier extends Struct<VkImageMemoryBarrier> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkAccessFlagBits} specifying a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-access-masks">source access mask</a>. */
+    /** @return the value of the {@code srcAccessMask} field. */
     @NativeType("VkAccessFlags")
     public int srcAccessMask() { return nsrcAccessMask(address()); }
-    /** a bitmask of {@code VkAccessFlagBits} specifying a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-access-masks">destination access mask</a>. */
+    /** @return the value of the {@code dstAccessMask} field. */
     @NativeType("VkAccessFlags")
     public int dstAccessMask() { return ndstAccessMask(address()); }
-    /** the old layout in an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>. */
+    /** @return the value of the {@code oldLayout} field. */
     @NativeType("VkImageLayout")
     public int oldLayout() { return noldLayout(address()); }
-    /** the new layout in an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-image-layout-transitions">image layout transition</a>. */
+    /** @return the value of the {@code newLayout} field. */
     @NativeType("VkImageLayout")
     public int newLayout() { return nnewLayout(address()); }
-    /** the source queue family for a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
+    /** @return the value of the {@code srcQueueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int srcQueueFamilyIndex() { return nsrcQueueFamilyIndex(address()); }
-    /** the destination queue family for a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
+    /** @return the value of the {@code dstQueueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int dstQueueFamilyIndex() { return ndstQueueFamilyIndex(address()); }
-    /** a handle to the image affected by this barrier. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** describes the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-views">image subresource range</a> within {@code image} that is affected by this barrier. */
+    /** @return a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
     public VkImageSubresourceRange subresourceRange() { return nsubresourceRange(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageMemoryBarrier sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER} value to the {@code sType} field. */
     public VkImageMemoryBarrier sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageMemoryBarrier pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
     public VkImageMemoryBarrier pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
     public VkImageMemoryBarrier pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #srcAccessMask} field. */
+    /** Sets the specified value to the {@code srcAccessMask} field. */
     public VkImageMemoryBarrier srcAccessMask(@NativeType("VkAccessFlags") int value) { nsrcAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstAccessMask} field. */
+    /** Sets the specified value to the {@code dstAccessMask} field. */
     public VkImageMemoryBarrier dstAccessMask(@NativeType("VkAccessFlags") int value) { ndstAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #oldLayout} field. */
+    /** Sets the specified value to the {@code oldLayout} field. */
     public VkImageMemoryBarrier oldLayout(@NativeType("VkImageLayout") int value) { noldLayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #newLayout} field. */
+    /** Sets the specified value to the {@code newLayout} field. */
     public VkImageMemoryBarrier newLayout(@NativeType("VkImageLayout") int value) { nnewLayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
     public VkImageMemoryBarrier srcQueueFamilyIndex(@NativeType("uint32_t") int value) { nsrcQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
     public VkImageMemoryBarrier dstQueueFamilyIndex(@NativeType("uint32_t") int value) { ndstQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #image} field. */
+    /** Sets the specified value to the {@code image} field. */
     public VkImageMemoryBarrier image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresourceRange} to the {@link #subresourceRange} field. */
+    /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
     public VkImageMemoryBarrier subresourceRange(VkImageSubresourceRange value) { nsubresourceRange(address(), value); return this; }
-    /** Passes the {@link #subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageMemoryBarrier subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -516,63 +415,63 @@ public class VkImageMemoryBarrier extends Struct<VkImageMemoryBarrier> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageMemoryBarrier#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageMemoryBarrier.nsType(address()); }
-        /** @return the value of the {@link VkImageMemoryBarrier#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageMemoryBarrier.npNext(address()); }
-        /** @return the value of the {@link VkImageMemoryBarrier#srcAccessMask} field. */
+        /** @return the value of the {@code srcAccessMask} field. */
         @NativeType("VkAccessFlags")
         public int srcAccessMask() { return VkImageMemoryBarrier.nsrcAccessMask(address()); }
-        /** @return the value of the {@link VkImageMemoryBarrier#dstAccessMask} field. */
+        /** @return the value of the {@code dstAccessMask} field. */
         @NativeType("VkAccessFlags")
         public int dstAccessMask() { return VkImageMemoryBarrier.ndstAccessMask(address()); }
-        /** @return the value of the {@link VkImageMemoryBarrier#oldLayout} field. */
+        /** @return the value of the {@code oldLayout} field. */
         @NativeType("VkImageLayout")
         public int oldLayout() { return VkImageMemoryBarrier.noldLayout(address()); }
-        /** @return the value of the {@link VkImageMemoryBarrier#newLayout} field. */
+        /** @return the value of the {@code newLayout} field. */
         @NativeType("VkImageLayout")
         public int newLayout() { return VkImageMemoryBarrier.nnewLayout(address()); }
-        /** @return the value of the {@link VkImageMemoryBarrier#srcQueueFamilyIndex} field. */
+        /** @return the value of the {@code srcQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int srcQueueFamilyIndex() { return VkImageMemoryBarrier.nsrcQueueFamilyIndex(address()); }
-        /** @return the value of the {@link VkImageMemoryBarrier#dstQueueFamilyIndex} field. */
+        /** @return the value of the {@code dstQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int dstQueueFamilyIndex() { return VkImageMemoryBarrier.ndstQueueFamilyIndex(address()); }
-        /** @return the value of the {@link VkImageMemoryBarrier#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return VkImageMemoryBarrier.nimage(address()); }
-        /** @return a {@link VkImageSubresourceRange} view of the {@link VkImageMemoryBarrier#subresourceRange} field. */
+        /** @return a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
         public VkImageSubresourceRange subresourceRange() { return VkImageMemoryBarrier.nsubresourceRange(address()); }
 
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageMemoryBarrier.Buffer sType(@NativeType("VkStructureType") int value) { VkImageMemoryBarrier.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER} value to the {@link VkImageMemoryBarrier#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER} value to the {@code sType} field. */
         public VkImageMemoryBarrier.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER); }
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageMemoryBarrier.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryBarrier.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
         public VkImageMemoryBarrier.Buffer pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSampleLocationsInfoEXT} value to the {@code pNext} chain. */
         public VkImageMemoryBarrier.Buffer pNext(VkSampleLocationsInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#srcAccessMask} field. */
+        /** Sets the specified value to the {@code srcAccessMask} field. */
         public VkImageMemoryBarrier.Buffer srcAccessMask(@NativeType("VkAccessFlags") int value) { VkImageMemoryBarrier.nsrcAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#dstAccessMask} field. */
+        /** Sets the specified value to the {@code dstAccessMask} field. */
         public VkImageMemoryBarrier.Buffer dstAccessMask(@NativeType("VkAccessFlags") int value) { VkImageMemoryBarrier.ndstAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#oldLayout} field. */
+        /** Sets the specified value to the {@code oldLayout} field. */
         public VkImageMemoryBarrier.Buffer oldLayout(@NativeType("VkImageLayout") int value) { VkImageMemoryBarrier.noldLayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#newLayout} field. */
+        /** Sets the specified value to the {@code newLayout} field. */
         public VkImageMemoryBarrier.Buffer newLayout(@NativeType("VkImageLayout") int value) { VkImageMemoryBarrier.nnewLayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#srcQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
         public VkImageMemoryBarrier.Buffer srcQueueFamilyIndex(@NativeType("uint32_t") int value) { VkImageMemoryBarrier.nsrcQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#dstQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
         public VkImageMemoryBarrier.Buffer dstQueueFamilyIndex(@NativeType("uint32_t") int value) { VkImageMemoryBarrier.ndstQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageMemoryBarrier#image} field. */
+        /** Sets the specified value to the {@code image} field. */
         public VkImageMemoryBarrier.Buffer image(@NativeType("VkImage") long value) { VkImageMemoryBarrier.nimage(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresourceRange} to the {@link VkImageMemoryBarrier#subresourceRange} field. */
+        /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
         public VkImageMemoryBarrier.Buffer subresourceRange(VkImageSubresourceRange value) { VkImageMemoryBarrier.nsubresourceRange(address(), value); return this; }
-        /** Passes the {@link VkImageMemoryBarrier#subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageMemoryBarrier.Buffer subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     }

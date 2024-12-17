@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VROverlayIntersectionResults_t {
  *     {@link HmdVector3 HmdVector3_t} vPoint;
  *     {@link HmdVector3 HmdVector3_t} vNormal;
  *     {@link HmdVector2 HmdVector2_t} vUVs;
  *     float fDistance;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VROverlayIntersectionResults_t")
 public class VROverlayIntersectionResults extends Struct<VROverlayIntersectionResults> implements NativeResource {

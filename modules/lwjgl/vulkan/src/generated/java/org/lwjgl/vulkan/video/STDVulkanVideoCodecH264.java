@@ -19,19 +19,6 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_MAX_CHROMA_PLANES             = 2,
         STD_VIDEO_H264_NO_REFERENCE_PICTURE          = 0xFF;
 
-    /**
-     * {@code StdVideoH264ChromaFormatIdc}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_CHROMA_FORMAT_IDC_MONOCHROME H264_CHROMA_FORMAT_IDC_MONOCHROME}</li>
-     * <li>{@link #STD_VIDEO_H264_CHROMA_FORMAT_IDC_420 H264_CHROMA_FORMAT_IDC_420}</li>
-     * <li>{@link #STD_VIDEO_H264_CHROMA_FORMAT_IDC_422 H264_CHROMA_FORMAT_IDC_422}</li>
-     * <li>{@link #STD_VIDEO_H264_CHROMA_FORMAT_IDC_444 H264_CHROMA_FORMAT_IDC_444}</li>
-     * <li>{@link #STD_VIDEO_H264_CHROMA_FORMAT_IDC_INVALID H264_CHROMA_FORMAT_IDC_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_CHROMA_FORMAT_IDC_MONOCHROME = 0,
         STD_VIDEO_H264_CHROMA_FORMAT_IDC_420        = 1,
@@ -39,19 +26,6 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_CHROMA_FORMAT_IDC_444        = 3,
         STD_VIDEO_H264_CHROMA_FORMAT_IDC_INVALID    = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264ProfileIdc}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_PROFILE_IDC_BASELINE H264_PROFILE_IDC_BASELINE} - Only constrained baseSTline is supported</li>
-     * <li>{@link #STD_VIDEO_H264_PROFILE_IDC_MAIN H264_PROFILE_IDC_MAIN}</li>
-     * <li>{@link #STD_VIDEO_H264_PROFILE_IDC_HIGH H264_PROFILE_IDC_HIGH}</li>
-     * <li>{@link #STD_VIDEO_H264_PROFILE_IDC_HIGH_444_PREDICTIVE H264_PROFILE_IDC_HIGH_444_PREDICTIVE}</li>
-     * <li>{@link #STD_VIDEO_H264_PROFILE_IDC_INVALID H264_PROFILE_IDC_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_PROFILE_IDC_BASELINE            = 66,
         STD_VIDEO_H264_PROFILE_IDC_MAIN                = 77,
@@ -59,34 +33,6 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_PROFILE_IDC_HIGH_444_PREDICTIVE = 244,
         STD_VIDEO_H264_PROFILE_IDC_INVALID             = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264LevelIdc}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_1_0 H264_LEVEL_IDC_1_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_1_1 H264_LEVEL_IDC_1_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_1_2 H264_LEVEL_IDC_1_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_1_3 H264_LEVEL_IDC_1_3}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_2_0 H264_LEVEL_IDC_2_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_2_1 H264_LEVEL_IDC_2_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_2_2 H264_LEVEL_IDC_2_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_3_0 H264_LEVEL_IDC_3_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_3_1 H264_LEVEL_IDC_3_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_3_2 H264_LEVEL_IDC_3_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_4_0 H264_LEVEL_IDC_4_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_4_1 H264_LEVEL_IDC_4_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_4_2 H264_LEVEL_IDC_4_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_5_0 H264_LEVEL_IDC_5_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_5_1 H264_LEVEL_IDC_5_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_5_2 H264_LEVEL_IDC_5_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_6_0 H264_LEVEL_IDC_6_0}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_6_1 H264_LEVEL_IDC_6_1}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_6_2 H264_LEVEL_IDC_6_2}</li>
-     * <li>{@link #STD_VIDEO_H264_LEVEL_IDC_INVALID H264_LEVEL_IDC_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_LEVEL_IDC_1_0     = 0,
         STD_VIDEO_H264_LEVEL_IDC_1_1     = 1,
@@ -109,51 +55,12 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_LEVEL_IDC_6_2     = 18,
         STD_VIDEO_H264_LEVEL_IDC_INVALID = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264PocType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_POC_TYPE_0 H264_POC_TYPE_0}</li>
-     * <li>{@link #STD_VIDEO_H264_POC_TYPE_1 H264_POC_TYPE_1}</li>
-     * <li>{@link #STD_VIDEO_H264_POC_TYPE_2 H264_POC_TYPE_2}</li>
-     * <li>{@link #STD_VIDEO_H264_POC_TYPE_INVALID H264_POC_TYPE_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_POC_TYPE_0       = 0,
         STD_VIDEO_H264_POC_TYPE_1       = 1,
         STD_VIDEO_H264_POC_TYPE_2       = 2,
         STD_VIDEO_H264_POC_TYPE_INVALID = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264AspectRatioIdc}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_UNSPECIFIED H264_ASPECT_RATIO_IDC_UNSPECIFIED}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_SQUARE H264_ASPECT_RATIO_IDC_SQUARE}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_12_11 H264_ASPECT_RATIO_IDC_12_11}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_10_11 H264_ASPECT_RATIO_IDC_10_11}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_16_11 H264_ASPECT_RATIO_IDC_16_11}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_40_33 H264_ASPECT_RATIO_IDC_40_33}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_24_11 H264_ASPECT_RATIO_IDC_24_11}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_20_11 H264_ASPECT_RATIO_IDC_20_11}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_32_11 H264_ASPECT_RATIO_IDC_32_11}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_80_33 H264_ASPECT_RATIO_IDC_80_33}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_18_11 H264_ASPECT_RATIO_IDC_18_11}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_15_11 H264_ASPECT_RATIO_IDC_15_11}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_64_33 H264_ASPECT_RATIO_IDC_64_33}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_160_99 H264_ASPECT_RATIO_IDC_160_99}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_4_3 H264_ASPECT_RATIO_IDC_4_3}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_3_2 H264_ASPECT_RATIO_IDC_3_2}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_2_1 H264_ASPECT_RATIO_IDC_2_1}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_EXTENDED_SAR H264_ASPECT_RATIO_IDC_EXTENDED_SAR}</li>
-     * <li>{@link #STD_VIDEO_H264_ASPECT_RATIO_IDC_INVALID H264_ASPECT_RATIO_IDC_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_ASPECT_RATIO_IDC_UNSPECIFIED  = 0,
         STD_VIDEO_H264_ASPECT_RATIO_IDC_SQUARE       = 1,
@@ -175,37 +82,12 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_ASPECT_RATIO_IDC_EXTENDED_SAR = 255,
         STD_VIDEO_H264_ASPECT_RATIO_IDC_INVALID      = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264WeightedBipredIdc}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_DEFAULT H264_WEIGHTED_BIPRED_IDC_DEFAULT}</li>
-     * <li>{@link #STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_EXPLICIT H264_WEIGHTED_BIPRED_IDC_EXPLICIT}</li>
-     * <li>{@link #STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_IMPLICIT H264_WEIGHTED_BIPRED_IDC_IMPLICIT}</li>
-     * <li>{@link #STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_INVALID H264_WEIGHTED_BIPRED_IDC_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_DEFAULT  = 0,
         STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_EXPLICIT = 1,
         STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_IMPLICIT = 2,
         STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_INVALID  = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264ModificationOfPicNumsIdc}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_SHORT_TERM_SUBTRACT H264_MODIFICATION_OF_PIC_NUMS_IDC_SHORT_TERM_SUBTRACT}</li>
-     * <li>{@link #STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_SHORT_TERM_ADD H264_MODIFICATION_OF_PIC_NUMS_IDC_SHORT_TERM_ADD}</li>
-     * <li>{@link #STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_LONG_TERM H264_MODIFICATION_OF_PIC_NUMS_IDC_LONG_TERM}</li>
-     * <li>{@link #STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_END H264_MODIFICATION_OF_PIC_NUMS_IDC_END}</li>
-     * <li>{@link #STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_INVALID H264_MODIFICATION_OF_PIC_NUMS_IDC_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_SHORT_TERM_SUBTRACT = 0,
         STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_SHORT_TERM_ADD      = 1,
@@ -213,22 +95,6 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_END                 = 3,
         STD_VIDEO_H264_MODIFICATION_OF_PIC_NUMS_IDC_INVALID             = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264MemMgmtControlOp}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_END H264_MEM_MGMT_CONTROL_OP_END}</li>
-     * <li>{@link #STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_UNMARK_SHORT_TERM H264_MEM_MGMT_CONTROL_OP_UNMARK_SHORT_TERM}</li>
-     * <li>{@link #STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_UNMARK_LONG_TERM H264_MEM_MGMT_CONTROL_OP_UNMARK_LONG_TERM}</li>
-     * <li>{@link #STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_MARK_LONG_TERM H264_MEM_MGMT_CONTROL_OP_MARK_LONG_TERM}</li>
-     * <li>{@link #STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_SET_MAX_LONG_TERM_INDEX H264_MEM_MGMT_CONTROL_OP_SET_MAX_LONG_TERM_INDEX}</li>
-     * <li>{@link #STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_UNMARK_ALL H264_MEM_MGMT_CONTROL_OP_UNMARK_ALL}</li>
-     * <li>{@link #STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_MARK_CURRENT_AS_LONG_TERM H264_MEM_MGMT_CONTROL_OP_MARK_CURRENT_AS_LONG_TERM}</li>
-     * <li>{@link #STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_INVALID H264_MEM_MGMT_CONTROL_OP_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_END                       = 0,
         STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_UNMARK_SHORT_TERM         = 1,
@@ -239,73 +105,24 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_MARK_CURRENT_AS_LONG_TERM = 6,
         STD_VIDEO_H264_MEM_MGMT_CONTROL_OP_INVALID                   = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264CabacInitIdc}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_CABAC_INIT_IDC_0 H264_CABAC_INIT_IDC_0}</li>
-     * <li>{@link #STD_VIDEO_H264_CABAC_INIT_IDC_1 H264_CABAC_INIT_IDC_1}</li>
-     * <li>{@link #STD_VIDEO_H264_CABAC_INIT_IDC_2 H264_CABAC_INIT_IDC_2}</li>
-     * <li>{@link #STD_VIDEO_H264_CABAC_INIT_IDC_INVALID H264_CABAC_INIT_IDC_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_CABAC_INIT_IDC_0       = 0,
         STD_VIDEO_H264_CABAC_INIT_IDC_1       = 1,
         STD_VIDEO_H264_CABAC_INIT_IDC_2       = 2,
         STD_VIDEO_H264_CABAC_INIT_IDC_INVALID = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264DisableDeblockingFilterIdc}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_DISABLED H264_DISABLE_DEBLOCKING_FILTER_IDC_DISABLED}</li>
-     * <li>{@link #STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_ENABLED H264_DISABLE_DEBLOCKING_FILTER_IDC_ENABLED}</li>
-     * <li>{@link #STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_PARTIAL H264_DISABLE_DEBLOCKING_FILTER_IDC_PARTIAL}</li>
-     * <li>{@link #STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_INVALID H264_DISABLE_DEBLOCKING_FILTER_IDC_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_DISABLED = 0,
         STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_ENABLED  = 1,
         STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_PARTIAL  = 2,
         STD_VIDEO_H264_DISABLE_DEBLOCKING_FILTER_IDC_INVALID  = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264SliceType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_SLICE_TYPE_P H264_SLICE_TYPE_P}</li>
-     * <li>{@link #STD_VIDEO_H264_SLICE_TYPE_B H264_SLICE_TYPE_B}</li>
-     * <li>{@link #STD_VIDEO_H264_SLICE_TYPE_I H264_SLICE_TYPE_I}</li>
-     * <li>{@link #STD_VIDEO_H264_SLICE_TYPE_INVALID H264_SLICE_TYPE_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_SLICE_TYPE_P       = 0,
         STD_VIDEO_H264_SLICE_TYPE_B       = 1,
         STD_VIDEO_H264_SLICE_TYPE_I       = 2,
         STD_VIDEO_H264_SLICE_TYPE_INVALID = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264PictureType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_PICTURE_TYPE_P H264_PICTURE_TYPE_P}</li>
-     * <li>{@link #STD_VIDEO_H264_PICTURE_TYPE_B H264_PICTURE_TYPE_B}</li>
-     * <li>{@link #STD_VIDEO_H264_PICTURE_TYPE_I H264_PICTURE_TYPE_I}</li>
-     * <li>{@link #STD_VIDEO_H264_PICTURE_TYPE_IDR H264_PICTURE_TYPE_IDR}</li>
-     * <li>{@link #STD_VIDEO_H264_PICTURE_TYPE_INVALID H264_PICTURE_TYPE_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_PICTURE_TYPE_P       = 0,
         STD_VIDEO_H264_PICTURE_TYPE_B       = 1,
@@ -313,22 +130,6 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_PICTURE_TYPE_IDR     = 5,
         STD_VIDEO_H264_PICTURE_TYPE_INVALID = 0x7FFFFFFF;
 
-    /**
-     * {@code StdVideoH264NonVclNaluType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_H264_NON_VCL_NALU_TYPE_SPS H264_NON_VCL_NALU_TYPE_SPS}</li>
-     * <li>{@link #STD_VIDEO_H264_NON_VCL_NALU_TYPE_PPS H264_NON_VCL_NALU_TYPE_PPS}</li>
-     * <li>{@link #STD_VIDEO_H264_NON_VCL_NALU_TYPE_AUD H264_NON_VCL_NALU_TYPE_AUD}</li>
-     * <li>{@link #STD_VIDEO_H264_NON_VCL_NALU_TYPE_PREFIX H264_NON_VCL_NALU_TYPE_PREFIX}</li>
-     * <li>{@link #STD_VIDEO_H264_NON_VCL_NALU_TYPE_END_OF_SEQUENCE H264_NON_VCL_NALU_TYPE_END_OF_SEQUENCE}</li>
-     * <li>{@link #STD_VIDEO_H264_NON_VCL_NALU_TYPE_END_OF_STREAM H264_NON_VCL_NALU_TYPE_END_OF_STREAM}</li>
-     * <li>{@link #STD_VIDEO_H264_NON_VCL_NALU_TYPE_PRECODED H264_NON_VCL_NALU_TYPE_PRECODED}</li>
-     * <li>{@link #STD_VIDEO_H264_NON_VCL_NALU_TYPE_INVALID H264_NON_VCL_NALU_TYPE_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_H264_NON_VCL_NALU_TYPE_SPS             = 0,
         STD_VIDEO_H264_NON_VCL_NALU_TYPE_PPS             = 1,
@@ -339,34 +140,19 @@ public final class STDVulkanVideoCodecH264 {
         STD_VIDEO_H264_NON_VCL_NALU_TYPE_PRECODED        = 6,
         STD_VIDEO_H264_NON_VCL_NALU_TYPE_INVALID         = 0x7FFFFFFF;
 
-    /** The extension specification version. */
     public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(1, 0, 0);
 
-    /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_DECODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264_decode";
 
     public static final int STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE = 2;
 
-    /**
-     * {@code StdVideoDecodeH264FieldOrderCount}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_TOP DECODE_H264_FIELD_ORDER_COUNT_TOP}</li>
-     * <li>{@link #STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_BOTTOM DECODE_H264_FIELD_ORDER_COUNT_BOTTOM}</li>
-     * <li>{@link #STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_INVALID DECODE_H264_FIELD_ORDER_COUNT_INVALID}</li>
-     * </ul>
-     */
     public static final int
         STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_TOP     = 0,
         STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_BOTTOM  = 1,
         STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_INVALID = 0x7FFFFFFF;
 
-    /** The extension specification version. */
     public static final int VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_SPEC_VERSION = VK_MAKE_VIDEO_STD_VERSION(1, 0, 0);
 
-    /** The extension name. */
     public static final String VK_STD_VULKAN_VIDEO_CODEC_H264_ENCODE_EXTENSION_NAME = "VK_STD_vulkan_video_codec_h264_encode";
 
     private STDVulkanVideoCodecH264() {}

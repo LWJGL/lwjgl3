@@ -15,15 +15,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Describes a single preprocessing token.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXToken {
  *     unsigned int_data[4];
  *     void * ptr_data;
- * }</code></pre>
+ * }}</pre>
  */
 public class CXToken extends Struct<CXToken> {
 

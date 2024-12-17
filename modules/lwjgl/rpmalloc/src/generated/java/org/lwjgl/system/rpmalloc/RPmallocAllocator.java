@@ -9,7 +9,6 @@ import org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.system.rpmalloc.RPmalloc.*;
 
-/** A {@link MemoryAllocator} implementation using the rpmalloc library. */
 public class RPmallocAllocator implements MemoryAllocator {
 
     static {

@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 mutableDescriptorType;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE extends VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT {
 

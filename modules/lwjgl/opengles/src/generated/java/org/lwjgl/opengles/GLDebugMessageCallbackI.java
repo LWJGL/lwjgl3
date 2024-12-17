@@ -12,22 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLES32#glDebugMessageCallback DebugMessageCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLenum source,
- *     GLenum type,
- *     GLuint id,
- *     GLenum severity,
- *     GLsizei length,
- *     GLchar const *message,
- *     void const *userParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke GLDEBUGPROC} */
 @FunctionalInterface
 @NativeType("GLDEBUGPROC")
 public interface GLDebugMessageCallbackI extends CallbackI {
@@ -54,17 +39,7 @@ public interface GLDebugMessageCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when a debug message is generated.
-     *
-     * @param source    the message source
-     * @param type      the message type
-     * @param id        the message ID
-     * @param severity  the message severity
-     * @param length    the message length, excluding the null-terminator
-     * @param message   a pointer to the message string representation
-     * @param userParam the user-specified value that was passed when calling {@link GLES32#glDebugMessageCallback DebugMessageCallback}
-     */
+    /** {@code void (* GLDEBUGPROC) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, GLchar const * message, void const * userParam)} */
     void invoke(@NativeType("GLenum") int source, @NativeType("GLenum") int type, @NativeType("GLuint") int id, @NativeType("GLenum") int severity, @NativeType("GLsizei") int length, @NativeType("GLchar const *") long message, @NativeType("void const *") long userParam);
 
 }

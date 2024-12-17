@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A simple structure used to store a 2x2 matrix. Coefficients are in 16.16 fixed-point format.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Matrix {
  *     FT_Fixed xx;
  *     FT_Fixed xy;
  *     FT_Fixed yx;
  *     FT_Fixed yy;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Matrix extends Struct<FT_Matrix> implements NativeResource {
 

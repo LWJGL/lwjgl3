@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_CODEC_STATE *codec_state,
- *     void *buffer,
- *     unsigned int sizebytes,
- *     unsigned int *bytesread
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_CODEC_FILE_READ_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_CODEC_FILE_READ_FUNC")
 public interface FMOD_CODEC_FILE_READ_FUNCI extends CallbackI {
@@ -47,6 +37,7 @@ public interface FMOD_CODEC_FILE_READ_FUNCI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_CODEC_FILE_READ_FUNC) (struct FMOD_CODEC_STATE * codec_state, void * buffer, unsigned int sizebytes, unsigned int * bytesread)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_CODEC_STATE *") long codec_state, @NativeType("void *") long buffer, @NativeType("unsigned int") int sizebytes, @NativeType("unsigned int *") long bytesread);
 
 }

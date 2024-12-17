@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     void *opaqueState,
- *     void *address
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LZ4F_FreeFunction} */
 @FunctionalInterface
 @NativeType("LZ4F_FreeFunction")
 public interface LZ4FFreeFunctionI extends CallbackI {
@@ -43,6 +35,7 @@ public interface LZ4FFreeFunctionI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code void * (* LZ4F_FreeFunction) (void * opaqueState, void * address)} */
     @NativeType("void *") long invoke(@NativeType("void *") long opaqueState, @NativeType("void *") long address);
 
 }

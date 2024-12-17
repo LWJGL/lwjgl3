@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     uint64_t allocId,
- *     uint64_t pageNumber
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void * (*) (uint64_t, uint64_t)")
 public interface ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI extends CallbackI {
@@ -43,7 +35,7 @@ public interface ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI extends Callba
         apiClosureRetP(ret, __result);
     }
 
-    /** Function for unmapping the memory of a specific page. */
+    /** {@code void * (*) (uint64_t allocId, uint64_t pageNumber)} */
     @NativeType("void *") long invoke(@NativeType("uint64_t") long allocId, @NativeType("uint64_t") long pageNumber);
 
 }

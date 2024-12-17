@@ -16,38 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes a single descriptor update of the descriptor update template.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code dstBinding} <b>must</b> be a valid binding in the descriptor set layout implicitly specified when using a descriptor update template to update descriptors</li>
- * <li>{@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding implicitly specified when using a descriptor update template to update descriptors, and all applicable <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-updates-consecutive">consecutive bindings</a></li>
- * <li>If {@code descriptor} type is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, {@code dstArrayElement} <b>must</b> be an integer multiple of 4</li>
- * <li>If {@code descriptor} type is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, {@code descriptorCount} <b>must</b> be an integer multiple of 4</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code descriptorType} <b>must</b> be a valid {@code VkDescriptorType} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDescriptorUpdateTemplateCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorUpdateTemplateEntry {
- *     uint32_t {@link #dstBinding};
- *     uint32_t {@link #dstArrayElement};
- *     uint32_t {@link #descriptorCount};
- *     VkDescriptorType {@link #descriptorType};
- *     size_t {@link #offset};
- *     size_t {@link #stride};
- * }</code></pre>
+ *     uint32_t dstBinding;
+ *     uint32_t dstArrayElement;
+ *     uint32_t descriptorCount;
+ *     VkDescriptorType descriptorType;
+ *     size_t offset;
+ *     size_t stride;
+ * }}</pre>
  */
 public class VkDescriptorUpdateTemplateEntry extends Struct<VkDescriptorUpdateTemplateEntry> implements NativeResource {
 
@@ -109,43 +86,36 @@ public class VkDescriptorUpdateTemplateEntry extends Struct<VkDescriptorUpdateTe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the descriptor binding to update when using this descriptor update template. */
+    /** @return the value of the {@code dstBinding} field. */
     @NativeType("uint32_t")
     public int dstBinding() { return ndstBinding(address()); }
-    /** the starting element in the array belonging to {@code dstBinding}. If the descriptor binding identified by {@code dstBinding} has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code dstArrayElement} specifies the starting byte offset to update. */
+    /** @return the value of the {@code dstArrayElement} field. */
     @NativeType("uint32_t")
     public int dstArrayElement() { return ndstArrayElement(address()); }
-    /** the number of descriptors to update. If {@code descriptorCount} is greater than the number of remaining array elements in the destination binding, those affect consecutive bindings in a manner similar to {@link VkWriteDescriptorSet} above. If the descriptor binding identified by {@code dstBinding} has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code descriptorCount} specifies the number of bytes to update and the remaining array elements in the destination binding refer to the remaining number of bytes in it. */
+    /** @return the value of the {@code descriptorCount} field. */
     @NativeType("uint32_t")
     public int descriptorCount() { return ndescriptorCount(address()); }
-    /** a {@code VkDescriptorType} specifying the type of the descriptor. */
+    /** @return the value of the {@code descriptorType} field. */
     @NativeType("VkDescriptorType")
     public int descriptorType() { return ndescriptorType(address()); }
-    /** the offset in bytes of the first binding in the raw data structure. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("size_t")
     public long offset() { return noffset(address()); }
-    /**
-     * the stride in bytes between two consecutive array elements of the descriptor update information in the raw data structure. The actual pointer ptr for each array element j of update entry i is computed using the following formula:
-     * 
-     * <pre><code>
-     *     const char *ptr = (const char *)pData + pDescriptorUpdateEntries[i].offset + j * pDescriptorUpdateEntries[i].stride</code></pre>
-     * 
-     * <p>The stride is useful in case the bindings are stored in structs along with other data. If {@code descriptorType} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then the value of {@code stride} is ignored and the stride is assumed to be 1, i.e. the descriptor update information for them is always specified as a contiguous range.</p>
-     */
+    /** @return the value of the {@code stride} field. */
     @NativeType("size_t")
     public long stride() { return nstride(address()); }
 
-    /** Sets the specified value to the {@link #dstBinding} field. */
+    /** Sets the specified value to the {@code dstBinding} field. */
     public VkDescriptorUpdateTemplateEntry dstBinding(@NativeType("uint32_t") int value) { ndstBinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstArrayElement} field. */
+    /** Sets the specified value to the {@code dstArrayElement} field. */
     public VkDescriptorUpdateTemplateEntry dstArrayElement(@NativeType("uint32_t") int value) { ndstArrayElement(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorCount} field. */
+    /** Sets the specified value to the {@code descriptorCount} field. */
     public VkDescriptorUpdateTemplateEntry descriptorCount(@NativeType("uint32_t") int value) { ndescriptorCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorType} field. */
+    /** Sets the specified value to the {@code descriptorType} field. */
     public VkDescriptorUpdateTemplateEntry descriptorType(@NativeType("VkDescriptorType") int value) { ndescriptorType(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkDescriptorUpdateTemplateEntry offset(@NativeType("size_t") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #stride} field. */
+    /** Sets the specified value to the {@code stride} field. */
     public VkDescriptorUpdateTemplateEntry stride(@NativeType("size_t") long value) { nstride(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -378,36 +348,36 @@ public class VkDescriptorUpdateTemplateEntry extends Struct<VkDescriptorUpdateTe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorUpdateTemplateEntry#dstBinding} field. */
+        /** @return the value of the {@code dstBinding} field. */
         @NativeType("uint32_t")
         public int dstBinding() { return VkDescriptorUpdateTemplateEntry.ndstBinding(address()); }
-        /** @return the value of the {@link VkDescriptorUpdateTemplateEntry#dstArrayElement} field. */
+        /** @return the value of the {@code dstArrayElement} field. */
         @NativeType("uint32_t")
         public int dstArrayElement() { return VkDescriptorUpdateTemplateEntry.ndstArrayElement(address()); }
-        /** @return the value of the {@link VkDescriptorUpdateTemplateEntry#descriptorCount} field. */
+        /** @return the value of the {@code descriptorCount} field. */
         @NativeType("uint32_t")
         public int descriptorCount() { return VkDescriptorUpdateTemplateEntry.ndescriptorCount(address()); }
-        /** @return the value of the {@link VkDescriptorUpdateTemplateEntry#descriptorType} field. */
+        /** @return the value of the {@code descriptorType} field. */
         @NativeType("VkDescriptorType")
         public int descriptorType() { return VkDescriptorUpdateTemplateEntry.ndescriptorType(address()); }
-        /** @return the value of the {@link VkDescriptorUpdateTemplateEntry#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("size_t")
         public long offset() { return VkDescriptorUpdateTemplateEntry.noffset(address()); }
-        /** @return the value of the {@link VkDescriptorUpdateTemplateEntry#stride} field. */
+        /** @return the value of the {@code stride} field. */
         @NativeType("size_t")
         public long stride() { return VkDescriptorUpdateTemplateEntry.nstride(address()); }
 
-        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateEntry#dstBinding} field. */
+        /** Sets the specified value to the {@code dstBinding} field. */
         public VkDescriptorUpdateTemplateEntry.Buffer dstBinding(@NativeType("uint32_t") int value) { VkDescriptorUpdateTemplateEntry.ndstBinding(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateEntry#dstArrayElement} field. */
+        /** Sets the specified value to the {@code dstArrayElement} field. */
         public VkDescriptorUpdateTemplateEntry.Buffer dstArrayElement(@NativeType("uint32_t") int value) { VkDescriptorUpdateTemplateEntry.ndstArrayElement(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateEntry#descriptorCount} field. */
+        /** Sets the specified value to the {@code descriptorCount} field. */
         public VkDescriptorUpdateTemplateEntry.Buffer descriptorCount(@NativeType("uint32_t") int value) { VkDescriptorUpdateTemplateEntry.ndescriptorCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateEntry#descriptorType} field. */
+        /** Sets the specified value to the {@code descriptorType} field. */
         public VkDescriptorUpdateTemplateEntry.Buffer descriptorType(@NativeType("VkDescriptorType") int value) { VkDescriptorUpdateTemplateEntry.ndescriptorType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateEntry#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkDescriptorUpdateTemplateEntry.Buffer offset(@NativeType("size_t") long value) { VkDescriptorUpdateTemplateEntry.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorUpdateTemplateEntry#stride} field. */
+        /** Sets the specified value to the {@code stride} field. */
         public VkDescriptorUpdateTemplateEntry.Buffer stride(@NativeType("size_t") long value) { VkDescriptorUpdateTemplateEntry.nstride(address(), value); return this; }
 
     }

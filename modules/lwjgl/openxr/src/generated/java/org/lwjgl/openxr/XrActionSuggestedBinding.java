@@ -17,25 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Suggested binding for a single action.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code action} <b>must</b> be a valid {@code XrAction} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrInteractionProfileSuggestedBinding}, {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActionSuggestedBinding {
- *     XrAction {@link #action};
- *     XrPath {@link #binding};
- * }</code></pre>
+ *     XrAction action;
+ *     XrPath binding;
+ * }}</pre>
  */
 public class XrActionSuggestedBinding extends Struct<XrActionSuggestedBinding> implements NativeResource {
 
@@ -85,16 +71,16 @@ public class XrActionSuggestedBinding extends Struct<XrActionSuggestedBinding> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrAction} handle for an action */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** the {@code XrPath} of a binding for the action specified in {@code action}. This "binding path" is any top level pathname:/user path plus an applicable <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#semantic-paths-input">input subpath</a>, for example pathname:/user/hand/right/input/trigger/click. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-suggested-bindings">input-suggested-bindings</a> for more details. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("XrPath")
     public long binding() { return nbinding(address()); }
 
-    /** Sets the specified value to the {@link #action} field. */
+    /** Sets the specified value to the {@code action} field. */
     public XrActionSuggestedBinding action(XrAction value) { naction(address(), value); return this; }
-    /** Sets the specified value to the {@link #binding} field. */
+    /** Sets the specified value to the {@code binding} field. */
     public XrActionSuggestedBinding binding(@NativeType("XrPath") long value) { nbinding(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -293,16 +279,16 @@ public class XrActionSuggestedBinding extends Struct<XrActionSuggestedBinding> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActionSuggestedBinding#action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrActionSuggestedBinding.naction(address()); }
-        /** @return the value of the {@link XrActionSuggestedBinding#binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("XrPath")
         public long binding() { return XrActionSuggestedBinding.nbinding(address()); }
 
-        /** Sets the specified value to the {@link XrActionSuggestedBinding#action} field. */
+        /** Sets the specified value to the {@code action} field. */
         public XrActionSuggestedBinding.Buffer action(XrAction value) { XrActionSuggestedBinding.naction(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionSuggestedBinding#binding} field. */
+        /** Sets the specified value to the {@code binding} field. */
         public XrActionSuggestedBinding.Buffer binding(@NativeType("XrPath") long value) { XrActionSuggestedBinding.nbinding(address(), value); return this; }
 
     }

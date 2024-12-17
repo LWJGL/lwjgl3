@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_ARRAY3D_DESCRIPTOR {
  *     size_t Width;
  *     size_t Height;
@@ -26,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     CUarray_format Format;
  *     unsigned int NumChannels;
  *     unsigned int Flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_ARRAY3D_DESCRIPTOR extends Struct<CUDA_ARRAY3D_DESCRIPTOR> implements NativeResource {
 

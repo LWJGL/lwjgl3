@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMErrorHandling#LLVMInstallFatalErrorHandler InstallFatalErrorHandler} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     char const *Reason
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (char const *)")
 public interface LLVMFatalErrorHandlerI extends CallbackI {
@@ -42,6 +33,7 @@ public interface LLVMFatalErrorHandlerI extends CallbackI {
         );
     }
 
+    /** {@code void (*) (char const * Reason)} */
     void invoke(@NativeType("char const *") long Reason);
 
 }

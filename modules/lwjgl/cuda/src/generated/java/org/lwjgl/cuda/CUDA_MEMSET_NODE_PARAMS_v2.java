@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_MEMSET_NODE_PARAMS_v2 {
  *     CUdeviceptr dst;
  *     size_t pitch;
@@ -28,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t width;
  *     size_t height;
  *     CUcontext ctx;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_MEMSET_NODE_PARAMS_v2 extends Struct<CUDA_MEMSET_NODE_PARAMS_v2> implements NativeResource {
 

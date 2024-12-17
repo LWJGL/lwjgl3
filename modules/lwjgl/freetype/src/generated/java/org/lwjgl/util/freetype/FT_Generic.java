@@ -17,16 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Client applications often need to associate their own data to a variety of FreeType core objects. For example, a text layout API might
- * want to associate a glyph cache to a given size object.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Generic {
  *     void * data;
  *     {@link FT_Generic_FinalizerI FT_Generic_Finalizer} finalizer;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Generic extends Struct<FT_Generic> implements NativeResource {
 

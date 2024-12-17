@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FSBANK_SUBSOUND {
  *     char const * const * fileNames;
  *     void const * const * fileData;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int overrideQuality;
  *     float desiredSampleRate;
  *     float percentOptimizedRate;
- * }</code></pre>
+ * }}</pre>
  */
 public class FSBANK_SUBSOUND extends Struct<FSBANK_SUBSOUND> implements NativeResource {
 

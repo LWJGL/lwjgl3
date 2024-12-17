@@ -16,34 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to query the bound input sources for an action.
- * 
- * <h5>Description</h5>
- * 
- * <p>The result of passing an {@code XrPath} {@code sourcePath} <b>not</b> retrieved from {@link XR10#xrEnumerateBoundSourcesForAction EnumerateBoundSourcesForAction} is not specified.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code whichComponents} <b>must</b> be a valid combination of {@code XrInputSourceLocalizedNameFlagBits} values</li>
- * <li>{@code whichComponents} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrEnumerateBoundSourcesForAction EnumerateBoundSourcesForAction}, {@link XR10#xrGetInputSourceLocalizedName GetInputSourceLocalizedName}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrInputSourceLocalizedNameGetInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrPath {@link #sourcePath};
- *     XrInputSourceLocalizedNameFlags {@link #whichComponents};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrPath sourcePath;
+ *     XrInputSourceLocalizedNameFlags whichComponents;
+ * }}</pre>
  */
 public class XrInputSourceLocalizedNameGetInfo extends Struct<XrInputSourceLocalizedNameGetInfo> implements NativeResource {
 
@@ -99,28 +78,28 @@ public class XrInputSourceLocalizedNameGetInfo extends Struct<XrInputSourceLocal
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrPath} representing a bound source returned by {@link XR10#xrEnumerateBoundSourcesForAction EnumerateBoundSourcesForAction}. */
+    /** @return the value of the {@code sourcePath} field. */
     @NativeType("XrPath")
     public long sourcePath() { return nsourcePath(address()); }
-    /** any set of flags from {@code XrInputSourceLocalizedNameFlagBits}. */
+    /** @return the value of the {@code whichComponents} field. */
     @NativeType("XrInputSourceLocalizedNameFlags")
     public long whichComponents() { return nwhichComponents(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrInputSourceLocalizedNameGetInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO} value to the {@code type} field. */
     public XrInputSourceLocalizedNameGetInfo type$Default() { return type(XR10.XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrInputSourceLocalizedNameGetInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #sourcePath} field. */
+    /** Sets the specified value to the {@code sourcePath} field. */
     public XrInputSourceLocalizedNameGetInfo sourcePath(@NativeType("XrPath") long value) { nsourcePath(address(), value); return this; }
-    /** Sets the specified value to the {@link #whichComponents} field. */
+    /** Sets the specified value to the {@code whichComponents} field. */
     public XrInputSourceLocalizedNameGetInfo whichComponents(@NativeType("XrInputSourceLocalizedNameFlags") long value) { nwhichComponents(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,28 +301,28 @@ public class XrInputSourceLocalizedNameGetInfo extends Struct<XrInputSourceLocal
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrInputSourceLocalizedNameGetInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInputSourceLocalizedNameGetInfo.ntype(address()); }
-        /** @return the value of the {@link XrInputSourceLocalizedNameGetInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrInputSourceLocalizedNameGetInfo.nnext(address()); }
-        /** @return the value of the {@link XrInputSourceLocalizedNameGetInfo#sourcePath} field. */
+        /** @return the value of the {@code sourcePath} field. */
         @NativeType("XrPath")
         public long sourcePath() { return XrInputSourceLocalizedNameGetInfo.nsourcePath(address()); }
-        /** @return the value of the {@link XrInputSourceLocalizedNameGetInfo#whichComponents} field. */
+        /** @return the value of the {@code whichComponents} field. */
         @NativeType("XrInputSourceLocalizedNameFlags")
         public long whichComponents() { return XrInputSourceLocalizedNameGetInfo.nwhichComponents(address()); }
 
-        /** Sets the specified value to the {@link XrInputSourceLocalizedNameGetInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrInputSourceLocalizedNameGetInfo.Buffer type(@NativeType("XrStructureType") int value) { XrInputSourceLocalizedNameGetInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO} value to the {@link XrInputSourceLocalizedNameGetInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO} value to the {@code type} field. */
         public XrInputSourceLocalizedNameGetInfo.Buffer type$Default() { return type(XR10.XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO); }
-        /** Sets the specified value to the {@link XrInputSourceLocalizedNameGetInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrInputSourceLocalizedNameGetInfo.Buffer next(@NativeType("void const *") long value) { XrInputSourceLocalizedNameGetInfo.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInputSourceLocalizedNameGetInfo#sourcePath} field. */
+        /** Sets the specified value to the {@code sourcePath} field. */
         public XrInputSourceLocalizedNameGetInfo.Buffer sourcePath(@NativeType("XrPath") long value) { XrInputSourceLocalizedNameGetInfo.nsourcePath(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInputSourceLocalizedNameGetInfo#whichComponents} field. */
+        /** Sets the specified value to the {@code whichComponents} field. */
         public XrInputSourceLocalizedNameGetInfo.Buffer whichComponents(@NativeType("XrInputSourceLocalizedNameFlags") long value) { XrInputSourceLocalizedNameGetInfo.nwhichComponents(address(), value); return this; }
 
     }

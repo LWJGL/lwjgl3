@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     void *mm_context,
- *     rmtU32 size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke rmtMallocPtr} */
 @FunctionalInterface
 @NativeType("rmtMallocPtr")
 public interface RMTMallocI extends CallbackI {
@@ -43,6 +35,7 @@ public interface RMTMallocI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code void * (* rmtMallocPtr) (void * mm_context, rmtU32 size)} */
     @NativeType("void *") long invoke(@NativeType("void *") long mm_context, @NativeType("rmtU32") int size);
 
 }

@@ -16,45 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying custom border color.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>If {@code format} is a depth/stencil format, the aspect is determined by the value of {@link VkSamplerCreateInfo}{@code ::borderColor}. If {@link VkSamplerCreateInfo}{@code ::borderColor} is {@link EXTCustomBorderColor#VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT}, the depth aspect is considered. If {@link VkSamplerCreateInfo}{@code ::borderColor} is {@link EXTCustomBorderColor#VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}, the stencil aspect is considered.</p>
- * 
- * <p>If {@code format} is {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, the {@link VkSamplerCreateInfo}{@code ::borderColor} is {@link EXTCustomBorderColor#VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}, and the sampler is used with an image with a stencil format, then the implementation <b>must</b> source the custom border color from either the first or second components of {@link VkSamplerCreateInfo}{@code ::customBorderColor} and <b>should</b> source it from the first component.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code format} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} and {@code format} is not a depth/stencil format then the {@link VkSamplerCreateInfo}{@code ::borderColor} type <b>must</b> match the sampled type of the provided {@code format}, as shown in the <em>SPIR-V Type</em> column of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-numericformat">Interpretation of Numeric Format</a> table</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-customBorderColorWithoutFormat">{@code customBorderColorWithoutFormat}</a> feature is not enabled then {@code format} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
- * <li>If the sampler is used to sample an image view of {@link VK10#VK_FORMAT_B4G4R4A4_UNORM_PACK16 FORMAT_B4G4R4A4_UNORM_PACK16}, {@link VK10#VK_FORMAT_B5G6R5_UNORM_PACK16 FORMAT_B5G6R5_UNORM_PACK16}, {@link VK14#VK_FORMAT_A1B5G5R5_UNORM_PACK16 FORMAT_A1B5G5R5_UNORM_PACK16}, or {@link VK10#VK_FORMAT_B5G5R5A1_UNORM_PACK16 FORMAT_B5G5R5A1_UNORM_PACK16} format then {@code format} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT}</li>
- * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkClearColorValue}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerCustomBorderColorCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkClearColorValue VkClearColorValue} {@link #customBorderColor};
- *     VkFormat {@link #format};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkClearColorValue VkClearColorValue} customBorderColor;
+ *     VkFormat format;
+ * }}</pre>
  */
 public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct<VkSamplerCustomBorderColorCreateInfoEXT> implements NativeResource {
 
@@ -110,29 +78,29 @@ public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct<VkSamplerCus
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkClearColorValue} representing the desired custom sampler border color. */
+    /** @return a {@link VkClearColorValue} view of the {@code customBorderColor} field. */
     public VkClearColorValue customBorderColor() { return ncustomBorderColor(address()); }
-    /** a {@code VkFormat} representing the format of the sampled image view(s). This field may be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-customBorderColorWithoutFormat">{@code customBorderColorWithoutFormat}</a> feature is enabled. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSamplerCustomBorderColorCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkSamplerCustomBorderColorCreateInfoEXT sType$Default() { return sType(EXTCustomBorderColor.VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerCustomBorderColorCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkClearColorValue} to the {@link #customBorderColor} field. */
+    /** Copies the specified {@link VkClearColorValue} to the {@code customBorderColor} field. */
     public VkSamplerCustomBorderColorCreateInfoEXT customBorderColor(VkClearColorValue value) { ncustomBorderColor(address(), value); return this; }
-    /** Passes the {@link #customBorderColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code customBorderColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkSamplerCustomBorderColorCreateInfoEXT customBorderColor(java.util.function.Consumer<VkClearColorValue> consumer) { consumer.accept(customBorderColor()); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkSamplerCustomBorderColorCreateInfoEXT format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,29 +302,29 @@ public class VkSamplerCustomBorderColorCreateInfoEXT extends Struct<VkSamplerCus
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSamplerCustomBorderColorCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerCustomBorderColorCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkSamplerCustomBorderColorCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerCustomBorderColorCreateInfoEXT.npNext(address()); }
-        /** @return a {@link VkClearColorValue} view of the {@link VkSamplerCustomBorderColorCreateInfoEXT#customBorderColor} field. */
+        /** @return a {@link VkClearColorValue} view of the {@code customBorderColor} field. */
         public VkClearColorValue customBorderColor() { return VkSamplerCustomBorderColorCreateInfoEXT.ncustomBorderColor(address()); }
-        /** @return the value of the {@link VkSamplerCustomBorderColorCreateInfoEXT#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkSamplerCustomBorderColorCreateInfoEXT.nformat(address()); }
 
-        /** Sets the specified value to the {@link VkSamplerCustomBorderColorCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSamplerCustomBorderColorCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerCustomBorderColorCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT} value to the {@link VkSamplerCustomBorderColorCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkSamplerCustomBorderColorCreateInfoEXT.Buffer sType$Default() { return sType(EXTCustomBorderColor.VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkSamplerCustomBorderColorCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerCustomBorderColorCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSamplerCustomBorderColorCreateInfoEXT.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkClearColorValue} to the {@link VkSamplerCustomBorderColorCreateInfoEXT#customBorderColor} field. */
+        /** Copies the specified {@link VkClearColorValue} to the {@code customBorderColor} field. */
         public VkSamplerCustomBorderColorCreateInfoEXT.Buffer customBorderColor(VkClearColorValue value) { VkSamplerCustomBorderColorCreateInfoEXT.ncustomBorderColor(address(), value); return this; }
-        /** Passes the {@link VkSamplerCustomBorderColorCreateInfoEXT#customBorderColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code customBorderColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkSamplerCustomBorderColorCreateInfoEXT.Buffer customBorderColor(java.util.function.Consumer<VkClearColorValue> consumer) { consumer.accept(customBorderColor()); return this; }
-        /** Sets the specified value to the {@link VkSamplerCustomBorderColorCreateInfoEXT#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkSamplerCustomBorderColorCreateInfoEXT.Buffer format(@NativeType("VkFormat") int value) { VkSamplerCustomBorderColorCreateInfoEXT.nformat(address(), value); return this; }
 
     }

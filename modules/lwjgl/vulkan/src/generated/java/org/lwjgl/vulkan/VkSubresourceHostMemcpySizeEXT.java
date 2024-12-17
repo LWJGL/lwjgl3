@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSubresourceHostMemcpySize}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubresourceHostMemcpySizeEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkDeviceSize size;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSubresourceHostMemcpySizeEXT extends VkSubresourceHostMemcpySize {
 

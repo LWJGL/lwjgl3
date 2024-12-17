@@ -19,70 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifies AV1 DPB information when decoding a frame.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is specified in the {@code pNext} chain of {@link VkVideoDecodeInfoKHR}{@code ::pSetupReferenceSlot}, if not {@code NULL}, and the {@code pNext} chain of the elements of {@link VkVideoDecodeInfoKHR}{@code ::pReferenceSlots} to specify the codec-specific reference picture information for an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1">AV1 decode operation</a>.</p>
- * 
- * <dl>
- * <dt>Active Reference Picture Information</dt>
- * <dd><ul>
- * <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-picture-data-access">AV1 Decode Picture Data Access</a> section.</li>
- * <li>The reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> index specified in the {@code slotIndex} member of the corresponding element of {@link VkVideoDecodeInfoKHR}{@code ::pReferenceSlots}.</li>
- * <li>The reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-reference-info">AV1 reference information</a> provided in {@code pStdReferenceInfo}.</li>
- * </ul></dd>
- * </dl>
- * 
- * <dl>
- * <dt>Reconstructed Picture Information</dt>
- * <dd><ul>
- * <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-picture-data-access">AV1 Decode Picture Data Access</a> section.</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-ref-pic-setup">reference picture setup</a> is requested, then the reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> with the index specified in {@link VkVideoDecodeInfoKHR}{@code ::pSetupReferenceSlot→slotIndex}.</li>
- * <li>The reconstructed picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-reference-info">AV1 reference information</a> provided in {@code pStdReferenceInfo}.</li>
- * </ul></dd>
- * </dl>
- * 
- * <dl>
- * <dt>Std Reference Information</dt>
- * <dd><ul>
- * <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
- * <li>{@code flags.disable_frame_end_update_cdf} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code flags.segmentation_enabled} is interpreted as defined in section 6.8.13 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code frame_type} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The {@code frame_type} member is defined with the type {@code uint8_t}, but it takes the same values defined in the {@code StdVideoAV1FrameType} enumeration type as {@code StdVideoDecodeAV1PictureInfo}{@code ::frame_type}.</p>
- * </div>
- * </li>
- * <li>{@code RefFrameSignBias} is a bitmask where bit index <code>i</code> corresponds to {@code RefFrameSignBias[i]} as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code OrderHint} is interpreted as defined in section 6.8.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>;</li>
- * <li>{@code SavedOrderHints} is interpreted as defined in section 7.20 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>.
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>When the AV1 reference information is provided for the reconstructed picture, certain parameters (e.g. {@code frame_type}) are specified both in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-picture-info">AV1 picture information</a> and in the AV1 reference information. This is necessary because unlike the AV1 picture information, which is only used for the purposes of the video decode operation in question, the AV1 reference information specified for the reconstructed picture <b>may</b> be associated with the activated DPB slot, meaning that some implementations <b>may</b> maintain it as part of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#reference-metadata">reference picture metadata</a> corresponding to the video picture resource associated with the DPB slot. When the AV1 reference information is provided for an active reference picture, the specified parameters correspond to the parameters specified when the DPB slot was activated (set up) with the reference picture, as usual, in order to communicate these parameters for implementations that do not maintain any subset of these parameters as part of the DPB slot’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#reference-metadata">reference picture metadata</a>.</p>
- * </div>
- * </li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR}</li>
- * <li>{@code pStdReferenceInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoDecodeAV1ReferenceInfo} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoDecodeAV1DpbSlotInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link StdVideoDecodeAV1ReferenceInfo StdVideoDecodeAV1ReferenceInfo} const * {@link #pStdReferenceInfo};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link StdVideoDecodeAV1ReferenceInfo StdVideoDecodeAV1ReferenceInfo} const * pStdReferenceInfo;
+ * }}</pre>
  */
 public class VkVideoDecodeAV1DpbSlotInfoKHR extends Struct<VkVideoDecodeAV1DpbSlotInfoKHR> implements NativeResource {
 
@@ -135,23 +77,23 @@ public class VkVideoDecodeAV1DpbSlotInfoKHR extends Struct<VkVideoDecodeAV1DpbSl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to a {@code StdVideoDecodeAV1ReferenceInfo} structure specifying <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-reference-info">AV1 reference information</a>. */
+    /** @return a {@link StdVideoDecodeAV1ReferenceInfo} view of the struct pointed to by the {@code pStdReferenceInfo} field. */
     @NativeType("StdVideoDecodeAV1ReferenceInfo const *")
     public StdVideoDecodeAV1ReferenceInfo pStdReferenceInfo() { return npStdReferenceInfo(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeAV1DpbSlotInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR} value to the {@code sType} field. */
     public VkVideoDecodeAV1DpbSlotInfoKHR sType$Default() { return sType(KHRVideoDecodeAV1.VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeAV1DpbSlotInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoDecodeAV1ReferenceInfo} to the {@link #pStdReferenceInfo} field. */
+    /** Sets the address of the specified {@link StdVideoDecodeAV1ReferenceInfo} to the {@code pStdReferenceInfo} field. */
     public VkVideoDecodeAV1DpbSlotInfoKHR pStdReferenceInfo(@NativeType("StdVideoDecodeAV1ReferenceInfo const *") StdVideoDecodeAV1ReferenceInfo value) { npStdReferenceInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,23 +298,23 @@ public class VkVideoDecodeAV1DpbSlotInfoKHR extends Struct<VkVideoDecodeAV1DpbSl
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoDecodeAV1DpbSlotInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeAV1DpbSlotInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoDecodeAV1DpbSlotInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoDecodeAV1DpbSlotInfoKHR.npNext(address()); }
-        /** @return a {@link StdVideoDecodeAV1ReferenceInfo} view of the struct pointed to by the {@link VkVideoDecodeAV1DpbSlotInfoKHR#pStdReferenceInfo} field. */
+        /** @return a {@link StdVideoDecodeAV1ReferenceInfo} view of the struct pointed to by the {@code pStdReferenceInfo} field. */
         @NativeType("StdVideoDecodeAV1ReferenceInfo const *")
         public StdVideoDecodeAV1ReferenceInfo pStdReferenceInfo() { return VkVideoDecodeAV1DpbSlotInfoKHR.npStdReferenceInfo(address()); }
 
-        /** Sets the specified value to the {@link VkVideoDecodeAV1DpbSlotInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeAV1DpbSlotInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeAV1DpbSlotInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR} value to the {@link VkVideoDecodeAV1DpbSlotInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR} value to the {@code sType} field. */
         public VkVideoDecodeAV1DpbSlotInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeAV1.VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoDecodeAV1DpbSlotInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeAV1DpbSlotInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeAV1DpbSlotInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoDecodeAV1ReferenceInfo} to the {@link VkVideoDecodeAV1DpbSlotInfoKHR#pStdReferenceInfo} field. */
+        /** Sets the address of the specified {@link StdVideoDecodeAV1ReferenceInfo} to the {@code pStdReferenceInfo} field. */
         public VkVideoDecodeAV1DpbSlotInfoKHR.Buffer pStdReferenceInfo(@NativeType("StdVideoDecodeAV1ReferenceInfo const *") StdVideoDecodeAV1ReferenceInfo value) { VkVideoDecodeAV1DpbSlotInfoKHR.npStdReferenceInfo(address(), value); return this; }
 
     }

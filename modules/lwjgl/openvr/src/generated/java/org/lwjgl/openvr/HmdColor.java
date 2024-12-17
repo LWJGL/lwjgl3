@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct HmdColor_t {
  *     float r;
  *     float g;
  *     float b;
  *     float a;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct HmdColor_t")
 public class HmdColor extends Struct<HmdColor> implements NativeResource {

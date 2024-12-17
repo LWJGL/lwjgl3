@@ -15,16 +15,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a named instance in a TrueType GX or OpenType variation font.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Var_Named_Style {
  *     FT_Fixed * coords;
  *     FT_UInt strid;
  *     FT_UInt psid;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Var_Named_Style extends Struct<FT_Var_Named_Style> {
 
@@ -77,11 +73,7 @@ public class FT_Var_Named_Style extends Struct<FT_Var_Named_Style> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link CLongBuffer} view of the data pointed to by the {@code coords} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link CLongBuffer} view of the data pointed to by the {@code coords} field. */
     @NativeType("FT_Fixed *")
     public CLongBuffer coords(int capacity) { return ncoords(address(), capacity); }
     /** @return the value of the {@code strid} field. */
@@ -170,11 +162,7 @@ public class FT_Var_Named_Style extends Struct<FT_Var_Named_Style> {
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link CLongBuffer} view of the data pointed to by the {@code coords} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link CLongBuffer} view of the data pointed to by the {@code coords} field. */
         @NativeType("FT_Fixed *")
         public CLongBuffer coords(int capacity) { return FT_Var_Named_Style.ncoords(address(), capacity); }
         /** @return the value of the {@code strid} field. */

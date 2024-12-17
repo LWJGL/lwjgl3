@@ -18,25 +18,12 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_vertex_shader.txt">ARB_vertex_shader</a> extension.
- * 
- * <p>This extension adds programmable vertex level processing to OpenGL. The application can write vertex shaders in a high level language as defined in the
- * OpenGL Shading Language specification. A vertex shader replaces the transformation, texture coordinate generation and lighting parts of OpenGL, and it
- * also adds texture access at the vertex level. Furthermore, management of vertex shader objects and loading generic attributes are discussed. A vertex
- * shader object, attached to a program object, can be compiled and linked to produce an executable that runs on the vertex processor in OpenGL.
- * This extension also defines how such an executable interacts with the fixed functionality vertex processing of OpenGL 1.4.</p>
- * 
- * <p>Promoted to core in {@link GL20 OpenGL 2.0}.</p>
- */
 public class ARBVertexShader {
 
     static { GL.initialize(); }
 
-    /** Accepted by the {@code shaderType} argument of CreateShaderObjectARB and returned by the {@code params} parameter of GetObjectParameter{if}vARB. */
     public static final int GL_VERTEX_SHADER_ARB = 0x8B31;
 
-    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
         GL_MAX_VERTEX_UNIFORM_COMPONENTS_ARB    = 0x8B4A,
         GL_MAX_VARYING_FLOATS_ARB               = 0x8B4B,
@@ -46,20 +33,14 @@ public class ARBVertexShader {
         GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB = 0x8B4D,
         GL_MAX_TEXTURE_COORDS_ARB               = 0x8871;
 
-    /**
-     * Accepted by the {@code cap} parameter of Disable, Enable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
-     * GetDoublev.
-     */
     public static final int
         GL_VERTEX_PROGRAM_POINT_SIZE_ARB = 0x8642,
         GL_VERTEX_PROGRAM_TWO_SIDE_ARB   = 0x8643;
 
-    /** Accepted by the {@code pname} parameter GetObjectParameter{if}vARB. */
     public static final int
         GL_OBJECT_ACTIVE_ATTRIBUTES_ARB           = 0x8B89,
         GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB = 0x8B8A;
 
-    /** Accepted by the {@code pname} parameter of GetVertexAttrib{dfi}vARB. */
     public static final int
         GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB    = 0x8622,
         GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB       = 0x8623,
@@ -68,10 +49,8 @@ public class ARBVertexShader {
         GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB = 0x886A,
         GL_CURRENT_VERTEX_ATTRIB_ARB          = 0x8626;
 
-    /** Accepted by the {@code pname} parameter of GetVertexAttribPointervARB. */
     public static final int GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB = 0x8645;
 
-    /** Returned by the {@code type} parameter of GetActiveAttribARB. */
     public static final int
         GL_FLOAT_VEC2_ARB = 0x8B50,
         GL_FLOAT_VEC3_ARB = 0x8B51,
@@ -86,166 +65,75 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib1fARB ] ---
 
-    /**
-     * Specifies the value of a generic vertex attribute. The y and z components are implicitly set to 0.0f and w to 1.0f.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     */
+    /** {@code void glVertexAttrib1fARB(GLuint index, GLfloat v0)} */
     public static native void glVertexAttrib1fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0);
 
     // --- [ glVertexAttrib1sARB ] ---
 
-    /**
-     * Short version of {@link #glVertexAttrib1fARB VertexAttrib1fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     */
+    /** {@code void glVertexAttrib1sARB(GLuint index, GLshort v0)} */
     public static native void glVertexAttrib1sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0);
 
     // --- [ glVertexAttrib1dARB ] ---
 
-    /**
-     * Double version of {@link #glVertexAttrib1fARB VertexAttrib1fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     */
+    /** {@code void glVertexAttrib1dARB(GLuint index, GLdouble v0)} */
     public static native void glVertexAttrib1dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0);
 
     // --- [ glVertexAttrib2fARB ] ---
 
-    /**
-     * Specifies the value of a generic vertex attribute. The y component is implicitly set to 0.0f and w to 1.0f.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     */
+    /** {@code void glVertexAttrib2fARB(GLuint index, GLfloat v0, GLfloat v1)} */
     public static native void glVertexAttrib2fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1);
 
     // --- [ glVertexAttrib2sARB ] ---
 
-    /**
-     * Short version of {@link #glVertexAttrib2fARB VertexAttrib2fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     */
+    /** {@code void glVertexAttrib2sARB(GLuint index, GLshort v0, GLshort v1)} */
     public static native void glVertexAttrib2sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1);
 
     // --- [ glVertexAttrib2dARB ] ---
 
-    /**
-     * Double version of {@link #glVertexAttrib2fARB VertexAttrib2fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     */
+    /** {@code void glVertexAttrib2dARB(GLuint index, GLdouble v0, GLdouble v1)} */
     public static native void glVertexAttrib2dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1);
 
     // --- [ glVertexAttrib3fARB ] ---
 
-    /**
-     * Specifies the value of a generic vertex attribute. The w is implicitly set to 1.0f.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     * @param v2    the vertex attribute z component
-     */
+    /** {@code void glVertexAttrib3fARB(GLuint index, GLfloat v0, GLfloat v1, GLfloat v2)} */
     public static native void glVertexAttrib3fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2);
 
     // --- [ glVertexAttrib3sARB ] ---
 
-    /**
-     * Short version of {@link #glVertexAttrib3fARB VertexAttrib3fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     * @param v2    the vertex attribute z component
-     */
+    /** {@code void glVertexAttrib3sARB(GLuint index, GLshort v0, GLshort v1, GLshort v2)} */
     public static native void glVertexAttrib3sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1, @NativeType("GLshort") short v2);
 
     // --- [ glVertexAttrib3dARB ] ---
 
-    /**
-     * Double version of {@link #glVertexAttrib3fARB VertexAttrib3fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     * @param v2    the vertex attribute z component
-     */
+    /** {@code void glVertexAttrib3dARB(GLuint index, GLdouble v0, GLdouble v1, GLdouble v2)} */
     public static native void glVertexAttrib3dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1, @NativeType("GLdouble") double v2);
 
     // --- [ glVertexAttrib4fARB ] ---
 
-    /**
-     * Specifies the value of a generic vertex attribute.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     * @param v2    the vertex attribute z component
-     * @param v3    the vertex attribute w component
-     */
+    /** {@code void glVertexAttrib4fARB(GLuint index, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3)} */
     public static native void glVertexAttrib4fARB(@NativeType("GLuint") int index, @NativeType("GLfloat") float v0, @NativeType("GLfloat") float v1, @NativeType("GLfloat") float v2, @NativeType("GLfloat") float v3);
 
     // --- [ glVertexAttrib4sARB ] ---
 
-    /**
-     * Short version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     * @param v2    the vertex attribute z component
-     * @param v3    the vertex attribute w component
-     */
+    /** {@code void glVertexAttrib4sARB(GLuint index, GLshort v0, GLshort v1, GLshort v2, GLshort v3)} */
     public static native void glVertexAttrib4sARB(@NativeType("GLuint") int index, @NativeType("GLshort") short v0, @NativeType("GLshort") short v1, @NativeType("GLshort") short v2, @NativeType("GLshort") short v3);
 
     // --- [ glVertexAttrib4dARB ] ---
 
-    /**
-     * Double version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v0    the vertex attribute x component
-     * @param v1    the vertex attribute y component
-     * @param v2    the vertex attribute z component
-     * @param v3    the vertex attribute w component
-     */
+    /** {@code void glVertexAttrib4dARB(GLuint index, GLdouble v0, GLdouble v1, GLdouble v2, GLdouble v3)} */
     public static native void glVertexAttrib4dARB(@NativeType("GLuint") int index, @NativeType("GLdouble") double v0, @NativeType("GLdouble") double v1, @NativeType("GLdouble") double v2, @NativeType("GLdouble") double v3);
 
     // --- [ glVertexAttrib4NubARB ] ---
 
-    /**
-     * Normalized unsigned byte version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param x     the vertex attribute x component
-     * @param y     the vertex attribute y component
-     * @param z     the vertex attribute z component
-     * @param w     the vertex attribute w component
-     */
+    /** {@code void glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w)} */
     public static native void glVertexAttrib4NubARB(@NativeType("GLuint") int index, @NativeType("GLubyte") byte x, @NativeType("GLubyte") byte y, @NativeType("GLubyte") byte z, @NativeType("GLubyte") byte w);
 
     // --- [ glVertexAttrib1fvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib1fvARB VertexAttrib1fvARB} */
+    /** {@code void glVertexAttrib1fvARB(GLuint index, GLfloat const * v)} */
     public static native void nglVertexAttrib1fvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib1fARB VertexAttrib1fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib1fvARB(GLuint index, GLfloat const * v)} */
     public static void glVertexAttrib1fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 1);
@@ -255,15 +143,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib1svARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib1svARB VertexAttrib1svARB} */
+    /** {@code void glVertexAttrib1svARB(GLuint index, GLshort const * v)} */
     public static native void nglVertexAttrib1svARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib1sARB VertexAttrib1sARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib1svARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib1svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 1);
@@ -273,15 +156,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib1dvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib1dvARB VertexAttrib1dvARB} */
+    /** {@code void glVertexAttrib1dvARB(GLuint index, GLdouble const * v)} */
     public static native void nglVertexAttrib1dvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib1dARB VertexAttrib1dARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib1dvARB(GLuint index, GLdouble const * v)} */
     public static void glVertexAttrib1dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
             check(v, 1);
@@ -291,15 +169,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib2fvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib2fvARB VertexAttrib2fvARB} */
+    /** {@code void glVertexAttrib2fvARB(GLuint index, GLfloat const * v)} */
     public static native void nglVertexAttrib2fvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib2fARB VertexAttrib2fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib2fvARB(GLuint index, GLfloat const * v)} */
     public static void glVertexAttrib2fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 2);
@@ -309,15 +182,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib2svARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib2svARB VertexAttrib2svARB} */
+    /** {@code void glVertexAttrib2svARB(GLuint index, GLshort const * v)} */
     public static native void nglVertexAttrib2svARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib2sARB VertexAttrib2sARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib2svARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib2svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 2);
@@ -327,15 +195,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib2dvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib2dvARB VertexAttrib2dvARB} */
+    /** {@code void glVertexAttrib2dvARB(GLuint index, GLdouble const * v)} */
     public static native void nglVertexAttrib2dvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib2dARB VertexAttrib2dARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib2dvARB(GLuint index, GLdouble const * v)} */
     public static void glVertexAttrib2dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
             check(v, 2);
@@ -345,15 +208,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib3fvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib3fvARB VertexAttrib3fvARB} */
+    /** {@code void glVertexAttrib3fvARB(GLuint index, GLfloat const * v)} */
     public static native void nglVertexAttrib3fvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib3fARB VertexAttrib3fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib3fvARB(GLuint index, GLfloat const * v)} */
     public static void glVertexAttrib3fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 3);
@@ -363,15 +221,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib3svARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib3svARB VertexAttrib3svARB} */
+    /** {@code void glVertexAttrib3svARB(GLuint index, GLshort const * v)} */
     public static native void nglVertexAttrib3svARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib3sARB VertexAttrib3sARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib3svARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib3svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 3);
@@ -381,15 +234,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib3dvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib3dvARB VertexAttrib3dvARB} */
+    /** {@code void glVertexAttrib3dvARB(GLuint index, GLdouble const * v)} */
     public static native void nglVertexAttrib3dvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib3dARB VertexAttrib3dARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib3dvARB(GLuint index, GLdouble const * v)} */
     public static void glVertexAttrib3dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
             check(v, 3);
@@ -399,15 +247,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4fvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4fvARB VertexAttrib4fvARB} */
+    /** {@code void glVertexAttrib4fvARB(GLuint index, GLfloat const * v)} */
     public static native void nglVertexAttrib4fvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4fvARB(GLuint index, GLfloat const * v)} */
     public static void glVertexAttrib4fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -417,15 +260,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4svARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4svARB VertexAttrib4svARB} */
+    /** {@code void glVertexAttrib4svARB(GLuint index, GLshort const * v)} */
     public static native void nglVertexAttrib4svARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib4sARB VertexAttrib4sARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4svARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib4svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -435,15 +273,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4dvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4dvARB VertexAttrib4dvARB} */
+    /** {@code void glVertexAttrib4dvARB(GLuint index, GLdouble const * v)} */
     public static native void nglVertexAttrib4dvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib4dARB VertexAttrib4dARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4dvARB(GLuint index, GLdouble const * v)} */
     public static void glVertexAttrib4dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -453,15 +286,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4ivARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4ivARB VertexAttrib4ivARB} */
+    /** {@code void glVertexAttrib4ivARB(GLuint index, GLint const * v)} */
     public static native void nglVertexAttrib4ivARB(int index, long v);
 
-    /**
-     * Integer pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4ivARB(GLuint index, GLint const * v)} */
     public static void glVertexAttrib4ivARB(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -471,15 +299,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4bvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4bvARB VertexAttrib4bvARB} */
+    /** {@code void glVertexAttrib4bvARB(GLuint index, GLbyte const * v)} */
     public static native void nglVertexAttrib4bvARB(int index, long v);
 
-    /**
-     * Byte pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4bvARB(GLuint index, GLbyte const * v)} */
     public static void glVertexAttrib4bvARB(@NativeType("GLuint") int index, @NativeType("GLbyte const *") ByteBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -489,15 +312,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4ubvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4ubvARB VertexAttrib4ubvARB} */
+    /** {@code void glVertexAttrib4ubvARB(GLuint index, GLubyte const * v)} */
     public static native void nglVertexAttrib4ubvARB(int index, long v);
 
-    /**
-     * Pointer version of {@link #glVertexAttrib4NubARB VertexAttrib4NubARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4ubvARB(GLuint index, GLubyte const * v)} */
     public static void glVertexAttrib4ubvARB(@NativeType("GLuint") int index, @NativeType("GLubyte const *") ByteBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -507,15 +325,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4usvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4usvARB VertexAttrib4usvARB} */
+    /** {@code void glVertexAttrib4usvARB(GLuint index, GLushort const * v)} */
     public static native void nglVertexAttrib4usvARB(int index, long v);
 
-    /**
-     * Unsigned short pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4usvARB(GLuint index, GLushort const * v)} */
     public static void glVertexAttrib4usvARB(@NativeType("GLuint") int index, @NativeType("GLushort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -525,15 +338,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4uivARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4uivARB VertexAttrib4uivARB} */
+    /** {@code void glVertexAttrib4uivARB(GLuint index, GLuint const * v)} */
     public static native void nglVertexAttrib4uivARB(int index, long v);
 
-    /**
-     * Unsigned int pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4uivARB(GLuint index, GLuint const * v)} */
     public static void glVertexAttrib4uivARB(@NativeType("GLuint") int index, @NativeType("GLuint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -543,15 +351,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4NbvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4NbvARB VertexAttrib4NbvARB} */
+    /** {@code void glVertexAttrib4NbvARB(GLuint index, GLbyte const * v)} */
     public static native void nglVertexAttrib4NbvARB(int index, long v);
 
-    /**
-     * Normalized byte pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4NbvARB(GLuint index, GLbyte const * v)} */
     public static void glVertexAttrib4NbvARB(@NativeType("GLuint") int index, @NativeType("GLbyte const *") ByteBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -561,15 +364,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4NsvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4NsvARB VertexAttrib4NsvARB} */
+    /** {@code void glVertexAttrib4NsvARB(GLuint index, GLshort const * v)} */
     public static native void nglVertexAttrib4NsvARB(int index, long v);
 
-    /**
-     * Normalized short pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4NsvARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib4NsvARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -579,15 +377,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4NivARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4NivARB VertexAttrib4NivARB} */
+    /** {@code void glVertexAttrib4NivARB(GLuint index, GLint const * v)} */
     public static native void nglVertexAttrib4NivARB(int index, long v);
 
-    /**
-     * Normalized int pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4NivARB(GLuint index, GLint const * v)} */
     public static void glVertexAttrib4NivARB(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -597,15 +390,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4NubvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4NubvARB VertexAttrib4NubvARB} */
+    /** {@code void glVertexAttrib4NubvARB(GLuint index, GLubyte const * v)} */
     public static native void nglVertexAttrib4NubvARB(int index, long v);
 
-    /**
-     * Normalized unsigned byte pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4NubvARB(GLuint index, GLubyte const * v)} */
     public static void glVertexAttrib4NubvARB(@NativeType("GLuint") int index, @NativeType("GLubyte const *") ByteBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -615,15 +403,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4NusvARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4NusvARB VertexAttrib4NusvARB} */
+    /** {@code void glVertexAttrib4NusvARB(GLuint index, GLushort const * v)} */
     public static native void nglVertexAttrib4NusvARB(int index, long v);
 
-    /**
-     * Normalized unsigned short pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4NusvARB(GLuint index, GLushort const * v)} */
     public static void glVertexAttrib4NusvARB(@NativeType("GLuint") int index, @NativeType("GLushort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -633,15 +416,10 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttrib4NuivARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttrib4NuivARB VertexAttrib4NuivARB} */
+    /** {@code void glVertexAttrib4NuivARB(GLuint index, GLuint const * v)} */
     public static native void nglVertexAttrib4NuivARB(int index, long v);
 
-    /**
-     * Normalized unsigned int pointer version of {@link #glVertexAttrib4fARB VertexAttrib4fARB}.
-     *
-     * @param index the index of the generic vertex attribute to be modified
-     * @param v     the vertex attribute buffer
-     */
+    /** {@code void glVertexAttrib4NuivARB(GLuint index, GLuint const * v)} */
     public static void glVertexAttrib4NuivARB(@NativeType("GLuint") int index, @NativeType("GLuint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -651,119 +429,50 @@ public class ARBVertexShader {
 
     // --- [ glVertexAttribPointerARB ] ---
 
-    /** Unsafe version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static native void nglVertexAttribPointerARB(int index, int size, int type, boolean normalized, int stride, long pointer);
 
-    /**
-     * Specifies the location and organization of a vertex attribute array.
-     *
-     * @param index      the index of the generic vertex attribute to be modified
-     * @param size       the number of values per vertex that are stored in the array. The initial value is 4. One of:<br><table><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>{@link GL12#GL_BGRA BGRA}</td></tr></table>
-     * @param type       the data type of each component in the array. The initial value is GL_FLOAT. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL41#GL_FIXED FIXED}</td></tr></table>
-     * @param normalized whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed
-     * @param stride     the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
-     *                   the array. The initial value is 0.
-     * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-     *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
-     */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") ByteBuffer pointer) {
         nglVertexAttribPointerARB(index, size, type, normalized, stride, memAddress(pointer));
     }
 
-    /**
-     * Specifies the location and organization of a vertex attribute array.
-     *
-     * @param index      the index of the generic vertex attribute to be modified
-     * @param size       the number of values per vertex that are stored in the array. The initial value is 4. One of:<br><table><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>{@link GL12#GL_BGRA BGRA}</td></tr></table>
-     * @param type       the data type of each component in the array. The initial value is GL_FLOAT. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL41#GL_FIXED FIXED}</td></tr></table>
-     * @param normalized whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed
-     * @param stride     the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
-     *                   the array. The initial value is 0.
-     * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-     *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
-     */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") long pointer) {
         nglVertexAttribPointerARB(index, size, type, normalized, stride, pointer);
     }
 
-    /**
-     * Specifies the location and organization of a vertex attribute array.
-     *
-     * @param index      the index of the generic vertex attribute to be modified
-     * @param size       the number of values per vertex that are stored in the array. The initial value is 4. One of:<br><table><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>{@link GL12#GL_BGRA BGRA}</td></tr></table>
-     * @param type       the data type of each component in the array. The initial value is GL_FLOAT. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL41#GL_FIXED FIXED}</td></tr></table>
-     * @param normalized whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed
-     * @param stride     the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
-     *                   the array. The initial value is 0.
-     * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-     *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
-     */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") ShortBuffer pointer) {
         nglVertexAttribPointerARB(index, size, type, normalized, stride, memAddress(pointer));
     }
 
-    /**
-     * Specifies the location and organization of a vertex attribute array.
-     *
-     * @param index      the index of the generic vertex attribute to be modified
-     * @param size       the number of values per vertex that are stored in the array. The initial value is 4. One of:<br><table><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>{@link GL12#GL_BGRA BGRA}</td></tr></table>
-     * @param type       the data type of each component in the array. The initial value is GL_FLOAT. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL41#GL_FIXED FIXED}</td></tr></table>
-     * @param normalized whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed
-     * @param stride     the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
-     *                   the array. The initial value is 0.
-     * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-     *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
-     */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") IntBuffer pointer) {
         nglVertexAttribPointerARB(index, size, type, normalized, stride, memAddress(pointer));
     }
 
-    /**
-     * Specifies the location and organization of a vertex attribute array.
-     *
-     * @param index      the index of the generic vertex attribute to be modified
-     * @param size       the number of values per vertex that are stored in the array. The initial value is 4. One of:<br><table><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>{@link GL12#GL_BGRA BGRA}</td></tr></table>
-     * @param type       the data type of each component in the array. The initial value is GL_FLOAT. One of:<br><table><tr><td>{@link GL11#GL_BYTE BYTE}</td><td>{@link GL11#GL_UNSIGNED_BYTE UNSIGNED_BYTE}</td><td>{@link GL11#GL_SHORT SHORT}</td><td>{@link GL11#GL_UNSIGNED_SHORT UNSIGNED_SHORT}</td><td>{@link GL11#GL_INT INT}</td><td>{@link GL11#GL_UNSIGNED_INT UNSIGNED_INT}</td><td>{@link GL30#GL_HALF_FLOAT HALF_FLOAT}</td><td>{@link GL11#GL_FLOAT FLOAT}</td></tr><tr><td>{@link GL11#GL_DOUBLE DOUBLE}</td><td>{@link GL12#GL_UNSIGNED_INT_2_10_10_10_REV UNSIGNED_INT_2_10_10_10_REV}</td><td>{@link GL33#GL_INT_2_10_10_10_REV INT_2_10_10_10_REV}</td><td>{@link GL41#GL_FIXED FIXED}</td></tr></table>
-     * @param normalized whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed
-     * @param stride     the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
-     *                   the array. The initial value is 0.
-     * @param pointer    the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-     *                   currently bound to the {@link GL15#GL_ARRAY_BUFFER ARRAY_BUFFER} target. The initial value is 0.
-     */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") FloatBuffer pointer) {
         nglVertexAttribPointerARB(index, size, type, normalized, stride, memAddress(pointer));
     }
 
     // --- [ glEnableVertexAttribArrayARB ] ---
 
-    /**
-     * Enables a generic vertex attribute array.
-     *
-     * @param index the index of the generic vertex attribute to be enabled
-     */
+    /** {@code void glEnableVertexAttribArrayARB(GLuint index)} */
     public static native void glEnableVertexAttribArrayARB(@NativeType("GLuint") int index);
 
     // --- [ glDisableVertexAttribArrayARB ] ---
 
-    /**
-     * Disables a generic vertex attribute array.
-     *
-     * @param index the index of the generic vertex attribute to be disabled
-     */
+    /** {@code void glDisableVertexAttribArrayARB(GLuint index)} */
     public static native void glDisableVertexAttribArrayARB(@NativeType("GLuint") int index);
 
     // --- [ glBindAttribLocationARB ] ---
 
-    /** Unsafe version of: {@link #glBindAttribLocationARB BindAttribLocationARB} */
+    /** {@code void glBindAttribLocationARB(GLhandleARB programObj, GLuint index, GLchar const * name)} */
     public static native void nglBindAttribLocationARB(int programObj, int index, long name);
 
-    /**
-     * Associates a generic vertex attribute index with a named attribute variable.
-     *
-     * @param programObj the handle of the program object in which the association is to be made
-     * @param index      the index of the generic vertex attribute to be bound
-     * @param name       a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound
-     */
+    /** {@code void glBindAttribLocationARB(GLhandleARB programObj, GLuint index, GLchar const * name)} */
     public static void glBindAttribLocationARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLchar const *") ByteBuffer name) {
         if (CHECKS) {
             checkNT1(name);
@@ -771,13 +480,7 @@ public class ARBVertexShader {
         nglBindAttribLocationARB(programObj, index, memAddress(name));
     }
 
-    /**
-     * Associates a generic vertex attribute index with a named attribute variable.
-     *
-     * @param programObj the handle of the program object in which the association is to be made
-     * @param index      the index of the generic vertex attribute to be bound
-     * @param name       a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound
-     */
+    /** {@code void glBindAttribLocationARB(GLhandleARB programObj, GLuint index, GLchar const * name)} */
     public static void glBindAttribLocationARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -791,24 +494,10 @@ public class ARBVertexShader {
 
     // --- [ glGetActiveAttribARB ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetActiveAttribARB GetActiveAttribARB}
-     *
-     * @param maxLength the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}
-     */
+    /** {@code void glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei * length, GLint * size, GLenum * type, GLchar * name)} */
     public static native void nglGetActiveAttribARB(int programObj, int index, int maxLength, long length, long size, long type, long name);
 
-    /**
-     * Returns information about an active attribute variable for the specified program object.
-     *
-     * @param programObj the program object to be queried
-     * @param index      the index of the attribute variable to be queried
-     * @param length     the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than
-     *                   {@code NULL} is passed
-     * @param size       the size of the attribute variable
-     * @param type       the data type of the attribute variable
-     * @param name       a null terminated string containing the name of the attribute variable
-     */
+    /** {@code void glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei * length, GLint * size, GLenum * type, GLchar * name)} */
     public static void glGetActiveAttribARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type, @NativeType("GLchar *") ByteBuffer name) {
         if (CHECKS) {
             checkSafe(length, 1);
@@ -818,15 +507,7 @@ public class ARBVertexShader {
         nglGetActiveAttribARB(programObj, index, name.remaining(), memAddressSafe(length), memAddress(size), memAddress(type), memAddress(name));
     }
 
-    /**
-     * Returns information about an active attribute variable for the specified program object.
-     *
-     * @param programObj the program object to be queried
-     * @param index      the index of the attribute variable to be queried
-     * @param maxLength  the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}
-     * @param size       the size of the attribute variable
-     * @param type       the data type of the attribute variable
-     */
+    /** {@code void glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei * length, GLint * size, GLenum * type, GLchar * name)} */
     @NativeType("void")
     public static String glGetActiveAttribARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLsizei") int maxLength, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type) {
         if (CHECKS) {
@@ -844,14 +525,7 @@ public class ARBVertexShader {
         }
     }
 
-    /**
-     * Returns information about an active attribute variable for the specified program object.
-     *
-     * @param programObj the program object to be queried
-     * @param index      the index of the attribute variable to be queried
-     * @param size       the size of the attribute variable
-     * @param type       the data type of the attribute variable
-     */
+    /** {@code void glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei * length, GLint * size, GLenum * type, GLchar * name)} */
     @NativeType("void")
     public static String glGetActiveAttribARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLint *") IntBuffer size, @NativeType("GLenum *") IntBuffer type) {
         return glGetActiveAttribARB(programObj, index, ARBShaderObjects.glGetObjectParameteriARB(programObj, GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB), size, type);
@@ -859,15 +533,10 @@ public class ARBVertexShader {
 
     // --- [ glGetAttribLocationARB ] ---
 
-    /** Unsafe version of: {@link #glGetAttribLocationARB GetAttribLocationARB} */
+    /** {@code GLint glGetAttribLocationARB(GLhandleARB programObj, GLchar const * name)} */
     public static native int nglGetAttribLocationARB(int programObj, long name);
 
-    /**
-     * Returns the location of an attribute variable.
-     *
-     * @param programObj the program object to be queried
-     * @param name       a null terminated string containing the name of the attribute variable whose location is to be queried
-     */
+    /** {@code GLint glGetAttribLocationARB(GLhandleARB programObj, GLchar const * name)} */
     @NativeType("GLint")
     public static int glGetAttribLocationARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLchar const *") ByteBuffer name) {
         if (CHECKS) {
@@ -876,12 +545,7 @@ public class ARBVertexShader {
         return nglGetAttribLocationARB(programObj, memAddress(name));
     }
 
-    /**
-     * Returns the location of an attribute variable.
-     *
-     * @param programObj the program object to be queried
-     * @param name       a null terminated string containing the name of the attribute variable whose location is to be queried
-     */
+    /** {@code GLint glGetAttribLocationARB(GLhandleARB programObj, GLchar const * name)} */
     @NativeType("GLint")
     public static int glGetAttribLocationARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLchar const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -896,16 +560,10 @@ public class ARBVertexShader {
 
     // --- [ glGetVertexAttribivARB ] ---
 
-    /** Unsafe version of: {@link #glGetVertexAttribivARB GetVertexAttribivARB} */
+    /** {@code void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint * params)} */
     public static native void nglGetVertexAttribivARB(int index, int pname, long params);
 
-    /**
-     * Returns the integer value of a generic vertex attribute parameter.
-     *
-     * @param index  the generic vertex attribute parameter to be queried
-     * @param pname  the symbolic name of the vertex attribute parameter to be queried. One of:<br><table><tr><td>{@link GL15#GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING VERTEX_ATTRIB_ARRAY_BUFFER_BINDING}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB VERTEX_ATTRIB_ARRAY_ENABLED_ARB}</td></tr><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB VERTEX_ATTRIB_ARRAY_SIZE_ARB}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB VERTEX_ATTRIB_ARRAY_STRIDE_ARB}</td></tr><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB VERTEX_ATTRIB_ARRAY_TYPE_ARB}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB}</td></tr><tr><td>{@link #GL_CURRENT_VERTEX_ATTRIB_ARB CURRENT_VERTEX_ATTRIB_ARB}</td><td>{@link GL30#GL_VERTEX_ATTRIB_ARRAY_INTEGER VERTEX_ATTRIB_ARRAY_INTEGER}</td></tr><tr><td>{@link GL33#GL_VERTEX_ATTRIB_ARRAY_DIVISOR VERTEX_ATTRIB_ARRAY_DIVISOR}</td></tr></table>
-     * @param params returns the requested data
-     */
+    /** {@code void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint * params)} */
     public static void glGetVertexAttribivARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
             check(params, 1);
@@ -913,12 +571,7 @@ public class ARBVertexShader {
         nglGetVertexAttribivARB(index, pname, memAddress(params));
     }
 
-    /**
-     * Returns the integer value of a generic vertex attribute parameter.
-     *
-     * @param index the generic vertex attribute parameter to be queried
-     * @param pname the symbolic name of the vertex attribute parameter to be queried. One of:<br><table><tr><td>{@link GL15#GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING VERTEX_ATTRIB_ARRAY_BUFFER_BINDING}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_ENABLED_ARB VERTEX_ATTRIB_ARRAY_ENABLED_ARB}</td></tr><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_SIZE_ARB VERTEX_ATTRIB_ARRAY_SIZE_ARB}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_STRIDE_ARB VERTEX_ATTRIB_ARRAY_STRIDE_ARB}</td></tr><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_TYPE_ARB VERTEX_ATTRIB_ARRAY_TYPE_ARB}</td><td>{@link #GL_VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB}</td></tr><tr><td>{@link #GL_CURRENT_VERTEX_ATTRIB_ARB CURRENT_VERTEX_ATTRIB_ARB}</td><td>{@link GL30#GL_VERTEX_ATTRIB_ARRAY_INTEGER VERTEX_ATTRIB_ARRAY_INTEGER}</td></tr><tr><td>{@link GL33#GL_VERTEX_ATTRIB_ARRAY_DIVISOR VERTEX_ATTRIB_ARRAY_DIVISOR}</td></tr></table>
-     */
+    /** {@code void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint * params)} */
     @NativeType("void")
     public static int glGetVertexAttribiARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -933,16 +586,10 @@ public class ARBVertexShader {
 
     // --- [ glGetVertexAttribfvARB ] ---
 
-    /** Unsafe version of: {@link #glGetVertexAttribfvARB GetVertexAttribfvARB} */
+    /** {@code void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat * params)} */
     public static native void nglGetVertexAttribfvARB(int index, int pname, long params);
 
-    /**
-     * Float version of {@link #glGetVertexAttribivARB GetVertexAttribivARB}.
-     *
-     * @param index  the generic vertex attribute parameter to be queried
-     * @param pname  the symbolic name of the vertex attribute parameter to be queried
-     * @param params returns the requested data
-     */
+    /** {@code void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat * params)} */
     public static void glGetVertexAttribfvARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLfloat *") FloatBuffer params) {
         if (CHECKS) {
             check(params, 4);
@@ -952,16 +599,10 @@ public class ARBVertexShader {
 
     // --- [ glGetVertexAttribdvARB ] ---
 
-    /** Unsafe version of: {@link #glGetVertexAttribdvARB GetVertexAttribdvARB} */
+    /** {@code void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble * params)} */
     public static native void nglGetVertexAttribdvARB(int index, int pname, long params);
 
-    /**
-     * Double version of {@link #glGetVertexAttribivARB GetVertexAttribivARB}.
-     *
-     * @param index  the generic vertex attribute parameter to be queried
-     * @param pname  the symbolic name of the vertex attribute parameter to be queried
-     * @param params returns the requested data
-     */
+    /** {@code void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble * params)} */
     public static void glGetVertexAttribdvARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") DoubleBuffer params) {
         if (CHECKS) {
             check(params, 4);
@@ -971,16 +612,10 @@ public class ARBVertexShader {
 
     // --- [ glGetVertexAttribPointervARB ] ---
 
-    /** Unsafe version of: {@link #glGetVertexAttribPointervARB GetVertexAttribPointervARB} */
+    /** {@code void glGetVertexAttribPointervARB(GLuint index, GLenum pname, void ** pointer)} */
     public static native void nglGetVertexAttribPointervARB(int index, int pname, long pointer);
 
-    /**
-     * Returns the address of the specified generic vertex attribute pointer.
-     *
-     * @param index   the generic vertex attribute parameter to be queried
-     * @param pname   the symbolic name of the generic vertex attribute parameter to be returned. Must be:<br><table><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB VERTEX_ATTRIB_ARRAY_POINTER_ARB}</td></tr></table>
-     * @param pointer the pointer value
-     */
+    /** {@code void glGetVertexAttribPointervARB(GLuint index, GLenum pname, void ** pointer)} */
     public static void glGetVertexAttribPointervARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("void **") PointerBuffer pointer) {
         if (CHECKS) {
             check(pointer, 1);
@@ -988,12 +623,7 @@ public class ARBVertexShader {
         nglGetVertexAttribPointervARB(index, pname, memAddress(pointer));
     }
 
-    /**
-     * Returns the address of the specified generic vertex attribute pointer.
-     *
-     * @param index the generic vertex attribute parameter to be queried
-     * @param pname the symbolic name of the generic vertex attribute parameter to be returned. Must be:<br><table><tr><td>{@link #GL_VERTEX_ATTRIB_ARRAY_POINTER_ARB VERTEX_ATTRIB_ARRAY_POINTER_ARB}</td></tr></table>
-     */
+    /** {@code void glGetVertexAttribPointervARB(GLuint index, GLenum pname, void ** pointer)} */
     @NativeType("void")
     public static long glGetVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1006,7 +636,7 @@ public class ARBVertexShader {
         }
     }
 
-    /** Array version of: {@link #glVertexAttrib1fvARB VertexAttrib1fvARB} */
+    /** {@code void glVertexAttrib1fvARB(GLuint index, GLfloat const * v)} */
     public static void glVertexAttrib1fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib1fvARB;
         if (CHECKS) {
@@ -1016,7 +646,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib1svARB VertexAttrib1svARB} */
+    /** {@code void glVertexAttrib1svARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib1svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib1svARB;
         if (CHECKS) {
@@ -1026,7 +656,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib1dvARB VertexAttrib1dvARB} */
+    /** {@code void glVertexAttrib1dvARB(GLuint index, GLdouble const * v)} */
     public static void glVertexAttrib1dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib1dvARB;
         if (CHECKS) {
@@ -1036,7 +666,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib2fvARB VertexAttrib2fvARB} */
+    /** {@code void glVertexAttrib2fvARB(GLuint index, GLfloat const * v)} */
     public static void glVertexAttrib2fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib2fvARB;
         if (CHECKS) {
@@ -1046,7 +676,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib2svARB VertexAttrib2svARB} */
+    /** {@code void glVertexAttrib2svARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib2svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib2svARB;
         if (CHECKS) {
@@ -1056,7 +686,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib2dvARB VertexAttrib2dvARB} */
+    /** {@code void glVertexAttrib2dvARB(GLuint index, GLdouble const * v)} */
     public static void glVertexAttrib2dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib2dvARB;
         if (CHECKS) {
@@ -1066,7 +696,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib3fvARB VertexAttrib3fvARB} */
+    /** {@code void glVertexAttrib3fvARB(GLuint index, GLfloat const * v)} */
     public static void glVertexAttrib3fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib3fvARB;
         if (CHECKS) {
@@ -1076,7 +706,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib3svARB VertexAttrib3svARB} */
+    /** {@code void glVertexAttrib3svARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib3svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib3svARB;
         if (CHECKS) {
@@ -1086,7 +716,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib3dvARB VertexAttrib3dvARB} */
+    /** {@code void glVertexAttrib3dvARB(GLuint index, GLdouble const * v)} */
     public static void glVertexAttrib3dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib3dvARB;
         if (CHECKS) {
@@ -1096,7 +726,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4fvARB VertexAttrib4fvARB} */
+    /** {@code void glVertexAttrib4fvARB(GLuint index, GLfloat const * v)} */
     public static void glVertexAttrib4fvARB(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4fvARB;
         if (CHECKS) {
@@ -1106,7 +736,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4svARB VertexAttrib4svARB} */
+    /** {@code void glVertexAttrib4svARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib4svARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4svARB;
         if (CHECKS) {
@@ -1116,7 +746,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4dvARB VertexAttrib4dvARB} */
+    /** {@code void glVertexAttrib4dvARB(GLuint index, GLdouble const * v)} */
     public static void glVertexAttrib4dvARB(@NativeType("GLuint") int index, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4dvARB;
         if (CHECKS) {
@@ -1126,7 +756,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4ivARB VertexAttrib4ivARB} */
+    /** {@code void glVertexAttrib4ivARB(GLuint index, GLint const * v)} */
     public static void glVertexAttrib4ivARB(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4ivARB;
         if (CHECKS) {
@@ -1136,7 +766,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4usvARB VertexAttrib4usvARB} */
+    /** {@code void glVertexAttrib4usvARB(GLuint index, GLushort const * v)} */
     public static void glVertexAttrib4usvARB(@NativeType("GLuint") int index, @NativeType("GLushort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4usvARB;
         if (CHECKS) {
@@ -1146,7 +776,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4uivARB VertexAttrib4uivARB} */
+    /** {@code void glVertexAttrib4uivARB(GLuint index, GLuint const * v)} */
     public static void glVertexAttrib4uivARB(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4uivARB;
         if (CHECKS) {
@@ -1156,7 +786,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4NsvARB VertexAttrib4NsvARB} */
+    /** {@code void glVertexAttrib4NsvARB(GLuint index, GLshort const * v)} */
     public static void glVertexAttrib4NsvARB(@NativeType("GLuint") int index, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4NsvARB;
         if (CHECKS) {
@@ -1166,7 +796,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4NivARB VertexAttrib4NivARB} */
+    /** {@code void glVertexAttrib4NivARB(GLuint index, GLint const * v)} */
     public static void glVertexAttrib4NivARB(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4NivARB;
         if (CHECKS) {
@@ -1176,7 +806,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4NusvARB VertexAttrib4NusvARB} */
+    /** {@code void glVertexAttrib4NusvARB(GLuint index, GLushort const * v)} */
     public static void glVertexAttrib4NusvARB(@NativeType("GLuint") int index, @NativeType("GLushort const *") short[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4NusvARB;
         if (CHECKS) {
@@ -1186,7 +816,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttrib4NuivARB VertexAttrib4NuivARB} */
+    /** {@code void glVertexAttrib4NuivARB(GLuint index, GLuint const * v)} */
     public static void glVertexAttrib4NuivARB(@NativeType("GLuint") int index, @NativeType("GLuint const *") int[] v) {
         long __functionAddress = GL.getICD().glVertexAttrib4NuivARB;
         if (CHECKS) {
@@ -1196,7 +826,7 @@ public class ARBVertexShader {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") short[] pointer) {
         long __functionAddress = GL.getICD().glVertexAttribPointerARB;
         if (CHECKS) {
@@ -1205,7 +835,7 @@ public class ARBVertexShader {
         callPV(index, size, type, normalized, stride, pointer, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") int[] pointer) {
         long __functionAddress = GL.getICD().glVertexAttribPointerARB;
         if (CHECKS) {
@@ -1214,7 +844,7 @@ public class ARBVertexShader {
         callPV(index, size, type, normalized, stride, pointer, __functionAddress);
     }
 
-    /** Array version of: {@link #glVertexAttribPointerARB VertexAttribPointerARB} */
+    /** {@code void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void const * pointer)} */
     public static void glVertexAttribPointerARB(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride, @NativeType("void const *") float[] pointer) {
         long __functionAddress = GL.getICD().glVertexAttribPointerARB;
         if (CHECKS) {
@@ -1223,7 +853,7 @@ public class ARBVertexShader {
         callPV(index, size, type, normalized, stride, pointer, __functionAddress);
     }
 
-    /** Array version of: {@link #glGetActiveAttribARB GetActiveAttribARB} */
+    /** {@code void glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei * length, GLint * size, GLenum * type, GLchar * name)} */
     public static void glGetActiveAttribARB(@NativeType("GLhandleARB") int programObj, @NativeType("GLuint") int index, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLint *") int[] size, @NativeType("GLenum *") int[] type, @NativeType("GLchar *") ByteBuffer name) {
         long __functionAddress = GL.getICD().glGetActiveAttribARB;
         if (CHECKS) {
@@ -1235,7 +865,7 @@ public class ARBVertexShader {
         callPPPPV(programObj, index, name.remaining(), length, size, type, memAddress(name), __functionAddress);
     }
 
-    /** Array version of: {@link #glGetVertexAttribivARB GetVertexAttribivARB} */
+    /** {@code void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint * params)} */
     public static void glGetVertexAttribivARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribivARB;
         if (CHECKS) {
@@ -1245,7 +875,7 @@ public class ARBVertexShader {
         callPV(index, pname, params, __functionAddress);
     }
 
-    /** Array version of: {@link #glGetVertexAttribfvARB GetVertexAttribfvARB} */
+    /** {@code void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat * params)} */
     public static void glGetVertexAttribfvARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLfloat *") float[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribfvARB;
         if (CHECKS) {
@@ -1255,7 +885,7 @@ public class ARBVertexShader {
         callPV(index, pname, params, __functionAddress);
     }
 
-    /** Array version of: {@link #glGetVertexAttribdvARB GetVertexAttribdvARB} */
+    /** {@code void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble * params)} */
     public static void glGetVertexAttribdvARB(@NativeType("GLuint") int index, @NativeType("GLenum") int pname, @NativeType("GLdouble *") double[] params) {
         long __functionAddress = GL.getICD().glGetVertexAttribdvARB;
         if (CHECKS) {

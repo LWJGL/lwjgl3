@@ -16,40 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters for deserializing an acceleration structure.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The source memory pointed to by {@code src} <b>must</b> contain data previously serialized using {@link KHRAccelerationStructure#vkCmdCopyAccelerationStructureToMemoryKHR CmdCopyAccelerationStructureToMemoryKHR}, potentially modified to relocate acceleration structure references as described in that command</li>
- * <li>{@code mode} <b>must</b> be {@link KHRAccelerationStructure#VK_COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR COPY_ACCELERATION_STRUCTURE_MODE_DESERIALIZE_KHR}</li>
- * <li>The data in {@code src} <b>must</b> have a format compatible with the destination physical device as returned by {@link KHRAccelerationStructure#vkGetDeviceAccelerationStructureCompatibilityKHR GetDeviceAccelerationStructureCompatibilityKHR}</li>
- * <li>{@code dst} <b>must</b> have been created with a {@code size} greater than or equal to that used to serialize the data in {@code src}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code dst} <b>must</b> be a valid {@code VkAccelerationStructureKHR} handle</li>
- * <li>{@code mode} <b>must</b> be a valid {@code VkCopyAccelerationStructureModeKHR} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceOrHostAddressConstKHR}, {@link KHRAccelerationStructure#vkCmdCopyMemoryToAccelerationStructureKHR CmdCopyMemoryToAccelerationStructureKHR}, {@link KHRAccelerationStructure#vkCopyMemoryToAccelerationStructureKHR CopyMemoryToAccelerationStructureKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCopyMemoryToAccelerationStructureInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #src};
- *     VkAccelerationStructureKHR {@link #dst};
- *     VkCopyAccelerationStructureModeKHR {@link #mode};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} src;
+ *     VkAccelerationStructureKHR dst;
+ *     VkCopyAccelerationStructureModeKHR mode;
+ * }}</pre>
  */
 public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct<VkCopyMemoryToAccelerationStructureInfoKHR> implements NativeResource {
 
@@ -108,34 +82,34 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct<VkCopyMem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the device or host address to memory containing the source data for the copy. */
+    /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code src} field. */
     public VkDeviceOrHostAddressConstKHR src() { return nsrc(address()); }
-    /** the target acceleration structure for the copy. */
+    /** @return the value of the {@code dst} field. */
     @NativeType("VkAccelerationStructureKHR")
     public long dst() { return ndst(address()); }
-    /** a {@code VkCopyAccelerationStructureModeKHR} value specifying additional operations to perform during the copy. */
+    /** @return the value of the {@code mode} field. */
     @NativeType("VkCopyAccelerationStructureModeKHR")
     public int mode() { return nmode(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCopyMemoryToAccelerationStructureInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR} value to the {@code sType} field. */
     public VkCopyMemoryToAccelerationStructureInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCopyMemoryToAccelerationStructureInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #src} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code src} field. */
     public VkCopyMemoryToAccelerationStructureInfoKHR src(VkDeviceOrHostAddressConstKHR value) { nsrc(address(), value); return this; }
-    /** Passes the {@link #src} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code src} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkCopyMemoryToAccelerationStructureInfoKHR src(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(src()); return this; }
-    /** Sets the specified value to the {@link #dst} field. */
+    /** Sets the specified value to the {@code dst} field. */
     public VkCopyMemoryToAccelerationStructureInfoKHR dst(@NativeType("VkAccelerationStructureKHR") long value) { ndst(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public VkCopyMemoryToAccelerationStructureInfoKHR mode(@NativeType("VkCopyAccelerationStructureModeKHR") int value) { nmode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,34 +317,34 @@ public class VkCopyMemoryToAccelerationStructureInfoKHR extends Struct<VkCopyMem
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCopyMemoryToAccelerationStructureInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCopyMemoryToAccelerationStructureInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkCopyMemoryToAccelerationStructureInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCopyMemoryToAccelerationStructureInfoKHR.npNext(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkCopyMemoryToAccelerationStructureInfoKHR#src} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code src} field. */
         public VkDeviceOrHostAddressConstKHR src() { return VkCopyMemoryToAccelerationStructureInfoKHR.nsrc(address()); }
-        /** @return the value of the {@link VkCopyMemoryToAccelerationStructureInfoKHR#dst} field. */
+        /** @return the value of the {@code dst} field. */
         @NativeType("VkAccelerationStructureKHR")
         public long dst() { return VkCopyMemoryToAccelerationStructureInfoKHR.ndst(address()); }
-        /** @return the value of the {@link VkCopyMemoryToAccelerationStructureInfoKHR#mode} field. */
+        /** @return the value of the {@code mode} field. */
         @NativeType("VkCopyAccelerationStructureModeKHR")
         public int mode() { return VkCopyMemoryToAccelerationStructureInfoKHR.nmode(address()); }
 
-        /** Sets the specified value to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyMemoryToAccelerationStructureInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR} value to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#sType} field. */
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR} value to the {@code sType} field. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCopyMemoryToAccelerationStructureInfoKHR.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#src} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code src} field. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer src(VkDeviceOrHostAddressConstKHR value) { VkCopyMemoryToAccelerationStructureInfoKHR.nsrc(address(), value); return this; }
-        /** Passes the {@link VkCopyMemoryToAccelerationStructureInfoKHR#src} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code src} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer src(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(src()); return this; }
-        /** Sets the specified value to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#dst} field. */
+        /** Sets the specified value to the {@code dst} field. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer dst(@NativeType("VkAccelerationStructureKHR") long value) { VkCopyMemoryToAccelerationStructureInfoKHR.ndst(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyMemoryToAccelerationStructureInfoKHR#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public VkCopyMemoryToAccelerationStructureInfoKHR.Buffer mode(@NativeType("VkCopyAccelerationStructureModeKHR") int value) { VkCopyMemoryToAccelerationStructureInfoKHR.nmode(address(), value); return this; }
 
     }

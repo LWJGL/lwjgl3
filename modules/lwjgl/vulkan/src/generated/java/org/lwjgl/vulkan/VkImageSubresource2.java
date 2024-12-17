@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an image subresource.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2 STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code imageSubresource} <b>must</b> be a valid {@link VkImageSubresource} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceImageSubresourceInfo}, {@link VkImageSubresource}, {@link VK14#vkGetImageSubresourceLayout2 GetImageSubresourceLayout2}, {@link EXTHostImageCopy#vkGetImageSubresourceLayout2EXT GetImageSubresourceLayout2EXT}, {@link KHRMaintenance5#vkGetImageSubresourceLayout2KHR GetImageSubresourceLayout2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageSubresource2 {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkImageSubresource VkImageSubresource} {@link #imageSubresource};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkImageSubresource VkImageSubresource} imageSubresource;
+ * }}</pre>
  */
 public class VkImageSubresource2 extends Struct<VkImageSubresource2> implements NativeResource {
 
@@ -90,24 +74,24 @@ public class VkImageSubresource2 extends Struct<VkImageSubresource2> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkImageSubresource} structure. */
+    /** @return a {@link VkImageSubresource} view of the {@code imageSubresource} field. */
     public VkImageSubresource imageSubresource() { return nimageSubresource(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageSubresource2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2 STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2 STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2} value to the {@code sType} field. */
     public VkImageSubresource2 sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageSubresource2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresource} to the {@link #imageSubresource} field. */
+    /** Copies the specified {@link VkImageSubresource} to the {@code imageSubresource} field. */
     public VkImageSubresource2 imageSubresource(VkImageSubresource value) { nimageSubresource(address(), value); return this; }
-    /** Passes the {@link #imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageSubresource2 imageSubresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(imageSubresource()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,24 +287,24 @@ public class VkImageSubresource2 extends Struct<VkImageSubresource2> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageSubresource2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageSubresource2.nsType(address()); }
-        /** @return the value of the {@link VkImageSubresource2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkImageSubresource2.npNext(address()); }
-        /** @return a {@link VkImageSubresource} view of the {@link VkImageSubresource2#imageSubresource} field. */
+        /** @return a {@link VkImageSubresource} view of the {@code imageSubresource} field. */
         public VkImageSubresource imageSubresource() { return VkImageSubresource2.nimageSubresource(address()); }
 
-        /** Sets the specified value to the {@link VkImageSubresource2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageSubresource2.Buffer sType(@NativeType("VkStructureType") int value) { VkImageSubresource2.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2 STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2} value to the {@link VkImageSubresource2#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2 STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2} value to the {@code sType} field. */
         public VkImageSubresource2.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2); }
-        /** Sets the specified value to the {@link VkImageSubresource2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageSubresource2.Buffer pNext(@NativeType("void *") long value) { VkImageSubresource2.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresource} to the {@link VkImageSubresource2#imageSubresource} field. */
+        /** Copies the specified {@link VkImageSubresource} to the {@code imageSubresource} field. */
         public VkImageSubresource2.Buffer imageSubresource(VkImageSubresource value) { VkImageSubresource2.nimageSubresource(address(), value); return this; }
-        /** Passes the {@link VkImageSubresource2#imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageSubresource2.Buffer imageSubresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(imageSubresource()); return this; }
 
     }

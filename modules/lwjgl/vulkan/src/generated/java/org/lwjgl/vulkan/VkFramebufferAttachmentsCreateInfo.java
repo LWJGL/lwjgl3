@@ -17,28 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of images that will be used with a framebuffer.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO}</li>
- * <li>If {@code attachmentImageInfoCount} is not 0, {@code pAttachmentImageInfos} <b>must</b> be a valid pointer to an array of {@code attachmentImageInfoCount} valid {@link VkFramebufferAttachmentImageInfo} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkFramebufferAttachmentImageInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkFramebufferAttachmentsCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #attachmentImageInfoCount};
- *     {@link VkFramebufferAttachmentImageInfo VkFramebufferAttachmentImageInfo} const * {@link #pAttachmentImageInfos};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t attachmentImageInfoCount;
+ *     {@link VkFramebufferAttachmentImageInfo VkFramebufferAttachmentImageInfo} const * pAttachmentImageInfos;
+ * }}</pre>
  */
 public class VkFramebufferAttachmentsCreateInfo extends Struct<VkFramebufferAttachmentsCreateInfo> implements NativeResource {
 
@@ -94,26 +79,26 @@ public class VkFramebufferAttachmentsCreateInfo extends Struct<VkFramebufferAtta
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of attachments being described. */
+    /** @return the value of the {@code attachmentImageInfoCount} field. */
     @NativeType("uint32_t")
     public int attachmentImageInfoCount() { return nattachmentImageInfoCount(address()); }
-    /** a pointer to an array of {@link VkFramebufferAttachmentImageInfo} structures, each structure describing a number of parameters of the corresponding attachment in a render pass instance. */
+    /** @return a {@link VkFramebufferAttachmentImageInfo.Buffer} view of the struct array pointed to by the {@code pAttachmentImageInfos} field. */
     @NativeType("VkFramebufferAttachmentImageInfo const *")
     public VkFramebufferAttachmentImageInfo.@Nullable Buffer pAttachmentImageInfos() { return npAttachmentImageInfos(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkFramebufferAttachmentsCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO} value to the {@code sType} field. */
     public VkFramebufferAttachmentsCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkFramebufferAttachmentsCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@link #pAttachmentImageInfos} field. */
+    /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@code pAttachmentImageInfos} field. */
     public VkFramebufferAttachmentsCreateInfo pAttachmentImageInfos(@NativeType("VkFramebufferAttachmentImageInfo const *") VkFramebufferAttachmentImageInfo.@Nullable Buffer value) { npAttachmentImageInfos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,26 +312,26 @@ public class VkFramebufferAttachmentsCreateInfo extends Struct<VkFramebufferAtta
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkFramebufferAttachmentsCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkFramebufferAttachmentsCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkFramebufferAttachmentsCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkFramebufferAttachmentsCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkFramebufferAttachmentsCreateInfo#attachmentImageInfoCount} field. */
+        /** @return the value of the {@code attachmentImageInfoCount} field. */
         @NativeType("uint32_t")
         public int attachmentImageInfoCount() { return VkFramebufferAttachmentsCreateInfo.nattachmentImageInfoCount(address()); }
-        /** @return a {@link VkFramebufferAttachmentImageInfo.Buffer} view of the struct array pointed to by the {@link VkFramebufferAttachmentsCreateInfo#pAttachmentImageInfos} field. */
+        /** @return a {@link VkFramebufferAttachmentImageInfo.Buffer} view of the struct array pointed to by the {@code pAttachmentImageInfos} field. */
         @NativeType("VkFramebufferAttachmentImageInfo const *")
         public VkFramebufferAttachmentImageInfo.@Nullable Buffer pAttachmentImageInfos() { return VkFramebufferAttachmentsCreateInfo.npAttachmentImageInfos(address()); }
 
-        /** Sets the specified value to the {@link VkFramebufferAttachmentsCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkFramebufferAttachmentsCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferAttachmentsCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO} value to the {@link VkFramebufferAttachmentsCreateInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO} value to the {@code sType} field. */
         public VkFramebufferAttachmentsCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkFramebufferAttachmentsCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkFramebufferAttachmentsCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferAttachmentsCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@link VkFramebufferAttachmentsCreateInfo#pAttachmentImageInfos} field. */
+        /** Sets the address of the specified {@link VkFramebufferAttachmentImageInfo.Buffer} to the {@code pAttachmentImageInfos} field. */
         public VkFramebufferAttachmentsCreateInfo.Buffer pAttachmentImageInfos(@NativeType("VkFramebufferAttachmentImageInfo const *") VkFramebufferAttachmentImageInfo.@Nullable Buffer value) { VkFramebufferAttachmentsCreateInfo.npAttachmentImageInfos(address(), value); return this; }
 
     }

@@ -17,31 +17,27 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure to fill in to modify Remotery default settings.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct rmtSettings {
- *     rmtU16 {@link #port};
- *     rmtBool {@link #reuse_open_port};
- *     rmtBool {@link #limit_connections_to_localhost};
- *     rmtBool {@link #enableThreadSampler};
- *     rmtU32 {@link #msSleepBetweenServerUpdates};
- *     rmtU32 {@link #messageQueueSizeInBytes};
- *     rmtU32 {@link #maxNbMessagesPerUpdate};
- *     {@link RMTMallocI rmtMallocPtr} {@link #_malloc};
- *     {@link RMTReallocI rmtReallocPtr} {@link #realloc};
- *     {@link RMTFreeI rmtFreePtr} {@link #_free};
- *     void * {@link #mm_context};
- *     {@link RMTInputHandlerI rmtInputHandlerPtr} {@link #input_handler};
- *     {@link RMTSampleTreeHandlerI rmtSampleTreeHandlerPtr} {@link #sampletree_handler};
+ *     rmtU16 port;
+ *     rmtBool reuse_open_port;
+ *     rmtBool limit_connections_to_localhost;
+ *     rmtBool enableThreadSampler;
+ *     rmtU32 msSleepBetweenServerUpdates;
+ *     rmtU32 messageQueueSizeInBytes;
+ *     rmtU32 maxNbMessagesPerUpdate;
+ *     {@link RMTMallocI rmtMallocPtr} _malloc;
+ *     {@link RMTReallocI rmtReallocPtr} realloc;
+ *     {@link RMTFreeI rmtFreePtr} _free;
+ *     void * mm_context;
+ *     {@link RMTInputHandlerI rmtInputHandlerPtr} input_handler;
+ *     {@link RMTSampleTreeHandlerI rmtSampleTreeHandlerPtr} sampletree_handler;
  *     void * sampletree_context;
- *     {@link RMTPropertyHandlerI rmtPropertyHandlerPtr} {@link #snapshot_callback};
+ *     {@link RMTPropertyHandlerI rmtPropertyHandlerPtr} snapshot_callback;
  *     void * snapshot_context;
- *     void * {@link #input_handler_context};
+ *     void * input_handler_context;
  *     rmtPStr logPath;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct rmtSettings")
 public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
@@ -140,72 +136,55 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** which port to listen for incoming connections on */
+    /** @return the value of the {@code port} field. */
     @NativeType("rmtU16")
     public short port() { return nport(address()); }
-    /**
-     * when this server exits it can leave the port open in {@code TIME_WAIT} state for a while. This forces subsequent server bind attempts to fail when
-     * restarting. If you find restarts fail repeatedly with bind attempts, set this to true to forcibly reuse the open port.
-     */
+    /** @return the value of the {@code reuse_open_port} field. */
     @NativeType("rmtBool")
     public boolean reuse_open_port() { return nreuse_open_port(address()) != 0; }
-    /**
-     * Only allow connections on localhost?
-     * 
-     * <p>For dev builds you may want to access your game from other devices but if you distribute a game to your players with Remotery active, probably best to
-     * limit connections to localhost.</p>
-     */
+    /** @return the value of the {@code limit_connections_to_localhost} field. */
     @NativeType("rmtBool")
     public boolean limit_connections_to_localhost() { return nlimit_connections_to_localhost(address()) != 0; }
-    /**
-     * Whether to enable runtime thread sampling that discovers which processors a thread is running on.
-     * 
-     * <p>This will suspend and resume threads from outside repeatdly and inject code into each thread that automatically instruments the processor.</p>
-     * 
-     * <p>Default: Enabled</p>
-     */
+    /** @return the value of the {@code enableThreadSampler} field. */
     @NativeType("rmtBool")
     public boolean enableThreadSampler() { return nenableThreadSampler(address()) != 0; }
-    /** how long to sleep between server updates, hopefully trying to give a little CPU back to other threads */
+    /** @return the value of the {@code msSleepBetweenServerUpdates} field. */
     @NativeType("rmtU32")
     public int msSleepBetweenServerUpdates() { return nmsSleepBetweenServerUpdates(address()); }
-    /** size of the internal message queues Remotery uses. Will be rounded to page granularity of 64k. */
+    /** @return the value of the {@code messageQueueSizeInBytes} field. */
     @NativeType("rmtU32")
     public int messageQueueSizeInBytes() { return nmessageQueueSizeInBytes(address()); }
-    /**
-     * if the user continuously pushes to the message queue, the server network code won't get a chance to update unless there's an upper-limit on how many
-     * messages can be consumed per loop
-     */
+    /** @return the value of the {@code maxNbMessagesPerUpdate} field. */
     @NativeType("rmtU32")
     public int maxNbMessagesPerUpdate() { return nmaxNbMessagesPerUpdate(address()); }
-    /** callback pointer for memory allocation */
+    /** @return the value of the {@code _malloc} field. */
     @NativeType("rmtMallocPtr")
     public RMTMalloc _malloc() { return n_malloc(address()); }
-    /** callback pointer for memory allocation */
+    /** @return the value of the {@code realloc} field. */
     @NativeType("rmtReallocPtr")
     public RMTRealloc realloc() { return nrealloc(address()); }
-    /** callback pointer for memory allocation */
+    /** @return the value of the {@code _free} field. */
     @NativeType("rmtFreePtr")
     public RMTFree _free() { return n_free(address()); }
-    /** memory allocation context pointer */
+    /** @return the value of the {@code mm_context} field. */
     @NativeType("void *")
     public long mm_context() { return nmm_context(address()); }
-    /** callback pointer for receiving input from the Remotery console */
+    /** @return the value of the {@code input_handler} field. */
     @NativeType("rmtInputHandlerPtr")
     public @Nullable RMTInputHandler input_handler() { return ninput_handler(address()); }
-    /** callback pointer for traversing the sample tree graph */
+    /** @return the value of the {@code sampletree_handler} field. */
     @NativeType("rmtSampleTreeHandlerPtr")
     public @Nullable RMTSampleTreeHandler sampletree_handler() { return nsampletree_handler(address()); }
     /** @return the value of the {@code sampletree_context} field. */
     @NativeType("void *")
     public long sampletree_context() { return nsampletree_context(address()); }
-    /** callback pointer for traversing the property graph */
+    /** @return the value of the {@code snapshot_callback} field. */
     @NativeType("rmtPropertyHandlerPtr")
     public @Nullable RMTPropertyHandler snapshot_callback() { return nsnapshot_callback(address()); }
     /** @return the value of the {@code snapshot_context} field. */
     @NativeType("void *")
     public long snapshot_context() { return nsnapshot_context(address()); }
-    /** context pointer that gets sent to Remotery console callback function */
+    /** @return the value of the {@code input_handler_context} field. */
     @NativeType("void *")
     public long input_handler_context() { return ninput_handler_context(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code logPath} field. */
@@ -215,39 +194,39 @@ public class RMTSettings extends Struct<RMTSettings> implements NativeResource {
     @NativeType("rmtPStr")
     public @Nullable String logPathString() { return nlogPathString(address()); }
 
-    /** Sets the specified value to the {@link #port} field. */
+    /** Sets the specified value to the {@code port} field. */
     public RMTSettings port(@NativeType("rmtU16") short value) { nport(address(), value); return this; }
-    /** Sets the specified value to the {@link #reuse_open_port} field. */
+    /** Sets the specified value to the {@code reuse_open_port} field. */
     public RMTSettings reuse_open_port(@NativeType("rmtBool") boolean value) { nreuse_open_port(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #limit_connections_to_localhost} field. */
+    /** Sets the specified value to the {@code limit_connections_to_localhost} field. */
     public RMTSettings limit_connections_to_localhost(@NativeType("rmtBool") boolean value) { nlimit_connections_to_localhost(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #enableThreadSampler} field. */
+    /** Sets the specified value to the {@code enableThreadSampler} field. */
     public RMTSettings enableThreadSampler(@NativeType("rmtBool") boolean value) { nenableThreadSampler(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #msSleepBetweenServerUpdates} field. */
+    /** Sets the specified value to the {@code msSleepBetweenServerUpdates} field. */
     public RMTSettings msSleepBetweenServerUpdates(@NativeType("rmtU32") int value) { nmsSleepBetweenServerUpdates(address(), value); return this; }
-    /** Sets the specified value to the {@link #messageQueueSizeInBytes} field. */
+    /** Sets the specified value to the {@code messageQueueSizeInBytes} field. */
     public RMTSettings messageQueueSizeInBytes(@NativeType("rmtU32") int value) { nmessageQueueSizeInBytes(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxNbMessagesPerUpdate} field. */
+    /** Sets the specified value to the {@code maxNbMessagesPerUpdate} field. */
     public RMTSettings maxNbMessagesPerUpdate(@NativeType("rmtU32") int value) { nmaxNbMessagesPerUpdate(address(), value); return this; }
-    /** Sets the specified value to the {@link #_malloc} field. */
+    /** Sets the specified value to the {@code _malloc} field. */
     public RMTSettings _malloc(@NativeType("rmtMallocPtr") RMTMallocI value) { n_malloc(address(), value); return this; }
-    /** Sets the specified value to the {@link #realloc} field. */
+    /** Sets the specified value to the {@code realloc} field. */
     public RMTSettings realloc(@NativeType("rmtReallocPtr") RMTReallocI value) { nrealloc(address(), value); return this; }
-    /** Sets the specified value to the {@link #_free} field. */
+    /** Sets the specified value to the {@code _free} field. */
     public RMTSettings _free(@NativeType("rmtFreePtr") RMTFreeI value) { n_free(address(), value); return this; }
-    /** Sets the specified value to the {@link #mm_context} field. */
+    /** Sets the specified value to the {@code mm_context} field. */
     public RMTSettings mm_context(@NativeType("void *") long value) { nmm_context(address(), value); return this; }
-    /** Sets the specified value to the {@link #input_handler} field. */
+    /** Sets the specified value to the {@code input_handler} field. */
     public RMTSettings input_handler(@Nullable @NativeType("rmtInputHandlerPtr") RMTInputHandlerI value) { ninput_handler(address(), value); return this; }
-    /** Sets the specified value to the {@link #sampletree_handler} field. */
+    /** Sets the specified value to the {@code sampletree_handler} field. */
     public RMTSettings sampletree_handler(@Nullable @NativeType("rmtSampleTreeHandlerPtr") RMTSampleTreeHandlerI value) { nsampletree_handler(address(), value); return this; }
     /** Sets the specified value to the {@code sampletree_context} field. */
     public RMTSettings sampletree_context(@NativeType("void *") long value) { nsampletree_context(address(), value); return this; }
-    /** Sets the specified value to the {@link #snapshot_callback} field. */
+    /** Sets the specified value to the {@code snapshot_callback} field. */
     public RMTSettings snapshot_callback(@Nullable @NativeType("rmtPropertyHandlerPtr") RMTPropertyHandlerI value) { nsnapshot_callback(address(), value); return this; }
     /** Sets the specified value to the {@code snapshot_context} field. */
     public RMTSettings snapshot_context(@NativeType("void *") long value) { nsnapshot_context(address(), value); return this; }
-    /** Sets the specified value to the {@link #input_handler_context} field. */
+    /** Sets the specified value to the {@code input_handler_context} field. */
     public RMTSettings input_handler_context(@NativeType("void *") long value) { ninput_handler_context(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@code logPath} field. */
     public RMTSettings logPath(@Nullable @NativeType("rmtPStr") ByteBuffer value) { nlogPath(address(), value); return this; }

@@ -16,31 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a body tracker handle.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrBodyTrackerCreateInfoHTC} structure describes the information to create an {@code XrBodyTrackerHTC} handle. If the supplied {@code bodyJointSet} is not valid, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}. .Valid Usage (Implicit)</p>
- * 
- * <ul>
- * <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using {@link XrBodyTrackerCreateInfoHTC}</li>
- * <li>{@code type} <b>must</b> be {@link HTCBodyTracking#XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC TYPE_BODY_TRACKER_CREATE_INFO_HTC}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code bodyJointSet} <b>must</b> be a valid {@code XrBodyJointSetHTC} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link HTCBodyTracking#xrCreateBodyTrackerHTC CreateBodyTrackerHTC}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBodyTrackerCreateInfoHTC {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrBodyJointSetHTC {@link #bodyJointSet};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrBodyJointSetHTC bodyJointSet;
+ * }}</pre>
  */
 public class XrBodyTrackerCreateInfoHTC extends Struct<XrBodyTrackerCreateInfoHTC> implements NativeResource {
 
@@ -93,23 +74,23 @@ public class XrBodyTrackerCreateInfoHTC extends Struct<XrBodyTrackerCreateInfoHT
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBodyJointSetHTC} value that describes the set of body joints to retrieve. */
+    /** @return the value of the {@code bodyJointSet} field. */
     @NativeType("XrBodyJointSetHTC")
     public int bodyJointSet() { return nbodyJointSet(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrBodyTrackerCreateInfoHTC type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link HTCBodyTracking#XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC TYPE_BODY_TRACKER_CREATE_INFO_HTC} value to the {@link #type} field. */
+    /** Sets the {@link HTCBodyTracking#XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC TYPE_BODY_TRACKER_CREATE_INFO_HTC} value to the {@code type} field. */
     public XrBodyTrackerCreateInfoHTC type$Default() { return type(HTCBodyTracking.XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrBodyTrackerCreateInfoHTC next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #bodyJointSet} field. */
+    /** Sets the specified value to the {@code bodyJointSet} field. */
     public XrBodyTrackerCreateInfoHTC bodyJointSet(@NativeType("XrBodyJointSetHTC") int value) { nbodyJointSet(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -305,23 +286,23 @@ public class XrBodyTrackerCreateInfoHTC extends Struct<XrBodyTrackerCreateInfoHT
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrBodyTrackerCreateInfoHTC#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBodyTrackerCreateInfoHTC.ntype(address()); }
-        /** @return the value of the {@link XrBodyTrackerCreateInfoHTC#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrBodyTrackerCreateInfoHTC.nnext(address()); }
-        /** @return the value of the {@link XrBodyTrackerCreateInfoHTC#bodyJointSet} field. */
+        /** @return the value of the {@code bodyJointSet} field. */
         @NativeType("XrBodyJointSetHTC")
         public int bodyJointSet() { return XrBodyTrackerCreateInfoHTC.nbodyJointSet(address()); }
 
-        /** Sets the specified value to the {@link XrBodyTrackerCreateInfoHTC#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrBodyTrackerCreateInfoHTC.Buffer type(@NativeType("XrStructureType") int value) { XrBodyTrackerCreateInfoHTC.ntype(address(), value); return this; }
-        /** Sets the {@link HTCBodyTracking#XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC TYPE_BODY_TRACKER_CREATE_INFO_HTC} value to the {@link XrBodyTrackerCreateInfoHTC#type} field. */
+        /** Sets the {@link HTCBodyTracking#XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC TYPE_BODY_TRACKER_CREATE_INFO_HTC} value to the {@code type} field. */
         public XrBodyTrackerCreateInfoHTC.Buffer type$Default() { return type(HTCBodyTracking.XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC); }
-        /** Sets the specified value to the {@link XrBodyTrackerCreateInfoHTC#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrBodyTrackerCreateInfoHTC.Buffer next(@NativeType("void const *") long value) { XrBodyTrackerCreateInfoHTC.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrBodyTrackerCreateInfoHTC#bodyJointSet} field. */
+        /** Sets the specified value to the {@code bodyJointSet} field. */
         public XrBodyTrackerCreateInfoHTC.Buffer bodyJointSet(@NativeType("XrBodyJointSetHTC") int value) { XrBodyTrackerCreateInfoHTC.nbodyJointSet(address(), value); return this; }
 
     }

@@ -14,21 +14,17 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The size metrics structure gives the metrics of a size object.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Size_Metrics {
- *     FT_UShort {@link #x_ppem};
- *     FT_UShort {@link #y_ppem};
- *     FT_Fixed {@link #x_scale};
- *     FT_Fixed {@link #y_scale};
- *     FT_Pos {@link #ascender};
- *     FT_Pos {@link #descender};
- *     FT_Pos {@link #height};
- *     FT_Pos {@link #max_advance};
- * }</code></pre>
+ *     FT_UShort x_ppem;
+ *     FT_UShort y_ppem;
+ *     FT_Fixed x_scale;
+ *     FT_Fixed y_scale;
+ *     FT_Pos ascender;
+ *     FT_Pos descender;
+ *     FT_Pos height;
+ *     FT_Pos max_advance;
+ * }}</pre>
  */
 public class FT_Size_Metrics extends Struct<FT_Size_Metrics> {
 
@@ -96,28 +92,28 @@ public class FT_Size_Metrics extends Struct<FT_Size_Metrics> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** horizontal pixels per EM */
+    /** @return the value of the {@code x_ppem} field. */
     @NativeType("FT_UShort")
     public short x_ppem() { return nx_ppem(address()); }
-    /** vertical pixels per EM */
+    /** @return the value of the {@code y_ppem} field. */
     @NativeType("FT_UShort")
     public short y_ppem() { return ny_ppem(address()); }
-    /** scaling values used to convert font */
+    /** @return the value of the {@code x_scale} field. */
     @NativeType("FT_Fixed")
     public long x_scale() { return nx_scale(address()); }
-    /** units to 26.6 fractional pixels */
+    /** @return the value of the {@code y_scale} field. */
     @NativeType("FT_Fixed")
     public long y_scale() { return ny_scale(address()); }
-    /** ascender in 26.6 frac. pixels */
+    /** @return the value of the {@code ascender} field. */
     @NativeType("FT_Pos")
     public long ascender() { return nascender(address()); }
-    /** descender in 26.6 frac. pixels */
+    /** @return the value of the {@code descender} field. */
     @NativeType("FT_Pos")
     public long descender() { return ndescender(address()); }
-    /** text height in 26.6 frac. pixels */
+    /** @return the value of the {@code height} field. */
     @NativeType("FT_Pos")
     public long height() { return nheight(address()); }
-    /** max horizontal advance, in 26.6 pixels */
+    /** @return the value of the {@code max_advance} field. */
     @NativeType("FT_Pos")
     public long max_advance() { return nmax_advance(address()); }
 
@@ -210,28 +206,28 @@ public class FT_Size_Metrics extends Struct<FT_Size_Metrics> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link FT_Size_Metrics#x_ppem} field. */
+        /** @return the value of the {@code x_ppem} field. */
         @NativeType("FT_UShort")
         public short x_ppem() { return FT_Size_Metrics.nx_ppem(address()); }
-        /** @return the value of the {@link FT_Size_Metrics#y_ppem} field. */
+        /** @return the value of the {@code y_ppem} field. */
         @NativeType("FT_UShort")
         public short y_ppem() { return FT_Size_Metrics.ny_ppem(address()); }
-        /** @return the value of the {@link FT_Size_Metrics#x_scale} field. */
+        /** @return the value of the {@code x_scale} field. */
         @NativeType("FT_Fixed")
         public long x_scale() { return FT_Size_Metrics.nx_scale(address()); }
-        /** @return the value of the {@link FT_Size_Metrics#y_scale} field. */
+        /** @return the value of the {@code y_scale} field. */
         @NativeType("FT_Fixed")
         public long y_scale() { return FT_Size_Metrics.ny_scale(address()); }
-        /** @return the value of the {@link FT_Size_Metrics#ascender} field. */
+        /** @return the value of the {@code ascender} field. */
         @NativeType("FT_Pos")
         public long ascender() { return FT_Size_Metrics.nascender(address()); }
-        /** @return the value of the {@link FT_Size_Metrics#descender} field. */
+        /** @return the value of the {@code descender} field. */
         @NativeType("FT_Pos")
         public long descender() { return FT_Size_Metrics.ndescender(address()); }
-        /** @return the value of the {@link FT_Size_Metrics#height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("FT_Pos")
         public long height() { return FT_Size_Metrics.nheight(address()); }
-        /** @return the value of the {@link FT_Size_Metrics#max_advance} field. */
+        /** @return the value of the {@code max_advance} field. */
         @NativeType("FT_Pos")
         public long max_advance() { return FT_Size_Metrics.nmax_advance(address()); }
 

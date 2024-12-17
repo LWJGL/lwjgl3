@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDescriptorSetVariableDescriptorCountLayoutSupport}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetVariableDescriptorCountLayoutSupportEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t maxVariableDescriptorCount;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDescriptorSetVariableDescriptorCountLayoutSupportEXT extends VkDescriptorSetVariableDescriptorCountLayoutSupport {
 

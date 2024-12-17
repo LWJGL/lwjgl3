@@ -17,16 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Single move of an allocation to be done for defragmentation.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaDefragmentationMove {
- *     VmaDefragmentationMoveOperation {@link #operation};
- *     VmaAllocation {@link #srcAllocation};
- *     VmaAllocation {@link #dstTmpAllocation};
- * }</code></pre>
+ *     VmaDefragmentationMoveOperation operation;
+ *     VmaAllocation srcAllocation;
+ *     VmaAllocation dstTmpAllocation;
+ * }}</pre>
  */
 public class VmaDefragmentationMove extends Struct<VmaDefragmentationMove> implements NativeResource {
 
@@ -79,31 +75,21 @@ public class VmaDefragmentationMove extends Struct<VmaDefragmentationMove> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * operation to be performed on the allocation by {@link Vma#vmaEndDefragmentationPass EndDefragmentationPass}.
-     * 
-     * <p>Default value is {@link Vma#VMA_DEFRAGMENTATION_MOVE_OPERATION_COPY DEFRAGMENTATION_MOVE_OPERATION_COPY}. You can modify it.</p>
-     */
+    /** @return the value of the {@code operation} field. */
     @NativeType("VmaDefragmentationMoveOperation")
     public int operation() { return noperation(address()); }
-    /** allocation that should be moved */
+    /** @return the value of the {@code srcAllocation} field. */
     @NativeType("VmaAllocation")
     public long srcAllocation() { return nsrcAllocation(address()); }
-    /**
-     * temporary allocation pointing to destination memory that will replace {@code srcAllocation}.
-     * 
-     * <p>Warning: Do not store this allocation in your data structures! It exists only temporarily, for the duration of the defragmentation pass, to be used for
-     * binding new buffer/image to the destination memory using e.g. {@link Vma#vmaBindBufferMemory BindBufferMemory}. {@link Vma#vmaEndDefragmentationPass EndDefragmentationPass} will destroy it and make
-     * {@code srcAllocation} point to this memory.</p>
-     */
+    /** @return the value of the {@code dstTmpAllocation} field. */
     @NativeType("VmaAllocation")
     public long dstTmpAllocation() { return ndstTmpAllocation(address()); }
 
-    /** Sets the specified value to the {@link #operation} field. */
+    /** Sets the specified value to the {@code operation} field. */
     public VmaDefragmentationMove operation(@NativeType("VmaDefragmentationMoveOperation") int value) { noperation(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcAllocation} field. */
+    /** Sets the specified value to the {@code srcAllocation} field. */
     public VmaDefragmentationMove srcAllocation(@NativeType("VmaAllocation") long value) { nsrcAllocation(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstTmpAllocation} field. */
+    /** Sets the specified value to the {@code dstTmpAllocation} field. */
     public VmaDefragmentationMove dstTmpAllocation(@NativeType("VmaAllocation") long value) { ndstTmpAllocation(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,21 +295,21 @@ public class VmaDefragmentationMove extends Struct<VmaDefragmentationMove> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VmaDefragmentationMove#operation} field. */
+        /** @return the value of the {@code operation} field. */
         @NativeType("VmaDefragmentationMoveOperation")
         public int operation() { return VmaDefragmentationMove.noperation(address()); }
-        /** @return the value of the {@link VmaDefragmentationMove#srcAllocation} field. */
+        /** @return the value of the {@code srcAllocation} field. */
         @NativeType("VmaAllocation")
         public long srcAllocation() { return VmaDefragmentationMove.nsrcAllocation(address()); }
-        /** @return the value of the {@link VmaDefragmentationMove#dstTmpAllocation} field. */
+        /** @return the value of the {@code dstTmpAllocation} field. */
         @NativeType("VmaAllocation")
         public long dstTmpAllocation() { return VmaDefragmentationMove.ndstTmpAllocation(address()); }
 
-        /** Sets the specified value to the {@link VmaDefragmentationMove#operation} field. */
+        /** Sets the specified value to the {@code operation} field. */
         public VmaDefragmentationMove.Buffer operation(@NativeType("VmaDefragmentationMoveOperation") int value) { VmaDefragmentationMove.noperation(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaDefragmentationMove#srcAllocation} field. */
+        /** Sets the specified value to the {@code srcAllocation} field. */
         public VmaDefragmentationMove.Buffer srcAllocation(@NativeType("VmaAllocation") long value) { VmaDefragmentationMove.nsrcAllocation(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaDefragmentationMove#dstTmpAllocation} field. */
+        /** Sets the specified value to the {@code dstTmpAllocation} field. */
         public VmaDefragmentationMove.Buffer dstTmpAllocation(@NativeType("VmaAllocation") long value) { VmaDefragmentationMove.ndstTmpAllocation(address(), value); return this; }
 
     }

@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Data type to hold math kerning (cut-in) information for a glyph.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_ot_math_kern_entry_t {
- *     hb_position_t {@link #max_correction_height};
- *     hb_position_t {@link #kern_value};
- * }</code></pre>
+ *     hb_position_t max_correction_height;
+ *     hb_position_t kern_value;
+ * }}</pre>
  */
 public class hb_ot_math_kern_entry_t extends Struct<hb_ot_math_kern_entry_t> implements NativeResource {
 
@@ -74,16 +70,16 @@ public class hb_ot_math_kern_entry_t extends Struct<hb_ot_math_kern_entry_t> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the maximum height at which this entry should be used */
+    /** @return the value of the {@code max_correction_height} field. */
     @NativeType("hb_position_t")
     public int max_correction_height() { return nmax_correction_height(address()); }
-    /** the kern value of the entry */
+    /** @return the value of the {@code kern_value} field. */
     @NativeType("hb_position_t")
     public int kern_value() { return nkern_value(address()); }
 
-    /** Sets the specified value to the {@link #max_correction_height} field. */
+    /** Sets the specified value to the {@code max_correction_height} field. */
     public hb_ot_math_kern_entry_t max_correction_height(@NativeType("hb_position_t") int value) { nmax_correction_height(address(), value); return this; }
-    /** Sets the specified value to the {@link #kern_value} field. */
+    /** Sets the specified value to the {@code kern_value} field. */
     public hb_ot_math_kern_entry_t kern_value(@NativeType("hb_position_t") int value) { nkern_value(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -273,16 +269,16 @@ public class hb_ot_math_kern_entry_t extends Struct<hb_ot_math_kern_entry_t> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_ot_math_kern_entry_t#max_correction_height} field. */
+        /** @return the value of the {@code max_correction_height} field. */
         @NativeType("hb_position_t")
         public int max_correction_height() { return hb_ot_math_kern_entry_t.nmax_correction_height(address()); }
-        /** @return the value of the {@link hb_ot_math_kern_entry_t#kern_value} field. */
+        /** @return the value of the {@code kern_value} field. */
         @NativeType("hb_position_t")
         public int kern_value() { return hb_ot_math_kern_entry_t.nkern_value(address()); }
 
-        /** Sets the specified value to the {@link hb_ot_math_kern_entry_t#max_correction_height} field. */
+        /** Sets the specified value to the {@code max_correction_height} field. */
         public hb_ot_math_kern_entry_t.Buffer max_correction_height(@NativeType("hb_position_t") int value) { hb_ot_math_kern_entry_t.nmax_correction_height(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_ot_math_kern_entry_t#kern_value} field. */
+        /** Sets the specified value to the {@code kern_value} field. */
         public hb_ot_math_kern_entry_t.Buffer kern_value(@NativeType("hb_position_t") int value) { hb_ot_math_kern_entry_t.nkern_value(address(), value); return this; }
 
     }

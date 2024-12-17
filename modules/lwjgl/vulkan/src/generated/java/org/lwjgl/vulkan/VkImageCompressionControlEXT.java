@@ -16,40 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify image compression properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>If enabled, fixed-rate compression is done in an implementation-defined manner and <b>may</b> be applied at block granularity. In that case, a write to an individual texel <b>may</b> modify the value of other texels in the same block.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code flags} <b>must</b> be one of {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_DEFAULT_EXT IMAGE_COMPRESSION_DEFAULT_EXT}, {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT}, {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT}, or {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_DISABLED_EXT IMAGE_COMPRESSION_DISABLED_EXT}</li>
- * <li>If {@code flags} includes {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT}, {@code pFixedRateFlags} <b>must</b> not be {@code NULL}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT}</li>
- * </ul>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Some combinations of compression properties may not be supported. For example, some implementations may not support different fixed-rate compression rates per plane of a multi-planar format and will not be able to enable fixed-rate compression for any plane if the requested rates differ.</p>
- * </div>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageCompressionControlEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImageCompressionFlagsEXT {@link #flags};
- *     uint32_t {@link #compressionControlPlaneCount};
- *     VkImageCompressionFixedRateFlagsEXT * {@link #pFixedRateFlags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImageCompressionFlagsEXT flags;
+ *     uint32_t compressionControlPlaneCount;
+ *     VkImageCompressionFixedRateFlagsEXT * pFixedRateFlags;
+ * }}</pre>
  */
 public class VkImageCompressionControlEXT extends Struct<VkImageCompressionControlEXT> implements NativeResource {
 
@@ -108,33 +82,33 @@ public class VkImageCompressionControlEXT extends Struct<VkImageCompressionContr
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkImageCompressionFlagBitsEXT} describing compression controls for the image. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkImageCompressionFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** the number of entries in the {@code pFixedRateFlags} array. */
+    /** @return the value of the {@code compressionControlPlaneCount} field. */
     @NativeType("uint32_t")
     public int compressionControlPlaneCount() { return ncompressionControlPlaneCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@code VkImageCompressionFixedRateFlagsEXT} bitfields describing allowed fixed-rate compression rates of each image plane. It is ignored if {@code flags} does not include {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT}. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pFixedRateFlags} field. */
     @NativeType("VkImageCompressionFixedRateFlagsEXT *")
     public @Nullable IntBuffer pFixedRateFlags() { return npFixedRateFlags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageCompressionControlEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT} value to the {@code sType} field. */
     public VkImageCompressionControlEXT sType$Default() { return sType(EXTImageCompressionControl.VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageCompressionControlEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkImageCompressionControlEXT flags(@NativeType("VkImageCompressionFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #compressionControlPlaneCount} field. */
+    /** Sets the specified value to the {@code compressionControlPlaneCount} field. */
     public VkImageCompressionControlEXT compressionControlPlaneCount(@NativeType("uint32_t") int value) { ncompressionControlPlaneCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pFixedRateFlags} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pFixedRateFlags} field. */
     public VkImageCompressionControlEXT pFixedRateFlags(@Nullable @NativeType("VkImageCompressionFixedRateFlagsEXT *") IntBuffer value) { npFixedRateFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -342,33 +316,33 @@ public class VkImageCompressionControlEXT extends Struct<VkImageCompressionContr
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageCompressionControlEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageCompressionControlEXT.nsType(address()); }
-        /** @return the value of the {@link VkImageCompressionControlEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageCompressionControlEXT.npNext(address()); }
-        /** @return the value of the {@link VkImageCompressionControlEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkImageCompressionFlagsEXT")
         public int flags() { return VkImageCompressionControlEXT.nflags(address()); }
-        /** @return the value of the {@link VkImageCompressionControlEXT#compressionControlPlaneCount} field. */
+        /** @return the value of the {@code compressionControlPlaneCount} field. */
         @NativeType("uint32_t")
         public int compressionControlPlaneCount() { return VkImageCompressionControlEXT.ncompressionControlPlaneCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkImageCompressionControlEXT#pFixedRateFlags} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pFixedRateFlags} field. */
         @NativeType("VkImageCompressionFixedRateFlagsEXT *")
         public @Nullable IntBuffer pFixedRateFlags() { return VkImageCompressionControlEXT.npFixedRateFlags(address()); }
 
-        /** Sets the specified value to the {@link VkImageCompressionControlEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageCompressionControlEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageCompressionControlEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT} value to the {@link VkImageCompressionControlEXT#sType} field. */
+        /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT} value to the {@code sType} field. */
         public VkImageCompressionControlEXT.Buffer sType$Default() { return sType(EXTImageCompressionControl.VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT); }
-        /** Sets the specified value to the {@link VkImageCompressionControlEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageCompressionControlEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageCompressionControlEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageCompressionControlEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkImageCompressionControlEXT.Buffer flags(@NativeType("VkImageCompressionFlagsEXT") int value) { VkImageCompressionControlEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageCompressionControlEXT#compressionControlPlaneCount} field. */
+        /** Sets the specified value to the {@code compressionControlPlaneCount} field. */
         public VkImageCompressionControlEXT.Buffer compressionControlPlaneCount(@NativeType("uint32_t") int value) { VkImageCompressionControlEXT.ncompressionControlPlaneCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkImageCompressionControlEXT#pFixedRateFlags} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pFixedRateFlags} field. */
         public VkImageCompressionControlEXT.Buffer pFixedRateFlags(@Nullable @NativeType("VkImageCompressionFixedRateFlagsEXT *") IntBuffer value) { VkImageCompressionControlEXT.npFixedRateFlags(address(), value); return this; }
 
     }

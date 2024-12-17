@@ -11,20 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to the {@link NkUserFont} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     nk_handle handle,
- *     float font_height,
- *     struct nk_user_font_glyph *glyph,
- *     nk_rune codepoint,
- *     nk_rune next_codepoint
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_query_font_glyph_f} */
 public abstract class NkQueryFontGlyphCallback extends Callback implements NkQueryFontGlyphCallbackI {
 
     /**

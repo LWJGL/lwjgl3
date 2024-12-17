@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the eye gaze direction.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the returned {@code isValid} is true, the runtime <b>must</b> return {@code gazePose} and {@code gazeConfidence}.</p>
- * 
- * <p>If the returned {@code isValid} is false, it indicates either the eye tracker did not detect the eye gaze or the application lost input focus.</p>
- * 
- * <p>The eye gaze pose is natively oriented with +Y up, +X to the right, and -Z forward and not gravity-aligned, similar to the {@link XR10#XR_REFERENCE_SPACE_TYPE_VIEW REFERENCE_SPACE_TYPE_VIEW}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBEyeTrackingSocial XR_FB_eye_tracking_social} extension <b>must</b> be enabled prior to using {@link XrEyeGazeFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEyeGazesFB}, {@link XrPosef}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEyeGazeFB {
- *     XrBool32 {@link #isValid};
- *     {@link XrPosef XrPosef} {@link #gazePose};
- *     float {@link #gazeConfidence};
- * }</code></pre>
+ *     XrBool32 isValid;
+ *     {@link XrPosef XrPosef} gazePose;
+ *     float gazeConfidence;
+ * }}</pre>
  */
 public class XrEyeGazeFB extends Struct<XrEyeGazeFB> implements NativeResource {
 
@@ -96,21 +74,21 @@ public class XrEyeGazeFB extends Struct<XrEyeGazeFB> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@code XrBool32} indicating if the returned gazePose is valid. Callers <b>should</b> check the validity of pose prior to use. */
+    /** @return the value of the {@code isValid} field. */
     @NativeType("XrBool32")
     public boolean isValid() { return nisValid(address()) != 0; }
-    /** an {@link XrPosef} describing the position and orientation of the user’s eye. The pose is represented in the coordinate system provided by {@link XrEyeGazesInfoFB}{@code ::baseSpace}. */
+    /** @return a {@link XrPosef} view of the {@code gazePose} field. */
     public XrPosef gazePose() { return ngazePose(address()); }
-    /** a {@code float} value between 0 and 1 that represents the confidence for eye pose. A value of 0 represents no confidence in the pose returned, and a value of 1 means maximum confidence in the returned eye pose. */
+    /** @return the value of the {@code gazeConfidence} field. */
     public float gazeConfidence() { return ngazeConfidence(address()); }
 
-    /** Sets the specified value to the {@link #isValid} field. */
+    /** Sets the specified value to the {@code isValid} field. */
     public XrEyeGazeFB isValid(@NativeType("XrBool32") boolean value) { nisValid(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #gazePose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code gazePose} field. */
     public XrEyeGazeFB gazePose(XrPosef value) { ngazePose(address(), value); return this; }
-    /** Passes the {@link #gazePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code gazePose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrEyeGazeFB gazePose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(gazePose()); return this; }
-    /** Sets the specified value to the {@link #gazeConfidence} field. */
+    /** Sets the specified value to the {@code gazeConfidence} field. */
     public XrEyeGazeFB gazeConfidence(float value) { ngazeConfidence(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,21 +284,21 @@ public class XrEyeGazeFB extends Struct<XrEyeGazeFB> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEyeGazeFB#isValid} field. */
+        /** @return the value of the {@code isValid} field. */
         @NativeType("XrBool32")
         public boolean isValid() { return XrEyeGazeFB.nisValid(address()) != 0; }
-        /** @return a {@link XrPosef} view of the {@link XrEyeGazeFB#gazePose} field. */
+        /** @return a {@link XrPosef} view of the {@code gazePose} field. */
         public XrPosef gazePose() { return XrEyeGazeFB.ngazePose(address()); }
-        /** @return the value of the {@link XrEyeGazeFB#gazeConfidence} field. */
+        /** @return the value of the {@code gazeConfidence} field. */
         public float gazeConfidence() { return XrEyeGazeFB.ngazeConfidence(address()); }
 
-        /** Sets the specified value to the {@link XrEyeGazeFB#isValid} field. */
+        /** Sets the specified value to the {@code isValid} field. */
         public XrEyeGazeFB.Buffer isValid(@NativeType("XrBool32") boolean value) { XrEyeGazeFB.nisValid(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrEyeGazeFB#gazePose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code gazePose} field. */
         public XrEyeGazeFB.Buffer gazePose(XrPosef value) { XrEyeGazeFB.ngazePose(address(), value); return this; }
-        /** Passes the {@link XrEyeGazeFB#gazePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code gazePose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrEyeGazeFB.Buffer gazePose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(gazePose()); return this; }
-        /** Sets the specified value to the {@link XrEyeGazeFB#gazeConfidence} field. */
+        /** Sets the specified value to the {@code gazeConfidence} field. */
         public XrEyeGazeFB.Buffer gazeConfidence(float value) { XrEyeGazeFB.ngazeConfidence(address(), value); return this; }
 
     }

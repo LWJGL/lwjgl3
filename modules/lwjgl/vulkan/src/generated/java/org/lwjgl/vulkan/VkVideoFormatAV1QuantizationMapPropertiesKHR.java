@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing AV1 quantization map properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>The values returned in this structure are only defined if the allowed image usage flags returned in {@link VkVideoFormatPropertiesKHR}{@code ::imageUsageFlags} for this video format include {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR} or {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoFormatAV1QuantizationMapPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkVideoEncodeAV1SuperblockSizeFlagsKHR {@link #compatibleSuperblockSizes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkVideoEncodeAV1SuperblockSizeFlagsKHR compatibleSuperblockSizes;
+ * }}</pre>
  */
 public class VkVideoFormatAV1QuantizationMapPropertiesKHR extends Struct<VkVideoFormatAV1QuantizationMapPropertiesKHR> implements NativeResource {
 
@@ -88,28 +74,21 @@ public class VkVideoFormatAV1QuantizationMapPropertiesKHR extends Struct<VkVideo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /**
-     * a bitmask of {@code VkVideoEncodeAV1SuperblockSizeFlagBitsKHR} indicating the AV1 superblock sizes that quantization maps using this video format are compatible with.
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>The value of {@code compatibleSuperblockSizes} does not limit the use of the specific quantization map format, but does limit the implementation in being able to encode pictures with superblock sizes not included in {@code compatibleSuperblockSizes} but otherwise supported by the used video profile, as indicated by {@link VkVideoEncodeAV1CapabilitiesKHR}{@code ::superblockSizes}. In particular, using smaller <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-quantization-map-texel-size">quantization map texel sizes</a> may prevent implementations from encoding with larger superblock sizes which may have a negative impact on the efficiency of the encoder.</p>
-     * </div>
-     */
+    /** @return the value of the {@code compatibleSuperblockSizes} field. */
     @NativeType("VkVideoEncodeAV1SuperblockSizeFlagsKHR")
     public int compatibleSuperblockSizes() { return ncompatibleSuperblockSizes(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoFormatAV1QuantizationMapPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkVideoFormatAV1QuantizationMapPropertiesKHR sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoFormatAV1QuantizationMapPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -301,21 +280,21 @@ public class VkVideoFormatAV1QuantizationMapPropertiesKHR extends Struct<VkVideo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoFormatAV1QuantizationMapPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoFormatAV1QuantizationMapPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoFormatAV1QuantizationMapPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoFormatAV1QuantizationMapPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoFormatAV1QuantizationMapPropertiesKHR#compatibleSuperblockSizes} field. */
+        /** @return the value of the {@code compatibleSuperblockSizes} field. */
         @NativeType("VkVideoEncodeAV1SuperblockSizeFlagsKHR")
         public int compatibleSuperblockSizes() { return VkVideoFormatAV1QuantizationMapPropertiesKHR.ncompatibleSuperblockSizes(address()); }
 
-        /** Sets the specified value to the {@link VkVideoFormatAV1QuantizationMapPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoFormatAV1QuantizationMapPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoFormatAV1QuantizationMapPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR} value to the {@link VkVideoFormatAV1QuantizationMapPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkVideoFormatAV1QuantizationMapPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_FORMAT_AV1_QUANTIZATION_MAP_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoFormatAV1QuantizationMapPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoFormatAV1QuantizationMapPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoFormatAV1QuantizationMapPropertiesKHR.npNext(address(), value); return this; }
 
     }

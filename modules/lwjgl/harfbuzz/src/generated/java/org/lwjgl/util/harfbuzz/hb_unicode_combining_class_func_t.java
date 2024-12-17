@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_unicode_combining_class_t (*{@link #invoke}) (
- *     hb_unicode_funcs_t *ufuncs,
- *     hb_codepoint_t unicode,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_unicode_combining_class_func_t} */
 public abstract class hb_unicode_combining_class_func_t extends Callback implements hb_unicode_combining_class_func_tI {
 
     /**

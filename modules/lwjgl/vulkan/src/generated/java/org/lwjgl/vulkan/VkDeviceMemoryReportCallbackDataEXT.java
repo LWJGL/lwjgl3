@@ -16,50 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters returned to the callback.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code memoryObjectId} is used to avoid double-counting on the same memory object.</p>
- * 
- * <p>If an internally-allocated device memory object or a {@code VkDeviceMemory} <b>cannot</b> be exported, {@code memoryObjectId} <b>must</b> be unique in the {@code VkDevice}.</p>
- * 
- * <p>If an internally-allocated device memory object or a {@code VkDeviceMemory} supports being exported, {@code memoryObjectId} <b>must</b> be unique system wide.</p>
- * 
- * <p>If an internal device memory object or a {@code VkDeviceMemory} is backed by an imported external memory object, {@code memoryObjectId} <b>must</b> be unique system wide.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>This structure should only be considered valid during the lifetime of the triggered callback.</p>
- * 
- * <p>For {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT} and {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT} events, {@code objectHandle} usually will not yet exist when the application or tool receives the callback. {@code objectHandle} will only exist when the create or allocate call that triggered the event returns, and if the allocation or import ends up failing {@code objectHandle} will not ever exist.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceMemoryReportCallbackEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceMemoryReportCallbackDataEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceMemoryReportFlagsEXT {@link #flags};
- *     VkDeviceMemoryReportEventTypeEXT {@link #type};
- *     uint64_t {@link #memoryObjectId};
- *     VkDeviceSize {@link #size};
- *     VkObjectType {@link #objectType};
- *     uint64_t {@link #objectHandle};
- *     uint32_t {@link #heapIndex};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceMemoryReportFlagsEXT flags;
+ *     VkDeviceMemoryReportEventTypeEXT type;
+ *     uint64_t memoryObjectId;
+ *     VkDeviceSize size;
+ *     VkObjectType objectType;
+ *     uint64_t objectHandle;
+ *     uint32_t heapIndex;
+ * }}</pre>
  */
 public class VkDeviceMemoryReportCallbackDataEXT extends Struct<VkDeviceMemoryReportCallbackDataEXT> implements NativeResource {
 
@@ -130,39 +98,39 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct<VkDeviceMemoryRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** 0 and reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkDeviceMemoryReportFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** a {@code VkDeviceMemoryReportEventTypeEXT} type specifying the type of event reported in this {@link VkDeviceMemoryReportCallbackDataEXT} structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkDeviceMemoryReportEventTypeEXT")
     public int type() { return ntype(address()); }
-    /** the unique id for the underlying memory object as described below. */
+    /** @return the value of the {@code memoryObjectId} field. */
     @NativeType("uint64_t")
     public long memoryObjectId() { return nmemoryObjectId(address()); }
-    /** the size of the memory object in bytes. If {@code type} is {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT}, {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT} or {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT}, {@code size} is a valid {@code VkDeviceSize} value. Otherwise, {@code size} is undefined. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** a {@code VkObjectType} value specifying the type of the object associated with this device memory report event. If {@code type} is {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT}, {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT}, {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT}, {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT} or {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT}, {@code objectType} is a valid {@code VkObjectType} enum. Otherwise, {@code objectType} is undefined. */
+    /** @return the value of the {@code objectType} field. */
     @NativeType("VkObjectType")
     public int objectType() { return nobjectType(address()); }
-    /** the object this device memory report event is attributed to. If {@code type} is {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT}, {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_FREE_EXT}, {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_IMPORT_EXT} or {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_UNIMPORT_EXT}, {@code objectHandle} is a valid Vulkan handle of the type associated with {@code objectType} as defined in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#debugging-object-types">{@code VkObjectType} and Vulkan Handle Relationship</a> table. Otherwise, {@code objectHandle} is undefined. */
+    /** @return the value of the {@code objectHandle} field. */
     @NativeType("uint64_t")
     public long objectHandle() { return nobjectHandle(address()); }
-    /** describes which memory heap this device memory allocation is made from. If {@code type} is {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATE_EXT} or {@link EXTDeviceMemoryReport#VK_DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT DEVICE_MEMORY_REPORT_EVENT_TYPE_ALLOCATION_FAILED_EXT}, {@code heapIndex} corresponds to one of the valid heaps from the {@link VkPhysicalDeviceMemoryProperties} structure. Otherwise, {@code heapIndex} is undefined. */
+    /** @return the value of the {@code heapIndex} field. */
     @NativeType("uint32_t")
     public int heapIndex() { return nheapIndex(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceMemoryReportCallbackDataEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT} value to the {@code sType} field. */
     public VkDeviceMemoryReportCallbackDataEXT sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceMemoryReportCallbackDataEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -366,39 +334,39 @@ public class VkDeviceMemoryReportCallbackDataEXT extends Struct<VkDeviceMemoryRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceMemoryReportCallbackDataEXT.nsType(address()); }
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDeviceMemoryReportCallbackDataEXT.npNext(address()); }
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkDeviceMemoryReportFlagsEXT")
         public int flags() { return VkDeviceMemoryReportCallbackDataEXT.nflags(address()); }
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkDeviceMemoryReportEventTypeEXT")
         public int type() { return VkDeviceMemoryReportCallbackDataEXT.ntype(address()); }
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#memoryObjectId} field. */
+        /** @return the value of the {@code memoryObjectId} field. */
         @NativeType("uint64_t")
         public long memoryObjectId() { return VkDeviceMemoryReportCallbackDataEXT.nmemoryObjectId(address()); }
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkDeviceMemoryReportCallbackDataEXT.nsize(address()); }
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#objectType} field. */
+        /** @return the value of the {@code objectType} field. */
         @NativeType("VkObjectType")
         public int objectType() { return VkDeviceMemoryReportCallbackDataEXT.nobjectType(address()); }
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#objectHandle} field. */
+        /** @return the value of the {@code objectHandle} field. */
         @NativeType("uint64_t")
         public long objectHandle() { return VkDeviceMemoryReportCallbackDataEXT.nobjectHandle(address()); }
-        /** @return the value of the {@link VkDeviceMemoryReportCallbackDataEXT#heapIndex} field. */
+        /** @return the value of the {@code heapIndex} field. */
         @NativeType("uint32_t")
         public int heapIndex() { return VkDeviceMemoryReportCallbackDataEXT.nheapIndex(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceMemoryReportCallbackDataEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceMemoryReportCallbackDataEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceMemoryReportCallbackDataEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT} value to the {@link VkDeviceMemoryReportCallbackDataEXT#sType} field. */
+        /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT} value to the {@code sType} field. */
         public VkDeviceMemoryReportCallbackDataEXT.Buffer sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT); }
-        /** Sets the specified value to the {@link VkDeviceMemoryReportCallbackDataEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceMemoryReportCallbackDataEXT.Buffer pNext(@NativeType("void *") long value) { VkDeviceMemoryReportCallbackDataEXT.npNext(address(), value); return this; }
 
     }

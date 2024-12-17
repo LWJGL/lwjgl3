@@ -16,27 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a depth clamp range.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code minDepthClamp} <b>must</b> be less than or equal to {@code maxDepthClamp}</li>
- * <li>If the {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is not enabled, {@code minDepthClamp} <b>must</b> be greater than or equal to {@code 0.0}</li>
- * <li>If the {@link EXTDepthRangeUnrestricted VK_EXT_depth_range_unrestricted} extension is not enabled, {@code maxDepthClamp} <b>must</b> be less than or equal to {@code 1.0}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineViewportDepthClampControlCreateInfoEXT}, {@link EXTShaderObject#vkCmdSetDepthClampRangeEXT CmdSetDepthClampRangeEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDepthClampRangeEXT {
- *     float {@link #minDepthClamp};
- *     float {@link #maxDepthClamp};
- * }</code></pre>
+ *     float minDepthClamp;
+ *     float maxDepthClamp;
+ * }}</pre>
  */
 public class VkDepthClampRangeEXT extends Struct<VkDepthClampRangeEXT> implements NativeResource {
 
@@ -86,14 +70,14 @@ public class VkDepthClampRangeEXT extends Struct<VkDepthClampRangeEXT> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** sets <code>z<sub>min</sub></code> in the depth clamp range of the viewport. */
+    /** @return the value of the {@code minDepthClamp} field. */
     public float minDepthClamp() { return nminDepthClamp(address()); }
-    /** sets <code>z<sub>max</sub></code> in the depth clamp range of the viewport. */
+    /** @return the value of the {@code maxDepthClamp} field. */
     public float maxDepthClamp() { return nmaxDepthClamp(address()); }
 
-    /** Sets the specified value to the {@link #minDepthClamp} field. */
+    /** Sets the specified value to the {@code minDepthClamp} field. */
     public VkDepthClampRangeEXT minDepthClamp(float value) { nminDepthClamp(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxDepthClamp} field. */
+    /** Sets the specified value to the {@code maxDepthClamp} field. */
     public VkDepthClampRangeEXT maxDepthClamp(float value) { nmaxDepthClamp(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -283,14 +267,14 @@ public class VkDepthClampRangeEXT extends Struct<VkDepthClampRangeEXT> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDepthClampRangeEXT#minDepthClamp} field. */
+        /** @return the value of the {@code minDepthClamp} field. */
         public float minDepthClamp() { return VkDepthClampRangeEXT.nminDepthClamp(address()); }
-        /** @return the value of the {@link VkDepthClampRangeEXT#maxDepthClamp} field. */
+        /** @return the value of the {@code maxDepthClamp} field. */
         public float maxDepthClamp() { return VkDepthClampRangeEXT.nmaxDepthClamp(address()); }
 
-        /** Sets the specified value to the {@link VkDepthClampRangeEXT#minDepthClamp} field. */
+        /** Sets the specified value to the {@code minDepthClamp} field. */
         public VkDepthClampRangeEXT.Buffer minDepthClamp(float value) { VkDepthClampRangeEXT.nminDepthClamp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDepthClampRangeEXT#maxDepthClamp} field. */
+        /** Sets the specified value to the {@code maxDepthClamp} field. */
         public VkDepthClampRangeEXT.Buffer maxDepthClamp(float value) { VkDepthClampRangeEXT.nmaxDepthClamp(address(), value); return this; }
 
     }

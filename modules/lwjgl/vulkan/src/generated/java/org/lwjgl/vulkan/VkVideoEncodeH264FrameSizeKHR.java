@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing frame size values per H.264 picture type.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeH264RateControlLayerInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH264FrameSizeKHR {
- *     uint32_t {@link #frameISize};
- *     uint32_t {@link #framePSize};
- *     uint32_t {@link #frameBSize};
- * }</code></pre>
+ *     uint32_t frameISize;
+ *     uint32_t framePSize;
+ *     uint32_t frameBSize;
+ * }}</pre>
  */
 public class VkVideoEncodeH264FrameSizeKHR extends Struct<VkVideoEncodeH264FrameSizeKHR> implements NativeResource {
 
@@ -82,21 +74,21 @@ public class VkVideoEncodeH264FrameSizeKHR extends Struct<VkVideoEncodeH264Frame
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-i-pic">I pictures</a>. */
+    /** @return the value of the {@code frameISize} field. */
     @NativeType("uint32_t")
     public int frameISize() { return nframeISize(address()); }
-    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-p-pic">P pictures</a>. */
+    /** @return the value of the {@code framePSize} field. */
     @NativeType("uint32_t")
     public int framePSize() { return nframePSize(address()); }
-    /** the size in bytes to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-b-pic">B pictures</a>. */
+    /** @return the value of the {@code frameBSize} field. */
     @NativeType("uint32_t")
     public int frameBSize() { return nframeBSize(address()); }
 
-    /** Sets the specified value to the {@link #frameISize} field. */
+    /** Sets the specified value to the {@code frameISize} field. */
     public VkVideoEncodeH264FrameSizeKHR frameISize(@NativeType("uint32_t") int value) { nframeISize(address(), value); return this; }
-    /** Sets the specified value to the {@link #framePSize} field. */
+    /** Sets the specified value to the {@code framePSize} field. */
     public VkVideoEncodeH264FrameSizeKHR framePSize(@NativeType("uint32_t") int value) { nframePSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #frameBSize} field. */
+    /** Sets the specified value to the {@code frameBSize} field. */
     public VkVideoEncodeH264FrameSizeKHR frameBSize(@NativeType("uint32_t") int value) { nframeBSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,21 +284,21 @@ public class VkVideoEncodeH264FrameSizeKHR extends Struct<VkVideoEncodeH264Frame
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH264FrameSizeKHR#frameISize} field. */
+        /** @return the value of the {@code frameISize} field. */
         @NativeType("uint32_t")
         public int frameISize() { return VkVideoEncodeH264FrameSizeKHR.nframeISize(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264FrameSizeKHR#framePSize} field. */
+        /** @return the value of the {@code framePSize} field. */
         @NativeType("uint32_t")
         public int framePSize() { return VkVideoEncodeH264FrameSizeKHR.nframePSize(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264FrameSizeKHR#frameBSize} field. */
+        /** @return the value of the {@code frameBSize} field. */
         @NativeType("uint32_t")
         public int frameBSize() { return VkVideoEncodeH264FrameSizeKHR.nframeBSize(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH264FrameSizeKHR#frameISize} field. */
+        /** Sets the specified value to the {@code frameISize} field. */
         public VkVideoEncodeH264FrameSizeKHR.Buffer frameISize(@NativeType("uint32_t") int value) { VkVideoEncodeH264FrameSizeKHR.nframeISize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264FrameSizeKHR#framePSize} field. */
+        /** Sets the specified value to the {@code framePSize} field. */
         public VkVideoEncodeH264FrameSizeKHR.Buffer framePSize(@NativeType("uint32_t") int value) { VkVideoEncodeH264FrameSizeKHR.nframePSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264FrameSizeKHR#frameBSize} field. */
+        /** Sets the specified value to the {@code frameBSize} field. */
         public VkVideoEncodeH264FrameSizeKHR.Buffer frameBSize(@NativeType("uint32_t") int value) { VkVideoEncodeH264FrameSizeKHR.nframeBSize(address(), value); return this; }
 
     }

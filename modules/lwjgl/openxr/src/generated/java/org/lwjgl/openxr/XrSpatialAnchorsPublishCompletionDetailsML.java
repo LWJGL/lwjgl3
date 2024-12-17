@@ -17,31 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Completion structure to retrieve the per anchor result of the anchor creation.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsPublishCompletionDetailsML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code results} <b>must</b> be a pointer to an array of {@code resultCount} {@link XrSpatialAnchorCompletionResultML} structures</li>
- * <li>The {@code resultCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpatialAnchorCompletionResultML}, {@link XrSpatialAnchorsPublishCompletionML}, {@link MLSpatialAnchorsStorage#xrPublishSpatialAnchorsCompleteML PublishSpatialAnchorsCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsPublishCompletionDetailsML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #resultCount};
- *     {@link XrSpatialAnchorCompletionResultML XrSpatialAnchorCompletionResultML} * {@link #results};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t resultCount;
+ *     {@link XrSpatialAnchorCompletionResultML XrSpatialAnchorCompletionResultML} * results;
+ * }}</pre>
  */
 public class XrSpatialAnchorsPublishCompletionDetailsML extends Struct<XrSpatialAnchorsPublishCompletionDetailsML> implements NativeResource {
 
@@ -97,26 +79,26 @@ public class XrSpatialAnchorsPublishCompletionDetailsML extends Struct<XrSpatial
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the capacity of the {@code results} array and <b>must</b> match the number of anchors passed to {@link MLSpatialAnchorsStorage#xrPublishSpatialAnchorsAsyncML PublishSpatialAnchorsAsyncML}. */
+    /** @return the value of the {@code resultCount} field. */
     @NativeType("uint32_t")
     public int resultCount() { return nresultCount(address()); }
-    /** the per UUID status of the publish operation. The order of results in this array correspond to the async request order. */
+    /** @return a {@link XrSpatialAnchorCompletionResultML.Buffer} view of the struct array pointed to by the {@code results} field. */
     @NativeType("XrSpatialAnchorCompletionResultML *")
     public XrSpatialAnchorCompletionResultML.Buffer results() { return nresults(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsPublishCompletionDetailsML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML} value to the {@code type} field. */
     public XrSpatialAnchorsPublishCompletionDetailsML type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsPublishCompletionDetailsML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrSpatialAnchorCompletionResultML.Buffer} to the {@link #results} field. */
+    /** Sets the address of the specified {@link XrSpatialAnchorCompletionResultML.Buffer} to the {@code results} field. */
     public XrSpatialAnchorsPublishCompletionDetailsML results(@NativeType("XrSpatialAnchorCompletionResultML *") XrSpatialAnchorCompletionResultML.Buffer value) { nresults(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,26 +307,26 @@ public class XrSpatialAnchorsPublishCompletionDetailsML extends Struct<XrSpatial
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsPublishCompletionDetailsML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsPublishCompletionDetailsML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsPublishCompletionDetailsML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpatialAnchorsPublishCompletionDetailsML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsPublishCompletionDetailsML#resultCount} field. */
+        /** @return the value of the {@code resultCount} field. */
         @NativeType("uint32_t")
         public int resultCount() { return XrSpatialAnchorsPublishCompletionDetailsML.nresultCount(address()); }
-        /** @return a {@link XrSpatialAnchorCompletionResultML.Buffer} view of the struct array pointed to by the {@link XrSpatialAnchorsPublishCompletionDetailsML#results} field. */
+        /** @return a {@link XrSpatialAnchorCompletionResultML.Buffer} view of the struct array pointed to by the {@code results} field. */
         @NativeType("XrSpatialAnchorCompletionResultML *")
         public XrSpatialAnchorCompletionResultML.Buffer results() { return XrSpatialAnchorsPublishCompletionDetailsML.nresults(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsPublishCompletionDetailsML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsPublishCompletionDetailsML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsPublishCompletionDetailsML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML} value to the {@link XrSpatialAnchorsPublishCompletionDetailsML#type} field. */
+        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML} value to the {@code type} field. */
         public XrSpatialAnchorsPublishCompletionDetailsML.Buffer type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsPublishCompletionDetailsML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsPublishCompletionDetailsML.Buffer next(@NativeType("void *") long value) { XrSpatialAnchorsPublishCompletionDetailsML.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrSpatialAnchorCompletionResultML.Buffer} to the {@link XrSpatialAnchorsPublishCompletionDetailsML#results} field. */
+        /** Sets the address of the specified {@link XrSpatialAnchorCompletionResultML.Buffer} to the {@code results} field. */
         public XrSpatialAnchorsPublishCompletionDetailsML.Buffer results(@NativeType("XrSpatialAnchorCompletionResultML *") XrSpatialAnchorCompletionResultML.Buffer value) { XrSpatialAnchorsPublishCompletionDetailsML.nresults(address(), value); return this; }
 
     }

@@ -16,19 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a two-dimensional offset.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDisplayPlaneCapabilitiesKHR}, {@link VkImageViewSampleWeightCreateInfoQCOM}, {@link VkRect2D}, {@link VkRectLayerKHR}, {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM}, {@link VkTilePropertiesQCOM}, {@link VkVideoDecodeH264CapabilitiesKHR}, {@link VkVideoPictureResourceInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkOffset2D {
- *     int32_t {@link #x};
- *     int32_t {@link #y};
- * }</code></pre>
+ *     int32_t x;
+ *     int32_t y;
+ * }}</pre>
  */
 public class VkOffset2D extends Struct<VkOffset2D> implements NativeResource {
 
@@ -78,16 +70,16 @@ public class VkOffset2D extends Struct<VkOffset2D> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the x offset. */
+    /** @return the value of the {@code x} field. */
     @NativeType("int32_t")
     public int x() { return nx(address()); }
-    /** the y offset. */
+    /** @return the value of the {@code y} field. */
     @NativeType("int32_t")
     public int y() { return ny(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public VkOffset2D x(@NativeType("int32_t") int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public VkOffset2D y(@NativeType("int32_t") int value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,16 +288,16 @@ public class VkOffset2D extends Struct<VkOffset2D> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkOffset2D#x} field. */
+        /** @return the value of the {@code x} field. */
         @NativeType("int32_t")
         public int x() { return VkOffset2D.nx(address()); }
-        /** @return the value of the {@link VkOffset2D#y} field. */
+        /** @return the value of the {@code y} field. */
         @NativeType("int32_t")
         public int y() { return VkOffset2D.ny(address()); }
 
-        /** Sets the specified value to the {@link VkOffset2D#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public VkOffset2D.Buffer x(@NativeType("int32_t") int value) { VkOffset2D.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOffset2D#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public VkOffset2D.Buffer y(@NativeType("int32_t") int value) { VkOffset2D.ny(address(), value); return this; }
 
     }

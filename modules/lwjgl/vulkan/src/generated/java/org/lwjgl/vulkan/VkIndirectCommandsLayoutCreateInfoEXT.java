@@ -17,98 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters of a newly created indirect commands layout object.
- * 
- * <h5>Description</h5>
- * 
- * <p>The following code illustrates some of the flags:</p>
- * 
- * <pre><code>
- * void cmdProcessAllSequences(cmd, indirectExecutionSet, indirectCommandsLayout, indirectAddress, sequencesCount)
- * {
- *   for (s = 0; s &lt; sequencesCount; s++)
- *   {
- *     sUsed = s;
- * 
- *     if (indirectCommandsLayout.flags &amp; VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_EXT) {
- *       sUsed = incoherent_implementation_dependent_permutation[ sUsed ];
- *     }
- * 
- *     cmdProcessSequence( cmd, indirectExecutionSet, indirectCommandsLayout, indirectAddress, sUsed );
- *   }
- * }</code></pre>
- * 
- * <p>When tokens are consumed, an offset is computed based on token offset and stream stride. The resulting offset is required to be aligned. The alignment for a specific token is equal to the scalar alignment of the data type as defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-alignment-requirements">Alignment Requirements</a>, or 4, whichever is lower.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code indirectStride} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectCommandsIndirectStride}</li>
- * <li>{@code shaderStages} <b>must</b> only contain stages supported by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStages">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStages}</a></li>
- * <li>{@code tokenCount} <b>must</b> less than or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectCommandsTokenCount}</li>
- * <li>The number of tokens in the {@code pTokens} array with {@code type} equal to {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT} <b>must</b> be less than or equal to 1</li>
- * <li>The number of tokens in the {@code pTokens} array with {@code type} equal to {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT} <b>must</b> be less than or equal to 1</li>
- * <li>The number of tokens in the {@code pTokens} array with {@code type} equal to {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT} <b>must</b> be less than or equal to 1</li>
- * <li>If the action command token in the {@code pTokens} array is not an indexed draw token, then {@code pTokens} <b>must</b> not contain a member with {@code type} set to {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT}</li>
- * <li>If the action command token in the {@code pTokens} array is not a non-mesh draw token, then {@code pTokens} <b>must</b> not contain a member with {@code type} set to {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT}</li>
- * <li>If the {@code pTokens} array contains multiple tokens with {@code type} equal to {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT}, then there <b>must</b> be no duplicate {@link VkIndirectCommandsVertexBufferTokenEXT}{@code ::vertexBindingUnit} values</li>
- * <li>For all {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT} and {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT} type tokens in {@code pTokens}, there <b>must</b> be no overlapping ranges between any specified push constant ranges</li>
- * <li>The action command token <b>must</b> be the last token in the {@code pTokens} array</li>
- * <li>If the {@code pTokens} array contains a {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT} token, then this token <b>must</b> be the first token in the array</li>
- * <li>For any element of {@code pTokens}, if {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT} or {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT} and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicGeneratedPipelineLayout">{@code dynamicGeneratedPipelineLayout}</a> feature is not enabled, then the {@code pipelineLayout} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>For any element of {@code pTokens}, if {@code type} is either {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT} or {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT} and {@code pipelineLayout} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then the {@code pNext} chain <b>must</b> include a {@link VkPipelineLayoutCreateInfo} struct</li>
- * <li>For any element of {@code pTokens}, the {@code offset} <b>must</b> be greater than or equal to the {@code offset} member of the previous tokens</li>
- * <li>For any element of {@code pTokens}, if {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT}, {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT}, {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT}, {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT}, {@link NVMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT}, {@link NVMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT}, {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_COUNT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_COUNT_EXT}, {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_EXT}, or {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_EXT}, then {@code shaderStages} <b>must</b> contain graphics stages</li>
- * <li>For any element of {@code pTokens}, if {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT}, then {@code shaderStages} <b>must</b> be {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}</li>
- * <li>For any element of {@code pTokens}, if {@code type} is {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT} or {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT}, then {@code shaderStages} <b>must</b> contain {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}</li>
- * <li>For any element of {@code pTokens}, if {@code type} is {@link NVMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT} or {@link NVMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT}, then the {@code shaderStages} <b>must</b> contain {@link NVMeshShader#VK_SHADER_STAGE_MESH_BIT_NV SHADER_STAGE_MESH_BIT_NV}</li>
- * <li>For any element of {@code pTokens}, if {@code type} is {@link KHRRayTracingMaintenance1#VK_INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT}, then {@code shaderStages} <b>must</b> contain ray tracing stages</li>
- * <li>If {@code shaderStages} contains graphics stages then the state tokens in {@code pTokens} <b>must</b> not include {@link KHRRayTracingMaintenance1#VK_INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT}, {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT}</li>
- * <li>If {@code shaderStages} is {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} then the state tokens in {@code pTokens} <b>must</b> only include {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_EXT}, {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT}, {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT}, or {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT}</li>
- * <li>If {@code shaderStages} contains ray tracing stages then the state tokens in {@code pTokens} <b>must</b> only include {@link KHRRayTracingMaintenance1#VK_INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT}, {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT}, {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT}, or {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT}</li>
- * <li>The {@code shaderStages} <b>must</b> only contain stages from one of the following:
- * 
- * <ul>
- * <li>graphics stages</li>
- * <li>{@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}</li>
- * <li>mesh stages and {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}</li>
- * <li>ray tracing stages</li>
- * </ul>
- * </li>
- * <li>If {@code shaderStages} contains {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, then {@code shaderStages} <b>must</b> also contain {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT} or {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineLayoutCreateInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkIndirectCommandsLayoutUsageFlagBitsEXT} values</li>
- * <li>{@code shaderStages} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
- * <li>{@code shaderStages} <b>must</b> not be 0</li>
- * <li>If {@code pipelineLayout} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code pipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>{@code pTokens} <b>must</b> be a valid pointer to an array of {@code tokenCount} valid {@link VkIndirectCommandsLayoutTokenEXT} structures</li>
- * <li>{@code tokenCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsLayoutTokenEXT}, {@link EXTDeviceGeneratedCommands#vkCreateIndirectCommandsLayoutEXT CreateIndirectCommandsLayoutEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectCommandsLayoutCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkIndirectCommandsLayoutUsageFlagsEXT {@link #flags};
- *     VkShaderStageFlags {@link #shaderStages};
- *     uint32_t {@link #indirectStride};
- *     VkPipelineLayout {@link #pipelineLayout};
- *     uint32_t {@link #tokenCount};
- *     {@link VkIndirectCommandsLayoutTokenEXT VkIndirectCommandsLayoutTokenEXT} const * {@link #pTokens};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkIndirectCommandsLayoutUsageFlagsEXT flags;
+ *     VkShaderStageFlags shaderStages;
+ *     uint32_t indirectStride;
+ *     VkPipelineLayout pipelineLayout;
+ *     uint32_t tokenCount;
+ *     {@link VkIndirectCommandsLayoutTokenEXT VkIndirectCommandsLayoutTokenEXT} const * pTokens;
+ * }}</pre>
  */
 public class VkIndirectCommandsLayoutCreateInfoEXT extends Struct<VkIndirectCommandsLayoutCreateInfoEXT> implements NativeResource {
 
@@ -176,48 +95,48 @@ public class VkIndirectCommandsLayoutCreateInfoEXT extends Struct<VkIndirectComm
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkIndirectCommandsLayoutUsageFlagBitsEXT} specifying usage rules for this layout. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkIndirectCommandsLayoutUsageFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** the {@code VkShaderStageFlags} that this layout supports. */
+    /** @return the value of the {@code shaderStages} field. */
     @NativeType("VkShaderStageFlags")
     public int shaderStages() { return nshaderStages(address()); }
-    /** the distance in bytes between sequences in the indirect buffer */
+    /** @return the value of the {@code indirectStride} field. */
     @NativeType("uint32_t")
     public int indirectStride() { return nindirectStride(address()); }
-    /** the optional {@code VkPipelineLayout} that tokens in this layout use. If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicGeneratedPipelineLayout">{@code dynamicGeneratedPipelineLayout}</a> feature is enabled, {@code pipelineLayout} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and the layout <b>must</b> be specified by chaining the {@link VkPipelineLayoutCreateInfo} structure off the {@code pNext} */
+    /** @return the value of the {@code pipelineLayout} field. */
     @NativeType("VkPipelineLayout")
     public long pipelineLayout() { return npipelineLayout(address()); }
-    /** the length of the individual command sequence. */
+    /** @return the value of the {@code tokenCount} field. */
     @NativeType("uint32_t")
     public int tokenCount() { return ntokenCount(address()); }
-    /** a pointer to an array of {@link VkIndirectCommandsLayoutTokenEXT} describing each command token in detail. */
+    /** @return a {@link VkIndirectCommandsLayoutTokenEXT.Buffer} view of the struct array pointed to by the {@code pTokens} field. */
     @NativeType("VkIndirectCommandsLayoutTokenEXT const *")
     public VkIndirectCommandsLayoutTokenEXT.Buffer pTokens() { return npTokens(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkIndirectCommandsLayoutCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkIndirectCommandsLayoutCreateInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectCommandsLayoutCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
     public VkIndirectCommandsLayoutCreateInfoEXT pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkIndirectCommandsLayoutCreateInfoEXT flags(@NativeType("VkIndirectCommandsLayoutUsageFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderStages} field. */
+    /** Sets the specified value to the {@code shaderStages} field. */
     public VkIndirectCommandsLayoutCreateInfoEXT shaderStages(@NativeType("VkShaderStageFlags") int value) { nshaderStages(address(), value); return this; }
-    /** Sets the specified value to the {@link #indirectStride} field. */
+    /** Sets the specified value to the {@code indirectStride} field. */
     public VkIndirectCommandsLayoutCreateInfoEXT indirectStride(@NativeType("uint32_t") int value) { nindirectStride(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipelineLayout} field. */
+    /** Sets the specified value to the {@code pipelineLayout} field. */
     public VkIndirectCommandsLayoutCreateInfoEXT pipelineLayout(@NativeType("VkPipelineLayout") long value) { npipelineLayout(address(), value); return this; }
-    /** Sets the address of the specified {@link VkIndirectCommandsLayoutTokenEXT.Buffer} to the {@link #pTokens} field. */
+    /** Sets the address of the specified {@link VkIndirectCommandsLayoutTokenEXT.Buffer} to the {@code pTokens} field. */
     public VkIndirectCommandsLayoutCreateInfoEXT pTokens(@NativeType("VkIndirectCommandsLayoutTokenEXT const *") VkIndirectCommandsLayoutTokenEXT.Buffer value) { npTokens(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -450,48 +369,48 @@ public class VkIndirectCommandsLayoutCreateInfoEXT extends Struct<VkIndirectComm
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkIndirectCommandsLayoutCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkIndirectCommandsLayoutCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkIndirectCommandsLayoutUsageFlagsEXT")
         public int flags() { return VkIndirectCommandsLayoutCreateInfoEXT.nflags(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoEXT#shaderStages} field. */
+        /** @return the value of the {@code shaderStages} field. */
         @NativeType("VkShaderStageFlags")
         public int shaderStages() { return VkIndirectCommandsLayoutCreateInfoEXT.nshaderStages(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoEXT#indirectStride} field. */
+        /** @return the value of the {@code indirectStride} field. */
         @NativeType("uint32_t")
         public int indirectStride() { return VkIndirectCommandsLayoutCreateInfoEXT.nindirectStride(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoEXT#pipelineLayout} field. */
+        /** @return the value of the {@code pipelineLayout} field. */
         @NativeType("VkPipelineLayout")
         public long pipelineLayout() { return VkIndirectCommandsLayoutCreateInfoEXT.npipelineLayout(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutCreateInfoEXT#tokenCount} field. */
+        /** @return the value of the {@code tokenCount} field. */
         @NativeType("uint32_t")
         public int tokenCount() { return VkIndirectCommandsLayoutCreateInfoEXT.ntokenCount(address()); }
-        /** @return a {@link VkIndirectCommandsLayoutTokenEXT.Buffer} view of the struct array pointed to by the {@link VkIndirectCommandsLayoutCreateInfoEXT#pTokens} field. */
+        /** @return a {@link VkIndirectCommandsLayoutTokenEXT.Buffer} view of the struct array pointed to by the {@code pTokens} field. */
         @NativeType("VkIndirectCommandsLayoutTokenEXT const *")
         public VkIndirectCommandsLayoutTokenEXT.Buffer pTokens() { return VkIndirectCommandsLayoutCreateInfoEXT.npTokens(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectCommandsLayoutCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT} value to the {@link VkIndirectCommandsLayoutCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkIndirectCommandsLayoutCreateInfoEXT.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer flags(@NativeType("VkIndirectCommandsLayoutUsageFlagsEXT") int value) { VkIndirectCommandsLayoutCreateInfoEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoEXT#shaderStages} field. */
+        /** Sets the specified value to the {@code shaderStages} field. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer shaderStages(@NativeType("VkShaderStageFlags") int value) { VkIndirectCommandsLayoutCreateInfoEXT.nshaderStages(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoEXT#indirectStride} field. */
+        /** Sets the specified value to the {@code indirectStride} field. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer indirectStride(@NativeType("uint32_t") int value) { VkIndirectCommandsLayoutCreateInfoEXT.nindirectStride(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutCreateInfoEXT#pipelineLayout} field. */
+        /** Sets the specified value to the {@code pipelineLayout} field. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer pipelineLayout(@NativeType("VkPipelineLayout") long value) { VkIndirectCommandsLayoutCreateInfoEXT.npipelineLayout(address(), value); return this; }
-        /** Sets the address of the specified {@link VkIndirectCommandsLayoutTokenEXT.Buffer} to the {@link VkIndirectCommandsLayoutCreateInfoEXT#pTokens} field. */
+        /** Sets the address of the specified {@link VkIndirectCommandsLayoutTokenEXT.Buffer} to the {@code pTokens} field. */
         public VkIndirectCommandsLayoutCreateInfoEXT.Buffer pTokens(@NativeType("VkIndirectCommandsLayoutTokenEXT const *") VkIndirectCommandsLayoutTokenEXT.Buffer value) { VkIndirectCommandsLayoutCreateInfoEXT.npTokens(address(), value); return this; }
 
     }

@@ -16,63 +16,27 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a displacement micromap in a bottom-level acceleration structure.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@link VkAccelerationStructureTrianglesDisplacementMicromapNV} is included in the {@code pNext} chain of a {@link VkAccelerationStructureGeometryTrianglesDataKHR} structure, that geometry will reference that micromap.</p>
- * 
- * <p>For each triangle in the geometry, the acceleration structure build fetches an index from {@code indexBuffer} using {@code indexType} and {@code indexStride}. That triangle uses the displacement micromap information from {@code micromap} at that index plus {@code baseTriangle}.</p>
- * 
- * <p>Only one of {@code pUsageCounts} or {@code ppUsageCounts} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}. The elements of the non-{@code NULL} array describe the total count used to build this geometry. For a given {@code format} and {@code subdivisionLevel} the number of triangles in this geometry matching those values after indirection <b>must</b> be equal to the sum of matching {@code count} provided.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code displacementBiasAndScaleFormat} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
- * <li>{@code displacementVectorFormat} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
- * <li>Only one of {@code pUsageCounts} or {@code ppUsageCounts} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV}</li>
- * <li>{@code displacementBiasAndScaleFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code displacementVectorFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
- * <li>If {@code usageCountsCount} is not 0, and {@code pUsageCounts} is not {@code NULL}, {@code pUsageCounts} <b>must</b> be a valid pointer to an array of {@code usageCountsCount} {@link VkMicromapUsageEXT} structures</li>
- * <li>If {@code usageCountsCount} is not 0, and {@code ppUsageCounts} is not {@code NULL}, {@code ppUsageCounts} <b>must</b> be a valid pointer to an array of {@code usageCountsCount} valid pointers to {@link VkMicromapUsageEXT} structures</li>
- * <li>If {@code micromap} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code micromap} <b>must</b> be a valid {@code VkMicromapEXT} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceOrHostAddressConstKHR}, {@link VkMicromapUsageEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureTrianglesDisplacementMicromapNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkFormat {@link #displacementBiasAndScaleFormat};
- *     VkFormat {@link #displacementVectorFormat};
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #displacementBiasAndScaleBuffer};
- *     VkDeviceSize {@link #displacementBiasAndScaleStride};
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #displacementVectorBuffer};
- *     VkDeviceSize {@link #displacementVectorStride};
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #displacedMicromapPrimitiveFlags};
- *     VkDeviceSize {@link #displacedMicromapPrimitiveFlagsStride};
- *     VkIndexType {@link #indexType};
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #indexBuffer};
- *     VkDeviceSize {@link #indexStride};
- *     uint32_t {@link #baseTriangle};
- *     uint32_t {@link #usageCountsCount};
- *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * {@link #pUsageCounts};
- *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * const * {@link #ppUsageCounts};
- *     VkMicromapEXT {@link #micromap};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkFormat displacementBiasAndScaleFormat;
+ *     VkFormat displacementVectorFormat;
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} displacementBiasAndScaleBuffer;
+ *     VkDeviceSize displacementBiasAndScaleStride;
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} displacementVectorBuffer;
+ *     VkDeviceSize displacementVectorStride;
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} displacedMicromapPrimitiveFlags;
+ *     VkDeviceSize displacedMicromapPrimitiveFlagsStride;
+ *     VkIndexType indexType;
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} indexBuffer;
+ *     VkDeviceSize indexStride;
+ *     uint32_t baseTriangle;
+ *     uint32_t usageCountsCount;
+ *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * pUsageCounts;
+ *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * const * ppUsageCounts;
+ *     VkMicromapEXT micromap;
+ * }}</pre>
  */
 public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Struct<VkAccelerationStructureTrianglesDisplacementMicromapNV> implements NativeResource {
 
@@ -170,102 +134,102 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the format of displacement bias and scale used in this displacement micromap reference. */
+    /** @return the value of the {@code displacementBiasAndScaleFormat} field. */
     @NativeType("VkFormat")
     public int displacementBiasAndScaleFormat() { return ndisplacementBiasAndScaleFormat(address()); }
-    /** the format of displacement vector used in this displacement micromap reference. */
+    /** @return the value of the {@code displacementVectorFormat} field. */
     @NativeType("VkFormat")
     public int displacementVectorFormat() { return ndisplacementVectorFormat(address()); }
-    /** the address containing the bias and scale. */
+    /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code displacementBiasAndScaleBuffer} field. */
     public VkDeviceOrHostAddressConstKHR displacementBiasAndScaleBuffer() { return ndisplacementBiasAndScaleBuffer(address()); }
-    /** the byte stride between bias and scale values. */
+    /** @return the value of the {@code displacementBiasAndScaleStride} field. */
     @NativeType("VkDeviceSize")
     public long displacementBiasAndScaleStride() { return ndisplacementBiasAndScaleStride(address()); }
-    /** the address containing the displacement vector values. */
+    /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code displacementVectorBuffer} field. */
     public VkDeviceOrHostAddressConstKHR displacementVectorBuffer() { return ndisplacementVectorBuffer(address()); }
-    /** the byte stride between displacement vector values. */
+    /** @return the value of the {@code displacementVectorStride} field. */
     @NativeType("VkDeviceSize")
     public long displacementVectorStride() { return ndisplacementVectorStride(address()); }
-    /** the address containing the primitive flags. */
+    /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code displacedMicromapPrimitiveFlags} field. */
     public VkDeviceOrHostAddressConstKHR displacedMicromapPrimitiveFlags() { return ndisplacedMicromapPrimitiveFlags(address()); }
-    /** the byte stride between primitive flag values. */
+    /** @return the value of the {@code displacedMicromapPrimitiveFlagsStride} field. */
     @NativeType("VkDeviceSize")
     public long displacedMicromapPrimitiveFlagsStride() { return ndisplacedMicromapPrimitiveFlagsStride(address()); }
-    /** the type of triangle indices used when indexing this micromap. */
+    /** @return the value of the {@code indexType} field. */
     @NativeType("VkIndexType")
     public int indexType() { return nindexType(address()); }
-    /** the address containing the triangle indices. */
+    /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code indexBuffer} field. */
     public VkDeviceOrHostAddressConstKHR indexBuffer() { return nindexBuffer(address()); }
-    /** the byte stride between triangle indices. */
+    /** @return the value of the {@code indexStride} field. */
     @NativeType("VkDeviceSize")
     public long indexStride() { return nindexStride(address()); }
-    /** the base value added to the non-negative triangle indices. */
+    /** @return the value of the {@code baseTriangle} field. */
     @NativeType("uint32_t")
     public int baseTriangle() { return nbaseTriangle(address()); }
-    /** specifies the number of usage counts structures that will be used to determine the size of this micromap. */
+    /** @return the value of the {@code usageCountsCount} field. */
     @NativeType("uint32_t")
     public int usageCountsCount() { return nusageCountsCount(address()); }
-    /** a pointer to an array of {@link VkMicromapUsageEXT} structures. */
+    /** @return a {@link VkMicromapUsageEXT.Buffer} view of the struct array pointed to by the {@code pUsageCounts} field. */
     @NativeType("VkMicromapUsageEXT const *")
     public VkMicromapUsageEXT.@Nullable Buffer pUsageCounts() { return npUsageCounts(address()); }
-    /** a pointer to an array of pointers to {@link VkMicromapUsageEXT} structures. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code ppUsageCounts} field. */
     @NativeType("VkMicromapUsageEXT const * const *")
     public @Nullable PointerBuffer ppUsageCounts() { return nppUsageCounts(address()); }
-    /** the handle to the micromap object to include in this geometry. */
+    /** @return the value of the {@code micromap} field. */
     @NativeType("VkMicromapEXT")
     public long micromap() { return nmicromap(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV} value to the {@code sType} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV sType$Default() { return sType(NVDisplacementMicromap.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #displacementBiasAndScaleFormat} field. */
+    /** Sets the specified value to the {@code displacementBiasAndScaleFormat} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacementBiasAndScaleFormat(@NativeType("VkFormat") int value) { ndisplacementBiasAndScaleFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #displacementVectorFormat} field. */
+    /** Sets the specified value to the {@code displacementVectorFormat} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacementVectorFormat(@NativeType("VkFormat") int value) { ndisplacementVectorFormat(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #displacementBiasAndScaleBuffer} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code displacementBiasAndScaleBuffer} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacementBiasAndScaleBuffer(VkDeviceOrHostAddressConstKHR value) { ndisplacementBiasAndScaleBuffer(address(), value); return this; }
-    /** Passes the {@link #displacementBiasAndScaleBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code displacementBiasAndScaleBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacementBiasAndScaleBuffer(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(displacementBiasAndScaleBuffer()); return this; }
-    /** Sets the specified value to the {@link #displacementBiasAndScaleStride} field. */
+    /** Sets the specified value to the {@code displacementBiasAndScaleStride} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacementBiasAndScaleStride(@NativeType("VkDeviceSize") long value) { ndisplacementBiasAndScaleStride(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #displacementVectorBuffer} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code displacementVectorBuffer} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacementVectorBuffer(VkDeviceOrHostAddressConstKHR value) { ndisplacementVectorBuffer(address(), value); return this; }
-    /** Passes the {@link #displacementVectorBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code displacementVectorBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacementVectorBuffer(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(displacementVectorBuffer()); return this; }
-    /** Sets the specified value to the {@link #displacementVectorStride} field. */
+    /** Sets the specified value to the {@code displacementVectorStride} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacementVectorStride(@NativeType("VkDeviceSize") long value) { ndisplacementVectorStride(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #displacedMicromapPrimitiveFlags} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code displacedMicromapPrimitiveFlags} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacedMicromapPrimitiveFlags(VkDeviceOrHostAddressConstKHR value) { ndisplacedMicromapPrimitiveFlags(address(), value); return this; }
-    /** Passes the {@link #displacedMicromapPrimitiveFlags} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code displacedMicromapPrimitiveFlags} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacedMicromapPrimitiveFlags(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(displacedMicromapPrimitiveFlags()); return this; }
-    /** Sets the specified value to the {@link #displacedMicromapPrimitiveFlagsStride} field. */
+    /** Sets the specified value to the {@code displacedMicromapPrimitiveFlagsStride} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV displacedMicromapPrimitiveFlagsStride(@NativeType("VkDeviceSize") long value) { ndisplacedMicromapPrimitiveFlagsStride(address(), value); return this; }
-    /** Sets the specified value to the {@link #indexType} field. */
+    /** Sets the specified value to the {@code indexType} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV indexType(@NativeType("VkIndexType") int value) { nindexType(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #indexBuffer} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code indexBuffer} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV indexBuffer(VkDeviceOrHostAddressConstKHR value) { nindexBuffer(address(), value); return this; }
-    /** Passes the {@link #indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV indexBuffer(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(indexBuffer()); return this; }
-    /** Sets the specified value to the {@link #indexStride} field. */
+    /** Sets the specified value to the {@code indexStride} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV indexStride(@NativeType("VkDeviceSize") long value) { nindexStride(address(), value); return this; }
-    /** Sets the specified value to the {@link #baseTriangle} field. */
+    /** Sets the specified value to the {@code baseTriangle} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV baseTriangle(@NativeType("uint32_t") int value) { nbaseTriangle(address(), value); return this; }
-    /** Sets the specified value to the {@link #usageCountsCount} field. */
+    /** Sets the specified value to the {@code usageCountsCount} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV usageCountsCount(@NativeType("uint32_t") int value) { nusageCountsCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@link #pUsageCounts} field. */
+    /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@code pUsageCounts} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV pUsageCounts(@NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.@Nullable Buffer value) { npUsageCounts(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppUsageCounts} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code ppUsageCounts} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV ppUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const * const *") PointerBuffer value) { nppUsageCounts(address(), value); return this; }
-    /** Sets the specified value to the {@link #micromap} field. */
+    /** Sets the specified value to the {@code micromap} field. */
     public VkAccelerationStructureTrianglesDisplacementMicromapNV micromap(@NativeType("VkMicromapEXT") long value) { nmicromap(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -551,102 +515,102 @@ public class VkAccelerationStructureTrianglesDisplacementMicromapNV extends Stru
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nsType(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.npNext(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementBiasAndScaleFormat} field. */
+        /** @return the value of the {@code displacementBiasAndScaleFormat} field. */
         @NativeType("VkFormat")
         public int displacementBiasAndScaleFormat() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementBiasAndScaleFormat(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementVectorFormat} field. */
+        /** @return the value of the {@code displacementVectorFormat} field. */
         @NativeType("VkFormat")
         public int displacementVectorFormat() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementVectorFormat(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementBiasAndScaleBuffer} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code displacementBiasAndScaleBuffer} field. */
         public VkDeviceOrHostAddressConstKHR displacementBiasAndScaleBuffer() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementBiasAndScaleBuffer(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementBiasAndScaleStride} field. */
+        /** @return the value of the {@code displacementBiasAndScaleStride} field. */
         @NativeType("VkDeviceSize")
         public long displacementBiasAndScaleStride() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementBiasAndScaleStride(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementVectorBuffer} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code displacementVectorBuffer} field. */
         public VkDeviceOrHostAddressConstKHR displacementVectorBuffer() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementVectorBuffer(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementVectorStride} field. */
+        /** @return the value of the {@code displacementVectorStride} field. */
         @NativeType("VkDeviceSize")
         public long displacementVectorStride() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementVectorStride(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacedMicromapPrimitiveFlags} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code displacedMicromapPrimitiveFlags} field. */
         public VkDeviceOrHostAddressConstKHR displacedMicromapPrimitiveFlags() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacedMicromapPrimitiveFlags(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacedMicromapPrimitiveFlagsStride} field. */
+        /** @return the value of the {@code displacedMicromapPrimitiveFlagsStride} field. */
         @NativeType("VkDeviceSize")
         public long displacedMicromapPrimitiveFlagsStride() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacedMicromapPrimitiveFlagsStride(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#indexType} field. */
+        /** @return the value of the {@code indexType} field. */
         @NativeType("VkIndexType")
         public int indexType() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nindexType(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#indexBuffer} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code indexBuffer} field. */
         public VkDeviceOrHostAddressConstKHR indexBuffer() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nindexBuffer(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#indexStride} field. */
+        /** @return the value of the {@code indexStride} field. */
         @NativeType("VkDeviceSize")
         public long indexStride() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nindexStride(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#baseTriangle} field. */
+        /** @return the value of the {@code baseTriangle} field. */
         @NativeType("uint32_t")
         public int baseTriangle() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nbaseTriangle(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#usageCountsCount} field. */
+        /** @return the value of the {@code usageCountsCount} field. */
         @NativeType("uint32_t")
         public int usageCountsCount() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nusageCountsCount(address()); }
-        /** @return a {@link VkMicromapUsageEXT.Buffer} view of the struct array pointed to by the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#pUsageCounts} field. */
+        /** @return a {@link VkMicromapUsageEXT.Buffer} view of the struct array pointed to by the {@code pUsageCounts} field. */
         @NativeType("VkMicromapUsageEXT const *")
         public VkMicromapUsageEXT.@Nullable Buffer pUsageCounts() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.npUsageCounts(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#ppUsageCounts} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code ppUsageCounts} field. */
         @NativeType("VkMicromapUsageEXT const * const *")
         public @Nullable PointerBuffer ppUsageCounts() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nppUsageCounts(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#micromap} field. */
+        /** @return the value of the {@code micromap} field. */
         @NativeType("VkMicromapEXT")
         public long micromap() { return VkAccelerationStructureTrianglesDisplacementMicromapNV.nmicromap(address()); }
 
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV} value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#sType} field. */
+        /** Sets the {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV} value to the {@code sType} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer sType$Default() { return sType(NVDisplacementMicromap.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV); }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer pNext(@NativeType("void *") long value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementBiasAndScaleFormat} field. */
+        /** Sets the specified value to the {@code displacementBiasAndScaleFormat} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacementBiasAndScaleFormat(@NativeType("VkFormat") int value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementBiasAndScaleFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementVectorFormat} field. */
+        /** Sets the specified value to the {@code displacementVectorFormat} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacementVectorFormat(@NativeType("VkFormat") int value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementVectorFormat(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementBiasAndScaleBuffer} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code displacementBiasAndScaleBuffer} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacementBiasAndScaleBuffer(VkDeviceOrHostAddressConstKHR value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementBiasAndScaleBuffer(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementBiasAndScaleBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code displacementBiasAndScaleBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacementBiasAndScaleBuffer(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(displacementBiasAndScaleBuffer()); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementBiasAndScaleStride} field. */
+        /** Sets the specified value to the {@code displacementBiasAndScaleStride} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacementBiasAndScaleStride(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementBiasAndScaleStride(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementVectorBuffer} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code displacementVectorBuffer} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacementVectorBuffer(VkDeviceOrHostAddressConstKHR value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementVectorBuffer(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementVectorBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code displacementVectorBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacementVectorBuffer(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(displacementVectorBuffer()); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacementVectorStride} field. */
+        /** Sets the specified value to the {@code displacementVectorStride} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacementVectorStride(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacementVectorStride(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacedMicromapPrimitiveFlags} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code displacedMicromapPrimitiveFlags} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacedMicromapPrimitiveFlags(VkDeviceOrHostAddressConstKHR value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacedMicromapPrimitiveFlags(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacedMicromapPrimitiveFlags} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code displacedMicromapPrimitiveFlags} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacedMicromapPrimitiveFlags(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(displacedMicromapPrimitiveFlags()); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#displacedMicromapPrimitiveFlagsStride} field. */
+        /** Sets the specified value to the {@code displacedMicromapPrimitiveFlagsStride} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer displacedMicromapPrimitiveFlagsStride(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.ndisplacedMicromapPrimitiveFlagsStride(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#indexType} field. */
+        /** Sets the specified value to the {@code indexType} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer indexType(@NativeType("VkIndexType") int value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nindexType(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#indexBuffer} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code indexBuffer} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer indexBuffer(VkDeviceOrHostAddressConstKHR value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nindexBuffer(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer indexBuffer(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(indexBuffer()); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#indexStride} field. */
+        /** Sets the specified value to the {@code indexStride} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer indexStride(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nindexStride(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#baseTriangle} field. */
+        /** Sets the specified value to the {@code baseTriangle} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer baseTriangle(@NativeType("uint32_t") int value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nbaseTriangle(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#usageCountsCount} field. */
+        /** Sets the specified value to the {@code usageCountsCount} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer usageCountsCount(@NativeType("uint32_t") int value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nusageCountsCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#pUsageCounts} field. */
+        /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@code pUsageCounts} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer pUsageCounts(@NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.@Nullable Buffer value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.npUsageCounts(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#ppUsageCounts} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code ppUsageCounts} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer ppUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const * const *") PointerBuffer value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nppUsageCounts(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesDisplacementMicromapNV#micromap} field. */
+        /** Sets the specified value to the {@code micromap} field. */
         public VkAccelerationStructureTrianglesDisplacementMicromapNV.Buffer micromap(@NativeType("VkMicromapEXT") long value) { VkAccelerationStructureTrianglesDisplacementMicromapNV.nmicromap(address(), value); return this; }
 
     }

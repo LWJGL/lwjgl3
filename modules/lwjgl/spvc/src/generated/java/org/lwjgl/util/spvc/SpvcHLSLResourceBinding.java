@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_hlsl_resource_binding {
  *     SpvExecutionModel stage;
  *     unsigned desc_set;
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link SpvcHLSLResourceBindingMapping spvc_hlsl_resource_binding_mapping} uav;
  *     {@link SpvcHLSLResourceBindingMapping spvc_hlsl_resource_binding_mapping} srv;
  *     {@link SpvcHLSLResourceBindingMapping spvc_hlsl_resource_binding_mapping} sampler;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_hlsl_resource_binding")
 public class SpvcHLSLResourceBinding extends Struct<SpvcHLSLResourceBinding> implements NativeResource {

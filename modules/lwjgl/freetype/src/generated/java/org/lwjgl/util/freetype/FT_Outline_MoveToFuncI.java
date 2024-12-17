@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     FT_Vector const *to,
- *     void *user
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Outline_MoveToFunc} */
 @FunctionalInterface
 @NativeType("FT_Outline_MoveToFunc")
 public interface FT_Outline_MoveToFuncI extends CallbackI {
@@ -43,7 +35,7 @@ public interface FT_Outline_MoveToFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** A function pointer type used to describe the signature of a 'move to' function during outline walking/decomposition. */
+    /** {@code int (* FT_Outline_MoveToFunc) (FT_Vector const * to, void * user)} */
     int invoke(@NativeType("FT_Vector const *") long to, @NativeType("void *") long user);
 
 }

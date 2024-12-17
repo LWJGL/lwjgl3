@@ -16,32 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters of vkGetLatencyTimingsNV.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code pTimings} is {@code NULL} then the maximum number of queryable frame data is returned in {@code timingCount}. Otherwise, {@code timingCount} <b>must</b> be set by the application to the number of elements in the {@code pTimings} array, and on return the variable is overwritten with the number of values actually written to {@code pTimings}. The elements of {@code pTimings} are arranged in the order they were requested in, with the oldest data in the first entry.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVLowLatency2#VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV}</li>
- * <li>If {@code timingCount} is not 0, and {@code pTimings} is not {@code NULL}, {@code pTimings} <b>must</b> be a valid pointer to an array of {@code timingCount} {@link VkLatencyTimingsFrameReportNV} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkLatencyTimingsFrameReportNV}, {@link NVLowLatency2#vkGetLatencyTimingsNV GetLatencyTimingsNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkGetLatencyMarkerInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #timingCount};
- *     {@link VkLatencyTimingsFrameReportNV VkLatencyTimingsFrameReportNV} * {@link #pTimings};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t timingCount;
+ *     {@link VkLatencyTimingsFrameReportNV VkLatencyTimingsFrameReportNV} * pTimings;
+ * }}</pre>
  */
 public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> implements NativeResource {
 
@@ -97,28 +78,28 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** either {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** an integer related to the number of previous frames of latency data available or queried, as described below. */
+    /** @return the value of the {@code timingCount} field. */
     @NativeType("uint32_t")
     public int timingCount() { return ntimingCount(address()); }
-    /** either {@code NULL} or a pointer to an array of {@link VkLatencyTimingsFrameReportNV} structures. */
+    /** @return a {@link VkLatencyTimingsFrameReportNV.Buffer} view of the struct array pointed to by the {@code pTimings} field. */
     @NativeType("VkLatencyTimingsFrameReportNV *")
     public VkLatencyTimingsFrameReportNV.@Nullable Buffer pTimings() { return npTimings(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkGetLatencyMarkerInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV} value to the {@code sType} field. */
     public VkGetLatencyMarkerInfoNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkGetLatencyMarkerInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #timingCount} field. */
+    /** Sets the specified value to the {@code timingCount} field. */
     public VkGetLatencyMarkerInfoNV timingCount(@NativeType("uint32_t") int value) { ntimingCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkLatencyTimingsFrameReportNV.Buffer} to the {@link #pTimings} field. */
+    /** Sets the address of the specified {@link VkLatencyTimingsFrameReportNV.Buffer} to the {@code pTimings} field. */
     public VkGetLatencyMarkerInfoNV pTimings(@NativeType("VkLatencyTimingsFrameReportNV *") VkLatencyTimingsFrameReportNV.@Nullable Buffer value) { npTimings(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,28 +301,28 @@ public class VkGetLatencyMarkerInfoNV extends Struct<VkGetLatencyMarkerInfoNV> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkGetLatencyMarkerInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGetLatencyMarkerInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkGetLatencyMarkerInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGetLatencyMarkerInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkGetLatencyMarkerInfoNV#timingCount} field. */
+        /** @return the value of the {@code timingCount} field. */
         @NativeType("uint32_t")
         public int timingCount() { return VkGetLatencyMarkerInfoNV.ntimingCount(address()); }
-        /** @return a {@link VkLatencyTimingsFrameReportNV.Buffer} view of the struct array pointed to by the {@link VkGetLatencyMarkerInfoNV#pTimings} field. */
+        /** @return a {@link VkLatencyTimingsFrameReportNV.Buffer} view of the struct array pointed to by the {@code pTimings} field. */
         @NativeType("VkLatencyTimingsFrameReportNV *")
         public VkLatencyTimingsFrameReportNV.@Nullable Buffer pTimings() { return VkGetLatencyMarkerInfoNV.npTimings(address()); }
 
-        /** Sets the specified value to the {@link VkGetLatencyMarkerInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkGetLatencyMarkerInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGetLatencyMarkerInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV} value to the {@link VkGetLatencyMarkerInfoNV#sType} field. */
+        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV} value to the {@code sType} field. */
         public VkGetLatencyMarkerInfoNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV); }
-        /** Sets the specified value to the {@link VkGetLatencyMarkerInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkGetLatencyMarkerInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkGetLatencyMarkerInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkGetLatencyMarkerInfoNV#timingCount} field. */
+        /** Sets the specified value to the {@code timingCount} field. */
         public VkGetLatencyMarkerInfoNV.Buffer timingCount(@NativeType("uint32_t") int value) { VkGetLatencyMarkerInfoNV.ntimingCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkLatencyTimingsFrameReportNV.Buffer} to the {@link VkGetLatencyMarkerInfoNV#pTimings} field. */
+        /** Sets the address of the specified {@link VkLatencyTimingsFrameReportNV.Buffer} to the {@code pTimings} field. */
         public VkGetLatencyMarkerInfoNV.Buffer pTimings(@NativeType("VkLatencyTimingsFrameReportNV *") VkLatencyTimingsFrameReportNV.@Nullable Buffer value) { VkGetLatencyMarkerInfoNV.npTimings(address(), value); return this; }
 
     }

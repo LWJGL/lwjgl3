@@ -10,37 +10,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to <a href="https://libdivide.com/">libdivide</a>.
- * 
- * <p>libdivide allows you to replace expensive integer divides with comparatively cheap multiplication and bitshifts. Compilers usually do this, but
- * only when the divisor is known at compile time. libdivide allows you to take advantage of it at runtime. The result is that integer division can become
- * faster - a lot faster.</p>
- * 
- * <p><b>LWJGL</b>: This is a hybrid implementation. Divider recovery methods use standard JNI bindings. All {@code *_gen}, {@code *_do} &amp;
- * {@code *_get_algorithm} functions have been ported to pure Java. This eliminates the JNI overhead and enables the JVM to inline and further optimize
- * these methods.</p>
- */
 public class LibDivide {
 
     static { Library.loadSystem(System::load, System::loadLibrary, LibDivide.class, "org.lwjgl.libdivide", Platform.mapLibraryNameBundled("lwjgl_libdivide")); }
 
-    /** Library version. */
     public static final int
         LIBDIVIDE_VERSION_MAJOR = 5,
         LIBDIVIDE_VERSION_MINOR = 1;
 
-    /**
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LIBDIVIDE_16_SHIFT_MASK 16_SHIFT_MASK}</li>
-     * <li>{@link #LIBDIVIDE_32_SHIFT_MASK 32_SHIFT_MASK}</li>
-     * <li>{@link #LIBDIVIDE_64_SHIFT_MASK 64_SHIFT_MASK}</li>
-     * <li>{@link #LIBDIVIDE_ADD_MARKER ADD_MARKER}</li>
-     * <li>{@link #LIBDIVIDE_NEGATIVE_DIVISOR NEGATIVE_DIVISOR}</li>
-     * </ul>
-     */
     public static final int
         LIBDIVIDE_16_SHIFT_MASK    = 0x1F,
         LIBDIVIDE_32_SHIFT_MASK    = 0x1F,
@@ -54,8 +31,10 @@ public class LibDivide {
 
     // --- [ libdivide_s16_gen_ref ] ---
 
+    /** {@code struct libdivide_s16_t libdivide_s16_gen_ref(int16_t denom)} */
     static native void nlibdivide_s16_gen_ref(short denom, long __result);
 
+    /** {@code struct libdivide_s16_t libdivide_s16_gen_ref(int16_t denom)} */
     @NativeType("struct libdivide_s16_t")
     static LibDivideS16 libdivide_s16_gen_ref(@NativeType("int16_t") short denom, @NativeType("struct libdivide_s16_t") LibDivideS16 __result) {
         nlibdivide_s16_gen_ref(denom, __result.address());
@@ -64,8 +43,10 @@ public class LibDivide {
 
     // --- [ libdivide_u16_gen_ref ] ---
 
+    /** {@code struct libdivide_u16_t libdivide_u16_gen_ref(uint16_t denom)} */
     static native void nlibdivide_u16_gen_ref(short denom, long __result);
 
+    /** {@code struct libdivide_u16_t libdivide_u16_gen_ref(uint16_t denom)} */
     @NativeType("struct libdivide_u16_t")
     static LibDivideU16 libdivide_u16_gen_ref(@NativeType("uint16_t") short denom, @NativeType("struct libdivide_u16_t") LibDivideU16 __result) {
         nlibdivide_u16_gen_ref(denom, __result.address());
@@ -74,8 +55,10 @@ public class LibDivide {
 
     // --- [ libdivide_s32_gen_ref ] ---
 
+    /** {@code struct libdivide_s32_t libdivide_s32_gen_ref(int32_t denom)} */
     static native void nlibdivide_s32_gen_ref(int denom, long __result);
 
+    /** {@code struct libdivide_s32_t libdivide_s32_gen_ref(int32_t denom)} */
     @NativeType("struct libdivide_s32_t")
     static LibDivideS32 libdivide_s32_gen_ref(@NativeType("int32_t") int denom, @NativeType("struct libdivide_s32_t") LibDivideS32 __result) {
         nlibdivide_s32_gen_ref(denom, __result.address());
@@ -84,8 +67,10 @@ public class LibDivide {
 
     // --- [ libdivide_u32_gen_ref ] ---
 
+    /** {@code struct libdivide_u32_t libdivide_u32_gen_ref(uint32_t denom)} */
     static native void nlibdivide_u32_gen_ref(int denom, long __result);
 
+    /** {@code struct libdivide_u32_t libdivide_u32_gen_ref(uint32_t denom)} */
     @NativeType("struct libdivide_u32_t")
     static LibDivideU32 libdivide_u32_gen_ref(@NativeType("uint32_t") int denom, @NativeType("struct libdivide_u32_t") LibDivideU32 __result) {
         nlibdivide_u32_gen_ref(denom, __result.address());
@@ -94,8 +79,10 @@ public class LibDivide {
 
     // --- [ libdivide_s64_gen_ref ] ---
 
+    /** {@code struct libdivide_s64_t libdivide_s64_gen_ref(int64_t denom)} */
     static native void nlibdivide_s64_gen_ref(long denom, long __result);
 
+    /** {@code struct libdivide_s64_t libdivide_s64_gen_ref(int64_t denom)} */
     @NativeType("struct libdivide_s64_t")
     static LibDivideS64 libdivide_s64_gen_ref(@NativeType("int64_t") long denom, @NativeType("struct libdivide_s64_t") LibDivideS64 __result) {
         nlibdivide_s64_gen_ref(denom, __result.address());
@@ -104,8 +91,10 @@ public class LibDivide {
 
     // --- [ libdivide_u64_gen_ref ] ---
 
+    /** {@code struct libdivide_u64_t libdivide_u64_gen_ref(uint64_t denom)} */
     static native void nlibdivide_u64_gen_ref(long denom, long __result);
 
+    /** {@code struct libdivide_u64_t libdivide_u64_gen_ref(uint64_t denom)} */
     @NativeType("struct libdivide_u64_t")
     static LibDivideU64 libdivide_u64_gen_ref(@NativeType("uint64_t") long denom, @NativeType("struct libdivide_u64_t") LibDivideU64 __result) {
         nlibdivide_u64_gen_ref(denom, __result.address());
@@ -114,8 +103,10 @@ public class LibDivide {
 
     // --- [ libdivide_s16_branchfree_gen_ref ] ---
 
+    /** {@code struct libdivide_s16_branchfree_t libdivide_s16_branchfree_gen_ref(int16_t denom)} */
     static native void nlibdivide_s16_branchfree_gen_ref(short denom, long __result);
 
+    /** {@code struct libdivide_s16_branchfree_t libdivide_s16_branchfree_gen_ref(int16_t denom)} */
     @NativeType("struct libdivide_s16_branchfree_t")
     static LibDivideS16BranchFree libdivide_s16_branchfree_gen_ref(@NativeType("int16_t") short denom, @NativeType("struct libdivide_s16_branchfree_t") LibDivideS16BranchFree __result) {
         nlibdivide_s16_branchfree_gen_ref(denom, __result.address());
@@ -124,8 +115,10 @@ public class LibDivide {
 
     // --- [ libdivide_u16_branchfree_gen_ref ] ---
 
+    /** {@code struct libdivide_u16_branchfree_t libdivide_u16_branchfree_gen_ref(uint16_t denom)} */
     static native void nlibdivide_u16_branchfree_gen_ref(short denom, long __result);
 
+    /** {@code struct libdivide_u16_branchfree_t libdivide_u16_branchfree_gen_ref(uint16_t denom)} */
     @NativeType("struct libdivide_u16_branchfree_t")
     static LibDivideU16BranchFree libdivide_u16_branchfree_gen_ref(@NativeType("uint16_t") short denom, @NativeType("struct libdivide_u16_branchfree_t") LibDivideU16BranchFree __result) {
         nlibdivide_u16_branchfree_gen_ref(denom, __result.address());
@@ -134,8 +127,10 @@ public class LibDivide {
 
     // --- [ libdivide_s32_branchfree_gen_ref ] ---
 
+    /** {@code struct libdivide_s32_branchfree_t libdivide_s32_branchfree_gen_ref(int32_t denom)} */
     static native void nlibdivide_s32_branchfree_gen_ref(int denom, long __result);
 
+    /** {@code struct libdivide_s32_branchfree_t libdivide_s32_branchfree_gen_ref(int32_t denom)} */
     @NativeType("struct libdivide_s32_branchfree_t")
     static LibDivideS32BranchFree libdivide_s32_branchfree_gen_ref(@NativeType("int32_t") int denom, @NativeType("struct libdivide_s32_branchfree_t") LibDivideS32BranchFree __result) {
         nlibdivide_s32_branchfree_gen_ref(denom, __result.address());
@@ -144,8 +139,10 @@ public class LibDivide {
 
     // --- [ libdivide_u32_branchfree_gen_ref ] ---
 
+    /** {@code struct libdivide_u32_branchfree_t libdivide_u32_branchfree_gen_ref(uint32_t denom)} */
     static native void nlibdivide_u32_branchfree_gen_ref(int denom, long __result);
 
+    /** {@code struct libdivide_u32_branchfree_t libdivide_u32_branchfree_gen_ref(uint32_t denom)} */
     @NativeType("struct libdivide_u32_branchfree_t")
     static LibDivideU32BranchFree libdivide_u32_branchfree_gen_ref(@NativeType("uint32_t") int denom, @NativeType("struct libdivide_u32_branchfree_t") LibDivideU32BranchFree __result) {
         nlibdivide_u32_branchfree_gen_ref(denom, __result.address());
@@ -154,8 +151,10 @@ public class LibDivide {
 
     // --- [ libdivide_s64_branchfree_gen_ref ] ---
 
+    /** {@code struct libdivide_s64_branchfree_t libdivide_s64_branchfree_gen_ref(int64_t denom)} */
     static native void nlibdivide_s64_branchfree_gen_ref(long denom, long __result);
 
+    /** {@code struct libdivide_s64_branchfree_t libdivide_s64_branchfree_gen_ref(int64_t denom)} */
     @NativeType("struct libdivide_s64_branchfree_t")
     static LibDivideS64BranchFree libdivide_s64_branchfree_gen_ref(@NativeType("int64_t") long denom, @NativeType("struct libdivide_s64_branchfree_t") LibDivideS64BranchFree __result) {
         nlibdivide_s64_branchfree_gen_ref(denom, __result.address());
@@ -164,8 +163,10 @@ public class LibDivide {
 
     // --- [ libdivide_u64_branchfree_gen_ref ] ---
 
+    /** {@code struct libdivide_u64_branchfree_t libdivide_u64_branchfree_gen_ref(uint64_t denom)} */
     static native void nlibdivide_u64_branchfree_gen_ref(long denom, long __result);
 
+    /** {@code struct libdivide_u64_branchfree_t libdivide_u64_branchfree_gen_ref(uint64_t denom)} */
     @NativeType("struct libdivide_u64_branchfree_t")
     static LibDivideU64BranchFree libdivide_u64_branchfree_gen_ref(@NativeType("uint64_t") long denom, @NativeType("struct libdivide_u64_branchfree_t") LibDivideU64BranchFree __result) {
         nlibdivide_u64_branchfree_gen_ref(denom, __result.address());
@@ -174,8 +175,10 @@ public class LibDivide {
 
     // --- [ libdivide_s16_do_ref ] ---
 
+    /** {@code int16_t libdivide_s16_do_ref(int16_t numer, struct libdivide_s16_t const * denom)} */
     static native short nlibdivide_s16_do_ref(short numer, long denom);
 
+    /** {@code int16_t libdivide_s16_do_ref(int16_t numer, struct libdivide_s16_t const * denom)} */
     @NativeType("int16_t")
     static short libdivide_s16_do_ref(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_t const *") LibDivideS16 denom) {
         return nlibdivide_s16_do_ref(numer, denom.address());
@@ -183,8 +186,10 @@ public class LibDivide {
 
     // --- [ libdivide_u16_do_ref ] ---
 
+    /** {@code uint16_t libdivide_u16_do_ref(uint16_t numer, struct libdivide_u16_t const * denom)} */
     static native short nlibdivide_u16_do_ref(short numer, long denom);
 
+    /** {@code uint16_t libdivide_u16_do_ref(uint16_t numer, struct libdivide_u16_t const * denom)} */
     @NativeType("uint16_t")
     static short libdivide_u16_do_ref(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_t const *") LibDivideU16 denom) {
         return nlibdivide_u16_do_ref(numer, denom.address());
@@ -192,8 +197,10 @@ public class LibDivide {
 
     // --- [ libdivide_s32_do_ref ] ---
 
+    /** {@code int32_t libdivide_s32_do_ref(int32_t numer, struct libdivide_s32_t const * denom)} */
     static native int nlibdivide_s32_do_ref(int numer, long denom);
 
+    /** {@code int32_t libdivide_s32_do_ref(int32_t numer, struct libdivide_s32_t const * denom)} */
     @NativeType("int32_t")
     static int libdivide_s32_do_ref(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
         return nlibdivide_s32_do_ref(numer, denom.address());
@@ -201,8 +208,10 @@ public class LibDivide {
 
     // --- [ libdivide_u32_do_ref ] ---
 
+    /** {@code uint32_t libdivide_u32_do_ref(uint32_t numer, struct libdivide_u32_t const * denom)} */
     static native int nlibdivide_u32_do_ref(int numer, long denom);
 
+    /** {@code uint32_t libdivide_u32_do_ref(uint32_t numer, struct libdivide_u32_t const * denom)} */
     @NativeType("uint32_t")
     static int libdivide_u32_do_ref(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) {
         return nlibdivide_u32_do_ref(numer, denom.address());
@@ -210,8 +219,10 @@ public class LibDivide {
 
     // --- [ libdivide_s64_do_ref ] ---
 
+    /** {@code int64_t libdivide_s64_do_ref(int64_t numer, struct libdivide_s64_t const * denom)} */
     static native long nlibdivide_s64_do_ref(long numer, long denom);
 
+    /** {@code int64_t libdivide_s64_do_ref(int64_t numer, struct libdivide_s64_t const * denom)} */
     @NativeType("int64_t")
     static long libdivide_s64_do_ref(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
         return nlibdivide_s64_do_ref(numer, denom.address());
@@ -219,8 +230,10 @@ public class LibDivide {
 
     // --- [ libdivide_u64_do_ref ] ---
 
+    /** {@code uint64_t libdivide_u64_do_ref(uint64_t numer, struct libdivide_u64_t const * denom)} */
     static native long nlibdivide_u64_do_ref(long numer, long denom);
 
+    /** {@code uint64_t libdivide_u64_do_ref(uint64_t numer, struct libdivide_u64_t const * denom)} */
     @NativeType("uint64_t")
     static long libdivide_u64_do_ref(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) {
         return nlibdivide_u64_do_ref(numer, denom.address());
@@ -228,8 +241,10 @@ public class LibDivide {
 
     // --- [ libdivide_s16_branchfree_do_ref ] ---
 
+    /** {@code int16_t libdivide_s16_branchfree_do_ref(int16_t numer, struct libdivide_s16_branchfree_t const * denom)} */
     static native short nlibdivide_s16_branchfree_do_ref(short numer, long denom);
 
+    /** {@code int16_t libdivide_s16_branchfree_do_ref(int16_t numer, struct libdivide_s16_branchfree_t const * denom)} */
     @NativeType("int16_t")
     static short libdivide_s16_branchfree_do_ref(@NativeType("int16_t") short numer, @NativeType("struct libdivide_s16_branchfree_t const *") LibDivideS16BranchFree denom) {
         return nlibdivide_s16_branchfree_do_ref(numer, denom.address());
@@ -237,8 +252,10 @@ public class LibDivide {
 
     // --- [ libdivide_u16_branchfree_do_ref ] ---
 
+    /** {@code uint16_t libdivide_u16_branchfree_do_ref(uint16_t numer, struct libdivide_u16_branchfree_t const * denom)} */
     static native short nlibdivide_u16_branchfree_do_ref(short numer, long denom);
 
+    /** {@code uint16_t libdivide_u16_branchfree_do_ref(uint16_t numer, struct libdivide_u16_branchfree_t const * denom)} */
     @NativeType("uint16_t")
     static short libdivide_u16_branchfree_do_ref(@NativeType("uint16_t") short numer, @NativeType("struct libdivide_u16_branchfree_t const *") LibDivideU16BranchFree denom) {
         return nlibdivide_u16_branchfree_do_ref(numer, denom.address());
@@ -246,8 +263,10 @@ public class LibDivide {
 
     // --- [ libdivide_s32_branchfree_do_ref ] ---
 
+    /** {@code int32_t libdivide_s32_branchfree_do_ref(int32_t numer, struct libdivide_s32_branchfree_t const * denom)} */
     static native int nlibdivide_s32_branchfree_do_ref(int numer, long denom);
 
+    /** {@code int32_t libdivide_s32_branchfree_do_ref(int32_t numer, struct libdivide_s32_branchfree_t const * denom)} */
     @NativeType("int32_t")
     static int libdivide_s32_branchfree_do_ref(@NativeType("int32_t") int numer, @NativeType("struct libdivide_s32_branchfree_t const *") LibDivideS32BranchFree denom) {
         return nlibdivide_s32_branchfree_do_ref(numer, denom.address());
@@ -255,8 +274,10 @@ public class LibDivide {
 
     // --- [ libdivide_u32_branchfree_do_ref ] ---
 
+    /** {@code uint32_t libdivide_u32_branchfree_do_ref(uint32_t numer, struct libdivide_u32_branchfree_t const * denom)} */
     static native int nlibdivide_u32_branchfree_do_ref(int numer, long denom);
 
+    /** {@code uint32_t libdivide_u32_branchfree_do_ref(uint32_t numer, struct libdivide_u32_branchfree_t const * denom)} */
     @NativeType("uint32_t")
     static int libdivide_u32_branchfree_do_ref(@NativeType("uint32_t") int numer, @NativeType("struct libdivide_u32_branchfree_t const *") LibDivideU32BranchFree denom) {
         return nlibdivide_u32_branchfree_do_ref(numer, denom.address());
@@ -264,8 +285,10 @@ public class LibDivide {
 
     // --- [ libdivide_s64_branchfree_do_ref ] ---
 
+    /** {@code int64_t libdivide_s64_branchfree_do_ref(int64_t numer, struct libdivide_s64_branchfree_t const * denom)} */
     static native long nlibdivide_s64_branchfree_do_ref(long numer, long denom);
 
+    /** {@code int64_t libdivide_s64_branchfree_do_ref(int64_t numer, struct libdivide_s64_branchfree_t const * denom)} */
     @NativeType("int64_t")
     static long libdivide_s64_branchfree_do_ref(@NativeType("int64_t") long numer, @NativeType("struct libdivide_s64_branchfree_t const *") LibDivideS64BranchFree denom) {
         return nlibdivide_s64_branchfree_do_ref(numer, denom.address());
@@ -273,8 +296,10 @@ public class LibDivide {
 
     // --- [ libdivide_u64_branchfree_do_ref ] ---
 
+    /** {@code uint64_t libdivide_u64_branchfree_do_ref(uint64_t numer, struct libdivide_u64_branchfree_t const * denom)} */
     static native long nlibdivide_u64_branchfree_do_ref(long numer, long denom);
 
+    /** {@code uint64_t libdivide_u64_branchfree_do_ref(uint64_t numer, struct libdivide_u64_branchfree_t const * denom)} */
     @NativeType("uint64_t")
     static long libdivide_u64_branchfree_do_ref(@NativeType("uint64_t") long numer, @NativeType("struct libdivide_u64_branchfree_t const *") LibDivideU64BranchFree denom) {
         return nlibdivide_u64_branchfree_do_ref(numer, denom.address());
@@ -282,8 +307,10 @@ public class LibDivide {
 
     // --- [ libdivide_s16_recover ] ---
 
+    /** {@code int16_t libdivide_s16_recover(struct libdivide_s16_t const * denom)} */
     public static native short nlibdivide_s16_recover(long denom);
 
+    /** {@code int16_t libdivide_s16_recover(struct libdivide_s16_t const * denom)} */
     @NativeType("int16_t")
     public static short libdivide_s16_recover(@NativeType("struct libdivide_s16_t const *") LibDivideS16 denom) {
         return nlibdivide_s16_recover(denom.address());
@@ -291,8 +318,10 @@ public class LibDivide {
 
     // --- [ libdivide_u16_recover ] ---
 
+    /** {@code uint16_t libdivide_u16_recover(struct libdivide_u16_t const * denom)} */
     public static native short nlibdivide_u16_recover(long denom);
 
+    /** {@code uint16_t libdivide_u16_recover(struct libdivide_u16_t const * denom)} */
     @NativeType("uint16_t")
     public static short libdivide_u16_recover(@NativeType("struct libdivide_u16_t const *") LibDivideU16 denom) {
         return nlibdivide_u16_recover(denom.address());
@@ -300,8 +329,10 @@ public class LibDivide {
 
     // --- [ libdivide_s32_recover ] ---
 
+    /** {@code int32_t libdivide_s32_recover(struct libdivide_s32_t const * denom)} */
     public static native int nlibdivide_s32_recover(long denom);
 
+    /** {@code int32_t libdivide_s32_recover(struct libdivide_s32_t const * denom)} */
     @NativeType("int32_t")
     public static int libdivide_s32_recover(@NativeType("struct libdivide_s32_t const *") LibDivideS32 denom) {
         return nlibdivide_s32_recover(denom.address());
@@ -309,8 +340,10 @@ public class LibDivide {
 
     // --- [ libdivide_u32_recover ] ---
 
+    /** {@code uint32_t libdivide_u32_recover(struct libdivide_u32_t const * denom)} */
     public static native int nlibdivide_u32_recover(long denom);
 
+    /** {@code uint32_t libdivide_u32_recover(struct libdivide_u32_t const * denom)} */
     @NativeType("uint32_t")
     public static int libdivide_u32_recover(@NativeType("struct libdivide_u32_t const *") LibDivideU32 denom) {
         return nlibdivide_u32_recover(denom.address());
@@ -318,8 +351,10 @@ public class LibDivide {
 
     // --- [ libdivide_s64_recover ] ---
 
+    /** {@code int64_t libdivide_s64_recover(struct libdivide_s64_t const * denom)} */
     public static native long nlibdivide_s64_recover(long denom);
 
+    /** {@code int64_t libdivide_s64_recover(struct libdivide_s64_t const * denom)} */
     @NativeType("int64_t")
     public static long libdivide_s64_recover(@NativeType("struct libdivide_s64_t const *") LibDivideS64 denom) {
         return nlibdivide_s64_recover(denom.address());
@@ -327,8 +362,10 @@ public class LibDivide {
 
     // --- [ libdivide_u64_recover ] ---
 
+    /** {@code uint64_t libdivide_u64_recover(struct libdivide_u64_t const * denom)} */
     public static native long nlibdivide_u64_recover(long denom);
 
+    /** {@code uint64_t libdivide_u64_recover(struct libdivide_u64_t const * denom)} */
     @NativeType("uint64_t")
     public static long libdivide_u64_recover(@NativeType("struct libdivide_u64_t const *") LibDivideU64 denom) {
         return nlibdivide_u64_recover(denom.address());
@@ -336,8 +373,10 @@ public class LibDivide {
 
     // --- [ libdivide_s16_branchfree_recover ] ---
 
+    /** {@code int16_t libdivide_s16_branchfree_recover(struct libdivide_s16_branchfree_t const * denom)} */
     public static native short nlibdivide_s16_branchfree_recover(long denom);
 
+    /** {@code int16_t libdivide_s16_branchfree_recover(struct libdivide_s16_branchfree_t const * denom)} */
     @NativeType("int16_t")
     public static short libdivide_s16_branchfree_recover(@NativeType("struct libdivide_s16_branchfree_t const *") LibDivideS16BranchFree denom) {
         return nlibdivide_s16_branchfree_recover(denom.address());
@@ -345,8 +384,10 @@ public class LibDivide {
 
     // --- [ libdivide_u16_branchfree_recover ] ---
 
+    /** {@code uint16_t libdivide_u16_branchfree_recover(struct libdivide_u16_branchfree_t const * denom)} */
     public static native short nlibdivide_u16_branchfree_recover(long denom);
 
+    /** {@code uint16_t libdivide_u16_branchfree_recover(struct libdivide_u16_branchfree_t const * denom)} */
     @NativeType("uint16_t")
     public static short libdivide_u16_branchfree_recover(@NativeType("struct libdivide_u16_branchfree_t const *") LibDivideU16BranchFree denom) {
         return nlibdivide_u16_branchfree_recover(denom.address());
@@ -354,8 +395,10 @@ public class LibDivide {
 
     // --- [ libdivide_s32_branchfree_recover ] ---
 
+    /** {@code int32_t libdivide_s32_branchfree_recover(struct libdivide_s32_branchfree_t const * denom)} */
     public static native int nlibdivide_s32_branchfree_recover(long denom);
 
+    /** {@code int32_t libdivide_s32_branchfree_recover(struct libdivide_s32_branchfree_t const * denom)} */
     @NativeType("int32_t")
     public static int libdivide_s32_branchfree_recover(@NativeType("struct libdivide_s32_branchfree_t const *") LibDivideS32BranchFree denom) {
         return nlibdivide_s32_branchfree_recover(denom.address());
@@ -363,8 +406,10 @@ public class LibDivide {
 
     // --- [ libdivide_u32_branchfree_recover ] ---
 
+    /** {@code uint32_t libdivide_u32_branchfree_recover(struct libdivide_u32_branchfree_t const * denom)} */
     public static native int nlibdivide_u32_branchfree_recover(long denom);
 
+    /** {@code uint32_t libdivide_u32_branchfree_recover(struct libdivide_u32_branchfree_t const * denom)} */
     @NativeType("uint32_t")
     public static int libdivide_u32_branchfree_recover(@NativeType("struct libdivide_u32_branchfree_t const *") LibDivideU32BranchFree denom) {
         return nlibdivide_u32_branchfree_recover(denom.address());
@@ -372,8 +417,10 @@ public class LibDivide {
 
     // --- [ libdivide_s64_branchfree_recover ] ---
 
+    /** {@code int64_t libdivide_s64_branchfree_recover(struct libdivide_s64_branchfree_t const * denom)} */
     public static native long nlibdivide_s64_branchfree_recover(long denom);
 
+    /** {@code int64_t libdivide_s64_branchfree_recover(struct libdivide_s64_branchfree_t const * denom)} */
     @NativeType("int64_t")
     public static long libdivide_s64_branchfree_recover(@NativeType("struct libdivide_s64_branchfree_t const *") LibDivideS64BranchFree denom) {
         return nlibdivide_s64_branchfree_recover(denom.address());
@@ -381,8 +428,10 @@ public class LibDivide {
 
     // --- [ libdivide_u64_branchfree_recover ] ---
 
+    /** {@code uint64_t libdivide_u64_branchfree_recover(struct libdivide_u64_branchfree_t const * denom)} */
     public static native long nlibdivide_u64_branchfree_recover(long denom);
 
+    /** {@code uint64_t libdivide_u64_branchfree_recover(struct libdivide_u64_branchfree_t const * denom)} */
     @NativeType("uint64_t")
     public static long libdivide_u64_branchfree_recover(@NativeType("struct libdivide_u64_branchfree_t const *") LibDivideU64BranchFree denom) {
         return nlibdivide_u64_branchfree_recover(denom.address());

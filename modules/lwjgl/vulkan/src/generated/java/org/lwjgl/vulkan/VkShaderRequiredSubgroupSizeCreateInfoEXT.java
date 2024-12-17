@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkShaderRequiredSubgroupSizeCreateInfoEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t requiredSubgroupSize;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkShaderRequiredSubgroupSizeCreateInfoEXT extends VkPipelineShaderStageRequiredSubgroupSizeCreateInfo {
 

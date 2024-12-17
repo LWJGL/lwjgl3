@@ -16,27 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Configuration of foveation.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link HTCFoveation XR_HTC_foveation} extension <b>must</b> be enabled prior to using {@link XrFoveationConfigurationHTC}</li>
- * <li>{@code level} <b>must</b> be a valid {@code XrFoveationLevelHTC} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFoveationCustomModeInfoHTC}, {@link XrVector2f}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFoveationConfigurationHTC {
- *     XrFoveationLevelHTC {@link #level};
- *     float {@link #clearFovDegree};
- *     {@link XrVector2f XrVector2f} {@link #focalCenterOffset};
- * }</code></pre>
+ *     XrFoveationLevelHTC level;
+ *     float clearFovDegree;
+ *     {@link XrVector2f XrVector2f} focalCenterOffset;
+ * }}</pre>
  */
 public class XrFoveationConfigurationHTC extends Struct<XrFoveationConfigurationHTC> implements NativeResource {
 
@@ -89,21 +74,21 @@ public class XrFoveationConfigurationHTC extends Struct<XrFoveationConfiguration
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the pixel density drop level of periphery area specified by {@code XrFoveationLevelHTC} . */
+    /** @return the value of the {@code level} field. */
     @NativeType("XrFoveationLevelHTC")
     public int level() { return nlevel(address()); }
-    /** the value indicating the total horizontal and vertical field angle with the original pixel density level. {@code clearFovDegree} <b>must</b> be specified in degree, and <b>must</b> be in the range [0, 180]. */
+    /** @return the value of the {@code clearFovDegree} field. */
     public float clearFovDegree() { return nclearFovDegree(address()); }
-    /** the desired center offset of the field of view in NDC(normalized device coordinates) space. The x and y of {@code focalCenterOffset} <b>must</b> be in the range [-1, 1]. */
+    /** @return a {@link XrVector2f} view of the {@code focalCenterOffset} field. */
     public XrVector2f focalCenterOffset() { return nfocalCenterOffset(address()); }
 
-    /** Sets the specified value to the {@link #level} field. */
+    /** Sets the specified value to the {@code level} field. */
     public XrFoveationConfigurationHTC level(@NativeType("XrFoveationLevelHTC") int value) { nlevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #clearFovDegree} field. */
+    /** Sets the specified value to the {@code clearFovDegree} field. */
     public XrFoveationConfigurationHTC clearFovDegree(float value) { nclearFovDegree(address(), value); return this; }
-    /** Copies the specified {@link XrVector2f} to the {@link #focalCenterOffset} field. */
+    /** Copies the specified {@link XrVector2f} to the {@code focalCenterOffset} field. */
     public XrFoveationConfigurationHTC focalCenterOffset(XrVector2f value) { nfocalCenterOffset(address(), value); return this; }
-    /** Passes the {@link #focalCenterOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code focalCenterOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrFoveationConfigurationHTC focalCenterOffset(java.util.function.Consumer<XrVector2f> consumer) { consumer.accept(focalCenterOffset()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,21 +284,21 @@ public class XrFoveationConfigurationHTC extends Struct<XrFoveationConfiguration
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFoveationConfigurationHTC#level} field. */
+        /** @return the value of the {@code level} field. */
         @NativeType("XrFoveationLevelHTC")
         public int level() { return XrFoveationConfigurationHTC.nlevel(address()); }
-        /** @return the value of the {@link XrFoveationConfigurationHTC#clearFovDegree} field. */
+        /** @return the value of the {@code clearFovDegree} field. */
         public float clearFovDegree() { return XrFoveationConfigurationHTC.nclearFovDegree(address()); }
-        /** @return a {@link XrVector2f} view of the {@link XrFoveationConfigurationHTC#focalCenterOffset} field. */
+        /** @return a {@link XrVector2f} view of the {@code focalCenterOffset} field. */
         public XrVector2f focalCenterOffset() { return XrFoveationConfigurationHTC.nfocalCenterOffset(address()); }
 
-        /** Sets the specified value to the {@link XrFoveationConfigurationHTC#level} field. */
+        /** Sets the specified value to the {@code level} field. */
         public XrFoveationConfigurationHTC.Buffer level(@NativeType("XrFoveationLevelHTC") int value) { XrFoveationConfigurationHTC.nlevel(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFoveationConfigurationHTC#clearFovDegree} field. */
+        /** Sets the specified value to the {@code clearFovDegree} field. */
         public XrFoveationConfigurationHTC.Buffer clearFovDegree(float value) { XrFoveationConfigurationHTC.nclearFovDegree(address(), value); return this; }
-        /** Copies the specified {@link XrVector2f} to the {@link XrFoveationConfigurationHTC#focalCenterOffset} field. */
+        /** Copies the specified {@link XrVector2f} to the {@code focalCenterOffset} field. */
         public XrFoveationConfigurationHTC.Buffer focalCenterOffset(XrVector2f value) { XrFoveationConfigurationHTC.nfocalCenterOffset(address(), value); return this; }
-        /** Passes the {@link XrFoveationConfigurationHTC#focalCenterOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code focalCenterOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrFoveationConfigurationHTC.Buffer focalCenterOffset(java.util.function.Consumer<XrVector2f> consumer) { consumer.accept(focalCenterOffset()); return this; }
 
     }

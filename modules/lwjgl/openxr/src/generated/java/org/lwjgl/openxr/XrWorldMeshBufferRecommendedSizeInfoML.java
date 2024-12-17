@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Memory Allocation Info.
- * 
- * <h5>Description</h5>
- * 
- * <p>The value for {@code maxBlockCount} <b>should</b> be populated {@link XrWorldMeshStateRequestCompletionML}{@code ::meshBlockStateCountOutput}. As long as the {@code maxBlockCount} is equal or larger to this {@link XrWorldMeshStateRequestCompletionML}{@code ::meshBlockStateCountOutput}, a memory block <b>may</b> be re-used for new requests.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshBufferRecommendedSizeInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLWorldMeshDetection#xrGetWorldMeshBufferRecommendSizeML GetWorldMeshBufferRecommendSizeML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshBufferRecommendedSizeInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #maxBlockCount};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t maxBlockCount;
+ * }}</pre>
  */
 public class XrWorldMeshBufferRecommendedSizeInfoML extends Struct<XrWorldMeshBufferRecommendedSizeInfoML> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class XrWorldMeshBufferRecommendedSizeInfoML extends Struct<XrWorldMeshBu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} of the maximum number of blocks in the request. */
+    /** @return the value of the {@code maxBlockCount} field. */
     @NativeType("uint32_t")
     public int maxBlockCount() { return nmaxBlockCount(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshBufferRecommendedSizeInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML} value to the {@code type} field. */
     public XrWorldMeshBufferRecommendedSizeInfoML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshBufferRecommendedSizeInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxBlockCount} field. */
+    /** Sets the specified value to the {@code maxBlockCount} field. */
     public XrWorldMeshBufferRecommendedSizeInfoML maxBlockCount(@NativeType("uint32_t") int value) { nmaxBlockCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class XrWorldMeshBufferRecommendedSizeInfoML extends Struct<XrWorldMeshBu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshBufferRecommendedSizeInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshBufferRecommendedSizeInfoML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshBufferRecommendedSizeInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrWorldMeshBufferRecommendedSizeInfoML.nnext(address()); }
-        /** @return the value of the {@link XrWorldMeshBufferRecommendedSizeInfoML#maxBlockCount} field. */
+        /** @return the value of the {@code maxBlockCount} field. */
         @NativeType("uint32_t")
         public int maxBlockCount() { return XrWorldMeshBufferRecommendedSizeInfoML.nmaxBlockCount(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshBufferRecommendedSizeInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshBufferRecommendedSizeInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshBufferRecommendedSizeInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML} value to the {@link XrWorldMeshBufferRecommendedSizeInfoML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML} value to the {@code type} field. */
         public XrWorldMeshBufferRecommendedSizeInfoML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshBufferRecommendedSizeInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshBufferRecommendedSizeInfoML.Buffer next(@NativeType("void const *") long value) { XrWorldMeshBufferRecommendedSizeInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshBufferRecommendedSizeInfoML#maxBlockCount} field. */
+        /** Sets the specified value to the {@code maxBlockCount} field. */
         public XrWorldMeshBufferRecommendedSizeInfoML.Buffer maxBlockCount(@NativeType("uint32_t") int value) { XrWorldMeshBufferRecommendedSizeInfoML.nmaxBlockCount(address(), value); return this; }
 
     }

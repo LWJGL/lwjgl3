@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_CODEC_STATE *codec_state,
- *     unsigned int *position,
- *     FMOD_TIMEUNIT postype
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_CODEC_GETPOSITION_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_CODEC_GETPOSITION_CALLBACK")
 public interface FMOD_CODEC_GETPOSITION_CALLBACKI extends CallbackI {
@@ -45,6 +36,7 @@ public interface FMOD_CODEC_GETPOSITION_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_CODEC_GETPOSITION_CALLBACK) (struct FMOD_CODEC_STATE * codec_state, unsigned int * position, FMOD_TIMEUNIT postype)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_CODEC_STATE *") long codec_state, @NativeType("unsigned int *") long position, @NativeType("FMOD_TIMEUNIT") int postype);
 
 }

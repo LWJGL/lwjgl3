@@ -11,14 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_destroy_func_t} */
 public abstract class hb_destroy_func_t extends Callback implements hb_destroy_func_tI {
 
     /**

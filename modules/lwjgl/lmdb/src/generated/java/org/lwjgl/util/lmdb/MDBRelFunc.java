@@ -11,23 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * A callback function used to relocate a position-dependent data item in a fixed-address database.
- * 
- * <p>The {@code newptr} gives the item's desired address in the memory map, and {@code oldptr} gives its previous address. The item's actual data resides at
- * the address in {@code item}. This callback is expected to walk through the fields of the record in {@code item} and modify any values based at the
- * {@code oldptr} address to be relative to the {@code newptr} address.</p>
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     MDB_val *item,
- *     void *oldptr,
- *     void *newptr,
- *     void *relctx
- * )</code></pre>
- */
+/** Callback function: {@link #invoke MDB_rel_func *} */
 public abstract class MDBRelFunc extends Callback implements MDBRelFuncI {
 
     /**

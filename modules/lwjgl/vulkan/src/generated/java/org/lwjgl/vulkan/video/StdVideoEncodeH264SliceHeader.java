@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH264SliceHeader {
  *     {@link StdVideoEncodeH264SliceHeaderFlags StdVideoEncodeH264SliceHeaderFlags} flags;
  *     uint32_t first_mb_in_slice;
@@ -31,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     StdVideoH264CabacInitIdc cabac_init_idc;
  *     StdVideoH264DisableDeblockingFilterIdc disable_deblocking_filter_idc;
  *     {@link StdVideoEncodeH264WeightTable StdVideoEncodeH264WeightTable} const * pWeightTable;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH264SliceHeader extends Struct<StdVideoEncodeH264SliceHeader> implements NativeResource {
 

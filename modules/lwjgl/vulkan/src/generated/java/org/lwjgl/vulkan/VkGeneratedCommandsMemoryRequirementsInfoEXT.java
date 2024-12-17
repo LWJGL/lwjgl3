@@ -16,49 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters for the reservation of preprocess buffer space.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the action command token for the layout is not a COUNT-type multi-draw indirect token, {@code maxDrawCount} is ignored.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code maxSequencesCount} <b>must</b> be less or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectSequenceCount}</li>
- * <li>If {@code indirectCommandsLayout} was created with a token sequence that contained the {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT} token, {@code indirectExecutionSet} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code indirectCommandsLayout} was created with a token sequence that contained the {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT} token, the shader stages used to create the initial shader state of {@code indirectExecutionSet} <b>must</b> equal the {@link VkIndirectCommandsExecutionSetTokenEXT}{@code ::shaderStages} used to create {@code indirectCommandsLayout}</li>
- * <li>If {@code indirectCommandsLayout} was not created with a token sequence that contained the {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT} token, {@code indirectExecutionSet} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>When not ignored, <code>maxDrawCount × maxSequenceCount</code> <b>must</b> be less than <code>2^24</code></li>
- * <li>If {@code indirectExecutionSet} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, either a {@link VkGeneratedCommandsPipelineInfoEXT} or a {@link VkGeneratedCommandsShaderInfoEXT} <b>must</b> be included in the {@code pNext} chain</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkGeneratedCommandsPipelineInfoEXT} or {@link VkGeneratedCommandsShaderInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>If {@code indirectExecutionSet} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code indirectExecutionSet} <b>must</b> be a valid {@code VkIndirectExecutionSetEXT} handle</li>
- * <li>{@code indirectCommandsLayout} <b>must</b> be a valid {@code VkIndirectCommandsLayoutEXT} handle</li>
- * <li>Both of {@code indirectCommandsLayout}, and {@code indirectExecutionSet} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDeviceGeneratedCommands#vkGetGeneratedCommandsMemoryRequirementsEXT GetGeneratedCommandsMemoryRequirementsEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkGeneratedCommandsMemoryRequirementsInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkIndirectExecutionSetEXT {@link #indirectExecutionSet};
- *     VkIndirectCommandsLayoutEXT {@link #indirectCommandsLayout};
- *     uint32_t {@link #maxSequenceCount};
- *     uint32_t {@link #maxDrawCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkIndirectExecutionSetEXT indirectExecutionSet;
+ *     VkIndirectCommandsLayoutEXT indirectCommandsLayout;
+ *     uint32_t maxSequenceCount;
+ *     uint32_t maxDrawCount;
+ * }}</pre>
  */
 public class VkGeneratedCommandsMemoryRequirementsInfoEXT extends Struct<VkGeneratedCommandsMemoryRequirementsInfoEXT> implements NativeResource {
 
@@ -120,42 +86,42 @@ public class VkGeneratedCommandsMemoryRequirementsInfoEXT extends Struct<VkGener
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the indirect execution set to be used for binding shaders. */
+    /** @return the value of the {@code indirectExecutionSet} field. */
     @NativeType("VkIndirectExecutionSetEXT")
     public long indirectExecutionSet() { return nindirectExecutionSet(address()); }
-    /** the {@code VkIndirectCommandsLayoutEXT} that this buffer memory is intended to be used with. */
+    /** @return the value of the {@code indirectCommandsLayout} field. */
     @NativeType("VkIndirectCommandsLayoutEXT")
     public long indirectCommandsLayout() { return nindirectCommandsLayout(address()); }
-    /** the maximum number of sequences that this buffer memory can be used with. */
+    /** @return the value of the {@code maxSequenceCount} field. */
     @NativeType("uint32_t")
     public int maxSequenceCount() { return nmaxSequenceCount(address()); }
-    /** the maximum number of indirect draws that can be executed by any COUNT-type multi-draw indirect tokens. The draw count in the indirect buffer is clamped to this value for these token types. */
+    /** @return the value of the {@code maxDrawCount} field. */
     @NativeType("uint32_t")
     public int maxDrawCount() { return nmaxDrawCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT} value to the {@code sType} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkGeneratedCommandsPipelineInfoEXT} value to the {@code pNext} chain. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT pNext(VkGeneratedCommandsPipelineInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkGeneratedCommandsShaderInfoEXT} value to the {@code pNext} chain. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT pNext(VkGeneratedCommandsShaderInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #indirectExecutionSet} field. */
+    /** Sets the specified value to the {@code indirectExecutionSet} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT indirectExecutionSet(@NativeType("VkIndirectExecutionSetEXT") long value) { nindirectExecutionSet(address(), value); return this; }
-    /** Sets the specified value to the {@link #indirectCommandsLayout} field. */
+    /** Sets the specified value to the {@code indirectCommandsLayout} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT indirectCommandsLayout(@NativeType("VkIndirectCommandsLayoutEXT") long value) { nindirectCommandsLayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxSequenceCount} field. */
+    /** Sets the specified value to the {@code maxSequenceCount} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT maxSequenceCount(@NativeType("uint32_t") int value) { nmaxSequenceCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxDrawCount} field. */
+    /** Sets the specified value to the {@code maxDrawCount} field. */
     public VkGeneratedCommandsMemoryRequirementsInfoEXT maxDrawCount(@NativeType("uint32_t") int value) { nmaxDrawCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -369,42 +335,42 @@ public class VkGeneratedCommandsMemoryRequirementsInfoEXT extends Struct<VkGener
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGeneratedCommandsMemoryRequirementsInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGeneratedCommandsMemoryRequirementsInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#indirectExecutionSet} field. */
+        /** @return the value of the {@code indirectExecutionSet} field. */
         @NativeType("VkIndirectExecutionSetEXT")
         public long indirectExecutionSet() { return VkGeneratedCommandsMemoryRequirementsInfoEXT.nindirectExecutionSet(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#indirectCommandsLayout} field. */
+        /** @return the value of the {@code indirectCommandsLayout} field. */
         @NativeType("VkIndirectCommandsLayoutEXT")
         public long indirectCommandsLayout() { return VkGeneratedCommandsMemoryRequirementsInfoEXT.nindirectCommandsLayout(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#maxSequenceCount} field. */
+        /** @return the value of the {@code maxSequenceCount} field. */
         @NativeType("uint32_t")
         public int maxSequenceCount() { return VkGeneratedCommandsMemoryRequirementsInfoEXT.nmaxSequenceCount(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#maxDrawCount} field. */
+        /** @return the value of the {@code maxDrawCount} field. */
         @NativeType("uint32_t")
         public int maxDrawCount() { return VkGeneratedCommandsMemoryRequirementsInfoEXT.nmaxDrawCount(address()); }
 
-        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkGeneratedCommandsMemoryRequirementsInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT} value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT} value to the {@code sType} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT); }
-        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkGeneratedCommandsMemoryRequirementsInfoEXT.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkGeneratedCommandsPipelineInfoEXT} value to the {@code pNext} chain. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer pNext(VkGeneratedCommandsPipelineInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkGeneratedCommandsShaderInfoEXT} value to the {@code pNext} chain. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer pNext(VkGeneratedCommandsShaderInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#indirectExecutionSet} field. */
+        /** Sets the specified value to the {@code indirectExecutionSet} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer indirectExecutionSet(@NativeType("VkIndirectExecutionSetEXT") long value) { VkGeneratedCommandsMemoryRequirementsInfoEXT.nindirectExecutionSet(address(), value); return this; }
-        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#indirectCommandsLayout} field. */
+        /** Sets the specified value to the {@code indirectCommandsLayout} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer indirectCommandsLayout(@NativeType("VkIndirectCommandsLayoutEXT") long value) { VkGeneratedCommandsMemoryRequirementsInfoEXT.nindirectCommandsLayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#maxSequenceCount} field. */
+        /** Sets the specified value to the {@code maxSequenceCount} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer maxSequenceCount(@NativeType("uint32_t") int value) { VkGeneratedCommandsMemoryRequirementsInfoEXT.nmaxSequenceCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkGeneratedCommandsMemoryRequirementsInfoEXT#maxDrawCount} field. */
+        /** Sets the specified value to the {@code maxDrawCount} field. */
         public VkGeneratedCommandsMemoryRequirementsInfoEXT.Buffer maxDrawCount(@NativeType("uint32_t") int value) { VkGeneratedCommandsMemoryRequirementsInfoEXT.nmaxDrawCount(address(), value); return this; }
 
     }

@@ -14,13 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union hwloc_location_u {
  *     hwloc_cpuset_t cpuset;
  *     hwloc_obj_t object;
- * }</code></pre>
+ * }}</pre>
  */
 public class hwloc_location_u extends Struct<hwloc_location_u> {
 

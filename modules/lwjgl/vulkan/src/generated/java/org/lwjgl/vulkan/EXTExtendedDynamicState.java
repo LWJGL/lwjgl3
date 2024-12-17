@@ -15,87 +15,14 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * This extension adds some more dynamic state to support applications that need to reduce the number of pipeline state objects they compile and bind.
- * 
- * <h5>Promotion to Vulkan 1.3</h5>
- * 
- * <p>All dynamic state enumerants and commands in this extension are included in core Vulkan 1.3, with the EXT suffix omitted. The feature structure is not promoted. Extension interfaces that were promoted remain available as aliases of the core functionality.</p>
- * 
- * <dl>
- * <dt><b>Name String</b></dt>
- * <dd>{@code VK_EXT_extended_dynamic_state}</dd>
- * <dt><b>Extension Type</b></dt>
- * <dd>Device extension</dd>
- * <dt><b>Registered Extension Number</b></dt>
- * <dd>268</dd>
- * <dt><b>Revision</b></dt>
- * <dd>1</dd>
- * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRGetPhysicalDeviceProperties2 VK_KHR_get_physical_device_properties2} or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.1">Version 1.1</a></dd>
- * <dt><b>Deprecation State</b></dt>
- * <dd><ul>
- * <li><em>Promoted</em> to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#versions-1.3-promotions">Vulkan 1.3</a></li>
- * </ul></dd>
- * <dt><b>Contact</b></dt>
- * <dd><ul>
- * <li>Piers Daniell <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_extended_dynamic_state]%20@pdaniell-nv%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_extended_dynamic_state%20extension*">pdaniell-nv</a></li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Other Extension Metadata</h5>
- * 
- * <dl>
- * <dt><b>Last Modified Date</b></dt>
- * <dd>2019-12-09</dd>
- * <dt><b>IP Status</b></dt>
- * <dd>No known IP claims.</dd>
- * <dt><b>Contributors</b></dt>
- * <dd><ul>
- * <li>Dan Ginsburg, Valve Corporation</li>
- * <li>Graeme Leese, Broadcom</li>
- * <li>Hans-Kristian Arntzen, Valve Corporation</li>
- * <li>Jan-Harald Fredriksen, Arm Limited</li>
- * <li>Faith Ekstrand, Intel</li>
- * <li>Jeff Bolz, NVIDIA</li>
- * <li>Jesse Hall, Google</li>
- * <li>Philip Rebohle, Valve Corporation</li>
- * <li>Stuart Smith, Imagination Technologies</li>
- * <li>Tobias Hector, AMD</li>
- * </ul></dd>
- * </dl>
- */
 public class EXTExtendedDynamicState {
 
-    /** The extension specification version. */
     public static final int VK_EXT_EXTENDED_DYNAMIC_STATE_SPEC_VERSION = 1;
 
-    /** The extension name. */
     public static final String VK_EXT_EXTENDED_DYNAMIC_STATE_EXTENSION_NAME = "VK_EXT_extended_dynamic_state";
 
-    /** Extends {@code VkStructureType}. */
     public static final int VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT = 1000267000;
 
-    /**
-     * Extends {@code VkDynamicState}.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #VK_DYNAMIC_STATE_CULL_MODE_EXT DYNAMIC_STATE_CULL_MODE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_FRONT_FACE_EXT DYNAMIC_STATE_FRONT_FACE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT DYNAMIC_STATE_PRIMITIVE_TOPOLOGY_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT DYNAMIC_STATE_VIEWPORT_WITH_COUNT_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT DYNAMIC_STATE_SCISSOR_WITH_COUNT_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT DYNAMIC_STATE_VERTEX_INPUT_BINDING_STRIDE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT DYNAMIC_STATE_DEPTH_TEST_ENABLE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT DYNAMIC_STATE_DEPTH_WRITE_ENABLE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT}</li>
-     * <li>{@link #VK_DYNAMIC_STATE_STENCIL_OP_EXT DYNAMIC_STATE_STENCIL_OP_EXT}</li>
-     * </ul>
-     */
     public static final int
         VK_DYNAMIC_STATE_CULL_MODE_EXT                   = 1000267000,
         VK_DYNAMIC_STATE_FRONT_FACE_EXT                  = 1000267001,
@@ -116,12 +43,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetCullModeEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetCullMode CmdSetCullMode}.
-     *
-     * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param cullMode      specifies the cull mode property to use for drawing.
-     */
+    /** {@code void vkCmdSetCullModeEXT(VkCommandBuffer commandBuffer, VkCullModeFlags cullMode)} */
     public static void vkCmdSetCullModeEXT(VkCommandBuffer commandBuffer, @NativeType("VkCullModeFlags") int cullMode) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetCullModeEXT;
         if (CHECKS) {
@@ -132,12 +54,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetFrontFaceEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetFrontFace CmdSetFrontFace}.
-     *
-     * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param frontFace     a {@code VkFrontFace} value specifying the front-facing triangle orientation to be used for culling.
-     */
+    /** {@code void vkCmdSetFrontFaceEXT(VkCommandBuffer commandBuffer, VkFrontFace frontFace)} */
     public static void vkCmdSetFrontFaceEXT(VkCommandBuffer commandBuffer, @NativeType("VkFrontFace") int frontFace) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetFrontFaceEXT;
         if (CHECKS) {
@@ -148,12 +65,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetPrimitiveTopologyEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetPrimitiveTopology CmdSetPrimitiveTopology}.
-     *
-     * @param commandBuffer     the command buffer into which the command will be recorded.
-     * @param primitiveTopology specifies the primitive topology to use for drawing.
-     */
+    /** {@code void vkCmdSetPrimitiveTopologyEXT(VkCommandBuffer commandBuffer, VkPrimitiveTopology primitiveTopology)} */
     public static void vkCmdSetPrimitiveTopologyEXT(VkCommandBuffer commandBuffer, @NativeType("VkPrimitiveTopology") int primitiveTopology) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetPrimitiveTopologyEXT;
         if (CHECKS) {
@@ -164,11 +76,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetViewportWithCountEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #vkCmdSetViewportWithCountEXT CmdSetViewportWithCountEXT}
-     *
-     * @param viewportCount specifies the viewport count.
-     */
+    /** {@code void vkCmdSetViewportWithCountEXT(VkCommandBuffer commandBuffer, uint32_t viewportCount, VkViewport const * pViewports)} */
     public static void nvkCmdSetViewportWithCountEXT(VkCommandBuffer commandBuffer, int viewportCount, long pViewports) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetViewportWithCountEXT;
         if (CHECKS) {
@@ -177,23 +85,14 @@ public class EXTExtendedDynamicState {
         callPPV(commandBuffer.address(), viewportCount, pViewports, __functionAddress);
     }
 
-    /**
-     * See {@link VK13#vkCmdSetViewportWithCount CmdSetViewportWithCount}.
-     *
-     * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param pViewports    specifies the viewports to use for drawing.
-     */
+    /** {@code void vkCmdSetViewportWithCountEXT(VkCommandBuffer commandBuffer, uint32_t viewportCount, VkViewport const * pViewports)} */
     public static void vkCmdSetViewportWithCountEXT(VkCommandBuffer commandBuffer, @NativeType("VkViewport const *") VkViewport.Buffer pViewports) {
         nvkCmdSetViewportWithCountEXT(commandBuffer, pViewports.remaining(), pViewports.address());
     }
 
     // --- [ vkCmdSetScissorWithCountEXT ] ---
 
-    /**
-     * Unsafe version of: {@link #vkCmdSetScissorWithCountEXT CmdSetScissorWithCountEXT}
-     *
-     * @param scissorCount specifies the scissor count.
-     */
+    /** {@code void vkCmdSetScissorWithCountEXT(VkCommandBuffer commandBuffer, uint32_t scissorCount, VkRect2D const * pScissors)} */
     public static void nvkCmdSetScissorWithCountEXT(VkCommandBuffer commandBuffer, int scissorCount, long pScissors) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetScissorWithCountEXT;
         if (CHECKS) {
@@ -202,23 +101,14 @@ public class EXTExtendedDynamicState {
         callPPV(commandBuffer.address(), scissorCount, pScissors, __functionAddress);
     }
 
-    /**
-     * See {@link VK13#vkCmdSetScissorWithCount CmdSetScissorWithCount}.
-     *
-     * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param pScissors     specifies the scissors to use for drawing.
-     */
+    /** {@code void vkCmdSetScissorWithCountEXT(VkCommandBuffer commandBuffer, uint32_t scissorCount, VkRect2D const * pScissors)} */
     public static void vkCmdSetScissorWithCountEXT(VkCommandBuffer commandBuffer, @NativeType("VkRect2D const *") VkRect2D.Buffer pScissors) {
         nvkCmdSetScissorWithCountEXT(commandBuffer, pScissors.remaining(), pScissors.address());
     }
 
     // --- [ vkCmdBindVertexBuffers2EXT ] ---
 
-    /**
-     * Unsafe version of: {@link #vkCmdBindVertexBuffers2EXT CmdBindVertexBuffers2EXT}
-     *
-     * @param bindingCount the number of vertex input bindings whose state is updated by the command.
-     */
+    /** {@code void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, VkBuffer const * pBuffers, VkDeviceSize const * pOffsets, VkDeviceSize const * pSizes, VkDeviceSize const * pStrides)} */
     public static void nvkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, int firstBinding, int bindingCount, long pBuffers, long pOffsets, long pSizes, long pStrides) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBindVertexBuffers2EXT;
         if (CHECKS) {
@@ -227,16 +117,7 @@ public class EXTExtendedDynamicState {
         callPPPPPV(commandBuffer.address(), firstBinding, bindingCount, pBuffers, pOffsets, pSizes, pStrides, __functionAddress);
     }
 
-    /**
-     * See {@link VK13#vkCmdBindVertexBuffers2 CmdBindVertexBuffers2}.
-     *
-     * @param commandBuffer the command buffer into which the command is recorded.
-     * @param firstBinding  the index of the first vertex input binding whose state is updated by the command.
-     * @param pBuffers      a pointer to an array of buffer handles.
-     * @param pOffsets      a pointer to an array of buffer offsets.
-     * @param pSizes        {@code NULL} or a pointer to an array of the size in bytes of vertex data bound from {@code pBuffers}.
-     * @param pStrides      {@code NULL} or a pointer to an array of buffer strides.
-     */
+    /** {@code void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, VkBuffer const * pBuffers, VkDeviceSize const * pOffsets, VkDeviceSize const * pSizes, VkDeviceSize const * pStrides)} */
     public static void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") LongBuffer pBuffers, @NativeType("VkDeviceSize const *") LongBuffer pOffsets, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pSizes, @NativeType("VkDeviceSize const *") @Nullable LongBuffer pStrides) {
         if (CHECKS) {
             check(pOffsets, pBuffers.remaining());
@@ -248,12 +129,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetDepthTestEnableEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetDepthTestEnable CmdSetDepthTestEnable}.
-     *
-     * @param commandBuffer   the command buffer into which the command will be recorded.
-     * @param depthTestEnable specifies if the depth test is enabled.
-     */
+    /** {@code void vkCmdSetDepthTestEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthTestEnable)} */
     public static void vkCmdSetDepthTestEnableEXT(VkCommandBuffer commandBuffer, @NativeType("VkBool32") boolean depthTestEnable) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDepthTestEnableEXT;
         if (CHECKS) {
@@ -264,12 +140,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetDepthWriteEnableEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetDepthWriteEnable CmdSetDepthWriteEnable}.
-     *
-     * @param commandBuffer    the command buffer into which the command will be recorded.
-     * @param depthWriteEnable specifies if depth writes are enabled.
-     */
+    /** {@code void vkCmdSetDepthWriteEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthWriteEnable)} */
     public static void vkCmdSetDepthWriteEnableEXT(VkCommandBuffer commandBuffer, @NativeType("VkBool32") boolean depthWriteEnable) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDepthWriteEnableEXT;
         if (CHECKS) {
@@ -280,12 +151,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetDepthCompareOpEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetDepthCompareOp CmdSetDepthCompareOp}.
-     *
-     * @param commandBuffer  the command buffer into which the command will be recorded.
-     * @param depthCompareOp a {@code VkCompareOp} value specifying the comparison operator used for the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-depth-comparison">Depth Comparison</a> step of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-depth">depth test</a>.
-     */
+    /** {@code void vkCmdSetDepthCompareOpEXT(VkCommandBuffer commandBuffer, VkCompareOp depthCompareOp)} */
     public static void vkCmdSetDepthCompareOpEXT(VkCommandBuffer commandBuffer, @NativeType("VkCompareOp") int depthCompareOp) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDepthCompareOpEXT;
         if (CHECKS) {
@@ -296,12 +162,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetDepthBoundsTestEnableEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetDepthBoundsTestEnable CmdSetDepthBoundsTestEnable}.
-     *
-     * @param commandBuffer         the command buffer into which the command will be recorded.
-     * @param depthBoundsTestEnable specifies if the depth bounds test is enabled.
-     */
+    /** {@code void vkCmdSetDepthBoundsTestEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthBoundsTestEnable)} */
     public static void vkCmdSetDepthBoundsTestEnableEXT(VkCommandBuffer commandBuffer, @NativeType("VkBool32") boolean depthBoundsTestEnable) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetDepthBoundsTestEnableEXT;
         if (CHECKS) {
@@ -312,12 +173,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetStencilTestEnableEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetStencilTestEnable CmdSetStencilTestEnable}.
-     *
-     * @param commandBuffer     the command buffer into which the command will be recorded.
-     * @param stencilTestEnable specifies if the stencil test is enabled.
-     */
+    /** {@code void vkCmdSetStencilTestEnableEXT(VkCommandBuffer commandBuffer, VkBool32 stencilTestEnable)} */
     public static void vkCmdSetStencilTestEnableEXT(VkCommandBuffer commandBuffer, @NativeType("VkBool32") boolean stencilTestEnable) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetStencilTestEnableEXT;
         if (CHECKS) {
@@ -328,16 +184,7 @@ public class EXTExtendedDynamicState {
 
     // --- [ vkCmdSetStencilOpEXT ] ---
 
-    /**
-     * See {@link VK13#vkCmdSetStencilOp CmdSetStencilOp}.
-     *
-     * @param commandBuffer the command buffer into which the command will be recorded.
-     * @param faceMask      a bitmask of {@code VkStencilFaceFlagBits} specifying the set of stencil state for which to update the stencil operation.
-     * @param failOp        a {@code VkStencilOp} value specifying the action performed on samples that fail the stencil test.
-     * @param passOp        a {@code VkStencilOp} value specifying the action performed on samples that pass both the depth and stencil tests.
-     * @param depthFailOp   a {@code VkStencilOp} value specifying the action performed on samples that pass the stencil test and fail the depth test.
-     * @param compareOp     a {@code VkCompareOp} value specifying the comparison operator used in the stencil test.
-     */
+    /** {@code void vkCmdSetStencilOpEXT(VkCommandBuffer commandBuffer, VkStencilFaceFlags faceMask, VkStencilOp failOp, VkStencilOp passOp, VkStencilOp depthFailOp, VkCompareOp compareOp)} */
     public static void vkCmdSetStencilOpEXT(VkCommandBuffer commandBuffer, @NativeType("VkStencilFaceFlags") int faceMask, @NativeType("VkStencilOp") int failOp, @NativeType("VkStencilOp") int passOp, @NativeType("VkStencilOp") int depthFailOp, @NativeType("VkCompareOp") int compareOp) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdSetStencilOpEXT;
         if (CHECKS) {
@@ -346,7 +193,7 @@ public class EXTExtendedDynamicState {
         callPV(commandBuffer.address(), faceMask, failOp, passOp, depthFailOp, compareOp, __functionAddress);
     }
 
-    /** Array version of: {@link #vkCmdBindVertexBuffers2EXT CmdBindVertexBuffers2EXT} */
+    /** {@code void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, VkBuffer const * pBuffers, VkDeviceSize const * pOffsets, VkDeviceSize const * pSizes, VkDeviceSize const * pStrides)} */
     public static void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, @NativeType("uint32_t") int firstBinding, @NativeType("VkBuffer const *") long[] pBuffers, @NativeType("VkDeviceSize const *") long[] pOffsets, @NativeType("VkDeviceSize const *") long @Nullable [] pSizes, @NativeType("VkDeviceSize const *") long @Nullable [] pStrides) {
         long __functionAddress = commandBuffer.getCapabilities().vkCmdBindVertexBuffers2EXT;
         if (CHECKS) {

@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct InputBindingInfo_t {
  *     char rchDevicePathName[128];
  *     char rchInputPathName[128];
  *     char rchModeName[128];
  *     char rchSlotName[128];
  *     char rchInputSourceType[32];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct InputBindingInfo_t")
 public class InputBindingInfo extends Struct<InputBindingInfo> implements NativeResource {

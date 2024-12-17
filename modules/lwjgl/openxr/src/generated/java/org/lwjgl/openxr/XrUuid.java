@@ -19,22 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.XR10.*;
 
 /**
- * Universally Unique Identifier.
- * 
- * <h5>Description</h5>
- * 
- * <p>The structure is composed of 16 octets, with the size and order of the fields defined in <a href="https://www.rfc-editor.org/rfc/rfc4122.html#section-4.1.2">RFC 4122 section 4.1.2</a>.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEventDataColocationDiscoveryResultMETA}, {@link XrEventDataStartColocationAdvertisementCompleteMETA}, {@link XrShareSpacesRecipientGroupsMETA}, {@link XrSpaceGroupUuidFilterInfoMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrUuid {
- *     uint8_t {@link #data}[XR_UUID_SIZE];
- * }</code></pre>
+ *     uint8_t data[XR_UUID_SIZE];
+ * }}</pre>
  */
 public class XrUuid extends Struct<XrUuid> implements NativeResource {
 
@@ -81,16 +69,16 @@ public class XrUuid extends Struct<XrUuid> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a 128-bit Universally Unique Identifier. */
+    /** @return a {@link ByteBuffer} view of the {@code data} field. */
     @NativeType("uint8_t[XR_UUID_SIZE]")
     public ByteBuffer data() { return ndata(address()); }
-    /** a 128-bit Universally Unique Identifier. */
+    /** @return the value at the specified index of the {@code data} field. */
     @NativeType("uint8_t")
     public byte data(int index) { return ndata(address(), index); }
 
-    /** Copies the specified {@link ByteBuffer} to the {@link #data} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code data} field. */
     public XrUuid data(@NativeType("uint8_t[XR_UUID_SIZE]") ByteBuffer value) { ndata(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #data} field. */
+    /** Sets the specified value at the specified index of the {@code data} field. */
     public XrUuid data(int index, @NativeType("uint8_t") byte value) { ndata(address(), index, value); return this; }
 
     /**
@@ -276,16 +264,16 @@ public class XrUuid extends Struct<XrUuid> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link XrUuid#data} field. */
+        /** @return a {@link ByteBuffer} view of the {@code data} field. */
         @NativeType("uint8_t[XR_UUID_SIZE]")
         public ByteBuffer data() { return XrUuid.ndata(address()); }
-        /** @return the value at the specified index of the {@link XrUuid#data} field. */
+        /** @return the value at the specified index of the {@code data} field. */
         @NativeType("uint8_t")
         public byte data(int index) { return XrUuid.ndata(address(), index); }
 
-        /** Copies the specified {@link ByteBuffer} to the {@link XrUuid#data} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code data} field. */
         public XrUuid.Buffer data(@NativeType("uint8_t[XR_UUID_SIZE]") ByteBuffer value) { XrUuid.ndata(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link XrUuid#data} field. */
+        /** Sets the specified value at the specified index of the {@code data} field. */
         public XrUuid.Buffer data(int index, @NativeType("uint8_t") byte value) { XrUuid.ndata(address(), index, value); return this; }
 
     }

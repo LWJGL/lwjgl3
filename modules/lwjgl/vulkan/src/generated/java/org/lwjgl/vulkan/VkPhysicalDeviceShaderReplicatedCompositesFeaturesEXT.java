@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether support for replicated composites in SPIR-V is enabled.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTShaderReplicatedComposites#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderReplicatedComposites};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderReplicatedComposites;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT extends Struct<VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT extends Struc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether shader modules <b>can</b> declare the {@code ReplicatedCompositesEXT} capability. */
+    /** @return the value of the {@code shaderReplicatedComposites} field. */
     @NativeType("VkBool32")
     public boolean shaderReplicatedComposites() { return nshaderReplicatedComposites(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTShaderReplicatedComposites#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTShaderReplicatedComposites#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT sType$Default() { return sType(EXTShaderReplicatedComposites.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderReplicatedComposites} field. */
+    /** Sets the specified value to the {@code shaderReplicatedComposites} field. */
     public VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT shaderReplicatedComposites(@NativeType("VkBool32") boolean value) { nshaderReplicatedComposites(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT#shaderReplicatedComposites} field. */
+        /** @return the value of the {@code shaderReplicatedComposites} field. */
         @NativeType("VkBool32")
         public boolean shaderReplicatedComposites() { return VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.nshaderReplicatedComposites(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTShaderReplicatedComposites#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT} value to the {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTShaderReplicatedComposites#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.Buffer sType$Default() { return sType(EXTShaderReplicatedComposites.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT#shaderReplicatedComposites} field. */
+        /** Sets the specified value to the {@code shaderReplicatedComposites} field. */
         public VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.Buffer shaderReplicatedComposites(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT.nshaderReplicatedComposites(address(), value ? 1 : 0); return this; }
 
     }

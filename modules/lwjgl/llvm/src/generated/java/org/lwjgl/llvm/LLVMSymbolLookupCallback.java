@@ -11,20 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMDisassembler#LLVMCreateDisasm CreateDisasm}, {@link LLVMDisassembler#LLVMCreateDisasmCPU CreateDisasmCPU} and {@link LLVMDisassembler#LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} methods.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * char const * (*{@link #invoke}) (
- *     void *DisInfo,
- *     uint64_t ReferenceValue,
- *     uint64_t *ReferenceType,
- *     uint64_t ReferencePC,
- *     char const **ReferenceName
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class LLVMSymbolLookupCallback extends Callback implements LLVMSymbolLookupCallbackI {
 
     /**

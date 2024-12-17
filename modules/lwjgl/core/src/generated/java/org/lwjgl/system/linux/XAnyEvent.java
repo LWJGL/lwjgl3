@@ -17,18 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Generic X event.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XAnyEvent {
- *     int {@link #type};
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
- *     Window {@link #window};
- * }</code></pre>
+ *     int type;
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
+ *     Window window;
+ * }}</pre>
  */
 public class XAnyEvent extends Struct<XAnyEvent> implements NativeResource {
 
@@ -87,30 +83,30 @@ public class XAnyEvent extends Struct<XAnyEvent> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the event type constant name that uniquely identifies it */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** window it reported relative to */
+    /** @return the value of the {@code window} field. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XAnyEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XAnyEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XAnyEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XAnyEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #window} field. */
+    /** Sets the specified value to the {@code window} field. */
     public XAnyEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,30 +342,30 @@ public class XAnyEvent extends Struct<XAnyEvent> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XAnyEvent#type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XAnyEvent.ntype(address()); }
-        /** @return the value of the {@link XAnyEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XAnyEvent.nserial(address()); }
-        /** @return the value of the {@link XAnyEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XAnyEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XAnyEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XAnyEvent.ndisplay(address()); }
-        /** @return the value of the {@link XAnyEvent#window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("Window")
         public long window() { return XAnyEvent.nwindow(address()); }
 
-        /** Sets the specified value to the {@link XAnyEvent#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XAnyEvent.Buffer type(int value) { XAnyEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XAnyEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XAnyEvent.Buffer serial(@NativeType("unsigned long") long value) { XAnyEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XAnyEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XAnyEvent.Buffer send_event(@NativeType("Bool") boolean value) { XAnyEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XAnyEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XAnyEvent.Buffer display(@NativeType("Display *") long value) { XAnyEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XAnyEvent#window} field. */
+        /** Sets the specified value to the {@code window} field. */
         public XAnyEvent.Buffer window(@NativeType("Window") long value) { XAnyEvent.nwindow(address(), value); return this; }
 
     }

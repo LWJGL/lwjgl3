@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceMaintenance5Properties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMaintenance5PropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 polygonModePointSize;
  *     VkBool32 nonStrictSinglePixelWideLinesUseParallelogram;
  *     VkBool32 nonStrictWideLinesUseParallelogram;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceMaintenance5PropertiesKHR extends VkPhysicalDeviceMaintenance5Properties {
 

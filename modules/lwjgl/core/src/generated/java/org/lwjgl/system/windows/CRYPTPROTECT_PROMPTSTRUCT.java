@@ -17,18 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Provides the text of a prompt and information about when and where that prompt is to be displayed when using the {@link Crypt32#CryptProtectData} and
- * {@link Crypt32#CryptUnprotectData} functions.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CRYPTPROTECT_PROMPTSTRUCT {
- *     DWORD {@link #cbSize};
- *     DWORD {@link #dwPromptFlags};
- *     HWND {@link #hwndApp};
- *     LPCWSTR {@link #szPrompt};
- * }</code></pre>
+ *     DWORD cbSize;
+ *     DWORD dwPromptFlags;
+ *     HWND hwndApp;
+ *     LPCWSTR szPrompt;
+ * }}</pre>
  */
 public class CRYPTPROTECT_PROMPTSTRUCT extends Struct<CRYPTPROTECT_PROMPTSTRUCT> implements NativeResource {
 
@@ -84,31 +79,31 @@ public class CRYPTPROTECT_PROMPTSTRUCT extends Struct<CRYPTPROTECT_PROMPTSTRUCT>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the size, in bytes, of this structure */
+    /** @return the value of the {@code cbSize} field. */
     @NativeType("DWORD")
     public int cbSize() { return ncbSize(address()); }
-    /** flags that indicate when prompts to the user are to be displayed. One or more of:<br><table><tr><td>{@link Crypt32#CRYPTPROTECT_PROMPT_ON_UNPROTECT}</td><td>{@link Crypt32#CRYPTPROTECT_PROMPT_ON_PROTECT}</td></tr></table> */
+    /** @return the value of the {@code dwPromptFlags} field. */
     @NativeType("DWORD")
     public int dwPromptFlags() { return ndwPromptFlags(address()); }
-    /** window handle to the parent window */
+    /** @return the value of the {@code hwndApp} field. */
     @NativeType("HWND")
     public long hwndApp() { return nhwndApp(address()); }
-    /** a string containing the text of a prompt to be displayed */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code szPrompt} field. */
     @NativeType("LPCWSTR")
     public ByteBuffer szPrompt() { return nszPrompt(address()); }
-    /** a string containing the text of a prompt to be displayed */
+    /** @return the null-terminated string pointed to by the {@code szPrompt} field. */
     @NativeType("LPCWSTR")
     public String szPromptString() { return nszPromptString(address()); }
 
-    /** Sets the specified value to the {@link #cbSize} field. */
+    /** Sets the specified value to the {@code cbSize} field. */
     public CRYPTPROTECT_PROMPTSTRUCT cbSize(@NativeType("DWORD") int value) { ncbSize(address(), value); return this; }
-    /** Sets the default value to the {@link #cbSize} field. */
+    /** Sets the default value to the {@code cbSize} field. */
     public CRYPTPROTECT_PROMPTSTRUCT cbSize$Default() { return cbSize(SIZEOF); }
-    /** Sets the specified value to the {@link #dwPromptFlags} field. */
+    /** Sets the specified value to the {@code dwPromptFlags} field. */
     public CRYPTPROTECT_PROMPTSTRUCT dwPromptFlags(@NativeType("DWORD") int value) { ndwPromptFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #hwndApp} field. */
+    /** Sets the specified value to the {@code hwndApp} field. */
     public CRYPTPROTECT_PROMPTSTRUCT hwndApp(@NativeType("HWND") long value) { nhwndApp(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #szPrompt} field. */
+    /** Sets the address of the specified encoded string to the {@code szPrompt} field. */
     public CRYPTPROTECT_PROMPTSTRUCT szPrompt(@NativeType("LPCWSTR") ByteBuffer value) { nszPrompt(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */

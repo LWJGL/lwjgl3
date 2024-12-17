@@ -16,37 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a push constant range.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code offset} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxPushConstantsSize}</li>
- * <li>{@code offset} <b>must</b> be a multiple of 4</li>
- * <li>{@code size} <b>must</b> be greater than 0</li>
- * <li>{@code size} <b>must</b> be a multiple of 4</li>
- * <li>{@code size} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxPushConstantsSize} minus {@code offset}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
- * <li>{@code stageFlags} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsPushConstantTokenEXT}, {@link VkIndirectExecutionSetShaderInfoEXT}, {@link VkPipelineLayoutCreateInfo}, {@link VkShaderCreateInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPushConstantRange {
- *     VkShaderStageFlags {@link #stageFlags};
- *     uint32_t {@link #offset};
- *     uint32_t {@link #size};
- * }</code></pre>
+ *     VkShaderStageFlags stageFlags;
+ *     uint32_t offset;
+ *     uint32_t size;
+ * }}</pre>
  */
 public class VkPushConstantRange extends Struct<VkPushConstantRange> implements NativeResource {
 
@@ -99,21 +74,21 @@ public class VkPushConstantRange extends Struct<VkPushConstantRange> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a set of stage flags describing the shader stages that will access a range of push constants. If a particular stage is not included in the range, then accessing members of that range of push constants from the corresponding shader stage will return undefined values. */
+    /** @return the value of the {@code stageFlags} field. */
     @NativeType("VkShaderStageFlags")
     public int stageFlags() { return nstageFlags(address()); }
-    /** {@code offset} and {@code size} are the start offset and size, respectively, consumed by the range. Both {@code offset} and {@code size} are in units of bytes and <b>must</b> be a multiple of 4. The layout of the push constant variables is specified in the shader. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("uint32_t")
     public int offset() { return noffset(address()); }
-    /** see {@code offset} */
+    /** @return the value of the {@code size} field. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #stageFlags} field. */
+    /** Sets the specified value to the {@code stageFlags} field. */
     public VkPushConstantRange stageFlags(@NativeType("VkShaderStageFlags") int value) { nstageFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkPushConstantRange offset(@NativeType("uint32_t") int value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkPushConstantRange size(@NativeType("uint32_t") int value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,21 +303,21 @@ public class VkPushConstantRange extends Struct<VkPushConstantRange> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPushConstantRange#stageFlags} field. */
+        /** @return the value of the {@code stageFlags} field. */
         @NativeType("VkShaderStageFlags")
         public int stageFlags() { return VkPushConstantRange.nstageFlags(address()); }
-        /** @return the value of the {@link VkPushConstantRange#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("uint32_t")
         public int offset() { return VkPushConstantRange.noffset(address()); }
-        /** @return the value of the {@link VkPushConstantRange#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("uint32_t")
         public int size() { return VkPushConstantRange.nsize(address()); }
 
-        /** Sets the specified value to the {@link VkPushConstantRange#stageFlags} field. */
+        /** Sets the specified value to the {@code stageFlags} field. */
         public VkPushConstantRange.Buffer stageFlags(@NativeType("VkShaderStageFlags") int value) { VkPushConstantRange.nstageFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPushConstantRange#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkPushConstantRange.Buffer offset(@NativeType("uint32_t") int value) { VkPushConstantRange.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPushConstantRange#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkPushConstantRange.Buffer size(@NativeType("uint32_t") int value) { VkPushConstantRange.nsize(address(), value); return this; }
 
     }

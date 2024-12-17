@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Passthrough system properties.
- * 
- * <h5>Member Descriptions</h5>
- * 
- * <ul>
- * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
- * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
- * <li>{@code capabilities} defines a set of features supported by the passthrough system.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using {@link XrSystemPassthroughProperties2FB}</li>
- * <li>{@code type} <b>must</b> be {@link FBPassthrough#XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemPassthroughProperties2FB {
  *     XrStructureType type;
  *     void const * next;
  *     XrPassthroughCapabilityFlagsFB capabilities;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrSystemPassthroughProperties2FB extends Struct<XrSystemPassthroughProperties2FB> implements NativeResource {
 

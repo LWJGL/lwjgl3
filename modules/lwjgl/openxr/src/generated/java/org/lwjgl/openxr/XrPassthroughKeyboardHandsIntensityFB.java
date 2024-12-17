@@ -16,37 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A struct for setting the level of intensity for hands in the passthrough layer.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrPassthroughKeyboardHandsIntensityFB} describes intensities of passthrough hands, and is used as a parameter to {@link FBPassthroughKeyboardHands#xrPassthroughLayerSetKeyboardHandsIntensityFB PassthroughLayerSetKeyboardHandsIntensityFB}.</p>
- * 
- * <p>Each of the intensity values {@code leftHandIntensity} and {@code rightHandIntensity} <b>must</b> be in the range [0.0, 1.0]. The hand intensity value represents the level of visibility of rendered hand, the minimal value of the intensity 0.0 represents the fully transparent hand (not visible), the maximal value of 1.0 represented fully opaque hands (maximal visibility).</p>
- * 
- * <p>If either {@code leftHandIntensity} or {@code rightHandIntensity} is outside the range [0.0, 1.0], the runtime must return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBPassthroughKeyboardHands XR_FB_passthrough_keyboard_hands} extension <b>must</b> be enabled prior to using {@link XrPassthroughKeyboardHandsIntensityFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBPassthroughKeyboardHands#XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBPassthroughKeyboardHands#xrPassthroughLayerSetKeyboardHandsIntensityFB PassthroughLayerSetKeyboardHandsIntensityFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPassthroughKeyboardHandsIntensityFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     float {@link #leftHandIntensity};
- *     float {@link #rightHandIntensity};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     float leftHandIntensity;
+ *     float rightHandIntensity;
+ * }}</pre>
  */
 public class XrPassthroughKeyboardHandsIntensityFB extends Struct<XrPassthroughKeyboardHandsIntensityFB> implements NativeResource {
 
@@ -102,26 +78,26 @@ public class XrPassthroughKeyboardHandsIntensityFB extends Struct<XrPassthroughK
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** defines an intensity for the left tracked hand. */
+    /** @return the value of the {@code leftHandIntensity} field. */
     public float leftHandIntensity() { return nleftHandIntensity(address()); }
-    /** defines an intensity for the right tracked hand. */
+    /** @return the value of the {@code rightHandIntensity} field. */
     public float rightHandIntensity() { return nrightHandIntensity(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPassthroughKeyboardHandsIntensityFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBPassthroughKeyboardHands#XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBPassthroughKeyboardHands#XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB} value to the {@code type} field. */
     public XrPassthroughKeyboardHandsIntensityFB type$Default() { return type(FBPassthroughKeyboardHands.XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPassthroughKeyboardHandsIntensityFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #leftHandIntensity} field. */
+    /** Sets the specified value to the {@code leftHandIntensity} field. */
     public XrPassthroughKeyboardHandsIntensityFB leftHandIntensity(float value) { nleftHandIntensity(address(), value); return this; }
-    /** Sets the specified value to the {@link #rightHandIntensity} field. */
+    /** Sets the specified value to the {@code rightHandIntensity} field. */
     public XrPassthroughKeyboardHandsIntensityFB rightHandIntensity(float value) { nrightHandIntensity(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,26 +299,26 @@ public class XrPassthroughKeyboardHandsIntensityFB extends Struct<XrPassthroughK
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPassthroughKeyboardHandsIntensityFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughKeyboardHandsIntensityFB.ntype(address()); }
-        /** @return the value of the {@link XrPassthroughKeyboardHandsIntensityFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughKeyboardHandsIntensityFB.nnext(address()); }
-        /** @return the value of the {@link XrPassthroughKeyboardHandsIntensityFB#leftHandIntensity} field. */
+        /** @return the value of the {@code leftHandIntensity} field. */
         public float leftHandIntensity() { return XrPassthroughKeyboardHandsIntensityFB.nleftHandIntensity(address()); }
-        /** @return the value of the {@link XrPassthroughKeyboardHandsIntensityFB#rightHandIntensity} field. */
+        /** @return the value of the {@code rightHandIntensity} field. */
         public float rightHandIntensity() { return XrPassthroughKeyboardHandsIntensityFB.nrightHandIntensity(address()); }
 
-        /** Sets the specified value to the {@link XrPassthroughKeyboardHandsIntensityFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPassthroughKeyboardHandsIntensityFB.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughKeyboardHandsIntensityFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBPassthroughKeyboardHands#XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB} value to the {@link XrPassthroughKeyboardHandsIntensityFB#type} field. */
+        /** Sets the {@link FBPassthroughKeyboardHands#XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB} value to the {@code type} field. */
         public XrPassthroughKeyboardHandsIntensityFB.Buffer type$Default() { return type(FBPassthroughKeyboardHands.XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB); }
-        /** Sets the specified value to the {@link XrPassthroughKeyboardHandsIntensityFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPassthroughKeyboardHandsIntensityFB.Buffer next(@NativeType("void const *") long value) { XrPassthroughKeyboardHandsIntensityFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughKeyboardHandsIntensityFB#leftHandIntensity} field. */
+        /** Sets the specified value to the {@code leftHandIntensity} field. */
         public XrPassthroughKeyboardHandsIntensityFB.Buffer leftHandIntensity(float value) { XrPassthroughKeyboardHandsIntensityFB.nleftHandIntensity(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughKeyboardHandsIntensityFB#rightHandIntensity} field. */
+        /** Sets the specified value to the {@code rightHandIntensity} field. */
         public XrPassthroughKeyboardHandsIntensityFB.Buffer rightHandIntensity(float value) { XrPassthroughKeyboardHandsIntensityFB.nrightHandIntensity(address(), value); return this; }
 
     }

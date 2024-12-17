@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     FT_Raster raster,
- *     unsigned long mode,
- *     void *args
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Raster_SetModeFunc} */
 public abstract class FT_Raster_SetModeFunc extends Callback implements FT_Raster_SetModeFuncI {
 
     /**

@@ -14,9 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_topology_cpubind_support {
  *     unsigned char set_thisproc_cpubind;
  *     unsigned char get_thisproc_cpubind;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned char get_thisproc_last_cpu_location;
  *     unsigned char get_proc_last_cpu_location;
  *     unsigned char get_thisthread_last_cpu_location;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct hwloc_topology_cpubind_support")
 public class hwloc_topology_cpubind_support extends Struct<hwloc_topology_cpubind_support> {

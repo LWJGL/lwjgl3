@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link Nuklear#nk_plot_function plot_function} function.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     void *userdata,
- *     int index
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_value_getter} */
 @FunctionalInterface
 @NativeType("nk_value_getter")
 public interface NkValueGetterI extends CallbackI {
@@ -45,6 +35,7 @@ public interface NkValueGetterI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code float (* nk_value_getter) (void * userdata, int index)} */
     float invoke(@NativeType("void *") long userdata, int index);
 
 }

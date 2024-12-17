@@ -19,30 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.FBEyeTrackingSocial.*;
 
 /**
- * Returns the eye gaze directions.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBEyeTrackingSocial XR_FB_eye_tracking_social} extension <b>must</b> be enabled prior to using {@link XrEyeGazesFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBEyeTrackingSocial#XR_TYPE_EYE_GAZES_FB TYPE_EYE_GAZES_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>Any given element of {@code gaze} <b>must</b> be a valid {@link XrEyeGazeFB} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEyeGazeFB}, {@link FBEyeTrackingSocial#xrGetEyeGazesFB GetEyeGazesFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEyeGazesFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrEyeGazeFB XrEyeGazeFB} {@link #gaze}[XR_EYE_POSITION_COUNT_FB];
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrEyeGazeFB XrEyeGazeFB} gaze[XR_EYE_POSITION_COUNT_FB];
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource {
 
@@ -98,36 +81,36 @@ public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an array of {@link XrEyeGazeFB} receiving the returned eye gaze directions. */
+    /** @return a {@link XrEyeGazeFB}.Buffer view of the {@code gaze} field. */
     @NativeType("XrEyeGazeFB[XR_EYE_POSITION_COUNT_FB]")
     public XrEyeGazeFB.Buffer gaze() { return ngaze(address()); }
-    /** an array of {@link XrEyeGazeFB} receiving the returned eye gaze directions. */
+    /** @return a {@link XrEyeGazeFB} view of the struct at the specified index of the {@code gaze} field. */
     public XrEyeGazeFB gaze(int index) { return ngaze(address(), index); }
-    /** an {@code XrTime} time at which the returned eye gaze is tracked or extrapolated to. Equals the time for which the eye gaze was requested if the interpolation at the time was successful. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEyeGazesFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBEyeTrackingSocial#XR_TYPE_EYE_GAZES_FB TYPE_EYE_GAZES_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBEyeTrackingSocial#XR_TYPE_EYE_GAZES_FB TYPE_EYE_GAZES_FB} value to the {@code type} field. */
     public XrEyeGazesFB type$Default() { return type(FBEyeTrackingSocial.XR_TYPE_EYE_GAZES_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEyeGazesFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrEyeGazeFB.Buffer} to the {@link #gaze} field. */
+    /** Copies the specified {@link XrEyeGazeFB.Buffer} to the {@code gaze} field. */
     public XrEyeGazesFB gaze(@NativeType("XrEyeGazeFB[XR_EYE_POSITION_COUNT_FB]") XrEyeGazeFB.Buffer value) { ngaze(address(), value); return this; }
-    /** Copies the specified {@link XrEyeGazeFB} at the specified index of the {@link #gaze} field. */
+    /** Copies the specified {@link XrEyeGazeFB} at the specified index of the {@code gaze} field. */
     public XrEyeGazesFB gaze(int index, XrEyeGazeFB value) { ngaze(address(), index, value); return this; }
-    /** Passes the {@link #gaze} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code gaze} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrEyeGazesFB gaze(java.util.function.Consumer<XrEyeGazeFB.Buffer> consumer) { consumer.accept(gaze()); return this; }
-    /** Passes the element at {@code index} of the {@link #gaze} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@code gaze} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrEyeGazesFB gaze(int index, java.util.function.Consumer<XrEyeGazeFB> consumer) { consumer.accept(gaze(index)); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrEyeGazesFB time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -340,36 +323,36 @@ public class XrEyeGazesFB extends Struct<XrEyeGazesFB> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEyeGazesFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEyeGazesFB.ntype(address()); }
-        /** @return the value of the {@link XrEyeGazesFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrEyeGazesFB.nnext(address()); }
-        /** @return a {@link XrEyeGazeFB}.Buffer view of the {@link XrEyeGazesFB#gaze} field. */
+        /** @return a {@link XrEyeGazeFB}.Buffer view of the {@code gaze} field. */
         @NativeType("XrEyeGazeFB[XR_EYE_POSITION_COUNT_FB]")
         public XrEyeGazeFB.Buffer gaze() { return XrEyeGazesFB.ngaze(address()); }
-        /** @return a {@link XrEyeGazeFB} view of the struct at the specified index of the {@link XrEyeGazesFB#gaze} field. */
+        /** @return a {@link XrEyeGazeFB} view of the struct at the specified index of the {@code gaze} field. */
         public XrEyeGazeFB gaze(int index) { return XrEyeGazesFB.ngaze(address(), index); }
-        /** @return the value of the {@link XrEyeGazesFB#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrEyeGazesFB.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrEyeGazesFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEyeGazesFB.Buffer type(@NativeType("XrStructureType") int value) { XrEyeGazesFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBEyeTrackingSocial#XR_TYPE_EYE_GAZES_FB TYPE_EYE_GAZES_FB} value to the {@link XrEyeGazesFB#type} field. */
+        /** Sets the {@link FBEyeTrackingSocial#XR_TYPE_EYE_GAZES_FB TYPE_EYE_GAZES_FB} value to the {@code type} field. */
         public XrEyeGazesFB.Buffer type$Default() { return type(FBEyeTrackingSocial.XR_TYPE_EYE_GAZES_FB); }
-        /** Sets the specified value to the {@link XrEyeGazesFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEyeGazesFB.Buffer next(@NativeType("void *") long value) { XrEyeGazesFB.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrEyeGazeFB.Buffer} to the {@link XrEyeGazesFB#gaze} field. */
+        /** Copies the specified {@link XrEyeGazeFB.Buffer} to the {@code gaze} field. */
         public XrEyeGazesFB.Buffer gaze(@NativeType("XrEyeGazeFB[XR_EYE_POSITION_COUNT_FB]") XrEyeGazeFB.Buffer value) { XrEyeGazesFB.ngaze(address(), value); return this; }
-        /** Copies the specified {@link XrEyeGazeFB} at the specified index of the {@link XrEyeGazesFB#gaze} field. */
+        /** Copies the specified {@link XrEyeGazeFB} at the specified index of the {@code gaze} field. */
         public XrEyeGazesFB.Buffer gaze(int index, XrEyeGazeFB value) { XrEyeGazesFB.ngaze(address(), index, value); return this; }
-        /** Passes the {@link XrEyeGazesFB#gaze} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code gaze} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrEyeGazesFB.Buffer gaze(java.util.function.Consumer<XrEyeGazeFB.Buffer> consumer) { consumer.accept(gaze()); return this; }
-        /** Passes the element at {@code index} of the {@link XrEyeGazesFB#gaze} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@code gaze} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrEyeGazesFB.Buffer gaze(int index, java.util.function.Consumer<XrEyeGazeFB> consumer) { consumer.accept(gaze(index)); return this; }
-        /** Sets the specified value to the {@link XrEyeGazesFB#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrEyeGazesFB.Buffer time(@NativeType("XrTime") long value) { XrEyeGazesFB.ntime(address(), value); return this; }
 
     }

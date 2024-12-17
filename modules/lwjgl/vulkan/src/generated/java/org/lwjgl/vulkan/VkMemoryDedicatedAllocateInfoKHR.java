@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkMemoryDedicatedAllocateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryDedicatedAllocateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkImage image;
  *     VkBuffer buffer;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkMemoryDedicatedAllocateInfoKHR extends VkMemoryDedicatedAllocateInfo {
 

@@ -16,39 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event indicating instance loss will occur.
- * 
- * <h5>Description</h5>
- * 
- * <p>After the application has destroyed all of its instances and their children and waited past the specified time, it may then re-try {@link XR10#xrCreateInstance CreateInstance} in a loop waiting for whatever maintenance the runtime is performing to complete. The runtime will return {@link XR10#XR_ERROR_RUNTIME_UNAVAILABLE ERROR_RUNTIME_UNAVAILABLE} from {@link XR10#xrCreateInstance CreateInstance} as long as it is unable to create the instance. Once the runtime has returned and is able to continue, it <b>must</b> resume returning {@link XR10#XR_SUCCESS SUCCESS} from {@link XR10#xrCreateInstance CreateInstance} if valid data is passed in.</p>
- * 
- * <h5>Member Descriptions</h5>
- * 
- * <ul>
- * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
- * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR.</li>
- * <li>{@code lossTime} is the absolute time at which the indicated instance will be considered lost and become unusable.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEventDataBaseHeader}, {@link XR10#xrPollEvent PollEvent}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataInstanceLossPending {
  *     XrStructureType type;
  *     void const * next;
  *     XrTime lossTime;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrEventDataInstanceLossPending extends Struct<XrEventDataInstanceLossPending> implements NativeResource {
 

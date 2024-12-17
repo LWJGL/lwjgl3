@@ -381,26 +381,6 @@ public class ClangIndex {
 
     public static final String CINDEX_VERSION_STRING = "0.62";
 
-    /**
-     * Error codes returned by libclang routines. ({@code enum CXErrorCode})
-     * 
-     * <p>Zero ({@code CXError_Success}) is the only error code indicating success. Other error codes, including not yet assigned non-zero values, indicate
-     * errors.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXError_Success Error_Success} - No error.</li>
-     * <li>{@link #CXError_Failure Error_Failure} - 
-     * A generic error code, no further details are available.
-     * 
-     * <p>Errors of this kind can get their own specific error codes in future libclang versions.</p>
-     * </li>
-     * <li>{@link #CXError_Crashed Error_Crashed} - libclang crashed while performing the requested operation.</li>
-     * <li>{@link #CXError_InvalidArguments Error_InvalidArguments} - The function detected that the arguments violate the function contract.</li>
-     * <li>{@link #CXError_ASTReadError Error_ASTReadError} - An AST deserialization error has occurred.</li>
-     * </ul>
-     */
     public static final int
         CXError_Success          = 0,
         CXError_Failure          = 1,
@@ -408,47 +388,12 @@ public class ClangIndex {
         CXError_InvalidArguments = 3,
         CXError_ASTReadError     = 4;
 
-    /**
-     * Describes the availability of a particular entity, which indicates whether the use of this entity will result in a warning or error due to it being
-     * deprecated or unavailable.
-     * 
-     * <p>({@code enum CXAvailabilityKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXAvailability_Available Availability_Available} - The entity is available.</li>
-     * <li>{@link #CXAvailability_Deprecated Availability_Deprecated} - The entity is available, but has been deprecated (and its use is not recommended).</li>
-     * <li>{@link #CXAvailability_NotAvailable Availability_NotAvailable} - The entity is not available; any use of it will be an error.</li>
-     * <li>{@link #CXAvailability_NotAccessible Availability_NotAccessible} - The entity is available, but not accessible; any use of it will be an error.</li>
-     * </ul>
-     */
     public static final int
         CXAvailability_Available     = 0,
         CXAvailability_Deprecated    = 1,
         CXAvailability_NotAvailable  = 2,
         CXAvailability_NotAccessible = 3;
 
-    /**
-     * Describes the exception specification of a cursor. ({@code enum CXCursor_ExceptionSpecificationKind})
-     * 
-     * <p>A negative value indicates that the cursor is not a function declaration.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_None Cursor_ExceptionSpecificationKind_None} - The cursor has no exception specification.</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_DynamicNone Cursor_ExceptionSpecificationKind_DynamicNone} - The cursor has exception specification throw()</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_Dynamic Cursor_ExceptionSpecificationKind_Dynamic} - The cursor has exception specification throw(T1, T2)</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_MSAny Cursor_ExceptionSpecificationKind_MSAny} - The cursor has exception specification throw(...).</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_BasicNoexcept Cursor_ExceptionSpecificationKind_BasicNoexcept} - The cursor has exception specification basic noexcept.</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_ComputedNoexcept Cursor_ExceptionSpecificationKind_ComputedNoexcept} - The cursor has exception specification computed noexcept.</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_Unevaluated Cursor_ExceptionSpecificationKind_Unevaluated} - The exception specification has not yet been evaluated.</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_Uninstantiated Cursor_ExceptionSpecificationKind_Uninstantiated} - The exception specification has not yet been instantiated.</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_Unparsed Cursor_ExceptionSpecificationKind_Unparsed} - The exception specification has not been parsed yet.</li>
-     * <li>{@link #CXCursor_ExceptionSpecificationKind_NoThrow Cursor_ExceptionSpecificationKind_NoThrow} - The cursor has a {@code __declspec(nothrow)} exception specification.</li>
-     * </ul>
-     */
     public static final int
         CXCursor_ExceptionSpecificationKind_None             = 0,
         CXCursor_ExceptionSpecificationKind_DynamicNone      = 1,
@@ -461,63 +406,17 @@ public class ClangIndex {
         CXCursor_ExceptionSpecificationKind_Unparsed         = 8,
         CXCursor_ExceptionSpecificationKind_NoThrow          = 9;
 
-    /**
-     * {@code CXChoice}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXChoice_Default Choice_Default} - Use the default value of an option that may depend on the process environment.</li>
-     * <li>{@link #CXChoice_Enabled Choice_Enabled} - Enable the option.</li>
-     * <li>{@link #CXChoice_Disabled Choice_Disabled} - Disable the option.</li>
-     * </ul>
-     */
     public static final byte
         CXChoice_Default  = 0,
         CXChoice_Enabled  = 1,
         CXChoice_Disabled = 2;
 
-    /**
-     * {@code CXGlobalOptFlags}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXGlobalOpt_None GlobalOpt_None} - Used to indicate that no special CXIndex options are needed.</li>
-     * <li>{@link #CXGlobalOpt_ThreadBackgroundPriorityForIndexing GlobalOpt_ThreadBackgroundPriorityForIndexing} - 
-     * Used to indicate that threads that libclang creates for indexing purposes should use background priority.
-     * 
-     * <p>Affects {@link #clang_indexSourceFile indexSourceFile}, {@link #clang_indexTranslationUnit indexTranslationUnit}, {@link #clang_parseTranslationUnit parseTranslationUnit}, {@link #clang_saveTranslationUnit saveTranslationUnit}.</p>
-     * </li>
-     * <li>{@link #CXGlobalOpt_ThreadBackgroundPriorityForEditing GlobalOpt_ThreadBackgroundPriorityForEditing} - 
-     * Used to indicate that threads that libclang creates for editing purposes should use background priority.
-     * 
-     * <p>Affects {@link #clang_reparseTranslationUnit reparseTranslationUnit}, {@link #clang_codeCompleteAt codeCompleteAt}, {@link #clang_annotateTokens annotateTokens}</p>
-     * </li>
-     * <li>{@link #CXGlobalOpt_ThreadBackgroundPriorityForAll GlobalOpt_ThreadBackgroundPriorityForAll} - Used to indicate that all threads that libclang creates should use background priority.</li>
-     * </ul>
-     */
     public static final int
         CXGlobalOpt_None                                = 0x0,
         CXGlobalOpt_ThreadBackgroundPriorityForIndexing = 0x1,
         CXGlobalOpt_ThreadBackgroundPriorityForEditing  = 0x2,
         CXGlobalOpt_ThreadBackgroundPriorityForAll      = CXGlobalOpt_ThreadBackgroundPriorityForIndexing | CXGlobalOpt_ThreadBackgroundPriorityForEditing;
 
-    /**
-     * Describes the severity of a particular diagnostic.
-     * 
-     * <p>({@code enum CXDiagnosticSeverity})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXDiagnostic_Ignored Diagnostic_Ignored} - A diagnostic that has been suppressed, e.g., by a command-line option.</li>
-     * <li>{@link #CXDiagnostic_Note Diagnostic_Note} - This diagnostic is a note that should be attached to the previous (non-note) diagnostic.</li>
-     * <li>{@link #CXDiagnostic_Warning Diagnostic_Warning} - This diagnostic indicates suspicious code that may not be wrong.</li>
-     * <li>{@link #CXDiagnostic_Error Diagnostic_Error} - This diagnostic indicates that the code is ill-formed.</li>
-     * <li>{@link #CXDiagnostic_Fatal Diagnostic_Fatal} - This diagnostic indicates that the code is ill-formed such that future parser recovery is unlikely to produce useful results.</li>
-     * </ul>
-     */
     public static final int
         CXDiagnostic_Ignored = 0,
         CXDiagnostic_Note    = 1,
@@ -525,74 +424,12 @@ public class ClangIndex {
         CXDiagnostic_Error   = 3,
         CXDiagnostic_Fatal   = 4;
 
-    /**
-     * Describes the kind of error that occurred (if any) in a call to {@code clang_loadDiagnostics}.
-     * 
-     * <p>({@code enum CXLoadDiag_Error})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXLoadDiag_None LoadDiag_None} - Indicates that no error occurred.</li>
-     * <li>{@link #CXLoadDiag_Unknown LoadDiag_Unknown} - Indicates that an unknown error occurred while attempting to deserialize diagnostics.</li>
-     * <li>{@link #CXLoadDiag_CannotLoad LoadDiag_CannotLoad} - Indicates that the file containing the serialized diagnostics could not be opened.</li>
-     * <li>{@link #CXLoadDiag_InvalidFile LoadDiag_InvalidFile} - Indicates that the serialized diagnostics file is invalid or corrupt.</li>
-     * </ul>
-     */
     public static final int
         CXLoadDiag_None        = 0,
         CXLoadDiag_Unknown     = 1,
         CXLoadDiag_CannotLoad  = 2,
         CXLoadDiag_InvalidFile = 3;
 
-    /**
-     * Options to control the display of diagnostics. ({@code enum CXDiagnosticDisplayOptions})
-     * 
-     * <p>The values in this enum are meant to be combined to customize the behavior of {@code clang_formatDiagnostic()}.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXDiagnostic_DisplaySourceLocation Diagnostic_DisplaySourceLocation} - 
-     * Display the source-location information where the diagnostic was located.
-     * 
-     * <p>When set, diagnostics will be prefixed by the file, line, and (optionally) column to which the diagnostic refers. For example,</p>
-     * 
-     * <pre><code>
-     *  test.c:28: warning: extra tokens at end of #endif directive</code></pre>
-     * 
-     * <p>This option corresponds to the clang flag {@code -fshow-source-location}.</p>
-     * </li>
-     * <li>{@link #CXDiagnostic_DisplayColumn Diagnostic_DisplayColumn} - 
-     * If displaying the source-location information of the diagnostic, also include the column number.
-     * 
-     * <p>This option corresponds to the clang flag {@code -fshow-column}.</p>
-     * </li>
-     * <li>{@link #CXDiagnostic_DisplaySourceRanges Diagnostic_DisplaySourceRanges} - 
-     * If displaying the source-location information of the diagnostic, also include information about source ranges in a machine-parsable format.
-     * 
-     * <p>This option corresponds to the clang flag {@code -fdiagnostics-print-source-range-info}.</p>
-     * </li>
-     * <li>{@link #CXDiagnostic_DisplayOption Diagnostic_DisplayOption} - 
-     * Display the option name associated with this diagnostic, if any.
-     * 
-     * <p>The option name displayed (e.g., -Wconversion) will be placed in brackets after the diagnostic text. This option corresponds to the clang flag
-     * {@code -fdiagnostics-show-option}.</p>
-     * </li>
-     * <li>{@link #CXDiagnostic_DisplayCategoryId Diagnostic_DisplayCategoryId} - 
-     * Display the category number associated with this diagnostic, if any.
-     * 
-     * <p>The category number is displayed within brackets after the diagnostic text. This option corresponds to the clang flag {@code
-     * -fdiagnostics-show-category=id}.</p>
-     * </li>
-     * <li>{@link #CXDiagnostic_DisplayCategoryName Diagnostic_DisplayCategoryName} - 
-     * Display the category name associated with this diagnostic, if any.
-     * 
-     * <p>The category name is displayed within brackets after the diagnostic text. This option corresponds to the clang flag {@code
-     * -fdiagnostics-show-category=name}.</p>
-     * </li>
-     * </ul>
-     */
     public static final int
         CXDiagnostic_DisplaySourceLocation = 0x01,
         CXDiagnostic_DisplayColumn         = 0x02,
@@ -601,87 +438,6 @@ public class ClangIndex {
         CXDiagnostic_DisplayCategoryId     = 0x10,
         CXDiagnostic_DisplayCategoryName   = 0x20;
 
-    /**
-     * Flags that control the creation of translation units. ({@code enum CXTranslationUnit_Flags})
-     * 
-     * <p>The enumerators in this enumeration type are meant to be bitwise ORed together to specify which options should be used when constructing the
-     * translation unit.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXTranslationUnit_None TranslationUnit_None} - Used to indicate that no special translation-unit options are needed.</li>
-     * <li>{@link #CXTranslationUnit_DetailedPreprocessingRecord TranslationUnit_DetailedPreprocessingRecord} - 
-     * Used to indicate that the parser should construct a "detailed" preprocessing record, including all macro definitions and instantiations.
-     * 
-     * <p>Constructing a detailed preprocessing record requires more memory and time to parse, since the information contained in the record is usually not
-     * retained. However, it can be useful for applications that require more detailed information about the behavior of the preprocessor.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_Incomplete TranslationUnit_Incomplete} - 
-     * Used to indicate that the translation unit is incomplete.
-     * 
-     * <p>When a translation unit is considered "incomplete", semantic analysis that is typically performed at the end of the translation unit will be
-     * suppressed. For example, this suppresses the completion of tentative declarations in C and of instantiation of implicitly-instantiation function
-     * templates in C++. This option is typically used when parsing a header with the intent of producing a precompiled header.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_PrecompiledPreamble TranslationUnit_PrecompiledPreamble} - 
-     * Used to indicate that the translation unit should be built with an implicit precompiled header for the preamble.
-     * 
-     * <p>An implicit precompiled header is used as an optimization when a particular translation unit is likely to be reparsed many times when the sources
-     * aren't changing that often. In this case, an implicit precompiled header will be built containing all of the initial includes at the top of the
-     * main file (what we refer to as the "preamble" of the file). In subsequent parses, if the preamble or the files in it have not changed, {@code
-     * clang_reparseTranslationUnit()} will re-use the implicit precompiled header to improve parsing performance.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_CacheCompletionResults TranslationUnit_CacheCompletionResults} - 
-     * Used to indicate that the translation unit should cache some code-completion results with each reparse of the source file.
-     * 
-     * <p>Caching of code-completion results is a performance optimization that introduces some overhead to reparsing but improves the performance of
-     * code-completion operations.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_ForSerialization TranslationUnit_ForSerialization} - 
-     * Used to indicate that the translation unit will be serialized with {@code clang_saveTranslationUnit}.
-     * 
-     * <p>This option is typically used when parsing a header with the intent of producing a precompiled header.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_CXXChainedPCH TranslationUnit_CXXChainedPCH} - 
-     * DEPRECATED: Enabled chained precompiled preambles in C++.
-     * 
-     * <p>Note: this is a *temporary* option that is available only while we are testing C++ precompiled preamble support. It is deprecated.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_SkipFunctionBodies TranslationUnit_SkipFunctionBodies} - 
-     * Used to indicate that function/method bodies should be skipped while parsing.
-     * 
-     * <p>This option can be used to search for declarations/definitions while ignoring the usages.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_IncludeBriefCommentsInCodeCompletion TranslationUnit_IncludeBriefCommentsInCodeCompletion} - Used to indicate that brief documentation comments should be included into the set of code completions returned from this translation unit.</li>
-     * <li>{@link #CXTranslationUnit_CreatePreambleOnFirstParse TranslationUnit_CreatePreambleOnFirstParse} - 
-     * Used to indicate that the precompiled preamble should be created on the first parse. Otherwise it will be created on the first reparse. This trades
-     * runtime on the first parse (serializing the preamble takes time) for reduced runtime on the second parse (can now reuse the preamble).
-     * </li>
-     * <li>{@link #CXTranslationUnit_KeepGoing TranslationUnit_KeepGoing} - 
-     * Do not stop processing when fatal errors are encountered.
-     * 
-     * <p>When fatal errors are encountered while parsing a translation unit, semantic analysis is typically stopped early when compiling code. A common
-     * source for fatal errors are unresolvable include files. For the purposes of an IDE, this is undesirable behavior and as much information as
-     * possible should be reported. Use this flag to enable this behavior.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_SingleFileParse TranslationUnit_SingleFileParse} - Sets the preprocessor in a mode for parsing a single file only.</li>
-     * <li>{@link #CXTranslationUnit_LimitSkipFunctionBodiesToPreamble TranslationUnit_LimitSkipFunctionBodiesToPreamble} - 
-     * Used in combination with CXTranslationUnit_SkipFunctionBodies to constrain the skipping of function bodies to the preamble.
-     * 
-     * <p>The function bodies of the main file are not skipped.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_IncludeAttributedTypes TranslationUnit_IncludeAttributedTypes} - Used to indicate that attributed types should be included in CXType.</li>
-     * <li>{@link #CXTranslationUnit_VisitImplicitAttributes TranslationUnit_VisitImplicitAttributes} - Used to indicate that implicit attributes should be visited.</li>
-     * <li>{@link #CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles TranslationUnit_IgnoreNonErrorsFromIncludedFiles} - 
-     * Used to indicate that non-errors from included files should be ignored.
-     * 
-     * <p>If set, {@link #clang_getDiagnosticSetFromTU getDiagnosticSetFromTU} will not report e.g. warnings from included files anymore. This speeds up {@code clang_getDiagnosticSetFromTU()}
-     * for the case where these warnings are not of interest, as for an IDE for example, which typically shows only the diagnostics in the main file.</p>
-     * </li>
-     * <li>{@link #CXTranslationUnit_RetainExcludedConditionalBlocks TranslationUnit_RetainExcludedConditionalBlocks} - Tells the preprocessor not to skip excluded conditional blocks.</li>
-     * </ul>
-     */
     public static final int
         CXTranslationUnit_None                                 = 0x0,
         CXTranslationUnit_DetailedPreprocessingRecord          = 0x01,
@@ -701,91 +457,16 @@ public class ClangIndex {
         CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles     = 0x4000,
         CXTranslationUnit_RetainExcludedConditionalBlocks      = 0x8000;
 
-    /**
-     * Flags that control how translation units are saved. ({@code enum CXSaveTranslationUnit_Flags})
-     * 
-     * <p>The enumerators in this enumeration type are meant to be bitwise ORed together to specify which options should be used when saving the translation
-     * unit.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXSaveTranslationUnit_None SaveTranslationUnit_None} - Used to indicate that no special saving options are needed.</li>
-     * </ul>
-     */
     public static final int CXSaveTranslationUnit_None = 0x0;
 
-    /**
-     * Describes the kind of error that occurred (if any) in a call to {@code clang_saveTranslationUnit()}.
-     * 
-     * <p>({@code enum CXSaveError})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXSaveError_None SaveError_None} - Indicates that no error occurred while saving a translation unit.</li>
-     * <li>{@link #CXSaveError_Unknown SaveError_Unknown} - 
-     * Indicates that an unknown error occurred while attempting to save the file.
-     * 
-     * <p>This error typically indicates that file I/O failed when attempting to write the file.</p>
-     * </li>
-     * <li>{@link #CXSaveError_TranslationErrors SaveError_TranslationErrors} - 
-     * Indicates that errors during translation prevented this attempt to save the translation unit.
-     * 
-     * <p>Errors that prevent the translation unit from being saved can be extracted using {@code clang_getNumDiagnostics()} and {@code
-     * clang_getDiagnostic()}.</p>
-     * </li>
-     * <li>{@link #CXSaveError_InvalidTU SaveError_InvalidTU} - Indicates that the translation unit to be saved was somehow invalid (e.g., {@code NULL}).</li>
-     * </ul>
-     */
     public static final int
         CXSaveError_None              = 0,
         CXSaveError_Unknown           = 1,
         CXSaveError_TranslationErrors = 2,
         CXSaveError_InvalidTU         = 3;
 
-    /**
-     * Flags that control the reparsing of translation units. ({@code enum CXReparse_Flags})
-     * 
-     * <p>The enumerators in this enumeration type are meant to be bitwise ORed together to specify which options should be used when reparsing the translation
-     * unit.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXReparse_None Reparse_None} - Used to indicate that no special reparsing options are needed.</li>
-     * </ul>
-     */
     public static final int CXReparse_None = 0x0;
 
-    /**
-     * Categorizes how memory is being used by a translation unit.
-     * 
-     * <p>({@code enum CXTUResourceUsageKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXTUResourceUsage_AST TUResourceUsage_AST}</li>
-     * <li>{@link #CXTUResourceUsage_Identifiers TUResourceUsage_Identifiers}</li>
-     * <li>{@link #CXTUResourceUsage_Selectors TUResourceUsage_Selectors}</li>
-     * <li>{@link #CXTUResourceUsage_GlobalCompletionResults TUResourceUsage_GlobalCompletionResults}</li>
-     * <li>{@link #CXTUResourceUsage_SourceManagerContentCache TUResourceUsage_SourceManagerContentCache}</li>
-     * <li>{@link #CXTUResourceUsage_AST_SideTables TUResourceUsage_AST_SideTables}</li>
-     * <li>{@link #CXTUResourceUsage_SourceManager_Membuffer_Malloc TUResourceUsage_SourceManager_Membuffer_Malloc}</li>
-     * <li>{@link #CXTUResourceUsage_SourceManager_Membuffer_MMap TUResourceUsage_SourceManager_Membuffer_MMap}</li>
-     * <li>{@link #CXTUResourceUsage_ExternalASTSource_Membuffer_Malloc TUResourceUsage_ExternalASTSource_Membuffer_Malloc}</li>
-     * <li>{@link #CXTUResourceUsage_ExternalASTSource_Membuffer_MMap TUResourceUsage_ExternalASTSource_Membuffer_MMap}</li>
-     * <li>{@link #CXTUResourceUsage_Preprocessor TUResourceUsage_Preprocessor}</li>
-     * <li>{@link #CXTUResourceUsage_PreprocessingRecord TUResourceUsage_PreprocessingRecord}</li>
-     * <li>{@link #CXTUResourceUsage_SourceManager_DataStructures TUResourceUsage_SourceManager_DataStructures}</li>
-     * <li>{@link #CXTUResourceUsage_Preprocessor_HeaderSearch TUResourceUsage_Preprocessor_HeaderSearch}</li>
-     * <li>{@link #CXTUResourceUsage_MEMORY_IN_BYTES_BEGIN TUResourceUsage_MEMORY_IN_BYTES_BEGIN}</li>
-     * <li>{@link #CXTUResourceUsage_MEMORY_IN_BYTES_END TUResourceUsage_MEMORY_IN_BYTES_END}</li>
-     * <li>{@link #CXTUResourceUsage_First TUResourceUsage_First}</li>
-     * <li>{@link #CXTUResourceUsage_Last TUResourceUsage_Last}</li>
-     * </ul>
-     */
     public static final int
         CXTUResourceUsage_AST                                = 1,
         CXTUResourceUsage_Identifiers                        = 2,
@@ -806,466 +487,6 @@ public class ClangIndex {
         CXTUResourceUsage_First                              = CXTUResourceUsage_AST,
         CXTUResourceUsage_Last                               = CXTUResourceUsage_Preprocessor_HeaderSearch;
 
-    /**
-     * Describes the kind of entity that a cursor refers to.
-     * 
-     * <p>({@code enum CXCursorKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXCursor_UnexposedDecl Cursor_UnexposedDecl} - 
-     * Declarations
-     * 
-     * <p>A declaration whose specific kind is not exposed via this interface.</p>
-     * 
-     * <p>Unexposed declarations have the same operations as any other kind of declaration; one can extract their location information, spelling, find their
-     * definitions, etc. However, the specific kind of the declaration is not reported.</p>
-     * </li>
-     * <li>{@link #CXCursor_StructDecl Cursor_StructDecl} - A C or C++ struct.</li>
-     * <li>{@link #CXCursor_UnionDecl Cursor_UnionDecl} - A C or C++ union.</li>
-     * <li>{@link #CXCursor_ClassDecl Cursor_ClassDecl} - A C++ class.</li>
-     * <li>{@link #CXCursor_EnumDecl Cursor_EnumDecl} - An enumeration.</li>
-     * <li>{@link #CXCursor_FieldDecl Cursor_FieldDecl} - A field (in C) or non-static data member (in C++) in a struct, union, or C++ class.</li>
-     * <li>{@link #CXCursor_EnumConstantDecl Cursor_EnumConstantDecl} - An enumerator constant.</li>
-     * <li>{@link #CXCursor_FunctionDecl Cursor_FunctionDecl} - A function.</li>
-     * <li>{@link #CXCursor_VarDecl Cursor_VarDecl} - A variable.</li>
-     * <li>{@link #CXCursor_ParmDecl Cursor_ParmDecl} - A function or method parameter.</li>
-     * <li>{@link #CXCursor_ObjCInterfaceDecl Cursor_ObjCInterfaceDecl} - An Objective-C @ interface.</li>
-     * <li>{@link #CXCursor_ObjCCategoryDecl Cursor_ObjCCategoryDecl} - An Objective-C @ interface for a category.</li>
-     * <li>{@link #CXCursor_ObjCProtocolDecl Cursor_ObjCProtocolDecl} - An Objective-C @ protocol declaration.</li>
-     * <li>{@link #CXCursor_ObjCPropertyDecl Cursor_ObjCPropertyDecl} - An Objective-C @ property declaration.</li>
-     * <li>{@link #CXCursor_ObjCIvarDecl Cursor_ObjCIvarDecl} - An Objective-C instance variable.</li>
-     * <li>{@link #CXCursor_ObjCInstanceMethodDecl Cursor_ObjCInstanceMethodDecl} - An Objective-C instance method.</li>
-     * <li>{@link #CXCursor_ObjCClassMethodDecl Cursor_ObjCClassMethodDecl} - An Objective-C class method.</li>
-     * <li>{@link #CXCursor_ObjCImplementationDecl Cursor_ObjCImplementationDecl} - An Objective-C @ implementation.</li>
-     * <li>{@link #CXCursor_ObjCCategoryImplDecl Cursor_ObjCCategoryImplDecl} - An Objective-C @ implementation for a category.</li>
-     * <li>{@link #CXCursor_TypedefDecl Cursor_TypedefDecl} - A typedef.</li>
-     * <li>{@link #CXCursor_CXXMethod Cursor_CXXMethod} - A C++ class method.</li>
-     * <li>{@link #CXCursor_Namespace Cursor_Namespace} - A C++ namespace.</li>
-     * <li>{@link #CXCursor_LinkageSpec Cursor_LinkageSpec} - A linkage specification, e.g. 'extern "C"'.</li>
-     * <li>{@link #CXCursor_Constructor Cursor_Constructor} - A C++ constructor.</li>
-     * <li>{@link #CXCursor_Destructor Cursor_Destructor} - A C++ destructor.</li>
-     * <li>{@link #CXCursor_ConversionFunction Cursor_ConversionFunction} - A C++ conversion function.</li>
-     * <li>{@link #CXCursor_TemplateTypeParameter Cursor_TemplateTypeParameter} - A C++ template type parameter.</li>
-     * <li>{@link #CXCursor_NonTypeTemplateParameter Cursor_NonTypeTemplateParameter} - A C++ non-type template parameter.</li>
-     * <li>{@link #CXCursor_TemplateTemplateParameter Cursor_TemplateTemplateParameter} - A C++ template template parameter.</li>
-     * <li>{@link #CXCursor_FunctionTemplate Cursor_FunctionTemplate} - A C++ function template.</li>
-     * <li>{@link #CXCursor_ClassTemplate Cursor_ClassTemplate} - A C++ class template.</li>
-     * <li>{@link #CXCursor_ClassTemplatePartialSpecialization Cursor_ClassTemplatePartialSpecialization} - A C++ class template partial specialization.</li>
-     * <li>{@link #CXCursor_NamespaceAlias Cursor_NamespaceAlias} - A C++ namespace alias declaration.</li>
-     * <li>{@link #CXCursor_UsingDirective Cursor_UsingDirective} - A C++ using directive.</li>
-     * <li>{@link #CXCursor_UsingDeclaration Cursor_UsingDeclaration} - A C++ using declaration.</li>
-     * <li>{@link #CXCursor_TypeAliasDecl Cursor_TypeAliasDecl} - A C++ alias declaration</li>
-     * <li>{@link #CXCursor_ObjCSynthesizeDecl Cursor_ObjCSynthesizeDecl} - An Objective-C @ synthesize definition.</li>
-     * <li>{@link #CXCursor_ObjCDynamicDecl Cursor_ObjCDynamicDecl} - An Objective-C @ dynamic definition.</li>
-     * <li>{@link #CXCursor_CXXAccessSpecifier Cursor_CXXAccessSpecifier} - An access specifier.</li>
-     * <li>{@link #CXCursor_FirstDecl Cursor_FirstDecl} - An access specifier.</li>
-     * <li>{@link #CXCursor_LastDecl Cursor_LastDecl} - An access specifier.</li>
-     * <li>{@link #CXCursor_FirstRef Cursor_FirstRef} - Decl references</li>
-     * <li>{@link #CXCursor_ObjCSuperClassRef Cursor_ObjCSuperClassRef}</li>
-     * <li>{@link #CXCursor_ObjCProtocolRef Cursor_ObjCProtocolRef}</li>
-     * <li>{@link #CXCursor_ObjCClassRef Cursor_ObjCClassRef}</li>
-     * <li>{@link #CXCursor_TypeRef Cursor_TypeRef} - 
-     * A reference to a type declaration.
-     * 
-     * <p>A type reference occurs anywhere where a type is named but not declared. For example, given:</p>
-     * 
-     * <pre><code>
-     *  typedef unsigned size_type;
-     *  size_type size;</code></pre>
-     * 
-     * <p>The typedef is a declaration of size_type (CXCursor_TypedefDecl), while the type of the variable "size" is referenced. The cursor referenced by the
-     * type of size is the typedef for size_type.</p>
-     * </li>
-     * <li>{@link #CXCursor_CXXBaseSpecifier Cursor_CXXBaseSpecifier} - 
-     * A reference to a type declaration.
-     * 
-     * <p>A type reference occurs anywhere where a type is named but not declared. For example, given:</p>
-     * 
-     * <pre><code>
-     *  typedef unsigned size_type;
-     *  size_type size;</code></pre>
-     * 
-     * <p>The typedef is a declaration of size_type (CXCursor_TypedefDecl), while the type of the variable "size" is referenced. The cursor referenced by the
-     * type of size is the typedef for size_type.</p>
-     * </li>
-     * <li>{@link #CXCursor_TemplateRef Cursor_TemplateRef} - A reference to a class template, function template, template template parameter, or class template partial specialization.</li>
-     * <li>{@link #CXCursor_NamespaceRef Cursor_NamespaceRef} - A reference to a namespace or namespace alias.</li>
-     * <li>{@link #CXCursor_MemberRef Cursor_MemberRef} - A reference to a member of a struct, union, or class that occurs in some non-expression context, e.g., a designated initializer.</li>
-     * <li>{@link #CXCursor_LabelRef Cursor_LabelRef} - 
-     * A reference to a labeled statement.
-     * 
-     * <p>This cursor kind is used to describe the jump to "start_over" in the goto statement in the following example:</p>
-     * 
-     * <pre><code>
-     *    start_over:
-     *      ++counter;
-     * 
-     *      goto start_over;</code></pre>
-     * 
-     * <p>A label reference cursor refers to a label statement.</p>
-     * </li>
-     * <li>{@link #CXCursor_OverloadedDeclRef Cursor_OverloadedDeclRef} - 
-     * A reference to a set of overloaded functions or function templates that has not yet been resolved to a specific function or function template.
-     * 
-     * <p>An overloaded declaration reference cursor occurs in C++ templates where a dependent name refers to a function. For example:</p>
-     * 
-     * <pre><code>
-     *  template&lt;typename T&gt; void swap(T&amp;, T&amp;);
-     * 
-     *  struct X { ... };
-     *  void swap(X&amp;, X&amp;);
-     * 
-     *  template&lt;typename T&gt;
-     *  void reverse(T* first, T* last) {
-     *    while (first &lt; last - 1) {
-     *      swap(*first, *--last);
-     *      ++first;
-     *    }
-     *  }
-     * 
-     *  struct Y { };
-     *  void swap(Y&amp;, Y&amp;);</code></pre>
-     * 
-     * <p>Here, the identifier "swap" is associated with an overloaded declaration reference. In the template definition, "swap" refers to either of the two
-     * "swap" functions declared above, so both results will be available. At instantiation time, "swap" may also refer to other functions found via
-     * argument-dependent lookup (e.g., the "swap" function at the end of the example).</p>
-     * 
-     * <p>The functions {@code clang_getNumOverloadedDecls()} and {@code clang_getOverloadedDecl()} can be used to retrieve the definitions referenced by
-     * this cursor.</p>
-     * </li>
-     * <li>{@link #CXCursor_VariableRef Cursor_VariableRef} - A reference to a variable that occurs in some non-expression context, e.g., a C++ lambda capture list.</li>
-     * <li>{@link #CXCursor_LastRef Cursor_LastRef} - A reference to a variable that occurs in some non-expression context, e.g., a C++ lambda capture list.</li>
-     * <li>{@link #CXCursor_FirstInvalid Cursor_FirstInvalid} - Error conditions</li>
-     * <li>{@link #CXCursor_InvalidFile Cursor_InvalidFile} - Error conditions</li>
-     * <li>{@link #CXCursor_NoDeclFound Cursor_NoDeclFound} - Error conditions</li>
-     * <li>{@link #CXCursor_NotImplemented Cursor_NotImplemented} - Error conditions</li>
-     * <li>{@link #CXCursor_InvalidCode Cursor_InvalidCode} - Error conditions</li>
-     * <li>{@link #CXCursor_LastInvalid Cursor_LastInvalid} - Error conditions</li>
-     * <li>{@link #CXCursor_FirstExpr Cursor_FirstExpr} - Expressions</li>
-     * <li>{@link #CXCursor_UnexposedExpr Cursor_UnexposedExpr} - 
-     * An expression whose specific kind is not exposed via this interface.
-     * 
-     * <p>Unexposed expressions have the same operations as any other kind of expression; one can extract their location information, spelling, children,
-     * etc. However, the specific kind of the expression is not reported.</p>
-     * </li>
-     * <li>{@link #CXCursor_DeclRefExpr Cursor_DeclRefExpr} - An expression that refers to some value declaration, such as a function, variable, or enumerator.</li>
-     * <li>{@link #CXCursor_MemberRefExpr Cursor_MemberRefExpr} - An expression that refers to a member of a struct, union, class, Objective-C class, etc.</li>
-     * <li>{@link #CXCursor_CallExpr Cursor_CallExpr} - An expression that calls a function.</li>
-     * <li>{@link #CXCursor_ObjCMessageExpr Cursor_ObjCMessageExpr} - An expression that sends a message to an Objective-C object or class.</li>
-     * <li>{@link #CXCursor_BlockExpr Cursor_BlockExpr} - An expression that represents a block literal.</li>
-     * <li>{@link #CXCursor_IntegerLiteral Cursor_IntegerLiteral} - An integer literal.</li>
-     * <li>{@link #CXCursor_FloatingLiteral Cursor_FloatingLiteral} - A floating point number literal.</li>
-     * <li>{@link #CXCursor_ImaginaryLiteral Cursor_ImaginaryLiteral} - An imaginary number literal.</li>
-     * <li>{@link #CXCursor_StringLiteral Cursor_StringLiteral} - A string literal.</li>
-     * <li>{@link #CXCursor_CharacterLiteral Cursor_CharacterLiteral} - A character literal.</li>
-     * <li>{@link #CXCursor_ParenExpr Cursor_ParenExpr} - 
-     * A parenthesized expression, e.g. "(1)".
-     * 
-     * <p>This AST node is only formed if full location information is requested.</p>
-     * </li>
-     * <li>{@link #CXCursor_UnaryOperator Cursor_UnaryOperator} - This represents the unary-expression's (except sizeof and alignof).</li>
-     * <li>{@link #CXCursor_ArraySubscriptExpr Cursor_ArraySubscriptExpr} - [C99 6.5.2.1] Array Subscripting.</li>
-     * <li>{@link #CXCursor_BinaryOperator Cursor_BinaryOperator} - A builtin binary operation expression such as "x + y" or "x &lt;= y".</li>
-     * <li>{@link #CXCursor_CompoundAssignOperator Cursor_CompoundAssignOperator} - Compound assignment such as "+=".</li>
-     * <li>{@link #CXCursor_ConditionalOperator Cursor_ConditionalOperator} - The ?: ternary operator.</li>
-     * <li>{@link #CXCursor_CStyleCastExpr Cursor_CStyleCastExpr} - 
-     * An explicit cast in C (C99 6.5.4) or a C-style cast in C++ (C++ [expr.cast]), which uses the syntax (Type)expr.
-     * 
-     * <p>For example: (int)f.</p>
-     * </li>
-     * <li>{@link #CXCursor_CompoundLiteralExpr Cursor_CompoundLiteralExpr} - [C99 6.5.2.5]</li>
-     * <li>{@link #CXCursor_InitListExpr Cursor_InitListExpr} - Describes an C or C++ initializer list.</li>
-     * <li>{@link #CXCursor_AddrLabelExpr Cursor_AddrLabelExpr} - The GNU address of label extension, representing {@code &&label}.</li>
-     * <li>{@link #CXCursor_StmtExpr Cursor_StmtExpr} - This is the GNU Statement Expression extension: ({int X=4; X;})</li>
-     * <li>{@link #CXCursor_GenericSelectionExpr Cursor_GenericSelectionExpr} - Represents a C11 generic selection.</li>
-     * <li>{@link #CXCursor_GNUNullExpr Cursor_GNUNullExpr} - 
-     * Implements the GNU __null extension, which is a name for a null pointer constant that has integral type (e.g., int or long) and is the same size
-     * and alignment as a pointer.
-     * 
-     * <p>The __null extension is typically only used by system headers, which define {@code NULL} as __null in C++ rather than using 0 (which is an integer that
-     * may not match the size of a pointer).</p>
-     * </li>
-     * <li>{@link #CXCursor_CXXStaticCastExpr Cursor_CXXStaticCastExpr} - C++'s static_cast &lt;&gt; expression.</li>
-     * <li>{@link #CXCursor_CXXDynamicCastExpr Cursor_CXXDynamicCastExpr} - C++'s dynamic_cast &lt;&gt; expression.</li>
-     * <li>{@link #CXCursor_CXXReinterpretCastExpr Cursor_CXXReinterpretCastExpr} - C++'s reinterpret_cast &lt;&gt; expression.</li>
-     * <li>{@link #CXCursor_CXXConstCastExpr Cursor_CXXConstCastExpr} - C++'s const_cast &lt;&gt; expression.</li>
-     * <li>{@link #CXCursor_CXXFunctionalCastExpr Cursor_CXXFunctionalCastExpr} - 
-     * Represents an explicit C++ type conversion that uses "functional" notion (C++ [expr.type.conv]).
-     * 
-     * <p>Example:</p>
-     * 
-     * <pre><code>
-     *    x = int(0.5);</code></pre>
-     * </li>
-     * <li>{@link #CXCursor_CXXTypeidExpr Cursor_CXXTypeidExpr} - A C++ typeid expression (C++ [expr.typeid]).</li>
-     * <li>{@link #CXCursor_CXXBoolLiteralExpr Cursor_CXXBoolLiteralExpr} - [C++ 2.13.5] C++ Boolean Literal.</li>
-     * <li>{@link #CXCursor_CXXNullPtrLiteralExpr Cursor_CXXNullPtrLiteralExpr} - [C++0x 2.14.7] C++ Pointer Literal.</li>
-     * <li>{@link #CXCursor_CXXThisExpr Cursor_CXXThisExpr} - Represents the "this" expression in C++</li>
-     * <li>{@link #CXCursor_CXXThrowExpr Cursor_CXXThrowExpr} - 
-     * [C++ 15] C++ Throw Expression.
-     * 
-     * <p>This handles 'throw' and 'throw' assignment-expression. When assignment-expression isn't present, Op will be null.</p>
-     * </li>
-     * <li>{@link #CXCursor_CXXNewExpr Cursor_CXXNewExpr} - A new expression for memory allocation and constructor calls, e.g: "new CXXNewExpr(foo)".</li>
-     * <li>{@link #CXCursor_CXXDeleteExpr Cursor_CXXDeleteExpr} - A delete expression for memory deallocation and destructor calls, e.g. "delete[] pArray".</li>
-     * <li>{@link #CXCursor_UnaryExpr Cursor_UnaryExpr} - A unary expression. (noexcept, sizeof, or other traits)</li>
-     * <li>{@link #CXCursor_ObjCStringLiteral Cursor_ObjCStringLiteral} - An Objective-C string literal i.e. " foo".</li>
-     * <li>{@link #CXCursor_ObjCEncodeExpr Cursor_ObjCEncodeExpr} - An Objective-C @ encode expression.</li>
-     * <li>{@link #CXCursor_ObjCSelectorExpr Cursor_ObjCSelectorExpr} - An Objective-C @ selector expression.</li>
-     * <li>{@link #CXCursor_ObjCProtocolExpr Cursor_ObjCProtocolExpr} - An Objective-C @ protocol expression.</li>
-     * <li>{@link #CXCursor_ObjCBridgedCastExpr Cursor_ObjCBridgedCastExpr} - 
-     * An Objective-C "bridged" cast expression, which casts between Objective-C pointers and C pointers, transferring ownership in the process.
-     * 
-     * <pre><code>
-     *    NSString *str = (__bridge_transfer NSString *)CFCreateString();</code></pre>
-     * </li>
-     * <li>{@link #CXCursor_PackExpansionExpr Cursor_PackExpansionExpr} - 
-     * Represents a C++0x pack expansion that produces a sequence of expressions.
-     * 
-     * <p>A pack expansion expression contains a pattern (which itself is an expression) followed by an ellipsis. For example:</p>
-     * 
-     * <pre><code>
-     *  template&lt;typename F, typename ...Types&gt;
-     *  void forward(F f, Types &amp;&amp;...args) {
-     *   f(static_cast&lt;Types&amp;&amp;&gt;(args)...);
-     *  }</code></pre>
-     * </li>
-     * <li>{@link #CXCursor_SizeOfPackExpr Cursor_SizeOfPackExpr} - 
-     * Represents an expression that computes the length of a parameter pack.
-     * 
-     * <pre><code>
-     *  template&lt;typename ...Types&gt;
-     *  struct count {
-     *    static const unsigned value = sizeof...(Types);
-     *  };</code></pre>
-     * </li>
-     * <li>{@link #CXCursor_LambdaExpr Cursor_LambdaExpr} - 
-     * Represents a C++ lambda expression that produces a local function object.
-     * 
-     * <pre><code>
-     *  void abssort(float *x, unsigned N) {
-     *    std::sort(x, x + N,
-     *              [](float a, float b) {
-     *                return std::abs(a) &lt; std::abs(b);
-     *              });
-     *  }</code></pre>
-     * </li>
-     * <li>{@link #CXCursor_ObjCBoolLiteralExpr Cursor_ObjCBoolLiteralExpr} - Objective-c Boolean Literal.</li>
-     * <li>{@link #CXCursor_ObjCSelfExpr Cursor_ObjCSelfExpr} - Represents the "self" expression in an Objective-C method.</li>
-     * <li>{@link #CXCursor_ArraySectionExpr Cursor_ArraySectionExpr} - OpenMP 5.0 [2.1.5, Array Section].</li>
-     * <li>{@link #CXCursor_ObjCAvailabilityCheckExpr Cursor_ObjCAvailabilityCheckExpr} - Represents an {@code @available (...)} check.</li>
-     * <li>{@link #CXCursor_FixedPointLiteral Cursor_FixedPointLiteral} - Fixed point literal</li>
-     * <li>{@link #CXCursor_OMPArrayShapingExpr Cursor_OMPArrayShapingExpr} - OpenMP 5.0 [2.1.4, Array Shaping].</li>
-     * <li>{@link #CXCursor_OMPIteratorExpr Cursor_OMPIteratorExpr} - OpenMP 5.0 [2.1.6 Iterators]</li>
-     * <li>{@link #CXCursor_CXXAddrspaceCastExpr Cursor_CXXAddrspaceCastExpr} - OpenCL's {@code addrspace_cast<>} expression.</li>
-     * <li>{@link #CXCursor_ConceptSpecializationExpr Cursor_ConceptSpecializationExpr} - Expression that references a C++20 concept.</li>
-     * <li>{@link #CXCursor_RequiresExpr Cursor_RequiresExpr} - Expression that references a C++20 concept requires expression.</li>
-     * <li>{@link #CXCursor_CXXParenListInitExpr Cursor_CXXParenListInitExpr} - Expression that references a C++20 parenthesized list aggregate initializer.</li>
-     * <li>{@link #CXCursor_PackIndexingExpr Cursor_PackIndexingExpr} - Represents a C++26 pack indexing expression.</li>
-     * <li>{@link #CXCursor_LastExpr Cursor_LastExpr}</li>
-     * <li>{@link #CXCursor_FirstStmt Cursor_FirstStmt} - Statements</li>
-     * <li>{@link #CXCursor_UnexposedStmt Cursor_UnexposedStmt} - 
-     * A statement whose specific kind is not exposed via this interface.
-     * 
-     * <p>Unexposed statements have the same operations as any other kind of statement; one can extract their location information, spelling, children, etc.
-     * However, the specific kind of the statement is not reported.</p>
-     * </li>
-     * <li>{@link #CXCursor_LabelStmt Cursor_LabelStmt} - 
-     * A labelled statement in a function.
-     * 
-     * <p>This cursor kind is used to describe the "start_over:" label statement in the following example:</p>
-     * 
-     * <pre><code>
-     *    start_over:
-     *      ++counter;</code></pre>
-     * </li>
-     * <li>{@link #CXCursor_CompoundStmt Cursor_CompoundStmt} - 
-     * A group of statements like { stmt stmt }.
-     * 
-     * <p>This cursor kind is used to describe compound statements, e.g. function bodies.</p>
-     * </li>
-     * <li>{@link #CXCursor_CaseStmt Cursor_CaseStmt} - A case statement.</li>
-     * <li>{@link #CXCursor_DefaultStmt Cursor_DefaultStmt} - A default statement.</li>
-     * <li>{@link #CXCursor_IfStmt Cursor_IfStmt} - An if statement</li>
-     * <li>{@link #CXCursor_SwitchStmt Cursor_SwitchStmt} - A switch statement.</li>
-     * <li>{@link #CXCursor_WhileStmt Cursor_WhileStmt} - A while statement.</li>
-     * <li>{@link #CXCursor_DoStmt Cursor_DoStmt} - A do statement.</li>
-     * <li>{@link #CXCursor_ForStmt Cursor_ForStmt} - A for statement.</li>
-     * <li>{@link #CXCursor_GotoStmt Cursor_GotoStmt} - A goto statement.</li>
-     * <li>{@link #CXCursor_IndirectGotoStmt Cursor_IndirectGotoStmt} - An indirect goto statement.</li>
-     * <li>{@link #CXCursor_ContinueStmt Cursor_ContinueStmt} - A continue statement.</li>
-     * <li>{@link #CXCursor_BreakStmt Cursor_BreakStmt} - A break statement.</li>
-     * <li>{@link #CXCursor_ReturnStmt Cursor_ReturnStmt} - A return statement.</li>
-     * <li>{@link #CXCursor_GCCAsmStmt Cursor_GCCAsmStmt} - A GCC inline assembly statement extension.</li>
-     * <li>{@link #CXCursor_AsmStmt Cursor_AsmStmt} - A GCC inline assembly statement extension.</li>
-     * <li>{@link #CXCursor_ObjCAtTryStmt Cursor_ObjCAtTryStmt} - Objective-C's overall @ try- @ catch- @ finally statement.</li>
-     * <li>{@link #CXCursor_ObjCAtCatchStmt Cursor_ObjCAtCatchStmt} - Objective-C's @ catch statement.</li>
-     * <li>{@link #CXCursor_ObjCAtFinallyStmt Cursor_ObjCAtFinallyStmt} - Objective-C's @ finally statement.</li>
-     * <li>{@link #CXCursor_ObjCAtThrowStmt Cursor_ObjCAtThrowStmt} - Objective-C's @ throw statement.</li>
-     * <li>{@link #CXCursor_ObjCAtSynchronizedStmt Cursor_ObjCAtSynchronizedStmt} - Objective-C's @ synchronized statement.</li>
-     * <li>{@link #CXCursor_ObjCAutoreleasePoolStmt Cursor_ObjCAutoreleasePoolStmt} - Objective-C's autorelease pool statement.</li>
-     * <li>{@link #CXCursor_ObjCForCollectionStmt Cursor_ObjCForCollectionStmt} - Objective-C's collection statement.</li>
-     * <li>{@link #CXCursor_CXXCatchStmt Cursor_CXXCatchStmt} - C++'s catch statement.</li>
-     * <li>{@link #CXCursor_CXXTryStmt Cursor_CXXTryStmt} - C++'s try statement.</li>
-     * <li>{@link #CXCursor_CXXForRangeStmt Cursor_CXXForRangeStmt} - C++'s for (* : *) statement.</li>
-     * <li>{@link #CXCursor_SEHTryStmt Cursor_SEHTryStmt} - Windows Structured Exception Handling's try statement.</li>
-     * <li>{@link #CXCursor_SEHExceptStmt Cursor_SEHExceptStmt} - Windows Structured Exception Handling's except statement.</li>
-     * <li>{@link #CXCursor_SEHFinallyStmt Cursor_SEHFinallyStmt} - Windows Structured Exception Handling's finally statement.</li>
-     * <li>{@link #CXCursor_MSAsmStmt Cursor_MSAsmStmt} - A MS inline assembly statement extension.</li>
-     * <li>{@link #CXCursor_NullStmt Cursor_NullStmt} - 
-     * The null statement ";": C99 6.8.3p3.
-     * 
-     * <p>This cursor kind is used to describe the null statement.</p>
-     * </li>
-     * <li>{@link #CXCursor_DeclStmt Cursor_DeclStmt} - Adaptor class for mixing declarations with statements and expressions.</li>
-     * <li>{@link #CXCursor_OMPParallelDirective Cursor_OMPParallelDirective} - OpenMP parallel directive.</li>
-     * <li>{@link #CXCursor_OMPSimdDirective Cursor_OMPSimdDirective} - OpenMP SIMD directive.</li>
-     * <li>{@link #CXCursor_OMPForDirective Cursor_OMPForDirective} - OpenMP for directive.</li>
-     * <li>{@link #CXCursor_OMPSectionsDirective Cursor_OMPSectionsDirective} - OpenMP sections directive.</li>
-     * <li>{@link #CXCursor_OMPSectionDirective Cursor_OMPSectionDirective} - OpenMP section directive.</li>
-     * <li>{@link #CXCursor_OMPSingleDirective Cursor_OMPSingleDirective} - OpenMP single directive.</li>
-     * <li>{@link #CXCursor_OMPParallelForDirective Cursor_OMPParallelForDirective} - OpenMP parallel for directive.</li>
-     * <li>{@link #CXCursor_OMPParallelSectionsDirective Cursor_OMPParallelSectionsDirective} - OpenMP parallel sections directive.</li>
-     * <li>{@link #CXCursor_OMPTaskDirective Cursor_OMPTaskDirective} - OpenMP task directive.</li>
-     * <li>{@link #CXCursor_OMPMasterDirective Cursor_OMPMasterDirective} - OpenMP master directive.</li>
-     * <li>{@link #CXCursor_OMPCriticalDirective Cursor_OMPCriticalDirective} - OpenMP critical directive.</li>
-     * <li>{@link #CXCursor_OMPTaskyieldDirective Cursor_OMPTaskyieldDirective} - OpenMP taskyield directive.</li>
-     * <li>{@link #CXCursor_OMPBarrierDirective Cursor_OMPBarrierDirective} - OpenMP barrier directive.</li>
-     * <li>{@link #CXCursor_OMPTaskwaitDirective Cursor_OMPTaskwaitDirective} - OpenMP taskwait directive.</li>
-     * <li>{@link #CXCursor_OMPFlushDirective Cursor_OMPFlushDirective} - OpenMP flush directive.</li>
-     * <li>{@link #CXCursor_SEHLeaveStmt Cursor_SEHLeaveStmt} - Windows Structured Exception Handling's leave statement.</li>
-     * <li>{@link #CXCursor_OMPOrderedDirective Cursor_OMPOrderedDirective} - OpenMP ordered directive.</li>
-     * <li>{@link #CXCursor_OMPAtomicDirective Cursor_OMPAtomicDirective} - OpenMP atomic directive.</li>
-     * <li>{@link #CXCursor_OMPForSimdDirective Cursor_OMPForSimdDirective} - OpenMP for SIMD directive.</li>
-     * <li>{@link #CXCursor_OMPParallelForSimdDirective Cursor_OMPParallelForSimdDirective} - OpenMP parallel for SIMD directive.</li>
-     * <li>{@link #CXCursor_OMPTargetDirective Cursor_OMPTargetDirective} - OpenMP target directive.</li>
-     * <li>{@link #CXCursor_OMPTeamsDirective Cursor_OMPTeamsDirective} - OpenMP teams directive.</li>
-     * <li>{@link #CXCursor_OMPTaskgroupDirective Cursor_OMPTaskgroupDirective} - OpenMP taskgroup directive.</li>
-     * <li>{@link #CXCursor_OMPCancellationPointDirective Cursor_OMPCancellationPointDirective} - OpenMP cancellation point directive.</li>
-     * <li>{@link #CXCursor_OMPCancelDirective Cursor_OMPCancelDirective} - OpenMP cancel directive.</li>
-     * <li>{@link #CXCursor_OMPTargetDataDirective Cursor_OMPTargetDataDirective} - OpenMP target data directive.</li>
-     * <li>{@link #CXCursor_OMPTaskLoopDirective Cursor_OMPTaskLoopDirective} - OpenMP taskloop directive.</li>
-     * <li>{@link #CXCursor_OMPTaskLoopSimdDirective Cursor_OMPTaskLoopSimdDirective} - OpenMP taskloop simd directive.</li>
-     * <li>{@link #CXCursor_OMPDistributeDirective Cursor_OMPDistributeDirective} - OpenMP distribute directive.</li>
-     * <li>{@link #CXCursor_OMPTargetEnterDataDirective Cursor_OMPTargetEnterDataDirective} - OpenMP target enter data directive.</li>
-     * <li>{@link #CXCursor_OMPTargetExitDataDirective Cursor_OMPTargetExitDataDirective} - OpenMP target exit data directive.</li>
-     * <li>{@link #CXCursor_OMPTargetParallelDirective Cursor_OMPTargetParallelDirective} - OpenMP target parallel directive.</li>
-     * <li>{@link #CXCursor_OMPTargetParallelForDirective Cursor_OMPTargetParallelForDirective} - OpenMP target parallel for directive.</li>
-     * <li>{@link #CXCursor_OMPTargetUpdateDirective Cursor_OMPTargetUpdateDirective} - OpenMP target update directive.</li>
-     * <li>{@link #CXCursor_OMPDistributeParallelForDirective Cursor_OMPDistributeParallelForDirective} - OpenMP distribute parallel for directive.</li>
-     * <li>{@link #CXCursor_OMPDistributeParallelForSimdDirective Cursor_OMPDistributeParallelForSimdDirective} - OpenMP distribute parallel for simd directive.</li>
-     * <li>{@link #CXCursor_OMPDistributeSimdDirective Cursor_OMPDistributeSimdDirective} - OpenMP distribute simd directive.</li>
-     * <li>{@link #CXCursor_OMPTargetParallelForSimdDirective Cursor_OMPTargetParallelForSimdDirective} - OpenMP target parallel for simd directive.</li>
-     * <li>{@link #CXCursor_OMPTargetSimdDirective Cursor_OMPTargetSimdDirective} - OpenMP target simd directive.</li>
-     * <li>{@link #CXCursor_OMPTeamsDistributeDirective Cursor_OMPTeamsDistributeDirective} - OpenMP teams distribute directive.</li>
-     * <li>{@link #CXCursor_OMPTeamsDistributeSimdDirective Cursor_OMPTeamsDistributeSimdDirective} - OpenMP teams distribute simd directive.</li>
-     * <li>{@link #CXCursor_OMPTeamsDistributeParallelForSimdDirective Cursor_OMPTeamsDistributeParallelForSimdDirective} - OpenMP teams distribute parallel for simd directive.</li>
-     * <li>{@link #CXCursor_OMPTeamsDistributeParallelForDirective Cursor_OMPTeamsDistributeParallelForDirective} - OpenMP teams distribute parallel for directive.</li>
-     * <li>{@link #CXCursor_OMPTargetTeamsDirective Cursor_OMPTargetTeamsDirective} - OpenMP target teams directive.</li>
-     * <li>{@link #CXCursor_OMPTargetTeamsDistributeDirective Cursor_OMPTargetTeamsDistributeDirective} - OpenMP target teams distribute directive.</li>
-     * <li>{@link #CXCursor_OMPTargetTeamsDistributeParallelForDirective Cursor_OMPTargetTeamsDistributeParallelForDirective} - OpenMP target teams distribute parallel for directive.</li>
-     * <li>{@link #CXCursor_OMPTargetTeamsDistributeParallelForSimdDirective Cursor_OMPTargetTeamsDistributeParallelForSimdDirective} - OpenMP target teams distribute parallel for simd directive.</li>
-     * <li>{@link #CXCursor_OMPTargetTeamsDistributeSimdDirective Cursor_OMPTargetTeamsDistributeSimdDirective} - OpenMP target teams distribute simd directive.</li>
-     * <li>{@link #CXCursor_BuiltinBitCastExpr Cursor_BuiltinBitCastExpr} - C++2a std::bit_cast expression.</li>
-     * <li>{@link #CXCursor_OMPMasterTaskLoopDirective Cursor_OMPMasterTaskLoopDirective} - OpenMP master taskloop directive.</li>
-     * <li>{@link #CXCursor_OMPParallelMasterTaskLoopDirective Cursor_OMPParallelMasterTaskLoopDirective} - OpenMP parallel master taskloop directive.</li>
-     * <li>{@link #CXCursor_OMPMasterTaskLoopSimdDirective Cursor_OMPMasterTaskLoopSimdDirective} - OpenMP master taskloop simd directive.</li>
-     * <li>{@link #CXCursor_OMPParallelMasterTaskLoopSimdDirective Cursor_OMPParallelMasterTaskLoopSimdDirective} - OpenMP parallel master taskloop simd directive.</li>
-     * <li>{@link #CXCursor_OMPParallelMasterDirective Cursor_OMPParallelMasterDirective} - OpenMP parallel master directive.</li>
-     * <li>{@link #CXCursor_OMPDepobjDirective Cursor_OMPDepobjDirective} - OpenMP depobj directive.</li>
-     * <li>{@link #CXCursor_OMPScanDirective Cursor_OMPScanDirective} - OpenMP scan directive.</li>
-     * <li>{@link #CXCursor_OMPTileDirective Cursor_OMPTileDirective} - OpenMP tile directive.</li>
-     * <li>{@link #CXCursor_OMPCanonicalLoop Cursor_OMPCanonicalLoop} - OpenMP canonical loop.</li>
-     * <li>{@link #CXCursor_OMPInteropDirective Cursor_OMPInteropDirective} - OpenMP interop directive.</li>
-     * <li>{@link #CXCursor_OMPDispatchDirective Cursor_OMPDispatchDirective} - OpenMP dispatch directive.</li>
-     * <li>{@link #CXCursor_OMPMaskedDirective Cursor_OMPMaskedDirective} - OpenMP masked directive.</li>
-     * <li>{@link #CXCursor_OMPUnrollDirective Cursor_OMPUnrollDirective} - OpenMP unroll directive.</li>
-     * <li>{@link #CXCursor_OMPMetaDirective Cursor_OMPMetaDirective} - OpenMP metadirective directive.</li>
-     * <li>{@link #CXCursor_OMPGenericLoopDirective Cursor_OMPGenericLoopDirective} - OpenMP loop directive.</li>
-     * <li>{@link #CXCursor_OMPTeamsGenericLoopDirective Cursor_OMPTeamsGenericLoopDirective} - OpenMP teams loop directive.</li>
-     * <li>{@link #CXCursor_OMPTargetTeamsGenericLoopDirective Cursor_OMPTargetTeamsGenericLoopDirective} - OpenMP target teams loop directive.</li>
-     * <li>{@link #CXCursor_OMPParallelGenericLoopDirective Cursor_OMPParallelGenericLoopDirective} - OpenMP parallel loop directive.</li>
-     * <li>{@link #CXCursor_OMPTargetParallelGenericLoopDirective Cursor_OMPTargetParallelGenericLoopDirective} - OpenMP target parallel loop directive.</li>
-     * <li>{@link #CXCursor_OMPParallelMaskedDirective Cursor_OMPParallelMaskedDirective} - OpenMP parallel masked directive.</li>
-     * <li>{@link #CXCursor_OMPMaskedTaskLoopDirective Cursor_OMPMaskedTaskLoopDirective} - OpenMP masked taskloop directive.</li>
-     * <li>{@link #CXCursor_OMPMaskedTaskLoopSimdDirective Cursor_OMPMaskedTaskLoopSimdDirective} - OpenMP masked taskloop simd directive.</li>
-     * <li>{@link #CXCursor_OMPParallelMaskedTaskLoopDirective Cursor_OMPParallelMaskedTaskLoopDirective} - OpenMP parallel masked taskloop directive.</li>
-     * <li>{@link #CXCursor_OMPParallelMaskedTaskLoopSimdDirective Cursor_OMPParallelMaskedTaskLoopSimdDirective} - OpenMP parallel masked taskloop simd directive.</li>
-     * <li>{@link #CXCursor_OMPErrorDirective Cursor_OMPErrorDirective} - OpenMP error directive.</li>
-     * <li>{@link #CXCursor_OMPScopeDirective Cursor_OMPScopeDirective} - OpenMP scope directive.</li>
-     * <li>{@link #CXCursor_OMPReverseDirective Cursor_OMPReverseDirective} - OpenMP reverse directive.</li>
-     * <li>{@link #CXCursor_OMPInterchangeDirective Cursor_OMPInterchangeDirective} - OpenMP interchange directive.</li>
-     * <li>{@link #CXCursor_OpenACCComputeConstruct Cursor_OpenACCComputeConstruct} - OpenACC Compute Construct.</li>
-     * <li>{@link #CXCursor_OpenACCLoopConstruct Cursor_OpenACCLoopConstruct} - OpenACC Loop Construct.</li>
-     * <li>{@link #CXCursor_LastStmt Cursor_LastStmt}</li>
-     * <li>{@link #CXCursor_TranslationUnit Cursor_TranslationUnit} - 
-     * Cursor that represents the translation unit itself.
-     * 
-     * <p>The translation unit cursor exists primarily to act as the root cursor for traversing the contents of a translation unit.</p>
-     * </li>
-     * <li>{@link #CXCursor_FirstAttr Cursor_FirstAttr} - Attributes</li>
-     * <li>{@link #CXCursor_UnexposedAttr Cursor_UnexposedAttr} - An attribute whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXCursor_IBActionAttr Cursor_IBActionAttr}</li>
-     * <li>{@link #CXCursor_IBOutletAttr Cursor_IBOutletAttr}</li>
-     * <li>{@link #CXCursor_IBOutletCollectionAttr Cursor_IBOutletCollectionAttr}</li>
-     * <li>{@link #CXCursor_CXXFinalAttr Cursor_CXXFinalAttr}</li>
-     * <li>{@link #CXCursor_CXXOverrideAttr Cursor_CXXOverrideAttr}</li>
-     * <li>{@link #CXCursor_AnnotateAttr Cursor_AnnotateAttr}</li>
-     * <li>{@link #CXCursor_AsmLabelAttr Cursor_AsmLabelAttr}</li>
-     * <li>{@link #CXCursor_PackedAttr Cursor_PackedAttr}</li>
-     * <li>{@link #CXCursor_PureAttr Cursor_PureAttr}</li>
-     * <li>{@link #CXCursor_ConstAttr Cursor_ConstAttr}</li>
-     * <li>{@link #CXCursor_NoDuplicateAttr Cursor_NoDuplicateAttr}</li>
-     * <li>{@link #CXCursor_CUDAConstantAttr Cursor_CUDAConstantAttr}</li>
-     * <li>{@link #CXCursor_CUDADeviceAttr Cursor_CUDADeviceAttr}</li>
-     * <li>{@link #CXCursor_CUDAGlobalAttr Cursor_CUDAGlobalAttr}</li>
-     * <li>{@link #CXCursor_CUDAHostAttr Cursor_CUDAHostAttr}</li>
-     * <li>{@link #CXCursor_CUDASharedAttr Cursor_CUDASharedAttr}</li>
-     * <li>{@link #CXCursor_VisibilityAttr Cursor_VisibilityAttr}</li>
-     * <li>{@link #CXCursor_DLLExport Cursor_DLLExport}</li>
-     * <li>{@link #CXCursor_DLLImport Cursor_DLLImport}</li>
-     * <li>{@link #CXCursor_NSReturnsRetained Cursor_NSReturnsRetained}</li>
-     * <li>{@link #CXCursor_NSReturnsNotRetained Cursor_NSReturnsNotRetained}</li>
-     * <li>{@link #CXCursor_NSReturnsAutoreleased Cursor_NSReturnsAutoreleased}</li>
-     * <li>{@link #CXCursor_NSConsumesSelf Cursor_NSConsumesSelf}</li>
-     * <li>{@link #CXCursor_NSConsumed Cursor_NSConsumed}</li>
-     * <li>{@link #CXCursor_ObjCException Cursor_ObjCException}</li>
-     * <li>{@link #CXCursor_ObjCNSObject Cursor_ObjCNSObject}</li>
-     * <li>{@link #CXCursor_ObjCIndependentClass Cursor_ObjCIndependentClass}</li>
-     * <li>{@link #CXCursor_ObjCPreciseLifetime Cursor_ObjCPreciseLifetime}</li>
-     * <li>{@link #CXCursor_ObjCReturnsInnerPointer Cursor_ObjCReturnsInnerPointer}</li>
-     * <li>{@link #CXCursor_ObjCRequiresSuper Cursor_ObjCRequiresSuper}</li>
-     * <li>{@link #CXCursor_ObjCRootClass Cursor_ObjCRootClass}</li>
-     * <li>{@link #CXCursor_ObjCSubclassingRestricted Cursor_ObjCSubclassingRestricted}</li>
-     * <li>{@link #CXCursor_ObjCExplicitProtocolImpl Cursor_ObjCExplicitProtocolImpl}</li>
-     * <li>{@link #CXCursor_ObjCDesignatedInitializer Cursor_ObjCDesignatedInitializer}</li>
-     * <li>{@link #CXCursor_ObjCRuntimeVisible Cursor_ObjCRuntimeVisible}</li>
-     * <li>{@link #CXCursor_ObjCBoxable Cursor_ObjCBoxable}</li>
-     * <li>{@link #CXCursor_FlagEnum Cursor_FlagEnum}</li>
-     * <li>{@link #CXCursor_ConvergentAttr Cursor_ConvergentAttr}</li>
-     * <li>{@link #CXCursor_WarnUnusedAttr Cursor_WarnUnusedAttr}</li>
-     * <li>{@link #CXCursor_WarnUnusedResultAttr Cursor_WarnUnusedResultAttr}</li>
-     * <li>{@link #CXCursor_AlignedAttr Cursor_AlignedAttr}</li>
-     * <li>{@link #CXCursor_LastAttr Cursor_LastAttr}</li>
-     * <li>{@link #CXCursor_PreprocessingDirective Cursor_PreprocessingDirective} - Preprocessing</li>
-     * <li>{@link #CXCursor_MacroDefinition Cursor_MacroDefinition}</li>
-     * <li>{@link #CXCursor_MacroExpansion Cursor_MacroExpansion}</li>
-     * <li>{@link #CXCursor_MacroInstantiation Cursor_MacroInstantiation}</li>
-     * <li>{@link #CXCursor_InclusionDirective Cursor_InclusionDirective}</li>
-     * <li>{@link #CXCursor_FirstPreprocessing Cursor_FirstPreprocessing}</li>
-     * <li>{@link #CXCursor_LastPreprocessing Cursor_LastPreprocessing}</li>
-     * <li>{@link #CXCursor_ModuleImportDecl Cursor_ModuleImportDecl} - A module import declaration.</li>
-     * <li>{@link #CXCursor_TypeAliasTemplateDecl Cursor_TypeAliasTemplateDecl}</li>
-     * <li>{@link #CXCursor_StaticAssert Cursor_StaticAssert} - A static_assert or _Static_assert node</li>
-     * <li>{@link #CXCursor_FriendDecl Cursor_FriendDecl} - a friend declaration.</li>
-     * <li>{@link #CXCursor_ConceptDecl Cursor_ConceptDecl} - a concept declaration.</li>
-     * <li>{@link #CXCursor_FirstExtraDecl Cursor_FirstExtraDecl}</li>
-     * <li>{@link #CXCursor_LastExtraDecl Cursor_LastExtraDecl}</li>
-     * <li>{@link #CXCursor_OverloadCandidate Cursor_OverloadCandidate} - A code completion overload candidate.</li>
-     * </ul>
-     */
     public static final int
         CXCursor_UnexposedDecl                                    = 1,
         CXCursor_StructDecl                                       = 2,
@@ -1561,21 +782,6 @@ public class ClangIndex {
         CXCursor_LastExtraDecl                                    = CXCursor_ConceptDecl,
         CXCursor_OverloadCandidate                                = 700;
 
-    /**
-     * Describe the linkage of the entity referred to by a cursor.
-     * 
-     * <p>({@code enum CXLinkageKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXLinkage_Invalid Linkage_Invalid} - This value indicates that no linkage information is available for a provided CXCursor.</li>
-     * <li>{@link #CXLinkage_NoLinkage Linkage_NoLinkage} - This is the linkage for variables, parameters, and so on that have automatic storage.  This covers normal (non-extern) local variables.</li>
-     * <li>{@link #CXLinkage_Internal Linkage_Internal} - This is the linkage for static variables and static functions.</li>
-     * <li>{@link #CXLinkage_UniqueExternal Linkage_UniqueExternal} - This is the linkage for entities with external linkage that live in C++ anonymous namespaces.</li>
-     * <li>{@link #CXLinkage_External Linkage_External} - This is the linkage for entities with true, external linkage.</li>
-     * </ul>
-     */
     public static final int
         CXLinkage_Invalid        = 0,
         CXLinkage_NoLinkage      = 1,
@@ -1583,202 +789,23 @@ public class ClangIndex {
         CXLinkage_UniqueExternal = 3,
         CXLinkage_External       = 4;
 
-    /**
-     * {@code enum CXVisibilityKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXVisibility_Invalid Visibility_Invalid} - This value indicates that no visibility information is available for a provided CXCursor.</li>
-     * <li>{@link #CXVisibility_Hidden Visibility_Hidden} - Symbol not seen by the linker.</li>
-     * <li>{@link #CXVisibility_Protected Visibility_Protected} - Symbol seen by the linker but resolves to a symbol inside this object.</li>
-     * <li>{@link #CXVisibility_Default Visibility_Default} - Symbol seen by the linker and acts like a normal symbol.</li>
-     * </ul>
-     */
     public static final int
         CXVisibility_Invalid   = 0,
         CXVisibility_Hidden    = 1,
         CXVisibility_Protected = 2,
         CXVisibility_Default   = 3;
 
-    /**
-     * Describe the "language" of the entity referred to by a cursor.
-     * 
-     * <p>({@code enum CXLanguageKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXLanguage_Invalid Language_Invalid}</li>
-     * <li>{@link #CXLanguage_C Language_C}</li>
-     * <li>{@link #CXLanguage_ObjC Language_ObjC}</li>
-     * <li>{@link #CXLanguage_CPlusPlus Language_CPlusPlus}</li>
-     * </ul>
-     */
     public static final int
         CXLanguage_Invalid   = 0,
         CXLanguage_C         = 1,
         CXLanguage_ObjC      = 2,
         CXLanguage_CPlusPlus = 3;
 
-    /**
-     * Describe the "thread-local storage (TLS) kind" of the declaration referred to by a cursor.
-     * 
-     * <p>({@code enum CXTLSKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXTLS_None TLS_None}</li>
-     * <li>{@link #CXTLS_Dynamic TLS_Dynamic}</li>
-     * <li>{@link #CXTLS_Static TLS_Static}</li>
-     * </ul>
-     */
     public static final int
         CXTLS_None    = 0,
         CXTLS_Dynamic = 1,
         CXTLS_Static  = 2;
 
-    /**
-     * Describes the kind of type
-     * 
-     * <p>({@code enum CXTypeKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXType_Invalid Type_Invalid} - Represents an invalid type (e.g., where no type is available).</li>
-     * <li>{@link #CXType_Unexposed Type_Unexposed} - A type whose specific kind is not exposed via this interface.</li>
-     * <li>{@link #CXType_Void Type_Void}</li>
-     * <li>{@link #CXType_Bool Type_Bool}</li>
-     * <li>{@link #CXType_Char_U Type_Char_U}</li>
-     * <li>{@link #CXType_UChar Type_UChar}</li>
-     * <li>{@link #CXType_Char16 Type_Char16}</li>
-     * <li>{@link #CXType_Char32 Type_Char32}</li>
-     * <li>{@link #CXType_UShort Type_UShort}</li>
-     * <li>{@link #CXType_UInt Type_UInt}</li>
-     * <li>{@link #CXType_ULong Type_ULong}</li>
-     * <li>{@link #CXType_ULongLong Type_ULongLong}</li>
-     * <li>{@link #CXType_UInt128 Type_UInt128}</li>
-     * <li>{@link #CXType_Char_S Type_Char_S}</li>
-     * <li>{@link #CXType_SChar Type_SChar}</li>
-     * <li>{@link #CXType_WChar Type_WChar}</li>
-     * <li>{@link #CXType_Short Type_Short}</li>
-     * <li>{@link #CXType_Int Type_Int}</li>
-     * <li>{@link #CXType_Long Type_Long}</li>
-     * <li>{@link #CXType_LongLong Type_LongLong}</li>
-     * <li>{@link #CXType_Int128 Type_Int128}</li>
-     * <li>{@link #CXType_Float Type_Float}</li>
-     * <li>{@link #CXType_Double Type_Double}</li>
-     * <li>{@link #CXType_LongDouble Type_LongDouble}</li>
-     * <li>{@link #CXType_NullPtr Type_NullPtr}</li>
-     * <li>{@link #CXType_Overload Type_Overload}</li>
-     * <li>{@link #CXType_Dependent Type_Dependent}</li>
-     * <li>{@link #CXType_ObjCId Type_ObjCId}</li>
-     * <li>{@link #CXType_ObjCClass Type_ObjCClass}</li>
-     * <li>{@link #CXType_ObjCSel Type_ObjCSel}</li>
-     * <li>{@link #CXType_Float128 Type_Float128}</li>
-     * <li>{@link #CXType_Half Type_Half}</li>
-     * <li>{@link #CXType_Float16 Type_Float16}</li>
-     * <li>{@link #CXType_ShortAccum Type_ShortAccum}</li>
-     * <li>{@link #CXType_Accum Type_Accum}</li>
-     * <li>{@link #CXType_LongAccum Type_LongAccum}</li>
-     * <li>{@link #CXType_UShortAccum Type_UShortAccum}</li>
-     * <li>{@link #CXType_UAccum Type_UAccum}</li>
-     * <li>{@link #CXType_ULongAccum Type_ULongAccum}</li>
-     * <li>{@link #CXType_BFloat16 Type_BFloat16}</li>
-     * <li>{@link #CXType_Ibm128 Type_Ibm128}</li>
-     * <li>{@link #CXType_FirstBuiltin Type_FirstBuiltin}</li>
-     * <li>{@link #CXType_LastBuiltin Type_LastBuiltin}</li>
-     * <li>{@link #CXType_Complex Type_Complex}</li>
-     * <li>{@link #CXType_Pointer Type_Pointer}</li>
-     * <li>{@link #CXType_BlockPointer Type_BlockPointer}</li>
-     * <li>{@link #CXType_LValueReference Type_LValueReference}</li>
-     * <li>{@link #CXType_RValueReference Type_RValueReference}</li>
-     * <li>{@link #CXType_Record Type_Record}</li>
-     * <li>{@link #CXType_Enum Type_Enum}</li>
-     * <li>{@link #CXType_Typedef Type_Typedef}</li>
-     * <li>{@link #CXType_ObjCInterface Type_ObjCInterface}</li>
-     * <li>{@link #CXType_ObjCObjectPointer Type_ObjCObjectPointer}</li>
-     * <li>{@link #CXType_FunctionNoProto Type_FunctionNoProto}</li>
-     * <li>{@link #CXType_FunctionProto Type_FunctionProto}</li>
-     * <li>{@link #CXType_ConstantArray Type_ConstantArray}</li>
-     * <li>{@link #CXType_Vector Type_Vector}</li>
-     * <li>{@link #CXType_IncompleteArray Type_IncompleteArray}</li>
-     * <li>{@link #CXType_VariableArray Type_VariableArray}</li>
-     * <li>{@link #CXType_DependentSizedArray Type_DependentSizedArray}</li>
-     * <li>{@link #CXType_MemberPointer Type_MemberPointer}</li>
-     * <li>{@link #CXType_Auto Type_Auto}</li>
-     * <li>{@link #CXType_Elaborated Type_Elaborated} - 
-     * Represents a type that was referred to using an elaborated type keyword.
-     * 
-     * <p>E.g., struct S, or via a qualified name, e.g., N::M::type, or both.</p>
-     * </li>
-     * <li>{@link #CXType_Pipe Type_Pipe} - OpenCL PipeType.</li>
-     * <li>{@link #CXType_OCLImage1dRO Type_OCLImage1dRO}</li>
-     * <li>{@link #CXType_OCLImage1dArrayRO Type_OCLImage1dArrayRO}</li>
-     * <li>{@link #CXType_OCLImage1dBufferRO Type_OCLImage1dBufferRO}</li>
-     * <li>{@link #CXType_OCLImage2dRO Type_OCLImage2dRO}</li>
-     * <li>{@link #CXType_OCLImage2dArrayRO Type_OCLImage2dArrayRO}</li>
-     * <li>{@link #CXType_OCLImage2dDepthRO Type_OCLImage2dDepthRO}</li>
-     * <li>{@link #CXType_OCLImage2dArrayDepthRO Type_OCLImage2dArrayDepthRO}</li>
-     * <li>{@link #CXType_OCLImage2dMSAARO Type_OCLImage2dMSAARO}</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAARO Type_OCLImage2dArrayMSAARO}</li>
-     * <li>{@link #CXType_OCLImage2dMSAADepthRO Type_OCLImage2dMSAADepthRO}</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAADepthRO Type_OCLImage2dArrayMSAADepthRO}</li>
-     * <li>{@link #CXType_OCLImage3dRO Type_OCLImage3dRO}</li>
-     * <li>{@link #CXType_OCLImage1dWO Type_OCLImage1dWO}</li>
-     * <li>{@link #CXType_OCLImage1dArrayWO Type_OCLImage1dArrayWO}</li>
-     * <li>{@link #CXType_OCLImage1dBufferWO Type_OCLImage1dBufferWO}</li>
-     * <li>{@link #CXType_OCLImage2dWO Type_OCLImage2dWO}</li>
-     * <li>{@link #CXType_OCLImage2dArrayWO Type_OCLImage2dArrayWO}</li>
-     * <li>{@link #CXType_OCLImage2dDepthWO Type_OCLImage2dDepthWO}</li>
-     * <li>{@link #CXType_OCLImage2dArrayDepthWO Type_OCLImage2dArrayDepthWO}</li>
-     * <li>{@link #CXType_OCLImage2dMSAAWO Type_OCLImage2dMSAAWO}</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAAWO Type_OCLImage2dArrayMSAAWO}</li>
-     * <li>{@link #CXType_OCLImage2dMSAADepthWO Type_OCLImage2dMSAADepthWO}</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAADepthWO Type_OCLImage2dArrayMSAADepthWO}</li>
-     * <li>{@link #CXType_OCLImage3dWO Type_OCLImage3dWO}</li>
-     * <li>{@link #CXType_OCLImage1dRW Type_OCLImage1dRW}</li>
-     * <li>{@link #CXType_OCLImage1dArrayRW Type_OCLImage1dArrayRW}</li>
-     * <li>{@link #CXType_OCLImage1dBufferRW Type_OCLImage1dBufferRW}</li>
-     * <li>{@link #CXType_OCLImage2dRW Type_OCLImage2dRW}</li>
-     * <li>{@link #CXType_OCLImage2dArrayRW Type_OCLImage2dArrayRW}</li>
-     * <li>{@link #CXType_OCLImage2dDepthRW Type_OCLImage2dDepthRW}</li>
-     * <li>{@link #CXType_OCLImage2dArrayDepthRW Type_OCLImage2dArrayDepthRW}</li>
-     * <li>{@link #CXType_OCLImage2dMSAARW Type_OCLImage2dMSAARW}</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAARW Type_OCLImage2dArrayMSAARW}</li>
-     * <li>{@link #CXType_OCLImage2dMSAADepthRW Type_OCLImage2dMSAADepthRW}</li>
-     * <li>{@link #CXType_OCLImage2dArrayMSAADepthRW Type_OCLImage2dArrayMSAADepthRW}</li>
-     * <li>{@link #CXType_OCLImage3dRW Type_OCLImage3dRW}</li>
-     * <li>{@link #CXType_OCLSampler Type_OCLSampler}</li>
-     * <li>{@link #CXType_OCLEvent Type_OCLEvent}</li>
-     * <li>{@link #CXType_OCLQueue Type_OCLQueue}</li>
-     * <li>{@link #CXType_OCLReserveID Type_OCLReserveID}</li>
-     * <li>{@link #CXType_ObjCObject Type_ObjCObject}</li>
-     * <li>{@link #CXType_ObjCTypeParam Type_ObjCTypeParam}</li>
-     * <li>{@link #CXType_Attributed Type_Attributed}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCMcePayload Type_OCLIntelSubgroupAVCMcePayload}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImePayload Type_OCLIntelSubgroupAVCImePayload}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCRefPayload Type_OCLIntelSubgroupAVCRefPayload}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCSicPayload Type_OCLIntelSubgroupAVCSicPayload}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCMceResult Type_OCLIntelSubgroupAVCMceResult}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResult Type_OCLIntelSubgroupAVCImeResult}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCRefResult Type_OCLIntelSubgroupAVCRefResult}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCSicResult Type_OCLIntelSubgroupAVCSicResult}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResultSingleReferenceStreamout Type_OCLIntelSubgroupAVCImeResultSingleReferenceStreamout}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResultDualReferenceStreamout Type_OCLIntelSubgroupAVCImeResultDualReferenceStreamout}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeSingleReferenceStreamin Type_OCLIntelSubgroupAVCImeSingleReferenceStreamin}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeDualReferenceStreamin Type_OCLIntelSubgroupAVCImeDualReferenceStreamin}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResultSingleRefStreamout Type_OCLIntelSubgroupAVCImeResultSingleRefStreamout}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeResultDualRefStreamout Type_OCLIntelSubgroupAVCImeResultDualRefStreamout}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeSingleRefStreamin Type_OCLIntelSubgroupAVCImeSingleRefStreamin}</li>
-     * <li>{@link #CXType_OCLIntelSubgroupAVCImeDualRefStreamin Type_OCLIntelSubgroupAVCImeDualRefStreamin}</li>
-     * <li>{@link #CXType_ExtVector Type_ExtVector}</li>
-     * <li>{@link #CXType_Atomic Type_Atomic}</li>
-     * <li>{@link #CXType_BTFTagAttributed Type_BTFTagAttributed}</li>
-     * </ul>
-     */
     public static final int
         CXType_Invalid                                              = 0,
         CXType_Unexposed                                            = 1,
@@ -1907,41 +934,6 @@ public class ClangIndex {
         CXType_Atomic                                               = 177,
         CXType_BTFTagAttributed                                     = 178;
 
-    /**
-     * Describes the calling convention of a function type
-     * 
-     * <p>({@code enum CXCallingConv})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXCallingConv_Default CallingConv_Default}</li>
-     * <li>{@link #CXCallingConv_C CallingConv_C}</li>
-     * <li>{@link #CXCallingConv_X86StdCall CallingConv_X86StdCall}</li>
-     * <li>{@link #CXCallingConv_X86FastCall CallingConv_X86FastCall}</li>
-     * <li>{@link #CXCallingConv_X86ThisCall CallingConv_X86ThisCall}</li>
-     * <li>{@link #CXCallingConv_X86Pascal CallingConv_X86Pascal}</li>
-     * <li>{@link #CXCallingConv_AAPCS CallingConv_AAPCS}</li>
-     * <li>{@link #CXCallingConv_AAPCS_VFP CallingConv_AAPCS_VFP}</li>
-     * <li>{@link #CXCallingConv_X86RegCall CallingConv_X86RegCall}</li>
-     * <li>{@link #CXCallingConv_IntelOclBicc CallingConv_IntelOclBicc}</li>
-     * <li>{@link #CXCallingConv_Win64 CallingConv_Win64}</li>
-     * <li>{@link #CXCallingConv_X86_64Win64 CallingConv_X86_64Win64} - Alias for compatibility with older versions of API.</li>
-     * <li>{@link #CXCallingConv_X86_64SysV CallingConv_X86_64SysV}</li>
-     * <li>{@link #CXCallingConv_X86VectorCall CallingConv_X86VectorCall}</li>
-     * <li>{@link #CXCallingConv_Swift CallingConv_Swift}</li>
-     * <li>{@link #CXCallingConv_PreserveMost CallingConv_PreserveMost}</li>
-     * <li>{@link #CXCallingConv_PreserveAll CallingConv_PreserveAll}</li>
-     * <li>{@link #CXCallingConv_AArch64VectorCall CallingConv_AArch64VectorCall}</li>
-     * <li>{@link #CXCallingConv_SwiftAsync CallingConv_SwiftAsync}</li>
-     * <li>{@link #CXCallingConv_AArch64SVEPCS CallingConv_AArch64SVEPCS}</li>
-     * <li>{@link #CXCallingConv_M68kRTD CallingConv_M68kRTD}</li>
-     * <li>{@link #CXCallingConv_PreserveNone CallingConv_PreserveNone}</li>
-     * <li>{@link #CXCallingConv_RISCVVectorCall CallingConv_RISCVVectorCall}</li>
-     * <li>{@link #CXCallingConv_Invalid CallingConv_Invalid}</li>
-     * <li>{@link #CXCallingConv_Unexposed CallingConv_Unexposed}</li>
-     * </ul>
-     */
     public static final int
         CXCallingConv_Default           = 0,
         CXCallingConv_C                 = 1,
@@ -1969,26 +961,6 @@ public class ClangIndex {
         CXCallingConv_Invalid           = 100,
         CXCallingConv_Unexposed         = 200;
 
-    /**
-     * Describes the kind of a template argument. ({@code enum CXTemplateArgumentKind})
-     * 
-     * <p>See the definition of llvm::clang::TemplateArgument::ArgKind for full element descriptions.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXTemplateArgumentKind_Null TemplateArgumentKind_Null}</li>
-     * <li>{@link #CXTemplateArgumentKind_Type TemplateArgumentKind_Type}</li>
-     * <li>{@link #CXTemplateArgumentKind_Declaration TemplateArgumentKind_Declaration}</li>
-     * <li>{@link #CXTemplateArgumentKind_NullPtr TemplateArgumentKind_NullPtr}</li>
-     * <li>{@link #CXTemplateArgumentKind_Integral TemplateArgumentKind_Integral}</li>
-     * <li>{@link #CXTemplateArgumentKind_Template TemplateArgumentKind_Template}</li>
-     * <li>{@link #CXTemplateArgumentKind_TemplateExpansion TemplateArgumentKind_TemplateExpansion}</li>
-     * <li>{@link #CXTemplateArgumentKind_Expression TemplateArgumentKind_Expression}</li>
-     * <li>{@link #CXTemplateArgumentKind_Pack TemplateArgumentKind_Pack}</li>
-     * <li>{@link #CXTemplateArgumentKind_Invalid TemplateArgumentKind_Invalid} - Indicates an error case, preventing the kind from being deduced.</li>
-     * </ul>
-     */
     public static final int
         CXTemplateArgumentKind_Null              = 0,
         CXTemplateArgumentKind_Type              = 1,
@@ -2001,25 +973,6 @@ public class ClangIndex {
         CXTemplateArgumentKind_Pack              = 8,
         CXTemplateArgumentKind_Invalid           = 9;
 
-    /**
-     * {@code enum CXTypeNullabilityKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXTypeNullability_NonNull TypeNullability_NonNull} - Values of this type can never be null.</li>
-     * <li>{@link #CXTypeNullability_Nullable TypeNullability_Nullable} - Values of this type can be null.</li>
-     * <li>{@link #CXTypeNullability_Unspecified TypeNullability_Unspecified} - 
-     * Whether values of this type can be null is (explicitly) unspecified. This captures a (fairly rare) case where we can't conclude anything about the
-     * nullability of the type even though it has been considered.
-     * </li>
-     * <li>{@link #CXTypeNullability_Invalid TypeNullability_Invalid} - Nullability is not applicable to this type.</li>
-     * <li>{@link #CXTypeNullability_NullableResult TypeNullability_NullableResult} - 
-     * Generally behaves like {@code Nullable}, except when used in a block parameter that was imported into a swift async method. There, swift will
-     * assume that the parameter can get null even if no error occurred. {@code _Nullable} parameters are assumed to only get null on error.
-     * </li>
-     * </ul>
-     */
     public static final int
         CXTypeNullability_NonNull        = 0,
         CXTypeNullability_Nullable       = 1,
@@ -2027,23 +980,6 @@ public class ClangIndex {
         CXTypeNullability_Invalid        = 3,
         CXTypeNullability_NullableResult = 4;
 
-    /**
-     * List the possible error codes for {@code clang_Type_getSizeOf}, {@code clang_Type_getAlignOf}, {@code clang_Type_getOffsetOf} and {@code
-     * clang_Cursor_getOffsetOf}. ({@code enum CXTypeLayoutError})
-     * 
-     * <p>A value of this enumeration type can be returned if the target type is not a valid argument to sizeof, alignof or offsetof.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXTypeLayoutError_Invalid TypeLayoutError_Invalid} - Type is of kind CXType_Invalid.</li>
-     * <li>{@link #CXTypeLayoutError_Incomplete TypeLayoutError_Incomplete} - The type is an incomplete Type.</li>
-     * <li>{@link #CXTypeLayoutError_Dependent TypeLayoutError_Dependent} - The type is a dependent Type.</li>
-     * <li>{@link #CXTypeLayoutError_NotConstantSize TypeLayoutError_NotConstantSize} - The type is not a constant size type.</li>
-     * <li>{@link #CXTypeLayoutError_InvalidFieldName TypeLayoutError_InvalidFieldName} - The Field name is not valid for this record.</li>
-     * <li>{@link #CXTypeLayoutError_Undeduced TypeLayoutError_Undeduced} - The type is undeduced.</li>
-     * </ul>
-     */
     public static final int
         CXTypeLayoutError_Invalid          = -1,
         CXTypeLayoutError_Incomplete       = -2,
@@ -2052,60 +988,17 @@ public class ClangIndex {
         CXTypeLayoutError_InvalidFieldName = -5,
         CXTypeLayoutError_Undeduced        = -6;
 
-    /**
-     * {@code enum CXRefQualifierKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXRefQualifier_None RefQualifier_None} - No ref-qualifier was provided.</li>
-     * <li>{@link #CXRefQualifier_LValue RefQualifier_LValue} - An lvalue ref-qualifier was provided ({@code &}).</li>
-     * <li>{@link #CXRefQualifier_RValue RefQualifier_RValue} - An rvalue ref-qualifier was provided ({@code &&}).</li>
-     * </ul>
-     */
     public static final int
         CXRefQualifier_None   = 0,
         CXRefQualifier_LValue = 1,
         CXRefQualifier_RValue = 2;
 
-    /**
-     * Represents the C++ access control level to a base class for a cursor with kind CX_CXXBaseSpecifier.
-     * 
-     * <p>({@code enum CX_CXXAccessSpecifier})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CX_CXXInvalidAccessSpecifier _CXXInvalidAccessSpecifier}</li>
-     * <li>{@link #CX_CXXPublic _CXXPublic}</li>
-     * <li>{@link #CX_CXXProtected _CXXProtected}</li>
-     * <li>{@link #CX_CXXPrivate _CXXPrivate}</li>
-     * </ul>
-     */
     public static final int
         CX_CXXInvalidAccessSpecifier = 0,
         CX_CXXPublic                 = 1,
         CX_CXXProtected              = 2,
         CX_CXXPrivate                = 3;
 
-    /**
-     * Represents the storage classes as declared in the source. CX_SC_Invalid was added for the case that the passed cursor in not a declaration.
-     * 
-     * <p>({@code enum CX_StorageClass})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CX_SC_Invalid _SC_Invalid}</li>
-     * <li>{@link #CX_SC_None _SC_None}</li>
-     * <li>{@link #CX_SC_Extern _SC_Extern}</li>
-     * <li>{@link #CX_SC_Static _SC_Static}</li>
-     * <li>{@link #CX_SC_PrivateExtern _SC_PrivateExtern}</li>
-     * <li>{@link #CX_SC_OpenCLWorkGroupLocal _SC_OpenCLWorkGroupLocal}</li>
-     * <li>{@link #CX_SC_Auto _SC_Auto}</li>
-     * <li>{@link #CX_SC_Register _SC_Register}</li>
-     * </ul>
-     */
     public static final int
         CX_SC_Invalid              = 0,
         CX_SC_None                 = 1,
@@ -2116,49 +1009,6 @@ public class ClangIndex {
         CX_SC_Auto                 = 6,
         CX_SC_Register             = 7;
 
-    /**
-     * Represents a specific kind of binary operator which can appear at a cursor. ({@code enum CX_BinaryOperatorKind})
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CX_BO_Invalid _BO_Invalid}</li>
-     * <li>{@link #CX_BO_PtrMemD _BO_PtrMemD}</li>
-     * <li>{@link #CX_BO_PtrMemI _BO_PtrMemI}</li>
-     * <li>{@link #CX_BO_Mul _BO_Mul}</li>
-     * <li>{@link #CX_BO_Div _BO_Div}</li>
-     * <li>{@link #CX_BO_Rem _BO_Rem}</li>
-     * <li>{@link #CX_BO_Add _BO_Add}</li>
-     * <li>{@link #CX_BO_Sub _BO_Sub}</li>
-     * <li>{@link #CX_BO_Shl _BO_Shl}</li>
-     * <li>{@link #CX_BO_Shr _BO_Shr}</li>
-     * <li>{@link #CX_BO_Cmp _BO_Cmp}</li>
-     * <li>{@link #CX_BO_LT _BO_LT}</li>
-     * <li>{@link #CX_BO_GT _BO_GT}</li>
-     * <li>{@link #CX_BO_LE _BO_LE}</li>
-     * <li>{@link #CX_BO_GE _BO_GE}</li>
-     * <li>{@link #CX_BO_EQ _BO_EQ}</li>
-     * <li>{@link #CX_BO_NE _BO_NE}</li>
-     * <li>{@link #CX_BO_And _BO_And}</li>
-     * <li>{@link #CX_BO_Xor _BO_Xor}</li>
-     * <li>{@link #CX_BO_Or _BO_Or}</li>
-     * <li>{@link #CX_BO_LAnd _BO_LAnd}</li>
-     * <li>{@link #CX_BO_LOr _BO_LOr}</li>
-     * <li>{@link #CX_BO_Assign _BO_Assign}</li>
-     * <li>{@link #CX_BO_MulAssign _BO_MulAssign}</li>
-     * <li>{@link #CX_BO_DivAssign _BO_DivAssign}</li>
-     * <li>{@link #CX_BO_RemAssign _BO_RemAssign}</li>
-     * <li>{@link #CX_BO_AddAssign _BO_AddAssign}</li>
-     * <li>{@link #CX_BO_SubAssign _BO_SubAssign}</li>
-     * <li>{@link #CX_BO_ShlAssign _BO_ShlAssign}</li>
-     * <li>{@link #CX_BO_ShrAssign _BO_ShrAssign}</li>
-     * <li>{@link #CX_BO_AndAssign _BO_AndAssign}</li>
-     * <li>{@link #CX_BO_XorAssign _BO_XorAssign}</li>
-     * <li>{@link #CX_BO_OrAssign _BO_OrAssign}</li>
-     * <li>{@link #CX_BO_Comma _BO_Comma}</li>
-     * <li>{@link #CX_BO_LAST _BO_LAST}</li>
-     * </ul>
-     */
     public static final int
         CX_BO_Invalid   = 0,
         CX_BO_PtrMemD   = 1,
@@ -2196,62 +1046,11 @@ public class ClangIndex {
         CX_BO_Comma     = 33,
         CX_BO_LAST      = CX_BO_Comma;
 
-    /**
-     * Describes how the traversal of the children of a particular cursor should proceed after visiting a particular child cursor. ({@code enum
-     * CXChildVisitResult})
-     * 
-     * <p>A value of this enumeration type should be returned by each {@code CXCursorVisitor} to indicate how {@link #clang_visitChildren visitChildren} proceed.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXChildVisit_Break ChildVisit_Break} - Terminates the cursor traversal.</li>
-     * <li>{@link #CXChildVisit_Continue ChildVisit_Continue} - Continues the cursor traversal with the next sibling of the cursor just visited, without visiting its children.</li>
-     * <li>{@link #CXChildVisit_Recurse ChildVisit_Recurse} - Recursively traverse the children of this cursor, using the same visitor and client data.</li>
-     * </ul>
-     */
     public static final int
         CXChildVisit_Break    = 0,
         CXChildVisit_Continue = 1,
         CXChildVisit_Recurse  = 2;
 
-    /**
-     * Properties for the printing policy. ({@code enum CXPrintingPolicyProperty})
-     * 
-     * <p>See {@code clang::PrintingPolicy} for more information.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXPrintingPolicy_Indentation PrintingPolicy_Indentation}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressSpecifiers PrintingPolicy_SuppressSpecifiers}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressTagKeyword PrintingPolicy_SuppressTagKeyword}</li>
-     * <li>{@link #CXPrintingPolicy_IncludeTagDefinition PrintingPolicy_IncludeTagDefinition}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressScope PrintingPolicy_SuppressScope}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressUnwrittenScope PrintingPolicy_SuppressUnwrittenScope}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressInitializers PrintingPolicy_SuppressInitializers}</li>
-     * <li>{@link #CXPrintingPolicy_ConstantArraySizeAsWritten PrintingPolicy_ConstantArraySizeAsWritten}</li>
-     * <li>{@link #CXPrintingPolicy_AnonymousTagLocations PrintingPolicy_AnonymousTagLocations}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressStrongLifetime PrintingPolicy_SuppressStrongLifetime}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressLifetimeQualifiers PrintingPolicy_SuppressLifetimeQualifiers}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressTemplateArgsInCXXConstructors PrintingPolicy_SuppressTemplateArgsInCXXConstructors}</li>
-     * <li>{@link #CXPrintingPolicy_Bool PrintingPolicy_Bool}</li>
-     * <li>{@link #CXPrintingPolicy_Restrict PrintingPolicy_Restrict}</li>
-     * <li>{@link #CXPrintingPolicy_Alignof PrintingPolicy_Alignof}</li>
-     * <li>{@link #CXPrintingPolicy_UnderscoreAlignof PrintingPolicy_UnderscoreAlignof}</li>
-     * <li>{@link #CXPrintingPolicy_UseVoidForZeroParams PrintingPolicy_UseVoidForZeroParams}</li>
-     * <li>{@link #CXPrintingPolicy_TerseOutput PrintingPolicy_TerseOutput}</li>
-     * <li>{@link #CXPrintingPolicy_PolishForDeclaration PrintingPolicy_PolishForDeclaration}</li>
-     * <li>{@link #CXPrintingPolicy_Half PrintingPolicy_Half}</li>
-     * <li>{@link #CXPrintingPolicy_MSWChar PrintingPolicy_MSWChar}</li>
-     * <li>{@link #CXPrintingPolicy_IncludeNewlines PrintingPolicy_IncludeNewlines}</li>
-     * <li>{@link #CXPrintingPolicy_MSVCFormatting PrintingPolicy_MSVCFormatting}</li>
-     * <li>{@link #CXPrintingPolicy_ConstantsAsWritten PrintingPolicy_ConstantsAsWritten}</li>
-     * <li>{@link #CXPrintingPolicy_SuppressImplicitBase PrintingPolicy_SuppressImplicitBase}</li>
-     * <li>{@link #CXPrintingPolicy_FullyQualifiedName PrintingPolicy_FullyQualifiedName}</li>
-     * <li>{@link #CXPrintingPolicy_LastProperty PrintingPolicy_LastProperty}</li>
-     * </ul>
-     */
     public static final int
         CXPrintingPolicy_Indentation                           = 0,
         CXPrintingPolicy_SuppressSpecifiers                    = 1,
@@ -2281,30 +1080,6 @@ public class ClangIndex {
         CXPrintingPolicy_FullyQualifiedName                    = 25,
         CXPrintingPolicy_LastProperty                          = CXPrintingPolicy_FullyQualifiedName;
 
-    /**
-     * Property attributes for a {@code CXCursor_ObjCPropertyDecl}.
-     * 
-     * <p>({@code CXObjCPropertyAttrKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXObjCPropertyAttr_noattr ObjCPropertyAttr_noattr}</li>
-     * <li>{@link #CXObjCPropertyAttr_readonly ObjCPropertyAttr_readonly}</li>
-     * <li>{@link #CXObjCPropertyAttr_getter ObjCPropertyAttr_getter}</li>
-     * <li>{@link #CXObjCPropertyAttr_assign ObjCPropertyAttr_assign}</li>
-     * <li>{@link #CXObjCPropertyAttr_readwrite ObjCPropertyAttr_readwrite}</li>
-     * <li>{@link #CXObjCPropertyAttr_retain ObjCPropertyAttr_retain}</li>
-     * <li>{@link #CXObjCPropertyAttr_copy ObjCPropertyAttr_copy}</li>
-     * <li>{@link #CXObjCPropertyAttr_nonatomic ObjCPropertyAttr_nonatomic}</li>
-     * <li>{@link #CXObjCPropertyAttr_setter ObjCPropertyAttr_setter}</li>
-     * <li>{@link #CXObjCPropertyAttr_atomic ObjCPropertyAttr_atomic}</li>
-     * <li>{@link #CXObjCPropertyAttr_weak ObjCPropertyAttr_weak}</li>
-     * <li>{@link #CXObjCPropertyAttr_strong ObjCPropertyAttr_strong}</li>
-     * <li>{@link #CXObjCPropertyAttr_unsafe_unretained ObjCPropertyAttr_unsafe_unretained}</li>
-     * <li>{@link #CXObjCPropertyAttr_class ObjCPropertyAttr_class}</li>
-     * </ul>
-     */
     public static final int
         CXObjCPropertyAttr_noattr            = 0x00,
         CXObjCPropertyAttr_readonly          = 0x01,
@@ -2321,23 +1096,6 @@ public class ClangIndex {
         CXObjCPropertyAttr_unsafe_unretained = 0x800,
         CXObjCPropertyAttr_class             = 0x1000;
 
-    /**
-     * 'Qualifiers' written next to the return and parameter types in Objective-C method declarations.
-     * 
-     * <p>({@code CXObjCDeclQualifierKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXObjCDeclQualifier_None ObjCDeclQualifier_None}</li>
-     * <li>{@link #CXObjCDeclQualifier_In ObjCDeclQualifier_In}</li>
-     * <li>{@link #CXObjCDeclQualifier_Inout ObjCDeclQualifier_Inout}</li>
-     * <li>{@link #CXObjCDeclQualifier_Out ObjCDeclQualifier_Out}</li>
-     * <li>{@link #CXObjCDeclQualifier_Bycopy ObjCDeclQualifier_Bycopy}</li>
-     * <li>{@link #CXObjCDeclQualifier_Byref ObjCDeclQualifier_Byref}</li>
-     * <li>{@link #CXObjCDeclQualifier_Oneway ObjCDeclQualifier_Oneway}</li>
-     * </ul>
-     */
     public static final int
         CXObjCDeclQualifier_None   = 0x0,
         CXObjCDeclQualifier_In     = 0x1,
@@ -2347,45 +1105,11 @@ public class ClangIndex {
         CXObjCDeclQualifier_Byref  = 0x10,
         CXObjCDeclQualifier_Oneway = 0x20;
 
-    /**
-     * {@code enum CXNameRefFlags}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXNameRange_WantQualifier NameRange_WantQualifier} - Include the nested-name-specifier, e.g. Foo:: in x.Foo::y, in the range.</li>
-     * <li>{@link #CXNameRange_WantTemplateArgs NameRange_WantTemplateArgs} - Include the explicit template arguments, e.g. &lt;int&gt; in x.f&lt;int&gt;, in the range.</li>
-     * <li>{@link #CXNameRange_WantSinglePiece NameRange_WantSinglePiece} - 
-     * If the name is non-contiguous, return the full spanning range.
-     * 
-     * <p>Non-contiguous names occur in Objective-C when a selector with two or more parameters is used, or in C++ when using an operator:</p>
-     * 
-     * <pre><code>
-     *  [object doSomething:here withValue:there]; // Objective-C
-     *  return some_vector[1]; // C++</code></pre>
-     * </li>
-     * </ul>
-     */
     public static final int
         CXNameRange_WantQualifier    = 0x1,
         CXNameRange_WantTemplateArgs = 0x2,
         CXNameRange_WantSinglePiece  = 0x4;
 
-    /**
-     * Describes a kind of token.
-     * 
-     * <p>({@code CXTokenKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXToken_Punctuation Token_Punctuation} - A token that contains some kind of punctuation.</li>
-     * <li>{@link #CXToken_Keyword Token_Keyword} - A language keyword.</li>
-     * <li>{@link #CXToken_Identifier Token_Identifier} - An identifier (that is not a keyword).</li>
-     * <li>{@link #CXToken_Literal Token_Literal} - A numeric, string, or character literal.</li>
-     * <li>{@link #CXToken_Comment Token_Comment} - A comment.</li>
-     * </ul>
-     */
     public static final int
         CXToken_Punctuation = 0,
         CXToken_Keyword     = 1,
@@ -2393,114 +1117,6 @@ public class ClangIndex {
         CXToken_Literal     = 3,
         CXToken_Comment     = 4;
 
-    /**
-     * Describes a single piece of text within a code-completion string. ({@code enum CXCompletionChunkKind})
-     * 
-     * <p>Each "chunk" within a code-completion string ({@code CXCompletionString}) is either a piece of text with a specific "kind" that describes how that text
-     * should be interpreted by the client or is another completion string.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXCompletionChunk_Optional CompletionChunk_Optional} - 
-     * A code-completion string that describes "optional" text that could be a part of the template (but is not required).
-     * 
-     * <p>The Optional chunk is the only kind of chunk that has a code-completion string for its representation, which is accessible via {@code
-     * clang_getCompletionChunkCompletionString()}. The code-completion string describes an additional part of the template that is completely optional.
-     * For example, optional chunks can be used to describe the placeholders for arguments that match up with defaulted function parameters, e.g. given:</p>
-     * 
-     * <pre><code>
-     *  void f(int x, float y = 3.14, double z = 2.71828);</code></pre>
-     * 
-     * <p>The code-completion string for this function would contain:</p>
-     * 
-     * <ul>
-     * <li>a TypedText chunk for "f".</li>
-     * <li>a LeftParen chunk for "(".</li>
-     * <li>a Placeholder chunk for "int x"</li>
-     * <li>an Optional chunk containing the remaining defaulted arguments, e.g.,
-     * 
-     * <ul>
-     * <li>a Comma chunk for ","</li>
-     * <li>a Placeholder chunk for "float y"</li>
-     * <li>an Optional chunk containing the last defaulted argument:
-     * 
-     * <ul>
-     * <li>a Comma chunk for ","</li>
-     * <li>a Placeholder chunk for "double z"</li>
-     * </ul></li>
-     * </ul></li>
-     * <li>a RightParen chunk for ")"</li>
-     * </ul>
-     * 
-     * <p>There are many ways to handle Optional chunks. Two simple approaches are:</p>
-     * 
-     * <ul>
-     * <li>Completely ignore optional chunks, in which case the template for the function "f" would only include the first parameter ("int x").</li>
-     * <li>Fully expand all optional chunks, in which case the template for the function "f" would have all of the parameters.</li>
-     * </ul>
-     * </li>
-     * <li>{@link #CXCompletionChunk_TypedText CompletionChunk_TypedText} - 
-     * Text that a user would be expected to type to get this code-completion result.
-     * 
-     * <p>There will be exactly one "typed text" chunk in a semantic string, which will typically provide the spelling of a keyword or the name of a
-     * declaration that could be used at the current code point. Clients are expected to filter the code-completion results based on the text in this
-     * chunk.</p>
-     * </li>
-     * <li>{@link #CXCompletionChunk_Text CompletionChunk_Text} - 
-     * Text that should be inserted as part of a code-completion result.
-     * 
-     * <p>A "text" chunk represents text that is part of the template to be inserted into user code should this particular code-completion result be
-     * selected.</p>
-     * </li>
-     * <li>{@link #CXCompletionChunk_Placeholder CompletionChunk_Placeholder} - 
-     * Placeholder text that should be replaced by the user.
-     * 
-     * <p>A "placeholder" chunk marks a place where the user should insert text into the code-completion template. For example, placeholders might mark the
-     * function parameters for a function declaration, to indicate that the user should provide arguments for each of those parameters. The actual text in
-     * a placeholder is a suggestion for the text to display before the user replaces the placeholder with real code.</p>
-     * </li>
-     * <li>{@link #CXCompletionChunk_Informative CompletionChunk_Informative} - 
-     * Informative text that should be displayed but never inserted as part of the template.
-     * 
-     * <p>An "informative" chunk contains annotations that can be displayed to help the user decide whether a particular code-completion result is the right
-     * option, but which is not part of the actual template to be inserted by code completion.</p>
-     * </li>
-     * <li>{@link #CXCompletionChunk_CurrentParameter CompletionChunk_CurrentParameter} - 
-     * Text that describes the current parameter when code-completion is referring to function call, message send, or template specialization.
-     * 
-     * <p>A "current parameter" chunk occurs when code-completion is providing information about a parameter corresponding to the argument at the
-     * code-completion point. For example, given a function</p>
-     * 
-     * <pre><code>
-     *  int add(int x, int y);</code></pre>
-     * 
-     * <p>and the source code {@code add(}, where the code-completion point is after the "(", the code-completion string will contain a "current parameter"
-     * chunk for "int x", indicating that the current argument will initialize that parameter. After typing further, to {@code add(17}, (where the
-     * code-completion point is after the ","), the code-completion string will contain a "current parameter" chunk to "int y".</p>
-     * </li>
-     * <li>{@link #CXCompletionChunk_LeftParen CompletionChunk_LeftParen} - A left parenthesis ('('), used to initiate a function call or signal the beginning of a function parameter list.</li>
-     * <li>{@link #CXCompletionChunk_RightParen CompletionChunk_RightParen} - A right parenthesis (')'), used to finish a function call or signal the end of a function parameter list.</li>
-     * <li>{@link #CXCompletionChunk_LeftBracket CompletionChunk_LeftBracket} - A left bracket ('[').</li>
-     * <li>{@link #CXCompletionChunk_RightBracket CompletionChunk_RightBracket} - A right bracket (']').</li>
-     * <li>{@link #CXCompletionChunk_LeftBrace CompletionChunk_LeftBrace} - A left brace ('{').</li>
-     * <li>{@link #CXCompletionChunk_RightBrace CompletionChunk_RightBrace} - A right brace ('}').</li>
-     * <li>{@link #CXCompletionChunk_LeftAngle CompletionChunk_LeftAngle} - A left angle bracket (' &lt;').</li>
-     * <li>{@link #CXCompletionChunk_RightAngle CompletionChunk_RightAngle} - A right angle bracket ('&gt;').</li>
-     * <li>{@link #CXCompletionChunk_Comma CompletionChunk_Comma} - A comma separator (',').</li>
-     * <li>{@link #CXCompletionChunk_ResultType CompletionChunk_ResultType} - 
-     * Text that specifies the result type of a given result.
-     * 
-     * <p>This special kind of informative chunk is not meant to be inserted into the text buffer. Rather, it is meant to illustrate the type that an
-     * expression using the given completion string would have.</p>
-     * </li>
-     * <li>{@link #CXCompletionChunk_Colon CompletionChunk_Colon} - A colon (':').</li>
-     * <li>{@link #CXCompletionChunk_SemiColon CompletionChunk_SemiColon} - A semicolon (';').</li>
-     * <li>{@link #CXCompletionChunk_Equal CompletionChunk_Equal} - An '=' sign.</li>
-     * <li>{@link #CXCompletionChunk_HorizontalSpace CompletionChunk_HorizontalSpace} - Horizontal space (' ').</li>
-     * <li>{@link #CXCompletionChunk_VerticalSpace CompletionChunk_VerticalSpace} - Vertical space ('\n'), after which it is generally a good idea to perform indentation.</li>
-     * </ul>
-     */
     public static final int
         CXCompletionChunk_Optional         = 0,
         CXCompletionChunk_TypedText        = 1,
@@ -2524,24 +1140,6 @@ public class ClangIndex {
         CXCompletionChunk_HorizontalSpace  = 19,
         CXCompletionChunk_VerticalSpace    = 20;
 
-    /**
-     * Flags that can be passed to {@code clang_codeCompleteAt()} to modify its behavior. ({@code enum CXCodeComplete_Flags})
-     * 
-     * <p>The enumerators in this enumeration can be bitwise-OR'd together to provide multiple options to {@code clang_codeCompleteAt()}.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXCodeComplete_IncludeMacros CodeComplete_IncludeMacros} - Whether to include macros within the set of code completions returned.</li>
-     * <li>{@link #CXCodeComplete_IncludeCodePatterns CodeComplete_IncludeCodePatterns} - Whether to include code patterns for language constructs within the set of code completions, e.g., for loops.</li>
-     * <li>{@link #CXCodeComplete_IncludeBriefComments CodeComplete_IncludeBriefComments} - Whether to include brief documentation within the set of code completions returned.</li>
-     * <li>{@link #CXCodeComplete_SkipPreamble CodeComplete_SkipPreamble} - 
-     * Whether to speed up completion by omitting top- or namespace-level entities defined in the preamble. There's no guarantee any particular entity is
-     * omitted. This may be useful if the headers are indexed externally.
-     * </li>
-     * <li>{@link #CXCodeComplete_IncludeCompletionsWithFixIts CodeComplete_IncludeCompletionsWithFixIts} - Whether to include completions with small fix-its, e.g. change '.' to '-&gt;' on member access, etc.</li>
-     * </ul>
-     */
     public static final int
         CXCodeComplete_IncludeMacros                = 0x01,
         CXCodeComplete_IncludeCodePatterns          = 0x02,
@@ -2549,41 +1147,6 @@ public class ClangIndex {
         CXCodeComplete_SkipPreamble                 = 0x08,
         CXCodeComplete_IncludeCompletionsWithFixIts = 0x10;
 
-    /**
-     * Bits that represent the context under which completion is occurring. ({@code enum CXCompletionContext})
-     * 
-     * <p>The enumerators in this enumeration may be bitwise-OR'd together if multiple contexts are occurring simultaneously.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXCompletionContext_Unexposed CompletionContext_Unexposed} - The context for completions is unexposed, as only Clang results should be included. (This is equivalent to having no context bits set.)</li>
-     * <li>{@link #CXCompletionContext_AnyType CompletionContext_AnyType} - Completions for any possible type should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_AnyValue CompletionContext_AnyValue} - Completions for any possible value (variables, function calls, etc.) should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCObjectValue CompletionContext_ObjCObjectValue} - Completions for values that resolve to an Objective-C object should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCSelectorValue CompletionContext_ObjCSelectorValue} - Completions for values that resolve to an Objective-C selector should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_CXXClassTypeValue CompletionContext_CXXClassTypeValue} - Completions for values that resolve to a C++ class type should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_DotMemberAccess CompletionContext_DotMemberAccess} - Completions for fields of the member being accessed using the dot operator should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ArrowMemberAccess CompletionContext_ArrowMemberAccess} - Completions for fields of the member being accessed using the arrow operator should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCPropertyAccess CompletionContext_ObjCPropertyAccess} - Completions for properties of the Objective-C object being accessed using the dot operator should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_EnumTag CompletionContext_EnumTag} - Completions for enum tags should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_UnionTag CompletionContext_UnionTag} - Completions for union tags should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_StructTag CompletionContext_StructTag} - Completions for struct tags should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ClassTag CompletionContext_ClassTag} - Completions for C++ class names should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_Namespace CompletionContext_Namespace} - Completions for C++ namespaces and namespace aliases should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_NestedNameSpecifier CompletionContext_NestedNameSpecifier} - Completions for C++ nested name specifiers should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCInterface CompletionContext_ObjCInterface} - Completions for Objective-C interfaces (classes) should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCProtocol CompletionContext_ObjCProtocol} - Completions for Objective-C protocols should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCCategory CompletionContext_ObjCCategory} - Completions for Objective-C categories should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCInstanceMessage CompletionContext_ObjCInstanceMessage} - Completions for Objective-C instance messages should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCClassMessage CompletionContext_ObjCClassMessage} - Completions for Objective-C class messages should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_ObjCSelectorName CompletionContext_ObjCSelectorName} - Completions for Objective-C selector names should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_MacroName CompletionContext_MacroName} - Completions for preprocessor macro names should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_NaturalLanguage CompletionContext_NaturalLanguage} - Natural language completions should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_IncludedFile CompletionContext_IncludedFile} - {@code #include} file completions should be included in the results.</li>
-     * <li>{@link #CXCompletionContext_Unknown CompletionContext_Unknown} - The current context is unknown, so set all contexts.</li>
-     * </ul>
-     */
     public static final int
         CXCompletionContext_Unexposed           = 0,
         CXCompletionContext_AnyType             = 1 << 0,
@@ -2611,21 +1174,6 @@ public class ClangIndex {
         CXCompletionContext_IncludedFile        = 1 << 22,
         CXCompletionContext_Unknown             = ((1 << 23) - 1);
 
-    /**
-     * {@code CXEvalResultKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXEval_Int Eval_Int}</li>
-     * <li>{@link #CXEval_Float Eval_Float}</li>
-     * <li>{@link #CXEval_ObjCStrLiteral Eval_ObjCStrLiteral}</li>
-     * <li>{@link #CXEval_StrLiteral Eval_StrLiteral}</li>
-     * <li>{@link #CXEval_CFStr Eval_CFStr}</li>
-     * <li>{@link #CXEval_Other Eval_Other}</li>
-     * <li>{@link #CXEval_UnExposed Eval_UnExposed}</li>
-     * </ul>
-     */
     public static final int
         CXEval_Int            = 1,
         CXEval_Float          = 2,
@@ -2635,72 +1183,15 @@ public class ClangIndex {
         CXEval_Other          = 6,
         CXEval_UnExposed      = 0;
 
-    /**
-     * {@code enum CXVisitorResult}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXVisit_Break Visit_Break}</li>
-     * <li>{@link #CXVisit_Continue Visit_Continue}</li>
-     * </ul>
-     */
     public static final int
         CXVisit_Break    = 0,
         CXVisit_Continue = 1;
 
-    /**
-     * {@code CXResult}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXResult_Success Result_Success} - Function returned successfully.</li>
-     * <li>{@link #CXResult_Invalid Result_Invalid} - One of the parameters was invalid for the function.</li>
-     * <li>{@link #CXResult_VisitBreak Result_VisitBreak} - The function was terminated by a callback (e.g. it returned CXVisit_Break)</li>
-     * </ul>
-     */
     public static final int
         CXResult_Success    = 0,
         CXResult_Invalid    = 1,
         CXResult_VisitBreak = 2;
 
-    /**
-     * {@code CXIdxEntityKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXIdxEntity_Unexposed IdxEntity_Unexposed}</li>
-     * <li>{@link #CXIdxEntity_Typedef IdxEntity_Typedef}</li>
-     * <li>{@link #CXIdxEntity_Function IdxEntity_Function}</li>
-     * <li>{@link #CXIdxEntity_Variable IdxEntity_Variable}</li>
-     * <li>{@link #CXIdxEntity_Field IdxEntity_Field}</li>
-     * <li>{@link #CXIdxEntity_EnumConstant IdxEntity_EnumConstant}</li>
-     * <li>{@link #CXIdxEntity_ObjCClass IdxEntity_ObjCClass}</li>
-     * <li>{@link #CXIdxEntity_ObjCProtocol IdxEntity_ObjCProtocol}</li>
-     * <li>{@link #CXIdxEntity_ObjCCategory IdxEntity_ObjCCategory}</li>
-     * <li>{@link #CXIdxEntity_ObjCInstanceMethod IdxEntity_ObjCInstanceMethod}</li>
-     * <li>{@link #CXIdxEntity_ObjCClassMethod IdxEntity_ObjCClassMethod}</li>
-     * <li>{@link #CXIdxEntity_ObjCProperty IdxEntity_ObjCProperty}</li>
-     * <li>{@link #CXIdxEntity_ObjCIvar IdxEntity_ObjCIvar}</li>
-     * <li>{@link #CXIdxEntity_Enum IdxEntity_Enum}</li>
-     * <li>{@link #CXIdxEntity_Struct IdxEntity_Struct}</li>
-     * <li>{@link #CXIdxEntity_Union IdxEntity_Union}</li>
-     * <li>{@link #CXIdxEntity_CXXClass IdxEntity_CXXClass}</li>
-     * <li>{@link #CXIdxEntity_CXXNamespace IdxEntity_CXXNamespace}</li>
-     * <li>{@link #CXIdxEntity_CXXNamespaceAlias IdxEntity_CXXNamespaceAlias}</li>
-     * <li>{@link #CXIdxEntity_CXXStaticVariable IdxEntity_CXXStaticVariable}</li>
-     * <li>{@link #CXIdxEntity_CXXStaticMethod IdxEntity_CXXStaticMethod}</li>
-     * <li>{@link #CXIdxEntity_CXXInstanceMethod IdxEntity_CXXInstanceMethod}</li>
-     * <li>{@link #CXIdxEntity_CXXConstructor IdxEntity_CXXConstructor}</li>
-     * <li>{@link #CXIdxEntity_CXXDestructor IdxEntity_CXXDestructor}</li>
-     * <li>{@link #CXIdxEntity_CXXConversionFunction IdxEntity_CXXConversionFunction}</li>
-     * <li>{@link #CXIdxEntity_CXXTypeAlias IdxEntity_CXXTypeAlias}</li>
-     * <li>{@link #CXIdxEntity_CXXInterface IdxEntity_CXXInterface}</li>
-     * <li>{@link #CXIdxEntity_CXXConcept IdxEntity_CXXConcept}</li>
-     * </ul>
-     */
     public static final int
         CXIdxEntity_Unexposed             = 0,
         CXIdxEntity_Typedef               = 1,
@@ -2731,19 +1222,6 @@ public class ClangIndex {
         CXIdxEntity_CXXInterface          = 26,
         CXIdxEntity_CXXConcept            = 27;
 
-    /**
-     * {@code CXIdxEntityLanguage}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXIdxEntityLang_None IdxEntityLang_None}</li>
-     * <li>{@link #CXIdxEntityLang_C IdxEntityLang_C}</li>
-     * <li>{@link #CXIdxEntityLang_ObjC IdxEntityLang_ObjC}</li>
-     * <li>{@link #CXIdxEntityLang_CXX IdxEntityLang_CXX}</li>
-     * <li>{@link #CXIdxEntityLang_Swift IdxEntityLang_Swift}</li>
-     * </ul>
-     */
     public static final int
         CXIdxEntityLang_None  = 0,
         CXIdxEntityLang_C     = 1,
@@ -2751,100 +1229,29 @@ public class ClangIndex {
         CXIdxEntityLang_CXX   = 3,
         CXIdxEntityLang_Swift = 4;
 
-    /**
-     * Extra C++ template information for an entity. This can apply to: CXIdxEntity_Function CXIdxEntity_CXXClass CXIdxEntity_CXXStaticMethod
-     * CXIdxEntity_CXXInstanceMethod CXIdxEntity_CXXConstructor CXIdxEntity_CXXConversionFunction CXIdxEntity_CXXTypeAlias
-     * 
-     * <p>({@code CXIdxEntityCXXTemplateKind})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXIdxEntity_NonTemplate IdxEntity_NonTemplate}</li>
-     * <li>{@link #CXIdxEntity_Template IdxEntity_Template}</li>
-     * <li>{@link #CXIdxEntity_TemplatePartialSpecialization IdxEntity_TemplatePartialSpecialization}</li>
-     * <li>{@link #CXIdxEntity_TemplateSpecialization IdxEntity_TemplateSpecialization}</li>
-     * </ul>
-     */
     public static final int
         CXIdxEntity_NonTemplate                   = 0,
         CXIdxEntity_Template                      = 1,
         CXIdxEntity_TemplatePartialSpecialization = 2,
         CXIdxEntity_TemplateSpecialization        = 3;
 
-    /**
-     * {@code CXIdxAttrKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXIdxAttr_Unexposed IdxAttr_Unexposed}</li>
-     * <li>{@link #CXIdxAttr_IBAction IdxAttr_IBAction}</li>
-     * <li>{@link #CXIdxAttr_IBOutlet IdxAttr_IBOutlet}</li>
-     * <li>{@link #CXIdxAttr_IBOutletCollection IdxAttr_IBOutletCollection}</li>
-     * </ul>
-     */
     public static final int
         CXIdxAttr_Unexposed          = 0,
         CXIdxAttr_IBAction           = 1,
         CXIdxAttr_IBOutlet           = 2,
         CXIdxAttr_IBOutletCollection = 3;
 
-    /** {@code CXIdxDeclInfoFlags} */
     public static final int CXIdxDeclFlag_Skipped = 0x1;
 
-    /**
-     * {@code CXIdxObjCContainerKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXIdxObjCContainer_ForwardRef IdxObjCContainer_ForwardRef}</li>
-     * <li>{@link #CXIdxObjCContainer_Interface IdxObjCContainer_Interface}</li>
-     * <li>{@link #CXIdxObjCContainer_Implementation IdxObjCContainer_Implementation}</li>
-     * </ul>
-     */
     public static final int
         CXIdxObjCContainer_ForwardRef     = 0,
         CXIdxObjCContainer_Interface      = 1,
         CXIdxObjCContainer_Implementation = 2;
 
-    /**
-     * Data for {@link IndexerCallbacks#indexEntityReference}. ({@code CXIdxEntityRefKind})
-     * 
-     * <p>This may be deprecated in a future version as this duplicates the {@code CXSymbolRole_Implicit} bit in {@code CXSymbolRole}.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXIdxEntityRef_Direct IdxEntityRef_Direct} - The entity is referenced directly in user's code.</li>
-     * <li>{@link #CXIdxEntityRef_Implicit IdxEntityRef_Implicit} - An implicit reference, e.g. a reference of an Objective-C method via the dot syntax.</li>
-     * </ul>
-     */
     public static final int
         CXIdxEntityRef_Direct   = 1,
         CXIdxEntityRef_Implicit = 2;
 
-    /**
-     * Roles that are attributed to symbol occurrences. ({@code CXSymbolRole})
-     * 
-     * <p>Internal: this currently mirrors low 9 bits of clang::index::SymbolRole with higher bits zeroed. These high bits may be exposed in the future.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXSymbolRole_None SymbolRole_None}</li>
-     * <li>{@link #CXSymbolRole_Declaration SymbolRole_Declaration}</li>
-     * <li>{@link #CXSymbolRole_Definition SymbolRole_Definition}</li>
-     * <li>{@link #CXSymbolRole_Reference SymbolRole_Reference}</li>
-     * <li>{@link #CXSymbolRole_Read SymbolRole_Read}</li>
-     * <li>{@link #CXSymbolRole_Write SymbolRole_Write}</li>
-     * <li>{@link #CXSymbolRole_Call SymbolRole_Call}</li>
-     * <li>{@link #CXSymbolRole_Dynamic SymbolRole_Dynamic}</li>
-     * <li>{@link #CXSymbolRole_AddressOf SymbolRole_AddressOf}</li>
-     * <li>{@link #CXSymbolRole_Implicit SymbolRole_Implicit}</li>
-     * </ul>
-     */
     public static final int
         CXSymbolRole_None        = 0,
         CXSymbolRole_Declaration = 1 << 0,
@@ -2857,26 +1264,6 @@ public class ClangIndex {
         CXSymbolRole_AddressOf   = 1 << 7,
         CXSymbolRole_Implicit    = 1 << 8;
 
-    /**
-     * {@code CXIndexOptFlags}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXIndexOpt_None IndexOpt_None} - Used to indicate that no special indexing options are needed.</li>
-     * <li>{@link #CXIndexOpt_SuppressRedundantRefs IndexOpt_SuppressRedundantRefs} - 
-     * Used to indicate that {@link IndexerCallbacks#indexEntityReference} should be invoked for only one reference of an entity per source file that does not
-     * also include a declaration/definition of the entity.
-     * </li>
-     * <li>{@link #CXIndexOpt_IndexFunctionLocalSymbols IndexOpt_IndexFunctionLocalSymbols} - Function-local symbols should be indexed. If this is not set function-local symbols will be ignored.</li>
-     * <li>{@link #CXIndexOpt_IndexImplicitTemplateInstantiations IndexOpt_IndexImplicitTemplateInstantiations} - Implicit function/class template instantiations should be indexed. If this is not set, implicit instantiations will be ignored.</li>
-     * <li>{@link #CXIndexOpt_SuppressWarnings IndexOpt_SuppressWarnings} - Suppress all compiler warnings when parsing for indexing.</li>
-     * <li>{@link #CXIndexOpt_SkipParsedBodiesInSession IndexOpt_SkipParsedBodiesInSession} - 
-     * Skip a function/method body that was already parsed during an indexing session associated with a {@code CXIndexAction} object. Bodies in system
-     * headers are always skipped.
-     * </li>
-     * </ul>
-     */
     public static final int
         CXIndexOpt_None                                = 0x0,
         CXIndexOpt_SuppressRedundantRefs               = 0x1,
@@ -2885,48 +1272,6 @@ public class ClangIndex {
         CXIndexOpt_SuppressWarnings                    = 0x8,
         CXIndexOpt_SkipParsedBodiesInSession           = 0x10;
 
-    /**
-     * Describes the kind of binary operators. ({@code CXBinaryOperatorKind})
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXBinaryOperator_Invalid BinaryOperator_Invalid} - This value describes cursors which are not binary operators.</li>
-     * <li>{@link #CXBinaryOperator_PtrMemD BinaryOperator_PtrMemD} - C++ Pointer - to - member operator.</li>
-     * <li>{@link #CXBinaryOperator_PtrMemI BinaryOperator_PtrMemI} - C++ Pointer - to - member operator.</li>
-     * <li>{@link #CXBinaryOperator_Mul BinaryOperator_Mul} - Multiplication operator.</li>
-     * <li>{@link #CXBinaryOperator_Div BinaryOperator_Div} - Division operator.</li>
-     * <li>{@link #CXBinaryOperator_Rem BinaryOperator_Rem} - Remainder operator.</li>
-     * <li>{@link #CXBinaryOperator_Add BinaryOperator_Add} - Addition operator.</li>
-     * <li>{@link #CXBinaryOperator_Sub BinaryOperator_Sub} - Subtraction operator.</li>
-     * <li>{@link #CXBinaryOperator_Shl BinaryOperator_Shl} - Bitwise shift left operator.</li>
-     * <li>{@link #CXBinaryOperator_Shr BinaryOperator_Shr} - Bitwise shift right operator.</li>
-     * <li>{@link #CXBinaryOperator_Cmp BinaryOperator_Cmp} - C++ three-way comparison (spaceship) operator.</li>
-     * <li>{@link #CXBinaryOperator_LT BinaryOperator_LT} - Less than operator.</li>
-     * <li>{@link #CXBinaryOperator_GT BinaryOperator_GT} - Greater than operator.</li>
-     * <li>{@link #CXBinaryOperator_LE BinaryOperator_LE} - Less or equal operator.</li>
-     * <li>{@link #CXBinaryOperator_GE BinaryOperator_GE} - Greater or equal operator.</li>
-     * <li>{@link #CXBinaryOperator_EQ BinaryOperator_EQ} - Equal operator.</li>
-     * <li>{@link #CXBinaryOperator_NE BinaryOperator_NE} - Not equal operator.</li>
-     * <li>{@link #CXBinaryOperator_And BinaryOperator_And} - Bitwise AND operator.</li>
-     * <li>{@link #CXBinaryOperator_Xor BinaryOperator_Xor} - Bitwise XOR operator.</li>
-     * <li>{@link #CXBinaryOperator_Or BinaryOperator_Or} - Bitwise OR operator.</li>
-     * <li>{@link #CXBinaryOperator_LAnd BinaryOperator_LAnd} - Logical AND operator.</li>
-     * <li>{@link #CXBinaryOperator_LOr BinaryOperator_LOr} - Logical OR operator.</li>
-     * <li>{@link #CXBinaryOperator_Assign BinaryOperator_Assign} - Assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_MulAssign BinaryOperator_MulAssign} - Multiplication assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_DivAssign BinaryOperator_DivAssign} - Division assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_RemAssign BinaryOperator_RemAssign} - Remainder assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_AddAssign BinaryOperator_AddAssign} - Addition assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_SubAssign BinaryOperator_SubAssign} - Subtraction assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_ShlAssign BinaryOperator_ShlAssign} - Bitwise shift left assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_ShrAssign BinaryOperator_ShrAssign} - Bitwise shift right assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_AndAssign BinaryOperator_AndAssign} - Bitwise AND assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_XorAssign BinaryOperator_XorAssign} - Bitwise XOR assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_OrAssign BinaryOperator_OrAssign} - Bitwise OR assignment operator.</li>
-     * <li>{@link #CXBinaryOperator_Comma BinaryOperator_Comma} - Comma operator.</li>
-     * </ul>
-     */
     public static final int
         CXBinaryOperator_Invalid   = 0,
         CXBinaryOperator_PtrMemD   = 1,
@@ -2963,29 +1308,6 @@ public class ClangIndex {
         CXBinaryOperator_OrAssign  = 32,
         CXBinaryOperator_Comma     = 33;
 
-    /**
-     * Describes the kind of unary operators. ({@code CXUnaryOperatorKind})
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXUnaryOperator_Invalid UnaryOperator_Invalid} - This value describes cursors which are not unary operators.</li>
-     * <li>{@link #CXUnaryOperator_PostInc UnaryOperator_PostInc} - Postfix increment operator.</li>
-     * <li>{@link #CXUnaryOperator_PostDec UnaryOperator_PostDec} - Postfix decrement operator.</li>
-     * <li>{@link #CXUnaryOperator_PreInc UnaryOperator_PreInc} - Prefix increment operator.</li>
-     * <li>{@link #CXUnaryOperator_PreDec UnaryOperator_PreDec} - Prefix decrement operator.</li>
-     * <li>{@link #CXUnaryOperator_AddrOf UnaryOperator_AddrOf} - Address of operator.</li>
-     * <li>{@link #CXUnaryOperator_Deref UnaryOperator_Deref} - Dereference operator.</li>
-     * <li>{@link #CXUnaryOperator_Plus UnaryOperator_Plus} - Plus operator.</li>
-     * <li>{@link #CXUnaryOperator_Minus UnaryOperator_Minus} - Minus operator.</li>
-     * <li>{@link #CXUnaryOperator_Not UnaryOperator_Not} - Not operator.</li>
-     * <li>{@link #CXUnaryOperator_LNot UnaryOperator_LNot} - LNot operator.</li>
-     * <li>{@link #CXUnaryOperator_Real UnaryOperator_Real} - {@code __real} expr operator.</li>
-     * <li>{@link #CXUnaryOperator_Imag UnaryOperator_Imag} - {@code __imag} expr operator.</li>
-     * <li>{@link #CXUnaryOperator_Extension UnaryOperator_Extension} - {@code __extension__} marker operator.</li>
-     * <li>{@link #CXUnaryOperator_Coawait UnaryOperator_Coawait} - C++ {@code co_await} operator.</li>
-     * </ul>
-     */
     public static final int
         CXUnaryOperator_Invalid   = 0,
         CXUnaryOperator_PostInc   = 1,
@@ -3009,16 +1331,16 @@ public class ClangIndex {
 
     // --- [ clang_getCString ] ---
 
-    /** Unsafe version of: {@link #clang_getCString getCString} */
+    /** {@code char const * clang_getCString(CXString string)} */
     public static native long nclang_getCString(long string, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCString getCString} */
+    /** {@code char const * clang_getCString(CXString string)} */
     public static long nclang_getCString(long string) {
         long __functionAddress = Functions.getCString;
         return nclang_getCString(string, __functionAddress);
     }
 
-    /** Retrieve the character data associated with the given string. */
+    /** {@code char const * clang_getCString(CXString string)} */
     @NativeType("char const *")
     public static @Nullable String clang_getCString(CXString string) {
         long __result = nclang_getCString(string.address());
@@ -3027,73 +1349,36 @@ public class ClangIndex {
 
     // --- [ clang_disposeString ] ---
 
-    /** Unsafe version of: {@link #clang_disposeString disposeString} */
+    /** {@code void clang_disposeString(CXString string)} */
     public static native void nclang_disposeString(long string, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_disposeString disposeString} */
+    /** {@code void clang_disposeString(CXString string)} */
     public static void nclang_disposeString(long string) {
         long __functionAddress = Functions.disposeString;
         nclang_disposeString(string, __functionAddress);
     }
 
-    /** Free the given string. */
+    /** {@code void clang_disposeString(CXString string)} */
     public static void clang_disposeString(CXString string) {
         nclang_disposeString(string.address());
     }
 
     // --- [ clang_disposeStringSet ] ---
 
-    /** Unsafe version of: {@link #clang_disposeStringSet disposeStringSet} */
+    /** {@code void clang_disposeStringSet(CXStringSet * set)} */
     public static void nclang_disposeStringSet(long set) {
         long __functionAddress = Functions.disposeStringSet;
         invokePV(set, __functionAddress);
     }
 
-    /** Free the given string set. */
+    /** {@code void clang_disposeStringSet(CXStringSet * set)} */
     public static void clang_disposeStringSet(@NativeType("CXStringSet *") CXStringSet set) {
         nclang_disposeStringSet(set.address());
     }
 
     // --- [ clang_createIndex ] ---
 
-    /**
-     * Provides a shared context for creating translation units.
-     * 
-     * <p>It provides two options:</p>
-     * 
-     * <ul>
-     * <li>{@code excludeDeclarationsFromPCH}: When non-zero, allows enumeration of "local" declarations (when loading any new translation units). A "local"
-     * declaration is one that belongs in the translation unit itself and not in a precompiled header that was used by the translation unit. If zero, all
-     * declarations will be enumerated.</li>
-     * </ul>
-     * 
-     * <p>Here is an example:</p>
-     * 
-     * <pre><code>
-     *    // excludeDeclsFromPCH = 1, displayDiagnostics=1
-     *    Idx = clang_createIndex(1, 1);
-     * 
-     *    // IndexTest.pch was produced with the following command:
-     *    // "clang -x c IndexTest.h -emit-ast -o IndexTest.pch"
-     *    TU = clang_createTranslationUnit(Idx, "IndexTest.pch");
-     * 
-     *    // This will load all the symbols from 'IndexTest.pch'
-     *    clang_visitChildren(clang_getTranslationUnitCursor(TU),
-     *                        TranslationUnitVisitor, 0);
-     *    clang_disposeTranslationUnit(TU);
-     * 
-     *    // This will load all the symbols from 'IndexTest.c', excluding symbols
-     *    // from 'IndexTest.pch'.
-     *    char *args[] = { "-Xclang", "-include-pch=IndexTest.pch" };
-     *    TU = clang_createTranslationUnitFromSourceFile(Idx, "IndexTest.c", 2, args,
-     *                                                   0, 0);
-     *    clang_visitChildren(clang_getTranslationUnitCursor(TU),
-     *                        TranslationUnitVisitor, 0);
-     *    clang_disposeTranslationUnit(TU);</code></pre>
-     * 
-     * <p>This process of creating the {@code pch}, loading it separately, and using it (via {@code -include-pch}) allows {@code excludeDeclsFromPCH} to remove
-     * redundant callbacks (which gives the indexer the same performance benefit as the compiler).</p>
-     */
+    /** {@code CXIndex clang_createIndex(int excludeDeclarationsFromPCH, int displayDiagnostics)} */
     @NativeType("CXIndex")
     public static long clang_createIndex(@NativeType("int") boolean excludeDeclarationsFromPCH, @NativeType("int") boolean displayDiagnostics) {
         long __functionAddress = Functions.createIndex;
@@ -3102,11 +1387,7 @@ public class ClangIndex {
 
     // --- [ clang_disposeIndex ] ---
 
-    /**
-     * Destroy the given index.
-     * 
-     * <p>The index must not be destroyed until all of the translation units created within that index have been destroyed.</p>
-     */
+    /** {@code void clang_disposeIndex(CXIndex index)} */
     public static void clang_disposeIndex(@NativeType("CXIndex") long index) {
         long __functionAddress = Functions.disposeIndex;
         if (CHECKS) {
@@ -3117,7 +1398,7 @@ public class ClangIndex {
 
     // --- [ clang_createIndexWithOptions ] ---
 
-    /** Unsafe version of: {@link #clang_createIndexWithOptions createIndexWithOptions} */
+    /** {@code CXIndex clang_createIndexWithOptions(CXIndexOptions const * options)} */
     public static long nclang_createIndexWithOptions(long options) {
         long __functionAddress = Functions.createIndexWithOptions;
         if (CHECKS) {
@@ -3126,15 +1407,7 @@ public class ClangIndex {
         return invokePP(options, __functionAddress);
     }
 
-    /**
-     * Provides a shared context for creating translation units.
-     * 
-     * <p>Call this function instead of {@link #clang_createIndex createIndex} if you need to configure the additional options in {@code CXIndexOptions}.</p>
-     *
-     * @return the created index or null in case of error, such as an unsupported value of {@code options->Size}.
-     *
-     * @since 17
-     */
+    /** {@code CXIndex clang_createIndexWithOptions(CXIndexOptions const * options)} */
     @NativeType("CXIndex")
     public static long clang_createIndexWithOptions(@NativeType("CXIndexOptions const *") CXIndexOptions options) {
         return nclang_createIndexWithOptions(options.address());
@@ -3142,22 +1415,7 @@ public class ClangIndex {
 
     // --- [ clang_CXIndex_setGlobalOptions ] ---
 
-    /**
-     * Sets general options associated with a {@code CXIndex}.
-     * 
-     * <p>This function is DEPRECATED. Set {@link CXIndexOptions}{@code ::ThreadBackgroundPriorityForIndexing} and/or
-     * {@code CXIndexOptions::ThreadBackgroundPriorityForEditing} and call {@link #clang_createIndexWithOptions createIndexWithOptions} instead.</p>
-     * 
-     * <p>For example:</p>
-     * 
-     * <pre><code>
-     *  CXIndex idx = ...;
-     *  clang_CXIndex_setGlobalOptions(idx,
-     *      clang_CXIndex_getGlobalOptions(idx) |
-     *      CXGlobalOpt_ThreadBackgroundPriorityForIndexing);</code></pre>
-     *
-     * @param options a bitmask of options, a bitwise OR of {@code CXGlobalOpt_XXX} flags
-     */
+    /** {@code void clang_CXIndex_setGlobalOptions(CXIndex index, unsigned options)} */
     public static void clang_CXIndex_setGlobalOptions(@NativeType("CXIndex") long index, @NativeType("unsigned") int options) {
         long __functionAddress = Functions.CXIndex_setGlobalOptions;
         if (CHECKS) {
@@ -3168,13 +1426,7 @@ public class ClangIndex {
 
     // --- [ clang_CXIndex_getGlobalOptions ] ---
 
-    /**
-     * Gets the general options associated with a CXIndex.
-     * 
-     * <p>This function allows to obtain the final option values used by libclang after specifying the option policies via {@code CXChoice} enumerators.</p>
-     *
-     * @return a bitmask of options, a bitwise OR of {@code CXGlobalOpt_XXX} flags that are associated with the given {@code CXIndex} object
-     */
+    /** {@code unsigned clang_CXIndex_getGlobalOptions(CXIndex index)} */
     @NativeType("unsigned")
     public static int clang_CXIndex_getGlobalOptions(@NativeType("CXIndex") long index) {
         long __functionAddress = Functions.CXIndex_getGlobalOptions;
@@ -3186,7 +1438,7 @@ public class ClangIndex {
 
     // --- [ clang_CXIndex_setInvocationEmissionPathOption ] ---
 
-    /** Unsafe version of: {@link #clang_CXIndex_setInvocationEmissionPathOption CXIndex_setInvocationEmissionPathOption} */
+    /** {@code void clang_CXIndex_setInvocationEmissionPathOption(CXIndex index, char const * Path)} */
     public static void nclang_CXIndex_setInvocationEmissionPathOption(long index, long Path) {
         long __functionAddress = Functions.CXIndex_setInvocationEmissionPathOption;
         if (CHECKS) {
@@ -3196,14 +1448,7 @@ public class ClangIndex {
         invokePPV(index, Path, __functionAddress);
     }
 
-    /**
-     * Sets the invocation emission path option in a {@code CXIndex}.
-     * 
-     * <p>This function is DEPRECATED. Set {@link CXIndexOptions}{@code ::InvocationEmissionPath} and call {@link #clang_createIndexWithOptions createIndexWithOptions} instead.</p>
-     * 
-     * <p>The invocation emission path specifies a path which will contain log files for certain libclang invocations. A null value (default) implies that
-     * libclang invocations are not logged.</p>
-     */
+    /** {@code void clang_CXIndex_setInvocationEmissionPathOption(CXIndex index, char const * Path)} */
     public static void clang_CXIndex_setInvocationEmissionPathOption(@NativeType("CXIndex") long index, @NativeType("char const *") @Nullable ByteBuffer Path) {
         if (CHECKS) {
             checkNT1Safe(Path);
@@ -3211,14 +1456,7 @@ public class ClangIndex {
         nclang_CXIndex_setInvocationEmissionPathOption(index, memAddressSafe(Path));
     }
 
-    /**
-     * Sets the invocation emission path option in a {@code CXIndex}.
-     * 
-     * <p>This function is DEPRECATED. Set {@link CXIndexOptions}{@code ::InvocationEmissionPath} and call {@link #clang_createIndexWithOptions createIndexWithOptions} instead.</p>
-     * 
-     * <p>The invocation emission path specifies a path which will contain log files for certain libclang invocations. A null value (default) implies that
-     * libclang invocations are not logged.</p>
-     */
+    /** {@code void clang_CXIndex_setInvocationEmissionPathOption(CXIndex index, char const * Path)} */
     public static void clang_CXIndex_setInvocationEmissionPathOption(@NativeType("CXIndex") long index, @NativeType("char const *") @Nullable CharSequence Path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -3232,10 +1470,10 @@ public class ClangIndex {
 
     // --- [ clang_getFileName ] ---
 
-    /** Unsafe version of: {@link #clang_getFileName getFileName} */
+    /** {@code CXString clang_getFileName(CXFile SFile)} */
     public static native void nclang_getFileName(long SFile, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getFileName getFileName} */
+    /** {@code CXString clang_getFileName(CXFile SFile)} */
     public static void nclang_getFileName(long SFile, long __result) {
         long __functionAddress = Functions.getFileName;
         if (CHECKS) {
@@ -3244,7 +1482,7 @@ public class ClangIndex {
         nclang_getFileName(SFile, __functionAddress, __result);
     }
 
-    /** Retrieve the complete file and path name of the given file. */
+    /** {@code CXString clang_getFileName(CXFile SFile)} */
     public static CXString clang_getFileName(@NativeType("CXFile") long SFile, CXString __result) {
         nclang_getFileName(SFile, __result.address());
         return __result;
@@ -3252,7 +1490,7 @@ public class ClangIndex {
 
     // --- [ clang_getFileTime ] ---
 
-    /** Retrieve the last modification time of the given file. */
+    /** {@code time_t clang_getFileTime(CXFile SFile)} */
     @NativeType("time_t")
     public static long clang_getFileTime(@NativeType("CXFile") long SFile) {
         long __functionAddress = Functions.getFileTime;
@@ -3264,7 +1502,7 @@ public class ClangIndex {
 
     // --- [ clang_getFileUniqueID ] ---
 
-    /** Unsafe version of: {@link #clang_getFileUniqueID getFileUniqueID} */
+    /** {@code int clang_getFileUniqueID(CXFile file, CXFileUniqueID * outID)} */
     public static int nclang_getFileUniqueID(long file, long outID) {
         long __functionAddress = Functions.getFileUniqueID;
         if (CHECKS) {
@@ -3273,24 +1511,14 @@ public class ClangIndex {
         return invokePPI(file, outID, __functionAddress);
     }
 
-    /**
-     * Retrieve the unique ID for the given {@code file}.
-     *
-     * @param file  the file to get the ID for
-     * @param outID stores the returned CXFileUniqueID
-     *
-     * @return if there was a failure getting the unique ID, returns non-zero, otherwise returns 0
-     */
+    /** {@code int clang_getFileUniqueID(CXFile file, CXFileUniqueID * outID)} */
     public static int clang_getFileUniqueID(@NativeType("CXFile") long file, @NativeType("CXFileUniqueID *") CXFileUniqueID outID) {
         return nclang_getFileUniqueID(file, outID.address());
     }
 
     // --- [ clang_isFileMultipleIncludeGuarded ] ---
 
-    /**
-     * Determine whether the given header is guarded against multiple inclusions, either with the conventional #ifndef/#define/#endif macro guards or with
-     * #pragma once.
-     */
+    /** {@code unsigned clang_isFileMultipleIncludeGuarded(CXTranslationUnit tu, CXFile file)} */
     @NativeType("unsigned")
     public static boolean clang_isFileMultipleIncludeGuarded(@NativeType("CXTranslationUnit") long tu, @NativeType("CXFile") long file) {
         long __functionAddress = Functions.isFileMultipleIncludeGuarded;
@@ -3303,7 +1531,7 @@ public class ClangIndex {
 
     // --- [ clang_getFile ] ---
 
-    /** Unsafe version of: {@link #clang_getFile getFile} */
+    /** {@code CXFile clang_getFile(CXTranslationUnit tu, char const * file_name)} */
     public static long nclang_getFile(long tu, long file_name) {
         long __functionAddress = Functions.getFile;
         if (CHECKS) {
@@ -3312,14 +1540,7 @@ public class ClangIndex {
         return invokePPP(tu, file_name, __functionAddress);
     }
 
-    /**
-     * Retrieve a file handle within the given translation unit.
-     *
-     * @param tu        the translation unit
-     * @param file_name the name of the file
-     *
-     * @return the file handle for the named file in the translation unit {@code tu}, or a {@code NULL} file handle if the file was not a part of this translation unit
-     */
+    /** {@code CXFile clang_getFile(CXTranslationUnit tu, char const * file_name)} */
     @NativeType("CXFile")
     public static long clang_getFile(@NativeType("CXTranslationUnit") long tu, @NativeType("char const *") ByteBuffer file_name) {
         if (CHECKS) {
@@ -3328,14 +1549,7 @@ public class ClangIndex {
         return nclang_getFile(tu, memAddress(file_name));
     }
 
-    /**
-     * Retrieve a file handle within the given translation unit.
-     *
-     * @param tu        the translation unit
-     * @param file_name the name of the file
-     *
-     * @return the file handle for the named file in the translation unit {@code tu}, or a {@code NULL} file handle if the file was not a part of this translation unit
-     */
+    /** {@code CXFile clang_getFile(CXTranslationUnit tu, char const * file_name)} */
     @NativeType("CXFile")
     public static long clang_getFile(@NativeType("CXTranslationUnit") long tu, @NativeType("char const *") CharSequence file_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -3350,11 +1564,7 @@ public class ClangIndex {
 
     // --- [ clang_getFileContents ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_getFileContents getFileContents}
-     *
-     * @param size [out] if non-{@code NULL}, will be set to the size of the buffer
-     */
+    /** {@code char const * clang_getFileContents(CXTranslationUnit tu, CXFile file, size_t * size)} */
     public static long nclang_getFileContents(long tu, long file, long size) {
         long __functionAddress = Functions.getFileContents;
         if (CHECKS) {
@@ -3365,14 +1575,7 @@ public class ClangIndex {
         return invokePPPP(tu, file, size, __functionAddress);
     }
 
-    /**
-     * Retrieve the buffer associated with the given file.
-     *
-     * @param tu   the translation unit
-     * @param file the file for which to retrieve the buffer
-     *
-     * @return a pointer to the buffer in memory that holds the contents of {@code file}, or a {@code NULL} pointer when the file is not loaded
-     */
+    /** {@code char const * clang_getFileContents(CXTranslationUnit tu, CXFile file, size_t * size)} */
     @NativeType("char const *")
     public static @Nullable ByteBuffer clang_getFileContents(@NativeType("CXTranslationUnit") long tu, @NativeType("CXFile") long file) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -3387,7 +1590,7 @@ public class ClangIndex {
 
     // --- [ clang_File_isEqual ] ---
 
-    /** Returns non-zero if the {@code file1} and {@code file2} point to the same file, or they are both {@code NULL}. */
+    /** {@code int clang_File_isEqual(CXFile file1, CXFile file2)} */
     @NativeType("int")
     public static boolean clang_File_isEqual(@NativeType("CXFile") long file1, @NativeType("CXFile") long file2) {
         long __functionAddress = Functions.File_isEqual;
@@ -3396,10 +1599,10 @@ public class ClangIndex {
 
     // --- [ clang_File_tryGetRealPathName ] ---
 
-    /** Unsafe version of: {@link #clang_File_tryGetRealPathName File_tryGetRealPathName} */
+    /** {@code CXString clang_File_tryGetRealPathName(CXFile file)} */
     public static native void nclang_File_tryGetRealPathName(long file, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_File_tryGetRealPathName File_tryGetRealPathName} */
+    /** {@code CXString clang_File_tryGetRealPathName(CXFile file)} */
     public static void nclang_File_tryGetRealPathName(long file, long __result) {
         long __functionAddress = Functions.File_tryGetRealPathName;
         if (CHECKS) {
@@ -3409,11 +1612,7 @@ public class ClangIndex {
         nclang_File_tryGetRealPathName(file, __functionAddress, __result);
     }
 
-    /**
-     * Returns the real path name of {@code file}.
-     * 
-     * <p>An empty string may be returned. Use {@link #clang_getFileName getFileName} in that case.</p>
-     */
+    /** {@code CXString clang_File_tryGetRealPathName(CXFile file)} */
     public static CXString clang_File_tryGetRealPathName(@NativeType("CXFile") long file, CXString __result) {
         nclang_File_tryGetRealPathName(file, __result.address());
         return __result;
@@ -3421,16 +1620,16 @@ public class ClangIndex {
 
     // --- [ clang_getNullLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getNullLocation getNullLocation} */
+    /** {@code CXSourceLocation clang_getNullLocation(void)} */
     public static native void nclang_getNullLocation(long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getNullLocation getNullLocation} */
+    /** {@code CXSourceLocation clang_getNullLocation(void)} */
     public static void nclang_getNullLocation(long __result) {
         long __functionAddress = Functions.getNullLocation;
         nclang_getNullLocation(__functionAddress, __result);
     }
 
-    /** Retrieve a {@code NULL} (invalid) source location. */
+    /** {@code CXSourceLocation clang_getNullLocation(void)} */
     public static CXSourceLocation clang_getNullLocation(CXSourceLocation __result) {
         nclang_getNullLocation(__result.address());
         return __result;
@@ -3438,20 +1637,16 @@ public class ClangIndex {
 
     // --- [ clang_equalLocations ] ---
 
-    /** Unsafe version of: {@link #clang_equalLocations equalLocations} */
+    /** {@code unsigned clang_equalLocations(CXSourceLocation loc1, CXSourceLocation loc2)} */
     public static native int nclang_equalLocations(long loc1, long loc2, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_equalLocations equalLocations} */
+    /** {@code unsigned clang_equalLocations(CXSourceLocation loc1, CXSourceLocation loc2)} */
     public static int nclang_equalLocations(long loc1, long loc2) {
         long __functionAddress = Functions.equalLocations;
         return nclang_equalLocations(loc1, loc2, __functionAddress);
     }
 
-    /**
-     * Determine whether two source locations, which must refer into the same translation unit, refer to exactly the same point in the source code.
-     *
-     * @return non-zero if the source locations refer to the same location, zero if they refer to different locations
-     */
+    /** {@code unsigned clang_equalLocations(CXSourceLocation loc1, CXSourceLocation loc2)} */
     @NativeType("unsigned")
     public static boolean clang_equalLocations(CXSourceLocation loc1, CXSourceLocation loc2) {
         return nclang_equalLocations(loc1.address(), loc2.address()) != 0;
@@ -3459,10 +1654,10 @@ public class ClangIndex {
 
     // --- [ clang_getLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getLocation getLocation} */
+    /** {@code CXSourceLocation clang_getLocation(CXTranslationUnit tu, CXFile file, unsigned line, unsigned column)} */
     public static native void nclang_getLocation(long tu, long file, int line, int column, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getLocation getLocation} */
+    /** {@code CXSourceLocation clang_getLocation(CXTranslationUnit tu, CXFile file, unsigned line, unsigned column)} */
     public static void nclang_getLocation(long tu, long file, int line, int column, long __result) {
         long __functionAddress = Functions.getLocation;
         if (CHECKS) {
@@ -3472,7 +1667,7 @@ public class ClangIndex {
         nclang_getLocation(tu, file, line, column, __functionAddress, __result);
     }
 
-    /** Retrieves the source location associated with a given file/line/column in a particular translation unit. */
+    /** {@code CXSourceLocation clang_getLocation(CXTranslationUnit tu, CXFile file, unsigned line, unsigned column)} */
     public static CXSourceLocation clang_getLocation(@NativeType("CXTranslationUnit") long tu, @NativeType("CXFile") long file, @NativeType("unsigned") int line, @NativeType("unsigned") int column, CXSourceLocation __result) {
         nclang_getLocation(tu, file, line, column, __result.address());
         return __result;
@@ -3480,10 +1675,10 @@ public class ClangIndex {
 
     // --- [ clang_getLocationForOffset ] ---
 
-    /** Unsafe version of: {@link #clang_getLocationForOffset getLocationForOffset} */
+    /** {@code CXSourceLocation clang_getLocationForOffset(CXTranslationUnit tu, CXFile file, unsigned offset)} */
     public static native void nclang_getLocationForOffset(long tu, long file, int offset, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getLocationForOffset getLocationForOffset} */
+    /** {@code CXSourceLocation clang_getLocationForOffset(CXTranslationUnit tu, CXFile file, unsigned offset)} */
     public static void nclang_getLocationForOffset(long tu, long file, int offset, long __result) {
         long __functionAddress = Functions.getLocationForOffset;
         if (CHECKS) {
@@ -3493,7 +1688,7 @@ public class ClangIndex {
         nclang_getLocationForOffset(tu, file, offset, __functionAddress, __result);
     }
 
-    /** Retrieves the source location associated with a given character offset in a particular translation unit. */
+    /** {@code CXSourceLocation clang_getLocationForOffset(CXTranslationUnit tu, CXFile file, unsigned offset)} */
     public static CXSourceLocation clang_getLocationForOffset(@NativeType("CXTranslationUnit") long tu, @NativeType("CXFile") long file, @NativeType("unsigned") int offset, CXSourceLocation __result) {
         nclang_getLocationForOffset(tu, file, offset, __result.address());
         return __result;
@@ -3501,16 +1696,16 @@ public class ClangIndex {
 
     // --- [ clang_Location_isInSystemHeader ] ---
 
-    /** Unsafe version of: {@link #clang_Location_isInSystemHeader Location_isInSystemHeader} */
+    /** {@code int clang_Location_isInSystemHeader(CXSourceLocation location)} */
     public static native int nclang_Location_isInSystemHeader(long location, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Location_isInSystemHeader Location_isInSystemHeader} */
+    /** {@code int clang_Location_isInSystemHeader(CXSourceLocation location)} */
     public static int nclang_Location_isInSystemHeader(long location) {
         long __functionAddress = Functions.Location_isInSystemHeader;
         return nclang_Location_isInSystemHeader(location, __functionAddress);
     }
 
-    /** Returns non-zero if the given source location is in a system header. */
+    /** {@code int clang_Location_isInSystemHeader(CXSourceLocation location)} */
     @NativeType("int")
     public static boolean clang_Location_isInSystemHeader(CXSourceLocation location) {
         return nclang_Location_isInSystemHeader(location.address()) != 0;
@@ -3518,16 +1713,16 @@ public class ClangIndex {
 
     // --- [ clang_Location_isFromMainFile ] ---
 
-    /** Unsafe version of: {@link #clang_Location_isFromMainFile Location_isFromMainFile} */
+    /** {@code int clang_Location_isFromMainFile(CXSourceLocation location)} */
     public static native int nclang_Location_isFromMainFile(long location, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Location_isFromMainFile Location_isFromMainFile} */
+    /** {@code int clang_Location_isFromMainFile(CXSourceLocation location)} */
     public static int nclang_Location_isFromMainFile(long location) {
         long __functionAddress = Functions.Location_isFromMainFile;
         return nclang_Location_isFromMainFile(location, __functionAddress);
     }
 
-    /** Returns non-zero if the given source location is in the main file of the corresponding translation unit. */
+    /** {@code int clang_Location_isFromMainFile(CXSourceLocation location)} */
     @NativeType("int")
     public static boolean clang_Location_isFromMainFile(CXSourceLocation location) {
         return nclang_Location_isFromMainFile(location.address()) != 0;
@@ -3535,16 +1730,16 @@ public class ClangIndex {
 
     // --- [ clang_getNullRange ] ---
 
-    /** Unsafe version of: {@link #clang_getNullRange getNullRange} */
+    /** {@code CXSourceRange clang_getNullRange(void)} */
     public static native void nclang_getNullRange(long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getNullRange getNullRange} */
+    /** {@code CXSourceRange clang_getNullRange(void)} */
     public static void nclang_getNullRange(long __result) {
         long __functionAddress = Functions.getNullRange;
         nclang_getNullRange(__functionAddress, __result);
     }
 
-    /** Retrieve a {@code NULL} (invalid) source range. */
+    /** {@code CXSourceRange clang_getNullRange(void)} */
     public static CXSourceRange clang_getNullRange(CXSourceRange __result) {
         nclang_getNullRange(__result.address());
         return __result;
@@ -3552,16 +1747,16 @@ public class ClangIndex {
 
     // --- [ clang_getRange ] ---
 
-    /** Unsafe version of: {@link #clang_getRange getRange} */
+    /** {@code CXSourceRange clang_getRange(CXSourceLocation begin, CXSourceLocation end)} */
     public static native void nclang_getRange(long begin, long end, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getRange getRange} */
+    /** {@code CXSourceRange clang_getRange(CXSourceLocation begin, CXSourceLocation end)} */
     public static void nclang_getRange(long begin, long end, long __result) {
         long __functionAddress = Functions.getRange;
         nclang_getRange(begin, end, __functionAddress, __result);
     }
 
-    /** Retrieve a source range given the beginning and ending source locations. */
+    /** {@code CXSourceRange clang_getRange(CXSourceLocation begin, CXSourceLocation end)} */
     public static CXSourceRange clang_getRange(CXSourceLocation begin, CXSourceLocation end, CXSourceRange __result) {
         nclang_getRange(begin.address(), end.address(), __result.address());
         return __result;
@@ -3569,20 +1764,16 @@ public class ClangIndex {
 
     // --- [ clang_equalRanges ] ---
 
-    /** Unsafe version of: {@link #clang_equalRanges equalRanges} */
+    /** {@code unsigned clang_equalRanges(CXSourceRange range1, CXSourceRange range2)} */
     public static native int nclang_equalRanges(long range1, long range2, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_equalRanges equalRanges} */
+    /** {@code unsigned clang_equalRanges(CXSourceRange range1, CXSourceRange range2)} */
     public static int nclang_equalRanges(long range1, long range2) {
         long __functionAddress = Functions.equalRanges;
         return nclang_equalRanges(range1, range2, __functionAddress);
     }
 
-    /**
-     * Determine whether two ranges are equivalent.
-     *
-     * @return non-zero if the ranges are the same, zero if they differ
-     */
+    /** {@code unsigned clang_equalRanges(CXSourceRange range1, CXSourceRange range2)} */
     @NativeType("unsigned")
     public static boolean clang_equalRanges(CXSourceRange range1, CXSourceRange range2) {
         return nclang_equalRanges(range1.address(), range2.address()) != 0;
@@ -3590,16 +1781,16 @@ public class ClangIndex {
 
     // --- [ clang_Range_isNull ] ---
 
-    /** Unsafe version of: {@link #clang_Range_isNull Range_isNull} */
+    /** {@code int clang_Range_isNull(CXSourceRange range)} */
     public static native int nclang_Range_isNull(long range, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Range_isNull Range_isNull} */
+    /** {@code int clang_Range_isNull(CXSourceRange range)} */
     public static int nclang_Range_isNull(long range) {
         long __functionAddress = Functions.Range_isNull;
         return nclang_Range_isNull(range, __functionAddress);
     }
 
-    /** Returns non-zero if {@code range} is null. */
+    /** {@code int clang_Range_isNull(CXSourceRange range)} */
     @NativeType("int")
     public static boolean clang_Range_isNull(CXSourceRange range) {
         return nclang_Range_isNull(range.address()) != 0;
@@ -3607,26 +1798,16 @@ public class ClangIndex {
 
     // --- [ clang_getExpansionLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getExpansionLocation getExpansionLocation} */
+    /** {@code void clang_getExpansionLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static native void nclang_getExpansionLocation(long location, long file, long line, long column, long offset, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getExpansionLocation getExpansionLocation} */
+    /** {@code void clang_getExpansionLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static void nclang_getExpansionLocation(long location, long file, long line, long column, long offset) {
         long __functionAddress = Functions.getExpansionLocation;
         nclang_getExpansionLocation(location, file, line, column, offset, __functionAddress);
     }
 
-    /**
-     * Retrieve the file, line, column, and offset represented by the given source location.
-     * 
-     * <p>If the location refers into a macro expansion, retrieves the location of the macro expansion.</p>
-     *
-     * @param location the location within a source file that will be decomposed into its parts
-     * @param file     [out] if non-{@code NULL}, will be set to the file to which the given source location points
-     * @param line     [out] if non-{@code NULL}, will be set to the line to which the given source location points
-     * @param column   [out] if non-{@code NULL}, will be set to the column to which the given source location points
-     * @param offset   [out] if non-{@code NULL}, will be set to the offset into the buffer to which the given source location points
-     */
+    /** {@code void clang_getExpansionLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static void clang_getExpansionLocation(CXSourceLocation location, @NativeType("CXFile *") @Nullable PointerBuffer file, @NativeType("unsigned *") @Nullable IntBuffer line, @NativeType("unsigned *") @Nullable IntBuffer column, @NativeType("unsigned *") @Nullable IntBuffer offset) {
         if (CHECKS) {
             checkSafe(file, 1);
@@ -3639,44 +1820,16 @@ public class ClangIndex {
 
     // --- [ clang_getPresumedLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getPresumedLocation getPresumedLocation} */
+    /** {@code void clang_getPresumedLocation(CXSourceLocation location, CXString * filename, unsigned * line, unsigned * column)} */
     public static native void nclang_getPresumedLocation(long location, long filename, long line, long column, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getPresumedLocation getPresumedLocation} */
+    /** {@code void clang_getPresumedLocation(CXSourceLocation location, CXString * filename, unsigned * line, unsigned * column)} */
     public static void nclang_getPresumedLocation(long location, long filename, long line, long column) {
         long __functionAddress = Functions.getPresumedLocation;
         nclang_getPresumedLocation(location, filename, line, column, __functionAddress);
     }
 
-    /**
-     * Retrieve the file, line and column represented by the given source location, as specified in a # line directive.
-     * 
-     * <p>Example: given the following source code in a file somefile.c</p>
-     * 
-     * <pre><code>
-     *  #123 "dummy.c" 1
-     * 
-     *  static int func(void)
-     *  {
-     *      return 0;
-     *  }</code></pre>
-     * 
-     * <p>the location information returned by this function would be</p>
-     * 
-     * <p>File: dummy.c Line: 124 Column: 12</p>
-     * 
-     * <p>whereas clang_getExpansionLocation would have returned</p>
-     * 
-     * <p>File: somefile.c Line: 3 Column: 12</p>
-     *
-     * @param location the location within a source file that will be decomposed into its parts
-     * @param filename [out] if non-{@code NULL}, will be set to the filename of the source location. Note that filenames returned will be for "virtual" files, which don't
-     *                 necessarily exist on the machine running clang - e.g. when parsing preprocessed output obtained from a different environment. If a non-{@code NULL} value
-     *                 is passed in, remember to dispose of the returned value using {@code clang_disposeString()} once you've finished with it. For an invalid source
-     *                 location, an empty string is returned.
-     * @param line     [out] if non-{@code NULL}, will be set to the line number of the source location. For an invalid source location, zero is returned.
-     * @param column   [out] if non-{@code NULL}, will be set to the column number of the source location. For an invalid source location, zero is returned.
-     */
+    /** {@code void clang_getPresumedLocation(CXSourceLocation location, CXString * filename, unsigned * line, unsigned * column)} */
     public static void clang_getPresumedLocation(CXSourceLocation location, @NativeType("CXString *") CXString.@Nullable Buffer filename, @NativeType("unsigned *") @Nullable IntBuffer line, @NativeType("unsigned *") @Nullable IntBuffer column) {
         if (CHECKS) {
             checkSafe(filename, 1);
@@ -3688,26 +1841,16 @@ public class ClangIndex {
 
     // --- [ clang_getSpellingLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getSpellingLocation getSpellingLocation} */
+    /** {@code void clang_getSpellingLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static native void nclang_getSpellingLocation(long location, long file, long line, long column, long offset, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getSpellingLocation getSpellingLocation} */
+    /** {@code void clang_getSpellingLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static void nclang_getSpellingLocation(long location, long file, long line, long column, long offset) {
         long __functionAddress = Functions.getSpellingLocation;
         nclang_getSpellingLocation(location, file, line, column, offset, __functionAddress);
     }
 
-    /**
-     * Retrieve the file, line, column, and offset represented by the given source location.
-     * 
-     * <p>If the location refers into a macro instantiation, return where the location was originally spelled in the source file.</p>
-     *
-     * @param location the location within a source file that will be decomposed into its parts
-     * @param file     [out] if non-{@code NULL}, will be set to the file to which the given source location points
-     * @param line     [out] if non-{@code NULL}, will be set to the line to which the given source location points
-     * @param column   [out] if non-{@code NULL}, will be set to the column to which the given source location points
-     * @param offset   [out] if non-{@code NULL}, will be set to the offset into the buffer to which the given source location points
-     */
+    /** {@code void clang_getSpellingLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static void clang_getSpellingLocation(CXSourceLocation location, @NativeType("CXFile *") @Nullable PointerBuffer file, @NativeType("unsigned *") @Nullable IntBuffer line, @NativeType("unsigned *") @Nullable IntBuffer column, @NativeType("unsigned *") @Nullable IntBuffer offset) {
         if (CHECKS) {
             checkSafe(file, 1);
@@ -3720,27 +1863,16 @@ public class ClangIndex {
 
     // --- [ clang_getFileLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getFileLocation getFileLocation} */
+    /** {@code void clang_getFileLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static native void nclang_getFileLocation(long location, long file, long line, long column, long offset, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getFileLocation getFileLocation} */
+    /** {@code void clang_getFileLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static void nclang_getFileLocation(long location, long file, long line, long column, long offset) {
         long __functionAddress = Functions.getFileLocation;
         nclang_getFileLocation(location, file, line, column, offset, __functionAddress);
     }
 
-    /**
-     * Retrieve the file, line, column, and offset represented by the given source location.
-     * 
-     * <p>If the location refers into a macro expansion, return where the macro was expanded or where the macro argument was written, if the location points at a
-     * macro argument.</p>
-     *
-     * @param location the location within a source file that will be decomposed into its parts
-     * @param file     [out] if non-{@code NULL}, will be set to the file to which the given source location points
-     * @param line     [out] if non-{@code NULL}, will be set to the line to which the given source location points
-     * @param column   [out] if non-{@code NULL}, will be set to the column to which the given source location points
-     * @param offset   [out] if non-{@code NULL}, will be set to the offset into the buffer to which the given source location points
-     */
+    /** {@code void clang_getFileLocation(CXSourceLocation location, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static void clang_getFileLocation(CXSourceLocation location, @NativeType("CXFile *") @Nullable PointerBuffer file, @NativeType("unsigned *") @Nullable IntBuffer line, @NativeType("unsigned *") @Nullable IntBuffer column, @NativeType("unsigned *") @Nullable IntBuffer offset) {
         if (CHECKS) {
             checkSafe(file, 1);
@@ -3753,16 +1885,16 @@ public class ClangIndex {
 
     // --- [ clang_getRangeStart ] ---
 
-    /** Unsafe version of: {@link #clang_getRangeStart getRangeStart} */
+    /** {@code CXSourceLocation clang_getRangeStart(CXSourceRange range)} */
     public static native void nclang_getRangeStart(long range, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getRangeStart getRangeStart} */
+    /** {@code CXSourceLocation clang_getRangeStart(CXSourceRange range)} */
     public static void nclang_getRangeStart(long range, long __result) {
         long __functionAddress = Functions.getRangeStart;
         nclang_getRangeStart(range, __functionAddress, __result);
     }
 
-    /** Retrieve a source location representing the first character within a source range. */
+    /** {@code CXSourceLocation clang_getRangeStart(CXSourceRange range)} */
     public static CXSourceLocation clang_getRangeStart(CXSourceRange range, CXSourceLocation __result) {
         nclang_getRangeStart(range.address(), __result.address());
         return __result;
@@ -3770,16 +1902,16 @@ public class ClangIndex {
 
     // --- [ clang_getRangeEnd ] ---
 
-    /** Unsafe version of: {@link #clang_getRangeEnd getRangeEnd} */
+    /** {@code CXSourceLocation clang_getRangeEnd(CXSourceRange range)} */
     public static native void nclang_getRangeEnd(long range, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getRangeEnd getRangeEnd} */
+    /** {@code CXSourceLocation clang_getRangeEnd(CXSourceRange range)} */
     public static void nclang_getRangeEnd(long range, long __result) {
         long __functionAddress = Functions.getRangeEnd;
         nclang_getRangeEnd(range, __functionAddress, __result);
     }
 
-    /** Retrieve a source location representing the last character within a source range. */
+    /** {@code CXSourceLocation clang_getRangeEnd(CXSourceRange range)} */
     public static CXSourceLocation clang_getRangeEnd(CXSourceRange range, CXSourceLocation __result) {
         nclang_getRangeEnd(range.address(), __result.address());
         return __result;
@@ -3787,7 +1919,7 @@ public class ClangIndex {
 
     // --- [ clang_getSkippedRanges ] ---
 
-    /** Unsafe version of: {@link #clang_getSkippedRanges getSkippedRanges} */
+    /** {@code CXSourceRangeList * clang_getSkippedRanges(CXTranslationUnit tu, CXFile file)} */
     public static long nclang_getSkippedRanges(long tu, long file) {
         long __functionAddress = Functions.getSkippedRanges;
         if (CHECKS) {
@@ -3797,11 +1929,7 @@ public class ClangIndex {
         return invokePPP(tu, file, __functionAddress);
     }
 
-    /**
-     * Retrieve all ranges that were skipped by the preprocessor.
-     * 
-     * <p>The preprocessor will skip lines when they are surrounded by an if/ifdef/ifndef directive whose condition does not evaluate to true.</p>
-     */
+    /** {@code CXSourceRangeList * clang_getSkippedRanges(CXTranslationUnit tu, CXFile file)} */
     @NativeType("CXSourceRangeList *")
     public static @Nullable CXSourceRangeList clang_getSkippedRanges(@NativeType("CXTranslationUnit") long tu, @NativeType("CXFile") long file) {
         long __result = nclang_getSkippedRanges(tu, file);
@@ -3810,7 +1938,7 @@ public class ClangIndex {
 
     // --- [ clang_getAllSkippedRanges ] ---
 
-    /** Unsafe version of: {@link #clang_getAllSkippedRanges getAllSkippedRanges} */
+    /** {@code CXSourceRangeList * clang_getAllSkippedRanges(CXTranslationUnit tu)} */
     public static long nclang_getAllSkippedRanges(long tu) {
         long __functionAddress = Functions.getAllSkippedRanges;
         if (CHECKS) {
@@ -3819,11 +1947,7 @@ public class ClangIndex {
         return invokePP(tu, __functionAddress);
     }
 
-    /**
-     * Retrieve all ranges from all files that were skipped by the preprocessor.
-     * 
-     * <p>The preprocessor will skip lines when they are surrounded by an if/ifdef/ifndef directive whose condition does not evaluate to true.</p>
-     */
+    /** {@code CXSourceRangeList * clang_getAllSkippedRanges(CXTranslationUnit tu)} */
     @NativeType("CXSourceRangeList *")
     public static @Nullable CXSourceRangeList clang_getAllSkippedRanges(@NativeType("CXTranslationUnit") long tu) {
         long __result = nclang_getAllSkippedRanges(tu);
@@ -3832,20 +1956,20 @@ public class ClangIndex {
 
     // --- [ clang_disposeSourceRangeList ] ---
 
-    /** Unsafe version of: {@link #clang_disposeSourceRangeList disposeSourceRangeList} */
+    /** {@code void clang_disposeSourceRangeList(CXSourceRangeList * ranges)} */
     public static void nclang_disposeSourceRangeList(long ranges) {
         long __functionAddress = Functions.disposeSourceRangeList;
         invokePV(ranges, __functionAddress);
     }
 
-    /** Destroy the given {@code CXSourceRangeList}. */
+    /** {@code void clang_disposeSourceRangeList(CXSourceRangeList * ranges)} */
     public static void clang_disposeSourceRangeList(@NativeType("CXSourceRangeList *") CXSourceRangeList ranges) {
         nclang_disposeSourceRangeList(ranges.address());
     }
 
     // --- [ clang_getNumDiagnosticsInSet ] ---
 
-    /** Determine the number of diagnostics in a {@code CXDiagnosticSet}. */
+    /** {@code unsigned clang_getNumDiagnosticsInSet(CXDiagnosticSet Diags)} */
     @NativeType("unsigned")
     public static int clang_getNumDiagnosticsInSet(@NativeType("CXDiagnosticSet") long Diags) {
         long __functionAddress = Functions.getNumDiagnosticsInSet;
@@ -3857,14 +1981,7 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticInSet ] ---
 
-    /**
-     * Retrieve a diagnostic associated with the given {@code CXDiagnosticSet}.
-     *
-     * @param Diags the {@code CXDiagnosticSet} to query
-     * @param Index the zero-based diagnostic number to retrieve
-     *
-     * @return the requested diagnostic. This diagnostic must be freed via a call to {@link #clang_disposeDiagnostic disposeDiagnostic}.
-     */
+    /** {@code CXDiagnostic clang_getDiagnosticInSet(CXDiagnosticSet Diags, unsigned Index)} */
     @NativeType("CXDiagnostic")
     public static long clang_getDiagnosticInSet(@NativeType("CXDiagnosticSet") long Diags, @NativeType("unsigned") int Index) {
         long __functionAddress = Functions.getDiagnosticInSet;
@@ -3876,21 +1993,13 @@ public class ClangIndex {
 
     // --- [ clang_loadDiagnostics ] ---
 
-    /** Unsafe version of: {@link #clang_loadDiagnostics loadDiagnostics} */
+    /** {@code CXDiagnosticSet clang_loadDiagnostics(char const * file, enum CXLoadDiag_Error * error, CXString * errorString)} */
     public static long nclang_loadDiagnostics(long file, long error, long errorString) {
         long __functionAddress = Functions.loadDiagnostics;
         return invokePPPP(file, error, errorString, __functionAddress);
     }
 
-    /**
-     * Deserialize a set of diagnostics from a Clang diagnostics bitcode file.
-     *
-     * @param file        the name of the file to deserialize
-     * @param error       a pointer to a enum value recording if there was a problem deserializing the diagnostics
-     * @param errorString a pointer to a {@link CXString} for recording the error string if the file was not successfully loaded
-     *
-     * @return a loaded {@code CXDiagnosticSet} if successful, and {@code NULL} otherwise. These diagnostics should be released using {@link #clang_disposeDiagnosticSet disposeDiagnosticSet}.
-     */
+    /** {@code CXDiagnosticSet clang_loadDiagnostics(char const * file, enum CXLoadDiag_Error * error, CXString * errorString)} */
     @NativeType("CXDiagnosticSet")
     public static long clang_loadDiagnostics(@NativeType("char const *") ByteBuffer file, @NativeType("enum CXLoadDiag_Error *") IntBuffer error, @NativeType("CXString *") CXString errorString) {
         if (CHECKS) {
@@ -3900,15 +2009,7 @@ public class ClangIndex {
         return nclang_loadDiagnostics(memAddress(file), memAddress(error), errorString.address());
     }
 
-    /**
-     * Deserialize a set of diagnostics from a Clang diagnostics bitcode file.
-     *
-     * @param file        the name of the file to deserialize
-     * @param error       a pointer to a enum value recording if there was a problem deserializing the diagnostics
-     * @param errorString a pointer to a {@link CXString} for recording the error string if the file was not successfully loaded
-     *
-     * @return a loaded {@code CXDiagnosticSet} if successful, and {@code NULL} otherwise. These diagnostics should be released using {@link #clang_disposeDiagnosticSet disposeDiagnosticSet}.
-     */
+    /** {@code CXDiagnosticSet clang_loadDiagnostics(char const * file, enum CXLoadDiag_Error * error, CXString * errorString)} */
     @NativeType("CXDiagnosticSet")
     public static long clang_loadDiagnostics(@NativeType("char const *") CharSequence file, @NativeType("enum CXLoadDiag_Error *") IntBuffer error, @NativeType("CXString *") CXString errorString) {
         if (CHECKS) {
@@ -3926,7 +2027,7 @@ public class ClangIndex {
 
     // --- [ clang_disposeDiagnosticSet ] ---
 
-    /** Release a {@code CXDiagnosticSet} and all of its contained diagnostics. */
+    /** {@code void clang_disposeDiagnosticSet(CXDiagnosticSet Diags)} */
     public static void clang_disposeDiagnosticSet(@NativeType("CXDiagnosticSet") long Diags) {
         long __functionAddress = Functions.disposeDiagnosticSet;
         if (CHECKS) {
@@ -3937,11 +2038,7 @@ public class ClangIndex {
 
     // --- [ clang_getChildDiagnostics ] ---
 
-    /**
-     * Retrieve the child diagnostics of a {@code CXDiagnostic}.
-     * 
-     * <p>This {@code CXDiagnosticSet} does not need to be released by {@link #clang_disposeDiagnosticSet disposeDiagnosticSet}.</p>
-     */
+    /** {@code CXDiagnosticSet clang_getChildDiagnostics(CXDiagnostic D)} */
     @NativeType("CXDiagnosticSet")
     public static long clang_getChildDiagnostics(@NativeType("CXDiagnostic") long D) {
         long __functionAddress = Functions.getChildDiagnostics;
@@ -3953,7 +2050,7 @@ public class ClangIndex {
 
     // --- [ clang_getNumDiagnostics ] ---
 
-    /** Determine the number of diagnostics produced for the given translation unit. */
+    /** {@code unsigned clang_getNumDiagnostics(CXTranslationUnit Unit)} */
     @NativeType("unsigned")
     public static int clang_getNumDiagnostics(@NativeType("CXTranslationUnit") long Unit) {
         long __functionAddress = Functions.getNumDiagnostics;
@@ -3965,14 +2062,7 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnostic ] ---
 
-    /**
-     * Retrieve a diagnostic associated with the given translation unit.
-     *
-     * @param Unit  the translation unit to query
-     * @param Index the zero-based diagnostic number to retrieve
-     *
-     * @return the requested diagnostic. This diagnostic must be freed via a call to {@link #clang_disposeDiagnostic disposeDiagnostic}.
-     */
+    /** {@code CXDiagnostic clang_getDiagnostic(CXTranslationUnit Unit, unsigned Index)} */
     @NativeType("CXDiagnostic")
     public static long clang_getDiagnostic(@NativeType("CXTranslationUnit") long Unit, @NativeType("unsigned") int Index) {
         long __functionAddress = Functions.getDiagnostic;
@@ -3984,11 +2074,7 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticSetFromTU ] ---
 
-    /**
-     * Retrieve the complete set of diagnostics associated with a translation unit.
-     *
-     * @param Unit the translation unit to query
-     */
+    /** {@code CXDiagnosticSet clang_getDiagnosticSetFromTU(CXTranslationUnit Unit)} */
     @NativeType("CXDiagnosticSet")
     public static long clang_getDiagnosticSetFromTU(@NativeType("CXTranslationUnit") long Unit) {
         long __functionAddress = Functions.getDiagnosticSetFromTU;
@@ -4000,7 +2086,7 @@ public class ClangIndex {
 
     // --- [ clang_disposeDiagnostic ] ---
 
-    /** Destroy a diagnostic. */
+    /** {@code void clang_disposeDiagnostic(CXDiagnostic Diagnostic)} */
     public static void clang_disposeDiagnostic(@NativeType("CXDiagnostic") long Diagnostic) {
         long __functionAddress = Functions.disposeDiagnostic;
         if (CHECKS) {
@@ -4011,10 +2097,10 @@ public class ClangIndex {
 
     // --- [ clang_formatDiagnostic ] ---
 
-    /** Unsafe version of: {@link #clang_formatDiagnostic formatDiagnostic} */
+    /** {@code CXString clang_formatDiagnostic(CXDiagnostic Diagnostic, unsigned Options)} */
     public static native void nclang_formatDiagnostic(long Diagnostic, int Options, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_formatDiagnostic formatDiagnostic} */
+    /** {@code CXString clang_formatDiagnostic(CXDiagnostic Diagnostic, unsigned Options)} */
     public static void nclang_formatDiagnostic(long Diagnostic, int Options, long __result) {
         long __functionAddress = Functions.formatDiagnostic;
         if (CHECKS) {
@@ -4023,16 +2109,7 @@ public class ClangIndex {
         nclang_formatDiagnostic(Diagnostic, Options, __functionAddress, __result);
     }
 
-    /**
-     * Format the given diagnostic in a manner that is suitable for display.
-     * 
-     * <p>This routine will format the given diagnostic to a string, rendering the diagnostic according to the various options given. The
-     * {@link #clang_defaultDiagnosticDisplayOptions defaultDiagnosticDisplayOptions} function returns the set of options that most closely mimics the behavior of the clang compiler.</p>
-     *
-     * @param Diagnostic the diagnostic to print
-     * @param Options    a set of options that control the diagnostic display, created by combining {@code CXDiagnosticDisplayOptions} values
-     * @param __result   a new string containing for formatted diagnostic
-     */
+    /** {@code CXString clang_formatDiagnostic(CXDiagnostic Diagnostic, unsigned Options)} */
     public static CXString clang_formatDiagnostic(@NativeType("CXDiagnostic") long Diagnostic, @NativeType("unsigned") int Options, CXString __result) {
         nclang_formatDiagnostic(Diagnostic, Options, __result.address());
         return __result;
@@ -4040,11 +2117,7 @@ public class ClangIndex {
 
     // --- [ clang_defaultDiagnosticDisplayOptions ] ---
 
-    /**
-     * Retrieve the set of display options most similar to the default behavior of the clang compiler.
-     *
-     * @return a set of display options suitable for use with {@link #clang_formatDiagnostic formatDiagnostic}
-     */
+    /** {@code unsigned clang_defaultDiagnosticDisplayOptions(void)} */
     @NativeType("unsigned")
     public static int clang_defaultDiagnosticDisplayOptions() {
         long __functionAddress = Functions.defaultDiagnosticDisplayOptions;
@@ -4053,7 +2126,7 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticSeverity ] ---
 
-    /** Determine the severity of the given diagnostic. */
+    /** {@code enum CXDiagnosticSeverity clang_getDiagnosticSeverity(CXDiagnostic Diagnostic)} */
     @NativeType("enum CXDiagnosticSeverity")
     public static int clang_getDiagnosticSeverity(@NativeType("CXDiagnostic") long Diagnostic) {
         long __functionAddress = Functions.getDiagnosticSeverity;
@@ -4065,10 +2138,10 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getDiagnosticLocation getDiagnosticLocation} */
+    /** {@code CXSourceLocation clang_getDiagnosticLocation(CXDiagnostic Diagnostic)} */
     public static native void nclang_getDiagnosticLocation(long Diagnostic, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getDiagnosticLocation getDiagnosticLocation} */
+    /** {@code CXSourceLocation clang_getDiagnosticLocation(CXDiagnostic Diagnostic)} */
     public static void nclang_getDiagnosticLocation(long Diagnostic, long __result) {
         long __functionAddress = Functions.getDiagnosticLocation;
         if (CHECKS) {
@@ -4077,11 +2150,7 @@ public class ClangIndex {
         nclang_getDiagnosticLocation(Diagnostic, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the source location of the given diagnostic.
-     * 
-     * <p>This location is where Clang would print the caret ('^') when displaying the diagnostic on the command line.</p>
-     */
+    /** {@code CXSourceLocation clang_getDiagnosticLocation(CXDiagnostic Diagnostic)} */
     public static CXSourceLocation clang_getDiagnosticLocation(@NativeType("CXDiagnostic") long Diagnostic, CXSourceLocation __result) {
         nclang_getDiagnosticLocation(Diagnostic, __result.address());
         return __result;
@@ -4089,10 +2158,10 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticSpelling ] ---
 
-    /** Unsafe version of: {@link #clang_getDiagnosticSpelling getDiagnosticSpelling} */
+    /** {@code CXString clang_getDiagnosticSpelling(CXDiagnostic Diagnostic)} */
     public static native void nclang_getDiagnosticSpelling(long Diagnostic, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getDiagnosticSpelling getDiagnosticSpelling} */
+    /** {@code CXString clang_getDiagnosticSpelling(CXDiagnostic Diagnostic)} */
     public static void nclang_getDiagnosticSpelling(long Diagnostic, long __result) {
         long __functionAddress = Functions.getDiagnosticSpelling;
         if (CHECKS) {
@@ -4101,7 +2170,7 @@ public class ClangIndex {
         nclang_getDiagnosticSpelling(Diagnostic, __functionAddress, __result);
     }
 
-    /** Retrieve the text of the given diagnostic. */
+    /** {@code CXString clang_getDiagnosticSpelling(CXDiagnostic Diagnostic)} */
     public static CXString clang_getDiagnosticSpelling(@NativeType("CXDiagnostic") long Diagnostic, CXString __result) {
         nclang_getDiagnosticSpelling(Diagnostic, __result.address());
         return __result;
@@ -4109,10 +2178,10 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticOption ] ---
 
-    /** Unsafe version of: {@link #clang_getDiagnosticOption getDiagnosticOption} */
+    /** {@code CXString clang_getDiagnosticOption(CXDiagnostic Diag, CXString * Disable)} */
     public static native void nclang_getDiagnosticOption(long Diag, long Disable, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getDiagnosticOption getDiagnosticOption} */
+    /** {@code CXString clang_getDiagnosticOption(CXDiagnostic Diag, CXString * Disable)} */
     public static void nclang_getDiagnosticOption(long Diag, long Disable, long __result) {
         long __functionAddress = Functions.getDiagnosticOption;
         if (CHECKS) {
@@ -4121,13 +2190,7 @@ public class ClangIndex {
         nclang_getDiagnosticOption(Diag, Disable, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the name of the command-line option that enabled this diagnostic.
-     *
-     * @param Diag     the diagnostic to be queried
-     * @param Disable  if non-{@code NULL}, will be set to the option that disables this diagnostic (if any)
-     * @param __result a string that contains the command-line option used to enable this warning, such as "-Wconversion" or "-pedantic"
-     */
+    /** {@code CXString clang_getDiagnosticOption(CXDiagnostic Diag, CXString * Disable)} */
     public static CXString clang_getDiagnosticOption(@NativeType("CXDiagnostic") long Diag, @NativeType("CXString *") @Nullable CXString Disable, CXString __result) {
         nclang_getDiagnosticOption(Diag, memAddressSafe(Disable), __result.address());
         return __result;
@@ -4135,14 +2198,7 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticCategory ] ---
 
-    /**
-     * Retrieve the category number for this diagnostic.
-     * 
-     * <p>Diagnostics can be categorized into groups along with other, related diagnostics (e.g., diagnostics under the same warning flag). This routine
-     * retrieves the category number for the given diagnostic.</p>
-     *
-     * @return the number of the category that contains this diagnostic, or zero if this diagnostic is uncategorized
-     */
+    /** {@code unsigned clang_getDiagnosticCategory(CXDiagnostic Diagnostic)} */
     @NativeType("unsigned")
     public static int clang_getDiagnosticCategory(@NativeType("CXDiagnostic") long Diagnostic) {
         long __functionAddress = Functions.getDiagnosticCategory;
@@ -4154,10 +2210,10 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticCategoryText ] ---
 
-    /** Unsafe version of: {@link #clang_getDiagnosticCategoryText getDiagnosticCategoryText} */
+    /** {@code CXString clang_getDiagnosticCategoryText(CXDiagnostic Diagnostic)} */
     public static native void nclang_getDiagnosticCategoryText(long Diagnostic, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getDiagnosticCategoryText getDiagnosticCategoryText} */
+    /** {@code CXString clang_getDiagnosticCategoryText(CXDiagnostic Diagnostic)} */
     public static void nclang_getDiagnosticCategoryText(long Diagnostic, long __result) {
         long __functionAddress = Functions.getDiagnosticCategoryText;
         if (CHECKS) {
@@ -4166,11 +2222,7 @@ public class ClangIndex {
         nclang_getDiagnosticCategoryText(Diagnostic, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the diagnostic category text for a given diagnostic.
-     *
-     * @param __result the text of the given diagnostic category
-     */
+    /** {@code CXString clang_getDiagnosticCategoryText(CXDiagnostic Diagnostic)} */
     public static CXString clang_getDiagnosticCategoryText(@NativeType("CXDiagnostic") long Diagnostic, CXString __result) {
         nclang_getDiagnosticCategoryText(Diagnostic, __result.address());
         return __result;
@@ -4178,7 +2230,7 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticNumRanges ] ---
 
-    /** Determine the number of source ranges associated with the given diagnostic. */
+    /** {@code unsigned clang_getDiagnosticNumRanges(CXDiagnostic Diagnostic)} */
     @NativeType("unsigned")
     public static int clang_getDiagnosticNumRanges(@NativeType("CXDiagnostic") long Diagnostic) {
         long __functionAddress = Functions.getDiagnosticNumRanges;
@@ -4190,10 +2242,10 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticRange ] ---
 
-    /** Unsafe version of: {@link #clang_getDiagnosticRange getDiagnosticRange} */
+    /** {@code CXSourceRange clang_getDiagnosticRange(CXDiagnostic Diagnostic, unsigned Range)} */
     public static native void nclang_getDiagnosticRange(long Diagnostic, int Range, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getDiagnosticRange getDiagnosticRange} */
+    /** {@code CXSourceRange clang_getDiagnosticRange(CXDiagnostic Diagnostic, unsigned Range)} */
     public static void nclang_getDiagnosticRange(long Diagnostic, int Range, long __result) {
         long __functionAddress = Functions.getDiagnosticRange;
         if (CHECKS) {
@@ -4202,16 +2254,7 @@ public class ClangIndex {
         nclang_getDiagnosticRange(Diagnostic, Range, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve a source range associated with the diagnostic.
-     * 
-     * <p>A diagnostic's source ranges highlight important elements in the source code. On the command line, Clang displays source ranges by underlining them
-     * with '~' characters.</p>
-     *
-     * @param Diagnostic the diagnostic whose range is being extracted
-     * @param Range      the zero-based index specifying which range to
-     * @param __result   the requested source range
-     */
+    /** {@code CXSourceRange clang_getDiagnosticRange(CXDiagnostic Diagnostic, unsigned Range)} */
     public static CXSourceRange clang_getDiagnosticRange(@NativeType("CXDiagnostic") long Diagnostic, @NativeType("unsigned") int Range, CXSourceRange __result) {
         nclang_getDiagnosticRange(Diagnostic, Range, __result.address());
         return __result;
@@ -4219,7 +2262,7 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticNumFixIts ] ---
 
-    /** Determine the number of fix-it hints associated with the given diagnostic. */
+    /** {@code unsigned clang_getDiagnosticNumFixIts(CXDiagnostic Diagnostic)} */
     @NativeType("unsigned")
     public static int clang_getDiagnosticNumFixIts(@NativeType("CXDiagnostic") long Diagnostic) {
         long __functionAddress = Functions.getDiagnosticNumFixIts;
@@ -4231,10 +2274,10 @@ public class ClangIndex {
 
     // --- [ clang_getDiagnosticFixIt ] ---
 
-    /** Unsafe version of: {@link #clang_getDiagnosticFixIt getDiagnosticFixIt} */
+    /** {@code CXString clang_getDiagnosticFixIt(CXDiagnostic Diagnostic, unsigned FixIt, CXSourceRange * ReplacementRange)} */
     public static native void nclang_getDiagnosticFixIt(long Diagnostic, int FixIt, long ReplacementRange, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getDiagnosticFixIt getDiagnosticFixIt} */
+    /** {@code CXString clang_getDiagnosticFixIt(CXDiagnostic Diagnostic, unsigned FixIt, CXSourceRange * ReplacementRange)} */
     public static void nclang_getDiagnosticFixIt(long Diagnostic, int FixIt, long ReplacementRange, long __result) {
         long __functionAddress = Functions.getDiagnosticFixIt;
         if (CHECKS) {
@@ -4243,20 +2286,7 @@ public class ClangIndex {
         nclang_getDiagnosticFixIt(Diagnostic, FixIt, ReplacementRange, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the replacement information for a given fix-it.
-     * 
-     * <p>Fix-its are described in terms of a source range whose contents should be replaced by a string. This approach generalizes over three kinds of
-     * operations: removal of source code (the range covers the code to be removed and the replacement string is empty), replacement of source code (the range
-     * covers the code to be replaced and the replacement string provides the new code), and insertion (both the start and end of the range point at the
-     * insertion location, and the replacement string provides the text to insert).</p>
-     *
-     * @param Diagnostic       the diagnostic whose fix-its are being queried
-     * @param FixIt            the zero-based index of the fix-it
-     * @param ReplacementRange the source range whose contents will be replaced with the returned replacement string. Note that source ranges are half-open ranges [a, b), so the
-     *                         source code should be replaced from a and up to (but not including) b.
-     * @param __result         a string containing text that should be replace the source code indicated by the {@code ReplacementRange}
-     */
+    /** {@code CXString clang_getDiagnosticFixIt(CXDiagnostic Diagnostic, unsigned FixIt, CXSourceRange * ReplacementRange)} */
     public static CXString clang_getDiagnosticFixIt(@NativeType("CXDiagnostic") long Diagnostic, @NativeType("unsigned") int FixIt, @NativeType("CXSourceRange *") CXSourceRange ReplacementRange, CXString __result) {
         nclang_getDiagnosticFixIt(Diagnostic, FixIt, ReplacementRange.address(), __result.address());
         return __result;
@@ -4264,10 +2294,10 @@ public class ClangIndex {
 
     // --- [ clang_getTranslationUnitSpelling ] ---
 
-    /** Unsafe version of: {@link #clang_getTranslationUnitSpelling getTranslationUnitSpelling} */
+    /** {@code CXString clang_getTranslationUnitSpelling(CXTranslationUnit CTUnit)} */
     public static native void nclang_getTranslationUnitSpelling(long CTUnit, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTranslationUnitSpelling getTranslationUnitSpelling} */
+    /** {@code CXString clang_getTranslationUnitSpelling(CXTranslationUnit CTUnit)} */
     public static void nclang_getTranslationUnitSpelling(long CTUnit, long __result) {
         long __functionAddress = Functions.getTranslationUnitSpelling;
         if (CHECKS) {
@@ -4276,7 +2306,7 @@ public class ClangIndex {
         nclang_getTranslationUnitSpelling(CTUnit, __functionAddress, __result);
     }
 
-    /** Get the original translation unit source file name. */
+    /** {@code CXString clang_getTranslationUnitSpelling(CXTranslationUnit CTUnit)} */
     public static CXString clang_getTranslationUnitSpelling(@NativeType("CXTranslationUnit") long CTUnit, CXString __result) {
         nclang_getTranslationUnitSpelling(CTUnit, __result.address());
         return __result;
@@ -4284,12 +2314,7 @@ public class ClangIndex {
 
     // --- [ clang_createTranslationUnitFromSourceFile ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_createTranslationUnitFromSourceFile createTranslationUnitFromSourceFile}
-     *
-     * @param num_clang_command_line_args the number of command-line arguments in {@code clang_command_line_args}
-     * @param num_unsaved_files           the number of unsaved file entries in {@code unsaved_files}
-     */
+    /** {@code CXTranslationUnit clang_createTranslationUnitFromSourceFile(CXIndex CIdx, char const * source_filename, int num_clang_command_line_args, char const * const * clang_command_line_args, unsigned num_unsaved_files, struct CXUnsavedFile * unsaved_files)} */
     public static long nclang_createTranslationUnitFromSourceFile(long CIdx, long source_filename, int num_clang_command_line_args, long clang_command_line_args, int num_unsaved_files, long unsaved_files) {
         long __functionAddress = Functions.createTranslationUnitFromSourceFile;
         if (CHECKS) {
@@ -4299,30 +2324,7 @@ public class ClangIndex {
         return invokePPPPP(CIdx, source_filename, num_clang_command_line_args, clang_command_line_args, num_unsaved_files, unsaved_files, __functionAddress);
     }
 
-    /**
-     * Return the {@code CXTranslationUnit} for a given source file and the provided command line arguments one would pass to the compiler.
-     * 
-     * <p>Note: The {@code source_filename} argument is optional. If the caller provides a {@code NULL} pointer, the name of the source file is expected to reside in
-     * the specified command line arguments.</p>
-     * 
-     * <p>Note: When encountered in {@code clang_command_line_args}, the following options are ignored:</p>
-     * 
-     * <ul>
-     * <li>'-c'</li>
-     * <li>'-emit-ast'</li>
-     * <li>'-fsyntax-only'</li>
-     * <li>'-o &lt;output file&gt;' (both '-o' and ' &lt;output file&gt;' are ignored)</li>
-     * </ul>
-     *
-     * @param CIdx                    the index object with which the translation unit will be associated
-     * @param source_filename         the name of the source file to load, or {@code NULL} if the source file is included in {@code clang_command_line_args}
-     * @param clang_command_line_args the command-line arguments that would be passed to the {@code clang} executable if it were being invoked out-of-process. These command-line options
-     *                                will be parsed and will affect how the translation unit is parsed. Note that the following options are ignored: '-c', '-emit-ast', '-fsyntax-only'
-     *                                (which is the default), and '-o &lt;output file&gt;'.
-     * @param unsaved_files           the files that have not yet been saved to disk but may be required for code completion, including the contents of those files. The contents and
-     *                                name of these files (as specified by {@code CXUnsavedFile}) are copied when necessary, so the client only needs to guarantee their validity until
-     *                                the call to this function returns.
-     */
+    /** {@code CXTranslationUnit clang_createTranslationUnitFromSourceFile(CXIndex CIdx, char const * source_filename, int num_clang_command_line_args, char const * const * clang_command_line_args, unsigned num_unsaved_files, struct CXUnsavedFile * unsaved_files)} */
     @NativeType("CXTranslationUnit")
     public static long clang_createTranslationUnitFromSourceFile(@NativeType("CXIndex") long CIdx, @NativeType("char const *") @Nullable ByteBuffer source_filename, @NativeType("char const * const *") @Nullable PointerBuffer clang_command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files) {
         if (CHECKS) {
@@ -4331,30 +2333,7 @@ public class ClangIndex {
         return nclang_createTranslationUnitFromSourceFile(CIdx, memAddressSafe(source_filename), remainingSafe(clang_command_line_args), memAddressSafe(clang_command_line_args), remainingSafe(unsaved_files), memAddressSafe(unsaved_files));
     }
 
-    /**
-     * Return the {@code CXTranslationUnit} for a given source file and the provided command line arguments one would pass to the compiler.
-     * 
-     * <p>Note: The {@code source_filename} argument is optional. If the caller provides a {@code NULL} pointer, the name of the source file is expected to reside in
-     * the specified command line arguments.</p>
-     * 
-     * <p>Note: When encountered in {@code clang_command_line_args}, the following options are ignored:</p>
-     * 
-     * <ul>
-     * <li>'-c'</li>
-     * <li>'-emit-ast'</li>
-     * <li>'-fsyntax-only'</li>
-     * <li>'-o &lt;output file&gt;' (both '-o' and ' &lt;output file&gt;' are ignored)</li>
-     * </ul>
-     *
-     * @param CIdx                    the index object with which the translation unit will be associated
-     * @param source_filename         the name of the source file to load, or {@code NULL} if the source file is included in {@code clang_command_line_args}
-     * @param clang_command_line_args the command-line arguments that would be passed to the {@code clang} executable if it were being invoked out-of-process. These command-line options
-     *                                will be parsed and will affect how the translation unit is parsed. Note that the following options are ignored: '-c', '-emit-ast', '-fsyntax-only'
-     *                                (which is the default), and '-o &lt;output file&gt;'.
-     * @param unsaved_files           the files that have not yet been saved to disk but may be required for code completion, including the contents of those files. The contents and
-     *                                name of these files (as specified by {@code CXUnsavedFile}) are copied when necessary, so the client only needs to guarantee their validity until
-     *                                the call to this function returns.
-     */
+    /** {@code CXTranslationUnit clang_createTranslationUnitFromSourceFile(CXIndex CIdx, char const * source_filename, int num_clang_command_line_args, char const * const * clang_command_line_args, unsigned num_unsaved_files, struct CXUnsavedFile * unsaved_files)} */
     @NativeType("CXTranslationUnit")
     public static long clang_createTranslationUnitFromSourceFile(@NativeType("CXIndex") long CIdx, @NativeType("char const *") @Nullable CharSequence source_filename, @NativeType("char const * const *") @Nullable PointerBuffer clang_command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -4369,7 +2348,7 @@ public class ClangIndex {
 
     // --- [ clang_createTranslationUnit ] ---
 
-    /** Unsafe version of: {@link #clang_createTranslationUnit createTranslationUnit} */
+    /** {@code CXTranslationUnit clang_createTranslationUnit(CXIndex CIdx, char const * ast_filename)} */
     public static long nclang_createTranslationUnit(long CIdx, long ast_filename) {
         long __functionAddress = Functions.createTranslationUnit;
         if (CHECKS) {
@@ -4378,10 +2357,7 @@ public class ClangIndex {
         return invokePPP(CIdx, ast_filename, __functionAddress);
     }
 
-    /**
-     * Same as {@link #clang_createTranslationUnit2 createTranslationUnit2}, but returns the {@code CXTranslationUnit} instead of an error code. In case of an error this routine returns a
-     * {@code NULL} {@code CXTranslationUnit}, without further detailed error codes.
-     */
+    /** {@code CXTranslationUnit clang_createTranslationUnit(CXIndex CIdx, char const * ast_filename)} */
     @NativeType("CXTranslationUnit")
     public static long clang_createTranslationUnit(@NativeType("CXIndex") long CIdx, @NativeType("char const *") ByteBuffer ast_filename) {
         if (CHECKS) {
@@ -4390,10 +2366,7 @@ public class ClangIndex {
         return nclang_createTranslationUnit(CIdx, memAddress(ast_filename));
     }
 
-    /**
-     * Same as {@link #clang_createTranslationUnit2 createTranslationUnit2}, but returns the {@code CXTranslationUnit} instead of an error code. In case of an error this routine returns a
-     * {@code NULL} {@code CXTranslationUnit}, without further detailed error codes.
-     */
+    /** {@code CXTranslationUnit clang_createTranslationUnit(CXIndex CIdx, char const * ast_filename)} */
     @NativeType("CXTranslationUnit")
     public static long clang_createTranslationUnit(@NativeType("CXIndex") long CIdx, @NativeType("char const *") CharSequence ast_filename) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -4408,7 +2381,7 @@ public class ClangIndex {
 
     // --- [ clang_createTranslationUnit2 ] ---
 
-    /** Unsafe version of: {@link #clang_createTranslationUnit2 createTranslationUnit2} */
+    /** {@code enum CXErrorCode clang_createTranslationUnit2(CXIndex CIdx, char const * ast_filename, CXTranslationUnit * out_TU)} */
     public static int nclang_createTranslationUnit2(long CIdx, long ast_filename, long out_TU) {
         long __functionAddress = Functions.createTranslationUnit2;
         if (CHECKS) {
@@ -4417,13 +2390,7 @@ public class ClangIndex {
         return invokePPPI(CIdx, ast_filename, out_TU, __functionAddress);
     }
 
-    /**
-     * Create a translation unit from an AST file ({@code -emit-ast}).
-     *
-     * @param out_TU a non-{@code NULL} pointer to store the created {@code CXTranslationUnit}
-     *
-     * @return zero on success, otherwise returns an error code
-     */
+    /** {@code enum CXErrorCode clang_createTranslationUnit2(CXIndex CIdx, char const * ast_filename, CXTranslationUnit * out_TU)} */
     @NativeType("enum CXErrorCode")
     public static int clang_createTranslationUnit2(@NativeType("CXIndex") long CIdx, @NativeType("char const *") ByteBuffer ast_filename, @NativeType("CXTranslationUnit *") PointerBuffer out_TU) {
         if (CHECKS) {
@@ -4433,13 +2400,7 @@ public class ClangIndex {
         return nclang_createTranslationUnit2(CIdx, memAddress(ast_filename), memAddress(out_TU));
     }
 
-    /**
-     * Create a translation unit from an AST file ({@code -emit-ast}).
-     *
-     * @param out_TU a non-{@code NULL} pointer to store the created {@code CXTranslationUnit}
-     *
-     * @return zero on success, otherwise returns an error code
-     */
+    /** {@code enum CXErrorCode clang_createTranslationUnit2(CXIndex CIdx, char const * ast_filename, CXTranslationUnit * out_TU)} */
     @NativeType("enum CXErrorCode")
     public static int clang_createTranslationUnit2(@NativeType("CXIndex") long CIdx, @NativeType("char const *") CharSequence ast_filename, @NativeType("CXTranslationUnit *") PointerBuffer out_TU) {
         if (CHECKS) {
@@ -4457,14 +2418,7 @@ public class ClangIndex {
 
     // --- [ clang_defaultEditingTranslationUnitOptions ] ---
 
-    /**
-     * Returns the set of flags that is suitable for parsing a translation unit that is being edited.
-     * 
-     * <p>The set of flags returned provide options for {@link #clang_parseTranslationUnit parseTranslationUnit} to indicate that the translation unit is likely to be reparsed many times, either
-     * explicitly (via {@link #clang_reparseTranslationUnit reparseTranslationUnit}) or implicitly (e.g., by code completion ({@link #clang_codeCompleteAt codeCompleteAt}). The returned flag set contains an unspecified
-     * set of optimizations (e.g., the precompiled preamble) geared toward improving the performance of these routines. The set of optimizations enabled may
-     * change from one version to the next.</p>
-     */
+    /** {@code unsigned clang_defaultEditingTranslationUnitOptions(void)} */
     @NativeType("unsigned")
     public static int clang_defaultEditingTranslationUnitOptions() {
         long __functionAddress = Functions.defaultEditingTranslationUnitOptions;
@@ -4473,7 +2427,7 @@ public class ClangIndex {
 
     // --- [ clang_parseTranslationUnit ] ---
 
-    /** Unsafe version of: {@link #clang_parseTranslationUnit parseTranslationUnit} */
+    /** {@code CXTranslationUnit clang_parseTranslationUnit(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options)} */
     public static long nclang_parseTranslationUnit(long CIdx, long source_filename, long command_line_args, int num_command_line_args, long unsaved_files, int num_unsaved_files, int options) {
         long __functionAddress = Functions.parseTranslationUnit;
         if (CHECKS) {
@@ -4483,10 +2437,7 @@ public class ClangIndex {
         return invokePPPPP(CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, __functionAddress);
     }
 
-    /**
-     * Same as {@link #clang_parseTranslationUnit2 parseTranslationUnit2}, but returns the {@code CXTranslationUnit} instead of an error code. In case of an error this routine returns a {@code NULL}
-     * {@code CXTranslationUnit}, without further detailed error codes.
-     */
+    /** {@code CXTranslationUnit clang_parseTranslationUnit(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options)} */
     @NativeType("CXTranslationUnit")
     public static long clang_parseTranslationUnit(@NativeType("CXIndex") long CIdx, @NativeType("char const *") @Nullable ByteBuffer source_filename, @NativeType("char const * const *") @Nullable PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options) {
         if (CHECKS) {
@@ -4495,10 +2446,7 @@ public class ClangIndex {
         return nclang_parseTranslationUnit(CIdx, memAddressSafe(source_filename), memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options);
     }
 
-    /**
-     * Same as {@link #clang_parseTranslationUnit2 parseTranslationUnit2}, but returns the {@code CXTranslationUnit} instead of an error code. In case of an error this routine returns a {@code NULL}
-     * {@code CXTranslationUnit}, without further detailed error codes.
-     */
+    /** {@code CXTranslationUnit clang_parseTranslationUnit(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options)} */
     @NativeType("CXTranslationUnit")
     public static long clang_parseTranslationUnit(@NativeType("CXIndex") long CIdx, @NativeType("char const *") @Nullable CharSequence source_filename, @NativeType("char const * const *") @Nullable PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -4513,12 +2461,7 @@ public class ClangIndex {
 
     // --- [ clang_parseTranslationUnit2 ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_parseTranslationUnit2 parseTranslationUnit2}
-     *
-     * @param num_command_line_args the number of command-line arguments in {@code command_line_args}
-     * @param num_unsaved_files     the number of unsaved file entries in {@code unsaved_files}
-     */
+    /** {@code enum CXErrorCode clang_parseTranslationUnit2(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options, CXTranslationUnit * out_TU)} */
     public static int nclang_parseTranslationUnit2(long CIdx, long source_filename, long command_line_args, int num_command_line_args, long unsaved_files, int num_unsaved_files, int options, long out_TU) {
         long __functionAddress = Functions.parseTranslationUnit2;
         if (CHECKS) {
@@ -4528,28 +2471,7 @@ public class ClangIndex {
         return invokePPPPPI(CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, out_TU, __functionAddress);
     }
 
-    /**
-     * Parse the given source file and the translation unit corresponding to that file.
-     * 
-     * <p>This routine is the main entry point for the Clang C API, providing the ability to parse a source file into a translation unit that can then be queried
-     * by other functions in the API. This routine accepts a set of command-line arguments so that the compilation can be configured in the same way that the
-     * compiler is configured on the command line.</p>
-     *
-     * @param CIdx              the index object with which the translation unit will be associated
-     * @param source_filename   the name of the source file to load, or {@code NULL} if the source file is included in {@code command_line_args}
-     * @param command_line_args the command-line arguments that would be passed to the {@code clang} executable if it were being invoked out-of-process. These command-line options
-     *                          will be parsed and will affect how the translation unit is parsed. Note that the following options are ignored: '-c', '-emit-ast', '-fsyntax-only'
-     *                          (which is the default), and '-o &lt;output file&gt;'.
-     * @param unsaved_files     the files that have not yet been saved to disk but may be required for parsing, including the contents of those files. The contents and name of
-     *                          these files (as specified by CXUnsavedFile) are copied when necessary, so the client only needs to guarantee their validity until the call to this
-     *                          function returns.
-     * @param options           a bitmask of options that affects how the translation unit is managed but not its compilation. This should be a bitwise OR of the
-     *                          CXTranslationUnit_XXX flags.
-     * @param out_TU            a non-{@code NULL} pointer to store the created {@code CXTranslationUnit}, describing the parsed code and containing any diagnostics produced by the
-     *                          compiler
-     *
-     * @return zero on success, otherwise returns an error code
-     */
+    /** {@code enum CXErrorCode clang_parseTranslationUnit2(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options, CXTranslationUnit * out_TU)} */
     @NativeType("enum CXErrorCode")
     public static int clang_parseTranslationUnit2(@NativeType("CXIndex") long CIdx, @NativeType("char const *") @Nullable ByteBuffer source_filename, @NativeType("char const * const *") @Nullable PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options, @NativeType("CXTranslationUnit *") PointerBuffer out_TU) {
         if (CHECKS) {
@@ -4559,28 +2481,7 @@ public class ClangIndex {
         return nclang_parseTranslationUnit2(CIdx, memAddressSafe(source_filename), memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options, memAddress(out_TU));
     }
 
-    /**
-     * Parse the given source file and the translation unit corresponding to that file.
-     * 
-     * <p>This routine is the main entry point for the Clang C API, providing the ability to parse a source file into a translation unit that can then be queried
-     * by other functions in the API. This routine accepts a set of command-line arguments so that the compilation can be configured in the same way that the
-     * compiler is configured on the command line.</p>
-     *
-     * @param CIdx              the index object with which the translation unit will be associated
-     * @param source_filename   the name of the source file to load, or {@code NULL} if the source file is included in {@code command_line_args}
-     * @param command_line_args the command-line arguments that would be passed to the {@code clang} executable if it were being invoked out-of-process. These command-line options
-     *                          will be parsed and will affect how the translation unit is parsed. Note that the following options are ignored: '-c', '-emit-ast', '-fsyntax-only'
-     *                          (which is the default), and '-o &lt;output file&gt;'.
-     * @param unsaved_files     the files that have not yet been saved to disk but may be required for parsing, including the contents of those files. The contents and name of
-     *                          these files (as specified by CXUnsavedFile) are copied when necessary, so the client only needs to guarantee their validity until the call to this
-     *                          function returns.
-     * @param options           a bitmask of options that affects how the translation unit is managed but not its compilation. This should be a bitwise OR of the
-     *                          CXTranslationUnit_XXX flags.
-     * @param out_TU            a non-{@code NULL} pointer to store the created {@code CXTranslationUnit}, describing the parsed code and containing any diagnostics produced by the
-     *                          compiler
-     *
-     * @return zero on success, otherwise returns an error code
-     */
+    /** {@code enum CXErrorCode clang_parseTranslationUnit2(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options, CXTranslationUnit * out_TU)} */
     @NativeType("enum CXErrorCode")
     public static int clang_parseTranslationUnit2(@NativeType("CXIndex") long CIdx, @NativeType("char const *") @Nullable CharSequence source_filename, @NativeType("char const * const *") @Nullable PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options, @NativeType("CXTranslationUnit *") PointerBuffer out_TU) {
         if (CHECKS) {
@@ -4598,7 +2499,7 @@ public class ClangIndex {
 
     // --- [ clang_parseTranslationUnit2FullArgv ] ---
 
-    /** Unsafe version of: {@link #clang_parseTranslationUnit2FullArgv parseTranslationUnit2FullArgv} */
+    /** {@code enum CXErrorCode clang_parseTranslationUnit2FullArgv(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options, CXTranslationUnit * out_TU)} */
     public static int nclang_parseTranslationUnit2FullArgv(long CIdx, long source_filename, long command_line_args, int num_command_line_args, long unsaved_files, int num_unsaved_files, int options, long out_TU) {
         long __functionAddress = Functions.parseTranslationUnit2FullArgv;
         if (CHECKS) {
@@ -4607,10 +2508,7 @@ public class ClangIndex {
         return invokePPPPPI(CIdx, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, options, out_TU, __functionAddress);
     }
 
-    /**
-     * Same as {@link #clang_parseTranslationUnit2 parseTranslationUnit2} but requires a full command line for {@code command_line_args} including {@code argv[0]}. This is useful if the
-     * standard library paths are relative to the binary.
-     */
+    /** {@code enum CXErrorCode clang_parseTranslationUnit2FullArgv(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options, CXTranslationUnit * out_TU)} */
     @NativeType("enum CXErrorCode")
     public static int clang_parseTranslationUnit2FullArgv(@NativeType("CXIndex") long CIdx, @NativeType("char const *") @Nullable ByteBuffer source_filename, @NativeType("char const * const *") PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options, @NativeType("CXTranslationUnit *") PointerBuffer out_TU) {
         if (CHECKS) {
@@ -4620,10 +2518,7 @@ public class ClangIndex {
         return nclang_parseTranslationUnit2FullArgv(CIdx, memAddressSafe(source_filename), memAddress(command_line_args), command_line_args.remaining(), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), options, memAddress(out_TU));
     }
 
-    /**
-     * Same as {@link #clang_parseTranslationUnit2 parseTranslationUnit2} but requires a full command line for {@code command_line_args} including {@code argv[0]}. This is useful if the
-     * standard library paths are relative to the binary.
-     */
+    /** {@code enum CXErrorCode clang_parseTranslationUnit2FullArgv(CXIndex CIdx, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options, CXTranslationUnit * out_TU)} */
     @NativeType("enum CXErrorCode")
     public static int clang_parseTranslationUnit2FullArgv(@NativeType("CXIndex") long CIdx, @NativeType("char const *") @Nullable CharSequence source_filename, @NativeType("char const * const *") PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options, @NativeType("CXTranslationUnit *") PointerBuffer out_TU) {
         if (CHECKS) {
@@ -4641,12 +2536,7 @@ public class ClangIndex {
 
     // --- [ clang_defaultSaveOptions ] ---
 
-    /**
-     * Returns the set of flags that is suitable for saving a translation unit.
-     * 
-     * <p>The set of flags returned provide options for {@link #clang_saveTranslationUnit saveTranslationUnit} by default. The returned flag set contains an unspecified set of options that save
-     * translation units with the most commonly-requested data.</p>
-     */
+    /** {@code unsigned clang_defaultSaveOptions(CXTranslationUnit TU)} */
     @NativeType("unsigned")
     public static int clang_defaultSaveOptions(@NativeType("CXTranslationUnit") long TU) {
         long __functionAddress = Functions.defaultSaveOptions;
@@ -4658,7 +2548,7 @@ public class ClangIndex {
 
     // --- [ clang_saveTranslationUnit ] ---
 
-    /** Unsafe version of: {@link #clang_saveTranslationUnit saveTranslationUnit} */
+    /** {@code int clang_saveTranslationUnit(CXTranslationUnit TU, char const * FileName, unsigned options)} */
     public static int nclang_saveTranslationUnit(long TU, long FileName, int options) {
         long __functionAddress = Functions.saveTranslationUnit;
         if (CHECKS) {
@@ -4667,20 +2557,7 @@ public class ClangIndex {
         return invokePPI(TU, FileName, options, __functionAddress);
     }
 
-    /**
-     * Saves a translation unit into a serialized representation of that translation unit on disk.
-     * 
-     * <p>Any translation unit that was parsed without error can be saved into a file. The translation unit can then be deserialized into a new {@code
-     * CXTranslationUnit} with {@link #clang_createTranslationUnit createTranslationUnit} or, if it is an incomplete translation unit that corresponds to a header, used as a precompiled header
-     * when parsing other translation units.</p>
-     *
-     * @param TU       the translation unit to save
-     * @param FileName the file to which the translation unit will be saved
-     * @param options  a bitmask of options that affects how the translation unit is saved. This should be a bitwise OR of the {@code CXSaveTranslationUnit_XXX} flags.
-     *
-     * @return a value that will match one of the enumerators of the {@code CXSaveError} enumeration. Zero ({@link #CXSaveError_None SaveError_None}) indicates that the translation unit was
-     *         saved successfully, while a non-zero value indicates that a problem occurred.
-     */
+    /** {@code int clang_saveTranslationUnit(CXTranslationUnit TU, char const * FileName, unsigned options)} */
     public static int clang_saveTranslationUnit(@NativeType("CXTranslationUnit") long TU, @NativeType("char const *") ByteBuffer FileName, @NativeType("unsigned") int options) {
         if (CHECKS) {
             checkNT1(FileName);
@@ -4688,20 +2565,7 @@ public class ClangIndex {
         return nclang_saveTranslationUnit(TU, memAddress(FileName), options);
     }
 
-    /**
-     * Saves a translation unit into a serialized representation of that translation unit on disk.
-     * 
-     * <p>Any translation unit that was parsed without error can be saved into a file. The translation unit can then be deserialized into a new {@code
-     * CXTranslationUnit} with {@link #clang_createTranslationUnit createTranslationUnit} or, if it is an incomplete translation unit that corresponds to a header, used as a precompiled header
-     * when parsing other translation units.</p>
-     *
-     * @param TU       the translation unit to save
-     * @param FileName the file to which the translation unit will be saved
-     * @param options  a bitmask of options that affects how the translation unit is saved. This should be a bitwise OR of the {@code CXSaveTranslationUnit_XXX} flags.
-     *
-     * @return a value that will match one of the enumerators of the {@code CXSaveError} enumeration. Zero ({@link #CXSaveError_None SaveError_None}) indicates that the translation unit was
-     *         saved successfully, while a non-zero value indicates that a problem occurred.
-     */
+    /** {@code int clang_saveTranslationUnit(CXTranslationUnit TU, char const * FileName, unsigned options)} */
     public static int clang_saveTranslationUnit(@NativeType("CXTranslationUnit") long TU, @NativeType("char const *") CharSequence FileName, @NativeType("unsigned") int options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -4715,12 +2579,7 @@ public class ClangIndex {
 
     // --- [ clang_suspendTranslationUnit ] ---
 
-    /**
-     * Suspend a translation unit in order to free memory associated with it.
-     * 
-     * <p>A suspended translation unit uses significantly less memory but on the other side does not support any other calls than {@link #clang_reparseTranslationUnit reparseTranslationUnit} to
-     * resume it or {@link #clang_disposeTranslationUnit disposeTranslationUnit} to dispose it completely.</p>
-     */
+    /** {@code unsigned clang_suspendTranslationUnit(CXTranslationUnit TU)} */
     @NativeType("unsigned")
     public static boolean clang_suspendTranslationUnit(@NativeType("CXTranslationUnit") long TU) {
         long __functionAddress = Functions.suspendTranslationUnit;
@@ -4732,7 +2591,7 @@ public class ClangIndex {
 
     // --- [ clang_disposeTranslationUnit ] ---
 
-    /** Destroy the specified CXTranslationUnit object. */
+    /** {@code void clang_disposeTranslationUnit(CXTranslationUnit TU)} */
     public static void clang_disposeTranslationUnit(@NativeType("CXTranslationUnit") long TU) {
         long __functionAddress = Functions.disposeTranslationUnit;
         if (CHECKS) {
@@ -4743,12 +2602,7 @@ public class ClangIndex {
 
     // --- [ clang_defaultReparseOptions ] ---
 
-    /**
-     * Returns the set of flags that is suitable for reparsing a translation unit.
-     * 
-     * <p>The set of flags returned provide options for {@code clang_reparseTranslationUnit()} by default. The returned flag set contains an unspecified set of
-     * optimizations geared toward common uses of reparsing. The set of optimizations enabled may change from one version to the next.</p>
-     */
+    /** {@code unsigned clang_defaultReparseOptions(CXTranslationUnit TU)} */
     @NativeType("unsigned")
     public static int clang_defaultReparseOptions(@NativeType("CXTranslationUnit") long TU) {
         long __functionAddress = Functions.defaultReparseOptions;
@@ -4760,11 +2614,7 @@ public class ClangIndex {
 
     // --- [ clang_reparseTranslationUnit ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_reparseTranslationUnit reparseTranslationUnit}
-     *
-     * @param num_unsaved_files the number of unsaved file entries in {@code unsaved_files}
-     */
+    /** {@code int clang_reparseTranslationUnit(CXTranslationUnit TU, unsigned num_unsaved_files, struct CXUnsavedFile * unsaved_files, unsigned options)} */
     public static int nclang_reparseTranslationUnit(long TU, int num_unsaved_files, long unsaved_files, int options) {
         long __functionAddress = Functions.reparseTranslationUnit;
         if (CHECKS) {
@@ -4774,42 +2624,20 @@ public class ClangIndex {
         return invokePPI(TU, num_unsaved_files, unsaved_files, options, __functionAddress);
     }
 
-    /**
-     * Reparse the source files that produced this translation unit.
-     * 
-     * <p>This routine can be used to re-parse the source files that originally created the given translation unit, for example because those source files have
-     * changed (either on disk or as passed via {@code unsaved_files}). The source code will be reparsed with the same command-line options as it was
-     * originally parsed.</p>
-     * 
-     * <p>Reparsing a translation unit invalidates all cursors and source locations that refer into that translation unit. This makes reparsing a translation
-     * unit semantically equivalent to destroying the translation unit and then creating a new translation unit with the same command-line arguments. However,
-     * it may be more efficient to reparse a translation unit using this routine.</p>
-     *
-     * @param TU            the translation unit whose contents will be re-parsed. The translation unit must originally have been built with {@code
-     *                      clang_createTranslationUnitFromSourceFile()}.
-     * @param unsaved_files the files that have not yet been saved to disk but may be required for parsing, including the contents of those files. The contents and name of
-     *                      these files (as specified by {@code CXUnsavedFile}) are copied when necessary, so the client only needs to guarantee their validity until the call
-     *                      to this function returns.
-     * @param options       a bitset of options composed of the flags in {@code CXReparse_Flags}. The function {@link #clang_defaultReparseOptions defaultReparseOptions} produces a default set of options
-     *                      recommended for most uses, based on the translation unit.
-     *
-     * @return 0 if the sources could be reparsed. A non-zero error code will be returned if reparsing was impossible, such that the translation unit is invalid. In
-     *         such cases, the only valid call for {@code TU} is {@link #clang_disposeTranslationUnit disposeTranslationUnit}. The error codes returned by this routine are described by the
-     *         {@code CXErrorCode} enum.
-     */
+    /** {@code int clang_reparseTranslationUnit(CXTranslationUnit TU, unsigned num_unsaved_files, struct CXUnsavedFile * unsaved_files, unsigned options)} */
     public static int clang_reparseTranslationUnit(@NativeType("CXTranslationUnit") long TU, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options) {
         return nclang_reparseTranslationUnit(TU, remainingSafe(unsaved_files), memAddressSafe(unsaved_files), options);
     }
 
     // --- [ clang_getTUResourceUsageName ] ---
 
-    /** Unsafe version of: {@link #clang_getTUResourceUsageName getTUResourceUsageName} */
+    /** {@code char const * clang_getTUResourceUsageName(enum CXTUResourceUsageKind kind)} */
     public static long nclang_getTUResourceUsageName(int kind) {
         long __functionAddress = Functions.getTUResourceUsageName;
         return invokeP(kind, __functionAddress);
     }
 
-    /** Returns the human-readable null-terminated C string that represents the name of the memory category. This string should never be freed. */
+    /** {@code char const * clang_getTUResourceUsageName(enum CXTUResourceUsageKind kind)} */
     @NativeType("char const *")
     public static @Nullable String clang_getTUResourceUsageName(@NativeType("enum CXTUResourceUsageKind") int kind) {
         long __result = nclang_getTUResourceUsageName(kind);
@@ -4818,10 +2646,10 @@ public class ClangIndex {
 
     // --- [ clang_getCXTUResourceUsage ] ---
 
-    /** Unsafe version of: {@link #clang_getCXTUResourceUsage getCXTUResourceUsage} */
+    /** {@code CXTUResourceUsage clang_getCXTUResourceUsage(CXTranslationUnit TU)} */
     public static native void nclang_getCXTUResourceUsage(long TU, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCXTUResourceUsage getCXTUResourceUsage} */
+    /** {@code CXTUResourceUsage clang_getCXTUResourceUsage(CXTranslationUnit TU)} */
     public static void nclang_getCXTUResourceUsage(long TU, long __result) {
         long __functionAddress = Functions.getCXTUResourceUsage;
         if (CHECKS) {
@@ -4830,7 +2658,7 @@ public class ClangIndex {
         nclang_getCXTUResourceUsage(TU, __functionAddress, __result);
     }
 
-    /** Return the memory usage of a translation unit.  This object should be released with {@link #clang_disposeCXTUResourceUsage disposeCXTUResourceUsage}. */
+    /** {@code CXTUResourceUsage clang_getCXTUResourceUsage(CXTranslationUnit TU)} */
     public static CXTUResourceUsage clang_getCXTUResourceUsage(@NativeType("CXTranslationUnit") long TU, CXTUResourceUsage __result) {
         nclang_getCXTUResourceUsage(TU, __result.address());
         return __result;
@@ -4838,24 +2666,23 @@ public class ClangIndex {
 
     // --- [ clang_disposeCXTUResourceUsage ] ---
 
+    /** {@code void clang_disposeCXTUResourceUsage(CXTUResourceUsage usage)} */
     public static native void nclang_disposeCXTUResourceUsage(long usage, long __functionAddress);
 
+    /** {@code void clang_disposeCXTUResourceUsage(CXTUResourceUsage usage)} */
     public static void nclang_disposeCXTUResourceUsage(long usage) {
         long __functionAddress = Functions.disposeCXTUResourceUsage;
         nclang_disposeCXTUResourceUsage(usage, __functionAddress);
     }
 
+    /** {@code void clang_disposeCXTUResourceUsage(CXTUResourceUsage usage)} */
     public static void clang_disposeCXTUResourceUsage(CXTUResourceUsage usage) {
         nclang_disposeCXTUResourceUsage(usage.address());
     }
 
     // --- [ clang_getTranslationUnitTargetInfo ] ---
 
-    /**
-     * Get target information for this translation unit.
-     * 
-     * <p>The {@code CXTargetInfo} object cannot outlive the {@code CXTranslationUnit} object.</p>
-     */
+    /** {@code CXTargetInfo clang_getTranslationUnitTargetInfo(CXTranslationUnit CTUnit)} */
     @NativeType("CXTargetInfo")
     public static long clang_getTranslationUnitTargetInfo(@NativeType("CXTranslationUnit") long CTUnit) {
         long __functionAddress = Functions.getTranslationUnitTargetInfo;
@@ -4867,7 +2694,7 @@ public class ClangIndex {
 
     // --- [ clang_TargetInfo_dispose ] ---
 
-    /** Destroy the {@code CXTargetInfo} object. */
+    /** {@code void clang_TargetInfo_dispose(CXTargetInfo Info)} */
     public static void clang_TargetInfo_dispose(@NativeType("CXTargetInfo") long Info) {
         long __functionAddress = Functions.TargetInfo_dispose;
         if (CHECKS) {
@@ -4878,10 +2705,10 @@ public class ClangIndex {
 
     // --- [ clang_TargetInfo_getTriple ] ---
 
-    /** Unsafe version of: {@link #clang_TargetInfo_getTriple TargetInfo_getTriple} */
+    /** {@code CXString clang_TargetInfo_getTriple(CXTargetInfo Info)} */
     public static native void nclang_TargetInfo_getTriple(long Info, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_TargetInfo_getTriple TargetInfo_getTriple} */
+    /** {@code CXString clang_TargetInfo_getTriple(CXTargetInfo Info)} */
     public static void nclang_TargetInfo_getTriple(long Info, long __result) {
         long __functionAddress = Functions.TargetInfo_getTriple;
         if (CHECKS) {
@@ -4890,11 +2717,7 @@ public class ClangIndex {
         nclang_TargetInfo_getTriple(Info, __functionAddress, __result);
     }
 
-    /**
-     * Get the normalized target triple as a string.
-     * 
-     * <p>Returns the empty string in case of any error.</p>
-     */
+    /** {@code CXString clang_TargetInfo_getTriple(CXTargetInfo Info)} */
     public static CXString clang_TargetInfo_getTriple(@NativeType("CXTargetInfo") long Info, CXString __result) {
         nclang_TargetInfo_getTriple(Info, __result.address());
         return __result;
@@ -4902,11 +2725,7 @@ public class ClangIndex {
 
     // --- [ clang_TargetInfo_getPointerWidth ] ---
 
-    /**
-     * Get the pointer width of the target in bits.
-     * 
-     * <p>Returns -1 in case of error.</p>
-     */
+    /** {@code int clang_TargetInfo_getPointerWidth(CXTargetInfo Info)} */
     public static int clang_TargetInfo_getPointerWidth(@NativeType("CXTargetInfo") long Info) {
         long __functionAddress = Functions.TargetInfo_getPointerWidth;
         if (CHECKS) {
@@ -4917,16 +2736,16 @@ public class ClangIndex {
 
     // --- [ clang_getNullCursor ] ---
 
-    /** Unsafe version of: {@link #clang_getNullCursor getNullCursor} */
+    /** {@code CXCursor clang_getNullCursor(void)} */
     public static native void nclang_getNullCursor(long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getNullCursor getNullCursor} */
+    /** {@code CXCursor clang_getNullCursor(void)} */
     public static void nclang_getNullCursor(long __result) {
         long __functionAddress = Functions.getNullCursor;
         nclang_getNullCursor(__functionAddress, __result);
     }
 
-    /** Retrieve the {@code NULL} cursor, which represents no entity. */
+    /** {@code CXCursor clang_getNullCursor(void)} */
     public static CXCursor clang_getNullCursor(CXCursor __result) {
         nclang_getNullCursor(__result.address());
         return __result;
@@ -4934,10 +2753,10 @@ public class ClangIndex {
 
     // --- [ clang_getTranslationUnitCursor ] ---
 
-    /** Unsafe version of: {@link #clang_getTranslationUnitCursor getTranslationUnitCursor} */
+    /** {@code CXCursor clang_getTranslationUnitCursor(CXTranslationUnit TU)} */
     public static native void nclang_getTranslationUnitCursor(long TU, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTranslationUnitCursor getTranslationUnitCursor} */
+    /** {@code CXCursor clang_getTranslationUnitCursor(CXTranslationUnit TU)} */
     public static void nclang_getTranslationUnitCursor(long TU, long __result) {
         long __functionAddress = Functions.getTranslationUnitCursor;
         if (CHECKS) {
@@ -4946,11 +2765,7 @@ public class ClangIndex {
         nclang_getTranslationUnitCursor(TU, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the cursor that represents the given translation unit.
-     * 
-     * <p>The translation unit cursor can be used to start traversing the various declarations within the given translation unit.</p>
-     */
+    /** {@code CXCursor clang_getTranslationUnitCursor(CXTranslationUnit TU)} */
     public static CXCursor clang_getTranslationUnitCursor(@NativeType("CXTranslationUnit") long TU, CXCursor __result) {
         nclang_getTranslationUnitCursor(TU, __result.address());
         return __result;
@@ -4958,16 +2773,16 @@ public class ClangIndex {
 
     // --- [ clang_equalCursors ] ---
 
-    /** Unsafe version of: {@link #clang_equalCursors equalCursors} */
+    /** {@code unsigned clang_equalCursors(CXCursor A, CXCursor B)} */
     public static native int nclang_equalCursors(long A, long B, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_equalCursors equalCursors} */
+    /** {@code unsigned clang_equalCursors(CXCursor A, CXCursor B)} */
     public static int nclang_equalCursors(long A, long B) {
         long __functionAddress = Functions.equalCursors;
         return nclang_equalCursors(A, B, __functionAddress);
     }
 
-    /** Determine whether two cursors are equivalent. */
+    /** {@code unsigned clang_equalCursors(CXCursor A, CXCursor B)} */
     @NativeType("unsigned")
     public static boolean clang_equalCursors(CXCursor A, CXCursor B) {
         return nclang_equalCursors(A.address(), B.address()) != 0;
@@ -4975,16 +2790,16 @@ public class ClangIndex {
 
     // --- [ clang_Cursor_isNull ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isNull Cursor_isNull} */
+    /** {@code int clang_Cursor_isNull(CXCursor cursor)} */
     public static native int nclang_Cursor_isNull(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isNull Cursor_isNull} */
+    /** {@code int clang_Cursor_isNull(CXCursor cursor)} */
     public static int nclang_Cursor_isNull(long cursor) {
         long __functionAddress = Functions.Cursor_isNull;
         return nclang_Cursor_isNull(cursor, __functionAddress);
     }
 
-    /** Returns non-zero if {@code cursor} is null. */
+    /** {@code int clang_Cursor_isNull(CXCursor cursor)} */
     @NativeType("int")
     public static boolean clang_Cursor_isNull(CXCursor cursor) {
         return nclang_Cursor_isNull(cursor.address()) != 0;
@@ -4992,16 +2807,16 @@ public class ClangIndex {
 
     // --- [ clang_hashCursor ] ---
 
-    /** Unsafe version of: {@link #clang_hashCursor hashCursor} */
+    /** {@code unsigned clang_hashCursor(CXCursor cursor)} */
     public static native int nclang_hashCursor(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_hashCursor hashCursor} */
+    /** {@code unsigned clang_hashCursor(CXCursor cursor)} */
     public static int nclang_hashCursor(long cursor) {
         long __functionAddress = Functions.hashCursor;
         return nclang_hashCursor(cursor, __functionAddress);
     }
 
-    /** Compute a hash value for the given cursor. */
+    /** {@code unsigned clang_hashCursor(CXCursor cursor)} */
     @NativeType("unsigned")
     public static int clang_hashCursor(CXCursor cursor) {
         return nclang_hashCursor(cursor.address());
@@ -5009,16 +2824,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorKind ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorKind getCursorKind} */
+    /** {@code enum CXCursorKind clang_getCursorKind(CXCursor cursor)} */
     public static native int nclang_getCursorKind(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorKind getCursorKind} */
+    /** {@code enum CXCursorKind clang_getCursorKind(CXCursor cursor)} */
     public static int nclang_getCursorKind(long cursor) {
         long __functionAddress = Functions.getCursorKind;
         return nclang_getCursorKind(cursor, __functionAddress);
     }
 
-    /** Retrieve the kind of the given cursor. */
+    /** {@code enum CXCursorKind clang_getCursorKind(CXCursor cursor)} */
     @NativeType("enum CXCursorKind")
     public static int clang_getCursorKind(CXCursor cursor) {
         return nclang_getCursorKind(cursor.address());
@@ -5026,7 +2841,7 @@ public class ClangIndex {
 
     // --- [ clang_isDeclaration ] ---
 
-    /** Determine whether the given cursor kind represents a declaration. */
+    /** {@code unsigned clang_isDeclaration(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isDeclaration(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isDeclaration;
@@ -5035,10 +2850,10 @@ public class ClangIndex {
 
     // --- [ clang_isInvalidDeclaration ] ---
 
-    /** Unsafe version of: {@link #clang_isInvalidDeclaration isInvalidDeclaration} */
+    /** {@code unsigned clang_isInvalidDeclaration(CXCursor cursor)} */
     public static native int nclang_isInvalidDeclaration(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_isInvalidDeclaration isInvalidDeclaration} */
+    /** {@code unsigned clang_isInvalidDeclaration(CXCursor cursor)} */
     public static int nclang_isInvalidDeclaration(long cursor) {
         long __functionAddress = Functions.isInvalidDeclaration;
         if (CHECKS) {
@@ -5047,13 +2862,7 @@ public class ClangIndex {
         return nclang_isInvalidDeclaration(cursor, __functionAddress);
     }
 
-    /**
-     * Determine whether the given declaration is invalid.
-     * 
-     * <p>A declaration is invalid if it could not be parsed successfully.</p>
-     *
-     * @return non-zero if the cursor represents a declaration and it is invalid, otherwise {@code NULL}
-     */
+    /** {@code unsigned clang_isInvalidDeclaration(CXCursor cursor)} */
     @NativeType("unsigned")
     public static boolean clang_isInvalidDeclaration(CXCursor cursor) {
         return nclang_isInvalidDeclaration(cursor.address()) != 0;
@@ -5061,12 +2870,7 @@ public class ClangIndex {
 
     // --- [ clang_isReference ] ---
 
-    /**
-     * Determine whether the given cursor kind represents a simple reference.
-     * 
-     * <p>Note that other kinds of cursors (such as expressions) can also refer to other cursors. Use {@link #clang_getCursorReferenced getCursorReferenced} to determine whether a particular
-     * cursor refers to another entity.</p>
-     */
+    /** {@code unsigned clang_isReference(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isReference(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isReference;
@@ -5075,7 +2879,7 @@ public class ClangIndex {
 
     // --- [ clang_isExpression ] ---
 
-    /** Determine whether the given cursor kind represents an expression. */
+    /** {@code unsigned clang_isExpression(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isExpression(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isExpression;
@@ -5084,7 +2888,7 @@ public class ClangIndex {
 
     // --- [ clang_isStatement ] ---
 
-    /** Determine whether the given cursor kind represents a statement. */
+    /** {@code unsigned clang_isStatement(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isStatement(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isStatement;
@@ -5093,7 +2897,7 @@ public class ClangIndex {
 
     // --- [ clang_isAttribute ] ---
 
-    /** Determine whether the given cursor kind represents an attribute. */
+    /** {@code unsigned clang_isAttribute(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isAttribute(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isAttribute;
@@ -5102,16 +2906,16 @@ public class ClangIndex {
 
     // --- [ clang_Cursor_hasAttrs ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_hasAttrs Cursor_hasAttrs} */
+    /** {@code unsigned clang_Cursor_hasAttrs(CXCursor C)} */
     public static native int nclang_Cursor_hasAttrs(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_hasAttrs Cursor_hasAttrs} */
+    /** {@code unsigned clang_Cursor_hasAttrs(CXCursor C)} */
     public static int nclang_Cursor_hasAttrs(long C) {
         long __functionAddress = Functions.Cursor_hasAttrs;
         return nclang_Cursor_hasAttrs(C, __functionAddress);
     }
 
-    /** Determine whether the given cursor has any attributes. */
+    /** {@code unsigned clang_Cursor_hasAttrs(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_hasAttrs(CXCursor C) {
         return nclang_Cursor_hasAttrs(C.address()) != 0;
@@ -5119,7 +2923,7 @@ public class ClangIndex {
 
     // --- [ clang_isInvalid ] ---
 
-    /** Determine whether the given cursor kind represents an invalid cursor. */
+    /** {@code unsigned clang_isInvalid(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isInvalid(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isInvalid;
@@ -5128,7 +2932,7 @@ public class ClangIndex {
 
     // --- [ clang_isTranslationUnit ] ---
 
-    /** Determine whether the given cursor kind represents a translation unit. */
+    /** {@code unsigned clang_isTranslationUnit(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isTranslationUnit(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isTranslationUnit;
@@ -5137,7 +2941,7 @@ public class ClangIndex {
 
     // --- [ clang_isPreprocessing ] ---
 
-    /** Determine whether the given cursor represents a preprocessing element, such as a preprocessor directive or macro instantiation. */
+    /** {@code unsigned clang_isPreprocessing(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isPreprocessing(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isPreprocessing;
@@ -5146,7 +2950,7 @@ public class ClangIndex {
 
     // --- [ clang_isUnexposed ] ---
 
-    /** Determine whether the given cursor represents a currently unexposed piece of the AST (e.g., CXCursor_UnexposedStmt). */
+    /** {@code unsigned clang_isUnexposed(enum CXCursorKind kind)} */
     @NativeType("unsigned")
     public static boolean clang_isUnexposed(@NativeType("enum CXCursorKind") int kind) {
         long __functionAddress = Functions.isUnexposed;
@@ -5155,16 +2959,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorLinkage ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorLinkage getCursorLinkage} */
+    /** {@code enum CXLinkageKind clang_getCursorLinkage(CXCursor cursor)} */
     public static native int nclang_getCursorLinkage(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorLinkage getCursorLinkage} */
+    /** {@code enum CXLinkageKind clang_getCursorLinkage(CXCursor cursor)} */
     public static int nclang_getCursorLinkage(long cursor) {
         long __functionAddress = Functions.getCursorLinkage;
         return nclang_getCursorLinkage(cursor, __functionAddress);
     }
 
-    /** Determine the linkage of the entity referred to by a given cursor. */
+    /** {@code enum CXLinkageKind clang_getCursorLinkage(CXCursor cursor)} */
     @NativeType("enum CXLinkageKind")
     public static int clang_getCursorLinkage(CXCursor cursor) {
         return nclang_getCursorLinkage(cursor.address());
@@ -5172,25 +2976,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorVisibility ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorVisibility getCursorVisibility} */
+    /** {@code enum CXVisibilityKind clang_getCursorVisibility(CXCursor cursor)} */
     public static native int nclang_getCursorVisibility(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorVisibility getCursorVisibility} */
+    /** {@code enum CXVisibilityKind clang_getCursorVisibility(CXCursor cursor)} */
     public static int nclang_getCursorVisibility(long cursor) {
         long __functionAddress = Functions.getCursorVisibility;
         return nclang_getCursorVisibility(cursor, __functionAddress);
     }
 
-    /**
-     * Describe the visibility of the entity referred to by a cursor.
-     * 
-     * <p>This returns the default visibility if not explicitly specified by a visibility attribute. The default visibility may be changed by commandline
-     * arguments.</p>
-     *
-     * @param cursor the cursor to query
-     *
-     * @return the visibility of the cursor
-     */
+    /** {@code enum CXVisibilityKind clang_getCursorVisibility(CXCursor cursor)} */
     @NativeType("enum CXVisibilityKind")
     public static int clang_getCursorVisibility(CXCursor cursor) {
         return nclang_getCursorVisibility(cursor.address());
@@ -5198,22 +2993,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorAvailability ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorAvailability getCursorAvailability} */
+    /** {@code enum CXAvailabilityKind clang_getCursorAvailability(CXCursor cursor)} */
     public static native int nclang_getCursorAvailability(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorAvailability getCursorAvailability} */
+    /** {@code enum CXAvailabilityKind clang_getCursorAvailability(CXCursor cursor)} */
     public static int nclang_getCursorAvailability(long cursor) {
         long __functionAddress = Functions.getCursorAvailability;
         return nclang_getCursorAvailability(cursor, __functionAddress);
     }
 
-    /**
-     * Determine the availability of the entity that this cursor refers to, taking the current target platform into account.
-     *
-     * @param cursor the cursor to query
-     *
-     * @return the availability of the cursor
-     */
+    /** {@code enum CXAvailabilityKind clang_getCursorAvailability(CXCursor cursor)} */
     @NativeType("enum CXAvailabilityKind")
     public static int clang_getCursorAvailability(CXCursor cursor) {
         return nclang_getCursorAvailability(cursor.address());
@@ -5221,42 +3010,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorPlatformAvailability ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_getCursorPlatformAvailability getCursorPlatformAvailability}
-     *
-     * @param availability_size the number of elements available in the {@code availability} array
-     */
+    /** {@code int clang_getCursorPlatformAvailability(CXCursor cursor, int * always_deprecated, CXString * deprecated_message, int * always_unavailable, CXString * unavailable_message, CXPlatformAvailability * availability, int availability_size)} */
     public static native int nclang_getCursorPlatformAvailability(long cursor, long always_deprecated, long deprecated_message, long always_unavailable, long unavailable_message, long availability, int availability_size, long __functionAddress);
 
-    /**
-     * Unsafe version of: {@link #clang_getCursorPlatformAvailability getCursorPlatformAvailability}
-     *
-     * @param availability_size the number of elements available in the {@code availability} array
-     */
+    /** {@code int clang_getCursorPlatformAvailability(CXCursor cursor, int * always_deprecated, CXString * deprecated_message, int * always_unavailable, CXString * unavailable_message, CXPlatformAvailability * availability, int availability_size)} */
     public static int nclang_getCursorPlatformAvailability(long cursor, long always_deprecated, long deprecated_message, long always_unavailable, long unavailable_message, long availability, int availability_size) {
         long __functionAddress = Functions.getCursorPlatformAvailability;
         return nclang_getCursorPlatformAvailability(cursor, always_deprecated, deprecated_message, always_unavailable, unavailable_message, availability, availability_size, __functionAddress);
     }
 
-    /**
-     * Determine the availability of the entity that this cursor refers to on any platforms for which availability information is known.
-     * 
-     * <p>Note that the client is responsible for calling {@link #clang_disposeCXPlatformAvailability disposeCXPlatformAvailability} to free each of the platform-availability structures returned. There
-     * are {@code min(N, availability_size)} such structures.</p>
-     *
-     * @param cursor              the cursor to query
-     * @param always_deprecated   if non-{@code NULL}, will be set to indicate whether the entity is deprecated on all platforms
-     * @param deprecated_message  if non-{@code NULL}, will be set to the message text provided along with the unconditional deprecation of this entity. The client is responsible for
-     *                            deallocating this string.
-     * @param always_unavailable  if non-{@code NULL}, will be set to indicate whether the entity is unavailable on all platforms
-     * @param unavailable_message if non-{@code NULL}, will be set to the message text provided along with the unconditional unavailability of this entity. The client is responsible for
-     *                            deallocating this string.
-     * @param availability        if non-{@code NULL}, an array of {@code CXPlatformAvailability} instances that will be populated with platform availability information, up to either the
-     *                            number of platforms for which availability information is available (as returned by this function) or {@code availability_size}, whichever is
-     *                            smaller
-     *
-     * @return the number of platforms (N) for which availability information is available (which is unrelated to {@code availability_size})
-     */
+    /** {@code int clang_getCursorPlatformAvailability(CXCursor cursor, int * always_deprecated, CXString * deprecated_message, int * always_unavailable, CXString * unavailable_message, CXPlatformAvailability * availability, int availability_size)} */
     public static int clang_getCursorPlatformAvailability(CXCursor cursor, @NativeType("int *") @Nullable IntBuffer always_deprecated, @NativeType("CXString *") @Nullable CXString deprecated_message, @NativeType("int *") @Nullable IntBuffer always_unavailable, @NativeType("CXString *") @Nullable CXString unavailable_message, @NativeType("CXPlatformAvailability *") CXPlatformAvailability.@Nullable Buffer availability) {
         if (CHECKS) {
             checkSafe(always_deprecated, 1);
@@ -5268,23 +3031,23 @@ public class ClangIndex {
 
     // --- [ clang_disposeCXPlatformAvailability ] ---
 
-    /** Unsafe version of: {@link #clang_disposeCXPlatformAvailability disposeCXPlatformAvailability} */
+    /** {@code void clang_disposeCXPlatformAvailability(CXPlatformAvailability * availability)} */
     public static void nclang_disposeCXPlatformAvailability(long availability) {
         long __functionAddress = Functions.disposeCXPlatformAvailability;
         invokePV(availability, __functionAddress);
     }
 
-    /** Free the memory associated with a {@code CXPlatformAvailability} structure. */
+    /** {@code void clang_disposeCXPlatformAvailability(CXPlatformAvailability * availability)} */
     public static void clang_disposeCXPlatformAvailability(@NativeType("CXPlatformAvailability *") CXPlatformAvailability availability) {
         nclang_disposeCXPlatformAvailability(availability.address());
     }
 
     // --- [ clang_Cursor_getVarDeclInitializer ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getVarDeclInitializer Cursor_getVarDeclInitializer} */
+    /** {@code CXCursor clang_Cursor_getVarDeclInitializer(CXCursor cursor)} */
     public static native void nclang_Cursor_getVarDeclInitializer(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getVarDeclInitializer Cursor_getVarDeclInitializer} */
+    /** {@code CXCursor clang_Cursor_getVarDeclInitializer(CXCursor cursor)} */
     public static void nclang_Cursor_getVarDeclInitializer(long cursor, long __result) {
         long __functionAddress = Functions.Cursor_getVarDeclInitializer;
         if (CHECKS) {
@@ -5293,11 +3056,7 @@ public class ClangIndex {
         nclang_Cursor_getVarDeclInitializer(cursor, __functionAddress, __result);
     }
 
-    /**
-     * If cursor refers to a variable declaration and it has initializer returns cursor referring to the initializer otherwise return null cursor.
-     *
-     * @since 12
-     */
+    /** {@code CXCursor clang_Cursor_getVarDeclInitializer(CXCursor cursor)} */
     public static CXCursor clang_Cursor_getVarDeclInitializer(CXCursor cursor, CXCursor __result) {
         nclang_Cursor_getVarDeclInitializer(cursor.address(), __result.address());
         return __result;
@@ -5305,10 +3064,10 @@ public class ClangIndex {
 
     // --- [ clang_Cursor_hasVarDeclGlobalStorage ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_hasVarDeclGlobalStorage Cursor_hasVarDeclGlobalStorage} */
+    /** {@code int clang_Cursor_hasVarDeclGlobalStorage(CXCursor cursor)} */
     public static native int nclang_Cursor_hasVarDeclGlobalStorage(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_hasVarDeclGlobalStorage Cursor_hasVarDeclGlobalStorage} */
+    /** {@code int clang_Cursor_hasVarDeclGlobalStorage(CXCursor cursor)} */
     public static int nclang_Cursor_hasVarDeclGlobalStorage(long cursor) {
         long __functionAddress = Functions.Cursor_hasVarDeclGlobalStorage;
         if (CHECKS) {
@@ -5317,22 +3076,17 @@ public class ClangIndex {
         return nclang_Cursor_hasVarDeclGlobalStorage(cursor, __functionAddress);
     }
 
-    /**
-     * If cursor refers to a variable declaration that has global storage returns 1. If cursor refers to a variable declaration that doesn't have global
-     * storage returns 0. Otherwise returns -1.
-     *
-     * @since 12
-     */
+    /** {@code int clang_Cursor_hasVarDeclGlobalStorage(CXCursor cursor)} */
     public static int clang_Cursor_hasVarDeclGlobalStorage(CXCursor cursor) {
         return nclang_Cursor_hasVarDeclGlobalStorage(cursor.address());
     }
 
     // --- [ clang_Cursor_hasVarDeclExternalStorage ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_hasVarDeclExternalStorage Cursor_hasVarDeclExternalStorage} */
+    /** {@code int clang_Cursor_hasVarDeclExternalStorage(CXCursor cursor)} */
     public static native int nclang_Cursor_hasVarDeclExternalStorage(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_hasVarDeclExternalStorage Cursor_hasVarDeclExternalStorage} */
+    /** {@code int clang_Cursor_hasVarDeclExternalStorage(CXCursor cursor)} */
     public static int nclang_Cursor_hasVarDeclExternalStorage(long cursor) {
         long __functionAddress = Functions.Cursor_hasVarDeclExternalStorage;
         if (CHECKS) {
@@ -5341,28 +3095,23 @@ public class ClangIndex {
         return nclang_Cursor_hasVarDeclExternalStorage(cursor, __functionAddress);
     }
 
-    /**
-     * If cursor refers to a variable declaration that has external storage returns 1. If cursor refers to a variable declaration that doesn't have external
-     * storage returns 0. Otherwise returns -1.
-     *
-     * @since 12
-     */
+    /** {@code int clang_Cursor_hasVarDeclExternalStorage(CXCursor cursor)} */
     public static int clang_Cursor_hasVarDeclExternalStorage(CXCursor cursor) {
         return nclang_Cursor_hasVarDeclExternalStorage(cursor.address());
     }
 
     // --- [ clang_getCursorLanguage ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorLanguage getCursorLanguage} */
+    /** {@code enum CXLanguageKind clang_getCursorLanguage(CXCursor cursor)} */
     public static native int nclang_getCursorLanguage(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorLanguage getCursorLanguage} */
+    /** {@code enum CXLanguageKind clang_getCursorLanguage(CXCursor cursor)} */
     public static int nclang_getCursorLanguage(long cursor) {
         long __functionAddress = Functions.getCursorLanguage;
         return nclang_getCursorLanguage(cursor, __functionAddress);
     }
 
-    /** Determine the "language" of the entity referred to by a given cursor. */
+    /** {@code enum CXLanguageKind clang_getCursorLanguage(CXCursor cursor)} */
     @NativeType("enum CXLanguageKind")
     public static int clang_getCursorLanguage(CXCursor cursor) {
         return nclang_getCursorLanguage(cursor.address());
@@ -5370,10 +3119,10 @@ public class ClangIndex {
 
     // --- [ clang_getCursorTLSKind ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorTLSKind getCursorTLSKind} */
+    /** {@code enum CXTLSKind clang_getCursorTLSKind(CXCursor cursor)} */
     public static native int nclang_getCursorTLSKind(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorTLSKind getCursorTLSKind} */
+    /** {@code enum CXTLSKind clang_getCursorTLSKind(CXCursor cursor)} */
     public static int nclang_getCursorTLSKind(long cursor) {
         long __functionAddress = Functions.getCursorTLSKind;
         if (CHECKS) {
@@ -5382,7 +3131,7 @@ public class ClangIndex {
         return nclang_getCursorTLSKind(cursor, __functionAddress);
     }
 
-    /** Determine the "thread-local storage (TLS) kind" of the declaration referred to by a cursor. */
+    /** {@code enum CXTLSKind clang_getCursorTLSKind(CXCursor cursor)} */
     @NativeType("enum CXTLSKind")
     public static int clang_getCursorTLSKind(CXCursor cursor) {
         return nclang_getCursorTLSKind(cursor.address());
@@ -5390,16 +3139,16 @@ public class ClangIndex {
 
     // --- [ clang_Cursor_getTranslationUnit ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getTranslationUnit Cursor_getTranslationUnit} */
+    /** {@code CXTranslationUnit clang_Cursor_getTranslationUnit(CXCursor cursor)} */
     public static native long nclang_Cursor_getTranslationUnit(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getTranslationUnit Cursor_getTranslationUnit} */
+    /** {@code CXTranslationUnit clang_Cursor_getTranslationUnit(CXCursor cursor)} */
     public static long nclang_Cursor_getTranslationUnit(long cursor) {
         long __functionAddress = Functions.Cursor_getTranslationUnit;
         return nclang_Cursor_getTranslationUnit(cursor, __functionAddress);
     }
 
-    /** Returns the translation unit that a cursor originated from. */
+    /** {@code CXTranslationUnit clang_Cursor_getTranslationUnit(CXCursor cursor)} */
     @NativeType("CXTranslationUnit")
     public static long clang_Cursor_getTranslationUnit(CXCursor cursor) {
         return nclang_Cursor_getTranslationUnit(cursor.address());
@@ -5407,7 +3156,7 @@ public class ClangIndex {
 
     // --- [ clang_createCXCursorSet ] ---
 
-    /** Creates an empty CXCursorSet. */
+    /** {@code CXCursorSet clang_createCXCursorSet(void)} */
     @NativeType("CXCursorSet")
     public static long clang_createCXCursorSet() {
         long __functionAddress = Functions.createCXCursorSet;
@@ -5416,7 +3165,7 @@ public class ClangIndex {
 
     // --- [ clang_disposeCXCursorSet ] ---
 
-    /** Disposes a CXCursorSet and releases its associated memory. */
+    /** {@code void clang_disposeCXCursorSet(CXCursorSet cset)} */
     public static void clang_disposeCXCursorSet(@NativeType("CXCursorSet") long cset) {
         long __functionAddress = Functions.disposeCXCursorSet;
         if (CHECKS) {
@@ -5427,10 +3176,10 @@ public class ClangIndex {
 
     // --- [ clang_CXCursorSet_contains ] ---
 
-    /** Unsafe version of: {@link #clang_CXCursorSet_contains CXCursorSet_contains} */
+    /** {@code unsigned clang_CXCursorSet_contains(CXCursorSet cset, CXCursor cursor)} */
     public static native int nclang_CXCursorSet_contains(long cset, long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXCursorSet_contains CXCursorSet_contains} */
+    /** {@code unsigned clang_CXCursorSet_contains(CXCursorSet cset, CXCursor cursor)} */
     public static int nclang_CXCursorSet_contains(long cset, long cursor) {
         long __functionAddress = Functions.CXCursorSet_contains;
         if (CHECKS) {
@@ -5439,11 +3188,7 @@ public class ClangIndex {
         return nclang_CXCursorSet_contains(cset, cursor, __functionAddress);
     }
 
-    /**
-     * Queries a CXCursorSet to see if it contains a specific CXCursor.
-     *
-     * @return non-zero if the set contains the specified cursor
-     */
+    /** {@code unsigned clang_CXCursorSet_contains(CXCursorSet cset, CXCursor cursor)} */
     @NativeType("unsigned")
     public static boolean clang_CXCursorSet_contains(@NativeType("CXCursorSet") long cset, CXCursor cursor) {
         return nclang_CXCursorSet_contains(cset, cursor.address()) != 0;
@@ -5451,10 +3196,10 @@ public class ClangIndex {
 
     // --- [ clang_CXCursorSet_insert ] ---
 
-    /** Unsafe version of: {@link #clang_CXCursorSet_insert CXCursorSet_insert} */
+    /** {@code unsigned clang_CXCursorSet_insert(CXCursorSet cset, CXCursor cursor)} */
     public static native int nclang_CXCursorSet_insert(long cset, long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXCursorSet_insert CXCursorSet_insert} */
+    /** {@code unsigned clang_CXCursorSet_insert(CXCursorSet cset, CXCursor cursor)} */
     public static int nclang_CXCursorSet_insert(long cset, long cursor) {
         long __functionAddress = Functions.CXCursorSet_insert;
         if (CHECKS) {
@@ -5463,11 +3208,7 @@ public class ClangIndex {
         return nclang_CXCursorSet_insert(cset, cursor, __functionAddress);
     }
 
-    /**
-     * Inserts a CXCursor into a CXCursorSet.
-     *
-     * @return zero if the CXCursor was already in the set, and non-zero otherwise
-     */
+    /** {@code unsigned clang_CXCursorSet_insert(CXCursorSet cset, CXCursor cursor)} */
     @NativeType("unsigned")
     public static boolean clang_CXCursorSet_insert(@NativeType("CXCursorSet") long cset, CXCursor cursor) {
         return nclang_CXCursorSet_insert(cset, cursor.address()) != 0;
@@ -5475,40 +3216,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorSemanticParent ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorSemanticParent getCursorSemanticParent} */
+    /** {@code CXCursor clang_getCursorSemanticParent(CXCursor cursor)} */
     public static native void nclang_getCursorSemanticParent(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorSemanticParent getCursorSemanticParent} */
+    /** {@code CXCursor clang_getCursorSemanticParent(CXCursor cursor)} */
     public static void nclang_getCursorSemanticParent(long cursor, long __result) {
         long __functionAddress = Functions.getCursorSemanticParent;
         nclang_getCursorSemanticParent(cursor, __functionAddress, __result);
     }
 
-    /**
-     * Determine the semantic parent of the given cursor.
-     * 
-     * <p>The semantic parent of a cursor is the cursor that semantically contains the given {@code cursor}. For many declarations, the lexical and semantic
-     * parents are equivalent (the lexical parent is returned by {@link #clang_getCursorLexicalParent getCursorLexicalParent}). They diverge when declarations or definitions are provided
-     * out-of-line. For example:</p>
-     * 
-     * <pre><code>
-     *  class C {
-     *   void f();
-     *  };
-     * 
-     *  void C::f() { }</code></pre>
-     * 
-     * <p>In the out-of-line definition of {@code C::f}, the semantic parent is the class {@code C}, of which this function is a member. The lexical parent is
-     * the place where the declaration actually occurs in the source code; in this case, the definition occurs in the translation unit. In general, the
-     * lexical parent for a given entity can change without affecting the semantics of the program, and the lexical parent of different declarations of the
-     * same entity may be different. Changing the semantic parent of a declaration, on the other hand, can have a major impact on semantics, and
-     * redeclarations of a particular entity should all have the same semantic context.</p>
-     * 
-     * <p>In the example above, both declarations of {@code C::f} have {@code C} as their semantic context, while the lexical context of the first {@code C::f}
-     * is {@code C} and the lexical context of the second {@code C::f} is the translation unit.</p>
-     * 
-     * <p>For global declarations, the semantic parent is the translation unit.</p>
-     */
+    /** {@code CXCursor clang_getCursorSemanticParent(CXCursor cursor)} */
     public static CXCursor clang_getCursorSemanticParent(CXCursor cursor, CXCursor __result) {
         nclang_getCursorSemanticParent(cursor.address(), __result.address());
         return __result;
@@ -5516,40 +3233,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorLexicalParent ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorLexicalParent getCursorLexicalParent} */
+    /** {@code CXCursor clang_getCursorLexicalParent(CXCursor cursor)} */
     public static native void nclang_getCursorLexicalParent(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorLexicalParent getCursorLexicalParent} */
+    /** {@code CXCursor clang_getCursorLexicalParent(CXCursor cursor)} */
     public static void nclang_getCursorLexicalParent(long cursor, long __result) {
         long __functionAddress = Functions.getCursorLexicalParent;
         nclang_getCursorLexicalParent(cursor, __functionAddress, __result);
     }
 
-    /**
-     * Determine the lexical parent of the given cursor.
-     * 
-     * <p>The lexical parent of a cursor is the cursor in which the given {@code cursor} was actually written. For many declarations, the lexical and semantic
-     * parents are equivalent (the semantic parent is returned by {@link #clang_getCursorSemanticParent getCursorSemanticParent}). They diverge when declarations or definitions are provided
-     * out-of-line. For example:</p>
-     * 
-     * <pre><code>
-     *  class C {
-     *   void f();
-     *  };
-     * 
-     *  void C::f() { }</code></pre>
-     * 
-     * <p>In the out-of-line definition of {@code C::f}, the semantic parent is the class {@code C}, of which this function is a member. The lexical parent is
-     * the place where the declaration actually occurs in the source code; in this case, the definition occurs in the translation unit. In general, the
-     * lexical parent for a given entity can change without affecting the semantics of the program, and the lexical parent of different declarations of the
-     * same entity may be different. Changing the semantic parent of a declaration, on the other hand, can have a major impact on semantics, and
-     * redeclarations of a particular entity should all have the same semantic context.</p>
-     * 
-     * <p>In the example above, both declarations of {@code C::f} have {@code C} as their semantic context, while the lexical context of the first {@code C::f}
-     * is {@code C} and the lexical context of the second {@code C::f} is the translation unit.</p>
-     * 
-     * <p>For declarations written in the global scope, the lexical parent is the translation unit.</p>
-     */
+    /** {@code CXCursor clang_getCursorLexicalParent(CXCursor cursor)} */
     public static CXCursor clang_getCursorLexicalParent(CXCursor cursor, CXCursor __result) {
         nclang_getCursorLexicalParent(cursor.address(), __result.address());
         return __result;
@@ -5557,36 +3250,16 @@ public class ClangIndex {
 
     // --- [ clang_getOverriddenCursors ] ---
 
-    /** Unsafe version of: {@link #clang_getOverriddenCursors getOverriddenCursors} */
+    /** {@code void clang_getOverriddenCursors(CXCursor cursor, CXCursor ** overridden, unsigned * num_overridden)} */
     public static native void nclang_getOverriddenCursors(long cursor, long overridden, long num_overridden, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getOverriddenCursors getOverriddenCursors} */
+    /** {@code void clang_getOverriddenCursors(CXCursor cursor, CXCursor ** overridden, unsigned * num_overridden)} */
     public static void nclang_getOverriddenCursors(long cursor, long overridden, long num_overridden) {
         long __functionAddress = Functions.getOverriddenCursors;
         nclang_getOverriddenCursors(cursor, overridden, num_overridden, __functionAddress);
     }
 
-    /**
-     * Determine the set of methods that are overridden by the given method.
-     * 
-     * <p>In both Objective-C and C++, a method (aka virtual member function, in C++) can override a virtual method in a base class. For Objective-C, a method is
-     * said to override any method in the class's base class, its protocols, or its categories' protocols, that has the same selector and is of the same kind
-     * (class or instance). If no such method exists, the search continues to the class's superclass, its protocols, and its categories, and so on. A method
-     * from an Objective-C implementation is considered to override the same methods as its corresponding method in the interface.</p>
-     * 
-     * <p>For C++, a virtual member function overrides any virtual member function with the same signature that occurs in its base classes. With multiple
-     * inheritance, a virtual member function can override several virtual member functions coming from different base classes.</p>
-     * 
-     * <p>In all cases, this function determines the immediate overridden method, rather than all of the overridden methods. For example, if a method is
-     * originally declared in a class A, then overridden in B (which in inherits from A) and also in C (which inherited from B), then the only overridden
-     * method returned from this function when invoked on C's method will be B's method. The client may then invoke this function again, given the
-     * previously-found overridden methods, to map out the complete method-override set.</p>
-     *
-     * @param cursor         a cursor representing an Objective-C or C++ method. This routine will compute the set of methods that this method overrides.
-     * @param overridden     a pointer whose pointee will be replaced with a pointer to an array of cursors, representing the set of overridden methods. If there are no
-     *                       overridden methods, the pointee will be set to {@code NULL}. The pointee must be freed via a call to {@link #clang_disposeOverriddenCursors disposeOverriddenCursors}.
-     * @param num_overridden a pointer to the number of overridden functions, will be set to the number of overridden functions in the array pointed to by {@code overridden}
-     */
+    /** {@code void clang_getOverriddenCursors(CXCursor cursor, CXCursor ** overridden, unsigned * num_overridden)} */
     public static void clang_getOverriddenCursors(CXCursor cursor, @NativeType("CXCursor **") PointerBuffer overridden, @NativeType("unsigned *") IntBuffer num_overridden) {
         if (CHECKS) {
             check(overridden, 1);
@@ -5597,29 +3270,29 @@ public class ClangIndex {
 
     // --- [ clang_disposeOverriddenCursors ] ---
 
-    /** Unsafe version of: {@link #clang_disposeOverriddenCursors disposeOverriddenCursors} */
+    /** {@code void clang_disposeOverriddenCursors(CXCursor * overridden)} */
     public static void nclang_disposeOverriddenCursors(long overridden) {
         long __functionAddress = Functions.disposeOverriddenCursors;
         invokePV(overridden, __functionAddress);
     }
 
-    /** Free the set of overridden cursors returned by {@code clang_getOverriddenCursors()}. */
+    /** {@code void clang_disposeOverriddenCursors(CXCursor * overridden)} */
     public static void clang_disposeOverriddenCursors(@NativeType("CXCursor *") CXCursor.Buffer overridden) {
         nclang_disposeOverriddenCursors(overridden.address());
     }
 
     // --- [ clang_getIncludedFile ] ---
 
-    /** Unsafe version of: {@link #clang_getIncludedFile getIncludedFile} */
+    /** {@code CXFile clang_getIncludedFile(CXCursor cursor)} */
     public static native long nclang_getIncludedFile(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getIncludedFile getIncludedFile} */
+    /** {@code CXFile clang_getIncludedFile(CXCursor cursor)} */
     public static long nclang_getIncludedFile(long cursor) {
         long __functionAddress = Functions.getIncludedFile;
         return nclang_getIncludedFile(cursor, __functionAddress);
     }
 
-    /** Retrieve the file that is included by the given inclusion directive cursor. */
+    /** {@code CXFile clang_getIncludedFile(CXCursor cursor)} */
     @NativeType("CXFile")
     public static long clang_getIncludedFile(CXCursor cursor) {
         return nclang_getIncludedFile(cursor.address());
@@ -5627,10 +3300,10 @@ public class ClangIndex {
 
     // --- [ clang_getCursor ] ---
 
-    /** Unsafe version of: {@link #clang_getCursor getCursor} */
+    /** {@code CXCursor clang_getCursor(CXTranslationUnit TU, CXSourceLocation location)} */
     public static native void nclang_getCursor(long TU, long location, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursor getCursor} */
+    /** {@code CXCursor clang_getCursor(CXTranslationUnit TU, CXSourceLocation location)} */
     public static void nclang_getCursor(long TU, long location, long __result) {
         long __functionAddress = Functions.getCursor;
         if (CHECKS) {
@@ -5639,16 +3312,7 @@ public class ClangIndex {
         nclang_getCursor(TU, location, __functionAddress, __result);
     }
 
-    /**
-     * Map a source location to the cursor that describes the entity at that location in the source code.
-     * 
-     * <p>{@code clang_getCursor()} maps an arbitrary source location within a translation unit down to the most specific cursor that describes the entity at that
-     * location. For example, given an expression {@code x + y}, invoking {@code clang_getCursor()} with a source location pointing to "x" will return the
-     * cursor for "x"; similarly for "y". If the cursor points anywhere between "x" or "y" (e.g., on the + or the whitespace around it), clang_getCursor()
-     * will return a cursor referring to the "+" expression.</p>
-     *
-     * @param __result a cursor representing the entity at the given source location, or a {@code NULL} cursor if no such entity can be found
-     */
+    /** {@code CXCursor clang_getCursor(CXTranslationUnit TU, CXSourceLocation location)} */
     public static CXCursor clang_getCursor(@NativeType("CXTranslationUnit") long TU, CXSourceLocation location, CXCursor __result) {
         nclang_getCursor(TU, location.address(), __result.address());
         return __result;
@@ -5656,22 +3320,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorLocation getCursorLocation} */
+    /** {@code CXSourceLocation clang_getCursorLocation(CXCursor cursor)} */
     public static native void nclang_getCursorLocation(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorLocation getCursorLocation} */
+    /** {@code CXSourceLocation clang_getCursorLocation(CXCursor cursor)} */
     public static void nclang_getCursorLocation(long cursor, long __result) {
         long __functionAddress = Functions.getCursorLocation;
         nclang_getCursorLocation(cursor, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the physical location of the source constructor referenced by the given cursor.
-     * 
-     * <p>The location of a declaration is typically the location of the name of that declaration, where the name of that declaration would occur if it is
-     * unnamed, or some keyword that introduces that particular declaration. The location of a reference is where that reference occurs within the source
-     * code.</p>
-     */
+    /** {@code CXSourceLocation clang_getCursorLocation(CXCursor cursor)} */
     public static CXSourceLocation clang_getCursorLocation(CXCursor cursor, CXSourceLocation __result) {
         nclang_getCursorLocation(cursor.address(), __result.address());
         return __result;
@@ -5679,22 +3337,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorExtent ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorExtent getCursorExtent} */
+    /** {@code CXSourceRange clang_getCursorExtent(CXCursor cursor)} */
     public static native void nclang_getCursorExtent(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorExtent getCursorExtent} */
+    /** {@code CXSourceRange clang_getCursorExtent(CXCursor cursor)} */
     public static void nclang_getCursorExtent(long cursor, long __result) {
         long __functionAddress = Functions.getCursorExtent;
         nclang_getCursorExtent(cursor, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the physical extent of the source construct referenced by the given cursor.
-     * 
-     * <p>The extent of a cursor starts with the file/line/column pointing at the first character within the source construct that the cursor refers to and ends
-     * with the last character within that source construct. For a declaration, the extent covers the declaration itself. For a reference, the extent covers
-     * the location of the reference (e.g., where the referenced entity was actually used).</p>
-     */
+    /** {@code CXSourceRange clang_getCursorExtent(CXCursor cursor)} */
     public static CXSourceRange clang_getCursorExtent(CXCursor cursor, CXSourceRange __result) {
         nclang_getCursorExtent(cursor.address(), __result.address());
         return __result;
@@ -5702,16 +3354,16 @@ public class ClangIndex {
 
     // --- [ clang_getCursorType ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorType getCursorType} */
+    /** {@code CXType clang_getCursorType(CXCursor C)} */
     public static native void nclang_getCursorType(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorType getCursorType} */
+    /** {@code CXType clang_getCursorType(CXCursor C)} */
     public static void nclang_getCursorType(long C, long __result) {
         long __functionAddress = Functions.getCursorType;
         nclang_getCursorType(C, __functionAddress, __result);
     }
 
-    /** Retrieve the type of a {@code CXCursor} (if any). */
+    /** {@code CXType clang_getCursorType(CXCursor C)} */
     public static CXType clang_getCursorType(CXCursor C, CXType __result) {
         nclang_getCursorType(C.address(), __result.address());
         return __result;
@@ -5719,20 +3371,16 @@ public class ClangIndex {
 
     // --- [ clang_getTypeSpelling ] ---
 
-    /** Unsafe version of: {@link #clang_getTypeSpelling getTypeSpelling} */
+    /** {@code CXString clang_getTypeSpelling(CXType CT)} */
     public static native void nclang_getTypeSpelling(long CT, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTypeSpelling getTypeSpelling} */
+    /** {@code CXString clang_getTypeSpelling(CXType CT)} */
     public static void nclang_getTypeSpelling(long CT, long __result) {
         long __functionAddress = Functions.getTypeSpelling;
         nclang_getTypeSpelling(CT, __functionAddress, __result);
     }
 
-    /**
-     * Pretty-print the underlying type using the rules of the language of the translation unit from which it came.
-     * 
-     * <p>If the type is invalid, an empty string is returned.</p>
-     */
+    /** {@code CXString clang_getTypeSpelling(CXType CT)} */
     public static CXString clang_getTypeSpelling(CXType CT, CXString __result) {
         nclang_getTypeSpelling(CT.address(), __result.address());
         return __result;
@@ -5740,20 +3388,16 @@ public class ClangIndex {
 
     // --- [ clang_getTypedefDeclUnderlyingType ] ---
 
-    /** Unsafe version of: {@link #clang_getTypedefDeclUnderlyingType getTypedefDeclUnderlyingType} */
+    /** {@code CXType clang_getTypedefDeclUnderlyingType(CXCursor C)} */
     public static native void nclang_getTypedefDeclUnderlyingType(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTypedefDeclUnderlyingType getTypedefDeclUnderlyingType} */
+    /** {@code CXType clang_getTypedefDeclUnderlyingType(CXCursor C)} */
     public static void nclang_getTypedefDeclUnderlyingType(long C, long __result) {
         long __functionAddress = Functions.getTypedefDeclUnderlyingType;
         nclang_getTypedefDeclUnderlyingType(C, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the underlying type of a typedef declaration.
-     * 
-     * <p>If the cursor does not reference a typedef declaration, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_getTypedefDeclUnderlyingType(CXCursor C)} */
     public static CXType clang_getTypedefDeclUnderlyingType(CXCursor C, CXType __result) {
         nclang_getTypedefDeclUnderlyingType(C.address(), __result.address());
         return __result;
@@ -5761,20 +3405,16 @@ public class ClangIndex {
 
     // --- [ clang_getEnumDeclIntegerType ] ---
 
-    /** Unsafe version of: {@link #clang_getEnumDeclIntegerType getEnumDeclIntegerType} */
+    /** {@code CXType clang_getEnumDeclIntegerType(CXCursor C)} */
     public static native void nclang_getEnumDeclIntegerType(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getEnumDeclIntegerType getEnumDeclIntegerType} */
+    /** {@code CXType clang_getEnumDeclIntegerType(CXCursor C)} */
     public static void nclang_getEnumDeclIntegerType(long C, long __result) {
         long __functionAddress = Functions.getEnumDeclIntegerType;
         nclang_getEnumDeclIntegerType(C, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the integer type of an enum declaration.
-     * 
-     * <p>If the cursor does not reference an enum declaration, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_getEnumDeclIntegerType(CXCursor C)} */
     public static CXType clang_getEnumDeclIntegerType(CXCursor C, CXType __result) {
         nclang_getEnumDeclIntegerType(C.address(), __result.address());
         return __result;
@@ -5782,21 +3422,16 @@ public class ClangIndex {
 
     // --- [ clang_getEnumConstantDeclValue ] ---
 
-    /** Unsafe version of: {@link #clang_getEnumConstantDeclValue getEnumConstantDeclValue} */
+    /** {@code long long clang_getEnumConstantDeclValue(CXCursor C)} */
     public static native long nclang_getEnumConstantDeclValue(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getEnumConstantDeclValue getEnumConstantDeclValue} */
+    /** {@code long long clang_getEnumConstantDeclValue(CXCursor C)} */
     public static long nclang_getEnumConstantDeclValue(long C) {
         long __functionAddress = Functions.getEnumConstantDeclValue;
         return nclang_getEnumConstantDeclValue(C, __functionAddress);
     }
 
-    /**
-     * Retrieve the integer value of an enum constant declaration as a signed long long.
-     * 
-     * <p>If the cursor does not reference an enum constant declaration, {@code LLONG_MIN} is returned. Since this is also potentially a valid constant value,
-     * the kind of the cursor must be verified before calling this function.</p>
-     */
+    /** {@code long long clang_getEnumConstantDeclValue(CXCursor C)} */
     @NativeType("long long")
     public static long clang_getEnumConstantDeclValue(CXCursor C) {
         return nclang_getEnumConstantDeclValue(C.address());
@@ -5804,21 +3439,16 @@ public class ClangIndex {
 
     // --- [ clang_getEnumConstantDeclUnsignedValue ] ---
 
-    /** Unsafe version of: {@link #clang_getEnumConstantDeclUnsignedValue getEnumConstantDeclUnsignedValue} */
+    /** {@code unsigned long long clang_getEnumConstantDeclUnsignedValue(CXCursor C)} */
     public static native long nclang_getEnumConstantDeclUnsignedValue(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getEnumConstantDeclUnsignedValue getEnumConstantDeclUnsignedValue} */
+    /** {@code unsigned long long clang_getEnumConstantDeclUnsignedValue(CXCursor C)} */
     public static long nclang_getEnumConstantDeclUnsignedValue(long C) {
         long __functionAddress = Functions.getEnumConstantDeclUnsignedValue;
         return nclang_getEnumConstantDeclUnsignedValue(C, __functionAddress);
     }
 
-    /**
-     * Retrieve the integer value of an enum constant declaration as an unsigned long long.
-     * 
-     * <p>If the cursor does not reference an enum constant declaration, {@code ULLONG_MAX} is returned. Since this is also potentially a valid constant value,
-     * the kind of the cursor must be verified before calling this function.</p>
-     */
+    /** {@code unsigned long long clang_getEnumConstantDeclUnsignedValue(CXCursor C)} */
     @NativeType("unsigned long long")
     public static long clang_getEnumConstantDeclUnsignedValue(CXCursor C) {
         return nclang_getEnumConstantDeclUnsignedValue(C.address());
@@ -5826,16 +3456,16 @@ public class ClangIndex {
 
     // --- [ clang_Cursor_isBitField ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isBitField Cursor_isBitField} */
+    /** {@code unsigned clang_Cursor_isBitField(CXCursor C)} */
     public static native int nclang_Cursor_isBitField(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isBitField Cursor_isBitField} */
+    /** {@code unsigned clang_Cursor_isBitField(CXCursor C)} */
     public static int nclang_Cursor_isBitField(long C) {
         long __functionAddress = Functions.Cursor_isBitField;
         return nclang_Cursor_isBitField(C, __functionAddress);
     }
 
-    /** Returns non-zero if the cursor specifies a {@code Record} member that is a bit-field. */
+    /** {@code unsigned clang_Cursor_isBitField(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isBitField(CXCursor C) {
         return nclang_Cursor_isBitField(C.address()) != 0;
@@ -5843,70 +3473,48 @@ public class ClangIndex {
 
     // --- [ clang_getFieldDeclBitWidth ] ---
 
-    /** Unsafe version of: {@link #clang_getFieldDeclBitWidth getFieldDeclBitWidth} */
+    /** {@code int clang_getFieldDeclBitWidth(CXCursor C)} */
     public static native int nclang_getFieldDeclBitWidth(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getFieldDeclBitWidth getFieldDeclBitWidth} */
+    /** {@code int clang_getFieldDeclBitWidth(CXCursor C)} */
     public static int nclang_getFieldDeclBitWidth(long C) {
         long __functionAddress = Functions.getFieldDeclBitWidth;
         return nclang_getFieldDeclBitWidth(C, __functionAddress);
     }
 
-    /**
-     * Retrieve the bit width of a bit-field declaration as an integer.
-     * 
-     * <p>If the cursor does not reference a bit-field, or if the bit-field's width expression cannot be evaluated, -1 is returned.</p>
-     * 
-     * <p>For example:
-     * <code>
-if (clang_Cursor_isBitField(Cursor)) {
-     * int Width = clang_getFieldDeclBitWidth(Cursor);
-     * if (Width != -1) {
-     * // The bit-field width is not value-dependent.
-     * }
-}</code></p>
-     */
+    /** {@code int clang_getFieldDeclBitWidth(CXCursor C)} */
     public static int clang_getFieldDeclBitWidth(CXCursor C) {
         return nclang_getFieldDeclBitWidth(C.address());
     }
 
     // --- [ clang_Cursor_getNumArguments ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getNumArguments Cursor_getNumArguments} */
+    /** {@code int clang_Cursor_getNumArguments(CXCursor C)} */
     public static native int nclang_Cursor_getNumArguments(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getNumArguments Cursor_getNumArguments} */
+    /** {@code int clang_Cursor_getNumArguments(CXCursor C)} */
     public static int nclang_Cursor_getNumArguments(long C) {
         long __functionAddress = Functions.Cursor_getNumArguments;
         return nclang_Cursor_getNumArguments(C, __functionAddress);
     }
 
-    /**
-     * Retrieve the number of non-variadic arguments associated with a given cursor.
-     * 
-     * <p>The number of arguments can be determined for calls as well as for declarations of functions or methods. For other cursors -1 is returned.</p>
-     */
+    /** {@code int clang_Cursor_getNumArguments(CXCursor C)} */
     public static int clang_Cursor_getNumArguments(CXCursor C) {
         return nclang_Cursor_getNumArguments(C.address());
     }
 
     // --- [ clang_Cursor_getArgument ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getArgument Cursor_getArgument} */
+    /** {@code CXCursor clang_Cursor_getArgument(CXCursor C, unsigned i)} */
     public static native void nclang_Cursor_getArgument(long C, int i, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getArgument Cursor_getArgument} */
+    /** {@code CXCursor clang_Cursor_getArgument(CXCursor C, unsigned i)} */
     public static void nclang_Cursor_getArgument(long C, int i, long __result) {
         long __functionAddress = Functions.Cursor_getArgument;
         nclang_Cursor_getArgument(C, i, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the argument cursor of a function or method.
-     * 
-     * <p>The argument cursor can be determined for calls as well as for declarations of functions or methods. For other cursors and for invalid indices, an
-     * invalid cursor is returned.</p>
-     */
+    /** {@code CXCursor clang_Cursor_getArgument(CXCursor C, unsigned i)} */
     public static CXCursor clang_Cursor_getArgument(CXCursor C, @NativeType("unsigned") int i, CXCursor __result) {
         nclang_Cursor_getArgument(C.address(), i, __result.address());
         return __result;
@@ -5914,63 +3522,32 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getNumTemplateArguments ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getNumTemplateArguments Cursor_getNumTemplateArguments} */
+    /** {@code int clang_Cursor_getNumTemplateArguments(CXCursor C)} */
     public static native int nclang_Cursor_getNumTemplateArguments(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getNumTemplateArguments Cursor_getNumTemplateArguments} */
+    /** {@code int clang_Cursor_getNumTemplateArguments(CXCursor C)} */
     public static int nclang_Cursor_getNumTemplateArguments(long C) {
         long __functionAddress = Functions.Cursor_getNumTemplateArguments;
         return nclang_Cursor_getNumTemplateArguments(C, __functionAddress);
     }
 
-    /**
-     * Returns the number of template args of a function, struct, or class decl representing a template specialization.
-     * 
-     * <p>If the argument cursor cannot be converted into a template function declaration, -1 is returned.</p>
-     * 
-     * <p>For example, for the following declaration and specialization:</p>
-     * 
-     * <pre><code>
-     * template &lt;typename T, int kInt, bool kBool&gt;
-     * void foo() { ... }
-     * 
-     * template &lt;&gt;
-     * void foo &lt;float , -7, true&gt;();</code></pre>
-     * 
-     * <p>The value 3 would be returned from this call.</p>
-     */
+    /** {@code int clang_Cursor_getNumTemplateArguments(CXCursor C)} */
     public static int clang_Cursor_getNumTemplateArguments(CXCursor C) {
         return nclang_Cursor_getNumTemplateArguments(C.address());
     }
 
     // --- [ clang_Cursor_getTemplateArgumentKind ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentKind Cursor_getTemplateArgumentKind} */
+    /** {@code enum CXTemplateArgumentKind clang_Cursor_getTemplateArgumentKind(CXCursor C, unsigned I)} */
     public static native int nclang_Cursor_getTemplateArgumentKind(long C, int I, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentKind Cursor_getTemplateArgumentKind} */
+    /** {@code enum CXTemplateArgumentKind clang_Cursor_getTemplateArgumentKind(CXCursor C, unsigned I)} */
     public static int nclang_Cursor_getTemplateArgumentKind(long C, int I) {
         long __functionAddress = Functions.Cursor_getTemplateArgumentKind;
         return nclang_Cursor_getTemplateArgumentKind(C, I, __functionAddress);
     }
 
-    /**
-     * Retrieve the kind of the I'th template argument of the {@code CXCursor} {@code C}.
-     * 
-     * <p>If the argument {@code CXCursor} does not represent a {@code FunctionDecl}, {@code StructDecl}, or {@code ClassTemplatePartialSpecialization}, an
-     * invalid template argument kind is returned.</p>
-     * 
-     * <p>For example, for the following declaration and specialization:</p>
-     * 
-     * <pre><code>
-     * template &lt;typename T, int kInt, bool kBool&gt;
-     * void foo() { ... }
-     * 
-     * template &lt;&gt;
-     * void foo &lt;float , -7, true&gt;();</code></pre>
-     * 
-     * <p>For I = 0, 1, and 2, {@code Type}, {@code Integral}, and {@code Integral} will be returned, respectively.</p>
-     */
+    /** {@code enum CXTemplateArgumentKind clang_Cursor_getTemplateArgumentKind(CXCursor C, unsigned I)} */
     @NativeType("enum CXTemplateArgumentKind")
     public static int clang_Cursor_getTemplateArgumentKind(CXCursor C, @NativeType("unsigned") int I) {
         return nclang_Cursor_getTemplateArgumentKind(C.address(), I);
@@ -5978,33 +3555,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getTemplateArgumentType ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentType Cursor_getTemplateArgumentType} */
+    /** {@code CXType clang_Cursor_getTemplateArgumentType(CXCursor C, unsigned I)} */
     public static native void nclang_Cursor_getTemplateArgumentType(long C, int I, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentType Cursor_getTemplateArgumentType} */
+    /** {@code CXType clang_Cursor_getTemplateArgumentType(CXCursor C, unsigned I)} */
     public static void nclang_Cursor_getTemplateArgumentType(long C, int I, long __result) {
         long __functionAddress = Functions.Cursor_getTemplateArgumentType;
         nclang_Cursor_getTemplateArgumentType(C, I, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve a {@code CXType} representing the type of a {@code TemplateArgument} of a function decl representing a template specialization.
-     * 
-     * <p>If the argument {@code CXCursor} does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
-     * {@code ClassTemplatePartialSpecialization} whose {@code I}'th template argument has a kind of {@link #CXTemplateArgumentKind_Integral TemplateArgumentKind_Integral}, an invalid type is
-     * returned.</p>
-     * 
-     * <p>For example, for the following declaration and specialization:</p>
-     * 
-     * <pre><code>
-     * template &lt;typename T, int kInt, bool kBool&gt;
-     * void foo() { ... }
-     * 
-     * template &lt;&gt;
-     * void foo &lt;float , -7, true&gt;();</code></pre>
-     * 
-     * <p>If called with I = 0, "float", will be returned. Invalid types will be returned for I == 1 or 2.</p>
-     */
+    /** {@code CXType clang_Cursor_getTemplateArgumentType(CXCursor C, unsigned I)} */
     public static CXType clang_Cursor_getTemplateArgumentType(CXCursor C, @NativeType("unsigned") int I, CXType __result) {
         nclang_Cursor_getTemplateArgumentType(C.address(), I, __result.address());
         return __result;
@@ -6012,33 +3572,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getTemplateArgumentValue ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentValue Cursor_getTemplateArgumentValue} */
+    /** {@code long long clang_Cursor_getTemplateArgumentValue(CXCursor C, unsigned I)} */
     public static native long nclang_Cursor_getTemplateArgumentValue(long C, int I, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentValue Cursor_getTemplateArgumentValue} */
+    /** {@code long long clang_Cursor_getTemplateArgumentValue(CXCursor C, unsigned I)} */
     public static long nclang_Cursor_getTemplateArgumentValue(long C, int I) {
         long __functionAddress = Functions.Cursor_getTemplateArgumentValue;
         return nclang_Cursor_getTemplateArgumentValue(C, I, __functionAddress);
     }
 
-    /**
-     * Retrieve the value of an {@code Integral} {@code TemplateArgument} (of a function decl representing a template specialization) as a {@code signed long
-     * long}.
-     * 
-     * <p>It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
-     * {@code ClassTemplatePartialSpecialization} whose {@code I}'th template argument is not an integral value.</p>
-     * 
-     * <p>For example, for the following declaration and specialization:</p>
-     * 
-     * <pre><code>
-     * template &lt;typename T, int kInt, bool kBool&gt;
-     * void foo() { ... }
-     * 
-     * template &lt;&gt;
-     * void foo &lt;float , -7, true&gt;();</code></pre>
-     * 
-     * <p>If called with I = 1 or 2, -7 or true will be returned, respectively. For I == 0, this function's behavior is undefined.</p>
-     */
+    /** {@code long long clang_Cursor_getTemplateArgumentValue(CXCursor C, unsigned I)} */
     @NativeType("long long")
     public static long clang_Cursor_getTemplateArgumentValue(CXCursor C, @NativeType("unsigned") int I) {
         return nclang_Cursor_getTemplateArgumentValue(C.address(), I);
@@ -6046,33 +3589,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getTemplateArgumentUnsignedValue ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentUnsignedValue Cursor_getTemplateArgumentUnsignedValue} */
+    /** {@code unsigned long long clang_Cursor_getTemplateArgumentUnsignedValue(CXCursor C, unsigned I)} */
     public static native long nclang_Cursor_getTemplateArgumentUnsignedValue(long C, int I, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getTemplateArgumentUnsignedValue Cursor_getTemplateArgumentUnsignedValue} */
+    /** {@code unsigned long long clang_Cursor_getTemplateArgumentUnsignedValue(CXCursor C, unsigned I)} */
     public static long nclang_Cursor_getTemplateArgumentUnsignedValue(long C, int I) {
         long __functionAddress = Functions.Cursor_getTemplateArgumentUnsignedValue;
         return nclang_Cursor_getTemplateArgumentUnsignedValue(C, I, __functionAddress);
     }
 
-    /**
-     * Retrieve the value of an {@code Integral} {@code TemplateArgument} (of a function decl representing a template specialization) as an {@code unsigned
-     * long long}.
-     * 
-     * <p>It is undefined to call this function on a {@code CXCursor} that does not represent a {@code FunctionDecl}, {@code StructDecl}, {@code ClassDecl} or
-     * {@code ClassTemplatePartialSpecialization} or whose {@code I}'th template argument is not an integral value.</p>
-     * 
-     * <p>For example, for the following declaration and specialization:</p>
-     * 
-     * <pre><code>
-     * template &lt;typename T, int kInt, bool kBool&gt;
-     * void foo() { ... }
-     * 
-     * template &lt;&gt;
-     * void foo &lt;float , 2147483649, true&gt;();</code></pre>
-     * 
-     * <p>If called with I = 1 or 2, 2147483649 or true will be returned, respectively. For I == 0, this function's behavior is undefined.</p>
-     */
+    /** {@code unsigned long long clang_Cursor_getTemplateArgumentUnsignedValue(CXCursor C, unsigned I)} */
     @NativeType("unsigned long long")
     public static long clang_Cursor_getTemplateArgumentUnsignedValue(CXCursor C, @NativeType("unsigned") int I) {
         return nclang_Cursor_getTemplateArgumentUnsignedValue(C.address(), I);
@@ -6080,20 +3606,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_equalTypes ] ---
 
-    /** Unsafe version of: {@link #clang_equalTypes equalTypes} */
+    /** {@code unsigned clang_equalTypes(CXType A, CXType B)} */
     public static native int nclang_equalTypes(long A, long B, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_equalTypes equalTypes} */
+    /** {@code unsigned clang_equalTypes(CXType A, CXType B)} */
     public static int nclang_equalTypes(long A, long B) {
         long __functionAddress = Functions.equalTypes;
         return nclang_equalTypes(A, B, __functionAddress);
     }
 
-    /**
-     * Determine whether two {@code CXTypes} represent the same type.
-     *
-     * @return non-zero if the {@code CXTypes} represent the same type and zero otherwise
-     */
+    /** {@code unsigned clang_equalTypes(CXType A, CXType B)} */
     @NativeType("unsigned")
     public static boolean clang_equalTypes(CXType A, CXType B) {
         return nclang_equalTypes(A.address(), B.address()) != 0;
@@ -6101,21 +3623,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCanonicalType ] ---
 
-    /** Unsafe version of: {@link #clang_getCanonicalType getCanonicalType} */
+    /** {@code CXType clang_getCanonicalType(CXType T)} */
     public static native void nclang_getCanonicalType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCanonicalType getCanonicalType} */
+    /** {@code CXType clang_getCanonicalType(CXType T)} */
     public static void nclang_getCanonicalType(long T, long __result) {
         long __functionAddress = Functions.getCanonicalType;
         nclang_getCanonicalType(T, __functionAddress, __result);
     }
 
-    /**
-     * Return the canonical type for a {@code CXType}.
-     * 
-     * <p>Clang's type system explicitly models typedefs and all the ways a specific type can be represented. The canonical type is the underlying type with all
-     * the "sugar" removed. For example, if 'T' is a typedef for 'int', the canonical type for 'T' would be 'int'.</p>
-     */
+    /** {@code CXType clang_getCanonicalType(CXType T)} */
     public static CXType clang_getCanonicalType(CXType T, CXType __result) {
         nclang_getCanonicalType(T.address(), __result.address());
         return __result;
@@ -6123,16 +3640,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_isConstQualifiedType ] ---
 
-    /** Unsafe version of: {@link #clang_isConstQualifiedType isConstQualifiedType} */
+    /** {@code unsigned clang_isConstQualifiedType(CXType T)} */
     public static native int nclang_isConstQualifiedType(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_isConstQualifiedType isConstQualifiedType} */
+    /** {@code unsigned clang_isConstQualifiedType(CXType T)} */
     public static int nclang_isConstQualifiedType(long T) {
         long __functionAddress = Functions.isConstQualifiedType;
         return nclang_isConstQualifiedType(T, __functionAddress);
     }
 
-    /** Determine whether a {@code CXType} has the "const" qualifier set, without looking through typedefs that may have added "const" at a different level. */
+    /** {@code unsigned clang_isConstQualifiedType(CXType T)} */
     @NativeType("unsigned")
     public static boolean clang_isConstQualifiedType(CXType T) {
         return nclang_isConstQualifiedType(T.address()) != 0;
@@ -6140,16 +3657,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isMacroFunctionLike ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isMacroFunctionLike Cursor_isMacroFunctionLike} */
+    /** {@code unsigned clang_Cursor_isMacroFunctionLike(CXCursor C)} */
     public static native int nclang_Cursor_isMacroFunctionLike(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isMacroFunctionLike Cursor_isMacroFunctionLike} */
+    /** {@code unsigned clang_Cursor_isMacroFunctionLike(CXCursor C)} */
     public static int nclang_Cursor_isMacroFunctionLike(long C) {
         long __functionAddress = Functions.Cursor_isMacroFunctionLike;
         return nclang_Cursor_isMacroFunctionLike(C, __functionAddress);
     }
 
-    /** Determine whether a {@code CXCursor} that is a macro, is function like. */
+    /** {@code unsigned clang_Cursor_isMacroFunctionLike(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isMacroFunctionLike(CXCursor C) {
         return nclang_Cursor_isMacroFunctionLike(C.address()) != 0;
@@ -6157,16 +3674,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isMacroBuiltin ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isMacroBuiltin Cursor_isMacroBuiltin} */
+    /** {@code unsigned clang_Cursor_isMacroBuiltin(CXCursor C)} */
     public static native int nclang_Cursor_isMacroBuiltin(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isMacroBuiltin Cursor_isMacroBuiltin} */
+    /** {@code unsigned clang_Cursor_isMacroBuiltin(CXCursor C)} */
     public static int nclang_Cursor_isMacroBuiltin(long C) {
         long __functionAddress = Functions.Cursor_isMacroBuiltin;
         return nclang_Cursor_isMacroBuiltin(C, __functionAddress);
     }
 
-    /** Determine whether a {@code CXCursor} that is a macro, is a builtin one. */
+    /** {@code unsigned clang_Cursor_isMacroBuiltin(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isMacroBuiltin(CXCursor C) {
         return nclang_Cursor_isMacroBuiltin(C.address()) != 0;
@@ -6174,16 +3691,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isFunctionInlined ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isFunctionInlined Cursor_isFunctionInlined} */
+    /** {@code unsigned clang_Cursor_isFunctionInlined(CXCursor C)} */
     public static native int nclang_Cursor_isFunctionInlined(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isFunctionInlined Cursor_isFunctionInlined} */
+    /** {@code unsigned clang_Cursor_isFunctionInlined(CXCursor C)} */
     public static int nclang_Cursor_isFunctionInlined(long C) {
         long __functionAddress = Functions.Cursor_isFunctionInlined;
         return nclang_Cursor_isFunctionInlined(C, __functionAddress);
     }
 
-    /** Determine whether a {@code CXCursor} that is a function declaration, is an inline declaration. */
+    /** {@code unsigned clang_Cursor_isFunctionInlined(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isFunctionInlined(CXCursor C) {
         return nclang_Cursor_isFunctionInlined(C.address()) != 0;
@@ -6191,19 +3708,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_isVolatileQualifiedType ] ---
 
-    /** Unsafe version of: {@link #clang_isVolatileQualifiedType isVolatileQualifiedType} */
+    /** {@code unsigned clang_isVolatileQualifiedType(CXType T)} */
     public static native int nclang_isVolatileQualifiedType(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_isVolatileQualifiedType isVolatileQualifiedType} */
+    /** {@code unsigned clang_isVolatileQualifiedType(CXType T)} */
     public static int nclang_isVolatileQualifiedType(long T) {
         long __functionAddress = Functions.isVolatileQualifiedType;
         return nclang_isVolatileQualifiedType(T, __functionAddress);
     }
 
-    /**
-     * Determine whether a {@code CXType} has the "volatile" qualifier set, without looking through typedefs that may have added "volatile" at a different
-     * level.
-     */
+    /** {@code unsigned clang_isVolatileQualifiedType(CXType T)} */
     @NativeType("unsigned")
     public static boolean clang_isVolatileQualifiedType(CXType T) {
         return nclang_isVolatileQualifiedType(T.address()) != 0;
@@ -6211,19 +3725,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_isRestrictQualifiedType ] ---
 
-    /** Unsafe version of: {@link #clang_isRestrictQualifiedType isRestrictQualifiedType} */
+    /** {@code unsigned clang_isRestrictQualifiedType(CXType T)} */
     public static native int nclang_isRestrictQualifiedType(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_isRestrictQualifiedType isRestrictQualifiedType} */
+    /** {@code unsigned clang_isRestrictQualifiedType(CXType T)} */
     public static int nclang_isRestrictQualifiedType(long T) {
         long __functionAddress = Functions.isRestrictQualifiedType;
         return nclang_isRestrictQualifiedType(T, __functionAddress);
     }
 
-    /**
-     * Determine whether a {@code CXType} has the "restrict" qualifier set, without looking through typedefs that may have added "restrict" at a different
-     * level.
-     */
+    /** {@code unsigned clang_isRestrictQualifiedType(CXType T)} */
     @NativeType("unsigned")
     public static boolean clang_isRestrictQualifiedType(CXType T) {
         return nclang_isRestrictQualifiedType(T.address()) != 0;
@@ -6231,16 +3742,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getAddressSpace ] ---
 
-    /** Unsafe version of: {@link #clang_getAddressSpace getAddressSpace} */
+    /** {@code unsigned clang_getAddressSpace(CXType T)} */
     public static native int nclang_getAddressSpace(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getAddressSpace getAddressSpace} */
+    /** {@code unsigned clang_getAddressSpace(CXType T)} */
     public static int nclang_getAddressSpace(long T) {
         long __functionAddress = Functions.getAddressSpace;
         return nclang_getAddressSpace(T, __functionAddress);
     }
 
-    /** Returns the address space of the given type. */
+    /** {@code unsigned clang_getAddressSpace(CXType T)} */
     @NativeType("unsigned")
     public static int clang_getAddressSpace(CXType T) {
         return nclang_getAddressSpace(T.address());
@@ -6248,16 +3759,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getTypedefName ] ---
 
-    /** Unsafe version of: {@link #clang_getTypedefName getTypedefName} */
+    /** {@code CXString clang_getTypedefName(CXType CT)} */
     public static native void nclang_getTypedefName(long CT, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTypedefName getTypedefName} */
+    /** {@code CXString clang_getTypedefName(CXType CT)} */
     public static void nclang_getTypedefName(long CT, long __result) {
         long __functionAddress = Functions.getTypedefName;
         nclang_getTypedefName(CT, __functionAddress, __result);
     }
 
-    /** Returns the typedef name of the given type. */
+    /** {@code CXString clang_getTypedefName(CXType CT)} */
     public static CXString clang_getTypedefName(CXType CT, CXString __result) {
         nclang_getTypedefName(CT.address(), __result.address());
         return __result;
@@ -6265,16 +3776,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getPointeeType ] ---
 
-    /** Unsafe version of: {@link #clang_getPointeeType getPointeeType} */
+    /** {@code CXType clang_getPointeeType(CXType T)} */
     public static native void nclang_getPointeeType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getPointeeType getPointeeType} */
+    /** {@code CXType clang_getPointeeType(CXType T)} */
     public static void nclang_getPointeeType(long T, long __result) {
         long __functionAddress = Functions.getPointeeType;
         nclang_getPointeeType(T, __functionAddress, __result);
     }
 
-    /** For pointer types, returns the type of the pointee. */
+    /** {@code CXType clang_getPointeeType(CXType T)} */
     public static CXType clang_getPointeeType(CXType T, CXType __result) {
         nclang_getPointeeType(T.address(), __result.address());
         return __result;
@@ -6282,10 +3793,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getUnqualifiedType ] ---
 
-    /** Unsafe version of: {@link #clang_getUnqualifiedType getUnqualifiedType} */
+    /** {@code CXType clang_getUnqualifiedType(CXType CT)} */
     public static native void nclang_getUnqualifiedType(long CT, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getUnqualifiedType getUnqualifiedType} */
+    /** {@code CXType clang_getUnqualifiedType(CXType CT)} */
     public static void nclang_getUnqualifiedType(long CT, long __result) {
         long __functionAddress = Functions.getUnqualifiedType;
         if (CHECKS) {
@@ -6294,32 +3805,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getUnqualifiedType(CT, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the unqualified variant of the given type, removing as little sugar as possible.
-     * 
-     * <p>For example, given the following series of typedefs:</p>
-     * 
-     * <pre><code>
-     * typedef int Integer;
-     * typedef const Integer CInteger;
-     * typedef CInteger DifferenceType;</code></pre>
-     * 
-     * <p>Executing {@code clang_getUnqualifiedType()} on a {@code CXType} that represents {@code DifferenceType}, will desugar to a type representing
-     * {@code Integer}, that has no qualifiers.</p>
-     * 
-     * <p>And, executing {@code clang_getUnqualifiedType()} on the type of the first argument of the following function declaration:</p>
-     * 
-     * <pre><code>
-     * void foo(const int);</code></pre>
-     * 
-     * <p>Will return a type representing {@code int}, removing the {@code const} qualifier.</p>
-     * 
-     * <p>Sugar over array types is not desugared.</p>
-     * 
-     * <p>A type can be checked for qualifiers with {@link #clang_isConstQualifiedType isConstQualifiedType}, {@link #clang_isVolatileQualifiedType isVolatileQualifiedType} and {@link #clang_isRestrictQualifiedType isRestrictQualifiedType}.</p>
-     * 
-     * <p>A type that resulted from a call to {@code clang_getUnqualifiedType} will return {@code false} for all of the above calls.</p>
-     */
+    /** {@code CXType clang_getUnqualifiedType(CXType CT)} */
     public static CXType clang_getUnqualifiedType(CXType CT, CXType __result) {
         nclang_getUnqualifiedType(CT.address(), __result.address());
         return __result;
@@ -6327,10 +3813,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getNonReferenceType ] ---
 
-    /** Unsafe version of: {@link #clang_getNonReferenceType getNonReferenceType} */
+    /** {@code CXType clang_getNonReferenceType(CXType CT)} */
     public static native void nclang_getNonReferenceType(long CT, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getNonReferenceType getNonReferenceType} */
+    /** {@code CXType clang_getNonReferenceType(CXType CT)} */
     public static void nclang_getNonReferenceType(long CT, long __result) {
         long __functionAddress = Functions.getNonReferenceType;
         if (CHECKS) {
@@ -6339,13 +3825,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getNonReferenceType(CT, __functionAddress, __result);
     }
 
-    /**
-     * For reference types (e.g., {@code "const int&"}), returns the type that the reference refers to (e.g {@code "const int"}).
-     * 
-     * <p>Otherwise, returns the type itself.</p>
-     * 
-     * <p>A type that has kind {@link #CXType_LValueReference Type_LValueReference} or {@link #CXType_RValueReference Type_RValueReference} is a reference type.</p>
-     */
+    /** {@code CXType clang_getNonReferenceType(CXType CT)} */
     public static CXType clang_getNonReferenceType(CXType CT, CXType __result) {
         nclang_getNonReferenceType(CT.address(), __result.address());
         return __result;
@@ -6353,16 +3833,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getTypeDeclaration ] ---
 
-    /** Unsafe version of: {@link #clang_getTypeDeclaration getTypeDeclaration} */
+    /** {@code CXCursor clang_getTypeDeclaration(CXType T)} */
     public static native void nclang_getTypeDeclaration(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTypeDeclaration getTypeDeclaration} */
+    /** {@code CXCursor clang_getTypeDeclaration(CXType T)} */
     public static void nclang_getTypeDeclaration(long T, long __result) {
         long __functionAddress = Functions.getTypeDeclaration;
         nclang_getTypeDeclaration(T, __functionAddress, __result);
     }
 
-    /** Return the cursor for the declaration of the given type. */
+    /** {@code CXCursor clang_getTypeDeclaration(CXType T)} */
     public static CXCursor clang_getTypeDeclaration(CXType T, CXCursor __result) {
         nclang_getTypeDeclaration(T.address(), __result.address());
         return __result;
@@ -6370,16 +3850,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getDeclObjCTypeEncoding ] ---
 
-    /** Unsafe version of: {@link #clang_getDeclObjCTypeEncoding getDeclObjCTypeEncoding} */
+    /** {@code CXString clang_getDeclObjCTypeEncoding(CXCursor C)} */
     public static native void nclang_getDeclObjCTypeEncoding(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getDeclObjCTypeEncoding getDeclObjCTypeEncoding} */
+    /** {@code CXString clang_getDeclObjCTypeEncoding(CXCursor C)} */
     public static void nclang_getDeclObjCTypeEncoding(long C, long __result) {
         long __functionAddress = Functions.getDeclObjCTypeEncoding;
         nclang_getDeclObjCTypeEncoding(C, __functionAddress, __result);
     }
 
-    /** Returns the Objective-C type encoding for the specified declaration. */
+    /** {@code CXString clang_getDeclObjCTypeEncoding(CXCursor C)} */
     public static CXString clang_getDeclObjCTypeEncoding(CXCursor C, CXString __result) {
         nclang_getDeclObjCTypeEncoding(C.address(), __result.address());
         return __result;
@@ -6387,16 +3867,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getObjCEncoding ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getObjCEncoding Type_getObjCEncoding} */
+    /** {@code CXString clang_Type_getObjCEncoding(CXType type)} */
     public static native void nclang_Type_getObjCEncoding(long type, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getObjCEncoding Type_getObjCEncoding} */
+    /** {@code CXString clang_Type_getObjCEncoding(CXType type)} */
     public static void nclang_Type_getObjCEncoding(long type, long __result) {
         long __functionAddress = Functions.Type_getObjCEncoding;
         nclang_Type_getObjCEncoding(type, __functionAddress, __result);
     }
 
-    /** Returns the Objective-C type encoding for the specified {@code CXType}. */
+    /** {@code CXString clang_Type_getObjCEncoding(CXType type)} */
     public static CXString clang_Type_getObjCEncoding(CXType type, CXString __result) {
         nclang_Type_getObjCEncoding(type.address(), __result.address());
         return __result;
@@ -6404,16 +3884,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getTypeKindSpelling ] ---
 
-    /** Unsafe version of: {@link #clang_getTypeKindSpelling getTypeKindSpelling} */
+    /** {@code CXString clang_getTypeKindSpelling(enum CXTypeKind K)} */
     public static native void nclang_getTypeKindSpelling(int K, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTypeKindSpelling getTypeKindSpelling} */
+    /** {@code CXString clang_getTypeKindSpelling(enum CXTypeKind K)} */
     public static void nclang_getTypeKindSpelling(int K, long __result) {
         long __functionAddress = Functions.getTypeKindSpelling;
         nclang_getTypeKindSpelling(K, __functionAddress, __result);
     }
 
-    /** Retrieve the spelling of a given {@code CXTypeKind}. */
+    /** {@code CXString clang_getTypeKindSpelling(enum CXTypeKind K)} */
     public static CXString clang_getTypeKindSpelling(@NativeType("enum CXTypeKind") int K, CXString __result) {
         nclang_getTypeKindSpelling(K, __result.address());
         return __result;
@@ -6421,20 +3901,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getFunctionTypeCallingConv ] ---
 
-    /** Unsafe version of: {@link #clang_getFunctionTypeCallingConv getFunctionTypeCallingConv} */
+    /** {@code enum CXCallingConv clang_getFunctionTypeCallingConv(CXType T)} */
     public static native int nclang_getFunctionTypeCallingConv(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getFunctionTypeCallingConv getFunctionTypeCallingConv} */
+    /** {@code enum CXCallingConv clang_getFunctionTypeCallingConv(CXType T)} */
     public static int nclang_getFunctionTypeCallingConv(long T) {
         long __functionAddress = Functions.getFunctionTypeCallingConv;
         return nclang_getFunctionTypeCallingConv(T, __functionAddress);
     }
 
-    /**
-     * Retrieve the calling convention associated with a function type.
-     * 
-     * <p>If a non-function type is passed in, {@link #CXCallingConv_Invalid CallingConv_Invalid} is returned.</p>
-     */
+    /** {@code enum CXCallingConv clang_getFunctionTypeCallingConv(CXType T)} */
     @NativeType("enum CXCallingConv")
     public static int clang_getFunctionTypeCallingConv(CXType T) {
         return nclang_getFunctionTypeCallingConv(T.address());
@@ -6442,20 +3918,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getResultType ] ---
 
-    /** Unsafe version of: {@link #clang_getResultType getResultType} */
+    /** {@code CXType clang_getResultType(CXType T)} */
     public static native void nclang_getResultType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getResultType getResultType} */
+    /** {@code CXType clang_getResultType(CXType T)} */
     public static void nclang_getResultType(long T, long __result) {
         long __functionAddress = Functions.getResultType;
         nclang_getResultType(T, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the return type associated with a function type.
-     * 
-     * <p>If a non-function type is passed in, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_getResultType(CXType T)} */
     public static CXType clang_getResultType(CXType T, CXType __result) {
         nclang_getResultType(T.address(), __result.address());
         return __result;
@@ -6463,60 +3935,48 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getExceptionSpecificationType ] ---
 
-    /** Unsafe version of: {@link #clang_getExceptionSpecificationType getExceptionSpecificationType} */
+    /** {@code int clang_getExceptionSpecificationType(CXType T)} */
     public static native int nclang_getExceptionSpecificationType(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getExceptionSpecificationType getExceptionSpecificationType} */
+    /** {@code int clang_getExceptionSpecificationType(CXType T)} */
     public static int nclang_getExceptionSpecificationType(long T) {
         long __functionAddress = Functions.getExceptionSpecificationType;
         return nclang_getExceptionSpecificationType(T, __functionAddress);
     }
 
-    /**
-     * Retrieve the exception specification type associated with a function type. This is a value of type {@code CXCursor_ExceptionSpecificationKind}.
-     * 
-     * <p>If a non-function type is passed in, an error code of -1 is returned.</p>
-     */
+    /** {@code int clang_getExceptionSpecificationType(CXType T)} */
     public static int clang_getExceptionSpecificationType(CXType T) {
         return nclang_getExceptionSpecificationType(T.address());
     }
 
     // --- [ clang_getNumArgTypes ] ---
 
-    /** Unsafe version of: {@link #clang_getNumArgTypes getNumArgTypes} */
+    /** {@code int clang_getNumArgTypes(CXType T)} */
     public static native int nclang_getNumArgTypes(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getNumArgTypes getNumArgTypes} */
+    /** {@code int clang_getNumArgTypes(CXType T)} */
     public static int nclang_getNumArgTypes(long T) {
         long __functionAddress = Functions.getNumArgTypes;
         return nclang_getNumArgTypes(T, __functionAddress);
     }
 
-    /**
-     * Retrieve the number of non-variadic parameters associated with a function type.
-     * 
-     * <p>If a non-function type is passed in, -1 is returned.</p>
-     */
+    /** {@code int clang_getNumArgTypes(CXType T)} */
     public static int clang_getNumArgTypes(CXType T) {
         return nclang_getNumArgTypes(T.address());
     }
 
     // --- [ clang_getArgType ] ---
 
-    /** Unsafe version of: {@link #clang_getArgType getArgType} */
+    /** {@code CXType clang_getArgType(CXType T, unsigned i)} */
     public static native void nclang_getArgType(long T, int i, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getArgType getArgType} */
+    /** {@code CXType clang_getArgType(CXType T, unsigned i)} */
     public static void nclang_getArgType(long T, int i, long __result) {
         long __functionAddress = Functions.getArgType;
         nclang_getArgType(T, i, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the type of a parameter of a function type.
-     * 
-     * <p>If a non-function type is passed in or the function does not have enough parameters, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_getArgType(CXType T, unsigned i)} */
     public static CXType clang_getArgType(CXType T, @NativeType("unsigned") int i, CXType __result) {
         nclang_getArgType(T.address(), i, __result.address());
         return __result;
@@ -6524,10 +3984,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getObjCObjectBaseType ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getObjCObjectBaseType Type_getObjCObjectBaseType} */
+    /** {@code CXType clang_Type_getObjCObjectBaseType(CXType T)} */
     public static native void nclang_Type_getObjCObjectBaseType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getObjCObjectBaseType Type_getObjCObjectBaseType} */
+    /** {@code CXType clang_Type_getObjCObjectBaseType(CXType T)} */
     public static void nclang_Type_getObjCObjectBaseType(long T, long __result) {
         long __functionAddress = Functions.Type_getObjCObjectBaseType;
         if (CHECKS) {
@@ -6536,11 +3996,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Type_getObjCObjectBaseType(T, __functionAddress, __result);
     }
 
-    /**
-     * Retrieves the base type of the {@code ObjCObjectType}.
-     * 
-     * <p>If the type is not an ObjC object, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_Type_getObjCObjectBaseType(CXType T)} */
     public static CXType clang_Type_getObjCObjectBaseType(CXType T, CXType __result) {
         nclang_Type_getObjCObjectBaseType(T.address(), __result.address());
         return __result;
@@ -6548,10 +4004,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getNumObjCProtocolRefs ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getNumObjCProtocolRefs Type_getNumObjCProtocolRefs} */
+    /** {@code unsigned clang_Type_getNumObjCProtocolRefs(CXType T)} */
     public static native int nclang_Type_getNumObjCProtocolRefs(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_getNumObjCProtocolRefs Type_getNumObjCProtocolRefs} */
+    /** {@code unsigned clang_Type_getNumObjCProtocolRefs(CXType T)} */
     public static int nclang_Type_getNumObjCProtocolRefs(long T) {
         long __functionAddress = Functions.Type_getNumObjCProtocolRefs;
         if (CHECKS) {
@@ -6560,11 +4016,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_Type_getNumObjCProtocolRefs(T, __functionAddress);
     }
 
-    /**
-     * Retrieve the number of protocol references associated with an ObjC object/id.
-     * 
-     * <p>If the type is not an ObjC object, 0 is returned.</p>
-     */
+    /** {@code unsigned clang_Type_getNumObjCProtocolRefs(CXType T)} */
     @NativeType("unsigned")
     public static int clang_Type_getNumObjCProtocolRefs(CXType T) {
         return nclang_Type_getNumObjCProtocolRefs(T.address());
@@ -6572,10 +4024,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getObjCProtocolDecl ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getObjCProtocolDecl Type_getObjCProtocolDecl} */
+    /** {@code CXCursor clang_Type_getObjCProtocolDecl(CXType T, unsigned i)} */
     public static native void nclang_Type_getObjCProtocolDecl(long T, int i, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getObjCProtocolDecl Type_getObjCProtocolDecl} */
+    /** {@code CXCursor clang_Type_getObjCProtocolDecl(CXType T, unsigned i)} */
     public static void nclang_Type_getObjCProtocolDecl(long T, int i, long __result) {
         long __functionAddress = Functions.Type_getObjCProtocolDecl;
         if (CHECKS) {
@@ -6584,11 +4036,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Type_getObjCProtocolDecl(T, i, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the decl for a protocol reference for an ObjC object/id.
-     * 
-     * <p>If the type is not an ObjC object or there are not enough protocol references, an invalid cursor is returned.</p>
-     */
+    /** {@code CXCursor clang_Type_getObjCProtocolDecl(CXType T, unsigned i)} */
     public static CXCursor clang_Type_getObjCProtocolDecl(CXType T, @NativeType("unsigned") int i, CXCursor __result) {
         nclang_Type_getObjCProtocolDecl(T.address(), i, __result.address());
         return __result;
@@ -6596,10 +4044,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getNumObjCTypeArgs ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getNumObjCTypeArgs Type_getNumObjCTypeArgs} */
+    /** {@code unsigned clang_Type_getNumObjCTypeArgs(CXType T)} */
     public static native int nclang_Type_getNumObjCTypeArgs(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_getNumObjCTypeArgs Type_getNumObjCTypeArgs} */
+    /** {@code unsigned clang_Type_getNumObjCTypeArgs(CXType T)} */
     public static int nclang_Type_getNumObjCTypeArgs(long T) {
         long __functionAddress = Functions.Type_getNumObjCTypeArgs;
         if (CHECKS) {
@@ -6608,11 +4056,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_Type_getNumObjCTypeArgs(T, __functionAddress);
     }
 
-    /**
-     * Retrieve the number of type arguments associated with an ObjC object.
-     * 
-     * <p>If the type is not an ObjC object, 0 is returned.</p>
-     */
+    /** {@code unsigned clang_Type_getNumObjCTypeArgs(CXType T)} */
     @NativeType("unsigned")
     public static int clang_Type_getNumObjCTypeArgs(CXType T) {
         return nclang_Type_getNumObjCTypeArgs(T.address());
@@ -6620,10 +4064,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getObjCTypeArg ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getObjCTypeArg Type_getObjCTypeArg} */
+    /** {@code CXType clang_Type_getObjCTypeArg(CXType T, unsigned i)} */
     public static native void nclang_Type_getObjCTypeArg(long T, int i, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getObjCTypeArg Type_getObjCTypeArg} */
+    /** {@code CXType clang_Type_getObjCTypeArg(CXType T, unsigned i)} */
     public static void nclang_Type_getObjCTypeArg(long T, int i, long __result) {
         long __functionAddress = Functions.Type_getObjCTypeArg;
         if (CHECKS) {
@@ -6632,11 +4076,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Type_getObjCTypeArg(T, i, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve a type argument associated with an ObjC object.
-     * 
-     * <p>If the type is not an ObjC or the index is not valid, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_Type_getObjCTypeArg(CXType T, unsigned i)} */
     public static CXType clang_Type_getObjCTypeArg(CXType T, @NativeType("unsigned") int i, CXType __result) {
         nclang_Type_getObjCTypeArg(T.address(), i, __result.address());
         return __result;
@@ -6644,16 +4084,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_isFunctionTypeVariadic ] ---
 
-    /** Unsafe version of: {@link #clang_isFunctionTypeVariadic isFunctionTypeVariadic} */
+    /** {@code unsigned clang_isFunctionTypeVariadic(CXType T)} */
     public static native int nclang_isFunctionTypeVariadic(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_isFunctionTypeVariadic isFunctionTypeVariadic} */
+    /** {@code unsigned clang_isFunctionTypeVariadic(CXType T)} */
     public static int nclang_isFunctionTypeVariadic(long T) {
         long __functionAddress = Functions.isFunctionTypeVariadic;
         return nclang_isFunctionTypeVariadic(T, __functionAddress);
     }
 
-    /** Return 1 if the {@code CXType} is a variadic function type, and 0 otherwise. */
+    /** {@code unsigned clang_isFunctionTypeVariadic(CXType T)} */
     @NativeType("unsigned")
     public static boolean clang_isFunctionTypeVariadic(CXType T) {
         return nclang_isFunctionTypeVariadic(T.address()) != 0;
@@ -6661,20 +4101,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorResultType ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorResultType getCursorResultType} */
+    /** {@code CXType clang_getCursorResultType(CXCursor C)} */
     public static native void nclang_getCursorResultType(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorResultType getCursorResultType} */
+    /** {@code CXType clang_getCursorResultType(CXCursor C)} */
     public static void nclang_getCursorResultType(long C, long __result) {
         long __functionAddress = Functions.getCursorResultType;
         nclang_getCursorResultType(C, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the return type associated with a given cursor.
-     * 
-     * <p>This only returns a valid type if the cursor refers to a function or method.</p>
-     */
+    /** {@code CXType clang_getCursorResultType(CXCursor C)} */
     public static CXType clang_getCursorResultType(CXCursor C, CXType __result) {
         nclang_getCursorResultType(C.address(), __result.address());
         return __result;
@@ -6682,36 +4118,32 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorExceptionSpecificationType ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorExceptionSpecificationType getCursorExceptionSpecificationType} */
+    /** {@code int clang_getCursorExceptionSpecificationType(CXCursor C)} */
     public static native int nclang_getCursorExceptionSpecificationType(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorExceptionSpecificationType getCursorExceptionSpecificationType} */
+    /** {@code int clang_getCursorExceptionSpecificationType(CXCursor C)} */
     public static int nclang_getCursorExceptionSpecificationType(long C) {
         long __functionAddress = Functions.getCursorExceptionSpecificationType;
         return nclang_getCursorExceptionSpecificationType(C, __functionAddress);
     }
 
-    /**
-     * Retrieve the exception specification type associated with a given cursor. This is a value of type {@code CXCursor_ExceptionSpecificationKind}.
-     * 
-     * <p>This only returns a valid result if the cursor refers to a function or method.</p>
-     */
+    /** {@code int clang_getCursorExceptionSpecificationType(CXCursor C)} */
     public static int clang_getCursorExceptionSpecificationType(CXCursor C) {
         return nclang_getCursorExceptionSpecificationType(C.address());
     }
 
     // --- [ clang_isPODType ] ---
 
-    /** Unsafe version of: {@link #clang_isPODType isPODType} */
+    /** {@code unsigned clang_isPODType(CXType T)} */
     public static native int nclang_isPODType(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_isPODType isPODType} */
+    /** {@code unsigned clang_isPODType(CXType T)} */
     public static int nclang_isPODType(long T) {
         long __functionAddress = Functions.isPODType;
         return nclang_isPODType(T, __functionAddress);
     }
 
-    /** Return 1 if the {@code CXType} is a POD (plain old data) type, and 0 otherwise. */
+    /** {@code unsigned clang_isPODType(CXType T)} */
     @NativeType("unsigned")
     public static boolean clang_isPODType(CXType T) {
         return nclang_isPODType(T.address()) != 0;
@@ -6719,20 +4151,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getElementType ] ---
 
-    /** Unsafe version of: {@link #clang_getElementType getElementType} */
+    /** {@code CXType clang_getElementType(CXType T)} */
     public static native void nclang_getElementType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getElementType getElementType} */
+    /** {@code CXType clang_getElementType(CXType T)} */
     public static void nclang_getElementType(long T, long __result) {
         long __functionAddress = Functions.getElementType;
         nclang_getElementType(T, __functionAddress, __result);
     }
 
-    /**
-     * Return the element type of an array, complex, or vector type.
-     * 
-     * <p>If a type is passed in that is not an array, complex, or vector type, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_getElementType(CXType T)} */
     public static CXType clang_getElementType(CXType T, CXType __result) {
         nclang_getElementType(T.address(), __result.address());
         return __result;
@@ -6740,20 +4168,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getNumElements ] ---
 
-    /** Unsafe version of: {@link #clang_getNumElements getNumElements} */
+    /** {@code long long clang_getNumElements(CXType T)} */
     public static native long nclang_getNumElements(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getNumElements getNumElements} */
+    /** {@code long long clang_getNumElements(CXType T)} */
     public static long nclang_getNumElements(long T) {
         long __functionAddress = Functions.getNumElements;
         return nclang_getNumElements(T, __functionAddress);
     }
 
-    /**
-     * Return the number of elements of an array or vector type.
-     * 
-     * <p>If a type is passed in that is not an array or vector type, -1 is returned.</p>
-     */
+    /** {@code long long clang_getNumElements(CXType T)} */
     @NativeType("long long")
     public static long clang_getNumElements(CXType T) {
         return nclang_getNumElements(T.address());
@@ -6761,20 +4185,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getArrayElementType ] ---
 
-    /** Unsafe version of: {@link #clang_getArrayElementType getArrayElementType} */
+    /** {@code CXType clang_getArrayElementType(CXType T)} */
     public static native void nclang_getArrayElementType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getArrayElementType getArrayElementType} */
+    /** {@code CXType clang_getArrayElementType(CXType T)} */
     public static void nclang_getArrayElementType(long T, long __result) {
         long __functionAddress = Functions.getArrayElementType;
         nclang_getArrayElementType(T, __functionAddress, __result);
     }
 
-    /**
-     * Return the element type of an array type.
-     * 
-     * <p>If a non-array type is passed in, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_getArrayElementType(CXType T)} */
     public static CXType clang_getArrayElementType(CXType T, CXType __result) {
         nclang_getArrayElementType(T.address(), __result.address());
         return __result;
@@ -6782,20 +4202,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getArraySize ] ---
 
-    /** Unsafe version of: {@link #clang_getArraySize getArraySize} */
+    /** {@code long long clang_getArraySize(CXType T)} */
     public static native long nclang_getArraySize(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getArraySize getArraySize} */
+    /** {@code long long clang_getArraySize(CXType T)} */
     public static long nclang_getArraySize(long T) {
         long __functionAddress = Functions.getArraySize;
         return nclang_getArraySize(T, __functionAddress);
     }
 
-    /**
-     * Return the array size of a constant array.
-     * 
-     * <p>If a non-array type is passed in, -1 is returned.</p>
-     */
+    /** {@code long long clang_getArraySize(CXType T)} */
     @NativeType("long long")
     public static long clang_getArraySize(CXType T) {
         return nclang_getArraySize(T.address());
@@ -6803,20 +4219,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getNamedType ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getNamedType Type_getNamedType} */
+    /** {@code CXType clang_Type_getNamedType(CXType T)} */
     public static native void nclang_Type_getNamedType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getNamedType Type_getNamedType} */
+    /** {@code CXType clang_Type_getNamedType(CXType T)} */
     public static void nclang_Type_getNamedType(long T, long __result) {
         long __functionAddress = Functions.Type_getNamedType;
         nclang_Type_getNamedType(T, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the type named by the qualified-id.
-     * 
-     * <p>If a non-elaborated type is passed in, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_Type_getNamedType(CXType T)} */
     public static CXType clang_Type_getNamedType(CXType T, CXType __result) {
         nclang_Type_getNamedType(T.address(), __result.address());
         return __result;
@@ -6824,23 +4236,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_isTransparentTagTypedef ] ---
 
-    /** Unsafe version of: {@link #clang_Type_isTransparentTagTypedef Type_isTransparentTagTypedef} */
+    /** {@code unsigned clang_Type_isTransparentTagTypedef(CXType T)} */
     public static native int nclang_Type_isTransparentTagTypedef(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_isTransparentTagTypedef Type_isTransparentTagTypedef} */
+    /** {@code unsigned clang_Type_isTransparentTagTypedef(CXType T)} */
     public static int nclang_Type_isTransparentTagTypedef(long T) {
         long __functionAddress = Functions.Type_isTransparentTagTypedef;
         return nclang_Type_isTransparentTagTypedef(T, __functionAddress);
     }
 
-    /**
-     * Determine if a typedef is 'transparent' tag.
-     * 
-     * <p>A typedef is considered 'transparent' if it shares a name and spelling location with its underlying tag type, as is the case with the {@code NS_ENUM}
-     * macro.</p>
-     *
-     * @return non-zero if transparent and zero otherwise
-     */
+    /** {@code unsigned clang_Type_isTransparentTagTypedef(CXType T)} */
     @NativeType("unsigned")
     public static boolean clang_Type_isTransparentTagTypedef(CXType T) {
         return nclang_Type_isTransparentTagTypedef(T.address()) != 0;
@@ -6848,10 +4253,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getNullability ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getNullability Type_getNullability} */
+    /** {@code enum CXTypeNullabilityKind clang_Type_getNullability(CXType T)} */
     public static native int nclang_Type_getNullability(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_getNullability Type_getNullability} */
+    /** {@code enum CXTypeNullabilityKind clang_Type_getNullability(CXType T)} */
     public static int nclang_Type_getNullability(long T) {
         long __functionAddress = Functions.Type_getNullability;
         if (CHECKS) {
@@ -6860,7 +4265,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_Type_getNullability(T, __functionAddress);
     }
 
-    /** Retrieve the nullability kind of a pointer type. */
+    /** {@code enum CXTypeNullabilityKind clang_Type_getNullability(CXType T)} */
     @NativeType("enum CXTypeNullabilityKind")
     public static int clang_Type_getNullability(CXType T) {
         return nclang_Type_getNullability(T.address());
@@ -6868,22 +4273,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getAlignOf ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getAlignOf Type_getAlignOf} */
+    /** {@code long long clang_Type_getAlignOf(CXType T)} */
     public static native long nclang_Type_getAlignOf(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_getAlignOf Type_getAlignOf} */
+    /** {@code long long clang_Type_getAlignOf(CXType T)} */
     public static long nclang_Type_getAlignOf(long T) {
         long __functionAddress = Functions.Type_getAlignOf;
         return nclang_Type_getAlignOf(T, __functionAddress);
     }
 
-    /**
-     * Return the alignment of a type in bytes as per {@code C++[expr.alignof]} standard.
-     * 
-     * <p>If the type declaration is invalid, {@link #CXTypeLayoutError_Invalid TypeLayoutError_Invalid} is returned. If the type declaration is an incomplete type, {@link #CXTypeLayoutError_Incomplete TypeLayoutError_Incomplete} is
-     * returned. If the type declaration is a dependent type, {@link #CXTypeLayoutError_Dependent TypeLayoutError_Dependent} is returned. If the type declaration is not a constant size type,
-     * {@link #CXTypeLayoutError_NotConstantSize TypeLayoutError_NotConstantSize} is returned.</p>
-     */
+    /** {@code long long clang_Type_getAlignOf(CXType T)} */
     @NativeType("long long")
     public static long clang_Type_getAlignOf(CXType T) {
         return nclang_Type_getAlignOf(T.address());
@@ -6891,20 +4290,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getClassType ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getClassType Type_getClassType} */
+    /** {@code CXType clang_Type_getClassType(CXType T)} */
     public static native void nclang_Type_getClassType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getClassType Type_getClassType} */
+    /** {@code CXType clang_Type_getClassType(CXType T)} */
     public static void nclang_Type_getClassType(long T, long __result) {
         long __functionAddress = Functions.Type_getClassType;
         nclang_Type_getClassType(T, __functionAddress, __result);
     }
 
-    /**
-     * Return the class type of an member pointer type.
-     * 
-     * <p>If a non-member-pointer type is passed in, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_Type_getClassType(CXType T)} */
     public static CXType clang_Type_getClassType(CXType T, CXType __result) {
         nclang_Type_getClassType(T.address(), __result.address());
         return __result;
@@ -6912,21 +4307,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getSizeOf ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getSizeOf Type_getSizeOf} */
+    /** {@code long long clang_Type_getSizeOf(CXType T)} */
     public static native long nclang_Type_getSizeOf(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_getSizeOf Type_getSizeOf} */
+    /** {@code long long clang_Type_getSizeOf(CXType T)} */
     public static long nclang_Type_getSizeOf(long T) {
         long __functionAddress = Functions.Type_getSizeOf;
         return nclang_Type_getSizeOf(T, __functionAddress);
     }
 
-    /**
-     * Return the size of a type in bytes as per {@code C++[expr.sizeof]} standard.
-     * 
-     * <p>If the type declaration is invalid, {@link #CXTypeLayoutError_Invalid TypeLayoutError_Invalid} is returned. If the type declaration is an incomplete type, {@link #CXTypeLayoutError_Incomplete TypeLayoutError_Incomplete} is
-     * returned. If the type declaration is a dependent type, {@link #CXTypeLayoutError_Dependent TypeLayoutError_Dependent} is returned.</p>
-     */
+    /** {@code long long clang_Type_getSizeOf(CXType T)} */
     @NativeType("long long")
     public static long clang_Type_getSizeOf(CXType T) {
         return nclang_Type_getSizeOf(T.address());
@@ -6934,23 +4324,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getOffsetOf ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getOffsetOf Type_getOffsetOf} */
+    /** {@code long long clang_Type_getOffsetOf(CXType T, char const * S)} */
     public static native long nclang_Type_getOffsetOf(long T, long S, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_getOffsetOf Type_getOffsetOf} */
+    /** {@code long long clang_Type_getOffsetOf(CXType T, char const * S)} */
     public static long nclang_Type_getOffsetOf(long T, long S) {
         long __functionAddress = Functions.Type_getOffsetOf;
         return nclang_Type_getOffsetOf(T, S, __functionAddress);
     }
 
-    /**
-     * Return the offset of a field named {@code S} in a record of type {@code T} in bits as it would be returned by {@code __offsetof__} as per
-     * {@code C++11[18.2p4]}
-     * 
-     * <p>If the cursor is not a record field declaration, {@link #CXTypeLayoutError_Invalid TypeLayoutError_Invalid} is returned. If the field's type declaration is an incomplete type,
-     * {@link #CXTypeLayoutError_Incomplete TypeLayoutError_Incomplete} is returned. If the field's type declaration is a dependent type, {@link #CXTypeLayoutError_Dependent TypeLayoutError_Dependent} is returned. If the field's
-     * name {@code S} is not found, {@link #CXTypeLayoutError_InvalidFieldName TypeLayoutError_InvalidFieldName} is returned.</p>
-     */
+    /** {@code long long clang_Type_getOffsetOf(CXType T, char const * S)} */
     @NativeType("long long")
     public static long clang_Type_getOffsetOf(CXType T, @NativeType("char const *") ByteBuffer S) {
         if (CHECKS) {
@@ -6959,14 +4342,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_Type_getOffsetOf(T.address(), memAddress(S));
     }
 
-    /**
-     * Return the offset of a field named {@code S} in a record of type {@code T} in bits as it would be returned by {@code __offsetof__} as per
-     * {@code C++11[18.2p4]}
-     * 
-     * <p>If the cursor is not a record field declaration, {@link #CXTypeLayoutError_Invalid TypeLayoutError_Invalid} is returned. If the field's type declaration is an incomplete type,
-     * {@link #CXTypeLayoutError_Incomplete TypeLayoutError_Incomplete} is returned. If the field's type declaration is a dependent type, {@link #CXTypeLayoutError_Dependent TypeLayoutError_Dependent} is returned. If the field's
-     * name {@code S} is not found, {@link #CXTypeLayoutError_InvalidFieldName TypeLayoutError_InvalidFieldName} is returned.</p>
-     */
+    /** {@code long long clang_Type_getOffsetOf(CXType T, char const * S)} */
     @NativeType("long long")
     public static long clang_Type_getOffsetOf(CXType T, @NativeType("char const *") CharSequence S) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -6981,10 +4357,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getModifiedType ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getModifiedType Type_getModifiedType} */
+    /** {@code CXType clang_Type_getModifiedType(CXType T)} */
     public static native void nclang_Type_getModifiedType(long T, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getModifiedType Type_getModifiedType} */
+    /** {@code CXType clang_Type_getModifiedType(CXType T)} */
     public static void nclang_Type_getModifiedType(long T, long __result) {
         long __functionAddress = Functions.Type_getModifiedType;
         if (CHECKS) {
@@ -6993,11 +4369,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Type_getModifiedType(T, __functionAddress, __result);
     }
 
-    /**
-     * Return the type that was modified by this attributed type.
-     * 
-     * <p>If the type is not an attributed type, an invalid type is returned.</p>
-     */
+    /** {@code CXType clang_Type_getModifiedType(CXType T)} */
     public static CXType clang_Type_getModifiedType(CXType T, CXType __result) {
         nclang_Type_getModifiedType(T.address(), __result.address());
         return __result;
@@ -7005,10 +4377,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getValueType ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getValueType Type_getValueType} */
+    /** {@code CXType clang_Type_getValueType(CXType CT)} */
     public static native void nclang_Type_getValueType(long CT, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getValueType Type_getValueType} */
+    /** {@code CXType clang_Type_getValueType(CXType CT)} */
     public static void nclang_Type_getValueType(long CT, long __result) {
         long __functionAddress = Functions.Type_getValueType;
         if (CHECKS) {
@@ -7017,13 +4389,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Type_getValueType(CT, __functionAddress, __result);
     }
 
-    /**
-     * Gets the type contained by this atomic type.
-     * 
-     * <p>If a non-atomic type is passed in, an invalid type is returned.</p>
-     *
-     * @since 11
-     */
+    /** {@code CXType clang_Type_getValueType(CXType CT)} */
     public static CXType clang_Type_getValueType(CXType CT, CXType __result) {
         nclang_Type_getValueType(CT.address(), __result.address());
         return __result;
@@ -7031,22 +4397,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getOffsetOfField ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getOffsetOfField Cursor_getOffsetOfField} */
+    /** {@code long long clang_Cursor_getOffsetOfField(CXCursor C)} */
     public static native long nclang_Cursor_getOffsetOfField(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getOffsetOfField Cursor_getOffsetOfField} */
+    /** {@code long long clang_Cursor_getOffsetOfField(CXCursor C)} */
     public static long nclang_Cursor_getOffsetOfField(long C) {
         long __functionAddress = Functions.Cursor_getOffsetOfField;
         return nclang_Cursor_getOffsetOfField(C, __functionAddress);
     }
 
-    /**
-     * Return the offset of the field represented by the Cursor.
-     * 
-     * <p>If the cursor is not a field declaration, -1 is returned. If the cursor semantic parent is not a record field declaration, {@link #CXTypeLayoutError_Invalid TypeLayoutError_Invalid} is
-     * returned. If the field's type declaration is an incomplete type, {@link #CXTypeLayoutError_Incomplete TypeLayoutError_Incomplete} is returned. If the field's type declaration is a
-     * dependent type, {@link #CXTypeLayoutError_Dependent TypeLayoutError_Dependent} is returned. If the field's name S is not found, {@link #CXTypeLayoutError_InvalidFieldName TypeLayoutError_InvalidFieldName} is returned.</p>
-     */
+    /** {@code long long clang_Cursor_getOffsetOfField(CXCursor C)} */
     @NativeType("long long")
     public static long clang_Cursor_getOffsetOfField(CXCursor C) {
         return nclang_Cursor_getOffsetOfField(C.address());
@@ -7054,16 +4414,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isAnonymous ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isAnonymous Cursor_isAnonymous} */
+    /** {@code unsigned clang_Cursor_isAnonymous(CXCursor C)} */
     public static native int nclang_Cursor_isAnonymous(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isAnonymous Cursor_isAnonymous} */
+    /** {@code unsigned clang_Cursor_isAnonymous(CXCursor C)} */
     public static int nclang_Cursor_isAnonymous(long C) {
         long __functionAddress = Functions.Cursor_isAnonymous;
         return nclang_Cursor_isAnonymous(C, __functionAddress);
     }
 
-    /** Determine whether the given cursor represents an anonymous tag or namespace. */
+    /** {@code unsigned clang_Cursor_isAnonymous(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isAnonymous(CXCursor C) {
         return nclang_Cursor_isAnonymous(C.address()) != 0;
@@ -7071,10 +4431,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isAnonymousRecordDecl ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isAnonymousRecordDecl Cursor_isAnonymousRecordDecl} */
+    /** {@code unsigned clang_Cursor_isAnonymousRecordDecl(CXCursor C)} */
     public static native int nclang_Cursor_isAnonymousRecordDecl(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isAnonymousRecordDecl Cursor_isAnonymousRecordDecl} */
+    /** {@code unsigned clang_Cursor_isAnonymousRecordDecl(CXCursor C)} */
     public static int nclang_Cursor_isAnonymousRecordDecl(long C) {
         long __functionAddress = Functions.Cursor_isAnonymousRecordDecl;
         if (CHECKS) {
@@ -7083,11 +4443,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_Cursor_isAnonymousRecordDecl(C, __functionAddress);
     }
 
-    /**
-     * Determine whether the given cursor represents an anonymous record declaration.
-     *
-     * @since 9
-     */
+    /** {@code unsigned clang_Cursor_isAnonymousRecordDecl(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isAnonymousRecordDecl(CXCursor C) {
         return nclang_Cursor_isAnonymousRecordDecl(C.address()) != 0;
@@ -7095,10 +4451,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isInlineNamespace ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isInlineNamespace Cursor_isInlineNamespace} */
+    /** {@code unsigned clang_Cursor_isInlineNamespace(CXCursor C)} */
     public static native int nclang_Cursor_isInlineNamespace(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isInlineNamespace Cursor_isInlineNamespace} */
+    /** {@code unsigned clang_Cursor_isInlineNamespace(CXCursor C)} */
     public static int nclang_Cursor_isInlineNamespace(long C) {
         long __functionAddress = Functions.Cursor_isInlineNamespace;
         if (CHECKS) {
@@ -7107,11 +4463,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_Cursor_isInlineNamespace(C, __functionAddress);
     }
 
-    /**
-     * Determine whether the given cursor represents an inline namespace declaration.
-     *
-     * @since 9
-     */
+    /** {@code unsigned clang_Cursor_isInlineNamespace(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isInlineNamespace(CXCursor C) {
         return nclang_Cursor_isInlineNamespace(C.address()) != 0;
@@ -7119,36 +4471,32 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getNumTemplateArguments ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getNumTemplateArguments Type_getNumTemplateArguments} */
+    /** {@code int clang_Type_getNumTemplateArguments(CXType T)} */
     public static native int nclang_Type_getNumTemplateArguments(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_getNumTemplateArguments Type_getNumTemplateArguments} */
+    /** {@code int clang_Type_getNumTemplateArguments(CXType T)} */
     public static int nclang_Type_getNumTemplateArguments(long T) {
         long __functionAddress = Functions.Type_getNumTemplateArguments;
         return nclang_Type_getNumTemplateArguments(T, __functionAddress);
     }
 
-    /** Returns the number of template arguments for given template specialization, or -1 if type {@code T} is not a template specialization. */
+    /** {@code int clang_Type_getNumTemplateArguments(CXType T)} */
     public static int clang_Type_getNumTemplateArguments(CXType T) {
         return nclang_Type_getNumTemplateArguments(T.address());
     }
 
     // --- [ clang_Type_getTemplateArgumentAsType ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getTemplateArgumentAsType Type_getTemplateArgumentAsType} */
+    /** {@code CXType clang_Type_getTemplateArgumentAsType(CXType T, unsigned i)} */
     public static native void nclang_Type_getTemplateArgumentAsType(long T, int i, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Type_getTemplateArgumentAsType Type_getTemplateArgumentAsType} */
+    /** {@code CXType clang_Type_getTemplateArgumentAsType(CXType T, unsigned i)} */
     public static void nclang_Type_getTemplateArgumentAsType(long T, int i, long __result) {
         long __functionAddress = Functions.Type_getTemplateArgumentAsType;
         nclang_Type_getTemplateArgumentAsType(T, i, __functionAddress, __result);
     }
 
-    /**
-     * Returns the type template argument of a template class specialization at given index.
-     * 
-     * <p>This function only returns template type arguments and does not handle template template arguments or variadic packs.</p>
-     */
+    /** {@code CXType clang_Type_getTemplateArgumentAsType(CXType T, unsigned i)} */
     public static CXType clang_Type_getTemplateArgumentAsType(CXType T, @NativeType("unsigned") int i, CXType __result) {
         nclang_Type_getTemplateArgumentAsType(T.address(), i, __result.address());
         return __result;
@@ -7156,20 +4504,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_getCXXRefQualifier ] ---
 
-    /** Unsafe version of: {@link #clang_Type_getCXXRefQualifier Type_getCXXRefQualifier} */
+    /** {@code enum CXRefQualifierKind clang_Type_getCXXRefQualifier(CXType T)} */
     public static native int nclang_Type_getCXXRefQualifier(long T, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_getCXXRefQualifier Type_getCXXRefQualifier} */
+    /** {@code enum CXRefQualifierKind clang_Type_getCXXRefQualifier(CXType T)} */
     public static int nclang_Type_getCXXRefQualifier(long T) {
         long __functionAddress = Functions.Type_getCXXRefQualifier;
         return nclang_Type_getCXXRefQualifier(T, __functionAddress);
     }
 
-    /**
-     * Retrieve the ref-qualifier kind of a function or method.
-     * 
-     * <p>The ref-qualifier is returned for C++ functions or methods. For other types or non-C++ declarations, {@link #CXRefQualifier_None RefQualifier_None} is returned.</p>
-     */
+    /** {@code enum CXRefQualifierKind clang_Type_getCXXRefQualifier(CXType T)} */
     @NativeType("enum CXRefQualifierKind")
     public static int clang_Type_getCXXRefQualifier(CXType T) {
         return nclang_Type_getCXXRefQualifier(T.address());
@@ -7177,16 +4521,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_isVirtualBase ] ---
 
-    /** Unsafe version of: {@link #clang_isVirtualBase isVirtualBase} */
+    /** {@code unsigned clang_isVirtualBase(CXCursor cursor)} */
     public static native int nclang_isVirtualBase(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_isVirtualBase isVirtualBase} */
+    /** {@code unsigned clang_isVirtualBase(CXCursor cursor)} */
     public static int nclang_isVirtualBase(long cursor) {
         long __functionAddress = Functions.isVirtualBase;
         return nclang_isVirtualBase(cursor, __functionAddress);
     }
 
-    /** Returns 1 if the base class specified by the cursor with kind {@link #CXCursor_CXXBaseSpecifier Cursor_CXXBaseSpecifier} is virtual. */
+    /** {@code unsigned clang_isVirtualBase(CXCursor cursor)} */
     @NativeType("unsigned")
     public static boolean clang_isVirtualBase(CXCursor cursor) {
         return nclang_isVirtualBase(cursor.address()) != 0;
@@ -7194,21 +4538,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCXXAccessSpecifier ] ---
 
-    /** Unsafe version of: {@link #clang_getCXXAccessSpecifier getCXXAccessSpecifier} */
+    /** {@code enum CX_CXXAccessSpecifier clang_getCXXAccessSpecifier(CXCursor cursor)} */
     public static native int nclang_getCXXAccessSpecifier(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCXXAccessSpecifier getCXXAccessSpecifier} */
+    /** {@code enum CX_CXXAccessSpecifier clang_getCXXAccessSpecifier(CXCursor cursor)} */
     public static int nclang_getCXXAccessSpecifier(long cursor) {
         long __functionAddress = Functions.getCXXAccessSpecifier;
         return nclang_getCXXAccessSpecifier(cursor, __functionAddress);
     }
 
-    /**
-     * Returns the access control level for the referenced object.
-     * 
-     * <p>If the cursor refers to a C++ declaration, its access control level within its parent scope is returned. Otherwise, if the cursor refers to a base
-     * specifier or access specifier, the specifier itself is returned.</p>
-     */
+    /** {@code enum CX_CXXAccessSpecifier clang_getCXXAccessSpecifier(CXCursor cursor)} */
     @NativeType("enum CX_CXXAccessSpecifier")
     public static int clang_getCXXAccessSpecifier(CXCursor cursor) {
         return nclang_getCXXAccessSpecifier(cursor.address());
@@ -7216,10 +4555,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getBinaryOpcode ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getBinaryOpcode Cursor_getBinaryOpcode} */
+    /** {@code enum CX_BinaryOperatorKind clang_Cursor_getBinaryOpcode(CXCursor cursor)} */
     public static native int nclang_Cursor_getBinaryOpcode(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getBinaryOpcode Cursor_getBinaryOpcode} */
+    /** {@code enum CX_BinaryOperatorKind clang_Cursor_getBinaryOpcode(CXCursor cursor)} */
     public static int nclang_Cursor_getBinaryOpcode(long cursor) {
         long __functionAddress = Functions.Cursor_getBinaryOpcode;
         if (CHECKS) {
@@ -7228,7 +4567,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_Cursor_getBinaryOpcode(cursor, __functionAddress);
     }
 
-    /** Returns the operator code for the binary operator. */
+    /** {@code enum CX_BinaryOperatorKind clang_Cursor_getBinaryOpcode(CXCursor cursor)} */
     @NativeType("enum CX_BinaryOperatorKind")
     public static int clang_Cursor_getBinaryOpcode(CXCursor cursor) {
         return nclang_Cursor_getBinaryOpcode(cursor.address());
@@ -7236,10 +4575,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getBinaryOpcodeStr ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getBinaryOpcodeStr Cursor_getBinaryOpcodeStr} */
+    /** {@code CXString clang_Cursor_getBinaryOpcodeStr(enum CX_BinaryOperatorKind Op)} */
     public static native void nclang_Cursor_getBinaryOpcodeStr(int Op, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getBinaryOpcodeStr Cursor_getBinaryOpcodeStr} */
+    /** {@code CXString clang_Cursor_getBinaryOpcodeStr(enum CX_BinaryOperatorKind Op)} */
     public static void nclang_Cursor_getBinaryOpcodeStr(int Op, long __result) {
         long __functionAddress = Functions.Cursor_getBinaryOpcodeStr;
         if (CHECKS) {
@@ -7248,7 +4587,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Cursor_getBinaryOpcodeStr(Op, __functionAddress, __result);
     }
 
-    /** Returns a string containing the spelling of the binary operator. */
+    /** {@code CXString clang_Cursor_getBinaryOpcodeStr(enum CX_BinaryOperatorKind Op)} */
     public static CXString clang_Cursor_getBinaryOpcodeStr(@NativeType("enum CX_BinaryOperatorKind") int Op, CXString __result) {
         nclang_Cursor_getBinaryOpcodeStr(Op, __result.address());
         return __result;
@@ -7256,20 +4595,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getStorageClass ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getStorageClass Cursor_getStorageClass} */
+    /** {@code enum CX_StorageClass clang_Cursor_getStorageClass(CXCursor cursor)} */
     public static native int nclang_Cursor_getStorageClass(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getStorageClass Cursor_getStorageClass} */
+    /** {@code enum CX_StorageClass clang_Cursor_getStorageClass(CXCursor cursor)} */
     public static int nclang_Cursor_getStorageClass(long cursor) {
         long __functionAddress = Functions.Cursor_getStorageClass;
         return nclang_Cursor_getStorageClass(cursor, __functionAddress);
     }
 
-    /**
-     * Returns the storage class for a function or variable declaration.
-     * 
-     * <p>If the passed in Cursor is not a function or variable declaration, {@link #CX_SC_Invalid _SC_Invalid} is returned else the storage class.</p>
-     */
+    /** {@code enum CX_StorageClass clang_Cursor_getStorageClass(CXCursor cursor)} */
     @NativeType("enum CX_StorageClass")
     public static int clang_Cursor_getStorageClass(CXCursor cursor) {
         return nclang_Cursor_getStorageClass(cursor.address());
@@ -7277,22 +4612,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getNumOverloadedDecls ] ---
 
-    /** Unsafe version of: {@link #clang_getNumOverloadedDecls getNumOverloadedDecls} */
+    /** {@code unsigned clang_getNumOverloadedDecls(CXCursor cursor)} */
     public static native int nclang_getNumOverloadedDecls(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getNumOverloadedDecls getNumOverloadedDecls} */
+    /** {@code unsigned clang_getNumOverloadedDecls(CXCursor cursor)} */
     public static int nclang_getNumOverloadedDecls(long cursor) {
         long __functionAddress = Functions.getNumOverloadedDecls;
         return nclang_getNumOverloadedDecls(cursor, __functionAddress);
     }
 
-    /**
-     * Determine the number of overloaded declarations referenced by a {@link #CXCursor_OverloadedDeclRef Cursor_OverloadedDeclRef} cursor.
-     *
-     * @param cursor the cursor whose overloaded declarations are being queried
-     *
-     * @return the number of overloaded declarations referenced by {@code cursor}. If it is not a {@code CXCursor_OverloadedDeclRef} cursor, returns 0.
-     */
+    /** {@code unsigned clang_getNumOverloadedDecls(CXCursor cursor)} */
     @NativeType("unsigned")
     public static int clang_getNumOverloadedDecls(CXCursor cursor) {
         return nclang_getNumOverloadedDecls(cursor.address());
@@ -7300,23 +4629,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getOverloadedDecl ] ---
 
-    /** Unsafe version of: {@link #clang_getOverloadedDecl getOverloadedDecl} */
+    /** {@code CXCursor clang_getOverloadedDecl(CXCursor cursor, unsigned index)} */
     public static native void nclang_getOverloadedDecl(long cursor, int index, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getOverloadedDecl getOverloadedDecl} */
+    /** {@code CXCursor clang_getOverloadedDecl(CXCursor cursor, unsigned index)} */
     public static void nclang_getOverloadedDecl(long cursor, int index, long __result) {
         long __functionAddress = Functions.getOverloadedDecl;
         nclang_getOverloadedDecl(cursor, index, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve a cursor for one of the overloaded declarations referenced by a {@link #CXCursor_OverloadedDeclRef Cursor_OverloadedDeclRef} cursor.
-     *
-     * @param cursor   the cursor whose overloaded declarations are being queried
-     * @param index    the zero-based index into the set of overloaded declarations in the cursor
-     * @param __result a cursor representing the declaration referenced by the given {@code cursor} at the specified {@code index}. If the cursor does not have an associated
-     *                 set of overloaded declarations, or if the index is out of bounds, returns {@link #clang_getNullCursor getNullCursor};
-     */
+    /** {@code CXCursor clang_getOverloadedDecl(CXCursor cursor, unsigned index)} */
     public static CXCursor clang_getOverloadedDecl(CXCursor cursor, @NativeType("unsigned") int index, CXCursor __result) {
         nclang_getOverloadedDecl(cursor.address(), index, __result.address());
         return __result;
@@ -7324,16 +4646,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getIBOutletCollectionType ] ---
 
-    /** Unsafe version of: {@link #clang_getIBOutletCollectionType getIBOutletCollectionType} */
+    /** {@code CXType clang_getIBOutletCollectionType(CXCursor cursor)} */
     public static native void nclang_getIBOutletCollectionType(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getIBOutletCollectionType getIBOutletCollectionType} */
+    /** {@code CXType clang_getIBOutletCollectionType(CXCursor cursor)} */
     public static void nclang_getIBOutletCollectionType(long cursor, long __result) {
         long __functionAddress = Functions.getIBOutletCollectionType;
         nclang_getIBOutletCollectionType(cursor, __functionAddress, __result);
     }
 
-    /** For cursors representing an {@code iboutletcollection} attribute, this function returns the collection element type. */
+    /** {@code CXType clang_getIBOutletCollectionType(CXCursor cursor)} */
     public static CXType clang_getIBOutletCollectionType(CXCursor cursor, CXType __result) {
         nclang_getIBOutletCollectionType(cursor.address(), __result.address());
         return __result;
@@ -7341,28 +4663,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_visitChildren ] ---
 
-    /** Unsafe version of: {@link #clang_visitChildren visitChildren} */
+    /** {@code unsigned clang_visitChildren(CXCursor parent, enum CXChildVisitResult (*) (CXCursor, CXCursor, CXClientData) visitor, CXClientData client_data)} */
     public static native int nclang_visitChildren(long parent, long visitor, long client_data, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_visitChildren visitChildren} */
+    /** {@code unsigned clang_visitChildren(CXCursor parent, enum CXChildVisitResult (*) (CXCursor, CXCursor, CXClientData) visitor, CXClientData client_data)} */
     public static int nclang_visitChildren(long parent, long visitor, long client_data) {
         long __functionAddress = Functions.visitChildren;
         return nclang_visitChildren(parent, visitor, client_data, __functionAddress);
     }
 
-    /**
-     * Visit the children of a particular cursor.
-     * 
-     * <p>This function visits all the direct children of the given cursor, invoking the given {@code visitor} function with the cursors of each visited child.
-     * The traversal may be recursive, if the visitor returns {@link #CXChildVisit_Recurse ChildVisit_Recurse}. The traversal may also be ended prematurely, if the visitor returns
-     * {@link #CXChildVisit_Break ChildVisit_Break}.</p>
-     *
-     * @param parent      the cursor whose child may be visited. All kinds of cursors can be visited, including invalid cursors (which, by definition, have no children).
-     * @param visitor     the visitor function that will be invoked for each child of {@code parent}
-     * @param client_data pointer data supplied by the client, which will be passed to the visitor each time it is invoked
-     *
-     * @return a non-zero value if the traversal was terminated prematurely by the visitor returning {@link #CXChildVisit_Break ChildVisit_Break}
-     */
+    /** {@code unsigned clang_visitChildren(CXCursor parent, enum CXChildVisitResult (*) (CXCursor, CXCursor, CXClientData) visitor, CXClientData client_data)} */
     @NativeType("unsigned")
     public static boolean clang_visitChildren(CXCursor parent, @NativeType("enum CXChildVisitResult (*) (CXCursor, CXCursor, CXClientData)") CXCursorVisitorI visitor, @NativeType("CXClientData") long client_data) {
         return nclang_visitChildren(parent.address(), visitor.address(), client_data) != 0;
@@ -7370,21 +4680,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorUSR ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorUSR getCursorUSR} */
+    /** {@code CXString clang_getCursorUSR(CXCursor cursor)} */
     public static native void nclang_getCursorUSR(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorUSR getCursorUSR} */
+    /** {@code CXString clang_getCursorUSR(CXCursor cursor)} */
     public static void nclang_getCursorUSR(long cursor, long __result) {
         long __functionAddress = Functions.getCursorUSR;
         nclang_getCursorUSR(cursor, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve a Unified Symbol Resolution (USR) for the entity referenced by the given cursor.
-     * 
-     * <p>A Unified Symbol Resolution (USR) is a string that identifies a particular entity (function, class, variable, etc.) within a program. USRs can be
-     * compared across translation units to determine, e.g., when references in one translation refer to an entity defined in another translation unit.</p>
-     */
+    /** {@code CXString clang_getCursorUSR(CXCursor cursor)} */
     public static CXString clang_getCursorUSR(CXCursor cursor, CXString __result) {
         nclang_getCursorUSR(cursor.address(), __result.address());
         return __result;
@@ -7392,16 +4697,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_constructUSR_ObjCClass ] ---
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCClass constructUSR_ObjCClass} */
+    /** {@code CXString clang_constructUSR_ObjCClass(char const * class_name)} */
     public static native void nclang_constructUSR_ObjCClass(long class_name, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCClass constructUSR_ObjCClass} */
+    /** {@code CXString clang_constructUSR_ObjCClass(char const * class_name)} */
     public static void nclang_constructUSR_ObjCClass(long class_name, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCClass;
         nclang_constructUSR_ObjCClass(class_name, __functionAddress, __result);
     }
 
-    /** Construct a USR for a specified Objective-C class. */
+    /** {@code CXString clang_constructUSR_ObjCClass(char const * class_name)} */
     public static CXString clang_constructUSR_ObjCClass(@NativeType("char const *") ByteBuffer class_name, CXString __result) {
         if (CHECKS) {
             checkNT1(class_name);
@@ -7410,7 +4715,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return __result;
     }
 
-    /** Construct a USR for a specified Objective-C class. */
+    /** {@code CXString clang_constructUSR_ObjCClass(char const * class_name)} */
     public static CXString clang_constructUSR_ObjCClass(@NativeType("char const *") CharSequence class_name, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7425,16 +4730,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_constructUSR_ObjCCategory ] ---
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCCategory constructUSR_ObjCCategory} */
+    /** {@code CXString clang_constructUSR_ObjCCategory(char const * class_name, char const * category_name)} */
     public static native void nclang_constructUSR_ObjCCategory(long class_name, long category_name, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCCategory constructUSR_ObjCCategory} */
+    /** {@code CXString clang_constructUSR_ObjCCategory(char const * class_name, char const * category_name)} */
     public static void nclang_constructUSR_ObjCCategory(long class_name, long category_name, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCCategory;
         nclang_constructUSR_ObjCCategory(class_name, category_name, __functionAddress, __result);
     }
 
-    /** Construct a USR for a specified Objective-C category. */
+    /** {@code CXString clang_constructUSR_ObjCCategory(char const * class_name, char const * category_name)} */
     public static CXString clang_constructUSR_ObjCCategory(@NativeType("char const *") ByteBuffer class_name, @NativeType("char const *") ByteBuffer category_name, CXString __result) {
         if (CHECKS) {
             checkNT1(class_name);
@@ -7444,7 +4749,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return __result;
     }
 
-    /** Construct a USR for a specified Objective-C category. */
+    /** {@code CXString clang_constructUSR_ObjCCategory(char const * class_name, char const * category_name)} */
     public static CXString clang_constructUSR_ObjCCategory(@NativeType("char const *") CharSequence class_name, @NativeType("char const *") CharSequence category_name, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7461,16 +4766,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_constructUSR_ObjCProtocol ] ---
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCProtocol constructUSR_ObjCProtocol} */
+    /** {@code CXString clang_constructUSR_ObjCProtocol(char const * protocol_name)} */
     public static native void nclang_constructUSR_ObjCProtocol(long protocol_name, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCProtocol constructUSR_ObjCProtocol} */
+    /** {@code CXString clang_constructUSR_ObjCProtocol(char const * protocol_name)} */
     public static void nclang_constructUSR_ObjCProtocol(long protocol_name, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCProtocol;
         nclang_constructUSR_ObjCProtocol(protocol_name, __functionAddress, __result);
     }
 
-    /** Construct a USR for a specified Objective-C protocol. */
+    /** {@code CXString clang_constructUSR_ObjCProtocol(char const * protocol_name)} */
     public static CXString clang_constructUSR_ObjCProtocol(@NativeType("char const *") ByteBuffer protocol_name, CXString __result) {
         if (CHECKS) {
             checkNT1(protocol_name);
@@ -7479,7 +4784,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return __result;
     }
 
-    /** Construct a USR for a specified Objective-C protocol. */
+    /** {@code CXString clang_constructUSR_ObjCProtocol(char const * protocol_name)} */
     public static CXString clang_constructUSR_ObjCProtocol(@NativeType("char const *") CharSequence protocol_name, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7494,16 +4799,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_constructUSR_ObjCIvar ] ---
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCIvar constructUSR_ObjCIvar} */
+    /** {@code CXString clang_constructUSR_ObjCIvar(char const * name, CXString classUSR)} */
     public static native void nclang_constructUSR_ObjCIvar(long name, long classUSR, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCIvar constructUSR_ObjCIvar} */
+    /** {@code CXString clang_constructUSR_ObjCIvar(char const * name, CXString classUSR)} */
     public static void nclang_constructUSR_ObjCIvar(long name, long classUSR, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCIvar;
         nclang_constructUSR_ObjCIvar(name, classUSR, __functionAddress, __result);
     }
 
-    /** Construct a USR for a specified Objective-C instance variable and the USR for its containing class. */
+    /** {@code CXString clang_constructUSR_ObjCIvar(char const * name, CXString classUSR)} */
     public static CXString clang_constructUSR_ObjCIvar(@NativeType("char const *") ByteBuffer name, CXString classUSR, CXString __result) {
         if (CHECKS) {
             checkNT1(name);
@@ -7512,7 +4817,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return __result;
     }
 
-    /** Construct a USR for a specified Objective-C instance variable and the USR for its containing class. */
+    /** {@code CXString clang_constructUSR_ObjCIvar(char const * name, CXString classUSR)} */
     public static CXString clang_constructUSR_ObjCIvar(@NativeType("char const *") CharSequence name, CXString classUSR, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7527,16 +4832,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_constructUSR_ObjCMethod ] ---
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCMethod constructUSR_ObjCMethod} */
+    /** {@code CXString clang_constructUSR_ObjCMethod(char const * name, unsigned isInstanceMethod, CXString classUSR)} */
     public static native void nclang_constructUSR_ObjCMethod(long name, int isInstanceMethod, long classUSR, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCMethod constructUSR_ObjCMethod} */
+    /** {@code CXString clang_constructUSR_ObjCMethod(char const * name, unsigned isInstanceMethod, CXString classUSR)} */
     public static void nclang_constructUSR_ObjCMethod(long name, int isInstanceMethod, long classUSR, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCMethod;
         nclang_constructUSR_ObjCMethod(name, isInstanceMethod, classUSR, __functionAddress, __result);
     }
 
-    /** Construct a USR for a specified Objective-C method and the USR for its containing class. */
+    /** {@code CXString clang_constructUSR_ObjCMethod(char const * name, unsigned isInstanceMethod, CXString classUSR)} */
     public static CXString clang_constructUSR_ObjCMethod(@NativeType("char const *") ByteBuffer name, @NativeType("unsigned") boolean isInstanceMethod, CXString classUSR, CXString __result) {
         if (CHECKS) {
             checkNT1(name);
@@ -7545,7 +4850,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return __result;
     }
 
-    /** Construct a USR for a specified Objective-C method and the USR for its containing class. */
+    /** {@code CXString clang_constructUSR_ObjCMethod(char const * name, unsigned isInstanceMethod, CXString classUSR)} */
     public static CXString clang_constructUSR_ObjCMethod(@NativeType("char const *") CharSequence name, @NativeType("unsigned") boolean isInstanceMethod, CXString classUSR, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7560,16 +4865,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_constructUSR_ObjCProperty ] ---
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCProperty constructUSR_ObjCProperty} */
+    /** {@code CXString clang_constructUSR_ObjCProperty(char const * property, CXString classUSR)} */
     public static native void nclang_constructUSR_ObjCProperty(long property, long classUSR, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_constructUSR_ObjCProperty constructUSR_ObjCProperty} */
+    /** {@code CXString clang_constructUSR_ObjCProperty(char const * property, CXString classUSR)} */
     public static void nclang_constructUSR_ObjCProperty(long property, long classUSR, long __result) {
         long __functionAddress = Functions.constructUSR_ObjCProperty;
         nclang_constructUSR_ObjCProperty(property, classUSR, __functionAddress, __result);
     }
 
-    /** Construct a USR for a specified Objective-C property and the USR for its containing class. */
+    /** {@code CXString clang_constructUSR_ObjCProperty(char const * property, CXString classUSR)} */
     public static CXString clang_constructUSR_ObjCProperty(@NativeType("char const *") ByteBuffer property, CXString classUSR, CXString __result) {
         if (CHECKS) {
             checkNT1(property);
@@ -7578,7 +4883,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return __result;
     }
 
-    /** Construct a USR for a specified Objective-C property and the USR for its containing class. */
+    /** {@code CXString clang_constructUSR_ObjCProperty(char const * property, CXString classUSR)} */
     public static CXString clang_constructUSR_ObjCProperty(@NativeType("char const *") CharSequence property, CXString classUSR, CXString __result) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -7593,16 +4898,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorSpelling ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorSpelling getCursorSpelling} */
+    /** {@code CXString clang_getCursorSpelling(CXCursor cursor)} */
     public static native void nclang_getCursorSpelling(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorSpelling getCursorSpelling} */
+    /** {@code CXString clang_getCursorSpelling(CXCursor cursor)} */
     public static void nclang_getCursorSpelling(long cursor, long __result) {
         long __functionAddress = Functions.getCursorSpelling;
         nclang_getCursorSpelling(cursor, __functionAddress, __result);
     }
 
-    /** Retrieve a name for the entity referenced by this cursor. */
+    /** {@code CXString clang_getCursorSpelling(CXCursor cursor)} */
     public static CXString clang_getCursorSpelling(CXCursor cursor, CXString __result) {
         nclang_getCursorSpelling(cursor.address(), __result.address());
         return __result;
@@ -7610,22 +4915,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getSpellingNameRange ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getSpellingNameRange Cursor_getSpellingNameRange} */
+    /** {@code CXSourceRange clang_Cursor_getSpellingNameRange(CXCursor cursor, unsigned pieceIndex, unsigned options)} */
     public static native void nclang_Cursor_getSpellingNameRange(long cursor, int pieceIndex, int options, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getSpellingNameRange Cursor_getSpellingNameRange} */
+    /** {@code CXSourceRange clang_Cursor_getSpellingNameRange(CXCursor cursor, unsigned pieceIndex, unsigned options)} */
     public static void nclang_Cursor_getSpellingNameRange(long cursor, int pieceIndex, int options, long __result) {
         long __functionAddress = Functions.Cursor_getSpellingNameRange;
         nclang_Cursor_getSpellingNameRange(cursor, pieceIndex, options, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve a range for a piece that forms the cursors spelling name. Most of the times there is only one range for the complete spelling but for
-     * Objective-C methods and Objective-C message expressions, there are multiple pieces for each selector identifier.
-     *
-     * @param pieceIndex the index of the spelling name piece. If this is greater than the actual number of pieces, it will return a {@code NULL} (invalid) range.
-     * @param options    reserved
-     */
+    /** {@code CXSourceRange clang_Cursor_getSpellingNameRange(CXCursor cursor, unsigned pieceIndex, unsigned options)} */
     public static CXSourceRange clang_Cursor_getSpellingNameRange(CXCursor cursor, @NativeType("unsigned") int pieceIndex, @NativeType("unsigned") int options, CXSourceRange __result) {
         nclang_Cursor_getSpellingNameRange(cursor.address(), pieceIndex, options, __result.address());
         return __result;
@@ -7633,7 +4932,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_PrintingPolicy_getProperty ] ---
 
-    /** Get a property value for the given printing policy. */
+    /** {@code unsigned clang_PrintingPolicy_getProperty(CXPrintingPolicy Policy, enum CXPrintingPolicyProperty Property)} */
     @NativeType("unsigned")
     public static int clang_PrintingPolicy_getProperty(@NativeType("CXPrintingPolicy") long Policy, @NativeType("enum CXPrintingPolicyProperty") int Property) {
         long __functionAddress = Functions.PrintingPolicy_getProperty;
@@ -7646,7 +4945,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_PrintingPolicy_setProperty ] ---
 
-    /** Set a property value for the given printing policy. */
+    /** {@code void clang_PrintingPolicy_setProperty(CXPrintingPolicy Policy, enum CXPrintingPolicyProperty Property, unsigned Value)} */
     public static void clang_PrintingPolicy_setProperty(@NativeType("CXPrintingPolicy") long Policy, @NativeType("enum CXPrintingPolicyProperty") int Property, @NativeType("unsigned") int Value) {
         long __functionAddress = Functions.PrintingPolicy_setProperty;
         if (CHECKS) {
@@ -7658,10 +4957,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorPrintingPolicy ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorPrintingPolicy getCursorPrintingPolicy} */
+    /** {@code CXPrintingPolicy clang_getCursorPrintingPolicy(CXCursor cursor)} */
     public static native long nclang_getCursorPrintingPolicy(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorPrintingPolicy getCursorPrintingPolicy} */
+    /** {@code CXPrintingPolicy clang_getCursorPrintingPolicy(CXCursor cursor)} */
     public static long nclang_getCursorPrintingPolicy(long cursor) {
         long __functionAddress = Functions.getCursorPrintingPolicy;
         if (CHECKS) {
@@ -7670,11 +4969,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_getCursorPrintingPolicy(cursor, __functionAddress);
     }
 
-    /**
-     * Retrieve the default policy for the cursor.
-     * 
-     * <p>The policy should be released after use with {@code clang_PrintingPolicy_dispose}.</p>
-     */
+    /** {@code CXPrintingPolicy clang_getCursorPrintingPolicy(CXCursor cursor)} */
     @NativeType("CXPrintingPolicy")
     public static long clang_getCursorPrintingPolicy(CXCursor cursor) {
         return nclang_getCursorPrintingPolicy(cursor.address());
@@ -7682,7 +4977,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_PrintingPolicy_dispose ] ---
 
-    /** Release a printing policy. */
+    /** {@code void clang_PrintingPolicy_dispose(CXPrintingPolicy Policy)} */
     public static void clang_PrintingPolicy_dispose(@NativeType("CXPrintingPolicy") long Policy) {
         long __functionAddress = Functions.PrintingPolicy_dispose;
         if (CHECKS) {
@@ -7694,10 +4989,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorPrettyPrinted ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorPrettyPrinted getCursorPrettyPrinted} */
+    /** {@code CXString clang_getCursorPrettyPrinted(CXCursor Cursor, CXPrintingPolicy Policy)} */
     public static native void nclang_getCursorPrettyPrinted(long Cursor, long Policy, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorPrettyPrinted getCursorPrettyPrinted} */
+    /** {@code CXString clang_getCursorPrettyPrinted(CXCursor Cursor, CXPrintingPolicy Policy)} */
     public static void nclang_getCursorPrettyPrinted(long Cursor, long Policy, long __result) {
         long __functionAddress = Functions.getCursorPrettyPrinted;
         if (CHECKS) {
@@ -7707,13 +5002,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getCursorPrettyPrinted(Cursor, Policy, __functionAddress, __result);
     }
 
-    /**
-     * Pretty print declarations.
-     *
-     * @param Cursor   the cursor representing a declaration
-     * @param Policy   the policy to control the entities being printed. If {@code NULL}, a default policy is used.
-     * @param __result the pretty printed declaration or the empty string for other cursors
-     */
+    /** {@code CXString clang_getCursorPrettyPrinted(CXCursor Cursor, CXPrintingPolicy Policy)} */
     public static CXString clang_getCursorPrettyPrinted(CXCursor Cursor, @NativeType("CXPrintingPolicy") long Policy, CXString __result) {
         nclang_getCursorPrettyPrinted(Cursor.address(), Policy, __result.address());
         return __result;
@@ -7721,21 +5010,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorDisplayName ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorDisplayName getCursorDisplayName} */
+    /** {@code CXString clang_getCursorDisplayName(CXCursor cursor)} */
     public static native void nclang_getCursorDisplayName(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorDisplayName getCursorDisplayName} */
+    /** {@code CXString clang_getCursorDisplayName(CXCursor cursor)} */
     public static void nclang_getCursorDisplayName(long cursor, long __result) {
         long __functionAddress = Functions.getCursorDisplayName;
         nclang_getCursorDisplayName(cursor, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the display name for the entity referenced by this cursor.
-     * 
-     * <p>The display name contains extra information that helps identify the cursor, such as the parameters of a function or template or the arguments of a
-     * class template specialization.</p>
-     */
+    /** {@code CXString clang_getCursorDisplayName(CXCursor cursor)} */
     public static CXString clang_getCursorDisplayName(CXCursor cursor, CXString __result) {
         nclang_getCursorDisplayName(cursor.address(), __result.address());
         return __result;
@@ -7743,22 +5027,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorReferenced ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorReferenced getCursorReferenced} */
+    /** {@code CXCursor clang_getCursorReferenced(CXCursor cursor)} */
     public static native void nclang_getCursorReferenced(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorReferenced getCursorReferenced} */
+    /** {@code CXCursor clang_getCursorReferenced(CXCursor cursor)} */
     public static void nclang_getCursorReferenced(long cursor, long __result) {
         long __functionAddress = Functions.getCursorReferenced;
         nclang_getCursorReferenced(cursor, __functionAddress, __result);
     }
 
-    /**
-     * For a cursor that is a reference, retrieve a cursor representing the entity that it references.
-     * 
-     * <p>Reference cursors refer to other entities in the AST. For example, an Objective-C superclass reference cursor refers to an Objective-C class. This
-     * function produces the cursor for the Objective-C class from the cursor for the superclass reference. If the input cursor is a declaration or
-     * definition, it returns that declaration or definition unchanged. Otherwise, returns the {@code NULL} cursor.</p>
-     */
+    /** {@code CXCursor clang_getCursorReferenced(CXCursor cursor)} */
     public static CXCursor clang_getCursorReferenced(CXCursor cursor, CXCursor __result) {
         nclang_getCursorReferenced(cursor.address(), __result.address());
         return __result;
@@ -7766,34 +5044,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorDefinition ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorDefinition getCursorDefinition} */
+    /** {@code CXCursor clang_getCursorDefinition(CXCursor cursor)} */
     public static native void nclang_getCursorDefinition(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorDefinition getCursorDefinition} */
+    /** {@code CXCursor clang_getCursorDefinition(CXCursor cursor)} */
     public static void nclang_getCursorDefinition(long cursor, long __result) {
         long __functionAddress = Functions.getCursorDefinition;
         nclang_getCursorDefinition(cursor, __functionAddress, __result);
     }
 
-    /**
-     * For a cursor that is either a reference to or a declaration of some entity, retrieve a cursor that describes the definition of that entity.
-     * 
-     * <p>Some entities can be declared multiple times within a translation unit, but only one of those declarations can also be a definition. For example,
-     * given:</p>
-     * 
-     * <pre><code>
-     *   int f(int, int);
-     *   int g(int x, int y) { return f(x, y); }
-     *   int f(int a, int b) { return a + b; }
-     *   int f(int, int);</code></pre>
-     * 
-     * <p>there are three declarations of the function "f", but only the second one is a definition. The {@code clang_getCursorDefinition()} function will take
-     * any cursor pointing to a declaration of "f" (the first or fourth lines of the example) or a cursor referenced that uses "f" (the call to "f' inside
-     * "g") and will return a declaration cursor pointing to the definition (the second "f" declaration).</p>
-     * 
-     * <p>If given a cursor for which there is no corresponding definition, e.g., because there is no definition of that entity within this translation unit,
-     * returns a {@code NULL} cursor.</p>
-     */
+    /** {@code CXCursor clang_getCursorDefinition(CXCursor cursor)} */
     public static CXCursor clang_getCursorDefinition(CXCursor cursor, CXCursor __result) {
         nclang_getCursorDefinition(cursor.address(), __result.address());
         return __result;
@@ -7801,16 +5061,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_isCursorDefinition ] ---
 
-    /** Unsafe version of: {@link #clang_isCursorDefinition isCursorDefinition} */
+    /** {@code unsigned clang_isCursorDefinition(CXCursor cursor)} */
     public static native int nclang_isCursorDefinition(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_isCursorDefinition isCursorDefinition} */
+    /** {@code unsigned clang_isCursorDefinition(CXCursor cursor)} */
     public static int nclang_isCursorDefinition(long cursor) {
         long __functionAddress = Functions.isCursorDefinition;
         return nclang_isCursorDefinition(cursor, __functionAddress);
     }
 
-    /** Determine whether the declaration pointed to by this cursor is also a definition of that entity. */
+    /** {@code unsigned clang_isCursorDefinition(CXCursor cursor)} */
     @NativeType("unsigned")
     public static boolean clang_isCursorDefinition(CXCursor cursor) {
         return nclang_isCursorDefinition(cursor.address()) != 0;
@@ -7818,34 +5078,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCanonicalCursor ] ---
 
-    /** Unsafe version of: {@link #clang_getCanonicalCursor getCanonicalCursor} */
+    /** {@code CXCursor clang_getCanonicalCursor(CXCursor cursor)} */
     public static native void nclang_getCanonicalCursor(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCanonicalCursor getCanonicalCursor} */
+    /** {@code CXCursor clang_getCanonicalCursor(CXCursor cursor)} */
     public static void nclang_getCanonicalCursor(long cursor, long __result) {
         long __functionAddress = Functions.getCanonicalCursor;
         nclang_getCanonicalCursor(cursor, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the canonical cursor corresponding to the given cursor.
-     * 
-     * <p>In the C family of languages, many kinds of entities can be declared several times within a single translation unit. For example, a structure type can
-     * be forward-declared (possibly multiple times) and later defined:</p>
-     * 
-     * <pre><code>
-     *  struct X;
-     *  struct X;
-     *  struct X {
-     *    int member;
-     *  };</code></pre>
-     * 
-     * <p>The declarations and the definition of {@code X} are represented by three different cursors, all of which are declarations of the same underlying
-     * entity. One of these cursor is considered the "canonical" cursor, which is effectively the representative for the underlying entity. One can determine
-     * if two cursors are declarations of the same underlying entity by comparing their canonical cursors.</p>
-     *
-     * @param __result the canonical cursor for the entity referred to by the given cursor
-     */
+    /** {@code CXCursor clang_getCanonicalCursor(CXCursor cursor)} */
     public static CXCursor clang_getCanonicalCursor(CXCursor cursor, CXCursor __result) {
         nclang_getCanonicalCursor(cursor.address(), __result.address());
         return __result;
@@ -7853,44 +5095,32 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getObjCSelectorIndex ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCSelectorIndex Cursor_getObjCSelectorIndex} */
+    /** {@code int clang_Cursor_getObjCSelectorIndex(CXCursor cursor)} */
     public static native int nclang_Cursor_getObjCSelectorIndex(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCSelectorIndex Cursor_getObjCSelectorIndex} */
+    /** {@code int clang_Cursor_getObjCSelectorIndex(CXCursor cursor)} */
     public static int nclang_Cursor_getObjCSelectorIndex(long cursor) {
         long __functionAddress = Functions.Cursor_getObjCSelectorIndex;
         return nclang_Cursor_getObjCSelectorIndex(cursor, __functionAddress);
     }
 
-    /**
-     * If the cursor points to a selector identifier in an Objective-C method or message expression, this returns the selector index.
-     * 
-     * <p>After getting a cursor with {@link #clang_getCursor getCursor}, this can be called to determine if the location points to a selector identifier.</p>
-     *
-     * @return the selector index if the cursor is an Objective-C method or message expression and the cursor is pointing to a selector identifier, or -1 otherwise
-     */
+    /** {@code int clang_Cursor_getObjCSelectorIndex(CXCursor cursor)} */
     public static int clang_Cursor_getObjCSelectorIndex(CXCursor cursor) {
         return nclang_Cursor_getObjCSelectorIndex(cursor.address());
     }
 
     // --- [ clang_Cursor_isDynamicCall ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isDynamicCall Cursor_isDynamicCall} */
+    /** {@code int clang_Cursor_isDynamicCall(CXCursor C)} */
     public static native int nclang_Cursor_isDynamicCall(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isDynamicCall Cursor_isDynamicCall} */
+    /** {@code int clang_Cursor_isDynamicCall(CXCursor C)} */
     public static int nclang_Cursor_isDynamicCall(long C) {
         long __functionAddress = Functions.Cursor_isDynamicCall;
         return nclang_Cursor_isDynamicCall(C, __functionAddress);
     }
 
-    /**
-     * Given a cursor pointing to a C++ method call or an Objective-C message, returns non-zero if the method/message is "dynamic", meaning:
-     * 
-     * <p>For a C++ method: the call is virtual. For an Objective-C message: the receiver is an object instance, not 'super' or a specific class.</p>
-     * 
-     * <p>If the method/message is "static" or the cursor does not point to a method/message, it will return zero.</p>
-     */
+    /** {@code int clang_Cursor_isDynamicCall(CXCursor C)} */
     @NativeType("int")
     public static boolean clang_Cursor_isDynamicCall(CXCursor C) {
         return nclang_Cursor_isDynamicCall(C.address()) != 0;
@@ -7898,16 +5128,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getReceiverType ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getReceiverType Cursor_getReceiverType} */
+    /** {@code CXType clang_Cursor_getReceiverType(CXCursor C)} */
     public static native void nclang_Cursor_getReceiverType(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getReceiverType Cursor_getReceiverType} */
+    /** {@code CXType clang_Cursor_getReceiverType(CXCursor C)} */
     public static void nclang_Cursor_getReceiverType(long C, long __result) {
         long __functionAddress = Functions.Cursor_getReceiverType;
         nclang_Cursor_getReceiverType(C, __functionAddress, __result);
     }
 
-    /** Given a cursor pointing to an Objective-C message or property reference, or C++ method call, returns the {@code CXType} of the receiver. */
+    /** {@code CXType clang_Cursor_getReceiverType(CXCursor C)} */
     public static CXType clang_Cursor_getReceiverType(CXCursor C, CXType __result) {
         nclang_Cursor_getReceiverType(C.address(), __result.address());
         return __result;
@@ -7915,21 +5145,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getObjCPropertyAttributes ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCPropertyAttributes Cursor_getObjCPropertyAttributes} */
+    /** {@code unsigned clang_Cursor_getObjCPropertyAttributes(CXCursor C, unsigned reserved)} */
     public static native int nclang_Cursor_getObjCPropertyAttributes(long C, int reserved, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCPropertyAttributes Cursor_getObjCPropertyAttributes} */
+    /** {@code unsigned clang_Cursor_getObjCPropertyAttributes(CXCursor C, unsigned reserved)} */
     public static int nclang_Cursor_getObjCPropertyAttributes(long C, int reserved) {
         long __functionAddress = Functions.Cursor_getObjCPropertyAttributes;
         return nclang_Cursor_getObjCPropertyAttributes(C, reserved, __functionAddress);
     }
 
-    /**
-     * Given a cursor that represents a property declaration, return the associated property attributes. The bits are formed from {@code
-     * CXObjCPropertyAttrKind}.
-     *
-     * @param reserved reserved for future use, pass 0
-     */
+    /** {@code unsigned clang_Cursor_getObjCPropertyAttributes(CXCursor C, unsigned reserved)} */
     @NativeType("unsigned")
     public static int clang_Cursor_getObjCPropertyAttributes(CXCursor C, @NativeType("unsigned") int reserved) {
         return nclang_Cursor_getObjCPropertyAttributes(C.address(), reserved);
@@ -7937,10 +5162,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getObjCPropertyGetterName ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCPropertyGetterName Cursor_getObjCPropertyGetterName} */
+    /** {@code CXString clang_Cursor_getObjCPropertyGetterName(CXCursor C)} */
     public static native void nclang_Cursor_getObjCPropertyGetterName(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCPropertyGetterName Cursor_getObjCPropertyGetterName} */
+    /** {@code CXString clang_Cursor_getObjCPropertyGetterName(CXCursor C)} */
     public static void nclang_Cursor_getObjCPropertyGetterName(long C, long __result) {
         long __functionAddress = Functions.Cursor_getObjCPropertyGetterName;
         if (CHECKS) {
@@ -7949,7 +5174,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Cursor_getObjCPropertyGetterName(C, __functionAddress, __result);
     }
 
-    /** Given a cursor that represents a property declaration, return the name of the method that implements the getter. */
+    /** {@code CXString clang_Cursor_getObjCPropertyGetterName(CXCursor C)} */
     public static CXString clang_Cursor_getObjCPropertyGetterName(CXCursor C, CXString __result) {
         nclang_Cursor_getObjCPropertyGetterName(C.address(), __result.address());
         return __result;
@@ -7957,10 +5182,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getObjCPropertySetterName ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCPropertySetterName Cursor_getObjCPropertySetterName} */
+    /** {@code CXString clang_Cursor_getObjCPropertySetterName(CXCursor C)} */
     public static native void nclang_Cursor_getObjCPropertySetterName(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCPropertySetterName Cursor_getObjCPropertySetterName} */
+    /** {@code CXString clang_Cursor_getObjCPropertySetterName(CXCursor C)} */
     public static void nclang_Cursor_getObjCPropertySetterName(long C, long __result) {
         long __functionAddress = Functions.Cursor_getObjCPropertySetterName;
         if (CHECKS) {
@@ -7969,7 +5194,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Cursor_getObjCPropertySetterName(C, __functionAddress, __result);
     }
 
-    /** Given a cursor that represents a property declaration, return the name of the method that implements the setter, if any. */
+    /** {@code CXString clang_Cursor_getObjCPropertySetterName(CXCursor C)} */
     public static CXString clang_Cursor_getObjCPropertySetterName(CXCursor C, CXString __result) {
         nclang_Cursor_getObjCPropertySetterName(C.address(), __result.address());
         return __result;
@@ -7977,19 +5202,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getObjCDeclQualifiers ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCDeclQualifiers Cursor_getObjCDeclQualifiers} */
+    /** {@code unsigned clang_Cursor_getObjCDeclQualifiers(CXCursor C)} */
     public static native int nclang_Cursor_getObjCDeclQualifiers(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCDeclQualifiers Cursor_getObjCDeclQualifiers} */
+    /** {@code unsigned clang_Cursor_getObjCDeclQualifiers(CXCursor C)} */
     public static int nclang_Cursor_getObjCDeclQualifiers(long C) {
         long __functionAddress = Functions.Cursor_getObjCDeclQualifiers;
         return nclang_Cursor_getObjCDeclQualifiers(C, __functionAddress);
     }
 
-    /**
-     * Given a cursor that represents an Objective-C method or parameter declaration, return the associated Objective-C qualifiers for the return type or the
-     * parameter respectively. The bits are formed from CXObjCDeclQualifierKind.
-     */
+    /** {@code unsigned clang_Cursor_getObjCDeclQualifiers(CXCursor C)} */
     @NativeType("unsigned")
     public static int clang_Cursor_getObjCDeclQualifiers(CXCursor C) {
         return nclang_Cursor_getObjCDeclQualifiers(C.address());
@@ -7997,19 +5219,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isObjCOptional ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isObjCOptional Cursor_isObjCOptional} */
+    /** {@code unsigned clang_Cursor_isObjCOptional(CXCursor C)} */
     public static native int nclang_Cursor_isObjCOptional(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isObjCOptional Cursor_isObjCOptional} */
+    /** {@code unsigned clang_Cursor_isObjCOptional(CXCursor C)} */
     public static int nclang_Cursor_isObjCOptional(long C) {
         long __functionAddress = Functions.Cursor_isObjCOptional;
         return nclang_Cursor_isObjCOptional(C, __functionAddress);
     }
 
-    /**
-     * Given a cursor that represents an Objective-C method or property declaration, return non-zero if the declaration was affected by "@optional". Returns
-     * zero if the cursor is not such a declaration or it is "@required".
-     */
+    /** {@code unsigned clang_Cursor_isObjCOptional(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isObjCOptional(CXCursor C) {
         return nclang_Cursor_isObjCOptional(C.address()) != 0;
@@ -8017,16 +5236,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isVariadic ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isVariadic Cursor_isVariadic} */
+    /** {@code unsigned clang_Cursor_isVariadic(CXCursor C)} */
     public static native int nclang_Cursor_isVariadic(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isVariadic Cursor_isVariadic} */
+    /** {@code unsigned clang_Cursor_isVariadic(CXCursor C)} */
     public static int nclang_Cursor_isVariadic(long C) {
         long __functionAddress = Functions.Cursor_isVariadic;
         return nclang_Cursor_isVariadic(C, __functionAddress);
     }
 
-    /** Returns non-zero if the given cursor is a variadic function or method. */
+    /** {@code unsigned clang_Cursor_isVariadic(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isVariadic(CXCursor C) {
         return nclang_Cursor_isVariadic(C.address()) != 0;
@@ -8034,22 +5253,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_isExternalSymbol ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_isExternalSymbol Cursor_isExternalSymbol} */
+    /** {@code unsigned clang_Cursor_isExternalSymbol(CXCursor C, CXString * language, CXString * definedIn, unsigned * isGenerated)} */
     public static native int nclang_Cursor_isExternalSymbol(long C, long language, long definedIn, long isGenerated, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_isExternalSymbol Cursor_isExternalSymbol} */
+    /** {@code unsigned clang_Cursor_isExternalSymbol(CXCursor C, CXString * language, CXString * definedIn, unsigned * isGenerated)} */
     public static int nclang_Cursor_isExternalSymbol(long C, long language, long definedIn, long isGenerated) {
         long __functionAddress = Functions.Cursor_isExternalSymbol;
         return nclang_Cursor_isExternalSymbol(C, language, definedIn, isGenerated, __functionAddress);
     }
 
-    /**
-     * Returns non-zero if the given cursor points to a symbol marked with external_source_symbol attribute.
-     *
-     * @param language    if non-{@code NULL}, and the attribute is present, will be set to the 'language' string from the attribute
-     * @param definedIn   if non-{@code NULL}, and the attribute is present, will be set to the 'definedIn' string from the attribute
-     * @param isGenerated if non-{@code NULL}, and the attribute is present, will be set to non-zero if the 'generated_declaration' is set in the attribute
-     */
+    /** {@code unsigned clang_Cursor_isExternalSymbol(CXCursor C, CXString * language, CXString * definedIn, unsigned * isGenerated)} */
     @NativeType("unsigned")
     public static boolean clang_Cursor_isExternalSymbol(CXCursor C, @NativeType("CXString *") CXString.@Nullable Buffer language, @NativeType("CXString *") CXString.@Nullable Buffer definedIn, @NativeType("unsigned *") @Nullable IntBuffer isGenerated) {
         if (CHECKS) {
@@ -8062,19 +5275,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getCommentRange ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getCommentRange Cursor_getCommentRange} */
+    /** {@code CXSourceRange clang_Cursor_getCommentRange(CXCursor C)} */
     public static native void nclang_Cursor_getCommentRange(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getCommentRange Cursor_getCommentRange} */
+    /** {@code CXSourceRange clang_Cursor_getCommentRange(CXCursor C)} */
     public static void nclang_Cursor_getCommentRange(long C, long __result) {
         long __functionAddress = Functions.Cursor_getCommentRange;
         nclang_Cursor_getCommentRange(C, __functionAddress, __result);
     }
 
-    /**
-     * Given a cursor that represents a declaration, return the associated comment's source range. The range may include multiple consecutive comments with
-     * whitespace in between.
-     */
+    /** {@code CXSourceRange clang_Cursor_getCommentRange(CXCursor C)} */
     public static CXSourceRange clang_Cursor_getCommentRange(CXCursor C, CXSourceRange __result) {
         nclang_Cursor_getCommentRange(C.address(), __result.address());
         return __result;
@@ -8082,16 +5292,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getRawCommentText ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getRawCommentText Cursor_getRawCommentText} */
+    /** {@code CXString clang_Cursor_getRawCommentText(CXCursor C)} */
     public static native void nclang_Cursor_getRawCommentText(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getRawCommentText Cursor_getRawCommentText} */
+    /** {@code CXString clang_Cursor_getRawCommentText(CXCursor C)} */
     public static void nclang_Cursor_getRawCommentText(long C, long __result) {
         long __functionAddress = Functions.Cursor_getRawCommentText;
         nclang_Cursor_getRawCommentText(C, __functionAddress, __result);
     }
 
-    /** Given a cursor that represents a declaration, return the associated comment text, including comment markers. */
+    /** {@code CXString clang_Cursor_getRawCommentText(CXCursor C)} */
     public static CXString clang_Cursor_getRawCommentText(CXCursor C, CXString __result) {
         nclang_Cursor_getRawCommentText(C.address(), __result.address());
         return __result;
@@ -8099,20 +5309,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getBriefCommentText ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getBriefCommentText Cursor_getBriefCommentText} */
+    /** {@code CXString clang_Cursor_getBriefCommentText(CXCursor C)} */
     public static native void nclang_Cursor_getBriefCommentText(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getBriefCommentText Cursor_getBriefCommentText} */
+    /** {@code CXString clang_Cursor_getBriefCommentText(CXCursor C)} */
     public static void nclang_Cursor_getBriefCommentText(long C, long __result) {
         long __functionAddress = Functions.Cursor_getBriefCommentText;
         nclang_Cursor_getBriefCommentText(C, __functionAddress, __result);
     }
 
-    /**
-     * Given a cursor that represents a documentable entity (e.g., declaration), return the associated; otherwise return the
-     * 
-     * <p>first paragraph.</p>
-     */
+    /** {@code CXString clang_Cursor_getBriefCommentText(CXCursor C)} */
     public static CXString clang_Cursor_getBriefCommentText(CXCursor C, CXString __result) {
         nclang_Cursor_getBriefCommentText(C.address(), __result.address());
         return __result;
@@ -8120,16 +5326,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getMangling ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getMangling Cursor_getMangling} */
+    /** {@code CXString clang_Cursor_getMangling(CXCursor cursor)} */
     public static native void nclang_Cursor_getMangling(long cursor, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Cursor_getMangling Cursor_getMangling} */
+    /** {@code CXString clang_Cursor_getMangling(CXCursor cursor)} */
     public static void nclang_Cursor_getMangling(long cursor, long __result) {
         long __functionAddress = Functions.Cursor_getMangling;
         nclang_Cursor_getMangling(cursor, __functionAddress, __result);
     }
 
-    /** Retrieve the {@code CXString} representing the mangled name of the cursor. */
+    /** {@code CXString clang_Cursor_getMangling(CXCursor cursor)} */
     public static CXString clang_Cursor_getMangling(CXCursor cursor, CXString __result) {
         nclang_Cursor_getMangling(cursor.address(), __result.address());
         return __result;
@@ -8137,16 +5343,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getCXXManglings ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getCXXManglings Cursor_getCXXManglings} */
+    /** {@code CXStringSet * clang_Cursor_getCXXManglings(CXCursor cursor)} */
     public static native long nclang_Cursor_getCXXManglings(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getCXXManglings Cursor_getCXXManglings} */
+    /** {@code CXStringSet * clang_Cursor_getCXXManglings(CXCursor cursor)} */
     public static long nclang_Cursor_getCXXManglings(long cursor) {
         long __functionAddress = Functions.Cursor_getCXXManglings;
         return nclang_Cursor_getCXXManglings(cursor, __functionAddress);
     }
 
-    /** Retrieve the {@code CXString}s representing the mangled symbols of the C++ constructor or destructor at the cursor. */
+    /** {@code CXStringSet * clang_Cursor_getCXXManglings(CXCursor cursor)} */
     @NativeType("CXStringSet *")
     public static @Nullable CXStringSet clang_Cursor_getCXXManglings(CXCursor cursor) {
         long __result = nclang_Cursor_getCXXManglings(cursor.address());
@@ -8155,10 +5361,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getObjCManglings ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCManglings Cursor_getObjCManglings} */
+    /** {@code CXStringSet * clang_Cursor_getObjCManglings(CXCursor cursor)} */
     public static native long nclang_Cursor_getObjCManglings(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getObjCManglings Cursor_getObjCManglings} */
+    /** {@code CXStringSet * clang_Cursor_getObjCManglings(CXCursor cursor)} */
     public static long nclang_Cursor_getObjCManglings(long cursor) {
         long __functionAddress = Functions.Cursor_getObjCManglings;
         if (CHECKS) {
@@ -8167,7 +5373,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_Cursor_getObjCManglings(cursor, __functionAddress);
     }
 
-    /** Retrieve the {@code CXString}s representing the mangled symbols of the ObjC class interface or implementation at the cursor. */
+    /** {@code CXStringSet * clang_Cursor_getObjCManglings(CXCursor cursor)} */
     @NativeType("CXStringSet *")
     public static @Nullable CXStringSet clang_Cursor_getObjCManglings(CXCursor cursor) {
         long __result = nclang_Cursor_getObjCManglings(cursor.address());
@@ -8176,16 +5382,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Cursor_getModule ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_getModule Cursor_getModule} */
+    /** {@code CXModule clang_Cursor_getModule(CXCursor C)} */
     public static native long nclang_Cursor_getModule(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_getModule Cursor_getModule} */
+    /** {@code CXModule clang_Cursor_getModule(CXCursor C)} */
     public static long nclang_Cursor_getModule(long C) {
         long __functionAddress = Functions.Cursor_getModule;
         return nclang_Cursor_getModule(C, __functionAddress);
     }
 
-    /** Given a {@link #CXCursor_ModuleImportDecl Cursor_ModuleImportDecl} cursor, return the associated module. */
+    /** {@code CXModule clang_Cursor_getModule(CXCursor C)} */
     @NativeType("CXModule")
     public static long clang_Cursor_getModule(CXCursor C) {
         return nclang_Cursor_getModule(C.address());
@@ -8193,7 +5399,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getModuleForFile ] ---
 
-    /** Given a {@code CXFile} header file, return the module that contains it, if one exists. */
+    /** {@code CXModule clang_getModuleForFile(CXTranslationUnit TU, CXFile file)} */
     @NativeType("CXModule")
     public static long clang_getModuleForFile(@NativeType("CXTranslationUnit") long TU, @NativeType("CXFile") long file) {
         long __functionAddress = Functions.getModuleForFile;
@@ -8206,11 +5412,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Module_getASTFile ] ---
 
-    /**
-     * @param Module a module object
-     *
-     * @return the module file where the provided module object came from
-     */
+    /** {@code CXFile clang_Module_getASTFile(CXModule Module)} */
     @NativeType("CXFile")
     public static long clang_Module_getASTFile(@NativeType("CXModule") long Module) {
         long __functionAddress = Functions.Module_getASTFile;
@@ -8222,11 +5424,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Module_getParent ] ---
 
-    /**
-     * @param Module a module object
-     *
-     * @return the parent of a sub-module or {@code NULL} if the given module is top-level, e.g. for 'std.vector' it will return the 'std' module.
-     */
+    /** {@code CXModule clang_Module_getParent(CXModule Module)} */
     @NativeType("CXModule")
     public static long clang_Module_getParent(@NativeType("CXModule") long Module) {
         long __functionAddress = Functions.Module_getParent;
@@ -8238,10 +5436,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Module_getName ] ---
 
-    /** Unsafe version of: {@link #clang_Module_getName Module_getName} */
+    /** {@code CXString clang_Module_getName(CXModule Module)} */
     public static native void nclang_Module_getName(long Module, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Module_getName Module_getName} */
+    /** {@code CXString clang_Module_getName(CXModule Module)} */
     public static void nclang_Module_getName(long Module, long __result) {
         long __functionAddress = Functions.Module_getName;
         if (CHECKS) {
@@ -8250,10 +5448,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Module_getName(Module, __functionAddress, __result);
     }
 
-    /**
-     * @param Module   a module object
-     * @param __result the name of the module, e.g. for the 'std.vector' sub-module it will return "vector".
-     */
+    /** {@code CXString clang_Module_getName(CXModule Module)} */
     public static CXString clang_Module_getName(@NativeType("CXModule") long Module, CXString __result) {
         nclang_Module_getName(Module, __result.address());
         return __result;
@@ -8261,10 +5456,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Module_getFullName ] ---
 
-    /** Unsafe version of: {@link #clang_Module_getFullName Module_getFullName} */
+    /** {@code CXString clang_Module_getFullName(CXModule Module)} */
     public static native void nclang_Module_getFullName(long Module, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_Module_getFullName Module_getFullName} */
+    /** {@code CXString clang_Module_getFullName(CXModule Module)} */
     public static void nclang_Module_getFullName(long Module, long __result) {
         long __functionAddress = Functions.Module_getFullName;
         if (CHECKS) {
@@ -8273,10 +5468,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_Module_getFullName(Module, __functionAddress, __result);
     }
 
-    /**
-     * @param Module   a module object
-     * @param __result the full name of the module, e.g. "std.vector".
-     */
+    /** {@code CXString clang_Module_getFullName(CXModule Module)} */
     public static CXString clang_Module_getFullName(@NativeType("CXModule") long Module, CXString __result) {
         nclang_Module_getFullName(Module, __result.address());
         return __result;
@@ -8284,11 +5476,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Module_isSystem ] ---
 
-    /**
-     * @param Module a module object
-     *
-     * @return non-zero if the module is a system one
-     */
+    /** {@code int clang_Module_isSystem(CXModule Module)} */
     @NativeType("int")
     public static boolean clang_Module_isSystem(@NativeType("CXModule") long Module) {
         long __functionAddress = Functions.Module_isSystem;
@@ -8300,11 +5488,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Module_getNumTopLevelHeaders ] ---
 
-    /**
-     * @param Module a module object
-     *
-     * @return the number of top level headers associated with this module
-     */
+    /** {@code unsigned clang_Module_getNumTopLevelHeaders(CXTranslationUnit TU, CXModule Module)} */
     @NativeType("unsigned")
     public static int clang_Module_getNumTopLevelHeaders(@NativeType("CXTranslationUnit") long TU, @NativeType("CXModule") long Module) {
         long __functionAddress = Functions.Module_getNumTopLevelHeaders;
@@ -8317,12 +5501,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Module_getTopLevelHeader ] ---
 
-    /**
-     * @param Module a module object
-     * @param Index  top level header index (zero-based)
-     *
-     * @return the specified top level header associated with the module
-     */
+    /** {@code CXFile clang_Module_getTopLevelHeader(CXTranslationUnit TU, CXModule Module, unsigned Index)} */
     @NativeType("CXFile")
     public static long clang_Module_getTopLevelHeader(@NativeType("CXTranslationUnit") long TU, @NativeType("CXModule") long Module, @NativeType("unsigned") int Index) {
         long __functionAddress = Functions.Module_getTopLevelHeader;
@@ -8335,16 +5514,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXConstructor_isConvertingConstructor ] ---
 
-    /** Unsafe version of: {@link #clang_CXXConstructor_isConvertingConstructor CXXConstructor_isConvertingConstructor} */
+    /** {@code unsigned clang_CXXConstructor_isConvertingConstructor(CXCursor C)} */
     public static native int nclang_CXXConstructor_isConvertingConstructor(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXConstructor_isConvertingConstructor CXXConstructor_isConvertingConstructor} */
+    /** {@code unsigned clang_CXXConstructor_isConvertingConstructor(CXCursor C)} */
     public static int nclang_CXXConstructor_isConvertingConstructor(long C) {
         long __functionAddress = Functions.CXXConstructor_isConvertingConstructor;
         return nclang_CXXConstructor_isConvertingConstructor(C, __functionAddress);
     }
 
-    /** Determine if a C++ constructor is a converting constructor. */
+    /** {@code unsigned clang_CXXConstructor_isConvertingConstructor(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXConstructor_isConvertingConstructor(CXCursor C) {
         return nclang_CXXConstructor_isConvertingConstructor(C.address()) != 0;
@@ -8352,16 +5531,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXConstructor_isCopyConstructor ] ---
 
-    /** Unsafe version of: {@link #clang_CXXConstructor_isCopyConstructor CXXConstructor_isCopyConstructor} */
+    /** {@code unsigned clang_CXXConstructor_isCopyConstructor(CXCursor C)} */
     public static native int nclang_CXXConstructor_isCopyConstructor(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXConstructor_isCopyConstructor CXXConstructor_isCopyConstructor} */
+    /** {@code unsigned clang_CXXConstructor_isCopyConstructor(CXCursor C)} */
     public static int nclang_CXXConstructor_isCopyConstructor(long C) {
         long __functionAddress = Functions.CXXConstructor_isCopyConstructor;
         return nclang_CXXConstructor_isCopyConstructor(C, __functionAddress);
     }
 
-    /** Determine if a C++ constructor is a copy constructor. */
+    /** {@code unsigned clang_CXXConstructor_isCopyConstructor(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXConstructor_isCopyConstructor(CXCursor C) {
         return nclang_CXXConstructor_isCopyConstructor(C.address()) != 0;
@@ -8369,16 +5548,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXConstructor_isDefaultConstructor ] ---
 
-    /** Unsafe version of: {@link #clang_CXXConstructor_isDefaultConstructor CXXConstructor_isDefaultConstructor} */
+    /** {@code unsigned clang_CXXConstructor_isDefaultConstructor(CXCursor C)} */
     public static native int nclang_CXXConstructor_isDefaultConstructor(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXConstructor_isDefaultConstructor CXXConstructor_isDefaultConstructor} */
+    /** {@code unsigned clang_CXXConstructor_isDefaultConstructor(CXCursor C)} */
     public static int nclang_CXXConstructor_isDefaultConstructor(long C) {
         long __functionAddress = Functions.CXXConstructor_isDefaultConstructor;
         return nclang_CXXConstructor_isDefaultConstructor(C, __functionAddress);
     }
 
-    /** Determine if a C++ constructor is the default constructor. */
+    /** {@code unsigned clang_CXXConstructor_isDefaultConstructor(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXConstructor_isDefaultConstructor(CXCursor C) {
         return nclang_CXXConstructor_isDefaultConstructor(C.address()) != 0;
@@ -8386,16 +5565,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXConstructor_isMoveConstructor ] ---
 
-    /** Unsafe version of: {@link #clang_CXXConstructor_isMoveConstructor CXXConstructor_isMoveConstructor} */
+    /** {@code unsigned clang_CXXConstructor_isMoveConstructor(CXCursor C)} */
     public static native int nclang_CXXConstructor_isMoveConstructor(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXConstructor_isMoveConstructor CXXConstructor_isMoveConstructor} */
+    /** {@code unsigned clang_CXXConstructor_isMoveConstructor(CXCursor C)} */
     public static int nclang_CXXConstructor_isMoveConstructor(long C) {
         long __functionAddress = Functions.CXXConstructor_isMoveConstructor;
         return nclang_CXXConstructor_isMoveConstructor(C, __functionAddress);
     }
 
-    /** Determine if a C++ constructor is a move constructor. */
+    /** {@code unsigned clang_CXXConstructor_isMoveConstructor(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXConstructor_isMoveConstructor(CXCursor C) {
         return nclang_CXXConstructor_isMoveConstructor(C.address()) != 0;
@@ -8403,16 +5582,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXField_isMutable ] ---
 
-    /** Unsafe version of: {@link #clang_CXXField_isMutable CXXField_isMutable} */
+    /** {@code unsigned clang_CXXField_isMutable(CXCursor C)} */
     public static native int nclang_CXXField_isMutable(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXField_isMutable CXXField_isMutable} */
+    /** {@code unsigned clang_CXXField_isMutable(CXCursor C)} */
     public static int nclang_CXXField_isMutable(long C) {
         long __functionAddress = Functions.CXXField_isMutable;
         return nclang_CXXField_isMutable(C, __functionAddress);
     }
 
-    /** Determine if a C++ field is declared 'mutable'. */
+    /** {@code unsigned clang_CXXField_isMutable(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXField_isMutable(CXCursor C) {
         return nclang_CXXField_isMutable(C.address()) != 0;
@@ -8420,16 +5599,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isDefaulted ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isDefaulted CXXMethod_isDefaulted} */
+    /** {@code unsigned clang_CXXMethod_isDefaulted(CXCursor C)} */
     public static native int nclang_CXXMethod_isDefaulted(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isDefaulted CXXMethod_isDefaulted} */
+    /** {@code unsigned clang_CXXMethod_isDefaulted(CXCursor C)} */
     public static int nclang_CXXMethod_isDefaulted(long C) {
         long __functionAddress = Functions.CXXMethod_isDefaulted;
         return nclang_CXXMethod_isDefaulted(C, __functionAddress);
     }
 
-    /** Determine if a C++ method is declared '= default'. */
+    /** {@code unsigned clang_CXXMethod_isDefaulted(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isDefaulted(CXCursor C) {
         return nclang_CXXMethod_isDefaulted(C.address()) != 0;
@@ -8437,10 +5616,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isDeleted ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isDeleted CXXMethod_isDeleted} */
+    /** {@code unsigned clang_CXXMethod_isDeleted(CXCursor C)} */
     public static native int nclang_CXXMethod_isDeleted(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isDeleted CXXMethod_isDeleted} */
+    /** {@code unsigned clang_CXXMethod_isDeleted(CXCursor C)} */
     public static int nclang_CXXMethod_isDeleted(long C) {
         long __functionAddress = Functions.CXXMethod_isDeleted;
         if (CHECKS) {
@@ -8449,7 +5628,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_CXXMethod_isDeleted(C, __functionAddress);
     }
 
-    /** Determine if a C++ method is declared {@code '= delete'}. */
+    /** {@code unsigned clang_CXXMethod_isDeleted(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isDeleted(CXCursor C) {
         return nclang_CXXMethod_isDeleted(C.address()) != 0;
@@ -8457,16 +5636,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isPureVirtual ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isPureVirtual CXXMethod_isPureVirtual} */
+    /** {@code unsigned clang_CXXMethod_isPureVirtual(CXCursor C)} */
     public static native int nclang_CXXMethod_isPureVirtual(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isPureVirtual CXXMethod_isPureVirtual} */
+    /** {@code unsigned clang_CXXMethod_isPureVirtual(CXCursor C)} */
     public static int nclang_CXXMethod_isPureVirtual(long C) {
         long __functionAddress = Functions.CXXMethod_isPureVirtual;
         return nclang_CXXMethod_isPureVirtual(C, __functionAddress);
     }
 
-    /** Determine if a C++ member function or member function template is pure virtual. */
+    /** {@code unsigned clang_CXXMethod_isPureVirtual(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isPureVirtual(CXCursor C) {
         return nclang_CXXMethod_isPureVirtual(C.address()) != 0;
@@ -8474,16 +5653,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isStatic ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isStatic CXXMethod_isStatic} */
+    /** {@code unsigned clang_CXXMethod_isStatic(CXCursor C)} */
     public static native int nclang_CXXMethod_isStatic(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isStatic CXXMethod_isStatic} */
+    /** {@code unsigned clang_CXXMethod_isStatic(CXCursor C)} */
     public static int nclang_CXXMethod_isStatic(long C) {
         long __functionAddress = Functions.CXXMethod_isStatic;
         return nclang_CXXMethod_isStatic(C, __functionAddress);
     }
 
-    /** Determine if a C++ member function or member function template is declared 'static'. */
+    /** {@code unsigned clang_CXXMethod_isStatic(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isStatic(CXCursor C) {
         return nclang_CXXMethod_isStatic(C.address()) != 0;
@@ -8491,19 +5670,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isVirtual ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isVirtual CXXMethod_isVirtual} */
+    /** {@code unsigned clang_CXXMethod_isVirtual(CXCursor C)} */
     public static native int nclang_CXXMethod_isVirtual(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isVirtual CXXMethod_isVirtual} */
+    /** {@code unsigned clang_CXXMethod_isVirtual(CXCursor C)} */
     public static int nclang_CXXMethod_isVirtual(long C) {
         long __functionAddress = Functions.CXXMethod_isVirtual;
         return nclang_CXXMethod_isVirtual(C, __functionAddress);
     }
 
-    /**
-     * Determine if a C++ member function or member function template is explicitly declared 'virtual' or if it overrides a virtual method from one of the
-     * base classes.
-     */
+    /** {@code unsigned clang_CXXMethod_isVirtual(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isVirtual(CXCursor C) {
         return nclang_CXXMethod_isVirtual(C.address()) != 0;
@@ -8511,10 +5687,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isCopyAssignmentOperator ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isCopyAssignmentOperator CXXMethod_isCopyAssignmentOperator} */
+    /** {@code unsigned clang_CXXMethod_isCopyAssignmentOperator(CXCursor C)} */
     public static native int nclang_CXXMethod_isCopyAssignmentOperator(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isCopyAssignmentOperator CXXMethod_isCopyAssignmentOperator} */
+    /** {@code unsigned clang_CXXMethod_isCopyAssignmentOperator(CXCursor C)} */
     public static int nclang_CXXMethod_isCopyAssignmentOperator(long C) {
         long __functionAddress = Functions.CXXMethod_isCopyAssignmentOperator;
         if (CHECKS) {
@@ -8523,28 +5699,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_CXXMethod_isCopyAssignmentOperator(C, __functionAddress);
     }
 
-    /**
-     * Determine if a C++ member function is a copy-assignment operator, returning 1 if such is the case and 0 otherwise.
-     * 
-     * <p>A copy-assignment operator {@code X::operator=} is a non-static, non-template member function of class {@code X} with exactly one parameter of type
-     * {@code X}, {@code X&}, {@code const X&}, {@code volatile X&} or {@code const volatile X&}.</p>
-     * 
-     * <p>That is, for example, the {@code operator=} in:</p>
-     * 
-     * <pre><code>
-     * class Foo {
-     *     bool operator=(const volatile Foo&amp;);
-     * };</code></pre>
-     * 
-     * <p>Is a copy-assignment operator, while the {@code operator=} in:</p>
-     * 
-     * <pre><code>
-     * class Bar {
-     *     bool operator=(const int&amp;);
-     * };</code></pre>
-     * 
-     * <p>Is not.</p>
-     */
+    /** {@code unsigned clang_CXXMethod_isCopyAssignmentOperator(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isCopyAssignmentOperator(CXCursor C) {
         return nclang_CXXMethod_isCopyAssignmentOperator(C.address()) != 0;
@@ -8552,10 +5707,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isMoveAssignmentOperator ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isMoveAssignmentOperator CXXMethod_isMoveAssignmentOperator} */
+    /** {@code unsigned clang_CXXMethod_isMoveAssignmentOperator(CXCursor C)} */
     public static native int nclang_CXXMethod_isMoveAssignmentOperator(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isMoveAssignmentOperator CXXMethod_isMoveAssignmentOperator} */
+    /** {@code unsigned clang_CXXMethod_isMoveAssignmentOperator(CXCursor C)} */
     public static int nclang_CXXMethod_isMoveAssignmentOperator(long C) {
         long __functionAddress = Functions.CXXMethod_isMoveAssignmentOperator;
         if (CHECKS) {
@@ -8564,28 +5719,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_CXXMethod_isMoveAssignmentOperator(C, __functionAddress);
     }
 
-    /**
-     * Determine if a C++ member function is a move-assignment operator, returning 1 if such is the case and 0 otherwise.
-     * 
-     * <p>A move-assignment operator {@code X::operator=} is a non-static, non-template member function of class {@code X} with exactly one parameter of type
-     * {@code X&&}, {@code const X&&}, {@code volatile X&&} or {@code const volatile X&&}.</p>
-     * 
-     * <p>That is, for example, the {@code operator=} in:</p>
-     * 
-     * <pre><code>
-     * class Foo {
-     *     bool operator=(const volatile Foo&amp;&amp;);
-     * };</code></pre>
-     * 
-     * <p>Is a move-assignment operator, while the {@code operator=} in:</p>
-     * 
-     * <pre><code>
-     * class Bar {
-     *     bool operator=(const int&amp;&amp;);
-     * };</code></pre>
-     * 
-     * <p>Is not.</p>
-     */
+    /** {@code unsigned clang_CXXMethod_isMoveAssignmentOperator(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isMoveAssignmentOperator(CXCursor C) {
         return nclang_CXXMethod_isMoveAssignmentOperator(C.address()) != 0;
@@ -8593,10 +5727,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isExplicit ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isExplicit CXXMethod_isExplicit} */
+    /** {@code unsigned clang_CXXMethod_isExplicit(CXCursor C)} */
     public static native int nclang_CXXMethod_isExplicit(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isExplicit CXXMethod_isExplicit} */
+    /** {@code unsigned clang_CXXMethod_isExplicit(CXCursor C)} */
     public static int nclang_CXXMethod_isExplicit(long C) {
         long __functionAddress = Functions.CXXMethod_isExplicit;
         if (CHECKS) {
@@ -8605,47 +5739,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_CXXMethod_isExplicit(C, __functionAddress);
     }
 
-    /**
-     * Determine if a C++ constructor or conversion function was declared explicit, returning 1 if such is the case and 0 otherwise.
-     * 
-     * <p>Constructors or conversion functions are declared explicit through the use of the explicit specifier.</p>
-     * 
-     * <p>For example, the following constructor and conversion function are not explicit as they lack the explicit specifier:</p>
-     * 
-     * <pre><code>
-     * class Foo {
-     *     Foo();
-     *     operator int();
-     * };</code></pre>
-     * 
-     * <p>While the following constructor and conversion function are explicit as they are declared with the explicit specifier.</p>
-     * 
-     * <pre><code>
-     * class Foo {
-     *     explicit Foo();
-     *     explicit operator int();
-     * };</code></pre>
-     * 
-     * <p>This function will return 0 when given a cursor pointing to one of the former declarations and it will return 1 for a cursor pointing to the latter
-     * declarations.</p>
-     * 
-     * <p>The explicit specifier allows the user to specify a conditional compile-time expression whose value decides whether the marked element is explicit or
-     * not.</p>
-     * 
-     * <p>For example:</p>
-     * 
-     * <pre><code>
-     * constexpr bool foo(int i) { return i % 2 == 0; }
-     * 
-     * class Foo {
-     *     explicit(foo(1)) Foo();
-     *     explicit(foo(2)) operator int();
-     * }</code></pre>
-     * 
-     * <p>This function will return 0 for the constructor and 1 for the conversion function.</p>
-     *
-     * @since 17
-     */
+    /** {@code unsigned clang_CXXMethod_isExplicit(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isExplicit(CXCursor C) {
         return nclang_CXXMethod_isExplicit(C.address()) != 0;
@@ -8653,10 +5747,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXRecord_isAbstract ] ---
 
-    /** Unsafe version of: {@link #clang_CXXRecord_isAbstract CXXRecord_isAbstract} */
+    /** {@code unsigned clang_CXXRecord_isAbstract(CXCursor C)} */
     public static native int nclang_CXXRecord_isAbstract(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXRecord_isAbstract CXXRecord_isAbstract} */
+    /** {@code unsigned clang_CXXRecord_isAbstract(CXCursor C)} */
     public static int nclang_CXXRecord_isAbstract(long C) {
         long __functionAddress = Functions.CXXRecord_isAbstract;
         if (CHECKS) {
@@ -8665,7 +5759,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_CXXRecord_isAbstract(C, __functionAddress);
     }
 
-    /** Determine if a C++ record is abstract, i.e. whether a class or struct has a pure virtual member function. */
+    /** {@code unsigned clang_CXXRecord_isAbstract(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXRecord_isAbstract(CXCursor C) {
         return nclang_CXXRecord_isAbstract(C.address()) != 0;
@@ -8673,16 +5767,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EnumDecl_isScoped ] ---
 
-    /** Unsafe version of: {@link #clang_EnumDecl_isScoped EnumDecl_isScoped} */
+    /** {@code unsigned clang_EnumDecl_isScoped(CXCursor C)} */
     public static native int nclang_EnumDecl_isScoped(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_EnumDecl_isScoped EnumDecl_isScoped} */
+    /** {@code unsigned clang_EnumDecl_isScoped(CXCursor C)} */
     public static int nclang_EnumDecl_isScoped(long C) {
         long __functionAddress = Functions.EnumDecl_isScoped;
         return nclang_EnumDecl_isScoped(C, __functionAddress);
     }
 
-    /** Determine if an enum declaration refers to a scoped enum. */
+    /** {@code unsigned clang_EnumDecl_isScoped(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_EnumDecl_isScoped(CXCursor C) {
         return nclang_EnumDecl_isScoped(C.address()) != 0;
@@ -8690,16 +5784,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_CXXMethod_isConst ] ---
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isConst CXXMethod_isConst} */
+    /** {@code unsigned clang_CXXMethod_isConst(CXCursor C)} */
     public static native int nclang_CXXMethod_isConst(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_CXXMethod_isConst CXXMethod_isConst} */
+    /** {@code unsigned clang_CXXMethod_isConst(CXCursor C)} */
     public static int nclang_CXXMethod_isConst(long C) {
         long __functionAddress = Functions.CXXMethod_isConst;
         return nclang_CXXMethod_isConst(C, __functionAddress);
     }
 
-    /** Determine if a C++ member function or member function template is declared 'const'. */
+    /** {@code unsigned clang_CXXMethod_isConst(CXCursor C)} */
     @NativeType("unsigned")
     public static boolean clang_CXXMethod_isConst(CXCursor C) {
         return nclang_CXXMethod_isConst(C.address()) != 0;
@@ -8707,26 +5801,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getTemplateCursorKind ] ---
 
-    /** Unsafe version of: {@link #clang_getTemplateCursorKind getTemplateCursorKind} */
+    /** {@code enum CXCursorKind clang_getTemplateCursorKind(CXCursor C)} */
     public static native int nclang_getTemplateCursorKind(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getTemplateCursorKind getTemplateCursorKind} */
+    /** {@code enum CXCursorKind clang_getTemplateCursorKind(CXCursor C)} */
     public static int nclang_getTemplateCursorKind(long C) {
         long __functionAddress = Functions.getTemplateCursorKind;
         return nclang_getTemplateCursorKind(C, __functionAddress);
     }
 
-    /**
-     * Given a cursor that represents a template, determine the cursor kind of the specializations would be generated by instantiating the template.
-     * 
-     * <p>This routine can be used to determine what flavor of function template, class template, or class template partial specialization is stored in the
-     * cursor. For example, it can describe whether a class template cursor is declared with "struct", "class" or "union".</p>
-     *
-     * @param C the cursor to query. This cursor should represent a template declaration.
-     *
-     * @return the cursor kind of the specializations that would be generated by instantiating the template {@code C}. If {@code C} is not a template, returns
-     *         {@link #CXCursor_NoDeclFound Cursor_NoDeclFound}.
-     */
+    /** {@code enum CXCursorKind clang_getTemplateCursorKind(CXCursor C)} */
     @NativeType("enum CXCursorKind")
     public static int clang_getTemplateCursorKind(CXCursor C) {
         return nclang_getTemplateCursorKind(C.address());
@@ -8734,33 +5818,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getSpecializedCursorTemplate ] ---
 
-    /** Unsafe version of: {@link #clang_getSpecializedCursorTemplate getSpecializedCursorTemplate} */
+    /** {@code CXCursor clang_getSpecializedCursorTemplate(CXCursor C)} */
     public static native void nclang_getSpecializedCursorTemplate(long C, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getSpecializedCursorTemplate getSpecializedCursorTemplate} */
+    /** {@code CXCursor clang_getSpecializedCursorTemplate(CXCursor C)} */
     public static void nclang_getSpecializedCursorTemplate(long C, long __result) {
         long __functionAddress = Functions.getSpecializedCursorTemplate;
         nclang_getSpecializedCursorTemplate(C, __functionAddress, __result);
     }
 
-    /**
-     * Given a cursor that may represent a specialization or instantiation of a template, retrieve the cursor that represents the template that it specializes
-     * or from which it was instantiated.
-     * 
-     * <p>This routine determines the template involved both for explicit specializations of templates and for implicit instantiations of the template, both of
-     * which are referred to as "specializations". For a class template specialization (e.g., {@code std::vector<bool>}), this routine will return either the
-     * primary template ({@code std::vector}) or, if the specialization was instantiated from a class template partial specialization, the class template
-     * partial specialization. For a class template partial specialization and a function template specialization (including instantiations), this this
-     * routine will return the specialized template.</p>
-     * 
-     * <p>For members of a class template (e.g., member functions, member classes, or static data members), returns the specialized or instantiated member.
-     * Although not strictly "templates" in the C++ language, members of class templates have the same notions of specializations and instantiations that
-     * templates do, so this routine treats them similarly.</p>
-     *
-     * @param C        a cursor that may be a specialization of a template or a member of a template
-     * @param __result if the given cursor is a specialization or instantiation of a template or a member thereof, the template or member that it specializes or from which it
-     *                 was instantiated. Otherwise, returns a {@code NULL} cursor.
-     */
+    /** {@code CXCursor clang_getSpecializedCursorTemplate(CXCursor C)} */
     public static CXCursor clang_getSpecializedCursorTemplate(CXCursor C, CXCursor __result) {
         nclang_getSpecializedCursorTemplate(C.address(), __result.address());
         return __result;
@@ -8768,26 +5835,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorReferenceNameRange ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorReferenceNameRange getCursorReferenceNameRange} */
+    /** {@code CXSourceRange clang_getCursorReferenceNameRange(CXCursor C, unsigned NameFlags, unsigned PieceIndex)} */
     public static native void nclang_getCursorReferenceNameRange(long C, int NameFlags, int PieceIndex, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCursorReferenceNameRange getCursorReferenceNameRange} */
+    /** {@code CXSourceRange clang_getCursorReferenceNameRange(CXCursor C, unsigned NameFlags, unsigned PieceIndex)} */
     public static void nclang_getCursorReferenceNameRange(long C, int NameFlags, int PieceIndex, long __result) {
         long __functionAddress = Functions.getCursorReferenceNameRange;
         nclang_getCursorReferenceNameRange(C, NameFlags, PieceIndex, __functionAddress, __result);
     }
 
-    /**
-     * Given a cursor that references something else, return the source range covering that reference.
-     *
-     * @param C          a cursor pointing to a member reference, a declaration reference, or an operator call
-     * @param NameFlags  a bitset with three independent flags: {@link #CXNameRange_WantQualifier NameRange_WantQualifier}, {@link #CXNameRange_WantTemplateArgs NameRange_WantTemplateArgs}, and {@link #CXNameRange_WantSinglePiece NameRange_WantSinglePiece}
-     * @param PieceIndex for contiguous names or when passing the flag {@link #CXNameRange_WantSinglePiece NameRange_WantSinglePiece}, only one piece with index 0 is available. When the
-     *                   {@link #CXNameRange_WantSinglePiece NameRange_WantSinglePiece} flag is not passed for a non-contiguous names, this index can be used to retrieve the individual pieces of the name.
-     *                   See also {@link #CXNameRange_WantSinglePiece NameRange_WantSinglePiece}.
-     * @param __result   the piece of the name pointed to by the given cursor. If there is no name, or if the {@code PieceIndex} is out-of-range, a null-cursor will be
-     *                   returned.
-     */
+    /** {@code CXSourceRange clang_getCursorReferenceNameRange(CXCursor C, unsigned NameFlags, unsigned PieceIndex)} */
     public static CXSourceRange clang_getCursorReferenceNameRange(CXCursor C, @NativeType("unsigned") int NameFlags, @NativeType("unsigned") int PieceIndex, CXSourceRange __result) {
         nclang_getCursorReferenceNameRange(C.address(), NameFlags, PieceIndex, __result.address());
         return __result;
@@ -8795,10 +5852,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getToken ] ---
 
-    /** Unsafe version of: {@link #clang_getToken getToken} */
+    /** {@code CXToken * clang_getToken(CXTranslationUnit TU, CXSourceLocation Location)} */
     public static native long nclang_getToken(long TU, long Location, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getToken getToken} */
+    /** {@code CXToken * clang_getToken(CXTranslationUnit TU, CXSourceLocation Location)} */
     public static long nclang_getToken(long TU, long Location) {
         long __functionAddress = Functions.getToken;
         if (CHECKS) {
@@ -8808,15 +5865,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_getToken(TU, Location, __functionAddress);
     }
 
-    /**
-     * Get the raw lexical token starting with the given location.
-     *
-     * @param TU       the translation unit whose text is being tokenized
-     * @param Location the source location with which the token starts
-     *
-     * @return the token starting with the given location or {@code NULL} if no such token exist. The returned pointer must be freed with {@link #clang_disposeTokens disposeTokens} before the
-     *         translation unit is destroyed.
-     */
+    /** {@code CXToken * clang_getToken(CXTranslationUnit TU, CXSourceLocation Location)} */
     @NativeType("CXToken *")
     public static @Nullable CXToken clang_getToken(@NativeType("CXTranslationUnit") long TU, CXSourceLocation Location) {
         long __result = nclang_getToken(TU, Location.address());
@@ -8825,16 +5874,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getTokenKind ] ---
 
-    /** Unsafe version of: {@link #clang_getTokenKind getTokenKind} */
+    /** {@code CXTokenKind clang_getTokenKind(CXToken token)} */
     public static native int nclang_getTokenKind(long token, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getTokenKind getTokenKind} */
+    /** {@code CXTokenKind clang_getTokenKind(CXToken token)} */
     public static int nclang_getTokenKind(long token) {
         long __functionAddress = Functions.getTokenKind;
         return nclang_getTokenKind(token, __functionAddress);
     }
 
-    /** Determine the kind of the given token. */
+    /** {@code CXTokenKind clang_getTokenKind(CXToken token)} */
     @NativeType("CXTokenKind")
     public static int clang_getTokenKind(CXToken token) {
         return nclang_getTokenKind(token.address());
@@ -8842,10 +5891,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getTokenSpelling ] ---
 
-    /** Unsafe version of: {@link #clang_getTokenSpelling getTokenSpelling} */
+    /** {@code CXString clang_getTokenSpelling(CXTranslationUnit TU, CXToken token)} */
     public static native void nclang_getTokenSpelling(long TU, long token, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTokenSpelling getTokenSpelling} */
+    /** {@code CXString clang_getTokenSpelling(CXTranslationUnit TU, CXToken token)} */
     public static void nclang_getTokenSpelling(long TU, long token, long __result) {
         long __functionAddress = Functions.getTokenSpelling;
         if (CHECKS) {
@@ -8854,11 +5903,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getTokenSpelling(TU, token, __functionAddress, __result);
     }
 
-    /**
-     * Determine the spelling of the given token.
-     * 
-     * <p>The spelling of a token is the textual representation of that token, e.g., the text of an identifier or keyword.</p>
-     */
+    /** {@code CXString clang_getTokenSpelling(CXTranslationUnit TU, CXToken token)} */
     public static CXString clang_getTokenSpelling(@NativeType("CXTranslationUnit") long TU, CXToken token, CXString __result) {
         nclang_getTokenSpelling(TU, token.address(), __result.address());
         return __result;
@@ -8866,10 +5911,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getTokenLocation ] ---
 
-    /** Unsafe version of: {@link #clang_getTokenLocation getTokenLocation} */
+    /** {@code CXSourceLocation clang_getTokenLocation(CXTranslationUnit TU, CXToken token)} */
     public static native void nclang_getTokenLocation(long TU, long token, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTokenLocation getTokenLocation} */
+    /** {@code CXSourceLocation clang_getTokenLocation(CXTranslationUnit TU, CXToken token)} */
     public static void nclang_getTokenLocation(long TU, long token, long __result) {
         long __functionAddress = Functions.getTokenLocation;
         if (CHECKS) {
@@ -8878,7 +5923,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getTokenLocation(TU, token, __functionAddress, __result);
     }
 
-    /** Retrieve the source location of the given token. */
+    /** {@code CXSourceLocation clang_getTokenLocation(CXTranslationUnit TU, CXToken token)} */
     public static CXSourceLocation clang_getTokenLocation(@NativeType("CXTranslationUnit") long TU, CXToken token, CXSourceLocation __result) {
         nclang_getTokenLocation(TU, token.address(), __result.address());
         return __result;
@@ -8886,10 +5931,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getTokenExtent ] ---
 
-    /** Unsafe version of: {@link #clang_getTokenExtent getTokenExtent} */
+    /** {@code CXSourceRange clang_getTokenExtent(CXTranslationUnit TU, CXToken token)} */
     public static native void nclang_getTokenExtent(long TU, long token, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getTokenExtent getTokenExtent} */
+    /** {@code CXSourceRange clang_getTokenExtent(CXTranslationUnit TU, CXToken token)} */
     public static void nclang_getTokenExtent(long TU, long token, long __result) {
         long __functionAddress = Functions.getTokenExtent;
         if (CHECKS) {
@@ -8898,7 +5943,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getTokenExtent(TU, token, __functionAddress, __result);
     }
 
-    /** Retrieve a source range that covers the given token. */
+    /** {@code CXSourceRange clang_getTokenExtent(CXTranslationUnit TU, CXToken token)} */
     public static CXSourceRange clang_getTokenExtent(@NativeType("CXTranslationUnit") long TU, CXToken token, CXSourceRange __result) {
         nclang_getTokenExtent(TU, token.address(), __result.address());
         return __result;
@@ -8906,10 +5951,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_tokenize ] ---
 
-    /** Unsafe version of: {@link #clang_tokenize tokenize} */
+    /** {@code void clang_tokenize(CXTranslationUnit TU, CXSourceRange Range, CXToken ** Tokens, unsigned * NumTokens)} */
     public static native void nclang_tokenize(long TU, long Range, long Tokens, long NumTokens, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_tokenize tokenize} */
+    /** {@code void clang_tokenize(CXTranslationUnit TU, CXSourceRange Range, CXToken ** Tokens, unsigned * NumTokens)} */
     public static void nclang_tokenize(long TU, long Range, long Tokens, long NumTokens) {
         long __functionAddress = Functions.tokenize;
         if (CHECKS) {
@@ -8918,15 +5963,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_tokenize(TU, Range, Tokens, NumTokens, __functionAddress);
     }
 
-    /**
-     * Tokenize the source code described by the given range into raw lexical tokens.
-     *
-     * @param TU        the translation unit whose text is being tokenized
-     * @param Range     the source range in which text should be tokenized. All of the tokens produced by tokenization will fall within this source range,
-     * @param Tokens    this pointer will be set to point to the array of tokens that occur within the given source range. The returned pointer must be freed with
-     *                  {@link #clang_disposeTokens disposeTokens} before the translation unit is destroyed.
-     * @param NumTokens will be set to the number of tokens in the {@code *Tokens} array
-     */
+    /** {@code void clang_tokenize(CXTranslationUnit TU, CXSourceRange Range, CXToken ** Tokens, unsigned * NumTokens)} */
     public static void clang_tokenize(@NativeType("CXTranslationUnit") long TU, CXSourceRange Range, @NativeType("CXToken **") PointerBuffer Tokens, @NativeType("unsigned *") IntBuffer NumTokens) {
         if (CHECKS) {
             check(Tokens, 1);
@@ -8937,11 +5974,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_annotateTokens ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_annotateTokens annotateTokens}
-     *
-     * @param NumTokens the number of tokens in {@code Tokens}
-     */
+    /** {@code void clang_annotateTokens(CXTranslationUnit TU, CXToken * Tokens, unsigned NumTokens, CXCursor * Cursors)} */
     public static void nclang_annotateTokens(long TU, long Tokens, int NumTokens, long Cursors) {
         long __functionAddress = Functions.annotateTokens;
         if (CHECKS) {
@@ -8950,26 +5983,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         invokePPPV(TU, Tokens, NumTokens, Cursors, __functionAddress);
     }
 
-    /**
-     * Annotate the given set of tokens by providing cursors for each token that can be mapped to a specific entity within the abstract syntax tree.
-     * 
-     * <p>This token-annotation routine is equivalent to invoking {@link #clang_getCursor getCursor} for the source locations of each of the tokens. The cursors provided are filtered,
-     * so that only those cursors that have a direct correspondence to the token are accepted. For example, given a function call {@code f(x)},
-     * {@code clang_getCursor()} would provide the following cursors:</p>
-     * 
-     * <ul>
-     * <li>when the cursor is over the 'f', a DeclRefExpr cursor referring to 'f'.</li>
-     * <li>when the cursor is over the '(' or the ')', a CallExpr referring to 'f'.</li>
-     * <li>when the cursor is over the 'x', a DeclRefExpr cursor referring to 'x'.</li>
-     * </ul>
-     * 
-     * <p>Only the first and last of these cursors will occur within the annotate, since the tokens "f" and "x' directly refer to a function and a variable,
-     * respectively, but the parentheses are just a small part of the full syntax of the function call expression, which is not provided as an annotation.</p>
-     *
-     * @param TU      the translation unit that owns the given tokens
-     * @param Tokens  the set of tokens to annotate
-     * @param Cursors an array of {@code NumTokens} cursors, whose contents will be replaced with the cursors corresponding to each token
-     */
+    /** {@code void clang_annotateTokens(CXTranslationUnit TU, CXToken * Tokens, unsigned NumTokens, CXCursor * Cursors)} */
     public static void clang_annotateTokens(@NativeType("CXTranslationUnit") long TU, @NativeType("CXToken *") CXToken.Buffer Tokens, @NativeType("CXCursor *") CXCursor.Buffer Cursors) {
         if (CHECKS) {
             check(Cursors, Tokens.remaining());
@@ -8979,7 +5993,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_disposeTokens ] ---
 
-    /** Unsafe version of: {@link #clang_disposeTokens disposeTokens} */
+    /** {@code void clang_disposeTokens(CXTranslationUnit TU, CXToken * Tokens, unsigned NumTokens)} */
     public static void nclang_disposeTokens(long TU, long Tokens, int NumTokens) {
         long __functionAddress = Functions.disposeTokens;
         if (CHECKS) {
@@ -8988,20 +6002,23 @@ if (clang_Cursor_isBitField(Cursor)) {
         invokePPV(TU, Tokens, NumTokens, __functionAddress);
     }
 
-    /** Free the given set of tokens. */
+    /** {@code void clang_disposeTokens(CXTranslationUnit TU, CXToken * Tokens, unsigned NumTokens)} */
     public static void clang_disposeTokens(@NativeType("CXTranslationUnit") long TU, @NativeType("CXToken *") CXToken.Buffer Tokens) {
         nclang_disposeTokens(TU, Tokens.address(), Tokens.remaining());
     }
 
     // --- [ clang_getCursorKindSpelling ] ---
 
+    /** {@code CXString clang_getCursorKindSpelling(enum CXCursorKind Kind)} */
     public static native void nclang_getCursorKindSpelling(int Kind, long __functionAddress, long __result);
 
+    /** {@code CXString clang_getCursorKindSpelling(enum CXCursorKind Kind)} */
     public static void nclang_getCursorKindSpelling(int Kind, long __result) {
         long __functionAddress = Functions.getCursorKindSpelling;
         nclang_getCursorKindSpelling(Kind, __functionAddress, __result);
     }
 
+    /** {@code CXString clang_getCursorKindSpelling(enum CXCursorKind Kind)} */
     public static CXString clang_getCursorKindSpelling(@NativeType("enum CXCursorKind") int Kind, CXString __result) {
         nclang_getCursorKindSpelling(Kind, __result.address());
         return __result;
@@ -9009,13 +6026,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getDefinitionSpellingAndExtent ] ---
 
+    /** {@code void clang_getDefinitionSpellingAndExtent(CXCursor cursor, char const ** startBuf, char const ** endBuf, unsigned * startLine, unsigned * startColumn, unsigned * endLine, unsigned * endColumn)} */
     public static native void nclang_getDefinitionSpellingAndExtent(long cursor, long startBuf, long endBuf, long startLine, long startColumn, long endLine, long endColumn, long __functionAddress);
 
+    /** {@code void clang_getDefinitionSpellingAndExtent(CXCursor cursor, char const ** startBuf, char const ** endBuf, unsigned * startLine, unsigned * startColumn, unsigned * endLine, unsigned * endColumn)} */
     public static void nclang_getDefinitionSpellingAndExtent(long cursor, long startBuf, long endBuf, long startLine, long startColumn, long endLine, long endColumn) {
         long __functionAddress = Functions.getDefinitionSpellingAndExtent;
         nclang_getDefinitionSpellingAndExtent(cursor, startBuf, endBuf, startLine, startColumn, endLine, endColumn, __functionAddress);
     }
 
+    /** {@code void clang_getDefinitionSpellingAndExtent(CXCursor cursor, char const ** startBuf, char const ** endBuf, unsigned * startLine, unsigned * startColumn, unsigned * endLine, unsigned * endColumn)} */
     public static void clang_getDefinitionSpellingAndExtent(CXCursor cursor, @NativeType("char const **") @Nullable PointerBuffer startBuf, @NativeType("char const **") @Nullable PointerBuffer endBuf, @NativeType("unsigned *") @Nullable IntBuffer startLine, @NativeType("unsigned *") @Nullable IntBuffer startColumn, @NativeType("unsigned *") @Nullable IntBuffer endLine, @NativeType("unsigned *") @Nullable IntBuffer endColumn) {
         if (CHECKS) {
             checkSafe(startBuf, 1);
@@ -9030,6 +6050,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_enableStackTraces ] ---
 
+    /** {@code void clang_enableStackTraces(void)} */
     public static void clang_enableStackTraces() {
         long __functionAddress = Functions.enableStackTraces;
         invokeV(__functionAddress);
@@ -9037,25 +6058,20 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_executeOnThread ] ---
 
+    /** {@code void clang_executeOnThread(void (*) (void *) fn, void * user_data, unsigned stack_size)} */
     public static void nclang_executeOnThread(long fn, long user_data, int stack_size) {
         long __functionAddress = Functions.executeOnThread;
         invokePPV(fn, user_data, stack_size, __functionAddress);
     }
 
+    /** {@code void clang_executeOnThread(void (*) (void *) fn, void * user_data, unsigned stack_size)} */
     public static void clang_executeOnThread(@NativeType("void (*) (void *)") CXExecuteOnThreadI fn, @NativeType("void *") long user_data, @NativeType("unsigned") int stack_size) {
         nclang_executeOnThread(fn.address(), user_data, stack_size);
     }
 
     // --- [ clang_getCompletionChunkKind ] ---
 
-    /**
-     * Determine the kind of a particular chunk within a completion string.
-     *
-     * @param completion_string the completion string to query
-     * @param chunk_number      the 0-based index of the chunk in the completion string
-     *
-     * @return the kind of the chunk at the index {@code chunk_number}
-     */
+    /** {@code enum CXCompletionChunkKind clang_getCompletionChunkKind(CXCompletionString completion_string, unsigned chunk_number)} */
     @NativeType("enum CXCompletionChunkKind")
     public static int clang_getCompletionChunkKind(@NativeType("CXCompletionString") long completion_string, @NativeType("unsigned") int chunk_number) {
         long __functionAddress = Functions.getCompletionChunkKind;
@@ -9067,10 +6083,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionChunkText ] ---
 
-    /** Unsafe version of: {@link #clang_getCompletionChunkText getCompletionChunkText} */
+    /** {@code CXString clang_getCompletionChunkText(CXCompletionString completion_string, unsigned chunk_number)} */
     public static native void nclang_getCompletionChunkText(long completion_string, int chunk_number, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCompletionChunkText getCompletionChunkText} */
+    /** {@code CXString clang_getCompletionChunkText(CXCompletionString completion_string, unsigned chunk_number)} */
     public static void nclang_getCompletionChunkText(long completion_string, int chunk_number, long __result) {
         long __functionAddress = Functions.getCompletionChunkText;
         if (CHECKS) {
@@ -9079,13 +6095,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getCompletionChunkText(completion_string, chunk_number, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the text associated with a particular chunk within a completion string.
-     *
-     * @param completion_string the completion string to query
-     * @param chunk_number      the 0-based index of the chunk in the completion string
-     * @param __result          the text associated with the chunk at index {@code chunk_number}
-     */
+    /** {@code CXString clang_getCompletionChunkText(CXCompletionString completion_string, unsigned chunk_number)} */
     public static CXString clang_getCompletionChunkText(@NativeType("CXCompletionString") long completion_string, @NativeType("unsigned") int chunk_number, CXString __result) {
         nclang_getCompletionChunkText(completion_string, chunk_number, __result.address());
         return __result;
@@ -9093,14 +6103,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionChunkCompletionString ] ---
 
-    /**
-     * Retrieve the completion string associated with a particular chunk within a completion string.
-     *
-     * @param completion_string the completion string to query
-     * @param chunk_number      the 0-based index of the chunk in the completion string
-     *
-     * @return the completion string associated with the chunk at index {@code chunk_number}
-     */
+    /** {@code CXCompletionString clang_getCompletionChunkCompletionString(CXCompletionString completion_string, unsigned chunk_number)} */
     @NativeType("CXCompletionString")
     public static long clang_getCompletionChunkCompletionString(@NativeType("CXCompletionString") long completion_string, @NativeType("unsigned") int chunk_number) {
         long __functionAddress = Functions.getCompletionChunkCompletionString;
@@ -9112,7 +6115,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getNumCompletionChunks ] ---
 
-    /** Retrieve the number of chunks in the given code-completion string. */
+    /** {@code unsigned clang_getNumCompletionChunks(CXCompletionString completion_string)} */
     @NativeType("unsigned")
     public static int clang_getNumCompletionChunks(@NativeType("CXCompletionString") long completion_string) {
         long __functionAddress = Functions.getNumCompletionChunks;
@@ -9124,16 +6127,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionPriority ] ---
 
-    /**
-     * Determine the priority of this code completion.
-     * 
-     * <p>The priority of a code completion indicates how likely it is that this particular completion is the completion that the user will select. The priority
-     * is selected by various internal heuristics.</p>
-     *
-     * @param completion_string the completion string to query
-     *
-     * @return the priority of this completion string. Smaller values indicate higher-priority (more likely) completions.
-     */
+    /** {@code unsigned clang_getCompletionPriority(CXCompletionString completion_string)} */
     @NativeType("unsigned")
     public static int clang_getCompletionPriority(@NativeType("CXCompletionString") long completion_string) {
         long __functionAddress = Functions.getCompletionPriority;
@@ -9145,13 +6139,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionAvailability ] ---
 
-    /**
-     * Determine the availability of the entity that this code-completion string refers to.
-     *
-     * @param completion_string the completion string to query
-     *
-     * @return the availability of the completion string
-     */
+    /** {@code enum CXAvailabilityKind clang_getCompletionAvailability(CXCompletionString completion_string)} */
     @NativeType("enum CXAvailabilityKind")
     public static int clang_getCompletionAvailability(@NativeType("CXCompletionString") long completion_string) {
         long __functionAddress = Functions.getCompletionAvailability;
@@ -9163,13 +6151,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionNumAnnotations ] ---
 
-    /**
-     * Retrieve the number of annotations associated with the given completion string.
-     *
-     * @param completion_string the completion string to query
-     *
-     * @return the number of annotations associated with the given completion string
-     */
+    /** {@code unsigned clang_getCompletionNumAnnotations(CXCompletionString completion_string)} */
     @NativeType("unsigned")
     public static int clang_getCompletionNumAnnotations(@NativeType("CXCompletionString") long completion_string) {
         long __functionAddress = Functions.getCompletionNumAnnotations;
@@ -9181,10 +6163,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionAnnotation ] ---
 
-    /** Unsafe version of: {@link #clang_getCompletionAnnotation getCompletionAnnotation} */
+    /** {@code CXString clang_getCompletionAnnotation(CXCompletionString completion_string, unsigned annotation_number)} */
     public static native void nclang_getCompletionAnnotation(long completion_string, int annotation_number, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCompletionAnnotation getCompletionAnnotation} */
+    /** {@code CXString clang_getCompletionAnnotation(CXCompletionString completion_string, unsigned annotation_number)} */
     public static void nclang_getCompletionAnnotation(long completion_string, int annotation_number, long __result) {
         long __functionAddress = Functions.getCompletionAnnotation;
         if (CHECKS) {
@@ -9193,13 +6175,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getCompletionAnnotation(completion_string, annotation_number, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the annotation associated with the given completion string.
-     *
-     * @param completion_string the completion string to query
-     * @param annotation_number the 0-based index of the annotation of the completion string
-     * @param __result          annotation string associated with the completion at index {@code annotation_number}, or a {@code NULL} string if that annotation is not available
-     */
+    /** {@code CXString clang_getCompletionAnnotation(CXCompletionString completion_string, unsigned annotation_number)} */
     public static CXString clang_getCompletionAnnotation(@NativeType("CXCompletionString") long completion_string, @NativeType("unsigned") int annotation_number, CXString __result) {
         nclang_getCompletionAnnotation(completion_string, annotation_number, __result.address());
         return __result;
@@ -9207,10 +6183,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionParent ] ---
 
-    /** Unsafe version of: {@link #clang_getCompletionParent getCompletionParent} */
+    /** {@code CXString clang_getCompletionParent(CXCompletionString completion_string, enum CXCursorKind * kind)} */
     public static native void nclang_getCompletionParent(long completion_string, long kind, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCompletionParent getCompletionParent} */
+    /** {@code CXString clang_getCompletionParent(CXCompletionString completion_string, enum CXCursorKind * kind)} */
     public static void nclang_getCompletionParent(long completion_string, long kind, long __result) {
         long __functionAddress = Functions.getCompletionParent;
         if (CHECKS) {
@@ -9219,16 +6195,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getCompletionParent(completion_string, kind, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the parent context of the given completion string.
-     * 
-     * <p>The parent context of a completion string is the semantic parent of the declaration (if any) that the code completion represents. For example, a code
-     * completion for an Objective-C method would have the method's class or protocol as its context.</p>
-     *
-     * @param completion_string the code completion string whose parent is being queried
-     * @param kind              DEPRECATED: always set to {@link #CXCursor_NotImplemented Cursor_NotImplemented} if non-{@code NULL}
-     * @param __result          the name of the completion parent, e.g., "NSObject" if the completion string represents a method in the {@code NSObject} class.
-     */
+    /** {@code CXString clang_getCompletionParent(CXCompletionString completion_string, enum CXCursorKind * kind)} */
     public static CXString clang_getCompletionParent(@NativeType("CXCompletionString") long completion_string, @NativeType("enum CXCursorKind *") @Nullable IntBuffer kind, CXString __result) {
         if (CHECKS) {
             checkSafe(kind, 1);
@@ -9239,10 +6206,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionBriefComment ] ---
 
-    /** Unsafe version of: {@link #clang_getCompletionBriefComment getCompletionBriefComment} */
+    /** {@code CXString clang_getCompletionBriefComment(CXCompletionString completion_string)} */
     public static native void nclang_getCompletionBriefComment(long completion_string, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCompletionBriefComment getCompletionBriefComment} */
+    /** {@code CXString clang_getCompletionBriefComment(CXCompletionString completion_string)} */
     public static void nclang_getCompletionBriefComment(long completion_string, long __result) {
         long __functionAddress = Functions.getCompletionBriefComment;
         if (CHECKS) {
@@ -9251,7 +6218,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getCompletionBriefComment(completion_string, __functionAddress, __result);
     }
 
-    /** Retrieve the brief documentation comment attached to the declaration that corresponds to the given completion string. */
+    /** {@code CXString clang_getCompletionBriefComment(CXCompletionString completion_string)} */
     public static CXString clang_getCompletionBriefComment(@NativeType("CXCompletionString") long completion_string, CXString __result) {
         nclang_getCompletionBriefComment(completion_string, __result.address());
         return __result;
@@ -9259,22 +6226,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorCompletionString ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorCompletionString getCursorCompletionString} */
+    /** {@code CXCompletionString clang_getCursorCompletionString(CXCursor cursor)} */
     public static native long nclang_getCursorCompletionString(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorCompletionString getCursorCompletionString} */
+    /** {@code CXCompletionString clang_getCursorCompletionString(CXCursor cursor)} */
     public static long nclang_getCursorCompletionString(long cursor) {
         long __functionAddress = Functions.getCursorCompletionString;
         return nclang_getCursorCompletionString(cursor, __functionAddress);
     }
 
-    /**
-     * Retrieve a completion string for an arbitrary declaration or macro definition cursor.
-     *
-     * @param cursor the cursor to query
-     *
-     * @return a non-context-sensitive completion string for declaration and macro definition cursors, or {@code NULL} for other kinds of cursors
-     */
+    /** {@code CXCompletionString clang_getCursorCompletionString(CXCursor cursor)} */
     @NativeType("CXCompletionString")
     public static long clang_getCursorCompletionString(CXCursor cursor) {
         return nclang_getCursorCompletionString(cursor.address());
@@ -9282,7 +6243,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionNumFixIts ] ---
 
-    /** Unsafe version of: {@link #clang_getCompletionNumFixIts getCompletionNumFixIts} */
+    /** {@code unsigned clang_getCompletionNumFixIts(CXCodeCompleteResults * results, unsigned completion_index)} */
     public static int nclang_getCompletionNumFixIts(long results, int completion_index) {
         long __functionAddress = Functions.getCompletionNumFixIts;
         if (CHECKS) {
@@ -9291,16 +6252,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return invokePI(results, completion_index, __functionAddress);
     }
 
-    /**
-     * Retrieve the number of fix-its for the given completion index.
-     * 
-     * <p>Calling this makes sense only if {@link #CXCodeComplete_IncludeCompletionsWithFixIts CodeComplete_IncludeCompletionsWithFixIts} option was set.</p>
-     *
-     * @param results          the structure keeping all completion results
-     * @param completion_index the index of the completion
-     *
-     * @return the number of fix-its which must be applied before the completion at {@code completion_index} can be applied
-     */
+    /** {@code unsigned clang_getCompletionNumFixIts(CXCodeCompleteResults * results, unsigned completion_index)} */
     @NativeType("unsigned")
     public static int clang_getCompletionNumFixIts(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults results, @NativeType("unsigned") int completion_index) {
         return nclang_getCompletionNumFixIts(results.address(), completion_index);
@@ -9308,10 +6260,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCompletionFixIt ] ---
 
-    /** Unsafe version of: {@link #clang_getCompletionFixIt getCompletionFixIt} */
+    /** {@code CXString clang_getCompletionFixIt(CXCodeCompleteResults * results, unsigned completion_index, unsigned fixit_index, CXSourceRange * replacement_range)} */
     public static native void nclang_getCompletionFixIt(long results, int completion_index, int fixit_index, long replacement_range, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getCompletionFixIt getCompletionFixIt} */
+    /** {@code CXString clang_getCompletionFixIt(CXCodeCompleteResults * results, unsigned completion_index, unsigned fixit_index, CXSourceRange * replacement_range)} */
     public static void nclang_getCompletionFixIt(long results, int completion_index, int fixit_index, long replacement_range, long __result) {
         long __functionAddress = Functions.getCompletionFixIt;
         if (CHECKS) {
@@ -9320,34 +6272,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getCompletionFixIt(results, completion_index, fixit_index, replacement_range, __functionAddress, __result);
     }
 
-    /**
-     * Fix-its that <b>must</b> be applied before inserting the text for the corresponding completion.
-     * 
-     * <p>By default, {@link #clang_codeCompleteAt codeCompleteAt} only returns completions with empty fix-its. Extra completions with non-empty fix-its should be explicitly requested
-     * by setting {@link #CXCodeComplete_IncludeCompletionsWithFixIts CodeComplete_IncludeCompletionsWithFixIts}.</p>
-     * 
-     * <p>For the clients to be able to compute position of the cursor after applying fix-its, the following conditions are guaranteed to hold for
-     * {@code replacement_range} of the stored fix-its:</p>
-     * 
-     * <ul>
-     * <li>Ranges in the fix-its are guaranteed to never contain the completion point (or identifier under completion point, if any) inside them, except at
-     * the start or at the end of the range.</li>
-     * <li>If a fix-it range starts or ends with completion point (or starts or ends after the identifier under completion point), it will contain at least
-     * one character. It allows to unambiguously recompute completion point after applying the fix-it.</li>
-     * </ul>
-     * 
-     * <p>The intuition is that provided fix-its change code around the identifier we complete, but are not allowed to touch the identifier itself or the
-     * completion point. One example of completions with corrections are the ones replacing '.' with '-&gt;' and vice versa:</p>
-     * 
-     * <p>{@code std::unique_ptr<std::vector<int>> vec_ptr;} In 'vec_ptr.^', one of the completions is 'push_back', it requires replacing '.' with '-&gt;'. In
-     * 'vec_ptr-&gt;^', one of the completions is 'release', it requires replacing '-&gt;' with '.'.</p>
-     *
-     * @param results           the structure keeping all completion results
-     * @param completion_index  the index of the completion
-     * @param fixit_index       the index of the fix-it for the completion at {@code completion_index}
-     * @param replacement_range the fix-it range that must be replaced before the completion at completion_index can be applied
-     * @param __result          the fix-it string that must replace the code at replacement_range before the completion at completion_index can be applied
-     */
+    /** {@code CXString clang_getCompletionFixIt(CXCodeCompleteResults * results, unsigned completion_index, unsigned fixit_index, CXSourceRange * replacement_range)} */
     public static CXString clang_getCompletionFixIt(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults results, @NativeType("unsigned") int completion_index, @NativeType("unsigned") int fixit_index, @NativeType("CXSourceRange *") CXSourceRange replacement_range, CXString __result) {
         nclang_getCompletionFixIt(results.address(), completion_index, fixit_index, replacement_range.address(), __result.address());
         return __result;
@@ -9355,7 +6280,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_defaultCodeCompleteOptions ] ---
 
-    /** Returns a default set of code-completion options that can be passed to {@link #clang_codeCompleteAt codeCompleteAt}. */
+    /** {@code unsigned clang_defaultCodeCompleteOptions(void)} */
     @NativeType("unsigned")
     public static int clang_defaultCodeCompleteOptions() {
         long __functionAddress = Functions.defaultCodeCompleteOptions;
@@ -9364,11 +6289,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_codeCompleteAt ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_codeCompleteAt codeCompleteAt}
-     *
-     * @param num_unsaved_files the number of unsaved file entries in {@code unsaved_files}
-     */
+    /** {@code CXCodeCompleteResults * clang_codeCompleteAt(CXTranslationUnit TU, char const * complete_filename, unsigned complete_line, unsigned complete_column, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options)} */
     public static long nclang_codeCompleteAt(long TU, long complete_filename, int complete_line, int complete_column, long unsaved_files, int num_unsaved_files, int options) {
         long __functionAddress = Functions.codeCompleteAt;
         if (CHECKS) {
@@ -9377,40 +6298,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return invokePPPP(TU, complete_filename, complete_line, complete_column, unsaved_files, num_unsaved_files, options, __functionAddress);
     }
 
-    /**
-     * Perform code completion at a given location in a translation unit.
-     * 
-     * <p>This function performs code completion at a particular file, line, and column within source code, providing results that suggest potential code
-     * snippets based on the context of the completion. The basic model for code completion is that Clang will parse a complete source file, performing syntax
-     * checking up to the location where code-completion has been requested. At that point, a special code-completion token is passed to the parser, which
-     * recognizes this token and determines, based on the current location in the C/Objective-C/C++ grammar and the state of semantic analysis, what
-     * completions to provide. These completions are returned via a new {@code CXCodeCompleteResults} structure.</p>
-     * 
-     * <p>Code completion itself is meant to be triggered by the client when the user types punctuation characters or whitespace, at which point the
-     * code-completion location will coincide with the cursor. For example, if {@code p} is a pointer, code-completion might be triggered after the "-" and
-     * then after the "&gt;" in {@code p->}. When the code-completion location is after the "&gt;", the completion results will provide, e.g., the members of
-     * the struct that "p" points to. The client is responsible for placing the cursor at the beginning of the token currently being typed, then filtering the
-     * results based on the contents of the token. For example, when code-completing for the expression {@code p->get}, the client should provide the location
-     * just after the "&gt;" (e.g., pointing at the "g") to this code-completion hook. Then, the client can filter the results based on the current token text
-     * ("get"), only showing those results that start with "get". The intent of this interface is to separate the relatively high-latency acquisition of
-     * code-completion results from the filtering of results on a per-character basis, which must have a lower latency.</p>
-     *
-     * @param TU                the translation unit in which code-completion should occur. The source files for this translation unit need not be completely up-to-date (and the
-     *                          contents of those source files may be overridden via {@code unsaved_files}). Cursors referring into the translation unit may be invalidated by this
-     *                          invocation.
-     * @param complete_filename the name of the source file where code completion should be performed. This filename may be any file included in the translation unit.
-     * @param complete_line     the line at which code-completion should occur
-     * @param complete_column   the column at which code-completion should occur. Note that the column should point just after the syntactic construct that initiated code
-     *                          completion, and not in the middle of a lexical token.
-     * @param unsaved_files     the Files that have not yet been saved to disk but may be required for parsing or code completion, including the contents of those files. The
-     *                          contents and name of these files (as specified by {@code CXUnsavedFile}) are copied when necessary, so the client only needs to guarantee their
-     *                          validity until the call to this function returns.
-     * @param options           extra options that control the behavior of code completion, expressed as a bitwise OR of the enumerators of the {@code CXCodeComplete_Flags}
-     *                          enumeration. The {@link #clang_defaultCodeCompleteOptions defaultCodeCompleteOptions} function returns a default set of code-completion options.
-     *
-     * @return if successful, a new {@code CXCodeCompleteResults} structure containing code-completion results, which should eventually be freed with
-     *         {@link #clang_disposeCodeCompleteResults disposeCodeCompleteResults}. If code completion fails, returns {@code NULL}.
-     */
+    /** {@code CXCodeCompleteResults * clang_codeCompleteAt(CXTranslationUnit TU, char const * complete_filename, unsigned complete_line, unsigned complete_column, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options)} */
     @NativeType("CXCodeCompleteResults *")
     public static @Nullable CXCodeCompleteResults clang_codeCompleteAt(@NativeType("CXTranslationUnit") long TU, @NativeType("char const *") ByteBuffer complete_filename, @NativeType("unsigned") int complete_line, @NativeType("unsigned") int complete_column, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options) {
         if (CHECKS) {
@@ -9420,40 +6308,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return CXCodeCompleteResults.createSafe(__result);
     }
 
-    /**
-     * Perform code completion at a given location in a translation unit.
-     * 
-     * <p>This function performs code completion at a particular file, line, and column within source code, providing results that suggest potential code
-     * snippets based on the context of the completion. The basic model for code completion is that Clang will parse a complete source file, performing syntax
-     * checking up to the location where code-completion has been requested. At that point, a special code-completion token is passed to the parser, which
-     * recognizes this token and determines, based on the current location in the C/Objective-C/C++ grammar and the state of semantic analysis, what
-     * completions to provide. These completions are returned via a new {@code CXCodeCompleteResults} structure.</p>
-     * 
-     * <p>Code completion itself is meant to be triggered by the client when the user types punctuation characters or whitespace, at which point the
-     * code-completion location will coincide with the cursor. For example, if {@code p} is a pointer, code-completion might be triggered after the "-" and
-     * then after the "&gt;" in {@code p->}. When the code-completion location is after the "&gt;", the completion results will provide, e.g., the members of
-     * the struct that "p" points to. The client is responsible for placing the cursor at the beginning of the token currently being typed, then filtering the
-     * results based on the contents of the token. For example, when code-completing for the expression {@code p->get}, the client should provide the location
-     * just after the "&gt;" (e.g., pointing at the "g") to this code-completion hook. Then, the client can filter the results based on the current token text
-     * ("get"), only showing those results that start with "get". The intent of this interface is to separate the relatively high-latency acquisition of
-     * code-completion results from the filtering of results on a per-character basis, which must have a lower latency.</p>
-     *
-     * @param TU                the translation unit in which code-completion should occur. The source files for this translation unit need not be completely up-to-date (and the
-     *                          contents of those source files may be overridden via {@code unsaved_files}). Cursors referring into the translation unit may be invalidated by this
-     *                          invocation.
-     * @param complete_filename the name of the source file where code completion should be performed. This filename may be any file included in the translation unit.
-     * @param complete_line     the line at which code-completion should occur
-     * @param complete_column   the column at which code-completion should occur. Note that the column should point just after the syntactic construct that initiated code
-     *                          completion, and not in the middle of a lexical token.
-     * @param unsaved_files     the Files that have not yet been saved to disk but may be required for parsing or code completion, including the contents of those files. The
-     *                          contents and name of these files (as specified by {@code CXUnsavedFile}) are copied when necessary, so the client only needs to guarantee their
-     *                          validity until the call to this function returns.
-     * @param options           extra options that control the behavior of code completion, expressed as a bitwise OR of the enumerators of the {@code CXCodeComplete_Flags}
-     *                          enumeration. The {@link #clang_defaultCodeCompleteOptions defaultCodeCompleteOptions} function returns a default set of code-completion options.
-     *
-     * @return if successful, a new {@code CXCodeCompleteResults} structure containing code-completion results, which should eventually be freed with
-     *         {@link #clang_disposeCodeCompleteResults disposeCodeCompleteResults}. If code completion fails, returns {@code NULL}.
-     */
+    /** {@code CXCodeCompleteResults * clang_codeCompleteAt(CXTranslationUnit TU, char const * complete_filename, unsigned complete_line, unsigned complete_column, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, unsigned options)} */
     @NativeType("CXCodeCompleteResults *")
     public static @Nullable CXCodeCompleteResults clang_codeCompleteAt(@NativeType("CXTranslationUnit") long TU, @NativeType("char const *") CharSequence complete_filename, @NativeType("unsigned") int complete_line, @NativeType("unsigned") int complete_column, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("unsigned") int options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -9469,47 +6324,39 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_sortCodeCompletionResults ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_sortCodeCompletionResults sortCodeCompletionResults}
-     *
-     * @param NumResults the number of results in {@code Results}
-     */
+    /** {@code void clang_sortCodeCompletionResults(CXCompletionResult * Results, unsigned NumResults)} */
     public static void nclang_sortCodeCompletionResults(long Results, int NumResults) {
         long __functionAddress = Functions.sortCodeCompletionResults;
         invokePV(Results, NumResults, __functionAddress);
     }
 
-    /**
-     * Sort the code-completion results in case-insensitive alphabetical order.
-     *
-     * @param Results the set of results to sort
-     */
+    /** {@code void clang_sortCodeCompletionResults(CXCompletionResult * Results, unsigned NumResults)} */
     public static void clang_sortCodeCompletionResults(@NativeType("CXCompletionResult *") CXCompletionResult.Buffer Results) {
         nclang_sortCodeCompletionResults(Results.address(), Results.remaining());
     }
 
     // --- [ clang_disposeCodeCompleteResults ] ---
 
-    /** Unsafe version of: {@link #clang_disposeCodeCompleteResults disposeCodeCompleteResults} */
+    /** {@code void clang_disposeCodeCompleteResults(CXCodeCompleteResults * Results)} */
     public static void nclang_disposeCodeCompleteResults(long Results) {
         long __functionAddress = Functions.disposeCodeCompleteResults;
         invokePV(Results, __functionAddress);
     }
 
-    /** Free the given set of code-completion results. */
+    /** {@code void clang_disposeCodeCompleteResults(CXCodeCompleteResults * Results)} */
     public static void clang_disposeCodeCompleteResults(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults Results) {
         nclang_disposeCodeCompleteResults(Results.address());
     }
 
     // --- [ clang_codeCompleteGetNumDiagnostics ] ---
 
-    /** Unsafe version of: {@link #clang_codeCompleteGetNumDiagnostics codeCompleteGetNumDiagnostics} */
+    /** {@code unsigned clang_codeCompleteGetNumDiagnostics(CXCodeCompleteResults * Results)} */
     public static int nclang_codeCompleteGetNumDiagnostics(long Results) {
         long __functionAddress = Functions.codeCompleteGetNumDiagnostics;
         return invokePI(Results, __functionAddress);
     }
 
-    /** Determine the number of diagnostics produced prior to the location where code completion was performed. */
+    /** {@code unsigned clang_codeCompleteGetNumDiagnostics(CXCodeCompleteResults * Results)} */
     @NativeType("unsigned")
     public static int clang_codeCompleteGetNumDiagnostics(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults Results) {
         return nclang_codeCompleteGetNumDiagnostics(Results.address());
@@ -9517,20 +6364,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_codeCompleteGetDiagnostic ] ---
 
-    /** Unsafe version of: {@link #clang_codeCompleteGetDiagnostic codeCompleteGetDiagnostic} */
+    /** {@code CXDiagnostic clang_codeCompleteGetDiagnostic(CXCodeCompleteResults * Results, unsigned Index)} */
     public static long nclang_codeCompleteGetDiagnostic(long Results, int Index) {
         long __functionAddress = Functions.codeCompleteGetDiagnostic;
         return invokePP(Results, Index, __functionAddress);
     }
 
-    /**
-     * Retrieve a diagnostic associated with the given code completion.
-     *
-     * @param Results the code completion results to query
-     * @param Index   the zero-based diagnostic number to retrieve
-     *
-     * @return the requested diagnostic. This diagnostic must be freed via a call to {@link #clang_disposeDiagnostic disposeDiagnostic}.
-     */
+    /** {@code CXDiagnostic clang_codeCompleteGetDiagnostic(CXCodeCompleteResults * Results, unsigned Index)} */
     @NativeType("CXDiagnostic")
     public static long clang_codeCompleteGetDiagnostic(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults Results, @NativeType("unsigned") int Index) {
         return nclang_codeCompleteGetDiagnostic(Results.address(), Index);
@@ -9538,19 +6378,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_codeCompleteGetContexts ] ---
 
-    /** Unsafe version of: {@link #clang_codeCompleteGetContexts codeCompleteGetContexts} */
+    /** {@code unsigned long long clang_codeCompleteGetContexts(CXCodeCompleteResults * Results)} */
     public static long nclang_codeCompleteGetContexts(long Results) {
         long __functionAddress = Functions.codeCompleteGetContexts;
         return invokePJ(Results, __functionAddress);
     }
 
-    /**
-     * Determines what completions are appropriate for the context the given code completion.
-     *
-     * @param Results the code completion results to query
-     *
-     * @return the kinds of completions that are appropriate for use along with the given code completion results
-     */
+    /** {@code unsigned long long clang_codeCompleteGetContexts(CXCodeCompleteResults * Results)} */
     @NativeType("unsigned long long")
     public static long clang_codeCompleteGetContexts(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults Results) {
         return nclang_codeCompleteGetContexts(Results.address());
@@ -9558,22 +6392,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_codeCompleteGetContainerKind ] ---
 
-    /** Unsafe version of: {@link #clang_codeCompleteGetContainerKind codeCompleteGetContainerKind} */
+    /** {@code enum CXCursorKind clang_codeCompleteGetContainerKind(CXCodeCompleteResults * Results, unsigned * IsIncomplete)} */
     public static int nclang_codeCompleteGetContainerKind(long Results, long IsIncomplete) {
         long __functionAddress = Functions.codeCompleteGetContainerKind;
         return invokePPI(Results, IsIncomplete, __functionAddress);
     }
 
-    /**
-     * Returns the cursor kind for the container for the current code completion context. The container is only guaranteed to be set for contexts where a
-     * container exists (i.e. member accesses or Objective-C message sends); if there is not a container, this function will return {@link #CXCursor_InvalidCode Cursor_InvalidCode}.
-     *
-     * @param Results      the code completion results to query
-     * @param IsIncomplete on return, this value will be false if Clang has complete information about the container. If Clang does not have complete information, this value
-     *                     will be true.
-     *
-     * @return the container kind, or {@link #CXCursor_InvalidCode Cursor_InvalidCode} if there is not a container
-     */
+    /** {@code enum CXCursorKind clang_codeCompleteGetContainerKind(CXCodeCompleteResults * Results, unsigned * IsIncomplete)} */
     @NativeType("enum CXCursorKind")
     public static int clang_codeCompleteGetContainerKind(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults Results, @NativeType("unsigned *") IntBuffer IsIncomplete) {
         if (CHECKS) {
@@ -9584,22 +6409,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_codeCompleteGetContainerUSR ] ---
 
-    /** Unsafe version of: {@link #clang_codeCompleteGetContainerUSR codeCompleteGetContainerUSR} */
+    /** {@code CXString clang_codeCompleteGetContainerUSR(CXCodeCompleteResults * Results)} */
     public static native void nclang_codeCompleteGetContainerUSR(long Results, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_codeCompleteGetContainerUSR codeCompleteGetContainerUSR} */
+    /** {@code CXString clang_codeCompleteGetContainerUSR(CXCodeCompleteResults * Results)} */
     public static void nclang_codeCompleteGetContainerUSR(long Results, long __result) {
         long __functionAddress = Functions.codeCompleteGetContainerUSR;
         nclang_codeCompleteGetContainerUSR(Results, __functionAddress, __result);
     }
 
-    /**
-     * Returns the USR for the container for the current code completion context. If there is not a container for the current context, this function will
-     * return the empty string.
-     *
-     * @param Results  the code completion results to query
-     * @param __result the USR for the container
-     */
+    /** {@code CXString clang_codeCompleteGetContainerUSR(CXCodeCompleteResults * Results)} */
     public static CXString clang_codeCompleteGetContainerUSR(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults Results, CXString __result) {
         nclang_codeCompleteGetContainerUSR(Results.address(), __result.address());
         return __result;
@@ -9607,22 +6426,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_codeCompleteGetObjCSelector ] ---
 
-    /** Unsafe version of: {@link #clang_codeCompleteGetObjCSelector codeCompleteGetObjCSelector} */
+    /** {@code CXString clang_codeCompleteGetObjCSelector(CXCodeCompleteResults * Results)} */
     public static native void nclang_codeCompleteGetObjCSelector(long Results, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_codeCompleteGetObjCSelector codeCompleteGetObjCSelector} */
+    /** {@code CXString clang_codeCompleteGetObjCSelector(CXCodeCompleteResults * Results)} */
     public static void nclang_codeCompleteGetObjCSelector(long Results, long __result) {
         long __functionAddress = Functions.codeCompleteGetObjCSelector;
         nclang_codeCompleteGetObjCSelector(Results, __functionAddress, __result);
     }
 
-    /**
-     * Returns the currently-entered selector for an Objective-C message send, formatted like "initWithFoo:bar:". Only guaranteed to return a non-empty string
-     * for {@link #CXCompletionContext_ObjCInstanceMessage CompletionContext_ObjCInstanceMessage} and {@link #CXCompletionContext_ObjCClassMessage CompletionContext_ObjCClassMessage}.
-     *
-     * @param Results  the code completion results to query
-     * @param __result the selector (or partial selector) that has been entered thus far for an Objective-C message send
-     */
+    /** {@code CXString clang_codeCompleteGetObjCSelector(CXCodeCompleteResults * Results)} */
     public static CXString clang_codeCompleteGetObjCSelector(@NativeType("CXCodeCompleteResults *") CXCodeCompleteResults Results, CXString __result) {
         nclang_codeCompleteGetObjCSelector(Results.address(), __result.address());
         return __result;
@@ -9630,16 +6443,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getClangVersion ] ---
 
-    /** Unsafe version of: {@link #clang_getClangVersion getClangVersion} */
+    /** {@code CXString clang_getClangVersion(void)} */
     public static native void nclang_getClangVersion(long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getClangVersion getClangVersion} */
+    /** {@code CXString clang_getClangVersion(void)} */
     public static void nclang_getClangVersion(long __result) {
         long __functionAddress = Functions.getClangVersion;
         nclang_getClangVersion(__functionAddress, __result);
     }
 
-    /** Return a version string, suitable for showing to a user, but not intended to be parsed (the format is not guaranteed to be stable). */
+    /** {@code CXString clang_getClangVersion(void)} */
     public static CXString clang_getClangVersion(CXString __result) {
         nclang_getClangVersion(__result.address());
         return __result;
@@ -9647,11 +6460,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_toggleCrashRecovery ] ---
 
-    /**
-     * Enable/disable crash recovery.
-     *
-     * @param isEnabled flag to indicate if crash recovery is enabled.  A non-zero value enables crash recovery, while 0 disables it.
-     */
+    /** {@code void clang_toggleCrashRecovery(unsigned isEnabled)} */
     public static void clang_toggleCrashRecovery(@NativeType("unsigned") boolean isEnabled) {
         long __functionAddress = Functions.toggleCrashRecovery;
         invokeV(isEnabled ? 1 : 0, __functionAddress);
@@ -9659,7 +6468,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getInclusions ] ---
 
-    /** Unsafe version of: {@link #clang_getInclusions getInclusions} */
+    /** {@code void clang_getInclusions(CXTranslationUnit tu, void (*) (CXFile, CXSourceLocation *, unsigned, CXClientData) visitor, CXClientData client_data)} */
     public static void nclang_getInclusions(long tu, long visitor, long client_data) {
         long __functionAddress = Functions.getInclusions;
         if (CHECKS) {
@@ -9668,31 +6477,23 @@ if (clang_Cursor_isBitField(Cursor)) {
         invokePPPV(tu, visitor, client_data, __functionAddress);
     }
 
-    /**
-     * Visit the set of preprocessor inclusions in a translation unit. The visitor function is called with the provided data for every included file. This
-     * does not include headers included by the PCH file (unless one is inspecting the inclusions in the PCH file itself).
-     */
+    /** {@code void clang_getInclusions(CXTranslationUnit tu, void (*) (CXFile, CXSourceLocation *, unsigned, CXClientData) visitor, CXClientData client_data)} */
     public static void clang_getInclusions(@NativeType("CXTranslationUnit") long tu, @NativeType("void (*) (CXFile, CXSourceLocation *, unsigned, CXClientData)") CXInclusionVisitorI visitor, @NativeType("CXClientData") long client_data) {
         nclang_getInclusions(tu, visitor.address(), client_data);
     }
 
     // --- [ clang_Cursor_Evaluate ] ---
 
-    /** Unsafe version of: {@link #clang_Cursor_Evaluate Cursor_Evaluate} */
+    /** {@code CXEvalResult clang_Cursor_Evaluate(CXCursor C)} */
     public static native long nclang_Cursor_Evaluate(long C, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Cursor_Evaluate Cursor_Evaluate} */
+    /** {@code CXEvalResult clang_Cursor_Evaluate(CXCursor C)} */
     public static long nclang_Cursor_Evaluate(long C) {
         long __functionAddress = Functions.Cursor_Evaluate;
         return nclang_Cursor_Evaluate(C, __functionAddress);
     }
 
-    /**
-     * If cursor is a statement declaration tries to evaluate the statement and if its variable, tries to evaluate its initializer, into its corresponding
-     * type.
-     * 
-     * <p>If it's an expression, tries to evaluate the expression.</p>
-     */
+    /** {@code CXEvalResult clang_Cursor_Evaluate(CXCursor C)} */
     @NativeType("CXEvalResult")
     public static long clang_Cursor_Evaluate(CXCursor C) {
         return nclang_Cursor_Evaluate(C.address());
@@ -9700,7 +6501,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EvalResult_getKind ] ---
 
-    /** Returns the kind of the evaluated result. */
+    /** {@code CXEvalResultKind clang_EvalResult_getKind(CXEvalResult E)} */
     @NativeType("CXEvalResultKind")
     public static int clang_EvalResult_getKind(@NativeType("CXEvalResult") long E) {
         long __functionAddress = Functions.EvalResult_getKind;
@@ -9712,7 +6513,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EvalResult_getAsInt ] ---
 
-    /** Returns the evaluation result as integer if the kind is Int. */
+    /** {@code int clang_EvalResult_getAsInt(CXEvalResult E)} */
     public static int clang_EvalResult_getAsInt(@NativeType("CXEvalResult") long E) {
         long __functionAddress = Functions.EvalResult_getAsInt;
         if (CHECKS) {
@@ -9723,10 +6524,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EvalResult_getAsLongLong ] ---
 
-    /**
-     * Returns the evaluation result as a long long integer if the kind is Int. This prevents overflows that may happen if the result is returned with
-     * {@link #clang_EvalResult_getAsInt EvalResult_getAsInt}.
-     */
+    /** {@code long long clang_EvalResult_getAsLongLong(CXEvalResult E)} */
     @NativeType("long long")
     public static long clang_EvalResult_getAsLongLong(@NativeType("CXEvalResult") long E) {
         long __functionAddress = Functions.EvalResult_getAsLongLong;
@@ -9738,7 +6536,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EvalResult_isUnsignedInt ] ---
 
-    /** Returns a non-zero value if the kind is Int and the evaluation result resulted in an unsigned integer. */
+    /** {@code unsigned clang_EvalResult_isUnsignedInt(CXEvalResult E)} */
     @NativeType("unsigned")
     public static boolean clang_EvalResult_isUnsignedInt(@NativeType("CXEvalResult") long E) {
         long __functionAddress = Functions.EvalResult_isUnsignedInt;
@@ -9750,7 +6548,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EvalResult_getAsUnsigned ] ---
 
-    /** Returns the evaluation result as an unsigned integer if the kind is Int and {@link #clang_EvalResult_isUnsignedInt EvalResult_isUnsignedInt} is non-zero. */
+    /** {@code unsigned long long clang_EvalResult_getAsUnsigned(CXEvalResult E)} */
     @NativeType("unsigned long long")
     public static long clang_EvalResult_getAsUnsigned(@NativeType("CXEvalResult") long E) {
         long __functionAddress = Functions.EvalResult_getAsUnsigned;
@@ -9762,7 +6560,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EvalResult_getAsDouble ] ---
 
-    /** Returns the evaluation result as double if the kind is double. */
+    /** {@code double clang_EvalResult_getAsDouble(CXEvalResult E)} */
     public static double clang_EvalResult_getAsDouble(@NativeType("CXEvalResult") long E) {
         long __functionAddress = Functions.EvalResult_getAsDouble;
         if (CHECKS) {
@@ -9773,7 +6571,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EvalResult_getAsStr ] ---
 
-    /** Unsafe version of: {@link #clang_EvalResult_getAsStr EvalResult_getAsStr} */
+    /** {@code char const * clang_EvalResult_getAsStr(CXEvalResult E)} */
     public static long nclang_EvalResult_getAsStr(long E) {
         long __functionAddress = Functions.EvalResult_getAsStr;
         if (CHECKS) {
@@ -9782,10 +6580,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return invokePP(E, __functionAddress);
     }
 
-    /**
-     * Returns the evaluation result as a constant string if the kind is other than Int or float. User must not free this pointer, instead call
-     * {@link #clang_EvalResult_dispose EvalResult_dispose} on the {@code CXEvalResult} returned by {@link #clang_Cursor_Evaluate Cursor_Evaluate}.
-     */
+    /** {@code char const * clang_EvalResult_getAsStr(CXEvalResult E)} */
     @NativeType("char const *")
     public static @Nullable String clang_EvalResult_getAsStr(@NativeType("CXEvalResult") long E) {
         long __result = nclang_EvalResult_getAsStr(E);
@@ -9794,7 +6589,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_EvalResult_dispose ] ---
 
-    /** Disposes the created {@code Eval} memory. */
+    /** {@code void clang_EvalResult_dispose(CXEvalResult E)} */
     public static void clang_EvalResult_dispose(@NativeType("CXEvalResult") long E) {
         long __functionAddress = Functions.EvalResult_dispose;
         if (CHECKS) {
@@ -9805,19 +6600,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getRemappings ] ---
 
-    /** Unsafe version of: {@link #clang_getRemappings getRemappings} */
+    /** {@code CXRemapping clang_getRemappings(char const * path)} */
     public static long nclang_getRemappings(long path) {
         long __functionAddress = Functions.getRemappings;
         return invokePP(path, __functionAddress);
     }
 
-    /**
-     * Retrieve a remapping.
-     *
-     * @param path the path that contains metadata about remappings
-     *
-     * @return the requested remapping. This remapping must be freed via a call to {@link #clang_remap_dispose remap_dispose}. Can return {@code NULL} if an error occurred.
-     */
+    /** {@code CXRemapping clang_getRemappings(char const * path)} */
     @NativeType("CXRemapping")
     public static long clang_getRemappings(@NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
@@ -9826,13 +6615,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_getRemappings(memAddress(path));
     }
 
-    /**
-     * Retrieve a remapping.
-     *
-     * @param path the path that contains metadata about remappings
-     *
-     * @return the requested remapping. This remapping must be freed via a call to {@link #clang_remap_dispose remap_dispose}. Can return {@code NULL} if an error occurred.
-     */
+    /** {@code CXRemapping clang_getRemappings(char const * path)} */
     @NativeType("CXRemapping")
     public static long clang_getRemappings(@NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -9847,23 +6630,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getRemappingsFromFileList ] ---
 
-    /**
-     * Unsafe version of: {@link #clang_getRemappingsFromFileList getRemappingsFromFileList}
-     *
-     * @param numFiles number of file paths
-     */
+    /** {@code CXRemapping clang_getRemappingsFromFileList(char const ** filePaths, unsigned numFiles)} */
     public static long nclang_getRemappingsFromFileList(long filePaths, int numFiles) {
         long __functionAddress = Functions.getRemappingsFromFileList;
         return invokePP(filePaths, numFiles, __functionAddress);
     }
 
-    /**
-     * Retrieve a remapping.
-     *
-     * @param filePaths pointer to an array of file paths containing remapping info
-     *
-     * @return the requested remapping. This remapping must be freed via a call to {@link #clang_remap_dispose remap_dispose}. Can return {@code NULL} if an error occurred.
-     */
+    /** {@code CXRemapping clang_getRemappingsFromFileList(char const ** filePaths, unsigned numFiles)} */
     @NativeType("CXRemapping")
     public static long clang_getRemappingsFromFileList(@NativeType("char const **") PointerBuffer filePaths) {
         return nclang_getRemappingsFromFileList(memAddress(filePaths), filePaths.remaining());
@@ -9871,7 +6644,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_remap_getNumFiles ] ---
 
-    /** Determine the number of remappings. */
+    /** {@code unsigned clang_remap_getNumFiles(CXRemapping Remapping)} */
     @NativeType("unsigned")
     public static int clang_remap_getNumFiles(@NativeType("CXRemapping") long Remapping) {
         long __functionAddress = Functions.remap_getNumFiles;
@@ -9883,7 +6656,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_remap_getFilenames ] ---
 
-    /** Unsafe version of: {@link #clang_remap_getFilenames remap_getFilenames} */
+    /** {@code void clang_remap_getFilenames(CXRemapping Remapping, unsigned index, CXString * original, CXString * transformed)} */
     public static void nclang_remap_getFilenames(long Remapping, int index, long original, long transformed) {
         long __functionAddress = Functions.remap_getFilenames;
         if (CHECKS) {
@@ -9892,19 +6665,14 @@ if (clang_Cursor_isBitField(Cursor)) {
         invokePPPV(Remapping, index, original, transformed, __functionAddress);
     }
 
-    /**
-     * Get the original and the associated filename from the remapping.
-     *
-     * @param original    if non-{@code NULL}, will be set to the original filename
-     * @param transformed if non-{@code NULL}, will be set to the filename that the original is associated with
-     */
+    /** {@code void clang_remap_getFilenames(CXRemapping Remapping, unsigned index, CXString * original, CXString * transformed)} */
     public static void clang_remap_getFilenames(@NativeType("CXRemapping") long Remapping, @NativeType("unsigned") int index, @NativeType("CXString *") @Nullable CXString original, @NativeType("CXString *") @Nullable CXString transformed) {
         nclang_remap_getFilenames(Remapping, index, memAddressSafe(original), memAddressSafe(transformed));
     }
 
     // --- [ clang_remap_dispose ] ---
 
-    /** Dispose the remapping. */
+    /** {@code void clang_remap_dispose(CXRemapping Remapping)} */
     public static void clang_remap_dispose(@NativeType("CXRemapping") long Remapping) {
         long __functionAddress = Functions.remap_dispose;
         if (CHECKS) {
@@ -9915,10 +6683,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_findReferencesInFile ] ---
 
-    /** Unsafe version of: {@link #clang_findReferencesInFile findReferencesInFile} */
+    /** {@code CXResult clang_findReferencesInFile(CXCursor cursor, CXFile file, CXCursorAndRangeVisitor visitor)} */
     public static native int nclang_findReferencesInFile(long cursor, long file, long visitor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_findReferencesInFile findReferencesInFile} */
+    /** {@code CXResult clang_findReferencesInFile(CXCursor cursor, CXFile file, CXCursorAndRangeVisitor visitor)} */
     public static int nclang_findReferencesInFile(long cursor, long file, long visitor) {
         long __functionAddress = Functions.findReferencesInFile;
         if (CHECKS) {
@@ -9928,16 +6696,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_findReferencesInFile(cursor, file, visitor, __functionAddress);
     }
 
-    /**
-     * Find references of a declaration in a specific file.
-     *
-     * @param cursor  pointing to a declaration or a reference of one
-     * @param file    to search for references
-     * @param visitor callback that will receive pairs of {@code CXCursor/CXSourceRange} for each reference found. The {@code CXSourceRange} will point inside the file;
-     *                if the reference is inside a macro (and not a macro argument) the {@code CXSourceRange} will be invalid.
-     *
-     * @return one of the {@code CXResult} enumerators
-     */
+    /** {@code CXResult clang_findReferencesInFile(CXCursor cursor, CXFile file, CXCursorAndRangeVisitor visitor)} */
     @NativeType("CXResult")
     public static int clang_findReferencesInFile(CXCursor cursor, @NativeType("CXFile") long file, CXCursorAndRangeVisitor visitor) {
         return nclang_findReferencesInFile(cursor.address(), file, visitor.address());
@@ -9945,10 +6704,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_findIncludesInFile ] ---
 
-    /** Unsafe version of: {@link #clang_findIncludesInFile findIncludesInFile} */
+    /** {@code CXResult clang_findIncludesInFile(CXTranslationUnit TU, CXFile file, CXCursorAndRangeVisitor visitor)} */
     public static native int nclang_findIncludesInFile(long TU, long file, long visitor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_findIncludesInFile findIncludesInFile} */
+    /** {@code CXResult clang_findIncludesInFile(CXTranslationUnit TU, CXFile file, CXCursorAndRangeVisitor visitor)} */
     public static int nclang_findIncludesInFile(long TU, long file, long visitor) {
         long __functionAddress = Functions.findIncludesInFile;
         if (CHECKS) {
@@ -9959,15 +6718,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_findIncludesInFile(TU, file, visitor, __functionAddress);
     }
 
-    /**
-     * Find {@code #import/#include} directives in a specific file.
-     *
-     * @param TU      translation unit containing the file to query
-     * @param file    to search for {@code #import/#include} directives
-     * @param visitor callback that will receive pairs of {@code CXCursor/CXSourceRange} for each directive found
-     *
-     * @return one of the CXResult enumerators
-     */
+    /** {@code CXResult clang_findIncludesInFile(CXTranslationUnit TU, CXFile file, CXCursorAndRangeVisitor visitor)} */
     @NativeType("CXResult")
     public static int clang_findIncludesInFile(@NativeType("CXTranslationUnit") long TU, @NativeType("CXFile") long file, CXCursorAndRangeVisitor visitor) {
         return nclang_findIncludesInFile(TU, file, visitor.address());
@@ -9975,6 +6726,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_isEntityObjCContainerKind ] ---
 
+    /** {@code int clang_index_isEntityObjCContainerKind(CXIdxEntityKind kind)} */
     @NativeType("int")
     public static boolean clang_index_isEntityObjCContainerKind(@NativeType("CXIdxEntityKind") int kind) {
         long __functionAddress = Functions.index_isEntityObjCContainerKind;
@@ -9983,11 +6735,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_getObjCContainerDeclInfo ] ---
 
+    /** {@code CXIdxObjCContainerDeclInfo const * clang_index_getObjCContainerDeclInfo(CXIdxDeclInfo const * info)} */
     public static long nclang_index_getObjCContainerDeclInfo(long info) {
         long __functionAddress = Functions.index_getObjCContainerDeclInfo;
         return invokePP(info, __functionAddress);
     }
 
+    /** {@code CXIdxObjCContainerDeclInfo const * clang_index_getObjCContainerDeclInfo(CXIdxDeclInfo const * info)} */
     @NativeType("CXIdxObjCContainerDeclInfo const *")
     public static @Nullable CXIdxObjCContainerDeclInfo clang_index_getObjCContainerDeclInfo(@NativeType("CXIdxDeclInfo const *") CXIdxDeclInfo info) {
         long __result = nclang_index_getObjCContainerDeclInfo(info.address());
@@ -9996,11 +6750,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_getObjCInterfaceDeclInfo ] ---
 
+    /** {@code CXIdxObjCInterfaceDeclInfo const * clang_index_getObjCInterfaceDeclInfo(CXIdxDeclInfo const * info)} */
     public static long nclang_index_getObjCInterfaceDeclInfo(long info) {
         long __functionAddress = Functions.index_getObjCInterfaceDeclInfo;
         return invokePP(info, __functionAddress);
     }
 
+    /** {@code CXIdxObjCInterfaceDeclInfo const * clang_index_getObjCInterfaceDeclInfo(CXIdxDeclInfo const * info)} */
     @NativeType("CXIdxObjCInterfaceDeclInfo const *")
     public static @Nullable CXIdxObjCInterfaceDeclInfo clang_index_getObjCInterfaceDeclInfo(@NativeType("CXIdxDeclInfo const *") CXIdxDeclInfo info) {
         long __result = nclang_index_getObjCInterfaceDeclInfo(info.address());
@@ -10009,11 +6765,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_getObjCCategoryDeclInfo ] ---
 
+    /** {@code CXIdxObjCCategoryDeclInfo const * clang_index_getObjCCategoryDeclInfo(CXIdxDeclInfo const * info)} */
     public static long nclang_index_getObjCCategoryDeclInfo(long info) {
         long __functionAddress = Functions.index_getObjCCategoryDeclInfo;
         return invokePP(info, __functionAddress);
     }
 
+    /** {@code CXIdxObjCCategoryDeclInfo const * clang_index_getObjCCategoryDeclInfo(CXIdxDeclInfo const * info)} */
     @NativeType("CXIdxObjCCategoryDeclInfo const *")
     public static @Nullable CXIdxObjCCategoryDeclInfo clang_index_getObjCCategoryDeclInfo(@NativeType("CXIdxDeclInfo const *") CXIdxDeclInfo info) {
         long __result = nclang_index_getObjCCategoryDeclInfo(info.address());
@@ -10022,11 +6780,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_getObjCProtocolRefListInfo ] ---
 
+    /** {@code CXIdxObjCProtocolRefListInfo const * clang_index_getObjCProtocolRefListInfo(CXIdxDeclInfo const * info)} */
     public static long nclang_index_getObjCProtocolRefListInfo(long info) {
         long __functionAddress = Functions.index_getObjCProtocolRefListInfo;
         return invokePP(info, __functionAddress);
     }
 
+    /** {@code CXIdxObjCProtocolRefListInfo const * clang_index_getObjCProtocolRefListInfo(CXIdxDeclInfo const * info)} */
     @NativeType("CXIdxObjCProtocolRefListInfo const *")
     public static @Nullable CXIdxObjCProtocolRefListInfo clang_index_getObjCProtocolRefListInfo(@NativeType("CXIdxDeclInfo const *") CXIdxDeclInfo info) {
         long __result = nclang_index_getObjCProtocolRefListInfo(info.address());
@@ -10035,11 +6795,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_getObjCPropertyDeclInfo ] ---
 
+    /** {@code CXIdxObjCPropertyDeclInfo const * clang_index_getObjCPropertyDeclInfo(CXIdxDeclInfo const * info)} */
     public static long nclang_index_getObjCPropertyDeclInfo(long info) {
         long __functionAddress = Functions.index_getObjCPropertyDeclInfo;
         return invokePP(info, __functionAddress);
     }
 
+    /** {@code CXIdxObjCPropertyDeclInfo const * clang_index_getObjCPropertyDeclInfo(CXIdxDeclInfo const * info)} */
     @NativeType("CXIdxObjCPropertyDeclInfo const *")
     public static @Nullable CXIdxObjCPropertyDeclInfo clang_index_getObjCPropertyDeclInfo(@NativeType("CXIdxDeclInfo const *") CXIdxDeclInfo info) {
         long __result = nclang_index_getObjCPropertyDeclInfo(info.address());
@@ -10048,11 +6810,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_getIBOutletCollectionAttrInfo ] ---
 
+    /** {@code CXIdxIBOutletCollectionAttrInfo const * clang_index_getIBOutletCollectionAttrInfo(CXIdxAttrInfo const * info)} */
     public static long nclang_index_getIBOutletCollectionAttrInfo(long info) {
         long __functionAddress = Functions.index_getIBOutletCollectionAttrInfo;
         return invokePP(info, __functionAddress);
     }
 
+    /** {@code CXIdxIBOutletCollectionAttrInfo const * clang_index_getIBOutletCollectionAttrInfo(CXIdxAttrInfo const * info)} */
     @NativeType("CXIdxIBOutletCollectionAttrInfo const *")
     public static @Nullable CXIdxIBOutletCollectionAttrInfo clang_index_getIBOutletCollectionAttrInfo(@NativeType("CXIdxAttrInfo const *") CXIdxAttrInfo info) {
         long __result = nclang_index_getIBOutletCollectionAttrInfo(info.address());
@@ -10061,11 +6825,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_getCXXClassDeclInfo ] ---
 
+    /** {@code CXIdxCXXClassDeclInfo const * clang_index_getCXXClassDeclInfo(CXIdxDeclInfo const * info)} */
     public static long nclang_index_getCXXClassDeclInfo(long info) {
         long __functionAddress = Functions.index_getCXXClassDeclInfo;
         return invokePP(info, __functionAddress);
     }
 
+    /** {@code CXIdxCXXClassDeclInfo const * clang_index_getCXXClassDeclInfo(CXIdxDeclInfo const * info)} */
     @NativeType("CXIdxCXXClassDeclInfo const *")
     public static @Nullable CXIdxCXXClassDeclInfo clang_index_getCXXClassDeclInfo(@NativeType("CXIdxDeclInfo const *") CXIdxDeclInfo info) {
         long __result = nclang_index_getCXXClassDeclInfo(info.address());
@@ -10074,13 +6840,13 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_getClientContainer ] ---
 
-    /** Unsafe version of: {@link #clang_index_getClientContainer index_getClientContainer} */
+    /** {@code CXIdxClientContainer clang_index_getClientContainer(CXIdxContainerInfo const * info)} */
     public static long nclang_index_getClientContainer(long info) {
         long __functionAddress = Functions.index_getClientContainer;
         return invokePP(info, __functionAddress);
     }
 
-    /** For retrieving a custom {@code CXIdxClientContainer} attached to a container. */
+    /** {@code CXIdxClientContainer clang_index_getClientContainer(CXIdxContainerInfo const * info)} */
     @NativeType("CXIdxClientContainer")
     public static long clang_index_getClientContainer(@NativeType("CXIdxContainerInfo const *") CXIdxContainerInfo info) {
         return nclang_index_getClientContainer(info.address());
@@ -10088,7 +6854,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_setClientContainer ] ---
 
-    /** Unsafe version of: {@link #clang_index_setClientContainer index_setClientContainer} */
+    /** {@code void clang_index_setClientContainer(CXIdxContainerInfo const * info, CXIdxClientContainer container)} */
     public static void nclang_index_setClientContainer(long info, long container) {
         long __functionAddress = Functions.index_setClientContainer;
         if (CHECKS) {
@@ -10097,20 +6863,20 @@ if (clang_Cursor_isBitField(Cursor)) {
         invokePPV(info, container, __functionAddress);
     }
 
-    /** For setting a custom {@code CXIdxClientContainer} attached to a container. */
+    /** {@code void clang_index_setClientContainer(CXIdxContainerInfo const * info, CXIdxClientContainer container)} */
     public static void clang_index_setClientContainer(@NativeType("CXIdxContainerInfo const *") CXIdxContainerInfo info, @NativeType("CXIdxClientContainer") long container) {
         nclang_index_setClientContainer(info.address(), container);
     }
 
     // --- [ clang_index_getClientEntity ] ---
 
-    /** Unsafe version of: {@link #clang_index_getClientEntity index_getClientEntity} */
+    /** {@code CXIdxClientEntity clang_index_getClientEntity(CXIdxEntityInfo const * info)} */
     public static long nclang_index_getClientEntity(long info) {
         long __functionAddress = Functions.index_getClientEntity;
         return invokePP(info, __functionAddress);
     }
 
-    /** For retrieving a custom {@code CXIdxClientEntity} attached to an entity. */
+    /** {@code CXIdxClientEntity clang_index_getClientEntity(CXIdxEntityInfo const * info)} */
     @NativeType("CXIdxClientEntity")
     public static long clang_index_getClientEntity(@NativeType("CXIdxEntityInfo const *") CXIdxEntityInfo info) {
         return nclang_index_getClientEntity(info.address());
@@ -10118,7 +6884,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_index_setClientEntity ] ---
 
-    /** Unsafe version of: {@link #clang_index_setClientEntity index_setClientEntity} */
+    /** {@code void clang_index_setClientEntity(CXIdxEntityInfo const * info, CXIdxClientEntity entity)} */
     public static void nclang_index_setClientEntity(long info, long entity) {
         long __functionAddress = Functions.index_setClientEntity;
         if (CHECKS) {
@@ -10127,18 +6893,14 @@ if (clang_Cursor_isBitField(Cursor)) {
         invokePPV(info, entity, __functionAddress);
     }
 
-    /** For setting a custom {@code CXIdxClientEntity} attached to an entity. */
+    /** {@code void clang_index_setClientEntity(CXIdxEntityInfo const * info, CXIdxClientEntity entity)} */
     public static void clang_index_setClientEntity(@NativeType("CXIdxEntityInfo const *") CXIdxEntityInfo info, @NativeType("CXIdxClientEntity") long entity) {
         nclang_index_setClientEntity(info.address(), entity);
     }
 
     // --- [ clang_IndexAction_create ] ---
 
-    /**
-     * An indexing action/session, to be applied to one or multiple translation units.
-     *
-     * @param CIdx the index object with which the index action will be associated
-     */
+    /** {@code CXIndexAction clang_IndexAction_create(CXIndex CIdx)} */
     @NativeType("CXIndexAction")
     public static long clang_IndexAction_create(@NativeType("CXIndex") long CIdx) {
         long __functionAddress = Functions.IndexAction_create;
@@ -10150,11 +6912,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_IndexAction_dispose ] ---
 
-    /**
-     * Destroy the given index action.
-     * 
-     * <p>The index action must not be destroyed until all of the translation units created within that index action have been destroyed.</p>
-     */
+    /** {@code void clang_IndexAction_dispose(CXIndexAction action)} */
     public static void clang_IndexAction_dispose(@NativeType("CXIndexAction") long action) {
         long __functionAddress = Functions.IndexAction_dispose;
         if (CHECKS) {
@@ -10165,7 +6923,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_indexSourceFile ] ---
 
-    /** Unsafe version of: {@link #clang_indexSourceFile indexSourceFile} */
+    /** {@code int clang_indexSourceFile(CXIndexAction action, CXClientData client_data, IndexerCallbacks * index_callbacks, unsigned index_callbacks_size, unsigned index_options, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, CXTranslationUnit * out_TU, unsigned TU_options)} */
     public static int nclang_indexSourceFile(long action, long client_data, long index_callbacks, int index_callbacks_size, int index_options, long source_filename, long command_line_args, int num_command_line_args, long unsaved_files, int num_unsaved_files, long out_TU, int TU_options) {
         long __functionAddress = Functions.indexSourceFile;
         if (CHECKS) {
@@ -10174,20 +6932,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return invokePPPPPPPI(action, client_data, index_callbacks, index_callbacks_size, index_options, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, out_TU, TU_options, __functionAddress);
     }
 
-    /**
-     * Index the given source file and the translation unit corresponding to that file via callbacks implemented through {@link IndexerCallbacks}.
-     * 
-     * <p>The rest of the parameters are the same as {@link #clang_parseTranslationUnit parseTranslationUnit}.</p>
-     *
-     * @param client_data          pointer data supplied by the client, which will be passed to the invoked callbacks
-     * @param index_callbacks      pointer to indexing callbacks that the client implements
-     * @param index_callbacks_size size of {@link IndexerCallbacks} structure that gets passed in {@code index_callbacks}
-     * @param index_options        a bitmask of options that affects how indexing is performed. This should be a bitwise OR of the {@code CXIndexOpt_XXX} flags.
-     * @param out_TU               pointer to store a {@code CXTranslationUnit} that can be reused after indexing is finished. Set to {@code NULL} if you do not require it.
-     *
-     * @return 0 on success or if there were errors from which the compiler could recover. If there is a failure from which there is no recovery, returns a non-zero
-     *         {@code CXErrorCode}.
-     */
+    /** {@code int clang_indexSourceFile(CXIndexAction action, CXClientData client_data, IndexerCallbacks * index_callbacks, unsigned index_callbacks_size, unsigned index_options, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, CXTranslationUnit * out_TU, unsigned TU_options)} */
     public static int clang_indexSourceFile(@NativeType("CXIndexAction") long action, @NativeType("CXClientData") long client_data, @NativeType("IndexerCallbacks *") IndexerCallbacks index_callbacks, @NativeType("unsigned") int index_callbacks_size, @NativeType("unsigned") int index_options, @NativeType("char const *") ByteBuffer source_filename, @NativeType("char const * const *") @Nullable PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("CXTranslationUnit *") @Nullable PointerBuffer out_TU, @NativeType("unsigned") int TU_options) {
         if (CHECKS) {
             checkNT1(source_filename);
@@ -10196,20 +6941,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_indexSourceFile(action, client_data, index_callbacks.address(), index_callbacks_size, index_options, memAddress(source_filename), memAddressSafe(command_line_args), remainingSafe(command_line_args), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), memAddressSafe(out_TU), TU_options);
     }
 
-    /**
-     * Index the given source file and the translation unit corresponding to that file via callbacks implemented through {@link IndexerCallbacks}.
-     * 
-     * <p>The rest of the parameters are the same as {@link #clang_parseTranslationUnit parseTranslationUnit}.</p>
-     *
-     * @param client_data          pointer data supplied by the client, which will be passed to the invoked callbacks
-     * @param index_callbacks      pointer to indexing callbacks that the client implements
-     * @param index_callbacks_size size of {@link IndexerCallbacks} structure that gets passed in {@code index_callbacks}
-     * @param index_options        a bitmask of options that affects how indexing is performed. This should be a bitwise OR of the {@code CXIndexOpt_XXX} flags.
-     * @param out_TU               pointer to store a {@code CXTranslationUnit} that can be reused after indexing is finished. Set to {@code NULL} if you do not require it.
-     *
-     * @return 0 on success or if there were errors from which the compiler could recover. If there is a failure from which there is no recovery, returns a non-zero
-     *         {@code CXErrorCode}.
-     */
+    /** {@code int clang_indexSourceFile(CXIndexAction action, CXClientData client_data, IndexerCallbacks * index_callbacks, unsigned index_callbacks_size, unsigned index_options, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, CXTranslationUnit * out_TU, unsigned TU_options)} */
     public static int clang_indexSourceFile(@NativeType("CXIndexAction") long action, @NativeType("CXClientData") long client_data, @NativeType("IndexerCallbacks *") IndexerCallbacks index_callbacks, @NativeType("unsigned") int index_callbacks_size, @NativeType("unsigned") int index_options, @NativeType("char const *") CharSequence source_filename, @NativeType("char const * const *") @Nullable PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("CXTranslationUnit *") @Nullable PointerBuffer out_TU, @NativeType("unsigned") int TU_options) {
         if (CHECKS) {
             checkSafe(out_TU, 1);
@@ -10226,7 +6958,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_indexSourceFileFullArgv ] ---
 
-    /** Unsafe version of: {@link #clang_indexSourceFileFullArgv indexSourceFileFullArgv} */
+    /** {@code int clang_indexSourceFileFullArgv(CXIndexAction action, CXClientData client_data, IndexerCallbacks * index_callbacks, unsigned index_callbacks_size, unsigned index_options, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, CXTranslationUnit * out_TU, unsigned TU_options)} */
     public static int nclang_indexSourceFileFullArgv(long action, long client_data, long index_callbacks, int index_callbacks_size, int index_options, long source_filename, long command_line_args, int num_command_line_args, long unsaved_files, int num_unsaved_files, long out_TU, int TU_options) {
         long __functionAddress = Functions.indexSourceFileFullArgv;
         if (CHECKS) {
@@ -10235,10 +6967,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return invokePPPPPPPI(action, client_data, index_callbacks, index_callbacks_size, index_options, source_filename, command_line_args, num_command_line_args, unsaved_files, num_unsaved_files, out_TU, TU_options, __functionAddress);
     }
 
-    /**
-     * Same as {@link #clang_indexSourceFile indexSourceFile} but requires a full command line for {@code command_line_args} including {@code argv[0]}. This is useful if the standard
-     * library paths are relative to the binary.
-     */
+    /** {@code int clang_indexSourceFileFullArgv(CXIndexAction action, CXClientData client_data, IndexerCallbacks * index_callbacks, unsigned index_callbacks_size, unsigned index_options, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, CXTranslationUnit * out_TU, unsigned TU_options)} */
     public static int clang_indexSourceFileFullArgv(@NativeType("CXIndexAction") long action, @NativeType("CXClientData") long client_data, @NativeType("IndexerCallbacks *") IndexerCallbacks index_callbacks, @NativeType("unsigned") int index_callbacks_size, @NativeType("unsigned") int index_options, @NativeType("char const *") ByteBuffer source_filename, @NativeType("char const * const *") PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("CXTranslationUnit *") @Nullable PointerBuffer out_TU, @NativeType("unsigned") int TU_options) {
         if (CHECKS) {
             checkNT1(source_filename);
@@ -10247,10 +6976,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_indexSourceFileFullArgv(action, client_data, index_callbacks.address(), index_callbacks_size, index_options, memAddress(source_filename), memAddress(command_line_args), command_line_args.remaining(), memAddressSafe(unsaved_files), remainingSafe(unsaved_files), memAddressSafe(out_TU), TU_options);
     }
 
-    /**
-     * Same as {@link #clang_indexSourceFile indexSourceFile} but requires a full command line for {@code command_line_args} including {@code argv[0]}. This is useful if the standard
-     * library paths are relative to the binary.
-     */
+    /** {@code int clang_indexSourceFileFullArgv(CXIndexAction action, CXClientData client_data, IndexerCallbacks * index_callbacks, unsigned index_callbacks_size, unsigned index_options, char const * source_filename, char const * const * command_line_args, int num_command_line_args, struct CXUnsavedFile * unsaved_files, unsigned num_unsaved_files, CXTranslationUnit * out_TU, unsigned TU_options)} */
     public static int clang_indexSourceFileFullArgv(@NativeType("CXIndexAction") long action, @NativeType("CXClientData") long client_data, @NativeType("IndexerCallbacks *") IndexerCallbacks index_callbacks, @NativeType("unsigned") int index_callbacks_size, @NativeType("unsigned") int index_options, @NativeType("char const *") CharSequence source_filename, @NativeType("char const * const *") PointerBuffer command_line_args, @NativeType("struct CXUnsavedFile *") CXUnsavedFile.@Nullable Buffer unsaved_files, @NativeType("CXTranslationUnit *") @Nullable PointerBuffer out_TU, @NativeType("unsigned") int TU_options) {
         if (CHECKS) {
             checkSafe(out_TU, 1);
@@ -10267,7 +6993,7 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_indexTranslationUnit ] ---
 
-    /** Unsafe version of: {@link #clang_indexTranslationUnit indexTranslationUnit} */
+    /** {@code int clang_indexTranslationUnit(CXIndexAction action, CXClientData client_data, IndexerCallbacks * index_callbacks, unsigned index_callbacks_size, unsigned index_options, CXTranslationUnit TU)} */
     public static int nclang_indexTranslationUnit(long action, long client_data, long index_callbacks, int index_callbacks_size, int index_options, long TU) {
         long __functionAddress = Functions.indexTranslationUnit;
         if (CHECKS) {
@@ -10277,21 +7003,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return invokePPPPI(action, client_data, index_callbacks, index_callbacks_size, index_options, TU, __functionAddress);
     }
 
-    /**
-     * Index the given translation unit via callbacks implemented through {@link IndexerCallbacks}.
-     * 
-     * <p>The order of callback invocations is not guaranteed to be the same as when indexing a source file. The high level order will be:</p>
-     * 
-     * <ul>
-     * <li>Preprocessor callbacks invocations</li>
-     * <li>Declaration/reference callbacks invocations</li>
-     * <li>Diagnostic callback invocations</li>
-     * </ul>
-     * 
-     * <p>The parameters are the same as {@link #clang_indexSourceFile indexSourceFile}.</p>
-     *
-     * @return if there is a failure from which there is no recovery, returns non-zero, otherwise returns 0
-     */
+    /** {@code int clang_indexTranslationUnit(CXIndexAction action, CXClientData client_data, IndexerCallbacks * index_callbacks, unsigned index_callbacks_size, unsigned index_options, CXTranslationUnit TU)} */
     @NativeType("int")
     public static boolean clang_indexTranslationUnit(@NativeType("CXIndexAction") long action, @NativeType("CXClientData") long client_data, @NativeType("IndexerCallbacks *") IndexerCallbacks index_callbacks, @NativeType("unsigned") int index_callbacks_size, @NativeType("unsigned") int index_options, @NativeType("CXTranslationUnit") long TU) {
         return nclang_indexTranslationUnit(action, client_data, index_callbacks.address(), index_callbacks_size, index_options, TU) != 0;
@@ -10299,21 +7011,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_indexLoc_getFileLocation ] ---
 
-    /** Unsafe version of: {@link #clang_indexLoc_getFileLocation indexLoc_getFileLocation} */
+    /** {@code void clang_indexLoc_getFileLocation(CXIdxLoc loc, CXIdxClientFile * indexFile, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static native void nclang_indexLoc_getFileLocation(long loc, long indexFile, long file, long line, long column, long offset, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_indexLoc_getFileLocation indexLoc_getFileLocation} */
+    /** {@code void clang_indexLoc_getFileLocation(CXIdxLoc loc, CXIdxClientFile * indexFile, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static void nclang_indexLoc_getFileLocation(long loc, long indexFile, long file, long line, long column, long offset) {
         long __functionAddress = Functions.indexLoc_getFileLocation;
         nclang_indexLoc_getFileLocation(loc, indexFile, file, line, column, offset, __functionAddress);
     }
 
-    /**
-     * Retrieve the {@code CXIdxFile}, file, line, column, and offset represented by the given {@code CXIdxLoc}.
-     * 
-     * <p>If the location refers into a macro expansion, retrieves the location of the macro expansion and if it refers into a macro argument retrieves the
-     * location of the argument.</p>
-     */
+    /** {@code void clang_indexLoc_getFileLocation(CXIdxLoc loc, CXIdxClientFile * indexFile, CXFile * file, unsigned * line, unsigned * column, unsigned * offset)} */
     public static void clang_indexLoc_getFileLocation(CXIdxLoc loc, @NativeType("CXIdxClientFile *") @Nullable PointerBuffer indexFile, @NativeType("CXFile *") @Nullable PointerBuffer file, @NativeType("unsigned *") @Nullable IntBuffer line, @NativeType("unsigned *") @Nullable IntBuffer column, @NativeType("unsigned *") @Nullable IntBuffer offset) {
         if (CHECKS) {
             checkSafe(indexFile, 1);
@@ -10327,16 +7034,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_indexLoc_getCXSourceLocation ] ---
 
-    /** Unsafe version of: {@link #clang_indexLoc_getCXSourceLocation indexLoc_getCXSourceLocation} */
+    /** {@code CXSourceLocation clang_indexLoc_getCXSourceLocation(CXIdxLoc loc)} */
     public static native void nclang_indexLoc_getCXSourceLocation(long loc, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_indexLoc_getCXSourceLocation indexLoc_getCXSourceLocation} */
+    /** {@code CXSourceLocation clang_indexLoc_getCXSourceLocation(CXIdxLoc loc)} */
     public static void nclang_indexLoc_getCXSourceLocation(long loc, long __result) {
         long __functionAddress = Functions.indexLoc_getCXSourceLocation;
         nclang_indexLoc_getCXSourceLocation(loc, __functionAddress, __result);
     }
 
-    /** Retrieve the {@code CXSourceLocation} represented by the given {@code CXIdxLoc}. */
+    /** {@code CXSourceLocation clang_indexLoc_getCXSourceLocation(CXIdxLoc loc)} */
     public static CXSourceLocation clang_indexLoc_getCXSourceLocation(CXIdxLoc loc, CXSourceLocation __result) {
         nclang_indexLoc_getCXSourceLocation(loc.address(), __result.address());
         return __result;
@@ -10344,27 +7051,16 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_Type_visitFields ] ---
 
-    /** Unsafe version of: {@link #clang_Type_visitFields Type_visitFields} */
+    /** {@code unsigned clang_Type_visitFields(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
     public static native int nclang_Type_visitFields(long T, long visitor, long client_data, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_Type_visitFields Type_visitFields} */
+    /** {@code unsigned clang_Type_visitFields(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
     public static int nclang_Type_visitFields(long T, long visitor, long client_data) {
         long __functionAddress = Functions.Type_visitFields;
         return nclang_Type_visitFields(T, visitor, client_data, __functionAddress);
     }
 
-    /**
-     * Visit the fields of a particular type.
-     * 
-     * <p>This function visits all the direct fields of the given cursor, invoking the given {@code visitor} function with the cursors of each visited field. The
-     * traversal may be ended prematurely, if the visitor returns {@link #CXVisit_Break Visit_Break}.</p>
-     *
-     * @param T           the record type whose field may be visited
-     * @param visitor     the visitor function that will be invoked for each field of {@code T}
-     * @param client_data pointer data supplied by the client, which will be passed to the visitor each time it is invoked
-     *
-     * @return a non-zero value if the traversal was terminated prematurely by the visitor returning {@link #CXVisit_Break Visit_Break}
-     */
+    /** {@code unsigned clang_Type_visitFields(CXType T, enum CXVisitorResult (*) (CXCursor, CXClientData) visitor, CXClientData client_data)} */
     @NativeType("unsigned")
     public static boolean clang_Type_visitFields(CXType T, @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)") CXFieldVisitorI visitor, @NativeType("CXClientData") long client_data) {
         return nclang_Type_visitFields(T.address(), visitor.address(), client_data) != 0;
@@ -10372,10 +7068,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getBinaryOperatorKindSpelling ] ---
 
-    /** Unsafe version of: {@link #clang_getBinaryOperatorKindSpelling getBinaryOperatorKindSpelling} */
+    /** {@code CXString clang_getBinaryOperatorKindSpelling(enum CXBinaryOperatorKind kind)} */
     public static native void nclang_getBinaryOperatorKindSpelling(int kind, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getBinaryOperatorKindSpelling getBinaryOperatorKindSpelling} */
+    /** {@code CXString clang_getBinaryOperatorKindSpelling(enum CXBinaryOperatorKind kind)} */
     public static void nclang_getBinaryOperatorKindSpelling(int kind, long __result) {
         long __functionAddress = Functions.getBinaryOperatorKindSpelling;
         if (CHECKS) {
@@ -10384,11 +7080,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getBinaryOperatorKindSpelling(kind, __functionAddress, __result);
     }
 
-    /**
-     * Retrieve the spelling of a given {@code CXBinaryOperatorKind}.
-     *
-     * @since 17
-     */
+    /** {@code CXString clang_getBinaryOperatorKindSpelling(enum CXBinaryOperatorKind kind)} */
     public static CXString clang_getBinaryOperatorKindSpelling(@NativeType("enum CXBinaryOperatorKind") int kind, CXString __result) {
         nclang_getBinaryOperatorKindSpelling(kind, __result.address());
         return __result;
@@ -10396,10 +7088,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorBinaryOperatorKind ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorBinaryOperatorKind getCursorBinaryOperatorKind} */
+    /** {@code enum CXBinaryOperatorKind clang_getCursorBinaryOperatorKind(CXCursor cursor)} */
     public static native int nclang_getCursorBinaryOperatorKind(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorBinaryOperatorKind getCursorBinaryOperatorKind} */
+    /** {@code enum CXBinaryOperatorKind clang_getCursorBinaryOperatorKind(CXCursor cursor)} */
     public static int nclang_getCursorBinaryOperatorKind(long cursor) {
         long __functionAddress = Functions.getCursorBinaryOperatorKind;
         if (CHECKS) {
@@ -10408,13 +7100,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_getCursorBinaryOperatorKind(cursor, __functionAddress);
     }
 
-    /**
-     * Retrieve the binary operator kind of this cursor.
-     * 
-     * <p>If this cursor is not a binary operator then returns Invalid.</p>
-     *
-     * @since 17
-     */
+    /** {@code enum CXBinaryOperatorKind clang_getCursorBinaryOperatorKind(CXCursor cursor)} */
     @NativeType("enum CXBinaryOperatorKind")
     public static int clang_getCursorBinaryOperatorKind(CXCursor cursor) {
         return nclang_getCursorBinaryOperatorKind(cursor.address());
@@ -10422,10 +7108,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getUnaryOperatorKindSpelling ] ---
 
-    /** Unsafe version of: {@link #clang_getUnaryOperatorKindSpelling getUnaryOperatorKindSpelling} */
+    /** {@code CXString clang_getUnaryOperatorKindSpelling(enum CXUnaryOperatorKind kind)} */
     public static native void nclang_getUnaryOperatorKindSpelling(int kind, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_getUnaryOperatorKindSpelling getUnaryOperatorKindSpelling} */
+    /** {@code CXString clang_getUnaryOperatorKindSpelling(enum CXUnaryOperatorKind kind)} */
     public static void nclang_getUnaryOperatorKindSpelling(int kind, long __result) {
         long __functionAddress = Functions.getUnaryOperatorKindSpelling;
         if (CHECKS) {
@@ -10434,7 +7120,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         nclang_getUnaryOperatorKindSpelling(kind, __functionAddress, __result);
     }
 
-    /** Retrieve the spelling of a given {@code CXUnaryOperatorKind}. */
+    /** {@code CXString clang_getUnaryOperatorKindSpelling(enum CXUnaryOperatorKind kind)} */
     public static CXString clang_getUnaryOperatorKindSpelling(@NativeType("enum CXUnaryOperatorKind") int kind, CXString __result) {
         nclang_getUnaryOperatorKindSpelling(kind, __result.address());
         return __result;
@@ -10442,10 +7128,10 @@ if (clang_Cursor_isBitField(Cursor)) {
 
     // --- [ clang_getCursorUnaryOperatorKind ] ---
 
-    /** Unsafe version of: {@link #clang_getCursorUnaryOperatorKind getCursorUnaryOperatorKind} */
+    /** {@code enum CXUnaryOperatorKind clang_getCursorUnaryOperatorKind(CXCursor cursor)} */
     public static native int nclang_getCursorUnaryOperatorKind(long cursor, long __functionAddress);
 
-    /** Unsafe version of: {@link #clang_getCursorUnaryOperatorKind getCursorUnaryOperatorKind} */
+    /** {@code enum CXUnaryOperatorKind clang_getCursorUnaryOperatorKind(CXCursor cursor)} */
     public static int nclang_getCursorUnaryOperatorKind(long cursor) {
         long __functionAddress = Functions.getCursorUnaryOperatorKind;
         if (CHECKS) {
@@ -10454,13 +7140,7 @@ if (clang_Cursor_isBitField(Cursor)) {
         return nclang_getCursorUnaryOperatorKind(cursor, __functionAddress);
     }
 
-    /**
-     * Retrieve the unary operator kind of this cursor.
-     * 
-     * <p>If this cursor is not a unary operator then returns {@code Invalid}.</p>
-     *
-     * @since 17
-     */
+    /** {@code enum CXUnaryOperatorKind clang_getCursorUnaryOperatorKind(CXCursor cursor)} */
     @NativeType("enum CXUnaryOperatorKind")
     public static int clang_getCursorUnaryOperatorKind(CXCursor cursor) {
         return nclang_getCursorUnaryOperatorKind(cursor.address());

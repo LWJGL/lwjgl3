@@ -17,30 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Stub description of VkCuModuleCreateInfoNVX.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVXBinaryImport#VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkCuModuleTexturingModeCreateInfoNVX}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>If {@code dataSize} is not 0, {@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVXBinaryImport#vkCreateCuModuleNVX CreateCuModuleNVX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCuModuleCreateInfoNVX {
  *     VkStructureType sType;
  *     void const * pNext;
  *     size_t dataSize;
  *     void const * pData;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkCuModuleCreateInfoNVX extends Struct<VkCuModuleCreateInfoNVX> implements NativeResource {
 

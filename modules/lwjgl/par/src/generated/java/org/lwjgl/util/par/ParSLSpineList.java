@@ -17,18 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Client-owned list of line strips that will be tessellated.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct parsl_spine_list {
  *     uint32_t num_vertices;
  *     uint16_t num_spines;
  *     {@link ParSLPosition parsl_position} * vertices;
  *     uint16_t * spine_lengths;
  *     bool closed;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct parsl_spine_list")
 public class ParSLSpineList extends Struct<ParSLSpineList> implements NativeResource {

@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure returning information about whether a descriptor set layout can be supported.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code supported} will be {@link VK10#VK_TRUE TRUE} if the descriptor set <b>can</b> be created, or else {@link VK10#VK_FALSE FALSE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDescriptorSetVariableDescriptorCountLayoutSupport}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK11#vkGetDescriptorSetLayoutSupport GetDescriptorSetLayoutSupport}, {@link KHRMaintenance3#vkGetDescriptorSetLayoutSupportKHR GetDescriptorSetLayoutSupportKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetLayoutSupport {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #supported};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 supported;
+ * }}</pre>
  */
 public class VkDescriptorSetLayoutSupport extends Struct<VkDescriptorSetLayoutSupport> implements NativeResource {
 
@@ -94,21 +74,21 @@ public class VkDescriptorSetLayoutSupport extends Struct<VkDescriptorSetLayoutSu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether the descriptor set layout <b>can</b> be created. */
+    /** @return the value of the {@code supported} field. */
     @NativeType("VkBool32")
     public boolean supported() { return nsupported(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDescriptorSetLayoutSupport sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT} value to the {@code sType} field. */
     public VkDescriptorSetLayoutSupport sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorSetLayoutSupport pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountLayoutSupport} value to the {@code pNext} chain. */
     public VkDescriptorSetLayoutSupport pNext(VkDescriptorSetVariableDescriptorCountLayoutSupport value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -323,21 +303,21 @@ public class VkDescriptorSetLayoutSupport extends Struct<VkDescriptorSetLayoutSu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorSetLayoutSupport#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorSetLayoutSupport.nsType(address()); }
-        /** @return the value of the {@link VkDescriptorSetLayoutSupport#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDescriptorSetLayoutSupport.npNext(address()); }
-        /** @return the value of the {@link VkDescriptorSetLayoutSupport#supported} field. */
+        /** @return the value of the {@code supported} field. */
         @NativeType("VkBool32")
         public boolean supported() { return VkDescriptorSetLayoutSupport.nsupported(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutSupport#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDescriptorSetLayoutSupport.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetLayoutSupport.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT} value to the {@link VkDescriptorSetLayoutSupport#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT} value to the {@code sType} field. */
         public VkDescriptorSetLayoutSupport.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT); }
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutSupport#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorSetLayoutSupport.Buffer pNext(@NativeType("void *") long value) { VkDescriptorSetLayoutSupport.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDescriptorSetVariableDescriptorCountLayoutSupport} value to the {@code pNext} chain. */
         public VkDescriptorSetLayoutSupport.Buffer pNext(VkDescriptorSetVariableDescriptorCountLayoutSupport value) { return this.pNext(value.pNext(this.pNext()).address()); }

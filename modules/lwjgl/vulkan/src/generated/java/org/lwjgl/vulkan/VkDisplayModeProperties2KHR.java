@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing an available display mode.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRGetDisplayProperties2#VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDisplayModeStereoPropertiesNV}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDisplayModePropertiesKHR}, {@link KHRGetDisplayProperties2#vkGetDisplayModeProperties2KHR GetDisplayModeProperties2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDisplayModeProperties2KHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkDisplayModePropertiesKHR VkDisplayModePropertiesKHR} {@link #displayModeProperties};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkDisplayModePropertiesKHR VkDisplayModePropertiesKHR} displayModeProperties;
+ * }}</pre>
  */
 public class VkDisplayModeProperties2KHR extends Struct<VkDisplayModeProperties2KHR> implements NativeResource {
 
@@ -90,20 +74,20 @@ public class VkDisplayModeProperties2KHR extends Struct<VkDisplayModeProperties2
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkDisplayModePropertiesKHR} structure. */
+    /** @return a {@link VkDisplayModePropertiesKHR} view of the {@code displayModeProperties} field. */
     public VkDisplayModePropertiesKHR displayModeProperties() { return ndisplayModeProperties(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDisplayModeProperties2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRGetDisplayProperties2#VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRGetDisplayProperties2#VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR} value to the {@code sType} field. */
     public VkDisplayModeProperties2KHR sType$Default() { return sType(KHRGetDisplayProperties2.VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDisplayModeProperties2KHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDisplayModeStereoPropertiesNV} value to the {@code pNext} chain. */
     public VkDisplayModeProperties2KHR pNext(VkDisplayModeStereoPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -316,20 +300,20 @@ public class VkDisplayModeProperties2KHR extends Struct<VkDisplayModeProperties2
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDisplayModeProperties2KHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDisplayModeProperties2KHR.nsType(address()); }
-        /** @return the value of the {@link VkDisplayModeProperties2KHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDisplayModeProperties2KHR.npNext(address()); }
-        /** @return a {@link VkDisplayModePropertiesKHR} view of the {@link VkDisplayModeProperties2KHR#displayModeProperties} field. */
+        /** @return a {@link VkDisplayModePropertiesKHR} view of the {@code displayModeProperties} field. */
         public VkDisplayModePropertiesKHR displayModeProperties() { return VkDisplayModeProperties2KHR.ndisplayModeProperties(address()); }
 
-        /** Sets the specified value to the {@link VkDisplayModeProperties2KHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDisplayModeProperties2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayModeProperties2KHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRGetDisplayProperties2#VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR} value to the {@link VkDisplayModeProperties2KHR#sType} field. */
+        /** Sets the {@link KHRGetDisplayProperties2#VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR} value to the {@code sType} field. */
         public VkDisplayModeProperties2KHR.Buffer sType$Default() { return sType(KHRGetDisplayProperties2.VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR); }
-        /** Sets the specified value to the {@link VkDisplayModeProperties2KHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDisplayModeProperties2KHR.Buffer pNext(@NativeType("void *") long value) { VkDisplayModeProperties2KHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDisplayModeStereoPropertiesNV} value to the {@code pNext} chain. */
         public VkDisplayModeProperties2KHR.Buffer pNext(VkDisplayModeStereoPropertiesNV value) { return this.pNext(value.pNext(this.pNext()).address()); }

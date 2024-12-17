@@ -17,28 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to query the bound input sources for an action.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code action} <b>must</b> be a valid {@code XrAction} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrEnumerateBoundSourcesForAction EnumerateBoundSourcesForAction}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBoundSourcesForActionEnumerateInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrAction {@link #action};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrAction action;
+ * }}</pre>
  */
 public class XrBoundSourcesForActionEnumerateInfo extends Struct<XrBoundSourcesForActionEnumerateInfo> implements NativeResource {
 
@@ -91,23 +75,23 @@ public class XrBoundSourcesForActionEnumerateInfo extends Struct<XrBoundSourcesF
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the handle of the action to query. */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrBoundSourcesForActionEnumerateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO} value to the {@code type} field. */
     public XrBoundSourcesForActionEnumerateInfo type$Default() { return type(XR10.XR_TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrBoundSourcesForActionEnumerateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #action} field. */
+    /** Sets the specified value to the {@code action} field. */
     public XrBoundSourcesForActionEnumerateInfo action(XrAction value) { naction(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,23 +296,23 @@ public class XrBoundSourcesForActionEnumerateInfo extends Struct<XrBoundSourcesF
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrBoundSourcesForActionEnumerateInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBoundSourcesForActionEnumerateInfo.ntype(address()); }
-        /** @return the value of the {@link XrBoundSourcesForActionEnumerateInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrBoundSourcesForActionEnumerateInfo.nnext(address()); }
-        /** @return the value of the {@link XrBoundSourcesForActionEnumerateInfo#action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrBoundSourcesForActionEnumerateInfo.naction(address()); }
 
-        /** Sets the specified value to the {@link XrBoundSourcesForActionEnumerateInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrBoundSourcesForActionEnumerateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrBoundSourcesForActionEnumerateInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO} value to the {@link XrBoundSourcesForActionEnumerateInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO} value to the {@code type} field. */
         public XrBoundSourcesForActionEnumerateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO); }
-        /** Sets the specified value to the {@link XrBoundSourcesForActionEnumerateInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrBoundSourcesForActionEnumerateInfo.Buffer next(@NativeType("void const *") long value) { XrBoundSourcesForActionEnumerateInfo.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrBoundSourcesForActionEnumerateInfo#action} field. */
+        /** Sets the specified value to the {@code action} field. */
         public XrBoundSourcesForActionEnumerateInfo.Buffer action(XrAction value) { XrBoundSourcesForActionEnumerateInfo.naction(address(), value); return this; }
 
     }

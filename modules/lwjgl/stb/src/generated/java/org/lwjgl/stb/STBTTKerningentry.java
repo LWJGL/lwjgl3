@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stbtt_kerningentry {
  *     int glyph1;
  *     int glyph2;
  *     int advance;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stbtt_kerningentry")
 public class STBTTKerningentry extends Struct<STBTTKerningentry> implements NativeResource {

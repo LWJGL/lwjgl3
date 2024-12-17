@@ -19,7 +19,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import org.lwjgl.system.windows.*;
 
-/** Native bindings to WGL functionality. */
 public class WGL {
 
     static { GL.initialize(); }
@@ -43,12 +42,10 @@ public class WGL {
 
     }
 
-    /** UseFontOutlines format. */
     public static final int
         WGL_FONT_LINES    = 0,
         WGL_FONT_POLYGONS = 1;
 
-    /** SwapLayerBuffers flags. */
     public static final int
         WGL_SWAP_MAIN_PLANE = 0x1,
         WGL_SWAP_OVERLAY1   = 0x2,
@@ -88,10 +85,10 @@ public class WGL {
 
     // --- [ wglCreateContext ] ---
 
-    /** Unsafe version of: {@link #wglCreateContext CreateContext} */
+    /** {@code HGLRC wglCreateContext(HDC hdc)} */
     public static native long nwglCreateContext(long _GetLastError, long hdc, long __functionAddress);
 
-    /** Unsafe version of: {@link #wglCreateContext CreateContext} */
+    /** {@code HGLRC wglCreateContext(HDC hdc)} */
     public static long nwglCreateContext(long _GetLastError, long hdc) {
         long __functionAddress = Functions.CreateContext;
         if (CHECKS) {
@@ -100,13 +97,7 @@ public class WGL {
         return nwglCreateContext(_GetLastError, hdc, __functionAddress);
     }
 
-    /**
-     * Creates a new OpenGL rendering context, which is suitable for drawing on the device referenced by device. The rendering context has the same pixel
-     * format as the device context.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     * @param hdc           handle to a device context for which the function creates a suitable OpenGL rendering context
-     */
+    /** {@code HGLRC wglCreateContext(HDC hdc)} */
     @NativeType("HGLRC")
     public static long wglCreateContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc) {
         if (CHECKS) {
@@ -117,10 +108,10 @@ public class WGL {
 
     // --- [ wglCreateLayerContext ] ---
 
-    /** Unsafe version of: {@link #wglCreateLayerContext CreateLayerContext} */
+    /** {@code HGLRC wglCreateLayerContext(HDC hdc, int layerPlane)} */
     public static native long nwglCreateLayerContext(long _GetLastError, long hdc, int layerPlane, long __functionAddress);
 
-    /** Unsafe version of: {@link #wglCreateLayerContext CreateLayerContext} */
+    /** {@code HGLRC wglCreateLayerContext(HDC hdc, int layerPlane)} */
     public static long nwglCreateLayerContext(long _GetLastError, long hdc, int layerPlane) {
         long __functionAddress = Functions.CreateLayerContext;
         if (CHECKS) {
@@ -129,17 +120,7 @@ public class WGL {
         return nwglCreateLayerContext(_GetLastError, hdc, layerPlane, __functionAddress);
     }
 
-    /**
-     * Creates a new OpenGL rendering context for drawing to a specified layer plane on a device context.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     * @param hdc           the device context for a new rendering context
-     * @param layerPlane    the layer plane to which you want to bind a rendering context. The value 0 identifies the main plane. Positive values of {@code layerPlace} identify
-     *                      overlay planes, where 1 is the first overlay plane over the main plane, 2 is the second overlay plane over the first overlay plane, and so on.
-     *                      Negative values identify underlay planes, where 1 is the first underlay plane under the main plane, 2 is the second underlay plane under the first
-     *                      underlay plane, and so on. The number of overlay and underlay planes is given in the {@code reserved} member of the {@link PIXELFORMATDESCRIPTOR}
-     *                      structure.
-     */
+    /** {@code HGLRC wglCreateLayerContext(HDC hdc, int layerPlane)} */
     @NativeType("HGLRC")
     public static long wglCreateLayerContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc, int layerPlane) {
         if (CHECKS) {
@@ -150,10 +131,10 @@ public class WGL {
 
     // --- [ wglCopyContext ] ---
 
-    /** Unsafe version of: {@link #wglCopyContext CopyContext} */
+    /** {@code BOOL wglCopyContext(HGLRC src, HGLRC dst, UINT mask)} */
     public static native int nwglCopyContext(long _GetLastError, long src, long dst, int mask, long __functionAddress);
 
-    /** Unsafe version of: {@link #wglCopyContext CopyContext} */
+    /** {@code BOOL wglCopyContext(HGLRC src, HGLRC dst, UINT mask)} */
     public static int nwglCopyContext(long _GetLastError, long src, long dst, int mask) {
         long __functionAddress = Functions.CopyContext;
         if (CHECKS) {
@@ -163,15 +144,7 @@ public class WGL {
         return nwglCopyContext(_GetLastError, src, dst, mask, __functionAddress);
     }
 
-    /**
-     * Copies selected groups of rendering states from one OpenGL rendering context to another.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     * @param src           the source OpenGL rendering context whose state information is to be copied
-     * @param dst           the destination OpenGL rendering context to which state information is to be copied
-     * @param mask          which groups of the {@code src} rendering state are to be copied to {@code dst}. It contains the bitwise-OR of the same symbolic names that are
-     *                      passed to the {@link GL11#glPushAttrib PushAttrib} function. You can use {@link GL11#GL_ALL_ATTRIB_BITS ALL_ATTRIB_BITS} to copy all the rendering state information.
-     */
+    /** {@code BOOL wglCopyContext(HGLRC src, HGLRC dst, UINT mask)} */
     @NativeType("BOOL")
     public static boolean wglCopyContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HGLRC") long src, @NativeType("HGLRC") long dst, @NativeType("UINT") int mask) {
         if (CHECKS) {
@@ -182,10 +155,10 @@ public class WGL {
 
     // --- [ wglDeleteContext ] ---
 
-    /** Unsafe version of: {@link #wglDeleteContext DeleteContext} */
+    /** {@code BOOL wglDeleteContext(HGLRC context)} */
     public static native int nwglDeleteContext(long _GetLastError, long context, long __functionAddress);
 
-    /** Unsafe version of: {@link #wglDeleteContext DeleteContext} */
+    /** {@code BOOL wglDeleteContext(HGLRC context)} */
     public static int nwglDeleteContext(long _GetLastError, long context) {
         long __functionAddress = Functions.DeleteContext;
         if (CHECKS) {
@@ -194,12 +167,7 @@ public class WGL {
         return nwglDeleteContext(_GetLastError, context, __functionAddress);
     }
 
-    /**
-     * Deletes a specified OpenGL rendering context.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     * @param context       handle to an OpenGL rendering context that the function will delete
-     */
+    /** {@code BOOL wglDeleteContext(HGLRC context)} */
     @NativeType("BOOL")
     public static boolean wglDeleteContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HGLRC") long context) {
         if (CHECKS) {
@@ -210,20 +178,16 @@ public class WGL {
 
     // --- [ wglGetCurrentContext ] ---
 
-    /** Unsafe version of: {@link #wglGetCurrentContext GetCurrentContext} */
+    /** {@code HGLRC wglGetCurrentContext(void)} */
     public static native long nwglGetCurrentContext(long _GetLastError, long __functionAddress);
 
-    /** Unsafe version of: {@link #wglGetCurrentContext GetCurrentContext} */
+    /** {@code HGLRC wglGetCurrentContext(void)} */
     public static long nwglGetCurrentContext(long _GetLastError) {
         long __functionAddress = Functions.GetCurrentContext;
         return nwglGetCurrentContext(_GetLastError, __functionAddress);
     }
 
-    /**
-     * Obtains a handle to the current OpenGL rendering context of the calling thread.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     */
+    /** {@code HGLRC wglGetCurrentContext(void)} */
     @NativeType("HGLRC")
     public static long wglGetCurrentContext(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError) {
         if (CHECKS) {
@@ -234,7 +198,7 @@ public class WGL {
 
     // --- [ wglGetCurrentDC ] ---
 
-    /** Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread. */
+    /** {@code HDC wglGetCurrentDC(void)} */
     @NativeType("HDC")
     public static long wglGetCurrentDC() {
         long __functionAddress = Functions.GetCurrentDC;
@@ -243,22 +207,16 @@ public class WGL {
 
     // --- [ wglGetProcAddress ] ---
 
-    /** Unsafe version of: {@link #wglGetProcAddress GetProcAddress} */
+    /** {@code PROC wglGetProcAddress(LPCSTR proc)} */
     public static native long nwglGetProcAddress(long _GetLastError, long proc, long __functionAddress);
 
-    /** Unsafe version of: {@link #wglGetProcAddress GetProcAddress} */
+    /** {@code PROC wglGetProcAddress(LPCSTR proc)} */
     public static long nwglGetProcAddress(long _GetLastError, long proc) {
         long __functionAddress = Functions.GetProcAddress;
         return nwglGetProcAddress(_GetLastError, proc, __functionAddress);
     }
 
-    /**
-     * Returns the address of an OpenGL extension function for use with the current OpenGL rendering context.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     * @param proc          points to a null-terminated string that is the name of the extension function. The name of the extension function must be identical to a
-     *                      corresponding function implemented by OpenGL.
-     */
+    /** {@code PROC wglGetProcAddress(LPCSTR proc)} */
     @NativeType("PROC")
     public static long wglGetProcAddress(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCSTR") ByteBuffer proc) {
         if (CHECKS) {
@@ -268,13 +226,7 @@ public class WGL {
         return nwglGetProcAddress(memAddressSafe(_GetLastError), memAddress(proc));
     }
 
-    /**
-     * Returns the address of an OpenGL extension function for use with the current OpenGL rendering context.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     * @param proc          points to a null-terminated string that is the name of the extension function. The name of the extension function must be identical to a
-     *                      corresponding function implemented by OpenGL.
-     */
+    /** {@code PROC wglGetProcAddress(LPCSTR proc)} */
     @NativeType("PROC")
     public static long wglGetProcAddress(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("LPCSTR") CharSequence proc) {
         if (CHECKS) {
@@ -292,25 +244,16 @@ public class WGL {
 
     // --- [ wglMakeCurrent ] ---
 
-    /** Unsafe version of: {@link #wglMakeCurrent MakeCurrent} */
+    /** {@code BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc)} */
     public static native int nwglMakeCurrent(long _GetLastError, long hdc, long hglrc, long __functionAddress);
 
-    /** Unsafe version of: {@link #wglMakeCurrent MakeCurrent} */
+    /** {@code BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc)} */
     public static int nwglMakeCurrent(long _GetLastError, long hdc, long hglrc) {
         long __functionAddress = Functions.MakeCurrent;
         return nwglMakeCurrent(_GetLastError, hdc, hglrc, __functionAddress);
     }
 
-    /**
-     * Makes a specified OpenGL rendering context the calling thread's current rendering context. All subsequent OpenGL calls made by the thread are drawn on
-     * the device identified by device. You can also use MakeCurrent to change the calling thread's current rendering context so it's no longer current.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     * @param hdc           handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}.
-     * @param hglrc         handle to an OpenGL rendering context that the function sets as the calling thread's rendering context. If {@code context} is {@code NULL}, the function
-     *                      makes the calling thread's current rendering context no longer current, and releases the device context that is used by the rendering context. In
-     *                      this case, {@code hdc} is ignored.
-     */
+    /** {@code BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc)} */
     @NativeType("BOOL")
     public static boolean wglMakeCurrent(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HDC") long hdc, @NativeType("HGLRC") long hglrc) {
         if (CHECKS) {
@@ -321,10 +264,10 @@ public class WGL {
 
     // --- [ wglShareLists ] ---
 
-    /** Unsafe version of: {@link #wglShareLists ShareLists} */
+    /** {@code BOOL wglShareLists(HGLRC hglrc1, HGLRC hglrc2)} */
     public static native int nwglShareLists(long _GetLastError, long hglrc1, long hglrc2, long __functionAddress);
 
-    /** Unsafe version of: {@link #wglShareLists ShareLists} */
+    /** {@code BOOL wglShareLists(HGLRC hglrc1, HGLRC hglrc2)} */
     public static int nwglShareLists(long _GetLastError, long hglrc1, long hglrc2) {
         long __functionAddress = Functions.ShareLists;
         if (CHECKS) {
@@ -334,14 +277,7 @@ public class WGL {
         return nwglShareLists(_GetLastError, hglrc1, hglrc2, __functionAddress);
     }
 
-    /**
-     * Enables multiple OpenGL rendering contexts to share a single display-list space.
-     *
-     * @param _GetLastError optionally returns the result of {@code GetLastError()} after this function is called
-     * @param hglrc1        the OpenGL rendering context with which to share display lists.
-     * @param hglrc2        the OpenGL rendering context to share display lists with {@code hglrc1}. The {@code hglrc2} parameter should not contain any existing display lists
-     *                      when {@code wglShareLists} is called.
-     */
+    /** {@code BOOL wglShareLists(HGLRC hglrc1, HGLRC hglrc2)} */
     @NativeType("BOOL")
     public static boolean wglShareLists(@NativeType("DWORD *") @Nullable IntBuffer _GetLastError, @NativeType("HGLRC") long hglrc1, @NativeType("HGLRC") long hglrc2) {
         if (CHECKS) {

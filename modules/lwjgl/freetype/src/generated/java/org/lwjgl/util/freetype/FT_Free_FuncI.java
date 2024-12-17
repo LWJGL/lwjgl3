@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     FT_Memory memory,
- *     void *block
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Free_Func} */
 @FunctionalInterface
 @NativeType("FT_Free_Func")
 public interface FT_Free_FuncI extends CallbackI {
@@ -42,7 +34,7 @@ public interface FT_Free_FuncI extends CallbackI {
         );
     }
 
-    /** A function used to release a given block of memory. */
+    /** {@code void (* FT_Free_Func) (FT_Memory memory, void * block)} */
     void invoke(@NativeType("FT_Memory") long memory, @NativeType("void *") long block);
 
 }

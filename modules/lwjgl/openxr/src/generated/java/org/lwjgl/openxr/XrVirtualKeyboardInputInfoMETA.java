@@ -16,34 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Virtual keyboard input info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using {@link XrVirtualKeyboardInputInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code inputSource} <b>must</b> be a valid {@code XrVirtualKeyboardInputSourceMETA} value</li>
- * <li>If {@code inputSpace} is not {@link XR10#XR_NULL_HANDLE NULL_HANDLE}, {@code inputSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>{@code inputState} <b>must</b> be 0 or a valid combination of {@code XrVirtualKeyboardInputStateFlagBitsMETA} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link METAVirtualKeyboard#xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrVirtualKeyboardInputInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrVirtualKeyboardInputSourceMETA {@link #inputSource};
- *     XrSpace {@link #inputSpace};
- *     {@link XrPosef XrPosef} {@link #inputPoseInSpace};
- *     XrVirtualKeyboardInputStateFlagsMETA {@link #inputState};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrVirtualKeyboardInputSourceMETA inputSource;
+ *     XrSpace inputSpace;
+ *     {@link XrPosef XrPosef} inputPoseInSpace;
+ *     XrVirtualKeyboardInputStateFlagsMETA inputState;
+ * }}</pre>
  */
 public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInputInfoMETA> implements NativeResource {
 
@@ -105,39 +86,39 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an enum of {@code XrVirtualKeyboardInputSourceMETA} describing the source device and input mode type. */
+    /** @return the value of the {@code inputSource} field. */
     @NativeType("XrVirtualKeyboardInputSourceMETA")
     public int inputSource() { return ninputSource(address()); }
-    /** an {@code XrSpace} previously created by a function such as {@link XR10#xrCreateReferenceSpace CreateReferenceSpace}. */
+    /** @return the value of the {@code inputSpace} field. */
     @NativeType("XrSpace")
     public @Nullable long inputSpace() { return ninputSpace(address()); }
-    /** an {@link XrPosef} defining the position and orientation of the input’s source pose within the natural reference frame of the input space. */
+    /** @return a {@link XrPosef} view of the {@code inputPoseInSpace} field. */
     public XrPosef inputPoseInSpace() { return ninputPoseInSpace(address()); }
-    /** a bitmask of {@code XrVirtualKeyboardInputStateFlagsMETA} describing the button or pinch state of the {@code inputSource}. */
+    /** @return the value of the {@code inputState} field. */
     @NativeType("XrVirtualKeyboardInputStateFlagsMETA")
     public long inputState() { return ninputState(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrVirtualKeyboardInputInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META} value to the {@code type} field. */
     public XrVirtualKeyboardInputInfoMETA type$Default() { return type(METAVirtualKeyboard.XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrVirtualKeyboardInputInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #inputSource} field. */
+    /** Sets the specified value to the {@code inputSource} field. */
     public XrVirtualKeyboardInputInfoMETA inputSource(@NativeType("XrVirtualKeyboardInputSourceMETA") int value) { ninputSource(address(), value); return this; }
-    /** Sets the specified value to the {@link #inputSpace} field. */
+    /** Sets the specified value to the {@code inputSpace} field. */
     public XrVirtualKeyboardInputInfoMETA inputSpace(@Nullable XrSpace value) { ninputSpace(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #inputPoseInSpace} field. */
+    /** Copies the specified {@link XrPosef} to the {@code inputPoseInSpace} field. */
     public XrVirtualKeyboardInputInfoMETA inputPoseInSpace(XrPosef value) { ninputPoseInSpace(address(), value); return this; }
-    /** Passes the {@link #inputPoseInSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code inputPoseInSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrVirtualKeyboardInputInfoMETA inputPoseInSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(inputPoseInSpace()); return this; }
-    /** Sets the specified value to the {@link #inputState} field. */
+    /** Sets the specified value to the {@code inputState} field. */
     public XrVirtualKeyboardInputInfoMETA inputState(@NativeType("XrVirtualKeyboardInputStateFlagsMETA") long value) { ninputState(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -351,39 +332,39 @@ public class XrVirtualKeyboardInputInfoMETA extends Struct<XrVirtualKeyboardInpu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrVirtualKeyboardInputInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVirtualKeyboardInputInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardInputInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrVirtualKeyboardInputInfoMETA.nnext(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardInputInfoMETA#inputSource} field. */
+        /** @return the value of the {@code inputSource} field. */
         @NativeType("XrVirtualKeyboardInputSourceMETA")
         public int inputSource() { return XrVirtualKeyboardInputInfoMETA.ninputSource(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardInputInfoMETA#inputSpace} field. */
+        /** @return the value of the {@code inputSpace} field. */
         @NativeType("XrSpace")
         public @Nullable long inputSpace() { return XrVirtualKeyboardInputInfoMETA.ninputSpace(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrVirtualKeyboardInputInfoMETA#inputPoseInSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code inputPoseInSpace} field. */
         public XrPosef inputPoseInSpace() { return XrVirtualKeyboardInputInfoMETA.ninputPoseInSpace(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardInputInfoMETA#inputState} field. */
+        /** @return the value of the {@code inputState} field. */
         @NativeType("XrVirtualKeyboardInputStateFlagsMETA")
         public long inputState() { return XrVirtualKeyboardInputInfoMETA.ninputState(address()); }
 
-        /** Sets the specified value to the {@link XrVirtualKeyboardInputInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrVirtualKeyboardInputInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrVirtualKeyboardInputInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META} value to the {@link XrVirtualKeyboardInputInfoMETA#type} field. */
+        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META} value to the {@code type} field. */
         public XrVirtualKeyboardInputInfoMETA.Buffer type$Default() { return type(METAVirtualKeyboard.XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META); }
-        /** Sets the specified value to the {@link XrVirtualKeyboardInputInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrVirtualKeyboardInputInfoMETA.Buffer next(@NativeType("void const *") long value) { XrVirtualKeyboardInputInfoMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardInputInfoMETA#inputSource} field. */
+        /** Sets the specified value to the {@code inputSource} field. */
         public XrVirtualKeyboardInputInfoMETA.Buffer inputSource(@NativeType("XrVirtualKeyboardInputSourceMETA") int value) { XrVirtualKeyboardInputInfoMETA.ninputSource(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardInputInfoMETA#inputSpace} field. */
+        /** Sets the specified value to the {@code inputSpace} field. */
         public XrVirtualKeyboardInputInfoMETA.Buffer inputSpace(@Nullable XrSpace value) { XrVirtualKeyboardInputInfoMETA.ninputSpace(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrVirtualKeyboardInputInfoMETA#inputPoseInSpace} field. */
+        /** Copies the specified {@link XrPosef} to the {@code inputPoseInSpace} field. */
         public XrVirtualKeyboardInputInfoMETA.Buffer inputPoseInSpace(XrPosef value) { XrVirtualKeyboardInputInfoMETA.ninputPoseInSpace(address(), value); return this; }
-        /** Passes the {@link XrVirtualKeyboardInputInfoMETA#inputPoseInSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code inputPoseInSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrVirtualKeyboardInputInfoMETA.Buffer inputPoseInSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(inputPoseInSpace()); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardInputInfoMETA#inputState} field. */
+        /** Sets the specified value to the {@code inputState} field. */
         public XrVirtualKeyboardInputInfoMETA.Buffer inputState(@NativeType("XrVirtualKeyboardInputStateFlagsMETA") long value) { XrVirtualKeyboardInputInfoMETA.ninputState(address(), value); return this; }
 
     }

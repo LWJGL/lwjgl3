@@ -19,40 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * Structure specifying additional creation parameters specific to Win32 fullscreen exclusive mode.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>If {@code hmonitor} is invalidated (e.g. the monitor is unplugged) during the lifetime of a swapchain created with this structure, operations on that swapchain will return {@link KHRSwapchain#VK_ERROR_OUT_OF_DATE_KHR ERROR_OUT_OF_DATE_KHR}.</p>
- * </div>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>It is the responsibility of the application to change the display settings of the targeted Win32 display using the appropriate platform APIs. Such changes <b>may</b> alter the surface capabilities reported for the created surface.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code hmonitor} <b>must</b> be a valid {@code HMONITOR}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSurfaceFullScreenExclusiveWin32InfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     HMONITOR {@link #hmonitor};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     HMONITOR hmonitor;
+ * }}</pre>
  */
 public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct<VkSurfaceFullScreenExclusiveWin32InfoEXT> implements NativeResource {
 
@@ -105,23 +77,23 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct<VkSurfaceFu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the Win32 {@code HMONITOR} handle identifying the display to create the surface with. */
+    /** @return the value of the {@code hmonitor} field. */
     @NativeType("HMONITOR")
     public long hmonitor() { return nhmonitor(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSurfaceFullScreenExclusiveWin32InfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT} value to the {@code sType} field. */
     public VkSurfaceFullScreenExclusiveWin32InfoEXT sType$Default() { return sType(EXTFullScreenExclusive.VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSurfaceFullScreenExclusiveWin32InfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #hmonitor} field. */
+    /** Sets the specified value to the {@code hmonitor} field. */
     public VkSurfaceFullScreenExclusiveWin32InfoEXT hmonitor(@NativeType("HMONITOR") long value) { nhmonitor(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -345,23 +317,23 @@ public class VkSurfaceFullScreenExclusiveWin32InfoEXT extends Struct<VkSurfaceFu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSurfaceFullScreenExclusiveWin32InfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSurfaceFullScreenExclusiveWin32InfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#hmonitor} field. */
+        /** @return the value of the {@code hmonitor} field. */
         @NativeType("HMONITOR")
         public long hmonitor() { return VkSurfaceFullScreenExclusiveWin32InfoEXT.nhmonitor(address()); }
 
-        /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceFullScreenExclusiveWin32InfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT} value to the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#sType} field. */
+        /** Sets the {@link EXTFullScreenExclusive#VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT} value to the {@code sType} field. */
         public VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer sType$Default() { return sType(EXTFullScreenExclusive.VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT); }
-        /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSurfaceFullScreenExclusiveWin32InfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSurfaceFullScreenExclusiveWin32InfoEXT#hmonitor} field. */
+        /** Sets the specified value to the {@code hmonitor} field. */
         public VkSurfaceFullScreenExclusiveWin32InfoEXT.Buffer hmonitor(@NativeType("HMONITOR") long value) { VkSurfaceFullScreenExclusiveWin32InfoEXT.nhmonitor(address(), value); return this; }
 
     }

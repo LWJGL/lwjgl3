@@ -16,30 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Control about the creation of render pass or subpass.
- * 
- * <h5>Description</h5>
- * 
- * <p>If a {@link VkRenderPassCreationControlEXT} structure is included in the {@code pNext} chain of {@link VkRenderPassCreateInfo2} and its value of {@code disallowMerging} is {@link VK10#VK_TRUE TRUE}, the implementation will disable subpass merging for the entire render pass. If a {@link VkRenderPassCreationControlEXT} structure is included in the {@code pNext} chain of {@link VkSubpassDescription2} and its value of {@code disallowMerging} is {@link VK10#VK_TRUE TRUE}, the implementation will disable merging the described subpass with previous subpasses in the render pass.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRenderPassCreateInfo2}, {@link VkSubpassDescription2}, {@link VK12#vkCreateRenderPass2 CreateRenderPass2}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderPassCreationControlEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #disallowMerging};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 disallowMerging;
+ * }}</pre>
  */
 public class VkRenderPassCreationControlEXT extends Struct<VkRenderPassCreationControlEXT> implements NativeResource {
 
@@ -92,23 +74,23 @@ public class VkRenderPassCreationControlEXT extends Struct<VkRenderPassCreationC
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a boolean value indicating whether subpass merging will be disabled. */
+    /** @return the value of the {@code disallowMerging} field. */
     @NativeType("VkBool32")
     public boolean disallowMerging() { return ndisallowMerging(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRenderPassCreationControlEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT} value to the {@code sType} field. */
     public VkRenderPassCreationControlEXT sType$Default() { return sType(EXTSubpassMergeFeedback.VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRenderPassCreationControlEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #disallowMerging} field. */
+    /** Sets the specified value to the {@code disallowMerging} field. */
     public VkRenderPassCreationControlEXT disallowMerging(@NativeType("VkBool32") boolean value) { ndisallowMerging(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -304,23 +286,23 @@ public class VkRenderPassCreationControlEXT extends Struct<VkRenderPassCreationC
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderPassCreationControlEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassCreationControlEXT.nsType(address()); }
-        /** @return the value of the {@link VkRenderPassCreationControlEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassCreationControlEXT.npNext(address()); }
-        /** @return the value of the {@link VkRenderPassCreationControlEXT#disallowMerging} field. */
+        /** @return the value of the {@code disallowMerging} field. */
         @NativeType("VkBool32")
         public boolean disallowMerging() { return VkRenderPassCreationControlEXT.ndisallowMerging(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkRenderPassCreationControlEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRenderPassCreationControlEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassCreationControlEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT} value to the {@link VkRenderPassCreationControlEXT#sType} field. */
+        /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT} value to the {@code sType} field. */
         public VkRenderPassCreationControlEXT.Buffer sType$Default() { return sType(EXTSubpassMergeFeedback.VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT); }
-        /** Sets the specified value to the {@link VkRenderPassCreationControlEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRenderPassCreationControlEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassCreationControlEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderPassCreationControlEXT#disallowMerging} field. */
+        /** Sets the specified value to the {@code disallowMerging} field. */
         public VkRenderPassCreationControlEXT.Buffer disallowMerging(@NativeType("VkBool32") boolean value) { VkRenderPassCreationControlEXT.ndisallowMerging(address(), value ? 1 : 0); return this; }
 
     }

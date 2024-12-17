@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDevicePushDescriptorProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDevicePushDescriptorPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t maxPushDescriptors;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDevicePushDescriptorPropertiesKHR extends VkPhysicalDevicePushDescriptorProperties {
 

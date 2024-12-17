@@ -17,62 +17,24 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct specifying the details of an indirect command layout token.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code stream} <b>must</b> be smaller than {@link VkIndirectCommandsLayoutCreateInfoNV}{@code ::streamCount}</li>
- * <li>{@code offset} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV}{@code ::maxIndirectCommandsTokenOffset}</li>
- * <li>{@code offset} <b>must</b> be aligned to the scalar alignment of {@code tokenType} or {@code minIndirectCommandsBufferOffsetAlignment}, whichever is lower</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NV}, {@code vertexBindingUnit} <b>must</b> stay within device supported limits for the appropriate commands</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, {@code pushconstantPipelineLayout} <b>must</b> be valid</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, {@code pushconstantOffset} <b>must</b> be a multiple of 4</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, {@code pushconstantSize} <b>must</b> be a multiple of 4</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, {@code pushconstantOffset} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxPushConstantsSize}</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, {@code pushconstantSize} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxPushConstantsSize} minus {@code pushconstantOffset}</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, for each byte in the range specified by {@code pushconstantOffset} and {@code pushconstantSize} and for each shader stage in {@code pushconstantShaderStageFlags}, there <b>must</b> be a push constant range in {@code pushconstantPipelineLayout} that includes that byte and that stage</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NV}, for each byte in the range specified by {@code pushconstantOffset} and {@code pushconstantSize} and for each push constant range that overlaps that byte, {@code pushconstantShaderStageFlags} <b>must</b> include all stages in that push constant range’s {@link VkPushConstantRange}{@code ::stageFlags}</li>
- * <li>If {@code tokenType} is {@link NVDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_STATE_FLAGS_NV INDIRECT_COMMANDS_TOKEN_TYPE_STATE_FLAGS_NV}, {@code indirectStateFlags} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code tokenType} <b>must</b> be a valid {@code VkIndirectCommandsTokenTypeNV} value</li>
- * <li>If {@code pushconstantPipelineLayout} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code pushconstantPipelineLayout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>{@code pushconstantShaderStageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
- * <li>{@code indirectStateFlags} <b>must</b> be a valid combination of {@code VkIndirectStateFlagBitsNV} values</li>
- * <li>If {@code indexTypeCount} is not 0, {@code pIndexTypes} <b>must</b> be a valid pointer to an array of {@code indexTypeCount} valid {@code VkIndexType} values</li>
- * <li>If {@code indexTypeCount} is not 0, {@code pIndexTypeValues} <b>must</b> be a valid pointer to an array of {@code indexTypeCount} {@code uint32_t} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsLayoutCreateInfoNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectCommandsLayoutTokenNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkIndirectCommandsTokenTypeNV {@link #tokenType};
- *     uint32_t {@link #stream$ stream};
- *     uint32_t {@link #offset};
- *     uint32_t {@link #vertexBindingUnit};
- *     VkBool32 {@link #vertexDynamicStride};
- *     VkPipelineLayout {@link #pushconstantPipelineLayout};
- *     VkShaderStageFlags {@link #pushconstantShaderStageFlags};
- *     uint32_t {@link #pushconstantOffset};
- *     uint32_t {@link #pushconstantSize};
- *     VkIndirectStateFlagsNV {@link #indirectStateFlags};
- *     uint32_t {@link #indexTypeCount};
- *     VkIndexType const * {@link #pIndexTypes};
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkIndirectCommandsTokenTypeNV tokenType;
+ *     uint32_t stream;
+ *     uint32_t offset;
+ *     uint32_t vertexBindingUnit;
+ *     VkBool32 vertexDynamicStride;
+ *     VkPipelineLayout pushconstantPipelineLayout;
+ *     VkShaderStageFlags pushconstantShaderStageFlags;
+ *     uint32_t pushconstantOffset;
+ *     uint32_t pushconstantSize;
+ *     VkIndirectStateFlagsNV indirectStateFlags;
+ *     uint32_t indexTypeCount;
+ *     VkIndexType const * pIndexTypes;
  *     uint32_t const * pIndexTypeValues;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLayoutTokenNV> implements NativeResource {
 
@@ -161,81 +123,81 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkIndirectCommandsTokenTypeNV} specifying the token command type. */
+    /** @return the value of the {@code tokenType} field. */
     @NativeType("VkIndirectCommandsTokenTypeNV")
     public int tokenType() { return ntokenType(address()); }
-    /** the index of the input stream containing the token argument data. */
+    /** @return the value of the {@code stream} field. */
     @NativeType("uint32_t")
     public int stream$() { return nstream$(address()); }
-    /** a relative starting offset within the input stream memory for the token argument data. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("uint32_t")
     public int offset() { return noffset(address()); }
-    /** used for the vertex buffer binding command. */
+    /** @return the value of the {@code vertexBindingUnit} field. */
     @NativeType("uint32_t")
     public int vertexBindingUnit() { return nvertexBindingUnit(address()); }
-    /** sets if the vertex buffer stride is provided by the binding command rather than the current bound graphics pipeline state. */
+    /** @return the value of the {@code vertexDynamicStride} field. */
     @NativeType("VkBool32")
     public boolean vertexDynamicStride() { return nvertexDynamicStride(address()) != 0; }
-    /** the {@code VkPipelineLayout} used for the push constant command. */
+    /** @return the value of the {@code pushconstantPipelineLayout} field. */
     @NativeType("VkPipelineLayout")
     public long pushconstantPipelineLayout() { return npushconstantPipelineLayout(address()); }
-    /** are the shader stage flags used for the push constant command. */
+    /** @return the value of the {@code pushconstantShaderStageFlags} field. */
     @NativeType("VkShaderStageFlags")
     public int pushconstantShaderStageFlags() { return npushconstantShaderStageFlags(address()); }
-    /** the offset used for the push constant command. */
+    /** @return the value of the {@code pushconstantOffset} field. */
     @NativeType("uint32_t")
     public int pushconstantOffset() { return npushconstantOffset(address()); }
-    /** the size used for the push constant command. */
+    /** @return the value of the {@code pushconstantSize} field. */
     @NativeType("uint32_t")
     public int pushconstantSize() { return npushconstantSize(address()); }
-    /** a {@code VkIndirectStateFlagsNV} bitfield indicating the active states for the state flag command. */
+    /** @return the value of the {@code indirectStateFlags} field. */
     @NativeType("VkIndirectStateFlagsNV")
     public int indirectStateFlags() { return nindirectStateFlags(address()); }
-    /** the optional size of the {@code pIndexTypes} and {@code pIndexTypeValues} array pairings. If not zero, it allows to register a custom {@code uint32_t} value to be treated as specific {@code VkIndexType}. */
+    /** @return the value of the {@code indexTypeCount} field. */
     @NativeType("uint32_t")
     public int indexTypeCount() { return nindexTypeCount(address()); }
-    /** the used {@code VkIndexType} for the corresponding {@code uint32_t} value entry in {@code pIndexTypeValues}. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pIndexTypes} field. */
     @NativeType("VkIndexType const *")
     public @Nullable IntBuffer pIndexTypes() { return npIndexTypes(address()); }
     /** @return a {@link IntBuffer} view of the data pointed to by the {@code pIndexTypeValues} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pIndexTypeValues() { return npIndexTypeValues(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkIndirectCommandsLayoutTokenNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV} value to the {@code sType} field. */
     public VkIndirectCommandsLayoutTokenNV sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectCommandsLayoutTokenNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #tokenType} field. */
+    /** Sets the specified value to the {@code tokenType} field. */
     public VkIndirectCommandsLayoutTokenNV tokenType(@NativeType("VkIndirectCommandsTokenTypeNV") int value) { ntokenType(address(), value); return this; }
-    /** Sets the specified value to the {@link #stream$} field. */
+    /** Sets the specified value to the {@code stream} field. */
     public VkIndirectCommandsLayoutTokenNV stream$(@NativeType("uint32_t") int value) { nstream$(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkIndirectCommandsLayoutTokenNV offset(@NativeType("uint32_t") int value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertexBindingUnit} field. */
+    /** Sets the specified value to the {@code vertexBindingUnit} field. */
     public VkIndirectCommandsLayoutTokenNV vertexBindingUnit(@NativeType("uint32_t") int value) { nvertexBindingUnit(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertexDynamicStride} field. */
+    /** Sets the specified value to the {@code vertexDynamicStride} field. */
     public VkIndirectCommandsLayoutTokenNV vertexDynamicStride(@NativeType("VkBool32") boolean value) { nvertexDynamicStride(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #pushconstantPipelineLayout} field. */
+    /** Sets the specified value to the {@code pushconstantPipelineLayout} field. */
     public VkIndirectCommandsLayoutTokenNV pushconstantPipelineLayout(@NativeType("VkPipelineLayout") long value) { npushconstantPipelineLayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #pushconstantShaderStageFlags} field. */
+    /** Sets the specified value to the {@code pushconstantShaderStageFlags} field. */
     public VkIndirectCommandsLayoutTokenNV pushconstantShaderStageFlags(@NativeType("VkShaderStageFlags") int value) { npushconstantShaderStageFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #pushconstantOffset} field. */
+    /** Sets the specified value to the {@code pushconstantOffset} field. */
     public VkIndirectCommandsLayoutTokenNV pushconstantOffset(@NativeType("uint32_t") int value) { npushconstantOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #pushconstantSize} field. */
+    /** Sets the specified value to the {@code pushconstantSize} field. */
     public VkIndirectCommandsLayoutTokenNV pushconstantSize(@NativeType("uint32_t") int value) { npushconstantSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #indirectStateFlags} field. */
+    /** Sets the specified value to the {@code indirectStateFlags} field. */
     public VkIndirectCommandsLayoutTokenNV indirectStateFlags(@NativeType("VkIndirectStateFlagsNV") int value) { nindirectStateFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #indexTypeCount} field. */
+    /** Sets the specified value to the {@code indexTypeCount} field. */
     public VkIndirectCommandsLayoutTokenNV indexTypeCount(@NativeType("uint32_t") int value) { nindexTypeCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pIndexTypes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pIndexTypes} field. */
     public VkIndirectCommandsLayoutTokenNV pIndexTypes(@Nullable @NativeType("VkIndexType const *") IntBuffer value) { npIndexTypes(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code pIndexTypeValues} field. */
     public VkIndirectCommandsLayoutTokenNV pIndexTypeValues(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npIndexTypeValues(address(), value); return this; }
@@ -517,81 +479,81 @@ public class VkIndirectCommandsLayoutTokenNV extends Struct<VkIndirectCommandsLa
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkIndirectCommandsLayoutTokenNV.nsType(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkIndirectCommandsLayoutTokenNV.npNext(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#tokenType} field. */
+        /** @return the value of the {@code tokenType} field. */
         @NativeType("VkIndirectCommandsTokenTypeNV")
         public int tokenType() { return VkIndirectCommandsLayoutTokenNV.ntokenType(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#stream$} field. */
+        /** @return the value of the {@code stream} field. */
         @NativeType("uint32_t")
         public int stream$() { return VkIndirectCommandsLayoutTokenNV.nstream$(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("uint32_t")
         public int offset() { return VkIndirectCommandsLayoutTokenNV.noffset(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#vertexBindingUnit} field. */
+        /** @return the value of the {@code vertexBindingUnit} field. */
         @NativeType("uint32_t")
         public int vertexBindingUnit() { return VkIndirectCommandsLayoutTokenNV.nvertexBindingUnit(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#vertexDynamicStride} field. */
+        /** @return the value of the {@code vertexDynamicStride} field. */
         @NativeType("VkBool32")
         public boolean vertexDynamicStride() { return VkIndirectCommandsLayoutTokenNV.nvertexDynamicStride(address()) != 0; }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#pushconstantPipelineLayout} field. */
+        /** @return the value of the {@code pushconstantPipelineLayout} field. */
         @NativeType("VkPipelineLayout")
         public long pushconstantPipelineLayout() { return VkIndirectCommandsLayoutTokenNV.npushconstantPipelineLayout(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#pushconstantShaderStageFlags} field. */
+        /** @return the value of the {@code pushconstantShaderStageFlags} field. */
         @NativeType("VkShaderStageFlags")
         public int pushconstantShaderStageFlags() { return VkIndirectCommandsLayoutTokenNV.npushconstantShaderStageFlags(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#pushconstantOffset} field. */
+        /** @return the value of the {@code pushconstantOffset} field. */
         @NativeType("uint32_t")
         public int pushconstantOffset() { return VkIndirectCommandsLayoutTokenNV.npushconstantOffset(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#pushconstantSize} field. */
+        /** @return the value of the {@code pushconstantSize} field. */
         @NativeType("uint32_t")
         public int pushconstantSize() { return VkIndirectCommandsLayoutTokenNV.npushconstantSize(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#indirectStateFlags} field. */
+        /** @return the value of the {@code indirectStateFlags} field. */
         @NativeType("VkIndirectStateFlagsNV")
         public int indirectStateFlags() { return VkIndirectCommandsLayoutTokenNV.nindirectStateFlags(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenNV#indexTypeCount} field. */
+        /** @return the value of the {@code indexTypeCount} field. */
         @NativeType("uint32_t")
         public int indexTypeCount() { return VkIndirectCommandsLayoutTokenNV.nindexTypeCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkIndirectCommandsLayoutTokenNV#pIndexTypes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pIndexTypes} field. */
         @NativeType("VkIndexType const *")
         public @Nullable IntBuffer pIndexTypes() { return VkIndirectCommandsLayoutTokenNV.npIndexTypes(address()); }
         /** @return a {@link IntBuffer} view of the data pointed to by the {@code pIndexTypeValues} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pIndexTypeValues() { return VkIndirectCommandsLayoutTokenNV.npIndexTypeValues(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectCommandsLayoutTokenNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV} value to the {@link VkIndirectCommandsLayoutTokenNV#sType} field. */
+        /** Sets the {@link NVDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV} value to the {@code sType} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer sType$Default() { return sType(NVDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV); }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pNext(@NativeType("void const *") long value) { VkIndirectCommandsLayoutTokenNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#tokenType} field. */
+        /** Sets the specified value to the {@code tokenType} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer tokenType(@NativeType("VkIndirectCommandsTokenTypeNV") int value) { VkIndirectCommandsLayoutTokenNV.ntokenType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#stream$} field. */
+        /** Sets the specified value to the {@code stream} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer stream$(@NativeType("uint32_t") int value) { VkIndirectCommandsLayoutTokenNV.nstream$(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer offset(@NativeType("uint32_t") int value) { VkIndirectCommandsLayoutTokenNV.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#vertexBindingUnit} field. */
+        /** Sets the specified value to the {@code vertexBindingUnit} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer vertexBindingUnit(@NativeType("uint32_t") int value) { VkIndirectCommandsLayoutTokenNV.nvertexBindingUnit(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#vertexDynamicStride} field. */
+        /** Sets the specified value to the {@code vertexDynamicStride} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer vertexDynamicStride(@NativeType("VkBool32") boolean value) { VkIndirectCommandsLayoutTokenNV.nvertexDynamicStride(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#pushconstantPipelineLayout} field. */
+        /** Sets the specified value to the {@code pushconstantPipelineLayout} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pushconstantPipelineLayout(@NativeType("VkPipelineLayout") long value) { VkIndirectCommandsLayoutTokenNV.npushconstantPipelineLayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#pushconstantShaderStageFlags} field. */
+        /** Sets the specified value to the {@code pushconstantShaderStageFlags} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pushconstantShaderStageFlags(@NativeType("VkShaderStageFlags") int value) { VkIndirectCommandsLayoutTokenNV.npushconstantShaderStageFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#pushconstantOffset} field. */
+        /** Sets the specified value to the {@code pushconstantOffset} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pushconstantOffset(@NativeType("uint32_t") int value) { VkIndirectCommandsLayoutTokenNV.npushconstantOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#pushconstantSize} field. */
+        /** Sets the specified value to the {@code pushconstantSize} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pushconstantSize(@NativeType("uint32_t") int value) { VkIndirectCommandsLayoutTokenNV.npushconstantSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#indirectStateFlags} field. */
+        /** Sets the specified value to the {@code indirectStateFlags} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer indirectStateFlags(@NativeType("VkIndirectStateFlagsNV") int value) { VkIndirectCommandsLayoutTokenNV.nindirectStateFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenNV#indexTypeCount} field. */
+        /** Sets the specified value to the {@code indexTypeCount} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer indexTypeCount(@NativeType("uint32_t") int value) { VkIndirectCommandsLayoutTokenNV.nindexTypeCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkIndirectCommandsLayoutTokenNV#pIndexTypes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pIndexTypes} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pIndexTypes(@Nullable @NativeType("VkIndexType const *") IntBuffer value) { VkIndirectCommandsLayoutTokenNV.npIndexTypes(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code pIndexTypeValues} field. */
         public VkIndirectCommandsLayoutTokenNV.Buffer pIndexTypeValues(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkIndirectCommandsLayoutTokenNV.npIndexTypeValues(address(), value); return this; }

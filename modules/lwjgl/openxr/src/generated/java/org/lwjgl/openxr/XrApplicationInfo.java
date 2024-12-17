@@ -19,40 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.XR10.*;
 
 /**
- * Structure specifying application info.
- * 
- * <h5>Description</h5>
- * 
- * <p>Useful values for {@code apiVersion} include {@link XR10#XR_API_VERSION_1_0 API_VERSION_1_0} and {@link XR11#XR_API_VERSION_1_1 API_VERSION_1_1}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code applicationName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link XR10#XR_MAX_APPLICATION_NAME_SIZE MAX_APPLICATION_NAME_SIZE}</li>
- * <li>{@code engineName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link XR10#XR_MAX_ENGINE_NAME_SIZE MAX_ENGINE_NAME_SIZE}</li>
- * </ul>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>When using the OpenXR API to implement a reusable engine that will be used by many applications, {@code engineName} <b>should</b> be set to a unique string that identifies the engine, and {@code engineVersion} <b>should</b> encode a representation of the engine’s version. This way, all applications that share this engine version will provide the same {@code engineName} and {@code engineVersion} to the runtime. The engine <b>should</b> then enable individual applications to choose their specific {@code applicationName} and {@code applicationVersion}, enabling one application to be distinguished from another application.</p>
- * 
- * <p>When using the OpenXR API to implement an individual application without a shared engine, the input {@code engineName} <b>should</b> be left empty and {@code engineVersion} <b>should</b> be set to 0. The {@code applicationName} <b>should</b> then be filled in with a unique string that identifies the app and the {@code applicationVersion} <b>should</b> encode a representation of the application’s version.</p>
- * </div>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#XR_API_VERSION_1_0 API_VERSION_1_0}, {@link XR11#XR_API_VERSION_1_1 API_VERSION_1_1}, {@link XrInstanceCreateInfo}, {@link XR10#xrCreateInstance CreateInstance}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrApplicationInfo {
- *     char {@link #applicationName}[XR_MAX_APPLICATION_NAME_SIZE];
- *     uint32_t {@link #applicationVersion};
- *     char {@link #engineName}[XR_MAX_ENGINE_NAME_SIZE];
- *     uint32_t {@link #engineVersion};
- *     XrVersion {@link #apiVersion};
- * }</code></pre>
+ *     char applicationName[XR_MAX_APPLICATION_NAME_SIZE];
+ *     uint32_t applicationVersion;
+ *     char engineName[XR_MAX_ENGINE_NAME_SIZE];
+ *     uint32_t engineVersion;
+ *     XrVersion apiVersion;
+ * }}</pre>
  */
 public class XrApplicationInfo extends Struct<XrApplicationInfo> implements NativeResource {
 
@@ -111,37 +85,37 @@ public class XrApplicationInfo extends Struct<XrApplicationInfo> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a non-empty string containing the name of the application. */
+    /** @return a {@link ByteBuffer} view of the {@code applicationName} field. */
     @NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]")
     public ByteBuffer applicationName() { return napplicationName(address()); }
-    /** a non-empty string containing the name of the application. */
+    /** @return the null-terminated string stored in the {@code applicationName} field. */
     @NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]")
     public String applicationNameString() { return napplicationNameString(address()); }
-    /** an unsigned integer variable containing the developer-supplied version number of the application. */
+    /** @return the value of the {@code applicationVersion} field. */
     @NativeType("uint32_t")
     public int applicationVersion() { return napplicationVersion(address()); }
-    /** a string containing the name of the engine (if any) used to create the application. It may be empty to indicate no specified engine. */
+    /** @return a {@link ByteBuffer} view of the {@code engineName} field. */
     @NativeType("char[XR_MAX_ENGINE_NAME_SIZE]")
     public ByteBuffer engineName() { return nengineName(address()); }
-    /** a string containing the name of the engine (if any) used to create the application. It may be empty to indicate no specified engine. */
+    /** @return the null-terminated string stored in the {@code engineName} field. */
     @NativeType("char[XR_MAX_ENGINE_NAME_SIZE]")
     public String engineNameString() { return nengineNameString(address()); }
-    /** an unsigned integer variable containing the developer-supplied version number of the engine used to create the application. May be zero to indicate no specified engine. */
+    /** @return the value of the {@code engineVersion} field. */
     @NativeType("uint32_t")
     public int engineVersion() { return nengineVersion(address()); }
-    /** the version of this API against which the application will run, encoded as described in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-api-version-numbers-and-semantics">API Version Numbers and Semantics</a> section. If the runtime does not support the requested {@code apiVersion} it <b>must</b> return {@link XR10#XR_ERROR_API_VERSION_UNSUPPORTED ERROR_API_VERSION_UNSUPPORTED}. */
+    /** @return the value of the {@code apiVersion} field. */
     @NativeType("XrVersion")
     public long apiVersion() { return napiVersion(address()); }
 
-    /** Copies the specified encoded string to the {@link #applicationName} field. */
+    /** Copies the specified encoded string to the {@code applicationName} field. */
     public XrApplicationInfo applicationName(@NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]") ByteBuffer value) { napplicationName(address(), value); return this; }
-    /** Sets the specified value to the {@link #applicationVersion} field. */
+    /** Sets the specified value to the {@code applicationVersion} field. */
     public XrApplicationInfo applicationVersion(@NativeType("uint32_t") int value) { napplicationVersion(address(), value); return this; }
-    /** Copies the specified encoded string to the {@link #engineName} field. */
+    /** Copies the specified encoded string to the {@code engineName} field. */
     public XrApplicationInfo engineName(@NativeType("char[XR_MAX_ENGINE_NAME_SIZE]") ByteBuffer value) { nengineName(address(), value); return this; }
-    /** Sets the specified value to the {@link #engineVersion} field. */
+    /** Sets the specified value to the {@code engineVersion} field. */
     public XrApplicationInfo engineVersion(@NativeType("uint32_t") int value) { nengineVersion(address(), value); return this; }
-    /** Sets the specified value to the {@link #apiVersion} field. */
+    /** Sets the specified value to the {@code apiVersion} field. */
     public XrApplicationInfo apiVersion(@NativeType("XrVersion") long value) { napiVersion(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -365,37 +339,37 @@ public class XrApplicationInfo extends Struct<XrApplicationInfo> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link XrApplicationInfo#applicationName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code applicationName} field. */
         @NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]")
         public ByteBuffer applicationName() { return XrApplicationInfo.napplicationName(address()); }
-        /** @return the null-terminated string stored in the {@link XrApplicationInfo#applicationName} field. */
+        /** @return the null-terminated string stored in the {@code applicationName} field. */
         @NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]")
         public String applicationNameString() { return XrApplicationInfo.napplicationNameString(address()); }
-        /** @return the value of the {@link XrApplicationInfo#applicationVersion} field. */
+        /** @return the value of the {@code applicationVersion} field. */
         @NativeType("uint32_t")
         public int applicationVersion() { return XrApplicationInfo.napplicationVersion(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrApplicationInfo#engineName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code engineName} field. */
         @NativeType("char[XR_MAX_ENGINE_NAME_SIZE]")
         public ByteBuffer engineName() { return XrApplicationInfo.nengineName(address()); }
-        /** @return the null-terminated string stored in the {@link XrApplicationInfo#engineName} field. */
+        /** @return the null-terminated string stored in the {@code engineName} field. */
         @NativeType("char[XR_MAX_ENGINE_NAME_SIZE]")
         public String engineNameString() { return XrApplicationInfo.nengineNameString(address()); }
-        /** @return the value of the {@link XrApplicationInfo#engineVersion} field. */
+        /** @return the value of the {@code engineVersion} field. */
         @NativeType("uint32_t")
         public int engineVersion() { return XrApplicationInfo.nengineVersion(address()); }
-        /** @return the value of the {@link XrApplicationInfo#apiVersion} field. */
+        /** @return the value of the {@code apiVersion} field. */
         @NativeType("XrVersion")
         public long apiVersion() { return XrApplicationInfo.napiVersion(address()); }
 
-        /** Copies the specified encoded string to the {@link XrApplicationInfo#applicationName} field. */
+        /** Copies the specified encoded string to the {@code applicationName} field. */
         public XrApplicationInfo.Buffer applicationName(@NativeType("char[XR_MAX_APPLICATION_NAME_SIZE]") ByteBuffer value) { XrApplicationInfo.napplicationName(address(), value); return this; }
-        /** Sets the specified value to the {@link XrApplicationInfo#applicationVersion} field. */
+        /** Sets the specified value to the {@code applicationVersion} field. */
         public XrApplicationInfo.Buffer applicationVersion(@NativeType("uint32_t") int value) { XrApplicationInfo.napplicationVersion(address(), value); return this; }
-        /** Copies the specified encoded string to the {@link XrApplicationInfo#engineName} field. */
+        /** Copies the specified encoded string to the {@code engineName} field. */
         public XrApplicationInfo.Buffer engineName(@NativeType("char[XR_MAX_ENGINE_NAME_SIZE]") ByteBuffer value) { XrApplicationInfo.nengineName(address(), value); return this; }
-        /** Sets the specified value to the {@link XrApplicationInfo#engineVersion} field. */
+        /** Sets the specified value to the {@code engineVersion} field. */
         public XrApplicationInfo.Buffer engineVersion(@NativeType("uint32_t") int value) { XrApplicationInfo.nengineVersion(address(), value); return this; }
-        /** Sets the specified value to the {@link XrApplicationInfo#apiVersion} field. */
+        /** Sets the specified value to the {@code apiVersion} field. */
         public XrApplicationInfo.Buffer apiVersion(@NativeType("XrVersion") long value) { XrApplicationInfo.napiVersion(address(), value); return this; }
 
     }

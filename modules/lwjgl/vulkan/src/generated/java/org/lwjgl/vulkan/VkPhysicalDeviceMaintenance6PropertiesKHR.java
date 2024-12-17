@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceMaintenance6Properties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMaintenance6PropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 blockTexelViewCompatibleMultipleLayers;
  *     uint32_t maxCombinedImageSamplerDescriptorCount;
  *     VkBool32 fragmentShadingRateClampCombinerInputs;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceMaintenance6PropertiesKHR extends VkPhysicalDeviceMaintenance6Properties {
 

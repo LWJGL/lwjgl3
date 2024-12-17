@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LLVMMCJITCompilerOptions {
  *     unsigned int OptLevel;
  *     LLVMCodeModel CodeModel;
  *     LLVMBool NoFramePointerElim;
  *     LLVMBool EnableFastISel;
  *     LLVMMCJITMemoryManagerRef MCJMM;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct LLVMMCJITCompilerOptions")
 public class LLVMMCJITCompilerOptions extends Struct<LLVMMCJITCompilerOptions> implements NativeResource {

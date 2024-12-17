@@ -20,42 +20,16 @@ import org.lwjgl.system.linux.*;
 import org.lwjgl.opengl.*;
 
 /**
- * The graphics binding structure to be passed at session creation to use OpenGL on X11 via Xlib.
- * 
- * <h5>Description</h5>
- * 
- * <p>When creating an OpenGL-backed {@code XrSession} on any Linux/Unix platform that utilizes X11 and GLX, via the Xlib library, the application will provide a pointer to an {@link XrGraphicsBindingOpenGLXlibKHR} in the {@code next} chain of the {@link XrSessionCreateInfo}.</p>
- * 
- * <p>The required window system configuration define to expose this structure type is {@link XR10#XR_USE_PLATFORM_XLIB USE_PLATFORM_XLIB}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsBindingOpenGLXlibKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code xDisplay} <b>must</b> be a pointer to a {@code Display} value</li>
- * <li>{@code glxFBConfig} <b>must</b> be a valid {@code GLXFBConfig} value</li>
- * <li>{@code glxDrawable} <b>must</b> be a valid {@code GLXDrawable} value</li>
- * <li>{@code glxContext} <b>must</b> be a valid {@code GLXContext} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateSession CreateSession}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGraphicsBindingOpenGLXlibKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     Display * {@link #xDisplay};
- *     uint32_t {@link #visualid};
- *     GLXFBConfig {@link #glxFBConfig};
- *     GLXDrawable {@link #glxDrawable};
- *     GLXContext {@link #glxContext};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     Display * xDisplay;
+ *     uint32_t visualid;
+ *     GLXFBConfig glxFBConfig;
+ *     GLXDrawable glxDrawable;
+ *     GLXContext glxContext;
+ * }}</pre>
  */
 public class XrGraphicsBindingOpenGLXlibKHR extends Struct<XrGraphicsBindingOpenGLXlibKHR> implements NativeResource {
 
@@ -120,43 +94,43 @@ public class XrGraphicsBindingOpenGLXlibKHR extends Struct<XrGraphicsBindingOpen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a valid X11 {@code Display}. */
+    /** @return the value of the {@code xDisplay} field. */
     @NativeType("Display *")
     public long xDisplay() { return nxDisplay(address()); }
-    /** a valid X11 visual identifier. */
+    /** @return the value of the {@code visualid} field. */
     @NativeType("uint32_t")
     public int visualid() { return nvisualid(address()); }
-    /** a valid X11 OpenGL GLX {@code GLXFBConfig}. */
+    /** @return the value of the {@code glxFBConfig} field. */
     @NativeType("GLXFBConfig")
     public long glxFBConfig() { return nglxFBConfig(address()); }
-    /** a valid X11 OpenGL GLX {@code GLXDrawable}. */
+    /** @return the value of the {@code glxDrawable} field. */
     @NativeType("GLXDrawable")
     public long glxDrawable() { return nglxDrawable(address()); }
-    /** a valid X11 OpenGL GLX {@code GLXContext}. */
+    /** @return the value of the {@code glxContext} field. */
     @NativeType("GLXContext")
     public long glxContext() { return nglxContext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrGraphicsBindingOpenGLXlibKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR} value to the {@code type} field. */
     public XrGraphicsBindingOpenGLXlibKHR type$Default() { return type(KHROpenGLEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrGraphicsBindingOpenGLXlibKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #xDisplay} field. */
+    /** Sets the specified value to the {@code xDisplay} field. */
     public XrGraphicsBindingOpenGLXlibKHR xDisplay(@NativeType("Display *") long value) { nxDisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #visualid} field. */
+    /** Sets the specified value to the {@code visualid} field. */
     public XrGraphicsBindingOpenGLXlibKHR visualid(@NativeType("uint32_t") int value) { nvisualid(address(), value); return this; }
-    /** Sets the specified value to the {@link #glxFBConfig} field. */
+    /** Sets the specified value to the {@code glxFBConfig} field. */
     public XrGraphicsBindingOpenGLXlibKHR glxFBConfig(@NativeType("GLXFBConfig") long value) { nglxFBConfig(address(), value); return this; }
-    /** Sets the specified value to the {@link #glxDrawable} field. */
+    /** Sets the specified value to the {@code glxDrawable} field. */
     public XrGraphicsBindingOpenGLXlibKHR glxDrawable(@NativeType("GLXDrawable") long value) { nglxDrawable(address(), value); return this; }
-    /** Sets the specified value to the {@link #glxContext} field. */
+    /** Sets the specified value to the {@code glxContext} field. */
     public XrGraphicsBindingOpenGLXlibKHR glxContext(@NativeType("GLXContext") long value) { nglxContext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -388,43 +362,43 @@ public class XrGraphicsBindingOpenGLXlibKHR extends Struct<XrGraphicsBindingOpen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrGraphicsBindingOpenGLXlibKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingOpenGLXlibKHR.ntype(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLXlibKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingOpenGLXlibKHR.nnext(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLXlibKHR#xDisplay} field. */
+        /** @return the value of the {@code xDisplay} field. */
         @NativeType("Display *")
         public long xDisplay() { return XrGraphicsBindingOpenGLXlibKHR.nxDisplay(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLXlibKHR#visualid} field. */
+        /** @return the value of the {@code visualid} field. */
         @NativeType("uint32_t")
         public int visualid() { return XrGraphicsBindingOpenGLXlibKHR.nvisualid(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLXlibKHR#glxFBConfig} field. */
+        /** @return the value of the {@code glxFBConfig} field. */
         @NativeType("GLXFBConfig")
         public long glxFBConfig() { return XrGraphicsBindingOpenGLXlibKHR.nglxFBConfig(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLXlibKHR#glxDrawable} field. */
+        /** @return the value of the {@code glxDrawable} field. */
         @NativeType("GLXDrawable")
         public long glxDrawable() { return XrGraphicsBindingOpenGLXlibKHR.nglxDrawable(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLXlibKHR#glxContext} field. */
+        /** @return the value of the {@code glxContext} field. */
         @NativeType("GLXContext")
         public long glxContext() { return XrGraphicsBindingOpenGLXlibKHR.nglxContext(address()); }
 
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLXlibKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrGraphicsBindingOpenGLXlibKHR.Buffer type(@NativeType("XrStructureType") int value) { XrGraphicsBindingOpenGLXlibKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR} value to the {@link XrGraphicsBindingOpenGLXlibKHR#type} field. */
+        /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR} value to the {@code type} field. */
         public XrGraphicsBindingOpenGLXlibKHR.Buffer type$Default() { return type(KHROpenGLEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR); }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLXlibKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrGraphicsBindingOpenGLXlibKHR.Buffer next(@NativeType("void const *") long value) { XrGraphicsBindingOpenGLXlibKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLXlibKHR#xDisplay} field. */
+        /** Sets the specified value to the {@code xDisplay} field. */
         public XrGraphicsBindingOpenGLXlibKHR.Buffer xDisplay(@NativeType("Display *") long value) { XrGraphicsBindingOpenGLXlibKHR.nxDisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLXlibKHR#visualid} field. */
+        /** Sets the specified value to the {@code visualid} field. */
         public XrGraphicsBindingOpenGLXlibKHR.Buffer visualid(@NativeType("uint32_t") int value) { XrGraphicsBindingOpenGLXlibKHR.nvisualid(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLXlibKHR#glxFBConfig} field. */
+        /** Sets the specified value to the {@code glxFBConfig} field. */
         public XrGraphicsBindingOpenGLXlibKHR.Buffer glxFBConfig(@NativeType("GLXFBConfig") long value) { XrGraphicsBindingOpenGLXlibKHR.nglxFBConfig(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLXlibKHR#glxDrawable} field. */
+        /** Sets the specified value to the {@code glxDrawable} field. */
         public XrGraphicsBindingOpenGLXlibKHR.Buffer glxDrawable(@NativeType("GLXDrawable") long value) { XrGraphicsBindingOpenGLXlibKHR.nglxDrawable(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLXlibKHR#glxContext} field. */
+        /** Sets the specified value to the {@code glxContext} field. */
         public XrGraphicsBindingOpenGLXlibKHR.Buffer glxContext(@NativeType("GLXContext") long value) { XrGraphicsBindingOpenGLXlibKHR.nglxContext(address(), value); return this; }
 
     }

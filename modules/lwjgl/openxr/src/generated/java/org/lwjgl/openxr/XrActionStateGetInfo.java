@@ -17,33 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to get action state.
- * 
- * <h5>Description</h5>
- * 
- * <p>See {@link XrActionCreateInfo} for a description of subaction paths, and the restrictions on their use.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTION_STATE_GET_INFO TYPE_ACTION_STATE_GET_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code action} <b>must</b> be a valid {@code XrAction} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrGetActionStateBoolean GetActionStateBoolean}, {@link XR10#xrGetActionStateFloat GetActionStateFloat}, {@link XR10#xrGetActionStatePose GetActionStatePose}, {@link XR10#xrGetActionStateVector2f GetActionStateVector2f}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActionStateGetInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrAction {@link #action};
- *     XrPath {@link #subactionPath};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrAction action;
+ *     XrPath subactionPath;
+ * }}</pre>
  */
 public class XrActionStateGetInfo extends Struct<XrActionStateGetInfo> implements NativeResource {
 
@@ -99,28 +79,28 @@ public class XrActionStateGetInfo extends Struct<XrActionStateGetInfo> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrAction} being queried. */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** the subaction path {@code XrPath} to query data from, or {@link XR10#XR_NULL_PATH NULL_PATH} to specify all subaction paths. If the subaction path is specified, it is one of the subaction paths that were specified when the action was created. If the subaction path was not specified when the action was created, the runtime <b>must</b> return {@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}. If this parameter is specified, the runtime <b>must</b> return data that originates only from the subaction paths specified. */
+    /** @return the value of the {@code subactionPath} field. */
     @NativeType("XrPath")
     public long subactionPath() { return nsubactionPath(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrActionStateGetInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_GET_INFO TYPE_ACTION_STATE_GET_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_GET_INFO TYPE_ACTION_STATE_GET_INFO} value to the {@code type} field. */
     public XrActionStateGetInfo type$Default() { return type(XR10.XR_TYPE_ACTION_STATE_GET_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrActionStateGetInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #action} field. */
+    /** Sets the specified value to the {@code action} field. */
     public XrActionStateGetInfo action(XrAction value) { naction(address(), value); return this; }
-    /** Sets the specified value to the {@link #subactionPath} field. */
+    /** Sets the specified value to the {@code subactionPath} field. */
     public XrActionStateGetInfo subactionPath(@NativeType("XrPath") long value) { nsubactionPath(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -331,28 +311,28 @@ public class XrActionStateGetInfo extends Struct<XrActionStateGetInfo> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActionStateGetInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionStateGetInfo.ntype(address()); }
-        /** @return the value of the {@link XrActionStateGetInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionStateGetInfo.nnext(address()); }
-        /** @return the value of the {@link XrActionStateGetInfo#action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrActionStateGetInfo.naction(address()); }
-        /** @return the value of the {@link XrActionStateGetInfo#subactionPath} field. */
+        /** @return the value of the {@code subactionPath} field. */
         @NativeType("XrPath")
         public long subactionPath() { return XrActionStateGetInfo.nsubactionPath(address()); }
 
-        /** Sets the specified value to the {@link XrActionStateGetInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrActionStateGetInfo.Buffer type(@NativeType("XrStructureType") int value) { XrActionStateGetInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_GET_INFO TYPE_ACTION_STATE_GET_INFO} value to the {@link XrActionStateGetInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_GET_INFO TYPE_ACTION_STATE_GET_INFO} value to the {@code type} field. */
         public XrActionStateGetInfo.Buffer type$Default() { return type(XR10.XR_TYPE_ACTION_STATE_GET_INFO); }
-        /** Sets the specified value to the {@link XrActionStateGetInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrActionStateGetInfo.Buffer next(@NativeType("void const *") long value) { XrActionStateGetInfo.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionStateGetInfo#action} field. */
+        /** Sets the specified value to the {@code action} field. */
         public XrActionStateGetInfo.Buffer action(XrAction value) { XrActionStateGetInfo.naction(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionStateGetInfo#subactionPath} field. */
+        /** Sets the specified value to the {@code subactionPath} field. */
         public XrActionStateGetInfo.Buffer subactionPath(@NativeType("XrPath") long value) { XrActionStateGetInfo.nsubactionPath(address(), value); return this; }
 
     }

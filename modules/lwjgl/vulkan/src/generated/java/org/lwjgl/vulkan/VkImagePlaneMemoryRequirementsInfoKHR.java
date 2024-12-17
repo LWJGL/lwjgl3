@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkImagePlaneMemoryRequirementsInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImagePlaneMemoryRequirementsInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkImageAspectFlagBits planeAspect;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkImagePlaneMemoryRequirementsInfoKHR extends VkImagePlaneMemoryRequirementsInfo {
 

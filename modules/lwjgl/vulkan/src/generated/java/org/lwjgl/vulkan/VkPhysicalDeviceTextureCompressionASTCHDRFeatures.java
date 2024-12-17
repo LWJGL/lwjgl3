@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing ASTC HDR features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceTextureCompressionASTCHDRFeatures {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #textureCompressionASTC_HDR};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 textureCompressionASTC_HDR;
+ * }}</pre>
  */
 public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct<VkPhysicalDeviceTextureCompressionASTCHDRFeatures> implements NativeResource {
 
@@ -88,44 +74,23 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /**
-     * indicates whether all of the ASTC HDR compressed texture formats are supported. If this feature is enabled, then the {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}, {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT} and {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT} features <b>must</b> be supported in {@code optimalTilingFeatures} for the following formats:
-     * 
-     * <ul>
-     * <li>{@link VK13#VK_FORMAT_ASTC_4x4_SFLOAT_BLOCK FORMAT_ASTC_4x4_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_5x4_SFLOAT_BLOCK FORMAT_ASTC_5x4_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_5x5_SFLOAT_BLOCK FORMAT_ASTC_5x5_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_6x5_SFLOAT_BLOCK FORMAT_ASTC_6x5_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_6x6_SFLOAT_BLOCK FORMAT_ASTC_6x6_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_8x5_SFLOAT_BLOCK FORMAT_ASTC_8x5_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_8x6_SFLOAT_BLOCK FORMAT_ASTC_8x6_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_8x8_SFLOAT_BLOCK FORMAT_ASTC_8x8_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_10x5_SFLOAT_BLOCK FORMAT_ASTC_10x5_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_10x6_SFLOAT_BLOCK FORMAT_ASTC_10x6_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_10x8_SFLOAT_BLOCK FORMAT_ASTC_10x8_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_10x10_SFLOAT_BLOCK FORMAT_ASTC_10x10_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_12x10_SFLOAT_BLOCK FORMAT_ASTC_12x10_SFLOAT_BLOCK}</li>
-     * <li>{@link VK13#VK_FORMAT_ASTC_12x12_SFLOAT_BLOCK FORMAT_ASTC_12x12_SFLOAT_BLOCK}
-     * To query for additional properties, or if the feature is not enabled, {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} and {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties} <b>can</b> be used to check for supported properties of individual formats as normal.
-     * </li>
-     * </ul>
-     */
+    /** @return the value of the {@code textureCompressionASTC_HDR} field. */
     @NativeType("VkBool32")
     public boolean textureCompressionASTC_HDR() { return ntextureCompressionASTC_HDR(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeatures sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #textureCompressionASTC_HDR} field. */
+    /** Sets the specified value to the {@code textureCompressionASTC_HDR} field. */
     public VkPhysicalDeviceTextureCompressionASTCHDRFeatures textureCompressionASTC_HDR(@NativeType("VkBool32") boolean value) { ntextureCompressionASTC_HDR(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,23 +286,23 @@ public class VkPhysicalDeviceTextureCompressionASTCHDRFeatures extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceTextureCompressionASTCHDRFeatures.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceTextureCompressionASTCHDRFeatures.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#textureCompressionASTC_HDR} field. */
+        /** @return the value of the {@code textureCompressionASTC_HDR} field. */
         @NativeType("VkBool32")
         public boolean textureCompressionASTC_HDR() { return VkPhysicalDeviceTextureCompressionASTCHDRFeatures.ntextureCompressionASTC_HDR(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceTextureCompressionASTCHDRFeatures.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES} value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceTextureCompressionASTCHDRFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures#textureCompressionASTC_HDR} field. */
+        /** Sets the specified value to the {@code textureCompressionASTC_HDR} field. */
         public VkPhysicalDeviceTextureCompressionASTCHDRFeatures.Buffer textureCompressionASTC_HDR(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceTextureCompressionASTCHDRFeatures.ntextureCompressionASTC_HDR(address(), value ? 1 : 0); return this; }
 
     }

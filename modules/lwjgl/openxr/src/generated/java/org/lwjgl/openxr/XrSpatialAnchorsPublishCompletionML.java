@@ -17,56 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Completion structure to retrieve the result of the anchor creation.
- * 
- * <h5>Future Return Codes</h5>
- * 
- * <p>{@code futureResult} values:</p>
- * 
- * <dl>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-successcodes">Success</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
- * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
- * </ul></dd>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-errorcodes">Failure</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
- * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
- * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
- * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
- * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
- * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML}</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsPublishCompletionML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSpatialAnchorsPublishCompletionDetailsML}</li>
- * <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
- * <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} {@link XrUuidEXT} structures</li>
- * <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}, {@link MLSpatialAnchors#xrCreateSpatialAnchorsCompleteML CreateSpatialAnchorsCompleteML}, {@link MLSpatialAnchorsStorage#xrPublishSpatialAnchorsCompleteML PublishSpatialAnchorsCompleteML}, {@link MLSpatialAnchorsStorage#xrQuerySpatialAnchorsAsyncML QuerySpatialAnchorsAsyncML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsPublishCompletionML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrResult {@link #futureResult};
- *     uint32_t {@link #uuidCount};
- *     {@link XrUuidEXT XrUuidEXT} * {@link #uuids};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrResult futureResult;
+ *     uint32_t uuidCount;
+ *     {@link XrUuidEXT XrUuidEXT} * uuids;
+ * }}</pre>
  */
 public class XrSpatialAnchorsPublishCompletionML extends Struct<XrSpatialAnchorsPublishCompletionML> implements NativeResource {
 
@@ -125,33 +83,33 @@ public class XrSpatialAnchorsPublishCompletionML extends Struct<XrSpatialAnchors
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrResult} of the asynchronous operation. */
+    /** @return the value of the {@code futureResult} field. */
     @NativeType("XrResult")
     public int futureResult() { return nfutureResult(address()); }
-    /** the capacity of the {@code uuids} array and <b>must</b> match the number of anchors passed to {@link MLSpatialAnchorsStorage#xrPublishSpatialAnchorsAsyncML PublishSpatialAnchorsAsyncML} */
+    /** @return the value of the {@code uuidCount} field. */
     @NativeType("uint32_t")
     public int uuidCount() { return nuuidCount(address()); }
-    /** an array of {@link XrUuidEXT}. */
+    /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
     @NativeType("XrUuidEXT *")
     public XrUuidEXT.Buffer uuids() { return nuuids(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsPublishCompletionML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML} value to the {@code type} field. */
     public XrSpatialAnchorsPublishCompletionML type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsPublishCompletionML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrSpatialAnchorsPublishCompletionDetailsML} value to the {@code next} chain. */
     public XrSpatialAnchorsPublishCompletionML next(XrSpatialAnchorsPublishCompletionDetailsML value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #futureResult} field. */
+    /** Sets the specified value to the {@code futureResult} field. */
     public XrSpatialAnchorsPublishCompletionML futureResult(@NativeType("XrResult") int value) { nfutureResult(address(), value); return this; }
-    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link #uuids} field. */
+    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
     public XrSpatialAnchorsPublishCompletionML uuids(@NativeType("XrUuidEXT *") XrUuidEXT.Buffer value) { nuuids(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -376,33 +334,33 @@ public class XrSpatialAnchorsPublishCompletionML extends Struct<XrSpatialAnchors
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsPublishCompletionML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsPublishCompletionML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsPublishCompletionML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpatialAnchorsPublishCompletionML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsPublishCompletionML#futureResult} field. */
+        /** @return the value of the {@code futureResult} field. */
         @NativeType("XrResult")
         public int futureResult() { return XrSpatialAnchorsPublishCompletionML.nfutureResult(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsPublishCompletionML#uuidCount} field. */
+        /** @return the value of the {@code uuidCount} field. */
         @NativeType("uint32_t")
         public int uuidCount() { return XrSpatialAnchorsPublishCompletionML.nuuidCount(address()); }
-        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@link XrSpatialAnchorsPublishCompletionML#uuids} field. */
+        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
         @NativeType("XrUuidEXT *")
         public XrUuidEXT.Buffer uuids() { return XrSpatialAnchorsPublishCompletionML.nuuids(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsPublishCompletionML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsPublishCompletionML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsPublishCompletionML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML} value to the {@link XrSpatialAnchorsPublishCompletionML#type} field. */
+        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML} value to the {@code type} field. */
         public XrSpatialAnchorsPublishCompletionML.Buffer type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsPublishCompletionML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsPublishCompletionML.Buffer next(@NativeType("void *") long value) { XrSpatialAnchorsPublishCompletionML.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrSpatialAnchorsPublishCompletionDetailsML} value to the {@code next} chain. */
         public XrSpatialAnchorsPublishCompletionML.Buffer next(XrSpatialAnchorsPublishCompletionDetailsML value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsPublishCompletionML#futureResult} field. */
+        /** Sets the specified value to the {@code futureResult} field. */
         public XrSpatialAnchorsPublishCompletionML.Buffer futureResult(@NativeType("XrResult") int value) { XrSpatialAnchorsPublishCompletionML.nfutureResult(address(), value); return this; }
-        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link XrSpatialAnchorsPublishCompletionML#uuids} field. */
+        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
         public XrSpatialAnchorsPublishCompletionML.Buffer uuids(@NativeType("XrUuidEXT *") XrUuidEXT.Buffer value) { XrSpatialAnchorsPublishCompletionML.nuuids(address(), value); return this; }
 
     }

@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@code visit} field of the {@link CXCursorAndRangeVisitor} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * enum CXVisitorResult (*{@link #invoke}) (
- *     void *context,
- *     CXCursor cursor,
- *     CXSourceRange range
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("enum CXVisitorResult (*) (void *, CXCursor, CXSourceRange)")
 public interface CXCursorAndRangeVisitI extends CallbackI {
@@ -47,6 +36,7 @@ public interface CXCursorAndRangeVisitI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code enum CXVisitorResult (*) (void * context, CXCursor cursor, CXSourceRange range)} */
     @NativeType("enum CXVisitorResult") int invoke(@NativeType("void *") long context, CXCursor cursor, CXSourceRange range);
 
 }

@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiMetadataEntry {
  *     aiMetadataType mType;
  *     void * mData;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct aiMetadataEntry")
 public class AIMetaDataEntry extends Struct<AIMetaDataEntry> implements NativeResource {
@@ -77,11 +75,7 @@ public class AIMetaDataEntry extends Struct<AIMetaDataEntry> implements NativeRe
     /** @return the value of the {@code mType} field. */
     @NativeType("aiMetadataType")
     public int mType() { return nmType(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code mData} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code mData} field. */
     @NativeType("void *")
     public ByteBuffer mData(int capacity) { return nmData(address(), capacity); }
 
@@ -308,11 +302,7 @@ public class AIMetaDataEntry extends Struct<AIMetaDataEntry> implements NativeRe
         /** @return the value of the {@code mType} field. */
         @NativeType("aiMetadataType")
         public int mType() { return AIMetaDataEntry.nmType(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code mData} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code mData} field. */
         @NativeType("void *")
         public ByteBuffer mData(int capacity) { return AIMetaDataEntry.nmData(address(), capacity); }
 

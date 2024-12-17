@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     FT_Vector const *control1,
- *     FT_Vector const *control2,
- *     FT_Vector const *to,
- *     void *user
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Outline_CubicToFunc} */
 public abstract class FT_Outline_CubicToFunc extends Callback implements FT_Outline_CubicToFuncI {
 
     /**

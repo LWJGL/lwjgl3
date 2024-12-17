@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_GUID {
  *     unsigned int Data1;
  *     unsigned short Data2;
  *     unsigned short Data3;
  *     unsigned char Data4[8];
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_GUID extends Struct<FMOD_GUID> implements NativeResource {
 

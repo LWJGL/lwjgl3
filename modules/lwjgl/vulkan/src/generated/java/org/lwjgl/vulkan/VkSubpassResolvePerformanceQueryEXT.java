@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the efficiency of subpass resolve for an attachment with a format.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code optimal} is {@link VK10#VK_FALSE FALSE} for a {@code VkFormat}, using a subpass resolve operation on a multisampled attachment with this format can incur additional costs, including additional memory bandwidth usage and a higher memory footprint. If an attachment with such a format is used in a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#subpass-multisampledrendertosinglesampled">multisampled-render-to-single-sampled</a> subpass, the additional memory and memory bandwidth usage can nullify the benefits of using the {@link EXTMultisampledRenderToSingleSampled VK_EXT_multisampled_render_to_single_sampled} extension.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMultisampledRenderToSingleSampled#VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubpassResolvePerformanceQueryEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #optimal};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 optimal;
+ * }}</pre>
  */
 public class VkSubpassResolvePerformanceQueryEXT extends Struct<VkSubpassResolvePerformanceQueryEXT> implements NativeResource {
 
@@ -88,21 +74,21 @@ public class VkSubpassResolvePerformanceQueryEXT extends Struct<VkSubpassResolve
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies that a subpass resolve operation is optimally performed. */
+    /** @return the value of the {@code optimal} field. */
     @NativeType("VkBool32")
     public boolean optimal() { return noptimal(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSubpassResolvePerformanceQueryEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMultisampledRenderToSingleSampled#VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMultisampledRenderToSingleSampled#VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT} value to the {@code sType} field. */
     public VkSubpassResolvePerformanceQueryEXT sType$Default() { return sType(EXTMultisampledRenderToSingleSampled.VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSubpassResolvePerformanceQueryEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,21 +280,21 @@ public class VkSubpassResolvePerformanceQueryEXT extends Struct<VkSubpassResolve
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSubpassResolvePerformanceQueryEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubpassResolvePerformanceQueryEXT.nsType(address()); }
-        /** @return the value of the {@link VkSubpassResolvePerformanceQueryEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSubpassResolvePerformanceQueryEXT.npNext(address()); }
-        /** @return the value of the {@link VkSubpassResolvePerformanceQueryEXT#optimal} field. */
+        /** @return the value of the {@code optimal} field. */
         @NativeType("VkBool32")
         public boolean optimal() { return VkSubpassResolvePerformanceQueryEXT.noptimal(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkSubpassResolvePerformanceQueryEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSubpassResolvePerformanceQueryEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassResolvePerformanceQueryEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMultisampledRenderToSingleSampled#VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT} value to the {@link VkSubpassResolvePerformanceQueryEXT#sType} field. */
+        /** Sets the {@link EXTMultisampledRenderToSingleSampled#VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT} value to the {@code sType} field. */
         public VkSubpassResolvePerformanceQueryEXT.Buffer sType$Default() { return sType(EXTMultisampledRenderToSingleSampled.VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT); }
-        /** Sets the specified value to the {@link VkSubpassResolvePerformanceQueryEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSubpassResolvePerformanceQueryEXT.Buffer pNext(@NativeType("void *") long value) { VkSubpassResolvePerformanceQueryEXT.npNext(address(), value); return this; }
 
     }

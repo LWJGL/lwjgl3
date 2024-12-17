@@ -16,31 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure defining properties of resolves using an external format.
- * 
- * <h5>Description</h5>
- * 
- * <p>Any Android hardware buffer created with the {@code GRALLOC_USAGE_HW_RENDER} flag <b>must</b> be renderable in some way in Vulkan, either:</p>
- * 
- * <ul>
- * <li>{@link VkAndroidHardwareBufferFormatPropertiesANDROID}{@code ::format} <b>must</b> be a format that supports {@link VK10#VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT FORMAT_FEATURE_COLOR_ATTACHMENT_BIT} or {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT} in {@link VkFormatProperties}{@code ::optimalTilingFeatures}; or</li>
- * <li>{@code colorAttachmentFormat} <b>must</b> be a format that supports {@link VK10#VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT FORMAT_FEATURE_COLOR_ATTACHMENT_BIT} in {@link VkFormatProperties}{@code ::optimalTilingFeatures}.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAndroidHardwareBufferFormatResolvePropertiesANDROID {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkFormat {@link #colorAttachmentFormat};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkFormat colorAttachmentFormat;
+ * }}</pre>
  */
 public class VkAndroidHardwareBufferFormatResolvePropertiesANDROID extends Struct<VkAndroidHardwareBufferFormatResolvePropertiesANDROID> implements NativeResource {
 
@@ -93,21 +74,21 @@ public class VkAndroidHardwareBufferFormatResolvePropertiesANDROID extends Struc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkFormat} specifying the format of color attachment images that <b>must</b> be used for color attachments when resolving to the specified external format. If the implementation supports external format resolves for the specified external format, this value will be a color format supporting the {@link VK10#VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT FORMAT_FEATURE_COLOR_ATTACHMENT_BIT} in {@link VkFormatProperties}{@code ::optimalTilingFeatures} as returned by {@link VK10#vkGetPhysicalDeviceFormatProperties GetPhysicalDeviceFormatProperties} with {@code format} equal to {@code colorAttachmentFormat} If external format resolves are not supported, this value will be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}. */
+    /** @return the value of the {@code colorAttachmentFormat} field. */
     @NativeType("VkFormat")
     public int colorAttachmentFormat() { return ncolorAttachmentFormat(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAndroidHardwareBufferFormatResolvePropertiesANDROID sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID} value to the {@link #sType} field. */
+    /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID} value to the {@code sType} field. */
     public VkAndroidHardwareBufferFormatResolvePropertiesANDROID sType$Default() { return sType(ANDROIDExternalFormatResolve.VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAndroidHardwareBufferFormatResolvePropertiesANDROID pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,21 +280,21 @@ public class VkAndroidHardwareBufferFormatResolvePropertiesANDROID extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAndroidHardwareBufferFormatResolvePropertiesANDROID.nsType(address()); }
-        /** @return the value of the {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkAndroidHardwareBufferFormatResolvePropertiesANDROID.npNext(address()); }
-        /** @return the value of the {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID#colorAttachmentFormat} field. */
+        /** @return the value of the {@code colorAttachmentFormat} field. */
         @NativeType("VkFormat")
         public int colorAttachmentFormat() { return VkAndroidHardwareBufferFormatResolvePropertiesANDROID.ncolorAttachmentFormat(address()); }
 
-        /** Sets the specified value to the {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAndroidHardwareBufferFormatResolvePropertiesANDROID.Buffer sType(@NativeType("VkStructureType") int value) { VkAndroidHardwareBufferFormatResolvePropertiesANDROID.nsType(address(), value); return this; }
-        /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID} value to the {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID#sType} field. */
+        /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID} value to the {@code sType} field. */
         public VkAndroidHardwareBufferFormatResolvePropertiesANDROID.Buffer sType$Default() { return sType(ANDROIDExternalFormatResolve.VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID); }
-        /** Sets the specified value to the {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAndroidHardwareBufferFormatResolvePropertiesANDROID.Buffer pNext(@NativeType("void *") long value) { VkAndroidHardwareBufferFormatResolvePropertiesANDROID.npNext(address(), value); return this; }
 
     }

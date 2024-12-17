@@ -19,72 +19,16 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.XR10.*;
 
 /**
- * XrAction creation info.
- * 
- * <h5>Description</h5>
- * 
- * <p>Subaction paths are a mechanism that enables applications to use the same action name and handle on multiple devices. Applications can query action state using subaction paths that differentiate data coming from each device. This allows the runtime to group logically equivalent actions together in system UI. For instance, an application could create a single actionname:pick_up action with the pathname:/user/hand/left and pathname:/user/hand/right subaction paths and use the subaction paths to independently query the state of actionname:pick_up_with_left_hand and actionname:pick_up_with_right_hand.</p>
- * 
- * <p>Applications <b>can</b> create actions with or without the {@code subactionPaths} set to a list of paths. If this list of paths is omitted (i.e. {@code subactionPaths} is set to {@code NULL}, and {@code countSubactionPaths} is set to 0), the application is opting out of filtering action results by subaction paths and any call to get action data must also omit subaction paths.</p>
- * 
- * <p>If {@code subactionPaths} is specified and any of the following conditions are not satisfied, the runtime <b>must</b> return {@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}:</p>
- * 
- * <ul>
- * <li>Each path provided is one of:
- * 
- * <ul>
- * <li>pathname:/user/head</li>
- * <li>pathname:/user/hand/left</li>
- * <li>pathname:/user/hand/right</li>
- * <li>pathname:/user/gamepad</li>
- * </ul>
- * </li>
- * <li>No path appears in the list more than once</li>
- * </ul>
- * 
- * <p>Extensions <b>may</b> append additional top level user paths to the above list.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Earlier revisions of the spec mentioned pathname:/user but it could not be implemented as specified and was removed as errata.</p>
- * </div>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED} in the following circumstances:</p>
- * 
- * <ul>
- * <li>The application specified subaction paths at action creation and the application called {@code xrGetActionState*} or a haptic function with an empty subaction path array.</li>
- * <li>The application called {@code xrGetActionState*} or a haptic function with a subaction path that was not specified when the action was created.</li>
- * </ul>
- * 
- * <p>If {@code actionName} or {@code localizedActionName} are empty strings, the runtime <b>must</b> return {@link XR10#XR_ERROR_NAME_INVALID ERROR_NAME_INVALID} or {@link XR10#XR_ERROR_LOCALIZED_NAME_INVALID ERROR_LOCALIZED_NAME_INVALID} respectively. If {@code actionName} or {@code localizedActionName} are duplicates of the corresponding field for any existing action in the specified action set, the runtime <b>must</b> return {@link XR10#XR_ERROR_NAME_DUPLICATED ERROR_NAME_DUPLICATED} or {@link XR10#XR_ERROR_LOCALIZED_NAME_DUPLICATED ERROR_LOCALIZED_NAME_DUPLICATED} respectively. If the conflicting action is destroyed, the conflicting field is no longer considered duplicated. If {@code actionName} contains characters which are not allowed in a single level of a <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#semantic-paths-well-formed">well-formed path string</a>, the runtime <b>must</b> return {@link XR10#XR_ERROR_PATH_FORMAT_INVALID ERROR_PATH_FORMAT_INVALID}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTION_CREATE_INFO TYPE_ACTION_CREATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code actionName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link XR10#XR_MAX_ACTION_NAME_SIZE MAX_ACTION_NAME_SIZE}</li>
- * <li>{@code actionType} <b>must</b> be a valid {@code XrActionType} value</li>
- * <li>If {@code countSubactionPaths} is not 0, {@code subactionPaths} <b>must</b> be a pointer to an array of {@code countSubactionPaths} valid {@code XrPath} values</li>
- * <li>{@code localizedActionName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link XR10#XR_MAX_LOCALIZED_ACTION_NAME_SIZE MAX_LOCALIZED_ACTION_NAME_SIZE}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateAction CreateAction}, {@link XR10#xrCreateActionSet CreateActionSet}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActionCreateInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     char {@link #actionName}[XR_MAX_ACTION_NAME_SIZE];
- *     XrActionType {@link #actionType};
- *     uint32_t {@link #countSubactionPaths};
- *     XrPath const * {@link #subactionPaths};
- *     char {@link #localizedActionName}[XR_MAX_LOCALIZED_ACTION_NAME_SIZE];
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     char actionName[XR_MAX_ACTION_NAME_SIZE];
+ *     XrActionType actionType;
+ *     uint32_t countSubactionPaths;
+ *     XrPath const * subactionPaths;
+ *     char localizedActionName[XR_MAX_LOCALIZED_ACTION_NAME_SIZE];
+ * }}</pre>
  */
 public class XrActionCreateInfo extends Struct<XrActionCreateInfo> implements NativeResource {
 
@@ -149,49 +93,49 @@ public class XrActionCreateInfo extends Struct<XrActionCreateInfo> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an array containing a {@code NULL} terminated string with the name of this action. */
+    /** @return a {@link ByteBuffer} view of the {@code actionName} field. */
     @NativeType("char[XR_MAX_ACTION_NAME_SIZE]")
     public ByteBuffer actionName() { return nactionName(address()); }
-    /** an array containing a {@code NULL} terminated string with the name of this action. */
+    /** @return the null-terminated string stored in the {@code actionName} field. */
     @NativeType("char[XR_MAX_ACTION_NAME_SIZE]")
     public String actionNameString() { return nactionNameString(address()); }
-    /** the {@code XrActionType} of the action to be created. */
+    /** @return the value of the {@code actionType} field. */
     @NativeType("XrActionType")
     public int actionType() { return nactionType(address()); }
-    /** the number of elements in the {@code subactionPaths} array. If {@code subactionPaths} is NULL, this parameter must be 0. */
+    /** @return the value of the {@code countSubactionPaths} field. */
     @NativeType("uint32_t")
     public int countSubactionPaths() { return ncountSubactionPaths(address()); }
-    /** an array of {@code XrPath} or {@code NULL}. If this array is specified, it contains one or more subaction paths that the application intends to query action state for. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code subactionPaths} field. */
     @NativeType("XrPath const *")
     public @Nullable LongBuffer subactionPaths() { return nsubactionPaths(address()); }
-    /** an array containing a {@code NULL} terminated {@code UTF}-8 string that can be presented to the user as a description of the action. This string should be in the system’s current active locale. */
+    /** @return a {@link ByteBuffer} view of the {@code localizedActionName} field. */
     @NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]")
     public ByteBuffer localizedActionName() { return nlocalizedActionName(address()); }
-    /** an array containing a {@code NULL} terminated {@code UTF}-8 string that can be presented to the user as a description of the action. This string should be in the system’s current active locale. */
+    /** @return the null-terminated string stored in the {@code localizedActionName} field. */
     @NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]")
     public String localizedActionNameString() { return nlocalizedActionNameString(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrActionCreateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_ACTION_CREATE_INFO TYPE_ACTION_CREATE_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_ACTION_CREATE_INFO TYPE_ACTION_CREATE_INFO} value to the {@code type} field. */
     public XrActionCreateInfo type$Default() { return type(XR10.XR_TYPE_ACTION_CREATE_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrActionCreateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified encoded string to the {@link #actionName} field. */
+    /** Copies the specified encoded string to the {@code actionName} field. */
     public XrActionCreateInfo actionName(@NativeType("char[XR_MAX_ACTION_NAME_SIZE]") ByteBuffer value) { nactionName(address(), value); return this; }
-    /** Sets the specified value to the {@link #actionType} field. */
+    /** Sets the specified value to the {@code actionType} field. */
     public XrActionCreateInfo actionType(@NativeType("XrActionType") int value) { nactionType(address(), value); return this; }
-    /** Sets the specified value to the {@link #countSubactionPaths} field. */
+    /** Sets the specified value to the {@code countSubactionPaths} field. */
     public XrActionCreateInfo countSubactionPaths(@NativeType("uint32_t") int value) { ncountSubactionPaths(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #subactionPaths} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code subactionPaths} field. */
     public XrActionCreateInfo subactionPaths(@Nullable @NativeType("XrPath const *") LongBuffer value) { nsubactionPaths(address(), value); return this; }
-    /** Copies the specified encoded string to the {@link #localizedActionName} field. */
+    /** Copies the specified encoded string to the {@code localizedActionName} field. */
     public XrActionCreateInfo localizedActionName(@NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]") ByteBuffer value) { nlocalizedActionName(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -427,49 +371,49 @@ public class XrActionCreateInfo extends Struct<XrActionCreateInfo> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActionCreateInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionCreateInfo.ntype(address()); }
-        /** @return the value of the {@link XrActionCreateInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionCreateInfo.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrActionCreateInfo#actionName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code actionName} field. */
         @NativeType("char[XR_MAX_ACTION_NAME_SIZE]")
         public ByteBuffer actionName() { return XrActionCreateInfo.nactionName(address()); }
-        /** @return the null-terminated string stored in the {@link XrActionCreateInfo#actionName} field. */
+        /** @return the null-terminated string stored in the {@code actionName} field. */
         @NativeType("char[XR_MAX_ACTION_NAME_SIZE]")
         public String actionNameString() { return XrActionCreateInfo.nactionNameString(address()); }
-        /** @return the value of the {@link XrActionCreateInfo#actionType} field. */
+        /** @return the value of the {@code actionType} field. */
         @NativeType("XrActionType")
         public int actionType() { return XrActionCreateInfo.nactionType(address()); }
-        /** @return the value of the {@link XrActionCreateInfo#countSubactionPaths} field. */
+        /** @return the value of the {@code countSubactionPaths} field. */
         @NativeType("uint32_t")
         public int countSubactionPaths() { return XrActionCreateInfo.ncountSubactionPaths(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link XrActionCreateInfo#subactionPaths} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code subactionPaths} field. */
         @NativeType("XrPath const *")
         public @Nullable LongBuffer subactionPaths() { return XrActionCreateInfo.nsubactionPaths(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrActionCreateInfo#localizedActionName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code localizedActionName} field. */
         @NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]")
         public ByteBuffer localizedActionName() { return XrActionCreateInfo.nlocalizedActionName(address()); }
-        /** @return the null-terminated string stored in the {@link XrActionCreateInfo#localizedActionName} field. */
+        /** @return the null-terminated string stored in the {@code localizedActionName} field. */
         @NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]")
         public String localizedActionNameString() { return XrActionCreateInfo.nlocalizedActionNameString(address()); }
 
-        /** Sets the specified value to the {@link XrActionCreateInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrActionCreateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrActionCreateInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_ACTION_CREATE_INFO TYPE_ACTION_CREATE_INFO} value to the {@link XrActionCreateInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_ACTION_CREATE_INFO TYPE_ACTION_CREATE_INFO} value to the {@code type} field. */
         public XrActionCreateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_ACTION_CREATE_INFO); }
-        /** Sets the specified value to the {@link XrActionCreateInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrActionCreateInfo.Buffer next(@NativeType("void const *") long value) { XrActionCreateInfo.nnext(address(), value); return this; }
-        /** Copies the specified encoded string to the {@link XrActionCreateInfo#actionName} field. */
+        /** Copies the specified encoded string to the {@code actionName} field. */
         public XrActionCreateInfo.Buffer actionName(@NativeType("char[XR_MAX_ACTION_NAME_SIZE]") ByteBuffer value) { XrActionCreateInfo.nactionName(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionCreateInfo#actionType} field. */
+        /** Sets the specified value to the {@code actionType} field. */
         public XrActionCreateInfo.Buffer actionType(@NativeType("XrActionType") int value) { XrActionCreateInfo.nactionType(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionCreateInfo#countSubactionPaths} field. */
+        /** Sets the specified value to the {@code countSubactionPaths} field. */
         public XrActionCreateInfo.Buffer countSubactionPaths(@NativeType("uint32_t") int value) { XrActionCreateInfo.ncountSubactionPaths(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link XrActionCreateInfo#subactionPaths} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code subactionPaths} field. */
         public XrActionCreateInfo.Buffer subactionPaths(@Nullable @NativeType("XrPath const *") LongBuffer value) { XrActionCreateInfo.nsubactionPaths(address(), value); return this; }
-        /** Copies the specified encoded string to the {@link XrActionCreateInfo#localizedActionName} field. */
+        /** Copies the specified encoded string to the {@code localizedActionName} field. */
         public XrActionCreateInfo.Buffer localizedActionName(@NativeType("char[XR_MAX_LOCALIZED_ACTION_NAME_SIZE]") ByteBuffer value) { XrActionCreateInfo.nlocalizedActionName(address(), value); return this; }
 
     }

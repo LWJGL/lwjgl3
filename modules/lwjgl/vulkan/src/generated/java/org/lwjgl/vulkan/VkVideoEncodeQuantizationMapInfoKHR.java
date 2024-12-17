@@ -16,35 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying quantization map information to use for video encode operations.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code quantizationMapExtent.width} <b>must</b> be less than or equal to the width of {@code quantizationMap}</li>
- * <li>{@code quantizationMapExtent.height} <b>must</b> be less than or equal to the height of {@code quantizationMap}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR}</li>
- * <li>If {@code quantizationMap} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code quantizationMap} <b>must</b> be a valid {@code VkImageView} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeQuantizationMapInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImageView {@link #quantizationMap};
- *     {@link VkExtent2D VkExtent2D} {@link #quantizationMapExtent};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImageView quantizationMap;
+ *     {@link VkExtent2D VkExtent2D} quantizationMapExtent;
+ * }}</pre>
  */
 public class VkVideoEncodeQuantizationMapInfoKHR extends Struct<VkVideoEncodeQuantizationMapInfoKHR> implements NativeResource {
 
@@ -100,29 +78,29 @@ public class VkVideoEncodeQuantizationMapInfoKHR extends Struct<VkVideoEncodeQua
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the image view to use as the quantization map. */
+    /** @return the value of the {@code quantizationMap} field. */
     @NativeType("VkImageView")
     public long quantizationMap() { return nquantizationMap(address()); }
-    /** specifies the extent of the image subregion of {@code quantizationMap} to use as the quantization map starting at offset <code>(0,0)</code>. */
+    /** @return a {@link VkExtent2D} view of the {@code quantizationMapExtent} field. */
     public VkExtent2D quantizationMapExtent() { return nquantizationMapExtent(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeQuantizationMapInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeQuantizationMapInfoKHR sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeQuantizationMapInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #quantizationMap} field. */
+    /** Sets the specified value to the {@code quantizationMap} field. */
     public VkVideoEncodeQuantizationMapInfoKHR quantizationMap(@NativeType("VkImageView") long value) { nquantizationMap(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #quantizationMapExtent} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@code quantizationMapExtent} field. */
     public VkVideoEncodeQuantizationMapInfoKHR quantizationMapExtent(VkExtent2D value) { nquantizationMapExtent(address(), value); return this; }
-    /** Passes the {@link #quantizationMapExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code quantizationMapExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoEncodeQuantizationMapInfoKHR quantizationMapExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(quantizationMapExtent()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,29 +302,29 @@ public class VkVideoEncodeQuantizationMapInfoKHR extends Struct<VkVideoEncodeQua
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeQuantizationMapInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeQuantizationMapInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeQuantizationMapInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeQuantizationMapInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeQuantizationMapInfoKHR#quantizationMap} field. */
+        /** @return the value of the {@code quantizationMap} field. */
         @NativeType("VkImageView")
         public long quantizationMap() { return VkVideoEncodeQuantizationMapInfoKHR.nquantizationMap(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoEncodeQuantizationMapInfoKHR#quantizationMapExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code quantizationMapExtent} field. */
         public VkExtent2D quantizationMapExtent() { return VkVideoEncodeQuantizationMapInfoKHR.nquantizationMapExtent(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeQuantizationMapInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeQuantizationMapInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeQuantizationMapInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR} value to the {@link VkVideoEncodeQuantizationMapInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeQuantizationMapInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeQuantizationMapInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeQuantizationMapInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeQuantizationMapInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeQuantizationMapInfoKHR#quantizationMap} field. */
+        /** Sets the specified value to the {@code quantizationMap} field. */
         public VkVideoEncodeQuantizationMapInfoKHR.Buffer quantizationMap(@NativeType("VkImageView") long value) { VkVideoEncodeQuantizationMapInfoKHR.nquantizationMap(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkVideoEncodeQuantizationMapInfoKHR#quantizationMapExtent} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@code quantizationMapExtent} field. */
         public VkVideoEncodeQuantizationMapInfoKHR.Buffer quantizationMapExtent(VkExtent2D value) { VkVideoEncodeQuantizationMapInfoKHR.nquantizationMapExtent(address(), value); return this; }
-        /** Passes the {@link VkVideoEncodeQuantizationMapInfoKHR#quantizationMapExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code quantizationMapExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoEncodeQuantizationMapInfoKHR.Buffer quantizationMapExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(quantizationMapExtent()); return this; }
 
     }

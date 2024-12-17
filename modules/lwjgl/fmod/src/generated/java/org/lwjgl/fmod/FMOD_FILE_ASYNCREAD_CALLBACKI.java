@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_ASYNCREADINFO *info,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_FILE_ASYNCREAD_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_FILE_ASYNCREAD_CALLBACK")
 public interface FMOD_FILE_ASYNCREAD_CALLBACKI extends CallbackI {
@@ -43,6 +35,7 @@ public interface FMOD_FILE_ASYNCREAD_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_FILE_ASYNCREAD_CALLBACK) (struct FMOD_ASYNCREADINFO * info, void * userdata)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_ASYNCREADINFO *") long info, @NativeType("void *") long userdata);
 
 }

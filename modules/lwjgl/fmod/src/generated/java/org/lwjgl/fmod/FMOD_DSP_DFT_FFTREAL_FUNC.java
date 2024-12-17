@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     int size,
- *     float const *signal,
- *     struct FMOD_COMPLEX *dft,
- *     float const *window,
- *     int signalhop
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_DFT_FFTREAL_FUNC} */
 public abstract class FMOD_DSP_DFT_FFTREAL_FUNC extends Callback implements FMOD_DSP_DFT_FFTREAL_FUNCI {
 
     /**

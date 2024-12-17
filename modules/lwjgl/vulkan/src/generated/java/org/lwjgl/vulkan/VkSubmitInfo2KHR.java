@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSubmitInfo2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubmitInfo2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkCommandBufferSubmitInfo VkCommandBufferSubmitInfo} const * pCommandBufferInfos;
  *     uint32_t signalSemaphoreInfoCount;
  *     {@link VkSemaphoreSubmitInfo VkSemaphoreSubmitInfo} const * pSignalSemaphoreInfos;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSubmitInfo2KHR extends VkSubmitInfo2 {
 

@@ -15,16 +15,10 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://github.com/syoyo/tinyexr">Tiny OpenEXR</a> image library.
- * 
- * <p>tinyexr is a small, single header-only library to load and save OpenEXR(.exr) images.</p>
- */
 public class TinyEXR {
 
     static { LibTinyEXR.initialize(); }
 
-    /** Error codes. */
     public static final int
         TINYEXR_SUCCESS                    = 0,
         TINYEXR_ERROR_INVALID_MAGIC_NUMBER = -1,
@@ -42,7 +36,6 @@ public class TinyEXR {
         TINYEXR_ERROR_LAYER_NOT_FOUND      = -13,
         TINYEXR_ERROR_DATA_TOO_LARGE       = -14;
 
-    /** Pixel types. */
     public static final int
         TINYEXR_PIXELTYPE_UINT  = 0,
         TINYEXR_PIXELTYPE_HALF  = 1,
@@ -52,7 +45,6 @@ public class TinyEXR {
         TINYEXR_MAX_HEADER_ATTRIBUTES = 1024,
         TINYEXR_MAX_CUSTOM_ATTRIBUTES = 128;
 
-    /** Compression types. */
     public static final int
         TINYEXR_COMPRESSIONTYPE_NONE = 0,
         TINYEXR_COMPRESSIONTYPE_RLE  = 1,
@@ -61,19 +53,16 @@ public class TinyEXR {
         TINYEXR_COMPRESSIONTYPE_PIZ  = 4,
         TINYEXR_COMPRESSIONTYPE_ZFP  = 128;
 
-    /** ZFP compression types. */
     public static final int
         TINYEXR_ZFP_COMPRESSIONTYPE_RATE      = 0,
         TINYEXR_ZFP_COMPRESSIONTYPE_PRECISION = 1,
         TINYEXR_ZFP_COMPRESSIONTYPE_ACCURACY  = 2;
 
-    /** Tile level types. */
     public static final int
         TINYEXR_TILE_ONE_LEVEL     = 0,
         TINYEXR_TILE_MIPMAP_LEVELS = 1,
         TINYEXR_TILE_RIPMAP_LEVELS = 2;
 
-    /** Tile rounding types. */
     public static final int
         TINYEXR_TILE_ROUND_DOWN = 0,
         TINYEXR_TILE_ROUND_UP   = 1;
@@ -84,18 +73,10 @@ public class TinyEXR {
 
     // --- [ LoadEXRWithLayer ] ---
 
-    /** Unsafe version of: {@link #LoadEXRWithLayer} */
+    /** {@code int LoadEXRWithLayer(float ** out_rgba, int * width, int * height, char const * filename, char const * layer_name, char const ** err)} */
     public static native int nLoadEXRWithLayer(long out_rgba, long width, long height, long filename, long layer_name, long err);
 
-    /**
-     * Loads single-frame OpenEXR image by specifying layer name.
-     * 
-     * <p>Assume EXR image contains A(single channel alpha) or RGB(A) channels. Application must free image data as returned by {@code out_rgba}. Result image
-     * format is: float x RGBA x width x height.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error. When the specified layer name is not found in the EXR file, the function
-     *         will return {@link #TINYEXR_ERROR_LAYER_NOT_FOUND ERROR_LAYER_NOT_FOUND}.
-     */
+    /** {@code int LoadEXRWithLayer(float ** out_rgba, int * width, int * height, char const * filename, char const * layer_name, char const ** err)} */
     public static int LoadEXRWithLayer(@NativeType("float **") PointerBuffer out_rgba, @NativeType("int *") IntBuffer width, @NativeType("int *") IntBuffer height, @NativeType("char const *") ByteBuffer filename, @NativeType("char const *") ByteBuffer layer_name, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(out_rgba, 1);
@@ -108,15 +89,7 @@ public class TinyEXR {
         return nLoadEXRWithLayer(memAddress(out_rgba), memAddress(width), memAddress(height), memAddress(filename), memAddress(layer_name), memAddress(err));
     }
 
-    /**
-     * Loads single-frame OpenEXR image by specifying layer name.
-     * 
-     * <p>Assume EXR image contains A(single channel alpha) or RGB(A) channels. Application must free image data as returned by {@code out_rgba}. Result image
-     * format is: float x RGBA x width x height.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error. When the specified layer name is not found in the EXR file, the function
-     *         will return {@link #TINYEXR_ERROR_LAYER_NOT_FOUND ERROR_LAYER_NOT_FOUND}.
-     */
+    /** {@code int LoadEXRWithLayer(float ** out_rgba, int * width, int * height, char const * filename, char const * layer_name, char const ** err)} */
     public static int LoadEXRWithLayer(@NativeType("float **") PointerBuffer out_rgba, @NativeType("int *") IntBuffer width, @NativeType("int *") IntBuffer height, @NativeType("char const *") CharSequence filename, @NativeType("char const *") CharSequence layer_name, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(out_rgba, 1);
@@ -138,18 +111,10 @@ public class TinyEXR {
 
     // --- [ EXRLayers ] ---
 
-    /** Unsafe version of: {@link #EXRLayers} */
+    /** {@code int EXRLayers(char const * filename, char const *** layer_names, int * num_layers, char const ** err)} */
     public static native int nEXRLayers(long filename, long layer_names, long num_layers, long err);
 
-    /**
-     * Get layer infos from EXR file.
-     *
-     * @param layer_names list of layer names. Application must free memory after using this.
-     * @param num_layers  the number of layers
-     * @param err         Error string(will be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
-     *
-     * @return {@link #TINYEXR_SUCCESS SUCCESS} upon success.
-     */
+    /** {@code int EXRLayers(char const * filename, char const *** layer_names, int * num_layers, char const ** err)} */
     public static int EXRLayers(@NativeType("char const *") ByteBuffer filename, @NativeType("char const ***") PointerBuffer layer_names, @NativeType("int *") IntBuffer num_layers, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             checkNT1(filename);
@@ -160,15 +125,7 @@ public class TinyEXR {
         return nEXRLayers(memAddress(filename), memAddress(layer_names), memAddress(num_layers), memAddress(err));
     }
 
-    /**
-     * Get layer infos from EXR file.
-     *
-     * @param layer_names list of layer names. Application must free memory after using this.
-     * @param num_layers  the number of layers
-     * @param err         Error string(will be filled when the function returns error code). Free it using FreeEXRErrorMessage after using this value.
-     *
-     * @return {@link #TINYEXR_SUCCESS SUCCESS} upon success.
-     */
+    /** {@code int EXRLayers(char const * filename, char const *** layer_names, int * num_layers, char const ** err)} */
     public static int EXRLayers(@NativeType("char const *") CharSequence filename, @NativeType("char const ***") PointerBuffer layer_names, @NativeType("int *") IntBuffer num_layers, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(layer_names, 1);
@@ -187,26 +144,20 @@ public class TinyEXR {
 
     // --- [ IsEXRFromMemory ] ---
 
-    /** Unsafe version of: {@link #IsEXRFromMemory} */
+    /** {@code int IsEXRFromMemory(unsigned char const * memory, size_t size)} */
     public static native int nIsEXRFromMemory(long memory, long size);
 
-    /**
-     * Checks if given data is a EXR image (by just looking up a header section).
-     * 
-     * <p>Simple wrapper API for {@link #ParseEXRHeaderFromMemory}.</p>
-     *
-     * @return {@link #TINYEXR_SUCCESS SUCCESS} for EXR image, {@link #TINYEXR_ERROR_INVALID_HEADER ERROR_INVALID_HEADER} for others
-     */
+    /** {@code int IsEXRFromMemory(unsigned char const * memory, size_t size)} */
     public static int IsEXRFromMemory(@NativeType("unsigned char const *") ByteBuffer memory) {
         return nIsEXRFromMemory(memAddress(memory), memory.remaining());
     }
 
     // --- [ EXRNumLevels ] ---
 
-    /** Unsafe version of: {@link #EXRNumLevels} */
+    /** {@code int EXRNumLevels(EXRImage const * exr_image)} */
     public static native int nEXRNumLevels(long exr_image);
 
-    /** Returns the number of resolution levels of the image (including the base). */
+    /** {@code int EXRNumLevels(EXRImage const * exr_image)} */
     public static int EXRNumLevels(@NativeType("EXRImage const *") EXRImage exr_image) {
         if (CHECKS) {
             EXRImage.validate(exr_image.address());
@@ -216,20 +167,20 @@ public class TinyEXR {
 
     // --- [ InitEXRHeader ] ---
 
-    /** Unsafe version of: {@link #InitEXRHeader} */
+    /** {@code void InitEXRHeader(EXRHeader * exr_header)} */
     public static native void nInitEXRHeader(long exr_header);
 
-    /** Initialize {@link EXRHeader} struct. */
+    /** {@code void InitEXRHeader(EXRHeader * exr_header)} */
     public static void InitEXRHeader(@NativeType("EXRHeader *") EXRHeader exr_header) {
         nInitEXRHeader(exr_header.address());
     }
 
     // --- [ EXRSetNameAttr ] ---
 
-    /** Unsafe version of: {@link #EXRSetNameAttr} */
+    /** {@code void EXRSetNameAttr(EXRHeader * exr_header, char const * name)} */
     public static native void nEXRSetNameAttr(long exr_header, long name);
 
-    /** Sets name attribute of {@link EXRHeader} struct (it makes a copy). */
+    /** {@code void EXRSetNameAttr(EXRHeader * exr_header, char const * name)} */
     public static void EXRSetNameAttr(@NativeType("EXRHeader *") EXRHeader exr_header, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
             checkNT1(name);
@@ -237,7 +188,7 @@ public class TinyEXR {
         nEXRSetNameAttr(exr_header.address(), memAddress(name));
     }
 
-    /** Sets name attribute of {@link EXRHeader} struct (it makes a copy). */
+    /** {@code void EXRSetNameAttr(EXRHeader * exr_header, char const * name)} */
     public static void EXRSetNameAttr(@NativeType("EXRHeader *") EXRHeader exr_header, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -251,50 +202,50 @@ public class TinyEXR {
 
     // --- [ InitEXRImage ] ---
 
-    /** Unsafe version of: {@link #InitEXRImage} */
+    /** {@code void InitEXRImage(EXRImage * exr_image)} */
     public static native void nInitEXRImage(long exr_image);
 
-    /** Initialize {@link EXRImage} struct. */
+    /** {@code void InitEXRImage(EXRImage * exr_image)} */
     public static void InitEXRImage(@NativeType("EXRImage *") EXRImage exr_image) {
         nInitEXRImage(exr_image.address());
     }
 
     // --- [ FreeEXRHeader ] ---
 
-    /** Unsafe version of: {@link #FreeEXRHeader} */
+    /** {@code int FreeEXRHeader(EXRHeader * exr_header)} */
     public static native int nFreeEXRHeader(long exr_header);
 
-    /** Frees internal data of {@link EXRHeader} struct */
+    /** {@code int FreeEXRHeader(EXRHeader * exr_header)} */
     public static int FreeEXRHeader(@NativeType("EXRHeader *") EXRHeader exr_header) {
         return nFreeEXRHeader(exr_header.address());
     }
 
     // --- [ FreeEXRImage ] ---
 
-    /** Unsafe version of: {@link #FreeEXRImage} */
+    /** {@code int FreeEXRImage(EXRImage * exr_image)} */
     public static native int nFreeEXRImage(long exr_image);
 
-    /** Frees internal data of {@link EXRImage} struct */
+    /** {@code int FreeEXRImage(EXRImage * exr_image)} */
     public static int FreeEXRImage(@NativeType("EXRImage *") EXRImage exr_image) {
         return nFreeEXRImage(exr_image.address());
     }
 
     // --- [ FreeEXRErrorMessage ] ---
 
-    /** Unsafe version of: {@link #FreeEXRErrorMessage} */
+    /** {@code void FreeEXRErrorMessage(char const * msg)} */
     public static native void nFreeEXRErrorMessage(long msg);
 
-    /** Frees error message */
+    /** {@code void FreeEXRErrorMessage(char const * msg)} */
     public static void FreeEXRErrorMessage(@NativeType("char const *") ByteBuffer msg) {
         nFreeEXRErrorMessage(memAddress(msg));
     }
 
     // --- [ ParseEXRVersionFromFile ] ---
 
-    /** Unsafe version of: {@link #ParseEXRVersionFromFile} */
+    /** {@code int ParseEXRVersionFromFile(EXRVersion * version, char const * filename)} */
     public static native int nParseEXRVersionFromFile(long version, long filename);
 
-    /** Parse EXR version header of a file. */
+    /** {@code int ParseEXRVersionFromFile(EXRVersion * version, char const * filename)} */
     public static int ParseEXRVersionFromFile(@NativeType("EXRVersion *") EXRVersion version, @NativeType("char const *") ByteBuffer filename) {
         if (CHECKS) {
             checkNT1(filename);
@@ -302,7 +253,7 @@ public class TinyEXR {
         return nParseEXRVersionFromFile(version.address(), memAddress(filename));
     }
 
-    /** Parse EXR version header of a file. */
+    /** {@code int ParseEXRVersionFromFile(EXRVersion * version, char const * filename)} */
     public static int ParseEXRVersionFromFile(@NativeType("EXRVersion *") EXRVersion version, @NativeType("char const *") CharSequence filename) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -316,24 +267,20 @@ public class TinyEXR {
 
     // --- [ ParseEXRVersionFromMemory ] ---
 
-    /** Unsafe version of: {@link #ParseEXRVersionFromMemory} */
+    /** {@code int ParseEXRVersionFromMemory(EXRVersion * version, unsigned char const * memory, size_t size)} */
     public static native int nParseEXRVersionFromMemory(long version, long memory, long size);
 
-    /** Parse EXR version header from memory-mapped EXR data. */
+    /** {@code int ParseEXRVersionFromMemory(EXRVersion * version, unsigned char const * memory, size_t size)} */
     public static int ParseEXRVersionFromMemory(@NativeType("EXRVersion *") EXRVersion version, @NativeType("unsigned char const *") ByteBuffer memory) {
         return nParseEXRVersionFromMemory(version.address(), memAddress(memory), memory.remaining());
     }
 
     // --- [ ParseEXRHeaderFromFile ] ---
 
-    /** Unsafe version of: {@link #ParseEXRHeaderFromFile} */
+    /** {@code int ParseEXRHeaderFromFile(EXRHeader * header, EXRVersion const * version, char const * filename, char const ** err)} */
     public static native int nParseEXRHeaderFromFile(long header, long version, long filename, long err);
 
-    /**
-     * Parse single-part OpenEXR header from a file and initialize {@link EXRHeader}.
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code int ParseEXRHeaderFromFile(EXRHeader * header, EXRVersion const * version, char const * filename, char const ** err)} */
     public static int ParseEXRHeaderFromFile(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             checkNT1(filename);
@@ -342,11 +289,7 @@ public class TinyEXR {
         return nParseEXRHeaderFromFile(header.address(), version.address(), memAddress(filename), memAddress(err));
     }
 
-    /**
-     * Parse single-part OpenEXR header from a file and initialize {@link EXRHeader}.
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code int ParseEXRHeaderFromFile(EXRHeader * header, EXRVersion const * version, char const * filename, char const ** err)} */
     public static int ParseEXRHeaderFromFile(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(err, 1);
@@ -363,14 +306,10 @@ public class TinyEXR {
 
     // --- [ ParseEXRHeaderFromMemory ] ---
 
-    /** Unsafe version of: {@link #ParseEXRHeaderFromMemory} */
+    /** {@code int ParseEXRHeaderFromMemory(EXRHeader * header, EXRVersion const * version, unsigned char const * memory, size_t size, char const ** err)} */
     public static native int nParseEXRHeaderFromMemory(long header, long version, long memory, long size, long err);
 
-    /**
-     * Parse single-part OpenEXR header from a memory and initialize {@link EXRHeader}.
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code int ParseEXRHeaderFromMemory(EXRHeader * header, EXRVersion const * version, unsigned char const * memory, size_t size, char const ** err)} */
     public static int ParseEXRHeaderFromMemory(@NativeType("EXRHeader *") EXRHeader header, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(err, 1);
@@ -380,14 +319,10 @@ public class TinyEXR {
 
     // --- [ ParseEXRMultipartHeaderFromFile ] ---
 
-    /** Unsafe version of: {@link #ParseEXRMultipartHeaderFromFile} */
+    /** {@code int ParseEXRMultipartHeaderFromFile(EXRHeader *** headers, int * num_headers, EXRVersion const * version, char const * filename, char const ** err)} */
     public static native int nParseEXRMultipartHeaderFromFile(long headers, long num_headers, long version, long filename, long err);
 
-    /**
-     * Parse multi-part OpenEXR headers from a file and initialize {@link EXRHeader}* array.
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code int ParseEXRMultipartHeaderFromFile(EXRHeader *** headers, int * num_headers, EXRVersion const * version, char const * filename, char const ** err)} */
     public static int ParseEXRMultipartHeaderFromFile(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, 1);
@@ -398,11 +333,7 @@ public class TinyEXR {
         return nParseEXRMultipartHeaderFromFile(memAddress(headers), memAddress(num_headers), version.address(), memAddress(filename), memAddress(err));
     }
 
-    /**
-     * Parse multi-part OpenEXR headers from a file and initialize {@link EXRHeader}* array.
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code int ParseEXRMultipartHeaderFromFile(EXRHeader *** headers, int * num_headers, EXRVersion const * version, char const * filename, char const ** err)} */
     public static int ParseEXRMultipartHeaderFromFile(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, 1);
@@ -421,14 +352,10 @@ public class TinyEXR {
 
     // --- [ ParseEXRMultipartHeaderFromMemory ] ---
 
-    /** Unsafe version of: {@link #ParseEXRMultipartHeaderFromMemory} */
+    /** {@code int ParseEXRMultipartHeaderFromMemory(EXRHeader *** headers, int * num_headers, EXRVersion const * version, unsigned char const * memory, size_t size, char const ** err)} */
     public static native int nParseEXRMultipartHeaderFromMemory(long headers, long num_headers, long version, long memory, long size, long err);
 
-    /**
-     * Parse multi-part OpenEXR headers from a memory and initialize {@link EXRHeader}* array.
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code int ParseEXRMultipartHeaderFromMemory(EXRHeader *** headers, int * num_headers, EXRVersion const * version, unsigned char const * memory, size_t size, char const ** err)} */
     public static int ParseEXRMultipartHeaderFromMemory(@NativeType("EXRHeader ***") PointerBuffer headers, @NativeType("int *") IntBuffer num_headers, @NativeType("EXRVersion const *") EXRVersion version, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, 1);
@@ -440,18 +367,10 @@ public class TinyEXR {
 
     // --- [ LoadEXRImageFromFile ] ---
 
-    /** Unsafe version of: {@link #LoadEXRImageFromFile} */
+    /** {@code int LoadEXRImageFromFile(EXRImage * image, EXRHeader const * header, char const * filename, char const ** err)} */
     public static native int nLoadEXRImageFromFile(long image, long header, long filename, long err);
 
-    /**
-     * Loads single-part OpenEXR image from a file.
-     * 
-     * <p>Application must setup {@link #ParseEXRHeaderFromFile} before calling this function.</p>
-     * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int LoadEXRImageFromFile(EXRImage * image, EXRHeader const * header, char const * filename, char const ** err)} */
     public static int LoadEXRImageFromFile(@NativeType("EXRImage *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader header, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             checkNT1(filename);
@@ -461,15 +380,7 @@ public class TinyEXR {
         return nLoadEXRImageFromFile(image.address(), header.address(), memAddress(filename), memAddress(err));
     }
 
-    /**
-     * Loads single-part OpenEXR image from a file.
-     * 
-     * <p>Application must setup {@link #ParseEXRHeaderFromFile} before calling this function.</p>
-     * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int LoadEXRImageFromFile(EXRImage * image, EXRHeader const * header, char const * filename, char const ** err)} */
     public static int LoadEXRImageFromFile(@NativeType("EXRImage *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader header, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(err, 1);
@@ -487,18 +398,10 @@ public class TinyEXR {
 
     // --- [ LoadEXRImageFromMemory ] ---
 
-    /** Unsafe version of: {@link #LoadEXRImageFromMemory} */
+    /** {@code int LoadEXRImageFromMemory(EXRImage * image, EXRHeader const * header, unsigned char const * memory, size_t size, char const ** err)} */
     public static native int nLoadEXRImageFromMemory(long image, long header, long memory, long size, long err);
 
-    /**
-     * Loads single-part OpenEXR image from a memory.
-     * 
-     * <p>Application must setup {@link EXRHeader} with {@link #ParseEXRHeaderFromMemory} before calling this function.</p>
-     * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int LoadEXRImageFromMemory(EXRImage * image, EXRHeader const * header, unsigned char const * memory, size_t size, char const ** err)} */
     public static int LoadEXRImageFromMemory(@NativeType("EXRImage *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader header, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(err, 1);
@@ -509,18 +412,10 @@ public class TinyEXR {
 
     // --- [ LoadEXRMultipartImageFromFile ] ---
 
-    /** Unsafe version of: {@link #LoadEXRMultipartImageFromFile} */
+    /** {@code int LoadEXRMultipartImageFromFile(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, char const * filename, char const ** err)} */
     public static native int nLoadEXRMultipartImageFromFile(long images, long headers, int num_parts, long filename, long err);
 
-    /**
-     * Loads multi-part OpenEXR image from a file.
-     * 
-     * <p>Application must setup {@link #ParseEXRMultipartHeaderFromFile} before calling this function.</p>
-     * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int LoadEXRMultipartImageFromFile(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, char const * filename, char const ** err)} */
     public static int LoadEXRMultipartImageFromFile(@NativeType("EXRImage *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer headers, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, images.remaining());
@@ -530,15 +425,7 @@ public class TinyEXR {
         return nLoadEXRMultipartImageFromFile(images.address(), memAddress(headers), images.remaining(), memAddress(filename), memAddress(err));
     }
 
-    /**
-     * Loads multi-part OpenEXR image from a file.
-     * 
-     * <p>Application must setup {@link #ParseEXRMultipartHeaderFromFile} before calling this function.</p>
-     * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int LoadEXRMultipartImageFromFile(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, char const * filename, char const ** err)} */
     public static int LoadEXRMultipartImageFromFile(@NativeType("EXRImage *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer headers, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, images.remaining());
@@ -556,18 +443,10 @@ public class TinyEXR {
 
     // --- [ LoadEXRMultipartImageFromMemory ] ---
 
-    /** Unsafe version of: {@link #LoadEXRMultipartImageFromMemory} */
+    /** {@code int LoadEXRMultipartImageFromMemory(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, unsigned char const * memory, size_t size, char const ** err)} */
     public static native int nLoadEXRMultipartImageFromMemory(long images, long headers, int num_parts, long memory, long size, long err);
 
-    /**
-     * Loads multi-part OpenEXR image from a memory.
-     * 
-     * <p>Application must setup {@link EXRHeader}* array with {@link #ParseEXRMultipartHeaderFromMemory} before calling this function.</p>
-     * 
-     * <p>Application can free EXRImage using {@link #FreeEXRImage}. When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int LoadEXRMultipartImageFromMemory(EXRImage * images, EXRHeader const ** headers, unsigned int num_parts, unsigned char const * memory, size_t size, char const ** err)} */
     public static int LoadEXRMultipartImageFromMemory(@NativeType("EXRImage *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer headers, @NativeType("unsigned char const *") ByteBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(headers, images.remaining());
@@ -578,16 +457,10 @@ public class TinyEXR {
 
     // --- [ SaveEXRImageToFile ] ---
 
-    /** Unsafe version of: {@link #SaveEXRImageToFile} */
+    /** {@code int SaveEXRImageToFile(EXRImage const * image, EXRHeader const * exr_header, char const * filename, char const ** err)} */
     public static native int nSaveEXRImageToFile(long image, long exr_header, long filename, long err);
 
-    /**
-     * Saves multi-channel, single-frame OpenEXR image to a file.
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int SaveEXRImageToFile(EXRImage const * image, EXRHeader const * exr_header, char const * filename, char const ** err)} */
     public static int SaveEXRImageToFile(@NativeType("EXRImage const *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             checkNT1(filename);
@@ -598,13 +471,7 @@ public class TinyEXR {
         return nSaveEXRImageToFile(image.address(), exr_header.address(), memAddress(filename), memAddress(err));
     }
 
-    /**
-     * Saves multi-channel, single-frame OpenEXR image to a file.
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int SaveEXRImageToFile(EXRImage const * image, EXRHeader const * exr_header, char const * filename, char const ** err)} */
     public static int SaveEXRImageToFile(@NativeType("EXRImage const *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(err, 1);
@@ -623,18 +490,10 @@ public class TinyEXR {
 
     // --- [ SaveEXRImageToMemory ] ---
 
-    /** Unsafe version of: {@link #SaveEXRImageToMemory} */
+    /** {@code size_t SaveEXRImageToMemory(EXRImage const * image, EXRHeader const * exr_header, unsigned char ** memory, char const ** err)} */
     public static native long nSaveEXRImageToMemory(long image, long exr_header, long memory, long err);
 
-    /**
-     * Saves multi-channel, single-frame OpenEXR image to a memory.
-     * 
-     * <p>Image is compressed using {@code EXRImage.compression} value.</p>
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return the number of bytes if success or zero and may set error string in {@code err} when there's an error
-     */
+    /** {@code size_t SaveEXRImageToMemory(EXRImage const * image, EXRHeader const * exr_header, unsigned char ** memory, char const ** err)} */
     @NativeType("size_t")
     public static long SaveEXRImageToMemory(@NativeType("EXRImage const *") EXRImage image, @NativeType("EXRHeader const *") EXRHeader exr_header, @NativeType("unsigned char **") PointerBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
@@ -648,18 +507,10 @@ public class TinyEXR {
 
     // --- [ SaveEXRMultipartImageToFile ] ---
 
-    /** Unsafe version of: {@link #SaveEXRMultipartImageToFile} */
+    /** {@code int SaveEXRMultipartImageToFile(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, char const * filename, char const ** err)} */
     public static native int nSaveEXRMultipartImageToFile(long images, long exr_headers, int num_parts, long filename, long err);
 
-    /**
-     * Saves multi-channel, multi-frame OpenEXR image to a file.
-     * 
-     * <p>Image is compressed using {@code EXRImage.compression} value. File global attributes (eg. {@code display_window}) must be set in the first header.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error.
-     *         
-     *         <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code int SaveEXRMultipartImageToFile(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, char const * filename, char const ** err)} */
     public static int SaveEXRMultipartImageToFile(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(exr_headers, images.remaining());
@@ -670,15 +521,7 @@ public class TinyEXR {
         return nSaveEXRMultipartImageToFile(images.address(), memAddress(exr_headers), images.remaining(), memAddress(filename), memAddress(err));
     }
 
-    /**
-     * Saves multi-channel, multi-frame OpenEXR image to a file.
-     * 
-     * <p>Image is compressed using {@code EXRImage.compression} value. File global attributes (eg. {@code display_window}) must be set in the first header.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error.
-     *         
-     *         <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code int SaveEXRMultipartImageToFile(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, char const * filename, char const ** err)} */
     public static int SaveEXRMultipartImageToFile(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(exr_headers, images.remaining());
@@ -697,18 +540,10 @@ public class TinyEXR {
 
     // --- [ SaveEXRMultipartImageToMemory ] ---
 
-    /** Unsafe version of: {@link #SaveEXRMultipartImageToMemory} */
+    /** {@code size_t SaveEXRMultipartImageToMemory(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, unsigned char ** memory, char const ** err)} */
     public static native long nSaveEXRMultipartImageToMemory(long images, long exr_headers, int num_parts, long memory, long err);
 
-    /**
-     * Saves multi-channel, multi-frame OpenEXR image to a memory.
-     * 
-     * <p>Image is compressed using {@code EXRImage.compression} value. File global attributes (eg. {@code display_window}) must be set in the first header.</p>
-     *
-     * @return the number of bytes if success. Return zero and will set error string in {@code err} when there's an error.
-     *         
-     *         <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     */
+    /** {@code size_t SaveEXRMultipartImageToMemory(EXRImage const * images, EXRHeader const ** exr_headers, unsigned int num_parts, unsigned char ** memory, char const ** err)} */
     @NativeType("size_t")
     public static long SaveEXRMultipartImageToMemory(@NativeType("EXRImage const *") EXRImage.Buffer images, @NativeType("EXRHeader const **") PointerBuffer exr_headers, @NativeType("unsigned char **") PointerBuffer memory, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
@@ -722,18 +557,10 @@ public class TinyEXR {
 
     // --- [ LoadDeepEXR ] ---
 
-    /** Unsafe version of: {@link #LoadDeepEXR} */
+    /** {@code int LoadDeepEXR(DeepImage * out_image, char const * filename, char const ** err)} */
     public static native int nLoadDeepEXR(long out_image, long filename, long err);
 
-    /**
-     * Loads single-frame OpenEXR deep image.
-     * 
-     * <p>Application must free memory of variables in {@code DeepImage(image, offset_table)}.</p>
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int LoadDeepEXR(DeepImage * out_image, char const * filename, char const ** err)} */
     public static int LoadDeepEXR(@NativeType("DeepImage *") DeepImage out_image, @NativeType("char const *") ByteBuffer filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             checkNT1(filename);
@@ -742,15 +569,7 @@ public class TinyEXR {
         return nLoadDeepEXR(out_image.address(), memAddress(filename), memAddress(err));
     }
 
-    /**
-     * Loads single-frame OpenEXR deep image.
-     * 
-     * <p>Application must free memory of variables in {@code DeepImage(image, offset_table)}.</p>
-     * 
-     * <p>When there was an error message, Application must free {@code err} with {@link #FreeEXRErrorMessage}.</p>
-     *
-     * @return negative value and may set error string in {@code err} when there's an error
-     */
+    /** {@code int LoadDeepEXR(DeepImage * out_image, char const * filename, char const ** err)} */
     public static int LoadDeepEXR(@NativeType("DeepImage *") DeepImage out_image, @NativeType("char const *") CharSequence filename, @NativeType("char const **") PointerBuffer err) {
         if (CHECKS) {
             check(err, 1);

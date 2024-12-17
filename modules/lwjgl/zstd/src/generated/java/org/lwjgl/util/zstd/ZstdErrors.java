@@ -9,53 +9,10 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the experimental error code API of <a href="https://facebook.github.io/zstd/">Zstandard</a> (zstd). */
 public class ZstdErrors {
 
     static { LibZstd.initialize(); }
 
-    /**
-     * Error code. ({@code ZSTD_ErrorCode})
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #ZSTD_error_no_error error_no_error}</li>
-     * <li>{@link #ZSTD_error_GENERIC error_GENERIC}</li>
-     * <li>{@link #ZSTD_error_prefix_unknown error_prefix_unknown}</li>
-     * <li>{@link #ZSTD_error_version_unsupported error_version_unsupported}</li>
-     * <li>{@link #ZSTD_error_frameParameter_unsupported error_frameParameter_unsupported}</li>
-     * <li>{@link #ZSTD_error_frameParameter_windowTooLarge error_frameParameter_windowTooLarge}</li>
-     * <li>{@link #ZSTD_error_corruption_detected error_corruption_detected}</li>
-     * <li>{@link #ZSTD_error_checksum_wrong error_checksum_wrong}</li>
-     * <li>{@link #ZSTD_error_literals_headerWrong error_literals_headerWrong}</li>
-     * <li>{@link #ZSTD_error_dictionary_corrupted error_dictionary_corrupted}</li>
-     * <li>{@link #ZSTD_error_dictionary_wrong error_dictionary_wrong}</li>
-     * <li>{@link #ZSTD_error_dictionaryCreation_failed error_dictionaryCreation_failed}</li>
-     * <li>{@link #ZSTD_error_parameter_unsupported error_parameter_unsupported}</li>
-     * <li>{@link #ZSTD_error_parameter_combination_unsupported error_parameter_combination_unsupported}</li>
-     * <li>{@link #ZSTD_error_parameter_outOfBound error_parameter_outOfBound}</li>
-     * <li>{@link #ZSTD_error_tableLog_tooLarge error_tableLog_tooLarge}</li>
-     * <li>{@link #ZSTD_error_maxSymbolValue_tooLarge error_maxSymbolValue_tooLarge}</li>
-     * <li>{@link #ZSTD_error_maxSymbolValue_tooSmall error_maxSymbolValue_tooSmall}</li>
-     * <li>{@link #ZSTD_error_stabilityCondition_notRespected error_stabilityCondition_notRespected}</li>
-     * <li>{@link #ZSTD_error_stage_wrong error_stage_wrong}</li>
-     * <li>{@link #ZSTD_error_init_missing error_init_missing}</li>
-     * <li>{@link #ZSTD_error_memory_allocation error_memory_allocation}</li>
-     * <li>{@link #ZSTD_error_workSpace_tooSmall error_workSpace_tooSmall}</li>
-     * <li>{@link #ZSTD_error_dstSize_tooSmall error_dstSize_tooSmall}</li>
-     * <li>{@link #ZSTD_error_srcSize_wrong error_srcSize_wrong}</li>
-     * <li>{@link #ZSTD_error_dstBuffer_null error_dstBuffer_null}</li>
-     * <li>{@link #ZSTD_error_noForwardProgress_destFull error_noForwardProgress_destFull}</li>
-     * <li>{@link #ZSTD_error_noForwardProgress_inputEmpty error_noForwardProgress_inputEmpty}</li>
-     * <li>{@link #ZSTD_error_frameIndex_tooLarge error_frameIndex_tooLarge}</li>
-     * <li>{@link #ZSTD_error_seekableIO error_seekableIO}</li>
-     * <li>{@link #ZSTD_error_dstBuffer_wrong error_dstBuffer_wrong}</li>
-     * <li>{@link #ZSTD_error_srcBuffer_wrong error_srcBuffer_wrong}</li>
-     * <li>{@link #ZSTD_error_sequenceProducer_failed error_sequenceProducer_failed}</li>
-     * <li>{@link #ZSTD_error_externalSequences_invalid error_externalSequences_invalid}</li>
-     * </ul>
-     */
     public static final int
         ZSTD_error_no_error                          = 0,
         ZSTD_error_GENERIC                           = 1,
@@ -98,13 +55,16 @@ public class ZstdErrors {
 
     // --- [ ZSTD_getErrorCode ] ---
 
+    /** {@code ZSTD_ErrorCode ZSTD_getErrorCode(size_t functionResult)} */
     @NativeType("ZSTD_ErrorCode")
     public static native int ZSTD_getErrorCode(@NativeType("size_t") long functionResult);
 
     // --- [ ZSTD_getErrorString ] ---
 
+    /** {@code char const * ZSTD_getErrorString(ZSTD_ErrorCode code)} */
     public static native long nZSTD_getErrorString(int code);
 
+    /** {@code char const * ZSTD_getErrorString(ZSTD_ErrorCode code)} */
     @NativeType("char const *")
     public static String ZSTD_getErrorString(@NativeType("ZSTD_ErrorCode") int code) {
         long __result = nZSTD_getErrorString(code);

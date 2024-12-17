@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a sampler for descriptor capture.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code sampler} <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} set in {@link VkSamplerCreateInfo}{@code ::flags}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code sampler} <b>must</b> be a valid {@code VkSampler} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDescriptorBuffer#vkGetSamplerOpaqueCaptureDescriptorDataEXT GetSamplerOpaqueCaptureDescriptorDataEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerCaptureDescriptorDataInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSampler {@link #sampler};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSampler sampler;
+ * }}</pre>
  */
 public class VkSamplerCaptureDescriptorDataInfoEXT extends Struct<VkSamplerCaptureDescriptorDataInfoEXT> implements NativeResource {
 
@@ -96,23 +74,23 @@ public class VkSamplerCaptureDescriptorDataInfoEXT extends Struct<VkSamplerCaptu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the {@code VkSampler} handle of the sampler to get opaque capture data for. */
+    /** @return the value of the {@code sampler} field. */
     @NativeType("VkSampler")
     public long sampler() { return nsampler(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSamplerCaptureDescriptorDataInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@code sType} field. */
     public VkSamplerCaptureDescriptorDataInfoEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerCaptureDescriptorDataInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #sampler} field. */
+    /** Sets the specified value to the {@code sampler} field. */
     public VkSamplerCaptureDescriptorDataInfoEXT sampler(@NativeType("VkSampler") long value) { nsampler(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -308,23 +286,23 @@ public class VkSamplerCaptureDescriptorDataInfoEXT extends Struct<VkSamplerCaptu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSamplerCaptureDescriptorDataInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerCaptureDescriptorDataInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkSamplerCaptureDescriptorDataInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerCaptureDescriptorDataInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkSamplerCaptureDescriptorDataInfoEXT#sampler} field. */
+        /** @return the value of the {@code sampler} field. */
         @NativeType("VkSampler")
         public long sampler() { return VkSamplerCaptureDescriptorDataInfoEXT.nsampler(address()); }
 
-        /** Sets the specified value to the {@link VkSamplerCaptureDescriptorDataInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSamplerCaptureDescriptorDataInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerCaptureDescriptorDataInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@link VkSamplerCaptureDescriptorDataInfoEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@code sType} field. */
         public VkSamplerCaptureDescriptorDataInfoEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT); }
-        /** Sets the specified value to the {@link VkSamplerCaptureDescriptorDataInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerCaptureDescriptorDataInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSamplerCaptureDescriptorDataInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSamplerCaptureDescriptorDataInfoEXT#sampler} field. */
+        /** Sets the specified value to the {@code sampler} field. */
         public VkSamplerCaptureDescriptorDataInfoEXT.Buffer sampler(@NativeType("VkSampler") long value) { VkSamplerCaptureDescriptorDataInfoEXT.nsampler(address(), value); return this; }
 
     }

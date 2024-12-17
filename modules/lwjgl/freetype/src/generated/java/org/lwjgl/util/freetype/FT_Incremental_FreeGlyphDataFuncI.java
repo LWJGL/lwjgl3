@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     FT_Incremental incremental,
- *     FT_Data *data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Incremental_FreeGlyphDataFunc} */
 @FunctionalInterface
 @NativeType("FT_Incremental_FreeGlyphDataFunc")
 public interface FT_Incremental_FreeGlyphDataFuncI extends CallbackI {
@@ -42,7 +34,7 @@ public interface FT_Incremental_FreeGlyphDataFuncI extends CallbackI {
         );
     }
 
-    /** A function used to release the glyph data bytes returned by a successful call to {@link FT_Incremental_GetGlyphDataFunc}. */
+    /** {@code void (* FT_Incremental_FreeGlyphDataFunc) (FT_Incremental incremental, FT_Data * data)} */
     void invoke(@NativeType("FT_Incremental") long incremental, @NativeType("FT_Data *") long data);
 
 }

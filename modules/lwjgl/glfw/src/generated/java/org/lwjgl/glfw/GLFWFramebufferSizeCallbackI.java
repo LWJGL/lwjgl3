@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetFramebufferSizeCallback SetFramebufferSizeCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window,
- *     int width,
- *     int height
- * )</code></pre>
- *
- * @since version 3.0
- */
+/** Callback function: {@link #invoke GLFWframebuffersizefun} */
 @FunctionalInterface
 @NativeType("GLFWframebuffersizefun")
 public interface GLFWFramebufferSizeCallbackI extends CallbackI {
@@ -48,13 +35,7 @@ public interface GLFWFramebufferSizeCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when the framebuffer of the specified window is resized.
-     *
-     * @param window the window whose framebuffer was resized
-     * @param width  the new width, in pixels, of the framebuffer
-     * @param height the new height, in pixels, of the framebuffer
-     */
+    /** {@code void (* GLFWframebuffersizefun) (GLFWwindow * window, int width, int height)} */
     void invoke(@NativeType("GLFWwindow *") long window, int width, int height);
 
 }

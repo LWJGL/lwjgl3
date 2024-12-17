@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct flock64 {
- *     short {@link #l_type};
- *     short {@link #l_whence};
- *     off_t {@link #l_start};
- *     off_t {@link #l_len};
- *     pid_t {@link #l_pid};
- * }</code></pre>
+ *     short l_type;
+ *     short l_whence;
+ *     off_t l_start;
+ *     off_t l_len;
+ *     pid_t l_pid;
+ * }}</pre>
  */
 @NativeType("struct flock64")
 public class Flock extends Struct<Flock> implements NativeResource {
@@ -85,29 +83,29 @@ public class Flock extends Struct<Flock> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** type of lock. One of:<br><table><tr><td>{@link FCNTL#F_RDLCK}</td><td>{@link FCNTL#F_WRLCK}</td><td>{@link FCNTL#F_UNLCK}</td></tr></table> */
+    /** @return the value of the {@code l_type} field. */
     public short l_type() { return nl_type(address()); }
-    /** where {@code l_start} is relative to (like {@code lseek}) */
+    /** @return the value of the {@code l_whence} field. */
     public short l_whence() { return nl_whence(address()); }
-    /** offset where the lock begins */
+    /** @return the value of the {@code l_start} field. */
     @NativeType("off_t")
     public long l_start() { return nl_start(address()); }
-    /** size of the locked area; zero means until EOF */
+    /** @return the value of the {@code l_len} field. */
     @NativeType("off_t")
     public long l_len() { return nl_len(address()); }
-    /** process holding the lock */
+    /** @return the value of the {@code l_pid} field. */
     @NativeType("pid_t")
     public int l_pid() { return nl_pid(address()); }
 
-    /** Sets the specified value to the {@link #l_type} field. */
+    /** Sets the specified value to the {@code l_type} field. */
     public Flock l_type(short value) { nl_type(address(), value); return this; }
-    /** Sets the specified value to the {@link #l_whence} field. */
+    /** Sets the specified value to the {@code l_whence} field. */
     public Flock l_whence(short value) { nl_whence(address(), value); return this; }
-    /** Sets the specified value to the {@link #l_start} field. */
+    /** Sets the specified value to the {@code l_start} field. */
     public Flock l_start(@NativeType("off_t") long value) { nl_start(address(), value); return this; }
-    /** Sets the specified value to the {@link #l_len} field. */
+    /** Sets the specified value to the {@code l_len} field. */
     public Flock l_len(@NativeType("off_t") long value) { nl_len(address(), value); return this; }
-    /** Sets the specified value to the {@link #l_pid} field. */
+    /** Sets the specified value to the {@code l_pid} field. */
     public Flock l_pid(@NativeType("pid_t") int value) { nl_pid(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,29 +313,29 @@ public class Flock extends Struct<Flock> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link Flock#l_type} field. */
+        /** @return the value of the {@code l_type} field. */
         public short l_type() { return Flock.nl_type(address()); }
-        /** @return the value of the {@link Flock#l_whence} field. */
+        /** @return the value of the {@code l_whence} field. */
         public short l_whence() { return Flock.nl_whence(address()); }
-        /** @return the value of the {@link Flock#l_start} field. */
+        /** @return the value of the {@code l_start} field. */
         @NativeType("off_t")
         public long l_start() { return Flock.nl_start(address()); }
-        /** @return the value of the {@link Flock#l_len} field. */
+        /** @return the value of the {@code l_len} field. */
         @NativeType("off_t")
         public long l_len() { return Flock.nl_len(address()); }
-        /** @return the value of the {@link Flock#l_pid} field. */
+        /** @return the value of the {@code l_pid} field. */
         @NativeType("pid_t")
         public int l_pid() { return Flock.nl_pid(address()); }
 
-        /** Sets the specified value to the {@link Flock#l_type} field. */
+        /** Sets the specified value to the {@code l_type} field. */
         public Flock.Buffer l_type(short value) { Flock.nl_type(address(), value); return this; }
-        /** Sets the specified value to the {@link Flock#l_whence} field. */
+        /** Sets the specified value to the {@code l_whence} field. */
         public Flock.Buffer l_whence(short value) { Flock.nl_whence(address(), value); return this; }
-        /** Sets the specified value to the {@link Flock#l_start} field. */
+        /** Sets the specified value to the {@code l_start} field. */
         public Flock.Buffer l_start(@NativeType("off_t") long value) { Flock.nl_start(address(), value); return this; }
-        /** Sets the specified value to the {@link Flock#l_len} field. */
+        /** Sets the specified value to the {@code l_len} field. */
         public Flock.Buffer l_len(@NativeType("off_t") long value) { Flock.nl_len(address(), value); return this; }
-        /** Sets the specified value to the {@link Flock#l_pid} field. */
+        /** Sets the specified value to the {@code l_pid} field. */
         public Flock.Buffer l_pid(@NativeType("pid_t") int value) { Flock.nl_pid(address(), value); return this; }
 
     }

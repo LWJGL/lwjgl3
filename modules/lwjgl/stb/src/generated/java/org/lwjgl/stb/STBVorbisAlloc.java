@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A buffer to use for allocations by {@link STBVorbis}
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stb_vorbis_alloc {
  *     char * alloc_buffer;
  *     int alloc_buffer_length_in_bytes;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stb_vorbis_alloc")
 public class STBVorbisAlloc extends Struct<STBVorbisAlloc> implements NativeResource {

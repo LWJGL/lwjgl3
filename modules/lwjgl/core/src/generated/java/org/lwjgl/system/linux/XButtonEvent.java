@@ -17,28 +17,24 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Button event.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XButtonEvent {
- *     int {@link #type};
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
- *     Window {@link #window};
- *     Window {@link #root};
- *     Window {@link #subwindow};
- *     Time {@link #time};
- *     int {@link #x};
- *     int {@link #y};
- *     int {@link #x_root};
- *     int {@link #y_root};
- *     unsigned int {@link #state};
- *     unsigned int {@link #button};
- *     Bool {@link #same_screen};
- * }</code></pre>
+ *     int type;
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
+ *     Window window;
+ *     Window root;
+ *     Window subwindow;
+ *     Time time;
+ *     int x;
+ *     int y;
+ *     int x_root;
+ *     int y_root;
+ *     unsigned int state;
+ *     unsigned int button;
+ *     Bool same_screen;
+ * }}</pre>
  */
 public class XButtonEvent extends Struct<XButtonEvent> implements NativeResource {
 
@@ -127,76 +123,76 @@ public class XButtonEvent extends Struct<XButtonEvent> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the event type. One of:<br><table><tr><td>{@link X11#ButtonPress}</td><td>{@link X11#ButtonRelease}</td></tr></table> */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** window it reported relative to */
+    /** @return the value of the {@code window} field. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** root window that the event occurred on */
+    /** @return the value of the {@code root} field. */
     @NativeType("Window")
     public long root() { return nroot(address()); }
-    /** child window */
+    /** @return the value of the {@code subwindow} field. */
     @NativeType("Window")
     public long subwindow() { return nsubwindow(address()); }
-    /** milliseconds */
+    /** @return the value of the {@code time} field. */
     @NativeType("Time")
     public long time() { return ntime(address()); }
-    /** pointer x coordinate in event window */
+    /** @return the value of the {@code x} field. */
     public int x() { return nx(address()); }
-    /** pointer y coordinate in event window */
+    /** @return the value of the {@code y} field. */
     public int y() { return ny(address()); }
-    /** x coordinate relative to {@code root} */
+    /** @return the value of the {@code x_root} field. */
     public int x_root() { return nx_root(address()); }
-    /** y coordinate relative to {@code root} */
+    /** @return the value of the {@code y_root} field. */
     public int y_root() { return ny_root(address()); }
-    /** button mask */
+    /** @return the value of the {@code state} field. */
     @NativeType("unsigned int")
     public int state() { return nstate(address()); }
-    /** detail */
+    /** @return the value of the {@code button} field. */
     @NativeType("unsigned int")
     public int button() { return nbutton(address()); }
-    /** same screen flag */
+    /** @return the value of the {@code same_screen} field. */
     @NativeType("Bool")
     public boolean same_screen() { return nsame_screen(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XButtonEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XButtonEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XButtonEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XButtonEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #window} field. */
+    /** Sets the specified value to the {@code window} field. */
     public XButtonEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
-    /** Sets the specified value to the {@link #root} field. */
+    /** Sets the specified value to the {@code root} field. */
     public XButtonEvent root(@NativeType("Window") long value) { nroot(address(), value); return this; }
-    /** Sets the specified value to the {@link #subwindow} field. */
+    /** Sets the specified value to the {@code subwindow} field. */
     public XButtonEvent subwindow(@NativeType("Window") long value) { nsubwindow(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XButtonEvent time(@NativeType("Time") long value) { ntime(address(), value); return this; }
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public XButtonEvent x(int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public XButtonEvent y(int value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@link #x_root} field. */
+    /** Sets the specified value to the {@code x_root} field. */
     public XButtonEvent x_root(int value) { nx_root(address(), value); return this; }
-    /** Sets the specified value to the {@link #y_root} field. */
+    /** Sets the specified value to the {@code y_root} field. */
     public XButtonEvent y_root(int value) { ny_root(address(), value); return this; }
-    /** Sets the specified value to the {@link #state} field. */
+    /** Sets the specified value to the {@code state} field. */
     public XButtonEvent state(@NativeType("unsigned int") int value) { nstate(address(), value); return this; }
-    /** Sets the specified value to the {@link #button} field. */
+    /** Sets the specified value to the {@code button} field. */
     public XButtonEvent button(@NativeType("unsigned int") int value) { nbutton(address(), value); return this; }
-    /** Sets the specified value to the {@link #same_screen} field. */
+    /** Sets the specified value to the {@code same_screen} field. */
     public XButtonEvent same_screen(@NativeType("Bool") boolean value) { nsame_screen(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -492,76 +488,76 @@ public class XButtonEvent extends Struct<XButtonEvent> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XButtonEvent#type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XButtonEvent.ntype(address()); }
-        /** @return the value of the {@link XButtonEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XButtonEvent.nserial(address()); }
-        /** @return the value of the {@link XButtonEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XButtonEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XButtonEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XButtonEvent.ndisplay(address()); }
-        /** @return the value of the {@link XButtonEvent#window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("Window")
         public long window() { return XButtonEvent.nwindow(address()); }
-        /** @return the value of the {@link XButtonEvent#root} field. */
+        /** @return the value of the {@code root} field. */
         @NativeType("Window")
         public long root() { return XButtonEvent.nroot(address()); }
-        /** @return the value of the {@link XButtonEvent#subwindow} field. */
+        /** @return the value of the {@code subwindow} field. */
         @NativeType("Window")
         public long subwindow() { return XButtonEvent.nsubwindow(address()); }
-        /** @return the value of the {@link XButtonEvent#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("Time")
         public long time() { return XButtonEvent.ntime(address()); }
-        /** @return the value of the {@link XButtonEvent#x} field. */
+        /** @return the value of the {@code x} field. */
         public int x() { return XButtonEvent.nx(address()); }
-        /** @return the value of the {@link XButtonEvent#y} field. */
+        /** @return the value of the {@code y} field. */
         public int y() { return XButtonEvent.ny(address()); }
-        /** @return the value of the {@link XButtonEvent#x_root} field. */
+        /** @return the value of the {@code x_root} field. */
         public int x_root() { return XButtonEvent.nx_root(address()); }
-        /** @return the value of the {@link XButtonEvent#y_root} field. */
+        /** @return the value of the {@code y_root} field. */
         public int y_root() { return XButtonEvent.ny_root(address()); }
-        /** @return the value of the {@link XButtonEvent#state} field. */
+        /** @return the value of the {@code state} field. */
         @NativeType("unsigned int")
         public int state() { return XButtonEvent.nstate(address()); }
-        /** @return the value of the {@link XButtonEvent#button} field. */
+        /** @return the value of the {@code button} field. */
         @NativeType("unsigned int")
         public int button() { return XButtonEvent.nbutton(address()); }
-        /** @return the value of the {@link XButtonEvent#same_screen} field. */
+        /** @return the value of the {@code same_screen} field. */
         @NativeType("Bool")
         public boolean same_screen() { return XButtonEvent.nsame_screen(address()) != 0; }
 
-        /** Sets the specified value to the {@link XButtonEvent#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XButtonEvent.Buffer type(int value) { XButtonEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XButtonEvent.Buffer serial(@NativeType("unsigned long") long value) { XButtonEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XButtonEvent.Buffer send_event(@NativeType("Bool") boolean value) { XButtonEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XButtonEvent.Buffer display(@NativeType("Display *") long value) { XButtonEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#window} field. */
+        /** Sets the specified value to the {@code window} field. */
         public XButtonEvent.Buffer window(@NativeType("Window") long value) { XButtonEvent.nwindow(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#root} field. */
+        /** Sets the specified value to the {@code root} field. */
         public XButtonEvent.Buffer root(@NativeType("Window") long value) { XButtonEvent.nroot(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#subwindow} field. */
+        /** Sets the specified value to the {@code subwindow} field. */
         public XButtonEvent.Buffer subwindow(@NativeType("Window") long value) { XButtonEvent.nsubwindow(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XButtonEvent.Buffer time(@NativeType("Time") long value) { XButtonEvent.ntime(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public XButtonEvent.Buffer x(int value) { XButtonEvent.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public XButtonEvent.Buffer y(int value) { XButtonEvent.ny(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#x_root} field. */
+        /** Sets the specified value to the {@code x_root} field. */
         public XButtonEvent.Buffer x_root(int value) { XButtonEvent.nx_root(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#y_root} field. */
+        /** Sets the specified value to the {@code y_root} field. */
         public XButtonEvent.Buffer y_root(int value) { XButtonEvent.ny_root(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#state} field. */
+        /** Sets the specified value to the {@code state} field. */
         public XButtonEvent.Buffer state(@NativeType("unsigned int") int value) { XButtonEvent.nstate(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#button} field. */
+        /** Sets the specified value to the {@code button} field. */
         public XButtonEvent.Buffer button(@NativeType("unsigned int") int value) { XButtonEvent.nbutton(address(), value); return this; }
-        /** Sets the specified value to the {@link XButtonEvent#same_screen} field. */
+        /** Sets the specified value to the {@code same_screen} field. */
         public XButtonEvent.Buffer same_screen(@NativeType("Bool") boolean value) { XButtonEvent.nsame_screen(address(), value ? 1 : 0); return this; }
 
     }

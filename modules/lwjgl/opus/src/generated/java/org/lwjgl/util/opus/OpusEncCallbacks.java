@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Callback functions for accessing the stream.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct OpusEncCallbacks {
- *     {@link OPEWriteFuncI ope_write_func} {@link #write};
- *     {@link OPECloseFuncI ope_close_func} {@link #close$ close};
- * }</code></pre>
+ *     {@link OPEWriteFuncI ope_write_func} write;
+ *     {@link OPECloseFuncI ope_close_func} close;
+ * }}</pre>
  */
 public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements NativeResource {
 
@@ -75,16 +71,16 @@ public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** callback for writing to the stream */
+    /** @return the value of the {@code write} field. */
     @NativeType("ope_write_func")
     public OPEWriteFunc write() { return nwrite(address()); }
-    /** callback for closing the stream */
+    /** @return the value of the {@code close} field. */
     @NativeType("ope_close_func")
     public OPECloseFunc close$() { return nclose$(address()); }
 
-    /** Sets the specified value to the {@link #write} field. */
+    /** Sets the specified value to the {@code write} field. */
     public OpusEncCallbacks write(@NativeType("ope_write_func") OPEWriteFuncI value) { nwrite(address(), value); return this; }
-    /** Sets the specified value to the {@link #close$} field. */
+    /** Sets the specified value to the {@code close} field. */
     public OpusEncCallbacks close$(@NativeType("ope_close_func") OPECloseFuncI value) { nclose$(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -284,16 +280,16 @@ public class OpusEncCallbacks extends Struct<OpusEncCallbacks> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OpusEncCallbacks#write} field. */
+        /** @return the value of the {@code write} field. */
         @NativeType("ope_write_func")
         public OPEWriteFunc write() { return OpusEncCallbacks.nwrite(address()); }
-        /** @return the value of the {@link OpusEncCallbacks#close$} field. */
+        /** @return the value of the {@code close} field. */
         @NativeType("ope_close_func")
         public OPECloseFunc close$() { return OpusEncCallbacks.nclose$(address()); }
 
-        /** Sets the specified value to the {@link OpusEncCallbacks#write} field. */
+        /** Sets the specified value to the {@code write} field. */
         public OpusEncCallbacks.Buffer write(@NativeType("ope_write_func") OPEWriteFuncI value) { OpusEncCallbacks.nwrite(address(), value); return this; }
-        /** Sets the specified value to the {@link OpusEncCallbacks#close$} field. */
+        /** Sets the specified value to the {@code close} field. */
         public OpusEncCallbacks.Buffer close$(@NativeType("ope_close_func") OPECloseFuncI value) { OpusEncCallbacks.nclose$(address(), value); return this; }
 
     }

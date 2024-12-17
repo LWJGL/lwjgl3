@@ -16,39 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Output parameter to the xrGetSpaceTriangleMeshMETA function.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSpaceTriangleMeshMETA} structure <b>can</b> be used by the application to perform the two calls required to obtain a triangle mesh associated to a specified spatial entity.</p>
- * 
- * <p>The output values written in the {@code indices} array represent indices of vertices: Three consecutive elements represent a triangle with a counter-clockwise winding order.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METASpatialEntityMesh XR_META_spatial_entity_mesh} extension <b>must</b> be enabled prior to using {@link XrSpaceTriangleMeshMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METASpatialEntityMesh#XR_TYPE_SPACE_TRIANGLE_MESH_META TYPE_SPACE_TRIANGLE_MESH_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrVector3f}, {@link METASpatialEntityMesh#xrGetSpaceTriangleMeshMETA GetSpaceTriangleMeshMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceTriangleMeshMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #vertexCapacityInput};
- *     uint32_t {@link #vertexCountOutput};
- *     {@link XrVector3f XrVector3f} * {@link #vertices};
- *     uint32_t {@link #indexCapacityInput};
- *     uint32_t {@link #indexCountOutput};
- *     uint32_t * {@link #indices};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t vertexCapacityInput;
+ *     uint32_t vertexCountOutput;
+ *     {@link XrVector3f XrVector3f} * vertices;
+ *     uint32_t indexCapacityInput;
+ *     uint32_t indexCountOutput;
+ *     uint32_t * indices;
+ * }}</pre>
  */
 public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> implements NativeResource {
 
@@ -116,36 +94,36 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an input parameter for the application to specify the capacity of the {@code vertices} array, or 0 to indicate a request to retrieve the required capacity. */
+    /** @return the value of the {@code vertexCapacityInput} field. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** an output parameter that will hold the number of vertices written in the output array, or the required capacity in the case that {@code vertexCapacityInput} is insufficient. The returned value <b>must</b> be equal to or larger than 3. */
+    /** @return the value of the {@code vertexCountOutput} field. */
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
-    /** a pointer to an array of {@link XrVector3f}, but <b>can</b> be {@code NULL} if {@code vertexCapacityInput} is 0. The vertices are defined in the coordinate frame of {@code XrSpace} to which this struct is associated. */
+    /** @return a {@link XrVector3f.Buffer} view of the struct array pointed to by the {@code vertices} field. */
     @NativeType("XrVector3f *")
     public XrVector3f.@Nullable Buffer vertices() { return nvertices(address()); }
-    /** an input parameter for the application to specify the capacity of the {@code indices} array, or 0 to indicate a request to retrieve the required capacity. */
+    /** @return the value of the {@code indexCapacityInput} field. */
     @NativeType("uint32_t")
     public int indexCapacityInput() { return nindexCapacityInput(address()); }
-    /** an output parameter that will hold the number of indices written in the output array, or the required capacity in the case that {@code indexCapacityInput} is insufficient. The returned value <b>must</b> be a multiple of 3. */
+    /** @return the value of the {@code indexCountOutput} field. */
     @NativeType("uint32_t")
     public int indexCountOutput() { return nindexCountOutput(address()); }
-    /** a pointer to an array of {@code uint32_t}, but <b>can</b> be {@code NULL} if {@code indexCapacityInput} is 0. Each element refers to a vertex in {@code vertices}. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
     @NativeType("uint32_t *")
     public @Nullable IntBuffer indices() { return nindices(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceTriangleMeshMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METASpatialEntityMesh#XR_TYPE_SPACE_TRIANGLE_MESH_META TYPE_SPACE_TRIANGLE_MESH_META} value to the {@link #type} field. */
+    /** Sets the {@link METASpatialEntityMesh#XR_TYPE_SPACE_TRIANGLE_MESH_META TYPE_SPACE_TRIANGLE_MESH_META} value to the {@code type} field. */
     public XrSpaceTriangleMeshMETA type$Default() { return type(METASpatialEntityMesh.XR_TYPE_SPACE_TRIANGLE_MESH_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceTriangleMeshMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -347,36 +325,36 @@ public class XrSpaceTriangleMeshMETA extends Struct<XrSpaceTriangleMeshMETA> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceTriangleMeshMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceTriangleMeshMETA.ntype(address()); }
-        /** @return the value of the {@link XrSpaceTriangleMeshMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpaceTriangleMeshMETA.nnext(address()); }
-        /** @return the value of the {@link XrSpaceTriangleMeshMETA#vertexCapacityInput} field. */
+        /** @return the value of the {@code vertexCapacityInput} field. */
         @NativeType("uint32_t")
         public int vertexCapacityInput() { return XrSpaceTriangleMeshMETA.nvertexCapacityInput(address()); }
-        /** @return the value of the {@link XrSpaceTriangleMeshMETA#vertexCountOutput} field. */
+        /** @return the value of the {@code vertexCountOutput} field. */
         @NativeType("uint32_t")
         public int vertexCountOutput() { return XrSpaceTriangleMeshMETA.nvertexCountOutput(address()); }
-        /** @return a {@link XrVector3f.Buffer} view of the struct array pointed to by the {@link XrSpaceTriangleMeshMETA#vertices} field. */
+        /** @return a {@link XrVector3f.Buffer} view of the struct array pointed to by the {@code vertices} field. */
         @NativeType("XrVector3f *")
         public XrVector3f.@Nullable Buffer vertices() { return XrSpaceTriangleMeshMETA.nvertices(address()); }
-        /** @return the value of the {@link XrSpaceTriangleMeshMETA#indexCapacityInput} field. */
+        /** @return the value of the {@code indexCapacityInput} field. */
         @NativeType("uint32_t")
         public int indexCapacityInput() { return XrSpaceTriangleMeshMETA.nindexCapacityInput(address()); }
-        /** @return the value of the {@link XrSpaceTriangleMeshMETA#indexCountOutput} field. */
+        /** @return the value of the {@code indexCountOutput} field. */
         @NativeType("uint32_t")
         public int indexCountOutput() { return XrSpaceTriangleMeshMETA.nindexCountOutput(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrSpaceTriangleMeshMETA#indices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code indices} field. */
         @NativeType("uint32_t *")
         public @Nullable IntBuffer indices() { return XrSpaceTriangleMeshMETA.nindices(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceTriangleMeshMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceTriangleMeshMETA.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceTriangleMeshMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METASpatialEntityMesh#XR_TYPE_SPACE_TRIANGLE_MESH_META TYPE_SPACE_TRIANGLE_MESH_META} value to the {@link XrSpaceTriangleMeshMETA#type} field. */
+        /** Sets the {@link METASpatialEntityMesh#XR_TYPE_SPACE_TRIANGLE_MESH_META TYPE_SPACE_TRIANGLE_MESH_META} value to the {@code type} field. */
         public XrSpaceTriangleMeshMETA.Buffer type$Default() { return type(METASpatialEntityMesh.XR_TYPE_SPACE_TRIANGLE_MESH_META); }
-        /** Sets the specified value to the {@link XrSpaceTriangleMeshMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceTriangleMeshMETA.Buffer next(@NativeType("void *") long value) { XrSpaceTriangleMeshMETA.nnext(address(), value); return this; }
 
     }

@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure indicating support for device fault reporting.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceFaultFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceFaultFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceFault#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceFaultFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #deviceFault};
- *     VkBool32 {@link #deviceFaultVendorBinary};
- * }</code></pre>
+ *     VkBool32 deviceFault;
+ *     VkBool32 deviceFaultVendorBinary;
+ * }}</pre>
  */
 public class VkPhysicalDeviceFaultFeaturesEXT extends Struct<VkPhysicalDeviceFaultFeaturesEXT> implements NativeResource {
 
@@ -98,10 +84,10 @@ public class VkPhysicalDeviceFaultFeaturesEXT extends Struct<VkPhysicalDeviceFau
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports the reporting of device fault information. */
+    /** @return the value of the {@code deviceFault} field. */
     @NativeType("VkBool32")
     public boolean deviceFault() { return ndeviceFault(address()) != 0; }
-    /** indicates that the implementation supports the generation of vendor-specific binary crash dumps. These may provide additional information when imported into vendor-specific external tools. */
+    /** @return the value of the {@code deviceFaultVendorBinary} field. */
     @NativeType("VkBool32")
     public boolean deviceFaultVendorBinary() { return ndeviceFaultVendorBinary(address()) != 0; }
 
@@ -111,9 +97,9 @@ public class VkPhysicalDeviceFaultFeaturesEXT extends Struct<VkPhysicalDeviceFau
     public VkPhysicalDeviceFaultFeaturesEXT sType$Default() { return sType(EXTDeviceFault.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceFaultFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceFault} field. */
+    /** Sets the specified value to the {@code deviceFault} field. */
     public VkPhysicalDeviceFaultFeaturesEXT deviceFault(@NativeType("VkBool32") boolean value) { ndeviceFault(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #deviceFaultVendorBinary} field. */
+    /** Sets the specified value to the {@code deviceFaultVendorBinary} field. */
     public VkPhysicalDeviceFaultFeaturesEXT deviceFaultVendorBinary(@NativeType("VkBool32") boolean value) { ndeviceFaultVendorBinary(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,10 +307,10 @@ public class VkPhysicalDeviceFaultFeaturesEXT extends Struct<VkPhysicalDeviceFau
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFaultFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceFaultFeaturesEXT#deviceFault} field. */
+        /** @return the value of the {@code deviceFault} field. */
         @NativeType("VkBool32")
         public boolean deviceFault() { return VkPhysicalDeviceFaultFeaturesEXT.ndeviceFault(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceFaultFeaturesEXT#deviceFaultVendorBinary} field. */
+        /** @return the value of the {@code deviceFaultVendorBinary} field. */
         @NativeType("VkBool32")
         public boolean deviceFaultVendorBinary() { return VkPhysicalDeviceFaultFeaturesEXT.ndeviceFaultVendorBinary(address()) != 0; }
 
@@ -334,9 +320,9 @@ public class VkPhysicalDeviceFaultFeaturesEXT extends Struct<VkPhysicalDeviceFau
         public VkPhysicalDeviceFaultFeaturesEXT.Buffer sType$Default() { return sType(EXTDeviceFault.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceFaultFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFaultFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceFaultFeaturesEXT#deviceFault} field. */
+        /** Sets the specified value to the {@code deviceFault} field. */
         public VkPhysicalDeviceFaultFeaturesEXT.Buffer deviceFault(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFaultFeaturesEXT.ndeviceFault(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceFaultFeaturesEXT#deviceFaultVendorBinary} field. */
+        /** Sets the specified value to the {@code deviceFaultVendorBinary} field. */
         public VkPhysicalDeviceFaultFeaturesEXT.Buffer deviceFaultVendorBinary(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFaultFeaturesEXT.ndeviceFaultVendorBinary(address(), value ? 1 : 0); return this; }
 
     }

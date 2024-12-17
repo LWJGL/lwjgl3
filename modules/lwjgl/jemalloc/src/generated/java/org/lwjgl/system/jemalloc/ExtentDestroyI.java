@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@link ExtentHooks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * bool (*{@link #invoke}) (
- *     extent_hooks_t *extent_hooks,
- *     void *addr,
- *     size_t size,
- *     bool committed,
- *     unsigned int arena_ind
- * )</code></pre>
- */
+/** Callback function: {@link #invoke extent_destroy_t} */
 @FunctionalInterface
 @NativeType("extent_destroy_t")
 public interface ExtentDestroyI extends CallbackI {
@@ -51,13 +38,7 @@ public interface ExtentDestroyI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Extent destruction hook.
-     * 
-     * <p>An extent destruction function conforms to the {@code extent_destroy_t} type and unconditionally destroys an extent at given {@code addr} and {@code size}
-     * with {@code committed}/decommited memory as indicated, on behalf of arena {@code arena_ind}. This function may be called to destroy retained extents during
-     * arena destruction (see {@code arena.i.destroy}).</p>
-     */
+    /** {@code bool (* extent_destroy_t) (extent_hooks_t * extent_hooks, void * addr, size_t size, bool committed, unsigned int arena_ind)} */
     @NativeType("bool") boolean invoke(@NativeType("extent_hooks_t *") long extent_hooks, @NativeType("void *") long addr, @NativeType("size_t") long size, @NativeType("bool") boolean committed, @NativeType("unsigned int") int arena_ind);
 
 }

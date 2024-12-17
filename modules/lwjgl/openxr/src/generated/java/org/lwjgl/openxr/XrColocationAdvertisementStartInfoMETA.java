@@ -17,35 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information about start colocation visibility request.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrColocationAdvertisementStartInfoMETA} is the input data for {@link METAColocationDiscovery#xrStartColocationAdvertisementMETA StartColocationAdvertisementMETA}. Implicitly, while the application has an active advertisement, the runtime will retain a copy of the {@link XrColocationAdvertisementStartInfoMETA} submitted with {@link METAColocationDiscovery#xrStartColocationAdvertisementMETA StartColocationAdvertisementMETA}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using {@link XrColocationAdvertisementStartInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} {@code uint8_t} values</li>
- * <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAColocationDiscovery#xrStartColocationAdvertisementMETA StartColocationAdvertisementMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrColocationAdvertisementStartInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #bufferSize};
- *     uint8_t * {@link #buffer};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t bufferSize;
+ *     uint8_t * buffer;
+ * }}</pre>
  */
 public class XrColocationAdvertisementStartInfoMETA extends Struct<XrColocationAdvertisementStartInfoMETA> implements NativeResource {
 
@@ -101,26 +79,26 @@ public class XrColocationAdvertisementStartInfoMETA extends Struct<XrColocationA
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the count of bytes used in the {@code buffer} array. If {@code bufferSize} is greater than {@link METAColocationDiscovery#XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META}, then the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}. The maximum supported count is {@link METAColocationDiscovery#XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META}. */
+    /** @return the value of the {@code bufferSize} field. */
     @NativeType("uint32_t")
     public int bufferSize() { return nbufferSize(address()); }
-    /** a byte array which allows the application to define app buffer. It is the advertisement payload. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("uint8_t *")
     public ByteBuffer buffer() { return nbuffer(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrColocationAdvertisementStartInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META} value to the {@code type} field. */
     public XrColocationAdvertisementStartInfoMETA type$Default() { return type(METAColocationDiscovery.XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrColocationAdvertisementStartInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #buffer} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
     public XrColocationAdvertisementStartInfoMETA buffer(@NativeType("uint8_t *") ByteBuffer value) { nbuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,26 +307,26 @@ public class XrColocationAdvertisementStartInfoMETA extends Struct<XrColocationA
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrColocationAdvertisementStartInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrColocationAdvertisementStartInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrColocationAdvertisementStartInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrColocationAdvertisementStartInfoMETA.nnext(address()); }
-        /** @return the value of the {@link XrColocationAdvertisementStartInfoMETA#bufferSize} field. */
+        /** @return the value of the {@code bufferSize} field. */
         @NativeType("uint32_t")
         public int bufferSize() { return XrColocationAdvertisementStartInfoMETA.nbufferSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link XrColocationAdvertisementStartInfoMETA#buffer} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("uint8_t *")
         public ByteBuffer buffer() { return XrColocationAdvertisementStartInfoMETA.nbuffer(address()); }
 
-        /** Sets the specified value to the {@link XrColocationAdvertisementStartInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrColocationAdvertisementStartInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrColocationAdvertisementStartInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META} value to the {@link XrColocationAdvertisementStartInfoMETA#type} field. */
+        /** Sets the {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META} value to the {@code type} field. */
         public XrColocationAdvertisementStartInfoMETA.Buffer type$Default() { return type(METAColocationDiscovery.XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META); }
-        /** Sets the specified value to the {@link XrColocationAdvertisementStartInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrColocationAdvertisementStartInfoMETA.Buffer next(@NativeType("void const *") long value) { XrColocationAdvertisementStartInfoMETA.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link XrColocationAdvertisementStartInfoMETA#buffer} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
         public XrColocationAdvertisementStartInfoMETA.Buffer buffer(@NativeType("uint8_t *") ByteBuffer value) { XrColocationAdvertisementStartInfoMETA.nbuffer(address(), value); return this; }
 
     }

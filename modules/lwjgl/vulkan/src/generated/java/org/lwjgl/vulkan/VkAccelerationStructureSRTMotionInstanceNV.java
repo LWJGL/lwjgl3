@@ -16,59 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a single acceleration structure SRT motion instance for building into an acceleration structure geometry.
- * 
- * <h5>Description</h5>
- * 
- * <p>The C language specification does not define the ordering of bit-fields, but in practice, this struct produces the correct layout with existing compilers. The intended bit pattern is for the following:</p>
- * 
- * <ul>
- * <li>{@code instanceCustomIndex} and {@code mask} occupy the same memory as if a single {@code uint32_t} was specified in their place
- * 
- * <ul>
- * <li>{@code instanceCustomIndex} occupies the 24 least significant bits of that memory</li>
- * <li>{@code mask} occupies the 8 most significant bits of that memory</li>
- * </ul>
- * </li>
- * <li>{@code instanceShaderBindingTableRecordOffset} and {@code flags} occupy the same memory as if a single {@code uint32_t} was specified in their place
- * 
- * <ul>
- * <li>{@code instanceShaderBindingTableRecordOffset} occupies the 24 least significant bits of that memory</li>
- * <li>{@code flags} occupies the 8 most significant bits of that memory</li>
- * </ul>
- * </li>
- * </ul>
- * 
- * <p>If a compiler produces code that diverges from that pattern, applications <b>must</b> employ another method to set values according to the correct bit pattern.</p>
- * 
- * <p>The transform for a SRT motion instance at a point in time is derived from component-wise linear interpolation of the two SRT transforms. That is, for a {@code time} in [0,1] the resulting transform is</p>
- * 
- * <dl>
- * <dd><code>transformT0 × (1 - time) + transformT1 × time</code></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkGeometryInstanceFlagBitsKHR} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAccelerationStructureMotionInstanceDataNV}, {@link VkSRTDataNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureSRTMotionInstanceNV {
- *     {@link VkSRTDataNV VkSRTDataNV} {@link #transformT0};
- *     {@link VkSRTDataNV VkSRTDataNV} {@link #transformT1};
- *     uint32_t {@link #instanceCustomIndex} : 24;
- *     uint32_t {@link #mask} : 8;
- *     uint32_t {@link #instanceShaderBindingTableRecordOffset} : 24;
- *     VkGeometryInstanceFlagsKHR {@link #flags} : 8;
- *     uint64_t {@link #accelerationStructureReference};
- * }</code></pre>
+ *     {@link VkSRTDataNV VkSRTDataNV} transformT0;
+ *     {@link VkSRTDataNV VkSRTDataNV} transformT1;
+ *     uint32_t instanceCustomIndex : 24;
+ *     uint32_t mask : 8;
+ *     uint32_t instanceShaderBindingTableRecordOffset : 24;
+ *     VkGeometryInstanceFlagsKHR flags : 8;
+ *     uint64_t accelerationStructureReference;
+ * }}</pre>
  */
 public class VkAccelerationStructureSRTMotionInstanceNV extends Struct<VkAccelerationStructureSRTMotionInstanceNV> implements NativeResource {
 
@@ -127,50 +84,43 @@ public class VkAccelerationStructureSRTMotionInstanceNV extends Struct<VkAcceler
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@link VkSRTDataNV} structure describing a transformation to be applied to the acceleration structure at time 0. */
+    /** @return a {@link VkSRTDataNV} view of the {@code transformT0} field. */
     public VkSRTDataNV transformT0() { return ntransformT0(address()); }
-    /** a {@link VkSRTDataNV} structure describing a transformation to be applied to the acceleration structure at time 1. */
+    /** @return a {@link VkSRTDataNV} view of the {@code transformT1} field. */
     public VkSRTDataNV transformT1() { return ntransformT1(address()); }
-    /** a 24-bit application-specified index value accessible to ray shaders in the {@code InstanceCustomIndexKHR} built-in. */
+    /** @return the value of the {@code instanceCustomIndex} field. */
     @NativeType("uint32_t")
     public int instanceCustomIndex() { return ninstanceCustomIndex(address()); }
-    /** an 8-bit visibility mask for the geometry. The instance <b>may</b> only be hit if {@code Cull Mask &amp; instance.mask != 0} */
+    /** @return the value of the {@code mask} field. */
     @NativeType("uint32_t")
     public int mask() { return nmask(address()); }
-    /** a 24-bit offset used in calculating the hit shader binding table index. */
+    /** @return the value of the {@code instanceShaderBindingTableRecordOffset} field. */
     @NativeType("uint32_t")
     public int instanceShaderBindingTableRecordOffset() { return ninstanceShaderBindingTableRecordOffset(address()); }
-    /** an 8-bit mask of {@code VkGeometryInstanceFlagBitsKHR} values to apply to this instance. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkGeometryInstanceFlagsKHR")
     public int flags() { return nflags(address()); }
-    /**
-     * either:
-     * 
-     * <ul>
-     * <li>a device address containing the value obtained from {@link KHRAccelerationStructure#vkGetAccelerationStructureDeviceAddressKHR GetAccelerationStructureDeviceAddressKHR} or {@link NVRayTracing#vkGetAccelerationStructureHandleNV GetAccelerationStructureHandleNV} (used by device operations which reference acceleration structures) or,</li>
-     * <li>a {@code VkAccelerationStructureKHR} object (used by host operations which reference acceleration structures).</li>
-     * </ul>
-     */
+    /** @return the value of the {@code accelerationStructureReference} field. */
     @NativeType("uint64_t")
     public long accelerationStructureReference() { return naccelerationStructureReference(address()); }
 
-    /** Copies the specified {@link VkSRTDataNV} to the {@link #transformT0} field. */
+    /** Copies the specified {@link VkSRTDataNV} to the {@code transformT0} field. */
     public VkAccelerationStructureSRTMotionInstanceNV transformT0(VkSRTDataNV value) { ntransformT0(address(), value); return this; }
-    /** Passes the {@link #transformT0} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code transformT0} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureSRTMotionInstanceNV transformT0(java.util.function.Consumer<VkSRTDataNV> consumer) { consumer.accept(transformT0()); return this; }
-    /** Copies the specified {@link VkSRTDataNV} to the {@link #transformT1} field. */
+    /** Copies the specified {@link VkSRTDataNV} to the {@code transformT1} field. */
     public VkAccelerationStructureSRTMotionInstanceNV transformT1(VkSRTDataNV value) { ntransformT1(address(), value); return this; }
-    /** Passes the {@link #transformT1} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code transformT1} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureSRTMotionInstanceNV transformT1(java.util.function.Consumer<VkSRTDataNV> consumer) { consumer.accept(transformT1()); return this; }
-    /** Sets the specified value to the {@link #instanceCustomIndex} field. */
+    /** Sets the specified value to the {@code instanceCustomIndex} field. */
     public VkAccelerationStructureSRTMotionInstanceNV instanceCustomIndex(@NativeType("uint32_t") int value) { ninstanceCustomIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #mask} field. */
+    /** Sets the specified value to the {@code mask} field. */
     public VkAccelerationStructureSRTMotionInstanceNV mask(@NativeType("uint32_t") int value) { nmask(address(), value); return this; }
-    /** Sets the specified value to the {@link #instanceShaderBindingTableRecordOffset} field. */
+    /** Sets the specified value to the {@code instanceShaderBindingTableRecordOffset} field. */
     public VkAccelerationStructureSRTMotionInstanceNV instanceShaderBindingTableRecordOffset(@NativeType("uint32_t") int value) { ninstanceShaderBindingTableRecordOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkAccelerationStructureSRTMotionInstanceNV flags(@NativeType("VkGeometryInstanceFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #accelerationStructureReference} field. */
+    /** Sets the specified value to the {@code accelerationStructureReference} field. */
     public VkAccelerationStructureSRTMotionInstanceNV accelerationStructureReference(@NativeType("uint64_t") long value) { naccelerationStructureReference(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -394,43 +344,43 @@ public class VkAccelerationStructureSRTMotionInstanceNV extends Struct<VkAcceler
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VkSRTDataNV} view of the {@link VkAccelerationStructureSRTMotionInstanceNV#transformT0} field. */
+        /** @return a {@link VkSRTDataNV} view of the {@code transformT0} field. */
         public VkSRTDataNV transformT0() { return VkAccelerationStructureSRTMotionInstanceNV.ntransformT0(address()); }
-        /** @return a {@link VkSRTDataNV} view of the {@link VkAccelerationStructureSRTMotionInstanceNV#transformT1} field. */
+        /** @return a {@link VkSRTDataNV} view of the {@code transformT1} field. */
         public VkSRTDataNV transformT1() { return VkAccelerationStructureSRTMotionInstanceNV.ntransformT1(address()); }
-        /** @return the value of the {@link VkAccelerationStructureSRTMotionInstanceNV#instanceCustomIndex} field. */
+        /** @return the value of the {@code instanceCustomIndex} field. */
         @NativeType("uint32_t")
         public int instanceCustomIndex() { return VkAccelerationStructureSRTMotionInstanceNV.ninstanceCustomIndex(address()); }
-        /** @return the value of the {@link VkAccelerationStructureSRTMotionInstanceNV#mask} field. */
+        /** @return the value of the {@code mask} field. */
         @NativeType("uint32_t")
         public int mask() { return VkAccelerationStructureSRTMotionInstanceNV.nmask(address()); }
-        /** @return the value of the {@link VkAccelerationStructureSRTMotionInstanceNV#instanceShaderBindingTableRecordOffset} field. */
+        /** @return the value of the {@code instanceShaderBindingTableRecordOffset} field. */
         @NativeType("uint32_t")
         public int instanceShaderBindingTableRecordOffset() { return VkAccelerationStructureSRTMotionInstanceNV.ninstanceShaderBindingTableRecordOffset(address()); }
-        /** @return the value of the {@link VkAccelerationStructureSRTMotionInstanceNV#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkGeometryInstanceFlagsKHR")
         public int flags() { return VkAccelerationStructureSRTMotionInstanceNV.nflags(address()); }
-        /** @return the value of the {@link VkAccelerationStructureSRTMotionInstanceNV#accelerationStructureReference} field. */
+        /** @return the value of the {@code accelerationStructureReference} field. */
         @NativeType("uint64_t")
         public long accelerationStructureReference() { return VkAccelerationStructureSRTMotionInstanceNV.naccelerationStructureReference(address()); }
 
-        /** Copies the specified {@link VkSRTDataNV} to the {@link VkAccelerationStructureSRTMotionInstanceNV#transformT0} field. */
+        /** Copies the specified {@link VkSRTDataNV} to the {@code transformT0} field. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer transformT0(VkSRTDataNV value) { VkAccelerationStructureSRTMotionInstanceNV.ntransformT0(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureSRTMotionInstanceNV#transformT0} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code transformT0} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer transformT0(java.util.function.Consumer<VkSRTDataNV> consumer) { consumer.accept(transformT0()); return this; }
-        /** Copies the specified {@link VkSRTDataNV} to the {@link VkAccelerationStructureSRTMotionInstanceNV#transformT1} field. */
+        /** Copies the specified {@link VkSRTDataNV} to the {@code transformT1} field. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer transformT1(VkSRTDataNV value) { VkAccelerationStructureSRTMotionInstanceNV.ntransformT1(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureSRTMotionInstanceNV#transformT1} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code transformT1} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer transformT1(java.util.function.Consumer<VkSRTDataNV> consumer) { consumer.accept(transformT1()); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureSRTMotionInstanceNV#instanceCustomIndex} field. */
+        /** Sets the specified value to the {@code instanceCustomIndex} field. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer instanceCustomIndex(@NativeType("uint32_t") int value) { VkAccelerationStructureSRTMotionInstanceNV.ninstanceCustomIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureSRTMotionInstanceNV#mask} field. */
+        /** Sets the specified value to the {@code mask} field. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer mask(@NativeType("uint32_t") int value) { VkAccelerationStructureSRTMotionInstanceNV.nmask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureSRTMotionInstanceNV#instanceShaderBindingTableRecordOffset} field. */
+        /** Sets the specified value to the {@code instanceShaderBindingTableRecordOffset} field. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer instanceShaderBindingTableRecordOffset(@NativeType("uint32_t") int value) { VkAccelerationStructureSRTMotionInstanceNV.ninstanceShaderBindingTableRecordOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureSRTMotionInstanceNV#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer flags(@NativeType("VkGeometryInstanceFlagsKHR") int value) { VkAccelerationStructureSRTMotionInstanceNV.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureSRTMotionInstanceNV#accelerationStructureReference} field. */
+        /** Sets the specified value to the {@code accelerationStructureReference} field. */
         public VkAccelerationStructureSRTMotionInstanceNV.Buffer accelerationStructureReference(@NativeType("uint64_t") long value) { VkAccelerationStructureSRTMotionInstanceNV.naccelerationStructureReference(address(), value); return this; }
 
     }

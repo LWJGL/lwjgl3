@@ -16,39 +16,25 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing latency data.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkGetLatencyMarkerInfoNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkLatencyTimingsFrameReportNV {
  *     VkStructureType sType;
  *     void const * pNext;
- *     uint64_t {@link #presentID};
+ *     uint64_t presentID;
  *     uint64_t inputSampleTimeUs;
- *     uint64_t {@link #simStartTimeUs};
- *     uint64_t {@link #simEndTimeUs};
+ *     uint64_t simStartTimeUs;
+ *     uint64_t simEndTimeUs;
  *     uint64_t renderSubmitStartTimeUs;
  *     uint64_t renderSubmitEndTimeUs;
- *     uint64_t {@link #presentStartTimeUs};
- *     uint64_t {@link #presentEndTimeUs};
- *     uint64_t {@link #driverStartTimeUs};
- *     uint64_t {@link #driverEndTimeUs};
- *     uint64_t {@link #osRenderQueueStartTimeUs};
- *     uint64_t {@link #osRenderQueueEndTimeUs};
- *     uint64_t {@link #gpuRenderStartTimeUs};
- *     uint64_t {@link #gpuRenderEndTimeUs};
- * }</code></pre>
+ *     uint64_t presentStartTimeUs;
+ *     uint64_t presentEndTimeUs;
+ *     uint64_t driverStartTimeUs;
+ *     uint64_t driverEndTimeUs;
+ *     uint64_t osRenderQueueStartTimeUs;
+ *     uint64_t osRenderQueueEndTimeUs;
+ *     uint64_t gpuRenderStartTimeUs;
+ *     uint64_t gpuRenderEndTimeUs;
+ * }}</pre>
  */
 public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameReportNV> implements NativeResource {
 
@@ -146,16 +132,16 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
     /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the application provided value that is used to associate the timestamp with a {@code vkQueuePresentKHR} command using {@link VkPresentIdKHR}{@code ::pPresentIds} for a given present. */
+    /** @return the value of the {@code presentID} field. */
     @NativeType("uint64_t")
     public long presentID() { return npresentID(address()); }
     /** @return the value of the {@code inputSampleTimeUs} field. */
     @NativeType("uint64_t")
     public long inputSampleTimeUs() { return ninputSampleTimeUs(address()); }
-    /** the timestamp written when {@code vkSetLatencyMarkerNV} is called with the {@code VkLatencyMarkerNV} enum {@link NVLowLatency2#VK_LATENCY_MARKER_SIMULATION_START_NV LATENCY_MARKER_SIMULATION_START_NV}. */
+    /** @return the value of the {@code simStartTimeUs} field. */
     @NativeType("uint64_t")
     public long simStartTimeUs() { return nsimStartTimeUs(address()); }
-    /** the timestamp written when {@code vkSetLatencyMarkerNV} is called with the {@code VkLatencyMarkerNV} enum {@link NVLowLatency2#VK_LATENCY_MARKER_SIMULATION_END_NV LATENCY_MARKER_SIMULATION_END_NV} */
+    /** @return the value of the {@code simEndTimeUs} field. */
     @NativeType("uint64_t")
     public long simEndTimeUs() { return nsimEndTimeUs(address()); }
     /** @return the value of the {@code renderSubmitStartTimeUs} field. */
@@ -164,28 +150,28 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
     /** @return the value of the {@code renderSubmitEndTimeUs} field. */
     @NativeType("uint64_t")
     public long renderSubmitEndTimeUs() { return nrenderSubmitEndTimeUs(address()); }
-    /** the timestamp written when {@code vkSetLatencyMarkerNV} is called with the {@code VkLatencyMarkerNV} enum {@link NVLowLatency2#VK_LATENCY_MARKER_PRESENT_START_NV LATENCY_MARKER_PRESENT_START_NV}. */
+    /** @return the value of the {@code presentStartTimeUs} field. */
     @NativeType("uint64_t")
     public long presentStartTimeUs() { return npresentStartTimeUs(address()); }
-    /** the timestamp written when {@code vkSetLatencyMarkerNV} is called with the {@code VkLatencyMarkerNV} enum {@link NVLowLatency2#VK_LATENCY_MARKER_PRESENT_END_NV LATENCY_MARKER_PRESENT_END_NV}. */
+    /** @return the value of the {@code presentEndTimeUs} field. */
     @NativeType("uint64_t")
     public long presentEndTimeUs() { return npresentEndTimeUs(address()); }
-    /** the timestamp written when the first {@code vkQueueSubmit} for the frame is called. */
+    /** @return the value of the {@code driverStartTimeUs} field. */
     @NativeType("uint64_t")
     public long driverStartTimeUs() { return ndriverStartTimeUs(address()); }
-    /** the timestamp written when the final {@code vkQueueSubmit} hands off from the Vulkan Driver. */
+    /** @return the value of the {@code driverEndTimeUs} field. */
     @NativeType("uint64_t")
     public long driverEndTimeUs() { return ndriverEndTimeUs(address()); }
-    /** the timestamp written when the final {@code vkQueueSubmit} hands off from the Vulkan Driver. */
+    /** @return the value of the {@code osRenderQueueStartTimeUs} field. */
     @NativeType("uint64_t")
     public long osRenderQueueStartTimeUs() { return nosRenderQueueStartTimeUs(address()); }
-    /** the timestamp written when the first submission reaches the GPU. */
+    /** @return the value of the {@code osRenderQueueEndTimeUs} field. */
     @NativeType("uint64_t")
     public long osRenderQueueEndTimeUs() { return nosRenderQueueEndTimeUs(address()); }
-    /** the timestamp written when the first submission reaches the GPU. */
+    /** @return the value of the {@code gpuRenderStartTimeUs} field. */
     @NativeType("uint64_t")
     public long gpuRenderStartTimeUs() { return ngpuRenderStartTimeUs(address()); }
-    /** the timestamp written when the final submission finishes on the GPU for the frame. */
+    /** @return the value of the {@code gpuRenderEndTimeUs} field. */
     @NativeType("uint64_t")
     public long gpuRenderEndTimeUs() { return ngpuRenderEndTimeUs(address()); }
 
@@ -417,16 +403,16 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
         /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkLatencyTimingsFrameReportNV.npNext(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#presentID} field. */
+        /** @return the value of the {@code presentID} field. */
         @NativeType("uint64_t")
         public long presentID() { return VkLatencyTimingsFrameReportNV.npresentID(address()); }
         /** @return the value of the {@code inputSampleTimeUs} field. */
         @NativeType("uint64_t")
         public long inputSampleTimeUs() { return VkLatencyTimingsFrameReportNV.ninputSampleTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#simStartTimeUs} field. */
+        /** @return the value of the {@code simStartTimeUs} field. */
         @NativeType("uint64_t")
         public long simStartTimeUs() { return VkLatencyTimingsFrameReportNV.nsimStartTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#simEndTimeUs} field. */
+        /** @return the value of the {@code simEndTimeUs} field. */
         @NativeType("uint64_t")
         public long simEndTimeUs() { return VkLatencyTimingsFrameReportNV.nsimEndTimeUs(address()); }
         /** @return the value of the {@code renderSubmitStartTimeUs} field. */
@@ -435,28 +421,28 @@ public class VkLatencyTimingsFrameReportNV extends Struct<VkLatencyTimingsFrameR
         /** @return the value of the {@code renderSubmitEndTimeUs} field. */
         @NativeType("uint64_t")
         public long renderSubmitEndTimeUs() { return VkLatencyTimingsFrameReportNV.nrenderSubmitEndTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#presentStartTimeUs} field. */
+        /** @return the value of the {@code presentStartTimeUs} field. */
         @NativeType("uint64_t")
         public long presentStartTimeUs() { return VkLatencyTimingsFrameReportNV.npresentStartTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#presentEndTimeUs} field. */
+        /** @return the value of the {@code presentEndTimeUs} field. */
         @NativeType("uint64_t")
         public long presentEndTimeUs() { return VkLatencyTimingsFrameReportNV.npresentEndTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#driverStartTimeUs} field. */
+        /** @return the value of the {@code driverStartTimeUs} field. */
         @NativeType("uint64_t")
         public long driverStartTimeUs() { return VkLatencyTimingsFrameReportNV.ndriverStartTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#driverEndTimeUs} field. */
+        /** @return the value of the {@code driverEndTimeUs} field. */
         @NativeType("uint64_t")
         public long driverEndTimeUs() { return VkLatencyTimingsFrameReportNV.ndriverEndTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#osRenderQueueStartTimeUs} field. */
+        /** @return the value of the {@code osRenderQueueStartTimeUs} field. */
         @NativeType("uint64_t")
         public long osRenderQueueStartTimeUs() { return VkLatencyTimingsFrameReportNV.nosRenderQueueStartTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#osRenderQueueEndTimeUs} field. */
+        /** @return the value of the {@code osRenderQueueEndTimeUs} field. */
         @NativeType("uint64_t")
         public long osRenderQueueEndTimeUs() { return VkLatencyTimingsFrameReportNV.nosRenderQueueEndTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#gpuRenderStartTimeUs} field. */
+        /** @return the value of the {@code gpuRenderStartTimeUs} field. */
         @NativeType("uint64_t")
         public long gpuRenderStartTimeUs() { return VkLatencyTimingsFrameReportNV.ngpuRenderStartTimeUs(address()); }
-        /** @return the value of the {@link VkLatencyTimingsFrameReportNV#gpuRenderEndTimeUs} field. */
+        /** @return the value of the {@code gpuRenderEndTimeUs} field. */
         @NativeType("uint64_t")
         public long gpuRenderEndTimeUs() { return VkLatencyTimingsFrameReportNV.ngpuRenderEndTimeUs(address()); }
 

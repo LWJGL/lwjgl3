@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH265WeightTable {
  *     {@link StdVideoEncodeH265WeightTableFlags StdVideoEncodeH265WeightTableFlags} flags;
  *     uint8_t luma_log2_weight_denom;
@@ -34,7 +32,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     int8_t luma_offset_l1[STD_VIDEO_H265_MAX_NUM_LIST_REF];
  *     int8_t delta_chroma_weight_l1[STD_VIDEO_H265_MAX_CHROMA_PLANES];
  *     int8_t delta_chroma_offset_l1[STD_VIDEO_H265_MAX_CHROMA_PLANES];
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH265WeightTable extends Struct<StdVideoEncodeH265WeightTable> implements NativeResource {
 

@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct meshopt_VertexFetchStatistics {
  *     unsigned int bytes_fetched;
- *     float {@link #overfetch};
- * }</code></pre>
+ *     float overfetch;
+ * }}</pre>
  */
 @NativeType("struct meshopt_VertexFetchStatistics")
 public class MeshoptVertexFetchStatistics extends Struct<MeshoptVertexFetchStatistics> implements NativeResource {
@@ -76,7 +74,7 @@ public class MeshoptVertexFetchStatistics extends Struct<MeshoptVertexFetchStati
     /** @return the value of the {@code bytes_fetched} field. */
     @NativeType("unsigned int")
     public int bytes_fetched() { return nbytes_fetched(address()); }
-    /** fetched bytes / vertex buffer size; best case 1.0 (each byte is fetched once) */
+    /** @return the value of the {@code overfetch} field. */
     public float overfetch() { return noverfetch(address()); }
 
     // -----------------------------------
@@ -241,7 +239,7 @@ public class MeshoptVertexFetchStatistics extends Struct<MeshoptVertexFetchStati
         /** @return the value of the {@code bytes_fetched} field. */
         @NativeType("unsigned int")
         public int bytes_fetched() { return MeshoptVertexFetchStatistics.nbytes_fetched(address()); }
-        /** @return the value of the {@link MeshoptVertexFetchStatistics#overfetch} field. */
+        /** @return the value of the {@code overfetch} field. */
         public float overfetch() { return MeshoptVertexFetchStatistics.noverfetch(address()); }
 
     }

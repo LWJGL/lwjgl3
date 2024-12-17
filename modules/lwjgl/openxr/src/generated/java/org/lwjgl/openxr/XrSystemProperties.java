@@ -18,31 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.XR10.*;
 
 /**
- * Properties of a particular system.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SYSTEM_PROPERTIES TYPE_SYSTEM_PROPERTIES}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSystemAnchorPropertiesHTC}, {@link XrSystemBodyTrackingPropertiesFB}, {@link XrSystemBodyTrackingPropertiesHTC}, {@link XrSystemColocationDiscoveryPropertiesMETA}, {@link XrSystemColorSpacePropertiesFB}, {@link XrSystemEnvironmentDepthPropertiesMETA}, {@link XrSystemEyeGazeInteractionPropertiesEXT}, {@link XrSystemEyeTrackingPropertiesFB}, {@link XrSystemFaceTrackingProperties2FB}, {@link XrSystemFaceTrackingPropertiesFB}, {@link XrSystemFacialExpressionPropertiesML}, {@link XrSystemFacialTrackingPropertiesHTC}, {@link XrSystemForceFeedbackCurlPropertiesMNDX}, {@link XrSystemFoveatedRenderingPropertiesVARJO}, {@link XrSystemFoveationEyeTrackedPropertiesMETA}, {@link XrSystemHandTrackingMeshPropertiesMSFT}, {@link XrSystemHandTrackingPropertiesEXT}, {@link XrSystemHeadsetIdPropertiesMETA}, {@link XrSystemKeyboardTrackingPropertiesFB}, {@link XrSystemMarkerTrackingPropertiesVARJO}, {@link XrSystemMarkerUnderstandingPropertiesML}, {@link XrSystemPassthroughColorLutPropertiesMETA}, {@link XrSystemPassthroughProperties2FB}, {@link XrSystemPassthroughPropertiesFB}, {@link XrSystemPlaneDetectionPropertiesEXT}, {@link XrSystemRenderModelPropertiesFB}, {@link XrSystemSpaceWarpPropertiesFB}, {@link XrSystemSpatialEntityGroupSharingPropertiesMETA}, {@link XrSystemSpatialEntityPropertiesFB}, {@link XrSystemSpatialEntitySharingPropertiesMETA}, {@link XrSystemUserPresencePropertiesEXT}, {@link XrSystemVirtualKeyboardPropertiesMETA}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSystemGraphicsProperties}, {@link XrSystemTrackingProperties}, {@link XR10#xrGetSystem GetSystem}, {@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemProperties {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrSystemId {@link #systemId};
- *     uint32_t {@link #vendorId};
- *     char {@link #systemName}[XR_MAX_SYSTEM_NAME_SIZE];
- *     {@link XrSystemGraphicsProperties XrSystemGraphicsProperties} {@link #graphicsProperties};
- *     {@link XrSystemTrackingProperties XrSystemTrackingProperties} {@link #trackingProperties};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrSystemId systemId;
+ *     uint32_t vendorId;
+ *     char systemName[XR_MAX_SYSTEM_NAME_SIZE];
+ *     {@link XrSystemGraphicsProperties XrSystemGraphicsProperties} graphicsProperties;
+ *     {@link XrSystemTrackingProperties XrSystemTrackingProperties} trackingProperties;
+ * }}</pre>
  */
 public class XrSystemProperties extends Struct<XrSystemProperties> implements NativeResource {
 
@@ -107,34 +92,34 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSystemId} identifying the system. */
+    /** @return the value of the {@code systemId} field. */
     @NativeType("XrSystemId")
     public long systemId() { return nsystemId(address()); }
-    /** a unique identifier for the vendor of the system. */
+    /** @return the value of the {@code vendorId} field. */
     @NativeType("uint32_t")
     public int vendorId() { return nvendorId(address()); }
-    /** a string containing the name of the system. */
+    /** @return a {@link ByteBuffer} view of the {@code systemName} field. */
     @NativeType("char[XR_MAX_SYSTEM_NAME_SIZE]")
     public ByteBuffer systemName() { return nsystemName(address()); }
-    /** a string containing the name of the system. */
+    /** @return the null-terminated string stored in the {@code systemName} field. */
     @NativeType("char[XR_MAX_SYSTEM_NAME_SIZE]")
     public String systemNameString() { return nsystemNameString(address()); }
-    /** an {@link XrSystemGraphicsProperties} structure specifying the system graphics properties. */
+    /** @return a {@link XrSystemGraphicsProperties} view of the {@code graphicsProperties} field. */
     public XrSystemGraphicsProperties graphicsProperties() { return ngraphicsProperties(address()); }
-    /** an {@link XrSystemTrackingProperties} structure specifying system tracking properties. */
+    /** @return a {@link XrSystemTrackingProperties} view of the {@code trackingProperties} field. */
     public XrSystemTrackingProperties trackingProperties() { return ntrackingProperties(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemProperties type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_SYSTEM_PROPERTIES TYPE_SYSTEM_PROPERTIES} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_SYSTEM_PROPERTIES TYPE_SYSTEM_PROPERTIES} value to the {@code type} field. */
     public XrSystemProperties type$Default() { return type(XR10.XR_TYPE_SYSTEM_PROPERTIES); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrSystemAnchorPropertiesHTC} value to the {@code next} chain. */
     public XrSystemProperties next(XrSystemAnchorPropertiesHTC value) { return this.next(value.next(this.next()).address()); }
@@ -400,34 +385,34 @@ public class XrSystemProperties extends Struct<XrSystemProperties> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemProperties#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemProperties.ntype(address()); }
-        /** @return the value of the {@link XrSystemProperties#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemProperties.nnext(address()); }
-        /** @return the value of the {@link XrSystemProperties#systemId} field. */
+        /** @return the value of the {@code systemId} field. */
         @NativeType("XrSystemId")
         public long systemId() { return XrSystemProperties.nsystemId(address()); }
-        /** @return the value of the {@link XrSystemProperties#vendorId} field. */
+        /** @return the value of the {@code vendorId} field. */
         @NativeType("uint32_t")
         public int vendorId() { return XrSystemProperties.nvendorId(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrSystemProperties#systemName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code systemName} field. */
         @NativeType("char[XR_MAX_SYSTEM_NAME_SIZE]")
         public ByteBuffer systemName() { return XrSystemProperties.nsystemName(address()); }
-        /** @return the null-terminated string stored in the {@link XrSystemProperties#systemName} field. */
+        /** @return the null-terminated string stored in the {@code systemName} field. */
         @NativeType("char[XR_MAX_SYSTEM_NAME_SIZE]")
         public String systemNameString() { return XrSystemProperties.nsystemNameString(address()); }
-        /** @return a {@link XrSystemGraphicsProperties} view of the {@link XrSystemProperties#graphicsProperties} field. */
+        /** @return a {@link XrSystemGraphicsProperties} view of the {@code graphicsProperties} field. */
         public XrSystemGraphicsProperties graphicsProperties() { return XrSystemProperties.ngraphicsProperties(address()); }
-        /** @return a {@link XrSystemTrackingProperties} view of the {@link XrSystemProperties#trackingProperties} field. */
+        /** @return a {@link XrSystemTrackingProperties} view of the {@code trackingProperties} field. */
         public XrSystemTrackingProperties trackingProperties() { return XrSystemProperties.ntrackingProperties(address()); }
 
-        /** Sets the specified value to the {@link XrSystemProperties#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemProperties.Buffer type(@NativeType("XrStructureType") int value) { XrSystemProperties.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_SYSTEM_PROPERTIES TYPE_SYSTEM_PROPERTIES} value to the {@link XrSystemProperties#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_SYSTEM_PROPERTIES TYPE_SYSTEM_PROPERTIES} value to the {@code type} field. */
         public XrSystemProperties.Buffer type$Default() { return type(XR10.XR_TYPE_SYSTEM_PROPERTIES); }
-        /** Sets the specified value to the {@link XrSystemProperties#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemProperties.Buffer next(@NativeType("void *") long value) { XrSystemProperties.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrSystemAnchorPropertiesHTC} value to the {@code next} chain. */
         public XrSystemProperties.Buffer next(XrSystemAnchorPropertiesHTC value) { return this.next(value.next(this.next()).address()); }

@@ -16,14 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying input data for a single state flag command token.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSetStateFlagsIndirectCommandNV {
- *     uint32_t {@link #data};
- * }</code></pre>
+ *     uint32_t data;
+ * }}</pre>
  */
 public class VkSetStateFlagsIndirectCommandNV extends Struct<VkSetStateFlagsIndirectCommandNV> implements NativeResource {
 
@@ -70,17 +66,11 @@ public class VkSetStateFlagsIndirectCommandNV extends Struct<VkSetStateFlagsIndi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * encodes packed state that this command alters.
-     * 
-     * <ul>
-     * <li>Bit 0: If set represents {@link VK10#VK_FRONT_FACE_CLOCKWISE FRONT_FACE_CLOCKWISE}, otherwise {@link VK10#VK_FRONT_FACE_COUNTER_CLOCKWISE FRONT_FACE_COUNTER_CLOCKWISE}</li>
-     * </ul>
-     */
+    /** @return the value of the {@code data} field. */
     @NativeType("uint32_t")
     public int data() { return ndata(address()); }
 
-    /** Sets the specified value to the {@link #data} field. */
+    /** Sets the specified value to the {@code data} field. */
     public VkSetStateFlagsIndirectCommandNV data(@NativeType("uint32_t") int value) { ndata(address(), value); return this; }
 
     /**
@@ -255,11 +245,11 @@ public class VkSetStateFlagsIndirectCommandNV extends Struct<VkSetStateFlagsIndi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSetStateFlagsIndirectCommandNV#data} field. */
+        /** @return the value of the {@code data} field. */
         @NativeType("uint32_t")
         public int data() { return VkSetStateFlagsIndirectCommandNV.ndata(address()); }
 
-        /** Sets the specified value to the {@link VkSetStateFlagsIndirectCommandNV#data} field. */
+        /** Sets the specified value to the {@code data} field. */
         public VkSetStateFlagsIndirectCommandNV.Buffer data(@NativeType("uint32_t") int value) { VkSetStateFlagsIndirectCommandNV.ndata(address(), value); return this; }
 
     }

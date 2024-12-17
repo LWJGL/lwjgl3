@@ -17,40 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Use the Windows keyed mutex mechanism to synchronize work.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Each member of {@code pAcquireSyncs} and {@code pReleaseSyncs} <b>must</b> be a device memory object imported by setting {@link VkImportMemoryWin32HandleInfoKHR}{@code ::handleType} to {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT} or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRWin32KeyedMutex#VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR}</li>
- * <li>If {@code acquireCount} is not 0, {@code pAcquireSyncs} <b>must</b> be a valid pointer to an array of {@code acquireCount} valid {@code VkDeviceMemory} handles</li>
- * <li>If {@code acquireCount} is not 0, {@code pAcquireKeys} <b>must</b> be a valid pointer to an array of {@code acquireCount} {@code uint64_t} values</li>
- * <li>If {@code acquireCount} is not 0, {@code pAcquireTimeouts} <b>must</b> be a valid pointer to an array of {@code acquireCount} {@code uint32_t} values</li>
- * <li>If {@code releaseCount} is not 0, {@code pReleaseSyncs} <b>must</b> be a valid pointer to an array of {@code releaseCount} valid {@code VkDeviceMemory} handles</li>
- * <li>If {@code releaseCount} is not 0, {@code pReleaseKeys} <b>must</b> be a valid pointer to an array of {@code releaseCount} {@code uint64_t} values</li>
- * <li>Both of the elements of {@code pAcquireSyncs}, and the elements of {@code pReleaseSyncs} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkWin32KeyedMutexAcquireReleaseInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #acquireCount};
- *     VkDeviceMemory const * {@link #pAcquireSyncs};
- *     uint64_t const * {@link #pAcquireKeys};
- *     uint32_t const * {@link #pAcquireTimeouts};
- *     uint32_t {@link #releaseCount};
- *     VkDeviceMemory const * {@link #pReleaseSyncs};
- *     uint64_t const * {@link #pReleaseKeys};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t acquireCount;
+ *     VkDeviceMemory const * pAcquireSyncs;
+ *     uint64_t const * pAcquireKeys;
+ *     uint32_t const * pAcquireTimeouts;
+ *     uint32_t releaseCount;
+ *     VkDeviceMemory const * pReleaseSyncs;
+ *     uint64_t const * pReleaseKeys;
+ * }}</pre>
  */
 public class VkWin32KeyedMutexAcquireReleaseInfoKHR extends Struct<VkWin32KeyedMutexAcquireReleaseInfoKHR> implements NativeResource {
 
@@ -121,53 +99,53 @@ public class VkWin32KeyedMutexAcquireReleaseInfoKHR extends Struct<VkWin32KeyedM
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of entries in the {@code pAcquireSyncs}, {@code pAcquireKeys}, and {@code pAcquireTimeouts} arrays. */
+    /** @return the value of the {@code acquireCount} field. */
     @NativeType("uint32_t")
     public int acquireCount() { return nacquireCount(address()); }
-    /** a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAcquireSyncs} field. */
     @NativeType("VkDeviceMemory const *")
     public @Nullable LongBuffer pAcquireSyncs() { return npAcquireSyncs(address()); }
-    /** a pointer to an array of mutex key values to wait for prior to beginning the submitted work. Entries refer to the keyed mutex associated with the corresponding entries in {@code pAcquireSyncs}. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAcquireKeys} field. */
     @NativeType("uint64_t const *")
     public @Nullable LongBuffer pAcquireKeys() { return npAcquireKeys(address()); }
-    /** a pointer to an array of timeout values, in millisecond units, for each acquire specified in {@code pAcquireKeys}. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pAcquireTimeouts} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pAcquireTimeouts() { return npAcquireTimeouts(address()); }
-    /** the number of entries in the {@code pReleaseSyncs} and {@code pReleaseKeys} arrays. */
+    /** @return the value of the {@code releaseCount} field. */
     @NativeType("uint32_t")
     public int releaseCount() { return nreleaseCount(address()); }
-    /** a pointer to an array of {@code VkDeviceMemory} objects which were imported from Direct3D 11 resources. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pReleaseSyncs} field. */
     @NativeType("VkDeviceMemory const *")
     public @Nullable LongBuffer pReleaseSyncs() { return npReleaseSyncs(address()); }
-    /** a pointer to an array of mutex key values to set when the submitted work has completed. Entries refer to the keyed mutex associated with the corresponding entries in {@code pReleaseSyncs}. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pReleaseKeys} field. */
     @NativeType("uint64_t const *")
     public @Nullable LongBuffer pReleaseKeys() { return npReleaseKeys(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRWin32KeyedMutex#VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRWin32KeyedMutex#VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR} value to the {@code sType} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR sType$Default() { return sType(KHRWin32KeyedMutex.VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #acquireCount} field. */
+    /** Sets the specified value to the {@code acquireCount} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR acquireCount(@NativeType("uint32_t") int value) { nacquireCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pAcquireSyncs} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pAcquireSyncs} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR pAcquireSyncs(@Nullable @NativeType("VkDeviceMemory const *") LongBuffer value) { npAcquireSyncs(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pAcquireKeys} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pAcquireKeys} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR pAcquireKeys(@Nullable @NativeType("uint64_t const *") LongBuffer value) { npAcquireKeys(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pAcquireTimeouts} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pAcquireTimeouts} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR pAcquireTimeouts(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npAcquireTimeouts(address(), value); return this; }
-    /** Sets the specified value to the {@link #releaseCount} field. */
+    /** Sets the specified value to the {@code releaseCount} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR releaseCount(@NativeType("uint32_t") int value) { nreleaseCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pReleaseSyncs} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pReleaseSyncs} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR pReleaseSyncs(@Nullable @NativeType("VkDeviceMemory const *") LongBuffer value) { npReleaseSyncs(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pReleaseKeys} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pReleaseKeys} field. */
     public VkWin32KeyedMutexAcquireReleaseInfoKHR pReleaseKeys(@Nullable @NativeType("uint64_t const *") LongBuffer value) { npReleaseKeys(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -435,53 +413,53 @@ public class VkWin32KeyedMutexAcquireReleaseInfoKHR extends Struct<VkWin32KeyedM
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#acquireCount} field. */
+        /** @return the value of the {@code acquireCount} field. */
         @NativeType("uint32_t")
         public int acquireCount() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.nacquireCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pAcquireSyncs} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAcquireSyncs} field. */
         @NativeType("VkDeviceMemory const *")
         public @Nullable LongBuffer pAcquireSyncs() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.npAcquireSyncs(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pAcquireKeys} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAcquireKeys} field. */
         @NativeType("uint64_t const *")
         public @Nullable LongBuffer pAcquireKeys() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.npAcquireKeys(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pAcquireTimeouts} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pAcquireTimeouts} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pAcquireTimeouts() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.npAcquireTimeouts(address()); }
-        /** @return the value of the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#releaseCount} field. */
+        /** @return the value of the {@code releaseCount} field. */
         @NativeType("uint32_t")
         public int releaseCount() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.nreleaseCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pReleaseSyncs} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pReleaseSyncs} field. */
         @NativeType("VkDeviceMemory const *")
         public @Nullable LongBuffer pReleaseSyncs() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.npReleaseSyncs(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pReleaseKeys} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pReleaseKeys} field. */
         @NativeType("uint64_t const *")
         public @Nullable LongBuffer pReleaseKeys() { return VkWin32KeyedMutexAcquireReleaseInfoKHR.npReleaseKeys(address()); }
 
-        /** Sets the specified value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRWin32KeyedMutex#VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR} value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#sType} field. */
+        /** Sets the {@link KHRWin32KeyedMutex#VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR} value to the {@code sType} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer sType$Default() { return sType(KHRWin32KeyedMutex.VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#acquireCount} field. */
+        /** Sets the specified value to the {@code acquireCount} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer acquireCount(@NativeType("uint32_t") int value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.nacquireCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pAcquireSyncs} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pAcquireSyncs} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer pAcquireSyncs(@Nullable @NativeType("VkDeviceMemory const *") LongBuffer value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.npAcquireSyncs(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pAcquireKeys} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pAcquireKeys} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer pAcquireKeys(@Nullable @NativeType("uint64_t const *") LongBuffer value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.npAcquireKeys(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pAcquireTimeouts} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pAcquireTimeouts} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer pAcquireTimeouts(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.npAcquireTimeouts(address(), value); return this; }
-        /** Sets the specified value to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#releaseCount} field. */
+        /** Sets the specified value to the {@code releaseCount} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer releaseCount(@NativeType("uint32_t") int value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.nreleaseCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pReleaseSyncs} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pReleaseSyncs} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer pReleaseSyncs(@Nullable @NativeType("VkDeviceMemory const *") LongBuffer value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.npReleaseSyncs(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkWin32KeyedMutexAcquireReleaseInfoKHR#pReleaseKeys} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pReleaseKeys} field. */
         public VkWin32KeyedMutexAcquireReleaseInfoKHR.Buffer pReleaseKeys(@Nullable @NativeType("uint64_t const *") LongBuffer value) { VkWin32KeyedMutexAcquireReleaseInfoKHR.npReleaseKeys(address(), value); return this; }
 
     }

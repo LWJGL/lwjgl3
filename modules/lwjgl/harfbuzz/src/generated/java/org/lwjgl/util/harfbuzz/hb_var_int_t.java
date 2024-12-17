@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union hb_var_int_t {
  *     uint32_t u32;
  *     int32_t i32;
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int16_t i16[2];
  *     uint8_t u8[4];
  *     int8_t i8[4];
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_var_int_t extends Struct<hb_var_int_t> implements NativeResource {
 

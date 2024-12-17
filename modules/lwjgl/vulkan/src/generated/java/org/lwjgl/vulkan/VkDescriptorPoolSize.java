@@ -16,41 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying descriptor pool size.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>When creating a descriptor pool that will contain descriptors for combined image samplers of multi-planar formats, an application needs to account for non-trivial descriptor consumption when choosing the {@code descriptorCount} value, as indicated by {@link VkSamplerYcbcrConversionImageFormatProperties}{@code ::combinedImageSamplerDescriptorCount}.</p>
- * 
- * <p>For simplicity the application <b>can</b> use the {@link VkPhysicalDeviceMaintenance6Properties}{@code ::maxCombinedImageSamplerDescriptorCount} property, which is sized to accommodate any and all <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> supported by the implementation.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code descriptorCount} <b>must</b> be greater than 0</li>
- * <li>If {@code type} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code descriptorCount} <b>must</b> be a multiple of 4</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be a valid {@code VkDescriptorType} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDescriptorPoolCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorPoolSize {
- *     VkDescriptorType {@link #type};
- *     uint32_t {@link #descriptorCount};
- * }</code></pre>
+ *     VkDescriptorType type;
+ *     uint32_t descriptorCount;
+ * }}</pre>
  */
 public class VkDescriptorPoolSize extends Struct<VkDescriptorPoolSize> implements NativeResource {
 
@@ -100,16 +70,16 @@ public class VkDescriptorPoolSize extends Struct<VkDescriptorPoolSize> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of descriptor. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkDescriptorType")
     public int type() { return ntype(address()); }
-    /** the number of descriptors of that type to allocate. If {@code type} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code descriptorCount} is the number of bytes to allocate for descriptors of this type. */
+    /** @return the value of the {@code descriptorCount} field. */
     @NativeType("uint32_t")
     public int descriptorCount() { return ndescriptorCount(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkDescriptorPoolSize type(@NativeType("VkDescriptorType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorCount} field. */
+    /** Sets the specified value to the {@code descriptorCount} field. */
     public VkDescriptorPoolSize descriptorCount(@NativeType("uint32_t") int value) { ndescriptorCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,16 +288,16 @@ public class VkDescriptorPoolSize extends Struct<VkDescriptorPoolSize> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorPoolSize#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkDescriptorType")
         public int type() { return VkDescriptorPoolSize.ntype(address()); }
-        /** @return the value of the {@link VkDescriptorPoolSize#descriptorCount} field. */
+        /** @return the value of the {@code descriptorCount} field. */
         @NativeType("uint32_t")
         public int descriptorCount() { return VkDescriptorPoolSize.ndescriptorCount(address()); }
 
-        /** Sets the specified value to the {@link VkDescriptorPoolSize#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkDescriptorPoolSize.Buffer type(@NativeType("VkDescriptorType") int value) { VkDescriptorPoolSize.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorPoolSize#descriptorCount} field. */
+        /** Sets the specified value to the {@code descriptorCount} field. */
         public VkDescriptorPoolSize.Buffer descriptorCount(@NativeType("uint32_t") int value) { VkDescriptorPoolSize.ndescriptorCount(address(), value); return this; }
 
     }

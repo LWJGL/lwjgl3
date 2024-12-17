@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXCursorAndRangeVisitor {
  *     void * context;
- *     enum CXVisitorResult (*{@link CXCursorAndRangeVisitI visit}) (void *context, CXCursor cursor, CXSourceRange range);
- * }</code></pre>
+ *     enum CXVisitorResult (* visit) (void * context, CXCursor cursor, CXSourceRange range);
+ * }}</pre>
  */
 public class CXCursorAndRangeVisitor extends Struct<CXCursorAndRangeVisitor> implements NativeResource {
 

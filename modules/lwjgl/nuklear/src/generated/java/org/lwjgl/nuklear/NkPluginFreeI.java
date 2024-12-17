@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     nk_handle handle,
- *     void *old
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_plugin_free} */
 @FunctionalInterface
 @NativeType("nk_plugin_free")
 public interface NkPluginFreeI extends CallbackI {
@@ -42,6 +34,7 @@ public interface NkPluginFreeI extends CallbackI {
         );
     }
 
+    /** {@code void (* nk_plugin_free) (nk_handle handle, void * old)} */
     void invoke(@NativeType("nk_handle") long handle, @NativeType("void *") long old);
 
 }

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Packed character data, returned by {@link STBTruetype#stbtt_PackFontRange PackFontRange}
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stbtt_packedchar {
  *     unsigned short x0;
  *     unsigned short y0;
@@ -31,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float xadvance;
  *     float xoff2;
  *     float yoff2;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stbtt_packedchar")
 public class STBTTPackedchar extends Struct<STBTTPackedchar> implements NativeResource {

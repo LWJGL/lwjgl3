@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_blob_t * (*{@link #invoke}) (
- *     hb_face_t *face,
- *     hb_tag_t tag,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_reference_table_func_t} */
 public abstract class hb_reference_table_func_t extends Callback implements hb_reference_table_func_tI {
 
     /**

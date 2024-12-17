@@ -17,35 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Acceleration structure version information.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>{@code pVersionData} is a <em>pointer</em> to an array of 2×{@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values instead of two {@link VK10#VK_UUID_SIZE UUID_SIZE} arrays as the expected use case for this member is to be pointed at the header of a previously serialized acceleration structure (via {@link KHRAccelerationStructure#vkCmdCopyAccelerationStructureToMemoryKHR CmdCopyAccelerationStructureToMemoryKHR} or {@link KHRAccelerationStructure#vkCopyAccelerationStructureToMemoryKHR CopyAccelerationStructureToMemoryKHR}) that is loaded in memory. Using arrays would necessitate extra memory copies of the UUIDs.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pVersionData} <b>must</b> be a valid pointer to an array of 2 &times; {@code VK_UUID_SIZE} {@code uint8_t} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRAccelerationStructure#vkGetDeviceAccelerationStructureCompatibilityKHR GetDeviceAccelerationStructureCompatibilityKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureVersionInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint8_t const * {@link #pVersionData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint8_t const * pVersionData;
+ * }}</pre>
  */
 public class VkAccelerationStructureVersionInfoKHR extends Struct<VkAccelerationStructureVersionInfoKHR> implements NativeResource {
 
@@ -98,27 +75,23 @@ public class VkAccelerationStructureVersionInfoKHR extends Struct<VkAcceleration
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return a pointer to the version header of an acceleration structure as defined in {@link KHRAccelerationStructure#vkCmdCopyAccelerationStructureToMemoryKHR CmdCopyAccelerationStructureToMemoryKHR}
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pVersionData} field. */
     @NativeType("uint8_t const *")
     public ByteBuffer pVersionData(int capacity) { return npVersionData(address(), capacity); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAccelerationStructureVersionInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR} value to the {@code sType} field. */
     public VkAccelerationStructureVersionInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAccelerationStructureVersionInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pVersionData} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pVersionData} field. */
     public VkAccelerationStructureVersionInfoKHR pVersionData(@NativeType("uint8_t const *") ByteBuffer value) { npVersionData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,27 +296,23 @@ public class VkAccelerationStructureVersionInfoKHR extends Struct<VkAcceleration
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAccelerationStructureVersionInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureVersionInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkAccelerationStructureVersionInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureVersionInfoKHR.npNext(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@link VkAccelerationStructureVersionInfoKHR#pVersionData} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pVersionData} field. */
         @NativeType("uint8_t const *")
         public ByteBuffer pVersionData(int capacity) { return VkAccelerationStructureVersionInfoKHR.npVersionData(address(), capacity); }
 
-        /** Sets the specified value to the {@link VkAccelerationStructureVersionInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAccelerationStructureVersionInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureVersionInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR} value to the {@link VkAccelerationStructureVersionInfoKHR#sType} field. */
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR} value to the {@code sType} field. */
         public VkAccelerationStructureVersionInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR); }
-        /** Sets the specified value to the {@link VkAccelerationStructureVersionInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAccelerationStructureVersionInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureVersionInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkAccelerationStructureVersionInfoKHR#pVersionData} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pVersionData} field. */
         public VkAccelerationStructureVersionInfoKHR.Buffer pVersionData(@NativeType("uint8_t const *") ByteBuffer value) { VkAccelerationStructureVersionInfoKHR.npVersionData(address(), value); return this; }
 
     }

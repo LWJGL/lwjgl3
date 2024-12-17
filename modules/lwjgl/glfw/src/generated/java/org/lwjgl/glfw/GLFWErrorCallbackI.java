@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetErrorCallback SetErrorCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     int error,
- *     char *description
- * )</code></pre>
- *
- * @since version 3.0
- */
+/** Callback function: {@link #invoke GLFWerrorfun} */
 @FunctionalInterface
 @NativeType("GLFWerrorfun")
 public interface GLFWErrorCallbackI extends CallbackI {
@@ -46,12 +34,7 @@ public interface GLFWErrorCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called with an error code and a human-readable description when a GLFW error occurs.
-     *
-     * @param error       the error code
-     * @param description a pointer to a UTF-8 encoded string describing the error
-     */
+    /** {@code void (* GLFWerrorfun) (int error, char * description)} */
     void invoke(int error, @NativeType("char *") long description);
 
 }

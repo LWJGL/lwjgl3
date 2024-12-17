@@ -119,33 +119,6 @@ public class LLVMLTO {
 
     public static final int LTOAPI_VERSION = 29;
 
-    /**
-     * {@code lto_symbol_attributes}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LTOSYMBOL_ALIGNMENT_MASK SYMBOL_ALIGNMENT_MASK} - log2 of alignment</li>
-     * <li>{@link #LTOSYMBOL_PERMISSIONS_MASK SYMBOL_PERMISSIONS_MASK}</li>
-     * <li>{@link #LTOSYMBOL_PERMISSIONS_CODE SYMBOL_PERMISSIONS_CODE}</li>
-     * <li>{@link #LTOSYMBOL_PERMISSIONS_DATA SYMBOL_PERMISSIONS_DATA}</li>
-     * <li>{@link #LTOSYMBOL_PERMISSIONS_RODATA SYMBOL_PERMISSIONS_RODATA}</li>
-     * <li>{@link #LTOSYMBOL_DEFINITION_MASK SYMBOL_DEFINITION_MASK}</li>
-     * <li>{@link #LTOSYMBOL_DEFINITION_REGULAR SYMBOL_DEFINITION_REGULAR}</li>
-     * <li>{@link #LTOSYMBOL_DEFINITION_TENTATIVE SYMBOL_DEFINITION_TENTATIVE}</li>
-     * <li>{@link #LTOSYMBOL_DEFINITION_WEAK SYMBOL_DEFINITION_WEAK}</li>
-     * <li>{@link #LTOSYMBOL_DEFINITION_UNDEFINED SYMBOL_DEFINITION_UNDEFINED}</li>
-     * <li>{@link #LTOSYMBOL_DEFINITION_WEAKUNDEF SYMBOL_DEFINITION_WEAKUNDEF}</li>
-     * <li>{@link #LTOSYMBOL_SCOPE_MASK SYMBOL_SCOPE_MASK}</li>
-     * <li>{@link #LTOSYMBOL_SCOPE_INTERNAL SYMBOL_SCOPE_INTERNAL}</li>
-     * <li>{@link #LTOSYMBOL_SCOPE_HIDDEN SYMBOL_SCOPE_HIDDEN}</li>
-     * <li>{@link #LTOSYMBOL_SCOPE_PROTECTED SYMBOL_SCOPE_PROTECTED}</li>
-     * <li>{@link #LTOSYMBOL_SCOPE_DEFAULT SYMBOL_SCOPE_DEFAULT}</li>
-     * <li>{@link #LTOSYMBOL_SCOPE_DEFAULT_CAN_BE_HIDDEN SYMBOL_SCOPE_DEFAULT_CAN_BE_HIDDEN}</li>
-     * <li>{@link #LTOSYMBOL_COMDAT SYMBOL_COMDAT}</li>
-     * <li>{@link #LTOSYMBOL_ALIAS SYMBOL_ALIAS}</li>
-     * </ul>
-     */
     public static final int
         LTOSYMBOL_ALIGNMENT_MASK              = 0x0000001F,
         LTOSYMBOL_PERMISSIONS_MASK            = 0x000000E0,
@@ -167,52 +140,16 @@ public class LLVMLTO {
         LTOSYMBOL_COMDAT                      = 0x00004000,
         LTOSYMBOL_ALIAS                       = 0x00008000;
 
-    /**
-     * {@code lto_debug_model}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LTODEBUG_MODEL_NONE DEBUG_MODEL_NONE}</li>
-     * <li>{@link #LTODEBUG_MODEL_DWARF DEBUG_MODEL_DWARF}</li>
-     * </ul>
-     */
     public static final int
         LTODEBUG_MODEL_NONE  = 0,
         LTODEBUG_MODEL_DWARF = 1;
 
-    /**
-     * {@code lto_codegen_model}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LTOCODEGEN_PIC_MODEL_STATIC CODEGEN_PIC_MODEL_STATIC}</li>
-     * <li>{@link #LTOCODEGEN_PIC_MODEL_DYNAMIC CODEGEN_PIC_MODEL_DYNAMIC}</li>
-     * <li>{@link #LTOCODEGEN_PIC_MODEL_DYNAMIC_NO_PIC CODEGEN_PIC_MODEL_DYNAMIC_NO_PIC}</li>
-     * <li>{@link #LTOCODEGEN_PIC_MODEL_DEFAULT CODEGEN_PIC_MODEL_DEFAULT}</li>
-     * </ul>
-     */
     public static final int
         LTOCODEGEN_PIC_MODEL_STATIC         = 0,
         LTOCODEGEN_PIC_MODEL_DYNAMIC        = 1,
         LTOCODEGEN_PIC_MODEL_DYNAMIC_NO_PIC = 2,
         LTOCODEGEN_PIC_MODEL_DEFAULT        = 3;
 
-    /**
-     * Diagnostic severity.
-     * 
-     * <p>({@code lto_codegen_diagnostic_severity_t})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LTODS_ERROR DS_ERROR}</li>
-     * <li>{@link #LTODS_WARNING DS_WARNING}</li>
-     * <li>{@link #LTODS_REMARK DS_REMARK} - Added in LTO_API_VERSION=10.</li>
-     * <li>{@link #LTODS_NOTE DS_NOTE}</li>
-     * </ul>
-     */
     public static final int
         LTODS_ERROR   = 0,
         LTODS_WARNING = 1,
@@ -225,13 +162,13 @@ public class LLVMLTO {
 
     // --- [ lto_get_version ] ---
 
-    /** Unsafe version of: {@link #lto_get_version get_version} */
+    /** {@code char const * lto_get_version(void)} */
     public static long nlto_get_version() {
         long __functionAddress = Functions.get_version;
         return invokeP(__functionAddress);
     }
 
-    /** Returns a printable string. */
+    /** {@code char const * lto_get_version(void)} */
     @NativeType("char const *")
     public static String lto_get_version() {
         long __result = nlto_get_version();
@@ -240,13 +177,13 @@ public class LLVMLTO {
 
     // --- [ lto_get_error_message ] ---
 
-    /** Unsafe version of: {@link #lto_get_error_message get_error_message} */
+    /** {@code char const * lto_get_error_message(void)} */
     public static long nlto_get_error_message() {
         long __functionAddress = Functions.get_error_message;
         return invokeP(__functionAddress);
     }
 
-    /** Returns the last error string or {@code NULL} if last operation was successful. */
+    /** {@code char const * lto_get_error_message(void)} */
     @NativeType("char const *")
     public static @Nullable String lto_get_error_message() {
         long __result = nlto_get_error_message();
@@ -255,13 +192,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_is_object_file ] ---
 
-    /** Unsafe version of: {@link #lto_module_is_object_file module_is_object_file} */
+    /** {@code lto_bool_t lto_module_is_object_file(char const * path)} */
     public static boolean nlto_module_is_object_file(long path) {
         long __functionAddress = Functions.module_is_object_file;
         return invokePZ(path, __functionAddress);
     }
 
-    /** Checks if a file is a loadable object file. */
+    /** {@code lto_bool_t lto_module_is_object_file(char const * path)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_is_object_file(@NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
@@ -270,7 +207,7 @@ public class LLVMLTO {
         return nlto_module_is_object_file(memAddress(path));
     }
 
-    /** Checks if a file is a loadable object file. */
+    /** {@code lto_bool_t lto_module_is_object_file(char const * path)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_is_object_file(@NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -285,13 +222,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_is_object_file_for_target ] ---
 
-    /** Unsafe version of: {@link #lto_module_is_object_file_for_target module_is_object_file_for_target} */
+    /** {@code lto_bool_t lto_module_is_object_file_for_target(char const * path, char const * target_triple_prefix)} */
     public static boolean nlto_module_is_object_file_for_target(long path, long target_triple_prefix) {
         long __functionAddress = Functions.module_is_object_file_for_target;
         return invokePPZ(path, target_triple_prefix, __functionAddress);
     }
 
-    /** Checks if a file is a loadable object compiled for requested target. */
+    /** {@code lto_bool_t lto_module_is_object_file_for_target(char const * path, char const * target_triple_prefix)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_is_object_file_for_target(@NativeType("char const *") ByteBuffer path, @NativeType("char const *") ByteBuffer target_triple_prefix) {
         if (CHECKS) {
@@ -301,7 +238,7 @@ public class LLVMLTO {
         return nlto_module_is_object_file_for_target(memAddress(path), memAddress(target_triple_prefix));
     }
 
-    /** Checks if a file is a loadable object compiled for requested target. */
+    /** {@code lto_bool_t lto_module_is_object_file_for_target(char const * path, char const * target_triple_prefix)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_is_object_file_for_target(@NativeType("char const *") CharSequence path, @NativeType("char const *") CharSequence target_triple_prefix) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -318,13 +255,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_has_objc_category ] ---
 
-    /** Unsafe version of: {@link #lto_module_has_objc_category module_has_objc_category} */
+    /** {@code lto_bool_t lto_module_has_objc_category(void const * mem, size_t length)} */
     public static boolean nlto_module_has_objc_category(long mem, long length) {
         long __functionAddress = Functions.module_has_objc_category;
         return invokePPZ(mem, length, __functionAddress);
     }
 
-    /** Return true if {@code Buffer} contains a bitcode file with ObjC code (category or class) in it. */
+    /** {@code lto_bool_t lto_module_has_objc_category(void const * mem, size_t length)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_has_objc_category(@NativeType("void const *") ByteBuffer mem) {
         return nlto_module_has_objc_category(memAddress(mem), mem.remaining());
@@ -332,13 +269,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_is_object_file_in_memory ] ---
 
-    /** Unsafe version of: {@link #lto_module_is_object_file_in_memory module_is_object_file_in_memory} */
+    /** {@code lto_bool_t lto_module_is_object_file_in_memory(void const * mem, size_t length)} */
     public static boolean nlto_module_is_object_file_in_memory(long mem, long length) {
         long __functionAddress = Functions.module_is_object_file_in_memory;
         return invokePPZ(mem, length, __functionAddress);
     }
 
-    /** Checks if a buffer is a loadable object file. */
+    /** {@code lto_bool_t lto_module_is_object_file_in_memory(void const * mem, size_t length)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_is_object_file_in_memory(@NativeType("void const *") ByteBuffer mem) {
         return nlto_module_is_object_file_in_memory(memAddress(mem), mem.remaining());
@@ -346,13 +283,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_is_object_file_in_memory_for_target ] ---
 
-    /** Unsafe version of: {@link #lto_module_is_object_file_in_memory_for_target module_is_object_file_in_memory_for_target} */
+    /** {@code lto_bool_t lto_module_is_object_file_in_memory_for_target(void const * mem, size_t length, char const * target_triple_prefix)} */
     public static boolean nlto_module_is_object_file_in_memory_for_target(long mem, long length, long target_triple_prefix) {
         long __functionAddress = Functions.module_is_object_file_in_memory_for_target;
         return invokePPPZ(mem, length, target_triple_prefix, __functionAddress);
     }
 
-    /** Checks if a buffer is a loadable object compiled for requested target. */
+    /** {@code lto_bool_t lto_module_is_object_file_in_memory_for_target(void const * mem, size_t length, char const * target_triple_prefix)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_is_object_file_in_memory_for_target(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") ByteBuffer target_triple_prefix) {
         if (CHECKS) {
@@ -361,7 +298,7 @@ public class LLVMLTO {
         return nlto_module_is_object_file_in_memory_for_target(memAddress(mem), mem.remaining(), memAddress(target_triple_prefix));
     }
 
-    /** Checks if a buffer is a loadable object compiled for requested target. */
+    /** {@code lto_bool_t lto_module_is_object_file_in_memory_for_target(void const * mem, size_t length, char const * target_triple_prefix)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_is_object_file_in_memory_for_target(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") CharSequence target_triple_prefix) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -376,13 +313,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_create ] ---
 
-    /** Unsafe version of: {@link #lto_module_create module_create} */
+    /** {@code lto_module_t lto_module_create(char const * path)} */
     public static long nlto_module_create(long path) {
         long __functionAddress = Functions.module_create;
         return invokePP(path, __functionAddress);
     }
 
-    /** Loads an object file from disk. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create(char const * path)} */
     @NativeType("lto_module_t")
     public static long lto_module_create(@NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
@@ -391,7 +328,7 @@ public class LLVMLTO {
         return nlto_module_create(memAddress(path));
     }
 
-    /** Loads an object file from disk. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create(char const * path)} */
     @NativeType("lto_module_t")
     public static long lto_module_create(@NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -406,13 +343,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_create_from_memory ] ---
 
-    /** Unsafe version of: {@link #lto_module_create_from_memory module_create_from_memory} */
+    /** {@code lto_module_t lto_module_create_from_memory(void const * mem, size_t length)} */
     public static long nlto_module_create_from_memory(long mem, long length) {
         long __functionAddress = Functions.module_create_from_memory;
         return invokePPP(mem, length, __functionAddress);
     }
 
-    /** Loads an object file from memory. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create_from_memory(void const * mem, size_t length)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_from_memory(@NativeType("void const *") ByteBuffer mem) {
         return nlto_module_create_from_memory(memAddress(mem), mem.remaining());
@@ -420,13 +357,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_create_from_memory_with_path ] ---
 
-    /** Unsafe version of: {@link #lto_module_create_from_memory_with_path module_create_from_memory_with_path} */
+    /** {@code lto_module_t lto_module_create_from_memory_with_path(void const * mem, size_t length, char const * path)} */
     public static long nlto_module_create_from_memory_with_path(long mem, long length, long path) {
         long __functionAddress = Functions.module_create_from_memory_with_path;
         return invokePPPP(mem, length, path, __functionAddress);
     }
 
-    /** Loads an object file from memory with an extra path argument. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create_from_memory_with_path(void const * mem, size_t length, char const * path)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_from_memory_with_path(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
@@ -435,7 +372,7 @@ public class LLVMLTO {
         return nlto_module_create_from_memory_with_path(memAddress(mem), mem.remaining(), memAddress(path));
     }
 
-    /** Loads an object file from memory with an extra path argument. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create_from_memory_with_path(void const * mem, size_t length, char const * path)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_from_memory_with_path(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -450,20 +387,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_create_in_local_context ] ---
 
-    /** Unsafe version of: {@link #lto_module_create_in_local_context module_create_in_local_context} */
+    /** {@code lto_module_t lto_module_create_in_local_context(void const * mem, size_t length, char const * path)} */
     public static long nlto_module_create_in_local_context(long mem, long length, long path) {
         long __functionAddress = Functions.module_create_in_local_context;
         return invokePPPP(mem, length, path, __functionAddress);
     }
 
-    /**
-     * Loads an object file in its own context.
-     * 
-     * <p>Loads an object file in its own LLVMContext. This function call is thread-safe. However, modules created this way should not be merged into an
-     * {@code lto_code_gen_t} using {@link #lto_codegen_add_module codegen_add_module}.</p>
-     * 
-     * <p>Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details).</p>
-     */
+    /** {@code lto_module_t lto_module_create_in_local_context(void const * mem, size_t length, char const * path)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_in_local_context(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
@@ -472,14 +402,7 @@ public class LLVMLTO {
         return nlto_module_create_in_local_context(memAddress(mem), mem.remaining(), memAddress(path));
     }
 
-    /**
-     * Loads an object file in its own context.
-     * 
-     * <p>Loads an object file in its own LLVMContext. This function call is thread-safe. However, modules created this way should not be merged into an
-     * {@code lto_code_gen_t} using {@link #lto_codegen_add_module codegen_add_module}.</p>
-     * 
-     * <p>Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details).</p>
-     */
+    /** {@code lto_module_t lto_module_create_in_local_context(void const * mem, size_t length, char const * path)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_in_local_context(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -494,7 +417,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_create_in_codegen_context ] ---
 
-    /** Unsafe version of: {@link #lto_module_create_in_codegen_context module_create_in_codegen_context} */
+    /** {@code lto_module_t lto_module_create_in_codegen_context(void const * mem, size_t length, char const * path, lto_code_gen_t cg)} */
     public static long nlto_module_create_in_codegen_context(long mem, long length, long path, long cg) {
         long __functionAddress = Functions.module_create_in_codegen_context;
         if (CHECKS) {
@@ -503,13 +426,7 @@ public class LLVMLTO {
         return invokePPPPP(mem, length, path, cg, __functionAddress);
     }
 
-    /**
-     * Loads an object file in the codegen context.
-     * 
-     * <p>Loads an object file into the same context as {@code cg}. The module is safe to add using {@link #lto_codegen_add_module codegen_add_module}.</p>
-     * 
-     * <p>Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details).</p>
-     */
+    /** {@code lto_module_t lto_module_create_in_codegen_context(void const * mem, size_t length, char const * path, lto_code_gen_t cg)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_in_codegen_context(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") ByteBuffer path, @NativeType("lto_code_gen_t") long cg) {
         if (CHECKS) {
@@ -518,13 +435,7 @@ public class LLVMLTO {
         return nlto_module_create_in_codegen_context(memAddress(mem), mem.remaining(), memAddress(path), cg);
     }
 
-    /**
-     * Loads an object file in the codegen context.
-     * 
-     * <p>Loads an object file into the same context as {@code cg}. The module is safe to add using {@link #lto_codegen_add_module codegen_add_module}.</p>
-     * 
-     * <p>Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details).</p>
-     */
+    /** {@code lto_module_t lto_module_create_in_codegen_context(void const * mem, size_t length, char const * path, lto_code_gen_t cg)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_in_codegen_context(@NativeType("void const *") ByteBuffer mem, @NativeType("char const *") CharSequence path, @NativeType("lto_code_gen_t") long cg) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -539,13 +450,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_create_from_fd ] ---
 
-    /** Unsafe version of: {@link #lto_module_create_from_fd module_create_from_fd} */
+    /** {@code lto_module_t lto_module_create_from_fd(int fd, char const * path, size_t file_size)} */
     public static long nlto_module_create_from_fd(int fd, long path, long file_size) {
         long __functionAddress = Functions.module_create_from_fd;
         return invokePPP(fd, path, file_size, __functionAddress);
     }
 
-    /** Loads an object file from disk. The seek point of {@code fd} is not preserved. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create_from_fd(int fd, char const * path, size_t file_size)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_from_fd(int fd, @NativeType("char const *") ByteBuffer path, @NativeType("size_t") long file_size) {
         if (CHECKS) {
@@ -554,7 +465,7 @@ public class LLVMLTO {
         return nlto_module_create_from_fd(fd, memAddress(path), file_size);
     }
 
-    /** Loads an object file from disk. The seek point of {@code fd} is not preserved. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create_from_fd(int fd, char const * path, size_t file_size)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_from_fd(int fd, @NativeType("char const *") CharSequence path, @NativeType("size_t") long file_size) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -569,13 +480,13 @@ public class LLVMLTO {
 
     // --- [ lto_module_create_from_fd_at_offset ] ---
 
-    /** Unsafe version of: {@link #lto_module_create_from_fd_at_offset module_create_from_fd_at_offset} */
+    /** {@code lto_module_t lto_module_create_from_fd_at_offset(int fd, char const * path, size_t file_size, size_t map_size, off_t offset)} */
     public static long nlto_module_create_from_fd_at_offset(int fd, long path, long file_size, long map_size, long offset) {
         long __functionAddress = Functions.module_create_from_fd_at_offset;
         return invokePPPJP(fd, path, file_size, map_size, offset, __functionAddress);
     }
 
-    /** Loads an object file from disk. The seek point of {@code fd} is not preserved. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create_from_fd_at_offset(int fd, char const * path, size_t file_size, size_t map_size, off_t offset)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_from_fd_at_offset(int fd, @NativeType("char const *") ByteBuffer path, @NativeType("size_t") long file_size, @NativeType("size_t") long map_size, @NativeType("off_t") long offset) {
         if (CHECKS) {
@@ -584,7 +495,7 @@ public class LLVMLTO {
         return nlto_module_create_from_fd_at_offset(fd, memAddress(path), file_size, map_size, offset);
     }
 
-    /** Loads an object file from disk. The seek point of {@code fd} is not preserved. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_module_t lto_module_create_from_fd_at_offset(int fd, char const * path, size_t file_size, size_t map_size, off_t offset)} */
     @NativeType("lto_module_t")
     public static long lto_module_create_from_fd_at_offset(int fd, @NativeType("char const *") CharSequence path, @NativeType("size_t") long file_size, @NativeType("size_t") long map_size, @NativeType("off_t") long offset) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -599,7 +510,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_dispose ] ---
 
-    /** Frees all memory internally allocated by the module. Upon return the {@code lto_module_t} is no longer valid. */
+    /** {@code void lto_module_dispose(lto_module_t mod)} */
     public static void lto_module_dispose(@NativeType("lto_module_t") long mod) {
         long __functionAddress = Functions.module_dispose;
         if (CHECKS) {
@@ -610,7 +521,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_get_target_triple ] ---
 
-    /** Unsafe version of: {@link #lto_module_get_target_triple module_get_target_triple} */
+    /** {@code char const * lto_module_get_target_triple(lto_module_t mod)} */
     public static long nlto_module_get_target_triple(long mod) {
         long __functionAddress = Functions.module_get_target_triple;
         if (CHECKS) {
@@ -619,7 +530,7 @@ public class LLVMLTO {
         return invokePP(mod, __functionAddress);
     }
 
-    /** Returns triple string which the object module was compiled under. */
+    /** {@code char const * lto_module_get_target_triple(lto_module_t mod)} */
     @NativeType("char const *")
     public static @Nullable String lto_module_get_target_triple(@NativeType("lto_module_t") long mod) {
         long __result = nlto_module_get_target_triple(mod);
@@ -628,7 +539,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_set_target_triple ] ---
 
-    /** Unsafe version of: {@link #lto_module_set_target_triple module_set_target_triple} */
+    /** {@code void lto_module_set_target_triple(lto_module_t mod, char const * triple)} */
     public static void nlto_module_set_target_triple(long mod, long triple) {
         long __functionAddress = Functions.module_set_target_triple;
         if (CHECKS) {
@@ -637,7 +548,7 @@ public class LLVMLTO {
         invokePPV(mod, triple, __functionAddress);
     }
 
-    /** Sets triple string with which the object will be codegened. */
+    /** {@code void lto_module_set_target_triple(lto_module_t mod, char const * triple)} */
     public static void lto_module_set_target_triple(@NativeType("lto_module_t") long mod, @NativeType("char const *") ByteBuffer triple) {
         if (CHECKS) {
             checkNT1(triple);
@@ -645,7 +556,7 @@ public class LLVMLTO {
         nlto_module_set_target_triple(mod, memAddress(triple));
     }
 
-    /** Sets triple string with which the object will be codegened. */
+    /** {@code void lto_module_set_target_triple(lto_module_t mod, char const * triple)} */
     public static void lto_module_set_target_triple(@NativeType("lto_module_t") long mod, @NativeType("char const *") CharSequence triple) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -659,7 +570,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_get_num_symbols ] ---
 
-    /** Returns the number of symbols in the object module. */
+    /** {@code unsigned int lto_module_get_num_symbols(lto_module_t mod)} */
     @NativeType("unsigned int")
     public static int lto_module_get_num_symbols(@NativeType("lto_module_t") long mod) {
         long __functionAddress = Functions.module_get_num_symbols;
@@ -671,7 +582,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_get_symbol_name ] ---
 
-    /** Unsafe version of: {@link #lto_module_get_symbol_name module_get_symbol_name} */
+    /** {@code char const * lto_module_get_symbol_name(lto_module_t mod, unsigned int index)} */
     public static long nlto_module_get_symbol_name(long mod, int index) {
         long __functionAddress = Functions.module_get_symbol_name;
         if (CHECKS) {
@@ -680,7 +591,7 @@ public class LLVMLTO {
         return invokePP(mod, index, __functionAddress);
     }
 
-    /** Returns the name of the ith symbol in the object module. */
+    /** {@code char const * lto_module_get_symbol_name(lto_module_t mod, unsigned int index)} */
     @NativeType("char const *")
     public static @Nullable String lto_module_get_symbol_name(@NativeType("lto_module_t") long mod, @NativeType("unsigned int") int index) {
         long __result = nlto_module_get_symbol_name(mod, index);
@@ -689,7 +600,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_get_symbol_attribute ] ---
 
-    /** Returns the attributes of the ith symbol in the object module. */
+    /** {@code lto_symbol_attributes lto_module_get_symbol_attribute(lto_module_t mod, unsigned int index)} */
     @NativeType("lto_symbol_attributes")
     public static int lto_module_get_symbol_attribute(@NativeType("lto_module_t") long mod, @NativeType("unsigned int") int index) {
         long __functionAddress = Functions.module_get_symbol_attribute;
@@ -701,7 +612,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_get_linkeropts ] ---
 
-    /** Unsafe version of: {@link #lto_module_get_linkeropts module_get_linkeropts} */
+    /** {@code char const * lto_module_get_linkeropts(lto_module_t mod)} */
     public static long nlto_module_get_linkeropts(long mod) {
         long __functionAddress = Functions.module_get_linkeropts;
         if (CHECKS) {
@@ -710,11 +621,7 @@ public class LLVMLTO {
         return invokePP(mod, __functionAddress);
     }
 
-    /**
-     * Returns the module's linker options.
-     * 
-     * <p>The linker options may consist of multiple flags. It is the linker's responsibility to split the flags using a platform-specific mechanism.</p>
-     */
+    /** {@code char const * lto_module_get_linkeropts(lto_module_t mod)} */
     @NativeType("char const *")
     public static @Nullable String lto_module_get_linkeropts(@NativeType("lto_module_t") long mod) {
         long __result = nlto_module_get_linkeropts(mod);
@@ -723,7 +630,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_get_macho_cputype ] ---
 
-    /** Unsafe version of: {@link #lto_module_get_macho_cputype module_get_macho_cputype} */
+    /** {@code lto_bool_t lto_module_get_macho_cputype(lto_module_t mod, unsigned int * out_cputype, unsigned int * out_cpusubtype)} */
     public static boolean nlto_module_get_macho_cputype(long mod, long out_cputype, long out_cpusubtype) {
         long __functionAddress = Functions.module_get_macho_cputype;
         if (CHECKS) {
@@ -733,17 +640,7 @@ public class LLVMLTO {
         return invokePPPZ(mod, out_cputype, out_cpusubtype, __functionAddress);
     }
 
-    /**
-     * If targeting mach-o on darwin, this function gets the CPU type and subtype that will end up being encoded in the mach-o header. These are the values
-     * that can be found in {@code mach/machine.h}.
-     *
-     * @param out_cputype    must be non-{@code NULL}
-     * @param out_cpusubtype must be non-{@code NULL}
-     *
-     * @return true on error (check {@link #lto_get_error_message get_error_message} for details).
-     *
-     * @since 11, {@code LTO_API_VERSION=27}
-     */
+    /** {@code lto_bool_t lto_module_get_macho_cputype(lto_module_t mod, unsigned int * out_cputype, unsigned int * out_cpusubtype)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_get_macho_cputype(@NativeType("lto_module_t") long mod, @NativeType("unsigned int *") IntBuffer out_cputype, @NativeType("unsigned int *") IntBuffer out_cpusubtype) {
         if (CHECKS) {
@@ -755,13 +652,7 @@ public class LLVMLTO {
 
     // --- [ lto_module_has_ctor_dtor ] ---
 
-    /**
-     * This function can be used by the linker to check if a given module has any constructor or destructor functions.
-     *
-     * @return true if the module has either the {@code @llvm.global_ctors} or the {@code @llvm.global_dtors} symbol. Otherwise returns false.
-     *
-     * @since {@code LTO_API_VERSION=29}
-     */
+    /** {@code lto_bool_t lto_module_has_ctor_dtor(lto_module_t mod)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_has_ctor_dtor(@NativeType("lto_module_t") long mod) {
         long __functionAddress = Functions.module_has_ctor_dtor;
@@ -774,7 +665,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_diagnostic_handler ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_set_diagnostic_handler codegen_set_diagnostic_handler} */
+    /** {@code void lto_codegen_set_diagnostic_handler(lto_code_gen_t cg, void (*) (lto_codegen_diagnostic_severity_t, char const *, void *) handler, void * ctxt)} */
     public static void nlto_codegen_set_diagnostic_handler(long cg, long handler, long ctxt) {
         long __functionAddress = Functions.codegen_set_diagnostic_handler;
         if (CHECKS) {
@@ -784,21 +675,14 @@ public class LLVMLTO {
         invokePPPV(cg, handler, ctxt, __functionAddress);
     }
 
-    /**
-     * Set a diagnostic handler and the related context ({@code void *}). This is more general than {@link #lto_get_error_message get_error_message}, as the diagnostic handler can be
-     * called at anytime within lto.
-     */
+    /** {@code void lto_codegen_set_diagnostic_handler(lto_code_gen_t cg, void (*) (lto_codegen_diagnostic_severity_t, char const *, void *) handler, void * ctxt)} */
     public static void lto_codegen_set_diagnostic_handler(@NativeType("lto_code_gen_t") long cg, @NativeType("void (*) (lto_codegen_diagnostic_severity_t, char const *, void *)") LTODiagnosticHandlerI handler, @NativeType("void *") long ctxt) {
         nlto_codegen_set_diagnostic_handler(cg, handler.address(), ctxt);
     }
 
     // --- [ lto_codegen_create ] ---
 
-    /**
-     * Instantiates a code generator. Returns {@code NULL} on error (check {@link #lto_get_error_message get_error_message} for details).
-     * 
-     * <p>All modules added using {@link #lto_codegen_add_module codegen_add_module} must have been created in the same context as the codegen.</p>
-     */
+    /** {@code lto_code_gen_t lto_codegen_create(void)} */
     @NativeType("lto_code_gen_t")
     public static long lto_codegen_create() {
         long __functionAddress = Functions.codegen_create;
@@ -807,12 +691,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_create_in_local_context ] ---
 
-    /**
-     * Instantiate a code generator in its own context.
-     * 
-     * <p>Instantiates a code generator in its own context. Modules added via {@link #lto_codegen_add_module codegen_add_module} must have all been created in the same context, using
-     * {@link #lto_module_create_in_codegen_context module_create_in_codegen_context}.</p>
-     */
+    /** {@code lto_code_gen_t lto_codegen_create_in_local_context(void)} */
     @NativeType("lto_code_gen_t")
     public static long lto_codegen_create_in_local_context() {
         long __functionAddress = Functions.codegen_create_in_local_context;
@@ -821,7 +700,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_dispose ] ---
 
-    /** Frees all code generator and all memory it internally allocated. Upon return the {@code lto_code_gen_t} is no longer valid. */
+    /** {@code void lto_codegen_dispose(lto_code_gen_t cg)} */
     public static void lto_codegen_dispose(@NativeType("lto_code_gen_t") long cg) {
         long __functionAddress = Functions.codegen_dispose;
         if (CHECKS) {
@@ -832,11 +711,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_add_module ] ---
 
-    /**
-     * Add an object module to the set of modules for which code will be generated. Returns true on error (check {@link #lto_get_error_message get_error_message} for details).
-     * 
-     * <p>{@code cg} and {@code mod} must both be in the same context. See {@link #lto_codegen_create_in_local_context codegen_create_in_local_context} and {@link #lto_module_create_in_codegen_context module_create_in_codegen_context}.</p>
-     */
+    /** {@code lto_bool_t lto_codegen_add_module(lto_code_gen_t cg, lto_module_t mod)} */
     @NativeType("lto_bool_t")
     public static boolean lto_codegen_add_module(@NativeType("lto_code_gen_t") long cg, @NativeType("lto_module_t") long mod) {
         long __functionAddress = Functions.codegen_add_module;
@@ -849,11 +724,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_module ] ---
 
-    /**
-     * Sets the object module for code generation. This will transfer the ownership of the module to the code generator.
-     * 
-     * <p>{@code cg} and {@code mod} must both be in the same context.</p>
-     */
+    /** {@code void lto_codegen_set_module(lto_code_gen_t cg, lto_module_t mod)} */
     public static void lto_codegen_set_module(@NativeType("lto_code_gen_t") long cg, @NativeType("lto_module_t") long mod) {
         long __functionAddress = Functions.codegen_set_module;
         if (CHECKS) {
@@ -865,7 +736,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_debug_model ] ---
 
-    /** Sets if debug info should be generated. Returns true on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_bool_t lto_codegen_set_debug_model(lto_code_gen_t cg, lto_debug_model model)} */
     @NativeType("lto_bool_t")
     public static boolean lto_codegen_set_debug_model(@NativeType("lto_code_gen_t") long cg, @NativeType("lto_debug_model") int model) {
         long __functionAddress = Functions.codegen_set_debug_model;
@@ -877,7 +748,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_pic_model ] ---
 
-    /** Sets which PIC code model to generated. Returns true on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_bool_t lto_codegen_set_pic_model(lto_code_gen_t cg, lto_codegen_model model)} */
     @NativeType("lto_bool_t")
     public static boolean lto_codegen_set_pic_model(@NativeType("lto_code_gen_t") long cg, @NativeType("lto_codegen_model") int model) {
         long __functionAddress = Functions.codegen_set_pic_model;
@@ -889,7 +760,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_cpu ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_set_cpu codegen_set_cpu} */
+    /** {@code void lto_codegen_set_cpu(lto_code_gen_t cg, char const * cpu)} */
     public static void nlto_codegen_set_cpu(long cg, long cpu) {
         long __functionAddress = Functions.codegen_set_cpu;
         if (CHECKS) {
@@ -898,7 +769,7 @@ public class LLVMLTO {
         invokePPV(cg, cpu, __functionAddress);
     }
 
-    /** Sets the cpu to generate code for. */
+    /** {@code void lto_codegen_set_cpu(lto_code_gen_t cg, char const * cpu)} */
     public static void lto_codegen_set_cpu(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer cpu) {
         if (CHECKS) {
             checkNT1(cpu);
@@ -906,7 +777,7 @@ public class LLVMLTO {
         nlto_codegen_set_cpu(cg, memAddress(cpu));
     }
 
-    /** Sets the cpu to generate code for. */
+    /** {@code void lto_codegen_set_cpu(lto_code_gen_t cg, char const * cpu)} */
     public static void lto_codegen_set_cpu(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence cpu) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -920,7 +791,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_assembler_path ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_set_assembler_path codegen_set_assembler_path} */
+    /** {@code void lto_codegen_set_assembler_path(lto_code_gen_t cg, char const * path)} */
     public static void nlto_codegen_set_assembler_path(long cg, long path) {
         long __functionAddress = Functions.codegen_set_assembler_path;
         if (CHECKS) {
@@ -929,7 +800,7 @@ public class LLVMLTO {
         invokePPV(cg, path, __functionAddress);
     }
 
-    /** Sets the location of the assembler tool to run. If not set, libLTO will use gcc to invoke the assembler. */
+    /** {@code void lto_codegen_set_assembler_path(lto_code_gen_t cg, char const * path)} */
     public static void lto_codegen_set_assembler_path(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
             checkNT1(path);
@@ -937,7 +808,7 @@ public class LLVMLTO {
         nlto_codegen_set_assembler_path(cg, memAddress(path));
     }
 
-    /** Sets the location of the assembler tool to run. If not set, libLTO will use gcc to invoke the assembler. */
+    /** {@code void lto_codegen_set_assembler_path(lto_code_gen_t cg, char const * path)} */
     public static void lto_codegen_set_assembler_path(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -951,7 +822,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_assembler_args ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_set_assembler_args codegen_set_assembler_args} */
+    /** {@code void lto_codegen_set_assembler_args(lto_code_gen_t cg, char const ** args, int nargs)} */
     public static void nlto_codegen_set_assembler_args(long cg, long args, int nargs) {
         long __functionAddress = Functions.codegen_set_assembler_args;
         if (CHECKS) {
@@ -960,14 +831,14 @@ public class LLVMLTO {
         invokePPV(cg, args, nargs, __functionAddress);
     }
 
-    /** Sets extra arguments that libLTO should pass to the assembler. */
+    /** {@code void lto_codegen_set_assembler_args(lto_code_gen_t cg, char const ** args, int nargs)} */
     public static void lto_codegen_set_assembler_args(@NativeType("lto_code_gen_t") long cg, @NativeType("char const **") PointerBuffer args) {
         nlto_codegen_set_assembler_args(cg, memAddress(args), args.remaining());
     }
 
     // --- [ lto_codegen_add_must_preserve_symbol ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_add_must_preserve_symbol codegen_add_must_preserve_symbol} */
+    /** {@code void lto_codegen_add_must_preserve_symbol(lto_code_gen_t cg, char const * symbol)} */
     public static void nlto_codegen_add_must_preserve_symbol(long cg, long symbol) {
         long __functionAddress = Functions.codegen_add_must_preserve_symbol;
         if (CHECKS) {
@@ -976,10 +847,7 @@ public class LLVMLTO {
         invokePPV(cg, symbol, __functionAddress);
     }
 
-    /**
-     * Adds to a list of all global symbols that must exist in the final generated code. If a function is not listed there, it might be inlined into every
-     * usage and optimized away.
-     */
+    /** {@code void lto_codegen_add_must_preserve_symbol(lto_code_gen_t cg, char const * symbol)} */
     public static void lto_codegen_add_must_preserve_symbol(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer symbol) {
         if (CHECKS) {
             checkNT1(symbol);
@@ -987,10 +855,7 @@ public class LLVMLTO {
         nlto_codegen_add_must_preserve_symbol(cg, memAddress(symbol));
     }
 
-    /**
-     * Adds to a list of all global symbols that must exist in the final generated code. If a function is not listed there, it might be inlined into every
-     * usage and optimized away.
-     */
+    /** {@code void lto_codegen_add_must_preserve_symbol(lto_code_gen_t cg, char const * symbol)} */
     public static void lto_codegen_add_must_preserve_symbol(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence symbol) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1004,7 +869,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_write_merged_modules ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_write_merged_modules codegen_write_merged_modules} */
+    /** {@code lto_bool_t lto_codegen_write_merged_modules(lto_code_gen_t cg, char const * path)} */
     public static boolean nlto_codegen_write_merged_modules(long cg, long path) {
         long __functionAddress = Functions.codegen_write_merged_modules;
         if (CHECKS) {
@@ -1013,10 +878,7 @@ public class LLVMLTO {
         return invokePPZ(cg, path, __functionAddress);
     }
 
-    /**
-     * Writes a new object file at the specified path that contains the merged contents of all modules added so far. Returns true on error (check
-     * {@link #lto_get_error_message get_error_message} for details).
-     */
+    /** {@code lto_bool_t lto_codegen_write_merged_modules(lto_code_gen_t cg, char const * path)} */
     @NativeType("lto_bool_t")
     public static boolean lto_codegen_write_merged_modules(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
@@ -1025,10 +887,7 @@ public class LLVMLTO {
         return nlto_codegen_write_merged_modules(cg, memAddress(path));
     }
 
-    /**
-     * Writes a new object file at the specified path that contains the merged contents of all modules added so far. Returns true on error (check
-     * {@link #lto_get_error_message get_error_message} for details).
-     */
+    /** {@code lto_bool_t lto_codegen_write_merged_modules(lto_code_gen_t cg, char const * path)} */
     @NativeType("lto_bool_t")
     public static boolean lto_codegen_write_merged_modules(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1043,7 +902,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_compile ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_compile codegen_compile} */
+    /** {@code void const * lto_codegen_compile(lto_code_gen_t cg, size_t * length)} */
     public static long nlto_codegen_compile(long cg, long length) {
         long __functionAddress = Functions.codegen_compile;
         if (CHECKS) {
@@ -1052,13 +911,7 @@ public class LLVMLTO {
         return invokePPP(cg, length, __functionAddress);
     }
 
-    /**
-     * Generates code for all added modules into one native object file. This calls {@link #lto_codegen_optimize codegen_optimize} then {@link #lto_codegen_compile_optimized codegen_compile_optimized}.
-     * 
-     * <p>On success returns a pointer to a generated mach-o/ELF buffer and length set to the buffer size. The buffer is owned by the {@code lto_code_gen_t} and
-     * will be freed when {@link #lto_codegen_dispose codegen_dispose} is called, or {@code lto_codegen_compile()} is called again. On failure, returns {@code NULL} (check
-     * {@link #lto_get_error_message get_error_message} for details).</p>
-     */
+    /** {@code void const * lto_codegen_compile(lto_code_gen_t cg, size_t * length)} */
     @NativeType("void const *")
     public static @Nullable ByteBuffer lto_codegen_compile(@NativeType("lto_code_gen_t") long cg) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1073,7 +926,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_compile_to_file ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_compile_to_file codegen_compile_to_file} */
+    /** {@code lto_bool_t lto_codegen_compile_to_file(lto_code_gen_t cg, char const ** name)} */
     public static boolean nlto_codegen_compile_to_file(long cg, long name) {
         long __functionAddress = Functions.codegen_compile_to_file;
         if (CHECKS) {
@@ -1082,12 +935,7 @@ public class LLVMLTO {
         return invokePPZ(cg, name, __functionAddress);
     }
 
-    /**
-     * Generates code for all added modules into one native object file. This calls {@link #lto_codegen_optimize codegen_optimize} then {@link #lto_codegen_compile_optimized codegen_compile_optimized} (instead of
-     * returning a generated mach-o/ELF buffer, it writes to a file).
-     * 
-     * <p>The name of the file is written to name. Returns true on error.</p>
-     */
+    /** {@code lto_bool_t lto_codegen_compile_to_file(lto_code_gen_t cg, char const ** name)} */
     @NativeType("lto_bool_t")
     public static boolean lto_codegen_compile_to_file(@NativeType("lto_code_gen_t") long cg, @NativeType("char const **") PointerBuffer name) {
         if (CHECKS) {
@@ -1098,7 +946,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_optimize ] ---
 
-    /** Runs optimization for the merged module. Returns true on error. */
+    /** {@code lto_bool_t lto_codegen_optimize(lto_code_gen_t cg)} */
     @NativeType("lto_bool_t")
     public static boolean lto_codegen_optimize(@NativeType("lto_code_gen_t") long cg) {
         long __functionAddress = Functions.codegen_optimize;
@@ -1110,7 +958,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_compile_optimized ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_compile_optimized codegen_compile_optimized} */
+    /** {@code void const * lto_codegen_compile_optimized(lto_code_gen_t cg, size_t * length)} */
     public static long nlto_codegen_compile_optimized(long cg, long length) {
         long __functionAddress = Functions.codegen_compile_optimized;
         if (CHECKS) {
@@ -1119,13 +967,7 @@ public class LLVMLTO {
         return invokePPP(cg, length, __functionAddress);
     }
 
-    /**
-     * Generates code for the optimized merged module into one native object file. It will not run any IR optimizations on the merged module.
-     * 
-     * <p>On success returns a pointer to a generated mach-o/ELF buffer and length set to the buffer size. The buffer is owned by the {@code lto_code_gen_t} and
-     * will be freed when {@link #lto_codegen_dispose codegen_dispose} is called, or {@code lto_codegen_compile_optimized()} is called again. On failure, returns {@code NULL} (check
-     * {@link #lto_get_error_message get_error_message} for details).</p>
-     */
+    /** {@code void const * lto_codegen_compile_optimized(lto_code_gen_t cg, size_t * length)} */
     @NativeType("void const *")
     public static @Nullable ByteBuffer lto_codegen_compile_optimized(@NativeType("lto_code_gen_t") long cg) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1140,7 +982,7 @@ public class LLVMLTO {
 
     // --- [ lto_api_version ] ---
 
-    /** Returns the runtime API version. */
+    /** {@code unsigned int lto_api_version(void)} */
     @NativeType("unsigned int")
     public static int lto_api_version() {
         long __functionAddress = Functions.api_version;
@@ -1149,7 +991,7 @@ public class LLVMLTO {
 
     // --- [ lto_set_debug_options ] ---
 
-    /** Unsafe version of: {@link #lto_set_debug_options set_debug_options} */
+    /** {@code void lto_set_debug_options(char const * const * options, int number)} */
     public static void nlto_set_debug_options(long options, int number) {
         long __functionAddress = Functions.set_debug_options;
         if (CHECKS) {
@@ -1158,21 +1000,14 @@ public class LLVMLTO {
         invokePV(options, number, __functionAddress);
     }
 
-    /**
-     * Parses options immediately, making them available as early as possible.
-     * 
-     * <p>For example during executing {@code codegen::InitTargetOptionsFromCodeGenFlags}. Since parsing shud only happen once, only one of
-     * {@link #lto_codegen_debug_options codegen_debug_options} or {@code lto_set_debug_options} should be called.</p>
-     *
-     * @since 13, {@code LTO_API_VERSION=28}
-     */
+    /** {@code void lto_set_debug_options(char const * const * options, int number)} */
     public static void lto_set_debug_options(@NativeType("char const * const *") PointerBuffer options) {
         nlto_set_debug_options(memAddress(options), options.remaining());
     }
 
     // --- [ lto_codegen_debug_options ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_debug_options codegen_debug_options} */
+    /** {@code void lto_codegen_debug_options(lto_code_gen_t cg, char const * options)} */
     public static void nlto_codegen_debug_options(long cg, long options) {
         long __functionAddress = Functions.codegen_debug_options;
         if (CHECKS) {
@@ -1181,14 +1016,7 @@ public class LLVMLTO {
         invokePPV(cg, options, __functionAddress);
     }
 
-    /**
-     * Sets options to help debug codegen bugs.
-     * 
-     * <p>Since parsing should only happen once, only one of {@code lto_codegen_debug_options} or {@link #lto_set_debug_options set_debug_options} should be called.</p>
-     * 
-     * <p>This function takes one or more options separated by spaces. Warning: passing file paths through this function may confuse the argument parser if the
-     * paths contain spaces.</p>
-     */
+    /** {@code void lto_codegen_debug_options(lto_code_gen_t cg, char const * options)} */
     public static void lto_codegen_debug_options(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer options) {
         if (CHECKS) {
             checkNT1(options);
@@ -1196,14 +1024,7 @@ public class LLVMLTO {
         nlto_codegen_debug_options(cg, memAddress(options));
     }
 
-    /**
-     * Sets options to help debug codegen bugs.
-     * 
-     * <p>Since parsing should only happen once, only one of {@code lto_codegen_debug_options} or {@link #lto_set_debug_options set_debug_options} should be called.</p>
-     * 
-     * <p>This function takes one or more options separated by spaces. Warning: passing file paths through this function may confuse the argument parser if the
-     * paths contain spaces.</p>
-     */
+    /** {@code void lto_codegen_debug_options(lto_code_gen_t cg, char const * options)} */
     public static void lto_codegen_debug_options(@NativeType("lto_code_gen_t") long cg, @NativeType("char const *") CharSequence options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1217,7 +1038,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_debug_options_array ] ---
 
-    /** Unsafe version of: {@link #lto_codegen_debug_options_array codegen_debug_options_array} */
+    /** {@code void lto_codegen_debug_options_array(lto_code_gen_t cg, char const * const * options, int number)} */
     public static void nlto_codegen_debug_options_array(long cg, long options, int number) {
         long __functionAddress = Functions.codegen_debug_options_array;
         if (CHECKS) {
@@ -1227,18 +1048,14 @@ public class LLVMLTO {
         invokePPV(cg, options, number, __functionAddress);
     }
 
-    /**
-     * Same as {@link #lto_codegen_debug_options codegen_debug_options}, but takes every option separately through an array.
-     *
-     * @since 10, prior to {@code LTO_API_VERSION=26}
-     */
+    /** {@code void lto_codegen_debug_options_array(lto_code_gen_t cg, char const * const * options, int number)} */
     public static void lto_codegen_debug_options_array(@NativeType("lto_code_gen_t") long cg, @NativeType("char const * const *") PointerBuffer options) {
         nlto_codegen_debug_options_array(cg, memAddress(options), options.remaining());
     }
 
     // --- [ lto_initialize_disassembler ] ---
 
-    /** Initializes LLVM disassemblers. */
+    /** {@code void lto_initialize_disassembler(void)} */
     public static void lto_initialize_disassembler() {
         long __functionAddress = Functions.initialize_disassembler;
         invokeV(__functionAddress);
@@ -1246,7 +1063,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_should_internalize ] ---
 
-    /** Sets if we should run internalize pass during optimization and code generation. */
+    /** {@code void lto_codegen_set_should_internalize(lto_code_gen_t cg, lto_bool_t ShouldInternalize)} */
     public static void lto_codegen_set_should_internalize(@NativeType("lto_code_gen_t") long cg, @NativeType("lto_bool_t") boolean ShouldInternalize) {
         long __functionAddress = Functions.codegen_set_should_internalize;
         if (CHECKS) {
@@ -1257,11 +1074,7 @@ public class LLVMLTO {
 
     // --- [ lto_codegen_set_should_embed_uselists ] ---
 
-    /**
-     * Set whether to embed uselists in bitcode.
-     * 
-     * <p>Sets whether {@link #lto_codegen_write_merged_modules codegen_write_merged_modules} should embed uselists in output bitcode. This should be turned on for all {@code -save-temps} output.</p>
-     */
+    /** {@code void lto_codegen_set_should_embed_uselists(lto_code_gen_t cg, lto_bool_t ShouldEmbedUselists)} */
     public static void lto_codegen_set_should_embed_uselists(@NativeType("lto_code_gen_t") long cg, @NativeType("lto_bool_t") boolean ShouldEmbedUselists) {
         long __functionAddress = Functions.codegen_set_should_embed_uselists;
         if (CHECKS) {
@@ -1272,7 +1085,7 @@ public class LLVMLTO {
 
     // --- [ lto_input_create ] ---
 
-    /** Unsafe version of: {@link #lto_input_create input_create} */
+    /** {@code lto_input_t lto_input_create(void const * buffer, size_t buffer_size, char const * path)} */
     public static long nlto_input_create(long buffer, long buffer_size, long path) {
         long __functionAddress = Functions.input_create;
         if (CHECKS) {
@@ -1281,13 +1094,7 @@ public class LLVMLTO {
         return invokePPPP(buffer, buffer_size, path, __functionAddress);
     }
 
-    /**
-     * Creates an LTO input file from a buffer.
-     * 
-     * <p>The path argument is used for diagnotics as this function otherwise does not know which file the given buffer is associated with.</p>
-     *
-     * @since 10, {@code LTO_API_VERSION=24}
-     */
+    /** {@code lto_input_t lto_input_create(void const * buffer, size_t buffer_size, char const * path)} */
     @NativeType("lto_input_t")
     public static long lto_input_create(@NativeType("void const *") ByteBuffer buffer, @NativeType("char const *") ByteBuffer path) {
         if (CHECKS) {
@@ -1296,13 +1103,7 @@ public class LLVMLTO {
         return nlto_input_create(memAddress(buffer), buffer.remaining(), memAddress(path));
     }
 
-    /**
-     * Creates an LTO input file from a buffer.
-     * 
-     * <p>The path argument is used for diagnotics as this function otherwise does not know which file the given buffer is associated with.</p>
-     *
-     * @since 10, {@code LTO_API_VERSION=24}
-     */
+    /** {@code lto_input_t lto_input_create(void const * buffer, size_t buffer_size, char const * path)} */
     @NativeType("lto_input_t")
     public static long lto_input_create(@NativeType("void const *") ByteBuffer buffer, @NativeType("char const *") CharSequence path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1317,11 +1118,7 @@ public class LLVMLTO {
 
     // --- [ lto_input_dispose ] ---
 
-    /**
-     * Frees all memory internally allocated by the LTO input file. Upon return the {@code lto_module_t} is no longer valid.
-     *
-     * @since 10, {@code LTO_API_VERSION=24}
-     */
+    /** {@code void lto_input_dispose(lto_input_t input)} */
     public static void lto_input_dispose(@NativeType("lto_input_t") long input) {
         long __functionAddress = Functions.input_dispose;
         if (CHECKS) {
@@ -1333,11 +1130,7 @@ public class LLVMLTO {
 
     // --- [ lto_input_get_num_dependent_libraries ] ---
 
-    /**
-     * Returns the number of dependent library specifiers for the given LTO input file.
-     *
-     * @since 10, {@code LTO_API_VERSION=24}
-     */
+    /** {@code unsigned lto_input_get_num_dependent_libraries(lto_input_t input)} */
     @NativeType("unsigned")
     public static int lto_input_get_num_dependent_libraries(@NativeType("lto_input_t") long input) {
         long __functionAddress = Functions.input_get_num_dependent_libraries;
@@ -1350,7 +1143,7 @@ public class LLVMLTO {
 
     // --- [ lto_input_get_dependent_library ] ---
 
-    /** Unsafe version of: {@link #lto_input_get_dependent_library input_get_dependent_library} */
+    /** {@code char const * lto_input_get_dependent_library(lto_input_t input, size_t index, size_t * size)} */
     public static long nlto_input_get_dependent_library(long input, long index, long size) {
         long __functionAddress = Functions.input_get_dependent_library;
         if (CHECKS) {
@@ -1360,11 +1153,7 @@ public class LLVMLTO {
         return invokePPPP(input, index, size, __functionAddress);
     }
 
-    /**
-     * Returns the {@code ith} dependent library specifier for the given LTO input file. The returned string is not null-terminated.
-     *
-     * @since 10, {@code LTO_API_VERSION=24}
-     */
+    /** {@code char const * lto_input_get_dependent_library(lto_input_t input, size_t index, size_t * size)} */
     @NativeType("char const *")
     public static @Nullable String lto_input_get_dependent_library(@NativeType("lto_input_t") long input, @NativeType("size_t") long index) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1379,7 +1168,7 @@ public class LLVMLTO {
 
     // --- [ lto_runtime_lib_symbols_list ] ---
 
-    /** Unsafe version of: {@link #lto_runtime_lib_symbols_list runtime_lib_symbols_list} */
+    /** {@code char const * const * lto_runtime_lib_symbols_list(size_t * size)} */
     public static long nlto_runtime_lib_symbols_list(long size) {
         long __functionAddress = Functions.runtime_lib_symbols_list;
         if (CHECKS) {
@@ -1388,11 +1177,7 @@ public class LLVMLTO {
         return invokePP(size, __functionAddress);
     }
 
-    /**
-     * Returns the list of {@code libcall} symbols that can be generated by LTO that might not be visible from the symbol table of bitcode files.
-     *
-     * @since 10, {@code LTO_API_VERSION=25}
-     */
+    /** {@code char const * const * lto_runtime_lib_symbols_list(size_t * size)} */
     @NativeType("char const * const *")
     public static @Nullable PointerBuffer lto_runtime_lib_symbols_list() {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1407,12 +1192,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_create_codegen ] ---
 
-    /**
-     * Instantiates a ThinLTO code generator. Returns {@code NULL} on error (check lto_get_error_message() for details).
-     * 
-     * <p>The {@code ThinLTOCodeGenerator} is not intended to be reuse for multiple compilation: the model is that the client adds modules to the generator and
-     * ask to perform the ThinLTO optimizations / codegen, and finally destroys the codegenerator.</p>
-     */
+    /** {@code thinlto_code_gen_t thinlto_create_codegen(void)} */
     @NativeType("thinlto_code_gen_t")
     public static long thinlto_create_codegen() {
         long __functionAddress = Functions.thinlto_create_codegen;
@@ -1421,7 +1201,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_dispose ] ---
 
-    /** Frees the generator and all memory it internally allocated. Upon return the {@code thinlto_code_gen_t} is no longer valid. */
+    /** {@code void thinlto_codegen_dispose(thinlto_code_gen_t cg)} */
     public static void thinlto_codegen_dispose(@NativeType("thinlto_code_gen_t") long cg) {
         long __functionAddress = Functions.thinlto_codegen_dispose;
         if (CHECKS) {
@@ -1432,7 +1212,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_add_module ] ---
 
-    /** Unsafe version of: {@link #thinlto_codegen_add_module} */
+    /** {@code void thinlto_codegen_add_module(thinlto_code_gen_t cg, char const * identifier, char const * data, int length)} */
     public static void nthinlto_codegen_add_module(long cg, long identifier, long data, int length) {
         long __functionAddress = Functions.thinlto_codegen_add_module;
         if (CHECKS) {
@@ -1441,12 +1221,7 @@ public class LLVMLTO {
         invokePPPV(cg, identifier, data, length, __functionAddress);
     }
 
-    /**
-     * Add a module to a ThinLTO code generator. Identifier has to be unique among all the modules in a code generator. The data buffer stays owned by the
-     * client, and is expected to be available for the entire lifetime of the {@code thinlto_code_gen_t} it is added to.
-     * 
-     * <p>On failure, returns {@code NULL} (check {@link #lto_get_error_message get_error_message} for details).</p>
-     */
+    /** {@code void thinlto_codegen_add_module(thinlto_code_gen_t cg, char const * identifier, char const * data, int length)} */
     public static void thinlto_codegen_add_module(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer identifier, @NativeType("char const *") ByteBuffer data) {
         if (CHECKS) {
             checkNT1(identifier);
@@ -1454,12 +1229,7 @@ public class LLVMLTO {
         nthinlto_codegen_add_module(cg, memAddress(identifier), memAddress(data), data.remaining());
     }
 
-    /**
-     * Add a module to a ThinLTO code generator. Identifier has to be unique among all the modules in a code generator. The data buffer stays owned by the
-     * client, and is expected to be available for the entire lifetime of the {@code thinlto_code_gen_t} it is added to.
-     * 
-     * <p>On failure, returns {@code NULL} (check {@link #lto_get_error_message get_error_message} for details).</p>
-     */
+    /** {@code void thinlto_codegen_add_module(thinlto_code_gen_t cg, char const * identifier, char const * data, int length)} */
     public static void thinlto_codegen_add_module(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence identifier, @NativeType("char const *") ByteBuffer data) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1473,7 +1243,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_process ] ---
 
-    /** Optimize and codegen all the modules added to the codegenerator using ThinLTO. Resulting objects are accessible using {@link #thinlto_module_get_object}. */
+    /** {@code void thinlto_codegen_process(thinlto_code_gen_t cg)} */
     public static void thinlto_codegen_process(@NativeType("thinlto_code_gen_t") long cg) {
         long __functionAddress = Functions.thinlto_codegen_process;
         if (CHECKS) {
@@ -1484,12 +1254,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_module_get_num_objects ] ---
 
-    /**
-     * Returns the number of object files produced by the ThinLTO CodeGenerator.
-     * 
-     * <p>It usually matches the number of input files, but this is not a guarantee of the API and may change in future implementation, so the client should not
-     * assume it.</p>
-     */
+    /** {@code unsigned int thinlto_module_get_num_objects(thinlto_code_gen_t cg)} */
     @NativeType("unsigned int")
     public static int thinlto_module_get_num_objects(@NativeType("thinlto_code_gen_t") long cg) {
         long __functionAddress = Functions.thinlto_module_get_num_objects;
@@ -1501,10 +1266,10 @@ public class LLVMLTO {
 
     // --- [ thinlto_module_get_object ] ---
 
-    /** Unsafe version of: {@link #thinlto_module_get_object} */
+    /** {@code LTOObjectBuffer thinlto_module_get_object(thinlto_code_gen_t cg, unsigned int index)} */
     public static native void nthinlto_module_get_object(long cg, int index, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #thinlto_module_get_object} */
+    /** {@code LTOObjectBuffer thinlto_module_get_object(thinlto_code_gen_t cg, unsigned int index)} */
     public static void nthinlto_module_get_object(long cg, int index, long __result) {
         long __functionAddress = Functions.thinlto_module_get_object;
         if (CHECKS) {
@@ -1513,11 +1278,7 @@ public class LLVMLTO {
         nthinlto_module_get_object(cg, index, __functionAddress, __result);
     }
 
-    /**
-     * Returns a reference to the ith object file produced by the ThinLTO CodeGenerator.
-     * 
-     * <p>Client should use {@link #thinlto_module_get_num_objects} to get the number of available objects.</p>
-     */
+    /** {@code LTOObjectBuffer thinlto_module_get_object(thinlto_code_gen_t cg, unsigned int index)} */
     public static LTOObjectBuffer thinlto_module_get_object(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int index, LTOObjectBuffer __result) {
         nthinlto_module_get_object(cg, index, __result.address());
         return __result;
@@ -1525,12 +1286,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_module_get_num_object_files ] ---
 
-    /**
-     * Returns the number of object files produced by the ThinLTO CodeGenerator.
-     * 
-     * <p>It usually matches the number of input files, but this is not a guarantee of the API and may change in future implementation, so the client should not
-     * assume it.</p>
-     */
+    /** {@code unsigned int thinlto_module_get_num_object_files(thinlto_code_gen_t cg)} */
     @NativeType("unsigned int")
     public static int thinlto_module_get_num_object_files(@NativeType("thinlto_code_gen_t") long cg) {
         long __functionAddress = Functions.thinlto_module_get_num_object_files;
@@ -1542,7 +1298,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_module_get_object_file ] ---
 
-    /** Unsafe version of: {@link #thinlto_module_get_object_file} */
+    /** {@code char const * thinlto_module_get_object_file(thinlto_code_gen_t cg, unsigned int index)} */
     public static long nthinlto_module_get_object_file(long cg, int index) {
         long __functionAddress = Functions.thinlto_module_get_object_file;
         if (CHECKS) {
@@ -1551,11 +1307,7 @@ public class LLVMLTO {
         return invokePP(cg, index, __functionAddress);
     }
 
-    /**
-     * Returns the path to the ith object file produced by the ThinLTO CodeGenerator.
-     * 
-     * <p>Client should use {@link #thinlto_module_get_num_object_files} to get the number of available objects.</p>
-     */
+    /** {@code char const * thinlto_module_get_object_file(thinlto_code_gen_t cg, unsigned int index)} */
     @NativeType("char const *")
     public static @Nullable String thinlto_module_get_object_file(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int index) {
         long __result = nthinlto_module_get_object_file(cg, index);
@@ -1564,7 +1316,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_pic_model ] ---
 
-    /** Sets which PIC code model to generate. Returns true on error (check {@link #lto_get_error_message get_error_message} for details). */
+    /** {@code lto_bool_t thinlto_codegen_set_pic_model(thinlto_code_gen_t cg, lto_codegen_model model)} */
     @NativeType("lto_bool_t")
     public static boolean thinlto_codegen_set_pic_model(@NativeType("thinlto_code_gen_t") long cg, @NativeType("lto_codegen_model") int model) {
         long __functionAddress = Functions.thinlto_codegen_set_pic_model;
@@ -1576,7 +1328,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_savetemps_dir ] ---
 
-    /** Unsafe version of: {@link #thinlto_codegen_set_savetemps_dir} */
+    /** {@code void thinlto_codegen_set_savetemps_dir(thinlto_code_gen_t cg, char const * save_temps_dir)} */
     public static void nthinlto_codegen_set_savetemps_dir(long cg, long save_temps_dir) {
         long __functionAddress = Functions.thinlto_codegen_set_savetemps_dir;
         if (CHECKS) {
@@ -1585,10 +1337,7 @@ public class LLVMLTO {
         invokePPV(cg, save_temps_dir, __functionAddress);
     }
 
-    /**
-     * Sets the path to a directory to use as a storage for temporary bitcode files. The intention is to make the bitcode files available for debugging at
-     * various stage of the pipeline.
-     */
+    /** {@code void thinlto_codegen_set_savetemps_dir(thinlto_code_gen_t cg, char const * save_temps_dir)} */
     public static void thinlto_codegen_set_savetemps_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer save_temps_dir) {
         if (CHECKS) {
             checkNT1(save_temps_dir);
@@ -1596,10 +1345,7 @@ public class LLVMLTO {
         nthinlto_codegen_set_savetemps_dir(cg, memAddress(save_temps_dir));
     }
 
-    /**
-     * Sets the path to a directory to use as a storage for temporary bitcode files. The intention is to make the bitcode files available for debugging at
-     * various stage of the pipeline.
-     */
+    /** {@code void thinlto_codegen_set_savetemps_dir(thinlto_code_gen_t cg, char const * save_temps_dir)} */
     public static void thinlto_codegen_set_savetemps_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence save_temps_dir) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1613,7 +1359,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_set_generated_objects_dir ] ---
 
-    /** Unsafe version of: {@link #thinlto_set_generated_objects_dir} */
+    /** {@code void thinlto_set_generated_objects_dir(thinlto_code_gen_t cg, char const * save_temps_dir)} */
     public static void nthinlto_set_generated_objects_dir(long cg, long save_temps_dir) {
         long __functionAddress = Functions.thinlto_set_generated_objects_dir;
         if (CHECKS) {
@@ -1622,10 +1368,7 @@ public class LLVMLTO {
         invokePPV(cg, save_temps_dir, __functionAddress);
     }
 
-    /**
-     * Set the path to a directory where to save generated object files. This path can be used by a linker to request on-disk files instead of in-memory
-     * buffers. When set, results are available through {@link #thinlto_module_get_object_file} instead of {@link #thinlto_module_get_object}.
-     */
+    /** {@code void thinlto_set_generated_objects_dir(thinlto_code_gen_t cg, char const * save_temps_dir)} */
     public static void thinlto_set_generated_objects_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer save_temps_dir) {
         if (CHECKS) {
             checkNT1(save_temps_dir);
@@ -1633,10 +1376,7 @@ public class LLVMLTO {
         nthinlto_set_generated_objects_dir(cg, memAddress(save_temps_dir));
     }
 
-    /**
-     * Set the path to a directory where to save generated object files. This path can be used by a linker to request on-disk files instead of in-memory
-     * buffers. When set, results are available through {@link #thinlto_module_get_object_file} instead of {@link #thinlto_module_get_object}.
-     */
+    /** {@code void thinlto_set_generated_objects_dir(thinlto_code_gen_t cg, char const * save_temps_dir)} */
     public static void thinlto_set_generated_objects_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence save_temps_dir) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1650,7 +1390,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_cpu ] ---
 
-    /** Unsafe version of: {@link #thinlto_codegen_set_cpu} */
+    /** {@code void thinlto_codegen_set_cpu(thinlto_code_gen_t cg, char const * cpu)} */
     public static void nthinlto_codegen_set_cpu(long cg, long cpu) {
         long __functionAddress = Functions.thinlto_codegen_set_cpu;
         if (CHECKS) {
@@ -1659,7 +1399,7 @@ public class LLVMLTO {
         invokePPV(cg, cpu, __functionAddress);
     }
 
-    /** Sets the cpu to generate code for. */
+    /** {@code void thinlto_codegen_set_cpu(thinlto_code_gen_t cg, char const * cpu)} */
     public static void thinlto_codegen_set_cpu(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer cpu) {
         if (CHECKS) {
             checkNT1(cpu);
@@ -1667,7 +1407,7 @@ public class LLVMLTO {
         nthinlto_codegen_set_cpu(cg, memAddress(cpu));
     }
 
-    /** Sets the cpu to generate code for. */
+    /** {@code void thinlto_codegen_set_cpu(thinlto_code_gen_t cg, char const * cpu)} */
     public static void thinlto_codegen_set_cpu(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence cpu) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1681,7 +1421,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_disable_codegen ] ---
 
-    /** Disable CodeGen, only run the stages till codegen and stop. The output will be bitcode. */
+    /** {@code void thinlto_codegen_disable_codegen(thinlto_code_gen_t cg, lto_bool_t disable)} */
     public static void thinlto_codegen_disable_codegen(@NativeType("thinlto_code_gen_t") long cg, @NativeType("lto_bool_t") boolean disable) {
         long __functionAddress = Functions.thinlto_codegen_disable_codegen;
         if (CHECKS) {
@@ -1692,7 +1432,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_codegen_only ] ---
 
-    /** Perform CodeGen only: disable all other stages. */
+    /** {@code void thinlto_codegen_set_codegen_only(thinlto_code_gen_t cg, lto_bool_t codegen_only)} */
     public static void thinlto_codegen_set_codegen_only(@NativeType("thinlto_code_gen_t") long cg, @NativeType("lto_bool_t") boolean codegen_only) {
         long __functionAddress = Functions.thinlto_codegen_set_codegen_only;
         if (CHECKS) {
@@ -1703,20 +1443,20 @@ public class LLVMLTO {
 
     // --- [ thinlto_debug_options ] ---
 
-    /** Unsafe version of: {@link #thinlto_debug_options} */
+    /** {@code void thinlto_debug_options(char const * const * options, int number)} */
     public static void nthinlto_debug_options(long options, int number) {
         long __functionAddress = Functions.thinlto_debug_options;
         invokePV(options, number, __functionAddress);
     }
 
-    /** Parse {@code -mllvm} style debug options. */
+    /** {@code void thinlto_debug_options(char const * const * options, int number)} */
     public static void thinlto_debug_options(@NativeType("char const * const *") PointerBuffer options) {
         nthinlto_debug_options(memAddress(options), options.remaining());
     }
 
     // --- [ lto_module_is_thinlto ] ---
 
-    /** Test if a module has support for ThinLTO linking. */
+    /** {@code lto_bool_t lto_module_is_thinlto(lto_module_t mod)} */
     @NativeType("lto_bool_t")
     public static boolean lto_module_is_thinlto(@NativeType("lto_module_t") long mod) {
         long __functionAddress = Functions.module_is_thinlto;
@@ -1728,7 +1468,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_add_must_preserve_symbol ] ---
 
-    /** Unsafe version of: {@link #thinlto_codegen_add_must_preserve_symbol} */
+    /** {@code void thinlto_codegen_add_must_preserve_symbol(thinlto_code_gen_t cg, char const * name, int length)} */
     public static void nthinlto_codegen_add_must_preserve_symbol(long cg, long name, int length) {
         long __functionAddress = Functions.thinlto_codegen_add_must_preserve_symbol;
         if (CHECKS) {
@@ -1737,18 +1477,12 @@ public class LLVMLTO {
         invokePPV(cg, name, length, __functionAddress);
     }
 
-    /**
-     * Adds a symbol to the list of global symbols that must exist in the final generated code. If a function is not listed there, it might be inlined into
-     * every usage and optimized away. For every single module, the functions referenced from code outside of the ThinLTO modules need to be added here.
-     */
+    /** {@code void thinlto_codegen_add_must_preserve_symbol(thinlto_code_gen_t cg, char const * name, int length)} */
     public static void thinlto_codegen_add_must_preserve_symbol(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer name) {
         nthinlto_codegen_add_must_preserve_symbol(cg, memAddress(name), name.remaining());
     }
 
-    /**
-     * Adds a symbol to the list of global symbols that must exist in the final generated code. If a function is not listed there, it might be inlined into
-     * every usage and optimized away. For every single module, the functions referenced from code outside of the ThinLTO modules need to be added here.
-     */
+    /** {@code void thinlto_codegen_add_must_preserve_symbol(thinlto_code_gen_t cg, char const * name, int length)} */
     public static void thinlto_codegen_add_must_preserve_symbol(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1762,7 +1496,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_add_cross_referenced_symbol ] ---
 
-    /** Unsafe version of: {@link #thinlto_codegen_add_cross_referenced_symbol} */
+    /** {@code void thinlto_codegen_add_cross_referenced_symbol(thinlto_code_gen_t cg, char const * name, int length)} */
     public static void nthinlto_codegen_add_cross_referenced_symbol(long cg, long name, int length) {
         long __functionAddress = Functions.thinlto_codegen_add_cross_referenced_symbol;
         if (CHECKS) {
@@ -1771,18 +1505,12 @@ public class LLVMLTO {
         invokePPV(cg, name, length, __functionAddress);
     }
 
-    /**
-     * Adds a symbol to the list of global symbols that are cross-referenced between ThinLTO files. If the ThinLTO CodeGenerator can ensure that every
-     * references from a ThinLTO module to this symbol is optimized away, then the symbol can be discarded.
-     */
+    /** {@code void thinlto_codegen_add_cross_referenced_symbol(thinlto_code_gen_t cg, char const * name, int length)} */
     public static void thinlto_codegen_add_cross_referenced_symbol(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer name) {
         nthinlto_codegen_add_cross_referenced_symbol(cg, memAddress(name), name.remaining());
     }
 
-    /**
-     * Adds a symbol to the list of global symbols that are cross-referenced between ThinLTO files. If the ThinLTO CodeGenerator can ensure that every
-     * references from a ThinLTO module to this symbol is optimized away, then the symbol can be discarded.
-     */
+    /** {@code void thinlto_codegen_add_cross_referenced_symbol(thinlto_code_gen_t cg, char const * name, int length)} */
     public static void thinlto_codegen_add_cross_referenced_symbol(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1796,7 +1524,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_cache_dir ] ---
 
-    /** Unsafe version of: {@link #thinlto_codegen_set_cache_dir} */
+    /** {@code void thinlto_codegen_set_cache_dir(thinlto_code_gen_t cg, char const * cache_dir)} */
     public static void nthinlto_codegen_set_cache_dir(long cg, long cache_dir) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_dir;
         if (CHECKS) {
@@ -1805,7 +1533,7 @@ public class LLVMLTO {
         invokePPV(cg, cache_dir, __functionAddress);
     }
 
-    /** Sets the path to a directory to use as a cache storage for incremental build. Setting this activates caching. */
+    /** {@code void thinlto_codegen_set_cache_dir(thinlto_code_gen_t cg, char const * cache_dir)} */
     public static void thinlto_codegen_set_cache_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") ByteBuffer cache_dir) {
         if (CHECKS) {
             checkNT1(cache_dir);
@@ -1813,7 +1541,7 @@ public class LLVMLTO {
         nthinlto_codegen_set_cache_dir(cg, memAddress(cache_dir));
     }
 
-    /** Sets the path to a directory to use as a cache storage for incremental build. Setting this activates caching. */
+    /** {@code void thinlto_codegen_set_cache_dir(thinlto_code_gen_t cg, char const * cache_dir)} */
     public static void thinlto_codegen_set_cache_dir(@NativeType("thinlto_code_gen_t") long cg, @NativeType("char const *") CharSequence cache_dir) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1827,10 +1555,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_cache_pruning_interval ] ---
 
-    /**
-     * Sets the cache pruning interval (in seconds). A negative value disables the pruning. An unspecified default value will be applied, and a value of 0
-     * will force prunning to occur.
-     */
+    /** {@code void thinlto_codegen_set_cache_pruning_interval(thinlto_code_gen_t cg, int interval)} */
     public static void thinlto_codegen_set_cache_pruning_interval(@NativeType("thinlto_code_gen_t") long cg, int interval) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_pruning_interval;
         if (CHECKS) {
@@ -1841,13 +1566,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_final_cache_size_relative_to_available_space ] ---
 
-    /**
-     * Sets the maximum cache size that can be persistent across build, in terms of percentage of the available space on the disk. Set to 100 to indicate no
-     * limit, 50 to indicate that the cache size will not be left over half the available space. A value over 100 will be reduced to 100, a value of 0 will be
-     * ignored. An unspecified default value will be applied.
-     * 
-     * <p>The formula looks like: {@code AvailableSpace = FreeSpace + ExistingCacheSize NewCacheSize = AvailableSpace * P/100}</p>
-     */
+    /** {@code void thinlto_codegen_set_final_cache_size_relative_to_available_space(thinlto_code_gen_t cg, unsigned int percentage)} */
     public static void thinlto_codegen_set_final_cache_size_relative_to_available_space(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int percentage) {
         long __functionAddress = Functions.thinlto_codegen_set_final_cache_size_relative_to_available_space;
         if (CHECKS) {
@@ -1858,7 +1577,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_cache_entry_expiration ] ---
 
-    /** Sets the expiration (in seconds) for an entry in the cache. An unspecified default value will be applied. A value of 0 will be ignored. */
+    /** {@code void thinlto_codegen_set_cache_entry_expiration(thinlto_code_gen_t cg, unsigned int expiration)} */
     public static void thinlto_codegen_set_cache_entry_expiration(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int expiration) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_entry_expiration;
         if (CHECKS) {
@@ -1869,10 +1588,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_cache_size_bytes ] ---
 
-    /**
-     * Sets the maximum size of the cache directory (in bytes). A value over the amount of available space on the disk will be reduced to the amount of
-     * available space. An unspecified default value will be applied. A value of 0 will be ignored.
-     */
+    /** {@code void thinlto_codegen_set_cache_size_bytes(thinlto_code_gen_t cg, unsigned int max_size_bytes)} */
     public static void thinlto_codegen_set_cache_size_bytes(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int max_size_bytes) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_size_bytes;
         if (CHECKS) {
@@ -1884,7 +1600,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_cache_size_megabytes ] ---
 
-    /** Same as {@link #thinlto_codegen_set_cache_size_bytes}, except the maximum size is in megabytes (2<sup>20</sup> bytes). */
+    /** {@code void thinlto_codegen_set_cache_size_megabytes(thinlto_code_gen_t cg, unsigned int max_size_megabytes)} */
     public static void thinlto_codegen_set_cache_size_megabytes(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int max_size_megabytes) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_size_megabytes;
         if (CHECKS) {
@@ -1896,7 +1612,7 @@ public class LLVMLTO {
 
     // --- [ thinlto_codegen_set_cache_size_files ] ---
 
-    /** Sets the maximum number of files in the cache directory. An unspecified default value will be applied. A value of 0 will be ignored. */
+    /** {@code void thinlto_codegen_set_cache_size_files(thinlto_code_gen_t cg, unsigned int max_size_files)} */
     public static void thinlto_codegen_set_cache_size_files(@NativeType("thinlto_code_gen_t") long cg, @NativeType("unsigned int") int max_size_files) {
         long __functionAddress = Functions.thinlto_codegen_set_cache_size_files;
         if (CHECKS) {

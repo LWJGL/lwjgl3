@@ -16,191 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created image view.
- * 
- * <h5>Description</h5>
- * 
- * <p>Some of the {@code image} creation parameters are inherited by the view. In particular, image view creation inherits the implicit parameter {@code usage} specifying the allowed usages of the image view that, by default, takes the value of the corresponding {@code usage} parameter specified in {@link VkImageCreateInfo} at image creation time. The implicit {@code usage} <b>can</b> be overridden by adding a {@link VkImageViewUsageCreateInfo} structure to the {@code pNext} chain, but the view usage <b>must</b> be a subset of the image usage. If {@code image} has a depth-stencil format and was created with a {@link VkImageStencilUsageCreateInfo} structure included in the {@code pNext} chain of {@link VkImageCreateInfo}, the usage is calculated based on the {@code subresource.aspectMask} provided:</p>
- * 
- * <ul>
- * <li>If {@code aspectMask} includes only {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, the implicit {@code usage} is equal to {@link VkImageStencilUsageCreateInfo}{@code ::stencilUsage}.</li>
- * <li>If {@code aspectMask} includes only {@link VK10#VK_IMAGE_ASPECT_DEPTH_BIT IMAGE_ASPECT_DEPTH_BIT}, the implicit {@code usage} is equal to {@link VkImageCreateInfo}{@code ::usage}.</li>
- * <li>If both aspects are included in {@code aspectMask}, the implicit {@code usage} is equal to the intersection of {@link VkImageCreateInfo}{@code ::usage} and {@link VkImageStencilUsageCreateInfo}{@code ::stencilUsage}.</li>
- * </ul>
- * 
- * <p>If {@code image} is a 3D image, its Z range <b>can</b> be restricted to a subset by adding a {@link VkImageViewSlicedCreateInfoEXT} to the {@code pNext} chain.</p>
- * 
- * <p>If {@code image} was created with the {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT} flag, and if the {@code format} of the image is not <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a>, {@code format} <b>can</b> be different from the image’s format, but if {@code image} was created without the {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} flag and they are not equal they <b>must</b> be <em>compatible</em>. Image format compatibility is defined in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">Format Compatibility Classes</a> section. Views of compatible formats will have the same mapping between texel coordinates and memory locations irrespective of the {@code format}, with only the interpretation of the bit pattern changing.</p>
- * 
- * <p>If {@code image} was created with a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format, and the image view’s {@code aspectMask} is one of {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT} or {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT}, the view’s aspect mask is considered to be equivalent to {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} when used as a framebuffer attachment.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Values intended to be used with one view format <b>may</b> not be exactly preserved when written or read through a different format. For example, an integer value that happens to have the bit pattern of a floating-point denorm or NaN <b>may</b> be flushed or canonicalized when written or read through a view with a floating-point format. Similarly, a value written through a signed normalized format that has a bit pattern exactly equal to <code>-2<sup>b</sup></code> <b>may</b> be changed to <code>-2<sup>b</sup> + 1</code> as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fundamentals-fixedfpconv">Conversion from Normalized Fixed-Point to Floating-Point</a>.</p>
- * </div>
- * 
- * <p>If {@code image} was created with the {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} flag, {@code format} <b>must</b> be <em>compatible</em> with the image’s format as described above; or <b>must</b> be an uncompressed format, in which case it <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-size-compatibility"><em>size-compatible</em></a> with the image’s format. In this case, the resulting image view’s texel dimensions equal the dimensions of the selected mip level divided by the compressed texel block size and rounded up.</p>
- * 
- * <p>The {@link VkComponentMapping} {@code components} member describes a remapping from components of the image to components of the vector returned by shader image instructions. This remapping <b>must</b> be the identity swizzle for storage image descriptors, input attachment descriptors, framebuffer attachments, and any {@code VkImageView} used with a combined image sampler that enables <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>.</p>
- * 
- * <p>If the image view is to be used with a sampler which supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>, an <em>identically defined object</em> of type {@code VkSamplerYcbcrConversion} to that used to create the sampler <b>must</b> be passed to {@link VK10#vkCreateImageView CreateImageView} in a {@link VkSamplerYcbcrConversionInfo} included in the {@code pNext} chain of {@link VkImageViewCreateInfo}. Conversely, if a {@code VkSamplerYcbcrConversion} object is passed to {@link VK10#vkCreateImageView CreateImageView}, an identically defined {@code VkSamplerYcbcrConversion} object <b>must</b> be used when sampling the image.</p>
- * 
- * <p>If the image has a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> {@code format}, {@code subresourceRange.aspectMask} is {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}, and {@code usage} includes {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT}, then the {@code format} <b>must</b> be identical to the image {@code format} and the sampler to be used with the image view <b>must</b> enable <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>.</p>
- * 
- * <p>When such an image is used in a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding">video coding</a> operation, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> has no effect.</p>
- * 
- * <p>If {@code image} was created with the {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT} and the image has a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> {@code format}, and if {@code subresourceRange.aspectMask} is {@link VK11#VK_IMAGE_ASPECT_PLANE_0_BIT IMAGE_ASPECT_PLANE_0_BIT}, {@link VK11#VK_IMAGE_ASPECT_PLANE_1_BIT IMAGE_ASPECT_PLANE_1_BIT}, or {@link VK11#VK_IMAGE_ASPECT_PLANE_2_BIT IMAGE_ASPECT_PLANE_2_BIT}, {@code format} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatible-planes">compatible</a> with the corresponding plane of the image, and the sampler to be used with the image view <b>must</b> not enable <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a>. The {@code width} and {@code height} of the single-plane image view <b>must</b> be derived from the multi-planar image’s dimensions in the manner listed for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatible-planes">plane compatibility</a> for the plane.</p>
- * 
- * <p>Any view of an image plane will have the same mapping between texel coordinates and memory locations as used by the components of the color aspect, subject to the formulae relating texel coordinates to lower-resolution planes as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-chroma-reconstruction">Chroma Reconstruction</a>. That is, if an R or B plane has a reduced resolution relative to the G plane of the multi-planar image, the image view operates using the (<em>u<sub>plane</sub></em>, <em>v<sub>plane</sub></em>) unnormalized coordinates of the reduced-resolution plane, and these coordinates access the same memory locations as the (<em>u<sub>color</sub></em>, <em>v<sub>color</sub></em>) unnormalized coordinates of the color aspect for which chroma reconstruction operations operate on the same (<em>u<sub>plane</sub></em>, <em>v<sub>plane</sub></em>) or (<em>i<sub>plane</sub></em>, <em>j<sub>plane</sub></em>) coordinates.</p>
- * 
- * <h6>Image Type and Image View Type Compatibility Requirements</h6>
- * 
- * <table class="lwjgl">
- * <thead><tr><th>Image View Type</th><th>Compatible Image Types</th></tr></thead>
- * <tbody>
- * <tr><td>{@link VK10#VK_IMAGE_VIEW_TYPE_1D IMAGE_VIEW_TYPE_1D}</td><td>{@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}</td></tr>
- * <tr><td>{@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY}</td><td>{@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}</td></tr>
- * <tr><td>{@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}</td><td>{@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} , {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</td></tr>
- * <tr><td>{@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}</td><td>{@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D} , {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</td></tr>
- * <tr><td>{@link VK10#VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE}</td><td>{@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</td></tr>
- * <tr><td>{@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}</td><td>{@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</td></tr>
- * <tr><td>{@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}</td><td>{@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</td></tr>
- * </tbody>
- * </table>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code image} was not created with {@link VK10#VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT IMAGE_CREATE_CUBE_COMPATIBLE_BIT} then {@code viewType} <b>must</b> not be {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE} or {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-imageCubeArray">{@code imageCubeArray}</a> feature is not enabled, {@code viewType} <b>must</b> not be {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY}</li>
- * <li>If {@code image} was created with {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} but without {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT} set then {@code viewType} <b>must</b> not be {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}</li>
- * <li>If {@code image} was created with {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} but without {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT} or {@link EXTImage2dViewOf3d#VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT} set, then {@code viewType} <b>must</b> not be {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}</li>
- * <li>If {@code image} was created with {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D} and {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY} then {@code subresourceRange.levelCount} <b>must</b> be 1</li>
- * <li>If {@code image} was created with a {@code samples} value not equal to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT} then {@code viewType} <b>must</b> be either {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}</li>
- * <li>{@code image} <b>must</b> have been created with a {@code usage} value containing at least one of the usages defined in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#valid-imageview-imageusage">valid image usage</a> list for image views</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> of the resultant image view <b>must</b> contain at least one bit</li>
- * <li>If {@code usage} contains {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT}, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> of the resultant image view <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT FORMAT_FEATURE_SAMPLED_IMAGE_BIT}</li>
- * <li>If {@code usage} contains {@link VK10#VK_IMAGE_USAGE_STORAGE_BIT IMAGE_USAGE_STORAGE_BIT}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT FORMAT_FEATURE_STORAGE_IMAGE_BIT}</li>
- * <li>If {@code usage} contains {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT FORMAT_FEATURE_COLOR_ATTACHMENT_BIT} or {@link NVLinearColorAttachment#VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV}</li>
- * <li>If {@code usage} contains {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code image} was created with {@link KHRVideoMaintenance1#VK_IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR} and {@code usage} contains {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link KHRVideoDecodeQueue#VK_FORMAT_FEATURE_VIDEO_DECODE_OUTPUT_BIT_KHR FORMAT_FEATURE_VIDEO_DECODE_OUTPUT_BIT_KHR}</li>
- * <li>If {@code image} was created with {@link KHRVideoMaintenance1#VK_IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR} and {@code usage} contains {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link KHRVideoDecodeQueue#VK_FORMAT_FEATURE_VIDEO_DECODE_DPB_BIT_KHR FORMAT_FEATURE_VIDEO_DECODE_DPB_BIT_KHR}</li>
- * <li>If {@code image} was created with {@link KHRVideoMaintenance1#VK_IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR}, then {@code usage} <b>must</b> not include {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR}</li>
- * <li>If {@code image} was created with {@link KHRVideoMaintenance1#VK_IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR} and {@code usage} contains {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link KHRVideoEncodeQueue#VK_FORMAT_FEATURE_VIDEO_ENCODE_INPUT_BIT_KHR FORMAT_FEATURE_VIDEO_ENCODE_INPUT_BIT_KHR}</li>
- * <li>If {@code image} was created with {@link KHRVideoMaintenance1#VK_IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR} and {@code usage} contains {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link KHRVideoEncodeQueue#VK_FORMAT_FEATURE_VIDEO_ENCODE_DPB_BIT_KHR FORMAT_FEATURE_VIDEO_ENCODE_DPB_BIT_KHR}</li>
- * <li>If {@code image} was created with {@link KHRVideoMaintenance1#VK_IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR}, then {@code usage} <b>must</b> not include {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR}</li>
- * <li>If {@code usage} contains {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link KHRVideoEncodeQuantizationMap#VK_FORMAT_FEATURE_2_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR FORMAT_FEATURE_2_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR}</li>
- * <li>If {@code usage} contains {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link KHRVideoEncodeQuantizationMap#VK_FORMAT_FEATURE_2_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR FORMAT_FEATURE_2_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR}</li>
- * <li>If {@code usage} contains {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}, and any of the following is true:
- * 
- * <ul>
- * <li>the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-externalFormatResolve">{@code externalFormatResolve}</a> feature is not enabled</li>
- * <li>the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-nullColorAttachmentWithExternalFormatResolve">{@code nullColorAttachmentWithExternalFormatResolve}</a> property is {@link VK10#VK_FALSE FALSE}</li>
- * <li>{@code image} was created with an {@link VkExternalFormatANDROID}{@code ::externalFormat} value of 0</li>
- * </ul>
- * 
- * <p>then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain at least one of {@link VK10#VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT FORMAT_FEATURE_COLOR_ATTACHMENT_BIT} or {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT} or {@link NVLinearColorAttachment#VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV}</p>
- * </li>
- * <li>{@code subresourceRange.baseMipLevel} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code subresourceRange.levelCount} is not {@link VK10#VK_REMAINING_MIP_LEVELS REMAINING_MIP_LEVELS}, <code>subresourceRange.baseMipLevel + subresourceRange.levelCount</code> <b>must</b> be less than or equal to the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code image} was created with {@code usage} containing {@link EXTFragmentDensityMap#VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT}, {@code subresourceRange.levelCount} <b>must</b> be 1</li>
- * <li>If {@code image} is not a 3D image created with {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT} or {@link EXTImage2dViewOf3d#VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT} set, or {@code viewType} is not {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}, {@code subresourceRange.baseArrayLayer} <b>must</b> be less than the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code subresourceRange.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, {@code image} is not a 3D image created with {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT} or {@link EXTImage2dViewOf3d#VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT} set, or {@code viewType} is not {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}, {@code subresourceRange.layerCount} <b>must</b> be non-zero and <code>subresourceRange.baseArrayLayer + subresourceRange.layerCount</code> <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code image} was created</li>
- * <li>If {@code image} is a 3D image created with {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT} set, and {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}, {@code subresourceRange.baseArrayLayer} <b>must</b> be less than the depth computed from {@code baseMipLevel} and {@code extent.depth} specified in {@link VkImageCreateInfo} when {@code image} was created, according to the formula defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
- * <li>If {@code subresourceRange.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, {@code image} is a 3D image created with {@link VK11#VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT} set, and {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}, {@code subresourceRange.layerCount} <b>must</b> be non-zero and <code>subresourceRange.baseArrayLayer + subresourceRange.layerCount</code> <b>must</b> be less than or equal to the depth computed from {@code baseMipLevel} and {@code extent.depth} specified in {@link VkImageCreateInfo} when {@code image} was created, according to the formula defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
- * <li>If {@code image} was created with the {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT} flag, but without the {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} flag, and if the {@code format} of the {@code image} is not a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format, {@code format} <b>must</b> be compatible with the {@code format} used to create {@code image}, as defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">Format Compatibility Classes</a></li>
- * <li>If {@code image} was created with the {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} flag, {@code format} <b>must</b> be compatible with, or <b>must</b> be an uncompressed format that is size-compatible with, the {@code format} used to create {@code image}</li>
- * <li>If {@code image} was created with the {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} flag and {@code format} is a non-compressed format, the {@code levelCount} member of {@code subresourceRange} <b>must</b> be 1</li>
- * <li>If {@code image} was created with the {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} flag, the {@link VkPhysicalDeviceMaintenance6Properties}{@code ::blockTexelViewCompatibleMultipleLayers} property is not {@link VK10#VK_TRUE TRUE}, and {@code format} is a non-compressed format, then the {@code layerCount} member of {@code subresourceRange} <b>must</b> be 1</li>
- * <li>If a {@link VkImageFormatListCreateInfo} structure was included in the {@code pNext} chain of the {@link VkImageCreateInfo} structure used when creating {@code image} and {@link VkImageFormatListCreateInfo}{@code ::viewFormatCount} is not zero then {@code format} <b>must</b> be one of the formats in {@link VkImageFormatListCreateInfo}{@code ::pViewFormats}</li>
- * <li>If {@code image} was created with the {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT} flag, if the {@code format} of the {@code image} is a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format, and if {@code subresourceRange.aspectMask} is one of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a> bits, then {@code format} <b>must</b> be compatible with the {@code VkFormat} for the plane of the {@code image} {@code format} indicated by {@code subresourceRange.aspectMask}, as defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatible-planes">Compatible formats of planes of multi-planar formats</a></li>
- * <li>{@code subresourceRange.aspectMask} <b>must</b> only have at most 1 valid <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
- * <li>If {@code image} was not created with the {@link VK10#VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT IMAGE_CREATE_MUTABLE_FORMAT_BIT} flag, or if the {@code format} of the {@code image} is a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> format and if {@code subresourceRange.aspectMask} is {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}, {@code format} <b>must</b> be identical to the {@code format} used to create {@code image}</li>
- * <li>If the image view <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#image-views-requiring-sampler-ycbcr-conversion">requires a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> and {@code usage} contains {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT}, then the {@code pNext} chain <b>must</b> include a {@link VkSamplerYcbcrConversionInfo} structure with a conversion value other than {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code format} has a {@code _422} or {@code _420} suffix then {@code image} <b>must</b> have been created with a width that is a multiple of 2</li>
- * <li>If {@code format} has a {@code _420} suffix then {@code image} <b>must</b> have been created with a height that is a multiple of 2</li>
- * <li>If the {@code pNext} chain includes a {@link VkSamplerYcbcrConversionInfo} structure with a {@code conversion} value other than {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, all members of {@code components} <b>must</b> have the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-views-identity-mappings">identity swizzle</a></li>
- * <li>If the {@code pNext} chain includes a {@link VkSamplerYcbcrConversionInfo} structure with a {@code conversion} value other than {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code format} <b>must</b> be the same used in {@link VkSamplerYcbcrConversionCreateInfo}{@code ::format}</li>
- * <li>If {@code image} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>{@code viewType} <b>must</b> be compatible with the type of {@code image} as shown in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-views-compatibility">view type compatibility table</a></li>
- * <li>If {@code image} has an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-external-android-hardware-buffer-external-formats">Android external format</a>, {@code format} <b>must</b> be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
- * <li>If {@code image} has an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-external-android-hardware-buffer-external-formats">Android external format</a>, the {@code pNext} chain <b>must</b> include a {@link VkSamplerYcbcrConversionInfo} structure with a {@code conversion} object created with the same external format as {@code image}</li>
- * <li>If {@code image} has an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-external-android-hardware-buffer-external-formats">Android external format</a>, all members of {@code components} <b>must</b> be the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-views-identity-mappings">identity swizzle</a></li>
- * <li>If {@code image} was created with {@code usage} containing {@link KHRFragmentShadingRate#VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}, {@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shadingRateImage">{@code shadingRateImage}</a> feature is enabled, and If {@code image} was created with {@code usage} containing {@link NVShadingRateImage#VK_IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV}, {@code format} <b>must</b> be {@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature is enabled, and the {@code usage} for the image view includes {@link KHRFragmentShadingRate#VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}, then the image view’s <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-view-format-features">format features</a> <b>must</b> contain {@link KHRFragmentShadingRate#VK_FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR FORMAT_FEATURE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature is enabled, the {@code usage} for the image view includes {@link KHRFragmentShadingRate#VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}, and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-layeredShadingRateAttachments">{@code layeredShadingRateAttachments}</a> is {@link VK10#VK_FALSE FALSE}, {@code subresourceRange.layerCount} <b>must</b> be 1</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMapDynamic">{@code fragmentDensityMapDynamic}</a> feature is not enabled, {@code flags} <b>must</b> not contain {@link EXTFragmentDensityMap#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMapDeferred">{@code fragmentDensityMapDeferred}</a> feature is not enabled, {@code flags} <b>must</b> not contain {@link EXTFragmentDensityMap2#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT}</li>
- * <li>If {@code flags} contains {@link EXTFragmentDensityMap2#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT}, {@code flags} <b>must</b> not contain {@link EXTFragmentDensityMap#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT}</li>
- * <li>If {@code image} was created with {@code flags} containing {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT} and {@code usage} containing {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT}, {@code subresourceRange.layerCount} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxSubsampledArrayLayers">{@link VkPhysicalDeviceFragmentDensityMap2PropertiesEXT}{@code ::maxSubsampledArrayLayers}</a></li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-invocationMask">{@code invocationMask}</a> feature is enabled, and if {@code image} was created with {@code usage} containing {@link HUAWEIInvocationMask#VK_IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI IMAGE_USAGE_INVOCATION_MASK_BIT_HUAWEI}, {@code format} <b>must</b> be {@link VK10#VK_FORMAT_R8_UINT FORMAT_R8_UINT}</li>
- * <li>If {@code flags} does not contain {@link EXTFragmentDensityMap#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT} and {@code image} was created with {@code usage} containing {@link EXTFragmentDensityMap#VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT}, its {@code flags} <b>must</b> not contain any of {@link VK11#VK_IMAGE_CREATE_PROTECTED_BIT IMAGE_CREATE_PROTECTED_BIT}, {@link VK10#VK_IMAGE_CREATE_SPARSE_BINDING_BIT IMAGE_CREATE_SPARSE_BINDING_BIT}, {@link VK10#VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT IMAGE_CREATE_SPARSE_RESIDENCY_BIT}, or {@link VK10#VK_IMAGE_CREATE_SPARSE_ALIASED_BIT IMAGE_CREATE_SPARSE_ALIASED_BIT}</li>
- * <li>If the {@code pNext} chain includes a {@link VkImageViewUsageCreateInfo} structure, and {@code image} was not created with a {@link VkImageStencilUsageCreateInfo} structure included in the {@code pNext} chain of {@link VkImageCreateInfo}, its {@code usage} member <b>must</b> not include any bits that were not set in the {@code usage} member of the {@link VkImageCreateInfo} structure used to create {@code image}</li>
- * <li>If the {@code pNext} chain includes a {@link VkImageViewUsageCreateInfo} structure, {@code image} was created with a {@link VkImageStencilUsageCreateInfo} structure included in the {@code pNext} chain of {@link VkImageCreateInfo}, and {@code subresourceRange.aspectMask} includes {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, the {@code usage} member of the {@link VkImageViewUsageCreateInfo} structure <b>must</b> not include any bits that were not set in the {@code usage} member of the {@link VkImageStencilUsageCreateInfo} structure used to create {@code image}</li>
- * <li>If the {@code pNext} chain includes a {@link VkImageViewUsageCreateInfo} structure, {@code image} was created with a {@link VkImageStencilUsageCreateInfo} structure included in the {@code pNext} chain of {@link VkImageCreateInfo}, and {@code subresourceRange.aspectMask} includes bits other than {@link VK10#VK_IMAGE_ASPECT_STENCIL_BIT IMAGE_ASPECT_STENCIL_BIT}, the {@code usage} member of the {@link VkImageViewUsageCreateInfo} structure <b>must</b> not include any bits that were not set in the {@code usage} member of the {@link VkImageCreateInfo} structure used to create {@code image}</li>
- * <li>If {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_1D IMAGE_VIEW_TYPE_1D}, {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}, or {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}; and {@code subresourceRange.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, then {@code subresourceRange.layerCount} <b>must</b> be 1</li>
- * <li>If {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_1D IMAGE_VIEW_TYPE_1D}, {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D}, or {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}; and {@code subresourceRange.layerCount} is {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, then the remaining number of layers <b>must</b> be 1</li>
- * <li>If {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE} and {@code subresourceRange.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, {@code subresourceRange.layerCount} <b>must</b> be 6</li>
- * <li>If {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY} and {@code subresourceRange.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, {@code subresourceRange.layerCount} <b>must</b> be a multiple of 6</li>
- * <li>If {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE IMAGE_VIEW_TYPE_CUBE} and {@code subresourceRange.layerCount} is {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the remaining number of layers <b>must</b> be 6</li>
- * <li>If {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_CUBE_ARRAY IMAGE_VIEW_TYPE_CUBE_ARRAY} and {@code subresourceRange.layerCount} is {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the remaining number of layers <b>must</b> be a multiple of 6</li>
- * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::imageViewFormatSwizzle} is {@link VK10#VK_FALSE FALSE}, all elements of {@code components} <b>must</b> have the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-views-identity-mappings">identity swizzle</a></li>
- * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::imageViewFormatReinterpretation} is {@link VK10#VK_FALSE FALSE}, the {@code VkFormat} in {@code format} <b>must</b> not contain a different number of components, or a different number of bits in each component, than the format of the {@code VkImage} in {@code image}</li>
- * <li>If {@code image} was created with {@code usage} containing {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR}, {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR}, or {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR}, then the {@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}</li>
- * <li>If {@code image} was created with {@code usage} containing {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR}, {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR}, or {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR}, then the {@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}</li>
- * <li>If {@code image} was created with {@code usage} containing {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR} or {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR}, then {@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_2D IMAGE_VIEW_TYPE_2D} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}</li>
- * <li>If {@code flags} includes {@link EXTDescriptorBuffer#VK_IMAGE_VIEW_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT IMAGE_VIEW_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBufferCaptureReplay">{@code descriptorBufferCaptureReplay}</a> feature <b>must</b> be enabled</li>
- * <li>If the {@code pNext} chain includes a {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} structure, {@code flags} <b>must</b> contain {@link EXTDescriptorBuffer#VK_IMAGE_VIEW_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT IMAGE_VIEW_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}</li>
- * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT}</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure, then <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-textureSampleWeighted">{@code textureSampleWeighted}</a> feature <b>must</b> be enabled</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure, then {@code image} <b>must</b> have been created with {@code usage} containing {@link QCOMImageProcessing#VK_IMAGE_USAGE_SAMPLE_WEIGHT_BIT_QCOM IMAGE_USAGE_SAMPLE_WEIGHT_BIT_QCOM}</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure, then {@code components} <b>must</b> be {@link VK10#VK_COMPONENT_SWIZZLE_IDENTITY COMPONENT_SWIZZLE_IDENTITY} for all components</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure, then {@code subresourceRange.aspectMask} <b>must</b> be {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT}</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure, then {@code subresourceRange.levelCount} <b>must</b> be 1</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure, then {@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY} or {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure and if {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY}, then {@code image} <b>must</b> have been created with {@code imageType} {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure and {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY}, then {@code subresourceRange.layerCount} <b>must</b> be equal to 2</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure and {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_1D_ARRAY IMAGE_VIEW_TYPE_1D_ARRAY}, then {@code image} <b>must</b> have been created with {@code width} equal to or greater than <code>(numPhases &times; max(align(filterSize.width, 4), filterSize.height))</code></li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure and if {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}, then {@code image} <b>must</b> have been created with {@code imageType} {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure and {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}, then {@code subresourceRange.layerCount} <b>must</b> be equal or greater than <code>numPhases</code></li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure and {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}, then {@code image} <b>must</b> have been created with {@code width} equal to or greater than {@code filterSize.width}</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure and {@code viewType} is {@link VK10#VK_IMAGE_VIEW_TYPE_2D_ARRAY IMAGE_VIEW_TYPE_2D_ARRAY}, then {@code image} <b>must</b> have been created with {@code height} equal to or greater than {@code filterSize.height}</li>
- * <li>If the {@code pNext} chain includes {@link VkImageViewSampleWeightCreateInfoQCOM} structure then {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::filterSize.height} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-weightfilter-maxdimension">{@link VkPhysicalDeviceImageProcessingPropertiesQCOM}{@code ::maxWeightFilterDimension.height}</a></li>
- * <li>{@code subresourceRange.aspectMask} <b>must</b> be valid for the {@code format} the {@code image} was created with</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExportMetalObjectCreateInfoEXT}, {@link VkImageViewASTCDecodeModeEXT}, {@link VkImageViewMinLodCreateInfoEXT}, {@link VkImageViewSampleWeightCreateInfoQCOM}, {@link VkImageViewSlicedCreateInfoEXT}, {@link VkImageViewUsageCreateInfo}, {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT}, or {@link VkSamplerYcbcrConversionInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkExportMetalObjectCreateInfoEXT}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkImageViewCreateFlagBits} values</li>
- * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>{@code viewType} <b>must</b> be a valid {@code VkImageViewType} value</li>
- * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code components} <b>must</b> be a valid {@link VkComponentMapping} structure</li>
- * <li>{@code subresourceRange} <b>must</b> be a valid {@link VkImageSubresourceRange} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkComponentMapping}, {@link VkImageSubresourceRange}, {@link VK10#vkCreateImageView CreateImageView}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageViewCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImageViewCreateFlags {@link #flags};
- *     VkImage {@link #image};
- *     VkImageViewType {@link #viewType};
- *     VkFormat {@link #format};
- *     {@link VkComponentMapping VkComponentMapping} {@link #components};
- *     {@link VkImageSubresourceRange VkImageSubresourceRange} {@link #subresourceRange};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImageViewCreateFlags flags;
+ *     VkImage image;
+ *     VkImageViewType viewType;
+ *     VkFormat format;
+ *     {@link VkComponentMapping VkComponentMapping} components;
+ *     {@link VkImageSubresourceRange VkImageSubresourceRange} subresourceRange;
+ * }}</pre>
  */
 public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> implements NativeResource {
 
@@ -268,34 +94,34 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkImageViewCreateFlagBits} specifying additional parameters of the image view. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkImageViewCreateFlags")
     public int flags() { return nflags(address()); }
-    /** a {@code VkImage} on which the view will be created. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** a {@code VkImageViewType} value specifying the type of the image view. */
+    /** @return the value of the {@code viewType} field. */
     @NativeType("VkImageViewType")
     public int viewType() { return nviewType(address()); }
-    /** a {@code VkFormat} specifying the format and type used to interpret texel blocks of the image. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** a {@link VkComponentMapping} structure specifying a remapping of color components (or of depth or stencil components after they have been converted into color components). */
+    /** @return a {@link VkComponentMapping} view of the {@code components} field. */
     public VkComponentMapping components() { return ncomponents(address()); }
-    /** a {@link VkImageSubresourceRange} structure selecting the set of mipmap levels and array layers to be accessible to the view. */
+    /** @return a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
     public VkImageSubresourceRange subresourceRange() { return nsubresourceRange(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageViewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO} value to the {@code sType} field. */
     public VkImageViewCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -317,21 +143,21 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
     public VkImageViewCreateInfo pNext(VkSamplerYcbcrConversionInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSamplerYcbcrConversionInfoKHR} value to the {@code pNext} chain. */
     public VkImageViewCreateInfo pNext(VkSamplerYcbcrConversionInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkImageViewCreateInfo flags(@NativeType("VkImageViewCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #image} field. */
+    /** Sets the specified value to the {@code image} field. */
     public VkImageViewCreateInfo image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Sets the specified value to the {@link #viewType} field. */
+    /** Sets the specified value to the {@code viewType} field. */
     public VkImageViewCreateInfo viewType(@NativeType("VkImageViewType") int value) { nviewType(address(), value); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkImageViewCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Copies the specified {@link VkComponentMapping} to the {@link #components} field. */
+    /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
     public VkImageViewCreateInfo components(VkComponentMapping value) { ncomponents(address(), value); return this; }
-    /** Passes the {@link #components} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageViewCreateInfo components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
-    /** Copies the specified {@link VkImageSubresourceRange} to the {@link #subresourceRange} field. */
+    /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
     public VkImageViewCreateInfo subresourceRange(VkImageSubresourceRange value) { nsubresourceRange(address(), value); return this; }
-    /** Passes the {@link #subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageViewCreateInfo subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -576,34 +402,34 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageViewCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageViewCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkImageViewCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageViewCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkImageViewCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkImageViewCreateFlags")
         public int flags() { return VkImageViewCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkImageViewCreateInfo#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return VkImageViewCreateInfo.nimage(address()); }
-        /** @return the value of the {@link VkImageViewCreateInfo#viewType} field. */
+        /** @return the value of the {@code viewType} field. */
         @NativeType("VkImageViewType")
         public int viewType() { return VkImageViewCreateInfo.nviewType(address()); }
-        /** @return the value of the {@link VkImageViewCreateInfo#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkImageViewCreateInfo.nformat(address()); }
-        /** @return a {@link VkComponentMapping} view of the {@link VkImageViewCreateInfo#components} field. */
+        /** @return a {@link VkComponentMapping} view of the {@code components} field. */
         public VkComponentMapping components() { return VkImageViewCreateInfo.ncomponents(address()); }
-        /** @return a {@link VkImageSubresourceRange} view of the {@link VkImageViewCreateInfo#subresourceRange} field. */
+        /** @return a {@link VkImageSubresourceRange} view of the {@code subresourceRange} field. */
         public VkImageSubresourceRange subresourceRange() { return VkImageViewCreateInfo.nsubresourceRange(address()); }
 
-        /** Sets the specified value to the {@link VkImageViewCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageViewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO} value to the {@link VkImageViewCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO} value to the {@code sType} field. */
         public VkImageViewCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkImageViewCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageViewCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -625,21 +451,21 @@ public class VkImageViewCreateInfo extends Struct<VkImageViewCreateInfo> impleme
         public VkImageViewCreateInfo.Buffer pNext(VkSamplerYcbcrConversionInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSamplerYcbcrConversionInfoKHR} value to the {@code pNext} chain. */
         public VkImageViewCreateInfo.Buffer pNext(VkSamplerYcbcrConversionInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkImageViewCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkImageViewCreateInfo.Buffer flags(@NativeType("VkImageViewCreateFlags") int value) { VkImageViewCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewCreateInfo#image} field. */
+        /** Sets the specified value to the {@code image} field. */
         public VkImageViewCreateInfo.Buffer image(@NativeType("VkImage") long value) { VkImageViewCreateInfo.nimage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewCreateInfo#viewType} field. */
+        /** Sets the specified value to the {@code viewType} field. */
         public VkImageViewCreateInfo.Buffer viewType(@NativeType("VkImageViewType") int value) { VkImageViewCreateInfo.nviewType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewCreateInfo#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkImageViewCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkImageViewCreateInfo.nformat(address(), value); return this; }
-        /** Copies the specified {@link VkComponentMapping} to the {@link VkImageViewCreateInfo#components} field. */
+        /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
         public VkImageViewCreateInfo.Buffer components(VkComponentMapping value) { VkImageViewCreateInfo.ncomponents(address(), value); return this; }
-        /** Passes the {@link VkImageViewCreateInfo#components} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageViewCreateInfo.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
-        /** Copies the specified {@link VkImageSubresourceRange} to the {@link VkImageViewCreateInfo#subresourceRange} field. */
+        /** Copies the specified {@link VkImageSubresourceRange} to the {@code subresourceRange} field. */
         public VkImageViewCreateInfo.Buffer subresourceRange(VkImageSubresourceRange value) { VkImageViewCreateInfo.nsubresourceRange(address(), value); return this; }
-        /** Passes the {@link VkImageViewCreateInfo#subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code subresourceRange} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageViewCreateInfo.Buffer subresourceRange(java.util.function.Consumer<VkImageSubresourceRange> consumer) { consumer.accept(subresourceRange()); return this; }
 
     }

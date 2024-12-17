@@ -17,40 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Haptic Effect Description.
- * 
- * <h5>Member Descriptions</h5>
- * 
- * <ul>
- * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
- * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain.</li>
- * <li>{@code duration} is the duration of the haptic effect in nanoseconds. See <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-duration">duration</a> for more details.</li>
- * <li>{@code amplitudeCount} is the number of samples in the buffer.</li>
- * <li>{@code amplitudes} is the pointer to a float array that contains the samples.</li>
- * </ul>
- * 
- * <p>The runtime <b>should</b> resample the provided samples in the {@code amplitudes}, and maintain an internal buffer which <b>should</b> be of {@link FBHapticAmplitudeEnvelope#XR_MAX_HAPTIC_AMPLITUDE_ENVELOPE_SAMPLES_FB MAX_HAPTIC_AMPLITUDE_ENVELOPE_SAMPLES_FB} length. The resampling <b>should</b> happen based on the {@code duration}, {@code amplitudeCount}, and the device’s sample rate.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBHapticAmplitudeEnvelope XR_FB_haptic_amplitude_envelope} extension <b>must</b> be enabled prior to using {@link XrHapticAmplitudeEnvelopeVibrationFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBHapticAmplitudeEnvelope#XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code amplitudes} <b>must</b> be a pointer to an array of {@code amplitudeCount} {@code float} values</li>
- * <li>The {@code amplitudeCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHapticAmplitudeEnvelopeVibrationFB {
  *     XrStructureType type;
  *     void const * next;
  *     XrDuration duration;
  *     uint32_t amplitudeCount;
  *     float const * amplitudes;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrHapticAmplitudeEnvelopeVibrationFB extends Struct<XrHapticAmplitudeEnvelopeVibrationFB> implements NativeResource {
 

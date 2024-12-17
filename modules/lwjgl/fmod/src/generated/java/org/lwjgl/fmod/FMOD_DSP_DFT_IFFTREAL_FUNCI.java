@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     int size,
- *     struct FMOD_COMPLEX const *dft,
- *     float *signal,
- *     float const *window,
- *     int signalhop
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_DFT_IFFTREAL_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_DSP_DFT_IFFTREAL_FUNC")
 public interface FMOD_DSP_DFT_IFFTREAL_FUNCI extends CallbackI {
@@ -51,6 +39,7 @@ public interface FMOD_DSP_DFT_IFFTREAL_FUNCI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_DSP_DFT_IFFTREAL_FUNC) (struct FMOD_DSP_STATE * dsp_state, int size, struct FMOD_COMPLEX const * dft, float * signal, float const * window, int signalhop)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_DSP_STATE *") long dsp_state, int size, @NativeType("struct FMOD_COMPLEX const *") long dft, @NativeType("float *") long signal, @NativeType("float const *") long window, int signalhop);
 
 }

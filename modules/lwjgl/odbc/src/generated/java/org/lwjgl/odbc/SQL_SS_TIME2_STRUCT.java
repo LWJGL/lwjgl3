@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SQL_SS_TIME2_STRUCT {
  *     SQLUSMALLINT hour;
  *     SQLUSMALLINT minute;
  *     SQLUSMALLINT second;
  *     SQLUINTEGER fraction;
- * }</code></pre>
+ * }}</pre>
  */
 public class SQL_SS_TIME2_STRUCT extends Struct<SQL_SS_TIME2_STRUCT> implements NativeResource {
 

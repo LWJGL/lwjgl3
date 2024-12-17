@@ -15,7 +15,6 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-/** Opaque data structure -- see {@code NFD_PathSet_*}. */
 @NativeType("struct nfdpathsetenum_t")
 public class NFDPathSetEnum extends Struct<NFDPathSetEnum> implements NativeResource {
 

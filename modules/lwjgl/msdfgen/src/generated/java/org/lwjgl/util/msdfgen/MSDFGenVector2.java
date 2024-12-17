@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct msdf_vector2 {
- *     double {@link #x};
- *     double {@link #y};
- * }</code></pre>
+ *     double x;
+ *     double y;
+ * }}</pre>
  */
 @NativeType("struct msdf_vector2")
 public class MSDFGenVector2 extends Struct<MSDFGenVector2> implements NativeResource {
@@ -73,14 +71,14 @@ public class MSDFGenVector2 extends Struct<MSDFGenVector2> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the x-coordinate of this vector */
+    /** @return the value of the {@code x} field. */
     public double x() { return nx(address()); }
-    /** the y-coordinate of this vector */
+    /** @return the value of the {@code y} field. */
     public double y() { return ny(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public MSDFGenVector2 x(double value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public MSDFGenVector2 y(double value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -270,14 +268,14 @@ public class MSDFGenVector2 extends Struct<MSDFGenVector2> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link MSDFGenVector2#x} field. */
+        /** @return the value of the {@code x} field. */
         public double x() { return MSDFGenVector2.nx(address()); }
-        /** @return the value of the {@link MSDFGenVector2#y} field. */
+        /** @return the value of the {@code y} field. */
         public double y() { return MSDFGenVector2.ny(address()); }
 
-        /** Sets the specified value to the {@link MSDFGenVector2#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public MSDFGenVector2.Buffer x(double value) { MSDFGenVector2.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenVector2#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public MSDFGenVector2.Buffer y(double value) { MSDFGenVector2.ny(address(), value); return this; }
 
     }

@@ -16,23 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure providing feedback about the requested H.264 video session parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH264SessionParametersFeedbackInfoKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #hasStdSPSOverrides};
- *     VkBool32 {@link #hasStdPPSOverrides};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 hasStdSPSOverrides;
+ *     VkBool32 hasStdPPSOverrides;
+ * }}</pre>
  */
 public class VkVideoEncodeH264SessionParametersFeedbackInfoKHR extends Struct<VkVideoEncodeH264SessionParametersFeedbackInfoKHR> implements NativeResource {
 
@@ -88,24 +78,24 @@ public class VkVideoEncodeH264SessionParametersFeedbackInfoKHR extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-sps">H.264 sequence parameter set</a>, if one was requested via {@link VkVideoEncodeH264SessionParametersGetInfoKHR}{@code ::writeStdSPS}, were <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
+    /** @return the value of the {@code hasStdSPSOverrides} field. */
     @NativeType("VkBool32")
     public boolean hasStdSPSOverrides() { return nhasStdSPSOverrides(address()) != 0; }
-    /** indicates whether any of the parameters of the requested <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-pps">H.264 picture parameter set</a>, if one was requested via {@link VkVideoEncodeH264SessionParametersGetInfoKHR}{@code ::writeStdPPS}, were <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">overridden</a> by the implementation. */
+    /** @return the value of the {@code hasStdPPSOverrides} field. */
     @NativeType("VkBool32")
     public boolean hasStdPPSOverrides() { return nhasStdPPSOverrides(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH264SessionParametersFeedbackInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH264SessionParametersFeedbackInfoKHR sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH264SessionParametersFeedbackInfoKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,24 +289,24 @@ public class VkVideoEncodeH264SessionParametersFeedbackInfoKHR extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH264SessionParametersFeedbackInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoEncodeH264SessionParametersFeedbackInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR#hasStdSPSOverrides} field. */
+        /** @return the value of the {@code hasStdSPSOverrides} field. */
         @NativeType("VkBool32")
         public boolean hasStdSPSOverrides() { return VkVideoEncodeH264SessionParametersFeedbackInfoKHR.nhasStdSPSOverrides(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR#hasStdPPSOverrides} field. */
+        /** @return the value of the {@code hasStdPPSOverrides} field. */
         @NativeType("VkBool32")
         public boolean hasStdPPSOverrides() { return VkVideoEncodeH264SessionParametersFeedbackInfoKHR.nhasStdPPSOverrides(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH264SessionParametersFeedbackInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264SessionParametersFeedbackInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR} value to the {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH264SessionParametersFeedbackInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_FEEDBACK_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH264SessionParametersFeedbackInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH264SessionParametersFeedbackInfoKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeH264SessionParametersFeedbackInfoKHR.npNext(address(), value); return this; }
 
     }

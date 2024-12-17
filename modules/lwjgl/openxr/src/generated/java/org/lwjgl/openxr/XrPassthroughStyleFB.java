@@ -16,33 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A layer style.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrPassthroughStyleFB} lets applications customize the appearance of passthrough layers. In addition to the parameters specified here, applications <b>may</b> add one of the following structures to the structure chain: {@link XrPassthroughColorMapMonoToRgbaFB}, {@link XrPassthroughColorMapMonoToMonoFB}, {@link XrPassthroughBrightnessContrastSaturationFB}. These structures are mutually exclusive. The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if more than one of them are present in the structure chain.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using {@link XrPassthroughStyleFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBPassthrough#XR_TYPE_PASSTHROUGH_STYLE_FB TYPE_PASSTHROUGH_STYLE_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrPassthroughBrightnessContrastSaturationFB}, {@link XrPassthroughColorMapInterpolatedLutMETA}, {@link XrPassthroughColorMapLutMETA}, {@link XrPassthroughColorMapMonoToMonoFB}, {@link XrPassthroughColorMapMonoToRgbaFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrColor4f}, {@link FBPassthrough#xrPassthroughLayerSetStyleFB PassthroughLayerSetStyleFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPassthroughStyleFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     float {@link #textureOpacityFactor};
- *     {@link XrColor4f XrColor4f} {@link #edgeColor};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     float textureOpacityFactor;
+ *     {@link XrColor4f XrColor4f} edgeColor;
+ * }}</pre>
  */
 public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implements NativeResource {
 
@@ -98,22 +78,22 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the opacity of the passthrough imagery in the range [0, 1]. */
+    /** @return the value of the {@code textureOpacityFactor} field. */
     public float textureOpacityFactor() { return ntextureOpacityFactor(address()); }
-    /** the {@link XrColor4f} that defines the edge rendering color. Edges are detected in the original passthrough imagery and rendered on top of it. Edge rendering is disabled when the alpha value of {@code edgeColor} is zero. */
+    /** @return a {@link XrColor4f} view of the {@code edgeColor} field. */
     public XrColor4f edgeColor() { return nedgeColor(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPassthroughStyleFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_STYLE_FB TYPE_PASSTHROUGH_STYLE_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_STYLE_FB TYPE_PASSTHROUGH_STYLE_FB} value to the {@code type} field. */
     public XrPassthroughStyleFB type$Default() { return type(FBPassthrough.XR_TYPE_PASSTHROUGH_STYLE_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPassthroughStyleFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrPassthroughBrightnessContrastSaturationFB} value to the {@code next} chain. */
     public XrPassthroughStyleFB next(XrPassthroughBrightnessContrastSaturationFB value) { return this.next(value.next(this.next()).address()); }
@@ -125,11 +105,11 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
     public XrPassthroughStyleFB next(XrPassthroughColorMapMonoToMonoFB value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrPassthroughColorMapMonoToRgbaFB} value to the {@code next} chain. */
     public XrPassthroughStyleFB next(XrPassthroughColorMapMonoToRgbaFB value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #textureOpacityFactor} field. */
+    /** Sets the specified value to the {@code textureOpacityFactor} field. */
     public XrPassthroughStyleFB textureOpacityFactor(float value) { ntextureOpacityFactor(address(), value); return this; }
-    /** Copies the specified {@link XrColor4f} to the {@link #edgeColor} field. */
+    /** Copies the specified {@link XrColor4f} to the {@code edgeColor} field. */
     public XrPassthroughStyleFB edgeColor(XrColor4f value) { nedgeColor(address(), value); return this; }
-    /** Passes the {@link #edgeColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code edgeColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrPassthroughStyleFB edgeColor(java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(edgeColor()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -331,22 +311,22 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPassthroughStyleFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughStyleFB.ntype(address()); }
-        /** @return the value of the {@link XrPassthroughStyleFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughStyleFB.nnext(address()); }
-        /** @return the value of the {@link XrPassthroughStyleFB#textureOpacityFactor} field. */
+        /** @return the value of the {@code textureOpacityFactor} field. */
         public float textureOpacityFactor() { return XrPassthroughStyleFB.ntextureOpacityFactor(address()); }
-        /** @return a {@link XrColor4f} view of the {@link XrPassthroughStyleFB#edgeColor} field. */
+        /** @return a {@link XrColor4f} view of the {@code edgeColor} field. */
         public XrColor4f edgeColor() { return XrPassthroughStyleFB.nedgeColor(address()); }
 
-        /** Sets the specified value to the {@link XrPassthroughStyleFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPassthroughStyleFB.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughStyleFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_STYLE_FB TYPE_PASSTHROUGH_STYLE_FB} value to the {@link XrPassthroughStyleFB#type} field. */
+        /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_STYLE_FB TYPE_PASSTHROUGH_STYLE_FB} value to the {@code type} field. */
         public XrPassthroughStyleFB.Buffer type$Default() { return type(FBPassthrough.XR_TYPE_PASSTHROUGH_STYLE_FB); }
-        /** Sets the specified value to the {@link XrPassthroughStyleFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPassthroughStyleFB.Buffer next(@NativeType("void const *") long value) { XrPassthroughStyleFB.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrPassthroughBrightnessContrastSaturationFB} value to the {@code next} chain. */
         public XrPassthroughStyleFB.Buffer next(XrPassthroughBrightnessContrastSaturationFB value) { return this.next(value.next(this.next()).address()); }
@@ -358,11 +338,11 @@ public class XrPassthroughStyleFB extends Struct<XrPassthroughStyleFB> implement
         public XrPassthroughStyleFB.Buffer next(XrPassthroughColorMapMonoToMonoFB value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrPassthroughColorMapMonoToRgbaFB} value to the {@code next} chain. */
         public XrPassthroughStyleFB.Buffer next(XrPassthroughColorMapMonoToRgbaFB value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrPassthroughStyleFB#textureOpacityFactor} field. */
+        /** Sets the specified value to the {@code textureOpacityFactor} field. */
         public XrPassthroughStyleFB.Buffer textureOpacityFactor(float value) { XrPassthroughStyleFB.ntextureOpacityFactor(address(), value); return this; }
-        /** Copies the specified {@link XrColor4f} to the {@link XrPassthroughStyleFB#edgeColor} field. */
+        /** Copies the specified {@link XrColor4f} to the {@code edgeColor} field. */
         public XrPassthroughStyleFB.Buffer edgeColor(XrColor4f value) { XrPassthroughStyleFB.nedgeColor(address(), value); return this; }
-        /** Passes the {@link XrPassthroughStyleFB#edgeColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code edgeColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrPassthroughStyleFB.Buffer edgeColor(java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(edgeColor()); return this; }
 
     }

@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkImageFormatListCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageFormatListCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t viewFormatCount;
  *     VkFormat const * pViewFormats;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkImageFormatListCreateInfoKHR extends VkImageFormatListCreateInfo {
 

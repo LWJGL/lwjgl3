@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPipelineCreateFlags2CreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineCreateFlags2CreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkPipelineCreateFlags2 flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPipelineCreateFlags2CreateInfoKHR extends VkPipelineCreateFlags2CreateInfo {
 

@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_SOUND *sound,
- *     FMOD_RESULT result
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_SOUND_NONBLOCK_CALLBACK} */
 public abstract class FMOD_SOUND_NONBLOCK_CALLBACK extends Callback implements FMOD_SOUND_NONBLOCK_CALLBACKI {
 
     /**

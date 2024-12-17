@@ -17,17 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the input state of a gamepad.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct GLFWgamepadstate {
- *     unsigned char {@link #buttons}[15];
- *     float {@link #axes}[6];
- * }</code></pre>
- *
- * @since version 3.3
+ *     unsigned char buttons[15];
+ *     float axes[6];
+ * }}</pre>
  */
 @NativeType("struct GLFWgamepadstate")
 public class GLFWGamepadState extends Struct<GLFWGamepadState> implements NativeResource {
@@ -78,25 +72,25 @@ public class GLFWGamepadState extends Struct<GLFWGamepadState> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the states of each gamepad button, {@link GLFW#GLFW_PRESS PRESS} or {@link GLFW#GLFW_RELEASE RELEASE} */
+    /** @return a {@link ByteBuffer} view of the {@code buttons} field. */
     @NativeType("unsigned char[15]")
     public ByteBuffer buttons() { return nbuttons(address()); }
-    /** the states of each gamepad button, {@link GLFW#GLFW_PRESS PRESS} or {@link GLFW#GLFW_RELEASE RELEASE} */
+    /** @return the value at the specified index of the {@code buttons} field. */
     @NativeType("unsigned char")
     public byte buttons(int index) { return nbuttons(address(), index); }
-    /** the states of each gamepad axis, in the range -1.0 to 1.0 inclusive */
+    /** @return a {@link FloatBuffer} view of the {@code axes} field. */
     @NativeType("float[6]")
     public FloatBuffer axes() { return naxes(address()); }
-    /** the states of each gamepad axis, in the range -1.0 to 1.0 inclusive */
+    /** @return the value at the specified index of the {@code axes} field. */
     public float axes(int index) { return naxes(address(), index); }
 
-    /** Copies the specified {@link ByteBuffer} to the {@link #buttons} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code buttons} field. */
     public GLFWGamepadState buttons(@NativeType("unsigned char[15]") ByteBuffer value) { nbuttons(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #buttons} field. */
+    /** Sets the specified value at the specified index of the {@code buttons} field. */
     public GLFWGamepadState buttons(int index, @NativeType("unsigned char") byte value) { nbuttons(address(), index, value); return this; }
-    /** Copies the specified {@link FloatBuffer} to the {@link #axes} field. */
+    /** Copies the specified {@link FloatBuffer} to the {@code axes} field. */
     public GLFWGamepadState axes(@NativeType("float[6]") FloatBuffer value) { naxes(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #axes} field. */
+    /** Sets the specified value at the specified index of the {@code axes} field. */
     public GLFWGamepadState axes(int index, float value) { naxes(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,25 +321,25 @@ public class GLFWGamepadState extends Struct<GLFWGamepadState> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link GLFWGamepadState#buttons} field. */
+        /** @return a {@link ByteBuffer} view of the {@code buttons} field. */
         @NativeType("unsigned char[15]")
         public ByteBuffer buttons() { return GLFWGamepadState.nbuttons(address()); }
-        /** @return the value at the specified index of the {@link GLFWGamepadState#buttons} field. */
+        /** @return the value at the specified index of the {@code buttons} field. */
         @NativeType("unsigned char")
         public byte buttons(int index) { return GLFWGamepadState.nbuttons(address(), index); }
-        /** @return a {@link FloatBuffer} view of the {@link GLFWGamepadState#axes} field. */
+        /** @return a {@link FloatBuffer} view of the {@code axes} field. */
         @NativeType("float[6]")
         public FloatBuffer axes() { return GLFWGamepadState.naxes(address()); }
-        /** @return the value at the specified index of the {@link GLFWGamepadState#axes} field. */
+        /** @return the value at the specified index of the {@code axes} field. */
         public float axes(int index) { return GLFWGamepadState.naxes(address(), index); }
 
-        /** Copies the specified {@link ByteBuffer} to the {@link GLFWGamepadState#buttons} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code buttons} field. */
         public GLFWGamepadState.Buffer buttons(@NativeType("unsigned char[15]") ByteBuffer value) { GLFWGamepadState.nbuttons(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link GLFWGamepadState#buttons} field. */
+        /** Sets the specified value at the specified index of the {@code buttons} field. */
         public GLFWGamepadState.Buffer buttons(int index, @NativeType("unsigned char") byte value) { GLFWGamepadState.nbuttons(address(), index, value); return this; }
-        /** Copies the specified {@link FloatBuffer} to the {@link GLFWGamepadState#axes} field. */
+        /** Copies the specified {@link FloatBuffer} to the {@code axes} field. */
         public GLFWGamepadState.Buffer axes(@NativeType("float[6]") FloatBuffer value) { GLFWGamepadState.naxes(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link GLFWGamepadState#axes} field. */
+        /** Sets the specified value at the specified index of the {@code axes} field. */
         public GLFWGamepadState.Buffer axes(int index, float value) { GLFWGamepadState.naxes(address(), index, value); return this; }
 
     }

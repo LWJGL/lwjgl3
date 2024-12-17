@@ -15,20 +15,16 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to model a TrueType vertical header, the {@code vhea} table, as well as the corresponding vertical metrics table, {@code vmtx}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TT_VertHeader {
  *     FT_Fixed Version;
  *     FT_Short Ascender;
  *     FT_Short Descender;
  *     FT_Short Line_Gap;
- *     FT_UShort {@link #advance_Height_Max};
- *     FT_Short {@link #min_Top_Side_Bearing};
- *     FT_Short {@link #min_Bottom_Side_Bearing};
- *     FT_Short {@link #yMax_Extent};
+ *     FT_UShort advance_Height_Max;
+ *     FT_Short min_Top_Side_Bearing;
+ *     FT_Short min_Bottom_Side_Bearing;
+ *     FT_Short yMax_Extent;
  *     FT_Short caret_Slope_Rise;
  *     FT_Short caret_Slope_Run;
  *     FT_Short caret_Offset;
@@ -37,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UShort number_Of_VMetrics;
  *     void * long_metrics;
  *     void * short_metrics;
- * }</code></pre>
+ * }}</pre>
  */
 public class TT_VertHeader extends Struct<TT_VertHeader> {
 
@@ -141,16 +137,16 @@ public class TT_VertHeader extends Struct<TT_VertHeader> {
     /** @return the value of the {@code Line_Gap} field. */
     @NativeType("FT_Short")
     public short Line_Gap() { return nLine_Gap(address()); }
-    /** advance height maximum */
+    /** @return the value of the {@code advance_Height_Max} field. */
     @NativeType("FT_UShort")
     public short advance_Height_Max() { return nadvance_Height_Max(address()); }
-    /** minimum top-sb */
+    /** @return the value of the {@code min_Top_Side_Bearing} field. */
     @NativeType("FT_Short")
     public short min_Top_Side_Bearing() { return nmin_Top_Side_Bearing(address()); }
-    /** minimum bottom-sb */
+    /** @return the value of the {@code min_Bottom_Side_Bearing} field. */
     @NativeType("FT_Short")
     public short min_Bottom_Side_Bearing() { return nmin_Bottom_Side_Bearing(address()); }
-    /** ymax extents */
+    /** @return the value of the {@code yMax_Extent} field. */
     @NativeType("FT_Short")
     public short yMax_Extent() { return nyMax_Extent(address()); }
     /** @return the value of the {@code caret_Slope_Rise} field. */
@@ -174,18 +170,10 @@ public class TT_VertHeader extends Struct<TT_VertHeader> {
     /** @return the value of the {@code number_Of_VMetrics} field. */
     @NativeType("FT_UShort")
     public short number_Of_VMetrics() { return nnumber_Of_VMetrics(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code long_metrics} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code long_metrics} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer long_metrics(int capacity) { return nlong_metrics(address(), capacity); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer short_metrics(int capacity) { return nshort_metrics(address(), capacity); }
 
@@ -310,16 +298,16 @@ public class TT_VertHeader extends Struct<TT_VertHeader> {
         /** @return the value of the {@code Line_Gap} field. */
         @NativeType("FT_Short")
         public short Line_Gap() { return TT_VertHeader.nLine_Gap(address()); }
-        /** @return the value of the {@link TT_VertHeader#advance_Height_Max} field. */
+        /** @return the value of the {@code advance_Height_Max} field. */
         @NativeType("FT_UShort")
         public short advance_Height_Max() { return TT_VertHeader.nadvance_Height_Max(address()); }
-        /** @return the value of the {@link TT_VertHeader#min_Top_Side_Bearing} field. */
+        /** @return the value of the {@code min_Top_Side_Bearing} field. */
         @NativeType("FT_Short")
         public short min_Top_Side_Bearing() { return TT_VertHeader.nmin_Top_Side_Bearing(address()); }
-        /** @return the value of the {@link TT_VertHeader#min_Bottom_Side_Bearing} field. */
+        /** @return the value of the {@code min_Bottom_Side_Bearing} field. */
         @NativeType("FT_Short")
         public short min_Bottom_Side_Bearing() { return TT_VertHeader.nmin_Bottom_Side_Bearing(address()); }
-        /** @return the value of the {@link TT_VertHeader#yMax_Extent} field. */
+        /** @return the value of the {@code yMax_Extent} field. */
         @NativeType("FT_Short")
         public short yMax_Extent() { return TT_VertHeader.nyMax_Extent(address()); }
         /** @return the value of the {@code caret_Slope_Rise} field. */
@@ -343,18 +331,10 @@ public class TT_VertHeader extends Struct<TT_VertHeader> {
         /** @return the value of the {@code number_Of_VMetrics} field. */
         @NativeType("FT_UShort")
         public short number_Of_VMetrics() { return TT_VertHeader.nnumber_Of_VMetrics(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code long_metrics} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code long_metrics} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer long_metrics(int capacity) { return TT_VertHeader.nlong_metrics(address(), capacity); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer short_metrics(int capacity) { return TT_VertHeader.nshort_metrics(address(), capacity); }
 

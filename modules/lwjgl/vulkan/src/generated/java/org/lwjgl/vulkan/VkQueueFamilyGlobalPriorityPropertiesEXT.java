@@ -19,17 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK14.*;
 
 /**
- * See {@link VkQueueFamilyGlobalPriorityProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkQueueFamilyGlobalPriorityPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t priorityCount;
  *     VkQueueGlobalPriority priorities[VK_MAX_GLOBAL_PRIORITY_SIZE];
- * }</code></pre>
+ * }}</pre>
  */
 public class VkQueueFamilyGlobalPriorityPropertiesEXT extends VkQueueFamilyGlobalPriorityProperties {
 

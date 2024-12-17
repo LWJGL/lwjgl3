@@ -16,33 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information about share spatial entity request.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrShareSpacesRecipientBaseHeaderMETA} is designed to be an abstract base struct which is to be extended by other structures.</p>
- * 
- * <p>Any valid structure that identifies {@link XrShareSpacesRecipientBaseHeaderMETA} as its parent structure <b>may</b> be provided anywhere a valid {@link XrShareSpacesRecipientBaseHeaderMETA} is specified to be passed.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METASpatialEntitySharing XR_META_spatial_entity_sharing} extension <b>must</b> be enabled prior to using {@link XrShareSpacesRecipientBaseHeaderMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METASpatialEntityGroupSharing#XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrShareSpacesInfoMETA}, {@link METASpatialEntitySharing#xrShareSpacesMETA ShareSpacesMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrShareSpacesRecipientBaseHeaderMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrShareSpacesRecipientBaseHeaderMETA extends Struct<XrShareSpacesRecipientBaseHeaderMETA> implements NativeResource {
 
@@ -92,16 +70,16 @@ public class XrShareSpacesRecipientBaseHeaderMETA extends Struct<XrShareSpacesRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrShareSpacesRecipientBaseHeaderMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrShareSpacesRecipientBaseHeaderMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -301,16 +279,16 @@ public class XrShareSpacesRecipientBaseHeaderMETA extends Struct<XrShareSpacesRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrShareSpacesRecipientBaseHeaderMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrShareSpacesRecipientBaseHeaderMETA.ntype(address()); }
-        /** @return the value of the {@link XrShareSpacesRecipientBaseHeaderMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrShareSpacesRecipientBaseHeaderMETA.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrShareSpacesRecipientBaseHeaderMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrShareSpacesRecipientBaseHeaderMETA.Buffer type(@NativeType("XrStructureType") int value) { XrShareSpacesRecipientBaseHeaderMETA.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XrShareSpacesRecipientBaseHeaderMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrShareSpacesRecipientBaseHeaderMETA.Buffer next(@NativeType("void const *") long value) { XrShareSpacesRecipientBaseHeaderMETA.nnext(address(), value); return this; }
 
     }

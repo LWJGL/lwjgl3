@@ -16,36 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify image alignment.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code maximumRequestedAlignment} is not 0, the implementation <b>should</b> choose an image memory layout that requires an alignment no larger than {@code maximumRequestedAlignment} as reported in {@link VkMemoryRequirements}{@code ::alignment}. If such a layout does not exist for the given image creation parameters, the implementation <b>should</b> return the smallest alignment which is supported in {@link VkMemoryRequirements}.</p>
- * 
- * <p>If an implementation needs to disable image compression for {@code maximumRequestedAlignment} to be honored - where a larger alignment would enable image compression - the implementation <b>should</b> not use {@code maximumRequestedAlignment}, and <b>should</b> return the smallest alignment which does not compromise compression. If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-imageCompressionControl">{@code imageCompressionControl}</a> feature is enabled, the application <b>can</b> chain a {@link VkImageCompressionControlEXT} with {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_DISABLED_EXT IMAGE_COMPRESSION_DISABLED_EXT}. In this case, image compression considerations <b>should</b> not apply when implementation decides alignment.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code maximumRequestedAlignment} is not 0, {@code maximumRequestedAlignment} <b>must</b> be a power of two</li>
- * <li>If {@code maximumRequestedAlignment} is not 0, the bitwise-and of {@code maximumRequestedAlignment} and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedImageAlignmentMask">{@code supportedImageAlignmentMask}</a> <b>must</b> be non-zero</li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-imageAlignmentControl">{@code imageAlignmentControl}</a> <b>must</b> be enabled</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link MESAImageAlignmentControl#VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageAlignmentControlCreateInfoMESA {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #maximumRequestedAlignment};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t maximumRequestedAlignment;
+ * }}</pre>
  */
 public class VkImageAlignmentControlCreateInfoMESA extends Struct<VkImageAlignmentControlCreateInfoMESA> implements NativeResource {
 
@@ -98,23 +74,23 @@ public class VkImageAlignmentControlCreateInfoMESA extends Struct<VkImageAlignme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the maximum alignment for the image. */
+    /** @return the value of the {@code maximumRequestedAlignment} field. */
     @NativeType("uint32_t")
     public int maximumRequestedAlignment() { return nmaximumRequestedAlignment(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageAlignmentControlCreateInfoMESA sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link MESAImageAlignmentControl#VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA} value to the {@link #sType} field. */
+    /** Sets the {@link MESAImageAlignmentControl#VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA} value to the {@code sType} field. */
     public VkImageAlignmentControlCreateInfoMESA sType$Default() { return sType(MESAImageAlignmentControl.VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageAlignmentControlCreateInfoMESA pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maximumRequestedAlignment} field. */
+    /** Sets the specified value to the {@code maximumRequestedAlignment} field. */
     public VkImageAlignmentControlCreateInfoMESA maximumRequestedAlignment(@NativeType("uint32_t") int value) { nmaximumRequestedAlignment(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -310,23 +286,23 @@ public class VkImageAlignmentControlCreateInfoMESA extends Struct<VkImageAlignme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageAlignmentControlCreateInfoMESA#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageAlignmentControlCreateInfoMESA.nsType(address()); }
-        /** @return the value of the {@link VkImageAlignmentControlCreateInfoMESA#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageAlignmentControlCreateInfoMESA.npNext(address()); }
-        /** @return the value of the {@link VkImageAlignmentControlCreateInfoMESA#maximumRequestedAlignment} field. */
+        /** @return the value of the {@code maximumRequestedAlignment} field. */
         @NativeType("uint32_t")
         public int maximumRequestedAlignment() { return VkImageAlignmentControlCreateInfoMESA.nmaximumRequestedAlignment(address()); }
 
-        /** Sets the specified value to the {@link VkImageAlignmentControlCreateInfoMESA#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageAlignmentControlCreateInfoMESA.Buffer sType(@NativeType("VkStructureType") int value) { VkImageAlignmentControlCreateInfoMESA.nsType(address(), value); return this; }
-        /** Sets the {@link MESAImageAlignmentControl#VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA} value to the {@link VkImageAlignmentControlCreateInfoMESA#sType} field. */
+        /** Sets the {@link MESAImageAlignmentControl#VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA} value to the {@code sType} field. */
         public VkImageAlignmentControlCreateInfoMESA.Buffer sType$Default() { return sType(MESAImageAlignmentControl.VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA); }
-        /** Sets the specified value to the {@link VkImageAlignmentControlCreateInfoMESA#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageAlignmentControlCreateInfoMESA.Buffer pNext(@NativeType("void const *") long value) { VkImageAlignmentControlCreateInfoMESA.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageAlignmentControlCreateInfoMESA#maximumRequestedAlignment} field. */
+        /** Sets the specified value to the {@code maximumRequestedAlignment} field. */
         public VkImageAlignmentControlCreateInfoMESA.Buffer maximumRequestedAlignment(@NativeType("uint32_t") int value) { VkImageAlignmentControlCreateInfoMESA.nmaximumRequestedAlignment(address(), value); return this; }
 
     }

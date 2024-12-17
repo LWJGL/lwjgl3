@@ -14,23 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Feedback about the creation of a pipeline or pipeline stage.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VK13#VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT PIPELINE_CREATION_FEEDBACK_VALID_BIT} is not set in {@code flags}, an implementation <b>must</b> not set any other bits in {@code flags}, and the values of all other {@link VkPipelineCreationFeedback} data members are undefined.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineCreationFeedbackCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineCreationFeedback {
- *     VkPipelineCreationFeedbackFlags {@link #flags};
- *     uint64_t {@link #duration};
- * }</code></pre>
+ *     VkPipelineCreationFeedbackFlags flags;
+ *     uint64_t duration;
+ * }}</pre>
  */
 public class VkPipelineCreationFeedback extends Struct<VkPipelineCreationFeedback> {
 
@@ -80,10 +68,10 @@ public class VkPipelineCreationFeedback extends Struct<VkPipelineCreationFeedbac
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a bitmask of {@code VkPipelineCreationFeedbackFlagBits} providing feedback about the creation of a pipeline or of a pipeline stage. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkPipelineCreationFeedbackFlags")
     public int flags() { return nflags(address()); }
-    /** the duration spent creating a pipeline or pipeline stage in nanoseconds. */
+    /** @return the value of the {@code duration} field. */
     @NativeType("uint64_t")
     public long duration() { return nduration(address()); }
 
@@ -164,10 +152,10 @@ public class VkPipelineCreationFeedback extends Struct<VkPipelineCreationFeedbac
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineCreationFeedback#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkPipelineCreationFeedbackFlags")
         public int flags() { return VkPipelineCreationFeedback.nflags(address()); }
-        /** @return the value of the {@link VkPipelineCreationFeedback#duration} field. */
+        /** @return the value of the {@code duration} field. */
         @NativeType("uint64_t")
         public long duration() { return VkPipelineCreationFeedback.nduration(address()); }
 

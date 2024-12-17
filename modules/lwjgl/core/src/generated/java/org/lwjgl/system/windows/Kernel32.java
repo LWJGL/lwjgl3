@@ -11,7 +11,6 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** Native bindings to Kernel32 library. */
 public class Kernel32 {
 
     private static final SharedLibrary KERNEL32 = Library.loadNative(Kernel32.class, "org.lwjgl", "kernel32");
@@ -45,6 +44,7 @@ public class Kernel32 {
 
     // --- [ GetCurrentProcess ] ---
 
+    /** {@code HANDLE GetCurrentProcess(void)} */
     @NativeType("HANDLE")
     public static long GetCurrentProcess() {
         long __functionAddress = Functions.GetCurrentProcess;
@@ -53,6 +53,7 @@ public class Kernel32 {
 
     // --- [ GetCurrentProcessId ] ---
 
+    /** {@code DWORD GetCurrentProcessId(void)} */
     @NativeType("DWORD")
     public static int GetCurrentProcessId() {
         long __functionAddress = Functions.GetCurrentProcessId;
@@ -61,6 +62,7 @@ public class Kernel32 {
 
     // --- [ GetProcessId ] ---
 
+    /** {@code DWORD GetProcessId(HANDLE Process)} */
     @NativeType("DWORD")
     public static int GetProcessId(@NativeType("HANDLE") long Process) {
         long __functionAddress = Functions.GetProcessId;
@@ -72,6 +74,7 @@ public class Kernel32 {
 
     // --- [ GetCurrentThread ] ---
 
+    /** {@code HANDLE GetCurrentThread(void)} */
     @NativeType("HANDLE")
     public static long GetCurrentThread() {
         long __functionAddress = Functions.GetCurrentThread;
@@ -80,6 +83,7 @@ public class Kernel32 {
 
     // --- [ GetCurrentThreadId ] ---
 
+    /** {@code DWORD GetCurrentThreadId(void)} */
     @NativeType("DWORD")
     public static int GetCurrentThreadId() {
         long __functionAddress = Functions.GetCurrentThreadId;
@@ -88,6 +92,7 @@ public class Kernel32 {
 
     // --- [ GetThreadId ] ---
 
+    /** {@code DWORD GetThreadId(HANDLE Thread)} */
     @NativeType("DWORD")
     public static int GetThreadId(@NativeType("HANDLE") long Thread) {
         long __functionAddress = Functions.GetThreadId;
@@ -100,6 +105,7 @@ public class Kernel32 {
 
     // --- [ GetProcessIdOfThread ] ---
 
+    /** {@code DWORD GetProcessIdOfThread(HANDLE Thread)} */
     @NativeType("DWORD")
     public static int GetProcessIdOfThread(@NativeType("HANDLE") long Thread) {
         long __functionAddress = Functions.GetProcessIdOfThread;
@@ -112,6 +118,7 @@ public class Kernel32 {
 
     // --- [ GetCurrentProcessorNumber ] ---
 
+    /** {@code DWORD GetCurrentProcessorNumber(void)} */
     @NativeType("DWORD")
     public static int GetCurrentProcessorNumber() {
         long __functionAddress = Functions.GetCurrentProcessorNumber;

@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link ZSTDCustomMem} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     void *opaque,
- *     size_t size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ZSTD_allocFunction} */
 @FunctionalInterface
 @NativeType("ZSTD_allocFunction")
 public interface ZSTDAllocFunctionI extends CallbackI {
@@ -45,6 +35,7 @@ public interface ZSTDAllocFunctionI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code void * (* ZSTD_allocFunction) (void * opaque, size_t size)} */
     @NativeType("void *") long invoke(@NativeType("void *") long opaque, @NativeType("size_t") long size);
 
 }

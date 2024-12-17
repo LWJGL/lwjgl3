@@ -16,27 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying input data for a single draw-type command token.
- * 
- * <h5>Description</h5>
- * 
- * <p>The corresponding indirect draw struct data will be read from the buffer address.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The buffer’s usage flag from which the address was acquired <b>must</b> have the {@link VK10#VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT BUFFER_USAGE_INDIRECT_BUFFER_BIT} bit set</li>
- * <li>Each element of the buffer from which the address was acquired and that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDrawIndirectCountIndirectCommandEXT {
- *     VkDeviceAddress {@link #bufferAddress};
- *     uint32_t {@link #stride};
- *     uint32_t {@link #commandCount};
- * }</code></pre>
+ *     VkDeviceAddress bufferAddress;
+ *     uint32_t stride;
+ *     uint32_t commandCount;
+ * }}</pre>
  */
 public class VkDrawIndirectCountIndirectCommandEXT extends Struct<VkDrawIndirectCountIndirectCommandEXT> implements NativeResource {
 
@@ -89,21 +74,21 @@ public class VkDrawIndirectCountIndirectCommandEXT extends Struct<VkDrawIndirect
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies a physical address of the {@code VkBuffer} used for draw commands. */
+    /** @return the value of the {@code bufferAddress} field. */
     @NativeType("VkDeviceAddress")
     public long bufferAddress() { return nbufferAddress(address()); }
-    /** the byte size stride for the command arguments */
+    /** @return the value of the {@code stride} field. */
     @NativeType("uint32_t")
     public int stride() { return nstride(address()); }
-    /** the number of commands to execute */
+    /** @return the value of the {@code commandCount} field. */
     @NativeType("uint32_t")
     public int commandCount() { return ncommandCount(address()); }
 
-    /** Sets the specified value to the {@link #bufferAddress} field. */
+    /** Sets the specified value to the {@code bufferAddress} field. */
     public VkDrawIndirectCountIndirectCommandEXT bufferAddress(@NativeType("VkDeviceAddress") long value) { nbufferAddress(address(), value); return this; }
-    /** Sets the specified value to the {@link #stride} field. */
+    /** Sets the specified value to the {@code stride} field. */
     public VkDrawIndirectCountIndirectCommandEXT stride(@NativeType("uint32_t") int value) { nstride(address(), value); return this; }
-    /** Sets the specified value to the {@link #commandCount} field. */
+    /** Sets the specified value to the {@code commandCount} field. */
     public VkDrawIndirectCountIndirectCommandEXT commandCount(@NativeType("uint32_t") int value) { ncommandCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,21 +284,21 @@ public class VkDrawIndirectCountIndirectCommandEXT extends Struct<VkDrawIndirect
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDrawIndirectCountIndirectCommandEXT#bufferAddress} field. */
+        /** @return the value of the {@code bufferAddress} field. */
         @NativeType("VkDeviceAddress")
         public long bufferAddress() { return VkDrawIndirectCountIndirectCommandEXT.nbufferAddress(address()); }
-        /** @return the value of the {@link VkDrawIndirectCountIndirectCommandEXT#stride} field. */
+        /** @return the value of the {@code stride} field. */
         @NativeType("uint32_t")
         public int stride() { return VkDrawIndirectCountIndirectCommandEXT.nstride(address()); }
-        /** @return the value of the {@link VkDrawIndirectCountIndirectCommandEXT#commandCount} field. */
+        /** @return the value of the {@code commandCount} field. */
         @NativeType("uint32_t")
         public int commandCount() { return VkDrawIndirectCountIndirectCommandEXT.ncommandCount(address()); }
 
-        /** Sets the specified value to the {@link VkDrawIndirectCountIndirectCommandEXT#bufferAddress} field. */
+        /** Sets the specified value to the {@code bufferAddress} field. */
         public VkDrawIndirectCountIndirectCommandEXT.Buffer bufferAddress(@NativeType("VkDeviceAddress") long value) { VkDrawIndirectCountIndirectCommandEXT.nbufferAddress(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDrawIndirectCountIndirectCommandEXT#stride} field. */
+        /** Sets the specified value to the {@code stride} field. */
         public VkDrawIndirectCountIndirectCommandEXT.Buffer stride(@NativeType("uint32_t") int value) { VkDrawIndirectCountIndirectCommandEXT.nstride(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDrawIndirectCountIndirectCommandEXT#commandCount} field. */
+        /** Sets the specified value to the {@code commandCount} field. */
         public VkDrawIndirectCountIndirectCommandEXT.Buffer commandCount(@NativeType("uint32_t") int value) { VkDrawIndirectCountIndirectCommandEXT.ncommandCount(address(), value); return this; }
 
     }

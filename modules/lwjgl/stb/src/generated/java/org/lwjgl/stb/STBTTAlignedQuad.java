@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Quad used for drawing a baked character, returned by {@link STBTruetype#stbtt_GetBakedQuad GetBakedQuad}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stbtt_aligned_quad {
  *     float x0;
  *     float y0;
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float y1;
  *     float s1;
  *     float t1;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stbtt_aligned_quad")
 public class STBTTAlignedQuad extends Struct<STBTTAlignedQuad> implements NativeResource {

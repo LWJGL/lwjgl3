@@ -36,6 +36,7 @@ public class LLVMTargetAMDGPU {
 
     // --- [ LLVMInitializeAMDGPUTargetInfo ] ---
 
+    /** {@code void LLVMInitializeAMDGPUTargetInfo(void)} */
     public static void LLVMInitializeAMDGPUTargetInfo() {
         long __functionAddress = Functions.InitializeAMDGPUTargetInfo;
         invokeV(__functionAddress);
@@ -43,6 +44,7 @@ public class LLVMTargetAMDGPU {
 
     // --- [ LLVMInitializeAMDGPUTarget ] ---
 
+    /** {@code void LLVMInitializeAMDGPUTarget(void)} */
     public static void LLVMInitializeAMDGPUTarget() {
         long __functionAddress = Functions.InitializeAMDGPUTarget;
         invokeV(__functionAddress);
@@ -50,6 +52,7 @@ public class LLVMTargetAMDGPU {
 
     // --- [ LLVMInitializeAMDGPUTargetMC ] ---
 
+    /** {@code void LLVMInitializeAMDGPUTargetMC(void)} */
     public static void LLVMInitializeAMDGPUTargetMC() {
         long __functionAddress = Functions.InitializeAMDGPUTargetMC;
         invokeV(__functionAddress);
@@ -57,6 +60,7 @@ public class LLVMTargetAMDGPU {
 
     // --- [ LLVMInitializeAMDGPUTargetMCA ] ---
 
+    /** {@code void LLVMInitializeAMDGPUTargetMCA(void)} */
     public static void LLVMInitializeAMDGPUTargetMCA() {
         long __functionAddress = Functions.InitializeAMDGPUTargetMCA;
         if (CHECKS) {
@@ -67,6 +71,7 @@ public class LLVMTargetAMDGPU {
 
     // --- [ LLVMInitializeAMDGPUAsmPrinter ] ---
 
+    /** {@code void LLVMInitializeAMDGPUAsmPrinter(void)} */
     public static void LLVMInitializeAMDGPUAsmPrinter() {
         long __functionAddress = Functions.InitializeAMDGPUAsmPrinter;
         invokeV(__functionAddress);
@@ -74,6 +79,7 @@ public class LLVMTargetAMDGPU {
 
     // --- [ LLVMInitializeAMDGPUAsmParser ] ---
 
+    /** {@code void LLVMInitializeAMDGPUAsmParser(void)} */
     public static void LLVMInitializeAMDGPUAsmParser() {
         long __functionAddress = Functions.InitializeAMDGPUAsmParser;
         invokeV(__functionAddress);
@@ -81,6 +87,7 @@ public class LLVMTargetAMDGPU {
 
     // --- [ LLVMInitializeAMDGPUDisassembler ] ---
 
+    /** {@code void LLVMInitializeAMDGPUDisassembler(void)} */
     public static void LLVMInitializeAMDGPUDisassembler() {
         long __functionAddress = Functions.InitializeAMDGPUDisassembler;
         invokeV(__functionAddress);

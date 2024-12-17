@@ -16,17 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters for incremental defragmentation steps.
- * 
- * <p>To be used with function {@link Vma#vmaBeginDefragmentationPass BeginDefragmentationPass}.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaDefragmentationPassMoveInfo {
- *     uint32_t {@link #moveCount};
- *     {@link VmaDefragmentationMove VmaDefragmentationMove} * {@link #pMoves};
- * }</code></pre>
+ *     uint32_t moveCount;
+ *     {@link VmaDefragmentationMove VmaDefragmentationMove} * pMoves;
+ * }}</pre>
  */
 public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPassMoveInfo> implements NativeResource {
 
@@ -76,44 +70,16 @@ public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPas
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** number of elements in the {@code pMoves} array. */
+    /** @return the value of the {@code moveCount} field. */
     @NativeType("uint32_t")
     public int moveCount() { return nmoveCount(address()); }
-    /**
-     * array of moves to be performed by the user in the current defragmentation pass.
-     * 
-     * <p>Pointer to an array of {@code moveCount} elements, owned by VMA, created in {@link Vma#vmaBeginDefragmentationPass BeginDefragmentationPass}, destroyed in {@link Vma#vmaEndDefragmentationPass EndDefragmentationPass}.</p>
-     * 
-     * <p>For each element, you should:</p>
-     * 
-     * <ol>
-     * <li>Create a new buffer/image in the place pointed by {@link VmaDefragmentationMove}{@code ::dstMemory} + {@code VmaDefragmentationMove::dstOffset}.</li>
-     * <li>Copy data from the {@code VmaDefragmentationMove::srcAllocation} e.g. using {@code vkCmdCopyBuffer}, {@code vkCmdCopyImage}.</li>
-     * <li>Make sure these commands finished executing on the GPU.</li>
-     * <li>Destroy the old buffer/image.</li>
-     * </ol>
-     * 
-     * <p>Only then you can finish defragmentation pass by calling {@code vmaEndDefragmentationPass()}. After this call, the allocation will point to the new
-     * place in memory.</p>
-     * 
-     * <p>Alternatively, if you cannot move specific allocation, you can set {@code VmaDefragmentationMove::operation} to
-     * {@link Vma#VMA_DEFRAGMENTATION_MOVE_OPERATION_IGNORE DEFRAGMENTATION_MOVE_OPERATION_IGNORE}.</p>
-     * 
-     * <p>Alternatively, if you decide you want to completely remove the allocation:</p>
-     * 
-     * <ol>
-     * <li>Destroy its buffer/image.</li>
-     * <li>Set {@code VmaDefragmentationMove::operation} to {@link Vma#VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY DEFRAGMENTATION_MOVE_OPERATION_DESTROY}.</li>
-     * </ol>
-     * 
-     * <p>Then, after {@code vmaEndDefragmentationPass()} the allocation will be freed.</p>
-     */
+    /** @return a {@link VmaDefragmentationMove.Buffer} view of the struct array pointed to by the {@code pMoves} field. */
     @NativeType("VmaDefragmentationMove *")
     public VmaDefragmentationMove.@Nullable Buffer pMoves() { return npMoves(address()); }
 
-    /** Sets the specified value to the {@link #moveCount} field. */
+    /** Sets the specified value to the {@code moveCount} field. */
     public VmaDefragmentationPassMoveInfo moveCount(@NativeType("uint32_t") int value) { nmoveCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VmaDefragmentationMove.Buffer} to the {@link #pMoves} field. */
+    /** Sets the address of the specified {@link VmaDefragmentationMove.Buffer} to the {@code pMoves} field. */
     public VmaDefragmentationPassMoveInfo pMoves(@NativeType("VmaDefragmentationMove *") VmaDefragmentationMove.@Nullable Buffer value) { npMoves(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,16 +282,16 @@ public class VmaDefragmentationPassMoveInfo extends Struct<VmaDefragmentationPas
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VmaDefragmentationPassMoveInfo#moveCount} field. */
+        /** @return the value of the {@code moveCount} field. */
         @NativeType("uint32_t")
         public int moveCount() { return VmaDefragmentationPassMoveInfo.nmoveCount(address()); }
-        /** @return a {@link VmaDefragmentationMove.Buffer} view of the struct array pointed to by the {@link VmaDefragmentationPassMoveInfo#pMoves} field. */
+        /** @return a {@link VmaDefragmentationMove.Buffer} view of the struct array pointed to by the {@code pMoves} field. */
         @NativeType("VmaDefragmentationMove *")
         public VmaDefragmentationMove.@Nullable Buffer pMoves() { return VmaDefragmentationPassMoveInfo.npMoves(address()); }
 
-        /** Sets the specified value to the {@link VmaDefragmentationPassMoveInfo#moveCount} field. */
+        /** Sets the specified value to the {@code moveCount} field. */
         public VmaDefragmentationPassMoveInfo.Buffer moveCount(@NativeType("uint32_t") int value) { VmaDefragmentationPassMoveInfo.nmoveCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VmaDefragmentationMove.Buffer} to the {@link VmaDefragmentationPassMoveInfo#pMoves} field. */
+        /** Sets the address of the specified {@link VmaDefragmentationMove.Buffer} to the {@code pMoves} field. */
         public VmaDefragmentationPassMoveInfo.Buffer pMoves(@NativeType("VmaDefragmentationMove *") VmaDefragmentationMove.@Nullable Buffer value) { VmaDefragmentationPassMoveInfo.npMoves(address(), value); return this; }
 
     }

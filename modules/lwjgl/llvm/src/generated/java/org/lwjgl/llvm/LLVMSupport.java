@@ -39,13 +39,13 @@ public class LLVMSupport {
 
     // --- [ LLVMLoadLibraryPermanently ] ---
 
-    /** Unsafe version of: {@link #LLVMLoadLibraryPermanently LoadLibraryPermanently} */
+    /** {@code LLVMBool LLVMLoadLibraryPermanently(char const * Filename)} */
     public static int nLLVMLoadLibraryPermanently(long Filename) {
         long __functionAddress = Functions.LoadLibraryPermanently;
         return invokePI(Filename, __functionAddress);
     }
 
-    /** This function permanently loads the dynamic library at the given path. It is safe to call this function multiple times for the same library. */
+    /** {@code LLVMBool LLVMLoadLibraryPermanently(char const * Filename)} */
     @NativeType("LLVMBool")
     public static boolean LLVMLoadLibraryPermanently(@NativeType("char const *") ByteBuffer Filename) {
         if (CHECKS) {
@@ -54,7 +54,7 @@ public class LLVMSupport {
         return nLLVMLoadLibraryPermanently(memAddress(Filename)) != 0;
     }
 
-    /** This function permanently loads the dynamic library at the given path. It is safe to call this function multiple times for the same library. */
+    /** {@code LLVMBool LLVMLoadLibraryPermanently(char const * Filename)} */
     @NativeType("LLVMBool")
     public static boolean LLVMLoadLibraryPermanently(@NativeType("char const *") CharSequence Filename) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -69,18 +69,13 @@ public class LLVMSupport {
 
     // --- [ LLVMParseCommandLineOptions ] ---
 
-    /** Unsafe version of: {@link #LLVMParseCommandLineOptions ParseCommandLineOptions} */
+    /** {@code void LLVMParseCommandLineOptions(int argc, char const * const * argv, char const * Overview)} */
     public static void nLLVMParseCommandLineOptions(int argc, long argv, long Overview) {
         long __functionAddress = Functions.ParseCommandLineOptions;
         invokePPV(argc, argv, Overview, __functionAddress);
     }
 
-    /**
-     * This function parses the given arguments using the LLVM command line parser.
-     * 
-     * <p>Note that the only stable thing about this function is its signature; you cannot rely on any particular set of command line arguments being interpreted
-     * the same way across LLVM versions.</p>
-     */
+    /** {@code void LLVMParseCommandLineOptions(int argc, char const * const * argv, char const * Overview)} */
     public static void LLVMParseCommandLineOptions(@NativeType("char const * const *") PointerBuffer argv, @NativeType("char const *") ByteBuffer Overview) {
         if (CHECKS) {
             checkNT1(Overview);
@@ -88,12 +83,7 @@ public class LLVMSupport {
         nLLVMParseCommandLineOptions(argv.remaining(), memAddress(argv), memAddress(Overview));
     }
 
-    /**
-     * This function parses the given arguments using the LLVM command line parser.
-     * 
-     * <p>Note that the only stable thing about this function is its signature; you cannot rely on any particular set of command line arguments being interpreted
-     * the same way across LLVM versions.</p>
-     */
+    /** {@code void LLVMParseCommandLineOptions(int argc, char const * const * argv, char const * Overview)} */
     public static void LLVMParseCommandLineOptions(@NativeType("char const * const *") PointerBuffer argv, @NativeType("char const *") CharSequence Overview) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -107,16 +97,13 @@ public class LLVMSupport {
 
     // --- [ LLVMSearchForAddressOfSymbol ] ---
 
-    /** Unsafe version of: {@link #LLVMSearchForAddressOfSymbol SearchForAddressOfSymbol} */
+    /** {@code void * LLVMSearchForAddressOfSymbol(char const * symbolName)} */
     public static long nLLVMSearchForAddressOfSymbol(long symbolName) {
         long __functionAddress = Functions.SearchForAddressOfSymbol;
         return invokePP(symbolName, __functionAddress);
     }
 
-    /**
-     * This function will search through all previously loaded dynamic libraries for the symbol {@code symbolName}. If it is found, the address of that symbol
-     * is returned. If not, null is returned.
-     */
+    /** {@code void * LLVMSearchForAddressOfSymbol(char const * symbolName)} */
     @NativeType("void *")
     public static long LLVMSearchForAddressOfSymbol(@NativeType("char const *") ByteBuffer symbolName) {
         if (CHECKS) {
@@ -125,10 +112,7 @@ public class LLVMSupport {
         return nLLVMSearchForAddressOfSymbol(memAddress(symbolName));
     }
 
-    /**
-     * This function will search through all previously loaded dynamic libraries for the symbol {@code symbolName}. If it is found, the address of that symbol
-     * is returned. If not, null is returned.
-     */
+    /** {@code void * LLVMSearchForAddressOfSymbol(char const * symbolName)} */
     @NativeType("void *")
     public static long LLVMSearchForAddressOfSymbol(@NativeType("char const *") CharSequence symbolName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -143,7 +127,7 @@ public class LLVMSupport {
 
     // --- [ LLVMAddSymbol ] ---
 
-    /** Unsafe version of: {@link #LLVMAddSymbol AddSymbol} */
+    /** {@code void LLVMAddSymbol(char const * symbolName, void * symbolValue)} */
     public static void nLLVMAddSymbol(long symbolName, long symbolValue) {
         long __functionAddress = Functions.AddSymbol;
         if (CHECKS) {
@@ -152,7 +136,7 @@ public class LLVMSupport {
         invokePPV(symbolName, symbolValue, __functionAddress);
     }
 
-    /** This functions permanently adds the symbol {@code symbolName} with the value {@code symbolValue}. These symbols are searched before any libraries. */
+    /** {@code void LLVMAddSymbol(char const * symbolName, void * symbolValue)} */
     public static void LLVMAddSymbol(@NativeType("char const *") ByteBuffer symbolName, @NativeType("void *") long symbolValue) {
         if (CHECKS) {
             checkNT1(symbolName);
@@ -160,7 +144,7 @@ public class LLVMSupport {
         nLLVMAddSymbol(memAddress(symbolName), symbolValue);
     }
 
-    /** This functions permanently adds the symbol {@code symbolName} with the value {@code symbolValue}. These symbols are searched before any libraries. */
+    /** {@code void LLVMAddSymbol(char const * symbolName, void * symbolValue)} */
     public static void LLVMAddSymbol(@NativeType("char const *") CharSequence symbolName, @NativeType("void *") long symbolValue) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {

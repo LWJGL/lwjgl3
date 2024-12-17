@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *object
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Generic_Finalizer} */
 @FunctionalInterface
 @NativeType("FT_Generic_Finalizer")
 public interface FT_Generic_FinalizerI extends CallbackI {
@@ -40,11 +33,7 @@ public interface FT_Generic_FinalizerI extends CallbackI {
         );
     }
 
-    /**
-     * Describe a function used to destroy the {@code client} data of any FreeType object.
-     *
-     * @param object the address of the FreeType object that is under finalization. Its client data is accessed through its {@code generic} field.
-     */
+    /** {@code void (* FT_Generic_Finalizer) (void * object)} */
     void invoke(@NativeType("void *") long object);
 
 }

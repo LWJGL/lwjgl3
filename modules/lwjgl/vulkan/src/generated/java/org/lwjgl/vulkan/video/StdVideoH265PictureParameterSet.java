@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265PictureParameterSet {
  *     {@link StdVideoH265PpsFlags StdVideoH265PpsFlags} flags;
  *     uint8_t pps_pic_parameter_set_id;
@@ -37,14 +35,14 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     int8_t pps_beta_offset_div2;
  *     int8_t pps_tc_offset_div2;
  *     uint8_t log2_parallel_merge_level_minus2;
- *     uint8_t {@link #log2_max_transform_skip_block_size_minus2};
+ *     uint8_t log2_max_transform_skip_block_size_minus2;
  *     uint8_t diff_cu_chroma_qp_offset_depth;
  *     uint8_t chroma_qp_offset_list_len_minus1;
  *     int8_t cb_qp_offset_list[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE];
  *     int8_t cr_qp_offset_list[STD_VIDEO_H265_CHROMA_QP_OFFSET_LIST_SIZE];
  *     uint8_t log2_sao_offset_scale_luma;
  *     uint8_t log2_sao_offset_scale_chroma;
- *     int8_t {@link #pps_act_y_qp_offset_plus5};
+ *     int8_t pps_act_y_qp_offset_plus5;
  *     int8_t pps_act_cb_qp_offset_plus5;
  *     int8_t pps_act_cr_qp_offset_plus3;
  *     uint8_t pps_num_palette_predictor_initializers;
@@ -57,9 +55,9 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint16_t column_width_minus1[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_COLS_LIST_SIZE];
  *     uint16_t row_height_minus1[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE];
  *     uint32_t reserved3;
- *     {@link StdVideoH265ScalingLists StdVideoH265ScalingLists} const * {@link #pScalingLists};
- *     {@link StdVideoH265PredictorPaletteEntries StdVideoH265PredictorPaletteEntries} const * {@link #pPredictorPaletteEntries};
- * }</code></pre>
+ *     {@link StdVideoH265ScalingLists StdVideoH265ScalingLists} const * pScalingLists;
+ *     {@link StdVideoH265PredictorPaletteEntries StdVideoH265PredictorPaletteEntries} const * pPredictorPaletteEntries;
+ * }}</pre>
  */
 public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureParameterSet> implements NativeResource {
 
@@ -252,7 +250,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     /** @return the value of the {@code log2_parallel_merge_level_minus2} field. */
     @NativeType("uint8_t")
     public byte log2_parallel_merge_level_minus2() { return nlog2_parallel_merge_level_minus2(address()); }
-    /** extension PPS, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS} is set */
+    /** @return the value of the {@code log2_max_transform_skip_block_size_minus2} field. */
     @NativeType("uint8_t")
     public byte log2_max_transform_skip_block_size_minus2() { return nlog2_max_transform_skip_block_size_minus2(address()); }
     /** @return the value of the {@code diff_cu_chroma_qp_offset_depth} field. */
@@ -279,7 +277,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     /** @return the value of the {@code log2_sao_offset_scale_chroma} field. */
     @NativeType("uint8_t")
     public byte log2_sao_offset_scale_chroma() { return nlog2_sao_offset_scale_chroma(address()); }
-    /** extension PPS, valid when std_video_h265_profile_idc_scc_extensions is set */
+    /** @return the value of the {@code pps_act_y_qp_offset_plus5} field. */
     @NativeType("int8_t")
     public byte pps_act_y_qp_offset_plus5() { return npps_act_y_qp_offset_plus5(address()); }
     /** @return the value of the {@code pps_act_cb_qp_offset_plus5} field. */
@@ -315,10 +313,10 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     /** @return the value at the specified index of the {@code row_height_minus1} field. */
     @NativeType("uint16_t")
     public short row_height_minus1(int index) { return nrow_height_minus1(address(), index); }
-    /** must be a valid pointer if {@code pps_scaling_list_data_present_flag} is set */
+    /** @return a {@link StdVideoH265ScalingLists} view of the struct pointed to by the {@code pScalingLists} field. */
     @NativeType("StdVideoH265ScalingLists const *")
     public StdVideoH265ScalingLists pScalingLists() { return npScalingLists(address()); }
-    /** must be a valid pointer if pps_palette_predictor_initializer_present_flag is set */
+    /** @return a {@link StdVideoH265PredictorPaletteEntries} view of the struct pointed to by the {@code pPredictorPaletteEntries} field. */
     @NativeType("StdVideoH265PredictorPaletteEntries const *")
     public StdVideoH265PredictorPaletteEntries pPredictorPaletteEntries() { return npPredictorPaletteEntries(address()); }
 
@@ -352,7 +350,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     public StdVideoH265PictureParameterSet pps_tc_offset_div2(@NativeType("int8_t") byte value) { npps_tc_offset_div2(address(), value); return this; }
     /** Sets the specified value to the {@code log2_parallel_merge_level_minus2} field. */
     public StdVideoH265PictureParameterSet log2_parallel_merge_level_minus2(@NativeType("uint8_t") byte value) { nlog2_parallel_merge_level_minus2(address(), value); return this; }
-    /** Sets the specified value to the {@link #log2_max_transform_skip_block_size_minus2} field. */
+    /** Sets the specified value to the {@code log2_max_transform_skip_block_size_minus2} field. */
     public StdVideoH265PictureParameterSet log2_max_transform_skip_block_size_minus2(@NativeType("uint8_t") byte value) { nlog2_max_transform_skip_block_size_minus2(address(), value); return this; }
     /** Sets the specified value to the {@code diff_cu_chroma_qp_offset_depth} field. */
     public StdVideoH265PictureParameterSet diff_cu_chroma_qp_offset_depth(@NativeType("uint8_t") byte value) { ndiff_cu_chroma_qp_offset_depth(address(), value); return this; }
@@ -370,7 +368,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     public StdVideoH265PictureParameterSet log2_sao_offset_scale_luma(@NativeType("uint8_t") byte value) { nlog2_sao_offset_scale_luma(address(), value); return this; }
     /** Sets the specified value to the {@code log2_sao_offset_scale_chroma} field. */
     public StdVideoH265PictureParameterSet log2_sao_offset_scale_chroma(@NativeType("uint8_t") byte value) { nlog2_sao_offset_scale_chroma(address(), value); return this; }
-    /** Sets the specified value to the {@link #pps_act_y_qp_offset_plus5} field. */
+    /** Sets the specified value to the {@code pps_act_y_qp_offset_plus5} field. */
     public StdVideoH265PictureParameterSet pps_act_y_qp_offset_plus5(@NativeType("int8_t") byte value) { npps_act_y_qp_offset_plus5(address(), value); return this; }
     /** Sets the specified value to the {@code pps_act_cb_qp_offset_plus5} field. */
     public StdVideoH265PictureParameterSet pps_act_cb_qp_offset_plus5(@NativeType("int8_t") byte value) { npps_act_cb_qp_offset_plus5(address(), value); return this; }
@@ -394,9 +392,9 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
     public StdVideoH265PictureParameterSet row_height_minus1(@NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE]") ShortBuffer value) { nrow_height_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code row_height_minus1} field. */
     public StdVideoH265PictureParameterSet row_height_minus1(int index, @NativeType("uint16_t") short value) { nrow_height_minus1(address(), index, value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265ScalingLists} to the {@link #pScalingLists} field. */
+    /** Sets the address of the specified {@link StdVideoH265ScalingLists} to the {@code pScalingLists} field. */
     public StdVideoH265PictureParameterSet pScalingLists(@NativeType("StdVideoH265ScalingLists const *") StdVideoH265ScalingLists value) { npScalingLists(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265PredictorPaletteEntries} to the {@link #pPredictorPaletteEntries} field. */
+    /** Sets the address of the specified {@link StdVideoH265PredictorPaletteEntries} to the {@code pPredictorPaletteEntries} field. */
     public StdVideoH265PictureParameterSet pPredictorPaletteEntries(@NativeType("StdVideoH265PredictorPaletteEntries const *") StdVideoH265PredictorPaletteEntries value) { npPredictorPaletteEntries(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -873,7 +871,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
         /** @return the value of the {@code log2_parallel_merge_level_minus2} field. */
         @NativeType("uint8_t")
         public byte log2_parallel_merge_level_minus2() { return StdVideoH265PictureParameterSet.nlog2_parallel_merge_level_minus2(address()); }
-        /** @return the value of the {@link StdVideoH265PictureParameterSet#log2_max_transform_skip_block_size_minus2} field. */
+        /** @return the value of the {@code log2_max_transform_skip_block_size_minus2} field. */
         @NativeType("uint8_t")
         public byte log2_max_transform_skip_block_size_minus2() { return StdVideoH265PictureParameterSet.nlog2_max_transform_skip_block_size_minus2(address()); }
         /** @return the value of the {@code diff_cu_chroma_qp_offset_depth} field. */
@@ -900,7 +898,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
         /** @return the value of the {@code log2_sao_offset_scale_chroma} field. */
         @NativeType("uint8_t")
         public byte log2_sao_offset_scale_chroma() { return StdVideoH265PictureParameterSet.nlog2_sao_offset_scale_chroma(address()); }
-        /** @return the value of the {@link StdVideoH265PictureParameterSet#pps_act_y_qp_offset_plus5} field. */
+        /** @return the value of the {@code pps_act_y_qp_offset_plus5} field. */
         @NativeType("int8_t")
         public byte pps_act_y_qp_offset_plus5() { return StdVideoH265PictureParameterSet.npps_act_y_qp_offset_plus5(address()); }
         /** @return the value of the {@code pps_act_cb_qp_offset_plus5} field. */
@@ -936,10 +934,10 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
         /** @return the value at the specified index of the {@code row_height_minus1} field. */
         @NativeType("uint16_t")
         public short row_height_minus1(int index) { return StdVideoH265PictureParameterSet.nrow_height_minus1(address(), index); }
-        /** @return a {@link StdVideoH265ScalingLists} view of the struct pointed to by the {@link StdVideoH265PictureParameterSet#pScalingLists} field. */
+        /** @return a {@link StdVideoH265ScalingLists} view of the struct pointed to by the {@code pScalingLists} field. */
         @NativeType("StdVideoH265ScalingLists const *")
         public StdVideoH265ScalingLists pScalingLists() { return StdVideoH265PictureParameterSet.npScalingLists(address()); }
-        /** @return a {@link StdVideoH265PredictorPaletteEntries} view of the struct pointed to by the {@link StdVideoH265PictureParameterSet#pPredictorPaletteEntries} field. */
+        /** @return a {@link StdVideoH265PredictorPaletteEntries} view of the struct pointed to by the {@code pPredictorPaletteEntries} field. */
         @NativeType("StdVideoH265PredictorPaletteEntries const *")
         public StdVideoH265PredictorPaletteEntries pPredictorPaletteEntries() { return StdVideoH265PictureParameterSet.npPredictorPaletteEntries(address()); }
 
@@ -973,7 +971,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
         public StdVideoH265PictureParameterSet.Buffer pps_tc_offset_div2(@NativeType("int8_t") byte value) { StdVideoH265PictureParameterSet.npps_tc_offset_div2(address(), value); return this; }
         /** Sets the specified value to the {@code log2_parallel_merge_level_minus2} field. */
         public StdVideoH265PictureParameterSet.Buffer log2_parallel_merge_level_minus2(@NativeType("uint8_t") byte value) { StdVideoH265PictureParameterSet.nlog2_parallel_merge_level_minus2(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoH265PictureParameterSet#log2_max_transform_skip_block_size_minus2} field. */
+        /** Sets the specified value to the {@code log2_max_transform_skip_block_size_minus2} field. */
         public StdVideoH265PictureParameterSet.Buffer log2_max_transform_skip_block_size_minus2(@NativeType("uint8_t") byte value) { StdVideoH265PictureParameterSet.nlog2_max_transform_skip_block_size_minus2(address(), value); return this; }
         /** Sets the specified value to the {@code diff_cu_chroma_qp_offset_depth} field. */
         public StdVideoH265PictureParameterSet.Buffer diff_cu_chroma_qp_offset_depth(@NativeType("uint8_t") byte value) { StdVideoH265PictureParameterSet.ndiff_cu_chroma_qp_offset_depth(address(), value); return this; }
@@ -991,7 +989,7 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
         public StdVideoH265PictureParameterSet.Buffer log2_sao_offset_scale_luma(@NativeType("uint8_t") byte value) { StdVideoH265PictureParameterSet.nlog2_sao_offset_scale_luma(address(), value); return this; }
         /** Sets the specified value to the {@code log2_sao_offset_scale_chroma} field. */
         public StdVideoH265PictureParameterSet.Buffer log2_sao_offset_scale_chroma(@NativeType("uint8_t") byte value) { StdVideoH265PictureParameterSet.nlog2_sao_offset_scale_chroma(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoH265PictureParameterSet#pps_act_y_qp_offset_plus5} field. */
+        /** Sets the specified value to the {@code pps_act_y_qp_offset_plus5} field. */
         public StdVideoH265PictureParameterSet.Buffer pps_act_y_qp_offset_plus5(@NativeType("int8_t") byte value) { StdVideoH265PictureParameterSet.npps_act_y_qp_offset_plus5(address(), value); return this; }
         /** Sets the specified value to the {@code pps_act_cb_qp_offset_plus5} field. */
         public StdVideoH265PictureParameterSet.Buffer pps_act_cb_qp_offset_plus5(@NativeType("int8_t") byte value) { StdVideoH265PictureParameterSet.npps_act_cb_qp_offset_plus5(address(), value); return this; }
@@ -1015,9 +1013,9 @@ public class StdVideoH265PictureParameterSet extends Struct<StdVideoH265PictureP
         public StdVideoH265PictureParameterSet.Buffer row_height_minus1(@NativeType("uint16_t[STD_VIDEO_H265_CHROMA_QP_OFFSET_TILE_ROWS_LIST_SIZE]") ShortBuffer value) { StdVideoH265PictureParameterSet.nrow_height_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code row_height_minus1} field. */
         public StdVideoH265PictureParameterSet.Buffer row_height_minus1(int index, @NativeType("uint16_t") short value) { StdVideoH265PictureParameterSet.nrow_height_minus1(address(), index, value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265ScalingLists} to the {@link StdVideoH265PictureParameterSet#pScalingLists} field. */
+        /** Sets the address of the specified {@link StdVideoH265ScalingLists} to the {@code pScalingLists} field. */
         public StdVideoH265PictureParameterSet.Buffer pScalingLists(@NativeType("StdVideoH265ScalingLists const *") StdVideoH265ScalingLists value) { StdVideoH265PictureParameterSet.npScalingLists(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265PredictorPaletteEntries} to the {@link StdVideoH265PictureParameterSet#pPredictorPaletteEntries} field. */
+        /** Sets the address of the specified {@link StdVideoH265PredictorPaletteEntries} to the {@code pPredictorPaletteEntries} field. */
         public StdVideoH265PictureParameterSet.Buffer pPredictorPaletteEntries(@NativeType("StdVideoH265PredictorPaletteEntries const *") StdVideoH265PredictorPaletteEntries value) { StdVideoH265PictureParameterSet.npPredictorPaletteEntries(address(), value); return this; }
 
     }

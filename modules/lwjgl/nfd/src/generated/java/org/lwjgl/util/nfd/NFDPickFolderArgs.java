@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nfdpickfolderu8args_t {
  *     nfdchar_t const * defaultPath;
  *     {@link NFDWindowHandle nfdwindowhandle_t} parentWindow;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nfdpickfolderu8args_t")
 public class NFDPickFolderArgs extends Struct<NFDPickFolderArgs> implements NativeResource {

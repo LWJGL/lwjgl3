@@ -17,47 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Returns the body joint locations.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@code jointCount} does not equal to the number of joints defined by the {@code XrBodyJointSetFB} used to create the {@code XrBodyTrackerFB}.</p>
- * 
- * <p>The runtime <b>must</b> return {@code jointLocations} representing the range of human body motion, without any obstructions. Input systems that either obstruct the movement of the user’s body (for example, a held controller preventing the user from making a fist) or input systems that have only limited ability to track finger positions <b>must</b> use the information available to them to emulate an unobstructed range of motion.</p>
- * 
- * <p>The runtime <b>must</b> update the {@code jointLocations} array ordered so that it is indexed using the corresponding body joint enum (e.g. {@code XrBodyJointFB}) as described by {@code XrBodyJointSetFB} when creating the {@code XrBodyTrackerFB}. For example, when the {@code XrBodyTrackerFB} is created with {@link FBBodyTracking#XR_BODY_JOINT_SET_DEFAULT_FB BODY_JOINT_SET_DEFAULT_FB}, the application <b>must</b> set the {@code jointCount} to {@link FBBodyTracking#XR_BODY_JOINT_COUNT_FB BODY_JOINT_COUNT_FB}, and the runtime <b>must</b> fill the {@code jointLocations} array ordered so that it is indexed by the {@code XrBodyJointFB} enum.</p>
- * 
- * <p>If the returned {@code isActive} is true, the runtime <b>must</b> return all joint locations with both {@link XR10#XR_SPACE_LOCATION_POSITION_VALID_BIT SPACE_LOCATION_POSITION_VALID_BIT} and {@link XR10#XR_SPACE_LOCATION_ORIENTATION_VALID_BIT SPACE_LOCATION_ORIENTATION_VALID_BIT} set. However, in this case, some joint space locations <b>may</b> be untracked (i.e. {@link XR10#XR_SPACE_LOCATION_POSITION_TRACKED_BIT SPACE_LOCATION_POSITION_TRACKED_BIT} or {@link XR10#XR_SPACE_LOCATION_ORIENTATION_TRACKED_BIT SPACE_LOCATION_ORIENTATION_TRACKED_BIT} is unset).</p>
- * 
- * <p>If the returned {@code isActive} is false, it indicates that the body tracker did not detect the body input, the application lost input focus, or the consent for body tracking was denied by the user. In this case, the runtime <b>must</b> return all {@code jointLocations} with neither {@link XR10#XR_SPACE_LOCATION_POSITION_VALID_BIT SPACE_LOCATION_POSITION_VALID_BIT} nor {@link XR10#XR_SPACE_LOCATION_ORIENTATION_VALID_BIT SPACE_LOCATION_ORIENTATION_VALID_BIT} set.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using {@link XrBodyJointLocationsFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBBodyTracking#XR_TYPE_BODY_JOINT_LOCATIONS_FB TYPE_BODY_JOINT_LOCATIONS_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code jointLocations} <b>must</b> be a pointer to an array of {@code jointCount} {@link XrBodyJointLocationFB} structures</li>
- * <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrBodyJointLocationFB}, {@link FBBodyTracking#xrLocateBodyJointsFB LocateBodyJointsFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBodyJointLocationsFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #isActive};
- *     float {@link #confidence};
- *     uint32_t {@link #jointCount};
- *     {@link XrBodyJointLocationFB XrBodyJointLocationFB} * {@link #jointLocations};
- *     uint32_t {@link #skeletonChangedCount};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 isActive;
+ *     float confidence;
+ *     uint32_t jointCount;
+ *     {@link XrBodyJointLocationFB XrBodyJointLocationFB} * jointLocations;
+ *     uint32_t skeletonChangedCount;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> implements NativeResource {
 
@@ -125,45 +95,45 @@ public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32} indicating if the body tracker is actively tracking. */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
-    /** a {@code float} between 0 and 1 which represents the confidence for the returned body pose. A value of 0 means there is no confidence in the pose returned, and a value of 1 means maximum confidence in the returned body pose. */
+    /** @return the value of the {@code confidence} field. */
     public float confidence() { return nconfidence(address()); }
-    /** a {@code uint32_t} describing the count of elements in {@code jointLocations} array. */
+    /** @return the value of the {@code jointCount} field. */
     @NativeType("uint32_t")
     public int jointCount() { return njointCount(address()); }
-    /** an application-allocated array of {@link XrBodyJointLocationFB} that will be filled with joint locations. */
+    /** @return a {@link XrBodyJointLocationFB.Buffer} view of the struct array pointed to by the {@code jointLocations} field. */
     @NativeType("XrBodyJointLocationFB *")
     public XrBodyJointLocationFB.Buffer jointLocations() { return njointLocations(address()); }
-    /** an output {@code uint32_t} incremental counter indicating that the skeleton scale proportions have changed. {@link FBBodyTracking#xrGetBodySkeletonFB GetBodySkeletonFB} <b>can</b> be called when this counter increases to get the latest body proportions/scale. */
+    /** @return the value of the {@code skeletonChangedCount} field. */
     @NativeType("uint32_t")
     public int skeletonChangedCount() { return nskeletonChangedCount(address()); }
-    /** an {@code XrTime} time at which the returned joints are tracked. Equals the time at which the joints were requested if the interpolation at the time was successful. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrBodyJointLocationsFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBBodyTracking#XR_TYPE_BODY_JOINT_LOCATIONS_FB TYPE_BODY_JOINT_LOCATIONS_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBBodyTracking#XR_TYPE_BODY_JOINT_LOCATIONS_FB TYPE_BODY_JOINT_LOCATIONS_FB} value to the {@code type} field. */
     public XrBodyJointLocationsFB type$Default() { return type(FBBodyTracking.XR_TYPE_BODY_JOINT_LOCATIONS_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrBodyJointLocationsFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #isActive} field. */
+    /** Sets the specified value to the {@code isActive} field. */
     public XrBodyJointLocationsFB isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #confidence} field. */
+    /** Sets the specified value to the {@code confidence} field. */
     public XrBodyJointLocationsFB confidence(float value) { nconfidence(address(), value); return this; }
-    /** Sets the address of the specified {@link XrBodyJointLocationFB.Buffer} to the {@link #jointLocations} field. */
+    /** Sets the address of the specified {@link XrBodyJointLocationFB.Buffer} to the {@code jointLocations} field. */
     public XrBodyJointLocationsFB jointLocations(@NativeType("XrBodyJointLocationFB *") XrBodyJointLocationFB.Buffer value) { njointLocations(address(), value); return this; }
-    /** Sets the specified value to the {@link #skeletonChangedCount} field. */
+    /** Sets the specified value to the {@code skeletonChangedCount} field. */
     public XrBodyJointLocationsFB skeletonChangedCount(@NativeType("uint32_t") int value) { nskeletonChangedCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrBodyJointLocationsFB time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -396,45 +366,45 @@ public class XrBodyJointLocationsFB extends Struct<XrBodyJointLocationsFB> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrBodyJointLocationsFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBodyJointLocationsFB.ntype(address()); }
-        /** @return the value of the {@link XrBodyJointLocationsFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrBodyJointLocationsFB.nnext(address()); }
-        /** @return the value of the {@link XrBodyJointLocationsFB#isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrBodyJointLocationsFB.nisActive(address()) != 0; }
-        /** @return the value of the {@link XrBodyJointLocationsFB#confidence} field. */
+        /** @return the value of the {@code confidence} field. */
         public float confidence() { return XrBodyJointLocationsFB.nconfidence(address()); }
-        /** @return the value of the {@link XrBodyJointLocationsFB#jointCount} field. */
+        /** @return the value of the {@code jointCount} field. */
         @NativeType("uint32_t")
         public int jointCount() { return XrBodyJointLocationsFB.njointCount(address()); }
-        /** @return a {@link XrBodyJointLocationFB.Buffer} view of the struct array pointed to by the {@link XrBodyJointLocationsFB#jointLocations} field. */
+        /** @return a {@link XrBodyJointLocationFB.Buffer} view of the struct array pointed to by the {@code jointLocations} field. */
         @NativeType("XrBodyJointLocationFB *")
         public XrBodyJointLocationFB.Buffer jointLocations() { return XrBodyJointLocationsFB.njointLocations(address()); }
-        /** @return the value of the {@link XrBodyJointLocationsFB#skeletonChangedCount} field. */
+        /** @return the value of the {@code skeletonChangedCount} field. */
         @NativeType("uint32_t")
         public int skeletonChangedCount() { return XrBodyJointLocationsFB.nskeletonChangedCount(address()); }
-        /** @return the value of the {@link XrBodyJointLocationsFB#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrBodyJointLocationsFB.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrBodyJointLocationsFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrBodyJointLocationsFB.Buffer type(@NativeType("XrStructureType") int value) { XrBodyJointLocationsFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBBodyTracking#XR_TYPE_BODY_JOINT_LOCATIONS_FB TYPE_BODY_JOINT_LOCATIONS_FB} value to the {@link XrBodyJointLocationsFB#type} field. */
+        /** Sets the {@link FBBodyTracking#XR_TYPE_BODY_JOINT_LOCATIONS_FB TYPE_BODY_JOINT_LOCATIONS_FB} value to the {@code type} field. */
         public XrBodyJointLocationsFB.Buffer type$Default() { return type(FBBodyTracking.XR_TYPE_BODY_JOINT_LOCATIONS_FB); }
-        /** Sets the specified value to the {@link XrBodyJointLocationsFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrBodyJointLocationsFB.Buffer next(@NativeType("void *") long value) { XrBodyJointLocationsFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrBodyJointLocationsFB#isActive} field. */
+        /** Sets the specified value to the {@code isActive} field. */
         public XrBodyJointLocationsFB.Buffer isActive(@NativeType("XrBool32") boolean value) { XrBodyJointLocationsFB.nisActive(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrBodyJointLocationsFB#confidence} field. */
+        /** Sets the specified value to the {@code confidence} field. */
         public XrBodyJointLocationsFB.Buffer confidence(float value) { XrBodyJointLocationsFB.nconfidence(address(), value); return this; }
-        /** Sets the address of the specified {@link XrBodyJointLocationFB.Buffer} to the {@link XrBodyJointLocationsFB#jointLocations} field. */
+        /** Sets the address of the specified {@link XrBodyJointLocationFB.Buffer} to the {@code jointLocations} field. */
         public XrBodyJointLocationsFB.Buffer jointLocations(@NativeType("XrBodyJointLocationFB *") XrBodyJointLocationFB.Buffer value) { XrBodyJointLocationsFB.njointLocations(address(), value); return this; }
-        /** Sets the specified value to the {@link XrBodyJointLocationsFB#skeletonChangedCount} field. */
+        /** Sets the specified value to the {@code skeletonChangedCount} field. */
         public XrBodyJointLocationsFB.Buffer skeletonChangedCount(@NativeType("uint32_t") int value) { XrBodyJointLocationsFB.nskeletonChangedCount(address(), value); return this; }
-        /** Sets the specified value to the {@link XrBodyJointLocationsFB#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrBodyJointLocationsFB.Buffer time(@NativeType("XrTime") long value) { XrBodyJointLocationsFB.ntime(address(), value); return this; }
 
     }

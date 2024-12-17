@@ -16,19 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specifying a root constant (d3d12) or push constant range (vulkan).
- * 
- * <p>{@code start} and {@code end} denotes the range of the root constant in bytes. Both values need to be multiple of 4.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_hlsl_root_constants {
  *     unsigned int start;
  *     unsigned int end;
  *     unsigned int binding;
  *     unsigned int space;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_hlsl_root_constants")
 public class SpvcHlslRootConstants extends Struct<SpvcHlslRootConstants> implements NativeResource {

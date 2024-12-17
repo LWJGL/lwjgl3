@@ -17,19 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct PathWrite_t {
  *     PathHandle_t ulPath;
- *     EPropertyWriteType {@link #writeType};
- *     ETrackedPropertyError {@link #eSetError};
+ *     EPropertyWriteType writeType;
+ *     ETrackedPropertyError eSetError;
  *     void * pvBuffer;
  *     uint32_t unBufferSize;
  *     PropertyTypeTag_t unTag;
- *     ETrackedPropertyError {@link #eError};
+ *     ETrackedPropertyError eError;
  *     char * pszPath;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct PathWrite_t")
 public class PathWrite extends Struct<PathWrite> implements NativeResource {
@@ -101,10 +99,10 @@ public class PathWrite extends Struct<PathWrite> implements NativeResource {
     /** @return the value of the {@code ulPath} field. */
     @NativeType("PathHandle_t")
     public long ulPath() { return nulPath(address()); }
-    /** one of:<br><table><tr><td>{@link VR#EPropertyWriteType_PropertyWrite_Set}</td><td>{@link VR#EPropertyWriteType_PropertyWrite_Erase}</td></tr><tr><td>{@link VR#EPropertyWriteType_PropertyWrite_SetError}</td></tr></table> */
+    /** @return the value of the {@code writeType} field. */
     @NativeType("EPropertyWriteType")
     public int writeType() { return nwriteType(address()); }
-    /** one of:<br><table><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_Success}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_WrongDataType}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_WrongDeviceClass}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_BufferTooSmall}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_UnknownProperty}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidDevice}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_CouldNotContactServer}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_ValueNotProvidedByDevice}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_StringExceedsMaximumLength}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_NotYetAvailable}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_PermissionDenied}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidOperation}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_CannotWriteToWildcards}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_IPCReadFailure}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_OutOfMemory}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidContainer}</td></tr></table> */
+    /** @return the value of the {@code eSetError} field. */
     @NativeType("ETrackedPropertyError")
     public int eSetError() { return neSetError(address()); }
     /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pvBuffer} field. */
@@ -116,7 +114,7 @@ public class PathWrite extends Struct<PathWrite> implements NativeResource {
     /** @return the value of the {@code unTag} field. */
     @NativeType("PropertyTypeTag_t")
     public int unTag() { return nunTag(address()); }
-    /** one of:<br><table><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_Success}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_WrongDataType}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_WrongDeviceClass}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_BufferTooSmall}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_UnknownProperty}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidDevice}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_CouldNotContactServer}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_ValueNotProvidedByDevice}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_StringExceedsMaximumLength}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_NotYetAvailable}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_PermissionDenied}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidOperation}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_CannotWriteToWildcards}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_IPCReadFailure}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_OutOfMemory}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidContainer}</td></tr></table> */
+    /** @return the value of the {@code eError} field. */
     @NativeType("ETrackedPropertyError")
     public int eError() { return neError(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pszPath} field. */
@@ -128,15 +126,15 @@ public class PathWrite extends Struct<PathWrite> implements NativeResource {
 
     /** Sets the specified value to the {@code ulPath} field. */
     public PathWrite ulPath(@NativeType("PathHandle_t") long value) { nulPath(address(), value); return this; }
-    /** Sets the specified value to the {@link #writeType} field. */
+    /** Sets the specified value to the {@code writeType} field. */
     public PathWrite writeType(@NativeType("EPropertyWriteType") int value) { nwriteType(address(), value); return this; }
-    /** Sets the specified value to the {@link #eSetError} field. */
+    /** Sets the specified value to the {@code eSetError} field. */
     public PathWrite eSetError(@NativeType("ETrackedPropertyError") int value) { neSetError(address(), value); return this; }
     /** Sets the address of the specified {@link ByteBuffer} to the {@code pvBuffer} field. */
     public PathWrite pvBuffer(@NativeType("void *") ByteBuffer value) { npvBuffer(address(), value); return this; }
     /** Sets the specified value to the {@code unTag} field. */
     public PathWrite unTag(@NativeType("PropertyTypeTag_t") int value) { nunTag(address(), value); return this; }
-    /** Sets the specified value to the {@link #eError} field. */
+    /** Sets the specified value to the {@code eError} field. */
     public PathWrite eError(@NativeType("ETrackedPropertyError") int value) { neError(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@code pszPath} field. */
     public PathWrite pszPath(@NativeType("char *") ByteBuffer value) { npszPath(address(), value); return this; }
@@ -380,10 +378,10 @@ public class PathWrite extends Struct<PathWrite> implements NativeResource {
         /** @return the value of the {@code ulPath} field. */
         @NativeType("PathHandle_t")
         public long ulPath() { return PathWrite.nulPath(address()); }
-        /** @return the value of the {@link PathWrite#writeType} field. */
+        /** @return the value of the {@code writeType} field. */
         @NativeType("EPropertyWriteType")
         public int writeType() { return PathWrite.nwriteType(address()); }
-        /** @return the value of the {@link PathWrite#eSetError} field. */
+        /** @return the value of the {@code eSetError} field. */
         @NativeType("ETrackedPropertyError")
         public int eSetError() { return PathWrite.neSetError(address()); }
         /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pvBuffer} field. */
@@ -395,7 +393,7 @@ public class PathWrite extends Struct<PathWrite> implements NativeResource {
         /** @return the value of the {@code unTag} field. */
         @NativeType("PropertyTypeTag_t")
         public int unTag() { return PathWrite.nunTag(address()); }
-        /** @return the value of the {@link PathWrite#eError} field. */
+        /** @return the value of the {@code eError} field. */
         @NativeType("ETrackedPropertyError")
         public int eError() { return PathWrite.neError(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pszPath} field. */
@@ -407,15 +405,15 @@ public class PathWrite extends Struct<PathWrite> implements NativeResource {
 
         /** Sets the specified value to the {@code ulPath} field. */
         public PathWrite.Buffer ulPath(@NativeType("PathHandle_t") long value) { PathWrite.nulPath(address(), value); return this; }
-        /** Sets the specified value to the {@link PathWrite#writeType} field. */
+        /** Sets the specified value to the {@code writeType} field. */
         public PathWrite.Buffer writeType(@NativeType("EPropertyWriteType") int value) { PathWrite.nwriteType(address(), value); return this; }
-        /** Sets the specified value to the {@link PathWrite#eSetError} field. */
+        /** Sets the specified value to the {@code eSetError} field. */
         public PathWrite.Buffer eSetError(@NativeType("ETrackedPropertyError") int value) { PathWrite.neSetError(address(), value); return this; }
         /** Sets the address of the specified {@link ByteBuffer} to the {@code pvBuffer} field. */
         public PathWrite.Buffer pvBuffer(@NativeType("void *") ByteBuffer value) { PathWrite.npvBuffer(address(), value); return this; }
         /** Sets the specified value to the {@code unTag} field. */
         public PathWrite.Buffer unTag(@NativeType("PropertyTypeTag_t") int value) { PathWrite.nunTag(address(), value); return this; }
-        /** Sets the specified value to the {@link PathWrite#eError} field. */
+        /** Sets the specified value to the {@code eError} field. */
         public PathWrite.Buffer eError(@NativeType("ETrackedPropertyError") int value) { PathWrite.neError(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@code pszPath} field. */
         public PathWrite.Buffer pszPath(@NativeType("char *") ByteBuffer value) { PathWrite.npszPath(address(), value); return this; }

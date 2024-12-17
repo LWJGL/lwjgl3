@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Request foveated FoV.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return foveated field of view when {@code foveatedRenderingActive} is {@link XR10#XR_TRUE TRUE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link VARJOFoveatedRendering XR_VARJO_foveated_rendering} extension <b>must</b> be enabled prior to using {@link XrViewLocateFoveatedRenderingVARJO}</li>
- * <li>{@code type} <b>must</b> be {@link VARJOFoveatedRendering#XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrViewLocateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrViewLocateFoveatedRenderingVARJO {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrBool32 {@link #foveatedRenderingActive};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrBool32 foveatedRenderingActive;
+ * }}</pre>
  */
 public class XrViewLocateFoveatedRenderingVARJO extends Struct<XrViewLocateFoveatedRenderingVARJO> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class XrViewLocateFoveatedRenderingVARJO extends Struct<XrViewLocateFovea
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32}, indicating if runtime should return foveated FoV. */
+    /** @return the value of the {@code foveatedRenderingActive} field. */
     @NativeType("XrBool32")
     public boolean foveatedRenderingActive() { return nfoveatedRenderingActive(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrViewLocateFoveatedRenderingVARJO type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO} value to the {@link #type} field. */
+    /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO} value to the {@code type} field. */
     public XrViewLocateFoveatedRenderingVARJO type$Default() { return type(VARJOFoveatedRendering.XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrViewLocateFoveatedRenderingVARJO next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #foveatedRenderingActive} field. */
+    /** Sets the specified value to the {@code foveatedRenderingActive} field. */
     public XrViewLocateFoveatedRenderingVARJO foveatedRenderingActive(@NativeType("XrBool32") boolean value) { nfoveatedRenderingActive(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class XrViewLocateFoveatedRenderingVARJO extends Struct<XrViewLocateFovea
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrViewLocateFoveatedRenderingVARJO#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewLocateFoveatedRenderingVARJO.ntype(address()); }
-        /** @return the value of the {@link XrViewLocateFoveatedRenderingVARJO#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrViewLocateFoveatedRenderingVARJO.nnext(address()); }
-        /** @return the value of the {@link XrViewLocateFoveatedRenderingVARJO#foveatedRenderingActive} field. */
+        /** @return the value of the {@code foveatedRenderingActive} field. */
         @NativeType("XrBool32")
         public boolean foveatedRenderingActive() { return XrViewLocateFoveatedRenderingVARJO.nfoveatedRenderingActive(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrViewLocateFoveatedRenderingVARJO#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrViewLocateFoveatedRenderingVARJO.Buffer type(@NativeType("XrStructureType") int value) { XrViewLocateFoveatedRenderingVARJO.ntype(address(), value); return this; }
-        /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO} value to the {@link XrViewLocateFoveatedRenderingVARJO#type} field. */
+        /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO} value to the {@code type} field. */
         public XrViewLocateFoveatedRenderingVARJO.Buffer type$Default() { return type(VARJOFoveatedRendering.XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO); }
-        /** Sets the specified value to the {@link XrViewLocateFoveatedRenderingVARJO#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrViewLocateFoveatedRenderingVARJO.Buffer next(@NativeType("void const *") long value) { XrViewLocateFoveatedRenderingVARJO.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewLocateFoveatedRenderingVARJO#foveatedRenderingActive} field. */
+        /** Sets the specified value to the {@code foveatedRenderingActive} field. */
         public XrViewLocateFoveatedRenderingVARJO.Buffer foveatedRenderingActive(@NativeType("XrBool32") boolean value) { XrViewLocateFoveatedRenderingVARJO.nfoveatedRenderingActive(address(), value ? 1 : 0); return this; }
 
     }

@@ -17,18 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Used to return the post-distortion UVs for each color channel.
- * 
- * <p>UVs range from 0 to 1 with 0,0 in the upper left corner of the source render target. The 0,0 to 1,1 range covers a single eye.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct DistortionCoordinates_t {
- *     float {@link #rfRed}[2];
- *     float {@link #rfGreen}[2];
- *     float {@link #rfBlue}[2];
- * }</code></pre>
+ *     float rfRed[2];
+ *     float rfGreen[2];
+ *     float rfBlue[2];
+ * }}</pre>
  */
 @NativeType("struct DistortionCoordinates_t")
 public class DistortionCoordinates extends Struct<DistortionCoordinates> implements NativeResource {
@@ -82,20 +76,20 @@ public class DistortionCoordinates extends Struct<DistortionCoordinates> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the UVs for the red channel */
+    /** @return a {@link FloatBuffer} view of the {@code rfRed} field. */
     @NativeType("float[2]")
     public FloatBuffer rfRed() { return nrfRed(address()); }
-    /** the UVs for the red channel */
+    /** @return the value at the specified index of the {@code rfRed} field. */
     public float rfRed(int index) { return nrfRed(address(), index); }
-    /** the UVs for the green channel */
+    /** @return a {@link FloatBuffer} view of the {@code rfGreen} field. */
     @NativeType("float[2]")
     public FloatBuffer rfGreen() { return nrfGreen(address()); }
-    /** the UVs for the green channel */
+    /** @return the value at the specified index of the {@code rfGreen} field. */
     public float rfGreen(int index) { return nrfGreen(address(), index); }
-    /** the UVs for the blue channel */
+    /** @return a {@link FloatBuffer} view of the {@code rfBlue} field. */
     @NativeType("float[2]")
     public FloatBuffer rfBlue() { return nrfBlue(address()); }
-    /** the UVs for the blue channel */
+    /** @return the value at the specified index of the {@code rfBlue} field. */
     public float rfBlue(int index) { return nrfBlue(address(), index); }
 
     // -----------------------------------
@@ -290,20 +284,20 @@ public class DistortionCoordinates extends Struct<DistortionCoordinates> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link FloatBuffer} view of the {@link DistortionCoordinates#rfRed} field. */
+        /** @return a {@link FloatBuffer} view of the {@code rfRed} field. */
         @NativeType("float[2]")
         public FloatBuffer rfRed() { return DistortionCoordinates.nrfRed(address()); }
-        /** @return the value at the specified index of the {@link DistortionCoordinates#rfRed} field. */
+        /** @return the value at the specified index of the {@code rfRed} field. */
         public float rfRed(int index) { return DistortionCoordinates.nrfRed(address(), index); }
-        /** @return a {@link FloatBuffer} view of the {@link DistortionCoordinates#rfGreen} field. */
+        /** @return a {@link FloatBuffer} view of the {@code rfGreen} field. */
         @NativeType("float[2]")
         public FloatBuffer rfGreen() { return DistortionCoordinates.nrfGreen(address()); }
-        /** @return the value at the specified index of the {@link DistortionCoordinates#rfGreen} field. */
+        /** @return the value at the specified index of the {@code rfGreen} field. */
         public float rfGreen(int index) { return DistortionCoordinates.nrfGreen(address(), index); }
-        /** @return a {@link FloatBuffer} view of the {@link DistortionCoordinates#rfBlue} field. */
+        /** @return a {@link FloatBuffer} view of the {@code rfBlue} field. */
         @NativeType("float[2]")
         public FloatBuffer rfBlue() { return DistortionCoordinates.nrfBlue(address()); }
-        /** @return the value at the specified index of the {@link DistortionCoordinates#rfBlue} field. */
+        /** @return the value at the specified index of the {@code rfBlue} field. */
         public float rfBlue(int index) { return DistortionCoordinates.nrfBlue(address(), index); }
 
     }

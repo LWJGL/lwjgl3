@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1LoopFilterFlags {
  *     uint32_t loop_filter_delta_enabled : 1;
  *     uint32_t loop_filter_delta_update : 1;
  *     uint32_t reserved : 30;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1LoopFilterFlags extends Struct<StdVideoAV1LoopFilterFlags> implements NativeResource {
 

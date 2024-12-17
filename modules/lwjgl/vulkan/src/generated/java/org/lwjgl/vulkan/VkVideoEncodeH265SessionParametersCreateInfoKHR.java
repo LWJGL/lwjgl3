@@ -16,30 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifies H.265 encoder parameter set information.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR}</li>
- * <li>If {@code pParametersAddInfo} is not {@code NULL}, {@code pParametersAddInfo} <b>must</b> be a valid pointer to a valid {@link VkVideoEncodeH265SessionParametersAddInfoKHR} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeH265SessionParametersAddInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH265SessionParametersCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #maxStdVPSCount};
- *     uint32_t {@link #maxStdSPSCount};
- *     uint32_t {@link #maxStdPPSCount};
- *     {@link VkVideoEncodeH265SessionParametersAddInfoKHR VkVideoEncodeH265SessionParametersAddInfoKHR} const * {@link #pParametersAddInfo};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t maxStdVPSCount;
+ *     uint32_t maxStdSPSCount;
+ *     uint32_t maxStdPPSCount;
+ *     {@link VkVideoEncodeH265SessionParametersAddInfoKHR VkVideoEncodeH265SessionParametersAddInfoKHR} const * pParametersAddInfo;
+ * }}</pre>
  */
 public class VkVideoEncodeH265SessionParametersCreateInfoKHR extends Struct<VkVideoEncodeH265SessionParametersCreateInfoKHR> implements NativeResource {
 
@@ -101,38 +86,38 @@ public class VkVideoEncodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-vps">H.265 VPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
+    /** @return the value of the {@code maxStdVPSCount} field. */
     @NativeType("uint32_t")
     public int maxStdVPSCount() { return nmaxStdVPSCount(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-sps">H.265 SPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
+    /** @return the value of the {@code maxStdSPSCount} field. */
     @NativeType("uint32_t")
     public int maxStdSPSCount() { return nmaxStdSPSCount(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-pps">H.265 PPS</a> entries the created {@code VkVideoSessionParametersKHR} <b>can</b> contain. */
+    /** @return the value of the {@code maxStdPPSCount} field. */
     @NativeType("uint32_t")
     public int maxStdPPSCount() { return nmaxStdPPSCount(address()); }
-    /** {@code NULL} or a pointer to a {@link VkVideoEncodeH265SessionParametersAddInfoKHR} structure specifying H.265 parameters to add upon object creation. */
+    /** @return a {@link VkVideoEncodeH265SessionParametersAddInfoKHR} view of the struct pointed to by the {@code pParametersAddInfo} field. */
     @NativeType("VkVideoEncodeH265SessionParametersAddInfoKHR const *")
     public @Nullable VkVideoEncodeH265SessionParametersAddInfoKHR pParametersAddInfo() { return npParametersAddInfo(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoKHR sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxStdVPSCount} field. */
+    /** Sets the specified value to the {@code maxStdVPSCount} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoKHR maxStdVPSCount(@NativeType("uint32_t") int value) { nmaxStdVPSCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxStdSPSCount} field. */
+    /** Sets the specified value to the {@code maxStdSPSCount} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoKHR maxStdSPSCount(@NativeType("uint32_t") int value) { nmaxStdSPSCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxStdPPSCount} field. */
+    /** Sets the specified value to the {@code maxStdPPSCount} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoKHR maxStdPPSCount(@NativeType("uint32_t") int value) { nmaxStdPPSCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVideoEncodeH265SessionParametersAddInfoKHR} to the {@link #pParametersAddInfo} field. */
+    /** Sets the address of the specified {@link VkVideoEncodeH265SessionParametersAddInfoKHR} to the {@code pParametersAddInfo} field. */
     public VkVideoEncodeH265SessionParametersCreateInfoKHR pParametersAddInfo(@Nullable @NativeType("VkVideoEncodeH265SessionParametersAddInfoKHR const *") VkVideoEncodeH265SessionParametersAddInfoKHR value) { npParametersAddInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,38 +331,38 @@ public class VkVideoEncodeH265SessionParametersCreateInfoKHR extends Struct<VkVi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH265SessionParametersCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265SessionParametersCreateInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#maxStdVPSCount} field. */
+        /** @return the value of the {@code maxStdVPSCount} field. */
         @NativeType("uint32_t")
         public int maxStdVPSCount() { return VkVideoEncodeH265SessionParametersCreateInfoKHR.nmaxStdVPSCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#maxStdSPSCount} field. */
+        /** @return the value of the {@code maxStdSPSCount} field. */
         @NativeType("uint32_t")
         public int maxStdSPSCount() { return VkVideoEncodeH265SessionParametersCreateInfoKHR.nmaxStdSPSCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#maxStdPPSCount} field. */
+        /** @return the value of the {@code maxStdPPSCount} field. */
         @NativeType("uint32_t")
         public int maxStdPPSCount() { return VkVideoEncodeH265SessionParametersCreateInfoKHR.nmaxStdPPSCount(address()); }
-        /** @return a {@link VkVideoEncodeH265SessionParametersAddInfoKHR} view of the struct pointed to by the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#pParametersAddInfo} field. */
+        /** @return a {@link VkVideoEncodeH265SessionParametersAddInfoKHR} view of the struct pointed to by the {@code pParametersAddInfo} field. */
         @NativeType("VkVideoEncodeH265SessionParametersAddInfoKHR const *")
         public @Nullable VkVideoEncodeH265SessionParametersAddInfoKHR pParametersAddInfo() { return VkVideoEncodeH265SessionParametersCreateInfoKHR.npParametersAddInfo(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265SessionParametersCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265SessionParametersCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#maxStdVPSCount} field. */
+        /** Sets the specified value to the {@code maxStdVPSCount} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoKHR.Buffer maxStdVPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoKHR.nmaxStdVPSCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#maxStdSPSCount} field. */
+        /** Sets the specified value to the {@code maxStdSPSCount} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoKHR.Buffer maxStdSPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoKHR.nmaxStdSPSCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#maxStdPPSCount} field. */
+        /** Sets the specified value to the {@code maxStdPPSCount} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoKHR.Buffer maxStdPPSCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersCreateInfoKHR.nmaxStdPPSCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVideoEncodeH265SessionParametersAddInfoKHR} to the {@link VkVideoEncodeH265SessionParametersCreateInfoKHR#pParametersAddInfo} field. */
+        /** Sets the address of the specified {@link VkVideoEncodeH265SessionParametersAddInfoKHR} to the {@code pParametersAddInfo} field. */
         public VkVideoEncodeH265SessionParametersCreateInfoKHR.Buffer pParametersAddInfo(@Nullable @NativeType("VkVideoEncodeH265SessionParametersAddInfoKHR const *") VkVideoEncodeH265SessionParametersAddInfoKHR value) { VkVideoEncodeH265SessionParametersCreateInfoKHR.npParametersAddInfo(address(), value); return this; }
 
     }

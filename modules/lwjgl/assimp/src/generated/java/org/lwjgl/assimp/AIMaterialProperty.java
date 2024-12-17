@@ -14,33 +14,15 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Data structure for a single material property.
- * 
- * <p>As a user, you'll probably never need to deal with this data structure. Just use the provided {@code aiGetMaterialXXX()} family of functions to query
- * material properties easily. Processing them manually is faster, but it is not the recommended way. It isn't worth the effort.</p>
- * 
- * <p>Material property names follow a simple scheme:</p>
- * 
- * <pre><code>
- * $&lt;name&gt;
- * ?&lt;name&gt;
- *     A public property, there must be corresponding AI_MATKEY_XXX define
- *     2nd: Public, but ignored by the aiProcess_RemoveRedundantMaterials
- *     post-processing step.
- * ~&lt;name&gt;
- *     A temporary property for internal use.</code></pre>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiMaterialProperty {
- *     {@link AIString struct aiString} {@link #mKey};
- *     unsigned int {@link #mSemantic};
- *     unsigned int {@link #mIndex};
- *     unsigned int {@link #mDataLength};
- *     aiPropertyTypeInfo {@link #mType};
- *     char * {@link #mData};
- * }</code></pre>
+ *     {@link AIString struct aiString} mKey;
+ *     unsigned int mSemantic;
+ *     unsigned int mIndex;
+ *     unsigned int mDataLength;
+ *     aiPropertyTypeInfo mType;
+ *     char * mData;
+ * }}</pre>
  */
 @NativeType("struct aiMaterialProperty")
 public class AIMaterialProperty extends Struct<AIMaterialProperty> {
@@ -103,25 +85,22 @@ public class AIMaterialProperty extends Struct<AIMaterialProperty> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Specifies the name of the property (key). Keys are generally case insensitive. */
+    /** @return a {@link AIString} view of the {@code mKey} field. */
     @NativeType("struct aiString")
     public AIString mKey() { return nmKey(address()); }
-    /** Textures: Specifies their exact usage semantic. For non-texture properties, this member is always 0 (or, better-said, {@link Assimp#aiTextureType_NONE TextureType_NONE}). */
+    /** @return the value of the {@code mSemantic} field. */
     @NativeType("unsigned int")
     public int mSemantic() { return nmSemantic(address()); }
-    /** Textures: Specifies the index of the texture. For non-texture properties, this member is always 0. */
+    /** @return the value of the {@code mIndex} field. */
     @NativeType("unsigned int")
     public int mIndex() { return nmIndex(address()); }
-    /** Size of the buffer {@code mData} is pointing to, in bytes. This value may not be 0. */
+    /** @return the value of the {@code mDataLength} field. */
     @NativeType("unsigned int")
     public int mDataLength() { return nmDataLength(address()); }
-    /**
-     * Type information for the property. Defines the data layout inside the data buffer. This is used by the library internally to perform debug checks and
-     * to utilize proper type conversions. (It's probably a hacky solution, but it works.)
-     */
+    /** @return the value of the {@code mType} field. */
     @NativeType("aiPropertyTypeInfo")
     public int mType() { return nmType(address()); }
-    /** Binary buffer to hold the property's value. The size of the buffer is always mDataLength. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code mData} field. */
     @NativeType("char *")
     public ByteBuffer mData() { return nmData(address()); }
 
@@ -210,22 +189,22 @@ public class AIMaterialProperty extends Struct<AIMaterialProperty> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link AIString} view of the {@link AIMaterialProperty#mKey} field. */
+        /** @return a {@link AIString} view of the {@code mKey} field. */
         @NativeType("struct aiString")
         public AIString mKey() { return AIMaterialProperty.nmKey(address()); }
-        /** @return the value of the {@link AIMaterialProperty#mSemantic} field. */
+        /** @return the value of the {@code mSemantic} field. */
         @NativeType("unsigned int")
         public int mSemantic() { return AIMaterialProperty.nmSemantic(address()); }
-        /** @return the value of the {@link AIMaterialProperty#mIndex} field. */
+        /** @return the value of the {@code mIndex} field. */
         @NativeType("unsigned int")
         public int mIndex() { return AIMaterialProperty.nmIndex(address()); }
-        /** @return the value of the {@link AIMaterialProperty#mDataLength} field. */
+        /** @return the value of the {@code mDataLength} field. */
         @NativeType("unsigned int")
         public int mDataLength() { return AIMaterialProperty.nmDataLength(address()); }
-        /** @return the value of the {@link AIMaterialProperty#mType} field. */
+        /** @return the value of the {@code mType} field. */
         @NativeType("aiPropertyTypeInfo")
         public int mType() { return AIMaterialProperty.nmType(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link AIMaterialProperty#mData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code mData} field. */
         @NativeType("char *")
         public ByteBuffer mData() { return AIMaterialProperty.nmData(address()); }
 

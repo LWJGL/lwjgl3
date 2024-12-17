@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ZSTD_inBuffer {
- *     void const * {@link #src};
- *     size_t {@link #size};
- *     size_t {@link #pos};
- * }</code></pre>
+ *     void const * src;
+ *     size_t size;
+ *     size_t pos;
+ * }}</pre>
  */
 @NativeType("struct ZSTD_inBuffer")
 public class ZSTDInBuffer extends Struct<ZSTDInBuffer> implements NativeResource {
@@ -78,19 +76,19 @@ public class ZSTDInBuffer extends Struct<ZSTDInBuffer> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** start of input buffer */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code src} field. */
     @NativeType("void const *")
     public ByteBuffer src() { return nsrc(address()); }
-    /** size of input buffer */
+    /** @return the value of the {@code size} field. */
     @NativeType("size_t")
     public long size() { return nsize(address()); }
-    /** position where reading stopped. Will be updated. Necessarily 0 &le; {@code pos} &le; {@code size} */
+    /** @return the value of the {@code pos} field. */
     @NativeType("size_t")
     public long pos() { return npos(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #src} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code src} field. */
     public ZSTDInBuffer src(@NativeType("void const *") ByteBuffer value) { nsrc(address(), value); return this; }
-    /** Sets the specified value to the {@link #pos} field. */
+    /** Sets the specified value to the {@code pos} field. */
     public ZSTDInBuffer pos(@NativeType("size_t") long value) { npos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,19 +310,19 @@ public class ZSTDInBuffer extends Struct<ZSTDInBuffer> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link ZSTDInBuffer#src} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code src} field. */
         @NativeType("void const *")
         public ByteBuffer src() { return ZSTDInBuffer.nsrc(address()); }
-        /** @return the value of the {@link ZSTDInBuffer#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("size_t")
         public long size() { return ZSTDInBuffer.nsize(address()); }
-        /** @return the value of the {@link ZSTDInBuffer#pos} field. */
+        /** @return the value of the {@code pos} field. */
         @NativeType("size_t")
         public long pos() { return ZSTDInBuffer.npos(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link ZSTDInBuffer#src} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code src} field. */
         public ZSTDInBuffer.Buffer src(@NativeType("void const *") ByteBuffer value) { ZSTDInBuffer.nsrc(address(), value); return this; }
-        /** Sets the specified value to the {@link ZSTDInBuffer#pos} field. */
+        /** Sets the specified value to the {@code pos} field. */
         public ZSTDInBuffer.Buffer pos(@NativeType("size_t") long value) { ZSTDInBuffer.npos(address(), value); return this; }
 
     }

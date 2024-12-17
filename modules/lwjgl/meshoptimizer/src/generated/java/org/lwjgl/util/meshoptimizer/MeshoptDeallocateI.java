@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link MeshOptimizer#meshopt_setAllocator setAllocator} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *ptr
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (void *)")
 public interface MeshoptDeallocateI extends CallbackI {
@@ -42,6 +33,7 @@ public interface MeshoptDeallocateI extends CallbackI {
         );
     }
 
+    /** {@code void (*) (void * ptr)} */
     void invoke(@NativeType("void *") long ptr);
 
 }

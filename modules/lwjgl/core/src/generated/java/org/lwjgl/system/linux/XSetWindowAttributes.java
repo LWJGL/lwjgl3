@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Data structure for setting window attributes.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XSetWindowAttributes {
  *     Pixmap background_pixmap;
  *     unsigned long background_pixel;
@@ -37,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     Bool override_redirect;
  *     Colormap colormap;
  *     Cursor cursor;
- * }</code></pre>
+ * }}</pre>
  */
 public class XSetWindowAttributes extends Struct<XSetWindowAttributes> implements NativeResource {
 

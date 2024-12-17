@@ -11,20 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     ALenum source,
- *     ALenum type,
- *     ALuint id,
- *     ALenum severity,
- *     ALsizei length,
- *     ALchar const *message,
- *     ALvoid *userParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ALDEBUGPROCEXT} */
 public abstract class EXTDebugProc extends Callback implements EXTDebugProcI {
 
     /**

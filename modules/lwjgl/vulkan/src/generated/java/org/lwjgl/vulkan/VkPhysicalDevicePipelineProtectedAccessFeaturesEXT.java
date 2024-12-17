@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDevicePipelineProtectedAccessFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDevicePipelineProtectedAccessFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 pipelineProtectedAccess;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDevicePipelineProtectedAccessFeaturesEXT extends VkPhysicalDevicePipelineProtectedAccessFeatures {
 

@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing compute shader derivative features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#shaders-scope-quad">Quad shader scope</a> for more information.</p>
- * 
- * <p>If the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR}. structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR}. <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRComputeShaderDerivatives#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #computeDerivativeGroupQuads};
- *     VkBool32 {@link #computeDerivativeGroupLinear};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 computeDerivativeGroupQuads;
+ *     VkBool32 computeDerivativeGroupLinear;
+ * }}</pre>
  */
 public class VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR extends Struct<VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR> implements NativeResource {
 
@@ -94,28 +78,28 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR extends Struct<
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports the {@code ComputeDerivativeGroupQuadsKHR} SPIR-V capability. */
+    /** @return the value of the {@code computeDerivativeGroupQuads} field. */
     @NativeType("VkBool32")
     public boolean computeDerivativeGroupQuads() { return ncomputeDerivativeGroupQuads(address()) != 0; }
-    /** indicates that the implementation supports the {@code ComputeDerivativeGroupLinearKHR} SPIR-V capability. */
+    /** @return the value of the {@code computeDerivativeGroupLinear} field. */
     @NativeType("VkBool32")
     public boolean computeDerivativeGroupLinear() { return ncomputeDerivativeGroupLinear(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRComputeShaderDerivatives#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRComputeShaderDerivatives#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR sType$Default() { return sType(KHRComputeShaderDerivatives.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #computeDerivativeGroupQuads} field. */
+    /** Sets the specified value to the {@code computeDerivativeGroupQuads} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR computeDerivativeGroupQuads(@NativeType("VkBool32") boolean value) { ncomputeDerivativeGroupQuads(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #computeDerivativeGroupLinear} field. */
+    /** Sets the specified value to the {@code computeDerivativeGroupLinear} field. */
     public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR computeDerivativeGroupLinear(@NativeType("VkBool32") boolean value) { ncomputeDerivativeGroupLinear(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -317,28 +301,28 @@ public class VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR extends Struct<
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#computeDerivativeGroupQuads} field. */
+        /** @return the value of the {@code computeDerivativeGroupQuads} field. */
         @NativeType("VkBool32")
         public boolean computeDerivativeGroupQuads() { return VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.ncomputeDerivativeGroupQuads(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#computeDerivativeGroupLinear} field. */
+        /** @return the value of the {@code computeDerivativeGroupLinear} field. */
         @NativeType("VkBool32")
         public boolean computeDerivativeGroupLinear() { return VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.ncomputeDerivativeGroupLinear(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRComputeShaderDerivatives#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR} value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#sType} field. */
+        /** Sets the {@link KHRComputeShaderDerivatives#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.Buffer sType$Default() { return sType(KHRComputeShaderDerivatives.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#computeDerivativeGroupQuads} field. */
+        /** Sets the specified value to the {@code computeDerivativeGroupQuads} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.Buffer computeDerivativeGroupQuads(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.ncomputeDerivativeGroupQuads(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR#computeDerivativeGroupLinear} field. */
+        /** Sets the specified value to the {@code computeDerivativeGroupLinear} field. */
         public VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.Buffer computeDerivativeGroupLinear(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR.ncomputeDerivativeGroupLinear(address(), value ? 1 : 0); return this; }
 
     }

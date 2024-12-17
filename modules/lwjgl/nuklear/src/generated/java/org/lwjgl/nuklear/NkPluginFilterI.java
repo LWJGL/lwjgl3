@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@link NkTextEdit} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * nk_bool (*{@link #invoke}) (
- *     struct nk_text_edit const *edit,
- *     nk_rune unicode
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_plugin_filter} */
 @FunctionalInterface
 @NativeType("nk_plugin_filter")
 public interface NkPluginFilterI extends CallbackI {
@@ -45,6 +35,7 @@ public interface NkPluginFilterI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code nk_bool (* nk_plugin_filter) (struct nk_text_edit const * edit, nk_rune unicode)} */
     @NativeType("nk_bool") boolean invoke(@NativeType("struct nk_text_edit const *") long edit, @NativeType("nk_rune") int unicode);
 
 }

@@ -11,22 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to the {@link ExtentHooks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * bool (*{@link #invoke}) (
- *     extent_hooks_t *extent_hooks,
- *     void *addr,
- *     size_t size,
- *     size_t size_a,
- *     size_t size_b,
- *     bool committed,
- *     unsigned int arena_ind
- * )</code></pre>
- */
+/** Callback function: {@link #invoke extent_split_t} */
 public abstract class ExtentSplit extends Callback implements ExtentSplitI {
 
     /**

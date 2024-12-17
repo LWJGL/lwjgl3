@@ -17,14 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Uniquely identifies a CXFile, that refers to the same underlying file, across an indexing session.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXFileUniqueID {
  *     unsigned long long data[3];
- * }</code></pre>
+ * }}</pre>
  */
 public class CXFileUniqueID extends Struct<CXFileUniqueID> implements NativeResource {
 

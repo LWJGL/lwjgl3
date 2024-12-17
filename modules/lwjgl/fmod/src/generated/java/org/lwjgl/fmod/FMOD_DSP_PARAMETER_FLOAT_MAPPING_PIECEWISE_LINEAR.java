@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR {
  *     int numpoints;
  *     float * pointparamvalues;
  *     float * pointpositions;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR extends Struct<FMOD_DSP_PARAMETER_FLOAT_MAPPING_PIECEWISE_LINEAR> implements NativeResource {
 

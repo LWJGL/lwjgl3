@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDescriptorPoolInlineUniformBlockCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorPoolInlineUniformBlockCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t maxInlineUniformBlockBindings;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDescriptorPoolInlineUniformBlockCreateInfoEXT extends VkDescriptorPoolInlineUniformBlockCreateInfo {
 

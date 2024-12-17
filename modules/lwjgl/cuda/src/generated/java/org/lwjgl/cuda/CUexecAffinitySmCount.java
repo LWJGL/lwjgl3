@@ -16,12 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUexecAffinitySmCount {
  *     unsigned int val;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUexecAffinitySmCount extends Struct<CUexecAffinitySmCount> implements NativeResource {
 

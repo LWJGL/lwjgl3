@@ -19,38 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.KHRPipelineBinary.*;
 
 /**
- * Structure specifying a key to a pipeline binary.
- * 
- * <h5>Description</h5>
- * 
- * <p>Any returned values beyond the first {@code keySize} bytes are undefined. Implementations <b>must</b> return a {@code keySize} greater than 0, and less-or-equal to {@link KHRPipelineBinary#VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR MAX_PIPELINE_BINARY_KEY_SIZE_KHR}.</p>
- * 
- * <p>Two keys are considered equal if {@code keySize} is equal and the first {@code keySize} bytes of {@code key} compare equal.</p>
- * 
- * <p>Implementations <b>may</b> return a different {@code keySize} for different binaries.</p>
- * 
- * <p>Implementations <b>should</b> ensure that {@code keySize} is large enough to uniquely identify a pipeline binary.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineBinaryKeysAndDataKHR}, {@link KHRPipelineBinary#vkGetPipelineBinaryDataKHR GetPipelineBinaryDataKHR}, {@link KHRPipelineBinary#vkGetPipelineKeyKHR GetPipelineKeyKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineBinaryKeyKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #keySize};
- *     uint8_t {@link #key}[VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR];
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t keySize;
+ *     uint8_t key[VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR];
+ * }}</pre>
  */
 public class VkPipelineBinaryKeyKHR extends Struct<VkPipelineBinaryKeyKHR> implements NativeResource {
 
@@ -106,33 +81,33 @@ public class VkPipelineBinaryKeyKHR extends Struct<VkPipelineBinaryKeyKHR> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the size, in bytes, of valid data returned in {@code key}. */
+    /** @return the value of the {@code keySize} field. */
     @NativeType("uint32_t")
     public int keySize() { return nkeySize(address()); }
-    /** a buffer of opaque data specifying a pipeline binary key. */
+    /** @return a {@link ByteBuffer} view of the {@code key} field. */
     @NativeType("uint8_t[VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR]")
     public ByteBuffer key() { return nkey(address()); }
-    /** a buffer of opaque data specifying a pipeline binary key. */
+    /** @return the value at the specified index of the {@code key} field. */
     @NativeType("uint8_t")
     public byte key(int index) { return nkey(address(), index); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineBinaryKeyKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR} value to the {@code sType} field. */
     public VkPipelineBinaryKeyKHR sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineBinaryKeyKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #keySize} field. */
+    /** Sets the specified value to the {@code keySize} field. */
     public VkPipelineBinaryKeyKHR keySize(@NativeType("uint32_t") int value) { nkeySize(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #key} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code key} field. */
     public VkPipelineBinaryKeyKHR key(@NativeType("uint8_t[VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR]") ByteBuffer value) { nkey(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #key} field. */
+    /** Sets the specified value at the specified index of the {@code key} field. */
     public VkPipelineBinaryKeyKHR key(int index, @NativeType("uint8_t") byte value) { nkey(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -345,33 +320,33 @@ public class VkPipelineBinaryKeyKHR extends Struct<VkPipelineBinaryKeyKHR> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineBinaryKeyKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineBinaryKeyKHR.nsType(address()); }
-        /** @return the value of the {@link VkPipelineBinaryKeyKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelineBinaryKeyKHR.npNext(address()); }
-        /** @return the value of the {@link VkPipelineBinaryKeyKHR#keySize} field. */
+        /** @return the value of the {@code keySize} field. */
         @NativeType("uint32_t")
         public int keySize() { return VkPipelineBinaryKeyKHR.nkeySize(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPipelineBinaryKeyKHR#key} field. */
+        /** @return a {@link ByteBuffer} view of the {@code key} field. */
         @NativeType("uint8_t[VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR]")
         public ByteBuffer key() { return VkPipelineBinaryKeyKHR.nkey(address()); }
-        /** @return the value at the specified index of the {@link VkPipelineBinaryKeyKHR#key} field. */
+        /** @return the value at the specified index of the {@code key} field. */
         @NativeType("uint8_t")
         public byte key(int index) { return VkPipelineBinaryKeyKHR.nkey(address(), index); }
 
-        /** Sets the specified value to the {@link VkPipelineBinaryKeyKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineBinaryKeyKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineBinaryKeyKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR} value to the {@link VkPipelineBinaryKeyKHR#sType} field. */
+        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR} value to the {@code sType} field. */
         public VkPipelineBinaryKeyKHR.Buffer sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR); }
-        /** Sets the specified value to the {@link VkPipelineBinaryKeyKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineBinaryKeyKHR.Buffer pNext(@NativeType("void *") long value) { VkPipelineBinaryKeyKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineBinaryKeyKHR#keySize} field. */
+        /** Sets the specified value to the {@code keySize} field. */
         public VkPipelineBinaryKeyKHR.Buffer keySize(@NativeType("uint32_t") int value) { VkPipelineBinaryKeyKHR.nkeySize(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link VkPipelineBinaryKeyKHR#key} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code key} field. */
         public VkPipelineBinaryKeyKHR.Buffer key(@NativeType("uint8_t[VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR]") ByteBuffer value) { VkPipelineBinaryKeyKHR.nkey(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link VkPipelineBinaryKeyKHR#key} field. */
+        /** Sets the specified value at the specified index of the {@code key} field. */
         public VkPipelineBinaryKeyKHR.Buffer key(int index, @NativeType("uint8_t") byte value) { VkPipelineBinaryKeyKHR.nkey(address(), index, value); return this; }
 
     }

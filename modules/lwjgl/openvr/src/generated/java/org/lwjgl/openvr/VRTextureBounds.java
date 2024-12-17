@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Allows the application to control what part of the provided texture will be used in the frame buffer.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRTextureBounds_t {
  *     float uMin;
  *     float vMin;
  *     float uMax;
  *     float vMax;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VRTextureBounds_t")
 public class VRTextureBounds extends Struct<VRTextureBounds> implements NativeResource {

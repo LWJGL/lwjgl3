@@ -14,18 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * X11-specific declarations for AWT native interface.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct JAWT_X11DrawingSurfaceInfo {
- *     Drawable {@link #drawable};
- *     Display * {@link #display};
- *     VisualID {@link #visualID};
- *     Colormap {@link #colormapID};
- *     int {@link #depth};
- * }</code></pre>
+ *     Drawable drawable;
+ *     Display * display;
+ *     VisualID visualID;
+ *     Colormap colormapID;
+ *     int depth;
+ * }}</pre>
  */
 @NativeType("struct JAWT_X11DrawingSurfaceInfo")
 public class JAWTX11DrawingSurfaceInfo extends Struct<JAWTX11DrawingSurfaceInfo> {
@@ -85,19 +81,19 @@ public class JAWTX11DrawingSurfaceInfo extends Struct<JAWTX11DrawingSurfaceInfo>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the drawable */
+    /** @return the value of the {@code drawable} field. */
     @NativeType("Drawable")
     public long drawable() { return ndrawable(address()); }
-    /** the connection to the X server */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** the VisualID */
+    /** @return the value of the {@code visualID} field. */
     @NativeType("VisualID")
     public long visualID() { return nvisualID(address()); }
-    /** the colormap */
+    /** @return the value of the {@code colormapID} field. */
     @NativeType("Colormap")
     public long colormapID() { return ncolormapID(address()); }
-    /** the depth */
+    /** @return the value of the {@code depth} field. */
     public int depth() { return ndepth(address()); }
 
     // -----------------------------------
@@ -183,19 +179,19 @@ public class JAWTX11DrawingSurfaceInfo extends Struct<JAWTX11DrawingSurfaceInfo>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link JAWTX11DrawingSurfaceInfo#drawable} field. */
+        /** @return the value of the {@code drawable} field. */
         @NativeType("Drawable")
         public long drawable() { return JAWTX11DrawingSurfaceInfo.ndrawable(address()); }
-        /** @return the value of the {@link JAWTX11DrawingSurfaceInfo#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return JAWTX11DrawingSurfaceInfo.ndisplay(address()); }
-        /** @return the value of the {@link JAWTX11DrawingSurfaceInfo#visualID} field. */
+        /** @return the value of the {@code visualID} field. */
         @NativeType("VisualID")
         public long visualID() { return JAWTX11DrawingSurfaceInfo.nvisualID(address()); }
-        /** @return the value of the {@link JAWTX11DrawingSurfaceInfo#colormapID} field. */
+        /** @return the value of the {@code colormapID} field. */
         @NativeType("Colormap")
         public long colormapID() { return JAWTX11DrawingSurfaceInfo.ncolormapID(address()); }
-        /** @return the value of the {@link JAWTX11DrawingSurfaceInfo#depth} field. */
+        /** @return the value of the {@code depth} field. */
         public int depth() { return JAWTX11DrawingSurfaceInfo.ndepth(address()); }
 
     }

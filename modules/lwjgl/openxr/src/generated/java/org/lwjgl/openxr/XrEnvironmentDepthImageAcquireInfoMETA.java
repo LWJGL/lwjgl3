@@ -17,30 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * XrEnvironmentDepthImageAcquireInfoMETA.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using {@link XrEnvironmentDepthImageAcquireInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAEnvironmentDepth#xrAcquireEnvironmentDepthImageMETA AcquireEnvironmentDepthImageMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEnvironmentDepthImageAcquireInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #space};
- *     XrTime {@link #displayTime};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace space;
+ *     XrTime displayTime;
+ * }}</pre>
  */
 public class XrEnvironmentDepthImageAcquireInfoMETA extends Struct<XrEnvironmentDepthImageAcquireInfoMETA> implements NativeResource {
 
@@ -96,28 +79,28 @@ public class XrEnvironmentDepthImageAcquireInfoMETA extends Struct<XrEnvironment
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrSpace} defining the reference frame of the returned pose in {@link XrEnvironmentDepthImageMETA}. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** an {@code XrTime} specifying the time used to compute the pose for the returned pose in {@link XrEnvironmentDepthImageMETA}. Clients <b>should</b> pass their predicted display time for the current frame. */
+    /** @return the value of the {@code displayTime} field. */
     @NativeType("XrTime")
     public long displayTime() { return ndisplayTime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEnvironmentDepthImageAcquireInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META} value to the {@code type} field. */
     public XrEnvironmentDepthImageAcquireInfoMETA type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEnvironmentDepthImageAcquireInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrEnvironmentDepthImageAcquireInfoMETA space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@link #displayTime} field. */
+    /** Sets the specified value to the {@code displayTime} field. */
     public XrEnvironmentDepthImageAcquireInfoMETA displayTime(@NativeType("XrTime") long value) { ndisplayTime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,28 +311,28 @@ public class XrEnvironmentDepthImageAcquireInfoMETA extends Struct<XrEnvironment
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEnvironmentDepthImageAcquireInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEnvironmentDepthImageAcquireInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthImageAcquireInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEnvironmentDepthImageAcquireInfoMETA.nnext(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthImageAcquireInfoMETA#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrEnvironmentDepthImageAcquireInfoMETA.nspace(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthImageAcquireInfoMETA#displayTime} field. */
+        /** @return the value of the {@code displayTime} field. */
         @NativeType("XrTime")
         public long displayTime() { return XrEnvironmentDepthImageAcquireInfoMETA.ndisplayTime(address()); }
 
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageAcquireInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEnvironmentDepthImageAcquireInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEnvironmentDepthImageAcquireInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META} value to the {@link XrEnvironmentDepthImageAcquireInfoMETA#type} field. */
+        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META} value to the {@code type} field. */
         public XrEnvironmentDepthImageAcquireInfoMETA.Buffer type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META); }
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageAcquireInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEnvironmentDepthImageAcquireInfoMETA.Buffer next(@NativeType("void const *") long value) { XrEnvironmentDepthImageAcquireInfoMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageAcquireInfoMETA#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrEnvironmentDepthImageAcquireInfoMETA.Buffer space(XrSpace value) { XrEnvironmentDepthImageAcquireInfoMETA.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageAcquireInfoMETA#displayTime} field. */
+        /** Sets the specified value to the {@code displayTime} field. */
         public XrEnvironmentDepthImageAcquireInfoMETA.Buffer displayTime(@NativeType("XrTime") long value) { XrEnvironmentDepthImageAcquireInfoMETA.ndisplayTime(address(), value); return this; }
 
     }

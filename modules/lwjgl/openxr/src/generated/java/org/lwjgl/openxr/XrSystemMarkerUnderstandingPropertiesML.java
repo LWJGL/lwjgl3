@@ -16,24 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * System Property for Marker Understanding support.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using {@link XrSystemMarkerUnderstandingPropertiesML}</li>
- * <li>{@code type} <b>must</b> be {@link MLMarkerUnderstanding#XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemMarkerUnderstandingPropertiesML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsMarkerUnderstanding};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsMarkerUnderstanding;
+ * }}</pre>
  */
 public class XrSystemMarkerUnderstandingPropertiesML extends Struct<XrSystemMarkerUnderstandingPropertiesML> implements NativeResource {
 
@@ -86,21 +74,21 @@ public class XrSystemMarkerUnderstandingPropertiesML extends Struct<XrSystemMark
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** indicates whether marker detection and tracking is supported by this system. */
+    /** @return the value of the {@code supportsMarkerUnderstanding} field. */
     @NativeType("XrBool32")
     public boolean supportsMarkerUnderstanding() { return nsupportsMarkerUnderstanding(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemMarkerUnderstandingPropertiesML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML} value to the {@code type} field. */
     public XrSystemMarkerUnderstandingPropertiesML type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemMarkerUnderstandingPropertiesML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,21 +280,21 @@ public class XrSystemMarkerUnderstandingPropertiesML extends Struct<XrSystemMark
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemMarkerUnderstandingPropertiesML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemMarkerUnderstandingPropertiesML.ntype(address()); }
-        /** @return the value of the {@link XrSystemMarkerUnderstandingPropertiesML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemMarkerUnderstandingPropertiesML.nnext(address()); }
-        /** @return the value of the {@link XrSystemMarkerUnderstandingPropertiesML#supportsMarkerUnderstanding} field. */
+        /** @return the value of the {@code supportsMarkerUnderstanding} field. */
         @NativeType("XrBool32")
         public boolean supportsMarkerUnderstanding() { return XrSystemMarkerUnderstandingPropertiesML.nsupportsMarkerUnderstanding(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemMarkerUnderstandingPropertiesML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemMarkerUnderstandingPropertiesML.Buffer type(@NativeType("XrStructureType") int value) { XrSystemMarkerUnderstandingPropertiesML.ntype(address(), value); return this; }
-        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML} value to the {@link XrSystemMarkerUnderstandingPropertiesML#type} field. */
+        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML} value to the {@code type} field. */
         public XrSystemMarkerUnderstandingPropertiesML.Buffer type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML); }
-        /** Sets the specified value to the {@link XrSystemMarkerUnderstandingPropertiesML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemMarkerUnderstandingPropertiesML.Buffer next(@NativeType("void *") long value) { XrSystemMarkerUnderstandingPropertiesML.nnext(address(), value); return this; }
 
     }

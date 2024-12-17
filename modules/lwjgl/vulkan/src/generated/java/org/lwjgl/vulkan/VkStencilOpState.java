@@ -16,33 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying stencil operation state.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code failOp} <b>must</b> be a valid {@code VkStencilOp} value</li>
- * <li>{@code passOp} <b>must</b> be a valid {@code VkStencilOp} value</li>
- * <li>{@code depthFailOp} <b>must</b> be a valid {@code VkStencilOp} value</li>
- * <li>{@code compareOp} <b>must</b> be a valid {@code VkCompareOp} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineDepthStencilStateCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkStencilOpState {
- *     VkStencilOp {@link #failOp};
- *     VkStencilOp {@link #passOp};
- *     VkStencilOp {@link #depthFailOp};
- *     VkCompareOp {@link #compareOp};
- *     uint32_t {@link #compareMask};
- *     uint32_t {@link #writeMask};
- *     uint32_t {@link #reference};
- * }</code></pre>
+ *     VkStencilOp failOp;
+ *     VkStencilOp passOp;
+ *     VkStencilOp depthFailOp;
+ *     VkCompareOp compareOp;
+ *     uint32_t compareMask;
+ *     uint32_t writeMask;
+ *     uint32_t reference;
+ * }}</pre>
  */
 public class VkStencilOpState extends Struct<VkStencilOpState> implements NativeResource {
 
@@ -107,41 +90,41 @@ public class VkStencilOpState extends Struct<VkStencilOpState> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStencilOp} value specifying the action performed on samples that fail the stencil test. */
+    /** @return the value of the {@code failOp} field. */
     @NativeType("VkStencilOp")
     public int failOp() { return nfailOp(address()); }
-    /** a {@code VkStencilOp} value specifying the action performed on samples that pass both the depth and stencil tests. */
+    /** @return the value of the {@code passOp} field. */
     @NativeType("VkStencilOp")
     public int passOp() { return npassOp(address()); }
-    /** a {@code VkStencilOp} value specifying the action performed on samples that pass the stencil test and fail the depth test. */
+    /** @return the value of the {@code depthFailOp} field. */
     @NativeType("VkStencilOp")
     public int depthFailOp() { return ndepthFailOp(address()); }
-    /** a {@code VkCompareOp} value specifying the comparison operator used in the stencil test. */
+    /** @return the value of the {@code compareOp} field. */
     @NativeType("VkCompareOp")
     public int compareOp() { return ncompareOp(address()); }
-    /** selects the bits of the unsigned integer stencil values participating in the stencil test. */
+    /** @return the value of the {@code compareMask} field. */
     @NativeType("uint32_t")
     public int compareMask() { return ncompareMask(address()); }
-    /** selects the bits of the unsigned integer stencil values updated by the stencil test in the stencil framebuffer attachment. */
+    /** @return the value of the {@code writeMask} field. */
     @NativeType("uint32_t")
     public int writeMask() { return nwriteMask(address()); }
-    /** an integer stencil reference value that is used in the unsigned stencil comparison. */
+    /** @return the value of the {@code reference} field. */
     @NativeType("uint32_t")
     public int reference() { return nreference(address()); }
 
-    /** Sets the specified value to the {@link #failOp} field. */
+    /** Sets the specified value to the {@code failOp} field. */
     public VkStencilOpState failOp(@NativeType("VkStencilOp") int value) { nfailOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #passOp} field. */
+    /** Sets the specified value to the {@code passOp} field. */
     public VkStencilOpState passOp(@NativeType("VkStencilOp") int value) { npassOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthFailOp} field. */
+    /** Sets the specified value to the {@code depthFailOp} field. */
     public VkStencilOpState depthFailOp(@NativeType("VkStencilOp") int value) { ndepthFailOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #compareOp} field. */
+    /** Sets the specified value to the {@code compareOp} field. */
     public VkStencilOpState compareOp(@NativeType("VkCompareOp") int value) { ncompareOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #compareMask} field. */
+    /** Sets the specified value to the {@code compareMask} field. */
     public VkStencilOpState compareMask(@NativeType("uint32_t") int value) { ncompareMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #writeMask} field. */
+    /** Sets the specified value to the {@code writeMask} field. */
     public VkStencilOpState writeMask(@NativeType("uint32_t") int value) { nwriteMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #reference} field. */
+    /** Sets the specified value to the {@code reference} field. */
     public VkStencilOpState reference(@NativeType("uint32_t") int value) { nreference(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -380,41 +363,41 @@ public class VkStencilOpState extends Struct<VkStencilOpState> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkStencilOpState#failOp} field. */
+        /** @return the value of the {@code failOp} field. */
         @NativeType("VkStencilOp")
         public int failOp() { return VkStencilOpState.nfailOp(address()); }
-        /** @return the value of the {@link VkStencilOpState#passOp} field. */
+        /** @return the value of the {@code passOp} field. */
         @NativeType("VkStencilOp")
         public int passOp() { return VkStencilOpState.npassOp(address()); }
-        /** @return the value of the {@link VkStencilOpState#depthFailOp} field. */
+        /** @return the value of the {@code depthFailOp} field. */
         @NativeType("VkStencilOp")
         public int depthFailOp() { return VkStencilOpState.ndepthFailOp(address()); }
-        /** @return the value of the {@link VkStencilOpState#compareOp} field. */
+        /** @return the value of the {@code compareOp} field. */
         @NativeType("VkCompareOp")
         public int compareOp() { return VkStencilOpState.ncompareOp(address()); }
-        /** @return the value of the {@link VkStencilOpState#compareMask} field. */
+        /** @return the value of the {@code compareMask} field. */
         @NativeType("uint32_t")
         public int compareMask() { return VkStencilOpState.ncompareMask(address()); }
-        /** @return the value of the {@link VkStencilOpState#writeMask} field. */
+        /** @return the value of the {@code writeMask} field. */
         @NativeType("uint32_t")
         public int writeMask() { return VkStencilOpState.nwriteMask(address()); }
-        /** @return the value of the {@link VkStencilOpState#reference} field. */
+        /** @return the value of the {@code reference} field. */
         @NativeType("uint32_t")
         public int reference() { return VkStencilOpState.nreference(address()); }
 
-        /** Sets the specified value to the {@link VkStencilOpState#failOp} field. */
+        /** Sets the specified value to the {@code failOp} field. */
         public VkStencilOpState.Buffer failOp(@NativeType("VkStencilOp") int value) { VkStencilOpState.nfailOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkStencilOpState#passOp} field. */
+        /** Sets the specified value to the {@code passOp} field. */
         public VkStencilOpState.Buffer passOp(@NativeType("VkStencilOp") int value) { VkStencilOpState.npassOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkStencilOpState#depthFailOp} field. */
+        /** Sets the specified value to the {@code depthFailOp} field. */
         public VkStencilOpState.Buffer depthFailOp(@NativeType("VkStencilOp") int value) { VkStencilOpState.ndepthFailOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkStencilOpState#compareOp} field. */
+        /** Sets the specified value to the {@code compareOp} field. */
         public VkStencilOpState.Buffer compareOp(@NativeType("VkCompareOp") int value) { VkStencilOpState.ncompareOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkStencilOpState#compareMask} field. */
+        /** Sets the specified value to the {@code compareMask} field. */
         public VkStencilOpState.Buffer compareMask(@NativeType("uint32_t") int value) { VkStencilOpState.ncompareMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkStencilOpState#writeMask} field. */
+        /** Sets the specified value to the {@code writeMask} field. */
         public VkStencilOpState.Buffer writeMask(@NativeType("uint32_t") int value) { VkStencilOpState.nwriteMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkStencilOpState#reference} field. */
+        /** Sets the specified value to the {@code reference} field. */
         public VkStencilOpState.Buffer reference(@NativeType("uint32_t") int value) { VkStencilOpState.nreference(address(), value); return this; }
 
     }

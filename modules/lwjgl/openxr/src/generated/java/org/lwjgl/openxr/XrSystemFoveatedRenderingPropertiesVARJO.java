@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * System property for foveated rendering.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>should</b> return {@link XR10#XR_TRUE TRUE} for {@code supportsFoveatedRendering} when rendering gaze is available in the system. An application <b>should</b> avoid using foveated rendering functionality when {@code supportsFoveatedRendering} is {@link XR10#XR_FALSE FALSE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link VARJOFoveatedRendering XR_VARJO_foveated_rendering} extension <b>must</b> be enabled prior to using {@link XrSystemFoveatedRenderingPropertiesVARJO}</li>
- * <li>{@code type} <b>must</b> be {@link VARJOFoveatedRendering#XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemFoveatedRenderingPropertiesVARJO {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsFoveatedRendering};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsFoveatedRendering;
+ * }}</pre>
  */
 public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct<XrSystemFoveatedRenderingPropertiesVARJO> implements NativeResource {
 
@@ -90,21 +74,21 @@ public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct<XrSystemFov
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32}, indicating if current system is capable of performoning foveated rendering. */
+    /** @return the value of the {@code supportsFoveatedRendering} field. */
     @NativeType("XrBool32")
     public boolean supportsFoveatedRendering() { return nsupportsFoveatedRendering(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemFoveatedRenderingPropertiesVARJO type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO} value to the {@link #type} field. */
+    /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO} value to the {@code type} field. */
     public XrSystemFoveatedRenderingPropertiesVARJO type$Default() { return type(VARJOFoveatedRendering.XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemFoveatedRenderingPropertiesVARJO next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,21 +280,21 @@ public class XrSystemFoveatedRenderingPropertiesVARJO extends Struct<XrSystemFov
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemFoveatedRenderingPropertiesVARJO#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemFoveatedRenderingPropertiesVARJO.ntype(address()); }
-        /** @return the value of the {@link XrSystemFoveatedRenderingPropertiesVARJO#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemFoveatedRenderingPropertiesVARJO.nnext(address()); }
-        /** @return the value of the {@link XrSystemFoveatedRenderingPropertiesVARJO#supportsFoveatedRendering} field. */
+        /** @return the value of the {@code supportsFoveatedRendering} field. */
         @NativeType("XrBool32")
         public boolean supportsFoveatedRendering() { return XrSystemFoveatedRenderingPropertiesVARJO.nsupportsFoveatedRendering(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemFoveatedRenderingPropertiesVARJO#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemFoveatedRenderingPropertiesVARJO.Buffer type(@NativeType("XrStructureType") int value) { XrSystemFoveatedRenderingPropertiesVARJO.ntype(address(), value); return this; }
-        /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO} value to the {@link XrSystemFoveatedRenderingPropertiesVARJO#type} field. */
+        /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO} value to the {@code type} field. */
         public XrSystemFoveatedRenderingPropertiesVARJO.Buffer type$Default() { return type(VARJOFoveatedRendering.XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO); }
-        /** Sets the specified value to the {@link XrSystemFoveatedRenderingPropertiesVARJO#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemFoveatedRenderingPropertiesVARJO.Buffer next(@NativeType("void *") long value) { XrSystemFoveatedRenderingPropertiesVARJO.nnext(address(), value); return this; }
 
     }

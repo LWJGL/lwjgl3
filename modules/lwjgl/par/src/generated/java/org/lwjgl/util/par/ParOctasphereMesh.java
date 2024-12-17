@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct par_octasphere_mesh {
  *     float * positions;
  *     float * normals;
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t * indices;
  *     uint32_t num_indices;
  *     uint32_t num_vertices;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct par_octasphere_mesh")
 public class ParOctasphereMesh extends Struct<ParOctasphereMesh> implements NativeResource {
@@ -90,32 +88,16 @@ public class ParOctasphereMesh extends Struct<ParOctasphereMesh> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link FloatBuffer} view of the data pointed to by the {@code positions} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code positions} field. */
     @NativeType("float *")
     public FloatBuffer positions(int capacity) { return npositions(address(), capacity); }
-    /**
-     * @return a {@link FloatBuffer} view of the data pointed to by the {@code normals} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code normals} field. */
     @NativeType("float *")
     public @Nullable FloatBuffer normals(int capacity) { return nnormals(address(), capacity); }
-    /**
-     * @return a {@link FloatBuffer} view of the data pointed to by the {@code texcoords} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code texcoords} field. */
     @NativeType("float *")
     public @Nullable FloatBuffer texcoords(int capacity) { return ntexcoords(address(), capacity); }
-    /**
-     * @return a {@link ShortBuffer} view of the data pointed to by the {@code indices} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ShortBuffer} view of the data pointed to by the {@code indices} field. */
     @NativeType("uint16_t *")
     public ShortBuffer indices(int capacity) { return nindices(address(), capacity); }
     /** @return the value of the {@code num_indices} field. */
@@ -347,32 +329,16 @@ public class ParOctasphereMesh extends Struct<ParOctasphereMesh> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link FloatBuffer} view of the data pointed to by the {@code positions} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code positions} field. */
         @NativeType("float *")
         public FloatBuffer positions(int capacity) { return ParOctasphereMesh.npositions(address(), capacity); }
-        /**
-         * @return a {@link FloatBuffer} view of the data pointed to by the {@code normals} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code normals} field. */
         @NativeType("float *")
         public @Nullable FloatBuffer normals(int capacity) { return ParOctasphereMesh.nnormals(address(), capacity); }
-        /**
-         * @return a {@link FloatBuffer} view of the data pointed to by the {@code texcoords} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code texcoords} field. */
         @NativeType("float *")
         public @Nullable FloatBuffer texcoords(int capacity) { return ParOctasphereMesh.ntexcoords(address(), capacity); }
-        /**
-         * @return a {@link ShortBuffer} view of the data pointed to by the {@code indices} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@code indices} field. */
         @NativeType("uint16_t *")
         public ShortBuffer indices(int capacity) { return ParOctasphereMesh.nindices(address(), capacity); }
         /** @return the value of the {@code num_indices} field. */

@@ -14,9 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_topology_membind_support {
  *     unsigned char set_thisproc_membind;
  *     unsigned char get_thisproc_membind;
@@ -34,7 +32,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned char weighted_interleave_membind;
  *     unsigned char nexttouch_membind;
  *     unsigned char migrate_membind;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct hwloc_topology_membind_support")
 public class hwloc_topology_membind_support extends Struct<hwloc_topology_membind_support> {

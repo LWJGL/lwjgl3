@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Helper structure to represent a texel in a ARGB8888 format. Used by aiTexture.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiTexel {
- *     unsigned char {@link #b};
- *     unsigned char {@link #g};
- *     unsigned char {@link #r};
- *     unsigned char {@link #a};
- * }</code></pre>
+ *     unsigned char b;
+ *     unsigned char g;
+ *     unsigned char r;
+ *     unsigned char a;
+ * }}</pre>
  */
 @NativeType("struct aiTexel")
 public class AITexel extends Struct<AITexel> {
@@ -81,16 +77,16 @@ public class AITexel extends Struct<AITexel> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** The blue color component */
+    /** @return the value of the {@code b} field. */
     @NativeType("unsigned char")
     public byte b() { return nb(address()); }
-    /** The green color component */
+    /** @return the value of the {@code g} field. */
     @NativeType("unsigned char")
     public byte g() { return ng(address()); }
-    /** The red color component */
+    /** @return the value of the {@code r} field. */
     @NativeType("unsigned char")
     public byte r() { return nr(address()); }
-    /** The alpha color component */
+    /** @return the value of the {@code a} field. */
     @NativeType("unsigned char")
     public byte a() { return na(address()); }
 
@@ -175,16 +171,16 @@ public class AITexel extends Struct<AITexel> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AITexel#b} field. */
+        /** @return the value of the {@code b} field. */
         @NativeType("unsigned char")
         public byte b() { return AITexel.nb(address()); }
-        /** @return the value of the {@link AITexel#g} field. */
+        /** @return the value of the {@code g} field. */
         @NativeType("unsigned char")
         public byte g() { return AITexel.ng(address()); }
-        /** @return the value of the {@link AITexel#r} field. */
+        /** @return the value of the {@code r} field. */
         @NativeType("unsigned char")
         public byte r() { return AITexel.nr(address()); }
-        /** @return the value of the {@link AITexel#a} field. */
+        /** @return the value of the {@code a} field. */
         @NativeType("unsigned char")
         public byte a() { return AITexel.na(address()); }
 

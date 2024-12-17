@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * An RGBA color with normalized float components.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrColorf {
- *     float {@link #r};
- *     float {@link #g};
- *     float {@link #b};
- *     float {@link #a};
- * }</code></pre>
+ *     float r;
+ *     float g;
+ *     float b;
+ *     float a;
+ * }}</pre>
  */
 @NativeType("struct ovrColorf")
 public class OVRColorf extends Struct<OVRColorf> implements NativeResource {
@@ -83,22 +79,22 @@ public class OVRColorf extends Struct<OVRColorf> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the R component */
+    /** @return the value of the {@code r} field. */
     public float r() { return nr(address()); }
-    /** the G component */
+    /** @return the value of the {@code g} field. */
     public float g() { return ng(address()); }
-    /** the B component */
+    /** @return the value of the {@code b} field. */
     public float b() { return nb(address()); }
-    /** the A component */
+    /** @return the value of the {@code a} field. */
     public float a() { return na(address()); }
 
-    /** Sets the specified value to the {@link #r} field. */
+    /** Sets the specified value to the {@code r} field. */
     public OVRColorf r(float value) { nr(address(), value); return this; }
-    /** Sets the specified value to the {@link #g} field. */
+    /** Sets the specified value to the {@code g} field. */
     public OVRColorf g(float value) { ng(address(), value); return this; }
-    /** Sets the specified value to the {@link #b} field. */
+    /** Sets the specified value to the {@code b} field. */
     public OVRColorf b(float value) { nb(address(), value); return this; }
-    /** Sets the specified value to the {@link #a} field. */
+    /** Sets the specified value to the {@code a} field. */
     public OVRColorf a(float value) { na(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,22 +315,22 @@ public class OVRColorf extends Struct<OVRColorf> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRColorf#r} field. */
+        /** @return the value of the {@code r} field. */
         public float r() { return OVRColorf.nr(address()); }
-        /** @return the value of the {@link OVRColorf#g} field. */
+        /** @return the value of the {@code g} field. */
         public float g() { return OVRColorf.ng(address()); }
-        /** @return the value of the {@link OVRColorf#b} field. */
+        /** @return the value of the {@code b} field. */
         public float b() { return OVRColorf.nb(address()); }
-        /** @return the value of the {@link OVRColorf#a} field. */
+        /** @return the value of the {@code a} field. */
         public float a() { return OVRColorf.na(address()); }
 
-        /** Sets the specified value to the {@link OVRColorf#r} field. */
+        /** Sets the specified value to the {@code r} field. */
         public OVRColorf.Buffer r(float value) { OVRColorf.nr(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRColorf#g} field. */
+        /** Sets the specified value to the {@code g} field. */
         public OVRColorf.Buffer g(float value) { OVRColorf.ng(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRColorf#b} field. */
+        /** Sets the specified value to the {@code b} field. */
         public OVRColorf.Buffer b(float value) { OVRColorf.nb(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRColorf#a} field. */
+        /** Sets the specified value to the {@code a} field. */
         public OVRColorf.Buffer a(float value) { OVRColorf.na(address(), value); return this; }
 
     }

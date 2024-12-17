@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * size_t (*{@link #invoke}) (
- *     struct aiFile *pFile
- * )</code></pre>
- */
+/** Callback function: {@link #invoke aiFileTellProc} */
 @FunctionalInterface
 @NativeType("aiFileTellProc")
 public interface AIFileTellProcI extends CallbackI {
@@ -41,13 +34,7 @@ public interface AIFileTellProcI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /**
-     * File tell procedure.
-     *
-     * @param pFile file pointer to query
-     *
-     * @return the current file position
-     */
+    /** {@code size_t (* aiFileTellProc) (struct aiFile * pFile)} */
     @NativeType("size_t") long invoke(@NativeType("struct aiFile *") long pFile);
 
 }

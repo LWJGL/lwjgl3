@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * XrEnvironmentDepthImageViewMETA.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using {@link XrEnvironmentDepthImageViewMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEnvironmentDepthImageMETA}, {@link XrFovf}, {@link XrPosef}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEnvironmentDepthImageViewMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrFovf XrFovf} {@link #fov};
- *     {@link XrPosef XrPosef} {@link #pose};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrFovf XrFovf} fov;
+ *     {@link XrPosef XrPosef} pose;
+ * }}</pre>
  */
 public class XrEnvironmentDepthImageViewMETA extends Struct<XrEnvironmentDepthImageViewMETA> implements NativeResource {
 
@@ -94,30 +78,30 @@ public class XrEnvironmentDepthImageViewMETA extends Struct<XrEnvironmentDepthIm
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@link XrFovf} specifying the field of view used to generate this view. The view is never flipped horizontally nor vertically. */
+    /** @return a {@link XrFovf} view of the {@code fov} field. */
     public XrFovf fov() { return nfov(address()); }
-    /** an {@link XrPosef} specifying the pose from which the depth map was rendered. The reference frame is specified in {@link XrEnvironmentDepthImageAcquireInfoMETA}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEnvironmentDepthImageViewMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META} value to the {@link #type} field. */
+    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META} value to the {@code type} field. */
     public XrEnvironmentDepthImageViewMETA type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEnvironmentDepthImageViewMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrFovf} to the {@link #fov} field. */
+    /** Copies the specified {@link XrFovf} to the {@code fov} field. */
     public XrEnvironmentDepthImageViewMETA fov(XrFovf value) { nfov(address(), value); return this; }
-    /** Passes the {@link #fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrEnvironmentDepthImageViewMETA fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrEnvironmentDepthImageViewMETA pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrEnvironmentDepthImageViewMETA pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,30 +303,30 @@ public class XrEnvironmentDepthImageViewMETA extends Struct<XrEnvironmentDepthIm
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEnvironmentDepthImageViewMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEnvironmentDepthImageViewMETA.ntype(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthImageViewMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEnvironmentDepthImageViewMETA.nnext(address()); }
-        /** @return a {@link XrFovf} view of the {@link XrEnvironmentDepthImageViewMETA#fov} field. */
+        /** @return a {@link XrFovf} view of the {@code fov} field. */
         public XrFovf fov() { return XrEnvironmentDepthImageViewMETA.nfov(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrEnvironmentDepthImageViewMETA#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrEnvironmentDepthImageViewMETA.npose(address()); }
 
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageViewMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEnvironmentDepthImageViewMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEnvironmentDepthImageViewMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META} value to the {@link XrEnvironmentDepthImageViewMETA#type} field. */
+        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META} value to the {@code type} field. */
         public XrEnvironmentDepthImageViewMETA.Buffer type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META); }
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageViewMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEnvironmentDepthImageViewMETA.Buffer next(@NativeType("void const *") long value) { XrEnvironmentDepthImageViewMETA.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrFovf} to the {@link XrEnvironmentDepthImageViewMETA#fov} field. */
+        /** Copies the specified {@link XrFovf} to the {@code fov} field. */
         public XrEnvironmentDepthImageViewMETA.Buffer fov(XrFovf value) { XrEnvironmentDepthImageViewMETA.nfov(address(), value); return this; }
-        /** Passes the {@link XrEnvironmentDepthImageViewMETA#fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrEnvironmentDepthImageViewMETA.Buffer fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrEnvironmentDepthImageViewMETA#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrEnvironmentDepthImageViewMETA.Buffer pose(XrPosef value) { XrEnvironmentDepthImageViewMETA.npose(address(), value); return this; }
-        /** Passes the {@link XrEnvironmentDepthImageViewMETA#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrEnvironmentDepthImageViewMETA.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
 
     }

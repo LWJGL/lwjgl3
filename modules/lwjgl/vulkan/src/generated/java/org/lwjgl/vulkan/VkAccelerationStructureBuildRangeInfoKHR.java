@@ -16,48 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying build offsets and counts for acceleration structure builds.
- * 
- * <h5>Description</h5>
- * 
- * <p>The primitive count and primitive offset are interpreted differently depending on the {@code VkGeometryTypeKHR} used:</p>
- * 
- * <ul>
- * <li>For geometries of type {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, {@code primitiveCount} is the number of triangles to be built, where each triangle is treated as 3 vertices.
- * 
- * <ul>
- * <li>If the geometry uses indices, <code>primitiveCount × 3</code> indices are consumed from {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::indexData}, starting at an offset of {@code primitiveOffset}. The value of {@code firstVertex} is added to the index values before fetching vertices.</li>
- * <li>If the geometry does not use indices, <code>primitiveCount × 3</code> vertices are consumed from {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::vertexData}, starting at an offset of <code>primitiveOffset + {@link VkAccelerationStructureGeometryTrianglesDataKHR}::vertexStride × firstVertex</code>.</li>
- * <li>If {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::transformData} is not {@code NULL}, a single {@link VkTransformMatrixKHR} structure is consumed from {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::transformData}, at an offset of {@code transformOffset}. This matrix describes a transformation from the space in which the vertices for all triangles in this geometry are described to the space in which the acceleration structure is defined.</li>
- * </ul>
- * </li>
- * <li>For geometries of type {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_AABBS_KHR GEOMETRY_TYPE_AABBS_KHR}, {@code primitiveCount} is the number of axis-aligned bounding boxes. {@code primitiveCount} {@link VkAabbPositionsKHR} structures are consumed from {@link VkAccelerationStructureGeometryAabbsDataKHR}{@code ::data}, starting at an offset of {@code primitiveOffset}.</li>
- * <li>For geometries of type {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_INSTANCES_KHR GEOMETRY_TYPE_INSTANCES_KHR}, {@code primitiveCount} is the number of acceleration structures. {@code primitiveCount} {@link VkAccelerationStructureInstanceKHR} or {@link VkAccelerationStructureMotionInstanceNV} structures are consumed from {@link VkAccelerationStructureGeometryInstancesDataKHR}{@code ::data}, starting at an offset of {@code primitiveOffset}.</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>For geometries of type {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, if the geometry uses indices, the offset {@code primitiveOffset} from {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::indexData} <b>must</b> be a multiple of the element size of {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::indexType}</li>
- * <li>For geometries of type {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, if the geometry does not use indices, the offset {@code primitiveOffset} from {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::vertexData} <b>must</b> be a multiple of the component size of {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::vertexFormat}</li>
- * <li>For geometries of type {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_TRIANGLES_KHR GEOMETRY_TYPE_TRIANGLES_KHR}, the offset {@code transformOffset} from {@link VkAccelerationStructureGeometryTrianglesDataKHR}{@code ::transformData} <b>must</b> be a multiple of 16</li>
- * <li>For geometries of type {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_AABBS_KHR GEOMETRY_TYPE_AABBS_KHR}, the offset {@code primitiveOffset} from {@link VkAccelerationStructureGeometryAabbsDataKHR}{@code ::data} <b>must</b> be a multiple of 8</li>
- * <li>For geometries of type {@link KHRAccelerationStructure#VK_GEOMETRY_TYPE_INSTANCES_KHR GEOMETRY_TYPE_INSTANCES_KHR}, the offset {@code primitiveOffset} from {@link VkAccelerationStructureGeometryInstancesDataKHR}{@code ::data} <b>must</b> be a multiple of 16</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRAccelerationStructure#vkBuildAccelerationStructuresKHR BuildAccelerationStructuresKHR}, {@link KHRAccelerationStructure#vkCmdBuildAccelerationStructuresKHR CmdBuildAccelerationStructuresKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureBuildRangeInfoKHR {
- *     uint32_t {@link #primitiveCount};
- *     uint32_t {@link #primitiveOffset};
- *     uint32_t {@link #firstVertex};
- *     uint32_t {@link #transformOffset};
- * }</code></pre>
+ *     uint32_t primitiveCount;
+ *     uint32_t primitiveOffset;
+ *     uint32_t firstVertex;
+ *     uint32_t transformOffset;
+ * }}</pre>
  */
 public class VkAccelerationStructureBuildRangeInfoKHR extends Struct<VkAccelerationStructureBuildRangeInfoKHR> implements NativeResource {
 
@@ -113,26 +78,26 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct<VkAccelerat
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** defines the number of primitives for a corresponding acceleration structure geometry. */
+    /** @return the value of the {@code primitiveCount} field. */
     @NativeType("uint32_t")
     public int primitiveCount() { return nprimitiveCount(address()); }
-    /** defines an offset in bytes into the memory where primitive data is defined. */
+    /** @return the value of the {@code primitiveOffset} field. */
     @NativeType("uint32_t")
     public int primitiveOffset() { return nprimitiveOffset(address()); }
-    /** the index of the first vertex to build from for triangle geometry. */
+    /** @return the value of the {@code firstVertex} field. */
     @NativeType("uint32_t")
     public int firstVertex() { return nfirstVertex(address()); }
-    /** defines an offset in bytes into the memory where a transform matrix is defined. */
+    /** @return the value of the {@code transformOffset} field. */
     @NativeType("uint32_t")
     public int transformOffset() { return ntransformOffset(address()); }
 
-    /** Sets the specified value to the {@link #primitiveCount} field. */
+    /** Sets the specified value to the {@code primitiveCount} field. */
     public VkAccelerationStructureBuildRangeInfoKHR primitiveCount(@NativeType("uint32_t") int value) { nprimitiveCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #primitiveOffset} field. */
+    /** Sets the specified value to the {@code primitiveOffset} field. */
     public VkAccelerationStructureBuildRangeInfoKHR primitiveOffset(@NativeType("uint32_t") int value) { nprimitiveOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #firstVertex} field. */
+    /** Sets the specified value to the {@code firstVertex} field. */
     public VkAccelerationStructureBuildRangeInfoKHR firstVertex(@NativeType("uint32_t") int value) { nfirstVertex(address(), value); return this; }
-    /** Sets the specified value to the {@link #transformOffset} field. */
+    /** Sets the specified value to the {@code transformOffset} field. */
     public VkAccelerationStructureBuildRangeInfoKHR transformOffset(@NativeType("uint32_t") int value) { ntransformOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,26 +299,26 @@ public class VkAccelerationStructureBuildRangeInfoKHR extends Struct<VkAccelerat
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAccelerationStructureBuildRangeInfoKHR#primitiveCount} field. */
+        /** @return the value of the {@code primitiveCount} field. */
         @NativeType("uint32_t")
         public int primitiveCount() { return VkAccelerationStructureBuildRangeInfoKHR.nprimitiveCount(address()); }
-        /** @return the value of the {@link VkAccelerationStructureBuildRangeInfoKHR#primitiveOffset} field. */
+        /** @return the value of the {@code primitiveOffset} field. */
         @NativeType("uint32_t")
         public int primitiveOffset() { return VkAccelerationStructureBuildRangeInfoKHR.nprimitiveOffset(address()); }
-        /** @return the value of the {@link VkAccelerationStructureBuildRangeInfoKHR#firstVertex} field. */
+        /** @return the value of the {@code firstVertex} field. */
         @NativeType("uint32_t")
         public int firstVertex() { return VkAccelerationStructureBuildRangeInfoKHR.nfirstVertex(address()); }
-        /** @return the value of the {@link VkAccelerationStructureBuildRangeInfoKHR#transformOffset} field. */
+        /** @return the value of the {@code transformOffset} field. */
         @NativeType("uint32_t")
         public int transformOffset() { return VkAccelerationStructureBuildRangeInfoKHR.ntransformOffset(address()); }
 
-        /** Sets the specified value to the {@link VkAccelerationStructureBuildRangeInfoKHR#primitiveCount} field. */
+        /** Sets the specified value to the {@code primitiveCount} field. */
         public VkAccelerationStructureBuildRangeInfoKHR.Buffer primitiveCount(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildRangeInfoKHR.nprimitiveCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureBuildRangeInfoKHR#primitiveOffset} field. */
+        /** Sets the specified value to the {@code primitiveOffset} field. */
         public VkAccelerationStructureBuildRangeInfoKHR.Buffer primitiveOffset(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildRangeInfoKHR.nprimitiveOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureBuildRangeInfoKHR#firstVertex} field. */
+        /** Sets the specified value to the {@code firstVertex} field. */
         public VkAccelerationStructureBuildRangeInfoKHR.Buffer firstVertex(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildRangeInfoKHR.nfirstVertex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureBuildRangeInfoKHR#transformOffset} field. */
+        /** Sets the specified value to the {@code transformOffset} field. */
         public VkAccelerationStructureBuildRangeInfoKHR.Buffer transformOffset(@NativeType("uint32_t") int value) { VkAccelerationStructureBuildRangeInfoKHR.ntransformOffset(address(), value); return this; }
 
     }

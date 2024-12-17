@@ -16,27 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Extent in two dimensions.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is used for component values that may be real numbers, represented with single-precision floating point. For representing extents in discrete values, such as texels, the integer variant {@link XrExtent2Di} is used instead.</p>
- * 
- * <p>If used to represent physical distances, values <b>must</b> be in meters.</p>
- * 
- * <p>The {@code width} and {@code height} value <b>must</b> be non-negative.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerQuad}, {@link XrOffset2Df}, {@link XrPlaneDetectorLocationEXT}, {@link XrRect2Df}, {@link XrSceneMarkerMSFT}, {@link XrScenePlaneMSFT}, {@link VARJOMarkerTracking#xrGetMarkerSizeVARJO GetMarkerSizeVARJO}, {@link XR10#xrGetReferenceSpaceBoundsRect GetReferenceSpaceBoundsRect}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrExtent2Df {
- *     float {@link #width};
- *     float {@link #height};
- * }</code></pre>
+ *     float width;
+ *     float height;
+ * }}</pre>
  */
 public class XrExtent2Df extends Struct<XrExtent2Df> implements NativeResource {
 
@@ -86,14 +70,14 @@ public class XrExtent2Df extends Struct<XrExtent2Df> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the floating-point width of the extent. */
+    /** @return the value of the {@code width} field. */
     public float width() { return nwidth(address()); }
-    /** the floating-point height of the extent. */
+    /** @return the value of the {@code height} field. */
     public float height() { return nheight(address()); }
 
-    /** Sets the specified value to the {@link #width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public XrExtent2Df width(float value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public XrExtent2Df height(float value) { nheight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -283,14 +267,14 @@ public class XrExtent2Df extends Struct<XrExtent2Df> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrExtent2Df#width} field. */
+        /** @return the value of the {@code width} field. */
         public float width() { return XrExtent2Df.nwidth(address()); }
-        /** @return the value of the {@link XrExtent2Df#height} field. */
+        /** @return the value of the {@code height} field. */
         public float height() { return XrExtent2Df.nheight(address()); }
 
-        /** Sets the specified value to the {@link XrExtent2Df#width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public XrExtent2Df.Buffer width(float value) { XrExtent2Df.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrExtent2Df#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public XrExtent2Df.Buffer height(float value) { XrExtent2Df.nheight(address(), value); return this; }
 
     }

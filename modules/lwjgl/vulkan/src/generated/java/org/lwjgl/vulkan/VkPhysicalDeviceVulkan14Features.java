@@ -16,46 +16,32 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the Vulkan 1.4 features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceVulkan14Features} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceVulkan14Features} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceVulkan14Features {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #globalPriorityQuery};
- *     VkBool32 {@link #shaderSubgroupRotate};
- *     VkBool32 {@link #shaderSubgroupRotateClustered};
- *     VkBool32 {@link #shaderFloatControls2};
- *     VkBool32 {@link #shaderExpectAssume};
- *     VkBool32 {@link #rectangularLines};
- *     VkBool32 {@link #bresenhamLines};
- *     VkBool32 {@link #smoothLines};
- *     VkBool32 {@link #stippledRectangularLines};
- *     VkBool32 {@link #stippledBresenhamLines};
- *     VkBool32 {@link #stippledSmoothLines};
- *     VkBool32 {@link #vertexAttributeInstanceRateDivisor};
- *     VkBool32 {@link #vertexAttributeInstanceRateZeroDivisor};
- *     VkBool32 {@link #indexTypeUint8};
- *     VkBool32 {@link #dynamicRenderingLocalRead};
- *     VkBool32 {@link #maintenance5};
- *     VkBool32 {@link #maintenance6};
- *     VkBool32 {@link #pipelineProtectedAccess};
- *     VkBool32 {@link #pipelineRobustness};
- *     VkBool32 {@link #hostImageCopy};
- *     VkBool32 {@link #pushDescriptor};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 globalPriorityQuery;
+ *     VkBool32 shaderSubgroupRotate;
+ *     VkBool32 shaderSubgroupRotateClustered;
+ *     VkBool32 shaderFloatControls2;
+ *     VkBool32 shaderExpectAssume;
+ *     VkBool32 rectangularLines;
+ *     VkBool32 bresenhamLines;
+ *     VkBool32 smoothLines;
+ *     VkBool32 stippledRectangularLines;
+ *     VkBool32 stippledBresenhamLines;
+ *     VkBool32 stippledSmoothLines;
+ *     VkBool32 vertexAttributeInstanceRateDivisor;
+ *     VkBool32 vertexAttributeInstanceRateZeroDivisor;
+ *     VkBool32 indexTypeUint8;
+ *     VkBool32 dynamicRenderingLocalRead;
+ *     VkBool32 maintenance5;
+ *     VkBool32 maintenance6;
+ *     VkBool32 pipelineProtectedAccess;
+ *     VkBool32 pipelineRobustness;
+ *     VkBool32 hostImageCopy;
+ *     VkBool32 pushDescriptor;
+ * }}</pre>
  */
 public class VkPhysicalDeviceVulkan14Features extends Struct<VkPhysicalDeviceVulkan14Features> implements NativeResource {
 
@@ -168,156 +154,123 @@ public class VkPhysicalDeviceVulkan14Features extends Struct<VkPhysicalDeviceVul
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the ability to query global queue priorities. */
+    /** @return the value of the {@code globalPriorityQuery} field. */
     @NativeType("VkBool32")
     public boolean globalPriorityQuery() { return nglobalPriorityQuery(address()) != 0; }
-    /** specifies whether shader modules <b>can</b> declare the {@code GroupNonUniformRotateKHR} capability. */
+    /** @return the value of the {@code shaderSubgroupRotate} field. */
     @NativeType("VkBool32")
     public boolean shaderSubgroupRotate() { return nshaderSubgroupRotate(address()) != 0; }
-    /** specifies whether shader modules <b>can</b> use the {@code ClusterSize} operand to {@code OpGroupNonUniformRotateKHR}. */
+    /** @return the value of the {@code shaderSubgroupRotateClustered} field. */
     @NativeType("VkBool32")
     public boolean shaderSubgroupRotateClustered() { return nshaderSubgroupRotateClustered(address()) != 0; }
-    /** specifies whether shader modules <b>can</b> declare the {@code FloatControls2} capability. */
+    /** @return the value of the {@code shaderFloatControls2} field. */
     @NativeType("VkBool32")
     public boolean shaderFloatControls2() { return nshaderFloatControls2(address()) != 0; }
-    /** specifies whether shader modules <b>can</b> declare the {@code ExpectAssumeKHR} capability. */
+    /** @return the value of the {@code shaderExpectAssume} field. */
     @NativeType("VkBool32")
     public boolean shaderExpectAssume() { return nshaderExpectAssume(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines">rectangular line rasterization</a>. */
+    /** @return the value of the {@code rectangularLines} field. */
     @NativeType("VkBool32")
     public boolean rectangularLines() { return nrectangularLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-bresenham">Bresenham-style line rasterization</a>. */
+    /** @return the value of the {@code bresenhamLines} field. */
     @NativeType("VkBool32")
     public boolean bresenhamLines() { return nbresenhamLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-smooth">smooth line rasterization</a>. */
+    /** @return the value of the {@code smoothLines} field. */
     @NativeType("VkBool32")
     public boolean smoothLines() { return nsmoothLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link VK14#VK_LINE_RASTERIZATION_MODE_RECTANGULAR LINE_RASTERIZATION_MODE_RECTANGULAR} lines. */
+    /** @return the value of the {@code stippledRectangularLines} field. */
     @NativeType("VkBool32")
     public boolean stippledRectangularLines() { return nstippledRectangularLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link VK14#VK_LINE_RASTERIZATION_MODE_BRESENHAM LINE_RASTERIZATION_MODE_BRESENHAM} lines. */
+    /** @return the value of the {@code stippledBresenhamLines} field. */
     @NativeType("VkBool32")
     public boolean stippledBresenhamLines() { return nstippledBresenhamLines(address()) != 0; }
-    /** indicates whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines-stipple">stippled line rasterization</a> with {@link VK14#VK_LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH LINE_RASTERIZATION_MODE_RECTANGULAR_SMOOTH} lines. */
+    /** @return the value of the {@code stippledSmoothLines} field. */
     @NativeType("VkBool32")
     public boolean stippledSmoothLines() { return nstippledSmoothLines(address()) != 0; }
-    /** specifies whether vertex attribute fetching may be repeated in the case of instanced rendering. */
+    /** @return the value of the {@code vertexAttributeInstanceRateDivisor} field. */
     @NativeType("VkBool32")
     public boolean vertexAttributeInstanceRateDivisor() { return nvertexAttributeInstanceRateDivisor(address()) != 0; }
-    /** specifies whether a zero value for {@link VkVertexInputBindingDivisorDescriptionEXT}{@code ::divisor} is supported. */
+    /** @return the value of the {@code vertexAttributeInstanceRateZeroDivisor} field. */
     @NativeType("VkBool32")
     public boolean vertexAttributeInstanceRateZeroDivisor() { return nvertexAttributeInstanceRateZeroDivisor(address()) != 0; }
-    /** indicates that {@link VK14#VK_INDEX_TYPE_UINT8 INDEX_TYPE_UINT8} can be used with {@link VK14#vkCmdBindIndexBuffer2 CmdBindIndexBuffer2} and {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}. */
+    /** @return the value of the {@code indexTypeUint8} field. */
     @NativeType("VkBool32")
     public boolean indexTypeUint8() { return nindexTypeUint8(address()) != 0; }
-    /** specifies that the implementation supports local reads inside dynamic render pass instances using the {@link VK13#vkCmdBeginRendering CmdBeginRendering} command. */
+    /** @return the value of the {@code dynamicRenderingLocalRead} field. */
     @NativeType("VkBool32")
     public boolean dynamicRenderingLocalRead() { return ndynamicRenderingLocalRead(address()) != 0; }
-    /**
-     * indicates that the implementation supports the following:
-     * 
-     * <ul>
-     * <li>The ability to expose support for the optional format {@link VK14#VK_FORMAT_A1B5G5R5_UNORM_PACK16 FORMAT_A1B5G5R5_UNORM_PACK16}.</li>
-     * <li>The ability to expose support for the optional format {@link VK14#VK_FORMAT_A8_UNORM FORMAT_A8_UNORM}.</li>
-     * <li>A property to indicate that multisample coverage operations are performed after sample counting in EarlyFragmentTests mode.</li>
-     * <li>Creating a {@code VkBufferView} with a subset of the associated {@code VkBuffer} usage using {@link VkBufferUsageFlags2CreateInfo}.</li>
-     * <li>A new function {@link VK14#vkCmdBindIndexBuffer2 CmdBindIndexBuffer2}, allowing a range of memory to be bound as an index buffer.</li>
-     * <li>{@link VK10#vkGetDeviceProcAddr GetDeviceProcAddr} will return {@code NULL} for function pointers of core functions for versions higher than the version requested by the application.</li>
-     * <li>{@link VK13#vkCmdBindVertexBuffers2 CmdBindVertexBuffers2} supports using {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} in the {@code pSizes} parameter.</li>
-     * <li>If {@code PointSize} is not written, a default value of {@code 1.0} is used for the size of points.</li>
-     * <li>{@link VkShaderModuleCreateInfo} <b>can</b> be added as a chained structure to pipeline creation via {@link VkPipelineShaderStageCreateInfo}, rather than having to create a shader module.</li>
-     * <li>A function {@link VK14#vkGetRenderingAreaGranularity GetRenderingAreaGranularity} to query the optimal render area for a dynamic rendering instance.</li>
-     * <li>A property to indicate that depth/stencil texturing operations with {@link VK10#VK_COMPONENT_SWIZZLE_ONE COMPONENT_SWIZZLE_ONE} have defined behavior.</li>
-     * <li>{@link VK14#vkGetDeviceImageSubresourceLayout GetDeviceImageSubresourceLayout} allows an application to perform a {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout} query without having to create an image.</li>
-     * <li>{@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS} as the {@code layerCount} member of {@link VkImageSubresourceLayers}.</li>
-     * <li>A property to indicate whether {@code PointSize} controls the final rasterization of polygons if <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-polygonmode">polygon mode</a> is {@link VK10#VK_POLYGON_MODE_POINT POLYGON_MODE_POINT}.</li>
-     * <li>Two properties to indicate the non-strict line rasterization algorithm used.</li>
-     * <li>Two new flags words {@code VkPipelineCreateFlagBits2} and {@code VkBufferUsageFlagBits2}.</li>
-     * <li>Physical-device-level functions <b>can</b> now be called with any value in the valid range for a type beyond the defined enumerants, such that applications can avoid checking individual features, extensions, or versions before querying supported properties of a particular enumerant.</li>
-     * <li>Copies between images of any type are allowed, with 1D images treated as 2D images with a height of 1.</li>
-     * </ul>
-     */
+    /** @return the value of the {@code maintenance5} field. */
     @NativeType("VkBool32")
     public boolean maintenance5() { return nmaintenance5(address()) != 0; }
-    /**
-     * indicates that the implementation supports the following:
-     * 
-     * <ul>
-     * <li>{@link VK10#VK_NULL_HANDLE NULL_HANDLE} <b>can</b> be used when binding an index buffer</li>
-     * <li>{@link VkBindMemoryStatus} <b>can</b> be included in the {@code pNext} chain of the {@link VkBindBufferMemoryInfo} and {@link VkBindImageMemoryInfo} structures, enabling applications to retrieve {@code VkResult} values for individual memory binding operations.</li>
-     * <li>{@link VkPhysicalDeviceMaintenance6Properties}{@code ::blockTexelViewCompatibleMultipleLayers} property to indicate that the implementation supports creating image views with {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} where the {@code layerCount} member of {@code subresourceRange} is greater than 1.</li>
-     * <li>{@link VkPhysicalDeviceMaintenance6Properties}{@code ::maxCombinedImageSamplerDescriptorCount} property which indicates the maximum descriptor size required for any <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">format that requires a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> supported by the implementation.</li>
-     * <li>A {@link VkPhysicalDeviceMaintenance6Properties}{@code ::fragmentShadingRateClampCombinerInputs} property which indicates whether the implementation clamps the inputs to fragment shading rate combiner operations.</li>
-     * </ul>
-     */
+    /** @return the value of the {@code maintenance6} field. */
     @NativeType("VkBool32")
     public boolean maintenance6() { return nmaintenance6(address()) != 0; }
-    /** indicates whether the implementation supports specifying protected access on individual pipelines. */
+    /** @return the value of the {@code pipelineProtectedAccess} field. */
     @NativeType("VkBool32")
     public boolean pipelineProtectedAccess() { return npipelineProtectedAccess(address()) != 0; }
-    /** indicates that robustness <b>can</b> be requested on a per-pipeline-stage granularity. */
+    /** @return the value of the {@code pipelineRobustness} field. */
     @NativeType("VkBool32")
     public boolean pipelineRobustness() { return npipelineRobustness(address()) != 0; }
-    /** indicates that the implementation supports copying from host memory to images using the {@link VK14#vkCopyMemoryToImage CopyMemoryToImage} command, copying from images to host memory using the {@link VK14#vkCopyImageToMemory CopyImageToMemory} command, and copying between images using the {@link VK14#vkCopyImageToImage CopyImageToImage} command. */
+    /** @return the value of the {@code hostImageCopy} field. */
     @NativeType("VkBool32")
     public boolean hostImageCopy() { return nhostImageCopy(address()) != 0; }
-    /** indicates that the implementation supports push descriptors. */
+    /** @return the value of the {@code pushDescriptor} field. */
     @NativeType("VkBool32")
     public boolean pushDescriptor() { return npushDescriptor(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceVulkan14Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceVulkan14Features sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceVulkan14Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #globalPriorityQuery} field. */
+    /** Sets the specified value to the {@code globalPriorityQuery} field. */
     public VkPhysicalDeviceVulkan14Features globalPriorityQuery(@NativeType("VkBool32") boolean value) { nglobalPriorityQuery(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #shaderSubgroupRotate} field. */
+    /** Sets the specified value to the {@code shaderSubgroupRotate} field. */
     public VkPhysicalDeviceVulkan14Features shaderSubgroupRotate(@NativeType("VkBool32") boolean value) { nshaderSubgroupRotate(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #shaderSubgroupRotateClustered} field. */
+    /** Sets the specified value to the {@code shaderSubgroupRotateClustered} field. */
     public VkPhysicalDeviceVulkan14Features shaderSubgroupRotateClustered(@NativeType("VkBool32") boolean value) { nshaderSubgroupRotateClustered(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #shaderFloatControls2} field. */
+    /** Sets the specified value to the {@code shaderFloatControls2} field. */
     public VkPhysicalDeviceVulkan14Features shaderFloatControls2(@NativeType("VkBool32") boolean value) { nshaderFloatControls2(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #shaderExpectAssume} field. */
+    /** Sets the specified value to the {@code shaderExpectAssume} field. */
     public VkPhysicalDeviceVulkan14Features shaderExpectAssume(@NativeType("VkBool32") boolean value) { nshaderExpectAssume(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #rectangularLines} field. */
+    /** Sets the specified value to the {@code rectangularLines} field. */
     public VkPhysicalDeviceVulkan14Features rectangularLines(@NativeType("VkBool32") boolean value) { nrectangularLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #bresenhamLines} field. */
+    /** Sets the specified value to the {@code bresenhamLines} field. */
     public VkPhysicalDeviceVulkan14Features bresenhamLines(@NativeType("VkBool32") boolean value) { nbresenhamLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #smoothLines} field. */
+    /** Sets the specified value to the {@code smoothLines} field. */
     public VkPhysicalDeviceVulkan14Features smoothLines(@NativeType("VkBool32") boolean value) { nsmoothLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #stippledRectangularLines} field. */
+    /** Sets the specified value to the {@code stippledRectangularLines} field. */
     public VkPhysicalDeviceVulkan14Features stippledRectangularLines(@NativeType("VkBool32") boolean value) { nstippledRectangularLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #stippledBresenhamLines} field. */
+    /** Sets the specified value to the {@code stippledBresenhamLines} field. */
     public VkPhysicalDeviceVulkan14Features stippledBresenhamLines(@NativeType("VkBool32") boolean value) { nstippledBresenhamLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #stippledSmoothLines} field. */
+    /** Sets the specified value to the {@code stippledSmoothLines} field. */
     public VkPhysicalDeviceVulkan14Features stippledSmoothLines(@NativeType("VkBool32") boolean value) { nstippledSmoothLines(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #vertexAttributeInstanceRateDivisor} field. */
+    /** Sets the specified value to the {@code vertexAttributeInstanceRateDivisor} field. */
     public VkPhysicalDeviceVulkan14Features vertexAttributeInstanceRateDivisor(@NativeType("VkBool32") boolean value) { nvertexAttributeInstanceRateDivisor(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #vertexAttributeInstanceRateZeroDivisor} field. */
+    /** Sets the specified value to the {@code vertexAttributeInstanceRateZeroDivisor} field. */
     public VkPhysicalDeviceVulkan14Features vertexAttributeInstanceRateZeroDivisor(@NativeType("VkBool32") boolean value) { nvertexAttributeInstanceRateZeroDivisor(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #indexTypeUint8} field. */
+    /** Sets the specified value to the {@code indexTypeUint8} field. */
     public VkPhysicalDeviceVulkan14Features indexTypeUint8(@NativeType("VkBool32") boolean value) { nindexTypeUint8(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #dynamicRenderingLocalRead} field. */
+    /** Sets the specified value to the {@code dynamicRenderingLocalRead} field. */
     public VkPhysicalDeviceVulkan14Features dynamicRenderingLocalRead(@NativeType("VkBool32") boolean value) { ndynamicRenderingLocalRead(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #maintenance5} field. */
+    /** Sets the specified value to the {@code maintenance5} field. */
     public VkPhysicalDeviceVulkan14Features maintenance5(@NativeType("VkBool32") boolean value) { nmaintenance5(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #maintenance6} field. */
+    /** Sets the specified value to the {@code maintenance6} field. */
     public VkPhysicalDeviceVulkan14Features maintenance6(@NativeType("VkBool32") boolean value) { nmaintenance6(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #pipelineProtectedAccess} field. */
+    /** Sets the specified value to the {@code pipelineProtectedAccess} field. */
     public VkPhysicalDeviceVulkan14Features pipelineProtectedAccess(@NativeType("VkBool32") boolean value) { npipelineProtectedAccess(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #pipelineRobustness} field. */
+    /** Sets the specified value to the {@code pipelineRobustness} field. */
     public VkPhysicalDeviceVulkan14Features pipelineRobustness(@NativeType("VkBool32") boolean value) { npipelineRobustness(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #hostImageCopy} field. */
+    /** Sets the specified value to the {@code hostImageCopy} field. */
     public VkPhysicalDeviceVulkan14Features hostImageCopy(@NativeType("VkBool32") boolean value) { nhostImageCopy(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #pushDescriptor} field. */
+    /** Sets the specified value to the {@code pushDescriptor} field. */
     public VkPhysicalDeviceVulkan14Features pushDescriptor(@NativeType("VkBool32") boolean value) { npushDescriptor(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -633,123 +586,123 @@ public class VkPhysicalDeviceVulkan14Features extends Struct<VkPhysicalDeviceVul
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVulkan14Features.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVulkan14Features.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#globalPriorityQuery} field. */
+        /** @return the value of the {@code globalPriorityQuery} field. */
         @NativeType("VkBool32")
         public boolean globalPriorityQuery() { return VkPhysicalDeviceVulkan14Features.nglobalPriorityQuery(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#shaderSubgroupRotate} field. */
+        /** @return the value of the {@code shaderSubgroupRotate} field. */
         @NativeType("VkBool32")
         public boolean shaderSubgroupRotate() { return VkPhysicalDeviceVulkan14Features.nshaderSubgroupRotate(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#shaderSubgroupRotateClustered} field. */
+        /** @return the value of the {@code shaderSubgroupRotateClustered} field. */
         @NativeType("VkBool32")
         public boolean shaderSubgroupRotateClustered() { return VkPhysicalDeviceVulkan14Features.nshaderSubgroupRotateClustered(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#shaderFloatControls2} field. */
+        /** @return the value of the {@code shaderFloatControls2} field. */
         @NativeType("VkBool32")
         public boolean shaderFloatControls2() { return VkPhysicalDeviceVulkan14Features.nshaderFloatControls2(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#shaderExpectAssume} field. */
+        /** @return the value of the {@code shaderExpectAssume} field. */
         @NativeType("VkBool32")
         public boolean shaderExpectAssume() { return VkPhysicalDeviceVulkan14Features.nshaderExpectAssume(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#rectangularLines} field. */
+        /** @return the value of the {@code rectangularLines} field. */
         @NativeType("VkBool32")
         public boolean rectangularLines() { return VkPhysicalDeviceVulkan14Features.nrectangularLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#bresenhamLines} field. */
+        /** @return the value of the {@code bresenhamLines} field. */
         @NativeType("VkBool32")
         public boolean bresenhamLines() { return VkPhysicalDeviceVulkan14Features.nbresenhamLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#smoothLines} field. */
+        /** @return the value of the {@code smoothLines} field. */
         @NativeType("VkBool32")
         public boolean smoothLines() { return VkPhysicalDeviceVulkan14Features.nsmoothLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#stippledRectangularLines} field. */
+        /** @return the value of the {@code stippledRectangularLines} field. */
         @NativeType("VkBool32")
         public boolean stippledRectangularLines() { return VkPhysicalDeviceVulkan14Features.nstippledRectangularLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#stippledBresenhamLines} field. */
+        /** @return the value of the {@code stippledBresenhamLines} field. */
         @NativeType("VkBool32")
         public boolean stippledBresenhamLines() { return VkPhysicalDeviceVulkan14Features.nstippledBresenhamLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#stippledSmoothLines} field. */
+        /** @return the value of the {@code stippledSmoothLines} field. */
         @NativeType("VkBool32")
         public boolean stippledSmoothLines() { return VkPhysicalDeviceVulkan14Features.nstippledSmoothLines(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#vertexAttributeInstanceRateDivisor} field. */
+        /** @return the value of the {@code vertexAttributeInstanceRateDivisor} field. */
         @NativeType("VkBool32")
         public boolean vertexAttributeInstanceRateDivisor() { return VkPhysicalDeviceVulkan14Features.nvertexAttributeInstanceRateDivisor(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#vertexAttributeInstanceRateZeroDivisor} field. */
+        /** @return the value of the {@code vertexAttributeInstanceRateZeroDivisor} field. */
         @NativeType("VkBool32")
         public boolean vertexAttributeInstanceRateZeroDivisor() { return VkPhysicalDeviceVulkan14Features.nvertexAttributeInstanceRateZeroDivisor(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#indexTypeUint8} field. */
+        /** @return the value of the {@code indexTypeUint8} field. */
         @NativeType("VkBool32")
         public boolean indexTypeUint8() { return VkPhysicalDeviceVulkan14Features.nindexTypeUint8(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#dynamicRenderingLocalRead} field. */
+        /** @return the value of the {@code dynamicRenderingLocalRead} field. */
         @NativeType("VkBool32")
         public boolean dynamicRenderingLocalRead() { return VkPhysicalDeviceVulkan14Features.ndynamicRenderingLocalRead(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#maintenance5} field. */
+        /** @return the value of the {@code maintenance5} field. */
         @NativeType("VkBool32")
         public boolean maintenance5() { return VkPhysicalDeviceVulkan14Features.nmaintenance5(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#maintenance6} field. */
+        /** @return the value of the {@code maintenance6} field. */
         @NativeType("VkBool32")
         public boolean maintenance6() { return VkPhysicalDeviceVulkan14Features.nmaintenance6(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#pipelineProtectedAccess} field. */
+        /** @return the value of the {@code pipelineProtectedAccess} field. */
         @NativeType("VkBool32")
         public boolean pipelineProtectedAccess() { return VkPhysicalDeviceVulkan14Features.npipelineProtectedAccess(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#pipelineRobustness} field. */
+        /** @return the value of the {@code pipelineRobustness} field. */
         @NativeType("VkBool32")
         public boolean pipelineRobustness() { return VkPhysicalDeviceVulkan14Features.npipelineRobustness(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#hostImageCopy} field. */
+        /** @return the value of the {@code hostImageCopy} field. */
         @NativeType("VkBool32")
         public boolean hostImageCopy() { return VkPhysicalDeviceVulkan14Features.nhostImageCopy(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Features#pushDescriptor} field. */
+        /** @return the value of the {@code pushDescriptor} field. */
         @NativeType("VkBool32")
         public boolean pushDescriptor() { return VkPhysicalDeviceVulkan14Features.npushDescriptor(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan14Features.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES} value to the {@link VkPhysicalDeviceVulkan14Features#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan14Features.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#globalPriorityQuery} field. */
+        /** Sets the specified value to the {@code globalPriorityQuery} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer globalPriorityQuery(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nglobalPriorityQuery(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#shaderSubgroupRotate} field. */
+        /** Sets the specified value to the {@code shaderSubgroupRotate} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer shaderSubgroupRotate(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nshaderSubgroupRotate(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#shaderSubgroupRotateClustered} field. */
+        /** Sets the specified value to the {@code shaderSubgroupRotateClustered} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer shaderSubgroupRotateClustered(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nshaderSubgroupRotateClustered(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#shaderFloatControls2} field. */
+        /** Sets the specified value to the {@code shaderFloatControls2} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer shaderFloatControls2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nshaderFloatControls2(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#shaderExpectAssume} field. */
+        /** Sets the specified value to the {@code shaderExpectAssume} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer shaderExpectAssume(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nshaderExpectAssume(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#rectangularLines} field. */
+        /** Sets the specified value to the {@code rectangularLines} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer rectangularLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nrectangularLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#bresenhamLines} field. */
+        /** Sets the specified value to the {@code bresenhamLines} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer bresenhamLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nbresenhamLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#smoothLines} field. */
+        /** Sets the specified value to the {@code smoothLines} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer smoothLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nsmoothLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#stippledRectangularLines} field. */
+        /** Sets the specified value to the {@code stippledRectangularLines} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer stippledRectangularLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nstippledRectangularLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#stippledBresenhamLines} field. */
+        /** Sets the specified value to the {@code stippledBresenhamLines} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer stippledBresenhamLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nstippledBresenhamLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#stippledSmoothLines} field. */
+        /** Sets the specified value to the {@code stippledSmoothLines} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer stippledSmoothLines(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nstippledSmoothLines(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#vertexAttributeInstanceRateDivisor} field. */
+        /** Sets the specified value to the {@code vertexAttributeInstanceRateDivisor} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer vertexAttributeInstanceRateDivisor(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nvertexAttributeInstanceRateDivisor(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#vertexAttributeInstanceRateZeroDivisor} field. */
+        /** Sets the specified value to the {@code vertexAttributeInstanceRateZeroDivisor} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer vertexAttributeInstanceRateZeroDivisor(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nvertexAttributeInstanceRateZeroDivisor(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#indexTypeUint8} field. */
+        /** Sets the specified value to the {@code indexTypeUint8} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer indexTypeUint8(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nindexTypeUint8(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#dynamicRenderingLocalRead} field. */
+        /** Sets the specified value to the {@code dynamicRenderingLocalRead} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer dynamicRenderingLocalRead(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.ndynamicRenderingLocalRead(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#maintenance5} field. */
+        /** Sets the specified value to the {@code maintenance5} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer maintenance5(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nmaintenance5(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#maintenance6} field. */
+        /** Sets the specified value to the {@code maintenance6} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer maintenance6(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nmaintenance6(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#pipelineProtectedAccess} field. */
+        /** Sets the specified value to the {@code pipelineProtectedAccess} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer pipelineProtectedAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.npipelineProtectedAccess(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#pipelineRobustness} field. */
+        /** Sets the specified value to the {@code pipelineRobustness} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer pipelineRobustness(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.npipelineRobustness(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#hostImageCopy} field. */
+        /** Sets the specified value to the {@code hostImageCopy} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer hostImageCopy(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.nhostImageCopy(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Features#pushDescriptor} field. */
+        /** Sets the specified value to the {@code pushDescriptor} field. */
         public VkPhysicalDeviceVulkan14Features.Buffer pushDescriptor(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVulkan14Features.npushDescriptor(address(), value ? 1 : 0); return this; }
 
     }

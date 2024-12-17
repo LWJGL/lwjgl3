@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *cbk_context,
- *     rmtSampleTree *sample_tree
- * )</code></pre>
- */
+/** Callback function: {@link #invoke rmtSampleTreeHandlerPtr} */
 @FunctionalInterface
 @NativeType("rmtSampleTreeHandlerPtr")
 public interface RMTSampleTreeHandlerI extends CallbackI {
@@ -42,6 +34,7 @@ public interface RMTSampleTreeHandlerI extends CallbackI {
         );
     }
 
+    /** {@code void (* rmtSampleTreeHandlerPtr) (void * cbk_context, rmtSampleTree * sample_tree)} */
     void invoke(@NativeType("void *") long cbk_context, @NativeType("rmtSampleTree *") long sample_tree);
 
 }

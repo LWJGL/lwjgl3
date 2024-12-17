@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link ClangIndex#clang_Type_visitFields Type_visitFields} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * enum CXVisitorResult (*{@link #invoke}) (
- *     CXCursor C,
- *     CXClientData client_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class CXFieldVisitor extends Callback implements CXFieldVisitorI {
 
     /**

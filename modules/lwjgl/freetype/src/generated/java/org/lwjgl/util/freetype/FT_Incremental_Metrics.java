@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A small structure used to contain the basic glyph metrics returned by the {@link FT_Incremental_GetGlyphMetricsFunc} method.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Incremental_MetricsRec {
  *     FT_Long bearing_x;
  *     FT_Long bearing_y;
  *     FT_Long advance;
  *     FT_Long advance_v;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_Incremental_MetricsRec")
 public class FT_Incremental_Metrics extends Struct<FT_Incremental_Metrics> {

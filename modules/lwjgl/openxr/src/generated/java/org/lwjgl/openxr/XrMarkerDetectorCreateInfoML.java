@@ -16,31 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a marker detection handle.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using {@link XrMarkerDetectorCreateInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML TYPE_MARKER_DETECTOR_CREATE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrMarkerDetectorAprilTagInfoML}, {@link XrMarkerDetectorArucoInfoML}, {@link XrMarkerDetectorCustomProfileInfoML}, {@link XrMarkerDetectorSizeInfoML}</li>
- * <li>{@code profile} <b>must</b> be a valid {@code XrMarkerDetectorProfileML} value</li>
- * <li>{@code markerType} <b>must</b> be a valid {@code XrMarkerTypeML} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLMarkerUnderstanding#xrCreateMarkerDetectorML CreateMarkerDetectorML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMarkerDetectorCreateInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrMarkerDetectorProfileML {@link #profile};
- *     XrMarkerTypeML {@link #markerType};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrMarkerDetectorProfileML profile;
+ *     XrMarkerTypeML markerType;
+ * }}</pre>
  */
 public class XrMarkerDetectorCreateInfoML extends Struct<XrMarkerDetectorCreateInfoML> implements NativeResource {
 
@@ -96,24 +78,24 @@ public class XrMarkerDetectorCreateInfoML extends Struct<XrMarkerDetectorCreateI
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the marker tracker profile to be used. */
+    /** @return the value of the {@code profile} field. */
     @NativeType("XrMarkerDetectorProfileML")
     public int profile() { return nprofile(address()); }
-    /** the detector type that this tracker enables. */
+    /** @return the value of the {@code markerType} field. */
     @NativeType("XrMarkerTypeML")
     public int markerType() { return nmarkerType(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMarkerDetectorCreateInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML TYPE_MARKER_DETECTOR_CREATE_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML TYPE_MARKER_DETECTOR_CREATE_INFO_ML} value to the {@code type} field. */
     public XrMarkerDetectorCreateInfoML type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMarkerDetectorCreateInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrMarkerDetectorAprilTagInfoML} value to the {@code next} chain. */
     public XrMarkerDetectorCreateInfoML next(XrMarkerDetectorAprilTagInfoML value) { return this.next(value.next(this.next()).address()); }
@@ -123,9 +105,9 @@ public class XrMarkerDetectorCreateInfoML extends Struct<XrMarkerDetectorCreateI
     public XrMarkerDetectorCreateInfoML next(XrMarkerDetectorCustomProfileInfoML value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrMarkerDetectorSizeInfoML} value to the {@code next} chain. */
     public XrMarkerDetectorCreateInfoML next(XrMarkerDetectorSizeInfoML value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #profile} field. */
+    /** Sets the specified value to the {@code profile} field. */
     public XrMarkerDetectorCreateInfoML profile(@NativeType("XrMarkerDetectorProfileML") int value) { nprofile(address(), value); return this; }
-    /** Sets the specified value to the {@link #markerType} field. */
+    /** Sets the specified value to the {@code markerType} field. */
     public XrMarkerDetectorCreateInfoML markerType(@NativeType("XrMarkerTypeML") int value) { nmarkerType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,24 +309,24 @@ public class XrMarkerDetectorCreateInfoML extends Struct<XrMarkerDetectorCreateI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMarkerDetectorCreateInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMarkerDetectorCreateInfoML.ntype(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCreateInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrMarkerDetectorCreateInfoML.nnext(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCreateInfoML#profile} field. */
+        /** @return the value of the {@code profile} field. */
         @NativeType("XrMarkerDetectorProfileML")
         public int profile() { return XrMarkerDetectorCreateInfoML.nprofile(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCreateInfoML#markerType} field. */
+        /** @return the value of the {@code markerType} field. */
         @NativeType("XrMarkerTypeML")
         public int markerType() { return XrMarkerDetectorCreateInfoML.nmarkerType(address()); }
 
-        /** Sets the specified value to the {@link XrMarkerDetectorCreateInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMarkerDetectorCreateInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrMarkerDetectorCreateInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML TYPE_MARKER_DETECTOR_CREATE_INFO_ML} value to the {@link XrMarkerDetectorCreateInfoML#type} field. */
+        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML TYPE_MARKER_DETECTOR_CREATE_INFO_ML} value to the {@code type} field. */
         public XrMarkerDetectorCreateInfoML.Buffer type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML); }
-        /** Sets the specified value to the {@link XrMarkerDetectorCreateInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMarkerDetectorCreateInfoML.Buffer next(@NativeType("void const *") long value) { XrMarkerDetectorCreateInfoML.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrMarkerDetectorAprilTagInfoML} value to the {@code next} chain. */
         public XrMarkerDetectorCreateInfoML.Buffer next(XrMarkerDetectorAprilTagInfoML value) { return this.next(value.next(this.next()).address()); }
@@ -354,9 +336,9 @@ public class XrMarkerDetectorCreateInfoML extends Struct<XrMarkerDetectorCreateI
         public XrMarkerDetectorCreateInfoML.Buffer next(XrMarkerDetectorCustomProfileInfoML value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrMarkerDetectorSizeInfoML} value to the {@code next} chain. */
         public XrMarkerDetectorCreateInfoML.Buffer next(XrMarkerDetectorSizeInfoML value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrMarkerDetectorCreateInfoML#profile} field. */
+        /** Sets the specified value to the {@code profile} field. */
         public XrMarkerDetectorCreateInfoML.Buffer profile(@NativeType("XrMarkerDetectorProfileML") int value) { XrMarkerDetectorCreateInfoML.nprofile(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorCreateInfoML#markerType} field. */
+        /** Sets the specified value to the {@code markerType} field. */
         public XrMarkerDetectorCreateInfoML.Buffer markerType(@NativeType("XrMarkerTypeML") int value) { XrMarkerDetectorCreateInfoML.nmarkerType(address(), value); return this; }
 
     }

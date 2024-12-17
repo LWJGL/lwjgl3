@@ -11,20 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_OUTPUT_STATE *output_state,
- *     FMOD_PORT_TYPE portType,
- *     FMOD_PORT_INDEX portIndex,
- *     int *portId,
- *     int *portRate,
- *     int *portChannels,
- *     FMOD_SOUND_FORMAT *portFormat
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_OUTPUT_OPENPORT_CALLBACK} */
 public abstract class FMOD_OUTPUT_OPENPORT_CALLBACK extends Callback implements FMOD_OUTPUT_OPENPORT_CALLBACKI {
 
     /**

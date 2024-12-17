@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A very compact structure used to describe a small glyph bitmap.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FTC_SBitRec {
  *     FT_Byte width;
  *     FT_Byte height;
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Char xadvance;
  *     FT_Char yadvance;
  *     FT_Byte * buffer;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FTC_SBitRec")
 public class FTC_SBit extends Struct<FTC_SBit> {
@@ -132,11 +128,7 @@ public class FTC_SBit extends Struct<FTC_SBit> {
     /** @return the value of the {@code yadvance} field. */
     @NativeType("FT_Char")
     public byte yadvance() { return nyadvance(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("FT_Byte *")
     public ByteBuffer buffer(int capacity) { return nbuffer(address(), capacity); }
 
@@ -260,11 +252,7 @@ public class FTC_SBit extends Struct<FTC_SBit> {
         /** @return the value of the {@code yadvance} field. */
         @NativeType("FT_Char")
         public byte yadvance() { return FTC_SBit.nyadvance(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("FT_Byte *")
         public ByteBuffer buffer(int capacity) { return FTC_SBit.nbuffer(address(), capacity); }
 

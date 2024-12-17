@@ -19,12 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265PredictorPaletteEntries {
  *     uint16_t PredictorPaletteEntries[STD_VIDEO_H265_PREDICTOR_PALETTE_COMP_ENTRIES_LIST_SIZE];
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH265PredictorPaletteEntries extends Struct<StdVideoH265PredictorPaletteEntries> implements NativeResource {
 

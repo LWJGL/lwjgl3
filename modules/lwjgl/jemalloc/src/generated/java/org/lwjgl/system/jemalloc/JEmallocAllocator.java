@@ -9,7 +9,6 @@ import org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.system.jemalloc.JEmalloc.*;
 
-/** A {@link MemoryAllocator} implementation using the jemalloc library. */
 public class JEmallocAllocator implements MemoryAllocator {
 
     static {

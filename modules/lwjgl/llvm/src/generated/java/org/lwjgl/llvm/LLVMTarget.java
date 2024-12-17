@@ -51,16 +51,6 @@ public class LLVMTarget {
 
     }
 
-    /**
-     * {@code enum LLVMByteOrdering}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMBigEndian BigEndian}</li>
-     * <li>{@link #LLVMLittleEndian LittleEndian}</li>
-     * </ul>
-     */
     public static final int
         LLVMBigEndian    = 0,
         LLVMLittleEndian = 1;
@@ -71,7 +61,7 @@ public class LLVMTarget {
 
     // --- [ LLVMGetModuleDataLayout ] ---
 
-    /** Obtain the data layout for a module. */
+    /** {@code LLVMTargetDataRef LLVMGetModuleDataLayout(LLVMModuleRef M)} */
     @NativeType("LLVMTargetDataRef")
     public static long LLVMGetModuleDataLayout(@NativeType("LLVMModuleRef") long M) {
         long __functionAddress = Functions.GetModuleDataLayout;
@@ -83,7 +73,7 @@ public class LLVMTarget {
 
     // --- [ LLVMSetModuleDataLayout ] ---
 
-    /** Set the data layout for a module. */
+    /** {@code void LLVMSetModuleDataLayout(LLVMModuleRef M, LLVMTargetDataRef DL)} */
     public static void LLVMSetModuleDataLayout(@NativeType("LLVMModuleRef") long M, @NativeType("LLVMTargetDataRef") long DL) {
         long __functionAddress = Functions.SetModuleDataLayout;
         if (CHECKS) {
@@ -95,13 +85,13 @@ public class LLVMTarget {
 
     // --- [ LLVMCreateTargetData ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateTargetData CreateTargetData} */
+    /** {@code LLVMTargetDataRef LLVMCreateTargetData(char const * StringRep)} */
     public static long nLLVMCreateTargetData(long StringRep) {
         long __functionAddress = Functions.CreateTargetData;
         return invokePP(StringRep, __functionAddress);
     }
 
-    /** Creates target data from a target layout string. See the constructor {@code llvm::DataLayout::DataLayout}. */
+    /** {@code LLVMTargetDataRef LLVMCreateTargetData(char const * StringRep)} */
     @NativeType("LLVMTargetDataRef")
     public static long LLVMCreateTargetData(@NativeType("char const *") ByteBuffer StringRep) {
         if (CHECKS) {
@@ -110,7 +100,7 @@ public class LLVMTarget {
         return nLLVMCreateTargetData(memAddress(StringRep));
     }
 
-    /** Creates target data from a target layout string. See the constructor {@code llvm::DataLayout::DataLayout}. */
+    /** {@code LLVMTargetDataRef LLVMCreateTargetData(char const * StringRep)} */
     @NativeType("LLVMTargetDataRef")
     public static long LLVMCreateTargetData(@NativeType("char const *") CharSequence StringRep) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -125,7 +115,7 @@ public class LLVMTarget {
 
     // --- [ LLVMDisposeTargetData ] ---
 
-    /** Deallocates a {@code TargetData}. See the destructor {@code llvm::DataLayout::~DataLayout}. */
+    /** {@code void LLVMDisposeTargetData(LLVMTargetDataRef TD)} */
     public static void LLVMDisposeTargetData(@NativeType("LLVMTargetDataRef") long TD) {
         long __functionAddress = Functions.DisposeTargetData;
         if (CHECKS) {
@@ -136,10 +126,7 @@ public class LLVMTarget {
 
     // --- [ LLVMAddTargetLibraryInfo ] ---
 
-    /**
-     * Adds target library information to a pass manager. This does not take ownership of the target library info. See the method
-     * {@code llvm::PassManagerBase::add}.
-     */
+    /** {@code void LLVMAddTargetLibraryInfo(LLVMTargetLibraryInfoRef TLI, LLVMPassManagerRef PM)} */
     public static void LLVMAddTargetLibraryInfo(@NativeType("LLVMTargetLibraryInfoRef") long TLI, @NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddTargetLibraryInfo;
         if (CHECKS) {
@@ -151,7 +138,7 @@ public class LLVMTarget {
 
     // --- [ LLVMCopyStringRepOfTargetData ] ---
 
-    /** Unsafe version of: {@link #LLVMCopyStringRepOfTargetData CopyStringRepOfTargetData} */
+    /** {@code char * LLVMCopyStringRepOfTargetData(LLVMTargetDataRef TD)} */
     public static long nLLVMCopyStringRepOfTargetData(long TD) {
         long __functionAddress = Functions.CopyStringRepOfTargetData;
         if (CHECKS) {
@@ -160,10 +147,7 @@ public class LLVMTarget {
         return invokePP(TD, __functionAddress);
     }
 
-    /**
-     * Converts target data to a target layout string. The string must be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. See the constructor
-     * {@code llvm::DataLayout::DataLayout}.
-     */
+    /** {@code char * LLVMCopyStringRepOfTargetData(LLVMTargetDataRef TD)} */
     @NativeType("char *")
     public static @Nullable String LLVMCopyStringRepOfTargetData(@NativeType("LLVMTargetDataRef") long TD) {
         long __result = nLLVMCopyStringRepOfTargetData(TD);
@@ -172,7 +156,7 @@ public class LLVMTarget {
 
     // --- [ LLVMByteOrder ] ---
 
-    /** Returns the byte order of a target, either {@link #LLVMBigEndian BigEndian} or {@link #LLVMLittleEndian LittleEndian}. See the method {@code llvm::DataLayout::isLittleEndian}. */
+    /** {@code enum LLVMByteOrdering LLVMByteOrder(LLVMTargetDataRef TD)} */
     @NativeType("enum LLVMByteOrdering")
     public static int LLVMByteOrder(@NativeType("LLVMTargetDataRef") long TD) {
         long __functionAddress = Functions.ByteOrder;
@@ -184,7 +168,7 @@ public class LLVMTarget {
 
     // --- [ LLVMPointerSize ] ---
 
-    /** Returns the pointer size in bytes for a target. See the method {@code llvm::DataLayout::getPointerSize}. */
+    /** {@code unsigned int LLVMPointerSize(LLVMTargetDataRef TD)} */
     @NativeType("unsigned int")
     public static int LLVMPointerSize(@NativeType("LLVMTargetDataRef") long TD) {
         long __functionAddress = Functions.PointerSize;
@@ -196,7 +180,7 @@ public class LLVMTarget {
 
     // --- [ LLVMPointerSizeForAS ] ---
 
-    /** Returns the pointer size in bytes for a target for a specified address space. See the method {@code llvm::DataLayout::getPointerSize}. */
+    /** {@code unsigned int LLVMPointerSizeForAS(LLVMTargetDataRef TD, unsigned int AS)} */
     @NativeType("unsigned int")
     public static int LLVMPointerSizeForAS(@NativeType("LLVMTargetDataRef") long TD, @NativeType("unsigned int") int AS) {
         long __functionAddress = Functions.PointerSizeForAS;
@@ -208,7 +192,7 @@ public class LLVMTarget {
 
     // --- [ LLVMIntPtrType ] ---
 
-    /** Returns the integer type that is the same size as a pointer on a target. See the method {@code llvm::DataLayout::getIntPtrType}. */
+    /** {@code LLVMTypeRef LLVMIntPtrType(LLVMTargetDataRef TD)} */
     @NativeType("LLVMTypeRef")
     public static long LLVMIntPtrType(@NativeType("LLVMTargetDataRef") long TD) {
         long __functionAddress = Functions.IntPtrType;
@@ -220,10 +204,7 @@ public class LLVMTarget {
 
     // --- [ LLVMIntPtrTypeForAS ] ---
 
-    /**
-     * Returns the integer type that is the same size as a pointer on a target. This version allows the address space to be specified. See the method
-     * {@code llvm::DataLayout::getIntPtrType}.
-     */
+    /** {@code LLVMTypeRef LLVMIntPtrTypeForAS(LLVMTargetDataRef TD, unsigned int AS)} */
     @NativeType("LLVMTypeRef")
     public static long LLVMIntPtrTypeForAS(@NativeType("LLVMTargetDataRef") long TD, @NativeType("unsigned int") int AS) {
         long __functionAddress = Functions.IntPtrTypeForAS;
@@ -235,7 +216,7 @@ public class LLVMTarget {
 
     // --- [ LLVMIntPtrTypeInContext ] ---
 
-    /** Returns the integer type that is the same size as a pointer on a target. See the method {@code llvm::DataLayout::getIntPtrType}. */
+    /** {@code LLVMTypeRef LLVMIntPtrTypeInContext(LLVMContextRef C, LLVMTargetDataRef TD)} */
     @NativeType("LLVMTypeRef")
     public static long LLVMIntPtrTypeInContext(@NativeType("LLVMContextRef") long C, @NativeType("LLVMTargetDataRef") long TD) {
         long __functionAddress = Functions.IntPtrTypeInContext;
@@ -248,10 +229,7 @@ public class LLVMTarget {
 
     // --- [ LLVMIntPtrTypeForASInContext ] ---
 
-    /**
-     * Returns the integer type that is the same size as a pointer on a target. This version allows the address space to be specified. See the method
-     * {@code llvm::DataLayout::getIntPtrType}.
-     */
+    /** {@code LLVMTypeRef LLVMIntPtrTypeForASInContext(LLVMContextRef C, LLVMTargetDataRef TD, unsigned int AS)} */
     @NativeType("LLVMTypeRef")
     public static long LLVMIntPtrTypeForASInContext(@NativeType("LLVMContextRef") long C, @NativeType("LLVMTargetDataRef") long TD, @NativeType("unsigned int") int AS) {
         long __functionAddress = Functions.IntPtrTypeForASInContext;
@@ -264,7 +242,7 @@ public class LLVMTarget {
 
     // --- [ LLVMSizeOfTypeInBits ] ---
 
-    /** Computes the size of a type in bytes for a target. See the method {@code llvm::DataLayout::getTypeSizeInBits}. */
+    /** {@code unsigned long long LLVMSizeOfTypeInBits(LLVMTargetDataRef TD, LLVMTypeRef Ty)} */
     @NativeType("unsigned long long")
     public static long LLVMSizeOfTypeInBits(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMTypeRef") long Ty) {
         long __functionAddress = Functions.SizeOfTypeInBits;
@@ -277,7 +255,7 @@ public class LLVMTarget {
 
     // --- [ LLVMStoreSizeOfType ] ---
 
-    /** Computes the storage size of a type in bytes for a target. See the method {@code llvm::DataLayout::getTypeStoreSize}. */
+    /** {@code unsigned long long LLVMStoreSizeOfType(LLVMTargetDataRef TD, LLVMTypeRef Ty)} */
     @NativeType("unsigned long long")
     public static long LLVMStoreSizeOfType(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMTypeRef") long Ty) {
         long __functionAddress = Functions.StoreSizeOfType;
@@ -290,7 +268,7 @@ public class LLVMTarget {
 
     // --- [ LLVMABISizeOfType ] ---
 
-    /** Computes the ABI size of a type in bytes for a target. See the method {@code llvm::DataLayout::getTypeAllocSize}. */
+    /** {@code unsigned long long LLVMABISizeOfType(LLVMTargetDataRef TD, LLVMTypeRef Ty)} */
     @NativeType("unsigned long long")
     public static long LLVMABISizeOfType(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMTypeRef") long Ty) {
         long __functionAddress = Functions.ABISizeOfType;
@@ -303,7 +281,7 @@ public class LLVMTarget {
 
     // --- [ LLVMABIAlignmentOfType ] ---
 
-    /** Computes the ABI alignment of a type in bytes for a target. See the method {@code llvm::DataLayout::getTypeABISize}. */
+    /** {@code unsigned int LLVMABIAlignmentOfType(LLVMTargetDataRef TD, LLVMTypeRef Ty)} */
     @NativeType("unsigned int")
     public static int LLVMABIAlignmentOfType(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMTypeRef") long Ty) {
         long __functionAddress = Functions.ABIAlignmentOfType;
@@ -316,7 +294,7 @@ public class LLVMTarget {
 
     // --- [ LLVMCallFrameAlignmentOfType ] ---
 
-    /** Computes the call frame alignment of a type in bytes for a target. See the method {@code llvm::DataLayout::getTypeABISize}. */
+    /** {@code unsigned int LLVMCallFrameAlignmentOfType(LLVMTargetDataRef TD, LLVMTypeRef Ty)} */
     @NativeType("unsigned int")
     public static int LLVMCallFrameAlignmentOfType(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMTypeRef") long Ty) {
         long __functionAddress = Functions.CallFrameAlignmentOfType;
@@ -329,7 +307,7 @@ public class LLVMTarget {
 
     // --- [ LLVMPreferredAlignmentOfType ] ---
 
-    /** Computes the preferred alignment of a type in bytes for a target. See the method {@code llvm::DataLayout::getTypeABISize}. */
+    /** {@code unsigned int LLVMPreferredAlignmentOfType(LLVMTargetDataRef TD, LLVMTypeRef Ty)} */
     @NativeType("unsigned int")
     public static int LLVMPreferredAlignmentOfType(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMTypeRef") long Ty) {
         long __functionAddress = Functions.PreferredAlignmentOfType;
@@ -342,7 +320,7 @@ public class LLVMTarget {
 
     // --- [ LLVMPreferredAlignmentOfGlobal ] ---
 
-    /** Computes the preferred alignment of a global variable in bytes for a target. See the method {@code llvm::DataLayout::getPreferredAlignment}. */
+    /** {@code unsigned int LLVMPreferredAlignmentOfGlobal(LLVMTargetDataRef TD, LLVMValueRef GlobalVar)} */
     @NativeType("unsigned int")
     public static int LLVMPreferredAlignmentOfGlobal(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMValueRef") long GlobalVar) {
         long __functionAddress = Functions.PreferredAlignmentOfGlobal;
@@ -355,7 +333,7 @@ public class LLVMTarget {
 
     // --- [ LLVMElementAtOffset ] ---
 
-    /** Computes the structure element that contains the byte offset for a target. See the method {@code llvm::StructLayout::getElementContainingOffset}. */
+    /** {@code unsigned int LLVMElementAtOffset(LLVMTargetDataRef TD, LLVMTypeRef StructTy, unsigned long long Offset)} */
     @NativeType("unsigned int")
     public static int LLVMElementAtOffset(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMTypeRef") long StructTy, @NativeType("unsigned long long") long Offset) {
         long __functionAddress = Functions.ElementAtOffset;
@@ -368,7 +346,7 @@ public class LLVMTarget {
 
     // --- [ LLVMOffsetOfElement ] ---
 
-    /** Computes the byte offset of the indexed struct element for a target. See the method {@code llvm::StructLayout::getElementContainingOffset}. */
+    /** {@code unsigned long long LLVMOffsetOfElement(LLVMTargetDataRef TD, LLVMTypeRef StructTy, unsigned int Element)} */
     @NativeType("unsigned long long")
     public static long LLVMOffsetOfElement(@NativeType("LLVMTargetDataRef") long TD, @NativeType("LLVMTypeRef") long StructTy, @NativeType("unsigned int") int Element) {
         long __functionAddress = Functions.OffsetOfElement;

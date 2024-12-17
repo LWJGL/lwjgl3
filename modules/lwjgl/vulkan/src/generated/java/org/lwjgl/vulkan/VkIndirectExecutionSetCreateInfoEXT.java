@@ -16,36 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created indirect execution set.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectShaderObjectCount} is zero or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderObject">{@code shaderObject}</a> feature is not enabled {@code type} <b>must</b> not be {@link EXTDeviceGeneratedCommands#VK_INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT}</li>
- * <li>{@code type} <b>must</b> be a valid {@code VkIndirectExecutionSetInfoTypeEXT} value</li>
- * <li>If {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_EXECUTION_SET_INFO_TYPE_PIPELINES_EXT INDIRECT_EXECUTION_SET_INFO_TYPE_PIPELINES_EXT}, the {@code pPipelineInfo} member of {@code info} <b>must</b> be a valid pointer to a valid {@link VkIndirectExecutionSetPipelineInfoEXT} structure</li>
- * <li>If {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT INDIRECT_EXECUTION_SET_INFO_TYPE_SHADER_OBJECTS_EXT}, the {@code pShaderInfo} member of {@code info} <b>must</b> be a valid pointer to a valid {@link VkIndirectExecutionSetShaderInfoEXT} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectExecutionSetInfoEXT}, {@link EXTDeviceGeneratedCommands#vkCreateIndirectExecutionSetEXT CreateIndirectExecutionSetEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectExecutionSetCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkIndirectExecutionSetInfoTypeEXT {@link #type};
- *     {@link VkIndirectExecutionSetInfoEXT VkIndirectExecutionSetInfoEXT} {@link #info};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkIndirectExecutionSetInfoTypeEXT type;
+ *     {@link VkIndirectExecutionSetInfoEXT VkIndirectExecutionSetInfoEXT} info;
+ * }}</pre>
  */
 public class VkIndirectExecutionSetCreateInfoEXT extends Struct<VkIndirectExecutionSetCreateInfoEXT> implements NativeResource {
 
@@ -101,29 +78,29 @@ public class VkIndirectExecutionSetCreateInfoEXT extends Struct<VkIndirectExecut
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkIndirectExecutionSetInfoTypeEXT} describing the type of set being created and determining which field of the {@code info} union will be used. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkIndirectExecutionSetInfoTypeEXT")
     public int type() { return ntype(address()); }
-    /** a {@link VkIndirectExecutionSetInfoEXT} union containing layout information for the set. */
+    /** @return a {@link VkIndirectExecutionSetInfoEXT} view of the {@code info} field. */
     public VkIndirectExecutionSetInfoEXT info() { return ninfo(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkIndirectExecutionSetCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkIndirectExecutionSetCreateInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectExecutionSetCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkIndirectExecutionSetCreateInfoEXT type(@NativeType("VkIndirectExecutionSetInfoTypeEXT") int value) { ntype(address(), value); return this; }
-    /** Copies the specified {@link VkIndirectExecutionSetInfoEXT} to the {@link #info} field. */
+    /** Copies the specified {@link VkIndirectExecutionSetInfoEXT} to the {@code info} field. */
     public VkIndirectExecutionSetCreateInfoEXT info(VkIndirectExecutionSetInfoEXT value) { ninfo(address(), value); return this; }
-    /** Passes the {@link #info} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code info} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkIndirectExecutionSetCreateInfoEXT info(java.util.function.Consumer<VkIndirectExecutionSetInfoEXT> consumer) { consumer.accept(info()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,29 +302,29 @@ public class VkIndirectExecutionSetCreateInfoEXT extends Struct<VkIndirectExecut
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectExecutionSetCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkIndirectExecutionSetCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkIndirectExecutionSetCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetCreateInfoEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkIndirectExecutionSetInfoTypeEXT")
         public int type() { return VkIndirectExecutionSetCreateInfoEXT.ntype(address()); }
-        /** @return a {@link VkIndirectExecutionSetInfoEXT} view of the {@link VkIndirectExecutionSetCreateInfoEXT#info} field. */
+        /** @return a {@link VkIndirectExecutionSetInfoEXT} view of the {@code info} field. */
         public VkIndirectExecutionSetInfoEXT info() { return VkIndirectExecutionSetCreateInfoEXT.ninfo(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectExecutionSetCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkIndirectExecutionSetCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectExecutionSetCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT} value to the {@link VkIndirectExecutionSetCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkIndirectExecutionSetCreateInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectExecutionSetCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkIndirectExecutionSetCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetCreateInfoEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkIndirectExecutionSetCreateInfoEXT.Buffer type(@NativeType("VkIndirectExecutionSetInfoTypeEXT") int value) { VkIndirectExecutionSetCreateInfoEXT.ntype(address(), value); return this; }
-        /** Copies the specified {@link VkIndirectExecutionSetInfoEXT} to the {@link VkIndirectExecutionSetCreateInfoEXT#info} field. */
+        /** Copies the specified {@link VkIndirectExecutionSetInfoEXT} to the {@code info} field. */
         public VkIndirectExecutionSetCreateInfoEXT.Buffer info(VkIndirectExecutionSetInfoEXT value) { VkIndirectExecutionSetCreateInfoEXT.ninfo(address(), value); return this; }
-        /** Passes the {@link VkIndirectExecutionSetCreateInfoEXT#info} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code info} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkIndirectExecutionSetCreateInfoEXT.Buffer info(java.util.function.Consumer<VkIndirectExecutionSetInfoEXT> consumer) { consumer.accept(info()); return this; }
 
     }

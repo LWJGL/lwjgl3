@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     FT_Incremental incremental,
- *     FT_UInt glyph_index,
- *     FT_Bool vertical,
- *     FT_Incremental_MetricsRec *ametrics
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Incremental_GetGlyphMetricsFunc} */
 @FunctionalInterface
 @NativeType("FT_Incremental_GetGlyphMetricsFunc")
 public interface FT_Incremental_GetGlyphMetricsFuncI extends CallbackI {
@@ -47,7 +37,7 @@ public interface FT_Incremental_GetGlyphMetricsFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** A function used to retrieve the basic metrics of a given glyph index before accessing its data. */
+    /** {@code FT_Error (* FT_Incremental_GetGlyphMetricsFunc) (FT_Incremental incremental, FT_UInt glyph_index, FT_Bool vertical, FT_Incremental_MetricsRec * ametrics)} */
     @NativeType("FT_Error") int invoke(@NativeType("FT_Incremental") long incremental, @NativeType("FT_UInt") int glyph_index, @NativeType("FT_Bool") boolean vertical, @NativeType("FT_Incremental_MetricsRec *") long ametrics);
 
 }

@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     FMOD_BOOL inputsidle,
- *     unsigned int length,
- *     FMOD_CHANNELMASK inmask,
- *     int inchannels,
- *     FMOD_SPEAKERMODE speakermode
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_SHOULDIPROCESS_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_DSP_SHOULDIPROCESS_CALLBACK")
 public interface FMOD_DSP_SHOULDIPROCESS_CALLBACKI extends CallbackI {
@@ -51,6 +39,7 @@ public interface FMOD_DSP_SHOULDIPROCESS_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_DSP_SHOULDIPROCESS_CALLBACK) (struct FMOD_DSP_STATE * dsp_state, FMOD_BOOL inputsidle, unsigned int length, FMOD_CHANNELMASK inmask, int inchannels, FMOD_SPEAKERMODE speakermode)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_DSP_STATE *") long dsp_state, @NativeType("FMOD_BOOL") int inputsidle, @NativeType("unsigned int") int length, @NativeType("FMOD_CHANNELMASK") int inmask, int inchannels, @NativeType("FMOD_SPEAKERMODE") int speakermode);
 
 }

@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Request a specific address for a buffer.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code deviceAddress} is zero, no specific address is requested.</p>
- * 
- * <p>If {@code deviceAddress} is not zero, then it <b>must</b> be an address retrieved from an identically created buffer on the same implementation. The buffer <b>must</b> also be bound to an identically created {@code VkDeviceMemory} object.</p>
- * 
- * <p>If this structure is not present, it is as if {@code deviceAddress} is zero.</p>
- * 
- * <p>Applications <b>should</b> avoid creating buffers with application-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of {@link EXTBufferDeviceAddress#VK_ERROR_INVALID_DEVICE_ADDRESS_EXT ERROR_INVALID_DEVICE_ADDRESS_EXT} errors.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferDeviceAddressCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceAddress {@link #deviceAddress};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceAddress deviceAddress;
+ * }}</pre>
  */
 public class VkBufferDeviceAddressCreateInfoEXT extends Struct<VkBufferDeviceAddressCreateInfoEXT> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct<VkBufferDeviceAdd
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the device address requested for the buffer. */
+    /** @return the value of the {@code deviceAddress} field. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBufferDeviceAddressCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkBufferDeviceAddressCreateInfoEXT sType$Default() { return sType(EXTBufferDeviceAddress.VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBufferDeviceAddressCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceAddress} field. */
+    /** Sets the specified value to the {@code deviceAddress} field. */
     public VkBufferDeviceAddressCreateInfoEXT deviceAddress(@NativeType("VkDeviceAddress") long value) { ndeviceAddress(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,23 +305,23 @@ public class VkBufferDeviceAddressCreateInfoEXT extends Struct<VkBufferDeviceAdd
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBufferDeviceAddressCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferDeviceAddressCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkBufferDeviceAddressCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferDeviceAddressCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkBufferDeviceAddressCreateInfoEXT#deviceAddress} field. */
+        /** @return the value of the {@code deviceAddress} field. */
         @NativeType("VkDeviceAddress")
         public long deviceAddress() { return VkBufferDeviceAddressCreateInfoEXT.ndeviceAddress(address()); }
 
-        /** Sets the specified value to the {@link VkBufferDeviceAddressCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBufferDeviceAddressCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferDeviceAddressCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT} value to the {@link VkBufferDeviceAddressCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTBufferDeviceAddress#VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkBufferDeviceAddressCreateInfoEXT.Buffer sType$Default() { return sType(EXTBufferDeviceAddress.VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkBufferDeviceAddressCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBufferDeviceAddressCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkBufferDeviceAddressCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferDeviceAddressCreateInfoEXT#deviceAddress} field. */
+        /** Sets the specified value to the {@code deviceAddress} field. */
         public VkBufferDeviceAddressCreateInfoEXT.Buffer deviceAddress(@NativeType("VkDeviceAddress") long value) { VkBufferDeviceAddressCreateInfoEXT.ndeviceAddress(address(), value); return this; }
 
     }

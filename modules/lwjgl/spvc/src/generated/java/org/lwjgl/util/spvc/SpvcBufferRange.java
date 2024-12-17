@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_buffer_range {
  *     unsigned int index;
  *     size_t offset;
  *     size_t range;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_buffer_range")
 public class SpvcBufferRange extends Struct<SpvcBufferRange> implements NativeResource {

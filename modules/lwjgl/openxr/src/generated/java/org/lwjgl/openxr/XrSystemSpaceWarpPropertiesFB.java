@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Composition Layer Space Warp structure.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpaceWarp XR_FB_space_warp} extension <b>must</b> be enabled prior to using {@link XrSystemSpaceWarpPropertiesFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpaceWarp#XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemSpaceWarpPropertiesFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #recommendedMotionVectorImageRectWidth};
- *     uint32_t {@link #recommendedMotionVectorImageRectHeight};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t recommendedMotionVectorImageRectWidth;
+ *     uint32_t recommendedMotionVectorImageRectHeight;
+ * }}</pre>
  */
 public class XrSystemSpaceWarpPropertiesFB extends Struct<XrSystemSpaceWarpPropertiesFB> implements NativeResource {
 
@@ -94,24 +78,24 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct<XrSystemSpaceWarpPrope
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** recommended motion vector and depth image width */
+    /** @return the value of the {@code recommendedMotionVectorImageRectWidth} field. */
     @NativeType("uint32_t")
     public int recommendedMotionVectorImageRectWidth() { return nrecommendedMotionVectorImageRectWidth(address()); }
-    /** recommended motion vector and depth image height */
+    /** @return the value of the {@code recommendedMotionVectorImageRectHeight} field. */
     @NativeType("uint32_t")
     public int recommendedMotionVectorImageRectHeight() { return nrecommendedMotionVectorImageRectHeight(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemSpaceWarpPropertiesFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpaceWarp#XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpaceWarp#XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB} value to the {@code type} field. */
     public XrSystemSpaceWarpPropertiesFB type$Default() { return type(FBSpaceWarp.XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemSpaceWarpPropertiesFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -305,24 +289,24 @@ public class XrSystemSpaceWarpPropertiesFB extends Struct<XrSystemSpaceWarpPrope
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemSpaceWarpPropertiesFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemSpaceWarpPropertiesFB.ntype(address()); }
-        /** @return the value of the {@link XrSystemSpaceWarpPropertiesFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemSpaceWarpPropertiesFB.nnext(address()); }
-        /** @return the value of the {@link XrSystemSpaceWarpPropertiesFB#recommendedMotionVectorImageRectWidth} field. */
+        /** @return the value of the {@code recommendedMotionVectorImageRectWidth} field. */
         @NativeType("uint32_t")
         public int recommendedMotionVectorImageRectWidth() { return XrSystemSpaceWarpPropertiesFB.nrecommendedMotionVectorImageRectWidth(address()); }
-        /** @return the value of the {@link XrSystemSpaceWarpPropertiesFB#recommendedMotionVectorImageRectHeight} field. */
+        /** @return the value of the {@code recommendedMotionVectorImageRectHeight} field. */
         @NativeType("uint32_t")
         public int recommendedMotionVectorImageRectHeight() { return XrSystemSpaceWarpPropertiesFB.nrecommendedMotionVectorImageRectHeight(address()); }
 
-        /** Sets the specified value to the {@link XrSystemSpaceWarpPropertiesFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemSpaceWarpPropertiesFB.Buffer type(@NativeType("XrStructureType") int value) { XrSystemSpaceWarpPropertiesFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpaceWarp#XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB} value to the {@link XrSystemSpaceWarpPropertiesFB#type} field. */
+        /** Sets the {@link FBSpaceWarp#XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB} value to the {@code type} field. */
         public XrSystemSpaceWarpPropertiesFB.Buffer type$Default() { return type(FBSpaceWarp.XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB); }
-        /** Sets the specified value to the {@link XrSystemSpaceWarpPropertiesFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemSpaceWarpPropertiesFB.Buffer next(@NativeType("void *") long value) { XrSystemSpaceWarpPropertiesFB.nnext(address(), value); return this; }
 
     }

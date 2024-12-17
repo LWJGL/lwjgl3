@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_bool_t (*{@link #invoke}) (
- *     hb_font_t *font,
- *     void *font_data,
- *     hb_codepoint_t glyph,
- *     char *name,
- *     unsigned int size,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_font_get_glyph_name_func_t} */
 @FunctionalInterface
 @NativeType("hb_font_get_glyph_name_func_t")
 public interface hb_font_get_glyph_name_func_tI extends CallbackI {
@@ -51,20 +39,7 @@ public interface hb_font_get_glyph_name_func_tI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.
-     * 
-     * <p>This method should retrieve the glyph name that corresponds to a glyph ID. The name should be returned in a string output parameter.</p>
-     * 
-     * <p>Return value: {@code true} if data found, {@code false} otherwise.</p>
-     *
-     * @param font      {@code hb_font_t} to work upon
-     * @param font_data {@code font} user data pointer
-     * @param glyph     the glyph ID to query
-     * @param name      name string retrieved for the glyph ID
-     * @param size      length of the glyph-name string retrieved
-     * @param user_data user data pointer passed by the caller
-     */
+    /** {@code hb_bool_t (* hb_font_get_glyph_name_func_t) (hb_font_t * font, void * font_data, hb_codepoint_t glyph, char * name, unsigned int size, void * user_data)} */
     @NativeType("hb_bool_t") int invoke(@NativeType("hb_font_t *") long font, @NativeType("void *") long font_data, @NativeType("hb_codepoint_t") int glyph, @NativeType("char *") long name, @NativeType("unsigned int") int size, @NativeType("void *") long user_data);
 
 }

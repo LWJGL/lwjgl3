@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265ShortTermRefPicSet {
  *     {@link StdVideoH265ShortTermRefPicSetFlags StdVideoH265ShortTermRefPicSetFlags} flags;
  *     uint32_t delta_idx_minus1;
@@ -37,7 +35,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint8_t num_positive_pics;
  *     uint16_t delta_poc_s0_minus1[STD_VIDEO_H265_MAX_DPB_SIZE];
  *     uint16_t delta_poc_s1_minus1[STD_VIDEO_H265_MAX_DPB_SIZE];
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH265ShortTermRefPicSet extends Struct<StdVideoH265ShortTermRefPicSet> implements NativeResource {
 

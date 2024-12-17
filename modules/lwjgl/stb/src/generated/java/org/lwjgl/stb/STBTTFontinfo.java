@@ -15,7 +15,6 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
-/** An opaque structure that contains font information. */
 @NativeType("struct stbtt_fontinfo")
 public class STBTTFontinfo extends Struct<STBTTFontinfo> implements NativeResource {
 

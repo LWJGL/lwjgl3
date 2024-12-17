@@ -19,34 +19,15 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifies AV1 encoder parameter set information.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code pStdSequenceHeader→flags.film_grain_params_present} <b>must</b> be zero</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR}</li>
- * <li>{@code pStdSequenceHeader} <b>must</b> be a valid pointer to a valid {@code StdVideoAV1SequenceHeader} value</li>
- * <li>If {@code pStdDecoderModelInfo} is not {@code NULL}, {@code pStdDecoderModelInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeAV1DecoderModelInfo} value</li>
- * <li>If {@code stdOperatingPointCount} is not 0, and {@code pStdOperatingPoints} is not {@code NULL}, {@code pStdOperatingPoints} <b>must</b> be a valid pointer to an array of {@code stdOperatingPointCount} {@code StdVideoEncodeAV1OperatingPointInfo} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeAV1SessionParametersCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link StdVideoAV1SequenceHeader StdVideoAV1SequenceHeader} const * {@link #pStdSequenceHeader};
- *     {@link StdVideoEncodeAV1DecoderModelInfo StdVideoEncodeAV1DecoderModelInfo} const * {@link #pStdDecoderModelInfo};
- *     uint32_t {@link #stdOperatingPointCount};
- *     {@link StdVideoEncodeAV1OperatingPointInfo StdVideoEncodeAV1OperatingPointInfo} const * {@link #pStdOperatingPoints};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link StdVideoAV1SequenceHeader StdVideoAV1SequenceHeader} const * pStdSequenceHeader;
+ *     {@link StdVideoEncodeAV1DecoderModelInfo StdVideoEncodeAV1DecoderModelInfo} const * pStdDecoderModelInfo;
+ *     uint32_t stdOperatingPointCount;
+ *     {@link StdVideoEncodeAV1OperatingPointInfo StdVideoEncodeAV1OperatingPointInfo} const * pStdOperatingPoints;
+ * }}</pre>
  */
 public class VkVideoEncodeAV1SessionParametersCreateInfoKHR extends Struct<VkVideoEncodeAV1SessionParametersCreateInfoKHR> implements NativeResource {
 
@@ -108,38 +89,38 @@ public class VkVideoEncodeAV1SessionParametersCreateInfoKHR extends Struct<VkVid
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to a {@code StdVideoAV1SequenceHeader} structure describing parameters of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-sequence-header">AV1 sequence header</a> entry to store in the created object. */
+    /** @return a {@link StdVideoAV1SequenceHeader} view of the struct pointed to by the {@code pStdSequenceHeader} field. */
     @NativeType("StdVideoAV1SequenceHeader const *")
     public StdVideoAV1SequenceHeader pStdSequenceHeader() { return npStdSequenceHeader(address()); }
-    /** {@code NULL} or a pointer to a {@code StdVideoEncodeAV1DecoderModelInfo} structure specifying the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-decoder-model-info">AV1 decoder model information</a> to store in the created object. */
+    /** @return a {@link StdVideoEncodeAV1DecoderModelInfo} view of the struct pointed to by the {@code pStdDecoderModelInfo} field. */
     @NativeType("StdVideoEncodeAV1DecoderModelInfo const *")
     public @Nullable StdVideoEncodeAV1DecoderModelInfo pStdDecoderModelInfo() { return npStdDecoderModelInfo(address()); }
-    /** the number of elements in the {@code pStdOperatingPoints} array. */
+    /** @return the value of the {@code stdOperatingPointCount} field. */
     @NativeType("uint32_t")
     public int stdOperatingPointCount() { return nstdOperatingPointCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@code stdOperatingPointCount} number of {@code StdVideoEncodeAV1OperatingPointInfo} structures specifying the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-operating-points">AV1 operating point information</a> to store in the created object. Each element <code>i</code> specifies the parameter values corresponding to element <code>i</code> of the syntax elements defined in section 6.4 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
+    /** @return a {@link StdVideoEncodeAV1OperatingPointInfo.Buffer} view of the struct array pointed to by the {@code pStdOperatingPoints} field. */
     @NativeType("StdVideoEncodeAV1OperatingPointInfo const *")
     public StdVideoEncodeAV1OperatingPointInfo.@Nullable Buffer pStdOperatingPoints() { return npStdOperatingPoints(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeAV1SessionParametersCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeAV1SessionParametersCreateInfoKHR sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeAV1SessionParametersCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoAV1SequenceHeader} to the {@link #pStdSequenceHeader} field. */
+    /** Sets the address of the specified {@link StdVideoAV1SequenceHeader} to the {@code pStdSequenceHeader} field. */
     public VkVideoEncodeAV1SessionParametersCreateInfoKHR pStdSequenceHeader(@NativeType("StdVideoAV1SequenceHeader const *") StdVideoAV1SequenceHeader value) { npStdSequenceHeader(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoEncodeAV1DecoderModelInfo} to the {@link #pStdDecoderModelInfo} field. */
+    /** Sets the address of the specified {@link StdVideoEncodeAV1DecoderModelInfo} to the {@code pStdDecoderModelInfo} field. */
     public VkVideoEncodeAV1SessionParametersCreateInfoKHR pStdDecoderModelInfo(@Nullable @NativeType("StdVideoEncodeAV1DecoderModelInfo const *") StdVideoEncodeAV1DecoderModelInfo value) { npStdDecoderModelInfo(address(), value); return this; }
-    /** Sets the specified value to the {@link #stdOperatingPointCount} field. */
+    /** Sets the specified value to the {@code stdOperatingPointCount} field. */
     public VkVideoEncodeAV1SessionParametersCreateInfoKHR stdOperatingPointCount(@NativeType("uint32_t") int value) { nstdOperatingPointCount(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoEncodeAV1OperatingPointInfo.Buffer} to the {@link #pStdOperatingPoints} field. */
+    /** Sets the address of the specified {@link StdVideoEncodeAV1OperatingPointInfo.Buffer} to the {@code pStdOperatingPoints} field. */
     public VkVideoEncodeAV1SessionParametersCreateInfoKHR pStdOperatingPoints(@NativeType("StdVideoEncodeAV1OperatingPointInfo const *") StdVideoEncodeAV1OperatingPointInfo.@Nullable Buffer value) { npStdOperatingPoints(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -364,38 +345,38 @@ public class VkVideoEncodeAV1SessionParametersCreateInfoKHR extends Struct<VkVid
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeAV1SessionParametersCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeAV1SessionParametersCreateInfoKHR.npNext(address()); }
-        /** @return a {@link StdVideoAV1SequenceHeader} view of the struct pointed to by the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#pStdSequenceHeader} field. */
+        /** @return a {@link StdVideoAV1SequenceHeader} view of the struct pointed to by the {@code pStdSequenceHeader} field. */
         @NativeType("StdVideoAV1SequenceHeader const *")
         public StdVideoAV1SequenceHeader pStdSequenceHeader() { return VkVideoEncodeAV1SessionParametersCreateInfoKHR.npStdSequenceHeader(address()); }
-        /** @return a {@link StdVideoEncodeAV1DecoderModelInfo} view of the struct pointed to by the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#pStdDecoderModelInfo} field. */
+        /** @return a {@link StdVideoEncodeAV1DecoderModelInfo} view of the struct pointed to by the {@code pStdDecoderModelInfo} field. */
         @NativeType("StdVideoEncodeAV1DecoderModelInfo const *")
         public @Nullable StdVideoEncodeAV1DecoderModelInfo pStdDecoderModelInfo() { return VkVideoEncodeAV1SessionParametersCreateInfoKHR.npStdDecoderModelInfo(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#stdOperatingPointCount} field. */
+        /** @return the value of the {@code stdOperatingPointCount} field. */
         @NativeType("uint32_t")
         public int stdOperatingPointCount() { return VkVideoEncodeAV1SessionParametersCreateInfoKHR.nstdOperatingPointCount(address()); }
-        /** @return a {@link StdVideoEncodeAV1OperatingPointInfo.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#pStdOperatingPoints} field. */
+        /** @return a {@link StdVideoEncodeAV1OperatingPointInfo.Buffer} view of the struct array pointed to by the {@code pStdOperatingPoints} field. */
         @NativeType("StdVideoEncodeAV1OperatingPointInfo const *")
         public StdVideoEncodeAV1OperatingPointInfo.@Nullable Buffer pStdOperatingPoints() { return VkVideoEncodeAV1SessionParametersCreateInfoKHR.npStdOperatingPoints(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeAV1SessionParametersCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeAV1SessionParametersCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeAV1SessionParametersCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeAV1SessionParametersCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeAV1SessionParametersCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoAV1SequenceHeader} to the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#pStdSequenceHeader} field. */
+        /** Sets the address of the specified {@link StdVideoAV1SequenceHeader} to the {@code pStdSequenceHeader} field. */
         public VkVideoEncodeAV1SessionParametersCreateInfoKHR.Buffer pStdSequenceHeader(@NativeType("StdVideoAV1SequenceHeader const *") StdVideoAV1SequenceHeader value) { VkVideoEncodeAV1SessionParametersCreateInfoKHR.npStdSequenceHeader(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoEncodeAV1DecoderModelInfo} to the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#pStdDecoderModelInfo} field. */
+        /** Sets the address of the specified {@link StdVideoEncodeAV1DecoderModelInfo} to the {@code pStdDecoderModelInfo} field. */
         public VkVideoEncodeAV1SessionParametersCreateInfoKHR.Buffer pStdDecoderModelInfo(@Nullable @NativeType("StdVideoEncodeAV1DecoderModelInfo const *") StdVideoEncodeAV1DecoderModelInfo value) { VkVideoEncodeAV1SessionParametersCreateInfoKHR.npStdDecoderModelInfo(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#stdOperatingPointCount} field. */
+        /** Sets the specified value to the {@code stdOperatingPointCount} field. */
         public VkVideoEncodeAV1SessionParametersCreateInfoKHR.Buffer stdOperatingPointCount(@NativeType("uint32_t") int value) { VkVideoEncodeAV1SessionParametersCreateInfoKHR.nstdOperatingPointCount(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoEncodeAV1OperatingPointInfo.Buffer} to the {@link VkVideoEncodeAV1SessionParametersCreateInfoKHR#pStdOperatingPoints} field. */
+        /** Sets the address of the specified {@link StdVideoEncodeAV1OperatingPointInfo.Buffer} to the {@code pStdOperatingPoints} field. */
         public VkVideoEncodeAV1SessionParametersCreateInfoKHR.Buffer pStdOperatingPoints(@NativeType("StdVideoEncodeAV1OperatingPointInfo const *") StdVideoEncodeAV1OperatingPointInfo.@Nullable Buffer value) { VkVideoEncodeAV1SessionParametersCreateInfoKHR.npStdOperatingPoints(address(), value); return this; }
 
     }

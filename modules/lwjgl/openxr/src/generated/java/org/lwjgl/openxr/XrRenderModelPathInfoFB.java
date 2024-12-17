@@ -16,52 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Supported model paths.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrRenderModelPathInfoFB} contains a model path supported by the device when returned from {@link FBRenderModel#xrEnumerateRenderModelPathsFB EnumerateRenderModelPathsFB}. This path can be used to request information about the render model for the connected device that the path represents using {@link FBRenderModel#xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB}.</p>
- * 
- * <h5>Possible Render Model Paths</h5>
- * 
- * <ul>
- * <li>Controller models with origin at the grip pose.
- * 
- * <ul>
- * <li>pathname:/model_fb/controller/left</li>
- * <li>pathname:/model_fb/controller/right</li>
- * </ul>
- * </li>
- * <li>Keyboard models with origin at the center of its bounding box.
- * 
- * <ul>
- * <li>pathname:/model_fb/keyboard/local</li>
- * <li>pathname:/model_fb/keyboard/remote</li>
- * <li>pathname:/model_meta/keyboard/virtual (if the {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension is enabled)</li>
- * </ul>
- * </li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using {@link XrRenderModelPathInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBRenderModel#XR_TYPE_RENDER_MODEL_PATH_INFO_FB TYPE_RENDER_MODEL_PATH_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBRenderModel#xrEnumerateRenderModelPathsFB EnumerateRenderModelPathsFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrRenderModelPathInfoFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrPath {@link #path};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrPath path;
+ * }}</pre>
  */
 public class XrRenderModelPathInfoFB extends Struct<XrRenderModelPathInfoFB> implements NativeResource {
 
@@ -114,23 +74,23 @@ public class XrRenderModelPathInfoFB extends Struct<XrRenderModelPathInfoFB> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a valid {@code XrPath} used for retrieving model properties from {@link FBRenderModel#xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB}. */
+    /** @return the value of the {@code path} field. */
     @NativeType("XrPath")
     public long path() { return npath(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrRenderModelPathInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_PATH_INFO_FB TYPE_RENDER_MODEL_PATH_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_PATH_INFO_FB TYPE_RENDER_MODEL_PATH_INFO_FB} value to the {@code type} field. */
     public XrRenderModelPathInfoFB type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_PATH_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrRenderModelPathInfoFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #path} field. */
+    /** Sets the specified value to the {@code path} field. */
     public XrRenderModelPathInfoFB path(@NativeType("XrPath") long value) { npath(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,23 +286,23 @@ public class XrRenderModelPathInfoFB extends Struct<XrRenderModelPathInfoFB> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrRenderModelPathInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrRenderModelPathInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrRenderModelPathInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrRenderModelPathInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrRenderModelPathInfoFB#path} field. */
+        /** @return the value of the {@code path} field. */
         @NativeType("XrPath")
         public long path() { return XrRenderModelPathInfoFB.npath(address()); }
 
-        /** Sets the specified value to the {@link XrRenderModelPathInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrRenderModelPathInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrRenderModelPathInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_PATH_INFO_FB TYPE_RENDER_MODEL_PATH_INFO_FB} value to the {@link XrRenderModelPathInfoFB#type} field. */
+        /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_PATH_INFO_FB TYPE_RENDER_MODEL_PATH_INFO_FB} value to the {@code type} field. */
         public XrRenderModelPathInfoFB.Buffer type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_PATH_INFO_FB); }
-        /** Sets the specified value to the {@link XrRenderModelPathInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrRenderModelPathInfoFB.Buffer next(@NativeType("void *") long value) { XrRenderModelPathInfoFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrRenderModelPathInfoFB#path} field. */
+        /** Sets the specified value to the {@code path} field. */
         public XrRenderModelPathInfoFB.Buffer path(@NativeType("XrPath") long value) { XrRenderModelPathInfoFB.npath(address(), value); return this; }
 
     }

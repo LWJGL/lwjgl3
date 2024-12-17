@@ -17,26 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Action set priority mapping.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTActiveActionSetPriority XR_EXT_active_action_set_priority} extension <b>must</b> be enabled prior to using {@link XrActiveActionSetPriorityEXT}</li>
- * <li>{@code actionSet} <b>must</b> be a valid {@code XrActionSet} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrActionsSyncInfo}, {@link XrActiveActionSetPrioritiesEXT}, {@link XR10#xrSyncActions SyncActions}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActiveActionSetPriorityEXT {
- *     XrActionSet {@link #actionSet};
- *     uint32_t {@link #priorityOverride};
- * }</code></pre>
+ *     XrActionSet actionSet;
+ *     uint32_t priorityOverride;
+ * }}</pre>
  */
 public class XrActiveActionSetPriorityEXT extends Struct<XrActiveActionSetPriorityEXT> implements NativeResource {
 
@@ -86,16 +71,16 @@ public class XrActiveActionSetPriorityEXT extends Struct<XrActiveActionSetPriori
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the handle of the {@code XrActionSet} to set the priority number for. */
+    /** @return the value of the {@code actionSet} field. */
     @NativeType("XrActionSet")
     public long actionSet() { return nactionSet(address()); }
-    /** an integer specifying the priority of the action set while it is active. */
+    /** @return the value of the {@code priorityOverride} field. */
     @NativeType("uint32_t")
     public int priorityOverride() { return npriorityOverride(address()); }
 
-    /** Sets the specified value to the {@link #actionSet} field. */
+    /** Sets the specified value to the {@code actionSet} field. */
     public XrActiveActionSetPriorityEXT actionSet(XrActionSet value) { nactionSet(address(), value); return this; }
-    /** Sets the specified value to the {@link #priorityOverride} field. */
+    /** Sets the specified value to the {@code priorityOverride} field. */
     public XrActiveActionSetPriorityEXT priorityOverride(@NativeType("uint32_t") int value) { npriorityOverride(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,16 +279,16 @@ public class XrActiveActionSetPriorityEXT extends Struct<XrActiveActionSetPriori
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActiveActionSetPriorityEXT#actionSet} field. */
+        /** @return the value of the {@code actionSet} field. */
         @NativeType("XrActionSet")
         public long actionSet() { return XrActiveActionSetPriorityEXT.nactionSet(address()); }
-        /** @return the value of the {@link XrActiveActionSetPriorityEXT#priorityOverride} field. */
+        /** @return the value of the {@code priorityOverride} field. */
         @NativeType("uint32_t")
         public int priorityOverride() { return XrActiveActionSetPriorityEXT.npriorityOverride(address()); }
 
-        /** Sets the specified value to the {@link XrActiveActionSetPriorityEXT#actionSet} field. */
+        /** Sets the specified value to the {@code actionSet} field. */
         public XrActiveActionSetPriorityEXT.Buffer actionSet(XrActionSet value) { XrActiveActionSetPriorityEXT.nactionSet(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActiveActionSetPriorityEXT#priorityOverride} field. */
+        /** Sets the specified value to the {@code priorityOverride} field. */
         public XrActiveActionSetPriorityEXT.Buffer priorityOverride(@NativeType("uint32_t") int value) { XrActiveActionSetPriorityEXT.npriorityOverride(address(), value); return this; }
 
     }

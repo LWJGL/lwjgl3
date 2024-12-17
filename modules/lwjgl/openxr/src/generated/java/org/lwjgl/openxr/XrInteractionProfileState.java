@@ -16,31 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Receives active interaction profile for a top level path.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> only include interaction profiles that the application has provided bindings for via {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings} or {@link XR10#XR_NULL_PATH NULL_PATH}. If the runtime is rebinding an interaction profile provided by the application to a device that the application did not provide bindings for, it <b>must</b> return the interaction profile path that it is emulating. If the runtime is unable to provide input because it cannot emulate any of the application-provided interaction profiles, it <b>must</b> return {@link XR10#XR_NULL_PATH NULL_PATH}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_INTERACTION_PROFILE_STATE TYPE_INTERACTION_PROFILE_STATE}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrActionSuggestedBinding}, {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile}, {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrInteractionProfileState {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrPath {@link #interactionProfile};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrPath interactionProfile;
+ * }}</pre>
  */
 public class XrInteractionProfileState extends Struct<XrInteractionProfileState> implements NativeResource {
 
@@ -93,23 +74,23 @@ public class XrInteractionProfileState extends Struct<XrInteractionProfileState>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrPath} of the interaction profile path for the {@link XR10#xrGetCurrentInteractionProfile GetCurrentInteractionProfile}{@code ::topLevelUserPath} used to retrieve this state, or {@link XR10#XR_NULL_PATH NULL_PATH} if there is no active interaction profile at that top level user path. */
+    /** @return the value of the {@code interactionProfile} field. */
     @NativeType("XrPath")
     public long interactionProfile() { return ninteractionProfile(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrInteractionProfileState type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_INTERACTION_PROFILE_STATE TYPE_INTERACTION_PROFILE_STATE} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_INTERACTION_PROFILE_STATE TYPE_INTERACTION_PROFILE_STATE} value to the {@code type} field. */
     public XrInteractionProfileState type$Default() { return type(XR10.XR_TYPE_INTERACTION_PROFILE_STATE); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrInteractionProfileState next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #interactionProfile} field. */
+    /** Sets the specified value to the {@code interactionProfile} field. */
     public XrInteractionProfileState interactionProfile(@NativeType("XrPath") long value) { ninteractionProfile(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -305,23 +286,23 @@ public class XrInteractionProfileState extends Struct<XrInteractionProfileState>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrInteractionProfileState#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInteractionProfileState.ntype(address()); }
-        /** @return the value of the {@link XrInteractionProfileState#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrInteractionProfileState.nnext(address()); }
-        /** @return the value of the {@link XrInteractionProfileState#interactionProfile} field. */
+        /** @return the value of the {@code interactionProfile} field. */
         @NativeType("XrPath")
         public long interactionProfile() { return XrInteractionProfileState.ninteractionProfile(address()); }
 
-        /** Sets the specified value to the {@link XrInteractionProfileState#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrInteractionProfileState.Buffer type(@NativeType("XrStructureType") int value) { XrInteractionProfileState.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_INTERACTION_PROFILE_STATE TYPE_INTERACTION_PROFILE_STATE} value to the {@link XrInteractionProfileState#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_INTERACTION_PROFILE_STATE TYPE_INTERACTION_PROFILE_STATE} value to the {@code type} field. */
         public XrInteractionProfileState.Buffer type$Default() { return type(XR10.XR_TYPE_INTERACTION_PROFILE_STATE); }
-        /** Sets the specified value to the {@link XrInteractionProfileState#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrInteractionProfileState.Buffer next(@NativeType("void *") long value) { XrInteractionProfileState.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileState#interactionProfile} field. */
+        /** Sets the specified value to the {@code interactionProfile} field. */
         public XrInteractionProfileState.Buffer interactionProfile(@NativeType("XrPath") long value) { XrInteractionProfileState.ninteractionProfile(address(), value); return this; }
 
     }

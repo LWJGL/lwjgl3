@@ -17,35 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Block Request Info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshGetInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_GET_INFO_ML TYPE_WORLD_MESH_GET_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrWorldMeshDetectorFlagBitsML} values</li>
- * <li>{@code blocks} <b>must</b> be a pointer to an array of {@code blockCount} {@link XrWorldMeshBlockRequestML} structures</li>
- * <li>The {@code blockCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrWorldMeshBlockRequestML}, {@link MLWorldMeshDetection#xrRequestWorldMeshAsyncML RequestWorldMeshAsyncML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshGetInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrWorldMeshDetectorFlagsML {@link #flags};
- *     float {@link #fillHoleLength};
- *     float {@link #disconnectedComponentArea};
- *     uint32_t {@link #blockCount};
- *     {@link XrWorldMeshBlockRequestML XrWorldMeshBlockRequestML} * {@link #blocks};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrWorldMeshDetectorFlagsML flags;
+ *     float fillHoleLength;
+ *     float disconnectedComponentArea;
+ *     uint32_t blockCount;
+ *     {@link XrWorldMeshBlockRequestML XrWorldMeshBlockRequestML} * blocks;
+ * }}</pre>
  */
 public class XrWorldMeshGetInfoML extends Struct<XrWorldMeshGetInfoML> implements NativeResource {
 
@@ -110,39 +91,39 @@ public class XrWorldMeshGetInfoML extends Struct<XrWorldMeshGetInfoML> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** are the detector flags defined by {@code XrWorldMeshDetectorFlagBitsML}. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrWorldMeshDetectorFlagsML")
     public long flags() { return nflags(address()); }
-    /** Any hole which has perimeter (in meters) less than {@code fillHoleLength} will be filled. The maximum hole perimeter is limited to 5 meters, the runtime <b>must</b> clamp the value between 0 and 5 meters. Also the maximum area of the hole <b>should</b> not exceed 0.5 square meters. If the hole overlaps with neighboring mesh block(s), it will not be filled in. */
+    /** @return the value of the {@code fillHoleLength} field. */
     public float fillHoleLength() { return nfillHoleLength(address()); }
-    /** Any component that is disconnected from the main mesh which has an area (in square meters) less than {@code disconnectedComponentArea} will be removed. The maximum area is limited to 2 square meters, and the area needs to exist fully within a mesh block boundary without skirt. The runtime <b>must</b> clamp this value between 0 and 2 square meters. */
+    /** @return the value of the {@code disconnectedComponentArea} field. */
     public float disconnectedComponentArea() { return ndisconnectedComponentArea(address()); }
-    /** a {@code uint32_t} indicating the number of elements in the {@code blocks} array. */
+    /** @return the value of the {@code blockCount} field. */
     @NativeType("uint32_t")
     public int blockCount() { return nblockCount(address()); }
-    /** an array of {@link XrWorldMeshBlockRequestML}. */
+    /** @return a {@link XrWorldMeshBlockRequestML.Buffer} view of the struct array pointed to by the {@code blocks} field. */
     @NativeType("XrWorldMeshBlockRequestML *")
     public XrWorldMeshBlockRequestML.Buffer blocks() { return nblocks(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshGetInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_GET_INFO_ML TYPE_WORLD_MESH_GET_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_GET_INFO_ML TYPE_WORLD_MESH_GET_INFO_ML} value to the {@code type} field. */
     public XrWorldMeshGetInfoML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_GET_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshGetInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public XrWorldMeshGetInfoML flags(@NativeType("XrWorldMeshDetectorFlagsML") long value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #fillHoleLength} field. */
+    /** Sets the specified value to the {@code fillHoleLength} field. */
     public XrWorldMeshGetInfoML fillHoleLength(float value) { nfillHoleLength(address(), value); return this; }
-    /** Sets the specified value to the {@link #disconnectedComponentArea} field. */
+    /** Sets the specified value to the {@code disconnectedComponentArea} field. */
     public XrWorldMeshGetInfoML disconnectedComponentArea(float value) { ndisconnectedComponentArea(address(), value); return this; }
-    /** Sets the address of the specified {@link XrWorldMeshBlockRequestML.Buffer} to the {@link #blocks} field. */
+    /** Sets the address of the specified {@link XrWorldMeshBlockRequestML.Buffer} to the {@code blocks} field. */
     public XrWorldMeshGetInfoML blocks(@NativeType("XrWorldMeshBlockRequestML *") XrWorldMeshBlockRequestML.Buffer value) { nblocks(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -369,39 +350,39 @@ public class XrWorldMeshGetInfoML extends Struct<XrWorldMeshGetInfoML> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshGetInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshGetInfoML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshGetInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrWorldMeshGetInfoML.nnext(address()); }
-        /** @return the value of the {@link XrWorldMeshGetInfoML#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrWorldMeshDetectorFlagsML")
         public long flags() { return XrWorldMeshGetInfoML.nflags(address()); }
-        /** @return the value of the {@link XrWorldMeshGetInfoML#fillHoleLength} field. */
+        /** @return the value of the {@code fillHoleLength} field. */
         public float fillHoleLength() { return XrWorldMeshGetInfoML.nfillHoleLength(address()); }
-        /** @return the value of the {@link XrWorldMeshGetInfoML#disconnectedComponentArea} field. */
+        /** @return the value of the {@code disconnectedComponentArea} field. */
         public float disconnectedComponentArea() { return XrWorldMeshGetInfoML.ndisconnectedComponentArea(address()); }
-        /** @return the value of the {@link XrWorldMeshGetInfoML#blockCount} field. */
+        /** @return the value of the {@code blockCount} field. */
         @NativeType("uint32_t")
         public int blockCount() { return XrWorldMeshGetInfoML.nblockCount(address()); }
-        /** @return a {@link XrWorldMeshBlockRequestML.Buffer} view of the struct array pointed to by the {@link XrWorldMeshGetInfoML#blocks} field. */
+        /** @return a {@link XrWorldMeshBlockRequestML.Buffer} view of the struct array pointed to by the {@code blocks} field. */
         @NativeType("XrWorldMeshBlockRequestML *")
         public XrWorldMeshBlockRequestML.Buffer blocks() { return XrWorldMeshGetInfoML.nblocks(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshGetInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshGetInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshGetInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_GET_INFO_ML TYPE_WORLD_MESH_GET_INFO_ML} value to the {@link XrWorldMeshGetInfoML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_GET_INFO_ML TYPE_WORLD_MESH_GET_INFO_ML} value to the {@code type} field. */
         public XrWorldMeshGetInfoML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_GET_INFO_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshGetInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshGetInfoML.Buffer next(@NativeType("void const *") long value) { XrWorldMeshGetInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshGetInfoML#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public XrWorldMeshGetInfoML.Buffer flags(@NativeType("XrWorldMeshDetectorFlagsML") long value) { XrWorldMeshGetInfoML.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshGetInfoML#fillHoleLength} field. */
+        /** Sets the specified value to the {@code fillHoleLength} field. */
         public XrWorldMeshGetInfoML.Buffer fillHoleLength(float value) { XrWorldMeshGetInfoML.nfillHoleLength(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshGetInfoML#disconnectedComponentArea} field. */
+        /** Sets the specified value to the {@code disconnectedComponentArea} field. */
         public XrWorldMeshGetInfoML.Buffer disconnectedComponentArea(float value) { XrWorldMeshGetInfoML.ndisconnectedComponentArea(address(), value); return this; }
-        /** Sets the address of the specified {@link XrWorldMeshBlockRequestML.Buffer} to the {@link XrWorldMeshGetInfoML#blocks} field. */
+        /** Sets the address of the specified {@link XrWorldMeshBlockRequestML.Buffer} to the {@code blocks} field. */
         public XrWorldMeshGetInfoML.Buffer blocks(@NativeType("XrWorldMeshBlockRequestML *") XrWorldMeshBlockRequestML.Buffer value) { XrWorldMeshGetInfoML.nblocks(address(), value); return this; }
 
     }

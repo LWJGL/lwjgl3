@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUdevprop {
  *     int maxThreadsPerBlock;
  *     int maxThreadsDim[3];
@@ -31,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int regsPerBlock;
  *     int clockRate;
  *     int textureAlign;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUdevprop extends Struct<CUdevprop> implements NativeResource {
 

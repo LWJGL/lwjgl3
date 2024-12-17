@@ -17,28 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying arrays of key and data pairs.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code pPipelineBinaryKeys} <b>must</b> be a valid pointer to an array of {@code binaryCount} valid {@link VkPipelineBinaryKeyKHR} structures</li>
- * <li>{@code pPipelineBinaryData} <b>must</b> be a valid pointer to an array of {@code binaryCount} valid {@link VkPipelineBinaryDataKHR} structures</li>
- * <li>{@code binaryCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineBinaryCreateInfoKHR}, {@link VkPipelineBinaryDataKHR}, {@link VkPipelineBinaryKeyKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineBinaryKeysAndDataKHR {
- *     uint32_t {@link #binaryCount};
- *     {@link VkPipelineBinaryKeyKHR VkPipelineBinaryKeyKHR} const * {@link #pPipelineBinaryKeys};
- *     {@link VkPipelineBinaryDataKHR VkPipelineBinaryDataKHR} const * {@link #pPipelineBinaryData};
- * }</code></pre>
+ *     uint32_t binaryCount;
+ *     {@link VkPipelineBinaryKeyKHR VkPipelineBinaryKeyKHR} const * pPipelineBinaryKeys;
+ *     {@link VkPipelineBinaryDataKHR VkPipelineBinaryDataKHR} const * pPipelineBinaryData;
+ * }}</pre>
  */
 public class VkPipelineBinaryKeysAndDataKHR extends Struct<VkPipelineBinaryKeysAndDataKHR> implements NativeResource {
 
@@ -91,21 +75,21 @@ public class VkPipelineBinaryKeysAndDataKHR extends Struct<VkPipelineBinaryKeysA
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the size of the {@code pPipelineBinaryKeys} and {@code pPipelineBinaryData} arrays */
+    /** @return the value of the {@code binaryCount} field. */
     @NativeType("uint32_t")
     public int binaryCount() { return nbinaryCount(address()); }
-    /** a pointer to an array of {@link VkPipelineBinaryKeyKHR} structures containing the pipeline binary keys */
+    /** @return a {@link VkPipelineBinaryKeyKHR.Buffer} view of the struct array pointed to by the {@code pPipelineBinaryKeys} field. */
     @NativeType("VkPipelineBinaryKeyKHR const *")
     public VkPipelineBinaryKeyKHR.Buffer pPipelineBinaryKeys() { return npPipelineBinaryKeys(address()); }
-    /** a pointer to an array of {@link VkPipelineBinaryDataKHR} structures containing the pipeline binary data */
+    /** @return a {@link VkPipelineBinaryDataKHR.Buffer} view of the struct array pointed to by the {@code pPipelineBinaryData} field. */
     @NativeType("VkPipelineBinaryDataKHR const *")
     public VkPipelineBinaryDataKHR.Buffer pPipelineBinaryData() { return npPipelineBinaryData(address()); }
 
-    /** Sets the specified value to the {@link #binaryCount} field. */
+    /** Sets the specified value to the {@code binaryCount} field. */
     public VkPipelineBinaryKeysAndDataKHR binaryCount(@NativeType("uint32_t") int value) { nbinaryCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineBinaryKeyKHR.Buffer} to the {@link #pPipelineBinaryKeys} field. */
+    /** Sets the address of the specified {@link VkPipelineBinaryKeyKHR.Buffer} to the {@code pPipelineBinaryKeys} field. */
     public VkPipelineBinaryKeysAndDataKHR pPipelineBinaryKeys(@NativeType("VkPipelineBinaryKeyKHR const *") VkPipelineBinaryKeyKHR.Buffer value) { npPipelineBinaryKeys(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineBinaryDataKHR.Buffer} to the {@link #pPipelineBinaryData} field. */
+    /** Sets the address of the specified {@link VkPipelineBinaryDataKHR.Buffer} to the {@code pPipelineBinaryData} field. */
     public VkPipelineBinaryKeysAndDataKHR pPipelineBinaryData(@NativeType("VkPipelineBinaryDataKHR const *") VkPipelineBinaryDataKHR.Buffer value) { npPipelineBinaryData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,21 +298,21 @@ public class VkPipelineBinaryKeysAndDataKHR extends Struct<VkPipelineBinaryKeysA
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineBinaryKeysAndDataKHR#binaryCount} field. */
+        /** @return the value of the {@code binaryCount} field. */
         @NativeType("uint32_t")
         public int binaryCount() { return VkPipelineBinaryKeysAndDataKHR.nbinaryCount(address()); }
-        /** @return a {@link VkPipelineBinaryKeyKHR.Buffer} view of the struct array pointed to by the {@link VkPipelineBinaryKeysAndDataKHR#pPipelineBinaryKeys} field. */
+        /** @return a {@link VkPipelineBinaryKeyKHR.Buffer} view of the struct array pointed to by the {@code pPipelineBinaryKeys} field. */
         @NativeType("VkPipelineBinaryKeyKHR const *")
         public VkPipelineBinaryKeyKHR.Buffer pPipelineBinaryKeys() { return VkPipelineBinaryKeysAndDataKHR.npPipelineBinaryKeys(address()); }
-        /** @return a {@link VkPipelineBinaryDataKHR.Buffer} view of the struct array pointed to by the {@link VkPipelineBinaryKeysAndDataKHR#pPipelineBinaryData} field. */
+        /** @return a {@link VkPipelineBinaryDataKHR.Buffer} view of the struct array pointed to by the {@code pPipelineBinaryData} field. */
         @NativeType("VkPipelineBinaryDataKHR const *")
         public VkPipelineBinaryDataKHR.Buffer pPipelineBinaryData() { return VkPipelineBinaryKeysAndDataKHR.npPipelineBinaryData(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineBinaryKeysAndDataKHR#binaryCount} field. */
+        /** Sets the specified value to the {@code binaryCount} field. */
         public VkPipelineBinaryKeysAndDataKHR.Buffer binaryCount(@NativeType("uint32_t") int value) { VkPipelineBinaryKeysAndDataKHR.nbinaryCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineBinaryKeyKHR.Buffer} to the {@link VkPipelineBinaryKeysAndDataKHR#pPipelineBinaryKeys} field. */
+        /** Sets the address of the specified {@link VkPipelineBinaryKeyKHR.Buffer} to the {@code pPipelineBinaryKeys} field. */
         public VkPipelineBinaryKeysAndDataKHR.Buffer pPipelineBinaryKeys(@NativeType("VkPipelineBinaryKeyKHR const *") VkPipelineBinaryKeyKHR.Buffer value) { VkPipelineBinaryKeysAndDataKHR.npPipelineBinaryKeys(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineBinaryDataKHR.Buffer} to the {@link VkPipelineBinaryKeysAndDataKHR#pPipelineBinaryData} field. */
+        /** Sets the address of the specified {@link VkPipelineBinaryDataKHR.Buffer} to the {@code pPipelineBinaryData} field. */
         public VkPipelineBinaryKeysAndDataKHR.Buffer pPipelineBinaryData(@NativeType("VkPipelineBinaryDataKHR const *") VkPipelineBinaryDataKHR.Buffer value) { VkPipelineBinaryKeysAndDataKHR.npPipelineBinaryData(address(), value); return this; }
 
     }

@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link Nuklear#nk_combo_callback combo_callback} and {@link Nuklear#nk_combobox_callback combobox_callback} functions.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     void *userdata,
- *     int selected,
- *     char const **item
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_item_getter} */
 @FunctionalInterface
 @NativeType("nk_item_getter")
 public interface NkItemGetterI extends CallbackI {
@@ -47,6 +36,7 @@ public interface NkItemGetterI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code float (* nk_item_getter) (void * userdata, int selected, char const ** item)} */
     float invoke(@NativeType("void *") long userdata, int selected, @NativeType("char const **") long item);
 
 }

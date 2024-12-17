@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     ktxStream *str
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ktxStream_destruct} */
 @FunctionalInterface
 @NativeType("ktxStream_destruct")
 public interface ktxStream_destructI extends CallbackI {
@@ -40,7 +33,7 @@ public interface ktxStream_destructI extends CallbackI {
         );
     }
 
-    /** Destruct a stream. */
+    /** {@code void (* ktxStream_destruct) (ktxStream * str)} */
     void invoke(@NativeType("ktxStream *") long str);
 
 }

@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the opacity micromap properties of a physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceOpacityMicromapPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxOpacity2StateSubdivisionLevel};
- *     uint32_t {@link #maxOpacity4StateSubdivisionLevel};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxOpacity2StateSubdivisionLevel;
+ *     uint32_t maxOpacity4StateSubdivisionLevel;
+ * }}</pre>
  */
 public class VkPhysicalDeviceOpacityMicromapPropertiesEXT extends Struct<VkPhysicalDeviceOpacityMicromapPropertiesEXT> implements NativeResource {
 
@@ -92,24 +78,24 @@ public class VkPhysicalDeviceOpacityMicromapPropertiesEXT extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum allowed {@code subdivisionLevel} when {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} */
+    /** @return the value of the {@code maxOpacity2StateSubdivisionLevel} field. */
     @NativeType("uint32_t")
     public int maxOpacity2StateSubdivisionLevel() { return nmaxOpacity2StateSubdivisionLevel(address()); }
-    /** the maximum allowed {@code subdivisionLevel} when {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT} */
+    /** @return the value of the {@code maxOpacity4StateSubdivisionLevel} field. */
     @NativeType("uint32_t")
     public int maxOpacity4StateSubdivisionLevel() { return nmaxOpacity4StateSubdivisionLevel(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceOpacityMicromapPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceOpacityMicromapPropertiesEXT sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceOpacityMicromapPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,24 +289,24 @@ public class VkPhysicalDeviceOpacityMicromapPropertiesEXT extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceOpacityMicromapPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceOpacityMicromapPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT#maxOpacity2StateSubdivisionLevel} field. */
+        /** @return the value of the {@code maxOpacity2StateSubdivisionLevel} field. */
         @NativeType("uint32_t")
         public int maxOpacity2StateSubdivisionLevel() { return VkPhysicalDeviceOpacityMicromapPropertiesEXT.nmaxOpacity2StateSubdivisionLevel(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT#maxOpacity4StateSubdivisionLevel} field. */
+        /** @return the value of the {@code maxOpacity4StateSubdivisionLevel} field. */
         @NativeType("uint32_t")
         public int maxOpacity4StateSubdivisionLevel() { return VkPhysicalDeviceOpacityMicromapPropertiesEXT.nmaxOpacity4StateSubdivisionLevel(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceOpacityMicromapPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceOpacityMicromapPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceOpacityMicromapPropertiesEXT.Buffer sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceOpacityMicromapPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceOpacityMicromapPropertiesEXT.npNext(address(), value); return this; }
 
     }

@@ -17,27 +17,13 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_surface_compression.txt">EXT_surface_compression</a> extension.
- * 
- * <p>Applications may wish to take advantage of framebuffer compression. Some platforms may support framebuffer compression at fixed bitrates. Such
- * compression algorithms generally produce results that are visually lossless, but the results are typically not bit exact when compared to a
- * non-compressed result.</p>
- * 
- * <p>This extension enables applications to opt-in to fixed-rate compression for EGL window surfaces.</p>
- * 
- * <p>Compression may not be supported for all framebuffer formats. It can still be requested for all formats and applications can query what level of
- * compression was actually enabled.</p>
- */
 public class EXTSurfaceCompression {
 
-    /** New attributes accepted by the {@code attrib_list} argument of {@link EGL15#eglCreatePlatformWindowSurface CreatePlatformWindowSurface} and {@link EGL10#eglCreateWindowSurface CreateWindowSurface}. */
     public static final int
         EGL_SURFACE_COMPRESSION_EXT        = 0x34B0,
         EGL_SURFACE_COMPRESSION_PLANE1_EXT = 0x328E,
         EGL_SURFACE_COMPRESSION_PLANE2_EXT = 0x328F;
 
-    /** Accepted as attribute values for {@link #EGL_SURFACE_COMPRESSION_EXT SURFACE_COMPRESSION_EXT} by {@link EGL15#eglCreatePlatformWindowSurface CreatePlatformWindowSurface} and {@link EGL10#eglCreateWindowSurface CreateWindowSurface}. */
     public static final int
         EGL_SURFACE_COMPRESSION_FIXED_RATE_NONE_EXT    = 0x34B1,
         EGL_SURFACE_COMPRESSION_FIXED_RATE_DEFAULT_EXT = 0x34B2,
@@ -60,7 +46,7 @@ public class EXTSurfaceCompression {
 
     // --- [ eglQuerySupportedCompressionRatesEXT ] ---
 
-    /** Unsafe version of: {@link #eglQuerySupportedCompressionRatesEXT QuerySupportedCompressionRatesEXT} */
+    /** {@code EGLBoolean eglQuerySupportedCompressionRatesEXT(EGLDisplay dpy, EGLConfig config, EGLAttrib const * attrib_list, EGLint * rates, EGLint rate_size, EGLint * num_rates)} */
     public static int neglQuerySupportedCompressionRatesEXT(long dpy, long config, long attrib_list, long rates, int rate_size, long num_rates) {
         long __functionAddress = EGL.getCapabilities().eglQuerySupportedCompressionRatesEXT;
         if (CHECKS) {
@@ -71,25 +57,7 @@ public class EXTSurfaceCompression {
         return callPPPPPI(dpy, config, attrib_list, rates, rate_size, num_rates, __functionAddress);
     }
 
-    /**
-     * Gets the list of all fixed-rate compression rates that are available on a specified display and {@code EGLConfig}.
-     * 
-     * <p>The number of rates is returned in {@code num_rates}, and elements 0 through {@code num_rates-1} of {@code rates} are filled in with the available
-     * compression rates.</p>
-     * 
-     * <p>No more than {@code rate_size} compression rates will be returned even if more are available on the specified display and config. However, if
-     * {@code eglQuerySupportedCompressionRatesEXT} is called with {@code rates = NULL}, then no rates are returned, but the total number of rates
-     * available will be returned in {@code num_rates}.</p>
-     * 
-     * <p>The possible values returned in {@code rates} are the attribute values accepted for {@link #EGL_SURFACE_COMPRESSION_EXT SURFACE_COMPRESSION_EXT} by {@link EGL15#eglCreatePlatformWindowSurface CreatePlatformWindowSurface} and
-     * {@link EGL10#eglCreateWindowSurface CreateWindowSurface}, except {@link #EGL_SURFACE_COMPRESSION_FIXED_RATE_NONE_EXT SURFACE_COMPRESSION_FIXED_RATE_NONE_EXT} and {@link #EGL_SURFACE_COMPRESSION_FIXED_RATE_DEFAULT_EXT SURFACE_COMPRESSION_FIXED_RATE_DEFAULT_EXT}.</p>
-     *
-     * @param attrib_list a list of attributes that will be provided when a surface is created with this combination of display and {@code EGLConfig}. The accepted
-     *                    attributes are the same as for {@link EGL15#eglCreatePlatformWindowSurface CreatePlatformWindowSurface}.
-     * @param rates       a pointer to a buffer containing {@code rate_size} elements.
-     *
-     * @return {@link EGL10#EGL_TRUE TRUE} on success.
-     */
+    /** {@code EGLBoolean eglQuerySupportedCompressionRatesEXT(EGLDisplay dpy, EGLConfig config, EGLAttrib const * attrib_list, EGLint * rates, EGLint rate_size, EGLint * num_rates)} */
     @NativeType("EGLBoolean")
     public static boolean eglQuerySupportedCompressionRatesEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list, @NativeType("EGLint *") @Nullable IntBuffer rates, @NativeType("EGLint *") IntBuffer num_rates) {
         if (CHECKS) {
@@ -99,7 +67,7 @@ public class EXTSurfaceCompression {
         return neglQuerySupportedCompressionRatesEXT(dpy, config, memAddressSafe(attrib_list), memAddressSafe(rates), remainingSafe(rates), memAddress(num_rates)) != 0;
     }
 
-    /** Array version of: {@link #eglQuerySupportedCompressionRatesEXT QuerySupportedCompressionRatesEXT} */
+    /** {@code EGLBoolean eglQuerySupportedCompressionRatesEXT(EGLDisplay dpy, EGLConfig config, EGLAttrib const * attrib_list, EGLint * rates, EGLint rate_size, EGLint * num_rates)} */
     @NativeType("EGLBoolean")
     public static boolean eglQuerySupportedCompressionRatesEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list, @NativeType("EGLint *") int @Nullable [] rates, @NativeType("EGLint *") int[] num_rates) {
         long __functionAddress = EGL.getCapabilities().eglQuerySupportedCompressionRatesEXT;

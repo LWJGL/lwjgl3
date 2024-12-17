@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SQL_TIMESTAMP_STRUCT {
  *     SQLSMALLINT year;
  *     SQLUSMALLINT month;
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SQLUSMALLINT minute;
  *     SQLUSMALLINT second;
  *     SQLUINTEGER fraction;
- * }</code></pre>
+ * }}</pre>
  */
 public class SQL_TIMESTAMP_STRUCT extends Struct<SQL_TIMESTAMP_STRUCT> implements NativeResource {
 

@@ -12,7 +12,6 @@ import java.util.function.IntFunction;
 
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the capabilities of the OpenAL Context API. */
 public final class ALCCapabilities {
 
     // ALC10
@@ -80,53 +79,49 @@ public final class ALCCapabilities {
         alcEventControlSOFT,
         alcEventCallbackSOFT;
 
-    /** When true, {@link ALC10} is supported. */
+    /** When true, {@code ALC10} is supported. */
     public final boolean OpenALC10;
-    /** When true, {@link ALC11} is supported. */
+    /** When true, {@code ALC11} is supported. */
     public final boolean OpenALC11;
-    /** When true, {@link SOFTLoopbackBformat} is supported. */
+    /** When true, {@code ALC_SOFT_loopback_bformat} is supported. */
     public final boolean OpenALC_SOFT_loopback_bformat;
-    /** When true, {@link EnumerateAllExt} is supported. */
+    /** When true, {@code ENUMERATE_ALL_EXT} is supported. */
     public final boolean ALC_ENUMERATE_ALL_EXT;
-    /**
-     * An OpenAL 1.1 implementation will always support the {@code ALC_ENUMERATION_EXT} extension. This extension provides for enumeration of the available OpenAL devices
-     * through {@link ALC10#alcGetString GetString}. An {@link ALC10#alcGetString GetString} query of {@link ALC10#ALC_DEVICE_SPECIFIER DEVICE_SPECIFIER} with a {@code NULL} device passed in will return a list of devices. Each
-     * device name will be separated by a single {@code NULL} character and the list will be terminated with two {@code NULL} characters.
-     */
+    /** When true, {@code ENUMERATION_EXT} is supported. */
     public final boolean ALC_ENUMERATION_EXT;
-    /** When true, {@link EXTCapture} is supported. */
+    /** When true, {@code EXT_CAPTURE} is supported. */
     public final boolean ALC_EXT_CAPTURE;
-    /** When true, the {@link EXTDebug ALC_EXT_debug} extension is supported. */
+    /** When true, {@code EXT_debug} is supported. */
     public final boolean ALC_EXT_debug;
-    /** When true, {@link EXTDedicated} is supported. */
+    /** When true, {@code EXT_DEDICATED} is supported. */
     public final boolean ALC_EXT_DEDICATED;
-    /** When true, {@link EXTDefaultFilterOrder} is supported. */
+    /** When true, {@code EXT_DEFAULT_FILTER_ORDER} is supported. */
     public final boolean ALC_EXT_DEFAULT_FILTER_ORDER;
-    /** When true, {@link EXTDirectContext} is supported. */
+    /** When true, {@code EXT_direct_context} is supported. */
     public final boolean ALC_EXT_direct_context;
-    /** When true, {@link EXTDisconnect} is supported. */
+    /** When true, {@code EXT_disconnect} is supported. */
     public final boolean ALC_EXT_disconnect;
-    /** When true, {@link EXTEfx} is supported. */
+    /** When true, {@code EXT_EFX} is supported. */
     public final boolean ALC_EXT_EFX;
-    /** When true, {@link EXTThreadLocalContext} is supported. */
+    /** When true, {@code EXT_thread_local_context} is supported. */
     public final boolean ALC_EXT_thread_local_context;
-    /** When true, {@link LOKIAudioChannel} is supported. */
+    /** When true, {@code LOKI_audio_channel} is supported. */
     public final boolean ALC_LOKI_audio_channel;
-    /** When true, {@link SOFTDeviceClock} is supported. */
+    /** When true, {@code SOFT_device_clock} is supported. */
     public final boolean ALC_SOFT_device_clock;
-    /** When true, {@link SOFTHRTF} is supported. */
+    /** When true, {@code SOFT_HRTF} is supported. */
     public final boolean ALC_SOFT_HRTF;
-    /** When true, {@link SOFTLoopback} is supported. */
+    /** When true, {@code SOFT_loopback} is supported. */
     public final boolean ALC_SOFT_loopback;
-    /** When true, {@link SOFTOutputLimiter} is supported. */
+    /** When true, {@code SOFT_output_limiter} is supported. */
     public final boolean ALC_SOFT_output_limiter;
-    /** When true, {@link SOFTOutputMode} is supported. */
+    /** When true, {@code SOFT_output_mode} is supported. */
     public final boolean ALC_SOFT_output_mode;
-    /** When true, {@link SOFTPauseDevice} is supported. */
+    /** When true, {@code SOFT_pause_device} is supported. */
     public final boolean ALC_SOFT_pause_device;
-    /** When true, {@link SOFTReopenDevice} is supported. */
+    /** When true, {@code SOFT_reopen_device} is supported. */
     public final boolean ALC_SOFT_reopen_device;
-    /** When true, {@link SOFTSystemEvents} is supported. */
+    /** When true, {@code SOFT_system_events} is supported. */
     public final boolean ALC_SOFT_system_events;
 
     /** Device handle. */

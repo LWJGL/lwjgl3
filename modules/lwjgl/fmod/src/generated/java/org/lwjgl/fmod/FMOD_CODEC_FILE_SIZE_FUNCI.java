@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_CODEC_STATE *codec_state,
- *     unsigned int *size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_CODEC_FILE_SIZE_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_CODEC_FILE_SIZE_FUNC")
 public interface FMOD_CODEC_FILE_SIZE_FUNCI extends CallbackI {
@@ -43,6 +35,7 @@ public interface FMOD_CODEC_FILE_SIZE_FUNCI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_CODEC_FILE_SIZE_FUNC) (struct FMOD_CODEC_STATE * codec_state, unsigned int * size)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_CODEC_STATE *") long codec_state, @NativeType("unsigned int *") long size);
 
 }

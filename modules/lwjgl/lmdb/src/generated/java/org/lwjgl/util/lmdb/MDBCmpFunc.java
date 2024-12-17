@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     MDB_val const *a,
- *     MDB_val const *b
- * )</code></pre>
- */
+/** Callback function: {@link #invoke MDB_cmp_func *} */
 public abstract class MDBCmpFunc extends Callback implements MDBCmpFuncI {
 
     /**

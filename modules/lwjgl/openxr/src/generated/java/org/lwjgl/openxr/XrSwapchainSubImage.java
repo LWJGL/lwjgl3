@@ -17,26 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Composition layer data.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code swapchain} <b>must</b> be a valid {@code XrSwapchain} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerProjectionView}, {@link XrCompositionLayerQuad}, {@link XrCompositionLayerSpaceWarpInfoFB}, {@link XrFoveationApplyInfoHTC}, {@link XrFrameEndInfo}, {@link XrRect2Di}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainSubImage {
- *     XrSwapchain {@link #swapchain};
- *     {@link XrRect2Di XrRect2Di} {@link #imageRect};
- *     uint32_t {@link #imageArrayIndex};
- * }</code></pre>
+ *     XrSwapchain swapchain;
+ *     {@link XrRect2Di XrRect2Di} imageRect;
+ *     uint32_t imageArrayIndex;
+ * }}</pre>
  */
 public class XrSwapchainSubImage extends Struct<XrSwapchainSubImage> implements NativeResource {
 
@@ -89,22 +75,22 @@ public class XrSwapchainSubImage extends Struct<XrSwapchainSubImage> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrSwapchain} to be displayed. */
+    /** @return the value of the {@code swapchain} field. */
     @NativeType("XrSwapchain")
     public long swapchain() { return nswapchain(address()); }
-    /** an {@link XrRect2Di} representing the valid portion of the image to use, in pixels. It also implicitly defines the transform from normalized image coordinates into pixel coordinates. The coordinate origin depends on which graphics API is being used. See the graphics API extension details for more information on the coordinate origin definition. Note that the compositor <b>may</b> bleed in pixels from outside the bounds in some cases, for instance due to mipmapping. */
+    /** @return a {@link XrRect2Di} view of the {@code imageRect} field. */
     public XrRect2Di imageRect() { return nimageRect(address()); }
-    /** the image array index, with 0 meaning the first or only array element. */
+    /** @return the value of the {@code imageArrayIndex} field. */
     @NativeType("uint32_t")
     public int imageArrayIndex() { return nimageArrayIndex(address()); }
 
-    /** Sets the specified value to the {@link #swapchain} field. */
+    /** Sets the specified value to the {@code swapchain} field. */
     public XrSwapchainSubImage swapchain(XrSwapchain value) { nswapchain(address(), value); return this; }
-    /** Copies the specified {@link XrRect2Di} to the {@link #imageRect} field. */
+    /** Copies the specified {@link XrRect2Di} to the {@code imageRect} field. */
     public XrSwapchainSubImage imageRect(XrRect2Di value) { nimageRect(address(), value); return this; }
-    /** Passes the {@link #imageRect} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageRect} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSwapchainSubImage imageRect(java.util.function.Consumer<XrRect2Di> consumer) { consumer.accept(imageRect()); return this; }
-    /** Sets the specified value to the {@link #imageArrayIndex} field. */
+    /** Sets the specified value to the {@code imageArrayIndex} field. */
     public XrSwapchainSubImage imageArrayIndex(@NativeType("uint32_t") int value) { nimageArrayIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,22 +295,22 @@ public class XrSwapchainSubImage extends Struct<XrSwapchainSubImage> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSwapchainSubImage#swapchain} field. */
+        /** @return the value of the {@code swapchain} field. */
         @NativeType("XrSwapchain")
         public long swapchain() { return XrSwapchainSubImage.nswapchain(address()); }
-        /** @return a {@link XrRect2Di} view of the {@link XrSwapchainSubImage#imageRect} field. */
+        /** @return a {@link XrRect2Di} view of the {@code imageRect} field. */
         public XrRect2Di imageRect() { return XrSwapchainSubImage.nimageRect(address()); }
-        /** @return the value of the {@link XrSwapchainSubImage#imageArrayIndex} field. */
+        /** @return the value of the {@code imageArrayIndex} field. */
         @NativeType("uint32_t")
         public int imageArrayIndex() { return XrSwapchainSubImage.nimageArrayIndex(address()); }
 
-        /** Sets the specified value to the {@link XrSwapchainSubImage#swapchain} field. */
+        /** Sets the specified value to the {@code swapchain} field. */
         public XrSwapchainSubImage.Buffer swapchain(XrSwapchain value) { XrSwapchainSubImage.nswapchain(address(), value); return this; }
-        /** Copies the specified {@link XrRect2Di} to the {@link XrSwapchainSubImage#imageRect} field. */
+        /** Copies the specified {@link XrRect2Di} to the {@code imageRect} field. */
         public XrSwapchainSubImage.Buffer imageRect(XrRect2Di value) { XrSwapchainSubImage.nimageRect(address(), value); return this; }
-        /** Passes the {@link XrSwapchainSubImage#imageRect} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageRect} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSwapchainSubImage.Buffer imageRect(java.util.function.Consumer<XrRect2Di> consumer) { consumer.accept(imageRect()); return this; }
-        /** Sets the specified value to the {@link XrSwapchainSubImage#imageArrayIndex} field. */
+        /** Sets the specified value to the {@code imageArrayIndex} field. */
         public XrSwapchainSubImage.Buffer imageArrayIndex(@NativeType("uint32_t") int value) { XrSwapchainSubImage.nimageArrayIndex(address(), value); return this; }
 
     }

@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event containing the latest headset fit state.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLUserCalibration XR_ML_user_calibration} extension <b>must</b> be enabled prior to using {@link XrEventDataHeadsetFitChangedML}</li>
- * <li>{@code type} <b>must</b> be {@link MLUserCalibration#XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLUserCalibration#xrEnableUserCalibrationEventsML EnableUserCalibrationEventsML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataHeadsetFitChangedML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrHeadsetFitStatusML {@link #status};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrHeadsetFitStatusML status;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrEventDataHeadsetFitChangedML extends Struct<XrEventDataHeadsetFitChangedML> implements NativeResource {
 
@@ -94,24 +78,24 @@ public class XrEventDataHeadsetFitChangedML extends Struct<XrEventDataHeadsetFit
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrHeadsetFitStatusML} headset fit status. */
+    /** @return the value of the {@code status} field. */
     @NativeType("XrHeadsetFitStatusML")
     public int status() { return nstatus(address()); }
-    /** the {@code XrTime} at which the {@code status} was captured. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataHeadsetFitChangedML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLUserCalibration#XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLUserCalibration#XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML} value to the {@code type} field. */
     public XrEventDataHeadsetFitChangedML type$Default() { return type(MLUserCalibration.XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataHeadsetFitChangedML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,24 +299,24 @@ public class XrEventDataHeadsetFitChangedML extends Struct<XrEventDataHeadsetFit
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataHeadsetFitChangedML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataHeadsetFitChangedML.ntype(address()); }
-        /** @return the value of the {@link XrEventDataHeadsetFitChangedML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataHeadsetFitChangedML.nnext(address()); }
-        /** @return the value of the {@link XrEventDataHeadsetFitChangedML#status} field. */
+        /** @return the value of the {@code status} field. */
         @NativeType("XrHeadsetFitStatusML")
         public int status() { return XrEventDataHeadsetFitChangedML.nstatus(address()); }
-        /** @return the value of the {@link XrEventDataHeadsetFitChangedML#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrEventDataHeadsetFitChangedML.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataHeadsetFitChangedML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataHeadsetFitChangedML.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataHeadsetFitChangedML.ntype(address(), value); return this; }
-        /** Sets the {@link MLUserCalibration#XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML} value to the {@link XrEventDataHeadsetFitChangedML#type} field. */
+        /** Sets the {@link MLUserCalibration#XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML} value to the {@code type} field. */
         public XrEventDataHeadsetFitChangedML.Buffer type$Default() { return type(MLUserCalibration.XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML); }
-        /** Sets the specified value to the {@link XrEventDataHeadsetFitChangedML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataHeadsetFitChangedML.Buffer next(@NativeType("void const *") long value) { XrEventDataHeadsetFitChangedML.nnext(address(), value); return this; }
 
     }

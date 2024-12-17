@@ -16,25 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Rect in two dimensions, integer values.
- * 
- * <h5>Description</h5>
- * 
- * <p>This variant is for representing discrete values such as texels. For representing physical distances, the floating-point variant {@link XrRect2Df} is used instead.</p>
- * 
- * <p>The {@code offset} is the position of the rectangle corner with minimum value coordinates. The other three corners are computed by adding the {@link XrExtent2Di}{@code ::width} to the {@code x} offset, {@link XrExtent2Di}{@code ::height} to the {@code y} offset, or both.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent2Di}, {@link XrOffset2Di}, {@link XrRect2Df}, {@link XrSwapchainSubImage}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrRect2Di {
- *     {@link XrOffset2Di XrOffset2Di} {@link #offset};
- *     {@link XrExtent2Di XrExtent2Di} {@link #extent};
- * }</code></pre>
+ *     {@link XrOffset2Di XrOffset2Di} offset;
+ *     {@link XrExtent2Di XrExtent2Di} extent;
+ * }}</pre>
  */
 public class XrRect2Di extends Struct<XrRect2Di> implements NativeResource {
 
@@ -84,18 +70,18 @@ public class XrRect2Di extends Struct<XrRect2Di> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@link XrOffset2Di} specifying the integer rectangle offset. */
+    /** @return a {@link XrOffset2Di} view of the {@code offset} field. */
     public XrOffset2Di offset() { return noffset(address()); }
-    /** the {@link XrExtent2Di} specifying the integer rectangle extent. */
+    /** @return a {@link XrExtent2Di} view of the {@code extent} field. */
     public XrExtent2Di extent() { return nextent(address()); }
 
-    /** Copies the specified {@link XrOffset2Di} to the {@link #offset} field. */
+    /** Copies the specified {@link XrOffset2Di} to the {@code offset} field. */
     public XrRect2Di offset(XrOffset2Di value) { noffset(address(), value); return this; }
-    /** Passes the {@link #offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrRect2Di offset(java.util.function.Consumer<XrOffset2Di> consumer) { consumer.accept(offset()); return this; }
-    /** Copies the specified {@link XrExtent2Di} to the {@link #extent} field. */
+    /** Copies the specified {@link XrExtent2Di} to the {@code extent} field. */
     public XrRect2Di extent(XrExtent2Di value) { nextent(address(), value); return this; }
-    /** Passes the {@link #extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrRect2Di extent(java.util.function.Consumer<XrExtent2Di> consumer) { consumer.accept(extent()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -285,18 +271,18 @@ public class XrRect2Di extends Struct<XrRect2Di> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrOffset2Di} view of the {@link XrRect2Di#offset} field. */
+        /** @return a {@link XrOffset2Di} view of the {@code offset} field. */
         public XrOffset2Di offset() { return XrRect2Di.noffset(address()); }
-        /** @return a {@link XrExtent2Di} view of the {@link XrRect2Di#extent} field. */
+        /** @return a {@link XrExtent2Di} view of the {@code extent} field. */
         public XrExtent2Di extent() { return XrRect2Di.nextent(address()); }
 
-        /** Copies the specified {@link XrOffset2Di} to the {@link XrRect2Di#offset} field. */
+        /** Copies the specified {@link XrOffset2Di} to the {@code offset} field. */
         public XrRect2Di.Buffer offset(XrOffset2Di value) { XrRect2Di.noffset(address(), value); return this; }
-        /** Passes the {@link XrRect2Di#offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrRect2Di.Buffer offset(java.util.function.Consumer<XrOffset2Di> consumer) { consumer.accept(offset()); return this; }
-        /** Copies the specified {@link XrExtent2Di} to the {@link XrRect2Di#extent} field. */
+        /** Copies the specified {@link XrExtent2Di} to the {@code extent} field. */
         public XrRect2Di.Buffer extent(XrExtent2Di value) { XrRect2Di.nextent(address(), value); return this; }
-        /** Passes the {@link XrRect2Di#extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrRect2Di.Buffer extent(java.util.function.Consumer<XrExtent2Di> consumer) { consumer.accept(extent()); return this; }
 
     }

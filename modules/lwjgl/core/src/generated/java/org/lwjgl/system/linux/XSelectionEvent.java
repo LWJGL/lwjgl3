@@ -17,22 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Selection event structure.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XSelectionEvent {
  *     int type;
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
  *     Window requestor;
  *     Atom selection;
  *     Atom target;
- *     Atom {@link #property};
+ *     Atom property;
  *     Time time;
- * }</code></pre>
+ * }}</pre>
  */
 public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeResource {
 
@@ -105,13 +101,13 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
 
     /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
     /** @return the value of the {@code requestor} field. */
@@ -123,7 +119,7 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
     /** @return the value of the {@code target} field. */
     @NativeType("Atom")
     public long target() { return ntarget(address()); }
-    /** atom or {@link X11#None} */
+    /** @return the value of the {@code property} field. */
     @NativeType("Atom")
     public long property() { return nproperty(address()); }
     /** @return the value of the {@code time} field. */
@@ -132,11 +128,11 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
 
     /** Sets the specified value to the {@code type} field. */
     public XSelectionEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XSelectionEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XSelectionEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XSelectionEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
     /** Sets the specified value to the {@code requestor} field. */
     public XSelectionEvent requestor(@NativeType("Window") long value) { nrequestor(address(), value); return this; }
@@ -144,7 +140,7 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
     public XSelectionEvent selection(@NativeType("Atom") long value) { nselection(address(), value); return this; }
     /** Sets the specified value to the {@code target} field. */
     public XSelectionEvent target(@NativeType("Atom") long value) { ntarget(address(), value); return this; }
-    /** Sets the specified value to the {@link #property} field. */
+    /** Sets the specified value to the {@code property} field. */
     public XSelectionEvent property(@NativeType("Atom") long value) { nproperty(address(), value); return this; }
     /** Sets the specified value to the {@code time} field. */
     public XSelectionEvent time(@NativeType("Time") long value) { ntime(address(), value); return this; }
@@ -408,13 +404,13 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
 
         /** @return the value of the {@code type} field. */
         public int type() { return XSelectionEvent.ntype(address()); }
-        /** @return the value of the {@link XSelectionEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XSelectionEvent.nserial(address()); }
-        /** @return the value of the {@link XSelectionEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XSelectionEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XSelectionEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XSelectionEvent.ndisplay(address()); }
         /** @return the value of the {@code requestor} field. */
@@ -426,7 +422,7 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
         /** @return the value of the {@code target} field. */
         @NativeType("Atom")
         public long target() { return XSelectionEvent.ntarget(address()); }
-        /** @return the value of the {@link XSelectionEvent#property} field. */
+        /** @return the value of the {@code property} field. */
         @NativeType("Atom")
         public long property() { return XSelectionEvent.nproperty(address()); }
         /** @return the value of the {@code time} field. */
@@ -435,11 +431,11 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
 
         /** Sets the specified value to the {@code type} field. */
         public XSelectionEvent.Buffer type(int value) { XSelectionEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XSelectionEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XSelectionEvent.Buffer serial(@NativeType("unsigned long") long value) { XSelectionEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XSelectionEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XSelectionEvent.Buffer send_event(@NativeType("Bool") boolean value) { XSelectionEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XSelectionEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XSelectionEvent.Buffer display(@NativeType("Display *") long value) { XSelectionEvent.ndisplay(address(), value); return this; }
         /** Sets the specified value to the {@code requestor} field. */
         public XSelectionEvent.Buffer requestor(@NativeType("Window") long value) { XSelectionEvent.nrequestor(address(), value); return this; }
@@ -447,7 +443,7 @@ public class XSelectionEvent extends Struct<XSelectionEvent> implements NativeRe
         public XSelectionEvent.Buffer selection(@NativeType("Atom") long value) { XSelectionEvent.nselection(address(), value); return this; }
         /** Sets the specified value to the {@code target} field. */
         public XSelectionEvent.Buffer target(@NativeType("Atom") long value) { XSelectionEvent.ntarget(address(), value); return this; }
-        /** Sets the specified value to the {@link XSelectionEvent#property} field. */
+        /** Sets the specified value to the {@code property} field. */
         public XSelectionEvent.Buffer property(@NativeType("Atom") long value) { XSelectionEvent.nproperty(address(), value); return this; }
         /** Sets the specified value to the {@code time} field. */
         public XSelectionEvent.Buffer time(@NativeType("Time") long value) { XSelectionEvent.ntime(address(), value); return this; }

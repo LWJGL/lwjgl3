@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct JNINativeMethod {
  *     char * name;
  *     char * signature;
  *     void * fnPtr;
- * }</code></pre>
+ * }}</pre>
  */
 public class JNINativeMethod extends Struct<JNINativeMethod> implements NativeResource {
 

@@ -17,34 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify that an image <b>can</b> be used with a particular set of formats.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code viewFormatCount} is zero, {@code pViewFormats} is ignored and the image is created as if the {@link VkImageFormatListCreateInfo} structure were not included in the {@code pNext} chain of {@link VkImageCreateInfo}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code viewFormatCount} is not 0, each element of {@code pViewFormats} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO}</li>
- * <li>If {@code viewFormatCount} is not 0, {@code pViewFormats} <b>must</b> be a valid pointer to an array of {@code viewFormatCount} valid {@code VkFormat} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageFormatListCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #viewFormatCount};
- *     VkFormat const * {@link #pViewFormats};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t viewFormatCount;
+ *     VkFormat const * pViewFormats;
+ * }}</pre>
  */
 public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateInfo> implements NativeResource {
 
@@ -100,26 +79,26 @@ public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateI
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of entries in the {@code pViewFormats} array. */
+    /** @return the value of the {@code viewFormatCount} field. */
     @NativeType("uint32_t")
     public int viewFormatCount() { return nviewFormatCount(address()); }
-    /** a pointer to an array of {@code VkFormat} values specifying all formats which <b>can</b> be used when creating views of this image. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pViewFormats} field. */
     @NativeType("VkFormat const *")
     public @Nullable IntBuffer pViewFormats() { return npViewFormats(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageFormatListCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO} value to the {@code sType} field. */
     public VkImageFormatListCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageFormatListCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pViewFormats} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pViewFormats} field. */
     public VkImageFormatListCreateInfo pViewFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { npViewFormats(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -330,26 +309,26 @@ public class VkImageFormatListCreateInfo extends Struct<VkImageFormatListCreateI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageFormatListCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageFormatListCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkImageFormatListCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageFormatListCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkImageFormatListCreateInfo#viewFormatCount} field. */
+        /** @return the value of the {@code viewFormatCount} field. */
         @NativeType("uint32_t")
         public int viewFormatCount() { return VkImageFormatListCreateInfo.nviewFormatCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkImageFormatListCreateInfo#pViewFormats} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pViewFormats} field. */
         @NativeType("VkFormat const *")
         public @Nullable IntBuffer pViewFormats() { return VkImageFormatListCreateInfo.npViewFormats(address()); }
 
-        /** Sets the specified value to the {@link VkImageFormatListCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageFormatListCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageFormatListCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO} value to the {@link VkImageFormatListCreateInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO} value to the {@code sType} field. */
         public VkImageFormatListCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkImageFormatListCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageFormatListCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageFormatListCreateInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkImageFormatListCreateInfo#pViewFormats} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pViewFormats} field. */
         public VkImageFormatListCreateInfo.Buffer pViewFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { VkImageFormatListCreateInfo.npViewFormats(address(), value); return this; }
 
     }

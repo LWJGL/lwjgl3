@@ -16,19 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Defines properties shared by all ovrLayer structs, such as {@link OVRLayerEyeFov}.
- * 
- * <p>{@code ovrLayerHeader} is used as a base member in these larger structs. This struct cannot be used by itself except for the case that {@code Type} is
- * {@link OVR#ovrLayerType_Disabled LayerType_Disabled}.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrLayerHeader {
- *     ovrLayerType {@link #Type};
- *     unsigned int {@link #Flags};
+ *     ovrLayerType Type;
+ *     unsigned int Flags;
  *     char[128];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct ovrLayerHeader")
 public class OVRLayerHeader extends Struct<OVRLayerHeader> implements NativeResource {
@@ -81,16 +74,16 @@ public class OVRLayerHeader extends Struct<OVRLayerHeader> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** described by {@code ovrLayerType}. One of:<br><table><tr><td>{@link OVR#ovrLayerType_Disabled LayerType_Disabled}</td><td>{@link OVR#ovrLayerType_EyeFov LayerType_EyeFov}</td><td>{@link OVR#ovrLayerType_EyeFovDepth LayerType_EyeFovDepth}</td><td>{@link OVR#ovrLayerType_Quad LayerType_Quad}</td></tr><tr><td>{@link OVR#ovrLayerType_EyeMatrix LayerType_EyeMatrix}</td><td>{@link OVR#ovrLayerType_EyeFovMultires LayerType_EyeFovMultires}</td><td>{@link OVR#ovrLayerType_Cylinder LayerType_Cylinder}</td><td>{@link OVR#ovrLayerType_Cube LayerType_Cube}</td></tr></table> */
+    /** @return the value of the {@code Type} field. */
     @NativeType("ovrLayerType")
     public int Type() { return nType(address()); }
-    /** described by {@code ovrLayerFlags} */
+    /** @return the value of the {@code Flags} field. */
     @NativeType("unsigned int")
     public int Flags() { return nFlags(address()); }
 
-    /** Sets the specified value to the {@link #Type} field. */
+    /** Sets the specified value to the {@code Type} field. */
     public OVRLayerHeader Type(@NativeType("ovrLayerType") int value) { nType(address(), value); return this; }
-    /** Sets the specified value to the {@link #Flags} field. */
+    /** Sets the specified value to the {@code Flags} field. */
     public OVRLayerHeader Flags(@NativeType("unsigned int") int value) { nFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,16 +292,16 @@ public class OVRLayerHeader extends Struct<OVRLayerHeader> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRLayerHeader#Type} field. */
+        /** @return the value of the {@code Type} field. */
         @NativeType("ovrLayerType")
         public int Type() { return OVRLayerHeader.nType(address()); }
-        /** @return the value of the {@link OVRLayerHeader#Flags} field. */
+        /** @return the value of the {@code Flags} field. */
         @NativeType("unsigned int")
         public int Flags() { return OVRLayerHeader.nFlags(address()); }
 
-        /** Sets the specified value to the {@link OVRLayerHeader#Type} field. */
+        /** Sets the specified value to the {@code Type} field. */
         public OVRLayerHeader.Buffer Type(@NativeType("ovrLayerType") int value) { OVRLayerHeader.nType(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRLayerHeader#Flags} field. */
+        /** Sets the specified value to the {@code Flags} field. */
         public OVRLayerHeader.Buffer Flags(@NativeType("unsigned int") int value) { OVRLayerHeader.nFlags(address(), value); return this; }
 
     }

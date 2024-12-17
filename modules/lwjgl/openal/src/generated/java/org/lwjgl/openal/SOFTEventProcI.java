@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     ALenum eventType,
- *     ALuint object,
- *     ALuint param,
- *     ALsizei length,
- *     ALchar const *message,
- *     ALvoid *userParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ALEVENTPROCSOFT} */
 @FunctionalInterface
 @NativeType("ALEVENTPROCSOFT")
 public interface SOFTEventProcI extends CallbackI {
@@ -50,6 +38,7 @@ public interface SOFTEventProcI extends CallbackI {
         );
     }
 
+    /** {@code void (* ALEVENTPROCSOFT) (ALenum eventType, ALuint object, ALuint param, ALsizei length, ALchar const * message, ALvoid * userParam)} */
     void invoke(@NativeType("ALenum") int eventType, @NativeType("ALuint") int object, @NativeType("ALuint") int param, @NativeType("ALsizei") int length, @NativeType("ALchar const *") long message, @NativeType("ALvoid *") long userParam);
 
 }

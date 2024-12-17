@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_nine_slice {
  *     {@link NkImage struct nk_image} img;
  *     nk_ushort l;
  *     nk_ushort t;
  *     nk_ushort r;
  *     nk_ushort b;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_nine_slice")
 public class NkNineSlice extends Struct<NkNineSlice> implements NativeResource {

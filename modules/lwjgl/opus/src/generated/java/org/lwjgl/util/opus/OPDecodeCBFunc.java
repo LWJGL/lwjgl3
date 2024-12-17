@@ -11,23 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link OpusFile#op_set_decode_callback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *_ctx,
- *     OpusMSDecoder *_decoder,
- *     void *_pcm,
- *     ogg_packet const *_op,
- *     int _nsamples,
- *     int _nchannels,
- *     int _format,
- *     int _li
- * )</code></pre>
- */
+/** Callback function: {@link #invoke op_decode_cb_func} */
 public abstract class OPDecodeCBFunc extends Callback implements OPDecodeCBFuncI {
 
     /**

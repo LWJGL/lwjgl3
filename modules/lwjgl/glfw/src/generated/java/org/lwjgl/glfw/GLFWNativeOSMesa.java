@@ -23,7 +23,6 @@ import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the GLFW library's GLX native access functions. */
 public class GLFWNativeOSMesa {
 
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
@@ -45,7 +44,7 @@ public class GLFWNativeOSMesa {
 
     // --- [ glfwGetOSMesaColorBuffer ] ---
 
-    /** Unsafe version of: {@link #glfwGetOSMesaColorBuffer GetOSMesaColorBuffer} */
+    /** {@code int glfwGetOSMesaColorBuffer(GLFWwindow * window, int * width, int * height, int * format, void ** buffer)} */
     public static int nglfwGetOSMesaColorBuffer(long window, long width, long height, long format, long buffer) {
         long __functionAddress = Functions.GetOSMesaColorBuffer;
         if (CHECKS) {
@@ -54,23 +53,7 @@ public class GLFWNativeOSMesa {
         return invokePPPPPI(window, width, height, format, buffer, __functionAddress);
     }
 
-    /**
-     * Retrieves the color buffer associated with the specified window.
-     * 
-     * <p>This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @param window the window whose color buffer to retrieve
-     * @param width  where to store the width of the color buffer, or {@code NULL}
-     * @param height where to store the height of the color buffer, or {@code NULL}
-     * @param format where to store the OSMesa pixel format of the color buffer, or {@code NULL}
-     * @param buffer where to store the address of the color buffer, or {@code NULL}
-     *
-     * @return {@link GLFW#GLFW_TRUE TRUE} if successful, or {@link GLFW#GLFW_FALSE FALSE} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.3
-     */
+    /** {@code int glfwGetOSMesaColorBuffer(GLFWwindow * window, int * width, int * height, int * format, void ** buffer)} */
     @NativeType("int")
     public static boolean glfwGetOSMesaColorBuffer(@NativeType("GLFWwindow *") long window, @NativeType("int *") @Nullable IntBuffer width, @NativeType("int *") @Nullable IntBuffer height, @NativeType("int *") @Nullable IntBuffer format, @NativeType("void **") @Nullable PointerBuffer buffer) {
         if (CHECKS) {
@@ -84,7 +67,7 @@ public class GLFWNativeOSMesa {
 
     // --- [ glfwGetOSMesaDepthBuffer ] ---
 
-    /** Unsafe version of: {@link #glfwGetOSMesaDepthBuffer GetOSMesaDepthBuffer} */
+    /** {@code int glfwGetOSMesaDepthBuffer(GLFWwindow * window, int * width, int * height, int * bytesPerValue, void ** buffer)} */
     public static int nglfwGetOSMesaDepthBuffer(long window, long width, long height, long bytesPerValue, long buffer) {
         long __functionAddress = Functions.GetOSMesaDepthBuffer;
         if (CHECKS) {
@@ -93,23 +76,7 @@ public class GLFWNativeOSMesa {
         return invokePPPPPI(window, width, height, bytesPerValue, buffer, __functionAddress);
     }
 
-    /**
-     * Retrieves the depth buffer associated with the specified window.
-     * 
-     * <p>This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @param window        the window whose depth buffer to retrieve
-     * @param width         where to store the width of the depth buffer, or {@code NULL}
-     * @param height        where to store the height of the depth buffer, or {@code NULL}
-     * @param bytesPerValue where to store the number of bytes per depth buffer element, or {@code NULL}
-     * @param buffer        where to store the address of the depth buffer, or {@code NULL}
-     *
-     * @return {@link GLFW#GLFW_TRUE TRUE} if successful, or {@link GLFW#GLFW_FALSE FALSE} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.3
-     */
+    /** {@code int glfwGetOSMesaDepthBuffer(GLFWwindow * window, int * width, int * height, int * bytesPerValue, void ** buffer)} */
     public static int glfwGetOSMesaDepthBuffer(@NativeType("GLFWwindow *") long window, @NativeType("int *") @Nullable IntBuffer width, @NativeType("int *") @Nullable IntBuffer height, @NativeType("int *") @Nullable IntBuffer bytesPerValue, @NativeType("void **") @Nullable PointerBuffer buffer) {
         if (CHECKS) {
             checkSafe(width, 1);
@@ -122,19 +89,7 @@ public class GLFWNativeOSMesa {
 
     // --- [ glfwGetOSMesaContext ] ---
 
-    /**
-     * Returns the {@code OSMesaContext} of the specified window.
-     * 
-     * <p>This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @param window the window whose context to retrieve
-     *
-     * @return the {@code OSMesaContext} of the specified window, or {@code NULL} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.3
-     */
+    /** {@code OSMesaContext glfwGetOSMesaContext(GLFWwindow * window)} */
     @NativeType("OSMesaContext")
     public static long glfwGetOSMesaContext(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.GetOSMesaContext;
@@ -144,7 +99,7 @@ public class GLFWNativeOSMesa {
         return invokePP(window, __functionAddress);
     }
 
-    /** Array version of: {@link #glfwGetOSMesaColorBuffer GetOSMesaColorBuffer} */
+    /** {@code int glfwGetOSMesaColorBuffer(GLFWwindow * window, int * width, int * height, int * format, void ** buffer)} */
     @NativeType("int")
     public static boolean glfwGetOSMesaColorBuffer(@NativeType("GLFWwindow *") long window, @NativeType("int *") int @Nullable [] width, @NativeType("int *") int @Nullable [] height, @NativeType("int *") int @Nullable [] format, @NativeType("void **") @Nullable PointerBuffer buffer) {
         long __functionAddress = Functions.GetOSMesaColorBuffer;
@@ -158,7 +113,7 @@ public class GLFWNativeOSMesa {
         return invokePPPPPI(window, width, height, format, memAddressSafe(buffer), __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #glfwGetOSMesaDepthBuffer GetOSMesaDepthBuffer} */
+    /** {@code int glfwGetOSMesaDepthBuffer(GLFWwindow * window, int * width, int * height, int * bytesPerValue, void ** buffer)} */
     public static int glfwGetOSMesaDepthBuffer(@NativeType("GLFWwindow *") long window, @NativeType("int *") int @Nullable [] width, @NativeType("int *") int @Nullable [] height, @NativeType("int *") int @Nullable [] bytesPerValue, @NativeType("void **") @Nullable PointerBuffer buffer) {
         long __functionAddress = Functions.GetOSMesaDepthBuffer;
         if (CHECKS) {
@@ -174,7 +129,7 @@ public class GLFWNativeOSMesa {
     /**
      * Calls {@link #setPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
-     * <p>Example usage: <code>GLFWNativeOSMesa.setPath(GL.getFunctionProvider());</code></p> 
+     * <p>Example usage: {@code GLFWNativeOSMesa.setPath(GL.getFunctionProvider());}</p> 
      *
      * @param sharedLibrary a {@code FunctionProvider} instance that will be cast to {@code SharedLibrary}
      */

@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_PARAMETER_FFT {
  *     int length;
  *     int numchannels;
  *     float * spectrum[32];
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_PARAMETER_FFT extends Struct<FMOD_DSP_PARAMETER_FFT> implements NativeResource {
 

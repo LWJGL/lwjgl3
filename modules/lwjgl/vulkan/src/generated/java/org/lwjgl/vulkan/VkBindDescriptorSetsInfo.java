@@ -17,65 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a descriptor set binding operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code stageFlags} specifies a subset of all stages corresponding to one or more pipeline bind points, the binding operation still affects all stages corresponding to the given pipeline bind point(s) as if the equivalent original version of this command had been called with the same parameters. For example, specifying a {@code stageFlags} value of {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT} | {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT} | {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} is equivalent to calling the original version of this command once with {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS} and once with {@link VK10#VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Each element of {@code pDescriptorSets} <b>must</b> have been allocated with a {@code VkDescriptorSetLayout} that matches (is the same as, or identically defined as) the {@code VkDescriptorSetLayout} at set <em>n</em> in {@code layout}, where <em>n</em> is the sum of {@code firstSet} and the index into {@code pDescriptorSets}</li>
- * <li>{@code dynamicOffsetCount} <b>must</b> be equal to the total number of dynamic descriptors in {@code pDescriptorSets}</li>
- * <li>The sum of {@code firstSet} and {@code descriptorSetCount} <b>must</b> be less than or equal to {@link VkPipelineLayoutCreateInfo}{@code ::setLayoutCount} provided when {@code layout} was created</li>
- * <li>Each element of {@code pDynamicOffsets} which corresponds to a descriptor binding with type {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} <b>must</b> be a multiple of {@link VkPhysicalDeviceLimits}{@code ::minUniformBufferOffsetAlignment}</li>
- * <li>Each element of {@code pDynamicOffsets} which corresponds to a descriptor binding with type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} <b>must</b> be a multiple of {@link VkPhysicalDeviceLimits}{@code ::minStorageBufferOffsetAlignment}</li>
- * <li>For each dynamic uniform or storage buffer binding in {@code pDescriptorSets}, the sum of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dynamic-effective-offset">effective offset</a> and the range of the binding <b>must</b> be less than or equal to the size of the buffer</li>
- * <li>For each dynamic uniform or storage buffer binding in {@code pDescriptorSets}, if the range was set with {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} then {@code pDynamicOffsets} which corresponds to the descriptor binding <b>must</b> be 0</li>
- * <li>Each element of {@code pDescriptorSets} <b>must</b> not have been allocated from a {@code VkDescriptorPool} with the {@link EXTMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT} flag set</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a> feature is not enabled, each element of {@code pDescriptorSets} <b>must</b> be a valid {@code VkDescriptorSet}</li>
- * <li>Each element of {@code pDescriptorSets} <b>must</b> have been allocated with a {@code VkDescriptorSetLayout} which was not created with {@link EXTDescriptorBuffer#VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT}</li>
- * </ul>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>If {@code layout} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the {@code pNext} chain <b>must</b> include a valid {@link VkPipelineLayoutCreateInfo} structure</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineLayoutCreateInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
- * <li>{@code stageFlags} <b>must</b> not be 0</li>
- * <li>If {@code layout} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>{@code pDescriptorSets} <b>must</b> be a valid pointer to an array of {@code descriptorSetCount} valid {@code VkDescriptorSet} handles</li>
- * <li>If {@code dynamicOffsetCount} is not 0, and {@code pDynamicOffsets} is not {@code NULL}, {@code pDynamicOffsets} <b>must</b> be a valid pointer to an array of {@code dynamicOffsetCount} or {@link VK10#VK_NULL_HANDLE NULL_HANDLE} {@code uint32_t} values</li>
- * <li>{@code descriptorSetCount} <b>must</b> be greater than 0</li>
- * <li>Both of {@code layout}, and the elements of {@code pDescriptorSets} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK14#vkCmdBindDescriptorSets2 CmdBindDescriptorSets2}, {@link KHRMaintenance6#vkCmdBindDescriptorSets2KHR CmdBindDescriptorSets2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindDescriptorSetsInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkShaderStageFlags {@link #stageFlags};
- *     VkPipelineLayout {@link #layout};
- *     uint32_t {@link #firstSet};
- *     uint32_t {@link #descriptorSetCount};
- *     VkDescriptorSet const * {@link #pDescriptorSets};
- *     uint32_t {@link #dynamicOffsetCount};
- *     uint32_t const * {@link #pDynamicOffsets};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkShaderStageFlags stageFlags;
+ *     VkPipelineLayout layout;
+ *     uint32_t firstSet;
+ *     uint32_t descriptorSetCount;
+ *     VkDescriptorSet const * pDescriptorSets;
+ *     uint32_t dynamicOffsetCount;
+ *     uint32_t const * pDynamicOffsets;
+ * }}</pre>
  */
 public class VkBindDescriptorSetsInfo extends Struct<VkBindDescriptorSetsInfo> implements NativeResource {
 
@@ -146,53 +99,53 @@ public class VkBindDescriptorSetsInfo extends Struct<VkBindDescriptorSetsInfo> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages the descriptor sets will be bound to. */
+    /** @return the value of the {@code stageFlags} field. */
     @NativeType("VkShaderStageFlags")
     public int stageFlags() { return nstageFlags(address()); }
-    /** a {@code VkPipelineLayout} object used to program the bindings. If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and the layout <b>must</b> be specified by chaining the {@link VkPipelineLayoutCreateInfo} structure off the {@code pNext} */
+    /** @return the value of the {@code layout} field. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
-    /** the set number of the first descriptor set to be bound. */
+    /** @return the value of the {@code firstSet} field. */
     @NativeType("uint32_t")
     public int firstSet() { return nfirstSet(address()); }
-    /** the number of elements in the {@code pDescriptorSets} array. */
+    /** @return the value of the {@code descriptorSetCount} field. */
     @NativeType("uint32_t")
     public int descriptorSetCount() { return ndescriptorSetCount(address()); }
-    /** a pointer to an array of handles to {@code VkDescriptorSet} objects describing the descriptor sets to bind to. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pDescriptorSets} field. */
     @NativeType("VkDescriptorSet const *")
     public LongBuffer pDescriptorSets() { return npDescriptorSets(address()); }
-    /** the number of dynamic offsets in the {@code pDynamicOffsets} array. */
+    /** @return the value of the {@code dynamicOffsetCount} field. */
     @NativeType("uint32_t")
     public int dynamicOffsetCount() { return ndynamicOffsetCount(address()); }
-    /** a pointer to an array of {@code uint32_t} values specifying dynamic offsets. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDynamicOffsets} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pDynamicOffsets() { return npDynamicOffsets(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBindDescriptorSetsInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO} value to the {@code sType} field. */
     public VkBindDescriptorSetsInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBindDescriptorSetsInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
     public VkBindDescriptorSetsInfo pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #stageFlags} field. */
+    /** Sets the specified value to the {@code stageFlags} field. */
     public VkBindDescriptorSetsInfo stageFlags(@NativeType("VkShaderStageFlags") int value) { nstageFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #layout} field. */
+    /** Sets the specified value to the {@code layout} field. */
     public VkBindDescriptorSetsInfo layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #firstSet} field. */
+    /** Sets the specified value to the {@code firstSet} field. */
     public VkBindDescriptorSetsInfo firstSet(@NativeType("uint32_t") int value) { nfirstSet(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pDescriptorSets} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pDescriptorSets} field. */
     public VkBindDescriptorSetsInfo pDescriptorSets(@NativeType("VkDescriptorSet const *") LongBuffer value) { npDescriptorSets(address(), value); return this; }
-    /** Sets the specified value to the {@link #dynamicOffsetCount} field. */
+    /** Sets the specified value to the {@code dynamicOffsetCount} field. */
     public VkBindDescriptorSetsInfo dynamicOffsetCount(@NativeType("uint32_t") int value) { ndynamicOffsetCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDynamicOffsets} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pDynamicOffsets} field. */
     public VkBindDescriptorSetsInfo pDynamicOffsets(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npDynamicOffsets(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -431,53 +384,53 @@ public class VkBindDescriptorSetsInfo extends Struct<VkBindDescriptorSetsInfo> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindDescriptorSetsInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindDescriptorSetsInfo.nsType(address()); }
-        /** @return the value of the {@link VkBindDescriptorSetsInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindDescriptorSetsInfo.npNext(address()); }
-        /** @return the value of the {@link VkBindDescriptorSetsInfo#stageFlags} field. */
+        /** @return the value of the {@code stageFlags} field. */
         @NativeType("VkShaderStageFlags")
         public int stageFlags() { return VkBindDescriptorSetsInfo.nstageFlags(address()); }
-        /** @return the value of the {@link VkBindDescriptorSetsInfo#layout} field. */
+        /** @return the value of the {@code layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkBindDescriptorSetsInfo.nlayout(address()); }
-        /** @return the value of the {@link VkBindDescriptorSetsInfo#firstSet} field. */
+        /** @return the value of the {@code firstSet} field. */
         @NativeType("uint32_t")
         public int firstSet() { return VkBindDescriptorSetsInfo.nfirstSet(address()); }
-        /** @return the value of the {@link VkBindDescriptorSetsInfo#descriptorSetCount} field. */
+        /** @return the value of the {@code descriptorSetCount} field. */
         @NativeType("uint32_t")
         public int descriptorSetCount() { return VkBindDescriptorSetsInfo.ndescriptorSetCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkBindDescriptorSetsInfo#pDescriptorSets} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pDescriptorSets} field. */
         @NativeType("VkDescriptorSet const *")
         public LongBuffer pDescriptorSets() { return VkBindDescriptorSetsInfo.npDescriptorSets(address()); }
-        /** @return the value of the {@link VkBindDescriptorSetsInfo#dynamicOffsetCount} field. */
+        /** @return the value of the {@code dynamicOffsetCount} field. */
         @NativeType("uint32_t")
         public int dynamicOffsetCount() { return VkBindDescriptorSetsInfo.ndynamicOffsetCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkBindDescriptorSetsInfo#pDynamicOffsets} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDynamicOffsets} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pDynamicOffsets() { return VkBindDescriptorSetsInfo.npDynamicOffsets(address()); }
 
-        /** Sets the specified value to the {@link VkBindDescriptorSetsInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBindDescriptorSetsInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindDescriptorSetsInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO} value to the {@link VkBindDescriptorSetsInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO} value to the {@code sType} field. */
         public VkBindDescriptorSetsInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_SETS_INFO); }
-        /** Sets the specified value to the {@link VkBindDescriptorSetsInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBindDescriptorSetsInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindDescriptorSetsInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
         public VkBindDescriptorSetsInfo.Buffer pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkBindDescriptorSetsInfo#stageFlags} field. */
+        /** Sets the specified value to the {@code stageFlags} field. */
         public VkBindDescriptorSetsInfo.Buffer stageFlags(@NativeType("VkShaderStageFlags") int value) { VkBindDescriptorSetsInfo.nstageFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindDescriptorSetsInfo#layout} field. */
+        /** Sets the specified value to the {@code layout} field. */
         public VkBindDescriptorSetsInfo.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkBindDescriptorSetsInfo.nlayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindDescriptorSetsInfo#firstSet} field. */
+        /** Sets the specified value to the {@code firstSet} field. */
         public VkBindDescriptorSetsInfo.Buffer firstSet(@NativeType("uint32_t") int value) { VkBindDescriptorSetsInfo.nfirstSet(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkBindDescriptorSetsInfo#pDescriptorSets} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pDescriptorSets} field. */
         public VkBindDescriptorSetsInfo.Buffer pDescriptorSets(@NativeType("VkDescriptorSet const *") LongBuffer value) { VkBindDescriptorSetsInfo.npDescriptorSets(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindDescriptorSetsInfo#dynamicOffsetCount} field. */
+        /** Sets the specified value to the {@code dynamicOffsetCount} field. */
         public VkBindDescriptorSetsInfo.Buffer dynamicOffsetCount(@NativeType("uint32_t") int value) { VkBindDescriptorSetsInfo.ndynamicOffsetCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkBindDescriptorSetsInfo#pDynamicOffsets} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pDynamicOffsets} field. */
         public VkBindDescriptorSetsInfo.Buffer pDynamicOffsets(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkBindDescriptorSetsInfo.npDynamicOffsets(address(), value); return this; }
 
     }

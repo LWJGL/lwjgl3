@@ -16,35 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying layout token info for a single index buffer command token.
- * 
- * <h5>Description</h5>
- * 
- * <p>This allows for easy layering of Vulkan atop other APIs. When {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_INPUT_MODE_DXGI_INDEX_BUFFER_EXT INDIRECT_COMMANDS_INPUT_MODE_DXGI_INDEX_BUFFER_EXT} is specified, the indirect buffer can contain a {@code D3D12_INDEX_BUFFER_VIEW} instead of {@link VkBindIndexBufferIndirectCommandEXT} as D3D’s DXGI format value is mapped to the {@code VkIndexType}. It works as both structs are otherwise binary compatible.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code mode} <b>must</b> be non-zero</li>
- * <li>{@code mode} <b>must</b> be one of the bits supported in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsInputModes">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsInputModes}</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code mode} <b>must</b> be a valid {@code VkIndirectCommandsInputModeFlagBitsEXT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsTokenDataEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectCommandsIndexBufferTokenEXT {
- *     VkIndirectCommandsInputModeFlagBitsEXT {@link #mode};
- * }</code></pre>
+ *     VkIndirectCommandsInputModeFlagBitsEXT mode;
+ * }}</pre>
  */
 public class VkIndirectCommandsIndexBufferTokenEXT extends Struct<VkIndirectCommandsIndexBufferTokenEXT> implements NativeResource {
 
@@ -91,11 +66,11 @@ public class VkIndirectCommandsIndexBufferTokenEXT extends Struct<VkIndirectComm
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies the mode to use with this token. */
+    /** @return the value of the {@code mode} field. */
     @NativeType("VkIndirectCommandsInputModeFlagBitsEXT")
     public int mode() { return nmode(address()); }
 
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public VkIndirectCommandsIndexBufferTokenEXT mode(@NativeType("VkIndirectCommandsInputModeFlagBitsEXT") int value) { nmode(address(), value); return this; }
 
     /**
@@ -270,11 +245,11 @@ public class VkIndirectCommandsIndexBufferTokenEXT extends Struct<VkIndirectComm
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectCommandsIndexBufferTokenEXT#mode} field. */
+        /** @return the value of the {@code mode} field. */
         @NativeType("VkIndirectCommandsInputModeFlagBitsEXT")
         public int mode() { return VkIndirectCommandsIndexBufferTokenEXT.nmode(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectCommandsIndexBufferTokenEXT#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public VkIndirectCommandsIndexBufferTokenEXT.Buffer mode(@NativeType("VkIndirectCommandsInputModeFlagBitsEXT") int value) { VkIndirectCommandsIndexBufferTokenEXT.nmode(address(), value); return this; }
 
     }

@@ -15,13 +15,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXIdxObjCProtocolRefListInfo {
  *     {@link CXIdxObjCProtocolRefInfo CXIdxObjCProtocolRefInfo} const * const * protocols;
  *     unsigned numProtocols;
- * }</code></pre>
+ * }}</pre>
  */
 public class CXIdxObjCProtocolRefListInfo extends Struct<CXIdxObjCProtocolRefListInfo> {
 

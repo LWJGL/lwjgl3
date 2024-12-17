@@ -16,36 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Filters for entities with specific unique identifiers.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is a space query filter for use with query functions introduced in the {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension.</p>
- * 
- * <p>To query spaces shared with a group, the application <b>can</b> include the {@link XrSpaceGroupUuidFilterInfoMETA} filter in the query filters when calling {@link FBSpatialEntityQuery#xrQuerySpacesFB QuerySpacesFB}.</p>
- * 
- * <p>If {@link XrSpaceGroupUuidFilterInfoMETA} is passed into {@link FBSpatialEntityQuery#xrQuerySpacesFB QuerySpacesFB} and the group UUID is not found by the runtime, the runtime <b>must</b> return an {@link METASpatialEntityGroupSharing#XR_ERROR_SPACE_GROUP_NOT_FOUND_META ERROR_SPACE_GROUP_NOT_FOUND_META} as the {@link XrEventDataSpaceQueryCompleteFB}{@code ::result}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METASpatialEntityGroupSharing XR_META_spatial_entity_group_sharing} extension <b>must</b> be enabled prior to using {@link XrSpaceGroupUuidFilterInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METASpatialEntityGroupSharing#XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META TYPE_SPACE_GROUP_UUID_FILTER_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpaceFilterInfoBaseHeaderFB}, {@link XrSpaceQueryInfoFB}, {@link XrUuid}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceGroupUuidFilterInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrUuid XrUuid} {@link #groupUuid};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrUuid XrUuid} groupUuid;
+ * }}</pre>
  */
 public class XrSpaceGroupUuidFilterInfoMETA extends Struct<XrSpaceGroupUuidFilterInfoMETA> implements NativeResource {
 
@@ -98,24 +74,24 @@ public class XrSpaceGroupUuidFilterInfoMETA extends Struct<XrSpaceGroupUuidFilte
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@link XrUuid} specifying which group UUID that the application wants to query for spaces shared within. */
+    /** @return a {@link XrUuid} view of the {@code groupUuid} field. */
     public XrUuid groupUuid() { return ngroupUuid(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceGroupUuidFilterInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METASpatialEntityGroupSharing#XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META TYPE_SPACE_GROUP_UUID_FILTER_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METASpatialEntityGroupSharing#XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META TYPE_SPACE_GROUP_UUID_FILTER_INFO_META} value to the {@code type} field. */
     public XrSpaceGroupUuidFilterInfoMETA type$Default() { return type(METASpatialEntityGroupSharing.XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceGroupUuidFilterInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrUuid} to the {@link #groupUuid} field. */
+    /** Copies the specified {@link XrUuid} to the {@code groupUuid} field. */
     public XrSpaceGroupUuidFilterInfoMETA groupUuid(XrUuid value) { ngroupUuid(address(), value); return this; }
-    /** Passes the {@link #groupUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code groupUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpaceGroupUuidFilterInfoMETA groupUuid(java.util.function.Consumer<XrUuid> consumer) { consumer.accept(groupUuid()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -311,24 +287,24 @@ public class XrSpaceGroupUuidFilterInfoMETA extends Struct<XrSpaceGroupUuidFilte
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceGroupUuidFilterInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceGroupUuidFilterInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrSpaceGroupUuidFilterInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpaceGroupUuidFilterInfoMETA.nnext(address()); }
-        /** @return a {@link XrUuid} view of the {@link XrSpaceGroupUuidFilterInfoMETA#groupUuid} field. */
+        /** @return a {@link XrUuid} view of the {@code groupUuid} field. */
         public XrUuid groupUuid() { return XrSpaceGroupUuidFilterInfoMETA.ngroupUuid(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceGroupUuidFilterInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceGroupUuidFilterInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceGroupUuidFilterInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METASpatialEntityGroupSharing#XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META TYPE_SPACE_GROUP_UUID_FILTER_INFO_META} value to the {@link XrSpaceGroupUuidFilterInfoMETA#type} field. */
+        /** Sets the {@link METASpatialEntityGroupSharing#XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META TYPE_SPACE_GROUP_UUID_FILTER_INFO_META} value to the {@code type} field. */
         public XrSpaceGroupUuidFilterInfoMETA.Buffer type$Default() { return type(METASpatialEntityGroupSharing.XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META); }
-        /** Sets the specified value to the {@link XrSpaceGroupUuidFilterInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceGroupUuidFilterInfoMETA.Buffer next(@NativeType("void const *") long value) { XrSpaceGroupUuidFilterInfoMETA.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrUuid} to the {@link XrSpaceGroupUuidFilterInfoMETA#groupUuid} field. */
+        /** Copies the specified {@link XrUuid} to the {@code groupUuid} field. */
         public XrSpaceGroupUuidFilterInfoMETA.Buffer groupUuid(XrUuid value) { XrSpaceGroupUuidFilterInfoMETA.ngroupUuid(address(), value); return this; }
-        /** Passes the {@link XrSpaceGroupUuidFilterInfoMETA#groupUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code groupUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpaceGroupUuidFilterInfoMETA.Buffer groupUuid(java.util.function.Consumer<XrUuid> consumer) { consumer.accept(groupUuid()); return this; }
 
     }

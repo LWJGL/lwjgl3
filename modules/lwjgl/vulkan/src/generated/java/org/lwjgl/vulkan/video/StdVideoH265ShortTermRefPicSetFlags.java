@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265ShortTermRefPicSetFlags {
  *     uint32_t inter_ref_pic_set_prediction_flag : 1;
  *     uint32_t delta_rps_sign : 1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH265ShortTermRefPicSetFlags extends Struct<StdVideoH265ShortTermRefPicSetFlags> implements NativeResource {
 

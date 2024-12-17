@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeAV1PictureInfoFlags {
  *     uint32_t error_resilient_mode : 1;
  *     uint32_t disable_cdf_update : 1;
@@ -50,7 +48,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t show_frame : 1;
  *     uint32_t showable_frame : 1;
  *     uint32_t reserved : 3;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeAV1PictureInfoFlags extends Struct<StdVideoEncodeAV1PictureInfoFlags> implements NativeResource {
 

@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to enable headset fit events.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLUserCalibration XR_ML_user_calibration} extension <b>must</b> be enabled prior to using {@link XrUserCalibrationEnableEventsInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLUserCalibration#XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLUserCalibration#xrEnableUserCalibrationEventsML EnableUserCalibrationEventsML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrUserCalibrationEnableEventsInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrBool32 {@link #enabled};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrBool32 enabled;
+ * }}</pre>
  */
 public class XrUserCalibrationEnableEventsInfoML extends Struct<XrUserCalibrationEnableEventsInfoML> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class XrUserCalibrationEnableEventsInfoML extends Struct<XrUserCalibratio
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the flag to enable/disable user calibration events. */
+    /** @return the value of the {@code enabled} field. */
     @NativeType("XrBool32")
     public boolean enabled() { return nenabled(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrUserCalibrationEnableEventsInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLUserCalibration#XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLUserCalibration#XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML} value to the {@code type} field. */
     public XrUserCalibrationEnableEventsInfoML type$Default() { return type(MLUserCalibration.XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrUserCalibrationEnableEventsInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #enabled} field. */
+    /** Sets the specified value to the {@code enabled} field. */
     public XrUserCalibrationEnableEventsInfoML enabled(@NativeType("XrBool32") boolean value) { nenabled(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,23 +286,23 @@ public class XrUserCalibrationEnableEventsInfoML extends Struct<XrUserCalibratio
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrUserCalibrationEnableEventsInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrUserCalibrationEnableEventsInfoML.ntype(address()); }
-        /** @return the value of the {@link XrUserCalibrationEnableEventsInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrUserCalibrationEnableEventsInfoML.nnext(address()); }
-        /** @return the value of the {@link XrUserCalibrationEnableEventsInfoML#enabled} field. */
+        /** @return the value of the {@code enabled} field. */
         @NativeType("XrBool32")
         public boolean enabled() { return XrUserCalibrationEnableEventsInfoML.nenabled(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrUserCalibrationEnableEventsInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrUserCalibrationEnableEventsInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrUserCalibrationEnableEventsInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLUserCalibration#XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML} value to the {@link XrUserCalibrationEnableEventsInfoML#type} field. */
+        /** Sets the {@link MLUserCalibration#XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML} value to the {@code type} field. */
         public XrUserCalibrationEnableEventsInfoML.Buffer type$Default() { return type(MLUserCalibration.XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML); }
-        /** Sets the specified value to the {@link XrUserCalibrationEnableEventsInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrUserCalibrationEnableEventsInfoML.Buffer next(@NativeType("void const *") long value) { XrUserCalibrationEnableEventsInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrUserCalibrationEnableEventsInfoML#enabled} field. */
+        /** Sets the specified value to the {@code enabled} field. */
         public XrUserCalibrationEnableEventsInfoML.Buffer enabled(@NativeType("XrBool32") boolean value) { XrUserCalibrationEnableEventsInfoML.nenabled(address(), value ? 1 : 0); return this; }
 
     }

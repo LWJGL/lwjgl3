@@ -16,103 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created framebuffer.
- * 
- * <h5>Description</h5>
- * 
- * <p>It is legal for a subpass to use no color or depth/stencil attachments, either because it has no attachment references or because all of them are {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}. This kind of subpass <b>can</b> use shader side effects such as image stores and atomics to produce an output. In this case, the subpass continues to use the {@code width}, {@code height}, and {@code layers} of the framebuffer to define the dimensions of the rendering area, and the {@code rasterizationSamples} from each pipeline’s {@link VkPipelineMultisampleStateCreateInfo} to define the number of samples used in rasterization; however, if {@link VkPhysicalDeviceFeatures}{@code ::variableMultisampleRate} is {@link VK10#VK_FALSE FALSE}, then all pipelines to be bound with the subpass <b>must</b> have the same value for {@link VkPipelineMultisampleStateCreateInfo}{@code ::rasterizationSamples}. In all such cases, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value that is set in {@link VkPhysicalDeviceLimits}{@code ::framebufferNoAttachmentsSampleCounts}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code attachmentCount} <b>must</b> be equal to the attachment count specified in {@code renderPass}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT} and {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@code VkImageView} handles</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is used as a color attachment or resolve attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is used as a depth/stencil attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is used as a depth/stencil resolve attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code renderpass} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is used as an input attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
- * <li>Each element of {@code pAttachments} that is used as a fragment density map attachment by {@code renderPass} <b>must</b> not have been created with a {@code flags} value including {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
- * <li>If {@code renderPass} has a fragment density map attachment and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMapNonSubsampledImages">{@code fragmentDensityMapNonSubsampledImages}</a> feature is not enabled, each element of {@code pAttachments} <b>must</b> have been created with a {@code flags} value including {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT} unless that element is the fragment density map attachment</li>
- * <li>If {@code renderPass} was created with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-fragmentdensitymapoffsets">fragment density map offsets</a> other than <code>(0,0)</code>, each element of {@code pAttachments} <b>must</b> have been created with a {@code flags} value including {@link QCOMFragmentDensityMapOffset#VK_IMAGE_CREATE_FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM IMAGE_CREATE_FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} <b>must</b> have been created with a {@code VkFormat} value that matches the {@code VkFormat} specified by the corresponding {@link VkAttachmentDescription} in {@code renderPass}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} <b>must</b> have been created with a {@code samples} value that matches the {@code samples} value specified by the corresponding {@link VkAttachmentDescription} in {@code renderPass}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is used as an input, color, resolve, or depth/stencil attachment by {@code renderPass} <b>must</b> have been created with a {@link VkImageCreateInfo}{@code ::extent.width} greater than or equal to {@code width}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is used as an input, color, resolve, or depth/stencil attachment by {@code renderPass} <b>must</b> have been created with a {@link VkImageCreateInfo}{@code ::extent.height} greater than or equal to {@code height}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is used as an input, color, resolve, or depth/stencil attachment by {@code renderPass} <b>must</b> have been created with a {@link VkImageViewCreateInfo}{@code ::subresourceRange.layerCount} greater than or equal to {@code layers}</li>
- * <li>If {@code renderPass} was specified with non-zero view masks, each element of {@code pAttachments} that is used as an input, color, resolve, or depth/stencil attachment by {@code renderPass} <b>must</b> have a {@code layerCount} greater than the index of the most significant bit set in any of those view masks</li>
- * <li>Each element of {@code pAttachments} that is referenced by {@code fragmentDensityMapAttachment} <b>must</b> have a {@code layerCount} equal to 1 or if {@code renderPass} was specified with non-zero view masks, greater than the index of the most significant bit set in any of those view masks</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, an element of {@code pAttachments} that is referenced by {@code fragmentDensityMapAttachment} <b>must</b> have a width at least as large as <code>ceil(width / maxFragmentDensityTexelSize<sub>width</sub>)</code></li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, an element of {@code pAttachments} that is referenced by {@code fragmentDensityMapAttachment} <b>must</b> have a height at least as large as <code>ceil(height / maxFragmentDensityTexelSize<sub>height</sub>)</code></li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, and {@code renderPass} was specified with non-zero view masks, each element of {@code pAttachments} that is used as a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a> by {@code renderPass} <b>must</b> have a {@code layerCount} that is either 1, or greater than the index of the most significant bit set in any of those view masks</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, and {@code renderPass} was not specified with non-zero view masks, each element of {@code pAttachments} that is used as a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a> by {@code renderPass} <b>must</b> have a {@code layerCount} that is either 1, or greater than {@code layers}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-maintenance7">{@code maintenance7}</a> feature is not enabled or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-robustFragmentShadingRateAttachmentAccess">{@code robustFragmentShadingRateAttachmentAccess}</a> limit is {@link VK10#VK_FALSE FALSE} or the {@code imageView} member of a {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} structure was created with {@link VkImageSubresourceRange}{@code ::baseMipLevel} greater than 0, {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, an element of {@code pAttachments} that is used as a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a> <b>must</b> have a width at least as large as <code>⌈width / texelWidth⌉</code>, where {@code texelWidth} is the largest value of {@code shadingRateAttachmentTexelSize.width} in a {@link VkFragmentShadingRateAttachmentInfoKHR} which references that attachment</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-maintenance7">{@code maintenance7}</a> feature is not enabled or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-robustFragmentShadingRateAttachmentAccess">{@code robustFragmentShadingRateAttachmentAccess}</a> limit is {@link VK10#VK_FALSE FALSE} or the {@code imageView} member of a {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} structure was created with {@link VkImageSubresourceRange}{@code ::baseMipLevel} greater than 0, {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, an element of {@code pAttachments} that is used as a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a> <b>must</b> have a height at least as large as <code>⌈height / texelHeight⌉</code>, where {@code texelHeight} is the largest value of {@code shadingRateAttachmentTexelSize.height} in a {@link VkFragmentShadingRateAttachmentInfoKHR} which references that attachment</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} <b>must</b> only specify a single mip level</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} <b>must</b> have been created with the identity swizzle</li>
- * <li>{@code width} <b>must</b> be greater than 0</li>
- * <li>{@code width} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFramebufferWidth">{@code maxFramebufferWidth}</a></li>
- * <li>{@code height} <b>must</b> be greater than 0</li>
- * <li>{@code height} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFramebufferHeight">{@code maxFramebufferHeight}</a></li>
- * <li>{@code layers} <b>must</b> be greater than 0</li>
- * <li>{@code layers} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFramebufferLayers">{@code maxFramebufferLayers}</a></li>
- * <li>If {@code renderPass} was specified with non-zero view masks, {@code layers} <b>must</b> be 1</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is a 2D or 2D array image view taken from a 3D image <b>must</b> not be a depth/stencil format</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-imagelessFramebuffer">{@code imagelessFramebuffer}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code pNext} chain <b>must</b> include a {@link VkFramebufferAttachmentsCreateInfo} structure</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code attachmentImageInfoCount} member of a {@link VkFramebufferAttachmentsCreateInfo} structure in the {@code pNext} chain <b>must</b> be equal to either zero or {@code attachmentCount}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code width} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure in the {@code pNext} chain that is used as an input, color, resolve or depth/stencil attachment in {@code renderPass} <b>must</b> be greater than or equal to {@code width}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code height} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure in the {@code pNext} chain that is used as an input, color, resolve or depth/stencil attachment in {@code renderPass} <b>must</b> be greater than or equal to {@code height}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code width} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure in the {@code pNext} chain that is referenced by {@link VkRenderPassFragmentDensityMapCreateInfoEXT}{@code ::fragmentDensityMapAttachment} in {@code renderPass} <b>must</b> be greater than or equal to <code>ceil(width / maxFragmentDensityTexelSize<sub>width</sub>)</code></li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code height} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain that is referenced by {@link VkRenderPassFragmentDensityMapCreateInfoEXT}{@code ::fragmentDensityMapAttachment} in {@code renderPass} <b>must</b> be greater than or equal to <code>ceil(height / maxFragmentDensityTexelSize<sub>height</sub>)</code></li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-maintenance7">{@code maintenance7}</a> feature is not enabled or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-robustFragmentShadingRateAttachmentAccess">{@code robustFragmentShadingRateAttachmentAccess}</a> limit is {@link VK10#VK_FALSE FALSE} or the {@code imageView} member of a {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} structure was created with {@link VkImageSubresourceRange}{@code ::baseMipLevel} greater than 0, and {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code width} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure in the {@code pNext} chain that is used as a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a> <b>must</b> be greater than or equal to <code>⌈width / texelWidth⌉</code>, where {@code texelWidth} is the largest value of {@code shadingRateAttachmentTexelSize.width} in a {@link VkFragmentShadingRateAttachmentInfoKHR} which references that attachment</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-maintenance7">{@code maintenance7}</a> feature is not enabled or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-robustFragmentShadingRateAttachmentAccess">{@code robustFragmentShadingRateAttachmentAccess}</a> limit is {@link VK10#VK_FALSE FALSE} or the {@code imageView} member of a {@link VkRenderingFragmentShadingRateAttachmentInfoKHR} structure was created with {@link VkImageSubresourceRange}{@code ::baseMipLevel} greater than 0, and {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code height} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure in the {@code pNext} chain that is used as a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a> <b>must</b> be greater than or equal to <code>⌈height / texelHeight⌉</code>, where {@code texelHeight} is the largest value of {@code shadingRateAttachmentTexelSize.height} in a {@link VkFragmentShadingRateAttachmentInfoKHR} which references that attachment</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code layerCount} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure in the {@code pNext} chain that is used as a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a> <b>must</b> be either 1, or greater than or equal to {@code layers}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT} and {@code renderPass} was specified with non-zero view masks, the {@code layerCount} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure in the {@code pNext} chain that is used as a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a> <b>must</b> be either 1, or greater than the index of the most significant bit set in any of those view masks</li>
- * <li>If multiview is enabled for {@code renderPass} and {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code layerCount} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain used as an input, color, resolve, or depth/stencil attachment in {@code renderPass} <b>must</b> be greater than the maximum bit index set in the view mask in the subpasses in which it is used in {@code renderPass}</li>
- * <li>If multiview is not enabled for {@code renderPass} and {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code layerCount} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain used as an input, color, resolve, or depth/stencil attachment in {@code renderPass} <b>must</b> be greater than or equal to {@code layers}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code usage} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain that refers to an attachment used as a color attachment or resolve attachment by {@code renderPass} <b>must</b> include {@link VK10#VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT IMAGE_USAGE_COLOR_ATTACHMENT_BIT}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code usage} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain that refers to an attachment used as a depth/stencil attachment by {@code renderPass} <b>must</b> include {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code usage} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain that refers to an attachment used as a depth/stencil resolve attachment by {@code renderPass} <b>must</b> include {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code usage} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain that refers to an attachment used as an input attachment by {@code renderPass} <b>must</b> include {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, at least one element of the {@code pViewFormats} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain <b>must</b> be equal to the corresponding value of {@link VkAttachmentDescription}{@code ::format} used to create {@code renderPass}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} <b>must</b> have been created with {@link VkImageViewCreateInfo}{@code ::viewType} not equal to {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, each element of {@code pAttachments} that is used as a fragment shading rate attachment by {@code renderPass} <b>must</b> have been created with a {@code usage} value including {@link KHRFragmentShadingRate#VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
- * <li>If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the {@code usage} member of any element of the {@code pAttachmentImageInfos} member of a {@link VkFramebufferAttachmentsCreateInfo} structure included in the {@code pNext} chain that refers to an attachment used as a fragment shading rate attachment by {@code renderPass} <b>must</b> include {@link KHRFragmentShadingRate#VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#subpass-multisampledrendertosinglesampled">multisampled-render-to-single-sampled</a> is enabled for any subpass, all color, depth/stencil and input attachments used in that subpass which have {@link VkAttachmentDescription}{@code ::samples} or {@link VkAttachmentDescription2}{@code ::samples} equal to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT} <b>must</b> have been created with {@link EXTMultisampledRenderToSingleSampled#VK_IMAGE_CREATE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT IMAGE_CREATE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT} in their {@link VkImageCreateInfo}{@code ::flags}</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#subpass-multisampledrendertosinglesampled">multisampled-render-to-single-sampled</a> is enabled for any subpass, all color, depth/stencil and input attachments used in that subpass which have {@link VkAttachmentDescription}{@code ::samples} or {@link VkAttachmentDescription2}{@code ::samples} equal to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT} <b>must</b> have a format that supports the sample count specified in {@link VkMultisampledRenderToSingleSampledInfoEXT}{@code ::rasterizationSamples}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-nullColorAttachmentWithExternalFormatResolve">{@code nullColorAttachmentWithExternalFormatResolve}</a> is {@link VK10#VK_FALSE FALSE}, and {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, the format of the color attachment for each subpass in {@code renderPass} that includes an external format image as a resolve attachment <b>must</b> have a format equal to the value of {@link VkAndroidHardwareBufferFormatResolvePropertiesANDROID}{@code ::colorAttachmentFormat} as returned by a call to {@link ANDROIDExternalMemoryAndroidHardwareBuffer#vkGetAndroidHardwareBufferPropertiesANDROID GetAndroidHardwareBufferPropertiesANDROID} for the Android hardware buffer that was used to create the image view use as its resolve attachment</li>
- * <li>If {@code flags} does not include {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, then if an element of {@code pAttachments} has a format of {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> have been created with a {@link VkExternalFormatANDROID}{@code ::externalFormat} value identical to that provided in the {@link VkExternalFormatANDROID}{@code ::externalFormat} specified by the corresponding {@link VkAttachmentDescription2} in {@code renderPass}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkFramebufferAttachmentsCreateInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkFramebufferCreateFlagBits} values</li>
- * <li>{@code renderPass} <b>must</b> be a valid {@code VkRenderPass} handle</li>
- * <li>Both of {@code renderPass}, and the elements of {@code pAttachments} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkCreateFramebuffer CreateFramebuffer}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkFramebufferCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkFramebufferCreateFlags {@link #flags};
- *     VkRenderPass {@link #renderPass};
- *     uint32_t {@link #attachmentCount};
- *     VkImageView const * {@link #pAttachments};
- *     uint32_t {@link #width};
- *     uint32_t {@link #height};
- *     uint32_t {@link #layers};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkFramebufferCreateFlags flags;
+ *     VkRenderPass renderPass;
+ *     uint32_t attachmentCount;
+ *     VkImageView const * pAttachments;
+ *     uint32_t width;
+ *     uint32_t height;
+ *     uint32_t layers;
+ * }}</pre>
  */
 public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> implements NativeResource {
 
@@ -183,57 +98,57 @@ public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkFramebufferCreateFlagBits} */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkFramebufferCreateFlags")
     public int flags() { return nflags(address()); }
-    /** a render pass defining what render passes the framebuffer will be compatible with. See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-compatibility">Render Pass Compatibility</a> for details. */
+    /** @return the value of the {@code renderPass} field. */
     @NativeType("VkRenderPass")
     public long renderPass() { return nrenderPass(address()); }
-    /** the number of attachments. */
+    /** @return the value of the {@code attachmentCount} field. */
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
-    /** a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in a render pass instance. If {@code flags} includes {@link VK12#VK_FRAMEBUFFER_CREATE_IMAGELESS_BIT FRAMEBUFFER_CREATE_IMAGELESS_BIT}, this parameter is ignored. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAttachments} field. */
     @NativeType("VkImageView const *")
     public @Nullable LongBuffer pAttachments() { return npAttachments(address()); }
-    /** {@code width}, {@code height} and {@code layers} define the dimensions of the framebuffer. If the render pass uses multiview, then {@code layers} <b>must</b> be one and each attachment requires a number of layers that is greater than the maximum bit index set in the view mask in the subpasses in which it is used. */
+    /** @return the value of the {@code width} field. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** see {@code width} */
+    /** @return the value of the {@code height} field. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** see {@code width} */
+    /** @return the value of the {@code layers} field. */
     @NativeType("uint32_t")
     public int layers() { return nlayers(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkFramebufferCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO} value to the {@code sType} field. */
     public VkFramebufferCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkFramebufferCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkFramebufferAttachmentsCreateInfo} value to the {@code pNext} chain. */
     public VkFramebufferCreateInfo pNext(VkFramebufferAttachmentsCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkFramebufferAttachmentsCreateInfoKHR} value to the {@code pNext} chain. */
     public VkFramebufferCreateInfo pNext(VkFramebufferAttachmentsCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkFramebufferCreateInfo flags(@NativeType("VkFramebufferCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #renderPass} field. */
+    /** Sets the specified value to the {@code renderPass} field. */
     public VkFramebufferCreateInfo renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
-    /** Sets the specified value to the {@link #attachmentCount} field. */
+    /** Sets the specified value to the {@code attachmentCount} field. */
     public VkFramebufferCreateInfo attachmentCount(@NativeType("uint32_t") int value) { nattachmentCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pAttachments} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pAttachments} field. */
     public VkFramebufferCreateInfo pAttachments(@Nullable @NativeType("VkImageView const *") LongBuffer value) { npAttachments(address(), value); return this; }
-    /** Sets the specified value to the {@link #width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public VkFramebufferCreateInfo width(@NativeType("uint32_t") int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public VkFramebufferCreateInfo height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@link #layers} field. */
+    /** Sets the specified value to the {@code layers} field. */
     public VkFramebufferCreateInfo layers(@NativeType("uint32_t") int value) { nlayers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -484,57 +399,57 @@ public class VkFramebufferCreateInfo extends Struct<VkFramebufferCreateInfo> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkFramebufferCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkFramebufferCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkFramebufferCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkFramebufferCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkFramebufferCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkFramebufferCreateFlags")
         public int flags() { return VkFramebufferCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkFramebufferCreateInfo#renderPass} field. */
+        /** @return the value of the {@code renderPass} field. */
         @NativeType("VkRenderPass")
         public long renderPass() { return VkFramebufferCreateInfo.nrenderPass(address()); }
-        /** @return the value of the {@link VkFramebufferCreateInfo#attachmentCount} field. */
+        /** @return the value of the {@code attachmentCount} field. */
         @NativeType("uint32_t")
         public int attachmentCount() { return VkFramebufferCreateInfo.nattachmentCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkFramebufferCreateInfo#pAttachments} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAttachments} field. */
         @NativeType("VkImageView const *")
         public @Nullable LongBuffer pAttachments() { return VkFramebufferCreateInfo.npAttachments(address()); }
-        /** @return the value of the {@link VkFramebufferCreateInfo#width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("uint32_t")
         public int width() { return VkFramebufferCreateInfo.nwidth(address()); }
-        /** @return the value of the {@link VkFramebufferCreateInfo#height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("uint32_t")
         public int height() { return VkFramebufferCreateInfo.nheight(address()); }
-        /** @return the value of the {@link VkFramebufferCreateInfo#layers} field. */
+        /** @return the value of the {@code layers} field. */
         @NativeType("uint32_t")
         public int layers() { return VkFramebufferCreateInfo.nlayers(address()); }
 
-        /** Sets the specified value to the {@link VkFramebufferCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkFramebufferCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkFramebufferCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO} value to the {@link VkFramebufferCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO} value to the {@code sType} field. */
         public VkFramebufferCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkFramebufferCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkFramebufferCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkFramebufferCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkFramebufferAttachmentsCreateInfo} value to the {@code pNext} chain. */
         public VkFramebufferCreateInfo.Buffer pNext(VkFramebufferAttachmentsCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkFramebufferAttachmentsCreateInfoKHR} value to the {@code pNext} chain. */
         public VkFramebufferCreateInfo.Buffer pNext(VkFramebufferAttachmentsCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkFramebufferCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkFramebufferCreateInfo.Buffer flags(@NativeType("VkFramebufferCreateFlags") int value) { VkFramebufferCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkFramebufferCreateInfo#renderPass} field. */
+        /** Sets the specified value to the {@code renderPass} field. */
         public VkFramebufferCreateInfo.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkFramebufferCreateInfo.nrenderPass(address(), value); return this; }
-        /** Sets the specified value to the {@link VkFramebufferCreateInfo#attachmentCount} field. */
+        /** Sets the specified value to the {@code attachmentCount} field. */
         public VkFramebufferCreateInfo.Buffer attachmentCount(@NativeType("uint32_t") int value) { VkFramebufferCreateInfo.nattachmentCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkFramebufferCreateInfo#pAttachments} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pAttachments} field. */
         public VkFramebufferCreateInfo.Buffer pAttachments(@Nullable @NativeType("VkImageView const *") LongBuffer value) { VkFramebufferCreateInfo.npAttachments(address(), value); return this; }
-        /** Sets the specified value to the {@link VkFramebufferCreateInfo#width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public VkFramebufferCreateInfo.Buffer width(@NativeType("uint32_t") int value) { VkFramebufferCreateInfo.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@link VkFramebufferCreateInfo#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public VkFramebufferCreateInfo.Buffer height(@NativeType("uint32_t") int value) { VkFramebufferCreateInfo.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@link VkFramebufferCreateInfo#layers} field. */
+        /** Sets the specified value to the {@code layers} field. */
         public VkFramebufferCreateInfo.Buffer layers(@NativeType("uint32_t") int value) { VkFramebufferCreateInfo.nlayers(address(), value); return this; }
 
     }

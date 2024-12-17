@@ -16,27 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying sparse image format properties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSparseImageFormatProperties}, {@link VK11#vkGetPhysicalDeviceSparseImageFormatProperties2 GetPhysicalDeviceSparseImageFormatProperties2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceSparseImageFormatProperties2KHR GetPhysicalDeviceSparseImageFormatProperties2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSparseImageFormatProperties2 {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkSparseImageFormatProperties VkSparseImageFormatProperties} {@link #properties};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkSparseImageFormatProperties VkSparseImageFormatProperties} properties;
+ * }}</pre>
  */
 public class VkSparseImageFormatProperties2 extends Struct<VkSparseImageFormatProperties2> implements NativeResource {
 
@@ -89,20 +74,20 @@ public class VkSparseImageFormatProperties2 extends Struct<VkSparseImageFormatPr
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkSparseImageFormatProperties} structure which is populated with the same values as in {@link VK10#vkGetPhysicalDeviceSparseImageFormatProperties GetPhysicalDeviceSparseImageFormatProperties}. */
+    /** @return a {@link VkSparseImageFormatProperties} view of the {@code properties} field. */
     public VkSparseImageFormatProperties properties() { return nproperties(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSparseImageFormatProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2} value to the {@code sType} field. */
     public VkSparseImageFormatProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSparseImageFormatProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,20 +298,20 @@ public class VkSparseImageFormatProperties2 extends Struct<VkSparseImageFormatPr
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSparseImageFormatProperties2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSparseImageFormatProperties2.nsType(address()); }
-        /** @return the value of the {@link VkSparseImageFormatProperties2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSparseImageFormatProperties2.npNext(address()); }
-        /** @return a {@link VkSparseImageFormatProperties} view of the {@link VkSparseImageFormatProperties2#properties} field. */
+        /** @return a {@link VkSparseImageFormatProperties} view of the {@code properties} field. */
         public VkSparseImageFormatProperties properties() { return VkSparseImageFormatProperties2.nproperties(address()); }
 
-        /** Sets the specified value to the {@link VkSparseImageFormatProperties2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSparseImageFormatProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkSparseImageFormatProperties2.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2} value to the {@link VkSparseImageFormatProperties2#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2 STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2} value to the {@code sType} field. */
         public VkSparseImageFormatProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2); }
-        /** Sets the specified value to the {@link VkSparseImageFormatProperties2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSparseImageFormatProperties2.Buffer pNext(@NativeType("void *") long value) { VkSparseImageFormatProperties2.npNext(address(), value); return this; }
 
     }

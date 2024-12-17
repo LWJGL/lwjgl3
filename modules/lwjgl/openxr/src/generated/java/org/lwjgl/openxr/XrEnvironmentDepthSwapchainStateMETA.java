@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * XrEnvironmentDepthSwapchainStateMETA.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using {@link XrEnvironmentDepthSwapchainStateMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAEnvironmentDepth#xrGetEnvironmentDepthSwapchainStateMETA GetEnvironmentDepthSwapchainStateMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEnvironmentDepthSwapchainStateMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #width};
- *     uint32_t {@link #height};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t width;
+ *     uint32_t height;
+ * }}</pre>
  */
 public class XrEnvironmentDepthSwapchainStateMETA extends Struct<XrEnvironmentDepthSwapchainStateMETA> implements NativeResource {
 
@@ -94,28 +78,28 @@ public class XrEnvironmentDepthSwapchainStateMETA extends Struct<XrEnvironmentDe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the width of the image. */
+    /** @return the value of the {@code width} field. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** the height of the image. */
+    /** @return the value of the {@code height} field. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEnvironmentDepthSwapchainStateMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META} value to the {@link #type} field. */
+    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META} value to the {@code type} field. */
     public XrEnvironmentDepthSwapchainStateMETA type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEnvironmentDepthSwapchainStateMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public XrEnvironmentDepthSwapchainStateMETA width(@NativeType("uint32_t") int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public XrEnvironmentDepthSwapchainStateMETA height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -317,28 +301,28 @@ public class XrEnvironmentDepthSwapchainStateMETA extends Struct<XrEnvironmentDe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEnvironmentDepthSwapchainStateMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEnvironmentDepthSwapchainStateMETA.ntype(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthSwapchainStateMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrEnvironmentDepthSwapchainStateMETA.nnext(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthSwapchainStateMETA#width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("uint32_t")
         public int width() { return XrEnvironmentDepthSwapchainStateMETA.nwidth(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthSwapchainStateMETA#height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("uint32_t")
         public int height() { return XrEnvironmentDepthSwapchainStateMETA.nheight(address()); }
 
-        /** Sets the specified value to the {@link XrEnvironmentDepthSwapchainStateMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEnvironmentDepthSwapchainStateMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEnvironmentDepthSwapchainStateMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META} value to the {@link XrEnvironmentDepthSwapchainStateMETA#type} field. */
+        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META} value to the {@code type} field. */
         public XrEnvironmentDepthSwapchainStateMETA.Buffer type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META); }
-        /** Sets the specified value to the {@link XrEnvironmentDepthSwapchainStateMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEnvironmentDepthSwapchainStateMETA.Buffer next(@NativeType("void *") long value) { XrEnvironmentDepthSwapchainStateMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthSwapchainStateMETA#width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public XrEnvironmentDepthSwapchainStateMETA.Buffer width(@NativeType("uint32_t") int value) { XrEnvironmentDepthSwapchainStateMETA.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthSwapchainStateMETA#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public XrEnvironmentDepthSwapchainStateMETA.Buffer height(@NativeType("uint32_t") int value) { XrEnvironmentDepthSwapchainStateMETA.nheight(address(), value); return this; }
 
     }

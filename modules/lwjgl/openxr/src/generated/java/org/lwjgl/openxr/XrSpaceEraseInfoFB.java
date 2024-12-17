@@ -17,35 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters for an erase operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSpaceEraseInfoFB} structure contains information used to erase the spatial entity.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntityStorage XR_FB_spatial_entity_storage} extension <b>must</b> be enabled prior to using {@link XrSpaceEraseInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntityStorage#XR_TYPE_SPACE_ERASE_INFO_FB TYPE_SPACE_ERASE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBSpatialEntityStorage#xrEraseSpaceFB EraseSpaceFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceEraseInfoFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #space};
- *     XrSpaceStorageLocationFB {@link #location};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace space;
+ *     XrSpaceStorageLocationFB location;
+ * }}</pre>
  */
 public class XrSpaceEraseInfoFB extends Struct<XrSpaceEraseInfoFB> implements NativeResource {
 
@@ -101,28 +79,28 @@ public class XrSpaceEraseInfoFB extends Struct<XrSpaceEraseInfoFB> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSpace} handle to the reference space that defines the entity to be erased. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the storage location. */
+    /** @return the value of the {@code location} field. */
     @NativeType("XrSpaceStorageLocationFB")
     public int location() { return nlocation(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceEraseInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_SPACE_ERASE_INFO_FB TYPE_SPACE_ERASE_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_SPACE_ERASE_INFO_FB TYPE_SPACE_ERASE_INFO_FB} value to the {@code type} field. */
     public XrSpaceEraseInfoFB type$Default() { return type(FBSpatialEntityStorage.XR_TYPE_SPACE_ERASE_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceEraseInfoFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrSpaceEraseInfoFB space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@link #location} field. */
+    /** Sets the specified value to the {@code location} field. */
     public XrSpaceEraseInfoFB location(@NativeType("XrSpaceStorageLocationFB") int value) { nlocation(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -333,28 +311,28 @@ public class XrSpaceEraseInfoFB extends Struct<XrSpaceEraseInfoFB> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceEraseInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceEraseInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrSpaceEraseInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpaceEraseInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrSpaceEraseInfoFB#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrSpaceEraseInfoFB.nspace(address()); }
-        /** @return the value of the {@link XrSpaceEraseInfoFB#location} field. */
+        /** @return the value of the {@code location} field. */
         @NativeType("XrSpaceStorageLocationFB")
         public int location() { return XrSpaceEraseInfoFB.nlocation(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceEraseInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceEraseInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceEraseInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_SPACE_ERASE_INFO_FB TYPE_SPACE_ERASE_INFO_FB} value to the {@link XrSpaceEraseInfoFB#type} field. */
+        /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_SPACE_ERASE_INFO_FB TYPE_SPACE_ERASE_INFO_FB} value to the {@code type} field. */
         public XrSpaceEraseInfoFB.Buffer type$Default() { return type(FBSpatialEntityStorage.XR_TYPE_SPACE_ERASE_INFO_FB); }
-        /** Sets the specified value to the {@link XrSpaceEraseInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceEraseInfoFB.Buffer next(@NativeType("void const *") long value) { XrSpaceEraseInfoFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceEraseInfoFB#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrSpaceEraseInfoFB.Buffer space(XrSpace value) { XrSpaceEraseInfoFB.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceEraseInfoFB#location} field. */
+        /** Sets the specified value to the {@code location} field. */
         public XrSpaceEraseInfoFB.Buffer location(@NativeType("XrSpaceStorageLocationFB") int value) { XrSpaceEraseInfoFB.nlocation(address(), value); return this; }
 
     }

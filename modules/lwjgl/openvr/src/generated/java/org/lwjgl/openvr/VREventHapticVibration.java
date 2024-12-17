@@ -14,16 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_HapticVibration_t {
- *     uint64_t {@link #containerHandle};
- *     uint64_t {@link #componentHandle};
+ *     uint64_t containerHandle;
+ *     uint64_t componentHandle;
  *     float fDurationSeconds;
  *     float fFrequency;
  *     float fAmplitude;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_HapticVibration_t")
 public class VREventHapticVibration extends Struct<VREventHapticVibration> {
@@ -83,10 +81,10 @@ public class VREventHapticVibration extends Struct<VREventHapticVibration> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** property container handle of the device with the haptic component */
+    /** @return the value of the {@code containerHandle} field. */
     @NativeType("uint64_t")
     public long containerHandle() { return ncontainerHandle(address()); }
-    /** which haptic component needs to vibrate */
+    /** @return the value of the {@code componentHandle} field. */
     @NativeType("uint64_t")
     public long componentHandle() { return ncomponentHandle(address()); }
     /** @return the value of the {@code fDurationSeconds} field. */
@@ -179,10 +177,10 @@ public class VREventHapticVibration extends Struct<VREventHapticVibration> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VREventHapticVibration#containerHandle} field. */
+        /** @return the value of the {@code containerHandle} field. */
         @NativeType("uint64_t")
         public long containerHandle() { return VREventHapticVibration.ncontainerHandle(address()); }
-        /** @return the value of the {@link VREventHapticVibration#componentHandle} field. */
+        /** @return the value of the {@code componentHandle} field. */
         @NativeType("uint64_t")
         public long componentHandle() { return VREventHapticVibration.ncomponentHandle(address()); }
         /** @return the value of the {@code fDurationSeconds} field. */

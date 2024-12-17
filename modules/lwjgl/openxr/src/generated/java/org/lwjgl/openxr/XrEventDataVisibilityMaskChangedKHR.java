@@ -16,26 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Visibility Mask.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHRVisibilityMask XR_KHR_visibility_mask} extension <b>must</b> be enabled prior to using {@link XrEventDataVisibilityMaskChangedKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataVisibilityMaskChangedKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSession {@link #session};
- *     XrViewConfigurationType {@link #viewConfigurationType};
- *     uint32_t {@link #viewIndex};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSession session;
+ *     XrViewConfigurationType viewConfigurationType;
+ *     uint32_t viewIndex;
+ * }}</pre>
  */
 public class XrEventDataVisibilityMaskChangedKHR extends Struct<XrEventDataVisibilityMaskChangedKHR> implements NativeResource {
 
@@ -94,27 +82,27 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct<XrEventDataVisib
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSession} for which the view mask has changed. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
-    /** the view configuration whose mask has changed. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
-    /** the individual view within the view configuration to which the change refers. */
+    /** @return the value of the {@code viewIndex} field. */
     @NativeType("uint32_t")
     public int viewIndex() { return nviewIndex(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataVisibilityMaskChangedKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR} value to the {@code type} field. */
     public XrEventDataVisibilityMaskChangedKHR type$Default() { return type(KHRVisibilityMask.XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataVisibilityMaskChangedKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,27 +308,27 @@ public class XrEventDataVisibilityMaskChangedKHR extends Struct<XrEventDataVisib
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataVisibilityMaskChangedKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataVisibilityMaskChangedKHR.ntype(address()); }
-        /** @return the value of the {@link XrEventDataVisibilityMaskChangedKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataVisibilityMaskChangedKHR.nnext(address()); }
-        /** @return the value of the {@link XrEventDataVisibilityMaskChangedKHR#session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataVisibilityMaskChangedKHR.nsession(address()); }
-        /** @return the value of the {@link XrEventDataVisibilityMaskChangedKHR#viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrEventDataVisibilityMaskChangedKHR.nviewConfigurationType(address()); }
-        /** @return the value of the {@link XrEventDataVisibilityMaskChangedKHR#viewIndex} field. */
+        /** @return the value of the {@code viewIndex} field. */
         @NativeType("uint32_t")
         public int viewIndex() { return XrEventDataVisibilityMaskChangedKHR.nviewIndex(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataVisibilityMaskChangedKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataVisibilityMaskChangedKHR.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataVisibilityMaskChangedKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR} value to the {@link XrEventDataVisibilityMaskChangedKHR#type} field. */
+        /** Sets the {@link KHRVisibilityMask#XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR} value to the {@code type} field. */
         public XrEventDataVisibilityMaskChangedKHR.Buffer type$Default() { return type(KHRVisibilityMask.XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR); }
-        /** Sets the specified value to the {@link XrEventDataVisibilityMaskChangedKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataVisibilityMaskChangedKHR.Buffer next(@NativeType("void const *") long value) { XrEventDataVisibilityMaskChangedKHR.nnext(address(), value); return this; }
 
     }

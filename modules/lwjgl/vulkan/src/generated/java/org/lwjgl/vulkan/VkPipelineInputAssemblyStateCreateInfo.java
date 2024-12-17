@@ -16,45 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created pipeline input assembly state.
- * 
- * <h5>Description</h5>
- * 
- * <p>Restarting the assembly of primitives discards the most recent index values if those elements formed an incomplete primitive, and restarts the primitive assembly using the subsequent indices, but only assembling the immediately following element through the end of the originally specified elements. The primitive restart index value comparison is performed before adding the {@code vertexOffset} value to the index value.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-primitiveTopologyListRestart">{@code primitiveTopologyListRestart}</a> feature is not enabled, and {@code topology} is {@link VK10#VK_PRIMITIVE_TOPOLOGY_POINT_LIST PRIMITIVE_TOPOLOGY_POINT_LIST}, {@link VK10#VK_PRIMITIVE_TOPOLOGY_LINE_LIST PRIMITIVE_TOPOLOGY_LINE_LIST}, {@link VK10#VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST PRIMITIVE_TOPOLOGY_TRIANGLE_LIST}, {@link VK10#VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY}, or {@link VK10#VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY}, {@code primitiveRestartEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-primitiveTopologyPatchListRestart">{@code primitiveTopologyPatchListRestart}</a> feature is not enabled, and {@code topology} is {@link VK10#VK_PRIMITIVE_TOPOLOGY_PATCH_LIST PRIMITIVE_TOPOLOGY_PATCH_LIST}, {@code primitiveRestartEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code topology} <b>must</b> not be any of {@link VK10#VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY}, {@link VK10#VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY}, {@link VK10#VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY} or {@link VK10#VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code topology} <b>must</b> not be {@link VK10#VK_PRIMITIVE_TOPOLOGY_PATCH_LIST PRIMITIVE_TOPOLOGY_PATCH_LIST}</li>
- * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::triangleFans} is {@link VK10#VK_FALSE FALSE}, {@code topology} <b>must</b> not be {@link VK10#VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN PRIMITIVE_TOPOLOGY_TRIANGLE_FAN}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code topology} <b>must</b> be a valid {@code VkPrimitiveTopology} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkGraphicsPipelineCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineInputAssemblyStateCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineInputAssemblyStateCreateFlags {@link #flags};
- *     VkPrimitiveTopology {@link #topology};
- *     VkBool32 {@link #primitiveRestartEnable};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineInputAssemblyStateCreateFlags flags;
+ *     VkPrimitiveTopology topology;
+ *     VkBool32 primitiveRestartEnable;
+ * }}</pre>
  */
 public class VkPipelineInputAssemblyStateCreateInfo extends Struct<VkPipelineInputAssemblyStateCreateInfo> implements NativeResource {
 
@@ -113,33 +82,33 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct<VkPipelineInp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkPipelineInputAssemblyStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** a {@code VkPrimitiveTopology} defining the primitive topology, as described below. */
+    /** @return the value of the {@code topology} field. */
     @NativeType("VkPrimitiveTopology")
     public int topology() { return ntopology(address()); }
-    /** controls whether a special vertex index value is treated as restarting the assembly of primitives. This enable only applies to indexed draws ({@link VK10#vkCmdDrawIndexed CmdDrawIndexed}, {@link EXTMultiDraw#vkCmdDrawMultiIndexedEXT CmdDrawMultiIndexedEXT}, and {@link VK10#vkCmdDrawIndexedIndirect CmdDrawIndexedIndirect}), and the special index value is either 0xFFFFFFFF when the {@code indexType} parameter of {@code vkCmdBindIndexBuffer2} or {@code vkCmdBindIndexBuffer} is equal to {@link VK10#VK_INDEX_TYPE_UINT32 INDEX_TYPE_UINT32}; 0xFF when {@code indexType} is equal to {@link VK14#VK_INDEX_TYPE_UINT8 INDEX_TYPE_UINT8}; or 0xFFFF when {@code indexType} is equal to {@link VK10#VK_INDEX_TYPE_UINT16 INDEX_TYPE_UINT16}. Primitive restart is not allowed for “list” topologies, unless one of the features <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-primitiveTopologyPatchListRestart">{@code primitiveTopologyPatchListRestart}</a> (for {@link VK10#VK_PRIMITIVE_TOPOLOGY_PATCH_LIST PRIMITIVE_TOPOLOGY_PATCH_LIST}) or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-primitiveTopologyListRestart">{@code primitiveTopologyListRestart}</a> (for all other list topologies) is enabled. */
+    /** @return the value of the {@code primitiveRestartEnable} field. */
     @NativeType("VkBool32")
     public boolean primitiveRestartEnable() { return nprimitiveRestartEnable(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineInputAssemblyStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO} value to the {@code sType} field. */
     public VkPipelineInputAssemblyStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineInputAssemblyStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkPipelineInputAssemblyStateCreateInfo flags(@NativeType("VkPipelineInputAssemblyStateCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #topology} field. */
+    /** Sets the specified value to the {@code topology} field. */
     public VkPipelineInputAssemblyStateCreateInfo topology(@NativeType("VkPrimitiveTopology") int value) { ntopology(address(), value); return this; }
-    /** Sets the specified value to the {@link #primitiveRestartEnable} field. */
+    /** Sets the specified value to the {@code primitiveRestartEnable} field. */
     public VkPipelineInputAssemblyStateCreateInfo primitiveRestartEnable(@NativeType("VkBool32") boolean value) { nprimitiveRestartEnable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -366,33 +335,33 @@ public class VkPipelineInputAssemblyStateCreateInfo extends Struct<VkPipelineInp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineInputAssemblyStateCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineInputAssemblyStateCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkPipelineInputAssemblyStateCreateFlags")
         public int flags() { return VkPipelineInputAssemblyStateCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#topology} field. */
+        /** @return the value of the {@code topology} field. */
         @NativeType("VkPrimitiveTopology")
         public int topology() { return VkPipelineInputAssemblyStateCreateInfo.ntopology(address()); }
-        /** @return the value of the {@link VkPipelineInputAssemblyStateCreateInfo#primitiveRestartEnable} field. */
+        /** @return the value of the {@code primitiveRestartEnable} field. */
         @NativeType("VkBool32")
         public boolean primitiveRestartEnable() { return VkPipelineInputAssemblyStateCreateInfo.nprimitiveRestartEnable(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineInputAssemblyStateCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO} value to the {@link VkPipelineInputAssemblyStateCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO} value to the {@code sType} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineInputAssemblyStateCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer flags(@NativeType("VkPipelineInputAssemblyStateCreateFlags") int value) { VkPipelineInputAssemblyStateCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#topology} field. */
+        /** Sets the specified value to the {@code topology} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer topology(@NativeType("VkPrimitiveTopology") int value) { VkPipelineInputAssemblyStateCreateInfo.ntopology(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineInputAssemblyStateCreateInfo#primitiveRestartEnable} field. */
+        /** Sets the specified value to the {@code primitiveRestartEnable} field. */
         public VkPipelineInputAssemblyStateCreateInfo.Buffer primitiveRestartEnable(@NativeType("VkBool32") boolean value) { VkPipelineInputAssemblyStateCreateInfo.nprimitiveRestartEnable(address(), value ? 1 : 0); return this; }
 
     }

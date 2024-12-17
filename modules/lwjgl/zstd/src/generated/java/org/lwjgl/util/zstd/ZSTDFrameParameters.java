@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ZSTD_frameParameters {
- *     int {@link #contentSizeFlag};
- *     int {@link #checksumFlag};
- *     int {@link #noDictIDFlag};
- * }</code></pre>
+ *     int contentSizeFlag;
+ *     int checksumFlag;
+ *     int noDictIDFlag;
+ * }}</pre>
  */
 @NativeType("struct ZSTD_frameParameters")
 public class ZSTDFrameParameters extends Struct<ZSTDFrameParameters> implements NativeResource {
@@ -77,18 +75,18 @@ public class ZSTDFrameParameters extends Struct<ZSTDFrameParameters> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** 1: content size will be in frame header (when known) */
+    /** @return the value of the {@code contentSizeFlag} field. */
     public int contentSizeFlag() { return ncontentSizeFlag(address()); }
-    /** 1: generate a 32-bits checksum using XXH64 algorithm at end of frame, for error detection */
+    /** @return the value of the {@code checksumFlag} field. */
     public int checksumFlag() { return nchecksumFlag(address()); }
-    /** 1: no {@code dictID} will be saved into frame header ({@code dictID} is only useful for dictionary compression) */
+    /** @return the value of the {@code noDictIDFlag} field. */
     public int noDictIDFlag() { return nnoDictIDFlag(address()); }
 
-    /** Sets the specified value to the {@link #contentSizeFlag} field. */
+    /** Sets the specified value to the {@code contentSizeFlag} field. */
     public ZSTDFrameParameters contentSizeFlag(int value) { ncontentSizeFlag(address(), value); return this; }
-    /** Sets the specified value to the {@link #checksumFlag} field. */
+    /** Sets the specified value to the {@code checksumFlag} field. */
     public ZSTDFrameParameters checksumFlag(int value) { nchecksumFlag(address(), value); return this; }
-    /** Sets the specified value to the {@link #noDictIDFlag} field. */
+    /** Sets the specified value to the {@code noDictIDFlag} field. */
     public ZSTDFrameParameters noDictIDFlag(int value) { nnoDictIDFlag(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,18 +301,18 @@ public class ZSTDFrameParameters extends Struct<ZSTDFrameParameters> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ZSTDFrameParameters#contentSizeFlag} field. */
+        /** @return the value of the {@code contentSizeFlag} field. */
         public int contentSizeFlag() { return ZSTDFrameParameters.ncontentSizeFlag(address()); }
-        /** @return the value of the {@link ZSTDFrameParameters#checksumFlag} field. */
+        /** @return the value of the {@code checksumFlag} field. */
         public int checksumFlag() { return ZSTDFrameParameters.nchecksumFlag(address()); }
-        /** @return the value of the {@link ZSTDFrameParameters#noDictIDFlag} field. */
+        /** @return the value of the {@code noDictIDFlag} field. */
         public int noDictIDFlag() { return ZSTDFrameParameters.nnoDictIDFlag(address()); }
 
-        /** Sets the specified value to the {@link ZSTDFrameParameters#contentSizeFlag} field. */
+        /** Sets the specified value to the {@code contentSizeFlag} field. */
         public ZSTDFrameParameters.Buffer contentSizeFlag(int value) { ZSTDFrameParameters.ncontentSizeFlag(address(), value); return this; }
-        /** Sets the specified value to the {@link ZSTDFrameParameters#checksumFlag} field. */
+        /** Sets the specified value to the {@code checksumFlag} field. */
         public ZSTDFrameParameters.Buffer checksumFlag(int value) { ZSTDFrameParameters.nchecksumFlag(address(), value); return this; }
-        /** Sets the specified value to the {@link ZSTDFrameParameters#noDictIDFlag} field. */
+        /** Sets the specified value to the {@code noDictIDFlag} field. */
         public ZSTDFrameParameters.Buffer noDictIDFlag(int value) { ZSTDFrameParameters.nnoDictIDFlag(address(), value); return this; }
 
     }

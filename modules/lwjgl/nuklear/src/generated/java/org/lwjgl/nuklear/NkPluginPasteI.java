@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@link NkClipboard} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     nk_handle handle,
- *     struct nk_text_edit *edit
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_plugin_paste} */
 @FunctionalInterface
 @NativeType("nk_plugin_paste")
 public interface NkPluginPasteI extends CallbackI {
@@ -44,6 +34,7 @@ public interface NkPluginPasteI extends CallbackI {
         );
     }
 
+    /** {@code void (* nk_plugin_paste) (nk_handle handle, struct nk_text_edit * edit)} */
     void invoke(@NativeType("nk_handle") long handle, @NativeType("struct nk_text_edit *") long edit);
 
 }

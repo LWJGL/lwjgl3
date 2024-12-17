@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct AppOverrideKeys_t {
  *     char * pchKey;
  *     char * pchValue;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct AppOverrideKeys_t")
 public class AppOverrideKeys extends Struct<AppOverrideKeys> implements NativeResource {
@@ -80,11 +78,7 @@ public class AppOverrideKeys extends Struct<AppOverrideKeys> implements NativeRe
     /** @return the null-terminated string pointed to by the {@code pchKey} field. */
     @NativeType("char *")
     public String pchKeyString() { return npchKeyString(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code pchValue} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pchValue} field. */
     @NativeType("char *")
     public ByteBuffer pchValue(int capacity) { return npchValue(address(), capacity); }
 
@@ -320,11 +314,7 @@ public class AppOverrideKeys extends Struct<AppOverrideKeys> implements NativeRe
         /** @return the null-terminated string pointed to by the {@code pchKey} field. */
         @NativeType("char *")
         public String pchKeyString() { return AppOverrideKeys.npchKeyString(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code pchValue} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pchValue} field. */
         @NativeType("char *")
         public ByteBuffer pchValue(int capacity) { return AppOverrideKeys.npchValue(address(), capacity); }
 

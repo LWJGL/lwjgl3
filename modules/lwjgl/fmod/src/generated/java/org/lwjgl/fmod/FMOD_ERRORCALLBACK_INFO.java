@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_ERRORCALLBACK_INFO {
  *     FMOD_RESULT result;
  *     FMOD_ERRORCALLBACK_INSTANCETYPE instancetype;
  *     void * instance;
  *     char const * functionname;
  *     char const * functionparams;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_ERRORCALLBACK_INFO extends Struct<FMOD_ERRORCALLBACK_INFO> implements NativeResource {
 

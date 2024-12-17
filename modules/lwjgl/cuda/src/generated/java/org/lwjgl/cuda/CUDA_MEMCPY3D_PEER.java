@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_MEMCPY3D_PEER {
  *     size_t srcXInBytes;
  *     size_t srcY;
@@ -45,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     size_t WidthInBytes;
  *     size_t Height;
  *     size_t Depth;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_MEMCPY3D_PEER extends Struct<CUDA_MEMCPY3D_PEER> implements NativeResource {
 
@@ -179,11 +177,7 @@ public class CUDA_MEMCPY3D_PEER extends Struct<CUDA_MEMCPY3D_PEER> implements Na
     /** @return the value of the {@code srcMemoryType} field. */
     @NativeType("CUmemorytype")
     public int srcMemoryType() { return nsrcMemoryType(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code srcHost} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code srcHost} field. */
     @NativeType("void const *")
     public @Nullable ByteBuffer srcHost(int capacity) { return nsrcHost(address(), capacity); }
     /** @return the value of the {@code srcDevice} field. */
@@ -216,11 +210,7 @@ public class CUDA_MEMCPY3D_PEER extends Struct<CUDA_MEMCPY3D_PEER> implements Na
     /** @return the value of the {@code dstMemoryType} field. */
     @NativeType("CUmemorytype")
     public int dstMemoryType() { return ndstMemoryType(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code dstHost} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code dstHost} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer dstHost(int capacity) { return ndstHost(address(), capacity); }
     /** @return the value of the {@code dstDevice} field. */
@@ -658,11 +648,7 @@ public class CUDA_MEMCPY3D_PEER extends Struct<CUDA_MEMCPY3D_PEER> implements Na
         /** @return the value of the {@code srcMemoryType} field. */
         @NativeType("CUmemorytype")
         public int srcMemoryType() { return CUDA_MEMCPY3D_PEER.nsrcMemoryType(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code srcHost} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code srcHost} field. */
         @NativeType("void const *")
         public @Nullable ByteBuffer srcHost(int capacity) { return CUDA_MEMCPY3D_PEER.nsrcHost(address(), capacity); }
         /** @return the value of the {@code srcDevice} field. */
@@ -695,11 +681,7 @@ public class CUDA_MEMCPY3D_PEER extends Struct<CUDA_MEMCPY3D_PEER> implements Na
         /** @return the value of the {@code dstMemoryType} field. */
         @NativeType("CUmemorytype")
         public int dstMemoryType() { return CUDA_MEMCPY3D_PEER.ndstMemoryType(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code dstHost} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code dstHost} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer dstHost(int capacity) { return CUDA_MEMCPY3D_PEER.ndstHost(address(), capacity); }
         /** @return the value of the {@code dstDevice} field. */

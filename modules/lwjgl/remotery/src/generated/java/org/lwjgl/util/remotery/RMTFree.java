@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *mm_context,
- *     void *ptr
- * )</code></pre>
- */
+/** Callback function: {@link #invoke rmtFreePtr} */
 public abstract class RMTFree extends Callback implements RMTFreeI {
 
     /**

@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information required to request a localization map.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using {@link XrMapLocalizationRequestInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLLocalizationMap#XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}, {@link MLLocalizationMap#xrRequestMapLocalizationML RequestMapLocalizationML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMapLocalizationRequestInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrUuidEXT XrUuidEXT} {@link #mapUuid};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrUuidEXT XrUuidEXT} mapUuid;
+ * }}</pre>
  */
 public class XrMapLocalizationRequestInfoML extends Struct<XrMapLocalizationRequestInfoML> implements NativeResource {
 
@@ -90,24 +74,24 @@ public class XrMapLocalizationRequestInfoML extends Struct<XrMapLocalizationRequ
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@link XrUuidEXT} of the localization map to request. This mapUuid <b>can</b> be obtained via {@link MLLocalizationMap#xrQueryLocalizationMapsML QueryLocalizationMapsML}. */
+    /** @return a {@link XrUuidEXT} view of the {@code mapUuid} field. */
     public XrUuidEXT mapUuid() { return nmapUuid(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMapLocalizationRequestInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLLocalizationMap#XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLLocalizationMap#XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML} value to the {@code type} field. */
     public XrMapLocalizationRequestInfoML type$Default() { return type(MLLocalizationMap.XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMapLocalizationRequestInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrUuidEXT} to the {@link #mapUuid} field. */
+    /** Copies the specified {@link XrUuidEXT} to the {@code mapUuid} field. */
     public XrMapLocalizationRequestInfoML mapUuid(XrUuidEXT value) { nmapUuid(address(), value); return this; }
-    /** Passes the {@link #mapUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mapUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrMapLocalizationRequestInfoML mapUuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(mapUuid()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,24 +287,24 @@ public class XrMapLocalizationRequestInfoML extends Struct<XrMapLocalizationRequ
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMapLocalizationRequestInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMapLocalizationRequestInfoML.ntype(address()); }
-        /** @return the value of the {@link XrMapLocalizationRequestInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrMapLocalizationRequestInfoML.nnext(address()); }
-        /** @return a {@link XrUuidEXT} view of the {@link XrMapLocalizationRequestInfoML#mapUuid} field. */
+        /** @return a {@link XrUuidEXT} view of the {@code mapUuid} field. */
         public XrUuidEXT mapUuid() { return XrMapLocalizationRequestInfoML.nmapUuid(address()); }
 
-        /** Sets the specified value to the {@link XrMapLocalizationRequestInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMapLocalizationRequestInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrMapLocalizationRequestInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLLocalizationMap#XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML} value to the {@link XrMapLocalizationRequestInfoML#type} field. */
+        /** Sets the {@link MLLocalizationMap#XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML} value to the {@code type} field. */
         public XrMapLocalizationRequestInfoML.Buffer type$Default() { return type(MLLocalizationMap.XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML); }
-        /** Sets the specified value to the {@link XrMapLocalizationRequestInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMapLocalizationRequestInfoML.Buffer next(@NativeType("void const *") long value) { XrMapLocalizationRequestInfoML.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrUuidEXT} to the {@link XrMapLocalizationRequestInfoML#mapUuid} field. */
+        /** Copies the specified {@link XrUuidEXT} to the {@code mapUuid} field. */
         public XrMapLocalizationRequestInfoML.Buffer mapUuid(XrUuidEXT value) { XrMapLocalizationRequestInfoML.nmapUuid(address(), value); return this; }
-        /** Passes the {@link XrMapLocalizationRequestInfoML#mapUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mapUuid} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrMapLocalizationRequestInfoML.Buffer mapUuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(mapUuid()); return this; }
 
     }

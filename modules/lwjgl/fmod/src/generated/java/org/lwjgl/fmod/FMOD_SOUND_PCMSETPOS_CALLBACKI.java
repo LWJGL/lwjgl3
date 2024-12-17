@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_SOUND *sound,
- *     int subsound,
- *     unsigned int position,
- *     FMOD_TIMEUNIT postype
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_SOUND_PCMSETPOS_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_SOUND_PCMSETPOS_CALLBACK")
 public interface FMOD_SOUND_PCMSETPOS_CALLBACKI extends CallbackI {
@@ -47,6 +37,7 @@ public interface FMOD_SOUND_PCMSETPOS_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_SOUND_PCMSETPOS_CALLBACK) (FMOD_SOUND * sound, int subsound, unsigned int position, FMOD_TIMEUNIT postype)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("FMOD_SOUND *") long sound, int subsound, @NativeType("unsigned int") int position, @NativeType("FMOD_TIMEUNIT") int postype);
 
 }

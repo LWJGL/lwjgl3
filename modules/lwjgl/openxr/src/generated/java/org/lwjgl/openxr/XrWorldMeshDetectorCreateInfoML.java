@@ -16,27 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Mesh Detector Create Info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshDetectorCreateInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLWorldMeshDetection#xrCreateWorldMeshDetectorML CreateWorldMeshDetectorML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshDetectorCreateInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrWorldMeshDetectorCreateInfoML extends Struct<XrWorldMeshDetectorCreateInfoML> implements NativeResource {
 
@@ -86,18 +70,18 @@ public class XrWorldMeshDetectorCreateInfoML extends Struct<XrWorldMeshDetectorC
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshDetectorCreateInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML} value to the {@code type} field. */
     public XrWorldMeshDetectorCreateInfoML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshDetectorCreateInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -287,18 +271,18 @@ public class XrWorldMeshDetectorCreateInfoML extends Struct<XrWorldMeshDetectorC
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshDetectorCreateInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshDetectorCreateInfoML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshDetectorCreateInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrWorldMeshDetectorCreateInfoML.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshDetectorCreateInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshDetectorCreateInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshDetectorCreateInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML} value to the {@link XrWorldMeshDetectorCreateInfoML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML} value to the {@code type} field. */
         public XrWorldMeshDetectorCreateInfoML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshDetectorCreateInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshDetectorCreateInfoML.Buffer next(@NativeType("void const *") long value) { XrWorldMeshDetectorCreateInfoML.nnext(address(), value); return this; }
 
     }

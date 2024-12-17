@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link ClangIndex#clang_Type_visitFields Type_visitFields} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * enum CXVisitorResult (*{@link #invoke}) (
- *     CXCursor C,
- *     CXClientData client_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("enum CXVisitorResult (*) (CXCursor, CXClientData)")
 public interface CXFieldVisitorI extends CallbackI {
@@ -45,14 +35,7 @@ public interface CXFieldVisitorI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Visitor invoked for each field found by a traversal.
-     * 
-     * <p>This visitor function will be invoked for each field found by {@link ClangIndex#clang_Type_visitFields Type_visitFields}. Its first argument is the cursor being visited, its second argument
-     * is the client data provided to {@code clang_Type_visitFields}.</p>
-     * 
-     * <p>The visitor should return one of the {@code CXVisitorResult} values to direct {@code {@link ClangIndex#clang_Type_visitFields Type_visitFields}}.</p>
-     */
+    /** {@code enum CXVisitorResult (*) (CXCursor C, CXClientData client_data)} */
     @NativeType("enum CXVisitorResult") int invoke(CXCursor C, @NativeType("CXClientData") long client_data);
 
 }

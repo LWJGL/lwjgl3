@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrSpaceLocations}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceLocationsKHR {
  *     XrStructureType type;
  *     void * next;
  *     uint32_t locationCount;
  *     {@link XrSpaceLocationData XrSpaceLocationData} * locations;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrSpaceLocationsKHR extends XrSpaceLocations {
 

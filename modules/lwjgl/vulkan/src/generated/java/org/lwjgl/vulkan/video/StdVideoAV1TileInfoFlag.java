@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1TileInfoFlag {
  *     uint32_t uniform_tile_spacing_flag : 1;
  *     uint32_t reserved : 31;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1TileInfoFlag extends Struct<StdVideoAV1TileInfoFlag> implements NativeResource {
 

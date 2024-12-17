@@ -16,49 +16,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying cooperative matrix properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>Rather than explicitly enumerating a list of supported sizes, {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV} advertises size granularities, where the matrix <b>must</b> be a multiple of the advertised size. The M and K granularities apply to rows and columns of matrices with {@code Use} of {@code MatrixA}, K, and N apply to rows and columns of matrices with {@code Use} of {@code MatrixB}, M, and N apply to rows and columns of matrices with {@code Use} of {@code MatrixAccumulator}.</p>
- * 
- * <p>For a given type combination, if multiple workgroup sizes are supported there <b>may</b> be multiple {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV} structures with different granularities.</p>
- * 
- * <p>All granularity values <b>must</b> be powers of two.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Different A/B types may require different granularities but share the same accumulator type. In such a case, the supported granularity for a matrix with the accumulator type would be the smallest advertised granularity.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVCooperativeMatrix2#vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV GetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCooperativeMatrixFlexibleDimensionsPropertiesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #MGranularity};
- *     uint32_t {@link #NGranularity};
- *     uint32_t {@link #KGranularity};
- *     VkComponentTypeKHR {@link #AType};
- *     VkComponentTypeKHR {@link #BType};
- *     VkComponentTypeKHR {@link #CType};
- *     VkComponentTypeKHR {@link #ResultType};
- *     VkBool32 {@link #saturatingAccumulation};
- *     VkScopeKHR {@link #scope};
- *     uint32_t {@link #workgroupInvocations};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t MGranularity;
+ *     uint32_t NGranularity;
+ *     uint32_t KGranularity;
+ *     VkComponentTypeKHR AType;
+ *     VkComponentTypeKHR BType;
+ *     VkComponentTypeKHR CType;
+ *     VkComponentTypeKHR ResultType;
+ *     VkBool32 saturatingAccumulation;
+ *     VkScopeKHR scope;
+ *     uint32_t workgroupInvocations;
+ * }}</pre>
  */
 public class VkCooperativeMatrixFlexibleDimensionsPropertiesNV extends Struct<VkCooperativeMatrixFlexibleDimensionsPropertiesNV> implements NativeResource {
 
@@ -138,48 +110,48 @@ public class VkCooperativeMatrixFlexibleDimensionsPropertiesNV extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the granularity of the number of rows in matrices {@code A}, {@code C}, and {@code Result}. The rows <b>must</b> be an integer multiple of this value. */
+    /** @return the value of the {@code MGranularity} field. */
     @NativeType("uint32_t")
     public int MGranularity() { return nMGranularity(address()); }
-    /** the granularity of columns in matrices {@code B}, {@code C}, {@code Result}. The columns <b>must</b> be an integer multiple of this value. */
+    /** @return the value of the {@code NGranularity} field. */
     @NativeType("uint32_t")
     public int NGranularity() { return nNGranularity(address()); }
-    /** the granularity of columns in matrix {@code A} and rows in matrix {@code B}. The columns/rows <b>must</b> be an integer multiple of this value. */
+    /** @return the value of the {@code KGranularity} field. */
     @NativeType("uint32_t")
     public int KGranularity() { return nKGranularity(address()); }
-    /** the component type of matrix {@code A}, of type {@code VkComponentTypeKHR}. */
+    /** @return the value of the {@code AType} field. */
     @NativeType("VkComponentTypeKHR")
     public int AType() { return nAType(address()); }
-    /** the component type of matrix {@code B}, of type {@code VkComponentTypeKHR}. */
+    /** @return the value of the {@code BType} field. */
     @NativeType("VkComponentTypeKHR")
     public int BType() { return nBType(address()); }
-    /** the component type of matrix {@code C}, of type {@code VkComponentTypeKHR}. */
+    /** @return the value of the {@code CType} field. */
     @NativeType("VkComponentTypeKHR")
     public int CType() { return nCType(address()); }
-    /** the component type of matrix {@code Result}, of type {@code VkComponentTypeKHR}. */
+    /** @return the value of the {@code ResultType} field. */
     @NativeType("VkComponentTypeKHR")
     public int ResultType() { return nResultType(address()); }
-    /** indicates whether the {@code SaturatingAccumulation} operand to {@code OpCooperativeMatrixMulAddKHR} <b>must</b> be present or not. If it is {@link VK10#VK_TRUE TRUE}, the {@code SaturatingAccumulation} operand <b>must</b> be present. If it is {@link VK10#VK_FALSE FALSE}, the {@code SaturatingAccumulation} operand <b>must</b> not be present. */
+    /** @return the value of the {@code saturatingAccumulation} field. */
     @NativeType("VkBool32")
     public boolean saturatingAccumulation() { return nsaturatingAccumulation(address()) != 0; }
-    /** the scope of all the matrix types, of type {@code VkScopeKHR}. */
+    /** @return the value of the {@code scope} field. */
     @NativeType("VkScopeKHR")
     public int scope() { return nscope(address()); }
-    /** the number of invocations in the local workgroup when this combination of values is supported. */
+    /** @return the value of the {@code workgroupInvocations} field. */
     @NativeType("uint32_t")
     public int workgroupInvocations() { return nworkgroupInvocations(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCooperativeMatrixFlexibleDimensionsPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV} value to the {@code sType} field. */
     public VkCooperativeMatrixFlexibleDimensionsPropertiesNV sType$Default() { return sType(NVCooperativeMatrix2.VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCooperativeMatrixFlexibleDimensionsPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -389,48 +361,48 @@ public class VkCooperativeMatrixFlexibleDimensionsPropertiesNV extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nsType(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.npNext(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#MGranularity} field. */
+        /** @return the value of the {@code MGranularity} field. */
         @NativeType("uint32_t")
         public int MGranularity() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nMGranularity(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#NGranularity} field. */
+        /** @return the value of the {@code NGranularity} field. */
         @NativeType("uint32_t")
         public int NGranularity() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nNGranularity(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#KGranularity} field. */
+        /** @return the value of the {@code KGranularity} field. */
         @NativeType("uint32_t")
         public int KGranularity() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nKGranularity(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#AType} field. */
+        /** @return the value of the {@code AType} field. */
         @NativeType("VkComponentTypeKHR")
         public int AType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nAType(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#BType} field. */
+        /** @return the value of the {@code BType} field. */
         @NativeType("VkComponentTypeKHR")
         public int BType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nBType(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#CType} field. */
+        /** @return the value of the {@code CType} field. */
         @NativeType("VkComponentTypeKHR")
         public int CType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nCType(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#ResultType} field. */
+        /** @return the value of the {@code ResultType} field. */
         @NativeType("VkComponentTypeKHR")
         public int ResultType() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nResultType(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#saturatingAccumulation} field. */
+        /** @return the value of the {@code saturatingAccumulation} field. */
         @NativeType("VkBool32")
         public boolean saturatingAccumulation() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nsaturatingAccumulation(address()) != 0; }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#scope} field. */
+        /** @return the value of the {@code scope} field. */
         @NativeType("VkScopeKHR")
         public int scope() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nscope(address()); }
-        /** @return the value of the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#workgroupInvocations} field. */
+        /** @return the value of the {@code workgroupInvocations} field. */
         @NativeType("uint32_t")
         public int workgroupInvocations() { return VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nworkgroupInvocations(address()); }
 
-        /** Sets the specified value to the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCooperativeMatrixFlexibleDimensionsPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkCooperativeMatrixFlexibleDimensionsPropertiesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV} value to the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#sType} field. */
+        /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV} value to the {@code sType} field. */
         public VkCooperativeMatrixFlexibleDimensionsPropertiesNV.Buffer sType$Default() { return sType(NVCooperativeMatrix2.VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV); }
-        /** Sets the specified value to the {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCooperativeMatrixFlexibleDimensionsPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkCooperativeMatrixFlexibleDimensionsPropertiesNV.npNext(address(), value); return this; }
 
     }

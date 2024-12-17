@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * KTX_error_code (*{@link #invoke}) (
- *     ktxStream *str,
- *     ktx_size_t * const size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ktxStream_getsize} */
 public abstract class ktxStream_getsize extends Callback implements ktxStream_getsizeI {
 
     /**

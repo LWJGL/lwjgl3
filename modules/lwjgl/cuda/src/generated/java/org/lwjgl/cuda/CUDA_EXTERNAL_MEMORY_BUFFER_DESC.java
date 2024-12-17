@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_EXTERNAL_MEMORY_BUFFER_DESC {
  *     unsigned long long offset;
  *     unsigned long long size;
  *     unsigned int flags;
  *     unsigned int reserved[16];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_EXTERNAL_MEMORY_BUFFER_DESC extends Struct<CUDA_EXTERNAL_MEMORY_BUFFER_DESC> implements NativeResource {
 

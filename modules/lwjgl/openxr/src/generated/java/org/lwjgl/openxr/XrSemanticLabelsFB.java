@@ -16,35 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Provides application with semantic usage of a spatial entity.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is used by the {@link FBScene#xrGetSpaceSemanticLabelsFB GetSpaceSemanticLabelsFB} function to provide the application with the intended usage of the spatial entity.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using {@link XrSemanticLabelsFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBScene#XR_TYPE_SEMANTIC_LABELS_FB TYPE_SEMANTIC_LABELS_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code bufferCapacityInput} is not 0, {@code buffer} <b>must</b> be a pointer to an array of {@code bufferCapacityInput} char values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBScene#xrGetSpaceSemanticLabelsFB GetSpaceSemanticLabelsFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSemanticLabelsFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #bufferCapacityInput};
- *     uint32_t {@link #bufferCountOutput};
- *     char * {@link #buffer};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t bufferCapacityInput;
+ *     uint32_t bufferCountOutput;
+ *     char * buffer;
+ * }}</pre>
  */
 public class XrSemanticLabelsFB extends Struct<XrSemanticLabelsFB> implements NativeResource {
 
@@ -103,33 +82,33 @@ public class XrSemanticLabelsFB extends Struct<XrSemanticLabelsFB> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain, such as {@link XrSemanticLabelsSupportInfoFB}. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the capacity of the {@code buffer} array, in bytes, or 0 to indicate a request to retrieve the required capacity. */
+    /** @return the value of the {@code bufferCapacityInput} field. */
     @NativeType("uint32_t")
     public int bufferCapacityInput() { return nbufferCapacityInput(address()); }
-    /** the count of bytes written, or the required capacity in the case that {@code bufferCapacityInput} is insufficient. */
+    /** @return the value of the {@code bufferCountOutput} field. */
     @NativeType("uint32_t")
     public int bufferCountOutput() { return nbufferCountOutput(address()); }
-    /** a pointer to an array of bytes, but can be {@code NULL} if {@code bufferCapacityInput} is 0. Multiple labels represented by raw string, separated by a comma without spaces. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("char *")
     public @Nullable ByteBuffer buffer() { return nbuffer(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSemanticLabelsFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBScene#XR_TYPE_SEMANTIC_LABELS_FB TYPE_SEMANTIC_LABELS_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBScene#XR_TYPE_SEMANTIC_LABELS_FB TYPE_SEMANTIC_LABELS_FB} value to the {@code type} field. */
     public XrSemanticLabelsFB type$Default() { return type(FBScene.XR_TYPE_SEMANTIC_LABELS_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSemanticLabelsFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #bufferCapacityInput} field. */
+    /** Sets the specified value to the {@code bufferCapacityInput} field. */
     public XrSemanticLabelsFB bufferCapacityInput(@NativeType("uint32_t") int value) { nbufferCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@link #bufferCountOutput} field. */
+    /** Sets the specified value to the {@code bufferCountOutput} field. */
     public XrSemanticLabelsFB bufferCountOutput(@NativeType("uint32_t") int value) { nbufferCountOutput(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #buffer} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
     public XrSemanticLabelsFB buffer(@Nullable @NativeType("char *") ByteBuffer value) { nbuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,33 +316,33 @@ public class XrSemanticLabelsFB extends Struct<XrSemanticLabelsFB> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSemanticLabelsFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSemanticLabelsFB.ntype(address()); }
-        /** @return the value of the {@link XrSemanticLabelsFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSemanticLabelsFB.nnext(address()); }
-        /** @return the value of the {@link XrSemanticLabelsFB#bufferCapacityInput} field. */
+        /** @return the value of the {@code bufferCapacityInput} field. */
         @NativeType("uint32_t")
         public int bufferCapacityInput() { return XrSemanticLabelsFB.nbufferCapacityInput(address()); }
-        /** @return the value of the {@link XrSemanticLabelsFB#bufferCountOutput} field. */
+        /** @return the value of the {@code bufferCountOutput} field. */
         @NativeType("uint32_t")
         public int bufferCountOutput() { return XrSemanticLabelsFB.nbufferCountOutput(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link XrSemanticLabelsFB#buffer} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("char *")
         public @Nullable ByteBuffer buffer() { return XrSemanticLabelsFB.nbuffer(address()); }
 
-        /** Sets the specified value to the {@link XrSemanticLabelsFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSemanticLabelsFB.Buffer type(@NativeType("XrStructureType") int value) { XrSemanticLabelsFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBScene#XR_TYPE_SEMANTIC_LABELS_FB TYPE_SEMANTIC_LABELS_FB} value to the {@link XrSemanticLabelsFB#type} field. */
+        /** Sets the {@link FBScene#XR_TYPE_SEMANTIC_LABELS_FB TYPE_SEMANTIC_LABELS_FB} value to the {@code type} field. */
         public XrSemanticLabelsFB.Buffer type$Default() { return type(FBScene.XR_TYPE_SEMANTIC_LABELS_FB); }
-        /** Sets the specified value to the {@link XrSemanticLabelsFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSemanticLabelsFB.Buffer next(@NativeType("void const *") long value) { XrSemanticLabelsFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSemanticLabelsFB#bufferCapacityInput} field. */
+        /** Sets the specified value to the {@code bufferCapacityInput} field. */
         public XrSemanticLabelsFB.Buffer bufferCapacityInput(@NativeType("uint32_t") int value) { XrSemanticLabelsFB.nbufferCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSemanticLabelsFB#bufferCountOutput} field. */
+        /** Sets the specified value to the {@code bufferCountOutput} field. */
         public XrSemanticLabelsFB.Buffer bufferCountOutput(@NativeType("uint32_t") int value) { XrSemanticLabelsFB.nbufferCountOutput(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link XrSemanticLabelsFB#buffer} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
         public XrSemanticLabelsFB.Buffer buffer(@Nullable @NativeType("char *") ByteBuffer value) { XrSemanticLabelsFB.nbuffer(address(), value); return this; }
 
     }

@@ -19,48 +19,16 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * The graphics binding structure to be passed at session creation to use Vulkan.
- * 
- * <h5>Description</h5>
- * 
- * <p>When creating a Vulkan-backed {@code XrSession}, the application will provide a pointer to an {@link XrGraphicsBindingVulkanKHR} in the {@code next} chain of the {@link XrSessionCreateInfo}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code instance} <b>must</b> have enabled a Vulkan API version in the range specified by {@link XrGraphicsBindingVulkanKHR}</li>
- * <li>{@code instance} <b>must</b> have enabled all the instance extensions specified by {@link KHRVulkanEnable#xrGetVulkanInstanceExtensionsKHR GetVulkanInstanceExtensionsKHR}</li>
- * <li>{@code physicalDevice} {@code VkPhysicalDevice} <b>must</b> match the device specified by {@link KHRVulkanEnable#xrGetVulkanGraphicsDeviceKHR GetVulkanGraphicsDeviceKHR}</li>
- * <li>{@code device} <b>must</b> have enabled all the device extensions specified by {@link KHRVulkanEnable#xrGetVulkanDeviceExtensionsKHR GetVulkanDeviceExtensionsKHR}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHRVulkanEnable XR_KHR_vulkan_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsBindingVulkanKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHRVulkanEnable#XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR TYPE_GRAPHICS_BINDING_VULKAN_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code instance} <b>must</b> be a valid {@code VkInstance} value</li>
- * <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} value</li>
- * <li>{@code device} <b>must</b> be a valid {@code VkDevice} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateSession CreateSession}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGraphicsBindingVulkanKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     VkInstance {@link #instance};
- *     VkPhysicalDevice {@link #physicalDevice};
- *     VkDevice {@link #device};
- *     uint32_t {@link #queueFamilyIndex};
- *     uint32_t {@link #queueIndex};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     VkInstance instance;
+ *     VkPhysicalDevice physicalDevice;
+ *     VkDevice device;
+ *     uint32_t queueFamilyIndex;
+ *     uint32_t queueIndex;
+ * }}</pre>
  */
 public class XrGraphicsBindingVulkanKHR extends Struct<XrGraphicsBindingVulkanKHR> implements NativeResource {
 
@@ -125,43 +93,43 @@ public class XrGraphicsBindingVulkanKHR extends Struct<XrGraphicsBindingVulkanKH
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a valid Vulkan {@code VkInstance}. */
+    /** @return the value of the {@code instance} field. */
     @NativeType("VkInstance")
     public long instance() { return ninstance(address()); }
-    /** a valid Vulkan {@code VkPhysicalDevice}. */
+    /** @return the value of the {@code physicalDevice} field. */
     @NativeType("VkPhysicalDevice")
     public long physicalDevice() { return nphysicalDevice(address()); }
-    /** a valid Vulkan {@code VkDevice}. */
+    /** @return the value of the {@code device} field. */
     @NativeType("VkDevice")
     public long device() { return ndevice(address()); }
-    /** a valid queue family index on {@code device}. */
+    /** @return the value of the {@code queueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int queueFamilyIndex() { return nqueueFamilyIndex(address()); }
-    /** a valid queue index on {@code device} to be used for synchronization. */
+    /** @return the value of the {@code queueIndex} field. */
     @NativeType("uint32_t")
     public int queueIndex() { return nqueueIndex(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrGraphicsBindingVulkanKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRVulkanEnable#XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR TYPE_GRAPHICS_BINDING_VULKAN_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHRVulkanEnable#XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR TYPE_GRAPHICS_BINDING_VULKAN_KHR} value to the {@code type} field. */
     public XrGraphicsBindingVulkanKHR type$Default() { return type(KHRVulkanEnable.XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrGraphicsBindingVulkanKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #instance} field. */
+    /** Sets the specified value to the {@code instance} field. */
     public XrGraphicsBindingVulkanKHR instance(VkInstance value) { ninstance(address(), value); return this; }
-    /** Sets the specified value to the {@link #physicalDevice} field. */
+    /** Sets the specified value to the {@code physicalDevice} field. */
     public XrGraphicsBindingVulkanKHR physicalDevice(VkPhysicalDevice value) { nphysicalDevice(address(), value); return this; }
-    /** Sets the specified value to the {@link #device} field. */
+    /** Sets the specified value to the {@code device} field. */
     public XrGraphicsBindingVulkanKHR device(VkDevice value) { ndevice(address(), value); return this; }
-    /** Sets the specified value to the {@link #queueFamilyIndex} field. */
+    /** Sets the specified value to the {@code queueFamilyIndex} field. */
     public XrGraphicsBindingVulkanKHR queueFamilyIndex(@NativeType("uint32_t") int value) { nqueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #queueIndex} field. */
+    /** Sets the specified value to the {@code queueIndex} field. */
     public XrGraphicsBindingVulkanKHR queueIndex(@NativeType("uint32_t") int value) { nqueueIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -392,43 +360,43 @@ public class XrGraphicsBindingVulkanKHR extends Struct<XrGraphicsBindingVulkanKH
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrGraphicsBindingVulkanKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingVulkanKHR.ntype(address()); }
-        /** @return the value of the {@link XrGraphicsBindingVulkanKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingVulkanKHR.nnext(address()); }
-        /** @return the value of the {@link XrGraphicsBindingVulkanKHR#instance} field. */
+        /** @return the value of the {@code instance} field. */
         @NativeType("VkInstance")
         public long instance() { return XrGraphicsBindingVulkanKHR.ninstance(address()); }
-        /** @return the value of the {@link XrGraphicsBindingVulkanKHR#physicalDevice} field. */
+        /** @return the value of the {@code physicalDevice} field. */
         @NativeType("VkPhysicalDevice")
         public long physicalDevice() { return XrGraphicsBindingVulkanKHR.nphysicalDevice(address()); }
-        /** @return the value of the {@link XrGraphicsBindingVulkanKHR#device} field. */
+        /** @return the value of the {@code device} field. */
         @NativeType("VkDevice")
         public long device() { return XrGraphicsBindingVulkanKHR.ndevice(address()); }
-        /** @return the value of the {@link XrGraphicsBindingVulkanKHR#queueFamilyIndex} field. */
+        /** @return the value of the {@code queueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int queueFamilyIndex() { return XrGraphicsBindingVulkanKHR.nqueueFamilyIndex(address()); }
-        /** @return the value of the {@link XrGraphicsBindingVulkanKHR#queueIndex} field. */
+        /** @return the value of the {@code queueIndex} field. */
         @NativeType("uint32_t")
         public int queueIndex() { return XrGraphicsBindingVulkanKHR.nqueueIndex(address()); }
 
-        /** Sets the specified value to the {@link XrGraphicsBindingVulkanKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrGraphicsBindingVulkanKHR.Buffer type(@NativeType("XrStructureType") int value) { XrGraphicsBindingVulkanKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRVulkanEnable#XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR TYPE_GRAPHICS_BINDING_VULKAN_KHR} value to the {@link XrGraphicsBindingVulkanKHR#type} field. */
+        /** Sets the {@link KHRVulkanEnable#XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR TYPE_GRAPHICS_BINDING_VULKAN_KHR} value to the {@code type} field. */
         public XrGraphicsBindingVulkanKHR.Buffer type$Default() { return type(KHRVulkanEnable.XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR); }
-        /** Sets the specified value to the {@link XrGraphicsBindingVulkanKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrGraphicsBindingVulkanKHR.Buffer next(@NativeType("void const *") long value) { XrGraphicsBindingVulkanKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingVulkanKHR#instance} field. */
+        /** Sets the specified value to the {@code instance} field. */
         public XrGraphicsBindingVulkanKHR.Buffer instance(VkInstance value) { XrGraphicsBindingVulkanKHR.ninstance(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingVulkanKHR#physicalDevice} field. */
+        /** Sets the specified value to the {@code physicalDevice} field. */
         public XrGraphicsBindingVulkanKHR.Buffer physicalDevice(VkPhysicalDevice value) { XrGraphicsBindingVulkanKHR.nphysicalDevice(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingVulkanKHR#device} field. */
+        /** Sets the specified value to the {@code device} field. */
         public XrGraphicsBindingVulkanKHR.Buffer device(VkDevice value) { XrGraphicsBindingVulkanKHR.ndevice(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingVulkanKHR#queueFamilyIndex} field. */
+        /** Sets the specified value to the {@code queueFamilyIndex} field. */
         public XrGraphicsBindingVulkanKHR.Buffer queueFamilyIndex(@NativeType("uint32_t") int value) { XrGraphicsBindingVulkanKHR.nqueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingVulkanKHR#queueIndex} field. */
+        /** Sets the specified value to the {@code queueIndex} field. */
         public XrGraphicsBindingVulkanKHR.Buffer queueIndex(@NativeType("uint32_t") int value) { XrGraphicsBindingVulkanKHR.nqueueIndex(address(), value); return this; }
 
     }

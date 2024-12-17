@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents the dimensions of an axis-aligned rectangular prism.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is used for component values that may be real numbers, represented with single-precision floating point.</p>
- * 
- * <p>If used to represent physical distances, values <b>must</b> be in meters. The width, height, and depth values <b>must</b> be non-negative.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrBoxf}, {@link XrExtent2Df}, {@link XrExtent2Di}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrExtent3Df {
- *     float {@link #width};
- *     float {@link #height};
- *     float {@link #depth};
- * }</code></pre>
+ *     float width;
+ *     float height;
+ *     float depth;
+ * }}</pre>
  */
 public class XrExtent3Df extends Struct<XrExtent3Df> implements NativeResource {
 
@@ -88,18 +74,18 @@ public class XrExtent3Df extends Struct<XrExtent3Df> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the floating-point width of the extent (x). */
+    /** @return the value of the {@code width} field. */
     public float width() { return nwidth(address()); }
-    /** the floating-point height of the extent (y). */
+    /** @return the value of the {@code height} field. */
     public float height() { return nheight(address()); }
-    /** the floating-point depth of the extent (z). */
+    /** @return the value of the {@code depth} field. */
     public float depth() { return ndepth(address()); }
 
-    /** Sets the specified value to the {@link #width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public XrExtent3Df width(float value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public XrExtent3Df height(float value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@link #depth} field. */
+    /** Sets the specified value to the {@code depth} field. */
     public XrExtent3Df depth(float value) { ndepth(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -295,18 +281,18 @@ public class XrExtent3Df extends Struct<XrExtent3Df> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrExtent3Df#width} field. */
+        /** @return the value of the {@code width} field. */
         public float width() { return XrExtent3Df.nwidth(address()); }
-        /** @return the value of the {@link XrExtent3Df#height} field. */
+        /** @return the value of the {@code height} field. */
         public float height() { return XrExtent3Df.nheight(address()); }
-        /** @return the value of the {@link XrExtent3Df#depth} field. */
+        /** @return the value of the {@code depth} field. */
         public float depth() { return XrExtent3Df.ndepth(address()); }
 
-        /** Sets the specified value to the {@link XrExtent3Df#width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public XrExtent3Df.Buffer width(float value) { XrExtent3Df.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrExtent3Df#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public XrExtent3Df.Buffer height(float value) { XrExtent3Df.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@link XrExtent3Df#depth} field. */
+        /** Sets the specified value to the {@code depth} field. */
         public XrExtent3Df.Buffer depth(float value) { XrExtent3Df.ndepth(address(), value); return this; }
 
     }

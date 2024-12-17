@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *userData
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (void *)")
 public interface CUhostFnI extends CallbackI {
@@ -40,6 +33,7 @@ public interface CUhostFnI extends CallbackI {
         );
     }
 
+    /** {@code void (*) (void * userData)} */
     void invoke(@NativeType("void *") long userData);
 
 }

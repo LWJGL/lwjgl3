@@ -17,12 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_EVENT_WAIT_NODE_PARAMS {
  *     CUevent event;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_EVENT_WAIT_NODE_PARAMS extends Struct<CUDA_EVENT_WAIT_NODE_PARAMS> implements NativeResource {
 

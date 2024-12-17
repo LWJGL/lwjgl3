@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH265ReferenceModifications {
  *     {@link StdVideoEncodeH265ReferenceModificationFlags StdVideoEncodeH265ReferenceModificationFlags} flags;
  *     uint8_t num_ref_idx_l0_active_minus1;
@@ -31,7 +29,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint8_t RefPicList1[STD_VIDEO_H265_MAX_NUM_LIST_REF];
  *     uint8_t list_entry_l0[STD_VIDEO_H265_MAX_NUM_LIST_REF];
  *     uint8_t list_entry_l1[STD_VIDEO_H265_MAX_NUM_LIST_REF];
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH265ReferenceModifications extends Struct<StdVideoEncodeH265ReferenceModifications> implements NativeResource {
 

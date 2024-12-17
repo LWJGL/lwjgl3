@@ -260,85 +260,85 @@ public class VKCapabilitiesInstance {
     /** The Vulkan API version number. */
     public final int apiVersion;
 
-    /** When true, {@link VK10} is supported. */
+    /** When true, {@code VK10} is supported. */
     public final boolean Vulkan10;
-    /** When true, {@link VK11} is supported. */
+    /** When true, {@code VK11} is supported. */
     public final boolean Vulkan11;
-    /** When true, {@link VK12} is supported. */
+    /** When true, {@code VK12} is supported. */
     public final boolean Vulkan12;
-    /** When true, {@link VK13} is supported. */
+    /** When true, {@code VK13} is supported. */
     public final boolean Vulkan13;
-    /** When true, {@link VK14} is supported. */
+    /** When true, {@code VK14} is supported. */
     public final boolean Vulkan14;
-    /** When true, {@link EXTAcquireDrmDisplay} is supported. */
+    /** When true, {@code EXT_acquire_drm_display} is supported. */
     public final boolean VK_EXT_acquire_drm_display;
-    /** When true, {@link EXTAcquireXlibDisplay} is supported. */
+    /** When true, {@code EXT_acquire_xlib_display} is supported. */
     public final boolean VK_EXT_acquire_xlib_display;
-    /** When true, {@link EXTDebugReport} is supported. */
+    /** When true, {@code EXT_debug_report} is supported. */
     public final boolean VK_EXT_debug_report;
-    /** When true, {@link EXTDebugUtils} is supported. */
+    /** When true, {@code EXT_debug_utils} is supported. */
     public final boolean VK_EXT_debug_utils;
-    /** When true, {@link EXTDirectModeDisplay} is supported. */
+    /** When true, {@code EXT_direct_mode_display} is supported. */
     public final boolean VK_EXT_direct_mode_display;
-    /** When true, {@link EXTDirectfbSurface} is supported. */
+    /** When true, {@code EXT_directfb_surface} is supported. */
     public final boolean VK_EXT_directfb_surface;
-    /** When true, {@link EXTDisplaySurfaceCounter} is supported. */
+    /** When true, {@code EXT_display_surface_counter} is supported. */
     public final boolean VK_EXT_display_surface_counter;
-    /** When true, {@link EXTHeadlessSurface} is supported. */
+    /** When true, {@code EXT_headless_surface} is supported. */
     public final boolean VK_EXT_headless_surface;
-    /** When true, {@link EXTLayerSettings} is supported. */
+    /** When true, {@code EXT_layer_settings} is supported. */
     public final boolean VK_EXT_layer_settings;
-    /** When true, {@link EXTMetalSurface} is supported. */
+    /** When true, {@code EXT_metal_surface} is supported. */
     public final boolean VK_EXT_metal_surface;
-    /** When true, {@link EXTSurfaceMaintenance1} is supported. */
+    /** When true, {@code EXT_surface_maintenance1} is supported. */
     public final boolean VK_EXT_surface_maintenance1;
-    /** When true, {@link EXTSwapchainColorspace} is supported. */
+    /** When true, {@code EXT_swapchain_colorspace} is supported. */
     public final boolean VK_EXT_swapchain_colorspace;
-    /** When true, {@link EXTValidationFeatures} is supported. */
+    /** When true, {@code EXT_validation_features} is supported. */
     public final boolean VK_EXT_validation_features;
-    /** When true, {@link EXTValidationFlags} is supported. */
+    /** When true, {@code EXT_validation_flags} is supported. */
     public final boolean VK_EXT_validation_flags;
-    /** When true, {@link GOOGLESurfacelessQuery} is supported. */
+    /** When true, {@code GOOGLE_surfaceless_query} is supported. */
     public final boolean VK_GOOGLE_surfaceless_query;
-    /** When true, {@link KHRAndroidSurface} is supported. */
+    /** When true, {@code KHR_android_surface} is supported. */
     public final boolean VK_KHR_android_surface;
-    /** When true, {@link KHRDeviceGroupCreation} is supported. */
+    /** When true, {@code KHR_device_group_creation} is supported. */
     public final boolean VK_KHR_device_group_creation;
-    /** When true, {@link KHRDisplay} is supported. */
+    /** When true, {@code KHR_display} is supported. */
     public final boolean VK_KHR_display;
-    /** When true, {@link KHRExternalFenceCapabilities} is supported. */
+    /** When true, {@code KHR_external_fence_capabilities} is supported. */
     public final boolean VK_KHR_external_fence_capabilities;
-    /** When true, {@link KHRExternalMemoryCapabilities} is supported. */
+    /** When true, {@code KHR_external_memory_capabilities} is supported. */
     public final boolean VK_KHR_external_memory_capabilities;
-    /** When true, {@link KHRExternalSemaphoreCapabilities} is supported. */
+    /** When true, {@code KHR_external_semaphore_capabilities} is supported. */
     public final boolean VK_KHR_external_semaphore_capabilities;
-    /** When true, {@link KHRGetDisplayProperties2} is supported. */
+    /** When true, {@code KHR_get_display_properties2} is supported. */
     public final boolean VK_KHR_get_display_properties2;
-    /** When true, {@link KHRGetPhysicalDeviceProperties2} is supported. */
+    /** When true, {@code KHR_get_physical_device_properties2} is supported. */
     public final boolean VK_KHR_get_physical_device_properties2;
-    /** When true, {@link KHRGetSurfaceCapabilities2} is supported. */
+    /** When true, {@code KHR_get_surface_capabilities2} is supported. */
     public final boolean VK_KHR_get_surface_capabilities2;
-    /** When true, {@link KHRPortabilityEnumeration} is supported. */
+    /** When true, {@code KHR_portability_enumeration} is supported. */
     public final boolean VK_KHR_portability_enumeration;
-    /** When true, {@link KHRSurface} is supported. */
+    /** When true, {@code KHR_surface} is supported. */
     public final boolean VK_KHR_surface;
-    /** When true, {@link KHRSurfaceProtectedCapabilities} is supported. */
+    /** When true, {@code KHR_surface_protected_capabilities} is supported. */
     public final boolean VK_KHR_surface_protected_capabilities;
-    /** When true, {@link KHRWaylandSurface} is supported. */
+    /** When true, {@code KHR_wayland_surface} is supported. */
     public final boolean VK_KHR_wayland_surface;
-    /** When true, {@link KHRWin32Surface} is supported. */
+    /** When true, {@code KHR_win32_surface} is supported. */
     public final boolean VK_KHR_win32_surface;
-    /** When true, {@link KHRXcbSurface} is supported. */
+    /** When true, {@code KHR_xcb_surface} is supported. */
     public final boolean VK_KHR_xcb_surface;
-    /** When true, {@link KHRXlibSurface} is supported. */
+    /** When true, {@code KHR_xlib_surface} is supported. */
     public final boolean VK_KHR_xlib_surface;
-    /** When true, {@link LUNARGDirectDriverLoading} is supported. */
+    /** When true, {@code LUNARG_direct_driver_loading} is supported. */
     public final boolean VK_LUNARG_direct_driver_loading;
-    /** When true, {@link MVKMacosSurface} is supported. */
+    /** When true, {@code MVK_macos_surface} is supported. */
     public final boolean VK_MVK_macos_surface;
-    /** When true, {@link NVDisplayStereo} is supported. */
+    /** When true, {@code NV_display_stereo} is supported. */
     public final boolean VK_NV_display_stereo;
-    /** When true, {@link NVExternalMemoryCapabilities} is supported. */
+    /** When true, {@code NV_external_memory_capabilities} is supported. */
     public final boolean VK_NV_external_memory_capabilities;
 
     VKCapabilitiesInstance(FunctionProvider provider, int apiVersion, Set<String> ext, Set<String> deviceExt) {

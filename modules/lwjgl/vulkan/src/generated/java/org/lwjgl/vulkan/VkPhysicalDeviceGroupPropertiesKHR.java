@@ -19,18 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * See {@link VkPhysicalDeviceGroupProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceGroupPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t physicalDeviceCount;
  *     VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
  *     VkBool32 subsetAllocation;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceGroupPropertiesKHR extends VkPhysicalDeviceGroupProperties {
 

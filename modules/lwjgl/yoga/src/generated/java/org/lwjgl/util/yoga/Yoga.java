@@ -14,38 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to <a href="https://www.yogalayout.dev/">Yoga</a>.
- * 
- * <p>Yoga is an embeddable layout system used in popular UI frameworks like React Native. Yoga itself is not a UI framework, and does not do any drawing
- * itself. Yoga's only responsibility is determining the size and position of boxes.</p>
- * 
- * <p>Yoga supports a familiar subset of CSS, mostly focused on Flexbox. This gives users a familiar model, and enables sharing code between native platforms
- * and the browser.</p>
- * 
- * <p>Yoga is written in C++, with a public C API. This allows Yoga to be used by a wide variety of languages, via both offficial and unofficial bindings.</p>
- */
 public class Yoga {
 
     static { LibYoga.initialize(); }
 
-    /**
-     * YGAlign
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGAlignAuto AlignAuto}</li>
-     * <li>{@link #YGAlignFlexStart AlignFlexStart}</li>
-     * <li>{@link #YGAlignCenter AlignCenter}</li>
-     * <li>{@link #YGAlignFlexEnd AlignFlexEnd}</li>
-     * <li>{@link #YGAlignStretch AlignStretch}</li>
-     * <li>{@link #YGAlignBaseline AlignBaseline}</li>
-     * <li>{@link #YGAlignSpaceBetween AlignSpaceBetween}</li>
-     * <li>{@link #YGAlignSpaceAround AlignSpaceAround}</li>
-     * <li>{@link #YGAlignSpaceEvenly AlignSpaceEvenly}</li>
-     * </ul>
-     */
     public static final int
         YGAlignAuto         = 0,
         YGAlignFlexStart    = 1,
@@ -57,83 +29,24 @@ public class Yoga {
         YGAlignSpaceAround  = 7,
         YGAlignSpaceEvenly  = 8;
 
-    /**
-     * YGBoxSizing
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGBoxSizingBorderBox BoxSizingBorderBox}</li>
-     * <li>{@link #YGBoxSizingContentBox BoxSizingContentBox}</li>
-     * </ul>
-     */
     public static final int
         YGBoxSizingBorderBox  = 0,
         YGBoxSizingContentBox = 1;
 
-    /**
-     * YGDimension
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGDimensionWidth DimensionWidth}</li>
-     * <li>{@link #YGDimensionHeight DimensionHeight}</li>
-     * </ul>
-     */
     public static final int
         YGDimensionWidth  = 0,
         YGDimensionHeight = 1;
 
-    /**
-     * YGDirection
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGDirectionInherit DirectionInherit}</li>
-     * <li>{@link #YGDirectionLTR DirectionLTR}</li>
-     * <li>{@link #YGDirectionRTL DirectionRTL}</li>
-     * </ul>
-     */
     public static final int
         YGDirectionInherit = 0,
         YGDirectionLTR     = 1,
         YGDirectionRTL     = 2;
 
-    /**
-     * YGDisplay
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGDisplayFlex DisplayFlex}</li>
-     * <li>{@link #YGDisplayNone DisplayNone}</li>
-     * <li>{@link #YGDisplayContents DisplayContents}</li>
-     * </ul>
-     */
     public static final int
         YGDisplayFlex     = 0,
         YGDisplayNone     = 1,
         YGDisplayContents = 2;
 
-    /**
-     * YGEdge
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGEdgeLeft EdgeLeft}</li>
-     * <li>{@link #YGEdgeTop EdgeTop}</li>
-     * <li>{@link #YGEdgeRight EdgeRight}</li>
-     * <li>{@link #YGEdgeBottom EdgeBottom}</li>
-     * <li>{@link #YGEdgeStart EdgeStart}</li>
-     * <li>{@link #YGEdgeEnd EdgeEnd}</li>
-     * <li>{@link #YGEdgeHorizontal EdgeHorizontal}</li>
-     * <li>{@link #YGEdgeVertical EdgeVertical}</li>
-     * <li>{@link #YGEdgeAll EdgeAll}</li>
-     * </ul>
-     */
     public static final int
         YGEdgeLeft       = 0,
         YGEdgeTop        = 1,
@@ -145,20 +58,6 @@ public class Yoga {
         YGEdgeVertical   = 7,
         YGEdgeAll        = 8;
 
-    /**
-     * YGErrata
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGErrataNone ErrataNone}</li>
-     * <li>{@link #YGErrataStretchFlexBasis ErrataStretchFlexBasis}</li>
-     * <li>{@link #YGErrataAbsolutePositionWithoutInsetsExcludesPadding ErrataAbsolutePositionWithoutInsetsExcludesPadding}</li>
-     * <li>{@link #YGErrataAbsolutePercentAgainstInnerSize ErrataAbsolutePercentAgainstInnerSize}</li>
-     * <li>{@link #YGErrataAll ErrataAll}</li>
-     * <li>{@link #YGErrataClassic ErrataClassic}</li>
-     * </ul>
-     */
     public static final int
         YGErrataNone                                         = 0,
         YGErrataStretchFlexBasis                             = 1,
@@ -167,57 +66,19 @@ public class Yoga {
         YGErrataAll                                          = 2147483647,
         YGErrataClassic                                      = 2147483646;
 
-    /** YGExperimentalFeature */
     public static final int YGExperimentalFeatureWebFlexBasis = 0;
 
-    /**
-     * YGFlexDirection
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGFlexDirectionColumn FlexDirectionColumn}</li>
-     * <li>{@link #YGFlexDirectionColumnReverse FlexDirectionColumnReverse}</li>
-     * <li>{@link #YGFlexDirectionRow FlexDirectionRow}</li>
-     * <li>{@link #YGFlexDirectionRowReverse FlexDirectionRowReverse}</li>
-     * </ul>
-     */
     public static final int
         YGFlexDirectionColumn        = 0,
         YGFlexDirectionColumnReverse = 1,
         YGFlexDirectionRow           = 2,
         YGFlexDirectionRowReverse    = 3;
 
-    /**
-     * YGGutter
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGGutterColumn GutterColumn}</li>
-     * <li>{@link #YGGutterRow GutterRow}</li>
-     * <li>{@link #YGGutterAll GutterAll}</li>
-     * </ul>
-     */
     public static final int
         YGGutterColumn = 0,
         YGGutterRow    = 1,
         YGGutterAll    = 2;
 
-    /**
-     * YGJustify
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGJustifyFlexStart JustifyFlexStart}</li>
-     * <li>{@link #YGJustifyCenter JustifyCenter}</li>
-     * <li>{@link #YGJustifyFlexEnd JustifyFlexEnd}</li>
-     * <li>{@link #YGJustifySpaceBetween JustifySpaceBetween}</li>
-     * <li>{@link #YGJustifySpaceAround JustifySpaceAround}</li>
-     * <li>{@link #YGJustifySpaceEvenly JustifySpaceEvenly}</li>
-     * </ul>
-     */
     public static final int
         YGJustifyFlexStart    = 0,
         YGJustifyCenter       = 1,
@@ -226,20 +87,6 @@ public class Yoga {
         YGJustifySpaceAround  = 4,
         YGJustifySpaceEvenly  = 5;
 
-    /**
-     * YGLogLevel
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGLogLevelError LogLevelError}</li>
-     * <li>{@link #YGLogLevelWarn LogLevelWarn}</li>
-     * <li>{@link #YGLogLevelInfo LogLevelInfo}</li>
-     * <li>{@link #YGLogLevelDebug LogLevelDebug}</li>
-     * <li>{@link #YGLogLevelVerbose LogLevelVerbose}</li>
-     * <li>{@link #YGLogLevelFatal LogLevelFatal}</li>
-     * </ul>
-     */
     public static final int
         YGLogLevelError   = 0,
         YGLogLevelWarn    = 1,
@@ -248,97 +95,31 @@ public class Yoga {
         YGLogLevelVerbose = 4,
         YGLogLevelFatal   = 5;
 
-    /**
-     * YGMeasureMode
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGMeasureModeUndefined MeasureModeUndefined}</li>
-     * <li>{@link #YGMeasureModeExactly MeasureModeExactly}</li>
-     * <li>{@link #YGMeasureModeAtMost MeasureModeAtMost}</li>
-     * </ul>
-     */
     public static final int
         YGMeasureModeUndefined = 0,
         YGMeasureModeExactly   = 1,
         YGMeasureModeAtMost    = 2;
 
-    /**
-     * YGNodeType
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGNodeTypeDefault NodeTypeDefault}</li>
-     * <li>{@link #YGNodeTypeText NodeTypeText}</li>
-     * </ul>
-     */
     public static final int
         YGNodeTypeDefault = 0,
         YGNodeTypeText    = 1;
 
-    /**
-     * YGOverflow
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGOverflowVisible OverflowVisible}</li>
-     * <li>{@link #YGOverflowHidden OverflowHidden}</li>
-     * <li>{@link #YGOverflowScroll OverflowScroll}</li>
-     * </ul>
-     */
     public static final int
         YGOverflowVisible = 0,
         YGOverflowHidden  = 1,
         YGOverflowScroll  = 2;
 
-    /**
-     * YGPositionType
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGPositionTypeStatic PositionTypeStatic}</li>
-     * <li>{@link #YGPositionTypeRelative PositionTypeRelative}</li>
-     * <li>{@link #YGPositionTypeAbsolute PositionTypeAbsolute}</li>
-     * </ul>
-     */
     public static final int
         YGPositionTypeStatic   = 0,
         YGPositionTypeRelative = 1,
         YGPositionTypeAbsolute = 2;
 
-    /**
-     * YGUnit
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGUnitUndefined UnitUndefined}</li>
-     * <li>{@link #YGUnitPoint UnitPoint}</li>
-     * <li>{@link #YGUnitPercent UnitPercent}</li>
-     * <li>{@link #YGUnitAuto UnitAuto}</li>
-     * </ul>
-     */
     public static final int
         YGUnitUndefined = 0,
         YGUnitPoint     = 1,
         YGUnitPercent   = 2,
         YGUnitAuto      = 3;
 
-    /**
-     * YGWrap
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #YGWrapNoWrap WrapNoWrap}</li>
-     * <li>{@link #YGWrapWrap WrapWrap}</li>
-     * <li>{@link #YGWrapReverse WrapReverse}</li>
-     * </ul>
-     */
     public static final int
         YGWrapNoWrap  = 0,
         YGWrapWrap    = 1,
@@ -352,20 +133,16 @@ public class Yoga {
 
     // --- [ YGConfigNew ] ---
 
-    /**
-     * Allocates a set of configuration options.
-     * 
-     * <p>The configuration may be applied to multiple nodes (i.e. a single global config), or can be applied more granularly per-node.</p>
-     */
+    /** {@code YGConfigRef YGConfigNew(void)} */
     @NativeType("YGConfigRef")
     public static native long YGConfigNew();
 
     // --- [ YGConfigFree ] ---
 
-    /** Unsafe version of: {@link #YGConfigFree ConfigFree} */
+    /** {@code void YGConfigFree(YGConfigRef config)} */
     public static native void nYGConfigFree(long config);
 
-    /** Frees the associated Yoga configuration. */
+    /** {@code void YGConfigFree(YGConfigRef config)} */
     public static void YGConfigFree(@NativeType("YGConfigRef") long config) {
         if (CHECKS) {
             check(config);
@@ -375,20 +152,16 @@ public class Yoga {
 
     // --- [ YGConfigGetDefault ] ---
 
-    /** Returns the default config values set by Yoga. */
+    /** {@code YGConfigConstRef YGConfigGetDefault(void)} */
     @NativeType("YGConfigConstRef")
     public static native long YGConfigGetDefault();
 
     // --- [ YGConfigSetUseWebDefaults ] ---
 
-    /** Unsafe version of: {@link #YGConfigSetUseWebDefaults ConfigSetUseWebDefaults} */
+    /** {@code void YGConfigSetUseWebDefaults(YGConfigRef config, bool enabled)} */
     public static native void nYGConfigSetUseWebDefaults(long config, boolean enabled);
 
-    /**
-     * Yoga by default creates new nodes with style defaults different from flexbox on web (e.g. {@link #YGFlexDirectionColumn FlexDirectionColumn} and {@link #YGPositionTypeRelative PositionTypeRelative}).
-     * 
-     * <p>{@code UseWebDefaults} instructs Yoga to instead use a default style consistent with the web.</p>
-     */
+    /** {@code void YGConfigSetUseWebDefaults(YGConfigRef config, bool enabled)} */
     public static void YGConfigSetUseWebDefaults(@NativeType("YGConfigRef") long config, @NativeType("bool") boolean enabled) {
         if (CHECKS) {
             check(config);
@@ -398,10 +171,10 @@ public class Yoga {
 
     // --- [ YGConfigGetUseWebDefaults ] ---
 
-    /** Unsafe version of: {@link #YGConfigGetUseWebDefaults ConfigGetUseWebDefaults} */
+    /** {@code bool YGConfigGetUseWebDefaults(YGConfigConstRef config)} */
     public static native boolean nYGConfigGetUseWebDefaults(long config);
 
-    /** Whether the configuration is set to use web defaults. */
+    /** {@code bool YGConfigGetUseWebDefaults(YGConfigConstRef config)} */
     @NativeType("bool")
     public static boolean YGConfigGetUseWebDefaults(@NativeType("YGConfigConstRef") long config) {
         if (CHECKS) {
@@ -412,16 +185,10 @@ public class Yoga {
 
     // --- [ YGConfigSetPointScaleFactor ] ---
 
-    /** Unsafe version of: {@link #YGConfigSetPointScaleFactor ConfigSetPointScaleFactor} */
+    /** {@code void YGConfigSetPointScaleFactor(YGConfigRef config, float pixelsInPoint)} */
     public static native void nYGConfigSetPointScaleFactor(long config, float pixelsInPoint);
 
-    /**
-     * Yoga will by default round final layout positions and dimensions to the nearst point.
-     * 
-     * <p>{@code pointScaleFactor} controls the density of the grid used for layout rounding (e.g. to round to the closest display pixel).</p>
-     * 
-     * <p>May be set to 0.0f to avoid rounding the layout results.</p>
-     */
+    /** {@code void YGConfigSetPointScaleFactor(YGConfigRef config, float pixelsInPoint)} */
     public static void YGConfigSetPointScaleFactor(@NativeType("YGConfigRef") long config, float pixelsInPoint) {
         if (CHECKS) {
             check(config);
@@ -431,10 +198,10 @@ public class Yoga {
 
     // --- [ YGConfigGetPointScaleFactor ] ---
 
-    /** Unsafe version of: {@link #YGConfigGetPointScaleFactor ConfigGetPointScaleFactor} */
+    /** {@code float YGConfigGetPointScaleFactor(YGConfigConstRef config)} */
     public static native float nYGConfigGetPointScaleFactor(long config);
 
-    /** Get the currently set point scale factor. */
+    /** {@code float YGConfigGetPointScaleFactor(YGConfigConstRef config)} */
     public static float YGConfigGetPointScaleFactor(@NativeType("YGConfigConstRef") long config) {
         if (CHECKS) {
             check(config);
@@ -444,23 +211,10 @@ public class Yoga {
 
     // --- [ YGConfigSetErrata ] ---
 
-    /** Unsafe version of: {@link #YGConfigSetErrata ConfigSetErrata} */
+    /** {@code void YGConfigSetErrata(YGConfigRef config, YGErrata errata)} */
     public static native void nYGConfigSetErrata(long config, int errata);
 
-    /**
-     * Configures how Yoga balances W3C conformance vs compatibility with layouts created against earlier versions of Yoga.
-     * 
-     * <p>By default Yoga will prioritize W3C conformance. {@code Errata} may be set to ask Yoga to produce specific incorrect behaviors. E.g.
-     * {@code YGConfigSetErrata(config, YGErrataStretchFlexBasis)}.</p>
-     * 
-     * <p>{@code YGErrata} is a bitmask, and multiple errata may be set at once. Predefined constants exist for convenience:</p>
-     * 
-     * <ol>
-     * <li>{@link #YGErrataNone ErrataNone}: No errata</li>
-     * <li>{@link #YGErrataClassic ErrataClassic}: Match layout behaviors of Yoga 1.x</li>
-     * <li>{@link #YGErrataAll ErrataAll}: Match layout behaviors of Yoga 1.x, including {@code UseLegacyStretchBehaviour}</li>
-     * </ol>
-     */
+    /** {@code void YGConfigSetErrata(YGConfigRef config, YGErrata errata)} */
     public static void YGConfigSetErrata(@NativeType("YGConfigRef") long config, @NativeType("YGErrata") int errata) {
         if (CHECKS) {
             check(config);
@@ -470,10 +224,10 @@ public class Yoga {
 
     // --- [ YGConfigGetErrata ] ---
 
-    /** Unsafe version of: {@link #YGConfigGetErrata ConfigGetErrata} */
+    /** {@code YGErrata YGConfigGetErrata(YGConfigConstRef config)} */
     public static native int nYGConfigGetErrata(long config);
 
-    /** Get the currently set errata. */
+    /** {@code YGErrata YGConfigGetErrata(YGConfigConstRef config)} */
     @NativeType("YGErrata")
     public static int YGConfigGetErrata(@NativeType("YGConfigConstRef") long config) {
         if (CHECKS) {
@@ -484,10 +238,10 @@ public class Yoga {
 
     // --- [ YGConfigSetLogger ] ---
 
-    /** Unsafe version of: {@link #YGConfigSetLogger ConfigSetLogger} */
+    /** {@code void YGConfigSetLogger(YGConfigRef config, YGLogger logger)} */
     public static native void nYGConfigSetLogger(long config, long logger);
 
-    /** Set a custom log function for to use when logging diagnostics or fatal errors. */
+    /** {@code void YGConfigSetLogger(YGConfigRef config, YGLogger logger)} */
     public static void YGConfigSetLogger(@NativeType("YGConfigRef") long config, @NativeType("YGLogger") @Nullable YGLoggerI logger) {
         if (CHECKS) {
             check(config);
@@ -497,10 +251,10 @@ public class Yoga {
 
     // --- [ YGConfigSetContext ] ---
 
-    /** Unsafe version of: {@link #YGConfigSetContext ConfigSetContext} */
+    /** {@code void YGConfigSetContext(YGConfigRef config, void * context)} */
     public static native void nYGConfigSetContext(long config, long context);
 
-    /** Sets an arbitrary context pointer on the config which may be read from during callbacks. */
+    /** {@code void YGConfigSetContext(YGConfigRef config, void * context)} */
     public static void YGConfigSetContext(@NativeType("YGConfigRef") long config, @NativeType("void *") long context) {
         if (CHECKS) {
             check(config);
@@ -510,10 +264,10 @@ public class Yoga {
 
     // --- [ YGConfigGetContext ] ---
 
-    /** Unsafe version of: {@link #YGConfigGetContext ConfigGetContext} */
+    /** {@code void * YGConfigGetContext(YGConfigConstRef config)} */
     public static native long nYGConfigGetContext(long config);
 
-    /** Gets the currently set context. */
+    /** {@code void * YGConfigGetContext(YGConfigConstRef config)} */
     @NativeType("void *")
     public static long YGConfigGetContext(@NativeType("YGConfigConstRef") long config) {
         if (CHECKS) {
@@ -524,14 +278,10 @@ public class Yoga {
 
     // --- [ YGConfigSetExperimentalFeatureEnabled ] ---
 
-    /** Unsafe version of: {@link #YGConfigSetExperimentalFeatureEnabled ConfigSetExperimentalFeatureEnabled} */
+    /** {@code void YGConfigSetExperimentalFeatureEnabled(YGConfigRef config, YGExperimentalFeature feature, bool enabled)} */
     public static native void nYGConfigSetExperimentalFeatureEnabled(long config, int feature, boolean enabled);
 
-    /**
-     * Enable an experimental/unsupported feature in Yoga.
-     *
-     * @param feature must be:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr></table>
-     */
+    /** {@code void YGConfigSetExperimentalFeatureEnabled(YGConfigRef config, YGExperimentalFeature feature, bool enabled)} */
     public static void YGConfigSetExperimentalFeatureEnabled(@NativeType("YGConfigRef") long config, @NativeType("YGExperimentalFeature") int feature, @NativeType("bool") boolean enabled) {
         if (CHECKS) {
             check(config);
@@ -541,14 +291,10 @@ public class Yoga {
 
     // --- [ YGConfigIsExperimentalFeatureEnabled ] ---
 
-    /** Unsafe version of: {@link #YGConfigIsExperimentalFeatureEnabled ConfigIsExperimentalFeatureEnabled} */
+    /** {@code bool YGConfigIsExperimentalFeatureEnabled(YGConfigConstRef config, YGExperimentalFeature feature)} */
     public static native boolean nYGConfigIsExperimentalFeatureEnabled(long config, int feature);
 
-    /**
-     * Whether an experimental feature is set.
-     *
-     * @param feature must be:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr></table>
-     */
+    /** {@code bool YGConfigIsExperimentalFeatureEnabled(YGConfigConstRef config, YGExperimentalFeature feature)} */
     @NativeType("bool")
     public static boolean YGConfigIsExperimentalFeatureEnabled(@NativeType("YGConfigConstRef") long config, @NativeType("YGExperimentalFeature") int feature) {
         if (CHECKS) {
@@ -559,13 +305,10 @@ public class Yoga {
 
     // --- [ YGConfigSetCloneNodeFunc ] ---
 
-    /** Unsafe version of: {@link #YGConfigSetCloneNodeFunc ConfigSetCloneNodeFunc} */
+    /** {@code void YGConfigSetCloneNodeFunc(YGConfigRef config, YGCloneNodeFunc callback)} */
     public static native void nYGConfigSetCloneNodeFunc(long config, long callback);
 
-    /**
-     * Sets a callback, called during layout, to create a new mutable Yoga node if Yoga must write to it and its owner is not its parent observed during
-     * layout.
-     */
+    /** {@code void YGConfigSetCloneNodeFunc(YGConfigRef config, YGCloneNodeFunc callback)} */
     public static void YGConfigSetCloneNodeFunc(@NativeType("YGConfigRef") long config, @NativeType("YGCloneNodeFunc") @Nullable YGCloneNodeFuncI callback) {
         if (CHECKS) {
             check(config);
@@ -575,16 +318,16 @@ public class Yoga {
 
     // --- [ YGNodeNew ] ---
 
-    /** Heap allocates and returns a new Yoga node using Yoga settings. */
+    /** {@code YGNodeRef YGNodeNew(void)} */
     @NativeType("YGNodeRef")
     public static native long YGNodeNew();
 
     // --- [ YGNodeNewWithConfig ] ---
 
-    /** Unsafe version of: {@link #YGNodeNewWithConfig NodeNewWithConfig} */
+    /** {@code YGNodeRef YGNodeNewWithConfig(YGConfigConstRef config)} */
     public static native long nYGNodeNewWithConfig(long config);
 
-    /** Heap allocates and returns a new Yoga node, with customized settings. */
+    /** {@code YGNodeRef YGNodeNewWithConfig(YGConfigConstRef config)} */
     @NativeType("YGNodeRef")
     public static long YGNodeNewWithConfig(@NativeType("YGConfigConstRef") long config) {
         if (CHECKS) {
@@ -595,14 +338,10 @@ public class Yoga {
 
     // --- [ YGNodeClone ] ---
 
-    /** Unsafe version of: {@link #YGNodeClone NodeClone} */
+    /** {@code YGNodeRef YGNodeClone(YGNodeConstRef node)} */
     public static native long nYGNodeClone(long node);
 
-    /**
-     * Returns a mutable copy of an existing node, with the same context and children, but no owner set.
-     * 
-     * <p>Does not call the function set by {@link #YGConfigSetCloneNodeFunc ConfigSetCloneNodeFunc}.</p>
-     */
+    /** {@code YGNodeRef YGNodeClone(YGNodeConstRef node)} */
     @NativeType("YGNodeRef")
     public static long YGNodeClone(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -613,10 +352,10 @@ public class Yoga {
 
     // --- [ YGNodeFree ] ---
 
-    /** Unsafe version of: {@link #YGNodeFree NodeFree} */
+    /** {@code void YGNodeFree(YGNodeRef node)} */
     public static native void nYGNodeFree(long node);
 
-    /** Frees the Yoga node, disconnecting it from its owner and children. */
+    /** {@code void YGNodeFree(YGNodeRef node)} */
     public static void YGNodeFree(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -626,10 +365,10 @@ public class Yoga {
 
     // --- [ YGNodeFreeRecursive ] ---
 
-    /** Unsafe version of: {@link #YGNodeFreeRecursive NodeFreeRecursive} */
+    /** {@code void YGNodeFreeRecursive(YGNodeRef node)} */
     public static native void nYGNodeFreeRecursive(long node);
 
-    /** Frees the subtree of Yoga nodes rooted at the given node. */
+    /** {@code void YGNodeFreeRecursive(YGNodeRef node)} */
     public static void YGNodeFreeRecursive(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -639,14 +378,10 @@ public class Yoga {
 
     // --- [ YGNodeFinalize ] ---
 
-    /** Unsafe version of: {@link #YGNodeFinalize NodeFinalize} */
+    /** {@code void YGNodeFinalize(YGNodeRef node)} */
     public static native void nYGNodeFinalize(long node);
 
-    /**
-     * Frees the Yoga node without disconnecting it from its owner or children.
-     * 
-     * <p>Allows garbage collecting Yoga nodes in parallel when the entire tree is unreachable.</p>
-     */
+    /** {@code void YGNodeFinalize(YGNodeRef node)} */
     public static void YGNodeFinalize(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -656,10 +391,10 @@ public class Yoga {
 
     // --- [ YGNodeReset ] ---
 
-    /** Unsafe version of: {@link #YGNodeReset NodeReset} */
+    /** {@code void YGNodeReset(YGNodeRef node)} */
     public static native void nYGNodeReset(long node);
 
-    /** Resets the node to its default state. */
+    /** {@code void YGNodeReset(YGNodeRef node)} */
     public static void YGNodeReset(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -669,19 +404,10 @@ public class Yoga {
 
     // --- [ YGNodeCalculateLayout ] ---
 
-    /** Unsafe version of: {@link #YGNodeCalculateLayout NodeCalculateLayout} */
+    /** {@code void YGNodeCalculateLayout(YGNodeRef node, float availableWidth, float availableHeight, YGDirection ownerDirection)} */
     public static native void nYGNodeCalculateLayout(long node, float availableWidth, float availableHeight, int ownerDirection);
 
-    /**
-     * Calculates the layout of the tree rooted at the given node.
-     * 
-     * <p>Layout results may be read after calling {@code YGNodeCalculateLayout()} using functions like {@link #YGNodeLayoutGetLeft NodeLayoutGetLeft}, {@link #YGNodeLayoutGetTop NodeLayoutGetTop}, etc.</p>
-     * 
-     * <p>{@link #YGNodeGetHasNewLayout NodeGetHasNewLayout} may be read to know if the layout of the node or its subtrees may have changed since the last time {@code YGNodeCalculate()} was
-     * called.</p>
-     *
-     * @param ownerDirection one of:<br><table><tr><td>{@link #YGDirectionInherit DirectionInherit}</td><td>{@link #YGDirectionLTR DirectionLTR}</td><td>{@link #YGDirectionRTL DirectionRTL}</td></tr></table>
-     */
+    /** {@code void YGNodeCalculateLayout(YGNodeRef node, float availableWidth, float availableHeight, YGDirection ownerDirection)} */
     public static void YGNodeCalculateLayout(@NativeType("YGNodeRef") long node, float availableWidth, float availableHeight, @NativeType("YGDirection") int ownerDirection) {
         if (CHECKS) {
             check(node);
@@ -691,14 +417,10 @@ public class Yoga {
 
     // --- [ YGNodeGetHasNewLayout ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetHasNewLayout NodeGetHasNewLayout} */
+    /** {@code bool YGNodeGetHasNewLayout(YGNodeConstRef node)} */
     public static native boolean nYGNodeGetHasNewLayout(long node);
 
-    /**
-     * Whether the given node may have new layout results.
-     * 
-     * <p>Must be reset by calling {@link #YGNodeSetHasNewLayout NodeSetHasNewLayout}.</p>
-     */
+    /** {@code bool YGNodeGetHasNewLayout(YGNodeConstRef node)} */
     @NativeType("bool")
     public static boolean YGNodeGetHasNewLayout(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -709,10 +431,10 @@ public class Yoga {
 
     // --- [ YGNodeSetHasNewLayout ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetHasNewLayout NodeSetHasNewLayout} */
+    /** {@code void YGNodeSetHasNewLayout(YGNodeRef node, bool hasNewLayout)} */
     public static native void nYGNodeSetHasNewLayout(long node, boolean hasNewLayout);
 
-    /** Sets whether a nodes layout is considered new. */
+    /** {@code void YGNodeSetHasNewLayout(YGNodeRef node, bool hasNewLayout)} */
     public static void YGNodeSetHasNewLayout(@NativeType("YGNodeRef") long node, @NativeType("bool") boolean hasNewLayout) {
         if (CHECKS) {
             check(node);
@@ -722,10 +444,10 @@ public class Yoga {
 
     // --- [ YGNodeIsDirty ] ---
 
-    /** Unsafe version of: {@link #YGNodeIsDirty NodeIsDirty} */
+    /** {@code bool YGNodeIsDirty(YGNodeConstRef node)} */
     public static native boolean nYGNodeIsDirty(long node);
 
-    /** Whether the node's layout results are dirty due to it or its children changing. */
+    /** {@code bool YGNodeIsDirty(YGNodeConstRef node)} */
     @NativeType("bool")
     public static boolean YGNodeIsDirty(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -736,10 +458,10 @@ public class Yoga {
 
     // --- [ YGNodeMarkDirty ] ---
 
-    /** Unsafe version of: {@link #YGNodeMarkDirty NodeMarkDirty} */
+    /** {@code void YGNodeMarkDirty(YGNodeRef node)} */
     public static native void nYGNodeMarkDirty(long node);
 
-    /** Marks a node with custom measure function as dirty. */
+    /** {@code void YGNodeMarkDirty(YGNodeRef node)} */
     public static void YGNodeMarkDirty(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -749,10 +471,10 @@ public class Yoga {
 
     // --- [ YGNodeSetDirtiedFunc ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetDirtiedFunc NodeSetDirtiedFunc} */
+    /** {@code void YGNodeSetDirtiedFunc(YGNodeRef node, YGDirtiedFunc dirtiedFunc)} */
     public static native void nYGNodeSetDirtiedFunc(long node, long dirtiedFunc);
 
-    /** Called when a change is made to the Yoga tree which dirties this node. */
+    /** {@code void YGNodeSetDirtiedFunc(YGNodeRef node, YGDirtiedFunc dirtiedFunc)} */
     public static void YGNodeSetDirtiedFunc(@NativeType("YGNodeRef") long node, @NativeType("YGDirtiedFunc") @Nullable YGDirtiedFuncI dirtiedFunc) {
         if (CHECKS) {
             check(node);
@@ -762,10 +484,10 @@ public class Yoga {
 
     // --- [ YGNodeGetDirtiedFunc ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetDirtiedFunc NodeGetDirtiedFunc} */
+    /** {@code YGDirtiedFunc YGNodeGetDirtiedFunc(YGNodeConstRef node)} */
     public static native long nYGNodeGetDirtiedFunc(long node);
 
-    /** Returns a dirtied func if set. */
+    /** {@code YGDirtiedFunc YGNodeGetDirtiedFunc(YGNodeConstRef node)} */
     @NativeType("YGDirtiedFunc")
     public static @Nullable YGDirtiedFunc YGNodeGetDirtiedFunc(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -776,10 +498,10 @@ public class Yoga {
 
     // --- [ YGNodeInsertChild ] ---
 
-    /** Unsafe version of: {@link #YGNodeInsertChild NodeInsertChild} */
+    /** {@code void YGNodeInsertChild(YGNodeRef node, YGNodeRef child, size_t index)} */
     public static native void nYGNodeInsertChild(long node, long child, long index);
 
-    /** Inserts a child node at the given index. */
+    /** {@code void YGNodeInsertChild(YGNodeRef node, YGNodeRef child, size_t index)} */
     public static void YGNodeInsertChild(@NativeType("YGNodeRef") long node, @NativeType("YGNodeRef") long child, @NativeType("size_t") long index) {
         if (CHECKS) {
             check(node);
@@ -790,10 +512,10 @@ public class Yoga {
 
     // --- [ YGNodeSwapChild ] ---
 
-    /** Unsafe version of: {@link #YGNodeSwapChild NodeSwapChild} */
+    /** {@code void YGNodeSwapChild(YGNodeRef node, YGNodeRef child, size_t index)} */
     public static native void nYGNodeSwapChild(long node, long child, long index);
 
-    /** Replaces the child node at a given index with a new one. */
+    /** {@code void YGNodeSwapChild(YGNodeRef node, YGNodeRef child, size_t index)} */
     public static void YGNodeSwapChild(@NativeType("YGNodeRef") long node, @NativeType("YGNodeRef") long child, @NativeType("size_t") long index) {
         if (CHECKS) {
             check(node);
@@ -804,10 +526,10 @@ public class Yoga {
 
     // --- [ YGNodeRemoveChild ] ---
 
-    /** Unsafe version of: {@link #YGNodeRemoveChild NodeRemoveChild} */
+    /** {@code void YGNodeRemoveChild(YGNodeRef node, YGNodeRef child)} */
     public static native void nYGNodeRemoveChild(long node, long child);
 
-    /** Removes the given child node. */
+    /** {@code void YGNodeRemoveChild(YGNodeRef node, YGNodeRef child)} */
     public static void YGNodeRemoveChild(@NativeType("YGNodeRef") long node, @NativeType("YGNodeRef") long child) {
         if (CHECKS) {
             check(node);
@@ -818,10 +540,10 @@ public class Yoga {
 
     // --- [ YGNodeRemoveAllChildren ] ---
 
-    /** Unsafe version of: {@link #YGNodeRemoveAllChildren NodeRemoveAllChildren} */
+    /** {@code void YGNodeRemoveAllChildren(YGNodeRef node)} */
     public static native void nYGNodeRemoveAllChildren(long node);
 
-    /** Removes all children nodes. */
+    /** {@code void YGNodeRemoveAllChildren(YGNodeRef node)} */
     public static void YGNodeRemoveAllChildren(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -831,10 +553,10 @@ public class Yoga {
 
     // --- [ YGNodeSetChildren ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetChildren NodeSetChildren} */
+    /** {@code void YGNodeSetChildren(YGNodeRef owner, YGNodeRef const * children, size_t count)} */
     public static native void nYGNodeSetChildren(long owner, long children, long count);
 
-    /** Sets children according to the given list of nodes. */
+    /** {@code void YGNodeSetChildren(YGNodeRef owner, YGNodeRef const * children, size_t count)} */
     public static void YGNodeSetChildren(@NativeType("YGNodeRef") long owner, @NativeType("YGNodeRef const *") PointerBuffer children) {
         if (CHECKS) {
             check(owner);
@@ -844,10 +566,10 @@ public class Yoga {
 
     // --- [ YGNodeGetChild ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetChild NodeGetChild} */
+    /** {@code YGNodeRef YGNodeGetChild(YGNodeRef node, size_t index)} */
     public static native long nYGNodeGetChild(long node, long index);
 
-    /** Get the child node at a given index. */
+    /** {@code YGNodeRef YGNodeGetChild(YGNodeRef node, size_t index)} */
     @NativeType("YGNodeRef")
     public static long YGNodeGetChild(@NativeType("YGNodeRef") long node, @NativeType("size_t") long index) {
         if (CHECKS) {
@@ -858,10 +580,10 @@ public class Yoga {
 
     // --- [ YGNodeGetChildCount ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetChildCount NodeGetChildCount} */
+    /** {@code size_t YGNodeGetChildCount(YGNodeConstRef node)} */
     public static native long nYGNodeGetChildCount(long node);
 
-    /** The number of child nodes. */
+    /** {@code size_t YGNodeGetChildCount(YGNodeConstRef node)} */
     @NativeType("size_t")
     public static long YGNodeGetChildCount(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -872,10 +594,10 @@ public class Yoga {
 
     // --- [ YGNodeGetOwner ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetOwner NodeGetOwner} */
+    /** {@code YGNodeRef YGNodeGetOwner(YGNodeRef node)} */
     public static native long nYGNodeGetOwner(long node);
 
-    /** Get the parent/owner currently set for a node. */
+    /** {@code YGNodeRef YGNodeGetOwner(YGNodeRef node)} */
     @NativeType("YGNodeRef")
     public static long YGNodeGetOwner(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
@@ -886,10 +608,10 @@ public class Yoga {
 
     // --- [ YGNodeGetParent ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetParent NodeGetParent} */
+    /** {@code YGNodeRef YGNodeGetParent(YGNodeRef node)} */
     public static native long nYGNodeGetParent(long node);
 
-    /** Get the parent/owner currently set for a node. */
+    /** {@code YGNodeRef YGNodeGetParent(YGNodeRef node)} */
     @NativeType("YGNodeRef")
     public static long YGNodeGetParent(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
@@ -900,10 +622,10 @@ public class Yoga {
 
     // --- [ YGNodeSetConfig ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetConfig NodeSetConfig} */
+    /** {@code void YGNodeSetConfig(YGNodeRef node, YGConfigRef config)} */
     public static native void nYGNodeSetConfig(long node, long config);
 
-    /** Set a new config for the node after creation. */
+    /** {@code void YGNodeSetConfig(YGNodeRef node, YGConfigRef config)} */
     public static void YGNodeSetConfig(@NativeType("YGNodeRef") long node, @NativeType("YGConfigRef") long config) {
         if (CHECKS) {
             check(node);
@@ -914,10 +636,10 @@ public class Yoga {
 
     // --- [ YGNodeGetConfig ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetConfig NodeGetConfig} */
+    /** {@code YGConfigRef YGNodeGetConfig(YGNodeRef node)} */
     public static native long nYGNodeGetConfig(long node);
 
-    /** Get the config currently set on the node. */
+    /** {@code YGConfigRef YGNodeGetConfig(YGNodeRef node)} */
     @NativeType("YGConfigRef")
     public static long YGNodeGetConfig(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
@@ -928,10 +650,10 @@ public class Yoga {
 
     // --- [ YGNodeSetContext ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetContext NodeSetContext} */
+    /** {@code void YGNodeSetContext(YGNodeRef node, void * context)} */
     public static native void nYGNodeSetContext(long node, long context);
 
-    /** Sets extra data on the Yoga node which may be read from during callbacks. */
+    /** {@code void YGNodeSetContext(YGNodeRef node, void * context)} */
     public static void YGNodeSetContext(@NativeType("YGNodeRef") long node, @NativeType("void *") long context) {
         if (CHECKS) {
             check(node);
@@ -941,10 +663,10 @@ public class Yoga {
 
     // --- [ YGNodeGetContext ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetContext NodeGetContext} */
+    /** {@code void * YGNodeGetContext(YGNodeRef node)} */
     public static native long nYGNodeGetContext(long node);
 
-    /** Returns the context or {@code NULL} if no context has been set. */
+    /** {@code void * YGNodeGetContext(YGNodeRef node)} */
     @NativeType("void *")
     public static long YGNodeGetContext(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
@@ -955,14 +677,10 @@ public class Yoga {
 
     // --- [ YGNodeSetMeasureFunc ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetMeasureFunc NodeSetMeasureFunc} */
+    /** {@code void YGNodeSetMeasureFunc(YGNodeRef node, YGMeasureFunc measureFunc)} */
     public static native void nYGNodeSetMeasureFunc(long node, long measureFunc);
 
-    /**
-     * Allows providing custom measurements for a Yoga leaf node (usually for measuring text).
-     * 
-     * <p>{@link #YGNodeMarkDirty NodeMarkDirty} must be set if content effecting the measurements of the node changes.</p>
-     */
+    /** {@code void YGNodeSetMeasureFunc(YGNodeRef node, YGMeasureFunc measureFunc)} */
     public static void YGNodeSetMeasureFunc(@NativeType("YGNodeRef") long node, @NativeType("YGMeasureFunc") @Nullable YGMeasureFuncI measureFunc) {
         if (CHECKS) {
             check(node);
@@ -972,10 +690,10 @@ public class Yoga {
 
     // --- [ YGNodeHasMeasureFunc ] ---
 
-    /** Unsafe version of: {@link #YGNodeHasMeasureFunc NodeHasMeasureFunc} */
+    /** {@code bool YGNodeHasMeasureFunc(YGNodeConstRef node)} */
     public static native boolean nYGNodeHasMeasureFunc(long node);
 
-    /** Whether a measure function is set. */
+    /** {@code bool YGNodeHasMeasureFunc(YGNodeConstRef node)} */
     @NativeType("bool")
     public static boolean YGNodeHasMeasureFunc(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -986,10 +704,10 @@ public class Yoga {
 
     // --- [ YGNodeSetBaselineFunc ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetBaselineFunc NodeSetBaselineFunc} */
+    /** {@code void YGNodeSetBaselineFunc(YGNodeRef node, YGBaselineFunc baselineFunc)} */
     public static native void nYGNodeSetBaselineFunc(long node, long baselineFunc);
 
-    /** Set a custom function for determining the text baseline for use in baseline alignment. */
+    /** {@code void YGNodeSetBaselineFunc(YGNodeRef node, YGBaselineFunc baselineFunc)} */
     public static void YGNodeSetBaselineFunc(@NativeType("YGNodeRef") long node, @NativeType("YGBaselineFunc") @Nullable YGBaselineFuncI baselineFunc) {
         if (CHECKS) {
             check(node);
@@ -999,10 +717,10 @@ public class Yoga {
 
     // --- [ YGNodeHasBaselineFunc ] ---
 
-    /** Unsafe version of: {@link #YGNodeHasBaselineFunc NodeHasBaselineFunc} */
+    /** {@code bool YGNodeHasBaselineFunc(YGNodeConstRef node)} */
     public static native boolean nYGNodeHasBaselineFunc(long node);
 
-    /** Whether a baseline function is set. */
+    /** {@code bool YGNodeHasBaselineFunc(YGNodeConstRef node)} */
     @NativeType("bool")
     public static boolean YGNodeHasBaselineFunc(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1013,10 +731,10 @@ public class Yoga {
 
     // --- [ YGNodeSetIsReferenceBaseline ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetIsReferenceBaseline NodeSetIsReferenceBaseline} */
+    /** {@code void YGNodeSetIsReferenceBaseline(YGNodeRef node, bool isReferenceBaseline)} */
     public static native void nYGNodeSetIsReferenceBaseline(long node, boolean isReferenceBaseline);
 
-    /** Sets this node should be considered the reference baseline among siblings. */
+    /** {@code void YGNodeSetIsReferenceBaseline(YGNodeRef node, bool isReferenceBaseline)} */
     public static void YGNodeSetIsReferenceBaseline(@NativeType("YGNodeRef") long node, @NativeType("bool") boolean isReferenceBaseline) {
         if (CHECKS) {
             check(node);
@@ -1026,10 +744,10 @@ public class Yoga {
 
     // --- [ YGNodeIsReferenceBaseline ] ---
 
-    /** Unsafe version of: {@link #YGNodeIsReferenceBaseline NodeIsReferenceBaseline} */
+    /** {@code bool YGNodeIsReferenceBaseline(YGNodeConstRef node)} */
     public static native boolean nYGNodeIsReferenceBaseline(long node);
 
-    /** Whether this node is set as the reference baseline. */
+    /** {@code bool YGNodeIsReferenceBaseline(YGNodeConstRef node)} */
     @NativeType("bool")
     public static boolean YGNodeIsReferenceBaseline(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1040,10 +758,10 @@ public class Yoga {
 
     // --- [ YGNodeSetNodeType ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetNodeType NodeSetNodeType} */
+    /** {@code void YGNodeSetNodeType(YGNodeRef node, YGNodeType nodeType)} */
     public static native void nYGNodeSetNodeType(long node, int nodeType);
 
-    /** Sets whether a leaf node's layout results may be truncated during layout rounding. */
+    /** {@code void YGNodeSetNodeType(YGNodeRef node, YGNodeType nodeType)} */
     public static void YGNodeSetNodeType(@NativeType("YGNodeRef") long node, @NativeType("YGNodeType") int nodeType) {
         if (CHECKS) {
             check(node);
@@ -1053,10 +771,10 @@ public class Yoga {
 
     // --- [ YGNodeGetNodeType ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetNodeType NodeGetNodeType} */
+    /** {@code YGNodeType YGNodeGetNodeType(YGNodeConstRef node)} */
     public static native int nYGNodeGetNodeType(long node);
 
-    /** Whether a leaf node's layout results may be truncated during layout rounding. */
+    /** {@code YGNodeType YGNodeGetNodeType(YGNodeConstRef node)} */
     @NativeType("YGNodeType")
     public static int YGNodeGetNodeType(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1067,15 +785,10 @@ public class Yoga {
 
     // --- [ YGNodeSetAlwaysFormsContainingBlock ] ---
 
-    /** Unsafe version of: {@link #YGNodeSetAlwaysFormsContainingBlock NodeSetAlwaysFormsContainingBlock} */
+    /** {@code void YGNodeSetAlwaysFormsContainingBlock(YGNodeRef node, bool alwaysFormsContainingBlock)} */
     public static native void nYGNodeSetAlwaysFormsContainingBlock(long node, boolean alwaysFormsContainingBlock);
 
-    /**
-     * Make it so that this node will always form a containing block for any descendant nodes.
-     * 
-     * <p>This is useful for when a node has a property outside of Yoga that will form a containing block. For example, transforms or some of the others listed
-     * in <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block">Layout and the containing block</a>.</p>
-     */
+    /** {@code void YGNodeSetAlwaysFormsContainingBlock(YGNodeRef node, bool alwaysFormsContainingBlock)} */
     public static void YGNodeSetAlwaysFormsContainingBlock(@NativeType("YGNodeRef") long node, @NativeType("bool") boolean alwaysFormsContainingBlock) {
         if (CHECKS) {
             check(node);
@@ -1085,15 +798,10 @@ public class Yoga {
 
     // --- [ YGNodeGetAlwaysFormsContainingBlock ] ---
 
-    /** Unsafe version of: {@link #YGNodeGetAlwaysFormsContainingBlock NodeGetAlwaysFormsContainingBlock} */
+    /** {@code bool YGNodeGetAlwaysFormsContainingBlock(YGNodeConstRef node)} */
     public static native boolean nYGNodeGetAlwaysFormsContainingBlock(long node);
 
-    /**
-     * Whether the node will always form a containing block for any descendant.
-     * 
-     * <p>This can happen in situation where the client implements something like a transform that can affect containing blocks but is not handled by Yoga
-     * directly.</p>
-     */
+    /** {@code bool YGNodeGetAlwaysFormsContainingBlock(YGNodeConstRef node)} */
     @NativeType("bool")
     public static boolean YGNodeGetAlwaysFormsContainingBlock(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1104,8 +812,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetLeft ] ---
 
+    /** {@code float YGNodeLayoutGetLeft(YGNodeRef node)} */
     public static native float nYGNodeLayoutGetLeft(long node);
 
+    /** {@code float YGNodeLayoutGetLeft(YGNodeRef node)} */
     public static float YGNodeLayoutGetLeft(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1115,8 +825,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetTop ] ---
 
+    /** {@code float YGNodeLayoutGetTop(YGNodeRef node)} */
     public static native float nYGNodeLayoutGetTop(long node);
 
+    /** {@code float YGNodeLayoutGetTop(YGNodeRef node)} */
     public static float YGNodeLayoutGetTop(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1126,8 +838,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetRight ] ---
 
+    /** {@code float YGNodeLayoutGetRight(YGNodeRef node)} */
     public static native float nYGNodeLayoutGetRight(long node);
 
+    /** {@code float YGNodeLayoutGetRight(YGNodeRef node)} */
     public static float YGNodeLayoutGetRight(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1137,8 +851,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetBottom ] ---
 
+    /** {@code float YGNodeLayoutGetBottom(YGNodeRef node)} */
     public static native float nYGNodeLayoutGetBottom(long node);
 
+    /** {@code float YGNodeLayoutGetBottom(YGNodeRef node)} */
     public static float YGNodeLayoutGetBottom(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1148,8 +864,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetWidth ] ---
 
+    /** {@code float YGNodeLayoutGetWidth(YGNodeRef node)} */
     public static native float nYGNodeLayoutGetWidth(long node);
 
+    /** {@code float YGNodeLayoutGetWidth(YGNodeRef node)} */
     public static float YGNodeLayoutGetWidth(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1159,8 +877,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetHeight ] ---
 
+    /** {@code float YGNodeLayoutGetHeight(YGNodeRef node)} */
     public static native float nYGNodeLayoutGetHeight(long node);
 
+    /** {@code float YGNodeLayoutGetHeight(YGNodeRef node)} */
     public static float YGNodeLayoutGetHeight(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1170,8 +890,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetDirection ] ---
 
+    /** {@code YGDirection YGNodeLayoutGetDirection(YGNodeRef node)} */
     public static native int nYGNodeLayoutGetDirection(long node);
 
+    /** {@code YGDirection YGNodeLayoutGetDirection(YGNodeRef node)} */
     @NativeType("YGDirection")
     public static int YGNodeLayoutGetDirection(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
@@ -1182,8 +904,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetHadOverflow ] ---
 
+    /** {@code bool YGNodeLayoutGetHadOverflow(YGNodeRef node)} */
     public static native boolean nYGNodeLayoutGetHadOverflow(long node);
 
+    /** {@code bool YGNodeLayoutGetHadOverflow(YGNodeRef node)} */
     @NativeType("bool")
     public static boolean YGNodeLayoutGetHadOverflow(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
@@ -1194,17 +918,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetMargin ] ---
 
-    /** Unsafe version of: {@link #YGNodeLayoutGetMargin NodeLayoutGetMargin} */
+    /** {@code float YGNodeLayoutGetMargin(YGNodeRef node, YGEdge edge)} */
     public static native float nYGNodeLayoutGetMargin(long node, int edge);
 
-    /**
-     * Gets the computed value for these nodess after performing layout.
-     * 
-     * <p>If they were set using point values then the returned value will be the same as {@link #YGNodeStyleGetMargin NodeStyleGetMargin}). However if they were set using a percentage
-     * value then the returned value is the computed value used during layout.</p>
-     *
-     * @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table>
-     */
+    /** {@code float YGNodeLayoutGetMargin(YGNodeRef node, YGEdge edge)} */
     public static float YGNodeLayoutGetMargin(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge) {
         if (CHECKS) {
             check(node);
@@ -1214,17 +931,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetBorder ] ---
 
-    /** Unsafe version of: {@link #YGNodeLayoutGetBorder NodeLayoutGetBorder} */
+    /** {@code float YGNodeLayoutGetBorder(YGNodeRef node, YGEdge edge)} */
     public static native float nYGNodeLayoutGetBorder(long node, int edge);
 
-    /**
-     * Gets the computed value for these nodes after performing layout.
-     * 
-     * <p>If they were set using point values then the returned value will be the same as {@link #YGNodeStyleGetBorder NodeStyleGetBorder}. However if they were set using a percentage
-     * value then the returned value is the computed value used during layout.</p>
-     *
-     * @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table>
-     */
+    /** {@code float YGNodeLayoutGetBorder(YGNodeRef node, YGEdge edge)} */
     public static float YGNodeLayoutGetBorder(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge) {
         if (CHECKS) {
             check(node);
@@ -1234,17 +944,10 @@ public class Yoga {
 
     // --- [ YGNodeLayoutGetPadding ] ---
 
-    /** Unsafe version of: {@link #YGNodeLayoutGetPadding NodeLayoutGetPadding} */
+    /** {@code float YGNodeLayoutGetPadding(YGNodeRef node, YGEdge edge)} */
     public static native float nYGNodeLayoutGetPadding(long node, int edge);
 
-    /**
-     * Gets the computed value for these nodes after performing layout.
-     * 
-     * <p>If they were set using point values then the returned value will be the same as {@link #YGNodeStyleGetPadding NodeStyleGetPadding}. However if they were set using a percentage
-     * value then the returned value is the computed value used during layout.</p>
-     *
-     * @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table>
-     */
+    /** {@code float YGNodeLayoutGetPadding(YGNodeRef node, YGEdge edge)} */
     public static float YGNodeLayoutGetPadding(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge) {
         if (CHECKS) {
             check(node);
@@ -1254,8 +957,10 @@ public class Yoga {
 
     // --- [ YGNodeCopyStyle ] ---
 
+    /** {@code void YGNodeCopyStyle(YGNodeRef dstNode, YGNodeConstRef srcNode)} */
     public static native void nYGNodeCopyStyle(long dstNode, long srcNode);
 
+    /** {@code void YGNodeCopyStyle(YGNodeRef dstNode, YGNodeConstRef srcNode)} */
     public static void YGNodeCopyStyle(@NativeType("YGNodeRef") long dstNode, @NativeType("YGNodeConstRef") long srcNode) {
         if (CHECKS) {
             check(dstNode);
@@ -1266,10 +971,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetDirection ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetDirection NodeStyleSetDirection} */
+    /** {@code void YGNodeStyleSetDirection(YGNodeRef node, YGDirection direction)} */
     public static native void nYGNodeStyleSetDirection(long node, int direction);
 
-    /** @param direction one of:<br><table><tr><td>{@link #YGDirectionInherit DirectionInherit}</td><td>{@link #YGDirectionLTR DirectionLTR}</td><td>{@link #YGDirectionRTL DirectionRTL}</td></tr></table> */
+    /** {@code void YGNodeStyleSetDirection(YGNodeRef node, YGDirection direction)} */
     public static void YGNodeStyleSetDirection(@NativeType("YGNodeRef") long node, @NativeType("YGDirection") int direction) {
         if (CHECKS) {
             check(node);
@@ -1279,8 +984,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetDirection ] ---
 
+    /** {@code YGDirection YGNodeStyleGetDirection(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetDirection(long node);
 
+    /** {@code YGDirection YGNodeStyleGetDirection(YGNodeConstRef node)} */
     @NativeType("YGDirection")
     public static int YGNodeStyleGetDirection(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1291,10 +998,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetFlexDirection ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetFlexDirection NodeStyleSetFlexDirection} */
+    /** {@code void YGNodeStyleSetFlexDirection(YGNodeRef node, YGFlexDirection flexDirection)} */
     public static native void nYGNodeStyleSetFlexDirection(long node, int flexDirection);
 
-    /** @param flexDirection one of:<br><table><tr><td>{@link #YGFlexDirectionColumn FlexDirectionColumn}</td><td>{@link #YGFlexDirectionColumnReverse FlexDirectionColumnReverse}</td><td>{@link #YGFlexDirectionRow FlexDirectionRow}</td></tr><tr><td>{@link #YGFlexDirectionRowReverse FlexDirectionRowReverse}</td></tr></table> */
+    /** {@code void YGNodeStyleSetFlexDirection(YGNodeRef node, YGFlexDirection flexDirection)} */
     public static void YGNodeStyleSetFlexDirection(@NativeType("YGNodeRef") long node, @NativeType("YGFlexDirection") int flexDirection) {
         if (CHECKS) {
             check(node);
@@ -1304,8 +1011,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetFlexDirection ] ---
 
+    /** {@code YGFlexDirection YGNodeStyleGetFlexDirection(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetFlexDirection(long node);
 
+    /** {@code YGFlexDirection YGNodeStyleGetFlexDirection(YGNodeConstRef node)} */
     @NativeType("YGFlexDirection")
     public static int YGNodeStyleGetFlexDirection(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1316,10 +1025,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetJustifyContent ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetJustifyContent NodeStyleSetJustifyContent} */
+    /** {@code void YGNodeStyleSetJustifyContent(YGNodeRef node, YGJustify justifyContent)} */
     public static native void nYGNodeStyleSetJustifyContent(long node, int justifyContent);
 
-    /** @param justifyContent one of:<br><table><tr><td>{@link #YGJustifyFlexStart JustifyFlexStart}</td><td>{@link #YGJustifyCenter JustifyCenter}</td><td>{@link #YGJustifyFlexEnd JustifyFlexEnd}</td><td>{@link #YGJustifySpaceBetween JustifySpaceBetween}</td><td>{@link #YGJustifySpaceAround JustifySpaceAround}</td></tr><tr><td>{@link #YGJustifySpaceEvenly JustifySpaceEvenly}</td></tr></table> */
+    /** {@code void YGNodeStyleSetJustifyContent(YGNodeRef node, YGJustify justifyContent)} */
     public static void YGNodeStyleSetJustifyContent(@NativeType("YGNodeRef") long node, @NativeType("YGJustify") int justifyContent) {
         if (CHECKS) {
             check(node);
@@ -1329,8 +1038,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetJustifyContent ] ---
 
+    /** {@code YGJustify YGNodeStyleGetJustifyContent(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetJustifyContent(long node);
 
+    /** {@code YGJustify YGNodeStyleGetJustifyContent(YGNodeConstRef node)} */
     @NativeType("YGJustify")
     public static int YGNodeStyleGetJustifyContent(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1341,10 +1052,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetAlignContent ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetAlignContent NodeStyleSetAlignContent} */
+    /** {@code void YGNodeStyleSetAlignContent(YGNodeRef node, YGAlign alignContent)} */
     public static native void nYGNodeStyleSetAlignContent(long node, int alignContent);
 
-    /** @param alignContent one of:<br><table><tr><td>{@link #YGAlignAuto AlignAuto}</td><td>{@link #YGAlignFlexStart AlignFlexStart}</td><td>{@link #YGAlignCenter AlignCenter}</td><td>{@link #YGAlignFlexEnd AlignFlexEnd}</td><td>{@link #YGAlignStretch AlignStretch}</td><td>{@link #YGAlignBaseline AlignBaseline}</td></tr><tr><td>{@link #YGAlignSpaceBetween AlignSpaceBetween}</td><td>{@link #YGAlignSpaceAround AlignSpaceAround}</td><td>{@link #YGAlignSpaceEvenly AlignSpaceEvenly}</td></tr></table> */
+    /** {@code void YGNodeStyleSetAlignContent(YGNodeRef node, YGAlign alignContent)} */
     public static void YGNodeStyleSetAlignContent(@NativeType("YGNodeRef") long node, @NativeType("YGAlign") int alignContent) {
         if (CHECKS) {
             check(node);
@@ -1354,8 +1065,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetAlignContent ] ---
 
+    /** {@code YGAlign YGNodeStyleGetAlignContent(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetAlignContent(long node);
 
+    /** {@code YGAlign YGNodeStyleGetAlignContent(YGNodeConstRef node)} */
     @NativeType("YGAlign")
     public static int YGNodeStyleGetAlignContent(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1366,10 +1079,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetAlignItems ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetAlignItems NodeStyleSetAlignItems} */
+    /** {@code void YGNodeStyleSetAlignItems(YGNodeRef node, YGAlign alignItems)} */
     public static native void nYGNodeStyleSetAlignItems(long node, int alignItems);
 
-    /** @param alignItems one of:<br><table><tr><td>{@link #YGAlignAuto AlignAuto}</td><td>{@link #YGAlignFlexStart AlignFlexStart}</td><td>{@link #YGAlignCenter AlignCenter}</td><td>{@link #YGAlignFlexEnd AlignFlexEnd}</td><td>{@link #YGAlignStretch AlignStretch}</td><td>{@link #YGAlignBaseline AlignBaseline}</td></tr><tr><td>{@link #YGAlignSpaceBetween AlignSpaceBetween}</td><td>{@link #YGAlignSpaceAround AlignSpaceAround}</td><td>{@link #YGAlignSpaceEvenly AlignSpaceEvenly}</td></tr></table> */
+    /** {@code void YGNodeStyleSetAlignItems(YGNodeRef node, YGAlign alignItems)} */
     public static void YGNodeStyleSetAlignItems(@NativeType("YGNodeRef") long node, @NativeType("YGAlign") int alignItems) {
         if (CHECKS) {
             check(node);
@@ -1379,8 +1092,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetAlignItems ] ---
 
+    /** {@code YGAlign YGNodeStyleGetAlignItems(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetAlignItems(long node);
 
+    /** {@code YGAlign YGNodeStyleGetAlignItems(YGNodeConstRef node)} */
     @NativeType("YGAlign")
     public static int YGNodeStyleGetAlignItems(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1391,10 +1106,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetAlignSelf ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetAlignSelf NodeStyleSetAlignSelf} */
+    /** {@code void YGNodeStyleSetAlignSelf(YGNodeRef node, YGAlign alignSelf)} */
     public static native void nYGNodeStyleSetAlignSelf(long node, int alignSelf);
 
-    /** @param alignSelf one of:<br><table><tr><td>{@link #YGAlignAuto AlignAuto}</td><td>{@link #YGAlignFlexStart AlignFlexStart}</td><td>{@link #YGAlignCenter AlignCenter}</td><td>{@link #YGAlignFlexEnd AlignFlexEnd}</td><td>{@link #YGAlignStretch AlignStretch}</td><td>{@link #YGAlignBaseline AlignBaseline}</td></tr><tr><td>{@link #YGAlignSpaceBetween AlignSpaceBetween}</td><td>{@link #YGAlignSpaceAround AlignSpaceAround}</td><td>{@link #YGAlignSpaceEvenly AlignSpaceEvenly}</td></tr></table> */
+    /** {@code void YGNodeStyleSetAlignSelf(YGNodeRef node, YGAlign alignSelf)} */
     public static void YGNodeStyleSetAlignSelf(@NativeType("YGNodeRef") long node, @NativeType("YGAlign") int alignSelf) {
         if (CHECKS) {
             check(node);
@@ -1404,8 +1119,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetAlignSelf ] ---
 
+    /** {@code YGAlign YGNodeStyleGetAlignSelf(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetAlignSelf(long node);
 
+    /** {@code YGAlign YGNodeStyleGetAlignSelf(YGNodeConstRef node)} */
     @NativeType("YGAlign")
     public static int YGNodeStyleGetAlignSelf(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1416,10 +1133,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetPositionType ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetPositionType NodeStyleSetPositionType} */
+    /** {@code void YGNodeStyleSetPositionType(YGNodeRef node, YGPositionType positionType)} */
     public static native void nYGNodeStyleSetPositionType(long node, int positionType);
 
-    /** @param positionType one of:<br><table><tr><td>{@link #YGPositionTypeStatic PositionTypeStatic}</td><td>{@link #YGPositionTypeRelative PositionTypeRelative}</td><td>{@link #YGPositionTypeAbsolute PositionTypeAbsolute}</td></tr></table> */
+    /** {@code void YGNodeStyleSetPositionType(YGNodeRef node, YGPositionType positionType)} */
     public static void YGNodeStyleSetPositionType(@NativeType("YGNodeRef") long node, @NativeType("YGPositionType") int positionType) {
         if (CHECKS) {
             check(node);
@@ -1429,8 +1146,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetPositionType ] ---
 
+    /** {@code YGPositionType YGNodeStyleGetPositionType(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetPositionType(long node);
 
+    /** {@code YGPositionType YGNodeStyleGetPositionType(YGNodeConstRef node)} */
     @NativeType("YGPositionType")
     public static int YGNodeStyleGetPositionType(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1441,8 +1160,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetPositionAuto ] ---
 
+    /** {@code void YGNodeStyleSetPositionAuto(YGNodeRef node, YGEdge edge)} */
     public static native void nYGNodeStyleSetPositionAuto(long node, int edge);
 
+    /** {@code void YGNodeStyleSetPositionAuto(YGNodeRef node, YGEdge edge)} */
     public static void YGNodeStyleSetPositionAuto(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge) {
         if (CHECKS) {
             check(node);
@@ -1452,10 +1173,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetFlexWrap ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetFlexWrap NodeStyleSetFlexWrap} */
+    /** {@code void YGNodeStyleSetFlexWrap(YGNodeRef node, YGWrap flexWrap)} */
     public static native void nYGNodeStyleSetFlexWrap(long node, int flexWrap);
 
-    /** @param flexWrap one of:<br><table><tr><td>{@link #YGWrapNoWrap WrapNoWrap}</td><td>{@link #YGWrapWrap WrapWrap}</td><td>{@link #YGWrapReverse WrapReverse}</td></tr></table> */
+    /** {@code void YGNodeStyleSetFlexWrap(YGNodeRef node, YGWrap flexWrap)} */
     public static void YGNodeStyleSetFlexWrap(@NativeType("YGNodeRef") long node, @NativeType("YGWrap") int flexWrap) {
         if (CHECKS) {
             check(node);
@@ -1465,8 +1186,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetFlexWrap ] ---
 
+    /** {@code YGWrap YGNodeStyleGetFlexWrap(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetFlexWrap(long node);
 
+    /** {@code YGWrap YGNodeStyleGetFlexWrap(YGNodeConstRef node)} */
     @NativeType("YGWrap")
     public static int YGNodeStyleGetFlexWrap(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1477,10 +1200,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetOverflow ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetOverflow NodeStyleSetOverflow} */
+    /** {@code void YGNodeStyleSetOverflow(YGNodeRef node, YGOverflow overflow)} */
     public static native void nYGNodeStyleSetOverflow(long node, int overflow);
 
-    /** @param overflow one of:<br><table><tr><td>{@link #YGOverflowVisible OverflowVisible}</td><td>{@link #YGOverflowHidden OverflowHidden}</td><td>{@link #YGOverflowScroll OverflowScroll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetOverflow(YGNodeRef node, YGOverflow overflow)} */
     public static void YGNodeStyleSetOverflow(@NativeType("YGNodeRef") long node, @NativeType("YGOverflow") int overflow) {
         if (CHECKS) {
             check(node);
@@ -1490,8 +1213,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetOverflow ] ---
 
+    /** {@code YGOverflow YGNodeStyleGetOverflow(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetOverflow(long node);
 
+    /** {@code YGOverflow YGNodeStyleGetOverflow(YGNodeConstRef node)} */
     @NativeType("YGOverflow")
     public static int YGNodeStyleGetOverflow(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1502,10 +1227,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetDisplay ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetDisplay NodeStyleSetDisplay} */
+    /** {@code void YGNodeStyleSetDisplay(YGNodeRef node, YGDisplay display)} */
     public static native void nYGNodeStyleSetDisplay(long node, int display);
 
-    /** @param display one of:<br><table><tr><td>{@link #YGDisplayFlex DisplayFlex}</td><td>{@link #YGDisplayNone DisplayNone}</td><td>{@link #YGDisplayContents DisplayContents}</td></tr></table> */
+    /** {@code void YGNodeStyleSetDisplay(YGNodeRef node, YGDisplay display)} */
     public static void YGNodeStyleSetDisplay(@NativeType("YGNodeRef") long node, @NativeType("YGDisplay") int display) {
         if (CHECKS) {
             check(node);
@@ -1515,8 +1240,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetDisplay ] ---
 
+    /** {@code YGDisplay YGNodeStyleGetDisplay(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetDisplay(long node);
 
+    /** {@code YGDisplay YGNodeStyleGetDisplay(YGNodeConstRef node)} */
     @NativeType("YGDisplay")
     public static int YGNodeStyleGetDisplay(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1527,8 +1254,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetFlex ] ---
 
+    /** {@code void YGNodeStyleSetFlex(YGNodeRef node, float flex)} */
     public static native void nYGNodeStyleSetFlex(long node, float flex);
 
+    /** {@code void YGNodeStyleSetFlex(YGNodeRef node, float flex)} */
     public static void YGNodeStyleSetFlex(@NativeType("YGNodeRef") long node, float flex) {
         if (CHECKS) {
             check(node);
@@ -1538,8 +1267,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetFlex ] ---
 
+    /** {@code float YGNodeStyleGetFlex(YGNodeConstRef node)} */
     public static native float nYGNodeStyleGetFlex(long node);
 
+    /** {@code float YGNodeStyleGetFlex(YGNodeConstRef node)} */
     public static float YGNodeStyleGetFlex(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1549,8 +1280,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetFlexGrow ] ---
 
+    /** {@code void YGNodeStyleSetFlexGrow(YGNodeRef node, float flexGrow)} */
     public static native void nYGNodeStyleSetFlexGrow(long node, float flexGrow);
 
+    /** {@code void YGNodeStyleSetFlexGrow(YGNodeRef node, float flexGrow)} */
     public static void YGNodeStyleSetFlexGrow(@NativeType("YGNodeRef") long node, float flexGrow) {
         if (CHECKS) {
             check(node);
@@ -1560,8 +1293,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetFlexGrow ] ---
 
+    /** {@code float YGNodeStyleGetFlexGrow(YGNodeConstRef node)} */
     public static native float nYGNodeStyleGetFlexGrow(long node);
 
+    /** {@code float YGNodeStyleGetFlexGrow(YGNodeConstRef node)} */
     public static float YGNodeStyleGetFlexGrow(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1571,8 +1306,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetFlexShrink ] ---
 
+    /** {@code void YGNodeStyleSetFlexShrink(YGNodeRef node, float flexShrink)} */
     public static native void nYGNodeStyleSetFlexShrink(long node, float flexShrink);
 
+    /** {@code void YGNodeStyleSetFlexShrink(YGNodeRef node, float flexShrink)} */
     public static void YGNodeStyleSetFlexShrink(@NativeType("YGNodeRef") long node, float flexShrink) {
         if (CHECKS) {
             check(node);
@@ -1582,8 +1319,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetFlexShrink ] ---
 
+    /** {@code float YGNodeStyleGetFlexShrink(YGNodeConstRef node)} */
     public static native float nYGNodeStyleGetFlexShrink(long node);
 
+    /** {@code float YGNodeStyleGetFlexShrink(YGNodeConstRef node)} */
     public static float YGNodeStyleGetFlexShrink(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1593,8 +1332,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetFlexBasis ] ---
 
+    /** {@code void YGNodeStyleSetFlexBasis(YGNodeRef node, float flexBasis)} */
     public static native void nYGNodeStyleSetFlexBasis(long node, float flexBasis);
 
+    /** {@code void YGNodeStyleSetFlexBasis(YGNodeRef node, float flexBasis)} */
     public static void YGNodeStyleSetFlexBasis(@NativeType("YGNodeRef") long node, float flexBasis) {
         if (CHECKS) {
             check(node);
@@ -1604,8 +1345,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetFlexBasisPercent ] ---
 
+    /** {@code void YGNodeStyleSetFlexBasisPercent(YGNodeRef node, float flexBasis)} */
     public static native void nYGNodeStyleSetFlexBasisPercent(long node, float flexBasis);
 
+    /** {@code void YGNodeStyleSetFlexBasisPercent(YGNodeRef node, float flexBasis)} */
     public static void YGNodeStyleSetFlexBasisPercent(@NativeType("YGNodeRef") long node, float flexBasis) {
         if (CHECKS) {
             check(node);
@@ -1615,8 +1358,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetFlexBasisAuto ] ---
 
+    /** {@code void YGNodeStyleSetFlexBasisAuto(YGNodeRef node)} */
     public static native void nYGNodeStyleSetFlexBasisAuto(long node);
 
+    /** {@code void YGNodeStyleSetFlexBasisAuto(YGNodeRef node)} */
     public static void YGNodeStyleSetFlexBasisAuto(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1626,8 +1371,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetFlexBasis ] ---
 
+    /** {@code YGValue YGNodeStyleGetFlexBasis(YGNodeConstRef node)} */
     public static native void nYGNodeStyleGetFlexBasis(long node, long __result);
 
+    /** {@code YGValue YGNodeStyleGetFlexBasis(YGNodeConstRef node)} */
     public static YGValue YGNodeStyleGetFlexBasis(@NativeType("YGNodeConstRef") long node, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -1638,10 +1385,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetPosition ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetPosition NodeStyleSetPosition} */
+    /** {@code void YGNodeStyleSetPosition(YGNodeRef node, YGEdge edge, float position)} */
     public static native void nYGNodeStyleSetPosition(long node, int edge, float position);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetPosition(YGNodeRef node, YGEdge edge, float position)} */
     public static void YGNodeStyleSetPosition(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge, float position) {
         if (CHECKS) {
             check(node);
@@ -1651,10 +1398,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetPositionPercent ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetPositionPercent NodeStyleSetPositionPercent} */
+    /** {@code void YGNodeStyleSetPositionPercent(YGNodeRef node, YGEdge edge, float position)} */
     public static native void nYGNodeStyleSetPositionPercent(long node, int edge, float position);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetPositionPercent(YGNodeRef node, YGEdge edge, float position)} */
     public static void YGNodeStyleSetPositionPercent(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge, float position) {
         if (CHECKS) {
             check(node);
@@ -1664,10 +1411,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetPosition ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleGetPosition NodeStyleGetPosition} */
+    /** {@code YGValue YGNodeStyleGetPosition(YGNodeConstRef node, YGEdge edge)} */
     public static native void nYGNodeStyleGetPosition(long node, int edge, long __result);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code YGValue YGNodeStyleGetPosition(YGNodeConstRef node, YGEdge edge)} */
     public static YGValue YGNodeStyleGetPosition(@NativeType("YGNodeConstRef") long node, @NativeType("YGEdge") int edge, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -1678,10 +1425,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMargin ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetMargin NodeStyleSetMargin} */
+    /** {@code void YGNodeStyleSetMargin(YGNodeRef node, YGEdge edge, float margin)} */
     public static native void nYGNodeStyleSetMargin(long node, int edge, float margin);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetMargin(YGNodeRef node, YGEdge edge, float margin)} */
     public static void YGNodeStyleSetMargin(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge, float margin) {
         if (CHECKS) {
             check(node);
@@ -1691,10 +1438,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMarginPercent ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetMarginPercent NodeStyleSetMarginPercent} */
+    /** {@code void YGNodeStyleSetMarginPercent(YGNodeRef node, YGEdge edge, float margin)} */
     public static native void nYGNodeStyleSetMarginPercent(long node, int edge, float margin);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetMarginPercent(YGNodeRef node, YGEdge edge, float margin)} */
     public static void YGNodeStyleSetMarginPercent(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge, float margin) {
         if (CHECKS) {
             check(node);
@@ -1704,10 +1451,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMarginAuto ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetMarginAuto NodeStyleSetMarginAuto} */
+    /** {@code void YGNodeStyleSetMarginAuto(YGNodeRef node, YGEdge edge)} */
     public static native void nYGNodeStyleSetMarginAuto(long node, int edge);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetMarginAuto(YGNodeRef node, YGEdge edge)} */
     public static void YGNodeStyleSetMarginAuto(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge) {
         if (CHECKS) {
             check(node);
@@ -1717,10 +1464,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetMargin ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleGetMargin NodeStyleGetMargin} */
+    /** {@code YGValue YGNodeStyleGetMargin(YGNodeConstRef node, YGEdge edge)} */
     public static native void nYGNodeStyleGetMargin(long node, int edge, long __result);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code YGValue YGNodeStyleGetMargin(YGNodeConstRef node, YGEdge edge)} */
     public static YGValue YGNodeStyleGetMargin(@NativeType("YGNodeConstRef") long node, @NativeType("YGEdge") int edge, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -1731,10 +1478,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetPadding ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetPadding NodeStyleSetPadding} */
+    /** {@code void YGNodeStyleSetPadding(YGNodeRef node, YGEdge edge, float padding)} */
     public static native void nYGNodeStyleSetPadding(long node, int edge, float padding);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetPadding(YGNodeRef node, YGEdge edge, float padding)} */
     public static void YGNodeStyleSetPadding(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge, float padding) {
         if (CHECKS) {
             check(node);
@@ -1744,10 +1491,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetPaddingPercent ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetPaddingPercent NodeStyleSetPaddingPercent} */
+    /** {@code void YGNodeStyleSetPaddingPercent(YGNodeRef node, YGEdge edge, float padding)} */
     public static native void nYGNodeStyleSetPaddingPercent(long node, int edge, float padding);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetPaddingPercent(YGNodeRef node, YGEdge edge, float padding)} */
     public static void YGNodeStyleSetPaddingPercent(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge, float padding) {
         if (CHECKS) {
             check(node);
@@ -1757,10 +1504,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetPadding ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleGetPadding NodeStyleGetPadding} */
+    /** {@code YGValue YGNodeStyleGetPadding(YGNodeConstRef node, YGEdge edge)} */
     public static native void nYGNodeStyleGetPadding(long node, int edge, long __result);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code YGValue YGNodeStyleGetPadding(YGNodeConstRef node, YGEdge edge)} */
     public static YGValue YGNodeStyleGetPadding(@NativeType("YGNodeConstRef") long node, @NativeType("YGEdge") int edge, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -1771,10 +1518,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetBorder ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetBorder NodeStyleSetBorder} */
+    /** {@code void YGNodeStyleSetBorder(YGNodeRef node, YGEdge edge, float border)} */
     public static native void nYGNodeStyleSetBorder(long node, int edge, float border);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetBorder(YGNodeRef node, YGEdge edge, float border)} */
     public static void YGNodeStyleSetBorder(@NativeType("YGNodeRef") long node, @NativeType("YGEdge") int edge, float border) {
         if (CHECKS) {
             check(node);
@@ -1784,10 +1531,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetBorder ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleGetBorder NodeStyleGetBorder} */
+    /** {@code float YGNodeStyleGetBorder(YGNodeConstRef node, YGEdge edge)} */
     public static native float nYGNodeStyleGetBorder(long node, int edge);
 
-    /** @param edge one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code float YGNodeStyleGetBorder(YGNodeConstRef node, YGEdge edge)} */
     public static float YGNodeStyleGetBorder(@NativeType("YGNodeConstRef") long node, @NativeType("YGEdge") int edge) {
         if (CHECKS) {
             check(node);
@@ -1797,10 +1544,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetGap ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetGap NodeStyleSetGap} */
+    /** {@code void YGNodeStyleSetGap(YGNodeRef node, YGGutter gutter, float gapLength)} */
     public static native void nYGNodeStyleSetGap(long node, int gutter, float gapLength);
 
-    /** @param gutter one of:<br><table><tr><td>{@link #YGGutterColumn GutterColumn}</td><td>{@link #YGGutterRow GutterRow}</td><td>{@link #YGGutterAll GutterAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetGap(YGNodeRef node, YGGutter gutter, float gapLength)} */
     public static void YGNodeStyleSetGap(@NativeType("YGNodeRef") long node, @NativeType("YGGutter") int gutter, float gapLength) {
         if (CHECKS) {
             check(node);
@@ -1810,10 +1557,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetGapPercent ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleSetGapPercent NodeStyleSetGapPercent} */
+    /** {@code void YGNodeStyleSetGapPercent(YGNodeRef node, YGGutter gutter, float gapLength)} */
     public static native void nYGNodeStyleSetGapPercent(long node, int gutter, float gapLength);
 
-    /** @param gutter one of:<br><table><tr><td>{@link #YGGutterColumn GutterColumn}</td><td>{@link #YGGutterRow GutterRow}</td><td>{@link #YGGutterAll GutterAll}</td></tr></table> */
+    /** {@code void YGNodeStyleSetGapPercent(YGNodeRef node, YGGutter gutter, float gapLength)} */
     public static void YGNodeStyleSetGapPercent(@NativeType("YGNodeRef") long node, @NativeType("YGGutter") int gutter, float gapLength) {
         if (CHECKS) {
             check(node);
@@ -1823,10 +1570,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetGap ] ---
 
-    /** Unsafe version of: {@link #YGNodeStyleGetGap NodeStyleGetGap} */
+    /** {@code float YGNodeStyleGetGap(YGNodeConstRef node, YGGutter gutter)} */
     public static native float nYGNodeStyleGetGap(long node, int gutter);
 
-    /** @param gutter one of:<br><table><tr><td>{@link #YGGutterColumn GutterColumn}</td><td>{@link #YGGutterRow GutterRow}</td><td>{@link #YGGutterAll GutterAll}</td></tr></table> */
+    /** {@code float YGNodeStyleGetGap(YGNodeConstRef node, YGGutter gutter)} */
     public static float YGNodeStyleGetGap(@NativeType("YGNodeConstRef") long node, @NativeType("YGGutter") int gutter) {
         if (CHECKS) {
             check(node);
@@ -1836,8 +1583,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetBoxSizing ] ---
 
+    /** {@code void YGNodeStyleSetBoxSizing(YGNodeRef node, YGBoxSizing boxSizing)} */
     public static native void nYGNodeStyleSetBoxSizing(long node, int boxSizing);
 
+    /** {@code void YGNodeStyleSetBoxSizing(YGNodeRef node, YGBoxSizing boxSizing)} */
     public static void YGNodeStyleSetBoxSizing(@NativeType("YGNodeRef") long node, @NativeType("YGBoxSizing") int boxSizing) {
         if (CHECKS) {
             check(node);
@@ -1847,8 +1596,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetBoxSizing ] ---
 
+    /** {@code YGBoxSizing YGNodeStyleGetBoxSizing(YGNodeConstRef node)} */
     public static native int nYGNodeStyleGetBoxSizing(long node);
 
+    /** {@code YGBoxSizing YGNodeStyleGetBoxSizing(YGNodeConstRef node)} */
     @NativeType("YGBoxSizing")
     public static int YGNodeStyleGetBoxSizing(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
@@ -1859,8 +1610,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetWidth ] ---
 
+    /** {@code void YGNodeStyleSetWidth(YGNodeRef node, float width)} */
     public static native void nYGNodeStyleSetWidth(long node, float width);
 
+    /** {@code void YGNodeStyleSetWidth(YGNodeRef node, float width)} */
     public static void YGNodeStyleSetWidth(@NativeType("YGNodeRef") long node, float width) {
         if (CHECKS) {
             check(node);
@@ -1870,8 +1623,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetWidthPercent ] ---
 
+    /** {@code void YGNodeStyleSetWidthPercent(YGNodeRef node, float width)} */
     public static native void nYGNodeStyleSetWidthPercent(long node, float width);
 
+    /** {@code void YGNodeStyleSetWidthPercent(YGNodeRef node, float width)} */
     public static void YGNodeStyleSetWidthPercent(@NativeType("YGNodeRef") long node, float width) {
         if (CHECKS) {
             check(node);
@@ -1881,8 +1636,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetWidthAuto ] ---
 
+    /** {@code void YGNodeStyleSetWidthAuto(YGNodeRef node)} */
     public static native void nYGNodeStyleSetWidthAuto(long node);
 
+    /** {@code void YGNodeStyleSetWidthAuto(YGNodeRef node)} */
     public static void YGNodeStyleSetWidthAuto(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1892,8 +1649,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetWidth ] ---
 
+    /** {@code YGValue YGNodeStyleGetWidth(YGNodeConstRef node)} */
     public static native void nYGNodeStyleGetWidth(long node, long __result);
 
+    /** {@code YGValue YGNodeStyleGetWidth(YGNodeConstRef node)} */
     public static YGValue YGNodeStyleGetWidth(@NativeType("YGNodeConstRef") long node, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -1904,8 +1663,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetHeight ] ---
 
+    /** {@code void YGNodeStyleSetHeight(YGNodeRef node, float height)} */
     public static native void nYGNodeStyleSetHeight(long node, float height);
 
+    /** {@code void YGNodeStyleSetHeight(YGNodeRef node, float height)} */
     public static void YGNodeStyleSetHeight(@NativeType("YGNodeRef") long node, float height) {
         if (CHECKS) {
             check(node);
@@ -1915,8 +1676,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetHeightPercent ] ---
 
+    /** {@code void YGNodeStyleSetHeightPercent(YGNodeRef node, float height)} */
     public static native void nYGNodeStyleSetHeightPercent(long node, float height);
 
+    /** {@code void YGNodeStyleSetHeightPercent(YGNodeRef node, float height)} */
     public static void YGNodeStyleSetHeightPercent(@NativeType("YGNodeRef") long node, float height) {
         if (CHECKS) {
             check(node);
@@ -1926,8 +1689,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetHeightAuto ] ---
 
+    /** {@code void YGNodeStyleSetHeightAuto(YGNodeRef node)} */
     public static native void nYGNodeStyleSetHeightAuto(long node);
 
+    /** {@code void YGNodeStyleSetHeightAuto(YGNodeRef node)} */
     public static void YGNodeStyleSetHeightAuto(@NativeType("YGNodeRef") long node) {
         if (CHECKS) {
             check(node);
@@ -1937,8 +1702,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetHeight ] ---
 
+    /** {@code YGValue YGNodeStyleGetHeight(YGNodeConstRef node)} */
     public static native void nYGNodeStyleGetHeight(long node, long __result);
 
+    /** {@code YGValue YGNodeStyleGetHeight(YGNodeConstRef node)} */
     public static YGValue YGNodeStyleGetHeight(@NativeType("YGNodeConstRef") long node, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -1949,8 +1716,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMinWidth ] ---
 
+    /** {@code void YGNodeStyleSetMinWidth(YGNodeRef node, float minWidth)} */
     public static native void nYGNodeStyleSetMinWidth(long node, float minWidth);
 
+    /** {@code void YGNodeStyleSetMinWidth(YGNodeRef node, float minWidth)} */
     public static void YGNodeStyleSetMinWidth(@NativeType("YGNodeRef") long node, float minWidth) {
         if (CHECKS) {
             check(node);
@@ -1960,8 +1729,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMinWidthPercent ] ---
 
+    /** {@code void YGNodeStyleSetMinWidthPercent(YGNodeRef node, float minWidth)} */
     public static native void nYGNodeStyleSetMinWidthPercent(long node, float minWidth);
 
+    /** {@code void YGNodeStyleSetMinWidthPercent(YGNodeRef node, float minWidth)} */
     public static void YGNodeStyleSetMinWidthPercent(@NativeType("YGNodeRef") long node, float minWidth) {
         if (CHECKS) {
             check(node);
@@ -1971,8 +1742,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetMinWidth ] ---
 
+    /** {@code YGValue YGNodeStyleGetMinWidth(YGNodeConstRef node)} */
     public static native void nYGNodeStyleGetMinWidth(long node, long __result);
 
+    /** {@code YGValue YGNodeStyleGetMinWidth(YGNodeConstRef node)} */
     public static YGValue YGNodeStyleGetMinWidth(@NativeType("YGNodeConstRef") long node, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -1983,8 +1756,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMinHeight ] ---
 
+    /** {@code void YGNodeStyleSetMinHeight(YGNodeRef node, float minHeight)} */
     public static native void nYGNodeStyleSetMinHeight(long node, float minHeight);
 
+    /** {@code void YGNodeStyleSetMinHeight(YGNodeRef node, float minHeight)} */
     public static void YGNodeStyleSetMinHeight(@NativeType("YGNodeRef") long node, float minHeight) {
         if (CHECKS) {
             check(node);
@@ -1994,8 +1769,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMinHeightPercent ] ---
 
+    /** {@code void YGNodeStyleSetMinHeightPercent(YGNodeRef node, float minHeight)} */
     public static native void nYGNodeStyleSetMinHeightPercent(long node, float minHeight);
 
+    /** {@code void YGNodeStyleSetMinHeightPercent(YGNodeRef node, float minHeight)} */
     public static void YGNodeStyleSetMinHeightPercent(@NativeType("YGNodeRef") long node, float minHeight) {
         if (CHECKS) {
             check(node);
@@ -2005,8 +1782,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetMinHeight ] ---
 
+    /** {@code YGValue YGNodeStyleGetMinHeight(YGNodeConstRef node)} */
     public static native void nYGNodeStyleGetMinHeight(long node, long __result);
 
+    /** {@code YGValue YGNodeStyleGetMinHeight(YGNodeConstRef node)} */
     public static YGValue YGNodeStyleGetMinHeight(@NativeType("YGNodeConstRef") long node, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -2017,8 +1796,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMaxWidth ] ---
 
+    /** {@code void YGNodeStyleSetMaxWidth(YGNodeRef node, float maxWidth)} */
     public static native void nYGNodeStyleSetMaxWidth(long node, float maxWidth);
 
+    /** {@code void YGNodeStyleSetMaxWidth(YGNodeRef node, float maxWidth)} */
     public static void YGNodeStyleSetMaxWidth(@NativeType("YGNodeRef") long node, float maxWidth) {
         if (CHECKS) {
             check(node);
@@ -2028,8 +1809,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMaxWidthPercent ] ---
 
+    /** {@code void YGNodeStyleSetMaxWidthPercent(YGNodeRef node, float maxWidth)} */
     public static native void nYGNodeStyleSetMaxWidthPercent(long node, float maxWidth);
 
+    /** {@code void YGNodeStyleSetMaxWidthPercent(YGNodeRef node, float maxWidth)} */
     public static void YGNodeStyleSetMaxWidthPercent(@NativeType("YGNodeRef") long node, float maxWidth) {
         if (CHECKS) {
             check(node);
@@ -2039,8 +1822,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetMaxWidth ] ---
 
+    /** {@code YGValue YGNodeStyleGetMaxWidth(YGNodeConstRef node)} */
     public static native void nYGNodeStyleGetMaxWidth(long node, long __result);
 
+    /** {@code YGValue YGNodeStyleGetMaxWidth(YGNodeConstRef node)} */
     public static YGValue YGNodeStyleGetMaxWidth(@NativeType("YGNodeConstRef") long node, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -2051,8 +1836,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMaxHeight ] ---
 
+    /** {@code void YGNodeStyleSetMaxHeight(YGNodeRef node, float maxHeight)} */
     public static native void nYGNodeStyleSetMaxHeight(long node, float maxHeight);
 
+    /** {@code void YGNodeStyleSetMaxHeight(YGNodeRef node, float maxHeight)} */
     public static void YGNodeStyleSetMaxHeight(@NativeType("YGNodeRef") long node, float maxHeight) {
         if (CHECKS) {
             check(node);
@@ -2062,8 +1849,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetMaxHeightPercent ] ---
 
+    /** {@code void YGNodeStyleSetMaxHeightPercent(YGNodeRef node, float maxHeight)} */
     public static native void nYGNodeStyleSetMaxHeightPercent(long node, float maxHeight);
 
+    /** {@code void YGNodeStyleSetMaxHeightPercent(YGNodeRef node, float maxHeight)} */
     public static void YGNodeStyleSetMaxHeightPercent(@NativeType("YGNodeRef") long node, float maxHeight) {
         if (CHECKS) {
             check(node);
@@ -2073,8 +1862,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetMaxHeight ] ---
 
+    /** {@code YGValue YGNodeStyleGetMaxHeight(YGNodeConstRef node)} */
     public static native void nYGNodeStyleGetMaxHeight(long node, long __result);
 
+    /** {@code YGValue YGNodeStyleGetMaxHeight(YGNodeConstRef node)} */
     public static YGValue YGNodeStyleGetMaxHeight(@NativeType("YGNodeConstRef") long node, YGValue __result) {
         if (CHECKS) {
             check(node);
@@ -2085,8 +1876,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleSetAspectRatio ] ---
 
+    /** {@code void YGNodeStyleSetAspectRatio(YGNodeRef node, float aspectRatio)} */
     public static native void nYGNodeStyleSetAspectRatio(long node, float aspectRatio);
 
+    /** {@code void YGNodeStyleSetAspectRatio(YGNodeRef node, float aspectRatio)} */
     public static void YGNodeStyleSetAspectRatio(@NativeType("YGNodeRef") long node, float aspectRatio) {
         if (CHECKS) {
             check(node);
@@ -2096,8 +1889,10 @@ public class Yoga {
 
     // --- [ YGNodeStyleGetAspectRatio ] ---
 
+    /** {@code float YGNodeStyleGetAspectRatio(YGNodeConstRef node)} */
     public static native float nYGNodeStyleGetAspectRatio(long node);
 
+    /** {@code float YGNodeStyleGetAspectRatio(YGNodeConstRef node)} */
     public static float YGNodeStyleGetAspectRatio(@NativeType("YGNodeConstRef") long node) {
         if (CHECKS) {
             check(node);
@@ -2107,11 +1902,7 @@ public class Yoga {
 
     // --- [ YGRoundValueToPixelGrid ] ---
 
-    /**
-     * Rounds a point value to the nearest whole pixel, given a {@code pointScaleFactor} describing pixel density.
-     *
-     * @return the rounded value in points
-     */
+    /** {@code float YGRoundValueToPixelGrid(double value, double pointScaleFactor, bool forceCeil, bool forceFloor)} */
     public static native float YGRoundValueToPixelGrid(double value, double pointScaleFactor, @NativeType("bool") boolean forceCeil, @NativeType("bool") boolean forceFloor);
 
     // --- [ YGValueAuto ] ---
@@ -2123,7 +1914,7 @@ public class Yoga {
         return __result;
     }
 
-    /** Constant for a dimension of "auto". */
+    /** {@code YGValue YGValueAuto(void)} */
     public static final YGValue YGValueAuto = YGValueAuto(YGValue.create());
 
     // --- [ YGValueUndefined ] ---
@@ -2135,7 +1926,7 @@ public class Yoga {
         return __result;
     }
 
-    /** Constant for a dimension which is not defined. */
+    /** {@code YGValue YGValueUndefined(void)} */
     public static final YGValue YGValueUndefined = YGValueUndefined(YGValue.create());
 
     // --- [ YGValueZero ] ---
@@ -2147,21 +1938,21 @@ public class Yoga {
         return __result;
     }
 
-    /** Constant for a dimension that is zero-length. */
+    /** {@code YGValue YGValueZero(void)} */
     public static final YGValue YGValueZero = YGValueZero(YGValue.create());
 
     // --- [ YGFloatIsUndefined ] ---
 
-    /** Whether a dimension represented as a float is defined. */
+    /** {@code bool YGFloatIsUndefined(float value)} */
     @NativeType("bool")
     public static native boolean YGFloatIsUndefined(float value);
 
     // --- [ YGAlignToString ] ---
 
-    /** Unsafe version of: {@link #YGAlignToString AlignToString} */
+    /** {@code char const * YGAlignToString(YGAlign value)} */
     public static native long nYGAlignToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGAlignAuto AlignAuto}</td><td>{@link #YGAlignFlexStart AlignFlexStart}</td><td>{@link #YGAlignCenter AlignCenter}</td><td>{@link #YGAlignFlexEnd AlignFlexEnd}</td><td>{@link #YGAlignStretch AlignStretch}</td><td>{@link #YGAlignBaseline AlignBaseline}</td></tr><tr><td>{@link #YGAlignSpaceBetween AlignSpaceBetween}</td><td>{@link #YGAlignSpaceAround AlignSpaceAround}</td><td>{@link #YGAlignSpaceEvenly AlignSpaceEvenly}</td></tr></table> */
+    /** {@code char const * YGAlignToString(YGAlign value)} */
     @NativeType("char const *")
     public static String YGAlignToString(@NativeType("YGAlign") int value) {
         long __result = nYGAlignToString(value);
@@ -2170,10 +1961,10 @@ public class Yoga {
 
     // --- [ YGDimensionToString ] ---
 
-    /** Unsafe version of: {@link #YGDimensionToString DimensionToString} */
+    /** {@code char const * YGDimensionToString(YGDimension value)} */
     public static native long nYGDimensionToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGDimensionWidth DimensionWidth}</td><td>{@link #YGDimensionHeight DimensionHeight}</td></tr></table> */
+    /** {@code char const * YGDimensionToString(YGDimension value)} */
     @NativeType("char const *")
     public static String YGDimensionToString(@NativeType("YGDimension") int value) {
         long __result = nYGDimensionToString(value);
@@ -2182,10 +1973,10 @@ public class Yoga {
 
     // --- [ YGDirectionToString ] ---
 
-    /** Unsafe version of: {@link #YGDirectionToString DirectionToString} */
+    /** {@code char const * YGDirectionToString(YGDirection value)} */
     public static native long nYGDirectionToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGDirectionInherit DirectionInherit}</td><td>{@link #YGDirectionLTR DirectionLTR}</td><td>{@link #YGDirectionRTL DirectionRTL}</td></tr></table> */
+    /** {@code char const * YGDirectionToString(YGDirection value)} */
     @NativeType("char const *")
     public static String YGDirectionToString(@NativeType("YGDirection") int value) {
         long __result = nYGDirectionToString(value);
@@ -2194,10 +1985,10 @@ public class Yoga {
 
     // --- [ YGDisplayToString ] ---
 
-    /** Unsafe version of: {@link #YGDisplayToString DisplayToString} */
+    /** {@code char const * YGDisplayToString(YGDisplay value)} */
     public static native long nYGDisplayToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGDisplayFlex DisplayFlex}</td><td>{@link #YGDisplayNone DisplayNone}</td><td>{@link #YGDisplayContents DisplayContents}</td></tr></table> */
+    /** {@code char const * YGDisplayToString(YGDisplay value)} */
     @NativeType("char const *")
     public static String YGDisplayToString(@NativeType("YGDisplay") int value) {
         long __result = nYGDisplayToString(value);
@@ -2206,10 +1997,10 @@ public class Yoga {
 
     // --- [ YGEdgeToString ] ---
 
-    /** Unsafe version of: {@link #YGEdgeToString EdgeToString} */
+    /** {@code char const * YGEdgeToString(YGEdge value)} */
     public static native long nYGEdgeToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGEdgeLeft EdgeLeft}</td><td>{@link #YGEdgeTop EdgeTop}</td><td>{@link #YGEdgeRight EdgeRight}</td><td>{@link #YGEdgeBottom EdgeBottom}</td><td>{@link #YGEdgeStart EdgeStart}</td><td>{@link #YGEdgeEnd EdgeEnd}</td><td>{@link #YGEdgeHorizontal EdgeHorizontal}</td><td>{@link #YGEdgeVertical EdgeVertical}</td></tr><tr><td>{@link #YGEdgeAll EdgeAll}</td></tr></table> */
+    /** {@code char const * YGEdgeToString(YGEdge value)} */
     @NativeType("char const *")
     public static String YGEdgeToString(@NativeType("YGEdge") int value) {
         long __result = nYGEdgeToString(value);
@@ -2218,10 +2009,10 @@ public class Yoga {
 
     // --- [ YGErrataToString ] ---
 
-    /** Unsafe version of: {@link #YGErrataToString ErrataToString} */
+    /** {@code char const * YGErrataToString(YGErrata value)} */
     public static native long nYGErrataToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGErrataNone ErrataNone}</td><td>{@link #YGErrataStretchFlexBasis ErrataStretchFlexBasis}</td><td>{@link #YGErrataAbsolutePositionWithoutInsetsExcludesPadding ErrataAbsolutePositionWithoutInsetsExcludesPadding}</td></tr><tr><td>{@link #YGErrataAbsolutePercentAgainstInnerSize ErrataAbsolutePercentAgainstInnerSize}</td><td>{@link #YGErrataAll ErrataAll}</td><td>{@link #YGErrataClassic ErrataClassic}</td></tr></table> */
+    /** {@code char const * YGErrataToString(YGErrata value)} */
     @NativeType("char const *")
     public static String YGErrataToString(@NativeType("YGErrata") int value) {
         long __result = nYGErrataToString(value);
@@ -2230,10 +2021,10 @@ public class Yoga {
 
     // --- [ YGExperimentalFeatureToString ] ---
 
-    /** Unsafe version of: {@link #YGExperimentalFeatureToString ExperimentalFeatureToString} */
+    /** {@code char const * YGExperimentalFeatureToString(YGExperimentalFeature value)} */
     public static native long nYGExperimentalFeatureToString(int value);
 
-    /** @param value must be:<br><table><tr><td>{@link #YGExperimentalFeatureWebFlexBasis ExperimentalFeatureWebFlexBasis}</td></tr></table> */
+    /** {@code char const * YGExperimentalFeatureToString(YGExperimentalFeature value)} */
     @NativeType("char const *")
     public static String YGExperimentalFeatureToString(@NativeType("YGExperimentalFeature") int value) {
         long __result = nYGExperimentalFeatureToString(value);
@@ -2242,10 +2033,10 @@ public class Yoga {
 
     // --- [ YGFlexDirectionToString ] ---
 
-    /** Unsafe version of: {@link #YGFlexDirectionToString FlexDirectionToString} */
+    /** {@code char const * YGFlexDirectionToString(YGFlexDirection value)} */
     public static native long nYGFlexDirectionToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGFlexDirectionColumn FlexDirectionColumn}</td><td>{@link #YGFlexDirectionColumnReverse FlexDirectionColumnReverse}</td><td>{@link #YGFlexDirectionRow FlexDirectionRow}</td></tr><tr><td>{@link #YGFlexDirectionRowReverse FlexDirectionRowReverse}</td></tr></table> */
+    /** {@code char const * YGFlexDirectionToString(YGFlexDirection value)} */
     @NativeType("char const *")
     public static String YGFlexDirectionToString(@NativeType("YGFlexDirection") int value) {
         long __result = nYGFlexDirectionToString(value);
@@ -2254,10 +2045,10 @@ public class Yoga {
 
     // --- [ YGGutterToString ] ---
 
-    /** Unsafe version of: {@link #YGGutterToString GutterToString} */
+    /** {@code char const * YGGutterToString(YGGutter value)} */
     public static native long nYGGutterToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGGutterColumn GutterColumn}</td><td>{@link #YGGutterRow GutterRow}</td><td>{@link #YGGutterAll GutterAll}</td></tr></table> */
+    /** {@code char const * YGGutterToString(YGGutter value)} */
     @NativeType("char const *")
     public static String YGGutterToString(@NativeType("YGGutter") int value) {
         long __result = nYGGutterToString(value);
@@ -2266,10 +2057,10 @@ public class Yoga {
 
     // --- [ YGJustifyToString ] ---
 
-    /** Unsafe version of: {@link #YGJustifyToString JustifyToString} */
+    /** {@code char const * YGJustifyToString(YGJustify value)} */
     public static native long nYGJustifyToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGJustifyFlexStart JustifyFlexStart}</td><td>{@link #YGJustifyCenter JustifyCenter}</td><td>{@link #YGJustifyFlexEnd JustifyFlexEnd}</td><td>{@link #YGJustifySpaceBetween JustifySpaceBetween}</td><td>{@link #YGJustifySpaceAround JustifySpaceAround}</td></tr><tr><td>{@link #YGJustifySpaceEvenly JustifySpaceEvenly}</td></tr></table> */
+    /** {@code char const * YGJustifyToString(YGJustify value)} */
     @NativeType("char const *")
     public static String YGJustifyToString(@NativeType("YGJustify") int value) {
         long __result = nYGJustifyToString(value);
@@ -2278,10 +2069,10 @@ public class Yoga {
 
     // --- [ YGLogLevelToString ] ---
 
-    /** Unsafe version of: {@link #YGLogLevelToString LogLevelToString} */
+    /** {@code char const * YGLogLevelToString(YGLogLevel value)} */
     public static native long nYGLogLevelToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGLogLevelError LogLevelError}</td><td>{@link #YGLogLevelWarn LogLevelWarn}</td><td>{@link #YGLogLevelInfo LogLevelInfo}</td><td>{@link #YGLogLevelDebug LogLevelDebug}</td><td>{@link #YGLogLevelVerbose LogLevelVerbose}</td><td>{@link #YGLogLevelFatal LogLevelFatal}</td></tr></table> */
+    /** {@code char const * YGLogLevelToString(YGLogLevel value)} */
     @NativeType("char const *")
     public static String YGLogLevelToString(@NativeType("YGLogLevel") int value) {
         long __result = nYGLogLevelToString(value);
@@ -2290,10 +2081,10 @@ public class Yoga {
 
     // --- [ YGMeasureModeToString ] ---
 
-    /** Unsafe version of: {@link #YGMeasureModeToString MeasureModeToString} */
+    /** {@code char const * YGMeasureModeToString(YGMeasureMode value)} */
     public static native long nYGMeasureModeToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGMeasureModeUndefined MeasureModeUndefined}</td><td>{@link #YGMeasureModeExactly MeasureModeExactly}</td><td>{@link #YGMeasureModeAtMost MeasureModeAtMost}</td></tr></table> */
+    /** {@code char const * YGMeasureModeToString(YGMeasureMode value)} */
     @NativeType("char const *")
     public static String YGMeasureModeToString(@NativeType("YGMeasureMode") int value) {
         long __result = nYGMeasureModeToString(value);
@@ -2302,10 +2093,10 @@ public class Yoga {
 
     // --- [ YGNodeTypeToString ] ---
 
-    /** Unsafe version of: {@link #YGNodeTypeToString NodeTypeToString} */
+    /** {@code char const * YGNodeTypeToString(YGNodeType value)} */
     public static native long nYGNodeTypeToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGNodeTypeDefault NodeTypeDefault}</td><td>{@link #YGNodeTypeText NodeTypeText}</td></tr></table> */
+    /** {@code char const * YGNodeTypeToString(YGNodeType value)} */
     @NativeType("char const *")
     public static String YGNodeTypeToString(@NativeType("YGNodeType") int value) {
         long __result = nYGNodeTypeToString(value);
@@ -2314,10 +2105,10 @@ public class Yoga {
 
     // --- [ YGOverflowToString ] ---
 
-    /** Unsafe version of: {@link #YGOverflowToString OverflowToString} */
+    /** {@code char const * YGOverflowToString(YGOverflow value)} */
     public static native long nYGOverflowToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGOverflowVisible OverflowVisible}</td><td>{@link #YGOverflowHidden OverflowHidden}</td><td>{@link #YGOverflowScroll OverflowScroll}</td></tr></table> */
+    /** {@code char const * YGOverflowToString(YGOverflow value)} */
     @NativeType("char const *")
     public static String YGOverflowToString(@NativeType("YGOverflow") int value) {
         long __result = nYGOverflowToString(value);
@@ -2326,10 +2117,10 @@ public class Yoga {
 
     // --- [ YGPositionTypeToString ] ---
 
-    /** Unsafe version of: {@link #YGPositionTypeToString PositionTypeToString} */
+    /** {@code char const * YGPositionTypeToString(YGPositionType value)} */
     public static native long nYGPositionTypeToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGPositionTypeStatic PositionTypeStatic}</td><td>{@link #YGPositionTypeRelative PositionTypeRelative}</td><td>{@link #YGPositionTypeAbsolute PositionTypeAbsolute}</td></tr></table> */
+    /** {@code char const * YGPositionTypeToString(YGPositionType value)} */
     @NativeType("char const *")
     public static String YGPositionTypeToString(@NativeType("YGPositionType") int value) {
         long __result = nYGPositionTypeToString(value);
@@ -2338,10 +2129,10 @@ public class Yoga {
 
     // --- [ YGUnitToString ] ---
 
-    /** Unsafe version of: {@link #YGUnitToString UnitToString} */
+    /** {@code char const * YGUnitToString(YGUnit value)} */
     public static native long nYGUnitToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGUnitUndefined UnitUndefined}</td><td>{@link #YGUnitPoint UnitPoint}</td><td>{@link #YGUnitPercent UnitPercent}</td><td>{@link #YGUnitAuto UnitAuto}</td></tr></table> */
+    /** {@code char const * YGUnitToString(YGUnit value)} */
     @NativeType("char const *")
     public static String YGUnitToString(@NativeType("YGUnit") int value) {
         long __result = nYGUnitToString(value);
@@ -2350,10 +2141,10 @@ public class Yoga {
 
     // --- [ YGWrapToString ] ---
 
-    /** Unsafe version of: {@link #YGWrapToString WrapToString} */
+    /** {@code char const * YGWrapToString(YGWrap value)} */
     public static native long nYGWrapToString(int value);
 
-    /** @param value one of:<br><table><tr><td>{@link #YGWrapNoWrap WrapNoWrap}</td><td>{@link #YGWrapWrap WrapWrap}</td><td>{@link #YGWrapReverse WrapReverse}</td></tr></table> */
+    /** {@code char const * YGWrapToString(YGWrap value)} */
     @NativeType("char const *")
     public static String YGWrapToString(@NativeType("YGWrap") int value) {
         long __result = nYGWrapToString(value);

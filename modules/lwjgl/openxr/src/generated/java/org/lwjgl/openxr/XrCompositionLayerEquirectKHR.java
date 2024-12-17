@@ -17,43 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Equirectangular layer composition info.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrCompositionLayerEquirectKHR} contains the information needed to render an equirectangular image onto a sphere when calling {@link XR10#xrEndFrame EndFrame}. {@link XrCompositionLayerEquirectKHR} is an alias type for the base struct {@link XrCompositionLayerBaseHeader} used in {@link XrFrameEndInfo}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHRCompositionLayerEquirect XR_KHR_composition_layer_equirect} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerEquirectKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHRCompositionLayerEquirect#XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR TYPE_COMPOSITION_LAYER_EQUIRECT_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>{@code eyeVisibility} <b>must</b> be a valid {@code XrEyeVisibility} value</li>
- * <li>{@code subImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}, {@link XrFrameEndInfo}, {@link XrPosef}, {@link XrSwapchainSubImage}, {@link XrVector2f}, {@link XR10#xrEndFrame EndFrame}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerEquirectKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrCompositionLayerFlags {@link #layerFlags};
- *     XrSpace {@link #space};
- *     XrEyeVisibility {@link #eyeVisibility};
- *     {@link XrSwapchainSubImage XrSwapchainSubImage} {@link #subImage};
- *     {@link XrPosef XrPosef} {@link #pose};
- *     float {@link #radius};
- *     {@link XrVector2f XrVector2f} {@link #scale};
- *     {@link XrVector2f XrVector2f} {@link #bias};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrCompositionLayerFlags layerFlags;
+ *     XrSpace space;
+ *     XrEyeVisibility eyeVisibility;
+ *     {@link XrSwapchainSubImage XrSwapchainSubImage} subImage;
+ *     {@link XrPosef XrPosef} pose;
+ *     float radius;
+ *     {@link XrVector2f XrVector2f} scale;
+ *     {@link XrVector2f XrVector2f} bias;
+ * }}</pre>
  */
 public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEquirectKHR> implements NativeResource {
 
@@ -127,61 +103,61 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** specifies options for the layer. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** the {@code XrSpace} in which the {@code pose} of the equirect layer is evaluated over time. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the eye represented by this layer. */
+    /** @return the value of the {@code eyeVisibility} field. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** identifies the image {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@link XrSwapchainCreateInfo}{@code ::faceCount} of 1. */
+    /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
-    /** an {@link XrPosef} defining the position and orientation of the center point of the sphere onto which the equirect image data is mapped, relative to the reference frame of the {@code space}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** the non-negative radius of the sphere onto which the equirect image data is mapped. Values of zero or floating point positive infinity are treated as an infinite sphere. */
+    /** @return the value of the {@code radius} field. */
     public float radius() { return nradius(address()); }
-    /** an {@link XrVector2f} indicating a scale of the texture coordinates after the mapping to 2D. */
+    /** @return a {@link XrVector2f} view of the {@code scale} field. */
     public XrVector2f scale() { return nscale(address()); }
-    /** an {@link XrVector2f} indicating a bias of the texture coordinates after the mapping to 2D. */
+    /** @return a {@link XrVector2f} view of the {@code bias} field. */
     public XrVector2f bias() { return nbias(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerEquirectKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRCompositionLayerEquirect#XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR TYPE_COMPOSITION_LAYER_EQUIRECT_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHRCompositionLayerEquirect#XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR TYPE_COMPOSITION_LAYER_EQUIRECT_KHR} value to the {@code type} field. */
     public XrCompositionLayerEquirectKHR type$Default() { return type(KHRCompositionLayerEquirect.XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerEquirectKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #layerFlags} field. */
+    /** Sets the specified value to the {@code layerFlags} field. */
     public XrCompositionLayerEquirectKHR layerFlags(@NativeType("XrCompositionLayerFlags") long value) { nlayerFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrCompositionLayerEquirectKHR space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@link #eyeVisibility} field. */
+    /** Sets the specified value to the {@code eyeVisibility} field. */
     public XrCompositionLayerEquirectKHR eyeVisibility(@NativeType("XrEyeVisibility") int value) { neyeVisibility(address(), value); return this; }
-    /** Copies the specified {@link XrSwapchainSubImage} to the {@link #subImage} field. */
+    /** Copies the specified {@link XrSwapchainSubImage} to the {@code subImage} field. */
     public XrCompositionLayerEquirectKHR subImage(XrSwapchainSubImage value) { nsubImage(address(), value); return this; }
-    /** Passes the {@link #subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerEquirectKHR subImage(java.util.function.Consumer<XrSwapchainSubImage> consumer) { consumer.accept(subImage()); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrCompositionLayerEquirectKHR pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerEquirectKHR pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-    /** Sets the specified value to the {@link #radius} field. */
+    /** Sets the specified value to the {@code radius} field. */
     public XrCompositionLayerEquirectKHR radius(float value) { nradius(address(), value); return this; }
-    /** Copies the specified {@link XrVector2f} to the {@link #scale} field. */
+    /** Copies the specified {@link XrVector2f} to the {@code scale} field. */
     public XrCompositionLayerEquirectKHR scale(XrVector2f value) { nscale(address(), value); return this; }
-    /** Passes the {@link #scale} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code scale} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerEquirectKHR scale(java.util.function.Consumer<XrVector2f> consumer) { consumer.accept(scale()); return this; }
-    /** Copies the specified {@link XrVector2f} to the {@link #bias} field. */
+    /** Copies the specified {@link XrVector2f} to the {@code bias} field. */
     public XrCompositionLayerEquirectKHR bias(XrVector2f value) { nbias(address(), value); return this; }
-    /** Passes the {@link #bias} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code bias} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerEquirectKHR bias(java.util.function.Consumer<XrVector2f> consumer) { consumer.accept(bias()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -439,61 +415,61 @@ public class XrCompositionLayerEquirectKHR extends Struct<XrCompositionLayerEqui
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerEquirectKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerEquirectKHR.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerEquirectKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerEquirectKHR.nnext(address()); }
-        /** @return the value of the {@link XrCompositionLayerEquirectKHR#layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerEquirectKHR.nlayerFlags(address()); }
-        /** @return the value of the {@link XrCompositionLayerEquirectKHR#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerEquirectKHR.nspace(address()); }
-        /** @return the value of the {@link XrCompositionLayerEquirectKHR#eyeVisibility} field. */
+        /** @return the value of the {@code eyeVisibility} field. */
         @NativeType("XrEyeVisibility")
         public int eyeVisibility() { return XrCompositionLayerEquirectKHR.neyeVisibility(address()); }
-        /** @return a {@link XrSwapchainSubImage} view of the {@link XrCompositionLayerEquirectKHR#subImage} field. */
+        /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
         public XrSwapchainSubImage subImage() { return XrCompositionLayerEquirectKHR.nsubImage(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrCompositionLayerEquirectKHR#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrCompositionLayerEquirectKHR.npose(address()); }
-        /** @return the value of the {@link XrCompositionLayerEquirectKHR#radius} field. */
+        /** @return the value of the {@code radius} field. */
         public float radius() { return XrCompositionLayerEquirectKHR.nradius(address()); }
-        /** @return a {@link XrVector2f} view of the {@link XrCompositionLayerEquirectKHR#scale} field. */
+        /** @return a {@link XrVector2f} view of the {@code scale} field. */
         public XrVector2f scale() { return XrCompositionLayerEquirectKHR.nscale(address()); }
-        /** @return a {@link XrVector2f} view of the {@link XrCompositionLayerEquirectKHR#bias} field. */
+        /** @return a {@link XrVector2f} view of the {@code bias} field. */
         public XrVector2f bias() { return XrCompositionLayerEquirectKHR.nbias(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerEquirectKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerEquirectKHR.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerEquirectKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRCompositionLayerEquirect#XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR TYPE_COMPOSITION_LAYER_EQUIRECT_KHR} value to the {@link XrCompositionLayerEquirectKHR#type} field. */
+        /** Sets the {@link KHRCompositionLayerEquirect#XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR TYPE_COMPOSITION_LAYER_EQUIRECT_KHR} value to the {@code type} field. */
         public XrCompositionLayerEquirectKHR.Buffer type$Default() { return type(KHRCompositionLayerEquirect.XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR); }
-        /** Sets the specified value to the {@link XrCompositionLayerEquirectKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerEquirectKHR.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerEquirectKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerEquirectKHR#layerFlags} field. */
+        /** Sets the specified value to the {@code layerFlags} field. */
         public XrCompositionLayerEquirectKHR.Buffer layerFlags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerEquirectKHR.nlayerFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerEquirectKHR#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrCompositionLayerEquirectKHR.Buffer space(XrSpace value) { XrCompositionLayerEquirectKHR.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerEquirectKHR#eyeVisibility} field. */
+        /** Sets the specified value to the {@code eyeVisibility} field. */
         public XrCompositionLayerEquirectKHR.Buffer eyeVisibility(@NativeType("XrEyeVisibility") int value) { XrCompositionLayerEquirectKHR.neyeVisibility(address(), value); return this; }
-        /** Copies the specified {@link XrSwapchainSubImage} to the {@link XrCompositionLayerEquirectKHR#subImage} field. */
+        /** Copies the specified {@link XrSwapchainSubImage} to the {@code subImage} field. */
         public XrCompositionLayerEquirectKHR.Buffer subImage(XrSwapchainSubImage value) { XrCompositionLayerEquirectKHR.nsubImage(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerEquirectKHR#subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerEquirectKHR.Buffer subImage(java.util.function.Consumer<XrSwapchainSubImage> consumer) { consumer.accept(subImage()); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrCompositionLayerEquirectKHR#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrCompositionLayerEquirectKHR.Buffer pose(XrPosef value) { XrCompositionLayerEquirectKHR.npose(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerEquirectKHR#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerEquirectKHR.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerEquirectKHR#radius} field. */
+        /** Sets the specified value to the {@code radius} field. */
         public XrCompositionLayerEquirectKHR.Buffer radius(float value) { XrCompositionLayerEquirectKHR.nradius(address(), value); return this; }
-        /** Copies the specified {@link XrVector2f} to the {@link XrCompositionLayerEquirectKHR#scale} field. */
+        /** Copies the specified {@link XrVector2f} to the {@code scale} field. */
         public XrCompositionLayerEquirectKHR.Buffer scale(XrVector2f value) { XrCompositionLayerEquirectKHR.nscale(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerEquirectKHR#scale} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code scale} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerEquirectKHR.Buffer scale(java.util.function.Consumer<XrVector2f> consumer) { consumer.accept(scale()); return this; }
-        /** Copies the specified {@link XrVector2f} to the {@link XrCompositionLayerEquirectKHR#bias} field. */
+        /** Copies the specified {@link XrVector2f} to the {@code bias} field. */
         public XrCompositionLayerEquirectKHR.Buffer bias(XrVector2f value) { XrCompositionLayerEquirectKHR.nbias(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerEquirectKHR#bias} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code bias} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerEquirectKHR.Buffer bias(java.util.function.Consumer<XrVector2f> consumer) { consumer.accept(bias()); return this; }
 
     }

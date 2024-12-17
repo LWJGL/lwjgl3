@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceDescriptorIndexingProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDescriptorIndexingPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -47,7 +43,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxDescriptorSetUpdateAfterBindSampledImages;
  *     uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
  *     uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceDescriptorIndexingPropertiesEXT extends VkPhysicalDeviceDescriptorIndexingProperties {
 

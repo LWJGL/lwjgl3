@@ -16,23 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure used to pass compilation control flags to a pipeline.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDPipelineCompilerControl#VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD}</li>
- * <li>{@code compilerControlFlags} <b>must</b> be 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineCompilerControlCreateInfoAMD {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineCompilerControlFlagsAMD {@link #compilerControlFlags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineCompilerControlFlagsAMD compilerControlFlags;
+ * }}</pre>
  */
 public class VkPipelineCompilerControlCreateInfoAMD extends Struct<VkPipelineCompilerControlCreateInfoAMD> implements NativeResource {
 
@@ -85,23 +74,23 @@ public class VkPipelineCompilerControlCreateInfoAMD extends Struct<VkPipelineCom
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkPipelineCompilerControlFlagBitsAMD} affecting how the pipeline will be compiled. */
+    /** @return the value of the {@code compilerControlFlags} field. */
     @NativeType("VkPipelineCompilerControlFlagsAMD")
     public int compilerControlFlags() { return ncompilerControlFlags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineCompilerControlCreateInfoAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDPipelineCompilerControl#VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD} value to the {@link #sType} field. */
+    /** Sets the {@link AMDPipelineCompilerControl#VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD} value to the {@code sType} field. */
     public VkPipelineCompilerControlCreateInfoAMD sType$Default() { return sType(AMDPipelineCompilerControl.VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineCompilerControlCreateInfoAMD pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #compilerControlFlags} field. */
+    /** Sets the specified value to the {@code compilerControlFlags} field. */
     public VkPipelineCompilerControlCreateInfoAMD compilerControlFlags(@NativeType("VkPipelineCompilerControlFlagsAMD") int value) { ncompilerControlFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,23 +305,23 @@ public class VkPipelineCompilerControlCreateInfoAMD extends Struct<VkPipelineCom
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineCompilerControlCreateInfoAMD#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineCompilerControlCreateInfoAMD.nsType(address()); }
-        /** @return the value of the {@link VkPipelineCompilerControlCreateInfoAMD#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineCompilerControlCreateInfoAMD.npNext(address()); }
-        /** @return the value of the {@link VkPipelineCompilerControlCreateInfoAMD#compilerControlFlags} field. */
+        /** @return the value of the {@code compilerControlFlags} field. */
         @NativeType("VkPipelineCompilerControlFlagsAMD")
         public int compilerControlFlags() { return VkPipelineCompilerControlCreateInfoAMD.ncompilerControlFlags(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineCompilerControlCreateInfoAMD#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineCompilerControlCreateInfoAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCompilerControlCreateInfoAMD.nsType(address(), value); return this; }
-        /** Sets the {@link AMDPipelineCompilerControl#VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD} value to the {@link VkPipelineCompilerControlCreateInfoAMD#sType} field. */
+        /** Sets the {@link AMDPipelineCompilerControl#VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD} value to the {@code sType} field. */
         public VkPipelineCompilerControlCreateInfoAMD.Buffer sType$Default() { return sType(AMDPipelineCompilerControl.VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD); }
-        /** Sets the specified value to the {@link VkPipelineCompilerControlCreateInfoAMD#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineCompilerControlCreateInfoAMD.Buffer pNext(@NativeType("void const *") long value) { VkPipelineCompilerControlCreateInfoAMD.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineCompilerControlCreateInfoAMD#compilerControlFlags} field. */
+        /** Sets the specified value to the {@code compilerControlFlags} field. */
         public VkPipelineCompilerControlCreateInfoAMD.Buffer compilerControlFlags(@NativeType("VkPipelineCompilerControlFlagsAMD") int value) { VkPipelineCompilerControlCreateInfoAMD.ncompilerControlFlags(address(), value); return this; }
 
     }

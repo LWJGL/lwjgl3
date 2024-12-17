@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkBufferMemoryRequirementsInfo2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferMemoryRequirementsInfo2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBuffer buffer;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkBufferMemoryRequirementsInfo2KHR extends VkBufferMemoryRequirementsInfo2 {
 

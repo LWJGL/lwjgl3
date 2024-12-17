@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing corner sampled image features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceCornerSampledImageFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCornerSampledImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCornerSampledImageFeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #cornerSampledImage};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 cornerSampledImage;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct<VkPhysicalDeviceCornerSampledImageFeaturesNV> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether images can be created with a {@link VkImageCreateInfo}{@code ::flags} containing {@link NVCornerSampledImage#VK_IMAGE_CREATE_CORNER_SAMPLED_BIT_NV IMAGE_CREATE_CORNER_SAMPLED_BIT_NV}. See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-images-corner-sampled">Corner-Sampled Images</a>. */
+    /** @return the value of the {@code cornerSampledImage} field. */
     @NativeType("VkBool32")
     public boolean cornerSampledImage() { return ncornerSampledImage(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceCornerSampledImageFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCornerSampledImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCornerSampledImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceCornerSampledImageFeaturesNV sType$Default() { return sType(NVCornerSampledImage.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCornerSampledImageFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #cornerSampledImage} field. */
+    /** Sets the specified value to the {@code cornerSampledImage} field. */
     public VkPhysicalDeviceCornerSampledImageFeaturesNV cornerSampledImage(@NativeType("VkBool32") boolean value) { ncornerSampledImage(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,23 +305,23 @@ public class VkPhysicalDeviceCornerSampledImageFeaturesNV extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCornerSampledImageFeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCornerSampledImageFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#cornerSampledImage} field. */
+        /** @return the value of the {@code cornerSampledImage} field. */
         @NativeType("VkBool32")
         public boolean cornerSampledImage() { return VkPhysicalDeviceCornerSampledImageFeaturesNV.ncornerSampledImage(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCornerSampledImageFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCornerSampledImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV} value to the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#sType} field. */
+        /** Sets the {@link NVCornerSampledImage#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer sType$Default() { return sType(NVCornerSampledImage.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCornerSampledImageFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCornerSampledImageFeaturesNV#cornerSampledImage} field. */
+        /** Sets the specified value to the {@code cornerSampledImage} field. */
         public VkPhysicalDeviceCornerSampledImageFeaturesNV.Buffer cornerSampledImage(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCornerSampledImageFeaturesNV.ncornerSampledImage(address(), value ? 1 : 0); return this; }
 
     }

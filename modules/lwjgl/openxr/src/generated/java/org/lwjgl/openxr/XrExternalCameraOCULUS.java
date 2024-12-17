@@ -18,30 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.OCULUSExternalCamera.*;
 
 /**
- * Camera intrintics state.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link OCULUSExternalCamera XR_OCULUS_external_camera} extension <b>must</b> be enabled prior to using {@link XrExternalCameraOCULUS}</li>
- * <li>{@code type} <b>must</b> be {@link OCULUSExternalCamera#XR_TYPE_EXTERNAL_CAMERA_OCULUS TYPE_EXTERNAL_CAMERA_OCULUS}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExternalCameraExtrinsicsOCULUS}, {@link XrExternalCameraIntrinsicsOCULUS}, {@link OCULUSExternalCamera#xrEnumerateExternalCamerasOCULUS EnumerateExternalCamerasOCULUS}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrExternalCameraOCULUS {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     char {@link #name}[XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS];
- *     {@link XrExternalCameraIntrinsicsOCULUS XrExternalCameraIntrinsicsOCULUS} {@link #intrinsics};
- *     {@link XrExternalCameraExtrinsicsOCULUS XrExternalCameraExtrinsicsOCULUS} {@link #extrinsics};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     char name[XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS];
+ *     {@link XrExternalCameraIntrinsicsOCULUS XrExternalCameraIntrinsicsOCULUS} intrinsics;
+ *     {@link XrExternalCameraExtrinsicsOCULUS XrExternalCameraExtrinsicsOCULUS} extrinsics;
+ * }}</pre>
  */
 public class XrExternalCameraOCULUS extends Struct<XrExternalCameraOCULUS> implements NativeResource {
 
@@ -100,28 +84,28 @@ public class XrExternalCameraOCULUS extends Struct<XrExternalCameraOCULUS> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a null-terminated UTF-8 string containing a camera identifier: VID (vendor ID), PID (product ID), and serial number */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS]")
     public ByteBuffer name() { return nname(address()); }
-    /** a null-terminated UTF-8 string containing a camera identifier: VID (vendor ID), PID (product ID), and serial number */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS]")
     public String nameString() { return nnameString(address()); }
-    /** the {@link XrExternalCameraIntrinsicsOCULUS} for the camera */
+    /** @return a {@link XrExternalCameraIntrinsicsOCULUS} view of the {@code intrinsics} field. */
     public XrExternalCameraIntrinsicsOCULUS intrinsics() { return nintrinsics(address()); }
-    /** the {@link XrExternalCameraExtrinsicsOCULUS} for the camera */
+    /** @return a {@link XrExternalCameraExtrinsicsOCULUS} view of the {@code extrinsics} field. */
     public XrExternalCameraExtrinsicsOCULUS extrinsics() { return nextrinsics(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrExternalCameraOCULUS type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link OCULUSExternalCamera#XR_TYPE_EXTERNAL_CAMERA_OCULUS TYPE_EXTERNAL_CAMERA_OCULUS} value to the {@link #type} field. */
+    /** Sets the {@link OCULUSExternalCamera#XR_TYPE_EXTERNAL_CAMERA_OCULUS TYPE_EXTERNAL_CAMERA_OCULUS} value to the {@code type} field. */
     public XrExternalCameraOCULUS type$Default() { return type(OCULUSExternalCamera.XR_TYPE_EXTERNAL_CAMERA_OCULUS); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrExternalCameraOCULUS next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,28 +303,28 @@ public class XrExternalCameraOCULUS extends Struct<XrExternalCameraOCULUS> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrExternalCameraOCULUS#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrExternalCameraOCULUS.ntype(address()); }
-        /** @return the value of the {@link XrExternalCameraOCULUS#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrExternalCameraOCULUS.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrExternalCameraOCULUS#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS]")
         public ByteBuffer name() { return XrExternalCameraOCULUS.nname(address()); }
-        /** @return the null-terminated string stored in the {@link XrExternalCameraOCULUS#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS]")
         public String nameString() { return XrExternalCameraOCULUS.nnameString(address()); }
-        /** @return a {@link XrExternalCameraIntrinsicsOCULUS} view of the {@link XrExternalCameraOCULUS#intrinsics} field. */
+        /** @return a {@link XrExternalCameraIntrinsicsOCULUS} view of the {@code intrinsics} field. */
         public XrExternalCameraIntrinsicsOCULUS intrinsics() { return XrExternalCameraOCULUS.nintrinsics(address()); }
-        /** @return a {@link XrExternalCameraExtrinsicsOCULUS} view of the {@link XrExternalCameraOCULUS#extrinsics} field. */
+        /** @return a {@link XrExternalCameraExtrinsicsOCULUS} view of the {@code extrinsics} field. */
         public XrExternalCameraExtrinsicsOCULUS extrinsics() { return XrExternalCameraOCULUS.nextrinsics(address()); }
 
-        /** Sets the specified value to the {@link XrExternalCameraOCULUS#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrExternalCameraOCULUS.Buffer type(@NativeType("XrStructureType") int value) { XrExternalCameraOCULUS.ntype(address(), value); return this; }
-        /** Sets the {@link OCULUSExternalCamera#XR_TYPE_EXTERNAL_CAMERA_OCULUS TYPE_EXTERNAL_CAMERA_OCULUS} value to the {@link XrExternalCameraOCULUS#type} field. */
+        /** Sets the {@link OCULUSExternalCamera#XR_TYPE_EXTERNAL_CAMERA_OCULUS TYPE_EXTERNAL_CAMERA_OCULUS} value to the {@code type} field. */
         public XrExternalCameraOCULUS.Buffer type$Default() { return type(OCULUSExternalCamera.XR_TYPE_EXTERNAL_CAMERA_OCULUS); }
-        /** Sets the specified value to the {@link XrExternalCameraOCULUS#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrExternalCameraOCULUS.Buffer next(@NativeType("void const *") long value) { XrExternalCameraOCULUS.nnext(address(), value); return this; }
 
     }

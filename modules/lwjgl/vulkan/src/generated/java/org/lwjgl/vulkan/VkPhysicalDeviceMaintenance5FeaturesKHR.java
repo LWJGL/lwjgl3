@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceMaintenance5Features}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMaintenance5FeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 maintenance5;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceMaintenance5FeaturesKHR extends VkPhysicalDeviceMaintenance5Features {
 

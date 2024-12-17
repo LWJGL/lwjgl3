@@ -15,40 +15,10 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * NanoSVG is a simple stupid single-header-file SVG parse. The output of the parser is a list of cubic bezier shapes.
- * 
- * <p>The library suits well for anything from rendering scalable icons in your editor application to prototyping a game.</p>
- * 
- * <p>NanoSVG supports a wide range of SVG features, but something may be missing, feel free to create a pull request!</p>
- * 
- * <p>The shapes in the SVG images are transformed by the viewBox and converted to specified units. That is, you should get the same looking data as your
- * designed in your favorite app.</p>
- * 
- * <p>NanoSVG can return the paths in few different units. For example if you want to render an image, you may choose to get the paths in pixels, or if you
- * are feeding the data into a CNC-cutter, you may want to use millimeters.</p>
- * 
- * <p>The units passed to NanoSVG should be one of: 'px', 'pt', 'pc' 'mm', 'cm', or 'in'. DPI (dots-per-inch) controls how the unit conversion is done.</p>
- * 
- * <p>If you don't know or care about the units stuff, "px" and 96 should get you going.</p>
- */
 public class NanoSVG {
 
     static { LibNanoVG.initialize(); }
 
-    /**
-     * NSVGpaintType
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #NSVG_PAINT_UNDEF PAINT_UNDEF}</li>
-     * <li>{@link #NSVG_PAINT_NONE PAINT_NONE}</li>
-     * <li>{@link #NSVG_PAINT_COLOR PAINT_COLOR}</li>
-     * <li>{@link #NSVG_PAINT_LINEAR_GRADIENT PAINT_LINEAR_GRADIENT}</li>
-     * <li>{@link #NSVG_PAINT_RADIAL_GRADIENT PAINT_RADIAL_GRADIENT}</li>
-     * </ul>
-     */
     public static final int
         NSVG_PAINT_UNDEF           = -1,
         NSVG_PAINT_NONE            = 0,
@@ -56,69 +26,25 @@ public class NanoSVG {
         NSVG_PAINT_LINEAR_GRADIENT = 2,
         NSVG_PAINT_RADIAL_GRADIENT = 3;
 
-    /**
-     * NSVGspreadType
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #NSVG_SPREAD_PAD SPREAD_PAD}</li>
-     * <li>{@link #NSVG_SPREAD_REFLECT SPREAD_REFLECT}</li>
-     * <li>{@link #NSVG_SPREAD_REPEAT SPREAD_REPEAT}</li>
-     * </ul>
-     */
     public static final int
         NSVG_SPREAD_PAD     = 0,
         NSVG_SPREAD_REFLECT = 1,
         NSVG_SPREAD_REPEAT  = 2;
 
-    /**
-     * NSVGlineJoin
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #NSVG_JOIN_MITER JOIN_MITER}</li>
-     * <li>{@link #NSVG_JOIN_ROUND JOIN_ROUND}</li>
-     * <li>{@link #NSVG_JOIN_BEVEL JOIN_BEVEL}</li>
-     * </ul>
-     */
     public static final int
         NSVG_JOIN_MITER = 0,
         NSVG_JOIN_ROUND = 1,
         NSVG_JOIN_BEVEL = 2;
 
-    /**
-     * NSVGlineCap
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #NSVG_CAP_BUTT CAP_BUTT}</li>
-     * <li>{@link #NSVG_CAP_ROUND CAP_ROUND}</li>
-     * <li>{@link #NSVG_CAP_SQUARE CAP_SQUARE}</li>
-     * </ul>
-     */
     public static final int
         NSVG_CAP_BUTT   = 0,
         NSVG_CAP_ROUND  = 1,
         NSVG_CAP_SQUARE = 2;
 
-    /**
-     * NSVGfillRule
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #NSVG_FILLRULE_NONZERO FILLRULE_NONZERO}</li>
-     * <li>{@link #NSVG_FILLRULE_EVENODD FILLRULE_EVENODD}</li>
-     * </ul>
-     */
     public static final int
         NSVG_FILLRULE_NONZERO = 0,
         NSVG_FILLRULE_EVENODD = 1;
 
-    /** NSVGflags */
     public static final int NSVG_FLAGS_VISIBLE = 0x01;
 
     protected NanoSVG() {
@@ -127,10 +53,10 @@ public class NanoSVG {
 
     // --- [ nsvgParseFromFile ] ---
 
-    /** Unsafe version of: {@link #nsvgParseFromFile ParseFromFile} */
+    /** {@code NSVGimage * nsvgParseFromFile(char const * filename, char const * units, float dpi)} */
     public static native long nnsvgParseFromFile(long filename, long units, float dpi);
 
-    /** Parses SVG file from a file, returns SVG image as paths. */
+    /** {@code NSVGimage * nsvgParseFromFile(char const * filename, char const * units, float dpi)} */
     @NativeType("NSVGimage *")
     public static @Nullable NSVGImage nsvgParseFromFile(@NativeType("char const *") ByteBuffer filename, @NativeType("char const *") ByteBuffer units, float dpi) {
         if (CHECKS) {
@@ -141,7 +67,7 @@ public class NanoSVG {
         return NSVGImage.createSafe(__result);
     }
 
-    /** Parses SVG file from a file, returns SVG image as paths. */
+    /** {@code NSVGimage * nsvgParseFromFile(char const * filename, char const * units, float dpi)} */
     @NativeType("NSVGimage *")
     public static @Nullable NSVGImage nsvgParseFromFile(@NativeType("char const *") CharSequence filename, @NativeType("char const *") CharSequence units, float dpi) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -159,14 +85,10 @@ public class NanoSVG {
 
     // --- [ nsvgParse ] ---
 
-    /** Unsafe version of: {@link #nsvgParse Parse} */
+    /** {@code NSVGimage * nsvgParse(char * input, char const * units, float dpi)} */
     public static native long nnsvgParse(long input, long units, float dpi);
 
-    /**
-     * Parses SVG file from a null terminated string, returns SVG image as paths.
-     * 
-     * <p>Important note: changes the string.</p>
-     */
+    /** {@code NSVGimage * nsvgParse(char * input, char const * units, float dpi)} */
     @NativeType("NSVGimage *")
     public static @Nullable NSVGImage nsvgParse(@NativeType("char *") ByteBuffer input, @NativeType("char const *") ByteBuffer units, float dpi) {
         if (CHECKS) {
@@ -177,11 +99,7 @@ public class NanoSVG {
         return NSVGImage.createSafe(__result);
     }
 
-    /**
-     * Parses SVG file from a null terminated string, returns SVG image as paths.
-     * 
-     * <p>Important note: changes the string.</p>
-     */
+    /** {@code NSVGimage * nsvgParse(char * input, char const * units, float dpi)} */
     @NativeType("NSVGimage *")
     public static @Nullable NSVGImage nsvgParse(@NativeType("char *") CharSequence input, @NativeType("char const *") CharSequence units, float dpi) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -199,10 +117,10 @@ public class NanoSVG {
 
     // --- [ nsvgDuplicatePath ] ---
 
-    /** Unsafe version of: {@link #nsvgDuplicatePath DuplicatePath} */
+    /** {@code NSVGpath * nsvgDuplicatePath(NSVGpath * p)} */
     public static native long nnsvgDuplicatePath(long p);
 
-    /** Duplicates a path. */
+    /** {@code NSVGpath * nsvgDuplicatePath(NSVGpath * p)} */
     @NativeType("NSVGpath *")
     public static @Nullable NSVGPath nsvgDuplicatePath(@NativeType("NSVGpath *") NSVGPath p) {
         long __result = nnsvgDuplicatePath(p.address());
@@ -211,38 +129,26 @@ public class NanoSVG {
 
     // --- [ nsvgDelete ] ---
 
-    /** Unsafe version of: {@link #nsvgDelete Delete} */
+    /** {@code void nsvgDelete(NSVGimage * image)} */
     public static native void nnsvgDelete(long image);
 
-    /** Deletes an image. */
+    /** {@code void nsvgDelete(NSVGimage * image)} */
     public static void nsvgDelete(@NativeType("NSVGimage *") NSVGImage image) {
         nnsvgDelete(image.address());
     }
 
     // --- [ nsvgCreateRasterizer ] ---
 
-    /** Allocates rasterizer context. */
+    /** {@code NSVGrasterizer * nsvgCreateRasterizer(void)} */
     @NativeType("NSVGrasterizer *")
     public static native long nsvgCreateRasterizer();
 
     // --- [ nsvgRasterize ] ---
 
-    /** Unsafe version of: {@link #nsvgRasterize Rasterize} */
+    /** {@code void nsvgRasterize(NSVGrasterizer * r, NSVGimage * image, float tx, float ty, float scale, unsigned char * dst, int w, int h, int stride)} */
     public static native void nnsvgRasterize(long r, long image, float tx, float ty, float scale, long dst, int w, int h, int stride);
 
-    /**
-     * Rasterizes SVG image, returns RGBA image (non-premultiplied alpha).
-     *
-     * @param r      pointer to rasterizer context
-     * @param image  pointer to image to rasterize
-     * @param tx     image x offset (applied after scaling)
-     * @param ty     image y offset (applied after scaling)
-     * @param scale  image scale
-     * @param dst    pointer to destination image data, 4 bytes per pixel (RGBA)
-     * @param w      width of the image to render
-     * @param h      height of the image to render
-     * @param stride number of bytes per scaleline in the destination buffer
-     */
+    /** {@code void nsvgRasterize(NSVGrasterizer * r, NSVGimage * image, float tx, float ty, float scale, unsigned char * dst, int w, int h, int stride)} */
     public static void nsvgRasterize(@NativeType("NSVGrasterizer *") long r, @NativeType("NSVGimage *") NSVGImage image, float tx, float ty, float scale, @NativeType("unsigned char *") ByteBuffer dst, int w, int h, int stride) {
         if (CHECKS) {
             check(r);
@@ -253,14 +159,10 @@ public class NanoSVG {
 
     // --- [ nsvgDeleteRasterizer ] ---
 
-    /** Unsafe version of: {@link #nsvgDeleteRasterizer DeleteRasterizer} */
+    /** {@code void nsvgDeleteRasterizer(NSVGrasterizer * rasterizer)} */
     public static native void nnsvgDeleteRasterizer(long rasterizer);
 
-    /**
-     * Deletes rasterizer context.
-     *
-     * @param rasterizer the rasterizer context to delete
-     */
+    /** {@code void nsvgDeleteRasterizer(NSVGrasterizer * rasterizer)} */
     public static void nsvgDeleteRasterizer(@NativeType("NSVGrasterizer *") long rasterizer) {
         if (CHECKS) {
             check(rasterizer);

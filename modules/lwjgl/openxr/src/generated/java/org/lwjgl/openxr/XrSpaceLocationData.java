@@ -16,23 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Returns the data of a space.
- * 
- * <h5>Description</h5>
- * 
- * <p>This is a single element of the array in {@link XrSpaceLocations}{@code ::locations}, and is used to return the pose and location flags for a single space with respect to the specified base space from a call to {@link XR11#xrLocateSpaces LocateSpaces}. It does not accept chained structures to allow for easier use in dynamically allocated container datatypes. Chained structures are possible with the {@link XrSpaceLocations} that describes an array of these elements.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link XrSpaceLocations}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceLocationData {
- *     XrSpaceLocationFlags {@link #locationFlags};
- *     {@link XrPosef XrPosef} {@link #pose};
- * }</code></pre>
+ *     XrSpaceLocationFlags locationFlags;
+ *     {@link XrPosef XrPosef} pose;
+ * }}</pre>
  */
 public class XrSpaceLocationData extends Struct<XrSpaceLocationData> implements NativeResource {
 
@@ -82,10 +70,10 @@ public class XrSpaceLocationData extends Struct<XrSpaceLocationData> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}. It behaves the same as {@link XrSpaceLocation}{@code ::locationFlags}. */
+    /** @return the value of the {@code locationFlags} field. */
     @NativeType("XrSpaceLocationFlags")
     public long locationFlags() { return nlocationFlags(address()); }
-    /** an {@link XrPosef} that behaves the same as {@link XrSpaceLocation}{@code ::pose}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
 
     // -----------------------------------
@@ -247,10 +235,10 @@ public class XrSpaceLocationData extends Struct<XrSpaceLocationData> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceLocationData#locationFlags} field. */
+        /** @return the value of the {@code locationFlags} field. */
         @NativeType("XrSpaceLocationFlags")
         public long locationFlags() { return XrSpaceLocationData.nlocationFlags(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrSpaceLocationData#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrSpaceLocationData.npose(address()); }
 
     }

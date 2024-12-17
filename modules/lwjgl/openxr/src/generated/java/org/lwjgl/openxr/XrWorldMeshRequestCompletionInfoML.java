@@ -17,30 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Block Request Completion Info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshRequestCompletionInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code meshSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLWorldMeshDetection#xrRequestWorldMeshCompleteML RequestWorldMeshCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshRequestCompletionInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #meshSpace};
- *     XrTime {@link #meshSpaceLocateTime};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace meshSpace;
+ *     XrTime meshSpaceLocateTime;
+ * }}</pre>
  */
 public class XrWorldMeshRequestCompletionInfoML extends Struct<XrWorldMeshRequestCompletionInfoML> implements NativeResource {
 
@@ -96,28 +79,28 @@ public class XrWorldMeshRequestCompletionInfoML extends Struct<XrWorldMeshReques
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the space used to express the vertex data in. */
+    /** @return the value of the {@code meshSpace} field. */
     @NativeType("XrSpace")
     public long meshSpace() { return nmeshSpace(address()); }
-    /** the time used to locate the {@code meshSpace}. */
+    /** @return the value of the {@code meshSpaceLocateTime} field. */
     @NativeType("XrTime")
     public long meshSpaceLocateTime() { return nmeshSpaceLocateTime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshRequestCompletionInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML} value to the {@code type} field. */
     public XrWorldMeshRequestCompletionInfoML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshRequestCompletionInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #meshSpace} field. */
+    /** Sets the specified value to the {@code meshSpace} field. */
     public XrWorldMeshRequestCompletionInfoML meshSpace(XrSpace value) { nmeshSpace(address(), value); return this; }
-    /** Sets the specified value to the {@link #meshSpaceLocateTime} field. */
+    /** Sets the specified value to the {@code meshSpaceLocateTime} field. */
     public XrWorldMeshRequestCompletionInfoML meshSpaceLocateTime(@NativeType("XrTime") long value) { nmeshSpaceLocateTime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,28 +311,28 @@ public class XrWorldMeshRequestCompletionInfoML extends Struct<XrWorldMeshReques
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshRequestCompletionInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshRequestCompletionInfoML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshRequestCompletionInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrWorldMeshRequestCompletionInfoML.nnext(address()); }
-        /** @return the value of the {@link XrWorldMeshRequestCompletionInfoML#meshSpace} field. */
+        /** @return the value of the {@code meshSpace} field. */
         @NativeType("XrSpace")
         public long meshSpace() { return XrWorldMeshRequestCompletionInfoML.nmeshSpace(address()); }
-        /** @return the value of the {@link XrWorldMeshRequestCompletionInfoML#meshSpaceLocateTime} field. */
+        /** @return the value of the {@code meshSpaceLocateTime} field. */
         @NativeType("XrTime")
         public long meshSpaceLocateTime() { return XrWorldMeshRequestCompletionInfoML.nmeshSpaceLocateTime(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshRequestCompletionInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshRequestCompletionInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshRequestCompletionInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML} value to the {@link XrWorldMeshRequestCompletionInfoML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML} value to the {@code type} field. */
         public XrWorldMeshRequestCompletionInfoML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshRequestCompletionInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshRequestCompletionInfoML.Buffer next(@NativeType("void const *") long value) { XrWorldMeshRequestCompletionInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshRequestCompletionInfoML#meshSpace} field. */
+        /** Sets the specified value to the {@code meshSpace} field. */
         public XrWorldMeshRequestCompletionInfoML.Buffer meshSpace(XrSpace value) { XrWorldMeshRequestCompletionInfoML.nmeshSpace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshRequestCompletionInfoML#meshSpaceLocateTime} field. */
+        /** Sets the specified value to the {@code meshSpaceLocateTime} field. */
         public XrWorldMeshRequestCompletionInfoML.Buffer meshSpaceLocateTime(@NativeType("XrTime") long value) { XrWorldMeshRequestCompletionInfoML.nmeshSpaceLocateTime(address(), value); return this; }
 
     }

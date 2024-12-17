@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A union type used to store either a long or a pointer. This is used to store a file descriptor or a {@code FILE*} in an input stream.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union FT_StreamDesc {
  *     long value;
  *     void * pointer;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_StreamDesc extends Struct<FT_StreamDesc> implements NativeResource {
 

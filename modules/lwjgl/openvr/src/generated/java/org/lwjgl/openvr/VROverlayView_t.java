@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VROverlayView_t {
  *     VROverlayHandle_t overlayHandle;
  *     {@link Texture Texture_t} texture;
  *     {@link VRTextureBounds VRTextureBounds_t} textureBounds;
- * }</code></pre>
+ * }}</pre>
  */
 public class VROverlayView_t extends Struct<VROverlayView_t> implements NativeResource {
 

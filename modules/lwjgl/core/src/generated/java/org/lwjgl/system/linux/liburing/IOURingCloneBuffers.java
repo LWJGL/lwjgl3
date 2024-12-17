@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_clone_buffers {
  *     __u32 src_fd;
  *     __u32 flags;
  *     __u32 pad[6];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_clone_buffers")
 public class IOURingCloneBuffers extends Struct<IOURingCloneBuffers> implements NativeResource {

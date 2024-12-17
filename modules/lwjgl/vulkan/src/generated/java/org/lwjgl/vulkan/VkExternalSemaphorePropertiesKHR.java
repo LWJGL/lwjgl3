@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkExternalSemaphoreProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExternalSemaphorePropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkExternalSemaphoreHandleTypeFlags exportFromImportedHandleTypes;
  *     VkExternalSemaphoreHandleTypeFlags compatibleHandleTypes;
  *     VkExternalSemaphoreFeatureFlags externalSemaphoreFeatures;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkExternalSemaphorePropertiesKHR extends VkExternalSemaphoreProperties {
 

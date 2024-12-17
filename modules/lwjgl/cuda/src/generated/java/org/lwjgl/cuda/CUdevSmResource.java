@@ -14,12 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUdevSmResource {
  *     unsigned int smCount;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUdevSmResource extends Struct<CUdevSmResource> {
 

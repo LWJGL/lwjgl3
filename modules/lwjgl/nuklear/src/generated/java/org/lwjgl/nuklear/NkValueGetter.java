@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link Nuklear#nk_plot_function plot_function} function.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     void *userdata,
- *     int index
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_value_getter} */
 public abstract class NkValueGetter extends Callback implements NkValueGetterI {
 
     /**

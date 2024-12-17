@@ -16,38 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The information to filter marker query results.
- * 
- * <h5>Description</h5>
- * 
- * <p>The application <b>can</b> filter the returned scene components to specific marker types by chaining {@link XrSceneMarkerTypeFilterMSFT} to the {@code next} pointer of {@link XrSceneComponentsGetInfoMSFT} when calling {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}.</p>
- * 
- * <p>When {@link XrSceneMarkerTypeFilterMSFT} is provided to {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}, the runtime <b>must</b> only return scene components that match the requested types.</p>
- * 
- * <p>The application <b>must</b> provide a non-empty array of unique {@code markerTypes}, i.e. the {@code markerTypeCount} <b>must</b> be positive and the elements in the {@code markerTypes} array <b>must</b> not have duplicated values. Otherwise, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} for {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT} function.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using {@link XrSceneMarkerTypeFilterMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT TYPE_SCENE_MARKER_TYPE_FILTER_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code markerTypeCount} is not 0, {@code markerTypes} <b>must</b> be a pointer to an array of {@code markerTypeCount} {@code XrSceneMarkerTypeMSFT} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneMarkerTypeFilterMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #markerTypeCount};
- *     XrSceneMarkerTypeMSFT * {@link #markerTypes};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t markerTypeCount;
+ *     XrSceneMarkerTypeMSFT * markerTypes;
+ * }}</pre>
  */
 public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterMSFT> implements NativeResource {
 
@@ -103,28 +78,28 @@ public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterM
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} indicating the count of elements in the {@code markerTypes} array. */
+    /** @return the value of the {@code markerTypeCount} field. */
     @NativeType("uint32_t")
     public int markerTypeCount() { return nmarkerTypeCount(address()); }
-    /** an array of {@code XrSceneMarkerTypeMSFT} indicating the types of markers to return. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code markerTypes} field. */
     @NativeType("XrSceneMarkerTypeMSFT *")
     public @Nullable IntBuffer markerTypes() { return nmarkerTypes(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSceneMarkerTypeFilterMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT TYPE_SCENE_MARKER_TYPE_FILTER_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT TYPE_SCENE_MARKER_TYPE_FILTER_MSFT} value to the {@code type} field. */
     public XrSceneMarkerTypeFilterMSFT type$Default() { return type(MSFTSceneMarker.XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSceneMarkerTypeFilterMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #markerTypeCount} field. */
+    /** Sets the specified value to the {@code markerTypeCount} field. */
     public XrSceneMarkerTypeFilterMSFT markerTypeCount(@NativeType("uint32_t") int value) { nmarkerTypeCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #markerTypes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code markerTypes} field. */
     public XrSceneMarkerTypeFilterMSFT markerTypes(@Nullable @NativeType("XrSceneMarkerTypeMSFT *") IntBuffer value) { nmarkerTypes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,28 +301,28 @@ public class XrSceneMarkerTypeFilterMSFT extends Struct<XrSceneMarkerTypeFilterM
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneMarkerTypeFilterMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSceneMarkerTypeFilterMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSceneMarkerTypeFilterMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSceneMarkerTypeFilterMSFT.nnext(address()); }
-        /** @return the value of the {@link XrSceneMarkerTypeFilterMSFT#markerTypeCount} field. */
+        /** @return the value of the {@code markerTypeCount} field. */
         @NativeType("uint32_t")
         public int markerTypeCount() { return XrSceneMarkerTypeFilterMSFT.nmarkerTypeCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrSceneMarkerTypeFilterMSFT#markerTypes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code markerTypes} field. */
         @NativeType("XrSceneMarkerTypeMSFT *")
         public @Nullable IntBuffer markerTypes() { return XrSceneMarkerTypeFilterMSFT.nmarkerTypes(address()); }
 
-        /** Sets the specified value to the {@link XrSceneMarkerTypeFilterMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSceneMarkerTypeFilterMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneMarkerTypeFilterMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT TYPE_SCENE_MARKER_TYPE_FILTER_MSFT} value to the {@link XrSceneMarkerTypeFilterMSFT#type} field. */
+        /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT TYPE_SCENE_MARKER_TYPE_FILTER_MSFT} value to the {@code type} field. */
         public XrSceneMarkerTypeFilterMSFT.Buffer type$Default() { return type(MSFTSceneMarker.XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT); }
-        /** Sets the specified value to the {@link XrSceneMarkerTypeFilterMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSceneMarkerTypeFilterMSFT.Buffer next(@NativeType("void const *") long value) { XrSceneMarkerTypeFilterMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneMarkerTypeFilterMSFT#markerTypeCount} field. */
+        /** Sets the specified value to the {@code markerTypeCount} field. */
         public XrSceneMarkerTypeFilterMSFT.Buffer markerTypeCount(@NativeType("uint32_t") int value) { XrSceneMarkerTypeFilterMSFT.nmarkerTypeCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link XrSceneMarkerTypeFilterMSFT#markerTypes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code markerTypes} field. */
         public XrSceneMarkerTypeFilterMSFT.Buffer markerTypes(@Nullable @NativeType("XrSceneMarkerTypeMSFT *") IntBuffer value) { XrSceneMarkerTypeFilterMSFT.nmarkerTypes(address(), value); return this; }
 
     }

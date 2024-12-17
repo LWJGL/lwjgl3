@@ -19,11 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * See {@link VkPhysicalDeviceIDProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceIDPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -32,7 +28,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     uint8_t deviceLUID[VK_LUID_SIZE];
  *     uint32_t deviceNodeMask;
  *     VkBool32 deviceLUIDValid;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceIDPropertiesKHR extends VkPhysicalDeviceIDProperties {
 

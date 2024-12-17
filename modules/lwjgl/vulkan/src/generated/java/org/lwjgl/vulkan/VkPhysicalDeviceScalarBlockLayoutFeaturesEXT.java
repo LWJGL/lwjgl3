@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceScalarBlockLayoutFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceScalarBlockLayoutFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 scalarBlockLayout;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceScalarBlockLayoutFeaturesEXT extends VkPhysicalDeviceScalarBlockLayoutFeatures {
 

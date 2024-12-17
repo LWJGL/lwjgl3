@@ -17,32 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * specify HDR Vivid dynamic metadata.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The HDR Vivid metadata is intended to be used as defined in the T/UWA 005.1-2022 specification. The validity and use of this data is outside the scope of Vulkan.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI}</li>
- * <li>{@code pDynamicMetadata} <b>must</b> be a valid pointer to an array of {@code dynamicMetadataSize} bytes</li>
- * <li>{@code dynamicMetadataSize} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkHdrVividDynamicMetadataHUAWEI {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     size_t {@link #dynamicMetadataSize};
- *     void const * {@link #pDynamicMetadata};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     size_t dynamicMetadataSize;
+ *     void const * pDynamicMetadata;
+ * }}</pre>
  */
 public class VkHdrVividDynamicMetadataHUAWEI extends Struct<VkHdrVividDynamicMetadataHUAWEI> implements NativeResource {
 
@@ -98,26 +79,26 @@ public class VkHdrVividDynamicMetadataHUAWEI extends Struct<VkHdrVividDynamicMet
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the size in bytes of the dynamic metadata. */
+    /** @return the value of the {@code dynamicMetadataSize} field. */
     @NativeType("size_t")
     public long dynamicMetadataSize() { return ndynamicMetadataSize(address()); }
-    /** a pointer to the dynamic metadata. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pDynamicMetadata} field. */
     @NativeType("void const *")
     public ByteBuffer pDynamicMetadata() { return npDynamicMetadata(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkHdrVividDynamicMetadataHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI} value to the {@link #sType} field. */
+    /** Sets the {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI} value to the {@code sType} field. */
     public VkHdrVividDynamicMetadataHUAWEI sType$Default() { return sType(HUAWEIHdrVivid.VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkHdrVividDynamicMetadataHUAWEI pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pDynamicMetadata} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pDynamicMetadata} field. */
     public VkHdrVividDynamicMetadataHUAWEI pDynamicMetadata(@NativeType("void const *") ByteBuffer value) { npDynamicMetadata(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,26 +307,26 @@ public class VkHdrVividDynamicMetadataHUAWEI extends Struct<VkHdrVividDynamicMet
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkHdrVividDynamicMetadataHUAWEI#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkHdrVividDynamicMetadataHUAWEI.nsType(address()); }
-        /** @return the value of the {@link VkHdrVividDynamicMetadataHUAWEI#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkHdrVividDynamicMetadataHUAWEI.npNext(address()); }
-        /** @return the value of the {@link VkHdrVividDynamicMetadataHUAWEI#dynamicMetadataSize} field. */
+        /** @return the value of the {@code dynamicMetadataSize} field. */
         @NativeType("size_t")
         public long dynamicMetadataSize() { return VkHdrVividDynamicMetadataHUAWEI.ndynamicMetadataSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkHdrVividDynamicMetadataHUAWEI#pDynamicMetadata} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pDynamicMetadata} field. */
         @NativeType("void const *")
         public ByteBuffer pDynamicMetadata() { return VkHdrVividDynamicMetadataHUAWEI.npDynamicMetadata(address()); }
 
-        /** Sets the specified value to the {@link VkHdrVividDynamicMetadataHUAWEI#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkHdrVividDynamicMetadataHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkHdrVividDynamicMetadataHUAWEI.nsType(address(), value); return this; }
-        /** Sets the {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI} value to the {@link VkHdrVividDynamicMetadataHUAWEI#sType} field. */
+        /** Sets the {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI} value to the {@code sType} field. */
         public VkHdrVividDynamicMetadataHUAWEI.Buffer sType$Default() { return sType(HUAWEIHdrVivid.VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI); }
-        /** Sets the specified value to the {@link VkHdrVividDynamicMetadataHUAWEI#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkHdrVividDynamicMetadataHUAWEI.Buffer pNext(@NativeType("void const *") long value) { VkHdrVividDynamicMetadataHUAWEI.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkHdrVividDynamicMetadataHUAWEI#pDynamicMetadata} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pDynamicMetadata} field. */
         public VkHdrVividDynamicMetadataHUAWEI.Buffer pDynamicMetadata(@NativeType("void const *") ByteBuffer value) { VkHdrVividDynamicMetadataHUAWEI.npDynamicMetadata(address(), value); return this; }
 
     }

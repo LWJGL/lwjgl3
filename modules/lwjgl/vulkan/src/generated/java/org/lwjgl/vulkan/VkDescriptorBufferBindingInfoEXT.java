@@ -16,45 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying descriptor buffer binding information.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfo} structure, {@link VkBufferUsageFlags2CreateInfo}{@code ::usage} from that structure is used instead of {@code usage} from this structure.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfo} structure, {@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits} values</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBufferUsageFlags2CreateInfo} structure, {@code usage} <b>must</b> not be 0</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-bufferlessPushDescriptors">{@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::bufferlessPushDescriptors}</a> is {@link VK10#VK_FALSE FALSE}, and {@code usage} contains {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT}, then the {@code pNext} chain <b>must</b> include a {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT} structure</li>
- * <li>{@code address} <b>must</b> be aligned to {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT}{@code ::descriptorBufferOffsetAlignment}</li>
- * <li>If {@code usage} includes {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT}, {@code address} <b>must</b> be an address within a valid buffer that was created with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT}</li>
- * <li>If {@code usage} includes {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT}, {@code address} <b>must</b> be an address within a valid buffer that was created with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT}</li>
- * <li>If {@code usage} includes {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT}, {@code address} <b>must</b> be an address within a valid buffer that was created with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBufferUsageFlags2CreateInfo} or {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDescriptorBuffer#vkCmdBindDescriptorBuffersEXT CmdBindDescriptorBuffersEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorBufferBindingInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceAddress {@link #address$ address};
- *     VkBufferUsageFlags {@link #usage};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceAddress address;
+ *     VkBufferUsageFlags usage;
+ * }}</pre>
  */
 public class VkDescriptorBufferBindingInfoEXT extends Struct<VkDescriptorBufferBindingInfoEXT> implements NativeResource {
 
@@ -110,24 +78,24 @@ public class VkDescriptorBufferBindingInfoEXT extends Struct<VkDescriptorBufferB
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkDeviceAddress} specifying the device address defining the descriptor buffer to be bound. */
+    /** @return the value of the {@code address} field. */
     @NativeType("VkDeviceAddress")
     public long address$() { return naddress$(address()); }
-    /** a bitmask of {@code VkBufferUsageFlagBits} specifying the {@link VkBufferCreateInfo}{@code ::usage} for the buffer from which {@code address} was queried. */
+    /** @return the value of the {@code usage} field. */
     @NativeType("VkBufferUsageFlags")
     public int usage() { return nusage(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDescriptorBufferBindingInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT} value to the {@code sType} field. */
     public VkDescriptorBufferBindingInfoEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorBufferBindingInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
     public VkDescriptorBufferBindingInfoEXT pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -135,9 +103,9 @@ public class VkDescriptorBufferBindingInfoEXT extends Struct<VkDescriptorBufferB
     public VkDescriptorBufferBindingInfoEXT pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT} value to the {@code pNext} chain. */
     public VkDescriptorBufferBindingInfoEXT pNext(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #address$} field. */
+    /** Sets the specified value to the {@code address} field. */
     public VkDescriptorBufferBindingInfoEXT address$(@NativeType("VkDeviceAddress") long value) { naddress$(address(), value); return this; }
-    /** Sets the specified value to the {@link #usage} field. */
+    /** Sets the specified value to the {@code usage} field. */
     public VkDescriptorBufferBindingInfoEXT usage(@NativeType("VkBufferUsageFlags") int value) { nusage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,24 +307,24 @@ public class VkDescriptorBufferBindingInfoEXT extends Struct<VkDescriptorBufferB
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorBufferBindingInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorBufferBindingInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDescriptorBufferBindingInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDescriptorBufferBindingInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDescriptorBufferBindingInfoEXT#address$} field. */
+        /** @return the value of the {@code address} field. */
         @NativeType("VkDeviceAddress")
         public long address$() { return VkDescriptorBufferBindingInfoEXT.naddress$(address()); }
-        /** @return the value of the {@link VkDescriptorBufferBindingInfoEXT#usage} field. */
+        /** @return the value of the {@code usage} field. */
         @NativeType("VkBufferUsageFlags")
         public int usage() { return VkDescriptorBufferBindingInfoEXT.nusage(address()); }
 
-        /** Sets the specified value to the {@link VkDescriptorBufferBindingInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDescriptorBufferBindingInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorBufferBindingInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT} value to the {@link VkDescriptorBufferBindingInfoEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT} value to the {@code sType} field. */
         public VkDescriptorBufferBindingInfoEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDescriptorBufferBindingInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorBufferBindingInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorBufferBindingInfoEXT.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
         public VkDescriptorBufferBindingInfoEXT.Buffer pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -364,9 +332,9 @@ public class VkDescriptorBufferBindingInfoEXT extends Struct<VkDescriptorBufferB
         public VkDescriptorBufferBindingInfoEXT.Buffer pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkDescriptorBufferBindingPushDescriptorBufferHandleEXT} value to the {@code pNext} chain. */
         public VkDescriptorBufferBindingInfoEXT.Buffer pNext(VkDescriptorBufferBindingPushDescriptorBufferHandleEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkDescriptorBufferBindingInfoEXT#address$} field. */
+        /** Sets the specified value to the {@code address} field. */
         public VkDescriptorBufferBindingInfoEXT.Buffer address$(@NativeType("VkDeviceAddress") long value) { VkDescriptorBufferBindingInfoEXT.naddress$(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorBufferBindingInfoEXT#usage} field. */
+        /** Sets the specified value to the {@code usage} field. */
         public VkDescriptorBufferBindingInfoEXT.Buffer usage(@NativeType("VkBufferUsageFlags") int value) { VkDescriptorBufferBindingInfoEXT.nusage(address(), value); return this; }
 
     }

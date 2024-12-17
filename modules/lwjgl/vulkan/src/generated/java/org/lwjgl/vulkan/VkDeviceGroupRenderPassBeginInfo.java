@@ -17,52 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Set the initial device mask and render areas for a render pass instance.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code deviceMask} serves several purposes. It is an upper bound on the set of physical devices that <b>can</b> be used during the render pass instance, and the initial device mask when the render pass instance begins. In addition, commands transitioning to the next subpass in a render pass instance and commands ending the render pass instance, and, accordingly render pass <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-load-operations">load</a>, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-store-operations">store</a>, and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-resolve-operations">multisample resolve</a> operations and subpass dependencies corresponding to the render pass instance, are executed on the physical devices included in the device mask provided here.</p>
- * 
- * <p>If {@code deviceRenderAreaCount} is not zero, then the elements of {@code pDeviceRenderAreas} override the value of {@link VkRenderPassBeginInfo}{@code ::renderArea}, and provide a render area specific to each physical device. These render areas serve the same purpose as {@link VkRenderPassBeginInfo}{@code ::renderArea}, including controlling the region of attachments that are cleared by {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR} and that are resolved into resolve attachments.</p>
- * 
- * <p>If this structure is not present, the render pass instance’s device mask is the value of {@link VkDeviceGroupCommandBufferBeginInfo}{@code ::deviceMask}. If this structure is not present or if {@code deviceRenderAreaCount} is zero, {@link VkRenderPassBeginInfo}{@code ::renderArea} is used for all physical devices.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code deviceMask} <b>must</b> be a valid device mask value</li>
- * <li>{@code deviceMask} <b>must</b> not be zero</li>
- * <li>{@code deviceMask} <b>must</b> be a subset of the command buffer’s initial device mask</li>
- * <li>{@code deviceRenderAreaCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device</li>
- * <li>The {@code offset.x} member of any element of {@code pDeviceRenderAreas} <b>must</b> be greater than or equal to 0</li>
- * <li>The {@code offset.y} member of any element of {@code pDeviceRenderAreas} <b>must</b> be greater than or equal to 0</li>
- * <li>The sum of the {@code offset.x} and {@code extent.width} members of any element of {@code pDeviceRenderAreas} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFramebufferWidth">{@code maxFramebufferWidth}</a></li>
- * <li>The sum of the {@code offset.y} and {@code extent.height} members of any element of {@code pDeviceRenderAreas} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFramebufferHeight">{@code maxFramebufferHeight}</a></li>
- * <li>The {@code extent.width} member of any element of {@code pDeviceRenderAreas} <b>must</b> be greater than 0</li>
- * <li>The {@code extent.height} member of any element of {@code pDeviceRenderAreas} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO}</li>
- * <li>If {@code deviceRenderAreaCount} is not 0, {@code pDeviceRenderAreas} <b>must</b> be a valid pointer to an array of {@code deviceRenderAreaCount} {@link VkRect2D} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRect2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceGroupRenderPassBeginInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #deviceMask};
- *     uint32_t {@link #deviceRenderAreaCount};
- *     {@link VkRect2D VkRect2D} const * {@link #pDeviceRenderAreas};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t deviceMask;
+ *     uint32_t deviceRenderAreaCount;
+ *     {@link VkRect2D VkRect2D} const * pDeviceRenderAreas;
+ * }}</pre>
  */
 public class VkDeviceGroupRenderPassBeginInfo extends Struct<VkDeviceGroupRenderPassBeginInfo> implements NativeResource {
 
@@ -121,31 +83,31 @@ public class VkDeviceGroupRenderPassBeginInfo extends Struct<VkDeviceGroupRender
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the device mask for the render pass instance. */
+    /** @return the value of the {@code deviceMask} field. */
     @NativeType("uint32_t")
     public int deviceMask() { return ndeviceMask(address()); }
-    /** the number of elements in the {@code pDeviceRenderAreas} array. */
+    /** @return the value of the {@code deviceRenderAreaCount} field. */
     @NativeType("uint32_t")
     public int deviceRenderAreaCount() { return ndeviceRenderAreaCount(address()); }
-    /** a pointer to an array of {@link VkRect2D} structures defining the render area for each physical device. */
+    /** @return a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@code pDeviceRenderAreas} field. */
     @NativeType("VkRect2D const *")
     public VkRect2D.@Nullable Buffer pDeviceRenderAreas() { return npDeviceRenderAreas(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceGroupRenderPassBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO} value to the {@code sType} field. */
     public VkDeviceGroupRenderPassBeginInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceGroupRenderPassBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceMask} field. */
+    /** Sets the specified value to the {@code deviceMask} field. */
     public VkDeviceGroupRenderPassBeginInfo deviceMask(@NativeType("uint32_t") int value) { ndeviceMask(address(), value); return this; }
-    /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@link #pDeviceRenderAreas} field. */
+    /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@code pDeviceRenderAreas} field. */
     public VkDeviceGroupRenderPassBeginInfo pDeviceRenderAreas(@NativeType("VkRect2D const *") VkRect2D.@Nullable Buffer value) { npDeviceRenderAreas(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -381,31 +343,31 @@ public class VkDeviceGroupRenderPassBeginInfo extends Struct<VkDeviceGroupRender
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceGroupRenderPassBeginInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceGroupRenderPassBeginInfo.nsType(address()); }
-        /** @return the value of the {@link VkDeviceGroupRenderPassBeginInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceGroupRenderPassBeginInfo.npNext(address()); }
-        /** @return the value of the {@link VkDeviceGroupRenderPassBeginInfo#deviceMask} field. */
+        /** @return the value of the {@code deviceMask} field. */
         @NativeType("uint32_t")
         public int deviceMask() { return VkDeviceGroupRenderPassBeginInfo.ndeviceMask(address()); }
-        /** @return the value of the {@link VkDeviceGroupRenderPassBeginInfo#deviceRenderAreaCount} field. */
+        /** @return the value of the {@code deviceRenderAreaCount} field. */
         @NativeType("uint32_t")
         public int deviceRenderAreaCount() { return VkDeviceGroupRenderPassBeginInfo.ndeviceRenderAreaCount(address()); }
-        /** @return a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@link VkDeviceGroupRenderPassBeginInfo#pDeviceRenderAreas} field. */
+        /** @return a {@link VkRect2D.Buffer} view of the struct array pointed to by the {@code pDeviceRenderAreas} field. */
         @NativeType("VkRect2D const *")
         public VkRect2D.@Nullable Buffer pDeviceRenderAreas() { return VkDeviceGroupRenderPassBeginInfo.npDeviceRenderAreas(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceGroupRenderPassBeginInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceGroupRenderPassBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupRenderPassBeginInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO} value to the {@link VkDeviceGroupRenderPassBeginInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO} value to the {@code sType} field. */
         public VkDeviceGroupRenderPassBeginInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO); }
-        /** Sets the specified value to the {@link VkDeviceGroupRenderPassBeginInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceGroupRenderPassBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupRenderPassBeginInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceGroupRenderPassBeginInfo#deviceMask} field. */
+        /** Sets the specified value to the {@code deviceMask} field. */
         public VkDeviceGroupRenderPassBeginInfo.Buffer deviceMask(@NativeType("uint32_t") int value) { VkDeviceGroupRenderPassBeginInfo.ndeviceMask(address(), value); return this; }
-        /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@link VkDeviceGroupRenderPassBeginInfo#pDeviceRenderAreas} field. */
+        /** Sets the address of the specified {@link VkRect2D.Buffer} to the {@code pDeviceRenderAreas} field. */
         public VkDeviceGroupRenderPassBeginInfo.Buffer pDeviceRenderAreas(@NativeType("VkRect2D const *") VkRect2D.@Nullable Buffer value) { VkDeviceGroupRenderPassBeginInfo.npDeviceRenderAreas(address(), value); return this; }
 
     }

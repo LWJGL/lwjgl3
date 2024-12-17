@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Color Vector.
- * 
- * <h5>Description</h5>
- * 
- * <p>Unless otherwise specified, colors are encoded as linear (not with sRGB nor other gamma compression) values with individual components being in the range of 0.0 through 1.0.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrColor3f {
- *     float {@link #r};
- *     float {@link #g};
- *     float {@link #b};
- * }</code></pre>
+ *     float r;
+ *     float g;
+ *     float b;
+ * }}</pre>
  */
 public class XrColor3f extends Struct<XrColor3f> implements NativeResource {
 
@@ -82,18 +74,18 @@ public class XrColor3f extends Struct<XrColor3f> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the red component of the color. */
+    /** @return the value of the {@code r} field. */
     public float r() { return nr(address()); }
-    /** the green component of the color. */
+    /** @return the value of the {@code g} field. */
     public float g() { return ng(address()); }
-    /** the blue component of the color. */
+    /** @return the value of the {@code b} field. */
     public float b() { return nb(address()); }
 
-    /** Sets the specified value to the {@link #r} field. */
+    /** Sets the specified value to the {@code r} field. */
     public XrColor3f r(float value) { nr(address(), value); return this; }
-    /** Sets the specified value to the {@link #g} field. */
+    /** Sets the specified value to the {@code g} field. */
     public XrColor3f g(float value) { ng(address(), value); return this; }
-    /** Sets the specified value to the {@link #b} field. */
+    /** Sets the specified value to the {@code b} field. */
     public XrColor3f b(float value) { nb(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -289,18 +281,18 @@ public class XrColor3f extends Struct<XrColor3f> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrColor3f#r} field. */
+        /** @return the value of the {@code r} field. */
         public float r() { return XrColor3f.nr(address()); }
-        /** @return the value of the {@link XrColor3f#g} field. */
+        /** @return the value of the {@code g} field. */
         public float g() { return XrColor3f.ng(address()); }
-        /** @return the value of the {@link XrColor3f#b} field. */
+        /** @return the value of the {@code b} field. */
         public float b() { return XrColor3f.nb(address()); }
 
-        /** Sets the specified value to the {@link XrColor3f#r} field. */
+        /** Sets the specified value to the {@code r} field. */
         public XrColor3f.Buffer r(float value) { XrColor3f.nr(address(), value); return this; }
-        /** Sets the specified value to the {@link XrColor3f#g} field. */
+        /** Sets the specified value to the {@code g} field. */
         public XrColor3f.Buffer g(float value) { XrColor3f.ng(address(), value); return this; }
-        /** Sets the specified value to the {@link XrColor3f#b} field. */
+        /** Sets the specified value to the {@code b} field. */
         public XrColor3f.Buffer b(float value) { XrColor3f.nb(address(), value); return this; }
 
     }

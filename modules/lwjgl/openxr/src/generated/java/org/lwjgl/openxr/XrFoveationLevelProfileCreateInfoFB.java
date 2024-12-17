@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The information to create a foveation profile for foveation levels.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBFoveationConfiguration XR_FB_foveation_configuration} extension <b>must</b> be enabled prior to using {@link XrFoveationLevelProfileCreateInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBFoveationConfiguration#XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFoveationEyeTrackedProfileCreateInfoMETA}</li>
- * <li>{@code level} <b>must</b> be a valid {@code XrFoveationLevelFB} value</li>
- * <li>{@code dynamic} <b>must</b> be a valid {@code XrFoveationDynamicFB} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFoveationLevelProfileCreateInfoFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrFoveationLevelFB {@link #level};
- *     float {@link #verticalOffset};
- *     XrFoveationDynamicFB {@link #dynamic};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrFoveationLevelFB level;
+ *     float verticalOffset;
+ *     XrFoveationDynamicFB dynamic;
+ * }}</pre>
  */
 public class XrFoveationLevelProfileCreateInfoFB extends Struct<XrFoveationLevelProfileCreateInfoFB> implements NativeResource {
 
@@ -96,34 +82,34 @@ public class XrFoveationLevelProfileCreateInfoFB extends Struct<XrFoveationLevel
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the maximum desired foveation level. */
+    /** @return the value of the {@code level} field. */
     @NativeType("XrFoveationLevelFB")
     public int level() { return nlevel(address()); }
-    /** the desired vertical offset in degrees for the center of the foveation pattern. */
+    /** @return the value of the {@code verticalOffset} field. */
     public float verticalOffset() { return nverticalOffset(address()); }
-    /** the desired dynamic foveation setting. */
+    /** @return the value of the {@code dynamic} field. */
     @NativeType("XrFoveationDynamicFB")
     public int dynamic() { return ndynamic(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFoveationLevelProfileCreateInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBFoveationConfiguration#XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBFoveationConfiguration#XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB} value to the {@code type} field. */
     public XrFoveationLevelProfileCreateInfoFB type$Default() { return type(FBFoveationConfiguration.XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFoveationLevelProfileCreateInfoFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrFoveationEyeTrackedProfileCreateInfoMETA} value to the {@code next} chain. */
     public XrFoveationLevelProfileCreateInfoFB next(XrFoveationEyeTrackedProfileCreateInfoMETA value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #level} field. */
+    /** Sets the specified value to the {@code level} field. */
     public XrFoveationLevelProfileCreateInfoFB level(@NativeType("XrFoveationLevelFB") int value) { nlevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #verticalOffset} field. */
+    /** Sets the specified value to the {@code verticalOffset} field. */
     public XrFoveationLevelProfileCreateInfoFB verticalOffset(float value) { nverticalOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #dynamic} field. */
+    /** Sets the specified value to the {@code dynamic} field. */
     public XrFoveationLevelProfileCreateInfoFB dynamic(@NativeType("XrFoveationDynamicFB") int value) { ndynamic(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -331,34 +317,34 @@ public class XrFoveationLevelProfileCreateInfoFB extends Struct<XrFoveationLevel
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFoveationLevelProfileCreateInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFoveationLevelProfileCreateInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrFoveationLevelProfileCreateInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrFoveationLevelProfileCreateInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrFoveationLevelProfileCreateInfoFB#level} field. */
+        /** @return the value of the {@code level} field. */
         @NativeType("XrFoveationLevelFB")
         public int level() { return XrFoveationLevelProfileCreateInfoFB.nlevel(address()); }
-        /** @return the value of the {@link XrFoveationLevelProfileCreateInfoFB#verticalOffset} field. */
+        /** @return the value of the {@code verticalOffset} field. */
         public float verticalOffset() { return XrFoveationLevelProfileCreateInfoFB.nverticalOffset(address()); }
-        /** @return the value of the {@link XrFoveationLevelProfileCreateInfoFB#dynamic} field. */
+        /** @return the value of the {@code dynamic} field. */
         @NativeType("XrFoveationDynamicFB")
         public int dynamic() { return XrFoveationLevelProfileCreateInfoFB.ndynamic(address()); }
 
-        /** Sets the specified value to the {@link XrFoveationLevelProfileCreateInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFoveationLevelProfileCreateInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrFoveationLevelProfileCreateInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBFoveationConfiguration#XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB} value to the {@link XrFoveationLevelProfileCreateInfoFB#type} field. */
+        /** Sets the {@link FBFoveationConfiguration#XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB} value to the {@code type} field. */
         public XrFoveationLevelProfileCreateInfoFB.Buffer type$Default() { return type(FBFoveationConfiguration.XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB); }
-        /** Sets the specified value to the {@link XrFoveationLevelProfileCreateInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFoveationLevelProfileCreateInfoFB.Buffer next(@NativeType("void *") long value) { XrFoveationLevelProfileCreateInfoFB.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrFoveationEyeTrackedProfileCreateInfoMETA} value to the {@code next} chain. */
         public XrFoveationLevelProfileCreateInfoFB.Buffer next(XrFoveationEyeTrackedProfileCreateInfoMETA value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrFoveationLevelProfileCreateInfoFB#level} field. */
+        /** Sets the specified value to the {@code level} field. */
         public XrFoveationLevelProfileCreateInfoFB.Buffer level(@NativeType("XrFoveationLevelFB") int value) { XrFoveationLevelProfileCreateInfoFB.nlevel(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFoveationLevelProfileCreateInfoFB#verticalOffset} field. */
+        /** Sets the specified value to the {@code verticalOffset} field. */
         public XrFoveationLevelProfileCreateInfoFB.Buffer verticalOffset(float value) { XrFoveationLevelProfileCreateInfoFB.nverticalOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFoveationLevelProfileCreateInfoFB#dynamic} field. */
+        /** Sets the specified value to the {@code dynamic} field. */
         public XrFoveationLevelProfileCreateInfoFB.Buffer dynamic(@NativeType("XrFoveationDynamicFB") int value) { XrFoveationLevelProfileCreateInfoFB.ndynamic(address(), value); return this; }
 
     }

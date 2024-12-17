@@ -17,19 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XGravityEvent {
  *     int type;
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
  *     Window event;
  *     Window window;
  *     int x;
  *     int y;
- * }</code></pre>
+ * }}</pre>
  */
 public class XGravityEvent extends Struct<XGravityEvent> implements NativeResource {
 
@@ -99,13 +97,13 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
 
     /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
     /** @return the value of the {@code event} field. */
@@ -121,11 +119,11 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
 
     /** Sets the specified value to the {@code type} field. */
     public XGravityEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XGravityEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XGravityEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XGravityEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
     /** Sets the specified value to the {@code event} field. */
     public XGravityEvent event(@NativeType("Window") long value) { nevent(address(), value); return this; }
@@ -389,13 +387,13 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
 
         /** @return the value of the {@code type} field. */
         public int type() { return XGravityEvent.ntype(address()); }
-        /** @return the value of the {@link XGravityEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XGravityEvent.nserial(address()); }
-        /** @return the value of the {@link XGravityEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XGravityEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XGravityEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XGravityEvent.ndisplay(address()); }
         /** @return the value of the {@code event} field. */
@@ -411,11 +409,11 @@ public class XGravityEvent extends Struct<XGravityEvent> implements NativeResour
 
         /** Sets the specified value to the {@code type} field. */
         public XGravityEvent.Buffer type(int value) { XGravityEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XGravityEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XGravityEvent.Buffer serial(@NativeType("unsigned long") long value) { XGravityEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XGravityEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XGravityEvent.Buffer send_event(@NativeType("Bool") boolean value) { XGravityEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XGravityEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XGravityEvent.Buffer display(@NativeType("Display *") long value) { XGravityEvent.ndisplay(address(), value); return this; }
         /** Sets the specified value to the {@code event} field. */
         public XGravityEvent.Buffer event(@NativeType("Window") long value) { XGravityEvent.nevent(address(), value); return this; }

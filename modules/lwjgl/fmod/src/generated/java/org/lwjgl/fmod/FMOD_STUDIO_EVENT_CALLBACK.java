@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_STUDIO_EVENT_CALLBACK_TYPE type,
- *     FMOD_STUDIO_EVENTINSTANCE *event,
- *     void *parameters
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_STUDIO_EVENT_CALLBACK} */
 public abstract class FMOD_STUDIO_EVENT_CALLBACK extends Callback implements FMOD_STUDIO_EVENT_CALLBACKI {
 
     /**

@@ -40,58 +40,6 @@ private val GLESBinding = register(object : APIBinding(
 
     override fun getFunctionOrdinal(function: Func) = functionOrdinals[function.name]!!
 
-    override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
-        if (function.nativeClass.templateName.startsWith("GLES")) {
-            writer.printOpenGLJavaDoc(documentation, function.nativeName)
-            return true
-        }
-        return false
-    }
-
-    private val VECTOR_SUFFIX = "^gl(\\w+?)[ILP]?(?:Matrix)?\\d+(x\\d+)?N?u?(?:[bsifd]|i64)_?v?$".toRegex()
-    private val VECTOR_SUFFIX2 = "^gl(?:(Get)n?)?(\\w+?)[ILP]?\\d*N?u?(?:[bsifd]|i64)v$".toRegex()
-    private val NAMED = "^gl(\\w+?)?Named([A-Z]\\w*)$".toRegex()
-
-    private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String) {
-        val page = VECTOR_SUFFIX.find(function).let {
-            if (it == null)
-                function
-            else
-                "gl${it.groupValues[1]}"
-        }.let { page ->
-            VECTOR_SUFFIX2.find(page).let {
-                if (it == null)
-                    page
-                else
-                    "gl${it.groupValues[1]}${it.groupValues[2]}"
-            }
-        }.let { page ->
-            NAMED.find(page).let {
-                if (it == null)
-                    page
-                else
-                    "gl${it.groupValues[1]}${it.groupValues[2]}"
-            }
-        }
-
-        val link = url("https://docs.gl/es3/$page", "Reference Page")
-
-        if (documentation.isEmpty())
-            println("$t/** $link */")
-        else {
-            if (documentation.indexOf('\n') == -1) {
-                println("$t/**")
-                print("$t * ")
-                print(documentation.substring("$t/** ".length, documentation.length - " */".length))
-            } else {
-                print(documentation.substring(0, documentation.length - "\n$t */".length))
-            }
-            print("\n$t * ")
-            print("\n$t * @see $link")
-            println("\n$t */")
-        }
-    }
-
     override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "GLES20"
 
     override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
@@ -279,21 +227,3 @@ fun String.nativeClassGLES(
         }
     }
 )
-
-val NativeClass.capLink: String get() = "{@link $CAPABILITIES_CLASS\\#$capName $templateName}"
-
-private val REGISTRY_PATTERN = "([A-Z]+)_\\w+".toRegex()
-val NativeClass.registryLink: String
-    get() = url("https://www.khronos.org/registry/OpenGL/extensions/${if (postfix.isNotEmpty()) postfix else {
-        (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName")).groups[1]!!.value
-    }}/$templateName.txt", templateName)
-
-fun NativeClass.registryLink(spec: String): String =
-    url("https://www.khronos.org/registry/OpenGL/extensions/$postfix/$spec.txt", templateName)
-
-fun registryLinkTo(group: String, name: String): String = "${group}_$name".let {
-    url("https://www.khronos.org/registry/OpenGL/extensions/$group/$it.txt", it)
-}
-
-val NativeClass.core: String get() = "{@link ${this.className} GLES ${this.className[4]}.${this.className[5]}}"
-val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

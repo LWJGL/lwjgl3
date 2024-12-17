@@ -16,23 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying Y′C<sub>B</sub>C<sub>R</sub> conversion to a sampler or image view.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO}</li>
- * <li>{@code conversion} <b>must</b> be a valid {@code VkSamplerYcbcrConversion} handle</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerYcbcrConversionInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSamplerYcbcrConversion {@link #conversion};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSamplerYcbcrConversion conversion;
+ * }}</pre>
  */
 public class VkSamplerYcbcrConversionInfo extends Struct<VkSamplerYcbcrConversionInfo> implements NativeResource {
 
@@ -85,23 +74,23 @@ public class VkSamplerYcbcrConversionInfo extends Struct<VkSamplerYcbcrConversio
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkSamplerYcbcrConversion} handle created with {@link VK11#vkCreateSamplerYcbcrConversion CreateSamplerYcbcrConversion}. */
+    /** @return the value of the {@code conversion} field. */
     @NativeType("VkSamplerYcbcrConversion")
     public long conversion() { return nconversion(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSamplerYcbcrConversionInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO} value to the {@code sType} field. */
     public VkSamplerYcbcrConversionInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerYcbcrConversionInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #conversion} field. */
+    /** Sets the specified value to the {@code conversion} field. */
     public VkSamplerYcbcrConversionInfo conversion(@NativeType("VkSamplerYcbcrConversion") long value) { nconversion(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,23 +305,23 @@ public class VkSamplerYcbcrConversionInfo extends Struct<VkSamplerYcbcrConversio
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSamplerYcbcrConversionInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerYcbcrConversionInfo.nsType(address()); }
-        /** @return the value of the {@link VkSamplerYcbcrConversionInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerYcbcrConversionInfo.npNext(address()); }
-        /** @return the value of the {@link VkSamplerYcbcrConversionInfo#conversion} field. */
+        /** @return the value of the {@code conversion} field. */
         @NativeType("VkSamplerYcbcrConversion")
         public long conversion() { return VkSamplerYcbcrConversionInfo.nconversion(address()); }
 
-        /** Sets the specified value to the {@link VkSamplerYcbcrConversionInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSamplerYcbcrConversionInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerYcbcrConversionInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO} value to the {@link VkSamplerYcbcrConversionInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO} value to the {@code sType} field. */
         public VkSamplerYcbcrConversionInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO); }
-        /** Sets the specified value to the {@link VkSamplerYcbcrConversionInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerYcbcrConversionInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerYcbcrConversionInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSamplerYcbcrConversionInfo#conversion} field. */
+        /** Sets the specified value to the {@code conversion} field. */
         public VkSamplerYcbcrConversionInfo.Buffer conversion(@NativeType("VkSamplerYcbcrConversion") long value) { VkSamplerYcbcrConversionInfo.nconversion(address(), value); return this; }
 
     }

@@ -16,48 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying command buffer inheritance information.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code VkCommandBuffer} will not be executed within a render pass instance, or if the render pass instance was begun with {@link VK13#vkCmdBeginRendering CmdBeginRendering}, {@code renderPass}, {@code subpass}, and {@code framebuffer} are ignored.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-inheritedQueries">{@code inheritedQueries}</a> feature is not enabled, {@code occlusionQueryEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-inheritedQueries">{@code inheritedQueries}</a> feature is enabled, {@code queryFlags} <b>must</b> be a valid combination of {@code VkQueryControlFlagBits} values</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-inheritedQueries">{@code inheritedQueries}</a> feature is not enabled, {@code queryFlags} <b>must</b> be 0</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineStatisticsQuery">{@code pipelineStatisticsQuery}</a> feature is enabled, {@code pipelineStatistics} <b>must</b> be a valid combination of {@code VkQueryPipelineStatisticFlagBits} values</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineStatisticsQuery">{@code pipelineStatisticsQuery}</a> feature is not enabled, {@code pipelineStatistics} <b>must</b> be 0</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkAttachmentSampleCountInfoAMD}, {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT}, {@link VkCommandBufferInheritanceRenderPassTransformInfoQCOM}, {@link VkCommandBufferInheritanceRenderingInfo}, {@link VkCommandBufferInheritanceViewportScissorInfoNV}, {@link VkExternalFormatANDROID}, {@link VkMultiviewPerViewAttributesInfoNVX}, {@link VkRenderingAttachmentLocationInfo}, or {@link VkRenderingInputAttachmentIndexInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>Both of {@code framebuffer}, and {@code renderPass} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkCommandBufferBeginInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCommandBufferInheritanceInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkRenderPass {@link #renderPass};
- *     uint32_t {@link #subpass};
- *     VkFramebuffer {@link #framebuffer};
- *     VkBool32 {@link #occlusionQueryEnable};
- *     VkQueryControlFlags {@link #queryFlags};
- *     VkQueryPipelineStatisticFlags {@link #pipelineStatistics};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkRenderPass renderPass;
+ *     uint32_t subpass;
+ *     VkFramebuffer framebuffer;
+ *     VkBool32 occlusionQueryEnable;
+ *     VkQueryControlFlags queryFlags;
+ *     VkQueryPipelineStatisticFlags pipelineStatistics;
+ * }}</pre>
  */
 public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheritanceInfo> implements NativeResource {
 
@@ -125,43 +94,36 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkRenderPass} object defining which render passes the {@code VkCommandBuffer} will be <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-compatibility">compatible</a> with and <b>can</b> be executed within. */
+    /** @return the value of the {@code renderPass} field. */
     @NativeType("VkRenderPass")
     public long renderPass() { return nrenderPass(address()); }
-    /** the index of the subpass within the render pass instance that the {@code VkCommandBuffer} will be executed within. */
+    /** @return the value of the {@code subpass} field. */
     @NativeType("uint32_t")
     public int subpass() { return nsubpass(address()); }
-    /**
-     * <b>can</b> refer to the {@code VkFramebuffer} object that the {@code VkCommandBuffer} will be rendering to if it is executed within a render pass instance. It <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} if the framebuffer is not known.
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>Specifying the exact framebuffer that the secondary command buffer will be executed with <b>may</b> result in better performance at command buffer execution time.</p>
-     * </div>
-     */
+    /** @return the value of the {@code framebuffer} field. */
     @NativeType("VkFramebuffer")
     public long framebuffer() { return nframebuffer(address()); }
-    /** specifies whether the command buffer <b>can</b> be executed while an occlusion query is active in the primary command buffer. If this is {@link VK10#VK_TRUE TRUE}, then this command buffer <b>can</b> be executed whether the primary command buffer has an occlusion query active or not. If this is {@link VK10#VK_FALSE FALSE}, then the primary command buffer <b>must</b> not have an occlusion query active. */
+    /** @return the value of the {@code occlusionQueryEnable} field. */
     @NativeType("VkBool32")
     public boolean occlusionQueryEnable() { return nocclusionQueryEnable(address()) != 0; }
-    /** specifies the query flags that <b>can</b> be used by an active occlusion query in the primary command buffer when this secondary command buffer is executed. If this value includes the {@link VK10#VK_QUERY_CONTROL_PRECISE_BIT QUERY_CONTROL_PRECISE_BIT} bit, then the active query <b>can</b> return boolean results or actual sample counts. If this bit is not set, then the active query <b>must</b> not use the {@link VK10#VK_QUERY_CONTROL_PRECISE_BIT QUERY_CONTROL_PRECISE_BIT} bit. */
+    /** @return the value of the {@code queryFlags} field. */
     @NativeType("VkQueryControlFlags")
     public int queryFlags() { return nqueryFlags(address()); }
-    /** a bitmask of {@code VkQueryPipelineStatisticFlagBits} specifying the set of pipeline statistics that <b>can</b> be counted by an active query in the primary command buffer when this secondary command buffer is executed. If this value includes a given bit, then this command buffer <b>can</b> be executed whether the primary command buffer has a pipeline statistics query active that includes this bit or not. If this value excludes a given bit, then the active pipeline statistics query <b>must</b> not be from a query pool that counts that statistic. */
+    /** @return the value of the {@code pipelineStatistics} field. */
     @NativeType("VkQueryPipelineStatisticFlags")
     public int pipelineStatistics() { return npipelineStatistics(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCommandBufferInheritanceInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO} value to the {@code sType} field. */
     public VkCommandBufferInheritanceInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCommandBufferInheritanceInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkAttachmentSampleCountInfoAMD} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkAttachmentSampleCountInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -189,17 +151,17 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
     public VkCommandBufferInheritanceInfo pNext(VkRenderingInputAttachmentIndexInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkRenderingInputAttachmentIndexInfoKHR} value to the {@code pNext} chain. */
     public VkCommandBufferInheritanceInfo pNext(VkRenderingInputAttachmentIndexInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #renderPass} field. */
+    /** Sets the specified value to the {@code renderPass} field. */
     public VkCommandBufferInheritanceInfo renderPass(@NativeType("VkRenderPass") long value) { nrenderPass(address(), value); return this; }
-    /** Sets the specified value to the {@link #subpass} field. */
+    /** Sets the specified value to the {@code subpass} field. */
     public VkCommandBufferInheritanceInfo subpass(@NativeType("uint32_t") int value) { nsubpass(address(), value); return this; }
-    /** Sets the specified value to the {@link #framebuffer} field. */
+    /** Sets the specified value to the {@code framebuffer} field. */
     public VkCommandBufferInheritanceInfo framebuffer(@NativeType("VkFramebuffer") long value) { nframebuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #occlusionQueryEnable} field. */
+    /** Sets the specified value to the {@code occlusionQueryEnable} field. */
     public VkCommandBufferInheritanceInfo occlusionQueryEnable(@NativeType("VkBool32") boolean value) { nocclusionQueryEnable(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #queryFlags} field. */
+    /** Sets the specified value to the {@code queryFlags} field. */
     public VkCommandBufferInheritanceInfo queryFlags(@NativeType("VkQueryControlFlags") int value) { nqueryFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipelineStatistics} field. */
+    /** Sets the specified value to the {@code pipelineStatistics} field. */
     public VkCommandBufferInheritanceInfo pipelineStatistics(@NativeType("VkQueryPipelineStatisticFlags") int value) { npipelineStatistics(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -444,36 +406,36 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCommandBufferInheritanceInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCommandBufferInheritanceInfo.nsType(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCommandBufferInheritanceInfo.npNext(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceInfo#renderPass} field. */
+        /** @return the value of the {@code renderPass} field. */
         @NativeType("VkRenderPass")
         public long renderPass() { return VkCommandBufferInheritanceInfo.nrenderPass(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceInfo#subpass} field. */
+        /** @return the value of the {@code subpass} field. */
         @NativeType("uint32_t")
         public int subpass() { return VkCommandBufferInheritanceInfo.nsubpass(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceInfo#framebuffer} field. */
+        /** @return the value of the {@code framebuffer} field. */
         @NativeType("VkFramebuffer")
         public long framebuffer() { return VkCommandBufferInheritanceInfo.nframebuffer(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceInfo#occlusionQueryEnable} field. */
+        /** @return the value of the {@code occlusionQueryEnable} field. */
         @NativeType("VkBool32")
         public boolean occlusionQueryEnable() { return VkCommandBufferInheritanceInfo.nocclusionQueryEnable(address()) != 0; }
-        /** @return the value of the {@link VkCommandBufferInheritanceInfo#queryFlags} field. */
+        /** @return the value of the {@code queryFlags} field. */
         @NativeType("VkQueryControlFlags")
         public int queryFlags() { return VkCommandBufferInheritanceInfo.nqueryFlags(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceInfo#pipelineStatistics} field. */
+        /** @return the value of the {@code pipelineStatistics} field. */
         @NativeType("VkQueryPipelineStatisticFlags")
         public int pipelineStatistics() { return VkCommandBufferInheritanceInfo.npipelineStatistics(address()); }
 
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCommandBufferInheritanceInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferInheritanceInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO} value to the {@link VkCommandBufferInheritanceInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO} value to the {@code sType} field. */
         public VkCommandBufferInheritanceInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO); }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferInheritanceInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkAttachmentSampleCountInfoAMD} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkAttachmentSampleCountInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -501,17 +463,17 @@ public class VkCommandBufferInheritanceInfo extends Struct<VkCommandBufferInheri
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkRenderingInputAttachmentIndexInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkRenderingInputAttachmentIndexInfoKHR} value to the {@code pNext} chain. */
         public VkCommandBufferInheritanceInfo.Buffer pNext(VkRenderingInputAttachmentIndexInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#renderPass} field. */
+        /** Sets the specified value to the {@code renderPass} field. */
         public VkCommandBufferInheritanceInfo.Buffer renderPass(@NativeType("VkRenderPass") long value) { VkCommandBufferInheritanceInfo.nrenderPass(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#subpass} field. */
+        /** Sets the specified value to the {@code subpass} field. */
         public VkCommandBufferInheritanceInfo.Buffer subpass(@NativeType("uint32_t") int value) { VkCommandBufferInheritanceInfo.nsubpass(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#framebuffer} field. */
+        /** Sets the specified value to the {@code framebuffer} field. */
         public VkCommandBufferInheritanceInfo.Buffer framebuffer(@NativeType("VkFramebuffer") long value) { VkCommandBufferInheritanceInfo.nframebuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#occlusionQueryEnable} field. */
+        /** Sets the specified value to the {@code occlusionQueryEnable} field. */
         public VkCommandBufferInheritanceInfo.Buffer occlusionQueryEnable(@NativeType("VkBool32") boolean value) { VkCommandBufferInheritanceInfo.nocclusionQueryEnable(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#queryFlags} field. */
+        /** Sets the specified value to the {@code queryFlags} field. */
         public VkCommandBufferInheritanceInfo.Buffer queryFlags(@NativeType("VkQueryControlFlags") int value) { VkCommandBufferInheritanceInfo.nqueryFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceInfo#pipelineStatistics} field. */
+        /** Sets the specified value to the {@code pipelineStatistics} field. */
         public VkCommandBufferInheritanceInfo.Buffer pipelineStatistics(@NativeType("VkQueryPipelineStatisticFlags") int value) { VkCommandBufferInheritanceInfo.npipelineStatistics(address(), value); return this; }
 
     }

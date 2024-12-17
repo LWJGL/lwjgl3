@@ -16,53 +16,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an opacity micromap in a bottom-level acceleration structure.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@link VkAccelerationStructureTrianglesOpacityMicromapEXT} is included in the {@code pNext} chain of a {@link VkAccelerationStructureGeometryTrianglesDataKHR} structure, that geometry will reference that micromap.</p>
- * 
- * <p>For each triangle in the geometry, the acceleration structure build fetches an index from {@code indexBuffer} using {@code indexType} and {@code indexStride}. If that value is the unsigned cast of one of the values from {@code VkOpacityMicromapSpecialIndexEXT} then that triangle behaves as described for that special value in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#ray-opacity-micromap">Ray Opacity Micromap</a>. Otherwise that triangle uses the opacity micromap information from {@code micromap} at that index plus {@code baseTriangle}.</p>
- * 
- * <p>Only one of {@code pUsageCounts} or {@code ppUsageCounts} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}. The elements of the non-{@code NULL} array describe the total count used to build this geometry. For a given {@code format} and {@code subdivisionLevel} the number of triangles in this geometry matching those values after indirection and special index handling <b>must</b> be equal to the sum of matching {@code count} provided.</p>
- * 
- * <p>If {@code micromap} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then every value read from {@code indexBuffer} <b>must</b> be one of the values in {@code VkOpacityMicromapSpecialIndexEXT}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Only one of {@code pUsageCounts} or {@code ppUsageCounts} <b>can</b> be a valid pointer, the other <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT}</li>
- * <li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
- * <li>If {@code usageCountsCount} is not 0, and {@code pUsageCounts} is not {@code NULL}, {@code pUsageCounts} <b>must</b> be a valid pointer to an array of {@code usageCountsCount} {@link VkMicromapUsageEXT} structures</li>
- * <li>If {@code usageCountsCount} is not 0, and {@code ppUsageCounts} is not {@code NULL}, {@code ppUsageCounts} <b>must</b> be a valid pointer to an array of {@code usageCountsCount} valid pointers to {@link VkMicromapUsageEXT} structures</li>
- * <li>If {@code micromap} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code micromap} <b>must</b> be a valid {@code VkMicromapEXT} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceOrHostAddressConstKHR}, {@link VkMicromapUsageEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureTrianglesOpacityMicromapEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkIndexType {@link #indexType};
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #indexBuffer};
- *     VkDeviceSize {@link #indexStride};
- *     uint32_t {@link #baseTriangle};
- *     uint32_t {@link #usageCountsCount};
- *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * {@link #pUsageCounts};
- *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * const * {@link #ppUsageCounts};
- *     VkMicromapEXT {@link #micromap};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkIndexType indexType;
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} indexBuffer;
+ *     VkDeviceSize indexStride;
+ *     uint32_t baseTriangle;
+ *     uint32_t usageCountsCount;
+ *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * pUsageCounts;
+ *     {@link VkMicromapUsageEXT VkMicromapUsageEXT} const * const * ppUsageCounts;
+ *     VkMicromapEXT micromap;
+ * }}</pre>
  */
 public class VkAccelerationStructureTrianglesOpacityMicromapEXT extends Struct<VkAccelerationStructureTrianglesOpacityMicromapEXT> implements NativeResource {
 
@@ -136,59 +102,59 @@ public class VkAccelerationStructureTrianglesOpacityMicromapEXT extends Struct<V
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the type of triangle indices used when indexing this micromap */
+    /** @return the value of the {@code indexType} field. */
     @NativeType("VkIndexType")
     public int indexType() { return nindexType(address()); }
-    /** the address containing the triangle indices */
+    /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code indexBuffer} field. */
     public VkDeviceOrHostAddressConstKHR indexBuffer() { return nindexBuffer(address()); }
-    /** the byte stride between triangle indices */
+    /** @return the value of the {@code indexStride} field. */
     @NativeType("VkDeviceSize")
     public long indexStride() { return nindexStride(address()); }
-    /** the base value added to the non-negative triangle indices */
+    /** @return the value of the {@code baseTriangle} field. */
     @NativeType("uint32_t")
     public int baseTriangle() { return nbaseTriangle(address()); }
-    /** specifies the number of usage counts structures that will be used to determine the size of this micromap. */
+    /** @return the value of the {@code usageCountsCount} field. */
     @NativeType("uint32_t")
     public int usageCountsCount() { return nusageCountsCount(address()); }
-    /** a pointer to an array of {@link VkMicromapUsageEXT} structures. */
+    /** @return a {@link VkMicromapUsageEXT.Buffer} view of the struct array pointed to by the {@code pUsageCounts} field. */
     @NativeType("VkMicromapUsageEXT const *")
     public VkMicromapUsageEXT.@Nullable Buffer pUsageCounts() { return npUsageCounts(address()); }
-    /** a pointer to an array of pointers to {@link VkMicromapUsageEXT} structures. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code ppUsageCounts} field. */
     @NativeType("VkMicromapUsageEXT const * const *")
     public @Nullable PointerBuffer ppUsageCounts() { return nppUsageCounts(address()); }
-    /** the handle to the micromap object to include in this geometry */
+    /** @return the value of the {@code micromap} field. */
     @NativeType("VkMicromapEXT")
     public long micromap() { return nmicromap(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT} value to the {@code sType} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #indexType} field. */
+    /** Sets the specified value to the {@code indexType} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT indexType(@NativeType("VkIndexType") int value) { nindexType(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #indexBuffer} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code indexBuffer} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT indexBuffer(VkDeviceOrHostAddressConstKHR value) { nindexBuffer(address(), value); return this; }
-    /** Passes the {@link #indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT indexBuffer(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(indexBuffer()); return this; }
-    /** Sets the specified value to the {@link #indexStride} field. */
+    /** Sets the specified value to the {@code indexStride} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT indexStride(@NativeType("VkDeviceSize") long value) { nindexStride(address(), value); return this; }
-    /** Sets the specified value to the {@link #baseTriangle} field. */
+    /** Sets the specified value to the {@code baseTriangle} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT baseTriangle(@NativeType("uint32_t") int value) { nbaseTriangle(address(), value); return this; }
-    /** Sets the specified value to the {@link #usageCountsCount} field. */
+    /** Sets the specified value to the {@code usageCountsCount} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT usageCountsCount(@NativeType("uint32_t") int value) { nusageCountsCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@link #pUsageCounts} field. */
+    /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@code pUsageCounts} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT pUsageCounts(@NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.@Nullable Buffer value) { npUsageCounts(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppUsageCounts} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code ppUsageCounts} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT ppUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const * const *") PointerBuffer value) { nppUsageCounts(address(), value); return this; }
-    /** Sets the specified value to the {@link #micromap} field. */
+    /** Sets the specified value to the {@code micromap} field. */
     public VkAccelerationStructureTrianglesOpacityMicromapEXT micromap(@NativeType("VkMicromapEXT") long value) { nmicromap(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -426,59 +392,59 @@ public class VkAccelerationStructureTrianglesOpacityMicromapEXT extends Struct<V
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.nsType(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.npNext(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#indexType} field. */
+        /** @return the value of the {@code indexType} field. */
         @NativeType("VkIndexType")
         public int indexType() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.nindexType(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#indexBuffer} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code indexBuffer} field. */
         public VkDeviceOrHostAddressConstKHR indexBuffer() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.nindexBuffer(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#indexStride} field. */
+        /** @return the value of the {@code indexStride} field. */
         @NativeType("VkDeviceSize")
         public long indexStride() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.nindexStride(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#baseTriangle} field. */
+        /** @return the value of the {@code baseTriangle} field. */
         @NativeType("uint32_t")
         public int baseTriangle() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.nbaseTriangle(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#usageCountsCount} field. */
+        /** @return the value of the {@code usageCountsCount} field. */
         @NativeType("uint32_t")
         public int usageCountsCount() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.nusageCountsCount(address()); }
-        /** @return a {@link VkMicromapUsageEXT.Buffer} view of the struct array pointed to by the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#pUsageCounts} field. */
+        /** @return a {@link VkMicromapUsageEXT.Buffer} view of the struct array pointed to by the {@code pUsageCounts} field. */
         @NativeType("VkMicromapUsageEXT const *")
         public VkMicromapUsageEXT.@Nullable Buffer pUsageCounts() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.npUsageCounts(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#ppUsageCounts} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code ppUsageCounts} field. */
         @NativeType("VkMicromapUsageEXT const * const *")
         public @Nullable PointerBuffer ppUsageCounts() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.nppUsageCounts(address()); }
-        /** @return the value of the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#micromap} field. */
+        /** @return the value of the {@code micromap} field. */
         @NativeType("VkMicromapEXT")
         public long micromap() { return VkAccelerationStructureTrianglesOpacityMicromapEXT.nmicromap(address()); }
 
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT} value to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#sType} field. */
+        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT} value to the {@code sType} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT); }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer pNext(@NativeType("void *") long value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#indexType} field. */
+        /** Sets the specified value to the {@code indexType} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer indexType(@NativeType("VkIndexType") int value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.nindexType(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#indexBuffer} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code indexBuffer} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer indexBuffer(VkDeviceOrHostAddressConstKHR value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.nindexBuffer(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer indexBuffer(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(indexBuffer()); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#indexStride} field. */
+        /** Sets the specified value to the {@code indexStride} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer indexStride(@NativeType("VkDeviceSize") long value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.nindexStride(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#baseTriangle} field. */
+        /** Sets the specified value to the {@code baseTriangle} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer baseTriangle(@NativeType("uint32_t") int value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.nbaseTriangle(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#usageCountsCount} field. */
+        /** Sets the specified value to the {@code usageCountsCount} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer usageCountsCount(@NativeType("uint32_t") int value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.nusageCountsCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#pUsageCounts} field. */
+        /** Sets the address of the specified {@link VkMicromapUsageEXT.Buffer} to the {@code pUsageCounts} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer pUsageCounts(@NativeType("VkMicromapUsageEXT const *") VkMicromapUsageEXT.@Nullable Buffer value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.npUsageCounts(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#ppUsageCounts} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code ppUsageCounts} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer ppUsageCounts(@Nullable @NativeType("VkMicromapUsageEXT const * const *") PointerBuffer value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.nppUsageCounts(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureTrianglesOpacityMicromapEXT#micromap} field. */
+        /** Sets the specified value to the {@code micromap} field. */
         public VkAccelerationStructureTrianglesOpacityMicromapEXT.Buffer micromap(@NativeType("VkMicromapEXT") long value) { VkAccelerationStructureTrianglesOpacityMicromapEXT.nmicromap(address(), value); return this; }
 
     }

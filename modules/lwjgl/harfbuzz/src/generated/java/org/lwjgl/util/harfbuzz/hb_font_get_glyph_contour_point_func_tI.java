@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_bool_t (*{@link #invoke}) (
- *     hb_font_t *font,
- *     void *font_data,
- *     hb_codepoint_t glyph,
- *     unsigned int point_index,
- *     hb_position_t *x,
- *     hb_position_t *y,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_font_get_glyph_contour_point_func_t} */
 @FunctionalInterface
 @NativeType("hb_font_get_glyph_contour_point_func_t")
 public interface hb_font_get_glyph_contour_point_func_tI extends CallbackI {
@@ -53,22 +40,7 @@ public interface hb_font_get_glyph_contour_point_func_tI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.
-     * 
-     * <p>This method should retrieve the (X,Y) coordinates (in font units) for a specified contour point in a glyph. Each coordinate must be returned as an
-     * {@code hb_position_t} output parameter.</p>
-     * 
-     * <p>Return value: {@code true} if data found, {@code false} otherwise.</p>
-     *
-     * @param font        {@code hb_font_t} to work upon
-     * @param font_data   {@code font} user data pointer
-     * @param glyph       the glyph ID to query
-     * @param point_index the contour-point index to query
-     * @param x           the X value retrieved for the contour point
-     * @param y           the Y value retrieved for the contour point
-     * @param user_data   user data pointer passed by the caller
-     */
+    /** {@code hb_bool_t (* hb_font_get_glyph_contour_point_func_t) (hb_font_t * font, void * font_data, hb_codepoint_t glyph, unsigned int point_index, hb_position_t * x, hb_position_t * y, void * user_data)} */
     @NativeType("hb_bool_t") int invoke(@NativeType("hb_font_t *") long font, @NativeType("void *") long font_data, @NativeType("hb_codepoint_t") int glyph, @NativeType("unsigned int") int point_index, @NativeType("hb_position_t *") long x, @NativeType("hb_position_t *") long y, @NativeType("void *") long user_data);
 
 }

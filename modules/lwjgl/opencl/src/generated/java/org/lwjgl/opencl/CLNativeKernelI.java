@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link CL10#clEnqueueNativeKernel EnqueueNativeKernel} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *args
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (void *)")
 public interface CLNativeKernelI extends CallbackI {
@@ -42,11 +33,7 @@ public interface CLNativeKernelI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called by the OpenCL using {@link CL10#clEnqueueNativeKernel EnqueueNativeKernel}.
-     *
-     * @param args a pointer to the arguments list
-     */
+    /** {@code void (*) (void * args)} */
     void invoke(@NativeType("void *") long args);
 
 }

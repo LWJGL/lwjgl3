@@ -17,32 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure used to list the anchors that need to be published.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsPublishInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code anchors} <b>must</b> be a pointer to an array of {@code anchorCount} valid {@code XrSpace} handles</li>
- * <li>The {@code anchorCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLSpatialAnchorsStorage#xrPublishSpatialAnchorsAsyncML PublishSpatialAnchorsAsyncML}, {@link MLSpatialAnchorsStorage#xrPublishSpatialAnchorsCompleteML PublishSpatialAnchorsCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsPublishInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #anchorCount};
- *     XrSpace const * {@link #anchors};
- *     uint64_t {@link #expiration};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t anchorCount;
+ *     XrSpace const * anchors;
+ *     uint64_t expiration;
+ * }}</pre>
  */
 public class XrSpatialAnchorsPublishInfoML extends Struct<XrSpatialAnchorsPublishInfoML> implements NativeResource {
 
@@ -101,31 +83,31 @@ public class XrSpatialAnchorsPublishInfoML extends Struct<XrSpatialAnchorsPublis
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of anchors in the anchors array. */
+    /** @return the value of the {@code anchorCount} field. */
     @NativeType("uint32_t")
     public int anchorCount() { return nanchorCount(address()); }
-    /** an array of {@code XrSpace}. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code anchors} field. */
     @NativeType("XrSpace const *")
     public PointerBuffer anchors() { return nanchors(address()); }
-    /** an {@code uint64_t}, is the time in <b>seconds</b> since epoch after which these anchors <b>may</b> expire. The system <b>may</b> retain the anchors longer but <b>should</b> retain the anchors at least until this timestamp. Use 0 or {@link XR10#XR_INFINITE_DURATION INFINITE_DURATION} to create an anchor that does not expire. */
+    /** @return the value of the {@code expiration} field. */
     @NativeType("uint64_t")
     public long expiration() { return nexpiration(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsPublishInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML} value to the {@code type} field. */
     public XrSpatialAnchorsPublishInfoML type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsPublishInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #anchors} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code anchors} field. */
     public XrSpatialAnchorsPublishInfoML anchors(@NativeType("XrSpace const *") PointerBuffer value) { nanchors(address(), value); return this; }
-    /** Sets the specified value to the {@link #expiration} field. */
+    /** Sets the specified value to the {@code expiration} field. */
     public XrSpatialAnchorsPublishInfoML expiration(@NativeType("uint64_t") long value) { nexpiration(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -340,31 +322,31 @@ public class XrSpatialAnchorsPublishInfoML extends Struct<XrSpatialAnchorsPublis
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsPublishInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsPublishInfoML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsPublishInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorsPublishInfoML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsPublishInfoML#anchorCount} field. */
+        /** @return the value of the {@code anchorCount} field. */
         @NativeType("uint32_t")
         public int anchorCount() { return XrSpatialAnchorsPublishInfoML.nanchorCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrSpatialAnchorsPublishInfoML#anchors} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code anchors} field. */
         @NativeType("XrSpace const *")
         public PointerBuffer anchors() { return XrSpatialAnchorsPublishInfoML.nanchors(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsPublishInfoML#expiration} field. */
+        /** @return the value of the {@code expiration} field. */
         @NativeType("uint64_t")
         public long expiration() { return XrSpatialAnchorsPublishInfoML.nexpiration(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsPublishInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsPublishInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsPublishInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML} value to the {@link XrSpatialAnchorsPublishInfoML#type} field. */
+        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML} value to the {@code type} field. */
         public XrSpatialAnchorsPublishInfoML.Buffer type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsPublishInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsPublishInfoML.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorsPublishInfoML.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link XrSpatialAnchorsPublishInfoML#anchors} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code anchors} field. */
         public XrSpatialAnchorsPublishInfoML.Buffer anchors(@NativeType("XrSpace const *") PointerBuffer value) { XrSpatialAnchorsPublishInfoML.nanchors(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsPublishInfoML#expiration} field. */
+        /** Sets the specified value to the {@code expiration} field. */
         public XrSpatialAnchorsPublishInfoML.Buffer expiration(@NativeType("uint64_t") long value) { XrSpatialAnchorsPublishInfoML.nexpiration(address(), value); return this; }
 
     }

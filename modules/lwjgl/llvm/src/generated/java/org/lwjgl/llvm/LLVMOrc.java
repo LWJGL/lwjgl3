@@ -19,7 +19,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Requires LLVM 12 or higher. */
 public class LLVMOrc {
 
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
@@ -102,21 +101,6 @@ public class LLVMOrc {
 
     }
 
-    /**
-     * Represents generic linkage flags for a symbol definition.
-     * 
-     * <p>({@code LLVMJITSymbolGenericFlags})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMJITSymbolGenericFlagsNone JITSymbolGenericFlagsNone}</li>
-     * <li>{@link #LLVMJITSymbolGenericFlagsExported JITSymbolGenericFlagsExported}</li>
-     * <li>{@link #LLVMJITSymbolGenericFlagsWeak JITSymbolGenericFlagsWeak}</li>
-     * <li>{@link #LLVMJITSymbolGenericFlagsCallable JITSymbolGenericFlagsCallable}</li>
-     * <li>{@link #LLVMJITSymbolGenericFlagsMaterializationSideEffectsOnly JITSymbolGenericFlagsMaterializationSideEffectsOnly}</li>
-     * </ul>
-     */
     public static final int
         LLVMJITSymbolGenericFlagsNone                           = 0,
         LLVMJITSymbolGenericFlagsExported                       = 1 << 0,
@@ -124,54 +108,14 @@ public class LLVMOrc {
         LLVMJITSymbolGenericFlagsCallable                       = 1 << 2,
         LLVMJITSymbolGenericFlagsMaterializationSideEffectsOnly = 1 << 3;
 
-    /**
-     * Lookup kind. ({@code LLVMOrcLookupKind})
-     * 
-     * <p>This can be used by definition generators when deciding whether to produce a definition for a requested symbol.</p>
-     * 
-     * <p>This enum should be kept in sync with {@code llvm::orc::LookupKind}.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMOrcLookupKindStatic OrcLookupKindStatic}</li>
-     * <li>{@link #LLVMOrcLookupKindDLSym OrcLookupKindDLSym}</li>
-     * </ul>
-     */
     public static final int
         LLVMOrcLookupKindStatic = 0,
         LLVMOrcLookupKindDLSym  = 1;
 
-    /**
-     * {@code JITDylib} lookup flags. ({@code LLVMOrcJITDylibLookupFlags})
-     * 
-     * <p>This can be used by definition generators when deciding whether to produce a definition for a requested symbol.</p>
-     * 
-     * <p>This enum should be kept in sync with {@code llvm::orc::JITDylibLookupFlags}.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMOrcJITDylibLookupFlagsMatchExportedSymbolsOnly OrcJITDylibLookupFlagsMatchExportedSymbolsOnly}</li>
-     * <li>{@link #LLVMOrcJITDylibLookupFlagsMatchAllSymbols OrcJITDylibLookupFlagsMatchAllSymbols}</li>
-     * </ul>
-     */
     public static final int
         LLVMOrcJITDylibLookupFlagsMatchExportedSymbolsOnly = 0,
         LLVMOrcJITDylibLookupFlagsMatchAllSymbols          = 1;
 
-    /**
-     * Symbol lookup flags for lookup sets. ({@code LLVMOrcSymbolLookupFlags})
-     * 
-     * <p>This should be kept in sync with {@code llvm::orc::SymbolLookupFlags}.</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMOrcSymbolLookupFlagsRequiredSymbol OrcSymbolLookupFlagsRequiredSymbol}</li>
-     * <li>{@link #LLVMOrcSymbolLookupFlagsWeaklyReferencedSymbol OrcSymbolLookupFlagsWeaklyReferencedSymbol}</li>
-     * </ul>
-     */
     public static final int
         LLVMOrcSymbolLookupFlagsRequiredSymbol         = 0,
         LLVMOrcSymbolLookupFlagsWeaklyReferencedSymbol = 1;
@@ -182,7 +126,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcExecutionSessionSetErrorReporter ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcExecutionSessionSetErrorReporter OrcExecutionSessionSetErrorReporter} */
+    /** {@code void LLVMOrcExecutionSessionSetErrorReporter(LLVMOrcExecutionSessionRef ES, LLVMOrcErrorReporterFunction ReportError, void * Ctx)} */
     public static void nLLVMOrcExecutionSessionSetErrorReporter(long ES, long ReportError, long Ctx) {
         long __functionAddress = Functions.OrcExecutionSessionSetErrorReporter;
         if (CHECKS) {
@@ -192,24 +136,14 @@ public class LLVMOrc {
         invokePPPV(ES, ReportError, Ctx, __functionAddress);
     }
 
-    /**
-     * Attach a custom error reporter function to the {@code ExecutionSession}.
-     * 
-     * <p>The error reporter will be called to deliver failure notices that can not be directly reported to a caller. For example, failure to resolve symbols in
-     * the JIT linker is typically reported via the error reporter (callers requesting definitions from the JIT will typically be delivered a
-     * {@code FailureToMaterialize} error instead).</p>
-     */
+    /** {@code void LLVMOrcExecutionSessionSetErrorReporter(LLVMOrcExecutionSessionRef ES, LLVMOrcErrorReporterFunction ReportError, void * Ctx)} */
     public static void LLVMOrcExecutionSessionSetErrorReporter(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMOrcErrorReporterFunction") LLVMOrcErrorReporterFunctionI ReportError, @NativeType("void *") long Ctx) {
         nLLVMOrcExecutionSessionSetErrorReporter(ES, ReportError.address(), Ctx);
     }
 
     // --- [ LLVMOrcExecutionSessionGetSymbolStringPool ] ---
 
-    /**
-     * Return a reference to the {@code SymbolStringPool} for an {@code ExecutionSession}.
-     * 
-     * <p>Ownership of the pool remains with the {@code ExecutionSession}: The caller is not required to free the pool.</p>
-     */
+    /** {@code LLVMOrcSymbolStringPoolRef LLVMOrcExecutionSessionGetSymbolStringPool(LLVMOrcExecutionSessionRef ES)} */
     @NativeType("LLVMOrcSymbolStringPoolRef")
     public static long LLVMOrcExecutionSessionGetSymbolStringPool(@NativeType("LLVMOrcExecutionSessionRef") long ES) {
         long __functionAddress = Functions.OrcExecutionSessionGetSymbolStringPool;
@@ -221,13 +155,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcSymbolStringPoolClearDeadEntries ] ---
 
-    /**
-     * Clear all unreferenced symbol string pool entries.
-     * 
-     * <p>This can be called at any time to release unused entries in the {@code ExecutionSession}'s string pool. Since it locks the pool (preventing interning
-     * of any new strings) it is recommended that it only be called infrequently, ideally when the caller has reason to believe that some entries will have
-     * become unreferenced, e.g. after removing a module or closing a {@code JITDylib}.</p>
-     */
+    /** {@code void LLVMOrcSymbolStringPoolClearDeadEntries(LLVMOrcSymbolStringPoolRef SSP)} */
     public static void LLVMOrcSymbolStringPoolClearDeadEntries(@NativeType("LLVMOrcSymbolStringPoolRef") long SSP) {
         long __functionAddress = Functions.OrcSymbolStringPoolClearDeadEntries;
         if (CHECKS) {
@@ -238,7 +166,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcExecutionSessionIntern ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcExecutionSessionIntern OrcExecutionSessionIntern} */
+    /** {@code LLVMOrcSymbolStringPoolEntryRef LLVMOrcExecutionSessionIntern(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     public static long nLLVMOrcExecutionSessionIntern(long ES, long Name) {
         long __functionAddress = Functions.OrcExecutionSessionIntern;
         if (CHECKS) {
@@ -247,15 +175,7 @@ public class LLVMOrc {
         return invokePPP(ES, Name, __functionAddress);
     }
 
-    /**
-     * Intern a string in the {@code ExecutionSession}'s {@code SymbolStringPool} and return a reference to it. This increments the ref-count of the pool
-     * entry, and the returned value should be released once the client is done with it by calling {@link #LLVMOrcReleaseSymbolStringPoolEntry OrcReleaseSymbolStringPoolEntry}.
-     * 
-     * <p>Since strings are uniqued within the {@code SymbolStringPool} {@code LLVMOrcSymbolStringPoolEntryRefs} can be compared by value to test string
-     * equality.</p>
-     * 
-     * <p>Note that this function does not perform linker-mangling on the string.</p>
-     */
+    /** {@code LLVMOrcSymbolStringPoolEntryRef LLVMOrcExecutionSessionIntern(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     @NativeType("LLVMOrcSymbolStringPoolEntryRef")
     public static long LLVMOrcExecutionSessionIntern(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -264,15 +184,7 @@ public class LLVMOrc {
         return nLLVMOrcExecutionSessionIntern(ES, memAddress(Name));
     }
 
-    /**
-     * Intern a string in the {@code ExecutionSession}'s {@code SymbolStringPool} and return a reference to it. This increments the ref-count of the pool
-     * entry, and the returned value should be released once the client is done with it by calling {@link #LLVMOrcReleaseSymbolStringPoolEntry OrcReleaseSymbolStringPoolEntry}.
-     * 
-     * <p>Since strings are uniqued within the {@code SymbolStringPool} {@code LLVMOrcSymbolStringPoolEntryRefs} can be compared by value to test string
-     * equality.</p>
-     * 
-     * <p>Note that this function does not perform linker-mangling on the string.</p>
-     */
+    /** {@code LLVMOrcSymbolStringPoolEntryRef LLVMOrcExecutionSessionIntern(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     @NativeType("LLVMOrcSymbolStringPoolEntryRef")
     public static long LLVMOrcExecutionSessionIntern(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -287,7 +199,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcRetainSymbolStringPoolEntry ] ---
 
-    /** Increments the ref-count for a {@code SymbolStringPool} entry. */
+    /** {@code void LLVMOrcRetainSymbolStringPoolEntry(LLVMOrcSymbolStringPoolEntryRef S)} */
     public static void LLVMOrcRetainSymbolStringPoolEntry(@NativeType("LLVMOrcSymbolStringPoolEntryRef") long S) {
         long __functionAddress = Functions.OrcRetainSymbolStringPoolEntry;
         if (CHECKS) {
@@ -298,7 +210,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcExecutionSessionLookup ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcExecutionSessionLookup OrcExecutionSessionLookup} */
+    /** {@code void LLVMOrcExecutionSessionLookup(LLVMOrcExecutionSessionRef ES, LLVMOrcLookupKind K, LLVMOrcCJITDylibSearchOrder SearchOrder, size_t SearchOrderSize, LLVMOrcCLookupSet Symbols, size_t SymbolsSize, LLVMOrcExecutionSessionLookupHandleResultFunction HandleResult, void * Ctx)} */
     public static void nLLVMOrcExecutionSessionLookup(long ES, int K, long SearchOrder, long SearchOrderSize, long Symbols, long SymbolsSize, long HandleResult, long Ctx) {
         long __functionAddress = Functions.OrcExecutionSessionLookup;
         if (CHECKS) {
@@ -308,35 +220,14 @@ public class LLVMOrc {
         invokePPPPPPPV(ES, K, SearchOrder, SearchOrderSize, Symbols, SymbolsSize, HandleResult, Ctx, __functionAddress);
     }
 
-    /**
-     * Look up symbols in an execution session.
-     * 
-     * <p>This is a wrapper around the general {@code ExecutionSession::lookup} function.</p>
-     * 
-     * <p>The {@code SearchOrder} argument contains a list of ({@code JITDylibs}, {@code JITDylibSearchFlags}) pairs that describe the search order. The
-     * {@code JITDylibs} will be searched in the given order to try to find the symbols in the {@code Symbols} argument.</p>
-     * 
-     * <p>The Symbols argument should contain a null-terminated array of ({@code SymbolStringPtr}, {@code SymbolLookupFlags}) pairs describing the symbols to be
-     * searched for. This function takes ownership of the elements of the {@code Symbols} array. The {@code Name} fields of the {@code Symbols} elements are
-     * taken to have been retained by the client for this function. The client should <b>not</b> release the {@code Name} fields, but are still responsible
-     * for destroying the array itself.</p>
-     * 
-     * <p>The {@code HandleResult} function will be called once all searched for symbols have been found, or an error occurs. The {@code HandleResult} function
-     * will be passed an {@code LLVMErrorRef} indicating success or failure, and (on success) a null-terminated {@code LLVMOrcCSymbolMapPairs} array
-     * containing the function result, and the {@code Ctx} value passed to the lookup function.</p>
-     * 
-     * <p>The client is fully responsible for managing the lifetime of the {@code Ctx} object. A common idiom is to allocate the context prior to the lookup and
-     * deallocate it in the handler.</p>
-     * 
-     * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
-     */
+    /** {@code void LLVMOrcExecutionSessionLookup(LLVMOrcExecutionSessionRef ES, LLVMOrcLookupKind K, LLVMOrcCJITDylibSearchOrder SearchOrder, size_t SearchOrderSize, LLVMOrcCLookupSet Symbols, size_t SymbolsSize, LLVMOrcExecutionSessionLookupHandleResultFunction HandleResult, void * Ctx)} */
     public static void LLVMOrcExecutionSessionLookup(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMOrcLookupKind") int K, @NativeType("LLVMOrcCJITDylibSearchOrder") LLVMOrcCJITDylibSearchOrderElement.@Nullable Buffer SearchOrder, @NativeType("LLVMOrcCLookupSet") LLVMOrcCLookupSetElement.@Nullable Buffer Symbols, @NativeType("LLVMOrcExecutionSessionLookupHandleResultFunction") LLVMOrcExecutionSessionLookupHandleResultFunctionI HandleResult, @NativeType("void *") long Ctx) {
         nLLVMOrcExecutionSessionLookup(ES, K, memAddressSafe(SearchOrder), remainingSafe(SearchOrder), memAddressSafe(Symbols), remainingSafe(Symbols), HandleResult.address(), Ctx);
     }
 
     // --- [ LLVMOrcReleaseSymbolStringPoolEntry ] ---
 
-    /** Reduces the ref-count for of a {@code SymbolStringPool} entry. */
+    /** {@code void LLVMOrcReleaseSymbolStringPoolEntry(LLVMOrcSymbolStringPoolEntryRef S)} */
     public static void LLVMOrcReleaseSymbolStringPoolEntry(@NativeType("LLVMOrcSymbolStringPoolEntryRef") long S) {
         long __functionAddress = Functions.OrcReleaseSymbolStringPoolEntry;
         if (CHECKS) {
@@ -347,7 +238,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcSymbolStringPoolEntryStr ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcSymbolStringPoolEntryStr OrcSymbolStringPoolEntryStr} */
+    /** {@code char const * LLVMOrcSymbolStringPoolEntryStr(LLVMOrcSymbolStringPoolEntryRef S)} */
     public static long nLLVMOrcSymbolStringPoolEntryStr(long S) {
         long __functionAddress = Functions.OrcSymbolStringPoolEntryStr;
         if (CHECKS) {
@@ -356,11 +247,7 @@ public class LLVMOrc {
         return invokePP(S, __functionAddress);
     }
 
-    /**
-     * Return the c-string for the given symbol.
-     * 
-     * <p>This string will remain valid until the entry is freed (once all {@code LLVMOrcSymbolStringPoolEntryRefs} have been released).</p>
-     */
+    /** {@code char const * LLVMOrcSymbolStringPoolEntryStr(LLVMOrcSymbolStringPoolEntryRef S)} */
     @NativeType("char const *")
     public static @Nullable String LLVMOrcSymbolStringPoolEntryStr(@NativeType("LLVMOrcSymbolStringPoolEntryRef") long S) {
         long __result = nLLVMOrcSymbolStringPoolEntryStr(S);
@@ -369,7 +256,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcReleaseResourceTracker ] ---
 
-    /** Reduces the ref-count of a {@code ResourceTracker}. */
+    /** {@code void LLVMOrcReleaseResourceTracker(LLVMOrcResourceTrackerRef RT)} */
     public static void LLVMOrcReleaseResourceTracker(@NativeType("LLVMOrcResourceTrackerRef") long RT) {
         long __functionAddress = Functions.OrcReleaseResourceTracker;
         if (CHECKS) {
@@ -380,7 +267,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcResourceTrackerTransferTo ] ---
 
-    /** Transfers tracking of all resources associated with resource tracker {@code SrcRT} to resource tracker {@code DstRT}. */
+    /** {@code void LLVMOrcResourceTrackerTransferTo(LLVMOrcResourceTrackerRef SrcRT, LLVMOrcResourceTrackerRef DstRT)} */
     public static void LLVMOrcResourceTrackerTransferTo(@NativeType("LLVMOrcResourceTrackerRef") long SrcRT, @NativeType("LLVMOrcResourceTrackerRef") long DstRT) {
         long __functionAddress = Functions.OrcResourceTrackerTransferTo;
         if (CHECKS) {
@@ -392,7 +279,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcResourceTrackerRemove ] ---
 
-    /** Remove all resources associated with the given tracker. See ResourceTracker::remove(). */
+    /** {@code LLVMErrorRef LLVMOrcResourceTrackerRemove(LLVMOrcResourceTrackerRef RT)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcResourceTrackerRemove(@NativeType("LLVMOrcResourceTrackerRef") long RT) {
         long __functionAddress = Functions.OrcResourceTrackerRemove;
@@ -404,10 +291,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeDefinitionGenerator ] ---
 
-    /**
-     * Dispose of a {@code JITDylib::DefinitionGenerator}. This should only be called if ownership has not been passed to a {@code JITDylib} (e.g. because
-     * some error prevented the client from calling {@link #LLVMOrcJITDylibAddGenerator OrcJITDylibAddGenerator}).
-     */
+    /** {@code void LLVMOrcDisposeDefinitionGenerator(LLVMOrcDefinitionGeneratorRef DG)} */
     public static void LLVMOrcDisposeDefinitionGenerator(@NativeType("LLVMOrcDefinitionGeneratorRef") long DG) {
         long __functionAddress = Functions.OrcDisposeDefinitionGenerator;
         if (CHECKS) {
@@ -418,7 +302,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeMaterializationUnit ] ---
 
-    /** Dispose of a {@code MaterializationUnit}. */
+    /** {@code void LLVMOrcDisposeMaterializationUnit(LLVMOrcMaterializationUnitRef MU)} */
     public static void LLVMOrcDisposeMaterializationUnit(@NativeType("LLVMOrcMaterializationUnitRef") long MU) {
         long __functionAddress = Functions.OrcDisposeMaterializationUnit;
         if (CHECKS) {
@@ -429,7 +313,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateCustomMaterializationUnit ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcCreateCustomMaterializationUnit OrcCreateCustomMaterializationUnit} */
+    /** {@code LLVMOrcMaterializationUnitRef LLVMOrcCreateCustomMaterializationUnit(char const * Name, void * Ctx, LLVMOrcCSymbolFlagsMapPairs Syms, size_t NumSyms, LLVMOrcSymbolStringPoolEntryRef InitSym, LLVMOrcMaterializationUnitMaterializeFunction Materialize, LLVMOrcMaterializationUnitDiscardFunction Discard, LLVMOrcMaterializationUnitDestroyFunction Destroy)} */
     public static long nLLVMOrcCreateCustomMaterializationUnit(long Name, long Ctx, long Syms, long NumSyms, long InitSym, long Materialize, long Discard, long Destroy) {
         long __functionAddress = Functions.OrcCreateCustomMaterializationUnit;
         if (CHECKS) {
@@ -439,31 +323,7 @@ public class LLVMOrc {
         return invokePPPPPPPPP(Name, Ctx, Syms, NumSyms, InitSym, Materialize, Discard, Destroy, __functionAddress);
     }
 
-    /**
-     * Create a custom {@code MaterializationUnit}.
-     * 
-     * <p>Name is a name for this {@code MaterializationUnit} to be used for identification and logging purposes (e.g. if this {@code MaterializationUnit}
-     * produces an object buffer then the name of that buffer will be derived from this name).</p>
-     * 
-     * <p>The {@code Syms} list contains the names and linkages of the symbols provided by this unit. This function takes ownership of the elements of the
-     * {@code Syms} array. The {@code Name} fields of the array elements are taken to have been retained for this function. The client should <b>not</b>
-     * release the elements of the array, but is still responsible for destroying the array itself.</p>
-     * 
-     * <p>The {@code InitSym} argument indicates whether or not this {@code MaterializationUnit} contains static initializers. If there are no static
-     * initializers (the common case) then this argument should be null. If there are static initializers then {@code InitSym} should be set to a unique name
-     * that also appears in the {@code Syms} list with the {@link #LLVMJITSymbolGenericFlagsMaterializationSideEffectsOnly JITSymbolGenericFlagsMaterializationSideEffectsOnly} flag set. This function takes ownership of the
-     * {@code InitSym}, which should have been retained twice on behalf of this function: once for the {@code Syms} entry and once for {@code InitSym}. If
-     * clients wish to use the {@code InitSym} value after this function returns they must retain it once more for themselves.</p>
-     * 
-     * <p>If any of the symbols in the {@code Syms} list is looked up then the {@code Materialize} function will be called.</p>
-     * 
-     * <p>If any of the symbols in the {@code Syms} list is overridden then the {@code Discard} function will be called.</p>
-     * 
-     * <p>The caller owns the underling {@code MaterializationUnit} and is responsible for either passing it to a {@code JITDylib} (via {@link #LLVMOrcJITDylibDefine OrcJITDylibDefine}) or
-     * disposing of it by calling {@link #LLVMOrcDisposeMaterializationUnit OrcDisposeMaterializationUnit}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcMaterializationUnitRef LLVMOrcCreateCustomMaterializationUnit(char const * Name, void * Ctx, LLVMOrcCSymbolFlagsMapPairs Syms, size_t NumSyms, LLVMOrcSymbolStringPoolEntryRef InitSym, LLVMOrcMaterializationUnitMaterializeFunction Materialize, LLVMOrcMaterializationUnitDiscardFunction Discard, LLVMOrcMaterializationUnitDestroyFunction Destroy)} */
     @NativeType("LLVMOrcMaterializationUnitRef")
     public static long LLVMOrcCreateCustomMaterializationUnit(@NativeType("char const *") ByteBuffer Name, @NativeType("void *") long Ctx, @NativeType("LLVMOrcCSymbolFlagsMapPairs") LLVMOrcCSymbolFlagsMapPair.Buffer Syms, @NativeType("LLVMOrcSymbolStringPoolEntryRef") long InitSym, @NativeType("LLVMOrcMaterializationUnitMaterializeFunction") LLVMOrcMaterializationUnitMaterializeFunctionI Materialize, @NativeType("LLVMOrcMaterializationUnitDiscardFunction") LLVMOrcMaterializationUnitDiscardFunctionI Discard, @NativeType("LLVMOrcMaterializationUnitDestroyFunction") LLVMOrcMaterializationUnitDestroyFunctionI Destroy) {
         if (CHECKS) {
@@ -472,31 +332,7 @@ public class LLVMOrc {
         return nLLVMOrcCreateCustomMaterializationUnit(memAddress(Name), Ctx, Syms.address(), Syms.remaining(), InitSym, Materialize.address(), Discard.address(), Destroy.address());
     }
 
-    /**
-     * Create a custom {@code MaterializationUnit}.
-     * 
-     * <p>Name is a name for this {@code MaterializationUnit} to be used for identification and logging purposes (e.g. if this {@code MaterializationUnit}
-     * produces an object buffer then the name of that buffer will be derived from this name).</p>
-     * 
-     * <p>The {@code Syms} list contains the names and linkages of the symbols provided by this unit. This function takes ownership of the elements of the
-     * {@code Syms} array. The {@code Name} fields of the array elements are taken to have been retained for this function. The client should <b>not</b>
-     * release the elements of the array, but is still responsible for destroying the array itself.</p>
-     * 
-     * <p>The {@code InitSym} argument indicates whether or not this {@code MaterializationUnit} contains static initializers. If there are no static
-     * initializers (the common case) then this argument should be null. If there are static initializers then {@code InitSym} should be set to a unique name
-     * that also appears in the {@code Syms} list with the {@link #LLVMJITSymbolGenericFlagsMaterializationSideEffectsOnly JITSymbolGenericFlagsMaterializationSideEffectsOnly} flag set. This function takes ownership of the
-     * {@code InitSym}, which should have been retained twice on behalf of this function: once for the {@code Syms} entry and once for {@code InitSym}. If
-     * clients wish to use the {@code InitSym} value after this function returns they must retain it once more for themselves.</p>
-     * 
-     * <p>If any of the symbols in the {@code Syms} list is looked up then the {@code Materialize} function will be called.</p>
-     * 
-     * <p>If any of the symbols in the {@code Syms} list is overridden then the {@code Discard} function will be called.</p>
-     * 
-     * <p>The caller owns the underling {@code MaterializationUnit} and is responsible for either passing it to a {@code JITDylib} (via {@link #LLVMOrcJITDylibDefine OrcJITDylibDefine}) or
-     * disposing of it by calling {@link #LLVMOrcDisposeMaterializationUnit OrcDisposeMaterializationUnit}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcMaterializationUnitRef LLVMOrcCreateCustomMaterializationUnit(char const * Name, void * Ctx, LLVMOrcCSymbolFlagsMapPairs Syms, size_t NumSyms, LLVMOrcSymbolStringPoolEntryRef InitSym, LLVMOrcMaterializationUnitMaterializeFunction Materialize, LLVMOrcMaterializationUnitDiscardFunction Discard, LLVMOrcMaterializationUnitDestroyFunction Destroy)} */
     @NativeType("LLVMOrcMaterializationUnitRef")
     public static long LLVMOrcCreateCustomMaterializationUnit(@NativeType("char const *") CharSequence Name, @NativeType("void *") long Ctx, @NativeType("LLVMOrcCSymbolFlagsMapPairs") LLVMOrcCSymbolFlagsMapPair.Buffer Syms, @NativeType("LLVMOrcSymbolStringPoolEntryRef") long InitSym, @NativeType("LLVMOrcMaterializationUnitMaterializeFunction") LLVMOrcMaterializationUnitMaterializeFunctionI Materialize, @NativeType("LLVMOrcMaterializationUnitDiscardFunction") LLVMOrcMaterializationUnitDiscardFunctionI Discard, @NativeType("LLVMOrcMaterializationUnitDestroyFunction") LLVMOrcMaterializationUnitDestroyFunctionI Destroy) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -511,31 +347,13 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcAbsoluteSymbols ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcAbsoluteSymbols OrcAbsoluteSymbols} */
+    /** {@code LLVMOrcMaterializationUnitRef LLVMOrcAbsoluteSymbols(LLVMOrcCSymbolMapPairs Syms, size_t NumPairs)} */
     public static long nLLVMOrcAbsoluteSymbols(long Syms, long NumPairs) {
         long __functionAddress = Functions.OrcAbsoluteSymbols;
         return invokePPP(Syms, NumPairs, __functionAddress);
     }
 
-    /**
-     * Create a {@code MaterializationUnit} to define the given symbols as pointing to the corresponding raw addresses.
-     * 
-     * <p>This function takes ownership of the elements of the Syms array. The {@code Name} fields of the array elements are taken to have been retained for this
-     * function. This allows the following pattern...</p>
-     * 
-     * <pre><code>
-     * size_t NumPairs;
-     * LLVMOrcCSymbolMapPairs Sym;
-     * -- Build Syms array --
-     * LLVMOrcMaterializationUnitRef MU =
-     *     LLVMOrcAbsoluteSymbols(Syms, NumPairs);</code></pre>
-     * 
-     * <p>... without requiring cleanup of the elements of the {@code Sym} array afterwards.</p>
-     * 
-     * <p>The client is still responsible for deleting the {@code Sym} array itself.</p>
-     * 
-     * <p>If a client wishes to reuse elements of the {@code Sym} array after this call they must explicitly retain each of the elements for themselves.</p>
-     */
+    /** {@code LLVMOrcMaterializationUnitRef LLVMOrcAbsoluteSymbols(LLVMOrcCSymbolMapPairs Syms, size_t NumPairs)} */
     @NativeType("LLVMOrcMaterializationUnitRef")
     public static long LLVMOrcAbsoluteSymbols(@NativeType("LLVMOrcCSymbolMapPairs") LLVMOrcCSymbolMapPair.Buffer Syms) {
         return nLLVMOrcAbsoluteSymbols(Syms.address(), Syms.remaining());
@@ -543,7 +361,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcLazyReexports ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcLazyReexports OrcLazyReexports} */
+    /** {@code LLVMOrcMaterializationUnitRef LLVMOrcLazyReexports(LLVMOrcLazyCallThroughManagerRef LCTM, LLVMOrcIndirectStubsManagerRef ISM, LLVMOrcJITDylibRef SourceRef, LLVMOrcCSymbolAliasMapPairs CallableAliases, size_t NumPairs)} */
     public static long nLLVMOrcLazyReexports(long LCTM, long ISM, long SourceRef, long CallableAliases, long NumPairs) {
         long __functionAddress = Functions.OrcLazyReexports;
         if (CHECKS) {
@@ -555,27 +373,7 @@ public class LLVMOrc {
         return invokePPPPPP(LCTM, ISM, SourceRef, CallableAliases, NumPairs, __functionAddress);
     }
 
-    /**
-     * Create a {@code MaterializationUnit} to define lazy re-expots. These are callable entry points that call through to the given symbols.
-     * 
-     * <p>This function takes ownership of the {@code CallableAliases} array. The {@code Name} fields of the array elements are taken to have been retained for
-     * this function. This allows the following pattern...</p>
-     * 
-     * <pre><code>
-     * size_t NumPairs;
-     * LLVMOrcCSymbolAliasMapPairs CallableAliases;
-     * -- Build CallableAliases array --
-     * LLVMOrcMaterializationUnitRef MU =
-     *     LLVMOrcLazyReexports(LCTM, ISM, JD, CallableAliases, NumPairs);</code></pre>
-     * 
-     * <p>... without requiring cleanup of the elements of the {@code CallableAliases} array afterwards.</p>
-     * 
-     * <p>The client is still responsible for deleting the {@code CallableAliases} array itself.</p>
-     * 
-     * <p>If a client wishes to reuse elements of the {@code CallableAliases} array after this call they must explicitly retain each of the elements for themselves.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcMaterializationUnitRef LLVMOrcLazyReexports(LLVMOrcLazyCallThroughManagerRef LCTM, LLVMOrcIndirectStubsManagerRef ISM, LLVMOrcJITDylibRef SourceRef, LLVMOrcCSymbolAliasMapPairs CallableAliases, size_t NumPairs)} */
     @NativeType("LLVMOrcMaterializationUnitRef")
     public static long LLVMOrcLazyReexports(@NativeType("LLVMOrcLazyCallThroughManagerRef") long LCTM, @NativeType("LLVMOrcIndirectStubsManagerRef") long ISM, @NativeType("LLVMOrcJITDylibRef") long SourceRef, @NativeType("LLVMOrcCSymbolAliasMapPairs") LLVMOrcCSymbolAliasMapPair.Buffer CallableAliases) {
         return nLLVMOrcLazyReexports(LCTM, ISM, SourceRef, CallableAliases.address(), CallableAliases.remaining());
@@ -583,15 +381,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeMaterializationResponsibility ] ---
 
-    /**
-     * Disposes of the passed {@code MaterializationResponsibility} object.
-     * 
-     * <p>This should only be done after the symbols covered by the object have either been resolved and emitted (via
-     * {@link #LLVMOrcMaterializationResponsibilityNotifyResolved OrcMaterializationResponsibilityNotifyResolved} and {@link #LLVMOrcMaterializationResponsibilityNotifyEmitted OrcMaterializationResponsibilityNotifyEmitted}) or failed (via
-     * {@link #LLVMOrcMaterializationResponsibilityFailMaterialization OrcMaterializationResponsibilityFailMaterialization}).</p>
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcDisposeMaterializationResponsibility(LLVMOrcMaterializationResponsibilityRef MR)} */
     public static void LLVMOrcDisposeMaterializationResponsibility(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         long __functionAddress = Functions.OrcDisposeMaterializationResponsibility;
         if (CHECKS) {
@@ -603,11 +393,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityGetTargetDylib ] ---
 
-    /**
-     * Returns the target {@code JITDylib} that these symbols are being materialized into.
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcJITDylibRef LLVMOrcMaterializationResponsibilityGetTargetDylib(LLVMOrcMaterializationResponsibilityRef MR)} */
     @NativeType("LLVMOrcJITDylibRef")
     public static long LLVMOrcMaterializationResponsibilityGetTargetDylib(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityGetTargetDylib;
@@ -620,11 +406,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityGetExecutionSession ] ---
 
-    /**
-     * Returns the {@code ExecutionSession} for this {@code MaterializationResponsibility}.
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcExecutionSessionRef LLVMOrcMaterializationResponsibilityGetExecutionSession(LLVMOrcMaterializationResponsibilityRef MR)} */
     @NativeType("LLVMOrcExecutionSessionRef")
     public static long LLVMOrcMaterializationResponsibilityGetExecutionSession(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityGetExecutionSession;
@@ -637,7 +419,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityGetSymbols ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityGetSymbols OrcMaterializationResponsibilityGetSymbols} */
+    /** {@code LLVMOrcCSymbolFlagsMapPairs LLVMOrcMaterializationResponsibilityGetSymbols(LLVMOrcMaterializationResponsibilityRef MR, size_t * NumPairs)} */
     public static long nLLVMOrcMaterializationResponsibilityGetSymbols(long MR, long NumPairs) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityGetSymbols;
         if (CHECKS) {
@@ -647,16 +429,7 @@ public class LLVMOrc {
         return invokePPP(MR, NumPairs, __functionAddress);
     }
 
-    /**
-     * Returns the symbol flags map for this responsibility instance.
-     * 
-     * <p>The length of the array is returned in {@code NumPairs} and the caller is responsible for the returned memory and needs to call
-     * {@link #LLVMOrcDisposeCSymbolFlagsMap OrcDisposeCSymbolFlagsMap}.</p>
-     * 
-     * <p>To use the returned symbols beyond the livetime of the {@code MaterializationResponsibility} requires the caller to retain the symbols explicitly.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcCSymbolFlagsMapPairs LLVMOrcMaterializationResponsibilityGetSymbols(LLVMOrcMaterializationResponsibilityRef MR, size_t * NumPairs)} */
     @NativeType("LLVMOrcCSymbolFlagsMapPairs")
     public static LLVMOrcCSymbolFlagsMapPair.@Nullable Buffer LLVMOrcMaterializationResponsibilityGetSymbols(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -671,7 +444,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeCSymbolFlagsMap ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcDisposeCSymbolFlagsMap OrcDisposeCSymbolFlagsMap} */
+    /** {@code void LLVMOrcDisposeCSymbolFlagsMap(LLVMOrcCSymbolFlagsMapPairs Pairs)} */
     public static void nLLVMOrcDisposeCSymbolFlagsMap(long Pairs) {
         long __functionAddress = Functions.OrcDisposeCSymbolFlagsMap;
         if (CHECKS) {
@@ -680,27 +453,14 @@ public class LLVMOrc {
         invokePV(Pairs, __functionAddress);
     }
 
-    /**
-     * Disposes of the passed {@code LLVMOrcCSymbolFlagsMap}.
-     * 
-     * <p>Does not release the entries themselves.</p>
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcDisposeCSymbolFlagsMap(LLVMOrcCSymbolFlagsMapPairs Pairs)} */
     public static void LLVMOrcDisposeCSymbolFlagsMap(@NativeType("LLVMOrcCSymbolFlagsMapPairs") LLVMOrcCSymbolFlagsMapPair Pairs) {
         nLLVMOrcDisposeCSymbolFlagsMap(Pairs.address());
     }
 
     // --- [ LLVMOrcMaterializationResponsibilityGetInitializerSymbol ] ---
 
-    /**
-     * Returns the initialization pseudo-symbol, if any. This symbol will also be present in the {@code SymbolFlagsMap} for this
-     * {@code MaterializationResponsibility} object.
-     * 
-     * <p>The returned symbol is not retained over any mutating operation of the {@code MaterializationResponsbility} or beyond the lifetime thereof.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcSymbolStringPoolEntryRef LLVMOrcMaterializationResponsibilityGetInitializerSymbol(LLVMOrcMaterializationResponsibilityRef MR)} */
     @NativeType("LLVMOrcSymbolStringPoolEntryRef")
     public static long LLVMOrcMaterializationResponsibilityGetInitializerSymbol(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityGetInitializerSymbol;
@@ -713,7 +473,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityGetRequestedSymbols ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityGetRequestedSymbols OrcMaterializationResponsibilityGetRequestedSymbols} */
+    /** {@code LLVMOrcSymbolStringPoolEntryRef * LLVMOrcMaterializationResponsibilityGetRequestedSymbols(LLVMOrcMaterializationResponsibilityRef MR, size_t * NumSymbols)} */
     public static long nLLVMOrcMaterializationResponsibilityGetRequestedSymbols(long MR, long NumSymbols) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityGetRequestedSymbols;
         if (CHECKS) {
@@ -723,12 +483,7 @@ public class LLVMOrc {
         return invokePPP(MR, NumSymbols, __functionAddress);
     }
 
-    /**
-     * Returns the names of any symbols covered by this {@code MaterializationResponsibility} object that have queries pending. This information can be used
-     * to return responsibility for unrequested symbols back to the {@code JITDylib} via the delegate method.
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcSymbolStringPoolEntryRef * LLVMOrcMaterializationResponsibilityGetRequestedSymbols(LLVMOrcMaterializationResponsibilityRef MR, size_t * NumSymbols)} */
     @NativeType("LLVMOrcSymbolStringPoolEntryRef *")
     public static @Nullable PointerBuffer LLVMOrcMaterializationResponsibilityGetRequestedSymbols(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -743,7 +498,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeSymbols ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcDisposeSymbols OrcDisposeSymbols} */
+    /** {@code void LLVMOrcDisposeSymbols(LLVMOrcSymbolStringPoolEntryRef * Symbols)} */
     public static void nLLVMOrcDisposeSymbols(long Symbols) {
         long __functionAddress = Functions.OrcDisposeSymbols;
         if (CHECKS) {
@@ -752,20 +507,14 @@ public class LLVMOrc {
         invokePV(Symbols, __functionAddress);
     }
 
-    /**
-     * Disposes of the passed {@code LLVMOrcSymbolStringPoolEntryRef*}.
-     * 
-     * <p>Does not release the symbols themselves.</p>
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcDisposeSymbols(LLVMOrcSymbolStringPoolEntryRef * Symbols)} */
     public static void LLVMOrcDisposeSymbols(@NativeType("LLVMOrcSymbolStringPoolEntryRef *") PointerBuffer Symbols) {
         nLLVMOrcDisposeSymbols(memAddress(Symbols));
     }
 
     // --- [ LLVMOrcMaterializationResponsibilityNotifyResolved ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityNotifyResolved OrcMaterializationResponsibilityNotifyResolved} */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityNotifyResolved(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcCSymbolMapPairs Symbols, size_t NumPairs)} */
     public static long nLLVMOrcMaterializationResponsibilityNotifyResolved(long MR, long Symbols, long NumPairs) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityNotifyResolved;
         if (CHECKS) {
@@ -775,18 +524,7 @@ public class LLVMOrc {
         return invokePPPP(MR, Symbols, NumPairs, __functionAddress);
     }
 
-    /**
-     * Notifies the target {@code JITDylib} that the given symbols have been resolved. This will update the given symbols' addresses in the {@code JITDylib},
-     * and notify any pending queries on the given symbols of their resolution. The given symbols must be ones covered by this
-     * {@code MaterializationResponsibility} instance. Individual calls to this method may resolve a subset of the symbols, but all symbols must have been
-     * resolved prior to calling emit.
-     * 
-     * <p>This method will return an error if any symbols being resolved have been moved to the error state due to the failure of a dependency. If this method
-     * returns an error then clients should log it and call {@link #LLVMOrcMaterializationResponsibilityFailMaterialization OrcMaterializationResponsibilityFailMaterialization}. If no dependencies have been registered
-     * for the symbols covered by this {@code MaterializationResponsibility} then this method is guaranteed to return {@link LLVMError#LLVMErrorSuccess ErrorSuccess}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityNotifyResolved(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcCSymbolMapPairs Symbols, size_t NumPairs)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcMaterializationResponsibilityNotifyResolved(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcCSymbolMapPairs") LLVMOrcCSymbolMapPair.Buffer Symbols) {
         return nLLVMOrcMaterializationResponsibilityNotifyResolved(MR, Symbols.address(), Symbols.remaining());
@@ -794,7 +532,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityNotifyEmitted ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityNotifyEmitted OrcMaterializationResponsibilityNotifyEmitted} */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityNotifyEmitted(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcCSymbolDependenceGroup * SymbolDepGroups, size_t NumSymbolDepGroups)} */
     public static long nLLVMOrcMaterializationResponsibilityNotifyEmitted(long MR, long SymbolDepGroups, long NumSymbolDepGroups) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityNotifyEmitted;
         if (CHECKS) {
@@ -804,27 +542,7 @@ public class LLVMOrc {
         return invokePPPP(MR, SymbolDepGroups, NumSymbolDepGroups, __functionAddress);
     }
 
-    /**
-     * Notifies the target {@code JITDylib} (and any pending queries on that {@code JITDylib}) that all symbols covered by this
-     * {@code MaterializationResponsibility} instance have been emitted.
-     * 
-     * <p>This function takes ownership of the symbols in the {@code Dependencies} struct. This allows the following pattern...</p>
-     * 
-     * <pre><code>
-     * LLVMOrcSymbolStringPoolEntryRef Names[] = {...};
-     * LLVMOrcCDependenceMapPair Dependence = {JD, {Names, sizeof(Names)}}
-     * LLVMOrcMaterializationResponsibilityAddDependencies(JD, Name, &amp;Dependence, 1);</code></pre>
-     * 
-     * <p>... without requiring cleanup of the elements of the Names array afterwards.</p>
-     * 
-     * <p>The client is still responsible for deleting the {@code Dependencies.Names} arrays, and the {@code Dependencies} array itself.</p>
-     * 
-     * <p>This method will return an error if any symbols being resolved have been moved to the error state due to the failure of a dependency. If this method
-     * returns an error then clients should log it and call {@link #LLVMOrcMaterializationResponsibilityFailMaterialization OrcMaterializationResponsibilityFailMaterialization}. If no dependencies have been registered
-     * for the symbols covered by this {@code MaterializationResponsibility} then this method is guaranteed to return {@link LLVMError#LLVMErrorSuccess ErrorSuccess}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityNotifyEmitted(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcCSymbolDependenceGroup * SymbolDepGroups, size_t NumSymbolDepGroups)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcMaterializationResponsibilityNotifyEmitted(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcCSymbolDependenceGroup *") LLVMOrcCSymbolDependenceGroup.Buffer SymbolDepGroups) {
         return nLLVMOrcMaterializationResponsibilityNotifyEmitted(MR, SymbolDepGroups.address(), SymbolDepGroups.remaining());
@@ -832,7 +550,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityDefineMaterializing ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityDefineMaterializing OrcMaterializationResponsibilityDefineMaterializing} */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityDefineMaterializing(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcCSymbolFlagsMapPairs Pairs, size_t NumPairs)} */
     public static long nLLVMOrcMaterializationResponsibilityDefineMaterializing(long MR, long Pairs, long NumPairs) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityDefineMaterializing;
         if (CHECKS) {
@@ -842,16 +560,7 @@ public class LLVMOrc {
         return invokePPPP(MR, Pairs, NumPairs, __functionAddress);
     }
 
-    /**
-     * Attempt to claim responsibility for new definitions. This method can be used to claim responsibility for symbols that are added to a materialization
-     * unit during the compilation process (e.g. literal pool symbols). Symbol linkage rules are the same as for symbols that are defined up front: duplicate
-     * strong definitions will result in errors. Duplicate weak definitions will be discarded (in which case they will not be added to this responsibility
-     * instance).
-     * 
-     * <p>This method can be used by materialization units that want to add additional symbols at materialization time (e.g. stubs, compile callbacks, metadata)</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityDefineMaterializing(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcCSymbolFlagsMapPairs Pairs, size_t NumPairs)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcMaterializationResponsibilityDefineMaterializing(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcCSymbolFlagsMapPairs") LLVMOrcCSymbolFlagsMapPair.Buffer Pairs) {
         return nLLVMOrcMaterializationResponsibilityDefineMaterializing(MR, Pairs.address(), Pairs.remaining());
@@ -859,12 +568,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityFailMaterialization ] ---
 
-    /**
-     * Notify all not-yet-emitted covered by this {@code MaterializationResponsibility} instance that an error has occurred. This will remove all symbols
-     * covered by this {@code MaterializationResponsibility} from the target {@code JITDylib}, and send an error to any queries waiting on these symbols.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcMaterializationResponsibilityFailMaterialization(LLVMOrcMaterializationResponsibilityRef MR)} */
     public static void LLVMOrcMaterializationResponsibilityFailMaterialization(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityFailMaterialization;
         if (CHECKS) {
@@ -876,13 +580,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityReplace ] ---
 
-    /**
-     * Transfers responsibility to the given {@code MaterializationUnit} for all symbols defined by that {@code MaterializationUnit}. This allows
-     * materializers to break up work based on run-time information (e.g. by introspecting which symbols have actually been looked up and materializing only
-     * those).
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityReplace(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcMaterializationUnitRef MU)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcMaterializationResponsibilityReplace(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcMaterializationUnitRef") long MU) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityReplace;
@@ -896,7 +594,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityDelegate ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityDelegate OrcMaterializationResponsibilityDelegate} */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityDelegate(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcSymbolStringPoolEntryRef * Symbols, size_t NumSymbols, LLVMOrcMaterializationResponsibilityRef * Result)} */
     public static long nLLVMOrcMaterializationResponsibilityDelegate(long MR, long Symbols, long NumSymbols, long Result) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityDelegate;
         if (CHECKS) {
@@ -906,14 +604,7 @@ public class LLVMOrc {
         return invokePPPPP(MR, Symbols, NumSymbols, Result, __functionAddress);
     }
 
-    /**
-     * Delegates responsibility for the given symbols to the returned materialization responsibility. Useful for breaking up work between threads, or
-     * different kinds of materialization processes.
-     * 
-     * <p>The caller retains responsibility of the the passed {@code MaterializationResponsibility}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcMaterializationResponsibilityDelegate(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcSymbolStringPoolEntryRef * Symbols, size_t NumSymbols, LLVMOrcMaterializationResponsibilityRef * Result)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcMaterializationResponsibilityDelegate(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcSymbolStringPoolEntryRef *") PointerBuffer Symbols, @NativeType("LLVMOrcMaterializationResponsibilityRef *") PointerBuffer Result) {
         if (CHECKS) {
@@ -924,7 +615,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcMaterializationResponsibilityAddDependencies ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityAddDependencies OrcMaterializationResponsibilityAddDependencies} */
+    /** {@code void LLVMOrcMaterializationResponsibilityAddDependencies(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcSymbolStringPoolEntryRef Name, LLVMOrcCDependenceMapPairs Dependencies, size_t NumPairs)} */
     public static void nLLVMOrcMaterializationResponsibilityAddDependencies(long MR, long Name, long Dependencies, long NumPairs) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityAddDependencies;
         if (CHECKS) {
@@ -935,18 +626,14 @@ public class LLVMOrc {
         invokePPPPV(MR, Name, Dependencies, NumPairs, __functionAddress);
     }
 
-    /**
-     * Removed in LLVM 19.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcMaterializationResponsibilityAddDependencies(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcSymbolStringPoolEntryRef Name, LLVMOrcCDependenceMapPairs Dependencies, size_t NumPairs)} */
     public static void LLVMOrcMaterializationResponsibilityAddDependencies(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcSymbolStringPoolEntryRef") long Name, @NativeType("LLVMOrcCDependenceMapPairs") LLVMOrcCDependenceMapPair.Buffer Dependencies) {
         nLLVMOrcMaterializationResponsibilityAddDependencies(MR, Name, Dependencies.address(), Dependencies.remaining());
     }
 
     // --- [ LLVMOrcMaterializationResponsibilityAddDependenciesForAll ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcMaterializationResponsibilityAddDependenciesForAll OrcMaterializationResponsibilityAddDependenciesForAll} */
+    /** {@code void LLVMOrcMaterializationResponsibilityAddDependenciesForAll(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcCDependenceMapPairs Dependencies, size_t NumPairs)} */
     public static void nLLVMOrcMaterializationResponsibilityAddDependenciesForAll(long MR, long Dependencies, long NumPairs) {
         long __functionAddress = Functions.OrcMaterializationResponsibilityAddDependenciesForAll;
         if (CHECKS) {
@@ -956,18 +643,14 @@ public class LLVMOrc {
         invokePPPV(MR, Dependencies, NumPairs, __functionAddress);
     }
 
-    /**
-     * Removed in LLVM 19.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcMaterializationResponsibilityAddDependenciesForAll(LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcCDependenceMapPairs Dependencies, size_t NumPairs)} */
     public static void LLVMOrcMaterializationResponsibilityAddDependenciesForAll(@NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcCDependenceMapPairs") LLVMOrcCDependenceMapPair.Buffer Dependencies) {
         nLLVMOrcMaterializationResponsibilityAddDependenciesForAll(MR, Dependencies.address(), Dependencies.remaining());
     }
 
     // --- [ LLVMOrcExecutionSessionCreateBareJITDylib ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcExecutionSessionCreateBareJITDylib OrcExecutionSessionCreateBareJITDylib} */
+    /** {@code LLVMOrcJITDylibRef LLVMOrcExecutionSessionCreateBareJITDylib(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     public static long nLLVMOrcExecutionSessionCreateBareJITDylib(long ES, long Name) {
         long __functionAddress = Functions.OrcExecutionSessionCreateBareJITDylib;
         if (CHECKS) {
@@ -976,13 +659,7 @@ public class LLVMOrc {
         return invokePPP(ES, Name, __functionAddress);
     }
 
-    /**
-     * Create a "bare" {@code JITDylib}.
-     * 
-     * <p>The client is responsible for ensuring that the {@code JITDylib}'s name is unique, e.g. by calling {@link #LLVMOrcExecutionSessionGetJITDylibByName OrcExecutionSessionGetJITDylibByName} first.</p>
-     * 
-     * <p>This call does not install any library code or symbols into the newly created {@code JITDylib}. The client is responsible for all configuration.</p>
-     */
+    /** {@code LLVMOrcJITDylibRef LLVMOrcExecutionSessionCreateBareJITDylib(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     @NativeType("LLVMOrcJITDylibRef")
     public static long LLVMOrcExecutionSessionCreateBareJITDylib(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -991,13 +668,7 @@ public class LLVMOrc {
         return nLLVMOrcExecutionSessionCreateBareJITDylib(ES, memAddress(Name));
     }
 
-    /**
-     * Create a "bare" {@code JITDylib}.
-     * 
-     * <p>The client is responsible for ensuring that the {@code JITDylib}'s name is unique, e.g. by calling {@link #LLVMOrcExecutionSessionGetJITDylibByName OrcExecutionSessionGetJITDylibByName} first.</p>
-     * 
-     * <p>This call does not install any library code or symbols into the newly created {@code JITDylib}. The client is responsible for all configuration.</p>
-     */
+    /** {@code LLVMOrcJITDylibRef LLVMOrcExecutionSessionCreateBareJITDylib(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     @NativeType("LLVMOrcJITDylibRef")
     public static long LLVMOrcExecutionSessionCreateBareJITDylib(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1012,7 +683,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcExecutionSessionCreateJITDylib ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcExecutionSessionCreateJITDylib OrcExecutionSessionCreateJITDylib} */
+    /** {@code LLVMErrorRef LLVMOrcExecutionSessionCreateJITDylib(LLVMOrcExecutionSessionRef ES, LLVMOrcJITDylibRef * Result, char const * Name)} */
     public static long nLLVMOrcExecutionSessionCreateJITDylib(long ES, long Result, long Name) {
         long __functionAddress = Functions.OrcExecutionSessionCreateJITDylib;
         if (CHECKS) {
@@ -1021,15 +692,7 @@ public class LLVMOrc {
         return invokePPPP(ES, Result, Name, __functionAddress);
     }
 
-    /**
-     * Create a {@code JITDylib}.
-     * 
-     * <p>The client is responsible for ensuring that the {@code JITDylib}'s name is unique, e.g. by calling {@link #LLVMOrcExecutionSessionGetJITDylibByName OrcExecutionSessionGetJITDylibByName} first.</p>
-     * 
-     * <p>If a {@code Platform} is attached to the {@code ExecutionSession} then {@code Platform::setupJITDylib} will be called to install standard platform
-     * symbols (e.g. standard library interposes). If no {@code Platform} is installed then this call is equivalent to
-     * {@link #LLVMOrcExecutionSessionCreateBareJITDylib OrcExecutionSessionCreateBareJITDylib} and will always return success.</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcExecutionSessionCreateJITDylib(LLVMOrcExecutionSessionRef ES, LLVMOrcJITDylibRef * Result, char const * Name)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcExecutionSessionCreateJITDylib(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMOrcJITDylibRef *") PointerBuffer Result, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -1039,15 +702,7 @@ public class LLVMOrc {
         return nLLVMOrcExecutionSessionCreateJITDylib(ES, memAddress(Result), memAddress(Name));
     }
 
-    /**
-     * Create a {@code JITDylib}.
-     * 
-     * <p>The client is responsible for ensuring that the {@code JITDylib}'s name is unique, e.g. by calling {@link #LLVMOrcExecutionSessionGetJITDylibByName OrcExecutionSessionGetJITDylibByName} first.</p>
-     * 
-     * <p>If a {@code Platform} is attached to the {@code ExecutionSession} then {@code Platform::setupJITDylib} will be called to install standard platform
-     * symbols (e.g. standard library interposes). If no {@code Platform} is installed then this call is equivalent to
-     * {@link #LLVMOrcExecutionSessionCreateBareJITDylib OrcExecutionSessionCreateBareJITDylib} and will always return success.</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcExecutionSessionCreateJITDylib(LLVMOrcExecutionSessionRef ES, LLVMOrcJITDylibRef * Result, char const * Name)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcExecutionSessionCreateJITDylib(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMOrcJITDylibRef *") PointerBuffer Result, @NativeType("char const *") CharSequence Name) {
         if (CHECKS) {
@@ -1065,7 +720,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcExecutionSessionGetJITDylibByName ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcExecutionSessionGetJITDylibByName OrcExecutionSessionGetJITDylibByName} */
+    /** {@code LLVMOrcJITDylibRef LLVMOrcExecutionSessionGetJITDylibByName(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     public static long nLLVMOrcExecutionSessionGetJITDylibByName(long ES, long Name) {
         long __functionAddress = Functions.OrcExecutionSessionGetJITDylibByName;
         if (CHECKS) {
@@ -1074,7 +729,7 @@ public class LLVMOrc {
         return invokePPP(ES, Name, __functionAddress);
     }
 
-    /** Returns the {@code JITDylib} with the given name, or {@code NULL} if no such {@code JITDylib} exists. */
+    /** {@code LLVMOrcJITDylibRef LLVMOrcExecutionSessionGetJITDylibByName(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     @NativeType("LLVMOrcJITDylibRef")
     public static long LLVMOrcExecutionSessionGetJITDylibByName(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -1083,7 +738,7 @@ public class LLVMOrc {
         return nLLVMOrcExecutionSessionGetJITDylibByName(ES, memAddress(Name));
     }
 
-    /** Returns the {@code JITDylib} with the given name, or {@code NULL} if no such {@code JITDylib} exists. */
+    /** {@code LLVMOrcJITDylibRef LLVMOrcExecutionSessionGetJITDylibByName(LLVMOrcExecutionSessionRef ES, char const * Name)} */
     @NativeType("LLVMOrcJITDylibRef")
     public static long LLVMOrcExecutionSessionGetJITDylibByName(@NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1098,10 +753,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITDylibCreateResourceTracker ] ---
 
-    /**
-     * Return a reference to a newly created resource tracker associated with {@code JD}. The tracker is returned with an initial ref-count of 1, and must be
-     * released with {@link #LLVMOrcReleaseResourceTracker OrcReleaseResourceTracker} when no longer needed.
-     */
+    /** {@code LLVMOrcResourceTrackerRef LLVMOrcJITDylibCreateResourceTracker(LLVMOrcJITDylibRef JD)} */
     @NativeType("LLVMOrcResourceTrackerRef")
     public static long LLVMOrcJITDylibCreateResourceTracker(@NativeType("LLVMOrcJITDylibRef") long JD) {
         long __functionAddress = Functions.OrcJITDylibCreateResourceTracker;
@@ -1113,10 +765,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITDylibGetDefaultResourceTracker ] ---
 
-    /**
-     * Return a reference to the default resource tracker for the given {@code JITDylib}. This operation will increase the retain count of the tracker:
-     * Clients should call {@link #LLVMOrcReleaseResourceTracker OrcReleaseResourceTracker} when the result is no longer needed.
-     */
+    /** {@code LLVMOrcResourceTrackerRef LLVMOrcJITDylibGetDefaultResourceTracker(LLVMOrcJITDylibRef JD)} */
     @NativeType("LLVMOrcResourceTrackerRef")
     public static long LLVMOrcJITDylibGetDefaultResourceTracker(@NativeType("LLVMOrcJITDylibRef") long JD) {
         long __functionAddress = Functions.OrcJITDylibGetDefaultResourceTracker;
@@ -1128,12 +777,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITDylibDefine ] ---
 
-    /**
-     * Add the given {@code MaterializationUnit} to the given {@code JITDylib}.
-     * 
-     * <p>If this operation succeeds then {@code JITDylib} {@code JD} will take ownership of {@code MU}. If the operation fails then ownership remains with the
-     * caller who should call {@link #LLVMOrcDisposeMaterializationUnit OrcDisposeMaterializationUnit} to destroy it.</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcJITDylibDefine(LLVMOrcJITDylibRef JD, LLVMOrcMaterializationUnitRef MU)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcJITDylibDefine(@NativeType("LLVMOrcJITDylibRef") long JD, @NativeType("LLVMOrcMaterializationUnitRef") long MU) {
         long __functionAddress = Functions.OrcJITDylibDefine;
@@ -1146,7 +790,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITDylibClear ] ---
 
-    /** Calls remove on all trackers associated with this {@code JITDylib}, see {@code JITDylib::clear()}. */
+    /** {@code LLVMErrorRef LLVMOrcJITDylibClear(LLVMOrcJITDylibRef JD)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcJITDylibClear(@NativeType("LLVMOrcJITDylibRef") long JD) {
         long __functionAddress = Functions.OrcJITDylibClear;
@@ -1158,11 +802,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITDylibAddGenerator ] ---
 
-    /**
-     * Add a {@code DefinitionGenerator} to the given {@code JITDylib}.
-     * 
-     * <p>The {@code JITDylib} will take ownership of the given generator: The client is no longer responsible for managing its memory.</p>
-     */
+    /** {@code void LLVMOrcJITDylibAddGenerator(LLVMOrcJITDylibRef JD, LLVMOrcDefinitionGeneratorRef DG)} */
     public static void LLVMOrcJITDylibAddGenerator(@NativeType("LLVMOrcJITDylibRef") long JD, @NativeType("LLVMOrcDefinitionGeneratorRef") long DG) {
         long __functionAddress = Functions.OrcJITDylibAddGenerator;
         if (CHECKS) {
@@ -1174,23 +814,13 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateCustomCAPIDefinitionGenerator ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcCreateCustomCAPIDefinitionGenerator OrcCreateCustomCAPIDefinitionGenerator} */
+    /** {@code LLVMOrcDefinitionGeneratorRef LLVMOrcCreateCustomCAPIDefinitionGenerator(LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction F, void * Ctx, LLVMOrcDisposeCAPIDefinitionGeneratorFunction Dispose)} */
     public static long nLLVMOrcCreateCustomCAPIDefinitionGenerator(long F, long Ctx, long Dispose) {
         long __functionAddress = Functions.OrcCreateCustomCAPIDefinitionGenerator;
         return invokePPPP(F, Ctx, Dispose, __functionAddress);
     }
 
-    /**
-     * Create a custom generator.
-     * 
-     * <p>The {@code F} argument will be used to implement the {@code DefinitionGenerator}'s {@code tryToGenerate} method (see
-     * {@link LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction}).</p>
-     * 
-     * <p>{@code Ctx} is a context object that will be passed to {@code F}. This argument is permitted to be null.</p>
-     * 
-     * <p>{@code Dispose} is the disposal function for {@code Ctx}. This argument is permitted to be null (in which case the client is responsible for the
-     * lifetime of {@code Ctx}).</p>
-     */
+    /** {@code LLVMOrcDefinitionGeneratorRef LLVMOrcCreateCustomCAPIDefinitionGenerator(LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction F, void * Ctx, LLVMOrcDisposeCAPIDefinitionGeneratorFunction Dispose)} */
     @NativeType("LLVMOrcDefinitionGeneratorRef")
     public static long LLVMOrcCreateCustomCAPIDefinitionGenerator(@NativeType("LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction") LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI F, @NativeType("void *") long Ctx, @NativeType("LLVMOrcDisposeCAPIDefinitionGeneratorFunction") @Nullable LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI Dispose) {
         return nLLVMOrcCreateCustomCAPIDefinitionGenerator(F.address(), Ctx, memAddressSafe(Dispose));
@@ -1198,7 +828,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcLookupStateContinueLookup ] ---
 
-    /** Continue a lookup that was suspended in a generator (see {@link LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction}). */
+    /** {@code void LLVMOrcLookupStateContinueLookup(LLVMOrcLookupStateRef S, LLVMErrorRef Err)} */
     public static void LLVMOrcLookupStateContinueLookup(@NativeType("LLVMOrcLookupStateRef") long S, @NativeType("LLVMErrorRef") long Err) {
         long __functionAddress = Functions.OrcLookupStateContinueLookup;
         if (CHECKS) {
@@ -1211,23 +841,13 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess OrcCreateDynamicLibrarySearchGeneratorForProcess} */
+    /** {@code LLVMErrorRef LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess(LLVMOrcDefinitionGeneratorRef * Result, char GlobalPrefx, LLVMOrcSymbolPredicate Filter, void * FilterCtx)} */
     public static long nLLVMOrcCreateDynamicLibrarySearchGeneratorForProcess(long Result, byte GlobalPrefx, long Filter, long FilterCtx) {
         long __functionAddress = Functions.OrcCreateDynamicLibrarySearchGeneratorForProcess;
         return invokePBPPP(Result, GlobalPrefx, Filter, FilterCtx, __functionAddress);
     }
 
-    /**
-     * Get a {@code DynamicLibrarySearchGenerator} that will reflect process symbols into the {@code JITDylib}. On success the resulting generator is owned by
-     * the client. Ownership is typically transferred by adding the instance to a {@code JITDylib} using {@link #LLVMOrcJITDylibAddGenerator OrcJITDylibAddGenerator}.
-     * 
-     * <p>The {@code GlobalPrefix} argument specifies the character that appears on the front of linker-mangled symbols for the target platform (e.g. '_' on
-     * MachO). If non-null, this character will be stripped from the start of all symbol strings before passing the remaining substring to {@code dlsym}.</p>
-     * 
-     * <p>The optional {@code Filter} and {@code Ctx} arguments can be used to supply a symbol name filter: Only symbols for which the filter returns true will
-     * be visible to JIT'd code. If the {@code Filter} argument is null then all process symbols will be visible to JIT'd code. Note that the symbol name
-     * passed to the {@code Filter} function is the full mangled symbol: The client is responsible for stripping the global prefix if present.</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess(LLVMOrcDefinitionGeneratorRef * Result, char GlobalPrefx, LLVMOrcSymbolPredicate Filter, void * FilterCtx)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char") byte GlobalPrefx, @NativeType("LLVMOrcSymbolPredicate") @Nullable LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
         if (CHECKS) {
@@ -1238,7 +858,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateDynamicLibrarySearchGeneratorForPath ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcCreateDynamicLibrarySearchGeneratorForPath OrcCreateDynamicLibrarySearchGeneratorForPath} */
+    /** {@code LLVMErrorRef LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, char const * FileName, char GlobalPrefix, LLVMOrcSymbolPredicate Filter, void * FilterCtx)} */
     public static long nLLVMOrcCreateDynamicLibrarySearchGeneratorForPath(long Result, long FileName, byte GlobalPrefix, long Filter, long FilterCtx) {
         long __functionAddress = Functions.OrcCreateDynamicLibrarySearchGeneratorForPath;
         if (CHECKS) {
@@ -1247,19 +867,7 @@ public class LLVMOrc {
         return invokePPBPPP(Result, FileName, GlobalPrefix, Filter, FilterCtx, __functionAddress);
     }
 
-    /**
-     * Get a {@code LLVMOrcCreateDynamicLibrarySearchGeneratorForPath} that will reflect library symbols into the {@code JITDylib}. On success the resulting
-     * generator is owned by the client. Ownership is typically transferred by adding the instance to a {@code JITDylib} using {@link #LLVMOrcJITDylibAddGenerator OrcJITDylibAddGenerator},
-     * 
-     * <p>The {@code GlobalPrefix} argument specifies the character that appears on the front of linker-mangled symbols for the target platform (e.g. '_' on
-     * MachO). If non-null, this character will be stripped from the start of all symbol strings before passing the remaining substring to {@code dlsym}.</p>
-     * 
-     * <p>The optional {@code Filter} and {@code Ctx} arguments can be used to supply a symbol name filter: Only symbols for which the filter returns true will
-     * be visible to JIT'd code. If the {@code Filter} argument is null then all library symbols will be visible to JIT'd code. Note that the symbol name
-     * passed to the {@code Filter} function is the full mangled symbol: The client is responsible for stripping the global prefix if present.</p>
-     * 
-     * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, char const * FileName, char GlobalPrefix, LLVMOrcSymbolPredicate Filter, void * FilterCtx)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char const *") ByteBuffer FileName, @NativeType("char") byte GlobalPrefix, @NativeType("LLVMOrcSymbolPredicate") @Nullable LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
         if (CHECKS) {
@@ -1269,19 +877,7 @@ public class LLVMOrc {
         return nLLVMOrcCreateDynamicLibrarySearchGeneratorForPath(memAddress(Result), memAddress(FileName), GlobalPrefix, memAddressSafe(Filter), FilterCtx);
     }
 
-    /**
-     * Get a {@code LLVMOrcCreateDynamicLibrarySearchGeneratorForPath} that will reflect library symbols into the {@code JITDylib}. On success the resulting
-     * generator is owned by the client. Ownership is typically transferred by adding the instance to a {@code JITDylib} using {@link #LLVMOrcJITDylibAddGenerator OrcJITDylibAddGenerator},
-     * 
-     * <p>The {@code GlobalPrefix} argument specifies the character that appears on the front of linker-mangled symbols for the target platform (e.g. '_' on
-     * MachO). If non-null, this character will be stripped from the start of all symbol strings before passing the remaining substring to {@code dlsym}.</p>
-     * 
-     * <p>The optional {@code Filter} and {@code Ctx} arguments can be used to supply a symbol name filter: Only symbols for which the filter returns true will
-     * be visible to JIT'd code. If the {@code Filter} argument is null then all library symbols will be visible to JIT'd code. Note that the symbol name
-     * passed to the {@code Filter} function is the full mangled symbol: The client is responsible for stripping the global prefix if present.</p>
-     * 
-     * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, char const * FileName, char GlobalPrefix, LLVMOrcSymbolPredicate Filter, void * FilterCtx)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcCreateDynamicLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("char const *") CharSequence FileName, @NativeType("char") byte GlobalPrefix, @NativeType("LLVMOrcSymbolPredicate") @Nullable LLVMOrcSymbolPredicateI Filter, @NativeType("void *") long FilterCtx) {
         if (CHECKS) {
@@ -1299,7 +895,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateStaticLibrarySearchGeneratorForPath ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcCreateStaticLibrarySearchGeneratorForPath OrcCreateStaticLibrarySearchGeneratorForPath} */
+    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName, char const * TargetTriple)} */
     public static long nLLVMOrcCreateStaticLibrarySearchGeneratorForPath(long Result, long ObjLayer, long FileName, long TargetTriple) {
         long __functionAddress = Functions.OrcCreateStaticLibrarySearchGeneratorForPath;
         if (CHECKS) {
@@ -1309,16 +905,7 @@ public class LLVMOrc {
         return invokePPPPP(Result, ObjLayer, FileName, TargetTriple, __functionAddress);
     }
 
-    /**
-     * Get a {@code LLVMOrcCreateStaticLibrarySearchGeneratorForPath} that will reflect static library symbols into the {@code JITDylib}. On success the
-     * resulting generator is owned by the client. Ownership is typically transferred by adding the instance to a {@code JITDylib} using
-     * {@link #LLVMOrcJITDylibAddGenerator OrcJITDylibAddGenerator},
-     * 
-     * <p>Call with the optional {@code TargetTriple} argument will succeed if the file at the given path is a static library or a MachO universal binary
-     * containing a static library that is compatible with the given triple. Otherwise it will return an error.</p>
-     * 
-     * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName, char const * TargetTriple)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") ByteBuffer FileName, @NativeType("char const *") @Nullable ByteBuffer TargetTriple) {
         if (CHECKS) {
@@ -1329,16 +916,7 @@ public class LLVMOrc {
         return nLLVMOrcCreateStaticLibrarySearchGeneratorForPath(memAddress(Result), ObjLayer, memAddress(FileName), memAddressSafe(TargetTriple));
     }
 
-    /**
-     * Get a {@code LLVMOrcCreateStaticLibrarySearchGeneratorForPath} that will reflect static library symbols into the {@code JITDylib}. On success the
-     * resulting generator is owned by the client. Ownership is typically transferred by adding the instance to a {@code JITDylib} using
-     * {@link #LLVMOrcJITDylibAddGenerator OrcJITDylibAddGenerator},
-     * 
-     * <p>Call with the optional {@code TargetTriple} argument will succeed if the file at the given path is a static library or a MachO universal binary
-     * containing a static library that is compatible with the given triple. Otherwise it will return an error.</p>
-     * 
-     * <p>THIS API IS EXPERIMENTAL AND LIKELY TO CHANGE IN THE NEAR FUTURE!</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcCreateStaticLibrarySearchGeneratorForPath(LLVMOrcDefinitionGeneratorRef * Result, LLVMOrcObjectLayerRef ObjLayer, char const * FileName, char const * TargetTriple)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcCreateStaticLibrarySearchGeneratorForPath(@NativeType("LLVMOrcDefinitionGeneratorRef *") PointerBuffer Result, @NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("char const *") CharSequence FileName, @NativeType("char const *") @Nullable CharSequence TargetTriple) {
         if (CHECKS) {
@@ -1358,12 +936,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateNewThreadSafeContext ] ---
 
-    /**
-     * Create a {@code ThreadSafeContext} containing a new {@code LLVMContext}.
-     * 
-     * <p>Ownership of the underlying {@code ThreadSafeContext} data is shared: Clients can and should dispose of their {@code ThreadSafeContext} as soon as they
-     * no longer need to refer to it directly. Other references (e.g. from {@code ThreadSafeModules}) will keep the data alive as long as it is needed.</p>
-     */
+    /** {@code LLVMOrcThreadSafeContextRef LLVMOrcCreateNewThreadSafeContext(void)} */
     @NativeType("LLVMOrcThreadSafeContextRef")
     public static long LLVMOrcCreateNewThreadSafeContext() {
         long __functionAddress = Functions.OrcCreateNewThreadSafeContext;
@@ -1372,7 +945,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcThreadSafeContextGetContext ] ---
 
-    /** Get a reference to the wrapped {@code LLVMContext}. */
+    /** {@code LLVMContextRef LLVMOrcThreadSafeContextGetContext(LLVMOrcThreadSafeContextRef TSCtx)} */
     @NativeType("LLVMContextRef")
     public static long LLVMOrcThreadSafeContextGetContext(@NativeType("LLVMOrcThreadSafeContextRef") long TSCtx) {
         long __functionAddress = Functions.OrcThreadSafeContextGetContext;
@@ -1384,7 +957,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeThreadSafeContext ] ---
 
-    /** Dispose of a {@code ThreadSafeContext}. */
+    /** {@code void LLVMOrcDisposeThreadSafeContext(LLVMOrcThreadSafeContextRef TSCtx)} */
     public static void LLVMOrcDisposeThreadSafeContext(@NativeType("LLVMOrcThreadSafeContextRef") long TSCtx) {
         long __functionAddress = Functions.OrcDisposeThreadSafeContext;
         if (CHECKS) {
@@ -1395,13 +968,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateNewThreadSafeModule ] ---
 
-    /**
-     * Create a {@code ThreadSafeModule} wrapper around the given LLVM module. This takes ownership of the M argument which should not be disposed of or
-     * referenced after this function returns.
-     * 
-     * <p>Ownership of the {@code ThreadSafeModule} is unique: If it is transferred to the JIT (e.g. by {@link LLVMLLJIT#LLVMOrcLLJITAddLLVMIRModule OrcLLJITAddLLVMIRModule}) then the client is no longer
-     * responsible for it. If it is not transferred to the JIT then the client should call {@link #LLVMOrcDisposeThreadSafeModule OrcDisposeThreadSafeModule} to dispose of it.</p>
-     */
+    /** {@code LLVMOrcThreadSafeModuleRef LLVMOrcCreateNewThreadSafeModule(LLVMModuleRef M, LLVMOrcThreadSafeContextRef TSCtx)} */
     @NativeType("LLVMOrcThreadSafeModuleRef")
     public static long LLVMOrcCreateNewThreadSafeModule(@NativeType("LLVMModuleRef") long M, @NativeType("LLVMOrcThreadSafeContextRef") long TSCtx) {
         long __functionAddress = Functions.OrcCreateNewThreadSafeModule;
@@ -1414,10 +981,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeThreadSafeModule ] ---
 
-    /**
-     * Dispose of a {@code ThreadSafeModule}. This should only be called if ownership has not been passed to LLJIT (e.g. because some error prevented the
-     * client from adding this to the JIT).
-     */
+    /** {@code void LLVMOrcDisposeThreadSafeModule(LLVMOrcThreadSafeModuleRef TSM)} */
     public static void LLVMOrcDisposeThreadSafeModule(@NativeType("LLVMOrcThreadSafeModuleRef") long TSM) {
         long __functionAddress = Functions.OrcDisposeThreadSafeModule;
         if (CHECKS) {
@@ -1428,7 +992,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcThreadSafeModuleWithModuleDo ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcThreadSafeModuleWithModuleDo OrcThreadSafeModuleWithModuleDo} */
+    /** {@code LLVMErrorRef LLVMOrcThreadSafeModuleWithModuleDo(LLVMOrcThreadSafeModuleRef TSM, LLVMOrcGenericIRModuleOperationFunction F, void * Ctx)} */
     public static long nLLVMOrcThreadSafeModuleWithModuleDo(long TSM, long F, long Ctx) {
         long __functionAddress = Functions.OrcThreadSafeModuleWithModuleDo;
         if (CHECKS) {
@@ -1439,11 +1003,7 @@ public class LLVMOrc {
         return invokePPPP(TSM, F, Ctx, __functionAddress);
     }
 
-    /**
-     * Apply the given function to the module contained in this {@code ThreadSafeModule}.
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcThreadSafeModuleWithModuleDo(LLVMOrcThreadSafeModuleRef TSM, LLVMOrcGenericIRModuleOperationFunction F, void * Ctx)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcThreadSafeModuleWithModuleDo(@NativeType("LLVMOrcThreadSafeModuleRef") long TSM, @NativeType("LLVMOrcGenericIRModuleOperationFunction") LLVMOrcGenericIRModuleOperationFunctionI F, @NativeType("void *") long Ctx) {
         return nLLVMOrcThreadSafeModuleWithModuleDo(TSM, F.address(), Ctx);
@@ -1451,18 +1011,13 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITTargetMachineBuilderDetectHost ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcJITTargetMachineBuilderDetectHost OrcJITTargetMachineBuilderDetectHost} */
+    /** {@code LLVMErrorRef LLVMOrcJITTargetMachineBuilderDetectHost(LLVMOrcJITTargetMachineBuilderRef * Result)} */
     public static long nLLVMOrcJITTargetMachineBuilderDetectHost(long Result) {
         long __functionAddress = Functions.OrcJITTargetMachineBuilderDetectHost;
         return invokePP(Result, __functionAddress);
     }
 
-    /**
-     * Create a {@code JITTargetMachineBuilder} by detecting the host.
-     * 
-     * <p>On success the client owns the resulting {@code JITTargetMachineBuilder}. It must be passed to a consuming operation (e.g.
-     * {@link LLVMLLJIT#LLVMOrcLLJITBuilderSetJITTargetMachineBuilder OrcLLJITBuilderSetJITTargetMachineBuilder}) or disposed of by calling {@link #LLVMOrcDisposeJITTargetMachineBuilder OrcDisposeJITTargetMachineBuilder}.</p>
-     */
+    /** {@code LLVMErrorRef LLVMOrcJITTargetMachineBuilderDetectHost(LLVMOrcJITTargetMachineBuilderRef * Result)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcJITTargetMachineBuilderDetectHost(@NativeType("LLVMOrcJITTargetMachineBuilderRef *") PointerBuffer Result) {
         if (CHECKS) {
@@ -1473,13 +1028,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITTargetMachineBuilderCreateFromTargetMachine ] ---
 
-    /**
-     * Create a {@code JITTargetMachineBuilder} from the given {@code TargetMachine} template.
-     * 
-     * <p>This operation takes ownership of the given {@code TargetMachine} and destroys it before returing. The resulting {@code JITTargetMachineBuilder} is
-     * owned by the client and must be passed to a consuming operation (e.g. {@link LLVMLLJIT#LLVMOrcLLJITBuilderSetJITTargetMachineBuilder OrcLLJITBuilderSetJITTargetMachineBuilder}) or disposed of by calling
-     * {@link #LLVMOrcDisposeJITTargetMachineBuilder OrcDisposeJITTargetMachineBuilder}.</p>
-     */
+    /** {@code LLVMOrcJITTargetMachineBuilderRef LLVMOrcJITTargetMachineBuilderCreateFromTargetMachine(LLVMTargetMachineRef TM)} */
     @NativeType("LLVMOrcJITTargetMachineBuilderRef")
     public static long LLVMOrcJITTargetMachineBuilderCreateFromTargetMachine(@NativeType("LLVMTargetMachineRef") long TM) {
         long __functionAddress = Functions.OrcJITTargetMachineBuilderCreateFromTargetMachine;
@@ -1491,7 +1040,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeJITTargetMachineBuilder ] ---
 
-    /** Dispose of a {@code JITTargetMachineBuilder}. */
+    /** {@code void LLVMOrcDisposeJITTargetMachineBuilder(LLVMOrcJITTargetMachineBuilderRef JTMB)} */
     public static void LLVMOrcDisposeJITTargetMachineBuilder(@NativeType("LLVMOrcJITTargetMachineBuilderRef") long JTMB) {
         long __functionAddress = Functions.OrcDisposeJITTargetMachineBuilder;
         if (CHECKS) {
@@ -1502,7 +1051,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITTargetMachineBuilderGetTargetTriple ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcJITTargetMachineBuilderGetTargetTriple OrcJITTargetMachineBuilderGetTargetTriple} */
+    /** {@code char * LLVMOrcJITTargetMachineBuilderGetTargetTriple(LLVMOrcJITTargetMachineBuilderRef JTMB)} */
     public static long nLLVMOrcJITTargetMachineBuilderGetTargetTriple(long JTMB) {
         long __functionAddress = Functions.OrcJITTargetMachineBuilderGetTargetTriple;
         if (CHECKS) {
@@ -1512,13 +1061,7 @@ public class LLVMOrc {
         return invokePP(JTMB, __functionAddress);
     }
 
-    /**
-     * Returns the target triple for the given {@code JITTargetMachineBuilder} as a string.
-     * 
-     * <p>The caller owns the resulting string as must dispose of it by calling {@code LLVMDisposeMessage}.</p>
-     *
-     * @since 13
-     */
+    /** {@code char * LLVMOrcJITTargetMachineBuilderGetTargetTriple(LLVMOrcJITTargetMachineBuilderRef JTMB)} */
     @NativeType("char *")
     public static @Nullable String LLVMOrcJITTargetMachineBuilderGetTargetTriple(@NativeType("LLVMOrcJITTargetMachineBuilderRef") long JTMB) {
         long __result = nLLVMOrcJITTargetMachineBuilderGetTargetTriple(JTMB);
@@ -1527,7 +1070,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcJITTargetMachineBuilderSetTargetTriple ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcJITTargetMachineBuilderSetTargetTriple OrcJITTargetMachineBuilderSetTargetTriple} */
+    /** {@code void LLVMOrcJITTargetMachineBuilderSetTargetTriple(LLVMOrcJITTargetMachineBuilderRef JTMB, char const * TargetTriple)} */
     public static void nLLVMOrcJITTargetMachineBuilderSetTargetTriple(long JTMB, long TargetTriple) {
         long __functionAddress = Functions.OrcJITTargetMachineBuilderSetTargetTriple;
         if (CHECKS) {
@@ -1537,11 +1080,7 @@ public class LLVMOrc {
         invokePPV(JTMB, TargetTriple, __functionAddress);
     }
 
-    /**
-     * Sets the target triple for the given {@code JITTargetMachineBuilder} to the given string.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcJITTargetMachineBuilderSetTargetTriple(LLVMOrcJITTargetMachineBuilderRef JTMB, char const * TargetTriple)} */
     public static void LLVMOrcJITTargetMachineBuilderSetTargetTriple(@NativeType("LLVMOrcJITTargetMachineBuilderRef") long JTMB, @NativeType("char const *") ByteBuffer TargetTriple) {
         if (CHECKS) {
             checkNT1(TargetTriple);
@@ -1549,11 +1088,7 @@ public class LLVMOrc {
         nLLVMOrcJITTargetMachineBuilderSetTargetTriple(JTMB, memAddress(TargetTriple));
     }
 
-    /**
-     * Sets the target triple for the given {@code JITTargetMachineBuilder} to the given string.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcJITTargetMachineBuilderSetTargetTriple(LLVMOrcJITTargetMachineBuilderRef JTMB, char const * TargetTriple)} */
     public static void LLVMOrcJITTargetMachineBuilderSetTargetTriple(@NativeType("LLVMOrcJITTargetMachineBuilderRef") long JTMB, @NativeType("char const *") CharSequence TargetTriple) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -1567,16 +1102,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcObjectLayerAddObjectFile ] ---
 
-    /**
-     * Add an object to an {@code ObjectLayer} to the given {@code JITDylib}.
-     * 
-     * <p>Adds a buffer representing an object file to the given {@code JITDylib} using the given ObjectLayer instance. This operation transfers ownership of the
-     * buffer to the {@code ObjectLayer} instance. The buffer should not be disposed of or referenced once this function returns.</p>
-     * 
-     * <p>Resources associated with the given object will be tracked by the given {@code JITDylib}'s default {@code ResourceTracker}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcObjectLayerAddObjectFile(LLVMOrcObjectLayerRef ObjLayer, LLVMOrcJITDylibRef JD, LLVMMemoryBufferRef ObjBuffer)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcObjectLayerAddObjectFile(@NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("LLVMOrcJITDylibRef") long JD, @NativeType("LLVMMemoryBufferRef") long ObjBuffer) {
         long __functionAddress = Functions.OrcObjectLayerAddObjectFile;
@@ -1591,17 +1117,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcObjectLayerAddObjectFileWithRT ] ---
 
-    /**
-     * Add an object to an {@code ObjectLayer} using the given {@code ResourceTracker}.
-     * 
-     * <p>Adds a buffer representing an object file to the given {@code ResourceTracker}'s {@code JITDylib} using the given {@code ObjectLayer} instance. This
-     * operation transfers ownership of the buffer to the {@code ObjectLayer} instance. The buffer should not be disposed of or referenced once this function
-     * returns.</p>
-     * 
-     * <p>Resources associated with the given object will be tracked by {@code ResourceTracker} {@code RT}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcObjectLayerAddObjectFileWithRT(LLVMOrcObjectLayerRef ObjLayer, LLVMOrcResourceTrackerRef RT, LLVMMemoryBufferRef ObjBuffer)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcObjectLayerAddObjectFileWithRT(@NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("LLVMOrcResourceTrackerRef") long RT, @NativeType("LLVMMemoryBufferRef") long ObjBuffer) {
         long __functionAddress = Functions.OrcObjectLayerAddObjectFileWithRT;
@@ -1616,13 +1132,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcObjectLayerEmit ] ---
 
-    /**
-     * Emit an object buffer to an {@code ObjectLayer}.
-     * 
-     * <p>Ownership of the responsibility object and object buffer pass to this function. The client is not responsible for cleanup.</p>
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcObjectLayerEmit(LLVMOrcObjectLayerRef ObjLayer, LLVMOrcMaterializationResponsibilityRef R, LLVMMemoryBufferRef ObjBuffer)} */
     public static void LLVMOrcObjectLayerEmit(@NativeType("LLVMOrcObjectLayerRef") long ObjLayer, @NativeType("LLVMOrcMaterializationResponsibilityRef") long R, @NativeType("LLVMMemoryBufferRef") long ObjBuffer) {
         long __functionAddress = Functions.OrcObjectLayerEmit;
         if (CHECKS) {
@@ -1636,7 +1146,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeObjectLayer ] ---
 
-    /** Dispose of an {@code ObjectLayer}. */
+    /** {@code void LLVMOrcDisposeObjectLayer(LLVMOrcObjectLayerRef ObjLayer)} */
     public static void LLVMOrcDisposeObjectLayer(@NativeType("LLVMOrcObjectLayerRef") long ObjLayer) {
         long __functionAddress = Functions.OrcDisposeObjectLayer;
         if (CHECKS) {
@@ -1647,7 +1157,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcIRTransformLayerEmit ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMOrcIRTransformLayerEmit(LLVMOrcIRTransformLayerRef IRTransformLayer, LLVMOrcMaterializationResponsibilityRef MR, LLVMOrcThreadSafeModuleRef TSM)} */
     public static void LLVMOrcIRTransformLayerEmit(@NativeType("LLVMOrcIRTransformLayerRef") long IRTransformLayer, @NativeType("LLVMOrcMaterializationResponsibilityRef") long MR, @NativeType("LLVMOrcThreadSafeModuleRef") long TSM) {
         long __functionAddress = Functions.OrcIRTransformLayerEmit;
         if (CHECKS) {
@@ -1661,7 +1171,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcIRTransformLayerSetTransform ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcIRTransformLayerSetTransform OrcIRTransformLayerSetTransform} */
+    /** {@code void LLVMOrcIRTransformLayerSetTransform(LLVMOrcIRTransformLayerRef IRTransformLayer, LLVMOrcIRTransformLayerTransformFunction TransformFunction, void * Ctx)} */
     public static void nLLVMOrcIRTransformLayerSetTransform(long IRTransformLayer, long TransformFunction, long Ctx) {
         long __functionAddress = Functions.OrcIRTransformLayerSetTransform;
         if (CHECKS) {
@@ -1672,18 +1182,14 @@ public class LLVMOrc {
         invokePPPV(IRTransformLayer, TransformFunction, Ctx, __functionAddress);
     }
 
-    /**
-     * Set the transform function of the provided transform layer, passing through a pointer to user provided context.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcIRTransformLayerSetTransform(LLVMOrcIRTransformLayerRef IRTransformLayer, LLVMOrcIRTransformLayerTransformFunction TransformFunction, void * Ctx)} */
     public static void LLVMOrcIRTransformLayerSetTransform(@NativeType("LLVMOrcIRTransformLayerRef") long IRTransformLayer, @NativeType("LLVMOrcIRTransformLayerTransformFunction") LLVMOrcIRTransformLayerTransformFunctionI TransformFunction, @NativeType("void *") long Ctx) {
         nLLVMOrcIRTransformLayerSetTransform(IRTransformLayer, TransformFunction.address(), Ctx);
     }
 
     // --- [ LLVMOrcObjectTransformLayerSetTransform ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcObjectTransformLayerSetTransform OrcObjectTransformLayerSetTransform} */
+    /** {@code void LLVMOrcObjectTransformLayerSetTransform(LLVMOrcObjectTransformLayerRef ObjTransformLayer, LLVMOrcObjectTransformLayerTransformFunction TransformFunction, void * Ctx)} */
     public static void nLLVMOrcObjectTransformLayerSetTransform(long ObjTransformLayer, long TransformFunction, long Ctx) {
         long __functionAddress = Functions.OrcObjectTransformLayerSetTransform;
         if (CHECKS) {
@@ -1694,18 +1200,14 @@ public class LLVMOrc {
         invokePPPV(ObjTransformLayer, TransformFunction, Ctx, __functionAddress);
     }
 
-    /**
-     * Set the transform function on an {@code LLVMOrcObjectTransformLayer}.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcObjectTransformLayerSetTransform(LLVMOrcObjectTransformLayerRef ObjTransformLayer, LLVMOrcObjectTransformLayerTransformFunction TransformFunction, void * Ctx)} */
     public static void LLVMOrcObjectTransformLayerSetTransform(@NativeType("LLVMOrcObjectTransformLayerRef") long ObjTransformLayer, @NativeType("LLVMOrcObjectTransformLayerTransformFunction") LLVMOrcObjectTransformLayerTransformFunctionI TransformFunction, @NativeType("void *") long Ctx) {
         nLLVMOrcObjectTransformLayerSetTransform(ObjTransformLayer, TransformFunction.address(), Ctx);
     }
 
     // --- [ LLVMOrcCreateLocalIndirectStubsManager ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcCreateLocalIndirectStubsManager OrcCreateLocalIndirectStubsManager} */
+    /** {@code LLVMOrcIndirectStubsManagerRef LLVMOrcCreateLocalIndirectStubsManager(char const * TargetTriple)} */
     public static long nLLVMOrcCreateLocalIndirectStubsManager(long TargetTriple) {
         long __functionAddress = Functions.OrcCreateLocalIndirectStubsManager;
         if (CHECKS) {
@@ -1714,13 +1216,7 @@ public class LLVMOrc {
         return invokePP(TargetTriple, __functionAddress);
     }
 
-    /**
-     * Create a {@code LocalIndirectStubsManager} from the given target triple.
-     * 
-     * <p>The resulting {@code IndirectStubsManager} is owned by the client and must be disposed of by calling {@link #LLVMOrcDisposeIndirectStubsManager OrcDisposeIndirectStubsManager}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcIndirectStubsManagerRef LLVMOrcCreateLocalIndirectStubsManager(char const * TargetTriple)} */
     @NativeType("LLVMOrcIndirectStubsManagerRef")
     public static long LLVMOrcCreateLocalIndirectStubsManager(@NativeType("char const *") ByteBuffer TargetTriple) {
         if (CHECKS) {
@@ -1729,13 +1225,7 @@ public class LLVMOrc {
         return nLLVMOrcCreateLocalIndirectStubsManager(memAddress(TargetTriple));
     }
 
-    /**
-     * Create a {@code LocalIndirectStubsManager} from the given target triple.
-     * 
-     * <p>The resulting {@code IndirectStubsManager} is owned by the client and must be disposed of by calling {@link #LLVMOrcDisposeIndirectStubsManager OrcDisposeIndirectStubsManager}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcIndirectStubsManagerRef LLVMOrcCreateLocalIndirectStubsManager(char const * TargetTriple)} */
     @NativeType("LLVMOrcIndirectStubsManagerRef")
     public static long LLVMOrcCreateLocalIndirectStubsManager(@NativeType("char const *") CharSequence TargetTriple) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1750,11 +1240,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeIndirectStubsManager ] ---
 
-    /**
-     * Dispose of an {@code IndirectStubsManager}.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcDisposeIndirectStubsManager(LLVMOrcIndirectStubsManagerRef ISM)} */
     public static void LLVMOrcDisposeIndirectStubsManager(@NativeType("LLVMOrcIndirectStubsManagerRef") long ISM) {
         long __functionAddress = Functions.OrcDisposeIndirectStubsManager;
         if (CHECKS) {
@@ -1766,7 +1252,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateLocalLazyCallThroughManager ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcCreateLocalLazyCallThroughManager OrcCreateLocalLazyCallThroughManager} */
+    /** {@code LLVMErrorRef LLVMOrcCreateLocalLazyCallThroughManager(char const * TargetTriple, LLVMOrcExecutionSessionRef ES, LLVMOrcJITTargetAddress ErrorHandlerAddr, LLVMOrcLazyCallThroughManagerRef * LCTM)} */
     public static long nLLVMOrcCreateLocalLazyCallThroughManager(long TargetTriple, long ES, long ErrorHandlerAddr, long LCTM) {
         long __functionAddress = Functions.OrcCreateLocalLazyCallThroughManager;
         if (CHECKS) {
@@ -1776,7 +1262,7 @@ public class LLVMOrc {
         return invokePPJPP(TargetTriple, ES, ErrorHandlerAddr, LCTM, __functionAddress);
     }
 
-    /** @since 13 */
+    /** {@code LLVMErrorRef LLVMOrcCreateLocalLazyCallThroughManager(char const * TargetTriple, LLVMOrcExecutionSessionRef ES, LLVMOrcJITTargetAddress ErrorHandlerAddr, LLVMOrcLazyCallThroughManagerRef * LCTM)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcCreateLocalLazyCallThroughManager(@NativeType("char const *") ByteBuffer TargetTriple, @NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMOrcJITTargetAddress") long ErrorHandlerAddr, @NativeType("LLVMOrcLazyCallThroughManagerRef *") PointerBuffer LCTM) {
         if (CHECKS) {
@@ -1786,7 +1272,7 @@ public class LLVMOrc {
         return nLLVMOrcCreateLocalLazyCallThroughManager(memAddress(TargetTriple), ES, ErrorHandlerAddr, memAddress(LCTM));
     }
 
-    /** @since 13 */
+    /** {@code LLVMErrorRef LLVMOrcCreateLocalLazyCallThroughManager(char const * TargetTriple, LLVMOrcExecutionSessionRef ES, LLVMOrcJITTargetAddress ErrorHandlerAddr, LLVMOrcLazyCallThroughManagerRef * LCTM)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcCreateLocalLazyCallThroughManager(@NativeType("char const *") CharSequence TargetTriple, @NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("LLVMOrcJITTargetAddress") long ErrorHandlerAddr, @NativeType("LLVMOrcLazyCallThroughManagerRef *") PointerBuffer LCTM) {
         if (CHECKS) {
@@ -1804,11 +1290,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeLazyCallThroughManager ] ---
 
-    /**
-     * Dispose of an {@code LazyCallThroughManager}.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcDisposeLazyCallThroughManager(LLVMOrcLazyCallThroughManagerRef LCTM)} */
     public static void LLVMOrcDisposeLazyCallThroughManager(@NativeType("LLVMOrcLazyCallThroughManagerRef") long LCTM) {
         long __functionAddress = Functions.OrcDisposeLazyCallThroughManager;
         if (CHECKS) {
@@ -1820,7 +1302,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcCreateDumpObjects ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcCreateDumpObjects OrcCreateDumpObjects} */
+    /** {@code LLVMOrcDumpObjectsRef LLVMOrcCreateDumpObjects(char const * DumpDir, char const * IdentifierOverride)} */
     public static long nLLVMOrcCreateDumpObjects(long DumpDir, long IdentifierOverride) {
         long __functionAddress = Functions.OrcCreateDumpObjects;
         if (CHECKS) {
@@ -1829,19 +1311,7 @@ public class LLVMOrc {
         return invokePPP(DumpDir, IdentifierOverride, __functionAddress);
     }
 
-    /**
-     * Create a {@code DumpObjects} instance.
-     * 
-     * <p>{@code DumpDir} specifies the path to write dumped objects to. {@code DumpDir} may be empty in which case files will be dumped to the working
-     * directory.</p>
-     * 
-     * <p>{@code IdentifierOverride} specifies a file name stem to use when dumping objects. If empty then each {@code MemoryBuffer}'s identifier will be used
-     * (with a .o suffix added if not already present). If an identifier override is supplied it will be used instead, along with an incrementing counter
-     * (since all buffers will use the same identifier, the resulting files will be named {@code <ident>.o}, {@code <ident>.2.o}, {@code <ident>.3.o}, and so
-     * on). IdentifierOverride should not contain an extension, as a .o suffix will be added by {@code DumpObjects}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcDumpObjectsRef LLVMOrcCreateDumpObjects(char const * DumpDir, char const * IdentifierOverride)} */
     @NativeType("LLVMOrcDumpObjectsRef")
     public static long LLVMOrcCreateDumpObjects(@NativeType("char const *") ByteBuffer DumpDir, @NativeType("char const *") ByteBuffer IdentifierOverride) {
         if (CHECKS) {
@@ -1851,19 +1321,7 @@ public class LLVMOrc {
         return nLLVMOrcCreateDumpObjects(memAddress(DumpDir), memAddress(IdentifierOverride));
     }
 
-    /**
-     * Create a {@code DumpObjects} instance.
-     * 
-     * <p>{@code DumpDir} specifies the path to write dumped objects to. {@code DumpDir} may be empty in which case files will be dumped to the working
-     * directory.</p>
-     * 
-     * <p>{@code IdentifierOverride} specifies a file name stem to use when dumping objects. If empty then each {@code MemoryBuffer}'s identifier will be used
-     * (with a .o suffix added if not already present). If an identifier override is supplied it will be used instead, along with an incrementing counter
-     * (since all buffers will use the same identifier, the resulting files will be named {@code <ident>.o}, {@code <ident>.2.o}, {@code <ident>.3.o}, and so
-     * on). IdentifierOverride should not contain an extension, as a .o suffix will be added by {@code DumpObjects}.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMOrcDumpObjectsRef LLVMOrcCreateDumpObjects(char const * DumpDir, char const * IdentifierOverride)} */
     @NativeType("LLVMOrcDumpObjectsRef")
     public static long LLVMOrcCreateDumpObjects(@NativeType("char const *") CharSequence DumpDir, @NativeType("char const *") CharSequence IdentifierOverride) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1880,11 +1338,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDisposeDumpObjects ] ---
 
-    /**
-     * Dispose of a {@code DumpObjects} instance.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMOrcDisposeDumpObjects(LLVMOrcDumpObjectsRef DumpObjects)} */
     public static void LLVMOrcDisposeDumpObjects(@NativeType("LLVMOrcDumpObjectsRef") long DumpObjects) {
         long __functionAddress = Functions.OrcDisposeDumpObjects;
         if (CHECKS) {
@@ -1896,7 +1350,7 @@ public class LLVMOrc {
 
     // --- [ LLVMOrcDumpObjects_CallOperator ] ---
 
-    /** Unsafe version of: {@link #LLVMOrcDumpObjects_CallOperator OrcDumpObjects_CallOperator} */
+    /** {@code LLVMErrorRef LLVMOrcDumpObjects_CallOperator(LLVMOrcDumpObjectsRef DumpObjects, LLVMMemoryBufferRef * ObjBuffer)} */
     public static long nLLVMOrcDumpObjects_CallOperator(long DumpObjects, long ObjBuffer) {
         long __functionAddress = Functions.OrcDumpObjects_CallOperator;
         if (CHECKS) {
@@ -1906,11 +1360,7 @@ public class LLVMOrc {
         return invokePPP(DumpObjects, ObjBuffer, __functionAddress);
     }
 
-    /**
-     * Dump the contents of the given {@code MemoryBuffer}.
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMOrcDumpObjects_CallOperator(LLVMOrcDumpObjectsRef DumpObjects, LLVMMemoryBufferRef * ObjBuffer)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcDumpObjects_CallOperator(@NativeType("LLVMOrcDumpObjectsRef") long DumpObjects, @NativeType("LLVMMemoryBufferRef *") PointerBuffer ObjBuffer) {
         if (CHECKS) {

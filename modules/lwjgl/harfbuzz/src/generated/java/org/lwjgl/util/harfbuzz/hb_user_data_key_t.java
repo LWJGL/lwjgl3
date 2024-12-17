@@ -16,14 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Data structure for holding user-data keys.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_user_data_key_t {
  *     char unused;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_user_data_key_t extends Struct<hb_user_data_key_t> implements NativeResource {
 

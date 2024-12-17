@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The type of an element in the abstract syntax tree.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXType {
  *     enum CXTypeKind kind;
  *     void * data[2];
- * }</code></pre>
+ * }}</pre>
  */
 public class CXType extends Struct<CXType> implements NativeResource {
 

@@ -15,31 +15,14 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_storage_compression.txt">EXT_texture_storage_compression</a> extension.
- * 
- * <p>Applications may wish to take advantage of framebuffer compression. Some platforms may support framebuffer compression at fixed bitrates. Such
- * compression algorithms generally produce results that are visually lossless, but the results are typically not bit-exact when compared to a
- * non-compressed result.</p>
- * 
- * <p>This extension enables applications to opt-in to compression for immutable textures.</p>
- * 
- * <p>Requires {@link GLES30 GLES 3.0}.</p>
- */
 public class EXTTextureStorageCompression {
 
     static { GLES.initialize(); }
 
-    /**
-     * New attributes accepted by the {@code attrib_list} argument of {@link #glTexStorageAttribs2DEXT TexStorageAttribs2DEXT} and {@link #glTexStorageAttribs3DEXT TexStorageAttribs3DEXT}, and as the {@code pname}
-     * argument to {@code GetTexParameter*}.
-     */
     public static final int GL_SURFACE_COMPRESSION_EXT = 0x96C0;
 
-    /** New attributes accepted by the {@code pname} argument of {@link GLES30#glGetInternalformativ GetInternalformativ}. */
     public static final int GL_NUM_SURFACE_COMPRESSION_FIXED_RATES_EXT = 0x8F6E;
 
-    /** Accepted as attribute values for {@link #GL_SURFACE_COMPRESSION_EXT SURFACE_COMPRESSION_EXT} by {@link #glTexStorageAttribs2DEXT TexStorageAttribs2DEXT} and {@link #glTexStorageAttribs3DEXT TexStorageAttribs3DEXT}. */
     public static final int
         GL_SURFACE_COMPRESSION_FIXED_RATE_NONE_EXT    = 0x96C1,
         GL_SURFACE_COMPRESSION_FIXED_RATE_DEFAULT_EXT = 0x96C2,
@@ -62,10 +45,10 @@ public class EXTTextureStorageCompression {
 
     // --- [ glTexStorageAttribs2DEXT ] ---
 
-    /** Unsafe version of: {@link #glTexStorageAttribs2DEXT TexStorageAttribs2DEXT} */
+    /** {@code void glTexStorageAttribs2DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLint const * attrib_list)} */
     public static native void nglTexStorageAttribs2DEXT(int target, int levels, int internalformat, int width, int height, long attrib_list);
 
-    /** Behaves identically to {@link GLES30#glTexStorage2D TexStorage2D}, except that additional flags can specified in {@code attrib_list}. */
+    /** {@code void glTexStorageAttribs2DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLint const * attrib_list)} */
     public static void glTexStorageAttribs2DEXT(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list);
@@ -75,10 +58,10 @@ public class EXTTextureStorageCompression {
 
     // --- [ glTexStorageAttribs3DEXT ] ---
 
-    /** Unsafe version of: {@link #glTexStorageAttribs3DEXT TexStorageAttribs3DEXT} */
+    /** {@code void glTexStorageAttribs3DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint const * attrib_list)} */
     public static native void nglTexStorageAttribs3DEXT(int target, int levels, int internalformat, int width, int height, int depth, long attrib_list);
 
-    /** Behaves identically to {@link GLES30#glTexStorage3D TexStorage3D}, except that additional flags can specified in {@code attrib_list}. */
+    /** {@code void glTexStorageAttribs3DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint const * attrib_list)} */
     public static void glTexStorageAttribs3DEXT(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
             checkNTSafe(attrib_list);
@@ -86,7 +69,7 @@ public class EXTTextureStorageCompression {
         nglTexStorageAttribs3DEXT(target, levels, internalformat, width, height, depth, memAddressSafe(attrib_list));
     }
 
-    /** Array version of: {@link #glTexStorageAttribs2DEXT TexStorageAttribs2DEXT} */
+    /** {@code void glTexStorageAttribs2DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLint const * attrib_list)} */
     public static void glTexStorageAttribs2DEXT(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = GLES.getICD().glTexStorageAttribs2DEXT;
         if (CHECKS) {
@@ -96,7 +79,7 @@ public class EXTTextureStorageCompression {
         callPV(target, levels, internalformat, width, height, attrib_list, __functionAddress);
     }
 
-    /** Array version of: {@link #glTexStorageAttribs3DEXT TexStorageAttribs3DEXT} */
+    /** {@code void glTexStorageAttribs3DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint const * attrib_list)} */
     public static void glTexStorageAttribs3DEXT(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth, @NativeType("GLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = GLES.getICD().glTexStorageAttribs3DEXT;
         if (CHECKS) {

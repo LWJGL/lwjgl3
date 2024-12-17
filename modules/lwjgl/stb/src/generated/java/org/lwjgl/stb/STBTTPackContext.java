@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * An opaque structure which holds all the context needed from {@link STBTruetype#stbtt_PackBegin PackBegin} to {@link STBTruetype#stbtt_PackEnd PackEnd}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stbtt_pack_context {
  *     void * user_allocator_context;
  *     {@link STBRPContext stbrp_context} * pack_info;
@@ -33,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int v_oversample;
  *     unsigned char * pixels;
  *     {@link STBRPNode stbrp_node} * nodes;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stbtt_pack_context")
 public class STBTTPackContext extends Struct<STBTTPackContext> implements NativeResource {
@@ -134,18 +130,10 @@ public class STBTTPackContext extends Struct<STBTTPackContext> implements Native
     /** @return the value of the {@code v_oversample} field. */
     @NativeType("unsigned int")
     public int v_oversample() { return nv_oversample(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field. */
     @NativeType("unsigned char *")
     public ByteBuffer pixels(int capacity) { return npixels(address(), capacity); }
-    /**
-     * @return a {@link STBRPNode.Buffer} view of the struct array pointed to by the {@code nodes} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link STBRPNode.Buffer} view of the struct array pointed to by the {@code nodes} field. */
     @NativeType("stbrp_node *")
     public STBRPNode.Buffer nodes(int capacity) { return nnodes(address(), capacity); }
 
@@ -368,18 +356,10 @@ public class STBTTPackContext extends Struct<STBTTPackContext> implements Native
         /** @return the value of the {@code v_oversample} field. */
         @NativeType("unsigned int")
         public int v_oversample() { return STBTTPackContext.nv_oversample(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pixels} field. */
         @NativeType("unsigned char *")
         public ByteBuffer pixels(int capacity) { return STBTTPackContext.npixels(address(), capacity); }
-        /**
-         * @return a {@link STBRPNode.Buffer} view of the struct array pointed to by the {@code nodes} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link STBRPNode.Buffer} view of the struct array pointed to by the {@code nodes} field. */
         @NativeType("stbrp_node *")
         public STBRPNode.Buffer nodes(int capacity) { return STBTTPackContext.nnodes(address(), capacity); }
 

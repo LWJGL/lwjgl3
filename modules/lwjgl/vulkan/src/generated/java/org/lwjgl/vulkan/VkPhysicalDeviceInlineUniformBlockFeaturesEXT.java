@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceInlineUniformBlockFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceInlineUniformBlockFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 inlineUniformBlock;
  *     VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceInlineUniformBlockFeaturesEXT extends VkPhysicalDeviceInlineUniformBlockFeatures {
 

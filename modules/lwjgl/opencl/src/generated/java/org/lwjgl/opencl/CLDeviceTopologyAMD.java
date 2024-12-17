@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The struct returned by {@link CL10#clGetDeviceInfo GetDeviceInfo} with {@code param_name} set to {@link AMDDeviceTopology#CL_DEVICE_TOPOLOGY_AMD DEVICE_TOPOLOGY_AMD}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union cl_device_topology_amd {
  *     struct {
  *         cl_uint type;
@@ -34,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         cl_char device;
  *         cl_char function;
  *     } pcie;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("union cl_device_topology_amd")
 public class CLDeviceTopologyAMD extends Struct<CLDeviceTopologyAMD> implements NativeResource {

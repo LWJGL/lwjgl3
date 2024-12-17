@@ -32,19 +32,6 @@ public class LLVMComdat {
 
     }
 
-    /**
-     * {@code LLVMComdatSelectionKind}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMAnyComdatSelectionKind AnyComdatSelectionKind} - The linker may choose any COMDAT.</li>
-     * <li>{@link #LLVMExactMatchComdatSelectionKind ExactMatchComdatSelectionKind} - The data referenced by the COMDAT must be the same.</li>
-     * <li>{@link #LLVMLargestComdatSelectionKind LargestComdatSelectionKind} - The linker will choose the largest COMDAT.</li>
-     * <li>{@link #LLVMNoDeduplicateComdatSelectionKind NoDeduplicateComdatSelectionKind} - No deduplication is performed.</li>
-     * <li>{@link #LLVMSameSizeComdatSelectionKind SameSizeComdatSelectionKind} - The data referenced by the COMDAT must be the same size.</li>
-     * </ul>
-     */
     public static final int
         LLVMAnyComdatSelectionKind           = 0,
         LLVMExactMatchComdatSelectionKind    = 1,
@@ -58,7 +45,7 @@ public class LLVMComdat {
 
     // --- [ LLVMGetOrInsertComdat ] ---
 
-    /** Unsafe version of: {@link #LLVMGetOrInsertComdat GetOrInsertComdat} */
+    /** {@code LLVMComdatRef LLVMGetOrInsertComdat(LLVMModuleRef M, char const * Name)} */
     public static long nLLVMGetOrInsertComdat(long M, long Name) {
         long __functionAddress = Functions.GetOrInsertComdat;
         if (CHECKS) {
@@ -67,7 +54,7 @@ public class LLVMComdat {
         return invokePPP(M, Name, __functionAddress);
     }
 
-    /** Return the {@code Comdat} in the module with the specified name. It is created if it didn't already exist. */
+    /** {@code LLVMComdatRef LLVMGetOrInsertComdat(LLVMModuleRef M, char const * Name)} */
     @NativeType("LLVMComdatRef")
     public static long LLVMGetOrInsertComdat(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -76,7 +63,7 @@ public class LLVMComdat {
         return nLLVMGetOrInsertComdat(M, memAddress(Name));
     }
 
-    /** Return the {@code Comdat} in the module with the specified name. It is created if it didn't already exist. */
+    /** {@code LLVMComdatRef LLVMGetOrInsertComdat(LLVMModuleRef M, char const * Name)} */
     @NativeType("LLVMComdatRef")
     public static long LLVMGetOrInsertComdat(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -91,7 +78,7 @@ public class LLVMComdat {
 
     // --- [ LLVMGetComdat ] ---
 
-    /** Get the Comdat assigned to the given global object. */
+    /** {@code LLVMComdatRef LLVMGetComdat(LLVMValueRef V)} */
     @NativeType("LLVMComdatRef")
     public static long LLVMGetComdat(@NativeType("LLVMValueRef") long V) {
         long __functionAddress = Functions.GetComdat;
@@ -103,7 +90,7 @@ public class LLVMComdat {
 
     // --- [ LLVMSetComdat ] ---
 
-    /** Assign the Comdat to the given global object. */
+    /** {@code void LLVMSetComdat(LLVMValueRef V, LLVMComdatRef C)} */
     public static void LLVMSetComdat(@NativeType("LLVMValueRef") long V, @NativeType("LLVMComdatRef") long C) {
         long __functionAddress = Functions.SetComdat;
         if (CHECKS) {
@@ -115,7 +102,7 @@ public class LLVMComdat {
 
     // --- [ LLVMGetComdatSelectionKind ] ---
 
-    /** Get the conflict resolution selection kind for the Comdat. */
+    /** {@code LLVMComdatSelectionKind LLVMGetComdatSelectionKind(LLVMComdatRef C)} */
     @NativeType("LLVMComdatSelectionKind")
     public static int LLVMGetComdatSelectionKind(@NativeType("LLVMComdatRef") long C) {
         long __functionAddress = Functions.GetComdatSelectionKind;
@@ -127,7 +114,7 @@ public class LLVMComdat {
 
     // --- [ LLVMSetComdatSelectionKind ] ---
 
-    /** Set the conflict resolution selection kind for the Comdat. */
+    /** {@code void LLVMSetComdatSelectionKind(LLVMComdatRef C, LLVMComdatSelectionKind Kind)} */
     public static void LLVMSetComdatSelectionKind(@NativeType("LLVMComdatRef") long C, @NativeType("LLVMComdatSelectionKind") int Kind) {
         long __functionAddress = Functions.SetComdatSelectionKind;
         if (CHECKS) {

@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_KERNEL_NODE_PARAMS {
  *     CUfunction func;
  *     unsigned int gridDimX;
@@ -30,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int sharedMemBytes;
  *     void ** kernelParams;
  *     void ** extra;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_KERNEL_NODE_PARAMS extends Struct<CUDA_KERNEL_NODE_PARAMS> implements NativeResource {
 
@@ -128,18 +126,10 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct<CUDA_KERNEL_NODE_PARAMS> imp
     /** @return the value of the {@code sharedMemBytes} field. */
     @NativeType("unsigned int")
     public int sharedMemBytes() { return nsharedMemBytes(address()); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field. */
     @NativeType("void **")
     public @Nullable PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code extra} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code extra} field. */
     @NativeType("void **")
     public @Nullable PointerBuffer extra(int capacity) { return nextra(address(), capacity); }
 
@@ -442,18 +432,10 @@ public class CUDA_KERNEL_NODE_PARAMS extends Struct<CUDA_KERNEL_NODE_PARAMS> imp
         /** @return the value of the {@code sharedMemBytes} field. */
         @NativeType("unsigned int")
         public int sharedMemBytes() { return CUDA_KERNEL_NODE_PARAMS.nsharedMemBytes(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field. */
         @NativeType("void **")
         public @Nullable PointerBuffer kernelParams(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nkernelParams(address(), capacity); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code extra} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code extra} field. */
         @NativeType("void **")
         public @Nullable PointerBuffer extra(int capacity) { return CUDA_KERNEL_NODE_PARAMS.nextra(address(), capacity); }
 

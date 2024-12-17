@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describe a scene frustum.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@code farZ} is less than or equal to zero.</p>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@code nearZ} is less than zero.</p>
- * 
- * <p>See {@link XrFovf} for validity requirements on {@code fov}.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFovf}, {@link XrPosef}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFrustumf {
- *     {@link XrPosef XrPosef} {@link #pose};
- *     {@link XrFovf XrFovf} {@link #fov};
- *     float {@link #nearZ};
- *     float {@link #farZ};
- * }</code></pre>
+ *     {@link XrPosef XrPosef} pose;
+ *     {@link XrFovf XrFovf} fov;
+ *     float nearZ;
+ *     float farZ;
+ * }}</pre>
  */
 public class XrFrustumf extends Struct<XrFrustumf> implements NativeResource {
 
@@ -94,26 +78,26 @@ public class XrFrustumf extends Struct<XrFrustumf> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@link XrPosef} defining the position and orientation of the tip of the frustum within the reference frame of the corresponding {@code XrSpace}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** an {@link XrFovf} for the four sides of the frustum where {@code angleLeft} and {@code angleRight} are along the X axis and {@code angleUp} and {@code angleDown} are along the Y axis of the frustum space. */
+    /** @return a {@link XrFovf} view of the {@code fov} field. */
     public XrFovf fov() { return nfov(address()); }
-    /** the positive distance of the near plane of the frustum bound along the -Z direction of the frustum space. */
+    /** @return the value of the {@code nearZ} field. */
     public float nearZ() { return nnearZ(address()); }
-    /** the positive distance of the far plane of the frustum bound along the -Z direction of the frustum space. */
+    /** @return the value of the {@code farZ} field. */
     public float farZ() { return nfarZ(address()); }
 
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrFrustumf pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrFrustumf pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-    /** Copies the specified {@link XrFovf} to the {@link #fov} field. */
+    /** Copies the specified {@link XrFovf} to the {@code fov} field. */
     public XrFrustumf fov(XrFovf value) { nfov(address(), value); return this; }
-    /** Passes the {@link #fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrFrustumf fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
-    /** Sets the specified value to the {@link #nearZ} field. */
+    /** Sets the specified value to the {@code nearZ} field. */
     public XrFrustumf nearZ(float value) { nnearZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #farZ} field. */
+    /** Sets the specified value to the {@code farZ} field. */
     public XrFrustumf farZ(float value) { nfarZ(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,26 +299,26 @@ public class XrFrustumf extends Struct<XrFrustumf> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrPosef} view of the {@link XrFrustumf#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrFrustumf.npose(address()); }
-        /** @return a {@link XrFovf} view of the {@link XrFrustumf#fov} field. */
+        /** @return a {@link XrFovf} view of the {@code fov} field. */
         public XrFovf fov() { return XrFrustumf.nfov(address()); }
-        /** @return the value of the {@link XrFrustumf#nearZ} field. */
+        /** @return the value of the {@code nearZ} field. */
         public float nearZ() { return XrFrustumf.nnearZ(address()); }
-        /** @return the value of the {@link XrFrustumf#farZ} field. */
+        /** @return the value of the {@code farZ} field. */
         public float farZ() { return XrFrustumf.nfarZ(address()); }
 
-        /** Copies the specified {@link XrPosef} to the {@link XrFrustumf#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrFrustumf.Buffer pose(XrPosef value) { XrFrustumf.npose(address(), value); return this; }
-        /** Passes the {@link XrFrustumf#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrFrustumf.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-        /** Copies the specified {@link XrFovf} to the {@link XrFrustumf#fov} field. */
+        /** Copies the specified {@link XrFovf} to the {@code fov} field. */
         public XrFrustumf.Buffer fov(XrFovf value) { XrFrustumf.nfov(address(), value); return this; }
-        /** Passes the {@link XrFrustumf#fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrFrustumf.Buffer fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
-        /** Sets the specified value to the {@link XrFrustumf#nearZ} field. */
+        /** Sets the specified value to the {@code nearZ} field. */
         public XrFrustumf.Buffer nearZ(float value) { XrFrustumf.nnearZ(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFrustumf#farZ} field. */
+        /** Sets the specified value to the {@code farZ} field. */
         public XrFrustumf.Buffer farZ(float value) { XrFrustumf.nfarZ(address(), value); return this; }
 
     }

@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_STATE {
  *     void * instance;
  *     void * plugindata;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int sidechainchannels;
  *     {@link FMOD_DSP_STATE_FUNCTIONS FMOD_DSP_STATE_FUNCTIONS} * functions;
  *     int systemobject;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FMOD_DSP_STATE")
 public class FMOD_DSP_STATE extends Struct<FMOD_DSP_STATE> implements NativeResource {

@@ -16,23 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify that a buffer may be backed by external memory.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO}</li>
- * <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalMemoryHandleTypeFlagBits} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExternalMemoryBufferCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkExternalMemoryHandleTypeFlags {@link #handleTypes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkExternalMemoryHandleTypeFlags handleTypes;
+ * }}</pre>
  */
 public class VkExternalMemoryBufferCreateInfo extends Struct<VkExternalMemoryBufferCreateInfo> implements NativeResource {
 
@@ -85,23 +74,23 @@ public class VkExternalMemoryBufferCreateInfo extends Struct<VkExternalMemoryBuf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** zero or a bitmask of {@code VkExternalMemoryHandleTypeFlagBits} specifying one or more external memory handle types. */
+    /** @return the value of the {@code handleTypes} field. */
     @NativeType("VkExternalMemoryHandleTypeFlags")
     public int handleTypes() { return nhandleTypes(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkExternalMemoryBufferCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO} value to the {@code sType} field. */
     public VkExternalMemoryBufferCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkExternalMemoryBufferCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #handleTypes} field. */
+    /** Sets the specified value to the {@code handleTypes} field. */
     public VkExternalMemoryBufferCreateInfo handleTypes(@NativeType("VkExternalMemoryHandleTypeFlags") int value) { nhandleTypes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,23 +305,23 @@ public class VkExternalMemoryBufferCreateInfo extends Struct<VkExternalMemoryBuf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkExternalMemoryBufferCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExternalMemoryBufferCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkExternalMemoryBufferCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExternalMemoryBufferCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkExternalMemoryBufferCreateInfo#handleTypes} field. */
+        /** @return the value of the {@code handleTypes} field. */
         @NativeType("VkExternalMemoryHandleTypeFlags")
         public int handleTypes() { return VkExternalMemoryBufferCreateInfo.nhandleTypes(address()); }
 
-        /** Sets the specified value to the {@link VkExternalMemoryBufferCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkExternalMemoryBufferCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalMemoryBufferCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO} value to the {@link VkExternalMemoryBufferCreateInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO} value to the {@code sType} field. */
         public VkExternalMemoryBufferCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkExternalMemoryBufferCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkExternalMemoryBufferCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkExternalMemoryBufferCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExternalMemoryBufferCreateInfo#handleTypes} field. */
+        /** Sets the specified value to the {@code handleTypes} field. */
         public VkExternalMemoryBufferCreateInfo.Buffer handleTypes(@NativeType("VkExternalMemoryHandleTypeFlags") int value) { VkExternalMemoryBufferCreateInfo.nhandleTypes(address(), value); return this; }
 
     }

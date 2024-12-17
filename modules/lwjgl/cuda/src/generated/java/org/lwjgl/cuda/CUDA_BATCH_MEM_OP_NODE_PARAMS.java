@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_BATCH_MEM_OP_NODE_PARAMS {
  *     CUcontext ctx;
  *     unsigned int count;
  *     {@link CUstreamBatchMemOpParams CUstreamBatchMemOpParams} * paramArray;
  *     unsigned int flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_BATCH_MEM_OP_NODE_PARAMS extends Struct<CUDA_BATCH_MEM_OP_NODE_PARAMS> implements NativeResource {
 

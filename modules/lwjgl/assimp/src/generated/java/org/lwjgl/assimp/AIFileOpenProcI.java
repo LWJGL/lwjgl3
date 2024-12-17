@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * struct aiFile * (*{@link #invoke}) (
- *     struct aiFileIO *pFileIO,
- *     char const *fileName,
- *     char const *openMode
- * )</code></pre>
- */
+/** Callback function: {@link #invoke aiFileOpenProc} */
 @FunctionalInterface
 @NativeType("aiFileOpenProc")
 public interface AIFileOpenProcI extends CallbackI {
@@ -45,15 +36,7 @@ public interface AIFileOpenProcI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /**
-     * File open procedure
-     *
-     * @param pFileIO  {@code FileIO} pointer
-     * @param fileName name of the file to be opened
-     * @param openMode mode in which to open the file
-     *
-     * @return pointer to an {@link AIFile} structure, or {@code NULL} if the file could not be opened
-     */
+    /** {@code struct aiFile * (* aiFileOpenProc) (struct aiFileIO * pFileIO, char const * fileName, char const * openMode)} */
     @NativeType("struct aiFile *") long invoke(@NativeType("struct aiFileIO *") long pFileIO, @NativeType("char const *") long fileName, @NativeType("char const *") long openMode);
 
 }

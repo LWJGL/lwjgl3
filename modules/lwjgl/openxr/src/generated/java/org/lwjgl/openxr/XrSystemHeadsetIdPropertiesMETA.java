@@ -16,42 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * get headset model id from xrGetSystemProperties.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>can</b> get a corresponding headset UUID of the headset model by chaining an {@link XrSystemHeadsetIdPropertiesMETA} structure to the {@link XrSystemProperties} when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
- * 
- * <p>The UUID returned in the {@link XrSystemHeadsetIdPropertiesMETA} structure is an opaque UUID that identifies a runtime / headset model combo.</p>
- * 
- * <p>The runtime <b>should</b> always return the same UUID for a given headset model for the entire lifetime of that product.</p>
- * 
- * <p>The runtime <b>may</b> report a different UUID to some applications for compatibility purposes.</p>
- * 
- * <p>This is in contrast to the {@link XrSystemProperties}{@code ::systemName} field which is not required to be consistent across product renames.</p>
- * 
- * <p>This is intended to be a temporary feature that will be deprecated along with its extension as soon as motivating use cases are resolved in a better way. See the disclaimer at the start of the {@link METAHeadsetId XR_META_headset_id} extension documentation for more details.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAHeadsetId XR_META_headset_id} extension <b>must</b> be enabled prior to using {@link XrSystemHeadsetIdPropertiesMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAHeadsetId#XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}, {@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemHeadsetIdPropertiesMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrUuidEXT XrUuidEXT} {@link #id};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrUuidEXT XrUuidEXT} id;
+ * }}</pre>
  */
 public class XrSystemHeadsetIdPropertiesMETA extends Struct<XrSystemHeadsetIdPropertiesMETA> implements NativeResource {
 
@@ -104,20 +74,20 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct<XrSystemHeadsetIdPro
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@link XrUuidEXT} corresponding to the headset model. */
+    /** @return a {@link XrUuidEXT} view of the {@code id} field. */
     public XrUuidEXT id() { return nid(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemHeadsetIdPropertiesMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAHeadsetId#XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META} value to the {@link #type} field. */
+    /** Sets the {@link METAHeadsetId#XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META} value to the {@code type} field. */
     public XrSystemHeadsetIdPropertiesMETA type$Default() { return type(METAHeadsetId.XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemHeadsetIdPropertiesMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,20 +279,20 @@ public class XrSystemHeadsetIdPropertiesMETA extends Struct<XrSystemHeadsetIdPro
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemHeadsetIdPropertiesMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemHeadsetIdPropertiesMETA.ntype(address()); }
-        /** @return the value of the {@link XrSystemHeadsetIdPropertiesMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemHeadsetIdPropertiesMETA.nnext(address()); }
-        /** @return a {@link XrUuidEXT} view of the {@link XrSystemHeadsetIdPropertiesMETA#id} field. */
+        /** @return a {@link XrUuidEXT} view of the {@code id} field. */
         public XrUuidEXT id() { return XrSystemHeadsetIdPropertiesMETA.nid(address()); }
 
-        /** Sets the specified value to the {@link XrSystemHeadsetIdPropertiesMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemHeadsetIdPropertiesMETA.Buffer type(@NativeType("XrStructureType") int value) { XrSystemHeadsetIdPropertiesMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAHeadsetId#XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META} value to the {@link XrSystemHeadsetIdPropertiesMETA#type} field. */
+        /** Sets the {@link METAHeadsetId#XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META} value to the {@code type} field. */
         public XrSystemHeadsetIdPropertiesMETA.Buffer type$Default() { return type(METAHeadsetId.XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META); }
-        /** Sets the specified value to the {@link XrSystemHeadsetIdPropertiesMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemHeadsetIdPropertiesMETA.Buffer next(@NativeType("void *") long value) { XrSystemHeadsetIdPropertiesMETA.nnext(address(), value); return this; }
 
     }

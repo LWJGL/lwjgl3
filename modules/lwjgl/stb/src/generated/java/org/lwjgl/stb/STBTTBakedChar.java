@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Baked character data, returned by {@link STBTruetype#stbtt_BakeFontBitmap BakeFontBitmap}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stbtt_bakedchar {
  *     unsigned short x0;
  *     unsigned short y0;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float xoff;
  *     float yoff;
  *     float xadvance;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stbtt_bakedchar")
 public class STBTTBakedChar extends Struct<STBTTBakedChar> implements NativeResource {

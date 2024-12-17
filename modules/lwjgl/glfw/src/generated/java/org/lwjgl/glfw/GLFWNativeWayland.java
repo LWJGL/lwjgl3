@@ -11,7 +11,6 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** Native bindings to the GLFW library's Wayland native access functions. */
 public class GLFWNativeWayland {
 
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
@@ -33,17 +32,7 @@ public class GLFWNativeWayland {
 
     // --- [ glfwGetWaylandDisplay ] ---
 
-    /**
-     * Returns the {@code struct wl_display*} used by GLFW.
-     * 
-     * <p>This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @return the {@code struct wl_display*} used by GLFW, or {@code NULL} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.2
-     */
+    /** {@code struct wl_display * glfwGetWaylandDisplay(void)} */
     @NativeType("struct wl_display *")
     public static long glfwGetWaylandDisplay() {
         long __functionAddress = Functions.GetWaylandDisplay;
@@ -52,17 +41,7 @@ public class GLFWNativeWayland {
 
     // --- [ glfwGetWaylandMonitor ] ---
 
-    /**
-     * Returns the {@code struct wl_output*} of the specified monitor.
-     * 
-     * <p>This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @return the {@code struct wl_output*} of the specified monitor, or {@code NULL} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.2
-     */
+    /** {@code struct wl_output * glfwGetWaylandMonitor(GLFWmonitor * monitor)} */
     @NativeType("struct wl_output *")
     public static long glfwGetWaylandMonitor(@NativeType("GLFWmonitor *") long monitor) {
         long __functionAddress = Functions.GetWaylandMonitor;
@@ -74,17 +53,7 @@ public class GLFWNativeWayland {
 
     // --- [ glfwGetWaylandWindow ] ---
 
-    /**
-     * Returns the main {@code struct wl_surface*} of the specified window.
-     * 
-     * <p>This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @return the main {@code struct wl_surface*} of the specified window, or {@code NULL} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.2
-     */
+    /** {@code struct wl_surface * glfwGetWaylandWindow(GLFWwindow * window)} */
     @NativeType("struct wl_surface *")
     public static long glfwGetWaylandWindow(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.GetWaylandWindow;

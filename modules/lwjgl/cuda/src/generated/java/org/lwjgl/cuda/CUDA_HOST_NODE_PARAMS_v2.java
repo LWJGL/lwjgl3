@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_HOST_NODE_PARAMS_v2 {
- *     void (*{@link CUhostFnI fn}) (void *userData);
+ *     void (* fn) (void * userData);
  *     void * userData;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_HOST_NODE_PARAMS_v2 extends Struct<CUDA_HOST_NODE_PARAMS_v2> implements NativeResource {
 

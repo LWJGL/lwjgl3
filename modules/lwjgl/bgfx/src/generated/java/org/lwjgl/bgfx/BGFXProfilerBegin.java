@@ -11,20 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Profiler region begin.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     bgfx_callback_interface_t *_this,
- *     char const *_name,
- *     uint32_t _abgr,
- *     char const *_filePath,
- *     uint16_t _line
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class BGFXProfilerBegin extends Callback implements BGFXProfilerBeginI {
 
     /**

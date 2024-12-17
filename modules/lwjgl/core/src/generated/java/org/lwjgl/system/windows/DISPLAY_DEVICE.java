@@ -16,23 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Receives information about the display device specified by the {@code iDevNum} parameter of the {@link User32#EnumDisplayDevices} function.
- * 
- * <p>The four string members are set based on the parameters passed to {@code EnumDisplayDevices}. If the {@code lpDevice} param is {@code NULL}, then
- * {@code DISPLAY_DEVICE} is filled in with information about the display adapter(s). If it is a valid device name, then it is filled in with information
- * about the monitor(s) for that device.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct DISPLAY_DEVICE {
- *     DWORD {@link #cb};
- *     TCHAR {@link #DeviceName}[32];
- *     TCHAR {@link #DeviceString}[128];
- *     DWORD {@link #StateFlags};
- *     TCHAR {@link #DeviceID}[128];
- *     TCHAR {@link #DeviceKey}[128];
- * }</code></pre>
+ *     DWORD cb;
+ *     TCHAR DeviceName[32];
+ *     TCHAR DeviceString[128];
+ *     DWORD StateFlags;
+ *     TCHAR DeviceID[128];
+ *     TCHAR DeviceKey[128];
+ * }}</pre>
  */
 public class DISPLAY_DEVICE extends Struct<DISPLAY_DEVICE> implements NativeResource {
 
@@ -94,38 +86,38 @@ public class DISPLAY_DEVICE extends Struct<DISPLAY_DEVICE> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** size, in bytes, of the {@code DISPLAY_DEVICE} structure. This must be initialized prior to calling {@link User32#EnumDisplayDevices}. */
+    /** @return the value of the {@code cb} field. */
     @NativeType("DWORD")
     public int cb() { return ncb(address()); }
-    /** an array of characters identifying the device name. This is either the adapter device or the monitor device. */
+    /** @return a {@link ByteBuffer} view of the {@code DeviceName} field. */
     @NativeType("TCHAR[32]")
     public ByteBuffer DeviceName() { return nDeviceName(address()); }
-    /** an array of characters identifying the device name. This is either the adapter device or the monitor device. */
+    /** @return the null-terminated string stored in the {@code DeviceName} field. */
     @NativeType("TCHAR[32]")
     public String DeviceNameString() { return nDeviceNameString(address()); }
-    /** an array of characters containing the device context string. This is either a description of the display adapter or of the display monitor. */
+    /** @return a {@link ByteBuffer} view of the {@code DeviceString} field. */
     @NativeType("TCHAR[128]")
     public ByteBuffer DeviceString() { return nDeviceString(address()); }
-    /** an array of characters containing the device context string. This is either a description of the display adapter or of the display monitor. */
+    /** @return the null-terminated string stored in the {@code DeviceString} field. */
     @NativeType("TCHAR[128]")
     public String DeviceStringString() { return nDeviceStringString(address()); }
-    /** device state flags */
+    /** @return the value of the {@code StateFlags} field. */
     @NativeType("DWORD")
     public int StateFlags() { return nStateFlags(address()); }
-    /** not used */
+    /** @return a {@link ByteBuffer} view of the {@code DeviceID} field. */
     @NativeType("TCHAR[128]")
     public ByteBuffer DeviceID() { return nDeviceID(address()); }
-    /** not used */
+    /** @return the null-terminated string stored in the {@code DeviceID} field. */
     @NativeType("TCHAR[128]")
     public String DeviceIDString() { return nDeviceIDString(address()); }
-    /** reserved */
+    /** @return a {@link ByteBuffer} view of the {@code DeviceKey} field. */
     @NativeType("TCHAR[128]")
     public ByteBuffer DeviceKey() { return nDeviceKey(address()); }
-    /** reserved */
+    /** @return the null-terminated string stored in the {@code DeviceKey} field. */
     @NativeType("TCHAR[128]")
     public String DeviceKeyString() { return nDeviceKeyString(address()); }
 
-    /** Sets the specified value to the {@link #cb} field. */
+    /** Sets the specified value to the {@code cb} field. */
     public DISPLAY_DEVICE cb(@NativeType("DWORD") int value) { ncb(address(), value); return this; }
 
     /**
@@ -337,38 +329,38 @@ public class DISPLAY_DEVICE extends Struct<DISPLAY_DEVICE> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link DISPLAY_DEVICE#cb} field. */
+        /** @return the value of the {@code cb} field. */
         @NativeType("DWORD")
         public int cb() { return DISPLAY_DEVICE.ncb(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link DISPLAY_DEVICE#DeviceName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code DeviceName} field. */
         @NativeType("TCHAR[32]")
         public ByteBuffer DeviceName() { return DISPLAY_DEVICE.nDeviceName(address()); }
-        /** @return the null-terminated string stored in the {@link DISPLAY_DEVICE#DeviceName} field. */
+        /** @return the null-terminated string stored in the {@code DeviceName} field. */
         @NativeType("TCHAR[32]")
         public String DeviceNameString() { return DISPLAY_DEVICE.nDeviceNameString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link DISPLAY_DEVICE#DeviceString} field. */
+        /** @return a {@link ByteBuffer} view of the {@code DeviceString} field. */
         @NativeType("TCHAR[128]")
         public ByteBuffer DeviceString() { return DISPLAY_DEVICE.nDeviceString(address()); }
-        /** @return the null-terminated string stored in the {@link DISPLAY_DEVICE#DeviceString} field. */
+        /** @return the null-terminated string stored in the {@code DeviceString} field. */
         @NativeType("TCHAR[128]")
         public String DeviceStringString() { return DISPLAY_DEVICE.nDeviceStringString(address()); }
-        /** @return the value of the {@link DISPLAY_DEVICE#StateFlags} field. */
+        /** @return the value of the {@code StateFlags} field. */
         @NativeType("DWORD")
         public int StateFlags() { return DISPLAY_DEVICE.nStateFlags(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link DISPLAY_DEVICE#DeviceID} field. */
+        /** @return a {@link ByteBuffer} view of the {@code DeviceID} field. */
         @NativeType("TCHAR[128]")
         public ByteBuffer DeviceID() { return DISPLAY_DEVICE.nDeviceID(address()); }
-        /** @return the null-terminated string stored in the {@link DISPLAY_DEVICE#DeviceID} field. */
+        /** @return the null-terminated string stored in the {@code DeviceID} field. */
         @NativeType("TCHAR[128]")
         public String DeviceIDString() { return DISPLAY_DEVICE.nDeviceIDString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link DISPLAY_DEVICE#DeviceKey} field. */
+        /** @return a {@link ByteBuffer} view of the {@code DeviceKey} field. */
         @NativeType("TCHAR[128]")
         public ByteBuffer DeviceKey() { return DISPLAY_DEVICE.nDeviceKey(address()); }
-        /** @return the null-terminated string stored in the {@link DISPLAY_DEVICE#DeviceKey} field. */
+        /** @return the null-terminated string stored in the {@code DeviceKey} field. */
         @NativeType("TCHAR[128]")
         public String DeviceKeyString() { return DISPLAY_DEVICE.nDeviceKeyString(address()); }
 
-        /** Sets the specified value to the {@link DISPLAY_DEVICE#cb} field. */
+        /** Sets the specified value to the {@code cb} field. */
         public DISPLAY_DEVICE.Buffer cb(@NativeType("DWORD") int value) { DISPLAY_DEVICE.ncb(address(), value); return this; }
 
     }

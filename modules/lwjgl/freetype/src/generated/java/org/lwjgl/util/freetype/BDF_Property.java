@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * This structure models a given BDF/PCF property.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct BDF_PropertyRec {
  *     BDF_PropertyType type;
  *     union {
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         FT_Int32 integer;
  *         FT_UInt32 cardinal;
  *     } u;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct BDF_PropertyRec")
 public class BDF_Property extends Struct<BDF_Property> implements NativeResource {

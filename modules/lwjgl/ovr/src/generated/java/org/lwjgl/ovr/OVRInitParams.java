@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters for {@link OVR#ovr_Initialize Initialize}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrInitParams {
- *     uint32_t {@link #Flags};
- *     uint32_t {@link #RequestedMinorVersion};
- *     {@link OVRLogCallbackI ovrLogCallback} {@link #LogCallback};
- *     uintptr_t {@link #UserData};
- *     uint32_t {@link #ConnectionTimeoutMS};
- * }</code></pre>
+ *     uint32_t Flags;
+ *     uint32_t RequestedMinorVersion;
+ *     {@link OVRLogCallbackI ovrLogCallback} LogCallback;
+ *     uintptr_t UserData;
+ *     uint32_t ConnectionTimeoutMS;
+ * }}</pre>
  */
 @NativeType("struct ovrInitParams")
 public class OVRInitParams extends Struct<OVRInitParams> implements NativeResource {
@@ -87,41 +83,31 @@ public class OVRInitParams extends Struct<OVRInitParams> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** flags from {@code ovrInitFlags} to override default behavior. Use 0 for the defaults. */
+    /** @return the value of the {@code Flags} field. */
     @NativeType("uint32_t")
     public int Flags() { return nFlags(address()); }
-    /**
-     * requests a specific minor version of the LibOVR runtime. Flags must include {@link OVR#ovrInit_RequestVersion Init_RequestVersion} or this will be ignored and {@link OVRVersion#OVR_MINOR_VERSION MINOR_VERSION} will
-     * be used. If you are directly calling the LibOVRRT version of {@link OVR#ovr_Initialize Initialize} in the LibOVRRT DLL then this must be valid and include
-     * {@link OVR#ovrInit_RequestVersion Init_RequestVersion}.
-     */
+    /** @return the value of the {@code RequestedMinorVersion} field. */
     @NativeType("uint32_t")
     public int RequestedMinorVersion() { return nRequestedMinorVersion(address()); }
-    /**
-     * user-supplied log callback function, which may be called at any time asynchronously from multiple threads until {@link OVR#ovr_Shutdown Shutdown} completes. Use {@code NULL}
-     * to specify no log callback.
-     */
+    /** @return the value of the {@code LogCallback} field. */
     @NativeType("ovrLogCallback")
     public @Nullable OVRLogCallback LogCallback() { return nLogCallback(address()); }
-    /**
-     * user-supplied data which is passed as-is to {@code LogCallback}. Typically this is used to store an application-specific pointer which is read in the
-     * callback function.
-     */
+    /** @return the value of the {@code UserData} field. */
     @NativeType("uintptr_t")
     public long UserData() { return nUserData(address()); }
-    /** relative number of milliseconds to wait for a connection to the server before failing. Use 0 for the default timeout. */
+    /** @return the value of the {@code ConnectionTimeoutMS} field. */
     @NativeType("uint32_t")
     public int ConnectionTimeoutMS() { return nConnectionTimeoutMS(address()); }
 
-    /** Sets the specified value to the {@link #Flags} field. */
+    /** Sets the specified value to the {@code Flags} field. */
     public OVRInitParams Flags(@NativeType("uint32_t") int value) { nFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #RequestedMinorVersion} field. */
+    /** Sets the specified value to the {@code RequestedMinorVersion} field. */
     public OVRInitParams RequestedMinorVersion(@NativeType("uint32_t") int value) { nRequestedMinorVersion(address(), value); return this; }
-    /** Sets the specified value to the {@link #LogCallback} field. */
+    /** Sets the specified value to the {@code LogCallback} field. */
     public OVRInitParams LogCallback(@Nullable @NativeType("ovrLogCallback") OVRLogCallbackI value) { nLogCallback(address(), value); return this; }
-    /** Sets the specified value to the {@link #UserData} field. */
+    /** Sets the specified value to the {@code UserData} field. */
     public OVRInitParams UserData(@NativeType("uintptr_t") long value) { nUserData(address(), value); return this; }
-    /** Sets the specified value to the {@link #ConnectionTimeoutMS} field. */
+    /** Sets the specified value to the {@code ConnectionTimeoutMS} field. */
     public OVRInitParams ConnectionTimeoutMS(@NativeType("uint32_t") int value) { nConnectionTimeoutMS(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */

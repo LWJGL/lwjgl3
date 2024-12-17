@@ -14,13 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct NSVGgradientStop {
  *     unsigned int color;
  *     float offset;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct NSVGgradientStop")
 public class NSVGGradientStop extends Struct<NSVGGradientStop> {

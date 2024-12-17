@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used for OT-SVG glyphs. This is a 'sub-class' of {@link FT_Glyph}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_SvgGlyphRec {
  *     {@link FT_Glyph FT_GlyphRec} root;
  *     FT_Byte * svg_document;
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UShort end_glyph_id;
  *     {@link FT_Matrix FT_Matrix} transform;
  *     {@link FT_Vector FT_Vector} delta;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_SvgGlyphRec")
 public class FT_SvgGlyph extends Struct<FT_SvgGlyph> {

@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing sparse address space limits of an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVExtendedSparseAddressSpace#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceSize {@link #extendedSparseAddressSpaceSize};
- *     VkImageUsageFlags {@link #extendedSparseImageUsageFlags};
- *     VkBufferUsageFlags {@link #extendedSparseBufferUsageFlags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceSize extendedSparseAddressSpaceSize;
+ *     VkImageUsageFlags extendedSparseImageUsageFlags;
+ *     VkBufferUsageFlags extendedSparseBufferUsageFlags;
+ * }}</pre>
  */
 public class VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV extends Struct<VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV> implements NativeResource {
 
@@ -96,27 +82,27 @@ public class VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV extends Stru
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the total amount of address space available, in bytes, for sparse memory resources of all usages if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-extendedSparseAddressSpace">{@code extendedSparseAddressSpace}</a> feature is enabled. This <b>must</b> be greater than or equal to {@link VkPhysicalDeviceLimits}{@code ::sparseAddressSpaceSize}, and the difference in space <b>must</b> only be used with usages allowed below. This is an upper bound on the sum of the sizes of all sparse resources, regardless of whether any memory is bound to them. */
+    /** @return the value of the {@code extendedSparseAddressSpaceSize} field. */
     @NativeType("VkDeviceSize")
     public long extendedSparseAddressSpaceSize() { return nextendedSparseAddressSpaceSize(address()); }
-    /** a bitmask of {@code VkImageUsageFlagBits} of usages which <b>may</b> allow an implementation to use the full {@code extendedSparseAddressSpaceSize} space. */
+    /** @return the value of the {@code extendedSparseImageUsageFlags} field. */
     @NativeType("VkImageUsageFlags")
     public int extendedSparseImageUsageFlags() { return nextendedSparseImageUsageFlags(address()); }
-    /** a bitmask of {@code VkBufferUsageFlagBits} of usages which <b>may</b> allow an implementation to use the full {@code extendedSparseAddressSpaceSize} space. */
+    /** @return the value of the {@code extendedSparseBufferUsageFlags} field. */
     @NativeType("VkBufferUsageFlags")
     public int extendedSparseBufferUsageFlags() { return nextendedSparseBufferUsageFlags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVExtendedSparseAddressSpace#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVExtendedSparseAddressSpace#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV sType$Default() { return sType(NVExtendedSparseAddressSpace.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,27 +298,27 @@ public class VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV extends Stru
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV#extendedSparseAddressSpaceSize} field. */
+        /** @return the value of the {@code extendedSparseAddressSpaceSize} field. */
         @NativeType("VkDeviceSize")
         public long extendedSparseAddressSpaceSize() { return VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.nextendedSparseAddressSpaceSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV#extendedSparseImageUsageFlags} field. */
+        /** @return the value of the {@code extendedSparseImageUsageFlags} field. */
         @NativeType("VkImageUsageFlags")
         public int extendedSparseImageUsageFlags() { return VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.nextendedSparseImageUsageFlags(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV#extendedSparseBufferUsageFlags} field. */
+        /** @return the value of the {@code extendedSparseBufferUsageFlags} field. */
         @NativeType("VkBufferUsageFlags")
         public int extendedSparseBufferUsageFlags() { return VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.nextendedSparseBufferUsageFlags(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVExtendedSparseAddressSpace#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV} value to the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV#sType} field. */
+        /** Sets the {@link NVExtendedSparseAddressSpace#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.Buffer sType$Default() { return sType(NVExtendedSparseAddressSpace.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV.npNext(address(), value); return this; }
 
     }

@@ -17,43 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying striped rendering submit information.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure can be included in the {@code pNext} chain of {@link VkCommandBufferSubmitInfo} to provide a set of semaphores to be signaled for each striped render pass instance.</p>
- * 
- * <p>The elements of {@code pStripeSemaphoreInfos} are mapped to render pass instances in {@link VkCommandBufferSubmitInfo}{@code ::commandBuffer} in submission order and in stripe order within each render pass instance. Each semaphore in {@code pStripeSemaphoreInfos} is signaled when the implementation has completed execution of the associated stripe. In a render pass instance that has multiview enabled, the stripe includes all views in the view mask. In a render pass instance with {@code layerCount} greater than 1, the stripe includes all layers.</p>
- * 
- * <p>Render pass instances that specify the {@link VK13#VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT} will not have any elements of {@code pStripeSemaphoreInfos} mapped to them. Instead, for suspending and resuming render pass instances, this mapping is done for the first suspending render pass instance, and the per-stripe semaphores are only signaled for the last resuming render pass instance.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The {@code semaphore} member of each element of {@code pStripeSemaphoreInfos} <b>must</b> have been created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM}</li>
- * <li>{@code pStripeSemaphoreInfos} <b>must</b> be a valid pointer to an array of {@code stripeSemaphoreInfoCount} valid {@link VkSemaphoreSubmitInfo} structures</li>
- * <li>{@code stripeSemaphoreInfoCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSemaphoreSubmitInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderPassStripeSubmitInfoARM {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #stripeSemaphoreInfoCount};
- *     {@link VkSemaphoreSubmitInfo VkSemaphoreSubmitInfo} const * {@link #pStripeSemaphoreInfos};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t stripeSemaphoreInfoCount;
+ *     {@link VkSemaphoreSubmitInfo VkSemaphoreSubmitInfo} const * pStripeSemaphoreInfos;
+ * }}</pre>
  */
 public class VkRenderPassStripeSubmitInfoARM extends Struct<VkRenderPassStripeSubmitInfoARM> implements NativeResource {
 
@@ -109,26 +79,26 @@ public class VkRenderPassStripeSubmitInfoARM extends Struct<VkRenderPassStripeSu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of semaphores used to signal stripe completion in the render pass instances in the submitted command buffer. */
+    /** @return the value of the {@code stripeSemaphoreInfoCount} field. */
     @NativeType("uint32_t")
     public int stripeSemaphoreInfoCount() { return nstripeSemaphoreInfoCount(address()); }
-    /** a pointer to an array of {@code stripeSemaphoreInfoCount} {@link VkSemaphoreSubmitInfo} structures describing the semaphores used to signal stripe completion. */
+    /** @return a {@link VkSemaphoreSubmitInfo.Buffer} view of the struct array pointed to by the {@code pStripeSemaphoreInfos} field. */
     @NativeType("VkSemaphoreSubmitInfo const *")
     public VkSemaphoreSubmitInfo.Buffer pStripeSemaphoreInfos() { return npStripeSemaphoreInfos(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRenderPassStripeSubmitInfoARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM} value to the {@link #sType} field. */
+    /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM} value to the {@code sType} field. */
     public VkRenderPassStripeSubmitInfoARM sType$Default() { return sType(ARMRenderPassStriped.VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRenderPassStripeSubmitInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSemaphoreSubmitInfo.Buffer} to the {@link #pStripeSemaphoreInfos} field. */
+    /** Sets the address of the specified {@link VkSemaphoreSubmitInfo.Buffer} to the {@code pStripeSemaphoreInfos} field. */
     public VkRenderPassStripeSubmitInfoARM pStripeSemaphoreInfos(@NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.Buffer value) { npStripeSemaphoreInfos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,26 +307,26 @@ public class VkRenderPassStripeSubmitInfoARM extends Struct<VkRenderPassStripeSu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderPassStripeSubmitInfoARM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassStripeSubmitInfoARM.nsType(address()); }
-        /** @return the value of the {@link VkRenderPassStripeSubmitInfoARM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassStripeSubmitInfoARM.npNext(address()); }
-        /** @return the value of the {@link VkRenderPassStripeSubmitInfoARM#stripeSemaphoreInfoCount} field. */
+        /** @return the value of the {@code stripeSemaphoreInfoCount} field. */
         @NativeType("uint32_t")
         public int stripeSemaphoreInfoCount() { return VkRenderPassStripeSubmitInfoARM.nstripeSemaphoreInfoCount(address()); }
-        /** @return a {@link VkSemaphoreSubmitInfo.Buffer} view of the struct array pointed to by the {@link VkRenderPassStripeSubmitInfoARM#pStripeSemaphoreInfos} field. */
+        /** @return a {@link VkSemaphoreSubmitInfo.Buffer} view of the struct array pointed to by the {@code pStripeSemaphoreInfos} field. */
         @NativeType("VkSemaphoreSubmitInfo const *")
         public VkSemaphoreSubmitInfo.Buffer pStripeSemaphoreInfos() { return VkRenderPassStripeSubmitInfoARM.npStripeSemaphoreInfos(address()); }
 
-        /** Sets the specified value to the {@link VkRenderPassStripeSubmitInfoARM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRenderPassStripeSubmitInfoARM.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassStripeSubmitInfoARM.nsType(address(), value); return this; }
-        /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM} value to the {@link VkRenderPassStripeSubmitInfoARM#sType} field. */
+        /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM} value to the {@code sType} field. */
         public VkRenderPassStripeSubmitInfoARM.Buffer sType$Default() { return sType(ARMRenderPassStriped.VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM); }
-        /** Sets the specified value to the {@link VkRenderPassStripeSubmitInfoARM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRenderPassStripeSubmitInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassStripeSubmitInfoARM.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSemaphoreSubmitInfo.Buffer} to the {@link VkRenderPassStripeSubmitInfoARM#pStripeSemaphoreInfos} field. */
+        /** Sets the address of the specified {@link VkSemaphoreSubmitInfo.Buffer} to the {@code pStripeSemaphoreInfos} field. */
         public VkRenderPassStripeSubmitInfoARM.Buffer pStripeSemaphoreInfos(@NativeType("VkSemaphoreSubmitInfo const *") VkSemaphoreSubmitInfo.Buffer value) { VkRenderPassStripeSubmitInfoARM.npStripeSemaphoreInfos(address(), value); return this; }
 
     }

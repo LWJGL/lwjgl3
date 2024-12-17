@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the viewport scissor inheritance behavior for an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVInheritedViewportScissor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceInheritedViewportScissorFeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #inheritedViewportScissor2D};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 inheritedViewportScissor2D;
+ * }}</pre>
  */
 public class VkPhysicalDeviceInheritedViewportScissorFeaturesNV extends Struct<VkPhysicalDeviceInheritedViewportScissorFeaturesNV> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceInheritedViewportScissorFeaturesNV extends Struct<V
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether secondary command buffers can inherit most of the dynamic state affected by {@link VK13#VK_DYNAMIC_STATE_VIEWPORT_WITH_COUNT DYNAMIC_STATE_VIEWPORT_WITH_COUNT}, {@link VK13#VK_DYNAMIC_STATE_SCISSOR_WITH_COUNT DYNAMIC_STATE_SCISSOR_WITH_COUNT}, {@link EXTDiscardRectangles#VK_DYNAMIC_STATE_DISCARD_RECTANGLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_EXT}, {@link EXTDiscardRectangles#VK_DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_ENABLE_EXT}, {@link EXTDiscardRectangles#VK_DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT DYNAMIC_STATE_DISCARD_RECTANGLE_MODE_EXT}, {@link VK10#VK_DYNAMIC_STATE_VIEWPORT DYNAMIC_STATE_VIEWPORT} or {@link VK10#VK_DYNAMIC_STATE_SCISSOR DYNAMIC_STATE_SCISSOR}, from a primary command buffer. */
+    /** @return the value of the {@code inheritedViewportScissor2D} field. */
     @NativeType("VkBool32")
     public boolean inheritedViewportScissor2D() { return ninheritedViewportScissor2D(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceInheritedViewportScissorFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVInheritedViewportScissor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVInheritedViewportScissor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceInheritedViewportScissorFeaturesNV sType$Default() { return sType(NVInheritedViewportScissor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceInheritedViewportScissorFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #inheritedViewportScissor2D} field. */
+    /** Sets the specified value to the {@code inheritedViewportScissor2D} field. */
     public VkPhysicalDeviceInheritedViewportScissorFeaturesNV inheritedViewportScissor2D(@NativeType("VkBool32") boolean value) { ninheritedViewportScissor2D(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceInheritedViewportScissorFeaturesNV extends Struct<V
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceInheritedViewportScissorFeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceInheritedViewportScissorFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV#inheritedViewportScissor2D} field. */
+        /** @return the value of the {@code inheritedViewportScissor2D} field. */
         @NativeType("VkBool32")
         public boolean inheritedViewportScissor2D() { return VkPhysicalDeviceInheritedViewportScissorFeaturesNV.ninheritedViewportScissor2D(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceInheritedViewportScissorFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceInheritedViewportScissorFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVInheritedViewportScissor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV} value to the {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV#sType} field. */
+        /** Sets the {@link NVInheritedViewportScissor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceInheritedViewportScissorFeaturesNV.Buffer sType$Default() { return sType(NVInheritedViewportScissor.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceInheritedViewportScissorFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceInheritedViewportScissorFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV#inheritedViewportScissor2D} field. */
+        /** Sets the specified value to the {@code inheritedViewportScissor2D} field. */
         public VkPhysicalDeviceInheritedViewportScissorFeaturesNV.Buffer inheritedViewportScissor2D(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceInheritedViewportScissorFeaturesNV.ninheritedViewportScissor2D(address(), value ? 1 : 0); return this; }
 
     }

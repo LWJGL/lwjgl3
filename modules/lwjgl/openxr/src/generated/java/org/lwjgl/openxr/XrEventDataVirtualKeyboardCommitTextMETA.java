@@ -19,35 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.METAVirtualKeyboard.*;
 
 /**
- * Commit text event.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrEventDataVirtualKeyboardCommitTextMETA} event <b>must</b> be sent by the runtime when a character or string is input by the keyboard. The application <b>should</b> append to the text field that the keyboard is editing.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using {@link XrEventDataVirtualKeyboardCommitTextMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAVirtualKeyboard#XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code keyboard} <b>must</b> be a valid {@code XrVirtualKeyboardMETA} handle</li>
- * <li>{@code text} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link METAVirtualKeyboard#XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrPollEvent PollEvent}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataVirtualKeyboardCommitTextMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrVirtualKeyboardMETA {@link #keyboard};
- *     char {@link #text}[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META];
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrVirtualKeyboardMETA keyboard;
+ *     char text[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META];
+ * }}</pre>
  */
 public class XrEventDataVirtualKeyboardCommitTextMETA extends Struct<XrEventDataVirtualKeyboardCommitTextMETA> implements NativeResource {
 
@@ -103,31 +81,31 @@ public class XrEventDataVirtualKeyboardCommitTextMETA extends Struct<XrEventData
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrVirtualKeyboardMETA} this event belongs to. */
+    /** @return the value of the {@code keyboard} field. */
     @NativeType("XrVirtualKeyboardMETA")
     public long keyboard() { return nkeyboard(address()); }
-    /** the text string input by the keyboard. */
+    /** @return a {@link ByteBuffer} view of the {@code text} field. */
     @NativeType("char[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META]")
     public ByteBuffer text() { return ntext(address()); }
-    /** the text string input by the keyboard. */
+    /** @return the null-terminated string stored in the {@code text} field. */
     @NativeType("char[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META]")
     public String textString() { return ntextString(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataVirtualKeyboardCommitTextMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META} value to the {@link #type} field. */
+    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META} value to the {@code type} field. */
     public XrEventDataVirtualKeyboardCommitTextMETA type$Default() { return type(METAVirtualKeyboard.XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataVirtualKeyboardCommitTextMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #keyboard} field. */
+    /** Sets the specified value to the {@code keyboard} field. */
     public XrEventDataVirtualKeyboardCommitTextMETA keyboard(XrVirtualKeyboardMETA value) { nkeyboard(address(), value); return this; }
-    /** Copies the specified encoded string to the {@link #text} field. */
+    /** Copies the specified encoded string to the {@code text} field. */
     public XrEventDataVirtualKeyboardCommitTextMETA text(@NativeType("char[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META]") ByteBuffer value) { ntext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,31 +324,31 @@ public class XrEventDataVirtualKeyboardCommitTextMETA extends Struct<XrEventData
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataVirtualKeyboardCommitTextMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataVirtualKeyboardCommitTextMETA.ntype(address()); }
-        /** @return the value of the {@link XrEventDataVirtualKeyboardCommitTextMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataVirtualKeyboardCommitTextMETA.nnext(address()); }
-        /** @return the value of the {@link XrEventDataVirtualKeyboardCommitTextMETA#keyboard} field. */
+        /** @return the value of the {@code keyboard} field. */
         @NativeType("XrVirtualKeyboardMETA")
         public long keyboard() { return XrEventDataVirtualKeyboardCommitTextMETA.nkeyboard(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrEventDataVirtualKeyboardCommitTextMETA#text} field. */
+        /** @return a {@link ByteBuffer} view of the {@code text} field. */
         @NativeType("char[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META]")
         public ByteBuffer text() { return XrEventDataVirtualKeyboardCommitTextMETA.ntext(address()); }
-        /** @return the null-terminated string stored in the {@link XrEventDataVirtualKeyboardCommitTextMETA#text} field. */
+        /** @return the null-terminated string stored in the {@code text} field. */
         @NativeType("char[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META]")
         public String textString() { return XrEventDataVirtualKeyboardCommitTextMETA.ntextString(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataVirtualKeyboardCommitTextMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataVirtualKeyboardCommitTextMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataVirtualKeyboardCommitTextMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META} value to the {@link XrEventDataVirtualKeyboardCommitTextMETA#type} field. */
+        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META} value to the {@code type} field. */
         public XrEventDataVirtualKeyboardCommitTextMETA.Buffer type$Default() { return type(METAVirtualKeyboard.XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META); }
-        /** Sets the specified value to the {@link XrEventDataVirtualKeyboardCommitTextMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataVirtualKeyboardCommitTextMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataVirtualKeyboardCommitTextMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataVirtualKeyboardCommitTextMETA#keyboard} field. */
+        /** Sets the specified value to the {@code keyboard} field. */
         public XrEventDataVirtualKeyboardCommitTextMETA.Buffer keyboard(XrVirtualKeyboardMETA value) { XrEventDataVirtualKeyboardCommitTextMETA.nkeyboard(address(), value); return this; }
-        /** Copies the specified encoded string to the {@link XrEventDataVirtualKeyboardCommitTextMETA#text} field. */
+        /** Copies the specified encoded string to the {@code text} field. */
         public XrEventDataVirtualKeyboardCommitTextMETA.Buffer text(@NativeType("char[XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META]") ByteBuffer value) { XrEventDataVirtualKeyboardCommitTextMETA.ntext(address(), value); return this; }
 
     }

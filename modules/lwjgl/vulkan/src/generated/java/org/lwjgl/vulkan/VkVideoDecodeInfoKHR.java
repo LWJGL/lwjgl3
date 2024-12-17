@@ -17,52 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying video decode parameters.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code srcBuffer} <b>must</b> have been created with {@link KHRVideoDecodeQueue#VK_BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR} set</li>
- * <li>{@code srcBufferOffset} <b>must</b> be less than the size of {@code srcBuffer}</li>
- * <li>{@code srcBufferRange} <b>must</b> be less than or equal to the size of {@code srcBuffer} minus {@code srcBufferOffset}</li>
- * <li>If {@code pSetupReferenceSlot} is not {@code NULL}, then its {@code slotIndex} member <b>must</b> not be negative</li>
- * <li>If {@code pSetupReferenceSlot} is not {@code NULL}, then its {@code pPictureResource} <b>must</b> not be {@code NULL}</li>
- * <li>The {@code slotIndex} member of each element of {@code pReferenceSlots} <b>must</b> not be negative</li>
- * <li>The {@code pPictureResource} member of each element of {@code pReferenceSlots} <b>must</b> not be {@code NULL}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeAV1PictureInfoKHR}, {@link VkVideoDecodeH264PictureInfoKHR}, {@link VkVideoDecodeH265PictureInfoKHR}, or {@link VkVideoInlineQueryInfoKHR}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code srcBuffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>{@code dstPictureResource} <b>must</b> be a valid {@link VkVideoPictureResourceInfoKHR} structure</li>
- * <li>If {@code pSetupReferenceSlot} is not {@code NULL}, {@code pSetupReferenceSlot} <b>must</b> be a valid pointer to a valid {@link VkVideoReferenceSlotInfoKHR} structure</li>
- * <li>If {@code referenceSlotCount} is not 0, {@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid {@link VkVideoReferenceSlotInfoKHR} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoPictureResourceInfoKHR}, {@link VkVideoReferenceSlotInfoKHR}, {@link KHRVideoDecodeQueue#vkCmdDecodeVideoKHR CmdDecodeVideoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoDecodeInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkVideoDecodeFlagsKHR {@link #flags};
- *     VkBuffer {@link #srcBuffer};
- *     VkDeviceSize {@link #srcBufferOffset};
- *     VkDeviceSize {@link #srcBufferRange};
- *     {@link VkVideoPictureResourceInfoKHR VkVideoPictureResourceInfoKHR} {@link #dstPictureResource};
- *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * {@link #pSetupReferenceSlot};
- *     uint32_t {@link #referenceSlotCount};
- *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * {@link #pReferenceSlots};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkVideoDecodeFlagsKHR flags;
+ *     VkBuffer srcBuffer;
+ *     VkDeviceSize srcBufferOffset;
+ *     VkDeviceSize srcBufferRange;
+ *     {@link VkVideoPictureResourceInfoKHR VkVideoPictureResourceInfoKHR} dstPictureResource;
+ *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * pSetupReferenceSlot;
+ *     uint32_t referenceSlotCount;
+ *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * pReferenceSlots;
+ * }}</pre>
  */
 public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implements NativeResource {
 
@@ -136,41 +103,41 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkVideoDecodeFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the source video bitstream buffer to read the encoded bitstream from. */
+    /** @return the value of the {@code srcBuffer} field. */
     @NativeType("VkBuffer")
     public long srcBuffer() { return nsrcBuffer(address()); }
-    /** the starting offset in bytes from the start of {@code srcBuffer} to read the encoded bitstream from. */
+    /** @return the value of the {@code srcBufferOffset} field. */
     @NativeType("VkDeviceSize")
     public long srcBufferOffset() { return nsrcBufferOffset(address()); }
-    /** the size in bytes of the encoded bitstream to decode from {@code srcBuffer}, starting from {@code srcBufferOffset}. */
+    /** @return the value of the {@code srcBufferRange} field. */
     @NativeType("VkDeviceSize")
     public long srcBufferRange() { return nsrcBufferRange(address()); }
-    /** the video picture resource to use as the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-output-picture">decode output picture</a>. */
+    /** @return a {@link VkVideoPictureResourceInfoKHR} view of the {@code dstPictureResource} field. */
     public VkVideoPictureResourceInfoKHR dstPictureResource() { return ndstPictureResource(address()); }
-    /** {@code NULL} or a pointer to a {@link VkVideoReferenceSlotInfoKHR} structure specifying the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-reconstructed-picture-info">reconstructed picture information</a>. */
+    /** @return a {@link VkVideoReferenceSlotInfoKHR} view of the struct pointed to by the {@code pSetupReferenceSlot} field. */
     @NativeType("VkVideoReferenceSlotInfoKHR const *")
     public @Nullable VkVideoReferenceSlotInfoKHR pSetupReferenceSlot() { return npSetupReferenceSlot(address()); }
-    /** the number of elements in the {@code pReferenceSlots} array. */
+    /** @return the value of the {@code referenceSlotCount} field. */
     @NativeType("uint32_t")
     public int referenceSlotCount() { return nreferenceSlotCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkVideoReferenceSlotInfoKHR} structures describing the DPB slots and corresponding <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#reference-picture">reference picture</a> resources to use in this video decode operation (the set of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#active-reference-pictures">active reference pictures</a>). */
+    /** @return a {@link VkVideoReferenceSlotInfoKHR.Buffer} view of the struct array pointed to by the {@code pReferenceSlots} field. */
     @NativeType("VkVideoReferenceSlotInfoKHR const *")
     public VkVideoReferenceSlotInfoKHR.@Nullable Buffer pReferenceSlots() { return npReferenceSlots(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoDecodeInfoKHR sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoDecodeAV1PictureInfoKHR} value to the {@code pNext} chain. */
     public VkVideoDecodeInfoKHR pNext(VkVideoDecodeAV1PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -180,21 +147,21 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
     public VkVideoDecodeInfoKHR pNext(VkVideoDecodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */
     public VkVideoDecodeInfoKHR pNext(VkVideoInlineQueryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkVideoDecodeInfoKHR flags(@NativeType("VkVideoDecodeFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcBuffer} field. */
+    /** Sets the specified value to the {@code srcBuffer} field. */
     public VkVideoDecodeInfoKHR srcBuffer(@NativeType("VkBuffer") long value) { nsrcBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcBufferOffset} field. */
+    /** Sets the specified value to the {@code srcBufferOffset} field. */
     public VkVideoDecodeInfoKHR srcBufferOffset(@NativeType("VkDeviceSize") long value) { nsrcBufferOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcBufferRange} field. */
+    /** Sets the specified value to the {@code srcBufferRange} field. */
     public VkVideoDecodeInfoKHR srcBufferRange(@NativeType("VkDeviceSize") long value) { nsrcBufferRange(address(), value); return this; }
-    /** Copies the specified {@link VkVideoPictureResourceInfoKHR} to the {@link #dstPictureResource} field. */
+    /** Copies the specified {@link VkVideoPictureResourceInfoKHR} to the {@code dstPictureResource} field. */
     public VkVideoDecodeInfoKHR dstPictureResource(VkVideoPictureResourceInfoKHR value) { ndstPictureResource(address(), value); return this; }
-    /** Passes the {@link #dstPictureResource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code dstPictureResource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoDecodeInfoKHR dstPictureResource(java.util.function.Consumer<VkVideoPictureResourceInfoKHR> consumer) { consumer.accept(dstPictureResource()); return this; }
-    /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR} to the {@link #pSetupReferenceSlot} field. */
+    /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR} to the {@code pSetupReferenceSlot} field. */
     public VkVideoDecodeInfoKHR pSetupReferenceSlot(@Nullable @NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR value) { npSetupReferenceSlot(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@link #pReferenceSlots} field. */
+    /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@code pReferenceSlots} field. */
     public VkVideoDecodeInfoKHR pReferenceSlots(@NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR.@Nullable Buffer value) { npReferenceSlots(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -441,41 +408,41 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoDecodeInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoDecodeInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoDecodeInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoDecodeInfoKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkVideoDecodeFlagsKHR")
         public int flags() { return VkVideoDecodeInfoKHR.nflags(address()); }
-        /** @return the value of the {@link VkVideoDecodeInfoKHR#srcBuffer} field. */
+        /** @return the value of the {@code srcBuffer} field. */
         @NativeType("VkBuffer")
         public long srcBuffer() { return VkVideoDecodeInfoKHR.nsrcBuffer(address()); }
-        /** @return the value of the {@link VkVideoDecodeInfoKHR#srcBufferOffset} field. */
+        /** @return the value of the {@code srcBufferOffset} field. */
         @NativeType("VkDeviceSize")
         public long srcBufferOffset() { return VkVideoDecodeInfoKHR.nsrcBufferOffset(address()); }
-        /** @return the value of the {@link VkVideoDecodeInfoKHR#srcBufferRange} field. */
+        /** @return the value of the {@code srcBufferRange} field. */
         @NativeType("VkDeviceSize")
         public long srcBufferRange() { return VkVideoDecodeInfoKHR.nsrcBufferRange(address()); }
-        /** @return a {@link VkVideoPictureResourceInfoKHR} view of the {@link VkVideoDecodeInfoKHR#dstPictureResource} field. */
+        /** @return a {@link VkVideoPictureResourceInfoKHR} view of the {@code dstPictureResource} field. */
         public VkVideoPictureResourceInfoKHR dstPictureResource() { return VkVideoDecodeInfoKHR.ndstPictureResource(address()); }
-        /** @return a {@link VkVideoReferenceSlotInfoKHR} view of the struct pointed to by the {@link VkVideoDecodeInfoKHR#pSetupReferenceSlot} field. */
+        /** @return a {@link VkVideoReferenceSlotInfoKHR} view of the struct pointed to by the {@code pSetupReferenceSlot} field. */
         @NativeType("VkVideoReferenceSlotInfoKHR const *")
         public @Nullable VkVideoReferenceSlotInfoKHR pSetupReferenceSlot() { return VkVideoDecodeInfoKHR.npSetupReferenceSlot(address()); }
-        /** @return the value of the {@link VkVideoDecodeInfoKHR#referenceSlotCount} field. */
+        /** @return the value of the {@code referenceSlotCount} field. */
         @NativeType("uint32_t")
         public int referenceSlotCount() { return VkVideoDecodeInfoKHR.nreferenceSlotCount(address()); }
-        /** @return a {@link VkVideoReferenceSlotInfoKHR.Buffer} view of the struct array pointed to by the {@link VkVideoDecodeInfoKHR#pReferenceSlots} field. */
+        /** @return a {@link VkVideoReferenceSlotInfoKHR.Buffer} view of the struct array pointed to by the {@code pReferenceSlots} field. */
         @NativeType("VkVideoReferenceSlotInfoKHR const *")
         public VkVideoReferenceSlotInfoKHR.@Nullable Buffer pReferenceSlots() { return VkVideoDecodeInfoKHR.npReferenceSlots(address()); }
 
-        /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR} value to the {@link VkVideoDecodeInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoDecodeInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeInfoKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoDecodeAV1PictureInfoKHR} value to the {@code pNext} chain. */
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeAV1PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -485,21 +452,21 @@ public class VkVideoDecodeInfoKHR extends Struct<VkVideoDecodeInfoKHR> implement
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoDecodeH265PictureInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoInlineQueryInfoKHR} value to the {@code pNext} chain. */
         public VkVideoDecodeInfoKHR.Buffer pNext(VkVideoInlineQueryInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkVideoDecodeInfoKHR.Buffer flags(@NativeType("VkVideoDecodeFlagsKHR") int value) { VkVideoDecodeInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#srcBuffer} field. */
+        /** Sets the specified value to the {@code srcBuffer} field. */
         public VkVideoDecodeInfoKHR.Buffer srcBuffer(@NativeType("VkBuffer") long value) { VkVideoDecodeInfoKHR.nsrcBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#srcBufferOffset} field. */
+        /** Sets the specified value to the {@code srcBufferOffset} field. */
         public VkVideoDecodeInfoKHR.Buffer srcBufferOffset(@NativeType("VkDeviceSize") long value) { VkVideoDecodeInfoKHR.nsrcBufferOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoDecodeInfoKHR#srcBufferRange} field. */
+        /** Sets the specified value to the {@code srcBufferRange} field. */
         public VkVideoDecodeInfoKHR.Buffer srcBufferRange(@NativeType("VkDeviceSize") long value) { VkVideoDecodeInfoKHR.nsrcBufferRange(address(), value); return this; }
-        /** Copies the specified {@link VkVideoPictureResourceInfoKHR} to the {@link VkVideoDecodeInfoKHR#dstPictureResource} field. */
+        /** Copies the specified {@link VkVideoPictureResourceInfoKHR} to the {@code dstPictureResource} field. */
         public VkVideoDecodeInfoKHR.Buffer dstPictureResource(VkVideoPictureResourceInfoKHR value) { VkVideoDecodeInfoKHR.ndstPictureResource(address(), value); return this; }
-        /** Passes the {@link VkVideoDecodeInfoKHR#dstPictureResource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code dstPictureResource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoDecodeInfoKHR.Buffer dstPictureResource(java.util.function.Consumer<VkVideoPictureResourceInfoKHR> consumer) { consumer.accept(dstPictureResource()); return this; }
-        /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR} to the {@link VkVideoDecodeInfoKHR#pSetupReferenceSlot} field. */
+        /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR} to the {@code pSetupReferenceSlot} field. */
         public VkVideoDecodeInfoKHR.Buffer pSetupReferenceSlot(@Nullable @NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR value) { VkVideoDecodeInfoKHR.npSetupReferenceSlot(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@link VkVideoDecodeInfoKHR#pReferenceSlots} field. */
+        /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@code pReferenceSlots} field. */
         public VkVideoDecodeInfoKHR.Buffer pReferenceSlots(@NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR.@Nullable Buffer value) { VkVideoDecodeInfoKHR.npReferenceSlots(address(), value); return this; }
 
     }

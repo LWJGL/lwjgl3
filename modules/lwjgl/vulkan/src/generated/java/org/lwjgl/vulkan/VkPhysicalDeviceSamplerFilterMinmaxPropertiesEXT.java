@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceSamplerFilterMinmaxProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 filterMinmaxSingleComponentFormats;
  *     VkBool32 filterMinmaxImageComponentMapping;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT extends VkPhysicalDeviceSamplerFilterMinmaxProperties {
 

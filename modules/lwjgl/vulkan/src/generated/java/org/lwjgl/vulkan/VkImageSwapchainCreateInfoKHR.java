@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify that an image will be bound to swapchain memory.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code swapchain} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the fields of {@link VkImageCreateInfo} <b>must</b> match the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#swapchain-wsi-image-create-info">implied image creation parameters</a> of the swapchain</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSwapchain#VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR}</li>
- * <li>If {@code swapchain} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageSwapchainCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSwapchainKHR {@link #swapchain};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSwapchainKHR swapchain;
+ * }}</pre>
  */
 public class VkImageSwapchainCreateInfoKHR extends Struct<VkImageSwapchainCreateInfoKHR> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class VkImageSwapchainCreateInfoKHR extends Struct<VkImageSwapchainCreate
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a handle of a swapchain that the image will be bound to. */
+    /** @return the value of the {@code swapchain} field. */
     @NativeType("VkSwapchainKHR")
     public long swapchain() { return nswapchain(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageSwapchainCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkImageSwapchainCreateInfoKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageSwapchainCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #swapchain} field. */
+    /** Sets the specified value to the {@code swapchain} field. */
     public VkImageSwapchainCreateInfoKHR swapchain(@NativeType("VkSwapchainKHR") long value) { nswapchain(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,23 +305,23 @@ public class VkImageSwapchainCreateInfoKHR extends Struct<VkImageSwapchainCreate
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageSwapchainCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageSwapchainCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkImageSwapchainCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageSwapchainCreateInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkImageSwapchainCreateInfoKHR#swapchain} field. */
+        /** @return the value of the {@code swapchain} field. */
         @NativeType("VkSwapchainKHR")
         public long swapchain() { return VkImageSwapchainCreateInfoKHR.nswapchain(address()); }
 
-        /** Sets the specified value to the {@link VkImageSwapchainCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageSwapchainCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImageSwapchainCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR} value to the {@link VkImageSwapchainCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkImageSwapchainCreateInfoKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkImageSwapchainCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageSwapchainCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImageSwapchainCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageSwapchainCreateInfoKHR#swapchain} field. */
+        /** Sets the specified value to the {@code swapchain} field. */
         public VkImageSwapchainCreateInfoKHR.Buffer swapchain(@NativeType("VkSwapchainKHR") long value) { VkImageSwapchainCreateInfoKHR.nswapchain(address(), value); return this; }
 
     }

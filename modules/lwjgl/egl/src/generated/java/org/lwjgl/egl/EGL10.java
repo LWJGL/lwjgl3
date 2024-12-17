@@ -18,7 +18,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The core EGL 1.0 functionality. */
 public class EGL10 {
 
     public static final int
@@ -79,7 +78,6 @@ public class EGL10 {
         EGL_WIDTH                   = 0x3057,
         EGL_WINDOW_BIT              = 0x4;
 
-    /** Null values. */
     public static final long
         EGL_NO_CONTEXT = 0x0L,
         EGL_NO_DISPLAY = 0x0L,
@@ -91,6 +89,7 @@ public class EGL10 {
 
     // --- [ eglChooseConfig ] ---
 
+    /** {@code EGLBoolean eglChooseConfig(EGLDisplay dpy, EGLint const * attrib_list, EGLConfig * configs, EGLint config_size, EGLint * num_config)} */
     public static int neglChooseConfig(long dpy, long attrib_list, long configs, int config_size, long num_config) {
         long __functionAddress = EGL.getCapabilities().eglChooseConfig;
         if (CHECKS) {
@@ -100,7 +99,7 @@ public class EGL10 {
         return callPPPPI(dpy, attrib_list, configs, config_size, num_config, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglChooseConfig.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglChooseConfig(EGLDisplay dpy, EGLint const * attrib_list, EGLConfig * configs, EGLint config_size, EGLint * num_config)} */
     @NativeType("EGLBoolean")
     public static boolean eglChooseConfig(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list, @NativeType("EGLConfig *") @Nullable PointerBuffer configs, @NativeType("EGLint *") IntBuffer num_config) {
         if (CHECKS) {
@@ -112,7 +111,7 @@ public class EGL10 {
 
     // --- [ eglCopyBuffers ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCopyBuffers.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglCopyBuffers(EGLDisplay dpy, EGLSurface surface, EGLNativePixmapType target)} */
     @NativeType("EGLBoolean")
     public static boolean eglCopyBuffers(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLNativePixmapType") long target) {
         long __functionAddress = EGL.getCapabilities().eglCopyBuffers;
@@ -127,6 +126,7 @@ public class EGL10 {
 
     // --- [ eglCreateContext ] ---
 
+    /** {@code EGLContext eglCreateContext(EGLDisplay dpy, EGLConfig config, EGLContext share_context, EGLint const * attrib_list)} */
     public static long neglCreateContext(long dpy, long config, long share_context, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateContext;
         if (CHECKS) {
@@ -137,7 +137,7 @@ public class EGL10 {
         return callPPPPP(dpy, config, share_context, attrib_list, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateContext.xhtml">Reference Page</a> */
+    /** {@code EGLContext eglCreateContext(EGLDisplay dpy, EGLConfig config, EGLContext share_context, EGLint const * attrib_list)} */
     @NativeType("EGLContext")
     public static long eglCreateContext(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLContext") long share_context, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
@@ -148,6 +148,7 @@ public class EGL10 {
 
     // --- [ eglCreatePbufferSurface ] ---
 
+    /** {@code EGLSurface eglCreatePbufferSurface(EGLDisplay dpy, EGLConfig config, EGLint const * attrib_list)} */
     public static long neglCreatePbufferSurface(long dpy, long config, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreatePbufferSurface;
         if (CHECKS) {
@@ -158,7 +159,7 @@ public class EGL10 {
         return callPPPP(dpy, config, attrib_list, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferSurface.xhtml">Reference Page</a> */
+    /** {@code EGLSurface eglCreatePbufferSurface(EGLDisplay dpy, EGLConfig config, EGLint const * attrib_list)} */
     @NativeType("EGLSurface")
     public static long eglCreatePbufferSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
@@ -169,6 +170,7 @@ public class EGL10 {
 
     // --- [ eglCreatePixmapSurface ] ---
 
+    /** {@code EGLSurface eglCreatePixmapSurface(EGLDisplay dpy, EGLConfig config, EGLNativePixmapType pixmap, EGLint const * attrib_list)} */
     public static long neglCreatePixmapSurface(long dpy, long config, long pixmap, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreatePixmapSurface;
         if (CHECKS) {
@@ -180,7 +182,7 @@ public class EGL10 {
         return callPPPPP(dpy, config, pixmap, attrib_list, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePixmapSurface.xhtml">Reference Page</a> */
+    /** {@code EGLSurface eglCreatePixmapSurface(EGLDisplay dpy, EGLConfig config, EGLNativePixmapType pixmap, EGLint const * attrib_list)} */
     @NativeType("EGLSurface")
     public static long eglCreatePixmapSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLNativePixmapType") long pixmap, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
@@ -191,6 +193,7 @@ public class EGL10 {
 
     // --- [ eglCreateWindowSurface ] ---
 
+    /** {@code EGLSurface eglCreateWindowSurface(EGLDisplay dpy, EGLConfig config, EGLNativeWindowType win, EGLint const * attrib_list)} */
     public static long neglCreateWindowSurface(long dpy, long config, long win, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateWindowSurface;
         if (CHECKS) {
@@ -202,7 +205,7 @@ public class EGL10 {
         return callPPPPP(dpy, config, win, attrib_list, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateWindowSurface.xhtml">Reference Page</a> */
+    /** {@code EGLSurface eglCreateWindowSurface(EGLDisplay dpy, EGLConfig config, EGLNativeWindowType win, EGLint const * attrib_list)} */
     @NativeType("EGLSurface")
     public static long eglCreateWindowSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLNativeWindowType") long win, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
@@ -213,7 +216,7 @@ public class EGL10 {
 
     // --- [ eglDestroyContext ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglDestroyContext.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglDestroyContext(EGLDisplay dpy, EGLContext ctx)} */
     @NativeType("EGLBoolean")
     public static boolean eglDestroyContext(@NativeType("EGLDisplay") long dpy, @NativeType("EGLContext") long ctx) {
         long __functionAddress = EGL.getCapabilities().eglDestroyContext;
@@ -227,7 +230,7 @@ public class EGL10 {
 
     // --- [ eglDestroySurface ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglDestroySurface.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglDestroySurface(EGLDisplay dpy, EGLSurface surface)} */
     @NativeType("EGLBoolean")
     public static boolean eglDestroySurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface) {
         long __functionAddress = EGL.getCapabilities().eglDestroySurface;
@@ -241,6 +244,7 @@ public class EGL10 {
 
     // --- [ eglGetConfigAttrib ] ---
 
+    /** {@code EGLBoolean eglGetConfigAttrib(EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint * value)} */
     public static int neglGetConfigAttrib(long dpy, long config, int attribute, long value) {
         long __functionAddress = EGL.getCapabilities().eglGetConfigAttrib;
         if (CHECKS) {
@@ -251,7 +255,7 @@ public class EGL10 {
         return callPPPI(dpy, config, attribute, value, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigAttrib.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglGetConfigAttrib(EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglGetConfigAttrib(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLint") int attribute, @NativeType("EGLint *") IntBuffer value) {
         if (CHECKS) {
@@ -262,6 +266,7 @@ public class EGL10 {
 
     // --- [ eglGetConfigs ] ---
 
+    /** {@code EGLBoolean eglGetConfigs(EGLDisplay dpy, EGLConfig * configs, EGLint config_size, EGLint * num_config)} */
     public static int neglGetConfigs(long dpy, long configs, int config_size, long num_config) {
         long __functionAddress = EGL.getCapabilities().eglGetConfigs;
         if (CHECKS) {
@@ -271,7 +276,7 @@ public class EGL10 {
         return callPPPI(dpy, configs, config_size, num_config, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigs.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglGetConfigs(EGLDisplay dpy, EGLConfig * configs, EGLint config_size, EGLint * num_config)} */
     @NativeType("EGLBoolean")
     public static boolean eglGetConfigs(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig *") @Nullable PointerBuffer configs, @NativeType("EGLint *") IntBuffer num_config) {
         if (CHECKS) {
@@ -282,7 +287,7 @@ public class EGL10 {
 
     // --- [ eglGetCurrentDisplay ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetCurrentDisplay.xhtml">Reference Page</a> */
+    /** {@code EGLDisplay eglGetCurrentDisplay(void)} */
     @NativeType("EGLDisplay")
     public static long eglGetCurrentDisplay() {
         long __functionAddress = EGL.getCapabilities().eglGetCurrentDisplay;
@@ -294,7 +299,7 @@ public class EGL10 {
 
     // --- [ eglGetCurrentSurface ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetCurrentSurface.xhtml">Reference Page</a> */
+    /** {@code EGLSurface eglGetCurrentSurface(EGLint readdraw)} */
     @NativeType("EGLSurface")
     public static long eglGetCurrentSurface(@NativeType("EGLint") int readdraw) {
         long __functionAddress = EGL.getCapabilities().eglGetCurrentSurface;
@@ -306,7 +311,7 @@ public class EGL10 {
 
     // --- [ eglGetDisplay ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetDisplay.xhtml">Reference Page</a> */
+    /** {@code EGLDisplay eglGetDisplay(EGLNativeDisplayType display_id)} */
     @NativeType("EGLDisplay")
     public static long eglGetDisplay(@NativeType("EGLNativeDisplayType") long display_id) {
         long __functionAddress = EGL.getCapabilities().eglGetDisplay;
@@ -318,7 +323,7 @@ public class EGL10 {
 
     // --- [ eglGetError ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetError.xhtml">Reference Page</a> */
+    /** {@code EGLint eglGetError(void)} */
     @NativeType("EGLint")
     public static int eglGetError() {
         long __functionAddress = EGL.getCapabilities().eglGetError;
@@ -330,6 +335,7 @@ public class EGL10 {
 
     // --- [ eglGetProcAddress ] ---
 
+    /** {@code __eglMustCastToProperFunctionPointerType eglGetProcAddress(char const * procname)} */
     public static long neglGetProcAddress(long procname) {
         long __functionAddress = EGL.getCapabilities().eglGetProcAddress;
         if (CHECKS) {
@@ -338,7 +344,7 @@ public class EGL10 {
         return callPP(procname, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetProcAddress.xhtml">Reference Page</a> */
+    /** {@code __eglMustCastToProperFunctionPointerType eglGetProcAddress(char const * procname)} */
     @NativeType("__eglMustCastToProperFunctionPointerType")
     public static long eglGetProcAddress(@NativeType("char const *") ByteBuffer procname) {
         if (CHECKS) {
@@ -347,7 +353,7 @@ public class EGL10 {
         return neglGetProcAddress(memAddress(procname));
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetProcAddress.xhtml">Reference Page</a> */
+    /** {@code __eglMustCastToProperFunctionPointerType eglGetProcAddress(char const * procname)} */
     @NativeType("__eglMustCastToProperFunctionPointerType")
     public static long eglGetProcAddress(@NativeType("char const *") CharSequence procname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -362,6 +368,7 @@ public class EGL10 {
 
     // --- [ eglInitialize ] ---
 
+    /** {@code EGLBoolean eglInitialize(EGLDisplay dpy, EGLint * major, EGLint * minor)} */
     public static int neglInitialize(long dpy, long major, long minor) {
         long __functionAddress = EGL.getCapabilities().eglInitialize;
         if (CHECKS) {
@@ -371,7 +378,7 @@ public class EGL10 {
         return callPPPI(dpy, major, minor, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglInitialize.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglInitialize(EGLDisplay dpy, EGLint * major, EGLint * minor)} */
     @NativeType("EGLBoolean")
     public static boolean eglInitialize(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint *") @Nullable IntBuffer major, @NativeType("EGLint *") @Nullable IntBuffer minor) {
         if (CHECKS) {
@@ -383,7 +390,7 @@ public class EGL10 {
 
     // --- [ eglMakeCurrent ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglMakeCurrent.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglMakeCurrent(EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx)} */
     @NativeType("EGLBoolean")
     public static boolean eglMakeCurrent(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long draw, @NativeType("EGLSurface") long read, @NativeType("EGLContext") long ctx) {
         long __functionAddress = EGL.getCapabilities().eglMakeCurrent;
@@ -396,6 +403,7 @@ public class EGL10 {
 
     // --- [ eglQueryContext ] ---
 
+    /** {@code EGLBoolean eglQueryContext(EGLDisplay dpy, EGLContext ctx, EGLint attribute, EGLint * value)} */
     public static int neglQueryContext(long dpy, long ctx, int attribute, long value) {
         long __functionAddress = EGL.getCapabilities().eglQueryContext;
         if (CHECKS) {
@@ -406,7 +414,7 @@ public class EGL10 {
         return callPPPI(dpy, ctx, attribute, value, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQueryContext.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglQueryContext(EGLDisplay dpy, EGLContext ctx, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryContext(@NativeType("EGLDisplay") long dpy, @NativeType("EGLContext") long ctx, @NativeType("EGLint") int attribute, @NativeType("EGLint *") IntBuffer value) {
         if (CHECKS) {
@@ -417,6 +425,7 @@ public class EGL10 {
 
     // --- [ eglQueryString ] ---
 
+    /** {@code char * eglQueryString(EGLDisplay dpy, EGLint name)} */
     public static long neglQueryString(long dpy, int name) {
         long __functionAddress = EGL.getCapabilities().eglQueryString;
         if (CHECKS) {
@@ -425,7 +434,7 @@ public class EGL10 {
         return callPP(dpy, name, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQueryString.xhtml">Reference Page</a> */
+    /** {@code char * eglQueryString(EGLDisplay dpy, EGLint name)} */
     @NativeType("char *")
     public static @Nullable String eglQueryString(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint") int name) {
         long __result = neglQueryString(dpy, name);
@@ -434,6 +443,7 @@ public class EGL10 {
 
     // --- [ eglQuerySurface ] ---
 
+    /** {@code EGLBoolean eglQuerySurface(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint * value)} */
     public static int neglQuerySurface(long dpy, long surface, int attribute, long value) {
         long __functionAddress = EGL.getCapabilities().eglQuerySurface;
         if (CHECKS) {
@@ -444,7 +454,7 @@ public class EGL10 {
         return callPPPI(dpy, surface, attribute, value, __functionAddress);
     }
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQuerySurface.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglQuerySurface(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQuerySurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint") int attribute, @NativeType("EGLint *") IntBuffer value) {
         if (CHECKS) {
@@ -455,7 +465,7 @@ public class EGL10 {
 
     // --- [ eglSwapBuffers ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglSwapBuffers.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglSwapBuffers(EGLDisplay dpy, EGLSurface surface)} */
     @NativeType("EGLBoolean")
     public static boolean eglSwapBuffers(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface) {
         long __functionAddress = EGL.getCapabilities().eglSwapBuffers;
@@ -469,7 +479,7 @@ public class EGL10 {
 
     // --- [ eglTerminate ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglTerminate.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglTerminate(EGLDisplay dpy)} */
     @NativeType("EGLBoolean")
     public static boolean eglTerminate(@NativeType("EGLDisplay") long dpy) {
         long __functionAddress = EGL.getCapabilities().eglTerminate;
@@ -482,7 +492,7 @@ public class EGL10 {
 
     // --- [ eglWaitGL ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglWaitGL.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglWaitGL(void)} */
     @NativeType("EGLBoolean")
     public static boolean eglWaitGL() {
         long __functionAddress = EGL.getCapabilities().eglWaitGL;
@@ -494,7 +504,7 @@ public class EGL10 {
 
     // --- [ eglWaitNative ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglWaitNative.xhtml">Reference Page</a> */
+    /** {@code EGLBoolean eglWaitNative(EGLint engine)} */
     @NativeType("EGLBoolean")
     public static boolean eglWaitNative(@NativeType("EGLint") int engine) {
         long __functionAddress = EGL.getCapabilities().eglWaitNative;
@@ -504,11 +514,7 @@ public class EGL10 {
         return callI(engine, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #eglChooseConfig ChooseConfig}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglChooseConfig.xhtml">Reference Page</a>
-     */
+    /** {@code EGLBoolean eglChooseConfig(EGLDisplay dpy, EGLint const * attrib_list, EGLConfig * configs, EGLint config_size, EGLint * num_config)} */
     @NativeType("EGLBoolean")
     public static boolean eglChooseConfig(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint const *") int @Nullable [] attrib_list, @NativeType("EGLConfig *") @Nullable PointerBuffer configs, @NativeType("EGLint *") int[] num_config) {
         long __functionAddress = EGL.getCapabilities().eglChooseConfig;
@@ -521,11 +527,7 @@ public class EGL10 {
         return callPPPPI(dpy, attrib_list, memAddressSafe(configs), remainingSafe(configs), num_config, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #eglCreateContext CreateContext}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateContext.xhtml">Reference Page</a>
-     */
+    /** {@code EGLContext eglCreateContext(EGLDisplay dpy, EGLConfig config, EGLContext share_context, EGLint const * attrib_list)} */
     @NativeType("EGLContext")
     public static long eglCreateContext(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLContext") long share_context, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateContext;
@@ -538,11 +540,7 @@ public class EGL10 {
         return callPPPPP(dpy, config, share_context, attrib_list, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #eglCreatePbufferSurface CreatePbufferSurface}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePbufferSurface.xhtml">Reference Page</a>
-     */
+    /** {@code EGLSurface eglCreatePbufferSurface(EGLDisplay dpy, EGLConfig config, EGLint const * attrib_list)} */
     @NativeType("EGLSurface")
     public static long eglCreatePbufferSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreatePbufferSurface;
@@ -555,11 +553,7 @@ public class EGL10 {
         return callPPPP(dpy, config, attrib_list, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #eglCreatePixmapSurface CreatePixmapSurface}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreatePixmapSurface.xhtml">Reference Page</a>
-     */
+    /** {@code EGLSurface eglCreatePixmapSurface(EGLDisplay dpy, EGLConfig config, EGLNativePixmapType pixmap, EGLint const * attrib_list)} */
     @NativeType("EGLSurface")
     public static long eglCreatePixmapSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLNativePixmapType") long pixmap, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreatePixmapSurface;
@@ -573,11 +567,7 @@ public class EGL10 {
         return callPPPPP(dpy, config, pixmap, attrib_list, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #eglCreateWindowSurface CreateWindowSurface}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglCreateWindowSurface.xhtml">Reference Page</a>
-     */
+    /** {@code EGLSurface eglCreateWindowSurface(EGLDisplay dpy, EGLConfig config, EGLNativeWindowType win, EGLint const * attrib_list)} */
     @NativeType("EGLSurface")
     public static long eglCreateWindowSurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLNativeWindowType") long win, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateWindowSurface;
@@ -591,11 +581,7 @@ public class EGL10 {
         return callPPPPP(dpy, config, win, attrib_list, __functionAddress);
     }
 
-    /**
-     * Array version of: {@link #eglGetConfigAttrib GetConfigAttrib}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigAttrib.xhtml">Reference Page</a>
-     */
+    /** {@code EGLBoolean eglGetConfigAttrib(EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglGetConfigAttrib(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLint") int attribute, @NativeType("EGLint *") int[] value) {
         long __functionAddress = EGL.getCapabilities().eglGetConfigAttrib;
@@ -608,11 +594,7 @@ public class EGL10 {
         return callPPPI(dpy, config, attribute, value, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #eglGetConfigs GetConfigs}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetConfigs.xhtml">Reference Page</a>
-     */
+    /** {@code EGLBoolean eglGetConfigs(EGLDisplay dpy, EGLConfig * configs, EGLint config_size, EGLint * num_config)} */
     @NativeType("EGLBoolean")
     public static boolean eglGetConfigs(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig *") @Nullable PointerBuffer configs, @NativeType("EGLint *") int[] num_config) {
         long __functionAddress = EGL.getCapabilities().eglGetConfigs;
@@ -624,11 +606,7 @@ public class EGL10 {
         return callPPPI(dpy, memAddressSafe(configs), remainingSafe(configs), num_config, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #eglInitialize Initialize}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglInitialize.xhtml">Reference Page</a>
-     */
+    /** {@code EGLBoolean eglInitialize(EGLDisplay dpy, EGLint * major, EGLint * minor)} */
     @NativeType("EGLBoolean")
     public static boolean eglInitialize(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint *") int @Nullable [] major, @NativeType("EGLint *") int @Nullable [] minor) {
         long __functionAddress = EGL.getCapabilities().eglInitialize;
@@ -641,11 +619,7 @@ public class EGL10 {
         return callPPPI(dpy, major, minor, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #eglQueryContext QueryContext}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQueryContext.xhtml">Reference Page</a>
-     */
+    /** {@code EGLBoolean eglQueryContext(EGLDisplay dpy, EGLContext ctx, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryContext(@NativeType("EGLDisplay") long dpy, @NativeType("EGLContext") long ctx, @NativeType("EGLint") int attribute, @NativeType("EGLint *") int[] value) {
         long __functionAddress = EGL.getCapabilities().eglQueryContext;
@@ -658,11 +632,7 @@ public class EGL10 {
         return callPPPI(dpy, ctx, attribute, value, __functionAddress) != 0;
     }
 
-    /**
-     * Array version of: {@link #eglQuerySurface QuerySurface}
-     * 
-     * @see <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglQuerySurface.xhtml">Reference Page</a>
-     */
+    /** {@code EGLBoolean eglQuerySurface(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQuerySurface(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint") int attribute, @NativeType("EGLint *") int[] value) {
         long __functionAddress = EGL.getCapabilities().eglQuerySurface;

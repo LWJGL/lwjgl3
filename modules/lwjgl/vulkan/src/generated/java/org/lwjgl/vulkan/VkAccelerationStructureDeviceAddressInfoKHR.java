@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the acceleration structure to query an address for.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code accelerationStructure} <b>must</b> be a valid {@code VkAccelerationStructureKHR} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRAccelerationStructure#vkGetAccelerationStructureDeviceAddressKHR GetAccelerationStructureDeviceAddressKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureDeviceAddressInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkAccelerationStructureKHR {@link #accelerationStructure};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkAccelerationStructureKHR accelerationStructure;
+ * }}</pre>
  */
 public class VkAccelerationStructureDeviceAddressInfoKHR extends Struct<VkAccelerationStructureDeviceAddressInfoKHR> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class VkAccelerationStructureDeviceAddressInfoKHR extends Struct<VkAccele
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the acceleration structure whose address is being queried. */
+    /** @return the value of the {@code accelerationStructure} field. */
     @NativeType("VkAccelerationStructureKHR")
     public long accelerationStructure() { return naccelerationStructure(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAccelerationStructureDeviceAddressInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR} value to the {@code sType} field. */
     public VkAccelerationStructureDeviceAddressInfoKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAccelerationStructureDeviceAddressInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #accelerationStructure} field. */
+    /** Sets the specified value to the {@code accelerationStructure} field. */
     public VkAccelerationStructureDeviceAddressInfoKHR accelerationStructure(@NativeType("VkAccelerationStructureKHR") long value) { naccelerationStructure(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,23 +286,23 @@ public class VkAccelerationStructureDeviceAddressInfoKHR extends Struct<VkAccele
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAccelerationStructureDeviceAddressInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureDeviceAddressInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkAccelerationStructureDeviceAddressInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureDeviceAddressInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkAccelerationStructureDeviceAddressInfoKHR#accelerationStructure} field. */
+        /** @return the value of the {@code accelerationStructure} field. */
         @NativeType("VkAccelerationStructureKHR")
         public long accelerationStructure() { return VkAccelerationStructureDeviceAddressInfoKHR.naccelerationStructure(address()); }
 
-        /** Sets the specified value to the {@link VkAccelerationStructureDeviceAddressInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAccelerationStructureDeviceAddressInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureDeviceAddressInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR} value to the {@link VkAccelerationStructureDeviceAddressInfoKHR#sType} field. */
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR} value to the {@code sType} field. */
         public VkAccelerationStructureDeviceAddressInfoKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR); }
-        /** Sets the specified value to the {@link VkAccelerationStructureDeviceAddressInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAccelerationStructureDeviceAddressInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureDeviceAddressInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureDeviceAddressInfoKHR#accelerationStructure} field. */
+        /** Sets the specified value to the {@code accelerationStructure} field. */
         public VkAccelerationStructureDeviceAddressInfoKHR.Buffer accelerationStructure(@NativeType("VkAccelerationStructureKHR") long value) { VkAccelerationStructureDeviceAddressInfoKHR.naccelerationStructure(address(), value); return this; }
 
     }

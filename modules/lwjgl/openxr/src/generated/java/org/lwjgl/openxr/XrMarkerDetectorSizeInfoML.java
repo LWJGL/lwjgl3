@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a marker detection handle for QR markers.
- * 
- * <h5>Description</h5>
- * 
- * <p>Pose estimation accuracy depends on the accuracy of the specified {@code markerLength}.</p>
- * 
- * <p>This structure is used by {@link MLMarkerUnderstanding#XR_MARKER_TYPE_ARUCO_ML MARKER_TYPE_ARUCO_ML}, {@link MLMarkerUnderstanding#XR_MARKER_TYPE_APRIL_TAG_ML MARKER_TYPE_APRIL_TAG_ML}, and {@link MLMarkerUnderstanding#XR_MARKER_TYPE_QR_ML MARKER_TYPE_QR_ML} detectors.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using {@link XrMarkerDetectorSizeInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML TYPE_MARKER_DETECTOR_SIZE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrMarkerDetectorCreateInfoML}, {@link MLMarkerUnderstanding#xrCreateMarkerDetectorML CreateMarkerDetectorML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMarkerDetectorSizeInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     float {@link #markerLength};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     float markerLength;
+ * }}</pre>
  */
 public class XrMarkerDetectorSizeInfoML extends Struct<XrMarkerDetectorSizeInfoML> implements NativeResource {
 
@@ -96,22 +74,22 @@ public class XrMarkerDetectorSizeInfoML extends Struct<XrMarkerDetectorSizeInfoM
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the physical length of one side of a marker. */
+    /** @return the value of the {@code markerLength} field. */
     public float markerLength() { return nmarkerLength(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMarkerDetectorSizeInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML TYPE_MARKER_DETECTOR_SIZE_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML TYPE_MARKER_DETECTOR_SIZE_INFO_ML} value to the {@code type} field. */
     public XrMarkerDetectorSizeInfoML type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMarkerDetectorSizeInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #markerLength} field. */
+    /** Sets the specified value to the {@code markerLength} field. */
     public XrMarkerDetectorSizeInfoML markerLength(float value) { nmarkerLength(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,22 +285,22 @@ public class XrMarkerDetectorSizeInfoML extends Struct<XrMarkerDetectorSizeInfoM
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMarkerDetectorSizeInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMarkerDetectorSizeInfoML.ntype(address()); }
-        /** @return the value of the {@link XrMarkerDetectorSizeInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrMarkerDetectorSizeInfoML.nnext(address()); }
-        /** @return the value of the {@link XrMarkerDetectorSizeInfoML#markerLength} field. */
+        /** @return the value of the {@code markerLength} field. */
         public float markerLength() { return XrMarkerDetectorSizeInfoML.nmarkerLength(address()); }
 
-        /** Sets the specified value to the {@link XrMarkerDetectorSizeInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMarkerDetectorSizeInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrMarkerDetectorSizeInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML TYPE_MARKER_DETECTOR_SIZE_INFO_ML} value to the {@link XrMarkerDetectorSizeInfoML#type} field. */
+        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML TYPE_MARKER_DETECTOR_SIZE_INFO_ML} value to the {@code type} field. */
         public XrMarkerDetectorSizeInfoML.Buffer type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML); }
-        /** Sets the specified value to the {@link XrMarkerDetectorSizeInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMarkerDetectorSizeInfoML.Buffer next(@NativeType("void const *") long value) { XrMarkerDetectorSizeInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorSizeInfoML#markerLength} field. */
+        /** Sets the specified value to the {@code markerLength} field. */
         public XrMarkerDetectorSizeInfoML.Buffer markerLength(float value) { XrMarkerDetectorSizeInfoML.nmarkerLength(address(), value); return this; }
 
     }

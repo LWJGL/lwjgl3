@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Statistics returned for defragmentation process in function {@link Vma#vmaEndDefragmentation EndDefragmentation}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaDefragmentationStats {
- *     VkDeviceSize {@link #bytesMoved};
- *     VkDeviceSize {@link #bytesFreed};
- *     uint32_t {@link #allocationsMoved};
- *     uint32_t {@link #deviceMemoryBlocksFreed};
- * }</code></pre>
+ *     VkDeviceSize bytesMoved;
+ *     VkDeviceSize bytesFreed;
+ *     uint32_t allocationsMoved;
+ *     uint32_t deviceMemoryBlocksFreed;
+ * }}</pre>
  */
 public class VmaDefragmentationStats extends Struct<VmaDefragmentationStats> implements NativeResource {
 
@@ -82,16 +78,16 @@ public class VmaDefragmentationStats extends Struct<VmaDefragmentationStats> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** total number of bytes that have been copied while moving allocations to different places */
+    /** @return the value of the {@code bytesMoved} field. */
     @NativeType("VkDeviceSize")
     public long bytesMoved() { return nbytesMoved(address()); }
-    /** total number of bytes that have been released to the system by freeing empty {@code VkDeviceMemory} objects */
+    /** @return the value of the {@code bytesFreed} field. */
     @NativeType("VkDeviceSize")
     public long bytesFreed() { return nbytesFreed(address()); }
-    /** number of allocations that have been moved to different places */
+    /** @return the value of the {@code allocationsMoved} field. */
     @NativeType("uint32_t")
     public int allocationsMoved() { return nallocationsMoved(address()); }
-    /** number of empty {@code VkDeviceMemory} objects that have been released to the system */
+    /** @return the value of the {@code deviceMemoryBlocksFreed} field. */
     @NativeType("uint32_t")
     public int deviceMemoryBlocksFreed() { return ndeviceMemoryBlocksFreed(address()); }
 
@@ -277,16 +273,16 @@ public class VmaDefragmentationStats extends Struct<VmaDefragmentationStats> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VmaDefragmentationStats#bytesMoved} field. */
+        /** @return the value of the {@code bytesMoved} field. */
         @NativeType("VkDeviceSize")
         public long bytesMoved() { return VmaDefragmentationStats.nbytesMoved(address()); }
-        /** @return the value of the {@link VmaDefragmentationStats#bytesFreed} field. */
+        /** @return the value of the {@code bytesFreed} field. */
         @NativeType("VkDeviceSize")
         public long bytesFreed() { return VmaDefragmentationStats.nbytesFreed(address()); }
-        /** @return the value of the {@link VmaDefragmentationStats#allocationsMoved} field. */
+        /** @return the value of the {@code allocationsMoved} field. */
         @NativeType("uint32_t")
         public int allocationsMoved() { return VmaDefragmentationStats.nallocationsMoved(address()); }
-        /** @return the value of the {@link VmaDefragmentationStats#deviceMemoryBlocksFreed} field. */
+        /** @return the value of the {@code deviceMemoryBlocksFreed} field. */
         @NativeType("uint32_t")
         public int deviceMemoryBlocksFreed() { return VmaDefragmentationStats.ndeviceMemoryBlocksFreed(address()); }
 

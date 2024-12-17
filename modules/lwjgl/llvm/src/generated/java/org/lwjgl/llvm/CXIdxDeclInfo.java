@@ -16,24 +16,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXIdxDeclInfo {
  *     {@link CXIdxEntityInfo CXIdxEntityInfo} const * entityInfo;
  *     {@link CXCursor CXCursor} cursor;
  *     {@link CXIdxLoc CXIdxLoc} loc;
  *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * semanticContainer;
- *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * {@link #lexicalContainer};
+ *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * lexicalContainer;
  *     int isRedeclaration;
  *     int isDefinition;
  *     int isContainer;
  *     {@link CXIdxContainerInfo CXIdxContainerInfo} const * declAsContainer;
- *     int {@link #isImplicit};
+ *     int isImplicit;
  *     {@link CXIdxAttrInfo CXIdxAttrInfo} const * const * attributes;
  *     unsigned numAttributes;
  *     unsigned flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResource {
 
@@ -126,7 +124,7 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
     /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code semanticContainer} field. */
     @NativeType("CXIdxContainerInfo const *")
     public CXIdxContainerInfo semanticContainer() { return nsemanticContainer(address()); }
-    /** generally same as {@code semanticContainer} but can be different in cases like out-of-line C++ member functions */
+    /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code lexicalContainer} field. */
     @NativeType("CXIdxContainerInfo const *")
     public CXIdxContainerInfo lexicalContainer() { return nlexicalContainer(address()); }
     /** @return the value of the {@code isRedeclaration} field. */
@@ -141,7 +139,7 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
     /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code declAsContainer} field. */
     @NativeType("CXIdxContainerInfo const *")
     public CXIdxContainerInfo declAsContainer() { return ndeclAsContainer(address()); }
-    /** whether the declaration exists in code or was created implicitly by the compiler, e.g. implicit Objective-C methods for properties */
+    /** @return the value of the {@code isImplicit} field. */
     @NativeType("int")
     public boolean isImplicit() { return nisImplicit(address()) != 0; }
     /** @return a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */
@@ -364,7 +362,7 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
         /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code semanticContainer} field. */
         @NativeType("CXIdxContainerInfo const *")
         public CXIdxContainerInfo semanticContainer() { return CXIdxDeclInfo.nsemanticContainer(address()); }
-        /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@link CXIdxDeclInfo#lexicalContainer} field. */
+        /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code lexicalContainer} field. */
         @NativeType("CXIdxContainerInfo const *")
         public CXIdxContainerInfo lexicalContainer() { return CXIdxDeclInfo.nlexicalContainer(address()); }
         /** @return the value of the {@code isRedeclaration} field. */
@@ -379,7 +377,7 @@ public class CXIdxDeclInfo extends Struct<CXIdxDeclInfo> implements NativeResour
         /** @return a {@link CXIdxContainerInfo} view of the struct pointed to by the {@code declAsContainer} field. */
         @NativeType("CXIdxContainerInfo const *")
         public CXIdxContainerInfo declAsContainer() { return CXIdxDeclInfo.ndeclAsContainer(address()); }
-        /** @return the value of the {@link CXIdxDeclInfo#isImplicit} field. */
+        /** @return the value of the {@code isImplicit} field. */
         @NativeType("int")
         public boolean isImplicit() { return CXIdxDeclInfo.nisImplicit(address()) != 0; }
         /** @return a {@link PointerBuffer} view of the data pointed to by the {@code attributes} field. */

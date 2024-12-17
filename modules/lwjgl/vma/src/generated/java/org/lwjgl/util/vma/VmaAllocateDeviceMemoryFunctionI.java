@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@link VmaDeviceMemoryCallbacks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     VmaAllocator allocator,
- *     uint32_t memoryType,
- *     VkDeviceMemory memory,
- *     VkDeviceSize size,
- *     void *pUserData
- * )</code></pre>
- */
+/** Callback function: {@link #invoke PFN_vmaAllocateDeviceMemoryFunction} */
 @FunctionalInterface
 @NativeType("PFN_vmaAllocateDeviceMemoryFunction")
 public interface VmaAllocateDeviceMemoryFunctionI extends CallbackI {
@@ -50,7 +37,7 @@ public interface VmaAllocateDeviceMemoryFunctionI extends CallbackI {
         );
     }
 
-    /** Called after successful {@code vkAllocateMemory}. */
+    /** {@code void (* PFN_vmaAllocateDeviceMemoryFunction) (VmaAllocator allocator, uint32_t memoryType, VkDeviceMemory memory, VkDeviceSize size, void * pUserData)} */
     void invoke(@NativeType("VmaAllocator") long allocator, @NativeType("uint32_t") int memoryType, @NativeType("VkDeviceMemory") long memory, @NativeType("VkDeviceSize") long size, @NativeType("void *") long pUserData);
 
 }

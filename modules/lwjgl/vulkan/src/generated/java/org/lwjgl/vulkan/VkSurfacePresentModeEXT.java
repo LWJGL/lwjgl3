@@ -16,40 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing present mode of a surface.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkSurfacePresentModeEXT} structure is included in the {@code pNext} chain of {@link VkPhysicalDeviceSurfaceInfo2KHR}, the values returned in {@link VkSurfaceCapabilitiesKHR}{@code ::minImageCount}, {@link VkSurfaceCapabilitiesKHR}{@code ::maxImageCount}, {@link VkSurfacePresentScalingCapabilitiesEXT}{@code ::minScaledImageExtent}, and {@link VkSurfacePresentScalingCapabilitiesEXT}{@code ::maxScaledImageExtent} are valid only for the specified {@code presentMode}. If {@code presentMode} is {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR} or {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR}, the per-present mode image counts <b>must</b> both be one. The per-present mode image counts <b>may</b> be less-than or greater-than the image counts returned when {@link VkSurfacePresentModeEXT} is not provided.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>If {@link VkSwapchainPresentModesCreateInfoEXT} is provided to swapchain creation, the requirements for forward progress may be less strict. For example, a FIFO swapchain might only require 2 images to guarantee forward progress, but a MAILBOX one might require 4. Without the per-present image counts, such an implementation would have to return 4 in {@link VkSurfaceCapabilitiesKHR}{@code ::minImageCount}, which pessimizes FIFO. Conversely, an implementation may return a low number for minImageCount, but internally bump the image count when application queries {@link KHRSwapchain#vkGetSwapchainImagesKHR GetSwapchainImagesKHR}, which can surprise applications, and is not discoverable until swapchain creation. Using {@link VkSurfacePresentModeEXT} and {@link VkSwapchainPresentModesCreateInfoEXT} together effectively removes this problem.</p>
- * 
- * <p>{@link VkSwapchainPresentModesCreateInfoEXT} is required for the specification to be backwards compatible with applications that do not know about, or make use of this feature.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code presentMode} <b>must</b> be a value reported by {@link KHRSurface#vkGetPhysicalDeviceSurfacePresentModesKHR GetPhysicalDeviceSurfacePresentModesKHR} for the specified surface</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT}</li>
- * <li>{@code presentMode} <b>must</b> be a valid {@code VkPresentModeKHR} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSurfacePresentModeEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkPresentModeKHR {@link #presentMode};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkPresentModeKHR presentMode;
+ * }}</pre>
  */
 public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> implements NativeResource {
 
@@ -102,23 +74,23 @@ public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the presentation mode the swapchain will use. */
+    /** @return the value of the {@code presentMode} field. */
     @NativeType("VkPresentModeKHR")
     public int presentMode() { return npresentMode(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSurfacePresentModeEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT} value to the {@code sType} field. */
     public VkSurfacePresentModeEXT sType$Default() { return sType(EXTSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSurfacePresentModeEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #presentMode} field. */
+    /** Sets the specified value to the {@code presentMode} field. */
     public VkSurfacePresentModeEXT presentMode(@NativeType("VkPresentModeKHR") int value) { npresentMode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,23 +286,23 @@ public class VkSurfacePresentModeEXT extends Struct<VkSurfacePresentModeEXT> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSurfacePresentModeEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSurfacePresentModeEXT.nsType(address()); }
-        /** @return the value of the {@link VkSurfacePresentModeEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSurfacePresentModeEXT.npNext(address()); }
-        /** @return the value of the {@link VkSurfacePresentModeEXT#presentMode} field. */
+        /** @return the value of the {@code presentMode} field. */
         @NativeType("VkPresentModeKHR")
         public int presentMode() { return VkSurfacePresentModeEXT.npresentMode(address()); }
 
-        /** Sets the specified value to the {@link VkSurfacePresentModeEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSurfacePresentModeEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfacePresentModeEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT} value to the {@link VkSurfacePresentModeEXT#sType} field. */
+        /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT} value to the {@code sType} field. */
         public VkSurfacePresentModeEXT.Buffer sType$Default() { return sType(EXTSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_EXT); }
-        /** Sets the specified value to the {@link VkSurfacePresentModeEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSurfacePresentModeEXT.Buffer pNext(@NativeType("void *") long value) { VkSurfacePresentModeEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSurfacePresentModeEXT#presentMode} field. */
+        /** Sets the specified value to the {@code presentMode} field. */
         public VkSurfacePresentModeEXT.Buffer presentMode(@NativeType("VkPresentModeKHR") int value) { VkSurfacePresentModeEXT.npresentMode(address(), value); return this; }
 
     }

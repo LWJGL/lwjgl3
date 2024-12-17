@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CameraVideoStreamFrameHeader_t {
  *     EVRTrackedCameraFrameType eFrameType;
  *     uint32_t nWidth;
@@ -26,8 +24,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t nBytesPerPixel;
  *     uint32_t nFrameSequence;
  *     {@link TrackedDevicePose TrackedDevicePose_t} trackedDevicePose;
- *     uint64_t {@link #ulFrameExposureTime};
- * }</code></pre>
+ *     uint64_t ulFrameExposureTime;
+ * }}</pre>
  */
 @NativeType("struct CameraVideoStreamFrameHeader_t")
 public class CameraVideoStreamFrameHeader extends Struct<CameraVideoStreamFrameHeader> implements NativeResource {
@@ -111,7 +109,7 @@ public class CameraVideoStreamFrameHeader extends Struct<CameraVideoStreamFrameH
     /** @return a {@link TrackedDevicePose} view of the {@code trackedDevicePose} field. */
     @NativeType("TrackedDevicePose_t")
     public TrackedDevicePose trackedDevicePose() { return ntrackedDevicePose(address()); }
-    /** mid-point of the exposure of the image in host system ticks */
+    /** @return the value of the {@code ulFrameExposureTime} field. */
     @NativeType("uint64_t")
     public long ulFrameExposureTime() { return nulFrameExposureTime(address()); }
 
@@ -321,7 +319,7 @@ public class CameraVideoStreamFrameHeader extends Struct<CameraVideoStreamFrameH
         /** @return a {@link TrackedDevicePose} view of the {@code trackedDevicePose} field. */
         @NativeType("TrackedDevicePose_t")
         public TrackedDevicePose trackedDevicePose() { return CameraVideoStreamFrameHeader.ntrackedDevicePose(address()); }
-        /** @return the value of the {@link CameraVideoStreamFrameHeader#ulFrameExposureTime} field. */
+        /** @return the value of the {@code ulFrameExposureTime} field. */
         @NativeType("uint64_t")
         public long ulFrameExposureTime() { return CameraVideoStreamFrameHeader.nulFrameExposureTime(address()); }
 

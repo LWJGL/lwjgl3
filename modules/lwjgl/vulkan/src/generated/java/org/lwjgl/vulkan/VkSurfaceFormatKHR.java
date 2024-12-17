@@ -16,19 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing a supported swapchain format-color space pair.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSurfaceFormat2KHR}, {@link KHRSurface#vkGetPhysicalDeviceSurfaceFormatsKHR GetPhysicalDeviceSurfaceFormatsKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSurfaceFormatKHR {
- *     VkFormat {@link #format};
- *     VkColorSpaceKHR {@link #colorSpace};
- * }</code></pre>
+ *     VkFormat format;
+ *     VkColorSpaceKHR colorSpace;
+ * }}</pre>
  */
 public class VkSurfaceFormatKHR extends Struct<VkSurfaceFormatKHR> implements NativeResource {
 
@@ -78,10 +70,10 @@ public class VkSurfaceFormatKHR extends Struct<VkSurfaceFormatKHR> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkFormat} that is compatible with the specified surface. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** a presentation {@code VkColorSpaceKHR} that is compatible with the surface. */
+    /** @return the value of the {@code colorSpace} field. */
     @NativeType("VkColorSpaceKHR")
     public int colorSpace() { return ncolorSpace(address()); }
 
@@ -263,10 +255,10 @@ public class VkSurfaceFormatKHR extends Struct<VkSurfaceFormatKHR> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSurfaceFormatKHR#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkSurfaceFormatKHR.nformat(address()); }
-        /** @return the value of the {@link VkSurfaceFormatKHR#colorSpace} field. */
+        /** @return the value of the {@code colorSpace} field. */
         @NativeType("VkColorSpaceKHR")
         public int colorSpace() { return VkSurfaceFormatKHR.ncolorSpace(address()); }
 

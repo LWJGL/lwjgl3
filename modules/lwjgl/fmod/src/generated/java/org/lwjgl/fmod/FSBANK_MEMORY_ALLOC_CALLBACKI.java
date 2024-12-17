@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     unsigned int size,
- *     unsigned int type,
- *     char const *sourceStr
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FSBANK_MEMORY_ALLOC_CALLBACK} */
 @FunctionalInterface
 @NativeType("FSBANK_MEMORY_ALLOC_CALLBACK")
 public interface FSBANK_MEMORY_ALLOC_CALLBACKI extends CallbackI {
@@ -45,6 +36,7 @@ public interface FSBANK_MEMORY_ALLOC_CALLBACKI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code void * (* FSBANK_MEMORY_ALLOC_CALLBACK) (unsigned int size, unsigned int type, char const * sourceStr)} */
     @NativeType("void *") long invoke(@NativeType("unsigned int") int size, @NativeType("unsigned int") int type, @NativeType("char const *") long sourceStr);
 
 }

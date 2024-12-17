@@ -16,188 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a buffer memory barrier.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure defines a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-memory">memory dependency</a> limited to a range of a buffer, and <b>can</b> define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer operation</a> for that range.</p>
- * 
- * <p>The first <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> described by this structure include only operations and memory accesses specified by {@code srcStageMask} and {@code srcAccessMask}.</p>
- * 
- * <p>The second <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-scopes">synchronization scope</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> described by this structure include only operations and memory accesses specified by {@code dstStageMask} and {@code dstAccessMask}.</p>
- * 
- * <p>Both <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">access scopes</a> are limited to only memory accesses to {@code buffer} in the range defined by {@code offset} and {@code size}.</p>
- * 
- * <p>If {@code buffer} was created with {@link VK10#VK_SHARING_MODE_EXCLUSIVE SHARING_MODE_EXCLUSIVE}, and {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, this memory barrier defines a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer operation</a>. When executed on a queue in the family identified by {@code srcQueueFamilyIndex}, this barrier defines a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers-release">queue family release operation</a> for the specified buffer range, and the second synchronization scope does not apply to this operation. When executed on a queue in the family identified by {@code dstQueueFamilyIndex}, this barrier defines a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers-acquire">queue family acquire operation</a> for the specified buffer range, and the first synchronization scope does not apply to this operation.</p>
- * 
- * <p>A <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer operation</a> is also defined if the values are not equal, and either is one of the special queue family values reserved for external memory ownership transfers, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">Queue Family Ownership Transfer</a>. A <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers-release">queue family release operation</a> is defined when {@code dstQueueFamilyIndex} is one of those values, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers-acquire">queue family acquire operation</a> is defined when {@code srcQueueFamilyIndex} is one of those values.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link VK13#VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link VK13#VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT} or {@link VK13#VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-conditionalRendering">{@code conditionalRendering}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-transformFeedback">{@code transformFeedback}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-meshShader">{@code meshShader}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-taskShader">{@code taskShader}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT}</li>
- * <li>If neither of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shadingRateImage">{@code shadingRateImage}</a> or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> features are enabled, {@code srcStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-subpassShading">{@code subpassShading}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-invocationMask">{@code invocationMask}</a> feature is not enabled, {@code srcStageMask} <b>must</b> not contain {@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
- * <li>If neither the {@link NVRayTracing VK_NV_ray_tracing} extension or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-rayTracingPipeline">{@code rayTracingPipeline}</a> feature are enabled, {@code srcStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR}</li>
- * </ul>
- * 
- * <ul>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT ACCESS_2_INDIRECT_COMMAND_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT PIPELINE_STAGE_2_DRAW_INDIRECT_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_INDEX_READ_BIT ACCESS_2_INDEX_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT PIPELINE_STAGE_2_INDEX_INPUT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT PIPELINE_STAGE_2_VERTEX_INPUT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT PIPELINE_STAGE_2_VERTEX_INPUT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT ACCESS_2_INPUT_ATTACHMENT_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT}, {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_UNIFORM_READ_BIT ACCESS_2_UNIFORM_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_SAMPLED_READ_BIT ACCESS_2_SHADER_SAMPLED_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_STORAGE_READ_BIT ACCESS_2_SHADER_STORAGE_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT ACCESS_2_SHADER_STORAGE_WRITE_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_READ_BIT ACCESS_2_SHADER_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_WRITE_BIT ACCESS_2_SHADER_WRITE_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT ACCESS_2_COLOR_ATTACHMENT_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_TRANSFER_READ_BIT ACCESS_2_TRANSFER_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COPY_BIT PIPELINE_STAGE_2_COPY_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_BLIT_BIT PIPELINE_STAGE_2_BLIT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_RESOLVE_BIT PIPELINE_STAGE_2_RESOLVE_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT PIPELINE_STAGE_2_ALL_TRANSFER_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_TRANSFER_WRITE_BIT ACCESS_2_TRANSFER_WRITE_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COPY_BIT PIPELINE_STAGE_2_COPY_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_BLIT_BIT PIPELINE_STAGE_2_BLIT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_RESOLVE_BIT PIPELINE_STAGE_2_RESOLVE_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_CLEAR_BIT PIPELINE_STAGE_2_CLEAR_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT PIPELINE_STAGE_2_ALL_TRANSFER_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, or {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_HOST_READ_BIT ACCESS_2_HOST_READ_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link VK13#VK_ACCESS_2_HOST_WRITE_BIT ACCESS_2_HOST_WRITE_BIT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT PIPELINE_STAGE_2_DRAW_INDIRECT_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV}, {@code srcStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link HUAWEIInvocationMask#VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI}, {@code srcStageMask} <b>must</b> include {@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV}, {@code srcStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV} or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV}, {@code srcStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV} or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR}, {@code srcStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR}, {@code srcStageMask} <b>must</b> include {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR} or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-rayQuery">{@code rayQuery}</a> feature is not enabled and {@code srcAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR}, {@code srcStageMask} <b>must</b> not include any of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages except {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRRayTracingMaintenance1#VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT} or {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRVideoDecodeQueue#VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR ACCESS_2_VIDEO_DECODE_READ_BIT_KHR}, {@code srcStageMask} <b>must</b> include {@link KHRVideoDecodeQueue#VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRVideoDecodeQueue#VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR}, {@code srcStageMask} <b>must</b> include {@link KHRVideoDecodeQueue#VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRVideoEncodeQueue#VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR}, {@code srcStageMask} <b>must</b> include {@link KHRVideoEncodeQueue#VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR}</li>
- * <li>If {@code srcAccessMask} includes {@link KHRVideoEncodeQueue#VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR}, {@code srcStageMask} <b>must</b> include {@link KHRVideoEncodeQueue#VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR}</li>
- * <li>If {@code srcAccessMask} includes {@link NVOpticalFlow#VK_ACCESS_2_OPTICAL_FLOW_READ_BIT_NV ACCESS_2_OPTICAL_FLOW_READ_BIT_NV}, {@code srcStageMask} <b>must</b> include {@link NVOpticalFlow#VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV}</li>
- * <li>If {@code srcAccessMask} includes {@link NVOpticalFlow#VK_ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV}, {@code srcStageMask} <b>must</b> include {@link NVOpticalFlow#VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV}</li>
- * <li>If {@code srcAccessMask} includes {@link EXTOpacityMicromap#VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT ACCESS_2_MICROMAP_WRITE_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT}</li>
- * <li>If {@code srcAccessMask} includes {@link EXTOpacityMicromap#VK_ACCESS_2_MICROMAP_READ_BIT_EXT ACCESS_2_MICROMAP_READ_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} or {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}</li>
- * <li>If {@code srcAccessMask} includes {@link EXTDescriptorBuffer#VK_ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT}, {@code srcStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * </ul>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link VK13#VK_PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT PIPELINE_STAGE_2_GEOMETRY_SHADER_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link VK13#VK_PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT PIPELINE_STAGE_2_TESSELLATION_CONTROL_SHADER_BIT} or {@link VK13#VK_PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT PIPELINE_STAGE_2_TESSELLATION_EVALUATION_SHADER_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-conditionalRendering">{@code conditionalRendering}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-transformFeedback">{@code transformFeedback}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-meshShader">{@code meshShader}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT PIPELINE_STAGE_2_MESH_SHADER_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-taskShader">{@code taskShader}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT PIPELINE_STAGE_2_TASK_SHADER_BIT_EXT}</li>
- * <li>If neither of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shadingRateImage">{@code shadingRateImage}</a> or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> features are enabled, {@code dstStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR PIPELINE_STAGE_2_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-subpassShading">{@code subpassShading}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-invocationMask">{@code invocationMask}</a> feature is not enabled, {@code dstStageMask} <b>must</b> not contain {@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
- * <li>If neither the {@link NVRayTracing VK_NV_ray_tracing} extension or the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-rayTracingPipeline">{@code rayTracingPipeline}</a> feature are enabled, {@code dstStageMask} <b>must</b> not contain {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR}</li>
- * </ul>
- * 
- * <ul>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_INDIRECT_COMMAND_READ_BIT ACCESS_2_INDIRECT_COMMAND_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT PIPELINE_STAGE_2_DRAW_INDIRECT_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_INDEX_READ_BIT ACCESS_2_INDEX_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_INDEX_INPUT_BIT PIPELINE_STAGE_2_INDEX_INPUT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT PIPELINE_STAGE_2_VERTEX_INPUT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT ACCESS_2_VERTEX_ATTRIBUTE_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT PIPELINE_STAGE_2_VERTEX_ATTRIBUTE_INPUT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_VERTEX_INPUT_BIT PIPELINE_STAGE_2_VERTEX_INPUT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_INPUT_ATTACHMENT_READ_BIT ACCESS_2_INPUT_ATTACHMENT_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT}, {@link HUAWEISubpassShading#VK_PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI PIPELINE_STAGE_2_SUBPASS_SHADER_BIT_HUAWEI}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_UNIFORM_READ_BIT ACCESS_2_UNIFORM_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_SAMPLED_READ_BIT ACCESS_2_SHADER_SAMPLED_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_STORAGE_READ_BIT ACCESS_2_SHADER_STORAGE_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_STORAGE_WRITE_BIT ACCESS_2_SHADER_STORAGE_WRITE_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_READ_BIT ACCESS_2_SHADER_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_SHADER_WRITE_BIT ACCESS_2_SHADER_WRITE_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_COLOR_ATTACHMENT_READ_BIT ACCESS_2_COLOR_ATTACHMENT_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT ACCESS_2_COLOR_ATTACHMENT_WRITE_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT ACCESS_2_DEPTH_STENCIL_ATTACHMENT_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_TRANSFER_READ_BIT ACCESS_2_TRANSFER_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COPY_BIT PIPELINE_STAGE_2_COPY_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_BLIT_BIT PIPELINE_STAGE_2_BLIT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_RESOLVE_BIT PIPELINE_STAGE_2_RESOLVE_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT PIPELINE_STAGE_2_ALL_TRANSFER_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_TRANSFER_WRITE_BIT ACCESS_2_TRANSFER_WRITE_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COPY_BIT PIPELINE_STAGE_2_COPY_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_BLIT_BIT PIPELINE_STAGE_2_BLIT_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_RESOLVE_BIT PIPELINE_STAGE_2_RESOLVE_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_CLEAR_BIT PIPELINE_STAGE_2_CLEAR_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_TRANSFER_BIT PIPELINE_STAGE_2_ALL_TRANSFER_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, or {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_HOST_READ_BIT ACCESS_2_HOST_READ_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link VK13#VK_ACCESS_2_HOST_WRITE_BIT ACCESS_2_HOST_WRITE_BIT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT ACCESS_2_CONDITIONAL_RENDERING_READ_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT PIPELINE_STAGE_2_CONDITIONAL_RENDERING_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT ACCESS_2_FRAGMENT_DENSITY_MAP_READ_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT PIPELINE_STAGE_2_FRAGMENT_DENSITY_PROCESS_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT ACCESS_2_TRANSFORM_FEEDBACK_WRITE_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_DRAW_INDIRECT_BIT PIPELINE_STAGE_2_DRAW_INDIRECT_BIT}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT ACCESS_2_TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT PIPELINE_STAGE_2_TRANSFORM_FEEDBACK_BIT_EXT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV ACCESS_2_SHADING_RATE_IMAGE_READ_BIT_NV}, {@code dstStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV PIPELINE_STAGE_2_SHADING_RATE_IMAGE_BIT_NV}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link HUAWEIInvocationMask#VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI}, {@code dstStageMask} <b>must</b> include {@link HUAWEIInvocationMask#VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV ACCESS_2_COMMAND_PREPROCESS_READ_BIT_NV}, {@code dstStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV} or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV ACCESS_2_COMMAND_PREPROCESS_WRITE_BIT_NV}, {@code dstStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV PIPELINE_STAGE_2_COMMAND_PREPROCESS_BIT_NV} or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT ACCESS_2_COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT} {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR}, {@code dstStageMask} <b>must</b> include {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}, {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * <li>If {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_KHR}, {@code dstStageMask} <b>must</b> include {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}, {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR} or {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-rayQuery">{@code rayQuery}</a> feature is not enabled and {@code dstAccessMask} includes {@link KHRSynchronization2#VK_ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR ACCESS_2_ACCELERATION_STRUCTURE_READ_BIT_KHR}, {@code dstStageMask} <b>must</b> not include any of the {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages except {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRRayTracingMaintenance1#VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT} or {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR PIPELINE_STAGE_2_RAY_TRACING_SHADER_BIT_KHR}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRVideoDecodeQueue#VK_ACCESS_2_VIDEO_DECODE_READ_BIT_KHR ACCESS_2_VIDEO_DECODE_READ_BIT_KHR}, {@code dstStageMask} <b>must</b> include {@link KHRVideoDecodeQueue#VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRVideoDecodeQueue#VK_ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR ACCESS_2_VIDEO_DECODE_WRITE_BIT_KHR}, {@code dstStageMask} <b>must</b> include {@link KHRVideoDecodeQueue#VK_PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_DECODE_BIT_KHR}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRVideoEncodeQueue#VK_ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR ACCESS_2_VIDEO_ENCODE_READ_BIT_KHR}, {@code dstStageMask} <b>must</b> include {@link KHRVideoEncodeQueue#VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR}</li>
- * <li>If {@code dstAccessMask} includes {@link KHRVideoEncodeQueue#VK_ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR ACCESS_2_VIDEO_ENCODE_WRITE_BIT_KHR}, {@code dstStageMask} <b>must</b> include {@link KHRVideoEncodeQueue#VK_PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR PIPELINE_STAGE_2_VIDEO_ENCODE_BIT_KHR}</li>
- * <li>If {@code dstAccessMask} includes {@link NVOpticalFlow#VK_ACCESS_2_OPTICAL_FLOW_READ_BIT_NV ACCESS_2_OPTICAL_FLOW_READ_BIT_NV}, {@code dstStageMask} <b>must</b> include {@link NVOpticalFlow#VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV}</li>
- * <li>If {@code dstAccessMask} includes {@link NVOpticalFlow#VK_ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV ACCESS_2_OPTICAL_FLOW_WRITE_BIT_NV}, {@code dstStageMask} <b>must</b> include {@link NVOpticalFlow#VK_PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV PIPELINE_STAGE_2_OPTICAL_FLOW_BIT_NV}</li>
- * <li>If {@code dstAccessMask} includes {@link EXTOpacityMicromap#VK_ACCESS_2_MICROMAP_WRITE_BIT_EXT ACCESS_2_MICROMAP_WRITE_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT}</li>
- * <li>If {@code dstAccessMask} includes {@link EXTOpacityMicromap#VK_ACCESS_2_MICROMAP_READ_BIT_EXT ACCESS_2_MICROMAP_READ_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link EXTOpacityMicromap#VK_PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT PIPELINE_STAGE_2_MICROMAP_BUILD_BIT_EXT} or {@link KHRSynchronization2#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_BUILD_BIT_KHR}</li>
- * <li>If {@code dstAccessMask} includes {@link EXTDescriptorBuffer#VK_ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT ACCESS_2_DESCRIPTOR_BUFFER_READ_BIT_EXT}, {@code dstStageMask} <b>must</b> include {@link VK13#VK_PIPELINE_STAGE_2_ALL_GRAPHICS_BIT PIPELINE_STAGE_2_ALL_GRAPHICS_BIT}, {@link VK13#VK_PIPELINE_STAGE_2_ALL_COMMANDS_BIT PIPELINE_STAGE_2_ALL_COMMANDS_BIT}, or one of {@code VK_PIPELINE_STAGE_*_SHADER_BIT} stages</li>
- * </ul>
- * 
- * <ul>
- * <li>{@code offset} <b>must</b> be less than the size of {@code buffer}</li>
- * <li>If {@code size} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> be greater than 0</li>
- * <li>If {@code size} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> be less than or equal to than the size of {@code buffer} minus {@code offset}</li>
- * <li>If {@code buffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If {@code buffer} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_EXCLUSIVE SHARING_MODE_EXCLUSIVE}, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are not equal, {@code srcQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}, {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}, or a valid queue family</li>
- * <li>If {@code buffer} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_EXCLUSIVE SHARING_MODE_EXCLUSIVE}, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are not equal, {@code dstQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}, {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}, or a valid queue family</li>
- * <li>If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, at least one of {@code srcQueueFamilyIndex} or {@code dstQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL} or {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If the {@link KHRExternalMemory VK_KHR_external_memory} extension is not enabled, and the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} is not greater than or equal to Version 1.1, {@code srcQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * <li>If the {@link KHRExternalMemory VK_KHR_external_memory} extension is not enabled, and the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} is not greater than or equal to Version 1.1, {@code dstQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * <li>If the {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} extension is not enabled {@code srcQueueFamilyIndex} <b>must</b> not be {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If the {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} extension is not enabled {@code dstQueueFamilyIndex} <b>must</b> not be {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If either {@code srcStageMask} or {@code dstStageMask} includes {@link VK13#VK_PIPELINE_STAGE_2_HOST_BIT PIPELINE_STAGE_2_HOST_BIT}, {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} <b>must</b> be equal</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2 STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkExternalMemoryAcquireUnmodifiedEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code srcStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2} values</li>
- * <li>{@code srcAccessMask} <b>must</b> be a valid combination of {@code VkAccessFlagBits2} values</li>
- * <li>{@code dstStageMask} <b>must</b> be a valid combination of {@code VkPipelineStageFlagBits2} values</li>
- * <li>{@code dstAccessMask} <b>must</b> be a valid combination of {@code VkAccessFlagBits2} values</li>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDependencyInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferMemoryBarrier2 {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineStageFlags2 {@link #srcStageMask};
- *     VkAccessFlags2 {@link #srcAccessMask};
- *     VkPipelineStageFlags2 {@link #dstStageMask};
- *     VkAccessFlags2 {@link #dstAccessMask};
- *     uint32_t {@link #srcQueueFamilyIndex};
- *     uint32_t {@link #dstQueueFamilyIndex};
- *     VkBuffer {@link #buffer};
- *     VkDeviceSize {@link #offset};
- *     VkDeviceSize {@link #size};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineStageFlags2 srcStageMask;
+ *     VkAccessFlags2 srcAccessMask;
+ *     VkPipelineStageFlags2 dstStageMask;
+ *     VkAccessFlags2 dstAccessMask;
+ *     uint32_t srcQueueFamilyIndex;
+ *     uint32_t dstQueueFamilyIndex;
+ *     VkBuffer buffer;
+ *     VkDeviceSize offset;
+ *     VkDeviceSize size;
+ * }}</pre>
  */
 public class VkBufferMemoryBarrier2 extends Struct<VkBufferMemoryBarrier2> implements NativeResource {
 
@@ -274,65 +106,65 @@ public class VkBufferMemoryBarrier2 extends Struct<VkBufferMemoryBarrier2> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkPipelineStageFlags2} mask of pipeline stages to be included in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-scopes">first synchronization scope</a>. */
+    /** @return the value of the {@code srcStageMask} field. */
     @NativeType("VkPipelineStageFlags2")
     public long srcStageMask() { return nsrcStageMask(address()); }
-    /** a {@code VkAccessFlags2} mask of access flags to be included in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">first access scope</a>. */
+    /** @return the value of the {@code srcAccessMask} field. */
     @NativeType("VkAccessFlags2")
     public long srcAccessMask() { return nsrcAccessMask(address()); }
-    /** a {@code VkPipelineStageFlags2} mask of pipeline stages to be included in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-scopes">second synchronization scope</a>. */
+    /** @return the value of the {@code dstStageMask} field. */
     @NativeType("VkPipelineStageFlags2")
     public long dstStageMask() { return ndstStageMask(address()); }
-    /** a {@code VkAccessFlags2} mask of access flags to be included in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">second access scope</a>. */
+    /** @return the value of the {@code dstAccessMask} field. */
     @NativeType("VkAccessFlags2")
     public long dstAccessMask() { return ndstAccessMask(address()); }
-    /** the source queue family for a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
+    /** @return the value of the {@code srcQueueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int srcQueueFamilyIndex() { return nsrcQueueFamilyIndex(address()); }
-    /** the destination queue family for a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
+    /** @return the value of the {@code dstQueueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int dstQueueFamilyIndex() { return ndstQueueFamilyIndex(address()); }
-    /** a handle to the buffer whose backing memory is affected by the barrier. */
+    /** @return the value of the {@code buffer} field. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** an offset in bytes into the backing memory for {@code buffer}; this is relative to the base offset as bound to the buffer (see {@link VK10#vkBindBufferMemory BindBufferMemory}). */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** a size in bytes of the affected area of backing memory for {@code buffer}, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBufferMemoryBarrier2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2 STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2 STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2} value to the {@code sType} field. */
     public VkBufferMemoryBarrier2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBufferMemoryBarrier2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
     public VkBufferMemoryBarrier2 pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #srcStageMask} field. */
+    /** Sets the specified value to the {@code srcStageMask} field. */
     public VkBufferMemoryBarrier2 srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { nsrcStageMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcAccessMask} field. */
+    /** Sets the specified value to the {@code srcAccessMask} field. */
     public VkBufferMemoryBarrier2 srcAccessMask(@NativeType("VkAccessFlags2") long value) { nsrcAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstStageMask} field. */
+    /** Sets the specified value to the {@code dstStageMask} field. */
     public VkBufferMemoryBarrier2 dstStageMask(@NativeType("VkPipelineStageFlags2") long value) { ndstStageMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstAccessMask} field. */
+    /** Sets the specified value to the {@code dstAccessMask} field. */
     public VkBufferMemoryBarrier2 dstAccessMask(@NativeType("VkAccessFlags2") long value) { ndstAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
     public VkBufferMemoryBarrier2 srcQueueFamilyIndex(@NativeType("uint32_t") int value) { nsrcQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
     public VkBufferMemoryBarrier2 dstQueueFamilyIndex(@NativeType("uint32_t") int value) { ndstQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #buffer} field. */
+    /** Sets the specified value to the {@code buffer} field. */
     public VkBufferMemoryBarrier2 buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkBufferMemoryBarrier2 offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkBufferMemoryBarrier2 size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -576,65 +408,65 @@ public class VkBufferMemoryBarrier2 extends Struct<VkBufferMemoryBarrier2> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBufferMemoryBarrier2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferMemoryBarrier2.nsType(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferMemoryBarrier2.npNext(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#srcStageMask} field. */
+        /** @return the value of the {@code srcStageMask} field. */
         @NativeType("VkPipelineStageFlags2")
         public long srcStageMask() { return VkBufferMemoryBarrier2.nsrcStageMask(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#srcAccessMask} field. */
+        /** @return the value of the {@code srcAccessMask} field. */
         @NativeType("VkAccessFlags2")
         public long srcAccessMask() { return VkBufferMemoryBarrier2.nsrcAccessMask(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#dstStageMask} field. */
+        /** @return the value of the {@code dstStageMask} field. */
         @NativeType("VkPipelineStageFlags2")
         public long dstStageMask() { return VkBufferMemoryBarrier2.ndstStageMask(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#dstAccessMask} field. */
+        /** @return the value of the {@code dstAccessMask} field. */
         @NativeType("VkAccessFlags2")
         public long dstAccessMask() { return VkBufferMemoryBarrier2.ndstAccessMask(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#srcQueueFamilyIndex} field. */
+        /** @return the value of the {@code srcQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int srcQueueFamilyIndex() { return VkBufferMemoryBarrier2.nsrcQueueFamilyIndex(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#dstQueueFamilyIndex} field. */
+        /** @return the value of the {@code dstQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int dstQueueFamilyIndex() { return VkBufferMemoryBarrier2.ndstQueueFamilyIndex(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#buffer} field. */
+        /** @return the value of the {@code buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkBufferMemoryBarrier2.nbuffer(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkBufferMemoryBarrier2.noffset(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier2#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkBufferMemoryBarrier2.nsize(address()); }
 
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBufferMemoryBarrier2.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferMemoryBarrier2.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2 STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2} value to the {@link VkBufferMemoryBarrier2#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2 STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2} value to the {@code sType} field. */
         public VkBufferMemoryBarrier2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2); }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBufferMemoryBarrier2.Buffer pNext(@NativeType("void const *") long value) { VkBufferMemoryBarrier2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
         public VkBufferMemoryBarrier2.Buffer pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#srcStageMask} field. */
+        /** Sets the specified value to the {@code srcStageMask} field. */
         public VkBufferMemoryBarrier2.Buffer srcStageMask(@NativeType("VkPipelineStageFlags2") long value) { VkBufferMemoryBarrier2.nsrcStageMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#srcAccessMask} field. */
+        /** Sets the specified value to the {@code srcAccessMask} field. */
         public VkBufferMemoryBarrier2.Buffer srcAccessMask(@NativeType("VkAccessFlags2") long value) { VkBufferMemoryBarrier2.nsrcAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#dstStageMask} field. */
+        /** Sets the specified value to the {@code dstStageMask} field. */
         public VkBufferMemoryBarrier2.Buffer dstStageMask(@NativeType("VkPipelineStageFlags2") long value) { VkBufferMemoryBarrier2.ndstStageMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#dstAccessMask} field. */
+        /** Sets the specified value to the {@code dstAccessMask} field. */
         public VkBufferMemoryBarrier2.Buffer dstAccessMask(@NativeType("VkAccessFlags2") long value) { VkBufferMemoryBarrier2.ndstAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#srcQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
         public VkBufferMemoryBarrier2.Buffer srcQueueFamilyIndex(@NativeType("uint32_t") int value) { VkBufferMemoryBarrier2.nsrcQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#dstQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
         public VkBufferMemoryBarrier2.Buffer dstQueueFamilyIndex(@NativeType("uint32_t") int value) { VkBufferMemoryBarrier2.ndstQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#buffer} field. */
+        /** Sets the specified value to the {@code buffer} field. */
         public VkBufferMemoryBarrier2.Buffer buffer(@NativeType("VkBuffer") long value) { VkBufferMemoryBarrier2.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkBufferMemoryBarrier2.Buffer offset(@NativeType("VkDeviceSize") long value) { VkBufferMemoryBarrier2.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier2#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkBufferMemoryBarrier2.Buffer size(@NativeType("VkDeviceSize") long value) { VkBufferMemoryBarrier2.nsize(address(), value); return this; }
 
     }

@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A simple structure used to store a 2D vector; coordinates are of the {@code FT_Pos} type.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Vector {
  *     FT_Pos x;
  *     FT_Pos y;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Vector extends Struct<FT_Vector> implements NativeResource {
 

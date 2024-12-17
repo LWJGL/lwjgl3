@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceLineRasterizationFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceLineRasterizationFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 stippledRectangularLines;
  *     VkBool32 stippledBresenhamLines;
  *     VkBool32 stippledSmoothLines;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceLineRasterizationFeaturesEXT extends VkPhysicalDeviceLineRasterizationFeatures {
 

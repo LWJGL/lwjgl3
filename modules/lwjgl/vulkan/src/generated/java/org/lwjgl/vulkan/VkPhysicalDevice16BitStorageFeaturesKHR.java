@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDevice16BitStorageFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDevice16BitStorageFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 uniformAndStorageBuffer16BitAccess;
  *     VkBool32 storagePushConstant16;
  *     VkBool32 storageInputOutput16;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDevice16BitStorageFeaturesKHR extends VkPhysicalDevice16BitStorageFeatures {
 

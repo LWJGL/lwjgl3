@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Color Vector.
- * 
- * <h5>Description</h5>
- * 
- * <p>Unless otherwise specified, colors are encoded as linear (not with sRGB nor other gamma compression) values with individual components being in the range of 0.0 through 1.0, and without the RGB components being premultiplied by the alpha component.</p>
- * 
- * <p>If color encoding is specified as being premultiplied by the alpha component, the RGB components are set to zero if the alpha component is zero.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerColorScaleBiasKHR}, {@link XrPassthroughColorMapMonoToRgbaFB}, {@link XrPassthroughStyleFB}, {@link XrSwapchainStateSamplerOpenGLESFB}, {@link XrSwapchainStateSamplerVulkanFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrColor4f {
- *     float {@link #r};
- *     float {@link #g};
- *     float {@link #b};
- *     float {@link #a};
- * }</code></pre>
+ *     float r;
+ *     float g;
+ *     float b;
+ *     float a;
+ * }}</pre>
  */
 public class XrColor4f extends Struct<XrColor4f> implements NativeResource {
 
@@ -92,22 +78,22 @@ public class XrColor4f extends Struct<XrColor4f> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the red component of the color. */
+    /** @return the value of the {@code r} field. */
     public float r() { return nr(address()); }
-    /** the green component of the color. */
+    /** @return the value of the {@code g} field. */
     public float g() { return ng(address()); }
-    /** the blue component of the color. */
+    /** @return the value of the {@code b} field. */
     public float b() { return nb(address()); }
-    /** the alpha component of the color. */
+    /** @return the value of the {@code a} field. */
     public float a() { return na(address()); }
 
-    /** Sets the specified value to the {@link #r} field. */
+    /** Sets the specified value to the {@code r} field. */
     public XrColor4f r(float value) { nr(address(), value); return this; }
-    /** Sets the specified value to the {@link #g} field. */
+    /** Sets the specified value to the {@code g} field. */
     public XrColor4f g(float value) { ng(address(), value); return this; }
-    /** Sets the specified value to the {@link #b} field. */
+    /** Sets the specified value to the {@code b} field. */
     public XrColor4f b(float value) { nb(address(), value); return this; }
-    /** Sets the specified value to the {@link #a} field. */
+    /** Sets the specified value to the {@code a} field. */
     public XrColor4f a(float value) { na(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,22 +295,22 @@ public class XrColor4f extends Struct<XrColor4f> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrColor4f#r} field. */
+        /** @return the value of the {@code r} field. */
         public float r() { return XrColor4f.nr(address()); }
-        /** @return the value of the {@link XrColor4f#g} field. */
+        /** @return the value of the {@code g} field. */
         public float g() { return XrColor4f.ng(address()); }
-        /** @return the value of the {@link XrColor4f#b} field. */
+        /** @return the value of the {@code b} field. */
         public float b() { return XrColor4f.nb(address()); }
-        /** @return the value of the {@link XrColor4f#a} field. */
+        /** @return the value of the {@code a} field. */
         public float a() { return XrColor4f.na(address()); }
 
-        /** Sets the specified value to the {@link XrColor4f#r} field. */
+        /** Sets the specified value to the {@code r} field. */
         public XrColor4f.Buffer r(float value) { XrColor4f.nr(address(), value); return this; }
-        /** Sets the specified value to the {@link XrColor4f#g} field. */
+        /** Sets the specified value to the {@code g} field. */
         public XrColor4f.Buffer g(float value) { XrColor4f.ng(address(), value); return this; }
-        /** Sets the specified value to the {@link XrColor4f#b} field. */
+        /** Sets the specified value to the {@code b} field. */
         public XrColor4f.Buffer b(float value) { XrColor4f.nb(address(), value); return this; }
-        /** Sets the specified value to the {@link XrColor4f#a} field. */
+        /** Sets the specified value to the {@code a} field. */
         public XrColor4f.Buffer a(float value) { XrColor4f.na(address(), value); return this; }
 
     }

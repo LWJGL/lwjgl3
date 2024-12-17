@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a pipeline binary to retrieve binary data from.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pipelineBinary} <b>must</b> be a valid {@code VkPipelineBinaryKHR} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRPipelineBinary#vkGetPipelineBinaryDataKHR GetPipelineBinaryDataKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineBinaryDataInfoKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkPipelineBinaryKHR {@link #pipelineBinary};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkPipelineBinaryKHR pipelineBinary;
+ * }}</pre>
  */
 public class VkPipelineBinaryDataInfoKHR extends Struct<VkPipelineBinaryDataInfoKHR> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class VkPipelineBinaryDataInfoKHR extends Struct<VkPipelineBinaryDataInfo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the pipeline binary to get data from. */
+    /** @return the value of the {@code pipelineBinary} field. */
     @NativeType("VkPipelineBinaryKHR")
     public long pipelineBinary() { return npipelineBinary(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineBinaryDataInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR} value to the {@code sType} field. */
     public VkPipelineBinaryDataInfoKHR sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineBinaryDataInfoKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipelineBinary} field. */
+    /** Sets the specified value to the {@code pipelineBinary} field. */
     public VkPipelineBinaryDataInfoKHR pipelineBinary(@NativeType("VkPipelineBinaryKHR") long value) { npipelineBinary(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,23 +286,23 @@ public class VkPipelineBinaryDataInfoKHR extends Struct<VkPipelineBinaryDataInfo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineBinaryDataInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineBinaryDataInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkPipelineBinaryDataInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelineBinaryDataInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkPipelineBinaryDataInfoKHR#pipelineBinary} field. */
+        /** @return the value of the {@code pipelineBinary} field. */
         @NativeType("VkPipelineBinaryKHR")
         public long pipelineBinary() { return VkPipelineBinaryDataInfoKHR.npipelineBinary(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineBinaryDataInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineBinaryDataInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineBinaryDataInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR} value to the {@link VkPipelineBinaryDataInfoKHR#sType} field. */
+        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR} value to the {@code sType} field. */
         public VkPipelineBinaryDataInfoKHR.Buffer sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR); }
-        /** Sets the specified value to the {@link VkPipelineBinaryDataInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineBinaryDataInfoKHR.Buffer pNext(@NativeType("void *") long value) { VkPipelineBinaryDataInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineBinaryDataInfoKHR#pipelineBinary} field. */
+        /** Sets the specified value to the {@code pipelineBinary} field. */
         public VkPipelineBinaryDataInfoKHR.Buffer pipelineBinary(@NativeType("VkPipelineBinaryKHR") long value) { VkPipelineBinaryDataInfoKHR.npipelineBinary(address(), value); return this; }
 
     }

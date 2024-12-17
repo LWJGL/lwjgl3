@@ -17,16 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Haptics buffer descriptor, contains amplitude samples used for Touch vibration.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrHapticsBuffer {
- *     void * {@link #Samples};
- *     int {@link #SamplesCount};
- *     ovrHapticsBufferSubmitMode {@link #SubmitMode};
- * }</code></pre>
+ *     void * Samples;
+ *     int SamplesCount;
+ *     ovrHapticsBufferSubmitMode SubmitMode;
+ * }}</pre>
  */
 @NativeType("struct ovrHapticsBuffer")
 public class OVRHapticsBuffer extends Struct<OVRHapticsBuffer> implements NativeResource {
@@ -80,24 +76,20 @@ public class OVRHapticsBuffer extends Struct<OVRHapticsBuffer> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return samples stored in opaque format
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code Samples} field. */
     @NativeType("void *")
     public ByteBuffer Samples(int capacity) { return nSamples(address(), capacity); }
-    /** number of samples (up to {@link OVR#OVR_HAPTICS_BUFFER_SAMPLES_MAX}) */
+    /** @return the value of the {@code SamplesCount} field. */
     public int SamplesCount() { return nSamplesCount(address()); }
-    /** how samples are submitted to the hardware. Must be:<br><table><tr><td>{@link OVR#ovrHapticsBufferSubmit_Enqueue HapticsBufferSubmit_Enqueue}</td></tr></table> */
+    /** @return the value of the {@code SubmitMode} field. */
     @NativeType("ovrHapticsBufferSubmitMode")
     public int SubmitMode() { return nSubmitMode(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #Samples} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code Samples} field. */
     public OVRHapticsBuffer Samples(@NativeType("void *") ByteBuffer value) { nSamples(address(), value); return this; }
-    /** Sets the specified value to the {@link #SamplesCount} field. */
+    /** Sets the specified value to the {@code SamplesCount} field. */
     public OVRHapticsBuffer SamplesCount(int value) { nSamplesCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #SubmitMode} field. */
+    /** Sets the specified value to the {@code SubmitMode} field. */
     public OVRHapticsBuffer SubmitMode(@NativeType("ovrHapticsBufferSubmitMode") int value) { nSubmitMode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,24 +313,20 @@ public class OVRHapticsBuffer extends Struct<OVRHapticsBuffer> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@link OVRHapticsBuffer#Samples} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code Samples} field. */
         @NativeType("void *")
         public ByteBuffer Samples(int capacity) { return OVRHapticsBuffer.nSamples(address(), capacity); }
-        /** @return the value of the {@link OVRHapticsBuffer#SamplesCount} field. */
+        /** @return the value of the {@code SamplesCount} field. */
         public int SamplesCount() { return OVRHapticsBuffer.nSamplesCount(address()); }
-        /** @return the value of the {@link OVRHapticsBuffer#SubmitMode} field. */
+        /** @return the value of the {@code SubmitMode} field. */
         @NativeType("ovrHapticsBufferSubmitMode")
         public int SubmitMode() { return OVRHapticsBuffer.nSubmitMode(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link OVRHapticsBuffer#Samples} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code Samples} field. */
         public OVRHapticsBuffer.Buffer Samples(@NativeType("void *") ByteBuffer value) { OVRHapticsBuffer.nSamples(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRHapticsBuffer#SamplesCount} field. */
+        /** Sets the specified value to the {@code SamplesCount} field. */
         public OVRHapticsBuffer.Buffer SamplesCount(int value) { OVRHapticsBuffer.nSamplesCount(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRHapticsBuffer#SubmitMode} field. */
+        /** Sets the specified value to the {@code SubmitMode} field. */
         public OVRHapticsBuffer.Buffer SubmitMode(@NativeType("ovrHapticsBufferSubmitMode") int value) { OVRHapticsBuffer.nSubmitMode(address(), value); return this; }
 
     }

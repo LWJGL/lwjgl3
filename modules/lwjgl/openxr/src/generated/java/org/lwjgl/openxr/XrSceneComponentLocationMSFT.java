@@ -16,26 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the location of a scene component.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneComponentLocationMSFT}</li>
- * <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrSpaceLocationFlagBits} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link XrSceneComponentLocationsMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneComponentLocationMSFT {
- *     XrSpaceLocationFlags {@link #flags};
- *     {@link XrPosef XrPosef} {@link #pose};
- * }</code></pre>
+ *     XrSpaceLocationFlags flags;
+ *     {@link XrPosef XrPosef} pose;
+ * }}</pre>
  */
 public class XrSceneComponentLocationMSFT extends Struct<XrSceneComponentLocationMSFT> implements NativeResource {
 
@@ -85,17 +70,17 @@ public class XrSceneComponentLocationMSFT extends Struct<XrSceneComponentLocatio
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrSpaceLocationFlags")
     public long flags() { return nflags(address()); }
-    /** an {@link XrPosef} defining the position and orientation of the scene component within the reference frame of the corresponding {@link XrSceneComponentsLocateInfoMSFT}{@code ::baseSpace}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
 
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public XrSceneComponentLocationMSFT flags(@NativeType("XrSpaceLocationFlags") long value) { nflags(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrSceneComponentLocationMSFT pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSceneComponentLocationMSFT pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -285,17 +270,17 @@ public class XrSceneComponentLocationMSFT extends Struct<XrSceneComponentLocatio
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneComponentLocationMSFT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrSpaceLocationFlags")
         public long flags() { return XrSceneComponentLocationMSFT.nflags(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrSceneComponentLocationMSFT#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrSceneComponentLocationMSFT.npose(address()); }
 
-        /** Sets the specified value to the {@link XrSceneComponentLocationMSFT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public XrSceneComponentLocationMSFT.Buffer flags(@NativeType("XrSpaceLocationFlags") long value) { XrSceneComponentLocationMSFT.nflags(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrSceneComponentLocationMSFT#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrSceneComponentLocationMSFT.Buffer pose(XrPosef value) { XrSceneComponentLocationMSFT.npose(address(), value); return this; }
-        /** Passes the {@link XrSceneComponentLocationMSFT#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSceneComponentLocationMSFT.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
 
     }

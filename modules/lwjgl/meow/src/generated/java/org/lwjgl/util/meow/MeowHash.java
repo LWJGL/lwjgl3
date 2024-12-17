@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union meow_hash {
  *     {@link MeowU128 meow_u128} u128;
  *     meow_u64 u64[2];
  *     meow_u32 u32[4];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("union meow_hash")
 public class MeowHash extends Struct<MeowHash> implements NativeResource {

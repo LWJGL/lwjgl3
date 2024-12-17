@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an image for descriptor capture.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code image} <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_IMAGE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT IMAGE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} set in {@link VkImageCreateInfo}{@code ::flags}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDescriptorBuffer#vkGetImageOpaqueCaptureDescriptorDataEXT GetImageOpaqueCaptureDescriptorDataEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageCaptureDescriptorDataInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImage {@link #image};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImage image;
+ * }}</pre>
  */
 public class VkImageCaptureDescriptorDataInfoEXT extends Struct<VkImageCaptureDescriptorDataInfoEXT> implements NativeResource {
 
@@ -96,23 +74,23 @@ public class VkImageCaptureDescriptorDataInfoEXT extends Struct<VkImageCaptureDe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the {@code VkImage} handle of the image to get opaque capture data for. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageCaptureDescriptorDataInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@code sType} field. */
     public VkImageCaptureDescriptorDataInfoEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageCaptureDescriptorDataInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #image} field. */
+    /** Sets the specified value to the {@code image} field. */
     public VkImageCaptureDescriptorDataInfoEXT image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -308,23 +286,23 @@ public class VkImageCaptureDescriptorDataInfoEXT extends Struct<VkImageCaptureDe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageCaptureDescriptorDataInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageCaptureDescriptorDataInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkImageCaptureDescriptorDataInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageCaptureDescriptorDataInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkImageCaptureDescriptorDataInfoEXT#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return VkImageCaptureDescriptorDataInfoEXT.nimage(address()); }
 
-        /** Sets the specified value to the {@link VkImageCaptureDescriptorDataInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageCaptureDescriptorDataInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageCaptureDescriptorDataInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@link VkImageCaptureDescriptorDataInfoEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@code sType} field. */
         public VkImageCaptureDescriptorDataInfoEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT); }
-        /** Sets the specified value to the {@link VkImageCaptureDescriptorDataInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageCaptureDescriptorDataInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageCaptureDescriptorDataInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageCaptureDescriptorDataInfoEXT#image} field. */
+        /** Sets the specified value to the {@code image} field. */
         public VkImageCaptureDescriptorDataInfoEXT.Buffer image(@NativeType("VkImage") long value) { VkImageCaptureDescriptorDataInfoEXT.nimage(address(), value); return this; }
 
     }

@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_RESOURCE_VIEW_DESC {
  *     CUresourceViewFormat format;
  *     size_t width;
@@ -30,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int firstLayer;
  *     unsigned int lastLayer;
  *     unsigned int reserved[16];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_RESOURCE_VIEW_DESC extends Struct<CUDA_RESOURCE_VIEW_DESC> implements NativeResource {
 

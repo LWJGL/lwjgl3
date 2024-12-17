@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetWindowRefreshCallback SetWindowRefreshCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window
- * )</code></pre>
- *
- * @since version 2.5
- */
+/** Callback function: {@link #invoke GLFWwindowrefreshfun} */
 @FunctionalInterface
 @NativeType("GLFWwindowrefreshfun")
 public interface GLFWWindowRefreshCallbackI extends CallbackI {
@@ -44,12 +33,7 @@ public interface GLFWWindowRefreshCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when the client area of the specified window needs to be redrawn, for example if the window has been exposed after having been covered by
-     * another window.
-     *
-     * @param window the window whose content needs to be refreshed
-     */
+    /** {@code void (* GLFWwindowrefreshfun) (GLFWwindow * window)} */
     void invoke(@NativeType("GLFWwindow *") long window);
 
 }

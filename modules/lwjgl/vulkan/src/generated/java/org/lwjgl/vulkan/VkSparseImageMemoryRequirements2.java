@@ -16,27 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * (None).
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSparseImageMemoryRequirements}, {@link VK13#vkGetDeviceImageSparseMemoryRequirements GetDeviceImageSparseMemoryRequirements}, {@link KHRMaintenance4#vkGetDeviceImageSparseMemoryRequirementsKHR GetDeviceImageSparseMemoryRequirementsKHR}, {@link VK11#vkGetImageSparseMemoryRequirements2 GetImageSparseMemoryRequirements2}, {@link KHRGetMemoryRequirements2#vkGetImageSparseMemoryRequirements2KHR GetImageSparseMemoryRequirements2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSparseImageMemoryRequirements2 {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkSparseImageMemoryRequirements VkSparseImageMemoryRequirements} {@link #memoryRequirements};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkSparseImageMemoryRequirements VkSparseImageMemoryRequirements} memoryRequirements;
+ * }}</pre>
  */
 public class VkSparseImageMemoryRequirements2 extends Struct<VkSparseImageMemoryRequirements2> implements NativeResource {
 
@@ -89,20 +74,20 @@ public class VkSparseImageMemoryRequirements2 extends Struct<VkSparseImageMemory
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkSparseImageMemoryRequirements} structure describing the memory requirements of the sparse image. */
+    /** @return a {@link VkSparseImageMemoryRequirements} view of the {@code memoryRequirements} field. */
     public VkSparseImageMemoryRequirements memoryRequirements() { return nmemoryRequirements(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSparseImageMemoryRequirements2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2} value to the {@code sType} field. */
     public VkSparseImageMemoryRequirements2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSparseImageMemoryRequirements2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,20 +298,20 @@ public class VkSparseImageMemoryRequirements2 extends Struct<VkSparseImageMemory
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSparseImageMemoryRequirements2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSparseImageMemoryRequirements2.nsType(address()); }
-        /** @return the value of the {@link VkSparseImageMemoryRequirements2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSparseImageMemoryRequirements2.npNext(address()); }
-        /** @return a {@link VkSparseImageMemoryRequirements} view of the {@link VkSparseImageMemoryRequirements2#memoryRequirements} field. */
+        /** @return a {@link VkSparseImageMemoryRequirements} view of the {@code memoryRequirements} field. */
         public VkSparseImageMemoryRequirements memoryRequirements() { return VkSparseImageMemoryRequirements2.nmemoryRequirements(address()); }
 
-        /** Sets the specified value to the {@link VkSparseImageMemoryRequirements2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSparseImageMemoryRequirements2.Buffer sType(@NativeType("VkStructureType") int value) { VkSparseImageMemoryRequirements2.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2} value to the {@link VkSparseImageMemoryRequirements2#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2} value to the {@code sType} field. */
         public VkSparseImageMemoryRequirements2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2); }
-        /** Sets the specified value to the {@link VkSparseImageMemoryRequirements2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSparseImageMemoryRequirements2.Buffer pNext(@NativeType("void *") long value) { VkSparseImageMemoryRequirements2.npNext(address(), value); return this; }
 
     }

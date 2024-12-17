@@ -12,22 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     void *sequenceProducerState,
- *     ZSTD_Sequence *outSeqs,
- *     size_t outSeqsCapacity,
- *     void const *src,
- *     size_t srcSize,
- *     void const *dict,
- *     size_t dictSize,
- *     int compressionLevel,
- *     size_t windowSize
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ZSTD_sequenceProducer_F} */
 @FunctionalInterface
 @NativeType("ZSTD_sequenceProducer_F")
 public interface ZSTDSequenceProducerI extends CallbackI {
@@ -57,6 +42,7 @@ public interface ZSTDSequenceProducerI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code void * (* ZSTD_sequenceProducer_F) (void * sequenceProducerState, ZSTD_Sequence * outSeqs, size_t outSeqsCapacity, void const * src, size_t srcSize, void const * dict, size_t dictSize, int compressionLevel, size_t windowSize)} */
     @NativeType("void *") long invoke(@NativeType("void *") long sequenceProducerState, @NativeType("ZSTD_Sequence *") long outSeqs, @NativeType("size_t") long outSeqsCapacity, @NativeType("void const *") long src, @NativeType("size_t") long srcSize, @NativeType("void const *") long dict, @NativeType("size_t") long dictSize, int compressionLevel, @NativeType("size_t") long windowSize);
 
 }

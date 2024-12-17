@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     unsigned int size,
- *     FMOD_MEMORY_TYPE type,
- *     char const *sourcestr
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_ALLOC_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_DSP_ALLOC_FUNC")
 public interface FMOD_DSP_ALLOC_FUNCI extends CallbackI {
@@ -45,7 +36,7 @@ public interface FMOD_DSP_ALLOC_FUNCI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /** DSP Functions */
+    /** {@code void * (* FMOD_DSP_ALLOC_FUNC) (unsigned int size, FMOD_MEMORY_TYPE type, char const * sourcestr)} */
     @NativeType("void *") long invoke(@NativeType("unsigned int") int size, @NativeType("FMOD_MEMORY_TYPE") int type, @NativeType("char const *") long sourcestr);
 
 }

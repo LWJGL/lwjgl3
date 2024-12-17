@@ -11,14 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * size_t (*{@link #invoke}) (
- *     int blockSize
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class CUoccupancyB2DSize extends Callback implements CUoccupancyB2DSizeI {
 
     /**

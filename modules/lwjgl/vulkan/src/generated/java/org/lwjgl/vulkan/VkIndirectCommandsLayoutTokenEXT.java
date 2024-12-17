@@ -16,45 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct specifying the details of an indirect command layout token.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code offset} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectCommandsTokenOffset}</li>
- * <li>{@code offset} <b>must</b> be aligned to 4</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-meshShader">{@code meshShader}</a> or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-taskShader">{@code taskShader}</a> are not enabled, {@code type} <b>must</b> not be {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_EXT} {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT}, {@link NVMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_NV_EXT} or {@link NVMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-rayTracingMaintenance1">{@code rayTracingMaintenance1}</a> feature is not enabled, {@code type} <b>must</b> not be {@link KHRRayTracingMaintenance1#VK_INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT INDIRECT_COMMANDS_TOKEN_TYPE_TRACE_RAYS2_EXT}</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-deviceGeneratedCommandsMultiDrawIndirectCount">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::deviceGeneratedCommandsMultiDrawIndirectCount}</a> is not supported, {@code type} <b>must</b> not be {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_COUNT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_COUNT_EXT} or {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_COUNT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_COUNT_EXT}</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-deviceGeneratedCommandsMultiDrawIndirectCount">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::deviceGeneratedCommandsMultiDrawIndirectCount}</a> is not supported, {@code type} <b>must</b> not be {@link EXTMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_EXT}</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-deviceGeneratedCommandsMultiDrawIndirectCount">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::deviceGeneratedCommandsMultiDrawIndirectCount}</a> is not supported, {@code type} <b>must</b> not be {@link NVMeshShader#VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_MESH_TASKS_COUNT_NV_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT}</li>
- * <li>{@code type} <b>must</b> be a valid {@code VkIndirectCommandsTokenTypeEXT} value</li>
- * <li>If {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT},VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT, the {@code pPushConstant} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkIndirectCommandsPushConstantTokenEXT} structure</li>
- * <li>If {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT}, the {@code pVertexBuffer} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkIndirectCommandsVertexBufferTokenEXT} structure</li>
- * <li>If {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT}, the {@code pIndexBuffer} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkIndirectCommandsIndexBufferTokenEXT} structure</li>
- * <li>If {@code type} is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT}, the {@code pExecutionSet} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkIndirectCommandsExecutionSetTokenEXT} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsLayoutCreateInfoEXT}, {@link VkIndirectCommandsTokenDataEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectCommandsLayoutTokenEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkIndirectCommandsTokenTypeEXT {@link #type};
- *     {@link VkIndirectCommandsTokenDataEXT VkIndirectCommandsTokenDataEXT} {@link #data};
- *     uint32_t {@link #offset};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkIndirectCommandsTokenTypeEXT type;
+ *     {@link VkIndirectCommandsTokenDataEXT VkIndirectCommandsTokenDataEXT} data;
+ *     uint32_t offset;
+ * }}</pre>
  */
 public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsLayoutTokenEXT> implements NativeResource {
 
@@ -113,34 +82,34 @@ public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsL
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the {@code VkIndirectCommandsTokenTypeEXT} for {@code data}. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkIndirectCommandsTokenTypeEXT")
     public int type() { return ntype(address()); }
-    /** specifies a {@link VkIndirectCommandsTokenDataEXT} containing token-specific details for command execution. It is ignored if {@code type} does not match any member of the {@link VkIndirectCommandsTokenDataEXT} union. */
+    /** @return a {@link VkIndirectCommandsTokenDataEXT} view of the {@code data} field. */
     public VkIndirectCommandsTokenDataEXT data() { return ndata(address()); }
-    /** the relative byte offset for the token within one sequence of the indirect buffer. The data stored at that offset is the command data for the token, e.g. {@link VkDispatchIndirectCommand}. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("uint32_t")
     public int offset() { return noffset(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkIndirectCommandsLayoutTokenEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT} value to the {@code sType} field. */
     public VkIndirectCommandsLayoutTokenEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectCommandsLayoutTokenEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkIndirectCommandsLayoutTokenEXT type(@NativeType("VkIndirectCommandsTokenTypeEXT") int value) { ntype(address(), value); return this; }
-    /** Copies the specified {@link VkIndirectCommandsTokenDataEXT} to the {@link #data} field. */
+    /** Copies the specified {@link VkIndirectCommandsTokenDataEXT} to the {@code data} field. */
     public VkIndirectCommandsLayoutTokenEXT data(VkIndirectCommandsTokenDataEXT value) { ndata(address(), value); return this; }
-    /** Passes the {@link #data} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkIndirectCommandsLayoutTokenEXT data(java.util.function.Consumer<VkIndirectCommandsTokenDataEXT> consumer) { consumer.accept(data()); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkIndirectCommandsLayoutTokenEXT offset(@NativeType("uint32_t") int value) { noffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -348,34 +317,34 @@ public class VkIndirectCommandsLayoutTokenEXT extends Struct<VkIndirectCommandsL
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkIndirectCommandsLayoutTokenEXT.nsType(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkIndirectCommandsLayoutTokenEXT.npNext(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkIndirectCommandsTokenTypeEXT")
         public int type() { return VkIndirectCommandsLayoutTokenEXT.ntype(address()); }
-        /** @return a {@link VkIndirectCommandsTokenDataEXT} view of the {@link VkIndirectCommandsLayoutTokenEXT#data} field. */
+        /** @return a {@link VkIndirectCommandsTokenDataEXT} view of the {@code data} field. */
         public VkIndirectCommandsTokenDataEXT data() { return VkIndirectCommandsLayoutTokenEXT.ndata(address()); }
-        /** @return the value of the {@link VkIndirectCommandsLayoutTokenEXT#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("uint32_t")
         public int offset() { return VkIndirectCommandsLayoutTokenEXT.noffset(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectCommandsLayoutTokenEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT} value to the {@link VkIndirectCommandsLayoutTokenEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT} value to the {@code sType} field. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT); }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer pNext(@NativeType("void const *") long value) { VkIndirectCommandsLayoutTokenEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer type(@NativeType("VkIndirectCommandsTokenTypeEXT") int value) { VkIndirectCommandsLayoutTokenEXT.ntype(address(), value); return this; }
-        /** Copies the specified {@link VkIndirectCommandsTokenDataEXT} to the {@link VkIndirectCommandsLayoutTokenEXT#data} field. */
+        /** Copies the specified {@link VkIndirectCommandsTokenDataEXT} to the {@code data} field. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer data(VkIndirectCommandsTokenDataEXT value) { VkIndirectCommandsLayoutTokenEXT.ndata(address(), value); return this; }
-        /** Passes the {@link VkIndirectCommandsLayoutTokenEXT#data} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer data(java.util.function.Consumer<VkIndirectCommandsTokenDataEXT> consumer) { consumer.accept(data()); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsLayoutTokenEXT#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkIndirectCommandsLayoutTokenEXT.Buffer offset(@NativeType("uint32_t") int value) { VkIndirectCommandsLayoutTokenEXT.noffset(address(), value); return this; }
 
     }

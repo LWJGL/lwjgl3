@@ -14,15 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The data exchange structure for the glyph -to-script-map property.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Prop_GlyphToScriptMap {
  *     {@link FT_Face FT_Face} face;
  *     FT_UShort * map;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
 
@@ -74,11 +70,7 @@ public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
 
     /** @return a {@link FT_Face} view of the struct pointed to by the {@code face} field. */
     public FT_Face face() { return nface(address()); }
-    /**
-     * @return a {@link ShortBuffer} view of the data pointed to by the {@code map} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ShortBuffer} view of the data pointed to by the {@code map} field. */
     @NativeType("FT_UShort *")
     public @Nullable ShortBuffer map(int capacity) { return nmap(address(), capacity); }
 
@@ -161,11 +153,7 @@ public class FT_Prop_GlyphToScriptMap extends Struct<FT_Prop_GlyphToScriptMap> {
 
         /** @return a {@link FT_Face} view of the struct pointed to by the {@code face} field. */
         public FT_Face face() { return FT_Prop_GlyphToScriptMap.nface(address()); }
-        /**
-         * @return a {@link ShortBuffer} view of the data pointed to by the {@code map} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@code map} field. */
         @NativeType("FT_UShort *")
         public @Nullable ShortBuffer map(int capacity) { return FT_Prop_GlyphToScriptMap.nmap(address(), capacity); }
 

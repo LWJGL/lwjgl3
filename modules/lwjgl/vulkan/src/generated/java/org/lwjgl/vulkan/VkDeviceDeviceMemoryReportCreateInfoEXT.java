@@ -17,42 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Register device memory report callbacks for a Vulkan device.
- * 
- * <h5>Description</h5>
- * 
- * <p>The callback <b>may</b> be called from multiple threads simultaneously.</p>
- * 
- * <p>The callback <b>must</b> be called only once by the implementation when a {@code VkDeviceMemoryReportEventTypeEXT} event occurs.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The callback could be called from a background thread other than the thread calling the Vulkan commands.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code pfnUserCallback} <b>must</b> be a valid {@link VkDeviceMemoryReportCallbackEXT} value</li>
- * <li>{@code pUserData} <b>must</b> be a pointer value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceMemoryReportCallbackEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceDeviceMemoryReportCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceMemoryReportFlagsEXT {@link #flags};
- *     {@link VkDeviceMemoryReportCallbackEXTI PFN_vkDeviceMemoryReportCallbackEXT} {@link #pfnUserCallback};
- *     void * {@link #pUserData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceMemoryReportFlagsEXT flags;
+ *     {@link VkDeviceMemoryReportCallbackEXTI PFN_vkDeviceMemoryReportCallbackEXT} pfnUserCallback;
+ *     void * pUserData;
+ * }}</pre>
  */
 public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDeviceMemoryReportCreateInfoEXT> implements NativeResource {
 
@@ -111,33 +83,33 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** 0 and reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkDeviceMemoryReportFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** the application callback function to call. */
+    /** @return the value of the {@code pfnUserCallback} field. */
     @NativeType("PFN_vkDeviceMemoryReportCallbackEXT")
     public VkDeviceMemoryReportCallbackEXT pfnUserCallback() { return npfnUserCallback(address()); }
-    /** user data to be passed to the callback. */
+    /** @return the value of the {@code pUserData} field. */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceDeviceMemoryReportCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkDeviceDeviceMemoryReportCreateInfoEXT sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceDeviceMemoryReportCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkDeviceDeviceMemoryReportCreateInfoEXT flags(@NativeType("VkDeviceMemoryReportFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #pfnUserCallback} field. */
+    /** Sets the specified value to the {@code pfnUserCallback} field. */
     public VkDeviceDeviceMemoryReportCreateInfoEXT pfnUserCallback(@NativeType("PFN_vkDeviceMemoryReportCallbackEXT") VkDeviceMemoryReportCallbackEXTI value) { npfnUserCallback(address(), value); return this; }
-    /** Sets the specified value to the {@link #pUserData} field. */
+    /** Sets the specified value to the {@code pUserData} field. */
     public VkDeviceDeviceMemoryReportCreateInfoEXT pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -355,33 +327,33 @@ public class VkDeviceDeviceMemoryReportCreateInfoEXT extends Struct<VkDeviceDevi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceDeviceMemoryReportCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceDeviceMemoryReportCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkDeviceMemoryReportFlagsEXT")
         public int flags() { return VkDeviceDeviceMemoryReportCreateInfoEXT.nflags(address()); }
-        /** @return the value of the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#pfnUserCallback} field. */
+        /** @return the value of the {@code pfnUserCallback} field. */
         @NativeType("PFN_vkDeviceMemoryReportCallbackEXT")
         public VkDeviceMemoryReportCallbackEXT pfnUserCallback() { return VkDeviceDeviceMemoryReportCreateInfoEXT.npfnUserCallback(address()); }
-        /** @return the value of the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#pUserData} field. */
+        /** @return the value of the {@code pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VkDeviceDeviceMemoryReportCreateInfoEXT.npUserData(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceDeviceMemoryReportCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT} value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceMemoryReport#VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer sType$Default() { return sType(EXTDeviceMemoryReport.VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDeviceDeviceMemoryReportCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer flags(@NativeType("VkDeviceMemoryReportFlagsEXT") int value) { VkDeviceDeviceMemoryReportCreateInfoEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#pfnUserCallback} field. */
+        /** Sets the specified value to the {@code pfnUserCallback} field. */
         public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer pfnUserCallback(@NativeType("PFN_vkDeviceMemoryReportCallbackEXT") VkDeviceMemoryReportCallbackEXTI value) { VkDeviceDeviceMemoryReportCreateInfoEXT.npfnUserCallback(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceDeviceMemoryReportCreateInfoEXT#pUserData} field. */
+        /** Sets the specified value to the {@code pUserData} field. */
         public VkDeviceDeviceMemoryReportCreateInfoEXT.Buffer pUserData(@NativeType("void *") long value) { VkDeviceDeviceMemoryReportCreateInfoEXT.npUserData(address(), value); return this; }
 
     }

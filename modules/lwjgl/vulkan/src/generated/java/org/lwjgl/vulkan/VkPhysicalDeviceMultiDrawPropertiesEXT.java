@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing multidraw limits of an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMultiDrawPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMultiDraw#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMultiDrawPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint32_t {@link #maxMultiDrawCount};
- * }</code></pre>
+ *     uint32_t maxMultiDrawCount;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMultiDrawPropertiesEXT extends Struct<VkPhysicalDeviceMultiDrawPropertiesEXT> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceMultiDrawPropertiesEXT extends Struct<VkPhysicalDev
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the maximum number of draw calls which <b>can</b> be batched into a single multidraw. */
+    /** @return the value of the {@code maxMultiDrawCount} field. */
     @NativeType("uint32_t")
     public int maxMultiDrawCount() { return nmaxMultiDrawCount(address()); }
 
@@ -300,7 +286,7 @@ public class VkPhysicalDeviceMultiDrawPropertiesEXT extends Struct<VkPhysicalDev
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMultiDrawPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMultiDrawPropertiesEXT#maxMultiDrawCount} field. */
+        /** @return the value of the {@code maxMultiDrawCount} field. */
         @NativeType("uint32_t")
         public int maxMultiDrawCount() { return VkPhysicalDeviceMultiDrawPropertiesEXT.nmaxMultiDrawCount(address()); }
 

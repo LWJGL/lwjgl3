@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link HWLoc#hwloc_topology_set_userdata_import_callback topology_set_userdata_import_callback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hwloc_topology_t topology,
- *     hwloc_obj_t obj,
- *     char const *name,
- *     void const *buffer,
- *     size_t length
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (hwloc_topology_t, hwloc_obj_t, char const *, void const *, size_t)")
 public interface topology_set_userdata_import_callbackI extends CallbackI {
@@ -50,6 +37,7 @@ public interface topology_set_userdata_import_callbackI extends CallbackI {
         );
     }
 
+    /** {@code void (*) (hwloc_topology_t topology, hwloc_obj_t obj, char const * name, void const * buffer, size_t length)} */
     void invoke(@NativeType("hwloc_topology_t") long topology, @NativeType("hwloc_obj_t") long obj, @NativeType("char const *") long name, @NativeType("void const *") long buffer, @NativeType("size_t") long length);
 
 }

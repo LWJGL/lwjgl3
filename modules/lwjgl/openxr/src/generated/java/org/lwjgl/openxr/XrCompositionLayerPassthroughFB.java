@@ -17,41 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A composition layer for passthrough.
- * 
- * <h5>Description</h5>
- * 
- * <p>It is a composition layer type that may be submitted in {@link XR10#xrEndFrame EndFrame} where an {@link XrCompositionLayerBaseHeader} is specified, as a stand-in for the actual passthrough contents.</p>
- * 
- * <p>Errata: the third field of this structure is named {@code flags} rather than {@code layerFlags} as expected and as documented for for the parent type {@link XrCompositionLayerBaseHeader}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerPassthroughFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBPassthrough#XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code XrCompositionLayerFlagBits} values</li>
- * <li>{@code flags} <b>must</b> not be 0</li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>{@code layerHandle} <b>must</b> be a valid {@code XrPassthroughLayerFB} handle</li>
- * <li>Both of {@code layerHandle} and {@code space} <b>must</b> have been created, allocated, or retrieved from the same {@code XrSession}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerPassthroughFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrCompositionLayerFlags {@link #flags};
- *     XrSpace {@link #space};
- *     XrPassthroughLayerFB {@link #layerHandle};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrCompositionLayerFlags flags;
+ *     XrSpace space;
+ *     XrPassthroughLayerFB layerHandle;
+ * }}</pre>
  */
 public class XrCompositionLayerPassthroughFB extends Struct<XrCompositionLayerPassthroughFB> implements NativeResource {
 
@@ -110,33 +83,33 @@ public class XrCompositionLayerPassthroughFB extends Struct<XrCompositionLayerPa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a bitmask of {@code XrCompositionLayerFlagBits} that specify additional behavior. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long flags() { return nflags(address()); }
-    /** the {@code XrSpace} that specifies the layer’s space - <b>must</b> be {@link XR10#XR_NULL_HANDLE NULL_HANDLE}. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the {@code XrPassthroughLayerFB} that defines this layer’s behavior. */
+    /** @return the value of the {@code layerHandle} field. */
     @NativeType("XrPassthroughLayerFB")
     public long layerHandle() { return nlayerHandle(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerPassthroughFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBPassthrough#XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBPassthrough#XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB} value to the {@code type} field. */
     public XrCompositionLayerPassthroughFB type$Default() { return type(FBPassthrough.XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerPassthroughFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public XrCompositionLayerPassthroughFB flags(@NativeType("XrCompositionLayerFlags") long value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrCompositionLayerPassthroughFB space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@link #layerHandle} field. */
+    /** Sets the specified value to the {@code layerHandle} field. */
     public XrCompositionLayerPassthroughFB layerHandle(XrPassthroughLayerFB value) { nlayerHandle(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -364,33 +337,33 @@ public class XrCompositionLayerPassthroughFB extends Struct<XrCompositionLayerPa
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerPassthroughFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerPassthroughFB.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerPassthroughFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerPassthroughFB.nnext(address()); }
-        /** @return the value of the {@link XrCompositionLayerPassthroughFB#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long flags() { return XrCompositionLayerPassthroughFB.nflags(address()); }
-        /** @return the value of the {@link XrCompositionLayerPassthroughFB#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerPassthroughFB.nspace(address()); }
-        /** @return the value of the {@link XrCompositionLayerPassthroughFB#layerHandle} field. */
+        /** @return the value of the {@code layerHandle} field. */
         @NativeType("XrPassthroughLayerFB")
         public long layerHandle() { return XrCompositionLayerPassthroughFB.nlayerHandle(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerPassthroughFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerPassthroughFB.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerPassthroughFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBPassthrough#XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB} value to the {@link XrCompositionLayerPassthroughFB#type} field. */
+        /** Sets the {@link FBPassthrough#XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB} value to the {@code type} field. */
         public XrCompositionLayerPassthroughFB.Buffer type$Default() { return type(FBPassthrough.XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB); }
-        /** Sets the specified value to the {@link XrCompositionLayerPassthroughFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerPassthroughFB.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerPassthroughFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerPassthroughFB#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public XrCompositionLayerPassthroughFB.Buffer flags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerPassthroughFB.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerPassthroughFB#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrCompositionLayerPassthroughFB.Buffer space(XrSpace value) { XrCompositionLayerPassthroughFB.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerPassthroughFB#layerHandle} field. */
+        /** Sets the specified value to the {@code layerHandle} field. */
         public XrCompositionLayerPassthroughFB.Buffer layerHandle(XrPassthroughLayerFB value) { XrCompositionLayerPassthroughFB.nlayerHandle(address(), value); return this; }
 
     }

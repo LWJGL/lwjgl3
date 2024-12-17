@@ -9,46 +9,10 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_internalformat_query2.txt">ARB_internalformat_query2</a> extension.
- * 
- * <p>This extension extends the {@link ARBInternalformatQuery#glGetInternalformativ GetInternalformativ} query that was added in the {@link ARBInternalformatQuery ARB_internalformat_query} extension to
- * provide applications with more granular per-format capability information.</p>
- * 
- * <p>This extension allows the remainder of the texture-style targets to be specified along with any possible internal format. We add queries for additional
- * properties supported for an internal format in addition to the multisample-related information that was added in ARB_internalformat_query.</p>
- * 
- * <p>The goals of this extension are to:</p>
- * 
- * <ol type=a>
- * <li>provide a mechanism for implementations to declare support *above* the minimum required by the specification</li>
- * <li>provide API to allow universally constant information to be queried</li>
- * <li>provide a user-friendly way of finding out about version- or implementation-specific limitations.</li>
- * </ol>
- * 
- * <p>While much of this information can be determined for a single GL version by careful examination of the specification, support for many of these
- * properties has been gradually introduced over a number of API revisions. This can observed when considering the range in functionality between the
- * various versions of GL 2, 3, and 4, as well as GL ES 2 and 3.</p>
- * 
- * <p>In the case of an application which wishes to be scalable and able to run on a variety of possible GL or GL ES versions without being specifically
- * tailored for each version, it must either have knowledge of the specifications built up into either the code or tables, or it must do a number of tests
- * on startup to determine which capabilities are present.</p>
- * 
- * <p>In OpenGL, other than the course-grained extension mechanism, many limitations of, or limited support for, an internalformat can only be signaled by
- * failing an operation or by operating at reduced performance. Thus, such tests often involve attempts to create resources, using them in specific ways
- * and benchmarking the operations to find out if it is supported in the desired form, and at a required performance level. The extension provides a way
- * for these properties and caveats to be directly queried from the implementation.</p>
- * 
- * <p>This extension is NOT intended to allow implementations to only support a subset of features that are required by a specific GL version, nor is it
- * intended to replace the proper use of extension checks for optional functionality.</p>
- * 
- * <p>Requires {@link GL20 OpenGL 2.0} and {@link ARBInternalformatQuery ARB_internalformat_query}. Promoted to core in {@link GL43 OpenGL 4.3}.</p>
- */
 public class ARBInternalformatQuery2 {
 
     static { GL.initialize(); }
 
-    /** Accepted by the {@code target} parameter of GetInternalformativ and GetInternalformati64v. */
     public static final int
         GL_TEXTURE_1D                   = 0xDE0,
         GL_TEXTURE_1D_ARRAY             = 0x8C18,
@@ -63,7 +27,6 @@ public class ARBInternalformatQuery2 {
         GL_TEXTURE_2D_MULTISAMPLE       = 0x9100,
         GL_TEXTURE_2D_MULTISAMPLE_ARRAY = 0x9102;
 
-    /** Accepted by the {@code pname} parameter of GetInternalformativ and GetInternalformati64v. */
     public static final int
         GL_SAMPLES                                = 0x80A9,
         GL_NUM_SAMPLE_COUNTS                      = 0x9380,
@@ -140,7 +103,6 @@ public class ARBInternalformatQuery2 {
         GL_TEXTURE_VIEW                           = 0x82B5,
         GL_VIEW_COMPATIBILITY_CLASS               = 0x82B6;
 
-    /** Returned as possible responses for various {@code pname} queries to GetInternalformativ and GetInternalformati64v. */
     public static final int
         GL_FULL_SUPPORT              = 0x82B7,
         GL_CAVEAT_SUPPORT            = 0x82B8,
@@ -178,40 +140,23 @@ public class ARBInternalformatQuery2 {
 
     // --- [ glGetInternalformati64v ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetInternalformati64v GetInternalformati64v}
-     *
-     * @param bufSize the maximum number of values that may be written to params by the function
-     */
+    /** {@code void glGetInternalformati64v(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 * params)} */
     public static void nglGetInternalformati64v(int target, int internalformat, int pname, int bufSize, long params) {
         GL43C.nglGetInternalformati64v(target, internalformat, pname, bufSize, params);
     }
 
-    /**
-     * Retrieves information about implementation-dependent support for internal formats.
-     *
-     * @param target         the usage of the internal format. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL30#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_TEXTURE_RECTANGLE TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr><tr><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_TEXTURE_CUBE_MAP_ARRAY TEXTURE_CUBE_MAP_ARRAY}</td><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td></tr><tr><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE TEXTURE_2D_MULTISAMPLE}</td><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY TEXTURE_2D_MULTISAMPLE_ARRAY}</td></tr></table>
-     * @param internalformat the internal format about which to retrieve information
-     * @param pname          the type of information to query
-     * @param params         a variable into which to write the retrieved information
-     */
+    /** {@code void glGetInternalformati64v(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 * params)} */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") LongBuffer params) {
         GL43C.glGetInternalformati64v(target, internalformat, pname, params);
     }
 
-    /**
-     * Retrieves information about implementation-dependent support for internal formats.
-     *
-     * @param target         the usage of the internal format. One of:<br><table><tr><td>{@link GL11#GL_TEXTURE_1D TEXTURE_1D}</td><td>{@link GL11#GL_TEXTURE_2D TEXTURE_2D}</td><td>{@link GL30#GL_TEXTURE_1D_ARRAY TEXTURE_1D_ARRAY}</td><td>{@link GL31#GL_TEXTURE_RECTANGLE TEXTURE_RECTANGLE}</td><td>{@link GL13#GL_TEXTURE_CUBE_MAP TEXTURE_CUBE_MAP}</td></tr><tr><td>{@link GL12#GL_TEXTURE_3D TEXTURE_3D}</td><td>{@link GL30#GL_TEXTURE_2D_ARRAY TEXTURE_2D_ARRAY}</td><td>{@link GL40#GL_TEXTURE_CUBE_MAP_ARRAY TEXTURE_CUBE_MAP_ARRAY}</td><td>{@link GL30#GL_RENDERBUFFER RENDERBUFFER}</td><td>{@link GL31#GL_TEXTURE_BUFFER TEXTURE_BUFFER}</td></tr><tr><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE TEXTURE_2D_MULTISAMPLE}</td><td>{@link GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY TEXTURE_2D_MULTISAMPLE_ARRAY}</td></tr></table>
-     * @param internalformat the internal format about which to retrieve information
-     * @param pname          the type of information to query
-     */
+    /** {@code void glGetInternalformati64v(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 * params)} */
     @NativeType("void")
     public static long glGetInternalformati64(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname) {
         return GL43C.glGetInternalformati64(target, internalformat, pname);
     }
 
-    /** Array version of: {@link #glGetInternalformati64v GetInternalformati64v} */
+    /** {@code void glGetInternalformati64v(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint64 * params)} */
     public static void glGetInternalformati64v(@NativeType("GLenum") int target, @NativeType("GLenum") int internalformat, @NativeType("GLenum") int pname, @NativeType("GLint64 *") long[] params) {
         GL43C.glGetInternalformati64v(target, internalformat, pname, params);
     }

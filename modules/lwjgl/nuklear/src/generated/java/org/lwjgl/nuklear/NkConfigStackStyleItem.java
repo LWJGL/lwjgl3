@@ -15,13 +15,11 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_config_stack_style_item {
  *     int head;
  *     {@link NkConfigStackStyleItemElement struct nk_config_stack_style_item_element} elements[16];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_config_stack_style_item")
 class NkConfigStackStyleItem extends Struct<NkConfigStackStyleItem> {

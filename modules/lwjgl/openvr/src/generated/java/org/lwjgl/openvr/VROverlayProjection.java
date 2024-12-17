@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Defines the project used in an overlay that is using {@link VROverlay#VROverlay_SetOverlayTransformProjection SetOverlayTransformProjection}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VROverlayProjection_t {
- *     float {@link #fLeft};
- *     float {@link #fRight};
- *     float {@link #fTop};
- *     float {@link #fBottom};
- * }</code></pre>
+ *     float fLeft;
+ *     float fRight;
+ *     float fTop;
+ *     float fBottom;
+ * }}</pre>
  */
 @NativeType("struct VROverlayProjection_t")
 public class VROverlayProjection extends Struct<VROverlayProjection> implements NativeResource {
@@ -83,22 +79,22 @@ public class VROverlayProjection extends Struct<VROverlayProjection> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** tangent of the left side of the frustum */
+    /** @return the value of the {@code fLeft} field. */
     public float fLeft() { return nfLeft(address()); }
-    /** tangent of the right side of the frustum */
+    /** @return the value of the {@code fRight} field. */
     public float fRight() { return nfRight(address()); }
-    /** tangent of the top side of the frustum */
+    /** @return the value of the {@code fTop} field. */
     public float fTop() { return nfTop(address()); }
-    /** tangent of the bottom side of the frustum */
+    /** @return the value of the {@code fBottom} field. */
     public float fBottom() { return nfBottom(address()); }
 
-    /** Sets the specified value to the {@link #fLeft} field. */
+    /** Sets the specified value to the {@code fLeft} field. */
     public VROverlayProjection fLeft(float value) { nfLeft(address(), value); return this; }
-    /** Sets the specified value to the {@link #fRight} field. */
+    /** Sets the specified value to the {@code fRight} field. */
     public VROverlayProjection fRight(float value) { nfRight(address(), value); return this; }
-    /** Sets the specified value to the {@link #fTop} field. */
+    /** Sets the specified value to the {@code fTop} field. */
     public VROverlayProjection fTop(float value) { nfTop(address(), value); return this; }
-    /** Sets the specified value to the {@link #fBottom} field. */
+    /** Sets the specified value to the {@code fBottom} field. */
     public VROverlayProjection fBottom(float value) { nfBottom(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,22 +296,22 @@ public class VROverlayProjection extends Struct<VROverlayProjection> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VROverlayProjection#fLeft} field. */
+        /** @return the value of the {@code fLeft} field. */
         public float fLeft() { return VROverlayProjection.nfLeft(address()); }
-        /** @return the value of the {@link VROverlayProjection#fRight} field. */
+        /** @return the value of the {@code fRight} field. */
         public float fRight() { return VROverlayProjection.nfRight(address()); }
-        /** @return the value of the {@link VROverlayProjection#fTop} field. */
+        /** @return the value of the {@code fTop} field. */
         public float fTop() { return VROverlayProjection.nfTop(address()); }
-        /** @return the value of the {@link VROverlayProjection#fBottom} field. */
+        /** @return the value of the {@code fBottom} field. */
         public float fBottom() { return VROverlayProjection.nfBottom(address()); }
 
-        /** Sets the specified value to the {@link VROverlayProjection#fLeft} field. */
+        /** Sets the specified value to the {@code fLeft} field. */
         public VROverlayProjection.Buffer fLeft(float value) { VROverlayProjection.nfLeft(address(), value); return this; }
-        /** Sets the specified value to the {@link VROverlayProjection#fRight} field. */
+        /** Sets the specified value to the {@code fRight} field. */
         public VROverlayProjection.Buffer fRight(float value) { VROverlayProjection.nfRight(address(), value); return this; }
-        /** Sets the specified value to the {@link VROverlayProjection#fTop} field. */
+        /** Sets the specified value to the {@code fTop} field. */
         public VROverlayProjection.Buffer fTop(float value) { VROverlayProjection.nfTop(address(), value); return this; }
-        /** Sets the specified value to the {@link VROverlayProjection#fBottom} field. */
+        /** Sets the specified value to the {@code fBottom} field. */
         public VROverlayProjection.Buffer fBottom(float value) { VROverlayProjection.nfBottom(address(), value); return this; }
 
     }

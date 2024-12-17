@@ -15,33 +15,10 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_EXT_conformance_automation">XR_EXT_conformance_automation</a> extension.
- * 
- * <p>The XR_EXT_conformance_automation allows conformance test and runtime developers to provide hints to the underlying runtime as to what input the test is expecting. This enables runtime authors to automate the testing of their runtime conformance. This is useful for achieving rapidly iterative runtime development whilst maintaining conformance for runtime releases.</p>
- * 
- * <p>This extension provides the following capabilities:</p>
- * 
- * <ul>
- * <li>The ability to toggle the active state of an input device.</li>
- * <li>The ability to set the state of an input device button or other input component.</li>
- * <li>The ability to set the location of the input device.</li>
- * </ul>
- * 
- * <p>Applications <b>may</b> call these functions at any time. The runtime <b>must</b> do its best to honor the request of applications calling these functions, however it does not guarantee that any state change will be reflected immediately, at all, or with the exact value that was requested. Applications are thus advised to wait for the state change to be observable and to not assume that the value they requested will be the value observed. If any of the functions of this extension are called, control over input <b>must</b> be removed from the physical hardware of the system.</p>
- * 
- * <h5>Warning</h5>
- * 
- * <p>This extension is <b>not</b> intended for use by non-conformance-test applications. A runtime <b>may</b> require a runtime-specified configuration such as a "developer mode" to be enabled before reporting support for this extension or providing a non-stub implementation of it.</p>
- * 
- * <p><b>Do not</b> use this functionality in a non-conformance-test application!</p>
- */
 public class EXTConformanceAutomation {
 
-    /** The extension specification version. */
     public static final int XR_EXT_conformance_automation_SPEC_VERSION = 3;
 
-    /** The extension name. */
     public static final String XR_EXT_CONFORMANCE_AUTOMATION_EXTENSION_NAME = "XR_EXT_conformance_automation";
 
     protected EXTConformanceAutomation() {
@@ -50,58 +27,7 @@ public class EXTConformanceAutomation {
 
     // --- [ xrSetInputDeviceActiveEXT ] ---
 
-    /**
-     * Sets the active state of the input device.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <pre><code>
-     * XrResult xrSetInputDeviceActiveEXT(
-     *     XrSession                                   session,
-     *     XrPath                                      interactionProfile,
-     *     XrPath                                      topLevelPath,
-     *     XrBool32                                    isActive);</code></pre>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>{@code session} <b>must</b> be a valid session handle.</li>
-     * <li>{@code topLevelPath} <b>must</b> be a valid top level path.</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link EXTConformanceAutomation XR_EXT_conformance_automation} extension <b>must</b> be enabled prior to calling {@link #xrSetInputDeviceActiveEXT SetInputDeviceActiveEXT}</li>
-     * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_INVALID ERROR_PATH_INVALID}</li>
-     * </ul></dd>
-     * </dl>
-     *
-     * @param session            the {@code XrSession} to set the input device state in.
-     * @param interactionProfile the path representing the interaction profile of the input device (e.g. pathname:/interaction_profiles/khr/simple_controller).
-     * @param topLevelPath       the path representing the input device (e.g. pathname:/user/hand/left).
-     * @param isActive           the requested activation state of the input device.
-     */
+    /** {@code XrResult xrSetInputDeviceActiveEXT(XrSession session, XrPath interactionProfile, XrPath topLevelPath, XrBool32 isActive)} */
     @NativeType("XrResult")
     public static int xrSetInputDeviceActiveEXT(XrSession session, @NativeType("XrPath") long interactionProfile, @NativeType("XrPath") long topLevelPath, @NativeType("XrBool32") boolean isActive) {
         long __functionAddress = session.getCapabilities().xrSetInputDeviceActiveEXT;
@@ -113,59 +39,7 @@ public class EXTConformanceAutomation {
 
     // --- [ xrSetInputDeviceStateBoolEXT ] ---
 
-    /**
-     * Sets the state of a boolean input source on the input device.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <pre><code>
-     * XrResult xrSetInputDeviceStateBoolEXT(
-     *     XrSession                                   session,
-     *     XrPath                                      topLevelPath,
-     *     XrPath                                      inputSourcePath,
-     *     XrBool32                                    state);</code></pre>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>{@code session} <b>must</b> be a valid session handle.</li>
-     * <li>{@code topLevelPath} <b>must</b> be a valid top level path.</li>
-     * <li>{@code inputSourcePath} <b>must</b> be a valid input source path.</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link EXTConformanceAutomation XR_EXT_conformance_automation} extension <b>must</b> be enabled prior to calling {@link #xrSetInputDeviceStateBoolEXT SetInputDeviceStateBoolEXT}</li>
-     * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_INVALID ERROR_PATH_INVALID}</li>
-     * </ul></dd>
-     * </dl>
-     *
-     * @param session         the {@code XrSession} to set the input device state in.
-     * @param topLevelPath    the path representing the input device (e.g. pathname:/user/hand/left).
-     * @param inputSourcePath the full path of the input component for which we wish to set the state for (e.g. pathname:/user/hand/left/input/select/click).
-     * @param state           the requested boolean state of the input device.
-     */
+    /** {@code XrResult xrSetInputDeviceStateBoolEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrBool32 state)} */
     @NativeType("XrResult")
     public static int xrSetInputDeviceStateBoolEXT(XrSession session, @NativeType("XrPath") long topLevelPath, @NativeType("XrPath") long inputSourcePath, @NativeType("XrBool32") boolean state) {
         long __functionAddress = session.getCapabilities().xrSetInputDeviceStateBoolEXT;
@@ -177,59 +51,7 @@ public class EXTConformanceAutomation {
 
     // --- [ xrSetInputDeviceStateFloatEXT ] ---
 
-    /**
-     * Sets the state of a float input source on the input device.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <pre><code>
-     * XrResult xrSetInputDeviceStateFloatEXT(
-     *     XrSession                                   session,
-     *     XrPath                                      topLevelPath,
-     *     XrPath                                      inputSourcePath,
-     *     float                                       state);</code></pre>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>{@code session} <b>must</b> be a valid session handle.</li>
-     * <li>{@code topLevelPath} <b>must</b> be a valid top level path.</li>
-     * <li>{@code inputSourcePath} <b>must</b> be a valid input source path.</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link EXTConformanceAutomation XR_EXT_conformance_automation} extension <b>must</b> be enabled prior to calling {@link #xrSetInputDeviceStateFloatEXT SetInputDeviceStateFloatEXT}</li>
-     * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_INVALID ERROR_PATH_INVALID}</li>
-     * </ul></dd>
-     * </dl>
-     *
-     * @param session         the {@code XrSession} to set the input device state in.
-     * @param topLevelPath    the path representing the input device (e.g. pathname:/user/hand/left).
-     * @param inputSourcePath the full path of the input component for which we wish to set the state for (e.g. pathname:/user/hand/left/input/trigger/value).
-     * @param state           the requested float state of the input device.
-     */
+    /** {@code XrResult xrSetInputDeviceStateFloatEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, float state)} */
     @NativeType("XrResult")
     public static int xrSetInputDeviceStateFloatEXT(XrSession session, @NativeType("XrPath") long topLevelPath, @NativeType("XrPath") long inputSourcePath, float state) {
         long __functionAddress = session.getCapabilities().xrSetInputDeviceStateFloatEXT;
@@ -246,7 +68,7 @@ public class EXTConformanceAutomation {
         ffi_type_pointer, ffi_type_uint64, ffi_type_uint64, apiCreateStruct(ffi_type_float, ffi_type_float)
     );
 
-    /** Unsafe version of: {@link #xrSetInputDeviceStateVector2fEXT SetInputDeviceStateVector2fEXT} */
+    /** {@code XrResult xrSetInputDeviceStateVector2fEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrVector2f state)} */
     public static int nxrSetInputDeviceStateVector2fEXT(XrSession session, long topLevelPath, long inputSourcePath, long state) {
         long __functionAddress = session.getCapabilities().xrSetInputDeviceStateVector2fEXT;
         if (CHECKS) {
@@ -269,63 +91,7 @@ public class EXTConformanceAutomation {
         }
     }
 
-    /**
-     * Sets the state of a 2D vector input source on the input device.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <pre><code>
-     * XrResult xrSetInputDeviceStateVector2fEXT(
-     *     XrSession                                   session,
-     *     XrPath                                      topLevelPath,
-     *     XrPath                                      inputSourcePath,
-     *     XrVector2f                                  state);</code></pre>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>{@code session} <b>must</b> be a valid session handle.</li>
-     * <li>{@code topLevelPath} <b>must</b> be a valid top level path.</li>
-     * <li>{@code inputSourcePath} <b>must</b> be a valid input source path.</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link EXTConformanceAutomation XR_EXT_conformance_automation} extension <b>must</b> be enabled prior to calling {@link #xrSetInputDeviceStateVector2fEXT SetInputDeviceStateVector2fEXT}</li>
-     * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_INVALID ERROR_PATH_INVALID}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link XrVector2f}</p>
-     *
-     * @param session         the {@code XrSession} to set the input device state in.
-     * @param topLevelPath    the path representing the input device (e.g. pathname:/user/hand/left).
-     * @param inputSourcePath the full path of the input component for which we wish to set the state for (e.g. pathname:/user/hand/left/input/thumbstick).
-     * @param state           the requested two-dimensional state of the input device.
-     */
+    /** {@code XrResult xrSetInputDeviceStateVector2fEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrVector2f state)} */
     @NativeType("XrResult")
     public static int xrSetInputDeviceStateVector2fEXT(XrSession session, @NativeType("XrPath") long topLevelPath, @NativeType("XrPath") long inputSourcePath, XrVector2f state) {
         return nxrSetInputDeviceStateVector2fEXT(session, topLevelPath, inputSourcePath, state.address());
@@ -338,7 +104,7 @@ public class EXTConformanceAutomation {
         ffi_type_pointer, ffi_type_uint64, ffi_type_uint64, ffi_type_pointer, apiCreateStruct(apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float, ffi_type_float), apiCreateStruct(ffi_type_float, ffi_type_float, ffi_type_float))
     );
 
-    /** Unsafe version of: {@link #xrSetInputDeviceLocationEXT SetInputDeviceLocationEXT} */
+    /** {@code XrResult xrSetInputDeviceLocationEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrSpace space, XrPosef pose)} */
     public static int nxrSetInputDeviceLocationEXT(XrSession session, long topLevelPath, long inputSourcePath, XrSpace space, long pose) {
         long __functionAddress = session.getCapabilities().xrSetInputDeviceLocationEXT;
         if (CHECKS) {
@@ -362,69 +128,7 @@ public class EXTConformanceAutomation {
         }
     }
 
-    /**
-     * Sets the effective location of a pose input source on the input device.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <pre><code>
-     * XrResult xrSetInputDeviceLocationEXT(
-     *     XrSession                                   session,
-     *     XrPath                                      topLevelPath,
-     *     XrPath                                      inputSourcePath,
-     *     XrSpace                                     space,
-     *     XrPosef                                     pose);</code></pre>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>{@code session} <b>must</b> be a valid session handle.</li>
-     * <li>{@code topLevelPath} <b>must</b> be a valid top level path.</li>
-     * <li>{@code inputSourcePath} <b>must</b> be a valid input source path.</li>
-     * <li>{@code space} <b>must</b> be a valid {@code XrSpace}.</li>
-     * <li>{@code pose} <b>must</b> be a valid {@link XrPosef}.</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link EXTConformanceAutomation XR_EXT_conformance_automation} extension <b>must</b> be enabled prior to calling {@link #xrSetInputDeviceLocationEXT SetInputDeviceLocationEXT}</li>
-     * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-     * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
-     * <li>{@code space} <b>must</b> have been created, allocated, or retrieved from {@code session}</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_POSE_INVALID ERROR_POSE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_PATH_INVALID ERROR_PATH_INVALID}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link XrPosef}</p>
-     *
-     * @param session         the {@code XrSession} to set the input device state in.
-     * @param topLevelPath    the path representing the input device (e.g. pathname:/user/hand/left).
-     * @param inputSourcePath the full path of the input component for which we wish to set the pose for (e.g. pathname:/user/hand/left/input/grip/pose).
-     * @param pose            the requested pose state of the input device.
-     */
+    /** {@code XrResult xrSetInputDeviceLocationEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrSpace space, XrPosef pose)} */
     @NativeType("XrResult")
     public static int xrSetInputDeviceLocationEXT(XrSession session, @NativeType("XrPath") long topLevelPath, @NativeType("XrPath") long inputSourcePath, XrSpace space, XrPosef pose) {
         return nxrSetInputDeviceLocationEXT(session, topLevelPath, inputSourcePath, space, pose.address());

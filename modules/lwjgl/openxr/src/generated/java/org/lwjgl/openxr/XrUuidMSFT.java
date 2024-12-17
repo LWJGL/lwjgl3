@@ -17,24 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Universally Unique Identifier.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrUuidMSFT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSceneComponentMSFT}, {@link XrSceneComponentParentFilterInfoMSFT}, {@link XrSceneComponentsLocateInfoMSFT}, {@link XrSerializedSceneFragmentDataGetInfoMSFT}, {@link MSFTSceneMarker#xrGetSceneMarkerDecodedStringMSFT GetSceneMarkerDecodedStringMSFT}, {@link MSFTSceneMarker#xrGetSceneMarkerRawDataMSFT GetSceneMarkerRawDataMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrUuidMSFT {
- *     uint8_t {@link #bytes}[16];
- * }</code></pre>
+ *     uint8_t bytes[16];
+ * }}</pre>
  */
 public class XrUuidMSFT extends Struct<XrUuidMSFT> implements NativeResource {
 
@@ -81,16 +67,16 @@ public class XrUuidMSFT extends Struct<XrUuidMSFT> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a 128-bit Variant-1 Universally Unique Identifier. */
+    /** @return a {@link ByteBuffer} view of the {@code bytes} field. */
     @NativeType("uint8_t[16]")
     public ByteBuffer bytes() { return nbytes(address()); }
-    /** a 128-bit Variant-1 Universally Unique Identifier. */
+    /** @return the value at the specified index of the {@code bytes} field. */
     @NativeType("uint8_t")
     public byte bytes(int index) { return nbytes(address(), index); }
 
-    /** Copies the specified {@link ByteBuffer} to the {@link #bytes} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code bytes} field. */
     public XrUuidMSFT bytes(@NativeType("uint8_t[16]") ByteBuffer value) { nbytes(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #bytes} field. */
+    /** Sets the specified value at the specified index of the {@code bytes} field. */
     public XrUuidMSFT bytes(int index, @NativeType("uint8_t") byte value) { nbytes(address(), index, value); return this; }
 
     /**
@@ -276,16 +262,16 @@ public class XrUuidMSFT extends Struct<XrUuidMSFT> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link XrUuidMSFT#bytes} field. */
+        /** @return a {@link ByteBuffer} view of the {@code bytes} field. */
         @NativeType("uint8_t[16]")
         public ByteBuffer bytes() { return XrUuidMSFT.nbytes(address()); }
-        /** @return the value at the specified index of the {@link XrUuidMSFT#bytes} field. */
+        /** @return the value at the specified index of the {@code bytes} field. */
         @NativeType("uint8_t")
         public byte bytes(int index) { return XrUuidMSFT.nbytes(address(), index); }
 
-        /** Copies the specified {@link ByteBuffer} to the {@link XrUuidMSFT#bytes} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code bytes} field. */
         public XrUuidMSFT.Buffer bytes(@NativeType("uint8_t[16]") ByteBuffer value) { XrUuidMSFT.nbytes(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link XrUuidMSFT#bytes} field. */
+        /** Sets the specified value at the specified index of the {@code bytes} field. */
         public XrUuidMSFT.Buffer bytes(int index, @NativeType("uint8_t") byte value) { XrUuidMSFT.nbytes(address(), index, value); return this; }
 
     }

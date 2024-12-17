@@ -18,48 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure specifying device fault information.
- * 
- * <h5>Description</h5>
- * 
- * <p>An implementation <b>should</b> populate as many members of {@link VkDeviceFaultInfoEXT} as possible, given the information available at the time of the fault and the constraints of the implementation itself.</p>
- * 
- * <p>Due to hardware limitations, {@code pAddressInfos} describes ranges of GPU virtual address space, rather than precise addresses. The precise memory address accessed or the precise value of the instruction pointer <b>must</b> lie within the region described.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Each element of {@code pAddressInfos} describes either:</p>
- * 
- * <ul>
- * <li>A memory access which may have triggered a page fault and may have contributed to device loss</li>
- * <li>The value of an active instruction pointer at the time a fault occurred. This value may be indicative of the active pipeline or shader at the time of device loss</li>
- * </ul>
- * 
- * <p>Comparison of the GPU virtual addresses described by {@code pAddressInfos} to GPU virtual address ranges reported by the {@link EXTDeviceAddressBindingReport VK_EXT_device_address_binding_report} extension may allow applications to correlate between these addresses and Vulkan objects. Applications should be aware that these addresses may also correspond to resources internal to an implementation, which will not be reported via the {@link EXTDeviceAddressBindingReport VK_EXT_device_address_binding_report} extension.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceFault#VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceFaultAddressInfoEXT}, {@link VkDeviceFaultVendorInfoEXT}, {@link EXTDeviceFault#vkGetDeviceFaultInfoEXT GetDeviceFaultInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceFaultInfoEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     char {@link #description}[VK_MAX_DESCRIPTION_SIZE];
- *     {@link VkDeviceFaultAddressInfoEXT VkDeviceFaultAddressInfoEXT} * {@link #pAddressInfos};
- *     {@link VkDeviceFaultVendorInfoEXT VkDeviceFaultVendorInfoEXT} * {@link #pVendorInfos};
- *     void * {@link #pVendorBinaryData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     char description[VK_MAX_DESCRIPTION_SIZE];
+ *     {@link VkDeviceFaultAddressInfoEXT VkDeviceFaultAddressInfoEXT} * pAddressInfos;
+ *     {@link VkDeviceFaultVendorInfoEXT VkDeviceFaultVendorInfoEXT} * pVendorInfos;
+ *     void * pVendorBinaryData;
+ * }}</pre>
  */
 public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implements NativeResource {
 
@@ -121,33 +88,33 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description of the fault. */
+    /** @return a {@link ByteBuffer} view of the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description of the fault. */
+    /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkDeviceFaultAddressInfoEXT} structures describing either memory accesses which <b>may</b> have caused a page fault, or describing active instruction pointers at the time of the fault. If not {@code NULL}, each element of {@code pAddressInfos} describes the a bounded region of GPU virtual address space containing either the GPU virtual address accessed, or the value of an active instruction pointer. */
+    /** @return a {@link VkDeviceFaultAddressInfoEXT} view of the struct pointed to by the {@code pAddressInfos} field. */
     @NativeType("VkDeviceFaultAddressInfoEXT *")
     public @Nullable VkDeviceFaultAddressInfoEXT pAddressInfos() { return npAddressInfos(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkDeviceFaultVendorInfoEXT} structures describing vendor-specific fault information. */
+    /** @return a {@link VkDeviceFaultVendorInfoEXT} view of the struct pointed to by the {@code pVendorInfos} field. */
     @NativeType("VkDeviceFaultVendorInfoEXT *")
     public @Nullable VkDeviceFaultVendorInfoEXT pVendorInfos() { return npVendorInfos(address()); }
-    /** {@code NULL} or a pointer to {@code vendorBinarySize} number of bytes of data, which will be populated with a vendor-specific binary crash dump, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#vendor-binary-crash-dumps">Vendor Binary Crash Dumps</a>. */
+    /** @return the value of the {@code pVendorBinaryData} field. */
     @NativeType("void *")
     public long pVendorBinaryData() { return npVendorBinaryData(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceFaultInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceFault#VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceFault#VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT} value to the {@code sType} field. */
     public VkDeviceFaultInfoEXT sType$Default() { return sType(EXTDeviceFault.VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceFaultInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -347,33 +314,33 @@ public class VkDeviceFaultInfoEXT extends Struct<VkDeviceFaultInfoEXT> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceFaultInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceFaultInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDeviceFaultInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDeviceFaultInfoEXT.npNext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkDeviceFaultInfoEXT#description} field. */
+        /** @return a {@link ByteBuffer} view of the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return VkDeviceFaultInfoEXT.ndescription(address()); }
-        /** @return the null-terminated string stored in the {@link VkDeviceFaultInfoEXT#description} field. */
+        /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkDeviceFaultInfoEXT.ndescriptionString(address()); }
-        /** @return a {@link VkDeviceFaultAddressInfoEXT} view of the struct pointed to by the {@link VkDeviceFaultInfoEXT#pAddressInfos} field. */
+        /** @return a {@link VkDeviceFaultAddressInfoEXT} view of the struct pointed to by the {@code pAddressInfos} field. */
         @NativeType("VkDeviceFaultAddressInfoEXT *")
         public @Nullable VkDeviceFaultAddressInfoEXT pAddressInfos() { return VkDeviceFaultInfoEXT.npAddressInfos(address()); }
-        /** @return a {@link VkDeviceFaultVendorInfoEXT} view of the struct pointed to by the {@link VkDeviceFaultInfoEXT#pVendorInfos} field. */
+        /** @return a {@link VkDeviceFaultVendorInfoEXT} view of the struct pointed to by the {@code pVendorInfos} field. */
         @NativeType("VkDeviceFaultVendorInfoEXT *")
         public @Nullable VkDeviceFaultVendorInfoEXT pVendorInfos() { return VkDeviceFaultInfoEXT.npVendorInfos(address()); }
-        /** @return the value of the {@link VkDeviceFaultInfoEXT#pVendorBinaryData} field. */
+        /** @return the value of the {@code pVendorBinaryData} field. */
         @NativeType("void *")
         public long pVendorBinaryData() { return VkDeviceFaultInfoEXT.npVendorBinaryData(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceFaultInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceFaultInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceFaultInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceFault#VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT} value to the {@link VkDeviceFaultInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceFault#VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT} value to the {@code sType} field. */
         public VkDeviceFaultInfoEXT.Buffer sType$Default() { return sType(EXTDeviceFault.VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDeviceFaultInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceFaultInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkDeviceFaultInfoEXT.npNext(address(), value); return this; }
 
     }

@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_memory_status {
  *     void * memory;
  *     unsigned int type;
@@ -26,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     nk_size allocated;
  *     nk_size needed;
  *     nk_size calls;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_memory_status")
 public class NkMemoryStatus extends Struct<NkMemoryStatus> implements NativeResource {

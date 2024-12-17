@@ -16,12 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SpatialAnchorPose_t {
  *     {@link HmdMatrix34 HmdMatrix34_t} mAnchorToAbsoluteTracking;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct SpatialAnchorPose_t")
 public class SpatialAnchorPose extends Struct<SpatialAnchorPose> implements NativeResource {

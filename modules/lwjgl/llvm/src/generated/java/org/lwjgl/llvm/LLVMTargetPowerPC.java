@@ -34,6 +34,7 @@ public class LLVMTargetPowerPC {
 
     // --- [ LLVMInitializePowerPCTargetInfo ] ---
 
+    /** {@code void LLVMInitializePowerPCTargetInfo(void)} */
     public static void LLVMInitializePowerPCTargetInfo() {
         long __functionAddress = Functions.InitializePowerPCTargetInfo;
         invokeV(__functionAddress);
@@ -41,6 +42,7 @@ public class LLVMTargetPowerPC {
 
     // --- [ LLVMInitializePowerPCTarget ] ---
 
+    /** {@code void LLVMInitializePowerPCTarget(void)} */
     public static void LLVMInitializePowerPCTarget() {
         long __functionAddress = Functions.InitializePowerPCTarget;
         invokeV(__functionAddress);
@@ -48,6 +50,7 @@ public class LLVMTargetPowerPC {
 
     // --- [ LLVMInitializePowerPCTargetMC ] ---
 
+    /** {@code void LLVMInitializePowerPCTargetMC(void)} */
     public static void LLVMInitializePowerPCTargetMC() {
         long __functionAddress = Functions.InitializePowerPCTargetMC;
         invokeV(__functionAddress);
@@ -55,6 +58,7 @@ public class LLVMTargetPowerPC {
 
     // --- [ LLVMInitializePowerPCAsmPrinter ] ---
 
+    /** {@code void LLVMInitializePowerPCAsmPrinter(void)} */
     public static void LLVMInitializePowerPCAsmPrinter() {
         long __functionAddress = Functions.InitializePowerPCAsmPrinter;
         invokeV(__functionAddress);
@@ -62,6 +66,7 @@ public class LLVMTargetPowerPC {
 
     // --- [ LLVMInitializePowerPCAsmParser ] ---
 
+    /** {@code void LLVMInitializePowerPCAsmParser(void)} */
     public static void LLVMInitializePowerPCAsmParser() {
         long __functionAddress = Functions.InitializePowerPCAsmParser;
         invokeV(__functionAddress);
@@ -69,6 +74,7 @@ public class LLVMTargetPowerPC {
 
     // --- [ LLVMInitializePowerPCDisassembler ] ---
 
+    /** {@code void LLVMInitializePowerPCDisassembler(void)} */
     public static void LLVMInitializePowerPCDisassembler() {
         long __functionAddress = Functions.InitializePowerPCDisassembler;
         invokeV(__functionAddress);

@@ -16,30 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Scene planes.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrScenePlanesMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_PLANES_MSFT TYPE_SCENE_PLANES_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code scenePlaneCount} is not 0, {@code scenePlanes} <b>must</b> be a pointer to an array of {@code scenePlaneCount} {@link XrScenePlaneMSFT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSceneComponentsMSFT}, {@link XrScenePlaneMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrScenePlanesMSFT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #scenePlaneCount};
- *     {@link XrScenePlaneMSFT XrScenePlaneMSFT} * {@link #scenePlanes};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t scenePlaneCount;
+ *     {@link XrScenePlaneMSFT XrScenePlaneMSFT} * scenePlanes;
+ * }}</pre>
  */
 public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements NativeResource {
 
@@ -95,28 +78,28 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} describing the count of elements in the {@link XrScenePlaneMSFT} array. */
+    /** @return the value of the {@code scenePlaneCount} field. */
     @NativeType("uint32_t")
     public int scenePlaneCount() { return nscenePlaneCount(address()); }
-    /** an array of {@link XrScenePlaneMSFT}. */
+    /** @return a {@link XrScenePlaneMSFT.Buffer} view of the struct array pointed to by the {@code scenePlanes} field. */
     @NativeType("XrScenePlaneMSFT *")
     public XrScenePlaneMSFT.@Nullable Buffer scenePlanes() { return nscenePlanes(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrScenePlanesMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_PLANES_MSFT TYPE_SCENE_PLANES_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_PLANES_MSFT TYPE_SCENE_PLANES_MSFT} value to the {@code type} field. */
     public XrScenePlanesMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_PLANES_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrScenePlanesMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #scenePlaneCount} field. */
+    /** Sets the specified value to the {@code scenePlaneCount} field. */
     public XrScenePlanesMSFT scenePlaneCount(@NativeType("uint32_t") int value) { nscenePlaneCount(address(), value); return this; }
-    /** Sets the address of the specified {@link XrScenePlaneMSFT.Buffer} to the {@link #scenePlanes} field. */
+    /** Sets the address of the specified {@link XrScenePlaneMSFT.Buffer} to the {@code scenePlanes} field. */
     public XrScenePlanesMSFT scenePlanes(@NativeType("XrScenePlaneMSFT *") XrScenePlaneMSFT.@Nullable Buffer value) { nscenePlanes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,28 +301,28 @@ public class XrScenePlanesMSFT extends Struct<XrScenePlanesMSFT> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrScenePlanesMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrScenePlanesMSFT.ntype(address()); }
-        /** @return the value of the {@link XrScenePlanesMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrScenePlanesMSFT.nnext(address()); }
-        /** @return the value of the {@link XrScenePlanesMSFT#scenePlaneCount} field. */
+        /** @return the value of the {@code scenePlaneCount} field. */
         @NativeType("uint32_t")
         public int scenePlaneCount() { return XrScenePlanesMSFT.nscenePlaneCount(address()); }
-        /** @return a {@link XrScenePlaneMSFT.Buffer} view of the struct array pointed to by the {@link XrScenePlanesMSFT#scenePlanes} field. */
+        /** @return a {@link XrScenePlaneMSFT.Buffer} view of the struct array pointed to by the {@code scenePlanes} field. */
         @NativeType("XrScenePlaneMSFT *")
         public XrScenePlaneMSFT.@Nullable Buffer scenePlanes() { return XrScenePlanesMSFT.nscenePlanes(address()); }
 
-        /** Sets the specified value to the {@link XrScenePlanesMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrScenePlanesMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrScenePlanesMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_PLANES_MSFT TYPE_SCENE_PLANES_MSFT} value to the {@link XrScenePlanesMSFT#type} field. */
+        /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_PLANES_MSFT TYPE_SCENE_PLANES_MSFT} value to the {@code type} field. */
         public XrScenePlanesMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_PLANES_MSFT); }
-        /** Sets the specified value to the {@link XrScenePlanesMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrScenePlanesMSFT.Buffer next(@NativeType("void *") long value) { XrScenePlanesMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrScenePlanesMSFT#scenePlaneCount} field. */
+        /** Sets the specified value to the {@code scenePlaneCount} field. */
         public XrScenePlanesMSFT.Buffer scenePlaneCount(@NativeType("uint32_t") int value) { XrScenePlanesMSFT.nscenePlaneCount(address(), value); return this; }
-        /** Sets the address of the specified {@link XrScenePlaneMSFT.Buffer} to the {@link XrScenePlanesMSFT#scenePlanes} field. */
+        /** Sets the address of the specified {@link XrScenePlaneMSFT.Buffer} to the {@code scenePlanes} field. */
         public XrScenePlanesMSFT.Buffer scenePlanes(@NativeType("XrScenePlaneMSFT *") XrScenePlaneMSFT.@Nullable Buffer value) { XrScenePlanesMSFT.nscenePlanes(address(), value); return this; }
 
     }

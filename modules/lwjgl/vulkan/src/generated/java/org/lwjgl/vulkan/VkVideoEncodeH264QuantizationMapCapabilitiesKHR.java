@@ -16,23 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing H.264 encode quantization map capabilities.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH264QuantizationMapCapabilitiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     int32_t {@link #minQpDelta};
- *     int32_t {@link #maxQpDelta};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     int32_t minQpDelta;
+ *     int32_t maxQpDelta;
+ * }}</pre>
  */
 public class VkVideoEncodeH264QuantizationMapCapabilitiesKHR extends Struct<VkVideoEncodeH264QuantizationMapCapabilitiesKHR> implements NativeResource {
 
@@ -88,24 +78,24 @@ public class VkVideoEncodeH264QuantizationMapCapabilitiesKHR extends Struct<VkVi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the minimum QP delta value supported for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-qp-delta-map">H.264 QP delta maps</a>. */
+    /** @return the value of the {@code minQpDelta} field. */
     @NativeType("int32_t")
     public int minQpDelta() { return nminQpDelta(address()); }
-    /** indicates the maximum QP delta value supported for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-qp-delta-map">H.264 QP delta maps</a>. */
+    /** @return the value of the {@code maxQpDelta} field. */
     @NativeType("int32_t")
     public int maxQpDelta() { return nmaxQpDelta(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH264QuantizationMapCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH264QuantizationMapCapabilitiesKHR sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH264QuantizationMapCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,24 +289,24 @@ public class VkVideoEncodeH264QuantizationMapCapabilitiesKHR extends Struct<VkVi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH264QuantizationMapCapabilitiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoEncodeH264QuantizationMapCapabilitiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR#minQpDelta} field. */
+        /** @return the value of the {@code minQpDelta} field. */
         @NativeType("int32_t")
         public int minQpDelta() { return VkVideoEncodeH264QuantizationMapCapabilitiesKHR.nminQpDelta(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR#maxQpDelta} field. */
+        /** @return the value of the {@code maxQpDelta} field. */
         @NativeType("int32_t")
         public int maxQpDelta() { return VkVideoEncodeH264QuantizationMapCapabilitiesKHR.nmaxQpDelta(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH264QuantizationMapCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264QuantizationMapCapabilitiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR} value to the {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH264QuantizationMapCapabilitiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_QUANTIZATION_MAP_CAPABILITIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH264QuantizationMapCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeH264QuantizationMapCapabilitiesKHR.npNext(address(), value); return this; }
 
     }

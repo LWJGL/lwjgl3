@@ -17,33 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying images to be used as framebuffer attachments.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Each element of {@code pAttachments} <b>must</b> only specify a single mip level</li>
- * <li>Each element of {@code pAttachments} <b>must</b> have been created with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-views-identity-mappings">identity swizzle</a></li>
- * <li>Each element of {@code pAttachments} <b>must</b> have been created with {@link VkImageViewCreateInfo}{@code ::viewType} not equal to {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#subpass-multisampledrendertosinglesampled">multisampled-render-to-single-sampled</a> is enabled for any subpass, all element of {@code pAttachments} which have a sample count equal to {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT} <b>must</b> have a format that supports the sample count specified in {@link VkMultisampledRenderToSingleSampledInfoEXT}{@code ::rasterizationSamples}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO}</li>
- * <li>If {@code attachmentCount} is not 0, {@code pAttachments} <b>must</b> be a valid pointer to an array of {@code attachmentCount} valid {@code VkImageView} handles</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderPassAttachmentBeginInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #attachmentCount};
- *     VkImageView const * {@link #pAttachments};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t attachmentCount;
+ *     VkImageView const * pAttachments;
+ * }}</pre>
  */
 public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachmentBeginInfo> implements NativeResource {
 
@@ -99,26 +79,26 @@ public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of attachments. */
+    /** @return the value of the {@code attachmentCount} field. */
     @NativeType("uint32_t")
     public int attachmentCount() { return nattachmentCount(address()); }
-    /** a pointer to an array of {@code VkImageView} handles, each of which will be used as the corresponding attachment in the render pass instance. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAttachments} field. */
     @NativeType("VkImageView const *")
     public @Nullable LongBuffer pAttachments() { return npAttachments(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRenderPassAttachmentBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO} value to the {@code sType} field. */
     public VkRenderPassAttachmentBeginInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRenderPassAttachmentBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pAttachments} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pAttachments} field. */
     public VkRenderPassAttachmentBeginInfo pAttachments(@Nullable @NativeType("VkImageView const *") LongBuffer value) { npAttachments(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,26 +309,26 @@ public class VkRenderPassAttachmentBeginInfo extends Struct<VkRenderPassAttachme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderPassAttachmentBeginInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassAttachmentBeginInfo.nsType(address()); }
-        /** @return the value of the {@link VkRenderPassAttachmentBeginInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassAttachmentBeginInfo.npNext(address()); }
-        /** @return the value of the {@link VkRenderPassAttachmentBeginInfo#attachmentCount} field. */
+        /** @return the value of the {@code attachmentCount} field. */
         @NativeType("uint32_t")
         public int attachmentCount() { return VkRenderPassAttachmentBeginInfo.nattachmentCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkRenderPassAttachmentBeginInfo#pAttachments} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAttachments} field. */
         @NativeType("VkImageView const *")
         public @Nullable LongBuffer pAttachments() { return VkRenderPassAttachmentBeginInfo.npAttachments(address()); }
 
-        /** Sets the specified value to the {@link VkRenderPassAttachmentBeginInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRenderPassAttachmentBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassAttachmentBeginInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO} value to the {@link VkRenderPassAttachmentBeginInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO} value to the {@code sType} field. */
         public VkRenderPassAttachmentBeginInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO); }
-        /** Sets the specified value to the {@link VkRenderPassAttachmentBeginInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRenderPassAttachmentBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassAttachmentBeginInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkRenderPassAttachmentBeginInfo#pAttachments} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pAttachments} field. */
         public VkRenderPassAttachmentBeginInfo.Buffer pAttachments(@Nullable @NativeType("VkImageView const *") LongBuffer value) { VkRenderPassAttachmentBeginInfo.npAttachments(address(), value); return this; }
 
     }

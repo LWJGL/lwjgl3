@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *ptr,
- *     char const *file,
- *     int line
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_CODEC_FREE_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_CODEC_FREE_FUNC")
 public interface FMOD_CODEC_FREE_FUNCI extends CallbackI {
@@ -44,6 +35,7 @@ public interface FMOD_CODEC_FREE_FUNCI extends CallbackI {
         );
     }
 
+    /** {@code void (* FMOD_CODEC_FREE_FUNC) (void * ptr, char const * file, int line)} */
     void invoke(@NativeType("void *") long ptr, @NativeType("char const *") long file, int line);
 
 }

@@ -16,27 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure used to describe the queue that is being marked as Out of Band.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVLowLatency2#VK_STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV}</li>
- * <li>{@code queueType} <b>must</b> be a valid {@code VkOutOfBandQueueTypeNV} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVLowLatency2#vkQueueNotifyOutOfBandNV QueueNotifyOutOfBandNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkOutOfBandQueueTypeInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkOutOfBandQueueTypeNV {@link #queueType};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkOutOfBandQueueTypeNV queueType;
+ * }}</pre>
  */
 public class VkOutOfBandQueueTypeInfoNV extends Struct<VkOutOfBandQueueTypeInfoNV> implements NativeResource {
 
@@ -89,23 +74,23 @@ public class VkOutOfBandQueueTypeInfoNV extends Struct<VkOutOfBandQueueTypeInfoN
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** describes the usage of the queue to be marked as out of band. */
+    /** @return the value of the {@code queueType} field. */
     @NativeType("VkOutOfBandQueueTypeNV")
     public int queueType() { return nqueueType(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkOutOfBandQueueTypeInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV} value to the {@code sType} field. */
     public VkOutOfBandQueueTypeInfoNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkOutOfBandQueueTypeInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #queueType} field. */
+    /** Sets the specified value to the {@code queueType} field. */
     public VkOutOfBandQueueTypeInfoNV queueType(@NativeType("VkOutOfBandQueueTypeNV") int value) { nqueueType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -301,23 +286,23 @@ public class VkOutOfBandQueueTypeInfoNV extends Struct<VkOutOfBandQueueTypeInfoN
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkOutOfBandQueueTypeInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkOutOfBandQueueTypeInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkOutOfBandQueueTypeInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkOutOfBandQueueTypeInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkOutOfBandQueueTypeInfoNV#queueType} field. */
+        /** @return the value of the {@code queueType} field. */
         @NativeType("VkOutOfBandQueueTypeNV")
         public int queueType() { return VkOutOfBandQueueTypeInfoNV.nqueueType(address()); }
 
-        /** Sets the specified value to the {@link VkOutOfBandQueueTypeInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkOutOfBandQueueTypeInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkOutOfBandQueueTypeInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV} value to the {@link VkOutOfBandQueueTypeInfoNV#sType} field. */
+        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV} value to the {@code sType} field. */
         public VkOutOfBandQueueTypeInfoNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV); }
-        /** Sets the specified value to the {@link VkOutOfBandQueueTypeInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkOutOfBandQueueTypeInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkOutOfBandQueueTypeInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOutOfBandQueueTypeInfoNV#queueType} field. */
+        /** Sets the specified value to the {@code queueType} field. */
         public VkOutOfBandQueueTypeInfoNV.Buffer queueType(@NativeType("VkOutOfBandQueueTypeNV") int value) { VkOutOfBandQueueTypeInfoNV.nqueueType(address(), value); return this; }
 
     }

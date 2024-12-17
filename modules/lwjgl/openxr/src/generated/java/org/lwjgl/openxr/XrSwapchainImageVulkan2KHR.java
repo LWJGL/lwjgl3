@@ -18,16 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * See {@link XrSwapchainImageVulkanKHR}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainImageVulkan2KHR {
  *     XrStructureType type;
  *     void * next;
  *     VkImage image;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrSwapchainImageVulkan2KHR extends XrSwapchainImageVulkanKHR {
 

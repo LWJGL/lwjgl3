@@ -16,42 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure controlling how many instances of memory will be allocated.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@link VK11#VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} is not set, the number of instances allocated depends on whether {@link VK11#VK_MEMORY_HEAP_MULTI_INSTANCE_BIT MEMORY_HEAP_MULTI_INSTANCE_BIT} is set in the memory heap. If {@link VK11#VK_MEMORY_HEAP_MULTI_INSTANCE_BIT MEMORY_HEAP_MULTI_INSTANCE_BIT} is set, then memory is allocated for every physical device in the logical device (as if {@code deviceMask} has bits set for all device indices). If {@link VK11#VK_MEMORY_HEAP_MULTI_INSTANCE_BIT MEMORY_HEAP_MULTI_INSTANCE_BIT} is not set, then a single instance of memory is allocated (as if {@code deviceMask} is set to one).</p>
- * 
- * <p>On some implementations, allocations from a multi-instance heap <b>may</b> consume memory on all physical devices even if the {@code deviceMask} excludes some devices. If {@link VkPhysicalDeviceGroupProperties}{@code ::subsetAllocation} is {@link VK10#VK_TRUE TRUE}, then memory is only consumed for the devices in the device mask.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>In practice, most allocations on a multi-instance heap will be allocated across all physical devices. Unicast allocation support is an optional optimization for a minority of allocations.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@link VK11#VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} is set, {@code deviceMask} <b>must</b> be a valid device mask</li>
- * <li>If {@link VK11#VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} is set, {@code deviceMask} <b>must</b> not be zero</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkMemoryAllocateFlagBits} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryAllocateFlagsInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkMemoryAllocateFlags {@link #flags};
- *     uint32_t {@link #deviceMask};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkMemoryAllocateFlags flags;
+ *     uint32_t deviceMask;
+ * }}</pre>
  */
 public class VkMemoryAllocateFlagsInfo extends Struct<VkMemoryAllocateFlagsInfo> implements NativeResource {
 
@@ -107,28 +78,28 @@ public class VkMemoryAllocateFlagsInfo extends Struct<VkMemoryAllocateFlagsInfo>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkMemoryAllocateFlagBits} controlling the allocation. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkMemoryAllocateFlags")
     public int flags() { return nflags(address()); }
-    /** a mask of physical devices in the logical device, indicating that memory <b>must</b> be allocated on each device in the mask, if {@link VK11#VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT MEMORY_ALLOCATE_DEVICE_MASK_BIT} is set in {@code flags}. */
+    /** @return the value of the {@code deviceMask} field. */
     @NativeType("uint32_t")
     public int deviceMask() { return ndeviceMask(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryAllocateFlagsInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO} value to the {@code sType} field. */
     public VkMemoryAllocateFlagsInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryAllocateFlagsInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkMemoryAllocateFlagsInfo flags(@NativeType("VkMemoryAllocateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceMask} field. */
+    /** Sets the specified value to the {@code deviceMask} field. */
     public VkMemoryAllocateFlagsInfo deviceMask(@NativeType("uint32_t") int value) { ndeviceMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,28 +320,28 @@ public class VkMemoryAllocateFlagsInfo extends Struct<VkMemoryAllocateFlagsInfo>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryAllocateFlagsInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryAllocateFlagsInfo.nsType(address()); }
-        /** @return the value of the {@link VkMemoryAllocateFlagsInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryAllocateFlagsInfo.npNext(address()); }
-        /** @return the value of the {@link VkMemoryAllocateFlagsInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkMemoryAllocateFlags")
         public int flags() { return VkMemoryAllocateFlagsInfo.nflags(address()); }
-        /** @return the value of the {@link VkMemoryAllocateFlagsInfo#deviceMask} field. */
+        /** @return the value of the {@code deviceMask} field. */
         @NativeType("uint32_t")
         public int deviceMask() { return VkMemoryAllocateFlagsInfo.ndeviceMask(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryAllocateFlagsInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryAllocateFlagsInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryAllocateFlagsInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO} value to the {@link VkMemoryAllocateFlagsInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO} value to the {@code sType} field. */
         public VkMemoryAllocateFlagsInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO); }
-        /** Sets the specified value to the {@link VkMemoryAllocateFlagsInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryAllocateFlagsInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryAllocateFlagsInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryAllocateFlagsInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkMemoryAllocateFlagsInfo.Buffer flags(@NativeType("VkMemoryAllocateFlags") int value) { VkMemoryAllocateFlagsInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryAllocateFlagsInfo#deviceMask} field. */
+        /** Sets the specified value to the {@code deviceMask} field. */
         public VkMemoryAllocateFlagsInfo.Buffer deviceMask(@NativeType("uint32_t") int value) { VkMemoryAllocateFlagsInfo.ndeviceMask(address(), value); return this; }
 
     }

@@ -16,12 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.nuklear.Nuklear.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_popup_state {
  *     {@link NkWindow struct nk_window} * win;
- *     enum nk_panel_type {@link #type};
+ *     enum nk_panel_type type;
  *     {@link NkPopupBuffer struct nk_popup_buffer} buf;
  *     nk_hash name;
  *     nk_bool active;
@@ -30,7 +28,7 @@ import static org.lwjgl.nuklear.Nuklear.*;
  *     unsigned con_old;
  *     unsigned active_con;
  *     {@link NkRect struct nk_rect} header;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_popup_state")
 public class NkPopupState extends Struct<NkPopupState> {
@@ -108,7 +106,7 @@ public class NkPopupState extends Struct<NkPopupState> {
     /** @return a {@link NkWindow} view of the struct pointed to by the {@code win} field. */
     @NativeType("struct nk_window *")
     public NkWindow win() { return nwin(address()); }
-    /** one of:<br><table><tr><td>{@link Nuklear#NK_PANEL_NONE PANEL_NONE}</td><td>{@link Nuklear#NK_PANEL_WINDOW PANEL_WINDOW}</td><td>{@link Nuklear#NK_PANEL_GROUP PANEL_GROUP}</td><td>{@link Nuklear#NK_PANEL_POPUP PANEL_POPUP}</td><td>{@link Nuklear#NK_PANEL_CONTEXTUAL PANEL_CONTEXTUAL}</td><td>{@link Nuklear#NK_PANEL_COMBO PANEL_COMBO}</td></tr><tr><td>{@link Nuklear#NK_PANEL_MENU PANEL_MENU}</td><td>{@link Nuklear#NK_PANEL_TOOLTIP PANEL_TOOLTIP}</td><td>{@link Nuklear#NK_PANEL_SET_NONBLOCK PANEL_SET_NONBLOCK}</td><td>{@link Nuklear#NK_PANEL_SET_POPUP PANEL_SET_POPUP}</td><td>{@link Nuklear#NK_PANEL_SET_SUB PANEL_SET_SUB}</td></tr></table> */
+    /** @return the value of the {@code type} field. */
     @NativeType("enum nk_panel_type")
     public int type() { return ntype(address()); }
     /** @return a {@link NkPopupBuffer} view of the {@code buf} field. */
@@ -232,7 +230,7 @@ public class NkPopupState extends Struct<NkPopupState> {
         /** @return a {@link NkWindow} view of the struct pointed to by the {@code win} field. */
         @NativeType("struct nk_window *")
         public NkWindow win() { return NkPopupState.nwin(address()); }
-        /** @return the value of the {@link NkPopupState#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("enum nk_panel_type")
         public int type() { return NkPopupState.ntype(address()); }
         /** @return a {@link NkPopupBuffer} view of the {@code buf} field. */

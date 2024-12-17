@@ -14,19 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Structure specifying memory type.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPhysicalDeviceMemoryProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryType {
- *     VkMemoryPropertyFlags {@link #propertyFlags};
- *     uint32_t {@link #heapIndex};
- * }</code></pre>
+ *     VkMemoryPropertyFlags propertyFlags;
+ *     uint32_t heapIndex;
+ * }}</pre>
  */
 public class VkMemoryType extends Struct<VkMemoryType> {
 
@@ -76,10 +68,10 @@ public class VkMemoryType extends Struct<VkMemoryType> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a bitmask of {@code VkMemoryPropertyFlagBits} of properties for this memory type. */
+    /** @return the value of the {@code propertyFlags} field. */
     @NativeType("VkMemoryPropertyFlags")
     public int propertyFlags() { return npropertyFlags(address()); }
-    /** describes which memory heap this memory type corresponds to, and <b>must</b> be less than {@code memoryHeapCount} from the {@link VkPhysicalDeviceMemoryProperties} structure. */
+    /** @return the value of the {@code heapIndex} field. */
     @NativeType("uint32_t")
     public int heapIndex() { return nheapIndex(address()); }
 
@@ -160,10 +152,10 @@ public class VkMemoryType extends Struct<VkMemoryType> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryType#propertyFlags} field. */
+        /** @return the value of the {@code propertyFlags} field. */
         @NativeType("VkMemoryPropertyFlags")
         public int propertyFlags() { return VkMemoryType.npropertyFlags(address()); }
-        /** @return the value of the {@link VkMemoryType#heapIndex} field. */
+        /** @return the value of the {@code heapIndex} field. */
         @NativeType("uint32_t")
         public int heapIndex() { return VkMemoryType.nheapIndex(address()); }
 

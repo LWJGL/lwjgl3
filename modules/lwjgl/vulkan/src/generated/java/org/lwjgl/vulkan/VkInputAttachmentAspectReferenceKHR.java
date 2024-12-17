@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkInputAttachmentAspectReference}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkInputAttachmentAspectReferenceKHR {
  *     uint32_t subpass;
  *     uint32_t inputAttachmentIndex;
  *     VkImageAspectFlags aspectMask;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkInputAttachmentAspectReferenceKHR extends VkInputAttachmentAspectReference {
 

@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct __kernel_timespec {
- *     int64_t {@link #tv_sec};
- *     long long {@link #tv_nsec};
- * }</code></pre>
+ *     int64_t tv_sec;
+ *     long long tv_nsec;
+ * }}</pre>
  */
 @NativeType("struct __kernel_timespec")
 public class KernelTimespec extends Struct<KernelTimespec> implements NativeResource {
@@ -73,16 +71,16 @@ public class KernelTimespec extends Struct<KernelTimespec> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** seconds */
+    /** @return the value of the {@code tv_sec} field. */
     @NativeType("int64_t")
     public long tv_sec() { return ntv_sec(address()); }
-    /** nanoseconds */
+    /** @return the value of the {@code tv_nsec} field. */
     @NativeType("long long")
     public long tv_nsec() { return ntv_nsec(address()); }
 
-    /** Sets the specified value to the {@link #tv_sec} field. */
+    /** Sets the specified value to the {@code tv_sec} field. */
     public KernelTimespec tv_sec(@NativeType("int64_t") long value) { ntv_sec(address(), value); return this; }
-    /** Sets the specified value to the {@link #tv_nsec} field. */
+    /** Sets the specified value to the {@code tv_nsec} field. */
     public KernelTimespec tv_nsec(@NativeType("long long") long value) { ntv_nsec(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -272,16 +270,16 @@ public class KernelTimespec extends Struct<KernelTimespec> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link KernelTimespec#tv_sec} field. */
+        /** @return the value of the {@code tv_sec} field. */
         @NativeType("int64_t")
         public long tv_sec() { return KernelTimespec.ntv_sec(address()); }
-        /** @return the value of the {@link KernelTimespec#tv_nsec} field. */
+        /** @return the value of the {@code tv_nsec} field. */
         @NativeType("long long")
         public long tv_nsec() { return KernelTimespec.ntv_nsec(address()); }
 
-        /** Sets the specified value to the {@link KernelTimespec#tv_sec} field. */
+        /** Sets the specified value to the {@code tv_sec} field. */
         public KernelTimespec.Buffer tv_sec(@NativeType("int64_t") long value) { KernelTimespec.ntv_sec(address(), value); return this; }
-        /** Sets the specified value to the {@link KernelTimespec#tv_nsec} field. */
+        /** Sets the specified value to the {@code tv_nsec} field. */
         public KernelTimespec.Buffer tv_nsec(@NativeType("long long") long value) { KernelTimespec.ntv_nsec(address(), value); return this; }
 
     }

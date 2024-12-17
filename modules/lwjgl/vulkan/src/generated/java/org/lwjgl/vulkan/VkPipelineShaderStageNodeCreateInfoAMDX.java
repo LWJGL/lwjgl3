@@ -17,39 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the shader name and index with an execution graph.
- * 
- * <h5>Description</h5>
- * 
- * <p>When included in the {@code pNext} chain of a {@link VkPipelineShaderStageCreateInfo} structure, this structure specifies the shader name and shader index of a node when creating an execution graph pipeline. If this structure is omitted, the shader name is set to the name of the entry point in SPIR-V and the shader index is set to 0.</p>
- * 
- * <p>When dispatching a node from another shader, the name is fixed at pipeline creation, but the index <b>can</b> be set dynamically. By associating multiple shaders with the same name but different indexes, applications can dynamically select different nodes to execute. Applications <b>must</b> ensure each node has a unique name and index.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Shaders with the same name <b>must</b> be of the same type - e.g. a compute and graphics shader, or even two compute shaders where one is coalescing and the other is not, cannot share the same name.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX}</li>
- * <li>If {@code pName} is not {@code NULL}, {@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link AMDXShaderEnqueue#vkGetExecutionGraphPipelineNodeIndexAMDX GetExecutionGraphPipelineNodeIndexAMDX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineShaderStageNodeCreateInfoAMDX {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     char const * {@link #pName};
- *     uint32_t {@link #index};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     char const * pName;
+ *     uint32_t index;
+ * }}</pre>
  */
 public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineShaderStageNodeCreateInfoAMDX> implements NativeResource {
 
@@ -105,31 +79,31 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the shader name to use when creating a node in an execution graph. If {@code pName} is {@code NULL}, the name of the entry point specified in SPIR-V is used as the shader name. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pName} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer pName() { return npName(address()); }
-    /** the shader name to use when creating a node in an execution graph. If {@code pName} is {@code NULL}, the name of the entry point specified in SPIR-V is used as the shader name. */
+    /** @return the null-terminated string pointed to by the {@code pName} field. */
     @NativeType("char const *")
     public @Nullable String pNameString() { return npNameString(address()); }
-    /** the shader index to use when creating a node in an execution graph. If {@code index} is {@link AMDXShaderEnqueue#VK_SHADER_INDEX_UNUSED_AMDX SHADER_INDEX_UNUSED_AMDX} then the original index is used, either as specified by the {@code ShaderIndexAMDX} execution mode, or 0 if that too is not specified. */
+    /** @return the value of the {@code index} field. */
     @NativeType("uint32_t")
     public int index() { return nindex(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineShaderStageNodeCreateInfoAMDX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX} value to the {@link #sType} field. */
+    /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX} value to the {@code sType} field. */
     public VkPipelineShaderStageNodeCreateInfoAMDX sType$Default() { return sType(AMDXShaderEnqueue.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineShaderStageNodeCreateInfoAMDX pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #pName} field. */
+    /** Sets the address of the specified encoded string to the {@code pName} field. */
     public VkPipelineShaderStageNodeCreateInfoAMDX pName(@Nullable @NativeType("char const *") ByteBuffer value) { npName(address(), value); return this; }
-    /** Sets the specified value to the {@link #index} field. */
+    /** Sets the specified value to the {@code index} field. */
     public VkPipelineShaderStageNodeCreateInfoAMDX index(@NativeType("uint32_t") int value) { nindex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,31 +310,31 @@ public class VkPipelineShaderStageNodeCreateInfoAMDX extends Struct<VkPipelineSh
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineShaderStageNodeCreateInfoAMDX#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineShaderStageNodeCreateInfoAMDX.nsType(address()); }
-        /** @return the value of the {@link VkPipelineShaderStageNodeCreateInfoAMDX#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineShaderStageNodeCreateInfoAMDX.npNext(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkPipelineShaderStageNodeCreateInfoAMDX#pName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pName} field. */
         @NativeType("char const *")
         public @Nullable ByteBuffer pName() { return VkPipelineShaderStageNodeCreateInfoAMDX.npName(address()); }
-        /** @return the null-terminated string pointed to by the {@link VkPipelineShaderStageNodeCreateInfoAMDX#pName} field. */
+        /** @return the null-terminated string pointed to by the {@code pName} field. */
         @NativeType("char const *")
         public @Nullable String pNameString() { return VkPipelineShaderStageNodeCreateInfoAMDX.npNameString(address()); }
-        /** @return the value of the {@link VkPipelineShaderStageNodeCreateInfoAMDX#index} field. */
+        /** @return the value of the {@code index} field. */
         @NativeType("uint32_t")
         public int index() { return VkPipelineShaderStageNodeCreateInfoAMDX.nindex(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineShaderStageNodeCreateInfoAMDX#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineShaderStageNodeCreateInfoAMDX.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineShaderStageNodeCreateInfoAMDX.nsType(address(), value); return this; }
-        /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX} value to the {@link VkPipelineShaderStageNodeCreateInfoAMDX#sType} field. */
+        /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX} value to the {@code sType} field. */
         public VkPipelineShaderStageNodeCreateInfoAMDX.Buffer sType$Default() { return sType(AMDXShaderEnqueue.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX); }
-        /** Sets the specified value to the {@link VkPipelineShaderStageNodeCreateInfoAMDX#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineShaderStageNodeCreateInfoAMDX.Buffer pNext(@NativeType("void const *") long value) { VkPipelineShaderStageNodeCreateInfoAMDX.npNext(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link VkPipelineShaderStageNodeCreateInfoAMDX#pName} field. */
+        /** Sets the address of the specified encoded string to the {@code pName} field. */
         public VkPipelineShaderStageNodeCreateInfoAMDX.Buffer pName(@Nullable @NativeType("char const *") ByteBuffer value) { VkPipelineShaderStageNodeCreateInfoAMDX.npName(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineShaderStageNodeCreateInfoAMDX#index} field. */
+        /** Sets the specified value to the {@code index} field. */
         public VkPipelineShaderStageNodeCreateInfoAMDX.Buffer index(@NativeType("uint32_t") int value) { VkPipelineShaderStageNodeCreateInfoAMDX.nindex(address(), value); return this; }
 
     }

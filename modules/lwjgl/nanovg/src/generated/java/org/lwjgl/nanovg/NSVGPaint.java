@@ -14,16 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct NSVGpaint {
  *     signed char type;
  *     union {
  *         unsigned int color;
  *         {@link NSVGGradient NSVGgradient} * gradient;
  *     };
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct NSVGpaint")
 public class NSVGPaint extends Struct<NSVGPaint> {

@@ -14,19 +14,8 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://openal-soft.org/openal-extensions/SOFT_callback_buffer.txt">SOFT_callback_buffer</a> extension.
- * 
- * <p>This extension provides a mechanism for applications to provide sample data to the audio device in real-time.</p>
- * 
- * <p>Standard OpenAL sources can read samples from a pre-loaded static buffer, or from a queue of prepared buffers that can be fed in over time. In both
- * cases, an application needs to prepare all or some of the audio samples ahead of time to ensure proper continuous playback. A callback mechanism allows
- * applications to generate audio as needed, without having to prepare samples ahead of time, and to implement their own streaming interface instead of
- * having to fill, queue, and manage multiple OpenAL buffers per stream.</p>
- */
 public class SOFTCallbackBuffer {
 
-    /** Accepted as the {@code param} parameter of {@link #alGetBufferPtrSOFT GetBufferPtrSOFT} and {@link #alGetBufferPtrvSOFT GetBufferPtrvSOFT}. */
     public static final int
         AL_BUFFER_CALLBACK_FUNCTION_SOFT   = 0x19A0,
         AL_BUFFER_CALLBACK_USER_PARAM_SOFT = 0x19A1;
@@ -37,7 +26,7 @@ public class SOFTCallbackBuffer {
 
     // --- [ alBufferCallbackSOFT ] ---
 
-    /** Unsafe version of: {@link #alBufferCallbackSOFT BufferCallbackSOFT} */
+    /** {@code ALvoid alBufferCallbackSOFT(ALuint buffer, ALenum format, ALsizei freq, ALBUFFERCALLBACKTYPESOFT callback, ALvoid * userptr)} */
     public static void nalBufferCallbackSOFT(int buffer, int format, int freq, long callback, long userptr) {
         long __functionAddress = AL.getICD().alBufferCallbackSOFT;
         if (CHECKS) {
@@ -47,21 +36,7 @@ public class SOFTCallbackBuffer {
         invokePPV(buffer, format, freq, callback, userptr, __functionAddress);
     }
 
-    /**
-     * Instead of storing sample data, a buffer may be given a callback function which will be invoked when the source it's attached to needs more samples to
-     * mix. To specify a callback for a buffer, use {@code alBufferCallbackSOFT}.
-     * 
-     * <p>After a successful call, any sample data that was stored in the buffer is removed.</p>
-     * 
-     * <p>A buffer with a callback cannot be queued onto a streaming source, and it can only be set on one static source at a time. Attempting to queue such a
-     * buffer on a source, or attempting to set it on a source while it's already on one, will generate an {@link AL10#AL_INVALID_OPERATION INVALID_OPERATION} error.</p>
-     * 
-     * <p>A subsequent successful call to {@link AL10#alBufferData BufferData} will remove the callback from the buffer, and make it a normal non-callback buffer.</p>
-     *
-     * @param format  the sample format that will be expected from the callback
-     * @param freq    the base sample rate the samples will play at
-     * @param userptr stored with the {@code callback} pointer. Any data it references is not copied
-     */
+    /** {@code ALvoid alBufferCallbackSOFT(ALuint buffer, ALenum format, ALsizei freq, ALBUFFERCALLBACKTYPESOFT callback, ALvoid * userptr)} */
     @NativeType("ALvoid")
     public static void alBufferCallbackSOFT(@NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALsizei") int freq, @NativeType("ALBUFFERCALLBACKTYPESOFT") SOFTCallbackBufferTypeI callback, @NativeType("ALvoid *") long userptr) {
         nalBufferCallbackSOFT(buffer, format, freq, callback.address(), userptr);
@@ -69,7 +44,7 @@ public class SOFTCallbackBuffer {
 
     // --- [ alBufferCallbackDirectSOFT ] ---
 
-    /** Unsafe version of: {@link #alBufferCallbackDirectSOFT} */
+    /** {@code ALvoid alBufferCallbackDirectSOFT(ALCcontext * context, ALuint buffer, ALenum format, ALsizei freq, ALBUFFERCALLBACKTYPESOFT callback, ALvoid * userptr)} */
     public static void nalBufferCallbackDirectSOFT(long context, int buffer, int format, int freq, long callback, long userptr) {
         long __functionAddress = AL.getICD().alBufferCallbackDirectSOFT;
         if (CHECKS) {
@@ -80,21 +55,7 @@ public class SOFTCallbackBuffer {
         invokePPPV(context, buffer, format, freq, callback, userptr, __functionAddress);
     }
 
-    /**
-     * Instead of storing sample data, a buffer may be given a callback function which will be invoked when the source it's attached to needs more samples to
-     * mix. To specify a callback for a buffer, use {@code alBufferCallbackSOFT}.
-     * 
-     * <p>After a successful call, any sample data that was stored in the buffer is removed.</p>
-     * 
-     * <p>A buffer with a callback cannot be queued onto a streaming source, and it can only be set on one static source at a time. Attempting to queue such a
-     * buffer on a source, or attempting to set it on a source while it's already on one, will generate an {@link AL10#AL_INVALID_OPERATION INVALID_OPERATION} error.</p>
-     * 
-     * <p>A subsequent successful call to {@link AL10#alBufferData BufferData} will remove the callback from the buffer, and make it a normal non-callback buffer.</p>
-     *
-     * @param format  the sample format that will be expected from the callback
-     * @param freq    the base sample rate the samples will play at
-     * @param userptr stored with the {@code callback} pointer. Any data it references is not copied
-     */
+    /** {@code ALvoid alBufferCallbackDirectSOFT(ALCcontext * context, ALuint buffer, ALenum format, ALsizei freq, ALBUFFERCALLBACKTYPESOFT callback, ALvoid * userptr)} */
     @NativeType("ALvoid")
     public static void alBufferCallbackDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int format, @NativeType("ALsizei") int freq, @NativeType("ALBUFFERCALLBACKTYPESOFT") SOFTCallbackBufferTypeI callback, @NativeType("ALvoid *") long userptr) {
         nalBufferCallbackDirectSOFT(context, buffer, format, freq, callback.address(), userptr);
@@ -102,6 +63,7 @@ public class SOFTCallbackBuffer {
 
     // --- [ alGetBufferPtrSOFT ] ---
 
+    /** {@code ALvoid alGetBufferPtrSOFT(ALuint buffer, ALenum param, ALvoid ** ptr)} */
     public static void nalGetBufferPtrSOFT(int buffer, int param, long ptr) {
         long __functionAddress = AL.getICD().alGetBufferPtrSOFT;
         if (CHECKS) {
@@ -110,6 +72,7 @@ public class SOFTCallbackBuffer {
         invokePV(buffer, param, ptr, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBufferPtrSOFT(ALuint buffer, ALenum param, ALvoid ** ptr)} */
     @NativeType("ALvoid")
     public static void alGetBufferPtrSOFT(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr) {
         if (CHECKS) {
@@ -118,6 +81,7 @@ public class SOFTCallbackBuffer {
         nalGetBufferPtrSOFT(buffer, param, memAddress(ptr));
     }
 
+    /** {@code ALvoid alGetBufferPtrSOFT(ALuint buffer, ALenum param, ALvoid ** ptr)} */
     @NativeType("ALvoid")
     public static long alGetBufferPtrSOFT(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -132,6 +96,7 @@ public class SOFTCallbackBuffer {
 
     // --- [ alGetBufferPtrDirectSOFT ] ---
 
+    /** {@code ALvoid alGetBufferPtrDirectSOFT(ALCcontext * context, ALuint buffer, ALenum param, ALvoid ** ptr)} */
     public static void nalGetBufferPtrDirectSOFT(long context, int buffer, int param, long ptr) {
         long __functionAddress = AL.getICD().alGetBufferPtrDirectSOFT;
         if (CHECKS) {
@@ -141,6 +106,7 @@ public class SOFTCallbackBuffer {
         invokePPV(context, buffer, param, ptr, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBufferPtrDirectSOFT(ALCcontext * context, ALuint buffer, ALenum param, ALvoid ** ptr)} */
     @NativeType("ALvoid")
     public static void alGetBufferPtrDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr) {
         if (CHECKS) {
@@ -149,6 +115,7 @@ public class SOFTCallbackBuffer {
         nalGetBufferPtrDirectSOFT(context, buffer, param, memAddress(ptr));
     }
 
+    /** {@code ALvoid alGetBufferPtrDirectSOFT(ALCcontext * context, ALuint buffer, ALenum param, ALvoid ** ptr)} */
     @NativeType("ALvoid")
     public static long alGetBufferPtrDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -163,6 +130,7 @@ public class SOFTCallbackBuffer {
 
     // --- [ alGetBuffer3PtrSOFT ] ---
 
+    /** {@code ALvoid alGetBuffer3PtrSOFT(ALuint buffer, ALenum param, ALvoid ** ptr0, ALvoid ** ptr1, ALvoid ** ptr2)} */
     public static void nalGetBuffer3PtrSOFT(int buffer, int param, long ptr0, long ptr1, long ptr2) {
         long __functionAddress = AL.getICD().alGetBuffer3PtrSOFT;
         if (CHECKS) {
@@ -171,6 +139,7 @@ public class SOFTCallbackBuffer {
         invokePPPV(buffer, param, ptr0, ptr1, ptr2, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBuffer3PtrSOFT(ALuint buffer, ALenum param, ALvoid ** ptr0, ALvoid ** ptr1, ALvoid ** ptr2)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3PtrSOFT(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr0, @NativeType("ALvoid **") PointerBuffer ptr1, @NativeType("ALvoid **") PointerBuffer ptr2) {
         if (CHECKS) {
@@ -183,6 +152,7 @@ public class SOFTCallbackBuffer {
 
     // --- [ alGetBuffer3PtrDirectSOFT ] ---
 
+    /** {@code ALvoid alGetBuffer3PtrDirectSOFT(ALCcontext * context, ALuint buffer, ALenum param, ALvoid ** ptr0, ALvoid ** ptr1, ALvoid ** ptr2)} */
     public static void nalGetBuffer3PtrDirectSOFT(long context, int buffer, int param, long ptr0, long ptr1, long ptr2) {
         long __functionAddress = AL.getICD().alGetBuffer3PtrDirectSOFT;
         if (CHECKS) {
@@ -192,6 +162,7 @@ public class SOFTCallbackBuffer {
         invokePPPPV(context, buffer, param, ptr0, ptr1, ptr2, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBuffer3PtrDirectSOFT(ALCcontext * context, ALuint buffer, ALenum param, ALvoid ** ptr0, ALvoid ** ptr1, ALvoid ** ptr2)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3PtrDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr0, @NativeType("ALvoid **") PointerBuffer ptr1, @NativeType("ALvoid **") PointerBuffer ptr2) {
         if (CHECKS) {
@@ -204,6 +175,7 @@ public class SOFTCallbackBuffer {
 
     // --- [ alGetBufferPtrvSOFT ] ---
 
+    /** {@code ALvoid alGetBufferPtrvSOFT(ALuint buffer, ALenum param, ALvoid ** ptr)} */
     public static void nalGetBufferPtrvSOFT(int buffer, int param, long ptr) {
         long __functionAddress = AL.getICD().alGetBufferPtrvSOFT;
         if (CHECKS) {
@@ -212,6 +184,7 @@ public class SOFTCallbackBuffer {
         invokePV(buffer, param, ptr, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBufferPtrvSOFT(ALuint buffer, ALenum param, ALvoid ** ptr)} */
     @NativeType("ALvoid")
     public static void alGetBufferPtrvSOFT(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr) {
         if (CHECKS) {
@@ -222,6 +195,7 @@ public class SOFTCallbackBuffer {
 
     // --- [ alGetBufferPtrvDirectSOFT ] ---
 
+    /** {@code ALvoid alGetBufferPtrvDirectSOFT(ALCcontext * context, ALuint buffer, ALenum param, ALvoid ** ptr)} */
     public static void nalGetBufferPtrvDirectSOFT(long context, int buffer, int param, long ptr) {
         long __functionAddress = AL.getICD().alGetBufferPtrvDirectSOFT;
         if (CHECKS) {
@@ -231,6 +205,7 @@ public class SOFTCallbackBuffer {
         invokePPV(context, buffer, param, ptr, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBufferPtrvDirectSOFT(ALCcontext * context, ALuint buffer, ALenum param, ALvoid ** ptr)} */
     @NativeType("ALvoid")
     public static void alGetBufferPtrvDirectSOFT(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALvoid **") PointerBuffer ptr) {
         if (CHECKS) {

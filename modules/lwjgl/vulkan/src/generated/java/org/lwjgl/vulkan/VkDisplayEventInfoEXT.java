@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describe a display event to create.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDisplayControl#VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code displayEvent} <b>must</b> be a valid {@code VkDisplayEventTypeEXT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDisplayControl#vkRegisterDisplayEventEXT RegisterDisplayEventEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDisplayEventInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDisplayEventTypeEXT {@link #displayEvent};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDisplayEventTypeEXT displayEvent;
+ * }}</pre>
  */
 public class VkDisplayEventInfoEXT extends Struct<VkDisplayEventInfoEXT> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class VkDisplayEventInfoEXT extends Struct<VkDisplayEventInfoEXT> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkDisplayEventTypeEXT} specifying when the fence will be signaled. */
+    /** @return the value of the {@code displayEvent} field. */
     @NativeType("VkDisplayEventTypeEXT")
     public int displayEvent() { return ndisplayEvent(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDisplayEventInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDisplayControl#VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDisplayControl#VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT} value to the {@code sType} field. */
     public VkDisplayEventInfoEXT sType$Default() { return sType(EXTDisplayControl.VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDisplayEventInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #displayEvent} field. */
+    /** Sets the specified value to the {@code displayEvent} field. */
     public VkDisplayEventInfoEXT displayEvent(@NativeType("VkDisplayEventTypeEXT") int value) { ndisplayEvent(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,23 +305,23 @@ public class VkDisplayEventInfoEXT extends Struct<VkDisplayEventInfoEXT> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDisplayEventInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDisplayEventInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDisplayEventInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDisplayEventInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDisplayEventInfoEXT#displayEvent} field. */
+        /** @return the value of the {@code displayEvent} field. */
         @NativeType("VkDisplayEventTypeEXT")
         public int displayEvent() { return VkDisplayEventInfoEXT.ndisplayEvent(address()); }
 
-        /** Sets the specified value to the {@link VkDisplayEventInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDisplayEventInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplayEventInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDisplayControl#VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT} value to the {@link VkDisplayEventInfoEXT#sType} field. */
+        /** Sets the {@link EXTDisplayControl#VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT} value to the {@code sType} field. */
         public VkDisplayEventInfoEXT.Buffer sType$Default() { return sType(EXTDisplayControl.VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDisplayEventInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDisplayEventInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDisplayEventInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDisplayEventInfoEXT#displayEvent} field. */
+        /** Sets the specified value to the {@code displayEvent} field. */
         public VkDisplayEventInfoEXT.Buffer displayEvent(@NativeType("VkDisplayEventTypeEXT") int value) { VkDisplayEventInfoEXT.ndisplayEvent(address(), value); return this; }
 
     }

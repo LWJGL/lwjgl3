@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMTransforms#LLVMAddInternalizePassWithMustPreservePredicate AddInternalizePassWithMustPreservePredicate} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LLVMBool (*{@link #invoke}) (
- *     LLVMValueRef Val,
- *     void *Context
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("LLVMBool (*) (LLVMValueRef, void *)")
 public interface LLVMMustPreserveI extends CallbackI {
@@ -45,6 +35,7 @@ public interface LLVMMustPreserveI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code LLVMBool (*) (LLVMValueRef Val, void * Context)} */
     @NativeType("LLVMBool") int invoke(@NativeType("LLVMValueRef") long Val, @NativeType("void *") long Context);
 
 }

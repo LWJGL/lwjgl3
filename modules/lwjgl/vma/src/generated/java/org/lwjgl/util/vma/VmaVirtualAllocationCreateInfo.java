@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters of created virtual allocation to be passed to {@link Vma#vmaVirtualAllocate VirtualAllocate}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaVirtualAllocationCreateInfo {
- *     VkDeviceSize {@link #size};
- *     VkDeviceSize {@link #alignment};
- *     VmaVirtualAllocationCreateFlags {@link #flags};
- *     void * {@link #pUserData};
- * }</code></pre>
+ *     VkDeviceSize size;
+ *     VkDeviceSize alignment;
+ *     VmaVirtualAllocationCreateFlags flags;
+ *     void * pUserData;
+ * }}</pre>
  */
 public class VmaVirtualAllocationCreateInfo extends Struct<VmaVirtualAllocationCreateInfo> implements NativeResource {
 
@@ -82,38 +78,26 @@ public class VmaVirtualAllocationCreateInfo extends Struct<VmaVirtualAllocationC
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * size of the allocation.
-     * 
-     * <p>Cannot be zero.</p>
-     */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /**
-     * required alignment of the allocation. Optional.
-     * 
-     * <p>Must be power of two. Special value 0 has the same meaning as 1 - means no special alignment is required, so allocation can start at any offset.</p>
-     */
+    /** @return the value of the {@code alignment} field. */
     @NativeType("VkDeviceSize")
     public long alignment() { return nalignment(address()); }
-    /** use combination of {@code VmaVirtualAllocationCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT}</td></tr><tr><td>{@link Vma#VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK}</td></tr></table> */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VmaVirtualAllocationCreateFlags")
     public int flags() { return nflags(address()); }
-    /**
-     * custom pointer to be associated with the allocation. Optional.
-     * 
-     * <p>It can be any value and can be used for user-defined purposes. It can be fetched or changed later.</p>
-     */
+    /** @return the value of the {@code pUserData} field. */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
 
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VmaVirtualAllocationCreateInfo size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@link #alignment} field. */
+    /** Sets the specified value to the {@code alignment} field. */
     public VmaVirtualAllocationCreateInfo alignment(@NativeType("VkDeviceSize") long value) { nalignment(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VmaVirtualAllocationCreateInfo flags(@NativeType("VmaVirtualAllocationCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #pUserData} field. */
+    /** Sets the specified value to the {@code pUserData} field. */
     public VmaVirtualAllocationCreateInfo pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,26 +299,26 @@ public class VmaVirtualAllocationCreateInfo extends Struct<VmaVirtualAllocationC
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VmaVirtualAllocationCreateInfo#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VmaVirtualAllocationCreateInfo.nsize(address()); }
-        /** @return the value of the {@link VmaVirtualAllocationCreateInfo#alignment} field. */
+        /** @return the value of the {@code alignment} field. */
         @NativeType("VkDeviceSize")
         public long alignment() { return VmaVirtualAllocationCreateInfo.nalignment(address()); }
-        /** @return the value of the {@link VmaVirtualAllocationCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VmaVirtualAllocationCreateFlags")
         public int flags() { return VmaVirtualAllocationCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VmaVirtualAllocationCreateInfo#pUserData} field. */
+        /** @return the value of the {@code pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VmaVirtualAllocationCreateInfo.npUserData(address()); }
 
-        /** Sets the specified value to the {@link VmaVirtualAllocationCreateInfo#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VmaVirtualAllocationCreateInfo.Buffer size(@NativeType("VkDeviceSize") long value) { VmaVirtualAllocationCreateInfo.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaVirtualAllocationCreateInfo#alignment} field. */
+        /** Sets the specified value to the {@code alignment} field. */
         public VmaVirtualAllocationCreateInfo.Buffer alignment(@NativeType("VkDeviceSize") long value) { VmaVirtualAllocationCreateInfo.nalignment(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaVirtualAllocationCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VmaVirtualAllocationCreateInfo.Buffer flags(@NativeType("VmaVirtualAllocationCreateFlags") int value) { VmaVirtualAllocationCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaVirtualAllocationCreateInfo#pUserData} field. */
+        /** Sets the specified value to the {@code pUserData} field. */
         public VmaVirtualAllocationCreateInfo.Buffer pUserData(@NativeType("void *") long value) { VmaVirtualAllocationCreateInfo.npUserData(address(), value); return this; }
 
     }

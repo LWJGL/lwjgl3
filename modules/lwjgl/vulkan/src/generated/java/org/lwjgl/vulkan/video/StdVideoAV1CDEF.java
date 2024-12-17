@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1CDEF {
  *     uint8_t cdef_damping_minus_3;
  *     uint8_t cdef_bits;
@@ -29,7 +27,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
  *     uint8_t cdef_y_sec_strength[STD_VIDEO_AV1_MAX_CDEF_FILTER_STRENGTHS];
  *     uint8_t cdef_uv_pri_strength[STD_VIDEO_AV1_MAX_CDEF_FILTER_STRENGTHS];
  *     uint8_t cdef_uv_sec_strength[STD_VIDEO_AV1_MAX_CDEF_FILTER_STRENGTHS];
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1CDEF extends Struct<StdVideoAV1CDEF> implements NativeResource {
 

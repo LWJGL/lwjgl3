@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 rasterizationOrderColorAttachmentAccess;
  *     VkBool32 rasterizationOrderDepthAttachmentAccess;
  *     VkBool32 rasterizationOrderStencilAttachmentAccess;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM extends VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT {
 

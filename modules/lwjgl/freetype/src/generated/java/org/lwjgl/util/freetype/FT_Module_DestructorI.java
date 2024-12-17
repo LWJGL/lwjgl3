@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     FT_Module module
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Module_Destructor} */
 @FunctionalInterface
 @NativeType("FT_Module_Destructor")
 public interface FT_Module_DestructorI extends CallbackI {
@@ -40,7 +33,7 @@ public interface FT_Module_DestructorI extends CallbackI {
         );
     }
 
-    /** A function used to finalize (not destroy) a given module object. */
+    /** {@code void (* FT_Module_Destructor) (FT_Module module)} */
     void invoke(@NativeType("FT_Module") long module);
 
 }

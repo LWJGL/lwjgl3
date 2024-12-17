@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the nested command buffer limits of an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceNestedCommandBufferPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTNestedCommandBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceNestedCommandBufferPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint32_t {@link #maxCommandBufferNestingLevel};
- * }</code></pre>
+ *     uint32_t maxCommandBufferNestingLevel;
+ * }}</pre>
  */
 public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkPhysicalDeviceNestedCommandBufferPropertiesEXT> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the maximum nesting level of calls to {@link VK10#vkCmdExecuteCommands CmdExecuteCommands} from <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary">Secondary Command Buffers</a>. A {@code maxCommandBufferNestingLevel} of {@code UINT32_MAX} means there is no limit to the nesting level. */
+    /** @return the value of the {@code maxCommandBufferNestingLevel} field. */
     @NativeType("uint32_t")
     public int maxCommandBufferNestingLevel() { return nmaxCommandBufferNestingLevel(address()); }
 
@@ -104,7 +90,7 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
     public VkPhysicalDeviceNestedCommandBufferPropertiesEXT sType$Default() { return sType(EXTNestedCommandBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceNestedCommandBufferPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxCommandBufferNestingLevel} field. */
+    /** Sets the specified value to the {@code maxCommandBufferNestingLevel} field. */
     public VkPhysicalDeviceNestedCommandBufferPropertiesEXT maxCommandBufferNestingLevel(@NativeType("uint32_t") int value) { nmaxCommandBufferNestingLevel(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,7 +292,7 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceNestedCommandBufferPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceNestedCommandBufferPropertiesEXT#maxCommandBufferNestingLevel} field. */
+        /** @return the value of the {@code maxCommandBufferNestingLevel} field. */
         @NativeType("uint32_t")
         public int maxCommandBufferNestingLevel() { return VkPhysicalDeviceNestedCommandBufferPropertiesEXT.nmaxCommandBufferNestingLevel(address()); }
 
@@ -316,7 +302,7 @@ public class VkPhysicalDeviceNestedCommandBufferPropertiesEXT extends Struct<VkP
         public VkPhysicalDeviceNestedCommandBufferPropertiesEXT.Buffer sType$Default() { return sType(EXTNestedCommandBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceNestedCommandBufferPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceNestedCommandBufferPropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceNestedCommandBufferPropertiesEXT#maxCommandBufferNestingLevel} field. */
+        /** Sets the specified value to the {@code maxCommandBufferNestingLevel} field. */
         public VkPhysicalDeviceNestedCommandBufferPropertiesEXT.Buffer maxCommandBufferNestingLevel(@NativeType("uint32_t") int value) { VkPhysicalDeviceNestedCommandBufferPropertiesEXT.nmaxCommandBufferNestingLevel(address(), value); return this; }
 
     }

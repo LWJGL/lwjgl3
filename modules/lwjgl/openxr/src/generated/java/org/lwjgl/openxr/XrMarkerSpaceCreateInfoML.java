@@ -17,31 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify marker space creation parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using {@link XrMarkerSpaceCreateInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLMarkerUnderstanding#XR_TYPE_MARKER_SPACE_CREATE_INFO_ML TYPE_MARKER_SPACE_CREATE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code markerDetector} <b>must</b> be a valid {@code XrMarkerDetectorML} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link MLMarkerUnderstanding#xrCreateMarkerSpaceML CreateMarkerSpaceML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMarkerSpaceCreateInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrMarkerDetectorML {@link #markerDetector};
- *     XrMarkerML {@link #marker};
- *     {@link XrPosef XrPosef} {@link #poseInMarkerSpace};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrMarkerDetectorML markerDetector;
+ *     XrMarkerML marker;
+ *     {@link XrPosef XrPosef} poseInMarkerSpace;
+ * }}</pre>
  */
 public class XrMarkerSpaceCreateInfoML extends Struct<XrMarkerSpaceCreateInfoML> implements NativeResource {
 
@@ -100,34 +83,34 @@ public class XrMarkerSpaceCreateInfoML extends Struct<XrMarkerSpaceCreateInfoML>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the detector object to retrieve marker information from. */
+    /** @return the value of the {@code markerDetector} field. */
     @NativeType("XrMarkerDetectorML")
     public long markerDetector() { return nmarkerDetector(address()); }
-    /** the marker atom to be examined. */
+    /** @return the value of the {@code marker} field. */
     @NativeType("XrMarkerML")
     public long marker() { return nmarker(address()); }
-    /** the offset from the marker’s origin of the new {@code XrSpace}. The origin of each marker is located at its center. */
+    /** @return a {@link XrPosef} view of the {@code poseInMarkerSpace} field. */
     public XrPosef poseInMarkerSpace() { return nposeInMarkerSpace(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMarkerSpaceCreateInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_SPACE_CREATE_INFO_ML TYPE_MARKER_SPACE_CREATE_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_SPACE_CREATE_INFO_ML TYPE_MARKER_SPACE_CREATE_INFO_ML} value to the {@code type} field. */
     public XrMarkerSpaceCreateInfoML type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_SPACE_CREATE_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMarkerSpaceCreateInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #markerDetector} field. */
+    /** Sets the specified value to the {@code markerDetector} field. */
     public XrMarkerSpaceCreateInfoML markerDetector(XrMarkerDetectorML value) { nmarkerDetector(address(), value); return this; }
-    /** Sets the specified value to the {@link #marker} field. */
+    /** Sets the specified value to the {@code marker} field. */
     public XrMarkerSpaceCreateInfoML marker(@NativeType("XrMarkerML") long value) { nmarker(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #poseInMarkerSpace} field. */
+    /** Copies the specified {@link XrPosef} to the {@code poseInMarkerSpace} field. */
     public XrMarkerSpaceCreateInfoML poseInMarkerSpace(XrPosef value) { nposeInMarkerSpace(address(), value); return this; }
-    /** Passes the {@link #poseInMarkerSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code poseInMarkerSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrMarkerSpaceCreateInfoML poseInMarkerSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInMarkerSpace()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -344,34 +327,34 @@ public class XrMarkerSpaceCreateInfoML extends Struct<XrMarkerSpaceCreateInfoML>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMarkerSpaceCreateInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMarkerSpaceCreateInfoML.ntype(address()); }
-        /** @return the value of the {@link XrMarkerSpaceCreateInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrMarkerSpaceCreateInfoML.nnext(address()); }
-        /** @return the value of the {@link XrMarkerSpaceCreateInfoML#markerDetector} field. */
+        /** @return the value of the {@code markerDetector} field. */
         @NativeType("XrMarkerDetectorML")
         public long markerDetector() { return XrMarkerSpaceCreateInfoML.nmarkerDetector(address()); }
-        /** @return the value of the {@link XrMarkerSpaceCreateInfoML#marker} field. */
+        /** @return the value of the {@code marker} field. */
         @NativeType("XrMarkerML")
         public long marker() { return XrMarkerSpaceCreateInfoML.nmarker(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrMarkerSpaceCreateInfoML#poseInMarkerSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInMarkerSpace} field. */
         public XrPosef poseInMarkerSpace() { return XrMarkerSpaceCreateInfoML.nposeInMarkerSpace(address()); }
 
-        /** Sets the specified value to the {@link XrMarkerSpaceCreateInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMarkerSpaceCreateInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrMarkerSpaceCreateInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_SPACE_CREATE_INFO_ML TYPE_MARKER_SPACE_CREATE_INFO_ML} value to the {@link XrMarkerSpaceCreateInfoML#type} field. */
+        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_SPACE_CREATE_INFO_ML TYPE_MARKER_SPACE_CREATE_INFO_ML} value to the {@code type} field. */
         public XrMarkerSpaceCreateInfoML.Buffer type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_SPACE_CREATE_INFO_ML); }
-        /** Sets the specified value to the {@link XrMarkerSpaceCreateInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMarkerSpaceCreateInfoML.Buffer next(@NativeType("void const *") long value) { XrMarkerSpaceCreateInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerSpaceCreateInfoML#markerDetector} field. */
+        /** Sets the specified value to the {@code markerDetector} field. */
         public XrMarkerSpaceCreateInfoML.Buffer markerDetector(XrMarkerDetectorML value) { XrMarkerSpaceCreateInfoML.nmarkerDetector(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerSpaceCreateInfoML#marker} field. */
+        /** Sets the specified value to the {@code marker} field. */
         public XrMarkerSpaceCreateInfoML.Buffer marker(@NativeType("XrMarkerML") long value) { XrMarkerSpaceCreateInfoML.nmarker(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrMarkerSpaceCreateInfoML#poseInMarkerSpace} field. */
+        /** Copies the specified {@link XrPosef} to the {@code poseInMarkerSpace} field. */
         public XrMarkerSpaceCreateInfoML.Buffer poseInMarkerSpace(XrPosef value) { XrMarkerSpaceCreateInfoML.nposeInMarkerSpace(address(), value); return this; }
-        /** Passes the {@link XrMarkerSpaceCreateInfoML#poseInMarkerSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code poseInMarkerSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrMarkerSpaceCreateInfoML.Buffer poseInMarkerSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInMarkerSpace()); return this; }
 
     }

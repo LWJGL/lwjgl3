@@ -14,38 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Structure specifying properties of a format when combined with a DRM format modifier.
- * 
- * <h5>Description</h5>
- * 
- * <p>The returned {@code drmFormatModifierTilingFeatures} <b>must</b> contain at least one bit.</p>
- * 
- * <p>The implementation <b>must</b> not return {@code DRM_FORMAT_MOD_INVALID} in {@code drmFormatModifier}.</p>
- * 
- * <p>An image’s <em>memory planecount</em> (as returned by {@code drmFormatModifierPlaneCount}) is distinct from its <em>format planecount</em> (in the sense of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar</a> Y′C<sub>B</sub>C<sub>R</sub> formats). In {@code VkImageAspectFlags}, each <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> represents a <em>memory plane</em> and each <code>VK_IMAGE_ASPECT_PLANE<em>_i_</em>BIT</code> a <em>format plane</em>.</p>
- * 
- * <p>An image’s set of <em>format planes</em> is an ordered partition of the image’s <b>content</b> into separable groups of format components. The ordered partition is encoded in the name of each {@code VkFormat}. For example, {@link VK11#VK_FORMAT_G8_B8R8_2PLANE_420_UNORM FORMAT_G8_B8R8_2PLANE_420_UNORM} contains two <em>format planes</em>; the first plane contains the green component and the second plane contains the blue component and red component. If the format name does not contain {@code PLANE}, then the format contains a single plane; for example, {@link VK10#VK_FORMAT_R8G8B8A8_UNORM FORMAT_R8G8B8A8_UNORM}. Some commands, such as {@link VK10#vkCmdCopyBufferToImage CmdCopyBufferToImage}, do not operate on all format components in the image, but instead operate only on the <em>format planes</em> explicitly chosen by the application and operate on each <em>format plane</em> independently.</p>
- * 
- * <p>An image’s set of <em>memory planes</em> is an ordered partition of the image’s <b>memory</b> rather than the image’s <b>content</b>. Each <em>memory plane</em> is a contiguous range of memory. The union of an image’s <em>memory planes</em> is not necessarily contiguous.</p>
- * 
- * <p>If an image is <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary-linear-resource">linear</a>, then the partition is the same for <em>memory planes</em> and for <em>format planes</em>. Therefore, if the returned {@code drmFormatModifier} is {@code DRM_FORMAT_MOD_LINEAR}, then {@code drmFormatModifierPlaneCount} <b>must</b> equal the <em>format planecount</em>, and {@code drmFormatModifierTilingFeatures} <b>must</b> be identical to the {@link VkFormatProperties2}{@code ::linearTilingFeatures} returned in the same {@code pNext} chain.</p>
- * 
- * <p>If an image is <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary-linear-resource">non-linear</a>, then the partition of the image’s <b>memory</b> into <em>memory planes</em> is implementation-specific and <b>may</b> be unrelated to the partition of the image’s <b>content</b> into <em>format planes</em>. For example, consider an image whose {@code format} is {@link VK11#VK_FORMAT_G8_B8_R8_3PLANE_420_UNORM FORMAT_G8_B8_R8_3PLANE_420_UNORM}, {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, whose {@code drmFormatModifier} is not {@code DRM_FORMAT_MOD_LINEAR}, and {@code flags} lacks {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT}. The image has 3 <em>format planes</em>, and commands such {@link VK10#vkCmdCopyBufferToImage CmdCopyBufferToImage} act on each <em>format plane</em> independently as if the data of each <em>format plane</em> were separable from the data of the other planes. In a straightforward implementation, the implementation <b>may</b> store the image’s content in 3 adjacent <em>memory planes</em> where each <em>memory plane</em> corresponds exactly to a <em>format plane</em>. However, the implementation <b>may</b> also store the image’s content in a single <em>memory plane</em> where all format components are combined using an implementation-private block-compressed format; or the implementation <b>may</b> store the image’s content in a collection of 7 adjacent <em>memory planes</em> using an implementation-private sharding technique. Because the image is non-linear and non-disjoint, the implementation has much freedom when choosing the image’s placement in memory.</p>
- * 
- * <p>The <em>memory planecount</em> applies to function parameters and structures only when the API specifies an explicit requirement on {@code drmFormatModifierPlaneCount}. In all other cases, the <em>memory planecount</em> is ignored.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDrmFormatModifierPropertiesListEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDrmFormatModifierPropertiesEXT {
- *     uint64_t {@link #drmFormatModifier};
- *     uint32_t {@link #drmFormatModifierPlaneCount};
- *     VkFormatFeatureFlags {@link #drmFormatModifierTilingFeatures};
- * }</code></pre>
+ *     uint64_t drmFormatModifier;
+ *     uint32_t drmFormatModifierPlaneCount;
+ *     VkFormatFeatureFlags drmFormatModifierTilingFeatures;
+ * }}</pre>
  */
 public class VkDrmFormatModifierPropertiesEXT extends Struct<VkDrmFormatModifierPropertiesEXT> {
 
@@ -98,13 +72,13 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct<VkDrmFormatModifier
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a <em>Linux DRM format modifier</em>. */
+    /** @return the value of the {@code drmFormatModifier} field. */
     @NativeType("uint64_t")
     public long drmFormatModifier() { return ndrmFormatModifier(address()); }
-    /** the number of <em>memory planes</em> in any image created with {@code format} and {@code drmFormatModifier}. An image’s <em>memory planecount</em> is distinct from its <em>format planecount</em>, as explained below. */
+    /** @return the value of the {@code drmFormatModifierPlaneCount} field. */
     @NativeType("uint32_t")
     public int drmFormatModifierPlaneCount() { return ndrmFormatModifierPlaneCount(address()); }
-    /** a bitmask of {@code VkFormatFeatureFlagBits} that are supported by any image created with {@code format} and {@code drmFormatModifier}. */
+    /** @return the value of the {@code drmFormatModifierTilingFeatures} field. */
     @NativeType("VkFormatFeatureFlags")
     public int drmFormatModifierTilingFeatures() { return ndrmFormatModifierTilingFeatures(address()); }
 
@@ -187,13 +161,13 @@ public class VkDrmFormatModifierPropertiesEXT extends Struct<VkDrmFormatModifier
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDrmFormatModifierPropertiesEXT#drmFormatModifier} field. */
+        /** @return the value of the {@code drmFormatModifier} field. */
         @NativeType("uint64_t")
         public long drmFormatModifier() { return VkDrmFormatModifierPropertiesEXT.ndrmFormatModifier(address()); }
-        /** @return the value of the {@link VkDrmFormatModifierPropertiesEXT#drmFormatModifierPlaneCount} field. */
+        /** @return the value of the {@code drmFormatModifierPlaneCount} field. */
         @NativeType("uint32_t")
         public int drmFormatModifierPlaneCount() { return VkDrmFormatModifierPropertiesEXT.ndrmFormatModifierPlaneCount(address()); }
-        /** @return the value of the {@link VkDrmFormatModifierPropertiesEXT#drmFormatModifierTilingFeatures} field. */
+        /** @return the value of the {@code drmFormatModifierTilingFeatures} field. */
         @NativeType("VkFormatFeatureFlags")
         public int drmFormatModifierTilingFeatures() { return VkDrmFormatModifierPropertiesEXT.ndrmFormatModifierTilingFeatures(address()); }
 

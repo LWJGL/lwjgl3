@@ -78,19 +78,13 @@ public class LLVMDisassembler {
 
     // --- [ LLVMCreateDisasm ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateDisasm CreateDisasm} */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasm(char const * TripleName, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     public static long nLLVMCreateDisasm(long TripleName, long DisInfo, int TagType, long GetOpInfo, long SymbolLookUp) {
         long __functionAddress = Functions.CreateDisasm;
         return invokePPPPP(TripleName, DisInfo, TagType, GetOpInfo, SymbolLookUp, __functionAddress);
     }
 
-    /**
-     * Create a disassembler for the {@code TripleName}.
-     * 
-     * <p>Symbolic disassembly is supported by passing a block of information in the {@code DisInfo} parameter and specifying the {@code TagType} and callback
-     * functions as described above. These can all be passed as {@code NULL}. If successful, this returns a disassembler context. If not, it returns {@code NULL}. This
-     * function is equivalent to calling {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} with an empty CPU name and feature set.</p>
-     */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasm(char const * TripleName, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     @NativeType("LLVMDisasmContextRef")
     public static long LLVMCreateDisasm(@NativeType("char const *") ByteBuffer TripleName, @NativeType("void *") long DisInfo, int TagType, @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") @Nullable LLVMOpInfoCallbackI GetOpInfo, @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") @Nullable LLVMSymbolLookupCallbackI SymbolLookUp) {
         if (CHECKS) {
@@ -99,13 +93,7 @@ public class LLVMDisassembler {
         return nLLVMCreateDisasm(memAddress(TripleName), DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
     }
 
-    /**
-     * Create a disassembler for the {@code TripleName}.
-     * 
-     * <p>Symbolic disassembly is supported by passing a block of information in the {@code DisInfo} parameter and specifying the {@code TagType} and callback
-     * functions as described above. These can all be passed as {@code NULL}. If successful, this returns a disassembler context. If not, it returns {@code NULL}. This
-     * function is equivalent to calling {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} with an empty CPU name and feature set.</p>
-     */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasm(char const * TripleName, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     @NativeType("LLVMDisasmContextRef")
     public static long LLVMCreateDisasm(@NativeType("char const *") CharSequence TripleName, @NativeType("void *") long DisInfo, int TagType, @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") @Nullable LLVMOpInfoCallbackI GetOpInfo, @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") @Nullable LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -120,19 +108,13 @@ public class LLVMDisassembler {
 
     // --- [ LLVMCreateDisasmCPU ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateDisasmCPU CreateDisasmCPU} */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasmCPU(char const * Triple, char const * CPU, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     public static long nLLVMCreateDisasmCPU(long Triple, long CPU, long DisInfo, int TagType, long GetOpInfo, long SymbolLookUp) {
         long __functionAddress = Functions.CreateDisasmCPU;
         return invokePPPPPP(Triple, CPU, DisInfo, TagType, GetOpInfo, SymbolLookUp, __functionAddress);
     }
 
-    /**
-     * Create a disassembler for the {@code TripleName} and a specific CPU.
-     * 
-     * <p>Symbolic disassembly is supported by passing a block of information in the {@code DisInfo} parameter and specifying the {@code TagType} and callback
-     * functions as described above. These can all be passed as {@code NULL}. If successful, this returns a disassembler context. If not, it returns {@code NULL}. This
-     * function is equivalent to calling {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} with an empty feature set.</p>
-     */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasmCPU(char const * Triple, char const * CPU, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     @NativeType("LLVMDisasmContextRef")
     public static long LLVMCreateDisasmCPU(@NativeType("char const *") ByteBuffer Triple, @NativeType("char const *") ByteBuffer CPU, @NativeType("void *") long DisInfo, int TagType, @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") @Nullable LLVMOpInfoCallbackI GetOpInfo, @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") @Nullable LLVMSymbolLookupCallbackI SymbolLookUp) {
         if (CHECKS) {
@@ -142,13 +124,7 @@ public class LLVMDisassembler {
         return nLLVMCreateDisasmCPU(memAddress(Triple), memAddress(CPU), DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
     }
 
-    /**
-     * Create a disassembler for the {@code TripleName} and a specific CPU.
-     * 
-     * <p>Symbolic disassembly is supported by passing a block of information in the {@code DisInfo} parameter and specifying the {@code TagType} and callback
-     * functions as described above. These can all be passed as {@code NULL}. If successful, this returns a disassembler context. If not, it returns {@code NULL}. This
-     * function is equivalent to calling {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} with an empty feature set.</p>
-     */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasmCPU(char const * Triple, char const * CPU, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     @NativeType("LLVMDisasmContextRef")
     public static long LLVMCreateDisasmCPU(@NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("void *") long DisInfo, int TagType, @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") @Nullable LLVMOpInfoCallbackI GetOpInfo, @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") @Nullable LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -165,18 +141,13 @@ public class LLVMDisassembler {
 
     // --- [ LLVMCreateDisasmCPUFeatures ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateDisasmCPUFeatures CreateDisasmCPUFeatures} */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasmCPUFeatures(char const * Triple, char const * CPU, char const * Features, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     public static long nLLVMCreateDisasmCPUFeatures(long Triple, long CPU, long Features, long DisInfo, int TagType, long GetOpInfo, long SymbolLookUp) {
         long __functionAddress = Functions.CreateDisasmCPUFeatures;
         return invokePPPPPPP(Triple, CPU, Features, DisInfo, TagType, GetOpInfo, SymbolLookUp, __functionAddress);
     }
 
-    /**
-     * Create a disassembler for the {@code TripleName}, a specific CPU and specific feature string.
-     * 
-     * <p>Symbolic disassembly is supported by passing a block of information in the {@code DisInfo} parameter and specifying the {@code TagType} and callback
-     * functions as described above. These can all be passed as {@code NULL}. If successful, this returns a disassembler context. If not, it returns {@code NULL}.</p>
-     */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasmCPUFeatures(char const * Triple, char const * CPU, char const * Features, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     @NativeType("LLVMDisasmContextRef")
     public static long LLVMCreateDisasmCPUFeatures(@NativeType("char const *") ByteBuffer Triple, @NativeType("char const *") ByteBuffer CPU, @NativeType("char const *") ByteBuffer Features, @NativeType("void *") long DisInfo, int TagType, @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") @Nullable LLVMOpInfoCallbackI GetOpInfo, @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") @Nullable LLVMSymbolLookupCallbackI SymbolLookUp) {
         if (CHECKS) {
@@ -187,12 +158,7 @@ public class LLVMDisassembler {
         return nLLVMCreateDisasmCPUFeatures(memAddress(Triple), memAddress(CPU), memAddress(Features), DisInfo, TagType, memAddressSafe(GetOpInfo), memAddressSafe(SymbolLookUp));
     }
 
-    /**
-     * Create a disassembler for the {@code TripleName}, a specific CPU and specific feature string.
-     * 
-     * <p>Symbolic disassembly is supported by passing a block of information in the {@code DisInfo} parameter and specifying the {@code TagType} and callback
-     * functions as described above. These can all be passed as {@code NULL}. If successful, this returns a disassembler context. If not, it returns {@code NULL}.</p>
-     */
+    /** {@code LLVMDisasmContextRef LLVMCreateDisasmCPUFeatures(char const * Triple, char const * CPU, char const * Features, void * DisInfo, int TagType, int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *) GetOpInfo, char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **) SymbolLookUp)} */
     @NativeType("LLVMDisasmContextRef")
     public static long LLVMCreateDisasmCPUFeatures(@NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("char const *") CharSequence Features, @NativeType("void *") long DisInfo, int TagType, @NativeType("int (*) (void *, uint64_t, uint64_t, uint64_t, uint64_t, int, void *)") @Nullable LLVMOpInfoCallbackI GetOpInfo, @NativeType("char const * (*) (void *, uint64_t, uint64_t *, uint64_t, char const **)") @Nullable LLVMSymbolLookupCallbackI SymbolLookUp) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -211,7 +177,7 @@ public class LLVMDisassembler {
 
     // --- [ LLVMSetDisasmOptions ] ---
 
-    /** Set the disassembler's options.  Returns 1 if it can set the {@code Options} and 0 otherwise. */
+    /** {@code int LLVMSetDisasmOptions(LLVMDisasmContextRef DC, uint64_t Options)} */
     public static int LLVMSetDisasmOptions(@NativeType("LLVMDisasmContextRef") long DC, @NativeType("uint64_t") long Options) {
         long __functionAddress = Functions.SetDisasmOptions;
         if (CHECKS) {
@@ -222,7 +188,7 @@ public class LLVMDisassembler {
 
     // --- [ LLVMDisasmDispose ] ---
 
-    /** Dispose of a disassembler context. */
+    /** {@code void LLVMDisasmDispose(LLVMDisasmContextRef DC)} */
     public static void LLVMDisasmDispose(@NativeType("LLVMDisasmContextRef") long DC) {
         long __functionAddress = Functions.DisasmDispose;
         if (CHECKS) {
@@ -233,7 +199,7 @@ public class LLVMDisassembler {
 
     // --- [ LLVMDisasmInstruction ] ---
 
-    /** Unsafe version of: {@link #LLVMDisasmInstruction DisasmInstruction} */
+    /** {@code size_t LLVMDisasmInstruction(LLVMDisasmContextRef DC, uint8_t * Bytes, uint64_t BytesSize, uint64_t PC, char * OutString, size_t OutStringSize)} */
     public static long nLLVMDisasmInstruction(long DC, long Bytes, long BytesSize, long PC, long OutString, long OutStringSize) {
         long __functionAddress = Functions.DisasmInstruction;
         if (CHECKS) {
@@ -242,14 +208,7 @@ public class LLVMDisassembler {
         return invokePPJJPPP(DC, Bytes, BytesSize, PC, OutString, OutStringSize, __functionAddress);
     }
 
-    /**
-     * Disassemble a single instruction using the disassembler context specified in the parameter DC.
-     * 
-     * <p>The bytes of the instruction are specified in the parameter {@code Bytes}, and contains at least {@code BytesSize} number of bytes. The instruction is
-     * at the address specified by the {@code PC} parameter. If a valid instruction can be disassembled, its string is returned indirectly in
-     * {@code OutString} whose size is specified in the parameter {@code OutStringSize}. This function returns the number of bytes in the instruction or zero
-     * if there was no valid instruction.</p>
-     */
+    /** {@code size_t LLVMDisasmInstruction(LLVMDisasmContextRef DC, uint8_t * Bytes, uint64_t BytesSize, uint64_t PC, char * OutString, size_t OutStringSize)} */
     @NativeType("size_t")
     public static long LLVMDisasmInstruction(@NativeType("LLVMDisasmContextRef") long DC, @NativeType("uint8_t *") ByteBuffer Bytes, @NativeType("uint64_t") long PC, @NativeType("char *") ByteBuffer OutString) {
         return nLLVMDisasmInstruction(DC, memAddress(Bytes), Bytes.remaining(), PC, memAddress(OutString), OutString.remaining());

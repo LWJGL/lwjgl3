@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 dynamicRenderingLocalRead;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR extends VkPhysicalDeviceDynamicRenderingLocalReadFeatures {
 

@@ -16,23 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying input data for a single vertex buffer command token.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The buffer’s usage flag from which the address was acquired <b>must</b> have the {@link VK10#VK_BUFFER_USAGE_VERTEX_BUFFER_BIT BUFFER_USAGE_VERTEX_BUFFER_BIT} bit set</li>
- * <li>Each element of the buffer from which the address was acquired and that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindVertexBufferIndirectCommandNV {
- *     VkDeviceAddress {@link #bufferAddress};
- *     uint32_t {@link #size};
- *     uint32_t {@link #stride};
- * }</code></pre>
+ *     VkDeviceAddress bufferAddress;
+ *     uint32_t size;
+ *     uint32_t stride;
+ * }}</pre>
  */
 public class VkBindVertexBufferIndirectCommandNV extends Struct<VkBindVertexBufferIndirectCommandNV> implements NativeResource {
 
@@ -85,21 +74,21 @@ public class VkBindVertexBufferIndirectCommandNV extends Struct<VkBindVertexBuff
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies a physical address of the {@code VkBuffer} used as vertex input binding. */
+    /** @return the value of the {@code bufferAddress} field. */
     @NativeType("VkDeviceAddress")
     public long bufferAddress() { return nbufferAddress(address()); }
-    /** the byte size range which is available for this operation from the provided address. */
+    /** @return the value of the {@code size} field. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
-    /** the byte size stride for this vertex input binding as in {@link VkVertexInputBindingDescription}{@code ::stride}. It is only used if {@link VkIndirectCommandsLayoutTokenNV}{@code ::vertexDynamicStride} was set, otherwise the stride is inherited from the current bound graphics pipeline. */
+    /** @return the value of the {@code stride} field. */
     @NativeType("uint32_t")
     public int stride() { return nstride(address()); }
 
-    /** Sets the specified value to the {@link #bufferAddress} field. */
+    /** Sets the specified value to the {@code bufferAddress} field. */
     public VkBindVertexBufferIndirectCommandNV bufferAddress(@NativeType("VkDeviceAddress") long value) { nbufferAddress(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkBindVertexBufferIndirectCommandNV size(@NativeType("uint32_t") int value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@link #stride} field. */
+    /** Sets the specified value to the {@code stride} field. */
     public VkBindVertexBufferIndirectCommandNV stride(@NativeType("uint32_t") int value) { nstride(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -295,21 +284,21 @@ public class VkBindVertexBufferIndirectCommandNV extends Struct<VkBindVertexBuff
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindVertexBufferIndirectCommandNV#bufferAddress} field. */
+        /** @return the value of the {@code bufferAddress} field. */
         @NativeType("VkDeviceAddress")
         public long bufferAddress() { return VkBindVertexBufferIndirectCommandNV.nbufferAddress(address()); }
-        /** @return the value of the {@link VkBindVertexBufferIndirectCommandNV#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("uint32_t")
         public int size() { return VkBindVertexBufferIndirectCommandNV.nsize(address()); }
-        /** @return the value of the {@link VkBindVertexBufferIndirectCommandNV#stride} field. */
+        /** @return the value of the {@code stride} field. */
         @NativeType("uint32_t")
         public int stride() { return VkBindVertexBufferIndirectCommandNV.nstride(address()); }
 
-        /** Sets the specified value to the {@link VkBindVertexBufferIndirectCommandNV#bufferAddress} field. */
+        /** Sets the specified value to the {@code bufferAddress} field. */
         public VkBindVertexBufferIndirectCommandNV.Buffer bufferAddress(@NativeType("VkDeviceAddress") long value) { VkBindVertexBufferIndirectCommandNV.nbufferAddress(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindVertexBufferIndirectCommandNV#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkBindVertexBufferIndirectCommandNV.Buffer size(@NativeType("uint32_t") int value) { VkBindVertexBufferIndirectCommandNV.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindVertexBufferIndirectCommandNV#stride} field. */
+        /** Sets the specified value to the {@code stride} field. */
         public VkBindVertexBufferIndirectCommandNV.Buffer stride(@NativeType("uint32_t") int value) { VkBindVertexBufferIndirectCommandNV.nstride(address(), value); return this; }
 
     }

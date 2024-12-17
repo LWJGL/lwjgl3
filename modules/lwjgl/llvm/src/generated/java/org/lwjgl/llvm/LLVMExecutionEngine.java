@@ -73,6 +73,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMLinkInMCJIT ] ---
 
+    /** {@code void LLVMLinkInMCJIT(void)} */
     public static void LLVMLinkInMCJIT() {
         long __functionAddress = Functions.LinkInMCJIT;
         invokeV(__functionAddress);
@@ -80,6 +81,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMLinkInInterpreter ] ---
 
+    /** {@code void LLVMLinkInInterpreter(void)} */
     public static void LLVMLinkInInterpreter() {
         long __functionAddress = Functions.LinkInInterpreter;
         invokeV(__functionAddress);
@@ -87,6 +89,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateGenericValueOfInt ] ---
 
+    /** {@code LLVMGenericValueRef LLVMCreateGenericValueOfInt(LLVMTypeRef Ty, unsigned long long N, LLVMBool IsSigned)} */
     @NativeType("LLVMGenericValueRef")
     public static long LLVMCreateGenericValueOfInt(@NativeType("LLVMTypeRef") long Ty, @NativeType("unsigned long long") long N, @NativeType("LLVMBool") boolean IsSigned) {
         long __functionAddress = Functions.CreateGenericValueOfInt;
@@ -98,6 +101,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateGenericValueOfPointer ] ---
 
+    /** {@code LLVMGenericValueRef LLVMCreateGenericValueOfPointer(void * P)} */
     @NativeType("LLVMGenericValueRef")
     public static long LLVMCreateGenericValueOfPointer(@NativeType("void *") long P) {
         long __functionAddress = Functions.CreateGenericValueOfPointer;
@@ -109,6 +113,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateGenericValueOfFloat ] ---
 
+    /** {@code LLVMGenericValueRef LLVMCreateGenericValueOfFloat(LLVMTypeRef Ty, double N)} */
     @NativeType("LLVMGenericValueRef")
     public static long LLVMCreateGenericValueOfFloat(@NativeType("LLVMTypeRef") long Ty, double N) {
         long __functionAddress = Functions.CreateGenericValueOfFloat;
@@ -120,6 +125,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGenericValueIntWidth ] ---
 
+    /** {@code unsigned int LLVMGenericValueIntWidth(LLVMGenericValueRef GenValRef)} */
     @NativeType("unsigned int")
     public static int LLVMGenericValueIntWidth(@NativeType("LLVMGenericValueRef") long GenValRef) {
         long __functionAddress = Functions.GenericValueIntWidth;
@@ -131,6 +137,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGenericValueToInt ] ---
 
+    /** {@code unsigned long long LLVMGenericValueToInt(LLVMGenericValueRef GenVal, LLVMBool IsSigned)} */
     @NativeType("unsigned long long")
     public static long LLVMGenericValueToInt(@NativeType("LLVMGenericValueRef") long GenVal, @NativeType("LLVMBool") boolean IsSigned) {
         long __functionAddress = Functions.GenericValueToInt;
@@ -142,6 +149,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGenericValueToPointer ] ---
 
+    /** {@code void * LLVMGenericValueToPointer(LLVMGenericValueRef GenVal)} */
     @NativeType("void *")
     public static long LLVMGenericValueToPointer(@NativeType("LLVMGenericValueRef") long GenVal) {
         long __functionAddress = Functions.GenericValueToPointer;
@@ -153,6 +161,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGenericValueToFloat ] ---
 
+    /** {@code double LLVMGenericValueToFloat(LLVMTypeRef TyRef, LLVMGenericValueRef GenVal)} */
     public static double LLVMGenericValueToFloat(@NativeType("LLVMTypeRef") long TyRef, @NativeType("LLVMGenericValueRef") long GenVal) {
         long __functionAddress = Functions.GenericValueToFloat;
         if (CHECKS) {
@@ -164,6 +173,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMDisposeGenericValue ] ---
 
+    /** {@code void LLVMDisposeGenericValue(LLVMGenericValueRef GenVal)} */
     public static void LLVMDisposeGenericValue(@NativeType("LLVMGenericValueRef") long GenVal) {
         long __functionAddress = Functions.DisposeGenericValue;
         if (CHECKS) {
@@ -174,6 +184,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateExecutionEngineForModule ] ---
 
+    /** {@code LLVMBool LLVMCreateExecutionEngineForModule(LLVMExecutionEngineRef * OutEE, LLVMModuleRef M, char ** OutError)} */
     public static int nLLVMCreateExecutionEngineForModule(long OutEE, long M, long OutError) {
         long __functionAddress = Functions.CreateExecutionEngineForModule;
         if (CHECKS) {
@@ -182,6 +193,7 @@ public class LLVMExecutionEngine {
         return invokePPPI(OutEE, M, OutError, __functionAddress);
     }
 
+    /** {@code LLVMBool LLVMCreateExecutionEngineForModule(LLVMExecutionEngineRef * OutEE, LLVMModuleRef M, char ** OutError)} */
     @NativeType("LLVMBool")
     public static boolean LLVMCreateExecutionEngineForModule(@NativeType("LLVMExecutionEngineRef *") PointerBuffer OutEE, @NativeType("LLVMModuleRef") long M, @NativeType("char **") PointerBuffer OutError) {
         if (CHECKS) {
@@ -193,6 +205,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateInterpreterForModule ] ---
 
+    /** {@code LLVMBool LLVMCreateInterpreterForModule(LLVMExecutionEngineRef * OutInterp, LLVMModuleRef M, char ** OutError)} */
     public static int nLLVMCreateInterpreterForModule(long OutInterp, long M, long OutError) {
         long __functionAddress = Functions.CreateInterpreterForModule;
         if (CHECKS) {
@@ -201,6 +214,7 @@ public class LLVMExecutionEngine {
         return invokePPPI(OutInterp, M, OutError, __functionAddress);
     }
 
+    /** {@code LLVMBool LLVMCreateInterpreterForModule(LLVMExecutionEngineRef * OutInterp, LLVMModuleRef M, char ** OutError)} */
     @NativeType("LLVMBool")
     public static boolean LLVMCreateInterpreterForModule(@NativeType("LLVMExecutionEngineRef *") PointerBuffer OutInterp, @NativeType("LLVMModuleRef") long M, @NativeType("char **") PointerBuffer OutError) {
         if (CHECKS) {
@@ -212,6 +226,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateJITCompilerForModule ] ---
 
+    /** {@code LLVMBool LLVMCreateJITCompilerForModule(LLVMExecutionEngineRef * OutJIT, LLVMModuleRef M, unsigned int OptLevel, char ** OutError)} */
     public static int nLLVMCreateJITCompilerForModule(long OutJIT, long M, int OptLevel, long OutError) {
         long __functionAddress = Functions.CreateJITCompilerForModule;
         if (CHECKS) {
@@ -220,6 +235,7 @@ public class LLVMExecutionEngine {
         return invokePPPI(OutJIT, M, OptLevel, OutError, __functionAddress);
     }
 
+    /** {@code LLVMBool LLVMCreateJITCompilerForModule(LLVMExecutionEngineRef * OutJIT, LLVMModuleRef M, unsigned int OptLevel, char ** OutError)} */
     @NativeType("LLVMBool")
     public static boolean LLVMCreateJITCompilerForModule(@NativeType("LLVMExecutionEngineRef *") PointerBuffer OutJIT, @NativeType("LLVMModuleRef") long M, @NativeType("unsigned int") int OptLevel, @NativeType("char **") PointerBuffer OutError) {
         if (CHECKS) {
@@ -231,18 +247,20 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMInitializeMCJITCompilerOptions ] ---
 
+    /** {@code void LLVMInitializeMCJITCompilerOptions(struct LLVMMCJITCompilerOptions * Options, size_t SizeOfOptions)} */
     public static void nLLVMInitializeMCJITCompilerOptions(long Options, long SizeOfOptions) {
         long __functionAddress = Functions.InitializeMCJITCompilerOptions;
         invokePPV(Options, SizeOfOptions, __functionAddress);
     }
 
+    /** {@code void LLVMInitializeMCJITCompilerOptions(struct LLVMMCJITCompilerOptions * Options, size_t SizeOfOptions)} */
     public static void LLVMInitializeMCJITCompilerOptions(@NativeType("struct LLVMMCJITCompilerOptions *") LLVMMCJITCompilerOptions.Buffer Options) {
         nLLVMInitializeMCJITCompilerOptions(Options.address(), Options.remaining());
     }
 
     // --- [ LLVMCreateMCJITCompilerForModule ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateMCJITCompilerForModule CreateMCJITCompilerForModule} */
+    /** {@code LLVMBool LLVMCreateMCJITCompilerForModule(LLVMExecutionEngineRef * OutJIT, LLVMModuleRef M, struct LLVMMCJITCompilerOptions * Options, size_t SizeOfOptions, char ** OutError)} */
     public static int nLLVMCreateMCJITCompilerForModule(long OutJIT, long M, long Options, long SizeOfOptions, long OutError) {
         long __functionAddress = Functions.CreateMCJITCompilerForModule;
         if (CHECKS) {
@@ -251,23 +269,7 @@ public class LLVMExecutionEngine {
         return invokePPPPPI(OutJIT, M, Options, SizeOfOptions, OutError, __functionAddress);
     }
 
-    /**
-     * Create an MCJIT execution engine for a module, with the given options. It is the responsibility of the caller to ensure that all fields in
-     * {@code Options} up to the given {@code SizeOfOptions} are initialized. It is correct to pass a smaller value of {@code SizeOfOptions} that omits some
-     * fields. The canonical way of using this is:
-     * 
-     * <pre><code>
-     * LLVMMCJITCompilerOptions options;
-     * LLVMInitializeMCJITCompilerOptions(&amp;options, sizeof(options));
-     * ... fill in those options you care about
-     * LLVMCreateMCJITCompilerForModule(&amp;jit, mod, &amp;options, sizeof(options),
-     *                                  &amp;error);</code></pre>
-     * 
-     * <p>Note that this is also correct, though possibly suboptimal:</p>
-     * 
-     * <pre><code>
-     * LLVMCreateMCJITCompilerForModule(&amp;jit, mod, 0, 0, &amp;error);</code></pre>
-     */
+    /** {@code LLVMBool LLVMCreateMCJITCompilerForModule(LLVMExecutionEngineRef * OutJIT, LLVMModuleRef M, struct LLVMMCJITCompilerOptions * Options, size_t SizeOfOptions, char ** OutError)} */
     @NativeType("LLVMBool")
     public static boolean LLVMCreateMCJITCompilerForModule(@NativeType("LLVMExecutionEngineRef *") PointerBuffer OutJIT, @NativeType("LLVMModuleRef") long M, @NativeType("struct LLVMMCJITCompilerOptions *") LLVMMCJITCompilerOptions.Buffer Options, @NativeType("char **") PointerBuffer OutError) {
         if (CHECKS) {
@@ -279,6 +281,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMDisposeExecutionEngine ] ---
 
+    /** {@code void LLVMDisposeExecutionEngine(LLVMExecutionEngineRef EE)} */
     public static void LLVMDisposeExecutionEngine(@NativeType("LLVMExecutionEngineRef") long EE) {
         long __functionAddress = Functions.DisposeExecutionEngine;
         if (CHECKS) {
@@ -289,6 +292,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMRunStaticConstructors ] ---
 
+    /** {@code void LLVMRunStaticConstructors(LLVMExecutionEngineRef EE)} */
     public static void LLVMRunStaticConstructors(@NativeType("LLVMExecutionEngineRef") long EE) {
         long __functionAddress = Functions.RunStaticConstructors;
         if (CHECKS) {
@@ -299,6 +303,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMRunStaticDestructors ] ---
 
+    /** {@code void LLVMRunStaticDestructors(LLVMExecutionEngineRef EE)} */
     public static void LLVMRunStaticDestructors(@NativeType("LLVMExecutionEngineRef") long EE) {
         long __functionAddress = Functions.RunStaticDestructors;
         if (CHECKS) {
@@ -309,6 +314,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMRunFunctionAsMain ] ---
 
+    /** {@code int LLVMRunFunctionAsMain(LLVMExecutionEngineRef EE, LLVMValueRef F, unsigned int ArgC, char const * const * ArgV, char const * const * EnvP)} */
     public static int nLLVMRunFunctionAsMain(long EE, long F, int ArgC, long ArgV, long EnvP) {
         long __functionAddress = Functions.RunFunctionAsMain;
         if (CHECKS) {
@@ -318,6 +324,7 @@ public class LLVMExecutionEngine {
         return invokePPPPI(EE, F, ArgC, ArgV, EnvP, __functionAddress);
     }
 
+    /** {@code int LLVMRunFunctionAsMain(LLVMExecutionEngineRef EE, LLVMValueRef F, unsigned int ArgC, char const * const * ArgV, char const * const * EnvP)} */
     public static int LLVMRunFunctionAsMain(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMValueRef") long F, @NativeType("char const * const *") PointerBuffer ArgV, @NativeType("char const * const *") PointerBuffer EnvP) {
         if (CHECKS) {
             checkNT(EnvP);
@@ -327,6 +334,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMRunFunction ] ---
 
+    /** {@code LLVMGenericValueRef LLVMRunFunction(LLVMExecutionEngineRef EE, LLVMValueRef F, unsigned int NumArgs, LLVMGenericValueRef * Args)} */
     public static long nLLVMRunFunction(long EE, long F, int NumArgs, long Args) {
         long __functionAddress = Functions.RunFunction;
         if (CHECKS) {
@@ -336,6 +344,7 @@ public class LLVMExecutionEngine {
         return invokePPPP(EE, F, NumArgs, Args, __functionAddress);
     }
 
+    /** {@code LLVMGenericValueRef LLVMRunFunction(LLVMExecutionEngineRef EE, LLVMValueRef F, unsigned int NumArgs, LLVMGenericValueRef * Args)} */
     @NativeType("LLVMGenericValueRef")
     public static long LLVMRunFunction(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMValueRef") long F, @NativeType("LLVMGenericValueRef *") PointerBuffer Args) {
         return nLLVMRunFunction(EE, F, Args.remaining(), memAddress(Args));
@@ -343,6 +352,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMFreeMachineCodeForFunction ] ---
 
+    /** {@code void LLVMFreeMachineCodeForFunction(LLVMExecutionEngineRef EE, LLVMValueRef F)} */
     public static void LLVMFreeMachineCodeForFunction(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMValueRef") long F) {
         long __functionAddress = Functions.FreeMachineCodeForFunction;
         if (CHECKS) {
@@ -354,6 +364,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMAddModule ] ---
 
+    /** {@code void LLVMAddModule(LLVMExecutionEngineRef EE, LLVMModuleRef M)} */
     public static void LLVMAddModule(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMModuleRef") long M) {
         long __functionAddress = Functions.AddModule;
         if (CHECKS) {
@@ -365,6 +376,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMRemoveModule ] ---
 
+    /** {@code LLVMBool LLVMRemoveModule(LLVMExecutionEngineRef EE, LLVMModuleRef M, LLVMModuleRef * OutMod, char ** OutError)} */
     public static int nLLVMRemoveModule(long EE, long M, long OutMod, long OutError) {
         long __functionAddress = Functions.RemoveModule;
         if (CHECKS) {
@@ -374,6 +386,7 @@ public class LLVMExecutionEngine {
         return invokePPPPI(EE, M, OutMod, OutError, __functionAddress);
     }
 
+    /** {@code LLVMBool LLVMRemoveModule(LLVMExecutionEngineRef EE, LLVMModuleRef M, LLVMModuleRef * OutMod, char ** OutError)} */
     @NativeType("LLVMBool")
     public static boolean LLVMRemoveModule(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMModuleRef") long M, @NativeType("LLVMModuleRef *") PointerBuffer OutMod, @NativeType("char **") PointerBuffer OutError) {
         if (CHECKS) {
@@ -385,6 +398,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMFindFunction ] ---
 
+    /** {@code LLVMBool LLVMFindFunction(LLVMExecutionEngineRef EE, char const * Name, LLVMValueRef * OutFn)} */
     public static int nLLVMFindFunction(long EE, long Name, long OutFn) {
         long __functionAddress = Functions.FindFunction;
         if (CHECKS) {
@@ -393,6 +407,7 @@ public class LLVMExecutionEngine {
         return invokePPPI(EE, Name, OutFn, __functionAddress);
     }
 
+    /** {@code LLVMBool LLVMFindFunction(LLVMExecutionEngineRef EE, char const * Name, LLVMValueRef * OutFn)} */
     @NativeType("LLVMBool")
     public static boolean LLVMFindFunction(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char const *") ByteBuffer Name, @NativeType("LLVMValueRef *") PointerBuffer OutFn) {
         if (CHECKS) {
@@ -402,6 +417,7 @@ public class LLVMExecutionEngine {
         return nLLVMFindFunction(EE, memAddress(Name), memAddress(OutFn)) != 0;
     }
 
+    /** {@code LLVMBool LLVMFindFunction(LLVMExecutionEngineRef EE, char const * Name, LLVMValueRef * OutFn)} */
     @NativeType("LLVMBool")
     public static boolean LLVMFindFunction(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char const *") CharSequence Name, @NativeType("LLVMValueRef *") PointerBuffer OutFn) {
         if (CHECKS) {
@@ -420,6 +436,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMRecompileAndRelinkFunction ] ---
 
+    /** {@code void * LLVMRecompileAndRelinkFunction(LLVMExecutionEngineRef EE, LLVMValueRef Fn)} */
     @NativeType("void *")
     public static long LLVMRecompileAndRelinkFunction(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMValueRef") long Fn) {
         long __functionAddress = Functions.RecompileAndRelinkFunction;
@@ -432,6 +449,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGetExecutionEngineTargetData ] ---
 
+    /** {@code LLVMTargetDataRef LLVMGetExecutionEngineTargetData(LLVMExecutionEngineRef EE)} */
     @NativeType("LLVMTargetDataRef")
     public static long LLVMGetExecutionEngineTargetData(@NativeType("LLVMExecutionEngineRef") long EE) {
         long __functionAddress = Functions.GetExecutionEngineTargetData;
@@ -443,6 +461,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGetExecutionEngineTargetMachine ] ---
 
+    /** {@code LLVMTargetMachineRef LLVMGetExecutionEngineTargetMachine(LLVMExecutionEngineRef EE)} */
     @NativeType("LLVMTargetMachineRef")
     public static long LLVMGetExecutionEngineTargetMachine(@NativeType("LLVMExecutionEngineRef") long EE) {
         long __functionAddress = Functions.GetExecutionEngineTargetMachine;
@@ -454,6 +473,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMAddGlobalMapping ] ---
 
+    /** {@code void LLVMAddGlobalMapping(LLVMExecutionEngineRef EE, LLVMValueRef Global, void * Addr)} */
     public static void LLVMAddGlobalMapping(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMValueRef") long Global, @NativeType("void *") long Addr) {
         long __functionAddress = Functions.AddGlobalMapping;
         if (CHECKS) {
@@ -466,6 +486,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGetPointerToGlobal ] ---
 
+    /** {@code void * LLVMGetPointerToGlobal(LLVMExecutionEngineRef EE, LLVMValueRef Global)} */
     @NativeType("void *")
     public static long LLVMGetPointerToGlobal(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("LLVMValueRef") long Global) {
         long __functionAddress = Functions.GetPointerToGlobal;
@@ -478,6 +499,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGetGlobalValueAddress ] ---
 
+    /** {@code uint64_t LLVMGetGlobalValueAddress(LLVMExecutionEngineRef EE, char const * Name)} */
     public static long nLLVMGetGlobalValueAddress(long EE, long Name) {
         long __functionAddress = Functions.GetGlobalValueAddress;
         if (CHECKS) {
@@ -486,6 +508,7 @@ public class LLVMExecutionEngine {
         return invokePPJ(EE, Name, __functionAddress);
     }
 
+    /** {@code uint64_t LLVMGetGlobalValueAddress(LLVMExecutionEngineRef EE, char const * Name)} */
     @NativeType("uint64_t")
     public static long LLVMGetGlobalValueAddress(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -494,6 +517,7 @@ public class LLVMExecutionEngine {
         return nLLVMGetGlobalValueAddress(EE, memAddress(Name));
     }
 
+    /** {@code uint64_t LLVMGetGlobalValueAddress(LLVMExecutionEngineRef EE, char const * Name)} */
     @NativeType("uint64_t")
     public static long LLVMGetGlobalValueAddress(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -508,6 +532,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMGetFunctionAddress ] ---
 
+    /** {@code uint64_t LLVMGetFunctionAddress(LLVMExecutionEngineRef EE, char const * Name)} */
     public static long nLLVMGetFunctionAddress(long EE, long Name) {
         long __functionAddress = Functions.GetFunctionAddress;
         if (CHECKS) {
@@ -516,6 +541,7 @@ public class LLVMExecutionEngine {
         return invokePPJ(EE, Name, __functionAddress);
     }
 
+    /** {@code uint64_t LLVMGetFunctionAddress(LLVMExecutionEngineRef EE, char const * Name)} */
     @NativeType("uint64_t")
     public static long LLVMGetFunctionAddress(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -524,6 +550,7 @@ public class LLVMExecutionEngine {
         return nLLVMGetFunctionAddress(EE, memAddress(Name));
     }
 
+    /** {@code uint64_t LLVMGetFunctionAddress(LLVMExecutionEngineRef EE, char const * Name)} */
     @NativeType("uint64_t")
     public static long LLVMGetFunctionAddress(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -538,7 +565,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMExecutionEngineGetErrMsg ] ---
 
-    /** Unsafe version of: {@link #LLVMExecutionEngineGetErrMsg ExecutionEngineGetErrMsg} */
+    /** {@code LLVMBool LLVMExecutionEngineGetErrMsg(LLVMExecutionEngineRef EE, char ** OutError)} */
     public static int nLLVMExecutionEngineGetErrMsg(long EE, long OutError) {
         long __functionAddress = Functions.ExecutionEngineGetErrMsg;
         if (CHECKS) {
@@ -548,12 +575,7 @@ public class LLVMExecutionEngine {
         return invokePPI(EE, OutError, __functionAddress);
     }
 
-    /**
-     * Returns true on error, false on success. If true is returned then the error message is copied to {@code OutStr} and cleared in the
-     * {@code ExecutionEngine} instance.
-     *
-     * @since 11
-     */
+    /** {@code LLVMBool LLVMExecutionEngineGetErrMsg(LLVMExecutionEngineRef EE, char ** OutError)} */
     @NativeType("LLVMBool")
     public static boolean LLVMExecutionEngineGetErrMsg(@NativeType("LLVMExecutionEngineRef") long EE, @NativeType("char **") PointerBuffer OutError) {
         if (CHECKS) {
@@ -564,7 +586,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateSimpleMCJITMemoryManager ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateSimpleMCJITMemoryManager CreateSimpleMCJITMemoryManager} */
+    /** {@code LLVMMCJITMemoryManagerRef LLVMCreateSimpleMCJITMemoryManager(void * Opaque, uint8_t * (*) (void *, uintptr_t, unsigned int, unsigned int, char const *) AllocateCodeSection, uint8_t * (*) (void *, uintptr_t, unsigned int, unsigned int, char const *, LLVMBool) AllocateDataSection, LLVMBool (*) (void *, char **) FinalizeMemory, void (*) (void *) Destroy)} */
     public static long nLLVMCreateSimpleMCJITMemoryManager(long Opaque, long AllocateCodeSection, long AllocateDataSection, long FinalizeMemory, long Destroy) {
         long __functionAddress = Functions.CreateSimpleMCJITMemoryManager;
         if (CHECKS) {
@@ -573,15 +595,7 @@ public class LLVMExecutionEngine {
         return invokePPPPPP(Opaque, AllocateCodeSection, AllocateDataSection, FinalizeMemory, Destroy, __functionAddress);
     }
 
-    /**
-     * Create a simple custom MCJIT memory manager. This memory manager can intercept allocations in a module-oblivious way. This will return {@code NULL} if any of
-     * the passed functions are {@code NULL}.
-     *
-     * @param Opaque              an opaque client object to pass back to the callbacks
-     * @param AllocateCodeSection allocate a block of memory for executable code
-     * @param AllocateDataSection allocate a block of memory for data
-     * @param FinalizeMemory      set page permissions and flush cache. Return 0 on success, 1 on error.
-     */
+    /** {@code LLVMMCJITMemoryManagerRef LLVMCreateSimpleMCJITMemoryManager(void * Opaque, uint8_t * (*) (void *, uintptr_t, unsigned int, unsigned int, char const *) AllocateCodeSection, uint8_t * (*) (void *, uintptr_t, unsigned int, unsigned int, char const *, LLVMBool) AllocateDataSection, LLVMBool (*) (void *, char **) FinalizeMemory, void (*) (void *) Destroy)} */
     @NativeType("LLVMMCJITMemoryManagerRef")
     public static long LLVMCreateSimpleMCJITMemoryManager(@NativeType("void *") long Opaque, @NativeType("uint8_t * (*) (void *, uintptr_t, unsigned int, unsigned int, char const *)") LLVMMemoryManagerAllocateCodeSectionCallbackI AllocateCodeSection, @NativeType("uint8_t * (*) (void *, uintptr_t, unsigned int, unsigned int, char const *, LLVMBool)") LLVMMemoryManagerAllocateDataSectionCallbackI AllocateDataSection, @NativeType("LLVMBool (*) (void *, char **)") LLVMMemoryManagerFinalizeMemoryCallbackI FinalizeMemory, @NativeType("void (*) (void *)") LLVMMemoryManagerDestroyCallbackI Destroy) {
         return nLLVMCreateSimpleMCJITMemoryManager(Opaque, AllocateCodeSection.address(), AllocateDataSection.address(), FinalizeMemory.address(), Destroy.address());
@@ -589,6 +603,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMDisposeMCJITMemoryManager ] ---
 
+    /** {@code void LLVMDisposeMCJITMemoryManager(LLVMMCJITMemoryManagerRef MM)} */
     public static void LLVMDisposeMCJITMemoryManager(@NativeType("LLVMMCJITMemoryManagerRef") long MM) {
         long __functionAddress = Functions.DisposeMCJITMemoryManager;
         if (CHECKS) {
@@ -599,6 +614,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateGDBRegistrationListener ] ---
 
+    /** {@code LLVMJITEventListenerRef LLVMCreateGDBRegistrationListener(void)} */
     @NativeType("LLVMJITEventListenerRef")
     public static long LLVMCreateGDBRegistrationListener() {
         long __functionAddress = Functions.CreateGDBRegistrationListener;
@@ -610,6 +626,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateIntelJITEventListener ] ---
 
+    /** {@code LLVMJITEventListenerRef LLVMCreateIntelJITEventListener(void)} */
     @NativeType("LLVMJITEventListenerRef")
     public static long LLVMCreateIntelJITEventListener() {
         long __functionAddress = Functions.CreateIntelJITEventListener;
@@ -621,6 +638,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreateOProfileJITEventListener ] ---
 
+    /** {@code LLVMJITEventListenerRef LLVMCreateOProfileJITEventListener(void)} */
     @NativeType("LLVMJITEventListenerRef")
     public static long LLVMCreateOProfileJITEventListener() {
         long __functionAddress = Functions.CreateOProfileJITEventListener;
@@ -632,6 +650,7 @@ public class LLVMExecutionEngine {
 
     // --- [ LLVMCreatePerfJITEventListener ] ---
 
+    /** {@code LLVMJITEventListenerRef LLVMCreatePerfJITEventListener(void)} */
     @NativeType("LLVMJITEventListenerRef")
     public static long LLVMCreatePerfJITEventListener() {
         long __functionAddress = Functions.CreatePerfJITEventListener;

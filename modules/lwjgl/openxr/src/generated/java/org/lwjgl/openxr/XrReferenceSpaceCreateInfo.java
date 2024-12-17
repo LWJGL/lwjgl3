@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Creation info for a reference space.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_REFERENCE_SPACE_CREATE_INFO TYPE_REFERENCE_SPACE_CREATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code referenceSpaceType} <b>must</b> be a valid {@code XrReferenceSpaceType} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link XR10#xrCreateReferenceSpace CreateReferenceSpace}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrReferenceSpaceCreateInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrReferenceSpaceType {@link #referenceSpaceType};
- *     {@link XrPosef XrPosef} {@link #poseInReferenceSpace};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrReferenceSpaceType referenceSpaceType;
+ *     {@link XrPosef XrPosef} poseInReferenceSpace;
+ * }}</pre>
  */
 public class XrReferenceSpaceCreateInfo extends Struct<XrReferenceSpaceCreateInfo> implements NativeResource {
 
@@ -94,29 +78,29 @@ public class XrReferenceSpaceCreateInfo extends Struct<XrReferenceSpaceCreateInf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the chosen {@code XrReferenceSpaceType}. */
+    /** @return the value of the {@code referenceSpaceType} field. */
     @NativeType("XrReferenceSpaceType")
     public int referenceSpaceType() { return nreferenceSpaceType(address()); }
-    /** an {@link XrPosef} defining the position and orientation of the new space’s origin within the natural reference frame of the reference space. */
+    /** @return a {@link XrPosef} view of the {@code poseInReferenceSpace} field. */
     public XrPosef poseInReferenceSpace() { return nposeInReferenceSpace(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrReferenceSpaceCreateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_REFERENCE_SPACE_CREATE_INFO TYPE_REFERENCE_SPACE_CREATE_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_REFERENCE_SPACE_CREATE_INFO TYPE_REFERENCE_SPACE_CREATE_INFO} value to the {@code type} field. */
     public XrReferenceSpaceCreateInfo type$Default() { return type(XR10.XR_TYPE_REFERENCE_SPACE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrReferenceSpaceCreateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #referenceSpaceType} field. */
+    /** Sets the specified value to the {@code referenceSpaceType} field. */
     public XrReferenceSpaceCreateInfo referenceSpaceType(@NativeType("XrReferenceSpaceType") int value) { nreferenceSpaceType(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #poseInReferenceSpace} field. */
+    /** Copies the specified {@link XrPosef} to the {@code poseInReferenceSpace} field. */
     public XrReferenceSpaceCreateInfo poseInReferenceSpace(XrPosef value) { nposeInReferenceSpace(address(), value); return this; }
-    /** Passes the {@link #poseInReferenceSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code poseInReferenceSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrReferenceSpaceCreateInfo poseInReferenceSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInReferenceSpace()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,29 +302,29 @@ public class XrReferenceSpaceCreateInfo extends Struct<XrReferenceSpaceCreateInf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrReferenceSpaceCreateInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrReferenceSpaceCreateInfo.ntype(address()); }
-        /** @return the value of the {@link XrReferenceSpaceCreateInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrReferenceSpaceCreateInfo.nnext(address()); }
-        /** @return the value of the {@link XrReferenceSpaceCreateInfo#referenceSpaceType} field. */
+        /** @return the value of the {@code referenceSpaceType} field. */
         @NativeType("XrReferenceSpaceType")
         public int referenceSpaceType() { return XrReferenceSpaceCreateInfo.nreferenceSpaceType(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrReferenceSpaceCreateInfo#poseInReferenceSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInReferenceSpace} field. */
         public XrPosef poseInReferenceSpace() { return XrReferenceSpaceCreateInfo.nposeInReferenceSpace(address()); }
 
-        /** Sets the specified value to the {@link XrReferenceSpaceCreateInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrReferenceSpaceCreateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrReferenceSpaceCreateInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_REFERENCE_SPACE_CREATE_INFO TYPE_REFERENCE_SPACE_CREATE_INFO} value to the {@link XrReferenceSpaceCreateInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_REFERENCE_SPACE_CREATE_INFO TYPE_REFERENCE_SPACE_CREATE_INFO} value to the {@code type} field. */
         public XrReferenceSpaceCreateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_REFERENCE_SPACE_CREATE_INFO); }
-        /** Sets the specified value to the {@link XrReferenceSpaceCreateInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrReferenceSpaceCreateInfo.Buffer next(@NativeType("void const *") long value) { XrReferenceSpaceCreateInfo.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrReferenceSpaceCreateInfo#referenceSpaceType} field. */
+        /** Sets the specified value to the {@code referenceSpaceType} field. */
         public XrReferenceSpaceCreateInfo.Buffer referenceSpaceType(@NativeType("XrReferenceSpaceType") int value) { XrReferenceSpaceCreateInfo.nreferenceSpaceType(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrReferenceSpaceCreateInfo#poseInReferenceSpace} field. */
+        /** Copies the specified {@link XrPosef} to the {@code poseInReferenceSpace} field. */
         public XrReferenceSpaceCreateInfo.Buffer poseInReferenceSpace(XrPosef value) { XrReferenceSpaceCreateInfo.nposeInReferenceSpace(address(), value); return this; }
-        /** Passes the {@link XrReferenceSpaceCreateInfo#poseInReferenceSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code poseInReferenceSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrReferenceSpaceCreateInfo.Buffer poseInReferenceSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInReferenceSpace()); return this; }
 
     }

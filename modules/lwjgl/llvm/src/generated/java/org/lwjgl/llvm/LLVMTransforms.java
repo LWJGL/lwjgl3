@@ -131,7 +131,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddAggressiveInstCombinerPass ] ---
 
-    /** See {@code llvm::createAggressiveInstCombinerPass} function. */
+    /** {@code void LLVMAddAggressiveInstCombinerPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddAggressiveInstCombinerPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddAggressiveInstCombinerPass;
         if (CHECKS) {
@@ -143,7 +143,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddCoroEarlyPass ] ---
 
-    /** See {@code llvm::createCoroEarlyPass} function. */
+    /** {@code void LLVMAddCoroEarlyPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddCoroEarlyPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCoroEarlyPass;
         if (CHECKS) {
@@ -155,7 +155,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddCoroSplitPass ] ---
 
-    /** See {@code llvm::createCoroSplitPass} function. */
+    /** {@code void LLVMAddCoroSplitPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddCoroSplitPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCoroSplitPass;
         if (CHECKS) {
@@ -167,7 +167,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddCoroElidePass ] ---
 
-    /** See {@code llvm::createCoroElidePass} function. */
+    /** {@code void LLVMAddCoroElidePass(LLVMPassManagerRef PM)} */
     public static void LLVMAddCoroElidePass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCoroElidePass;
         if (CHECKS) {
@@ -179,7 +179,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddCoroCleanupPass ] ---
 
-    /** See {@code llvm::createCoroCleanupPass} function. */
+    /** {@code void LLVMAddCoroCleanupPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddCoroCleanupPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCoroCleanupPass;
         if (CHECKS) {
@@ -191,11 +191,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderAddCoroutinePassesToExtensionPoints ] ---
 
-    /**
-     * See {@code llvm::addCoroutinePassesToExtensionPoints} function.
-     *
-     * @since 11
-     */
+    /** {@code void LLVMPassManagerBuilderAddCoroutinePassesToExtensionPoints(LLVMPassManagerBuilderRef PMB)} */
     public static void LLVMPassManagerBuilderAddCoroutinePassesToExtensionPoints(@NativeType("LLVMPassManagerBuilderRef") long PMB) {
         long __functionAddress = Functions.PassManagerBuilderAddCoroutinePassesToExtensionPoints;
         if (CHECKS) {
@@ -207,7 +203,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddInstructionCombiningPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddInstructionCombiningPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddInstructionCombiningPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddInstructionCombiningPass;
         if (CHECKS) {
@@ -219,11 +215,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddInstructionSimplifyPass ] ---
 
-    /**
-     * Removed in LLVM 17.
-     *
-     * @since 12
-     */
+    /** {@code void LLVMAddInstructionSimplifyPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddInstructionSimplifyPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddInstructionSimplifyPass;
         if (CHECKS) {
@@ -235,7 +227,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddArgumentPromotionPass ] ---
 
-    /** See {@code llvm::createArgumentPromotionPass} function. */
+    /** {@code void LLVMAddArgumentPromotionPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddArgumentPromotionPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddArgumentPromotionPass;
         if (CHECKS) {
@@ -247,7 +239,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddConstantMergePass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddConstantMergePass(LLVMPassManagerRef PM)} */
     public static void LLVMAddConstantMergePass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddConstantMergePass;
         if (CHECKS) {
@@ -259,11 +251,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddMergeFunctionsPass ] ---
 
-    /**
-     * Removed in LLVM 17.
-     *
-     * @since 10
-     */
+    /** {@code void LLVMAddMergeFunctionsPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddMergeFunctionsPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddMergeFunctionsPass;
         if (CHECKS) {
@@ -275,7 +263,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddCalledValuePropagationPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddCalledValuePropagationPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddCalledValuePropagationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCalledValuePropagationPass;
         if (CHECKS) {
@@ -287,7 +275,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddDeadArgEliminationPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddDeadArgEliminationPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddDeadArgEliminationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddDeadArgEliminationPass;
         if (CHECKS) {
@@ -299,7 +287,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddFunctionAttrsPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddFunctionAttrsPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddFunctionAttrsPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddFunctionAttrsPass;
         if (CHECKS) {
@@ -311,7 +299,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddFunctionInliningPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddFunctionInliningPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddFunctionInliningPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddFunctionInliningPass;
         if (CHECKS) {
@@ -323,7 +311,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddAlwaysInlinerPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddAlwaysInlinerPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddAlwaysInlinerPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddAlwaysInlinerPass;
         if (CHECKS) {
@@ -335,7 +323,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddGlobalDCEPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddGlobalDCEPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddGlobalDCEPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddGlobalDCEPass;
         if (CHECKS) {
@@ -347,7 +335,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddGlobalOptimizerPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddGlobalOptimizerPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddGlobalOptimizerPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddGlobalOptimizerPass;
         if (CHECKS) {
@@ -359,7 +347,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddIPConstantPropagationPass ] ---
 
-    /** See {@code llvm::createIPConstantPropagationPass} function. */
+    /** {@code void LLVMAddIPConstantPropagationPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddIPConstantPropagationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddIPConstantPropagationPass;
         if (CHECKS) {
@@ -371,7 +359,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddPruneEHPass ] ---
 
-    /** See {@code llvm::createPruneEHPass} function. */
+    /** {@code void LLVMAddPruneEHPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddPruneEHPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddPruneEHPass;
         if (CHECKS) {
@@ -383,7 +371,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddIPSCCPPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddIPSCCPPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddIPSCCPPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddIPSCCPPass;
         if (CHECKS) {
@@ -395,7 +383,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddInternalizePass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddInternalizePass(LLVMPassManagerRef PM, unsigned int AllButMain)} */
     public static void LLVMAddInternalizePass(@NativeType("LLVMPassManagerRef") long PM, @NativeType("unsigned int") int AllButMain) {
         long __functionAddress = Functions.AddInternalizePass;
         if (CHECKS) {
@@ -407,7 +395,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddInternalizePassWithMustPreservePredicate ] ---
 
-    /** Unsafe version of: {@link #LLVMAddInternalizePassWithMustPreservePredicate AddInternalizePassWithMustPreservePredicate} */
+    /** {@code void LLVMAddInternalizePassWithMustPreservePredicate(LLVMPassManagerRef PM, void * Context, LLVMBool (*) (LLVMValueRef, void *) MustPreserve)} */
     public static void nLLVMAddInternalizePassWithMustPreservePredicate(long PM, long Context, long MustPreserve) {
         long __functionAddress = Functions.AddInternalizePassWithMustPreservePredicate;
         if (CHECKS) {
@@ -418,18 +406,14 @@ public class LLVMTransforms {
         invokePPPV(PM, Context, MustPreserve, __functionAddress);
     }
 
-    /**
-     * Removed in LLVM 17.
-     *
-     * @since 10
-     */
+    /** {@code void LLVMAddInternalizePassWithMustPreservePredicate(LLVMPassManagerRef PM, void * Context, LLVMBool (*) (LLVMValueRef, void *) MustPreserve)} */
     public static void LLVMAddInternalizePassWithMustPreservePredicate(@NativeType("LLVMPassManagerRef") long PM, @NativeType("void *") long Context, @NativeType("LLVMBool (*) (LLVMValueRef, void *)") LLVMMustPreserveI MustPreserve) {
         nLLVMAddInternalizePassWithMustPreservePredicate(PM, Context, MustPreserve.address());
     }
 
     // --- [ LLVMAddStripDeadPrototypesPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddStripDeadPrototypesPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddStripDeadPrototypesPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddStripDeadPrototypesPass;
         if (CHECKS) {
@@ -441,7 +425,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddStripSymbolsPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddStripSymbolsPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddStripSymbolsPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddStripSymbolsPass;
         if (CHECKS) {
@@ -453,7 +437,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMRunPasses ] ---
 
-    /** Unsafe version of: {@link #LLVMRunPasses RunPasses} */
+    /** {@code LLVMErrorRef LLVMRunPasses(LLVMModuleRef M, char const * Passes, LLVMTargetMachineRef TM, LLVMPassBuilderOptionsRef Options)} */
     public static long nLLVMRunPasses(long M, long Passes, long TM, long Options) {
         long __functionAddress = Functions.RunPasses;
         if (CHECKS) {
@@ -465,15 +449,7 @@ public class LLVMTransforms {
         return invokePPPPP(M, Passes, TM, Options, __functionAddress);
     }
 
-    /**
-     * Construct and run a set of passes over a module.
-     * 
-     * <p>This function takes a string with the passes that should be used. The format of this string is the same as opt's {@code -passes} argument for the new
-     * pass manager. Individual passes may be specified, separated by commas. Full pipelines may also be invoked using {@code default<O3>} and friends. See
-     * {@code opt} for full reference of the Passes format.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMRunPasses(LLVMModuleRef M, char const * Passes, LLVMTargetMachineRef TM, LLVMPassBuilderOptionsRef Options)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMRunPasses(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Passes, @NativeType("LLVMTargetMachineRef") long TM, @NativeType("LLVMPassBuilderOptionsRef") long Options) {
         if (CHECKS) {
@@ -482,15 +458,7 @@ public class LLVMTransforms {
         return nLLVMRunPasses(M, memAddress(Passes), TM, Options);
     }
 
-    /**
-     * Construct and run a set of passes over a module.
-     * 
-     * <p>This function takes a string with the passes that should be used. The format of this string is the same as opt's {@code -passes} argument for the new
-     * pass manager. Individual passes may be specified, separated by commas. Full pipelines may also be invoked using {@code default<O3>} and friends. See
-     * {@code opt} for full reference of the Passes format.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMErrorRef LLVMRunPasses(LLVMModuleRef M, char const * Passes, LLVMTargetMachineRef TM, LLVMPassBuilderOptionsRef Options)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMRunPasses(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Passes, @NativeType("LLVMTargetMachineRef") long TM, @NativeType("LLVMPassBuilderOptionsRef") long Options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -505,14 +473,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMCreatePassBuilderOptions ] ---
 
-    /**
-     * Create a new set of options for a {@code PassBuilder}.
-     * 
-     * <p>Ownership of the returned instance is given to the client, and they are responsible for it. The client should call {@link #LLVMDisposePassBuilderOptions DisposePassBuilderOptions} to free
-     * the pass builder options.</p>
-     *
-     * @since 13
-     */
+    /** {@code LLVMPassBuilderOptionsRef LLVMCreatePassBuilderOptions(void)} */
     @NativeType("LLVMPassBuilderOptionsRef")
     public static long LLVMCreatePassBuilderOptions() {
         long __functionAddress = Functions.CreatePassBuilderOptions;
@@ -524,11 +485,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetVerifyEach ] ---
 
-    /**
-     * Toggle adding the {@code VerifierPass} for the {@code PassBuilder}, ensuring all functions inside the module is valid.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMPassBuilderOptionsSetVerifyEach(LLVMPassBuilderOptionsRef Options, LLVMBool VerifyEach)} */
     public static void LLVMPassBuilderOptionsSetVerifyEach(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean VerifyEach) {
         long __functionAddress = Functions.PassBuilderOptionsSetVerifyEach;
         if (CHECKS) {
@@ -540,11 +497,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetDebugLogging ] ---
 
-    /**
-     * Toggle debug logging when running the PassBuilder
-     *
-     * @since 13
-     */
+    /** {@code void LLVMPassBuilderOptionsSetDebugLogging(LLVMPassBuilderOptionsRef Options, LLVMBool DebugLogging)} */
     public static void LLVMPassBuilderOptionsSetDebugLogging(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean DebugLogging) {
         long __functionAddress = Functions.PassBuilderOptionsSetDebugLogging;
         if (CHECKS) {
@@ -556,7 +509,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetLoopInterleaving ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetLoopInterleaving(LLVMPassBuilderOptionsRef Options, LLVMBool LoopInterleaving)} */
     public static void LLVMPassBuilderOptionsSetLoopInterleaving(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean LoopInterleaving) {
         long __functionAddress = Functions.PassBuilderOptionsSetLoopInterleaving;
         if (CHECKS) {
@@ -568,7 +521,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetLoopVectorization ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetLoopVectorization(LLVMPassBuilderOptionsRef Options, LLVMBool LoopVectorization)} */
     public static void LLVMPassBuilderOptionsSetLoopVectorization(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean LoopVectorization) {
         long __functionAddress = Functions.PassBuilderOptionsSetLoopVectorization;
         if (CHECKS) {
@@ -580,7 +533,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetSLPVectorization ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetSLPVectorization(LLVMPassBuilderOptionsRef Options, LLVMBool SLPVectorization)} */
     public static void LLVMPassBuilderOptionsSetSLPVectorization(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean SLPVectorization) {
         long __functionAddress = Functions.PassBuilderOptionsSetSLPVectorization;
         if (CHECKS) {
@@ -592,7 +545,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetLoopUnrolling ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetLoopUnrolling(LLVMPassBuilderOptionsRef Options, LLVMBool LoopUnrolling)} */
     public static void LLVMPassBuilderOptionsSetLoopUnrolling(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean LoopUnrolling) {
         long __functionAddress = Functions.PassBuilderOptionsSetLoopUnrolling;
         if (CHECKS) {
@@ -604,7 +557,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetForgetAllSCEVInLoopUnroll ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetForgetAllSCEVInLoopUnroll(LLVMPassBuilderOptionsRef Options, LLVMBool ForgetAllSCEVInLoopUnroll)} */
     public static void LLVMPassBuilderOptionsSetForgetAllSCEVInLoopUnroll(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean ForgetAllSCEVInLoopUnroll) {
         long __functionAddress = Functions.PassBuilderOptionsSetForgetAllSCEVInLoopUnroll;
         if (CHECKS) {
@@ -616,7 +569,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetLicmMssaOptCap ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetLicmMssaOptCap(LLVMPassBuilderOptionsRef Options, unsigned LicmMssaOptCap)} */
     public static void LLVMPassBuilderOptionsSetLicmMssaOptCap(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("unsigned") int LicmMssaOptCap) {
         long __functionAddress = Functions.PassBuilderOptionsSetLicmMssaOptCap;
         if (CHECKS) {
@@ -628,7 +581,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetLicmMssaNoAccForPromotionCap ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetLicmMssaNoAccForPromotionCap(LLVMPassBuilderOptionsRef Options, unsigned LicmMssaNoAccForPromotionCap)} */
     public static void LLVMPassBuilderOptionsSetLicmMssaNoAccForPromotionCap(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("unsigned") int LicmMssaNoAccForPromotionCap) {
         long __functionAddress = Functions.PassBuilderOptionsSetLicmMssaNoAccForPromotionCap;
         if (CHECKS) {
@@ -640,7 +593,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetCallGraphProfile ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetCallGraphProfile(LLVMPassBuilderOptionsRef Options, LLVMBool CallGraphProfile)} */
     public static void LLVMPassBuilderOptionsSetCallGraphProfile(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean CallGraphProfile) {
         long __functionAddress = Functions.PassBuilderOptionsSetCallGraphProfile;
         if (CHECKS) {
@@ -652,7 +605,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetMergeFunctions ] ---
 
-    /** @since 13 */
+    /** {@code void LLVMPassBuilderOptionsSetMergeFunctions(LLVMPassBuilderOptionsRef Options, LLVMBool MergeFunctions)} */
     public static void LLVMPassBuilderOptionsSetMergeFunctions(@NativeType("LLVMPassBuilderOptionsRef") long Options, @NativeType("LLVMBool") boolean MergeFunctions) {
         long __functionAddress = Functions.PassBuilderOptionsSetMergeFunctions;
         if (CHECKS) {
@@ -664,7 +617,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassBuilderOptionsSetInlinerThreshold ] ---
 
-    /** @since 17 */
+    /** {@code void LLVMPassBuilderOptionsSetInlinerThreshold(LLVMPassBuilderOptionsRef Options, int Threshold)} */
     public static void LLVMPassBuilderOptionsSetInlinerThreshold(@NativeType("LLVMPassBuilderOptionsRef") long Options, int Threshold) {
         long __functionAddress = Functions.PassBuilderOptionsSetInlinerThreshold;
         if (CHECKS) {
@@ -676,11 +629,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMDisposePassBuilderOptions ] ---
 
-    /**
-     * Dispose of a heap-allocated {@code PassBuilderOptions} instance.
-     *
-     * @since 13
-     */
+    /** {@code void LLVMDisposePassBuilderOptions(LLVMPassBuilderOptionsRef Options)} */
     public static void LLVMDisposePassBuilderOptions(@NativeType("LLVMPassBuilderOptionsRef") long Options) {
         long __functionAddress = Functions.DisposePassBuilderOptions;
         if (CHECKS) {
@@ -692,7 +641,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderCreate ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code LLVMPassManagerBuilderRef LLVMPassManagerBuilderCreate(void)} */
     @NativeType("LLVMPassManagerBuilderRef")
     public static long LLVMPassManagerBuilderCreate() {
         long __functionAddress = Functions.PassManagerBuilderCreate;
@@ -704,7 +653,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderDispose ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderDispose(LLVMPassManagerBuilderRef PMB)} */
     public static void LLVMPassManagerBuilderDispose(@NativeType("LLVMPassManagerBuilderRef") long PMB) {
         long __functionAddress = Functions.PassManagerBuilderDispose;
         if (CHECKS) {
@@ -716,7 +665,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderSetOptLevel ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderSetOptLevel(LLVMPassManagerBuilderRef PMB, unsigned int OptLevel)} */
     public static void LLVMPassManagerBuilderSetOptLevel(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("unsigned int") int OptLevel) {
         long __functionAddress = Functions.PassManagerBuilderSetOptLevel;
         if (CHECKS) {
@@ -728,7 +677,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderSetSizeLevel ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderSetSizeLevel(LLVMPassManagerBuilderRef PMB, unsigned int SizeLevel)} */
     public static void LLVMPassManagerBuilderSetSizeLevel(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("unsigned int") int SizeLevel) {
         long __functionAddress = Functions.PassManagerBuilderSetSizeLevel;
         if (CHECKS) {
@@ -740,7 +689,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderSetDisableUnitAtATime ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderSetDisableUnitAtATime(LLVMPassManagerBuilderRef PMB, LLVMBool Value)} */
     public static void LLVMPassManagerBuilderSetDisableUnitAtATime(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("LLVMBool") boolean Value) {
         long __functionAddress = Functions.PassManagerBuilderSetDisableUnitAtATime;
         if (CHECKS) {
@@ -752,7 +701,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderSetDisableUnrollLoops ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderSetDisableUnrollLoops(LLVMPassManagerBuilderRef PMB, LLVMBool Value)} */
     public static void LLVMPassManagerBuilderSetDisableUnrollLoops(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("LLVMBool") boolean Value) {
         long __functionAddress = Functions.PassManagerBuilderSetDisableUnrollLoops;
         if (CHECKS) {
@@ -764,7 +713,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderSetDisableSimplifyLibCalls ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderSetDisableSimplifyLibCalls(LLVMPassManagerBuilderRef PMB, LLVMBool Value)} */
     public static void LLVMPassManagerBuilderSetDisableSimplifyLibCalls(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("LLVMBool") boolean Value) {
         long __functionAddress = Functions.PassManagerBuilderSetDisableSimplifyLibCalls;
         if (CHECKS) {
@@ -776,7 +725,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderUseInlinerWithThreshold ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderUseInlinerWithThreshold(LLVMPassManagerBuilderRef PMB, unsigned int Threshold)} */
     public static void LLVMPassManagerBuilderUseInlinerWithThreshold(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("unsigned int") int Threshold) {
         long __functionAddress = Functions.PassManagerBuilderUseInlinerWithThreshold;
         if (CHECKS) {
@@ -788,7 +737,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderPopulateFunctionPassManager ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderPopulateFunctionPassManager(LLVMPassManagerBuilderRef PMB, LLVMPassManagerRef PM)} */
     public static void LLVMPassManagerBuilderPopulateFunctionPassManager(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.PassManagerBuilderPopulateFunctionPassManager;
         if (CHECKS) {
@@ -801,7 +750,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderPopulateModulePassManager ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMPassManagerBuilderPopulateModulePassManager(LLVMPassManagerBuilderRef PMB, LLVMPassManagerRef PM)} */
     public static void LLVMPassManagerBuilderPopulateModulePassManager(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.PassManagerBuilderPopulateModulePassManager;
         if (CHECKS) {
@@ -814,7 +763,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMPassManagerBuilderPopulateLTOPassManager ] ---
 
-    /** See {@code llvm::PassManagerBuilder::populateLTOPassManager}. */
+    /** {@code void LLVMPassManagerBuilderPopulateLTOPassManager(LLVMPassManagerBuilderRef PMB, LLVMPassManagerRef PM, LLVMBool Internalize, LLVMBool RunInliner)} */
     public static void LLVMPassManagerBuilderPopulateLTOPassManager(@NativeType("LLVMPassManagerBuilderRef") long PMB, @NativeType("LLVMPassManagerRef") long PM, @NativeType("LLVMBool") boolean Internalize, @NativeType("LLVMBool") boolean RunInliner) {
         long __functionAddress = Functions.PassManagerBuilderPopulateLTOPassManager;
         if (CHECKS) {
@@ -827,7 +776,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddAggressiveDCEPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddAggressiveDCEPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddAggressiveDCEPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddAggressiveDCEPass;
         if (CHECKS) {
@@ -839,11 +788,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddDCEPass ] ---
 
-    /**
-     * Removed in LLVM 17.
-     *
-     * @since 10
-     */
+    /** {@code void LLVMAddDCEPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddDCEPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddDCEPass;
         if (CHECKS) {
@@ -855,7 +800,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddBitTrackingDCEPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddBitTrackingDCEPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddBitTrackingDCEPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddBitTrackingDCEPass;
         if (CHECKS) {
@@ -867,7 +812,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddAlignmentFromAssumptionsPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddAlignmentFromAssumptionsPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddAlignmentFromAssumptionsPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddAlignmentFromAssumptionsPass;
         if (CHECKS) {
@@ -879,7 +824,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddCFGSimplificationPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddCFGSimplificationPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddCFGSimplificationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCFGSimplificationPass;
         if (CHECKS) {
@@ -891,7 +836,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddDeadStoreEliminationPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddDeadStoreEliminationPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddDeadStoreEliminationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddDeadStoreEliminationPass;
         if (CHECKS) {
@@ -903,7 +848,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddScalarizerPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddScalarizerPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddScalarizerPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddScalarizerPass;
         if (CHECKS) {
@@ -915,7 +860,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddMergedLoadStoreMotionPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddMergedLoadStoreMotionPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddMergedLoadStoreMotionPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddMergedLoadStoreMotionPass;
         if (CHECKS) {
@@ -927,7 +872,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddGVNPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddGVNPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddGVNPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddGVNPass;
         if (CHECKS) {
@@ -939,7 +884,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddNewGVNPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddNewGVNPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddNewGVNPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddNewGVNPass;
         if (CHECKS) {
@@ -951,7 +896,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddIndVarSimplifyPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddIndVarSimplifyPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddIndVarSimplifyPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddIndVarSimplifyPass;
         if (CHECKS) {
@@ -963,7 +908,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddJumpThreadingPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddJumpThreadingPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddJumpThreadingPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddJumpThreadingPass;
         if (CHECKS) {
@@ -975,7 +920,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLICMPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLICMPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLICMPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLICMPass;
         if (CHECKS) {
@@ -987,7 +932,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLoopDeletionPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLoopDeletionPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLoopDeletionPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopDeletionPass;
         if (CHECKS) {
@@ -999,7 +944,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLoopIdiomPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLoopIdiomPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLoopIdiomPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopIdiomPass;
         if (CHECKS) {
@@ -1011,7 +956,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLoopRotatePass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLoopRotatePass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLoopRotatePass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopRotatePass;
         if (CHECKS) {
@@ -1023,7 +968,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLoopRerollPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLoopRerollPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLoopRerollPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopRerollPass;
         if (CHECKS) {
@@ -1035,7 +980,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLoopUnrollPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLoopUnrollPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLoopUnrollPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopUnrollPass;
         if (CHECKS) {
@@ -1047,7 +992,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLoopUnrollAndJamPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLoopUnrollAndJamPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLoopUnrollAndJamPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopUnrollAndJamPass;
         if (CHECKS) {
@@ -1059,7 +1004,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLoopUnswitchPass ] ---
 
-    /** See {@code llvm::createLoopUnswitchPass} function. */
+    /** {@code void LLVMAddLoopUnswitchPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLoopUnswitchPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopUnswitchPass;
         if (CHECKS) {
@@ -1071,7 +1016,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLowerAtomicPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLowerAtomicPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLowerAtomicPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLowerAtomicPass;
         if (CHECKS) {
@@ -1083,7 +1028,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddMemCpyOptPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddMemCpyOptPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddMemCpyOptPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddMemCpyOptPass;
         if (CHECKS) {
@@ -1095,7 +1040,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddPartiallyInlineLibCallsPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddPartiallyInlineLibCallsPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddPartiallyInlineLibCallsPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddPartiallyInlineLibCallsPass;
         if (CHECKS) {
@@ -1107,7 +1052,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddReassociatePass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddReassociatePass(LLVMPassManagerRef PM)} */
     public static void LLVMAddReassociatePass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddReassociatePass;
         if (CHECKS) {
@@ -1119,7 +1064,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddSCCPPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddSCCPPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddSCCPPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddSCCPPass;
         if (CHECKS) {
@@ -1131,7 +1076,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddScalarReplAggregatesPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddScalarReplAggregatesPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddScalarReplAggregatesPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddScalarReplAggregatesPass;
         if (CHECKS) {
@@ -1143,7 +1088,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddScalarReplAggregatesPassSSA ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddScalarReplAggregatesPassSSA(LLVMPassManagerRef PM)} */
     public static void LLVMAddScalarReplAggregatesPassSSA(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddScalarReplAggregatesPassSSA;
         if (CHECKS) {
@@ -1155,7 +1100,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddScalarReplAggregatesPassWithThreshold ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddScalarReplAggregatesPassWithThreshold(LLVMPassManagerRef PM, int Threshold)} */
     public static void LLVMAddScalarReplAggregatesPassWithThreshold(@NativeType("LLVMPassManagerRef") long PM, int Threshold) {
         long __functionAddress = Functions.AddScalarReplAggregatesPassWithThreshold;
         if (CHECKS) {
@@ -1167,7 +1112,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddSimplifyLibCallsPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddSimplifyLibCallsPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddSimplifyLibCallsPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddSimplifyLibCallsPass;
         if (CHECKS) {
@@ -1179,7 +1124,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddTailCallEliminationPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddTailCallEliminationPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddTailCallEliminationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddTailCallEliminationPass;
         if (CHECKS) {
@@ -1191,7 +1136,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddConstantPropagationPass ] ---
 
-    /** See {@code llvm::createConstantPropagationPass} function. */
+    /** {@code void LLVMAddConstantPropagationPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddConstantPropagationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddConstantPropagationPass;
         if (CHECKS) {
@@ -1203,7 +1148,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddDemoteMemoryToRegisterPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddDemoteMemoryToRegisterPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddDemoteMemoryToRegisterPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddDemoteMemoryToRegisterPass;
         if (CHECKS) {
@@ -1215,7 +1160,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddVerifierPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddVerifierPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddVerifierPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddVerifierPass;
         if (CHECKS) {
@@ -1227,7 +1172,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddCorrelatedValuePropagationPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddCorrelatedValuePropagationPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddCorrelatedValuePropagationPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddCorrelatedValuePropagationPass;
         if (CHECKS) {
@@ -1239,7 +1184,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddEarlyCSEPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddEarlyCSEPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddEarlyCSEPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddEarlyCSEPass;
         if (CHECKS) {
@@ -1251,7 +1196,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddEarlyCSEMemSSAPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddEarlyCSEMemSSAPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddEarlyCSEMemSSAPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddEarlyCSEMemSSAPass;
         if (CHECKS) {
@@ -1263,7 +1208,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLowerExpectIntrinsicPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLowerExpectIntrinsicPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLowerExpectIntrinsicPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLowerExpectIntrinsicPass;
         if (CHECKS) {
@@ -1275,11 +1220,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLowerConstantIntrinsicsPass ] ---
 
-    /**
-     * Removed in LLVM 17.
-     *
-     * @since 10
-     */
+    /** {@code void LLVMAddLowerConstantIntrinsicsPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLowerConstantIntrinsicsPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLowerConstantIntrinsicsPass;
         if (CHECKS) {
@@ -1291,7 +1232,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddTypeBasedAliasAnalysisPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddTypeBasedAliasAnalysisPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddTypeBasedAliasAnalysisPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddTypeBasedAliasAnalysisPass;
         if (CHECKS) {
@@ -1303,7 +1244,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddScopedNoAliasAAPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddScopedNoAliasAAPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddScopedNoAliasAAPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddScopedNoAliasAAPass;
         if (CHECKS) {
@@ -1315,7 +1256,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddBasicAliasAnalysisPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddBasicAliasAnalysisPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddBasicAliasAnalysisPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddBasicAliasAnalysisPass;
         if (CHECKS) {
@@ -1327,7 +1268,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddUnifyFunctionExitNodesPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddUnifyFunctionExitNodesPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddUnifyFunctionExitNodesPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddUnifyFunctionExitNodesPass;
         if (CHECKS) {
@@ -1339,7 +1280,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLowerSwitchPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLowerSwitchPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLowerSwitchPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLowerSwitchPass;
         if (CHECKS) {
@@ -1351,7 +1292,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddPromoteMemoryToRegisterPass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddPromoteMemoryToRegisterPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddPromoteMemoryToRegisterPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddPromoteMemoryToRegisterPass;
         if (CHECKS) {
@@ -1363,11 +1304,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddAddDiscriminatorsPass ] ---
 
-    /**
-     * Removed in LLVM 17.
-     *
-     * @since 9
-     */
+    /** {@code void LLVMAddAddDiscriminatorsPass(LLVMPassManagerRef PM)} */
     public static void LLVMAddAddDiscriminatorsPass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddAddDiscriminatorsPass;
         if (CHECKS) {
@@ -1379,7 +1316,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddLoopVectorizePass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddLoopVectorizePass(LLVMPassManagerRef PM)} */
     public static void LLVMAddLoopVectorizePass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddLoopVectorizePass;
         if (CHECKS) {
@@ -1391,7 +1328,7 @@ public class LLVMTransforms {
 
     // --- [ LLVMAddSLPVectorizePass ] ---
 
-    /** Removed in LLVM 17. */
+    /** {@code void LLVMAddSLPVectorizePass(LLVMPassManagerRef PM)} */
     public static void LLVMAddSLPVectorizePass(@NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddSLPVectorizePass;
         if (CHECKS) {

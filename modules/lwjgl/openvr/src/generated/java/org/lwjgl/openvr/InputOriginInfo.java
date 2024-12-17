@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct InputOriginInfo_t {
  *     VRInputValueHandle_t devicePath;
  *     TrackedDeviceIndex_t trackedDeviceIndex;
  *     char rchRenderModelComponentName[128];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct InputOriginInfo_t")
 public class InputOriginInfo extends Struct<InputOriginInfo> implements NativeResource {

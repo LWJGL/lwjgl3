@@ -5,17 +5,6 @@
  */
 package org.lwjgl.egl;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_create_context.txt">KHR_create_context</a> extension.
- * 
- * <p>With the advent of new versions of OpenGL which deprecate features and/or break backward compatibility with older versions, there is a need and desire
- * to indicate at context creation which interface will be used. This extension adds a new context creation routine with attributes specifying the OpenGL
- * version, context properties, and profile requested for the context. It also allows making an OpenGL 3.0 or later context (or other client API context
- * supporting the ability) current without providing a default framebuffer. The new context creation attributes are also defined to work for OpenGL ES
- * context creation when that makes sense, and the extension has been augmented to allow configs to advertise support for creating OpenGL ES 3.0 contexts.</p>
- * 
- * <p>Requires {@link EGL14 EGL 1.4}.</p>
- */
 public final class KHRCreateContext {
 
     public static final int

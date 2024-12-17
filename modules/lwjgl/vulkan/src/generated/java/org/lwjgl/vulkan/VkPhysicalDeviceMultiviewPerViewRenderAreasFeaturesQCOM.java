@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing multiview per view render areas features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link QCOMMultiviewPerViewRenderAreas#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #multiviewPerViewRenderAreas};
- * }</code></pre>
+ *     VkBool32 multiviewPerViewRenderAreas;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM extends Struct<VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM extends Str
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports multiview per-view render areas. */
+    /** @return the value of the {@code multiviewPerViewRenderAreas} field. */
     @NativeType("VkBool32")
     public boolean multiviewPerViewRenderAreas() { return nmultiviewPerViewRenderAreas(address()) != 0; }
 
@@ -104,7 +90,7 @@ public class VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM extends Str
     public VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM sType$Default() { return sType(QCOMMultiviewPerViewRenderAreas.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #multiviewPerViewRenderAreas} field. */
+    /** Sets the specified value to the {@code multiviewPerViewRenderAreas} field. */
     public VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM multiviewPerViewRenderAreas(@NativeType("VkBool32") boolean value) { nmultiviewPerViewRenderAreas(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,7 +292,7 @@ public class VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM extends Str
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM#multiviewPerViewRenderAreas} field. */
+        /** @return the value of the {@code multiviewPerViewRenderAreas} field. */
         @NativeType("VkBool32")
         public boolean multiviewPerViewRenderAreas() { return VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.nmultiviewPerViewRenderAreas(address()) != 0; }
 
@@ -316,7 +302,7 @@ public class VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM extends Str
         public VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.Buffer sType$Default() { return sType(QCOMMultiviewPerViewRenderAreas.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_RENDER_AREAS_FEATURES_QCOM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM#multiviewPerViewRenderAreas} field. */
+        /** Sets the specified value to the {@code multiviewPerViewRenderAreas} field. */
         public VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.Buffer multiviewPerViewRenderAreas(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM.nmultiviewPerViewRenderAreas(address(), value ? 1 : 0); return this; }
 
     }

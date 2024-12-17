@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Camera extrinsics state.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link OCULUSExternalCamera XR_OCULUS_external_camera} extension <b>must</b> be enabled prior to using {@link XrExternalCameraExtrinsicsOCULUS}</li>
- * <li>{@code cameraStatusFlags} <b>must</b> be 0 or a valid combination of {@code XrExternalCameraStatusFlagBitsOCULUS} values</li>
- * <li>{@code attachedToDevice} <b>must</b> be a valid {@code XrExternalCameraAttachedToDeviceOCULUS} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExternalCameraOCULUS}, {@link XrPosef}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrExternalCameraExtrinsicsOCULUS {
- *     XrTime {@link #lastChangeTime};
- *     XrExternalCameraStatusFlagsOCULUS {@link #cameraStatusFlags};
- *     XrExternalCameraAttachedToDeviceOCULUS {@link #attachedToDevice};
- *     {@link XrPosef XrPosef} {@link #relativePose};
- * }</code></pre>
+ *     XrTime lastChangeTime;
+ *     XrExternalCameraStatusFlagsOCULUS cameraStatusFlags;
+ *     XrExternalCameraAttachedToDeviceOCULUS attachedToDevice;
+ *     {@link XrPosef XrPosef} relativePose;
+ * }}</pre>
  */
 public class XrExternalCameraExtrinsicsOCULUS extends Struct<XrExternalCameraExtrinsicsOCULUS> implements NativeResource {
 
@@ -94,27 +78,27 @@ public class XrExternalCameraExtrinsicsOCULUS extends Struct<XrExternalCameraExt
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrTime} when this camera’s extrinsics last changed. */
+    /** @return the value of the {@code lastChangeTime} field. */
     @NativeType("XrTime")
     public long lastChangeTime() { return nlastChangeTime(address()); }
-    /** the {@code XrExternalCameraStatusFlagsOCULUS} for this camera’s status. */
+    /** @return the value of the {@code cameraStatusFlags} field. */
     @NativeType("XrExternalCameraStatusFlagsOCULUS")
     public long cameraStatusFlags() { return ncameraStatusFlags(address()); }
-    /** the {@code XrExternalCameraAttachedToDeviceOCULUS} for the device this camera is attached to */
+    /** @return the value of the {@code attachedToDevice} field. */
     @NativeType("XrExternalCameraAttachedToDeviceOCULUS")
     public int attachedToDevice() { return nattachedToDevice(address()); }
-    /** the {@link XrPosef} for offset of the camera from the device that the camera is attached to */
+    /** @return a {@link XrPosef} view of the {@code relativePose} field. */
     public XrPosef relativePose() { return nrelativePose(address()); }
 
-    /** Sets the specified value to the {@link #lastChangeTime} field. */
+    /** Sets the specified value to the {@code lastChangeTime} field. */
     public XrExternalCameraExtrinsicsOCULUS lastChangeTime(@NativeType("XrTime") long value) { nlastChangeTime(address(), value); return this; }
-    /** Sets the specified value to the {@link #cameraStatusFlags} field. */
+    /** Sets the specified value to the {@code cameraStatusFlags} field. */
     public XrExternalCameraExtrinsicsOCULUS cameraStatusFlags(@NativeType("XrExternalCameraStatusFlagsOCULUS") long value) { ncameraStatusFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #attachedToDevice} field. */
+    /** Sets the specified value to the {@code attachedToDevice} field. */
     public XrExternalCameraExtrinsicsOCULUS attachedToDevice(@NativeType("XrExternalCameraAttachedToDeviceOCULUS") int value) { nattachedToDevice(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #relativePose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code relativePose} field. */
     public XrExternalCameraExtrinsicsOCULUS relativePose(XrPosef value) { nrelativePose(address(), value); return this; }
-    /** Passes the {@link #relativePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code relativePose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrExternalCameraExtrinsicsOCULUS relativePose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(relativePose()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,27 +300,27 @@ public class XrExternalCameraExtrinsicsOCULUS extends Struct<XrExternalCameraExt
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrExternalCameraExtrinsicsOCULUS#lastChangeTime} field. */
+        /** @return the value of the {@code lastChangeTime} field. */
         @NativeType("XrTime")
         public long lastChangeTime() { return XrExternalCameraExtrinsicsOCULUS.nlastChangeTime(address()); }
-        /** @return the value of the {@link XrExternalCameraExtrinsicsOCULUS#cameraStatusFlags} field. */
+        /** @return the value of the {@code cameraStatusFlags} field. */
         @NativeType("XrExternalCameraStatusFlagsOCULUS")
         public long cameraStatusFlags() { return XrExternalCameraExtrinsicsOCULUS.ncameraStatusFlags(address()); }
-        /** @return the value of the {@link XrExternalCameraExtrinsicsOCULUS#attachedToDevice} field. */
+        /** @return the value of the {@code attachedToDevice} field. */
         @NativeType("XrExternalCameraAttachedToDeviceOCULUS")
         public int attachedToDevice() { return XrExternalCameraExtrinsicsOCULUS.nattachedToDevice(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrExternalCameraExtrinsicsOCULUS#relativePose} field. */
+        /** @return a {@link XrPosef} view of the {@code relativePose} field. */
         public XrPosef relativePose() { return XrExternalCameraExtrinsicsOCULUS.nrelativePose(address()); }
 
-        /** Sets the specified value to the {@link XrExternalCameraExtrinsicsOCULUS#lastChangeTime} field. */
+        /** Sets the specified value to the {@code lastChangeTime} field. */
         public XrExternalCameraExtrinsicsOCULUS.Buffer lastChangeTime(@NativeType("XrTime") long value) { XrExternalCameraExtrinsicsOCULUS.nlastChangeTime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrExternalCameraExtrinsicsOCULUS#cameraStatusFlags} field. */
+        /** Sets the specified value to the {@code cameraStatusFlags} field. */
         public XrExternalCameraExtrinsicsOCULUS.Buffer cameraStatusFlags(@NativeType("XrExternalCameraStatusFlagsOCULUS") long value) { XrExternalCameraExtrinsicsOCULUS.ncameraStatusFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrExternalCameraExtrinsicsOCULUS#attachedToDevice} field. */
+        /** Sets the specified value to the {@code attachedToDevice} field. */
         public XrExternalCameraExtrinsicsOCULUS.Buffer attachedToDevice(@NativeType("XrExternalCameraAttachedToDeviceOCULUS") int value) { XrExternalCameraExtrinsicsOCULUS.nattachedToDevice(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrExternalCameraExtrinsicsOCULUS#relativePose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code relativePose} field. */
         public XrExternalCameraExtrinsicsOCULUS.Buffer relativePose(XrPosef value) { XrExternalCameraExtrinsicsOCULUS.nrelativePose(address(), value); return this; }
-        /** Passes the {@link XrExternalCameraExtrinsicsOCULUS#relativePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code relativePose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrExternalCameraExtrinsicsOCULUS.Buffer relativePose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(relativePose()); return this; }
 
     }

@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDeviceImageMemoryRequirements}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceImageMemoryRequirementsKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkImageCreateInfo VkImageCreateInfo} const * pCreateInfo;
  *     VkImageAspectFlagBits planeAspect;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDeviceImageMemoryRequirementsKHR extends VkDeviceImageMemoryRequirements {
 

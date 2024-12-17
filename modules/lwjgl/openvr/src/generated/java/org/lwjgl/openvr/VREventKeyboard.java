@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Used for keyboard events.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Keyboard_t {
- *     char {@link #cNewInput}[8];
- *     uint64_t {@link #uUserValue};
- *     uint64_t {@link #overlayHandle};
- * }</code></pre>
+ *     char cNewInput[8];
+ *     uint64_t uUserValue;
+ *     uint64_t overlayHandle;
+ * }}</pre>
  */
 @NativeType("struct VREvent_Keyboard_t")
 public class VREventKeyboard extends Struct<VREventKeyboard> {
@@ -77,16 +73,16 @@ public class VREventKeyboard extends Struct<VREventKeyboard> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** 7 bytes of utf8 + null */
+    /** @return a {@link ByteBuffer} view of the {@code cNewInput} field. */
     @NativeType("char[8]")
     public ByteBuffer cNewInput() { return ncNewInput(address()); }
-    /** 7 bytes of utf8 + null */
+    /** @return the null-terminated string stored in the {@code cNewInput} field. */
     @NativeType("char[8]")
     public String cNewInputString() { return ncNewInputString(address()); }
-    /** caller specified opaque token */
+    /** @return the value of the {@code uUserValue} field. */
     @NativeType("uint64_t")
     public long uUserValue() { return nuUserValue(address()); }
-    /** {@code VROverlayHandle_t} */
+    /** @return the value of the {@code overlayHandle} field. */
     @NativeType("uint64_t")
     public long overlayHandle() { return noverlayHandle(address()); }
 
@@ -171,16 +167,16 @@ public class VREventKeyboard extends Struct<VREventKeyboard> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link VREventKeyboard#cNewInput} field. */
+        /** @return a {@link ByteBuffer} view of the {@code cNewInput} field. */
         @NativeType("char[8]")
         public ByteBuffer cNewInput() { return VREventKeyboard.ncNewInput(address()); }
-        /** @return the null-terminated string stored in the {@link VREventKeyboard#cNewInput} field. */
+        /** @return the null-terminated string stored in the {@code cNewInput} field. */
         @NativeType("char[8]")
         public String cNewInputString() { return VREventKeyboard.ncNewInputString(address()); }
-        /** @return the value of the {@link VREventKeyboard#uUserValue} field. */
+        /** @return the value of the {@code uUserValue} field. */
         @NativeType("uint64_t")
         public long uUserValue() { return VREventKeyboard.nuUserValue(address()); }
-        /** @return the value of the {@link VREventKeyboard#overlayHandle} field. */
+        /** @return the value of the {@code overlayHandle} field. */
         @NativeType("uint64_t")
         public long overlayHandle() { return VREventKeyboard.noverlayHandle(address()); }
 

@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.util.tinyexr.TinyEXR.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct EXRHeader {
  *     float pixel_aspect_ratio;
  *     int line_order;
@@ -36,18 +34,18 @@ import static org.lwjgl.util.tinyexr.TinyEXR.*;
  *     int tile_level_mode;
  *     int tile_rounding_mode;
  *     int long_name;
- *     int {@link #non_image};
+ *     int non_image;
  *     int multipart;
  *     unsigned int header_len;
- *     int {@link #num_custom_attributes};
- *     {@link EXRAttribute EXRAttribute} * {@link #custom_attributes};
+ *     int num_custom_attributes;
+ *     {@link EXRAttribute EXRAttribute} * custom_attributes;
  *     {@link EXRChannelInfo EXRChannelInfo} * channels;
- *     int * {@link #pixel_types};
+ *     int * pixel_types;
  *     int num_channels;
- *     int {@link #compression_type};
- *     int * {@link #requested_pixel_types};
- *     char {@link #name}[256];
- * }</code></pre>
+ *     int compression_type;
+ *     int * requested_pixel_types;
+ *     char name[256];
+ * }}</pre>
  */
 public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
 
@@ -194,7 +192,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     /** @return the value of the {@code long_name} field. */
     @NativeType("int")
     public boolean long_name() { return nlong_name(address()) != 0; }
-    /** For a single-part file, agree with the version field bit 11. For a multi-part file, it is consistent with the type of part. */
+    /** @return the value of the {@code non_image} field. */
     @NativeType("int")
     public boolean non_image() { return nnon_image(address()) != 0; }
     /** @return the value of the {@code multipart} field. */
@@ -203,36 +201,28 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     /** @return the value of the {@code header_len} field. */
     @NativeType("unsigned int")
     public int header_len() { return nheader_len(address()); }
-    /** number of {@code EXRAttribute} in the {@code custom_attributes} array */
+    /** @return the value of the {@code num_custom_attributes} field. */
     public int num_custom_attributes() { return nnum_custom_attributes(address()); }
-    /** custom attributes (excludes required attributes, e.g. `channels`, `compression`, etc) */
+    /** @return a {@link EXRAttribute.Buffer} view of the struct array pointed to by the {@code custom_attributes} field. */
     @NativeType("EXRAttribute *")
     public EXRAttribute.@Nullable Buffer custom_attributes() { return ncustom_attributes(address()); }
     /** @return a {@link EXRChannelInfo.Buffer} view of the struct array pointed to by the {@code channels} field. */
     @NativeType("EXRChannelInfo *")
     public EXRChannelInfo.Buffer channels() { return nchannels(address()); }
-    /** loaded pixel type (TINYEXR_PIXELTYPE_*) of {@code images} for each channel. This is overwritten with {@code requested_pixel_types} when loading. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pixel_types} field. */
     @NativeType("int *")
     public IntBuffer pixel_types() { return npixel_types(address()); }
     /** @return the value of the {@code num_channels} field. */
     public int num_channels() { return nnum_channels(address()); }
-    /** compression type (TINYEXR_COMPRESSIONTYPE_*) */
+    /** @return the value of the {@code compression_type} field. */
     public int compression_type() { return ncompression_type(address()); }
-    /** filled initially by {@code ParseEXRHeaderFrom(Memory|File)}, then users can edit it (only valid for HALF pixel type channel) */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code requested_pixel_types} field. */
     @NativeType("int *")
     public IntBuffer requested_pixel_types() { return nrequested_pixel_types(address()); }
-    /**
-     * Name attribute required for multipart files.
-     * 
-     * <p>Must be unique and non empty (according to spec.). Use {@link TinyEXR#EXRSetNameAttr} for setting value. Max 255 characters allowed - excluding terminating zero.</p>
-     */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[256]")
     public ByteBuffer name() { return nname(address()); }
-    /**
-     * Name attribute required for multipart files.
-     * 
-     * <p>Must be unique and non empty (according to spec.). Use {@link TinyEXR#EXRSetNameAttr} for setting value. Max 255 characters allowed - excluding terminating zero.</p>
-     */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[256]")
     public String nameString() { return nnameString(address()); }
 
@@ -268,27 +258,27 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
     public EXRHeader tile_rounding_mode(int value) { ntile_rounding_mode(address(), value); return this; }
     /** Sets the specified value to the {@code long_name} field. */
     public EXRHeader long_name(@NativeType("int") boolean value) { nlong_name(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #non_image} field. */
+    /** Sets the specified value to the {@code non_image} field. */
     public EXRHeader non_image(@NativeType("int") boolean value) { nnon_image(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code multipart} field. */
     public EXRHeader multipart(@NativeType("int") boolean value) { nmultipart(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code header_len} field. */
     public EXRHeader header_len(@NativeType("unsigned int") int value) { nheader_len(address(), value); return this; }
-    /** Sets the specified value to the {@link #num_custom_attributes} field. */
+    /** Sets the specified value to the {@code num_custom_attributes} field. */
     public EXRHeader num_custom_attributes(int value) { nnum_custom_attributes(address(), value); return this; }
-    /** Sets the address of the specified {@link EXRAttribute.Buffer} to the {@link #custom_attributes} field. */
+    /** Sets the address of the specified {@link EXRAttribute.Buffer} to the {@code custom_attributes} field. */
     public EXRHeader custom_attributes(@NativeType("EXRAttribute *") EXRAttribute.@Nullable Buffer value) { ncustom_attributes(address(), value); return this; }
     /** Sets the address of the specified {@link EXRChannelInfo.Buffer} to the {@code channels} field. */
     public EXRHeader channels(@NativeType("EXRChannelInfo *") EXRChannelInfo.Buffer value) { nchannels(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pixel_types} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pixel_types} field. */
     public EXRHeader pixel_types(@NativeType("int *") IntBuffer value) { npixel_types(address(), value); return this; }
     /** Sets the specified value to the {@code num_channels} field. */
     public EXRHeader num_channels(int value) { nnum_channels(address(), value); return this; }
-    /** Sets the specified value to the {@link #compression_type} field. */
+    /** Sets the specified value to the {@code compression_type} field. */
     public EXRHeader compression_type(int value) { ncompression_type(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #requested_pixel_types} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code requested_pixel_types} field. */
     public EXRHeader requested_pixel_types(@NativeType("int *") IntBuffer value) { nrequested_pixel_types(address(), value); return this; }
-    /** Copies the specified encoded string to the {@link #name} field. */
+    /** Copies the specified encoded string to the {@code name} field. */
     public EXRHeader name(@NativeType("char[256]") ByteBuffer value) { nname(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -695,7 +685,7 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
         /** @return the value of the {@code long_name} field. */
         @NativeType("int")
         public boolean long_name() { return EXRHeader.nlong_name(address()) != 0; }
-        /** @return the value of the {@link EXRHeader#non_image} field. */
+        /** @return the value of the {@code non_image} field. */
         @NativeType("int")
         public boolean non_image() { return EXRHeader.nnon_image(address()) != 0; }
         /** @return the value of the {@code multipart} field. */
@@ -704,28 +694,28 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
         /** @return the value of the {@code header_len} field. */
         @NativeType("unsigned int")
         public int header_len() { return EXRHeader.nheader_len(address()); }
-        /** @return the value of the {@link EXRHeader#num_custom_attributes} field. */
+        /** @return the value of the {@code num_custom_attributes} field. */
         public int num_custom_attributes() { return EXRHeader.nnum_custom_attributes(address()); }
-        /** @return a {@link EXRAttribute.Buffer} view of the struct array pointed to by the {@link EXRHeader#custom_attributes} field. */
+        /** @return a {@link EXRAttribute.Buffer} view of the struct array pointed to by the {@code custom_attributes} field. */
         @NativeType("EXRAttribute *")
         public EXRAttribute.@Nullable Buffer custom_attributes() { return EXRHeader.ncustom_attributes(address()); }
         /** @return a {@link EXRChannelInfo.Buffer} view of the struct array pointed to by the {@code channels} field. */
         @NativeType("EXRChannelInfo *")
         public EXRChannelInfo.Buffer channels() { return EXRHeader.nchannels(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link EXRHeader#pixel_types} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pixel_types} field. */
         @NativeType("int *")
         public IntBuffer pixel_types() { return EXRHeader.npixel_types(address()); }
         /** @return the value of the {@code num_channels} field. */
         public int num_channels() { return EXRHeader.nnum_channels(address()); }
-        /** @return the value of the {@link EXRHeader#compression_type} field. */
+        /** @return the value of the {@code compression_type} field. */
         public int compression_type() { return EXRHeader.ncompression_type(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link EXRHeader#requested_pixel_types} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code requested_pixel_types} field. */
         @NativeType("int *")
         public IntBuffer requested_pixel_types() { return EXRHeader.nrequested_pixel_types(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link EXRHeader#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[256]")
         public ByteBuffer name() { return EXRHeader.nname(address()); }
-        /** @return the null-terminated string stored in the {@link EXRHeader#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[256]")
         public String nameString() { return EXRHeader.nnameString(address()); }
 
@@ -761,27 +751,27 @@ public class EXRHeader extends Struct<EXRHeader> implements NativeResource {
         public EXRHeader.Buffer tile_rounding_mode(int value) { EXRHeader.ntile_rounding_mode(address(), value); return this; }
         /** Sets the specified value to the {@code long_name} field. */
         public EXRHeader.Buffer long_name(@NativeType("int") boolean value) { EXRHeader.nlong_name(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link EXRHeader#non_image} field. */
+        /** Sets the specified value to the {@code non_image} field. */
         public EXRHeader.Buffer non_image(@NativeType("int") boolean value) { EXRHeader.nnon_image(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code multipart} field. */
         public EXRHeader.Buffer multipart(@NativeType("int") boolean value) { EXRHeader.nmultipart(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code header_len} field. */
         public EXRHeader.Buffer header_len(@NativeType("unsigned int") int value) { EXRHeader.nheader_len(address(), value); return this; }
-        /** Sets the specified value to the {@link EXRHeader#num_custom_attributes} field. */
+        /** Sets the specified value to the {@code num_custom_attributes} field. */
         public EXRHeader.Buffer num_custom_attributes(int value) { EXRHeader.nnum_custom_attributes(address(), value); return this; }
-        /** Sets the address of the specified {@link EXRAttribute.Buffer} to the {@link EXRHeader#custom_attributes} field. */
+        /** Sets the address of the specified {@link EXRAttribute.Buffer} to the {@code custom_attributes} field. */
         public EXRHeader.Buffer custom_attributes(@NativeType("EXRAttribute *") EXRAttribute.@Nullable Buffer value) { EXRHeader.ncustom_attributes(address(), value); return this; }
         /** Sets the address of the specified {@link EXRChannelInfo.Buffer} to the {@code channels} field. */
         public EXRHeader.Buffer channels(@NativeType("EXRChannelInfo *") EXRChannelInfo.Buffer value) { EXRHeader.nchannels(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link EXRHeader#pixel_types} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pixel_types} field. */
         public EXRHeader.Buffer pixel_types(@NativeType("int *") IntBuffer value) { EXRHeader.npixel_types(address(), value); return this; }
         /** Sets the specified value to the {@code num_channels} field. */
         public EXRHeader.Buffer num_channels(int value) { EXRHeader.nnum_channels(address(), value); return this; }
-        /** Sets the specified value to the {@link EXRHeader#compression_type} field. */
+        /** Sets the specified value to the {@code compression_type} field. */
         public EXRHeader.Buffer compression_type(int value) { EXRHeader.ncompression_type(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link EXRHeader#requested_pixel_types} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code requested_pixel_types} field. */
         public EXRHeader.Buffer requested_pixel_types(@NativeType("int *") IntBuffer value) { EXRHeader.nrequested_pixel_types(address(), value); return this; }
-        /** Copies the specified encoded string to the {@link EXRHeader#name} field. */
+        /** Copies the specified encoded string to the {@code name} field. */
         public EXRHeader.Buffer name(@NativeType("char[256]") ByteBuffer value) { EXRHeader.nname(address(), value); return this; }
 
     }

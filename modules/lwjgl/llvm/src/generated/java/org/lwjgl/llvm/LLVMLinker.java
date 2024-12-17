@@ -24,18 +24,6 @@ public class LLVMLinker {
 
     }
 
-    /**
-     * This enum is provided for backwards-compatibility only. It has no effect.
-     * 
-     * <p>({@code LLVMLinkerMode})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMLinkerDestroySource LinkerDestroySource} - This is the default behavior.</li>
-     * <li>{@link #LLVMLinkerPreserveSource_Removed LinkerPreserveSource_Removed} - This option has been deprecated and should not be used.</li>
-     * </ul>
-     */
     public static final int
         LLVMLinkerDestroySource          = 0,
         LLVMLinkerPreserveSource_Removed = 1;
@@ -46,12 +34,7 @@ public class LLVMLinker {
 
     // --- [ LLVMLinkModules2 ] ---
 
-    /**
-     * Links the source module into the destination module.
-     * 
-     * <p>The source module is destroyed. The return value is true if an error occurred, false otherwise. Use the diagnostic handler to get any diagnostic
-     * message.</p>
-     */
+    /** {@code LLVMBool LLVMLinkModules2(LLVMModuleRef Dest, LLVMModuleRef Src)} */
     @NativeType("LLVMBool")
     public static boolean LLVMLinkModules2(@NativeType("LLVMModuleRef") long Dest, @NativeType("LLVMModuleRef") long Src) {
         long __functionAddress = Functions.LinkModules2;

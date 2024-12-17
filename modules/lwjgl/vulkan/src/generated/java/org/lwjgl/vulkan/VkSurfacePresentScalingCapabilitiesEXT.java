@@ -16,34 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the presentation scaling capabilities of the surface.
- * 
- * <h5>Description</h5>
- * 
- * <p>Before creating a swapchain whose scaling mode <b>can</b> be specified through the use of {@link VkSwapchainPresentScalingCreateInfoEXT}, obtain the set of supported scaling modes by including a {@link VkSurfacePresentModeEXT} structure in the {@code pNext} chain of {@link VkPhysicalDeviceSurfaceInfo2KHR} when calling {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR}. The implementation <b>must</b> return the same values in {@link VkSurfacePresentScalingCapabilitiesEXT} for any of the compatible present modes as obtained through {@link VkSurfacePresentModeCompatibilityEXT}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSurfacePresentScalingCapabilitiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkPresentScalingFlagsEXT {@link #supportedPresentScaling};
- *     VkPresentGravityFlagsEXT {@link #supportedPresentGravityX};
- *     VkPresentGravityFlagsEXT {@link #supportedPresentGravityY};
- *     {@link VkExtent2D VkExtent2D} {@link #minScaledImageExtent};
- *     {@link VkExtent2D VkExtent2D} {@link #maxScaledImageExtent};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkPresentScalingFlagsEXT supportedPresentScaling;
+ *     VkPresentGravityFlagsEXT supportedPresentGravityX;
+ *     VkPresentGravityFlagsEXT supportedPresentGravityY;
+ *     {@link VkExtent2D VkExtent2D} minScaledImageExtent;
+ *     {@link VkExtent2D VkExtent2D} maxScaledImageExtent;
+ * }}</pre>
  */
 public class VkSurfacePresentScalingCapabilitiesEXT extends Struct<VkSurfacePresentScalingCapabilitiesEXT> implements NativeResource {
 
@@ -108,31 +90,31 @@ public class VkSurfacePresentScalingCapabilitiesEXT extends Struct<VkSurfacePres
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkPresentScalingFlagBitsEXT} representing the scaling methods supported by the surface, or 0 if application-defined scaling is not supported. */
+    /** @return the value of the {@code supportedPresentScaling} field. */
     @NativeType("VkPresentScalingFlagsEXT")
     public int supportedPresentScaling() { return nsupportedPresentScaling(address()); }
-    /** a bitmask of {@code VkPresentGravityFlagBitsEXT} representing the X-axis pixel gravity supported by the surface, or 0 if Vulkan-defined pixel gravity is not supported for the X axis. */
+    /** @return the value of the {@code supportedPresentGravityX} field. */
     @NativeType("VkPresentGravityFlagsEXT")
     public int supportedPresentGravityX() { return nsupportedPresentGravityX(address()); }
-    /** a bitmask of {@code VkPresentGravityFlagBitsEXT} representing the Y-axis pixel gravity supported by the surface, or 0 if Vulkan-defined pixel gravity is not supported for the Y axis. */
+    /** @return the value of the {@code supportedPresentGravityY} field. */
     @NativeType("VkPresentGravityFlagsEXT")
     public int supportedPresentGravityY() { return nsupportedPresentGravityY(address()); }
-    /** contains the smallest valid swapchain extent for the surface on the specified device when one of the scaling methods specified in {@code supportedPresentScaling} is used, or the special value <code>(0xFFFFFFFF, 0xFFFFFFFF)</code> indicating that the surface size will be determined by the extent of a swapchain targeting the surface. The {@code width} and {@code height} of the extent will each be smaller than or equal to the corresponding {@code width} and {@code height} of {@link VkSurfaceCapabilitiesKHR}{@code ::minImageExtent}. */
+    /** @return a {@link VkExtent2D} view of the {@code minScaledImageExtent} field. */
     public VkExtent2D minScaledImageExtent() { return nminScaledImageExtent(address()); }
-    /** contains the largest valid swapchain extent for the surface on the specified device when one of the scaling methods specified in {@code supportedPresentScaling} is used, or the special value described above for {@code minScaledImageExtent}. The {@code width} and {@code height} of the extent will each be greater than or equal to the corresponding {@code width} and {@code height} of {@link VkSurfaceCapabilitiesKHR}{@code ::maxImageExtent}. */
+    /** @return a {@link VkExtent2D} view of the {@code maxScaledImageExtent} field. */
     public VkExtent2D maxScaledImageExtent() { return nmaxScaledImageExtent(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSurfacePresentScalingCapabilitiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT} value to the {@code sType} field. */
     public VkSurfacePresentScalingCapabilitiesEXT sType$Default() { return sType(EXTSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSurfacePresentScalingCapabilitiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,31 +314,31 @@ public class VkSurfacePresentScalingCapabilitiesEXT extends Struct<VkSurfacePres
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSurfacePresentScalingCapabilitiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSurfacePresentScalingCapabilitiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkSurfacePresentScalingCapabilitiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSurfacePresentScalingCapabilitiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkSurfacePresentScalingCapabilitiesEXT#supportedPresentScaling} field. */
+        /** @return the value of the {@code supportedPresentScaling} field. */
         @NativeType("VkPresentScalingFlagsEXT")
         public int supportedPresentScaling() { return VkSurfacePresentScalingCapabilitiesEXT.nsupportedPresentScaling(address()); }
-        /** @return the value of the {@link VkSurfacePresentScalingCapabilitiesEXT#supportedPresentGravityX} field. */
+        /** @return the value of the {@code supportedPresentGravityX} field. */
         @NativeType("VkPresentGravityFlagsEXT")
         public int supportedPresentGravityX() { return VkSurfacePresentScalingCapabilitiesEXT.nsupportedPresentGravityX(address()); }
-        /** @return the value of the {@link VkSurfacePresentScalingCapabilitiesEXT#supportedPresentGravityY} field. */
+        /** @return the value of the {@code supportedPresentGravityY} field. */
         @NativeType("VkPresentGravityFlagsEXT")
         public int supportedPresentGravityY() { return VkSurfacePresentScalingCapabilitiesEXT.nsupportedPresentGravityY(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkSurfacePresentScalingCapabilitiesEXT#minScaledImageExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code minScaledImageExtent} field. */
         public VkExtent2D minScaledImageExtent() { return VkSurfacePresentScalingCapabilitiesEXT.nminScaledImageExtent(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkSurfacePresentScalingCapabilitiesEXT#maxScaledImageExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code maxScaledImageExtent} field. */
         public VkExtent2D maxScaledImageExtent() { return VkSurfacePresentScalingCapabilitiesEXT.nmaxScaledImageExtent(address()); }
 
-        /** Sets the specified value to the {@link VkSurfacePresentScalingCapabilitiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSurfacePresentScalingCapabilitiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfacePresentScalingCapabilitiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT} value to the {@link VkSurfacePresentScalingCapabilitiesEXT#sType} field. */
+        /** Sets the {@link EXTSurfaceMaintenance1#VK_STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT} value to the {@code sType} field. */
         public VkSurfacePresentScalingCapabilitiesEXT.Buffer sType$Default() { return sType(EXTSurfaceMaintenance1.VK_STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT); }
-        /** Sets the specified value to the {@link VkSurfacePresentScalingCapabilitiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSurfacePresentScalingCapabilitiesEXT.Buffer pNext(@NativeType("void *") long value) { VkSurfacePresentScalingCapabilitiesEXT.npNext(address(), value); return this; }
 
     }

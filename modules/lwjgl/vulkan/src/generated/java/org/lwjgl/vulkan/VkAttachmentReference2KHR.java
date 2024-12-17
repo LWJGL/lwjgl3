@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkAttachmentReference2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAttachmentReference2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t attachment;
  *     VkImageLayout layout;
  *     VkImageAspectFlags aspectMask;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkAttachmentReference2KHR extends VkAttachmentReference2 {
 

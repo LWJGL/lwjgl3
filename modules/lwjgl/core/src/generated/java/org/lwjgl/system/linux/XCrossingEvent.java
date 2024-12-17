@@ -17,28 +17,26 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XCrossingEvent {
- *     int {@link #type};
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
- *     Window {@link #window};
- *     Window {@link #root};
- *     Window {@link #subwindow};
- *     Time {@link #time};
- *     int {@link #x};
- *     int {@link #y};
- *     int {@link #x_root};
- *     int {@link #y_root};
- *     int {@link #mode};
+ *     int type;
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
+ *     Window window;
+ *     Window root;
+ *     Window subwindow;
+ *     Time time;
+ *     int x;
+ *     int y;
+ *     int x_root;
+ *     int y_root;
+ *     int mode;
  *     int detail;
- *     int {@link #same_screen};
- *     int {@link #focus};
- *     unsigned int {@link #state};
- * }</code></pre>
+ *     int same_screen;
+ *     int focus;
+ *     unsigned int state;
+ * }}</pre>
  */
 public class XCrossingEvent extends Struct<XCrossingEvent> implements NativeResource {
 
@@ -133,82 +131,82 @@ public class XCrossingEvent extends Struct<XCrossingEvent> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** of event */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** window it reported relative to */
+    /** @return the value of the {@code window} field. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** root window that the event occurred on */
+    /** @return the value of the {@code root} field. */
     @NativeType("Window")
     public long root() { return nroot(address()); }
-    /** child window */
+    /** @return the value of the {@code subwindow} field. */
     @NativeType("Window")
     public long subwindow() { return nsubwindow(address()); }
-    /** milliseconds */
+    /** @return the value of the {@code time} field. */
     @NativeType("Time")
     public long time() { return ntime(address()); }
-    /** pointer x coordinate in event window */
+    /** @return the value of the {@code x} field. */
     public int x() { return nx(address()); }
-    /** pointer y coordinate in event window */
+    /** @return the value of the {@code y} field. */
     public int y() { return ny(address()); }
-    /** x coordinate relative to {@code root} */
+    /** @return the value of the {@code x_root} field. */
     public int x_root() { return nx_root(address()); }
-    /** y coordinate relative to {@code root} */
+    /** @return the value of the {@code y_root} field. */
     public int y_root() { return ny_root(address()); }
-    /** one of:<br><table><tr><td>{@link X11#NotifyNormal}</td><td>{@link X11#NotifyGrab}</td><td>{@link X11#NotifyUngrab}</td></tr></table> */
+    /** @return the value of the {@code mode} field. */
     public int mode() { return nmode(address()); }
     /** @return the value of the {@code detail} field. */
     public int detail() { return ndetail(address()); }
-    /** same screen flag */
+    /** @return the value of the {@code same_screen} field. */
     public int same_screen() { return nsame_screen(address()); }
-    /** boolean focus */
+    /** @return the value of the {@code focus} field. */
     public int focus() { return nfocus(address()); }
-    /** key or button mask */
+    /** @return the value of the {@code state} field. */
     @NativeType("unsigned int")
     public int state() { return nstate(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XCrossingEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XCrossingEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XCrossingEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XCrossingEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #window} field. */
+    /** Sets the specified value to the {@code window} field. */
     public XCrossingEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
-    /** Sets the specified value to the {@link #root} field. */
+    /** Sets the specified value to the {@code root} field. */
     public XCrossingEvent root(@NativeType("Window") long value) { nroot(address(), value); return this; }
-    /** Sets the specified value to the {@link #subwindow} field. */
+    /** Sets the specified value to the {@code subwindow} field. */
     public XCrossingEvent subwindow(@NativeType("Window") long value) { nsubwindow(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XCrossingEvent time(@NativeType("Time") long value) { ntime(address(), value); return this; }
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public XCrossingEvent x(int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public XCrossingEvent y(int value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@link #x_root} field. */
+    /** Sets the specified value to the {@code x_root} field. */
     public XCrossingEvent x_root(int value) { nx_root(address(), value); return this; }
-    /** Sets the specified value to the {@link #y_root} field. */
+    /** Sets the specified value to the {@code y_root} field. */
     public XCrossingEvent y_root(int value) { ny_root(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public XCrossingEvent mode(int value) { nmode(address(), value); return this; }
     /** Sets the specified value to the {@code detail} field. */
     public XCrossingEvent detail(int value) { ndetail(address(), value); return this; }
-    /** Sets the specified value to the {@link #same_screen} field. */
+    /** Sets the specified value to the {@code same_screen} field. */
     public XCrossingEvent same_screen(int value) { nsame_screen(address(), value); return this; }
-    /** Sets the specified value to the {@link #focus} field. */
+    /** Sets the specified value to the {@code focus} field. */
     public XCrossingEvent focus(int value) { nfocus(address(), value); return this; }
-    /** Sets the specified value to the {@link #state} field. */
+    /** Sets the specified value to the {@code state} field. */
     public XCrossingEvent state(@NativeType("unsigned int") int value) { nstate(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -516,82 +514,82 @@ public class XCrossingEvent extends Struct<XCrossingEvent> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XCrossingEvent#type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XCrossingEvent.ntype(address()); }
-        /** @return the value of the {@link XCrossingEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XCrossingEvent.nserial(address()); }
-        /** @return the value of the {@link XCrossingEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XCrossingEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XCrossingEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XCrossingEvent.ndisplay(address()); }
-        /** @return the value of the {@link XCrossingEvent#window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("Window")
         public long window() { return XCrossingEvent.nwindow(address()); }
-        /** @return the value of the {@link XCrossingEvent#root} field. */
+        /** @return the value of the {@code root} field. */
         @NativeType("Window")
         public long root() { return XCrossingEvent.nroot(address()); }
-        /** @return the value of the {@link XCrossingEvent#subwindow} field. */
+        /** @return the value of the {@code subwindow} field. */
         @NativeType("Window")
         public long subwindow() { return XCrossingEvent.nsubwindow(address()); }
-        /** @return the value of the {@link XCrossingEvent#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("Time")
         public long time() { return XCrossingEvent.ntime(address()); }
-        /** @return the value of the {@link XCrossingEvent#x} field. */
+        /** @return the value of the {@code x} field. */
         public int x() { return XCrossingEvent.nx(address()); }
-        /** @return the value of the {@link XCrossingEvent#y} field. */
+        /** @return the value of the {@code y} field. */
         public int y() { return XCrossingEvent.ny(address()); }
-        /** @return the value of the {@link XCrossingEvent#x_root} field. */
+        /** @return the value of the {@code x_root} field. */
         public int x_root() { return XCrossingEvent.nx_root(address()); }
-        /** @return the value of the {@link XCrossingEvent#y_root} field. */
+        /** @return the value of the {@code y_root} field. */
         public int y_root() { return XCrossingEvent.ny_root(address()); }
-        /** @return the value of the {@link XCrossingEvent#mode} field. */
+        /** @return the value of the {@code mode} field. */
         public int mode() { return XCrossingEvent.nmode(address()); }
         /** @return the value of the {@code detail} field. */
         public int detail() { return XCrossingEvent.ndetail(address()); }
-        /** @return the value of the {@link XCrossingEvent#same_screen} field. */
+        /** @return the value of the {@code same_screen} field. */
         public int same_screen() { return XCrossingEvent.nsame_screen(address()); }
-        /** @return the value of the {@link XCrossingEvent#focus} field. */
+        /** @return the value of the {@code focus} field. */
         public int focus() { return XCrossingEvent.nfocus(address()); }
-        /** @return the value of the {@link XCrossingEvent#state} field. */
+        /** @return the value of the {@code state} field. */
         @NativeType("unsigned int")
         public int state() { return XCrossingEvent.nstate(address()); }
 
-        /** Sets the specified value to the {@link XCrossingEvent#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XCrossingEvent.Buffer type(int value) { XCrossingEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XCrossingEvent.Buffer serial(@NativeType("unsigned long") long value) { XCrossingEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XCrossingEvent.Buffer send_event(@NativeType("Bool") boolean value) { XCrossingEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XCrossingEvent.Buffer display(@NativeType("Display *") long value) { XCrossingEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#window} field. */
+        /** Sets the specified value to the {@code window} field. */
         public XCrossingEvent.Buffer window(@NativeType("Window") long value) { XCrossingEvent.nwindow(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#root} field. */
+        /** Sets the specified value to the {@code root} field. */
         public XCrossingEvent.Buffer root(@NativeType("Window") long value) { XCrossingEvent.nroot(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#subwindow} field. */
+        /** Sets the specified value to the {@code subwindow} field. */
         public XCrossingEvent.Buffer subwindow(@NativeType("Window") long value) { XCrossingEvent.nsubwindow(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XCrossingEvent.Buffer time(@NativeType("Time") long value) { XCrossingEvent.ntime(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public XCrossingEvent.Buffer x(int value) { XCrossingEvent.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public XCrossingEvent.Buffer y(int value) { XCrossingEvent.ny(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#x_root} field. */
+        /** Sets the specified value to the {@code x_root} field. */
         public XCrossingEvent.Buffer x_root(int value) { XCrossingEvent.nx_root(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#y_root} field. */
+        /** Sets the specified value to the {@code y_root} field. */
         public XCrossingEvent.Buffer y_root(int value) { XCrossingEvent.ny_root(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public XCrossingEvent.Buffer mode(int value) { XCrossingEvent.nmode(address(), value); return this; }
         /** Sets the specified value to the {@code detail} field. */
         public XCrossingEvent.Buffer detail(int value) { XCrossingEvent.ndetail(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#same_screen} field. */
+        /** Sets the specified value to the {@code same_screen} field. */
         public XCrossingEvent.Buffer same_screen(int value) { XCrossingEvent.nsame_screen(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#focus} field. */
+        /** Sets the specified value to the {@code focus} field. */
         public XCrossingEvent.Buffer focus(int value) { XCrossingEvent.nfocus(address(), value); return this; }
-        /** Sets the specified value to the {@link XCrossingEvent#state} field. */
+        /** Sets the specified value to the {@code state} field. */
         public XCrossingEvent.Buffer state(@NativeType("unsigned int") int value) { XCrossingEvent.nstate(address(), value); return this; }
 
     }

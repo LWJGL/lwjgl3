@@ -19,26 +19,24 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH265SliceSegmentHeader {
  *     {@link StdVideoEncodeH265SliceSegmentHeaderFlags StdVideoEncodeH265SliceSegmentHeaderFlags} flags;
  *     StdVideoH265SliceType slice_type;
  *     uint32_t slice_segment_address;
  *     uint8_t collocated_ref_idx;
  *     uint8_t MaxNumMergeCand;
- *     int8_t {@link #slice_cb_qp_offset};
- *     int8_t {@link #slice_cr_qp_offset};
- *     int8_t {@link #slice_beta_offset_div2};
- *     int8_t {@link #slice_tc_offset_div2};
+ *     int8_t slice_cb_qp_offset;
+ *     int8_t slice_cr_qp_offset;
+ *     int8_t slice_beta_offset_div2;
+ *     int8_t slice_tc_offset_div2;
  *     int8_t slice_act_y_qp_offset;
  *     int8_t slice_act_cb_qp_offset;
  *     int8_t slice_act_cr_qp_offset;
  *     int8_t slice_qp_delta;
  *     uint16_t reserved1;
  *     {@link StdVideoEncodeH265WeightTable StdVideoEncodeH265WeightTable} const * pWeightTable;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH265SliceSegmentHeader extends Struct<StdVideoEncodeH265SliceSegmentHeader> implements NativeResource {
 
@@ -141,16 +139,16 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct<StdVideoEncodeH
     /** @return the value of the {@code MaxNumMergeCand} field. */
     @NativeType("uint8_t")
     public byte MaxNumMergeCand() { return nMaxNumMergeCand(address()); }
-    /** [-12, 12] */
+    /** @return the value of the {@code slice_cb_qp_offset} field. */
     @NativeType("int8_t")
     public byte slice_cb_qp_offset() { return nslice_cb_qp_offset(address()); }
-    /** [-12, 12] */
+    /** @return the value of the {@code slice_cr_qp_offset} field. */
     @NativeType("int8_t")
     public byte slice_cr_qp_offset() { return nslice_cr_qp_offset(address()); }
-    /** [-6, 6] */
+    /** @return the value of the {@code slice_beta_offset_div2} field. */
     @NativeType("int8_t")
     public byte slice_beta_offset_div2() { return nslice_beta_offset_div2(address()); }
-    /** [-6, 6] */
+    /** @return the value of the {@code slice_tc_offset_div2} field. */
     @NativeType("int8_t")
     public byte slice_tc_offset_div2() { return nslice_tc_offset_div2(address()); }
     /** @return the value of the {@code slice_act_y_qp_offset} field. */
@@ -181,13 +179,13 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct<StdVideoEncodeH
     public StdVideoEncodeH265SliceSegmentHeader collocated_ref_idx(@NativeType("uint8_t") byte value) { ncollocated_ref_idx(address(), value); return this; }
     /** Sets the specified value to the {@code MaxNumMergeCand} field. */
     public StdVideoEncodeH265SliceSegmentHeader MaxNumMergeCand(@NativeType("uint8_t") byte value) { nMaxNumMergeCand(address(), value); return this; }
-    /** Sets the specified value to the {@link #slice_cb_qp_offset} field. */
+    /** Sets the specified value to the {@code slice_cb_qp_offset} field. */
     public StdVideoEncodeH265SliceSegmentHeader slice_cb_qp_offset(@NativeType("int8_t") byte value) { nslice_cb_qp_offset(address(), value); return this; }
-    /** Sets the specified value to the {@link #slice_cr_qp_offset} field. */
+    /** Sets the specified value to the {@code slice_cr_qp_offset} field. */
     public StdVideoEncodeH265SliceSegmentHeader slice_cr_qp_offset(@NativeType("int8_t") byte value) { nslice_cr_qp_offset(address(), value); return this; }
-    /** Sets the specified value to the {@link #slice_beta_offset_div2} field. */
+    /** Sets the specified value to the {@code slice_beta_offset_div2} field. */
     public StdVideoEncodeH265SliceSegmentHeader slice_beta_offset_div2(@NativeType("int8_t") byte value) { nslice_beta_offset_div2(address(), value); return this; }
-    /** Sets the specified value to the {@link #slice_tc_offset_div2} field. */
+    /** Sets the specified value to the {@code slice_tc_offset_div2} field. */
     public StdVideoEncodeH265SliceSegmentHeader slice_tc_offset_div2(@NativeType("int8_t") byte value) { nslice_tc_offset_div2(address(), value); return this; }
     /** Sets the specified value to the {@code slice_act_y_qp_offset} field. */
     public StdVideoEncodeH265SliceSegmentHeader slice_act_y_qp_offset(@NativeType("int8_t") byte value) { nslice_act_y_qp_offset(address(), value); return this; }
@@ -484,16 +482,16 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct<StdVideoEncodeH
         /** @return the value of the {@code MaxNumMergeCand} field. */
         @NativeType("uint8_t")
         public byte MaxNumMergeCand() { return StdVideoEncodeH265SliceSegmentHeader.nMaxNumMergeCand(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeader#slice_cb_qp_offset} field. */
+        /** @return the value of the {@code slice_cb_qp_offset} field. */
         @NativeType("int8_t")
         public byte slice_cb_qp_offset() { return StdVideoEncodeH265SliceSegmentHeader.nslice_cb_qp_offset(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeader#slice_cr_qp_offset} field. */
+        /** @return the value of the {@code slice_cr_qp_offset} field. */
         @NativeType("int8_t")
         public byte slice_cr_qp_offset() { return StdVideoEncodeH265SliceSegmentHeader.nslice_cr_qp_offset(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeader#slice_beta_offset_div2} field. */
+        /** @return the value of the {@code slice_beta_offset_div2} field. */
         @NativeType("int8_t")
         public byte slice_beta_offset_div2() { return StdVideoEncodeH265SliceSegmentHeader.nslice_beta_offset_div2(address()); }
-        /** @return the value of the {@link StdVideoEncodeH265SliceSegmentHeader#slice_tc_offset_div2} field. */
+        /** @return the value of the {@code slice_tc_offset_div2} field. */
         @NativeType("int8_t")
         public byte slice_tc_offset_div2() { return StdVideoEncodeH265SliceSegmentHeader.nslice_tc_offset_div2(address()); }
         /** @return the value of the {@code slice_act_y_qp_offset} field. */
@@ -524,13 +522,13 @@ public class StdVideoEncodeH265SliceSegmentHeader extends Struct<StdVideoEncodeH
         public StdVideoEncodeH265SliceSegmentHeader.Buffer collocated_ref_idx(@NativeType("uint8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.ncollocated_ref_idx(address(), value); return this; }
         /** Sets the specified value to the {@code MaxNumMergeCand} field. */
         public StdVideoEncodeH265SliceSegmentHeader.Buffer MaxNumMergeCand(@NativeType("uint8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nMaxNumMergeCand(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeader#slice_cb_qp_offset} field. */
+        /** Sets the specified value to the {@code slice_cb_qp_offset} field. */
         public StdVideoEncodeH265SliceSegmentHeader.Buffer slice_cb_qp_offset(@NativeType("int8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nslice_cb_qp_offset(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeader#slice_cr_qp_offset} field. */
+        /** Sets the specified value to the {@code slice_cr_qp_offset} field. */
         public StdVideoEncodeH265SliceSegmentHeader.Buffer slice_cr_qp_offset(@NativeType("int8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nslice_cr_qp_offset(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeader#slice_beta_offset_div2} field. */
+        /** Sets the specified value to the {@code slice_beta_offset_div2} field. */
         public StdVideoEncodeH265SliceSegmentHeader.Buffer slice_beta_offset_div2(@NativeType("int8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nslice_beta_offset_div2(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoEncodeH265SliceSegmentHeader#slice_tc_offset_div2} field. */
+        /** Sets the specified value to the {@code slice_tc_offset_div2} field. */
         public StdVideoEncodeH265SliceSegmentHeader.Buffer slice_tc_offset_div2(@NativeType("int8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nslice_tc_offset_div2(address(), value); return this; }
         /** Sets the specified value to the {@code slice_act_y_qp_offset} field. */
         public StdVideoEncodeH265SliceSegmentHeader.Buffer slice_act_y_qp_offset(@NativeType("int8_t") byte value) { StdVideoEncodeH265SliceSegmentHeader.nslice_act_y_qp_offset(address(), value); return this; }

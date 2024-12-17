@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkImageSparseMemoryRequirementsInfo2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageSparseMemoryRequirementsInfo2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkImage image;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkImageSparseMemoryRequirementsInfo2KHR extends VkImageSparseMemoryRequirementsInfo2 {
 

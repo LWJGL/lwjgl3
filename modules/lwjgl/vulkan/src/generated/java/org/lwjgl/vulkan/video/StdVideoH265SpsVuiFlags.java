@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265SpsVuiFlags {
  *     uint32_t aspect_ratio_info_present_flag : 1;
  *     uint32_t overscan_info_present_flag : 1;
@@ -38,7 +36,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t tiles_fixed_structure_flag : 1;
  *     uint32_t motion_vectors_over_pic_boundaries_flag : 1;
  *     uint32_t restricted_ref_pic_lists_flag : 1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH265SpsVuiFlags extends Struct<StdVideoH265SpsVuiFlags> implements NativeResource {
 

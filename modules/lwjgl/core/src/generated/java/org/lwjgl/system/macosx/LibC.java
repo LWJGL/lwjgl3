@@ -10,7 +10,6 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
 
-/** Native bindings to libc, the Standard C Library. */
 public class LibC {
 
     /** Contains the function pointers loaded from {@code LibSystem.getLibrary()}. */
@@ -30,7 +29,7 @@ public class LibC {
 
     // --- [ getpid ] ---
 
-    /** Returns the process ID of the calling process. */
+    /** {@code pid_t getpid(void)} */
     @NativeType("pid_t")
     public static long getpid() {
         long __functionAddress = Functions.getpid;

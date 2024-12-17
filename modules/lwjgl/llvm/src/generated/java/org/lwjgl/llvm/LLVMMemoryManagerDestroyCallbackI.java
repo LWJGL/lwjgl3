@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMExecutionEngine#LLVMCreateSimpleMCJITMemoryManager CreateSimpleMCJITMemoryManager} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *Opaque
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (void *)")
 public interface LLVMMemoryManagerDestroyCallbackI extends CallbackI {
@@ -42,6 +33,7 @@ public interface LLVMMemoryManagerDestroyCallbackI extends CallbackI {
         );
     }
 
+    /** {@code void (*) (void * Opaque)} */
     void invoke(@NativeType("void *") long Opaque);
 
 }

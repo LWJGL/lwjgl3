@@ -17,35 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure representing an array of locations to apply force feedback to.
- * 
- * <h5>Description</h5>
- * 
- * <p>Contains an array of {@link XrForceFeedbackCurlApplyLocationMNDX} that contains information on locations to apply force feedback to.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MNDXForceFeedbackCurl XR_MNDX_force_feedback_curl} extension <b>must</b> be enabled prior to using {@link XrForceFeedbackCurlApplyLocationsMNDX}</li>
- * <li>{@code type} <b>must</b> be {@link MNDXForceFeedbackCurl#XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code locations} <b>must</b> be a pointer to an array of {@code locationCount} {@link XrForceFeedbackCurlApplyLocationMNDX} structures</li>
- * <li>The {@code locationCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrForceFeedbackCurlApplyLocationMNDX}, {@link MNDXForceFeedbackCurl#xrApplyForceFeedbackCurlMNDX ApplyForceFeedbackCurlMNDX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrForceFeedbackCurlApplyLocationsMNDX {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #locationCount};
- *     {@link XrForceFeedbackCurlApplyLocationMNDX XrForceFeedbackCurlApplyLocationMNDX} * {@link #locations};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t locationCount;
+ *     {@link XrForceFeedbackCurlApplyLocationMNDX XrForceFeedbackCurlApplyLocationMNDX} * locations;
+ * }}</pre>
  */
 public class XrForceFeedbackCurlApplyLocationsMNDX extends Struct<XrForceFeedbackCurlApplyLocationsMNDX> implements NativeResource {
 
@@ -101,26 +79,26 @@ public class XrForceFeedbackCurlApplyLocationsMNDX extends Struct<XrForceFeedbac
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of elements in the {@code locations} array. */
+    /** @return the value of the {@code locationCount} field. */
     @NativeType("uint32_t")
     public int locationCount() { return nlocationCount(address()); }
-    /** a pointer to an array of locations to apply force feedback. */
+    /** @return a {@link XrForceFeedbackCurlApplyLocationMNDX.Buffer} view of the struct array pointed to by the {@code locations} field. */
     @NativeType("XrForceFeedbackCurlApplyLocationMNDX *")
     public XrForceFeedbackCurlApplyLocationMNDX.Buffer locations() { return nlocations(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrForceFeedbackCurlApplyLocationsMNDX type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MNDXForceFeedbackCurl#XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX} value to the {@link #type} field. */
+    /** Sets the {@link MNDXForceFeedbackCurl#XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX} value to the {@code type} field. */
     public XrForceFeedbackCurlApplyLocationsMNDX type$Default() { return type(MNDXForceFeedbackCurl.XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrForceFeedbackCurlApplyLocationsMNDX next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrForceFeedbackCurlApplyLocationMNDX.Buffer} to the {@link #locations} field. */
+    /** Sets the address of the specified {@link XrForceFeedbackCurlApplyLocationMNDX.Buffer} to the {@code locations} field. */
     public XrForceFeedbackCurlApplyLocationsMNDX locations(@NativeType("XrForceFeedbackCurlApplyLocationMNDX *") XrForceFeedbackCurlApplyLocationMNDX.Buffer value) { nlocations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,26 +307,26 @@ public class XrForceFeedbackCurlApplyLocationsMNDX extends Struct<XrForceFeedbac
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrForceFeedbackCurlApplyLocationsMNDX#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrForceFeedbackCurlApplyLocationsMNDX.ntype(address()); }
-        /** @return the value of the {@link XrForceFeedbackCurlApplyLocationsMNDX#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrForceFeedbackCurlApplyLocationsMNDX.nnext(address()); }
-        /** @return the value of the {@link XrForceFeedbackCurlApplyLocationsMNDX#locationCount} field. */
+        /** @return the value of the {@code locationCount} field. */
         @NativeType("uint32_t")
         public int locationCount() { return XrForceFeedbackCurlApplyLocationsMNDX.nlocationCount(address()); }
-        /** @return a {@link XrForceFeedbackCurlApplyLocationMNDX.Buffer} view of the struct array pointed to by the {@link XrForceFeedbackCurlApplyLocationsMNDX#locations} field. */
+        /** @return a {@link XrForceFeedbackCurlApplyLocationMNDX.Buffer} view of the struct array pointed to by the {@code locations} field. */
         @NativeType("XrForceFeedbackCurlApplyLocationMNDX *")
         public XrForceFeedbackCurlApplyLocationMNDX.Buffer locations() { return XrForceFeedbackCurlApplyLocationsMNDX.nlocations(address()); }
 
-        /** Sets the specified value to the {@link XrForceFeedbackCurlApplyLocationsMNDX#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrForceFeedbackCurlApplyLocationsMNDX.Buffer type(@NativeType("XrStructureType") int value) { XrForceFeedbackCurlApplyLocationsMNDX.ntype(address(), value); return this; }
-        /** Sets the {@link MNDXForceFeedbackCurl#XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX} value to the {@link XrForceFeedbackCurlApplyLocationsMNDX#type} field. */
+        /** Sets the {@link MNDXForceFeedbackCurl#XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX} value to the {@code type} field. */
         public XrForceFeedbackCurlApplyLocationsMNDX.Buffer type$Default() { return type(MNDXForceFeedbackCurl.XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX); }
-        /** Sets the specified value to the {@link XrForceFeedbackCurlApplyLocationsMNDX#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrForceFeedbackCurlApplyLocationsMNDX.Buffer next(@NativeType("void const *") long value) { XrForceFeedbackCurlApplyLocationsMNDX.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrForceFeedbackCurlApplyLocationMNDX.Buffer} to the {@link XrForceFeedbackCurlApplyLocationsMNDX#locations} field. */
+        /** Sets the address of the specified {@link XrForceFeedbackCurlApplyLocationMNDX.Buffer} to the {@code locations} field. */
         public XrForceFeedbackCurlApplyLocationsMNDX.Buffer locations(@NativeType("XrForceFeedbackCurlApplyLocationMNDX *") XrForceFeedbackCurlApplyLocationMNDX.Buffer value) { XrForceFeedbackCurlApplyLocationsMNDX.nlocations(address(), value); return this; }
 
     }

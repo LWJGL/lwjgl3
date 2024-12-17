@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_BUFFER_INFO {
  *     int currentusage;
  *     int peakusage;
  *     int capacity;
  *     int stallcount;
  *     float stalltime;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_BUFFER_INFO extends Struct<FMOD_STUDIO_BUFFER_INFO> implements NativeResource {
 

@@ -17,21 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Custom heap memory allocator.
- * 
- * <p>This describes a custom heap memory allocator for GLFW. To set an allocator, pass it to {@link GLFW#glfwInitAllocator InitAllocator} before initializing the library.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct GLFWallocator {
- *     {@link GLFWAllocateCallbackI GLFWallocatefun} {@link #allocate};
- *     {@link GLFWReallocateCallbackI GLFWreallocatefun} {@link #reallocate};
- *     {@link GLFWDeallocateCallbackI GLFWdeallocatefun} {@link #deallocate};
- *     void * {@link #user};
- * }</code></pre>
- *
- * @since version 3.4
+ *     {@link GLFWAllocateCallbackI GLFWallocatefun} allocate;
+ *     {@link GLFWReallocateCallbackI GLFWreallocatefun} reallocate;
+ *     {@link GLFWDeallocateCallbackI GLFWdeallocatefun} deallocate;
+ *     void * user;
+ * }}</pre>
  */
 @NativeType("struct GLFWallocator")
 public class GLFWAllocator extends Struct<GLFWAllocator> implements NativeResource {
@@ -88,26 +80,26 @@ public class GLFWAllocator extends Struct<GLFWAllocator> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the memory allocation function */
+    /** @return the value of the {@code allocate} field. */
     @NativeType("GLFWallocatefun")
     public GLFWAllocateCallback allocate() { return nallocate(address()); }
-    /** the memory reallocation function */
+    /** @return the value of the {@code reallocate} field. */
     @NativeType("GLFWreallocatefun")
     public GLFWReallocateCallback reallocate() { return nreallocate(address()); }
-    /** the memory deallocation function */
+    /** @return the value of the {@code deallocate} field. */
     @NativeType("GLFWdeallocatefun")
     public GLFWDeallocateCallback deallocate() { return ndeallocate(address()); }
-    /** the user pointer for this custom allocator. This value will be passed to the allocator functions. */
+    /** @return the value of the {@code user} field. */
     @NativeType("void *")
     public long user() { return nuser(address()); }
 
-    /** Sets the specified value to the {@link #allocate} field. */
+    /** Sets the specified value to the {@code allocate} field. */
     public GLFWAllocator allocate(@NativeType("GLFWallocatefun") GLFWAllocateCallbackI value) { nallocate(address(), value); return this; }
-    /** Sets the specified value to the {@link #reallocate} field. */
+    /** Sets the specified value to the {@code reallocate} field. */
     public GLFWAllocator reallocate(@NativeType("GLFWreallocatefun") GLFWReallocateCallbackI value) { nreallocate(address(), value); return this; }
-    /** Sets the specified value to the {@link #deallocate} field. */
+    /** Sets the specified value to the {@code deallocate} field. */
     public GLFWAllocator deallocate(@NativeType("GLFWdeallocatefun") GLFWDeallocateCallbackI value) { ndeallocate(address(), value); return this; }
-    /** Sets the specified value to the {@link #user} field. */
+    /** Sets the specified value to the {@code user} field. */
     public GLFWAllocator user(@NativeType("void *") long value) { nuser(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,26 +312,26 @@ public class GLFWAllocator extends Struct<GLFWAllocator> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link GLFWAllocator#allocate} field. */
+        /** @return the value of the {@code allocate} field. */
         @NativeType("GLFWallocatefun")
         public GLFWAllocateCallback allocate() { return GLFWAllocator.nallocate(address()); }
-        /** @return the value of the {@link GLFWAllocator#reallocate} field. */
+        /** @return the value of the {@code reallocate} field. */
         @NativeType("GLFWreallocatefun")
         public GLFWReallocateCallback reallocate() { return GLFWAllocator.nreallocate(address()); }
-        /** @return the value of the {@link GLFWAllocator#deallocate} field. */
+        /** @return the value of the {@code deallocate} field. */
         @NativeType("GLFWdeallocatefun")
         public GLFWDeallocateCallback deallocate() { return GLFWAllocator.ndeallocate(address()); }
-        /** @return the value of the {@link GLFWAllocator#user} field. */
+        /** @return the value of the {@code user} field. */
         @NativeType("void *")
         public long user() { return GLFWAllocator.nuser(address()); }
 
-        /** Sets the specified value to the {@link GLFWAllocator#allocate} field. */
+        /** Sets the specified value to the {@code allocate} field. */
         public GLFWAllocator.Buffer allocate(@NativeType("GLFWallocatefun") GLFWAllocateCallbackI value) { GLFWAllocator.nallocate(address(), value); return this; }
-        /** Sets the specified value to the {@link GLFWAllocator#reallocate} field. */
+        /** Sets the specified value to the {@code reallocate} field. */
         public GLFWAllocator.Buffer reallocate(@NativeType("GLFWreallocatefun") GLFWReallocateCallbackI value) { GLFWAllocator.nreallocate(address(), value); return this; }
-        /** Sets the specified value to the {@link GLFWAllocator#deallocate} field. */
+        /** Sets the specified value to the {@code deallocate} field. */
         public GLFWAllocator.Buffer deallocate(@NativeType("GLFWdeallocatefun") GLFWDeallocateCallbackI value) { GLFWAllocator.ndeallocate(address(), value); return this; }
-        /** Sets the specified value to the {@link GLFWAllocator#user} field. */
+        /** Sets the specified value to the {@code user} field. */
         public GLFWAllocator.Buffer user(@NativeType("void *") long value) { GLFWAllocator.nuser(address(), value); return this; }
 
     }

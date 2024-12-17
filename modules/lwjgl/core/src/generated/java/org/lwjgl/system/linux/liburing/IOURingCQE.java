@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * IO completion data structure (Completion Queue Entry).
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_cqe {
- *     __u64 {@link #user_data};
- *     __s32 {@link #res};
- *     __u32 {@link #flags};
- *     __u64 {@link #big_cqe}[0];
- * }</code></pre>
+ *     __u64 user_data;
+ *     __s32 res;
+ *     __u32 flags;
+ *     __u64 big_cqe[0];
+ * }}</pre>
  */
 @NativeType("struct io_uring_cqe")
 public class IOURingCQE extends Struct<IOURingCQE> implements NativeResource {
@@ -84,42 +80,31 @@ public class IOURingCQE extends Struct<IOURingCQE> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * is copied from the field of the same name in the submission queue entry.
-     * 
-     * <p>The primary use case is to store data that the application will need to access upon completion of this particular I/O.</p>
-     */
+    /** @return the value of the {@code user_data} field. */
     @NativeType("__u64")
     public long user_data() { return nuser_data(address()); }
-    /**
-     * is the operation-specific result, but {@code io_uring}-specific errors (e.g. {@code flags} or {@code opcode} invalid) are returned through this field.
-     * 
-     * <p>For read and write {@code opcodes}, the return values match {@code errno} values documented in the {@code preadv2(2)} and {@code pwritev2(2)} man
-     * pages, with {@code res} holding the equivalent of {@code -errno} for error cases, or the transferred number of bytes in case the operation is
-     * successful. Hence both error and success return can be found in that field in the CQE. For other request types, the return values are documented in the
-     * matching man page for that type, or in the {@code opcodes} section for {@code io_uring}-specific {@code opcodes}.</p>
-     */
+    /** @return the value of the {@code res} field. */
     @NativeType("__s32")
     public int res() { return nres(address()); }
-    /** is used for certain commands, like {@link LibIOURing#IORING_OP_POLL_ADD OP_POLL_ADD} or in conjunction with {@link LibIOURing#IOSQE_BUFFER_SELECT}, see those entries */
+    /** @return the value of the {@code flags} field. */
     @NativeType("__u32")
     public int flags() { return nflags(address()); }
-    /** If the ring is initialized with {@link LibIOURing#IORING_SETUP_CQE32 SETUP_CQE32}, then this field contains 16-bytes of padding, doubling the size of the CQE. */
+    /** @return a {@link LongBuffer} view of the {@code big_cqe} field. */
     @NativeType("__u64[0]")
     public LongBuffer big_cqe() { return nbig_cqe(address()); }
-    /** If the ring is initialized with {@link LibIOURing#IORING_SETUP_CQE32 SETUP_CQE32}, then this field contains 16-bytes of padding, doubling the size of the CQE. */
+    /** @return the value at the specified index of the {@code big_cqe} field. */
     @NativeType("__u64")
     public long big_cqe(int index) { return nbig_cqe(address(), index); }
 
-    /** Sets the specified value to the {@link #user_data} field. */
+    /** Sets the specified value to the {@code user_data} field. */
     public IOURingCQE user_data(@NativeType("__u64") long value) { nuser_data(address(), value); return this; }
-    /** Sets the specified value to the {@link #res} field. */
+    /** Sets the specified value to the {@code res} field. */
     public IOURingCQE res(@NativeType("__s32") int value) { nres(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public IOURingCQE flags(@NativeType("__u32") int value) { nflags(address(), value); return this; }
-    /** Copies the specified {@link LongBuffer} to the {@link #big_cqe} field. */
+    /** Copies the specified {@link LongBuffer} to the {@code big_cqe} field. */
     public IOURingCQE big_cqe(@NativeType("__u64[0]") LongBuffer value) { nbig_cqe(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #big_cqe} field. */
+    /** Sets the specified value at the specified index of the {@code big_cqe} field. */
     public IOURingCQE big_cqe(int index, @NativeType("__u64") long value) { nbig_cqe(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,31 +317,31 @@ public class IOURingCQE extends Struct<IOURingCQE> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link IOURingCQE#user_data} field. */
+        /** @return the value of the {@code user_data} field. */
         @NativeType("__u64")
         public long user_data() { return IOURingCQE.nuser_data(address()); }
-        /** @return the value of the {@link IOURingCQE#res} field. */
+        /** @return the value of the {@code res} field. */
         @NativeType("__s32")
         public int res() { return IOURingCQE.nres(address()); }
-        /** @return the value of the {@link IOURingCQE#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("__u32")
         public int flags() { return IOURingCQE.nflags(address()); }
-        /** @return a {@link LongBuffer} view of the {@link IOURingCQE#big_cqe} field. */
+        /** @return a {@link LongBuffer} view of the {@code big_cqe} field. */
         @NativeType("__u64[0]")
         public LongBuffer big_cqe() { return IOURingCQE.nbig_cqe(address()); }
-        /** @return the value at the specified index of the {@link IOURingCQE#big_cqe} field. */
+        /** @return the value at the specified index of the {@code big_cqe} field. */
         @NativeType("__u64")
         public long big_cqe(int index) { return IOURingCQE.nbig_cqe(address(), index); }
 
-        /** Sets the specified value to the {@link IOURingCQE#user_data} field. */
+        /** Sets the specified value to the {@code user_data} field. */
         public IOURingCQE.Buffer user_data(@NativeType("__u64") long value) { IOURingCQE.nuser_data(address(), value); return this; }
-        /** Sets the specified value to the {@link IOURingCQE#res} field. */
+        /** Sets the specified value to the {@code res} field. */
         public IOURingCQE.Buffer res(@NativeType("__s32") int value) { IOURingCQE.nres(address(), value); return this; }
-        /** Sets the specified value to the {@link IOURingCQE#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public IOURingCQE.Buffer flags(@NativeType("__u32") int value) { IOURingCQE.nflags(address(), value); return this; }
-        /** Copies the specified {@link LongBuffer} to the {@link IOURingCQE#big_cqe} field. */
+        /** Copies the specified {@link LongBuffer} to the {@code big_cqe} field. */
         public IOURingCQE.Buffer big_cqe(@NativeType("__u64[0]") LongBuffer value) { IOURingCQE.nbig_cqe(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link IOURingCQE#big_cqe} field. */
+        /** Sets the specified value at the specified index of the {@code big_cqe} field. */
         public IOURingCQE.Buffer big_cqe(int index, @NativeType("__u64") long value) { IOURingCQE.nbig_cqe(address(), index, value); return this; }
 
     }

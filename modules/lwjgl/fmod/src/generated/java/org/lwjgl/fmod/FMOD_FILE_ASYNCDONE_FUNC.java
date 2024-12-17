@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     struct FMOD_ASYNCREADINFO *info,
- *     FMOD_RESULT result
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_FILE_ASYNCDONE_FUNC} */
 public abstract class FMOD_FILE_ASYNCDONE_FUNC extends Callback implements FMOD_FILE_ASYNCDONE_FUNCI {
 
     /**

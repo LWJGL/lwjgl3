@@ -15,7 +15,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Contains bindings to <a href="https://developer.nvidia.com/cuda-zone">CUDA</a> profiler control functions of the low-level CUDA driver API. */
 public class CUDAProfiler {
 
     /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
@@ -31,16 +30,6 @@ public class CUDAProfiler {
 
     }
 
-    /**
-     * {@code CUoutput_mode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CU_OUT_KEY_VALUE_PAIR OUT_KEY_VALUE_PAIR}</li>
-     * <li>{@link #CU_OUT_CSV OUT_CSV}</li>
-     * </ul>
-     */
     public static final int
         CU_OUT_KEY_VALUE_PAIR = 0x0,
         CU_OUT_CSV            = 0x1;
@@ -51,11 +40,13 @@ public class CUDAProfiler {
 
     // --- [ cuProfilerInitialize ] ---
 
+    /** {@code CUresult cuProfilerInitialize(char const * configFile, char const * outputFile, CUoutput_mode outputMode)} */
     public static int ncuProfilerInitialize(long configFile, long outputFile, int outputMode) {
         long __functionAddress = Functions.ProfilerInitialize;
         return callPPI(configFile, outputFile, outputMode, __functionAddress);
     }
 
+    /** {@code CUresult cuProfilerInitialize(char const * configFile, char const * outputFile, CUoutput_mode outputMode)} */
     @NativeType("CUresult")
     public static int cuProfilerInitialize(@NativeType("char const *") ByteBuffer configFile, @NativeType("char const *") ByteBuffer outputFile, @NativeType("CUoutput_mode") int outputMode) {
         if (CHECKS) {
@@ -65,6 +56,7 @@ public class CUDAProfiler {
         return ncuProfilerInitialize(memAddress(configFile), memAddress(outputFile), outputMode);
     }
 
+    /** {@code CUresult cuProfilerInitialize(char const * configFile, char const * outputFile, CUoutput_mode outputMode)} */
     @NativeType("CUresult")
     public static int cuProfilerInitialize(@NativeType("char const *") CharSequence configFile, @NativeType("char const *") CharSequence outputFile, @NativeType("CUoutput_mode") int outputMode) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -81,6 +73,7 @@ public class CUDAProfiler {
 
     // --- [ cuProfilerStart ] ---
 
+    /** {@code CUresult cuProfilerStart(void)} */
     @NativeType("CUresult")
     public static int cuProfilerStart() {
         long __functionAddress = Functions.ProfilerStart;
@@ -89,6 +82,7 @@ public class CUDAProfiler {
 
     // --- [ cuProfilerStop ] ---
 
+    /** {@code CUresult cuProfilerStop(void)} */
     @NativeType("CUresult")
     public static int cuProfilerStop() {
         long __functionAddress = Functions.ProfilerStop;

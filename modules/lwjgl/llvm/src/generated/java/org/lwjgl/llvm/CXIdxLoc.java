@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Source location passed to index callbacks.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXIdxLoc {
  *     void * ptr_data[2];
  *     unsigned int_data;
- * }</code></pre>
+ * }}</pre>
  */
 public class CXIdxLoc extends Struct<CXIdxLoc> implements NativeResource {
 

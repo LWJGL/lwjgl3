@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_rsrc_update2 {
  *     __u32 offset;
  *     __u32 resv;
@@ -26,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u64 tags;
  *     __u32 nr;
  *     __u32 resv2;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_rsrc_update2")
 public class IOURingRSRCUpdate2 extends Struct<IOURingRSRCUpdate2> implements NativeResource {

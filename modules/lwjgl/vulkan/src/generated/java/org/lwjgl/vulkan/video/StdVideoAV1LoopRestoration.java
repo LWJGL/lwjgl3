@@ -19,13 +19,11 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1LoopRestoration {
  *     StdVideoAV1FrameRestorationType FrameRestorationType[STD_VIDEO_AV1_MAX_NUM_PLANES];
  *     uint16_t LoopRestorationSize[STD_VIDEO_AV1_MAX_NUM_PLANES];
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1LoopRestoration extends Struct<StdVideoAV1LoopRestoration> implements NativeResource {
 

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPipelineRobustnessCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineRobustnessCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineRobustnessBufferBehavior uniformBuffers;
  *     VkPipelineRobustnessBufferBehavior vertexInputs;
  *     VkPipelineRobustnessImageBehavior images;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPipelineRobustnessCreateInfoEXT extends VkPipelineRobustnessCreateInfo {
 

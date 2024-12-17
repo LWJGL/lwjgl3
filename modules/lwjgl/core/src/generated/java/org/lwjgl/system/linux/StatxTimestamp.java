@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Timestamp structure for the timestamps in {@code struct statx}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct statx_timestamp {
- *     __s64 {@link #tv_sec};
- *     __u32 {@link #tv_nsec};
+ *     __s64 tv_sec;
+ *     __u32 tv_nsec;
  *     __s32 __reserved;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct statx_timestamp")
 public class StatxTimestamp extends Struct<StatxTimestamp> implements NativeResource {
@@ -79,16 +75,16 @@ public class StatxTimestamp extends Struct<StatxTimestamp> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of seconds before (negative) or after (positive) {@code 00:00:00 1st January 1970 UTC} */
+    /** @return the value of the {@code tv_sec} field. */
     @NativeType("__s64")
     public long tv_sec() { return ntv_sec(address()); }
-    /** a number of nanoseconds (0..999,999,999) after the {@code tv_sec} time */
+    /** @return the value of the {@code tv_nsec} field. */
     @NativeType("__u32")
     public int tv_nsec() { return ntv_nsec(address()); }
 
-    /** Sets the specified value to the {@link #tv_sec} field. */
+    /** Sets the specified value to the {@code tv_sec} field. */
     public StatxTimestamp tv_sec(@NativeType("__s64") long value) { ntv_sec(address(), value); return this; }
-    /** Sets the specified value to the {@link #tv_nsec} field. */
+    /** Sets the specified value to the {@code tv_nsec} field. */
     public StatxTimestamp tv_nsec(@NativeType("__u32") int value) { ntv_nsec(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -280,16 +276,16 @@ public class StatxTimestamp extends Struct<StatxTimestamp> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link StatxTimestamp#tv_sec} field. */
+        /** @return the value of the {@code tv_sec} field. */
         @NativeType("__s64")
         public long tv_sec() { return StatxTimestamp.ntv_sec(address()); }
-        /** @return the value of the {@link StatxTimestamp#tv_nsec} field. */
+        /** @return the value of the {@code tv_nsec} field. */
         @NativeType("__u32")
         public int tv_nsec() { return StatxTimestamp.ntv_nsec(address()); }
 
-        /** Sets the specified value to the {@link StatxTimestamp#tv_sec} field. */
+        /** Sets the specified value to the {@code tv_sec} field. */
         public StatxTimestamp.Buffer tv_sec(@NativeType("__s64") long value) { StatxTimestamp.ntv_sec(address(), value); return this; }
-        /** Sets the specified value to the {@link StatxTimestamp#tv_nsec} field. */
+        /** Sets the specified value to the {@code tv_nsec} field. */
         public StatxTimestamp.Buffer tv_nsec(@NativeType("__u32") int value) { StatxTimestamp.ntv_nsec(address(), value); return this; }
 
     }

@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1TimingInfoFlags {
  *     uint32_t equal_picture_interval : 1;
  *     uint32_t reserved : 31;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1TimingInfoFlags extends Struct<StdVideoAV1TimingInfoFlags> implements NativeResource {
 

@@ -13,18 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import java.nio.*;
 
-/**
- * Instances of this class may be used with the {@link STBImageWrite} {@code write_type_to_func} functions.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *context,
- *     void *data,
- *     int size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke stbi_write_func *} */
 public abstract class STBIWriteCallback extends Callback implements STBIWriteCallbackI {
 
     /**

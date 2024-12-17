@@ -16,21 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing the conformance test suite version the implementation is compliant with.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPhysicalDeviceDriverProperties}, {@link VkPhysicalDeviceVulkan12Properties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkConformanceVersion {
- *     uint8_t {@link #major};
- *     uint8_t {@link #minor};
- *     uint8_t {@link #subminor};
- *     uint8_t {@link #patch};
- * }</code></pre>
+ *     uint8_t major;
+ *     uint8_t minor;
+ *     uint8_t subminor;
+ *     uint8_t patch;
+ * }}</pre>
  */
 public class VkConformanceVersion extends Struct<VkConformanceVersion> implements NativeResource {
 
@@ -86,26 +78,26 @@ public class VkConformanceVersion extends Struct<VkConformanceVersion> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the major version number of the conformance test suite. */
+    /** @return the value of the {@code major} field. */
     @NativeType("uint8_t")
     public byte major() { return nmajor(address()); }
-    /** the minor version number of the conformance test suite. */
+    /** @return the value of the {@code minor} field. */
     @NativeType("uint8_t")
     public byte minor() { return nminor(address()); }
-    /** the subminor version number of the conformance test suite. */
+    /** @return the value of the {@code subminor} field. */
     @NativeType("uint8_t")
     public byte subminor() { return nsubminor(address()); }
-    /** the patch version number of the conformance test suite. */
+    /** @return the value of the {@code patch} field. */
     @NativeType("uint8_t")
     public byte patch() { return npatch(address()); }
 
-    /** Sets the specified value to the {@link #major} field. */
+    /** Sets the specified value to the {@code major} field. */
     public VkConformanceVersion major(@NativeType("uint8_t") byte value) { nmajor(address(), value); return this; }
-    /** Sets the specified value to the {@link #minor} field. */
+    /** Sets the specified value to the {@code minor} field. */
     public VkConformanceVersion minor(@NativeType("uint8_t") byte value) { nminor(address(), value); return this; }
-    /** Sets the specified value to the {@link #subminor} field. */
+    /** Sets the specified value to the {@code subminor} field. */
     public VkConformanceVersion subminor(@NativeType("uint8_t") byte value) { nsubminor(address(), value); return this; }
-    /** Sets the specified value to the {@link #patch} field. */
+    /** Sets the specified value to the {@code patch} field. */
     public VkConformanceVersion patch(@NativeType("uint8_t") byte value) { npatch(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,26 +299,26 @@ public class VkConformanceVersion extends Struct<VkConformanceVersion> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkConformanceVersion#major} field. */
+        /** @return the value of the {@code major} field. */
         @NativeType("uint8_t")
         public byte major() { return VkConformanceVersion.nmajor(address()); }
-        /** @return the value of the {@link VkConformanceVersion#minor} field. */
+        /** @return the value of the {@code minor} field. */
         @NativeType("uint8_t")
         public byte minor() { return VkConformanceVersion.nminor(address()); }
-        /** @return the value of the {@link VkConformanceVersion#subminor} field. */
+        /** @return the value of the {@code subminor} field. */
         @NativeType("uint8_t")
         public byte subminor() { return VkConformanceVersion.nsubminor(address()); }
-        /** @return the value of the {@link VkConformanceVersion#patch} field. */
+        /** @return the value of the {@code patch} field. */
         @NativeType("uint8_t")
         public byte patch() { return VkConformanceVersion.npatch(address()); }
 
-        /** Sets the specified value to the {@link VkConformanceVersion#major} field. */
+        /** Sets the specified value to the {@code major} field. */
         public VkConformanceVersion.Buffer major(@NativeType("uint8_t") byte value) { VkConformanceVersion.nmajor(address(), value); return this; }
-        /** Sets the specified value to the {@link VkConformanceVersion#minor} field. */
+        /** Sets the specified value to the {@code minor} field. */
         public VkConformanceVersion.Buffer minor(@NativeType("uint8_t") byte value) { VkConformanceVersion.nminor(address(), value); return this; }
-        /** Sets the specified value to the {@link VkConformanceVersion#subminor} field. */
+        /** Sets the specified value to the {@code subminor} field. */
         public VkConformanceVersion.Buffer subminor(@NativeType("uint8_t") byte value) { VkConformanceVersion.nsubminor(address(), value); return this; }
-        /** Sets the specified value to the {@link VkConformanceVersion#patch} field. */
+        /** Sets the specified value to the {@code patch} field. */
         public VkConformanceVersion.Buffer patch(@NativeType("uint8_t") byte value) { VkConformanceVersion.npatch(address(), value); return this; }
 
     }

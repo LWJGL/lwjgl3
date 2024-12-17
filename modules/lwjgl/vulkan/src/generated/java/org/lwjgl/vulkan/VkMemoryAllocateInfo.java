@@ -16,99 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing parameters of a memory allocation.
- * 
- * <h5>Description</h5>
- * 
- * <p>The internal data of an allocated device memory object <b>must</b> include a reference to implementation-specific resources, referred to as the memory object’s <em>payload</em>. Applications <b>can</b> also import and export that internal data to and from device memory objects to share data between Vulkan instances and other compatible APIs. A {@link VkMemoryAllocateInfo} structure defines a memory import operation if its {@code pNext} chain includes one of the following structures:</p>
- * 
- * <ul>
- * <li>{@link VkImportMemoryWin32HandleInfoKHR} with a non-zero {@code handleType} value</li>
- * <li>{@link VkImportMemoryFdInfoKHR} with a non-zero {@code handleType} value</li>
- * <li>{@link VkImportMemoryHostPointerInfoEXT} with a non-zero {@code handleType} value</li>
- * <li>{@link VkImportAndroidHardwareBufferInfoANDROID} with a non-{@code NULL} {@code buffer} value</li>
- * </ul>
- * 
- * <p>If the parameters define an import operation and the external handle type is {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT}, or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}, {@code allocationSize} is ignored. The implementation <b>must</b> query the size of these allocations from the OS.</p>
- * 
- * <p>Whether device memory objects constructed via a memory import operation hold a reference to their payload depends on the properties of the handle type used to perform the import, as defined below for each valid handle type. Importing memory <b>must</b> not modify the content of the memory. Implementations <b>must</b> ensure that importing memory does not enable the importing Vulkan instance to access any memory or resources in other Vulkan instances other than that corresponding to the memory object imported. Implementations <b>must</b> also ensure accessing imported memory which has not been initialized does not allow the importing Vulkan instance to obtain data from the exporting Vulkan instance or vice-versa.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>How exported and imported memory is isolated is left to the implementation, but applications should be aware that such isolation <b>may</b> prevent implementations from placing multiple exportable memory objects in the same physical or virtual page. Hence, applications <b>should</b> avoid creating many small external memory objects whenever possible.</p>
- * </div>
- * 
- * <p>Importing memory <b>must</b> not increase overall heap usage within a system. However, it <b>must</b> affect the following per-process values:</p>
- * 
- * <ul>
- * <li>{@link VkPhysicalDeviceLimits}{@code ::maxMemoryAllocationCount}</li>
- * <li>{@link VkPhysicalDeviceMemoryBudgetPropertiesEXT}{@code ::heapUsage}</li>
- * </ul>
- * 
- * <p>When performing a memory import operation, it is the responsibility of the application to ensure the external handles and their associated payloads meet all valid usage requirements. However, implementations <b>must</b> perform sufficient validation of external handles and payloads to ensure that the operation results in a valid memory object which will not cause program termination, device loss, queue stalls, or corruption of other resources when used as allowed according to its allocation parameters. If the external handle provided does not meet these requirements, the implementation <b>must</b> fail the memory import operation with the error code {@link VK11#VK_ERROR_INVALID_EXTERNAL_HANDLE ERROR_INVALID_EXTERNAL_HANDLE}. If the parameters define an export operation and the external handle type is {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID}, implementations <b>should</b> not strictly follow {@code memoryTypeIndex}. Instead, they <b>should</b> modify the allocation internally to use the required memory type for the application’s given usage. This is because for an export operation, there is currently no way for the application to know the memory type index before allocating.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the parameters do not define an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-import-operation">import or export operation</a>, {@code allocationSize} <b>must</b> be greater than 0</li>
- * <li>The parameters <b>must</b> not define more than one <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-import-operation">import operation</a></li>
- * <li>If the parameters define an export operation and the handle type is not {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} , {@code allocationSize} <b>must</b> be greater than 0</li>
- * <li>If the {@code pNext} chain includes a {@link VkExportMemoryAllocateInfo} structure, and any of the handle types specified in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} require a dedicated allocation, as reported by {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} in {@link VkExternalImageFormatProperties}{@code ::externalMemoryProperties.externalMemoryFeatures}, or by {@link VK11#vkGetPhysicalDeviceExternalBufferProperties GetPhysicalDeviceExternalBufferProperties} in {@link VkExternalBufferProperties}{@code ::externalMemoryProperties.externalMemoryFeatures}, the {@code pNext} chain <b>must</b> include a {@link VkMemoryDedicatedAllocateInfo} or {@link VkDedicatedAllocationMemoryAllocateInfoNV} structure with either its {@code image} or {@code buffer} member set to a value other than {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If the {@code pNext} chain includes a {@link VkExportMemoryAllocateInfo} structure, it <b>must</b> not include a {@link VkExportMemoryAllocateInfoNV} or {@link VkExportMemoryWin32HandleInfoNV} structure</li>
- * <li>If the {@code pNext} chain includes a {@link VkImportMemoryWin32HandleInfoKHR} structure, it <b>must</b> not include a {@link VkImportMemoryWin32HandleInfoNV} structure</li>
- * <li>If the parameters define an import operation, the external handle specified was created by the Vulkan API, and the external handle type is {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT}, then the values of {@code allocationSize} and {@code memoryTypeIndex} <b>must</b> match those specified when the payload being imported was created</li>
- * <li>If the parameters define an import operation and the external handle specified was created by the Vulkan API, the device mask specified by {@link VkMemoryAllocateFlagsInfo} <b>must</b> match the mask specified when the payload being imported was allocated</li>
- * <li>If the parameters define an import operation and the external handle specified was created by the Vulkan API, the list of physical devices that comprise the logical device passed to {@link VK10#vkAllocateMemory AllocateMemory} <b>must</b> match the list of physical devices that comprise the logical device on which the payload was originally allocated</li>
- * <li>If the parameters define an import operation and the external handle is an NT handle or a global share handle created outside of the Vulkan API, the value of {@code memoryTypeIndex} <b>must</b> be one of those returned by {@link KHRExternalMemoryWin32#vkGetMemoryWin32HandlePropertiesKHR GetMemoryWin32HandlePropertiesKHR}</li>
- * <li>If the parameters define an import operation, the external handle was created by the Vulkan API, and the external handle type is {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT} or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT}, then the values of {@code allocationSize} and {@code memoryTypeIndex} <b>must</b> match those specified when the payload being imported was created</li>
- * <li>If the parameters define an import operation and the external handle type is {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}, {@code allocationSize} <b>must</b> match the size specified when creating the Direct3D 12 heap from which the payload was extracted</li>
- * <li>If the parameters define an import operation and the external handle is a POSIX file descriptor created outside of the Vulkan API, the value of {@code memoryTypeIndex} <b>must</b> be one of those returned by {@link KHRExternalMemoryFd#vkGetMemoryFdPropertiesKHR GetMemoryFdPropertiesKHR}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-protectedMemory">{@code protectedMemory}</a> feature is not enabled, the {@link VkMemoryAllocateInfo}{@code ::memoryTypeIndex} <b>must</b> not indicate a memory type that reports {@link VK11#VK_MEMORY_PROPERTY_PROTECTED_BIT MEMORY_PROPERTY_PROTECTED_BIT}</li>
- * <li>If the parameters define an import operation and the external handle is a host pointer, the value of {@code memoryTypeIndex} <b>must</b> be one of those returned by {@link EXTExternalMemoryHost#vkGetMemoryHostPointerPropertiesEXT GetMemoryHostPointerPropertiesEXT}</li>
- * <li>If the parameters define an import operation and the external handle is a host pointer, {@code allocationSize} <b>must</b> be an integer multiple of {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT}{@code ::minImportedHostPointerAlignment}</li>
- * <li>If the parameters define an import operation and the external handle is a host pointer, the {@code pNext} chain <b>must</b> not include a {@link VkDedicatedAllocationMemoryAllocateInfoNV} structure with either its {@code image} or {@code buffer} field set to a value other than {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If the parameters define an import operation and the external handle is a host pointer, the {@code pNext} chain <b>must</b> not include a {@link VkMemoryDedicatedAllocateInfo} structure with either its {@code image} or {@code buffer} field set to a value other than {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If the parameters define an import operation and the external handle type is {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID}, {@code allocationSize} <b>must</b> be the size returned by {@link ANDROIDExternalMemoryAndroidHardwareBuffer#vkGetAndroidHardwareBufferPropertiesANDROID GetAndroidHardwareBufferPropertiesANDROID} for the Android hardware buffer</li>
- * <li>If the parameters define an import operation and the external handle type is {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID}, and the {@code pNext} chain does not include a {@link VkMemoryDedicatedAllocateInfo} structure or {@link VkMemoryDedicatedAllocateInfo}{@code ::image} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the Android hardware buffer <b>must</b> have a {@code AHardwareBuffer_Desc}{@code ::format} of {@code AHARDWAREBUFFER_FORMAT_BLOB} and a {@code AHardwareBuffer_Desc}{@code ::usage} that includes {@code AHARDWAREBUFFER_USAGE_GPU_DATA_BUFFER}</li>
- * <li>If the parameters define an import operation and the external handle type is {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID}, {@code memoryTypeIndex} <b>must</b> be one of those returned by {@link ANDROIDExternalMemoryAndroidHardwareBuffer#vkGetAndroidHardwareBufferPropertiesANDROID GetAndroidHardwareBufferPropertiesANDROID} for the Android hardware buffer</li>
- * <li>If the parameters do not define an import operation, and the {@code pNext} chain includes a {@link VkExportMemoryAllocateInfo} structure with {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} included in its {@code handleTypes} member, and the {@code pNext} chain includes a {@link VkMemoryDedicatedAllocateInfo} structure with {@code image} not equal to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then {@code allocationSize} <b>must</b> be 0</li>
- * <li>If the parameters define an export operation, the handle type is {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID}, and the {@code pNext} does not include a {@link VkMemoryDedicatedAllocateInfo} structure, {@code allocationSize} <b>must</b> be greater than 0</li>
- * <li>If the parameters define an export operation, the handle type is {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID}, and the {@code pNext} chain includes a {@link VkMemoryDedicatedAllocateInfo} structure with {@code buffer} set to a valid {@code VkBuffer} object, {@code allocationSize} <b>must</b> be greater than 0</li>
- * <li>If the parameters define an import operation, the external handle is an Android hardware buffer, and the {@code pNext} chain includes a {@link VkMemoryDedicatedAllocateInfo} with {@code image} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the Android hardware buffer’s {@code AHardwareBuffer}{@code ::usage} <b>must</b> include at least one of {@code AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER}, {@code AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE} or {@code AHARDWAREBUFFER_USAGE_GPU_DATA_BUFFER}</li>
- * <li>If the parameters define an import operation, the external handle is an Android hardware buffer, and the {@code pNext} chain includes a {@link VkMemoryDedicatedAllocateInfo} with {@code image} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the format of {@code image} <b>must</b> be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} or the format returned by {@link ANDROIDExternalMemoryAndroidHardwareBuffer#vkGetAndroidHardwareBufferPropertiesANDROID GetAndroidHardwareBufferPropertiesANDROID} in {@link VkAndroidHardwareBufferFormatPropertiesANDROID}{@code ::format} for the Android hardware buffer</li>
- * <li>If the parameters define an import operation, the external handle is an Android hardware buffer, and the {@code pNext} chain includes a {@link VkMemoryDedicatedAllocateInfo} structure with {@code image} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the width, height, and array layer dimensions of {@code image} and the Android hardware buffer’s {@code AHardwareBuffer_Desc} <b>must</b> be identical</li>
- * <li>If the parameters define an import operation, the external handle is an Android hardware buffer, and the {@code pNext} chain includes a {@link VkMemoryDedicatedAllocateInfo} structure with {@code image} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, and the Android hardware buffer’s {@code AHardwareBuffer}{@code ::usage} includes {@code AHARDWAREBUFFER_USAGE_GPU_MIPMAP_COMPLETE}, the {@code image} <b>must</b> have a complete mipmap chain</li>
- * <li>If the parameters define an import operation, the external handle is an Android hardware buffer, and the {@code pNext} chain includes a {@link VkMemoryDedicatedAllocateInfo} structure with {@code image} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, and the Android hardware buffer’s {@code AHardwareBuffer}{@code ::usage} does not include {@code AHARDWAREBUFFER_USAGE_GPU_MIPMAP_COMPLETE}, the {@code image} <b>must</b> have exactly one mipmap level</li>
- * <li>If the parameters define an import operation, the external handle is an Android hardware buffer, and the {@code pNext} chain includes a {@link VkMemoryDedicatedAllocateInfo} structure with {@code image} that is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, each bit set in the usage of {@code image} <b>must</b> be listed in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-external-android-hardware-buffer-usage">AHardwareBuffer Usage Equivalence</a>, and if there is a corresponding {@code AHARDWAREBUFFER_USAGE} bit listed that bit <b>must</b> be included in the Android hardware buffer’s {@code AHardwareBuffer_Desc}{@code ::usage}</li>
- * <li>If {@link VkMemoryOpaqueCaptureAddressAllocateInfo}{@code ::opaqueCaptureAddress} is not zero, {@link VkMemoryAllocateFlagsInfo}{@code ::flags} <b>must</b> include {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT}</li>
- * <li>If {@link VkMemoryAllocateFlagsInfo}{@code ::flags} includes {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT}, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-bufferDeviceAddressCaptureReplay">{@code bufferDeviceAddressCaptureReplay}</a> feature <b>must</b> be enabled</li>
- * <li>If {@link VkMemoryAllocateFlagsInfo}{@code ::flags} includes {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT}, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-bufferDeviceAddress">{@code bufferDeviceAddress}</a> feature <b>must</b> be enabled</li>
- * <li>If the {@code pNext} chain includes a {@link VkImportMemoryHostPointerInfoEXT} structure, {@link VkMemoryOpaqueCaptureAddressAllocateInfo}{@code ::opaqueCaptureAddress} <b>must</b> be zero</li>
- * <li>If the parameters define an import operation, {@link VkMemoryOpaqueCaptureAddressAllocateInfo}{@code ::opaqueCaptureAddress} <b>must</b> be zero</li>
- * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_BUFFER_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDedicatedAllocationMemoryAllocateInfoNV}, {@link VkExportMemoryAllocateInfo}, {@link VkExportMemoryAllocateInfoNV}, {@link VkExportMemoryWin32HandleInfoKHR}, {@link VkExportMemoryWin32HandleInfoNV}, {@link VkExportMetalObjectCreateInfoEXT}, {@link VkImportAndroidHardwareBufferInfoANDROID}, {@link VkImportMemoryFdInfoKHR}, {@link VkImportMemoryHostPointerInfoEXT}, {@link VkImportMemoryWin32HandleInfoKHR}, {@link VkImportMemoryWin32HandleInfoNV}, {@link VkImportMetalBufferInfoEXT}, {@link VkMemoryAllocateFlagsInfo}, {@link VkMemoryDedicatedAllocateInfo}, {@link VkMemoryOpaqueCaptureAddressAllocateInfo}, or {@link VkMemoryPriorityAllocateInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkExportMetalObjectCreateInfoEXT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkAllocateMemory AllocateMemory}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryAllocateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceSize {@link #allocationSize};
- *     uint32_t {@link #memoryTypeIndex};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceSize allocationSize;
+ *     uint32_t memoryTypeIndex;
+ * }}</pre>
  */
 public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implements NativeResource {
 
@@ -164,24 +78,24 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the size of the allocation in bytes. */
+    /** @return the value of the {@code allocationSize} field. */
     @NativeType("VkDeviceSize")
     public long allocationSize() { return nallocationSize(address()); }
-    /** an index identifying a memory type from the {@code memoryTypes} array of the {@link VkPhysicalDeviceMemoryProperties} structure. */
+    /** @return the value of the {@code memoryTypeIndex} field. */
     @NativeType("uint32_t")
     public int memoryTypeIndex() { return nmemoryTypeIndex(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryAllocateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO} value to the {@code sType} field. */
     public VkMemoryAllocateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryAllocateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDedicatedAllocationMemoryAllocateInfoNV} value to the {@code pNext} chain. */
     public VkMemoryAllocateInfo pNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -223,9 +137,9 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
     public VkMemoryAllocateInfo pNext(VkMemoryOpaqueCaptureAddressAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMemoryPriorityAllocateInfoEXT} value to the {@code pNext} chain. */
     public VkMemoryAllocateInfo pNext(VkMemoryPriorityAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #allocationSize} field. */
+    /** Sets the specified value to the {@code allocationSize} field. */
     public VkMemoryAllocateInfo allocationSize(@NativeType("VkDeviceSize") long value) { nallocationSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryTypeIndex} field. */
+    /** Sets the specified value to the {@code memoryTypeIndex} field. */
     public VkMemoryAllocateInfo memoryTypeIndex(@NativeType("uint32_t") int value) { nmemoryTypeIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -446,24 +360,24 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryAllocateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryAllocateInfo.nsType(address()); }
-        /** @return the value of the {@link VkMemoryAllocateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryAllocateInfo.npNext(address()); }
-        /** @return the value of the {@link VkMemoryAllocateInfo#allocationSize} field. */
+        /** @return the value of the {@code allocationSize} field. */
         @NativeType("VkDeviceSize")
         public long allocationSize() { return VkMemoryAllocateInfo.nallocationSize(address()); }
-        /** @return the value of the {@link VkMemoryAllocateInfo#memoryTypeIndex} field. */
+        /** @return the value of the {@code memoryTypeIndex} field. */
         @NativeType("uint32_t")
         public int memoryTypeIndex() { return VkMemoryAllocateInfo.nmemoryTypeIndex(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryAllocateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryAllocateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryAllocateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO} value to the {@link VkMemoryAllocateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO} value to the {@code sType} field. */
         public VkMemoryAllocateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO); }
-        /** Sets the specified value to the {@link VkMemoryAllocateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryAllocateInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryAllocateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDedicatedAllocationMemoryAllocateInfoNV} value to the {@code pNext} chain. */
         public VkMemoryAllocateInfo.Buffer pNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -505,9 +419,9 @@ public class VkMemoryAllocateInfo extends Struct<VkMemoryAllocateInfo> implement
         public VkMemoryAllocateInfo.Buffer pNext(VkMemoryOpaqueCaptureAddressAllocateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMemoryPriorityAllocateInfoEXT} value to the {@code pNext} chain. */
         public VkMemoryAllocateInfo.Buffer pNext(VkMemoryPriorityAllocateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkMemoryAllocateInfo#allocationSize} field. */
+        /** Sets the specified value to the {@code allocationSize} field. */
         public VkMemoryAllocateInfo.Buffer allocationSize(@NativeType("VkDeviceSize") long value) { VkMemoryAllocateInfo.nallocationSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryAllocateInfo#memoryTypeIndex} field. */
+        /** Sets the specified value to the {@code memoryTypeIndex} field. */
         public VkMemoryAllocateInfo.Buffer memoryTypeIndex(@NativeType("uint32_t") int value) { VkMemoryAllocateInfo.nmemoryTypeIndex(address(), value); return this; }
 
     }

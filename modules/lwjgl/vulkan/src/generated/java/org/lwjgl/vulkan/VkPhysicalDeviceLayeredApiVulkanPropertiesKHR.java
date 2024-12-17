@@ -16,36 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing physical device properties of a layered Vulkan implementation underneath the Vulkan physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>The implementation <b>must</b> zero-fill the contents of {@code properties.properties.limits} and {@code properties.properties.sparseProperties}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Only {@link VkPhysicalDeviceDriverProperties} and {@link VkPhysicalDeviceIDProperties} are allowed in the {@code pNext} chain of {@code properties}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPhysicalDeviceProperties2}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceLayeredApiVulkanPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkPhysicalDeviceProperties2 VkPhysicalDeviceProperties2} {@link #properties};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkPhysicalDeviceProperties2 VkPhysicalDeviceProperties2} properties;
+ * }}</pre>
  */
 public class VkPhysicalDeviceLayeredApiVulkanPropertiesKHR extends Struct<VkPhysicalDeviceLayeredApiVulkanPropertiesKHR> implements NativeResource {
 
@@ -98,20 +74,20 @@ public class VkPhysicalDeviceLayeredApiVulkanPropertiesKHR extends Struct<VkPhys
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkPhysicalDeviceProperties2} in which properties of the underlying layered Vulkan implementation are returned. */
+    /** @return a {@link VkPhysicalDeviceProperties2} view of the {@code properties} field. */
     public VkPhysicalDeviceProperties2 properties() { return nproperties(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceLayeredApiVulkanPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceLayeredApiVulkanPropertiesKHR sType$Default() { return sType(KHRMaintenance7.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceLayeredApiVulkanPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,20 +279,20 @@ public class VkPhysicalDeviceLayeredApiVulkanPropertiesKHR extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.npNext(address()); }
-        /** @return a {@link VkPhysicalDeviceProperties2} view of the {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR#properties} field. */
+        /** @return a {@link VkPhysicalDeviceProperties2} view of the {@code properties} field. */
         public VkPhysicalDeviceProperties2 properties() { return VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.nproperties(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.Buffer sType$Default() { return sType(KHRMaintenance7.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLayeredApiVulkanPropertiesKHR.npNext(address(), value); return this; }
 
     }

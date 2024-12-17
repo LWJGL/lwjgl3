@@ -958,697 +958,697 @@ public class VKCapabilitiesDevice {
     /** The Vulkan API version number. */
     public final int apiVersion;
 
-    /** When true, {@link VK10} is supported. */
+    /** When true, {@code VK10} is supported. */
     public final boolean Vulkan10;
-    /** When true, {@link VK11} is supported. */
+    /** When true, {@code VK11} is supported. */
     public final boolean Vulkan11;
-    /** When true, {@link VK12} is supported. */
+    /** When true, {@code VK12} is supported. */
     public final boolean Vulkan12;
-    /** When true, {@link VK13} is supported. */
+    /** When true, {@code VK13} is supported. */
     public final boolean Vulkan13;
-    /** When true, {@link VK14} is supported. */
+    /** When true, {@code VK14} is supported. */
     public final boolean Vulkan14;
-    /** When true, {@link AMDAntiLag} is supported. */
+    /** When true, {@code AMD_anti_lag} is supported. */
     public final boolean VK_AMD_anti_lag;
-    /** When true, {@link AMDBufferMarker} is supported. */
+    /** When true, {@code AMD_buffer_marker} is supported. */
     public final boolean VK_AMD_buffer_marker;
-    /** When true, {@link AMDDeviceCoherentMemory} is supported. */
+    /** When true, {@code AMD_device_coherent_memory} is supported. */
     public final boolean VK_AMD_device_coherent_memory;
-    /** When true, {@link AMDDisplayNativeHdr} is supported. */
+    /** When true, {@code AMD_display_native_hdr} is supported. */
     public final boolean VK_AMD_display_native_hdr;
-    /** When true, {@link AMDDrawIndirectCount} is supported. */
+    /** When true, {@code AMD_draw_indirect_count} is supported. */
     public final boolean VK_AMD_draw_indirect_count;
-    /** When true, {@link AMDGCNShader} is supported. */
+    /** When true, {@code AMD_gcn_shader} is supported. */
     public final boolean VK_AMD_gcn_shader;
-    /** When true, {@link AMDGPUShaderHalfFloat} is supported. */
+    /** When true, {@code AMD_gpu_shader_half_float} is supported. */
     public final boolean VK_AMD_gpu_shader_half_float;
-    /** When true, {@link AMDGPUShaderInt16} is supported. */
+    /** When true, {@code AMD_gpu_shader_int16} is supported. */
     public final boolean VK_AMD_gpu_shader_int16;
-    /** When true, {@link AMDMemoryOverallocationBehavior} is supported. */
+    /** When true, {@code AMD_memory_overallocation_behavior} is supported. */
     public final boolean VK_AMD_memory_overallocation_behavior;
-    /** When true, {@link AMDMixedAttachmentSamples} is supported. */
+    /** When true, {@code AMD_mixed_attachment_samples} is supported. */
     public final boolean VK_AMD_mixed_attachment_samples;
-    /** When true, {@link AMDNegativeViewportHeight} is supported. */
+    /** When true, {@code AMD_negative_viewport_height} is supported. */
     public final boolean VK_AMD_negative_viewport_height;
-    /** When true, {@link AMDPipelineCompilerControl} is supported. */
+    /** When true, {@code AMD_pipeline_compiler_control} is supported. */
     public final boolean VK_AMD_pipeline_compiler_control;
-    /** When true, {@link AMDRasterizationOrder} is supported. */
+    /** When true, {@code AMD_rasterization_order} is supported. */
     public final boolean VK_AMD_rasterization_order;
-    /** When true, {@link AMDShaderBallot} is supported. */
+    /** When true, {@code AMD_shader_ballot} is supported. */
     public final boolean VK_AMD_shader_ballot;
-    /** When true, {@link AMDShaderCoreProperties} is supported. */
+    /** When true, {@code AMD_shader_core_properties} is supported. */
     public final boolean VK_AMD_shader_core_properties;
-    /** When true, {@link AMDShaderCoreProperties2} is supported. */
+    /** When true, {@code AMD_shader_core_properties2} is supported. */
     public final boolean VK_AMD_shader_core_properties2;
-    /** When true, {@link AMDShaderEarlyAndLateFragmentTests} is supported. */
+    /** When true, {@code AMD_shader_early_and_late_fragment_tests} is supported. */
     public final boolean VK_AMD_shader_early_and_late_fragment_tests;
-    /** When true, {@link AMDShaderExplicitVertexParameter} is supported. */
+    /** When true, {@code AMD_shader_explicit_vertex_parameter} is supported. */
     public final boolean VK_AMD_shader_explicit_vertex_parameter;
-    /** When true, {@link AMDShaderFragmentMask} is supported. */
+    /** When true, {@code AMD_shader_fragment_mask} is supported. */
     public final boolean VK_AMD_shader_fragment_mask;
-    /** When true, {@link AMDShaderImageLoadStoreLod} is supported. */
+    /** When true, {@code AMD_shader_image_load_store_lod} is supported. */
     public final boolean VK_AMD_shader_image_load_store_lod;
-    /** When true, {@link AMDShaderInfo} is supported. */
+    /** When true, {@code AMD_shader_info} is supported. */
     public final boolean VK_AMD_shader_info;
-    /** When true, {@link AMDShaderTrinaryMinmax} is supported. */
+    /** When true, {@code AMD_shader_trinary_minmax} is supported. */
     public final boolean VK_AMD_shader_trinary_minmax;
-    /** When true, {@link AMDTextureGatherBiasLod} is supported. */
+    /** When true, {@code AMD_texture_gather_bias_lod} is supported. */
     public final boolean VK_AMD_texture_gather_bias_lod;
-    /** When true, {@link AMDXShaderEnqueue} is supported. */
+    /** When true, {@code AMDX_shader_enqueue} is supported. */
     public final boolean VK_AMDX_shader_enqueue;
-    /** When true, {@link ANDROIDExternalFormatResolve} is supported. */
+    /** When true, {@code ANDROID_external_format_resolve} is supported. */
     public final boolean VK_ANDROID_external_format_resolve;
-    /** When true, {@link ANDROIDExternalMemoryAndroidHardwareBuffer} is supported. */
+    /** When true, {@code ANDROID_external_memory_android_hardware_buffer} is supported. */
     public final boolean VK_ANDROID_external_memory_android_hardware_buffer;
-    /** When true, {@link ARMRasterizationOrderAttachmentAccess} is supported. */
+    /** When true, {@code ARM_rasterization_order_attachment_access} is supported. */
     public final boolean VK_ARM_rasterization_order_attachment_access;
-    /** When true, {@link ARMRenderPassStriped} is supported. */
+    /** When true, {@code ARM_render_pass_striped} is supported. */
     public final boolean VK_ARM_render_pass_striped;
-    /** When true, {@link ARMSchedulingControls} is supported. */
+    /** When true, {@code ARM_scheduling_controls} is supported. */
     public final boolean VK_ARM_scheduling_controls;
-    /** When true, {@link ARMShaderCoreBuiltins} is supported. */
+    /** When true, {@code ARM_shader_core_builtins} is supported. */
     public final boolean VK_ARM_shader_core_builtins;
-    /** When true, {@link ARMShaderCoreProperties} is supported. */
+    /** When true, {@code ARM_shader_core_properties} is supported. */
     public final boolean VK_ARM_shader_core_properties;
-    /** When true, {@link EXT4444Formats} is supported. */
+    /** When true, {@code EXT_4444_formats} is supported. */
     public final boolean VK_EXT_4444_formats;
-    /** When true, {@link EXTAstcDecodeMode} is supported. */
+    /** When true, {@code EXT_astc_decode_mode} is supported. */
     public final boolean VK_EXT_astc_decode_mode;
-    /** When true, {@link EXTAttachmentFeedbackLoopDynamicState} is supported. */
+    /** When true, {@code EXT_attachment_feedback_loop_dynamic_state} is supported. */
     public final boolean VK_EXT_attachment_feedback_loop_dynamic_state;
-    /** When true, {@link EXTAttachmentFeedbackLoopLayout} is supported. */
+    /** When true, {@code EXT_attachment_feedback_loop_layout} is supported. */
     public final boolean VK_EXT_attachment_feedback_loop_layout;
-    /** When true, {@link EXTBlendOperationAdvanced} is supported. */
+    /** When true, {@code EXT_blend_operation_advanced} is supported. */
     public final boolean VK_EXT_blend_operation_advanced;
-    /** When true, {@link EXTBorderColorSwizzle} is supported. */
+    /** When true, {@code EXT_border_color_swizzle} is supported. */
     public final boolean VK_EXT_border_color_swizzle;
-    /** When true, {@link EXTBufferDeviceAddress} is supported. */
+    /** When true, {@code EXT_buffer_device_address} is supported. */
     public final boolean VK_EXT_buffer_device_address;
-    /** When true, {@link EXTCalibratedTimestamps} is supported. */
+    /** When true, {@code EXT_calibrated_timestamps} is supported. */
     public final boolean VK_EXT_calibrated_timestamps;
-    /** When true, {@link EXTColorWriteEnable} is supported. */
+    /** When true, {@code EXT_color_write_enable} is supported. */
     public final boolean VK_EXT_color_write_enable;
-    /** When true, {@link EXTConditionalRendering} is supported. */
+    /** When true, {@code EXT_conditional_rendering} is supported. */
     public final boolean VK_EXT_conditional_rendering;
-    /** When true, {@link EXTConservativeRasterization} is supported. */
+    /** When true, {@code EXT_conservative_rasterization} is supported. */
     public final boolean VK_EXT_conservative_rasterization;
-    /** When true, {@link EXTCustomBorderColor} is supported. */
+    /** When true, {@code EXT_custom_border_color} is supported. */
     public final boolean VK_EXT_custom_border_color;
-    /** When true, {@link EXTDebugMarker} is supported. */
+    /** When true, {@code EXT_debug_marker} is supported. */
     public final boolean VK_EXT_debug_marker;
-    /** When true, {@link EXTDepthBiasControl} is supported. */
+    /** When true, {@code EXT_depth_bias_control} is supported. */
     public final boolean VK_EXT_depth_bias_control;
-    /** When true, {@link EXTDepthClampControl} is supported. */
+    /** When true, {@code EXT_depth_clamp_control} is supported. */
     public final boolean VK_EXT_depth_clamp_control;
-    /** When true, {@link EXTDepthClampZeroOne} is supported. */
+    /** When true, {@code EXT_depth_clamp_zero_one} is supported. */
     public final boolean VK_EXT_depth_clamp_zero_one;
-    /** When true, {@link EXTDepthClipControl} is supported. */
+    /** When true, {@code EXT_depth_clip_control} is supported. */
     public final boolean VK_EXT_depth_clip_control;
-    /** When true, {@link EXTDepthClipEnable} is supported. */
+    /** When true, {@code EXT_depth_clip_enable} is supported. */
     public final boolean VK_EXT_depth_clip_enable;
-    /** When true, {@link EXTDepthRangeUnrestricted} is supported. */
+    /** When true, {@code EXT_depth_range_unrestricted} is supported. */
     public final boolean VK_EXT_depth_range_unrestricted;
-    /** When true, {@link EXTDescriptorBuffer} is supported. */
+    /** When true, {@code EXT_descriptor_buffer} is supported. */
     public final boolean VK_EXT_descriptor_buffer;
-    /** When true, {@link EXTDescriptorIndexing} is supported. */
+    /** When true, {@code EXT_descriptor_indexing} is supported. */
     public final boolean VK_EXT_descriptor_indexing;
-    /** When true, {@link EXTDeviceAddressBindingReport} is supported. */
+    /** When true, {@code EXT_device_address_binding_report} is supported. */
     public final boolean VK_EXT_device_address_binding_report;
-    /** When true, {@link EXTDeviceFault} is supported. */
+    /** When true, {@code EXT_device_fault} is supported. */
     public final boolean VK_EXT_device_fault;
-    /** When true, {@link EXTDeviceGeneratedCommands} is supported. */
+    /** When true, {@code EXT_device_generated_commands} is supported. */
     public final boolean VK_EXT_device_generated_commands;
-    /** When true, {@link EXTDeviceMemoryReport} is supported. */
+    /** When true, {@code EXT_device_memory_report} is supported. */
     public final boolean VK_EXT_device_memory_report;
-    /** When true, {@link EXTDiscardRectangles} is supported. */
+    /** When true, {@code EXT_discard_rectangles} is supported. */
     public final boolean VK_EXT_discard_rectangles;
-    /** When true, {@link EXTDisplayControl} is supported. */
+    /** When true, {@code EXT_display_control} is supported. */
     public final boolean VK_EXT_display_control;
-    /** When true, {@link EXTDynamicRenderingUnusedAttachments} is supported. */
+    /** When true, {@code EXT_dynamic_rendering_unused_attachments} is supported. */
     public final boolean VK_EXT_dynamic_rendering_unused_attachments;
-    /** When true, {@link EXTExtendedDynamicState} is supported. */
+    /** When true, {@code EXT_extended_dynamic_state} is supported. */
     public final boolean VK_EXT_extended_dynamic_state;
-    /** When true, {@link EXTExtendedDynamicState2} is supported. */
+    /** When true, {@code EXT_extended_dynamic_state2} is supported. */
     public final boolean VK_EXT_extended_dynamic_state2;
-    /** When true, {@link EXTExtendedDynamicState3} is supported. */
+    /** When true, {@code EXT_extended_dynamic_state3} is supported. */
     public final boolean VK_EXT_extended_dynamic_state3;
-    /** When true, {@link EXTExternalMemoryAcquireUnmodified} is supported. */
+    /** When true, {@code EXT_external_memory_acquire_unmodified} is supported. */
     public final boolean VK_EXT_external_memory_acquire_unmodified;
-    /** When true, {@link EXTExternalMemoryDmaBuf} is supported. */
+    /** When true, {@code EXT_external_memory_dma_buf} is supported. */
     public final boolean VK_EXT_external_memory_dma_buf;
-    /** When true, {@link EXTExternalMemoryHost} is supported. */
+    /** When true, {@code EXT_external_memory_host} is supported. */
     public final boolean VK_EXT_external_memory_host;
-    /** When true, {@link EXTFilterCubic} is supported. */
+    /** When true, {@code EXT_filter_cubic} is supported. */
     public final boolean VK_EXT_filter_cubic;
-    /** When true, {@link EXTFragmentDensityMap} is supported. */
+    /** When true, {@code EXT_fragment_density_map} is supported. */
     public final boolean VK_EXT_fragment_density_map;
-    /** When true, {@link EXTFragmentDensityMap2} is supported. */
+    /** When true, {@code EXT_fragment_density_map2} is supported. */
     public final boolean VK_EXT_fragment_density_map2;
-    /** When true, {@link EXTFragmentShaderInterlock} is supported. */
+    /** When true, {@code EXT_fragment_shader_interlock} is supported. */
     public final boolean VK_EXT_fragment_shader_interlock;
-    /** When true, {@link EXTFrameBoundary} is supported. */
+    /** When true, {@code EXT_frame_boundary} is supported. */
     public final boolean VK_EXT_frame_boundary;
-    /** When true, {@link EXTFullScreenExclusive} is supported. */
+    /** When true, {@code EXT_full_screen_exclusive} is supported. */
     public final boolean VK_EXT_full_screen_exclusive;
-    /** When true, {@link EXTGlobalPriority} is supported. */
+    /** When true, {@code EXT_global_priority} is supported. */
     public final boolean VK_EXT_global_priority;
-    /** When true, {@link EXTGlobalPriorityQuery} is supported. */
+    /** When true, {@code EXT_global_priority_query} is supported. */
     public final boolean VK_EXT_global_priority_query;
-    /** When true, {@link EXTGraphicsPipelineLibrary} is supported. */
+    /** When true, {@code EXT_graphics_pipeline_library} is supported. */
     public final boolean VK_EXT_graphics_pipeline_library;
-    /** When true, {@link EXTHdrMetadata} is supported. */
+    /** When true, {@code EXT_hdr_metadata} is supported. */
     public final boolean VK_EXT_hdr_metadata;
-    /** When true, {@link EXTHostImageCopy} is supported. */
+    /** When true, {@code EXT_host_image_copy} is supported. */
     public final boolean VK_EXT_host_image_copy;
-    /** When true, {@link EXTHostQueryReset} is supported. */
+    /** When true, {@code EXT_host_query_reset} is supported. */
     public final boolean VK_EXT_host_query_reset;
-    /** When true, {@link EXTImage2dViewOf3d} is supported. */
+    /** When true, {@code EXT_image_2d_view_of_3d} is supported. */
     public final boolean VK_EXT_image_2d_view_of_3d;
-    /** When true, {@link EXTImageCompressionControl} is supported. */
+    /** When true, {@code EXT_image_compression_control} is supported. */
     public final boolean VK_EXT_image_compression_control;
-    /** When true, {@link EXTImageCompressionControlSwapchain} is supported. */
+    /** When true, {@code EXT_image_compression_control_swapchain} is supported. */
     public final boolean VK_EXT_image_compression_control_swapchain;
-    /** When true, {@link EXTImageDrmFormatModifier} is supported. */
+    /** When true, {@code EXT_image_drm_format_modifier} is supported. */
     public final boolean VK_EXT_image_drm_format_modifier;
-    /** When true, {@link EXTImageRobustness} is supported. */
+    /** When true, {@code EXT_image_robustness} is supported. */
     public final boolean VK_EXT_image_robustness;
-    /** When true, {@link EXTImageSlicedViewOf3d} is supported. */
+    /** When true, {@code EXT_image_sliced_view_of_3d} is supported. */
     public final boolean VK_EXT_image_sliced_view_of_3d;
-    /** When true, {@link EXTImageViewMinLod} is supported. */
+    /** When true, {@code EXT_image_view_min_lod} is supported. */
     public final boolean VK_EXT_image_view_min_lod;
-    /** When true, {@link EXTIndexTypeUint8} is supported. */
+    /** When true, {@code EXT_index_type_uint8} is supported. */
     public final boolean VK_EXT_index_type_uint8;
-    /** When true, {@link EXTInlineUniformBlock} is supported. */
+    /** When true, {@code EXT_inline_uniform_block} is supported. */
     public final boolean VK_EXT_inline_uniform_block;
-    /** When true, {@link EXTLegacyDithering} is supported. */
+    /** When true, {@code EXT_legacy_dithering} is supported. */
     public final boolean VK_EXT_legacy_dithering;
-    /** When true, {@link EXTLegacyVertexAttributes} is supported. */
+    /** When true, {@code EXT_legacy_vertex_attributes} is supported. */
     public final boolean VK_EXT_legacy_vertex_attributes;
-    /** When true, {@link EXTLineRasterization} is supported. */
+    /** When true, {@code EXT_line_rasterization} is supported. */
     public final boolean VK_EXT_line_rasterization;
-    /** When true, {@link EXTLoadStoreOpNone} is supported. */
+    /** When true, {@code EXT_load_store_op_none} is supported. */
     public final boolean VK_EXT_load_store_op_none;
-    /** When true, {@link EXTMapMemoryPlaced} is supported. */
+    /** When true, {@code EXT_map_memory_placed} is supported. */
     public final boolean VK_EXT_map_memory_placed;
-    /** When true, {@link EXTMemoryBudget} is supported. */
+    /** When true, {@code EXT_memory_budget} is supported. */
     public final boolean VK_EXT_memory_budget;
-    /** When true, {@link EXTMemoryPriority} is supported. */
+    /** When true, {@code EXT_memory_priority} is supported. */
     public final boolean VK_EXT_memory_priority;
-    /** When true, {@link EXTMeshShader} is supported. */
+    /** When true, {@code EXT_mesh_shader} is supported. */
     public final boolean VK_EXT_mesh_shader;
-    /** When true, {@link EXTMetalObjects} is supported. */
+    /** When true, {@code EXT_metal_objects} is supported. */
     public final boolean VK_EXT_metal_objects;
-    /** When true, {@link EXTMultiDraw} is supported. */
+    /** When true, {@code EXT_multi_draw} is supported. */
     public final boolean VK_EXT_multi_draw;
-    /** When true, {@link EXTMultisampledRenderToSingleSampled} is supported. */
+    /** When true, {@code EXT_multisampled_render_to_single_sampled} is supported. */
     public final boolean VK_EXT_multisampled_render_to_single_sampled;
-    /** When true, {@link EXTMutableDescriptorType} is supported. */
+    /** When true, {@code EXT_mutable_descriptor_type} is supported. */
     public final boolean VK_EXT_mutable_descriptor_type;
-    /** When true, {@link EXTNestedCommandBuffer} is supported. */
+    /** When true, {@code EXT_nested_command_buffer} is supported. */
     public final boolean VK_EXT_nested_command_buffer;
-    /** When true, {@link EXTNonSeamlessCubeMap} is supported. */
+    /** When true, {@code EXT_non_seamless_cube_map} is supported. */
     public final boolean VK_EXT_non_seamless_cube_map;
-    /** When true, {@link EXTOpacityMicromap} is supported. */
+    /** When true, {@code EXT_opacity_micromap} is supported. */
     public final boolean VK_EXT_opacity_micromap;
-    /** When true, {@link EXTPageableDeviceLocalMemory} is supported. */
+    /** When true, {@code EXT_pageable_device_local_memory} is supported. */
     public final boolean VK_EXT_pageable_device_local_memory;
-    /** When true, {@link EXTPciBusInfo} is supported. */
+    /** When true, {@code EXT_pci_bus_info} is supported. */
     public final boolean VK_EXT_pci_bus_info;
-    /** When true, {@link EXTPhysicalDeviceDrm} is supported. */
+    /** When true, {@code EXT_physical_device_drm} is supported. */
     public final boolean VK_EXT_physical_device_drm;
-    /** When true, {@link EXTPipelineCreationCacheControl} is supported. */
+    /** When true, {@code EXT_pipeline_creation_cache_control} is supported. */
     public final boolean VK_EXT_pipeline_creation_cache_control;
-    /** When true, {@link EXTPipelineCreationFeedback} is supported. */
+    /** When true, {@code EXT_pipeline_creation_feedback} is supported. */
     public final boolean VK_EXT_pipeline_creation_feedback;
-    /** When true, {@link EXTPipelineLibraryGroupHandles} is supported. */
+    /** When true, {@code EXT_pipeline_library_group_handles} is supported. */
     public final boolean VK_EXT_pipeline_library_group_handles;
-    /** When true, {@link EXTPipelineProperties} is supported. */
+    /** When true, {@code EXT_pipeline_properties} is supported. */
     public final boolean VK_EXT_pipeline_properties;
-    /** When true, {@link EXTPipelineProtectedAccess} is supported. */
+    /** When true, {@code EXT_pipeline_protected_access} is supported. */
     public final boolean VK_EXT_pipeline_protected_access;
-    /** When true, {@link EXTPipelineRobustness} is supported. */
+    /** When true, {@code EXT_pipeline_robustness} is supported. */
     public final boolean VK_EXT_pipeline_robustness;
-    /** When true, {@link EXTPostDepthCoverage} is supported. */
+    /** When true, {@code EXT_post_depth_coverage} is supported. */
     public final boolean VK_EXT_post_depth_coverage;
-    /** When true, {@link EXTPresentModeFifoLatestReady} is supported. */
+    /** When true, {@code EXT_present_mode_fifo_latest_ready} is supported. */
     public final boolean VK_EXT_present_mode_fifo_latest_ready;
-    /** When true, {@link EXTPrimitiveTopologyListRestart} is supported. */
+    /** When true, {@code EXT_primitive_topology_list_restart} is supported. */
     public final boolean VK_EXT_primitive_topology_list_restart;
-    /** When true, {@link EXTPrimitivesGeneratedQuery} is supported. */
+    /** When true, {@code EXT_primitives_generated_query} is supported. */
     public final boolean VK_EXT_primitives_generated_query;
-    /** When true, {@link EXTPrivateData} is supported. */
+    /** When true, {@code EXT_private_data} is supported. */
     public final boolean VK_EXT_private_data;
-    /** When true, {@link EXTProvokingVertex} is supported. */
+    /** When true, {@code EXT_provoking_vertex} is supported. */
     public final boolean VK_EXT_provoking_vertex;
-    /** When true, {@link EXTQueueFamilyForeign} is supported. */
+    /** When true, {@code EXT_queue_family_foreign} is supported. */
     public final boolean VK_EXT_queue_family_foreign;
-    /** When true, {@link EXTRasterizationOrderAttachmentAccess} is supported. */
+    /** When true, {@code EXT_rasterization_order_attachment_access} is supported. */
     public final boolean VK_EXT_rasterization_order_attachment_access;
-    /** When true, {@link EXTRgba10x6Formats} is supported. */
+    /** When true, {@code EXT_rgba10x6_formats} is supported. */
     public final boolean VK_EXT_rgba10x6_formats;
-    /** When true, {@link EXTRobustness2} is supported. */
+    /** When true, {@code EXT_robustness2} is supported. */
     public final boolean VK_EXT_robustness2;
-    /** When true, {@link EXTSampleLocations} is supported. */
+    /** When true, {@code EXT_sample_locations} is supported. */
     public final boolean VK_EXT_sample_locations;
-    /** When true, {@link EXTSamplerFilterMinmax} is supported. */
+    /** When true, {@code EXT_sampler_filter_minmax} is supported. */
     public final boolean VK_EXT_sampler_filter_minmax;
-    /** When true, {@link EXTScalarBlockLayout} is supported. */
+    /** When true, {@code EXT_scalar_block_layout} is supported. */
     public final boolean VK_EXT_scalar_block_layout;
-    /** When true, {@link EXTSeparateStencilUsage} is supported. */
+    /** When true, {@code EXT_separate_stencil_usage} is supported. */
     public final boolean VK_EXT_separate_stencil_usage;
-    /** When true, {@link EXTShaderAtomicFloat} is supported. */
+    /** When true, {@code EXT_shader_atomic_float} is supported. */
     public final boolean VK_EXT_shader_atomic_float;
-    /** When true, {@link EXTShaderAtomicFloat2} is supported. */
+    /** When true, {@code EXT_shader_atomic_float2} is supported. */
     public final boolean VK_EXT_shader_atomic_float2;
-    /** When true, {@link EXTShaderDemoteToHelperInvocation} is supported. */
+    /** When true, {@code EXT_shader_demote_to_helper_invocation} is supported. */
     public final boolean VK_EXT_shader_demote_to_helper_invocation;
-    /** When true, {@link EXTShaderImageAtomicInt64} is supported. */
+    /** When true, {@code EXT_shader_image_atomic_int64} is supported. */
     public final boolean VK_EXT_shader_image_atomic_int64;
-    /** When true, {@link EXTShaderModuleIdentifier} is supported. */
+    /** When true, {@code EXT_shader_module_identifier} is supported. */
     public final boolean VK_EXT_shader_module_identifier;
-    /** When true, {@link EXTShaderObject} is supported. */
+    /** When true, {@code EXT_shader_object} is supported. */
     public final boolean VK_EXT_shader_object;
-    /** When true, {@link EXTShaderReplicatedComposites} is supported. */
+    /** When true, {@code EXT_shader_replicated_composites} is supported. */
     public final boolean VK_EXT_shader_replicated_composites;
-    /** When true, {@link EXTShaderStencilExport} is supported. */
+    /** When true, {@code EXT_shader_stencil_export} is supported. */
     public final boolean VK_EXT_shader_stencil_export;
-    /** When true, {@link EXTShaderSubgroupBallot} is supported. */
+    /** When true, {@code EXT_shader_subgroup_ballot} is supported. */
     public final boolean VK_EXT_shader_subgroup_ballot;
-    /** When true, {@link EXTShaderSubgroupVote} is supported. */
+    /** When true, {@code EXT_shader_subgroup_vote} is supported. */
     public final boolean VK_EXT_shader_subgroup_vote;
-    /** When true, {@link EXTShaderTileImage} is supported. */
+    /** When true, {@code EXT_shader_tile_image} is supported. */
     public final boolean VK_EXT_shader_tile_image;
-    /** When true, {@link EXTShaderViewportIndexLayer} is supported. */
+    /** When true, {@code EXT_shader_viewport_index_layer} is supported. */
     public final boolean VK_EXT_shader_viewport_index_layer;
-    /** When true, {@link EXTSubgroupSizeControl} is supported. */
+    /** When true, {@code EXT_subgroup_size_control} is supported. */
     public final boolean VK_EXT_subgroup_size_control;
-    /** When true, {@link EXTSubpassMergeFeedback} is supported. */
+    /** When true, {@code EXT_subpass_merge_feedback} is supported. */
     public final boolean VK_EXT_subpass_merge_feedback;
-    /** When true, {@link EXTSwapchainMaintenance1} is supported. */
+    /** When true, {@code EXT_swapchain_maintenance1} is supported. */
     public final boolean VK_EXT_swapchain_maintenance1;
-    /** When true, {@link EXTTexelBufferAlignment} is supported. */
+    /** When true, {@code EXT_texel_buffer_alignment} is supported. */
     public final boolean VK_EXT_texel_buffer_alignment;
-    /** When true, {@link EXTTextureCompressionAstcHdr} is supported. */
+    /** When true, {@code EXT_texture_compression_astc_hdr} is supported. */
     public final boolean VK_EXT_texture_compression_astc_hdr;
-    /** When true, {@link EXTToolingInfo} is supported. */
+    /** When true, {@code EXT_tooling_info} is supported. */
     public final boolean VK_EXT_tooling_info;
-    /** When true, {@link EXTTransformFeedback} is supported. */
+    /** When true, {@code EXT_transform_feedback} is supported. */
     public final boolean VK_EXT_transform_feedback;
-    /** When true, {@link EXTValidationCache} is supported. */
+    /** When true, {@code EXT_validation_cache} is supported. */
     public final boolean VK_EXT_validation_cache;
-    /** When true, {@link EXTVertexAttributeDivisor} is supported. */
+    /** When true, {@code EXT_vertex_attribute_divisor} is supported. */
     public final boolean VK_EXT_vertex_attribute_divisor;
-    /** When true, {@link EXTVertexAttributeRobustness} is supported. */
+    /** When true, {@code EXT_vertex_attribute_robustness} is supported. */
     public final boolean VK_EXT_vertex_attribute_robustness;
-    /** When true, {@link EXTVertexInputDynamicState} is supported. */
+    /** When true, {@code EXT_vertex_input_dynamic_state} is supported. */
     public final boolean VK_EXT_vertex_input_dynamic_state;
-    /** When true, {@link EXTYcbcr2plane444Formats} is supported. */
+    /** When true, {@code EXT_ycbcr_2plane_444_formats} is supported. */
     public final boolean VK_EXT_ycbcr_2plane_444_formats;
-    /** When true, {@link EXTYcbcrImageArrays} is supported. */
+    /** When true, {@code EXT_ycbcr_image_arrays} is supported. */
     public final boolean VK_EXT_ycbcr_image_arrays;
-    /** When true, {@link GOOGLEDecorateString} is supported. */
+    /** When true, {@code GOOGLE_decorate_string} is supported. */
     public final boolean VK_GOOGLE_decorate_string;
-    /** When true, {@link GOOGLEDisplayTiming} is supported. */
+    /** When true, {@code GOOGLE_display_timing} is supported. */
     public final boolean VK_GOOGLE_display_timing;
-    /** When true, {@link GOOGLEHlslFunctionality1} is supported. */
+    /** When true, {@code GOOGLE_hlsl_functionality1} is supported. */
     public final boolean VK_GOOGLE_hlsl_functionality1;
-    /** When true, {@link GOOGLEUserType} is supported. */
+    /** When true, {@code GOOGLE_user_type} is supported. */
     public final boolean VK_GOOGLE_user_type;
-    /** When true, {@link HUAWEIClusterCullingShader} is supported. */
+    /** When true, {@code HUAWEI_cluster_culling_shader} is supported. */
     public final boolean VK_HUAWEI_cluster_culling_shader;
-    /** When true, {@link HUAWEIHdrVivid} is supported. */
+    /** When true, {@code HUAWEI_hdr_vivid} is supported. */
     public final boolean VK_HUAWEI_hdr_vivid;
-    /** When true, {@link HUAWEIInvocationMask} is supported. */
+    /** When true, {@code HUAWEI_invocation_mask} is supported. */
     public final boolean VK_HUAWEI_invocation_mask;
-    /** When true, {@link HUAWEISubpassShading} is supported. */
+    /** When true, {@code HUAWEI_subpass_shading} is supported. */
     public final boolean VK_HUAWEI_subpass_shading;
-    /** When true, {@link IMGFilterCubic} is supported. */
+    /** When true, {@code IMG_filter_cubic} is supported. */
     public final boolean VK_IMG_filter_cubic;
-    /** When true, {@link IMGFormatPVRTC} is supported. */
+    /** When true, {@code IMG_format_pvrtc} is supported. */
     public final boolean VK_IMG_format_pvrtc;
-    /** When true, {@link IMGRelaxedLineRasterization} is supported. */
+    /** When true, {@code IMG_relaxed_line_rasterization} is supported. */
     public final boolean VK_IMG_relaxed_line_rasterization;
-    /** When true, {@link INTELPerformanceQuery} is supported. */
+    /** When true, {@code INTEL_performance_query} is supported. */
     public final boolean VK_INTEL_performance_query;
-    /** When true, {@link INTELShaderIntegerFunctions2} is supported. */
+    /** When true, {@code INTEL_shader_integer_functions2} is supported. */
     public final boolean VK_INTEL_shader_integer_functions2;
-    /** When true, {@link KHR16bitStorage} is supported. */
+    /** When true, {@code KHR_16bit_storage} is supported. */
     public final boolean VK_KHR_16bit_storage;
-    /** When true, {@link KHR8bitStorage} is supported. */
+    /** When true, {@code KHR_8bit_storage} is supported. */
     public final boolean VK_KHR_8bit_storage;
-    /** When true, {@link KHRAccelerationStructure} is supported. */
+    /** When true, {@code KHR_acceleration_structure} is supported. */
     public final boolean VK_KHR_acceleration_structure;
-    /** When true, {@link KHRBindMemory2} is supported. */
+    /** When true, {@code KHR_bind_memory2} is supported. */
     public final boolean VK_KHR_bind_memory2;
-    /** When true, {@link KHRBufferDeviceAddress} is supported. */
+    /** When true, {@code KHR_buffer_device_address} is supported. */
     public final boolean VK_KHR_buffer_device_address;
-    /** When true, {@link KHRCalibratedTimestamps} is supported. */
+    /** When true, {@code KHR_calibrated_timestamps} is supported. */
     public final boolean VK_KHR_calibrated_timestamps;
-    /** When true, {@link KHRComputeShaderDerivatives} is supported. */
+    /** When true, {@code KHR_compute_shader_derivatives} is supported. */
     public final boolean VK_KHR_compute_shader_derivatives;
-    /** When true, {@link KHRCooperativeMatrix} is supported. */
+    /** When true, {@code KHR_cooperative_matrix} is supported. */
     public final boolean VK_KHR_cooperative_matrix;
-    /** When true, {@link KHRCopyCommands2} is supported. */
+    /** When true, {@code KHR_copy_commands2} is supported. */
     public final boolean VK_KHR_copy_commands2;
-    /** When true, {@link KHRCreateRenderpass2} is supported. */
+    /** When true, {@code KHR_create_renderpass2} is supported. */
     public final boolean VK_KHR_create_renderpass2;
-    /** When true, {@link KHRDedicatedAllocation} is supported. */
+    /** When true, {@code KHR_dedicated_allocation} is supported. */
     public final boolean VK_KHR_dedicated_allocation;
-    /** When true, {@link KHRDeferredHostOperations} is supported. */
+    /** When true, {@code KHR_deferred_host_operations} is supported. */
     public final boolean VK_KHR_deferred_host_operations;
-    /** When true, {@link KHRDepthStencilResolve} is supported. */
+    /** When true, {@code KHR_depth_stencil_resolve} is supported. */
     public final boolean VK_KHR_depth_stencil_resolve;
-    /** When true, {@link KHRDescriptorUpdateTemplate} is supported. */
+    /** When true, {@code KHR_descriptor_update_template} is supported. */
     public final boolean VK_KHR_descriptor_update_template;
-    /** When true, {@link KHRDeviceGroup} is supported. */
+    /** When true, {@code KHR_device_group} is supported. */
     public final boolean VK_KHR_device_group;
-    /** When true, {@link KHRDisplaySwapchain} is supported. */
+    /** When true, {@code KHR_display_swapchain} is supported. */
     public final boolean VK_KHR_display_swapchain;
-    /** When true, {@link KHRDrawIndirectCount} is supported. */
+    /** When true, {@code KHR_draw_indirect_count} is supported. */
     public final boolean VK_KHR_draw_indirect_count;
-    /** When true, {@link KHRDriverProperties} is supported. */
+    /** When true, {@code KHR_driver_properties} is supported. */
     public final boolean VK_KHR_driver_properties;
-    /** When true, {@link KHRDynamicRendering} is supported. */
+    /** When true, {@code KHR_dynamic_rendering} is supported. */
     public final boolean VK_KHR_dynamic_rendering;
-    /** When true, {@link KHRDynamicRenderingLocalRead} is supported. */
+    /** When true, {@code KHR_dynamic_rendering_local_read} is supported. */
     public final boolean VK_KHR_dynamic_rendering_local_read;
-    /** When true, {@link KHRExternalFence} is supported. */
+    /** When true, {@code KHR_external_fence} is supported. */
     public final boolean VK_KHR_external_fence;
-    /** When true, {@link KHRExternalFenceFd} is supported. */
+    /** When true, {@code KHR_external_fence_fd} is supported. */
     public final boolean VK_KHR_external_fence_fd;
-    /** When true, {@link KHRExternalFenceWin32} is supported. */
+    /** When true, {@code KHR_external_fence_win32} is supported. */
     public final boolean VK_KHR_external_fence_win32;
-    /** When true, {@link KHRExternalMemory} is supported. */
+    /** When true, {@code KHR_external_memory} is supported. */
     public final boolean VK_KHR_external_memory;
-    /** When true, {@link KHRExternalMemoryFd} is supported. */
+    /** When true, {@code KHR_external_memory_fd} is supported. */
     public final boolean VK_KHR_external_memory_fd;
-    /** When true, {@link KHRExternalMemoryWin32} is supported. */
+    /** When true, {@code KHR_external_memory_win32} is supported. */
     public final boolean VK_KHR_external_memory_win32;
-    /** When true, {@link KHRExternalSemaphore} is supported. */
+    /** When true, {@code KHR_external_semaphore} is supported. */
     public final boolean VK_KHR_external_semaphore;
-    /** When true, {@link KHRExternalSemaphoreFd} is supported. */
+    /** When true, {@code KHR_external_semaphore_fd} is supported. */
     public final boolean VK_KHR_external_semaphore_fd;
-    /** When true, {@link KHRExternalSemaphoreWin32} is supported. */
+    /** When true, {@code KHR_external_semaphore_win32} is supported. */
     public final boolean VK_KHR_external_semaphore_win32;
-    /** When true, {@link KHRFormatFeatureFlags2} is supported. */
+    /** When true, {@code KHR_format_feature_flags2} is supported. */
     public final boolean VK_KHR_format_feature_flags2;
-    /** When true, {@link KHRFragmentShaderBarycentric} is supported. */
+    /** When true, {@code KHR_fragment_shader_barycentric} is supported. */
     public final boolean VK_KHR_fragment_shader_barycentric;
-    /** When true, {@link KHRFragmentShadingRate} is supported. */
+    /** When true, {@code KHR_fragment_shading_rate} is supported. */
     public final boolean VK_KHR_fragment_shading_rate;
-    /** When true, {@link KHRGetMemoryRequirements2} is supported. */
+    /** When true, {@code KHR_get_memory_requirements2} is supported. */
     public final boolean VK_KHR_get_memory_requirements2;
-    /** When true, {@link KHRGlobalPriority} is supported. */
+    /** When true, {@code KHR_global_priority} is supported. */
     public final boolean VK_KHR_global_priority;
-    /** When true, {@link KHRImageFormatList} is supported. */
+    /** When true, {@code KHR_image_format_list} is supported. */
     public final boolean VK_KHR_image_format_list;
-    /** When true, {@link KHRImagelessFramebuffer} is supported. */
+    /** When true, {@code KHR_imageless_framebuffer} is supported. */
     public final boolean VK_KHR_imageless_framebuffer;
-    /** When true, {@link KHRIncrementalPresent} is supported. */
+    /** When true, {@code KHR_incremental_present} is supported. */
     public final boolean VK_KHR_incremental_present;
-    /** When true, {@link KHRIndexTypeUint8} is supported. */
+    /** When true, {@code KHR_index_type_uint8} is supported. */
     public final boolean VK_KHR_index_type_uint8;
-    /** When true, {@link KHRLineRasterization} is supported. */
+    /** When true, {@code KHR_line_rasterization} is supported. */
     public final boolean VK_KHR_line_rasterization;
-    /** When true, {@link KHRLoadStoreOpNone} is supported. */
+    /** When true, {@code KHR_load_store_op_none} is supported. */
     public final boolean VK_KHR_load_store_op_none;
-    /** When true, {@link KHRMaintenance1} is supported. */
+    /** When true, {@code KHR_maintenance1} is supported. */
     public final boolean VK_KHR_maintenance1;
-    /** When true, {@link KHRMaintenance2} is supported. */
+    /** When true, {@code KHR_maintenance2} is supported. */
     public final boolean VK_KHR_maintenance2;
-    /** When true, {@link KHRMaintenance3} is supported. */
+    /** When true, {@code KHR_maintenance3} is supported. */
     public final boolean VK_KHR_maintenance3;
-    /** When true, {@link KHRMaintenance4} is supported. */
+    /** When true, {@code KHR_maintenance4} is supported. */
     public final boolean VK_KHR_maintenance4;
-    /** When true, {@link KHRMaintenance5} is supported. */
+    /** When true, {@code KHR_maintenance5} is supported. */
     public final boolean VK_KHR_maintenance5;
-    /** When true, {@link KHRMaintenance6} is supported. */
+    /** When true, {@code KHR_maintenance6} is supported. */
     public final boolean VK_KHR_maintenance6;
-    /** When true, {@link KHRMaintenance7} is supported. */
+    /** When true, {@code KHR_maintenance7} is supported. */
     public final boolean VK_KHR_maintenance7;
-    /** When true, {@link KHRMapMemory2} is supported. */
+    /** When true, {@code KHR_map_memory2} is supported. */
     public final boolean VK_KHR_map_memory2;
-    /** When true, {@link KHRMultiview} is supported. */
+    /** When true, {@code KHR_multiview} is supported. */
     public final boolean VK_KHR_multiview;
-    /** When true, {@link KHRPerformanceQuery} is supported. */
+    /** When true, {@code KHR_performance_query} is supported. */
     public final boolean VK_KHR_performance_query;
-    /** When true, {@link KHRPipelineBinary} is supported. */
+    /** When true, {@code KHR_pipeline_binary} is supported. */
     public final boolean VK_KHR_pipeline_binary;
-    /** When true, {@link KHRPipelineExecutableProperties} is supported. */
+    /** When true, {@code KHR_pipeline_executable_properties} is supported. */
     public final boolean VK_KHR_pipeline_executable_properties;
-    /** When true, {@link KHRPipelineLibrary} is supported. */
+    /** When true, {@code KHR_pipeline_library} is supported. */
     public final boolean VK_KHR_pipeline_library;
-    /** When true, {@link KHRPortabilitySubset} is supported. */
+    /** When true, {@code KHR_portability_subset} is supported. */
     public final boolean VK_KHR_portability_subset;
-    /** When true, {@link KHRPresentId} is supported. */
+    /** When true, {@code KHR_present_id} is supported. */
     public final boolean VK_KHR_present_id;
-    /** When true, {@link KHRPresentWait} is supported. */
+    /** When true, {@code KHR_present_wait} is supported. */
     public final boolean VK_KHR_present_wait;
-    /** When true, {@link KHRPushDescriptor} is supported. */
+    /** When true, {@code KHR_push_descriptor} is supported. */
     public final boolean VK_KHR_push_descriptor;
-    /** When true, {@link KHRRayQuery} is supported. */
+    /** When true, {@code KHR_ray_query} is supported. */
     public final boolean VK_KHR_ray_query;
-    /** When true, {@link KHRRayTracingMaintenance1} is supported. */
+    /** When true, {@code KHR_ray_tracing_maintenance1} is supported. */
     public final boolean VK_KHR_ray_tracing_maintenance1;
-    /** When true, {@link KHRRayTracingPipeline} is supported. */
+    /** When true, {@code KHR_ray_tracing_pipeline} is supported. */
     public final boolean VK_KHR_ray_tracing_pipeline;
-    /** When true, {@link KHRRayTracingPositionFetch} is supported. */
+    /** When true, {@code KHR_ray_tracing_position_fetch} is supported. */
     public final boolean VK_KHR_ray_tracing_position_fetch;
-    /** When true, {@link KHRRelaxedBlockLayout} is supported. */
+    /** When true, {@code KHR_relaxed_block_layout} is supported. */
     public final boolean VK_KHR_relaxed_block_layout;
-    /** When true, {@link KHRSamplerMirrorClampToEdge} is supported. */
+    /** When true, {@code KHR_sampler_mirror_clamp_to_edge} is supported. */
     public final boolean VK_KHR_sampler_mirror_clamp_to_edge;
-    /** When true, {@link KHRSamplerYcbcrConversion} is supported. */
+    /** When true, {@code KHR_sampler_ycbcr_conversion} is supported. */
     public final boolean VK_KHR_sampler_ycbcr_conversion;
-    /** When true, {@link KHRSeparateDepthStencilLayouts} is supported. */
+    /** When true, {@code KHR_separate_depth_stencil_layouts} is supported. */
     public final boolean VK_KHR_separate_depth_stencil_layouts;
-    /** When true, {@link KHRShaderAtomicInt64} is supported. */
+    /** When true, {@code KHR_shader_atomic_int64} is supported. */
     public final boolean VK_KHR_shader_atomic_int64;
-    /** When true, {@link KHRShaderClock} is supported. */
+    /** When true, {@code KHR_shader_clock} is supported. */
     public final boolean VK_KHR_shader_clock;
-    /** When true, {@link KHRShaderDrawParameters} is supported. */
+    /** When true, {@code KHR_shader_draw_parameters} is supported. */
     public final boolean VK_KHR_shader_draw_parameters;
-    /** When true, {@link KHRShaderExpectAssume} is supported. */
+    /** When true, {@code KHR_shader_expect_assume} is supported. */
     public final boolean VK_KHR_shader_expect_assume;
-    /** When true, {@link KHRShaderFloat16Int8} is supported. */
+    /** When true, {@code KHR_shader_float16_int8} is supported. */
     public final boolean VK_KHR_shader_float16_int8;
-    /** When true, {@link KHRShaderFloatControls} is supported. */
+    /** When true, {@code KHR_shader_float_controls} is supported. */
     public final boolean VK_KHR_shader_float_controls;
-    /** When true, {@link KHRShaderFloatControls2} is supported. */
+    /** When true, {@code KHR_shader_float_controls2} is supported. */
     public final boolean VK_KHR_shader_float_controls2;
-    /** When true, {@link KHRShaderIntegerDotProduct} is supported. */
+    /** When true, {@code KHR_shader_integer_dot_product} is supported. */
     public final boolean VK_KHR_shader_integer_dot_product;
-    /** When true, {@link KHRShaderMaximalReconvergence} is supported. */
+    /** When true, {@code KHR_shader_maximal_reconvergence} is supported. */
     public final boolean VK_KHR_shader_maximal_reconvergence;
-    /** When true, {@link KHRShaderNonSemanticInfo} is supported. */
+    /** When true, {@code KHR_shader_non_semantic_info} is supported. */
     public final boolean VK_KHR_shader_non_semantic_info;
-    /** When true, {@link KHRShaderQuadControl} is supported. */
+    /** When true, {@code KHR_shader_quad_control} is supported. */
     public final boolean VK_KHR_shader_quad_control;
-    /** When true, {@link KHRShaderRelaxedExtendedInstruction} is supported. */
+    /** When true, {@code KHR_shader_relaxed_extended_instruction} is supported. */
     public final boolean VK_KHR_shader_relaxed_extended_instruction;
-    /** When true, {@link KHRShaderSubgroupExtendedTypes} is supported. */
+    /** When true, {@code KHR_shader_subgroup_extended_types} is supported. */
     public final boolean VK_KHR_shader_subgroup_extended_types;
-    /** When true, {@link KHRShaderSubgroupRotate} is supported. */
+    /** When true, {@code KHR_shader_subgroup_rotate} is supported. */
     public final boolean VK_KHR_shader_subgroup_rotate;
-    /** When true, {@link KHRShaderSubgroupUniformControlFlow} is supported. */
+    /** When true, {@code KHR_shader_subgroup_uniform_control_flow} is supported. */
     public final boolean VK_KHR_shader_subgroup_uniform_control_flow;
-    /** When true, {@link KHRShaderTerminateInvocation} is supported. */
+    /** When true, {@code KHR_shader_terminate_invocation} is supported. */
     public final boolean VK_KHR_shader_terminate_invocation;
-    /** When true, {@link KHRSharedPresentableImage} is supported. */
+    /** When true, {@code KHR_shared_presentable_image} is supported. */
     public final boolean VK_KHR_shared_presentable_image;
-    /** When true, {@link KHRSpirv14} is supported. */
+    /** When true, {@code KHR_spirv_1_4} is supported. */
     public final boolean VK_KHR_spirv_1_4;
-    /** When true, {@link KHRStorageBufferStorageClass} is supported. */
+    /** When true, {@code KHR_storage_buffer_storage_class} is supported. */
     public final boolean VK_KHR_storage_buffer_storage_class;
-    /** When true, {@link KHRSwapchain} is supported. */
+    /** When true, {@code KHR_swapchain} is supported. */
     public final boolean VK_KHR_swapchain;
-    /** When true, {@link KHRSwapchainMutableFormat} is supported. */
+    /** When true, {@code KHR_swapchain_mutable_format} is supported. */
     public final boolean VK_KHR_swapchain_mutable_format;
-    /** When true, {@link KHRSynchronization2} is supported. */
+    /** When true, {@code KHR_synchronization2} is supported. */
     public final boolean VK_KHR_synchronization2;
-    /** When true, {@link KHRTimelineSemaphore} is supported. */
+    /** When true, {@code KHR_timeline_semaphore} is supported. */
     public final boolean VK_KHR_timeline_semaphore;
-    /** When true, {@link KHRUniformBufferStandardLayout} is supported. */
+    /** When true, {@code KHR_uniform_buffer_standard_layout} is supported. */
     public final boolean VK_KHR_uniform_buffer_standard_layout;
-    /** When true, {@link KHRVariablePointers} is supported. */
+    /** When true, {@code KHR_variable_pointers} is supported. */
     public final boolean VK_KHR_variable_pointers;
-    /** When true, {@link KHRVertexAttributeDivisor} is supported. */
+    /** When true, {@code KHR_vertex_attribute_divisor} is supported. */
     public final boolean VK_KHR_vertex_attribute_divisor;
-    /** When true, {@link KHRVideoDecodeAV1} is supported. */
+    /** When true, {@code KHR_video_decode_av1} is supported. */
     public final boolean VK_KHR_video_decode_av1;
-    /** When true, {@link KHRVideoDecodeH264} is supported. */
+    /** When true, {@code KHR_video_decode_h264} is supported. */
     public final boolean VK_KHR_video_decode_h264;
-    /** When true, {@link KHRVideoDecodeH265} is supported. */
+    /** When true, {@code KHR_video_decode_h265} is supported. */
     public final boolean VK_KHR_video_decode_h265;
-    /** When true, {@link KHRVideoDecodeQueue} is supported. */
+    /** When true, {@code KHR_video_decode_queue} is supported. */
     public final boolean VK_KHR_video_decode_queue;
-    /** When true, {@link KHRVideoEncodeAV1} is supported. */
+    /** When true, {@code KHR_video_encode_av1} is supported. */
     public final boolean VK_KHR_video_encode_av1;
-    /** When true, {@link KHRVideoEncodeH264} is supported. */
+    /** When true, {@code KHR_video_encode_h264} is supported. */
     public final boolean VK_KHR_video_encode_h264;
-    /** When true, {@link KHRVideoEncodeH265} is supported. */
+    /** When true, {@code KHR_video_encode_h265} is supported. */
     public final boolean VK_KHR_video_encode_h265;
-    /** When true, {@link KHRVideoEncodeQuantizationMap} is supported. */
+    /** When true, {@code KHR_video_encode_quantization_map} is supported. */
     public final boolean VK_KHR_video_encode_quantization_map;
-    /** When true, {@link KHRVideoEncodeQueue} is supported. */
+    /** When true, {@code KHR_video_encode_queue} is supported. */
     public final boolean VK_KHR_video_encode_queue;
-    /** When true, {@link KHRVideoMaintenance1} is supported. */
+    /** When true, {@code KHR_video_maintenance1} is supported. */
     public final boolean VK_KHR_video_maintenance1;
-    /** When true, {@link KHRVideoQueue} is supported. */
+    /** When true, {@code KHR_video_queue} is supported. */
     public final boolean VK_KHR_video_queue;
-    /** When true, {@link KHRVulkanMemoryModel} is supported. */
+    /** When true, {@code KHR_vulkan_memory_model} is supported. */
     public final boolean VK_KHR_vulkan_memory_model;
-    /** When true, {@link KHRWin32KeyedMutex} is supported. */
+    /** When true, {@code KHR_win32_keyed_mutex} is supported. */
     public final boolean VK_KHR_win32_keyed_mutex;
-    /** When true, {@link KHRWorkgroupMemoryExplicitLayout} is supported. */
+    /** When true, {@code KHR_workgroup_memory_explicit_layout} is supported. */
     public final boolean VK_KHR_workgroup_memory_explicit_layout;
-    /** When true, {@link KHRZeroInitializeWorkgroupMemory} is supported. */
+    /** When true, {@code KHR_zero_initialize_workgroup_memory} is supported. */
     public final boolean VK_KHR_zero_initialize_workgroup_memory;
-    /** When true, {@link MESAImageAlignmentControl} is supported. */
+    /** When true, {@code MESA_image_alignment_control} is supported. */
     public final boolean VK_MESA_image_alignment_control;
-    /** When true, {@link MSFTLayeredDriver} is supported. */
+    /** When true, {@code MSFT_layered_driver} is supported. */
     public final boolean VK_MSFT_layered_driver;
-    /** When true, {@link NVAcquireWinrtDisplay} is supported. */
+    /** When true, {@code NV_acquire_winrt_display} is supported. */
     public final boolean VK_NV_acquire_winrt_display;
-    /** When true, {@link NVClipSpaceWScaling} is supported. */
+    /** When true, {@code NV_clip_space_w_scaling} is supported. */
     public final boolean VK_NV_clip_space_w_scaling;
-    /** When true, {@link NVCommandBufferInheritance} is supported. */
+    /** When true, {@code NV_command_buffer_inheritance} is supported. */
     public final boolean VK_NV_command_buffer_inheritance;
-    /** When true, {@link NVComputeShaderDerivatives} is supported. */
+    /** When true, {@code NV_compute_shader_derivatives} is supported. */
     public final boolean VK_NV_compute_shader_derivatives;
-    /** When true, {@link NVCooperativeMatrix} is supported. */
+    /** When true, {@code NV_cooperative_matrix} is supported. */
     public final boolean VK_NV_cooperative_matrix;
-    /** When true, {@link NVCooperativeMatrix2} is supported. */
+    /** When true, {@code NV_cooperative_matrix2} is supported. */
     public final boolean VK_NV_cooperative_matrix2;
-    /** When true, {@link NVCopyMemoryIndirect} is supported. */
+    /** When true, {@code NV_copy_memory_indirect} is supported. */
     public final boolean VK_NV_copy_memory_indirect;
-    /** When true, {@link NVCornerSampledImage} is supported. */
+    /** When true, {@code NV_corner_sampled_image} is supported. */
     public final boolean VK_NV_corner_sampled_image;
-    /** When true, {@link NVCoverageReductionMode} is supported. */
+    /** When true, {@code NV_coverage_reduction_mode} is supported. */
     public final boolean VK_NV_coverage_reduction_mode;
-    /** When true, {@link NVCudaKernelLaunch} is supported. */
+    /** When true, {@code NV_cuda_kernel_launch} is supported. */
     public final boolean VK_NV_cuda_kernel_launch;
-    /** When true, {@link NVDedicatedAllocation} is supported. */
+    /** When true, {@code NV_dedicated_allocation} is supported. */
     public final boolean VK_NV_dedicated_allocation;
-    /** When true, {@link NVDedicatedAllocationImageAliasing} is supported. */
+    /** When true, {@code NV_dedicated_allocation_image_aliasing} is supported. */
     public final boolean VK_NV_dedicated_allocation_image_aliasing;
-    /** When true, {@link NVDescriptorPoolOverallocation} is supported. */
+    /** When true, {@code NV_descriptor_pool_overallocation} is supported. */
     public final boolean VK_NV_descriptor_pool_overallocation;
-    /** When true, {@link NVDeviceDiagnosticCheckpoints} is supported. */
+    /** When true, {@code NV_device_diagnostic_checkpoints} is supported. */
     public final boolean VK_NV_device_diagnostic_checkpoints;
-    /** When true, {@link NVDeviceDiagnosticsConfig} is supported. */
+    /** When true, {@code NV_device_diagnostics_config} is supported. */
     public final boolean VK_NV_device_diagnostics_config;
-    /** When true, {@link NVDeviceGeneratedCommands} is supported. */
+    /** When true, {@code NV_device_generated_commands} is supported. */
     public final boolean VK_NV_device_generated_commands;
-    /** When true, {@link NVDeviceGeneratedCommandsCompute} is supported. */
+    /** When true, {@code NV_device_generated_commands_compute} is supported. */
     public final boolean VK_NV_device_generated_commands_compute;
-    /** When true, {@link NVDisplacementMicromap} is supported. */
+    /** When true, {@code NV_displacement_micromap} is supported. */
     public final boolean VK_NV_displacement_micromap;
-    /** When true, {@link NVExtendedSparseAddressSpace} is supported. */
+    /** When true, {@code NV_extended_sparse_address_space} is supported. */
     public final boolean VK_NV_extended_sparse_address_space;
-    /** When true, {@link NVExternalMemory} is supported. */
+    /** When true, {@code NV_external_memory} is supported. */
     public final boolean VK_NV_external_memory;
-    /** When true, {@link NVExternalMemoryRdma} is supported. */
+    /** When true, {@code NV_external_memory_rdma} is supported. */
     public final boolean VK_NV_external_memory_rdma;
-    /** When true, {@link NVExternalMemoryWin32} is supported. */
+    /** When true, {@code NV_external_memory_win32} is supported. */
     public final boolean VK_NV_external_memory_win32;
-    /** When true, {@link NVFillRectangle} is supported. */
+    /** When true, {@code NV_fill_rectangle} is supported. */
     public final boolean VK_NV_fill_rectangle;
-    /** When true, {@link NVFragmentCoverageToColor} is supported. */
+    /** When true, {@code NV_fragment_coverage_to_color} is supported. */
     public final boolean VK_NV_fragment_coverage_to_color;
-    /** When true, {@link NVFragmentShaderBarycentric} is supported. */
+    /** When true, {@code NV_fragment_shader_barycentric} is supported. */
     public final boolean VK_NV_fragment_shader_barycentric;
-    /** When true, {@link NVFragmentShadingRateEnums} is supported. */
+    /** When true, {@code NV_fragment_shading_rate_enums} is supported. */
     public final boolean VK_NV_fragment_shading_rate_enums;
-    /** When true, {@link NVFramebufferMixedSamples} is supported. */
+    /** When true, {@code NV_framebuffer_mixed_samples} is supported. */
     public final boolean VK_NV_framebuffer_mixed_samples;
-    /** When true, {@link NVGeometryShaderPassthrough} is supported. */
+    /** When true, {@code NV_geometry_shader_passthrough} is supported. */
     public final boolean VK_NV_geometry_shader_passthrough;
-    /** When true, {@link NVGLSLShader} is supported. */
+    /** When true, {@code NV_glsl_shader} is supported. */
     public final boolean VK_NV_glsl_shader;
-    /** When true, {@link NVInheritedViewportScissor} is supported. */
+    /** When true, {@code NV_inherited_viewport_scissor} is supported. */
     public final boolean VK_NV_inherited_viewport_scissor;
-    /** When true, {@link NVLinearColorAttachment} is supported. */
+    /** When true, {@code NV_linear_color_attachment} is supported. */
     public final boolean VK_NV_linear_color_attachment;
-    /** When true, {@link NVLowLatency} is supported. */
+    /** When true, {@code NV_low_latency} is supported. */
     public final boolean VK_NV_low_latency;
-    /** When true, {@link NVLowLatency2} is supported. */
+    /** When true, {@code NV_low_latency2} is supported. */
     public final boolean VK_NV_low_latency2;
-    /** When true, {@link NVMemoryDecompression} is supported. */
+    /** When true, {@code NV_memory_decompression} is supported. */
     public final boolean VK_NV_memory_decompression;
-    /** When true, {@link NVMeshShader} is supported. */
+    /** When true, {@code NV_mesh_shader} is supported. */
     public final boolean VK_NV_mesh_shader;
-    /** When true, {@link NVOpticalFlow} is supported. */
+    /** When true, {@code NV_optical_flow} is supported. */
     public final boolean VK_NV_optical_flow;
-    /** When true, {@link NVPerStageDescriptorSet} is supported. */
+    /** When true, {@code NV_per_stage_descriptor_set} is supported. */
     public final boolean VK_NV_per_stage_descriptor_set;
-    /** When true, {@link NVPresentBarrier} is supported. */
+    /** When true, {@code NV_present_barrier} is supported. */
     public final boolean VK_NV_present_barrier;
-    /** When true, {@link NVRawAccessChains} is supported. */
+    /** When true, {@code NV_raw_access_chains} is supported. */
     public final boolean VK_NV_raw_access_chains;
-    /** When true, {@link NVRayTracing} is supported. */
+    /** When true, {@code NV_ray_tracing} is supported. */
     public final boolean VK_NV_ray_tracing;
-    /** When true, {@link NVRayTracingInvocationReorder} is supported. */
+    /** When true, {@code NV_ray_tracing_invocation_reorder} is supported. */
     public final boolean VK_NV_ray_tracing_invocation_reorder;
-    /** When true, {@link NVRayTracingMotionBlur} is supported. */
+    /** When true, {@code NV_ray_tracing_motion_blur} is supported. */
     public final boolean VK_NV_ray_tracing_motion_blur;
-    /** When true, {@link NVRayTracingValidation} is supported. */
+    /** When true, {@code NV_ray_tracing_validation} is supported. */
     public final boolean VK_NV_ray_tracing_validation;
-    /** When true, {@link NVRepresentativeFragmentTest} is supported. */
+    /** When true, {@code NV_representative_fragment_test} is supported. */
     public final boolean VK_NV_representative_fragment_test;
-    /** When true, {@link NVSampleMaskOverrideCoverage} is supported. */
+    /** When true, {@code NV_sample_mask_override_coverage} is supported. */
     public final boolean VK_NV_sample_mask_override_coverage;
-    /** When true, {@link NVScissorExclusive} is supported. */
+    /** When true, {@code NV_scissor_exclusive} is supported. */
     public final boolean VK_NV_scissor_exclusive;
-    /** When true, {@link NVShaderAtomicFloat16Vector} is supported. */
+    /** When true, {@code NV_shader_atomic_float16_vector} is supported. */
     public final boolean VK_NV_shader_atomic_float16_vector;
-    /** When true, {@link NVShaderImageFootprint} is supported. */
+    /** When true, {@code NV_shader_image_footprint} is supported. */
     public final boolean VK_NV_shader_image_footprint;
-    /** When true, {@link NVShaderSmBuiltins} is supported. */
+    /** When true, {@code NV_shader_sm_builtins} is supported. */
     public final boolean VK_NV_shader_sm_builtins;
-    /** When true, {@link NVShaderSubgroupPartitioned} is supported. */
+    /** When true, {@code NV_shader_subgroup_partitioned} is supported. */
     public final boolean VK_NV_shader_subgroup_partitioned;
-    /** When true, {@link NVShadingRateImage} is supported. */
+    /** When true, {@code NV_shading_rate_image} is supported. */
     public final boolean VK_NV_shading_rate_image;
-    /** When true, {@link NVViewportArray2} is supported. */
+    /** When true, {@code NV_viewport_array2} is supported. */
     public final boolean VK_NV_viewport_array2;
-    /** When true, {@link NVViewportSwizzle} is supported. */
+    /** When true, {@code NV_viewport_swizzle} is supported. */
     public final boolean VK_NV_viewport_swizzle;
-    /** When true, {@link NVWin32KeyedMutex} is supported. */
+    /** When true, {@code NV_win32_keyed_mutex} is supported. */
     public final boolean VK_NV_win32_keyed_mutex;
-    /** When true, {@link NVXBinaryImport} is supported. */
+    /** When true, {@code NVX_binary_import} is supported. */
     public final boolean VK_NVX_binary_import;
-    /** When true, {@link NVXImageViewHandle} is supported. */
+    /** When true, {@code NVX_image_view_handle} is supported. */
     public final boolean VK_NVX_image_view_handle;
-    /** When true, {@link NVXMultiviewPerViewAttributes} is supported. */
+    /** When true, {@code NVX_multiview_per_view_attributes} is supported. */
     public final boolean VK_NVX_multiview_per_view_attributes;
-    /** When true, {@link QCOMFilterCubicClamp} is supported. */
+    /** When true, {@code QCOM_filter_cubic_clamp} is supported. */
     public final boolean VK_QCOM_filter_cubic_clamp;
-    /** When true, {@link QCOMFilterCubicWeights} is supported. */
+    /** When true, {@code QCOM_filter_cubic_weights} is supported. */
     public final boolean VK_QCOM_filter_cubic_weights;
-    /** When true, {@link QCOMFragmentDensityMapOffset} is supported. */
+    /** When true, {@code QCOM_fragment_density_map_offset} is supported. */
     public final boolean VK_QCOM_fragment_density_map_offset;
-    /** When true, {@link QCOMImageProcessing} is supported. */
+    /** When true, {@code QCOM_image_processing} is supported. */
     public final boolean VK_QCOM_image_processing;
-    /** When true, {@link QCOMImageProcessing2} is supported. */
+    /** When true, {@code QCOM_image_processing2} is supported. */
     public final boolean VK_QCOM_image_processing2;
-    /** When true, {@link QCOMMultiviewPerViewRenderAreas} is supported. */
+    /** When true, {@code QCOM_multiview_per_view_render_areas} is supported. */
     public final boolean VK_QCOM_multiview_per_view_render_areas;
-    /** When true, {@link QCOMMultiviewPerViewViewports} is supported. */
+    /** When true, {@code QCOM_multiview_per_view_viewports} is supported. */
     public final boolean VK_QCOM_multiview_per_view_viewports;
-    /** When true, {@link QCOMRenderPassShaderResolve} is supported. */
+    /** When true, {@code QCOM_render_pass_shader_resolve} is supported. */
     public final boolean VK_QCOM_render_pass_shader_resolve;
-    /** When true, {@link QCOMRenderPassStoreOps} is supported. */
+    /** When true, {@code QCOM_render_pass_store_ops} is supported. */
     public final boolean VK_QCOM_render_pass_store_ops;
-    /** When true, {@link QCOMRenderPassTransform} is supported. */
+    /** When true, {@code QCOM_render_pass_transform} is supported. */
     public final boolean VK_QCOM_render_pass_transform;
-    /** When true, {@link QCOMRotatedCopyCommands} is supported. */
+    /** When true, {@code QCOM_rotated_copy_commands} is supported. */
     public final boolean VK_QCOM_rotated_copy_commands;
-    /** When true, {@link QCOMTileProperties} is supported. */
+    /** When true, {@code QCOM_tile_properties} is supported. */
     public final boolean VK_QCOM_tile_properties;
-    /** When true, {@link QCOMYcbcrDegamma} is supported. */
+    /** When true, {@code QCOM_ycbcr_degamma} is supported. */
     public final boolean VK_QCOM_ycbcr_degamma;
-    /** When true, {@link SECAmigoProfiling} is supported. */
+    /** When true, {@code SEC_amigo_profiling} is supported. */
     public final boolean VK_SEC_amigo_profiling;
     /** When true, {@code STD_vulkan_video_codec_av1} is supported. */
     public final boolean STD_VIDEO_STD_vulkan_video_codec_av1;
@@ -1656,9 +1656,9 @@ public class VKCapabilitiesDevice {
     public final boolean STD_VIDEO_STD_vulkan_video_codec_h264;
     /** When true, {@code STD_vulkan_video_codec_h265} is supported. */
     public final boolean STD_VIDEO_STD_vulkan_video_codec_h265;
-    /** When true, {@link VALVEDescriptorSetHostMapping} is supported. */
+    /** When true, {@code VALVE_descriptor_set_host_mapping} is supported. */
     public final boolean VK_VALVE_descriptor_set_host_mapping;
-    /** When true, {@link VALVEMutableDescriptorType} is supported. */
+    /** When true, {@code VALVE_mutable_descriptor_type} is supported. */
     public final boolean VK_VALVE_mutable_descriptor_type;
 
     VKCapabilitiesDevice(FunctionProvider provider, VKCapabilitiesInstance capsInstance, int apiVersion, Set<String> ext) {

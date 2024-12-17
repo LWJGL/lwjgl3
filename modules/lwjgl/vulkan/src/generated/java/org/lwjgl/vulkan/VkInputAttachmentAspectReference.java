@@ -16,43 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a subpass/input attachment pair and an aspect mask that <b>can</b> be read.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure specifies an aspect mask for a specific input attachment of a specific subpass in the render pass.</p>
- * 
- * <p>{@code subpass} and {@code inputAttachmentIndex} index into the render pass as:</p>
- * 
- * <pre><code>
- * pCreateInfo-&gt;pSubpasses[subpass].pInputAttachments[inputAttachmentIndex]</code></pre>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code aspectMask} <b>must</b> not include {@link VK10#VK_IMAGE_ASPECT_METADATA_BIT IMAGE_ASPECT_METADATA_BIT}</li>
- * <li>{@code aspectMask} <b>must</b> not include <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code> for any index <em>i</em></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code aspectMask} <b>must</b> be a valid combination of {@code VkImageAspectFlagBits} values</li>
- * <li>{@code aspectMask} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRenderPassInputAttachmentAspectCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkInputAttachmentAspectReference {
- *     uint32_t {@link #subpass};
- *     uint32_t {@link #inputAttachmentIndex};
- *     VkImageAspectFlags {@link #aspectMask};
- * }</code></pre>
+ *     uint32_t subpass;
+ *     uint32_t inputAttachmentIndex;
+ *     VkImageAspectFlags aspectMask;
+ * }}</pre>
  */
 public class VkInputAttachmentAspectReference extends Struct<VkInputAttachmentAspectReference> implements NativeResource {
 
@@ -105,21 +74,21 @@ public class VkInputAttachmentAspectReference extends Struct<VkInputAttachmentAs
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an index into the {@code pSubpasses} array of the parent {@link VkRenderPassCreateInfo} structure. */
+    /** @return the value of the {@code subpass} field. */
     @NativeType("uint32_t")
     public int subpass() { return nsubpass(address()); }
-    /** an index into the {@code pInputAttachments} of the specified subpass. */
+    /** @return the value of the {@code inputAttachmentIndex} field. */
     @NativeType("uint32_t")
     public int inputAttachmentIndex() { return ninputAttachmentIndex(address()); }
-    /** a mask of which aspect(s) <b>can</b> be accessed within the specified subpass. */
+    /** @return the value of the {@code aspectMask} field. */
     @NativeType("VkImageAspectFlags")
     public int aspectMask() { return naspectMask(address()); }
 
-    /** Sets the specified value to the {@link #subpass} field. */
+    /** Sets the specified value to the {@code subpass} field. */
     public VkInputAttachmentAspectReference subpass(@NativeType("uint32_t") int value) { nsubpass(address(), value); return this; }
-    /** Sets the specified value to the {@link #inputAttachmentIndex} field. */
+    /** Sets the specified value to the {@code inputAttachmentIndex} field. */
     public VkInputAttachmentAspectReference inputAttachmentIndex(@NativeType("uint32_t") int value) { ninputAttachmentIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #aspectMask} field. */
+    /** Sets the specified value to the {@code aspectMask} field. */
     public VkInputAttachmentAspectReference aspectMask(@NativeType("VkImageAspectFlags") int value) { naspectMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,21 +303,21 @@ public class VkInputAttachmentAspectReference extends Struct<VkInputAttachmentAs
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkInputAttachmentAspectReference#subpass} field. */
+        /** @return the value of the {@code subpass} field. */
         @NativeType("uint32_t")
         public int subpass() { return VkInputAttachmentAspectReference.nsubpass(address()); }
-        /** @return the value of the {@link VkInputAttachmentAspectReference#inputAttachmentIndex} field. */
+        /** @return the value of the {@code inputAttachmentIndex} field. */
         @NativeType("uint32_t")
         public int inputAttachmentIndex() { return VkInputAttachmentAspectReference.ninputAttachmentIndex(address()); }
-        /** @return the value of the {@link VkInputAttachmentAspectReference#aspectMask} field. */
+        /** @return the value of the {@code aspectMask} field. */
         @NativeType("VkImageAspectFlags")
         public int aspectMask() { return VkInputAttachmentAspectReference.naspectMask(address()); }
 
-        /** Sets the specified value to the {@link VkInputAttachmentAspectReference#subpass} field. */
+        /** Sets the specified value to the {@code subpass} field. */
         public VkInputAttachmentAspectReference.Buffer subpass(@NativeType("uint32_t") int value) { VkInputAttachmentAspectReference.nsubpass(address(), value); return this; }
-        /** Sets the specified value to the {@link VkInputAttachmentAspectReference#inputAttachmentIndex} field. */
+        /** Sets the specified value to the {@code inputAttachmentIndex} field. */
         public VkInputAttachmentAspectReference.Buffer inputAttachmentIndex(@NativeType("uint32_t") int value) { VkInputAttachmentAspectReference.ninputAttachmentIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkInputAttachmentAspectReference#aspectMask} field. */
+        /** Sets the specified value to the {@code aspectMask} field. */
         public VkInputAttachmentAspectReference.Buffer aspectMask(@NativeType("VkImageAspectFlags") int value) { VkInputAttachmentAspectReference.naspectMask(address(), value); return this; }
 
     }

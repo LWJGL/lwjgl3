@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceMaintenance3Properties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMaintenance3PropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t maxPerSetDescriptors;
  *     VkDeviceSize maxMemoryAllocationSize;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceMaintenance3PropertiesKHR extends VkPhysicalDeviceMaintenance3Properties {
 

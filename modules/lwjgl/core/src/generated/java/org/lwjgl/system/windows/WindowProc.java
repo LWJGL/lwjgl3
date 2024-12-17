@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * An application-defined function that processes messages sent to a window.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LRESULT (*{@link #invoke}) (
- *     HWND hwnd,
- *     UINT uMsg,
- *     WPARAM wParam,
- *     LPARAM lParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke WNDPROC} */
 public abstract class WindowProc extends Callback implements WindowProcI {
 
     /**

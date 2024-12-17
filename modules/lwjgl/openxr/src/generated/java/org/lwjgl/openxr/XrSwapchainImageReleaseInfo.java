@@ -16,30 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes a swapchain image release.
- * 
- * <h5>Description</h5>
- * 
- * <p>Because this structure only exists to support extension-specific structures, {@link XR10#xrReleaseSwapchainImage ReleaseSwapchainImage} will accept a {@code NULL} argument for {@link XR10#xrReleaseSwapchainImage ReleaseSwapchainImage}{@code ::releaseInfo} for applications that are not using any relevant extensions.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrReleaseSwapchainImage ReleaseSwapchainImage}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainImageReleaseInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrSwapchainImageReleaseInfo extends Struct<XrSwapchainImageReleaseInfo> implements NativeResource {
 
@@ -89,18 +70,18 @@ public class XrSwapchainImageReleaseInfo extends Struct<XrSwapchainImageReleaseI
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSwapchainImageReleaseInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO} value to the {@code type} field. */
     public XrSwapchainImageReleaseInfo type$Default() { return type(XR10.XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSwapchainImageReleaseInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -290,18 +271,18 @@ public class XrSwapchainImageReleaseInfo extends Struct<XrSwapchainImageReleaseI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSwapchainImageReleaseInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainImageReleaseInfo.ntype(address()); }
-        /** @return the value of the {@link XrSwapchainImageReleaseInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSwapchainImageReleaseInfo.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrSwapchainImageReleaseInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSwapchainImageReleaseInfo.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainImageReleaseInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO} value to the {@link XrSwapchainImageReleaseInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO} value to the {@code type} field. */
         public XrSwapchainImageReleaseInfo.Buffer type$Default() { return type(XR10.XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO); }
-        /** Sets the specified value to the {@link XrSwapchainImageReleaseInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSwapchainImageReleaseInfo.Buffer next(@NativeType("void const *") long value) { XrSwapchainImageReleaseInfo.nnext(address(), value); return this; }
 
     }

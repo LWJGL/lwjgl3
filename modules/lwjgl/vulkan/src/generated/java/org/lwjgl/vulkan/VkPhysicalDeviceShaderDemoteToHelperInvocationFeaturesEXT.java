@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 shaderDemoteToHelperInvocation;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT extends VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures {
 

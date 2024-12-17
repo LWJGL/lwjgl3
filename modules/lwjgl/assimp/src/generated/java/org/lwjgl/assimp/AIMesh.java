@@ -19,40 +19,29 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.assimp.Assimp.*;
 
 /**
- * A mesh represents a geometry or model with a single material.
- * 
- * <p>It usually consists of a number of vertices and a series of primitives/faces referencing the vertices. In addition there might be a series of bones,
- * each of them addressing a number of vertices with a certain weight. Vertex data is presented in channels with each channel containing a single
- * per-vertex information such as a set of texture coordinates or a normal vector. If a data pointer is non-null, the corresponding data stream is
- * present.</p>
- * 
- * <p>A Mesh uses only a single material which is referenced by a material ID.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiMesh {
- *     unsigned int {@link #mPrimitiveTypes};
- *     unsigned int {@link #mNumVertices};
- *     unsigned int {@link #mNumFaces};
- *     {@link AIVector3D struct aiVector3D} * {@link #mVertices};
- *     {@link AIVector3D struct aiVector3D} * {@link #mNormals};
- *     {@link AIVector3D struct aiVector3D} * {@link #mTangents};
- *     {@link AIVector3D struct aiVector3D} * {@link #mBitangents};
- *     {@link AIColor4D struct aiColor4D} * {@link #mColors}[AI_MAX_NUMBER_OF_COLOR_SETS];
- *     {@link AIVector3D struct aiVector3D} * {@link #mTextureCoords}[AI_MAX_NUMBER_OF_TEXTURECOORDS];
- *     unsigned int {@link #mNumUVComponents}[AI_MAX_NUMBER_OF_TEXTURECOORDS];
- *     {@link AIFace struct aiFace} * {@link #mFaces};
- *     unsigned int {@link #mNumBones};
- *     {@link AIBone struct aiBone} ** {@link #mBones};
- *     unsigned int {@link #mMaterialIndex};
- *     {@link AIString struct aiString} {@link #mName};
- *     unsigned int {@link #mNumAnimMeshes};
- *     {@link AIAnimMesh struct aiAnimMesh} ** {@link #mAnimMeshes};
- *     aiMorphingMethod {@link #mMethod};
- *     {@link AIAABB struct aiAABB} {@link #mAABB};
- *     {@link AIString struct aiString} ** {@link #mTextureCoordsNames};
- * }</code></pre>
+ *     unsigned int mPrimitiveTypes;
+ *     unsigned int mNumVertices;
+ *     unsigned int mNumFaces;
+ *     {@link AIVector3D struct aiVector3D} * mVertices;
+ *     {@link AIVector3D struct aiVector3D} * mNormals;
+ *     {@link AIVector3D struct aiVector3D} * mTangents;
+ *     {@link AIVector3D struct aiVector3D} * mBitangents;
+ *     {@link AIColor4D struct aiColor4D} * mColors[AI_MAX_NUMBER_OF_COLOR_SETS];
+ *     {@link AIVector3D struct aiVector3D} * mTextureCoords[AI_MAX_NUMBER_OF_TEXTURECOORDS];
+ *     unsigned int mNumUVComponents[AI_MAX_NUMBER_OF_TEXTURECOORDS];
+ *     {@link AIFace struct aiFace} * mFaces;
+ *     unsigned int mNumBones;
+ *     {@link AIBone struct aiBone} ** mBones;
+ *     unsigned int mMaterialIndex;
+ *     {@link AIString struct aiString} mName;
+ *     unsigned int mNumAnimMeshes;
+ *     {@link AIAnimMesh struct aiAnimMesh} ** mAnimMeshes;
+ *     aiMorphingMethod mMethod;
+ *     {@link AIAABB struct aiAABB} mAABB;
+ *     {@link AIString struct aiString} ** mTextureCoordsNames;
+ * }}</pre>
  */
 @NativeType("struct aiMesh")
 public class AIMesh extends Struct<AIMesh> implements NativeResource {
@@ -157,226 +146,123 @@ public class AIMesh extends Struct<AIMesh> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * Bitwise combination of the members of the {@code aiPrimitiveType} enum. This specifies which types of primitives are present in the mesh. The
-     * "SortByPrimitiveType"-Step can be used to make sure the output meshes consist of one primitive type each. One or more of:<br><table><tr><td>{@link Assimp#aiPrimitiveType_POINT PrimitiveType_POINT}</td><td>{@link Assimp#aiPrimitiveType_LINE PrimitiveType_LINE}</td><td>{@link Assimp#aiPrimitiveType_TRIANGLE PrimitiveType_TRIANGLE}</td></tr><tr><td>{@link Assimp#aiPrimitiveType_POLYGON PrimitiveType_POLYGON}</td><td>{@link Assimp#aiPrimitiveType_NGONEncodingFlag PrimitiveType_NGONEncodingFlag}</td></tr></table>
-     */
+    /** @return the value of the {@code mPrimitiveTypes} field. */
     @NativeType("unsigned int")
     public int mPrimitiveTypes() { return nmPrimitiveTypes(address()); }
-    /** The number of vertices in this mesh. This is also the size of all of the per-vertex data arrays. The maximum value for this member is {@link Assimp#AI_MAX_VERTICES}. */
+    /** @return the value of the {@code mNumVertices} field. */
     @NativeType("unsigned int")
     public int mNumVertices() { return nmNumVertices(address()); }
-    /**
-     * The number of primitives (triangles, polygons, lines) in this mesh. This is also the size of the {@code mFaces} array. The maximum value for this
-     * member is {@link Assimp#AI_MAX_FACES}.
-     */
+    /** @return the value of the {@code mNumFaces} field. */
     @NativeType("unsigned int")
     public int mNumFaces() { return nmNumFaces(address()); }
-    /** Vertex positions. This array is always present in a mesh. The array is {@code mNumVertices} in size. */
+    /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mVertices} field. */
     @NativeType("struct aiVector3D *")
     public AIVector3D.Buffer mVertices() { return nmVertices(address()); }
-    /**
-     * Vertex normals.
-     * 
-     * <p>The array contains normalized vectors, {@code NULL} if not present. The array is {@code mNumVertices} in size. Normals are undefined for point and line
-     * primitives. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines and triangles) may
-     * have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to {@code qNaN}.</p>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>Normal vectors computed by Assimp are always unit-length. However, this needn't apply for normals that have been taken directly from the model file</p>
-     * </div>
-     */
+    /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mNormals} field. */
     @NativeType("struct aiVector3D *")
     public AIVector3D.@Nullable Buffer mNormals() { return nmNormals(address()); }
-    /**
-     * Vertex tangents.
-     * 
-     * <p>The tangent of a vertex points in the direction of the positive X texture axis. The array contains normalized vectors, {@code NULL} if not present. The array
-     * is {@code mNumVertices} in size. A mesh consisting of points and lines only may not have normal vectors. Meshes with mixed primitive types (i.e. lines
-     * and triangles) may have normals, but the normals for vertices that are only referenced by point or line primitives are undefined and set to
-     * {@code qNaN}.</p>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>If the mesh contains tangents, it automatically also contains bitangents.</p></div>
-     */
+    /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mTangents} field. */
     @NativeType("struct aiVector3D *")
     public AIVector3D.@Nullable Buffer mTangents() { return nmTangents(address()); }
-    /**
-     * Vertex bitangents.
-     * 
-     * <p>The bitangent of a vertex points in the direction of the positive Y texture axis. The array contains normalized vectors, {@code NULL} if not present. The
-     * array is {@code mNumVertices} in size.</p>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>If the mesh contains tangents, it automatically also contains bitangents.</p></div>
-     */
+    /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mBitangents} field. */
     @NativeType("struct aiVector3D *")
     public AIVector3D.@Nullable Buffer mBitangents() { return nmBitangents(address()); }
-    /**
-     * Vertex color sets. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_COLOR_SETS} vertex colors per vertex. {@code NULL} if not present. Each array is
-     * {@code mNumVertices} in size if present.
-     */
+    /** @return a {@link PointerBuffer} view of the {@code mColors} field. */
     @NativeType("struct aiColor4D *[AI_MAX_NUMBER_OF_COLOR_SETS]")
     public PointerBuffer mColors() { return nmColors(address()); }
-    /**
-     * Vertex color sets. A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_COLOR_SETS} vertex colors per vertex. {@code NULL} if not present. Each array is
-     * {@code mNumVertices} in size if present.
-     */
+    /** @return a {@link AIColor4D} view of the pointer at the specified index of the {@code mColors} field. */
     @NativeType("struct aiColor4D *")
     public AIColor4D.@Nullable Buffer mColors(int index) { return nmColors(address(), index); }
-    /**
-     * Vertex texture coordinates, also known as UV channels.
-     * 
-     * <p>A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} channels per vertex. Used and unused ({@code nullptr}) channels may go in any order. The array is
-     * {@code mNumVertices} in size.</p>
-     */
+    /** @return a {@link PointerBuffer} view of the {@code mTextureCoords} field. */
     @NativeType("struct aiVector3D *[AI_MAX_NUMBER_OF_TEXTURECOORDS]")
     public PointerBuffer mTextureCoords() { return nmTextureCoords(address()); }
-    /**
-     * Vertex texture coordinates, also known as UV channels.
-     * 
-     * <p>A mesh may contain 0 to {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS} channels per vertex. Used and unused ({@code nullptr}) channels may go in any order. The array is
-     * {@code mNumVertices} in size.</p>
-     */
+    /** @return a {@link AIVector3D} view of the pointer at the specified index of the {@code mTextureCoords} field. */
     @NativeType("struct aiVector3D *")
     public AIVector3D.@Nullable Buffer mTextureCoords(int index) { return nmTextureCoords(address(), index); }
-    /**
-     * Specifies the number of components for a given UV channel.
-     * 
-     * <p>Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is 2 for a given channel n, the component {@code p.z} of
-     * {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y} is set to 0.0f, too.</p>
-     * 
-     * <p>Note: 4D coordinates are not supported.</p>
-     */
+    /** @return a {@link IntBuffer} view of the {@code mNumUVComponents} field. */
     @NativeType("unsigned int[AI_MAX_NUMBER_OF_TEXTURECOORDS]")
     public IntBuffer mNumUVComponents() { return nmNumUVComponents(address()); }
-    /**
-     * Specifies the number of components for a given UV channel.
-     * 
-     * <p>Up to three channels are supported (UVW, for accessing volume or cube maps). If the value is 2 for a given channel n, the component {@code p.z} of
-     * {@code mTextureCoords[n][p]} is set to 0.0f. If the value is 1 for a given channel, {@code p.y} is set to 0.0f, too.</p>
-     * 
-     * <p>Note: 4D coordinates are not supported.</p>
-     */
+    /** @return the value at the specified index of the {@code mNumUVComponents} field. */
     @NativeType("unsigned int")
     public int mNumUVComponents(int index) { return nmNumUVComponents(address(), index); }
-    /**
-     * The faces the mesh is constructed from. Each face refers to a number of vertices by their indices. This array is always present in a mesh, its size is
-     * given in {@code mNumFaces}. If the {@link Assimp#AI_SCENE_FLAGS_NON_VERBOSE_FORMAT} is NOT set each face references an unique set of vertices.
-     */
+    /** @return a {@link AIFace.Buffer} view of the struct array pointed to by the {@code mFaces} field. */
     @NativeType("struct aiFace *")
     public AIFace.Buffer mFaces() { return nmFaces(address()); }
-    /** The number of bones this mesh contains. Can be 0, in which case the {@code mBones} array is {@code NULL}. */
+    /** @return the value of the {@code mNumBones} field. */
     @NativeType("unsigned int")
     public int mNumBones() { return nmNumBones(address()); }
-    /** The bones of this mesh. A bone consists of a name by which it can be found in the frame hierarchy and a set of vertex weights. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mBones} field. */
     @NativeType("struct aiBone **")
     public @Nullable PointerBuffer mBones() { return nmBones(address()); }
-    /**
-     * The material used by this mesh. A mesh uses only a single material. If an imported model uses multiple materials, the import splits up the mesh. Use
-     * this value as index into the scene's material list.
-     */
+    /** @return the value of the {@code mMaterialIndex} field. */
     @NativeType("unsigned int")
     public int mMaterialIndex() { return nmMaterialIndex(address()); }
-    /**
-     * Name of the mesh.
-     * 
-     * <p>Meshes can be named, but this is not a requirement and leaving this field empty is totally fine. There are mainly three uses for mesh names:</p>
-     * 
-     * <ul>
-     * <li>some formats name nodes and meshes independently.</li>
-     * <li>importers tend to split meshes up to meet the one-material-per-mesh requirement. Assigning the same (dummy) name to each of the result meshes aids
-     * the caller at recovering the original mesh partitioning.</li>
-     * <li>vertex animations refer to meshes by their names.</li>
-     * </ul>
-     */
+    /** @return a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /**
-     * The number of attachment meshes.
-     * 
-     * <p>Currently known to work with loaders:</p>
-     * 
-     * <ul>
-     * <li>Collada</li>
-     * <li>gltf</li>
-     * </ul>
-     */
+    /** @return the value of the {@code mNumAnimMeshes} field. */
     @NativeType("unsigned int")
     public int mNumAnimMeshes() { return nmNumAnimMeshes(address()); }
-    /**
-     * Attachment meshes for this mesh, for vertex-based animation. Attachment meshes carry replacement data for some of the mesh'es vertex components
-     * (usually positions, normals).
-     * 
-     * <p>Currently known to work with loaders:</p>
-     * 
-     * <ul>
-     * <li>Collada</li>
-     * <li>gltf</li>
-     * </ul>
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mAnimMeshes} field. */
     @NativeType("struct aiAnimMesh **")
     public @Nullable PointerBuffer mAnimMeshes() { return nmAnimMeshes(address()); }
-    /** Method of morphing when anim-meshes are specified. One of:<br><table><tr><td>{@link Assimp#aiMorphingMethod_UNKNOWN MorphingMethod_UNKNOWN}</td><td>{@link Assimp#aiMorphingMethod_VERTEX_BLEND MorphingMethod_VERTEX_BLEND}</td></tr><tr><td>{@link Assimp#aiMorphingMethod_MORPH_NORMALIZED MorphingMethod_MORPH_NORMALIZED}</td><td>{@link Assimp#aiMorphingMethod_MORPH_RELATIVE MorphingMethod_MORPH_RELATIVE}</td></tr></table> */
+    /** @return the value of the {@code mMethod} field. */
     @NativeType("aiMorphingMethod")
     public int mMethod() { return nmMethod(address()); }
-    /** the bounding box */
+    /** @return a {@link AIAABB} view of the {@code mAABB} field. */
     @NativeType("struct aiAABB")
     public AIAABB mAABB() { return nmAABB(address()); }
-    /** Vertex UV stream names. Pointer to array of size {@link Assimp#AI_MAX_NUMBER_OF_TEXTURECOORDS}. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mTextureCoordsNames} field. */
     @NativeType("struct aiString **")
     public @Nullable PointerBuffer mTextureCoordsNames() { return nmTextureCoordsNames(address()); }
 
-    /** Sets the specified value to the {@link #mPrimitiveTypes} field. */
+    /** Sets the specified value to the {@code mPrimitiveTypes} field. */
     public AIMesh mPrimitiveTypes(@NativeType("unsigned int") int value) { nmPrimitiveTypes(address(), value); return this; }
-    /** Sets the specified value to the {@link #mNumVertices} field. */
+    /** Sets the specified value to the {@code mNumVertices} field. */
     public AIMesh mNumVertices(@NativeType("unsigned int") int value) { nmNumVertices(address(), value); return this; }
-    /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link #mVertices} field. */
+    /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mVertices} field. */
     public AIMesh mVertices(@NativeType("struct aiVector3D *") AIVector3D.Buffer value) { nmVertices(address(), value); return this; }
-    /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link #mNormals} field. */
+    /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mNormals} field. */
     public AIMesh mNormals(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmNormals(address(), value); return this; }
-    /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link #mTangents} field. */
+    /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mTangents} field. */
     public AIMesh mTangents(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmTangents(address(), value); return this; }
-    /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link #mBitangents} field. */
+    /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mBitangents} field. */
     public AIMesh mBitangents(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmBitangents(address(), value); return this; }
-    /** Copies the specified {@link PointerBuffer} to the {@link #mColors} field. */
+    /** Copies the specified {@link PointerBuffer} to the {@code mColors} field. */
     public AIMesh mColors(@NativeType("struct aiColor4D *[AI_MAX_NUMBER_OF_COLOR_SETS]") PointerBuffer value) { nmColors(address(), value); return this; }
-    /** Copies the address of the specified {@link AIColor4D.Buffer} at the specified index of the {@link #mColors} field. */
+    /** Copies the address of the specified {@link AIColor4D.Buffer} at the specified index of the {@code mColors} field. */
     public AIMesh mColors(int index, @NativeType("struct aiColor4D *") AIColor4D.@Nullable Buffer value) { nmColors(address(), index, value); return this; }
-    /** Passes the element at {@code index} of the {@link #mColors} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@code mColors} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIMesh mColors(int index, java.util.function.Consumer<AIColor4D.@Nullable Buffer> consumer) { consumer.accept(mColors(index)); return this; }
-    /** Copies the specified {@link PointerBuffer} to the {@link #mTextureCoords} field. */
+    /** Copies the specified {@link PointerBuffer} to the {@code mTextureCoords} field. */
     public AIMesh mTextureCoords(@NativeType("struct aiVector3D *[AI_MAX_NUMBER_OF_TEXTURECOORDS]") PointerBuffer value) { nmTextureCoords(address(), value); return this; }
-    /** Copies the address of the specified {@link AIVector3D.Buffer} at the specified index of the {@link #mTextureCoords} field. */
+    /** Copies the address of the specified {@link AIVector3D.Buffer} at the specified index of the {@code mTextureCoords} field. */
     public AIMesh mTextureCoords(int index, @NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { nmTextureCoords(address(), index, value); return this; }
-    /** Passes the element at {@code index} of the {@link #mTextureCoords} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@code mTextureCoords} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIMesh mTextureCoords(int index, java.util.function.Consumer<AIVector3D.@Nullable Buffer> consumer) { consumer.accept(mTextureCoords(index)); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@link #mNumUVComponents} field. */
+    /** Copies the specified {@link IntBuffer} to the {@code mNumUVComponents} field. */
     public AIMesh mNumUVComponents(@NativeType("unsigned int[AI_MAX_NUMBER_OF_TEXTURECOORDS]") IntBuffer value) { nmNumUVComponents(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #mNumUVComponents} field. */
+    /** Sets the specified value at the specified index of the {@code mNumUVComponents} field. */
     public AIMesh mNumUVComponents(int index, @NativeType("unsigned int") int value) { nmNumUVComponents(address(), index, value); return this; }
-    /** Sets the address of the specified {@link AIFace.Buffer} to the {@link #mFaces} field. */
+    /** Sets the address of the specified {@link AIFace.Buffer} to the {@code mFaces} field. */
     public AIMesh mFaces(@NativeType("struct aiFace *") AIFace.Buffer value) { nmFaces(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #mBones} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code mBones} field. */
     public AIMesh mBones(@Nullable @NativeType("struct aiBone **") PointerBuffer value) { nmBones(address(), value); return this; }
-    /** Sets the specified value to the {@link #mMaterialIndex} field. */
+    /** Sets the specified value to the {@code mMaterialIndex} field. */
     public AIMesh mMaterialIndex(@NativeType("unsigned int") int value) { nmMaterialIndex(address(), value); return this; }
-    /** Copies the specified {@link AIString} to the {@link #mName} field. */
+    /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AIMesh mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
-    /** Passes the {@link #mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIMesh mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #mAnimMeshes} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code mAnimMeshes} field. */
     public AIMesh mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { nmAnimMeshes(address(), value); return this; }
-    /** Sets the specified value to the {@link #mMethod} field. */
+    /** Sets the specified value to the {@code mMethod} field. */
     public AIMesh mMethod(@NativeType("aiMorphingMethod") int value) { nmMethod(address(), value); return this; }
-    /** Copies the specified {@link AIAABB} to the {@link #mAABB} field. */
+    /** Copies the specified {@link AIAABB} to the {@code mAABB} field. */
     public AIMesh mAABB(@NativeType("struct aiAABB") AIAABB value) { nmAABB(address(), value); return this; }
-    /** Passes the {@link #mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIMesh mAABB(java.util.function.Consumer<AIAABB> consumer) { consumer.accept(mAABB()); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #mTextureCoordsNames} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code mTextureCoordsNames} field. */
     public AIMesh mTextureCoordsNames(@Nullable @NativeType("struct aiString **") PointerBuffer value) { nmTextureCoordsNames(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -739,123 +625,123 @@ public class AIMesh extends Struct<AIMesh> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AIMesh#mPrimitiveTypes} field. */
+        /** @return the value of the {@code mPrimitiveTypes} field. */
         @NativeType("unsigned int")
         public int mPrimitiveTypes() { return AIMesh.nmPrimitiveTypes(address()); }
-        /** @return the value of the {@link AIMesh#mNumVertices} field. */
+        /** @return the value of the {@code mNumVertices} field. */
         @NativeType("unsigned int")
         public int mNumVertices() { return AIMesh.nmNumVertices(address()); }
-        /** @return the value of the {@link AIMesh#mNumFaces} field. */
+        /** @return the value of the {@code mNumFaces} field. */
         @NativeType("unsigned int")
         public int mNumFaces() { return AIMesh.nmNumFaces(address()); }
-        /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@link AIMesh#mVertices} field. */
+        /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mVertices} field. */
         @NativeType("struct aiVector3D *")
         public AIVector3D.Buffer mVertices() { return AIMesh.nmVertices(address()); }
-        /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@link AIMesh#mNormals} field. */
+        /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mNormals} field. */
         @NativeType("struct aiVector3D *")
         public AIVector3D.@Nullable Buffer mNormals() { return AIMesh.nmNormals(address()); }
-        /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@link AIMesh#mTangents} field. */
+        /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mTangents} field. */
         @NativeType("struct aiVector3D *")
         public AIVector3D.@Nullable Buffer mTangents() { return AIMesh.nmTangents(address()); }
-        /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@link AIMesh#mBitangents} field. */
+        /** @return a {@link AIVector3D.Buffer} view of the struct array pointed to by the {@code mBitangents} field. */
         @NativeType("struct aiVector3D *")
         public AIVector3D.@Nullable Buffer mBitangents() { return AIMesh.nmBitangents(address()); }
-        /** @return a {@link PointerBuffer} view of the {@link AIMesh#mColors} field. */
+        /** @return a {@link PointerBuffer} view of the {@code mColors} field. */
         @NativeType("struct aiColor4D *[AI_MAX_NUMBER_OF_COLOR_SETS]")
         public PointerBuffer mColors() { return AIMesh.nmColors(address()); }
-        /** @return a {@link AIColor4D} view of the pointer at the specified index of the {@link AIMesh#mColors} field. */
+        /** @return a {@link AIColor4D} view of the pointer at the specified index of the {@code mColors} field. */
         @NativeType("struct aiColor4D *")
         public AIColor4D.@Nullable Buffer mColors(int index) { return AIMesh.nmColors(address(), index); }
-        /** @return a {@link PointerBuffer} view of the {@link AIMesh#mTextureCoords} field. */
+        /** @return a {@link PointerBuffer} view of the {@code mTextureCoords} field. */
         @NativeType("struct aiVector3D *[AI_MAX_NUMBER_OF_TEXTURECOORDS]")
         public PointerBuffer mTextureCoords() { return AIMesh.nmTextureCoords(address()); }
-        /** @return a {@link AIVector3D} view of the pointer at the specified index of the {@link AIMesh#mTextureCoords} field. */
+        /** @return a {@link AIVector3D} view of the pointer at the specified index of the {@code mTextureCoords} field. */
         @NativeType("struct aiVector3D *")
         public AIVector3D.@Nullable Buffer mTextureCoords(int index) { return AIMesh.nmTextureCoords(address(), index); }
-        /** @return a {@link IntBuffer} view of the {@link AIMesh#mNumUVComponents} field. */
+        /** @return a {@link IntBuffer} view of the {@code mNumUVComponents} field. */
         @NativeType("unsigned int[AI_MAX_NUMBER_OF_TEXTURECOORDS]")
         public IntBuffer mNumUVComponents() { return AIMesh.nmNumUVComponents(address()); }
-        /** @return the value at the specified index of the {@link AIMesh#mNumUVComponents} field. */
+        /** @return the value at the specified index of the {@code mNumUVComponents} field. */
         @NativeType("unsigned int")
         public int mNumUVComponents(int index) { return AIMesh.nmNumUVComponents(address(), index); }
-        /** @return a {@link AIFace.Buffer} view of the struct array pointed to by the {@link AIMesh#mFaces} field. */
+        /** @return a {@link AIFace.Buffer} view of the struct array pointed to by the {@code mFaces} field. */
         @NativeType("struct aiFace *")
         public AIFace.Buffer mFaces() { return AIMesh.nmFaces(address()); }
-        /** @return the value of the {@link AIMesh#mNumBones} field. */
+        /** @return the value of the {@code mNumBones} field. */
         @NativeType("unsigned int")
         public int mNumBones() { return AIMesh.nmNumBones(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIMesh#mBones} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mBones} field. */
         @NativeType("struct aiBone **")
         public @Nullable PointerBuffer mBones() { return AIMesh.nmBones(address()); }
-        /** @return the value of the {@link AIMesh#mMaterialIndex} field. */
+        /** @return the value of the {@code mMaterialIndex} field. */
         @NativeType("unsigned int")
         public int mMaterialIndex() { return AIMesh.nmMaterialIndex(address()); }
-        /** @return a {@link AIString} view of the {@link AIMesh#mName} field. */
+        /** @return a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIMesh.nmName(address()); }
-        /** @return the value of the {@link AIMesh#mNumAnimMeshes} field. */
+        /** @return the value of the {@code mNumAnimMeshes} field. */
         @NativeType("unsigned int")
         public int mNumAnimMeshes() { return AIMesh.nmNumAnimMeshes(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIMesh#mAnimMeshes} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mAnimMeshes} field. */
         @NativeType("struct aiAnimMesh **")
         public @Nullable PointerBuffer mAnimMeshes() { return AIMesh.nmAnimMeshes(address()); }
-        /** @return the value of the {@link AIMesh#mMethod} field. */
+        /** @return the value of the {@code mMethod} field. */
         @NativeType("aiMorphingMethod")
         public int mMethod() { return AIMesh.nmMethod(address()); }
-        /** @return a {@link AIAABB} view of the {@link AIMesh#mAABB} field. */
+        /** @return a {@link AIAABB} view of the {@code mAABB} field. */
         @NativeType("struct aiAABB")
         public AIAABB mAABB() { return AIMesh.nmAABB(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link AIMesh#mTextureCoordsNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code mTextureCoordsNames} field. */
         @NativeType("struct aiString **")
         public @Nullable PointerBuffer mTextureCoordsNames() { return AIMesh.nmTextureCoordsNames(address()); }
 
-        /** Sets the specified value to the {@link AIMesh#mPrimitiveTypes} field. */
+        /** Sets the specified value to the {@code mPrimitiveTypes} field. */
         public AIMesh.Buffer mPrimitiveTypes(@NativeType("unsigned int") int value) { AIMesh.nmPrimitiveTypes(address(), value); return this; }
-        /** Sets the specified value to the {@link AIMesh#mNumVertices} field. */
+        /** Sets the specified value to the {@code mNumVertices} field. */
         public AIMesh.Buffer mNumVertices(@NativeType("unsigned int") int value) { AIMesh.nmNumVertices(address(), value); return this; }
-        /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link AIMesh#mVertices} field. */
+        /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mVertices} field. */
         public AIMesh.Buffer mVertices(@NativeType("struct aiVector3D *") AIVector3D.Buffer value) { AIMesh.nmVertices(address(), value); return this; }
-        /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link AIMesh#mNormals} field. */
+        /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mNormals} field. */
         public AIMesh.Buffer mNormals(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIMesh.nmNormals(address(), value); return this; }
-        /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link AIMesh#mTangents} field. */
+        /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mTangents} field. */
         public AIMesh.Buffer mTangents(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIMesh.nmTangents(address(), value); return this; }
-        /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@link AIMesh#mBitangents} field. */
+        /** Sets the address of the specified {@link AIVector3D.Buffer} to the {@code mBitangents} field. */
         public AIMesh.Buffer mBitangents(@NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIMesh.nmBitangents(address(), value); return this; }
-        /** Copies the specified {@link PointerBuffer} to the {@link AIMesh#mColors} field. */
+        /** Copies the specified {@link PointerBuffer} to the {@code mColors} field. */
         public AIMesh.Buffer mColors(@NativeType("struct aiColor4D *[AI_MAX_NUMBER_OF_COLOR_SETS]") PointerBuffer value) { AIMesh.nmColors(address(), value); return this; }
-        /** Copies the address of the specified {@link AIColor4D.Buffer} at the specified index of the {@link AIMesh#mColors} field. */
+        /** Copies the address of the specified {@link AIColor4D.Buffer} at the specified index of the {@code mColors} field. */
         public AIMesh.Buffer mColors(int index, @NativeType("struct aiColor4D *") AIColor4D.@Nullable Buffer value) { AIMesh.nmColors(address(), index, value); return this; }
-        /** Passes the element at {@code index} of the {@link AIMesh#mColors} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@code mColors} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIMesh.Buffer mColors(int index, java.util.function.Consumer<AIColor4D.@Nullable Buffer> consumer) { consumer.accept(mColors(index)); return this; }
-        /** Copies the specified {@link PointerBuffer} to the {@link AIMesh#mTextureCoords} field. */
+        /** Copies the specified {@link PointerBuffer} to the {@code mTextureCoords} field. */
         public AIMesh.Buffer mTextureCoords(@NativeType("struct aiVector3D *[AI_MAX_NUMBER_OF_TEXTURECOORDS]") PointerBuffer value) { AIMesh.nmTextureCoords(address(), value); return this; }
-        /** Copies the address of the specified {@link AIVector3D.Buffer} at the specified index of the {@link AIMesh#mTextureCoords} field. */
+        /** Copies the address of the specified {@link AIVector3D.Buffer} at the specified index of the {@code mTextureCoords} field. */
         public AIMesh.Buffer mTextureCoords(int index, @NativeType("struct aiVector3D *") AIVector3D.@Nullable Buffer value) { AIMesh.nmTextureCoords(address(), index, value); return this; }
-        /** Passes the element at {@code index} of the {@link AIMesh#mTextureCoords} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@code mTextureCoords} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIMesh.Buffer mTextureCoords(int index, java.util.function.Consumer<AIVector3D.@Nullable Buffer> consumer) { consumer.accept(mTextureCoords(index)); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@link AIMesh#mNumUVComponents} field. */
+        /** Copies the specified {@link IntBuffer} to the {@code mNumUVComponents} field. */
         public AIMesh.Buffer mNumUVComponents(@NativeType("unsigned int[AI_MAX_NUMBER_OF_TEXTURECOORDS]") IntBuffer value) { AIMesh.nmNumUVComponents(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link AIMesh#mNumUVComponents} field. */
+        /** Sets the specified value at the specified index of the {@code mNumUVComponents} field. */
         public AIMesh.Buffer mNumUVComponents(int index, @NativeType("unsigned int") int value) { AIMesh.nmNumUVComponents(address(), index, value); return this; }
-        /** Sets the address of the specified {@link AIFace.Buffer} to the {@link AIMesh#mFaces} field. */
+        /** Sets the address of the specified {@link AIFace.Buffer} to the {@code mFaces} field. */
         public AIMesh.Buffer mFaces(@NativeType("struct aiFace *") AIFace.Buffer value) { AIMesh.nmFaces(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link AIMesh#mBones} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code mBones} field. */
         public AIMesh.Buffer mBones(@Nullable @NativeType("struct aiBone **") PointerBuffer value) { AIMesh.nmBones(address(), value); return this; }
-        /** Sets the specified value to the {@link AIMesh#mMaterialIndex} field. */
+        /** Sets the specified value to the {@code mMaterialIndex} field. */
         public AIMesh.Buffer mMaterialIndex(@NativeType("unsigned int") int value) { AIMesh.nmMaterialIndex(address(), value); return this; }
-        /** Copies the specified {@link AIString} to the {@link AIMesh#mName} field. */
+        /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AIMesh.Buffer mName(@NativeType("struct aiString") AIString value) { AIMesh.nmName(address(), value); return this; }
-        /** Passes the {@link AIMesh#mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIMesh.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link AIMesh#mAnimMeshes} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code mAnimMeshes} field. */
         public AIMesh.Buffer mAnimMeshes(@Nullable @NativeType("struct aiAnimMesh **") PointerBuffer value) { AIMesh.nmAnimMeshes(address(), value); return this; }
-        /** Sets the specified value to the {@link AIMesh#mMethod} field. */
+        /** Sets the specified value to the {@code mMethod} field. */
         public AIMesh.Buffer mMethod(@NativeType("aiMorphingMethod") int value) { AIMesh.nmMethod(address(), value); return this; }
-        /** Copies the specified {@link AIAABB} to the {@link AIMesh#mAABB} field. */
+        /** Copies the specified {@link AIAABB} to the {@code mAABB} field. */
         public AIMesh.Buffer mAABB(@NativeType("struct aiAABB") AIAABB value) { AIMesh.nmAABB(address(), value); return this; }
-        /** Passes the {@link AIMesh#mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mAABB} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIMesh.Buffer mAABB(java.util.function.Consumer<AIAABB> consumer) { consumer.accept(mAABB()); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link AIMesh#mTextureCoordsNames} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code mTextureCoordsNames} field. */
         public AIMesh.Buffer mTextureCoordsNames(@Nullable @NativeType("struct aiString **") PointerBuffer value) { AIMesh.nmTextureCoordsNames(address(), value); return this; }
 
     }

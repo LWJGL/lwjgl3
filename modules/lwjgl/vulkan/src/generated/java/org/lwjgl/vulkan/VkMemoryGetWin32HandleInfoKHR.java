@@ -16,42 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing a Win32 handle memory export operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>The properties of the handle returned depend on the value of {@code handleType}. See {@code VkExternalMemoryHandleTypeFlagBits} for a description of the properties of the defined external memory handle types.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code handleType} <b>must</b> have been included in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} when {@code memory} was created</li>
- * <li>If {@code handleType} is defined as an NT handle, {@link KHRExternalMemoryWin32#vkGetMemoryWin32HandleKHR GetMemoryWin32HandleKHR} <b>must</b> be called no more than once for each valid unique combination of {@code memory} and {@code handleType}</li>
- * <li>{@code handleType} <b>must</b> be defined as an NT handle or a global share handle</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRExternalMemoryWin32#vkGetMemoryWin32HandleKHR GetMemoryWin32HandleKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryGetWin32HandleInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceMemory {@link #memory};
- *     VkExternalMemoryHandleTypeFlagBits {@link #handleType};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceMemory memory;
+ *     VkExternalMemoryHandleTypeFlagBits handleType;
+ * }}</pre>
  */
 public class VkMemoryGetWin32HandleInfoKHR extends Struct<VkMemoryGetWin32HandleInfoKHR> implements NativeResource {
 
@@ -107,28 +78,28 @@ public class VkMemoryGetWin32HandleInfoKHR extends Struct<VkMemoryGetWin32Handle
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the memory object from which the handle will be exported. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the type of handle requested. */
+    /** @return the value of the {@code handleType} field. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryGetWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR} value to the {@code sType} field. */
     public VkMemoryGetWin32HandleInfoKHR sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryGetWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkMemoryGetWin32HandleInfoKHR memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@link #handleType} field. */
+    /** Sets the specified value to the {@code handleType} field. */
     public VkMemoryGetWin32HandleInfoKHR handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,28 +320,28 @@ public class VkMemoryGetWin32HandleInfoKHR extends Struct<VkMemoryGetWin32Handle
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryGetWin32HandleInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryGetWin32HandleInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkMemoryGetWin32HandleInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryGetWin32HandleInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkMemoryGetWin32HandleInfoKHR#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkMemoryGetWin32HandleInfoKHR.nmemory(address()); }
-        /** @return the value of the {@link VkMemoryGetWin32HandleInfoKHR#handleType} field. */
+        /** @return the value of the {@code handleType} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagBits")
         public int handleType() { return VkMemoryGetWin32HandleInfoKHR.nhandleType(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryGetWin32HandleInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryGetWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryGetWin32HandleInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR} value to the {@link VkMemoryGetWin32HandleInfoKHR#sType} field. */
+        /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR} value to the {@code sType} field. */
         public VkMemoryGetWin32HandleInfoKHR.Buffer sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkMemoryGetWin32HandleInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryGetWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkMemoryGetWin32HandleInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryGetWin32HandleInfoKHR#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkMemoryGetWin32HandleInfoKHR.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkMemoryGetWin32HandleInfoKHR.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryGetWin32HandleInfoKHR#handleType} field. */
+        /** Sets the specified value to the {@code handleType} field. */
         public VkMemoryGetWin32HandleInfoKHR.Buffer handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { VkMemoryGetWin32HandleInfoKHR.nhandleType(address(), value); return this; }
 
     }

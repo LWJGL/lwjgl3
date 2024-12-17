@@ -16,21 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Arguments for how {@code openat2(2)} should open the target path.
- * 
- * <p>If only {@code flags} and {@code @}mode are non-zero, then {@code openat2(2)} operates very similarly to {@code openat(2)}.</p>
- * 
- * <p>However, unlike {@code openat(2)}, unknown or invalid bits in {@code flags} result in {@code -EINVAL} rather than being silently ignored. {@code mode}
- * must be zero unless one of {@link FCNTL#O_CREAT}, {@link FCNTL#O_TMPFILE} are set.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct open_how {
  *     __u64 flags;
  *     __u64 mode;
  *     __u64 resolve;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct open_how")
 public class OpenHow extends Struct<OpenHow> implements NativeResource {

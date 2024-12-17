@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Detailed configuration properties for an XrViewConfigurationProperties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_VIEW_CONFIGURATION_PROPERTIES TYPE_VIEW_CONFIGURATION_PROPERTIES}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrViewConfigurationView}, {@link XR10#xrGetViewConfigurationProperties GetViewConfigurationProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrViewConfigurationProperties {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrViewConfigurationType {@link #viewConfigurationType};
- *     XrBool32 {@link #fovMutable};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrViewConfigurationType viewConfigurationType;
+ *     XrBool32 fovMutable;
+ * }}</pre>
  */
 public class XrViewConfigurationProperties extends Struct<XrViewConfigurationProperties> implements NativeResource {
 
@@ -94,28 +78,28 @@ public class XrViewConfigurationProperties extends Struct<XrViewConfigurationPro
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrViewConfigurationType} of the configuration. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
-    /** indicates if the view field of view can be modified by the application. */
+    /** @return the value of the {@code fovMutable} field. */
     @NativeType("XrBool32")
     public boolean fovMutable() { return nfovMutable(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrViewConfigurationProperties type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_VIEW_CONFIGURATION_PROPERTIES TYPE_VIEW_CONFIGURATION_PROPERTIES} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_VIEW_CONFIGURATION_PROPERTIES TYPE_VIEW_CONFIGURATION_PROPERTIES} value to the {@code type} field. */
     public XrViewConfigurationProperties type$Default() { return type(XR10.XR_TYPE_VIEW_CONFIGURATION_PROPERTIES); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrViewConfigurationProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #viewConfigurationType} field. */
+    /** Sets the specified value to the {@code viewConfigurationType} field. */
     public XrViewConfigurationProperties viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { nviewConfigurationType(address(), value); return this; }
-    /** Sets the specified value to the {@link #fovMutable} field. */
+    /** Sets the specified value to the {@code fovMutable} field. */
     public XrViewConfigurationProperties fovMutable(@NativeType("XrBool32") boolean value) { nfovMutable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -317,28 +301,28 @@ public class XrViewConfigurationProperties extends Struct<XrViewConfigurationPro
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrViewConfigurationProperties#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewConfigurationProperties.ntype(address()); }
-        /** @return the value of the {@link XrViewConfigurationProperties#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrViewConfigurationProperties.nnext(address()); }
-        /** @return the value of the {@link XrViewConfigurationProperties#viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrViewConfigurationProperties.nviewConfigurationType(address()); }
-        /** @return the value of the {@link XrViewConfigurationProperties#fovMutable} field. */
+        /** @return the value of the {@code fovMutable} field. */
         @NativeType("XrBool32")
         public boolean fovMutable() { return XrViewConfigurationProperties.nfovMutable(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrViewConfigurationProperties#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrViewConfigurationProperties.Buffer type(@NativeType("XrStructureType") int value) { XrViewConfigurationProperties.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_VIEW_CONFIGURATION_PROPERTIES TYPE_VIEW_CONFIGURATION_PROPERTIES} value to the {@link XrViewConfigurationProperties#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_VIEW_CONFIGURATION_PROPERTIES TYPE_VIEW_CONFIGURATION_PROPERTIES} value to the {@code type} field. */
         public XrViewConfigurationProperties.Buffer type$Default() { return type(XR10.XR_TYPE_VIEW_CONFIGURATION_PROPERTIES); }
-        /** Sets the specified value to the {@link XrViewConfigurationProperties#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrViewConfigurationProperties.Buffer next(@NativeType("void *") long value) { XrViewConfigurationProperties.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationProperties#viewConfigurationType} field. */
+        /** Sets the specified value to the {@code viewConfigurationType} field. */
         public XrViewConfigurationProperties.Buffer viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { XrViewConfigurationProperties.nviewConfigurationType(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationProperties#fovMutable} field. */
+        /** Sets the specified value to the {@code fovMutable} field. */
         public XrViewConfigurationProperties.Buffer fovMutable(@NativeType("XrBool32") boolean value) { XrViewConfigurationProperties.nfovMutable(address(), value ? 1 : 0); return this; }
 
     }

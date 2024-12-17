@@ -17,19 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The opaque state struct for the XXH64 streaming API.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XXH64_state_t {
- *     XXH64_hash_t {@link #total_len};
- *     XXH64_hash_t {@link #acc}[4];
- *     unsigned char {@link #buffer}[32];
- *     XXH32_hash_t {@link #bufferedSize};
- *     XXH32_hash_t {@link #reserved32};
- *     XXH64_hash_t {@link #reserved64};
- * }</code></pre>
+ *     XXH64_hash_t total_len;
+ *     XXH64_hash_t acc[4];
+ *     unsigned char buffer[32];
+ *     XXH32_hash_t bufferedSize;
+ *     XXH32_hash_t reserved32;
+ *     XXH64_hash_t reserved64;
+ * }}</pre>
  */
 @NativeType("struct XXH64_state_t")
 public class XXH64State extends Struct<XXH64State> implements NativeResource {
@@ -92,28 +88,28 @@ public class XXH64State extends Struct<XXH64State> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** total length hashed. This is always 64-bit. */
+    /** @return the value of the {@code total_len} field. */
     @NativeType("XXH64_hash_t")
     public long total_len() { return ntotal_len(address()); }
-    /** accumulator lanes */
+    /** @return a {@link LongBuffer} view of the {@code acc} field. */
     @NativeType("XXH64_hash_t[4]")
     public LongBuffer acc() { return nacc(address()); }
-    /** accumulator lanes */
+    /** @return the value at the specified index of the {@code acc} field. */
     @NativeType("XXH64_hash_t")
     public long acc(int index) { return nacc(address(), index); }
-    /** internal buffer for partial reads */
+    /** @return a {@link ByteBuffer} view of the {@code buffer} field. */
     @NativeType("unsigned char[32]")
     public ByteBuffer buffer() { return nbuffer(address()); }
-    /** internal buffer for partial reads */
+    /** @return the value at the specified index of the {@code buffer} field. */
     @NativeType("unsigned char")
     public byte buffer(int index) { return nbuffer(address(), index); }
-    /** amount of data in {@code buffer} */
+    /** @return the value of the {@code bufferedSize} field. */
     @NativeType("XXH32_hash_t")
     public int bufferedSize() { return nbufferedSize(address()); }
-    /** reserved field, needed for padding anyways */
+    /** @return the value of the {@code reserved32} field. */
     @NativeType("XXH32_hash_t")
     public int reserved32() { return nreserved32(address()); }
-    /** reserved field. Do not read or write to it. */
+    /** @return the value of the {@code reserved64} field. */
     @NativeType("XXH64_hash_t")
     public long reserved64() { return nreserved64(address()); }
 
@@ -311,28 +307,28 @@ public class XXH64State extends Struct<XXH64State> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XXH64State#total_len} field. */
+        /** @return the value of the {@code total_len} field. */
         @NativeType("XXH64_hash_t")
         public long total_len() { return XXH64State.ntotal_len(address()); }
-        /** @return a {@link LongBuffer} view of the {@link XXH64State#acc} field. */
+        /** @return a {@link LongBuffer} view of the {@code acc} field. */
         @NativeType("XXH64_hash_t[4]")
         public LongBuffer acc() { return XXH64State.nacc(address()); }
-        /** @return the value at the specified index of the {@link XXH64State#acc} field. */
+        /** @return the value at the specified index of the {@code acc} field. */
         @NativeType("XXH64_hash_t")
         public long acc(int index) { return XXH64State.nacc(address(), index); }
-        /** @return a {@link ByteBuffer} view of the {@link XXH64State#buffer} field. */
+        /** @return a {@link ByteBuffer} view of the {@code buffer} field. */
         @NativeType("unsigned char[32]")
         public ByteBuffer buffer() { return XXH64State.nbuffer(address()); }
-        /** @return the value at the specified index of the {@link XXH64State#buffer} field. */
+        /** @return the value at the specified index of the {@code buffer} field. */
         @NativeType("unsigned char")
         public byte buffer(int index) { return XXH64State.nbuffer(address(), index); }
-        /** @return the value of the {@link XXH64State#bufferedSize} field. */
+        /** @return the value of the {@code bufferedSize} field. */
         @NativeType("XXH32_hash_t")
         public int bufferedSize() { return XXH64State.nbufferedSize(address()); }
-        /** @return the value of the {@link XXH64State#reserved32} field. */
+        /** @return the value of the {@code reserved32} field. */
         @NativeType("XXH32_hash_t")
         public int reserved32() { return XXH64State.nreserved32(address()); }
-        /** @return the value of the {@link XXH64State#reserved64} field. */
+        /** @return the value of the {@code reserved64} field. */
         @NativeType("XXH64_hash_t")
         public long reserved64() { return XXH64State.nreserved64(address()); }
 

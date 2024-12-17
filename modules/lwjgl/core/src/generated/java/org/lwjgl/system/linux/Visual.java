@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Visual structure; contains information about colormapping possible.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct Visual {
  *     void * ext_data;
  *     VisualID visualid;
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned long blue_mask;
  *     int bits_per_rgb;
  *     int map_entries;
- * }</code></pre>
+ * }}</pre>
  */
 public class Visual extends Struct<Visual> implements NativeResource {
 

@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct iovec {
- *     void * {@link #iov_base};
- *     size_t {@link #iov_len};
- * }</code></pre>
+ *     void * iov_base;
+ *     size_t iov_len;
+ * }}</pre>
  */
 @NativeType("struct iovec")
 public class IOVec extends Struct<IOVec> implements NativeResource {
@@ -73,16 +71,16 @@ public class IOVec extends Struct<IOVec> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** starting address */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code iov_base} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer iov_base() { return niov_base(address()); }
-    /** number of bytes to transfer */
+    /** @return the value of the {@code iov_len} field. */
     @NativeType("size_t")
     public long iov_len() { return niov_len(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #iov_base} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code iov_base} field. */
     public IOVec iov_base(@Nullable @NativeType("void *") ByteBuffer value) { niov_base(address(), value); return this; }
-    /** Sets the specified value to the {@link #iov_len} field. */
+    /** Sets the specified value to the {@code iov_len} field. */
     public IOVec iov_len(@NativeType("size_t") long value) { niov_len(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -272,16 +270,16 @@ public class IOVec extends Struct<IOVec> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link IOVec#iov_base} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code iov_base} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer iov_base() { return IOVec.niov_base(address()); }
-        /** @return the value of the {@link IOVec#iov_len} field. */
+        /** @return the value of the {@code iov_len} field. */
         @NativeType("size_t")
         public long iov_len() { return IOVec.niov_len(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link IOVec#iov_base} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code iov_base} field. */
         public IOVec.Buffer iov_base(@Nullable @NativeType("void *") ByteBuffer value) { IOVec.niov_base(address(), value); return this; }
-        /** Sets the specified value to the {@link IOVec#iov_len} field. */
+        /** Sets the specified value to the {@code iov_len} field. */
         public IOVec.Buffer iov_len(@NativeType("size_t") long value) { IOVec.niov_len(address(), value); return this; }
 
     }

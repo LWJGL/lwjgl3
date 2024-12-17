@@ -14,15 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to hold a simple doubly-linked list. These are used in many parts of FreeType.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_ListRec {
  *     {@link FT_ListNode FT_ListNode} head;
  *     {@link FT_ListNode FT_ListNode} tail;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_ListRec")
 public class FT_List extends Struct<FT_List> {

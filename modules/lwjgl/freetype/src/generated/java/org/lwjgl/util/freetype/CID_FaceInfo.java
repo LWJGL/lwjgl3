@@ -16,11 +16,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to represent CID Face information.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CID_FaceInfoRec {
  *     FT_String * cid_font_name;
  *     FT_Fixed cid_version;
@@ -40,7 +36,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UInt num_dicts;
  *     {@link CID_FaceDict CID_FaceDict} font_dicts;
  *     FT_ULong data_offset;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct CID_FaceInfoRec")
 public class CID_FaceInfo extends Struct<CID_FaceInfo> {

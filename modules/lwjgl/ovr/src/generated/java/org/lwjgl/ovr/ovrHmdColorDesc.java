@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrHmdColorDesc {
- *     ovrColorSpace {@link #ColorSpace};
+ *     ovrColorSpace ColorSpace;
  *     char[4];
- * }</code></pre>
+ * }}</pre>
  */
 public class ovrHmdColorDesc extends Struct<ovrHmdColorDesc> implements NativeResource {
 
@@ -71,15 +69,11 @@ public class ovrHmdColorDesc extends Struct<ovrHmdColorDesc> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * Approximate color space the HMD display can output.
-     * 
-     * <p>Use ColorPrimaries for more precise color space definition including white point (e.g. DN75)</p>
-     */
+    /** @return the value of the {@code ColorSpace} field. */
     @NativeType("ovrColorSpace")
     public int ColorSpace() { return nColorSpace(address()); }
 
-    /** Sets the specified value to the {@link #ColorSpace} field. */
+    /** Sets the specified value to the {@code ColorSpace} field. */
     public ovrHmdColorDesc ColorSpace(@NativeType("ovrColorSpace") int value) { nColorSpace(address(), value); return this; }
 
     /**
@@ -254,11 +248,11 @@ public class ovrHmdColorDesc extends Struct<ovrHmdColorDesc> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ovrHmdColorDesc#ColorSpace} field. */
+        /** @return the value of the {@code ColorSpace} field. */
         @NativeType("ovrColorSpace")
         public int ColorSpace() { return ovrHmdColorDesc.nColorSpace(address()); }
 
-        /** Sets the specified value to the {@link ovrHmdColorDesc#ColorSpace} field. */
+        /** Sets the specified value to the {@code ColorSpace} field. */
         public ovrHmdColorDesc.Buffer ColorSpace(@NativeType("ovrColorSpace") int value) { ovrHmdColorDesc.nColorSpace(address(), value); return this; }
 
     }

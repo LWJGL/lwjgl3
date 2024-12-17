@@ -17,18 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XFocusChangeEvent {
- *     int {@link #type};
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
- *     Window {@link #window};
- *     int {@link #mode};
- *     int {@link #detail};
- * }</code></pre>
+ *     int type;
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
+ *     Window window;
+ *     int mode;
+ *     int detail;
+ * }}</pre>
  */
 public class XFocusChangeEvent extends Struct<XFocusChangeEvent> implements NativeResource {
 
@@ -93,38 +91,38 @@ public class XFocusChangeEvent extends Struct<XFocusChangeEvent> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** one of:<br><table><tr><td>{@link X11#FocusIn}</td><td>{@link X11#FocusOut}</td></tr></table> */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** window it reported relative to */
+    /** @return the value of the {@code window} field. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** one of:<br><table><tr><td>{@link X11#NotifyNormal}</td><td>{@link X11#NotifyWhileGrabbed}</td><td>{@link X11#NotifyGrab}</td><td>{@link X11#NotifyUngrab}</td></tr></table> */
+    /** @return the value of the {@code mode} field. */
     public int mode() { return nmode(address()); }
-    /** one of:<br><table><tr><td>{@link X11#NotifyAncestor}</td><td>{@link X11#NotifyVirtual}</td><td>{@link X11#NotifyInferior}</td><td>{@link X11#NotifyNonlinear}</td><td>{@link X11#NotifyNonlinearVirtual}</td></tr><tr><td>{@link X11#NotifyPointer}</td><td>{@link X11#NotifyPointerRoot}</td><td>{@link X11#NotifyDetailNone}</td></tr></table> */
+    /** @return the value of the {@code detail} field. */
     public int detail() { return ndetail(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XFocusChangeEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XFocusChangeEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XFocusChangeEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XFocusChangeEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #window} field. */
+    /** Sets the specified value to the {@code window} field. */
     public XFocusChangeEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public XFocusChangeEvent mode(int value) { nmode(address(), value); return this; }
-    /** Sets the specified value to the {@link #detail} field. */
+    /** Sets the specified value to the {@code detail} field. */
     public XFocusChangeEvent detail(int value) { ndetail(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -372,38 +370,38 @@ public class XFocusChangeEvent extends Struct<XFocusChangeEvent> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XFocusChangeEvent#type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XFocusChangeEvent.ntype(address()); }
-        /** @return the value of the {@link XFocusChangeEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XFocusChangeEvent.nserial(address()); }
-        /** @return the value of the {@link XFocusChangeEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XFocusChangeEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XFocusChangeEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XFocusChangeEvent.ndisplay(address()); }
-        /** @return the value of the {@link XFocusChangeEvent#window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("Window")
         public long window() { return XFocusChangeEvent.nwindow(address()); }
-        /** @return the value of the {@link XFocusChangeEvent#mode} field. */
+        /** @return the value of the {@code mode} field. */
         public int mode() { return XFocusChangeEvent.nmode(address()); }
-        /** @return the value of the {@link XFocusChangeEvent#detail} field. */
+        /** @return the value of the {@code detail} field. */
         public int detail() { return XFocusChangeEvent.ndetail(address()); }
 
-        /** Sets the specified value to the {@link XFocusChangeEvent#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XFocusChangeEvent.Buffer type(int value) { XFocusChangeEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XFocusChangeEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XFocusChangeEvent.Buffer serial(@NativeType("unsigned long") long value) { XFocusChangeEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XFocusChangeEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XFocusChangeEvent.Buffer send_event(@NativeType("Bool") boolean value) { XFocusChangeEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XFocusChangeEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XFocusChangeEvent.Buffer display(@NativeType("Display *") long value) { XFocusChangeEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XFocusChangeEvent#window} field. */
+        /** Sets the specified value to the {@code window} field. */
         public XFocusChangeEvent.Buffer window(@NativeType("Window") long value) { XFocusChangeEvent.nwindow(address(), value); return this; }
-        /** Sets the specified value to the {@link XFocusChangeEvent#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public XFocusChangeEvent.Buffer mode(int value) { XFocusChangeEvent.nmode(address(), value); return this; }
-        /** Sets the specified value to the {@link XFocusChangeEvent#detail} field. */
+        /** Sets the specified value to the {@code detail} field. */
         public XFocusChangeEvent.Buffer detail(int value) { XFocusChangeEvent.ndetail(address(), value); return this; }
 
     }

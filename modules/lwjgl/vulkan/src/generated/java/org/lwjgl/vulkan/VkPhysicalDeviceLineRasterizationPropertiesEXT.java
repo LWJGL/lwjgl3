@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceLineRasterizationProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceLineRasterizationPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t lineSubPixelPrecisionBits;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceLineRasterizationPropertiesEXT extends VkPhysicalDeviceLineRasterizationProperties {
 

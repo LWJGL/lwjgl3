@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUmulticastObjectProp {
  *     unsigned int numDevices;
  *     size_t size;
  *     unsigned long long handleTypes;
  *     unsigned long long flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUmulticastObjectProp extends Struct<CUmulticastObjectProp> implements NativeResource {
 

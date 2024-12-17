@@ -15,12 +15,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_multi_draw_arrays.txt">EXT_multi_draw_arrays</a> extension.
- * 
- * <p>These functions behave identically to the standard OpenGL 1.1 functions glDrawArrays() and glDrawElements() except they handle multiple lists of
- * vertices in one call. Their main purpose is to allow one function call to render more than one primitive such as triangle strip, triangle fan, etc.</p>
- */
 public class EXTMultiDrawArrays {
 
     static { GLES.initialize(); }
@@ -31,8 +25,10 @@ public class EXTMultiDrawArrays {
 
     // --- [ glMultiDrawArraysEXT ] ---
 
+    /** {@code void glMultiDrawArraysEXT(GLenum mode, GLint const * first, GLsizei const * count, GLsizei drawcount)} */
     public static native void nglMultiDrawArraysEXT(int mode, long first, long count, int drawcount);
 
+    /** {@code void glMultiDrawArraysEXT(GLenum mode, GLint const * first, GLsizei const * count, GLsizei drawcount)} */
     public static void glMultiDrawArraysEXT(@NativeType("GLenum") int mode, @NativeType("GLint const *") IntBuffer first, @NativeType("GLsizei const *") IntBuffer count) {
         if (CHECKS) {
             check(count, first.remaining());
@@ -42,8 +38,10 @@ public class EXTMultiDrawArrays {
 
     // --- [ glMultiDrawElementsEXT ] ---
 
+    /** {@code void glMultiDrawElementsEXT(GLenum mode, GLsizei const * count, GLenum type, void const * const * indices, GLsizei drawcount)} */
     public static native void nglMultiDrawElementsEXT(int mode, long count, int type, long indices, int drawcount);
 
+    /** {@code void glMultiDrawElementsEXT(GLenum mode, GLsizei const * count, GLenum type, void const * const * indices, GLsizei drawcount)} */
     public static void glMultiDrawElementsEXT(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") IntBuffer count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices) {
         if (CHECKS) {
             check(indices, count.remaining());
@@ -51,7 +49,7 @@ public class EXTMultiDrawArrays {
         nglMultiDrawElementsEXT(mode, memAddress(count), type, memAddress(indices), count.remaining());
     }
 
-    /** Array version of: {@link #glMultiDrawArraysEXT MultiDrawArraysEXT} */
+    /** {@code void glMultiDrawArraysEXT(GLenum mode, GLint const * first, GLsizei const * count, GLsizei drawcount)} */
     public static void glMultiDrawArraysEXT(@NativeType("GLenum") int mode, @NativeType("GLint const *") int[] first, @NativeType("GLsizei const *") int[] count) {
         long __functionAddress = GLES.getICD().glMultiDrawArraysEXT;
         if (CHECKS) {
@@ -61,7 +59,7 @@ public class EXTMultiDrawArrays {
         callPPV(mode, first, count, first.length, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiDrawElementsEXT MultiDrawElementsEXT} */
+    /** {@code void glMultiDrawElementsEXT(GLenum mode, GLsizei const * count, GLenum type, void const * const * indices, GLsizei drawcount)} */
     public static void glMultiDrawElementsEXT(@NativeType("GLenum") int mode, @NativeType("GLsizei const *") int[] count, @NativeType("GLenum") int type, @NativeType("void const * const *") PointerBuffer indices) {
         long __functionAddress = GLES.getICD().glMultiDrawElementsEXT;
         if (CHECKS) {

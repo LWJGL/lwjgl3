@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     char const *message,
- *     char *user
- * )</code></pre>
- */
+/** Callback function: {@link #invoke aiLogStreamCallback} */
 public abstract class AILogStreamCallback extends Callback implements AILogStreamCallbackI {
 
     /**

@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_ARRAY_DESCRIPTOR {
  *     size_t Width;
  *     size_t Height;
  *     CUarray_format Format;
  *     unsigned int NumChannels;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_ARRAY_DESCRIPTOR extends Struct<CUDA_ARRAY_DESCRIPTOR> implements NativeResource {
 

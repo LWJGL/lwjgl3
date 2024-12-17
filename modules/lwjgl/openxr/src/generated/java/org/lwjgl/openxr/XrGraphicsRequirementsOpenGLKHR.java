@@ -16,33 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * OpenGL API version requirements.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrGraphicsRequirementsOpenGLKHR} is populated by {@link KHROpenGLEnable#xrGetOpenGLGraphicsRequirementsKHR GetOpenGLGraphicsRequirementsKHR} with the runtime’s OpenGL API version requirements.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsRequirementsOpenGLKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHROpenGLEnable#xrGetOpenGLGraphicsRequirementsKHR GetOpenGLGraphicsRequirementsKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGraphicsRequirementsOpenGLKHR {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrVersion {@link #minApiVersionSupported};
- *     XrVersion {@link #maxApiVersionSupported};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrVersion minApiVersionSupported;
+ *     XrVersion maxApiVersionSupported;
+ * }}</pre>
  */
 public class XrGraphicsRequirementsOpenGLKHR extends Struct<XrGraphicsRequirementsOpenGLKHR> implements NativeResource {
 
@@ -98,28 +78,28 @@ public class XrGraphicsRequirementsOpenGLKHR extends Struct<XrGraphicsRequiremen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the minimum version of OpenGL that the runtime supports. Uses {@link XR10#XR_MAKE_VERSION} on major and minor API version, ignoring any patch version component. */
+    /** @return the value of the {@code minApiVersionSupported} field. */
     @NativeType("XrVersion")
     public long minApiVersionSupported() { return nminApiVersionSupported(address()); }
-    /** the maximum version of OpenGL that the runtime has been tested on and is known to support. Newer OpenGL versions might work if they are compatible. Uses {@link XR10#XR_MAKE_VERSION} on major and minor API version, ignoring any patch version component. */
+    /** @return the value of the {@code maxApiVersionSupported} field. */
     @NativeType("XrVersion")
     public long maxApiVersionSupported() { return nmaxApiVersionSupported(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrGraphicsRequirementsOpenGLKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR} value to the {@code type} field. */
     public XrGraphicsRequirementsOpenGLKHR type$Default() { return type(KHROpenGLEnable.XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrGraphicsRequirementsOpenGLKHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #minApiVersionSupported} field. */
+    /** Sets the specified value to the {@code minApiVersionSupported} field. */
     public XrGraphicsRequirementsOpenGLKHR minApiVersionSupported(@NativeType("XrVersion") long value) { nminApiVersionSupported(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxApiVersionSupported} field. */
+    /** Sets the specified value to the {@code maxApiVersionSupported} field. */
     public XrGraphicsRequirementsOpenGLKHR maxApiVersionSupported(@NativeType("XrVersion") long value) { nmaxApiVersionSupported(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,28 +301,28 @@ public class XrGraphicsRequirementsOpenGLKHR extends Struct<XrGraphicsRequiremen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrGraphicsRequirementsOpenGLKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsRequirementsOpenGLKHR.ntype(address()); }
-        /** @return the value of the {@link XrGraphicsRequirementsOpenGLKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrGraphicsRequirementsOpenGLKHR.nnext(address()); }
-        /** @return the value of the {@link XrGraphicsRequirementsOpenGLKHR#minApiVersionSupported} field. */
+        /** @return the value of the {@code minApiVersionSupported} field. */
         @NativeType("XrVersion")
         public long minApiVersionSupported() { return XrGraphicsRequirementsOpenGLKHR.nminApiVersionSupported(address()); }
-        /** @return the value of the {@link XrGraphicsRequirementsOpenGLKHR#maxApiVersionSupported} field. */
+        /** @return the value of the {@code maxApiVersionSupported} field. */
         @NativeType("XrVersion")
         public long maxApiVersionSupported() { return XrGraphicsRequirementsOpenGLKHR.nmaxApiVersionSupported(address()); }
 
-        /** Sets the specified value to the {@link XrGraphicsRequirementsOpenGLKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrGraphicsRequirementsOpenGLKHR.Buffer type(@NativeType("XrStructureType") int value) { XrGraphicsRequirementsOpenGLKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR} value to the {@link XrGraphicsRequirementsOpenGLKHR#type} field. */
+        /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR} value to the {@code type} field. */
         public XrGraphicsRequirementsOpenGLKHR.Buffer type$Default() { return type(KHROpenGLEnable.XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR); }
-        /** Sets the specified value to the {@link XrGraphicsRequirementsOpenGLKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrGraphicsRequirementsOpenGLKHR.Buffer next(@NativeType("void *") long value) { XrGraphicsRequirementsOpenGLKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsRequirementsOpenGLKHR#minApiVersionSupported} field. */
+        /** Sets the specified value to the {@code minApiVersionSupported} field. */
         public XrGraphicsRequirementsOpenGLKHR.Buffer minApiVersionSupported(@NativeType("XrVersion") long value) { XrGraphicsRequirementsOpenGLKHR.nminApiVersionSupported(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsRequirementsOpenGLKHR#maxApiVersionSupported} field. */
+        /** Sets the specified value to the {@code maxApiVersionSupported} field. */
         public XrGraphicsRequirementsOpenGLKHR.Buffer maxApiVersionSupported(@NativeType("XrVersion") long value) { XrGraphicsRequirementsOpenGLKHR.nmaxApiVersionSupported(address(), value); return this; }
 
     }

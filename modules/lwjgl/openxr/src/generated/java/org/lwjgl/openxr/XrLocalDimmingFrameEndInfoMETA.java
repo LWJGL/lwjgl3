@@ -16,33 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Local dimming meta data for the current submitted frame.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrLocalDimmingFrameEndInfoMETA} is a structure that an application <b>can</b> chain in {@link XrFrameEndInfo} in order to request a local dimming mode.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METALocalDimming XR_META_local_dimming} extension <b>must</b> be enabled prior to using {@link XrLocalDimmingFrameEndInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METALocalDimming#XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META TYPE_LOCAL_DIMMING_FRAME_END_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code localDimmingMode} <b>must</b> be a valid {@code XrLocalDimmingModeMETA} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFrameEndInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrLocalDimmingFrameEndInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrLocalDimmingModeMETA {@link #localDimmingMode};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrLocalDimmingModeMETA localDimmingMode;
+ * }}</pre>
  */
 public class XrLocalDimmingFrameEndInfoMETA extends Struct<XrLocalDimmingFrameEndInfoMETA> implements NativeResource {
 
@@ -95,23 +74,23 @@ public class XrLocalDimmingFrameEndInfoMETA extends Struct<XrLocalDimmingFrameEn
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the local dimming mode for current submitted frame. */
+    /** @return the value of the {@code localDimmingMode} field. */
     @NativeType("XrLocalDimmingModeMETA")
     public int localDimmingMode() { return nlocalDimmingMode(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrLocalDimmingFrameEndInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METALocalDimming#XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META TYPE_LOCAL_DIMMING_FRAME_END_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METALocalDimming#XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META TYPE_LOCAL_DIMMING_FRAME_END_INFO_META} value to the {@code type} field. */
     public XrLocalDimmingFrameEndInfoMETA type$Default() { return type(METALocalDimming.XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrLocalDimmingFrameEndInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #localDimmingMode} field. */
+    /** Sets the specified value to the {@code localDimmingMode} field. */
     public XrLocalDimmingFrameEndInfoMETA localDimmingMode(@NativeType("XrLocalDimmingModeMETA") int value) { nlocalDimmingMode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,23 +286,23 @@ public class XrLocalDimmingFrameEndInfoMETA extends Struct<XrLocalDimmingFrameEn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrLocalDimmingFrameEndInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrLocalDimmingFrameEndInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrLocalDimmingFrameEndInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrLocalDimmingFrameEndInfoMETA.nnext(address()); }
-        /** @return the value of the {@link XrLocalDimmingFrameEndInfoMETA#localDimmingMode} field. */
+        /** @return the value of the {@code localDimmingMode} field. */
         @NativeType("XrLocalDimmingModeMETA")
         public int localDimmingMode() { return XrLocalDimmingFrameEndInfoMETA.nlocalDimmingMode(address()); }
 
-        /** Sets the specified value to the {@link XrLocalDimmingFrameEndInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrLocalDimmingFrameEndInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrLocalDimmingFrameEndInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METALocalDimming#XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META TYPE_LOCAL_DIMMING_FRAME_END_INFO_META} value to the {@link XrLocalDimmingFrameEndInfoMETA#type} field. */
+        /** Sets the {@link METALocalDimming#XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META TYPE_LOCAL_DIMMING_FRAME_END_INFO_META} value to the {@code type} field. */
         public XrLocalDimmingFrameEndInfoMETA.Buffer type$Default() { return type(METALocalDimming.XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META); }
-        /** Sets the specified value to the {@link XrLocalDimmingFrameEndInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrLocalDimmingFrameEndInfoMETA.Buffer next(@NativeType("void const *") long value) { XrLocalDimmingFrameEndInfoMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrLocalDimmingFrameEndInfoMETA#localDimmingMode} field. */
+        /** Sets the specified value to the {@code localDimmingMode} field. */
         public XrLocalDimmingFrameEndInfoMETA.Buffer localDimmingMode(@NativeType("XrLocalDimmingModeMETA") int value) { XrLocalDimmingFrameEndInfoMETA.nlocalDimmingMode(address(), value); return this; }
 
     }

@@ -16,41 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * OpenGL-specific swapchain image structure.
- * 
- * <h5>Description</h5>
- * 
- * <p>If a given session was created with a stext:XrGraphicsBindingOpenGL*KHR, the following conditions <b>must</b> apply.</p>
- * 
- * <ul>
- * <li>Calls to {@link XR10#xrEnumerateSwapchainImages EnumerateSwapchainImages} on an {@code XrSwapchain} in that session <b>must</b> return an array of {@link XrSwapchainImageOpenGLKHR} structures.</li>
- * <li>Whenever an OpenXR function accepts an {@link XrSwapchainImageBaseHeader} pointer as a parameter in that session, the runtime <b>must</b> also accept a pointer to an {@link XrSwapchainImageOpenGLKHR}.</li>
- * </ul>
- * 
- * <p>The OpenXR runtime <b>must</b> interpret the bottom-left corner of the swapchain image as the coordinate origin unless specified otherwise by extension functionality.</p>
- * 
- * <p>The OpenXR runtime <b>must</b> interpret the swapchain images in a clip space of positive Y pointing up, near Z plane at -1, and far Z plane at 1.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using {@link XrSwapchainImageOpenGLKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHROpenGLEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSwapchainImageBaseHeader}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainImageOpenGLKHR {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #image};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t image;
+ * }}</pre>
  */
 public class XrSwapchainImageOpenGLKHR extends Struct<XrSwapchainImageOpenGLKHR> implements NativeResource {
 
@@ -103,21 +74,21 @@ public class XrSwapchainImageOpenGLKHR extends Struct<XrSwapchainImageOpenGLKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the OpenGL texture handle associated with this swapchain image. */
+    /** @return the value of the {@code image} field. */
     @NativeType("uint32_t")
     public int image() { return nimage(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSwapchainImageOpenGLKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHROpenGLEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHROpenGLEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR} value to the {@code type} field. */
     public XrSwapchainImageOpenGLKHR type$Default() { return type(KHROpenGLEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSwapchainImageOpenGLKHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,21 +290,21 @@ public class XrSwapchainImageOpenGLKHR extends Struct<XrSwapchainImageOpenGLKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSwapchainImageOpenGLKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainImageOpenGLKHR.ntype(address()); }
-        /** @return the value of the {@link XrSwapchainImageOpenGLKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSwapchainImageOpenGLKHR.nnext(address()); }
-        /** @return the value of the {@link XrSwapchainImageOpenGLKHR#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("uint32_t")
         public int image() { return XrSwapchainImageOpenGLKHR.nimage(address()); }
 
-        /** Sets the specified value to the {@link XrSwapchainImageOpenGLKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSwapchainImageOpenGLKHR.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainImageOpenGLKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHROpenGLEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR} value to the {@link XrSwapchainImageOpenGLKHR#type} field. */
+        /** Sets the {@link KHROpenGLEnable#XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR} value to the {@code type} field. */
         public XrSwapchainImageOpenGLKHR.Buffer type$Default() { return type(KHROpenGLEnable.XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR); }
-        /** Sets the specified value to the {@link XrSwapchainImageOpenGLKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSwapchainImageOpenGLKHR.Buffer next(@NativeType("void *") long value) { XrSwapchainImageOpenGLKHR.nnext(address(), value); return this; }
 
     }

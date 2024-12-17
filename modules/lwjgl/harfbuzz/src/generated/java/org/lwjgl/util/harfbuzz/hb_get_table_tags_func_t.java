@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * unsigned int (*{@link #invoke}) (
- *     hb_face_t const *face,
- *     unsigned int start_offset,
- *     unsigned int *table_count,
- *     hb_tag_t *table_tags,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_get_table_tags_func_t} */
 public abstract class hb_get_table_tags_func_t extends Callback implements hb_get_table_tags_func_tI {
 
     /**

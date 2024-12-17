@@ -17,30 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters to create a CUDA Function.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code module} <b>must</b> be a valid {@code VkCudaModuleNV} handle</li>
- * <li>{@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVCudaKernelLaunch#vkCreateCudaFunctionNV CreateCudaFunctionNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCudaFunctionCreateInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkCudaModuleNV {@link #module};
- *     char const * {@link #pName};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkCudaModuleNV module;
+ *     char const * pName;
+ * }}</pre>
  */
 public class VkCudaFunctionCreateInfoNV extends Struct<VkCudaFunctionCreateInfoNV> implements NativeResource {
 
@@ -96,31 +79,31 @@ public class VkCudaFunctionCreateInfoNV extends Struct<VkCudaFunctionCreateInfoN
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the CUDA {@code VkCudaModuleNV} module in which the function resides. */
+    /** @return the value of the {@code module} field. */
     @NativeType("VkCudaModuleNV")
     public long module() { return nmodule(address()); }
-    /** a null-terminated UTF-8 string containing the name of the shader entry point for this stage. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pName} field. */
     @NativeType("char const *")
     public ByteBuffer pName() { return npName(address()); }
-    /** a null-terminated UTF-8 string containing the name of the shader entry point for this stage. */
+    /** @return the null-terminated string pointed to by the {@code pName} field. */
     @NativeType("char const *")
     public String pNameString() { return npNameString(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCudaFunctionCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV} value to the {@code sType} field. */
     public VkCudaFunctionCreateInfoNV sType$Default() { return sType(NVCudaKernelLaunch.VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCudaFunctionCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #module} field. */
+    /** Sets the specified value to the {@code module} field. */
     public VkCudaFunctionCreateInfoNV module(@NativeType("VkCudaModuleNV") long value) { nmodule(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #pName} field. */
+    /** Sets the address of the specified encoded string to the {@code pName} field. */
     public VkCudaFunctionCreateInfoNV pName(@NativeType("char const *") ByteBuffer value) { npName(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,31 +319,31 @@ public class VkCudaFunctionCreateInfoNV extends Struct<VkCudaFunctionCreateInfoN
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCudaFunctionCreateInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCudaFunctionCreateInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkCudaFunctionCreateInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCudaFunctionCreateInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkCudaFunctionCreateInfoNV#module} field. */
+        /** @return the value of the {@code module} field. */
         @NativeType("VkCudaModuleNV")
         public long module() { return VkCudaFunctionCreateInfoNV.nmodule(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkCudaFunctionCreateInfoNV#pName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pName} field. */
         @NativeType("char const *")
         public ByteBuffer pName() { return VkCudaFunctionCreateInfoNV.npName(address()); }
-        /** @return the null-terminated string pointed to by the {@link VkCudaFunctionCreateInfoNV#pName} field. */
+        /** @return the null-terminated string pointed to by the {@code pName} field. */
         @NativeType("char const *")
         public String pNameString() { return VkCudaFunctionCreateInfoNV.npNameString(address()); }
 
-        /** Sets the specified value to the {@link VkCudaFunctionCreateInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCudaFunctionCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkCudaFunctionCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV} value to the {@link VkCudaFunctionCreateInfoNV#sType} field. */
+        /** Sets the {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV} value to the {@code sType} field. */
         public VkCudaFunctionCreateInfoNV.Buffer sType$Default() { return sType(NVCudaKernelLaunch.VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV); }
-        /** Sets the specified value to the {@link VkCudaFunctionCreateInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCudaFunctionCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkCudaFunctionCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaFunctionCreateInfoNV#module} field. */
+        /** Sets the specified value to the {@code module} field. */
         public VkCudaFunctionCreateInfoNV.Buffer module(@NativeType("VkCudaModuleNV") long value) { VkCudaFunctionCreateInfoNV.nmodule(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link VkCudaFunctionCreateInfoNV#pName} field. */
+        /** Sets the address of the specified encoded string to the {@code pName} field. */
         public VkCudaFunctionCreateInfoNV.Buffer pName(@NativeType("char const *") ByteBuffer value) { VkCudaFunctionCreateInfoNV.npName(address(), value); return this; }
 
     }

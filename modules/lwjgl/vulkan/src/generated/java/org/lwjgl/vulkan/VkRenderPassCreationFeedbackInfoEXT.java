@@ -14,18 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Feedback about the creation of a render pass.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRenderPassCreationFeedbackCreateInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderPassCreationFeedbackInfoEXT {
- *     uint32_t {@link #postMergeSubpassCount};
- * }</code></pre>
+ *     uint32_t postMergeSubpassCount;
+ * }}</pre>
  */
 public class VkRenderPassCreationFeedbackInfoEXT extends Struct<VkRenderPassCreationFeedbackInfoEXT> {
 
@@ -72,7 +64,7 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct<VkRenderPassCrea
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the subpass count after merge. */
+    /** @return the value of the {@code postMergeSubpassCount} field. */
     @NativeType("uint32_t")
     public int postMergeSubpassCount() { return npostMergeSubpassCount(address()); }
 
@@ -151,7 +143,7 @@ public class VkRenderPassCreationFeedbackInfoEXT extends Struct<VkRenderPassCrea
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderPassCreationFeedbackInfoEXT#postMergeSubpassCount} field. */
+        /** @return the value of the {@code postMergeSubpassCount} field. */
         @NativeType("uint32_t")
         public int postMergeSubpassCount() { return VkRenderPassCreationFeedbackInfoEXT.npostMergeSubpassCount(address()); }
 

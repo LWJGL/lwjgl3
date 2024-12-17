@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * An application-defined function that processes messages sent to a window.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LRESULT (*{@link #invoke}) (
- *     HWND hwnd,
- *     UINT uMsg,
- *     WPARAM wParam,
- *     LPARAM lParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke WNDPROC} */
 @FunctionalInterface
 @NativeType("WNDPROC")
 public interface WindowProcI extends CallbackI {
@@ -49,14 +37,7 @@ public interface WindowProcI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /**
-     * Will be called for each message sent to the window.
-     *
-     * @param hwnd   a handle to the window procedure that received the message
-     * @param uMsg   the message
-     * @param wParam additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter.
-     * @param lParam additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter.
-     */
+    /** {@code LRESULT (* WNDPROC) (HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)} */
     @NativeType("LRESULT") long invoke(@NativeType("HWND") long hwnd, @NativeType("UINT") int uMsg, @NativeType("WPARAM") long wParam, @NativeType("LPARAM") long lParam);
 
 }

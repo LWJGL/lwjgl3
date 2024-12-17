@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameter to disable the internal pipeline cache.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkDeviceCreateInfo}{@code ::pNext} chain does not include this structure, then {@code disableInternalCache} defaults to {@link VK10#VK_FALSE FALSE}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@link VkPhysicalDevicePipelineBinaryPropertiesKHR}{@code ::pipelineBinaryInternalCacheControl} is {@link VK10#VK_FALSE FALSE}, {@code disableInternalCache} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDevicePipelineBinaryInternalCacheControlKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #disableInternalCache};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 disableInternalCache;
+ * }}</pre>
  */
 public class VkDevicePipelineBinaryInternalCacheControlKHR extends Struct<VkDevicePipelineBinaryInternalCacheControlKHR> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class VkDevicePipelineBinaryInternalCacheControlKHR extends Struct<VkDevi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether or not to disable the implementation’s internal pipeline cache. */
+    /** @return the value of the {@code disableInternalCache} field. */
     @NativeType("VkBool32")
     public boolean disableInternalCache() { return ndisableInternalCache(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDevicePipelineBinaryInternalCacheControlKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR} value to the {@code sType} field. */
     public VkDevicePipelineBinaryInternalCacheControlKHR sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDevicePipelineBinaryInternalCacheControlKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #disableInternalCache} field. */
+    /** Sets the specified value to the {@code disableInternalCache} field. */
     public VkDevicePipelineBinaryInternalCacheControlKHR disableInternalCache(@NativeType("VkBool32") boolean value) { ndisableInternalCache(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class VkDevicePipelineBinaryInternalCacheControlKHR extends Struct<VkDevi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDevicePipelineBinaryInternalCacheControlKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDevicePipelineBinaryInternalCacheControlKHR.nsType(address()); }
-        /** @return the value of the {@link VkDevicePipelineBinaryInternalCacheControlKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDevicePipelineBinaryInternalCacheControlKHR.npNext(address()); }
-        /** @return the value of the {@link VkDevicePipelineBinaryInternalCacheControlKHR#disableInternalCache} field. */
+        /** @return the value of the {@code disableInternalCache} field. */
         @NativeType("VkBool32")
         public boolean disableInternalCache() { return VkDevicePipelineBinaryInternalCacheControlKHR.ndisableInternalCache(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkDevicePipelineBinaryInternalCacheControlKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDevicePipelineBinaryInternalCacheControlKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDevicePipelineBinaryInternalCacheControlKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR} value to the {@link VkDevicePipelineBinaryInternalCacheControlKHR#sType} field. */
+        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR} value to the {@code sType} field. */
         public VkDevicePipelineBinaryInternalCacheControlKHR.Buffer sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR); }
-        /** Sets the specified value to the {@link VkDevicePipelineBinaryInternalCacheControlKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDevicePipelineBinaryInternalCacheControlKHR.Buffer pNext(@NativeType("void const *") long value) { VkDevicePipelineBinaryInternalCacheControlKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDevicePipelineBinaryInternalCacheControlKHR#disableInternalCache} field. */
+        /** Sets the specified value to the {@code disableInternalCache} field. */
         public VkDevicePipelineBinaryInternalCacheControlKHR.Buffer disableInternalCache(@NativeType("VkBool32") boolean value) { VkDevicePipelineBinaryInternalCacheControlKHR.ndisableInternalCache(address(), value ? 1 : 0); return this; }
 
     }

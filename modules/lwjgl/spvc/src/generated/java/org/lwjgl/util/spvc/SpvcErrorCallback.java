@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link Spvc#spvc_context_set_error_callback context_set_error_callback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *userdata,
- *     char const *error
- * )</code></pre>
- */
+/** Callback function: {@link #invoke spvc_error_callback} */
 public abstract class SpvcErrorCallback extends Callback implements SpvcErrorCallbackI {
 
     /**

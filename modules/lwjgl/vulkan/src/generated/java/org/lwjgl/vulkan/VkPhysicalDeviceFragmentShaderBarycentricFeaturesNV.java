@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 fragmentShaderBarycentric;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV extends VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
 

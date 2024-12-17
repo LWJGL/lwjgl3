@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link CL20#clEnqueueSVMFree EnqueueSVMFree} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     cl_command_queue queue,
- *     cl_uint num_svm_pointers,
- *     void **svm_pointers,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (cl_command_queue, cl_uint, void **, void *)")
 public interface CLSVMFreeCallbackI extends CallbackI {
@@ -48,14 +36,7 @@ public interface CLSVMFreeCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called to free shared virtual memory pointers.
-     *
-     * @param queue            a valid host command-queue
-     * @param num_svm_pointers the number of pointers in the {@code svm_pointers} array
-     * @param svm_pointers     an array of shared virtual memory pointers to be freed
-     * @param user_data        the user-specified value that was passed when calling {@link CL20#clEnqueueSVMFree EnqueueSVMFree}
-     */
+    /** {@code void (*) (cl_command_queue queue, cl_uint num_svm_pointers, void ** svm_pointers, void * user_data)} */
     void invoke(@NativeType("cl_command_queue") long queue, @NativeType("cl_uint") int num_svm_pointers, @NativeType("void **") long svm_pointers, @NativeType("void *") long user_data);
 
 }

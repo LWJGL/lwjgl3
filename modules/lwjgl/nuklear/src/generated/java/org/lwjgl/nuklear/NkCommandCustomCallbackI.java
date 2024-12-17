@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     void *canvas,
- *     short x,
- *     short y,
- *     unsigned short w,
- *     unsigned short h,
- *     nk_handle callback_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_command_custom_callback} */
 @FunctionalInterface
 @NativeType("nk_command_custom_callback")
 public interface NkCommandCustomCallbackI extends CallbackI {
@@ -51,6 +39,7 @@ public interface NkCommandCustomCallbackI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code void * (* nk_command_custom_callback) (void * canvas, short x, short y, unsigned short w, unsigned short h, nk_handle callback_data)} */
     @NativeType("void *") long invoke(@NativeType("void *") long canvas, short x, short y, @NativeType("unsigned short") short w, @NativeType("unsigned short") short h, @NativeType("nk_handle") long callback_data);
 
 }

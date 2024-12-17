@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceExternalBufferInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExternalBufferInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBufferCreateFlags flags;
  *     VkBufferUsageFlags usage;
  *     VkExternalMemoryHandleTypeFlagBits handleType;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceExternalBufferInfoKHR extends VkPhysicalDeviceExternalBufferInfo {
 

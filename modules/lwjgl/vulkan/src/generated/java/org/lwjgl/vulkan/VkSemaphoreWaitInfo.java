@@ -17,40 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing information about the semaphore wait condition.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>All of the elements of {@code pSemaphores} <b>must</b> reference a semaphore that was created with a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_TIMELINE SEMAPHORE_TYPE_TIMELINE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSemaphoreWaitFlagBits} values</li>
- * <li>{@code pSemaphores} <b>must</b> be a valid pointer to an array of {@code semaphoreCount} valid {@code VkSemaphore} handles</li>
- * <li>{@code pValues} <b>must</b> be a valid pointer to an array of {@code semaphoreCount} {@code uint64_t} values</li>
- * <li>{@code semaphoreCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK12#vkWaitSemaphores WaitSemaphores}, {@link KHRTimelineSemaphore#vkWaitSemaphoresKHR WaitSemaphoresKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSemaphoreWaitInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSemaphoreWaitFlags {@link #flags};
- *     uint32_t {@link #semaphoreCount};
- *     VkSemaphore const * {@link #pSemaphores};
- *     uint64_t const * {@link #pValues};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSemaphoreWaitFlags flags;
+ *     uint32_t semaphoreCount;
+ *     VkSemaphore const * pSemaphores;
+ *     uint64_t const * pValues;
+ * }}</pre>
  */
 public class VkSemaphoreWaitInfo extends Struct<VkSemaphoreWaitInfo> implements NativeResource {
 
@@ -112,38 +87,38 @@ public class VkSemaphoreWaitInfo extends Struct<VkSemaphoreWaitInfo> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkSemaphoreWaitFlagBits} specifying additional parameters for the semaphore wait operation. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkSemaphoreWaitFlags")
     public int flags() { return nflags(address()); }
-    /** the number of semaphores to wait on. */
+    /** @return the value of the {@code semaphoreCount} field. */
     @NativeType("uint32_t")
     public int semaphoreCount() { return nsemaphoreCount(address()); }
-    /** a pointer to an array of {@code semaphoreCount} semaphore handles to wait on. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pSemaphores} field. */
     @NativeType("VkSemaphore const *")
     public LongBuffer pSemaphores() { return npSemaphores(address()); }
-    /** a pointer to an array of {@code semaphoreCount} timeline semaphore values. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pValues} field. */
     @NativeType("uint64_t const *")
     public LongBuffer pValues() { return npValues(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSemaphoreWaitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO} value to the {@code sType} field. */
     public VkSemaphoreWaitInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSemaphoreWaitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkSemaphoreWaitInfo flags(@NativeType("VkSemaphoreWaitFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #semaphoreCount} field. */
+    /** Sets the specified value to the {@code semaphoreCount} field. */
     public VkSemaphoreWaitInfo semaphoreCount(@NativeType("uint32_t") int value) { nsemaphoreCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pSemaphores} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pSemaphores} field. */
     public VkSemaphoreWaitInfo pSemaphores(@NativeType("VkSemaphore const *") LongBuffer value) { npSemaphores(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pValues} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pValues} field. */
     public VkSemaphoreWaitInfo pValues(@NativeType("uint64_t const *") LongBuffer value) { npValues(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -367,38 +342,38 @@ public class VkSemaphoreWaitInfo extends Struct<VkSemaphoreWaitInfo> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSemaphoreWaitInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSemaphoreWaitInfo.nsType(address()); }
-        /** @return the value of the {@link VkSemaphoreWaitInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSemaphoreWaitInfo.npNext(address()); }
-        /** @return the value of the {@link VkSemaphoreWaitInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkSemaphoreWaitFlags")
         public int flags() { return VkSemaphoreWaitInfo.nflags(address()); }
-        /** @return the value of the {@link VkSemaphoreWaitInfo#semaphoreCount} field. */
+        /** @return the value of the {@code semaphoreCount} field. */
         @NativeType("uint32_t")
         public int semaphoreCount() { return VkSemaphoreWaitInfo.nsemaphoreCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkSemaphoreWaitInfo#pSemaphores} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pSemaphores} field. */
         @NativeType("VkSemaphore const *")
         public LongBuffer pSemaphores() { return VkSemaphoreWaitInfo.npSemaphores(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkSemaphoreWaitInfo#pValues} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pValues} field. */
         @NativeType("uint64_t const *")
         public LongBuffer pValues() { return VkSemaphoreWaitInfo.npValues(address()); }
 
-        /** Sets the specified value to the {@link VkSemaphoreWaitInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSemaphoreWaitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSemaphoreWaitInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO} value to the {@link VkSemaphoreWaitInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO} value to the {@code sType} field. */
         public VkSemaphoreWaitInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO); }
-        /** Sets the specified value to the {@link VkSemaphoreWaitInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSemaphoreWaitInfo.Buffer pNext(@NativeType("void const *") long value) { VkSemaphoreWaitInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSemaphoreWaitInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkSemaphoreWaitInfo.Buffer flags(@NativeType("VkSemaphoreWaitFlags") int value) { VkSemaphoreWaitInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSemaphoreWaitInfo#semaphoreCount} field. */
+        /** Sets the specified value to the {@code semaphoreCount} field. */
         public VkSemaphoreWaitInfo.Buffer semaphoreCount(@NativeType("uint32_t") int value) { VkSemaphoreWaitInfo.nsemaphoreCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkSemaphoreWaitInfo#pSemaphores} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pSemaphores} field. */
         public VkSemaphoreWaitInfo.Buffer pSemaphores(@NativeType("VkSemaphore const *") LongBuffer value) { VkSemaphoreWaitInfo.npSemaphores(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkSemaphoreWaitInfo#pValues} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pValues} field. */
         public VkSemaphoreWaitInfo.Buffer pValues(@NativeType("uint64_t const *") LongBuffer value) { VkSemaphoreWaitInfo.npValues(address(), value); return this; }
 
     }

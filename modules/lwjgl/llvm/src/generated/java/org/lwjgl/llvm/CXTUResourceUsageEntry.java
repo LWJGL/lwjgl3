@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXTUResourceUsageEntry {
- *     enum CXTUResourceUsageKind {@link #kind};
- *     unsigned long {@link #amount};
- * }</code></pre>
+ *     enum CXTUResourceUsageKind kind;
+ *     unsigned long amount;
+ * }}</pre>
  */
 public class CXTUResourceUsageEntry extends Struct<CXTUResourceUsageEntry> implements NativeResource {
 
@@ -72,10 +70,10 @@ public class CXTUResourceUsageEntry extends Struct<CXTUResourceUsageEntry> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the memory usage category */
+    /** @return the value of the {@code kind} field. */
     @NativeType("enum CXTUResourceUsageKind")
     public int kind() { return nkind(address()); }
-    /** amount of resources used. The units will depend on the resource kind. */
+    /** @return the value of the {@code amount} field. */
     @NativeType("unsigned long")
     public long amount() { return namount(address()); }
 
@@ -257,10 +255,10 @@ public class CXTUResourceUsageEntry extends Struct<CXTUResourceUsageEntry> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CXTUResourceUsageEntry#kind} field. */
+        /** @return the value of the {@code kind} field. */
         @NativeType("enum CXTUResourceUsageKind")
         public int kind() { return CXTUResourceUsageEntry.nkind(address()); }
-        /** @return the value of the {@link CXTUResourceUsageEntry#amount} field. */
+        /** @return the value of the {@code amount} field. */
         @NativeType("unsigned long")
         public long amount() { return CXTUResourceUsageEntry.namount(address()); }
 

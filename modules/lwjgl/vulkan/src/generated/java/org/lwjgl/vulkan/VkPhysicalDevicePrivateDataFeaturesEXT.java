@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDevicePrivateDataFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDevicePrivateDataFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 privateData;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDevicePrivateDataFeaturesEXT extends VkPhysicalDevicePrivateDataFeatures {
 

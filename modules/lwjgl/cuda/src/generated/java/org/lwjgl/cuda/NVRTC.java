@@ -19,7 +19,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Contains bindings to <a href="https://docs.nvidia.com/cuda/nvrtc/index.html">NVRTC</a>, a runtime compilation library for CUDA C++. */
 public class NVRTC {
 
     private static final SharedLibrary NVRTC          = CUDA.getToolkitLibrary(NVRTC.class, Configuration.CUDA_NVRTC_LIBRARY_NAME, "nvrtc");
@@ -61,27 +60,6 @@ public class NVRTC {
         return NVRTC;
     }
 
-    /**
-     * {@code nvrtcResult}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #NVRTC_SUCCESS SUCCESS}</li>
-     * <li>{@link #NVRTC_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
-     * <li>{@link #NVRTC_ERROR_PROGRAM_CREATION_FAILURE ERROR_PROGRAM_CREATION_FAILURE}</li>
-     * <li>{@link #NVRTC_ERROR_INVALID_INPUT ERROR_INVALID_INPUT}</li>
-     * <li>{@link #NVRTC_ERROR_INVALID_PROGRAM ERROR_INVALID_PROGRAM}</li>
-     * <li>{@link #NVRTC_ERROR_INVALID_OPTION ERROR_INVALID_OPTION}</li>
-     * <li>{@link #NVRTC_ERROR_COMPILATION ERROR_COMPILATION}</li>
-     * <li>{@link #NVRTC_ERROR_BUILTIN_OPERATION_FAILURE ERROR_BUILTIN_OPERATION_FAILURE}</li>
-     * <li>{@link #NVRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION}</li>
-     * <li>{@link #NVRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION}</li>
-     * <li>{@link #NVRTC_ERROR_NAME_EXPRESSION_NOT_VALID ERROR_NAME_EXPRESSION_NOT_VALID}</li>
-     * <li>{@link #NVRTC_ERROR_INTERNAL_ERROR ERROR_INTERNAL_ERROR}</li>
-     * <li>{@link #NVRTC_ERROR_TIME_FILE_WRITE_FAILED ERROR_TIME_FILE_WRITE_FAILED}</li>
-     * </ul>
-     */
     public static final int
         NVRTC_SUCCESS                                     = 0,
         NVRTC_ERROR_OUT_OF_MEMORY                         = 1,
@@ -103,11 +81,13 @@ public class NVRTC {
 
     // --- [ nvrtcGetErrorString ] ---
 
+    /** {@code char const * nvrtcGetErrorString(nvrtcResult result)} */
     public static long nnvrtcGetErrorString(int result) {
         long __functionAddress = Functions.GetErrorString;
         return callP(result, __functionAddress);
     }
 
+    /** {@code char const * nvrtcGetErrorString(nvrtcResult result)} */
     @NativeType("char const *")
     public static @Nullable String nvrtcGetErrorString(@NativeType("nvrtcResult") int result) {
         long __result = nnvrtcGetErrorString(result);
@@ -116,11 +96,13 @@ public class NVRTC {
 
     // --- [ nvrtcVersion ] ---
 
+    /** {@code nvrtcResult nvrtcVersion(int * major, int * minor)} */
     public static int nnvrtcVersion(long major, long minor) {
         long __functionAddress = Functions.Version;
         return callPPI(major, minor, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcVersion(int * major, int * minor)} */
     @NativeType("nvrtcResult")
     public static int nvrtcVersion(@NativeType("int *") IntBuffer major, @NativeType("int *") IntBuffer minor) {
         if (CHECKS) {
@@ -132,6 +114,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetNumSupportedArchs ] ---
 
+    /** {@code nvrtcResult nvrtcGetNumSupportedArchs(int * numArchs)} */
     public static int nnvrtcGetNumSupportedArchs(long numArchs) {
         long __functionAddress = Functions.GetNumSupportedArchs;
         if (CHECKS) {
@@ -140,6 +123,7 @@ public class NVRTC {
         return callPI(numArchs, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetNumSupportedArchs(int * numArchs)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetNumSupportedArchs(@NativeType("int *") IntBuffer numArchs) {
         if (CHECKS) {
@@ -150,6 +134,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetSupportedArchs ] ---
 
+    /** {@code nvrtcResult nvrtcGetSupportedArchs(int * supportedArchs)} */
     public static int nnvrtcGetSupportedArchs(long supportedArchs) {
         long __functionAddress = Functions.GetSupportedArchs;
         if (CHECKS) {
@@ -158,6 +143,7 @@ public class NVRTC {
         return callPI(supportedArchs, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetSupportedArchs(int * supportedArchs)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetSupportedArchs(@NativeType("int *") IntBuffer supportedArchs) {
         return nnvrtcGetSupportedArchs(memAddress(supportedArchs));
@@ -165,11 +151,13 @@ public class NVRTC {
 
     // --- [ nvrtcCreateProgram ] ---
 
+    /** {@code nvrtcResult nvrtcCreateProgram(nvrtcProgram * prog, char const * src, char const * name, int numHeaders, char const * const * headers, char const * const * includeNames)} */
     public static int nnvrtcCreateProgram(long prog, long src, long name, int numHeaders, long headers, long includeNames) {
         long __functionAddress = Functions.CreateProgram;
         return callPPPPPI(prog, src, name, numHeaders, headers, includeNames, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcCreateProgram(nvrtcProgram * prog, char const * src, char const * name, int numHeaders, char const * const * headers, char const * const * includeNames)} */
     @NativeType("nvrtcResult")
     public static int nvrtcCreateProgram(@NativeType("nvrtcProgram *") PointerBuffer prog, @NativeType("char const *") ByteBuffer src, @NativeType("char const *") @Nullable ByteBuffer name, @NativeType("char const * const *") @Nullable PointerBuffer headers, @NativeType("char const * const *") @Nullable PointerBuffer includeNames) {
         if (CHECKS) {
@@ -181,6 +169,7 @@ public class NVRTC {
         return nnvrtcCreateProgram(memAddress(prog), memAddress(src), memAddressSafe(name), remainingSafe(headers), memAddressSafe(headers), memAddressSafe(includeNames));
     }
 
+    /** {@code nvrtcResult nvrtcCreateProgram(nvrtcProgram * prog, char const * src, char const * name, int numHeaders, char const * const * headers, char const * const * includeNames)} */
     @NativeType("nvrtcResult")
     public static int nvrtcCreateProgram(@NativeType("nvrtcProgram *") PointerBuffer prog, @NativeType("char const *") CharSequence src, @NativeType("char const *") @Nullable CharSequence name, @NativeType("char const * const *") @Nullable PointerBuffer headers, @NativeType("char const * const *") @Nullable PointerBuffer includeNames) {
         if (CHECKS) {
@@ -201,11 +190,13 @@ public class NVRTC {
 
     // --- [ nvrtcDestroyProgram ] ---
 
+    /** {@code nvrtcResult nvrtcDestroyProgram(nvrtcProgram * prog)} */
     public static int nnvrtcDestroyProgram(long prog) {
         long __functionAddress = Functions.DestroyProgram;
         return callPI(prog, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcDestroyProgram(nvrtcProgram * prog)} */
     @NativeType("nvrtcResult")
     public static int nvrtcDestroyProgram(@NativeType("nvrtcProgram *") PointerBuffer prog) {
         if (CHECKS) {
@@ -216,6 +207,7 @@ public class NVRTC {
 
     // --- [ nvrtcCompileProgram ] ---
 
+    /** {@code nvrtcResult nvrtcCompileProgram(nvrtcProgram prog, int numOptions, char const * const * options)} */
     public static int nnvrtcCompileProgram(long prog, int numOptions, long options) {
         long __functionAddress = Functions.CompileProgram;
         if (CHECKS) {
@@ -224,6 +216,7 @@ public class NVRTC {
         return callPPI(prog, numOptions, options, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcCompileProgram(nvrtcProgram prog, int numOptions, char const * const * options)} */
     @NativeType("nvrtcResult")
     public static int nvrtcCompileProgram(@NativeType("nvrtcProgram") long prog, @NativeType("char const * const *") @Nullable PointerBuffer options) {
         return nnvrtcCompileProgram(prog, remainingSafe(options), memAddressSafe(options));
@@ -231,6 +224,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetPTXSize ] ---
 
+    /** {@code nvrtcResult nvrtcGetPTXSize(nvrtcProgram prog, size_t * ptxSizeRet)} */
     public static int nnvrtcGetPTXSize(long prog, long ptxSizeRet) {
         long __functionAddress = Functions.GetPTXSize;
         if (CHECKS) {
@@ -239,6 +233,7 @@ public class NVRTC {
         return callPPI(prog, ptxSizeRet, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetPTXSize(nvrtcProgram prog, size_t * ptxSizeRet)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetPTXSize(@NativeType("nvrtcProgram") long prog, @NativeType("size_t *") PointerBuffer ptxSizeRet) {
         if (CHECKS) {
@@ -249,6 +244,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetPTX ] ---
 
+    /** {@code nvrtcResult nvrtcGetPTX(nvrtcProgram prog, char * ptx)} */
     public static int nnvrtcGetPTX(long prog, long ptx) {
         long __functionAddress = Functions.GetPTX;
         if (CHECKS) {
@@ -257,6 +253,7 @@ public class NVRTC {
         return callPPI(prog, ptx, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetPTX(nvrtcProgram prog, char * ptx)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetPTX(@NativeType("nvrtcProgram") long prog, @NativeType("char *") ByteBuffer ptx) {
         return nnvrtcGetPTX(prog, memAddress(ptx));
@@ -264,6 +261,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetCUBINSize ] ---
 
+    /** {@code nvrtcResult nvrtcGetCUBINSize(nvrtcProgram prog, size_t * cubinSizeRet)} */
     public static int nnvrtcGetCUBINSize(long prog, long cubinSizeRet) {
         long __functionAddress = Functions.GetCUBINSize;
         if (CHECKS) {
@@ -273,6 +271,7 @@ public class NVRTC {
         return callPPI(prog, cubinSizeRet, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetCUBINSize(nvrtcProgram prog, size_t * cubinSizeRet)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetCUBINSize(@NativeType("nvrtcProgram") long prog, @NativeType("size_t *") PointerBuffer cubinSizeRet) {
         if (CHECKS) {
@@ -283,6 +282,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetCUBIN ] ---
 
+    /** {@code nvrtcResult nvrtcGetCUBIN(nvrtcProgram prog, char * cubin)} */
     public static int nnvrtcGetCUBIN(long prog, long cubin) {
         long __functionAddress = Functions.GetCUBIN;
         if (CHECKS) {
@@ -292,6 +292,7 @@ public class NVRTC {
         return callPPI(prog, cubin, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetCUBIN(nvrtcProgram prog, char * cubin)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetCUBIN(@NativeType("nvrtcProgram") long prog, @NativeType("char *") ByteBuffer cubin) {
         return nnvrtcGetCUBIN(prog, memAddress(cubin));
@@ -299,6 +300,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetNVVMSize ] ---
 
+    /** {@code nvrtcResult nvrtcGetNVVMSize(nvrtcProgram prog, size_t * nvvmSizeRet)} */
     public static int nnvrtcGetNVVMSize(long prog, long nvvmSizeRet) {
         long __functionAddress = Functions.GetNVVMSize;
         if (CHECKS) {
@@ -308,6 +310,7 @@ public class NVRTC {
         return callPPI(prog, nvvmSizeRet, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetNVVMSize(nvrtcProgram prog, size_t * nvvmSizeRet)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetNVVMSize(@NativeType("nvrtcProgram") long prog, @NativeType("size_t *") PointerBuffer nvvmSizeRet) {
         if (CHECKS) {
@@ -318,6 +321,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetNVVM ] ---
 
+    /** {@code nvrtcResult nvrtcGetNVVM(nvrtcProgram prog, char * nvvm)} */
     public static int nnvrtcGetNVVM(long prog, long nvvm) {
         long __functionAddress = Functions.GetNVVM;
         if (CHECKS) {
@@ -327,6 +331,7 @@ public class NVRTC {
         return callPPI(prog, nvvm, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetNVVM(nvrtcProgram prog, char * nvvm)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetNVVM(@NativeType("nvrtcProgram") long prog, @NativeType("char *") ByteBuffer nvvm) {
         return nnvrtcGetNVVM(prog, memAddress(nvvm));
@@ -334,6 +339,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetLTOIRSize ] ---
 
+    /** {@code nvrtcResult nvrtcGetLTOIRSize(nvrtcProgram prog, size_t * LTOIRSizeRet)} */
     public static int nnvrtcGetLTOIRSize(long prog, long LTOIRSizeRet) {
         long __functionAddress = Functions.GetLTOIRSize;
         if (CHECKS) {
@@ -343,6 +349,7 @@ public class NVRTC {
         return callPPI(prog, LTOIRSizeRet, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetLTOIRSize(nvrtcProgram prog, size_t * LTOIRSizeRet)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetLTOIRSize(@NativeType("nvrtcProgram") long prog, @NativeType("size_t *") PointerBuffer LTOIRSizeRet) {
         if (CHECKS) {
@@ -353,6 +360,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetLTOIR ] ---
 
+    /** {@code nvrtcResult nvrtcGetLTOIR(nvrtcProgram prog, char * LTOIR)} */
     public static int nnvrtcGetLTOIR(long prog, long LTOIR) {
         long __functionAddress = Functions.GetLTOIR;
         if (CHECKS) {
@@ -362,6 +370,7 @@ public class NVRTC {
         return callPPI(prog, LTOIR, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetLTOIR(nvrtcProgram prog, char * LTOIR)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetLTOIR(@NativeType("nvrtcProgram") long prog, @NativeType("char *") ByteBuffer LTOIR) {
         return nnvrtcGetLTOIR(prog, memAddress(LTOIR));
@@ -369,6 +378,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetOptiXIRSize ] ---
 
+    /** {@code nvrtcResult nvrtcGetOptiXIRSize(nvrtcProgram prog, size_t * optixirSizeRet)} */
     public static int nnvrtcGetOptiXIRSize(long prog, long optixirSizeRet) {
         long __functionAddress = Functions.GetOptiXIRSize;
         if (CHECKS) {
@@ -378,6 +388,7 @@ public class NVRTC {
         return callPPI(prog, optixirSizeRet, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetOptiXIRSize(nvrtcProgram prog, size_t * optixirSizeRet)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetOptiXIRSize(@NativeType("nvrtcProgram") long prog, @NativeType("size_t *") PointerBuffer optixirSizeRet) {
         if (CHECKS) {
@@ -388,6 +399,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetOptiXIR ] ---
 
+    /** {@code nvrtcResult nvrtcGetOptiXIR(nvrtcProgram prog, char * optixir)} */
     public static int nnvrtcGetOptiXIR(long prog, long optixir) {
         long __functionAddress = Functions.GetOptiXIR;
         if (CHECKS) {
@@ -397,6 +409,7 @@ public class NVRTC {
         return callPPI(prog, optixir, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetOptiXIR(nvrtcProgram prog, char * optixir)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetOptiXIR(@NativeType("nvrtcProgram") long prog, @NativeType("char *") ByteBuffer optixir) {
         return nnvrtcGetOptiXIR(prog, memAddress(optixir));
@@ -404,6 +417,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetProgramLogSize ] ---
 
+    /** {@code nvrtcResult nvrtcGetProgramLogSize(nvrtcProgram prog, size_t * logSizeRet)} */
     public static int nnvrtcGetProgramLogSize(long prog, long logSizeRet) {
         long __functionAddress = Functions.GetProgramLogSize;
         if (CHECKS) {
@@ -412,6 +426,7 @@ public class NVRTC {
         return callPPI(prog, logSizeRet, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetProgramLogSize(nvrtcProgram prog, size_t * logSizeRet)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetProgramLogSize(@NativeType("nvrtcProgram") long prog, @NativeType("size_t *") PointerBuffer logSizeRet) {
         if (CHECKS) {
@@ -422,6 +437,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetProgramLog ] ---
 
+    /** {@code nvrtcResult nvrtcGetProgramLog(nvrtcProgram prog, char * log)} */
     public static int nnvrtcGetProgramLog(long prog, long log) {
         long __functionAddress = Functions.GetProgramLog;
         if (CHECKS) {
@@ -430,6 +446,7 @@ public class NVRTC {
         return callPPI(prog, log, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetProgramLog(nvrtcProgram prog, char * log)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetProgramLog(@NativeType("nvrtcProgram") long prog, @NativeType("char *") ByteBuffer log) {
         return nnvrtcGetProgramLog(prog, memAddress(log));
@@ -437,6 +454,7 @@ public class NVRTC {
 
     // --- [ nvrtcAddNameExpression ] ---
 
+    /** {@code nvrtcResult nvrtcAddNameExpression(nvrtcProgram prog, char const * const name_expression)} */
     public static int nnvrtcAddNameExpression(long prog, long name_expression) {
         long __functionAddress = Functions.AddNameExpression;
         if (CHECKS) {
@@ -445,6 +463,7 @@ public class NVRTC {
         return callPPI(prog, name_expression, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcAddNameExpression(nvrtcProgram prog, char const * const name_expression)} */
     @NativeType("nvrtcResult")
     public static int nvrtcAddNameExpression(@NativeType("nvrtcProgram") long prog, @NativeType("char const * const") ByteBuffer name_expression) {
         if (CHECKS) {
@@ -453,6 +472,7 @@ public class NVRTC {
         return nnvrtcAddNameExpression(prog, memAddress(name_expression));
     }
 
+    /** {@code nvrtcResult nvrtcAddNameExpression(nvrtcProgram prog, char const * const name_expression)} */
     @NativeType("nvrtcResult")
     public static int nvrtcAddNameExpression(@NativeType("nvrtcProgram") long prog, @NativeType("char const * const") CharSequence name_expression) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -467,6 +487,7 @@ public class NVRTC {
 
     // --- [ nvrtcGetLoweredName ] ---
 
+    /** {@code nvrtcResult nvrtcGetLoweredName(nvrtcProgram prog, char const * const name_expression, char const ** lowered_name)} */
     public static int nnvrtcGetLoweredName(long prog, long name_expression, long lowered_name) {
         long __functionAddress = Functions.GetLoweredName;
         if (CHECKS) {
@@ -475,6 +496,7 @@ public class NVRTC {
         return callPPPI(prog, name_expression, lowered_name, __functionAddress);
     }
 
+    /** {@code nvrtcResult nvrtcGetLoweredName(nvrtcProgram prog, char const * const name_expression, char const ** lowered_name)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetLoweredName(@NativeType("nvrtcProgram") long prog, @NativeType("char const * const") ByteBuffer name_expression, @NativeType("char const **") PointerBuffer lowered_name) {
         if (CHECKS) {
@@ -484,6 +506,7 @@ public class NVRTC {
         return nnvrtcGetLoweredName(prog, memAddress(name_expression), memAddress(lowered_name));
     }
 
+    /** {@code nvrtcResult nvrtcGetLoweredName(nvrtcProgram prog, char const * const name_expression, char const ** lowered_name)} */
     @NativeType("nvrtcResult")
     public static int nvrtcGetLoweredName(@NativeType("nvrtcProgram") long prog, @NativeType("char const * const") CharSequence name_expression, @NativeType("char const **") PointerBuffer lowered_name) {
         if (CHECKS) {

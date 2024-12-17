@@ -17,18 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Identifies a half-open character range in the source code.
- * 
- * <p>Use {@link ClangIndex#clang_getRangeStart getRangeStart} and {@link ClangIndex#clang_getRangeEnd getRangeEnd} to retrieve the starting and end locations from a source range, respectively.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXSourceRange {
  *     void const * ptr_data[2];
  *     unsigned begin_int_data;
  *     unsigned end_int_data;
- * }</code></pre>
+ * }}</pre>
  */
 public class CXSourceRange extends Struct<CXSourceRange> implements NativeResource {
 

@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceExternalFenceInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExternalFenceInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkExternalFenceHandleTypeFlagBits handleType;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceExternalFenceInfoKHR extends VkPhysicalDeviceExternalFenceInfo {
 

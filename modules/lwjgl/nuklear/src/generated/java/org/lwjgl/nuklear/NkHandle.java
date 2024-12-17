@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union nk_handle {
  *     void * ptr;
  *     int id;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("union nk_handle")
 public class NkHandle extends Struct<NkHandle> implements NativeResource {

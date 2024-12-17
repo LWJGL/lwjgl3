@@ -17,7 +17,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the GLFW library's X11 native access functions. */
 public class GLFWNativeX11 {
 
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
@@ -42,17 +41,7 @@ public class GLFWNativeX11 {
 
     // --- [ glfwGetX11Display ] ---
 
-    /**
-     * Returns the {@code Display} used by GLFW.
-     * 
-     * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @return the {@code Display} used by GLFW, or {@code NULL} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.0
-     */
+    /** {@code Display * glfwGetX11Display(void)} */
     @NativeType("Display *")
     public static long glfwGetX11Display() {
         long __functionAddress = Functions.GetX11Display;
@@ -61,19 +50,7 @@ public class GLFWNativeX11 {
 
     // --- [ glfwGetX11Adapter ] ---
 
-    /**
-     * Returns the {@code RRCrtc} of the specified monitor.
-     * 
-     * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @param monitor the GLFW monitor
-     *
-     * @return the {@code RRCrtc} of the specified monitor, or {@code None} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.1
-     */
+    /** {@code RRCrtc glfwGetX11Adapter(GLFWmonitor * monitor)} */
     @NativeType("RRCrtc")
     public static long glfwGetX11Adapter(@NativeType("GLFWmonitor *") long monitor) {
         long __functionAddress = Functions.GetX11Adapter;
@@ -85,19 +62,7 @@ public class GLFWNativeX11 {
 
     // --- [ glfwGetX11Monitor ] ---
 
-    /**
-     * Returns the {@code RROutput} of the specified monitor.
-     * 
-     * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @param monitor the GLFW monitor
-     *
-     * @return the {@code RROutput} of the specified monitor, or {@code None} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.1
-     */
+    /** {@code RROutput glfwGetX11Monitor(GLFWmonitor * monitor)} */
     @NativeType("RROutput")
     public static long glfwGetX11Monitor(@NativeType("GLFWmonitor *") long monitor) {
         long __functionAddress = Functions.GetX11Monitor;
@@ -109,19 +74,7 @@ public class GLFWNativeX11 {
 
     // --- [ glfwGetX11Window ] ---
 
-    /**
-     * Returns the {@code Window} of the specified window.
-     * 
-     * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @param window a GLFW window
-     *
-     * @return the {@code Window} of the specified window, or {@code None} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.0
-     */
+    /** {@code Window glfwGetX11Window(GLFWwindow * window)} */
     @NativeType("Window")
     public static long glfwGetX11Window(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.GetX11Window;
@@ -133,21 +86,13 @@ public class GLFWNativeX11 {
 
     // --- [ glfwSetX11SelectionString ] ---
 
-    /** Unsafe version of: {@link #glfwSetX11SelectionString SetX11SelectionString} */
+    /** {@code void glfwSetX11SelectionString(char const * string)} */
     public static void nglfwSetX11SelectionString(long string) {
         long __functionAddress = Functions.SetX11SelectionString;
         invokePV(string, __functionAddress);
     }
 
-    /**
-     * Sets the current primary selection to the specified string.
-     * 
-     * <p>This function must only be called from the main thread.</p>
-     *
-     * @param string a UTF-8 encoded string. The specified string is copied before this function returns.
-     *
-     * @since version 3.3
-     */
+    /** {@code void glfwSetX11SelectionString(char const * string)} */
     public static void glfwSetX11SelectionString(@NativeType("char const *") ByteBuffer string) {
         if (CHECKS) {
             checkNT1(string);
@@ -155,15 +100,7 @@ public class GLFWNativeX11 {
         nglfwSetX11SelectionString(memAddress(string));
     }
 
-    /**
-     * Sets the current primary selection to the specified string.
-     * 
-     * <p>This function must only be called from the main thread.</p>
-     *
-     * @param string a UTF-8 encoded string. The specified string is copied before this function returns.
-     *
-     * @since version 3.3
-     */
+    /** {@code void glfwSetX11SelectionString(char const * string)} */
     public static void glfwSetX11SelectionString(@NativeType("char const *") CharSequence string) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -177,26 +114,13 @@ public class GLFWNativeX11 {
 
     // --- [ glfwGetX11SelectionString ] ---
 
-    /** Unsafe version of: {@link #glfwGetX11SelectionString GetX11SelectionString} */
+    /** {@code char const * glfwGetX11SelectionString(void)} */
     public static long nglfwGetX11SelectionString() {
         long __functionAddress = Functions.GetX11SelectionString;
         return invokeP(__functionAddress);
     }
 
-    /**
-     * Returns the contents of the current primary selection as a string.
-     * 
-     * <p>If the selection is empty or if its contents cannot be converted, {@code NULL} is returned and a {@link GLFW#GLFW_FORMAT_UNAVAILABLE FORMAT_UNAVAILABLE} error is generated.</p>
-     * 
-     * <p>The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to {@link #glfwGetX11SelectionString GetX11SelectionString} or
-     * {@link #glfwSetX11SelectionString SetX11SelectionString}, or until the library is terminated.</p>
-     * 
-     * <p>This function must only be called from the main thread.</p>
-     *
-     * @return the contents of the selection as a UTF-8 encoded string, or {@code NULL} if an error occurred
-     *
-     * @since version 3.3
-     */
+    /** {@code char const * glfwGetX11SelectionString(void)} */
     @NativeType("char const *")
     public static @Nullable String glfwGetX11SelectionString() {
         long __result = nglfwGetX11SelectionString();

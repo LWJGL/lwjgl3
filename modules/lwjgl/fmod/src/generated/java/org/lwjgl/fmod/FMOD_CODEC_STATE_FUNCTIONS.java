@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_CODEC_STATE_FUNCTIONS {
  *     {@link FMOD_CODEC_METADATA_FUNCI FMOD_CODEC_METADATA_FUNC} metadata;
  *     {@link FMOD_CODEC_ALLOC_FUNCI FMOD_CODEC_ALLOC_FUNC} alloc;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_CODEC_FILE_SEEK_FUNCI FMOD_CODEC_FILE_SEEK_FUNC} seek;
  *     {@link FMOD_CODEC_FILE_TELL_FUNCI FMOD_CODEC_FILE_TELL_FUNC} tell;
  *     {@link FMOD_CODEC_FILE_SIZE_FUNCI FMOD_CODEC_FILE_SIZE_FUNC} size;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_CODEC_STATE_FUNCTIONS extends Struct<FMOD_CODEC_STATE_FUNCTIONS> implements NativeResource {
 

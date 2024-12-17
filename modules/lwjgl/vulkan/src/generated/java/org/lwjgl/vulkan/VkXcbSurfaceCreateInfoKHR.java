@@ -16,37 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created Xcb surface object.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code connection} <b>must</b> point to a valid X11 {@code xcb_connection_t}</li>
- * <li>{@code window} <b>must</b> be a valid X11 {@code xcb_window_t}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRXcbSurface#VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRXcbSurface#vkCreateXcbSurfaceKHR CreateXcbSurfaceKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkXcbSurfaceCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkXcbSurfaceCreateFlagsKHR {@link #flags};
- *     xcb_connection_t * {@link #connection};
- *     xcb_window_t {@link #window};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkXcbSurfaceCreateFlagsKHR flags;
+ *     xcb_connection_t * connection;
+ *     xcb_window_t window;
+ * }}</pre>
  */
 public class VkXcbSurfaceCreateInfoKHR extends Struct<VkXcbSurfaceCreateInfoKHR> implements NativeResource {
 
@@ -105,33 +82,33 @@ public class VkXcbSurfaceCreateInfoKHR extends Struct<VkXcbSurfaceCreateInfoKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkXcbSurfaceCreateFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** a pointer to an {@code xcb_connection_t} to the X server. */
+    /** @return the value of the {@code connection} field. */
     @NativeType("xcb_connection_t *")
     public long connection() { return nconnection(address()); }
-    /** the {@code xcb_window_t} for the X11 window to associate the surface with. */
+    /** @return the value of the {@code window} field. */
     @NativeType("xcb_window_t")
     public int window() { return nwindow(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkXcbSurfaceCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRXcbSurface#VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRXcbSurface#VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkXcbSurfaceCreateInfoKHR sType$Default() { return sType(KHRXcbSurface.VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkXcbSurfaceCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkXcbSurfaceCreateInfoKHR flags(@NativeType("VkXcbSurfaceCreateFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #connection} field. */
+    /** Sets the specified value to the {@code connection} field. */
     public VkXcbSurfaceCreateInfoKHR connection(@NativeType("xcb_connection_t *") long value) { nconnection(address(), value); return this; }
-    /** Sets the specified value to the {@link #window} field. */
+    /** Sets the specified value to the {@code window} field. */
     public VkXcbSurfaceCreateInfoKHR window(@NativeType("xcb_window_t") int value) { nwindow(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,33 +316,33 @@ public class VkXcbSurfaceCreateInfoKHR extends Struct<VkXcbSurfaceCreateInfoKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkXcbSurfaceCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkXcbSurfaceCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkXcbSurfaceCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkXcbSurfaceCreateInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkXcbSurfaceCreateInfoKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkXcbSurfaceCreateFlagsKHR")
         public int flags() { return VkXcbSurfaceCreateInfoKHR.nflags(address()); }
-        /** @return the value of the {@link VkXcbSurfaceCreateInfoKHR#connection} field. */
+        /** @return the value of the {@code connection} field. */
         @NativeType("xcb_connection_t *")
         public long connection() { return VkXcbSurfaceCreateInfoKHR.nconnection(address()); }
-        /** @return the value of the {@link VkXcbSurfaceCreateInfoKHR#window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("xcb_window_t")
         public int window() { return VkXcbSurfaceCreateInfoKHR.nwindow(address()); }
 
-        /** Sets the specified value to the {@link VkXcbSurfaceCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkXcbSurfaceCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkXcbSurfaceCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRXcbSurface#VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR} value to the {@link VkXcbSurfaceCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRXcbSurface#VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkXcbSurfaceCreateInfoKHR.Buffer sType$Default() { return sType(KHRXcbSurface.VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkXcbSurfaceCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkXcbSurfaceCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkXcbSurfaceCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkXcbSurfaceCreateInfoKHR#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkXcbSurfaceCreateInfoKHR.Buffer flags(@NativeType("VkXcbSurfaceCreateFlagsKHR") int value) { VkXcbSurfaceCreateInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkXcbSurfaceCreateInfoKHR#connection} field. */
+        /** Sets the specified value to the {@code connection} field. */
         public VkXcbSurfaceCreateInfoKHR.Buffer connection(@NativeType("xcb_connection_t *") long value) { VkXcbSurfaceCreateInfoKHR.nconnection(address(), value); return this; }
-        /** Sets the specified value to the {@link VkXcbSurfaceCreateInfoKHR#window} field. */
+        /** Sets the specified value to the {@code window} field. */
         public VkXcbSurfaceCreateInfoKHR.Buffer window(@NativeType("xcb_window_t") int value) { VkXcbSurfaceCreateInfoKHR.nwindow(address(), value); return this; }
 
     }

@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     void *opaqueState,
- *     void *address
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LZ4F_FreeFunction} */
 public abstract class LZ4FFreeFunction extends Callback implements LZ4FFreeFunctionI {
 
     /**

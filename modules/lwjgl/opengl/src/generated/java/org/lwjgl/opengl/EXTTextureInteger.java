@@ -14,51 +14,12 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_integer.txt">EXT_texture_integer</a> extension.
- * 
- * <p>Fixed-point textures in unextended OpenGL have integer components, but those values are taken to represent floating-point values in the range [0,1].
- * These integer components are considered "normalized" integers. When such a texture is accessed by a shader or by fixed-function fragment processing,
- * floating-point values are returned.</p>
- * 
- * <p>This extension provides a set of new "unnormalized" integer texture formats. Formats with both signed and unsigned integers are provided. In these
- * formats, the components are treated as true integers. When such textures are accessed by a shader, actual integer values are returned.</p>
- * 
- * <p>Pixel operations that read from or write to a texture or color buffer with unnormalized integer components follow a path similar to that used for color
- * index pixel operations, except that more than one component may be provided at once. Integer values flow through the pixel processing pipe, and no pixel
- * transfer operations are performed. Integer format enumerants used for such operations indicate unnormalized integer data.</p>
- * 
- * <p>Textures or render buffers with unnormalized integer formats may also be attached to framebuffer objects to receive fragment color values written by a
- * fragment shader. Per-fragment operations that require floating-point color components, including multisample alpha operations, alpha test, blending, and
- * dithering, have no effect when the corresponding colors are written to an integer color buffer. The <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program4.txt">NV_gpu_program4</a> and
- * {@link EXTGPUShader4 EXT_gpu_shader4} extensions add the capability to fragment programs and fragment shaders to write signed and unsigned integer output values.</p>
- * 
- * <p>This extension does not enforce type consistency for texture accesses or between fragment shaders and the corresponding framebuffer attachments. The
- * results of a texture lookup from an integer texture are undefined:</p>
- * 
- * <ul>
- * <li>for fixed-function fragment processing, or</li>
- * <li>for shader texture accesses expecting floating-point return values.</li>
- * </ul>
- * 
- * <p>The color components used for per-fragment operations and written into a color buffer are undefined:</p>
- * 
- * <ul>
- * <li>for fixed-function fragment processing with an integer color buffer,</li>
- * <li>for fragment shaders that write floating-point color components to an integer color buffer, or</li>
- * <li>for fragment shaders that write integer color components to a color buffer with floating point or normalized integer components.</li>
- * </ul>
- * 
- * <p>Requires {@link GL20 OpenGL 2.0} and <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_gpu_program4.txt">NV_gpu_program4</a> or {@link EXTGPUShader4 EXT_gpu_shader4}. Promoted to core in {@link GL30 OpenGL 3.0}.</p>
- */
 public class EXTTextureInteger {
 
     static { GL.initialize(); }
 
-    /** Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int GL_RGBA_INTEGER_MODE_EXT = 0x8D9E;
 
-    /** Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D. */
     public static final int
         GL_RGBA32UI_EXT            = 0x8D70,
         GL_RGB32UI_EXT             = 0x8D71,
@@ -97,7 +58,6 @@ public class EXTTextureInteger {
         GL_LUMINANCE8I_EXT         = 0x8D92,
         GL_LUMINANCE_ALPHA8I_EXT   = 0x8D93;
 
-    /** Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, DrawPixels and ReadPixels. */
     public static final int
         GL_RED_INTEGER_EXT             = 0x8D94,
         GL_GREEN_INTEGER_EXT           = 0x8D95,
@@ -116,16 +76,20 @@ public class EXTTextureInteger {
 
     // --- [ glClearColorIiEXT ] ---
 
+    /** {@code void glClearColorIiEXT(GLint r, GLint g, GLint b, GLint a)} */
     public static native void glClearColorIiEXT(@NativeType("GLint") int r, @NativeType("GLint") int g, @NativeType("GLint") int b, @NativeType("GLint") int a);
 
     // --- [ glClearColorIuiEXT ] ---
 
+    /** {@code void glClearColorIuiEXT(GLuint r, GLuint g, GLuint b, GLuint a)} */
     public static native void glClearColorIuiEXT(@NativeType("GLuint") int r, @NativeType("GLuint") int g, @NativeType("GLuint") int b, @NativeType("GLuint") int a);
 
     // --- [ glTexParameterIivEXT ] ---
 
+    /** {@code void glTexParameterIivEXT(GLenum target, GLenum pname, GLint * params)} */
     public static native void nglTexParameterIivEXT(int target, int pname, long params);
 
+    /** {@code void glTexParameterIivEXT(GLenum target, GLenum pname, GLint * params)} */
     public static void glTexParameterIivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
             check(params, 1);
@@ -133,6 +97,7 @@ public class EXTTextureInteger {
         nglTexParameterIivEXT(target, pname, memAddress(params));
     }
 
+    /** {@code void glTexParameterIivEXT(GLenum target, GLenum pname, GLint * params)} */
     public static void glTexParameterIiEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int param) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -145,8 +110,10 @@ public class EXTTextureInteger {
 
     // --- [ glTexParameterIuivEXT ] ---
 
+    /** {@code void glTexParameterIuivEXT(GLenum target, GLenum pname, GLuint * params)} */
     public static native void nglTexParameterIuivEXT(int target, int pname, long params);
 
+    /** {@code void glTexParameterIuivEXT(GLenum target, GLenum pname, GLuint * params)} */
     public static void glTexParameterIuivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer params) {
         if (CHECKS) {
             check(params, 1);
@@ -154,6 +121,7 @@ public class EXTTextureInteger {
         nglTexParameterIuivEXT(target, pname, memAddress(params));
     }
 
+    /** {@code void glTexParameterIuivEXT(GLenum target, GLenum pname, GLuint * params)} */
     public static void glTexParameterIuiEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") int param) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -166,8 +134,10 @@ public class EXTTextureInteger {
 
     // --- [ glGetTexParameterIivEXT ] ---
 
+    /** {@code void glGetTexParameterIivEXT(GLenum target, GLenum pname, GLint * params)} */
     public static native void nglGetTexParameterIivEXT(int target, int pname, long params);
 
+    /** {@code void glGetTexParameterIivEXT(GLenum target, GLenum pname, GLint * params)} */
     public static void glGetTexParameterIivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         if (CHECKS) {
             check(params, 1);
@@ -175,6 +145,7 @@ public class EXTTextureInteger {
         nglGetTexParameterIivEXT(target, pname, memAddress(params));
     }
 
+    /** {@code void glGetTexParameterIivEXT(GLenum target, GLenum pname, GLint * params)} */
     @NativeType("void")
     public static int glGetTexParameterIiEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -189,8 +160,10 @@ public class EXTTextureInteger {
 
     // --- [ glGetTexParameterIuivEXT ] ---
 
+    /** {@code void glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint * params)} */
     public static native void nglGetTexParameterIuivEXT(int target, int pname, long params);
 
+    /** {@code void glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint * params)} */
     public static void glGetTexParameterIuivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") IntBuffer params) {
         if (CHECKS) {
             check(params, 1);
@@ -198,6 +171,7 @@ public class EXTTextureInteger {
         nglGetTexParameterIuivEXT(target, pname, memAddress(params));
     }
 
+    /** {@code void glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint * params)} */
     @NativeType("void")
     public static int glGetTexParameterIuiEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -210,7 +184,7 @@ public class EXTTextureInteger {
         }
     }
 
-    /** Array version of: {@link #glTexParameterIivEXT TexParameterIivEXT} */
+    /** {@code void glTexParameterIivEXT(GLenum target, GLenum pname, GLint * params)} */
     public static void glTexParameterIivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glTexParameterIivEXT;
         if (CHECKS) {
@@ -220,7 +194,7 @@ public class EXTTextureInteger {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /** Array version of: {@link #glTexParameterIuivEXT TexParameterIuivEXT} */
+    /** {@code void glTexParameterIuivEXT(GLenum target, GLenum pname, GLuint * params)} */
     public static void glTexParameterIuivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glTexParameterIuivEXT;
         if (CHECKS) {
@@ -230,7 +204,7 @@ public class EXTTextureInteger {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /** Array version of: {@link #glGetTexParameterIivEXT GetTexParameterIivEXT} */
+    /** {@code void glGetTexParameterIivEXT(GLenum target, GLenum pname, GLint * params)} */
     public static void glGetTexParameterIivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         long __functionAddress = GL.getICD().glGetTexParameterIivEXT;
         if (CHECKS) {
@@ -240,7 +214,7 @@ public class EXTTextureInteger {
         callPV(target, pname, params, __functionAddress);
     }
 
-    /** Array version of: {@link #glGetTexParameterIuivEXT GetTexParameterIuivEXT} */
+    /** {@code void glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint * params)} */
     public static void glGetTexParameterIuivEXT(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("GLuint *") int[] params) {
         long __functionAddress = GL.getICD().glGetTexParameterIuivEXT;
         if (CHECKS) {

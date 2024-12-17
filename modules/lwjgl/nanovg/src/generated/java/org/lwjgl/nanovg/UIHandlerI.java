@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link OUI#uiSetHandler SetHandler} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     int item,
- *     UIevent event
- * )</code></pre>
- */
+/** Callback function: {@link #invoke UIhandler} */
 @FunctionalInterface
 @NativeType("UIhandler")
 public interface UIHandlerI extends CallbackI {
@@ -44,7 +34,7 @@ public interface UIHandlerI extends CallbackI {
         );
     }
 
-    /** handler callback; event is one of UI_EVENT_* */
+    /** {@code void (* UIhandler) (int item, UIevent event)} */
     void invoke(int item, @NativeType("UIevent") int event);
 
 }

@@ -15,7 +15,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to stdio.h. */
 public class LibCStdio {
 
     static { Library.initialize(); }
@@ -29,24 +28,15 @@ public class LibCStdio {
     @NativeType("void *")
     private static native long sscanf();
 
-    /** The address of the {@code sscanf} function. */
+    /** {@code void * sscanf(void)} */
     public static final long sscanf = sscanf();
 
     // --- [ vsscanf ] ---
 
-    /** Unsafe version of: {@link #vsscanf} */
+    /** {@code int vsscanf(char const * buffer, char const * format, va_list vlist)} */
     public static native int nvsscanf(long buffer, long format, long vlist);
 
-    /**
-     * Reads data from the null-terminated character string {@code buffer}, interprets it according to {@code format} and stores the results into locations
-     * defined by {@code vlist}.
-     *
-     * @param buffer pointer to a null-terminated character string to read from
-     * @param format pointer to a null-terminated character string specifying how to read the input
-     * @param vlist  variable argument list containing the receiving arguments
-     *
-     * @return the number of receiving arguments successfully assigned, or {@code EOF} if read failure occurs before the first receiving argument was assigned
-     */
+    /** {@code int vsscanf(char const * buffer, char const * format, va_list vlist)} */
     public static int vsscanf(@NativeType("char const *") ByteBuffer buffer, @NativeType("char const *") ByteBuffer format, @NativeType("va_list") long vlist) {
         if (CHECKS) {
             checkNT1(buffer);
@@ -56,16 +46,7 @@ public class LibCStdio {
         return nvsscanf(memAddress(buffer), memAddress(format), vlist);
     }
 
-    /**
-     * Reads data from the null-terminated character string {@code buffer}, interprets it according to {@code format} and stores the results into locations
-     * defined by {@code vlist}.
-     *
-     * @param buffer pointer to a null-terminated character string to read from
-     * @param format pointer to a null-terminated character string specifying how to read the input
-     * @param vlist  variable argument list containing the receiving arguments
-     *
-     * @return the number of receiving arguments successfully assigned, or {@code EOF} if read failure occurs before the first receiving argument was assigned
-     */
+    /** {@code int vsscanf(char const * buffer, char const * format, va_list vlist)} */
     public static int vsscanf(@NativeType("char const *") CharSequence buffer, @NativeType("char const *") CharSequence format, @NativeType("va_list") long vlist) {
         if (CHECKS) {
             check(vlist);
@@ -87,30 +68,15 @@ public class LibCStdio {
     @NativeType("void *")
     private static native long snprintf();
 
-    /** The address of the {@code snprintf} function. */
+    /** {@code void * snprintf(void)} */
     public static final long snprintf = snprintf();
 
     // --- [ vsnprintf ] ---
 
-    /**
-     * Unsafe version of: {@link #vsnprintf}
-     *
-     * @param buf_size up to {@code buf_size - 1} characters may be written, plus the null terminator
-     */
+    /** {@code int vsnprintf(char * buffer, size_t buf_size, char const * format, va_list vlist)} */
     public static native int nvsnprintf(long buffer, long buf_size, long format, long vlist);
 
-    /**
-     * Loads the data from the locations, defined by {@code vlist}, converts them to character string equivalents and writes the results to a character string
-     * buffer.
-     *
-     * @param buffer pointer to a character string to write to
-     * @param format pointer to a null-terminated character string specifying how to interpret the data
-     * @param vlist  variable argument list containing the data to print
-     *
-     * @return the number of characters written if successful or negative value if an error occurred. If the resulting string gets truncated due to {@code buf_size}
-     *         limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not
-     *         imposed.
-     */
+    /** {@code int vsnprintf(char * buffer, size_t buf_size, char const * format, va_list vlist)} */
     public static int vsnprintf(@NativeType("char *") @Nullable ByteBuffer buffer, @NativeType("char const *") ByteBuffer format, @NativeType("va_list") long vlist) {
         if (CHECKS) {
             checkNT1(format);
@@ -119,18 +85,7 @@ public class LibCStdio {
         return nvsnprintf(memAddressSafe(buffer), remainingSafe(buffer), memAddress(format), vlist);
     }
 
-    /**
-     * Loads the data from the locations, defined by {@code vlist}, converts them to character string equivalents and writes the results to a character string
-     * buffer.
-     *
-     * @param buffer pointer to a character string to write to
-     * @param format pointer to a null-terminated character string specifying how to interpret the data
-     * @param vlist  variable argument list containing the data to print
-     *
-     * @return the number of characters written if successful or negative value if an error occurred. If the resulting string gets truncated due to {@code buf_size}
-     *         limit, function returns the total number of characters (not including the terminating null-byte) which would have been written, if the limit was not
-     *         imposed.
-     */
+    /** {@code int vsnprintf(char * buffer, size_t buf_size, char const * format, va_list vlist)} */
     public static int vsnprintf(@NativeType("char *") @Nullable ByteBuffer buffer, @NativeType("char const *") CharSequence format, @NativeType("va_list") long vlist) {
         if (CHECKS) {
             check(vlist);

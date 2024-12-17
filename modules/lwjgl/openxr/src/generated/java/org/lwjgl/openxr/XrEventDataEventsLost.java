@@ -16,31 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event indicating events were lost.
- * 
- * <h5>Description</h5>
- * 
- * <p>Receiving the {@link XrEventDataEventsLost} event structure indicates that the event queue overflowed and some events were removed at the position within the queue at which this event was found.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEventDataBaseHeader}, {@link XR10#xrPollEvent PollEvent}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataEventsLost {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #lostEventCount};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t lostEventCount;
+ * }}</pre>
  */
 public class XrEventDataEventsLost extends Struct<XrEventDataEventsLost> implements NativeResource {
 
@@ -93,21 +74,21 @@ public class XrEventDataEventsLost extends Struct<XrEventDataEventsLost> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of events which have overflowed since the last call to {@link XR10#xrPollEvent PollEvent}. */
+    /** @return the value of the {@code lostEventCount} field. */
     @NativeType("uint32_t")
     public int lostEventCount() { return nlostEventCount(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataEventsLost type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST} value to the {@code type} field. */
     public XrEventDataEventsLost type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_EVENTS_LOST); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataEventsLost next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,21 +290,21 @@ public class XrEventDataEventsLost extends Struct<XrEventDataEventsLost> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataEventsLost#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataEventsLost.ntype(address()); }
-        /** @return the value of the {@link XrEventDataEventsLost#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataEventsLost.nnext(address()); }
-        /** @return the value of the {@link XrEventDataEventsLost#lostEventCount} field. */
+        /** @return the value of the {@code lostEventCount} field. */
         @NativeType("uint32_t")
         public int lostEventCount() { return XrEventDataEventsLost.nlostEventCount(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataEventsLost#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataEventsLost.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataEventsLost.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST} value to the {@link XrEventDataEventsLost#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_EVENTS_LOST TYPE_EVENT_DATA_EVENTS_LOST} value to the {@code type} field. */
         public XrEventDataEventsLost.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_EVENTS_LOST); }
-        /** Sets the specified value to the {@link XrEventDataEventsLost#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataEventsLost.Buffer next(@NativeType("void const *") long value) { XrEventDataEventsLost.nnext(address(), value); return this; }
 
     }

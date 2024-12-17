@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Argument for {@code IORING_(UN)REGISTER_NAPI}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_napi {
  *     __u32 busy_poll_to;
  *     __u8 prefer_busy_poll;
  *     __u8 pad[3];
  *     __u64 resv;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_napi")
 public class IOURingNAPI extends Struct<IOURingNAPI> implements NativeResource {

@@ -16,33 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * System property for environment depth.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>can</b> inspect whether the system is capable of supporting environment depth by extending the {@link XrSystemProperties} with {@link XrSystemEnvironmentDepthPropertiesMETA} structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
- * 
- * <p>If and only if a runtime returns {@link XR10#XR_FALSE FALSE} for {@code supportsEnvironmentDepth}, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link METAEnvironmentDepth#xrCreateEnvironmentDepthProviderMETA CreateEnvironmentDepthProviderMETA}.</p>
- * 
- * <p>If and only if a runtime returns {@link XR10#XR_FALSE FALSE} for {@code supportsHandRemoval}, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link METAEnvironmentDepth#xrSetEnvironmentDepthHandRemovalMETA SetEnvironmentDepthHandRemovalMETA}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using {@link XrSystemEnvironmentDepthPropertiesMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAEnvironmentDepth#XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemEnvironmentDepthPropertiesMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsEnvironmentDepth};
- *     XrBool32 {@link #supportsHandRemoval};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsEnvironmentDepth;
+ *     XrBool32 supportsHandRemoval;
+ * }}</pre>
  */
 public class XrSystemEnvironmentDepthPropertiesMETA extends Struct<XrSystemEnvironmentDepthPropertiesMETA> implements NativeResource {
 
@@ -98,24 +78,24 @@ public class XrSystemEnvironmentDepthPropertiesMETA extends Struct<XrSystemEnvir
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32} indicating if current system supports environment depth. */
+    /** @return the value of the {@code supportsEnvironmentDepth} field. */
     @NativeType("XrBool32")
     public boolean supportsEnvironmentDepth() { return nsupportsEnvironmentDepth(address()) != 0; }
-    /** an {@code XrBool32} indicating if current system supports hand removal. */
+    /** @return the value of the {@code supportsHandRemoval} field. */
     @NativeType("XrBool32")
     public boolean supportsHandRemoval() { return nsupportsHandRemoval(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemEnvironmentDepthPropertiesMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META} value to the {@link #type} field. */
+    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META} value to the {@code type} field. */
     public XrSystemEnvironmentDepthPropertiesMETA type$Default() { return type(METAEnvironmentDepth.XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemEnvironmentDepthPropertiesMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,24 +289,24 @@ public class XrSystemEnvironmentDepthPropertiesMETA extends Struct<XrSystemEnvir
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemEnvironmentDepthPropertiesMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemEnvironmentDepthPropertiesMETA.ntype(address()); }
-        /** @return the value of the {@link XrSystemEnvironmentDepthPropertiesMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemEnvironmentDepthPropertiesMETA.nnext(address()); }
-        /** @return the value of the {@link XrSystemEnvironmentDepthPropertiesMETA#supportsEnvironmentDepth} field. */
+        /** @return the value of the {@code supportsEnvironmentDepth} field. */
         @NativeType("XrBool32")
         public boolean supportsEnvironmentDepth() { return XrSystemEnvironmentDepthPropertiesMETA.nsupportsEnvironmentDepth(address()) != 0; }
-        /** @return the value of the {@link XrSystemEnvironmentDepthPropertiesMETA#supportsHandRemoval} field. */
+        /** @return the value of the {@code supportsHandRemoval} field. */
         @NativeType("XrBool32")
         public boolean supportsHandRemoval() { return XrSystemEnvironmentDepthPropertiesMETA.nsupportsHandRemoval(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemEnvironmentDepthPropertiesMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemEnvironmentDepthPropertiesMETA.Buffer type(@NativeType("XrStructureType") int value) { XrSystemEnvironmentDepthPropertiesMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META} value to the {@link XrSystemEnvironmentDepthPropertiesMETA#type} field. */
+        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META} value to the {@code type} field. */
         public XrSystemEnvironmentDepthPropertiesMETA.Buffer type$Default() { return type(METAEnvironmentDepth.XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META); }
-        /** Sets the specified value to the {@link XrSystemEnvironmentDepthPropertiesMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemEnvironmentDepthPropertiesMETA.Buffer next(@NativeType("void *") long value) { XrSystemEnvironmentDepthPropertiesMETA.nnext(address(), value); return this; }
 
     }

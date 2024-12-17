@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A simple structure to pass more or less generic parameters to {@link FreeType#FT_Open_Face Open_Face} and {@link FreeType#FT_Face_Properties Face_Properties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Parameter {
  *     FT_ULong tag;
  *     FT_Pointer data;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Parameter extends Struct<FT_Parameter> implements NativeResource {
 
@@ -77,11 +73,7 @@ public class FT_Parameter extends Struct<FT_Parameter> implements NativeResource
     /** @return the value of the {@code tag} field. */
     @NativeType("FT_ULong")
     public long tag() { return ntag(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
     @NativeType("FT_Pointer")
     public @Nullable ByteBuffer data(int capacity) { return ndata(address(), capacity); }
 
@@ -280,11 +272,7 @@ public class FT_Parameter extends Struct<FT_Parameter> implements NativeResource
         /** @return the value of the {@code tag} field. */
         @NativeType("FT_ULong")
         public long tag() { return FT_Parameter.ntag(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
         @NativeType("FT_Pointer")
         public @Nullable ByteBuffer data(int capacity) { return FT_Parameter.ndata(address(), capacity); }
 

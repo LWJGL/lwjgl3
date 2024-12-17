@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code COLR} v1 {@code PaintTranslate} paint table. Used for translating downstream paints by a given x and y~delta.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintTranslate {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_Fixed dx;
  *     FT_Fixed dy;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintTranslate extends Struct<FT_PaintTranslate> {
 

@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union CUstreamBatchMemOpParams {
  *     CUstreamBatchMemOpType operation;
  *     struct {
@@ -51,7 +49,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         unsigned int flags;
  *     } memoryBarrier;
  *     cuuint64_t pad[6];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUstreamBatchMemOpParams extends Struct<CUstreamBatchMemOpParams> implements NativeResource {
 

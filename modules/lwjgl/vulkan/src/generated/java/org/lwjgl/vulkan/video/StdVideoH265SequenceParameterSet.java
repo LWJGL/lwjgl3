@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265SequenceParameterSet {
  *     {@link StdVideoH265SpsFlags StdVideoH265SpsFlags} flags;
  *     StdVideoH265ChromaFormatIdc chroma_format_idc;
@@ -46,7 +44,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t log2_diff_max_min_pcm_luma_coding_block_size;
  *     uint8_t reserved1;
  *     uint8_t reserved2;
- *     uint8_t {@link #palette_max_size};
+ *     uint8_t palette_max_size;
  *     uint8_t delta_palette_max_predictor_size;
  *     uint8_t motion_vector_resolution_control_idc;
  *     uint8_t sps_num_palette_predictor_initializer_minus1;
@@ -56,12 +54,12 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t conf_win_bottom_offset;
  *     {@link StdVideoH265ProfileTierLevel StdVideoH265ProfileTierLevel} const * pProfileTierLevel;
  *     {@link StdVideoH265DecPicBufMgr StdVideoH265DecPicBufMgr} const * pDecPicBufMgr;
- *     {@link StdVideoH265ScalingLists StdVideoH265ScalingLists} const * {@link #pScalingLists};
+ *     {@link StdVideoH265ScalingLists StdVideoH265ScalingLists} const * pScalingLists;
  *     {@link StdVideoH265ShortTermRefPicSet StdVideoH265ShortTermRefPicSet} const * pShortTermRefPicSet;
  *     {@link StdVideoH265LongTermRefPicsSps StdVideoH265LongTermRefPicsSps} const * pLongTermRefPicsSps;
- *     {@link StdVideoH265SequenceParameterSetVui StdVideoH265SequenceParameterSetVui} const * {@link #pSequenceParameterSetVui};
- *     {@link StdVideoH265PredictorPaletteEntries StdVideoH265PredictorPaletteEntries} const * {@link #pPredictorPaletteEntries};
- * }</code></pre>
+ *     {@link StdVideoH265SequenceParameterSetVui StdVideoH265SequenceParameterSetVui} const * pSequenceParameterSetVui;
+ *     {@link StdVideoH265PredictorPaletteEntries StdVideoH265PredictorPaletteEntries} const * pPredictorPaletteEntries;
+ * }}</pre>
  */
 public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265SequenceParameterSet> implements NativeResource {
 
@@ -293,7 +291,7 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
     /** @return the value of the {@code log2_diff_max_min_pcm_luma_coding_block_size} field. */
     @NativeType("uint8_t")
     public byte log2_diff_max_min_pcm_luma_coding_block_size() { return nlog2_diff_max_min_pcm_luma_coding_block_size(address()); }
-    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
+    /** @return the value of the {@code palette_max_size} field. */
     @NativeType("uint8_t")
     public byte palette_max_size() { return npalette_max_size(address()); }
     /** @return the value of the {@code delta_palette_max_predictor_size} field. */
@@ -323,7 +321,7 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
     /** @return a {@link StdVideoH265DecPicBufMgr} view of the struct pointed to by the {@code pDecPicBufMgr} field. */
     @NativeType("StdVideoH265DecPicBufMgr const *")
     public StdVideoH265DecPicBufMgr pDecPicBufMgr() { return npDecPicBufMgr(address()); }
-    /** must be a valid pointer if sps_scaling_list_data_present_flag is set */
+    /** @return a {@link StdVideoH265ScalingLists} view of the struct pointed to by the {@code pScalingLists} field. */
     @NativeType("StdVideoH265ScalingLists const *")
     public StdVideoH265ScalingLists pScalingLists() { return npScalingLists(address()); }
     /** @return a {@link StdVideoH265ShortTermRefPicSet} view of the struct pointed to by the {@code pShortTermRefPicSet} field. */
@@ -332,10 +330,10 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
     /** @return a {@link StdVideoH265LongTermRefPicsSps} view of the struct pointed to by the {@code pLongTermRefPicsSps} field. */
     @NativeType("StdVideoH265LongTermRefPicsSps const *")
     public StdVideoH265LongTermRefPicsSps pLongTermRefPicsSps() { return npLongTermRefPicsSps(address()); }
-    /** must be a valid pointer if StdVideoH265SpsFlags:vui_parameters_present_flag is set palette_max_size; */
+    /** @return a {@link StdVideoH265SequenceParameterSetVui} view of the struct pointed to by the {@code pSequenceParameterSetVui} field. */
     @NativeType("StdVideoH265SequenceParameterSetVui const *")
     public StdVideoH265SequenceParameterSetVui pSequenceParameterSetVui() { return npSequenceParameterSetVui(address()); }
-    /** must be a valid pointer if sps_palette_predictor_initializer_present_flag is set */
+    /** @return a {@link StdVideoH265PredictorPaletteEntries} view of the struct pointed to by the {@code pPredictorPaletteEntries} field. */
     @NativeType("StdVideoH265PredictorPaletteEntries const *")
     public StdVideoH265PredictorPaletteEntries pPredictorPaletteEntries() { return npPredictorPaletteEntries(address()); }
 
@@ -387,7 +385,7 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
     public StdVideoH265SequenceParameterSet log2_min_pcm_luma_coding_block_size_minus3(@NativeType("uint8_t") byte value) { nlog2_min_pcm_luma_coding_block_size_minus3(address(), value); return this; }
     /** Sets the specified value to the {@code log2_diff_max_min_pcm_luma_coding_block_size} field. */
     public StdVideoH265SequenceParameterSet log2_diff_max_min_pcm_luma_coding_block_size(@NativeType("uint8_t") byte value) { nlog2_diff_max_min_pcm_luma_coding_block_size(address(), value); return this; }
-    /** Sets the specified value to the {@link #palette_max_size} field. */
+    /** Sets the specified value to the {@code palette_max_size} field. */
     public StdVideoH265SequenceParameterSet palette_max_size(@NativeType("uint8_t") byte value) { npalette_max_size(address(), value); return this; }
     /** Sets the specified value to the {@code delta_palette_max_predictor_size} field. */
     public StdVideoH265SequenceParameterSet delta_palette_max_predictor_size(@NativeType("uint8_t") byte value) { ndelta_palette_max_predictor_size(address(), value); return this; }
@@ -407,15 +405,15 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
     public StdVideoH265SequenceParameterSet pProfileTierLevel(@NativeType("StdVideoH265ProfileTierLevel const *") StdVideoH265ProfileTierLevel value) { npProfileTierLevel(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoH265DecPicBufMgr} to the {@code pDecPicBufMgr} field. */
     public StdVideoH265SequenceParameterSet pDecPicBufMgr(@NativeType("StdVideoH265DecPicBufMgr const *") StdVideoH265DecPicBufMgr value) { npDecPicBufMgr(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265ScalingLists} to the {@link #pScalingLists} field. */
+    /** Sets the address of the specified {@link StdVideoH265ScalingLists} to the {@code pScalingLists} field. */
     public StdVideoH265SequenceParameterSet pScalingLists(@NativeType("StdVideoH265ScalingLists const *") StdVideoH265ScalingLists value) { npScalingLists(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoH265ShortTermRefPicSet} to the {@code pShortTermRefPicSet} field. */
     public StdVideoH265SequenceParameterSet pShortTermRefPicSet(@NativeType("StdVideoH265ShortTermRefPicSet const *") StdVideoH265ShortTermRefPicSet value) { npShortTermRefPicSet(address(), value); return this; }
     /** Sets the address of the specified {@link StdVideoH265LongTermRefPicsSps} to the {@code pLongTermRefPicsSps} field. */
     public StdVideoH265SequenceParameterSet pLongTermRefPicsSps(@NativeType("StdVideoH265LongTermRefPicsSps const *") StdVideoH265LongTermRefPicsSps value) { npLongTermRefPicsSps(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265SequenceParameterSetVui} to the {@link #pSequenceParameterSetVui} field. */
+    /** Sets the address of the specified {@link StdVideoH265SequenceParameterSetVui} to the {@code pSequenceParameterSetVui} field. */
     public StdVideoH265SequenceParameterSet pSequenceParameterSetVui(@NativeType("StdVideoH265SequenceParameterSetVui const *") StdVideoH265SequenceParameterSetVui value) { npSequenceParameterSetVui(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265PredictorPaletteEntries} to the {@link #pPredictorPaletteEntries} field. */
+    /** Sets the address of the specified {@link StdVideoH265PredictorPaletteEntries} to the {@code pPredictorPaletteEntries} field. */
     public StdVideoH265SequenceParameterSet pPredictorPaletteEntries(@NativeType("StdVideoH265PredictorPaletteEntries const *") StdVideoH265PredictorPaletteEntries value) { npPredictorPaletteEntries(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -910,7 +908,7 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
         /** @return the value of the {@code log2_diff_max_min_pcm_luma_coding_block_size} field. */
         @NativeType("uint8_t")
         public byte log2_diff_max_min_pcm_luma_coding_block_size() { return StdVideoH265SequenceParameterSet.nlog2_diff_max_min_pcm_luma_coding_block_size(address()); }
-        /** @return the value of the {@link StdVideoH265SequenceParameterSet#palette_max_size} field. */
+        /** @return the value of the {@code palette_max_size} field. */
         @NativeType("uint8_t")
         public byte palette_max_size() { return StdVideoH265SequenceParameterSet.npalette_max_size(address()); }
         /** @return the value of the {@code delta_palette_max_predictor_size} field. */
@@ -940,7 +938,7 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
         /** @return a {@link StdVideoH265DecPicBufMgr} view of the struct pointed to by the {@code pDecPicBufMgr} field. */
         @NativeType("StdVideoH265DecPicBufMgr const *")
         public StdVideoH265DecPicBufMgr pDecPicBufMgr() { return StdVideoH265SequenceParameterSet.npDecPicBufMgr(address()); }
-        /** @return a {@link StdVideoH265ScalingLists} view of the struct pointed to by the {@link StdVideoH265SequenceParameterSet#pScalingLists} field. */
+        /** @return a {@link StdVideoH265ScalingLists} view of the struct pointed to by the {@code pScalingLists} field. */
         @NativeType("StdVideoH265ScalingLists const *")
         public StdVideoH265ScalingLists pScalingLists() { return StdVideoH265SequenceParameterSet.npScalingLists(address()); }
         /** @return a {@link StdVideoH265ShortTermRefPicSet} view of the struct pointed to by the {@code pShortTermRefPicSet} field. */
@@ -949,10 +947,10 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
         /** @return a {@link StdVideoH265LongTermRefPicsSps} view of the struct pointed to by the {@code pLongTermRefPicsSps} field. */
         @NativeType("StdVideoH265LongTermRefPicsSps const *")
         public StdVideoH265LongTermRefPicsSps pLongTermRefPicsSps() { return StdVideoH265SequenceParameterSet.npLongTermRefPicsSps(address()); }
-        /** @return a {@link StdVideoH265SequenceParameterSetVui} view of the struct pointed to by the {@link StdVideoH265SequenceParameterSet#pSequenceParameterSetVui} field. */
+        /** @return a {@link StdVideoH265SequenceParameterSetVui} view of the struct pointed to by the {@code pSequenceParameterSetVui} field. */
         @NativeType("StdVideoH265SequenceParameterSetVui const *")
         public StdVideoH265SequenceParameterSetVui pSequenceParameterSetVui() { return StdVideoH265SequenceParameterSet.npSequenceParameterSetVui(address()); }
-        /** @return a {@link StdVideoH265PredictorPaletteEntries} view of the struct pointed to by the {@link StdVideoH265SequenceParameterSet#pPredictorPaletteEntries} field. */
+        /** @return a {@link StdVideoH265PredictorPaletteEntries} view of the struct pointed to by the {@code pPredictorPaletteEntries} field. */
         @NativeType("StdVideoH265PredictorPaletteEntries const *")
         public StdVideoH265PredictorPaletteEntries pPredictorPaletteEntries() { return StdVideoH265SequenceParameterSet.npPredictorPaletteEntries(address()); }
 
@@ -1004,7 +1002,7 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
         public StdVideoH265SequenceParameterSet.Buffer log2_min_pcm_luma_coding_block_size_minus3(@NativeType("uint8_t") byte value) { StdVideoH265SequenceParameterSet.nlog2_min_pcm_luma_coding_block_size_minus3(address(), value); return this; }
         /** Sets the specified value to the {@code log2_diff_max_min_pcm_luma_coding_block_size} field. */
         public StdVideoH265SequenceParameterSet.Buffer log2_diff_max_min_pcm_luma_coding_block_size(@NativeType("uint8_t") byte value) { StdVideoH265SequenceParameterSet.nlog2_diff_max_min_pcm_luma_coding_block_size(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoH265SequenceParameterSet#palette_max_size} field. */
+        /** Sets the specified value to the {@code palette_max_size} field. */
         public StdVideoH265SequenceParameterSet.Buffer palette_max_size(@NativeType("uint8_t") byte value) { StdVideoH265SequenceParameterSet.npalette_max_size(address(), value); return this; }
         /** Sets the specified value to the {@code delta_palette_max_predictor_size} field. */
         public StdVideoH265SequenceParameterSet.Buffer delta_palette_max_predictor_size(@NativeType("uint8_t") byte value) { StdVideoH265SequenceParameterSet.ndelta_palette_max_predictor_size(address(), value); return this; }
@@ -1024,15 +1022,15 @@ public class StdVideoH265SequenceParameterSet extends Struct<StdVideoH265Sequenc
         public StdVideoH265SequenceParameterSet.Buffer pProfileTierLevel(@NativeType("StdVideoH265ProfileTierLevel const *") StdVideoH265ProfileTierLevel value) { StdVideoH265SequenceParameterSet.npProfileTierLevel(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoH265DecPicBufMgr} to the {@code pDecPicBufMgr} field. */
         public StdVideoH265SequenceParameterSet.Buffer pDecPicBufMgr(@NativeType("StdVideoH265DecPicBufMgr const *") StdVideoH265DecPicBufMgr value) { StdVideoH265SequenceParameterSet.npDecPicBufMgr(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265ScalingLists} to the {@link StdVideoH265SequenceParameterSet#pScalingLists} field. */
+        /** Sets the address of the specified {@link StdVideoH265ScalingLists} to the {@code pScalingLists} field. */
         public StdVideoH265SequenceParameterSet.Buffer pScalingLists(@NativeType("StdVideoH265ScalingLists const *") StdVideoH265ScalingLists value) { StdVideoH265SequenceParameterSet.npScalingLists(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoH265ShortTermRefPicSet} to the {@code pShortTermRefPicSet} field. */
         public StdVideoH265SequenceParameterSet.Buffer pShortTermRefPicSet(@NativeType("StdVideoH265ShortTermRefPicSet const *") StdVideoH265ShortTermRefPicSet value) { StdVideoH265SequenceParameterSet.npShortTermRefPicSet(address(), value); return this; }
         /** Sets the address of the specified {@link StdVideoH265LongTermRefPicsSps} to the {@code pLongTermRefPicsSps} field. */
         public StdVideoH265SequenceParameterSet.Buffer pLongTermRefPicsSps(@NativeType("StdVideoH265LongTermRefPicsSps const *") StdVideoH265LongTermRefPicsSps value) { StdVideoH265SequenceParameterSet.npLongTermRefPicsSps(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265SequenceParameterSetVui} to the {@link StdVideoH265SequenceParameterSet#pSequenceParameterSetVui} field. */
+        /** Sets the address of the specified {@link StdVideoH265SequenceParameterSetVui} to the {@code pSequenceParameterSetVui} field. */
         public StdVideoH265SequenceParameterSet.Buffer pSequenceParameterSetVui(@NativeType("StdVideoH265SequenceParameterSetVui const *") StdVideoH265SequenceParameterSetVui value) { StdVideoH265SequenceParameterSet.npSequenceParameterSetVui(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265PredictorPaletteEntries} to the {@link StdVideoH265SequenceParameterSet#pPredictorPaletteEntries} field. */
+        /** Sets the address of the specified {@link StdVideoH265PredictorPaletteEntries} to the {@code pPredictorPaletteEntries} field. */
         public StdVideoH265SequenceParameterSet.Buffer pPredictorPaletteEntries(@NativeType("StdVideoH265PredictorPaletteEntries const *") StdVideoH265PredictorPaletteEntries value) { StdVideoH265SequenceParameterSet.npPredictorPaletteEntries(address(), value); return this; }
 
     }

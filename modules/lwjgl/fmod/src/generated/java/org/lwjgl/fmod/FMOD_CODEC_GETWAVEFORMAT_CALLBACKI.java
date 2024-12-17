@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_CODEC_STATE *codec_state,
- *     int index,
- *     struct FMOD_CODEC_WAVEFORMAT *waveformat
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_CODEC_GETWAVEFORMAT_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_CODEC_GETWAVEFORMAT_CALLBACK")
 public interface FMOD_CODEC_GETWAVEFORMAT_CALLBACKI extends CallbackI {
@@ -45,6 +36,7 @@ public interface FMOD_CODEC_GETWAVEFORMAT_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_CODEC_GETWAVEFORMAT_CALLBACK) (struct FMOD_CODEC_STATE * codec_state, int index, struct FMOD_CODEC_WAVEFORMAT * waveformat)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_CODEC_STATE *") long codec_state, int index, @NativeType("struct FMOD_CODEC_WAVEFORMAT *") long waveformat);
 
 }

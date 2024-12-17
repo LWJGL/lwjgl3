@@ -19,96 +19,15 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifies H.264 encode frame parameters.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is specified in the {@code pNext} chain of the {@link VkVideoEncodeInfoKHR} structure passed to {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} to specify the codec-specific picture information for an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264">H.264 encode operation</a>.</p>
- * 
- * <dl>
- * <dt>Encode Input Picture Information</dt>
- * <dd><ul>
- * <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-picture-data-access">H.264 Encode Picture Data Access</a> section.</li>
- * <li>The encode input picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-picture-info">H.264 picture information</a> provided in {@code pStdPictureInfo}.</li>
- * </ul></dd>
- * </dl>
- * 
- * <dl>
- * <dt>Std Picture Information</dt>
- * <dd><ul>
- * <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
- * <li>{@code flags.IdrPicFlag} as defined in section 7.4.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>{@code flags.is_reference} as defined in section 3.136 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>{@code seq_parameter_set_id} and {@code pic_parameter_set_id} are used to identify the active parameter sets, as described below;</li>
- * <li>{@code primary_pic_type} as defined in section 7.4.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>{@code PicOrderCnt} as defined in section 8.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>{@code temporal_id} as defined in section G.7.4.1.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>if {@code pRefLists} is not {@code NULL}, then it is a pointer to a {@code StdVideoEncodeH264ReferenceListsInfo} structure that is interpreted as follows:
- * 
- * <ul>
- * <li>{@code flags.reserved} is used only for padding purposes and is otherwise ignored;</li>
- * <li>{@code ref_pic_list_modification_flag_l0} and {@code ref_pic_list_modification_flag_l1} as defined in section 7.4.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>{@code num_ref_idx_l0_active_minus1} and {@code num_ref_idx_l1_active_minus1} as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>{@code RefPicList0} and {@code RefPicList1} as defined in section 8.2.4 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a> where each element of these arrays either identifies an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-active-reference-picture-info">active reference picture</a> using its <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> index or contains the value {@code STD_VIDEO_H264_NO_REFERENCE_PICTURE} to indicate “no reference picture”;</li>
- * <li>if {@code refList0ModOpCount} is not zero, then {@code pRefList0ModOperations} is a pointer to an array of {@code refList0ModOpCount} number of {@code StdVideoEncodeH264RefListModEntry} structures specifying the modification parameters for the reference list L0 as defined in section 7.4.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>if {@code refList1ModOpCount} is not zero, then {@code pRefList1ModOperations} is a pointer to an array of {@code refList1ModOpCount} number of {@code StdVideoEncodeH264RefListModEntry} structures specifying the modification parameters for the reference list L1 as defined in section 7.4.3.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>if {@code refPicMarkingOpCount} is not zero, then {@code refPicMarkingOperations} is a pointer to an array of {@code refPicMarkingOpCount} number of {@code StdVideoEncodeH264RefPicMarkingEntry} structures specifying the reference picture marking parameters as defined in section 7.4.3.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * </ul>
- * </li>
- * <li>all other members are interpreted as defined in section 7.4.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>.</li>
- * </ul></dd>
- * </dl>
- * 
- * <p>Reference picture setup is controlled by the value of {@code StdVideoEncodeH264PictureInfo}{@code ::flags.is_reference}. If it is set and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-reconstructed-picture-info">reconstructed picture</a> is specified, then the latter is used as the target of picture reconstruction to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> specified in {@code pEncodeInfo→pSetupReferenceSlot→slotIndex}. If {@code StdVideoEncodeH264PictureInfo}{@code ::flags.is_reference} is not set, but a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-reconstructed-picture-info">reconstructed picture</a> is specified, then the corresponding picture reference associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> is invalidated, as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot-states">DPB Slot States</a> section.</p>
- * 
- * <dl>
- * <dt>Active Parameter Sets</dt>
- * <dd><ul>
- * <li>The <em>active SPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-sps">SPS</a> identified by the key specified in {@code StdVideoEncodeH264PictureInfo}{@code ::seq_parameter_set_id}.</li>
- * <li>The <em>active PPS</em> is the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-pps">PPS</a> identified by the key specified by the pair constructed from {@code StdVideoEncodeH264PictureInfo}{@code ::seq_parameter_set_id} and {@code StdVideoEncodeH264PictureInfo}{@code ::pic_parameter_set_id}.</li>
- * </ul></dd>
- * </dl>
- * 
- * <p>H.264 encoding uses <em>explicit weighted sample prediction</em> for a slice, as defined in section 8.4.2.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>, if any of the following conditions are true for the active <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-pps">PPS</a> and the {@code pStdSliceHeader} member of the corresponding element of {@code pNaluSliceEntries}:</p>
- * 
- * <ul>
- * <li>{@code pStdSliceHeader→slice_type} is {@code STD_VIDEO_H264_SLICE_TYPE_P} and {@code weighted_pred_flag} is enabled in the active PPS.</li>
- * <li>{@code pStdSliceHeader→slice_type} is {@code STD_VIDEO_H264_SLICE_TYPE_B} and {@code weighted_bipred_idc} in the active PPS equals {@code STD_VIDEO_H264_WEIGHTED_BIPRED_IDC_EXPLICIT}.</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code naluSliceEntryCount} <b>must</b> be between 1 and {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::maxSliceCount}, inclusive, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
- * <li>If {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::flags}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile, does not include {@link KHRVideoEncodeH264#VK_VIDEO_ENCODE_H264_CAPABILITY_GENERATE_PREFIX_NALU_BIT_KHR VIDEO_ENCODE_H264_CAPABILITY_GENERATE_PREFIX_NALU_BIT_KHR}, then {@code generatePrefixNalu} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
- * <li>If {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::flags}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile, does not include {@link KHRVideoEncodeH264#VK_VIDEO_ENCODE_H264_CAPABILITY_PREDICTION_WEIGHT_TABLE_GENERATED_BIT_KHR VIDEO_ENCODE_H264_CAPABILITY_PREDICTION_WEIGHT_TABLE_GENERATED_BIT_KHR} and the slice corresponding to any element of {@code pNaluSliceEntries} uses <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-weighted-pred">explicit weighted sample prediction</a>, then {@link VkVideoEncodeH264NaluSliceInfoKHR}{@code ::pStdSliceHeader→pWeightTable} <b>must</b> not be {@code NULL} for that element of {@code pNaluSliceEntries}</li>
- * <li>If {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::flags}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile, does not include {@link KHRVideoEncodeH264#VK_VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_KHR VIDEO_ENCODE_H264_CAPABILITY_DIFFERENT_SLICE_TYPE_BIT_KHR}, then {@link VkVideoEncodeH264NaluSliceInfoKHR}{@code ::pStdSliceHeader→slice_type} <b>must</b> be identical for all elements of {@code pNaluSliceEntries}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR}</li>
- * <li>{@code pNaluSliceEntries} <b>must</b> be a valid pointer to an array of {@code naluSliceEntryCount} valid {@link VkVideoEncodeH264NaluSliceInfoKHR} structures</li>
- * <li>{@code pStdPictureInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH264PictureInfo} value</li>
- * <li>{@code naluSliceEntryCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeH264NaluSliceInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH264PictureInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #naluSliceEntryCount};
- *     {@link VkVideoEncodeH264NaluSliceInfoKHR VkVideoEncodeH264NaluSliceInfoKHR} const * {@link #pNaluSliceEntries};
- *     {@link StdVideoEncodeH264PictureInfo StdVideoEncodeH264PictureInfo} const * {@link #pStdPictureInfo};
- *     VkBool32 {@link #generatePrefixNalu};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t naluSliceEntryCount;
+ *     {@link VkVideoEncodeH264NaluSliceInfoKHR VkVideoEncodeH264NaluSliceInfoKHR} const * pNaluSliceEntries;
+ *     {@link StdVideoEncodeH264PictureInfo StdVideoEncodeH264PictureInfo} const * pStdPictureInfo;
+ *     VkBool32 generatePrefixNalu;
+ * }}</pre>
  */
 public class VkVideoEncodeH264PictureInfoKHR extends Struct<VkVideoEncodeH264PictureInfoKHR> implements NativeResource {
 
@@ -170,36 +89,36 @@ public class VkVideoEncodeH264PictureInfoKHR extends Struct<VkVideoEncodeH264Pic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of elements in {@code pNaluSliceEntries}. */
+    /** @return the value of the {@code naluSliceEntryCount} field. */
     @NativeType("uint32_t")
     public int naluSliceEntryCount() { return nnaluSliceEntryCount(address()); }
-    /** a pointer to an array of {@code naluSliceEntryCount} {@link VkVideoEncodeH264NaluSliceInfoKHR} structures specifying the parameters of the individual H.264 slices to encode for the input picture. */
+    /** @return a {@link VkVideoEncodeH264NaluSliceInfoKHR.Buffer} view of the struct array pointed to by the {@code pNaluSliceEntries} field. */
     @NativeType("VkVideoEncodeH264NaluSliceInfoKHR const *")
     public VkVideoEncodeH264NaluSliceInfoKHR.Buffer pNaluSliceEntries() { return npNaluSliceEntries(address()); }
-    /** a pointer to a {@code StdVideoEncodeH264PictureInfo} structure specifying <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-picture-info">H.264 picture information</a>. */
+    /** @return a {@link StdVideoEncodeH264PictureInfo} view of the struct pointed to by the {@code pStdPictureInfo} field. */
     @NativeType("StdVideoEncodeH264PictureInfo const *")
     public StdVideoEncodeH264PictureInfo pStdPictureInfo() { return npStdPictureInfo(address()); }
-    /** controls whether prefix NALUs are generated before slice NALUs into the target bitstream, as defined in sections 7.3.2.12 and 7.4.2.12 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>. */
+    /** @return the value of the {@code generatePrefixNalu} field. */
     @NativeType("VkBool32")
     public boolean generatePrefixNalu() { return ngeneratePrefixNalu(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH264PictureInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH264PictureInfoKHR sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH264PictureInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVideoEncodeH264NaluSliceInfoKHR.Buffer} to the {@link #pNaluSliceEntries} field. */
+    /** Sets the address of the specified {@link VkVideoEncodeH264NaluSliceInfoKHR.Buffer} to the {@code pNaluSliceEntries} field. */
     public VkVideoEncodeH264PictureInfoKHR pNaluSliceEntries(@NativeType("VkVideoEncodeH264NaluSliceInfoKHR const *") VkVideoEncodeH264NaluSliceInfoKHR.Buffer value) { npNaluSliceEntries(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoEncodeH264PictureInfo} to the {@link #pStdPictureInfo} field. */
+    /** Sets the address of the specified {@link StdVideoEncodeH264PictureInfo} to the {@code pStdPictureInfo} field. */
     public VkVideoEncodeH264PictureInfoKHR pStdPictureInfo(@NativeType("StdVideoEncodeH264PictureInfo const *") StdVideoEncodeH264PictureInfo value) { npStdPictureInfo(address(), value); return this; }
-    /** Sets the specified value to the {@link #generatePrefixNalu} field. */
+    /** Sets the specified value to the {@code generatePrefixNalu} field. */
     public VkVideoEncodeH264PictureInfoKHR generatePrefixNalu(@NativeType("VkBool32") boolean value) { ngeneratePrefixNalu(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -426,36 +345,36 @@ public class VkVideoEncodeH264PictureInfoKHR extends Struct<VkVideoEncodeH264Pic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH264PictureInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH264PictureInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264PictureInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH264PictureInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264PictureInfoKHR#naluSliceEntryCount} field. */
+        /** @return the value of the {@code naluSliceEntryCount} field. */
         @NativeType("uint32_t")
         public int naluSliceEntryCount() { return VkVideoEncodeH264PictureInfoKHR.nnaluSliceEntryCount(address()); }
-        /** @return a {@link VkVideoEncodeH264NaluSliceInfoKHR.Buffer} view of the struct array pointed to by the {@link VkVideoEncodeH264PictureInfoKHR#pNaluSliceEntries} field. */
+        /** @return a {@link VkVideoEncodeH264NaluSliceInfoKHR.Buffer} view of the struct array pointed to by the {@code pNaluSliceEntries} field. */
         @NativeType("VkVideoEncodeH264NaluSliceInfoKHR const *")
         public VkVideoEncodeH264NaluSliceInfoKHR.Buffer pNaluSliceEntries() { return VkVideoEncodeH264PictureInfoKHR.npNaluSliceEntries(address()); }
-        /** @return a {@link StdVideoEncodeH264PictureInfo} view of the struct pointed to by the {@link VkVideoEncodeH264PictureInfoKHR#pStdPictureInfo} field. */
+        /** @return a {@link StdVideoEncodeH264PictureInfo} view of the struct pointed to by the {@code pStdPictureInfo} field. */
         @NativeType("StdVideoEncodeH264PictureInfo const *")
         public StdVideoEncodeH264PictureInfo pStdPictureInfo() { return VkVideoEncodeH264PictureInfoKHR.npStdPictureInfo(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264PictureInfoKHR#generatePrefixNalu} field. */
+        /** @return the value of the {@code generatePrefixNalu} field. */
         @NativeType("VkBool32")
         public boolean generatePrefixNalu() { return VkVideoEncodeH264PictureInfoKHR.ngeneratePrefixNalu(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH264PictureInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH264PictureInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264PictureInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR} value to the {@link VkVideoEncodeH264PictureInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH264PictureInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PICTURE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH264PictureInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH264PictureInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264PictureInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVideoEncodeH264NaluSliceInfoKHR.Buffer} to the {@link VkVideoEncodeH264PictureInfoKHR#pNaluSliceEntries} field. */
+        /** Sets the address of the specified {@link VkVideoEncodeH264NaluSliceInfoKHR.Buffer} to the {@code pNaluSliceEntries} field. */
         public VkVideoEncodeH264PictureInfoKHR.Buffer pNaluSliceEntries(@NativeType("VkVideoEncodeH264NaluSliceInfoKHR const *") VkVideoEncodeH264NaluSliceInfoKHR.Buffer value) { VkVideoEncodeH264PictureInfoKHR.npNaluSliceEntries(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoEncodeH264PictureInfo} to the {@link VkVideoEncodeH264PictureInfoKHR#pStdPictureInfo} field. */
+        /** Sets the address of the specified {@link StdVideoEncodeH264PictureInfo} to the {@code pStdPictureInfo} field. */
         public VkVideoEncodeH264PictureInfoKHR.Buffer pStdPictureInfo(@NativeType("StdVideoEncodeH264PictureInfo const *") StdVideoEncodeH264PictureInfo value) { VkVideoEncodeH264PictureInfoKHR.npStdPictureInfo(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264PictureInfoKHR#generatePrefixNalu} field. */
+        /** Sets the specified value to the {@code generatePrefixNalu} field. */
         public VkVideoEncodeH264PictureInfoKHR.Buffer generatePrefixNalu(@NativeType("VkBool32") boolean value) { VkVideoEncodeH264PictureInfoKHR.ngeneratePrefixNalu(address(), value ? 1 : 0); return this; }
 
     }

@@ -17,51 +17,22 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_MSFT_spatial_anchor_persistence">XR_MSFT_spatial_anchor_persistence</a> extension.
- * 
- * <p>This extension allows persistence and retrieval of spatial anchors sharing and localization across application sessions on a device. Spatial anchors persisted during an application session on a device will only be able to be retrieved during sessions of that same application on the same device. This extension requires {@link MSFTSpatialAnchor XR_MSFT_spatial_anchor} to also be enabled.</p>
- */
 public class MSFTSpatialAnchorPersistence {
 
-    /** The extension specification version. */
     public static final int XR_MSFT_spatial_anchor_persistence_SPEC_VERSION = 2;
 
-    /** The extension name. */
     public static final String XR_MSFT_SPATIAL_ANCHOR_PERSISTENCE_EXTENSION_NAME = "XR_MSFT_spatial_anchor_persistence";
 
-    /** Extends {@code XrObjectType}. */
     public static final int XR_OBJECT_TYPE_SPATIAL_ANCHOR_STORE_CONNECTION_MSFT = 1000142000;
 
-    /**
-     * Extends {@code XrStructureType}.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT}</li>
-     * <li>{@link #XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT}</li>
-     * </ul>
-     */
     public static final int
         XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT                  = 1000142000,
         XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT = 1000142001;
 
-    /**
-     * Extends {@code XrResult}.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}</li>
-     * <li>{@link #XR_ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT}</li>
-     * </ul>
-     */
     public static final int
         XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT = -1000142001,
         XR_ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT   = -1000142002;
 
-    /** XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT */
     public static final int XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT = 256;
 
     protected MSFTSpatialAnchorPersistence() {
@@ -70,7 +41,7 @@ public class MSFTSpatialAnchorPersistence {
 
     // --- [ xrCreateSpatialAnchorStoreConnectionMSFT ] ---
 
-    /** Unsafe version of: {@link #xrCreateSpatialAnchorStoreConnectionMSFT CreateSpatialAnchorStoreConnectionMSFT} */
+    /** {@code XrResult xrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, XrSpatialAnchorStoreConnectionMSFT * spatialAnchorStore)} */
     public static int nxrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, long spatialAnchorStore) {
         long __functionAddress = session.getCapabilities().xrCreateSpatialAnchorStoreConnectionMSFT;
         if (CHECKS) {
@@ -79,51 +50,7 @@ public class MSFTSpatialAnchorPersistence {
         return callPPI(session.address(), spatialAnchorStore, __functionAddress);
     }
 
-    /**
-     * Create a handle to track a connection to the spatial anchor store.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>The application <b>can</b> use the {@link #xrCreateSpatialAnchorStoreConnectionMSFT CreateSpatialAnchorStoreConnectionMSFT} function to create an handle to the spatial anchor store. The application <b>can</b> use this handle to interact with the spatial anchor store in order to persist anchors across application sessions.</p>
-     * 
-     * <p>The {@link #xrCreateSpatialAnchorStoreConnectionMSFT CreateSpatialAnchorStoreConnectionMSFT} function <b>may</b> be a slow operation and therefore <b>should</b> be invoked from a non-timing critical thread.</p>
-     * 
-     * <pre><code>
-     * XrResult xrCreateSpatialAnchorStoreConnectionMSFT(
-     *     XrSession                                   session,
-     *     XrSpatialAnchorStoreConnectionMSFT*         spatialAnchorStore);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling {@link #xrCreateSpatialAnchorStoreConnectionMSFT CreateSpatialAnchorStoreConnectionMSFT}</li>
-     * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-     * <li>{@code spatialAnchorStore} <b>must</b> be a pointer to an {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
-     * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
-     * </ul></dd>
-     * </dl>
-     *
-     * @param session            the {@code XrSession} the anchor was created with.
-     * @param spatialAnchorStore a pointer to the {@code XrSpatialAnchorStoreConnectionMSFT} handle.
-     */
+    /** {@code XrResult xrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, XrSpatialAnchorStoreConnectionMSFT * spatialAnchorStore)} */
     @NativeType("XrResult")
     public static int xrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, @NativeType("XrSpatialAnchorStoreConnectionMSFT *") PointerBuffer spatialAnchorStore) {
         if (CHECKS) {
@@ -134,47 +61,7 @@ public class MSFTSpatialAnchorPersistence {
 
     // --- [ xrDestroySpatialAnchorStoreConnectionMSFT ] ---
 
-    /**
-     * Destroys the anchor store handle.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>The application <b>can</b> use the {@link #xrDestroySpatialAnchorStoreConnectionMSFT DestroySpatialAnchorStoreConnectionMSFT} function to destroy an anchor store connection.</p>
-     * 
-     * <pre><code>
-     * XrResult xrDestroySpatialAnchorStoreConnectionMSFT(
-     *     XrSpatialAnchorStoreConnectionMSFT          spatialAnchorStore);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling {@link #xrDestroySpatialAnchorStoreConnectionMSFT DestroySpatialAnchorStoreConnectionMSFT}</li>
-     * <li>{@code spatialAnchorStore} <b>must</b> be a valid {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-     * </ul>
-     * 
-     * <h5>Thread Safety</h5>
-     * 
-     * <ul>
-     * <li>Access to {@code spatialAnchorStore}, and any child handles, <b>must</b> be externally synchronized</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
-     * </ul></dd>
-     * </dl>
-     *
-     * @param spatialAnchorStore the {@code XrSpatialAnchorStoreConnectionMSFT} to be destroyed.
-     */
+    /** {@code XrResult xrDestroySpatialAnchorStoreConnectionMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore)} */
     @NativeType("XrResult")
     public static int xrDestroySpatialAnchorStoreConnectionMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) {
         long __functionAddress = spatialAnchorStore.getCapabilities().xrDestroySpatialAnchorStoreConnectionMSFT;
@@ -186,7 +73,7 @@ public class MSFTSpatialAnchorPersistence {
 
     // --- [ xrPersistSpatialAnchorMSFT ] ---
 
-    /** Unsafe version of: {@link #xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT} */
+    /** {@code XrResult xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, XrSpatialAnchorPersistenceInfoMSFT const * spatialAnchorPersistenceInfo)} */
     public static int nxrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, long spatialAnchorPersistenceInfo) {
         long __functionAddress = spatialAnchorStore.getCapabilities().xrPersistSpatialAnchorMSFT;
         if (CHECKS) {
@@ -196,53 +83,7 @@ public class MSFTSpatialAnchorPersistence {
         return callPPI(spatialAnchorStore.address(), spatialAnchorPersistenceInfo, __functionAddress);
     }
 
-    /**
-     * Persist the spatial anchor in the spatial anchor store.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>The application <b>can</b> use the {@link #xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT} function to persist a spatial anchor in the spatial anchor store for this application. The given {@link XrSpatialAnchorPersistenceInfoMSFT}{@code ::spatialAnchorPersistenceName} will be the string to retrieve the spatial anchor from the Spatial Anchor store or subsequently remove the record of this spatial anchor from the store. This name will uniquely identify the spatial anchor for the current application. If there is already a spatial anchor of the same name persisted in the spatial anchor store, the existing spatial anchor will be replaced and {@link #xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT} <b>must</b> return {@link XR10#XR_SUCCESS SUCCESS}.</p>
-     * 
-     * <pre><code>
-     * XrResult xrPersistSpatialAnchorMSFT(
-     *     XrSpatialAnchorStoreConnectionMSFT          spatialAnchorStore,
-     *     const XrSpatialAnchorPersistenceInfoMSFT*   spatialAnchorPersistenceInfo);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling {@link #xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT}</li>
-     * <li>{@code spatialAnchorStore} <b>must</b> be a valid {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-     * <li>{@code spatialAnchorPersistenceInfo} <b>must</b> be a pointer to a valid {@link XrSpatialAnchorPersistenceInfoMSFT} structure</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
-     * <li>{@link #XR_ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link XrSpatialAnchorPersistenceInfoMSFT}</p>
-     *
-     * @param spatialAnchorStore           the {@code XrSpatialAnchorStoreConnectionMSFT} with which to persist the {@link XrSpatialAnchorPersistenceInfoMSFT}{@code ::spatialAnchor}.
-     * @param spatialAnchorPersistenceInfo a pointer to {@link XrSpatialAnchorPersistenceInfoMSFT} structure to specify the anchor and its name to persist.
-     */
+    /** {@code XrResult xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, XrSpatialAnchorPersistenceInfoMSFT const * spatialAnchorPersistenceInfo)} */
     @NativeType("XrResult")
     public static int xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, @NativeType("XrSpatialAnchorPersistenceInfoMSFT const *") XrSpatialAnchorPersistenceInfoMSFT spatialAnchorPersistenceInfo) {
         return nxrPersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceInfo.address());
@@ -250,11 +91,7 @@ public class MSFTSpatialAnchorPersistence {
 
     // --- [ xrEnumeratePersistedSpatialAnchorNamesMSFT ] ---
 
-    /**
-     * Unsafe version of: {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT}
-     *
-     * @param spatialAnchorNameCapacityInput the capacity of the {@code spatialAnchorNames} array, or 0 to indicate a request to retrieve the required capacity.
-     */
+    /** {@code XrResult xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, uint32_t spatialAnchorNameCapacityInput, uint32_t * spatialAnchorNameCountOutput, XrSpatialAnchorPersistenceNameMSFT * spatialAnchorNames)} */
     public static int nxrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, int spatialAnchorNameCapacityInput, long spatialAnchorNameCountOutput, long spatialAnchorNames) {
         long __functionAddress = spatialAnchorStore.getCapabilities().xrEnumeratePersistedSpatialAnchorNamesMSFT;
         if (CHECKS) {
@@ -263,57 +100,7 @@ public class MSFTSpatialAnchorPersistence {
         return callPPPI(spatialAnchorStore.address(), spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, spatialAnchorNames, __functionAddress);
     }
 
-    /**
-     * Enumerate the names of currently persisted spatial anchors in the spatial anchor store.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>The application <b>can</b> use the {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT} function to enumerate the names of all spatial anchors currently persisted in the spatial anchor store for this application. This function follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@code spatialAnchorNames}.</p>
-     * 
-     * <pre><code>
-     * XrResult xrEnumeratePersistedSpatialAnchorNamesMSFT(
-     *     XrSpatialAnchorStoreConnectionMSFT          spatialAnchorStore,
-     *     uint32_t                                    spatialAnchorNameCapacityInput,
-     *     uint32_t*                                   spatialAnchorNameCountOutput,
-     *     XrSpatialAnchorPersistenceNameMSFT*         spatialAnchorNames);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT}</li>
-     * <li>{@code spatialAnchorStore} <b>must</b> be a valid {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-     * <li>{@code spatialAnchorNameCountOutput} <b>must</b> be a pointer to a {@code uint32_t} value</li>
-     * <li>If {@code spatialAnchorNameCapacityInput} is not 0, {@code spatialAnchorNames} <b>must</b> be a pointer to an array of {@code spatialAnchorNameCapacityInput} {@link XrSpatialAnchorPersistenceNameMSFT} structures</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
-     * <li>{@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link XrSpatialAnchorPersistenceNameMSFT}</p>
-     *
-     * @param spatialAnchorStore           the {@code XrSpatialAnchorStoreConnectionMSFT} anchor store to perform the enumeration operation on.
-     * @param spatialAnchorNameCountOutput filled in by the runtime with the count of anchor names written or the required capacity in the case that {@code spatialAnchorNameCapacityInput} is insufficient.
-     * @param spatialAnchorNames           a pointer to an array of {@link XrSpatialAnchorPersistenceNameMSFT} structures, but <b>can</b> be {@code NULL} if propertyCapacityInput is 0.
-     */
+    /** {@code XrResult xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, uint32_t spatialAnchorNameCapacityInput, uint32_t * spatialAnchorNameCountOutput, XrSpatialAnchorPersistenceNameMSFT * spatialAnchorNames)} */
     @NativeType("XrResult")
     public static int xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, @NativeType("uint32_t *") IntBuffer spatialAnchorNameCountOutput, @NativeType("XrSpatialAnchorPersistenceNameMSFT *") XrSpatialAnchorPersistenceNameMSFT.@Nullable Buffer spatialAnchorNames) {
         if (CHECKS) {
@@ -324,7 +111,7 @@ public class MSFTSpatialAnchorPersistence {
 
     // --- [ xrCreateSpatialAnchorFromPersistedNameMSFT ] ---
 
-    /** Unsafe version of: {@link #xrCreateSpatialAnchorFromPersistedNameMSFT CreateSpatialAnchorFromPersistedNameMSFT} */
+    /** {@code XrResult xrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT const * spatialAnchorCreateInfo, XrSpatialAnchorMSFT * spatialAnchor)} */
     public static int nxrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, long spatialAnchorCreateInfo, long spatialAnchor) {
         long __functionAddress = session.getCapabilities().xrCreateSpatialAnchorFromPersistedNameMSFT;
         if (CHECKS) {
@@ -334,58 +121,7 @@ public class MSFTSpatialAnchorPersistence {
         return callPPPI(session.address(), spatialAnchorCreateInfo, spatialAnchor, __functionAddress);
     }
 
-    /**
-     * Create a spatial anchor from the spatial anchor store by name.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>The application <b>can</b> use the {@link #xrCreateSpatialAnchorFromPersistedNameMSFT CreateSpatialAnchorFromPersistedNameMSFT} function to create a {@code XrSpatialAnchorMSFT} from the spatial anchor store. If the {@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}{@code ::spatialAnchorPersistenceName} provided does not correspond to a currently stored anchor (i.e. the list of spatial anchor names returned from {@link #xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT}), the function <b>must</b> return {@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}.</p>
-     * 
-     * <pre><code>
-     * XrResult xrCreateSpatialAnchorFromPersistedNameMSFT(
-     *     XrSession                                   session,
-     *     const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo,
-     *     XrSpatialAnchorMSFT*                        spatialAnchor);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling {@link #xrCreateSpatialAnchorFromPersistedNameMSFT CreateSpatialAnchorFromPersistedNameMSFT}</li>
-     * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
-     * <li>{@code spatialAnchorCreateInfo} <b>must</b> be a pointer to a valid {@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT} structure</li>
-     * <li>{@code spatialAnchor} <b>must</b> be a pointer to an {@code XrSpatialAnchorMSFT} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
-     * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
-     * <li>{@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}</li>
-     * <li>{@link #XR_ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}</p>
-     *
-     * @param session                 a handle to an {@code XrSession} previously created with {@link XR10#xrCreateSession CreateSession}.
-     * @param spatialAnchorCreateInfo a pointer to the {@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}.
-     * @param spatialAnchor           a pointer to an {@code XrSpatialAnchorMSFT} handle that will be set by the runtime on successful load.
-     */
+    /** {@code XrResult xrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT const * spatialAnchorCreateInfo, XrSpatialAnchorMSFT * spatialAnchor)} */
     @NativeType("XrResult")
     public static int xrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, @NativeType("XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT const *") XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT spatialAnchorCreateInfo, @NativeType("XrSpatialAnchorMSFT *") PointerBuffer spatialAnchor) {
         if (CHECKS) {
@@ -396,7 +132,7 @@ public class MSFTSpatialAnchorPersistence {
 
     // --- [ xrUnpersistSpatialAnchorMSFT ] ---
 
-    /** Unsafe version of: {@link #xrUnpersistSpatialAnchorMSFT UnpersistSpatialAnchorMSFT} */
+    /** {@code XrResult xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, XrSpatialAnchorPersistenceNameMSFT const * spatialAnchorPersistenceName)} */
     public static int nxrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, long spatialAnchorPersistenceName) {
         long __functionAddress = spatialAnchorStore.getCapabilities().xrUnpersistSpatialAnchorMSFT;
         if (CHECKS) {
@@ -405,54 +141,7 @@ public class MSFTSpatialAnchorPersistence {
         return callPPI(spatialAnchorStore.address(), spatialAnchorPersistenceName, __functionAddress);
     }
 
-    /**
-     * Removes an anchor from the store.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>The application <b>can</b> use the {@link #xrUnpersistSpatialAnchorMSFT UnpersistSpatialAnchorMSFT} function to remove the record of the anchor in the spatial anchor store. This operation will not affect any {@code XrSpatialAnchorMSFT} handles previously created. If the {@code spatialAnchorPersistenceName} provided does not correspond to a currently stored anchor, the function <b>must</b> return {@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}.</p>
-     * 
-     * <pre><code>
-     * XrResult xrUnpersistSpatialAnchorMSFT(
-     *     XrSpatialAnchorStoreConnectionMSFT          spatialAnchorStore,
-     *     const XrSpatialAnchorPersistenceNameMSFT*   spatialAnchorPersistenceName);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling {@link #xrUnpersistSpatialAnchorMSFT UnpersistSpatialAnchorMSFT}</li>
-     * <li>{@code spatialAnchorStore} <b>must</b> be a valid {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-     * <li>{@code spatialAnchorPersistenceName} <b>must</b> be a pointer to a valid {@link XrSpatialAnchorPersistenceNameMSFT} structure</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
-     * <li>{@link #XR_ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT ERROR_SPATIAL_ANCHOR_NAME_NOT_FOUND_MSFT}</li>
-     * <li>{@link #XR_ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link XrSpatialAnchorPersistenceNameMSFT}</p>
-     *
-     * @param spatialAnchorStore           an {@code XrSpatialAnchorStoreConnectionMSFT} anchor store to perform the unpersist operation on.
-     * @param spatialAnchorPersistenceName a pointer to the {@link XrSpatialAnchorPersistenceNameMSFT}.
-     */
+    /** {@code XrResult xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, XrSpatialAnchorPersistenceNameMSFT const * spatialAnchorPersistenceName)} */
     @NativeType("XrResult")
     public static int xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, @NativeType("XrSpatialAnchorPersistenceNameMSFT const *") XrSpatialAnchorPersistenceNameMSFT spatialAnchorPersistenceName) {
         return nxrUnpersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceName.address());
@@ -460,45 +149,7 @@ public class MSFTSpatialAnchorPersistence {
 
     // --- [ xrClearSpatialAnchorStoreMSFT ] ---
 
-    /**
-     * Clear all spatial anchors from the spatial anchor store.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>The application <b>can</b> use the {@link #xrClearSpatialAnchorStoreMSFT ClearSpatialAnchorStoreMSFT} function to remove all spatial anchors from the spatial anchor store for this application. The function only removes the record of the spatial anchors in the store but does not affect any {@code XrSpatialAnchorMSFT} handles previously loaded in the current session.</p>
-     * 
-     * <pre><code>
-     * XrResult xrClearSpatialAnchorStoreMSFT(
-     *     XrSpatialAnchorStoreConnectionMSFT          spatialAnchorStore);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to calling {@link #xrClearSpatialAnchorStoreMSFT ClearSpatialAnchorStoreMSFT}</li>
-     * <li>{@code spatialAnchorStore} <b>must</b> be a valid {@code XrSpatialAnchorStoreConnectionMSFT} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
-     * </ul></dd>
-     * </dl>
-     *
-     * @param spatialAnchorStore {@code XrSpatialAnchorStoreConnectionMSFT} to perform the clear operation on.
-     */
+    /** {@code XrResult xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore)} */
     @NativeType("XrResult")
     public static int xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) {
         long __functionAddress = spatialAnchorStore.getCapabilities().xrClearSpatialAnchorStoreMSFT;

@@ -16,35 +16,29 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Class representing a KTX version 2 format texture.
- * 
- * <p>{@code ktxTextures} should be created only by one of the {@code ktxTexture_Create*} functions and these fields should be considered read-only.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ktxTexture2 {
- *     class_id {@link #classId};
- *     {@link ktxTexture_vtbl struct ktxTexture_vtbl} * {@link #vtbl};
- *     struct ktxTexture_vvtbl * {@link #vvtbl};
- *     struct ktxTexture_protected * {@link #_protected};
- *     ktx_bool_t {@link #isArray};
- *     ktx_bool_t {@link #isCubemap};
- *     ktx_bool_t {@link #isCompressed};
- *     ktx_bool_t {@link #generateMipmaps};
- *     ktx_uint32_t {@link #baseWidth};
- *     ktx_uint32_t {@link #baseHeight};
- *     ktx_uint32_t {@link #baseDepth};
- *     ktx_uint32_t {@link #numDimensions};
- *     ktx_uint32_t {@link #numLevels};
- *     ktx_uint32_t {@link #numLayers};
- *     ktx_uint32_t {@link #numFaces};
- *     {@link ktxOrientation struct ktxOrientation} {@link #orientation};
- *     ktxHashList {@link #kvDataHead};
- *     ktx_uint32_t {@link #kvDataLen};
- *     ktx_uint8_t * {@link #kvData};
- *     ktx_size_t {@link #dataSize};
- *     ktx_uint8_t * {@link #pData};
+ *     class_id classId;
+ *     {@link ktxTexture_vtbl struct ktxTexture_vtbl} * vtbl;
+ *     struct ktxTexture_vvtbl * vvtbl;
+ *     struct ktxTexture_protected * _protected;
+ *     ktx_bool_t isArray;
+ *     ktx_bool_t isCubemap;
+ *     ktx_bool_t isCompressed;
+ *     ktx_bool_t generateMipmaps;
+ *     ktx_uint32_t baseWidth;
+ *     ktx_uint32_t baseHeight;
+ *     ktx_uint32_t baseDepth;
+ *     ktx_uint32_t numDimensions;
+ *     ktx_uint32_t numLevels;
+ *     ktx_uint32_t numLayers;
+ *     ktx_uint32_t numFaces;
+ *     {@link ktxOrientation struct ktxOrientation} orientation;
+ *     ktxHashList kvDataHead;
+ *     ktx_uint32_t kvDataLen;
+ *     ktx_uint8_t * kvData;
+ *     ktx_size_t dataSize;
+ *     ktx_uint8_t * pData;
  *     ktx_uint32_t vkFormat;
  *     ktx_uint32_t * pDfd;
  *     ktxSupercmpScheme supercompressionScheme;
@@ -53,7 +47,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     ktx_uint32_t timescale;
  *     ktx_uint32_t loopcount;
  *     struct ktxTexture2_private * _private;
- * }</code></pre>
+ * }}</pre>
  */
 public class ktxTexture2 extends Struct<ktxTexture2> implements NativeResource {
 
@@ -184,85 +178,73 @@ public class ktxTexture2 extends Struct<ktxTexture2> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** must be:<br><table><tr><td>{@link KTX#ktxTexture2_c}</td></tr></table> */
+    /** @return the value of the {@code classId} field. */
     @NativeType("class_id")
     public int classId() { return nclassId(address()); }
-    /** pointer to the class's vtble */
+    /** @return a {@link ktxTexture_vtbl} view of the struct pointed to by the {@code vtbl} field. */
     @NativeType("struct ktxTexture_vtbl *")
     public ktxTexture_vtbl vtbl() { return nvtbl(address()); }
-    /** pointer to the class's vtble for Vulkan functions */
+    /** @return the value of the {@code vvtbl} field. */
     @NativeType("struct ktxTexture_vvtbl *")
     public long vvtbl() { return nvvtbl(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return opaque pointer to the class's protected variables
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code _protected} field. */
     @NativeType("struct ktxTexture_protected *")
     public PointerBuffer _protected(int capacity) { return n_protected(address(), capacity); }
-    /** {@link KTX#KTX_TRUE TRUE} if the texture is an array texture, i.e, a {@code GL_TEXTURE*_ARRAY} target is to be used */
+    /** @return the value of the {@code isArray} field. */
     @NativeType("ktx_bool_t")
     public boolean isArray() { return nisArray(address()); }
-    /** {@link KTX#KTX_TRUE TRUE} if the texture is a cubemap or cubemap array */
+    /** @return the value of the {@code isCubemap} field. */
     @NativeType("ktx_bool_t")
     public boolean isCubemap() { return nisCubemap(address()); }
-    /** {@link KTX#KTX_TRUE TRUE} if the texture's format is a block compressed format */
+    /** @return the value of the {@code isCompressed} field. */
     @NativeType("ktx_bool_t")
     public boolean isCompressed() { return nisCompressed(address()); }
-    /** {@link KTX#KTX_TRUE TRUE} if mipmaps should be generated for the texture by {@link KTX#ktxTexture_GLUpload Texture_GLUpload} or {@link KTXVulkan#ktxTexture_VkUpload Texture_VkUpload} */
+    /** @return the value of the {@code generateMipmaps} field. */
     @NativeType("ktx_bool_t")
     public boolean generateMipmaps() { return ngenerateMipmaps(address()); }
-    /** width of the texture's base level */
+    /** @return the value of the {@code baseWidth} field. */
     @NativeType("ktx_uint32_t")
     public int baseWidth() { return nbaseWidth(address()); }
-    /** height of the texture's base level */
+    /** @return the value of the {@code baseHeight} field. */
     @NativeType("ktx_uint32_t")
     public int baseHeight() { return nbaseHeight(address()); }
-    /** depth of the texture's base level */
+    /** @return the value of the {@code baseDepth} field. */
     @NativeType("ktx_uint32_t")
     public int baseDepth() { return nbaseDepth(address()); }
-    /** number of dimensions in the texture: 1, 2 or 3. */
+    /** @return the value of the {@code numDimensions} field. */
     @NativeType("ktx_uint32_t")
     public int numDimensions() { return nnumDimensions(address()); }
-    /**
-     * number of mip levels in the texture.
-     * 
-     * <p>Must be 1, if {@code generateMipmaps} is {@link KTX#KTX_TRUE TRUE}. Can be less than a full pyramid but always starts at the base level.</p>
-     */
+    /** @return the value of the {@code numLevels} field. */
     @NativeType("ktx_uint32_t")
     public int numLevels() { return nnumLevels(address()); }
-    /** number of array layers in the texture */
+    /** @return the value of the {@code numLayers} field. */
     @NativeType("ktx_uint32_t")
     public int numLayers() { return nnumLayers(address()); }
-    /** number of faces: 6 for cube maps, 1 otherwise */
+    /** @return the value of the {@code numFaces} field. */
     @NativeType("ktx_uint32_t")
     public int numFaces() { return nnumFaces(address()); }
-    /** describes the logical orientation of the images in each dimension */
+    /** @return a {@link ktxOrientation} view of the {@code orientation} field. */
     @NativeType("struct ktxOrientation")
     public ktxOrientation orientation() { return norientation(address()); }
-    /** head of the hash list of metadata */
+    /** @return the value of the {@code kvDataHead} field. */
     @NativeType("ktxHashList")
     public long kvDataHead() { return nkvDataHead(address()); }
-    /** length of the metadata, if it has been extracted in its raw form, otherwise 0 */
+    /** @return the value of the {@code kvDataLen} field. */
     @NativeType("ktx_uint32_t")
     public int kvDataLen() { return nkvDataLen(address()); }
-    /** pointer to the metadata, if it has been extracted in its raw form, otherwise {@code NULL} */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code kvData} field. */
     @NativeType("ktx_uint8_t *")
     public @Nullable ByteBuffer kvData() { return nkvData(address()); }
-    /** byte length of the texture's uncompressed image data */
+    /** @return the value of the {@code dataSize} field. */
     @NativeType("ktx_size_t")
     public long dataSize() { return ndataSize(address()); }
-    /** pointer to the start of the image data */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
     @NativeType("ktx_uint8_t *")
     public ByteBuffer pData() { return npData(address()); }
     /** @return the value of the {@code vkFormat} field. */
     @NativeType("ktx_uint32_t")
     public int vkFormat() { return nvkFormat(address()); }
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code pDfd} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDfd} field. */
     @NativeType("ktx_uint32_t *")
     public @Nullable IntBuffer pDfd(int capacity) { return npDfd(address(), capacity); }
     /** @return the value of the {@code supercompressionScheme} field. */
@@ -493,81 +475,73 @@ public class ktxTexture2 extends Struct<ktxTexture2> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ktxTexture2#classId} field. */
+        /** @return the value of the {@code classId} field. */
         @NativeType("class_id")
         public int classId() { return ktxTexture2.nclassId(address()); }
-        /** @return a {@link ktxTexture_vtbl} view of the struct pointed to by the {@link ktxTexture2#vtbl} field. */
+        /** @return a {@link ktxTexture_vtbl} view of the struct pointed to by the {@code vtbl} field. */
         @NativeType("struct ktxTexture_vtbl *")
         public ktxTexture_vtbl vtbl() { return ktxTexture2.nvtbl(address()); }
-        /** @return the value of the {@link ktxTexture2#vvtbl} field. */
+        /** @return the value of the {@code vvtbl} field. */
         @NativeType("struct ktxTexture_vvtbl *")
         public long vvtbl() { return ktxTexture2.nvvtbl(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@link ktxTexture2#_protected} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code _protected} field. */
         @NativeType("struct ktxTexture_protected *")
         public PointerBuffer _protected(int capacity) { return ktxTexture2.n_protected(address(), capacity); }
-        /** @return the value of the {@link ktxTexture2#isArray} field. */
+        /** @return the value of the {@code isArray} field. */
         @NativeType("ktx_bool_t")
         public boolean isArray() { return ktxTexture2.nisArray(address()); }
-        /** @return the value of the {@link ktxTexture2#isCubemap} field. */
+        /** @return the value of the {@code isCubemap} field. */
         @NativeType("ktx_bool_t")
         public boolean isCubemap() { return ktxTexture2.nisCubemap(address()); }
-        /** @return the value of the {@link ktxTexture2#isCompressed} field. */
+        /** @return the value of the {@code isCompressed} field. */
         @NativeType("ktx_bool_t")
         public boolean isCompressed() { return ktxTexture2.nisCompressed(address()); }
-        /** @return the value of the {@link ktxTexture2#generateMipmaps} field. */
+        /** @return the value of the {@code generateMipmaps} field. */
         @NativeType("ktx_bool_t")
         public boolean generateMipmaps() { return ktxTexture2.ngenerateMipmaps(address()); }
-        /** @return the value of the {@link ktxTexture2#baseWidth} field. */
+        /** @return the value of the {@code baseWidth} field. */
         @NativeType("ktx_uint32_t")
         public int baseWidth() { return ktxTexture2.nbaseWidth(address()); }
-        /** @return the value of the {@link ktxTexture2#baseHeight} field. */
+        /** @return the value of the {@code baseHeight} field. */
         @NativeType("ktx_uint32_t")
         public int baseHeight() { return ktxTexture2.nbaseHeight(address()); }
-        /** @return the value of the {@link ktxTexture2#baseDepth} field. */
+        /** @return the value of the {@code baseDepth} field. */
         @NativeType("ktx_uint32_t")
         public int baseDepth() { return ktxTexture2.nbaseDepth(address()); }
-        /** @return the value of the {@link ktxTexture2#numDimensions} field. */
+        /** @return the value of the {@code numDimensions} field. */
         @NativeType("ktx_uint32_t")
         public int numDimensions() { return ktxTexture2.nnumDimensions(address()); }
-        /** @return the value of the {@link ktxTexture2#numLevels} field. */
+        /** @return the value of the {@code numLevels} field. */
         @NativeType("ktx_uint32_t")
         public int numLevels() { return ktxTexture2.nnumLevels(address()); }
-        /** @return the value of the {@link ktxTexture2#numLayers} field. */
+        /** @return the value of the {@code numLayers} field. */
         @NativeType("ktx_uint32_t")
         public int numLayers() { return ktxTexture2.nnumLayers(address()); }
-        /** @return the value of the {@link ktxTexture2#numFaces} field. */
+        /** @return the value of the {@code numFaces} field. */
         @NativeType("ktx_uint32_t")
         public int numFaces() { return ktxTexture2.nnumFaces(address()); }
-        /** @return a {@link ktxOrientation} view of the {@link ktxTexture2#orientation} field. */
+        /** @return a {@link ktxOrientation} view of the {@code orientation} field. */
         @NativeType("struct ktxOrientation")
         public ktxOrientation orientation() { return ktxTexture2.norientation(address()); }
-        /** @return the value of the {@link ktxTexture2#kvDataHead} field. */
+        /** @return the value of the {@code kvDataHead} field. */
         @NativeType("ktxHashList")
         public long kvDataHead() { return ktxTexture2.nkvDataHead(address()); }
-        /** @return the value of the {@link ktxTexture2#kvDataLen} field. */
+        /** @return the value of the {@code kvDataLen} field. */
         @NativeType("ktx_uint32_t")
         public int kvDataLen() { return ktxTexture2.nkvDataLen(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link ktxTexture2#kvData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code kvData} field. */
         @NativeType("ktx_uint8_t *")
         public @Nullable ByteBuffer kvData() { return ktxTexture2.nkvData(address()); }
-        /** @return the value of the {@link ktxTexture2#dataSize} field. */
+        /** @return the value of the {@code dataSize} field. */
         @NativeType("ktx_size_t")
         public long dataSize() { return ktxTexture2.ndataSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link ktxTexture2#pData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
         @NativeType("ktx_uint8_t *")
         public ByteBuffer pData() { return ktxTexture2.npData(address()); }
         /** @return the value of the {@code vkFormat} field. */
         @NativeType("ktx_uint32_t")
         public int vkFormat() { return ktxTexture2.nvkFormat(address()); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code pDfd} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDfd} field. */
         @NativeType("ktx_uint32_t *")
         public @Nullable IntBuffer pDfd(int capacity) { return ktxTexture2.npDfd(address(), capacity); }
         /** @return the value of the {@code supercompressionScheme} field. */

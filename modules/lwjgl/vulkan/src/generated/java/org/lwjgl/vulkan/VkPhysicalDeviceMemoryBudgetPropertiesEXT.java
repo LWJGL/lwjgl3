@@ -19,27 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure specifying physical device memory budget and usage.
- * 
- * <h5>Description</h5>
- * 
- * <p>The values returned in this structure are not invariant. The {@code heapBudget} and {@code heapUsage} values <b>must</b> be zero for array elements greater than or equal to {@link VkPhysicalDeviceMemoryProperties}{@code ::memoryHeapCount}. The {@code heapBudget} value <b>must</b> be non-zero for array elements less than {@link VkPhysicalDeviceMemoryProperties}{@code ::memoryHeapCount}. The {@code heapBudget} value <b>must</b> be less than or equal to {@link VkMemoryHeap}{@code ::size} for each heap.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMemoryBudget#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMemoryBudgetPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceSize {@link #heapBudget}[VK_MAX_MEMORY_HEAPS];
- *     VkDeviceSize {@link #heapUsage}[VK_MAX_MEMORY_HEAPS];
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceSize heapBudget[VK_MAX_MEMORY_HEAPS];
+ *     VkDeviceSize heapUsage[VK_MAX_MEMORY_HEAPS];
+ * }}</pre>
  */
 public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct<VkPhysicalDeviceMemoryBudgetPropertiesEXT> implements NativeResource {
 
@@ -95,30 +81,30 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct<VkPhysical
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory budgets are returned, with one element for each memory heap. A heap’s budget is a rough estimate of how much memory the process <b>can</b> allocate from that heap before allocations <b>may</b> fail or cause performance degradation. The budget includes any currently allocated device memory. */
+    /** @return a {@link LongBuffer} view of the {@code heapBudget} field. */
     @NativeType("VkDeviceSize[VK_MAX_MEMORY_HEAPS]")
     public LongBuffer heapBudget() { return nheapBudget(address()); }
-    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory budgets are returned, with one element for each memory heap. A heap’s budget is a rough estimate of how much memory the process <b>can</b> allocate from that heap before allocations <b>may</b> fail or cause performance degradation. The budget includes any currently allocated device memory. */
+    /** @return the value at the specified index of the {@code heapBudget} field. */
     @NativeType("VkDeviceSize")
     public long heapBudget(int index) { return nheapBudget(address(), index); }
-    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory usages are returned, with one element for each memory heap. A heap’s usage is an estimate of how much memory the process is currently using in that heap. */
+    /** @return a {@link LongBuffer} view of the {@code heapUsage} field. */
     @NativeType("VkDeviceSize[VK_MAX_MEMORY_HEAPS]")
     public LongBuffer heapUsage() { return nheapUsage(address()); }
-    /** an array of {@link VK10#VK_MAX_MEMORY_HEAPS MAX_MEMORY_HEAPS} {@code VkDeviceSize} values in which memory usages are returned, with one element for each memory heap. A heap’s usage is an estimate of how much memory the process is currently using in that heap. */
+    /** @return the value at the specified index of the {@code heapUsage} field. */
     @NativeType("VkDeviceSize")
     public long heapUsage(int index) { return nheapUsage(address(), index); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMemoryBudgetPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMemoryBudget#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMemoryBudget#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceMemoryBudgetPropertiesEXT sType$Default() { return sType(EXTMemoryBudget.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMemoryBudgetPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,30 +325,30 @@ public class VkPhysicalDeviceMemoryBudgetPropertiesEXT extends Struct<VkPhysical
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMemoryBudgetPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMemoryBudgetPropertiesEXT.npNext(address()); }
-        /** @return a {@link LongBuffer} view of the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#heapBudget} field. */
+        /** @return a {@link LongBuffer} view of the {@code heapBudget} field. */
         @NativeType("VkDeviceSize[VK_MAX_MEMORY_HEAPS]")
         public LongBuffer heapBudget() { return VkPhysicalDeviceMemoryBudgetPropertiesEXT.nheapBudget(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#heapBudget} field. */
+        /** @return the value at the specified index of the {@code heapBudget} field. */
         @NativeType("VkDeviceSize")
         public long heapBudget(int index) { return VkPhysicalDeviceMemoryBudgetPropertiesEXT.nheapBudget(address(), index); }
-        /** @return a {@link LongBuffer} view of the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#heapUsage} field. */
+        /** @return a {@link LongBuffer} view of the {@code heapUsage} field. */
         @NativeType("VkDeviceSize[VK_MAX_MEMORY_HEAPS]")
         public LongBuffer heapUsage() { return VkPhysicalDeviceMemoryBudgetPropertiesEXT.nheapUsage(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#heapUsage} field. */
+        /** @return the value at the specified index of the {@code heapUsage} field. */
         @NativeType("VkDeviceSize")
         public long heapUsage(int index) { return VkPhysicalDeviceMemoryBudgetPropertiesEXT.nheapUsage(address(), index); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMemoryBudgetPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMemoryBudget#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTMemoryBudget#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer sType$Default() { return sType(EXTMemoryBudget.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMemoryBudgetPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMemoryBudgetPropertiesEXT.npNext(address(), value); return this; }
 
     }

@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265SpsFlags {
  *     uint32_t sps_temporal_id_nesting_flag : 1;
  *     uint32_t separate_colour_plane_flag : 1;
@@ -36,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t vui_parameters_present_flag : 1;
  *     uint32_t sps_extension_present_flag : 1;
  *     uint32_t sps_range_extension_flag : 1;
- *     uint32_t {@link #transform_skip_rotation_enabled_flag} : 1;
+ *     uint32_t transform_skip_rotation_enabled_flag : 1;
  *     uint32_t transform_skip_context_enabled_flag : 1;
  *     uint32_t implicit_rdpcm_enabled_flag : 1;
  *     uint32_t explicit_rdpcm_enabled_flag : 1;
@@ -46,12 +44,12 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t persistent_rice_adaptation_enabled_flag : 1;
  *     uint32_t cabac_bypass_alignment_enabled_flag : 1;
  *     uint32_t sps_scc_extension_flag : 1;
- *     uint32_t {@link #sps_curr_pic_ref_enabled_flag} : 1;
+ *     uint32_t sps_curr_pic_ref_enabled_flag : 1;
  *     uint32_t palette_mode_enabled_flag : 1;
  *     uint32_t sps_palette_predictor_initializers_present_flag : 1;
  *     uint32_t sps_palette_predictor_initializer_present_flag : 1;
  *     uint32_t intra_boundary_filtering_disabled_flag : 1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implements NativeResource {
 
@@ -146,7 +144,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
     /** @return the value of the {@code sps_range_extension_flag} field. */
     @NativeType("uint32_t")
     public boolean sps_range_extension_flag() { return nsps_range_extension_flag(address()) != 0; }
-    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS H265_PROFILE_IDC_FORMAT_RANGE_EXTENSIONS} is set */
+    /** @return the value of the {@code transform_skip_rotation_enabled_flag} field. */
     @NativeType("uint32_t")
     public boolean transform_skip_rotation_enabled_flag() { return ntransform_skip_rotation_enabled_flag(address()) != 0; }
     /** @return the value of the {@code transform_skip_context_enabled_flag} field. */
@@ -176,7 +174,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
     /** @return the value of the {@code sps_scc_extension_flag} field. */
     @NativeType("uint32_t")
     public boolean sps_scc_extension_flag() { return nsps_scc_extension_flag(address()) != 0; }
-    /** extension SPS flags, valid when {@link STDVulkanVideoCodecH265#STD_VIDEO_H265_PROFILE_IDC_SCC_EXTENSIONS H265_PROFILE_IDC_SCC_EXTENSIONS} is set */
+    /** @return the value of the {@code sps_curr_pic_ref_enabled_flag} field. */
     @NativeType("uint32_t")
     public boolean sps_curr_pic_ref_enabled_flag() { return nsps_curr_pic_ref_enabled_flag(address()) != 0; }
     /** @return the value of the {@code palette_mode_enabled_flag} field. */
@@ -224,7 +222,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
     public StdVideoH265SpsFlags sps_extension_present_flag(@NativeType("uint32_t") boolean value) { nsps_extension_present_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code sps_range_extension_flag} field. */
     public StdVideoH265SpsFlags sps_range_extension_flag(@NativeType("uint32_t") boolean value) { nsps_range_extension_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #transform_skip_rotation_enabled_flag} field. */
+    /** Sets the specified value to the {@code transform_skip_rotation_enabled_flag} field. */
     public StdVideoH265SpsFlags transform_skip_rotation_enabled_flag(@NativeType("uint32_t") boolean value) { ntransform_skip_rotation_enabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code transform_skip_context_enabled_flag} field. */
     public StdVideoH265SpsFlags transform_skip_context_enabled_flag(@NativeType("uint32_t") boolean value) { ntransform_skip_context_enabled_flag(address(), value ? 1 : 0); return this; }
@@ -244,7 +242,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
     public StdVideoH265SpsFlags cabac_bypass_alignment_enabled_flag(@NativeType("uint32_t") boolean value) { ncabac_bypass_alignment_enabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code sps_scc_extension_flag} field. */
     public StdVideoH265SpsFlags sps_scc_extension_flag(@NativeType("uint32_t") boolean value) { nsps_scc_extension_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #sps_curr_pic_ref_enabled_flag} field. */
+    /** Sets the specified value to the {@code sps_curr_pic_ref_enabled_flag} field. */
     public StdVideoH265SpsFlags sps_curr_pic_ref_enabled_flag(@NativeType("uint32_t") boolean value) { nsps_curr_pic_ref_enabled_flag(address(), value ? 1 : 0); return this; }
     /** Sets the specified value to the {@code palette_mode_enabled_flag} field. */
     public StdVideoH265SpsFlags palette_mode_enabled_flag(@NativeType("uint32_t") boolean value) { npalette_mode_enabled_flag(address(), value ? 1 : 0); return this; }
@@ -666,7 +664,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
         /** @return the value of the {@code sps_range_extension_flag} field. */
         @NativeType("uint32_t")
         public boolean sps_range_extension_flag() { return StdVideoH265SpsFlags.nsps_range_extension_flag(address()) != 0; }
-        /** @return the value of the {@link StdVideoH265SpsFlags#transform_skip_rotation_enabled_flag} field. */
+        /** @return the value of the {@code transform_skip_rotation_enabled_flag} field. */
         @NativeType("uint32_t")
         public boolean transform_skip_rotation_enabled_flag() { return StdVideoH265SpsFlags.ntransform_skip_rotation_enabled_flag(address()) != 0; }
         /** @return the value of the {@code transform_skip_context_enabled_flag} field. */
@@ -696,7 +694,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
         /** @return the value of the {@code sps_scc_extension_flag} field. */
         @NativeType("uint32_t")
         public boolean sps_scc_extension_flag() { return StdVideoH265SpsFlags.nsps_scc_extension_flag(address()) != 0; }
-        /** @return the value of the {@link StdVideoH265SpsFlags#sps_curr_pic_ref_enabled_flag} field. */
+        /** @return the value of the {@code sps_curr_pic_ref_enabled_flag} field. */
         @NativeType("uint32_t")
         public boolean sps_curr_pic_ref_enabled_flag() { return StdVideoH265SpsFlags.nsps_curr_pic_ref_enabled_flag(address()) != 0; }
         /** @return the value of the {@code palette_mode_enabled_flag} field. */
@@ -744,7 +742,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
         public StdVideoH265SpsFlags.Buffer sps_extension_present_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_extension_present_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code sps_range_extension_flag} field. */
         public StdVideoH265SpsFlags.Buffer sps_range_extension_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_range_extension_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoH265SpsFlags#transform_skip_rotation_enabled_flag} field. */
+        /** Sets the specified value to the {@code transform_skip_rotation_enabled_flag} field. */
         public StdVideoH265SpsFlags.Buffer transform_skip_rotation_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.ntransform_skip_rotation_enabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code transform_skip_context_enabled_flag} field. */
         public StdVideoH265SpsFlags.Buffer transform_skip_context_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.ntransform_skip_context_enabled_flag(address(), value ? 1 : 0); return this; }
@@ -764,7 +762,7 @@ public class StdVideoH265SpsFlags extends Struct<StdVideoH265SpsFlags> implement
         public StdVideoH265SpsFlags.Buffer cabac_bypass_alignment_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.ncabac_bypass_alignment_enabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code sps_scc_extension_flag} field. */
         public StdVideoH265SpsFlags.Buffer sps_scc_extension_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_scc_extension_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoH265SpsFlags#sps_curr_pic_ref_enabled_flag} field. */
+        /** Sets the specified value to the {@code sps_curr_pic_ref_enabled_flag} field. */
         public StdVideoH265SpsFlags.Buffer sps_curr_pic_ref_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.nsps_curr_pic_ref_enabled_flag(address(), value ? 1 : 0); return this; }
         /** Sets the specified value to the {@code palette_mode_enabled_flag} field. */
         public StdVideoH265SpsFlags.Buffer palette_mode_enabled_flag(@NativeType("uint32_t") boolean value) { StdVideoH265SpsFlags.npalette_mode_enabled_flag(address(), value ? 1 : 0); return this; }

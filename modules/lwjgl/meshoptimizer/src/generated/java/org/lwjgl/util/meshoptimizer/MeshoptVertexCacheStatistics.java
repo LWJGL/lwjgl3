@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct meshopt_VertexCacheStatistics {
  *     unsigned int vertices_transformed;
  *     unsigned int warps_executed;
- *     float {@link #acmr};
- *     float {@link #atvr};
- * }</code></pre>
+ *     float acmr;
+ *     float atvr;
+ * }}</pre>
  */
 @NativeType("struct meshopt_VertexCacheStatistics")
 public class MeshoptVertexCacheStatistics extends Struct<MeshoptVertexCacheStatistics> implements NativeResource {
@@ -87,9 +85,9 @@ public class MeshoptVertexCacheStatistics extends Struct<MeshoptVertexCacheStati
     /** @return the value of the {@code warps_executed} field. */
     @NativeType("unsigned int")
     public int warps_executed() { return nwarps_executed(address()); }
-    /** transformed vertices / triangle count; best case 0.5, worst case 3.0, optimum depends on topology */
+    /** @return the value of the {@code acmr} field. */
     public float acmr() { return nacmr(address()); }
-    /** transformed vertices / vertex count; best case 1.0, worst case 6.0, optimum is 1.0 (each vertex is transformed once) */
+    /** @return the value of the {@code atvr} field. */
     public float atvr() { return natvr(address()); }
 
     // -----------------------------------
@@ -261,9 +259,9 @@ public class MeshoptVertexCacheStatistics extends Struct<MeshoptVertexCacheStati
         /** @return the value of the {@code warps_executed} field. */
         @NativeType("unsigned int")
         public int warps_executed() { return MeshoptVertexCacheStatistics.nwarps_executed(address()); }
-        /** @return the value of the {@link MeshoptVertexCacheStatistics#acmr} field. */
+        /** @return the value of the {@code acmr} field. */
         public float acmr() { return MeshoptVertexCacheStatistics.nacmr(address()); }
-        /** @return the value of the {@link MeshoptVertexCacheStatistics#atvr} field. */
+        /** @return the value of the {@code atvr} field. */
         public float atvr() { return MeshoptVertexCacheStatistics.natvr(address()); }
 
     }

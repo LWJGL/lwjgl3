@@ -16,27 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information about stop colocation advertisement request.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using {@link XrColocationAdvertisementStopInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAColocationDiscovery#xrStopColocationAdvertisementMETA StopColocationAdvertisementMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrColocationAdvertisementStopInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrColocationAdvertisementStopInfoMETA extends Struct<XrColocationAdvertisementStopInfoMETA> implements NativeResource {
 
@@ -86,18 +70,18 @@ public class XrColocationAdvertisementStopInfoMETA extends Struct<XrColocationAd
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrColocationAdvertisementStopInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META} value to the {@code type} field. */
     public XrColocationAdvertisementStopInfoMETA type$Default() { return type(METAColocationDiscovery.XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrColocationAdvertisementStopInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -287,18 +271,18 @@ public class XrColocationAdvertisementStopInfoMETA extends Struct<XrColocationAd
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrColocationAdvertisementStopInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrColocationAdvertisementStopInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrColocationAdvertisementStopInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrColocationAdvertisementStopInfoMETA.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrColocationAdvertisementStopInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrColocationAdvertisementStopInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrColocationAdvertisementStopInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META} value to the {@link XrColocationAdvertisementStopInfoMETA#type} field. */
+        /** Sets the {@link METAColocationDiscovery#XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META} value to the {@code type} field. */
         public XrColocationAdvertisementStopInfoMETA.Buffer type$Default() { return type(METAColocationDiscovery.XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META); }
-        /** Sets the specified value to the {@link XrColocationAdvertisementStopInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrColocationAdvertisementStopInfoMETA.Buffer next(@NativeType("void const *") long value) { XrColocationAdvertisementStopInfoMETA.nnext(address(), value); return this; }
 
     }

@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceExternalImageFormatInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExternalImageFormatInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkExternalMemoryHandleTypeFlagBits handleType;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceExternalImageFormatInfoKHR extends VkPhysicalDeviceExternalImageFormatInfo {
 

@@ -11,21 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link AMDDebugOutput#glDebugMessageCallbackAMD DebugMessageCallbackAMD} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLuint id,
- *     GLenum category,
- *     GLenum severity,
- *     GLsizei length,
- *     GLchar const *message,
- *     void *userParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke GLDEBUGPROCAMD} */
 public abstract class GLDebugMessageAMDCallback extends Callback implements GLDebugMessageAMDCallbackI {
 
     /**

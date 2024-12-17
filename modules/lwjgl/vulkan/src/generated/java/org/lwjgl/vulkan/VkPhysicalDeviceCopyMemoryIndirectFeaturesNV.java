@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing indirect copy features supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCopyMemoryIndirect#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCopyMemoryIndirectFeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #indirectCopy};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 indirectCopy;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCopyMemoryIndirectFeaturesNV extends Struct<VkPhysicalDeviceCopyMemoryIndirectFeaturesNV> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceCopyMemoryIndirectFeaturesNV extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#indirect-copies">indirect copies</a> are supported. */
+    /** @return the value of the {@code indirectCopy} field. */
     @NativeType("VkBool32")
     public boolean indirectCopy() { return nindirectCopy(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceCopyMemoryIndirectFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCopyMemoryIndirect#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCopyMemoryIndirect#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceCopyMemoryIndirectFeaturesNV sType$Default() { return sType(NVCopyMemoryIndirect.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCopyMemoryIndirectFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #indirectCopy} field. */
+    /** Sets the specified value to the {@code indirectCopy} field. */
     public VkPhysicalDeviceCopyMemoryIndirectFeaturesNV indirectCopy(@NativeType("VkBool32") boolean value) { nindirectCopy(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceCopyMemoryIndirectFeaturesNV extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV#indirectCopy} field. */
+        /** @return the value of the {@code indirectCopy} field. */
         @NativeType("VkBool32")
         public boolean indirectCopy() { return VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.nindirectCopy(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCopyMemoryIndirect#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV} value to the {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV#sType} field. */
+        /** Sets the {@link NVCopyMemoryIndirect#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.Buffer sType$Default() { return sType(NVCopyMemoryIndirect.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COPY_MEMORY_INDIRECT_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV#indirectCopy} field. */
+        /** Sets the specified value to the {@code indirectCopy} field. */
         public VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.Buffer indirectCopy(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCopyMemoryIndirectFeaturesNV.nindirectCopy(address(), value ? 1 : 0); return this; }
 
     }

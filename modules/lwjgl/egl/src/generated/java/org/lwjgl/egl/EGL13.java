@@ -5,7 +5,6 @@
  */
 package org.lwjgl.egl;
 
-/** The core EGL 1.3 functionality. */
 public class EGL13 extends EGL12 {
 
     public static final int

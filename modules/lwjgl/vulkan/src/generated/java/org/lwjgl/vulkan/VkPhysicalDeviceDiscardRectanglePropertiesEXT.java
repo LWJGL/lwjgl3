@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing discard rectangle limits that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDiscardRectanglePropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxDiscardRectangles};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxDiscardRectangles;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct<VkPhysicalDeviceDiscardRectanglePropertiesEXT> implements NativeResource {
 
@@ -88,21 +74,21 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct<VkPhys
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of active discard rectangles that <b>can</b> be specified. */
+    /** @return the value of the {@code maxDiscardRectangles} field. */
     @NativeType("uint32_t")
     public int maxDiscardRectangles() { return nmaxDiscardRectangles(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDiscardRectanglePropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDiscardRectanglePropertiesEXT sType$Default() { return sType(EXTDiscardRectangles.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDiscardRectanglePropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,21 +299,21 @@ public class VkPhysicalDeviceDiscardRectanglePropertiesEXT extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDiscardRectanglePropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDiscardRectanglePropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#maxDiscardRectangles} field. */
+        /** @return the value of the {@code maxDiscardRectangles} field. */
         @NativeType("uint32_t")
         public int maxDiscardRectangles() { return VkPhysicalDeviceDiscardRectanglePropertiesEXT.nmaxDiscardRectangles(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDiscardRectanglePropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#sType} field. */
+        /** Sets the {@link EXTDiscardRectangles#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer sType$Default() { return sType(EXTDiscardRectangles.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDiscardRectanglePropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDiscardRectanglePropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDiscardRectanglePropertiesEXT.npNext(address(), value); return this; }
 
     }

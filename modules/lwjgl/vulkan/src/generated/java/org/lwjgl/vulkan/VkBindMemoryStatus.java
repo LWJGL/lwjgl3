@@ -17,27 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying where to return memory binding status.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkBindBufferMemoryInfo} or {@link VkBindImageMemoryInfo} includes a {@link VkBindMemoryStatus} structure, then the {@link VkBindMemoryStatus}{@code ::pResult} will be populated with a value describing the result of the corresponding memory binding operation.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_BIND_MEMORY_STATUS STRUCTURE_TYPE_BIND_MEMORY_STATUS}</li>
- * <li>{@code pResult} <b>must</b> be a valid pointer to a {@code VkResult} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindMemoryStatus {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkResult * {@link #pResult};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkResult * pResult;
+ * }}</pre>
  */
 public class VkBindMemoryStatus extends Struct<VkBindMemoryStatus> implements NativeResource {
 
@@ -90,27 +75,23 @@ public class VkBindMemoryStatus extends Struct<VkBindMemoryStatus> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return a pointer to a {@code VkResult} value.
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pResult} field. */
     @NativeType("VkResult *")
     public IntBuffer pResult(int capacity) { return npResult(address(), capacity); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBindMemoryStatus sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BIND_MEMORY_STATUS STRUCTURE_TYPE_BIND_MEMORY_STATUS} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BIND_MEMORY_STATUS STRUCTURE_TYPE_BIND_MEMORY_STATUS} value to the {@code sType} field. */
     public VkBindMemoryStatus sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_BIND_MEMORY_STATUS); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBindMemoryStatus pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pResult} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pResult} field. */
     public VkBindMemoryStatus pResult(@NativeType("VkResult *") IntBuffer value) { npResult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,27 +296,23 @@ public class VkBindMemoryStatus extends Struct<VkBindMemoryStatus> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindMemoryStatus#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindMemoryStatus.nsType(address()); }
-        /** @return the value of the {@link VkBindMemoryStatus#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindMemoryStatus.npNext(address()); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@link VkBindMemoryStatus#pResult} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pResult} field. */
         @NativeType("VkResult *")
         public IntBuffer pResult(int capacity) { return VkBindMemoryStatus.npResult(address(), capacity); }
 
-        /** Sets the specified value to the {@link VkBindMemoryStatus#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBindMemoryStatus.Buffer sType(@NativeType("VkStructureType") int value) { VkBindMemoryStatus.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BIND_MEMORY_STATUS STRUCTURE_TYPE_BIND_MEMORY_STATUS} value to the {@link VkBindMemoryStatus#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BIND_MEMORY_STATUS STRUCTURE_TYPE_BIND_MEMORY_STATUS} value to the {@code sType} field. */
         public VkBindMemoryStatus.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_BIND_MEMORY_STATUS); }
-        /** Sets the specified value to the {@link VkBindMemoryStatus#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBindMemoryStatus.Buffer pNext(@NativeType("void const *") long value) { VkBindMemoryStatus.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkBindMemoryStatus#pResult} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pResult} field. */
         public VkBindMemoryStatus.Buffer pResult(@NativeType("VkResult *") IntBuffer value) { VkBindMemoryStatus.npResult(address(), value); return this; }
 
     }

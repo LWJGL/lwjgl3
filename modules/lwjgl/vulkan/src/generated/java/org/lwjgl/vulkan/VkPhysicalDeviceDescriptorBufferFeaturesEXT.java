@@ -16,29 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the descriptor buffer features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDescriptorBufferFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #descriptorBuffer};
- *     VkBool32 {@link #descriptorBufferCaptureReplay};
- *     VkBool32 {@link #descriptorBufferImageLayoutIgnored};
- *     VkBool32 {@link #descriptorBufferPushDescriptors};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 descriptorBuffer;
+ *     VkBool32 descriptorBufferCaptureReplay;
+ *     VkBool32 descriptorBufferImageLayoutIgnored;
+ *     VkBool32 descriptorBufferPushDescriptors;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct<VkPhysicalDeviceDescriptorBufferFeaturesEXT> implements NativeResource {
 
@@ -100,38 +86,38 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct<VkPhysic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports putting shader-accessible descriptors directly in memory. */
+    /** @return the value of the {@code descriptorBuffer} field. */
     @NativeType("VkBool32")
     public boolean descriptorBuffer() { return ndescriptorBuffer(address()) != 0; }
-    /** indicates that the implementation supports capture and replay when using descriptor buffers. If this is {@link VK10#VK_TRUE TRUE}, all resources created with {@link EXTDescriptorBuffer#VK_BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}, {@link EXTDescriptorBuffer#VK_IMAGE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT IMAGE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}, {@link EXTDescriptorBuffer#VK_IMAGE_VIEW_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT IMAGE_VIEW_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}, {@link EXTDescriptorBuffer#VK_SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT SAMPLER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT}, or {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} <b>must</b> be created before resources of the same types without those flags. */
+    /** @return the value of the {@code descriptorBufferCaptureReplay} field. */
     @NativeType("VkBool32")
     public boolean descriptorBufferCaptureReplay() { return ndescriptorBufferCaptureReplay(address()) != 0; }
-    /** indicates that the implementation will ignore {@code imageLayout} in {@link VkDescriptorImageInfo} when calling {@link EXTDescriptorBuffer#vkGetDescriptorEXT GetDescriptorEXT}. */
+    /** @return the value of the {@code descriptorBufferImageLayoutIgnored} field. */
     @NativeType("VkBool32")
     public boolean descriptorBufferImageLayoutIgnored() { return ndescriptorBufferImageLayoutIgnored(address()) != 0; }
-    /** indicates that the implementation supports using push descriptors with descriptor buffers. */
+    /** @return the value of the {@code descriptorBufferPushDescriptors} field. */
     @NativeType("VkBool32")
     public boolean descriptorBufferPushDescriptors() { return ndescriptorBufferPushDescriptors(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorBufferFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorBufferFeaturesEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDescriptorBufferFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorBuffer} field. */
+    /** Sets the specified value to the {@code descriptorBuffer} field. */
     public VkPhysicalDeviceDescriptorBufferFeaturesEXT descriptorBuffer(@NativeType("VkBool32") boolean value) { ndescriptorBuffer(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #descriptorBufferCaptureReplay} field. */
+    /** Sets the specified value to the {@code descriptorBufferCaptureReplay} field. */
     public VkPhysicalDeviceDescriptorBufferFeaturesEXT descriptorBufferCaptureReplay(@NativeType("VkBool32") boolean value) { ndescriptorBufferCaptureReplay(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #descriptorBufferImageLayoutIgnored} field. */
+    /** Sets the specified value to the {@code descriptorBufferImageLayoutIgnored} field. */
     public VkPhysicalDeviceDescriptorBufferFeaturesEXT descriptorBufferImageLayoutIgnored(@NativeType("VkBool32") boolean value) { ndescriptorBufferImageLayoutIgnored(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #descriptorBufferPushDescriptors} field. */
+    /** Sets the specified value to the {@code descriptorBufferPushDescriptors} field. */
     public VkPhysicalDeviceDescriptorBufferFeaturesEXT descriptorBufferPushDescriptors(@NativeType("VkBool32") boolean value) { ndescriptorBufferPushDescriptors(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -345,38 +331,38 @@ public class VkPhysicalDeviceDescriptorBufferFeaturesEXT extends Struct<VkPhysic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDescriptorBufferFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDescriptorBufferFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#descriptorBuffer} field. */
+        /** @return the value of the {@code descriptorBuffer} field. */
         @NativeType("VkBool32")
         public boolean descriptorBuffer() { return VkPhysicalDeviceDescriptorBufferFeaturesEXT.ndescriptorBuffer(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#descriptorBufferCaptureReplay} field. */
+        /** @return the value of the {@code descriptorBufferCaptureReplay} field. */
         @NativeType("VkBool32")
         public boolean descriptorBufferCaptureReplay() { return VkPhysicalDeviceDescriptorBufferFeaturesEXT.ndescriptorBufferCaptureReplay(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#descriptorBufferImageLayoutIgnored} field. */
+        /** @return the value of the {@code descriptorBufferImageLayoutIgnored} field. */
         @NativeType("VkBool32")
         public boolean descriptorBufferImageLayoutIgnored() { return VkPhysicalDeviceDescriptorBufferFeaturesEXT.ndescriptorBufferImageLayoutIgnored(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#descriptorBufferPushDescriptors} field. */
+        /** @return the value of the {@code descriptorBufferPushDescriptors} field. */
         @NativeType("VkBool32")
         public boolean descriptorBufferPushDescriptors() { return VkPhysicalDeviceDescriptorBufferFeaturesEXT.ndescriptorBufferPushDescriptors(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDescriptorBufferFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT} value to the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDescriptorBufferFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#descriptorBuffer} field. */
+        /** Sets the specified value to the {@code descriptorBuffer} field. */
         public VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer descriptorBuffer(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorBufferFeaturesEXT.ndescriptorBuffer(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#descriptorBufferCaptureReplay} field. */
+        /** Sets the specified value to the {@code descriptorBufferCaptureReplay} field. */
         public VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer descriptorBufferCaptureReplay(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorBufferFeaturesEXT.ndescriptorBufferCaptureReplay(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#descriptorBufferImageLayoutIgnored} field. */
+        /** Sets the specified value to the {@code descriptorBufferImageLayoutIgnored} field. */
         public VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer descriptorBufferImageLayoutIgnored(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorBufferFeaturesEXT.ndescriptorBufferImageLayoutIgnored(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT#descriptorBufferPushDescriptors} field. */
+        /** Sets the specified value to the {@code descriptorBufferPushDescriptors} field. */
         public VkPhysicalDeviceDescriptorBufferFeaturesEXT.Buffer descriptorBufferPushDescriptors(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorBufferFeaturesEXT.ndescriptorBufferPushDescriptors(address(), value ? 1 : 0); return this; }
 
     }

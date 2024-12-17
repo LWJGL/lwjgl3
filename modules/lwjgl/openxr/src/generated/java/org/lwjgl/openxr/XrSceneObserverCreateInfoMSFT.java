@@ -16,27 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The information to create a scene observer handle.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneObserverCreateInfoMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MSFTSceneUnderstanding#xrCreateSceneObserverMSFT CreateSceneObserverMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneObserverCreateInfoMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrSceneObserverCreateInfoMSFT extends Struct<XrSceneObserverCreateInfoMSFT> implements NativeResource {
 
@@ -86,18 +70,18 @@ public class XrSceneObserverCreateInfoMSFT extends Struct<XrSceneObserverCreateI
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSceneObserverCreateInfoMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT} value to the {@code type} field. */
     public XrSceneObserverCreateInfoMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSceneObserverCreateInfoMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -287,18 +271,18 @@ public class XrSceneObserverCreateInfoMSFT extends Struct<XrSceneObserverCreateI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneObserverCreateInfoMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSceneObserverCreateInfoMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSceneObserverCreateInfoMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSceneObserverCreateInfoMSFT.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrSceneObserverCreateInfoMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSceneObserverCreateInfoMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneObserverCreateInfoMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT} value to the {@link XrSceneObserverCreateInfoMSFT#type} field. */
+        /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT} value to the {@code type} field. */
         public XrSceneObserverCreateInfoMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT); }
-        /** Sets the specified value to the {@link XrSceneObserverCreateInfoMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSceneObserverCreateInfoMSFT.Buffer next(@NativeType("void const *") long value) { XrSceneObserverCreateInfoMSFT.nnext(address(), value); return this; }
 
     }

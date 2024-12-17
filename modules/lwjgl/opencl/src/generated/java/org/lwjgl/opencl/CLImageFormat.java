@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The image format descriptor struct.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct cl_image_format {
- *     cl_channel_order {@link #image_channel_order};
- *     cl_channel_type {@link #image_channel_data_type};
- * }</code></pre>
+ *     cl_channel_order image_channel_order;
+ *     cl_channel_type image_channel_data_type;
+ * }}</pre>
  */
 @NativeType("struct cl_image_format")
 public class CLImageFormat extends Struct<CLImageFormat> implements NativeResource {
@@ -75,19 +71,16 @@ public class CLImageFormat extends Struct<CLImageFormat> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies the number of channels and the channel layout i.e. the memory layout in which channels are stored in the image */
+    /** @return the value of the {@code image_channel_order} field. */
     @NativeType("cl_channel_order")
     public int image_channel_order() { return nimage_channel_order(address()); }
-    /**
-     * describes the size of the channel data type. The number of bits per element determined by the {@code image_channel_data_type} and
-     * {@code image_channel_order} must be a power of two.
-     */
+    /** @return the value of the {@code image_channel_data_type} field. */
     @NativeType("cl_channel_type")
     public int image_channel_data_type() { return nimage_channel_data_type(address()); }
 
-    /** Sets the specified value to the {@link #image_channel_order} field. */
+    /** Sets the specified value to the {@code image_channel_order} field. */
     public CLImageFormat image_channel_order(@NativeType("cl_channel_order") int value) { nimage_channel_order(address(), value); return this; }
-    /** Sets the specified value to the {@link #image_channel_data_type} field. */
+    /** Sets the specified value to the {@code image_channel_data_type} field. */
     public CLImageFormat image_channel_data_type(@NativeType("cl_channel_type") int value) { nimage_channel_data_type(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,16 +289,16 @@ public class CLImageFormat extends Struct<CLImageFormat> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CLImageFormat#image_channel_order} field. */
+        /** @return the value of the {@code image_channel_order} field. */
         @NativeType("cl_channel_order")
         public int image_channel_order() { return CLImageFormat.nimage_channel_order(address()); }
-        /** @return the value of the {@link CLImageFormat#image_channel_data_type} field. */
+        /** @return the value of the {@code image_channel_data_type} field. */
         @NativeType("cl_channel_type")
         public int image_channel_data_type() { return CLImageFormat.nimage_channel_data_type(address()); }
 
-        /** Sets the specified value to the {@link CLImageFormat#image_channel_order} field. */
+        /** Sets the specified value to the {@code image_channel_order} field. */
         public CLImageFormat.Buffer image_channel_order(@NativeType("cl_channel_order") int value) { CLImageFormat.nimage_channel_order(address(), value); return this; }
-        /** Sets the specified value to the {@link CLImageFormat#image_channel_data_type} field. */
+        /** Sets the specified value to the {@code image_channel_data_type} field. */
         public CLImageFormat.Buffer image_channel_data_type(@NativeType("cl_channel_type") int value) { CLImageFormat.nimage_channel_data_type(address(), value); return this; }
 
     }

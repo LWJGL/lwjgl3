@@ -16,27 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the orientation of the tessellation domain.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPipelineTessellationDomainOriginStateCreateInfo} structure is included in the {@code pNext} chain of {@link VkPipelineTessellationStateCreateInfo}, it controls the origin of the tessellation domain. If this structure is not present, it is as if {@code domainOrigin} was {@link VK11#VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO}</li>
- * <li>{@code domainOrigin} <b>must</b> be a valid {@code VkTessellationDomainOrigin} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineTessellationDomainOriginStateCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkTessellationDomainOrigin {@link #domainOrigin};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkTessellationDomainOrigin domainOrigin;
+ * }}</pre>
  */
 public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct<VkPipelineTessellationDomainOriginStateCreateInfo> implements NativeResource {
 
@@ -89,23 +74,23 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkTessellationDomainOrigin} value controlling the origin of the tessellation domain space. */
+    /** @return the value of the {@code domainOrigin} field. */
     @NativeType("VkTessellationDomainOrigin")
     public int domainOrigin() { return ndomainOrigin(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineTessellationDomainOriginStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO} value to the {@code sType} field. */
     public VkPipelineTessellationDomainOriginStateCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineTessellationDomainOriginStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #domainOrigin} field. */
+    /** Sets the specified value to the {@code domainOrigin} field. */
     public VkPipelineTessellationDomainOriginStateCreateInfo domainOrigin(@NativeType("VkTessellationDomainOrigin") int value) { ndomainOrigin(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,23 +305,23 @@ public class VkPipelineTessellationDomainOriginStateCreateInfo extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineTessellationDomainOriginStateCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineTessellationDomainOriginStateCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkPipelineTessellationDomainOriginStateCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineTessellationDomainOriginStateCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkPipelineTessellationDomainOriginStateCreateInfo#domainOrigin} field. */
+        /** @return the value of the {@code domainOrigin} field. */
         @NativeType("VkTessellationDomainOrigin")
         public int domainOrigin() { return VkPipelineTessellationDomainOriginStateCreateInfo.ndomainOrigin(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineTessellationDomainOriginStateCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineTessellationDomainOriginStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineTessellationDomainOriginStateCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO} value to the {@link VkPipelineTessellationDomainOriginStateCreateInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO} value to the {@code sType} field. */
         public VkPipelineTessellationDomainOriginStateCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkPipelineTessellationDomainOriginStateCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineTessellationDomainOriginStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineTessellationDomainOriginStateCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineTessellationDomainOriginStateCreateInfo#domainOrigin} field. */
+        /** Sets the specified value to the {@code domainOrigin} field. */
         public VkPipelineTessellationDomainOriginStateCreateInfo.Buffer domainOrigin(@NativeType("VkTessellationDomainOrigin") int value) { VkPipelineTessellationDomainOriginStateCreateInfo.ndomainOrigin(address(), value); return this; }
 
     }

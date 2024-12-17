@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_restriction {
  *     __u16 opcode;
  *     union {
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     };
  *     __u8 resv;
  *     __u32 resv2[3];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_restriction")
 public class IOURingRestriction extends Struct<IOURingRestriction> implements NativeResource {

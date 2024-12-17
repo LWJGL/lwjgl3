@@ -16,38 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing capabilities of a mode and plane combination.
- * 
- * <h5>Description</h5>
- * 
- * <p>The minimum and maximum position and extent fields describe the implementation limits, if any, as they apply to the specified display mode and plane. Vendors <b>may</b> support displaying a subset of a swapchain’s presentable images on the specified display plane. This is expressed by returning {@code minSrcPosition}, {@code maxSrcPosition}, {@code minSrcExtent}, and {@code maxSrcExtent} values that indicate a range of possible positions and sizes which <b>may</b> be used to specify the region within the presentable images that source pixels will be read from when creating a swapchain on the specified display mode and plane.</p>
- * 
- * <p>Vendors <b>may</b> also support mapping the presentable images’ content to a subset or superset of the visible region in the specified display mode. This is expressed by returning {@code minDstPosition}, {@code maxDstPosition}, {@code minDstExtent} and {@code maxDstExtent} values that indicate a range of possible positions and sizes which <b>may</b> be used to describe the region within the display mode that the source pixels will be mapped to.</p>
- * 
- * <p>Other vendors <b>may</b> support only a 1-1 mapping between pixels in the presentable images and the display mode. This <b>may</b> be indicated by returning <code>(0,0)</code> for {@code minSrcPosition}, {@code maxSrcPosition}, {@code minDstPosition}, and {@code maxDstPosition}, and (display mode width, display mode height) for {@code minSrcExtent}, {@code maxSrcExtent}, {@code minDstExtent}, and {@code maxDstExtent}.</p>
- * 
- * <p>The value {@code supportedAlpha} <b>must</b> contain at least one valid {@code VkDisplayPlaneAlphaFlagBitsKHR} bit.</p>
- * 
- * <p>These values indicate the limits of the implementation’s individual fields. Not all combinations of values within the offset and extent ranges returned in {@link VkDisplayPlaneCapabilitiesKHR} are guaranteed to be supported. Presentation requests specifying unsupported combinations <b>may</b> fail.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDisplayPlaneCapabilities2KHR}, {@link VkExtent2D}, {@link VkOffset2D}, {@link KHRDisplay#vkGetDisplayPlaneCapabilitiesKHR GetDisplayPlaneCapabilitiesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDisplayPlaneCapabilitiesKHR {
- *     VkDisplayPlaneAlphaFlagsKHR {@link #supportedAlpha};
- *     {@link VkOffset2D VkOffset2D} {@link #minSrcPosition};
- *     {@link VkOffset2D VkOffset2D} {@link #maxSrcPosition};
- *     {@link VkExtent2D VkExtent2D} {@link #minSrcExtent};
- *     {@link VkExtent2D VkExtent2D} {@link #maxSrcExtent};
- *     {@link VkOffset2D VkOffset2D} {@link #minDstPosition};
- *     {@link VkOffset2D VkOffset2D} {@link #maxDstPosition};
- *     {@link VkExtent2D VkExtent2D} {@link #minDstExtent};
- *     {@link VkExtent2D VkExtent2D} {@link #maxDstExtent};
- * }</code></pre>
+ *     VkDisplayPlaneAlphaFlagsKHR supportedAlpha;
+ *     {@link VkOffset2D VkOffset2D} minSrcPosition;
+ *     {@link VkOffset2D VkOffset2D} maxSrcPosition;
+ *     {@link VkExtent2D VkExtent2D} minSrcExtent;
+ *     {@link VkExtent2D VkExtent2D} maxSrcExtent;
+ *     {@link VkOffset2D VkOffset2D} minDstPosition;
+ *     {@link VkOffset2D VkOffset2D} maxDstPosition;
+ *     {@link VkExtent2D VkExtent2D} minDstExtent;
+ *     {@link VkExtent2D VkExtent2D} maxDstExtent;
+ * }}</pre>
  */
 public class VkDisplayPlaneCapabilitiesKHR extends Struct<VkDisplayPlaneCapabilitiesKHR> implements NativeResource {
 
@@ -118,24 +98,24 @@ public class VkDisplayPlaneCapabilitiesKHR extends Struct<VkDisplayPlaneCapabili
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a bitmask of {@code VkDisplayPlaneAlphaFlagBitsKHR} describing the supported alpha blending modes. */
+    /** @return the value of the {@code supportedAlpha} field. */
     @NativeType("VkDisplayPlaneAlphaFlagsKHR")
     public int supportedAlpha() { return nsupportedAlpha(address()); }
-    /** the minimum source rectangle offset supported by this plane using the specified mode. */
+    /** @return a {@link VkOffset2D} view of the {@code minSrcPosition} field. */
     public VkOffset2D minSrcPosition() { return nminSrcPosition(address()); }
-    /** the maximum source rectangle offset supported by this plane using the specified mode. The {@code x} and {@code y} components of {@code maxSrcPosition} <b>must</b> each be greater than or equal to the {@code x} and {@code y} components of {@code minSrcPosition}, respectively. */
+    /** @return a {@link VkOffset2D} view of the {@code maxSrcPosition} field. */
     public VkOffset2D maxSrcPosition() { return nmaxSrcPosition(address()); }
-    /** the minimum source rectangle size supported by this plane using the specified mode. */
+    /** @return a {@link VkExtent2D} view of the {@code minSrcExtent} field. */
     public VkExtent2D minSrcExtent() { return nminSrcExtent(address()); }
-    /** the maximum source rectangle size supported by this plane using the specified mode. */
+    /** @return a {@link VkExtent2D} view of the {@code maxSrcExtent} field. */
     public VkExtent2D maxSrcExtent() { return nmaxSrcExtent(address()); }
-    /** {@code minDstPosition}, {@code maxDstPosition}, {@code minDstExtent}, {@code maxDstExtent} all have similar semantics to their corresponding {@code *Src*} equivalents, but apply to the output region within the mode rather than the input region within the source image. Unlike the {@code *Src*} offsets, {@code minDstPosition} and {@code maxDstPosition} <b>may</b> contain negative values. */
+    /** @return a {@link VkOffset2D} view of the {@code minDstPosition} field. */
     public VkOffset2D minDstPosition() { return nminDstPosition(address()); }
-    /** see {@code minDstPosition} */
+    /** @return a {@link VkOffset2D} view of the {@code maxDstPosition} field. */
     public VkOffset2D maxDstPosition() { return nmaxDstPosition(address()); }
-    /** see {@code minDstPosition} */
+    /** @return a {@link VkExtent2D} view of the {@code minDstExtent} field. */
     public VkExtent2D minDstExtent() { return nminDstExtent(address()); }
-    /** see {@code minDstPosition} */
+    /** @return a {@link VkExtent2D} view of the {@code maxDstExtent} field. */
     public VkExtent2D maxDstExtent() { return nmaxDstExtent(address()); }
 
     // -----------------------------------
@@ -330,24 +310,24 @@ public class VkDisplayPlaneCapabilitiesKHR extends Struct<VkDisplayPlaneCapabili
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDisplayPlaneCapabilitiesKHR#supportedAlpha} field. */
+        /** @return the value of the {@code supportedAlpha} field. */
         @NativeType("VkDisplayPlaneAlphaFlagsKHR")
         public int supportedAlpha() { return VkDisplayPlaneCapabilitiesKHR.nsupportedAlpha(address()); }
-        /** @return a {@link VkOffset2D} view of the {@link VkDisplayPlaneCapabilitiesKHR#minSrcPosition} field. */
+        /** @return a {@link VkOffset2D} view of the {@code minSrcPosition} field. */
         public VkOffset2D minSrcPosition() { return VkDisplayPlaneCapabilitiesKHR.nminSrcPosition(address()); }
-        /** @return a {@link VkOffset2D} view of the {@link VkDisplayPlaneCapabilitiesKHR#maxSrcPosition} field. */
+        /** @return a {@link VkOffset2D} view of the {@code maxSrcPosition} field. */
         public VkOffset2D maxSrcPosition() { return VkDisplayPlaneCapabilitiesKHR.nmaxSrcPosition(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkDisplayPlaneCapabilitiesKHR#minSrcExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code minSrcExtent} field. */
         public VkExtent2D minSrcExtent() { return VkDisplayPlaneCapabilitiesKHR.nminSrcExtent(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkDisplayPlaneCapabilitiesKHR#maxSrcExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code maxSrcExtent} field. */
         public VkExtent2D maxSrcExtent() { return VkDisplayPlaneCapabilitiesKHR.nmaxSrcExtent(address()); }
-        /** @return a {@link VkOffset2D} view of the {@link VkDisplayPlaneCapabilitiesKHR#minDstPosition} field. */
+        /** @return a {@link VkOffset2D} view of the {@code minDstPosition} field. */
         public VkOffset2D minDstPosition() { return VkDisplayPlaneCapabilitiesKHR.nminDstPosition(address()); }
-        /** @return a {@link VkOffset2D} view of the {@link VkDisplayPlaneCapabilitiesKHR#maxDstPosition} field. */
+        /** @return a {@link VkOffset2D} view of the {@code maxDstPosition} field. */
         public VkOffset2D maxDstPosition() { return VkDisplayPlaneCapabilitiesKHR.nmaxDstPosition(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkDisplayPlaneCapabilitiesKHR#minDstExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code minDstExtent} field. */
         public VkExtent2D minDstExtent() { return VkDisplayPlaneCapabilitiesKHR.nminDstExtent(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkDisplayPlaneCapabilitiesKHR#maxDstExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code maxDstExtent} field. */
         public VkExtent2D maxDstExtent() { return VkDisplayPlaneCapabilitiesKHR.nmaxDstExtent(address()); }
 
     }

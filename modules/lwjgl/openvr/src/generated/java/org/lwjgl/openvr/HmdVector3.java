@@ -17,12 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct HmdVector3_t {
  *     float v[3];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct HmdVector3_t")
 public class HmdVector3 extends Struct<HmdVector3> implements NativeResource {

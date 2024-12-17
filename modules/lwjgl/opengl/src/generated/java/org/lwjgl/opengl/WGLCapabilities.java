@@ -11,7 +11,6 @@ import java.util.Set;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the WGL capabilities of an OpenGL device. */
 public final class WGLCapabilities {
 
     // WGL_AMD_gpu_association
@@ -116,112 +115,83 @@ public final class WGLCapabilities {
         wglAllocateMemoryNV,
         wglFreeMemoryNV;
 
-    /** When true, {@link WGLAMDGPUAssociation} is supported. */
+    /** When true, {@code WGL_AMD_gpu_association} is supported. */
     public final boolean WGL_AMD_gpu_association;
-    /** When true, {@link WGLARBBufferRegion} is supported. */
+    /** When true, {@code WGL_ARB_buffer_region} is supported. */
     public final boolean WGL_ARB_buffer_region;
-    /** When true, {@link WGLARBContextFlushControl} is supported. */
+    /** When true, {@code WGL_ARB_context_flush_control} is supported. */
     public final boolean WGL_ARB_context_flush_control;
-    /** When true, {@link WGLARBCreateContext} is supported. */
+    /** When true, {@code WGL_ARB_create_context} is supported. */
     public final boolean WGL_ARB_create_context;
-    /** When true, {@link WGLARBCreateContextNoError} is supported. */
+    /** When true, {@code WGL_ARB_create_context_no_error} is supported. */
     public final boolean WGL_ARB_create_context_no_error;
-    /** When true, {@link WGLARBCreateContextProfile} is supported. */
+    /** When true, {@code WGL_ARB_create_context_profile} is supported. */
     public final boolean WGL_ARB_create_context_profile;
-    /** When true, {@link WGLARBCreateContextRobustness} is supported. */
+    /** When true, {@code WGL_ARB_create_context_robustness} is supported. */
     public final boolean WGL_ARB_create_context_robustness;
-    /** When true, {@link WGLARBExtensionsString} is supported. */
+    /** When true, {@code WGL_ARB_extensions_string} is supported. */
     public final boolean WGL_ARB_extensions_string;
-    /** When true, {@link WGLARBFramebufferSRGB} is supported. */
+    /** When true, {@code WGL_ARB_framebuffer_sRGB} is supported. */
     public final boolean WGL_ARB_framebuffer_sRGB;
-    /** When true, {@link WGLARBMakeCurrentRead} is supported. */
+    /** When true, {@code WGL_ARB_make_current_read} is supported. */
     public final boolean WGL_ARB_make_current_read;
-    /** When true, {@link WGLARBMultisample} is supported. */
+    /** When true, {@code WGL_ARB_multisample} is supported. */
     public final boolean WGL_ARB_multisample;
-    /** When true, {@link WGLARBPbuffer} is supported. */
+    /** When true, {@code WGL_ARB_pbuffer} is supported. */
     public final boolean WGL_ARB_pbuffer;
-    /** When true, {@link WGLARBPixelFormat} is supported. */
+    /** When true, {@code WGL_ARB_pixel_format} is supported. */
     public final boolean WGL_ARB_pixel_format;
-    /** When true, {@link WGLARBPixelFormatFloat} is supported. */
+    /** When true, {@code WGL_ARB_pixel_format_float} is supported. */
     public final boolean WGL_ARB_pixel_format_float;
-    /** When true, {@link WGLARBRenderTexture} is supported. */
+    /** When true, {@code WGL_ARB_render_texture} is supported. */
     public final boolean WGL_ARB_render_texture;
-    /** When true, {@link WGLARBRobustnessApplicationIsolation} is supported. */
+    /** When true, {@code WGL_ARB_robustness_application_isolation} is supported. */
     public final boolean WGL_ARB_robustness_application_isolation;
-    /**
-     * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/WGL_ARB_robustness_application_isolation.txt">WGL_ARB_robustness_share_group_isolation</a> extension.
-     * 
-     * <p>GL_ARB_robustness and WGL_ARB_create_context_robustness allow creating an OpenGL context supporting graphics reset notification behavior.
-     * WGL_ARB_robustness_share_group_isolation provides stronger guarantees about the possible side-effects of a graphics reset.</p>
-     * 
-     * <p>If the graphics driver advertises the WGL_ARB_robustness_share_group_isolation extension string, then the driver guarantees that if a context in a
-     * particular share group causes a graphics reset to occur:</p>
-     * 
-     * <ol>
-     * <li>No other share group within the application is affected by the graphics reset. Additionally, no other application on the system is affected by the
-     * graphics reset.</li>
-     * <li>No other share group within the application receives any notification that the graphics reset occurred. Additionally, no other application on the
-     * system receives any notification that the graphics reset occurred.</li>
-     * </ol>
-     * 
-     * <p>Requires {@link WGLARBExtensionsString WGL_ARB_extensions_string} and {@link WGLARBCreateContextRobustness WGL_ARB_create_context_robustness}.</p>
-     */
+    /** When true, {@code WGL_ARB_robustness_share_group_isolation} is supported. */
     public final boolean WGL_ARB_robustness_share_group_isolation;
-    /** When true, {@link WGLATIPixelFormatFloat} is supported. */
+    /** When true, {@code WGL_ATI_pixel_format_float} is supported. */
     public final boolean WGL_ATI_pixel_format_float;
-    /** When true, {@link WGLATIRenderTextureRectangle} is supported. */
+    /** When true, {@code WGL_ATI_render_texture_rectangle} is supported. */
     public final boolean WGL_ATI_render_texture_rectangle;
-    /** When true, {@link WGLEXTColorspace} is supported. */
+    /** When true, {@code WGL_EXT_colorspace} is supported. */
     public final boolean WGL_EXT_colorspace;
-    /** When true, {@link WGLEXTCreateContextES2Profile} is supported. */
+    /** When true, {@code WGL_EXT_create_context_es2_profile} is supported. */
     public final boolean WGL_EXT_create_context_es2_profile;
-    /** When true, {@link WGLEXTCreateContextESProfile} is supported. */
+    /** When true, {@code WGL_EXT_create_context_es_profile} is supported. */
     public final boolean WGL_EXT_create_context_es_profile;
-    /** When true, {@link WGLEXTDepthFloat} is supported. */
+    /** When true, {@code WGL_EXT_depth_float} is supported. */
     public final boolean WGL_EXT_depth_float;
-    /** When true, {@link WGLEXTExtensionsString} is supported. */
+    /** When true, {@code WGL_EXT_extensions_string} is supported. */
     public final boolean WGL_EXT_extensions_string;
-    /** When true, {@link WGLEXTFramebufferSRGB} is supported. */
+    /** When true, {@code WGL_EXT_framebuffer_sRGB} is supported. */
     public final boolean WGL_EXT_framebuffer_sRGB;
-    /** When true, {@link WGLEXTPixelFormatPackedFloat} is supported. */
+    /** When true, {@code WGL_EXT_pixel_format_packed_float} is supported. */
     public final boolean WGL_EXT_pixel_format_packed_float;
-    /** When true, {@link WGLEXTSwapControl} is supported. */
+    /** When true, {@code WGL_EXT_swap_control} is supported. */
     public final boolean WGL_EXT_swap_control;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/WGL_EXT_swap_control_tear.txt">WGL_EXT_swap_control_tear</a> extension is supported.
-     * 
-     * <p>This extension extends the existing {@link WGLEXTSwapControl WGL_EXT_swap_control} extension by allowing a negative {@code interval} parameter to
-     * {@link WGLEXTSwapControl#wglSwapIntervalEXT SwapIntervalEXT}. The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This
-     * reduces the visual stutter on late frames and reduces the stall on subsequent frames.</p>
-     */
+    /** When true, {@code WGL_EXT_swap_control_tear} is supported. */
     public final boolean WGL_EXT_swap_control_tear;
-    /** When true, {@link WGLNVCopyImage} is supported. */
+    /** When true, {@code WGL_NV_copy_image} is supported. */
     public final boolean WGL_NV_copy_image;
-    /** When true, {@link WGLNVDelayBeforeSwap} is supported. */
+    /** When true, {@code WGL_NV_delay_before_swap} is supported. */
     public final boolean WGL_NV_delay_before_swap;
-    /** When true, {@link WGLNVDXInterop} is supported. */
+    /** When true, {@code WGL_NV_DX_interop} is supported. */
     public final boolean WGL_NV_DX_interop;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_DX_interop2.txt">WGL_NV_DX_interop2</a> extension is supported.
-     * 
-     * <p>This extension expands on the specification of {@link WGLNVDXInterop WGL_NV_DX_interop} to add support for DirectX version 10, 10.1 and 11 resources.</p>
-     * 
-     * <p>Requires {@link GL20 OpenGL 2.0} and {@link WGLNVDXInterop WGL_NV_DX_interop}.</p>
-     */
+    /** When true, {@code WGL_NV_DX_interop2} is supported. */
     public final boolean WGL_NV_DX_interop2;
-    /** When true, {@link WGLNVFloatBuffer} is supported. */
+    /** When true, {@code WGL_NV_float_buffer} is supported. */
     public final boolean WGL_NV_float_buffer;
-    /** When true, {@link WGLNVGPUAffinity} is supported. */
+    /** When true, {@code WGL_NV_gpu_affinity} is supported. */
     public final boolean WGL_NV_gpu_affinity;
-    /** When true, {@link WGLNVMultigpuContext} is supported. */
+    /** When true, {@code WGL_NV_multigpu_context} is supported. */
     public final boolean WGL_NV_multigpu_context;
-    /** When true, {@link WGLNVMultisampleCoverage} is supported. */
+    /** When true, {@code WGL_NV_multisample_coverage} is supported. */
     public final boolean WGL_NV_multisample_coverage;
-    /** When true, {@link WGLNVRenderDepthTexture} is supported. */
+    /** When true, {@code WGL_NV_render_depth_texture} is supported. */
     public final boolean WGL_NV_render_depth_texture;
-    /** When true, {@link WGLNVRenderTextureRectangle} is supported. */
+    /** When true, {@code WGL_NV_render_texture_rectangle} is supported. */
     public final boolean WGL_NV_render_texture_rectangle;
-    /** When true, {@link WGLNVSwapGroup} is supported. */
+    /** When true, {@code WGL_NV_swap_group} is supported. */
     public final boolean WGL_NV_swap_group;
     /** When true, {@code WGL_NV_vertex_array_range} is supported. */
     public final boolean WGL_NV_vertex_array_range;

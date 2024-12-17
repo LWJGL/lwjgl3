@@ -16,32 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying information about stage.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure specifies information about the presentation stage for which anti-lag parameters are being set.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD}</li>
- * <li>{@code stage} <b>must</b> be a valid {@code VkAntiLagStageAMD} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAntiLagDataAMD}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAntiLagPresentationInfoAMD {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkAntiLagStageAMD {@link #stage};
- *     uint64_t {@link #frameIndex};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkAntiLagStageAMD stage;
+ *     uint64_t frameIndex;
+ * }}</pre>
  */
 public class VkAntiLagPresentationInfoAMD extends Struct<VkAntiLagPresentationInfoAMD> implements NativeResource {
 
@@ -97,28 +78,28 @@ public class VkAntiLagPresentationInfoAMD extends Struct<VkAntiLagPresentationIn
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkAntiLagStageAMD} value specifying the current application stage. */
+    /** @return the value of the {@code stage} field. */
     @NativeType("VkAntiLagStageAMD")
     public int stage() { return nstage(address()); }
-    /** set just before the application processes input data ({@link AMDAntiLag#VK_ANTI_LAG_STAGE_INPUT_AMD ANTI_LAG_STAGE_INPUT_AMD}). The same {@code frameIndex} value <b>should</b> be set before the frame with current input data will be presented by {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} ({@link AMDAntiLag#VK_ANTI_LAG_STAGE_PRESENT_AMD ANTI_LAG_STAGE_PRESENT_AMD}). This <b>should</b> be done for each frame. */
+    /** @return the value of the {@code frameIndex} field. */
     @NativeType("uint64_t")
     public long frameIndex() { return nframeIndex(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAntiLagPresentationInfoAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD} value to the {@link #sType} field. */
+    /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD} value to the {@code sType} field. */
     public VkAntiLagPresentationInfoAMD sType$Default() { return sType(AMDAntiLag.VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAntiLagPresentationInfoAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #stage} field. */
+    /** Sets the specified value to the {@code stage} field. */
     public VkAntiLagPresentationInfoAMD stage(@NativeType("VkAntiLagStageAMD") int value) { nstage(address(), value); return this; }
-    /** Sets the specified value to the {@link #frameIndex} field. */
+    /** Sets the specified value to the {@code frameIndex} field. */
     public VkAntiLagPresentationInfoAMD frameIndex(@NativeType("uint64_t") long value) { nframeIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,28 +301,28 @@ public class VkAntiLagPresentationInfoAMD extends Struct<VkAntiLagPresentationIn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAntiLagPresentationInfoAMD#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAntiLagPresentationInfoAMD.nsType(address()); }
-        /** @return the value of the {@link VkAntiLagPresentationInfoAMD#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkAntiLagPresentationInfoAMD.npNext(address()); }
-        /** @return the value of the {@link VkAntiLagPresentationInfoAMD#stage} field. */
+        /** @return the value of the {@code stage} field. */
         @NativeType("VkAntiLagStageAMD")
         public int stage() { return VkAntiLagPresentationInfoAMD.nstage(address()); }
-        /** @return the value of the {@link VkAntiLagPresentationInfoAMD#frameIndex} field. */
+        /** @return the value of the {@code frameIndex} field. */
         @NativeType("uint64_t")
         public long frameIndex() { return VkAntiLagPresentationInfoAMD.nframeIndex(address()); }
 
-        /** Sets the specified value to the {@link VkAntiLagPresentationInfoAMD#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAntiLagPresentationInfoAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkAntiLagPresentationInfoAMD.nsType(address(), value); return this; }
-        /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD} value to the {@link VkAntiLagPresentationInfoAMD#sType} field. */
+        /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD} value to the {@code sType} field. */
         public VkAntiLagPresentationInfoAMD.Buffer sType$Default() { return sType(AMDAntiLag.VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD); }
-        /** Sets the specified value to the {@link VkAntiLagPresentationInfoAMD#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAntiLagPresentationInfoAMD.Buffer pNext(@NativeType("void *") long value) { VkAntiLagPresentationInfoAMD.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAntiLagPresentationInfoAMD#stage} field. */
+        /** Sets the specified value to the {@code stage} field. */
         public VkAntiLagPresentationInfoAMD.Buffer stage(@NativeType("VkAntiLagStageAMD") int value) { VkAntiLagPresentationInfoAMD.nstage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAntiLagPresentationInfoAMD#frameIndex} field. */
+        /** Sets the specified value to the {@code frameIndex} field. */
         public VkAntiLagPresentationInfoAMD.Buffer frameIndex(@NativeType("uint64_t") long value) { VkAntiLagPresentationInfoAMD.nframeIndex(address(), value); return this; }
 
     }

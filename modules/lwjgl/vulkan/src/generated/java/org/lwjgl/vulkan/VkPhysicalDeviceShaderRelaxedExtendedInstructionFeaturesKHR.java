@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing support for VK_KHR_shader_relaxed_extended_instruction an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRShaderRelaxedExtendedInstruction#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderRelaxedExtendedInstruction};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderRelaxedExtendedInstruction;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR extends Struct<VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR extends
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether the implementation supports SPIR-V modules that use the {@code SPV_KHR_relaxed_extended_instruction} extension. */
+    /** @return the value of the {@code shaderRelaxedExtendedInstruction} field. */
     @NativeType("VkBool32")
     public boolean shaderRelaxedExtendedInstruction() { return nshaderRelaxedExtendedInstruction(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRShaderRelaxedExtendedInstruction#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRShaderRelaxedExtendedInstruction#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR sType$Default() { return sType(KHRShaderRelaxedExtendedInstruction.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderRelaxedExtendedInstruction} field. */
+    /** Sets the specified value to the {@code shaderRelaxedExtendedInstruction} field. */
     public VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR shaderRelaxedExtendedInstruction(@NativeType("VkBool32") boolean value) { nshaderRelaxedExtendedInstruction(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR extends
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR#shaderRelaxedExtendedInstruction} field. */
+        /** @return the value of the {@code shaderRelaxedExtendedInstruction} field. */
         @NativeType("VkBool32")
         public boolean shaderRelaxedExtendedInstruction() { return VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.nshaderRelaxedExtendedInstruction(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRShaderRelaxedExtendedInstruction#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR} value to the {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR#sType} field. */
+        /** Sets the {@link KHRShaderRelaxedExtendedInstruction#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderRelaxedExtendedInstruction.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR#shaderRelaxedExtendedInstruction} field. */
+        /** Sets the specified value to the {@code shaderRelaxedExtendedInstruction} field. */
         public VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.Buffer shaderRelaxedExtendedInstruction(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR.nshaderRelaxedExtendedInstruction(address(), value ? 1 : 0); return this; }
 
     }

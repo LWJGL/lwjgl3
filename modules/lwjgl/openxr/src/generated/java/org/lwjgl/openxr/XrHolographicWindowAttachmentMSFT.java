@@ -17,39 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The holographic window binding structure which can be passed at session creation.
- * 
- * <h5>Description</h5>
- * 
- * <p>When creating a holographic window-backed {@code XrSession}, the application provides a pointer to an {@link XrHolographicWindowAttachmentMSFT} in the {@code next} chain of the {@link XrSessionCreateInfo}.</p>
- * 
- * <p>The session state of a holographic window-backed {@code XrSession} will only reach {@link XR10#XR_SESSION_STATE_VISIBLE SESSION_STATE_VISIBLE} when the provided CoreWindow is made visible. If the CoreWindow is for a secondary app view, the application must programmatically request to make the CoreWindow visible (e.g. with {@code ApplicationViewSwitcher.TryShowAsStandaloneAsync} or {@code ApplicationViewSwitcher.SwitchAsync}).</p>
- * 
- * <p>The app <b>must</b> not call {@link XR10#xrCreateSession CreateSession} while the specified CoreWindow thread is blocked, otherwise the call <b>may</b> deadlock.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTHolographicWindowAttachment XR_MSFT_holographic_window_attachment} extension <b>must</b> be enabled prior to using {@link XrHolographicWindowAttachmentMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTHolographicWindowAttachment#XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code holographicSpace} <b>must</b> be a pointer to an {@code IUnknown} value</li>
- * <li>{@code coreWindow} <b>must</b> be a pointer to an {@code IUnknown} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateSession CreateSession}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHolographicWindowAttachmentMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     IUnknown * {@link #holographicSpace};
- *     IUnknown * {@link #coreWindow};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     IUnknown * holographicSpace;
+ *     IUnknown * coreWindow;
+ * }}</pre>
  */
 public class XrHolographicWindowAttachmentMSFT extends Struct<XrHolographicWindowAttachmentMSFT> implements NativeResource {
 
@@ -105,28 +79,28 @@ public class XrHolographicWindowAttachmentMSFT extends Struct<XrHolographicWindo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a pointer to a valid {@code Windows}.Graphics.Holographic.HolographicSpace. */
+    /** @return the value of the {@code holographicSpace} field. */
     @NativeType("IUnknown *")
     public long holographicSpace() { return nholographicSpace(address()); }
-    /** a pointer to a valid {@code Windows}.UI.Core.CoreWindow. */
+    /** @return the value of the {@code coreWindow} field. */
     @NativeType("IUnknown *")
     public long coreWindow() { return ncoreWindow(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHolographicWindowAttachmentMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTHolographicWindowAttachment#XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTHolographicWindowAttachment#XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT} value to the {@code type} field. */
     public XrHolographicWindowAttachmentMSFT type$Default() { return type(MSFTHolographicWindowAttachment.XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHolographicWindowAttachmentMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #holographicSpace} field. */
+    /** Sets the specified value to the {@code holographicSpace} field. */
     public XrHolographicWindowAttachmentMSFT holographicSpace(@NativeType("IUnknown *") long value) { nholographicSpace(address(), value); return this; }
-    /** Sets the specified value to the {@link #coreWindow} field. */
+    /** Sets the specified value to the {@code coreWindow} field. */
     public XrHolographicWindowAttachmentMSFT coreWindow(@NativeType("IUnknown *") long value) { ncoreWindow(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -338,28 +312,28 @@ public class XrHolographicWindowAttachmentMSFT extends Struct<XrHolographicWindo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHolographicWindowAttachmentMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHolographicWindowAttachmentMSFT.ntype(address()); }
-        /** @return the value of the {@link XrHolographicWindowAttachmentMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHolographicWindowAttachmentMSFT.nnext(address()); }
-        /** @return the value of the {@link XrHolographicWindowAttachmentMSFT#holographicSpace} field. */
+        /** @return the value of the {@code holographicSpace} field. */
         @NativeType("IUnknown *")
         public long holographicSpace() { return XrHolographicWindowAttachmentMSFT.nholographicSpace(address()); }
-        /** @return the value of the {@link XrHolographicWindowAttachmentMSFT#coreWindow} field. */
+        /** @return the value of the {@code coreWindow} field. */
         @NativeType("IUnknown *")
         public long coreWindow() { return XrHolographicWindowAttachmentMSFT.ncoreWindow(address()); }
 
-        /** Sets the specified value to the {@link XrHolographicWindowAttachmentMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHolographicWindowAttachmentMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrHolographicWindowAttachmentMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTHolographicWindowAttachment#XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT} value to the {@link XrHolographicWindowAttachmentMSFT#type} field. */
+        /** Sets the {@link MSFTHolographicWindowAttachment#XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT} value to the {@code type} field. */
         public XrHolographicWindowAttachmentMSFT.Buffer type$Default() { return type(MSFTHolographicWindowAttachment.XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT); }
-        /** Sets the specified value to the {@link XrHolographicWindowAttachmentMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHolographicWindowAttachmentMSFT.Buffer next(@NativeType("void const *") long value) { XrHolographicWindowAttachmentMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHolographicWindowAttachmentMSFT#holographicSpace} field. */
+        /** Sets the specified value to the {@code holographicSpace} field. */
         public XrHolographicWindowAttachmentMSFT.Buffer holographicSpace(@NativeType("IUnknown *") long value) { XrHolographicWindowAttachmentMSFT.nholographicSpace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHolographicWindowAttachmentMSFT#coreWindow} field. */
+        /** Sets the specified value to the {@code coreWindow} field. */
         public XrHolographicWindowAttachmentMSFT.Buffer coreWindow(@NativeType("IUnknown *") long value) { XrHolographicWindowAttachmentMSFT.ncoreWindow(address(), value); return this; }
 
     }

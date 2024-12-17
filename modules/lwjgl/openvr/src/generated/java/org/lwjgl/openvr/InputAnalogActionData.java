@@ -16,20 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct InputAnalogActionData_t {
- *     bool {@link #bActive};
- *     VRInputValueHandle_t {@link #activeOrigin};
- *     float {@link #x};
- *     float {@link #y};
- *     float {@link #z};
- *     float {@link #deltaX};
- *     float {@link #deltaY};
- *     float {@link #deltaZ};
- *     float {@link #fUpdateTime};
- * }</code></pre>
+ *     bool bActive;
+ *     VRInputValueHandle_t activeOrigin;
+ *     float x;
+ *     float y;
+ *     float z;
+ *     float deltaX;
+ *     float deltaY;
+ *     float deltaZ;
+ *     float fUpdateTime;
+ * }}</pre>
  */
 @NativeType("struct InputAnalogActionData_t")
 public class InputAnalogActionData extends Struct<InputAnalogActionData> implements NativeResource {
@@ -101,25 +99,25 @@ public class InputAnalogActionData extends Struct<InputAnalogActionData> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** whether or not this action is currently available to be bound in the active action set */
+    /** @return the value of the {@code bActive} field. */
     @NativeType("bool")
     public boolean bActive() { return nbActive(address()); }
-    /** the origin that caused this action's current state */
+    /** @return the value of the {@code activeOrigin} field. */
     @NativeType("VRInputValueHandle_t")
     public long activeOrigin() { return nactiveOrigin(address()); }
-    /** the current state of this action; will be delta updates for mouse actions */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** the current state of this action; will be delta updates for mouse actions */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** the current state of this action; will be delta updates for mouse actions */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
-    /** teltas since the previous call to {@link VRInput#VRInput_UpdateActionState UpdateActionState} */
+    /** @return the value of the {@code deltaX} field. */
     public float deltaX() { return ndeltaX(address()); }
-    /** teltas since the previous call to {@link VRInput#VRInput_UpdateActionState UpdateActionState} */
+    /** @return the value of the {@code deltaY} field. */
     public float deltaY() { return ndeltaY(address()); }
-    /** teltas since the previous call to {@link VRInput#VRInput_UpdateActionState UpdateActionState} */
+    /** @return the value of the {@code deltaZ} field. */
     public float deltaZ() { return ndeltaZ(address()); }
-    /** time relative to now when this event happened. Will be negative to indicate a past time */
+    /** @return the value of the {@code fUpdateTime} field. */
     public float fUpdateTime() { return nfUpdateTime(address()); }
 
     // -----------------------------------
@@ -314,25 +312,25 @@ public class InputAnalogActionData extends Struct<InputAnalogActionData> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link InputAnalogActionData#bActive} field. */
+        /** @return the value of the {@code bActive} field. */
         @NativeType("bool")
         public boolean bActive() { return InputAnalogActionData.nbActive(address()); }
-        /** @return the value of the {@link InputAnalogActionData#activeOrigin} field. */
+        /** @return the value of the {@code activeOrigin} field. */
         @NativeType("VRInputValueHandle_t")
         public long activeOrigin() { return InputAnalogActionData.nactiveOrigin(address()); }
-        /** @return the value of the {@link InputAnalogActionData#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return InputAnalogActionData.nx(address()); }
-        /** @return the value of the {@link InputAnalogActionData#y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return InputAnalogActionData.ny(address()); }
-        /** @return the value of the {@link InputAnalogActionData#z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return InputAnalogActionData.nz(address()); }
-        /** @return the value of the {@link InputAnalogActionData#deltaX} field. */
+        /** @return the value of the {@code deltaX} field. */
         public float deltaX() { return InputAnalogActionData.ndeltaX(address()); }
-        /** @return the value of the {@link InputAnalogActionData#deltaY} field. */
+        /** @return the value of the {@code deltaY} field. */
         public float deltaY() { return InputAnalogActionData.ndeltaY(address()); }
-        /** @return the value of the {@link InputAnalogActionData#deltaZ} field. */
+        /** @return the value of the {@code deltaZ} field. */
         public float deltaZ() { return InputAnalogActionData.ndeltaZ(address()); }
-        /** @return the value of the {@link InputAnalogActionData#fUpdateTime} field. */
+        /** @return the value of the {@code fUpdateTime} field. */
         public float fUpdateTime() { return InputAnalogActionData.nfUpdateTime(address()); }
 
     }

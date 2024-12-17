@@ -16,24 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the exact dot product operations that are accelerated on the device.
- * 
- * <p>A dot product operation is deemed accelerated if its implementation provides a performance advantage over application-provided code composed from
- * elementary instructions and/or other dot product instructions, either because the implementation uses optimized machine code sequences whose
- * generation from application-provided code cannot be guaranteed or because it uses hardware features that cannot otherwise be targeted from
- * application-provided code.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct cl_device_integer_dot_product_acceleration_properties_khr {
- *     cl_bool {@link #signed_accelerated};
- *     cl_bool {@link #unsigned_accelerated};
- *     cl_bool {@link #mixed_signedness_accelerated};
- *     cl_bool {@link #accumulating_saturating_signed_accelerated};
- *     cl_bool {@link #accumulating_saturating_unsigned_accelerated};
- *     cl_bool {@link #accumulating_saturating_mixed_signedness_accelerated};
- * }</code></pre>
+ *     cl_bool signed_accelerated;
+ *     cl_bool unsigned_accelerated;
+ *     cl_bool mixed_signedness_accelerated;
+ *     cl_bool accumulating_saturating_signed_accelerated;
+ *     cl_bool accumulating_saturating_unsigned_accelerated;
+ *     cl_bool accumulating_saturating_mixed_signedness_accelerated;
+ * }}</pre>
  */
 @NativeType("struct cl_device_integer_dot_product_acceleration_properties_khr")
 public class CLDeviceIntegerDotProductAccelerationPropertiesKHR extends Struct<CLDeviceIntegerDotProductAccelerationPropertiesKHR> implements NativeResource {
@@ -96,22 +87,22 @@ public class CLDeviceIntegerDotProductAccelerationPropertiesKHR extends Struct<C
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** is {@link CL10#CL_TRUE TRUE} when signed dot product operations are accelerated, {@link CL10#CL_FALSE FALSE} otherwise */
+    /** @return the value of the {@code signed_accelerated} field. */
     @NativeType("cl_bool")
     public boolean signed_accelerated() { return nsigned_accelerated(address()) != 0; }
-    /** is {@link CL10#CL_TRUE TRUE} when unsigned dot product operations are accelerated, {@link CL10#CL_FALSE FALSE} otherwise */
+    /** @return the value of the {@code unsigned_accelerated} field. */
     @NativeType("cl_bool")
     public boolean unsigned_accelerated() { return nunsigned_accelerated(address()) != 0; }
-    /** is {@link CL10#CL_TRUE TRUE} when mixed signedness dot product operations are accelerated, {@link CL10#CL_FALSE FALSE} otherwise */
+    /** @return the value of the {@code mixed_signedness_accelerated} field. */
     @NativeType("cl_bool")
     public boolean mixed_signedness_accelerated() { return nmixed_signedness_accelerated(address()) != 0; }
-    /** is {@link CL10#CL_TRUE TRUE} when accumulating saturating signed dot product operations are accelerated, {@link CL10#CL_FALSE FALSE} otherwise */
+    /** @return the value of the {@code accumulating_saturating_signed_accelerated} field. */
     @NativeType("cl_bool")
     public boolean accumulating_saturating_signed_accelerated() { return naccumulating_saturating_signed_accelerated(address()) != 0; }
-    /** is {@link CL10#CL_TRUE TRUE} when accumulating saturating unsigned dot product operations are accelerated, {@link CL10#CL_FALSE FALSE} otherwise */
+    /** @return the value of the {@code accumulating_saturating_unsigned_accelerated} field. */
     @NativeType("cl_bool")
     public boolean accumulating_saturating_unsigned_accelerated() { return naccumulating_saturating_unsigned_accelerated(address()) != 0; }
-    /** is {@link CL10#CL_TRUE TRUE} when accumulating saturating mixed signedness dot product operations are accelerated, {@link CL10#CL_FALSE FALSE} otherwise */
+    /** @return the value of the {@code accumulating_saturating_mixed_signedness_accelerated} field. */
     @NativeType("cl_bool")
     public boolean accumulating_saturating_mixed_signedness_accelerated() { return naccumulating_saturating_mixed_signedness_accelerated(address()) != 0; }
 
@@ -282,22 +273,22 @@ public class CLDeviceIntegerDotProductAccelerationPropertiesKHR extends Struct<C
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CLDeviceIntegerDotProductAccelerationPropertiesKHR#signed_accelerated} field. */
+        /** @return the value of the {@code signed_accelerated} field. */
         @NativeType("cl_bool")
         public boolean signed_accelerated() { return CLDeviceIntegerDotProductAccelerationPropertiesKHR.nsigned_accelerated(address()) != 0; }
-        /** @return the value of the {@link CLDeviceIntegerDotProductAccelerationPropertiesKHR#unsigned_accelerated} field. */
+        /** @return the value of the {@code unsigned_accelerated} field. */
         @NativeType("cl_bool")
         public boolean unsigned_accelerated() { return CLDeviceIntegerDotProductAccelerationPropertiesKHR.nunsigned_accelerated(address()) != 0; }
-        /** @return the value of the {@link CLDeviceIntegerDotProductAccelerationPropertiesKHR#mixed_signedness_accelerated} field. */
+        /** @return the value of the {@code mixed_signedness_accelerated} field. */
         @NativeType("cl_bool")
         public boolean mixed_signedness_accelerated() { return CLDeviceIntegerDotProductAccelerationPropertiesKHR.nmixed_signedness_accelerated(address()) != 0; }
-        /** @return the value of the {@link CLDeviceIntegerDotProductAccelerationPropertiesKHR#accumulating_saturating_signed_accelerated} field. */
+        /** @return the value of the {@code accumulating_saturating_signed_accelerated} field. */
         @NativeType("cl_bool")
         public boolean accumulating_saturating_signed_accelerated() { return CLDeviceIntegerDotProductAccelerationPropertiesKHR.naccumulating_saturating_signed_accelerated(address()) != 0; }
-        /** @return the value of the {@link CLDeviceIntegerDotProductAccelerationPropertiesKHR#accumulating_saturating_unsigned_accelerated} field. */
+        /** @return the value of the {@code accumulating_saturating_unsigned_accelerated} field. */
         @NativeType("cl_bool")
         public boolean accumulating_saturating_unsigned_accelerated() { return CLDeviceIntegerDotProductAccelerationPropertiesKHR.naccumulating_saturating_unsigned_accelerated(address()) != 0; }
-        /** @return the value of the {@link CLDeviceIntegerDotProductAccelerationPropertiesKHR#accumulating_saturating_mixed_signedness_accelerated} field. */
+        /** @return the value of the {@code accumulating_saturating_mixed_signedness_accelerated} field. */
         @NativeType("cl_bool")
         public boolean accumulating_saturating_mixed_signedness_accelerated() { return CLDeviceIntegerDotProductAccelerationPropertiesKHR.naccumulating_saturating_mixed_signedness_accelerated(address()) != 0; }
 

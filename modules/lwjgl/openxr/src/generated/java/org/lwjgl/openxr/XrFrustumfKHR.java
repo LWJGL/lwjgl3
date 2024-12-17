@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrFrustumf}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFrustumfKHR {
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrFovf XrFovf} fov;
  *     float nearZ;
  *     float farZ;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrFrustumfKHR extends XrFrustumf {
 

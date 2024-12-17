@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to hold a single list element.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_ListNodeRec {
  *     {@link FT_ListNode FT_ListNode} prev;
  *     {@link FT_ListNode FT_ListNode} next;
  *     void * data;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_ListNodeRec")
 public class FT_ListNode extends Struct<FT_ListNode> {
@@ -81,11 +77,7 @@ public class FT_ListNode extends Struct<FT_ListNode> {
     public @Nullable FT_ListNode prev() { return nprev(address()); }
     /** @return a {@link FT_ListNode} view of the struct pointed to by the {@code next} field. */
     public @Nullable FT_ListNode next() { return nnext(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
     @NativeType("void *")
     public ByteBuffer data(int capacity) { return ndata(address(), capacity); }
 
@@ -172,11 +164,7 @@ public class FT_ListNode extends Struct<FT_ListNode> {
         public @Nullable FT_ListNode prev() { return FT_ListNode.nprev(address()); }
         /** @return a {@link FT_ListNode} view of the struct pointed to by the {@code next} field. */
         public @Nullable FT_ListNode next() { return FT_ListNode.nnext(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
         @NativeType("void *")
         public ByteBuffer data(int capacity) { return FT_ListNode.ndata(address(), capacity); }
 

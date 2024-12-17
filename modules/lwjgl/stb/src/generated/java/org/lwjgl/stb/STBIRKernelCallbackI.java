@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     float x,
- *     float scale,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke stbir__kernel_callback *} */
 @FunctionalInterface
 @NativeType("stbir__kernel_callback *")
 public interface STBIRKernelCallbackI extends CallbackI {
@@ -45,6 +36,7 @@ public interface STBIRKernelCallbackI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code float (* stbir__kernel_callback *) (float x, float scale, void * user_data)} */
     float invoke(float x, float scale, @NativeType("void *") long user_data);
 
 }

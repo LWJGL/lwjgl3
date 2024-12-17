@@ -17,82 +17,14 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Bindings to <a href="https://github.com/Celtoys/Remotery">Remotery</a>, a realtime CPU/GPU profiler hosted in a single C file with a viewer that runs in
- * a web browser.
- * 
- * <p>Supported features:</p>
- * 
- * <ul>
- * <li>Lightweight instrumentation of multiple threads running on the CPU and GPU.</li>
- * <li>Web viewer that runs in Chrome, Firefox and Safari; on Desktops, Mobiles or Tablets.</li>
- * <li>GPU UI rendering, bypassing the DOM completely, for real-time 60hz viewer updates at 10,000x the performance.</li>
- * <li>Automatic thread sampler that tells you what processor cores your threads are running on without requiring Administrator privileges.</li>
- * <li>Drop saved traces onto the Remotery window to load historical runs for inspection.</li>
- * <li>Console output for logging text.</li>
- * <li>Console input for sending commands to your game.</li>
- * <li>A Property API for recording named/typed values over time, alongside samples.</li>
- * <li>Profiles itself and shows how it's performing in the viewer.</li>
- * </ul>
- * 
- * <p>Supported Profiling Platforms:</p>
- * 
- * <ul>
- * <li>Windows 7/8/10/11/UWP (Hololens)</li>
- * <li>Linux</li>
- * <li>OSX</li>
- * <li>Android</li>
- * <li>Free BSD</li>
- * </ul>
- * 
- * <p>Supported GPU Profiling APIs:</p>
- * 
- * <ul>
- * <li>OpenGL</li>
- * <li>CUDA</li>
- * <li>Metal</li>
- * </ul>
- * 
- * <p><b>LWJGL</b>: The current version of the Remotery bindings is compatible with commit
- * <a href="https://github.com/Celtoys/Remotery/tree/c3e8a2f38603c054be479bcefeaa54ad455dd4b9/vis">c3e8a2f</a>. Run the following commands to clone the
- * Remotery repository at that commit:</p>
- * 
- * <pre><code>
- * git clone --depth=1 https://github.com/Celtoys/Remotery.git
- * cd Remotery
- * git fetch --depth=1 origin c3e8a2f38603c054be479bcefeaa54ad455dd4b9
- * git branch --no-track lwjgl c3e8a2f38603c054be479bcefeaa54ad455dd4b9
- * git checkout lwjgl
- * git branch -D @{-1}</code></pre>
- * 
- * <p>Now open {@code vis/index.html} in your favorite browser to view the profiler.</p>
- */
 public class Remotery {
 
     static { LibRemotery.initialize(); }
 
-    /** Boolean */
     public static final int RMT_TRUE = 1;
 
-    /** Boolean */
     public static final int RMT_FALSE = 0;
 
-    /**
-     * {@code rmtSampleType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #RMT_SampleType_CPU SampleType_CPU}</li>
-     * <li>{@link #RMT_SampleType_CUDA SampleType_CUDA}</li>
-     * <li>{@link #RMT_SampleType_D3D11 SampleType_D3D11}</li>
-     * <li>{@link #RMT_SampleType_D3D12 SampleType_D3D12}</li>
-     * <li>{@link #RMT_SampleType_OpenGL SampleType_OpenGL}</li>
-     * <li>{@link #RMT_SampleType_Metal SampleType_Metal}</li>
-     * <li>{@link #RMT_SampleType_Vulkan SampleType_Vulkan}</li>
-     * <li>{@link #RMT_SampleType_Count SampleType_Count}</li>
-     * </ul>
-     */
     public static final int
         RMT_SampleType_CPU    = 0,
         RMT_SampleType_CUDA   = 1,
@@ -103,58 +35,6 @@ public class Remotery {
         RMT_SampleType_Vulkan = 6,
         RMT_SampleType_Count  = 7;
 
-    /**
-     * All possible error codes ({@code rmtError}).
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #RMT_ERROR_NONE ERROR_NONE}</li>
-     * <li>{@link #RMT_ERROR_RECURSIVE_SAMPLE ERROR_RECURSIVE_SAMPLE} - Not an error but an internal message to calling code</li>
-     * <li>{@link #RMT_ERROR_UNKNOWN ERROR_UNKNOWN} - An error with a message yet to be defined, only for internal error handling</li>
-     * <li>{@link #RMT_ERROR_INVALID_INPUT ERROR_INVALID_INPUT} - An invalid input to a function call was provided</li>
-     * <li>{@link #RMT_ERROR_RESOURCE_CREATE_FAIL ERROR_RESOURCE_CREATE_FAIL} - Creation of an internal resource failed</li>
-     * <li>{@link #RMT_ERROR_RESOURCE_ACCESS_FAIL ERROR_RESOURCE_ACCESS_FAIL} - Access of an internal resource failed</li>
-     * <li>{@link #RMT_ERROR_TIMEOUT ERROR_TIMEOUT} - Internal system timeout</li>
-     * <li>{@link #RMT_ERROR_MALLOC_FAIL ERROR_MALLOC_FAIL} - Malloc call within remotery failed</li>
-     * <li>{@link #RMT_ERROR_TLS_ALLOC_FAIL ERROR_TLS_ALLOC_FAIL} - Attempt to allocate thread local storage failed</li>
-     * <li>{@link #RMT_ERROR_VIRTUAL_MEMORY_BUFFER_FAIL ERROR_VIRTUAL_MEMORY_BUFFER_FAIL} - Failed to create a virtual memory mirror buffer</li>
-     * <li>{@link #RMT_ERROR_CREATE_THREAD_FAIL ERROR_CREATE_THREAD_FAIL} - Failed to create a thread for the server</li>
-     * <li>{@link #RMT_ERROR_OPEN_THREAD_HANDLE_FAIL ERROR_OPEN_THREAD_HANDLE_FAIL} - Failed to open a thread handle, given a thread id</li>
-     * <li>{@link #RMT_ERROR_SOCKET_INVALID_POLL ERROR_SOCKET_INVALID_POLL} - Poll attempt on an invalid socket</li>
-     * <li>{@link #RMT_ERROR_SOCKET_SELECT_FAIL ERROR_SOCKET_SELECT_FAIL} - Server failed to call select on socket</li>
-     * <li>{@link #RMT_ERROR_SOCKET_POLL_ERRORS ERROR_SOCKET_POLL_ERRORS} - Poll notified that the socket has errors</li>
-     * <li>{@link #RMT_ERROR_SOCKET_SEND_FAIL ERROR_SOCKET_SEND_FAIL} - Unrecoverable error occured while client/server tried to send data</li>
-     * <li>{@link #RMT_ERROR_SOCKET_RECV_NO_DATA ERROR_SOCKET_RECV_NO_DATA} - No data available when attempting a receive</li>
-     * <li>{@link #RMT_ERROR_SOCKET_RECV_TIMEOUT ERROR_SOCKET_RECV_TIMEOUT} - Timed out trying to receive data</li>
-     * <li>{@link #RMT_ERROR_SOCKET_RECV_FAILED ERROR_SOCKET_RECV_FAILED} - Unrecoverable error occured while client/server tried to receive data</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_HANDSHAKE_NOT_GET ERROR_WEBSOCKET_HANDSHAKE_NOT_GET} - WebSocket server handshake failed, not HTTP GET</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_HANDSHAKE_NO_VERSION ERROR_WEBSOCKET_HANDSHAKE_NO_VERSION} - WebSocket server handshake failed, can't locate WebSocket version</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_HANDSHAKE_BAD_VERSION ERROR_WEBSOCKET_HANDSHAKE_BAD_VERSION} - WebSocket server handshake failed, unsupported WebSocket version</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_HANDSHAKE_NO_HOST ERROR_WEBSOCKET_HANDSHAKE_NO_HOST} - WebSocket server handshake failed, can't locate host</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_HANDSHAKE_BAD_HOST ERROR_WEBSOCKET_HANDSHAKE_BAD_HOST} - WebSocket server handshake failed, host is not allowed to connect</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_HANDSHAKE_NO_KEY ERROR_WEBSOCKET_HANDSHAKE_NO_KEY} - WebSocket server handshake failed, can't locate WebSocket key</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_HANDSHAKE_BAD_KEY ERROR_WEBSOCKET_HANDSHAKE_BAD_KEY} - WebSocket server handshake failed, WebSocket key is ill-formed</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_HANDSHAKE_STRING_FAIL ERROR_WEBSOCKET_HANDSHAKE_STRING_FAIL} - WebSocket server handshake failed, internal error, bad string code</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_DISCONNECTED ERROR_WEBSOCKET_DISCONNECTED} - WebSocket server received a disconnect request and closed the socket</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_BAD_FRAME_HEADER ERROR_WEBSOCKET_BAD_FRAME_HEADER} - Couldn't parse WebSocket frame header</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_BAD_FRAME_HEADER_SIZE ERROR_WEBSOCKET_BAD_FRAME_HEADER_SIZE} - Partially received wide frame header size</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_BAD_FRAME_HEADER_MASK ERROR_WEBSOCKET_BAD_FRAME_HEADER_MASK} - Partially received frame header data mask</li>
-     * <li>{@link #RMT_ERROR_WEBSOCKET_RECEIVE_TIMEOUT ERROR_WEBSOCKET_RECEIVE_TIMEOUT} - Timeout receiving frame header</li>
-     * <li>{@link #RMT_ERROR_REMOTERY_NOT_CREATED ERROR_REMOTERY_NOT_CREATED} - Remotery object has not been created</li>
-     * <li>{@link #RMT_ERROR_SEND_ON_INCOMPLETE_PROFILE ERROR_SEND_ON_INCOMPLETE_PROFILE} - An attempt was made to send an in,complete profile tree to the client</li>
-     * <li>{@link #RMT_ERROR_CUDA_DEINITIALIZED ERROR_CUDA_DEINITIALIZED} - This indicates that the CUDA driver is in the process of shutting down</li>
-     * <li>{@link #RMT_ERROR_CUDA_NOT_INITIALIZED ERROR_CUDA_NOT_INITIALIZED} - This indicates that the CUDA driver has not been initialized with cuInit() or that initialization has failed</li>
-     * <li>{@link #RMT_ERROR_CUDA_INVALID_CONTEXT ERROR_CUDA_INVALID_CONTEXT} - This most frequently indicates that there is no context bound to the current thread</li>
-     * <li>{@link #RMT_ERROR_CUDA_INVALID_VALUE ERROR_CUDA_INVALID_VALUE} - This indicates that one or more of the parameters passed to the API call is not within an acceptable range of values</li>
-     * <li>{@link #RMT_ERROR_CUDA_INVALID_HANDLE ERROR_CUDA_INVALID_HANDLE} - This indicates that a resource handle passed to the API call was not valid</li>
-     * <li>{@link #RMT_ERROR_CUDA_OUT_OF_MEMORY ERROR_CUDA_OUT_OF_MEMORY} - The API call failed because it was unable to allocate enough memory to perform the requested operation</li>
-     * <li>{@link #RMT_ERROR_ERROR_NOT_READY ERROR_ERROR_NOT_READY} - This indicates that a resource handle passed to the API call was not valid</li>
-     * <li>{@link #RMT_ERROR_D3D11_FAILED_TO_CREATE_QUERY ERROR_D3D11_FAILED_TO_CREATE_QUERY} - Failed to create query for sample</li>
-     * <li>{@link #RMT_ERROR_OPENGL_ERROR ERROR_OPENGL_ERROR} - Generic OpenGL error, no need to expose detail since app will need an OpenGL error callback registered</li>
-     * <li>{@link #RMT_ERROR_CUDA_UNKNOWN ERROR_CUDA_UNKNOWN}</li>
-     * </ul>
-     */
     public static final int
         RMT_ERROR_NONE                            = 0,
         RMT_ERROR_RECURSIVE_SAMPLE                = 1,
@@ -201,36 +81,10 @@ public class Remotery {
         RMT_ERROR_OPENGL_ERROR                    = 42,
         RMT_ERROR_CUDA_UNKNOWN                    = 43;
 
-    /**
-     * Flags that control property behaviour. ({@code rmtPropertyFlags})
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #RMT_PropertyFlags_NoFlags PropertyFlags_NoFlags}</li>
-     * <li>{@link #RMT_PropertyFlags_FrameReset PropertyFlags_FrameReset} - Reset property back to its default value on each new frame.</li>
-     * </ul>
-     */
     public static final int
         RMT_PropertyFlags_NoFlags    = 0,
         RMT_PropertyFlags_FrameReset = 1;
 
-    /**
-     * All possible property types that can be recorded and sent to the viewer. ({@code rmtPropertyType})
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #RMT_PropertyType_rmtGroup PropertyType_rmtGroup}</li>
-     * <li>{@link #RMT_PropertyType_rmtBool PropertyType_rmtBool}</li>
-     * <li>{@link #RMT_PropertyType_rmtS32 PropertyType_rmtS32}</li>
-     * <li>{@link #RMT_PropertyType_rmtU32 PropertyType_rmtU32}</li>
-     * <li>{@link #RMT_PropertyType_rmtF32 PropertyType_rmtF32}</li>
-     * <li>{@link #RMT_PropertyType_rmtS64 PropertyType_rmtS64}</li>
-     * <li>{@link #RMT_PropertyType_rmtU64 PropertyType_rmtU64}</li>
-     * <li>{@link #RMT_PropertyType_rmtF64 PropertyType_rmtF64}</li>
-     * </ul>
-     */
     public static final int
         RMT_PropertyType_rmtGroup = 0,
         RMT_PropertyType_rmtBool  = 1,
@@ -241,29 +95,6 @@ public class Remotery {
         RMT_PropertyType_rmtU64   = 6,
         RMT_PropertyType_rmtF64   = 7;
 
-    /**
-     * {@code rmtSampleFlags}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #RMTSF_None RMTSF_None} - Default behaviour</li>
-     * <li>{@link #RMTSF_Aggregate RMTSF_Aggregate} - Search parent for same-named samples and merge timing instead of adding a new sample</li>
-     * <li>{@link #RMTSF_Recursive RMTSF_Recursive} - Merge sample with parent if it's the same sample</li>
-     * <li>{@link #RMTSF_Root RMTSF_Root} - 
-     * Set this flag on any of your root samples so that Remotery will assert if it ends up <b>not</b> being the root sample.
-     * 
-     * <p>This will quickly allow you to detect {@code Begin}/{@code End} mismatches causing a sample tree imbalance.</p>
-     * </li>
-     * <li>{@link #RMTSF_SendOnClose RMTSF_SendOnClose} - ,
-     * Mainly for platforms other than Windows that don't support the thread sampler and can't detect stalling samples.
-     * 
-     * <p>Where you have a non-root sample that stays open indefinitely and never sends its contents to log/viewer. Send this sample to log/viewer when it
-     * closes.  You can not have more than one sample open with this flag on the same thread at a time. This flag will be removed in a future version when all
-     * platforms support stalling samples.</p>
-     * </li>
-     * </ul>
-     */
     public static final int
         RMTSF_None        = 0,
         RMTSF_Aggregate   = 1,
@@ -277,10 +108,10 @@ public class Remotery {
 
     // --- [ rmt_GetLastErrorMessage ] ---
 
-    /** Unsafe version of: {@link #rmt_GetLastErrorMessage GetLastErrorMessage} */
+    /** {@code rmtPStr rmt_GetLastErrorMessage(void)} */
     public static native long nrmt_GetLastErrorMessage();
 
-    /** Gets the last error message issued on the calling thread */
+    /** {@code rmtPStr rmt_GetLastErrorMessage(void)} */
     @NativeType("rmtPStr")
     public static @Nullable String rmt_GetLastErrorMessage() {
         long __result = nrmt_GetLastErrorMessage();
@@ -289,14 +120,10 @@ public class Remotery {
 
     // --- [ rmt_Settings ] ---
 
-    /** Unsafe version of: {@link #rmt_Settings Settings} */
+    /** {@code rmtSettings * rmt_Settings(void)} */
     public static native long nrmt_Settings();
 
-    /**
-     * Retrieve and configure the global {@code rmtSettings} object.
-     * 
-     * <p>This can be done before or after Remotery is initialised, however some fields are only referenced on initialisation.</p>
-     */
+    /** {@code rmtSettings * rmt_Settings(void)} */
     @NativeType("rmtSettings *")
     public static @Nullable RMTSettings rmt_Settings() {
         long __result = nrmt_Settings();
@@ -305,14 +132,10 @@ public class Remotery {
 
     // --- [ rmt_CreateGlobalInstance ] ---
 
-    /** Unsafe version of: {@link #rmt_CreateGlobalInstance CreateGlobalInstance} */
+    /** {@code rmtError rmt_CreateGlobalInstance(Remotery ** remotery)} */
     public static native int nrmt_CreateGlobalInstance(long remotery);
 
-    /**
-     * Initialises Remotery and sets its internal global instance pointer.
-     *
-     * @param remotery returns the pointer for further use
-     */
+    /** {@code rmtError rmt_CreateGlobalInstance(Remotery ** remotery)} */
     @NativeType("rmtError")
     public static int rmt_CreateGlobalInstance(@NativeType("Remotery **") PointerBuffer remotery) {
         if (CHECKS) {
@@ -323,10 +146,10 @@ public class Remotery {
 
     // --- [ rmt_DestroyGlobalInstance ] ---
 
-    /** Unsafe version of: {@link #rmt_DestroyGlobalInstance DestroyGlobalInstance} */
+    /** {@code void rmt_DestroyGlobalInstance(Remotery * remotery)} */
     public static native void nrmt_DestroyGlobalInstance(long remotery);
 
-    /** Shutsdown Remotery, requiring its pointer to be passed to ensure you are destroying the correct instance. */
+    /** {@code void rmt_DestroyGlobalInstance(Remotery * remotery)} */
     public static void rmt_DestroyGlobalInstance(@NativeType("Remotery *") long remotery) {
         if (CHECKS) {
             check(remotery);
@@ -336,15 +159,10 @@ public class Remotery {
 
     // --- [ rmt_SetGlobalInstance ] ---
 
-    /** Unsafe version of: {@link #rmt_SetGlobalInstance SetGlobalInstance} */
+    /** {@code void rmt_SetGlobalInstance(Remotery * remotery)} */
     public static native void nrmt_SetGlobalInstance(long remotery);
 
-    /**
-     * For use in the presence of DLLs/SOs if each of them are linking Remotery statically.
-     * 
-     * <p>If Remotery is hosted in its own DLL and linked dynamically then there is no need to use this. Otherwise, pass the result of {@link #rmt_CreateGlobalInstance CreateGlobalInstance}
-     * from your main DLL to this in your other DLLs.</p>
-     */
+    /** {@code void rmt_SetGlobalInstance(Remotery * remotery)} */
     public static void rmt_SetGlobalInstance(@NativeType("Remotery *") long remotery) {
         if (CHECKS) {
             check(remotery);
@@ -354,14 +172,16 @@ public class Remotery {
 
     // --- [ rmt_GetGlobalInstance ] ---
 
-    /** Gets a pointer to the current global Remotery instance. */
+    /** {@code Remotery * rmt_GetGlobalInstance(void)} */
     @NativeType("Remotery *")
     public static native long rmt_GetGlobalInstance();
 
     // --- [ rmt_SetCurrentThreadName ] ---
 
+    /** {@code void rmt_SetCurrentThreadName(rmtPStr thread_name)} */
     public static native void nrmt_SetCurrentThreadName(long thread_name);
 
+    /** {@code void rmt_SetCurrentThreadName(rmtPStr thread_name)} */
     public static void rmt_SetCurrentThreadName(@NativeType("rmtPStr") ByteBuffer thread_name) {
         if (CHECKS) {
             checkNT1(thread_name);
@@ -369,6 +189,7 @@ public class Remotery {
         nrmt_SetCurrentThreadName(memAddress(thread_name));
     }
 
+    /** {@code void rmt_SetCurrentThreadName(rmtPStr thread_name)} */
     public static void rmt_SetCurrentThreadName(@NativeType("rmtPStr") CharSequence thread_name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -382,8 +203,10 @@ public class Remotery {
 
     // --- [ rmt_LogText ] ---
 
+    /** {@code void rmt_LogText(rmtPStr text)} */
     public static native void nrmt_LogText(long text);
 
+    /** {@code void rmt_LogText(rmtPStr text)} */
     public static void rmt_LogText(@NativeType("rmtPStr") ByteBuffer text) {
         if (CHECKS) {
             checkNT1(text);
@@ -391,6 +214,7 @@ public class Remotery {
         nrmt_LogText(memAddress(text));
     }
 
+    /** {@code void rmt_LogText(rmtPStr text)} */
     public static void rmt_LogText(@NativeType("rmtPStr") CharSequence text) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -404,18 +228,10 @@ public class Remotery {
 
     // --- [ rmt_BeginCPUSample ] ---
 
-    /** Unsafe version of: {@link #rmt_BeginCPUSample BeginCPUSample} */
+    /** {@code void rmt_BeginCPUSample(rmtPStr name, rmtU32 flags, rmtU32 * hash_cache)} */
     public static native void nrmt_BeginCPUSample(long name, int flags, long hash_cache);
 
-    /**
-     * @param flags      one of:<br><table><tr><td>{@link #RMTSF_None}</td><td>{@link #RMTSF_Aggregate}</td><td>{@link #RMTSF_Recursive}</td><td>{@link #RMTSF_Root}</td><td>{@link #RMTSF_SendOnClose}</td></tr></table>
-     * @param hash_cache Stores a pointer to a sample name's hash value.
-     *                   
-     *                   <p>Internally this is used to identify unique callstacks and it would be ideal that it's not recalculated each time the sample is used. This can be
-     *                   statically cached at the point of call or stored elsewhere when dynamic names are required.</p>
-     *                   
-     *                   <p>If {@code NULL} then this call becomes more expensive, as it has to recalculate the hash of the name.</p>
-     */
+    /** {@code void rmt_BeginCPUSample(rmtPStr name, rmtU32 flags, rmtU32 * hash_cache)} */
     public static void rmt_BeginCPUSample(@NativeType("rmtPStr") ByteBuffer name, @NativeType("rmtU32") int flags, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkNT1(name);
@@ -424,15 +240,7 @@ public class Remotery {
         nrmt_BeginCPUSample(memAddress(name), flags, memAddressSafe(hash_cache));
     }
 
-    /**
-     * @param flags      one of:<br><table><tr><td>{@link #RMTSF_None}</td><td>{@link #RMTSF_Aggregate}</td><td>{@link #RMTSF_Recursive}</td><td>{@link #RMTSF_Root}</td><td>{@link #RMTSF_SendOnClose}</td></tr></table>
-     * @param hash_cache Stores a pointer to a sample name's hash value.
-     *                   
-     *                   <p>Internally this is used to identify unique callstacks and it would be ideal that it's not recalculated each time the sample is used. This can be
-     *                   statically cached at the point of call or stored elsewhere when dynamic names are required.</p>
-     *                   
-     *                   <p>If {@code NULL} then this call becomes more expensive, as it has to recalculate the hash of the name.</p>
-     */
+    /** {@code void rmt_BeginCPUSample(rmtPStr name, rmtU32 flags, rmtU32 * hash_cache)} */
     public static void rmt_BeginCPUSample(@NativeType("rmtPStr") CharSequence name, @NativeType("rmtU32") int flags, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkSafe(hash_cache, 1);
@@ -449,43 +257,42 @@ public class Remotery {
 
     // --- [ rmt_EndCPUSample ] ---
 
+    /** {@code void rmt_EndCPUSample(void)} */
     public static native void rmt_EndCPUSample();
 
     // --- [ rmt_MarkFrame ] ---
 
-    /**
-     * Used for both CPU and GPU profiling.
-     * 
-     * <p>Essential to call this every frame, ever since D3D12/Vulkan support was added</p>
-     * 
-     * <p>D3D12/Vulkan Requirements: Don't sample any command lists that begin before this call and end after it</p>
-     */
+    /** {@code rmtError rmt_MarkFrame(void)} */
     @NativeType("rmtError")
     public static native int rmt_MarkFrame();
 
     // --- [ rmt_PropertySnapshotAll ] ---
 
-    /** Sends all properties and their values to the viewer and log to file. */
+    /** {@code rmtError rmt_PropertySnapshotAll(void)} */
     @NativeType("rmtError")
     public static native int rmt_PropertySnapshotAll();
 
     // --- [ rmt_PropertyFrameResetAll ] ---
 
-    /** Resets all {@link #RMT_PropertyFlags_FrameReset PropertyFlags_FrameReset} properties to their default value. */
+    /** {@code void rmt_PropertyFrameResetAll(void)} */
     public static native void rmt_PropertyFrameResetAll();
 
     // --- [ rmt_IterateChildren ] ---
 
+    /** {@code void rmt_IterateChildren(rmtSampleIterator * iter, rmtSample * sample)} */
     public static native void nrmt_IterateChildren(long iter, long sample);
 
+    /** {@code void rmt_IterateChildren(rmtSampleIterator * iter, rmtSample * sample)} */
     public static void rmt_IterateChildren(@NativeType("rmtSampleIterator *") RMTSampleIterator iter, @NativeType("rmtSample *") long sample) {
         nrmt_IterateChildren(iter.address(), sample);
     }
 
     // --- [ rmt_IterateNext ] ---
 
+    /** {@code rmtBool rmt_IterateNext(rmtSampleIterator * iter)} */
     public static native int nrmt_IterateNext(long iter);
 
+    /** {@code rmtBool rmt_IterateNext(rmtSampleIterator * iter)} */
     @NativeType("rmtBool")
     public static boolean rmt_IterateNext(@NativeType("rmtSampleIterator *") RMTSampleIterator iter) {
         return nrmt_IterateNext(iter.address()) != 0;
@@ -493,8 +300,10 @@ public class Remotery {
 
     // --- [ rmt_SampleTreeGetThreadName ] ---
 
+    /** {@code char const * rmt_SampleTreeGetThreadName(rmtSampleTree * sample_tree)} */
     public static native long nrmt_SampleTreeGetThreadName(long sample_tree);
 
+    /** {@code char const * rmt_SampleTreeGetThreadName(rmtSampleTree * sample_tree)} */
     @NativeType("char const *")
     public static @Nullable String rmt_SampleTreeGetThreadName(@NativeType("rmtSampleTree *") long sample_tree) {
         if (CHECKS) {
@@ -506,8 +315,10 @@ public class Remotery {
 
     // --- [ rmt_SampleTreeGetRootSample ] ---
 
+    /** {@code rmtSample * rmt_SampleTreeGetRootSample(rmtSampleTree * sample_tree)} */
     public static native long nrmt_SampleTreeGetRootSample(long sample_tree);
 
+    /** {@code rmtSample * rmt_SampleTreeGetRootSample(rmtSampleTree * sample_tree)} */
     @NativeType("rmtSample *")
     public static long rmt_SampleTreeGetRootSample(@NativeType("rmtSampleTree *") long sample_tree) {
         if (CHECKS) {
@@ -518,10 +329,10 @@ public class Remotery {
 
     // --- [ rmt_SampleGetName ] ---
 
-    /** Unsafe version of: {@link #rmt_SampleGetName SampleGetName} */
+    /** {@code char const * rmt_SampleGetName(rmtSample * sample)} */
     public static native long nrmt_SampleGetName(long sample);
 
-    /** Should only called from within the sample tree callback, when the internal string lookup table is valid (i.e. on the main Remotery thread). */
+    /** {@code char const * rmt_SampleGetName(rmtSample * sample)} */
     @NativeType("char const *")
     public static @Nullable String rmt_SampleGetName(@NativeType("rmtSample *") long sample) {
         if (CHECKS) {
@@ -533,8 +344,10 @@ public class Remotery {
 
     // --- [ rmt_SampleGetNameHash ] ---
 
+    /** {@code rmtU32 rmt_SampleGetNameHash(rmtSample * sample)} */
     public static native int nrmt_SampleGetNameHash(long sample);
 
+    /** {@code rmtU32 rmt_SampleGetNameHash(rmtSample * sample)} */
     @NativeType("rmtU32")
     public static int rmt_SampleGetNameHash(@NativeType("rmtSample *") long sample) {
         if (CHECKS) {
@@ -545,8 +358,10 @@ public class Remotery {
 
     // --- [ rmt_SampleGetCallCount ] ---
 
+    /** {@code rmtU32 rmt_SampleGetCallCount(rmtSample * sample)} */
     public static native int nrmt_SampleGetCallCount(long sample);
 
+    /** {@code rmtU32 rmt_SampleGetCallCount(rmtSample * sample)} */
     @NativeType("rmtU32")
     public static int rmt_SampleGetCallCount(@NativeType("rmtSample *") long sample) {
         if (CHECKS) {
@@ -557,8 +372,10 @@ public class Remotery {
 
     // --- [ rmt_SampleGetStart ] ---
 
+    /** {@code rmtU64 rmt_SampleGetStart(rmtSample * sample)} */
     public static native long nrmt_SampleGetStart(long sample);
 
+    /** {@code rmtU64 rmt_SampleGetStart(rmtSample * sample)} */
     @NativeType("rmtU64")
     public static long rmt_SampleGetStart(@NativeType("rmtSample *") long sample) {
         if (CHECKS) {
@@ -569,8 +386,10 @@ public class Remotery {
 
     // --- [ rmt_SampleGetTime ] ---
 
+    /** {@code rmtU64 rmt_SampleGetTime(rmtSample * sample)} */
     public static native long nrmt_SampleGetTime(long sample);
 
+    /** {@code rmtU64 rmt_SampleGetTime(rmtSample * sample)} */
     @NativeType("rmtU64")
     public static long rmt_SampleGetTime(@NativeType("rmtSample *") long sample) {
         if (CHECKS) {
@@ -581,8 +400,10 @@ public class Remotery {
 
     // --- [ rmt_SampleGetSelfTime ] ---
 
+    /** {@code rmtU64 rmt_SampleGetSelfTime(rmtSample * sample)} */
     public static native long nrmt_SampleGetSelfTime(long sample);
 
+    /** {@code rmtU64 rmt_SampleGetSelfTime(rmtSample * sample)} */
     @NativeType("rmtU64")
     public static long rmt_SampleGetSelfTime(@NativeType("rmtSample *") long sample) {
         if (CHECKS) {
@@ -593,8 +414,10 @@ public class Remotery {
 
     // --- [ rmt_SampleGetColour ] ---
 
+    /** {@code void rmt_SampleGetColour(rmtSample * sample, rmtU8 * r, rmtU8 * g, rmtU8 * b)} */
     public static native void nrmt_SampleGetColour(long sample, long r, long g, long b);
 
+    /** {@code void rmt_SampleGetColour(rmtSample * sample, rmtU8 * r, rmtU8 * g, rmtU8 * b)} */
     public static void rmt_SampleGetColour(@NativeType("rmtSample *") long sample, @NativeType("rmtU8 *") ByteBuffer r, @NativeType("rmtU8 *") ByteBuffer g, @NativeType("rmtU8 *") ByteBuffer b) {
         if (CHECKS) {
             check(sample);
@@ -607,8 +430,10 @@ public class Remotery {
 
     // --- [ rmt_SampleGetType ] ---
 
+    /** {@code rmtSampleType rmt_SampleGetType(rmtSample * sample)} */
     public static native int nrmt_SampleGetType(long sample);
 
+    /** {@code rmtSampleType rmt_SampleGetType(rmtSample * sample)} */
     @NativeType("rmtSampleType")
     public static int rmt_SampleGetType(@NativeType("rmtSample *") long sample) {
         if (CHECKS) {
@@ -619,16 +444,20 @@ public class Remotery {
 
     // --- [ rmt_PropertyIterateChildren ] ---
 
+    /** {@code void rmt_PropertyIterateChildren(rmtPropertyIterator * iter, rmtProperty * sample)} */
     public static native void nrmt_PropertyIterateChildren(long iter, long sample);
 
+    /** {@code void rmt_PropertyIterateChildren(rmtPropertyIterator * iter, rmtProperty * sample)} */
     public static void rmt_PropertyIterateChildren(@NativeType("rmtPropertyIterator *") RMTPropertyIterator iter, @NativeType("rmtProperty *") @Nullable RMTProperty sample) {
         nrmt_PropertyIterateChildren(iter.address(), memAddressSafe(sample));
     }
 
     // --- [ rmt_PropertyIterateNext ] ---
 
+    /** {@code rmtBool rmt_PropertyIterateNext(rmtPropertyIterator * iter)} */
     public static native int nrmt_PropertyIterateNext(long iter);
 
+    /** {@code rmtBool rmt_PropertyIterateNext(rmtPropertyIterator * iter)} */
     @NativeType("rmtBool")
     public static boolean rmt_PropertyIterateNext(@NativeType("rmtPropertyIterator *") RMTPropertyIterator iter) {
         return nrmt_PropertyIterateNext(iter.address()) != 0;
@@ -636,8 +465,10 @@ public class Remotery {
 
     // --- [ rmt_PropertyGetType ] ---
 
+    /** {@code rmtPropertyType rmt_PropertyGetType(rmtProperty * property)} */
     public static native int nrmt_PropertyGetType(long property);
 
+    /** {@code rmtPropertyType rmt_PropertyGetType(rmtProperty * property)} */
     @NativeType("rmtPropertyType")
     public static int rmt_PropertyGetType(@NativeType("rmtProperty *") RMTProperty property) {
         return nrmt_PropertyGetType(property.address());
@@ -645,8 +476,10 @@ public class Remotery {
 
     // --- [ rmt_PropertyGetName ] ---
 
+    /** {@code char const * rmt_PropertyGetName(rmtProperty * property)} */
     public static native long nrmt_PropertyGetName(long property);
 
+    /** {@code char const * rmt_PropertyGetName(rmtProperty * property)} */
     @NativeType("char const *")
     public static @Nullable String rmt_PropertyGetName(@NativeType("rmtProperty *") RMTProperty property) {
         long __result = nrmt_PropertyGetName(property.address());
@@ -655,8 +488,10 @@ public class Remotery {
 
     // --- [ rmt_PropertyGetDescription ] ---
 
+    /** {@code char const * rmt_PropertyGetDescription(rmtProperty * property)} */
     public static native long nrmt_PropertyGetDescription(long property);
 
+    /** {@code char const * rmt_PropertyGetDescription(rmtProperty * property)} */
     @NativeType("char const *")
     public static @Nullable String rmt_PropertyGetDescription(@NativeType("rmtProperty *") RMTProperty property) {
         long __result = nrmt_PropertyGetDescription(property.address());
@@ -665,8 +500,10 @@ public class Remotery {
 
     // --- [ rmt_PropertyGetValue ] ---
 
+    /** {@code rmtPropertyValue rmt_PropertyGetValue(rmtProperty * property)} */
     public static native void nrmt_PropertyGetValue(long property, long __result);
 
+    /** {@code rmtPropertyValue rmt_PropertyGetValue(rmtProperty * property)} */
     @NativeType("rmtPropertyValue")
     public static RMTPropertyValue rmt_PropertyGetValue(@NativeType("rmtProperty *") RMTProperty property, @NativeType("rmtPropertyValue") RMTPropertyValue __result) {
         nrmt_PropertyGetValue(property.address(), __result.address());
@@ -675,24 +512,30 @@ public class Remotery {
 
     // --- [ _rmt_PropertySetValue ] ---
 
+    /** {@code void _rmt_PropertySetValue(rmtProperty * property)} */
     public static native void n_rmt_PropertySetValue(long property);
 
+    /** {@code void _rmt_PropertySetValue(rmtProperty * property)} */
     public static void _rmt_PropertySetValue(@NativeType("rmtProperty *") RMTProperty property) {
         n_rmt_PropertySetValue(property.address());
     }
 
     // --- [ _rmt_PropertyAddValue ] ---
 
+    /** {@code void _rmt_PropertyAddValue(rmtProperty * property, rmtPropertyValue add_value)} */
     public static native void n_rmt_PropertyAddValue(long property, long add_value);
 
+    /** {@code void _rmt_PropertyAddValue(rmtProperty * property, rmtPropertyValue add_value)} */
     public static void _rmt_PropertyAddValue(@NativeType("rmtProperty *") RMTProperty property, @NativeType("rmtPropertyValue") RMTPropertyValue add_value) {
         n_rmt_PropertyAddValue(property.address(), add_value.address());
     }
 
     // --- [ _rmt_HashString32 ] ---
 
+    /** {@code rmtU32 _rmt_HashString32(char const * s, int len, rmtU32 seed)} */
     public static native int n_rmt_HashString32(long s, int len, int seed);
 
+    /** {@code rmtU32 _rmt_HashString32(char const * s, int len, rmtU32 seed)} */
     @NativeType("rmtU32")
     public static int _rmt_HashString32(@NativeType("char const *") ByteBuffer s, int len, @NativeType("rmtU32") int seed) {
         if (CHECKS) {
@@ -701,6 +544,7 @@ public class Remotery {
         return n_rmt_HashString32(memAddress(s), len, seed);
     }
 
+    /** {@code rmtU32 _rmt_HashString32(char const * s, int len, rmtU32 seed)} */
     @NativeType("rmtU32")
     public static int _rmt_HashString32(@NativeType("char const *") CharSequence s, int len, @NativeType("rmtU32") int seed) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();

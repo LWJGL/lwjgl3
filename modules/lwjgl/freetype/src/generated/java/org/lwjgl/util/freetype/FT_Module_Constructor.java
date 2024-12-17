@@ -11,14 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     FT_Module module
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Module_Constructor} */
 public abstract class FT_Module_Constructor extends Callback implements FT_Module_ConstructorI {
 
     /**

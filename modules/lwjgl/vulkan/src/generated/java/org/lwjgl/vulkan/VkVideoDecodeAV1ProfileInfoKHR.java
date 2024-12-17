@@ -18,30 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifying AV1 decode profile.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Enabling {@code filmGrainSupport} <b>may</b> increase the memory requirements of video sessions and/or video picture resources on some implementations.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoDecodeAV1ProfileInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     StdVideoAV1Profile {@link #stdProfile};
- *     VkBool32 {@link #filmGrainSupport};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     StdVideoAV1Profile stdProfile;
+ *     VkBool32 filmGrainSupport;
+ * }}</pre>
  */
 public class VkVideoDecodeAV1ProfileInfoKHR extends Struct<VkVideoDecodeAV1ProfileInfoKHR> implements NativeResource {
 
@@ -97,28 +80,28 @@ public class VkVideoDecodeAV1ProfileInfoKHR extends Struct<VkVideoDecodeAV1Profi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code StdVideoAV1Profile} value specifying the AV1 codec profile, as defined in section A.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
+    /** @return the value of the {@code stdProfile} field. */
     @NativeType("StdVideoAV1Profile")
     public int stdProfile() { return nstdProfile(address()); }
-    /** specifies whether AV1 film grain, as defined in section 7.8.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>, <b>can</b> be used with the video profile. When this member is {@link VK10#VK_TRUE TRUE}, video session objects created against the video profile will be able to decode pictures that have <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-film-grain">film grain</a> enabled. */
+    /** @return the value of the {@code filmGrainSupport} field. */
     @NativeType("VkBool32")
     public boolean filmGrainSupport() { return nfilmGrainSupport(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeAV1ProfileInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoDecodeAV1ProfileInfoKHR sType$Default() { return sType(KHRVideoDecodeAV1.VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeAV1ProfileInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #stdProfile} field. */
+    /** Sets the specified value to the {@code stdProfile} field. */
     public VkVideoDecodeAV1ProfileInfoKHR stdProfile(@NativeType("StdVideoAV1Profile") int value) { nstdProfile(address(), value); return this; }
-    /** Sets the specified value to the {@link #filmGrainSupport} field. */
+    /** Sets the specified value to the {@code filmGrainSupport} field. */
     public VkVideoDecodeAV1ProfileInfoKHR filmGrainSupport(@NativeType("VkBool32") boolean value) { nfilmGrainSupport(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,28 +303,28 @@ public class VkVideoDecodeAV1ProfileInfoKHR extends Struct<VkVideoDecodeAV1Profi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoDecodeAV1ProfileInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeAV1ProfileInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoDecodeAV1ProfileInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoDecodeAV1ProfileInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoDecodeAV1ProfileInfoKHR#stdProfile} field. */
+        /** @return the value of the {@code stdProfile} field. */
         @NativeType("StdVideoAV1Profile")
         public int stdProfile() { return VkVideoDecodeAV1ProfileInfoKHR.nstdProfile(address()); }
-        /** @return the value of the {@link VkVideoDecodeAV1ProfileInfoKHR#filmGrainSupport} field. */
+        /** @return the value of the {@code filmGrainSupport} field. */
         @NativeType("VkBool32")
         public boolean filmGrainSupport() { return VkVideoDecodeAV1ProfileInfoKHR.nfilmGrainSupport(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkVideoDecodeAV1ProfileInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeAV1ProfileInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeAV1ProfileInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR} value to the {@link VkVideoDecodeAV1ProfileInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoDecodeAV1ProfileInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeAV1.VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_PROFILE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoDecodeAV1ProfileInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeAV1ProfileInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeAV1ProfileInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoDecodeAV1ProfileInfoKHR#stdProfile} field. */
+        /** Sets the specified value to the {@code stdProfile} field. */
         public VkVideoDecodeAV1ProfileInfoKHR.Buffer stdProfile(@NativeType("StdVideoAV1Profile") int value) { VkVideoDecodeAV1ProfileInfoKHR.nstdProfile(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoDecodeAV1ProfileInfoKHR#filmGrainSupport} field. */
+        /** Sets the specified value to the {@code filmGrainSupport} field. */
         public VkVideoDecodeAV1ProfileInfoKHR.Buffer filmGrainSupport(@NativeType("VkBool32") boolean value) { VkVideoDecodeAV1ProfileInfoKHR.nfilmGrainSupport(address(), value ? 1 : 0); return this; }
 
     }

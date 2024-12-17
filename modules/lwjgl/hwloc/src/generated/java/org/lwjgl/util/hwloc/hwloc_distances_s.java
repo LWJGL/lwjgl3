@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_distances_s {
  *     unsigned int nbobjs;
  *     hwloc_obj_t * objs;
  *     unsigned long kind;
  *     hwloc_uint64_t * values;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct hwloc_distances_s")
 public class hwloc_distances_s extends Struct<hwloc_distances_s> implements NativeResource {

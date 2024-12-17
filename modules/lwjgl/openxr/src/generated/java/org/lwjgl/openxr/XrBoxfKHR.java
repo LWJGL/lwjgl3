@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrBoxf}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBoxfKHR {
  *     {@link XrPosef XrPosef} center;
  *     {@link XrExtent3Df XrExtent3Df} extents;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrBoxfKHR extends XrBoxf {
 

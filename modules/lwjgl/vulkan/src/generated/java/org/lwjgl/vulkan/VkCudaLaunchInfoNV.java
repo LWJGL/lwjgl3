@@ -16,59 +16,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters to launch a CUDA kernel.
- * 
- * <h5>Description</h5>
- * 
- * <p>Kernel parameters of {@code function} are specified via {@code pParams}, very much the same way as described in <a href="https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__EXEC.html#group__CUDA__EXEC_1gb8f3dc3031b40da29d5f9a7139e52e15">cuLaunchKernel</a></p>
- * 
- * <p>If {@code function} has N parameters, then {@code pParams} <b>must</b> be an array of N pointers and {@code paramCount} <b>must</b> be N. Each of {@code kernelParams}[0] through {@code kernelParams}[N-1] <b>must</b> point to a region of memory from which the actual kernel parameter will be copied. The number of kernel parameters and their offsets and sizes are not specified here as that information is stored in the {@code VkCudaFunctionNV} object.</p>
- * 
- * <p>The application-owned memory pointed to by {@code pParams} and {@code kernelParams}[0] through {@code kernelParams}[N-1] are consumed immediately, and <b>may</b> be altered or freed after {@link NVCudaKernelLaunch#vkCmdCudaLaunchKernelNV CmdCudaLaunchKernelNV} has returned.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code gridDimX} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0]</li>
- * <li>{@code gridDimY} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1]</li>
- * <li>{@code gridDimZ} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2]</li>
- * <li>{@code paramCount} <b>must</b> be the total amount of parameters listed in the {@code pParams} table</li>
- * <li>{@code pParams} <b>must</b> be a pointer to a table of {@code paramCount} parameters, corresponding to the arguments of {@code function}</li>
- * <li>{@code extraCount} <b>must</b> be 0</li>
- * <li>{@code pExtras} <b>must</b> be NULL</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code function} <b>must</b> be a valid {@code VkCudaFunctionNV} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVCudaKernelLaunch#vkCmdCudaLaunchKernelNV CmdCudaLaunchKernelNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCudaLaunchInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkCudaFunctionNV {@link #function};
- *     uint32_t {@link #gridDimX};
- *     uint32_t {@link #gridDimY};
- *     uint32_t {@link #gridDimZ};
- *     uint32_t {@link #blockDimX};
- *     uint32_t {@link #blockDimY};
- *     uint32_t {@link #blockDimZ};
- *     uint32_t {@link #sharedMemBytes};
- *     size_t {@link #paramCount};
- *     void const * const * {@link #pParams};
- *     size_t {@link #extraCount};
- *     void const * const * {@link #pExtras};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkCudaFunctionNV function;
+ *     uint32_t gridDimX;
+ *     uint32_t gridDimY;
+ *     uint32_t gridDimZ;
+ *     uint32_t blockDimX;
+ *     uint32_t blockDimY;
+ *     uint32_t blockDimZ;
+ *     uint32_t sharedMemBytes;
+ *     size_t paramCount;
+ *     void const * const * pParams;
+ *     size_t extraCount;
+ *     void const * const * pExtras;
+ * }}</pre>
  */
 public class VkCudaLaunchInfoNV extends Struct<VkCudaLaunchInfoNV> implements NativeResource {
 
@@ -154,78 +118,78 @@ public class VkCudaLaunchInfoNV extends Struct<VkCudaLaunchInfoNV> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the CUDA-Driver handle to the function being launched. */
+    /** @return the value of the {@code function} field. */
     @NativeType("VkCudaFunctionNV")
     public long function() { return nfunction(address()); }
-    /** the number of local workgroups to dispatch in the X dimension. It <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[0] */
+    /** @return the value of the {@code gridDimX} field. */
     @NativeType("uint32_t")
     public int gridDimX() { return ngridDimX(address()); }
-    /** the number of local workgroups to dispatch in the Y dimension. It <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[1] */
+    /** @return the value of the {@code gridDimY} field. */
     @NativeType("uint32_t")
     public int gridDimY() { return ngridDimY(address()); }
-    /** the number of local workgroups to dispatch in the Z dimension. It <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxComputeWorkGroupCount}[2] */
+    /** @return the value of the {@code gridDimZ} field. */
     @NativeType("uint32_t")
     public int gridDimZ() { return ngridDimZ(address()); }
-    /** block size in the X dimension. */
+    /** @return the value of the {@code blockDimX} field. */
     @NativeType("uint32_t")
     public int blockDimX() { return nblockDimX(address()); }
-    /** block size in the Y dimension. */
+    /** @return the value of the {@code blockDimY} field. */
     @NativeType("uint32_t")
     public int blockDimY() { return nblockDimY(address()); }
-    /** block size in the Z dimension. */
+    /** @return the value of the {@code blockDimZ} field. */
     @NativeType("uint32_t")
     public int blockDimZ() { return nblockDimZ(address()); }
-    /** the dynamic shared-memory size per thread block in bytes. */
+    /** @return the value of the {@code sharedMemBytes} field. */
     @NativeType("uint32_t")
     public int sharedMemBytes() { return nsharedMemBytes(address()); }
-    /** the length of the {@code pParams} table. */
+    /** @return the value of the {@code paramCount} field. */
     @NativeType("size_t")
     public long paramCount() { return nparamCount(address()); }
-    /** a pointer to an array of {@code paramCount} pointers, corresponding to the arguments of {@code function}. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code pParams} field. */
     @NativeType("void const * const *")
     public @Nullable PointerBuffer pParams() { return npParams(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code extraCount} field. */
     @NativeType("size_t")
     public long extraCount() { return nextraCount(address()); }
-    /** reserved for future use. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code pExtras} field. */
     @NativeType("void const * const *")
     public @Nullable PointerBuffer pExtras() { return npExtras(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCudaLaunchInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV} value to the {@code sType} field. */
     public VkCudaLaunchInfoNV sType$Default() { return sType(NVCudaKernelLaunch.VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCudaLaunchInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #function} field. */
+    /** Sets the specified value to the {@code function} field. */
     public VkCudaLaunchInfoNV function(@NativeType("VkCudaFunctionNV") long value) { nfunction(address(), value); return this; }
-    /** Sets the specified value to the {@link #gridDimX} field. */
+    /** Sets the specified value to the {@code gridDimX} field. */
     public VkCudaLaunchInfoNV gridDimX(@NativeType("uint32_t") int value) { ngridDimX(address(), value); return this; }
-    /** Sets the specified value to the {@link #gridDimY} field. */
+    /** Sets the specified value to the {@code gridDimY} field. */
     public VkCudaLaunchInfoNV gridDimY(@NativeType("uint32_t") int value) { ngridDimY(address(), value); return this; }
-    /** Sets the specified value to the {@link #gridDimZ} field. */
+    /** Sets the specified value to the {@code gridDimZ} field. */
     public VkCudaLaunchInfoNV gridDimZ(@NativeType("uint32_t") int value) { ngridDimZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #blockDimX} field. */
+    /** Sets the specified value to the {@code blockDimX} field. */
     public VkCudaLaunchInfoNV blockDimX(@NativeType("uint32_t") int value) { nblockDimX(address(), value); return this; }
-    /** Sets the specified value to the {@link #blockDimY} field. */
+    /** Sets the specified value to the {@code blockDimY} field. */
     public VkCudaLaunchInfoNV blockDimY(@NativeType("uint32_t") int value) { nblockDimY(address(), value); return this; }
-    /** Sets the specified value to the {@link #blockDimZ} field. */
+    /** Sets the specified value to the {@code blockDimZ} field. */
     public VkCudaLaunchInfoNV blockDimZ(@NativeType("uint32_t") int value) { nblockDimZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #sharedMemBytes} field. */
+    /** Sets the specified value to the {@code sharedMemBytes} field. */
     public VkCudaLaunchInfoNV sharedMemBytes(@NativeType("uint32_t") int value) { nsharedMemBytes(address(), value); return this; }
-    /** Sets the specified value to the {@link #paramCount} field. */
+    /** Sets the specified value to the {@code paramCount} field. */
     public VkCudaLaunchInfoNV paramCount(@NativeType("size_t") long value) { nparamCount(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #pParams} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code pParams} field. */
     public VkCudaLaunchInfoNV pParams(@Nullable @NativeType("void const * const *") PointerBuffer value) { npParams(address(), value); return this; }
-    /** Sets the specified value to the {@link #extraCount} field. */
+    /** Sets the specified value to the {@code extraCount} field. */
     public VkCudaLaunchInfoNV extraCount(@NativeType("size_t") long value) { nextraCount(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #pExtras} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code pExtras} field. */
     public VkCudaLaunchInfoNV pExtras(@Nullable @NativeType("void const * const *") PointerBuffer value) { npExtras(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -487,78 +451,78 @@ public class VkCudaLaunchInfoNV extends Struct<VkCudaLaunchInfoNV> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCudaLaunchInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCudaLaunchInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCudaLaunchInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#function} field. */
+        /** @return the value of the {@code function} field. */
         @NativeType("VkCudaFunctionNV")
         public long function() { return VkCudaLaunchInfoNV.nfunction(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#gridDimX} field. */
+        /** @return the value of the {@code gridDimX} field. */
         @NativeType("uint32_t")
         public int gridDimX() { return VkCudaLaunchInfoNV.ngridDimX(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#gridDimY} field. */
+        /** @return the value of the {@code gridDimY} field. */
         @NativeType("uint32_t")
         public int gridDimY() { return VkCudaLaunchInfoNV.ngridDimY(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#gridDimZ} field. */
+        /** @return the value of the {@code gridDimZ} field. */
         @NativeType("uint32_t")
         public int gridDimZ() { return VkCudaLaunchInfoNV.ngridDimZ(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#blockDimX} field. */
+        /** @return the value of the {@code blockDimX} field. */
         @NativeType("uint32_t")
         public int blockDimX() { return VkCudaLaunchInfoNV.nblockDimX(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#blockDimY} field. */
+        /** @return the value of the {@code blockDimY} field. */
         @NativeType("uint32_t")
         public int blockDimY() { return VkCudaLaunchInfoNV.nblockDimY(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#blockDimZ} field. */
+        /** @return the value of the {@code blockDimZ} field. */
         @NativeType("uint32_t")
         public int blockDimZ() { return VkCudaLaunchInfoNV.nblockDimZ(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#sharedMemBytes} field. */
+        /** @return the value of the {@code sharedMemBytes} field. */
         @NativeType("uint32_t")
         public int sharedMemBytes() { return VkCudaLaunchInfoNV.nsharedMemBytes(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#paramCount} field. */
+        /** @return the value of the {@code paramCount} field. */
         @NativeType("size_t")
         public long paramCount() { return VkCudaLaunchInfoNV.nparamCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkCudaLaunchInfoNV#pParams} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code pParams} field. */
         @NativeType("void const * const *")
         public @Nullable PointerBuffer pParams() { return VkCudaLaunchInfoNV.npParams(address()); }
-        /** @return the value of the {@link VkCudaLaunchInfoNV#extraCount} field. */
+        /** @return the value of the {@code extraCount} field. */
         @NativeType("size_t")
         public long extraCount() { return VkCudaLaunchInfoNV.nextraCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkCudaLaunchInfoNV#pExtras} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code pExtras} field. */
         @NativeType("void const * const *")
         public @Nullable PointerBuffer pExtras() { return VkCudaLaunchInfoNV.npExtras(address()); }
 
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCudaLaunchInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkCudaLaunchInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV} value to the {@link VkCudaLaunchInfoNV#sType} field. */
+        /** Sets the {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV} value to the {@code sType} field. */
         public VkCudaLaunchInfoNV.Buffer sType$Default() { return sType(NVCudaKernelLaunch.VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV); }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCudaLaunchInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkCudaLaunchInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#function} field. */
+        /** Sets the specified value to the {@code function} field. */
         public VkCudaLaunchInfoNV.Buffer function(@NativeType("VkCudaFunctionNV") long value) { VkCudaLaunchInfoNV.nfunction(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#gridDimX} field. */
+        /** Sets the specified value to the {@code gridDimX} field. */
         public VkCudaLaunchInfoNV.Buffer gridDimX(@NativeType("uint32_t") int value) { VkCudaLaunchInfoNV.ngridDimX(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#gridDimY} field. */
+        /** Sets the specified value to the {@code gridDimY} field. */
         public VkCudaLaunchInfoNV.Buffer gridDimY(@NativeType("uint32_t") int value) { VkCudaLaunchInfoNV.ngridDimY(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#gridDimZ} field. */
+        /** Sets the specified value to the {@code gridDimZ} field. */
         public VkCudaLaunchInfoNV.Buffer gridDimZ(@NativeType("uint32_t") int value) { VkCudaLaunchInfoNV.ngridDimZ(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#blockDimX} field. */
+        /** Sets the specified value to the {@code blockDimX} field. */
         public VkCudaLaunchInfoNV.Buffer blockDimX(@NativeType("uint32_t") int value) { VkCudaLaunchInfoNV.nblockDimX(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#blockDimY} field. */
+        /** Sets the specified value to the {@code blockDimY} field. */
         public VkCudaLaunchInfoNV.Buffer blockDimY(@NativeType("uint32_t") int value) { VkCudaLaunchInfoNV.nblockDimY(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#blockDimZ} field. */
+        /** Sets the specified value to the {@code blockDimZ} field. */
         public VkCudaLaunchInfoNV.Buffer blockDimZ(@NativeType("uint32_t") int value) { VkCudaLaunchInfoNV.nblockDimZ(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#sharedMemBytes} field. */
+        /** Sets the specified value to the {@code sharedMemBytes} field. */
         public VkCudaLaunchInfoNV.Buffer sharedMemBytes(@NativeType("uint32_t") int value) { VkCudaLaunchInfoNV.nsharedMemBytes(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#paramCount} field. */
+        /** Sets the specified value to the {@code paramCount} field. */
         public VkCudaLaunchInfoNV.Buffer paramCount(@NativeType("size_t") long value) { VkCudaLaunchInfoNV.nparamCount(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkCudaLaunchInfoNV#pParams} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code pParams} field. */
         public VkCudaLaunchInfoNV.Buffer pParams(@Nullable @NativeType("void const * const *") PointerBuffer value) { VkCudaLaunchInfoNV.npParams(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCudaLaunchInfoNV#extraCount} field. */
+        /** Sets the specified value to the {@code extraCount} field. */
         public VkCudaLaunchInfoNV.Buffer extraCount(@NativeType("size_t") long value) { VkCudaLaunchInfoNV.nextraCount(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkCudaLaunchInfoNV#pExtras} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code pExtras} field. */
         public VkCudaLaunchInfoNV.Buffer pExtras(@Nullable @NativeType("void const * const *") PointerBuffer value) { VkCudaLaunchInfoNV.npExtras(address(), value); return this; }
 
     }

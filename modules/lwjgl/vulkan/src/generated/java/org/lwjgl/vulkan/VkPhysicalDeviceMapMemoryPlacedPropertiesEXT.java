@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the alignment requirements of placed memory maps for a physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMapMemoryPlacedPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMapMemoryPlaced#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMapMemoryPlacedPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkDeviceSize {@link #minPlacedMemoryMapAlignment};
- * }</code></pre>
+ *     VkDeviceSize minPlacedMemoryMapAlignment;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMapMemoryPlacedPropertiesEXT extends Struct<VkPhysicalDeviceMapMemoryPlacedPropertiesEXT> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceMapMemoryPlacedPropertiesEXT extends Struct<VkPhysi
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the minimum alignment required for memory object offsets and virtual address ranges when using placed memory mapping. */
+    /** @return the value of the {@code minPlacedMemoryMapAlignment} field. */
     @NativeType("VkDeviceSize")
     public long minPlacedMemoryMapAlignment() { return nminPlacedMemoryMapAlignment(address()); }
 
@@ -300,7 +286,7 @@ public class VkPhysicalDeviceMapMemoryPlacedPropertiesEXT extends Struct<VkPhysi
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMapMemoryPlacedPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMapMemoryPlacedPropertiesEXT#minPlacedMemoryMapAlignment} field. */
+        /** @return the value of the {@code minPlacedMemoryMapAlignment} field. */
         @NativeType("VkDeviceSize")
         public long minPlacedMemoryMapAlignment() { return VkPhysicalDeviceMapMemoryPlacedPropertiesEXT.nminPlacedMemoryMapAlignment(address()); }
 

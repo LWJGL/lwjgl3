@@ -16,22 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Stub description of VkCuModuleTexturingModeCreateInfoNVX.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVXBinaryImport#VK_STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX STRUCTURE_TYPE_CU_MODULE_TEXTURING_MODE_CREATE_INFO_NVX}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCuModuleTexturingModeCreateInfoNVX {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBool32 use64bitTexturing;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkCuModuleTexturingModeCreateInfoNVX extends Struct<VkCuModuleTexturingModeCreateInfoNVX> implements NativeResource {
 

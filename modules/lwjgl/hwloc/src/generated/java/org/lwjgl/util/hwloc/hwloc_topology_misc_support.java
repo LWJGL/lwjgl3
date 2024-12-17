@@ -14,12 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_topology_misc_support {
  *     unsigned char imported_support;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct hwloc_topology_misc_support")
 public class hwloc_topology_misc_support extends Struct<hwloc_topology_misc_support> {

@@ -16,37 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying used video encode quality level.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure <b>can</b> be specified in the following places:</p>
- * 
- * <ul>
- * <li>In the {@code pNext} chain of {@link VkVideoSessionParametersCreateInfoKHR} to specify the video encode quality level to use for a video session parameters object created for a video encode session. If no instance of this structure is included in the {@code pNext} chain of {@link VkVideoSessionParametersCreateInfoKHR}, then the video session parameters object is created with a video encode quality level of zero.</li>
- * <li>In the {@code pNext} chain of {@link VkVideoCodingControlInfoKHR} to change the video encode quality level state of the bound video session.</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code qualityLevel} <b>must</b> be less than {@link VkVideoEncodeCapabilitiesKHR}{@code ::maxQualityLevels}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeQualityLevelInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #qualityLevel};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t qualityLevel;
+ * }}</pre>
  */
 public class VkVideoEncodeQualityLevelInfoKHR extends Struct<VkVideoEncodeQualityLevelInfoKHR> implements NativeResource {
 
@@ -99,23 +74,23 @@ public class VkVideoEncodeQualityLevelInfoKHR extends Struct<VkVideoEncodeQualit
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the used video encode quality level. */
+    /** @return the value of the {@code qualityLevel} field. */
     @NativeType("uint32_t")
     public int qualityLevel() { return nqualityLevel(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeQualityLevelInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeQualityLevelInfoKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeQualityLevelInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #qualityLevel} field. */
+    /** Sets the specified value to the {@code qualityLevel} field. */
     public VkVideoEncodeQualityLevelInfoKHR qualityLevel(@NativeType("uint32_t") int value) { nqualityLevel(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -311,23 +286,23 @@ public class VkVideoEncodeQualityLevelInfoKHR extends Struct<VkVideoEncodeQualit
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeQualityLevelInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeQualityLevelInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeQualityLevelInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeQualityLevelInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeQualityLevelInfoKHR#qualityLevel} field. */
+        /** @return the value of the {@code qualityLevel} field. */
         @NativeType("uint32_t")
         public int qualityLevel() { return VkVideoEncodeQualityLevelInfoKHR.nqualityLevel(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeQualityLevelInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeQualityLevelInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeQualityLevelInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR} value to the {@link VkVideoEncodeQualityLevelInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeQualityLevelInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUALITY_LEVEL_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeQualityLevelInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeQualityLevelInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeQualityLevelInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeQualityLevelInfoKHR#qualityLevel} field. */
+        /** Sets the specified value to the {@code qualityLevel} field. */
         public VkVideoEncodeQualityLevelInfoKHR.Buffer qualityLevel(@NativeType("uint32_t") int value) { VkVideoEncodeQualityLevelInfoKHR.nqualityLevel(address(), value); return this; }
 
     }

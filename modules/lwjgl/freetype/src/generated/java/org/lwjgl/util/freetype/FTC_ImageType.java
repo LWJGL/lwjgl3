@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to model the type of images in a glyph cache.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FTC_ImageTypeRec {
  *     FTC_FaceID face_id;
  *     FT_UInt width;
  *     FT_UInt height;
  *     FT_Int32 flags;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FTC_ImageTypeRec")
 public class FTC_ImageType extends Struct<FTC_ImageType> {

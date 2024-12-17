@@ -17,37 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Active action set priority numbers.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTActiveActionSetPriority XR_EXT_active_action_set_priority} extension <b>must</b> be enabled prior to using {@link XrActiveActionSetPrioritiesEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTActiveActionSetPriority#XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code actionSetPriorities} <b>must</b> be a pointer to an array of {@code actionSetPriorityCount} valid {@link XrActiveActionSetPriorityEXT} structures</li>
- * <li>The {@code actionSetPriorityCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <p>The runtime <b>must</b> ignore any priority numbers for action sets that were not specified as an active action set in the {@link XrActionsSyncInfo} structure as this would have no effect.</p>
- * 
- * <p>The priority numbers provided in {@link XrActiveActionSetPriorityEXT} <b>must</b> override the priority number of the active action set starting with the {@link XR10#xrSyncActions SyncActions} call it is provided to, until the first subsequent call to {@link XR10#xrSyncActions SyncActions}.</p>
- * 
- * <p>When a subsequent call is made to {@link XR10#xrSyncActions SyncActions} where an active action set does not have a corresponding priority number specified in the {@link XrActiveActionSetPriorityEXT} structure the priority number for that action set <b>must</b> revert back to the priority number provided in {@link XrActionSetCreateInfo} when that action set was created.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrActionsSyncInfo}, {@link XrActiveActionSetPriorityEXT}, {@link XR10#xrSyncActions SyncActions}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActiveActionSetPrioritiesEXT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #actionSetPriorityCount};
- *     {@link XrActiveActionSetPriorityEXT XrActiveActionSetPriorityEXT} const * {@link #actionSetPriorities};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t actionSetPriorityCount;
+ *     {@link XrActiveActionSetPriorityEXT XrActiveActionSetPriorityEXT} const * actionSetPriorities;
+ * }}</pre>
  */
 public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrioritiesEXT> implements NativeResource {
 
@@ -103,26 +79,26 @@ public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrio
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an integer specifying the number of valid elements in the actionSetPriorities array. */
+    /** @return the value of the {@code actionSetPriorityCount} field. */
     @NativeType("uint32_t")
     public int actionSetPriorityCount() { return nactionSetPriorityCount(address()); }
-    /** a pointer to an array that maps action sets to their active priority numbers. If an action set is specified multiple times, the runtime <b>may</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} from {@link XR10#xrSyncActions SyncActions}. */
+    /** @return a {@link XrActiveActionSetPriorityEXT.Buffer} view of the struct array pointed to by the {@code actionSetPriorities} field. */
     @NativeType("XrActiveActionSetPriorityEXT const *")
     public XrActiveActionSetPriorityEXT.Buffer actionSetPriorities() { return nactionSetPriorities(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrActiveActionSetPrioritiesEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTActiveActionSetPriority#XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTActiveActionSetPriority#XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT} value to the {@code type} field. */
     public XrActiveActionSetPrioritiesEXT type$Default() { return type(EXTActiveActionSetPriority.XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrActiveActionSetPrioritiesEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrActiveActionSetPriorityEXT.Buffer} to the {@link #actionSetPriorities} field. */
+    /** Sets the address of the specified {@link XrActiveActionSetPriorityEXT.Buffer} to the {@code actionSetPriorities} field. */
     public XrActiveActionSetPrioritiesEXT actionSetPriorities(@NativeType("XrActiveActionSetPriorityEXT const *") XrActiveActionSetPriorityEXT.Buffer value) { nactionSetPriorities(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,26 +310,26 @@ public class XrActiveActionSetPrioritiesEXT extends Struct<XrActiveActionSetPrio
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActiveActionSetPrioritiesEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActiveActionSetPrioritiesEXT.ntype(address()); }
-        /** @return the value of the {@link XrActiveActionSetPrioritiesEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActiveActionSetPrioritiesEXT.nnext(address()); }
-        /** @return the value of the {@link XrActiveActionSetPrioritiesEXT#actionSetPriorityCount} field. */
+        /** @return the value of the {@code actionSetPriorityCount} field. */
         @NativeType("uint32_t")
         public int actionSetPriorityCount() { return XrActiveActionSetPrioritiesEXT.nactionSetPriorityCount(address()); }
-        /** @return a {@link XrActiveActionSetPriorityEXT.Buffer} view of the struct array pointed to by the {@link XrActiveActionSetPrioritiesEXT#actionSetPriorities} field. */
+        /** @return a {@link XrActiveActionSetPriorityEXT.Buffer} view of the struct array pointed to by the {@code actionSetPriorities} field. */
         @NativeType("XrActiveActionSetPriorityEXT const *")
         public XrActiveActionSetPriorityEXT.Buffer actionSetPriorities() { return XrActiveActionSetPrioritiesEXT.nactionSetPriorities(address()); }
 
-        /** Sets the specified value to the {@link XrActiveActionSetPrioritiesEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrActiveActionSetPrioritiesEXT.Buffer type(@NativeType("XrStructureType") int value) { XrActiveActionSetPrioritiesEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTActiveActionSetPriority#XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT} value to the {@link XrActiveActionSetPrioritiesEXT#type} field. */
+        /** Sets the {@link EXTActiveActionSetPriority#XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT} value to the {@code type} field. */
         public XrActiveActionSetPrioritiesEXT.Buffer type$Default() { return type(EXTActiveActionSetPriority.XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT); }
-        /** Sets the specified value to the {@link XrActiveActionSetPrioritiesEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrActiveActionSetPrioritiesEXT.Buffer next(@NativeType("void const *") long value) { XrActiveActionSetPrioritiesEXT.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrActiveActionSetPriorityEXT.Buffer} to the {@link XrActiveActionSetPrioritiesEXT#actionSetPriorities} field. */
+        /** Sets the address of the specified {@link XrActiveActionSetPriorityEXT.Buffer} to the {@code actionSetPriorities} field. */
         public XrActiveActionSetPrioritiesEXT.Buffer actionSetPriorities(@NativeType("XrActiveActionSetPriorityEXT const *") XrActiveActionSetPriorityEXT.Buffer value) { XrActiveActionSetPrioritiesEXT.nactionSetPriorities(address(), value); return this; }
 
     }

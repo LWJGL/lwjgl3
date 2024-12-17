@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Type to wrap a single object returned by {@code ThinLTO}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LTOObjectBuffer {
  *     char const * Buffer;
  *     size_t Size;
- * }</code></pre>
+ * }}</pre>
  */
 public class LTOObjectBuffer extends Struct<LTOObjectBuffer> implements NativeResource {
 

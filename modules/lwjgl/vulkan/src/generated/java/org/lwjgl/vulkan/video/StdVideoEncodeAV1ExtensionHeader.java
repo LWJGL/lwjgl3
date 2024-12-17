@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeAV1ExtensionHeader {
  *     uint8_t temporal_id;
  *     uint8_t spatial_id;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeAV1ExtensionHeader extends Struct<StdVideoEncodeAV1ExtensionHeader> implements NativeResource {
 

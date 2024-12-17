@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_rect {
  *     float x;
  *     float y;
  *     float w;
  *     float h;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_rect")
 public class NkRect extends Struct<NkRect> implements NativeResource {

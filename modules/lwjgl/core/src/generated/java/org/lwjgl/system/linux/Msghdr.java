@@ -17,18 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct msghdr {
- *     void * {@link #msg_name};
- *     socklen_t {@link #msg_namelen};
- *     {@link IOVec struct iovec} * {@link #msg_iov};
- *     size_t {@link #msg_iovlen};
- *     void * {@link #msg_control};
- *     size_t {@link #msg_controllen};
- *     int {@link #msg_flags};
- * }</code></pre>
+ *     void * msg_name;
+ *     socklen_t msg_namelen;
+ *     {@link IOVec struct iovec} * msg_iov;
+ *     size_t msg_iovlen;
+ *     void * msg_control;
+ *     size_t msg_controllen;
+ *     int msg_flags;
+ * }}</pre>
  */
 @NativeType("struct msghdr")
 public class Msghdr extends Struct<Msghdr> implements NativeResource {
@@ -94,34 +92,34 @@ public class Msghdr extends Struct<Msghdr> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** address to send to/receive from */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code msg_name} field. */
     @NativeType("void *")
     public ByteBuffer msg_name() { return nmsg_name(address()); }
-    /** length of {@code address} data */
+    /** @return the value of the {@code msg_namelen} field. */
     @NativeType("socklen_t")
     public int msg_namelen() { return nmsg_namelen(address()); }
-    /** vector of data to send/receive into */
+    /** @return a {@link IOVec.Buffer} view of the struct array pointed to by the {@code msg_iov} field. */
     @NativeType("struct iovec *")
     public IOVec.Buffer msg_iov() { return nmsg_iov(address()); }
-    /** number of elements in the vector */
+    /** @return the value of the {@code msg_iovlen} field. */
     @NativeType("size_t")
     public long msg_iovlen() { return nmsg_iovlen(address()); }
-    /** ancillary data (eg BSD filedesc passing) */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code msg_control} field. */
     @NativeType("void *")
     public ByteBuffer msg_control() { return nmsg_control(address()); }
-    /** ancillary data buffer length */
+    /** @return the value of the {@code msg_controllen} field. */
     @NativeType("size_t")
     public long msg_controllen() { return nmsg_controllen(address()); }
-    /** flags on received message */
+    /** @return the value of the {@code msg_flags} field. */
     public int msg_flags() { return nmsg_flags(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #msg_name} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code msg_name} field. */
     public Msghdr msg_name(@NativeType("void *") ByteBuffer value) { nmsg_name(address(), value); return this; }
-    /** Sets the address of the specified {@link IOVec.Buffer} to the {@link #msg_iov} field. */
+    /** Sets the address of the specified {@link IOVec.Buffer} to the {@code msg_iov} field. */
     public Msghdr msg_iov(@NativeType("struct iovec *") IOVec.Buffer value) { nmsg_iov(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #msg_control} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code msg_control} field. */
     public Msghdr msg_control(@NativeType("void *") ByteBuffer value) { nmsg_control(address(), value); return this; }
-    /** Sets the specified value to the {@link #msg_flags} field. */
+    /** Sets the specified value to the {@code msg_flags} field. */
     public Msghdr msg_flags(int value) { nmsg_flags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,34 +344,34 @@ public class Msghdr extends Struct<Msghdr> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link Msghdr#msg_name} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code msg_name} field. */
         @NativeType("void *")
         public ByteBuffer msg_name() { return Msghdr.nmsg_name(address()); }
-        /** @return the value of the {@link Msghdr#msg_namelen} field. */
+        /** @return the value of the {@code msg_namelen} field. */
         @NativeType("socklen_t")
         public int msg_namelen() { return Msghdr.nmsg_namelen(address()); }
-        /** @return a {@link IOVec.Buffer} view of the struct array pointed to by the {@link Msghdr#msg_iov} field. */
+        /** @return a {@link IOVec.Buffer} view of the struct array pointed to by the {@code msg_iov} field. */
         @NativeType("struct iovec *")
         public IOVec.Buffer msg_iov() { return Msghdr.nmsg_iov(address()); }
-        /** @return the value of the {@link Msghdr#msg_iovlen} field. */
+        /** @return the value of the {@code msg_iovlen} field. */
         @NativeType("size_t")
         public long msg_iovlen() { return Msghdr.nmsg_iovlen(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link Msghdr#msg_control} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code msg_control} field. */
         @NativeType("void *")
         public ByteBuffer msg_control() { return Msghdr.nmsg_control(address()); }
-        /** @return the value of the {@link Msghdr#msg_controllen} field. */
+        /** @return the value of the {@code msg_controllen} field. */
         @NativeType("size_t")
         public long msg_controllen() { return Msghdr.nmsg_controllen(address()); }
-        /** @return the value of the {@link Msghdr#msg_flags} field. */
+        /** @return the value of the {@code msg_flags} field. */
         public int msg_flags() { return Msghdr.nmsg_flags(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link Msghdr#msg_name} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code msg_name} field. */
         public Msghdr.Buffer msg_name(@NativeType("void *") ByteBuffer value) { Msghdr.nmsg_name(address(), value); return this; }
-        /** Sets the address of the specified {@link IOVec.Buffer} to the {@link Msghdr#msg_iov} field. */
+        /** Sets the address of the specified {@link IOVec.Buffer} to the {@code msg_iov} field. */
         public Msghdr.Buffer msg_iov(@NativeType("struct iovec *") IOVec.Buffer value) { Msghdr.nmsg_iov(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link Msghdr#msg_control} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code msg_control} field. */
         public Msghdr.Buffer msg_control(@NativeType("void *") ByteBuffer value) { Msghdr.nmsg_control(address(), value); return this; }
-        /** Sets the specified value to the {@link Msghdr#msg_flags} field. */
+        /** Sets the specified value to the {@code msg_flags} field. */
         public Msghdr.Buffer msg_flags(int value) { Msghdr.nmsg_flags(address(), value); return this; }
 
     }

@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * View Configuration Field-of-View.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EPICViewConfigurationFov XR_EPIC_view_configuration_fov} extension <b>must</b> be enabled prior to using {@link XrViewConfigurationViewFovEPIC}</li>
- * <li>{@code type} <b>must</b> be {@link EPICViewConfigurationFov#XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFovf}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrViewConfigurationViewFovEPIC {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrFovf XrFovf} {@link #recommendedFov};
- *     {@link XrFovf XrFovf} {@link #maxMutableFov};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrFovf XrFovf} recommendedFov;
+ *     {@link XrFovf XrFovf} maxMutableFov;
+ * }}</pre>
  */
 public class XrViewConfigurationViewFovEPIC extends Struct<XrViewConfigurationViewFovEPIC> implements NativeResource {
 
@@ -94,30 +78,30 @@ public class XrViewConfigurationViewFovEPIC extends Struct<XrViewConfigurationVi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the recommended field-of-view based on the current user IPD. */
+    /** @return a {@link XrFovf} view of the {@code recommendedFov} field. */
     public XrFovf recommendedFov() { return nrecommendedFov(address()); }
-    /** the maximum field-of-view that the runtime can display. */
+    /** @return a {@link XrFovf} view of the {@code maxMutableFov} field. */
     public XrFovf maxMutableFov() { return nmaxMutableFov(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrViewConfigurationViewFovEPIC type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EPICViewConfigurationFov#XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC} value to the {@link #type} field. */
+    /** Sets the {@link EPICViewConfigurationFov#XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC} value to the {@code type} field. */
     public XrViewConfigurationViewFovEPIC type$Default() { return type(EPICViewConfigurationFov.XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrViewConfigurationViewFovEPIC next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrFovf} to the {@link #recommendedFov} field. */
+    /** Copies the specified {@link XrFovf} to the {@code recommendedFov} field. */
     public XrViewConfigurationViewFovEPIC recommendedFov(XrFovf value) { nrecommendedFov(address(), value); return this; }
-    /** Passes the {@link #recommendedFov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code recommendedFov} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrViewConfigurationViewFovEPIC recommendedFov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(recommendedFov()); return this; }
-    /** Copies the specified {@link XrFovf} to the {@link #maxMutableFov} field. */
+    /** Copies the specified {@link XrFovf} to the {@code maxMutableFov} field. */
     public XrViewConfigurationViewFovEPIC maxMutableFov(XrFovf value) { nmaxMutableFov(address(), value); return this; }
-    /** Passes the {@link #maxMutableFov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code maxMutableFov} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrViewConfigurationViewFovEPIC maxMutableFov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(maxMutableFov()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,30 +303,30 @@ public class XrViewConfigurationViewFovEPIC extends Struct<XrViewConfigurationVi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrViewConfigurationViewFovEPIC#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewConfigurationViewFovEPIC.ntype(address()); }
-        /** @return the value of the {@link XrViewConfigurationViewFovEPIC#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrViewConfigurationViewFovEPIC.nnext(address()); }
-        /** @return a {@link XrFovf} view of the {@link XrViewConfigurationViewFovEPIC#recommendedFov} field. */
+        /** @return a {@link XrFovf} view of the {@code recommendedFov} field. */
         public XrFovf recommendedFov() { return XrViewConfigurationViewFovEPIC.nrecommendedFov(address()); }
-        /** @return a {@link XrFovf} view of the {@link XrViewConfigurationViewFovEPIC#maxMutableFov} field. */
+        /** @return a {@link XrFovf} view of the {@code maxMutableFov} field. */
         public XrFovf maxMutableFov() { return XrViewConfigurationViewFovEPIC.nmaxMutableFov(address()); }
 
-        /** Sets the specified value to the {@link XrViewConfigurationViewFovEPIC#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrViewConfigurationViewFovEPIC.Buffer type(@NativeType("XrStructureType") int value) { XrViewConfigurationViewFovEPIC.ntype(address(), value); return this; }
-        /** Sets the {@link EPICViewConfigurationFov#XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC} value to the {@link XrViewConfigurationViewFovEPIC#type} field. */
+        /** Sets the {@link EPICViewConfigurationFov#XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC} value to the {@code type} field. */
         public XrViewConfigurationViewFovEPIC.Buffer type$Default() { return type(EPICViewConfigurationFov.XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC); }
-        /** Sets the specified value to the {@link XrViewConfigurationViewFovEPIC#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrViewConfigurationViewFovEPIC.Buffer next(@NativeType("void const *") long value) { XrViewConfigurationViewFovEPIC.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrFovf} to the {@link XrViewConfigurationViewFovEPIC#recommendedFov} field. */
+        /** Copies the specified {@link XrFovf} to the {@code recommendedFov} field. */
         public XrViewConfigurationViewFovEPIC.Buffer recommendedFov(XrFovf value) { XrViewConfigurationViewFovEPIC.nrecommendedFov(address(), value); return this; }
-        /** Passes the {@link XrViewConfigurationViewFovEPIC#recommendedFov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code recommendedFov} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrViewConfigurationViewFovEPIC.Buffer recommendedFov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(recommendedFov()); return this; }
-        /** Copies the specified {@link XrFovf} to the {@link XrViewConfigurationViewFovEPIC#maxMutableFov} field. */
+        /** Copies the specified {@link XrFovf} to the {@code maxMutableFov} field. */
         public XrViewConfigurationViewFovEPIC.Buffer maxMutableFov(XrFovf value) { XrViewConfigurationViewFovEPIC.nmaxMutableFov(address(), value); return this; }
-        /** Passes the {@link XrViewConfigurationViewFovEPIC#maxMutableFov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code maxMutableFov} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrViewConfigurationViewFovEPIC.Buffer maxMutableFov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(maxMutableFov()); return this; }
 
     }

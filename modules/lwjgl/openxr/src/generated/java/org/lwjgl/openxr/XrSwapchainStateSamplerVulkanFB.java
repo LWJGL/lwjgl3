@@ -18,55 +18,22 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * Vulkan-specific swapchain sampler state structure.
- * 
- * <h5>Description</h5>
- * 
- * <p>When {@link XrSwapchainStateSamplerVulkanFB} is specified in the call to {@link FBSwapchainUpdateState#xrUpdateSwapchainFB UpdateSwapchainFB}, texture sampler state for all images in the {@code XrSwapchain} will be updated for the compositor process. For most cases, the sampler state update is only required compositor-side, as that is where the swapchain images are sampled. If the application requires sampling of the swapchain images, the application will be responsible for updating the texture state using normal Vulkan mechanisms and synchronizing appropriately with application-side rendering.</p>
- * 
- * <p>When {@link XrSwapchainStateSamplerVulkanFB} is specified in the call to {@link FBSwapchainUpdateState#xrGetSwapchainStateFB GetSwapchainStateFB}, the sampler state will be populated with the current swapchain sampler state.</p>
- * 
- * <p>To use {@link XrSwapchainStateSamplerVulkanFB}, {@link XR10#XR_USE_GRAPHICS_API_VULKAN USE_GRAPHICS_API_VULKAN} must be defined before including {@code openxr_platform.h}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSwapchainUpdateStateVulkan XR_FB_swapchain_update_state_vulkan} extension <b>must</b> be enabled prior to using {@link XrSwapchainStateSamplerVulkanFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSwapchainUpdateStateVulkan#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code minFilter} <b>must</b> be a valid {@code VkFilter} value</li>
- * <li>{@code magFilter} <b>must</b> be a valid {@code VkFilter} value</li>
- * <li>{@code mipmapMode} <b>must</b> be a valid {@code VkSamplerMipmapMode} value</li>
- * <li>{@code wrapModeS} <b>must</b> be a valid {@code VkSamplerAddressMode} value</li>
- * <li>{@code wrapModeT} <b>must</b> be a valid {@code VkSamplerAddressMode} value</li>
- * <li>{@code swizzleRed} <b>must</b> be a valid {@code VkComponentSwizzle} value</li>
- * <li>{@code swizzleGreen} <b>must</b> be a valid {@code VkComponentSwizzle} value</li>
- * <li>{@code swizzleBlue} <b>must</b> be a valid {@code VkComponentSwizzle} value</li>
- * <li>{@code swizzleAlpha} <b>must</b> be a valid {@code VkComponentSwizzle} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrColor4f}, {@link FBSwapchainUpdateState#xrGetSwapchainStateFB GetSwapchainStateFB}, {@link FBSwapchainUpdateState#xrUpdateSwapchainFB UpdateSwapchainFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainStateSamplerVulkanFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     VkFilter {@link #minFilter};
- *     VkFilter {@link #magFilter};
- *     VkSamplerMipmapMode {@link #mipmapMode};
- *     VkSamplerAddressMode {@link #wrapModeS};
- *     VkSamplerAddressMode {@link #wrapModeT};
- *     VkComponentSwizzle {@link #swizzleRed};
- *     VkComponentSwizzle {@link #swizzleGreen};
- *     VkComponentSwizzle {@link #swizzleBlue};
- *     VkComponentSwizzle {@link #swizzleAlpha};
- *     float {@link #maxAnisotropy};
- *     {@link XrColor4f XrColor4f} {@link #borderColor};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     VkFilter minFilter;
+ *     VkFilter magFilter;
+ *     VkSamplerMipmapMode mipmapMode;
+ *     VkSamplerAddressMode wrapModeS;
+ *     VkSamplerAddressMode wrapModeT;
+ *     VkComponentSwizzle swizzleRed;
+ *     VkComponentSwizzle swizzleGreen;
+ *     VkComponentSwizzle swizzleBlue;
+ *     VkComponentSwizzle swizzleAlpha;
+ *     float maxAnisotropy;
+ *     {@link XrColor4f XrColor4f} borderColor;
+ * }}</pre>
  */
 public class XrSwapchainStateSamplerVulkanFB extends Struct<XrSwapchainStateSamplerVulkanFB> implements NativeResource {
 
@@ -149,73 +116,73 @@ public class XrSwapchainStateSamplerVulkanFB extends Struct<XrSwapchainStateSamp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a valid Vulkan {@code VkFilter}. */
+    /** @return the value of the {@code minFilter} field. */
     @NativeType("VkFilter")
     public int minFilter() { return nminFilter(address()); }
-    /** a valid Vulkan {@code VkFilter}. */
+    /** @return the value of the {@code magFilter} field. */
     @NativeType("VkFilter")
     public int magFilter() { return nmagFilter(address()); }
-    /** a valid Vulkan {@code VkSamplerMipmapMode}. */
+    /** @return the value of the {@code mipmapMode} field. */
     @NativeType("VkSamplerMipmapMode")
     public int mipmapMode() { return nmipmapMode(address()); }
-    /** a valid Vulkan {@code VkSamplerAddressMode}. */
+    /** @return the value of the {@code wrapModeS} field. */
     @NativeType("VkSamplerAddressMode")
     public int wrapModeS() { return nwrapModeS(address()); }
-    /** a valid Vulkan {@code VkSamplerAddressMode}. */
+    /** @return the value of the {@code wrapModeT} field. */
     @NativeType("VkSamplerAddressMode")
     public int wrapModeT() { return nwrapModeT(address()); }
-    /** a valid Vulkan {@code VkComponentSwizzle}. */
+    /** @return the value of the {@code swizzleRed} field. */
     @NativeType("VkComponentSwizzle")
     public int swizzleRed() { return nswizzleRed(address()); }
-    /** a valid Vulkan {@code VkComponentSwizzle}. */
+    /** @return the value of the {@code swizzleGreen} field. */
     @NativeType("VkComponentSwizzle")
     public int swizzleGreen() { return nswizzleGreen(address()); }
-    /** a valid Vulkan {@code VkComponentSwizzle}. */
+    /** @return the value of the {@code swizzleBlue} field. */
     @NativeType("VkComponentSwizzle")
     public int swizzleBlue() { return nswizzleBlue(address()); }
-    /** a valid Vulkan {@code VkComponentSwizzle}. */
+    /** @return the value of the {@code swizzleAlpha} field. */
     @NativeType("VkComponentSwizzle")
     public int swizzleAlpha() { return nswizzleAlpha(address()); }
-    /** a valid float used to represent max anisotropy. */
+    /** @return the value of the {@code maxAnisotropy} field. */
     public float maxAnisotropy() { return nmaxAnisotropy(address()); }
-    /** an RGBA color to be used as border texels. */
+    /** @return a {@link XrColor4f} view of the {@code borderColor} field. */
     public XrColor4f borderColor() { return nborderColor(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSwapchainStateSamplerVulkanFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSwapchainUpdateStateVulkan#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSwapchainUpdateStateVulkan#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB} value to the {@code type} field. */
     public XrSwapchainStateSamplerVulkanFB type$Default() { return type(FBSwapchainUpdateStateVulkan.XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSwapchainStateSamplerVulkanFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #minFilter} field. */
+    /** Sets the specified value to the {@code minFilter} field. */
     public XrSwapchainStateSamplerVulkanFB minFilter(@NativeType("VkFilter") int value) { nminFilter(address(), value); return this; }
-    /** Sets the specified value to the {@link #magFilter} field. */
+    /** Sets the specified value to the {@code magFilter} field. */
     public XrSwapchainStateSamplerVulkanFB magFilter(@NativeType("VkFilter") int value) { nmagFilter(address(), value); return this; }
-    /** Sets the specified value to the {@link #mipmapMode} field. */
+    /** Sets the specified value to the {@code mipmapMode} field. */
     public XrSwapchainStateSamplerVulkanFB mipmapMode(@NativeType("VkSamplerMipmapMode") int value) { nmipmapMode(address(), value); return this; }
-    /** Sets the specified value to the {@link #wrapModeS} field. */
+    /** Sets the specified value to the {@code wrapModeS} field. */
     public XrSwapchainStateSamplerVulkanFB wrapModeS(@NativeType("VkSamplerAddressMode") int value) { nwrapModeS(address(), value); return this; }
-    /** Sets the specified value to the {@link #wrapModeT} field. */
+    /** Sets the specified value to the {@code wrapModeT} field. */
     public XrSwapchainStateSamplerVulkanFB wrapModeT(@NativeType("VkSamplerAddressMode") int value) { nwrapModeT(address(), value); return this; }
-    /** Sets the specified value to the {@link #swizzleRed} field. */
+    /** Sets the specified value to the {@code swizzleRed} field. */
     public XrSwapchainStateSamplerVulkanFB swizzleRed(@NativeType("VkComponentSwizzle") int value) { nswizzleRed(address(), value); return this; }
-    /** Sets the specified value to the {@link #swizzleGreen} field. */
+    /** Sets the specified value to the {@code swizzleGreen} field. */
     public XrSwapchainStateSamplerVulkanFB swizzleGreen(@NativeType("VkComponentSwizzle") int value) { nswizzleGreen(address(), value); return this; }
-    /** Sets the specified value to the {@link #swizzleBlue} field. */
+    /** Sets the specified value to the {@code swizzleBlue} field. */
     public XrSwapchainStateSamplerVulkanFB swizzleBlue(@NativeType("VkComponentSwizzle") int value) { nswizzleBlue(address(), value); return this; }
-    /** Sets the specified value to the {@link #swizzleAlpha} field. */
+    /** Sets the specified value to the {@code swizzleAlpha} field. */
     public XrSwapchainStateSamplerVulkanFB swizzleAlpha(@NativeType("VkComponentSwizzle") int value) { nswizzleAlpha(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxAnisotropy} field. */
+    /** Sets the specified value to the {@code maxAnisotropy} field. */
     public XrSwapchainStateSamplerVulkanFB maxAnisotropy(float value) { nmaxAnisotropy(address(), value); return this; }
-    /** Copies the specified {@link XrColor4f} to the {@link #borderColor} field. */
+    /** Copies the specified {@link XrColor4f} to the {@code borderColor} field. */
     public XrSwapchainStateSamplerVulkanFB borderColor(XrColor4f value) { nborderColor(address(), value); return this; }
-    /** Passes the {@link #borderColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code borderColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSwapchainStateSamplerVulkanFB borderColor(java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(borderColor()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -481,73 +448,73 @@ public class XrSwapchainStateSamplerVulkanFB extends Struct<XrSwapchainStateSamp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainStateSamplerVulkanFB.ntype(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSwapchainStateSamplerVulkanFB.nnext(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#minFilter} field. */
+        /** @return the value of the {@code minFilter} field. */
         @NativeType("VkFilter")
         public int minFilter() { return XrSwapchainStateSamplerVulkanFB.nminFilter(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#magFilter} field. */
+        /** @return the value of the {@code magFilter} field. */
         @NativeType("VkFilter")
         public int magFilter() { return XrSwapchainStateSamplerVulkanFB.nmagFilter(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#mipmapMode} field. */
+        /** @return the value of the {@code mipmapMode} field. */
         @NativeType("VkSamplerMipmapMode")
         public int mipmapMode() { return XrSwapchainStateSamplerVulkanFB.nmipmapMode(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#wrapModeS} field. */
+        /** @return the value of the {@code wrapModeS} field. */
         @NativeType("VkSamplerAddressMode")
         public int wrapModeS() { return XrSwapchainStateSamplerVulkanFB.nwrapModeS(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#wrapModeT} field. */
+        /** @return the value of the {@code wrapModeT} field. */
         @NativeType("VkSamplerAddressMode")
         public int wrapModeT() { return XrSwapchainStateSamplerVulkanFB.nwrapModeT(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#swizzleRed} field. */
+        /** @return the value of the {@code swizzleRed} field. */
         @NativeType("VkComponentSwizzle")
         public int swizzleRed() { return XrSwapchainStateSamplerVulkanFB.nswizzleRed(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#swizzleGreen} field. */
+        /** @return the value of the {@code swizzleGreen} field. */
         @NativeType("VkComponentSwizzle")
         public int swizzleGreen() { return XrSwapchainStateSamplerVulkanFB.nswizzleGreen(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#swizzleBlue} field. */
+        /** @return the value of the {@code swizzleBlue} field. */
         @NativeType("VkComponentSwizzle")
         public int swizzleBlue() { return XrSwapchainStateSamplerVulkanFB.nswizzleBlue(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#swizzleAlpha} field. */
+        /** @return the value of the {@code swizzleAlpha} field. */
         @NativeType("VkComponentSwizzle")
         public int swizzleAlpha() { return XrSwapchainStateSamplerVulkanFB.nswizzleAlpha(address()); }
-        /** @return the value of the {@link XrSwapchainStateSamplerVulkanFB#maxAnisotropy} field. */
+        /** @return the value of the {@code maxAnisotropy} field. */
         public float maxAnisotropy() { return XrSwapchainStateSamplerVulkanFB.nmaxAnisotropy(address()); }
-        /** @return a {@link XrColor4f} view of the {@link XrSwapchainStateSamplerVulkanFB#borderColor} field. */
+        /** @return a {@link XrColor4f} view of the {@code borderColor} field. */
         public XrColor4f borderColor() { return XrSwapchainStateSamplerVulkanFB.nborderColor(address()); }
 
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainStateSamplerVulkanFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSwapchainUpdateStateVulkan#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB} value to the {@link XrSwapchainStateSamplerVulkanFB#type} field. */
+        /** Sets the {@link FBSwapchainUpdateStateVulkan#XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB} value to the {@code type} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer type$Default() { return type(FBSwapchainUpdateStateVulkan.XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB); }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer next(@NativeType("void *") long value) { XrSwapchainStateSamplerVulkanFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#minFilter} field. */
+        /** Sets the specified value to the {@code minFilter} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer minFilter(@NativeType("VkFilter") int value) { XrSwapchainStateSamplerVulkanFB.nminFilter(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#magFilter} field. */
+        /** Sets the specified value to the {@code magFilter} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer magFilter(@NativeType("VkFilter") int value) { XrSwapchainStateSamplerVulkanFB.nmagFilter(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#mipmapMode} field. */
+        /** Sets the specified value to the {@code mipmapMode} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer mipmapMode(@NativeType("VkSamplerMipmapMode") int value) { XrSwapchainStateSamplerVulkanFB.nmipmapMode(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#wrapModeS} field. */
+        /** Sets the specified value to the {@code wrapModeS} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer wrapModeS(@NativeType("VkSamplerAddressMode") int value) { XrSwapchainStateSamplerVulkanFB.nwrapModeS(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#wrapModeT} field. */
+        /** Sets the specified value to the {@code wrapModeT} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer wrapModeT(@NativeType("VkSamplerAddressMode") int value) { XrSwapchainStateSamplerVulkanFB.nwrapModeT(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#swizzleRed} field. */
+        /** Sets the specified value to the {@code swizzleRed} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer swizzleRed(@NativeType("VkComponentSwizzle") int value) { XrSwapchainStateSamplerVulkanFB.nswizzleRed(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#swizzleGreen} field. */
+        /** Sets the specified value to the {@code swizzleGreen} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer swizzleGreen(@NativeType("VkComponentSwizzle") int value) { XrSwapchainStateSamplerVulkanFB.nswizzleGreen(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#swizzleBlue} field. */
+        /** Sets the specified value to the {@code swizzleBlue} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer swizzleBlue(@NativeType("VkComponentSwizzle") int value) { XrSwapchainStateSamplerVulkanFB.nswizzleBlue(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#swizzleAlpha} field. */
+        /** Sets the specified value to the {@code swizzleAlpha} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer swizzleAlpha(@NativeType("VkComponentSwizzle") int value) { XrSwapchainStateSamplerVulkanFB.nswizzleAlpha(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainStateSamplerVulkanFB#maxAnisotropy} field. */
+        /** Sets the specified value to the {@code maxAnisotropy} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer maxAnisotropy(float value) { XrSwapchainStateSamplerVulkanFB.nmaxAnisotropy(address(), value); return this; }
-        /** Copies the specified {@link XrColor4f} to the {@link XrSwapchainStateSamplerVulkanFB#borderColor} field. */
+        /** Copies the specified {@link XrColor4f} to the {@code borderColor} field. */
         public XrSwapchainStateSamplerVulkanFB.Buffer borderColor(XrColor4f value) { XrSwapchainStateSamplerVulkanFB.nborderColor(address(), value); return this; }
-        /** Passes the {@link XrSwapchainStateSamplerVulkanFB#borderColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code borderColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSwapchainStateSamplerVulkanFB.Buffer borderColor(java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(borderColor()); return this; }
 
     }

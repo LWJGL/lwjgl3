@@ -13,19 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-/**
- * Instances of this class may be passed to the {@link GLFW#glfwSetCharCallback SetCharCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window,
- *     unsigned int codepoint
- * )</code></pre>
- *
- * @since version 2.4
- */
+/** Callback function: {@link #invoke GLFWcharfun} */
 public abstract class GLFWCharCallback extends Callback implements GLFWCharCallbackI {
 
     /**

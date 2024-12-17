@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the dynamic rendering unused attachment features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDynamicRenderingUnusedAttachments#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #dynamicRenderingUnusedAttachments};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 dynamicRenderingUnusedAttachments;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT extends Struct<VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT extend
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports binding graphics pipelines within a render pass instance where any pipeline {@link VkPipelineRenderingCreateInfo}{@code ::pColorAttachmentFormats} element with a format other than {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} is allowed with a corresponding {@link VkRenderingInfo}{@code ::pColorAttachments} element with an {@code imageView} equal to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or any pipeline {@link VkPipelineRenderingCreateInfo}{@code ::pColorAttachmentFormats} element with a {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} format is allowed with a corresponding {@link VkRenderingInfo}{@code ::pColorAttachments} element with a non-{@link VK10#VK_NULL_HANDLE NULL_HANDLE} {@code imageView}. Also a {@link VkPipelineRenderingCreateInfo}{@code ::depthAttachmentFormat} other than {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} is allowed with a {@link VK10#VK_NULL_HANDLE NULL_HANDLE} {@link VkRenderingInfo}{@code ::pDepthAttachment}, or a {@link VkPipelineRenderingCreateInfo}{@code ::depthAttachmentFormat} of {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} is allowed with a non-{@link VK10#VK_NULL_HANDLE NULL_HANDLE} {@link VkRenderingInfo}{@code ::pDepthAttachment}. Also a {@link VkPipelineRenderingCreateInfo}{@code ::stencilAttachmentFormat} other than {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} is allowed with a {@link VK10#VK_NULL_HANDLE NULL_HANDLE} {@link VkRenderingInfo}{@code ::pStencilAttachment}, or a {@link VkPipelineRenderingCreateInfo}{@code ::stencilAttachmentFormat} of {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} is allowed with a non-{@link VK10#VK_NULL_HANDLE NULL_HANDLE} {@link VkRenderingInfo}{@code ::pStencilAttachment}. Any writes to a {@link VkRenderingInfo}{@code ::pColorAttachments}, {@link VkRenderingInfo}{@code ::pDepthAttachment}, or {@link VkRenderingInfo}{@code ::pStencilAttachment} with {@link VK10#VK_NULL_HANDLE NULL_HANDLE} are discarded. */
+    /** @return the value of the {@code dynamicRenderingUnusedAttachments} field. */
     @NativeType("VkBool32")
     public boolean dynamicRenderingUnusedAttachments() { return ndynamicRenderingUnusedAttachments(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDynamicRenderingUnusedAttachments#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDynamicRenderingUnusedAttachments#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT sType$Default() { return sType(EXTDynamicRenderingUnusedAttachments.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #dynamicRenderingUnusedAttachments} field. */
+    /** Sets the specified value to the {@code dynamicRenderingUnusedAttachments} field. */
     public VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT dynamicRenderingUnusedAttachments(@NativeType("VkBool32") boolean value) { ndynamicRenderingUnusedAttachments(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT extend
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT#dynamicRenderingUnusedAttachments} field. */
+        /** @return the value of the {@code dynamicRenderingUnusedAttachments} field. */
         @NativeType("VkBool32")
         public boolean dynamicRenderingUnusedAttachments() { return VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.ndynamicRenderingUnusedAttachments(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDynamicRenderingUnusedAttachments#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT} value to the {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTDynamicRenderingUnusedAttachments#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.Buffer sType$Default() { return sType(EXTDynamicRenderingUnusedAttachments.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT#dynamicRenderingUnusedAttachments} field. */
+        /** Sets the specified value to the {@code dynamicRenderingUnusedAttachments} field. */
         public VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.Buffer dynamicRenderingUnusedAttachments(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT.ndynamicRenderingUnusedAttachments(address(), value ? 1 : 0); return this; }
 
     }

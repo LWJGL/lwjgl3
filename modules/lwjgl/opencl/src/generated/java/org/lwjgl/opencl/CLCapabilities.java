@@ -11,14 +11,6 @@ import java.util.Set;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
-/**
- * Defines the capabilities of an OpenCL platform or device.
- * 
- * <p>The instance returned by {@link CL#createPlatformCapabilities} exposes the functionality present on either the platform or any of its devices.
- * This is unlike the {@link CL10#CL_PLATFORM_EXTENSIONS PLATFORM_EXTENSIONS} string, which returns only platform functionality, supported across all platform devices.</p>
- * 
- * <p>The instance returned by {@link CL#createDeviceCapabilities} exposes only the functionality available on that particular device.</p>
- */
 public class CLCapabilities {
 
     public final long
@@ -221,1022 +213,337 @@ public class CLCapabilities {
         clSetContentSizeBufferPoCL,
         clGetDeviceImageInfoQCOM;
 
-    /** When true, {@link CL10} is supported. */
+    /** When true, {@code CL10} is supported. */
     public final boolean OpenCL10;
-    /** When true, {@link CL10GL} is supported. */
+    /** When true, {@code CL10GL} is supported. */
     public final boolean OpenCL10GL;
-    /** When true, {@link CL11} is supported. */
+    /** When true, {@code CL11} is supported. */
     public final boolean OpenCL11;
-    /** When true, {@link CL12} is supported. */
+    /** When true, {@code CL12} is supported. */
     public final boolean OpenCL12;
-    /** When true, {@link CL12GL} is supported. */
+    /** When true, {@code CL12GL} is supported. */
     public final boolean OpenCL12GL;
-    /** When true, {@link CL20} is supported. */
+    /** When true, {@code CL20} is supported. */
     public final boolean OpenCL20;
-    /** When true, {@link CL21} is supported. */
+    /** When true, {@code CL21} is supported. */
     public final boolean OpenCL21;
-    /** When true, {@link CL22} is supported. */
+    /** When true, {@code CL22} is supported. */
     public final boolean OpenCL22;
-    /** When true, {@link CL30} is supported. */
+    /** When true, {@code CL30} is supported. */
     public final boolean OpenCL30;
-    /** When true, {@link ALTERACompilerMode} is supported. */
+    /** When true, {@code altera_compiler_mode} is supported. */
     public final boolean cl_altera_compiler_mode;
-    /** When true, {@link ALTERADeviceTemperature} is supported. */
+    /** When true, {@code altera_device_temperature} is supported. */
     public final boolean cl_altera_device_temperature;
-    /** When true, {@link ALTERALiveObjectTracking} is supported. */
+    /** When true, {@code altera_live_object_tracking} is supported. */
     public final boolean cl_altera_live_object_tracking;
-    /** When true, {@link AMDBusAddressableMemory} is supported. */
+    /** When true, {@code amd_bus_addressable_memory} is supported. */
     public final boolean cl_amd_bus_addressable_memory;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_compile_options.txt">amd_compile_options</a> extension is supported.
-     * 
-     * <p>This extension adds the following options, which are not part of the OpenCL specification:</p>
-     * 
-     * <ul>
-     * <li>-g &ndash; This is an experimental feature that lets you use the GNU project debugger, GDB, to debug kernels on x86 CPUs running Linux or
-     * cygwin/minGW under Windows. This option does not affect the default optimization of the OpenCL code.</li>
-     * <li>-O0 &ndash; Specifies to the compiler not to optimize. This is equivalent to the OpenCL standard option -cl-opt-disable.</li>
-     * <li>-f[no-]bin-source &ndash; Does [not] generate OpenCL source in the .source section. By default, the source is NOT generated.</li>
-     * <li>-f[no-]bin-llvmir &ndash; Does [not] generate LLVM IR in the .llvmir section. By default, LLVM IR IS generated.</li>
-     * <li>-f[no-]bin-amdil &ndash; Does [not] generate AMD IL in the .amdil section. By Default, AMD IL is NOT generated.</li>
-     * <li>-f[no-]bin-exe &ndash; Does [not] generate the executable (ISA) in .text section. By default, the executable IS generated.</li>
-     * <li>-f[no-]bin-hsail &ndash; Does [not] generate HSAIL/BRIG in the binary. By default, HSA IL/BRIG is NOT generated.</li>
-     * </ul>
-     * 
-     * <p>To avoid source changes, there are two environment variables that can be used to change CL options during the runtime:</p>
-     * 
-     * <ul>
-     * <li>AMD_OCL_BUILD_OPTIONS &ndash; Overrides the CL options specified in {@link CL10#clBuildProgram BuildProgram}.</li>
-     * <li>AMD_OCL_BUILD_OPTIONS_APPEND &ndash; Appends options to the options specified in {@link CL10#clBuildProgram BuildProgram}.</li>
-     * </ul>
-     */
+    /** When true, {@code amd_compile_options} is supported. */
     public final boolean cl_amd_compile_options;
-    /** When true, {@link AMDDeviceAttributeQuery} is supported. */
+    /** When true, {@code amd_device_attribute_query} is supported. */
     public final boolean cl_amd_device_attribute_query;
-    /** When true, {@link AMDDeviceBoardName} is supported. */
+    /** When true, {@code amd_device_board_name} is supported. */
     public final boolean cl_amd_device_board_name;
-    /** When true, {@link AMDDevicePersistentMemory} is supported. */
+    /** When true, {@code amd_device_persistent_memory} is supported. */
     public final boolean cl_amd_device_persistent_memory;
-    /** When true, {@link AMDDeviceProfilingTimerOffset} is supported. */
+    /** When true, {@code amd_device_profiling_timer_offset} is supported. */
     public final boolean cl_amd_device_profiling_timer_offset;
-    /** When true, {@link AMDDeviceTopology} is supported. */
+    /** When true, {@code amd_device_topology} is supported. */
     public final boolean cl_amd_device_topology;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_event_callback.txt">amd_event_callback</a> extension is supported.
-     * 
-     * <p>This extension provides the ability to register event callbacks for states other than {@link CL10#CL_COMPLETE COMPLETE}. The full set of event states are allowed:
-     * {@link CL10#CL_QUEUED QUEUED}, {@link CL10#CL_SUBMITTED SUBMITTED}, and {@link CL10#CL_RUNNING RUNNING}.</p>
-     */
+    /** When true, {@code amd_event_callback} is supported. */
     public final boolean cl_amd_event_callback;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_fp64.txt">amd_fp64</a> extension is supported.
-     * 
-     * <p>This extension provides a subset of the functionality of that provided by the cl_khr_fp64 extension. When enabled, the compiler recognizes the double
-     * scalar and vector types, compiles expressions involving those types, and accepts calls to all builtin functions enabled by the cl_khr_fp64 extension.
-     * However, this extension does not guarantee that all cl_khr_fp64 built in functions are implemented and does not guarantee that the built in functions
-     * that have been implemented would be considered conformant to the cl_khr_fp64 extension.</p>
-     */
+    /** When true, {@code amd_fp64} is supported. */
     public final boolean cl_amd_fp64;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_media_ops.txt">amd_media_ops</a> extension is supported.
-     * 
-     * <p>The directive when enabled adds the following built-in functions to the OpenCL language.</p>
-     * 
-     * <pre><code>
-     * Note: typen denote opencl scalar type {n = 1} and vector types {n = 4, 8, 16}.
-     * 
-     * Build-in Function
-     *   uint  amd_pack(float4 src)
-     * Description
-     *   dst =   ((((uint)src.s0) &amp; 0xff)      )
-     *         + ((((uint)src.s1) &amp; 0xff) &lt;&lt;  8)
-     *         + ((((uint)src.s2) &amp; 0xff) &lt;&lt; 16)
-     *         + ((((uint)src.s3) &amp; 0xff) &lt;&lt; 24)
-     * 
-     * Build-in Function
-     *   floatn  amd_unpack3(unitn src)
-     * Description
-     *   dst.s0 = (float)((src.s0 &gt;&gt; 24) &amp; 0xff)
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   floatn   amd_unpack2 (unitn src)
-     * Description
-     *   dst.s0 = (float)((src.s0 &gt;&gt; 16) &amp; 0xff)
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   floatn   amd_unpack1 (unitn src)
-     * Description
-     *   dst.s0 = (float)((src.s0 &gt;&gt; 8) &amp; 0xff)
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   floatn   amd_unpack0 (unitn src)
-     * Description
-     *   dst.s0 = (float)(src.s0 &amp; 0xff)
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   uintn  amd_bitalign (uintn src0, uintn src1, uintn src2)
-     * Description
-     *   dst.s0 =  (uint) (((((long)src0.s0) &lt;&lt; 32) | (long)src1.s0) &gt;&gt; (src2.s0 &amp; 31))
-     *   similar operation applied to other components of the vectors.
-     * 
-     * 
-     * Build-in Function
-     *   uintn  amd_bytealign (uintn src0, uintn src1, uintn src2)
-     * Description
-     *   dst.s0 =  (uint) (((((long)src0.s0) &lt;&lt; 32) | (long)src1.s0) &gt;&gt; ((src2.s0 &amp; 3)*8))
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   uintn  amd_lerp (uintn src0, uintn src1, uintn src2)
-     * Description
-     *   dst.s0 = (((((src0.s0 &gt;&gt;  0) &amp; 0xff) + ((src1.s0 &gt;&gt;  0) &amp; 0xff) + ((src2.s0 &gt;&gt;  0) &amp; 1)) &gt;&gt; 1) &lt;&lt;  0) +
-     *            (((((src0.s0 &gt;&gt;  8) &amp; 0xff) + ((src1.s0 &gt;&gt;  8) &amp; 0xff) + ((src2.s0 &gt;&gt;  8) &amp; 1)) &gt;&gt; 1) &lt;&lt;  8) +
-     *            (((((src0.s0 &gt;&gt; 16) &amp; 0xff) + ((src1.s0 &gt;&gt; 16) &amp; 0xff) + ((src2.s0 &gt;&gt; 16) &amp; 1)) &gt;&gt; 1) &lt;&lt; 16) +
-     *            (((((src0.s0 &gt;&gt; 24) &amp; 0xff) + ((src1.s0 &gt;&gt; 24) &amp; 0xff) + ((src2.s0 &gt;&gt; 24) &amp; 1)) &gt;&gt; 1) &lt;&lt; 24);
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   uintn  amd_sad (uintn src0, uintn src1, uintn src2)
-     * Description
-     *   dst.s0 = src2.s0 +
-     *            abs(((src0.s0 &gt;&gt;  0) &amp; 0xff) - ((src1.s0 &gt;&gt;  0) &amp; 0xff)) +
-     *            abs(((src0.s0 &gt;&gt;  8) &amp; 0xff) - ((src1.s0 &gt;&gt;  8) &amp; 0xff)) +
-     *            abs(((src0.s0 &gt;&gt; 16) &amp; 0xff) - ((src1.s0 &gt;&gt; 16) &amp; 0xff)) +
-     *            abs(((src0.s0 &gt;&gt; 24) &amp; 0xff) - ((src1.s0 &gt;&gt; 24) &amp; 0xff));
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   uintn  amd_sadhi (uintn src0, uintn src1n, uintn src2)
-     * Description
-     *   dst.s0 = src2.s0 +
-     *            (abs(((src0.s0 &gt;&gt;  0) &amp; 0xff) - ((src1.s0 &gt;&gt;  0) &amp; 0xff)) &lt;&lt; 16) +
-     *            (abs(((src0.s0 &gt;&gt;  8) &amp; 0xff) - ((src1.s0 &gt;&gt;  8) &amp; 0xff)) &lt;&lt; 16) +
-     *            (abs(((src0.s0 &gt;&gt; 16) &amp; 0xff) - ((src1.s0 &gt;&gt; 16) &amp; 0xff)) &lt;&lt; 16) +
-     *            (abs(((src0.s0 &gt;&gt; 24) &amp; 0xff) - ((src1.s0 &gt;&gt; 24) &amp; 0xff)) &lt;&lt; 16);
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   uint  amd_sad4(uint4 src0, uint4 src1, uint src2)
-     * Description
-     *   dst   = src2   +
-     *            abs(((src0.s0 &gt;&gt;  0) &amp; 0xff) - ((src1.s0 &gt;&gt;  0) &amp; 0xff)) +
-     *            abs(((src0.s0 &gt;&gt;  8) &amp; 0xff) - ((src1.s0 &gt;&gt;  8) &amp; 0xff)) +
-     *            abs(((src0.s0 &gt;&gt; 16) &amp; 0xff) - ((src1.s0 &gt;&gt; 16) &amp; 0xff)) +
-     *            abs(((src0.s0 &gt;&gt; 24) &amp; 0xff) - ((src1.s0 &gt;&gt; 24) &amp; 0xff)) +
-     *            abs(((src0.s1 &gt;&gt;  0) &amp; 0xff) - ((src1.s0 &gt;&gt;  0) &amp; 0xff)) +
-     *            abs(((src0.s1 &gt;&gt;  8) &amp; 0xff) - ((src1.s1 &gt;&gt;  8) &amp; 0xff)) +
-     *            abs(((src0.s1 &gt;&gt; 16) &amp; 0xff) - ((src1.s1 &gt;&gt; 16) &amp; 0xff)) +
-     *            abs(((src0.s1 &gt;&gt; 24) &amp; 0xff) - ((src1.s1 &gt;&gt; 24) &amp; 0xff)) +
-     *            abs(((src0.s2 &gt;&gt;  0) &amp; 0xff) - ((src1.s2 &gt;&gt;  0) &amp; 0xff)) +
-     *            abs(((src0.s2 &gt;&gt;  8) &amp; 0xff) - ((src1.s2 &gt;&gt;  8) &amp; 0xff)) +
-     *            abs(((src0.s2 &gt;&gt; 16) &amp; 0xff) - ((src1.s2 &gt;&gt; 16) &amp; 0xff)) +
-     *            abs(((src0.s2 &gt;&gt; 24) &amp; 0xff) - ((src1.s2 &gt;&gt; 24) &amp; 0xff)) +
-     *            abs(((src0.s3 &gt;&gt;  0) &amp; 0xff) - ((src1.s3 &gt;&gt;  0) &amp; 0xff)) +
-     *            abs(((src0.s3 &gt;&gt;  8) &amp; 0xff) - ((src1.s3 &gt;&gt;  8) &amp; 0xff)) +
-     *            abs(((src0.s3 &gt;&gt; 16) &amp; 0xff) - ((src1.s3 &gt;&gt; 16) &amp; 0xff)) +
-     *            abs(((src0.s3 &gt;&gt; 24) &amp; 0xff) - ((src1.s3 &gt;&gt; 24) &amp; 0xff));</code></pre>
-     */
+    /** When true, {@code amd_media_ops} is supported. */
     public final boolean cl_amd_media_ops;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_media_ops2.txt">amd_media_ops2</a> extension is supported.
-     * 
-     * <p>The directive when enabled adds the following built-in functions to the OpenCL language.</p>
-     * 
-     * <pre><code>
-     * Note: typen denote open scalar type { n = 1 } and vector types { n = 2, 4, 8, 16 }.
-     * 
-     * Build-in Function
-     *   uintn  amd_msad (uintn src0, uintn src1, uintn src2)
-     * Description
-     *   uchar4 src0u8 = as_uchar4(src0.s0);
-     *   uchar4 src1u8 = as_uchar4(src1.s0);
-     *   dst.s0 = src2.s0 +
-     *            ((src1u8.s0 == 0) ? 0 : abs(src0u8.s0 - src1u8.s0)) +
-     *            ((src1u8.s1 == 0) ? 0 : abs(src0u8.s1 - src1u8.s1)) +
-     *            ((src1u8.s2 == 0) ? 0 : abs(src0u8.s2 - src1u8.s2)) +
-     *            ((src1u8.s3 == 0) ? 0 : abs(src0u8.s3 - src1u8.s3));
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   ulongn amd_qsad (ulongn src0, uintn src1, ulongn src2)
-     * Description
-     *   uchar8 src0u8 = as_uchar8(src0.s0);
-     *   ushort4 src2u16 = as_ushort4(src2.s0);
-     *   ushort4 dstu16;
-     *   dstu16.s0 = amd_sad(as_uint(src0u8.s0123), src1.s0, src2u16.s0);
-     *   dstu16.s1 = amd_sad(as_uint(src0u8.s1234), src1.s0, src2u16.s1);
-     *   dstu16.s2 = amd_sad(as_uint(src0u8.s2345), src1.s0, src2u16.s2);
-     *   dstu16.s3 = amd_sad(as_uint(src0u8.s3456), src1.s0, src2u16.s3);
-     *   dst.s0 = as_uint2(dstu16);
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   ulongn amd_mqsad (ulongn src0, uintn src1, ulongn src2)
-     * Description
-     *   uchar8 src0u8 = as_uchar8(src0.s0);
-     *   ushort4 src2u16 = as_ushort4(src2.s0);
-     *   ushort4 dstu16;
-     *   dstu16.s0 = amd_msad(as_uint(src0u8.s0123), src1.s0, src2u16.s0);
-     *   dstu16.s1 = amd_msad(as_uint(src0u8.s1234), src1.s0, src2u16.s1);
-     *   dstu16.s2 = amd_msad(as_uint(src0u8.s2345), src1.s0, src2u16.s2);
-     *   dstu16.s3 = amd_msad(as_uint(src0u8.s3456), src1.s0, src2u16.s3);
-     *   dst.s0 = as_uint2(dstu16);
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   uintn  amd_sadw (uintn src0, uintn src1, uintn src2)
-     * Description
-     *   ushort2 src0u16 = as_ushort2(src0.s0);
-     *   ushort2 src1u16 = as_ushort2(src1.s0);
-     *   dst.s0 = src2.s0 +
-     *            abs(src0u16.s0 - src1u16.s0) +
-     *            abs(src0u16.s1 - src1u16.s1);
-     *   similar operation applied to other components of the vectors
-     * 
-     * Build-in Function
-     *   uintn  amd_sadd (uintn src0, uintn src1, uintn src2)
-     * Description
-     *   dst.s0 = src2.s0 +  abs(src0.s0 - src1.s0);
-     *   similar operation applied to other components of the vectors
-     * 
-     * Built-in Function:
-     *   uintn amd_bfm (uintn src0, uintn src1)
-     * Description
-     *   dst.s0 = ((1 &lt;&lt; (src0.s0 &amp; 0x1f)) - 1) &lt;&lt; (src1.s0 &amp; 0x1f);
-     *   similar operation applied to other components of the vectors
-     * 
-     * Built-in Function:
-     *   uintn amd_bfe (uintn src0, uintn src1, uintn src2)
-     * Description
-     *   NOTE: operator &gt;&gt; below represent logical right shift
-     *   offset = src1.s0 &amp; 31;
-     *   width = src2.s0 &amp; 31;
-     *   if width = 0
-     *       dst.s0 = 0;
-     *   else if (offset + width) &lt; 32
-     *       dst.s0 = (src0.s0 &lt;&lt; (32 - offset - width)) &gt;&gt; (32 - width);
-     *   else
-     *       dst.s0 = src0.s0 &gt;&gt; offset;
-     *   similar operation applied to other components of the vectors
-     * 
-     * Built-in Function:
-     *    intn amd_bfe (intn src0, uintn src1, uintn src2)
-     * Description
-     *   NOTE: operator &gt;&gt; below represent arithmetic right shift
-     *   offset = src1.s0 &amp; 31;
-     *   width = src2.s0 &amp; 31;
-     *   if width = 0
-     *       dst.s0 = 0;
-     *   else if (offset + width) &lt; 32
-     *       dst.s0 = src0.s0 &lt;&lt; (32-offset-width) &gt;&gt; 32-width;
-     *   else
-     *       dst.s0 = src0.s0 &gt;&gt; offset;
-     *   similar operation applied to other components of the vectors
-     * 
-     * Built-in Function:
-     *    intn amd_median3 (intn src0, intn src1, intn src2)
-     *    uintn amd_median3 (uintn src0, uintn src1, uintn src2)
-     *    floatn amd_median3 (floatn src0, floatn src1, floattn src2)
-     * Description
-     *    returns median of src0, src1, and src2
-     * 
-     * Built-in Function:
-     *    intn amd_min3 (intn src0, intn src1, intn src2)
-     *    uintn amd_min3 (uintn src0, uintn src1, uintn src2)
-     *    floatn amd_min3 (floatn src0, floatn src1, floattn src2)
-     * Description
-     *    returns min of src0, src1, and src2
-     * 
-     * Built-in Function:
-     *    intn amd_max3 (intn src0, intn src1, intn src2)
-     *    uintn amd_max3 (uintn src0, uintn src1, uintn src2)
-     *    floatn amd_max3 (floatn src0, floatn src1, floattn src2)
-     * Description
-     *    returns max of src0, src1, and src2</code></pre>
-     */
+    /** When true, {@code amd_media_ops2} is supported. */
     public final boolean cl_amd_media_ops2;
-    /** When true, {@link AMDOfflineDevices} is supported. */
+    /** When true, {@code amd_offline_devices} is supported. */
     public final boolean cl_amd_offline_devices;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_popcnt.txt">amd_popcnt</a> extension is supported.
-     * 
-     * <p>This extension introduces a “population count” function called popcnt. This extension was taken into core OpenCL 1.2, and the function was renamed
-     * popcount. The core 1.2 popcount function is identical to the AMD extension popcnt function.</p>
-     */
+    /** When true, {@code amd_popcnt} is supported. */
     public final boolean cl_amd_popcnt;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_predefined_macros.txt">amd_predefined_macros</a> extension is supported.
-     * 
-     * <p>The following macros are predefined when compiling OpenCL™ C kernels. These macros are defined automatically based on the device for which the code is
-     * being compiled.</p>
-     * 
-     * <h5>GPU devices</h5>
-     * 
-     * <ul>
-     * <li>__Barts__</li>
-     * <li>__BeaverCreek__</li>
-     * <li>__Bheem__</li>
-     * <li>__Bonaire__</li>
-     * <li>__Caicos__</li>
-     * <li>__Capeverde__</li>
-     * <li>__Carrizo__</li>
-     * <li>__Cayman__</li>
-     * <li>__Cedar__</li>
-     * <li>__Cypress__</li>
-     * <li>__Devastator__</li>
-     * <li>__Hainan__</li>
-     * <li>__Iceland__</li>
-     * <li>__Juniper__</li>
-     * <li>__Kalindi__</li>
-     * <li>__Kauai__</li>
-     * <li>__Lombok__</li>
-     * <li>__Loveland__</li>
-     * <li>__Mullins__</li>
-     * <li>__Oland__</li>
-     * <li>__Pitcairn__</li>
-     * <li>__RV710__</li>
-     * <li>__RV730__</li>
-     * <li>__RV740__</li>
-     * <li>__RV770__</li>
-     * <li>__RV790__</li>
-     * <li>__Redwood__</li>
-     * <li>__Scrapper__</li>
-     * <li>__Spectre__</li>
-     * <li>__Spooky__</li>
-     * <li>__Tahiti__</li>
-     * <li>__Tonga__</li>
-     * <li>__Turks__</li>
-     * <li>__WinterPark__</li>
-     * <li>__GPU__</li>
-     * </ul>
-     * 
-     * <h5>CPU devices</h5>
-     * 
-     * <ul>
-     * <li>__CPU__</li>
-     * <li>__X86__</li>
-     * <li>__X86_64__</li>
-     * </ul>
-     * 
-     * <p>Note that __GPU__ or __CPU__ are predefined whenever a GPU or CPU device is the compilation target.</p>
-     */
+    /** When true, {@code amd_predefined_macros} is supported. */
     public final boolean cl_amd_predefined_macros;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_printf.txt">amd_printf</a> extension is supported.
-     * 
-     * <p>This extension adds the built-in function {@code printf(__constant char * restrict format, …);}</p>
-     * 
-     * <p>This function writes output to the stdout stream associated with the host application. The format string is a character sequence that:</p>
-     * 
-     * <ul>
-     * <li>is null-terminated and composed of zero and more directives,</li>
-     * <li>ordinary characters (i.e. not %), which are copied directly to the output stream unchanged, and</li>
-     * <li>conversion specifications, each of which can result in fetching zero or more arguments, converting them, and then writing the final result to the
-     * output stream.</li>
-     * </ul>
-     * 
-     * <p>The format string must be resolvable at compile time; thus, it cannot be dynamically created by the executing program. (Note that the use of variadic
-     * arguments in the built-in printf does not imply its use in other builtins; more importantly, it is not valid to use printf in user-defined functions or
-     * kernels.)</p>
-     * 
-     * <p>The OpenCL C printf closely matches the definition found as part of the C99 standard. Note that conversions introduced in the format string with % are
-     * supported with the following guidelines:</p>
-     * 
-     * <ul>
-     * <li>A 32-bit floating point argument is not converted to a 64-bit double, unless the extension cl_khr_fp64 is supported and enabled. This includes the
-     * double variants if cl_khr_fp64 is supported and defined in the corresponding compilation unit.</li>
-     * <li>64-bit integer types can be printed using %ld / %lx / %lu.</li>
-     * <li>%lld / %llx / %llu are not supported and reserved for 128-bit integer types (long long).</li>
-     * <li>All OpenCL vector types can be explicitly passed and printed using the modifier vn, where n can be 2, 3, 4, 8, or 16. This modifier appears before
-     * the original conversion specifier for the vector’s component type (for example, to print a float4 %v4f). Since vn is a conversion specifier, it is
-     * valid to apply optional flags, such as field width and precision, just as it is when printing the component types. Since a vector is an aggregate
-     * type, the comma separator is used between the components: 0:1, … , n-2:n-1.</li>
-     * </ul>
-     */
+    /** When true, {@code amd_printf} is supported. */
     public final boolean cl_amd_printf;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/amd/cl_amd_vec3.txt">amd_vec3</a> extension is supported.
-     * 
-     * <p>This extension adds support for vectors with three elements: float3, short3, char3, etc. This data type was added to OpenCL 1.1 as a core feature.</p>
-     */
+    /** When true, {@code amd_vec3} is supported. */
     public final boolean cl_amd_vec3;
-    /** When true, {@link APPLEBiasedFixedPointImageFormats} is supported. */
+    /** When true, {@code APPLE_biased_fixed_point_image_formats} is supported. */
     public final boolean cl_APPLE_biased_fixed_point_image_formats;
-    /** When true, {@link APPLECommandQueuePriority} is supported. */
+    /** When true, {@code APPLE_command_queue_priority} is supported. */
     public final boolean cl_APPLE_command_queue_priority;
-    /** When true, {@link APPLECommandQueueSelectComputeUnits} is supported. */
+    /** When true, {@code APPLE_command_queue_select_compute_units} is supported. */
     public final boolean cl_APPLE_command_queue_select_compute_units;
-    /** When true, {@link APPLEContextLoggingFunctions} is supported. */
+    /** When true, {@code APPLE_ContextLoggingFunctions} is supported. */
     public final boolean cl_APPLE_ContextLoggingFunctions;
-    /** When true, {@link APPLEFixedAlphaChannelOrders} is supported. */
+    /** When true, {@code APPLE_fixed_alpha_channel_orders} is supported. */
     public final boolean cl_APPLE_fixed_alpha_channel_orders;
     /** When true, {@code APPLE_fp64_basic_ops} is supported. */
     public final boolean cl_APPLE_fp64_basic_ops;
-    /** When true, {@link APPLEGLSharing} is supported. */
+    /** When true, {@code APPLE_gl_sharing} is supported. */
     public final boolean cl_APPLE_gl_sharing;
-    /** When true, {@link APPLEQueryKernelNames} is supported. */
+    /** When true, {@code APPLE_query_kernel_names} is supported. */
     public final boolean cl_APPLE_query_kernel_names;
-    /** When true, {@link ARMControlledKernelTermination} is supported. */
+    /** When true, {@code arm_controlled_kernel_termination} is supported. */
     public final boolean cl_arm_controlled_kernel_termination;
-    /** When true, {@link ARMCoreID} is supported. */
+    /** When true, {@code arm_core_id} is supported. */
     public final boolean cl_arm_core_id;
-    /** When true, {@link ARMImportMemory} is supported. */
+    /** When true, {@code arm_import_memory} is supported. */
     public final boolean cl_arm_import_memory;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int16</a> extension is supported. */
+    /** When true, {@code arm_integer_dot_product_accumulate_int16} is supported. */
     public final boolean cl_arm_integer_dot_product_accumulate_int16;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_int8</a> extension is supported. */
+    /** When true, {@code arm_integer_dot_product_accumulate_int8} is supported. */
     public final boolean cl_arm_integer_dot_product_accumulate_int8;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_accumulate_saturate_int8</a> extension is supported. */
+    /** When true, {@code arm_integer_dot_product_accumulate_saturate_int8} is supported. */
     public final boolean cl_arm_integer_dot_product_accumulate_saturate_int8;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_integer_dot_product.txt">cl_arm_integer_dot_product_int8</a> extension is supported. */
+    /** When true, {@code arm_integer_dot_product_int8} is supported. */
     public final boolean cl_arm_integer_dot_product_int8;
-    /** When true, {@link ARMJobSlotSelection} is supported. */
+    /** When true, {@code arm_job_slot_selection} is supported. */
     public final boolean cl_arm_job_slot_selection;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_non_uniform_work_group_size.txt">arm_non_uniform_work_group_size</a> extension is supported.
-     * 
-     * <p>This extension provides a way to enqueue kernels with local work-group sizes that are not integer factors of the global work-group size in OpenCL C 1.x
-     * languages.</p>
-     * 
-     * <p>Such work-groups are referred to in the OpenCL 2.0 specification as non-uniform work-groups.</p>
-     * 
-     * <p>To enable this extension the option {@code -cl-arm-non-uniform-work-group-size} must be provided in the options string when building a program from
-     * source using {@link CL10#clBuildProgram BuildProgram}. Kernels created from such a program will be able to be enqueued via {@link CL10#clEnqueueNDRangeKernel EnqueueNDRangeKernel} with a non-uniform local
-     * work-group size.</p>
-     * 
-     * <p>This feature is enabled by default in OpenCL C 2.0. See section 5.10 of the OpenCL 2.0 API specification. This section also details how kernels that
-     * are enqueued with non-uniform work-group sizes are divided into work groups.</p>
-     * 
-     * <p>The built in function {@code get_local_size()} for kernels that have been built with this extension will take on the OpenCL 2.0 behaviour. See section
-     * 6.13.1 of the OpenCL 2.0 C specification for details.</p>
-     */
+    /** When true, {@code arm_non_uniform_work_group_size} is supported. */
     public final boolean cl_arm_non_uniform_work_group_size;
-    /** When true, {@link ARMPrintf} is supported. */
+    /** When true, {@code arm_printf} is supported. */
     public final boolean cl_arm_printf;
-    /** When true, {@link ARMProtectedMemoryAllocation} is supported. */
+    /** When true, {@code arm_protected_memory_allocation} is supported. */
     public final boolean cl_arm_protected_memory_allocation;
-    /** When true, {@link ARMSchedulingControls} is supported. */
+    /** When true, {@code arm_scheduling_controls} is supported. */
     public final boolean cl_arm_scheduling_controls;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/arm/cl_arm_thread_limit_hint.txt">arm_thread_limit_hint</a> extension is supported.
-     * 
-     * <p>This extension enables an application to provide a hint for the maximum number of threads allowed to run concurrently on a compute unit. This results
-     * in a limit in the threads used by a kernel instance on devices that support it, lowering pressure on caches.</p>
-     */
+    /** When true, {@code arm_thread_limit_hint} is supported. */
     public final boolean cl_arm_thread_limit_hint;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_android_hardware_buffer.txt">cl_arm_import_memory_android_hardware_buffer</a> extension is supported. */
+    /** When true, {@code cl_arm_import_memory_android_hardware_buffer} is supported. */
     public final boolean cl_cl_arm_import_memory_android_hardware_buffer;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_dma_buf.txt">cl_arm_import_memory_dma_buf</a> extension is supported. */
+    /** When true, {@code cl_arm_import_memory_dma_buf} is supported. */
     public final boolean cl_cl_arm_import_memory_dma_buf;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_host.txt">cl_arm_import_memory_host</a> extension is supported. */
+    /** When true, {@code cl_arm_import_memory_host} is supported. */
     public final boolean cl_cl_arm_import_memory_host;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/cl/cl_cl_arm_import_memory_protected.txt">cl_arm_import_memory_protected</a> extension is supported. */
+    /** When true, {@code cl_arm_import_memory_protected} is supported. */
     public final boolean cl_cl_arm_import_memory_protected;
-    /** When true, {@link EXTAtomicCounters32} is supported. */
+    /** When true, {@code ext_atomic_counters_32} is supported. */
     public final boolean cl_ext_atomic_counters_32;
-    /** When true, {@link EXTAtomicCounters64} is supported. */
+    /** When true, {@code ext_atomic_counters_64} is supported. */
     public final boolean cl_ext_atomic_counters_64;
-    /** When true, {@link EXTCXXForOpencl} is supported. */
+    /** When true, {@code ext_cxx_for_opencl} is supported. */
     public final boolean cl_ext_cxx_for_opencl;
-    /** When true, {@link EXTDeviceFission} is supported. */
+    /** When true, {@code ext_device_fission} is supported. */
     public final boolean cl_ext_device_fission;
-    /** When true, {@link EXTFloatAtomics} is supported. */
+    /** When true, {@code ext_float_atomics} is supported. */
     public final boolean cl_ext_float_atomics;
-    /** When true, {@link EXTImageFromBuffer} is supported. */
+    /** When true, {@code ext_image_from_buffer} is supported. */
     public final boolean cl_ext_image_from_buffer;
-    /** When true, {@link EXTImageRaw10Raw12} is supported. */
+    /** When true, {@code ext_image_raw10_raw12} is supported. */
     public final boolean cl_ext_image_raw10_raw12;
-    /** When true, {@link EXTImageRequirementsInfo} is supported. */
+    /** When true, {@code ext_image_requirements_info} is supported. */
     public final boolean cl_ext_image_requirements_info;
-    /** When true, {@link EXTMigrateMemobject} is supported. */
+    /** When true, {@code ext_migrate_memobject} is supported. */
     public final boolean cl_ext_migrate_memobject;
-    /** When true, {@link IMGCachedAllocations} is supported. */
+    /** When true, {@code img_cached_allocations} is supported. */
     public final boolean cl_img_cached_allocations;
-    /** When true, {@link IMGGenerateMipmap} is supported. */
+    /** When true, {@code img_generate_mipmap} is supported. */
     public final boolean cl_img_generate_mipmap;
-    /** When true, {@link IMGMemProperties} is supported. */
+    /** When true, {@code img_mem_properties} is supported. */
     public final boolean cl_img_mem_properties;
-    /** When true, {@link IMGYUVImage} is supported. */
+    /** When true, {@code img_yuv_image} is supported. */
     public final boolean cl_img_yuv_image;
-    /** When true, {@link INTELAccelerator} is supported. */
+    /** When true, {@code intel_accelerator} is supported. */
     public final boolean cl_intel_accelerator;
-    /** When true, {@link INTELAdvancedMotionEstimation} is supported. */
+    /** When true, {@code intel_advanced_motion_estimation} is supported. */
     public final boolean cl_intel_advanced_motion_estimation;
-    /**
-     * This extension adds built-in functions to convert between single-precision 32-bit floating-point values and 16-bit bfloat16 values. The 16-bit bfloat16
-     * format has similar dynamic range as the 32-bit float format, albeit with lower precision than the 16-bit half format.
-     * 
-     * <p>Please note that this extension currently does not introduce a bfloat16 type to OpenCL C and instead the built-in functions convert to or from a ushort
-     * 16-bit unsigned integer type with a bit pattern that represents a bfloat16 value.</p>
-     */
+    /** When true, {@code intel_bfloat16_conversions} is supported. */
     public final boolean cl_intel_bfloat16_conversions;
-    /** When true, {@link INTELCommandQueueFamilies} is supported. */
+    /** When true, {@code intel_command_queue_families} is supported. */
     public final boolean cl_intel_command_queue_families;
-    /** When true, {@link INTELCreateBufferWithProperties} is supported. */
+    /** When true, {@code intel_create_buffer_with_properties} is supported. */
     public final boolean cl_intel_create_buffer_with_properties;
-    /** When true, {@link INTELDeviceAttributeQuery} is supported. */
+    /** When true, {@code intel_device_attribute_query} is supported. */
     public final boolean cl_intel_device_attribute_query;
-    /** When true, {@link INTELDevicePartitionByNames} is supported. */
+    /** When true, {@code intel_device_partition_by_names} is supported. */
     public final boolean cl_intel_device_partition_by_names;
-    /** When true, {@link INTELDeviceSideAVCMotionEstimation} is supported. */
+    /** When true, {@code intel_device_side_avc_motion_estimation} is supported. */
     public final boolean cl_intel_device_side_avc_motion_estimation;
-    /** When true, {@link INTELDriverDiagnostics} is supported. */
+    /** When true, {@code intel_driver_diagnostics} is supported. */
     public final boolean cl_intel_driver_diagnostics;
-    /** When true, {@link INTELEGLImageYUV} is supported. */
+    /** When true, {@code intel_egl_image_yuv} is supported. */
     public final boolean cl_intel_egl_image_yuv;
-    /** When true, {@link INTELExecByLocalThread} is supported. */
+    /** When true, {@code intel_exec_by_local_thread} is supported. */
     public final boolean cl_intel_exec_by_local_thread;
-    /**
-     * This extension augments the block read/write functionality available in the Intel vendor extensions {@link INTELSubgroups intel_subgroups} and
-     * <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_subgroups_short.txt">intel_media_block_io</a> by the specification of additional built-in functions to facilitate the reading and writing of flexible 2D
-     * regions from images. This API allows for the explicit specification of the width and height of the image regions.
-     * 
-     * <p>While not required, this extension is most useful when the subgroup size is known at compile-time. The primary use case for this extension is to
-     * support the reading of the edge texels (or image elements) of neighboring macro-blocks as described in the Intel vendor extension
-     * {@link INTELDeviceSideAVCMotionEstimation intel_device_side_avc_motion_estimation}. When using the built-in functions from {@code cl_intel_device_ side_avc_motion_estimation} the
-     * subgroup size is implicitly fixed to 16. In other use cases the subgroup size may be fixed using the {@link INTELRequiredSubgroupSize intel_required_subgroup_size} extension, if
-     * needed.</p>
-     */
+    /** When true, {@code intel_media_block_io} is supported. */
     public final boolean cl_intel_media_block_io;
-    /** When true, {@link INTELMemAllocBufferLocation} is supported. */
+    /** When true, {@code intel_mem_alloc_buffer_location} is supported. */
     public final boolean cl_intel_mem_alloc_buffer_location;
-    /** When true, {@link INTELMemChannelProperty} is supported. */
+    /** When true, {@code intel_mem_channel_property} is supported. */
     public final boolean cl_intel_mem_channel_property;
-    /** When true, {@link INTELMemForceHostMemory} is supported. */
+    /** When true, {@code intel_mem_force_host_memory} is supported. */
     public final boolean cl_intel_mem_force_host_memory;
-    /** When true, {@link INTELMotionEstimation} is supported. */
+    /** When true, {@code intel_motion_estimation} is supported. */
     public final boolean cl_intel_motion_estimation;
-    /** When true, {@link INTELPackedYUV} is supported. */
+    /** When true, {@code intel_packed_yuv} is supported. */
     public final boolean cl_intel_packed_yuv;
-    /** When true, {@link INTELPlanarYUV} is supported. */
+    /** When true, {@code intel_planar_yuv} is supported. */
     public final boolean cl_intel_planar_yuv;
     /** When true, {@code intel_printf} is supported. */
     public final boolean cl_intel_printf;
-    /** When true, {@link INTELRequiredSubgroupSize} is supported. */
+    /** When true, {@code intel_required_subgroup_size} is supported. */
     public final boolean cl_intel_required_subgroup_size;
-    /** When true, {@link INTELSharingFormatQuery} is supported. */
+    /** When true, {@code intel_sharing_format_query} is supported. */
     public final boolean cl_intel_sharing_format_query;
-    /** When true, {@link INTELSimultaneousSharing} is supported. */
+    /** When true, {@code intel_simultaneous_sharing} is supported. */
     public final boolean cl_intel_simultaneous_sharing;
-    /**
-     * This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_device_side_avc_motion_estimation} may behave in an OpenCL environment.
-     * 
-     * <p>Requires {@link CL21 OpenCL 2.1} and {@link INTELDeviceSideAVCMotionEstimation intel_device_side_avc_motion_estimation}.</p>
-     */
+    /** When true, {@code intel_spirv_device_side_avc_motion_estimation} is supported. */
     public final boolean cl_intel_spirv_device_side_avc_motion_estimation;
-    /**
-     * This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_media_block_io} may behave in an OpenCL environment.
-     * 
-     * <p>Requires {@link CL21 OpenCL 2.1} and <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_media_block_io.txt">intel_spirv_media_block_io</a>.</p>
-     */
+    /** When true, {@code intel_spirv_media_block_io} is supported. */
     public final boolean cl_intel_spirv_media_block_io;
-    /**
-     * This extension defines how modules using the SPIR-V extension {@code SPV_INTEL_subgroups} may behave in an OpenCL environment.
-     * 
-     * <p>Requires {@link CL21 OpenCL 2.1} and {@link INTELSubgroups intel_subgroups}.</p>
-     */
+    /** When true, {@code intel_spirv_subgroups} is supported. */
     public final boolean cl_intel_spirv_subgroups;
-    /**
-     * This extension adds built-in functions to split a barrier or work_group_barrier function in OpenCL C into two separate operations: the first indicates
-     * that a work-item has "arrived" at a barrier but should continue executing, and the second indicates that a work-item should "wait" for all of the
-     * work-items to arrive at the barrier before executing further.
-     * 
-     * <p>Splitting a barrier operation may improve performance and may provide a closer match to "latch" or "barrier" operations in other parallel languages
-     * such as C++ 20.</p>
-     */
+    /** When true, {@code intel_split_work_group_barrier} is supported. */
     public final boolean cl_intel_split_work_group_barrier;
-    /**
-     * The extension adds the ability to prefetch data from a buffer as a sub-group operation.
-     * 
-     * <p>The functionality added by this extension can improve the performance of some kernels by prefetching data into a cache, so future reads of the data are
-     * from a fast cache rather than slower memory.</p>
-     * 
-     * <p>The new block prefetch operations are supported both in the OpenCL C kernel programming language and in the SPIR-V intermediate language.</p>
-     * 
-     * <p>The prefetch functions are companions to the sub-group block reads described by the extensions {@code cl_intel_subgroups},
-     * {@code cl_intel_subgroups_char}, {@code cl_intel_subgroups_short} and {@code cl_intel_subgroups_long}.</p>
-     * 
-     * <p>Requires {@link CL12 OpenCL 1.2} and support for {@link INTELSubgroups intel_subgroups} is required.</p>
-     */
+    /** When true, {@code intel_subgroup_buffer_prefetch} is supported. */
     public final boolean cl_intel_subgroup_buffer_prefetch;
-    /**
-     * This extension extends the subgroup block read and write functions defined by {@code cl_intel_subgroups} (and, when supported,
-     * {@code cl_intel_subgroups_char}, {@code cl_intel_subgroups_short}, and {@code cl_intel_subgroups_long}) to support reading from and writing to pointers
-     * to the {@code __local} memory address space in addition to pointers to the {@code __global} memory address space.
-     * 
-     * <p>Requires {@link CL12 OpenCL 1.2} and support for {@link INTELSubgroups intel_subgroups} is required.</p>
-     */
+    /** When true, {@code intel_subgroup_local_block_io} is supported. */
     public final boolean cl_intel_subgroup_local_block_io;
-    /**
-     * The goal of this extension is to allow programmers to access specialized hardware to compute the product of an M x K matrix with a K x N matrix and
-     * then add an M x N matrix accumulation value. This is a commonly used building block to compute the product of two large matrices. When used in an
-     * OpenCL kernel, all work items in the subgroup cooperate to perform this operation.
-     * 
-     * <p>This is a low-level extension for expert programmers seeking to access this functionality directly in custom kernels. Most users will access this
-     * functionality via high-level libraries or frameworks.</p>
-     * 
-     * <p>Requires support for subgroups.</p>
-     */
+    /** When true, {@code intel_subgroup_matrix_multiply_accumulate} is supported. */
     public final boolean cl_intel_subgroup_matrix_multiply_accumulate;
-    /**
-     * The goal of this extension is to allow programmers to access specialized hardware to compute the product of an M x K matrix with a K x N matrix and
-     * then add an M x N matrix accumulation value. This is a commonly used building block to compute the product of two large matrices.
-     * 
-     * <p>The functionality described in this extension is very similar to the functionality described in the
-     * {@code cl_intel_subgroup_matrix_multiply_accumulate} extension, with one key difference: in this extension, work items across two subgroups cooperate
-     * to perform the operation. This is done by splitting the M x K matrix source across two participating subgroups: The first M-divided-by-2 rows of the
-     * matrix source are provided by the first subgroup, and the remaining M-divided-by-2 rows of the matrix source are provided by the second subgroup.</p>
-     * 
-     * <p>Splitting the matrix source improves performance by halving the amount of data each subgroup must load for the first matrix source.</p>
-     * 
-     * <p>Requires support for subgroups.</p>
-     */
+    /** When true, {@code intel_subgroup_split_matrix_multiply_accumulate} is supported. */
     public final boolean cl_intel_subgroup_split_matrix_multiply_accumulate;
-    /** When true, {@link INTELSubgroups} is supported. */
+    /** When true, {@code intel_subgroups} is supported. */
     public final boolean cl_intel_subgroups;
-    /**
-     * The goal of this extension is to allow programmers to improve the performance of applications operating on 8-bit data types by extending the subgroup
-     * functions described in the {@link INTELSubgroups intel_subgroups} extension to support 8-bit integer data types (chars and uchars). Specifically, the extension:
-     * 
-     * <ul>
-     * <li>Extends the subgroup broadcast function to allow 8-bit integer values to be broadcast from one work item to all other work items in the subgroup.</li>
-     * <li>Extends the subgroup scan and reduction functions to operate on 8-bit integer data types.</li>
-     * <li>Extends the Intel subgroup shuffle functions to allow arbitrarily exchanging 8-bit integer values among work items in the subgroup.</li>
-     * <li>Extends the Intel subgroup block read and write functions to allow reading and writing 8-bit integer data from images and buffers.</li>
-     * </ul>
-     * 
-     * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}.</p>
-     */
+    /** When true, {@code intel_subgroups_char} is supported. */
     public final boolean cl_intel_subgroups_char;
-    /**
-     * The goal of this extension is to allow programmers to improve the performance of applications operating on 64-bit data types by extending the subgroup
-     * functions described in the {@link INTELSubgroups intel_subgroups} extension to support 64-bit integer data types (longs and ulongs). Specifically, the extension:
-     * 
-     * <ul>
-     * <li>Extends the Intel subgroup block read and write functions to allow reading and writing 64-bit integer data from images and buffers.</li>
-     * </ul>
-     * 
-     * <p>Note that {@code cl_intel_subgroups} and {@code cl_khr_subgroups} already support broadcasts, scans, and reductions for 64-bit integer types, and that
-     * {@code cl_intel_subgroups} already supports shuffles for 64-bit integer types.</p>
-     * 
-     * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}.</p>
-     */
+    /** When true, {@code intel_subgroups_long} is supported. */
     public final boolean cl_intel_subgroups_long;
-    /**
-     * The goal of this extension is to allow programmers to improve the performance of applications operating on 16-bit data types by extending the subgroup
-     * functions described in the {@link INTELSubgroups intel_subgroups} extension to support 16-bit integer data types (shorts and ushorts). Specifically, the extension:
-     * 
-     * <ul>
-     * <li>Extends the subgroup broadcast function to allow 16-bit integer values to be broadcast from one work item to all other work items in the subgroup.</li>
-     * <li>Extends the subgroup scan and reduction functions to operate on 16-bit integer data types.</li>
-     * <li>Extends the Intel subgroup shuffle functions to allow arbitrarily exchanging 16-bit integer values among work items in the subgroup.</li>
-     * <li>Extends the Intel subgroup block read and write functions to allow reading and writing 16-bit integer data from images and buffers.</li>
-     * </ul>
-     * 
-     * <p>Requires {@link CL12 OpenCL 1.2} and {@link INTELSubgroups intel_subgroups}.</p>
-     */
+    /** When true, {@code intel_subgroups_short} is supported. */
     public final boolean cl_intel_subgroups_short;
-    /** When true, {@link INTELUnifiedSharedMemory} is supported. */
+    /** When true, {@code intel_unified_shared_memory} is supported. */
     public final boolean cl_intel_unified_shared_memory;
-    /** When true, {@link INTELVAAPIMediaSharing} is supported. */
+    /** When true, {@code intel_va_api_media_sharing} is supported. */
     public final boolean cl_intel_va_api_media_sharing;
-    /**
-     * When true, the <strong>khr_3d_image_writes</strong> extension is supported.
-     * 
-     * <p>This extension adds support for kernel writes to 3D images.</p>
-     */
+    /** When true, {@code khr_3d_image_writes} is supported. */
     public final boolean cl_khr_3d_image_writes;
-    /**
-     * When true, the <strong>khr_async_work_group_copy_fence</strong> extension is supported.
-     * 
-     * <p>The extension adds a new built-in function to OpenCL C to establish a memory synchronization ordering of asynchronous copies.</p>
-     */
+    /** When true, {@code khr_async_work_group_copy_fence} is supported. */
     public final boolean cl_khr_async_work_group_copy_fence;
-    /**
-     * When true, the <strong>khr_byte_addressable_store</strong> extension is supported.
-     * 
-     * <p>This extension eliminates the restriction of not allowing writes to a pointer (or array elements) of types less than 32-bit wide in kernel program.</p>
-     */
+    /** When true, {@code khr_byte_addressable_store} is supported. */
     public final boolean cl_khr_byte_addressable_store;
-    /** When true, {@link KHRCommandBuffer} is supported. */
+    /** When true, {@code khr_command_buffer} is supported. */
     public final boolean cl_khr_command_buffer;
-    /** When true, {@link KHRCreateCommandQueue} is supported. */
+    /** When true, {@code khr_create_command_queue} is supported. */
     public final boolean cl_khr_create_command_queue;
-    /** When true, {@link KHRDepthImages} is supported. */
+    /** When true, {@code khr_depth_images} is supported. */
     public final boolean cl_khr_depth_images;
-    /**
-     * When true, the <strong>khr_device_enqueue_local_arg_types</strong> extension is supported.
-     * 
-     * <p>This extension allows arguments to blocks passed to enqueue_kernel functions to be declared as a pointer to any type (built-in or user-defined) in
-     * local memory instead of just {@code local void *}.</p>
-     */
+    /** When true, {@code khr_device_enqueue_local_arg_types} is supported. */
     public final boolean cl_khr_device_enqueue_local_arg_types;
-    /** When true, {@link KHRDeviceUUID} is supported. */
+    /** When true, {@code khr_device_uuid} is supported. */
     public final boolean cl_khr_device_uuid;
-    /** When true, {@link KHREGLEvent} is supported. */
+    /** When true, {@code khr_egl_event} is supported. */
     public final boolean cl_khr_egl_event;
-    /** When true, {@link KHREGLImage} is supported. */
+    /** When true, {@code khr_egl_image} is supported. */
     public final boolean cl_khr_egl_image;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_expect_assume.txt">khr_expect_assume</a> extension is supported.
-     * 
-     * <p>This extension adds mechanisms to provide information to the compiler that may improve the performance of some kernels. Specifically, this extension
-     * adds the ability to:</p>
-     * 
-     * <ul>
-     * <li>Tell the compiler the <i>expected</i> value of a variable.</li>
-     * <li>Allow the compiler to <i>assume</i> a condition is true.</li>
-     * </ul>
-     * 
-     * <p>These functions are not required for functional correctness.</p>
-     * 
-     * <p>The initial version of this extension extends the OpenCL SPIR-V environment to support new instructions for offline compilation tool chains. Similar
-     * functionality may be provided by some OpenCL C online compilation tool chains, but formal support in OpenCL C is not required by the initial version of
-     * the extension.</p>
-     */
+    /** When true, {@code khr_expect_assume} is supported. */
     public final boolean cl_khr_expect_assume;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_async_copies.txt">khr_extended_async_copies</a> extension is supported.
-     * 
-     * <p>This extension augments built-in asynchronous copy functions to OpenCL C to support more patterns:</p>
-     * 
-     * <ol>
-     * <li>for async copy between 2D source and 2D destination.</li>
-     * <li>for async copy between 3D source and 3D destination.</li>
-     * </ol>
-     */
+    /** When true, {@code khr_extended_async_copies} is supported. */
     public final boolean cl_khr_extended_async_copies;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_extended_bit_ops.txt">khr_extended_bit_ops</a> extension is supported.
-     * 
-     * <p>This extension adds OpenCL C functions for performing extended bit operations. Specifically, the following functions are added:</p>
-     * 
-     * <ul>
-     * <li>bitfield insert: insert bits from one source operand into another source operand.</li>
-     * <li>bitfield extract: extract bits from a source operand, with sign- or zero-extension.</li>
-     * <li>bit reverse: reverse the bits of a source operand.</li>
-     * </ul>
-     */
+    /** When true, {@code khr_extended_bit_ops} is supported. */
     public final boolean cl_khr_extended_bit_ops;
-    /** When true, {@link KHRExtendedVersioning} is supported. */
+    /** When true, {@code khr_extended_versioning} is supported. */
     public final boolean cl_khr_extended_versioning;
-    /** When true, {@link KHRExternalMemory} is supported. */
+    /** When true, {@code khr_external_memory} is supported. */
     public final boolean cl_khr_external_memory;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_dma_buf.txt">khr_external_memory_dma_buf</a> extension is supported. */
+    /** When true, {@code khr_external_memory_dma_buf} is supported. */
     public final boolean cl_khr_external_memory_dma_buf;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_opaque_fd.txt">khr_external_memory_opaque_fd</a> extension is supported. */
+    /** When true, {@code khr_external_memory_opaque_fd} is supported. */
     public final boolean cl_khr_external_memory_opaque_fd;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_external_memory_win32.txt">khr_external_memory_win32</a> extension is supported. */
+    /** When true, {@code khr_external_memory_win32} is supported. */
     public final boolean cl_khr_external_memory_win32;
-    /** When true, {@link KHRExternalSemaphore} is supported. */
+    /** When true, {@code khr_external_semaphore} is supported. */
     public final boolean cl_khr_external_semaphore;
-    /** When true, {@link KHRFP16} is supported. */
+    /** When true, {@code khr_fp16} is supported. */
     public final boolean cl_khr_fp16;
-    /** When true, {@link KHRFP64} is supported. */
+    /** When true, {@code khr_fp64} is supported. */
     public final boolean cl_khr_fp64;
-    /** When true, {@link KHRGLDepthImages} is supported. */
+    /** When true, {@code khr_gl_depth_images} is supported. */
     public final boolean cl_khr_gl_depth_images;
-    /** When true, {@link KHRGLEvent} is supported. */
+    /** When true, {@code khr_gl_event} is supported. */
     public final boolean cl_khr_gl_event;
-    /** When true, {@link KHRGLMSAASharing} is supported. */
+    /** When true, {@code khr_gl_msaa_sharing} is supported. */
     public final boolean cl_khr_gl_msaa_sharing;
-    /** When true, {@link KHRGLSharing} is supported. */
+    /** When true, {@code khr_gl_sharing} is supported. */
     public final boolean cl_khr_gl_sharing;
-    /**
-     * When true, the <strong>khr_global_int32_base_atomics</strong> extension is supported.
-     * 
-     * <p>This extension adds basic atomic operations on 32-bit integers in global memory.</p>
-     */
+    /** When true, {@code khr_global_int32_base_atomics} is supported. */
     public final boolean cl_khr_global_int32_base_atomics;
-    /**
-     * When true, the <strong>khr_global_int32_extended_atomics</strong> extension is supported.
-     * 
-     * <p>This extension adds extended atomic operations on 32-bit integers in global memory.</p>
-     */
+    /** When true, {@code khr_global_int32_extended_atomics} is supported. */
     public final boolean cl_khr_global_int32_extended_atomics;
-    /** When true, {@link KHRICD} is supported. */
+    /** When true, {@code khr_icd} is supported. */
     public final boolean cl_khr_icd;
-    /** When true, {@link KHRILProgram} is supported. */
+    /** When true, {@code khr_il_program} is supported. */
     public final boolean cl_khr_il_program;
-    /** When true, {@link KHRImage2DFromBuffer} is supported. */
+    /** When true, {@code khr_image2d_from_buffer} is supported. */
     public final boolean cl_khr_image2d_from_buffer;
-    /** When true, {@link KHRInitializeMemory} is supported. */
+    /** When true, {@code khr_initialize_memory} is supported. */
     public final boolean cl_khr_initialize_memory;
-    /**
-     * When true, the <strong>khr_int64_base_atomics</strong> extension is supported.
-     * 
-     * <p>This extension adds basic atomic operations on 64-bit integers in both global and local memory.</p>
-     */
+    /** When true, {@code khr_int64_base_atomics} is supported. */
     public final boolean cl_khr_int64_base_atomics;
-    /**
-     * When true, the <strong>khr_int64_extended_atomics</strong> extension is supported.
-     * 
-     * <p>This extension adds extended atomic operations on 64-bit integers in both global and local memory.</p>
-     */
+    /** When true, {@code khr_int64_extended_atomics} is supported. */
     public final boolean cl_khr_int64_extended_atomics;
-    /** When true, {@link KHRIntegerDotProduct} is supported. */
+    /** When true, {@code khr_integer_dot_product} is supported. */
     public final boolean cl_khr_integer_dot_product;
-    /**
-     * When true, the <strong>khr_local_int32_base_atomics</strong> extension is supported.
-     * 
-     * <p>This extension adds basic atomic operations on 32-bit integers in local memory.</p>
-     */
+    /** When true, {@code khr_local_int32_base_atomics} is supported. */
     public final boolean cl_khr_local_int32_base_atomics;
-    /**
-     * When true, the <strong>khr_local_int32_extended_atomics</strong> extension is supported.
-     * 
-     * <p>This extension adds extended atomic operations on 32-bit integers in local memory.</p>
-     */
+    /** When true, {@code khr_local_int32_extended_atomics} is supported. */
     public final boolean cl_khr_local_int32_extended_atomics;
-    /** When true, {@link KHRMipmapImage} is supported. */
+    /** When true, {@code khr_mipmap_image} is supported. */
     public final boolean cl_khr_mipmap_image;
-    /**
-     * When true, the <strong>khr_mipmap_image_writes</strong> extension is supported.
-     * 
-     * <p>This extension adds built-in functions that can be used to write a mip-mapped image in an OpenCL C program.</p>
-     */
+    /** When true, {@code khr_mipmap_image_writes} is supported. */
     public final boolean cl_khr_mipmap_image_writes;
-    /** When true, {@link KHRPCIBusInfo} is supported. */
+    /** When true, {@code khr_pci_bus_info} is supported. */
     public final boolean cl_khr_pci_bus_info;
-    /** When true, {@link KHRPriorityHints} is supported. */
+    /** When true, {@code khr_priority_hints} is supported. */
     public final boolean cl_khr_priority_hints;
-    /**
-     * When true, the <strong>khr_select_fprounding_mode</strong> extension is supported.
-     * 
-     * <p>This extension adds support for specifying the rounding mode for an instruction or group of instructions in the program source.</p>
-     * 
-     * <p>The appropriate rounding mode can be specified using {@code #pragma OPENCL SELECT_ROUNDING_MODE} rounding-mode in the program source.</p>
-     * 
-     * <p>The {@code #pragma OPENCL SELECT_ROUNDING_MODE} sets the rounding mode for all instructions that operate on floating-point types (scalar or vector
-     * types) or produce floating-point values that follow this pragma in the program source until the next {@code #pragma OPENCL SELECT_ROUNDING_MODE} is
-     * encountered. Note that the rounding mode specified for a block of code is known at compile time. Except where otherwise documented, the callee
-     * functions do not inherit the rounding mode of the caller function.</p>
-     * 
-     * <p>If this extension is enabled, the {@code __ROUNDING_MODE__} preprocessor symbol shall be defined to be one of the following according to the current
-     * rounding mode:</p>
-     * 
-     * <pre><code>
-     * #define __ROUNDING_MODE__ rte
-     * #define __ROUNDING_MODE__ rtz
-     * #define __ROUNDING_MODE__ rtp
-     * #define __ROUNDING_MODE__ rtz</code></pre>
-     * 
-     * <p>The default rounding mode is round to nearest even. The built-in math functions, the common functions, and the geometric functions are implemented with
-     * the round to nearest even rounding mode.</p>
-     * 
-     * <p>Various built-in conversions and the vstore_half and vstorea_halfn built-in functions that do not specify a rounding mode inherit the current rounding
-     * mode. Conversions from floating-point to integer type always use rtz mode, except where the user specifically asks for another rounding mode.</p>
-     * 
-     * <p>Notes The above four rounding modes are defined by IEEE 754. Floating-point calculations may be carried out internally with extra precision and then
-     * rounded to fit into the destination type. Round to nearest even is currently the only rounding mode required by the OpenCL specification and is
-     * therefore the default rounding mode. In addition, only static selection of rounding mode is supported. Dynamically reconfiguring the rounding modes as
-     * specified by the IEEE 754 spec is not a requirement.</p>
-     */
+    /** When true, {@code khr_select_fprounding_mode} is supported. */
     public final boolean cl_khr_select_fprounding_mode;
-    /** When true, {@link KHRSemaphore} is supported. */
+    /** When true, {@code khr_semaphore} is supported. */
     public final boolean cl_khr_semaphore;
-    /** When true, {@link KHRSPIR} is supported. */
+    /** When true, {@code khr_spir} is supported. */
     public final boolean cl_khr_spir;
-    /**
-     * When true, the <strong>khr_srgb_image_writes</strong> extension is supported.
-     * 
-     * <p>This extension enables kernels to write to sRGB images using the {@code write_imagef} built-in function. The sRGB image formats that may be written to
-     * will be returned by {@link CL10#clGetSupportedImageFormats GetSupportedImageFormats}.</p>
-     * 
-     * <p>When the image is an sRGB image, the {@code write_imagef} built-in function will perform the linear to sRGB conversion. Only the R, G, and B components
-     * are converted from linear to sRGB; the A component is written as-is.</p>
-     */
+    /** When true, {@code khr_srgb_image_writes} is supported. */
     public final boolean cl_khr_srgb_image_writes;
-    /**
-     * When true, the <strong>khr_subgroup_ballot</strong> extension is supported.
-     * 
-     * <p>This extension adds the ability to collect and operate on ballots from work items in the subgroup.</p>
-     */
+    /** When true, {@code khr_subgroup_ballot} is supported. */
     public final boolean cl_khr_subgroup_ballot;
-    /**
-     * When true, the <strong>khr_subgroup_clustered_reduce</strong> extension is supported.
-     * 
-     * <p>This extension adds support for clustered reductions that operate on a subset of work items in the subgroup.</p>
-     */
+    /** When true, {@code khr_subgroup_clustered_reduce} is supported. */
     public final boolean cl_khr_subgroup_clustered_reduce;
-    /**
-     * When true, the <strong>khr_subgroup_extended_types</strong> extension is supported.
-     * 
-     * <p>This extension adds additional supported data types to the existing subgroup broadcast, scan, and reduction functions.</p>
-     */
+    /** When true, {@code khr_subgroup_extended_types} is supported. */
     public final boolean cl_khr_subgroup_extended_types;
-    /** When true, {@link KHRSubgroupNamedBarrier} is supported. */
+    /** When true, {@code khr_subgroup_named_barrier} is supported. */
     public final boolean cl_khr_subgroup_named_barrier;
-    /**
-     * When true, the <strong>khr_subgroup_non_uniform_arithmetic</strong> extension is supported.
-     * 
-     * <p>This extension adds the ability to use some subgroup functions within non-uniform flow control, including additional scan and reduction operators.</p>
-     */
+    /** When true, {@code khr_subgroup_non_uniform_arithmetic} is supported. */
     public final boolean cl_khr_subgroup_non_uniform_arithmetic;
-    /**
-     * When true, the <strong>khr_subgroup_non_uniform_vote</strong> extension is supported.
-     * 
-     * <p>This extension adds the ability to elect a single work item from a subgroup to perform a task and to hold votes among work items in a subgroup.</p>
-     */
+    /** When true, {@code khr_subgroup_non_uniform_vote} is supported. */
     public final boolean cl_khr_subgroup_non_uniform_vote;
-    /**
-     * When true, the <strong>khr_subgroup_shuffle</strong> extension is supported.
-     * 
-     * <p>This extension adds additional ways to exchange data among work items in a subgroup.</p>
-     */
+    /** When true, {@code khr_subgroup_shuffle} is supported. */
     public final boolean cl_khr_subgroup_shuffle;
-    /**
-     * When true, the <strong>khr_subgroup_shuffle_relative</strong> extension is supported.
-     * 
-     * <p>This extension adds specialized ways to exchange data among work items in a subgroup that may perform better on some implementations.</p>
-     */
+    /** When true, {@code khr_subgroup_shuffle_relative} is supported. */
     public final boolean cl_khr_subgroup_shuffle_relative;
-    /** When true, {@link KHRSubgroups} is supported. */
+    /** When true, {@code khr_subgroups} is supported. */
     public final boolean cl_khr_subgroups;
-    /** When true, {@link KHRSuggestedLocalWorkSize} is supported. */
+    /** When true, {@code khr_suggested_local_work_size} is supported. */
     public final boolean cl_khr_suggested_local_work_size;
-    /** When true, {@link KHRTerminateContext} is supported. */
+    /** When true, {@code khr_terminate_context} is supported. */
     public final boolean cl_khr_terminate_context;
-    /** When true, {@link KHRThrottleHints} is supported. */
+    /** When true, {@code khr_throttle_hints} is supported. */
     public final boolean cl_khr_throttle_hints;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_compiler_options.txt">nv_compiler_options</a> extension is supported.
-     * 
-     * <p>This extension allows the programmer to pass options to the PTX assembler allowing greater control over code generation.</p>
-     * 
-     * <pre><code>
-     * -cl-nv-maxrregcount &lt;N&gt;
-     *     Passed on to ptxas as --maxrregcount &lt;N&gt;
-     *         N is a positive integer.
-     *     Specify the maximum number of registers that GPU functions can use.
-     *     Until a function-specific limit, a higher value will generally increase
-     *     the performance of individual GPU threads that execute this function.
-     *     However, because thread registers are allocated from a global register
-     *     pool on each GPU, a higher value of this option will also reduce the
-     *     maximum thread block size, thereby reducing the amount of thread
-     *     parallelism. Hence, a good maxrregcount value is the result of a
-     *     trade-off.
-     *     If this option is not specified, then no maximum is assumed. Otherwise
-     *     the specified value will be rounded to the next multiple of 4 registers
-     *     until the GPU specific maximum of 128 registers.
-     * 
-     * -cl-nv-opt-level &lt;N&gt;
-     *     Passed on to ptxas as --opt-level &lt;N&gt;
-     *         N is a positive integer, or 0 (no optimization).
-     *     Specify optimization level.
-     *     Default value:  3.
-     * 
-     * -cl-nv-verbose
-     *     Passed on to ptxas as --verbose
-     *     Enable verbose mode.
-     *     Output will be reported in the build log (accessible through the
-     *     callback parameter to clBuildProgram).</code></pre>
-     */
+    /** When true, {@code nv_compiler_options} is supported. */
     public final boolean cl_nv_compiler_options;
-    /** When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_copy_opts.txt">nv_copy_opts</a> extension is supported. */
+    /** When true, {@code nv_copy_opts} is supported. */
     public final boolean cl_nv_copy_opts;
-    /** When true, {@link NVCreateBuffer} is supported. */
+    /** When true, {@code nv_create_buffer} is supported. */
     public final boolean cl_nv_create_buffer;
-    /** When true, {@link NVDeviceAttributeQuery} is supported. */
+    /** When true, {@code nv_device_attribute_query} is supported. */
     public final boolean cl_nv_device_attribute_query;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenCL/extensions/nv/cl_nv_pragma_unroll.txt">nv_pragma_unroll</a> extension is supported.
-     * 
-     * <h5>Overview</h5>
-     * 
-     * <p>This extension extends the OpenCL C language with a hint that allows loops to be unrolled. This pragma must be used for a loop and can be used to
-     * specify full unrolling or partial unrolling by a certain amount. This is a hint and the compiler may ignore this pragma for any reason.</p>
-     * 
-     * <h5>Goals</h5>
-     * 
-     * <p>The principal goal of the pragma unroll is to improve the performance of loops via unrolling. Typically this enables other optimizations or improves
-     * instruction level parallelism of a thread.</p>
-     * 
-     * <h5>Details</h5>
-     * 
-     * <p>A user may specify that a loop in the source program be unrolled. This is done via a pragma. The syntax of this pragma is as follows</p>
-     * 
-     * <p>{@code #pragma unroll [unroll-factor]}</p>
-     * 
-     * <p>The pragma unroll may optionally specify an unroll factor. The pragma must be placed immediately before the loop and only applies to that loop.</p>
-     * 
-     * <p>If unroll factor is not specified then the compiler will try to do complete or full unrolling of the loop. If a loop unroll factor is specified the
-     * compiler will perform partial loop unrolling. The loop factor, if specified, must be a compile time non negative integer constant.</p>
-     * 
-     * <p>A loop unroll factor of 1 means that the compiler should not unroll the loop.</p>
-     * 
-     * <p>A complete unroll specification has no effect if the trip count of the loop is not compile-time computable.</p>
-     */
+    /** When true, {@code nv_pragma_unroll} is supported. */
     public final boolean cl_nv_pragma_unroll;
-    /** When true, {@link pocl_content_size} is supported. */
+    /** When true, {@code pocl_content_size} is supported. */
     public final boolean cl_pocl_content_size;
-    /** When true, {@link QCOMEXTHostPtr} is supported. */
+    /** When true, {@code qcom_ext_host_ptr} is supported. */
     public final boolean cl_qcom_ext_host_ptr;
-    /** When true, {@link QCOMEXTHostPtrIOCoherent} is supported. */
+    /** When true, {@code qcom_ext_host_ptr_iocoherent} is supported. */
     public final boolean cl_qcom_ext_host_ptr_iocoherent;
 
     CLCapabilities(FunctionProvider provider, Set<String> ext) {

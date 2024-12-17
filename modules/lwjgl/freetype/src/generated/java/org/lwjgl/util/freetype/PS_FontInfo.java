@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to model a Type~1 or Type~2 FontInfo dictionary. Note that for Multiple Master fonts, each instance has its own FontInfo dictionary.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct PS_FontInfoRec {
  *     FT_String * version;
  *     FT_String * notice;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Bool is_fixed_pitch;
  *     FT_Short underline_position;
  *     FT_UShort underline_thickness;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct PS_FontInfoRec")
 public class PS_FontInfo extends Struct<PS_FontInfo> {

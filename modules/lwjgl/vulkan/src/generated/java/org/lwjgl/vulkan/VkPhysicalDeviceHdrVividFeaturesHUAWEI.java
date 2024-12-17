@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether HDR Vivid metadata is supported.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceHdrVividFeaturesHUAWEI {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #hdrVivid};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 hdrVivid;
+ * }}</pre>
  */
 public class VkPhysicalDeviceHdrVividFeaturesHUAWEI extends Struct<VkPhysicalDeviceHdrVividFeaturesHUAWEI> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceHdrVividFeaturesHUAWEI extends Struct<VkPhysicalDev
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether HDR Vivid metadata is supported. */
+    /** @return the value of the {@code hdrVivid} field. */
     @NativeType("VkBool32")
     public boolean hdrVivid() { return nhdrVivid(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceHdrVividFeaturesHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI} value to the {@link #sType} field. */
+    /** Sets the {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI} value to the {@code sType} field. */
     public VkPhysicalDeviceHdrVividFeaturesHUAWEI sType$Default() { return sType(HUAWEIHdrVivid.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceHdrVividFeaturesHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #hdrVivid} field. */
+    /** Sets the specified value to the {@code hdrVivid} field. */
     public VkPhysicalDeviceHdrVividFeaturesHUAWEI hdrVivid(@NativeType("VkBool32") boolean value) { nhdrVivid(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceHdrVividFeaturesHUAWEI extends Struct<VkPhysicalDev
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceHdrVividFeaturesHUAWEI.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceHdrVividFeaturesHUAWEI.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI#hdrVivid} field. */
+        /** @return the value of the {@code hdrVivid} field. */
         @NativeType("VkBool32")
         public boolean hdrVivid() { return VkPhysicalDeviceHdrVividFeaturesHUAWEI.nhdrVivid(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceHdrVividFeaturesHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceHdrVividFeaturesHUAWEI.nsType(address(), value); return this; }
-        /** Sets the {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI} value to the {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI#sType} field. */
+        /** Sets the {@link HUAWEIHdrVivid#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI} value to the {@code sType} field. */
         public VkPhysicalDeviceHdrVividFeaturesHUAWEI.Buffer sType$Default() { return sType(HUAWEIHdrVivid.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceHdrVividFeaturesHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceHdrVividFeaturesHUAWEI.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI#hdrVivid} field. */
+        /** Sets the specified value to the {@code hdrVivid} field. */
         public VkPhysicalDeviceHdrVividFeaturesHUAWEI.Buffer hdrVivid(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceHdrVividFeaturesHUAWEI.nhdrVivid(address(), value ? 1 : 0); return this; }
 
     }

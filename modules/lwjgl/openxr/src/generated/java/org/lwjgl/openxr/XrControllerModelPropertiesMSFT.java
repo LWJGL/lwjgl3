@@ -16,31 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the properties of a controller model.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using {@link XrControllerModelPropertiesMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code nodeCapacityInput} is not 0, {@code nodeProperties} <b>must</b> be a pointer to an array of {@code nodeCapacityInput} {@link XrControllerModelNodePropertiesMSFT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrControllerModelNodePropertiesMSFT}, {@link MSFTControllerModel#xrGetControllerModelPropertiesMSFT GetControllerModelPropertiesMSFT}, {@link MSFTControllerModel#xrLoadControllerModelMSFT LoadControllerModelMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrControllerModelPropertiesMSFT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #nodeCapacityInput};
- *     uint32_t {@link #nodeCountOutput};
- *     {@link XrControllerModelNodePropertiesMSFT XrControllerModelNodePropertiesMSFT} * {@link #nodeProperties};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t nodeCapacityInput;
+ *     uint32_t nodeCountOutput;
+ *     {@link XrControllerModelNodePropertiesMSFT XrControllerModelNodePropertiesMSFT} * nodeProperties;
+ * }}</pre>
  */
 public class XrControllerModelPropertiesMSFT extends Struct<XrControllerModelPropertiesMSFT> implements NativeResource {
 
@@ -99,33 +82,33 @@ public class XrControllerModelPropertiesMSFT extends Struct<XrControllerModelPro
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the capacity of the {@code nodeProperties} array, or 0 to indicate a request to retrieve the required capacity. */
+    /** @return the value of the {@code nodeCapacityInput} field. */
     @NativeType("uint32_t")
     public int nodeCapacityInput() { return nnodeCapacityInput(address()); }
-    /** filled in by the runtime with the count of elements in {@code nodeProperties} array, or returns the required capacity in the case that {@code nodeCapacityInput} is insufficient. */
+    /** @return the value of the {@code nodeCountOutput} field. */
     @NativeType("uint32_t")
     public int nodeCountOutput() { return nnodeCountOutput(address()); }
-    /** a pointer to an application-allocated array that will be filled with the {@link XrControllerModelNodePropertiesMSFT} values. It <b>can</b> be {@code NULL} if {@code nodeCapacityInput} is 0. */
+    /** @return a {@link XrControllerModelNodePropertiesMSFT.Buffer} view of the struct array pointed to by the {@code nodeProperties} field. */
     @NativeType("XrControllerModelNodePropertiesMSFT *")
     public XrControllerModelNodePropertiesMSFT.@Nullable Buffer nodeProperties() { return nnodeProperties(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrControllerModelPropertiesMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT} value to the {@code type} field. */
     public XrControllerModelPropertiesMSFT type$Default() { return type(MSFTControllerModel.XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrControllerModelPropertiesMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #nodeCapacityInput} field. */
+    /** Sets the specified value to the {@code nodeCapacityInput} field. */
     public XrControllerModelPropertiesMSFT nodeCapacityInput(@NativeType("uint32_t") int value) { nnodeCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@link #nodeCountOutput} field. */
+    /** Sets the specified value to the {@code nodeCountOutput} field. */
     public XrControllerModelPropertiesMSFT nodeCountOutput(@NativeType("uint32_t") int value) { nnodeCountOutput(address(), value); return this; }
-    /** Sets the address of the specified {@link XrControllerModelNodePropertiesMSFT.Buffer} to the {@link #nodeProperties} field. */
+    /** Sets the address of the specified {@link XrControllerModelNodePropertiesMSFT.Buffer} to the {@code nodeProperties} field. */
     public XrControllerModelPropertiesMSFT nodeProperties(@NativeType("XrControllerModelNodePropertiesMSFT *") XrControllerModelNodePropertiesMSFT.@Nullable Buffer value) { nnodeProperties(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -333,33 +316,33 @@ public class XrControllerModelPropertiesMSFT extends Struct<XrControllerModelPro
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrControllerModelPropertiesMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrControllerModelPropertiesMSFT.ntype(address()); }
-        /** @return the value of the {@link XrControllerModelPropertiesMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrControllerModelPropertiesMSFT.nnext(address()); }
-        /** @return the value of the {@link XrControllerModelPropertiesMSFT#nodeCapacityInput} field. */
+        /** @return the value of the {@code nodeCapacityInput} field. */
         @NativeType("uint32_t")
         public int nodeCapacityInput() { return XrControllerModelPropertiesMSFT.nnodeCapacityInput(address()); }
-        /** @return the value of the {@link XrControllerModelPropertiesMSFT#nodeCountOutput} field. */
+        /** @return the value of the {@code nodeCountOutput} field. */
         @NativeType("uint32_t")
         public int nodeCountOutput() { return XrControllerModelPropertiesMSFT.nnodeCountOutput(address()); }
-        /** @return a {@link XrControllerModelNodePropertiesMSFT.Buffer} view of the struct array pointed to by the {@link XrControllerModelPropertiesMSFT#nodeProperties} field. */
+        /** @return a {@link XrControllerModelNodePropertiesMSFT.Buffer} view of the struct array pointed to by the {@code nodeProperties} field. */
         @NativeType("XrControllerModelNodePropertiesMSFT *")
         public XrControllerModelNodePropertiesMSFT.@Nullable Buffer nodeProperties() { return XrControllerModelPropertiesMSFT.nnodeProperties(address()); }
 
-        /** Sets the specified value to the {@link XrControllerModelPropertiesMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrControllerModelPropertiesMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrControllerModelPropertiesMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT} value to the {@link XrControllerModelPropertiesMSFT#type} field. */
+        /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT} value to the {@code type} field. */
         public XrControllerModelPropertiesMSFT.Buffer type$Default() { return type(MSFTControllerModel.XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT); }
-        /** Sets the specified value to the {@link XrControllerModelPropertiesMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrControllerModelPropertiesMSFT.Buffer next(@NativeType("void *") long value) { XrControllerModelPropertiesMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrControllerModelPropertiesMSFT#nodeCapacityInput} field. */
+        /** Sets the specified value to the {@code nodeCapacityInput} field. */
         public XrControllerModelPropertiesMSFT.Buffer nodeCapacityInput(@NativeType("uint32_t") int value) { XrControllerModelPropertiesMSFT.nnodeCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrControllerModelPropertiesMSFT#nodeCountOutput} field. */
+        /** Sets the specified value to the {@code nodeCountOutput} field. */
         public XrControllerModelPropertiesMSFT.Buffer nodeCountOutput(@NativeType("uint32_t") int value) { XrControllerModelPropertiesMSFT.nnodeCountOutput(address(), value); return this; }
-        /** Sets the address of the specified {@link XrControllerModelNodePropertiesMSFT.Buffer} to the {@link XrControllerModelPropertiesMSFT#nodeProperties} field. */
+        /** Sets the address of the specified {@link XrControllerModelNodePropertiesMSFT.Buffer} to the {@code nodeProperties} field. */
         public XrControllerModelPropertiesMSFT.Buffer nodeProperties(@NativeType("XrControllerModelNodePropertiesMSFT *") XrControllerModelNodePropertiesMSFT.@Nullable Buffer value) { XrControllerModelPropertiesMSFT.nnodeProperties(address(), value); return this; }
 
     }

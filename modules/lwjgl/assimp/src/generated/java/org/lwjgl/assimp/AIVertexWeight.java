@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A single influence of a bone on a vertex.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiVertexWeight {
- *     unsigned int {@link #mVertexId};
- *     float {@link #mWeight};
- * }</code></pre>
+ *     unsigned int mVertexId;
+ *     float mWeight;
+ * }}</pre>
  */
 @NativeType("struct aiVertexWeight")
 public class AIVertexWeight extends Struct<AIVertexWeight> implements NativeResource {
@@ -75,15 +71,15 @@ public class AIVertexWeight extends Struct<AIVertexWeight> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Index of the vertex which is influenced by the bone. */
+    /** @return the value of the {@code mVertexId} field. */
     @NativeType("unsigned int")
     public int mVertexId() { return nmVertexId(address()); }
-    /** The strength of the influence in the range (0...1). The influence from all bones at one vertex amounts to 1. */
+    /** @return the value of the {@code mWeight} field. */
     public float mWeight() { return nmWeight(address()); }
 
-    /** Sets the specified value to the {@link #mVertexId} field. */
+    /** Sets the specified value to the {@code mVertexId} field. */
     public AIVertexWeight mVertexId(@NativeType("unsigned int") int value) { nmVertexId(address(), value); return this; }
-    /** Sets the specified value to the {@link #mWeight} field. */
+    /** Sets the specified value to the {@code mWeight} field. */
     public AIVertexWeight mWeight(float value) { nmWeight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,15 +288,15 @@ public class AIVertexWeight extends Struct<AIVertexWeight> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AIVertexWeight#mVertexId} field. */
+        /** @return the value of the {@code mVertexId} field. */
         @NativeType("unsigned int")
         public int mVertexId() { return AIVertexWeight.nmVertexId(address()); }
-        /** @return the value of the {@link AIVertexWeight#mWeight} field. */
+        /** @return the value of the {@code mWeight} field. */
         public float mWeight() { return AIVertexWeight.nmWeight(address()); }
 
-        /** Sets the specified value to the {@link AIVertexWeight#mVertexId} field. */
+        /** Sets the specified value to the {@code mVertexId} field. */
         public AIVertexWeight.Buffer mVertexId(@NativeType("unsigned int") int value) { AIVertexWeight.nmVertexId(address(), value); return this; }
-        /** Sets the specified value to the {@link AIVertexWeight#mWeight} field. */
+        /** Sets the specified value to the {@code mWeight} field. */
         public AIVertexWeight.Buffer mWeight(float value) { AIVertexWeight.nmWeight(address(), value); return this; }
 
     }

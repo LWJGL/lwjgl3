@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a space from a spatial anchor.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link VARJOMarkerTracking XR_VARJO_marker_tracking} extension <b>must</b> be enabled prior to using {@link XrMarkerSpaceCreateInfoVARJO}</li>
- * <li>{@code type} <b>must</b> be {@link VARJOMarkerTracking#XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO TYPE_MARKER_SPACE_CREATE_INFO_VARJO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link VARJOMarkerTracking#xrCreateMarkerSpaceVARJO CreateMarkerSpaceVARJO}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMarkerSpaceCreateInfoVARJO {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint64_t {@link #markerId};
- *     {@link XrPosef XrPosef} {@link #poseInMarkerSpace};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint64_t markerId;
+ *     {@link XrPosef XrPosef} poseInMarkerSpace;
+ * }}</pre>
  */
 public class XrMarkerSpaceCreateInfoVARJO extends Struct<XrMarkerSpaceCreateInfoVARJO> implements NativeResource {
 
@@ -94,29 +78,29 @@ public class XrMarkerSpaceCreateInfoVARJO extends Struct<XrMarkerSpaceCreateInfo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** unique identifier of the marker. */
+    /** @return the value of the {@code markerId} field. */
     @NativeType("uint64_t")
     public long markerId() { return nmarkerId(address()); }
-    /** an {@link XrPosef} defining the position and orientation of the new space’s origin relative to the marker’s natural origin. */
+    /** @return a {@link XrPosef} view of the {@code poseInMarkerSpace} field. */
     public XrPosef poseInMarkerSpace() { return nposeInMarkerSpace(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMarkerSpaceCreateInfoVARJO type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link VARJOMarkerTracking#XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO TYPE_MARKER_SPACE_CREATE_INFO_VARJO} value to the {@link #type} field. */
+    /** Sets the {@link VARJOMarkerTracking#XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO TYPE_MARKER_SPACE_CREATE_INFO_VARJO} value to the {@code type} field. */
     public XrMarkerSpaceCreateInfoVARJO type$Default() { return type(VARJOMarkerTracking.XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMarkerSpaceCreateInfoVARJO next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #markerId} field. */
+    /** Sets the specified value to the {@code markerId} field. */
     public XrMarkerSpaceCreateInfoVARJO markerId(@NativeType("uint64_t") long value) { nmarkerId(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #poseInMarkerSpace} field. */
+    /** Copies the specified {@link XrPosef} to the {@code poseInMarkerSpace} field. */
     public XrMarkerSpaceCreateInfoVARJO poseInMarkerSpace(XrPosef value) { nposeInMarkerSpace(address(), value); return this; }
-    /** Passes the {@link #poseInMarkerSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code poseInMarkerSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrMarkerSpaceCreateInfoVARJO poseInMarkerSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInMarkerSpace()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,29 +302,29 @@ public class XrMarkerSpaceCreateInfoVARJO extends Struct<XrMarkerSpaceCreateInfo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMarkerSpaceCreateInfoVARJO#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMarkerSpaceCreateInfoVARJO.ntype(address()); }
-        /** @return the value of the {@link XrMarkerSpaceCreateInfoVARJO#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrMarkerSpaceCreateInfoVARJO.nnext(address()); }
-        /** @return the value of the {@link XrMarkerSpaceCreateInfoVARJO#markerId} field. */
+        /** @return the value of the {@code markerId} field. */
         @NativeType("uint64_t")
         public long markerId() { return XrMarkerSpaceCreateInfoVARJO.nmarkerId(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrMarkerSpaceCreateInfoVARJO#poseInMarkerSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInMarkerSpace} field. */
         public XrPosef poseInMarkerSpace() { return XrMarkerSpaceCreateInfoVARJO.nposeInMarkerSpace(address()); }
 
-        /** Sets the specified value to the {@link XrMarkerSpaceCreateInfoVARJO#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMarkerSpaceCreateInfoVARJO.Buffer type(@NativeType("XrStructureType") int value) { XrMarkerSpaceCreateInfoVARJO.ntype(address(), value); return this; }
-        /** Sets the {@link VARJOMarkerTracking#XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO TYPE_MARKER_SPACE_CREATE_INFO_VARJO} value to the {@link XrMarkerSpaceCreateInfoVARJO#type} field. */
+        /** Sets the {@link VARJOMarkerTracking#XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO TYPE_MARKER_SPACE_CREATE_INFO_VARJO} value to the {@code type} field. */
         public XrMarkerSpaceCreateInfoVARJO.Buffer type$Default() { return type(VARJOMarkerTracking.XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO); }
-        /** Sets the specified value to the {@link XrMarkerSpaceCreateInfoVARJO#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMarkerSpaceCreateInfoVARJO.Buffer next(@NativeType("void const *") long value) { XrMarkerSpaceCreateInfoVARJO.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerSpaceCreateInfoVARJO#markerId} field. */
+        /** Sets the specified value to the {@code markerId} field. */
         public XrMarkerSpaceCreateInfoVARJO.Buffer markerId(@NativeType("uint64_t") long value) { XrMarkerSpaceCreateInfoVARJO.nmarkerId(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrMarkerSpaceCreateInfoVARJO#poseInMarkerSpace} field. */
+        /** Copies the specified {@link XrPosef} to the {@code poseInMarkerSpace} field. */
         public XrMarkerSpaceCreateInfoVARJO.Buffer poseInMarkerSpace(XrPosef value) { XrMarkerSpaceCreateInfoVARJO.nposeInMarkerSpace(address(), value); return this; }
-        /** Passes the {@link XrMarkerSpaceCreateInfoVARJO#poseInMarkerSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code poseInMarkerSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrMarkerSpaceCreateInfoVARJO.Buffer poseInMarkerSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInMarkerSpace()); return this; }
 
     }

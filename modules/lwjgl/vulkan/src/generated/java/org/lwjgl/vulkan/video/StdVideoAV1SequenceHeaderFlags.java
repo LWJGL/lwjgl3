@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1SequenceHeaderFlags {
  *     uint32_t still_picture : 1;
  *     uint32_t reduced_still_picture_header : 1;
@@ -40,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t timing_info_present_flag : 1;
  *     uint32_t initial_display_delay_present_flag : 1;
  *     uint32_t reserved : 13;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1SequenceHeaderFlags extends Struct<StdVideoAV1SequenceHeaderFlags> implements NativeResource {
 

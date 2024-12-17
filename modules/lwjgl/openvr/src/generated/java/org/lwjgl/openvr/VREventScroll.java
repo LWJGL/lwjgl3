@@ -14,18 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Used for simulated mouse wheel scroll.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Scroll_t {
- *     float {@link #xdelta};
+ *     float xdelta;
  *     float ydelta;
  *     uint32_t unused;
- *     float {@link #viewportscale};
- *     uint32_t {@link #cursorIndex};
- * }</code></pre>
+ *     float viewportscale;
+ *     uint32_t cursorIndex;
+ * }}</pre>
  */
 @NativeType("struct VREvent_Scroll_t")
 public class VREventScroll extends Struct<VREventScroll> {
@@ -85,16 +81,16 @@ public class VREventScroll extends Struct<VREventScroll> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** movement in fraction of the pad traversed since last delta, 1.0 for a full swipe */
+    /** @return the value of the {@code xdelta} field. */
     public float xdelta() { return nxdelta(address()); }
     /** @return the value of the {@code ydelta} field. */
     public float ydelta() { return nydelta(address()); }
     /** @return the value of the {@code unused} field. */
     @NativeType("uint32_t")
     public int unused() { return nunused(address()); }
-    /** for scrolling on an overlay with laser mouse, this is the overlay's vertical size relative to the overlay height. Range: {@code [0,1]} */
+    /** @return the value of the {@code viewportscale} field. */
     public float viewportscale() { return nviewportscale(address()); }
-    /** if from an event triggered by cursor input on an overlay that supports multiple cursors, this is the index of which tracked cursor the event is for */
+    /** @return the value of the {@code cursorIndex} field. */
     @NativeType("uint32_t")
     public int cursorIndex() { return ncursorIndex(address()); }
 
@@ -181,16 +177,16 @@ public class VREventScroll extends Struct<VREventScroll> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VREventScroll#xdelta} field. */
+        /** @return the value of the {@code xdelta} field. */
         public float xdelta() { return VREventScroll.nxdelta(address()); }
         /** @return the value of the {@code ydelta} field. */
         public float ydelta() { return VREventScroll.nydelta(address()); }
         /** @return the value of the {@code unused} field. */
         @NativeType("uint32_t")
         public int unused() { return VREventScroll.nunused(address()); }
-        /** @return the value of the {@link VREventScroll#viewportscale} field. */
+        /** @return the value of the {@code viewportscale} field. */
         public float viewportscale() { return VREventScroll.nviewportscale(address()); }
-        /** @return the value of the {@link VREventScroll#cursorIndex} field. */
+        /** @return the value of the {@code cursorIndex} field. */
         @NativeType("uint32_t")
         public int cursorIndex() { return VREventScroll.ncursorIndex(address()); }
 

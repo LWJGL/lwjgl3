@@ -16,39 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Request a specific address for a buffer.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code opaqueCaptureAddress} is zero, no specific address is requested.</p>
- * 
- * <p>If {@code opaqueCaptureAddress} is not zero, then it <b>should</b> be an address retrieved from {@link VK12#vkGetBufferOpaqueCaptureAddress GetBufferOpaqueCaptureAddress} for an identically created buffer on the same implementation.</p>
- * 
- * <p>If this structure is not present, it is as if {@code opaqueCaptureAddress} is zero.</p>
- * 
- * <p>Applications <b>should</b> avoid creating buffers with application-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of {@link VK12#VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS} errors.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The expected usage for this is that a trace capture/replay tool will add the {@link VK12#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} flag to all buffers that use {@link VK12#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT}, and during capture will save the queried opaque device addresses in the trace. During replay, the buffers will be created specifying the original address so any address values stored in the trace data will remain valid.</p>
- * 
- * <p>Implementations are expected to separate such buffers in the GPU address space so normal allocations will avoid using these addresses. Applications and tools should avoid mixing application-provided and implementation-provided addresses for buffers created with {@link VK12#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT}, to avoid address space allocation conflicts.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferOpaqueCaptureAddressCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint64_t {@link #opaqueCaptureAddress};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint64_t opaqueCaptureAddress;
+ * }}</pre>
  */
 public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct<VkBufferOpaqueCaptureAddressCreateInfo> implements NativeResource {
 
@@ -101,23 +74,23 @@ public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct<VkBufferOpaqu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the opaque capture address requested for the buffer. */
+    /** @return the value of the {@code opaqueCaptureAddress} field. */
     @NativeType("uint64_t")
     public long opaqueCaptureAddress() { return nopaqueCaptureAddress(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO} value to the {@code sType} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #opaqueCaptureAddress} field. */
+    /** Sets the specified value to the {@code opaqueCaptureAddress} field. */
     public VkBufferOpaqueCaptureAddressCreateInfo opaqueCaptureAddress(@NativeType("uint64_t") long value) { nopaqueCaptureAddress(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,23 +286,23 @@ public class VkBufferOpaqueCaptureAddressCreateInfo extends Struct<VkBufferOpaqu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBufferOpaqueCaptureAddressCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferOpaqueCaptureAddressCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkBufferOpaqueCaptureAddressCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferOpaqueCaptureAddressCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkBufferOpaqueCaptureAddressCreateInfo#opaqueCaptureAddress} field. */
+        /** @return the value of the {@code opaqueCaptureAddress} field. */
         @NativeType("uint64_t")
         public long opaqueCaptureAddress() { return VkBufferOpaqueCaptureAddressCreateInfo.nopaqueCaptureAddress(address()); }
 
-        /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferOpaqueCaptureAddressCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO} value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO} value to the {@code sType} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferOpaqueCaptureAddressCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferOpaqueCaptureAddressCreateInfo#opaqueCaptureAddress} field. */
+        /** Sets the specified value to the {@code opaqueCaptureAddress} field. */
         public VkBufferOpaqueCaptureAddressCreateInfo.Buffer opaqueCaptureAddress(@NativeType("uint64_t") long value) { VkBufferOpaqueCaptureAddressCreateInfo.nopaqueCaptureAddress(address(), value); return this; }
 
     }

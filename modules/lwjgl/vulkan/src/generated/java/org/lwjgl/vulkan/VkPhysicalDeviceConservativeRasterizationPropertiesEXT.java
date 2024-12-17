@@ -16,34 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing conservative raster properties that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceConservativeRasterizationPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     float {@link #primitiveOverestimationSize};
- *     float {@link #maxExtraPrimitiveOverestimationSize};
- *     float {@link #extraPrimitiveOverestimationSizeGranularity};
- *     VkBool32 {@link #primitiveUnderestimation};
- *     VkBool32 {@link #conservativePointAndLineRasterization};
- *     VkBool32 {@link #degenerateTrianglesRasterized};
- *     VkBool32 {@link #degenerateLinesRasterized};
- *     VkBool32 {@link #fullyCoveredFragmentShaderInputVariable};
- *     VkBool32 {@link #conservativeRasterizationPostDepthCoverage};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     float primitiveOverestimationSize;
+ *     float maxExtraPrimitiveOverestimationSize;
+ *     float extraPrimitiveOverestimationSizeGranularity;
+ *     VkBool32 primitiveUnderestimation;
+ *     VkBool32 conservativePointAndLineRasterization;
+ *     VkBool32 degenerateTrianglesRasterized;
+ *     VkBool32 degenerateLinesRasterized;
+ *     VkBool32 fullyCoveredFragmentShaderInputVariable;
+ *     VkBool32 conservativeRasterizationPostDepthCoverage;
+ * }}</pre>
  */
 public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Struct<VkPhysicalDeviceConservativeRasterizationPropertiesEXT> implements NativeResource {
 
@@ -120,42 +106,42 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the size in pixels the generating primitive is increased at each of its edges during conservative rasterization overestimation mode. Even with a size of 0.0, conservative rasterization overestimation rules still apply and if any part of the pixel rectangle is covered by the generating primitive, fragments are generated for the entire pixel. However implementations <b>may</b> make the pixel coverage area even more conservative by increasing the size of the generating primitive. */
+    /** @return the value of the {@code primitiveOverestimationSize} field. */
     public float primitiveOverestimationSize() { return nprimitiveOverestimationSize(address()); }
-    /** the maximum size in pixels of extra overestimation the implementation supports in the pipeline state. A value of 0.0 means the implementation does not support any additional overestimation of the generating primitive during conservative rasterization. A value above 0.0 allows the application to further increase the size of the generating primitive during conservative rasterization overestimation. */
+    /** @return the value of the {@code maxExtraPrimitiveOverestimationSize} field. */
     public float maxExtraPrimitiveOverestimationSize() { return nmaxExtraPrimitiveOverestimationSize(address()); }
-    /** the granularity of extra overestimation that can be specified in the pipeline state between 0.0 and {@code maxExtraPrimitiveOverestimationSize} inclusive. A value of 0.0 means the implementation can use the smallest representable non-zero value in the screen space pixel fixed-point grid. */
+    /** @return the value of the {@code extraPrimitiveOverestimationSizeGranularity} field. */
     public float extraPrimitiveOverestimationSizeGranularity() { return nextraPrimitiveOverestimationSizeGranularity(address()); }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports the {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT} conservative rasterization mode in addition to {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT}. Otherwise the implementation only supports {@link EXTConservativeRasterization#VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT}. */
+    /** @return the value of the {@code primitiveUnderestimation} field. */
     @NativeType("VkBool32")
     public boolean primitiveUnderestimation() { return nprimitiveUnderestimation(address()) != 0; }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports conservative rasterization of point and line primitives as well as triangle primitives. Otherwise the implementation only supports triangle primitives. */
+    /** @return the value of the {@code conservativePointAndLineRasterization} field. */
     @NativeType("VkBool32")
     public boolean conservativePointAndLineRasterization() { return nconservativePointAndLineRasterization(address()) != 0; }
-    /** {@link VK10#VK_FALSE FALSE} if the implementation culls primitives generated from triangles that become zero area after they are quantized to the fixed-point rasterization pixel grid. {@code degenerateTrianglesRasterized} is {@link VK10#VK_TRUE TRUE} if these primitives are not culled and the provoking vertex attributes and depth value are used for the fragments. The primitive area calculation is done on the primitive generated from the clipped triangle if applicable. Zero area primitives are backfacing and the application <b>can</b> enable backface culling if desired. */
+    /** @return the value of the {@code degenerateTrianglesRasterized} field. */
     @NativeType("VkBool32")
     public boolean degenerateTrianglesRasterized() { return ndegenerateTrianglesRasterized(address()) != 0; }
-    /** {@link VK10#VK_FALSE FALSE} if the implementation culls lines that become zero length after they are quantized to the fixed-point rasterization pixel grid. {@code degenerateLinesRasterized} is {@link VK10#VK_TRUE TRUE} if zero length lines are not culled and the provoking vertex attributes and depth value are used for the fragments. */
+    /** @return the value of the {@code degenerateLinesRasterized} field. */
     @NativeType("VkBool32")
     public boolean degenerateLinesRasterized() { return ndegenerateLinesRasterized(address()) != 0; }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports the SPIR-V builtin fragment shader input variable {@code FullyCoveredEXT} specifying that conservative rasterization is enabled and the fragment area is fully covered by the generating primitive. */
+    /** @return the value of the {@code fullyCoveredFragmentShaderInputVariable} field. */
     @NativeType("VkBool32")
     public boolean fullyCoveredFragmentShaderInputVariable() { return nfullyCoveredFragmentShaderInputVariable(address()) != 0; }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports conservative rasterization with the {@code PostDepthCoverage} execution mode enabled. Otherwise the {@code PostDepthCoverage} execution mode <b>must</b> not be used when conservative rasterization is enabled. */
+    /** @return the value of the {@code conservativeRasterizationPostDepthCoverage} field. */
     @NativeType("VkBool32")
     public boolean conservativeRasterizationPostDepthCoverage() { return nconservativeRasterizationPostDepthCoverage(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceConservativeRasterizationPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceConservativeRasterizationPropertiesEXT sType$Default() { return sType(EXTConservativeRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceConservativeRasterizationPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -382,42 +368,42 @@ public class VkPhysicalDeviceConservativeRasterizationPropertiesEXT extends Stru
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#primitiveOverestimationSize} field. */
+        /** @return the value of the {@code primitiveOverestimationSize} field. */
         public float primitiveOverestimationSize() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nprimitiveOverestimationSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#maxExtraPrimitiveOverestimationSize} field. */
+        /** @return the value of the {@code maxExtraPrimitiveOverestimationSize} field. */
         public float maxExtraPrimitiveOverestimationSize() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nmaxExtraPrimitiveOverestimationSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#extraPrimitiveOverestimationSizeGranularity} field. */
+        /** @return the value of the {@code extraPrimitiveOverestimationSizeGranularity} field. */
         public float extraPrimitiveOverestimationSizeGranularity() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nextraPrimitiveOverestimationSizeGranularity(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#primitiveUnderestimation} field. */
+        /** @return the value of the {@code primitiveUnderestimation} field. */
         @NativeType("VkBool32")
         public boolean primitiveUnderestimation() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nprimitiveUnderestimation(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#conservativePointAndLineRasterization} field. */
+        /** @return the value of the {@code conservativePointAndLineRasterization} field. */
         @NativeType("VkBool32")
         public boolean conservativePointAndLineRasterization() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nconservativePointAndLineRasterization(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#degenerateTrianglesRasterized} field. */
+        /** @return the value of the {@code degenerateTrianglesRasterized} field. */
         @NativeType("VkBool32")
         public boolean degenerateTrianglesRasterized() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.ndegenerateTrianglesRasterized(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#degenerateLinesRasterized} field. */
+        /** @return the value of the {@code degenerateLinesRasterized} field. */
         @NativeType("VkBool32")
         public boolean degenerateLinesRasterized() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.ndegenerateLinesRasterized(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#fullyCoveredFragmentShaderInputVariable} field. */
+        /** @return the value of the {@code fullyCoveredFragmentShaderInputVariable} field. */
         @NativeType("VkBool32")
         public boolean fullyCoveredFragmentShaderInputVariable() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nfullyCoveredFragmentShaderInputVariable(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#conservativeRasterizationPostDepthCoverage} field. */
+        /** @return the value of the {@code conservativeRasterizationPostDepthCoverage} field. */
         @NativeType("VkBool32")
         public boolean conservativeRasterizationPostDepthCoverage() { return VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nconservativeRasterizationPostDepthCoverage(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTConservativeRasterization#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer sType$Default() { return sType(EXTConservativeRasterization.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceConservativeRasterizationPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceConservativeRasterizationPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceConservativeRasterizationPropertiesEXT.npNext(address(), value); return this; }
 
     }

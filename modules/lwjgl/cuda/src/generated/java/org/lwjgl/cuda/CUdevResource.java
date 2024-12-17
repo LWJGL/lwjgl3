@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUdevResource {
  *     CUdevResourceType type;
  *     unsigned char _internal_padding[92];
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link CUdevSmResource CUdevSmResource} sm;
  *         unsigned char _oversize[48];
  *     } resource;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUdevResource extends Struct<CUdevResource> implements NativeResource {
 

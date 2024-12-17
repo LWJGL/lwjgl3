@@ -14,15 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Encoder stats.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct bgfx_encoder_stats_t {
- *     int64_t {@link #cpuTimeBegin};
- *     int64_t {@link #cpuTimeEnd};
- * }</code></pre>
+ *     int64_t cpuTimeBegin;
+ *     int64_t cpuTimeEnd;
+ * }}</pre>
  */
 @NativeType("struct bgfx_encoder_stats_t")
 public class BGFXEncoderStats extends Struct<BGFXEncoderStats> {
@@ -73,10 +69,10 @@ public class BGFXEncoderStats extends Struct<BGFXEncoderStats> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** encoder thread CPU submit begin time */
+    /** @return the value of the {@code cpuTimeBegin} field. */
     @NativeType("int64_t")
     public long cpuTimeBegin() { return ncpuTimeBegin(address()); }
-    /** encoder thread CPU submit end time */
+    /** @return the value of the {@code cpuTimeEnd} field. */
     @NativeType("int64_t")
     public long cpuTimeEnd() { return ncpuTimeEnd(address()); }
 
@@ -157,10 +153,10 @@ public class BGFXEncoderStats extends Struct<BGFXEncoderStats> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link BGFXEncoderStats#cpuTimeBegin} field. */
+        /** @return the value of the {@code cpuTimeBegin} field. */
         @NativeType("int64_t")
         public long cpuTimeBegin() { return BGFXEncoderStats.ncpuTimeBegin(address()); }
-        /** @return the value of the {@link BGFXEncoderStats#cpuTimeEnd} field. */
+        /** @return the value of the {@code cpuTimeEnd} field. */
         @NativeType("int64_t")
         public long cpuTimeEnd() { return BGFXEncoderStats.ncpuTimeEnd(address()); }
 

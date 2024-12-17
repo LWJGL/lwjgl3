@@ -11,41 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * The function pointer type for memory deallocation callbacks.
- * 
- * <p>This is the function pointer type for memory deallocation callbacks. A memory deallocation callback function has the following signature:</p>
- * 
- * <pre><code>
- * void function_name(void* block, void* user)</code></pre>
- * 
- * <p>This function may deallocate the specified memory block. This memory block will have been allocated with the same allocator.</p>
- * 
- * <p>This function must support being called during {@link GLFW#glfwInit Init} but before the library is flagged as initialized, as well as during {@link GLFW#glfwTerminate Terminate} after the
- * library is no longer flagged as initialized.</p>
- * 
- * <p>The block address will never be {@code NULL}. Deallocations of {@code NULL} are filtered out before reaching the custom allocator.</p>
- * 
- * <p>If this function returns {@code NULL}, GLFW will emit {@link GLFW#GLFW_OUT_OF_MEMORY OUT_OF_MEMORY}.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <ul>
- * <li>The specified memory block will not be accessed by GLFW after this function is called.</li>
- * <li>This function should not call any GLFW function.</li>
- * <li>This function must support being called from any thread that calls GLFW functions.</li>
- * </ul></div>
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *block,
- *     void *user
- * )</code></pre>
- *
- * @since version 3.4
- */
+/** Callback function: {@link #invoke GLFWdeallocatefun} */
 public abstract class GLFWDeallocateCallback extends Callback implements GLFWDeallocateCallbackI {
 
     /**

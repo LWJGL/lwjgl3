@@ -19,29 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure specifying physical device group properties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK11#vkEnumeratePhysicalDeviceGroups EnumeratePhysicalDeviceGroups}, {@link KHRDeviceGroupCreation#vkEnumeratePhysicalDeviceGroupsKHR EnumeratePhysicalDeviceGroupsKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceGroupProperties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #physicalDeviceCount};
- *     VkPhysicalDevice {@link #physicalDevices}[VK_MAX_DEVICE_GROUP_SIZE];
- *     VkBool32 {@link #subsetAllocation};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t physicalDeviceCount;
+ *     VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
+ *     VkBool32 subsetAllocation;
+ * }}</pre>
  */
 public class VkPhysicalDeviceGroupProperties extends Struct<VkPhysicalDeviceGroupProperties> implements NativeResource {
 
@@ -100,30 +85,30 @@ public class VkPhysicalDeviceGroupProperties extends Struct<VkPhysicalDeviceGrou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the number of physical devices in the group. */
+    /** @return the value of the {@code physicalDeviceCount} field. */
     @NativeType("uint32_t")
     public int physicalDeviceCount() { return nphysicalDeviceCount(address()); }
-    /** an array of {@link VK10#VK_MAX_DEVICE_GROUP_SIZE MAX_DEVICE_GROUP_SIZE} {@code VkPhysicalDevice} handles representing all physical devices in the group. The first {@code physicalDeviceCount} elements of the array will be valid. */
+    /** @return a {@link PointerBuffer} view of the {@code physicalDevices} field. */
     @NativeType("VkPhysicalDevice[VK_MAX_DEVICE_GROUP_SIZE]")
     public PointerBuffer physicalDevices() { return nphysicalDevices(address()); }
-    /** an array of {@link VK10#VK_MAX_DEVICE_GROUP_SIZE MAX_DEVICE_GROUP_SIZE} {@code VkPhysicalDevice} handles representing all physical devices in the group. The first {@code physicalDeviceCount} elements of the array will be valid. */
+    /** @return the value at the specified index of the {@code physicalDevices} field. */
     @NativeType("VkPhysicalDevice")
     public long physicalDevices(int index) { return nphysicalDevices(address(), index); }
-    /** specifies whether logical devices created from the group support allocating device memory on a subset of devices, via the {@code deviceMask} member of the {@link VkMemoryAllocateFlagsInfo}. If this is {@link VK10#VK_FALSE FALSE}, then all device memory allocations are made across all physical devices in the group. If {@code physicalDeviceCount} is 1, then {@code subsetAllocation} <b>must</b> be {@link VK10#VK_FALSE FALSE}. */
+    /** @return the value of the {@code subsetAllocation} field. */
     @NativeType("VkBool32")
     public boolean subsetAllocation() { return nsubsetAllocation(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceGroupProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceGroupProperties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceGroupProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -342,30 +327,30 @@ public class VkPhysicalDeviceGroupProperties extends Struct<VkPhysicalDeviceGrou
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceGroupProperties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceGroupProperties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceGroupProperties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceGroupProperties.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceGroupProperties#physicalDeviceCount} field. */
+        /** @return the value of the {@code physicalDeviceCount} field. */
         @NativeType("uint32_t")
         public int physicalDeviceCount() { return VkPhysicalDeviceGroupProperties.nphysicalDeviceCount(address()); }
-        /** @return a {@link PointerBuffer} view of the {@link VkPhysicalDeviceGroupProperties#physicalDevices} field. */
+        /** @return a {@link PointerBuffer} view of the {@code physicalDevices} field. */
         @NativeType("VkPhysicalDevice[VK_MAX_DEVICE_GROUP_SIZE]")
         public PointerBuffer physicalDevices() { return VkPhysicalDeviceGroupProperties.nphysicalDevices(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceGroupProperties#physicalDevices} field. */
+        /** @return the value at the specified index of the {@code physicalDevices} field. */
         @NativeType("VkPhysicalDevice")
         public long physicalDevices(int index) { return VkPhysicalDeviceGroupProperties.nphysicalDevices(address(), index); }
-        /** @return the value of the {@link VkPhysicalDeviceGroupProperties#subsetAllocation} field. */
+        /** @return the value of the {@code subsetAllocation} field. */
         @NativeType("VkBool32")
         public boolean subsetAllocation() { return VkPhysicalDeviceGroupProperties.nsubsetAllocation(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceGroupProperties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceGroupProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceGroupProperties.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES} value to the {@link VkPhysicalDeviceGroupProperties#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceGroupProperties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceGroupProperties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceGroupProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceGroupProperties.npNext(address(), value); return this; }
 
     }

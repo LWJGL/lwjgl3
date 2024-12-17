@@ -19,15 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.odbc.SQL.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SQL_NUMERIC_STRUCT {
  *     SQLCHAR precision;
  *     SQLSCHAR scale;
  *     SQLCHAR sign;
  *     SQLCHAR val[SQL_MAX_NUMERIC_LEN];
- * }</code></pre>
+ * }}</pre>
  */
 public class SQL_NUMERIC_STRUCT extends Struct<SQL_NUMERIC_STRUCT> implements NativeResource {
 

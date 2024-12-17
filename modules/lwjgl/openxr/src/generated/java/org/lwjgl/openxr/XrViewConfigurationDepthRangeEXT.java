@@ -16,35 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * View configuration depth range information.
- * 
- * <h5>Description</h5>
- * 
- * <p>When enumerating the view configurations with {@link XR10#xrEnumerateViewConfigurationViews EnumerateViewConfigurationViews}, the application <b>can</b> provide a pointer to an {@link XrViewConfigurationDepthRangeEXT} in the {@code next} chain of {@link XrViewConfigurationView}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTViewConfigurationDepthRange XR_EXT_view_configuration_depth_range} extension <b>must</b> be enabled prior to using {@link XrViewConfigurationDepthRangeEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTViewConfigurationDepthRange#XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrViewConfigurationView}, {@link XR10#xrEnumerateViewConfigurationViews EnumerateViewConfigurationViews}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrViewConfigurationDepthRangeEXT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     float {@link #recommendedNearZ};
- *     float {@link #minNearZ};
- *     float {@link #recommendedFarZ};
- *     float {@link #maxFarZ};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     float recommendedNearZ;
+ *     float minNearZ;
+ *     float recommendedFarZ;
+ *     float maxFarZ;
+ * }}</pre>
  */
 public class XrViewConfigurationDepthRangeEXT extends Struct<XrViewConfigurationDepthRangeEXT> implements NativeResource {
 
@@ -106,34 +86,34 @@ public class XrViewConfigurationDepthRangeEXT extends Struct<XrViewConfiguration
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the recommended minimum positive distance in meters that content should be rendered for the view to achieve the best user experience. */
+    /** @return the value of the {@code recommendedNearZ} field. */
     public float recommendedNearZ() { return nrecommendedNearZ(address()); }
-    /** the absolute minimum positive distance in meters that content should be rendered for the view. */
+    /** @return the value of the {@code minNearZ} field. */
     public float minNearZ() { return nminNearZ(address()); }
-    /** the recommended maximum positive distance in meters that content should be rendered for the view to achieve the best user experience. */
+    /** @return the value of the {@code recommendedFarZ} field. */
     public float recommendedFarZ() { return nrecommendedFarZ(address()); }
-    /** the absolute maximum positive distance in meters that content should be rendered for the view. */
+    /** @return the value of the {@code maxFarZ} field. */
     public float maxFarZ() { return nmaxFarZ(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrViewConfigurationDepthRangeEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTViewConfigurationDepthRange#XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTViewConfigurationDepthRange#XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT} value to the {@code type} field. */
     public XrViewConfigurationDepthRangeEXT type$Default() { return type(EXTViewConfigurationDepthRange.XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrViewConfigurationDepthRangeEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #recommendedNearZ} field. */
+    /** Sets the specified value to the {@code recommendedNearZ} field. */
     public XrViewConfigurationDepthRangeEXT recommendedNearZ(float value) { nrecommendedNearZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #minNearZ} field. */
+    /** Sets the specified value to the {@code minNearZ} field. */
     public XrViewConfigurationDepthRangeEXT minNearZ(float value) { nminNearZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #recommendedFarZ} field. */
+    /** Sets the specified value to the {@code recommendedFarZ} field. */
     public XrViewConfigurationDepthRangeEXT recommendedFarZ(float value) { nrecommendedFarZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxFarZ} field. */
+    /** Sets the specified value to the {@code maxFarZ} field. */
     public XrViewConfigurationDepthRangeEXT maxFarZ(float value) { nmaxFarZ(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -347,34 +327,34 @@ public class XrViewConfigurationDepthRangeEXT extends Struct<XrViewConfiguration
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrViewConfigurationDepthRangeEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewConfigurationDepthRangeEXT.ntype(address()); }
-        /** @return the value of the {@link XrViewConfigurationDepthRangeEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrViewConfigurationDepthRangeEXT.nnext(address()); }
-        /** @return the value of the {@link XrViewConfigurationDepthRangeEXT#recommendedNearZ} field. */
+        /** @return the value of the {@code recommendedNearZ} field. */
         public float recommendedNearZ() { return XrViewConfigurationDepthRangeEXT.nrecommendedNearZ(address()); }
-        /** @return the value of the {@link XrViewConfigurationDepthRangeEXT#minNearZ} field. */
+        /** @return the value of the {@code minNearZ} field. */
         public float minNearZ() { return XrViewConfigurationDepthRangeEXT.nminNearZ(address()); }
-        /** @return the value of the {@link XrViewConfigurationDepthRangeEXT#recommendedFarZ} field. */
+        /** @return the value of the {@code recommendedFarZ} field. */
         public float recommendedFarZ() { return XrViewConfigurationDepthRangeEXT.nrecommendedFarZ(address()); }
-        /** @return the value of the {@link XrViewConfigurationDepthRangeEXT#maxFarZ} field. */
+        /** @return the value of the {@code maxFarZ} field. */
         public float maxFarZ() { return XrViewConfigurationDepthRangeEXT.nmaxFarZ(address()); }
 
-        /** Sets the specified value to the {@link XrViewConfigurationDepthRangeEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrViewConfigurationDepthRangeEXT.Buffer type(@NativeType("XrStructureType") int value) { XrViewConfigurationDepthRangeEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTViewConfigurationDepthRange#XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT} value to the {@link XrViewConfigurationDepthRangeEXT#type} field. */
+        /** Sets the {@link EXTViewConfigurationDepthRange#XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT} value to the {@code type} field. */
         public XrViewConfigurationDepthRangeEXT.Buffer type$Default() { return type(EXTViewConfigurationDepthRange.XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT); }
-        /** Sets the specified value to the {@link XrViewConfigurationDepthRangeEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrViewConfigurationDepthRangeEXT.Buffer next(@NativeType("void *") long value) { XrViewConfigurationDepthRangeEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationDepthRangeEXT#recommendedNearZ} field. */
+        /** Sets the specified value to the {@code recommendedNearZ} field. */
         public XrViewConfigurationDepthRangeEXT.Buffer recommendedNearZ(float value) { XrViewConfigurationDepthRangeEXT.nrecommendedNearZ(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationDepthRangeEXT#minNearZ} field. */
+        /** Sets the specified value to the {@code minNearZ} field. */
         public XrViewConfigurationDepthRangeEXT.Buffer minNearZ(float value) { XrViewConfigurationDepthRangeEXT.nminNearZ(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationDepthRangeEXT#recommendedFarZ} field. */
+        /** Sets the specified value to the {@code recommendedFarZ} field. */
         public XrViewConfigurationDepthRangeEXT.Buffer recommendedFarZ(float value) { XrViewConfigurationDepthRangeEXT.nrecommendedFarZ(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationDepthRangeEXT#maxFarZ} field. */
+        /** Sets the specified value to the {@code maxFarZ} field. */
         public XrViewConfigurationDepthRangeEXT.Buffer maxFarZ(float value) { XrViewConfigurationDepthRangeEXT.nmaxFarZ(address(), value); return this; }
 
     }

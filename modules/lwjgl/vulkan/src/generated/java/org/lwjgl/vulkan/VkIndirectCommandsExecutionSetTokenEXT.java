@@ -16,33 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying input data for a single execution set command token.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Each bit in {@code shaderStages} <b>must</b> be supported by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesPipelineBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a> or <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesShaderBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesShaderBinding}</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be a valid {@code VkIndirectExecutionSetInfoTypeEXT} value</li>
- * <li>{@code shaderStages} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
- * <li>{@code shaderStages} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsTokenDataEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectCommandsExecutionSetTokenEXT {
- *     VkIndirectExecutionSetInfoTypeEXT {@link #type};
- *     VkShaderStageFlags {@link #shaderStages};
- * }</code></pre>
+ *     VkIndirectExecutionSetInfoTypeEXT type;
+ *     VkShaderStageFlags shaderStages;
+ * }}</pre>
  */
 public class VkIndirectCommandsExecutionSetTokenEXT extends Struct<VkIndirectCommandsExecutionSetTokenEXT> implements NativeResource {
 
@@ -92,16 +70,16 @@ public class VkIndirectCommandsExecutionSetTokenEXT extends Struct<VkIndirectCom
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** describes the type of indirect execution set in use. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkIndirectExecutionSetInfoTypeEXT")
     public int type() { return ntype(address()); }
-    /** specifies the shaders that will be changed by this token. */
+    /** @return the value of the {@code shaderStages} field. */
     @NativeType("VkShaderStageFlags")
     public int shaderStages() { return nshaderStages(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkIndirectCommandsExecutionSetTokenEXT type(@NativeType("VkIndirectExecutionSetInfoTypeEXT") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderStages} field. */
+    /** Sets the specified value to the {@code shaderStages} field. */
     public VkIndirectCommandsExecutionSetTokenEXT shaderStages(@NativeType("VkShaderStageFlags") int value) { nshaderStages(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -291,16 +269,16 @@ public class VkIndirectCommandsExecutionSetTokenEXT extends Struct<VkIndirectCom
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectCommandsExecutionSetTokenEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkIndirectExecutionSetInfoTypeEXT")
         public int type() { return VkIndirectCommandsExecutionSetTokenEXT.ntype(address()); }
-        /** @return the value of the {@link VkIndirectCommandsExecutionSetTokenEXT#shaderStages} field. */
+        /** @return the value of the {@code shaderStages} field. */
         @NativeType("VkShaderStageFlags")
         public int shaderStages() { return VkIndirectCommandsExecutionSetTokenEXT.nshaderStages(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectCommandsExecutionSetTokenEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkIndirectCommandsExecutionSetTokenEXT.Buffer type(@NativeType("VkIndirectExecutionSetInfoTypeEXT") int value) { VkIndirectCommandsExecutionSetTokenEXT.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectCommandsExecutionSetTokenEXT#shaderStages} field. */
+        /** Sets the specified value to the {@code shaderStages} field. */
         public VkIndirectCommandsExecutionSetTokenEXT.Buffer shaderStages(@NativeType("VkShaderStageFlags") int value) { VkIndirectCommandsExecutionSetTokenEXT.nshaderStages(address(), value); return this; }
 
     }

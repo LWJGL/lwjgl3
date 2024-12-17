@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Extended buffer usage flags.
- * 
- * <h5>Description</h5>
- * 
- * <p>If this structure is included in the {@code pNext} chain of a buffer creation structure, {@code usage} is used instead of the corresponding {@code usage} value passed in that creation structure, allowing additional usage flags to be specified. If this structure is included in the {@code pNext} chain of a buffer query structure, the usage flags of the buffer are returned in {@code usage} of this structure, and the usage flags representable in {@code usage} of the buffer query structure are also returned in that field.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO}</li>
- * <li>{@code usage} <b>must</b> be a valid combination of {@code VkBufferUsageFlagBits2} values</li>
- * <li>{@code usage} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferUsageFlags2CreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBufferUsageFlags2 {@link #usage};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBufferUsageFlags2 usage;
+ * }}</pre>
  */
 public class VkBufferUsageFlags2CreateInfo extends Struct<VkBufferUsageFlags2CreateInfo> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class VkBufferUsageFlags2CreateInfo extends Struct<VkBufferUsageFlags2Cre
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkBufferUsageFlagBits2} specifying allowed usages of the buffer. */
+    /** @return the value of the {@code usage} field. */
     @NativeType("VkBufferUsageFlags2")
     public long usage() { return nusage(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBufferUsageFlags2CreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO} value to the {@code sType} field. */
     public VkBufferUsageFlags2CreateInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBufferUsageFlags2CreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #usage} field. */
+    /** Sets the specified value to the {@code usage} field. */
     public VkBufferUsageFlags2CreateInfo usage(@NativeType("VkBufferUsageFlags2") long value) { nusage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,23 +286,23 @@ public class VkBufferUsageFlags2CreateInfo extends Struct<VkBufferUsageFlags2Cre
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBufferUsageFlags2CreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferUsageFlags2CreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkBufferUsageFlags2CreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferUsageFlags2CreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkBufferUsageFlags2CreateInfo#usage} field. */
+        /** @return the value of the {@code usage} field. */
         @NativeType("VkBufferUsageFlags2")
         public long usage() { return VkBufferUsageFlags2CreateInfo.nusage(address()); }
 
-        /** Sets the specified value to the {@link VkBufferUsageFlags2CreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBufferUsageFlags2CreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferUsageFlags2CreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO} value to the {@link VkBufferUsageFlags2CreateInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO} value to the {@code sType} field. */
         public VkBufferUsageFlags2CreateInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkBufferUsageFlags2CreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBufferUsageFlags2CreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferUsageFlags2CreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferUsageFlags2CreateInfo#usage} field. */
+        /** Sets the specified value to the {@code usage} field. */
         public VkBufferUsageFlags2CreateInfo.Buffer usage(@NativeType("VkBufferUsageFlags2") long value) { VkBufferUsageFlags2CreateInfo.nusage(address(), value); return this; }
 
     }

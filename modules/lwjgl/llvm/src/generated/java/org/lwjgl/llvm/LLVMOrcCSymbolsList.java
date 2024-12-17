@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents a list of {@code LLVMOrcSymbolStringPoolEntryRef} and the associated length.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LLVMOrcCSymbolsList {
  *     LLVMOrcSymbolStringPoolEntryRef * Symbols;
  *     size_t Length;
- * }</code></pre>
+ * }}</pre>
  */
 public class LLVMOrcCSymbolsList extends Struct<LLVMOrcCSymbolsList> implements NativeResource {
 

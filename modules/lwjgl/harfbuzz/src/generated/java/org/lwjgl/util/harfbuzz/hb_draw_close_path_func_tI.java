@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_draw_funcs_t *dfuncs,
- *     void *draw_data,
- *     hb_draw_state_t *st,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_draw_close_path_func_t} */
 @FunctionalInterface
 @NativeType("hb_draw_close_path_func_t")
 public interface hb_draw_close_path_func_tI extends CallbackI {
@@ -46,14 +36,7 @@ public interface hb_draw_close_path_func_tI extends CallbackI {
         );
     }
 
-    /**
-     * A virtual method for the {@code hb_draw_funcs_t} to perform a "close-path" draw operation.
-     *
-     * @param dfuncs    draw functions object
-     * @param draw_data the data accompanying the draw functions in {@link HarfBuzz#hb_font_draw_glyph font_draw_glyph}
-     * @param st        current draw state
-     * @param user_data user data pointer passed to {@link HarfBuzz#hb_draw_funcs_set_close_path_func draw_funcs_set_close_path_func}
-     */
+    /** {@code void (* hb_draw_close_path_func_t) (hb_draw_funcs_t * dfuncs, void * draw_data, hb_draw_state_t * st, void * user_data)} */
     void invoke(@NativeType("hb_draw_funcs_t *") long dfuncs, @NativeType("void *") long draw_data, @NativeType("hb_draw_state_t *") long st, @NativeType("void *") long user_data);
 
 }

@@ -17,56 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying command buffer inheritance info for dynamic render pass instances.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkCommandBufferInheritanceInfo} includes a {@link VkCommandBufferInheritanceRenderingInfo} structure, then that structure controls parameters of dynamic render pass instances that the {@code VkCommandBuffer} <b>can</b> be executed within. If {@link VkCommandBufferInheritanceInfo}{@code ::renderPass} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or {@link VK10#VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT} is not specified in {@link VkCommandBufferBeginInfo}{@code ::flags}, parameters of this structure are ignored.</p>
- * 
- * <p>If {@code colorAttachmentCount} is 0 and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-variableMultisampleRate">{@code variableMultisampleRate}</a> feature is enabled, {@code rasterizationSamples} is ignored.</p>
- * 
- * <p>If {@code depthAttachmentFormat}, {@code stencilAttachmentFormat}, or any element of {@code pColorAttachmentFormats} is {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it indicates that the corresponding attachment is unused within the render pass and writes to those attachments are discarded.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code colorAttachmentCount} is not 0, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-variableMultisampleRate">{@code variableMultisampleRate}</a> feature is not enabled, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
- * <li>If {@code depthAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format that includes a depth component</li>
- * <li>If {@code depthAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#potential-format-features">potential format features</a> that include {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If any element of {@code pColorAttachmentFormats} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#potential-format-features">potential format features</a> that include {@link VK10#VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT FORMAT_FEATURE_COLOR_ATTACHMENT_BIT} , or {@link NVLinearColorAttachment#VK_FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV FORMAT_FEATURE_2_LINEAR_COLOR_ATTACHMENT_BIT_NV} if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-linearColorAttachment">{@code linearColorAttachment}</a> feature is enabled</li>
- * <li>If {@code stencilAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format that includes a stencil aspect</li>
- * <li>If {@code stencilAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, it <b>must</b> be a format with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#potential-format-features">potential format features</a> that include {@link VK10#VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT}</li>
- * <li>If {@code depthAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED} and {@code stencilAttachmentFormat} is not {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}, {@code depthAttachmentFormat} <b>must</b> equal {@code stencilAttachmentFormat}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-multiview">{@code multiview}</a> feature is not enabled, {@code viewMask} <b>must</b> be 0</li>
- * <li>The index of the most significant bit in {@code viewMask} <b>must</b> be less than <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxMultiviewViewCount">{@code maxMultiviewViewCount}</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkRenderingFlagBits} values</li>
- * <li>If {@code colorAttachmentCount} is not 0, {@code pColorAttachmentFormats} <b>must</b> be a valid pointer to an array of {@code colorAttachmentCount} valid {@code VkFormat} values</li>
- * <li>{@code depthAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code stencilAttachmentFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>If {@code rasterizationSamples} is not 0, {@code rasterizationSamples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCommandBufferInheritanceRenderingInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkRenderingFlags {@link #flags};
- *     uint32_t {@link #viewMask};
- *     uint32_t {@link #colorAttachmentCount};
- *     VkFormat const * {@link #pColorAttachmentFormats};
- *     VkFormat {@link #depthAttachmentFormat};
- *     VkFormat {@link #stencilAttachmentFormat};
- *     VkSampleCountFlagBits {@link #rasterizationSamples};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkRenderingFlags flags;
+ *     uint32_t viewMask;
+ *     uint32_t colorAttachmentCount;
+ *     VkFormat const * pColorAttachmentFormats;
+ *     VkFormat depthAttachmentFormat;
+ *     VkFormat stencilAttachmentFormat;
+ *     VkSampleCountFlagBits rasterizationSamples;
+ * }}</pre>
  */
 public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBufferInheritanceRenderingInfo> implements NativeResource {
 
@@ -137,51 +99,51 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBuf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkRenderingFlagBits} used by the render pass instance. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkRenderingFlags")
     public int flags() { return nflags(address()); }
-    /** the view mask used for rendering. */
+    /** @return the value of the {@code viewMask} field. */
     @NativeType("uint32_t")
     public int viewMask() { return nviewMask(address()); }
-    /** the number of color attachments specified in the render pass instance. */
+    /** @return the value of the {@code colorAttachmentCount} field. */
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
-    /** a pointer to an array of {@code VkFormat} values defining the format of color attachments. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pColorAttachmentFormats} field. */
     @NativeType("VkFormat const *")
     public @Nullable IntBuffer pColorAttachmentFormats() { return npColorAttachmentFormats(address()); }
-    /** a {@code VkFormat} value defining the format of the depth attachment. */
+    /** @return the value of the {@code depthAttachmentFormat} field. */
     @NativeType("VkFormat")
     public int depthAttachmentFormat() { return ndepthAttachmentFormat(address()); }
-    /** a {@code VkFormat} value defining the format of the stencil attachment. */
+    /** @return the value of the {@code stencilAttachmentFormat} field. */
     @NativeType("VkFormat")
     public int stencilAttachmentFormat() { return nstencilAttachmentFormat(address()); }
-    /** a {@code VkSampleCountFlagBits} specifying the number of samples used in rasterization. */
+    /** @return the value of the {@code rasterizationSamples} field. */
     @NativeType("VkSampleCountFlagBits")
     public int rasterizationSamples() { return nrasterizationSamples(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCommandBufferInheritanceRenderingInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO} value to the {@code sType} field. */
     public VkCommandBufferInheritanceRenderingInfo sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCommandBufferInheritanceRenderingInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkCommandBufferInheritanceRenderingInfo flags(@NativeType("VkRenderingFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #viewMask} field. */
+    /** Sets the specified value to the {@code viewMask} field. */
     public VkCommandBufferInheritanceRenderingInfo viewMask(@NativeType("uint32_t") int value) { nviewMask(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pColorAttachmentFormats} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentFormats} field. */
     public VkCommandBufferInheritanceRenderingInfo pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { npColorAttachmentFormats(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthAttachmentFormat} field. */
+    /** Sets the specified value to the {@code depthAttachmentFormat} field. */
     public VkCommandBufferInheritanceRenderingInfo depthAttachmentFormat(@NativeType("VkFormat") int value) { ndepthAttachmentFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #stencilAttachmentFormat} field. */
+    /** Sets the specified value to the {@code stencilAttachmentFormat} field. */
     public VkCommandBufferInheritanceRenderingInfo stencilAttachmentFormat(@NativeType("VkFormat") int value) { nstencilAttachmentFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #rasterizationSamples} field. */
+    /** Sets the specified value to the {@code rasterizationSamples} field. */
     public VkCommandBufferInheritanceRenderingInfo rasterizationSamples(@NativeType("VkSampleCountFlagBits") int value) { nrasterizationSamples(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -422,51 +384,51 @@ public class VkCommandBufferInheritanceRenderingInfo extends Struct<VkCommandBuf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCommandBufferInheritanceRenderingInfo.nsType(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCommandBufferInheritanceRenderingInfo.npNext(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkRenderingFlags")
         public int flags() { return VkCommandBufferInheritanceRenderingInfo.nflags(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#viewMask} field. */
+        /** @return the value of the {@code viewMask} field. */
         @NativeType("uint32_t")
         public int viewMask() { return VkCommandBufferInheritanceRenderingInfo.nviewMask(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#colorAttachmentCount} field. */
+        /** @return the value of the {@code colorAttachmentCount} field. */
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkCommandBufferInheritanceRenderingInfo.ncolorAttachmentCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkCommandBufferInheritanceRenderingInfo#pColorAttachmentFormats} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pColorAttachmentFormats} field. */
         @NativeType("VkFormat const *")
         public @Nullable IntBuffer pColorAttachmentFormats() { return VkCommandBufferInheritanceRenderingInfo.npColorAttachmentFormats(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#depthAttachmentFormat} field. */
+        /** @return the value of the {@code depthAttachmentFormat} field. */
         @NativeType("VkFormat")
         public int depthAttachmentFormat() { return VkCommandBufferInheritanceRenderingInfo.ndepthAttachmentFormat(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#stencilAttachmentFormat} field. */
+        /** @return the value of the {@code stencilAttachmentFormat} field. */
         @NativeType("VkFormat")
         public int stencilAttachmentFormat() { return VkCommandBufferInheritanceRenderingInfo.nstencilAttachmentFormat(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceRenderingInfo#rasterizationSamples} field. */
+        /** @return the value of the {@code rasterizationSamples} field. */
         @NativeType("VkSampleCountFlagBits")
         public int rasterizationSamples() { return VkCommandBufferInheritanceRenderingInfo.nrasterizationSamples(address()); }
 
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferInheritanceRenderingInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO} value to the {@link VkCommandBufferInheritanceRenderingInfo#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO} value to the {@code sType} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO); }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferInheritanceRenderingInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer flags(@NativeType("VkRenderingFlags") int value) { VkCommandBufferInheritanceRenderingInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfo#viewMask} field. */
+        /** Sets the specified value to the {@code viewMask} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer viewMask(@NativeType("uint32_t") int value) { VkCommandBufferInheritanceRenderingInfo.nviewMask(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkCommandBufferInheritanceRenderingInfo#pColorAttachmentFormats} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentFormats} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer pColorAttachmentFormats(@Nullable @NativeType("VkFormat const *") IntBuffer value) { VkCommandBufferInheritanceRenderingInfo.npColorAttachmentFormats(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfo#depthAttachmentFormat} field. */
+        /** Sets the specified value to the {@code depthAttachmentFormat} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer depthAttachmentFormat(@NativeType("VkFormat") int value) { VkCommandBufferInheritanceRenderingInfo.ndepthAttachmentFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfo#stencilAttachmentFormat} field. */
+        /** Sets the specified value to the {@code stencilAttachmentFormat} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer stencilAttachmentFormat(@NativeType("VkFormat") int value) { VkCommandBufferInheritanceRenderingInfo.nstencilAttachmentFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceRenderingInfo#rasterizationSamples} field. */
+        /** Sets the specified value to the {@code rasterizationSamples} field. */
         public VkCommandBufferInheritanceRenderingInfo.Buffer rasterizationSamples(@NativeType("VkSampleCountFlagBits") int value) { VkCommandBufferInheritanceRenderingInfo.nrasterizationSamples(address(), value); return this; }
 
     }

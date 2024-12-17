@@ -16,33 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event indicating session state changed.
- * 
- * <h5>Description</h5>
- * 
- * <p>Receiving the {@link XrEventDataSessionStateChanged} event structure indicates that the application has changed lifecycle state.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEventDataBaseHeader}, {@link XR10#xrPollEvent PollEvent}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataSessionStateChanged {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSession {@link #session};
- *     XrSessionState {@link #state};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSession session;
+ *     XrSessionState state;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrEventDataSessionStateChanged extends Struct<XrEventDataSessionStateChanged> implements NativeResource {
 
@@ -101,27 +82,27 @@ public class XrEventDataSessionStateChanged extends Struct<XrEventDataSessionSta
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSession} which has changed state. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
-    /** the current {@code XrSessionState} of the {@code session}. */
+    /** @return the value of the {@code state} field. */
     @NativeType("XrSessionState")
     public int state() { return nstate(address()); }
-    /** an {@code XrTime} which indicates the time of the state change. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataSessionStateChanged type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED} value to the {@code type} field. */
     public XrEventDataSessionStateChanged type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataSessionStateChanged next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,27 +308,27 @@ public class XrEventDataSessionStateChanged extends Struct<XrEventDataSessionSta
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataSessionStateChanged#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataSessionStateChanged.ntype(address()); }
-        /** @return the value of the {@link XrEventDataSessionStateChanged#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataSessionStateChanged.nnext(address()); }
-        /** @return the value of the {@link XrEventDataSessionStateChanged#session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataSessionStateChanged.nsession(address()); }
-        /** @return the value of the {@link XrEventDataSessionStateChanged#state} field. */
+        /** @return the value of the {@code state} field. */
         @NativeType("XrSessionState")
         public int state() { return XrEventDataSessionStateChanged.nstate(address()); }
-        /** @return the value of the {@link XrEventDataSessionStateChanged#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrEventDataSessionStateChanged.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataSessionStateChanged#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataSessionStateChanged.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataSessionStateChanged.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED} value to the {@link XrEventDataSessionStateChanged#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED TYPE_EVENT_DATA_SESSION_STATE_CHANGED} value to the {@code type} field. */
         public XrEventDataSessionStateChanged.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED); }
-        /** Sets the specified value to the {@link XrEventDataSessionStateChanged#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataSessionStateChanged.Buffer next(@NativeType("void const *") long value) { XrEventDataSessionStateChanged.nnext(address(), value); return this; }
 
     }

@@ -16,38 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying memory bindings for a video session object.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
- * <li>{@code memorySize} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRVideoQueue#vkBindVideoSessionMemoryKHR BindVideoSessionMemoryKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindVideoSessionMemoryInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #memoryBindIndex};
- *     VkDeviceMemory {@link #memory};
- *     VkDeviceSize {@link #memoryOffset};
- *     VkDeviceSize {@link #memorySize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t memoryBindIndex;
+ *     VkDeviceMemory memory;
+ *     VkDeviceSize memoryOffset;
+ *     VkDeviceSize memorySize;
+ * }}</pre>
  */
 public class VkBindVideoSessionMemoryInfoKHR extends Struct<VkBindVideoSessionMemoryInfoKHR> implements NativeResource {
 
@@ -109,38 +86,38 @@ public class VkBindVideoSessionMemoryInfoKHR extends Struct<VkBindVideoSessionMe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the memory binding index to bind memory to. */
+    /** @return the value of the {@code memoryBindIndex} field. */
     @NativeType("uint32_t")
     public int memoryBindIndex() { return nmemoryBindIndex(address()); }
-    /** the allocated device memory to be bound to the video session’s memory binding with index {@code memoryBindIndex}. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** the start offset of the region of {@code memory} which is to be bound. */
+    /** @return the value of the {@code memoryOffset} field. */
     @NativeType("VkDeviceSize")
     public long memoryOffset() { return nmemoryOffset(address()); }
-    /** the size in bytes of the region of {@code memory}, starting from {@code memoryOffset} bytes, to be bound. */
+    /** @return the value of the {@code memorySize} field. */
     @NativeType("VkDeviceSize")
     public long memorySize() { return nmemorySize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBindVideoSessionMemoryInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR} value to the {@code sType} field. */
     public VkBindVideoSessionMemoryInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBindVideoSessionMemoryInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryBindIndex} field. */
+    /** Sets the specified value to the {@code memoryBindIndex} field. */
     public VkBindVideoSessionMemoryInfoKHR memoryBindIndex(@NativeType("uint32_t") int value) { nmemoryBindIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkBindVideoSessionMemoryInfoKHR memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryOffset} field. */
+    /** Sets the specified value to the {@code memoryOffset} field. */
     public VkBindVideoSessionMemoryInfoKHR memoryOffset(@NativeType("VkDeviceSize") long value) { nmemoryOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #memorySize} field. */
+    /** Sets the specified value to the {@code memorySize} field. */
     public VkBindVideoSessionMemoryInfoKHR memorySize(@NativeType("VkDeviceSize") long value) { nmemorySize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -354,38 +331,38 @@ public class VkBindVideoSessionMemoryInfoKHR extends Struct<VkBindVideoSessionMe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindVideoSessionMemoryInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindVideoSessionMemoryInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkBindVideoSessionMemoryInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindVideoSessionMemoryInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkBindVideoSessionMemoryInfoKHR#memoryBindIndex} field. */
+        /** @return the value of the {@code memoryBindIndex} field. */
         @NativeType("uint32_t")
         public int memoryBindIndex() { return VkBindVideoSessionMemoryInfoKHR.nmemoryBindIndex(address()); }
-        /** @return the value of the {@link VkBindVideoSessionMemoryInfoKHR#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkBindVideoSessionMemoryInfoKHR.nmemory(address()); }
-        /** @return the value of the {@link VkBindVideoSessionMemoryInfoKHR#memoryOffset} field. */
+        /** @return the value of the {@code memoryOffset} field. */
         @NativeType("VkDeviceSize")
         public long memoryOffset() { return VkBindVideoSessionMemoryInfoKHR.nmemoryOffset(address()); }
-        /** @return the value of the {@link VkBindVideoSessionMemoryInfoKHR#memorySize} field. */
+        /** @return the value of the {@code memorySize} field. */
         @NativeType("VkDeviceSize")
         public long memorySize() { return VkBindVideoSessionMemoryInfoKHR.nmemorySize(address()); }
 
-        /** Sets the specified value to the {@link VkBindVideoSessionMemoryInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBindVideoSessionMemoryInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkBindVideoSessionMemoryInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR} value to the {@link VkBindVideoSessionMemoryInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR} value to the {@code sType} field. */
         public VkBindVideoSessionMemoryInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR); }
-        /** Sets the specified value to the {@link VkBindVideoSessionMemoryInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBindVideoSessionMemoryInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkBindVideoSessionMemoryInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindVideoSessionMemoryInfoKHR#memoryBindIndex} field. */
+        /** Sets the specified value to the {@code memoryBindIndex} field. */
         public VkBindVideoSessionMemoryInfoKHR.Buffer memoryBindIndex(@NativeType("uint32_t") int value) { VkBindVideoSessionMemoryInfoKHR.nmemoryBindIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindVideoSessionMemoryInfoKHR#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkBindVideoSessionMemoryInfoKHR.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkBindVideoSessionMemoryInfoKHR.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindVideoSessionMemoryInfoKHR#memoryOffset} field. */
+        /** Sets the specified value to the {@code memoryOffset} field. */
         public VkBindVideoSessionMemoryInfoKHR.Buffer memoryOffset(@NativeType("VkDeviceSize") long value) { VkBindVideoSessionMemoryInfoKHR.nmemoryOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindVideoSessionMemoryInfoKHR#memorySize} field. */
+        /** Sets the specified value to the {@code memorySize} field. */
         public VkBindVideoSessionMemoryInfoKHR.Buffer memorySize(@NativeType("VkDeviceSize") long value) { VkBindVideoSessionMemoryInfoKHR.nmemorySize(address(), value); return this; }
 
     }

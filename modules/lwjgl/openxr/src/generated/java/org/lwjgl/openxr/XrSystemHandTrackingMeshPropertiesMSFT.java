@@ -16,36 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * System property for hand tracking mesh.
- * 
- * <h5>Description</h5>
- * 
- * <p>If a runtime returns {@link XR10#XR_FALSE FALSE} for {@code supportsHandTrackingMesh}, the system does not support hand tracking mesh input, and therefore <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link MSFTHandTrackingMesh#xrCreateHandMeshSpaceMSFT CreateHandMeshSpaceMSFT} and {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT}. The application <b>should</b> avoid using hand mesh functionality when {@code supportsHandTrackingMesh} is {@link XR10#XR_FALSE FALSE}.</p>
- * 
- * <p>If a runtime returns {@link XR10#XR_TRUE TRUE} for {@code supportsHandTrackingMesh}, the system supports hand tracking mesh input. In this case, the runtime <b>must</b> return a positive number for {@code maxHandMeshIndexCount} and {@code maxHandMeshVertexCount}. An application <b>should</b> use {@code maxHandMeshIndexCount} and {@code maxHandMeshVertexCount} to preallocate hand mesh buffers and reuse them in their render loop when calling {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT} every frame.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using {@link XrSystemHandTrackingMeshPropertiesMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTHandTrackingMesh#XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSystemProperties}, {@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemHandTrackingMeshPropertiesMSFT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsHandTrackingMesh};
- *     uint32_t {@link #maxHandMeshIndexCount};
- *     uint32_t {@link #maxHandMeshVertexCount};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsHandTrackingMesh;
+ *     uint32_t maxHandMeshIndexCount;
+ *     uint32_t maxHandMeshVertexCount;
+ * }}</pre>
  */
 public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct<XrSystemHandTrackingMeshPropertiesMSFT> implements NativeResource {
 
@@ -104,27 +82,27 @@ public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct<XrSystemHandT
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32}, indicating if current system is capable of hand tracking mesh input. */
+    /** @return the value of the {@code supportsHandTrackingMesh} field. */
     @NativeType("XrBool32")
     public boolean supportsHandTrackingMesh() { return nsupportsHandTrackingMesh(address()) != 0; }
-    /** a {@code uint32_t} returns the maximum count of indices that will be returned from the hand tracker. */
+    /** @return the value of the {@code maxHandMeshIndexCount} field. */
     @NativeType("uint32_t")
     public int maxHandMeshIndexCount() { return nmaxHandMeshIndexCount(address()); }
-    /** a {@code uint32_t} returns the maximum count of vertices that will be returned from the hand tracker. */
+    /** @return the value of the {@code maxHandMeshVertexCount} field. */
     @NativeType("uint32_t")
     public int maxHandMeshVertexCount() { return nmaxHandMeshVertexCount(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemHandTrackingMeshPropertiesMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTHandTrackingMesh#XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTHandTrackingMesh#XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT} value to the {@code type} field. */
     public XrSystemHandTrackingMeshPropertiesMSFT type$Default() { return type(MSFTHandTrackingMesh.XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemHandTrackingMeshPropertiesMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,27 +298,27 @@ public class XrSystemHandTrackingMeshPropertiesMSFT extends Struct<XrSystemHandT
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemHandTrackingMeshPropertiesMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemHandTrackingMeshPropertiesMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSystemHandTrackingMeshPropertiesMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemHandTrackingMeshPropertiesMSFT.nnext(address()); }
-        /** @return the value of the {@link XrSystemHandTrackingMeshPropertiesMSFT#supportsHandTrackingMesh} field. */
+        /** @return the value of the {@code supportsHandTrackingMesh} field. */
         @NativeType("XrBool32")
         public boolean supportsHandTrackingMesh() { return XrSystemHandTrackingMeshPropertiesMSFT.nsupportsHandTrackingMesh(address()) != 0; }
-        /** @return the value of the {@link XrSystemHandTrackingMeshPropertiesMSFT#maxHandMeshIndexCount} field. */
+        /** @return the value of the {@code maxHandMeshIndexCount} field. */
         @NativeType("uint32_t")
         public int maxHandMeshIndexCount() { return XrSystemHandTrackingMeshPropertiesMSFT.nmaxHandMeshIndexCount(address()); }
-        /** @return the value of the {@link XrSystemHandTrackingMeshPropertiesMSFT#maxHandMeshVertexCount} field. */
+        /** @return the value of the {@code maxHandMeshVertexCount} field. */
         @NativeType("uint32_t")
         public int maxHandMeshVertexCount() { return XrSystemHandTrackingMeshPropertiesMSFT.nmaxHandMeshVertexCount(address()); }
 
-        /** Sets the specified value to the {@link XrSystemHandTrackingMeshPropertiesMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemHandTrackingMeshPropertiesMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSystemHandTrackingMeshPropertiesMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTHandTrackingMesh#XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT} value to the {@link XrSystemHandTrackingMeshPropertiesMSFT#type} field. */
+        /** Sets the {@link MSFTHandTrackingMesh#XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT} value to the {@code type} field. */
         public XrSystemHandTrackingMeshPropertiesMSFT.Buffer type$Default() { return type(MSFTHandTrackingMesh.XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT); }
-        /** Sets the specified value to the {@link XrSystemHandTrackingMeshPropertiesMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemHandTrackingMeshPropertiesMSFT.Buffer next(@NativeType("void *") long value) { XrSystemHandTrackingMeshPropertiesMSFT.nnext(address(), value); return this; }
 
     }

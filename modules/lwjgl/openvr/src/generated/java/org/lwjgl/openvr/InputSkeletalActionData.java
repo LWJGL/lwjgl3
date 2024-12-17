@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct InputSkeletalActionData_t {
- *     bool {@link #bActive};
- *     VRInputValueHandle_t {@link #activeOrigin};
- * }</code></pre>
+ *     bool bActive;
+ *     VRInputValueHandle_t activeOrigin;
+ * }}</pre>
  */
 @NativeType("struct InputSkeletalActionData_t")
 public class InputSkeletalActionData extends Struct<InputSkeletalActionData> implements NativeResource {
@@ -73,10 +71,10 @@ public class InputSkeletalActionData extends Struct<InputSkeletalActionData> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** whether or not this action is currently available to be bound in the active action set */
+    /** @return the value of the {@code bActive} field. */
     @NativeType("bool")
     public boolean bActive() { return nbActive(address()); }
-    /** the origin that caused this action's current state */
+    /** @return the value of the {@code activeOrigin} field. */
     @NativeType("VRInputValueHandle_t")
     public long activeOrigin() { return nactiveOrigin(address()); }
 
@@ -258,10 +256,10 @@ public class InputSkeletalActionData extends Struct<InputSkeletalActionData> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link InputSkeletalActionData#bActive} field. */
+        /** @return the value of the {@code bActive} field. */
         @NativeType("bool")
         public boolean bActive() { return InputSkeletalActionData.nbActive(address()); }
-        /** @return the value of the {@link InputSkeletalActionData#activeOrigin} field. */
+        /** @return the value of the {@code activeOrigin} field. */
         @NativeType("VRInputValueHandle_t")
         public long activeOrigin() { return InputSkeletalActionData.nactiveOrigin(address()); }
 

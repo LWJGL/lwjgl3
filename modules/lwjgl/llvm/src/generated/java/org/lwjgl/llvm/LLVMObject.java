@@ -68,30 +68,6 @@ public class LLVMObject {
 
     }
 
-    /**
-     * {@code LLVMBinaryType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMBinaryTypeArchive BinaryTypeArchive}</li>
-     * <li>{@link #LLVMBinaryTypeMachOUniversalBinary BinaryTypeMachOUniversalBinary}</li>
-     * <li>{@link #LLVMBinaryTypeCOFFImportFile BinaryTypeCOFFImportFile}</li>
-     * <li>{@link #LLVMBinaryTypeIR BinaryTypeIR}</li>
-     * <li>{@link #LLVMBinaryTypeWinRes BinaryTypeWinRes}</li>
-     * <li>{@link #LLVMBinaryTypeCOFF BinaryTypeCOFF}</li>
-     * <li>{@link #LLVMBinaryTypeELF32L BinaryTypeELF32L}</li>
-     * <li>{@link #LLVMBinaryTypeELF32B BinaryTypeELF32B}</li>
-     * <li>{@link #LLVMBinaryTypeELF64L BinaryTypeELF64L}</li>
-     * <li>{@link #LLVMBinaryTypeELF64B BinaryTypeELF64B}</li>
-     * <li>{@link #LLVMBinaryTypeMachO32L BinaryTypeMachO32L}</li>
-     * <li>{@link #LLVMBinaryTypeMachO32B BinaryTypeMachO32B}</li>
-     * <li>{@link #LLVMBinaryTypeMachO64L BinaryTypeMachO64L}</li>
-     * <li>{@link #LLVMBinaryTypeMachO64B BinaryTypeMachO64B}</li>
-     * <li>{@link #LLVMBinaryTypeWasm BinaryTypeWasm}</li>
-     * <li>{@link #LLVMBinaryTypeOffload BinaryTypeOffload}</li>
-     * </ul>
-     */
     public static final int
         LLVMBinaryTypeArchive              = 0,
         LLVMBinaryTypeMachOUniversalBinary = 1,
@@ -116,7 +92,7 @@ public class LLVMObject {
 
     // --- [ LLVMCreateBinary ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateBinary CreateBinary} */
+    /** {@code LLVMBinaryRef LLVMCreateBinary(LLVMMemoryBufferRef MemBuf, LLVMContextRef Context, char ** ErrorMessage)} */
     public static long nLLVMCreateBinary(long MemBuf, long Context, long ErrorMessage) {
         long __functionAddress = Functions.CreateBinary;
         if (CHECKS) {
@@ -126,17 +102,7 @@ public class LLVMObject {
         return invokePPPP(MemBuf, Context, ErrorMessage, __functionAddress);
     }
 
-    /**
-     * Create a binary file from the given memory buffer.
-     * 
-     * <p>The exact type of the binary file will be inferred automatically, and the appropriate implementation selected. The context may be {@code NULL} except if the
-     * resulting file is an LLVM IR file.</p>
-     * 
-     * <p>The memory buffer is not consumed by this function. It is the responsibilty of the caller to free it with {@link LLVMCore#LLVMDisposeMemoryBuffer DisposeMemoryBuffer}.</p>
-     * 
-     * <p>If {@code NULL} is returned, the {@code ErrorMessage} parameter is populated with the error's description. It is then the caller's responsibility to free this
-     * message by calling {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.</p>
-     */
+    /** {@code LLVMBinaryRef LLVMCreateBinary(LLVMMemoryBufferRef MemBuf, LLVMContextRef Context, char ** ErrorMessage)} */
     @NativeType("LLVMBinaryRef")
     public static long LLVMCreateBinary(@NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMContextRef") long Context, @NativeType("char **") PointerBuffer ErrorMessage) {
         if (CHECKS) {
@@ -147,11 +113,7 @@ public class LLVMObject {
 
     // --- [ LLVMDisposeBinary ] ---
 
-    /**
-     * Dispose of a binary file.
-     * 
-     * <p>The binary file does not own its backing buffer. It is the responsibilty of the caller to free it with {@link LLVMCore#LLVMDisposeMemoryBuffer DisposeMemoryBuffer}.</p>
-     */
+    /** {@code void LLVMDisposeBinary(LLVMBinaryRef BR)} */
     public static void LLVMDisposeBinary(@NativeType("LLVMBinaryRef") long BR) {
         long __functionAddress = Functions.DisposeBinary;
         if (CHECKS) {
@@ -163,12 +125,7 @@ public class LLVMObject {
 
     // --- [ LLVMBinaryCopyMemoryBuffer ] ---
 
-    /**
-     * Retrieves a copy of the memory buffer associated with this object file.
-     * 
-     * <p>The returned buffer is merely a shallow copy and does not own the actual backing buffer of the binary. Nevertheless, it is the responsibility of the
-     * caller to free it with {@link LLVMCore#LLVMDisposeMemoryBuffer DisposeMemoryBuffer}.</p>
-     */
+    /** {@code LLVMMemoryBufferRef LLVMBinaryCopyMemoryBuffer(LLVMBinaryRef BR)} */
     @NativeType("LLVMMemoryBufferRef")
     public static long LLVMBinaryCopyMemoryBuffer(@NativeType("LLVMBinaryRef") long BR) {
         long __functionAddress = Functions.BinaryCopyMemoryBuffer;
@@ -181,7 +138,7 @@ public class LLVMObject {
 
     // --- [ LLVMBinaryGetType ] ---
 
-    /** Retrieve the specific type of a binary. */
+    /** {@code LLVMBinaryType LLVMBinaryGetType(LLVMBinaryRef BR)} */
     @NativeType("LLVMBinaryType")
     public static int LLVMBinaryGetType(@NativeType("LLVMBinaryRef") long BR) {
         long __functionAddress = Functions.BinaryGetType;
@@ -194,7 +151,7 @@ public class LLVMObject {
 
     // --- [ LLVMMachOUniversalBinaryCopyObjectForArch ] ---
 
-    /** Unsafe version of: {@link #LLVMMachOUniversalBinaryCopyObjectForArch MachOUniversalBinaryCopyObjectForArch} */
+    /** {@code LLVMBinaryRef LLVMMachOUniversalBinaryCopyObjectForArch(LLVMBinaryRef BR, char const * Arch, size_t ArchLen, char ** ErrorMessage)} */
     public static long nLLVMMachOUniversalBinaryCopyObjectForArch(long BR, long Arch, long ArchLen, long ErrorMessage) {
         long __functionAddress = Functions.MachOUniversalBinaryCopyObjectForArch;
         if (CHECKS) {
@@ -204,14 +161,7 @@ public class LLVMObject {
         return invokePPPPP(BR, Arch, ArchLen, ErrorMessage, __functionAddress);
     }
 
-    /**
-     * For a Mach-O universal binary file, retrieves the object file corresponding to the given architecture if it is present as a slice.
-     * 
-     * <p>If {@code NULL} is returned, the {@code ErrorMessage} parameter is populated with the error's description. It is then the caller's responsibility to free this
-     * message by calling {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.</p>
-     * 
-     * <p>It is the responsiblity of the caller to free the returned object file by calling {@link #LLVMDisposeBinary DisposeBinary}.</p>
-     */
+    /** {@code LLVMBinaryRef LLVMMachOUniversalBinaryCopyObjectForArch(LLVMBinaryRef BR, char const * Arch, size_t ArchLen, char ** ErrorMessage)} */
     @NativeType("LLVMBinaryRef")
     public static long LLVMMachOUniversalBinaryCopyObjectForArch(@NativeType("LLVMBinaryRef") long BR, @NativeType("char const *") ByteBuffer Arch, @NativeType("char **") PointerBuffer ErrorMessage) {
         if (CHECKS) {
@@ -220,14 +170,7 @@ public class LLVMObject {
         return nLLVMMachOUniversalBinaryCopyObjectForArch(BR, memAddress(Arch), Arch.remaining(), memAddress(ErrorMessage));
     }
 
-    /**
-     * For a Mach-O universal binary file, retrieves the object file corresponding to the given architecture if it is present as a slice.
-     * 
-     * <p>If {@code NULL} is returned, the {@code ErrorMessage} parameter is populated with the error's description. It is then the caller's responsibility to free this
-     * message by calling {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.</p>
-     * 
-     * <p>It is the responsiblity of the caller to free the returned object file by calling {@link #LLVMDisposeBinary DisposeBinary}.</p>
-     */
+    /** {@code LLVMBinaryRef LLVMMachOUniversalBinaryCopyObjectForArch(LLVMBinaryRef BR, char const * Arch, size_t ArchLen, char ** ErrorMessage)} */
     @NativeType("LLVMBinaryRef")
     public static long LLVMMachOUniversalBinaryCopyObjectForArch(@NativeType("LLVMBinaryRef") long BR, @NativeType("char const *") CharSequence Arch, @NativeType("char **") PointerBuffer ErrorMessage) {
         if (CHECKS) {
@@ -245,13 +188,7 @@ public class LLVMObject {
 
     // --- [ LLVMObjectFileCopySectionIterator ] ---
 
-    /**
-     * Retrieve a copy of the section iterator for this object file.
-     * 
-     * <p>If there are no sections, the result is {@code NULL}.</p>
-     * 
-     * <p>The returned iterator is merely a shallow copy. Nevertheless, it is the responsibility of the caller to free it with {@link #LLVMDisposeSectionIterator DisposeSectionIterator}.</p>
-     */
+    /** {@code LLVMSectionIteratorRef LLVMObjectFileCopySectionIterator(LLVMBinaryRef BR)} */
     @NativeType("LLVMSectionIteratorRef")
     public static long LLVMObjectFileCopySectionIterator(@NativeType("LLVMBinaryRef") long BR) {
         long __functionAddress = Functions.ObjectFileCopySectionIterator;
@@ -264,7 +201,7 @@ public class LLVMObject {
 
     // --- [ LLVMObjectFileIsSectionIteratorAtEnd ] ---
 
-    /** Returns whether the given section iterator is at the end. */
+    /** {@code LLVMBool LLVMObjectFileIsSectionIteratorAtEnd(LLVMBinaryRef BR, LLVMSectionIteratorRef SI)} */
     @NativeType("LLVMBool")
     public static boolean LLVMObjectFileIsSectionIteratorAtEnd(@NativeType("LLVMBinaryRef") long BR, @NativeType("LLVMSectionIteratorRef") long SI) {
         long __functionAddress = Functions.ObjectFileIsSectionIteratorAtEnd;
@@ -278,13 +215,7 @@ public class LLVMObject {
 
     // --- [ LLVMObjectFileCopySymbolIterator ] ---
 
-    /**
-     * Retrieve a copy of the symbol iterator for this object file.
-     * 
-     * <p>If there are no symbols, the result is {@code NULL}.</p>
-     * 
-     * <p>The returned iterator is merely a shallow copy. Nevertheless, it is the responsibility of the caller to free it with {@link #LLVMDisposeSymbolIterator DisposeSymbolIterator}.</p>
-     */
+    /** {@code LLVMSymbolIteratorRef LLVMObjectFileCopySymbolIterator(LLVMBinaryRef BR)} */
     @NativeType("LLVMSymbolIteratorRef")
     public static long LLVMObjectFileCopySymbolIterator(@NativeType("LLVMBinaryRef") long BR) {
         long __functionAddress = Functions.ObjectFileCopySymbolIterator;
@@ -297,7 +228,7 @@ public class LLVMObject {
 
     // --- [ LLVMObjectFileIsSymbolIteratorAtEnd ] ---
 
-    /** Returns whether the given symbol iterator is at the end. */
+    /** {@code LLVMBool LLVMObjectFileIsSymbolIteratorAtEnd(LLVMBinaryRef BR, LLVMSymbolIteratorRef SI)} */
     @NativeType("LLVMBool")
     public static boolean LLVMObjectFileIsSymbolIteratorAtEnd(@NativeType("LLVMBinaryRef") long BR, @NativeType("LLVMSymbolIteratorRef") long SI) {
         long __functionAddress = Functions.ObjectFileIsSymbolIteratorAtEnd;
@@ -311,6 +242,7 @@ public class LLVMObject {
 
     // --- [ LLVMDisposeSectionIterator ] ---
 
+    /** {@code void LLVMDisposeSectionIterator(LLVMSectionIteratorRef SI)} */
     public static void LLVMDisposeSectionIterator(@NativeType("LLVMSectionIteratorRef") long SI) {
         long __functionAddress = Functions.DisposeSectionIterator;
         if (CHECKS) {
@@ -322,6 +254,7 @@ public class LLVMObject {
 
     // --- [ LLVMMoveToNextSection ] ---
 
+    /** {@code void LLVMMoveToNextSection(LLVMSectionIteratorRef SI)} */
     public static void LLVMMoveToNextSection(@NativeType("LLVMSectionIteratorRef") long SI) {
         long __functionAddress = Functions.MoveToNextSection;
         if (CHECKS) {
@@ -333,6 +266,7 @@ public class LLVMObject {
 
     // --- [ LLVMMoveToContainingSection ] ---
 
+    /** {@code void LLVMMoveToContainingSection(LLVMSectionIteratorRef Sect, LLVMSymbolIteratorRef Sym)} */
     public static void LLVMMoveToContainingSection(@NativeType("LLVMSectionIteratorRef") long Sect, @NativeType("LLVMSymbolIteratorRef") long Sym) {
         long __functionAddress = Functions.MoveToContainingSection;
         if (CHECKS) {
@@ -345,6 +279,7 @@ public class LLVMObject {
 
     // --- [ LLVMDisposeSymbolIterator ] ---
 
+    /** {@code void LLVMDisposeSymbolIterator(LLVMSymbolIteratorRef SI)} */
     public static void LLVMDisposeSymbolIterator(@NativeType("LLVMSymbolIteratorRef") long SI) {
         long __functionAddress = Functions.DisposeSymbolIterator;
         if (CHECKS) {
@@ -356,6 +291,7 @@ public class LLVMObject {
 
     // --- [ LLVMMoveToNextSymbol ] ---
 
+    /** {@code void LLVMMoveToNextSymbol(LLVMSymbolIteratorRef SI)} */
     public static void LLVMMoveToNextSymbol(@NativeType("LLVMSymbolIteratorRef") long SI) {
         long __functionAddress = Functions.MoveToNextSymbol;
         if (CHECKS) {
@@ -367,6 +303,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSectionName ] ---
 
+    /** {@code char const * LLVMGetSectionName(LLVMSectionIteratorRef SI)} */
     public static long nLLVMGetSectionName(long SI) {
         long __functionAddress = Functions.GetSectionName;
         if (CHECKS) {
@@ -376,6 +313,7 @@ public class LLVMObject {
         return invokePP(SI, __functionAddress);
     }
 
+    /** {@code char const * LLVMGetSectionName(LLVMSectionIteratorRef SI)} */
     @NativeType("char const *")
     public static @Nullable String LLVMGetSectionName(@NativeType("LLVMSectionIteratorRef") long SI) {
         long __result = nLLVMGetSectionName(SI);
@@ -384,6 +322,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSectionSize ] ---
 
+    /** {@code uint64_t LLVMGetSectionSize(LLVMSectionIteratorRef SI)} */
     @NativeType("uint64_t")
     public static long LLVMGetSectionSize(@NativeType("LLVMSectionIteratorRef") long SI) {
         long __functionAddress = Functions.GetSectionSize;
@@ -396,6 +335,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSectionContents ] ---
 
+    /** {@code char const * LLVMGetSectionContents(LLVMSectionIteratorRef SI)} */
     public static long nLLVMGetSectionContents(long SI) {
         long __functionAddress = Functions.GetSectionContents;
         if (CHECKS) {
@@ -405,6 +345,7 @@ public class LLVMObject {
         return invokePP(SI, __functionAddress);
     }
 
+    /** {@code char const * LLVMGetSectionContents(LLVMSectionIteratorRef SI)} */
     @NativeType("char const *")
     public static @Nullable String LLVMGetSectionContents(@NativeType("LLVMSectionIteratorRef") long SI) {
         long __result = nLLVMGetSectionContents(SI);
@@ -413,6 +354,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSectionAddress ] ---
 
+    /** {@code uint64_t LLVMGetSectionAddress(LLVMSectionIteratorRef SI)} */
     @NativeType("uint64_t")
     public static long LLVMGetSectionAddress(@NativeType("LLVMSectionIteratorRef") long SI) {
         long __functionAddress = Functions.GetSectionAddress;
@@ -425,6 +367,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSectionContainsSymbol ] ---
 
+    /** {@code LLVMBool LLVMGetSectionContainsSymbol(LLVMSectionIteratorRef SI, LLVMSymbolIteratorRef Sym)} */
     @NativeType("LLVMBool")
     public static boolean LLVMGetSectionContainsSymbol(@NativeType("LLVMSectionIteratorRef") long SI, @NativeType("LLVMSymbolIteratorRef") long Sym) {
         long __functionAddress = Functions.GetSectionContainsSymbol;
@@ -438,6 +381,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetRelocations ] ---
 
+    /** {@code LLVMRelocationIteratorRef LLVMGetRelocations(LLVMSectionIteratorRef Section)} */
     @NativeType("LLVMRelocationIteratorRef")
     public static long LLVMGetRelocations(@NativeType("LLVMSectionIteratorRef") long Section) {
         long __functionAddress = Functions.GetRelocations;
@@ -450,6 +394,7 @@ public class LLVMObject {
 
     // --- [ LLVMDisposeRelocationIterator ] ---
 
+    /** {@code void LLVMDisposeRelocationIterator(LLVMRelocationIteratorRef RI)} */
     public static void LLVMDisposeRelocationIterator(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __functionAddress = Functions.DisposeRelocationIterator;
         if (CHECKS) {
@@ -461,6 +406,7 @@ public class LLVMObject {
 
     // --- [ LLVMIsRelocationIteratorAtEnd ] ---
 
+    /** {@code LLVMBool LLVMIsRelocationIteratorAtEnd(LLVMSectionIteratorRef Section, LLVMRelocationIteratorRef RI)} */
     @NativeType("LLVMBool")
     public static boolean LLVMIsRelocationIteratorAtEnd(@NativeType("LLVMSectionIteratorRef") long Section, @NativeType("LLVMRelocationIteratorRef") long RI) {
         long __functionAddress = Functions.IsRelocationIteratorAtEnd;
@@ -474,6 +420,7 @@ public class LLVMObject {
 
     // --- [ LLVMMoveToNextRelocation ] ---
 
+    /** {@code void LLVMMoveToNextRelocation(LLVMRelocationIteratorRef RI)} */
     public static void LLVMMoveToNextRelocation(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __functionAddress = Functions.MoveToNextRelocation;
         if (CHECKS) {
@@ -485,6 +432,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSymbolName ] ---
 
+    /** {@code char const * LLVMGetSymbolName(LLVMSymbolIteratorRef SI)} */
     public static long nLLVMGetSymbolName(long SI) {
         long __functionAddress = Functions.GetSymbolName;
         if (CHECKS) {
@@ -494,6 +442,7 @@ public class LLVMObject {
         return invokePP(SI, __functionAddress);
     }
 
+    /** {@code char const * LLVMGetSymbolName(LLVMSymbolIteratorRef SI)} */
     @NativeType("char const *")
     public static @Nullable String LLVMGetSymbolName(@NativeType("LLVMSymbolIteratorRef") long SI) {
         long __result = nLLVMGetSymbolName(SI);
@@ -502,6 +451,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSymbolAddress ] ---
 
+    /** {@code uint64_t LLVMGetSymbolAddress(LLVMSymbolIteratorRef SI)} */
     @NativeType("uint64_t")
     public static long LLVMGetSymbolAddress(@NativeType("LLVMSymbolIteratorRef") long SI) {
         long __functionAddress = Functions.GetSymbolAddress;
@@ -514,6 +464,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSymbolSize ] ---
 
+    /** {@code uint64_t LLVMGetSymbolSize(LLVMSymbolIteratorRef SI)} */
     @NativeType("uint64_t")
     public static long LLVMGetSymbolSize(@NativeType("LLVMSymbolIteratorRef") long SI) {
         long __functionAddress = Functions.GetSymbolSize;
@@ -526,6 +477,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetRelocationOffset ] ---
 
+    /** {@code uint64_t LLVMGetRelocationOffset(LLVMRelocationIteratorRef RI)} */
     @NativeType("uint64_t")
     public static long LLVMGetRelocationOffset(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __functionAddress = Functions.GetRelocationOffset;
@@ -538,6 +490,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetRelocationSymbol ] ---
 
+    /** {@code LLVMSymbolIteratorRef LLVMGetRelocationSymbol(LLVMRelocationIteratorRef RI)} */
     @NativeType("LLVMSymbolIteratorRef")
     public static long LLVMGetRelocationSymbol(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __functionAddress = Functions.GetRelocationSymbol;
@@ -550,6 +503,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetRelocationType ] ---
 
+    /** {@code uint64_t LLVMGetRelocationType(LLVMRelocationIteratorRef RI)} */
     @NativeType("uint64_t")
     public static long LLVMGetRelocationType(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __functionAddress = Functions.GetRelocationType;
@@ -562,6 +516,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetRelocationTypeName ] ---
 
+    /** {@code char const * LLVMGetRelocationTypeName(LLVMRelocationIteratorRef RI)} */
     public static long nLLVMGetRelocationTypeName(long RI) {
         long __functionAddress = Functions.GetRelocationTypeName;
         if (CHECKS) {
@@ -571,6 +526,7 @@ public class LLVMObject {
         return invokePP(RI, __functionAddress);
     }
 
+    /** {@code char const * LLVMGetRelocationTypeName(LLVMRelocationIteratorRef RI)} */
     @NativeType("char const *")
     public static @Nullable String LLVMGetRelocationTypeName(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __result = nLLVMGetRelocationTypeName(RI);
@@ -579,6 +535,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetRelocationValueString ] ---
 
+    /** {@code char const * LLVMGetRelocationValueString(LLVMRelocationIteratorRef RI)} */
     public static long nLLVMGetRelocationValueString(long RI) {
         long __functionAddress = Functions.GetRelocationValueString;
         if (CHECKS) {
@@ -588,6 +545,7 @@ public class LLVMObject {
         return invokePP(RI, __functionAddress);
     }
 
+    /** {@code char const * LLVMGetRelocationValueString(LLVMRelocationIteratorRef RI)} */
     @NativeType("char const *")
     public static @Nullable String LLVMGetRelocationValueString(@NativeType("LLVMRelocationIteratorRef") long RI) {
         long __result = nLLVMGetRelocationValueString(RI);
@@ -596,7 +554,7 @@ public class LLVMObject {
 
     // --- [ LLVMCreateObjectFile ] ---
 
-    /** Deprecated: use {@link #LLVMCreateBinary CreateBinary} instead. */
+    /** {@code LLVMObjectFileRef LLVMCreateObjectFile(LLVMMemoryBufferRef MemBuf)} */
     @NativeType("LLVMObjectFileRef")
     public static long LLVMCreateObjectFile(@NativeType("LLVMMemoryBufferRef") long MemBuf) {
         long __functionAddress = Functions.CreateObjectFile;
@@ -608,7 +566,7 @@ public class LLVMObject {
 
     // --- [ LLVMDisposeObjectFile ] ---
 
-    /** Deprecated: use {@link #LLVMDisposeBinary DisposeBinary} instead. */
+    /** {@code void LLVMDisposeObjectFile(LLVMObjectFileRef ObjectFile)} */
     public static void LLVMDisposeObjectFile(@NativeType("LLVMObjectFileRef") long ObjectFile) {
         long __functionAddress = Functions.DisposeObjectFile;
         if (CHECKS) {
@@ -619,7 +577,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSections ] ---
 
-    /** Deprecated: Use {@link #LLVMObjectFileCopySectionIterator ObjectFileCopySectionIterator} instead. */
+    /** {@code LLVMSectionIteratorRef LLVMGetSections(LLVMObjectFileRef ObjectFile)} */
     @NativeType("LLVMSectionIteratorRef")
     public static long LLVMGetSections(@NativeType("LLVMObjectFileRef") long ObjectFile) {
         long __functionAddress = Functions.GetSections;
@@ -631,7 +589,7 @@ public class LLVMObject {
 
     // --- [ LLVMIsSectionIteratorAtEnd ] ---
 
-    /** Deprecated: Use {@link #LLVMObjectFileIsSectionIteratorAtEnd ObjectFileIsSectionIteratorAtEnd} instead. */
+    /** {@code LLVMBool LLVMIsSectionIteratorAtEnd(LLVMObjectFileRef ObjectFile, LLVMSectionIteratorRef SI)} */
     @NativeType("LLVMBool")
     public static boolean LLVMIsSectionIteratorAtEnd(@NativeType("LLVMObjectFileRef") long ObjectFile, @NativeType("LLVMSectionIteratorRef") long SI) {
         long __functionAddress = Functions.IsSectionIteratorAtEnd;
@@ -644,7 +602,7 @@ public class LLVMObject {
 
     // --- [ LLVMGetSymbols ] ---
 
-    /** Deprecated: Use {@link #LLVMObjectFileCopySymbolIterator ObjectFileCopySymbolIterator} instead. */
+    /** {@code LLVMSymbolIteratorRef LLVMGetSymbols(LLVMObjectFileRef ObjectFile)} */
     @NativeType("LLVMSymbolIteratorRef")
     public static long LLVMGetSymbols(@NativeType("LLVMObjectFileRef") long ObjectFile) {
         long __functionAddress = Functions.GetSymbols;
@@ -656,7 +614,7 @@ public class LLVMObject {
 
     // --- [ LLVMIsSymbolIteratorAtEnd ] ---
 
-    /** Deprecated: Use {@link #LLVMObjectFileIsSymbolIteratorAtEnd ObjectFileIsSymbolIteratorAtEnd} instead. */
+    /** {@code LLVMBool LLVMIsSymbolIteratorAtEnd(LLVMObjectFileRef ObjectFile, LLVMSymbolIteratorRef SI)} */
     @NativeType("LLVMBool")
     public static boolean LLVMIsSymbolIteratorAtEnd(@NativeType("LLVMObjectFileRef") long ObjectFile, @NativeType("LLVMSymbolIteratorRef") long SI) {
         long __functionAddress = Functions.IsSymbolIteratorAtEnd;

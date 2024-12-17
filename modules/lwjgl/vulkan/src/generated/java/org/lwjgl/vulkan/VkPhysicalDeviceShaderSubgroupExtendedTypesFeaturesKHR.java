@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 shaderSubgroupExtendedTypes;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR extends VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures {
 

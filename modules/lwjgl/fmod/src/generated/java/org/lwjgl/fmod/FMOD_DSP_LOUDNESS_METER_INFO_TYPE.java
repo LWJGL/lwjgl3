@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_LOUDNESS_METER_INFO_TYPE {
  *     float momentaryloudness;
  *     float shorttermloudness;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float loudnesshistogram[66];
  *     float maxtruepeak;
  *     float maxmomentaryloudness;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_LOUDNESS_METER_INFO_TYPE extends Struct<FMOD_DSP_LOUDNESS_METER_INFO_TYPE> implements NativeResource {
 

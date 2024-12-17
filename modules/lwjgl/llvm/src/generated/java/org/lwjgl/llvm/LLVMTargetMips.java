@@ -34,6 +34,7 @@ public class LLVMTargetMips {
 
     // --- [ LLVMInitializeMipsTargetInfo ] ---
 
+    /** {@code void LLVMInitializeMipsTargetInfo(void)} */
     public static void LLVMInitializeMipsTargetInfo() {
         long __functionAddress = Functions.InitializeMipsTargetInfo;
         invokeV(__functionAddress);
@@ -41,6 +42,7 @@ public class LLVMTargetMips {
 
     // --- [ LLVMInitializeMipsTarget ] ---
 
+    /** {@code void LLVMInitializeMipsTarget(void)} */
     public static void LLVMInitializeMipsTarget() {
         long __functionAddress = Functions.InitializeMipsTarget;
         invokeV(__functionAddress);
@@ -48,6 +50,7 @@ public class LLVMTargetMips {
 
     // --- [ LLVMInitializeMipsTargetMC ] ---
 
+    /** {@code void LLVMInitializeMipsTargetMC(void)} */
     public static void LLVMInitializeMipsTargetMC() {
         long __functionAddress = Functions.InitializeMipsTargetMC;
         invokeV(__functionAddress);
@@ -55,6 +58,7 @@ public class LLVMTargetMips {
 
     // --- [ LLVMInitializeMipsAsmPrinter ] ---
 
+    /** {@code void LLVMInitializeMipsAsmPrinter(void)} */
     public static void LLVMInitializeMipsAsmPrinter() {
         long __functionAddress = Functions.InitializeMipsAsmPrinter;
         invokeV(__functionAddress);
@@ -62,6 +66,7 @@ public class LLVMTargetMips {
 
     // --- [ LLVMInitializeMipsAsmParser ] ---
 
+    /** {@code void LLVMInitializeMipsAsmParser(void)} */
     public static void LLVMInitializeMipsAsmParser() {
         long __functionAddress = Functions.InitializeMipsAsmParser;
         invokeV(__functionAddress);
@@ -69,6 +74,7 @@ public class LLVMTargetMips {
 
     // --- [ LLVMInitializeMipsDisassembler ] ---
 
+    /** {@code void LLVMInitializeMipsDisassembler(void)} */
     public static void LLVMInitializeMipsDisassembler() {
         long __functionAddress = Functions.InitializeMipsDisassembler;
         invokeV(__functionAddress);

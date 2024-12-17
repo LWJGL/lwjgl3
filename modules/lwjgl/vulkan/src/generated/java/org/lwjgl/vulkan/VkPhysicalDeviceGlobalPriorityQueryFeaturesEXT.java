@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceGlobalPriorityQueryFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 globalPriorityQuery;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT extends VkPhysicalDeviceGlobalPriorityQueryFeatures {
 

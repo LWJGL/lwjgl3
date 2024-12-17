@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A parsed comment.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXComment {
  *     void const * ASTNode;
  *     CXTranslationUnit TranslationUnit;
- * }</code></pre>
+ * }}</pre>
  */
 public class CXComment extends Struct<CXComment> implements NativeResource {
 

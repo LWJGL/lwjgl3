@@ -16,40 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Chains to {@link XrHandJointLocationsEXT} to get hand tracking data source state.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrHandTrackingDataSourceStateEXT} is a structure that an application <b>can</b> chain to {@link XrHandJointLocationsEXT}{@code ::next} when calling {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT} to retrieve the data source of the currently active hand tracking device.</p>
- * 
- * <p>When the returned {@code isActive} is {@code XR_FALSE}, it indicates the currently active hand tracking device does not support any of the requested data sources. In these cases, the runtime <b>must</b> also return no valid tracking locations for hand joints from this {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT} function.</p>
- * 
- * <p>If the tracker was not created with {@link XrHandTrackingDataSourceInfoEXT} chained to {@link XrHandTrackerCreateInfoEXT}{@code ::next}, then the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}, if {@link XrHandTrackingDataSourceStateEXT} is passed in the call to {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT}.</p>
- * 
- * <p>If there is an active hand tracking device that is one of the specified {@link XrHandTrackingDataSourceInfoEXT}{@code ::requestedDataSources}, the runtime <b>must</b> set {@code isActive} to {@link XR10#XR_TRUE TRUE}. When the runtime sets {@code isActive} to {@link XR10#XR_TRUE TRUE}, the runtime <b>must</b> set {@code dataSource} indicate the active data source. The runtime <b>must</b> return a {@code dataSource} that is a subset of the {@link XrHandTrackingDataSourceInfoEXT}{@code ::requestedDataSources} when creating the corresponding hand tracker.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTHandTrackingDataSource XR_EXT_hand_tracking_data_source} extension <b>must</b> be enabled prior to using {@link XrHandTrackingDataSourceStateEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code dataSource} <b>must</b> be a valid {@code XrHandTrackingDataSourceEXT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandJointLocationsEXT}, {@link EXTHandTracking#xrLocateHandJointsEXT LocateHandJointsEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandTrackingDataSourceStateEXT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #isActive};
- *     XrHandTrackingDataSourceEXT {@link #dataSource};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 isActive;
+ *     XrHandTrackingDataSourceEXT dataSource;
+ * }}</pre>
  */
 public class XrHandTrackingDataSourceStateEXT extends Struct<XrHandTrackingDataSourceStateEXT> implements NativeResource {
 
@@ -105,28 +78,28 @@ public class XrHandTrackingDataSourceStateEXT extends Struct<XrHandTrackingDataS
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** indicating there is an active data source */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
-    /** indicating the data source that was used to generate the hand tracking joints. */
+    /** @return the value of the {@code dataSource} field. */
     @NativeType("XrHandTrackingDataSourceEXT")
     public int dataSource() { return ndataSource(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHandTrackingDataSourceStateEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT} value to the {@code type} field. */
     public XrHandTrackingDataSourceStateEXT type$Default() { return type(EXTHandTrackingDataSource.XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHandTrackingDataSourceStateEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #isActive} field. */
+    /** Sets the specified value to the {@code isActive} field. */
     public XrHandTrackingDataSourceStateEXT isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #dataSource} field. */
+    /** Sets the specified value to the {@code dataSource} field. */
     public XrHandTrackingDataSourceStateEXT dataSource(@NativeType("XrHandTrackingDataSourceEXT") int value) { ndataSource(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,28 +301,28 @@ public class XrHandTrackingDataSourceStateEXT extends Struct<XrHandTrackingDataS
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHandTrackingDataSourceStateEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandTrackingDataSourceStateEXT.ntype(address()); }
-        /** @return the value of the {@link XrHandTrackingDataSourceStateEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrHandTrackingDataSourceStateEXT.nnext(address()); }
-        /** @return the value of the {@link XrHandTrackingDataSourceStateEXT#isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrHandTrackingDataSourceStateEXT.nisActive(address()) != 0; }
-        /** @return the value of the {@link XrHandTrackingDataSourceStateEXT#dataSource} field. */
+        /** @return the value of the {@code dataSource} field. */
         @NativeType("XrHandTrackingDataSourceEXT")
         public int dataSource() { return XrHandTrackingDataSourceStateEXT.ndataSource(address()); }
 
-        /** Sets the specified value to the {@link XrHandTrackingDataSourceStateEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHandTrackingDataSourceStateEXT.Buffer type(@NativeType("XrStructureType") int value) { XrHandTrackingDataSourceStateEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT} value to the {@link XrHandTrackingDataSourceStateEXT#type} field. */
+        /** Sets the {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT} value to the {@code type} field. */
         public XrHandTrackingDataSourceStateEXT.Buffer type$Default() { return type(EXTHandTrackingDataSource.XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT); }
-        /** Sets the specified value to the {@link XrHandTrackingDataSourceStateEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHandTrackingDataSourceStateEXT.Buffer next(@NativeType("void *") long value) { XrHandTrackingDataSourceStateEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHandTrackingDataSourceStateEXT#isActive} field. */
+        /** Sets the specified value to the {@code isActive} field. */
         public XrHandTrackingDataSourceStateEXT.Buffer isActive(@NativeType("XrBool32") boolean value) { XrHandTrackingDataSourceStateEXT.nisActive(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrHandTrackingDataSourceStateEXT#dataSource} field. */
+        /** Sets the specified value to the {@code dataSource} field. */
         public XrHandTrackingDataSourceStateEXT.Buffer dataSource(@NativeType("XrHandTrackingDataSourceEXT") int value) { XrHandTrackingDataSourceStateEXT.ndataSource(address(), value); return this; }
 
     }

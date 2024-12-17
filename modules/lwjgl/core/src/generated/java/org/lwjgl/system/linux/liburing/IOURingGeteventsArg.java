@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_getevents_arg {
  *     __u64 sigmask;
  *     __u32 sigmask_sz;
  *     __u32 min_wait_usec;
  *     __u64 ts;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_getevents_arg")
 public class IOURingGeteventsArg extends Struct<IOURingGeteventsArg> implements NativeResource {

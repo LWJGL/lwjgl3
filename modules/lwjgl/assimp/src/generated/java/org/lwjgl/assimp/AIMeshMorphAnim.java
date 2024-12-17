@@ -17,16 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes a morphing animation of a given mesh.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiMeshMorphAnim {
- *     {@link AIString struct aiString} {@link #mName};
- *     unsigned int {@link #mNumKeys};
- *     {@link AIMeshMorphKey struct aiMeshMorphKey} * {@link #mKeys};
- * }</code></pre>
+ *     {@link AIString struct aiString} mName;
+ *     unsigned int mNumKeys;
+ *     {@link AIMeshMorphKey struct aiMeshMorphKey} * mKeys;
+ * }}</pre>
  */
 @NativeType("struct aiMeshMorphAnim")
 public class AIMeshMorphAnim extends Struct<AIMeshMorphAnim> implements NativeResource {
@@ -80,24 +76,21 @@ public class AIMeshMorphAnim extends Struct<AIMeshMorphAnim> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * Name of the mesh to be animated. An empty string is not allowed, animated meshes need to be named (not necessarily uniquely, the name can basically
-     * serve as wildcard to select a group of meshes with similar animation setup).
-     */
+    /** @return a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** Size of the {@code mKeys} array. Must be 1, at least. */
+    /** @return the value of the {@code mNumKeys} field. */
     @NativeType("unsigned int")
     public int mNumKeys() { return nmNumKeys(address()); }
-    /** Key frames of the animation. May not be {@code NULL}. */
+    /** @return a {@link AIMeshMorphKey.Buffer} view of the struct array pointed to by the {@code mKeys} field. */
     @NativeType("struct aiMeshMorphKey *")
     public AIMeshMorphKey.Buffer mKeys() { return nmKeys(address()); }
 
-    /** Copies the specified {@link AIString} to the {@link #mName} field. */
+    /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AIMeshMorphAnim mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
-    /** Passes the {@link #mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIMeshMorphAnim mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-    /** Sets the address of the specified {@link AIMeshMorphKey.Buffer} to the {@link #mKeys} field. */
+    /** Sets the address of the specified {@link AIMeshMorphKey.Buffer} to the {@code mKeys} field. */
     public AIMeshMorphAnim mKeys(@NativeType("struct aiMeshMorphKey *") AIMeshMorphKey.Buffer value) { nmKeys(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,21 +315,21 @@ public class AIMeshMorphAnim extends Struct<AIMeshMorphAnim> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link AIString} view of the {@link AIMeshMorphAnim#mName} field. */
+        /** @return a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIMeshMorphAnim.nmName(address()); }
-        /** @return the value of the {@link AIMeshMorphAnim#mNumKeys} field. */
+        /** @return the value of the {@code mNumKeys} field. */
         @NativeType("unsigned int")
         public int mNumKeys() { return AIMeshMorphAnim.nmNumKeys(address()); }
-        /** @return a {@link AIMeshMorphKey.Buffer} view of the struct array pointed to by the {@link AIMeshMorphAnim#mKeys} field. */
+        /** @return a {@link AIMeshMorphKey.Buffer} view of the struct array pointed to by the {@code mKeys} field. */
         @NativeType("struct aiMeshMorphKey *")
         public AIMeshMorphKey.Buffer mKeys() { return AIMeshMorphAnim.nmKeys(address()); }
 
-        /** Copies the specified {@link AIString} to the {@link AIMeshMorphAnim#mName} field. */
+        /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AIMeshMorphAnim.Buffer mName(@NativeType("struct aiString") AIString value) { AIMeshMorphAnim.nmName(address(), value); return this; }
-        /** Passes the {@link AIMeshMorphAnim#mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIMeshMorphAnim.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-        /** Sets the address of the specified {@link AIMeshMorphKey.Buffer} to the {@link AIMeshMorphAnim#mKeys} field. */
+        /** Sets the address of the specified {@link AIMeshMorphKey.Buffer} to the {@code mKeys} field. */
         public AIMeshMorphAnim.Buffer mKeys(@NativeType("struct aiMeshMorphKey *") AIMeshMorphKey.Buffer value) { AIMeshMorphAnim.nmKeys(address(), value); return this; }
 
     }

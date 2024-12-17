@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing descriptor buffer density map properties supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     size_t {@link #combinedImageSamplerDensityMapDescriptorSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     size_t combinedImageSamplerDensityMapDescriptorSize;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT extends Struct<VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT> implements NativeResource {
 
@@ -88,21 +74,21 @@ public class VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT extends Str
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} descriptor when creating the descriptor with {@link EXTFragmentDensityMap#VK_SAMPLER_CREATE_SUBSAMPLED_BIT_EXT SAMPLER_CREATE_SUBSAMPLED_BIT_EXT} set. */
+    /** @return the value of the {@code combinedImageSamplerDensityMapDescriptorSize} field. */
     @NativeType("size_t")
     public long combinedImageSamplerDensityMapDescriptorSize() { return ncombinedImageSamplerDensityMapDescriptorSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,21 +280,21 @@ public class VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT extends Str
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT#combinedImageSamplerDensityMapDescriptorSize} field. */
+        /** @return the value of the {@code combinedImageSamplerDensityMapDescriptorSize} field. */
         @NativeType("size_t")
         public long combinedImageSamplerDensityMapDescriptorSize() { return VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.ncombinedImageSamplerDensityMapDescriptorSize(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT.npNext(address(), value); return this; }
 
     }

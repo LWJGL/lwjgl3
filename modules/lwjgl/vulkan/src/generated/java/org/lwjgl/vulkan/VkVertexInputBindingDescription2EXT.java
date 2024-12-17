@@ -16,41 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the extended vertex input binding description.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code binding} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
- * <li>{@code stride} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindingStride}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-vertexAttributeInstanceRateZeroDivisor">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is not enabled, {@code divisor} <b>must</b> not be 0</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-vertexAttributeInstanceRateDivisor">{@code vertexAttributeInstanceRateDivisor}</a> feature is not enabled, {@code divisor} <b>must</b> be 1</li>
- * <li>{@code divisor} <b>must</b> be a value between 0 and {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT}{@code ::maxVertexAttribDivisor}, inclusive</li>
- * <li>If {@code divisor} is not 1 then {@code inputRate} <b>must</b> be of type {@link VK10#VK_VERTEX_INPUT_RATE_INSTANCE VERTEX_INPUT_RATE_INSTANCE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT}</li>
- * <li>{@code inputRate} <b>must</b> be a valid {@code VkVertexInputRate} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTShaderObject#vkCmdSetVertexInputEXT CmdSetVertexInputEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVertexInputBindingDescription2EXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #binding};
- *     uint32_t {@link #stride};
- *     VkVertexInputRate {@link #inputRate};
- *     uint32_t {@link #divisor};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t binding;
+ *     uint32_t stride;
+ *     VkVertexInputRate inputRate;
+ *     uint32_t divisor;
+ * }}</pre>
  */
 public class VkVertexInputBindingDescription2EXT extends Struct<VkVertexInputBindingDescription2EXT> implements NativeResource {
 
@@ -112,38 +86,38 @@ public class VkVertexInputBindingDescription2EXT extends Struct<VkVertexInputBin
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the binding number that this structure describes. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("uint32_t")
     public int binding() { return nbinding(address()); }
-    /** the byte stride between consecutive elements within the buffer. */
+    /** @return the value of the {@code stride} field. */
     @NativeType("uint32_t")
     public int stride() { return nstride(address()); }
-    /** a {@code VkVertexInputRate} value specifying whether vertex attribute addressing is a function of the vertex index or of the instance index. */
+    /** @return the value of the {@code inputRate} field. */
     @NativeType("VkVertexInputRate")
     public int inputRate() { return ninputRate(address()); }
-    /** the number of successive instances that will use the same value of the vertex attribute when instanced rendering is enabled. This member <b>can</b> be a value other than 1 if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-vertexAttributeInstanceRateDivisor">{@code vertexAttributeInstanceRateDivisor}</a> feature is enabled. For example, if the divisor is N, the same vertex attribute will be applied to N successive instances before moving on to the next vertex attribute. The maximum value of {@code divisor} is implementation-dependent and can be queried using {@link VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT}{@code ::maxVertexAttribDivisor}. A value of 0 <b>can</b> be used for the divisor if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-vertexAttributeInstanceRateZeroDivisor">{@code vertexAttributeInstanceRateZeroDivisor}</a> feature is enabled. In this case, the same vertex attribute will be applied to all instances. */
+    /** @return the value of the {@code divisor} field. */
     @NativeType("uint32_t")
     public int divisor() { return ndivisor(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVertexInputBindingDescription2EXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT} value to the {@code sType} field. */
     public VkVertexInputBindingDescription2EXT sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVertexInputBindingDescription2EXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #binding} field. */
+    /** Sets the specified value to the {@code binding} field. */
     public VkVertexInputBindingDescription2EXT binding(@NativeType("uint32_t") int value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #stride} field. */
+    /** Sets the specified value to the {@code stride} field. */
     public VkVertexInputBindingDescription2EXT stride(@NativeType("uint32_t") int value) { nstride(address(), value); return this; }
-    /** Sets the specified value to the {@link #inputRate} field. */
+    /** Sets the specified value to the {@code inputRate} field. */
     public VkVertexInputBindingDescription2EXT inputRate(@NativeType("VkVertexInputRate") int value) { ninputRate(address(), value); return this; }
-    /** Sets the specified value to the {@link #divisor} field. */
+    /** Sets the specified value to the {@code divisor} field. */
     public VkVertexInputBindingDescription2EXT divisor(@NativeType("uint32_t") int value) { ndivisor(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -357,38 +331,38 @@ public class VkVertexInputBindingDescription2EXT extends Struct<VkVertexInputBin
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVertexInputBindingDescription2EXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVertexInputBindingDescription2EXT.nsType(address()); }
-        /** @return the value of the {@link VkVertexInputBindingDescription2EXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVertexInputBindingDescription2EXT.npNext(address()); }
-        /** @return the value of the {@link VkVertexInputBindingDescription2EXT#binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("uint32_t")
         public int binding() { return VkVertexInputBindingDescription2EXT.nbinding(address()); }
-        /** @return the value of the {@link VkVertexInputBindingDescription2EXT#stride} field. */
+        /** @return the value of the {@code stride} field. */
         @NativeType("uint32_t")
         public int stride() { return VkVertexInputBindingDescription2EXT.nstride(address()); }
-        /** @return the value of the {@link VkVertexInputBindingDescription2EXT#inputRate} field. */
+        /** @return the value of the {@code inputRate} field. */
         @NativeType("VkVertexInputRate")
         public int inputRate() { return VkVertexInputBindingDescription2EXT.ninputRate(address()); }
-        /** @return the value of the {@link VkVertexInputBindingDescription2EXT#divisor} field. */
+        /** @return the value of the {@code divisor} field. */
         @NativeType("uint32_t")
         public int divisor() { return VkVertexInputBindingDescription2EXT.ndivisor(address()); }
 
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVertexInputBindingDescription2EXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVertexInputBindingDescription2EXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT} value to the {@link VkVertexInputBindingDescription2EXT#sType} field. */
+        /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT} value to the {@code sType} field. */
         public VkVertexInputBindingDescription2EXT.Buffer sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT); }
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVertexInputBindingDescription2EXT.Buffer pNext(@NativeType("void *") long value) { VkVertexInputBindingDescription2EXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#binding} field. */
+        /** Sets the specified value to the {@code binding} field. */
         public VkVertexInputBindingDescription2EXT.Buffer binding(@NativeType("uint32_t") int value) { VkVertexInputBindingDescription2EXT.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#stride} field. */
+        /** Sets the specified value to the {@code stride} field. */
         public VkVertexInputBindingDescription2EXT.Buffer stride(@NativeType("uint32_t") int value) { VkVertexInputBindingDescription2EXT.nstride(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#inputRate} field. */
+        /** Sets the specified value to the {@code inputRate} field. */
         public VkVertexInputBindingDescription2EXT.Buffer inputRate(@NativeType("VkVertexInputRate") int value) { VkVertexInputBindingDescription2EXT.ninputRate(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription2EXT#divisor} field. */
+        /** Sets the specified value to the {@code divisor} field. */
         public VkVertexInputBindingDescription2EXT.Buffer divisor(@NativeType("uint32_t") int value) { VkVertexInputBindingDescription2EXT.ndivisor(address(), value); return this; }
 
     }

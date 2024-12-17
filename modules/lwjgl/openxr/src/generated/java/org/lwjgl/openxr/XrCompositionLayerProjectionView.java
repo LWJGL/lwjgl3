@@ -16,34 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Projection layer element.
- * 
- * <h5>Description</h5>
- * 
- * <p>The count and order of view poses submitted with {@link XrCompositionLayerProjection} <b>must</b> be the same order as that returned by {@link XR10#xrLocateViews LocateViews}. The {@link XrCompositionLayerProjectionView}{@code ::pose} and {@link XrCompositionLayerProjectionView}{@code ::fov} <b>should</b> almost always derive from {@link XrView}{@code ::pose} and {@link XrView}{@code ::fov} as found in the {@link XR10#xrLocateViews LocateViews}{@code ::views} array. However, applications <b>may</b> submit an {@link XrCompositionLayerProjectionView} which has a different view or FOV than that from {@link XR10#xrLocateViews LocateViews}. In this case, the runtime will map the view and FOV to the system display appropriately. In the case that two submitted views within a single layer overlap, they <b>must</b> be composited in view array order.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW TYPE_COMPOSITION_LAYER_PROJECTION_VIEW}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrCompositionLayerDepthInfoKHR}, {@link XrCompositionLayerSpaceWarpInfoFB}</li>
- * <li>{@code subImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerProjection}, {@link XrFovf}, {@link XrPosef}, {@link XrSwapchainSubImage}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerProjectionView {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrPosef XrPosef} {@link #pose};
- *     {@link XrFovf XrFovf} {@link #fov};
- *     {@link XrSwapchainSubImage XrSwapchainSubImage} {@link #subImage};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrPosef XrPosef} pose;
+ *     {@link XrFovf XrFovf} fov;
+ *     {@link XrSwapchainSubImage XrSwapchainSubImage} subImage;
+ * }}</pre>
  */
 public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerProjectionView> implements NativeResource {
 
@@ -102,40 +82,40 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@link XrPosef} defining the location and orientation of this projection element in the {@code space} of the corresponding {@link XrCompositionLayerProjectionView}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** the {@link XrFovf} for this projection element. */
+    /** @return a {@link XrFovf} view of the {@code fov} field. */
     public XrFovf fov() { return nfov(address()); }
-    /** the image layer {@link XrSwapchainSubImage} to use. The swapchain <b>must</b> have been created with a {@link XrSwapchainCreateInfo}{@code ::faceCount} of 1. */
+    /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerProjectionView type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW TYPE_COMPOSITION_LAYER_PROJECTION_VIEW} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW TYPE_COMPOSITION_LAYER_PROJECTION_VIEW} value to the {@code type} field. */
     public XrCompositionLayerProjectionView type$Default() { return type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerProjectionView next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrCompositionLayerDepthInfoKHR} value to the {@code next} chain. */
     public XrCompositionLayerProjectionView next(XrCompositionLayerDepthInfoKHR value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrCompositionLayerSpaceWarpInfoFB} value to the {@code next} chain. */
     public XrCompositionLayerProjectionView next(XrCompositionLayerSpaceWarpInfoFB value) { return this.next(value.next(this.next()).address()); }
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrCompositionLayerProjectionView pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerProjectionView pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-    /** Copies the specified {@link XrFovf} to the {@link #fov} field. */
+    /** Copies the specified {@link XrFovf} to the {@code fov} field. */
     public XrCompositionLayerProjectionView fov(XrFovf value) { nfov(address(), value); return this; }
-    /** Passes the {@link #fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerProjectionView fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
-    /** Copies the specified {@link XrSwapchainSubImage} to the {@link #subImage} field. */
+    /** Copies the specified {@link XrSwapchainSubImage} to the {@code subImage} field. */
     public XrCompositionLayerProjectionView subImage(XrSwapchainSubImage value) { nsubImage(address(), value); return this; }
-    /** Passes the {@link #subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerProjectionView subImage(java.util.function.Consumer<XrSwapchainSubImage> consumer) { consumer.accept(subImage()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -352,40 +332,40 @@ public class XrCompositionLayerProjectionView extends Struct<XrCompositionLayerP
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerProjectionView#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerProjectionView.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerProjectionView#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerProjectionView.nnext(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrCompositionLayerProjectionView#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrCompositionLayerProjectionView.npose(address()); }
-        /** @return a {@link XrFovf} view of the {@link XrCompositionLayerProjectionView#fov} field. */
+        /** @return a {@link XrFovf} view of the {@code fov} field. */
         public XrFovf fov() { return XrCompositionLayerProjectionView.nfov(address()); }
-        /** @return a {@link XrSwapchainSubImage} view of the {@link XrCompositionLayerProjectionView#subImage} field. */
+        /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
         public XrSwapchainSubImage subImage() { return XrCompositionLayerProjectionView.nsubImage(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerProjectionView#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerProjectionView.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerProjectionView.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW TYPE_COMPOSITION_LAYER_PROJECTION_VIEW} value to the {@link XrCompositionLayerProjectionView#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW TYPE_COMPOSITION_LAYER_PROJECTION_VIEW} value to the {@code type} field. */
         public XrCompositionLayerProjectionView.Buffer type$Default() { return type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW); }
-        /** Sets the specified value to the {@link XrCompositionLayerProjectionView#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerProjectionView.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerProjectionView.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrCompositionLayerDepthInfoKHR} value to the {@code next} chain. */
         public XrCompositionLayerProjectionView.Buffer next(XrCompositionLayerDepthInfoKHR value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrCompositionLayerSpaceWarpInfoFB} value to the {@code next} chain. */
         public XrCompositionLayerProjectionView.Buffer next(XrCompositionLayerSpaceWarpInfoFB value) { return this.next(value.next(this.next()).address()); }
-        /** Copies the specified {@link XrPosef} to the {@link XrCompositionLayerProjectionView#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrCompositionLayerProjectionView.Buffer pose(XrPosef value) { XrCompositionLayerProjectionView.npose(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerProjectionView#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerProjectionView.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-        /** Copies the specified {@link XrFovf} to the {@link XrCompositionLayerProjectionView#fov} field. */
+        /** Copies the specified {@link XrFovf} to the {@code fov} field. */
         public XrCompositionLayerProjectionView.Buffer fov(XrFovf value) { XrCompositionLayerProjectionView.nfov(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerProjectionView#fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerProjectionView.Buffer fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
-        /** Copies the specified {@link XrSwapchainSubImage} to the {@link XrCompositionLayerProjectionView#subImage} field. */
+        /** Copies the specified {@link XrSwapchainSubImage} to the {@code subImage} field. */
         public XrCompositionLayerProjectionView.Buffer subImage(XrSwapchainSubImage value) { XrCompositionLayerProjectionView.nsubImage(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerProjectionView#subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerProjectionView.Buffer subImage(java.util.function.Consumer<XrSwapchainSubImage> consumer) { consumer.accept(subImage()); return this; }
 
     }

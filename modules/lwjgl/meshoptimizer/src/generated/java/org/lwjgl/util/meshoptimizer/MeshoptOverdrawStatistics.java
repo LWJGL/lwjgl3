@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct meshopt_OverdrawStatistics {
  *     unsigned int pixels_covered;
  *     unsigned int pixels_shaded;
- *     float {@link #overdraw};
- * }</code></pre>
+ *     float overdraw;
+ * }}</pre>
  */
 @NativeType("struct meshopt_OverdrawStatistics")
 public class MeshoptOverdrawStatistics extends Struct<MeshoptOverdrawStatistics> implements NativeResource {
@@ -83,7 +81,7 @@ public class MeshoptOverdrawStatistics extends Struct<MeshoptOverdrawStatistics>
     /** @return the value of the {@code pixels_shaded} field. */
     @NativeType("unsigned int")
     public int pixels_shaded() { return npixels_shaded(address()); }
-    /** shaded pixels / covered pixels; best case 1.0 */
+    /** @return the value of the {@code overdraw} field. */
     public float overdraw() { return noverdraw(address()); }
 
     // -----------------------------------
@@ -253,7 +251,7 @@ public class MeshoptOverdrawStatistics extends Struct<MeshoptOverdrawStatistics>
         /** @return the value of the {@code pixels_shaded} field. */
         @NativeType("unsigned int")
         public int pixels_shaded() { return MeshoptOverdrawStatistics.npixels_shaded(address()); }
-        /** @return the value of the {@link MeshoptOverdrawStatistics#overdraw} field. */
+        /** @return the value of the {@code overdraw} field. */
         public float overdraw() { return MeshoptOverdrawStatistics.noverdraw(address()); }
 
     }

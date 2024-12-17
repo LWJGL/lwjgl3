@@ -16,32 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying depth bias parameters.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-leastRepresentableValueForceUnormRepresentation">{@code leastRepresentableValueForceUnormRepresentation}</a> feature is not enabled, {@code depthBiasRepresentation} <b>must</b> not be {@code VK_DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORCE_UNORM_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-floatRepresentation">{@code floatRepresentation}</a> feature is not enabled, {@code depthBiasRepresentation} <b>must</b> not be {@code VK_DEPTH_BIAS_REPRESENTATION_FLOAT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-depthBiasExact">{@code depthBiasExact}</a> feature is not enabled, {@code depthBiasExact} <b>must</b> be {@code VK_FALSE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT}</li>
- * <li>{@code depthBiasRepresentation} <b>must</b> be a valid {@code VkDepthBiasRepresentationEXT} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDepthBiasRepresentationInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDepthBiasRepresentationEXT {@link #depthBiasRepresentation};
- *     VkBool32 {@link #depthBiasExact};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDepthBiasRepresentationEXT depthBiasRepresentation;
+ *     VkBool32 depthBiasExact;
+ * }}</pre>
  */
 public class VkDepthBiasRepresentationInfoEXT extends Struct<VkDepthBiasRepresentationInfoEXT> implements NativeResource {
 
@@ -97,28 +78,28 @@ public class VkDepthBiasRepresentationInfoEXT extends Struct<VkDepthBiasRepresen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkDepthBiasRepresentationEXT} value specifying the depth bias representation. */
+    /** @return the value of the {@code depthBiasRepresentation} field. */
     @NativeType("VkDepthBiasRepresentationEXT")
     public int depthBiasRepresentation() { return ndepthBiasRepresentation(address()); }
-    /** specifies that the implementation is not allowed to scale the depth bias value to ensure a minimum resolvable distance. */
+    /** @return the value of the {@code depthBiasExact} field. */
     @NativeType("VkBool32")
     public boolean depthBiasExact() { return ndepthBiasExact(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDepthBiasRepresentationInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT} value to the {@code sType} field. */
     public VkDepthBiasRepresentationInfoEXT sType$Default() { return sType(EXTDepthBiasControl.VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDepthBiasRepresentationInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthBiasRepresentation} field. */
+    /** Sets the specified value to the {@code depthBiasRepresentation} field. */
     public VkDepthBiasRepresentationInfoEXT depthBiasRepresentation(@NativeType("VkDepthBiasRepresentationEXT") int value) { ndepthBiasRepresentation(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthBiasExact} field. */
+    /** Sets the specified value to the {@code depthBiasExact} field. */
     public VkDepthBiasRepresentationInfoEXT depthBiasExact(@NativeType("VkBool32") boolean value) { ndepthBiasExact(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -320,28 +301,28 @@ public class VkDepthBiasRepresentationInfoEXT extends Struct<VkDepthBiasRepresen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDepthBiasRepresentationInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDepthBiasRepresentationInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDepthBiasRepresentationInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDepthBiasRepresentationInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDepthBiasRepresentationInfoEXT#depthBiasRepresentation} field. */
+        /** @return the value of the {@code depthBiasRepresentation} field. */
         @NativeType("VkDepthBiasRepresentationEXT")
         public int depthBiasRepresentation() { return VkDepthBiasRepresentationInfoEXT.ndepthBiasRepresentation(address()); }
-        /** @return the value of the {@link VkDepthBiasRepresentationInfoEXT#depthBiasExact} field. */
+        /** @return the value of the {@code depthBiasExact} field. */
         @NativeType("VkBool32")
         public boolean depthBiasExact() { return VkDepthBiasRepresentationInfoEXT.ndepthBiasExact(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkDepthBiasRepresentationInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDepthBiasRepresentationInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDepthBiasRepresentationInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT} value to the {@link VkDepthBiasRepresentationInfoEXT#sType} field. */
+        /** Sets the {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT} value to the {@code sType} field. */
         public VkDepthBiasRepresentationInfoEXT.Buffer sType$Default() { return sType(EXTDepthBiasControl.VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDepthBiasRepresentationInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDepthBiasRepresentationInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDepthBiasRepresentationInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDepthBiasRepresentationInfoEXT#depthBiasRepresentation} field. */
+        /** Sets the specified value to the {@code depthBiasRepresentation} field. */
         public VkDepthBiasRepresentationInfoEXT.Buffer depthBiasRepresentation(@NativeType("VkDepthBiasRepresentationEXT") int value) { VkDepthBiasRepresentationInfoEXT.ndepthBiasRepresentation(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDepthBiasRepresentationInfoEXT#depthBiasExact} field. */
+        /** Sets the specified value to the {@code depthBiasExact} field. */
         public VkDepthBiasRepresentationInfoEXT.Buffer depthBiasExact(@NativeType("VkBool32") boolean value) { VkDepthBiasRepresentationInfoEXT.ndepthBiasExact(address(), value ? 1 : 0); return this; }
 
     }

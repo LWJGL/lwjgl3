@@ -16,37 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a single acceleration structure motion instance for building into an acceleration structure geometry.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>If writing this other than with a standard C compiler, note that the final structure should be 152 bytes in size.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be a valid {@code VkAccelerationStructureMotionInstanceTypeNV} value</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>If {@code type} is {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_STATIC_NV ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_STATIC_NV}, the {@code staticInstance} member of {@code data} <b>must</b> be a valid {@link VkAccelerationStructureInstanceKHR} structure</li>
- * <li>If {@code type} is {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MATRIX_MOTION_NV ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_MATRIX_MOTION_NV}, the {@code matrixMotionInstance} member of {@code data} <b>must</b> be a valid {@link VkAccelerationStructureMatrixMotionInstanceNV} structure</li>
- * <li>If {@code type} is {@link NVRayTracingMotionBlur#VK_ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_SRT_MOTION_NV ACCELERATION_STRUCTURE_MOTION_INSTANCE_TYPE_SRT_MOTION_NV}, the {@code srtMotionInstance} member of {@code data} <b>must</b> be a valid {@link VkAccelerationStructureSRTMotionInstanceNV} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAccelerationStructureMotionInstanceDataNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureMotionInstanceNV {
- *     VkAccelerationStructureMotionInstanceTypeNV {@link #type};
- *     VkAccelerationStructureMotionInstanceFlagsNV {@link #flags};
- *     {@link VkAccelerationStructureMotionInstanceDataNV VkAccelerationStructureMotionInstanceDataNV} {@link #data};
- * }</code></pre>
+ *     VkAccelerationStructureMotionInstanceTypeNV type;
+ *     VkAccelerationStructureMotionInstanceFlagsNV flags;
+ *     {@link VkAccelerationStructureMotionInstanceDataNV VkAccelerationStructureMotionInstanceDataNV} data;
+ * }}</pre>
  */
 public class VkAccelerationStructureMotionInstanceNV extends Struct<VkAccelerationStructureMotionInstanceNV> implements NativeResource {
 
@@ -99,22 +74,22 @@ public class VkAccelerationStructureMotionInstanceNV extends Struct<VkAccelerati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkAccelerationStructureMotionInstanceTypeNV} enumerant identifying which type of motion instance this is and which type of the union is valid. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkAccelerationStructureMotionInstanceTypeNV")
     public int type() { return ntype(address()); }
-    /** currently unused, but is required to keep natural alignment of {@code data}. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkAccelerationStructureMotionInstanceFlagsNV")
     public int flags() { return nflags(address()); }
-    /** a {@link VkAccelerationStructureMotionInstanceDataNV} containing motion instance data for this instance. */
+    /** @return a {@link VkAccelerationStructureMotionInstanceDataNV} view of the {@code data} field. */
     public VkAccelerationStructureMotionInstanceDataNV data() { return ndata(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkAccelerationStructureMotionInstanceNV type(@NativeType("VkAccelerationStructureMotionInstanceTypeNV") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkAccelerationStructureMotionInstanceNV flags(@NativeType("VkAccelerationStructureMotionInstanceFlagsNV") int value) { nflags(address(), value); return this; }
-    /** Copies the specified {@link VkAccelerationStructureMotionInstanceDataNV} to the {@link #data} field. */
+    /** Copies the specified {@link VkAccelerationStructureMotionInstanceDataNV} to the {@code data} field. */
     public VkAccelerationStructureMotionInstanceNV data(VkAccelerationStructureMotionInstanceDataNV value) { ndata(address(), value); return this; }
-    /** Passes the {@link #data} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureMotionInstanceNV data(java.util.function.Consumer<VkAccelerationStructureMotionInstanceDataNV> consumer) { consumer.accept(data()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -310,22 +285,22 @@ public class VkAccelerationStructureMotionInstanceNV extends Struct<VkAccelerati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAccelerationStructureMotionInstanceNV#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkAccelerationStructureMotionInstanceTypeNV")
         public int type() { return VkAccelerationStructureMotionInstanceNV.ntype(address()); }
-        /** @return the value of the {@link VkAccelerationStructureMotionInstanceNV#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkAccelerationStructureMotionInstanceFlagsNV")
         public int flags() { return VkAccelerationStructureMotionInstanceNV.nflags(address()); }
-        /** @return a {@link VkAccelerationStructureMotionInstanceDataNV} view of the {@link VkAccelerationStructureMotionInstanceNV#data} field. */
+        /** @return a {@link VkAccelerationStructureMotionInstanceDataNV} view of the {@code data} field. */
         public VkAccelerationStructureMotionInstanceDataNV data() { return VkAccelerationStructureMotionInstanceNV.ndata(address()); }
 
-        /** Sets the specified value to the {@link VkAccelerationStructureMotionInstanceNV#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkAccelerationStructureMotionInstanceNV.Buffer type(@NativeType("VkAccelerationStructureMotionInstanceTypeNV") int value) { VkAccelerationStructureMotionInstanceNV.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureMotionInstanceNV#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkAccelerationStructureMotionInstanceNV.Buffer flags(@NativeType("VkAccelerationStructureMotionInstanceFlagsNV") int value) { VkAccelerationStructureMotionInstanceNV.nflags(address(), value); return this; }
-        /** Copies the specified {@link VkAccelerationStructureMotionInstanceDataNV} to the {@link VkAccelerationStructureMotionInstanceNV#data} field. */
+        /** Copies the specified {@link VkAccelerationStructureMotionInstanceDataNV} to the {@code data} field. */
         public VkAccelerationStructureMotionInstanceNV.Buffer data(VkAccelerationStructureMotionInstanceDataNV value) { VkAccelerationStructureMotionInstanceNV.ndata(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureMotionInstanceNV#data} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureMotionInstanceNV.Buffer data(java.util.function.Consumer<VkAccelerationStructureMotionInstanceDataNV> consumer) { consumer.accept(data()); return this; }
 
     }

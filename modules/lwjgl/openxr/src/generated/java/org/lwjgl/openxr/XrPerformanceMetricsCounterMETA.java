@@ -16,37 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Performance metrics counter value.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrPerformanceMetricsCounterMETA} is populated by calling {@link METAPerformanceMetrics#xrQueryPerformanceMetricsCounterMETA QueryPerformanceMetricsCounterMETA} to query real-time performance metrics counter information.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAPerformanceMetrics XR_META_performance_metrics} extension <b>must</b> be enabled prior to using {@link XrPerformanceMetricsCounterMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAPerformanceMetrics#XR_TYPE_PERFORMANCE_METRICS_COUNTER_META TYPE_PERFORMANCE_METRICS_COUNTER_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code counterFlags} <b>must</b> be 0 or a valid combination of {@code XrPerformanceMetricsCounterFlagBitsMETA} values</li>
- * <li>{@code counterUnit} <b>must</b> be a valid {@code XrPerformanceMetricsCounterUnitMETA} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAPerformanceMetrics#xrQueryPerformanceMetricsCounterMETA QueryPerformanceMetricsCounterMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPerformanceMetricsCounterMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrPerformanceMetricsCounterFlagsMETA {@link #counterFlags};
- *     XrPerformanceMetricsCounterUnitMETA {@link #counterUnit};
- *     uint32_t {@link #uintValue};
- *     float {@link #floatValue};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrPerformanceMetricsCounterFlagsMETA counterFlags;
+ *     XrPerformanceMetricsCounterUnitMETA counterUnit;
+ *     uint32_t uintValue;
+ *     float floatValue;
+ * }}</pre>
  */
 public class XrPerformanceMetricsCounterMETA extends Struct<XrPerformanceMetricsCounterMETA> implements NativeResource {
 
@@ -108,37 +86,37 @@ public class XrPerformanceMetricsCounterMETA extends Struct<XrPerformanceMetrics
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a bitmask of {@code XrPerformanceMetricsCounterFlagBitsMETA} describing the validity of value members. */
+    /** @return the value of the {@code counterFlags} field. */
     @NativeType("XrPerformanceMetricsCounterFlagsMETA")
     public long counterFlags() { return ncounterFlags(address()); }
-    /** a enum of {@code XrPerformanceMetricsCounterUnitMETA} describing the measurement unit. */
+    /** @return the value of the {@code counterUnit} field. */
     @NativeType("XrPerformanceMetricsCounterUnitMETA")
     public int counterUnit() { return ncounterUnit(address()); }
-    /** the counter value in {@code uint32_t} format. It is valid if {@code counterFlags} contains {@link METAPerformanceMetrics#XR_PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META PERFORMANCE_METRICS_COUNTER_UINT_VALUE_VALID_BIT_META}. */
+    /** @return the value of the {@code uintValue} field. */
     @NativeType("uint32_t")
     public int uintValue() { return nuintValue(address()); }
-    /** the counter value in {@code float} format. It is valid if {@code counterFlags} contains {@link METAPerformanceMetrics#XR_PERFORMANCE_METRICS_COUNTER_FLOAT_VALUE_VALID_BIT_META PERFORMANCE_METRICS_COUNTER_FLOAT_VALUE_VALID_BIT_META}. */
+    /** @return the value of the {@code floatValue} field. */
     public float floatValue() { return nfloatValue(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPerformanceMetricsCounterMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAPerformanceMetrics#XR_TYPE_PERFORMANCE_METRICS_COUNTER_META TYPE_PERFORMANCE_METRICS_COUNTER_META} value to the {@link #type} field. */
+    /** Sets the {@link METAPerformanceMetrics#XR_TYPE_PERFORMANCE_METRICS_COUNTER_META TYPE_PERFORMANCE_METRICS_COUNTER_META} value to the {@code type} field. */
     public XrPerformanceMetricsCounterMETA type$Default() { return type(METAPerformanceMetrics.XR_TYPE_PERFORMANCE_METRICS_COUNTER_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPerformanceMetricsCounterMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #counterFlags} field. */
+    /** Sets the specified value to the {@code counterFlags} field. */
     public XrPerformanceMetricsCounterMETA counterFlags(@NativeType("XrPerformanceMetricsCounterFlagsMETA") long value) { ncounterFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #counterUnit} field. */
+    /** Sets the specified value to the {@code counterUnit} field. */
     public XrPerformanceMetricsCounterMETA counterUnit(@NativeType("XrPerformanceMetricsCounterUnitMETA") int value) { ncounterUnit(address(), value); return this; }
-    /** Sets the specified value to the {@link #uintValue} field. */
+    /** Sets the specified value to the {@code uintValue} field. */
     public XrPerformanceMetricsCounterMETA uintValue(@NativeType("uint32_t") int value) { nuintValue(address(), value); return this; }
-    /** Sets the specified value to the {@link #floatValue} field. */
+    /** Sets the specified value to the {@code floatValue} field. */
     public XrPerformanceMetricsCounterMETA floatValue(float value) { nfloatValue(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -352,37 +330,37 @@ public class XrPerformanceMetricsCounterMETA extends Struct<XrPerformanceMetrics
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPerformanceMetricsCounterMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPerformanceMetricsCounterMETA.ntype(address()); }
-        /** @return the value of the {@link XrPerformanceMetricsCounterMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrPerformanceMetricsCounterMETA.nnext(address()); }
-        /** @return the value of the {@link XrPerformanceMetricsCounterMETA#counterFlags} field. */
+        /** @return the value of the {@code counterFlags} field. */
         @NativeType("XrPerformanceMetricsCounterFlagsMETA")
         public long counterFlags() { return XrPerformanceMetricsCounterMETA.ncounterFlags(address()); }
-        /** @return the value of the {@link XrPerformanceMetricsCounterMETA#counterUnit} field. */
+        /** @return the value of the {@code counterUnit} field. */
         @NativeType("XrPerformanceMetricsCounterUnitMETA")
         public int counterUnit() { return XrPerformanceMetricsCounterMETA.ncounterUnit(address()); }
-        /** @return the value of the {@link XrPerformanceMetricsCounterMETA#uintValue} field. */
+        /** @return the value of the {@code uintValue} field. */
         @NativeType("uint32_t")
         public int uintValue() { return XrPerformanceMetricsCounterMETA.nuintValue(address()); }
-        /** @return the value of the {@link XrPerformanceMetricsCounterMETA#floatValue} field. */
+        /** @return the value of the {@code floatValue} field. */
         public float floatValue() { return XrPerformanceMetricsCounterMETA.nfloatValue(address()); }
 
-        /** Sets the specified value to the {@link XrPerformanceMetricsCounterMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPerformanceMetricsCounterMETA.Buffer type(@NativeType("XrStructureType") int value) { XrPerformanceMetricsCounterMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAPerformanceMetrics#XR_TYPE_PERFORMANCE_METRICS_COUNTER_META TYPE_PERFORMANCE_METRICS_COUNTER_META} value to the {@link XrPerformanceMetricsCounterMETA#type} field. */
+        /** Sets the {@link METAPerformanceMetrics#XR_TYPE_PERFORMANCE_METRICS_COUNTER_META TYPE_PERFORMANCE_METRICS_COUNTER_META} value to the {@code type} field. */
         public XrPerformanceMetricsCounterMETA.Buffer type$Default() { return type(METAPerformanceMetrics.XR_TYPE_PERFORMANCE_METRICS_COUNTER_META); }
-        /** Sets the specified value to the {@link XrPerformanceMetricsCounterMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPerformanceMetricsCounterMETA.Buffer next(@NativeType("void const *") long value) { XrPerformanceMetricsCounterMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPerformanceMetricsCounterMETA#counterFlags} field. */
+        /** Sets the specified value to the {@code counterFlags} field. */
         public XrPerformanceMetricsCounterMETA.Buffer counterFlags(@NativeType("XrPerformanceMetricsCounterFlagsMETA") long value) { XrPerformanceMetricsCounterMETA.ncounterFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPerformanceMetricsCounterMETA#counterUnit} field. */
+        /** Sets the specified value to the {@code counterUnit} field. */
         public XrPerformanceMetricsCounterMETA.Buffer counterUnit(@NativeType("XrPerformanceMetricsCounterUnitMETA") int value) { XrPerformanceMetricsCounterMETA.ncounterUnit(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPerformanceMetricsCounterMETA#uintValue} field. */
+        /** Sets the specified value to the {@code uintValue} field. */
         public XrPerformanceMetricsCounterMETA.Buffer uintValue(@NativeType("uint32_t") int value) { XrPerformanceMetricsCounterMETA.nuintValue(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPerformanceMetricsCounterMETA#floatValue} field. */
+        /** Sets the specified value to the {@code floatValue} field. */
         public XrPerformanceMetricsCounterMETA.Buffer floatValue(float value) { XrPerformanceMetricsCounterMETA.nfloatValue(address(), value); return this; }
 
     }

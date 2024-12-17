@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing scheduling control properties of a physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceSchedulingControlsPropertiesARM} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ARMSchedulingControls#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM}</li>
- * <li>{@code schedulingControlsFlags} <b>must</b> be a valid combination of {@code VkPhysicalDeviceSchedulingControlsFlagBitsARM} values</li>
- * <li>{@code schedulingControlsFlags} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSchedulingControlsPropertiesARM {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkPhysicalDeviceSchedulingControlsFlagsARM {@link #schedulingControlsFlags};
- * }</code></pre>
+ *     VkPhysicalDeviceSchedulingControlsFlagsARM schedulingControlsFlags;
+ * }}</pre>
  */
 public class VkPhysicalDeviceSchedulingControlsPropertiesARM extends Struct<VkPhysicalDeviceSchedulingControlsPropertiesARM> implements NativeResource {
 
@@ -96,7 +80,7 @@ public class VkPhysicalDeviceSchedulingControlsPropertiesARM extends Struct<VkPh
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies the specific scheduling controls that a physical device supports. */
+    /** @return the value of the {@code schedulingControlsFlags} field. */
     @NativeType("VkPhysicalDeviceSchedulingControlsFlagsARM")
     public long schedulingControlsFlags() { return nschedulingControlsFlags(address()); }
 
@@ -106,7 +90,7 @@ public class VkPhysicalDeviceSchedulingControlsPropertiesARM extends Struct<VkPh
     public VkPhysicalDeviceSchedulingControlsPropertiesARM sType$Default() { return sType(ARMSchedulingControls.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSchedulingControlsPropertiesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #schedulingControlsFlags} field. */
+    /** Sets the specified value to the {@code schedulingControlsFlags} field. */
     public VkPhysicalDeviceSchedulingControlsPropertiesARM schedulingControlsFlags(@NativeType("VkPhysicalDeviceSchedulingControlsFlagsARM") long value) { nschedulingControlsFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -308,7 +292,7 @@ public class VkPhysicalDeviceSchedulingControlsPropertiesARM extends Struct<VkPh
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSchedulingControlsPropertiesARM.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSchedulingControlsPropertiesARM#schedulingControlsFlags} field. */
+        /** @return the value of the {@code schedulingControlsFlags} field. */
         @NativeType("VkPhysicalDeviceSchedulingControlsFlagsARM")
         public long schedulingControlsFlags() { return VkPhysicalDeviceSchedulingControlsPropertiesARM.nschedulingControlsFlags(address()); }
 
@@ -318,7 +302,7 @@ public class VkPhysicalDeviceSchedulingControlsPropertiesARM extends Struct<VkPh
         public VkPhysicalDeviceSchedulingControlsPropertiesARM.Buffer sType$Default() { return sType(ARMSchedulingControls.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSchedulingControlsPropertiesARM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSchedulingControlsPropertiesARM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSchedulingControlsPropertiesARM#schedulingControlsFlags} field. */
+        /** Sets the specified value to the {@code schedulingControlsFlags} field. */
         public VkPhysicalDeviceSchedulingControlsPropertiesARM.Buffer schedulingControlsFlags(@NativeType("VkPhysicalDeviceSchedulingControlsFlagsARM") long value) { VkPhysicalDeviceSchedulingControlsPropertiesARM.nschedulingControlsFlags(address(), value); return this; }
 
     }

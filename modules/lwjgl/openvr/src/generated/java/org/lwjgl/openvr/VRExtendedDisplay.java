@@ -21,7 +21,7 @@ public class VRExtendedDisplay {
 
     // --- [ VRExtendedDisplay_GetWindowBounds ] ---
 
-    /** Unsafe version of: {@link #VRExtendedDisplay_GetWindowBounds GetWindowBounds} */
+    /** {@code void VRExtendedDisplay_GetWindowBounds(int32_t * pnX, int32_t * pnY, uint32_t * pnWidth, uint32_t * pnHeight)} */
     public static void nVRExtendedDisplay_GetWindowBounds(long pnX, long pnY, long pnWidth, long pnHeight) {
         long __functionAddress = OpenVR.VRExtendedDisplay.GetWindowBounds;
         if (CHECKS) {
@@ -30,7 +30,7 @@ public class VRExtendedDisplay {
         callPPPPV(pnX, pnY, pnWidth, pnHeight, __functionAddress);
     }
 
-    /** Size and position that the window needs to be on the VR display. */
+    /** {@code void VRExtendedDisplay_GetWindowBounds(int32_t * pnX, int32_t * pnY, uint32_t * pnWidth, uint32_t * pnHeight)} */
     public static void VRExtendedDisplay_GetWindowBounds(@NativeType("int32_t *") IntBuffer pnX, @NativeType("int32_t *") IntBuffer pnY, @NativeType("uint32_t *") IntBuffer pnWidth, @NativeType("uint32_t *") IntBuffer pnHeight) {
         if (CHECKS) {
             check(pnX, 1);
@@ -43,7 +43,7 @@ public class VRExtendedDisplay {
 
     // --- [ VRExtendedDisplay_GetEyeOutputViewport ] ---
 
-    /** Unsafe version of: {@link #VRExtendedDisplay_GetEyeOutputViewport GetEyeOutputViewport} */
+    /** {@code void VRExtendedDisplay_GetEyeOutputViewport(EVREye eEye, uint32_t * pnX, uint32_t * pnY, uint32_t * pnWidth, uint32_t * pnHeight)} */
     public static void nVRExtendedDisplay_GetEyeOutputViewport(int eEye, long pnX, long pnY, long pnWidth, long pnHeight) {
         long __functionAddress = OpenVR.VRExtendedDisplay.GetEyeOutputViewport;
         if (CHECKS) {
@@ -52,7 +52,7 @@ public class VRExtendedDisplay {
         callPPPPV(eEye, pnX, pnY, pnWidth, pnHeight, __functionAddress);
     }
 
-    /** Gets the viewport in the frame buffer to draw the output of the distortion into. */
+    /** {@code void VRExtendedDisplay_GetEyeOutputViewport(EVREye eEye, uint32_t * pnX, uint32_t * pnY, uint32_t * pnWidth, uint32_t * pnHeight)} */
     public static void VRExtendedDisplay_GetEyeOutputViewport(@NativeType("EVREye") int eEye, @NativeType("uint32_t *") IntBuffer pnX, @NativeType("uint32_t *") IntBuffer pnY, @NativeType("uint32_t *") IntBuffer pnWidth, @NativeType("uint32_t *") IntBuffer pnHeight) {
         if (CHECKS) {
             check(pnX, 1);
@@ -65,7 +65,7 @@ public class VRExtendedDisplay {
 
     // --- [ VRExtendedDisplay_GetDXGIOutputInfo ] ---
 
-    /** Unsafe version of: {@link #VRExtendedDisplay_GetDXGIOutputInfo GetDXGIOutputInfo} */
+    /** {@code void VRExtendedDisplay_GetDXGIOutputInfo(int32_t * pnAdapterIndex, int32_t * pnAdapterOutputIndex)} */
     public static void nVRExtendedDisplay_GetDXGIOutputInfo(long pnAdapterIndex, long pnAdapterOutputIndex) {
         long __functionAddress = OpenVR.VRExtendedDisplay.GetDXGIOutputInfo;
         if (CHECKS) {
@@ -74,12 +74,7 @@ public class VRExtendedDisplay {
         callPPV(pnAdapterIndex, pnAdapterOutputIndex, __functionAddress);
     }
 
-    /**
-     * <h3>D3D10/11 Only</h3>
-     * 
-     * <p>Returns the adapter index and output index that the user should pass into {@code EnumAdapters} and {@code EnumOutputs} to create the device and swap
-     * chain in DX10 and DX11. If an error occurs both indices will be set to -1.</p>
-     */
+    /** {@code void VRExtendedDisplay_GetDXGIOutputInfo(int32_t * pnAdapterIndex, int32_t * pnAdapterOutputIndex)} */
     public static void VRExtendedDisplay_GetDXGIOutputInfo(@NativeType("int32_t *") IntBuffer pnAdapterIndex, @NativeType("int32_t *") IntBuffer pnAdapterOutputIndex) {
         if (CHECKS) {
             check(pnAdapterIndex, 1);

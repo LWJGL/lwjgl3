@@ -18,34 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure describing a pipeline executable.
- * 
- * <h5>Description</h5>
- * 
- * <p>Not all implementations have a 1:1 mapping between shader stages and pipeline executables and some implementations <b>may</b> reduce a given shader stage to fixed function hardware programming such that no pipeline executable is available. No guarantees are provided about the mapping between shader stages and pipeline executables and {@code stages} <b>should</b> be considered a best effort hint. Because the application <b>cannot</b> rely on the {@code stages} field to provide an exact description, {@code name} and {@code description} provide a human readable name and description which more accurately describes the given pipeline executable.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineExecutablePropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkShaderStageFlags {@link #stages};
- *     char {@link #name}[VK_MAX_DESCRIPTION_SIZE];
- *     char {@link #description}[VK_MAX_DESCRIPTION_SIZE];
- *     uint32_t {@link #subgroupSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkShaderStageFlags stages;
+ *     char name[VK_MAX_DESCRIPTION_SIZE];
+ *     char description[VK_MAX_DESCRIPTION_SIZE];
+ *     uint32_t subgroupSize;
+ * }}</pre>
  */
 public class VkPipelineExecutablePropertiesKHR extends Struct<VkPipelineExecutablePropertiesKHR> implements NativeResource {
 
@@ -107,36 +88,36 @@ public class VkPipelineExecutablePropertiesKHR extends Struct<VkPipelineExecutab
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of zero or more {@code VkShaderStageFlagBits} indicating which shader stages (if any) were principally used as inputs to compile this pipeline executable. */
+    /** @return the value of the {@code stages} field. */
     @NativeType("VkShaderStageFlags")
     public int stages() { return nstages(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this pipeline executable. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer name() { return nname(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this pipeline executable. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String nameString() { return nnameString(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this pipeline executable. */
+    /** @return a {@link ByteBuffer} view of the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this pipeline executable. */
+    /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** the subgroup size with which this pipeline executable is dispatched. */
+    /** @return the value of the {@code subgroupSize} field. */
     @NativeType("uint32_t")
     public int subgroupSize() { return nsubgroupSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineExecutablePropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkPipelineExecutablePropertiesKHR sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineExecutablePropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -357,36 +338,36 @@ public class VkPipelineExecutablePropertiesKHR extends Struct<VkPipelineExecutab
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineExecutablePropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineExecutablePropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPipelineExecutablePropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelineExecutablePropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPipelineExecutablePropertiesKHR#stages} field. */
+        /** @return the value of the {@code stages} field. */
         @NativeType("VkShaderStageFlags")
         public int stages() { return VkPipelineExecutablePropertiesKHR.nstages(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPipelineExecutablePropertiesKHR#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer name() { return VkPipelineExecutablePropertiesKHR.nname(address()); }
-        /** @return the null-terminated string stored in the {@link VkPipelineExecutablePropertiesKHR#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String nameString() { return VkPipelineExecutablePropertiesKHR.nnameString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPipelineExecutablePropertiesKHR#description} field. */
+        /** @return a {@link ByteBuffer} view of the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return VkPipelineExecutablePropertiesKHR.ndescription(address()); }
-        /** @return the null-terminated string stored in the {@link VkPipelineExecutablePropertiesKHR#description} field. */
+        /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkPipelineExecutablePropertiesKHR.ndescriptionString(address()); }
-        /** @return the value of the {@link VkPipelineExecutablePropertiesKHR#subgroupSize} field. */
+        /** @return the value of the {@code subgroupSize} field. */
         @NativeType("uint32_t")
         public int subgroupSize() { return VkPipelineExecutablePropertiesKHR.nsubgroupSize(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineExecutablePropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineExecutablePropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineExecutablePropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR} value to the {@link VkPipelineExecutablePropertiesKHR#sType} field. */
+        /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkPipelineExecutablePropertiesKHR.Buffer sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkPipelineExecutablePropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineExecutablePropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPipelineExecutablePropertiesKHR.npNext(address(), value); return this; }
 
     }

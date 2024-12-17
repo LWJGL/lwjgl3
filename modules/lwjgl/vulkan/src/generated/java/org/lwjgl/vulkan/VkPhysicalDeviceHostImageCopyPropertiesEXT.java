@@ -19,11 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * See {@link VkPhysicalDeviceHostImageCopyProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceHostImageCopyPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -33,7 +29,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     VkImageLayout * pCopyDstLayouts;
  *     uint8_t optimalTilingLayoutUUID[VK_UUID_SIZE];
  *     VkBool32 identicalMemoryTypeRequirements;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceHostImageCopyPropertiesEXT extends VkPhysicalDeviceHostImageCopyProperties {
 

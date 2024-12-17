@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkMemoryToImageCopy}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryToImageCopyEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -31,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} imageSubresource;
  *     {@link VkOffset3D VkOffset3D} imageOffset;
  *     {@link VkExtent3D VkExtent3D} imageExtent;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkMemoryToImageCopyEXT extends VkMemoryToImageCopy {
 

@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRVulkanDevice_t {
  *     VkInstance_T * m_pInstance;
  *     VkDevice_T * m_pDevice;
  *     VkPhysicalDevice_T * m_pPhysicalDevice;
  *     VkQueue_T * m_pQueue;
  *     uint32_t m_uQueueFamilyIndex;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VRVulkanDevice_t")
 public class VRVulkanDevice extends Struct<VRVulkanDevice> implements NativeResource {

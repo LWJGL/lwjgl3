@@ -17,53 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Block Request Completion.
- * 
- * <h5>Future Return Codes</h5>
- * 
- * <p>{@code futureResult} values:</p>
- * 
- * <dl>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-successcodes">Success</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
- * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
- * </ul></dd>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-errorcodes">Failure</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
- * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
- * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
- * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
- * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshRequestCompletionML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
- * <li>{@code blocks} <b>must</b> be a pointer to an array of {@code blockCount} {@link XrWorldMeshBlockML} structures</li>
- * <li>The {@code blockCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrWorldMeshBlockML}, {@link MLWorldMeshDetection#xrRequestWorldMeshCompleteML RequestWorldMeshCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshRequestCompletionML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrResult {@link #futureResult};
- *     uint32_t {@link #blockCount};
- *     {@link XrWorldMeshBlockML XrWorldMeshBlockML} * {@link #blocks};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrResult futureResult;
+ *     uint32_t blockCount;
+ *     {@link XrWorldMeshBlockML XrWorldMeshBlockML} * blocks;
+ * }}</pre>
  */
 public class XrWorldMeshRequestCompletionML extends Struct<XrWorldMeshRequestCompletionML> implements NativeResource {
 
@@ -122,31 +83,31 @@ public class XrWorldMeshRequestCompletionML extends Struct<XrWorldMeshRequestCom
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrResult} of the asynchronous operation. */
+    /** @return the value of the {@code futureResult} field. */
     @NativeType("XrResult")
     public int futureResult() { return nfutureResult(address()); }
-    /** a {@code uint32_t} that <b>must</b> match {@link XrWorldMeshGetInfoML}::blockCount parameter. */
+    /** @return the value of the {@code blockCount} field. */
     @NativeType("uint32_t")
     public int blockCount() { return nblockCount(address()); }
-    /** an array of {@link XrWorldMeshBlockML} structures containing the vertex data pointers. */
+    /** @return a {@link XrWorldMeshBlockML.Buffer} view of the struct array pointed to by the {@code blocks} field. */
     @NativeType("XrWorldMeshBlockML *")
     public XrWorldMeshBlockML.Buffer blocks() { return nblocks(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshRequestCompletionML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_ML} value to the {@code type} field. */
     public XrWorldMeshRequestCompletionML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshRequestCompletionML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #futureResult} field. */
+    /** Sets the specified value to the {@code futureResult} field. */
     public XrWorldMeshRequestCompletionML futureResult(@NativeType("XrResult") int value) { nfutureResult(address(), value); return this; }
-    /** Sets the address of the specified {@link XrWorldMeshBlockML.Buffer} to the {@link #blocks} field. */
+    /** Sets the address of the specified {@link XrWorldMeshBlockML.Buffer} to the {@code blocks} field. */
     public XrWorldMeshRequestCompletionML blocks(@NativeType("XrWorldMeshBlockML *") XrWorldMeshBlockML.Buffer value) { nblocks(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -374,31 +335,31 @@ public class XrWorldMeshRequestCompletionML extends Struct<XrWorldMeshRequestCom
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshRequestCompletionML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshRequestCompletionML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshRequestCompletionML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrWorldMeshRequestCompletionML.nnext(address()); }
-        /** @return the value of the {@link XrWorldMeshRequestCompletionML#futureResult} field. */
+        /** @return the value of the {@code futureResult} field. */
         @NativeType("XrResult")
         public int futureResult() { return XrWorldMeshRequestCompletionML.nfutureResult(address()); }
-        /** @return the value of the {@link XrWorldMeshRequestCompletionML#blockCount} field. */
+        /** @return the value of the {@code blockCount} field. */
         @NativeType("uint32_t")
         public int blockCount() { return XrWorldMeshRequestCompletionML.nblockCount(address()); }
-        /** @return a {@link XrWorldMeshBlockML.Buffer} view of the struct array pointed to by the {@link XrWorldMeshRequestCompletionML#blocks} field. */
+        /** @return a {@link XrWorldMeshBlockML.Buffer} view of the struct array pointed to by the {@code blocks} field. */
         @NativeType("XrWorldMeshBlockML *")
         public XrWorldMeshBlockML.Buffer blocks() { return XrWorldMeshRequestCompletionML.nblocks(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshRequestCompletionML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshRequestCompletionML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshRequestCompletionML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_ML} value to the {@link XrWorldMeshRequestCompletionML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_REQUEST_COMPLETION_ML} value to the {@code type} field. */
         public XrWorldMeshRequestCompletionML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshRequestCompletionML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshRequestCompletionML.Buffer next(@NativeType("void *") long value) { XrWorldMeshRequestCompletionML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshRequestCompletionML#futureResult} field. */
+        /** Sets the specified value to the {@code futureResult} field. */
         public XrWorldMeshRequestCompletionML.Buffer futureResult(@NativeType("XrResult") int value) { XrWorldMeshRequestCompletionML.nfutureResult(address(), value); return this; }
-        /** Sets the address of the specified {@link XrWorldMeshBlockML.Buffer} to the {@link XrWorldMeshRequestCompletionML#blocks} field. */
+        /** Sets the address of the specified {@link XrWorldMeshBlockML.Buffer} to the {@code blocks} field. */
         public XrWorldMeshRequestCompletionML.Buffer blocks(@NativeType("XrWorldMeshBlockML *") XrWorldMeshBlockML.Buffer value) { XrWorldMeshRequestCompletionML.nblocks(address(), value); return this; }
 
     }

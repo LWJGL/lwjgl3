@@ -14,31 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Helper structure to describe an embedded texture.
- * 
- * <p>Normally textures are contained in external files but some file formats embed them directly in the model file. There are two types of embedded
- * textures:</p>
- * 
- * <ul>
- * <li>Uncompressed textures. The color data is given in an uncompressed format.</li>
- * <li>Compressed textures stored in a file format like png or jpg.</li>
- * </ul>
- * 
- * <p>The raw file bytes are given so the application must utilize an image decoder (e.g. DevIL) to get access to the actual color data.</p>
- * 
- * <p>Embedded textures are referenced from materials using strings like "*0", "*1", etc. as the texture paths (a single asterisk character followed by the
- * zero-based index of the texture in the {@link AIScene}{@code ::mTextures} array).</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiTexture {
- *     unsigned int {@link #mWidth};
- *     unsigned int {@link #mHeight};
- *     char {@link #achFormatHint}[9];
- *     {@link AITexel struct aiTexel} * {@link #pcData};
- *     {@link AIString struct aiString} {@link #mFilename};
- * }</code></pre>
+ *     unsigned int mWidth;
+ *     unsigned int mHeight;
+ *     char achFormatHint[9];
+ *     {@link AITexel struct aiTexel} * pcData;
+ *     {@link AIString struct aiString} mFilename;
+ * }}</pre>
  */
 @NativeType("struct aiTexture")
 public class AITexture extends Struct<AITexture> {
@@ -98,63 +81,22 @@ public class AITexture extends Struct<AITexture> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * Width of the texture, in pixels. If {@code mHeight} is zero the texture is compressed in a format like JPEG. In this case {@code mWidth} specifies the
-     * size of the memory area {@code pcData} is pointing to, in bytes.
-     */
+    /** @return the value of the {@code mWidth} field. */
     @NativeType("unsigned int")
     public int mWidth() { return nmWidth(address()); }
-    /** Height of the texture, in pixels. If this value is zero, {@code pcData} points to an compressed texture in any format (e.g. JPEG). */
+    /** @return the value of the {@code mHeight} field. */
     @NativeType("unsigned int")
     public int mHeight() { return nmHeight(address()); }
-    /**
-     * A hint from the loader to make it easier for applications to determine the type of embedded textures.
-     * 
-     * <p>If {@code mHeight != 0} this member is show how data is packed. Hint will consist of two parts: channel order and channel bitness (count of the bits
-     * for every color channel). For simple parsing by the viewer it's better to not omit absent color channel and just use 0 for bitness. For example:</p>
-     * 
-     * <ol>
-     * <li>Image contain RGBA and 8 bit per channel, {@code achFormatHint == "rgba8888";}</li>
-     * <li>Image contain ARGB and 8 bit per channel, {@code achFormatHint == "argb8888";}</li>
-     * <li>Image contain RGB and 5 bit for R and B channels and 6 bit for G channel, {@code achFormatHint == "rgba5650";}</li>
-     * <li>One color image with B channel and 1 bit for it, {@code achFormatHint == "rgba0010";}</li>
-     * </ol>
-     * 
-     * <p>If {@code mHeight == 0} then {@code achFormatHint} is set set to '\0\0\0\0' if the loader has no additional information about the texture file format
-     * used OR the file extension of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen
-     * (JPEG maps to 'jpg', not to 'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.</p>
-     */
+    /** @return a {@link ByteBuffer} view of the {@code achFormatHint} field. */
     @NativeType("char[9]")
     public ByteBuffer achFormatHint() { return nachFormatHint(address()); }
-    /**
-     * A hint from the loader to make it easier for applications to determine the type of embedded textures.
-     * 
-     * <p>If {@code mHeight != 0} this member is show how data is packed. Hint will consist of two parts: channel order and channel bitness (count of the bits
-     * for every color channel). For simple parsing by the viewer it's better to not omit absent color channel and just use 0 for bitness. For example:</p>
-     * 
-     * <ol>
-     * <li>Image contain RGBA and 8 bit per channel, {@code achFormatHint == "rgba8888";}</li>
-     * <li>Image contain ARGB and 8 bit per channel, {@code achFormatHint == "argb8888";}</li>
-     * <li>Image contain RGB and 5 bit for R and B channels and 6 bit for G channel, {@code achFormatHint == "rgba5650";}</li>
-     * <li>One color image with B channel and 1 bit for it, {@code achFormatHint == "rgba0010";}</li>
-     * </ol>
-     * 
-     * <p>If {@code mHeight == 0} then {@code achFormatHint} is set set to '\0\0\0\0' if the loader has no additional information about the texture file format
-     * used OR the file extension of the format without a trailing dot. If there are multiple file extensions for a format, the shortest extension is chosen
-     * (JPEG maps to 'jpg', not to 'jpeg'). E.g. 'dds\0', 'pcx\0', 'jpg\0'. All characters are lower-case. The fourth character will always be '\0'.</p>
-     */
+    /** @return the null-terminated string stored in the {@code achFormatHint} field. */
     @NativeType("char[9]")
     public String achFormatHintString() { return nachFormatHintString(address()); }
-    /**
-     * Data of the texture.
-     * 
-     * <p>Points to an array of {@code mWidth * mHeight} {@link AITexel}'s. The format of the texture data is always ARGB8888 to make the implementation for user of
-     * the library as easy as possible. If {@code mHeight = 0} this is a pointer to a memory buffer of size {@code mWidth} containing the compressed texture
-     * data. Good luck, have fun!</p>
-     */
+    /** @return a {@link AITexel.Buffer} view of the struct array pointed to by the {@code pcData} field. */
     @NativeType("struct aiTexel *")
     public AITexel.Buffer pcData() { return npcData(address()); }
-    /** texture original filename. Used to get the texture reference. */
+    /** @return a {@link AIString} view of the {@code mFilename} field. */
     @NativeType("struct aiString")
     public AIString mFilename() { return nmFilename(address()); }
 
@@ -250,22 +192,22 @@ public class AITexture extends Struct<AITexture> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AITexture#mWidth} field. */
+        /** @return the value of the {@code mWidth} field. */
         @NativeType("unsigned int")
         public int mWidth() { return AITexture.nmWidth(address()); }
-        /** @return the value of the {@link AITexture#mHeight} field. */
+        /** @return the value of the {@code mHeight} field. */
         @NativeType("unsigned int")
         public int mHeight() { return AITexture.nmHeight(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link AITexture#achFormatHint} field. */
+        /** @return a {@link ByteBuffer} view of the {@code achFormatHint} field. */
         @NativeType("char[9]")
         public ByteBuffer achFormatHint() { return AITexture.nachFormatHint(address()); }
-        /** @return the null-terminated string stored in the {@link AITexture#achFormatHint} field. */
+        /** @return the null-terminated string stored in the {@code achFormatHint} field. */
         @NativeType("char[9]")
         public String achFormatHintString() { return AITexture.nachFormatHintString(address()); }
-        /** @return a {@link AITexel.Buffer} view of the struct array pointed to by the {@link AITexture#pcData} field. */
+        /** @return a {@link AITexel.Buffer} view of the struct array pointed to by the {@code pcData} field. */
         @NativeType("struct aiTexel *")
         public AITexel.Buffer pcData() { return AITexture.npcData(address()); }
-        /** @return a {@link AIString} view of the {@link AITexture#mFilename} field. */
+        /** @return a {@link AIString} view of the {@code mFilename} field. */
         @NativeType("struct aiString")
         public AIString mFilename() { return AITexture.nmFilename(address()); }
 

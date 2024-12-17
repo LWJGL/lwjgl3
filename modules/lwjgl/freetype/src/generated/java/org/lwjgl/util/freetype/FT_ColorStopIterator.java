@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * This iterator object is needed for {@link FreeType#FT_Get_Colorline_Stops Get_Colorline_Stops}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_ColorStopIterator {
  *     FT_UInt num_color_stops;
  *     FT_UInt current_color_stop;
  *     FT_Byte * p;
  *     FT_Bool read_variable;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implements NativeResource {
 
@@ -88,11 +84,7 @@ public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implement
     /** @return the value of the {@code current_color_stop} field. */
     @NativeType("FT_UInt")
     public int current_color_stop() { return ncurrent_color_stop(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field. */
     @NativeType("FT_Byte *")
     public @Nullable ByteBuffer p(int capacity) { return np(address(), capacity); }
     /** @return the value of the {@code read_variable} field. */
@@ -268,11 +260,7 @@ public class FT_ColorStopIterator extends Struct<FT_ColorStopIterator> implement
         /** @return the value of the {@code current_color_stop} field. */
         @NativeType("FT_UInt")
         public int current_color_stop() { return FT_ColorStopIterator.ncurrent_color_stop(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field. */
         @NativeType("FT_Byte *")
         public @Nullable ByteBuffer p(int capacity) { return FT_ColorStopIterator.np(address(), capacity); }
         /** @return the value of the {@code read_variable} field. */

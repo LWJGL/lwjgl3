@@ -16,36 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure defining the geometry stream used for rasterization.
- * 
- * <h5>Description</h5>
- * 
- * <p>If this structure is not present, {@code rasterizationStream} is assumed to be zero.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@link VkPhysicalDeviceTransformFeedbackFeaturesEXT}{@code ::geometryStreams} <b>must</b> be enabled</li>
- * <li>{@code rasterizationStream} <b>must</b> be less than {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}{@code ::maxTransformFeedbackStreams}</li>
- * <li>{@code rasterizationStream} <b>must</b> be zero if {@link VkPhysicalDeviceTransformFeedbackPropertiesEXT}{@code ::transformFeedbackRasterizationStreamSelect} is {@link VK10#VK_FALSE FALSE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineRasterizationStateStreamCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineRasterizationStateStreamCreateFlagsEXT {@link #flags};
- *     uint32_t {@link #rasterizationStream};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineRasterizationStateStreamCreateFlagsEXT flags;
+ *     uint32_t rasterizationStream;
+ * }}</pre>
  */
 public class VkPipelineRasterizationStateStreamCreateInfoEXT extends Struct<VkPipelineRasterizationStateStreamCreateInfoEXT> implements NativeResource {
 
@@ -101,28 +78,28 @@ public class VkPipelineRasterizationStateStreamCreateInfoEXT extends Struct<VkPi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkPipelineRasterizationStateStreamCreateFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** the vertex stream selected for rasterization. */
+    /** @return the value of the {@code rasterizationStream} field. */
     @NativeType("uint32_t")
     public int rasterizationStream() { return nrasterizationStream(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineRasterizationStateStreamCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkPipelineRasterizationStateStreamCreateInfoEXT sType$Default() { return sType(EXTTransformFeedback.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineRasterizationStateStreamCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkPipelineRasterizationStateStreamCreateInfoEXT flags(@NativeType("VkPipelineRasterizationStateStreamCreateFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #rasterizationStream} field. */
+    /** Sets the specified value to the {@code rasterizationStream} field. */
     public VkPipelineRasterizationStateStreamCreateInfoEXT rasterizationStream(@NativeType("uint32_t") int value) { nrasterizationStream(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,28 +320,28 @@ public class VkPipelineRasterizationStateStreamCreateInfoEXT extends Struct<VkPi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineRasterizationStateStreamCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineRasterizationStateStreamCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkPipelineRasterizationStateStreamCreateFlagsEXT")
         public int flags() { return VkPipelineRasterizationStateStreamCreateInfoEXT.nflags(address()); }
-        /** @return the value of the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#rasterizationStream} field. */
+        /** @return the value of the {@code rasterizationStream} field. */
         @NativeType("uint32_t")
         public int rasterizationStream() { return VkPipelineRasterizationStateStreamCreateInfoEXT.nrasterizationStream(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineRasterizationStateStreamCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineRasterizationStateStreamCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT} value to the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTTransformFeedback#VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkPipelineRasterizationStateStreamCreateInfoEXT.Buffer sType$Default() { return sType(EXTTransformFeedback.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineRasterizationStateStreamCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineRasterizationStateStreamCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkPipelineRasterizationStateStreamCreateInfoEXT.Buffer flags(@NativeType("VkPipelineRasterizationStateStreamCreateFlagsEXT") int value) { VkPipelineRasterizationStateStreamCreateInfoEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineRasterizationStateStreamCreateInfoEXT#rasterizationStream} field. */
+        /** Sets the specified value to the {@code rasterizationStream} field. */
         public VkPipelineRasterizationStateStreamCreateInfoEXT.Buffer rasterizationStream(@NativeType("uint32_t") int value) { VkPipelineRasterizationStateStreamCreateInfoEXT.nrasterizationStream(address(), value); return this; }
 
     }

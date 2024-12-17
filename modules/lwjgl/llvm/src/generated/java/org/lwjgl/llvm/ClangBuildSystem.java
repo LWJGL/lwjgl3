@@ -47,7 +47,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_getBuildSessionTimestamp ] ---
 
-    /** Return the timestamp for use with Clang's {@code -fbuild-session-timestamp=} option. */
+    /** {@code unsigned long long clang_getBuildSessionTimestamp(void)} */
     @NativeType("unsigned long long")
     public static long clang_getBuildSessionTimestamp() {
         long __functionAddress = Functions.getBuildSessionTimestamp;
@@ -56,11 +56,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_VirtualFileOverlay_create ] ---
 
-    /**
-     * Create a {@code CXVirtualFileOverlay} object. Must be disposed with {@link #clang_VirtualFileOverlay_dispose VirtualFileOverlay_dispose}.
-     *
-     * @param options is reserved, always pass 0
-     */
+    /** {@code CXVirtualFileOverlay clang_VirtualFileOverlay_create(unsigned int options)} */
     @NativeType("CXVirtualFileOverlay")
     public static long clang_VirtualFileOverlay_create(@NativeType("unsigned int") int options) {
         long __functionAddress = Functions.VirtualFileOverlay_create;
@@ -69,7 +65,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_VirtualFileOverlay_addFileMapping ] ---
 
-    /** Unsafe version of: {@link #clang_VirtualFileOverlay_addFileMapping VirtualFileOverlay_addFileMapping} */
+    /** {@code enum CXErrorCode clang_VirtualFileOverlay_addFileMapping(CXVirtualFileOverlay overlay, char const * virtualPath, char const * realPath)} */
     public static int nclang_VirtualFileOverlay_addFileMapping(long overlay, long virtualPath, long realPath) {
         long __functionAddress = Functions.VirtualFileOverlay_addFileMapping;
         if (CHECKS) {
@@ -78,11 +74,7 @@ public class ClangBuildSystem {
         return invokePPPI(overlay, virtualPath, realPath, __functionAddress);
     }
 
-    /**
-     * Map an absolute virtual file path to an absolute real one. The virtual path must be canonicalized (not contain "."/"..").
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_VirtualFileOverlay_addFileMapping(CXVirtualFileOverlay overlay, char const * virtualPath, char const * realPath)} */
     @NativeType("enum CXErrorCode")
     public static int clang_VirtualFileOverlay_addFileMapping(@NativeType("CXVirtualFileOverlay") long overlay, @NativeType("char const *") ByteBuffer virtualPath, @NativeType("char const *") ByteBuffer realPath) {
         if (CHECKS) {
@@ -92,11 +84,7 @@ public class ClangBuildSystem {
         return nclang_VirtualFileOverlay_addFileMapping(overlay, memAddress(virtualPath), memAddress(realPath));
     }
 
-    /**
-     * Map an absolute virtual file path to an absolute real one. The virtual path must be canonicalized (not contain "."/"..").
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_VirtualFileOverlay_addFileMapping(CXVirtualFileOverlay overlay, char const * virtualPath, char const * realPath)} */
     @NativeType("enum CXErrorCode")
     public static int clang_VirtualFileOverlay_addFileMapping(@NativeType("CXVirtualFileOverlay") long overlay, @NativeType("char const *") CharSequence virtualPath, @NativeType("char const *") CharSequence realPath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -113,12 +101,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_VirtualFileOverlay_setCaseSensitivity ] ---
 
-    /**
-     * Set the case sensitivity for the {@code CXVirtualFileOverlay} object. The {@code CXVirtualFileOverlay} object is case-sensitive by default, this option
-     * can be used to override the default.
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_VirtualFileOverlay_setCaseSensitivity(CXVirtualFileOverlay overlay, int caseSensitive)} */
     @NativeType("enum CXErrorCode")
     public static int clang_VirtualFileOverlay_setCaseSensitivity(@NativeType("CXVirtualFileOverlay") long overlay, int caseSensitive) {
         long __functionAddress = Functions.VirtualFileOverlay_setCaseSensitivity;
@@ -130,7 +113,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_VirtualFileOverlay_writeToBuffer ] ---
 
-    /** Unsafe version of: {@link #clang_VirtualFileOverlay_writeToBuffer VirtualFileOverlay_writeToBuffer} */
+    /** {@code enum CXErrorCode clang_VirtualFileOverlay_writeToBuffer(CXVirtualFileOverlay overlay, unsigned int options, char ** out_buffer_ptr, unsigned int * out_buffer_size)} */
     public static int nclang_VirtualFileOverlay_writeToBuffer(long overlay, int options, long out_buffer_ptr, long out_buffer_size) {
         long __functionAddress = Functions.VirtualFileOverlay_writeToBuffer;
         if (CHECKS) {
@@ -139,15 +122,7 @@ public class ClangBuildSystem {
         return invokePPPI(overlay, options, out_buffer_ptr, out_buffer_size, __functionAddress);
     }
 
-    /**
-     * Write out the {@code CXVirtualFileOverlay} object to a char buffer.
-     *
-     * @param options         is reserved, always pass 0
-     * @param out_buffer_ptr  pointer to receive the buffer pointer, which should be disposed using {@link #clang_free free}
-     * @param out_buffer_size pointer to receive the buffer size
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_VirtualFileOverlay_writeToBuffer(CXVirtualFileOverlay overlay, unsigned int options, char ** out_buffer_ptr, unsigned int * out_buffer_size)} */
     @NativeType("enum CXErrorCode")
     public static int clang_VirtualFileOverlay_writeToBuffer(@NativeType("CXVirtualFileOverlay") long overlay, @NativeType("unsigned int") int options, @NativeType("char **") PointerBuffer out_buffer_ptr, @NativeType("unsigned int *") IntBuffer out_buffer_size) {
         if (CHECKS) {
@@ -159,24 +134,20 @@ public class ClangBuildSystem {
 
     // --- [ clang_free ] ---
 
-    /** Unsafe version of: {@link #clang_free free} */
+    /** {@code void clang_free(void * buffer)} */
     public static void nclang_free(long buffer) {
         long __functionAddress = Functions.free;
         invokePV(buffer, __functionAddress);
     }
 
-    /**
-     * Free memory allocated by libclang, such as the buffer returned by {@link #clang_VirtualFileOverlay_writeToBuffer VirtualFileOverlay_writeToBuffer} or {@link #clang_ModuleMapDescriptor_writeToBuffer ModuleMapDescriptor_writeToBuffer}.
-     *
-     * @param buffer memory pointer to free
-     */
+    /** {@code void clang_free(void * buffer)} */
     public static void clang_free(@NativeType("void *") ByteBuffer buffer) {
         nclang_free(memAddress(buffer));
     }
 
     // --- [ clang_VirtualFileOverlay_dispose ] ---
 
-    /** Dispose a {@code CXVirtualFileOverlay} object. */
+    /** {@code void clang_VirtualFileOverlay_dispose(CXVirtualFileOverlay overlay)} */
     public static void clang_VirtualFileOverlay_dispose(@NativeType("CXVirtualFileOverlay") long overlay) {
         long __functionAddress = Functions.VirtualFileOverlay_dispose;
         if (CHECKS) {
@@ -187,11 +158,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_ModuleMapDescriptor_create ] ---
 
-    /**
-     * Create a {@code CXModuleMapDescriptor} object. Must be disposed with {@link #clang_ModuleMapDescriptor_dispose ModuleMapDescriptor_dispose}.
-     *
-     * @param options is reserved, always pass 0
-     */
+    /** {@code CXModuleMapDescriptor clang_ModuleMapDescriptor_create(unsigned int options)} */
     @NativeType("CXModuleMapDescriptor")
     public static long clang_ModuleMapDescriptor_create(@NativeType("unsigned int") int options) {
         long __functionAddress = Functions.ModuleMapDescriptor_create;
@@ -200,7 +167,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_ModuleMapDescriptor_setFrameworkModuleName ] ---
 
-    /** Unsafe version of: {@link #clang_ModuleMapDescriptor_setFrameworkModuleName ModuleMapDescriptor_setFrameworkModuleName} */
+    /** {@code enum CXErrorCode clang_ModuleMapDescriptor_setFrameworkModuleName(CXModuleMapDescriptor descriptor, char const * name)} */
     public static int nclang_ModuleMapDescriptor_setFrameworkModuleName(long descriptor, long name) {
         long __functionAddress = Functions.ModuleMapDescriptor_setFrameworkModuleName;
         if (CHECKS) {
@@ -209,11 +176,7 @@ public class ClangBuildSystem {
         return invokePPI(descriptor, name, __functionAddress);
     }
 
-    /**
-     * Sets the framework module name that the module.modulemap describes.
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_ModuleMapDescriptor_setFrameworkModuleName(CXModuleMapDescriptor descriptor, char const * name)} */
     @NativeType("enum CXErrorCode")
     public static int clang_ModuleMapDescriptor_setFrameworkModuleName(@NativeType("CXModuleMapDescriptor") long descriptor, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
@@ -222,11 +185,7 @@ public class ClangBuildSystem {
         return nclang_ModuleMapDescriptor_setFrameworkModuleName(descriptor, memAddress(name));
     }
 
-    /**
-     * Sets the framework module name that the module.modulemap describes.
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_ModuleMapDescriptor_setFrameworkModuleName(CXModuleMapDescriptor descriptor, char const * name)} */
     @NativeType("enum CXErrorCode")
     public static int clang_ModuleMapDescriptor_setFrameworkModuleName(@NativeType("CXModuleMapDescriptor") long descriptor, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -241,7 +200,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_ModuleMapDescriptor_setUmbrellaHeader ] ---
 
-    /** Unsafe version of: {@link #clang_ModuleMapDescriptor_setUmbrellaHeader ModuleMapDescriptor_setUmbrellaHeader} */
+    /** {@code enum CXErrorCode clang_ModuleMapDescriptor_setUmbrellaHeader(CXModuleMapDescriptor descriptor, char const * name)} */
     public static int nclang_ModuleMapDescriptor_setUmbrellaHeader(long descriptor, long name) {
         long __functionAddress = Functions.ModuleMapDescriptor_setUmbrellaHeader;
         if (CHECKS) {
@@ -250,11 +209,7 @@ public class ClangBuildSystem {
         return invokePPI(descriptor, name, __functionAddress);
     }
 
-    /**
-     * Sets the umbrella header name that the module.modulemap describes.
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_ModuleMapDescriptor_setUmbrellaHeader(CXModuleMapDescriptor descriptor, char const * name)} */
     @NativeType("enum CXErrorCode")
     public static int clang_ModuleMapDescriptor_setUmbrellaHeader(@NativeType("CXModuleMapDescriptor") long descriptor, @NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
@@ -263,11 +218,7 @@ public class ClangBuildSystem {
         return nclang_ModuleMapDescriptor_setUmbrellaHeader(descriptor, memAddress(name));
     }
 
-    /**
-     * Sets the umbrella header name that the module.modulemap describes.
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_ModuleMapDescriptor_setUmbrellaHeader(CXModuleMapDescriptor descriptor, char const * name)} */
     @NativeType("enum CXErrorCode")
     public static int clang_ModuleMapDescriptor_setUmbrellaHeader(@NativeType("CXModuleMapDescriptor") long descriptor, @NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -282,7 +233,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_ModuleMapDescriptor_writeToBuffer ] ---
 
-    /** Unsafe version of: {@link #clang_ModuleMapDescriptor_writeToBuffer ModuleMapDescriptor_writeToBuffer} */
+    /** {@code enum CXErrorCode clang_ModuleMapDescriptor_writeToBuffer(CXModuleMapDescriptor descriptor, unsigned int options, char ** out_buffer_ptr, unsigned int * out_buffer_size)} */
     public static int nclang_ModuleMapDescriptor_writeToBuffer(long descriptor, int options, long out_buffer_ptr, long out_buffer_size) {
         long __functionAddress = Functions.ModuleMapDescriptor_writeToBuffer;
         if (CHECKS) {
@@ -291,15 +242,7 @@ public class ClangBuildSystem {
         return invokePPPI(descriptor, options, out_buffer_ptr, out_buffer_size, __functionAddress);
     }
 
-    /**
-     * Write out the {@code CXModuleMapDescriptor} object to a char buffer.
-     *
-     * @param options         is reserved, always pass 0
-     * @param out_buffer_ptr  pointer to receive the buffer pointer, which should be disposed using {@link #clang_free free}
-     * @param out_buffer_size pointer to receive the buffer size
-     *
-     * @return 0 for success, non-zero to indicate an error
-     */
+    /** {@code enum CXErrorCode clang_ModuleMapDescriptor_writeToBuffer(CXModuleMapDescriptor descriptor, unsigned int options, char ** out_buffer_ptr, unsigned int * out_buffer_size)} */
     @NativeType("enum CXErrorCode")
     public static int clang_ModuleMapDescriptor_writeToBuffer(@NativeType("CXModuleMapDescriptor") long descriptor, @NativeType("unsigned int") int options, @NativeType("char **") PointerBuffer out_buffer_ptr, @NativeType("unsigned int *") IntBuffer out_buffer_size) {
         if (CHECKS) {
@@ -311,7 +254,7 @@ public class ClangBuildSystem {
 
     // --- [ clang_ModuleMapDescriptor_dispose ] ---
 
-    /** Dispose a {@code CXModuleMapDescriptor} object. */
+    /** {@code void clang_ModuleMapDescriptor_dispose(CXModuleMapDescriptor descriptor)} */
     public static void clang_ModuleMapDescriptor_dispose(@NativeType("CXModuleMapDescriptor") long descriptor) {
         long __functionAddress = Functions.ModuleMapDescriptor_dispose;
         if (CHECKS) {

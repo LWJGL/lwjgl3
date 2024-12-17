@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing optical flow image format info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV}</li>
- * <li>{@code usage} <b>must</b> be a valid combination of {@code VkOpticalFlowUsageFlagBitsNV} values</li>
- * <li>{@code usage} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVOpticalFlow#vkGetPhysicalDeviceOpticalFlowImageFormatsNV GetPhysicalDeviceOpticalFlowImageFormatsNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkOpticalFlowImageFormatInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkOpticalFlowUsageFlagsNV {@link #usage};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkOpticalFlowUsageFlagsNV usage;
+ * }}</pre>
  */
 public class VkOpticalFlowImageFormatInfoNV extends Struct<VkOpticalFlowImageFormatInfoNV> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class VkOpticalFlowImageFormatInfoNV extends Struct<VkOpticalFlowImageFor
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkOpticalFlowUsageFlagBitsNV} describing the intended optical flow usage of the image. */
+    /** @return the value of the {@code usage} field. */
     @NativeType("VkOpticalFlowUsageFlagsNV")
     public int usage() { return nusage(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkOpticalFlowImageFormatInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV} value to the {@code sType} field. */
     public VkOpticalFlowImageFormatInfoNV sType$Default() { return sType(NVOpticalFlow.VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkOpticalFlowImageFormatInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #usage} field. */
+    /** Sets the specified value to the {@code usage} field. */
     public VkOpticalFlowImageFormatInfoNV usage(@NativeType("VkOpticalFlowUsageFlagsNV") int value) { nusage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,23 +286,23 @@ public class VkOpticalFlowImageFormatInfoNV extends Struct<VkOpticalFlowImageFor
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkOpticalFlowImageFormatInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkOpticalFlowImageFormatInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkOpticalFlowImageFormatInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkOpticalFlowImageFormatInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkOpticalFlowImageFormatInfoNV#usage} field. */
+        /** @return the value of the {@code usage} field. */
         @NativeType("VkOpticalFlowUsageFlagsNV")
         public int usage() { return VkOpticalFlowImageFormatInfoNV.nusage(address()); }
 
-        /** Sets the specified value to the {@link VkOpticalFlowImageFormatInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkOpticalFlowImageFormatInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkOpticalFlowImageFormatInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV} value to the {@link VkOpticalFlowImageFormatInfoNV#sType} field. */
+        /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV} value to the {@code sType} field. */
         public VkOpticalFlowImageFormatInfoNV.Buffer sType$Default() { return sType(NVOpticalFlow.VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV); }
-        /** Sets the specified value to the {@link VkOpticalFlowImageFormatInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkOpticalFlowImageFormatInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkOpticalFlowImageFormatInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowImageFormatInfoNV#usage} field. */
+        /** Sets the specified value to the {@code usage} field. */
         public VkOpticalFlowImageFormatInfoNV.Buffer usage(@NativeType("VkOpticalFlowUsageFlagsNV") int value) { VkOpticalFlowImageFormatInfoNV.nusage(address(), value); return this; }
 
     }

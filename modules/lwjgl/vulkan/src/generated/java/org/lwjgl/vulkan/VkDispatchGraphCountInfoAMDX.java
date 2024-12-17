@@ -16,24 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying count parameters for execution graph dispatch.
- * 
- * <h5>Description</h5>
- * 
- * <p>Whether {@code infos} is consumed as a device or host pointer is defined by the command this structure is used in.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceOrHostAddressConstAMDX}, {@link AMDXShaderEnqueue#vkCmdDispatchGraphAMDX CmdDispatchGraphAMDX}, {@link AMDXShaderEnqueue#vkCmdDispatchGraphIndirectAMDX CmdDispatchGraphIndirectAMDX}, {@link AMDXShaderEnqueue#vkCmdDispatchGraphIndirectCountAMDX CmdDispatchGraphIndirectCountAMDX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDispatchGraphCountInfoAMDX {
- *     uint32_t {@link #count};
- *     {@link VkDeviceOrHostAddressConstAMDX VkDeviceOrHostAddressConstAMDX} {@link #infos};
- *     uint64_t {@link #stride};
- * }</code></pre>
+ *     uint32_t count;
+ *     {@link VkDeviceOrHostAddressConstAMDX VkDeviceOrHostAddressConstAMDX} infos;
+ *     uint64_t stride;
+ * }}</pre>
  */
 public class VkDispatchGraphCountInfoAMDX extends Struct<VkDispatchGraphCountInfoAMDX> implements NativeResource {
 
@@ -86,22 +74,22 @@ public class VkDispatchGraphCountInfoAMDX extends Struct<VkDispatchGraphCountInf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of dispatches to perform. */
+    /** @return the value of the {@code count} field. */
     @NativeType("uint32_t")
     public int count() { return ncount(address()); }
-    /** the device or host address of a flat array of {@link VkDispatchGraphInfoAMDX} structures */
+    /** @return a {@link VkDeviceOrHostAddressConstAMDX} view of the {@code infos} field. */
     public VkDeviceOrHostAddressConstAMDX infos() { return ninfos(address()); }
-    /** the byte stride between successive {@link VkDispatchGraphInfoAMDX} structures in {@code infos} */
+    /** @return the value of the {@code stride} field. */
     @NativeType("uint64_t")
     public long stride() { return nstride(address()); }
 
-    /** Sets the specified value to the {@link #count} field. */
+    /** Sets the specified value to the {@code count} field. */
     public VkDispatchGraphCountInfoAMDX count(@NativeType("uint32_t") int value) { ncount(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstAMDX} to the {@link #infos} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstAMDX} to the {@code infos} field. */
     public VkDispatchGraphCountInfoAMDX infos(VkDeviceOrHostAddressConstAMDX value) { ninfos(address(), value); return this; }
-    /** Passes the {@link #infos} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code infos} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkDispatchGraphCountInfoAMDX infos(java.util.function.Consumer<VkDeviceOrHostAddressConstAMDX> consumer) { consumer.accept(infos()); return this; }
-    /** Sets the specified value to the {@link #stride} field. */
+    /** Sets the specified value to the {@code stride} field. */
     public VkDispatchGraphCountInfoAMDX stride(@NativeType("uint64_t") long value) { nstride(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,22 +285,22 @@ public class VkDispatchGraphCountInfoAMDX extends Struct<VkDispatchGraphCountInf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDispatchGraphCountInfoAMDX#count} field. */
+        /** @return the value of the {@code count} field. */
         @NativeType("uint32_t")
         public int count() { return VkDispatchGraphCountInfoAMDX.ncount(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstAMDX} view of the {@link VkDispatchGraphCountInfoAMDX#infos} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstAMDX} view of the {@code infos} field. */
         public VkDeviceOrHostAddressConstAMDX infos() { return VkDispatchGraphCountInfoAMDX.ninfos(address()); }
-        /** @return the value of the {@link VkDispatchGraphCountInfoAMDX#stride} field. */
+        /** @return the value of the {@code stride} field. */
         @NativeType("uint64_t")
         public long stride() { return VkDispatchGraphCountInfoAMDX.nstride(address()); }
 
-        /** Sets the specified value to the {@link VkDispatchGraphCountInfoAMDX#count} field. */
+        /** Sets the specified value to the {@code count} field. */
         public VkDispatchGraphCountInfoAMDX.Buffer count(@NativeType("uint32_t") int value) { VkDispatchGraphCountInfoAMDX.ncount(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstAMDX} to the {@link VkDispatchGraphCountInfoAMDX#infos} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstAMDX} to the {@code infos} field. */
         public VkDispatchGraphCountInfoAMDX.Buffer infos(VkDeviceOrHostAddressConstAMDX value) { VkDispatchGraphCountInfoAMDX.ninfos(address(), value); return this; }
-        /** Passes the {@link VkDispatchGraphCountInfoAMDX#infos} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code infos} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkDispatchGraphCountInfoAMDX.Buffer infos(java.util.function.Consumer<VkDeviceOrHostAddressConstAMDX> consumer) { consumer.accept(infos()); return this; }
-        /** Sets the specified value to the {@link VkDispatchGraphCountInfoAMDX#stride} field. */
+        /** Sets the specified value to the {@code stride} field. */
         public VkDispatchGraphCountInfoAMDX.Buffer stride(@NativeType("uint64_t") long value) { VkDispatchGraphCountInfoAMDX.nstride(address(), value); return this; }
 
     }

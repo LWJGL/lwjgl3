@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSemaphoreWaitInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSemaphoreWaitInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t semaphoreCount;
  *     VkSemaphore const * pSemaphores;
  *     uint64_t const * pValues;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSemaphoreWaitInfoKHR extends VkSemaphoreWaitInfo {
 

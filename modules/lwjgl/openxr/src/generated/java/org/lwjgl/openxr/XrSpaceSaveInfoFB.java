@@ -17,37 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters for a save operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSpaceSaveInfoFB} structure contains information used to save the spatial entity.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntityStorage XR_FB_spatial_entity_storage} extension <b>must</b> be enabled prior to using {@link XrSpaceSaveInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntityStorage#XR_TYPE_SPACE_SAVE_INFO_FB TYPE_SPACE_SAVE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
- * <li>{@code persistenceMode} <b>must</b> be a valid {@code XrSpacePersistenceModeFB} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBSpatialEntityStorage#xrSaveSpaceFB SaveSpaceFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceSaveInfoFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #space};
- *     XrSpaceStorageLocationFB {@link #location};
- *     XrSpacePersistenceModeFB {@link #persistenceMode};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace space;
+ *     XrSpaceStorageLocationFB location;
+ *     XrSpacePersistenceModeFB persistenceMode;
+ * }}</pre>
  */
 public class XrSpaceSaveInfoFB extends Struct<XrSpaceSaveInfoFB> implements NativeResource {
 
@@ -106,33 +83,33 @@ public class XrSpaceSaveInfoFB extends Struct<XrSpaceSaveInfoFB> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSpace} handle to the space of the entity to be saved. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the storage location. */
+    /** @return the value of the {@code location} field. */
     @NativeType("XrSpaceStorageLocationFB")
     public int location() { return nlocation(address()); }
-    /** the persistence mode. */
+    /** @return the value of the {@code persistenceMode} field. */
     @NativeType("XrSpacePersistenceModeFB")
     public int persistenceMode() { return npersistenceMode(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceSaveInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_SPACE_SAVE_INFO_FB TYPE_SPACE_SAVE_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_SPACE_SAVE_INFO_FB TYPE_SPACE_SAVE_INFO_FB} value to the {@code type} field. */
     public XrSpaceSaveInfoFB type$Default() { return type(FBSpatialEntityStorage.XR_TYPE_SPACE_SAVE_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceSaveInfoFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrSpaceSaveInfoFB space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@link #location} field. */
+    /** Sets the specified value to the {@code location} field. */
     public XrSpaceSaveInfoFB location(@NativeType("XrSpaceStorageLocationFB") int value) { nlocation(address(), value); return this; }
-    /** Sets the specified value to the {@link #persistenceMode} field. */
+    /** Sets the specified value to the {@code persistenceMode} field. */
     public XrSpaceSaveInfoFB persistenceMode(@NativeType("XrSpacePersistenceModeFB") int value) { npersistenceMode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,33 +326,33 @@ public class XrSpaceSaveInfoFB extends Struct<XrSpaceSaveInfoFB> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceSaveInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceSaveInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrSpaceSaveInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpaceSaveInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrSpaceSaveInfoFB#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrSpaceSaveInfoFB.nspace(address()); }
-        /** @return the value of the {@link XrSpaceSaveInfoFB#location} field. */
+        /** @return the value of the {@code location} field. */
         @NativeType("XrSpaceStorageLocationFB")
         public int location() { return XrSpaceSaveInfoFB.nlocation(address()); }
-        /** @return the value of the {@link XrSpaceSaveInfoFB#persistenceMode} field. */
+        /** @return the value of the {@code persistenceMode} field. */
         @NativeType("XrSpacePersistenceModeFB")
         public int persistenceMode() { return XrSpaceSaveInfoFB.npersistenceMode(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceSaveInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceSaveInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceSaveInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_SPACE_SAVE_INFO_FB TYPE_SPACE_SAVE_INFO_FB} value to the {@link XrSpaceSaveInfoFB#type} field. */
+        /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_SPACE_SAVE_INFO_FB TYPE_SPACE_SAVE_INFO_FB} value to the {@code type} field. */
         public XrSpaceSaveInfoFB.Buffer type$Default() { return type(FBSpatialEntityStorage.XR_TYPE_SPACE_SAVE_INFO_FB); }
-        /** Sets the specified value to the {@link XrSpaceSaveInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceSaveInfoFB.Buffer next(@NativeType("void const *") long value) { XrSpaceSaveInfoFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceSaveInfoFB#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrSpaceSaveInfoFB.Buffer space(XrSpace value) { XrSpaceSaveInfoFB.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceSaveInfoFB#location} field. */
+        /** Sets the specified value to the {@code location} field. */
         public XrSpaceSaveInfoFB.Buffer location(@NativeType("XrSpaceStorageLocationFB") int value) { XrSpaceSaveInfoFB.nlocation(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceSaveInfoFB#persistenceMode} field. */
+        /** Sets the specified value to the {@code persistenceMode} field. */
         public XrSpaceSaveInfoFB.Buffer persistenceMode(@NativeType("XrSpacePersistenceModeFB") int value) { XrSpaceSaveInfoFB.npersistenceMode(address(), value); return this; }
 
     }

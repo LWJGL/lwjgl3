@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing feature to allow descriptor pool overallocation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVDescriptorPoolOverallocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #descriptorPoolOverallocation};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 descriptorPoolOverallocation;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV extends Struct<VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV extends Stru
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation allows the application to opt into descriptor pool overallocation by creating the descriptor pool with {@link NVDescriptorPoolOverallocation#VK_DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV} and/or {@link NVDescriptorPoolOverallocation#VK_DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV} flags. */
+    /** @return the value of the {@code descriptorPoolOverallocation} field. */
     @NativeType("VkBool32")
     public boolean descriptorPoolOverallocation() { return ndescriptorPoolOverallocation(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVDescriptorPoolOverallocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVDescriptorPoolOverallocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV sType$Default() { return sType(NVDescriptorPoolOverallocation.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorPoolOverallocation} field. */
+    /** Sets the specified value to the {@code descriptorPoolOverallocation} field. */
     public VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV descriptorPoolOverallocation(@NativeType("VkBool32") boolean value) { ndescriptorPoolOverallocation(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV extends Stru
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV#descriptorPoolOverallocation} field. */
+        /** @return the value of the {@code descriptorPoolOverallocation} field. */
         @NativeType("VkBool32")
         public boolean descriptorPoolOverallocation() { return VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.ndescriptorPoolOverallocation(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVDescriptorPoolOverallocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV} value to the {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV#sType} field. */
+        /** Sets the {@link NVDescriptorPoolOverallocation#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.Buffer sType$Default() { return sType(NVDescriptorPoolOverallocation.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV#descriptorPoolOverallocation} field. */
+        /** Sets the specified value to the {@code descriptorPoolOverallocation} field. */
         public VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.Buffer descriptorPoolOverallocation(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV.ndescriptorPoolOverallocation(address(), value ? 1 : 0); return this; }
 
     }

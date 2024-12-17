@@ -16,33 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing supported external semaphore handle features.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code handleType} is not supported by the implementation, then {@link VkExternalSemaphoreProperties}{@code ::externalSemaphoreFeatures} will be zero.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK11#vkGetPhysicalDeviceExternalSemaphoreProperties GetPhysicalDeviceExternalSemaphoreProperties}, {@link KHRExternalSemaphoreCapabilities#vkGetPhysicalDeviceExternalSemaphorePropertiesKHR GetPhysicalDeviceExternalSemaphorePropertiesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExternalSemaphoreProperties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkExternalSemaphoreHandleTypeFlags {@link #exportFromImportedHandleTypes};
- *     VkExternalSemaphoreHandleTypeFlags {@link #compatibleHandleTypes};
- *     VkExternalSemaphoreFeatureFlags {@link #externalSemaphoreFeatures};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkExternalSemaphoreHandleTypeFlags exportFromImportedHandleTypes;
+ *     VkExternalSemaphoreHandleTypeFlags compatibleHandleTypes;
+ *     VkExternalSemaphoreFeatureFlags externalSemaphoreFeatures;
+ * }}</pre>
  */
 public class VkExternalSemaphoreProperties extends Struct<VkExternalSemaphoreProperties> implements NativeResource {
 
@@ -101,27 +82,27 @@ public class VkExternalSemaphoreProperties extends Struct<VkExternalSemaphorePro
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying which types of imported handle {@code handleType} <b>can</b> be exported from. */
+    /** @return the value of the {@code exportFromImportedHandleTypes} field. */
     @NativeType("VkExternalSemaphoreHandleTypeFlags")
     public int exportFromImportedHandleTypes() { return nexportFromImportedHandleTypes(address()); }
-    /** a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a semaphore. */
+    /** @return the value of the {@code compatibleHandleTypes} field. */
     @NativeType("VkExternalSemaphoreHandleTypeFlags")
     public int compatibleHandleTypes() { return ncompatibleHandleTypes(address()); }
-    /** a bitmask of {@code VkExternalSemaphoreFeatureFlagBits} describing the features of {@code handleType}. */
+    /** @return the value of the {@code externalSemaphoreFeatures} field. */
     @NativeType("VkExternalSemaphoreFeatureFlags")
     public int externalSemaphoreFeatures() { return nexternalSemaphoreFeatures(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkExternalSemaphoreProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES} value to the {@code sType} field. */
     public VkExternalSemaphoreProperties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkExternalSemaphoreProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,27 +317,27 @@ public class VkExternalSemaphoreProperties extends Struct<VkExternalSemaphorePro
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkExternalSemaphoreProperties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExternalSemaphoreProperties.nsType(address()); }
-        /** @return the value of the {@link VkExternalSemaphoreProperties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkExternalSemaphoreProperties.npNext(address()); }
-        /** @return the value of the {@link VkExternalSemaphoreProperties#exportFromImportedHandleTypes} field. */
+        /** @return the value of the {@code exportFromImportedHandleTypes} field. */
         @NativeType("VkExternalSemaphoreHandleTypeFlags")
         public int exportFromImportedHandleTypes() { return VkExternalSemaphoreProperties.nexportFromImportedHandleTypes(address()); }
-        /** @return the value of the {@link VkExternalSemaphoreProperties#compatibleHandleTypes} field. */
+        /** @return the value of the {@code compatibleHandleTypes} field. */
         @NativeType("VkExternalSemaphoreHandleTypeFlags")
         public int compatibleHandleTypes() { return VkExternalSemaphoreProperties.ncompatibleHandleTypes(address()); }
-        /** @return the value of the {@link VkExternalSemaphoreProperties#externalSemaphoreFeatures} field. */
+        /** @return the value of the {@code externalSemaphoreFeatures} field. */
         @NativeType("VkExternalSemaphoreFeatureFlags")
         public int externalSemaphoreFeatures() { return VkExternalSemaphoreProperties.nexternalSemaphoreFeatures(address()); }
 
-        /** Sets the specified value to the {@link VkExternalSemaphoreProperties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkExternalSemaphoreProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalSemaphoreProperties.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES} value to the {@link VkExternalSemaphoreProperties#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES} value to the {@code sType} field. */
         public VkExternalSemaphoreProperties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES); }
-        /** Sets the specified value to the {@link VkExternalSemaphoreProperties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkExternalSemaphoreProperties.Buffer pNext(@NativeType("void *") long value) { VkExternalSemaphoreProperties.npNext(address(), value); return this; }
 
     }

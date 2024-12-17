@@ -16,22 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Memory size needed to copy to or from an image on the host with VK_HOST_IMAGE_COPY_MEMCPY.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubresourceHostMemcpySize {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceSize {@link #size};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceSize size;
+ * }}</pre>
  */
 public class VkSubresourceHostMemcpySize extends Struct<VkSubresourceHostMemcpySize> implements NativeResource {
 
@@ -84,21 +74,21 @@ public class VkSubresourceHostMemcpySize extends Struct<VkSubresourceHostMemcpyS
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the size in bytes of the image subresource. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSubresourceHostMemcpySize sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE} value to the {@code sType} field. */
     public VkSubresourceHostMemcpySize sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSubresourceHostMemcpySize pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -290,21 +280,21 @@ public class VkSubresourceHostMemcpySize extends Struct<VkSubresourceHostMemcpyS
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSubresourceHostMemcpySize#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubresourceHostMemcpySize.nsType(address()); }
-        /** @return the value of the {@link VkSubresourceHostMemcpySize#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSubresourceHostMemcpySize.npNext(address()); }
-        /** @return the value of the {@link VkSubresourceHostMemcpySize#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkSubresourceHostMemcpySize.nsize(address()); }
 
-        /** Sets the specified value to the {@link VkSubresourceHostMemcpySize#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSubresourceHostMemcpySize.Buffer sType(@NativeType("VkStructureType") int value) { VkSubresourceHostMemcpySize.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE} value to the {@link VkSubresourceHostMemcpySize#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE} value to the {@code sType} field. */
         public VkSubresourceHostMemcpySize.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_HOST_MEMCPY_SIZE); }
-        /** Sets the specified value to the {@link VkSubresourceHostMemcpySize#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSubresourceHostMemcpySize.Buffer pNext(@NativeType("void *") long value) { VkSubresourceHostMemcpySize.npNext(address(), value); return this; }
 
     }

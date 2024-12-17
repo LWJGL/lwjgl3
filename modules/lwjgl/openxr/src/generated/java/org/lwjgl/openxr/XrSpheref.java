@@ -16,23 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describe a sphere bounds.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@code radius} is not a finite positive value.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpheref {
- *     {@link XrPosef XrPosef} {@link #center};
- *     float {@link #radius};
- * }</code></pre>
+ *     {@link XrPosef XrPosef} center;
+ *     float radius;
+ * }}</pre>
  */
 public class XrSpheref extends Struct<XrSpheref> implements NativeResource {
 
@@ -82,16 +70,16 @@ public class XrSpheref extends Struct<XrSpheref> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@link XrPosef} representing the pose of the center of the sphere within the reference frame of the corresponding {@code XrSpace}. */
+    /** @return a {@link XrPosef} view of the {@code center} field. */
     public XrPosef center() { return ncenter(address()); }
-    /** the finite non-negative radius of the sphere. */
+    /** @return the value of the {@code radius} field. */
     public float radius() { return nradius(address()); }
 
-    /** Copies the specified {@link XrPosef} to the {@link #center} field. */
+    /** Copies the specified {@link XrPosef} to the {@code center} field. */
     public XrSpheref center(XrPosef value) { ncenter(address(), value); return this; }
-    /** Passes the {@link #center} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code center} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpheref center(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(center()); return this; }
-    /** Sets the specified value to the {@link #radius} field. */
+    /** Sets the specified value to the {@code radius} field. */
     public XrSpheref radius(float value) { nradius(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -281,16 +269,16 @@ public class XrSpheref extends Struct<XrSpheref> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrPosef} view of the {@link XrSpheref#center} field. */
+        /** @return a {@link XrPosef} view of the {@code center} field. */
         public XrPosef center() { return XrSpheref.ncenter(address()); }
-        /** @return the value of the {@link XrSpheref#radius} field. */
+        /** @return the value of the {@code radius} field. */
         public float radius() { return XrSpheref.nradius(address()); }
 
-        /** Copies the specified {@link XrPosef} to the {@link XrSpheref#center} field. */
+        /** Copies the specified {@link XrPosef} to the {@code center} field. */
         public XrSpheref.Buffer center(XrPosef value) { XrSpheref.ncenter(address(), value); return this; }
-        /** Passes the {@link XrSpheref#center} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code center} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpheref.Buffer center(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(center()); return this; }
-        /** Sets the specified value to the {@link XrSpheref#radius} field. */
+        /** Sets the specified value to the {@code radius} field. */
         public XrSpheref.Buffer radius(float value) { XrSpheref.nradius(address(), value); return this; }
 
     }

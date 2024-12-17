@@ -17,20 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * General statistics from current state of the Allocator - total memory usage across all memory heaps and types.
- * 
- * <p>These are slower to calculate. Use for debugging purposes.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaTotalStatistics {
  *     {@link VmaDetailedStatistics VmaDetailedStatistics} memoryType[32];
  *     {@link VmaDetailedStatistics VmaDetailedStatistics} memoryHeap[16];
  *     {@link VmaDetailedStatistics VmaDetailedStatistics} total;
- * }</code></pre>
- *
- * @see Vma#vmaCalculateStatistics
+ * }}</pre>
  */
 public class VmaTotalStatistics extends Struct<VmaTotalStatistics> implements NativeResource {
 

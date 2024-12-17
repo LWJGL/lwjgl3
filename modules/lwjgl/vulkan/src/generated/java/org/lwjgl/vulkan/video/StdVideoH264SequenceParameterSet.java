@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH264SequenceParameterSet {
  *     {@link StdVideoH264SpsFlags StdVideoH264SpsFlags} flags;
  *     StdVideoH264ProfileIdc profile_idc;
@@ -43,10 +41,10 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t frame_crop_top_offset;
  *     uint32_t frame_crop_bottom_offset;
  *     uint32_t reserved2;
- *     int32_t const * {@link #pOffsetForRefFrame};
- *     {@link StdVideoH264ScalingLists StdVideoH264ScalingLists} const * {@link #pScalingLists};
- *     {@link StdVideoH264SequenceParameterSetVui StdVideoH264SequenceParameterSetVui} const * {@link #pSequenceParameterSetVui};
- * }</code></pre>
+ *     int32_t const * pOffsetForRefFrame;
+ *     {@link StdVideoH264ScalingLists StdVideoH264ScalingLists} const * pScalingLists;
+ *     {@link StdVideoH264SequenceParameterSetVui StdVideoH264SequenceParameterSetVui} const * pSequenceParameterSetVui;
+ * }}</pre>
  */
 public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264SequenceParameterSet> implements NativeResource {
 
@@ -224,17 +222,13 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     /** @return the value of the {@code frame_crop_bottom_offset} field. */
     @NativeType("uint32_t")
     public int frame_crop_bottom_offset() { return nframe_crop_bottom_offset(address()); }
-    /**
-     * a pointer representing the {@code offset_for_ref_frame} array with {@code num_ref_frames_in_pic_order_cnt_cycle} number of elements.
-     * 
-     * <p>If {@code pOffsetForRefFrame} has {@code nullptr} value, then {@code num_ref_frames_in_pic_order_cnt_cycle} must also be "0".</p>
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pOffsetForRefFrame} field. */
     @NativeType("int32_t const *")
     public @Nullable IntBuffer pOffsetForRefFrame() { return npOffsetForRefFrame(address()); }
-    /** must be a valid pointer if scaling_matrix_present_flag is set */
+    /** @return a {@link StdVideoH264ScalingLists} view of the struct pointed to by the {@code pScalingLists} field. */
     @NativeType("StdVideoH264ScalingLists const *")
     public StdVideoH264ScalingLists pScalingLists() { return npScalingLists(address()); }
-    /** must be a valid pointer if StdVideoH264SpsFlags:vui_parameters_present_flag is set */
+    /** @return a {@link StdVideoH264SequenceParameterSetVui} view of the struct pointed to by the {@code pSequenceParameterSetVui} field. */
     @NativeType("StdVideoH264SequenceParameterSetVui const *")
     public StdVideoH264SequenceParameterSetVui pSequenceParameterSetVui() { return npSequenceParameterSetVui(address()); }
 
@@ -280,11 +274,11 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
     public StdVideoH264SequenceParameterSet frame_crop_top_offset(@NativeType("uint32_t") int value) { nframe_crop_top_offset(address(), value); return this; }
     /** Sets the specified value to the {@code frame_crop_bottom_offset} field. */
     public StdVideoH264SequenceParameterSet frame_crop_bottom_offset(@NativeType("uint32_t") int value) { nframe_crop_bottom_offset(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pOffsetForRefFrame} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pOffsetForRefFrame} field. */
     public StdVideoH264SequenceParameterSet pOffsetForRefFrame(@Nullable @NativeType("int32_t const *") IntBuffer value) { npOffsetForRefFrame(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@link #pScalingLists} field. */
+    /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@code pScalingLists} field. */
     public StdVideoH264SequenceParameterSet pScalingLists(@NativeType("StdVideoH264ScalingLists const *") StdVideoH264ScalingLists value) { npScalingLists(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH264SequenceParameterSetVui} to the {@link #pSequenceParameterSetVui} field. */
+    /** Sets the address of the specified {@link StdVideoH264SequenceParameterSetVui} to the {@code pSequenceParameterSetVui} field. */
     public StdVideoH264SequenceParameterSet pSequenceParameterSetVui(@NativeType("StdVideoH264SequenceParameterSetVui const *") StdVideoH264SequenceParameterSetVui value) { npSequenceParameterSetVui(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -675,13 +669,13 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
         /** @return the value of the {@code frame_crop_bottom_offset} field. */
         @NativeType("uint32_t")
         public int frame_crop_bottom_offset() { return StdVideoH264SequenceParameterSet.nframe_crop_bottom_offset(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link StdVideoH264SequenceParameterSet#pOffsetForRefFrame} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pOffsetForRefFrame} field. */
         @NativeType("int32_t const *")
         public @Nullable IntBuffer pOffsetForRefFrame() { return StdVideoH264SequenceParameterSet.npOffsetForRefFrame(address()); }
-        /** @return a {@link StdVideoH264ScalingLists} view of the struct pointed to by the {@link StdVideoH264SequenceParameterSet#pScalingLists} field. */
+        /** @return a {@link StdVideoH264ScalingLists} view of the struct pointed to by the {@code pScalingLists} field. */
         @NativeType("StdVideoH264ScalingLists const *")
         public StdVideoH264ScalingLists pScalingLists() { return StdVideoH264SequenceParameterSet.npScalingLists(address()); }
-        /** @return a {@link StdVideoH264SequenceParameterSetVui} view of the struct pointed to by the {@link StdVideoH264SequenceParameterSet#pSequenceParameterSetVui} field. */
+        /** @return a {@link StdVideoH264SequenceParameterSetVui} view of the struct pointed to by the {@code pSequenceParameterSetVui} field. */
         @NativeType("StdVideoH264SequenceParameterSetVui const *")
         public StdVideoH264SequenceParameterSetVui pSequenceParameterSetVui() { return StdVideoH264SequenceParameterSet.npSequenceParameterSetVui(address()); }
 
@@ -727,11 +721,11 @@ public class StdVideoH264SequenceParameterSet extends Struct<StdVideoH264Sequenc
         public StdVideoH264SequenceParameterSet.Buffer frame_crop_top_offset(@NativeType("uint32_t") int value) { StdVideoH264SequenceParameterSet.nframe_crop_top_offset(address(), value); return this; }
         /** Sets the specified value to the {@code frame_crop_bottom_offset} field. */
         public StdVideoH264SequenceParameterSet.Buffer frame_crop_bottom_offset(@NativeType("uint32_t") int value) { StdVideoH264SequenceParameterSet.nframe_crop_bottom_offset(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link StdVideoH264SequenceParameterSet#pOffsetForRefFrame} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pOffsetForRefFrame} field. */
         public StdVideoH264SequenceParameterSet.Buffer pOffsetForRefFrame(@Nullable @NativeType("int32_t const *") IntBuffer value) { StdVideoH264SequenceParameterSet.npOffsetForRefFrame(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@link StdVideoH264SequenceParameterSet#pScalingLists} field. */
+        /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@code pScalingLists} field. */
         public StdVideoH264SequenceParameterSet.Buffer pScalingLists(@NativeType("StdVideoH264ScalingLists const *") StdVideoH264ScalingLists value) { StdVideoH264SequenceParameterSet.npScalingLists(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH264SequenceParameterSetVui} to the {@link StdVideoH264SequenceParameterSet#pSequenceParameterSetVui} field. */
+        /** Sets the address of the specified {@link StdVideoH264SequenceParameterSetVui} to the {@code pSequenceParameterSetVui} field. */
         public StdVideoH264SequenceParameterSet.Buffer pSequenceParameterSetVui(@NativeType("StdVideoH264SequenceParameterSetVui const *") StdVideoH264SequenceParameterSetVui value) { StdVideoH264SequenceParameterSet.npSequenceParameterSetVui(address(), value); return this; }
 
     }

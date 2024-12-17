@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Interface which remaps vertex inputs to a fixed semantic name to make linking easier.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_hlsl_vertex_attribute_remap {
  *     unsigned int location;
  *     char const * semantic;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_hlsl_vertex_attribute_remap")
 public class SpvcHlslVertexAttributeRemap extends Struct<SpvcHlslVertexAttributeRemap> implements NativeResource {

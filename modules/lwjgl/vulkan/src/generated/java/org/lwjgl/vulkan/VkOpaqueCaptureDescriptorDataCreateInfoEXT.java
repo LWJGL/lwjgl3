@@ -17,27 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying opaque capture descriptor data.
- * 
- * <h5>Description</h5>
- * 
- * <p>During replay, opaque descriptor capture data <b>can</b> be specified by adding a {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT} structure to the relevant {@code pNext} chain of a {@link VkBufferCreateInfo}, {@link VkImageCreateInfo}, {@link VkImageViewCreateInfo}, {@link VkSamplerCreateInfo}, {@link VkAccelerationStructureCreateInfoNV} or {@link VkAccelerationStructureCreateInfoKHR} structure.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT}</li>
- * <li>{@code opaqueCaptureDescriptorData} <b>must</b> be a pointer value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkOpaqueCaptureDescriptorDataCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     void const * {@link #opaqueCaptureDescriptorData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     void const * opaqueCaptureDescriptorData;
+ * }}</pre>
  */
 public class VkOpaqueCaptureDescriptorDataCreateInfoEXT extends Struct<VkOpaqueCaptureDescriptorDataCreateInfoEXT> implements NativeResource {
 
@@ -90,23 +75,23 @@ public class VkOpaqueCaptureDescriptorDataCreateInfoEXT extends Struct<VkOpaqueC
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to an application-allocated buffer containing opaque capture data retrieved using {@link EXTDescriptorBuffer#vkGetBufferOpaqueCaptureDescriptorDataEXT GetBufferOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetImageOpaqueCaptureDescriptorDataEXT GetImageOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetImageViewOpaqueCaptureDescriptorDataEXT GetImageViewOpaqueCaptureDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetSamplerOpaqueCaptureDescriptorDataEXT GetSamplerOpaqueCaptureDescriptorDataEXT}, or {@link EXTDescriptorBuffer#vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT GetAccelerationStructureOpaqueCaptureDescriptorDataEXT}. */
+    /** @return the value of the {@code opaqueCaptureDescriptorData} field. */
     @NativeType("void const *")
     public long opaqueCaptureDescriptorData() { return nopaqueCaptureDescriptorData(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkOpaqueCaptureDescriptorDataCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkOpaqueCaptureDescriptorDataCreateInfoEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkOpaqueCaptureDescriptorDataCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #opaqueCaptureDescriptorData} field. */
+    /** Sets the specified value to the {@code opaqueCaptureDescriptorData} field. */
     public VkOpaqueCaptureDescriptorDataCreateInfoEXT opaqueCaptureDescriptorData(@NativeType("void const *") long value) { nopaqueCaptureDescriptorData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -311,23 +296,23 @@ public class VkOpaqueCaptureDescriptorDataCreateInfoEXT extends Struct<VkOpaqueC
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkOpaqueCaptureDescriptorDataCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkOpaqueCaptureDescriptorDataCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT#opaqueCaptureDescriptorData} field. */
+        /** @return the value of the {@code opaqueCaptureDescriptorData} field. */
         @NativeType("void const *")
         public long opaqueCaptureDescriptorData() { return VkOpaqueCaptureDescriptorDataCreateInfoEXT.nopaqueCaptureDescriptorData(address()); }
 
-        /** Sets the specified value to the {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkOpaqueCaptureDescriptorDataCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkOpaqueCaptureDescriptorDataCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT} value to the {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkOpaqueCaptureDescriptorDataCreateInfoEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkOpaqueCaptureDescriptorDataCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkOpaqueCaptureDescriptorDataCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpaqueCaptureDescriptorDataCreateInfoEXT#opaqueCaptureDescriptorData} field. */
+        /** Sets the specified value to the {@code opaqueCaptureDescriptorData} field. */
         public VkOpaqueCaptureDescriptorDataCreateInfoEXT.Buffer opaqueCaptureDescriptorData(@NativeType("void const *") long value) { VkOpaqueCaptureDescriptorDataCreateInfoEXT.nopaqueCaptureDescriptorData(address(), value); return this; }
 
     }

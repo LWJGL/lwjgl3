@@ -16,45 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the minimum LOD of an image view.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain includes a {@link VkImageViewMinLodCreateInfoEXT} structure, then that structure includes a parameter specifying a value to clamp the minimum LOD value during <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-image-level-selection">Image Level(s) Selection</a>, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-gather">Texel Gathering</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-integer-coordinate-operations">Integer Texel Coordinate Operations</a>.</p>
- * 
- * <p>If the image view contains {@link VkImageViewMinLodCreateInfoEXT} and it is used as part of a sampling operation:</p>
- * 
- * <p><code>minLodFloat<sub>imageView</sub> = minLod</code></p>
- * 
- * <p>otherwise:</p>
- * 
- * <p><code>minLodFloat<sub>imageView</sub> = 0.0</code></p>
- * 
- * <p>An integer variant of this parameter is also defined for sampling operations which access integer mipmap levels:</p>
- * 
- * <p><code>minLodInteger<sub>imageView</sub> = ⌊minLodFloat<sub>imageView</sub>⌋</code></p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-minLod">{@code minLod}</a> feature is not enabled, {@code minLod} <b>must</b> be {@code 0.0}</li>
- * <li>{@code minLod} <b>must</b> be less or equal to the index of the last mipmap level accessible to the view</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImageViewMinLod#VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageViewMinLodCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     float {@link #minLod};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     float minLod;
+ * }}</pre>
  */
 public class VkImageViewMinLodCreateInfoEXT extends Struct<VkImageViewMinLodCreateInfoEXT> implements NativeResource {
 
@@ -107,22 +74,22 @@ public class VkImageViewMinLodCreateInfoEXT extends Struct<VkImageViewMinLodCrea
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the value to clamp the minimum LOD accessible by this {@code VkImageView}. */
+    /** @return the value of the {@code minLod} field. */
     public float minLod() { return nminLod(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageViewMinLodCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImageViewMinLod#VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTImageViewMinLod#VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkImageViewMinLodCreateInfoEXT sType$Default() { return sType(EXTImageViewMinLod.VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageViewMinLodCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #minLod} field. */
+    /** Sets the specified value to the {@code minLod} field. */
     public VkImageViewMinLodCreateInfoEXT minLod(float value) { nminLod(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,22 +285,22 @@ public class VkImageViewMinLodCreateInfoEXT extends Struct<VkImageViewMinLodCrea
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageViewMinLodCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageViewMinLodCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkImageViewMinLodCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageViewMinLodCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkImageViewMinLodCreateInfoEXT#minLod} field. */
+        /** @return the value of the {@code minLod} field. */
         public float minLod() { return VkImageViewMinLodCreateInfoEXT.nminLod(address()); }
 
-        /** Sets the specified value to the {@link VkImageViewMinLodCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageViewMinLodCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewMinLodCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImageViewMinLod#VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT} value to the {@link VkImageViewMinLodCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTImageViewMinLod#VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkImageViewMinLodCreateInfoEXT.Buffer sType$Default() { return sType(EXTImageViewMinLod.VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkImageViewMinLodCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageViewMinLodCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageViewMinLodCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewMinLodCreateInfoEXT#minLod} field. */
+        /** Sets the specified value to the {@code minLod} field. */
         public VkImageViewMinLodCreateInfoEXT.Buffer minLod(float value) { VkImageViewMinLodCreateInfoEXT.nminLod(address(), value); return this; }
 
     }

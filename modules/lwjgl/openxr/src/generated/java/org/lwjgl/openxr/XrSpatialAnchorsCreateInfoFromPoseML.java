@@ -17,35 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure used to create a single anchors at a certain pose.
- * 
- * <h5>Description</h5>
- * 
- * <p>Note that {@link MLSpatialAnchors#xrCreateSpatialAnchorsCompleteML CreateSpatialAnchorsCompleteML} <b>must</b> be called with {@link XrCreateSpatialAnchorsCompletionML}{@code ::spaceCount} set to 1 when using {@link XrSpatialAnchorsCreateInfoFromPoseML} to create a spatial anchor.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchors XR_ML_spatial_anchors} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsCreateInfoFromPoseML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link MLSpatialAnchors#xrCreateSpatialAnchorsAsyncML CreateSpatialAnchorsAsyncML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsCreateInfoFromPoseML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #baseSpace};
- *     {@link XrPosef XrPosef} {@link #poseInBaseSpace};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace baseSpace;
+ *     {@link XrPosef XrPosef} poseInBaseSpace;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrSpatialAnchorsCreateInfoFromPoseML extends Struct<XrSpatialAnchorsCreateInfoFromPoseML> implements NativeResource {
 
@@ -104,34 +83,34 @@ public class XrSpatialAnchorsCreateInfoFromPoseML extends Struct<XrSpatialAnchor
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** {@code baseSpace} {@code XrSpace} used to calculate the position of the anchor. */
+    /** @return the value of the {@code baseSpace} field. */
     @NativeType("XrSpace")
     public long baseSpace() { return nbaseSpace(address()); }
-    /** {@link XrPosef} of the anchor to create. */
+    /** @return a {@link XrPosef} view of the {@code poseInBaseSpace} field. */
     public XrPosef poseInBaseSpace() { return nposeInBaseSpace(address()); }
-    /** {@code time} {@code XrTime} to resolve the pose in the base space. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsCreateInfoFromPoseML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML} value to the {@code type} field. */
     public XrSpatialAnchorsCreateInfoFromPoseML type$Default() { return type(MLSpatialAnchors.XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsCreateInfoFromPoseML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #baseSpace} field. */
+    /** Sets the specified value to the {@code baseSpace} field. */
     public XrSpatialAnchorsCreateInfoFromPoseML baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #poseInBaseSpace} field. */
+    /** Copies the specified {@link XrPosef} to the {@code poseInBaseSpace} field. */
     public XrSpatialAnchorsCreateInfoFromPoseML poseInBaseSpace(XrPosef value) { nposeInBaseSpace(address(), value); return this; }
-    /** Passes the {@link #poseInBaseSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code poseInBaseSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpatialAnchorsCreateInfoFromPoseML poseInBaseSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInBaseSpace()); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrSpatialAnchorsCreateInfoFromPoseML time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -358,34 +337,34 @@ public class XrSpatialAnchorsCreateInfoFromPoseML extends Struct<XrSpatialAnchor
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsCreateInfoFromPoseML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsCreateInfoFromPoseML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsCreateInfoFromPoseML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorsCreateInfoFromPoseML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsCreateInfoFromPoseML#baseSpace} field. */
+        /** @return the value of the {@code baseSpace} field. */
         @NativeType("XrSpace")
         public long baseSpace() { return XrSpatialAnchorsCreateInfoFromPoseML.nbaseSpace(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrSpatialAnchorsCreateInfoFromPoseML#poseInBaseSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInBaseSpace} field. */
         public XrPosef poseInBaseSpace() { return XrSpatialAnchorsCreateInfoFromPoseML.nposeInBaseSpace(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsCreateInfoFromPoseML#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrSpatialAnchorsCreateInfoFromPoseML.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsCreateInfoFromPoseML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsCreateInfoFromPoseML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsCreateInfoFromPoseML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML} value to the {@link XrSpatialAnchorsCreateInfoFromPoseML#type} field. */
+        /** Sets the {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML} value to the {@code type} field. */
         public XrSpatialAnchorsCreateInfoFromPoseML.Buffer type$Default() { return type(MLSpatialAnchors.XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsCreateInfoFromPoseML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsCreateInfoFromPoseML.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorsCreateInfoFromPoseML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsCreateInfoFromPoseML#baseSpace} field. */
+        /** Sets the specified value to the {@code baseSpace} field. */
         public XrSpatialAnchorsCreateInfoFromPoseML.Buffer baseSpace(XrSpace value) { XrSpatialAnchorsCreateInfoFromPoseML.nbaseSpace(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrSpatialAnchorsCreateInfoFromPoseML#poseInBaseSpace} field. */
+        /** Copies the specified {@link XrPosef} to the {@code poseInBaseSpace} field. */
         public XrSpatialAnchorsCreateInfoFromPoseML.Buffer poseInBaseSpace(XrPosef value) { XrSpatialAnchorsCreateInfoFromPoseML.nposeInBaseSpace(address(), value); return this; }
-        /** Passes the {@link XrSpatialAnchorsCreateInfoFromPoseML#poseInBaseSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code poseInBaseSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpatialAnchorsCreateInfoFromPoseML.Buffer poseInBaseSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInBaseSpace()); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsCreateInfoFromPoseML#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrSpatialAnchorsCreateInfoFromPoseML.Buffer time(@NativeType("XrTime") long value) { XrSpatialAnchorsCreateInfoFromPoseML.ntime(address(), value); return this; }
 
     }

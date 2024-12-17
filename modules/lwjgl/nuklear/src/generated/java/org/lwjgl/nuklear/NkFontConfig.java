@@ -17,28 +17,26 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_font_config {
- *     {@link NkFontConfig struct nk_font_config} * {@link #next};
- *     void * {@link #ttf_blob};
- *     nk_size {@link #ttf_size};
- *     unsigned char {@link #ttf_data_owned_by_atlas};
- *     unsigned char {@link #merge_mode};
- *     unsigned char {@link #pixel_snap};
- *     unsigned char {@link #oversample_v};
- *     unsigned char {@link #oversample_h};
- *     unsigned char {@link #padding}[3];
- *     float {@link #size};
- *     enum nk_font_coord_type {@link #coord_type};
- *     {@link NkVec2 struct nk_vec2} {@link #spacing};
- *     nk_rune const * {@link #range};
- *     {@link NkBakedFont struct nk_baked_font} * {@link #font};
- *     nk_rune {@link #fallback_glyph};
+ *     {@link NkFontConfig struct nk_font_config} * next;
+ *     void * ttf_blob;
+ *     nk_size ttf_size;
+ *     unsigned char ttf_data_owned_by_atlas;
+ *     unsigned char merge_mode;
+ *     unsigned char pixel_snap;
+ *     unsigned char oversample_v;
+ *     unsigned char oversample_h;
+ *     unsigned char padding[3];
+ *     float size;
+ *     enum nk_font_coord_type coord_type;
+ *     {@link NkVec2 struct nk_vec2} spacing;
+ *     nk_rune const * range;
+ *     {@link NkBakedFont struct nk_baked_font} * font;
+ *     nk_rune fallback_glyph;
  *     {@link NkFontConfig struct nk_font_config} * n;
  *     {@link NkFontConfig struct nk_font_config} * p;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_font_config")
 public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource {
@@ -134,55 +132,51 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** NOTE: only used internally */
+    /** @return a {@link NkFontConfig} view of the struct pointed to by the {@code next} field. */
     @NativeType("struct nk_font_config *")
     public @Nullable NkFontConfig next() { return nnext(address()); }
-    /** pointer to loaded TTF file memory block */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code ttf_blob} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer ttf_blob() { return nttf_blob(address()); }
-    /** size of the loaded TTF file memory block */
+    /** @return the value of the {@code ttf_size} field. */
     @NativeType("nk_size")
     public long ttf_size() { return nttf_size(address()); }
-    /** used inside font atlas: default to: 0 */
+    /** @return the value of the {@code ttf_data_owned_by_atlas} field. */
     @NativeType("unsigned char")
     public boolean ttf_data_owned_by_atlas() { return nttf_data_owned_by_atlas(address()); }
-    /** merges this font into the last font */
+    /** @return the value of the {@code merge_mode} field. */
     @NativeType("unsigned char")
     public boolean merge_mode() { return nmerge_mode(address()); }
-    /** align every character to pixel boundary (if true set oversample (1,1)) */
+    /** @return the value of the {@code pixel_snap} field. */
     @NativeType("unsigned char")
     public boolean pixel_snap() { return npixel_snap(address()); }
-    /** rasterize at high quality for sub-pixel position */
+    /** @return the value of the {@code oversample_v} field. */
     @NativeType("unsigned char")
     public boolean oversample_v() { return noversample_v(address()); }
-    /** rasterize at high quality for sub-pixel position */
+    /** @return the value of the {@code oversample_h} field. */
     @NativeType("unsigned char")
     public boolean oversample_h() { return noversample_h(address()); }
-    /** rasterize at high quality for sub-pixel position */
+    /** @return a {@link ByteBuffer} view of the {@code padding} field. */
     @NativeType("unsigned char[3]")
     public ByteBuffer padding() { return npadding(address()); }
-    /** rasterize at high quality for sub-pixel position */
+    /** @return the value at the specified index of the {@code padding} field. */
     @NativeType("unsigned char")
     public byte padding(int index) { return npadding(address(), index); }
-    /** baked pixel height of the font */
+    /** @return the value of the {@code size} field. */
     public float size() { return nsize(address()); }
-    /** texture coordinate format with either pixel or UV coordinates */
+    /** @return the value of the {@code coord_type} field. */
     @NativeType("enum nk_font_coord_type")
     public int coord_type() { return ncoord_type(address()); }
-    /** extra pixel spacing between glyphs */
+    /** @return a {@link NkVec2} view of the {@code spacing} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 spacing() { return nspacing(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return list of unicode ranges (2 values per range, zero terminated)
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code range} field. */
     @NativeType("nk_rune const *")
     public @Nullable IntBuffer range(int capacity) { return nrange(address(), capacity); }
-    /** font to setup in the baking process */
+    /** @return a {@link NkBakedFont} view of the struct pointed to by the {@code font} field. */
     @NativeType("struct nk_baked_font *")
     public @Nullable NkBakedFont font() { return nfont(address()); }
-    /** fallback glyph to use if a given rune is not found */
+    /** @return the value of the {@code fallback_glyph} field. */
     @NativeType("nk_rune")
     public int fallback_glyph() { return nfallback_glyph(address()); }
     /** @return a {@link NkFontConfig} view of the struct pointed to by the {@code n} field. */
@@ -192,39 +186,39 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
     @NativeType("struct nk_font_config *")
     public @Nullable NkFontConfig p() { return np(address()); }
 
-    /** Sets the address of the specified {@link NkFontConfig} to the {@link #next} field. */
+    /** Sets the address of the specified {@link NkFontConfig} to the {@code next} field. */
     public NkFontConfig next(@Nullable @NativeType("struct nk_font_config *") NkFontConfig value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #ttf_blob} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code ttf_blob} field. */
     public NkFontConfig ttf_blob(@Nullable @NativeType("void *") ByteBuffer value) { nttf_blob(address(), value); return this; }
-    /** Sets the specified value to the {@link #ttf_size} field. */
+    /** Sets the specified value to the {@code ttf_size} field. */
     public NkFontConfig ttf_size(@NativeType("nk_size") long value) { nttf_size(address(), value); return this; }
-    /** Sets the specified value to the {@link #ttf_data_owned_by_atlas} field. */
+    /** Sets the specified value to the {@code ttf_data_owned_by_atlas} field. */
     public NkFontConfig ttf_data_owned_by_atlas(@NativeType("unsigned char") boolean value) { nttf_data_owned_by_atlas(address(), value); return this; }
-    /** Sets the specified value to the {@link #merge_mode} field. */
+    /** Sets the specified value to the {@code merge_mode} field. */
     public NkFontConfig merge_mode(@NativeType("unsigned char") boolean value) { nmerge_mode(address(), value); return this; }
-    /** Sets the specified value to the {@link #pixel_snap} field. */
+    /** Sets the specified value to the {@code pixel_snap} field. */
     public NkFontConfig pixel_snap(@NativeType("unsigned char") boolean value) { npixel_snap(address(), value); return this; }
-    /** Sets the specified value to the {@link #oversample_v} field. */
+    /** Sets the specified value to the {@code oversample_v} field. */
     public NkFontConfig oversample_v(@NativeType("unsigned char") boolean value) { noversample_v(address(), value); return this; }
-    /** Sets the specified value to the {@link #oversample_h} field. */
+    /** Sets the specified value to the {@code oversample_h} field. */
     public NkFontConfig oversample_h(@NativeType("unsigned char") boolean value) { noversample_h(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #padding} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code padding} field. */
     public NkFontConfig padding(@NativeType("unsigned char[3]") ByteBuffer value) { npadding(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #padding} field. */
+    /** Sets the specified value at the specified index of the {@code padding} field. */
     public NkFontConfig padding(int index, @NativeType("unsigned char") byte value) { npadding(address(), index, value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public NkFontConfig size(float value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@link #coord_type} field. */
+    /** Sets the specified value to the {@code coord_type} field. */
     public NkFontConfig coord_type(@NativeType("enum nk_font_coord_type") int value) { ncoord_type(address(), value); return this; }
-    /** Copies the specified {@link NkVec2} to the {@link #spacing} field. */
+    /** Copies the specified {@link NkVec2} to the {@code spacing} field. */
     public NkFontConfig spacing(@NativeType("struct nk_vec2") NkVec2 value) { nspacing(address(), value); return this; }
-    /** Passes the {@link #spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkFontConfig spacing(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(spacing()); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #range} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code range} field. */
     public NkFontConfig range(@Nullable @NativeType("nk_rune const *") IntBuffer value) { nrange(address(), value); return this; }
-    /** Sets the address of the specified {@link NkBakedFont} to the {@link #font} field. */
+    /** Sets the address of the specified {@link NkBakedFont} to the {@code font} field. */
     public NkFontConfig font(@Nullable @NativeType("struct nk_baked_font *") NkBakedFont value) { nfont(address(), value); return this; }
-    /** Sets the specified value to the {@link #fallback_glyph} field. */
+    /** Sets the specified value to the {@code fallback_glyph} field. */
     public NkFontConfig fallback_glyph(@NativeType("nk_rune") int value) { nfallback_glyph(address(), value); return this; }
     /** Sets the address of the specified {@link NkFontConfig} to the {@code n} field. */
     public NkFontConfig n(@Nullable @NativeType("struct nk_font_config *") NkFontConfig value) { nn(address(), value); return this; }
@@ -519,55 +513,51 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link NkFontConfig} view of the struct pointed to by the {@link NkFontConfig#next} field. */
+        /** @return a {@link NkFontConfig} view of the struct pointed to by the {@code next} field. */
         @NativeType("struct nk_font_config *")
         public @Nullable NkFontConfig next() { return NkFontConfig.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link NkFontConfig#ttf_blob} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code ttf_blob} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer ttf_blob() { return NkFontConfig.nttf_blob(address()); }
-        /** @return the value of the {@link NkFontConfig#ttf_size} field. */
+        /** @return the value of the {@code ttf_size} field. */
         @NativeType("nk_size")
         public long ttf_size() { return NkFontConfig.nttf_size(address()); }
-        /** @return the value of the {@link NkFontConfig#ttf_data_owned_by_atlas} field. */
+        /** @return the value of the {@code ttf_data_owned_by_atlas} field. */
         @NativeType("unsigned char")
         public boolean ttf_data_owned_by_atlas() { return NkFontConfig.nttf_data_owned_by_atlas(address()); }
-        /** @return the value of the {@link NkFontConfig#merge_mode} field. */
+        /** @return the value of the {@code merge_mode} field. */
         @NativeType("unsigned char")
         public boolean merge_mode() { return NkFontConfig.nmerge_mode(address()); }
-        /** @return the value of the {@link NkFontConfig#pixel_snap} field. */
+        /** @return the value of the {@code pixel_snap} field. */
         @NativeType("unsigned char")
         public boolean pixel_snap() { return NkFontConfig.npixel_snap(address()); }
-        /** @return the value of the {@link NkFontConfig#oversample_v} field. */
+        /** @return the value of the {@code oversample_v} field. */
         @NativeType("unsigned char")
         public boolean oversample_v() { return NkFontConfig.noversample_v(address()); }
-        /** @return the value of the {@link NkFontConfig#oversample_h} field. */
+        /** @return the value of the {@code oversample_h} field. */
         @NativeType("unsigned char")
         public boolean oversample_h() { return NkFontConfig.noversample_h(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link NkFontConfig#padding} field. */
+        /** @return a {@link ByteBuffer} view of the {@code padding} field. */
         @NativeType("unsigned char[3]")
         public ByteBuffer padding() { return NkFontConfig.npadding(address()); }
-        /** @return the value at the specified index of the {@link NkFontConfig#padding} field. */
+        /** @return the value at the specified index of the {@code padding} field. */
         @NativeType("unsigned char")
         public byte padding(int index) { return NkFontConfig.npadding(address(), index); }
-        /** @return the value of the {@link NkFontConfig#size} field. */
+        /** @return the value of the {@code size} field. */
         public float size() { return NkFontConfig.nsize(address()); }
-        /** @return the value of the {@link NkFontConfig#coord_type} field. */
+        /** @return the value of the {@code coord_type} field. */
         @NativeType("enum nk_font_coord_type")
         public int coord_type() { return NkFontConfig.ncoord_type(address()); }
-        /** @return a {@link NkVec2} view of the {@link NkFontConfig#spacing} field. */
+        /** @return a {@link NkVec2} view of the {@code spacing} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 spacing() { return NkFontConfig.nspacing(address()); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@link NkFontConfig#range} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code range} field. */
         @NativeType("nk_rune const *")
         public @Nullable IntBuffer range(int capacity) { return NkFontConfig.nrange(address(), capacity); }
-        /** @return a {@link NkBakedFont} view of the struct pointed to by the {@link NkFontConfig#font} field. */
+        /** @return a {@link NkBakedFont} view of the struct pointed to by the {@code font} field. */
         @NativeType("struct nk_baked_font *")
         public @Nullable NkBakedFont font() { return NkFontConfig.nfont(address()); }
-        /** @return the value of the {@link NkFontConfig#fallback_glyph} field. */
+        /** @return the value of the {@code fallback_glyph} field. */
         @NativeType("nk_rune")
         public int fallback_glyph() { return NkFontConfig.nfallback_glyph(address()); }
         /** @return a {@link NkFontConfig} view of the struct pointed to by the {@code n} field. */
@@ -577,39 +567,39 @@ public class NkFontConfig extends Struct<NkFontConfig> implements NativeResource
         @NativeType("struct nk_font_config *")
         public @Nullable NkFontConfig p() { return NkFontConfig.np(address()); }
 
-        /** Sets the address of the specified {@link NkFontConfig} to the {@link NkFontConfig#next} field. */
+        /** Sets the address of the specified {@link NkFontConfig} to the {@code next} field. */
         public NkFontConfig.Buffer next(@Nullable @NativeType("struct nk_font_config *") NkFontConfig value) { NkFontConfig.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link NkFontConfig#ttf_blob} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code ttf_blob} field. */
         public NkFontConfig.Buffer ttf_blob(@Nullable @NativeType("void *") ByteBuffer value) { NkFontConfig.nttf_blob(address(), value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#ttf_size} field. */
+        /** Sets the specified value to the {@code ttf_size} field. */
         public NkFontConfig.Buffer ttf_size(@NativeType("nk_size") long value) { NkFontConfig.nttf_size(address(), value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#ttf_data_owned_by_atlas} field. */
+        /** Sets the specified value to the {@code ttf_data_owned_by_atlas} field. */
         public NkFontConfig.Buffer ttf_data_owned_by_atlas(@NativeType("unsigned char") boolean value) { NkFontConfig.nttf_data_owned_by_atlas(address(), value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#merge_mode} field. */
+        /** Sets the specified value to the {@code merge_mode} field. */
         public NkFontConfig.Buffer merge_mode(@NativeType("unsigned char") boolean value) { NkFontConfig.nmerge_mode(address(), value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#pixel_snap} field. */
+        /** Sets the specified value to the {@code pixel_snap} field. */
         public NkFontConfig.Buffer pixel_snap(@NativeType("unsigned char") boolean value) { NkFontConfig.npixel_snap(address(), value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#oversample_v} field. */
+        /** Sets the specified value to the {@code oversample_v} field. */
         public NkFontConfig.Buffer oversample_v(@NativeType("unsigned char") boolean value) { NkFontConfig.noversample_v(address(), value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#oversample_h} field. */
+        /** Sets the specified value to the {@code oversample_h} field. */
         public NkFontConfig.Buffer oversample_h(@NativeType("unsigned char") boolean value) { NkFontConfig.noversample_h(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link NkFontConfig#padding} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code padding} field. */
         public NkFontConfig.Buffer padding(@NativeType("unsigned char[3]") ByteBuffer value) { NkFontConfig.npadding(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link NkFontConfig#padding} field. */
+        /** Sets the specified value at the specified index of the {@code padding} field. */
         public NkFontConfig.Buffer padding(int index, @NativeType("unsigned char") byte value) { NkFontConfig.npadding(address(), index, value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public NkFontConfig.Buffer size(float value) { NkFontConfig.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#coord_type} field. */
+        /** Sets the specified value to the {@code coord_type} field. */
         public NkFontConfig.Buffer coord_type(@NativeType("enum nk_font_coord_type") int value) { NkFontConfig.ncoord_type(address(), value); return this; }
-        /** Copies the specified {@link NkVec2} to the {@link NkFontConfig#spacing} field. */
+        /** Copies the specified {@link NkVec2} to the {@code spacing} field. */
         public NkFontConfig.Buffer spacing(@NativeType("struct nk_vec2") NkVec2 value) { NkFontConfig.nspacing(address(), value); return this; }
-        /** Passes the {@link NkFontConfig#spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code spacing} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkFontConfig.Buffer spacing(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(spacing()); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link NkFontConfig#range} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code range} field. */
         public NkFontConfig.Buffer range(@Nullable @NativeType("nk_rune const *") IntBuffer value) { NkFontConfig.nrange(address(), value); return this; }
-        /** Sets the address of the specified {@link NkBakedFont} to the {@link NkFontConfig#font} field. */
+        /** Sets the address of the specified {@link NkBakedFont} to the {@code font} field. */
         public NkFontConfig.Buffer font(@Nullable @NativeType("struct nk_baked_font *") NkBakedFont value) { NkFontConfig.nfont(address(), value); return this; }
-        /** Sets the specified value to the {@link NkFontConfig#fallback_glyph} field. */
+        /** Sets the specified value to the {@code fallback_glyph} field. */
         public NkFontConfig.Buffer fallback_glyph(@NativeType("nk_rune") int value) { NkFontConfig.nfallback_glyph(address(), value); return this; }
         /** Sets the address of the specified {@link NkFontConfig} to the {@code n} field. */
         public NkFontConfig.Buffer n(@Nullable @NativeType("struct nk_font_config *") NkFontConfig value) { NkFontConfig.nn(address(), value); return this; }

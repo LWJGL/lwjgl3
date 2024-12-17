@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSubpassDescriptionDepthStencilResolve}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubpassDescriptionDepthStencilResolveKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkResolveModeFlagBits depthResolveMode;
  *     VkResolveModeFlagBits stencilResolveMode;
  *     {@link VkAttachmentReference2 VkAttachmentReference2} const * pDepthStencilResolveAttachment;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSubpassDescriptionDepthStencilResolveKHR extends VkSubpassDescriptionDepthStencilResolve {
 

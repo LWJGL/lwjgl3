@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying sampler cubic weights.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkSamplerCreateInfo} includes a {@link VkSamplerCubicWeightsCreateInfoQCOM} structure, then that structure specifies which cubic weights are used.</p>
- * 
- * <p>If that structure is not present, {@code cubicWeights} is considered to be {@link QCOMFilterCubicWeights#VK_CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link QCOMFilterCubicWeights#VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM}</li>
- * <li>{@code cubicWeights} <b>must</b> be a valid {@code VkCubicFilterWeightsQCOM} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerCubicWeightsCreateInfoQCOM {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkCubicFilterWeightsQCOM {@link #cubicWeights};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkCubicFilterWeightsQCOM cubicWeights;
+ * }}</pre>
  */
 public class VkSamplerCubicWeightsCreateInfoQCOM extends Struct<VkSamplerCubicWeightsCreateInfoQCOM> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class VkSamplerCubicWeightsCreateInfoQCOM extends Struct<VkSamplerCubicWe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkCubicFilterWeightsQCOM} value controlling which cubic weights are used. */
+    /** @return the value of the {@code cubicWeights} field. */
     @NativeType("VkCubicFilterWeightsQCOM")
     public int cubicWeights() { return ncubicWeights(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSamplerCubicWeightsCreateInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link QCOMFilterCubicWeights#VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM} value to the {@link #sType} field. */
+    /** Sets the {@link QCOMFilterCubicWeights#VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM} value to the {@code sType} field. */
     public VkSamplerCubicWeightsCreateInfoQCOM sType$Default() { return sType(QCOMFilterCubicWeights.VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerCubicWeightsCreateInfoQCOM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #cubicWeights} field. */
+    /** Sets the specified value to the {@code cubicWeights} field. */
     public VkSamplerCubicWeightsCreateInfoQCOM cubicWeights(@NativeType("VkCubicFilterWeightsQCOM") int value) { ncubicWeights(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,23 +286,23 @@ public class VkSamplerCubicWeightsCreateInfoQCOM extends Struct<VkSamplerCubicWe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSamplerCubicWeightsCreateInfoQCOM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerCubicWeightsCreateInfoQCOM.nsType(address()); }
-        /** @return the value of the {@link VkSamplerCubicWeightsCreateInfoQCOM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerCubicWeightsCreateInfoQCOM.npNext(address()); }
-        /** @return the value of the {@link VkSamplerCubicWeightsCreateInfoQCOM#cubicWeights} field. */
+        /** @return the value of the {@code cubicWeights} field. */
         @NativeType("VkCubicFilterWeightsQCOM")
         public int cubicWeights() { return VkSamplerCubicWeightsCreateInfoQCOM.ncubicWeights(address()); }
 
-        /** Sets the specified value to the {@link VkSamplerCubicWeightsCreateInfoQCOM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSamplerCubicWeightsCreateInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerCubicWeightsCreateInfoQCOM.nsType(address(), value); return this; }
-        /** Sets the {@link QCOMFilterCubicWeights#VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM} value to the {@link VkSamplerCubicWeightsCreateInfoQCOM#sType} field. */
+        /** Sets the {@link QCOMFilterCubicWeights#VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM} value to the {@code sType} field. */
         public VkSamplerCubicWeightsCreateInfoQCOM.Buffer sType$Default() { return sType(QCOMFilterCubicWeights.VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM); }
-        /** Sets the specified value to the {@link VkSamplerCubicWeightsCreateInfoQCOM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerCubicWeightsCreateInfoQCOM.Buffer pNext(@NativeType("void const *") long value) { VkSamplerCubicWeightsCreateInfoQCOM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSamplerCubicWeightsCreateInfoQCOM#cubicWeights} field. */
+        /** Sets the specified value to the {@code cubicWeights} field. */
         public VkSamplerCubicWeightsCreateInfoQCOM.Buffer cubicWeights(@NativeType("VkCubicFilterWeightsQCOM") int value) { VkSamplerCubicWeightsCreateInfoQCOM.ncubicWeights(address(), value); return this; }
 
     }

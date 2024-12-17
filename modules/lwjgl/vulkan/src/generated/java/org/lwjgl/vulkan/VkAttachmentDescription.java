@@ -16,102 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an attachment description.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the attachment uses a color format, then {@code loadOp} and {@code storeOp} are used, and {@code stencilLoadOp} and {@code stencilStoreOp} are ignored. If the format has depth and/or stencil components, {@code loadOp} and {@code storeOp} apply only to the depth data, while {@code stencilLoadOp} and {@code stencilStoreOp} define how the stencil data is handled. {@code loadOp} and {@code stencilLoadOp} define the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-load-operations">load operations</a> for the attachment. {@code storeOp} and {@code stencilStoreOp} define the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-store-operations">store operations</a> for the attachment. If an attachment is not used by any subpass, {@code loadOp}, {@code storeOp}, {@code stencilStoreOp}, and {@code stencilLoadOp} will be ignored for that attachment, and no load or store ops will be performed. However, any transition specified by {@code initialLayout} and {@code finalLayout} will still be executed.</p>
- * 
- * <p>If {@code flags} includes {@link VK10#VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT}, then the attachment is treated as if it shares physical memory with another attachment in the same render pass. This information limits the ability of the implementation to reorder certain operations (like layout transitions and the {@code loadOp}) such that it is not improperly reordered against other uses of the same physical memory via a different attachment. This is described in more detail below.</p>
- * 
- * <p>If a render pass uses multiple attachments that alias the same device memory, those attachments <b>must</b> each include the {@link VK10#VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit in their attachment description flags. Attachments aliasing the same memory occurs in multiple ways:</p>
- * 
- * <ul>
- * <li>Multiple attachments being assigned the same image view as part of framebuffer creation.</li>
- * <li>Attachments using distinct image views that correspond to the same image subresource of an image.</li>
- * <li>Attachments using views of distinct image subresources which are bound to overlapping memory ranges.</li>
- * </ul>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Render passes <b>must</b> include subpass dependencies (either directly or via a subpass dependency chain) between any two subpasses that operate on the same attachment or aliasing attachments and those subpass dependencies <b>must</b> include execution and memory dependencies separating uses of the aliases, if at least one of those subpasses writes to one of the aliases. These dependencies <b>must</b> not include the {@link VK10#VK_DEPENDENCY_BY_REGION_BIT DEPENDENCY_BY_REGION_BIT} if the aliases are views of distinct image subresources which overlap in memory.</p>
- * </div>
- * 
- * <p>Multiple attachments that alias the same memory <b>must</b> not be used in a single subpass. A given attachment index <b>must</b> not be used multiple times in a single subpass, with one exception: two subpass attachments <b>can</b> use the same attachment index if at least one use is as an input attachment and neither use is as a resolve or preserve attachment. In other words, the same view <b>can</b> be used simultaneously as an input and color or depth/stencil attachment, but <b>must</b> not be used as multiple color or depth/stencil attachments nor as resolve or preserve attachments.</p>
- * 
- * <p>If a set of attachments alias each other, then all except the first to be used in the render pass <b>must</b> use an {@code initialLayout} of {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED}, since the earlier uses of the other aliases make their contents undefined. Once an alias has been used and a different alias has been used after it, the first alias <b>must</b> not be used in any later subpasses. However, an application <b>can</b> assign the same image view to multiple aliasing attachment indices, which allows that image view to be used multiple times even if other aliases are used in between.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Once an attachment needs the {@link VK10#VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT} bit, there <b>should</b> be no additional cost of introducing additional aliases, and using these additional aliases <b>may</b> allow more efficient clearing of the attachments on multiple uses via {@link VK10#VK_ATTACHMENT_LOAD_OP_CLEAR ATTACHMENT_LOAD_OP_CLEAR}.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code format} includes a color or depth component and {@code loadOp} is {@link VK10#VK_ATTACHMENT_LOAD_OP_LOAD ATTACHMENT_LOAD_OP_LOAD}, then {@code initialLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED}</li>
- * <li>{@code finalLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED} or {@link VK10#VK_IMAGE_LAYOUT_PREINITIALIZED IMAGE_LAYOUT_PREINITIALIZED}</li>
- * <li>If {@code format} is a color format, {@code initialLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL} or {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format, {@code initialLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL}</li>
- * <li>If {@code format} is a color format, {@code finalLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL} or {@link VK10#VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format, {@code finalLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL}</li>
- * <li>If {@code format} is a color format, {@code initialLayout} <b>must</b> not be {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL} or {@link VK11#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL}</li>
- * <li>If {@code format} is a color format, {@code finalLayout} <b>must</b> not be {@link VK11#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL} or {@link VK11#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is not enabled, {@code initialLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL},</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-separateDepthStencilLayouts">{@code separateDepthStencilLayouts}</a> feature is not enabled, {@code finalLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL},</li>
- * <li>If {@code format} is a color format, {@code initialLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a color format, {@code finalLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}, {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL}, or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format which includes both depth and stencil components, {@code initialLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format which includes both depth and stencil components, {@code finalLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format which includes only the depth component, {@code initialLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format which includes only the depth component, {@code finalLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, {@code initialLayout} <b>must</b> not be {@link KHRSynchronization2#VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR} or {@link KHRSynchronization2#VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, {@code finalLayout} <b>must</b> not be {@link KHRSynchronization2#VK_IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR} or {@link KHRSynchronization2#VK_IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFeedbackLoopLayout">{@code attachmentFeedbackLoopLayout}</a> feature is not enabled, {@code initialLayout} <b>must</b> not be {@link EXTAttachmentFeedbackLoopLayout#VK_IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFeedbackLoopLayout">{@code attachmentFeedbackLoopLayout}</a> feature is not enabled, {@code finalLayout} <b>must</b> not be {@link EXTAttachmentFeedbackLoopLayout#VK_IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT IMAGE_LAYOUT_ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT}</li>
- * <li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value that is set in {@code imageCreateSampleCounts} (as defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-creation-limits">Image Creation Limits</a>) for the given {@code format}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, {@code initialLayout} <b>must</b> not be {@link VK14#VK_IMAGE_LAYOUT_RENDERING_LOCAL_READ IMAGE_LAYOUT_RENDERING_LOCAL_READ}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, {@code finalLayout} <b>must</b> not be {@link VK14#VK_IMAGE_LAYOUT_RENDERING_LOCAL_READ IMAGE_LAYOUT_RENDERING_LOCAL_READ}</li>
- * <li>{@code format} <b>must</b> not be VK_FORMAT_UNDEFINED</li>
- * <li>If {@code format} includes a stencil component and {@code stencilLoadOp} is {@link VK10#VK_ATTACHMENT_LOAD_OP_LOAD ATTACHMENT_LOAD_OP_LOAD}, then {@code initialLayout} <b>must</b> not be {@link VK10#VK_IMAGE_LAYOUT_UNDEFINED IMAGE_LAYOUT_UNDEFINED}</li>
- * <li>If {@code format} is a depth/stencil format which includes only the stencil component, {@code initialLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format which includes only the stencil component, {@code finalLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format which includes both depth and stencil components, {@code initialLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}</li>
- * <li>If {@code format} is a depth/stencil format which includes both depth and stencil components, {@code finalLayout} <b>must</b> not be {@link VK12#VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL} or {@link VK12#VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkAttachmentDescriptionFlagBits} values</li>
- * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
- * <li>{@code loadOp} <b>must</b> be a valid {@code VkAttachmentLoadOp} value</li>
- * <li>{@code storeOp} <b>must</b> be a valid {@code VkAttachmentStoreOp} value</li>
- * <li>{@code stencilLoadOp} <b>must</b> be a valid {@code VkAttachmentLoadOp} value</li>
- * <li>{@code stencilStoreOp} <b>must</b> be a valid {@code VkAttachmentStoreOp} value</li>
- * <li>{@code initialLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code finalLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRenderPassCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAttachmentDescription {
- *     VkAttachmentDescriptionFlags {@link #flags};
- *     VkFormat {@link #format};
- *     VkSampleCountFlagBits {@link #samples};
- *     VkAttachmentLoadOp {@link #loadOp};
- *     VkAttachmentStoreOp {@link #storeOp};
- *     VkAttachmentLoadOp {@link #stencilLoadOp};
- *     VkAttachmentStoreOp {@link #stencilStoreOp};
- *     VkImageLayout {@link #initialLayout};
- *     VkImageLayout {@link #finalLayout};
- * }</code></pre>
+ *     VkAttachmentDescriptionFlags flags;
+ *     VkFormat format;
+ *     VkSampleCountFlagBits samples;
+ *     VkAttachmentLoadOp loadOp;
+ *     VkAttachmentStoreOp storeOp;
+ *     VkAttachmentLoadOp stencilLoadOp;
+ *     VkAttachmentStoreOp stencilStoreOp;
+ *     VkImageLayout initialLayout;
+ *     VkImageLayout finalLayout;
+ * }}</pre>
  */
 public class VkAttachmentDescription extends Struct<VkAttachmentDescription> implements NativeResource {
 
@@ -182,51 +98,51 @@ public class VkAttachmentDescription extends Struct<VkAttachmentDescription> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a bitmask of {@code VkAttachmentDescriptionFlagBits} specifying additional properties of the attachment. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkAttachmentDescriptionFlags")
     public int flags() { return nflags(address()); }
-    /** a {@code VkFormat} value specifying the format of the image view that will be used for the attachment. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** a {@code VkSampleCountFlagBits} value specifying the number of samples of the image. */
+    /** @return the value of the {@code samples} field. */
     @NativeType("VkSampleCountFlagBits")
     public int samples() { return nsamples(address()); }
-    /** a {@code VkAttachmentLoadOp} value specifying how the contents of color and depth components of the attachment are treated at the beginning of the subpass where it is first used. */
+    /** @return the value of the {@code loadOp} field. */
     @NativeType("VkAttachmentLoadOp")
     public int loadOp() { return nloadOp(address()); }
-    /** a {@code VkAttachmentStoreOp} value specifying how the contents of color and depth components of the attachment are treated at the end of the subpass where it is last used. */
+    /** @return the value of the {@code storeOp} field. */
     @NativeType("VkAttachmentStoreOp")
     public int storeOp() { return nstoreOp(address()); }
-    /** a {@code VkAttachmentLoadOp} value specifying how the contents of stencil components of the attachment are treated at the beginning of the subpass where it is first used. */
+    /** @return the value of the {@code stencilLoadOp} field. */
     @NativeType("VkAttachmentLoadOp")
     public int stencilLoadOp() { return nstencilLoadOp(address()); }
-    /** a {@code VkAttachmentStoreOp} value specifying how the contents of stencil components of the attachment are treated at the end of the last subpass where it is used. */
+    /** @return the value of the {@code stencilStoreOp} field. */
     @NativeType("VkAttachmentStoreOp")
     public int stencilStoreOp() { return nstencilStoreOp(address()); }
-    /** the layout the attachment image subresource will be in when a render pass instance begins. */
+    /** @return the value of the {@code initialLayout} field. */
     @NativeType("VkImageLayout")
     public int initialLayout() { return ninitialLayout(address()); }
-    /** the layout the attachment image subresource will be transitioned to when a render pass instance ends. */
+    /** @return the value of the {@code finalLayout} field. */
     @NativeType("VkImageLayout")
     public int finalLayout() { return nfinalLayout(address()); }
 
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkAttachmentDescription flags(@NativeType("VkAttachmentDescriptionFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkAttachmentDescription format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@link #samples} field. */
+    /** Sets the specified value to the {@code samples} field. */
     public VkAttachmentDescription samples(@NativeType("VkSampleCountFlagBits") int value) { nsamples(address(), value); return this; }
-    /** Sets the specified value to the {@link #loadOp} field. */
+    /** Sets the specified value to the {@code loadOp} field. */
     public VkAttachmentDescription loadOp(@NativeType("VkAttachmentLoadOp") int value) { nloadOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #storeOp} field. */
+    /** Sets the specified value to the {@code storeOp} field. */
     public VkAttachmentDescription storeOp(@NativeType("VkAttachmentStoreOp") int value) { nstoreOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #stencilLoadOp} field. */
+    /** Sets the specified value to the {@code stencilLoadOp} field. */
     public VkAttachmentDescription stencilLoadOp(@NativeType("VkAttachmentLoadOp") int value) { nstencilLoadOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #stencilStoreOp} field. */
+    /** Sets the specified value to the {@code stencilStoreOp} field. */
     public VkAttachmentDescription stencilStoreOp(@NativeType("VkAttachmentStoreOp") int value) { nstencilStoreOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #initialLayout} field. */
+    /** Sets the specified value to the {@code initialLayout} field. */
     public VkAttachmentDescription initialLayout(@NativeType("VkImageLayout") int value) { ninitialLayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #finalLayout} field. */
+    /** Sets the specified value to the {@code finalLayout} field. */
     public VkAttachmentDescription finalLayout(@NativeType("VkImageLayout") int value) { nfinalLayout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -477,51 +393,51 @@ public class VkAttachmentDescription extends Struct<VkAttachmentDescription> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAttachmentDescription#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkAttachmentDescriptionFlags")
         public int flags() { return VkAttachmentDescription.nflags(address()); }
-        /** @return the value of the {@link VkAttachmentDescription#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkAttachmentDescription.nformat(address()); }
-        /** @return the value of the {@link VkAttachmentDescription#samples} field. */
+        /** @return the value of the {@code samples} field. */
         @NativeType("VkSampleCountFlagBits")
         public int samples() { return VkAttachmentDescription.nsamples(address()); }
-        /** @return the value of the {@link VkAttachmentDescription#loadOp} field. */
+        /** @return the value of the {@code loadOp} field. */
         @NativeType("VkAttachmentLoadOp")
         public int loadOp() { return VkAttachmentDescription.nloadOp(address()); }
-        /** @return the value of the {@link VkAttachmentDescription#storeOp} field. */
+        /** @return the value of the {@code storeOp} field. */
         @NativeType("VkAttachmentStoreOp")
         public int storeOp() { return VkAttachmentDescription.nstoreOp(address()); }
-        /** @return the value of the {@link VkAttachmentDescription#stencilLoadOp} field. */
+        /** @return the value of the {@code stencilLoadOp} field. */
         @NativeType("VkAttachmentLoadOp")
         public int stencilLoadOp() { return VkAttachmentDescription.nstencilLoadOp(address()); }
-        /** @return the value of the {@link VkAttachmentDescription#stencilStoreOp} field. */
+        /** @return the value of the {@code stencilStoreOp} field. */
         @NativeType("VkAttachmentStoreOp")
         public int stencilStoreOp() { return VkAttachmentDescription.nstencilStoreOp(address()); }
-        /** @return the value of the {@link VkAttachmentDescription#initialLayout} field. */
+        /** @return the value of the {@code initialLayout} field. */
         @NativeType("VkImageLayout")
         public int initialLayout() { return VkAttachmentDescription.ninitialLayout(address()); }
-        /** @return the value of the {@link VkAttachmentDescription#finalLayout} field. */
+        /** @return the value of the {@code finalLayout} field. */
         @NativeType("VkImageLayout")
         public int finalLayout() { return VkAttachmentDescription.nfinalLayout(address()); }
 
-        /** Sets the specified value to the {@link VkAttachmentDescription#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkAttachmentDescription.Buffer flags(@NativeType("VkAttachmentDescriptionFlags") int value) { VkAttachmentDescription.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAttachmentDescription#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkAttachmentDescription.Buffer format(@NativeType("VkFormat") int value) { VkAttachmentDescription.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAttachmentDescription#samples} field. */
+        /** Sets the specified value to the {@code samples} field. */
         public VkAttachmentDescription.Buffer samples(@NativeType("VkSampleCountFlagBits") int value) { VkAttachmentDescription.nsamples(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAttachmentDescription#loadOp} field. */
+        /** Sets the specified value to the {@code loadOp} field. */
         public VkAttachmentDescription.Buffer loadOp(@NativeType("VkAttachmentLoadOp") int value) { VkAttachmentDescription.nloadOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAttachmentDescription#storeOp} field. */
+        /** Sets the specified value to the {@code storeOp} field. */
         public VkAttachmentDescription.Buffer storeOp(@NativeType("VkAttachmentStoreOp") int value) { VkAttachmentDescription.nstoreOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAttachmentDescription#stencilLoadOp} field. */
+        /** Sets the specified value to the {@code stencilLoadOp} field. */
         public VkAttachmentDescription.Buffer stencilLoadOp(@NativeType("VkAttachmentLoadOp") int value) { VkAttachmentDescription.nstencilLoadOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAttachmentDescription#stencilStoreOp} field. */
+        /** Sets the specified value to the {@code stencilStoreOp} field. */
         public VkAttachmentDescription.Buffer stencilStoreOp(@NativeType("VkAttachmentStoreOp") int value) { VkAttachmentDescription.nstencilStoreOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAttachmentDescription#initialLayout} field. */
+        /** Sets the specified value to the {@code initialLayout} field. */
         public VkAttachmentDescription.Buffer initialLayout(@NativeType("VkImageLayout") int value) { VkAttachmentDescription.ninitialLayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAttachmentDescription#finalLayout} field. */
+        /** Sets the specified value to the {@code finalLayout} field. */
         public VkAttachmentDescription.Buffer finalLayout(@NativeType("VkImageLayout") int value) { VkAttachmentDescription.nfinalLayout(address(), value); return this; }
 
     }

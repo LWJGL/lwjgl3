@@ -17,25 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Stub description of VkCuLaunchInfoNVX.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVXBinaryImport#VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code function} <b>must</b> be a valid {@code VkCuFunctionNVX} handle</li>
- * <li>If {@code paramCount} is not 0, {@code pParams} <b>must</b> be a valid pointer to an array of {@code paramCount} bytes</li>
- * <li>If {@code extraCount} is not 0, {@code pExtras} <b>must</b> be a valid pointer to an array of {@code extraCount} bytes</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVXBinaryImport#vkCmdCuLaunchKernelNVX CmdCuLaunchKernelNVX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCuLaunchInfoNVX {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -51,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void const * const * pParams;
  *     size_t extraCount;
  *     void const * const * pExtras;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkCuLaunchInfoNVX extends Struct<VkCuLaunchInfoNVX> implements NativeResource {
 

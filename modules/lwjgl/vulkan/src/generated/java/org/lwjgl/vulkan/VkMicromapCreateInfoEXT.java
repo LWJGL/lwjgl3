@@ -16,63 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters of a newly created micromap object.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code deviceAddress} is zero, no specific address is requested.</p>
- * 
- * <p>If {@code deviceAddress} is not zero, {@code deviceAddress} <b>must</b> be an address retrieved from an identically created micromap on the same implementation. The micromap <b>must</b> also be placed on an identically created {@code buffer} and at the same {@code offset}.</p>
- * 
- * <p>Applications <b>should</b> avoid creating micromaps with application-provided addresses and implementation-provided addresses in the same process, to reduce the likelihood of {@link KHRBufferDeviceAddress#VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR} errors.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The expected usage for this is that a trace capture/replay tool will add the {@link VK12#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} flag to all buffers that use {@link VK12#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT}, and will add {@link VK12#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT} to all buffers used as storage for a micromap where {@code deviceAddress} is not zero. This also means that the tool will need to add {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT} to memory allocations to allow the flag to be set where the application may not have otherwise required it. During capture the tool will save the queried opaque device addresses in the trace. During replay, the buffers will be created specifying the original address so any address values stored in the trace data will remain valid.</p>
- * 
- * <p>Implementations are expected to separate such buffers in the GPU address space so normal allocations will avoid using these addresses. Applications and tools should avoid mixing application-provided and implementation-provided addresses for buffers created with {@link VK12#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT}, to avoid address space allocation conflicts.</p>
- * </div>
- * 
- * <p>If the micromap will be the target of a build operation, the required size for a micromap <b>can</b> be queried with {@link EXTOpacityMicromap#vkGetMicromapBuildSizesEXT GetMicromapBuildSizesEXT}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code deviceAddress} is not zero, {@code createFlags} <b>must</b> include {@link EXTOpacityMicromap#VK_MICROMAP_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT MICROMAP_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT}</li>
- * <li>If {@code createFlags} includes {@link EXTOpacityMicromap#VK_MICROMAP_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT MICROMAP_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT}, {@link VkPhysicalDeviceOpacityMicromapFeaturesEXT}{@code ::micromapCaptureReplay} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
- * <li>{@code buffer} <b>must</b> have been created with a {@code usage} value containing {@link EXTOpacityMicromap#VK_BUFFER_USAGE_MICROMAP_STORAGE_BIT_EXT BUFFER_USAGE_MICROMAP_STORAGE_BIT_EXT}</li>
- * <li>{@code buffer} <b>must</b> not have been created with {@link VK10#VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT BUFFER_CREATE_SPARSE_RESIDENCY_BIT}</li>
- * <li>The sum of {@code offset} and {@code size} <b>must</b> be less than the size of {@code buffer}</li>
- * <li>{@code offset} <b>must</b> be a multiple of 256 bytes</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code createFlags} <b>must</b> be a valid combination of {@code VkMicromapCreateFlagBitsEXT} values</li>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>{@code type} <b>must</b> be a valid {@code VkMicromapTypeEXT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTOpacityMicromap#vkCreateMicromapEXT CreateMicromapEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMicromapCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkMicromapCreateFlagsEXT {@link #createFlags};
- *     VkBuffer {@link #buffer};
- *     VkDeviceSize {@link #offset};
- *     VkDeviceSize {@link #size};
- *     VkMicromapTypeEXT {@link #type};
- *     VkDeviceAddress {@link #deviceAddress};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkMicromapCreateFlagsEXT createFlags;
+ *     VkBuffer buffer;
+ *     VkDeviceSize offset;
+ *     VkDeviceSize size;
+ *     VkMicromapTypeEXT type;
+ *     VkDeviceAddress deviceAddress;
+ * }}</pre>
  */
 public class VkMicromapCreateInfoEXT extends Struct<VkMicromapCreateInfoEXT> implements NativeResource {
 
@@ -140,48 +94,48 @@ public class VkMicromapCreateInfoEXT extends Struct<VkMicromapCreateInfoEXT> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkMicromapCreateFlagBitsEXT} specifying additional creation parameters of the micromap. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("VkMicromapCreateFlagsEXT")
     public int createFlags() { return ncreateFlags(address()); }
-    /** the buffer on which the micromap will be stored. */
+    /** @return the value of the {@code buffer} field. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** an offset in bytes from the base address of the buffer at which the micromap will be stored, and <b>must</b> be a multiple of 256. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** the size required for the micromap. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** a {@code VkMicromapTypeEXT} value specifying the type of micromap that will be created. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkMicromapTypeEXT")
     public int type() { return ntype(address()); }
-    /** the device address requested for the micromap if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-micromapCaptureReplay">{@code micromapCaptureReplay}</a> feature is being used. */
+    /** @return the value of the {@code deviceAddress} field. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMicromapCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkMicromapCreateInfoEXT sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMicromapCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #createFlags} field. */
+    /** Sets the specified value to the {@code createFlags} field. */
     public VkMicromapCreateInfoEXT createFlags(@NativeType("VkMicromapCreateFlagsEXT") int value) { ncreateFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #buffer} field. */
+    /** Sets the specified value to the {@code buffer} field. */
     public VkMicromapCreateInfoEXT buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkMicromapCreateInfoEXT offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkMicromapCreateInfoEXT size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkMicromapCreateInfoEXT type(@NativeType("VkMicromapTypeEXT") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceAddress} field. */
+    /** Sets the specified value to the {@code deviceAddress} field. */
     public VkMicromapCreateInfoEXT deviceAddress(@NativeType("VkDeviceAddress") long value) { ndeviceAddress(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -407,48 +361,48 @@ public class VkMicromapCreateInfoEXT extends Struct<VkMicromapCreateInfoEXT> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMicromapCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMicromapCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkMicromapCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMicromapCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkMicromapCreateInfoEXT#createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("VkMicromapCreateFlagsEXT")
         public int createFlags() { return VkMicromapCreateInfoEXT.ncreateFlags(address()); }
-        /** @return the value of the {@link VkMicromapCreateInfoEXT#buffer} field. */
+        /** @return the value of the {@code buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkMicromapCreateInfoEXT.nbuffer(address()); }
-        /** @return the value of the {@link VkMicromapCreateInfoEXT#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkMicromapCreateInfoEXT.noffset(address()); }
-        /** @return the value of the {@link VkMicromapCreateInfoEXT#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkMicromapCreateInfoEXT.nsize(address()); }
-        /** @return the value of the {@link VkMicromapCreateInfoEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkMicromapTypeEXT")
         public int type() { return VkMicromapCreateInfoEXT.ntype(address()); }
-        /** @return the value of the {@link VkMicromapCreateInfoEXT#deviceAddress} field. */
+        /** @return the value of the {@code deviceAddress} field. */
         @NativeType("VkDeviceAddress")
         public long deviceAddress() { return VkMicromapCreateInfoEXT.ndeviceAddress(address()); }
 
-        /** Sets the specified value to the {@link VkMicromapCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMicromapCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMicromapCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT} value to the {@link VkMicromapCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkMicromapCreateInfoEXT.Buffer sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkMicromapCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMicromapCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkMicromapCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapCreateInfoEXT#createFlags} field. */
+        /** Sets the specified value to the {@code createFlags} field. */
         public VkMicromapCreateInfoEXT.Buffer createFlags(@NativeType("VkMicromapCreateFlagsEXT") int value) { VkMicromapCreateInfoEXT.ncreateFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapCreateInfoEXT#buffer} field. */
+        /** Sets the specified value to the {@code buffer} field. */
         public VkMicromapCreateInfoEXT.Buffer buffer(@NativeType("VkBuffer") long value) { VkMicromapCreateInfoEXT.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapCreateInfoEXT#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkMicromapCreateInfoEXT.Buffer offset(@NativeType("VkDeviceSize") long value) { VkMicromapCreateInfoEXT.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapCreateInfoEXT#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkMicromapCreateInfoEXT.Buffer size(@NativeType("VkDeviceSize") long value) { VkMicromapCreateInfoEXT.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapCreateInfoEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkMicromapCreateInfoEXT.Buffer type(@NativeType("VkMicromapTypeEXT") int value) { VkMicromapCreateInfoEXT.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapCreateInfoEXT#deviceAddress} field. */
+        /** Sets the specified value to the {@code deviceAddress} field. */
         public VkMicromapCreateInfoEXT.Buffer deviceAddress(@NativeType("VkDeviceAddress") long value) { VkMicromapCreateInfoEXT.ndeviceAddress(address(), value); return this; }
 
     }

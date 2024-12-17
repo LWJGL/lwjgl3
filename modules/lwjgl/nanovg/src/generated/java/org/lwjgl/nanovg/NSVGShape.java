@@ -15,30 +15,28 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct NSVGshape {
- *     char {@link #id}[64];
- *     {@link NSVGPaint NSVGpaint} {@link #fill};
- *     {@link NSVGPaint NSVGpaint} {@link #stroke};
- *     float {@link #opacity};
- *     float {@link #strokeWidth};
- *     float {@link #strokeDashOffset};
- *     float {@link #strokeDashArray}[8];
- *     char {@link #strokeDashCount};
- *     char {@link #strokeLineJoin};
- *     char {@link #strokeLineCap};
- *     float {@link #miterLimit};
- *     char {@link #fillRule};
- *     unsigned char {@link #flags};
- *     float {@link #bounds}[4];
- *     char {@link #fillGradient}[64];
- *     char {@link #strokeGradient}[64];
- *     float {@link #xform}[6];
- *     {@link NSVGPath NSVGpath} * {@link #paths};
- *     {@link NSVGShape NSVGshape} * {@link #next};
- * }</code></pre>
+ *     char id[64];
+ *     {@link NSVGPaint NSVGpaint} fill;
+ *     {@link NSVGPaint NSVGpaint} stroke;
+ *     float opacity;
+ *     float strokeWidth;
+ *     float strokeDashOffset;
+ *     float strokeDashArray[8];
+ *     char strokeDashCount;
+ *     char strokeLineJoin;
+ *     char strokeLineCap;
+ *     float miterLimit;
+ *     char fillRule;
+ *     unsigned char flags;
+ *     float bounds[4];
+ *     char fillGradient[64];
+ *     char strokeGradient[64];
+ *     float xform[6];
+ *     {@link NSVGPath NSVGpath} * paths;
+ *     {@link NSVGShape NSVGshape} * next;
+ * }}</pre>
  */
 @NativeType("struct NSVGshape")
 public class NSVGShape extends Struct<NSVGShape> {
@@ -140,72 +138,72 @@ public class NSVGShape extends Struct<NSVGShape> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** optional 'id' attr of the shape or its group */
+    /** @return a {@link ByteBuffer} view of the {@code id} field. */
     @NativeType("char[64]")
     public ByteBuffer id() { return nid(address()); }
-    /** optional 'id' attr of the shape or its group */
+    /** @return the null-terminated string stored in the {@code id} field. */
     @NativeType("char[64]")
     public String idString() { return nidString(address()); }
-    /** fill paint */
+    /** @return a {@link NSVGPaint} view of the {@code fill} field. */
     @NativeType("NSVGpaint")
     public NSVGPaint fill() { return nfill(address()); }
-    /** stroke paint */
+    /** @return a {@link NSVGPaint} view of the {@code stroke} field. */
     @NativeType("NSVGpaint")
     public NSVGPaint stroke() { return nstroke(address()); }
-    /** opacity of the shape */
+    /** @return the value of the {@code opacity} field. */
     public float opacity() { return nopacity(address()); }
-    /** stroke width (scaled) */
+    /** @return the value of the {@code strokeWidth} field. */
     public float strokeWidth() { return nstrokeWidth(address()); }
-    /** stroke dash offset (scaled) */
+    /** @return the value of the {@code strokeDashOffset} field. */
     public float strokeDashOffset() { return nstrokeDashOffset(address()); }
-    /** stroke dash array (scaled) */
+    /** @return a {@link FloatBuffer} view of the {@code strokeDashArray} field. */
     @NativeType("float[8]")
     public FloatBuffer strokeDashArray() { return nstrokeDashArray(address()); }
-    /** stroke dash array (scaled) */
+    /** @return the value at the specified index of the {@code strokeDashArray} field. */
     public float strokeDashArray(int index) { return nstrokeDashArray(address(), index); }
-    /** number of dash values in dash array */
+    /** @return the value of the {@code strokeDashCount} field. */
     @NativeType("char")
     public byte strokeDashCount() { return nstrokeDashCount(address()); }
-    /** stroke join type */
+    /** @return the value of the {@code strokeLineJoin} field. */
     @NativeType("char")
     public byte strokeLineJoin() { return nstrokeLineJoin(address()); }
-    /** stroke cap type */
+    /** @return the value of the {@code strokeLineCap} field. */
     @NativeType("char")
     public byte strokeLineCap() { return nstrokeLineCap(address()); }
-    /** miter limit */
+    /** @return the value of the {@code miterLimit} field. */
     public float miterLimit() { return nmiterLimit(address()); }
-    /** fill rule, see NSVGfillRule */
+    /** @return the value of the {@code fillRule} field. */
     @NativeType("char")
     public byte fillRule() { return nfillRule(address()); }
-    /** logical or of NSVG_FLAGS_* flags */
+    /** @return the value of the {@code flags} field. */
     @NativeType("unsigned char")
     public byte flags() { return nflags(address()); }
-    /** tight bounding box of the shape {@code [minx,miny,maxx,maxy]} */
+    /** @return a {@link FloatBuffer} view of the {@code bounds} field. */
     @NativeType("float[4]")
     public FloatBuffer bounds() { return nbounds(address()); }
-    /** tight bounding box of the shape {@code [minx,miny,maxx,maxy]} */
+    /** @return the value at the specified index of the {@code bounds} field. */
     public float bounds(int index) { return nbounds(address(), index); }
-    /** optional 'id' of fill gradient */
+    /** @return a {@link ByteBuffer} view of the {@code fillGradient} field. */
     @NativeType("char[64]")
     public ByteBuffer fillGradient() { return nfillGradient(address()); }
-    /** optional 'id' of fill gradient */
+    /** @return the null-terminated string stored in the {@code fillGradient} field. */
     @NativeType("char[64]")
     public String fillGradientString() { return nfillGradientString(address()); }
-    /** optional 'id' of stroke gradient */
+    /** @return a {@link ByteBuffer} view of the {@code strokeGradient} field. */
     @NativeType("char[64]")
     public ByteBuffer strokeGradient() { return nstrokeGradient(address()); }
-    /** optional 'id' of stroke gradient */
+    /** @return the null-terminated string stored in the {@code strokeGradient} field. */
     @NativeType("char[64]")
     public String strokeGradientString() { return nstrokeGradientString(address()); }
-    /** root transformation for fill/stroke gradient */
+    /** @return a {@link FloatBuffer} view of the {@code xform} field. */
     @NativeType("float[6]")
     public FloatBuffer xform() { return nxform(address()); }
-    /** root transformation for fill/stroke gradient */
+    /** @return the value at the specified index of the {@code xform} field. */
     public float xform(int index) { return nxform(address(), index); }
-    /** linked list of paths in the image */
+    /** @return a {@link NSVGPath} view of the struct pointed to by the {@code paths} field. */
     @NativeType("NSVGpath *")
     public NSVGPath paths() { return npaths(address()); }
-    /** pointer to next shape, or {@code NULL} if last element */
+    /** @return a {@link NSVGShape} view of the struct pointed to by the {@code next} field. */
     @NativeType("NSVGshape *")
     public NSVGShape next() { return nnext(address()); }
 
@@ -338,72 +336,72 @@ public class NSVGShape extends Struct<NSVGShape> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link NSVGShape#id} field. */
+        /** @return a {@link ByteBuffer} view of the {@code id} field. */
         @NativeType("char[64]")
         public ByteBuffer id() { return NSVGShape.nid(address()); }
-        /** @return the null-terminated string stored in the {@link NSVGShape#id} field. */
+        /** @return the null-terminated string stored in the {@code id} field. */
         @NativeType("char[64]")
         public String idString() { return NSVGShape.nidString(address()); }
-        /** @return a {@link NSVGPaint} view of the {@link NSVGShape#fill} field. */
+        /** @return a {@link NSVGPaint} view of the {@code fill} field. */
         @NativeType("NSVGpaint")
         public NSVGPaint fill() { return NSVGShape.nfill(address()); }
-        /** @return a {@link NSVGPaint} view of the {@link NSVGShape#stroke} field. */
+        /** @return a {@link NSVGPaint} view of the {@code stroke} field. */
         @NativeType("NSVGpaint")
         public NSVGPaint stroke() { return NSVGShape.nstroke(address()); }
-        /** @return the value of the {@link NSVGShape#opacity} field. */
+        /** @return the value of the {@code opacity} field. */
         public float opacity() { return NSVGShape.nopacity(address()); }
-        /** @return the value of the {@link NSVGShape#strokeWidth} field. */
+        /** @return the value of the {@code strokeWidth} field. */
         public float strokeWidth() { return NSVGShape.nstrokeWidth(address()); }
-        /** @return the value of the {@link NSVGShape#strokeDashOffset} field. */
+        /** @return the value of the {@code strokeDashOffset} field. */
         public float strokeDashOffset() { return NSVGShape.nstrokeDashOffset(address()); }
-        /** @return a {@link FloatBuffer} view of the {@link NSVGShape#strokeDashArray} field. */
+        /** @return a {@link FloatBuffer} view of the {@code strokeDashArray} field. */
         @NativeType("float[8]")
         public FloatBuffer strokeDashArray() { return NSVGShape.nstrokeDashArray(address()); }
-        /** @return the value at the specified index of the {@link NSVGShape#strokeDashArray} field. */
+        /** @return the value at the specified index of the {@code strokeDashArray} field. */
         public float strokeDashArray(int index) { return NSVGShape.nstrokeDashArray(address(), index); }
-        /** @return the value of the {@link NSVGShape#strokeDashCount} field. */
+        /** @return the value of the {@code strokeDashCount} field. */
         @NativeType("char")
         public byte strokeDashCount() { return NSVGShape.nstrokeDashCount(address()); }
-        /** @return the value of the {@link NSVGShape#strokeLineJoin} field. */
+        /** @return the value of the {@code strokeLineJoin} field. */
         @NativeType("char")
         public byte strokeLineJoin() { return NSVGShape.nstrokeLineJoin(address()); }
-        /** @return the value of the {@link NSVGShape#strokeLineCap} field. */
+        /** @return the value of the {@code strokeLineCap} field. */
         @NativeType("char")
         public byte strokeLineCap() { return NSVGShape.nstrokeLineCap(address()); }
-        /** @return the value of the {@link NSVGShape#miterLimit} field. */
+        /** @return the value of the {@code miterLimit} field. */
         public float miterLimit() { return NSVGShape.nmiterLimit(address()); }
-        /** @return the value of the {@link NSVGShape#fillRule} field. */
+        /** @return the value of the {@code fillRule} field. */
         @NativeType("char")
         public byte fillRule() { return NSVGShape.nfillRule(address()); }
-        /** @return the value of the {@link NSVGShape#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("unsigned char")
         public byte flags() { return NSVGShape.nflags(address()); }
-        /** @return a {@link FloatBuffer} view of the {@link NSVGShape#bounds} field. */
+        /** @return a {@link FloatBuffer} view of the {@code bounds} field. */
         @NativeType("float[4]")
         public FloatBuffer bounds() { return NSVGShape.nbounds(address()); }
-        /** @return the value at the specified index of the {@link NSVGShape#bounds} field. */
+        /** @return the value at the specified index of the {@code bounds} field. */
         public float bounds(int index) { return NSVGShape.nbounds(address(), index); }
-        /** @return a {@link ByteBuffer} view of the {@link NSVGShape#fillGradient} field. */
+        /** @return a {@link ByteBuffer} view of the {@code fillGradient} field. */
         @NativeType("char[64]")
         public ByteBuffer fillGradient() { return NSVGShape.nfillGradient(address()); }
-        /** @return the null-terminated string stored in the {@link NSVGShape#fillGradient} field. */
+        /** @return the null-terminated string stored in the {@code fillGradient} field. */
         @NativeType("char[64]")
         public String fillGradientString() { return NSVGShape.nfillGradientString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link NSVGShape#strokeGradient} field. */
+        /** @return a {@link ByteBuffer} view of the {@code strokeGradient} field. */
         @NativeType("char[64]")
         public ByteBuffer strokeGradient() { return NSVGShape.nstrokeGradient(address()); }
-        /** @return the null-terminated string stored in the {@link NSVGShape#strokeGradient} field. */
+        /** @return the null-terminated string stored in the {@code strokeGradient} field. */
         @NativeType("char[64]")
         public String strokeGradientString() { return NSVGShape.nstrokeGradientString(address()); }
-        /** @return a {@link FloatBuffer} view of the {@link NSVGShape#xform} field. */
+        /** @return a {@link FloatBuffer} view of the {@code xform} field. */
         @NativeType("float[6]")
         public FloatBuffer xform() { return NSVGShape.nxform(address()); }
-        /** @return the value at the specified index of the {@link NSVGShape#xform} field. */
+        /** @return the value at the specified index of the {@code xform} field. */
         public float xform(int index) { return NSVGShape.nxform(address(), index); }
-        /** @return a {@link NSVGPath} view of the struct pointed to by the {@link NSVGShape#paths} field. */
+        /** @return a {@link NSVGPath} view of the struct pointed to by the {@code paths} field. */
         @NativeType("NSVGpath *")
         public NSVGPath paths() { return NSVGShape.npaths(address()); }
-        /** @return a {@link NSVGShape} view of the struct pointed to by the {@link NSVGShape#next} field. */
+        /** @return a {@link NSVGShape} view of the struct pointed to by the {@code next} field. */
         @NativeType("NSVGshape *")
         public NSVGShape next() { return NSVGShape.nnext(address()); }
 

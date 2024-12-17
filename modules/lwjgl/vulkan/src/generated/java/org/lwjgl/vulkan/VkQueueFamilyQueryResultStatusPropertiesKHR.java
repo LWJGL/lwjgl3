@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying support for result status query.
- * 
- * <h5>Description</h5>
- * 
- * <p>If this structure is included in the {@code pNext} chain of the {@link VkQueueFamilyProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}, then it is filled with information about whether <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#queries-result-status-only">result status queries</a> are supported by the specified queue family.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkQueueFamilyQueryResultStatusPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #queryResultStatusSupport};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 queryResultStatusSupport;
+ * }}</pre>
  */
 public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct<VkQueueFamilyQueryResultStatusPropertiesKHR> implements NativeResource {
 
@@ -88,21 +74,21 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct<VkQueueF
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** reports {@link VK10#VK_TRUE TRUE} if query type {@link KHRVideoQueue#VK_QUERY_TYPE_RESULT_STATUS_ONLY_KHR QUERY_TYPE_RESULT_STATUS_ONLY_KHR} and use of {@link KHRVideoQueue#VK_QUERY_RESULT_WITH_STATUS_BIT_KHR QUERY_RESULT_WITH_STATUS_BIT_KHR} are supported. */
+    /** @return the value of the {@code queryResultStatusSupport} field. */
     @NativeType("VkBool32")
     public boolean queryResultStatusSupport() { return nqueryResultStatusSupport(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkQueueFamilyQueryResultStatusPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkQueueFamilyQueryResultStatusPropertiesKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkQueueFamilyQueryResultStatusPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,21 +280,21 @@ public class VkQueueFamilyQueryResultStatusPropertiesKHR extends Struct<VkQueueF
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkQueueFamilyQueryResultStatusPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkQueueFamilyQueryResultStatusPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkQueueFamilyQueryResultStatusPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkQueueFamilyQueryResultStatusPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkQueueFamilyQueryResultStatusPropertiesKHR#queryResultStatusSupport} field. */
+        /** @return the value of the {@code queryResultStatusSupport} field. */
         @NativeType("VkBool32")
         public boolean queryResultStatusSupport() { return VkQueueFamilyQueryResultStatusPropertiesKHR.nqueryResultStatusSupport(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkQueueFamilyQueryResultStatusPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkQueueFamilyQueryResultStatusPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR} value to the {@link VkQueueFamilyQueryResultStatusPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkQueueFamilyQueryResultStatusPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkQueueFamilyQueryResultStatusPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkQueueFamilyQueryResultStatusPropertiesKHR.npNext(address(), value); return this; }
 
     }

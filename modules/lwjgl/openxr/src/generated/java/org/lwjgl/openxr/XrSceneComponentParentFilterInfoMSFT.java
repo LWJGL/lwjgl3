@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Scene component parent filter.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return only scene components with matching {@code parentId}. If {@code parentId} is zero then the runtime <b>must</b> return only scene components that do not have a parent.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneComponentParentFilterInfoMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSceneComponentsGetInfoMSFT}, {@link XrUuidMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneComponentParentFilterInfoMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrUuidMSFT XrUuidMSFT} {@link #parentId};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrUuidMSFT XrUuidMSFT} parentId;
+ * }}</pre>
  */
 public class XrSceneComponentParentFilterInfoMSFT extends Struct<XrSceneComponentParentFilterInfoMSFT> implements NativeResource {
 
@@ -94,24 +74,24 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct<XrSceneComponen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@link XrUuidMSFT} of the parent scene component to filter by. */
+    /** @return a {@link XrUuidMSFT} view of the {@code parentId} field. */
     public XrUuidMSFT parentId() { return nparentId(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSceneComponentParentFilterInfoMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT} value to the {@code type} field. */
     public XrSceneComponentParentFilterInfoMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSceneComponentParentFilterInfoMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrUuidMSFT} to the {@link #parentId} field. */
+    /** Copies the specified {@link XrUuidMSFT} to the {@code parentId} field. */
     public XrSceneComponentParentFilterInfoMSFT parentId(XrUuidMSFT value) { nparentId(address(), value); return this; }
-    /** Passes the {@link #parentId} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code parentId} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSceneComponentParentFilterInfoMSFT parentId(java.util.function.Consumer<XrUuidMSFT> consumer) { consumer.accept(parentId()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,24 +287,24 @@ public class XrSceneComponentParentFilterInfoMSFT extends Struct<XrSceneComponen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneComponentParentFilterInfoMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSceneComponentParentFilterInfoMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSceneComponentParentFilterInfoMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSceneComponentParentFilterInfoMSFT.nnext(address()); }
-        /** @return a {@link XrUuidMSFT} view of the {@link XrSceneComponentParentFilterInfoMSFT#parentId} field. */
+        /** @return a {@link XrUuidMSFT} view of the {@code parentId} field. */
         public XrUuidMSFT parentId() { return XrSceneComponentParentFilterInfoMSFT.nparentId(address()); }
 
-        /** Sets the specified value to the {@link XrSceneComponentParentFilterInfoMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSceneComponentParentFilterInfoMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneComponentParentFilterInfoMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT} value to the {@link XrSceneComponentParentFilterInfoMSFT#type} field. */
+        /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT} value to the {@code type} field. */
         public XrSceneComponentParentFilterInfoMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT); }
-        /** Sets the specified value to the {@link XrSceneComponentParentFilterInfoMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSceneComponentParentFilterInfoMSFT.Buffer next(@NativeType("void const *") long value) { XrSceneComponentParentFilterInfoMSFT.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrUuidMSFT} to the {@link XrSceneComponentParentFilterInfoMSFT#parentId} field. */
+        /** Copies the specified {@link XrUuidMSFT} to the {@code parentId} field. */
         public XrSceneComponentParentFilterInfoMSFT.Buffer parentId(XrUuidMSFT value) { XrSceneComponentParentFilterInfoMSFT.nparentId(address(), value); return this; }
-        /** Passes the {@link XrSceneComponentParentFilterInfoMSFT#parentId} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code parentId} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSceneComponentParentFilterInfoMSFT.Buffer parentId(java.util.function.Consumer<XrUuidMSFT> consumer) { consumer.accept(parentId()); return this; }
 
     }

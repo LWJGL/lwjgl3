@@ -19,12 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.cuda.CU.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUipcMemHandle {
  *     char reserved[CU_IPC_HANDLE_SIZE];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct CUipcMemHandle")
 public class CUIPCMemHandle extends Struct<CUIPCMemHandle> implements NativeResource {

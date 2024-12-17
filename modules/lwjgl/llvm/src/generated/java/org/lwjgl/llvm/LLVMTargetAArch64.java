@@ -34,6 +34,7 @@ public class LLVMTargetAArch64 {
 
     // --- [ LLVMInitializeAArch64TargetInfo ] ---
 
+    /** {@code void LLVMInitializeAArch64TargetInfo(void)} */
     public static void LLVMInitializeAArch64TargetInfo() {
         long __functionAddress = Functions.InitializeAArch64TargetInfo;
         invokeV(__functionAddress);
@@ -41,6 +42,7 @@ public class LLVMTargetAArch64 {
 
     // --- [ LLVMInitializeAArch64Target ] ---
 
+    /** {@code void LLVMInitializeAArch64Target(void)} */
     public static void LLVMInitializeAArch64Target() {
         long __functionAddress = Functions.InitializeAArch64Target;
         invokeV(__functionAddress);
@@ -48,6 +50,7 @@ public class LLVMTargetAArch64 {
 
     // --- [ LLVMInitializeAArch64TargetMC ] ---
 
+    /** {@code void LLVMInitializeAArch64TargetMC(void)} */
     public static void LLVMInitializeAArch64TargetMC() {
         long __functionAddress = Functions.InitializeAArch64TargetMC;
         invokeV(__functionAddress);
@@ -55,6 +58,7 @@ public class LLVMTargetAArch64 {
 
     // --- [ LLVMInitializeAArch64AsmPrinter ] ---
 
+    /** {@code void LLVMInitializeAArch64AsmPrinter(void)} */
     public static void LLVMInitializeAArch64AsmPrinter() {
         long __functionAddress = Functions.InitializeAArch64AsmPrinter;
         invokeV(__functionAddress);
@@ -62,6 +66,7 @@ public class LLVMTargetAArch64 {
 
     // --- [ LLVMInitializeAArch64AsmParser ] ---
 
+    /** {@code void LLVMInitializeAArch64AsmParser(void)} */
     public static void LLVMInitializeAArch64AsmParser() {
         long __functionAddress = Functions.InitializeAArch64AsmParser;
         invokeV(__functionAddress);
@@ -69,6 +74,7 @@ public class LLVMTargetAArch64 {
 
     // --- [ LLVMInitializeAArch64Disassembler ] ---
 
+    /** {@code void LLVMInitializeAArch64Disassembler(void)} */
     public static void LLVMInitializeAArch64Disassembler() {
         long __functionAddress = Functions.InitializeAArch64Disassembler;
         invokeV(__functionAddress);

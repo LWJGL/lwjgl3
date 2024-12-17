@@ -17,7 +17,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the <strong>APPLE_command_queue_priority</strong> extension. */
 public class APPLECommandQueuePriority {
 
     public static final int
@@ -31,7 +30,7 @@ public class APPLECommandQueuePriority {
 
     // --- [ clCreateCommandQueueWithPropertiesAPPLE ] ---
 
-    /** Unsafe version of: {@link #clCreateCommandQueueWithPropertiesAPPLE CreateCommandQueueWithPropertiesAPPLE} */
+    /** {@code cl_command_queue clCreateCommandQueueWithPropertiesAPPLE(cl_context context, cl_device_id device, cl_queue_properties_APPLE const * properties, cl_int * errcode_ret)} */
     public static long nclCreateCommandQueueWithPropertiesAPPLE(long context, long device, long properties, long errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandQueueWithPropertiesAPPLE;
         if (CHECKS) {
@@ -42,7 +41,7 @@ public class APPLECommandQueuePriority {
         return callPPPPP(context, device, properties, errcode_ret, __functionAddress);
     }
 
-    /** @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned. */
+    /** {@code cl_command_queue clCreateCommandQueueWithPropertiesAPPLE(cl_context context, cl_device_id device, cl_queue_properties_APPLE const * properties, cl_int * errcode_ret)} */
     @NativeType("cl_command_queue")
     public static long clCreateCommandQueueWithPropertiesAPPLE(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_queue_properties_APPLE const *") PointerBuffer properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
@@ -52,7 +51,7 @@ public class APPLECommandQueuePriority {
         return nclCreateCommandQueueWithPropertiesAPPLE(context, device, memAddress(properties), memAddressSafe(errcode_ret));
     }
 
-    /** Array version of: {@link #clCreateCommandQueueWithPropertiesAPPLE CreateCommandQueueWithPropertiesAPPLE} */
+    /** {@code cl_command_queue clCreateCommandQueueWithPropertiesAPPLE(cl_context context, cl_device_id device, cl_queue_properties_APPLE const * properties, cl_int * errcode_ret)} */
     @NativeType("cl_command_queue")
     public static long clCreateCommandQueueWithPropertiesAPPLE(@NativeType("cl_context") long context, @NativeType("cl_device_id") long device, @NativeType("cl_queue_properties_APPLE const *") PointerBuffer properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandQueueWithPropertiesAPPLE;

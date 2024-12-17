@@ -17,119 +17,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created shader.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, {@code codeSize} <b>must</b> be a multiple of 4</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, {@code pCode} <b>must</b> point to valid SPIR-V code, formatted and packed as described by the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirv-spec">Khronos SPIR-V Specification</a></li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, {@code pCode} <b>must</b> adhere to the validation rules described by the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirvenv-module-validation">Validation Rules within a Module</a> section of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirvenv-capabilities">SPIR-V Environment</a> appendix</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, {@code pCode} <b>must</b> declare the {@code Shader} capability for SPIR-V code</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, {@code pCode} <b>must</b> not declare any capability that is not supported by the API, as described by the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirvenv-module-validation">Capabilities</a> section of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirvenv-capabilities">SPIR-V Environment</a> appendix</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code pCode} declares any of the capabilities listed in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirvenv-capabilities-table">SPIR-V Environment</a> appendix, one of the corresponding requirements <b>must</b> be satisfied</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, {@code pCode} <b>must</b> not declare any SPIR-V extension that is not supported by the API, as described by the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirvenv-extensions">Extension</a> section of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirvenv-capabilities">SPIR-V Environment</a> appendix</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code pCode} declares any of the SPIR-V extensions listed in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirvenv-extensions-table">SPIR-V Environment</a> appendix, one of the corresponding requirements <b>must</b> be satisfied</li>
- * <li>If {@code stage} is not {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}, {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, or {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_LINK_STAGE_BIT_EXT SHADER_CREATE_LINK_STAGE_BIT_EXT}</li>
- * <li>If {@code stage} is not {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT SHADER_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_EXT}</li>
- * <li>If {@code stage} is not {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT SHADER_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT}</li>
- * <li>If {@code flags} includes {@link EXTShaderObject#VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT}, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-subgroupSizeControl">{@code subgroupSizeControl}</a> feature <b>must</b> be enabled</li>
- * <li>If {@code flags} includes {@link EXTShaderObject#VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT}, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-computeFullSubgroups">{@code computeFullSubgroups}</a> feature <b>must</b> be enabled</li>
- * <li>If {@code flags} includes {@link EXTDeviceGeneratedCommands#VK_SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-deviceGeneratedCommands">{@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT}{@code ::deviceGeneratedCommands}</a> feature <b>must</b> be enabled</li>
- * <li>If {@code flags} includes {@link EXTDeviceGeneratedCommands#VK_SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT}, then the identified entry point <b>must</b> not specify {@code Xfb} execution mode</li>
- * <li>If {@code flags} includes {@link EXTShaderObject#VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT}, {@code stage} <b>must</b> be one of {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}, or {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}</li>
- * <li>If {@code stage} is not {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_DISPATCH_BASE_BIT_EXT SHADER_CREATE_DISPATCH_BASE_BIT_EXT}</li>
- * <li>If {@code stage} is not {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, {@code flags} <b>must</b> not include {@link EXTShaderObject#VK_SHADER_CREATE_NO_TASK_SHADER_BIT_EXT SHADER_CREATE_NO_TASK_SHADER_BIT_EXT}</li>
- * <li>If {@code flags} includes both {@link EXTShaderObject#VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} and {@link EXTShaderObject#VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT}, the local workgroup size in the X dimension of the shader <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxSubgroupSize">{@code maxSubgroupSize}</a></li>
- * <li>If {@code flags} includes {@link EXTShaderObject#VK_SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT SHADER_CREATE_REQUIRE_FULL_SUBGROUPS_BIT_EXT} but not {@link EXTShaderObject#VK_SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT SHADER_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT} and no {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} structure is included in the {@code pNext} chain, the local workgroup size in the X dimension of the shader <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-subgroupSize">{@code subgroupSize}</a></li>
- * <li>{@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_ALL_GRAPHICS SHADER_STAGE_ALL_GRAPHICS} or {@link VK10#VK_SHADER_STAGE_ALL SHADER_STAGE_ALL}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT} or {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-taskShader">{@code taskShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-meshShader">{@code meshShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}</li>
- * <li>{@code stage} <b>must</b> not be {@link HUAWEISubpassShading#VK_SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI SHADER_STAGE_SUBPASS_SHADING_BIT_HUAWEI}</li>
- * <li>{@code stage} <b>must</b> not be {@link HUAWEIClusterCullingShader#VK_SHADER_STAGE_CLUSTER_CULLING_BIT_HUAWEI SHADER_STAGE_CLUSTER_CULLING_BIT_HUAWEI}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT}, {@code nextStage} <b>must</b> not include any bits other than {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT}, {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, and {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code nextStage} <b>must</b> not include {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT} or {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code nextStage} <b>must</b> not include {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT}, {@code nextStage} <b>must</b> not include any bits other than {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@code nextStage} <b>must</b> not include any bits other than {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT} and {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, {@code nextStage} <b>must</b> not include any bits other than {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT} or {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}, {@code nextStage} <b>must</b> be 0</li>
- * <li>If {@code stage} is {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}, {@code nextStage} <b>must</b> not include any bits other than {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}</li>
- * <li>If {@code stage} is {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, {@code nextStage} <b>must</b> not include any bits other than {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, {@code pName} <b>must</b> be the name of an {@code OpEntryPoint} in {@code pCode} with an execution model that matches {@code stage}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_BINARY_EXT SHADER_CODE_TYPE_BINARY_EXT}, {@code pCode} <b>must</b> be aligned to 16 bytes</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, {@code pCode} <b>must</b> be aligned to 4 bytes</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and the identified entry point includes any variable in its interface that is declared with the {@code ClipDistance} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than {@link VkPhysicalDeviceLimits}{@code ::maxClipDistances}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and the identified entry point includes any variable in its interface that is declared with the {@code CullDistance} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than {@link VkPhysicalDeviceLimits}{@code ::maxCullDistances}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and the identified entry point includes variables in its interface that are declared with the {@code ClipDistance} {@code BuiltIn} decoration and variables in its interface that are declared with the {@code CullDistance} {@code BuiltIn} decoration, those variables <b>must</b> not have array sizes which sum to more than {@link VkPhysicalDeviceLimits}{@code ::maxCombinedClipAndCullDistances}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and the identified entry point includes any variable in its interface that is declared with the {@code SampleMask} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than {@link VkPhysicalDeviceLimits}{@code ::maxSampleMaskWords}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT}, the identified entry point <b>must</b> not include any input variable in its interface that is decorated with {@code CullDistance}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT} or {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, and the identified entry point has an {@code OpExecutionMode} instruction specifying a patch size with {@code OutputVertices}, the patch size <b>must</b> be greater than 0 and less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxTessellationPatchSize}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, the identified entry point <b>must</b> have an {@code OpExecutionMode} instruction specifying a maximum output vertex count that is greater than 0 and less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxGeometryOutputVertices}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, the identified entry point <b>must</b> have an {@code OpExecutionMode} instruction specifying an invocation count that is greater than 0 and less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxGeometryShaderInvocations}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-graphics-subsets-pre-rasterization">pre-rasterization shader stage</a>, and the identified entry point writes to {@code Layer} for any primitive, it <b>must</b> write the same value to {@code Layer} for all vertices of a given primitive</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-graphics-subsets-pre-rasterization">pre-rasterization shader stage</a>, and the identified entry point writes to {@code ViewportIndex} for any primitive, it <b>must</b> write the same value to {@code ViewportIndex} for all vertices of a given primitive</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, the identified entry point <b>must</b> not include any output variables in its interface decorated with {@code CullDistance}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, and the identified entry point writes to {@code FragDepth} in any execution path, all execution paths that are not exclusive to helper invocations <b>must</b> either discard the fragment, or write or initialize the value of {@code FragDepth}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, the shader code in {@code pCode} <b>must</b> be valid as described by the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirv-spec">Khronos SPIR-V Specification</a> after applying the specializations provided in {@code pSpecializationInfo}, if any, and then converting all specialization constants into fixed constants</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@code pCode} <b>must</b> contain an {@code OpExecutionMode} instruction specifying the type of subdivision</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@code pCode} <b>must</b> contain an {@code OpExecutionMode} instruction specifying the orientation of triangles generated by the tessellator</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@code pCode} <b>must</b> contain an {@code OpExecutionMode} instruction specifying the spacing of segments on the edges of tessellated primitives</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@code pCode} <b>must</b> contain an {@code OpExecutionMode} instruction specifying the output patch size</li>
- * <li>Any two elements of {@code pPushConstantRanges} <b>must</b> not include the same stage in {@code stageFlags}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and if a push constant block is declared in a shader, then an element of {@code pPushConstantRanges}{@code ::stageFlags} <b>must</b> match {@code stage}</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and if a push constant block is declared in a shader, the block must be contained inside the element of {@code pPushConstantRanges} that matches the stage</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources">resource variable</a> is declared in a shader, the corresponding descriptor set in {@code pSetLayouts} <b>must</b> match the shader stage</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources">resource variable</a> is declared in a shader, and the descriptor type is not {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, the corresponding descriptor set in {@code pSetLayouts} <b>must</b> match the descriptor type</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources">resource variable</a> is declared in a shader as an array, the corresponding descriptor set in {@code pSetLayouts} <b>must</b> match the descriptor count</li>
- * <li>If {@code codeType} is {@link EXTShaderObject#VK_SHADER_CODE_TYPE_SPIRV_EXT SHADER_CODE_TYPE_SPIRV_EXT}, and a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources">resource variable</a> is declared in a shader as an array of descriptors, then the descriptor type of that variable <b>must</b> not be {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTShaderObject#VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} or {@link VkValidationFeaturesEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkShaderCreateFlagBitsEXT} values</li>
- * <li>{@code stage} <b>must</b> be a valid {@code VkShaderStageFlagBits} value</li>
- * <li>{@code nextStage} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
- * <li>{@code codeType} <b>must</b> be a valid {@code VkShaderCodeTypeEXT} value</li>
- * <li>{@code pCode} <b>must</b> be a valid pointer to an array of {@code codeSize} bytes</li>
- * <li>If {@code pName} is not {@code NULL}, {@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
- * <li>If {@code setLayoutCount} is not 0, and {@code pSetLayouts} is not {@code NULL}, {@code pSetLayouts} <b>must</b> be a valid pointer to an array of {@code setLayoutCount} valid {@code VkDescriptorSetLayout} handles</li>
- * <li>If {@code pushConstantRangeCount} is not 0, and {@code pPushConstantRanges} is not {@code NULL}, {@code pPushConstantRanges} <b>must</b> be a valid pointer to an array of {@code pushConstantRangeCount} valid {@link VkPushConstantRange} structures</li>
- * <li>If {@code pSpecializationInfo} is not {@code NULL}, {@code pSpecializationInfo} <b>must</b> be a valid pointer to a valid {@link VkSpecializationInfo} structure</li>
- * <li>{@code codeSize} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPushConstantRange}, {@link VkSpecializationInfo}, {@link EXTShaderObject#vkCreateShadersEXT CreateShadersEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkShaderCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkShaderCreateFlagsEXT {@link #flags};
- *     VkShaderStageFlagBits {@link #stage};
- *     VkShaderStageFlags {@link #nextStage};
- *     VkShaderCodeTypeEXT {@link #codeType};
- *     size_t {@link #codeSize};
- *     void const * {@link #pCode};
- *     char const * {@link #pName};
- *     uint32_t {@link #setLayoutCount};
- *     VkDescriptorSetLayout const * {@link #pSetLayouts};
- *     uint32_t {@link #pushConstantRangeCount};
- *     {@link VkPushConstantRange VkPushConstantRange} const * {@link #pPushConstantRanges};
- *     {@link VkSpecializationInfo VkSpecializationInfo} const * {@link #pSpecializationInfo};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkShaderCreateFlagsEXT flags;
+ *     VkShaderStageFlagBits stage;
+ *     VkShaderStageFlags nextStage;
+ *     VkShaderCodeTypeEXT codeType;
+ *     size_t codeSize;
+ *     void const * pCode;
+ *     char const * pName;
+ *     uint32_t setLayoutCount;
+ *     VkDescriptorSetLayout const * pSetLayouts;
+ *     uint32_t pushConstantRangeCount;
+ *     {@link VkPushConstantRange VkPushConstantRange} const * pPushConstantRanges;
+ *     {@link VkSpecializationInfo VkSpecializationInfo} const * pSpecializationInfo;
+ * }}</pre>
  */
 public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> implements NativeResource {
 
@@ -215,57 +119,57 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkShaderCreateFlagBitsEXT} describing additional parameters of the shader. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkShaderCreateFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** a {@code VkShaderStageFlagBits} value specifying a single shader stage. */
+    /** @return the value of the {@code stage} field. */
     @NativeType("VkShaderStageFlagBits")
     public int stage() { return nstage(address()); }
-    /** a bitmask of {@code VkShaderStageFlagBits} specifying zero or stages which <b>may</b> be used as a logically next bound stage when drawing with the shader bound. */
+    /** @return the value of the {@code nextStage} field. */
     @NativeType("VkShaderStageFlags")
     public int nextStage() { return nnextStage(address()); }
-    /** a {@code VkShaderCodeTypeEXT} value specifying the type of the shader code pointed to be {@code pCode}. */
+    /** @return the value of the {@code codeType} field. */
     @NativeType("VkShaderCodeTypeEXT")
     public int codeType() { return ncodeType(address()); }
-    /** the size in bytes of the shader code pointed to be {@code pCode}. */
+    /** @return the value of the {@code codeSize} field. */
     @NativeType("size_t")
     public long codeSize() { return ncodeSize(address()); }
-    /** a pointer to the shader code to use to create the shader. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pCode} field. */
     @NativeType("void const *")
     public ByteBuffer pCode() { return npCode(address()); }
-    /** a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pName} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer pName() { return npName(address()); }
-    /** a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage. */
+    /** @return the null-terminated string pointed to by the {@code pName} field. */
     @NativeType("char const *")
     public @Nullable String pNameString() { return npNameString(address()); }
-    /** the number of descriptor set layouts pointed to by {@code pSetLayouts}. */
+    /** @return the value of the {@code setLayoutCount} field. */
     @NativeType("uint32_t")
     public int setLayoutCount() { return nsetLayoutCount(address()); }
-    /** a pointer to an array of {@code VkDescriptorSetLayout} objects used by the shader stage. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pSetLayouts} field. */
     @NativeType("VkDescriptorSetLayout const *")
     public @Nullable LongBuffer pSetLayouts() { return npSetLayouts(address()); }
-    /** the number of push constant ranges pointed to by {@code pPushConstantRanges}. */
+    /** @return the value of the {@code pushConstantRangeCount} field. */
     @NativeType("uint32_t")
     public int pushConstantRangeCount() { return npushConstantRangeCount(address()); }
-    /** a pointer to an array of {@link VkPushConstantRange} structures used by the shader stage. */
+    /** @return a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@code pPushConstantRanges} field. */
     @NativeType("VkPushConstantRange const *")
     public VkPushConstantRange.@Nullable Buffer pPushConstantRanges() { return npPushConstantRanges(address()); }
-    /** a pointer to a {@link VkSpecializationInfo} structure, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-specialization-constants">Specialization Constants</a>, or {@code NULL}. */
+    /** @return a {@link VkSpecializationInfo} view of the struct pointed to by the {@code pSpecializationInfo} field. */
     @NativeType("VkSpecializationInfo const *")
     public @Nullable VkSpecializationInfo pSpecializationInfo() { return npSpecializationInfo(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkShaderCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkShaderCreateInfoEXT sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkShaderCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} value to the {@code pNext} chain. */
     public VkShaderCreateInfoEXT pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -275,27 +179,27 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
     public VkShaderCreateInfoEXT pNext(VkShaderRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
     public VkShaderCreateInfoEXT pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkShaderCreateInfoEXT flags(@NativeType("VkShaderCreateFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #stage} field. */
+    /** Sets the specified value to the {@code stage} field. */
     public VkShaderCreateInfoEXT stage(@NativeType("VkShaderStageFlagBits") int value) { nstage(address(), value); return this; }
-    /** Sets the specified value to the {@link #nextStage} field. */
+    /** Sets the specified value to the {@code nextStage} field. */
     public VkShaderCreateInfoEXT nextStage(@NativeType("VkShaderStageFlags") int value) { nnextStage(address(), value); return this; }
-    /** Sets the specified value to the {@link #codeType} field. */
+    /** Sets the specified value to the {@code codeType} field. */
     public VkShaderCreateInfoEXT codeType(@NativeType("VkShaderCodeTypeEXT") int value) { ncodeType(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pCode} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pCode} field. */
     public VkShaderCreateInfoEXT pCode(@NativeType("void const *") ByteBuffer value) { npCode(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #pName} field. */
+    /** Sets the address of the specified encoded string to the {@code pName} field. */
     public VkShaderCreateInfoEXT pName(@Nullable @NativeType("char const *") ByteBuffer value) { npName(address(), value); return this; }
-    /** Sets the specified value to the {@link #setLayoutCount} field. */
+    /** Sets the specified value to the {@code setLayoutCount} field. */
     public VkShaderCreateInfoEXT setLayoutCount(@NativeType("uint32_t") int value) { nsetLayoutCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pSetLayouts} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pSetLayouts} field. */
     public VkShaderCreateInfoEXT pSetLayouts(@Nullable @NativeType("VkDescriptorSetLayout const *") LongBuffer value) { npSetLayouts(address(), value); return this; }
-    /** Sets the specified value to the {@link #pushConstantRangeCount} field. */
+    /** Sets the specified value to the {@code pushConstantRangeCount} field. */
     public VkShaderCreateInfoEXT pushConstantRangeCount(@NativeType("uint32_t") int value) { npushConstantRangeCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@link #pPushConstantRanges} field. */
+    /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@code pPushConstantRanges} field. */
     public VkShaderCreateInfoEXT pPushConstantRanges(@NativeType("VkPushConstantRange const *") VkPushConstantRange.@Nullable Buffer value) { npPushConstantRanges(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSpecializationInfo} to the {@link #pSpecializationInfo} field. */
+    /** Sets the address of the specified {@link VkSpecializationInfo} to the {@code pSpecializationInfo} field. */
     public VkShaderCreateInfoEXT pSpecializationInfo(@Nullable @NativeType("VkSpecializationInfo const *") VkSpecializationInfo value) { npSpecializationInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -573,57 +477,57 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkShaderCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkShaderCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkShaderCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkShaderCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkShaderCreateInfoEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkShaderCreateFlagsEXT")
         public int flags() { return VkShaderCreateInfoEXT.nflags(address()); }
-        /** @return the value of the {@link VkShaderCreateInfoEXT#stage} field. */
+        /** @return the value of the {@code stage} field. */
         @NativeType("VkShaderStageFlagBits")
         public int stage() { return VkShaderCreateInfoEXT.nstage(address()); }
-        /** @return the value of the {@link VkShaderCreateInfoEXT#nextStage} field. */
+        /** @return the value of the {@code nextStage} field. */
         @NativeType("VkShaderStageFlags")
         public int nextStage() { return VkShaderCreateInfoEXT.nnextStage(address()); }
-        /** @return the value of the {@link VkShaderCreateInfoEXT#codeType} field. */
+        /** @return the value of the {@code codeType} field. */
         @NativeType("VkShaderCodeTypeEXT")
         public int codeType() { return VkShaderCreateInfoEXT.ncodeType(address()); }
-        /** @return the value of the {@link VkShaderCreateInfoEXT#codeSize} field. */
+        /** @return the value of the {@code codeSize} field. */
         @NativeType("size_t")
         public long codeSize() { return VkShaderCreateInfoEXT.ncodeSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkShaderCreateInfoEXT#pCode} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pCode} field. */
         @NativeType("void const *")
         public ByteBuffer pCode() { return VkShaderCreateInfoEXT.npCode(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkShaderCreateInfoEXT#pName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pName} field. */
         @NativeType("char const *")
         public @Nullable ByteBuffer pName() { return VkShaderCreateInfoEXT.npName(address()); }
-        /** @return the null-terminated string pointed to by the {@link VkShaderCreateInfoEXT#pName} field. */
+        /** @return the null-terminated string pointed to by the {@code pName} field. */
         @NativeType("char const *")
         public @Nullable String pNameString() { return VkShaderCreateInfoEXT.npNameString(address()); }
-        /** @return the value of the {@link VkShaderCreateInfoEXT#setLayoutCount} field. */
+        /** @return the value of the {@code setLayoutCount} field. */
         @NativeType("uint32_t")
         public int setLayoutCount() { return VkShaderCreateInfoEXT.nsetLayoutCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkShaderCreateInfoEXT#pSetLayouts} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pSetLayouts} field. */
         @NativeType("VkDescriptorSetLayout const *")
         public @Nullable LongBuffer pSetLayouts() { return VkShaderCreateInfoEXT.npSetLayouts(address()); }
-        /** @return the value of the {@link VkShaderCreateInfoEXT#pushConstantRangeCount} field. */
+        /** @return the value of the {@code pushConstantRangeCount} field. */
         @NativeType("uint32_t")
         public int pushConstantRangeCount() { return VkShaderCreateInfoEXT.npushConstantRangeCount(address()); }
-        /** @return a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@link VkShaderCreateInfoEXT#pPushConstantRanges} field. */
+        /** @return a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@code pPushConstantRanges} field. */
         @NativeType("VkPushConstantRange const *")
         public VkPushConstantRange.@Nullable Buffer pPushConstantRanges() { return VkShaderCreateInfoEXT.npPushConstantRanges(address()); }
-        /** @return a {@link VkSpecializationInfo} view of the struct pointed to by the {@link VkShaderCreateInfoEXT#pSpecializationInfo} field. */
+        /** @return a {@link VkSpecializationInfo} view of the struct pointed to by the {@code pSpecializationInfo} field. */
         @NativeType("VkSpecializationInfo const *")
         public @Nullable VkSpecializationInfo pSpecializationInfo() { return VkShaderCreateInfoEXT.npSpecializationInfo(address()); }
 
-        /** Sets the specified value to the {@link VkShaderCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkShaderCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkShaderCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT} value to the {@link VkShaderCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkShaderCreateInfoEXT.Buffer sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkShaderCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkShaderCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkShaderCreateInfoEXT.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} value to the {@code pNext} chain. */
         public VkShaderCreateInfoEXT.Buffer pNext(VkPipelineShaderStageRequiredSubgroupSizeCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -633,27 +537,27 @@ public class VkShaderCreateInfoEXT extends Struct<VkShaderCreateInfoEXT> impleme
         public VkShaderCreateInfoEXT.Buffer pNext(VkShaderRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkValidationFeaturesEXT} value to the {@code pNext} chain. */
         public VkShaderCreateInfoEXT.Buffer pNext(VkValidationFeaturesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkShaderCreateInfoEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkShaderCreateInfoEXT.Buffer flags(@NativeType("VkShaderCreateFlagsEXT") int value) { VkShaderCreateInfoEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkShaderCreateInfoEXT#stage} field. */
+        /** Sets the specified value to the {@code stage} field. */
         public VkShaderCreateInfoEXT.Buffer stage(@NativeType("VkShaderStageFlagBits") int value) { VkShaderCreateInfoEXT.nstage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkShaderCreateInfoEXT#nextStage} field. */
+        /** Sets the specified value to the {@code nextStage} field. */
         public VkShaderCreateInfoEXT.Buffer nextStage(@NativeType("VkShaderStageFlags") int value) { VkShaderCreateInfoEXT.nnextStage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkShaderCreateInfoEXT#codeType} field. */
+        /** Sets the specified value to the {@code codeType} field. */
         public VkShaderCreateInfoEXT.Buffer codeType(@NativeType("VkShaderCodeTypeEXT") int value) { VkShaderCreateInfoEXT.ncodeType(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkShaderCreateInfoEXT#pCode} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pCode} field. */
         public VkShaderCreateInfoEXT.Buffer pCode(@NativeType("void const *") ByteBuffer value) { VkShaderCreateInfoEXT.npCode(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link VkShaderCreateInfoEXT#pName} field. */
+        /** Sets the address of the specified encoded string to the {@code pName} field. */
         public VkShaderCreateInfoEXT.Buffer pName(@Nullable @NativeType("char const *") ByteBuffer value) { VkShaderCreateInfoEXT.npName(address(), value); return this; }
-        /** Sets the specified value to the {@link VkShaderCreateInfoEXT#setLayoutCount} field. */
+        /** Sets the specified value to the {@code setLayoutCount} field. */
         public VkShaderCreateInfoEXT.Buffer setLayoutCount(@NativeType("uint32_t") int value) { VkShaderCreateInfoEXT.nsetLayoutCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkShaderCreateInfoEXT#pSetLayouts} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pSetLayouts} field. */
         public VkShaderCreateInfoEXT.Buffer pSetLayouts(@Nullable @NativeType("VkDescriptorSetLayout const *") LongBuffer value) { VkShaderCreateInfoEXT.npSetLayouts(address(), value); return this; }
-        /** Sets the specified value to the {@link VkShaderCreateInfoEXT#pushConstantRangeCount} field. */
+        /** Sets the specified value to the {@code pushConstantRangeCount} field. */
         public VkShaderCreateInfoEXT.Buffer pushConstantRangeCount(@NativeType("uint32_t") int value) { VkShaderCreateInfoEXT.npushConstantRangeCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@link VkShaderCreateInfoEXT#pPushConstantRanges} field. */
+        /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@code pPushConstantRanges} field. */
         public VkShaderCreateInfoEXT.Buffer pPushConstantRanges(@NativeType("VkPushConstantRange const *") VkPushConstantRange.@Nullable Buffer value) { VkShaderCreateInfoEXT.npPushConstantRanges(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSpecializationInfo} to the {@link VkShaderCreateInfoEXT#pSpecializationInfo} field. */
+        /** Sets the address of the specified {@link VkSpecializationInfo} to the {@code pSpecializationInfo} field. */
         public VkShaderCreateInfoEXT.Buffer pSpecializationInfo(@Nullable @NativeType("VkSpecializationInfo const *") VkSpecializationInfo value) { VkShaderCreateInfoEXT.npSpecializationInfo(address(), value); return this; }
 
     }

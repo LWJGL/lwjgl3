@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Properties object retrieved as part of next chain from xrGetSystemProperties.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>can</b> inspect whether the system is capable of spatial entity operations by extending the {@link XrSystemProperties} with {@link XrSystemSpatialEntityPropertiesFB} structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
- * 
- * <p>If a runtime returns {@link XR10#XR_FALSE FALSE} for {@code supportsSpatialEntity}, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link FBSpatialEntity#xrGetSpaceUuidFB GetSpaceUuidFB}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using {@link XrSystemSpatialEntityPropertiesFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntity#XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemSpatialEntityPropertiesFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrBool32 {@link #supportsSpatialEntity};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrBool32 supportsSpatialEntity;
+ * }}</pre>
  */
 public class XrSystemSpatialEntityPropertiesFB extends Struct<XrSystemSpatialEntityPropertiesFB> implements NativeResource {
 
@@ -96,21 +74,21 @@ public class XrSystemSpatialEntityPropertiesFB extends Struct<XrSystemSpatialEnt
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a boolean value that determines if spatial entities are supported by the system. */
+    /** @return the value of the {@code supportsSpatialEntity} field. */
     @NativeType("XrBool32")
     public boolean supportsSpatialEntity() { return nsupportsSpatialEntity(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemSpatialEntityPropertiesFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntity#XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntity#XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB} value to the {@code type} field. */
     public XrSystemSpatialEntityPropertiesFB type$Default() { return type(FBSpatialEntity.XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemSpatialEntityPropertiesFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,21 +280,21 @@ public class XrSystemSpatialEntityPropertiesFB extends Struct<XrSystemSpatialEnt
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemSpatialEntityPropertiesFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemSpatialEntityPropertiesFB.ntype(address()); }
-        /** @return the value of the {@link XrSystemSpatialEntityPropertiesFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSystemSpatialEntityPropertiesFB.nnext(address()); }
-        /** @return the value of the {@link XrSystemSpatialEntityPropertiesFB#supportsSpatialEntity} field. */
+        /** @return the value of the {@code supportsSpatialEntity} field. */
         @NativeType("XrBool32")
         public boolean supportsSpatialEntity() { return XrSystemSpatialEntityPropertiesFB.nsupportsSpatialEntity(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemSpatialEntityPropertiesFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemSpatialEntityPropertiesFB.Buffer type(@NativeType("XrStructureType") int value) { XrSystemSpatialEntityPropertiesFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntity#XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB} value to the {@link XrSystemSpatialEntityPropertiesFB#type} field. */
+        /** Sets the {@link FBSpatialEntity#XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB} value to the {@code type} field. */
         public XrSystemSpatialEntityPropertiesFB.Buffer type$Default() { return type(FBSpatialEntity.XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB); }
-        /** Sets the specified value to the {@link XrSystemSpatialEntityPropertiesFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemSpatialEntityPropertiesFB.Buffer next(@NativeType("void const *") long value) { XrSystemSpatialEntityPropertiesFB.nnext(address(), value); return this; }
 
     }

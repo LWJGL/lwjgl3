@@ -17,46 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify that an image be created with the provided DRM format modifier and explicit memory layout.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code i}<sup>th</sup> member of {@code pPlaneLayouts} describes the layout of the image’s {@code i}<sup>th</sup> <em>memory plane</em> (that is, <code>VK_IMAGE_ASPECT_MEMORY_PLANE<em>_i_</em>BIT_EXT</code>). In each element of {@code pPlaneLayouts}, the implementation <b>must</b> ignore {@code size}. The implementation calculates the size of each plane, which the application <b>can</b> query with {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout}.</p>
- * 
- * <p>When creating an image with {@link VkImageDrmFormatModifierExplicitCreateInfoEXT}, it is the application’s responsibility to satisfy all valid usage requirements. However, the implementation <b>must</b> validate that the provided {@code pPlaneLayouts}, when combined with the provided {@code drmFormatModifier} and other creation parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, produce a valid image. (This validation is necessarily implementation-dependent and outside the scope of Vulkan, and therefore not described by valid usage requirements). If this validation fails, then {@link VK10#vkCreateImage CreateImage} returns {@link EXTImageDrmFormatModifier#VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code drmFormatModifier} <b>must</b> be compatible with the parameters in {@link VkImageCreateInfo} and its {@code pNext} chain, as determined by querying {@link VkPhysicalDeviceImageFormatInfo2} extended with {@link VkPhysicalDeviceImageDrmFormatModifierInfoEXT}</li>
- * <li>{@code drmFormatModifierPlaneCount} <b>must</b> be equal to the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with {@link VkImageCreateInfo}{@code ::format} and {@code drmFormatModifier}, as found by querying {@link VkDrmFormatModifierPropertiesListEXT}</li>
- * <li>For each element of {@code pPlaneLayouts}, {@code size} <b>must</b> be 0</li>
- * <li>For each element of {@code pPlaneLayouts}, {@code arrayPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::arrayLayers} is 1</li>
- * <li>For each element of {@code pPlaneLayouts}, {@code depthPitch} <b>must</b> be 0 if {@link VkImageCreateInfo}{@code ::extent.depth} is 1</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT}</li>
- * <li>{@code pPlaneLayouts} <b>must</b> be a valid pointer to an array of {@code drmFormatModifierPlaneCount} {@link VkSubresourceLayout} structures</li>
- * <li>{@code drmFormatModifierPlaneCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSubresourceLayout}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageDrmFormatModifierExplicitCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint64_t {@link #drmFormatModifier};
- *     uint32_t {@link #drmFormatModifierPlaneCount};
- *     {@link VkSubresourceLayout VkSubresourceLayout} const * {@link #pPlaneLayouts};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint64_t drmFormatModifier;
+ *     uint32_t drmFormatModifierPlaneCount;
+ *     {@link VkSubresourceLayout VkSubresourceLayout} const * pPlaneLayouts;
+ * }}</pre>
  */
 public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImageDrmFormatModifierExplicitCreateInfoEXT> implements NativeResource {
 
@@ -115,31 +83,31 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the <em>Linux DRM format modifier</em> with which the image will be created. */
+    /** @return the value of the {@code drmFormatModifier} field. */
     @NativeType("uint64_t")
     public long drmFormatModifier() { return ndrmFormatModifier(address()); }
-    /** the number of <em>memory planes</em> in the image (as reported by {@link VkDrmFormatModifierPropertiesEXT}) as well as the length of the {@code pPlaneLayouts} array. */
+    /** @return the value of the {@code drmFormatModifierPlaneCount} field. */
     @NativeType("uint32_t")
     public int drmFormatModifierPlaneCount() { return ndrmFormatModifierPlaneCount(address()); }
-    /** a pointer to an array of {@link VkSubresourceLayout} structures describing the image’s <em>memory planes</em>. */
+    /** @return a {@link VkSubresourceLayout.Buffer} view of the struct array pointed to by the {@code pPlaneLayouts} field. */
     @NativeType("VkSubresourceLayout const *")
     public VkSubresourceLayout.Buffer pPlaneLayouts() { return npPlaneLayouts(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #drmFormatModifier} field. */
+    /** Sets the specified value to the {@code drmFormatModifier} field. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT drmFormatModifier(@NativeType("uint64_t") long value) { ndrmFormatModifier(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSubresourceLayout.Buffer} to the {@link #pPlaneLayouts} field. */
+    /** Sets the address of the specified {@link VkSubresourceLayout.Buffer} to the {@code pPlaneLayouts} field. */
     public VkImageDrmFormatModifierExplicitCreateInfoEXT pPlaneLayouts(@NativeType("VkSubresourceLayout const *") VkSubresourceLayout.Buffer value) { npPlaneLayouts(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -373,31 +341,31 @@ public class VkImageDrmFormatModifierExplicitCreateInfoEXT extends Struct<VkImag
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageDrmFormatModifierExplicitCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageDrmFormatModifierExplicitCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#drmFormatModifier} field. */
+        /** @return the value of the {@code drmFormatModifier} field. */
         @NativeType("uint64_t")
         public long drmFormatModifier() { return VkImageDrmFormatModifierExplicitCreateInfoEXT.ndrmFormatModifier(address()); }
-        /** @return the value of the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#drmFormatModifierPlaneCount} field. */
+        /** @return the value of the {@code drmFormatModifierPlaneCount} field. */
         @NativeType("uint32_t")
         public int drmFormatModifierPlaneCount() { return VkImageDrmFormatModifierExplicitCreateInfoEXT.ndrmFormatModifierPlaneCount(address()); }
-        /** @return a {@link VkSubresourceLayout.Buffer} view of the struct array pointed to by the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#pPlaneLayouts} field. */
+        /** @return a {@link VkSubresourceLayout.Buffer} view of the struct array pointed to by the {@code pPlaneLayouts} field. */
         @NativeType("VkSubresourceLayout const *")
         public VkSubresourceLayout.Buffer pPlaneLayouts() { return VkImageDrmFormatModifierExplicitCreateInfoEXT.npPlaneLayouts(address()); }
 
-        /** Sets the specified value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT} value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#drmFormatModifier} field. */
+        /** Sets the specified value to the {@code drmFormatModifier} field. */
         public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer drmFormatModifier(@NativeType("uint64_t") long value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.ndrmFormatModifier(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSubresourceLayout.Buffer} to the {@link VkImageDrmFormatModifierExplicitCreateInfoEXT#pPlaneLayouts} field. */
+        /** Sets the address of the specified {@link VkSubresourceLayout.Buffer} to the {@code pPlaneLayouts} field. */
         public VkImageDrmFormatModifierExplicitCreateInfoEXT.Buffer pPlaneLayouts(@NativeType("VkSubresourceLayout const *") VkSubresourceLayout.Buffer value) { VkImageDrmFormatModifierExplicitCreateInfoEXT.npPlaneLayouts(address(), value); return this; }
 
     }

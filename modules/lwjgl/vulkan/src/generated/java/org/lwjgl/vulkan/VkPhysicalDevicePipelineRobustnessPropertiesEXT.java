@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDevicePipelineRobustnessProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDevicePipelineRobustnessPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineRobustnessBufferBehavior defaultRobustnessUniformBuffers;
  *     VkPipelineRobustnessBufferBehavior defaultRobustnessVertexInputs;
  *     VkPipelineRobustnessImageBehavior defaultRobustnessImages;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDevicePipelineRobustnessPropertiesEXT extends VkPhysicalDevicePipelineRobustnessProperties {
 

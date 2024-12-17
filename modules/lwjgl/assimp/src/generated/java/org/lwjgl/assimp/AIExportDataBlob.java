@@ -17,22 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes a blob of exported scene data. Use {@link Assimp#aiExportSceneToBlob ExportSceneToBlob} to create a blob containing an exported scene. The memory referred by this structure
- * is owned by Assimp. to free its resources. Don't try to free the memory on your side - it will crash for most build configurations due to conflicting
- * heaps.
- * 
- * <p>Blobs can be nested - each blob may reference another blob, which may in turn reference another blob and so on. This is used when exporters write more
- * than one output file for a given {@link AIScene}. See the remarks for {@code aiExportDataBlob::name} for more information.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiExportDataBlob {
- *     size_t {@link #size};
- *     void * {@link #data};
- *     {@link AIString struct aiString} {@link #name};
- *     {@link AIExportDataBlob struct aiExportDataBlob} * {@link #next};
- * }</code></pre>
+ *     size_t size;
+ *     void * data;
+ *     {@link AIString struct aiString} name;
+ *     {@link AIExportDataBlob struct aiExportDataBlob} * next;
+ * }}</pre>
  */
 @NativeType("struct aiExportDataBlob")
 public class AIExportDataBlob extends Struct<AIExportDataBlob> implements NativeResource {
@@ -89,35 +80,26 @@ public class AIExportDataBlob extends Struct<AIExportDataBlob> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Size of the data in bytes */
+    /** @return the value of the {@code size} field. */
     @NativeType("size_t")
     public long size() { return nsize(address()); }
-    /** The data. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
     @NativeType("void *")
     public ByteBuffer data() { return ndata(address()); }
-    /**
-     * Name of the blob. An empty string always indicates the first (and primary) blob, which contains the actual file data. Any other blobs are auxiliary
-     * files produced by exporters (i.e. material files). Existence of such files depends on the file format. Most formats don't split assets across multiple
-     * files.
-     * 
-     * <p>If used, blob names usually contain the file extension that should be used when writing the data to disc.</p>
-     * 
-     * <p>The blob names generated can be influenced by setting the {@link Assimp#AI_CONFIG_EXPORT_BLOB_NAME} export property to the name that is used for the master blob. All
-     * other names are typically derived from the base name, by the file format exporter.</p>
-     */
+    /** @return a {@link AIString} view of the {@code name} field. */
     @NativeType("struct aiString")
     public AIString name() { return nname(address()); }
-    /** Pointer to the next blob in the chain or NULL if there is none. */
+    /** @return a {@link AIExportDataBlob} view of the struct pointed to by the {@code next} field. */
     @NativeType("struct aiExportDataBlob *")
     public @Nullable AIExportDataBlob next() { return nnext(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #data} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
     public AIExportDataBlob data(@NativeType("void *") ByteBuffer value) { ndata(address(), value); return this; }
-    /** Copies the specified {@link AIString} to the {@link #name} field. */
+    /** Copies the specified {@link AIString} to the {@code name} field. */
     public AIExportDataBlob name(@NativeType("struct aiString") AIString value) { nname(address(), value); return this; }
-    /** Passes the {@link #name} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code name} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIExportDataBlob name(java.util.function.Consumer<AIString> consumer) { consumer.accept(name()); return this; }
-    /** Sets the address of the specified {@link AIExportDataBlob} to the {@link #next} field. */
+    /** Sets the address of the specified {@link AIExportDataBlob} to the {@code next} field. */
     public AIExportDataBlob next(@Nullable @NativeType("struct aiExportDataBlob *") AIExportDataBlob value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -345,26 +327,26 @@ public class AIExportDataBlob extends Struct<AIExportDataBlob> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AIExportDataBlob#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("size_t")
         public long size() { return AIExportDataBlob.nsize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link AIExportDataBlob#data} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
         @NativeType("void *")
         public ByteBuffer data() { return AIExportDataBlob.ndata(address()); }
-        /** @return a {@link AIString} view of the {@link AIExportDataBlob#name} field. */
+        /** @return a {@link AIString} view of the {@code name} field. */
         @NativeType("struct aiString")
         public AIString name() { return AIExportDataBlob.nname(address()); }
-        /** @return a {@link AIExportDataBlob} view of the struct pointed to by the {@link AIExportDataBlob#next} field. */
+        /** @return a {@link AIExportDataBlob} view of the struct pointed to by the {@code next} field. */
         @NativeType("struct aiExportDataBlob *")
         public @Nullable AIExportDataBlob next() { return AIExportDataBlob.nnext(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link AIExportDataBlob#data} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
         public AIExportDataBlob.Buffer data(@NativeType("void *") ByteBuffer value) { AIExportDataBlob.ndata(address(), value); return this; }
-        /** Copies the specified {@link AIString} to the {@link AIExportDataBlob#name} field. */
+        /** Copies the specified {@link AIString} to the {@code name} field. */
         public AIExportDataBlob.Buffer name(@NativeType("struct aiString") AIString value) { AIExportDataBlob.nname(address(), value); return this; }
-        /** Passes the {@link AIExportDataBlob#name} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code name} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIExportDataBlob.Buffer name(java.util.function.Consumer<AIString> consumer) { consumer.accept(name()); return this; }
-        /** Sets the address of the specified {@link AIExportDataBlob} to the {@link AIExportDataBlob#next} field. */
+        /** Sets the address of the specified {@link AIExportDataBlob} to the {@code next} field. */
         public AIExportDataBlob.Buffer next(@Nullable @NativeType("struct aiExportDataBlob *") AIExportDataBlob value) { AIExportDataBlob.nnext(address(), value); return this; }
 
     }

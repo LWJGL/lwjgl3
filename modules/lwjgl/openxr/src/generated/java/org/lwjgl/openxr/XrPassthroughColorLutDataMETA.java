@@ -17,31 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Passthrough color LUT data.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrPassthroughColorLutDataMETA} defines the LUT data for a color LUT. This structure is used when creating and updating color LUTs.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using {@link XrPassthroughColorLutDataMETA}</li>
- * <li>{@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} {@code uint8_t} values</li>
- * <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPassthroughColorLutCreateInfoMETA}, {@link XrPassthroughColorLutUpdateInfoMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPassthroughColorLutDataMETA {
- *     uint32_t {@link #bufferSize};
- *     uint8_t const * {@link #buffer};
- * }</code></pre>
+ *     uint32_t bufferSize;
+ *     uint8_t const * buffer;
+ * }}</pre>
  */
 public class XrPassthroughColorLutDataMETA extends Struct<XrPassthroughColorLutDataMETA> implements NativeResource {
 
@@ -91,14 +71,14 @@ public class XrPassthroughColorLutDataMETA extends Struct<XrPassthroughColorLutD
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of bytes contained in the buffer data. */
+    /** @return the value of the {@code bufferSize} field. */
     @NativeType("uint32_t")
     public int bufferSize() { return nbufferSize(address()); }
-    /** a pointer to a memory block of {@code bufferSize} bytes that contains the LUT data. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("uint8_t const *")
     public ByteBuffer buffer() { return nbuffer(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #buffer} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
     public XrPassthroughColorLutDataMETA buffer(@NativeType("uint8_t const *") ByteBuffer value) { nbuffer(address(), value); return this; }
 
     /**
@@ -286,14 +266,14 @@ public class XrPassthroughColorLutDataMETA extends Struct<XrPassthroughColorLutD
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPassthroughColorLutDataMETA#bufferSize} field. */
+        /** @return the value of the {@code bufferSize} field. */
         @NativeType("uint32_t")
         public int bufferSize() { return XrPassthroughColorLutDataMETA.nbufferSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link XrPassthroughColorLutDataMETA#buffer} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("uint8_t const *")
         public ByteBuffer buffer() { return XrPassthroughColorLutDataMETA.nbuffer(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link XrPassthroughColorLutDataMETA#buffer} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
         public XrPassthroughColorLutDataMETA.Buffer buffer(@NativeType("uint8_t const *") ByteBuffer value) { XrPassthroughColorLutDataMETA.nbuffer(address(), value); return this; }
 
     }

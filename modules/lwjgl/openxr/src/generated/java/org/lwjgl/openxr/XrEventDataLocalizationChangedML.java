@@ -16,41 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event containing the current localization map state.
- * 
- * <h5>Description</h5>
- * 
- * <p>By default the runtime does not send these events but calling {@link MLLocalizationMap#xrEnableLocalizationEventsML EnableLocalizationEventsML} function enables the events. When this function is called the {@link XrEventDataLocalizationChangedML} event will always be posted to the event queue, regardless of whether the map localization state has changed. This allows the application to synchronize with the current state.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The arrival of the event is asynchronous to this call.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using {@link XrEventDataLocalizationChangedML}</li>
- * <li>{@code type} <b>must</b> be {@link MLLocalizationMap#XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrLocalizationMapML}, {@link MLLocalizationMap#xrEnableLocalizationEventsML EnableLocalizationEventsML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataLocalizationChangedML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSession {@link #session};
- *     XrLocalizationMapStateML {@link #state};
- *     {@link XrLocalizationMapML XrLocalizationMapML} {@link #map};
- *     XrLocalizationMapConfidenceML {@link #confidence};
- *     XrLocalizationMapErrorFlagsML {@link #errorFlags};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSession session;
+ *     XrLocalizationMapStateML state;
+ *     {@link XrLocalizationMapML XrLocalizationMapML} map;
+ *     XrLocalizationMapConfidenceML confidence;
+ *     XrLocalizationMapErrorFlagsML errorFlags;
+ * }}</pre>
  */
 public class XrEventDataLocalizationChangedML extends Struct<XrEventDataLocalizationChangedML> implements NativeResource {
 
@@ -115,32 +90,32 @@ public class XrEventDataLocalizationChangedML extends Struct<XrEventDataLocaliza
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the session to which this change event applies. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
-    /** the current {@code XrLocalizationMapStateML} of the map. */
+    /** @return the value of the {@code state} field. */
     @NativeType("XrLocalizationMapStateML")
     public int state() { return nstate(address()); }
-    /** the {@link XrLocalizationMapML} of the current map. */
+    /** @return a {@link XrLocalizationMapML} view of the {@code map} field. */
     public XrLocalizationMapML map() { return nmap(address()); }
-    /** the {@code XrLocalizationMapConfidenceML} of the current map. */
+    /** @return the value of the {@code confidence} field. */
     @NativeType("XrLocalizationMapConfidenceML")
     public int confidence() { return nconfidence(address()); }
-    /** a a bitwise-OR of zero or more of the bits defined in {@code XrLocalizationMapErrorFlagBitsML} in the case that the localization map has low confidence. */
+    /** @return the value of the {@code errorFlags} field. */
     @NativeType("XrLocalizationMapErrorFlagsML")
     public long errorFlags() { return nerrorFlags(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataLocalizationChangedML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLLocalizationMap#XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLLocalizationMap#XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML} value to the {@code type} field. */
     public XrEventDataLocalizationChangedML type$Default() { return type(MLLocalizationMap.XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataLocalizationChangedML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,32 +325,32 @@ public class XrEventDataLocalizationChangedML extends Struct<XrEventDataLocaliza
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataLocalizationChangedML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataLocalizationChangedML.ntype(address()); }
-        /** @return the value of the {@link XrEventDataLocalizationChangedML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataLocalizationChangedML.nnext(address()); }
-        /** @return the value of the {@link XrEventDataLocalizationChangedML#session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataLocalizationChangedML.nsession(address()); }
-        /** @return the value of the {@link XrEventDataLocalizationChangedML#state} field. */
+        /** @return the value of the {@code state} field. */
         @NativeType("XrLocalizationMapStateML")
         public int state() { return XrEventDataLocalizationChangedML.nstate(address()); }
-        /** @return a {@link XrLocalizationMapML} view of the {@link XrEventDataLocalizationChangedML#map} field. */
+        /** @return a {@link XrLocalizationMapML} view of the {@code map} field. */
         public XrLocalizationMapML map() { return XrEventDataLocalizationChangedML.nmap(address()); }
-        /** @return the value of the {@link XrEventDataLocalizationChangedML#confidence} field. */
+        /** @return the value of the {@code confidence} field. */
         @NativeType("XrLocalizationMapConfidenceML")
         public int confidence() { return XrEventDataLocalizationChangedML.nconfidence(address()); }
-        /** @return the value of the {@link XrEventDataLocalizationChangedML#errorFlags} field. */
+        /** @return the value of the {@code errorFlags} field. */
         @NativeType("XrLocalizationMapErrorFlagsML")
         public long errorFlags() { return XrEventDataLocalizationChangedML.nerrorFlags(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataLocalizationChangedML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataLocalizationChangedML.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataLocalizationChangedML.ntype(address(), value); return this; }
-        /** Sets the {@link MLLocalizationMap#XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML} value to the {@link XrEventDataLocalizationChangedML#type} field. */
+        /** Sets the {@link MLLocalizationMap#XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML} value to the {@code type} field. */
         public XrEventDataLocalizationChangedML.Buffer type$Default() { return type(MLLocalizationMap.XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML); }
-        /** Sets the specified value to the {@link XrEventDataLocalizationChangedML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataLocalizationChangedML.Buffer next(@NativeType("void const *") long value) { XrEventDataLocalizationChangedML.nnext(address(), value); return this; }
 
     }

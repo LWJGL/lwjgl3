@@ -16,19 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Contains information about a simulated mouse event.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct MOUSEINPUT {
- *     LONG {@link #dx};
- *     LONG {@link #dy};
- *     DWORD {@link #mouseData};
- *     DWORD {@link #dwFlags};
- *     DWORD {@link #time};
- *     ULONG_PTR {@link #dwExtraInfo};
- * }</code></pre>
+ *     LONG dx;
+ *     LONG dy;
+ *     DWORD mouseData;
+ *     DWORD dwFlags;
+ *     DWORD time;
+ *     ULONG_PTR dwExtraInfo;
+ * }}</pre>
  */
 public class MOUSEINPUT extends Struct<MOUSEINPUT> implements NativeResource {
 
@@ -90,68 +86,36 @@ public class MOUSEINPUT extends Struct<MOUSEINPUT> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * the absolute position of the mouse, or the amount of motion since the last mouse event was generated, depending on the value of the {@code dwFlags}
-     * member.
-     * 
-     * <p>Absolute data is specified as the x coordinate of the mouse; relative data is specified as the number of pixels moved.</p>
-     */
+    /** @return the value of the {@code dx} field. */
     @NativeType("LONG")
     public int dx() { return ndx(address()); }
-    /**
-     * the absolute position of the mouse, or the amount of motion since the last mouse event was generated, depending on the value of the {@code dwFlags}
-     * member.
-     * 
-     * <p>Absolute data is specified as the y coordinate of the mouse; relative data is specified as the number of pixels moved.</p>
-     */
+    /** @return the value of the {@code dy} field. */
     @NativeType("LONG")
     public int dy() { return ndy(address()); }
-    /**
-     * If {@code dwFlags} contains {@link User32#MOUSEEVENTF_WHEEL}, then {@code mouseData} specifies the amount of wheel movement. A positive value indicates that the
-     * wheel was rotated forward, away from the user; a negative value indicates that the wheel was rotated backward, toward the user. One wheel click is
-     * defined as {@link User32#WHEEL_DELTA}, which is 120.
-     * 
-     * <p>Windows Vista: If {@code dwFlags} contains {@link User32#MOUSEEVENTF_HWHEEL}, then {@code dwData} specifies the amount of wheel movement. A positive value indicates
-     * that the wheel was rotated to the right; a negative value indicates that the wheel was rotated to the left. One wheel click is defined as
-     * {@code WHEEL_DELTA}, which is 120.</p>
-     * 
-     * <p>If {@code dwFlags} does not contain {@link User32#MOUSEEVENTF_WHEEL}, {@link User32#MOUSEEVENTF_XDOWN}, or {@link User32#MOUSEEVENTF_XUP}, then {@code mouseData} should be zero.</p>
-     * 
-     * <p>If {@code dwFlags} contains {@link User32#MOUSEEVENTF_XDOWN} or {@link User32#MOUSEEVENTF_XUP}, then {@code mouseData} specifies which X buttons were pressed or released. This
-     * value may be any combination of the following flags: {@link User32#XBUTTON1}, {@link User32#XBUTTON2}. One of:<br></p><table><tr><td>{@link User32#XBUTTON1}</td><td>{@link User32#XBUTTON2}</td></tr></table>
-     */
+    /** @return the value of the {@code mouseData} field. */
     @NativeType("DWORD")
     public int mouseData() { return nmouseData(address()); }
-    /**
-     * A set of bit flags that specify various aspects of mouse motion and button clicks.
-     * 
-     * <p>The bit flags that specify mouse button status are set to indicate changes in status, not ongoing conditions. For example, if the left mouse button is
-     * pressed and held down, {@link User32#MOUSEEVENTF_LEFTDOWN} is set when the left button is first pressed, but not for subsequent motions. Similarly,
-     * {@link User32#MOUSEEVENTF_LEFTUP} is set only when the button is first released.</p>
-     * 
-     * <p>You cannot specify both the {@link User32#MOUSEEVENTF_WHEEL} flag and either {@link User32#MOUSEEVENTF_XDOWN} or {@link User32#MOUSEEVENTF_XUP} flags simultaneously in the {@code dwFlags}
-     * parameter, because they both require use of the {@code mouseData} field. One of:<br></p><table><tr><td>{@link User32#MOUSEEVENTF_ABSOLUTE}</td><td>{@link User32#MOUSEEVENTF_HWHEEL}</td><td>{@link User32#MOUSEEVENTF_MOVE}</td><td>{@link User32#MOUSEEVENTF_MOVE_NOCOALESCE}</td></tr><tr><td>{@link User32#MOUSEEVENTF_LEFTDOWN}</td><td>{@link User32#MOUSEEVENTF_LEFTUP}</td><td>{@link User32#MOUSEEVENTF_RIGHTDOWN}</td><td>{@link User32#MOUSEEVENTF_RIGHTUP}</td></tr><tr><td>{@link User32#MOUSEEVENTF_MIDDLEDOWN}</td><td>{@link User32#MOUSEEVENTF_MIDDLEUP}</td><td>{@link User32#MOUSEEVENTF_VIRTUALDESK}</td><td>{@link User32#MOUSEEVENTF_WHEEL}</td></tr><tr><td>{@link User32#MOUSEEVENTF_XDOWN}</td><td>{@link User32#MOUSEEVENTF_XUP}</td></tr></table>
-     */
+    /** @return the value of the {@code dwFlags} field. */
     @NativeType("DWORD")
     public int dwFlags() { return ndwFlags(address()); }
-    /** the time stamp for the event, in milliseconds. If this parameter is 0, the system will provide its own time stamp. */
+    /** @return the value of the {@code time} field. */
     @NativeType("DWORD")
     public int time() { return ntime(address()); }
-    /** an additional value associated with the mouse event. An application calls {@link User32#GetMessageExtraInfo} to obtain this extra information. */
+    /** @return the value of the {@code dwExtraInfo} field. */
     @NativeType("ULONG_PTR")
     public long dwExtraInfo() { return ndwExtraInfo(address()); }
 
-    /** Sets the specified value to the {@link #dx} field. */
+    /** Sets the specified value to the {@code dx} field. */
     public MOUSEINPUT dx(@NativeType("LONG") int value) { ndx(address(), value); return this; }
-    /** Sets the specified value to the {@link #dy} field. */
+    /** Sets the specified value to the {@code dy} field. */
     public MOUSEINPUT dy(@NativeType("LONG") int value) { ndy(address(), value); return this; }
-    /** Sets the specified value to the {@link #mouseData} field. */
+    /** Sets the specified value to the {@code mouseData} field. */
     public MOUSEINPUT mouseData(@NativeType("DWORD") int value) { nmouseData(address(), value); return this; }
-    /** Sets the specified value to the {@link #dwFlags} field. */
+    /** Sets the specified value to the {@code dwFlags} field. */
     public MOUSEINPUT dwFlags(@NativeType("DWORD") int value) { ndwFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public MOUSEINPUT time(@NativeType("DWORD") int value) { ntime(address(), value); return this; }
-    /** Sets the specified value to the {@link #dwExtraInfo} field. */
+    /** Sets the specified value to the {@code dwExtraInfo} field. */
     public MOUSEINPUT dwExtraInfo(@NativeType("ULONG_PTR") long value) { ndwExtraInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -384,36 +348,36 @@ public class MOUSEINPUT extends Struct<MOUSEINPUT> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link MOUSEINPUT#dx} field. */
+        /** @return the value of the {@code dx} field. */
         @NativeType("LONG")
         public int dx() { return MOUSEINPUT.ndx(address()); }
-        /** @return the value of the {@link MOUSEINPUT#dy} field. */
+        /** @return the value of the {@code dy} field. */
         @NativeType("LONG")
         public int dy() { return MOUSEINPUT.ndy(address()); }
-        /** @return the value of the {@link MOUSEINPUT#mouseData} field. */
+        /** @return the value of the {@code mouseData} field. */
         @NativeType("DWORD")
         public int mouseData() { return MOUSEINPUT.nmouseData(address()); }
-        /** @return the value of the {@link MOUSEINPUT#dwFlags} field. */
+        /** @return the value of the {@code dwFlags} field. */
         @NativeType("DWORD")
         public int dwFlags() { return MOUSEINPUT.ndwFlags(address()); }
-        /** @return the value of the {@link MOUSEINPUT#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("DWORD")
         public int time() { return MOUSEINPUT.ntime(address()); }
-        /** @return the value of the {@link MOUSEINPUT#dwExtraInfo} field. */
+        /** @return the value of the {@code dwExtraInfo} field. */
         @NativeType("ULONG_PTR")
         public long dwExtraInfo() { return MOUSEINPUT.ndwExtraInfo(address()); }
 
-        /** Sets the specified value to the {@link MOUSEINPUT#dx} field. */
+        /** Sets the specified value to the {@code dx} field. */
         public MOUSEINPUT.Buffer dx(@NativeType("LONG") int value) { MOUSEINPUT.ndx(address(), value); return this; }
-        /** Sets the specified value to the {@link MOUSEINPUT#dy} field. */
+        /** Sets the specified value to the {@code dy} field. */
         public MOUSEINPUT.Buffer dy(@NativeType("LONG") int value) { MOUSEINPUT.ndy(address(), value); return this; }
-        /** Sets the specified value to the {@link MOUSEINPUT#mouseData} field. */
+        /** Sets the specified value to the {@code mouseData} field. */
         public MOUSEINPUT.Buffer mouseData(@NativeType("DWORD") int value) { MOUSEINPUT.nmouseData(address(), value); return this; }
-        /** Sets the specified value to the {@link MOUSEINPUT#dwFlags} field. */
+        /** Sets the specified value to the {@code dwFlags} field. */
         public MOUSEINPUT.Buffer dwFlags(@NativeType("DWORD") int value) { MOUSEINPUT.ndwFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link MOUSEINPUT#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public MOUSEINPUT.Buffer time(@NativeType("DWORD") int value) { MOUSEINPUT.ntime(address(), value); return this; }
-        /** Sets the specified value to the {@link MOUSEINPUT#dwExtraInfo} field. */
+        /** Sets the specified value to the {@code dwExtraInfo} field. */
         public MOUSEINPUT.Buffer dwExtraInfo(@NativeType("ULONG_PTR") long value) { MOUSEINPUT.ndwExtraInfo(address(), value); return this; }
 
     }

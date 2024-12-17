@@ -16,19 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The earliest time image should be presented.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPresentTimesInfoGOOGLE}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPresentTimeGOOGLE {
- *     uint32_t {@link #presentID};
- *     uint64_t {@link #desiredPresentTime};
- * }</code></pre>
+ *     uint32_t presentID;
+ *     uint64_t desiredPresentTime;
+ * }}</pre>
  */
 public class VkPresentTimeGOOGLE extends Struct<VkPresentTimeGOOGLE> implements NativeResource {
 
@@ -78,16 +70,16 @@ public class VkPresentTimeGOOGLE extends Struct<VkPresentTimeGOOGLE> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an application-provided identification value, that <b>can</b> be used with the results of {@link GOOGLEDisplayTiming#vkGetPastPresentationTimingGOOGLE GetPastPresentationTimingGOOGLE}, in order to uniquely identify this present. In order to be useful to the application, it <b>should</b> be unique within some period of time that is meaningful to the application. */
+    /** @return the value of the {@code presentID} field. */
     @NativeType("uint32_t")
     public int presentID() { return npresentID(address()); }
-    /** specifies that the image given <b>should</b> not be displayed to the user any earlier than this time. {@code desiredPresentTime} is a time in nanoseconds, relative to a monotonically-increasing clock (e.g. {@code CLOCK_MONOTONIC} (see clock_gettime(2)) on Android and Linux). A value of zero specifies that the presentation engine <b>may</b> display the image at any time. This is useful when the application desires to provide {@code presentID}, but does not need a specific {@code desiredPresentTime}. */
+    /** @return the value of the {@code desiredPresentTime} field. */
     @NativeType("uint64_t")
     public long desiredPresentTime() { return ndesiredPresentTime(address()); }
 
-    /** Sets the specified value to the {@link #presentID} field. */
+    /** Sets the specified value to the {@code presentID} field. */
     public VkPresentTimeGOOGLE presentID(@NativeType("uint32_t") int value) { npresentID(address(), value); return this; }
-    /** Sets the specified value to the {@link #desiredPresentTime} field. */
+    /** Sets the specified value to the {@code desiredPresentTime} field. */
     public VkPresentTimeGOOGLE desiredPresentTime(@NativeType("uint64_t") long value) { ndesiredPresentTime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,16 +288,16 @@ public class VkPresentTimeGOOGLE extends Struct<VkPresentTimeGOOGLE> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPresentTimeGOOGLE#presentID} field. */
+        /** @return the value of the {@code presentID} field. */
         @NativeType("uint32_t")
         public int presentID() { return VkPresentTimeGOOGLE.npresentID(address()); }
-        /** @return the value of the {@link VkPresentTimeGOOGLE#desiredPresentTime} field. */
+        /** @return the value of the {@code desiredPresentTime} field. */
         @NativeType("uint64_t")
         public long desiredPresentTime() { return VkPresentTimeGOOGLE.ndesiredPresentTime(address()); }
 
-        /** Sets the specified value to the {@link VkPresentTimeGOOGLE#presentID} field. */
+        /** Sets the specified value to the {@code presentID} field. */
         public VkPresentTimeGOOGLE.Buffer presentID(@NativeType("uint32_t") int value) { VkPresentTimeGOOGLE.npresentID(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPresentTimeGOOGLE#desiredPresentTime} field. */
+        /** Sets the specified value to the {@code desiredPresentTime} field. */
         public VkPresentTimeGOOGLE.Buffer desiredPresentTime(@NativeType("uint64_t") long value) { VkPresentTimeGOOGLE.ndesiredPresentTime(address(), value); return this; }
 
     }

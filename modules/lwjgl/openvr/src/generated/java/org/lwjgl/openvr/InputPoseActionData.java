@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct InputPoseActionData_t {
- *     bool {@link #bActive};
- *     VRInputValueHandle_t {@link #activeOrigin};
- *     {@link TrackedDevicePose TrackedDevicePose_t} {@link #pose};
- * }</code></pre>
+ *     bool bActive;
+ *     VRInputValueHandle_t activeOrigin;
+ *     {@link TrackedDevicePose TrackedDevicePose_t} pose;
+ * }}</pre>
  */
 @NativeType("struct InputPoseActionData_t")
 public class InputPoseActionData extends Struct<InputPoseActionData> implements NativeResource {
@@ -77,13 +75,13 @@ public class InputPoseActionData extends Struct<InputPoseActionData> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** whether or not this action is currently available to be bound in the active action set */
+    /** @return the value of the {@code bActive} field. */
     @NativeType("bool")
     public boolean bActive() { return nbActive(address()); }
-    /** the origin that caused this action's current state */
+    /** @return the value of the {@code activeOrigin} field. */
     @NativeType("VRInputValueHandle_t")
     public long activeOrigin() { return nactiveOrigin(address()); }
-    /** the current state of this action */
+    /** @return a {@link TrackedDevicePose} view of the {@code pose} field. */
     @NativeType("TrackedDevicePose_t")
     public TrackedDevicePose pose() { return npose(address()); }
 
@@ -267,13 +265,13 @@ public class InputPoseActionData extends Struct<InputPoseActionData> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link InputPoseActionData#bActive} field. */
+        /** @return the value of the {@code bActive} field. */
         @NativeType("bool")
         public boolean bActive() { return InputPoseActionData.nbActive(address()); }
-        /** @return the value of the {@link InputPoseActionData#activeOrigin} field. */
+        /** @return the value of the {@code activeOrigin} field. */
         @NativeType("VRInputValueHandle_t")
         public long activeOrigin() { return InputPoseActionData.nactiveOrigin(address()); }
-        /** @return a {@link TrackedDevicePose} view of the {@link InputPoseActionData#pose} field. */
+        /** @return a {@link TrackedDevicePose} view of the {@code pose} field. */
         @NativeType("TrackedDevicePose_t")
         public TrackedDevicePose pose() { return InputPoseActionData.npose(address()); }
 

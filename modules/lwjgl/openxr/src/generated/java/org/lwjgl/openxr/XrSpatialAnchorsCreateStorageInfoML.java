@@ -16,34 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information used to create a handle to interact with storage for spatial anchors.
- * 
- * <h5>Member Descriptions</h5>
- * 
- * <ul>
- * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
- * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsCreateStorageInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLSpatialAnchorsStorage#xrCreateSpatialAnchorsStorageML CreateSpatialAnchorsStorageML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsCreateStorageInfoML {
  *     XrStructureType type;
  *     void const * next;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrSpatialAnchorsCreateStorageInfoML extends Struct<XrSpatialAnchorsCreateStorageInfoML> implements NativeResource {
 

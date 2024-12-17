@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The alpha value of the passthrough.
- * 
- * <h5>Description</h5>
- * 
- * <p>The application <b>can</b> specify the {@link XrPassthroughColorHTC} to adjust the alpha value of the passthrough. The range is between 0.0f and 1.0f, 1.0f means opaque.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link HTCPassthrough XR_HTC_passthrough} extension <b>must</b> be enabled prior to using {@link XrPassthroughColorHTC}</li>
- * <li>{@code type} <b>must</b> be {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_COLOR_HTC TYPE_PASSTHROUGH_COLOR_HTC}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerPassthroughHTC}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPassthroughColorHTC {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     float {@link #alpha};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     float alpha;
+ * }}</pre>
  */
 public class XrPassthroughColorHTC extends Struct<XrPassthroughColorHTC> implements NativeResource {
 
@@ -94,22 +74,22 @@ public class XrPassthroughColorHTC extends Struct<XrPassthroughColorHTC> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the alpha value of the passthrough in the range [0, 1]. */
+    /** @return the value of the {@code alpha} field. */
     public float alpha() { return nalpha(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPassthroughColorHTC type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_COLOR_HTC TYPE_PASSTHROUGH_COLOR_HTC} value to the {@link #type} field. */
+    /** Sets the {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_COLOR_HTC TYPE_PASSTHROUGH_COLOR_HTC} value to the {@code type} field. */
     public XrPassthroughColorHTC type$Default() { return type(HTCPassthrough.XR_TYPE_PASSTHROUGH_COLOR_HTC); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPassthroughColorHTC next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #alpha} field. */
+    /** Sets the specified value to the {@code alpha} field. */
     public XrPassthroughColorHTC alpha(float value) { nalpha(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -305,22 +285,22 @@ public class XrPassthroughColorHTC extends Struct<XrPassthroughColorHTC> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPassthroughColorHTC#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughColorHTC.ntype(address()); }
-        /** @return the value of the {@link XrPassthroughColorHTC#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughColorHTC.nnext(address()); }
-        /** @return the value of the {@link XrPassthroughColorHTC#alpha} field. */
+        /** @return the value of the {@code alpha} field. */
         public float alpha() { return XrPassthroughColorHTC.nalpha(address()); }
 
-        /** Sets the specified value to the {@link XrPassthroughColorHTC#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPassthroughColorHTC.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughColorHTC.ntype(address(), value); return this; }
-        /** Sets the {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_COLOR_HTC TYPE_PASSTHROUGH_COLOR_HTC} value to the {@link XrPassthroughColorHTC#type} field. */
+        /** Sets the {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_COLOR_HTC TYPE_PASSTHROUGH_COLOR_HTC} value to the {@code type} field. */
         public XrPassthroughColorHTC.Buffer type$Default() { return type(HTCPassthrough.XR_TYPE_PASSTHROUGH_COLOR_HTC); }
-        /** Sets the specified value to the {@link XrPassthroughColorHTC#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPassthroughColorHTC.Buffer next(@NativeType("void const *") long value) { XrPassthroughColorHTC.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughColorHTC#alpha} field. */
+        /** Sets the specified value to the {@code alpha} field. */
         public XrPassthroughColorHTC.Buffer alpha(float value) { XrPassthroughColorHTC.nalpha(address(), value); return this; }
 
     }

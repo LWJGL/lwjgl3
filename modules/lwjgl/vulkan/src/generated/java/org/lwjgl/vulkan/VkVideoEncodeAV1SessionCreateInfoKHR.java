@@ -18,23 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifies AV1 encode session parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeAV1SessionCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #useMaxLevel};
- *     StdVideoAV1Level {@link #maxLevel};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 useMaxLevel;
+ *     StdVideoAV1Level maxLevel;
+ * }}</pre>
  */
 public class VkVideoEncodeAV1SessionCreateInfoKHR extends Struct<VkVideoEncodeAV1SessionCreateInfoKHR> implements NativeResource {
 
@@ -90,28 +80,28 @@ public class VkVideoEncodeAV1SessionCreateInfoKHR extends Struct<VkVideoEncodeAV
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the value of {@code maxLevel} should be used by the implementation. When it is set to {@link VK10#VK_FALSE FALSE}, the implementation ignores the value of {@code maxLevel} and uses the value of {@link VkVideoEncodeAV1CapabilitiesKHR}{@code ::maxLevel}, as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile. */
+    /** @return the value of the {@code useMaxLevel} field. */
     @NativeType("VkBool32")
     public boolean useMaxLevel() { return nuseMaxLevel(address()) != 0; }
-    /** a {@code StdVideoAV1Level} value specifying the upper bound on the AV1 level for the video bitstreams produced by the created video session. */
+    /** @return the value of the {@code maxLevel} field. */
     @NativeType("StdVideoAV1Level")
     public int maxLevel() { return nmaxLevel(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeAV1SessionCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeAV1SessionCreateInfoKHR sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeAV1SessionCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #useMaxLevel} field. */
+    /** Sets the specified value to the {@code useMaxLevel} field. */
     public VkVideoEncodeAV1SessionCreateInfoKHR useMaxLevel(@NativeType("VkBool32") boolean value) { nuseMaxLevel(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #maxLevel} field. */
+    /** Sets the specified value to the {@code maxLevel} field. */
     public VkVideoEncodeAV1SessionCreateInfoKHR maxLevel(@NativeType("StdVideoAV1Level") int value) { nmaxLevel(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,28 +303,28 @@ public class VkVideoEncodeAV1SessionCreateInfoKHR extends Struct<VkVideoEncodeAV
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeAV1SessionCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeAV1SessionCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1SessionCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeAV1SessionCreateInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1SessionCreateInfoKHR#useMaxLevel} field. */
+        /** @return the value of the {@code useMaxLevel} field. */
         @NativeType("VkBool32")
         public boolean useMaxLevel() { return VkVideoEncodeAV1SessionCreateInfoKHR.nuseMaxLevel(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeAV1SessionCreateInfoKHR#maxLevel} field. */
+        /** @return the value of the {@code maxLevel} field. */
         @NativeType("StdVideoAV1Level")
         public int maxLevel() { return VkVideoEncodeAV1SessionCreateInfoKHR.nmaxLevel(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeAV1SessionCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeAV1SessionCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeAV1SessionCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR} value to the {@link VkVideoEncodeAV1SessionCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeAV1SessionCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_SESSION_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1SessionCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeAV1SessionCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeAV1SessionCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1SessionCreateInfoKHR#useMaxLevel} field. */
+        /** Sets the specified value to the {@code useMaxLevel} field. */
         public VkVideoEncodeAV1SessionCreateInfoKHR.Buffer useMaxLevel(@NativeType("VkBool32") boolean value) { VkVideoEncodeAV1SessionCreateInfoKHR.nuseMaxLevel(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1SessionCreateInfoKHR#maxLevel} field. */
+        /** Sets the specified value to the {@code maxLevel} field. */
         public VkVideoEncodeAV1SessionCreateInfoKHR.Buffer maxLevel(@NativeType("StdVideoAV1Level") int value) { VkVideoEncodeAV1SessionCreateInfoKHR.nmaxLevel(address(), value); return this; }
 
     }

@@ -14,16 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_popup_buffer {
  *     nk_size begin;
  *     nk_size parent;
  *     nk_size last;
  *     nk_size end;
  *     nk_bool active;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_popup_buffer")
 public class NkPopupBuffer extends Struct<NkPopupBuffer> {

@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LZ4F_decompressOptions_t {
- *     unsigned {@link #stableDst};
- *     unsigned {@link #skipChecksums};
- *     unsigned {@link #reserved1};
- *     unsigned {@link #reserved0};
- * }</code></pre>
+ *     unsigned stableDst;
+ *     unsigned skipChecksums;
+ *     unsigned reserved1;
+ *     unsigned reserved0;
+ * }}</pre>
  */
 @NativeType("struct LZ4F_decompressOptions_t")
 public class LZ4FDecompressOptions extends Struct<LZ4FDecompressOptions> implements NativeResource {
@@ -81,34 +79,26 @@ public class LZ4FDecompressOptions extends Struct<LZ4FDecompressOptions> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * pledges that last 64KB decompressed data is present right before {@code dstBuffer} pointer.
-     * 
-     * <p>This optimization skips internal storage operations. Once set, this pledge must remain valid up to the end of current frame.</p>
-     */
+    /** @return the value of the {@code stableDst} field. */
     @NativeType("unsigned")
     public int stableDst() { return nstableDst(address()); }
-    /**
-     * disable checksum calculation and verification, even when one is present in frame, to save CPU time.
-     * 
-     * <p>Setting this option to 1 once disables all checksums for the rest of the frame.</p>
-     */
+    /** @return the value of the {@code skipChecksums} field. */
     @NativeType("unsigned")
     public int skipChecksums() { return nskipChecksums(address()); }
-    /** must be set to zero for forward compatibility */
+    /** @return the value of the {@code reserved1} field. */
     @NativeType("unsigned")
     public int reserved1() { return nreserved1(address()); }
-    /** idem */
+    /** @return the value of the {@code reserved0} field. */
     @NativeType("unsigned")
     public int reserved0() { return nreserved0(address()); }
 
-    /** Sets the specified value to the {@link #stableDst} field. */
+    /** Sets the specified value to the {@code stableDst} field. */
     public LZ4FDecompressOptions stableDst(@NativeType("unsigned") int value) { nstableDst(address(), value); return this; }
-    /** Sets the specified value to the {@link #skipChecksums} field. */
+    /** Sets the specified value to the {@code skipChecksums} field. */
     public LZ4FDecompressOptions skipChecksums(@NativeType("unsigned") int value) { nskipChecksums(address(), value); return this; }
-    /** Sets the specified value to the {@link #reserved1} field. */
+    /** Sets the specified value to the {@code reserved1} field. */
     public LZ4FDecompressOptions reserved1(@NativeType("unsigned") int value) { nreserved1(address(), value); return this; }
-    /** Sets the specified value to the {@link #reserved0} field. */
+    /** Sets the specified value to the {@code reserved0} field. */
     public LZ4FDecompressOptions reserved0(@NativeType("unsigned") int value) { nreserved0(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,26 +319,26 @@ public class LZ4FDecompressOptions extends Struct<LZ4FDecompressOptions> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link LZ4FDecompressOptions#stableDst} field. */
+        /** @return the value of the {@code stableDst} field. */
         @NativeType("unsigned")
         public int stableDst() { return LZ4FDecompressOptions.nstableDst(address()); }
-        /** @return the value of the {@link LZ4FDecompressOptions#skipChecksums} field. */
+        /** @return the value of the {@code skipChecksums} field. */
         @NativeType("unsigned")
         public int skipChecksums() { return LZ4FDecompressOptions.nskipChecksums(address()); }
-        /** @return the value of the {@link LZ4FDecompressOptions#reserved1} field. */
+        /** @return the value of the {@code reserved1} field. */
         @NativeType("unsigned")
         public int reserved1() { return LZ4FDecompressOptions.nreserved1(address()); }
-        /** @return the value of the {@link LZ4FDecompressOptions#reserved0} field. */
+        /** @return the value of the {@code reserved0} field. */
         @NativeType("unsigned")
         public int reserved0() { return LZ4FDecompressOptions.nreserved0(address()); }
 
-        /** Sets the specified value to the {@link LZ4FDecompressOptions#stableDst} field. */
+        /** Sets the specified value to the {@code stableDst} field. */
         public LZ4FDecompressOptions.Buffer stableDst(@NativeType("unsigned") int value) { LZ4FDecompressOptions.nstableDst(address(), value); return this; }
-        /** Sets the specified value to the {@link LZ4FDecompressOptions#skipChecksums} field. */
+        /** Sets the specified value to the {@code skipChecksums} field. */
         public LZ4FDecompressOptions.Buffer skipChecksums(@NativeType("unsigned") int value) { LZ4FDecompressOptions.nskipChecksums(address(), value); return this; }
-        /** Sets the specified value to the {@link LZ4FDecompressOptions#reserved1} field. */
+        /** Sets the specified value to the {@code reserved1} field. */
         public LZ4FDecompressOptions.Buffer reserved1(@NativeType("unsigned") int value) { LZ4FDecompressOptions.nreserved1(address(), value); return this; }
-        /** Sets the specified value to the {@link LZ4FDecompressOptions#reserved0} field. */
+        /** Sets the specified value to the {@code reserved0} field. */
         public LZ4FDecompressOptions.Buffer reserved0(@NativeType("unsigned") int value) { LZ4FDecompressOptions.nreserved0(address(), value); return this; }
 
     }

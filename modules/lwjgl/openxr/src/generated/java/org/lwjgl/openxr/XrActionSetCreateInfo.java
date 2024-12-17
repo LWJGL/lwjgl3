@@ -19,41 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.XR10.*;
 
 /**
- * XrActionSet creation info.
- * 
- * <h5>Description</h5>
- * 
- * <p>When multiple actions are bound to the same input source, the {@code priority} of each action set determines which bindings are suppressed. Runtimes <b>must</b> ignore input sources from action sets with a lower priority number if those specific input sources are also present in active actions within a higher priority action set. If multiple action sets with the same priority are bound to the same input source and that is the highest priority number, runtimes <b>must</b> process all those bindings at the same time.</p>
- * 
- * <p>Two actions are considered to be bound to the same input source if they use the same <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#semantic-paths-input">identifier and optional location</a> path segments, even if they have different component segments.</p>
- * 
- * <p>When runtimes are ignoring bindings because of priority, they <b>must</b> treat the binding to that input source as though they do not exist. That means the {@code isActive} field <b>must</b> be {@link XR10#XR_FALSE FALSE} when retrieving action data, and that the runtime <b>must</b> not provide any visual, haptic, or other feedback related to the binding of that action to that input source. Other actions in the same action set which are bound to input sources that do not collide are not affected and are processed as normal.</p>
- * 
- * <p>If {@code actionSetName} or {@code localizedActionSetName} are empty strings, the runtime <b>must</b> return {@link XR10#XR_ERROR_NAME_INVALID ERROR_NAME_INVALID} or {@link XR10#XR_ERROR_LOCALIZED_NAME_INVALID ERROR_LOCALIZED_NAME_INVALID} respectively. If {@code actionSetName} or {@code localizedActionSetName} are duplicates of the corresponding field for any existing action set in the specified instance, the runtime <b>must</b> return {@link XR10#XR_ERROR_NAME_DUPLICATED ERROR_NAME_DUPLICATED} or {@link XR10#XR_ERROR_LOCALIZED_NAME_DUPLICATED ERROR_LOCALIZED_NAME_DUPLICATED} respectively. If the conflicting action set is destroyed, the conflicting field is no longer considered duplicated. If {@code actionSetName} contains characters which are not allowed in a single level of a <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#semantic-paths-well-formed">well-formed path string</a>, the runtime <b>must</b> return {@link XR10#XR_ERROR_PATH_FORMAT_INVALID ERROR_PATH_FORMAT_INVALID}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTION_SET_CREATE_INFO TYPE_ACTION_SET_CREATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code actionSetName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link XR10#XR_MAX_ACTION_SET_NAME_SIZE MAX_ACTION_SET_NAME_SIZE}</li>
- * <li>{@code localizedActionSetName} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link XR10#XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE MAX_LOCALIZED_ACTION_SET_NAME_SIZE}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateActionSet CreateActionSet}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActionSetCreateInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     char {@link #actionSetName}[XR_MAX_ACTION_SET_NAME_SIZE];
- *     char {@link #localizedActionSetName}[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE];
- *     uint32_t {@link #priority};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     char actionSetName[XR_MAX_ACTION_SET_NAME_SIZE];
+ *     char localizedActionSetName[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE];
+ *     uint32_t priority;
+ * }}</pre>
  */
 public class XrActionSetCreateInfo extends Struct<XrActionSetCreateInfo> implements NativeResource {
 
@@ -112,39 +85,39 @@ public class XrActionSetCreateInfo extends Struct<XrActionSetCreateInfo> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an array containing a {@code NULL} terminated non-empty string with the name of this action set. */
+    /** @return a {@link ByteBuffer} view of the {@code actionSetName} field. */
     @NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]")
     public ByteBuffer actionSetName() { return nactionSetName(address()); }
-    /** an array containing a {@code NULL} terminated non-empty string with the name of this action set. */
+    /** @return the null-terminated string stored in the {@code actionSetName} field. */
     @NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]")
     public String actionSetNameString() { return nactionSetNameString(address()); }
-    /** an array containing a {@code NULL} terminated {@code UTF}-8 string that can be presented to the user as a description of the action set. This string should be presented in the system’s current active locale. */
+    /** @return a {@link ByteBuffer} view of the {@code localizedActionSetName} field. */
     @NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]")
     public ByteBuffer localizedActionSetName() { return nlocalizedActionSetName(address()); }
-    /** an array containing a {@code NULL} terminated {@code UTF}-8 string that can be presented to the user as a description of the action set. This string should be presented in the system’s current active locale. */
+    /** @return the null-terminated string stored in the {@code localizedActionSetName} field. */
     @NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]")
     public String localizedActionSetNameString() { return nlocalizedActionSetNameString(address()); }
-    /** defines which action sets' actions are active on a given input source when actions on multiple active action sets are bound to the same input source. Larger priority numbers take precedence over smaller priority numbers. */
+    /** @return the value of the {@code priority} field. */
     @NativeType("uint32_t")
     public int priority() { return npriority(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrActionSetCreateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_ACTION_SET_CREATE_INFO TYPE_ACTION_SET_CREATE_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_ACTION_SET_CREATE_INFO TYPE_ACTION_SET_CREATE_INFO} value to the {@code type} field. */
     public XrActionSetCreateInfo type$Default() { return type(XR10.XR_TYPE_ACTION_SET_CREATE_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrActionSetCreateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified encoded string to the {@link #actionSetName} field. */
+    /** Copies the specified encoded string to the {@code actionSetName} field. */
     public XrActionSetCreateInfo actionSetName(@NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]") ByteBuffer value) { nactionSetName(address(), value); return this; }
-    /** Copies the specified encoded string to the {@link #localizedActionSetName} field. */
+    /** Copies the specified encoded string to the {@code localizedActionSetName} field. */
     public XrActionSetCreateInfo localizedActionSetName(@NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]") ByteBuffer value) { nlocalizedActionSetName(address(), value); return this; }
-    /** Sets the specified value to the {@link #priority} field. */
+    /** Sets the specified value to the {@code priority} field. */
     public XrActionSetCreateInfo priority(@NativeType("uint32_t") int value) { npriority(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -368,39 +341,39 @@ public class XrActionSetCreateInfo extends Struct<XrActionSetCreateInfo> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActionSetCreateInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionSetCreateInfo.ntype(address()); }
-        /** @return the value of the {@link XrActionSetCreateInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionSetCreateInfo.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrActionSetCreateInfo#actionSetName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code actionSetName} field. */
         @NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]")
         public ByteBuffer actionSetName() { return XrActionSetCreateInfo.nactionSetName(address()); }
-        /** @return the null-terminated string stored in the {@link XrActionSetCreateInfo#actionSetName} field. */
+        /** @return the null-terminated string stored in the {@code actionSetName} field. */
         @NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]")
         public String actionSetNameString() { return XrActionSetCreateInfo.nactionSetNameString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrActionSetCreateInfo#localizedActionSetName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code localizedActionSetName} field. */
         @NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]")
         public ByteBuffer localizedActionSetName() { return XrActionSetCreateInfo.nlocalizedActionSetName(address()); }
-        /** @return the null-terminated string stored in the {@link XrActionSetCreateInfo#localizedActionSetName} field. */
+        /** @return the null-terminated string stored in the {@code localizedActionSetName} field. */
         @NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]")
         public String localizedActionSetNameString() { return XrActionSetCreateInfo.nlocalizedActionSetNameString(address()); }
-        /** @return the value of the {@link XrActionSetCreateInfo#priority} field. */
+        /** @return the value of the {@code priority} field. */
         @NativeType("uint32_t")
         public int priority() { return XrActionSetCreateInfo.npriority(address()); }
 
-        /** Sets the specified value to the {@link XrActionSetCreateInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrActionSetCreateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrActionSetCreateInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_ACTION_SET_CREATE_INFO TYPE_ACTION_SET_CREATE_INFO} value to the {@link XrActionSetCreateInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_ACTION_SET_CREATE_INFO TYPE_ACTION_SET_CREATE_INFO} value to the {@code type} field. */
         public XrActionSetCreateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_ACTION_SET_CREATE_INFO); }
-        /** Sets the specified value to the {@link XrActionSetCreateInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrActionSetCreateInfo.Buffer next(@NativeType("void const *") long value) { XrActionSetCreateInfo.nnext(address(), value); return this; }
-        /** Copies the specified encoded string to the {@link XrActionSetCreateInfo#actionSetName} field. */
+        /** Copies the specified encoded string to the {@code actionSetName} field. */
         public XrActionSetCreateInfo.Buffer actionSetName(@NativeType("char[XR_MAX_ACTION_SET_NAME_SIZE]") ByteBuffer value) { XrActionSetCreateInfo.nactionSetName(address(), value); return this; }
-        /** Copies the specified encoded string to the {@link XrActionSetCreateInfo#localizedActionSetName} field. */
+        /** Copies the specified encoded string to the {@code localizedActionSetName} field. */
         public XrActionSetCreateInfo.Buffer localizedActionSetName(@NativeType("char[XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE]") ByteBuffer value) { XrActionSetCreateInfo.nlocalizedActionSetName(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionSetCreateInfo#priority} field. */
+        /** Sets the specified value to the {@code priority} field. */
         public XrActionSetCreateInfo.Buffer priority(@NativeType("uint32_t") int value) { XrActionSetCreateInfo.npriority(address(), value); return this; }
 
     }

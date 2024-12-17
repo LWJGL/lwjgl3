@@ -16,18 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Store audio PCM data (as 32b float samples) for an audio channel.
- * 
- * <p>Note: needs to be released with {@link OVRUtil#ovr_ReleaseAudioChannelData _ReleaseAudioChannelData} to avoid memory leak.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrAudioChannelData {
- *     float const * {@link #Samples};
- *     int {@link #SamplesCount};
- *     int {@link #Frequency};
- * }</code></pre>
+ *     float const * Samples;
+ *     int SamplesCount;
+ *     int Frequency;
+ * }}</pre>
  */
 @NativeType("struct ovrAudioChannelData")
 public class OVRAudioChannelData extends Struct<OVRAudioChannelData> implements NativeResource {
@@ -81,12 +75,12 @@ public class OVRAudioChannelData extends Struct<OVRAudioChannelData> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** samples stored as floats {@code [-1.0f, 1.0f]} */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code Samples} field. */
     @NativeType("float const *")
     public FloatBuffer Samples() { return nSamples(address()); }
-    /** number of samples */
+    /** @return the value of the {@code SamplesCount} field. */
     public int SamplesCount() { return nSamplesCount(address()); }
-    /** frequency (e.g. 44100) */
+    /** @return the value of the {@code Frequency} field. */
     public int Frequency() { return nFrequency(address()); }
 
     // -----------------------------------
@@ -269,12 +263,12 @@ public class OVRAudioChannelData extends Struct<OVRAudioChannelData> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link FloatBuffer} view of the data pointed to by the {@link OVRAudioChannelData#Samples} field. */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code Samples} field. */
         @NativeType("float const *")
         public FloatBuffer Samples() { return OVRAudioChannelData.nSamples(address()); }
-        /** @return the value of the {@link OVRAudioChannelData#SamplesCount} field. */
+        /** @return the value of the {@code SamplesCount} field. */
         public int SamplesCount() { return OVRAudioChannelData.nSamplesCount(address()); }
-        /** @return the value of the {@link OVRAudioChannelData#Frequency} field. */
+        /** @return the value of the {@code Frequency} field. */
         public int Frequency() { return OVRAudioChannelData.nFrequency(address()); }
 
     }

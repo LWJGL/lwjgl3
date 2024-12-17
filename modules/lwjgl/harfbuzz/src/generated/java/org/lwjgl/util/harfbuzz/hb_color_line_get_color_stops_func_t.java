@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * unsigned int (*{@link #invoke}) (
- *     hb_color_line_t *color_line,
- *     void *color_line_data,
- *     unsigned int start,
- *     unsigned int *count,
- *     hb_color_stop_t *color_stops,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_color_line_get_color_stops_func_t} */
 public abstract class hb_color_line_get_color_stops_func_t extends Callback implements hb_color_line_get_color_stops_func_tI {
 
     /**

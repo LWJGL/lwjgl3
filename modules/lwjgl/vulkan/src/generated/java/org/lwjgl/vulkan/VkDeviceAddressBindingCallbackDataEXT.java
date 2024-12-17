@@ -16,46 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters returned to the callback.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-reportAddressBinding">{@code reportAddressBinding}</a> feature is enabled and the implementation binds or unbinds a region of virtual address space associated with a Vulkan object, the implementation <b>must</b> submit a debug message with the following properties:</p>
- * 
- * <ul>
- * <li>{@code messageSeverity} equal to {@link EXTDebugUtils#VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT}</li>
- * <li>{@code messageTypes} equal to {@link EXTDeviceAddressBindingReport#VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT}</li>
- * <li>{@link VkDebugUtilsMessengerCallbackDataEXT}{@code ::pObjects} <b>must</b> identify the associated Vulkan object</li>
- * <li>{@link VkDeviceAddressBindingCallbackDataEXT} <b>must</b> be included in the {@code pNext} chain of {@link VkDebugUtilsMessengerCallbackDataEXT}</li>
- * </ul>
- * 
- * <p>These debug messages <b>must</b> be emitted both for GPU virtual address space regions that are explicitly bound to a Vulkan object via the {@code vkBind}*Memory/{@code vkBind}*Memory2 functions, and for those that are implicitly generated via memory allocation or importing external memory.</p>
- * 
- * <p>An implementation <b>may</b> report binding events associated with a Vulkan object via {@code VkDebugUtilsMessengerEXT} prior to the object becoming visible to an application via other Vulkan commands. For example, object creation functions <b>may</b> report binding events that occur during an objects creation. In such cases, {@link VkDeviceAddressBindingCallbackDataEXT}{@code ::flags} <b>must</b> include {@link EXTDeviceAddressBindingReport#VK_DEVICE_ADDRESS_BINDING_INTERNAL_OBJECT_BIT_EXT DEVICE_ADDRESS_BINDING_INTERNAL_OBJECT_BIT_EXT}.</p>
- * 
- * <p>Object handles reported in this manner are not <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fundamentals-validusage-handles">valid object handles</a>, and <b>must</b> not be used as an input parameter to any Vulkan command.</p>
- * 
- * <p>Any valid object handle returned by an object creation function <b>must</b> match the handle specified via any previously reported binding events associated with the object’s creation.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceAddressBindingReport#VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkDeviceAddressBindingFlagBitsEXT} values</li>
- * <li>{@code bindingType} <b>must</b> be a valid {@code VkDeviceAddressBindingTypeEXT} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceAddressBindingCallbackDataEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceAddressBindingFlagsEXT {@link #flags};
- *     VkDeviceAddress {@link #baseAddress};
- *     VkDeviceSize {@link #size};
- *     VkDeviceAddressBindingTypeEXT {@link #bindingType};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceAddressBindingFlagsEXT flags;
+ *     VkDeviceAddress baseAddress;
+ *     VkDeviceSize size;
+ *     VkDeviceAddressBindingTypeEXT bindingType;
+ * }}</pre>
  */
 public class VkDeviceAddressBindingCallbackDataEXT extends Struct<VkDeviceAddressBindingCallbackDataEXT> implements NativeResource {
 
@@ -117,38 +86,38 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct<VkDeviceAddres
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkDeviceAddressBindingFlagBitsEXT} specifying additional information about the binding event that caused the callback to be called. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkDeviceAddressBindingFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** a GPU-accessible virtual address identifying the start of a region of the virtual address space associated with a Vulkan object, as identified by the {@code pObjects} member of {@link VkDebugUtilsMessengerCallbackDataEXT}. */
+    /** @return the value of the {@code baseAddress} field. */
     @NativeType("VkDeviceAddress")
     public long baseAddress() { return nbaseAddress(address()); }
-    /** the size in bytes of a region of GPU-accessible virtual address space. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** a {@code VkDeviceAddressBindingTypeEXT} specifying the type of binding event that caused the callback to be called. */
+    /** @return the value of the {@code bindingType} field. */
     @NativeType("VkDeviceAddressBindingTypeEXT")
     public int bindingType() { return nbindingType(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceAddressBindingCallbackDataEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceAddressBindingReport#VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceAddressBindingReport#VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT} value to the {@code sType} field. */
     public VkDeviceAddressBindingCallbackDataEXT sType$Default() { return sType(EXTDeviceAddressBindingReport.VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceAddressBindingCallbackDataEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkDeviceAddressBindingCallbackDataEXT flags(@NativeType("VkDeviceAddressBindingFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #baseAddress} field. */
+    /** Sets the specified value to the {@code baseAddress} field. */
     public VkDeviceAddressBindingCallbackDataEXT baseAddress(@NativeType("VkDeviceAddress") long value) { nbaseAddress(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkDeviceAddressBindingCallbackDataEXT size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@link #bindingType} field. */
+    /** Sets the specified value to the {@code bindingType} field. */
     public VkDeviceAddressBindingCallbackDataEXT bindingType(@NativeType("VkDeviceAddressBindingTypeEXT") int value) { nbindingType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -362,38 +331,38 @@ public class VkDeviceAddressBindingCallbackDataEXT extends Struct<VkDeviceAddres
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceAddressBindingCallbackDataEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceAddressBindingCallbackDataEXT.nsType(address()); }
-        /** @return the value of the {@link VkDeviceAddressBindingCallbackDataEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDeviceAddressBindingCallbackDataEXT.npNext(address()); }
-        /** @return the value of the {@link VkDeviceAddressBindingCallbackDataEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkDeviceAddressBindingFlagsEXT")
         public int flags() { return VkDeviceAddressBindingCallbackDataEXT.nflags(address()); }
-        /** @return the value of the {@link VkDeviceAddressBindingCallbackDataEXT#baseAddress} field. */
+        /** @return the value of the {@code baseAddress} field. */
         @NativeType("VkDeviceAddress")
         public long baseAddress() { return VkDeviceAddressBindingCallbackDataEXT.nbaseAddress(address()); }
-        /** @return the value of the {@link VkDeviceAddressBindingCallbackDataEXT#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkDeviceAddressBindingCallbackDataEXT.nsize(address()); }
-        /** @return the value of the {@link VkDeviceAddressBindingCallbackDataEXT#bindingType} field. */
+        /** @return the value of the {@code bindingType} field. */
         @NativeType("VkDeviceAddressBindingTypeEXT")
         public int bindingType() { return VkDeviceAddressBindingCallbackDataEXT.nbindingType(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceAddressBindingCallbackDataEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceAddressBindingCallbackDataEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceAddressBindingCallbackDataEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceAddressBindingReport#VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT} value to the {@link VkDeviceAddressBindingCallbackDataEXT#sType} field. */
+        /** Sets the {@link EXTDeviceAddressBindingReport#VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT} value to the {@code sType} field. */
         public VkDeviceAddressBindingCallbackDataEXT.Buffer sType$Default() { return sType(EXTDeviceAddressBindingReport.VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT); }
-        /** Sets the specified value to the {@link VkDeviceAddressBindingCallbackDataEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceAddressBindingCallbackDataEXT.Buffer pNext(@NativeType("void *") long value) { VkDeviceAddressBindingCallbackDataEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceAddressBindingCallbackDataEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkDeviceAddressBindingCallbackDataEXT.Buffer flags(@NativeType("VkDeviceAddressBindingFlagsEXT") int value) { VkDeviceAddressBindingCallbackDataEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceAddressBindingCallbackDataEXT#baseAddress} field. */
+        /** Sets the specified value to the {@code baseAddress} field. */
         public VkDeviceAddressBindingCallbackDataEXT.Buffer baseAddress(@NativeType("VkDeviceAddress") long value) { VkDeviceAddressBindingCallbackDataEXT.nbaseAddress(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceAddressBindingCallbackDataEXT#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkDeviceAddressBindingCallbackDataEXT.Buffer size(@NativeType("VkDeviceSize") long value) { VkDeviceAddressBindingCallbackDataEXT.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceAddressBindingCallbackDataEXT#bindingType} field. */
+        /** Sets the specified value to the {@code bindingType} field. */
         public VkDeviceAddressBindingCallbackDataEXT.Buffer bindingType(@NativeType("VkDeviceAddressBindingTypeEXT") int value) { VkDeviceAddressBindingCallbackDataEXT.nbindingType(address(), value); return this; }
 
     }

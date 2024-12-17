@@ -16,33 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Virtual keyboard texture data.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using {@link XrVirtualKeyboardTextureDataMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code bufferCapacityInput} is not 0, {@code buffer} <b>must</b> be a pointer to an array of {@code bufferCapacityInput} {@code uint8_t} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAVirtualKeyboard#xrGetVirtualKeyboardTextureDataMETA GetVirtualKeyboardTextureDataMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrVirtualKeyboardTextureDataMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #textureWidth};
- *     uint32_t {@link #textureHeight};
- *     uint32_t {@link #bufferCapacityInput};
- *     uint32_t {@link #bufferCountOutput};
- *     uint8_t * {@link #buffer};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t textureWidth;
+ *     uint32_t textureHeight;
+ *     uint32_t bufferCapacityInput;
+ *     uint32_t bufferCountOutput;
+ *     uint8_t * buffer;
+ * }}</pre>
  */
 public class XrVirtualKeyboardTextureDataMETA extends Struct<XrVirtualKeyboardTextureDataMETA> implements NativeResource {
 
@@ -107,43 +90,43 @@ public class XrVirtualKeyboardTextureDataMETA extends Struct<XrVirtualKeyboardTe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the pixel width of the texture to be updated. */
+    /** @return the value of the {@code textureWidth} field. */
     @NativeType("uint32_t")
     public int textureWidth() { return ntextureWidth(address()); }
-    /** the pixel height of the texture to be updated. */
+    /** @return the value of the {@code textureHeight} field. */
     @NativeType("uint32_t")
     public int textureHeight() { return ntextureHeight(address()); }
-    /** the capacity of {@code buffer}, or 0 to indicate a request to retrieve the required capacity. */
+    /** @return the value of the {@code bufferCapacityInput} field. */
     @NativeType("uint32_t")
     public int bufferCapacityInput() { return nbufferCapacityInput(address()); }
-    /** filled in by the runtime with the byte count written or the required capacity in the case that {@code bufferCapacityInput} is insufficient. */
+    /** @return the value of the {@code bufferCountOutput} field. */
     @NativeType("uint32_t")
     public int bufferCountOutput() { return nbufferCountOutput(address()); }
-    /** the pixel data in linear color space, RGBA 8-bit unsigned normalized integer format (i.e. GL_RGBA8 in OpenGL, VK_FORMAT_R8G8B8A8_UNORM in Vulkan). */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("uint8_t *")
     public @Nullable ByteBuffer buffer() { return nbuffer(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrVirtualKeyboardTextureDataMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META} value to the {@link #type} field. */
+    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META} value to the {@code type} field. */
     public XrVirtualKeyboardTextureDataMETA type$Default() { return type(METAVirtualKeyboard.XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrVirtualKeyboardTextureDataMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #textureWidth} field. */
+    /** Sets the specified value to the {@code textureWidth} field. */
     public XrVirtualKeyboardTextureDataMETA textureWidth(@NativeType("uint32_t") int value) { ntextureWidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #textureHeight} field. */
+    /** Sets the specified value to the {@code textureHeight} field. */
     public XrVirtualKeyboardTextureDataMETA textureHeight(@NativeType("uint32_t") int value) { ntextureHeight(address(), value); return this; }
-    /** Sets the specified value to the {@link #bufferCapacityInput} field. */
+    /** Sets the specified value to the {@code bufferCapacityInput} field. */
     public XrVirtualKeyboardTextureDataMETA bufferCapacityInput(@NativeType("uint32_t") int value) { nbufferCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@link #bufferCountOutput} field. */
+    /** Sets the specified value to the {@code bufferCountOutput} field. */
     public XrVirtualKeyboardTextureDataMETA bufferCountOutput(@NativeType("uint32_t") int value) { nbufferCountOutput(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #buffer} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
     public XrVirtualKeyboardTextureDataMETA buffer(@Nullable @NativeType("uint8_t *") ByteBuffer value) { nbuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -363,43 +346,43 @@ public class XrVirtualKeyboardTextureDataMETA extends Struct<XrVirtualKeyboardTe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrVirtualKeyboardTextureDataMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVirtualKeyboardTextureDataMETA.ntype(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardTextureDataMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrVirtualKeyboardTextureDataMETA.nnext(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardTextureDataMETA#textureWidth} field. */
+        /** @return the value of the {@code textureWidth} field. */
         @NativeType("uint32_t")
         public int textureWidth() { return XrVirtualKeyboardTextureDataMETA.ntextureWidth(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardTextureDataMETA#textureHeight} field. */
+        /** @return the value of the {@code textureHeight} field. */
         @NativeType("uint32_t")
         public int textureHeight() { return XrVirtualKeyboardTextureDataMETA.ntextureHeight(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardTextureDataMETA#bufferCapacityInput} field. */
+        /** @return the value of the {@code bufferCapacityInput} field. */
         @NativeType("uint32_t")
         public int bufferCapacityInput() { return XrVirtualKeyboardTextureDataMETA.nbufferCapacityInput(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardTextureDataMETA#bufferCountOutput} field. */
+        /** @return the value of the {@code bufferCountOutput} field. */
         @NativeType("uint32_t")
         public int bufferCountOutput() { return XrVirtualKeyboardTextureDataMETA.nbufferCountOutput(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link XrVirtualKeyboardTextureDataMETA#buffer} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("uint8_t *")
         public @Nullable ByteBuffer buffer() { return XrVirtualKeyboardTextureDataMETA.nbuffer(address()); }
 
-        /** Sets the specified value to the {@link XrVirtualKeyboardTextureDataMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrVirtualKeyboardTextureDataMETA.Buffer type(@NativeType("XrStructureType") int value) { XrVirtualKeyboardTextureDataMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META} value to the {@link XrVirtualKeyboardTextureDataMETA#type} field. */
+        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META} value to the {@code type} field. */
         public XrVirtualKeyboardTextureDataMETA.Buffer type$Default() { return type(METAVirtualKeyboard.XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META); }
-        /** Sets the specified value to the {@link XrVirtualKeyboardTextureDataMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrVirtualKeyboardTextureDataMETA.Buffer next(@NativeType("void *") long value) { XrVirtualKeyboardTextureDataMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardTextureDataMETA#textureWidth} field. */
+        /** Sets the specified value to the {@code textureWidth} field. */
         public XrVirtualKeyboardTextureDataMETA.Buffer textureWidth(@NativeType("uint32_t") int value) { XrVirtualKeyboardTextureDataMETA.ntextureWidth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardTextureDataMETA#textureHeight} field. */
+        /** Sets the specified value to the {@code textureHeight} field. */
         public XrVirtualKeyboardTextureDataMETA.Buffer textureHeight(@NativeType("uint32_t") int value) { XrVirtualKeyboardTextureDataMETA.ntextureHeight(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardTextureDataMETA#bufferCapacityInput} field. */
+        /** Sets the specified value to the {@code bufferCapacityInput} field. */
         public XrVirtualKeyboardTextureDataMETA.Buffer bufferCapacityInput(@NativeType("uint32_t") int value) { XrVirtualKeyboardTextureDataMETA.nbufferCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardTextureDataMETA#bufferCountOutput} field. */
+        /** Sets the specified value to the {@code bufferCountOutput} field. */
         public XrVirtualKeyboardTextureDataMETA.Buffer bufferCountOutput(@NativeType("uint32_t") int value) { XrVirtualKeyboardTextureDataMETA.nbufferCountOutput(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link XrVirtualKeyboardTextureDataMETA#buffer} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
         public XrVirtualKeyboardTextureDataMETA.Buffer buffer(@Nullable @NativeType("uint8_t *") ByteBuffer value) { XrVirtualKeyboardTextureDataMETA.nbuffer(address(), value); return this; }
 
     }

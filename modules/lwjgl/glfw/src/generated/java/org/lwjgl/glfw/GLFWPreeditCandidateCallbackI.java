@@ -12,22 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetPreeditCandidateCallback SetPreeditCandidateCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window,
- *     int candidates_count,
- *     int selected_index,
- *     int page_start,
- *     int page_size
- * )</code></pre>
- *
- * @since version 3.X
- */
+/** Callback function: {@link #invoke GLFWpreeditcandidatefun} */
 @FunctionalInterface
 @NativeType("GLFWpreeditcandidatefun")
 public interface GLFWPreeditCandidateCallbackI extends CallbackI {
@@ -52,17 +37,7 @@ public interface GLFWPreeditCandidateCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * The function pointer type for preedit candidate callbacks.
-     * 
-     * <p>Use {@link GLFW#glfwGetPreeditCandidate GetPreeditCandidate} to get the candidate text for a specific index.</p>
-     *
-     * @param window           the window that received the event
-     * @param candidates_count candidates count
-     * @param selected_index   index of selected candidate
-     * @param page_start       start index of candidate currently displayed
-     * @param page_size        count of candidates currently displayed
-     */
+    /** {@code void (* GLFWpreeditcandidatefun) (GLFWwindow * window, int candidates_count, int selected_index, int page_start, int page_size)} */
     void invoke(@NativeType("GLFWwindow *") long window, int candidates_count, int selected_index, int page_start, int page_size);
 
 }

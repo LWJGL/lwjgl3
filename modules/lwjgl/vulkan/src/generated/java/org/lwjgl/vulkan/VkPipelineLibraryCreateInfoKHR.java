@@ -17,40 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying pipeline libraries to use when creating a pipeline.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Each element of {@code pLibraries} <b>must</b> have been created with {@link KHRPipelineLibrary#VK_PIPELINE_CREATE_LIBRARY_BIT_KHR PIPELINE_CREATE_LIBRARY_BIT_KHR}</li>
- * <li>If any library in {@code pLibraries} was created with a shader stage with {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT} and {@code identifierSize} not equal to 0, the pipeline <b>must</b> be created with the {@link VK13#VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT} flag set</li>
- * <li>If any element of {@code pLibraries} was created with {@link EXTDescriptorBuffer#VK_PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT}, all elements <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT PIPELINE_CREATE_DESCRIPTOR_BUFFER_BIT_EXT}</li>
- * <li>If {@code pipeline} is being created with {@link VK14#VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT}, every element of {@code pLibraries} <b>must</b> have been created with {@link VK14#VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT}</li>
- * <li>If {@code pipeline} is being created without {@link VK14#VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT}, every element of {@code pLibraries} <b>must</b> have been created without {@link VK14#VK_PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT PIPELINE_CREATE_NO_PROTECTED_ACCESS_BIT}</li>
- * <li>If {@code pipeline} is being created with {@link VK14#VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT}, every element of {@code pLibraries} <b>must</b> have been created with {@link VK14#VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT}</li>
- * <li>If {@code pipeline} is being created without {@link VK14#VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT}, every element of {@code pLibraries} <b>must</b> have been created without {@link VK14#VK_PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT PIPELINE_CREATE_PROTECTED_ACCESS_ONLY_BIT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineLibrary#VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR}</li>
- * <li>If {@code libraryCount} is not 0, {@code pLibraries} <b>must</b> be a valid pointer to an array of {@code libraryCount} valid {@code VkPipeline} handles</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExecutionGraphPipelineCreateInfoAMDX}, {@link VkRayTracingPipelineCreateInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineLibraryCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #libraryCount};
- *     VkPipeline const * {@link #pLibraries};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t libraryCount;
+ *     VkPipeline const * pLibraries;
+ * }}</pre>
  */
 public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCreateInfoKHR> implements NativeResource {
 
@@ -106,26 +79,26 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of pipeline libraries in {@code pLibraries}. */
+    /** @return the value of the {@code libraryCount} field. */
     @NativeType("uint32_t")
     public int libraryCount() { return nlibraryCount(address()); }
-    /** a pointer to an array of {@code VkPipeline} structures specifying pipeline libraries to use when creating a pipeline. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pLibraries} field. */
     @NativeType("VkPipeline const *")
     public @Nullable LongBuffer pLibraries() { return npLibraries(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineLibraryCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineLibrary#VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineLibrary#VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkPipelineLibraryCreateInfoKHR sType$Default() { return sType(KHRPipelineLibrary.VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineLibraryCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pLibraries} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pLibraries} field. */
     public VkPipelineLibraryCreateInfoKHR pLibraries(@Nullable @NativeType("VkPipeline const *") LongBuffer value) { npLibraries(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,26 +309,26 @@ public class VkPipelineLibraryCreateInfoKHR extends Struct<VkPipelineLibraryCrea
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineLibraryCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineLibraryCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkPipelineLibraryCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineLibraryCreateInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkPipelineLibraryCreateInfoKHR#libraryCount} field. */
+        /** @return the value of the {@code libraryCount} field. */
         @NativeType("uint32_t")
         public int libraryCount() { return VkPipelineLibraryCreateInfoKHR.nlibraryCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkPipelineLibraryCreateInfoKHR#pLibraries} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pLibraries} field. */
         @NativeType("VkPipeline const *")
         public @Nullable LongBuffer pLibraries() { return VkPipelineLibraryCreateInfoKHR.npLibraries(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineLibraryCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineLibraryCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineLibraryCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineLibrary#VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR} value to the {@link VkPipelineLibraryCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRPipelineLibrary#VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkPipelineLibraryCreateInfoKHR.Buffer sType$Default() { return sType(KHRPipelineLibrary.VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkPipelineLibraryCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineLibraryCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPipelineLibraryCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkPipelineLibraryCreateInfoKHR#pLibraries} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pLibraries} field. */
         public VkPipelineLibraryCreateInfoKHR.Buffer pLibraries(@Nullable @NativeType("VkPipeline const *") LongBuffer value) { VkPipelineLibraryCreateInfoKHR.npLibraries(address(), value); return this; }
 
     }

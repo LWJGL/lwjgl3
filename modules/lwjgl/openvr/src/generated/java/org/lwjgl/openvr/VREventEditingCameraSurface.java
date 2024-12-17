@@ -14,13 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_EditingCameraSurface_t {
  *     uint64_t overlayHandle;
  *     uint32_t nVisualMode;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_EditingCameraSurface_t")
 public class VREventEditingCameraSurface extends Struct<VREventEditingCameraSurface> {

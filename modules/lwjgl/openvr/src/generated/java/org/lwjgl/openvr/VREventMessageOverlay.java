@@ -14,12 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_MessageOverlay_t {
- *     uint32_t {@link #unVRMessageOverlayResponse};
- * }</code></pre>
+ *     uint32_t unVRMessageOverlayResponse;
+ * }}</pre>
  */
 @NativeType("struct VREvent_MessageOverlay_t")
 public class VREventMessageOverlay extends Struct<VREventMessageOverlay> {
@@ -67,7 +65,7 @@ public class VREventMessageOverlay extends Struct<VREventMessageOverlay> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** one of:<br><table><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_0}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_1}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_2}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ButtonPress_3}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_CouldntFindSystemOverlay}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_CouldntFindOrCreateClientOverlay}</td></tr><tr><td>{@link VR#VRMessageOverlayResponse_ApplicationQuit}</td></tr></table> */
+    /** @return the value of the {@code unVRMessageOverlayResponse} field. */
     @NativeType("uint32_t")
     public int unVRMessageOverlayResponse() { return nunVRMessageOverlayResponse(address()); }
 
@@ -146,7 +144,7 @@ public class VREventMessageOverlay extends Struct<VREventMessageOverlay> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VREventMessageOverlay#unVRMessageOverlayResponse} field. */
+        /** @return the value of the {@code unVRMessageOverlayResponse} field. */
         @NativeType("uint32_t")
         public int unVRMessageOverlayResponse() { return VREventMessageOverlay.nunVRMessageOverlayResponse(address()); }
 

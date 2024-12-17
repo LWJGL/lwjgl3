@@ -14,15 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Notification related events. Details will still change at this point.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Notification_t {
  *     uint64_t ulUserValue;
  *     uint32_t notificationId;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_Notification_t")
 public class VREventNotification extends Struct<VREventNotification> {

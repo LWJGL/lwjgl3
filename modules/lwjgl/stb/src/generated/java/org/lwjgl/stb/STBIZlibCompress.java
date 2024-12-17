@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to {@link STBImageWrite#stbi_zlib_compress}.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * unsigned char * (*{@link #invoke}) (
- *     unsigned char *data,
- *     int data_len,
- *     int *out_len,
- *     int quality
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class STBIZlibCompress extends Callback implements STBIZlibCompressI {
 
     /**

@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing external memory host pointer limits that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExternalMemoryHostPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceSize {@link #minImportedHostPointerAlignment};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceSize minImportedHostPointerAlignment;
+ * }}</pre>
  */
 public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct<VkPhysicalDeviceExternalMemoryHostPropertiesEXT> implements NativeResource {
 
@@ -88,21 +74,21 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct<VkPh
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the minimum <b>required</b> alignment, in bytes, for the base address and size of host pointers that <b>can</b> be imported to a Vulkan memory object. The value <b>must</b> be a power of two. */
+    /** @return the value of the {@code minImportedHostPointerAlignment} field. */
     @NativeType("VkDeviceSize")
     public long minImportedHostPointerAlignment() { return nminImportedHostPointerAlignment(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceExternalMemoryHostPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceExternalMemoryHostPropertiesEXT sType$Default() { return sType(EXTExternalMemoryHost.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExternalMemoryHostPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,21 +299,21 @@ public class VkPhysicalDeviceExternalMemoryHostPropertiesEXT extends Struct<VkPh
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExternalMemoryHostPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceExternalMemoryHostPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT#minImportedHostPointerAlignment} field. */
+        /** @return the value of the {@code minImportedHostPointerAlignment} field. */
         @NativeType("VkDeviceSize")
         public long minImportedHostPointerAlignment() { return VkPhysicalDeviceExternalMemoryHostPropertiesEXT.nminImportedHostPointerAlignment(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalMemoryHostPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer sType$Default() { return sType(EXTExternalMemoryHost.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExternalMemoryHostPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExternalMemoryHostPropertiesEXT.npNext(address(), value); return this; }
 
     }

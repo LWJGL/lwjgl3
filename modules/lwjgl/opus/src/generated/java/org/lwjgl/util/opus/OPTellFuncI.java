@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to {@link OpusFileCallbacks}.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * long long (*{@link #invoke}) (
- *     void *_stream
- * )</code></pre>
- */
+/** Callback function: {@link #invoke op_tell_func} */
 @FunctionalInterface
 @NativeType("op_tell_func")
 public interface OPTellFuncI extends CallbackI {
@@ -43,11 +34,7 @@ public interface OPTellFuncI extends CallbackI {
         apiClosureRetL(ret, __result);
     }
 
-    /**
-     * Obtains the current value of the position indicator for {@code _stream}.
-     *
-     * @return the current position indicator
-     */
+    /** {@code long long (* op_tell_func) (void * _stream)} */
     @NativeType("long long") long invoke(@NativeType("void *") long _stream);
 
 }

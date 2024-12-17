@@ -16,31 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Properties of external memory host pointer.
- * 
- * <h5>Description</h5>
- * 
- * <p>The value returned by {@code memoryTypeBits} <b>should</b> only include bits that identify memory types which are host visible. Implementations <b>may</b> include bits that identify memory types which are not host visible. Behavior for imported pointers of such types is defined by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#host-memory-import-non-visible-type">{@link VkImportMemoryHostPointerInfoEXT}</a>.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTExternalMemoryHost#vkGetMemoryHostPointerPropertiesEXT GetMemoryHostPointerPropertiesEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryHostPointerPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #memoryTypeBits};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t memoryTypeBits;
+ * }}</pre>
  */
 public class VkMemoryHostPointerPropertiesEXT extends Struct<VkMemoryHostPointerPropertiesEXT> implements NativeResource {
 
@@ -93,21 +74,21 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct<VkMemoryHostPointer
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask containing one bit set for every memory type which the specified host pointer <b>can</b> be imported as. */
+    /** @return the value of the {@code memoryTypeBits} field. */
     @NativeType("uint32_t")
     public int memoryTypeBits() { return nmemoryTypeBits(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryHostPointerPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkMemoryHostPointerPropertiesEXT sType$Default() { return sType(EXTExternalMemoryHost.VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryHostPointerPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,21 +299,21 @@ public class VkMemoryHostPointerPropertiesEXT extends Struct<VkMemoryHostPointer
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryHostPointerPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryHostPointerPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkMemoryHostPointerPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkMemoryHostPointerPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkMemoryHostPointerPropertiesEXT#memoryTypeBits} field. */
+        /** @return the value of the {@code memoryTypeBits} field. */
         @NativeType("uint32_t")
         public int memoryTypeBits() { return VkMemoryHostPointerPropertiesEXT.nmemoryTypeBits(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryHostPointerPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryHostPointerPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryHostPointerPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT} value to the {@link VkMemoryHostPointerPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkMemoryHostPointerPropertiesEXT.Buffer sType$Default() { return sType(EXTExternalMemoryHost.VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkMemoryHostPointerPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryHostPointerPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkMemoryHostPointerPropertiesEXT.npNext(address(), value); return this; }
 
     }

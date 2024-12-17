@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_RESOURCE_DESC {
  *     CUresourcetype resType;
  *     union {
@@ -48,7 +46,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         } reserved;
  *     } res;
  *     unsigned int flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_RESOURCE_DESC extends Struct<CUDA_RESOURCE_DESC> implements NativeResource {
 

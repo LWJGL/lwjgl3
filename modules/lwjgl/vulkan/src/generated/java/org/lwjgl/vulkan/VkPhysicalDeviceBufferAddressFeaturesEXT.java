@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceBufferAddressFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 bufferDeviceAddress;
  *     VkBool32 bufferDeviceAddressCaptureReplay;
  *     VkBool32 bufferDeviceAddressMultiDevice;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceBufferAddressFeaturesEXT extends VkPhysicalDeviceBufferDeviceAddressFeaturesEXT {
 

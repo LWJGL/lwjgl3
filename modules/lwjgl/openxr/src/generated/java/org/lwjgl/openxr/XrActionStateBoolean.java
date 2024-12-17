@@ -16,34 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Boolean action state.
- * 
- * <h5>Description</h5>
- * 
- * <p>When multiple input sources are bound to this action, the {@code currentState} follows <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-multiple">the previously defined rule to resolve ambiguity</a>.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTION_STATE_BOOLEAN TYPE_ACTION_STATE_BOOLEAN}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrGetActionStateBoolean GetActionStateBoolean}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActionStateBoolean {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #currentState};
- *     XrBool32 {@link #changedSinceLastSync};
- *     XrTime {@link #lastChangeTime};
- *     XrBool32 {@link #isActive};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 currentState;
+ *     XrBool32 changedSinceLastSync;
+ *     XrTime lastChangeTime;
+ *     XrBool32 isActive;
+ * }}</pre>
  */
 public class XrActionStateBoolean extends Struct<XrActionStateBoolean> implements NativeResource {
 
@@ -105,38 +86,38 @@ public class XrActionStateBoolean extends Struct<XrActionStateBoolean> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the current state of the action. */
+    /** @return the value of the {@code currentState} field. */
     @NativeType("XrBool32")
     public boolean currentState() { return ncurrentState(address()) != 0; }
-    /** {@link XR10#XR_TRUE TRUE} if the value of {@code currentState} is different than it was before the most recent call to {@link XR10#xrSyncActions SyncActions}. This parameter can be combined with {@code currentState} to detect rising and falling edges since the previous call to {@link XR10#xrSyncActions SyncActions}. E.g. if both {@code changedSinceLastSync} and {@code currentState} are {@link XR10#XR_TRUE TRUE} then a rising edge ({@link XR10#XR_FALSE FALSE} to {@link XR10#XR_TRUE TRUE}) has taken place. */
+    /** @return the value of the {@code changedSinceLastSync} field. */
     @NativeType("XrBool32")
     public boolean changedSinceLastSync() { return nchangedSinceLastSync(address()) != 0; }
-    /** the {@code XrTime} associated with the most recent change to this action’s state. */
+    /** @return the value of the {@code lastChangeTime} field. */
     @NativeType("XrTime")
     public long lastChangeTime() { return nlastChangeTime(address()); }
-    /** {@link XR10#XR_TRUE TRUE} if and only if there exists an input source that is contributing to the current state of this action. */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrActionStateBoolean type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_BOOLEAN TYPE_ACTION_STATE_BOOLEAN} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_BOOLEAN TYPE_ACTION_STATE_BOOLEAN} value to the {@code type} field. */
     public XrActionStateBoolean type$Default() { return type(XR10.XR_TYPE_ACTION_STATE_BOOLEAN); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrActionStateBoolean next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #currentState} field. */
+    /** Sets the specified value to the {@code currentState} field. */
     public XrActionStateBoolean currentState(@NativeType("XrBool32") boolean value) { ncurrentState(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #changedSinceLastSync} field. */
+    /** Sets the specified value to the {@code changedSinceLastSync} field. */
     public XrActionStateBoolean changedSinceLastSync(@NativeType("XrBool32") boolean value) { nchangedSinceLastSync(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #lastChangeTime} field. */
+    /** Sets the specified value to the {@code lastChangeTime} field. */
     public XrActionStateBoolean lastChangeTime(@NativeType("XrTime") long value) { nlastChangeTime(address(), value); return this; }
-    /** Sets the specified value to the {@link #isActive} field. */
+    /** Sets the specified value to the {@code isActive} field. */
     public XrActionStateBoolean isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,38 +331,38 @@ public class XrActionStateBoolean extends Struct<XrActionStateBoolean> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActionStateBoolean#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionStateBoolean.ntype(address()); }
-        /** @return the value of the {@link XrActionStateBoolean#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrActionStateBoolean.nnext(address()); }
-        /** @return the value of the {@link XrActionStateBoolean#currentState} field. */
+        /** @return the value of the {@code currentState} field. */
         @NativeType("XrBool32")
         public boolean currentState() { return XrActionStateBoolean.ncurrentState(address()) != 0; }
-        /** @return the value of the {@link XrActionStateBoolean#changedSinceLastSync} field. */
+        /** @return the value of the {@code changedSinceLastSync} field. */
         @NativeType("XrBool32")
         public boolean changedSinceLastSync() { return XrActionStateBoolean.nchangedSinceLastSync(address()) != 0; }
-        /** @return the value of the {@link XrActionStateBoolean#lastChangeTime} field. */
+        /** @return the value of the {@code lastChangeTime} field. */
         @NativeType("XrTime")
         public long lastChangeTime() { return XrActionStateBoolean.nlastChangeTime(address()); }
-        /** @return the value of the {@link XrActionStateBoolean#isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrActionStateBoolean.nisActive(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrActionStateBoolean#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrActionStateBoolean.Buffer type(@NativeType("XrStructureType") int value) { XrActionStateBoolean.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_BOOLEAN TYPE_ACTION_STATE_BOOLEAN} value to the {@link XrActionStateBoolean#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_BOOLEAN TYPE_ACTION_STATE_BOOLEAN} value to the {@code type} field. */
         public XrActionStateBoolean.Buffer type$Default() { return type(XR10.XR_TYPE_ACTION_STATE_BOOLEAN); }
-        /** Sets the specified value to the {@link XrActionStateBoolean#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrActionStateBoolean.Buffer next(@NativeType("void *") long value) { XrActionStateBoolean.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionStateBoolean#currentState} field. */
+        /** Sets the specified value to the {@code currentState} field. */
         public XrActionStateBoolean.Buffer currentState(@NativeType("XrBool32") boolean value) { XrActionStateBoolean.ncurrentState(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrActionStateBoolean#changedSinceLastSync} field. */
+        /** Sets the specified value to the {@code changedSinceLastSync} field. */
         public XrActionStateBoolean.Buffer changedSinceLastSync(@NativeType("XrBool32") boolean value) { XrActionStateBoolean.nchangedSinceLastSync(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrActionStateBoolean#lastChangeTime} field. */
+        /** Sets the specified value to the {@code lastChangeTime} field. */
         public XrActionStateBoolean.Buffer lastChangeTime(@NativeType("XrTime") long value) { XrActionStateBoolean.nlastChangeTime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionStateBoolean#isActive} field. */
+        /** Sets the specified value to the {@code isActive} field. */
         public XrActionStateBoolean.Buffer isActive(@NativeType("XrBool32") boolean value) { XrActionStateBoolean.nisActive(address(), value ? 1 : 0); return this; }
 
     }

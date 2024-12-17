@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceShaderIntegerDotProductProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -54,7 +50,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 integerDotProductAccumulatingSaturating64BitUnsignedAccelerated;
  *     VkBool32 integerDotProductAccumulatingSaturating64BitSignedAccelerated;
  *     VkBool32 integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR extends VkPhysicalDeviceShaderIntegerDotProductProperties {
 

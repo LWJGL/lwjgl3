@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The structure to be passed when submitting layers to enable depth testing.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link VARJOCompositionLayerDepthTest XR_VARJO_composition_layer_depth_test} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerDepthTestVARJO}</li>
- * <li>{@code type} <b>must</b> be {@link VARJOCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrEndFrame EndFrame}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerDepthTestVARJO {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     float {@link #depthTestRangeNearZ};
- *     float {@link #depthTestRangeFarZ};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     float depthTestRangeNearZ;
+ *     float depthTestRangeFarZ;
+ * }}</pre>
  */
 public class XrCompositionLayerDepthTestVARJO extends Struct<XrCompositionLayerDepthTestVARJO> implements NativeResource {
 
@@ -94,26 +78,26 @@ public class XrCompositionLayerDepthTestVARJO extends Struct<XrCompositionLayerD
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** in a non-negative distance in meters that specifies the lower bound of the range where depth testing should be performed. Must be less than {@code depthTestRangeFarZ}. Value of zero means that there is no lower bound. */
+    /** @return the value of the {@code depthTestRangeNearZ} field. */
     public float depthTestRangeNearZ() { return ndepthTestRangeNearZ(address()); }
-    /** a positive distance in meters that specifies the upper bound of the range where depth testing should be performed. Must be greater than {@code depthTestRangeNearZ}. Value of floating point positive infinity means that there is no upper bound. */
+    /** @return the value of the {@code depthTestRangeFarZ} field. */
     public float depthTestRangeFarZ() { return ndepthTestRangeFarZ(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerDepthTestVARJO type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link VARJOCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO} value to the {@link #type} field. */
+    /** Sets the {@link VARJOCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO} value to the {@code type} field. */
     public XrCompositionLayerDepthTestVARJO type$Default() { return type(VARJOCompositionLayerDepthTest.XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerDepthTestVARJO next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthTestRangeNearZ} field. */
+    /** Sets the specified value to the {@code depthTestRangeNearZ} field. */
     public XrCompositionLayerDepthTestVARJO depthTestRangeNearZ(float value) { ndepthTestRangeNearZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthTestRangeFarZ} field. */
+    /** Sets the specified value to the {@code depthTestRangeFarZ} field. */
     public XrCompositionLayerDepthTestVARJO depthTestRangeFarZ(float value) { ndepthTestRangeFarZ(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,26 +299,26 @@ public class XrCompositionLayerDepthTestVARJO extends Struct<XrCompositionLayerD
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerDepthTestVARJO#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerDepthTestVARJO.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthTestVARJO#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerDepthTestVARJO.nnext(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthTestVARJO#depthTestRangeNearZ} field. */
+        /** @return the value of the {@code depthTestRangeNearZ} field. */
         public float depthTestRangeNearZ() { return XrCompositionLayerDepthTestVARJO.ndepthTestRangeNearZ(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthTestVARJO#depthTestRangeFarZ} field. */
+        /** @return the value of the {@code depthTestRangeFarZ} field. */
         public float depthTestRangeFarZ() { return XrCompositionLayerDepthTestVARJO.ndepthTestRangeFarZ(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerDepthTestVARJO#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerDepthTestVARJO.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerDepthTestVARJO.ntype(address(), value); return this; }
-        /** Sets the {@link VARJOCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO} value to the {@link XrCompositionLayerDepthTestVARJO#type} field. */
+        /** Sets the {@link VARJOCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO} value to the {@code type} field. */
         public XrCompositionLayerDepthTestVARJO.Buffer type$Default() { return type(VARJOCompositionLayerDepthTest.XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO); }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthTestVARJO#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerDepthTestVARJO.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerDepthTestVARJO.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthTestVARJO#depthTestRangeNearZ} field. */
+        /** Sets the specified value to the {@code depthTestRangeNearZ} field. */
         public XrCompositionLayerDepthTestVARJO.Buffer depthTestRangeNearZ(float value) { XrCompositionLayerDepthTestVARJO.ndepthTestRangeNearZ(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthTestVARJO#depthTestRangeFarZ} field. */
+        /** Sets the specified value to the {@code depthTestRangeFarZ} field. */
         public XrCompositionLayerDepthTestVARJO.Buffer depthTestRangeFarZ(float value) { XrCompositionLayerDepthTestVARJO.ndepthTestRangeFarZ(address(), value); return this; }
 
     }

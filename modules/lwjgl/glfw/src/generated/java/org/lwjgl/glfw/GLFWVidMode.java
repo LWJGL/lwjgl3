@@ -14,19 +14,15 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Describes a single video mode.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct GLFWvidmode {
- *     int {@link #width};
- *     int {@link #height};
- *     int {@link #redBits};
- *     int {@link #greenBits};
- *     int {@link #blueBits};
- *     int {@link #refreshRate};
- * }</code></pre>
+ *     int width;
+ *     int height;
+ *     int redBits;
+ *     int greenBits;
+ *     int blueBits;
+ *     int refreshRate;
+ * }}</pre>
  */
 @NativeType("struct GLFWvidmode")
 public class GLFWVidMode extends Struct<GLFWVidMode> {
@@ -89,17 +85,17 @@ public class GLFWVidMode extends Struct<GLFWVidMode> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the width, in screen coordinates, of the video mode */
+    /** @return the value of the {@code width} field. */
     public int width() { return nwidth(address()); }
-    /** the height, in screen coordinates, of the video mode */
+    /** @return the value of the {@code height} field. */
     public int height() { return nheight(address()); }
-    /** the bit depth of the red channel of the video mode */
+    /** @return the value of the {@code redBits} field. */
     public int redBits() { return nredBits(address()); }
-    /** the bit depth of the green channel of the video mode */
+    /** @return the value of the {@code greenBits} field. */
     public int greenBits() { return ngreenBits(address()); }
-    /** the bit depth of the blue channel of the video mode */
+    /** @return the value of the {@code blueBits} field. */
     public int blueBits() { return nblueBits(address()); }
-    /** the refresh rate, in Hz, of the video mode */
+    /** @return the value of the {@code refreshRate} field. */
     public int refreshRate() { return nrefreshRate(address()); }
 
     // -----------------------------------
@@ -187,17 +183,17 @@ public class GLFWVidMode extends Struct<GLFWVidMode> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link GLFWVidMode#width} field. */
+        /** @return the value of the {@code width} field. */
         public int width() { return GLFWVidMode.nwidth(address()); }
-        /** @return the value of the {@link GLFWVidMode#height} field. */
+        /** @return the value of the {@code height} field. */
         public int height() { return GLFWVidMode.nheight(address()); }
-        /** @return the value of the {@link GLFWVidMode#redBits} field. */
+        /** @return the value of the {@code redBits} field. */
         public int redBits() { return GLFWVidMode.nredBits(address()); }
-        /** @return the value of the {@link GLFWVidMode#greenBits} field. */
+        /** @return the value of the {@code greenBits} field. */
         public int greenBits() { return GLFWVidMode.ngreenBits(address()); }
-        /** @return the value of the {@link GLFWVidMode#blueBits} field. */
+        /** @return the value of the {@code blueBits} field. */
         public int blueBits() { return GLFWVidMode.nblueBits(address()); }
-        /** @return the value of the {@link GLFWVidMode#refreshRate} field. */
+        /** @return the value of the {@code refreshRate} field. */
         public int refreshRate() { return GLFWVidMode.nrefreshRate(address()); }
 
     }

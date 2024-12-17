@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * A callback invoked for resolving FreeTypee functions at runtime.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     char const *name
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class MSDFGenFTLoadCallback extends Callback implements MSDFGenFTLoadCallbackI {
 
     /**

@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkRenderPassCreateInfo2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderPassCreateInfo2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -34,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkSubpassDependency2 VkSubpassDependency2} const * pDependencies;
  *     uint32_t correlatedViewMaskCount;
  *     uint32_t const * pCorrelatedViewMasks;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkRenderPassCreateInfo2KHR extends VkRenderPassCreateInfo2 {
 

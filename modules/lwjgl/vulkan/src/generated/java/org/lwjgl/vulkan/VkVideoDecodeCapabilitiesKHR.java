@@ -16,22 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing general video decode capabilities for a video profile.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoDecodeCapabilitiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkVideoDecodeCapabilityFlagsKHR {@link #flags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkVideoDecodeCapabilityFlagsKHR flags;
+ * }}</pre>
  */
 public class VkVideoDecodeCapabilitiesKHR extends Struct<VkVideoDecodeCapabilitiesKHR> implements NativeResource {
 
@@ -84,21 +74,21 @@ public class VkVideoDecodeCapabilitiesKHR extends Struct<VkVideoDecodeCapabiliti
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoDecodeCapabilityFlagBitsKHR} describing the supported video decoding capabilities. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkVideoDecodeCapabilityFlagsKHR")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR} value to the {@code sType} field. */
     public VkVideoDecodeCapabilitiesKHR sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -290,21 +280,21 @@ public class VkVideoDecodeCapabilitiesKHR extends Struct<VkVideoDecodeCapabiliti
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoDecodeCapabilitiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeCapabilitiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoDecodeCapabilitiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoDecodeCapabilitiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoDecodeCapabilitiesKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkVideoDecodeCapabilityFlagsKHR")
         public int flags() { return VkVideoDecodeCapabilitiesKHR.nflags(address()); }
 
-        /** Sets the specified value to the {@link VkVideoDecodeCapabilitiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeCapabilitiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR} value to the {@link VkVideoDecodeCapabilitiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR} value to the {@code sType} field. */
         public VkVideoDecodeCapabilitiesKHR.Buffer sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoDecodeCapabilitiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoDecodeCapabilitiesKHR.npNext(address(), value); return this; }
 
     }

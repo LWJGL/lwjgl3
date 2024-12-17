@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing protected memory features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceProtectedMemoryFeatures} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceProtectedMemoryFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceProtectedMemoryFeatures {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #protectedMemory};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 protectedMemory;
+ * }}</pre>
  */
 public class VkPhysicalDeviceProtectedMemoryFeatures extends Struct<VkPhysicalDeviceProtectedMemoryFeatures> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceProtectedMemoryFeatures extends Struct<VkPhysicalDe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-protected-memory">protected memory</a> is supported. */
+    /** @return the value of the {@code protectedMemory} field. */
     @NativeType("VkBool32")
     public boolean protectedMemory() { return nprotectedMemory(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceProtectedMemoryFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceProtectedMemoryFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceProtectedMemoryFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #protectedMemory} field. */
+    /** Sets the specified value to the {@code protectedMemory} field. */
     public VkPhysicalDeviceProtectedMemoryFeatures protectedMemory(@NativeType("VkBool32") boolean value) { nprotectedMemory(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,23 +305,23 @@ public class VkPhysicalDeviceProtectedMemoryFeatures extends Struct<VkPhysicalDe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceProtectedMemoryFeatures#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceProtectedMemoryFeatures.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceProtectedMemoryFeatures#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceProtectedMemoryFeatures.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceProtectedMemoryFeatures#protectedMemory} field. */
+        /** @return the value of the {@code protectedMemory} field. */
         @NativeType("VkBool32")
         public boolean protectedMemory() { return VkPhysicalDeviceProtectedMemoryFeatures.nprotectedMemory(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceProtectedMemoryFeatures#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceProtectedMemoryFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceProtectedMemoryFeatures.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES} value to the {@link VkPhysicalDeviceProtectedMemoryFeatures#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceProtectedMemoryFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceProtectedMemoryFeatures#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceProtectedMemoryFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProtectedMemoryFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceProtectedMemoryFeatures#protectedMemory} field. */
+        /** Sets the specified value to the {@code protectedMemory} field. */
         public VkPhysicalDeviceProtectedMemoryFeatures.Buffer protectedMemory(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceProtectedMemoryFeatures.nprotectedMemory(address(), value ? 1 : 0); return this; }
 
     }

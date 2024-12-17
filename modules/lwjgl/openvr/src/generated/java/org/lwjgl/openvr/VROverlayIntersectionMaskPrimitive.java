@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VROverlayIntersectionMaskPrimitive_t {
  *     EVROverlayIntersectionMaskPrimitiveType m_nPrimitiveType;
  *     {@link VROverlayIntersectionMaskPrimitiveData VROverlayIntersectionMaskPrimitive_Data_t} m_Primitive;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VROverlayIntersectionMaskPrimitive_t")
 public class VROverlayIntersectionMaskPrimitive extends Struct<VROverlayIntersectionMaskPrimitive> implements NativeResource {

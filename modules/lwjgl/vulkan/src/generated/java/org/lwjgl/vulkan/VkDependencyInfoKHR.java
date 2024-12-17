@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDependencyInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDependencyInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkBufferMemoryBarrier2 VkBufferMemoryBarrier2} const * pBufferMemoryBarriers;
  *     uint32_t imageMemoryBarrierCount;
  *     {@link VkImageMemoryBarrier2 VkImageMemoryBarrier2} const * pImageMemoryBarriers;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDependencyInfoKHR extends VkDependencyInfo {
 

@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceShaderFloat16Int8Features}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderFloat16Int8FeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 shaderFloat16;
  *     VkBool32 shaderInt8;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderFloat16Int8FeaturesKHR extends VkPhysicalDeviceShaderFloat16Int8Features {
 

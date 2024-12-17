@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     FMOD_BOOL inputsidle,
- *     unsigned int length,
- *     FMOD_CHANNELMASK inmask,
- *     int inchannels,
- *     FMOD_SPEAKERMODE speakermode
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_SHOULDIPROCESS_CALLBACK} */
 public abstract class FMOD_DSP_SHOULDIPROCESS_CALLBACK extends Callback implements FMOD_DSP_SHOULDIPROCESS_CALLBACKI {
 
     /**

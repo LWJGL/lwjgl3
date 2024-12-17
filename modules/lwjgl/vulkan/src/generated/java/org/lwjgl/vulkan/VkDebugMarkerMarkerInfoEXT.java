@@ -17,29 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify parameters of a command buffer marker region.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pMarkerName} <b>must</b> be a null-terminated UTF-8 string</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDebugMarker#vkCmdDebugMarkerBeginEXT CmdDebugMarkerBeginEXT}, {@link EXTDebugMarker#vkCmdDebugMarkerInsertEXT CmdDebugMarkerInsertEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDebugMarkerMarkerInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     char const * {@link #pMarkerName};
- *     float {@link #color}[4];
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     char const * pMarkerName;
+ *     float color[4];
+ * }}</pre>
  */
 public class VkDebugMarkerMarkerInfoEXT extends Struct<VkDebugMarkerMarkerInfoEXT> implements NativeResource {
 
@@ -95,35 +79,35 @@ public class VkDebugMarkerMarkerInfoEXT extends Struct<VkDebugMarkerMarkerInfoEX
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to a null-terminated UTF-8 string containing the name of the marker. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pMarkerName} field. */
     @NativeType("char const *")
     public ByteBuffer pMarkerName() { return npMarkerName(address()); }
-    /** a pointer to a null-terminated UTF-8 string containing the name of the marker. */
+    /** @return the null-terminated string pointed to by the {@code pMarkerName} field. */
     @NativeType("char const *")
     public String pMarkerNameString() { return npMarkerNameString(address()); }
-    /** an <b>optional</b> RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are 0.0, then it is ignored. */
+    /** @return a {@link FloatBuffer} view of the {@code color} field. */
     @NativeType("float[4]")
     public FloatBuffer color() { return ncolor(address()); }
-    /** an <b>optional</b> RGBA color value that can be associated with the marker. A particular implementation <b>may</b> choose to ignore this color value. The values contain RGBA values in order, in the range 0.0 to 1.0. If all elements in {@code color} are 0.0, then it is ignored. */
+    /** @return the value at the specified index of the {@code color} field. */
     public float color(int index) { return ncolor(address(), index); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDebugMarkerMarkerInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT} value to the {@code sType} field. */
     public VkDebugMarkerMarkerInfoEXT sType$Default() { return sType(EXTDebugMarker.VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDebugMarkerMarkerInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #pMarkerName} field. */
+    /** Sets the address of the specified encoded string to the {@code pMarkerName} field. */
     public VkDebugMarkerMarkerInfoEXT pMarkerName(@NativeType("char const *") ByteBuffer value) { npMarkerName(address(), value); return this; }
-    /** Copies the specified {@link FloatBuffer} to the {@link #color} field. */
+    /** Copies the specified {@link FloatBuffer} to the {@code color} field. */
     public VkDebugMarkerMarkerInfoEXT color(@NativeType("float[4]") FloatBuffer value) { ncolor(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #color} field. */
+    /** Sets the specified value at the specified index of the {@code color} field. */
     public VkDebugMarkerMarkerInfoEXT color(int index, float value) { ncolor(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -369,35 +353,35 @@ public class VkDebugMarkerMarkerInfoEXT extends Struct<VkDebugMarkerMarkerInfoEX
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDebugMarkerMarkerInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDebugMarkerMarkerInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDebugMarkerMarkerInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDebugMarkerMarkerInfoEXT.npNext(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkDebugMarkerMarkerInfoEXT#pMarkerName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pMarkerName} field. */
         @NativeType("char const *")
         public ByteBuffer pMarkerName() { return VkDebugMarkerMarkerInfoEXT.npMarkerName(address()); }
-        /** @return the null-terminated string pointed to by the {@link VkDebugMarkerMarkerInfoEXT#pMarkerName} field. */
+        /** @return the null-terminated string pointed to by the {@code pMarkerName} field. */
         @NativeType("char const *")
         public String pMarkerNameString() { return VkDebugMarkerMarkerInfoEXT.npMarkerNameString(address()); }
-        /** @return a {@link FloatBuffer} view of the {@link VkDebugMarkerMarkerInfoEXT#color} field. */
+        /** @return a {@link FloatBuffer} view of the {@code color} field. */
         @NativeType("float[4]")
         public FloatBuffer color() { return VkDebugMarkerMarkerInfoEXT.ncolor(address()); }
-        /** @return the value at the specified index of the {@link VkDebugMarkerMarkerInfoEXT#color} field. */
+        /** @return the value at the specified index of the {@code color} field. */
         public float color(int index) { return VkDebugMarkerMarkerInfoEXT.ncolor(address(), index); }
 
-        /** Sets the specified value to the {@link VkDebugMarkerMarkerInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDebugMarkerMarkerInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugMarkerMarkerInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT} value to the {@link VkDebugMarkerMarkerInfoEXT#sType} field. */
+        /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT} value to the {@code sType} field. */
         public VkDebugMarkerMarkerInfoEXT.Buffer sType$Default() { return sType(EXTDebugMarker.VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDebugMarkerMarkerInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDebugMarkerMarkerInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugMarkerMarkerInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link VkDebugMarkerMarkerInfoEXT#pMarkerName} field. */
+        /** Sets the address of the specified encoded string to the {@code pMarkerName} field. */
         public VkDebugMarkerMarkerInfoEXT.Buffer pMarkerName(@NativeType("char const *") ByteBuffer value) { VkDebugMarkerMarkerInfoEXT.npMarkerName(address(), value); return this; }
-        /** Copies the specified {@link FloatBuffer} to the {@link VkDebugMarkerMarkerInfoEXT#color} field. */
+        /** Copies the specified {@link FloatBuffer} to the {@code color} field. */
         public VkDebugMarkerMarkerInfoEXT.Buffer color(@NativeType("float[4]") FloatBuffer value) { VkDebugMarkerMarkerInfoEXT.ncolor(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link VkDebugMarkerMarkerInfoEXT#color} field. */
+        /** Sets the specified value at the specified index of the {@code color} field. */
         public VkDebugMarkerMarkerInfoEXT.Buffer color(int index, float value) { VkDebugMarkerMarkerInfoEXT.ncolor(address(), index, value); return this; }
 
     }

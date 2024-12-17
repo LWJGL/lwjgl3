@@ -16,40 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a facial expression handle.
- * 
- * <h5>Description</h5>
- * 
- * <p>Note that although the naming convention for {@code requestedCount} does not align with {@code requestedFacialBlendShapes}, they are coupled together.</p>
- * 
- * <p>The {@link XrFacialExpressionClientCreateInfoML} structure describes the information to create an {@code XrFacialExpressionClientML} handle.</p>
- * 
- * <p>An application specifies the blend shapes they want to query by creating an array of type {@code XrFacialBlendShapeML} and passing it to {@code requestedFacialBlendShapes} along with the corresponding {@code requestedCount}.</p>
- * 
- * <p>The application <b>can</b> also pass in {@code NULL} into {@code requestedFacialBlendShapes} to capture the entirety of {@code XrFacialBlendShapeML}. However, for performance reasons, it <b>may</b> be better to be explicit about what blend shapes to query for performance reasons since some blend shapes <b>may</b> be queried by the runtime at a greater frequency than other blend shapes.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLFacialExpression XR_ML_facial_expression} extension <b>must</b> be enabled prior to using {@link XrFacialExpressionClientCreateInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code requestedCount} is not 0, {@code requestedFacialBlendShapes} <b>must</b> be a pointer to an array of {@code requestedCount} valid {@code XrFacialBlendShapeML} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLFacialExpression#xrCreateFacialExpressionClientML CreateFacialExpressionClientML}, {@link MLFacialExpression#xrDestroyFacialExpressionClientML DestroyFacialExpressionClientML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFacialExpressionClientCreateInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #requestedCount};
- *     XrFacialBlendShapeML const * {@link #requestedFacialBlendShapes};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t requestedCount;
+ *     XrFacialBlendShapeML const * requestedFacialBlendShapes;
+ * }}</pre>
  */
 public class XrFacialExpressionClientCreateInfoML extends Struct<XrFacialExpressionClientCreateInfoML> implements NativeResource {
 
@@ -105,28 +78,28 @@ public class XrFacialExpressionClientCreateInfoML extends Struct<XrFacialExpress
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the size of the {@code requestedFacialBlendShapes} array */
+    /** @return the value of the {@code requestedCount} field. */
     @NativeType("uint32_t")
     public int requestedCount() { return nrequestedCount(address()); }
-    /** a pointer to an application defined array containing the blend shapes for the runtime to target. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code requestedFacialBlendShapes} field. */
     @NativeType("XrFacialBlendShapeML const *")
     public @Nullable IntBuffer requestedFacialBlendShapes() { return nrequestedFacialBlendShapes(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFacialExpressionClientCreateInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML} value to the {@code type} field. */
     public XrFacialExpressionClientCreateInfoML type$Default() { return type(MLFacialExpression.XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFacialExpressionClientCreateInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #requestedCount} field. */
+    /** Sets the specified value to the {@code requestedCount} field. */
     public XrFacialExpressionClientCreateInfoML requestedCount(@NativeType("uint32_t") int value) { nrequestedCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #requestedFacialBlendShapes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code requestedFacialBlendShapes} field. */
     public XrFacialExpressionClientCreateInfoML requestedFacialBlendShapes(@Nullable @NativeType("XrFacialBlendShapeML const *") IntBuffer value) { nrequestedFacialBlendShapes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,28 +301,28 @@ public class XrFacialExpressionClientCreateInfoML extends Struct<XrFacialExpress
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFacialExpressionClientCreateInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFacialExpressionClientCreateInfoML.ntype(address()); }
-        /** @return the value of the {@link XrFacialExpressionClientCreateInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFacialExpressionClientCreateInfoML.nnext(address()); }
-        /** @return the value of the {@link XrFacialExpressionClientCreateInfoML#requestedCount} field. */
+        /** @return the value of the {@code requestedCount} field. */
         @NativeType("uint32_t")
         public int requestedCount() { return XrFacialExpressionClientCreateInfoML.nrequestedCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrFacialExpressionClientCreateInfoML#requestedFacialBlendShapes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code requestedFacialBlendShapes} field. */
         @NativeType("XrFacialBlendShapeML const *")
         public @Nullable IntBuffer requestedFacialBlendShapes() { return XrFacialExpressionClientCreateInfoML.nrequestedFacialBlendShapes(address()); }
 
-        /** Sets the specified value to the {@link XrFacialExpressionClientCreateInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFacialExpressionClientCreateInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrFacialExpressionClientCreateInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML} value to the {@link XrFacialExpressionClientCreateInfoML#type} field. */
+        /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML} value to the {@code type} field. */
         public XrFacialExpressionClientCreateInfoML.Buffer type$Default() { return type(MLFacialExpression.XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML); }
-        /** Sets the specified value to the {@link XrFacialExpressionClientCreateInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFacialExpressionClientCreateInfoML.Buffer next(@NativeType("void const *") long value) { XrFacialExpressionClientCreateInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFacialExpressionClientCreateInfoML#requestedCount} field. */
+        /** Sets the specified value to the {@code requestedCount} field. */
         public XrFacialExpressionClientCreateInfoML.Buffer requestedCount(@NativeType("uint32_t") int value) { XrFacialExpressionClientCreateInfoML.nrequestedCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link XrFacialExpressionClientCreateInfoML#requestedFacialBlendShapes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code requestedFacialBlendShapes} field. */
         public XrFacialExpressionClientCreateInfoML.Buffer requestedFacialBlendShapes(@Nullable @NativeType("XrFacialBlendShapeML const *") IntBuffer value) { XrFacialExpressionClientCreateInfoML.nrequestedFacialBlendShapes(address(), value); return this; }
 
     }

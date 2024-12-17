@@ -16,35 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing multiview features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMultiviewFeatures} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMultiviewFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code multiviewGeometryShader} is enabled then {@code multiview} <b>must</b> also be enabled</li>
- * <li>If {@code multiviewTessellationShader} is enabled then {@code multiview} <b>must</b> also be enabled</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMultiviewFeatures {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #multiview};
- *     VkBool32 {@link #multiviewGeometryShader};
- *     VkBool32 {@link #multiviewTessellationShader};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 multiview;
+ *     VkBool32 multiviewGeometryShader;
+ *     VkBool32 multiviewTessellationShader;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMultiviewFeatures extends Struct<VkPhysicalDeviceMultiviewFeatures> implements NativeResource {
 
@@ -103,33 +82,33 @@ public class VkPhysicalDeviceMultiviewFeatures extends Struct<VkPhysicalDeviceMu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether the implementation supports multiview rendering within a render pass. If this feature is not enabled, the view mask of each subpass <b>must</b> always be zero. */
+    /** @return the value of the {@code multiview} field. */
     @NativeType("VkBool32")
     public boolean multiview() { return nmultiview(address()) != 0; }
-    /** specifies whether the implementation supports multiview rendering within a render pass, with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#geometry">geometry shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a geometry shader. */
+    /** @return the value of the {@code multiviewGeometryShader} field. */
     @NativeType("VkBool32")
     public boolean multiviewGeometryShader() { return nmultiviewGeometryShader(address()) != 0; }
-    /** specifies whether the implementation supports multiview rendering within a render pass, with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#tessellation">tessellation shaders</a>. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include any tessellation shaders. */
+    /** @return the value of the {@code multiviewTessellationShader} field. */
     @NativeType("VkBool32")
     public boolean multiviewTessellationShader() { return nmultiviewTessellationShader(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMultiviewFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceMultiviewFeatures sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMultiviewFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #multiview} field. */
+    /** Sets the specified value to the {@code multiview} field. */
     public VkPhysicalDeviceMultiviewFeatures multiview(@NativeType("VkBool32") boolean value) { nmultiview(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #multiviewGeometryShader} field. */
+    /** Sets the specified value to the {@code multiviewGeometryShader} field. */
     public VkPhysicalDeviceMultiviewFeatures multiviewGeometryShader(@NativeType("VkBool32") boolean value) { nmultiviewGeometryShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #multiviewTessellationShader} field. */
+    /** Sets the specified value to the {@code multiviewTessellationShader} field. */
     public VkPhysicalDeviceMultiviewFeatures multiviewTessellationShader(@NativeType("VkBool32") boolean value) { nmultiviewTessellationShader(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,33 +335,33 @@ public class VkPhysicalDeviceMultiviewFeatures extends Struct<VkPhysicalDeviceMu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMultiviewFeatures#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMultiviewFeatures.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMultiviewFeatures#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMultiviewFeatures.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMultiviewFeatures#multiview} field. */
+        /** @return the value of the {@code multiview} field. */
         @NativeType("VkBool32")
         public boolean multiview() { return VkPhysicalDeviceMultiviewFeatures.nmultiview(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMultiviewFeatures#multiviewGeometryShader} field. */
+        /** @return the value of the {@code multiviewGeometryShader} field. */
         @NativeType("VkBool32")
         public boolean multiviewGeometryShader() { return VkPhysicalDeviceMultiviewFeatures.nmultiviewGeometryShader(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMultiviewFeatures#multiviewTessellationShader} field. */
+        /** @return the value of the {@code multiviewTessellationShader} field. */
         @NativeType("VkBool32")
         public boolean multiviewTessellationShader() { return VkPhysicalDeviceMultiviewFeatures.nmultiviewTessellationShader(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMultiviewFeatures.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES} value to the {@link VkPhysicalDeviceMultiviewFeatures#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMultiviewFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#multiview} field. */
+        /** Sets the specified value to the {@code multiview} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer multiview(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMultiviewFeatures.nmultiview(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#multiviewGeometryShader} field. */
+        /** Sets the specified value to the {@code multiviewGeometryShader} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer multiviewGeometryShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMultiviewFeatures.nmultiviewGeometryShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMultiviewFeatures#multiviewTessellationShader} field. */
+        /** Sets the specified value to the {@code multiviewTessellationShader} field. */
         public VkPhysicalDeviceMultiviewFeatures.Buffer multiviewTessellationShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMultiviewFeatures.nmultiviewTessellationShader(address(), value ? 1 : 0); return this; }
 
     }

@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union CUlaunchAttributeValue {
  *     char pad[64];
  *     {@link CUaccessPolicyWindow CUaccessPolicyWindow} accessPolicyWindow;
@@ -40,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int priority;
  *     {@link CUlaunchMemSyncDomainMap CUlaunchMemSyncDomainMap} memSyncDomainMap;
  *     CUlaunchMemSyncDomain memSyncDomain;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUlaunchAttributeValue extends Struct<CUlaunchAttributeValue> implements NativeResource {
 

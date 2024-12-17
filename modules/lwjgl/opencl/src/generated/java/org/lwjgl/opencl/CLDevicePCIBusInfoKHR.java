@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct cl_device_pci_bus_info_khr {
  *     cl_uint pci_domain;
  *     cl_uint pci_bus;
  *     cl_uint pci_device;
  *     cl_uint pci_function;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct cl_device_pci_bus_info_khr")
 public class CLDevicePCIBusInfoKHR extends Struct<CLDevicePCIBusInfoKHR> implements NativeResource {

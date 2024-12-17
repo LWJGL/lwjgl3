@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_buf {
  *     __u64 addr;
  *     __u32 len;
  *     __u16 bid;
  *     __u16 resv;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_buf")
 public class IOURingBuf extends Struct<IOURingBuf> implements NativeResource {

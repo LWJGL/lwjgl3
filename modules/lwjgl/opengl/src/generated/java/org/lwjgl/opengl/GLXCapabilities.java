@@ -11,7 +11,6 @@ import java.util.Set;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the GLX capabilities of a connection. */
 public final class GLXCapabilities {
 
     // GLX11
@@ -146,128 +145,101 @@ public final class GLXCapabilities {
     public final long
         glXJoinSwapGroupSGIX;
 
-    /** When true, {@link GLX11} is supported. */
+    /** When true, {@code GLX11} is supported. */
     public final boolean GLX11;
-    /** When true, {@link GLX12} is supported. */
+    /** When true, {@code GLX12} is supported. */
     public final boolean GLX12;
-    /** When true, {@link GLX13} is supported. */
+    /** When true, {@code GLX13} is supported. */
     public final boolean GLX13;
-    /** When true, {@link GLX14} is supported. */
+    /** When true, {@code GLX14} is supported. */
     public final boolean GLX14;
-    /** When true, {@link GLXAMDGPUAssociation} is supported. */
+    /** When true, {@code GLX_AMD_gpu_association} is supported. */
     public final boolean GLX_AMD_gpu_association;
-    /** When true, {@link GLXARBContextFlushControl} is supported. */
+    /** When true, {@code GLX_ARB_context_flush_control} is supported. */
     public final boolean GLX_ARB_context_flush_control;
-    /** When true, {@link GLXARBCreateContext} is supported. */
+    /** When true, {@code GLX_ARB_create_context} is supported. */
     public final boolean GLX_ARB_create_context;
-    /** When true, {@link GLXARBCreateContextNoError} is supported. */
+    /** When true, {@code GLX_ARB_create_context_no_error} is supported. */
     public final boolean GLX_ARB_create_context_no_error;
-    /** When true, {@link GLXARBCreateContextProfile} is supported. */
+    /** When true, {@code GLX_ARB_create_context_profile} is supported. */
     public final boolean GLX_ARB_create_context_profile;
-    /** When true, {@link GLXARBCreateContextRobustness} is supported. */
+    /** When true, {@code GLX_ARB_create_context_robustness} is supported. */
     public final boolean GLX_ARB_create_context_robustness;
-    /** When true, {@link GLXARBFBConfigFloat} is supported. */
+    /** When true, {@code GLX_ARB_fbconfig_float} is supported. */
     public final boolean GLX_ARB_fbconfig_float;
-    /** When true, {@link GLXARBFramebufferSRGB} is supported. */
+    /** When true, {@code GLX_ARB_framebuffer_sRGB} is supported. */
     public final boolean GLX_ARB_framebuffer_sRGB;
-    /** When true, {@link GLXARBGetProcAddress} is supported. */
+    /** When true, {@code GLX_ARB_get_proc_address} is supported. */
     public final boolean GLX_ARB_get_proc_address;
-    /** When true, {@link GLXARBMultisample} is supported. */
+    /** When true, {@code GLX_ARB_multisample} is supported. */
     public final boolean GLX_ARB_multisample;
-    /** When true, {@link GLXARBRobustnessApplicationIsolation} is supported. */
+    /** When true, {@code GLX_ARB_robustness_application_isolation} is supported. */
     public final boolean GLX_ARB_robustness_application_isolation;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/GLX_ARB_robustness_application_isolation.txt">GLX_ARB_robustness_share_group_isolation</a> extension is supported.
-     * 
-     * <p>GL_ARB_robustness and GLX_ARB_create_context_robustness allow creating an OpenGL context supporting graphics reset notification behavior.
-     * GLX_ARB_robustness_share_group_isolation provides stronger guarantees about the possible side-effects of a graphics reset.</p>
-     * 
-     * <p>If the graphics driver advertises the GLX_ARB_robustness_share_group_isolation extension string, then the driver guarantees that if a context in a
-     * particular share group causes a graphics reset to occur:</p>
-     * 
-     * <ol>
-     * <li>No other share group within the application, nor any other application on the system, is affected by the graphics reset.</li>
-     * <li>No other share group within the application, nor any other application on the system, receives any notification that the graphics reset occurred.</li>
-     * </ol>
-     * 
-     * <p>Requires {@link GLX14 GLX 1.4} and {@link GLXARBCreateContextRobustness GLX_ARB_create_context_robustness}.</p>
-     */
+    /** When true, {@code GLX_ARB_robustness_share_group_isolation} is supported. */
     public final boolean GLX_ARB_robustness_share_group_isolation;
-    /** When true, {@link GLXARBVertexBufferObject} is supported. */
+    /** When true, {@code GLX_ARB_vertex_buffer_object} is supported. */
     public final boolean GLX_ARB_vertex_buffer_object;
-    /** When true, {@link GLXEXTBufferAge} is supported. */
+    /** When true, {@code GLX_EXT_buffer_age} is supported. */
     public final boolean GLX_EXT_buffer_age;
-    /** When true, {@link GLXEXTContextPriority} is supported. */
+    /** When true, {@code GLX_EXT_context_priority} is supported. */
     public final boolean GLX_EXT_context_priority;
-    /** When true, {@link GLXEXTCreateContextES2Profile} is supported. */
+    /** When true, {@code GLX_EXT_create_context_es2_profile} is supported. */
     public final boolean GLX_EXT_create_context_es2_profile;
-    /** When true, {@link GLXEXTCreateContextESProfile} is supported. */
+    /** When true, {@code GLX_EXT_create_context_es_profile} is supported. */
     public final boolean GLX_EXT_create_context_es_profile;
-    /** When true, {@link GLXEXTFBConfigPackedFloat} is supported. */
+    /** When true, {@code GLX_EXT_fbconfig_packed_float} is supported. */
     public final boolean GLX_EXT_fbconfig_packed_float;
-    /** When true, {@link GLXEXTFramebufferSRGB} is supported. */
+    /** When true, {@code GLX_EXT_framebuffer_sRGB} is supported. */
     public final boolean GLX_EXT_framebuffer_sRGB;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_get_drawable_type.txt">GLX_EXT_get_drawable_type</a> extension is supported.
-     * 
-     * <p>This extension adds {@link GLX13#GLX_DRAWABLE_TYPE DRAWABLE_TYPE} to the set of drawable attributes that are sent in a {@code GLXGetDrawableAttributes} request, and that can be
-     * queried with {@link GLX13#glXQueryDrawable QueryDrawable}. While this is primarily a convenience for the client library implementation, it may also be useful for applications.</p>
-     */
+    /** When true, {@code GLX_EXT_get_drawable_type} is supported. */
     public final boolean GLX_EXT_get_drawable_type;
-    /** When true, {@link GLXEXTImportContext} is supported. */
+    /** When true, {@code GLX_EXT_import_context} is supported. */
     public final boolean GLX_EXT_import_context;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/GLX_EXT_no_config_context.txt">GLX_EXT_no_config_context</a> extension is supported.
-     * 
-     * <p>Modern GPUs allow contexts to render to almost any combination of supported color and auxiliary buffer formats. Traditionally GLX context creation is
-     * done with respect to a GLXFBConfig specifying buffer formats, and constrains contexts to only work with drawables created with a "compatible" config.</p>
-     * 
-     * <p>This extension allows creation of GL &amp; ES contexts without specifying a {@code GLXFBConfig}.</p>
-     */
+    /** When true, {@code GLX_EXT_no_config_context} is supported. */
     public final boolean GLX_EXT_no_config_context;
-    /** When true, {@link GLXEXTStereoTree} is supported. */
+    /** When true, {@code GLX_EXT_stereo_tree} is supported. */
     public final boolean GLX_EXT_stereo_tree;
-    /** When true, {@link GLXEXTSwapControl} is supported. */
+    /** When true, {@code GLX_EXT_swap_control} is supported. */
     public final boolean GLX_EXT_swap_control;
-    /** When true, {@link GLXEXTSwapControlTear} is supported. */
+    /** When true, {@code GLX_EXT_swap_control_tear} is supported. */
     public final boolean GLX_EXT_swap_control_tear;
-    /** When true, {@link GLXEXTTextureFromPixmap} is supported. */
+    /** When true, {@code GLX_EXT_texture_from_pixmap} is supported. */
     public final boolean GLX_EXT_texture_from_pixmap;
-    /** When true, {@link GLXEXTVisualInfo} is supported. */
+    /** When true, {@code GLX_EXT_visual_info} is supported. */
     public final boolean GLX_EXT_visual_info;
-    /** When true, {@link GLXEXTVisualRating} is supported. */
+    /** When true, {@code GLX_EXT_visual_rating} is supported. */
     public final boolean GLX_EXT_visual_rating;
-    /** When true, {@link GLXINTELSwapEvent} is supported. */
+    /** When true, {@code GLX_INTEL_swap_event} is supported. */
     public final boolean GLX_INTEL_swap_event;
-    /** When true, {@link GLXNVCopyBuffer} is supported. */
+    /** When true, {@code GLX_NV_copy_buffer} is supported. */
     public final boolean GLX_NV_copy_buffer;
-    /** When true, {@link GLXNVCopyImage} is supported. */
+    /** When true, {@code GLX_NV_copy_image} is supported. */
     public final boolean GLX_NV_copy_image;
-    /** When true, {@link GLXNVDelayBeforeSwap} is supported. */
+    /** When true, {@code GLX_NV_delay_before_swap} is supported. */
     public final boolean GLX_NV_delay_before_swap;
-    /** When true, {@link GLXNVFloatBuffer} is supported. */
+    /** When true, {@code GLX_NV_float_buffer} is supported. */
     public final boolean GLX_NV_float_buffer;
-    /** When true, {@link GLXNVMultiGPUContext} is supported. */
+    /** When true, {@code GLX_NV_multigpu_context} is supported. */
     public final boolean GLX_NV_multigpu_context;
-    /** When true, {@link GLXNVMultisampleCoverage} is supported. */
+    /** When true, {@code GLX_NV_multisample_coverage} is supported. */
     public final boolean GLX_NV_multisample_coverage;
-    /** When true, {@link GLXNVRobustnessVideoMemoryPurge} is supported. */
+    /** When true, {@code GLX_NV_robustness_video_memory_purge} is supported. */
     public final boolean GLX_NV_robustness_video_memory_purge;
-    /** When true, {@link GLXNVSwapGroup} is supported. */
+    /** When true, {@code GLX_NV_swap_group} is supported. */
     public final boolean GLX_NV_swap_group;
-    /** When true, {@link GLXSGIMakeCurrentRead} is supported. */
+    /** When true, {@code GLX_SGI_make_current_read} is supported. */
     public final boolean GLX_SGI_make_current_read;
-    /** When true, {@link GLXSGISwapControl} is supported. */
+    /** When true, {@code GLX_SGI_swap_control} is supported. */
     public final boolean GLX_SGI_swap_control;
-    /** When true, {@link GLXSGIVideoSync} is supported. */
+    /** When true, {@code GLX_SGI_video_sync} is supported. */
     public final boolean GLX_SGI_video_sync;
-    /** When true, {@link GLXSGIXFBConfig} is supported. */
+    /** When true, {@code GLX_SGIX_fbconfig} is supported. */
     public final boolean GLX_SGIX_fbconfig;
-    /** When true, {@link GLXSGIXPbuffer} is supported. */
+    /** When true, {@code GLX_SGIX_pbuffer} is supported. */
     public final boolean GLX_SGIX_pbuffer;
-    /** When true, {@link GLXSGIXSwapBarrier} is supported. */
+    /** When true, {@code GLX_SGIX_swap_barrier} is supported. */
     public final boolean GLX_SGIX_swap_barrier;
-    /** When true, {@link GLXSGIXSwapGroup} is supported. */
+    /** When true, {@code GLX_SGIX_swap_group} is supported. */
     public final boolean GLX_SGIX_swap_group;
 
     GLXCapabilities(FunctionProvider provider, Set<String> ext) {

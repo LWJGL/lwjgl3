@@ -57,66 +57,6 @@ val GLBinding = Generator.register(object : APIBinding(
 
     override fun getFunctionOrdinal(function: Func) = functionOrdinals[function.name]!!
 
-    override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
-        if (function.nativeClass.templateName.startsWith("GL")) {
-            writer.printOpenGLJavaDoc(documentation, function.nativeName, function has DeprecatedGL)
-            return true
-        }
-        return false
-    }
-
-    private val VECTOR_SUFFIX = "^gl(\\w+?)[ILP]?(?:Matrix)?\\d+(x\\d+)?N?u?(?:[bsifd]|i64)_?v?$".toRegex()
-    private val VECTOR_SUFFIX2 = "^gl(?:(Get)n?)?(\\w+?)[ILP]?\\d*N?u?(?:(?:[bsifd]|i64)v|(?<=Parameter)[bsifd])$".toRegex()
-    private val NAMED = "^gl(\\w+?)?Named([A-Z]\\w*)$".toRegex()
-
-    private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
-        val page = VECTOR_SUFFIX.find(function).let {
-            if (it == null)
-                function
-            else
-                "gl${it.groupValues[1]}"
-        }.let { page ->
-            VECTOR_SUFFIX2.find(page).let {
-                when {
-                    it == null                        -> page
-                    page == "glFramebufferParameteri" -> "glFramebufferParameteri"
-                    page == "glScissorIndexedv"       -> "glScissorIndexed"
-                    page == "glTextureParameteri"     -> "glTexParameter"
-                    else                              -> "gl${it.groupValues[1]}${it.groupValues[2]}"
-                }
-            }
-        }.let { page ->
-            NAMED.find(page).let {
-                if (it == null)
-                    page
-                else
-                    "gl${it.groupValues[1]}${it.groupValues[2]}"
-            }
-        }
-
-        val link = url("https://docs.gl/gl${if (deprecated) "3" else "4"}/$page", "Reference Page")
-        val injectedJavaDoc =
-            if (deprecated)
-                "$link - <em>This function is deprecated and unavailable in the Core profile</em>"
-            else
-                link
-
-        if (documentation.isEmpty())
-            println("$t/** $injectedJavaDoc */")
-        else {
-            if (documentation.indexOf('\n') == -1) {
-                println("$t/**")
-                print("$t * ")
-                print(documentation.substring("$t/** ".length, documentation.length - " */".length))
-            } else {
-                print(documentation.substring(0, documentation.length - "\n$t */".length))
-            }
-            print("\n$t * ")
-            print("\n$t * @see $injectedJavaDoc")
-            println("\n$t */")
-        }
-    }
-
     private val Sequence<Func>.hasDeprecated: Boolean
         get() = this.any { it has DeprecatedGL }
 
@@ -372,22 +312,3 @@ fun String.nativeClassGL(
         }
     }
 )
-
-private val REGISTRY_PATTERN = "([A-Z]+)_\\w+".toRegex()
-val NativeClass.registryLink: String
-    get() = url("https://www.khronos.org/registry/OpenGL/extensions/${if (postfix.isNotEmpty()) postfix else {
-        (REGISTRY_PATTERN.matchEntire(templateName) ?: throw IllegalStateException("Non-standard extension name: $templateName")).groups[1]!!.value
-    }}/$templateName.txt", templateName)
-
-fun NativeClass.registryLink(group: String, name: String): String =
-    url("https://www.khronos.org/registry/OpenGL/extensions/$group/${group}_$name.txt", templateName)
-fun NativeClass.registryLink(spec: String): String =
-    url("https://www.khronos.org/registry/OpenGL/extensions/$postfix/$spec.txt", templateName)
-
-fun registryLinkTo(group: String, name: String): String = "${group}_$name".let {
-    url("https://www.khronos.org/registry/OpenGL/extensions/$group/$it.txt", it)
-}
-
-val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"
-val NativeClass.glx: String get() = "{@link ${this.className} GLX ${this.className[3]}.${this.className[4]}}"
-val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

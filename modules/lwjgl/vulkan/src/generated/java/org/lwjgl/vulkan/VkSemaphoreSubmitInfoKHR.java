@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSemaphoreSubmitInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSemaphoreSubmitInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t value;
  *     VkPipelineStageFlags2 stageMask;
  *     uint32_t deviceIndex;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSemaphoreSubmitInfoKHR extends VkSemaphoreSubmitInfo {
 

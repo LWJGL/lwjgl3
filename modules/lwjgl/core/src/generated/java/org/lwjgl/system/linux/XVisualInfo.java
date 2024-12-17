@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information used by the visual utility routines to find desired visual type from the many visuals a display may support.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XVisualInfo {
  *     {@link Visual Visual} * visual;
  *     VisualID visualid;
@@ -33,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned long blue_mask;
  *     int colormap_size;
  *     int bits_per_rgb;
- * }</code></pre>
+ * }}</pre>
  */
 public class XVisualInfo extends Struct<XVisualInfo> implements NativeResource {
 

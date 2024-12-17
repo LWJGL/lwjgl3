@@ -14,15 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_InputActionManifestLoad_t {
  *     uint64_t pathAppKey;
  *     uint64_t pathMessage;
  *     uint64_t pathMessageParam;
  *     uint64_t pathManifestPath;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_InputActionManifestLoad_t")
 public class VREventInputActionManifestLoad extends Struct<VREventInputActionManifestLoad> {

@@ -16,23 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a multi-draw command.
- * 
- * <h5>Description</h5>
- * 
- * <p>The members of {@link VkMultiDrawInfoEXT} have the same meaning as the {@code firstVertex} and {@code vertexCount} parameters in {@link VK10#vkCmdDraw CmdDraw}.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTMultiDraw#vkCmdDrawMultiEXT CmdDrawMultiEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMultiDrawInfoEXT {
- *     uint32_t {@link #firstVertex};
- *     uint32_t {@link #vertexCount};
- * }</code></pre>
+ *     uint32_t firstVertex;
+ *     uint32_t vertexCount;
+ * }}</pre>
  */
 public class VkMultiDrawInfoEXT extends Struct<VkMultiDrawInfoEXT> implements NativeResource {
 
@@ -82,16 +70,16 @@ public class VkMultiDrawInfoEXT extends Struct<VkMultiDrawInfoEXT> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the first vertex to draw. */
+    /** @return the value of the {@code firstVertex} field. */
     @NativeType("uint32_t")
     public int firstVertex() { return nfirstVertex(address()); }
-    /** the number of vertices to draw. */
+    /** @return the value of the {@code vertexCount} field. */
     @NativeType("uint32_t")
     public int vertexCount() { return nvertexCount(address()); }
 
-    /** Sets the specified value to the {@link #firstVertex} field. */
+    /** Sets the specified value to the {@code firstVertex} field. */
     public VkMultiDrawInfoEXT firstVertex(@NativeType("uint32_t") int value) { nfirstVertex(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertexCount} field. */
+    /** Sets the specified value to the {@code vertexCount} field. */
     public VkMultiDrawInfoEXT vertexCount(@NativeType("uint32_t") int value) { nvertexCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -281,16 +269,16 @@ public class VkMultiDrawInfoEXT extends Struct<VkMultiDrawInfoEXT> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMultiDrawInfoEXT#firstVertex} field. */
+        /** @return the value of the {@code firstVertex} field. */
         @NativeType("uint32_t")
         public int firstVertex() { return VkMultiDrawInfoEXT.nfirstVertex(address()); }
-        /** @return the value of the {@link VkMultiDrawInfoEXT#vertexCount} field. */
+        /** @return the value of the {@code vertexCount} field. */
         @NativeType("uint32_t")
         public int vertexCount() { return VkMultiDrawInfoEXT.nvertexCount(address()); }
 
-        /** Sets the specified value to the {@link VkMultiDrawInfoEXT#firstVertex} field. */
+        /** Sets the specified value to the {@code firstVertex} field. */
         public VkMultiDrawInfoEXT.Buffer firstVertex(@NativeType("uint32_t") int value) { VkMultiDrawInfoEXT.nfirstVertex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMultiDrawInfoEXT#vertexCount} field. */
+        /** Sets the specified value to the {@code vertexCount} field. */
         public VkMultiDrawInfoEXT.Buffer vertexCount(@NativeType("uint32_t") int value) { VkMultiDrawInfoEXT.nvertexCount(address(), value); return this; }
 
     }

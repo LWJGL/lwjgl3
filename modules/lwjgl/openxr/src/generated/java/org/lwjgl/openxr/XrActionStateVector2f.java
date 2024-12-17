@@ -16,34 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * 2D float vector action state.
- * 
- * <h5>Description</h5>
- * 
- * <p>When multiple input sources are bound to this action, the {@code currentState} follows <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-multiple">the previously defined rule to resolve ambiguity</a>.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTION_STATE_VECTOR2F TYPE_ACTION_STATE_VECTOR2F}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrVector2f}, {@link XR10#xrGetActionStateVector2f GetActionStateVector2f}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActionStateVector2f {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrVector2f XrVector2f} {@link #currentState};
- *     XrBool32 {@link #changedSinceLastSync};
- *     XrTime {@link #lastChangeTime};
- *     XrBool32 {@link #isActive};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrVector2f XrVector2f} currentState;
+ *     XrBool32 changedSinceLastSync;
+ *     XrTime lastChangeTime;
+ *     XrBool32 isActive;
+ * }}</pre>
  */
 public class XrActionStateVector2f extends Struct<XrActionStateVector2f> implements NativeResource {
 
@@ -105,39 +86,39 @@ public class XrActionStateVector2f extends Struct<XrActionStateVector2f> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the current {@link XrVector2f} state of the Action. */
+    /** @return a {@link XrVector2f} view of the {@code currentState} field. */
     public XrVector2f currentState() { return ncurrentState(address()); }
-    /** {@link XR10#XR_TRUE TRUE} if the value of {@code currentState} is different than it was before the most recent call to {@link XR10#xrSyncActions SyncActions}. */
+    /** @return the value of the {@code changedSinceLastSync} field. */
     @NativeType("XrBool32")
     public boolean changedSinceLastSync() { return nchangedSinceLastSync(address()) != 0; }
-    /** the {@code XrTime} associated with the most recent change to this action’s state. */
+    /** @return the value of the {@code lastChangeTime} field. */
     @NativeType("XrTime")
     public long lastChangeTime() { return nlastChangeTime(address()); }
-    /** {@link XR10#XR_TRUE TRUE} if and only if there exists an input source that is contributing to the current state of this action. */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrActionStateVector2f type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_VECTOR2F TYPE_ACTION_STATE_VECTOR2F} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_VECTOR2F TYPE_ACTION_STATE_VECTOR2F} value to the {@code type} field. */
     public XrActionStateVector2f type$Default() { return type(XR10.XR_TYPE_ACTION_STATE_VECTOR2F); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrActionStateVector2f next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrVector2f} to the {@link #currentState} field. */
+    /** Copies the specified {@link XrVector2f} to the {@code currentState} field. */
     public XrActionStateVector2f currentState(XrVector2f value) { ncurrentState(address(), value); return this; }
-    /** Passes the {@link #currentState} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code currentState} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrActionStateVector2f currentState(java.util.function.Consumer<XrVector2f> consumer) { consumer.accept(currentState()); return this; }
-    /** Sets the specified value to the {@link #changedSinceLastSync} field. */
+    /** Sets the specified value to the {@code changedSinceLastSync} field. */
     public XrActionStateVector2f changedSinceLastSync(@NativeType("XrBool32") boolean value) { nchangedSinceLastSync(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #lastChangeTime} field. */
+    /** Sets the specified value to the {@code lastChangeTime} field. */
     public XrActionStateVector2f lastChangeTime(@NativeType("XrTime") long value) { nlastChangeTime(address(), value); return this; }
-    /** Sets the specified value to the {@link #isActive} field. */
+    /** Sets the specified value to the {@code isActive} field. */
     public XrActionStateVector2f isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -351,39 +332,39 @@ public class XrActionStateVector2f extends Struct<XrActionStateVector2f> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActionStateVector2f#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionStateVector2f.ntype(address()); }
-        /** @return the value of the {@link XrActionStateVector2f#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrActionStateVector2f.nnext(address()); }
-        /** @return a {@link XrVector2f} view of the {@link XrActionStateVector2f#currentState} field. */
+        /** @return a {@link XrVector2f} view of the {@code currentState} field. */
         public XrVector2f currentState() { return XrActionStateVector2f.ncurrentState(address()); }
-        /** @return the value of the {@link XrActionStateVector2f#changedSinceLastSync} field. */
+        /** @return the value of the {@code changedSinceLastSync} field. */
         @NativeType("XrBool32")
         public boolean changedSinceLastSync() { return XrActionStateVector2f.nchangedSinceLastSync(address()) != 0; }
-        /** @return the value of the {@link XrActionStateVector2f#lastChangeTime} field. */
+        /** @return the value of the {@code lastChangeTime} field. */
         @NativeType("XrTime")
         public long lastChangeTime() { return XrActionStateVector2f.nlastChangeTime(address()); }
-        /** @return the value of the {@link XrActionStateVector2f#isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrActionStateVector2f.nisActive(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrActionStateVector2f#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrActionStateVector2f.Buffer type(@NativeType("XrStructureType") int value) { XrActionStateVector2f.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_VECTOR2F TYPE_ACTION_STATE_VECTOR2F} value to the {@link XrActionStateVector2f#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_ACTION_STATE_VECTOR2F TYPE_ACTION_STATE_VECTOR2F} value to the {@code type} field. */
         public XrActionStateVector2f.Buffer type$Default() { return type(XR10.XR_TYPE_ACTION_STATE_VECTOR2F); }
-        /** Sets the specified value to the {@link XrActionStateVector2f#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrActionStateVector2f.Buffer next(@NativeType("void *") long value) { XrActionStateVector2f.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrVector2f} to the {@link XrActionStateVector2f#currentState} field. */
+        /** Copies the specified {@link XrVector2f} to the {@code currentState} field. */
         public XrActionStateVector2f.Buffer currentState(XrVector2f value) { XrActionStateVector2f.ncurrentState(address(), value); return this; }
-        /** Passes the {@link XrActionStateVector2f#currentState} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code currentState} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrActionStateVector2f.Buffer currentState(java.util.function.Consumer<XrVector2f> consumer) { consumer.accept(currentState()); return this; }
-        /** Sets the specified value to the {@link XrActionStateVector2f#changedSinceLastSync} field. */
+        /** Sets the specified value to the {@code changedSinceLastSync} field. */
         public XrActionStateVector2f.Buffer changedSinceLastSync(@NativeType("XrBool32") boolean value) { XrActionStateVector2f.nchangedSinceLastSync(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrActionStateVector2f#lastChangeTime} field. */
+        /** Sets the specified value to the {@code lastChangeTime} field. */
         public XrActionStateVector2f.Buffer lastChangeTime(@NativeType("XrTime") long value) { XrActionStateVector2f.nlastChangeTime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrActionStateVector2f#isActive} field. */
+        /** Sets the specified value to the {@code isActive} field. */
         public XrActionStateVector2f.Buffer isActive(@NativeType("XrBool32") boolean value) { XrActionStateVector2f.nisActive(address(), value ? 1 : 0); return this; }
 
     }

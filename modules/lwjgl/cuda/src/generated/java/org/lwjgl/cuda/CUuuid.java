@@ -16,12 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUuuid {
  *     char bytes[16];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUuuid extends Struct<CUuuid> implements NativeResource {
 

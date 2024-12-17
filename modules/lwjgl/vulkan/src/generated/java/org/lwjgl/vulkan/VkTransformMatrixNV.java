@@ -17,14 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkTransformMatrixKHR}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkTransformMatrixNV {
  *     float matrix[3][4];
- * }</code></pre>
+ * }}</pre>
  */
 public class VkTransformMatrixNV extends VkTransformMatrixKHR {
 

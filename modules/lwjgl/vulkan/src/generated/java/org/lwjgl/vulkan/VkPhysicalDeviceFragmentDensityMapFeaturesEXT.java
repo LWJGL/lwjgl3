@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing fragment density map features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceFragmentDensityMapFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #fragmentDensityMap};
- *     VkBool32 {@link #fragmentDensityMapDynamic};
- *     VkBool32 {@link #fragmentDensityMapNonSubsampledImages};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 fragmentDensityMap;
+ *     VkBool32 fragmentDensityMapDynamic;
+ *     VkBool32 fragmentDensityMapNonSubsampledImages;
+ * }}</pre>
  */
 public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct<VkPhysicalDeviceFragmentDensityMapFeaturesEXT> implements NativeResource {
 
@@ -96,33 +82,33 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct<VkPhys
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether the implementation supports render passes with a fragment density map attachment. If this feature is not enabled and the {@code pNext} chain of {@link VkRenderPassCreateInfo} includes a {@link VkRenderPassFragmentDensityMapCreateInfoEXT} structure, {@code fragmentDensityMapAttachment} <b>must</b> be {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED}. */
+    /** @return the value of the {@code fragmentDensityMap} field. */
     @NativeType("VkBool32")
     public boolean fragmentDensityMap() { return nfragmentDensityMap(address()) != 0; }
-    /** specifies whether the implementation supports dynamic fragment density map image views. If this feature is not enabled, {@link EXTFragmentDensityMap#VK_IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT IMAGE_VIEW_CREATE_FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT} <b>must</b> not be included in {@link VkImageViewCreateInfo}{@code ::flags}. */
+    /** @return the value of the {@code fragmentDensityMapDynamic} field. */
     @NativeType("VkBool32")
     public boolean fragmentDensityMapDynamic() { return nfragmentDensityMapDynamic(address()) != 0; }
-    /** specifies whether the implementation supports regular non-subsampled image attachments with fragment density map render passes. If this feature is not enabled, render passes with a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-fragmentdensitymapattachment">fragment density map attachment</a> <b>must</b> only have <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#samplers-subsamplesampler">subsampled attachments</a> bound. */
+    /** @return the value of the {@code fragmentDensityMapNonSubsampledImages} field. */
     @NativeType("VkBool32")
     public boolean fragmentDensityMapNonSubsampledImages() { return nfragmentDensityMapNonSubsampledImages(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceFragmentDensityMapFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceFragmentDensityMapFeaturesEXT sType$Default() { return sType(EXTFragmentDensityMap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceFragmentDensityMapFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #fragmentDensityMap} field. */
+    /** Sets the specified value to the {@code fragmentDensityMap} field. */
     public VkPhysicalDeviceFragmentDensityMapFeaturesEXT fragmentDensityMap(@NativeType("VkBool32") boolean value) { nfragmentDensityMap(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #fragmentDensityMapDynamic} field. */
+    /** Sets the specified value to the {@code fragmentDensityMapDynamic} field. */
     public VkPhysicalDeviceFragmentDensityMapFeaturesEXT fragmentDensityMapDynamic(@NativeType("VkBool32") boolean value) { nfragmentDensityMapDynamic(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #fragmentDensityMapNonSubsampledImages} field. */
+    /** Sets the specified value to the {@code fragmentDensityMapNonSubsampledImages} field. */
     public VkPhysicalDeviceFragmentDensityMapFeaturesEXT fragmentDensityMapNonSubsampledImages(@NativeType("VkBool32") boolean value) { nfragmentDensityMapNonSubsampledImages(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,33 +335,33 @@ public class VkPhysicalDeviceFragmentDensityMapFeaturesEXT extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceFragmentDensityMapFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceFragmentDensityMapFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#fragmentDensityMap} field. */
+        /** @return the value of the {@code fragmentDensityMap} field. */
         @NativeType("VkBool32")
         public boolean fragmentDensityMap() { return VkPhysicalDeviceFragmentDensityMapFeaturesEXT.nfragmentDensityMap(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#fragmentDensityMapDynamic} field. */
+        /** @return the value of the {@code fragmentDensityMapDynamic} field. */
         @NativeType("VkBool32")
         public boolean fragmentDensityMapDynamic() { return VkPhysicalDeviceFragmentDensityMapFeaturesEXT.nfragmentDensityMapDynamic(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#fragmentDensityMapNonSubsampledImages} field. */
+        /** @return the value of the {@code fragmentDensityMapNonSubsampledImages} field. */
         @NativeType("VkBool32")
         public boolean fragmentDensityMapNonSubsampledImages() { return VkPhysicalDeviceFragmentDensityMapFeaturesEXT.nfragmentDensityMapNonSubsampledImages(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceFragmentDensityMapFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT} value to the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer sType$Default() { return sType(EXTFragmentDensityMap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceFragmentDensityMapFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#fragmentDensityMap} field. */
+        /** Sets the specified value to the {@code fragmentDensityMap} field. */
         public VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer fragmentDensityMap(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentDensityMapFeaturesEXT.nfragmentDensityMap(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#fragmentDensityMapDynamic} field. */
+        /** Sets the specified value to the {@code fragmentDensityMapDynamic} field. */
         public VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer fragmentDensityMapDynamic(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentDensityMapFeaturesEXT.nfragmentDensityMapDynamic(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT#fragmentDensityMapNonSubsampledImages} field. */
+        /** Sets the specified value to the {@code fragmentDensityMapNonSubsampledImages} field. */
         public VkPhysicalDeviceFragmentDensityMapFeaturesEXT.Buffer fragmentDensityMapNonSubsampledImages(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceFragmentDensityMapFeaturesEXT.nfragmentDensityMapNonSubsampledImages(address(), value ? 1 : 0); return this; }
 
     }

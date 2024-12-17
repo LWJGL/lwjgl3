@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing placed memory map features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMapMemoryPlaced#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMapMemoryPlacedFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #memoryMapPlaced};
- *     VkBool32 {@link #memoryMapRangePlaced};
- *     VkBool32 {@link #memoryUnmapReserve};
- * }</code></pre>
+ *     VkBool32 memoryMapPlaced;
+ *     VkBool32 memoryMapRangePlaced;
+ *     VkBool32 memoryUnmapReserve;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMapMemoryPlacedFeaturesEXT extends Struct<VkPhysicalDeviceMapMemoryPlacedFeaturesEXT> implements NativeResource {
 
@@ -102,13 +88,13 @@ public class VkPhysicalDeviceMapMemoryPlacedFeaturesEXT extends Struct<VkPhysica
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports placing memory maps at application-specified virtual addresses. */
+    /** @return the value of the {@code memoryMapPlaced} field. */
     @NativeType("VkBool32")
     public boolean memoryMapPlaced() { return nmemoryMapPlaced(address()) != 0; }
-    /** indicates that the implementation supports placing memory maps of a subrange of a memory object at application-specified virtual addresses. */
+    /** @return the value of the {@code memoryMapRangePlaced} field. */
     @NativeType("VkBool32")
     public boolean memoryMapRangePlaced() { return nmemoryMapRangePlaced(address()) != 0; }
-    /** indicates that the implementation supports leaving the memory range reserved when unmapping a memory object. */
+    /** @return the value of the {@code memoryUnmapReserve} field. */
     @NativeType("VkBool32")
     public boolean memoryUnmapReserve() { return nmemoryUnmapReserve(address()) != 0; }
 
@@ -118,11 +104,11 @@ public class VkPhysicalDeviceMapMemoryPlacedFeaturesEXT extends Struct<VkPhysica
     public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT sType$Default() { return sType(EXTMapMemoryPlaced.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryMapPlaced} field. */
+    /** Sets the specified value to the {@code memoryMapPlaced} field. */
     public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT memoryMapPlaced(@NativeType("VkBool32") boolean value) { nmemoryMapPlaced(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #memoryMapRangePlaced} field. */
+    /** Sets the specified value to the {@code memoryMapRangePlaced} field. */
     public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT memoryMapRangePlaced(@NativeType("VkBool32") boolean value) { nmemoryMapRangePlaced(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #memoryUnmapReserve} field. */
+    /** Sets the specified value to the {@code memoryUnmapReserve} field. */
     public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT memoryUnmapReserve(@NativeType("VkBool32") boolean value) { nmemoryUnmapReserve(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,13 +322,13 @@ public class VkPhysicalDeviceMapMemoryPlacedFeaturesEXT extends Struct<VkPhysica
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT#memoryMapPlaced} field. */
+        /** @return the value of the {@code memoryMapPlaced} field. */
         @NativeType("VkBool32")
         public boolean memoryMapPlaced() { return VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.nmemoryMapPlaced(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT#memoryMapRangePlaced} field. */
+        /** @return the value of the {@code memoryMapRangePlaced} field. */
         @NativeType("VkBool32")
         public boolean memoryMapRangePlaced() { return VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.nmemoryMapRangePlaced(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT#memoryUnmapReserve} field. */
+        /** @return the value of the {@code memoryUnmapReserve} field. */
         @NativeType("VkBool32")
         public boolean memoryUnmapReserve() { return VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.nmemoryUnmapReserve(address()) != 0; }
 
@@ -352,11 +338,11 @@ public class VkPhysicalDeviceMapMemoryPlacedFeaturesEXT extends Struct<VkPhysica
         public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.Buffer sType$Default() { return sType(EXTMapMemoryPlaced.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT#memoryMapPlaced} field. */
+        /** Sets the specified value to the {@code memoryMapPlaced} field. */
         public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.Buffer memoryMapPlaced(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.nmemoryMapPlaced(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT#memoryMapRangePlaced} field. */
+        /** Sets the specified value to the {@code memoryMapRangePlaced} field. */
         public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.Buffer memoryMapRangePlaced(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.nmemoryMapRangePlaced(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT#memoryUnmapReserve} field. */
+        /** Sets the specified value to the {@code memoryUnmapReserve} field. */
         public VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.Buffer memoryUnmapReserve(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMapMemoryPlacedFeaturesEXT.nmemoryUnmapReserve(address(), value ? 1 : 0); return this; }
 
     }

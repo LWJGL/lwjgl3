@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether single-slice 2D views of 3D images can be used in image descriptors.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImage2dViewOf3d#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceImage2DViewOf3DFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #image2DViewOf3D};
- *     VkBool32 {@link #sampler2DViewOf3D};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 image2DViewOf3D;
+ *     VkBool32 sampler2DViewOf3D;
+ * }}</pre>
  */
 public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct<VkPhysicalDeviceImage2DViewOf3DFeaturesEXT> implements NativeResource {
 
@@ -92,28 +78,28 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct<VkPhysica
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports using a 2D view of a 3D image in a descriptor of type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} if the image is created using {@link EXTImage2dViewOf3d#VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT}. */
+    /** @return the value of the {@code image2DViewOf3D} field. */
     @NativeType("VkBool32")
     public boolean image2DViewOf3D() { return nimage2DViewOf3D(address()) != 0; }
-    /** indicates that the implementation supports using a 2D view of a 3D image in a descriptor of type {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} or {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} if the image is created using {@link EXTImage2dViewOf3d#VK_IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT IMAGE_CREATE_2D_VIEW_COMPATIBLE_BIT_EXT}. */
+    /** @return the value of the {@code sampler2DViewOf3D} field. */
     @NativeType("VkBool32")
     public boolean sampler2DViewOf3D() { return nsampler2DViewOf3D(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImage2dViewOf3d#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTImage2dViewOf3d#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT sType$Default() { return sType(EXTImage2dViewOf3d.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #image2DViewOf3D} field. */
+    /** Sets the specified value to the {@code image2DViewOf3D} field. */
     public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT image2DViewOf3D(@NativeType("VkBool32") boolean value) { nimage2DViewOf3D(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #sampler2DViewOf3D} field. */
+    /** Sets the specified value to the {@code sampler2DViewOf3D} field. */
     public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT sampler2DViewOf3D(@NativeType("VkBool32") boolean value) { nsampler2DViewOf3D(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,28 +301,28 @@ public class VkPhysicalDeviceImage2DViewOf3DFeaturesEXT extends Struct<VkPhysica
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#image2DViewOf3D} field. */
+        /** @return the value of the {@code image2DViewOf3D} field. */
         @NativeType("VkBool32")
         public boolean image2DViewOf3D() { return VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.nimage2DViewOf3D(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#sampler2DViewOf3D} field. */
+        /** @return the value of the {@code sampler2DViewOf3D} field. */
         @NativeType("VkBool32")
         public boolean sampler2DViewOf3D() { return VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.nsampler2DViewOf3D(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImage2dViewOf3d#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT} value to the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTImage2dViewOf3d#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer sType$Default() { return sType(EXTImage2dViewOf3d.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#image2DViewOf3D} field. */
+        /** Sets the specified value to the {@code image2DViewOf3D} field. */
         public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer image2DViewOf3D(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.nimage2DViewOf3D(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT#sampler2DViewOf3D} field. */
+        /** Sets the specified value to the {@code sampler2DViewOf3D} field. */
         public VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.Buffer sampler2DViewOf3D(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceImage2DViewOf3DFeaturesEXT.nsampler2DViewOf3D(address(), value ? 1 : 0); return this; }
 
     }

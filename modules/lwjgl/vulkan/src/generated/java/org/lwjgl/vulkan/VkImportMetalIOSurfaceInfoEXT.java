@@ -17,28 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure that identifies a VkImage object and corresponding Metal IOSurfaceRef object to use.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code ioSurface} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it will be used to underlie the {@code VkImage}. If {@code ioSurface} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the implementation will create a new {@code IOSurface} to underlie the {@code VkImage}.</p>
- * 
- * <p>If provided, the application <b>must</b> ensure that the configuration of the {@code IOSurfaceRef} object is compatible with the configuration of the {@code VkImage}. Failure to do so results in undefined behavior.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImportMetalIOSurfaceInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     IOSurfaceRef {@link #ioSurface};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     IOSurfaceRef ioSurface;
+ * }}</pre>
  */
 public class VkImportMetalIOSurfaceInfoEXT extends Struct<VkImportMetalIOSurfaceInfoEXT> implements NativeResource {
 
@@ -91,23 +75,23 @@ public class VkImportMetalIOSurfaceInfoEXT extends Struct<VkImportMetalIOSurface
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or the Metal {@code IOSurfaceRef} object that is to underlie the {@code VkImage}. */
+    /** @return the value of the {@code ioSurface} field. */
     @NativeType("IOSurfaceRef")
     public long ioSurface() { return nioSurface(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImportMetalIOSurfaceInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT} value to the {@code sType} field. */
     public VkImportMetalIOSurfaceInfoEXT sType$Default() { return sType(EXTMetalObjects.VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImportMetalIOSurfaceInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #ioSurface} field. */
+    /** Sets the specified value to the {@code ioSurface} field. */
     public VkImportMetalIOSurfaceInfoEXT ioSurface(@NativeType("IOSurfaceRef") long value) { nioSurface(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,23 +296,23 @@ public class VkImportMetalIOSurfaceInfoEXT extends Struct<VkImportMetalIOSurface
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImportMetalIOSurfaceInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImportMetalIOSurfaceInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkImportMetalIOSurfaceInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImportMetalIOSurfaceInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkImportMetalIOSurfaceInfoEXT#ioSurface} field. */
+        /** @return the value of the {@code ioSurface} field. */
         @NativeType("IOSurfaceRef")
         public long ioSurface() { return VkImportMetalIOSurfaceInfoEXT.nioSurface(address()); }
 
-        /** Sets the specified value to the {@link VkImportMetalIOSurfaceInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImportMetalIOSurfaceInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMetalIOSurfaceInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT} value to the {@link VkImportMetalIOSurfaceInfoEXT#sType} field. */
+        /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT} value to the {@code sType} field. */
         public VkImportMetalIOSurfaceInfoEXT.Buffer sType$Default() { return sType(EXTMetalObjects.VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkImportMetalIOSurfaceInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImportMetalIOSurfaceInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImportMetalIOSurfaceInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImportMetalIOSurfaceInfoEXT#ioSurface} field. */
+        /** Sets the specified value to the {@code ioSurface} field. */
         public VkImportMetalIOSurfaceInfoEXT.Buffer ioSurface(@NativeType("IOSurfaceRef") long value) { VkImportMetalIOSurfaceInfoEXT.nioSurface(address(), value); return this; }
 
     }

@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link AMDDebugOutput#glDebugMessageCallbackAMD DebugMessageCallbackAMD} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLuint id,
- *     GLenum category,
- *     GLenum severity,
- *     GLsizei length,
- *     GLchar const *message,
- *     void *userParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke GLDEBUGPROCAMD} */
 @FunctionalInterface
 @NativeType("GLDEBUGPROCAMD")
 public interface GLDebugMessageAMDCallbackI extends CallbackI {
@@ -52,16 +38,7 @@ public interface GLDebugMessageAMDCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when a debug message is generated.
-     *
-     * @param id        the message ID
-     * @param category  the message category
-     * @param severity  the message severity
-     * @param length    the message length, excluding the null-terminator
-     * @param message   a pointer to the message string representation
-     * @param userParam the user-specified value that was passed when calling {@link AMDDebugOutput#glDebugMessageCallbackAMD DebugMessageCallbackAMD}
-     */
+    /** {@code void (* GLDEBUGPROCAMD) (GLuint id, GLenum category, GLenum severity, GLsizei length, GLchar const * message, void * userParam)} */
     void invoke(@NativeType("GLuint") int id, @NativeType("GLenum") int category, @NativeType("GLenum") int severity, @NativeType("GLsizei") int length, @NativeType("GLchar const *") long message, @NativeType("void *") long userParam);
 
 }

@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying memory requirements.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkMemoryDedicatedRequirements}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkMemoryRequirements}, {@link VK11#vkGetBufferMemoryRequirements2 GetBufferMemoryRequirements2}, {@link KHRGetMemoryRequirements2#vkGetBufferMemoryRequirements2KHR GetBufferMemoryRequirements2KHR}, {@link VK13#vkGetDeviceBufferMemoryRequirements GetDeviceBufferMemoryRequirements}, {@link KHRMaintenance4#vkGetDeviceBufferMemoryRequirementsKHR GetDeviceBufferMemoryRequirementsKHR}, {@link VK13#vkGetDeviceImageMemoryRequirements GetDeviceImageMemoryRequirements}, {@link KHRMaintenance4#vkGetDeviceImageMemoryRequirementsKHR GetDeviceImageMemoryRequirementsKHR}, {@link EXTDeviceGeneratedCommands#vkGetGeneratedCommandsMemoryRequirementsEXT GetGeneratedCommandsMemoryRequirementsEXT}, {@link NVDeviceGeneratedCommands#vkGetGeneratedCommandsMemoryRequirementsNV GetGeneratedCommandsMemoryRequirementsNV}, {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2}, {@link KHRGetMemoryRequirements2#vkGetImageMemoryRequirements2KHR GetImageMemoryRequirements2KHR}, {@link NVDeviceGeneratedCommandsCompute#vkGetPipelineIndirectMemoryRequirementsNV GetPipelineIndirectMemoryRequirementsNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryRequirements2 {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkMemoryRequirements VkMemoryRequirements} {@link #memoryRequirements};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkMemoryRequirements VkMemoryRequirements} memoryRequirements;
+ * }}</pre>
  */
 public class VkMemoryRequirements2 extends Struct<VkMemoryRequirements2> implements NativeResource {
 
@@ -90,20 +74,20 @@ public class VkMemoryRequirements2 extends Struct<VkMemoryRequirements2> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkMemoryRequirements} structure describing the memory requirements of the resource. */
+    /** @return a {@link VkMemoryRequirements} view of the {@code memoryRequirements} field. */
     public VkMemoryRequirements memoryRequirements() { return nmemoryRequirements(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryRequirements2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2} value to the {@code sType} field. */
     public VkMemoryRequirements2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryRequirements2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkMemoryDedicatedRequirements} value to the {@code pNext} chain. */
     public VkMemoryRequirements2 pNext(VkMemoryDedicatedRequirements value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -318,20 +302,20 @@ public class VkMemoryRequirements2 extends Struct<VkMemoryRequirements2> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryRequirements2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryRequirements2.nsType(address()); }
-        /** @return the value of the {@link VkMemoryRequirements2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkMemoryRequirements2.npNext(address()); }
-        /** @return a {@link VkMemoryRequirements} view of the {@link VkMemoryRequirements2#memoryRequirements} field. */
+        /** @return a {@link VkMemoryRequirements} view of the {@code memoryRequirements} field. */
         public VkMemoryRequirements memoryRequirements() { return VkMemoryRequirements2.nmemoryRequirements(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryRequirements2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryRequirements2.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryRequirements2.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2} value to the {@link VkMemoryRequirements2#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2 STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2} value to the {@code sType} field. */
         public VkMemoryRequirements2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2); }
-        /** Sets the specified value to the {@link VkMemoryRequirements2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryRequirements2.Buffer pNext(@NativeType("void *") long value) { VkMemoryRequirements2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkMemoryDedicatedRequirements} value to the {@code pNext} chain. */
         public VkMemoryRequirements2.Buffer pNext(VkMemoryDedicatedRequirements value) { return this.pNext(value.pNext(this.pNext()).address()); }

@@ -16,33 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying AV1 encode rate control GOP remaining frame counts.
- * 
- * <h5>Description</h5>
- * 
- * <p>Setting {@code useGopRemainingFrames} to {@link VK10#VK_TRUE TRUE} and including this structure in the {@code pNext} chain of {@link VkVideoBeginCodingInfoKHR} is only mandatory if the {@link VkVideoEncodeAV1CapabilitiesKHR}{@code ::requiresGopRemainingFrames} reported for the used <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-profiles">video profile</a> is {@link VK10#VK_TRUE TRUE}. However, implementations <b>may</b> use these remaining frame counts, when specified, even when it is not required. In particular, when the application does not use a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-regular-gop">regular GOP structure</a>, these values <b>may</b> provide additional guidance for the implementation’s rate control algorithm.</p>
- * 
- * <p>The {@link VkVideoEncodeAV1CapabilitiesKHR}{@code ::prefersGopRemainingFrames} capability is also used to indicate that the implementation’s rate control algorithm <b>may</b> operate more accurately if the application specifies the remaining frame counts using this structure.</p>
- * 
- * <p>As with other rate control guidance values, if the effective order and number of frames encoded by the application are not in line with the remaining frame counts specified in this structure at any given point, then the behavior of the implementation’s rate control algorithm <b>may</b> deviate from the one expected by the application.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeAV1GopRemainingFrameInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #useGopRemainingFrames};
- *     uint32_t {@link #gopRemainingIntra};
- *     uint32_t {@link #gopRemainingPredictive};
- *     uint32_t {@link #gopRemainingBipredictive};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 useGopRemainingFrames;
+ *     uint32_t gopRemainingIntra;
+ *     uint32_t gopRemainingPredictive;
+ *     uint32_t gopRemainingBipredictive;
+ * }}</pre>
  */
 public class VkVideoEncodeAV1GopRemainingFrameInfoKHR extends Struct<VkVideoEncodeAV1GopRemainingFrameInfoKHR> implements NativeResource {
 
@@ -104,38 +86,38 @@ public class VkVideoEncodeAV1GopRemainingFrameInfoKHR extends Struct<VkVideoEnco
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation’s rate control algorithm <b>should</b> use the values specified in {@code gopRemainingIntra}, {@code gopRemainingPredictive}, and {@code gopRemainingBipredictive}. If {@code useGopRemainingFrames} is {@link VK10#VK_FALSE FALSE}, then the values of {@code gopRemainingIntra}, {@code gopRemainingPredictive}, and {@code gopRemainingBipredictive} are ignored. */
+    /** @return the value of the {@code useGopRemainingFrames} field. */
     @NativeType("VkBool32")
     public boolean useGopRemainingFrames() { return nuseGopRemainingFrames(address()) != 0; }
-    /** specifies the number of frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA_KHR} the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-gop">GOP</a> prior to executing the next video encode operation. */
+    /** @return the value of the {@code gopRemainingIntra} field. */
     @NativeType("uint32_t")
     public int gopRemainingIntra() { return ngopRemainingIntra(address()); }
-    /** specifies the number of frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE_KHR} the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-gop">GOP</a> prior to executing the next video encode operation. */
+    /** @return the value of the {@code gopRemainingPredictive} field. */
     @NativeType("uint32_t")
     public int gopRemainingPredictive() { return ngopRemainingPredictive(address()); }
-    /** specifies the number of frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR} the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-gop">GOP</a> prior to executing the next video encode operation. */
+    /** @return the value of the {@code gopRemainingBipredictive} field. */
     @NativeType("uint32_t")
     public int gopRemainingBipredictive() { return ngopRemainingBipredictive(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeAV1GopRemainingFrameInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeAV1GopRemainingFrameInfoKHR sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeAV1GopRemainingFrameInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #useGopRemainingFrames} field. */
+    /** Sets the specified value to the {@code useGopRemainingFrames} field. */
     public VkVideoEncodeAV1GopRemainingFrameInfoKHR useGopRemainingFrames(@NativeType("VkBool32") boolean value) { nuseGopRemainingFrames(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #gopRemainingIntra} field. */
+    /** Sets the specified value to the {@code gopRemainingIntra} field. */
     public VkVideoEncodeAV1GopRemainingFrameInfoKHR gopRemainingIntra(@NativeType("uint32_t") int value) { ngopRemainingIntra(address(), value); return this; }
-    /** Sets the specified value to the {@link #gopRemainingPredictive} field. */
+    /** Sets the specified value to the {@code gopRemainingPredictive} field. */
     public VkVideoEncodeAV1GopRemainingFrameInfoKHR gopRemainingPredictive(@NativeType("uint32_t") int value) { ngopRemainingPredictive(address(), value); return this; }
-    /** Sets the specified value to the {@link #gopRemainingBipredictive} field. */
+    /** Sets the specified value to the {@code gopRemainingBipredictive} field. */
     public VkVideoEncodeAV1GopRemainingFrameInfoKHR gopRemainingBipredictive(@NativeType("uint32_t") int value) { ngopRemainingBipredictive(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,38 +331,38 @@ public class VkVideoEncodeAV1GopRemainingFrameInfoKHR extends Struct<VkVideoEnco
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeAV1GopRemainingFrameInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeAV1GopRemainingFrameInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#useGopRemainingFrames} field. */
+        /** @return the value of the {@code useGopRemainingFrames} field. */
         @NativeType("VkBool32")
         public boolean useGopRemainingFrames() { return VkVideoEncodeAV1GopRemainingFrameInfoKHR.nuseGopRemainingFrames(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#gopRemainingIntra} field. */
+        /** @return the value of the {@code gopRemainingIntra} field. */
         @NativeType("uint32_t")
         public int gopRemainingIntra() { return VkVideoEncodeAV1GopRemainingFrameInfoKHR.ngopRemainingIntra(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#gopRemainingPredictive} field. */
+        /** @return the value of the {@code gopRemainingPredictive} field. */
         @NativeType("uint32_t")
         public int gopRemainingPredictive() { return VkVideoEncodeAV1GopRemainingFrameInfoKHR.ngopRemainingPredictive(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#gopRemainingBipredictive} field. */
+        /** @return the value of the {@code gopRemainingBipredictive} field. */
         @NativeType("uint32_t")
         public int gopRemainingBipredictive() { return VkVideoEncodeAV1GopRemainingFrameInfoKHR.ngopRemainingBipredictive(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeAV1GopRemainingFrameInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeAV1GopRemainingFrameInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR} value to the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeAV1GopRemainingFrameInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_GOP_REMAINING_FRAME_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeAV1GopRemainingFrameInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeAV1GopRemainingFrameInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#useGopRemainingFrames} field. */
+        /** Sets the specified value to the {@code useGopRemainingFrames} field. */
         public VkVideoEncodeAV1GopRemainingFrameInfoKHR.Buffer useGopRemainingFrames(@NativeType("VkBool32") boolean value) { VkVideoEncodeAV1GopRemainingFrameInfoKHR.nuseGopRemainingFrames(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#gopRemainingIntra} field. */
+        /** Sets the specified value to the {@code gopRemainingIntra} field. */
         public VkVideoEncodeAV1GopRemainingFrameInfoKHR.Buffer gopRemainingIntra(@NativeType("uint32_t") int value) { VkVideoEncodeAV1GopRemainingFrameInfoKHR.ngopRemainingIntra(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#gopRemainingPredictive} field. */
+        /** Sets the specified value to the {@code gopRemainingPredictive} field. */
         public VkVideoEncodeAV1GopRemainingFrameInfoKHR.Buffer gopRemainingPredictive(@NativeType("uint32_t") int value) { VkVideoEncodeAV1GopRemainingFrameInfoKHR.ngopRemainingPredictive(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR#gopRemainingBipredictive} field. */
+        /** Sets the specified value to the {@code gopRemainingBipredictive} field. */
         public VkVideoEncodeAV1GopRemainingFrameInfoKHR.Buffer gopRemainingBipredictive(@NativeType("uint32_t") int value) { VkVideoEncodeAV1GopRemainingFrameInfoKHR.ngopRemainingBipredictive(address(), value); return this; }
 
     }

@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_LAUNCH_PARAMS {
  *     CUfunction function;
  *     unsigned int gridDimX;
@@ -31,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int sharedMemBytes;
  *     CUstream hStream;
  *     void ** kernelParams;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements NativeResource {
 
@@ -132,11 +130,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
     /** @return the value of the {@code hStream} field. */
     @NativeType("CUstream")
     public long hStream() { return nhStream(address()); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field. */
     @NativeType("void **")
     public @Nullable PointerBuffer kernelParams(int capacity) { return nkernelParams(address(), capacity); }
 
@@ -451,11 +445,7 @@ public class CUDA_LAUNCH_PARAMS extends Struct<CUDA_LAUNCH_PARAMS> implements Na
         /** @return the value of the {@code hStream} field. */
         @NativeType("CUstream")
         public long hStream() { return CUDA_LAUNCH_PARAMS.nhStream(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code kernelParams} field. */
         @NativeType("void **")
         public @Nullable PointerBuffer kernelParams(int capacity) { return CUDA_LAUNCH_PARAMS.nkernelParams(address(), capacity); }
 

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information about a Vorbis stream.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stb_vorbis_info {
  *     unsigned int sample_rate;
  *     int channels;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int setup_temp_memory_required;
  *     unsigned int temp_memory_required;
  *     int max_frame_size;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stb_vorbis_info")
 public class STBVorbisInfo extends Struct<STBVorbisInfo> implements NativeResource {

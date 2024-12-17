@@ -16,27 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes a swapchain image wait operation.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO TYPE_SWAPCHAIN_IMAGE_WAIT_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrWaitSwapchainImage WaitSwapchainImage}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainImageWaitInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrDuration {@link #timeout};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrDuration timeout;
+ * }}</pre>
  */
 public class XrSwapchainImageWaitInfo extends Struct<XrSwapchainImageWaitInfo> implements NativeResource {
 
@@ -89,23 +74,23 @@ public class XrSwapchainImageWaitInfo extends Struct<XrSwapchainImageWaitInfo> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** indicates how many nanoseconds the call <b>may</b> block waiting for the image to become available for writing. */
+    /** @return the value of the {@code timeout} field. */
     @NativeType("XrDuration")
     public long timeout() { return ntimeout(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSwapchainImageWaitInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO TYPE_SWAPCHAIN_IMAGE_WAIT_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO TYPE_SWAPCHAIN_IMAGE_WAIT_INFO} value to the {@code type} field. */
     public XrSwapchainImageWaitInfo type$Default() { return type(XR10.XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSwapchainImageWaitInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #timeout} field. */
+    /** Sets the specified value to the {@code timeout} field. */
     public XrSwapchainImageWaitInfo timeout(@NativeType("XrDuration") long value) { ntimeout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -301,23 +286,23 @@ public class XrSwapchainImageWaitInfo extends Struct<XrSwapchainImageWaitInfo> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSwapchainImageWaitInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainImageWaitInfo.ntype(address()); }
-        /** @return the value of the {@link XrSwapchainImageWaitInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSwapchainImageWaitInfo.nnext(address()); }
-        /** @return the value of the {@link XrSwapchainImageWaitInfo#timeout} field. */
+        /** @return the value of the {@code timeout} field. */
         @NativeType("XrDuration")
         public long timeout() { return XrSwapchainImageWaitInfo.ntimeout(address()); }
 
-        /** Sets the specified value to the {@link XrSwapchainImageWaitInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSwapchainImageWaitInfo.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainImageWaitInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO TYPE_SWAPCHAIN_IMAGE_WAIT_INFO} value to the {@link XrSwapchainImageWaitInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO TYPE_SWAPCHAIN_IMAGE_WAIT_INFO} value to the {@code type} field. */
         public XrSwapchainImageWaitInfo.Buffer type$Default() { return type(XR10.XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO); }
-        /** Sets the specified value to the {@link XrSwapchainImageWaitInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSwapchainImageWaitInfo.Buffer next(@NativeType("void const *") long value) { XrSwapchainImageWaitInfo.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainImageWaitInfo#timeout} field. */
+        /** Sets the specified value to the {@code timeout} field. */
         public XrSwapchainImageWaitInfo.Buffer timeout(@NativeType("XrDuration") long value) { XrSwapchainImageWaitInfo.ntimeout(address(), value); return this; }
 
     }

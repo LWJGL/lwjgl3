@@ -16,41 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a mapped memory range.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code memory} <b>must</b> be currently host mapped</li>
- * <li>If {@code size} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code offset} and {@code size} <b>must</b> specify a range contained within the currently mapped range of {@code memory}</li>
- * <li>If {@code size} is equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code offset} <b>must</b> be within the currently mapped range of {@code memory}</li>
- * <li>{@code offset} <b>must</b> be a multiple of {@link VkPhysicalDeviceLimits}{@code ::nonCoherentAtomSize}</li>
- * <li>If {@code size} is equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the end of the current mapping of {@code memory} <b>must</b> either be a multiple of {@link VkPhysicalDeviceLimits}{@code ::nonCoherentAtomSize} bytes from the beginning of the memory object, or be equal to the end of the memory object</li>
- * <li>If {@code size} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> either be a multiple of {@link VkPhysicalDeviceLimits}{@code ::nonCoherentAtomSize}, or {@code offset} plus {@code size} <b>must</b> equal the size of {@code memory}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE STRUCTURE_TYPE_MAPPED_MEMORY_RANGE}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkFlushMappedMemoryRanges FlushMappedMemoryRanges}, {@link VK10#vkInvalidateMappedMemoryRanges InvalidateMappedMemoryRanges}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMappedMemoryRange {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceMemory {@link #memory};
- *     VkDeviceSize {@link #offset};
- *     VkDeviceSize {@link #size};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceMemory memory;
+ *     VkDeviceSize offset;
+ *     VkDeviceSize size;
+ * }}</pre>
  */
 public class VkMappedMemoryRange extends Struct<VkMappedMemoryRange> implements NativeResource {
 
@@ -109,33 +82,33 @@ public class VkMappedMemoryRange extends Struct<VkMappedMemoryRange> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the memory object to which this range belongs. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** the zero-based byte offset from the beginning of the memory object. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** either the size of range, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to affect the range from {@code offset} to the end of the current mapping of the allocation. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMappedMemoryRange sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE STRUCTURE_TYPE_MAPPED_MEMORY_RANGE} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE STRUCTURE_TYPE_MAPPED_MEMORY_RANGE} value to the {@code sType} field. */
     public VkMappedMemoryRange sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMappedMemoryRange pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkMappedMemoryRange memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkMappedMemoryRange offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkMappedMemoryRange size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -362,33 +335,33 @@ public class VkMappedMemoryRange extends Struct<VkMappedMemoryRange> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMappedMemoryRange#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMappedMemoryRange.nsType(address()); }
-        /** @return the value of the {@link VkMappedMemoryRange#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMappedMemoryRange.npNext(address()); }
-        /** @return the value of the {@link VkMappedMemoryRange#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkMappedMemoryRange.nmemory(address()); }
-        /** @return the value of the {@link VkMappedMemoryRange#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkMappedMemoryRange.noffset(address()); }
-        /** @return the value of the {@link VkMappedMemoryRange#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkMappedMemoryRange.nsize(address()); }
 
-        /** Sets the specified value to the {@link VkMappedMemoryRange#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMappedMemoryRange.Buffer sType(@NativeType("VkStructureType") int value) { VkMappedMemoryRange.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE STRUCTURE_TYPE_MAPPED_MEMORY_RANGE} value to the {@link VkMappedMemoryRange#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE STRUCTURE_TYPE_MAPPED_MEMORY_RANGE} value to the {@code sType} field. */
         public VkMappedMemoryRange.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE); }
-        /** Sets the specified value to the {@link VkMappedMemoryRange#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMappedMemoryRange.Buffer pNext(@NativeType("void const *") long value) { VkMappedMemoryRange.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMappedMemoryRange#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkMappedMemoryRange.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkMappedMemoryRange.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMappedMemoryRange#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkMappedMemoryRange.Buffer offset(@NativeType("VkDeviceSize") long value) { VkMappedMemoryRange.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMappedMemoryRange#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkMappedMemoryRange.Buffer size(@NativeType("VkDeviceSize") long value) { VkMappedMemoryRange.nsize(address(), value); return this; }
 
     }

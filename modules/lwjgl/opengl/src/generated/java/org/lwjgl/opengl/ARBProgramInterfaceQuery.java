@@ -11,38 +11,10 @@ import java.nio.*;
 
 import org.lwjgl.system.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_program_interface_query.txt">ARB_program_interface_query</a> extension.
- * 
- * <p>This extension provides a single unified set of query commands that can be used by applications to determine properties of various interfaces and
- * resources used by program objects to communicate with application code, fixed-function OpenGL pipeline stages, and other programs. In unextended OpenGL
- * 4.2, there is a separate set of query commands for each different type of interface or resource used by the program. These different sets of queries are
- * structured nearly identically, but the queries for some interfaces have limited capability (e.g., there is no ability to enumerate fragment shader
- * outputs).</p>
- * 
- * <p>With the single set of query commands provided by this extension, a consistent set of queries is available for all interfaces, and a new interface can
- * be added without having to introduce a completely new set of query commands. These queries are intended to provide a superset of the capabilities
- * provided by similar queries in OpenGL 4.2, and should allow for the deprecation of the existing queries.</p>
- * 
- * <p>This extension defines two terms: interfaces and active resources. Each interface of a program object provides a way for the program to communicate with
- * application code, fixed-function OpenGL pipeline stages, and other programs. Examples of interfaces for a program object include inputs (receiving
- * values from vertex attributes or outputs of other programs), outputs (sending values to other programs or per-fragment operations), uniforms (receiving
- * values from API calls), uniform blocks (receiving values from bound buffer objects), subroutines and subroutine uniforms (receiving API calls to
- * indicate functions to call during program execution), and atomic counter buffers (holding values to be manipulated by atomic counter shader functions).
- * Each interface of a program has a set of active resources used by the program. For example, the resources of a program's input interface includes all
- * active input variables used by the first stage of the program. The resources of a program's uniform block interface consists of the set of uniform
- * blocks with at least one member used by any shader in the program.</p>
- * 
- * <p>Requires {@link GL20 OpenGL 2.0}. Promoted to core in {@link GL43 OpenGL 4.3}.</p>
- */
 public class ARBProgramInterfaceQuery {
 
     static { GL.initialize(); }
 
-    /**
-     * Accepted by the {@code programInterface} parameter of GetProgramInterfaceiv, GetProgramResourceIndex, GetProgramResourceName, GetProgramResourceiv,
-     * GetProgramResourceLocation, and GetProgramResourceLocationIndex.
-     */
     public static final int
         GL_UNIFORM                            = 0x92E1,
         GL_UNIFORM_BLOCK                      = 0x92E2,
@@ -64,14 +36,12 @@ public class ARBProgramInterfaceQuery {
         GL_COMPUTE_SUBROUTINE_UNIFORM         = 0x92F3,
         GL_TRANSFORM_FEEDBACK_VARYING         = 0x92F4;
 
-    /** Accepted by the {@code pname} parameter of GetProgramInterfaceiv. */
     public static final int
         GL_ACTIVE_RESOURCES               = 0x92F5,
         GL_MAX_NAME_LENGTH                = 0x92F6,
         GL_MAX_NUM_ACTIVE_VARIABLES       = 0x92F7,
         GL_MAX_NUM_COMPATIBLE_SUBROUTINES = 0x92F8;
 
-    /** Accepted in the {@code props} array of GetProgramResourceiv. */
     public static final int
         GL_NAME_LENGTH                          = 0x92F9,
         GL_TYPE                                 = 0x92FA,
@@ -104,30 +74,17 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramInterfaceiv ] ---
 
-    /** Unsafe version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv} */
+    /** {@code void glGetProgramInterfaceiv(GLuint program, GLenum programInterface, GLenum pname, GLint * params)} */
     public static void nglGetProgramInterfaceiv(int program, int programInterface, int pname, long params) {
         GL43C.nglGetProgramInterfaceiv(program, programInterface, pname, params);
     }
 
-    /**
-     * Queries a property of an interface in a program.
-     *
-     * @param program          the name of a program object whose interface to query
-     * @param programInterface a token identifying the interface within {@code program} to query. One of:<br><table><tr><td>{@link GL43C#GL_UNIFORM UNIFORM}</td><td>{@link GL43C#GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link GL43C#GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link GL43C#GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link GL43C#GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
-     * @param pname            the name of the parameter within {@code programInterface} to query. One of:<br><table><tr><td>{@link GL43C#GL_ACTIVE_RESOURCES ACTIVE_RESOURCES}</td><td>{@link GL43C#GL_MAX_NAME_LENGTH MAX_NAME_LENGTH}</td><td>{@link GL43C#GL_MAX_NUM_ACTIVE_VARIABLES MAX_NUM_ACTIVE_VARIABLES}</td></tr><tr><td>{@link GL43C#GL_MAX_NUM_COMPATIBLE_SUBROUTINES MAX_NUM_COMPATIBLE_SUBROUTINES}</td></tr></table>
-     * @param params           a variable to retrieve the value of {@code pname} for the program interface
-     */
+    /** {@code void glGetProgramInterfaceiv(GLuint program, GLenum programInterface, GLenum pname, GLint * params)} */
     public static void glGetProgramInterfaceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname, @NativeType("GLint *") IntBuffer params) {
         GL43C.glGetProgramInterfaceiv(program, programInterface, pname, params);
     }
 
-    /**
-     * Queries a property of an interface in a program.
-     *
-     * @param program          the name of a program object whose interface to query
-     * @param programInterface a token identifying the interface within {@code program} to query. One of:<br><table><tr><td>{@link GL43C#GL_UNIFORM UNIFORM}</td><td>{@link GL43C#GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link GL43C#GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link GL43C#GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link GL43C#GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
-     * @param pname            the name of the parameter within {@code programInterface} to query. One of:<br><table><tr><td>{@link GL43C#GL_ACTIVE_RESOURCES ACTIVE_RESOURCES}</td><td>{@link GL43C#GL_MAX_NAME_LENGTH MAX_NAME_LENGTH}</td><td>{@link GL43C#GL_MAX_NUM_ACTIVE_VARIABLES MAX_NUM_ACTIVE_VARIABLES}</td></tr><tr><td>{@link GL43C#GL_MAX_NUM_COMPATIBLE_SUBROUTINES MAX_NUM_COMPATIBLE_SUBROUTINES}</td></tr></table>
-     */
+    /** {@code void glGetProgramInterfaceiv(GLuint program, GLenum programInterface, GLenum pname, GLint * params)} */
     @NativeType("void")
     public static int glGetProgramInterfacei(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname) {
         return GL43C.glGetProgramInterfacei(program, programInterface, pname);
@@ -135,30 +92,18 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramResourceIndex ] ---
 
-    /** Unsafe version of: {@link #glGetProgramResourceIndex GetProgramResourceIndex} */
+    /** {@code GLuint glGetProgramResourceIndex(GLuint program, GLenum programInterface, GLchar const * name)} */
     public static int nglGetProgramResourceIndex(int program, int programInterface, long name) {
         return GL43C.nglGetProgramResourceIndex(program, programInterface, name);
     }
 
-    /**
-     * Queries the index of a named resource within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the resource named {Wcode name}. One of:<br><table><tr><td>{@link GL43C#GL_UNIFORM UNIFORM}</td><td>{@link GL43C#GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link GL43C#GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link GL43C#GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link GL43C#GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
-     * @param name             the name of the resource to query the index of
-     */
+    /** {@code GLuint glGetProgramResourceIndex(GLuint program, GLenum programInterface, GLchar const * name)} */
     @NativeType("GLuint")
     public static int glGetProgramResourceIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") ByteBuffer name) {
         return GL43C.glGetProgramResourceIndex(program, programInterface, name);
     }
 
-    /**
-     * Queries the index of a named resource within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the resource named {Wcode name}. One of:<br><table><tr><td>{@link GL43C#GL_UNIFORM UNIFORM}</td><td>{@link GL43C#GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link GL43C#GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link GL43C#GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link GL43C#GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
-     * @param name             the name of the resource to query the index of
-     */
+    /** {@code GLuint glGetProgramResourceIndex(GLuint program, GLenum programInterface, GLchar const * name)} */
     @NativeType("GLuint")
     public static int glGetProgramResourceIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
         return GL43C.glGetProgramResourceIndex(program, programInterface, name);
@@ -166,48 +111,23 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramResourceName ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramResourceName GetProgramResourceName}
-     *
-     * @param bufSize the size of the character array whose address is given by {@code name}
-     */
+    /** {@code void glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei * length, GLchar * name)} */
     public static void nglGetProgramResourceName(int program, int programInterface, int index, int bufSize, long length, long name) {
         GL43C.nglGetProgramResourceName(program, programInterface, index, bufSize, length, name);
     }
 
-    /**
-     * Queries the name of an indexed resource within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the indexed resource. One of:<br><table><tr><td>{@link GL43C#GL_UNIFORM UNIFORM}</td><td>{@link GL43C#GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link GL43C#GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link GL43C#GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link GL43C#GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
-     * @param index            the index of the resource within {@code programInterface} of {@code program}
-     * @param length           a variable which will receive the length of the resource name
-     * @param name             a character array into which will be written the name of the resource
-     */
+    /** {@code void glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei * length, GLchar * name)} */
     public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLchar *") ByteBuffer name) {
         GL43C.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
-    /**
-     * Queries the name of an indexed resource within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the indexed resource. One of:<br><table><tr><td>{@link GL43C#GL_UNIFORM UNIFORM}</td><td>{@link GL43C#GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link GL43C#GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link GL43C#GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link GL43C#GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
-     * @param index            the index of the resource within {@code programInterface} of {@code program}
-     * @param bufSize          the size of the character array whose address is given by {@code name}
-     */
+    /** {@code void glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei * length, GLchar * name)} */
     @NativeType("void")
     public static String glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei") int bufSize) {
         return GL43C.glGetProgramResourceName(program, programInterface, index, bufSize);
     }
 
-    /**
-     * Queries the name of an indexed resource within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the indexed resource. One of:<br><table><tr><td>{@link GL43C#GL_UNIFORM UNIFORM}</td><td>{@link GL43C#GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link GL43C#GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link GL43C#GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link GL43C#GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
-     * @param index            the index of the resource within {@code programInterface} of {@code program}
-     */
+    /** {@code void glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei * length, GLchar * name)} */
     @NativeType("void")
     public static String glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index) {
         return glGetProgramResourceName(program, programInterface, index, glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH));
@@ -215,56 +135,30 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramResourceiv ] ---
 
-    /**
-     * Unsafe version of: {@link #glGetProgramResourceiv GetProgramResourceiv}
-     *
-     * @param propCount the number of properties in {@code props}
-     * @param bufSize   the size of the integer array whose address is given by {@code params}
-     */
+    /** {@code void glGetProgramResourceiv(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, GLenum const * props, GLsizei bufSize, GLsizei * length, GLint * params)} */
     public static void nglGetProgramResourceiv(int program, int programInterface, int index, int propCount, long props, int bufSize, long length, long params) {
         GL43C.nglGetProgramResourceiv(program, programInterface, index, propCount, props, bufSize, length, params);
     }
 
-    /**
-     * Retrieves values for multiple properties of a single active resource within a program object.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}. One of:<br><table><tr><td>{@link GL43C#GL_UNIFORM UNIFORM}</td><td>{@link GL43C#GL_UNIFORM_BLOCK UNIFORM_BLOCK}</td><td>{@link GL43C#GL_PROGRAM_INPUT PROGRAM_INPUT}</td></tr><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td><td>{@link GL43C#GL_BUFFER_VARIABLE BUFFER_VARIABLE}</td><td>{@link GL43C#GL_SHADER_STORAGE_BLOCK SHADER_STORAGE_BLOCK}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE VERTEX_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE TESS_CONTROL_SUBROUTINE}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE TESS_EVALUATION_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE GEOMETRY_SUBROUTINE}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE FRAGMENT_SUBROUTINE}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE COMPUTE_SUBROUTINE}</td></tr><tr><td>{@link GL43C#GL_VERTEX_SUBROUTINE_UNIFORM VERTEX_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_CONTROL_SUBROUTINE_UNIFORM TESS_CONTROL_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_TESS_EVALUATION_SUBROUTINE_UNIFORM TESS_EVALUATION_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_GEOMETRY_SUBROUTINE_UNIFORM GEOMETRY_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_FRAGMENT_SUBROUTINE_UNIFORM FRAGMENT_SUBROUTINE_UNIFORM}</td><td>{@link GL43C#GL_COMPUTE_SUBROUTINE_UNIFORM COMPUTE_SUBROUTINE_UNIFORM}</td></tr><tr><td>{@link GL43C#GL_TRANSFORM_FEEDBACK_VARYING TRANSFORM_FEEDBACK_VARYING}</td><td>{@link GL42#GL_ATOMIC_COUNTER_BUFFER ATOMIC_COUNTER_BUFFER}</td></tr></table>
-     * @param index            the active resource index
-     * @param props            an array that will receive the active resource properties
-     * @param length           a variable which will receive the number of values returned
-     * @param params           an array that will receive the property values
-     */
+    /** {@code void glGetProgramResourceiv(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, GLenum const * props, GLsizei bufSize, GLsizei * length, GLint * params)} */
     public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") IntBuffer props, @NativeType("GLsizei *") @Nullable IntBuffer length, @NativeType("GLint *") IntBuffer params) {
         GL43C.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }
 
     // --- [ glGetProgramResourceLocation ] ---
 
-    /** Unsafe version of: {@link #glGetProgramResourceLocation GetProgramResourceLocation} */
+    /** {@code GLint glGetProgramResourceLocation(GLuint program, GLenum programInterface, GLchar const * name)} */
     public static int nglGetProgramResourceLocation(int program, int programInterface, long name) {
         return GL43C.nglGetProgramResourceLocation(program, programInterface, name);
     }
 
-    /**
-     * Queries the location of a named resource within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}
-     * @param name             the name of the resource to query the location of
-     */
+    /** {@code GLint glGetProgramResourceLocation(GLuint program, GLenum programInterface, GLchar const * name)} */
     @NativeType("GLint")
     public static int glGetProgramResourceLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") ByteBuffer name) {
         return GL43C.glGetProgramResourceLocation(program, programInterface, name);
     }
 
-    /**
-     * Queries the location of a named resource within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}
-     * @param name             the name of the resource to query the location of
-     */
+    /** {@code GLint glGetProgramResourceLocation(GLuint program, GLenum programInterface, GLchar const * name)} */
     @NativeType("GLint")
     public static int glGetProgramResourceLocation(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
         return GL43C.glGetProgramResourceLocation(program, programInterface, name);
@@ -272,46 +166,34 @@ public class ARBProgramInterfaceQuery {
 
     // --- [ glGetProgramResourceLocationIndex ] ---
 
-    /** Unsafe version of: {@link #glGetProgramResourceLocationIndex GetProgramResourceLocationIndex} */
+    /** {@code GLint glGetProgramResourceLocationIndex(GLuint program, GLenum programInterface, GLchar const * name)} */
     public static int nglGetProgramResourceLocationIndex(int program, int programInterface, long name) {
         return GL43C.nglGetProgramResourceLocationIndex(program, programInterface, name);
     }
 
-    /**
-     * Queries the fragment color index of a named variable within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}. Must be:<br><table><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td></tr></table>
-     * @param name             the name of the resource to query the location of
-     */
+    /** {@code GLint glGetProgramResourceLocationIndex(GLuint program, GLenum programInterface, GLchar const * name)} */
     @NativeType("GLint")
     public static int glGetProgramResourceLocationIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") ByteBuffer name) {
         return GL43C.glGetProgramResourceLocationIndex(program, programInterface, name);
     }
 
-    /**
-     * Queries the fragment color index of a named variable within a program.
-     *
-     * @param program          the name of a program object whose resources to query
-     * @param programInterface a token identifying the interface within {@code program} containing the resource named {@code name}. Must be:<br><table><tr><td>{@link GL43C#GL_PROGRAM_OUTPUT PROGRAM_OUTPUT}</td></tr></table>
-     * @param name             the name of the resource to query the location of
-     */
+    /** {@code GLint glGetProgramResourceLocationIndex(GLuint program, GLenum programInterface, GLchar const * name)} */
     @NativeType("GLint")
     public static int glGetProgramResourceLocationIndex(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLchar const *") CharSequence name) {
         return GL43C.glGetProgramResourceLocationIndex(program, programInterface, name);
     }
 
-    /** Array version of: {@link #glGetProgramInterfaceiv GetProgramInterfaceiv} */
+    /** {@code void glGetProgramInterfaceiv(GLuint program, GLenum programInterface, GLenum pname, GLint * params)} */
     public static void glGetProgramInterfaceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLenum") int pname, @NativeType("GLint *") int[] params) {
         GL43C.glGetProgramInterfaceiv(program, programInterface, pname, params);
     }
 
-    /** Array version of: {@link #glGetProgramResourceName GetProgramResourceName} */
+    /** {@code void glGetProgramResourceName(GLuint program, GLenum programInterface, GLuint index, GLsizei bufSize, GLsizei * length, GLchar * name)} */
     public static void glGetProgramResourceName(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLchar *") ByteBuffer name) {
         GL43C.glGetProgramResourceName(program, programInterface, index, length, name);
     }
 
-    /** Array version of: {@link #glGetProgramResourceiv GetProgramResourceiv} */
+    /** {@code void glGetProgramResourceiv(GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, GLenum const * props, GLsizei bufSize, GLsizei * length, GLint * params)} */
     public static void glGetProgramResourceiv(@NativeType("GLuint") int program, @NativeType("GLenum") int programInterface, @NativeType("GLuint") int index, @NativeType("GLenum const *") int[] props, @NativeType("GLsizei *") int @Nullable [] length, @NativeType("GLint *") int[] params) {
         GL43C.glGetProgramResourceiv(program, programInterface, index, props, length, params);
     }

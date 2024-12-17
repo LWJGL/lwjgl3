@@ -14,18 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing all of the {@code COLR} v1 {@code PaintScale*} paint tables.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintScale {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_Fixed scale_x;
  *     FT_Fixed scale_y;
  *     FT_Fixed center_x;
  *     FT_Fixed center_y;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintScale extends Struct<FT_PaintScale> {
 

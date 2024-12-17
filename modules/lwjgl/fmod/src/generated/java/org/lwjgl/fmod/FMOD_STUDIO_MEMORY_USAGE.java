@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_MEMORY_USAGE {
  *     int exclusive;
  *     int inclusive;
  *     int sampledata;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_MEMORY_USAGE extends Struct<FMOD_STUDIO_MEMORY_USAGE> implements NativeResource {
 

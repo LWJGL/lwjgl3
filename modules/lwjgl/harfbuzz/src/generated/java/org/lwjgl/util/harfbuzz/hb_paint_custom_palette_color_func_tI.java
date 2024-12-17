@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_paint_funcs_t *funcs,
- *     void *paint_data,
- *     unsigned int color_index,
- *     hb_color_t *color,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_paint_custom_palette_color_func_t} */
 @FunctionalInterface
 @NativeType("hb_paint_custom_palette_color_func_t")
 public interface hb_paint_custom_palette_color_func_tI extends CallbackI {
@@ -48,6 +37,7 @@ public interface hb_paint_custom_palette_color_func_tI extends CallbackI {
         );
     }
 
+    /** {@code void (* hb_paint_custom_palette_color_func_t) (hb_paint_funcs_t * funcs, void * paint_data, unsigned int color_index, hb_color_t * color, void * user_data)} */
     void invoke(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("unsigned int") int color_index, @NativeType("hb_color_t *") long color, @NativeType("void *") long user_data);
 
 }

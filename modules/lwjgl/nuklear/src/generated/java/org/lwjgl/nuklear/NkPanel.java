@@ -14,11 +14,9 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_panel {
- *     enum nk_panel_type {@link #type};
+ *     enum nk_panel_type type;
  *     nk_flags flags;
  *     {@link NkRect struct nk_rect} bounds;
  *     nk_uint * offset_x;
@@ -36,7 +34,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkChart struct nk_chart} chart;
  *     {@link NkCommandBuffer struct nk_command_buffer} * buffer;
  *     {@link NkPanel struct nk_panel} * parent;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_panel")
 public class NkPanel extends Struct<NkPanel> {
@@ -135,7 +133,7 @@ public class NkPanel extends Struct<NkPanel> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** one of:<br><table><tr><td>{@link Nuklear#NK_PANEL_NONE PANEL_NONE}</td><td>{@link Nuklear#NK_PANEL_WINDOW PANEL_WINDOW}</td><td>{@link Nuklear#NK_PANEL_GROUP PANEL_GROUP}</td><td>{@link Nuklear#NK_PANEL_POPUP PANEL_POPUP}</td><td>{@link Nuklear#NK_PANEL_CONTEXTUAL PANEL_CONTEXTUAL}</td><td>{@link Nuklear#NK_PANEL_COMBO PANEL_COMBO}</td></tr><tr><td>{@link Nuklear#NK_PANEL_MENU PANEL_MENU}</td><td>{@link Nuklear#NK_PANEL_TOOLTIP PANEL_TOOLTIP}</td><td>{@link Nuklear#NK_PANEL_SET_NONBLOCK PANEL_SET_NONBLOCK}</td><td>{@link Nuklear#NK_PANEL_SET_POPUP PANEL_SET_POPUP}</td><td>{@link Nuklear#NK_PANEL_SET_SUB PANEL_SET_SUB}</td></tr></table> */
+    /** @return the value of the {@code type} field. */
     @NativeType("enum nk_panel_type")
     public int type() { return ntype(address()); }
     /** @return the value of the {@code flags} field. */
@@ -144,18 +142,10 @@ public class NkPanel extends Struct<NkPanel> {
     /** @return a {@link NkRect} view of the {@code bounds} field. */
     @NativeType("struct nk_rect")
     public NkRect bounds() { return nbounds(address()); }
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code offset_x} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code offset_x} field. */
     @NativeType("nk_uint *")
     public IntBuffer offset_x(int capacity) { return noffset_x(address(), capacity); }
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code offset_y} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code offset_y} field. */
     @NativeType("nk_uint *")
     public IntBuffer offset_y(int capacity) { return noffset_y(address(), capacity); }
     /** @return the value of the {@code at_x} field. */
@@ -301,7 +291,7 @@ public class NkPanel extends Struct<NkPanel> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link NkPanel#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("enum nk_panel_type")
         public int type() { return NkPanel.ntype(address()); }
         /** @return the value of the {@code flags} field. */
@@ -310,18 +300,10 @@ public class NkPanel extends Struct<NkPanel> {
         /** @return a {@link NkRect} view of the {@code bounds} field. */
         @NativeType("struct nk_rect")
         public NkRect bounds() { return NkPanel.nbounds(address()); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code offset_x} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code offset_x} field. */
         @NativeType("nk_uint *")
         public IntBuffer offset_x(int capacity) { return NkPanel.noffset_x(address(), capacity); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code offset_y} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code offset_y} field. */
         @NativeType("nk_uint *")
         public IntBuffer offset_y(int capacity) { return NkPanel.noffset_y(address(), capacity); }
         /** @return the value of the {@code at_x} field. */

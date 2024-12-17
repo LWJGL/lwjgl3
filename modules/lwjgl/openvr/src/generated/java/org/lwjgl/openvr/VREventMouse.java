@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Used for simulated mouse events in overlay space.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Mouse_t {
- *     float {@link #x};
+ *     float x;
  *     float y;
- *     uint32_t {@link #button};
- *     uint32_t {@link #cursorIndex};
- * }</code></pre>
+ *     uint32_t button;
+ *     uint32_t cursorIndex;
+ * }}</pre>
  */
 @NativeType("struct VREvent_Mouse_t")
 public class VREventMouse extends Struct<VREventMouse> {
@@ -81,14 +77,14 @@ public class VREventMouse extends Struct<VREventMouse> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** coords are in GL space, bottom left of the texture is 0,0 */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
     /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** one of:<br><table><tr><td>{@link VR#EVRMouseButton_VRMouseButton_Left}</td><td>{@link VR#EVRMouseButton_VRMouseButton_Right}</td></tr><tr><td>{@link VR#EVRMouseButton_VRMouseButton_Middle}</td></tr></table> */
+    /** @return the value of the {@code button} field. */
     @NativeType("uint32_t")
     public int button() { return nbutton(address()); }
-    /** if from an event triggered by cursor input on an overlay that supports multiple cursors, this is the index of which tracked cursor the event is for */
+    /** @return the value of the {@code cursorIndex} field. */
     @NativeType("uint32_t")
     public int cursorIndex() { return ncursorIndex(address()); }
 
@@ -173,14 +169,14 @@ public class VREventMouse extends Struct<VREventMouse> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VREventMouse#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return VREventMouse.nx(address()); }
         /** @return the value of the {@code y} field. */
         public float y() { return VREventMouse.ny(address()); }
-        /** @return the value of the {@link VREventMouse#button} field. */
+        /** @return the value of the {@code button} field. */
         @NativeType("uint32_t")
         public int button() { return VREventMouse.nbutton(address()); }
-        /** @return the value of the {@link VREventMouse#cursorIndex} field. */
+        /** @return the value of the {@code cursorIndex} field. */
         @NativeType("uint32_t")
         public int cursorIndex() { return VREventMouse.ncursorIndex(address()); }
 

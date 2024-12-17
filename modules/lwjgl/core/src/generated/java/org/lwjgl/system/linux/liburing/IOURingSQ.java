@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_sq {
  *     unsigned * khead;
  *     unsigned * ktail;
- *     unsigned * {@link #kring_mask};
- *     unsigned * {@link #kring_entries};
+ *     unsigned * kring_mask;
+ *     unsigned * kring_entries;
  *     unsigned * kflags;
  *     unsigned * kdropped;
  *     unsigned * array;
@@ -36,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned ring_mask;
  *     unsigned ring_entries;
  *     unsigned pad[2];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_sq")
 public class IOURingSQ extends Struct<IOURingSQ> implements NativeResource {
@@ -126,53 +124,25 @@ public class IOURingSQ extends Struct<IOURingSQ> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code khead} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code khead} field. */
     @NativeType("unsigned *")
     public IntBuffer khead(int capacity) { return nkhead(address(), capacity); }
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code ktail} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code ktail} field. */
     @NativeType("unsigned *")
     public IntBuffer ktail(int capacity) { return nktail(address(), capacity); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return Deprecated: use {@code ring_mask} instead of {@code *kring_mask}
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code kring_mask} field. */
     @NativeType("unsigned *")
     public IntBuffer kring_mask(int capacity) { return nkring_mask(address(), capacity); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return Deprecated: use {@code ring_entries} instead of {@code *kring_entries}
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code kring_entries} field. */
     @NativeType("unsigned *")
     public IntBuffer kring_entries(int capacity) { return nkring_entries(address(), capacity); }
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code kflags} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code kflags} field. */
     @NativeType("unsigned *")
     public IntBuffer kflags(int capacity) { return nkflags(address(), capacity); }
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code kdropped} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code kdropped} field. */
     @NativeType("unsigned *")
     public IntBuffer kdropped(int capacity) { return nkdropped(address(), capacity); }
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code array} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code array} field. */
     @NativeType("unsigned *")
     public IntBuffer array(int capacity) { return narray(address(), capacity); }
     /** @return a {@link IOURingSQE} view of the struct pointed to by the {@code sqes} field. */
@@ -201,9 +171,9 @@ public class IOURingSQ extends Struct<IOURingSQ> implements NativeResource {
     public IOURingSQ khead(@NativeType("unsigned *") IntBuffer value) { nkhead(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code ktail} field. */
     public IOURingSQ ktail(@NativeType("unsigned *") IntBuffer value) { nktail(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #kring_mask} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code kring_mask} field. */
     public IOURingSQ kring_mask(@NativeType("unsigned *") IntBuffer value) { nkring_mask(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #kring_entries} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code kring_entries} field. */
     public IOURingSQ kring_entries(@NativeType("unsigned *") IntBuffer value) { nkring_entries(address(), value); return this; }
     /** Sets the address of the specified {@link IntBuffer} to the {@code kflags} field. */
     public IOURingSQ kflags(@NativeType("unsigned *") IntBuffer value) { nkflags(address(), value); return this; }
@@ -509,53 +479,25 @@ public class IOURingSQ extends Struct<IOURingSQ> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code khead} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code khead} field. */
         @NativeType("unsigned *")
         public IntBuffer khead(int capacity) { return IOURingSQ.nkhead(address(), capacity); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code ktail} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code ktail} field. */
         @NativeType("unsigned *")
         public IntBuffer ktail(int capacity) { return IOURingSQ.nktail(address(), capacity); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@link IOURingSQ#kring_mask} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code kring_mask} field. */
         @NativeType("unsigned *")
         public IntBuffer kring_mask(int capacity) { return IOURingSQ.nkring_mask(address(), capacity); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@link IOURingSQ#kring_entries} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code kring_entries} field. */
         @NativeType("unsigned *")
         public IntBuffer kring_entries(int capacity) { return IOURingSQ.nkring_entries(address(), capacity); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code kflags} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code kflags} field. */
         @NativeType("unsigned *")
         public IntBuffer kflags(int capacity) { return IOURingSQ.nkflags(address(), capacity); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code kdropped} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code kdropped} field. */
         @NativeType("unsigned *")
         public IntBuffer kdropped(int capacity) { return IOURingSQ.nkdropped(address(), capacity); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code array} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code array} field. */
         @NativeType("unsigned *")
         public IntBuffer array(int capacity) { return IOURingSQ.narray(address(), capacity); }
         /** @return a {@link IOURingSQE} view of the struct pointed to by the {@code sqes} field. */
@@ -584,9 +526,9 @@ public class IOURingSQ extends Struct<IOURingSQ> implements NativeResource {
         public IOURingSQ.Buffer khead(@NativeType("unsigned *") IntBuffer value) { IOURingSQ.nkhead(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code ktail} field. */
         public IOURingSQ.Buffer ktail(@NativeType("unsigned *") IntBuffer value) { IOURingSQ.nktail(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link IOURingSQ#kring_mask} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code kring_mask} field. */
         public IOURingSQ.Buffer kring_mask(@NativeType("unsigned *") IntBuffer value) { IOURingSQ.nkring_mask(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link IOURingSQ#kring_entries} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code kring_entries} field. */
         public IOURingSQ.Buffer kring_entries(@NativeType("unsigned *") IntBuffer value) { IOURingSQ.nkring_entries(address(), value); return this; }
         /** Sets the address of the specified {@link IntBuffer} to the {@code kflags} field. */
         public IOURingSQ.Buffer kflags(@NativeType("unsigned *") IntBuffer value) { IOURingSQ.nkflags(address(), value); return this; }

@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a given axis in design space for Multiple Masters, TrueType GX, and OpenType variation fonts.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Var_Axis {
  *     FT_String * name;
  *     FT_Fixed minimum;
@@ -26,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Fixed maximum;
  *     FT_ULong tag;
  *     FT_UInt strid;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Var_Axis extends Struct<FT_Var_Axis> {
 

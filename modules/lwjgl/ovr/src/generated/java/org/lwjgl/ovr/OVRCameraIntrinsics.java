@@ -16,19 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrCameraIntrinsics {
- *     double {@link #LastChangedTime};
- *     {@link OVRFovPort ovrFovPort} {@link #FOVPort};
- *     float {@link #VirtualNearPlaneDistanceMeters};
- *     float {@link #VirtualFarPlaneDistanceMeters};
- *     {@link OVRSizei ovrSizei} {@link #ImageSensorPixelResolution};
- *     {@link OVRMatrix4f ovrMatrix4f} {@link #LensDistortionMatrix};
- *     double {@link #ExposurePeriodSeconds};
- *     double {@link #ExposureDurationSeconds};
- * }</code></pre>
+ *     double LastChangedTime;
+ *     {@link OVRFovPort ovrFovPort} FOVPort;
+ *     float VirtualNearPlaneDistanceMeters;
+ *     float VirtualFarPlaneDistanceMeters;
+ *     {@link OVRSizei ovrSizei} ImageSensorPixelResolution;
+ *     {@link OVRMatrix4f ovrMatrix4f} LensDistortionMatrix;
+ *     double ExposurePeriodSeconds;
+ *     double ExposureDurationSeconds;
+ * }}</pre>
  */
 @NativeType("struct ovrCameraIntrinsics")
 public class OVRCameraIntrinsics extends Struct<OVRCameraIntrinsics> implements NativeResource {
@@ -97,47 +95,47 @@ public class OVRCameraIntrinsics extends Struct<OVRCameraIntrinsics> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** time in seconds from last change to the parameters */
+    /** @return the value of the {@code LastChangedTime} field. */
     public double LastChangedTime() { return nLastChangedTime(address()); }
-    /** angles of all 4 sides of viewport */
+    /** @return a {@link OVRFovPort} view of the {@code FOVPort} field. */
     @NativeType("ovrFovPort")
     public OVRFovPort FOVPort() { return nFOVPort(address()); }
-    /** near plane of the virtual camera used to match the external camera */
+    /** @return the value of the {@code VirtualNearPlaneDistanceMeters} field. */
     public float VirtualNearPlaneDistanceMeters() { return nVirtualNearPlaneDistanceMeters(address()); }
-    /** far plane of the virtual camera used to match the external camera */
+    /** @return the value of the {@code VirtualFarPlaneDistanceMeters} field. */
     public float VirtualFarPlaneDistanceMeters() { return nVirtualFarPlaneDistanceMeters(address()); }
-    /** height in pixels of image sensor */
+    /** @return a {@link OVRSizei} view of the {@code ImageSensorPixelResolution} field. */
     @NativeType("ovrSizei")
     public OVRSizei ImageSensorPixelResolution() { return nImageSensorPixelResolution(address()); }
-    /** the lens distortion matrix of camera */
+    /** @return a {@link OVRMatrix4f} view of the {@code LensDistortionMatrix} field. */
     @NativeType("ovrMatrix4f")
     public OVRMatrix4f LensDistortionMatrix() { return nLensDistortionMatrix(address()); }
-    /** how often, in seconds, the exposure is taken */
+    /** @return the value of the {@code ExposurePeriodSeconds} field. */
     public double ExposurePeriodSeconds() { return nExposurePeriodSeconds(address()); }
-    /** length of the exposure time */
+    /** @return the value of the {@code ExposureDurationSeconds} field. */
     public double ExposureDurationSeconds() { return nExposureDurationSeconds(address()); }
 
-    /** Sets the specified value to the {@link #LastChangedTime} field. */
+    /** Sets the specified value to the {@code LastChangedTime} field. */
     public OVRCameraIntrinsics LastChangedTime(double value) { nLastChangedTime(address(), value); return this; }
-    /** Copies the specified {@link OVRFovPort} to the {@link #FOVPort} field. */
+    /** Copies the specified {@link OVRFovPort} to the {@code FOVPort} field. */
     public OVRCameraIntrinsics FOVPort(@NativeType("ovrFovPort") OVRFovPort value) { nFOVPort(address(), value); return this; }
-    /** Passes the {@link #FOVPort} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code FOVPort} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRCameraIntrinsics FOVPort(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(FOVPort()); return this; }
-    /** Sets the specified value to the {@link #VirtualNearPlaneDistanceMeters} field. */
+    /** Sets the specified value to the {@code VirtualNearPlaneDistanceMeters} field. */
     public OVRCameraIntrinsics VirtualNearPlaneDistanceMeters(float value) { nVirtualNearPlaneDistanceMeters(address(), value); return this; }
-    /** Sets the specified value to the {@link #VirtualFarPlaneDistanceMeters} field. */
+    /** Sets the specified value to the {@code VirtualFarPlaneDistanceMeters} field. */
     public OVRCameraIntrinsics VirtualFarPlaneDistanceMeters(float value) { nVirtualFarPlaneDistanceMeters(address(), value); return this; }
-    /** Copies the specified {@link OVRSizei} to the {@link #ImageSensorPixelResolution} field. */
+    /** Copies the specified {@link OVRSizei} to the {@code ImageSensorPixelResolution} field. */
     public OVRCameraIntrinsics ImageSensorPixelResolution(@NativeType("ovrSizei") OVRSizei value) { nImageSensorPixelResolution(address(), value); return this; }
-    /** Passes the {@link #ImageSensorPixelResolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code ImageSensorPixelResolution} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRCameraIntrinsics ImageSensorPixelResolution(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(ImageSensorPixelResolution()); return this; }
-    /** Copies the specified {@link OVRMatrix4f} to the {@link #LensDistortionMatrix} field. */
+    /** Copies the specified {@link OVRMatrix4f} to the {@code LensDistortionMatrix} field. */
     public OVRCameraIntrinsics LensDistortionMatrix(@NativeType("ovrMatrix4f") OVRMatrix4f value) { nLensDistortionMatrix(address(), value); return this; }
-    /** Passes the {@link #LensDistortionMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code LensDistortionMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRCameraIntrinsics LensDistortionMatrix(java.util.function.Consumer<OVRMatrix4f> consumer) { consumer.accept(LensDistortionMatrix()); return this; }
-    /** Sets the specified value to the {@link #ExposurePeriodSeconds} field. */
+    /** Sets the specified value to the {@code ExposurePeriodSeconds} field. */
     public OVRCameraIntrinsics ExposurePeriodSeconds(double value) { nExposurePeriodSeconds(address(), value); return this; }
-    /** Sets the specified value to the {@link #ExposureDurationSeconds} field. */
+    /** Sets the specified value to the {@code ExposureDurationSeconds} field. */
     public OVRCameraIntrinsics ExposureDurationSeconds(double value) { nExposureDurationSeconds(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -382,47 +380,47 @@ public class OVRCameraIntrinsics extends Struct<OVRCameraIntrinsics> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRCameraIntrinsics#LastChangedTime} field. */
+        /** @return the value of the {@code LastChangedTime} field. */
         public double LastChangedTime() { return OVRCameraIntrinsics.nLastChangedTime(address()); }
-        /** @return a {@link OVRFovPort} view of the {@link OVRCameraIntrinsics#FOVPort} field. */
+        /** @return a {@link OVRFovPort} view of the {@code FOVPort} field. */
         @NativeType("ovrFovPort")
         public OVRFovPort FOVPort() { return OVRCameraIntrinsics.nFOVPort(address()); }
-        /** @return the value of the {@link OVRCameraIntrinsics#VirtualNearPlaneDistanceMeters} field. */
+        /** @return the value of the {@code VirtualNearPlaneDistanceMeters} field. */
         public float VirtualNearPlaneDistanceMeters() { return OVRCameraIntrinsics.nVirtualNearPlaneDistanceMeters(address()); }
-        /** @return the value of the {@link OVRCameraIntrinsics#VirtualFarPlaneDistanceMeters} field. */
+        /** @return the value of the {@code VirtualFarPlaneDistanceMeters} field. */
         public float VirtualFarPlaneDistanceMeters() { return OVRCameraIntrinsics.nVirtualFarPlaneDistanceMeters(address()); }
-        /** @return a {@link OVRSizei} view of the {@link OVRCameraIntrinsics#ImageSensorPixelResolution} field. */
+        /** @return a {@link OVRSizei} view of the {@code ImageSensorPixelResolution} field. */
         @NativeType("ovrSizei")
         public OVRSizei ImageSensorPixelResolution() { return OVRCameraIntrinsics.nImageSensorPixelResolution(address()); }
-        /** @return a {@link OVRMatrix4f} view of the {@link OVRCameraIntrinsics#LensDistortionMatrix} field. */
+        /** @return a {@link OVRMatrix4f} view of the {@code LensDistortionMatrix} field. */
         @NativeType("ovrMatrix4f")
         public OVRMatrix4f LensDistortionMatrix() { return OVRCameraIntrinsics.nLensDistortionMatrix(address()); }
-        /** @return the value of the {@link OVRCameraIntrinsics#ExposurePeriodSeconds} field. */
+        /** @return the value of the {@code ExposurePeriodSeconds} field. */
         public double ExposurePeriodSeconds() { return OVRCameraIntrinsics.nExposurePeriodSeconds(address()); }
-        /** @return the value of the {@link OVRCameraIntrinsics#ExposureDurationSeconds} field. */
+        /** @return the value of the {@code ExposureDurationSeconds} field. */
         public double ExposureDurationSeconds() { return OVRCameraIntrinsics.nExposureDurationSeconds(address()); }
 
-        /** Sets the specified value to the {@link OVRCameraIntrinsics#LastChangedTime} field. */
+        /** Sets the specified value to the {@code LastChangedTime} field. */
         public OVRCameraIntrinsics.Buffer LastChangedTime(double value) { OVRCameraIntrinsics.nLastChangedTime(address(), value); return this; }
-        /** Copies the specified {@link OVRFovPort} to the {@link OVRCameraIntrinsics#FOVPort} field. */
+        /** Copies the specified {@link OVRFovPort} to the {@code FOVPort} field. */
         public OVRCameraIntrinsics.Buffer FOVPort(@NativeType("ovrFovPort") OVRFovPort value) { OVRCameraIntrinsics.nFOVPort(address(), value); return this; }
-        /** Passes the {@link OVRCameraIntrinsics#FOVPort} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code FOVPort} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRCameraIntrinsics.Buffer FOVPort(java.util.function.Consumer<OVRFovPort> consumer) { consumer.accept(FOVPort()); return this; }
-        /** Sets the specified value to the {@link OVRCameraIntrinsics#VirtualNearPlaneDistanceMeters} field. */
+        /** Sets the specified value to the {@code VirtualNearPlaneDistanceMeters} field. */
         public OVRCameraIntrinsics.Buffer VirtualNearPlaneDistanceMeters(float value) { OVRCameraIntrinsics.nVirtualNearPlaneDistanceMeters(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRCameraIntrinsics#VirtualFarPlaneDistanceMeters} field. */
+        /** Sets the specified value to the {@code VirtualFarPlaneDistanceMeters} field. */
         public OVRCameraIntrinsics.Buffer VirtualFarPlaneDistanceMeters(float value) { OVRCameraIntrinsics.nVirtualFarPlaneDistanceMeters(address(), value); return this; }
-        /** Copies the specified {@link OVRSizei} to the {@link OVRCameraIntrinsics#ImageSensorPixelResolution} field. */
+        /** Copies the specified {@link OVRSizei} to the {@code ImageSensorPixelResolution} field. */
         public OVRCameraIntrinsics.Buffer ImageSensorPixelResolution(@NativeType("ovrSizei") OVRSizei value) { OVRCameraIntrinsics.nImageSensorPixelResolution(address(), value); return this; }
-        /** Passes the {@link OVRCameraIntrinsics#ImageSensorPixelResolution} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code ImageSensorPixelResolution} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRCameraIntrinsics.Buffer ImageSensorPixelResolution(java.util.function.Consumer<OVRSizei> consumer) { consumer.accept(ImageSensorPixelResolution()); return this; }
-        /** Copies the specified {@link OVRMatrix4f} to the {@link OVRCameraIntrinsics#LensDistortionMatrix} field. */
+        /** Copies the specified {@link OVRMatrix4f} to the {@code LensDistortionMatrix} field. */
         public OVRCameraIntrinsics.Buffer LensDistortionMatrix(@NativeType("ovrMatrix4f") OVRMatrix4f value) { OVRCameraIntrinsics.nLensDistortionMatrix(address(), value); return this; }
-        /** Passes the {@link OVRCameraIntrinsics#LensDistortionMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code LensDistortionMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRCameraIntrinsics.Buffer LensDistortionMatrix(java.util.function.Consumer<OVRMatrix4f> consumer) { consumer.accept(LensDistortionMatrix()); return this; }
-        /** Sets the specified value to the {@link OVRCameraIntrinsics#ExposurePeriodSeconds} field. */
+        /** Sets the specified value to the {@code ExposurePeriodSeconds} field. */
         public OVRCameraIntrinsics.Buffer ExposurePeriodSeconds(double value) { OVRCameraIntrinsics.nExposurePeriodSeconds(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRCameraIntrinsics#ExposureDurationSeconds} field. */
+        /** Sets the specified value to the {@code ExposureDurationSeconds} field. */
         public OVRCameraIntrinsics.Buffer ExposureDurationSeconds(double value) { OVRCameraIntrinsics.nExposureDurationSeconds(address(), value); return this; }
 
     }

@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * This structure holds the data of the {@code CPAL} table.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Palette_Data {
  *     FT_UShort num_palettes;
  *     FT_UShort const * palette_name_ids;
  *     FT_UShort const * palette_flags;
  *     FT_UShort num_palette_entries;
  *     FT_UShort const * palette_entry_name_ids;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Palette_Data extends Struct<FT_Palette_Data> implements NativeResource {
 

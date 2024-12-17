@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkVertexInputBindingDivisorDescription}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVertexInputBindingDivisorDescriptionEXT {
  *     uint32_t binding;
  *     uint32_t divisor;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkVertexInputBindingDivisorDescriptionEXT extends VkVertexInputBindingDivisorDescription {
 

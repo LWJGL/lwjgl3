@@ -16,31 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing various implementation-defined properties introduced with VK_KHR_maintenance5.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMaintenance5Properties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMaintenance5Properties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #earlyFragmentMultisampleCoverageAfterSampleCounting};
- *     VkBool32 {@link #earlyFragmentSampleMaskTestBeforeSampleCounting};
- *     VkBool32 {@link #depthStencilSwizzleOneSupport};
- *     VkBool32 {@link #polygonModePointSize};
- *     VkBool32 {@link #nonStrictSinglePixelWideLinesUseParallelogram};
- *     VkBool32 {@link #nonStrictWideLinesUseParallelogram};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 earlyFragmentMultisampleCoverageAfterSampleCounting;
+ *     VkBool32 earlyFragmentSampleMaskTestBeforeSampleCounting;
+ *     VkBool32 depthStencilSwizzleOneSupport;
+ *     VkBool32 polygonModePointSize;
+ *     VkBool32 nonStrictSinglePixelWideLinesUseParallelogram;
+ *     VkBool32 nonStrictWideLinesUseParallelogram;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMaintenance5Properties extends Struct<VkPhysicalDeviceMaintenance5Properties> implements NativeResource {
 
@@ -108,36 +94,36 @@ public class VkPhysicalDeviceMaintenance5Properties extends Struct<VkPhysicalDev
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a boolean value indicating whether the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-shader">fragment shading</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-covg">multisample coverage</a> operations are performed after <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-samplecount">sample counting</a> for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-shader">fragment shaders</a> with {@code EarlyFragmentTests} execution mode. */
+    /** @return the value of the {@code earlyFragmentMultisampleCoverageAfterSampleCounting} field. */
     @NativeType("VkBool32")
     public boolean earlyFragmentMultisampleCoverageAfterSampleCounting() { return nearlyFragmentMultisampleCoverageAfterSampleCounting(address()) != 0; }
-    /** a boolean value indicating whether the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-samplemask">sample mask test</a> operation is performed before <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-samplecount">sample counting</a> for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-shader">fragment shaders</a> using the {@code EarlyFragmentTests} execution mode. */
+    /** @return the value of the {@code earlyFragmentSampleMaskTestBeforeSampleCounting} field. */
     @NativeType("VkBool32")
     public boolean earlyFragmentSampleMaskTestBeforeSampleCounting() { return nearlyFragmentSampleMaskTestBeforeSampleCounting(address()) != 0; }
-    /** a boolean indicating that depth/stencil texturing operations with {@link VK10#VK_COMPONENT_SWIZZLE_ONE COMPONENT_SWIZZLE_ONE} have defined behavior. */
+    /** @return the value of the {@code depthStencilSwizzleOneSupport} field. */
     @NativeType("VkBool32")
     public boolean depthStencilSwizzleOneSupport() { return ndepthStencilSwizzleOneSupport(address()) != 0; }
-    /** a boolean value indicating whether the point size of the final rasterization of polygons with {@link VK10#VK_POLYGON_MODE_POINT POLYGON_MODE_POINT} is controlled by {@code PointSize}. */
+    /** @return the value of the {@code polygonModePointSize} field. */
     @NativeType("VkBool32")
     public boolean polygonModePointSize() { return npolygonModePointSize(address()) != 0; }
-    /** a boolean value indicating whether non-strict lines with a width of 1.0 are rasterized as parallelograms or using Bresenham’s algorithm. */
+    /** @return the value of the {@code nonStrictSinglePixelWideLinesUseParallelogram} field. */
     @NativeType("VkBool32")
     public boolean nonStrictSinglePixelWideLinesUseParallelogram() { return nnonStrictSinglePixelWideLinesUseParallelogram(address()) != 0; }
-    /** a boolean value indicating whether non-strict lines with a width greater than 1.0 are rasterized as parallelograms or using Bresenham’s algorithm. */
+    /** @return the value of the {@code nonStrictWideLinesUseParallelogram} field. */
     @NativeType("VkBool32")
     public boolean nonStrictWideLinesUseParallelogram() { return nnonStrictWideLinesUseParallelogram(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMaintenance5Properties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceMaintenance5Properties sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMaintenance5Properties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,36 +325,36 @@ public class VkPhysicalDeviceMaintenance5Properties extends Struct<VkPhysicalDev
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Properties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMaintenance5Properties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Properties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMaintenance5Properties.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Properties#earlyFragmentMultisampleCoverageAfterSampleCounting} field. */
+        /** @return the value of the {@code earlyFragmentMultisampleCoverageAfterSampleCounting} field. */
         @NativeType("VkBool32")
         public boolean earlyFragmentMultisampleCoverageAfterSampleCounting() { return VkPhysicalDeviceMaintenance5Properties.nearlyFragmentMultisampleCoverageAfterSampleCounting(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Properties#earlyFragmentSampleMaskTestBeforeSampleCounting} field. */
+        /** @return the value of the {@code earlyFragmentSampleMaskTestBeforeSampleCounting} field. */
         @NativeType("VkBool32")
         public boolean earlyFragmentSampleMaskTestBeforeSampleCounting() { return VkPhysicalDeviceMaintenance5Properties.nearlyFragmentSampleMaskTestBeforeSampleCounting(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Properties#depthStencilSwizzleOneSupport} field. */
+        /** @return the value of the {@code depthStencilSwizzleOneSupport} field. */
         @NativeType("VkBool32")
         public boolean depthStencilSwizzleOneSupport() { return VkPhysicalDeviceMaintenance5Properties.ndepthStencilSwizzleOneSupport(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Properties#polygonModePointSize} field. */
+        /** @return the value of the {@code polygonModePointSize} field. */
         @NativeType("VkBool32")
         public boolean polygonModePointSize() { return VkPhysicalDeviceMaintenance5Properties.npolygonModePointSize(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Properties#nonStrictSinglePixelWideLinesUseParallelogram} field. */
+        /** @return the value of the {@code nonStrictSinglePixelWideLinesUseParallelogram} field. */
         @NativeType("VkBool32")
         public boolean nonStrictSinglePixelWideLinesUseParallelogram() { return VkPhysicalDeviceMaintenance5Properties.nnonStrictSinglePixelWideLinesUseParallelogram(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Properties#nonStrictWideLinesUseParallelogram} field. */
+        /** @return the value of the {@code nonStrictWideLinesUseParallelogram} field. */
         @NativeType("VkBool32")
         public boolean nonStrictWideLinesUseParallelogram() { return VkPhysicalDeviceMaintenance5Properties.nnonStrictWideLinesUseParallelogram(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance5Properties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMaintenance5Properties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance5Properties.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES} value to the {@link VkPhysicalDeviceMaintenance5Properties#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceMaintenance5Properties.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance5Properties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMaintenance5Properties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance5Properties.npNext(address(), value); return this; }
 
     }

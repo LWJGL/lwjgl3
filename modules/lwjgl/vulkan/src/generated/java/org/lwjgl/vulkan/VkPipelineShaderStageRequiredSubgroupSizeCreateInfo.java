@@ -16,36 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the required subgroup size of a newly created pipeline shader stage.
- * 
- * <h5>Description</h5>
- * 
- * <p>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain of {@link VkPipelineShaderStageCreateInfo}, it specifies that the pipeline shader stage being compiled has a required subgroup size.</p>
- * 
- * <p>If a {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} structure is included in the {@code pNext} chain of {@link VkShaderCreateInfoEXT}, it specifies that the shader being compiled has a required subgroup size.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code requiredSubgroupSize} <b>must</b> be a power-of-two integer</li>
- * <li>{@code requiredSubgroupSize} <b>must</b> be greater or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-minSubgroupSize">{@code minSubgroupSize}</a></li>
- * <li>{@code requiredSubgroupSize} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxSubgroupSize">{@code maxSubgroupSize}</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineShaderStageRequiredSubgroupSizeCreateInfo {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #requiredSubgroupSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t requiredSubgroupSize;
+ * }}</pre>
  */
 public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfo extends Struct<VkPipelineShaderStageRequiredSubgroupSizeCreateInfo> implements NativeResource {
 
@@ -98,21 +74,21 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfo extends Struct<
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an unsigned integer value specifying the required subgroup size for the newly created pipeline shader stage. */
+    /** @return the value of the {@code requiredSubgroupSize} field. */
     @NativeType("uint32_t")
     public int requiredSubgroupSize() { return nrequiredSubgroupSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineShaderStageRequiredSubgroupSizeCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO} value to the {@code sType} field. */
     public VkPipelineShaderStageRequiredSubgroupSizeCreateInfo sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineShaderStageRequiredSubgroupSizeCreateInfo pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -304,21 +280,21 @@ public class VkPipelineShaderStageRequiredSubgroupSizeCreateInfo extends Struct<
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo#requiredSubgroupSize} field. */
+        /** @return the value of the {@code requiredSubgroupSize} field. */
         @NativeType("uint32_t")
         public int requiredSubgroupSize() { return VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.nrequiredSubgroupSize(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO} value to the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO} value to the {@code sType} field. */
         public VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.Buffer pNext(@NativeType("void *") long value) { VkPipelineShaderStageRequiredSubgroupSizeCreateInfo.npNext(address(), value); return this; }
 
     }

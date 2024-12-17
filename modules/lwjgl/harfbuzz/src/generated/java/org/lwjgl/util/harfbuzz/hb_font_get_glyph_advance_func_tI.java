@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_position_t (*{@link #invoke}) (
- *     hb_font_t *font,
- *     void *font_data,
- *     hb_codepoint_t glyph,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_font_get_glyph_advance_func_t} */
 @FunctionalInterface
 @NativeType("hb_font_get_glyph_advance_func_t")
 public interface hb_font_get_glyph_advance_func_tI extends CallbackI {
@@ -47,18 +37,7 @@ public interface hb_font_get_glyph_advance_func_tI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.
-     * 
-     * <p>This method should retrieve the advance for a specified glyph. The method must return an {@code hb_position_t}.</p>
-     * 
-     * <p>Return value: The advance of glyph within font.</p>
-     *
-     * @param font      {@code hb_font_t} to work upon
-     * @param font_data {@code font} user data pointer
-     * @param glyph     the glyph ID to query
-     * @param user_data user data pointer passed by the caller
-     */
+    /** {@code hb_position_t (* hb_font_get_glyph_advance_func_t) (hb_font_t * font, void * font_data, hb_codepoint_t glyph, void * user_data)} */
     @NativeType("hb_position_t") int invoke(@NativeType("hb_font_t *") long font, @NativeType("void *") long font_data, @NativeType("hb_codepoint_t") int glyph, @NativeType("void *") long user_data);
 
 }

@@ -13,10 +13,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to AL 1.1 functionality. */
 public class AL11 extends AL10 {
 
-    /** General tokens. */
     public static final int
         AL_SEC_OFFSET                = 0x1024,
         AL_SAMPLE_OFFSET             = 0x1025,
@@ -37,14 +35,7 @@ public class AL11 extends AL10 {
 
     // --- [ alListener3i ] ---
 
-    /**
-     * Sets the 3 dimensional integer values of a listener parameter.
-     *
-     * @param paramName the parameter to modify
-     * @param value1    the first value
-     * @param value2    the second value
-     * @param value3    the third value
-     */
+    /** {@code ALvoid alListener3i(ALenum paramName, ALint value1, ALint value2, ALint value3)} */
     @NativeType("ALvoid")
     public static void alListener3i(@NativeType("ALenum") int paramName, @NativeType("ALint") int value1, @NativeType("ALint") int value2, @NativeType("ALint") int value3) {
         long __functionAddress = AL.getICD().alListener3i;
@@ -56,14 +47,7 @@ public class AL11 extends AL10 {
 
     // --- [ alListener3iDirect ] ---
 
-    /**
-     * Sets the 3 dimensional integer values of a listener parameter.
-     *
-     * @param paramName the parameter to modify
-     * @param value1    the first value
-     * @param value2    the second value
-     * @param value3    the third value
-     */
+    /** {@code ALvoid alListener3iDirect(ALCcontext * context, ALenum paramName, ALint value1, ALint value2, ALint value3)} */
     @NativeType("ALvoid")
     public static void alListener3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int paramName, @NativeType("ALint") int value1, @NativeType("ALint") int value2, @NativeType("ALint") int value3) {
         long __functionAddress = AL.getICD().alListener3iDirect;
@@ -76,6 +60,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetListener3i ] ---
 
+    /** {@code ALvoid alGetListener3i(ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     public static void nalGetListener3i(int param, long value1, long value2, long value3) {
         long __functionAddress = AL.getICD().alGetListener3i;
         if (CHECKS) {
@@ -84,6 +69,7 @@ public class AL11 extends AL10 {
         invokePPPV(param, value1, value2, value3, __functionAddress);
     }
 
+    /** {@code ALvoid alGetListener3i(ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetListener3i(@NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer value1, @NativeType("ALint *") IntBuffer value2, @NativeType("ALint *") IntBuffer value3) {
         if (CHECKS) {
@@ -96,6 +82,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetListener3iDirect ] ---
 
+    /** {@code ALvoid alGetListener3iDirect(ALCcontext * context, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     public static void nalGetListener3iDirect(long context, int param, long value1, long value2, long value3) {
         long __functionAddress = AL.getICD().alGetListener3iDirect;
         if (CHECKS) {
@@ -105,6 +92,7 @@ public class AL11 extends AL10 {
         invokePPPPV(context, param, value1, value2, value3, __functionAddress);
     }
 
+    /** {@code ALvoid alGetListener3iDirect(ALCcontext * context, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetListener3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer value1, @NativeType("ALint *") IntBuffer value2, @NativeType("ALint *") IntBuffer value3) {
         if (CHECKS) {
@@ -117,7 +105,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetListeneriv ] ---
 
-    /** Unsafe version of: {@link #alGetListeneriv GetListeneriv} */
+    /** {@code ALvoid alGetListeneriv(ALenum param, ALint * values)} */
     public static void nalGetListeneriv(int param, long values) {
         long __functionAddress = AL.getICD().alGetListeneriv;
         if (CHECKS) {
@@ -126,12 +114,7 @@ public class AL11 extends AL10 {
         invokePV(param, values, __functionAddress);
     }
 
-    /**
-     * Returns the integer values of the specified listener parameter.
-     *
-     * @param param  the parameter to query
-     * @param values the parameter values
-     */
+    /** {@code ALvoid alGetListeneriv(ALenum param, ALint * values)} */
     @NativeType("ALvoid")
     public static void alGetListeneriv(@NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer values) {
         if (CHECKS) {
@@ -142,7 +125,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetListenerivDirect ] ---
 
-    /** Unsafe version of: {@link #alGetListenerivDirect} */
+    /** {@code ALvoid alGetListenerivDirect(ALCcontext * context, ALenum param, ALint * values)} */
     public static void nalGetListenerivDirect(long context, int param, long values) {
         long __functionAddress = AL.getICD().alGetListenerivDirect;
         if (CHECKS) {
@@ -152,12 +135,7 @@ public class AL11 extends AL10 {
         invokePPV(context, param, values, __functionAddress);
     }
 
-    /**
-     * Returns the integer values of the specified listener parameter.
-     *
-     * @param param  the parameter to query
-     * @param values the parameter values
-     */
+    /** {@code ALvoid alGetListenerivDirect(ALCcontext * context, ALenum param, ALint * values)} */
     @NativeType("ALvoid")
     public static void alGetListenerivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer values) {
         if (CHECKS) {
@@ -168,15 +146,7 @@ public class AL11 extends AL10 {
 
     // --- [ alSource3i ] ---
 
-    /**
-     * Sets the 3 dimensional integer values of a source parameter.
-     *
-     * @param source    the source to modify
-     * @param paramName the parameter to modify
-     * @param value1    the first value
-     * @param value2    the second value
-     * @param value3    the third value
-     */
+    /** {@code ALvoid alSource3i(ALuint source, ALenum paramName, ALint value1, ALint value2, ALint value3)} */
     @NativeType("ALvoid")
     public static void alSource3i(@NativeType("ALuint") int source, @NativeType("ALenum") int paramName, @NativeType("ALint") int value1, @NativeType("ALint") int value2, @NativeType("ALint") int value3) {
         long __functionAddress = AL.getICD().alSource3i;
@@ -188,15 +158,7 @@ public class AL11 extends AL10 {
 
     // --- [ alSource3iDirect ] ---
 
-    /**
-     * Sets the 3 dimensional integer values of a source parameter.
-     *
-     * @param source    the source to modify
-     * @param paramName the parameter to modify
-     * @param value1    the first value
-     * @param value2    the second value
-     * @param value3    the third value
-     */
+    /** {@code ALvoid alSource3iDirect(ALCcontext * context, ALuint source, ALenum paramName, ALint value1, ALint value2, ALint value3)} */
     @NativeType("ALvoid")
     public static void alSource3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int paramName, @NativeType("ALint") int value1, @NativeType("ALint") int value2, @NativeType("ALint") int value3) {
         long __functionAddress = AL.getICD().alSource3iDirect;
@@ -209,6 +171,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetSource3i ] ---
 
+    /** {@code ALvoid alGetSource3i(ALuint source, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     public static void nalGetSource3i(int source, int param, long value1, long value2, long value3) {
         long __functionAddress = AL.getICD().alGetSource3i;
         if (CHECKS) {
@@ -217,6 +180,7 @@ public class AL11 extends AL10 {
         invokePPPV(source, param, value1, value2, value3, __functionAddress);
     }
 
+    /** {@code ALvoid alGetSource3i(ALuint source, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetSource3i(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer value1, @NativeType("ALint *") IntBuffer value2, @NativeType("ALint *") IntBuffer value3) {
         if (CHECKS) {
@@ -229,6 +193,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetSource3iDirect ] ---
 
+    /** {@code ALvoid alGetSource3iDirect(ALCcontext * context, ALuint source, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     public static void nalGetSource3iDirect(long context, int source, int param, long value1, long value2, long value3) {
         long __functionAddress = AL.getICD().alGetSource3iDirect;
         if (CHECKS) {
@@ -238,6 +203,7 @@ public class AL11 extends AL10 {
         invokePPPPV(context, source, param, value1, value2, value3, __functionAddress);
     }
 
+    /** {@code ALvoid alGetSource3iDirect(ALCcontext * context, ALuint source, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetSource3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer value1, @NativeType("ALint *") IntBuffer value2, @NativeType("ALint *") IntBuffer value3) {
         if (CHECKS) {
@@ -250,7 +216,7 @@ public class AL11 extends AL10 {
 
     // --- [ alListeneriv ] ---
 
-    /** Unsafe version of: {@link #alListeneriv Listeneriv} */
+    /** {@code ALvoid alListeneriv(ALenum listener, ALint const * value)} */
     public static void nalListeneriv(int listener, long value) {
         long __functionAddress = AL.getICD().alListeneriv;
         if (CHECKS) {
@@ -259,12 +225,7 @@ public class AL11 extends AL10 {
         invokePV(listener, value, __functionAddress);
     }
 
-    /**
-     * Pointer version.
-     *
-     * @param listener the parameter to modify
-     * @param value    the parameter values
-     */
+    /** {@code ALvoid alListeneriv(ALenum listener, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alListeneriv(@NativeType("ALenum") int listener, @NativeType("ALint const *") IntBuffer value) {
         if (CHECKS) {
@@ -275,7 +236,7 @@ public class AL11 extends AL10 {
 
     // --- [ alListenerivDirect ] ---
 
-    /** Unsafe version of: {@link #alListenerivDirect} */
+    /** {@code ALvoid alListenerivDirect(ALCcontext * context, ALenum listener, ALint const * value)} */
     public static void nalListenerivDirect(long context, int listener, long value) {
         long __functionAddress = AL.getICD().alListenerivDirect;
         if (CHECKS) {
@@ -285,12 +246,7 @@ public class AL11 extends AL10 {
         invokePPV(context, listener, value, __functionAddress);
     }
 
-    /**
-     * Pointer version.
-     *
-     * @param listener the parameter to modify
-     * @param value    the parameter values
-     */
+    /** {@code ALvoid alListenerivDirect(ALCcontext * context, ALenum listener, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alListenerivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int listener, @NativeType("ALint const *") IntBuffer value) {
         if (CHECKS) {
@@ -301,7 +257,7 @@ public class AL11 extends AL10 {
 
     // --- [ alSourceiv ] ---
 
-    /** Unsafe version of: {@link #alSourceiv Sourceiv} */
+    /** {@code ALvoid alSourceiv(ALuint source, ALenum paramName, ALint const * value)} */
     public static void nalSourceiv(int source, int paramName, long value) {
         long __functionAddress = AL.getICD().alSourceiv;
         if (CHECKS) {
@@ -310,13 +266,7 @@ public class AL11 extends AL10 {
         invokePV(source, paramName, value, __functionAddress);
     }
 
-    /**
-     * Pointer version.
-     *
-     * @param source    the source to modify
-     * @param paramName the parameter to modify
-     * @param value     the parameter values
-     */
+    /** {@code ALvoid alSourceiv(ALuint source, ALenum paramName, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alSourceiv(@NativeType("ALuint") int source, @NativeType("ALenum") int paramName, @NativeType("ALint const *") IntBuffer value) {
         if (CHECKS) {
@@ -327,7 +277,7 @@ public class AL11 extends AL10 {
 
     // --- [ alSourceivDirect ] ---
 
-    /** Unsafe version of: {@link #alSourceivDirect} */
+    /** {@code ALvoid alSourceivDirect(ALCcontext * context, ALuint source, ALenum paramName, ALint const * value)} */
     public static void nalSourceivDirect(long context, int source, int paramName, long value) {
         long __functionAddress = AL.getICD().alSourceivDirect;
         if (CHECKS) {
@@ -337,13 +287,7 @@ public class AL11 extends AL10 {
         invokePPV(context, source, paramName, value, __functionAddress);
     }
 
-    /**
-     * Pointer version.
-     *
-     * @param source    the source to modify
-     * @param paramName the parameter to modify
-     * @param value     the parameter values
-     */
+    /** {@code ALvoid alSourceivDirect(ALCcontext * context, ALuint source, ALenum paramName, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alSourceivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int paramName, @NativeType("ALint const *") IntBuffer value) {
         if (CHECKS) {
@@ -354,13 +298,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferf ] ---
 
-    /**
-     * Sets the float value of a buffer parameter.
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value     the value
-     */
+    /** {@code ALvoid alBufferf(ALuint buffer, ALenum paramName, ALfloat value)} */
     @NativeType("ALvoid")
     public static void alBufferf(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat") float value) {
         long __functionAddress = AL.getICD().alBufferf;
@@ -372,13 +310,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferfDirect ] ---
 
-    /**
-     * Sets the float value of a buffer parameter.
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value     the value
-     */
+    /** {@code ALvoid alBufferfDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALfloat value)} */
     @NativeType("ALvoid")
     public static void alBufferfDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat") float value) {
         long __functionAddress = AL.getICD().alBufferfDirect;
@@ -391,15 +323,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBuffer3f ] ---
 
-    /**
-     * Sets the dimensional value of a buffer parameter.
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value1    the first value
-     * @param value2    the second value
-     * @param value3    the third value
-     */
+    /** {@code ALvoid alBuffer3f(ALuint buffer, ALenum paramName, ALfloat value1, ALfloat value2, ALfloat value3)} */
     @NativeType("ALvoid")
     public static void alBuffer3f(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat") float value1, @NativeType("ALfloat") float value2, @NativeType("ALfloat") float value3) {
         long __functionAddress = AL.getICD().alBuffer3f;
@@ -411,15 +335,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBuffer3fDirect ] ---
 
-    /**
-     * Sets the dimensional value of a buffer parameter.
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value1    the first value
-     * @param value2    the second value
-     * @param value3    the third value
-     */
+    /** {@code ALvoid alBuffer3fDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALfloat value1, ALfloat value2, ALfloat value3)} */
     @NativeType("ALvoid")
     public static void alBuffer3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat") float value1, @NativeType("ALfloat") float value2, @NativeType("ALfloat") float value3) {
         long __functionAddress = AL.getICD().alBuffer3fDirect;
@@ -432,7 +348,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferfv ] ---
 
-    /** Unsafe version of: {@link #alBufferfv Bufferfv} */
+    /** {@code ALvoid alBufferfv(ALuint buffer, ALenum paramName, ALfloat const * value)} */
     public static void nalBufferfv(int buffer, int paramName, long value) {
         long __functionAddress = AL.getICD().alBufferfv;
         if (CHECKS) {
@@ -441,13 +357,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, paramName, value, __functionAddress);
     }
 
-    /**
-     * the pointer version of {@link #alBufferf Bufferf}
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value     the parameter values
-     */
+    /** {@code ALvoid alBufferfv(ALuint buffer, ALenum paramName, ALfloat const * value)} */
     @NativeType("ALvoid")
     public static void alBufferfv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat const *") FloatBuffer value) {
         if (CHECKS) {
@@ -458,7 +368,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferfvDirect ] ---
 
-    /** Unsafe version of: {@link #alBufferfvDirect} */
+    /** {@code ALvoid alBufferfvDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALfloat const * value)} */
     public static void nalBufferfvDirect(long context, int buffer, int paramName, long value) {
         long __functionAddress = AL.getICD().alBufferfvDirect;
         if (CHECKS) {
@@ -468,13 +378,7 @@ public class AL11 extends AL10 {
         invokePPV(context, buffer, paramName, value, __functionAddress);
     }
 
-    /**
-     * the pointer version of {@link #alBufferf Bufferf}
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value     the parameter values
-     */
+    /** {@code ALvoid alBufferfvDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALfloat const * value)} */
     @NativeType("ALvoid")
     public static void alBufferfvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat const *") FloatBuffer value) {
         if (CHECKS) {
@@ -485,13 +389,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferi ] ---
 
-    /**
-     * Sets the integer value of a buffer parameter.
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value     the value
-     */
+    /** {@code ALvoid alBufferi(ALuint buffer, ALenum paramName, ALint value)} */
     @NativeType("ALvoid")
     public static void alBufferi(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint") int value) {
         long __functionAddress = AL.getICD().alBufferi;
@@ -503,13 +401,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferiDirect ] ---
 
-    /**
-     * Sets the integer value of a buffer parameter.
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value     the value
-     */
+    /** {@code ALvoid alBufferiDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALint value)} */
     @NativeType("ALvoid")
     public static void alBufferiDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint") int value) {
         long __functionAddress = AL.getICD().alBufferiDirect;
@@ -522,15 +414,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBuffer3i ] ---
 
-    /**
-     * Sets the integer 3 dimensional value of a buffer parameter.
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value1    the first value
-     * @param value2    the second value
-     * @param value3    the third value
-     */
+    /** {@code ALvoid alBuffer3i(ALuint buffer, ALenum paramName, ALint value1, ALint value2, ALint value3)} */
     @NativeType("ALvoid")
     public static void alBuffer3i(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint") int value1, @NativeType("ALint") int value2, @NativeType("ALint") int value3) {
         long __functionAddress = AL.getICD().alBuffer3i;
@@ -542,15 +426,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBuffer3iDirect ] ---
 
-    /**
-     * Sets the integer 3 dimensional value of a buffer parameter.
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value1    the first value
-     * @param value2    the second value
-     * @param value3    the third value
-     */
+    /** {@code ALvoid alBuffer3iDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALint value1, ALint value2, ALint value3)} */
     @NativeType("ALvoid")
     public static void alBuffer3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint") int value1, @NativeType("ALint") int value2, @NativeType("ALint") int value3) {
         long __functionAddress = AL.getICD().alBuffer3iDirect;
@@ -563,7 +439,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferiv ] ---
 
-    /** Unsafe version of: {@link #alBufferiv Bufferiv} */
+    /** {@code ALvoid alBufferiv(ALuint buffer, ALenum paramName, ALint const * value)} */
     public static void nalBufferiv(int buffer, int paramName, long value) {
         long __functionAddress = AL.getICD().alBufferiv;
         if (CHECKS) {
@@ -572,13 +448,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, paramName, value, __functionAddress);
     }
 
-    /**
-     * the pointer version of {@link #alBufferi Bufferi}
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value     the parameter values
-     */
+    /** {@code ALvoid alBufferiv(ALuint buffer, ALenum paramName, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alBufferiv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint const *") IntBuffer value) {
         if (CHECKS) {
@@ -589,7 +459,7 @@ public class AL11 extends AL10 {
 
     // --- [ alBufferivDirect ] ---
 
-    /** Unsafe version of: {@link #alBufferivDirect} */
+    /** {@code ALvoid alBufferivDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALint const * value)} */
     public static void nalBufferivDirect(long context, int buffer, int paramName, long value) {
         long __functionAddress = AL.getICD().alBufferivDirect;
         if (CHECKS) {
@@ -599,13 +469,7 @@ public class AL11 extends AL10 {
         invokePPV(context, buffer, paramName, value, __functionAddress);
     }
 
-    /**
-     * the pointer version of {@link #alBufferi Bufferi}
-     *
-     * @param buffer    the buffer to modify
-     * @param paramName the parameter to modify
-     * @param value     the parameter values
-     */
+    /** {@code ALvoid alBufferivDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alBufferivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint const *") IntBuffer value) {
         if (CHECKS) {
@@ -616,6 +480,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBuffer3i ] ---
 
+    /** {@code ALvoid alGetBuffer3i(ALuint buffer, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     public static void nalGetBuffer3i(int buffer, int param, long value1, long value2, long value3) {
         long __functionAddress = AL.getICD().alGetBuffer3i;
         if (CHECKS) {
@@ -624,6 +489,7 @@ public class AL11 extends AL10 {
         invokePPPV(buffer, param, value1, value2, value3, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBuffer3i(ALuint buffer, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3i(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer value1, @NativeType("ALint *") IntBuffer value2, @NativeType("ALint *") IntBuffer value3) {
         if (CHECKS) {
@@ -636,6 +502,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBuffer3iDirect ] ---
 
+    /** {@code ALvoid alGetBuffer3iDirect(ALCcontext * context, ALuint buffer, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     public static void nalGetBuffer3iDirect(long context, int buffer, int param, long value1, long value2, long value3) {
         long __functionAddress = AL.getICD().alGetBuffer3iDirect;
         if (CHECKS) {
@@ -645,6 +512,7 @@ public class AL11 extends AL10 {
         invokePPPPV(context, buffer, param, value1, value2, value3, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBuffer3iDirect(ALCcontext * context, ALuint buffer, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer value1, @NativeType("ALint *") IntBuffer value2, @NativeType("ALint *") IntBuffer value3) {
         if (CHECKS) {
@@ -657,7 +525,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBufferiv ] ---
 
-    /** Unsafe version of: {@link #alGetBufferiv GetBufferiv} */
+    /** {@code ALvoid alGetBufferiv(ALuint buffer, ALenum param, ALint * values)} */
     public static void nalGetBufferiv(int buffer, int param, long values) {
         long __functionAddress = AL.getICD().alGetBufferiv;
         if (CHECKS) {
@@ -666,13 +534,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, param, values, __functionAddress);
     }
 
-    /**
-     * Returns the integer values of the specified buffer parameter.
-     *
-     * @param buffer the buffer to query
-     * @param param  the parameter to query
-     * @param values the parameter values
-     */
+    /** {@code ALvoid alGetBufferiv(ALuint buffer, ALenum param, ALint * values)} */
     @NativeType("ALvoid")
     public static void alGetBufferiv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer values) {
         if (CHECKS) {
@@ -683,7 +545,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBufferivDirect ] ---
 
-    /** Unsafe version of: {@link #alGetBufferivDirect} */
+    /** {@code ALvoid alGetBufferivDirect(ALCcontext * context, ALuint buffer, ALenum param, ALint * values)} */
     public static void nalGetBufferivDirect(long context, int buffer, int param, long values) {
         long __functionAddress = AL.getICD().alGetBufferivDirect;
         if (CHECKS) {
@@ -693,13 +555,7 @@ public class AL11 extends AL10 {
         invokePPV(context, buffer, param, values, __functionAddress);
     }
 
-    /**
-     * Returns the integer values of the specified buffer parameter.
-     *
-     * @param buffer the buffer to query
-     * @param param  the parameter to query
-     * @param values the parameter values
-     */
+    /** {@code ALvoid alGetBufferivDirect(ALCcontext * context, ALuint buffer, ALenum param, ALint * values)} */
     @NativeType("ALvoid")
     public static void alGetBufferivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") IntBuffer values) {
         if (CHECKS) {
@@ -710,6 +566,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBuffer3f ] ---
 
+    /** {@code ALvoid alGetBuffer3f(ALuint buffer, ALenum param, ALfloat * value1, ALfloat * value2, ALfloat * value3)} */
     public static void nalGetBuffer3f(int buffer, int param, long value1, long value2, long value3) {
         long __functionAddress = AL.getICD().alGetBuffer3f;
         if (CHECKS) {
@@ -718,6 +575,7 @@ public class AL11 extends AL10 {
         invokePPPV(buffer, param, value1, value2, value3, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBuffer3f(ALuint buffer, ALenum param, ALfloat * value1, ALfloat * value2, ALfloat * value3)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3f(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") FloatBuffer value1, @NativeType("ALfloat *") FloatBuffer value2, @NativeType("ALfloat *") FloatBuffer value3) {
         if (CHECKS) {
@@ -730,6 +588,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBuffer3fDirect ] ---
 
+    /** {@code ALvoid alGetBuffer3fDirect(ALCcontext * context, ALuint buffer, ALenum param, ALfloat * value1, ALfloat * value2, ALfloat * value3)} */
     public static void nalGetBuffer3fDirect(long context, int buffer, int param, long value1, long value2, long value3) {
         long __functionAddress = AL.getICD().alGetBuffer3fDirect;
         if (CHECKS) {
@@ -739,6 +598,7 @@ public class AL11 extends AL10 {
         invokePPPPV(context, buffer, param, value1, value2, value3, __functionAddress);
     }
 
+    /** {@code ALvoid alGetBuffer3fDirect(ALCcontext * context, ALuint buffer, ALenum param, ALfloat * value1, ALfloat * value2, ALfloat * value3)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") FloatBuffer value1, @NativeType("ALfloat *") FloatBuffer value2, @NativeType("ALfloat *") FloatBuffer value3) {
         if (CHECKS) {
@@ -751,7 +611,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBufferfv ] ---
 
-    /** Unsafe version of: {@link #alGetBufferfv GetBufferfv} */
+    /** {@code ALvoid alGetBufferfv(ALuint buffer, ALenum param, ALfloat * values)} */
     public static void nalGetBufferfv(int buffer, int param, long values) {
         long __functionAddress = AL.getICD().alGetBufferfv;
         if (CHECKS) {
@@ -760,13 +620,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, param, values, __functionAddress);
     }
 
-    /**
-     * Returns the float values of the specified buffer parameter.
-     *
-     * @param buffer the buffer to query
-     * @param param  the parameter to query
-     * @param values the parameter values
-     */
+    /** {@code ALvoid alGetBufferfv(ALuint buffer, ALenum param, ALfloat * values)} */
     @NativeType("ALvoid")
     public static void alGetBufferfv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") FloatBuffer values) {
         if (CHECKS) {
@@ -777,7 +631,7 @@ public class AL11 extends AL10 {
 
     // --- [ alGetBufferfvDirect ] ---
 
-    /** Unsafe version of: {@link #alGetBufferfvDirect} */
+    /** {@code ALvoid alGetBufferfvDirect(ALCcontext * context, ALuint buffer, ALenum param, ALfloat * values)} */
     public static void nalGetBufferfvDirect(long context, int buffer, int param, long values) {
         long __functionAddress = AL.getICD().alGetBufferfvDirect;
         if (CHECKS) {
@@ -787,13 +641,7 @@ public class AL11 extends AL10 {
         invokePPV(context, buffer, param, values, __functionAddress);
     }
 
-    /**
-     * Returns the float values of the specified buffer parameter.
-     *
-     * @param buffer the buffer to query
-     * @param param  the parameter to query
-     * @param values the parameter values
-     */
+    /** {@code ALvoid alGetBufferfvDirect(ALCcontext * context, ALuint buffer, ALenum param, ALfloat * values)} */
     @NativeType("ALvoid")
     public static void alGetBufferfvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") FloatBuffer values) {
         if (CHECKS) {
@@ -804,11 +652,7 @@ public class AL11 extends AL10 {
 
     // --- [ alSpeedOfSound ] ---
 
-    /**
-     * Sets the speed of sound.
-     *
-     * @param value the speed of sound
-     */
+    /** {@code ALvoid alSpeedOfSound(ALfloat value)} */
     @NativeType("ALvoid")
     public static void alSpeedOfSound(@NativeType("ALfloat") float value) {
         long __functionAddress = AL.getICD().alSpeedOfSound;
@@ -820,11 +664,7 @@ public class AL11 extends AL10 {
 
     // --- [ alSpeedOfSoundDirect ] ---
 
-    /**
-     * Sets the speed of sound.
-     *
-     * @param value the speed of sound
-     */
+    /** {@code ALvoid alSpeedOfSoundDirect(ALCcontext * context, ALfloat value)} */
     @NativeType("ALvoid")
     public static void alSpeedOfSoundDirect(@NativeType("ALCcontext *") long context, @NativeType("ALfloat") float value) {
         long __functionAddress = AL.getICD().alSpeedOfSoundDirect;
@@ -835,7 +675,7 @@ public class AL11 extends AL10 {
         invokePV(context, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetListener3i GetListener3i} */
+    /** {@code ALvoid alGetListener3i(ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetListener3i(@NativeType("ALenum") int param, @NativeType("ALint *") int[] value1, @NativeType("ALint *") int[] value2, @NativeType("ALint *") int[] value3) {
         long __functionAddress = AL.getICD().alGetListener3i;
@@ -848,7 +688,7 @@ public class AL11 extends AL10 {
         invokePPPV(param, value1, value2, value3, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetListener3iDirect} */
+    /** {@code ALvoid alGetListener3iDirect(ALCcontext * context, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetListener3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value1, @NativeType("ALint *") int[] value2, @NativeType("ALint *") int[] value3) {
         long __functionAddress = AL.getICD().alGetListener3iDirect;
@@ -862,7 +702,7 @@ public class AL11 extends AL10 {
         invokePPPPV(context, param, value1, value2, value3, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetListeneriv GetListeneriv} */
+    /** {@code ALvoid alGetListeneriv(ALenum param, ALint * values)} */
     @NativeType("ALvoid")
     public static void alGetListeneriv(@NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetListeneriv;
@@ -873,7 +713,7 @@ public class AL11 extends AL10 {
         invokePV(param, values, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetListenerivDirect} */
+    /** {@code ALvoid alGetListenerivDirect(ALCcontext * context, ALenum param, ALint * values)} */
     @NativeType("ALvoid")
     public static void alGetListenerivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetListenerivDirect;
@@ -885,7 +725,7 @@ public class AL11 extends AL10 {
         invokePPV(context, param, values, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetSource3i GetSource3i} */
+    /** {@code ALvoid alGetSource3i(ALuint source, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetSource3i(@NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value1, @NativeType("ALint *") int[] value2, @NativeType("ALint *") int[] value3) {
         long __functionAddress = AL.getICD().alGetSource3i;
@@ -898,7 +738,7 @@ public class AL11 extends AL10 {
         invokePPPV(source, param, value1, value2, value3, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetSource3iDirect} */
+    /** {@code ALvoid alGetSource3iDirect(ALCcontext * context, ALuint source, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetSource3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value1, @NativeType("ALint *") int[] value2, @NativeType("ALint *") int[] value3) {
         long __functionAddress = AL.getICD().alGetSource3iDirect;
@@ -912,7 +752,7 @@ public class AL11 extends AL10 {
         invokePPPPV(context, source, param, value1, value2, value3, __functionAddress);
     }
 
-    /** Array version of: {@link #alListeneriv Listeneriv} */
+    /** {@code ALvoid alListeneriv(ALenum listener, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alListeneriv(@NativeType("ALenum") int listener, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alListeneriv;
@@ -923,7 +763,7 @@ public class AL11 extends AL10 {
         invokePV(listener, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alListenerivDirect} */
+    /** {@code ALvoid alListenerivDirect(ALCcontext * context, ALenum listener, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alListenerivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALenum") int listener, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alListenerivDirect;
@@ -935,7 +775,7 @@ public class AL11 extends AL10 {
         invokePPV(context, listener, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alSourceiv Sourceiv} */
+    /** {@code ALvoid alSourceiv(ALuint source, ALenum paramName, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alSourceiv(@NativeType("ALuint") int source, @NativeType("ALenum") int paramName, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alSourceiv;
@@ -946,7 +786,7 @@ public class AL11 extends AL10 {
         invokePV(source, paramName, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alSourceivDirect} */
+    /** {@code ALvoid alSourceivDirect(ALCcontext * context, ALuint source, ALenum paramName, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alSourceivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int source, @NativeType("ALenum") int paramName, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alSourceivDirect;
@@ -958,7 +798,7 @@ public class AL11 extends AL10 {
         invokePPV(context, source, paramName, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferfv Bufferfv} */
+    /** {@code ALvoid alBufferfv(ALuint buffer, ALenum paramName, ALfloat const * value)} */
     @NativeType("ALvoid")
     public static void alBufferfv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat const *") float[] value) {
         long __functionAddress = AL.getICD().alBufferfv;
@@ -969,7 +809,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, paramName, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferfvDirect} */
+    /** {@code ALvoid alBufferfvDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALfloat const * value)} */
     @NativeType("ALvoid")
     public static void alBufferfvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALfloat const *") float[] value) {
         long __functionAddress = AL.getICD().alBufferfvDirect;
@@ -981,7 +821,7 @@ public class AL11 extends AL10 {
         invokePPV(context, buffer, paramName, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferiv Bufferiv} */
+    /** {@code ALvoid alBufferiv(ALuint buffer, ALenum paramName, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alBufferiv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alBufferiv;
@@ -992,7 +832,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, paramName, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferivDirect} */
+    /** {@code ALvoid alBufferivDirect(ALCcontext * context, ALuint buffer, ALenum paramName, ALint const * value)} */
     @NativeType("ALvoid")
     public static void alBufferivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int paramName, @NativeType("ALint const *") int[] value) {
         long __functionAddress = AL.getICD().alBufferivDirect;
@@ -1004,7 +844,7 @@ public class AL11 extends AL10 {
         invokePPV(context, buffer, paramName, value, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetBuffer3i GetBuffer3i} */
+    /** {@code ALvoid alGetBuffer3i(ALuint buffer, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3i(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value1, @NativeType("ALint *") int[] value2, @NativeType("ALint *") int[] value3) {
         long __functionAddress = AL.getICD().alGetBuffer3i;
@@ -1017,7 +857,7 @@ public class AL11 extends AL10 {
         invokePPPV(buffer, param, value1, value2, value3, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetBuffer3iDirect} */
+    /** {@code ALvoid alGetBuffer3iDirect(ALCcontext * context, ALuint buffer, ALenum param, ALint * value1, ALint * value2, ALint * value3)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3iDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") int[] value1, @NativeType("ALint *") int[] value2, @NativeType("ALint *") int[] value3) {
         long __functionAddress = AL.getICD().alGetBuffer3iDirect;
@@ -1031,7 +871,7 @@ public class AL11 extends AL10 {
         invokePPPPV(context, buffer, param, value1, value2, value3, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetBufferiv GetBufferiv} */
+    /** {@code ALvoid alGetBufferiv(ALuint buffer, ALenum param, ALint * values)} */
     @NativeType("ALvoid")
     public static void alGetBufferiv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetBufferiv;
@@ -1042,7 +882,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, param, values, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetBufferivDirect} */
+    /** {@code ALvoid alGetBufferivDirect(ALCcontext * context, ALuint buffer, ALenum param, ALint * values)} */
     @NativeType("ALvoid")
     public static void alGetBufferivDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALint *") int[] values) {
         long __functionAddress = AL.getICD().alGetBufferivDirect;
@@ -1054,7 +894,7 @@ public class AL11 extends AL10 {
         invokePPV(context, buffer, param, values, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetBuffer3f GetBuffer3f} */
+    /** {@code ALvoid alGetBuffer3f(ALuint buffer, ALenum param, ALfloat * value1, ALfloat * value2, ALfloat * value3)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3f(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] value1, @NativeType("ALfloat *") float[] value2, @NativeType("ALfloat *") float[] value3) {
         long __functionAddress = AL.getICD().alGetBuffer3f;
@@ -1067,7 +907,7 @@ public class AL11 extends AL10 {
         invokePPPV(buffer, param, value1, value2, value3, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetBuffer3fDirect} */
+    /** {@code ALvoid alGetBuffer3fDirect(ALCcontext * context, ALuint buffer, ALenum param, ALfloat * value1, ALfloat * value2, ALfloat * value3)} */
     @NativeType("ALvoid")
     public static void alGetBuffer3fDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] value1, @NativeType("ALfloat *") float[] value2, @NativeType("ALfloat *") float[] value3) {
         long __functionAddress = AL.getICD().alGetBuffer3fDirect;
@@ -1081,7 +921,7 @@ public class AL11 extends AL10 {
         invokePPPPV(context, buffer, param, value1, value2, value3, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetBufferfv GetBufferfv} */
+    /** {@code ALvoid alGetBufferfv(ALuint buffer, ALenum param, ALfloat * values)} */
     @NativeType("ALvoid")
     public static void alGetBufferfv(@NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] values) {
         long __functionAddress = AL.getICD().alGetBufferfv;
@@ -1092,7 +932,7 @@ public class AL11 extends AL10 {
         invokePV(buffer, param, values, __functionAddress);
     }
 
-    /** Array version of: {@link #alGetBufferfvDirect} */
+    /** {@code ALvoid alGetBufferfvDirect(ALCcontext * context, ALuint buffer, ALenum param, ALfloat * values)} */
     @NativeType("ALvoid")
     public static void alGetBufferfvDirect(@NativeType("ALCcontext *") long context, @NativeType("ALuint") int buffer, @NativeType("ALenum") int param, @NativeType("ALfloat *") float[] values) {
         long __functionAddress = AL.getICD().alGetBufferfvDirect;

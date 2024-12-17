@@ -16,43 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing general video capabilities for a video profile.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>It is common for video compression standards to allow using all reference pictures associated with active DPB slots as active reference pictures, hence for video decode profiles the values returned in {@code maxDpbSlots} and {@code maxActiveReferencePictures} are often equal. Similarly, in case of video decode profiles supporting field pictures the value of {@code maxActiveReferencePictures} often equals <code>maxDpbSlots × 2</code>.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoDecodeAV1CapabilitiesKHR}, {@link VkVideoDecodeCapabilitiesKHR}, {@link VkVideoDecodeH264CapabilitiesKHR}, {@link VkVideoDecodeH265CapabilitiesKHR}, {@link VkVideoEncodeAV1CapabilitiesKHR}, {@link VkVideoEncodeAV1QuantizationMapCapabilitiesKHR}, {@link VkVideoEncodeCapabilitiesKHR}, {@link VkVideoEncodeH264CapabilitiesKHR}, {@link VkVideoEncodeH264QuantizationMapCapabilitiesKHR}, {@link VkVideoEncodeH265CapabilitiesKHR}, {@link VkVideoEncodeH265QuantizationMapCapabilitiesKHR}, or {@link VkVideoEncodeQuantizationMapCapabilitiesKHR}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtensionProperties}, {@link VkExtent2D}, {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoCapabilitiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkVideoCapabilityFlagsKHR {@link #flags};
- *     VkDeviceSize {@link #minBitstreamBufferOffsetAlignment};
- *     VkDeviceSize {@link #minBitstreamBufferSizeAlignment};
- *     {@link VkExtent2D VkExtent2D} {@link #pictureAccessGranularity};
- *     {@link VkExtent2D VkExtent2D} {@link #minCodedExtent};
- *     {@link VkExtent2D VkExtent2D} {@link #maxCodedExtent};
- *     uint32_t {@link #maxDpbSlots};
- *     uint32_t {@link #maxActiveReferencePictures};
- *     {@link VkExtensionProperties VkExtensionProperties} {@link #stdHeaderVersion};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkVideoCapabilityFlagsKHR flags;
+ *     VkDeviceSize minBitstreamBufferOffsetAlignment;
+ *     VkDeviceSize minBitstreamBufferSizeAlignment;
+ *     {@link VkExtent2D VkExtent2D} pictureAccessGranularity;
+ *     {@link VkExtent2D VkExtent2D} minCodedExtent;
+ *     {@link VkExtent2D VkExtent2D} maxCodedExtent;
+ *     uint32_t maxDpbSlots;
+ *     uint32_t maxActiveReferencePictures;
+ *     {@link VkExtensionProperties VkExtensionProperties} stdHeaderVersion;
+ * }}</pre>
  */
 public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> implements NativeResource {
 
@@ -129,41 +106,41 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoCapabilityFlagBitsKHR} specifying capability flags. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkVideoCapabilityFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the minimum alignment for bitstream buffer offsets. */
+    /** @return the value of the {@code minBitstreamBufferOffsetAlignment} field. */
     @NativeType("VkDeviceSize")
     public long minBitstreamBufferOffsetAlignment() { return nminBitstreamBufferOffsetAlignment(address()); }
-    /** the minimum alignment for bitstream buffer range sizes. */
+    /** @return the value of the {@code minBitstreamBufferSizeAlignment} field. */
     @NativeType("VkDeviceSize")
     public long minBitstreamBufferSizeAlignment() { return nminBitstreamBufferSizeAlignment(address()); }
-    /** the granularity at which image access to video picture resources happen. */
+    /** @return a {@link VkExtent2D} view of the {@code pictureAccessGranularity} field. */
     public VkExtent2D pictureAccessGranularity() { return npictureAccessGranularity(address()); }
-    /** the minimum width and height of the coded frames. */
+    /** @return a {@link VkExtent2D} view of the {@code minCodedExtent} field. */
     public VkExtent2D minCodedExtent() { return nminCodedExtent(address()); }
-    /** the maximum width and height of the coded frames. */
+    /** @return a {@link VkExtent2D} view of the {@code maxCodedExtent} field. */
     public VkExtent2D maxCodedExtent() { return nmaxCodedExtent(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slots</a> supported by a single video session. */
+    /** @return the value of the {@code maxDpbSlots} field. */
     @NativeType("uint32_t")
     public int maxDpbSlots() { return nmaxDpbSlots(address()); }
-    /** the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#active-reference-pictures">active reference pictures</a> a single video coding operation <b>can</b> use. */
+    /** @return the value of the {@code maxActiveReferencePictures} field. */
     @NativeType("uint32_t")
     public int maxActiveReferencePictures() { return nmaxActiveReferencePictures(address()); }
-    /** a {@link VkExtensionProperties} structure reporting the Video Std header name and version supported for the video profile. */
+    /** @return a {@link VkExtensionProperties} view of the {@code stdHeaderVersion} field. */
     public VkExtensionProperties stdHeaderVersion() { return nstdHeaderVersion(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR} value to the {@code sType} field. */
     public VkVideoCapabilitiesKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoDecodeAV1CapabilitiesKHR} value to the {@code pNext} chain. */
     public VkVideoCapabilitiesKHR pNext(VkVideoDecodeAV1CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -395,41 +372,41 @@ public class VkVideoCapabilitiesKHR extends Struct<VkVideoCapabilitiesKHR> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoCapabilitiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoCapabilitiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkVideoCapabilityFlagsKHR")
         public int flags() { return VkVideoCapabilitiesKHR.nflags(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#minBitstreamBufferOffsetAlignment} field. */
+        /** @return the value of the {@code minBitstreamBufferOffsetAlignment} field. */
         @NativeType("VkDeviceSize")
         public long minBitstreamBufferOffsetAlignment() { return VkVideoCapabilitiesKHR.nminBitstreamBufferOffsetAlignment(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#minBitstreamBufferSizeAlignment} field. */
+        /** @return the value of the {@code minBitstreamBufferSizeAlignment} field. */
         @NativeType("VkDeviceSize")
         public long minBitstreamBufferSizeAlignment() { return VkVideoCapabilitiesKHR.nminBitstreamBufferSizeAlignment(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#pictureAccessGranularity} field. */
+        /** @return a {@link VkExtent2D} view of the {@code pictureAccessGranularity} field. */
         public VkExtent2D pictureAccessGranularity() { return VkVideoCapabilitiesKHR.npictureAccessGranularity(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#minCodedExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code minCodedExtent} field. */
         public VkExtent2D minCodedExtent() { return VkVideoCapabilitiesKHR.nminCodedExtent(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoCapabilitiesKHR#maxCodedExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code maxCodedExtent} field. */
         public VkExtent2D maxCodedExtent() { return VkVideoCapabilitiesKHR.nmaxCodedExtent(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#maxDpbSlots} field. */
+        /** @return the value of the {@code maxDpbSlots} field. */
         @NativeType("uint32_t")
         public int maxDpbSlots() { return VkVideoCapabilitiesKHR.nmaxDpbSlots(address()); }
-        /** @return the value of the {@link VkVideoCapabilitiesKHR#maxActiveReferencePictures} field. */
+        /** @return the value of the {@code maxActiveReferencePictures} field. */
         @NativeType("uint32_t")
         public int maxActiveReferencePictures() { return VkVideoCapabilitiesKHR.nmaxActiveReferencePictures(address()); }
-        /** @return a {@link VkExtensionProperties} view of the {@link VkVideoCapabilitiesKHR#stdHeaderVersion} field. */
+        /** @return a {@link VkExtensionProperties} view of the {@code stdHeaderVersion} field. */
         public VkExtensionProperties stdHeaderVersion() { return VkVideoCapabilitiesKHR.nstdHeaderVersion(address()); }
 
-        /** Sets the specified value to the {@link VkVideoCapabilitiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoCapabilitiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR} value to the {@link VkVideoCapabilitiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR} value to the {@code sType} field. */
         public VkVideoCapabilitiesKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoCapabilitiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoCapabilitiesKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoDecodeAV1CapabilitiesKHR} value to the {@code pNext} chain. */
         public VkVideoCapabilitiesKHR.Buffer pNext(VkVideoDecodeAV1CapabilitiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }

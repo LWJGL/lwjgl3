@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * This iterator object is needed for {@link FreeType#FT_Get_Color_Glyph_Layer Get_Color_Glyph_Layer}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_LayerIterator {
  *     FT_UInt num_layers;
  *     FT_UInt layer;
  *     FT_Byte * p;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_LayerIterator extends Struct<FT_LayerIterator> implements NativeResource {
 
@@ -84,11 +80,7 @@ public class FT_LayerIterator extends Struct<FT_LayerIterator> implements Native
     /** @return the value of the {@code layer} field. */
     @NativeType("FT_UInt")
     public int layer() { return nlayer(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field. */
     @NativeType("FT_Byte *")
     public @Nullable ByteBuffer p(int capacity) { return np(address(), capacity); }
 
@@ -259,11 +251,7 @@ public class FT_LayerIterator extends Struct<FT_LayerIterator> implements Native
         /** @return the value of the {@code layer} field. */
         @NativeType("FT_UInt")
         public int layer() { return FT_LayerIterator.nlayer(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field. */
         @NativeType("FT_Byte *")
         public @Nullable ByteBuffer p(int capacity) { return FT_LayerIterator.np(address(), capacity); }
 

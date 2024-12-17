@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the configuration of the motion estimation algorithm.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct cl_motion_estimation_desc_intel {
- *     cl_uint {@link #mb_block_type};
- *     cl_uint {@link #subpixel_mode};
- *     cl_uint {@link #sad_adjust_mode};
- *     cl_uint {@link #search_path_type};
- * }</code></pre>
+ *     cl_uint mb_block_type;
+ *     cl_uint subpixel_mode;
+ *     cl_uint sad_adjust_mode;
+ *     cl_uint search_path_type;
+ * }}</pre>
  */
 @NativeType("struct cl_motion_estimation_desc_intel")
 public class CLMotionEstimationDescINTEL extends Struct<CLMotionEstimationDescINTEL> implements NativeResource {
@@ -83,30 +79,26 @@ public class CLMotionEstimationDescINTEL extends Struct<CLMotionEstimationDescIN
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** describes the size of the blocks described by the motion estimator */
+    /** @return the value of the {@code mb_block_type} field. */
     @NativeType("cl_uint")
     public int mb_block_type() { return nmb_block_type(address()); }
-    /** defines the search precision (and hence, the precision of the returned motion vectors) */
+    /** @return the value of the {@code subpixel_mode} field. */
     @NativeType("cl_uint")
     public int subpixel_mode() { return nsubpixel_mode(address()); }
-    /** specifies distortion measure adjustment used for the motion search SAD comparison */
+    /** @return the value of the {@code sad_adjust_mode} field. */
     @NativeType("cl_uint")
     public int sad_adjust_mode() { return nsad_adjust_mode(address()); }
-    /**
-     * specifies the search path and search radius when matching blocks in the neighborhood of each pixel block (optionally offset by the predicted motion
-     * vector). Currently, all search algorithms match the source block with pixel blocks in the reference area exhaustively within a {@code [Rx, Ry]}
-     * radius from the current source pixel block location (optionally offset by the predicted motion vector)
-     */
+    /** @return the value of the {@code search_path_type} field. */
     @NativeType("cl_uint")
     public int search_path_type() { return nsearch_path_type(address()); }
 
-    /** Sets the specified value to the {@link #mb_block_type} field. */
+    /** Sets the specified value to the {@code mb_block_type} field. */
     public CLMotionEstimationDescINTEL mb_block_type(@NativeType("cl_uint") int value) { nmb_block_type(address(), value); return this; }
-    /** Sets the specified value to the {@link #subpixel_mode} field. */
+    /** Sets the specified value to the {@code subpixel_mode} field. */
     public CLMotionEstimationDescINTEL subpixel_mode(@NativeType("cl_uint") int value) { nsubpixel_mode(address(), value); return this; }
-    /** Sets the specified value to the {@link #sad_adjust_mode} field. */
+    /** Sets the specified value to the {@code sad_adjust_mode} field. */
     public CLMotionEstimationDescINTEL sad_adjust_mode(@NativeType("cl_uint") int value) { nsad_adjust_mode(address(), value); return this; }
-    /** Sets the specified value to the {@link #search_path_type} field. */
+    /** Sets the specified value to the {@code search_path_type} field. */
     public CLMotionEstimationDescINTEL search_path_type(@NativeType("cl_uint") int value) { nsearch_path_type(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,26 +319,26 @@ public class CLMotionEstimationDescINTEL extends Struct<CLMotionEstimationDescIN
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CLMotionEstimationDescINTEL#mb_block_type} field. */
+        /** @return the value of the {@code mb_block_type} field. */
         @NativeType("cl_uint")
         public int mb_block_type() { return CLMotionEstimationDescINTEL.nmb_block_type(address()); }
-        /** @return the value of the {@link CLMotionEstimationDescINTEL#subpixel_mode} field. */
+        /** @return the value of the {@code subpixel_mode} field. */
         @NativeType("cl_uint")
         public int subpixel_mode() { return CLMotionEstimationDescINTEL.nsubpixel_mode(address()); }
-        /** @return the value of the {@link CLMotionEstimationDescINTEL#sad_adjust_mode} field. */
+        /** @return the value of the {@code sad_adjust_mode} field. */
         @NativeType("cl_uint")
         public int sad_adjust_mode() { return CLMotionEstimationDescINTEL.nsad_adjust_mode(address()); }
-        /** @return the value of the {@link CLMotionEstimationDescINTEL#search_path_type} field. */
+        /** @return the value of the {@code search_path_type} field. */
         @NativeType("cl_uint")
         public int search_path_type() { return CLMotionEstimationDescINTEL.nsearch_path_type(address()); }
 
-        /** Sets the specified value to the {@link CLMotionEstimationDescINTEL#mb_block_type} field. */
+        /** Sets the specified value to the {@code mb_block_type} field. */
         public CLMotionEstimationDescINTEL.Buffer mb_block_type(@NativeType("cl_uint") int value) { CLMotionEstimationDescINTEL.nmb_block_type(address(), value); return this; }
-        /** Sets the specified value to the {@link CLMotionEstimationDescINTEL#subpixel_mode} field. */
+        /** Sets the specified value to the {@code subpixel_mode} field. */
         public CLMotionEstimationDescINTEL.Buffer subpixel_mode(@NativeType("cl_uint") int value) { CLMotionEstimationDescINTEL.nsubpixel_mode(address(), value); return this; }
-        /** Sets the specified value to the {@link CLMotionEstimationDescINTEL#sad_adjust_mode} field. */
+        /** Sets the specified value to the {@code sad_adjust_mode} field. */
         public CLMotionEstimationDescINTEL.Buffer sad_adjust_mode(@NativeType("cl_uint") int value) { CLMotionEstimationDescINTEL.nsad_adjust_mode(address(), value); return this; }
-        /** Sets the specified value to the {@link CLMotionEstimationDescINTEL#search_path_type} field. */
+        /** Sets the specified value to the {@code search_path_type} field. */
         public CLMotionEstimationDescINTEL.Buffer search_path_type(@NativeType("cl_uint") int value) { CLMotionEstimationDescINTEL.nsearch_path_type(address(), value); return this; }
 
     }

@@ -16,58 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying how to bind a buffer to memory.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code buffer} <b>must</b> not have been bound to a memory object</li>
- * <li>{@code buffer} <b>must</b> not have been created with any sparse memory binding flags</li>
- * <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
- * <li>{@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the {@link VkMemoryRequirements} structure returned from a call to {@code vkGetBufferMemoryRequirements} with {@code buffer}</li>
- * <li>{@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the {@link VkMemoryRequirements} structure returned from a call to {@code vkGetBufferMemoryRequirements} with {@code buffer}</li>
- * <li>The {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@code vkGetBufferMemoryRequirements} with {@code buffer} <b>must</b> be less than or equal to the size of {@code memory} minus {@code memoryOffset}</li>
- * <li>If {@code buffer} requires a dedicated allocation (as reported by {@link VK11#vkGetBufferMemoryRequirements2 GetBufferMemoryRequirements2} in {@link VkMemoryDedicatedRequirements}{@code ::requiresDedicatedAllocation} for {@code buffer}), {@code memory} <b>must</b> have been allocated with {@link VkMemoryDedicatedAllocateInfo}{@code ::buffer} equal to {@code buffer}</li>
- * <li>If the {@link VkMemoryAllocateInfo} provided when {@code memory} was allocated included a {@link VkMemoryDedicatedAllocateInfo} structure in its {@code pNext} chain, and {@link VkMemoryDedicatedAllocateInfo}{@code ::buffer} was not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then {@code buffer} <b>must</b> equal {@link VkMemoryDedicatedAllocateInfo}{@code ::buffer}, and {@code memoryOffset} <b>must</b> be zero</li>
- * <li>If {@code buffer} was created with the {@link VK11#VK_BUFFER_CREATE_PROTECTED_BIT BUFFER_CREATE_PROTECTED_BIT} bit set, the buffer <b>must</b> be bound to a memory object allocated with a memory type that reports {@link VK11#VK_MEMORY_PROPERTY_PROTECTED_BIT MEMORY_PROPERTY_PROTECTED_BIT}</li>
- * <li>If {@code buffer} was created with the {@link VK11#VK_BUFFER_CREATE_PROTECTED_BIT BUFFER_CREATE_PROTECTED_BIT} bit not set, the buffer <b>must</b> not be bound to a memory object allocated with a memory type that reports {@link VK11#VK_MEMORY_PROPERTY_PROTECTED_BIT MEMORY_PROPERTY_PROTECTED_BIT}</li>
- * <li>If {@code buffer} was created with {@link VkDedicatedAllocationBufferCreateInfoNV}{@code ::dedicatedAllocation} equal to {@link VK10#VK_TRUE TRUE}, {@code memory} <b>must</b> have been allocated with {@link VkDedicatedAllocationMemoryAllocateInfoNV}{@code ::buffer} equal to a buffer handle created with identical creation parameters to {@code buffer} and {@code memoryOffset} <b>must</b> be zero</li>
- * <li>If the {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation} extension is not enabled, {@link VkPhysicalDeviceProperties}{@code ::apiVersion} is less than Vulkan 1.1, and {@code buffer} was not created with {@link VkDedicatedAllocationBufferCreateInfoNV}{@code ::dedicatedAllocation} equal to {@link VK10#VK_TRUE TRUE}, {@code memory} <b>must</b> not have been allocated dedicated for a specific buffer or image</li>
- * <li>If the value of {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} used to allocate {@code memory} is not 0, it <b>must</b> include at least one of the handles set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} when {@code buffer} was created</li>
- * <li>If {@code memory} was allocated by a memory import operation, that is not {@link VkImportAndroidHardwareBufferInfoANDROID} with a non-{@code NULL} {@code buffer} value, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} when {@code buffer} was created</li>
- * <li>If {@code memory} was allocated with the {@link VkImportAndroidHardwareBufferInfoANDROID} memory import operation with a non-{@code NULL} {@code buffer} value, {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} <b>must</b> also have been set in {@link VkExternalMemoryBufferCreateInfo}{@code ::handleTypes} when {@code buffer} was created</li>
- * <li>If the {@link VkPhysicalDeviceBufferDeviceAddressFeatures}{@code ::bufferDeviceAddress} feature is enabled and {@code buffer} was created with the {@link VK12#VK_BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT} bit set</li>
- * <li>If the {@link VkPhysicalDeviceBufferDeviceAddressFeatures}{@code ::bufferDeviceAddressCaptureReplay} feature is enabled and {@code buffer} was created with the {@link VK12#VK_BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} bit set</li>
- * <li>If the {@code buffer} was created with the {@link EXTDescriptorBuffer#VK_BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT} bit set</li>
- * <li>If the {@code buffer} was created with the {@link EXTDescriptorBuffer#VK_BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT BUFFER_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} bit set</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindBufferMemoryDeviceGroupInfo} structure, all instances of {@code memory} specified by {@link VkBindBufferMemoryDeviceGroupInfo}{@code ::pDeviceIndices} <b>must</b> have been allocated</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBindBufferMemoryDeviceGroupInfo} or {@link VkBindMemoryStatus}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * <li>Both of {@code buffer}, and {@code memory} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK11#vkBindBufferMemory2 BindBufferMemory2}, {@link KHRBindMemory2#vkBindBufferMemory2KHR BindBufferMemory2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindBufferMemoryInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBuffer {@link #buffer};
- *     VkDeviceMemory {@link #memory};
- *     VkDeviceSize {@link #memoryOffset};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBuffer buffer;
+ *     VkDeviceMemory memory;
+ *     VkDeviceSize memoryOffset;
+ * }}</pre>
  */
 public class VkBindBufferMemoryInfo extends Struct<VkBindBufferMemoryInfo> implements NativeResource {
 
@@ -126,27 +82,27 @@ public class VkBindBufferMemoryInfo extends Struct<VkBindBufferMemoryInfo> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the buffer to be attached to memory. */
+    /** @return the value of the {@code buffer} field. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** a {@code VkDeviceMemory} object describing the device memory to attach. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** the start offset of the region of {@code memory} which is to be bound to the buffer. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified buffer. */
+    /** @return the value of the {@code memoryOffset} field. */
     @NativeType("VkDeviceSize")
     public long memoryOffset() { return nmemoryOffset(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBindBufferMemoryInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO} value to the {@code sType} field. */
     public VkBindBufferMemoryInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBindBufferMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkBindBufferMemoryDeviceGroupInfo} value to the {@code pNext} chain. */
     public VkBindBufferMemoryInfo pNext(VkBindBufferMemoryDeviceGroupInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -156,11 +112,11 @@ public class VkBindBufferMemoryInfo extends Struct<VkBindBufferMemoryInfo> imple
     public VkBindBufferMemoryInfo pNext(VkBindMemoryStatus value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkBindMemoryStatusKHR} value to the {@code pNext} chain. */
     public VkBindBufferMemoryInfo pNext(VkBindMemoryStatusKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #buffer} field. */
+    /** Sets the specified value to the {@code buffer} field. */
     public VkBindBufferMemoryInfo buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkBindBufferMemoryInfo memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryOffset} field. */
+    /** Sets the specified value to the {@code memoryOffset} field. */
     public VkBindBufferMemoryInfo memoryOffset(@NativeType("VkDeviceSize") long value) { nmemoryOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -387,27 +343,27 @@ public class VkBindBufferMemoryInfo extends Struct<VkBindBufferMemoryInfo> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindBufferMemoryInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindBufferMemoryInfo.nsType(address()); }
-        /** @return the value of the {@link VkBindBufferMemoryInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindBufferMemoryInfo.npNext(address()); }
-        /** @return the value of the {@link VkBindBufferMemoryInfo#buffer} field. */
+        /** @return the value of the {@code buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkBindBufferMemoryInfo.nbuffer(address()); }
-        /** @return the value of the {@link VkBindBufferMemoryInfo#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkBindBufferMemoryInfo.nmemory(address()); }
-        /** @return the value of the {@link VkBindBufferMemoryInfo#memoryOffset} field. */
+        /** @return the value of the {@code memoryOffset} field. */
         @NativeType("VkDeviceSize")
         public long memoryOffset() { return VkBindBufferMemoryInfo.nmemoryOffset(address()); }
 
-        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBindBufferMemoryInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindBufferMemoryInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO} value to the {@link VkBindBufferMemoryInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO} value to the {@code sType} field. */
         public VkBindBufferMemoryInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO); }
-        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBindBufferMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindBufferMemoryInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkBindBufferMemoryDeviceGroupInfo} value to the {@code pNext} chain. */
         public VkBindBufferMemoryInfo.Buffer pNext(VkBindBufferMemoryDeviceGroupInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -417,11 +373,11 @@ public class VkBindBufferMemoryInfo extends Struct<VkBindBufferMemoryInfo> imple
         public VkBindBufferMemoryInfo.Buffer pNext(VkBindMemoryStatus value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkBindMemoryStatusKHR} value to the {@code pNext} chain. */
         public VkBindBufferMemoryInfo.Buffer pNext(VkBindMemoryStatusKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#buffer} field. */
+        /** Sets the specified value to the {@code buffer} field. */
         public VkBindBufferMemoryInfo.Buffer buffer(@NativeType("VkBuffer") long value) { VkBindBufferMemoryInfo.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkBindBufferMemoryInfo.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkBindBufferMemoryInfo.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindBufferMemoryInfo#memoryOffset} field. */
+        /** Sets the specified value to the {@code memoryOffset} field. */
         public VkBindBufferMemoryInfo.Buffer memoryOffset(@NativeType("VkDeviceSize") long value) { VkBindBufferMemoryInfo.nmemoryOffset(address(), value); return this; }
 
     }

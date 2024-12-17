@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Allocates memory.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     bgfx_allocator_interface_t *_this,
- *     void *_ptr,
- *     size_t _size,
- *     size_t _align,
- *     char *_file,
- *     uint32_t _line
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)")
 public interface BGFXReallocCallbackI extends CallbackI {
@@ -53,16 +39,7 @@ public interface BGFXReallocCallbackI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /**
-     * Will be called when an allocation is requested.
-     *
-     * @param _this  the allocator interface
-     * @param _ptr   the previously allocated memory or {@code NULL}
-     * @param _size  the number of bytes to allocate
-     * @param _align the allocation alignment, in bytes
-     * @param _file  file path where allocation was generated
-     * @param _line  line where allocation was generated
-     */
+    /** {@code void * (*) (bgfx_allocator_interface_t * _this, void * _ptr, size_t _size, size_t _align, char * _file, uint32_t _line)} */
     @NativeType("void *") long invoke(@NativeType("bgfx_allocator_interface_t *") long _this, @NativeType("void *") long _ptr, @NativeType("size_t") long _size, @NativeType("size_t") long _align, @NativeType("char *") long _file, @NativeType("uint32_t") int _line);
 
 }

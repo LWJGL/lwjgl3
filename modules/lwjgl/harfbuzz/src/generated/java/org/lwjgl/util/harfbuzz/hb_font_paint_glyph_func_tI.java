@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_font_t *font,
- *     void *font_data,
- *     hb_codepoint_t glyph,
- *     hb_paint_funcs_t *paint_funcs,
- *     void *paint_data,
- *     unsigned int palette_index,
- *     hb_color_t foreground,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_font_paint_glyph_func_t} */
 @FunctionalInterface
 @NativeType("hb_font_paint_glyph_func_t")
 public interface hb_font_paint_glyph_func_tI extends CallbackI {
@@ -54,18 +40,7 @@ public interface hb_font_paint_glyph_func_tI extends CallbackI {
         );
     }
 
-    /**
-     * A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.
-     *
-     * @param font          {@code hb_font_t} to work upon
-     * @param font_data     user data pointer
-     * @param glyph         the glyph ID to query
-     * @param paint_funcs   the paint functions to use
-     * @param paint_data    the data accompanying the paint functions
-     * @param palette_index the color palette to use
-     * @param foreground    the foreground color
-     * @param user_data     user data pointer passed by the caller
-     */
+    /** {@code void (* hb_font_paint_glyph_func_t) (hb_font_t * font, void * font_data, hb_codepoint_t glyph, hb_paint_funcs_t * paint_funcs, void * paint_data, unsigned int palette_index, hb_color_t foreground, void * user_data)} */
     void invoke(@NativeType("hb_font_t *") long font, @NativeType("void *") long font_data, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_paint_funcs_t *") long paint_funcs, @NativeType("void *") long paint_data, @NativeType("unsigned int") int palette_index, @NativeType("hb_color_t") int foreground, @NativeType("void *") long user_data);
 
 }

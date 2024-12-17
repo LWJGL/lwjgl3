@@ -11,26 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Application-defined device memory report callback function.
- * 
- * <h5>C Specification</h5>
- * 
- * <p>The prototype for the {@link VkDeviceDeviceMemoryReportCreateInfoEXT}{@code ::pfnUserCallback} function implemented by the application is:</p>
- * 
- * <pre><code>
- * typedef void (VKAPI_PTR *PFN_vkDeviceMemoryReportCallbackEXT)(
- *     const VkDeviceMemoryReportCallbackDataEXT*  pCallbackData,
- *     void*                                       pUserData);</code></pre>
- * 
- * <h5>Description</h5>
- * 
- * <p>The callback <b>must</b> not make calls to any Vulkan commands.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceDeviceMemoryReportCreateInfoEXT}, {@link VkDeviceMemoryReportCallbackDataEXT}</p>
- */
+/** Callback function: {@link #invoke PFN_vkDeviceMemoryReportCallbackEXT} */
 public abstract class VkDeviceMemoryReportCallbackEXT extends Callback implements VkDeviceMemoryReportCallbackEXTI {
 
     /**

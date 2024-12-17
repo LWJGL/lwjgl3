@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * specify the present barrier membership of this swapchain.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkSwapchainCreateInfoKHR} does not include this structure, the default value for {@code presentBarrierEnable} is {@link VK10#VK_FALSE FALSE}, meaning the swapchain does not request to use the present barrier. Additionally, when recreating a swapchain that was using the present barrier, and the {@code pNext} chain of {@link VkSwapchainCreateInfoKHR} does not include this structure, it means the swapchain will stop using the present barrier.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVPresentBarrier#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSwapchainPresentBarrierCreateInfoNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #presentBarrierEnable};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 presentBarrierEnable;
+ * }}</pre>
  */
 public class VkSwapchainPresentBarrierCreateInfoNV extends Struct<VkSwapchainPresentBarrierCreateInfoNV> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct<VkSwapchainPre
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a boolean value indicating a request for using the <em>present barrier</em>. */
+    /** @return the value of the {@code presentBarrierEnable} field. */
     @NativeType("VkBool32")
     public boolean presentBarrierEnable() { return npresentBarrierEnable(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSwapchainPresentBarrierCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVPresentBarrier#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVPresentBarrier#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV} value to the {@code sType} field. */
     public VkSwapchainPresentBarrierCreateInfoNV sType$Default() { return sType(NVPresentBarrier.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSwapchainPresentBarrierCreateInfoNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #presentBarrierEnable} field. */
+    /** Sets the specified value to the {@code presentBarrierEnable} field. */
     public VkSwapchainPresentBarrierCreateInfoNV presentBarrierEnable(@NativeType("VkBool32") boolean value) { npresentBarrierEnable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkSwapchainPresentBarrierCreateInfoNV extends Struct<VkSwapchainPre
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSwapchainPresentBarrierCreateInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSwapchainPresentBarrierCreateInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkSwapchainPresentBarrierCreateInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSwapchainPresentBarrierCreateInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkSwapchainPresentBarrierCreateInfoNV#presentBarrierEnable} field. */
+        /** @return the value of the {@code presentBarrierEnable} field. */
         @NativeType("VkBool32")
         public boolean presentBarrierEnable() { return VkSwapchainPresentBarrierCreateInfoNV.npresentBarrierEnable(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkSwapchainPresentBarrierCreateInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSwapchainPresentBarrierCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainPresentBarrierCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVPresentBarrier#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV} value to the {@link VkSwapchainPresentBarrierCreateInfoNV#sType} field. */
+        /** Sets the {@link NVPresentBarrier#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV} value to the {@code sType} field. */
         public VkSwapchainPresentBarrierCreateInfoNV.Buffer sType$Default() { return sType(NVPresentBarrier.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV); }
-        /** Sets the specified value to the {@link VkSwapchainPresentBarrierCreateInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSwapchainPresentBarrierCreateInfoNV.Buffer pNext(@NativeType("void *") long value) { VkSwapchainPresentBarrierCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSwapchainPresentBarrierCreateInfoNV#presentBarrierEnable} field. */
+        /** Sets the specified value to the {@code presentBarrierEnable} field. */
         public VkSwapchainPresentBarrierCreateInfoNV.Buffer presentBarrierEnable(@NativeType("VkBool32") boolean value) { VkSwapchainPresentBarrierCreateInfoNV.npresentBarrierEnable(address(), value ? 1 : 0); return this; }
 
     }

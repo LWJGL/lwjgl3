@@ -18,22 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure describing AV1 decode capabilities.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoDecodeAV1CapabilitiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     StdVideoAV1Level {@link #maxLevel};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     StdVideoAV1Level maxLevel;
+ * }}</pre>
  */
 public class VkVideoDecodeAV1CapabilitiesKHR extends Struct<VkVideoDecodeAV1CapabilitiesKHR> implements NativeResource {
 
@@ -86,21 +76,21 @@ public class VkVideoDecodeAV1CapabilitiesKHR extends Struct<VkVideoDecodeAV1Capa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@code StdVideoAV1Level} value specifying the maximum AV1 level supported by the profile, as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
+    /** @return the value of the {@code maxLevel} field. */
     @NativeType("StdVideoAV1Level")
     public int maxLevel() { return nmaxLevel(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeAV1CapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR} value to the {@code sType} field. */
     public VkVideoDecodeAV1CapabilitiesKHR sType$Default() { return sType(KHRVideoDecodeAV1.VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeAV1CapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,21 +282,21 @@ public class VkVideoDecodeAV1CapabilitiesKHR extends Struct<VkVideoDecodeAV1Capa
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoDecodeAV1CapabilitiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeAV1CapabilitiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoDecodeAV1CapabilitiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoDecodeAV1CapabilitiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoDecodeAV1CapabilitiesKHR#maxLevel} field. */
+        /** @return the value of the {@code maxLevel} field. */
         @NativeType("StdVideoAV1Level")
         public int maxLevel() { return VkVideoDecodeAV1CapabilitiesKHR.nmaxLevel(address()); }
 
-        /** Sets the specified value to the {@link VkVideoDecodeAV1CapabilitiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeAV1CapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeAV1CapabilitiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR} value to the {@link VkVideoDecodeAV1CapabilitiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR} value to the {@code sType} field. */
         public VkVideoDecodeAV1CapabilitiesKHR.Buffer sType$Default() { return sType(KHRVideoDecodeAV1.VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_CAPABILITIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoDecodeAV1CapabilitiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeAV1CapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoDecodeAV1CapabilitiesKHR.npNext(address(), value); return this; }
 
     }

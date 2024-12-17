@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SQL_DAY_SECOND_STRUCT {
  *     SQLUINTEGER day;
  *     SQLUINTEGER hour;
  *     SQLUINTEGER minute;
  *     SQLUINTEGER second;
  *     SQLUINTEGER fraction;
- * }</code></pre>
+ * }}</pre>
  */
 public class SQL_DAY_SECOND_STRUCT extends Struct<SQL_DAY_SECOND_STRUCT> implements NativeResource {
 

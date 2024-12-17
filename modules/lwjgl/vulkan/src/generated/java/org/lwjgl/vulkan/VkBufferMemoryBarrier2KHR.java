@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkBufferMemoryBarrier2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferMemoryBarrier2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -33,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBuffer buffer;
  *     VkDeviceSize offset;
  *     VkDeviceSize size;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkBufferMemoryBarrier2KHR extends VkBufferMemoryBarrier2 {
 

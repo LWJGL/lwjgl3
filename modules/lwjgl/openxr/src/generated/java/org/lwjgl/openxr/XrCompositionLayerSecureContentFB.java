@@ -16,38 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * specifies secure content mode for composition layers.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrCompositionLayerSecureContentFB} contains additional flags to indicate a composition layer contains secure content and must not be written to external outputs.</p>
- * 
- * <p>If both {@link FBCompositionLayerSecureContent#XR_COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB} and {@link FBCompositionLayerSecureContent#XR_COMPOSITION_LAYER_SECURE_CONTENT_REPLACE_LAYER_BIT_FB COMPOSITION_LAYER_SECURE_CONTENT_REPLACE_LAYER_BIT_FB} are set, {@link FBCompositionLayerSecureContent#XR_COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB COMPOSITION_LAYER_SECURE_CONTENT_EXCLUDE_LAYER_BIT_FB} will take precedence.</p>
- * 
- * <p>To specify the additional flags, you <b>must</b> create a {@link XrCompositionLayerSecureContentFB} structure and pass it via the {@link XrCompositionLayerBaseHeader} structure’s {@code next} parameter.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBCompositionLayerSecureContent XR_FB_composition_layer_secure_content} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerSecureContentFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBCompositionLayerSecureContent#XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code XrCompositionLayerSecureContentFlagBitsFB} values</li>
- * <li>{@code flags} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerSecureContentFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrCompositionLayerSecureContentFlagsFB {@link #flags};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrCompositionLayerSecureContentFlagsFB flags;
+ * }}</pre>
  */
 public class XrCompositionLayerSecureContentFB extends Struct<XrCompositionLayerSecureContentFB> implements NativeResource {
 
@@ -100,23 +74,23 @@ public class XrCompositionLayerSecureContentFB extends Struct<XrCompositionLayer
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a bitmask of {@code XrCompositionLayerSecureContentFlagBitsFB}. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrCompositionLayerSecureContentFlagsFB")
     public long flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerSecureContentFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBCompositionLayerSecureContent#XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBCompositionLayerSecureContent#XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB} value to the {@code type} field. */
     public XrCompositionLayerSecureContentFB type$Default() { return type(FBCompositionLayerSecureContent.XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerSecureContentFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public XrCompositionLayerSecureContentFB flags(@NativeType("XrCompositionLayerSecureContentFlagsFB") long value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,23 +286,23 @@ public class XrCompositionLayerSecureContentFB extends Struct<XrCompositionLayer
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerSecureContentFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerSecureContentFB.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerSecureContentFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerSecureContentFB.nnext(address()); }
-        /** @return the value of the {@link XrCompositionLayerSecureContentFB#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrCompositionLayerSecureContentFlagsFB")
         public long flags() { return XrCompositionLayerSecureContentFB.nflags(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerSecureContentFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerSecureContentFB.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerSecureContentFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBCompositionLayerSecureContent#XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB} value to the {@link XrCompositionLayerSecureContentFB#type} field. */
+        /** Sets the {@link FBCompositionLayerSecureContent#XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB} value to the {@code type} field. */
         public XrCompositionLayerSecureContentFB.Buffer type$Default() { return type(FBCompositionLayerSecureContent.XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB); }
-        /** Sets the specified value to the {@link XrCompositionLayerSecureContentFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerSecureContentFB.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerSecureContentFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerSecureContentFB#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public XrCompositionLayerSecureContentFB.Buffer flags(@NativeType("XrCompositionLayerSecureContentFlagsFB") long value) { XrCompositionLayerSecureContentFB.nflags(address(), value); return this; }
 
     }

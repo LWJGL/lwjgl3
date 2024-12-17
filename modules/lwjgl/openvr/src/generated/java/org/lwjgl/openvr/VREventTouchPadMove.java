@@ -14,20 +14,15 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * When in mouse input mode you can receive data from the touchpad, these events are only sent if the users finger is on the touchpad (or just released from
- * it). These events are sent to overlays with the {@link VR#VROverlayFlags_SendVRTouchpadEvents} flag set.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_TouchPadMove_t {
- *     bool {@link #bFingerDown};
- *     float {@link #flSecondsFingerDown};
- *     float {@link #fValueXFirst};
+ *     bool bFingerDown;
+ *     float flSecondsFingerDown;
+ *     float fValueXFirst;
  *     float fValueYFirst;
- *     float {@link #fValueXRaw};
+ *     float fValueXRaw;
  *     float fValueYRaw;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_TouchPadMove_t")
 public class VREventTouchPadMove extends Struct<VREventTouchPadMove> {
@@ -90,16 +85,16 @@ public class VREventTouchPadMove extends Struct<VREventTouchPadMove> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** true if the users finger is detected on the touch pad */
+    /** @return the value of the {@code bFingerDown} field. */
     @NativeType("bool")
     public boolean bFingerDown() { return nbFingerDown(address()); }
-    /** how long the finger has been down in seconds */
+    /** @return the value of the {@code flSecondsFingerDown} field. */
     public float flSecondsFingerDown() { return nflSecondsFingerDown(address()); }
-    /** these values indicate the starting finger position (so you can do some basic swipe stuff) */
+    /** @return the value of the {@code fValueXFirst} field. */
     public float fValueXFirst() { return nfValueXFirst(address()); }
     /** @return the value of the {@code fValueYFirst} field. */
     public float fValueYFirst() { return nfValueYFirst(address()); }
-    /** this is the raw sampled coordinate without deadzoning */
+    /** @return the value of the {@code fValueXRaw} field. */
     public float fValueXRaw() { return nfValueXRaw(address()); }
     /** @return the value of the {@code fValueYRaw} field. */
     public float fValueYRaw() { return nfValueYRaw(address()); }
@@ -189,16 +184,16 @@ public class VREventTouchPadMove extends Struct<VREventTouchPadMove> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VREventTouchPadMove#bFingerDown} field. */
+        /** @return the value of the {@code bFingerDown} field. */
         @NativeType("bool")
         public boolean bFingerDown() { return VREventTouchPadMove.nbFingerDown(address()); }
-        /** @return the value of the {@link VREventTouchPadMove#flSecondsFingerDown} field. */
+        /** @return the value of the {@code flSecondsFingerDown} field. */
         public float flSecondsFingerDown() { return VREventTouchPadMove.nflSecondsFingerDown(address()); }
-        /** @return the value of the {@link VREventTouchPadMove#fValueXFirst} field. */
+        /** @return the value of the {@code fValueXFirst} field. */
         public float fValueXFirst() { return VREventTouchPadMove.nfValueXFirst(address()); }
         /** @return the value of the {@code fValueYFirst} field. */
         public float fValueYFirst() { return VREventTouchPadMove.nfValueYFirst(address()); }
-        /** @return the value of the {@link VREventTouchPadMove#fValueXRaw} field. */
+        /** @return the value of the {@code fValueXRaw} field. */
         public float fValueXRaw() { return VREventTouchPadMove.nfValueXRaw(address()); }
         /** @return the value of the {@code fValueYRaw} field. */
         public float fValueYRaw() { return VREventTouchPadMove.nfValueYRaw(address()); }

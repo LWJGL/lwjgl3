@@ -16,57 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Completion structure to retrieve the result of the anchor query.
- * 
- * <h5>Future Return Codes</h5>
- * 
- * <p>{@code futureResult} values:</p>
- * 
- * <dl>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-successcodes">Success</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
- * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
- * </ul></dd>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-errorcodes">Failure</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
- * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
- * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
- * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
- * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
- * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
- * <li>{@link EXTPlaneDetection#XR_ERROR_SPACE_NOT_LOCATABLE_EXT ERROR_SPACE_NOT_LOCATABLE_EXT}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_SPACE_NOT_LOCATABLE_ML ERROR_SPATIAL_ANCHORS_SPACE_NOT_LOCATABLE_ML}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML}</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsQueryCompletionML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code futureResult} is not 0, {@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
- * <li>If {@code uuidCapacityInput} is not 0, {@code uuids} <b>must</b> be a pointer to an array of {@code uuidCapacityInput} {@link XrUuidEXT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}, {@link MLSpatialAnchorsStorage#xrQuerySpatialAnchorsAsyncML QuerySpatialAnchorsAsyncML}, {@link MLSpatialAnchorsStorage#xrQuerySpatialAnchorsCompleteML QuerySpatialAnchorsCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsQueryCompletionML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrResult {@link #futureResult};
- *     uint32_t {@link #uuidCapacityInput};
- *     uint32_t {@link #uuidCountOutput};
- *     {@link XrUuidEXT XrUuidEXT} * {@link #uuids};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrResult futureResult;
+ *     uint32_t uuidCapacityInput;
+ *     uint32_t uuidCountOutput;
+ *     {@link XrUuidEXT XrUuidEXT} * uuids;
+ * }}</pre>
  */
 public class XrSpatialAnchorsQueryCompletionML extends Struct<XrSpatialAnchorsQueryCompletionML> implements NativeResource {
 
@@ -128,38 +86,38 @@ public class XrSpatialAnchorsQueryCompletionML extends Struct<XrSpatialAnchorsQu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrResult} of the asynchronous operation. */
+    /** @return the value of the {@code futureResult} field. */
     @NativeType("XrResult")
     public int futureResult() { return nfutureResult(address()); }
-    /** the capacity of the {@code uuids} array, or 0 to indicate a request to retrieve the required capacity. */
+    /** @return the value of the {@code uuidCapacityInput} field. */
     @NativeType("uint32_t")
     public int uuidCapacityInput() { return nuuidCapacityInput(address()); }
-    /** the number of elements populated in {@code uuids}, or the required capacity in the case that {@code uuidCapacityInput} is insufficient. */
+    /** @return the value of the {@code uuidCountOutput} field. */
     @NativeType("uint32_t")
     public int uuidCountOutput() { return nuuidCountOutput(address()); }
-    /** an array of {@link XrUuidEXT}. */
+    /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
     @NativeType("XrUuidEXT *")
     public XrUuidEXT.@Nullable Buffer uuids() { return nuuids(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsQueryCompletionML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML} value to the {@code type} field. */
     public XrSpatialAnchorsQueryCompletionML type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsQueryCompletionML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #futureResult} field. */
+    /** Sets the specified value to the {@code futureResult} field. */
     public XrSpatialAnchorsQueryCompletionML futureResult(@NativeType("XrResult") int value) { nfutureResult(address(), value); return this; }
-    /** Sets the specified value to the {@link #uuidCapacityInput} field. */
+    /** Sets the specified value to the {@code uuidCapacityInput} field. */
     public XrSpatialAnchorsQueryCompletionML uuidCapacityInput(@NativeType("uint32_t") int value) { nuuidCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@link #uuidCountOutput} field. */
+    /** Sets the specified value to the {@code uuidCountOutput} field. */
     public XrSpatialAnchorsQueryCompletionML uuidCountOutput(@NativeType("uint32_t") int value) { nuuidCountOutput(address(), value); return this; }
-    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link #uuids} field. */
+    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
     public XrSpatialAnchorsQueryCompletionML uuids(@NativeType("XrUuidEXT *") XrUuidEXT.@Nullable Buffer value) { nuuids(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -383,38 +341,38 @@ public class XrSpatialAnchorsQueryCompletionML extends Struct<XrSpatialAnchorsQu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsQueryCompletionML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsQueryCompletionML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsQueryCompletionML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpatialAnchorsQueryCompletionML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsQueryCompletionML#futureResult} field. */
+        /** @return the value of the {@code futureResult} field. */
         @NativeType("XrResult")
         public int futureResult() { return XrSpatialAnchorsQueryCompletionML.nfutureResult(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsQueryCompletionML#uuidCapacityInput} field. */
+        /** @return the value of the {@code uuidCapacityInput} field. */
         @NativeType("uint32_t")
         public int uuidCapacityInput() { return XrSpatialAnchorsQueryCompletionML.nuuidCapacityInput(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsQueryCompletionML#uuidCountOutput} field. */
+        /** @return the value of the {@code uuidCountOutput} field. */
         @NativeType("uint32_t")
         public int uuidCountOutput() { return XrSpatialAnchorsQueryCompletionML.nuuidCountOutput(address()); }
-        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@link XrSpatialAnchorsQueryCompletionML#uuids} field. */
+        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
         @NativeType("XrUuidEXT *")
         public XrUuidEXT.@Nullable Buffer uuids() { return XrSpatialAnchorsQueryCompletionML.nuuids(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsQueryCompletionML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsQueryCompletionML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsQueryCompletionML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML} value to the {@link XrSpatialAnchorsQueryCompletionML#type} field. */
+        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML} value to the {@code type} field. */
         public XrSpatialAnchorsQueryCompletionML.Buffer type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsQueryCompletionML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsQueryCompletionML.Buffer next(@NativeType("void *") long value) { XrSpatialAnchorsQueryCompletionML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsQueryCompletionML#futureResult} field. */
+        /** Sets the specified value to the {@code futureResult} field. */
         public XrSpatialAnchorsQueryCompletionML.Buffer futureResult(@NativeType("XrResult") int value) { XrSpatialAnchorsQueryCompletionML.nfutureResult(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsQueryCompletionML#uuidCapacityInput} field. */
+        /** Sets the specified value to the {@code uuidCapacityInput} field. */
         public XrSpatialAnchorsQueryCompletionML.Buffer uuidCapacityInput(@NativeType("uint32_t") int value) { XrSpatialAnchorsQueryCompletionML.nuuidCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsQueryCompletionML#uuidCountOutput} field. */
+        /** Sets the specified value to the {@code uuidCountOutput} field. */
         public XrSpatialAnchorsQueryCompletionML.Buffer uuidCountOutput(@NativeType("uint32_t") int value) { XrSpatialAnchorsQueryCompletionML.nuuidCountOutput(address(), value); return this; }
-        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link XrSpatialAnchorsQueryCompletionML#uuids} field. */
+        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
         public XrSpatialAnchorsQueryCompletionML.Buffer uuids(@NativeType("XrUuidEXT *") XrUuidEXT.@Nullable Buffer value) { XrSpatialAnchorsQueryCompletionML.nuuids(address(), value); return this; }
 
     }

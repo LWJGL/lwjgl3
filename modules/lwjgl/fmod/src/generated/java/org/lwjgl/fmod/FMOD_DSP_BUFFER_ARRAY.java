@@ -17,18 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * DSP Structures
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_BUFFER_ARRAY {
  *     int numbuffers;
  *     int * buffernumchannels;
  *     FMOD_CHANNELMASK * bufferchannelmask;
  *     float ** buffers;
  *     FMOD_SPEAKERMODE speakermode;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FMOD_DSP_BUFFER_ARRAY")
 public class FMOD_DSP_BUFFER_ARRAY extends Struct<FMOD_DSP_BUFFER_ARRAY> implements NativeResource {

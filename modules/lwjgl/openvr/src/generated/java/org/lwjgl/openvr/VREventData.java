@@ -14,9 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union VREvent_Data_t {
  *     {@link VREventReserved VREvent_Reserved_t} reserved;
  *     {@link VREventController VREvent_Controller_t} controller;
@@ -49,7 +47,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link VREventHDCPError VREvent_HDCPError_t} hdcpError;
  *     {@link VREventAudioVolumeControl VREvent_AudioVolumeControl_t} audioVolumeControl;
  *     {@link VREventAudioMuteControl VREvent_AudioMuteControl_t} audioMuteControl;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("union VREvent_Data_t")
 public class VREventData extends Struct<VREventData> {

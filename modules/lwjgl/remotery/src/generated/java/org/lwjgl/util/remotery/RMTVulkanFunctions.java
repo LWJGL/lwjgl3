@@ -17,28 +17,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Function pointers to Vulkan functions
- * 
- * <p>Untyped so that the Vulkan headers are not required.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct rmtVulkanFunctions {
  *     void * vkGetPhysicalDeviceProperties;
  *     void * vkQueueSubmit;
  *     void * vkQueueWaitIdle;
  *     void * vkCreateQueryPool;
  *     void * vkDestroyQueryPool;
- *     void * {@link #vkResetQueryPool};
+ *     void * vkResetQueryPool;
  *     void * vkGetQueryPoolResults;
  *     void * vkCmdWriteTimestamp;
  *     void * vkCreateSemaphore;
  *     void * vkDestroySemaphore;
- *     void * {@link #vkSignalSemaphore};
- *     void * {@link #vkGetSemaphoreCounterValue};
- *     void * {@link #vkGetCalibratedTimestampsEXT};
- * }</code></pre>
+ *     void * vkSignalSemaphore;
+ *     void * vkGetSemaphoreCounterValue;
+ *     void * vkGetCalibratedTimestampsEXT;
+ * }}</pre>
  */
 @NativeType("struct rmtVulkanFunctions")
 public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements NativeResource {
@@ -137,7 +131,7 @@ public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements Na
     /** @return the value of the {@code vkDestroyQueryPool} field. */
     @NativeType("void *")
     public long vkDestroyQueryPool() { return nvkDestroyQueryPool(address()); }
-    /** {@code vkResetQueryPool} (Vulkan 1.2+ with {@code hostQueryReset}) or {@code vkResetQueryPoolEXT} (VK_EXT_host_query_reset) */
+    /** @return the value of the {@code vkResetQueryPool} field. */
     @NativeType("void *")
     public long vkResetQueryPool() { return nvkResetQueryPool(address()); }
     /** @return the value of the {@code vkGetQueryPoolResults} field. */
@@ -152,13 +146,13 @@ public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements Na
     /** @return the value of the {@code vkDestroySemaphore} field. */
     @NativeType("void *")
     public long vkDestroySemaphore() { return nvkDestroySemaphore(address()); }
-    /** {@code vkSignalSemaphore} (Vulkan 1.2+ with {@code timelineSemaphore}) or {@code vkSignalSemaphoreKHR} (VK_KHR_timeline_semaphore) */
+    /** @return the value of the {@code vkSignalSemaphore} field. */
     @NativeType("void *")
     public long vkSignalSemaphore() { return nvkSignalSemaphore(address()); }
-    /** {@code vkGetSemaphoreCounterValue} (Vulkan 1.2+ with {@code timelineSemaphore}) or {@code vkGetSemaphoreCounterValueKHR} (VK_KHR_timeline_semaphore) */
+    /** @return the value of the {@code vkGetSemaphoreCounterValue} field. */
     @NativeType("void *")
     public long vkGetSemaphoreCounterValue() { return nvkGetSemaphoreCounterValue(address()); }
-    /** {@code vkGetCalibratedTimestampsKHR} (VK_KHR_calibrated_timestamps) or {@code vkGetCalibratedTimestampsEXT} (VK_EXT_calibrated_timestamps) */
+    /** @return the value of the {@code vkGetCalibratedTimestampsEXT} field. */
     @NativeType("void *")
     public long vkGetCalibratedTimestampsEXT() { return nvkGetCalibratedTimestampsEXT(address()); }
 
@@ -172,7 +166,7 @@ public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements Na
     public RMTVulkanFunctions vkCreateQueryPool(@NativeType("void *") long value) { nvkCreateQueryPool(address(), value); return this; }
     /** Sets the specified value to the {@code vkDestroyQueryPool} field. */
     public RMTVulkanFunctions vkDestroyQueryPool(@NativeType("void *") long value) { nvkDestroyQueryPool(address(), value); return this; }
-    /** Sets the specified value to the {@link #vkResetQueryPool} field. */
+    /** Sets the specified value to the {@code vkResetQueryPool} field. */
     public RMTVulkanFunctions vkResetQueryPool(@NativeType("void *") long value) { nvkResetQueryPool(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetQueryPoolResults} field. */
     public RMTVulkanFunctions vkGetQueryPoolResults(@NativeType("void *") long value) { nvkGetQueryPoolResults(address(), value); return this; }
@@ -182,11 +176,11 @@ public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements Na
     public RMTVulkanFunctions vkCreateSemaphore(@NativeType("void *") long value) { nvkCreateSemaphore(address(), value); return this; }
     /** Sets the specified value to the {@code vkDestroySemaphore} field. */
     public RMTVulkanFunctions vkDestroySemaphore(@NativeType("void *") long value) { nvkDestroySemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@link #vkSignalSemaphore} field. */
+    /** Sets the specified value to the {@code vkSignalSemaphore} field. */
     public RMTVulkanFunctions vkSignalSemaphore(@NativeType("void *") long value) { nvkSignalSemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@link #vkGetSemaphoreCounterValue} field. */
+    /** Sets the specified value to the {@code vkGetSemaphoreCounterValue} field. */
     public RMTVulkanFunctions vkGetSemaphoreCounterValue(@NativeType("void *") long value) { nvkGetSemaphoreCounterValue(address(), value); return this; }
-    /** Sets the specified value to the {@link #vkGetCalibratedTimestampsEXT} field. */
+    /** Sets the specified value to the {@code vkGetCalibratedTimestampsEXT} field. */
     public RMTVulkanFunctions vkGetCalibratedTimestampsEXT(@NativeType("void *") long value) { nvkGetCalibratedTimestampsEXT(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -478,7 +472,7 @@ public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements Na
         /** @return the value of the {@code vkDestroyQueryPool} field. */
         @NativeType("void *")
         public long vkDestroyQueryPool() { return RMTVulkanFunctions.nvkDestroyQueryPool(address()); }
-        /** @return the value of the {@link RMTVulkanFunctions#vkResetQueryPool} field. */
+        /** @return the value of the {@code vkResetQueryPool} field. */
         @NativeType("void *")
         public long vkResetQueryPool() { return RMTVulkanFunctions.nvkResetQueryPool(address()); }
         /** @return the value of the {@code vkGetQueryPoolResults} field. */
@@ -493,13 +487,13 @@ public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements Na
         /** @return the value of the {@code vkDestroySemaphore} field. */
         @NativeType("void *")
         public long vkDestroySemaphore() { return RMTVulkanFunctions.nvkDestroySemaphore(address()); }
-        /** @return the value of the {@link RMTVulkanFunctions#vkSignalSemaphore} field. */
+        /** @return the value of the {@code vkSignalSemaphore} field. */
         @NativeType("void *")
         public long vkSignalSemaphore() { return RMTVulkanFunctions.nvkSignalSemaphore(address()); }
-        /** @return the value of the {@link RMTVulkanFunctions#vkGetSemaphoreCounterValue} field. */
+        /** @return the value of the {@code vkGetSemaphoreCounterValue} field. */
         @NativeType("void *")
         public long vkGetSemaphoreCounterValue() { return RMTVulkanFunctions.nvkGetSemaphoreCounterValue(address()); }
-        /** @return the value of the {@link RMTVulkanFunctions#vkGetCalibratedTimestampsEXT} field. */
+        /** @return the value of the {@code vkGetCalibratedTimestampsEXT} field. */
         @NativeType("void *")
         public long vkGetCalibratedTimestampsEXT() { return RMTVulkanFunctions.nvkGetCalibratedTimestampsEXT(address()); }
 
@@ -513,7 +507,7 @@ public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements Na
         public RMTVulkanFunctions.Buffer vkCreateQueryPool(@NativeType("void *") long value) { RMTVulkanFunctions.nvkCreateQueryPool(address(), value); return this; }
         /** Sets the specified value to the {@code vkDestroyQueryPool} field. */
         public RMTVulkanFunctions.Buffer vkDestroyQueryPool(@NativeType("void *") long value) { RMTVulkanFunctions.nvkDestroyQueryPool(address(), value); return this; }
-        /** Sets the specified value to the {@link RMTVulkanFunctions#vkResetQueryPool} field. */
+        /** Sets the specified value to the {@code vkResetQueryPool} field. */
         public RMTVulkanFunctions.Buffer vkResetQueryPool(@NativeType("void *") long value) { RMTVulkanFunctions.nvkResetQueryPool(address(), value); return this; }
         /** Sets the specified value to the {@code vkGetQueryPoolResults} field. */
         public RMTVulkanFunctions.Buffer vkGetQueryPoolResults(@NativeType("void *") long value) { RMTVulkanFunctions.nvkGetQueryPoolResults(address(), value); return this; }
@@ -523,11 +517,11 @@ public class RMTVulkanFunctions extends Struct<RMTVulkanFunctions> implements Na
         public RMTVulkanFunctions.Buffer vkCreateSemaphore(@NativeType("void *") long value) { RMTVulkanFunctions.nvkCreateSemaphore(address(), value); return this; }
         /** Sets the specified value to the {@code vkDestroySemaphore} field. */
         public RMTVulkanFunctions.Buffer vkDestroySemaphore(@NativeType("void *") long value) { RMTVulkanFunctions.nvkDestroySemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@link RMTVulkanFunctions#vkSignalSemaphore} field. */
+        /** Sets the specified value to the {@code vkSignalSemaphore} field. */
         public RMTVulkanFunctions.Buffer vkSignalSemaphore(@NativeType("void *") long value) { RMTVulkanFunctions.nvkSignalSemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@link RMTVulkanFunctions#vkGetSemaphoreCounterValue} field. */
+        /** Sets the specified value to the {@code vkGetSemaphoreCounterValue} field. */
         public RMTVulkanFunctions.Buffer vkGetSemaphoreCounterValue(@NativeType("void *") long value) { RMTVulkanFunctions.nvkGetSemaphoreCounterValue(address(), value); return this; }
-        /** Sets the specified value to the {@link RMTVulkanFunctions#vkGetCalibratedTimestampsEXT} field. */
+        /** Sets the specified value to the {@code vkGetCalibratedTimestampsEXT} field. */
         public RMTVulkanFunctions.Buffer vkGetCalibratedTimestampsEXT(@NativeType("void *") long value) { RMTVulkanFunctions.nvkGetCalibratedTimestampsEXT(address(), value); return this; }
 
     }

@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceVertexAttributeDivisorFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 vertexAttributeInstanceRateDivisor;
  *     VkBool32 vertexAttributeInstanceRateZeroDivisor;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT extends VkPhysicalDeviceVertexAttributeDivisorFeatures {
 

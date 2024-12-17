@@ -16,39 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * (None).
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code image} was created with a <em>multi-planar</em> format and the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} flag, there <b>must</b> be a {@link VkImagePlaneMemoryRequirementsInfo} included in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
- * <li>If {@code image} was created with {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} and with {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then there <b>must</b> be a {@link VkImagePlaneMemoryRequirementsInfo} included in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
- * <li>If {@code image} was not created with the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} flag, there <b>must</b> not be a {@link VkImagePlaneMemoryRequirementsInfo} included in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
- * <li>If {@code image} was created with a single-plane format and with any {@code tiling} other than {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then there <b>must</b> not be a {@link VkImagePlaneMemoryRequirementsInfo} included in the {@code pNext} chain of the {@link VkImageMemoryRequirementsInfo2} structure</li>
- * <li>If {@code image} was created with the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} external memory handle type, then {@code image} <b>must</b> be bound to memory</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkImagePlaneMemoryRequirementsInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2}, {@link KHRGetMemoryRequirements2#vkGetImageMemoryRequirements2KHR GetImageMemoryRequirements2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageMemoryRequirementsInfo2 {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImage {@link #image};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImage image;
+ * }}</pre>
  */
 public class VkImageMemoryRequirementsInfo2 extends Struct<VkImageMemoryRequirementsInfo2> implements NativeResource {
 
@@ -101,27 +74,27 @@ public class VkImageMemoryRequirementsInfo2 extends Struct<VkImageMemoryRequirem
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the image to query. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageMemoryRequirementsInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2} value to the {@code sType} field. */
     public VkImageMemoryRequirementsInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageMemoryRequirementsInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkImagePlaneMemoryRequirementsInfo} value to the {@code pNext} chain. */
     public VkImageMemoryRequirementsInfo2 pNext(VkImagePlaneMemoryRequirementsInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImagePlaneMemoryRequirementsInfoKHR} value to the {@code pNext} chain. */
     public VkImageMemoryRequirementsInfo2 pNext(VkImagePlaneMemoryRequirementsInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #image} field. */
+    /** Sets the specified value to the {@code image} field. */
     public VkImageMemoryRequirementsInfo2 image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,27 +309,27 @@ public class VkImageMemoryRequirementsInfo2 extends Struct<VkImageMemoryRequirem
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageMemoryRequirementsInfo2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageMemoryRequirementsInfo2.nsType(address()); }
-        /** @return the value of the {@link VkImageMemoryRequirementsInfo2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageMemoryRequirementsInfo2.npNext(address()); }
-        /** @return the value of the {@link VkImageMemoryRequirementsInfo2#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return VkImageMemoryRequirementsInfo2.nimage(address()); }
 
-        /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageMemoryRequirementsInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkImageMemoryRequirementsInfo2.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2} value to the {@link VkImageMemoryRequirementsInfo2#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2 STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2} value to the {@code sType} field. */
         public VkImageMemoryRequirementsInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2); }
-        /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageMemoryRequirementsInfo2.Buffer pNext(@NativeType("void const *") long value) { VkImageMemoryRequirementsInfo2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkImagePlaneMemoryRequirementsInfo} value to the {@code pNext} chain. */
         public VkImageMemoryRequirementsInfo2.Buffer pNext(VkImagePlaneMemoryRequirementsInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImagePlaneMemoryRequirementsInfoKHR} value to the {@code pNext} chain. */
         public VkImageMemoryRequirementsInfo2.Buffer pNext(VkImagePlaneMemoryRequirementsInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkImageMemoryRequirementsInfo2#image} field. */
+        /** Sets the specified value to the {@code image} field. */
         public VkImageMemoryRequirementsInfo2.Buffer image(@NativeType("VkImage") long value) { VkImageMemoryRequirementsInfo2.nimage(address(), value); return this; }
 
     }

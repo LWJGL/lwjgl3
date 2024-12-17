@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Union containing a performance counter result.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union VkPerformanceCounterResultKHR {
  *     int32_t int32;
  *     int64_t int64;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t uint64;
  *     float float32;
  *     double float64;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPerformanceCounterResultKHR extends Struct<VkPerformanceCounterResultKHR> implements NativeResource {
 

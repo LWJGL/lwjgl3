@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_STUDIO_SYSTEM *system,
- *     FMOD_STUDIO_SYSTEM_CALLBACK_TYPE type,
- *     void *commanddata,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_STUDIO_SYSTEM_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_STUDIO_SYSTEM_CALLBACK")
 public interface FMOD_STUDIO_SYSTEM_CALLBACKI extends CallbackI {
@@ -47,7 +37,7 @@ public interface FMOD_STUDIO_SYSTEM_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** FMOD Studio callbacks. */
+    /** {@code FMOD_RESULT (* FMOD_STUDIO_SYSTEM_CALLBACK) (FMOD_STUDIO_SYSTEM * system, FMOD_STUDIO_SYSTEM_CALLBACK_TYPE type, void * commanddata, void * userdata)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("FMOD_STUDIO_SYSTEM *") long system, @NativeType("FMOD_STUDIO_SYSTEM_CALLBACK_TYPE") int type, @NativeType("void *") long commanddata, @NativeType("void *") long userdata);
 
 }

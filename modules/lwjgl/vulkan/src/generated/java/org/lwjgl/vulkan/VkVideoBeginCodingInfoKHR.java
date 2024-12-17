@@ -17,73 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying video coding scope begin information.
- * 
- * <h5>Description</h5>
- * 
- * <p>Limiting values are defined below that are referenced by the relevant valid usage statements of this structure.</p>
- * 
- * <ul>
- * <li>Let {@code VkOffset2D codedOffsetGranularity} be the minimum alignment requirement for the coded offset of video picture resources. Unless otherwise defined, the value of the {@code x} and {@code y} members of {@code codedOffsetGranularity} are 0.
- * 
- * <ul>
- * <li>If {@code videoSession} was created with an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264-profile">H.264 decode profile</a> with a {@link VkVideoDecodeH264ProfileInfoKHR}{@code ::pictureLayout} of {@link KHRVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR}, then {@code codedOffsetGranularity} is equal to {@link VkVideoDecodeH264CapabilitiesKHR}{@code ::fieldOffsetGranularity}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for that video profile.</li>
- * </ul>
- * </li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code videoSession} <b>must</b> have memory bound to all of its memory bindings returned by {@link KHRVideoQueue#vkGetVideoSessionMemoryRequirementsKHR GetVideoSessionMemoryRequirementsKHR} for {@code videoSession}</li>
- * <li>Each non-negative {@link VkVideoReferenceSlotInfoKHR}{@code ::slotIndex} specified in the elements of {@code pReferenceSlots} <b>must</b> be less than the {@link VkVideoSessionCreateInfoKHR}{@code ::maxDpbSlots} specified when {@code videoSession} was created</li>
- * <li>Each video picture resource corresponding to any non-{@code NULL} {@code pPictureResource} member specified in the elements of {@code pReferenceSlots} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-picture-resource-uniqueness">unique</a> within {@code pReferenceSlots}</li>
- * <li>If the {@code pPictureResource} member of any element of {@code pReferenceSlots} is not {@code NULL}, then the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-profile-compatibility">compatible</a> with the video profile {@code videoSession} was created with</li>
- * <li>If the {@code pPictureResource} member of any element of {@code pReferenceSlots} is not {@code NULL}, then the format of the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> match the {@link VkVideoSessionCreateInfoKHR}{@code ::referencePictureFormat} {@code videoSession} was created with</li>
- * <li>If the {@code pPictureResource} member of any element of {@code pReferenceSlots} is not {@code NULL}, then its {@code codedOffset} member <b>must</b> be an integer multiple of {@code codedOffsetGranularity}</li>
- * <li>If the {@code pPictureResource} member of any element of {@code pReferenceSlots} is not {@code NULL}, then its {@code codedExtent} member <b>must</b> be between {@code minCodedExtent} and {@code maxCodedExtent}, inclusive, {@code videoSession} was created with</li>
- * <li>If {@link VkVideoCapabilitiesKHR}{@code ::flags} does not include {@link KHRVideoQueue#VK_VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR VIDEO_CAPABILITY_SEPARATE_REFERENCE_IMAGES_BIT_KHR}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile {@code videoSession} was created with, then {@code pPictureResource→imageViewBinding} of all elements of {@code pReferenceSlots} with a non-{@code NULL} {@code pPictureResource} member <b>must</b> specify image views created from the same image</li>
- * <li>If {@code videoSession} was created with a decode operation and the {@code slotIndex} member of any element of {@code pReferenceSlots} is not negative, then the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> have been created with {@link KHRVideoDecodeQueue#VK_IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR}</li>
- * <li>If {@code videoSession} was created with an encode operation and the {@code slotIndex} member of any element of {@code pReferenceSlots} is not negative, then the image view specified in {@code pPictureResource→imageViewBinding} for that element <b>must</b> have been created with {@link KHRVideoEncodeQueue#VK_IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR}</li>
- * <li>If {@code videoSession} was created with the video codec operation {@link KHRVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code videoSession} was created with the video codec operation {@link KHRVideoDecodeH265#VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code videoSession} was created with the video codec operation {@link KHRVideoDecodeAV1#VK_VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code videoSession} was created with the video codec operation {@link KHRVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code videoSession} was created with the video codec operation {@link KHRVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code videoSession} was created with the video codec operation {@link KHRVideoEncodeAV1#VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR}, then {@code videoSessionParameters} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code videoSessionParameters} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have been created with {@code videoSession} specified in {@link VkVideoSessionParametersCreateInfoKHR}{@code ::videoSession}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR}, {@link VkVideoEncodeAV1RateControlInfoKHR}, {@link VkVideoEncodeH264GopRemainingFrameInfoKHR}, {@link VkVideoEncodeH264RateControlInfoKHR}, {@link VkVideoEncodeH265GopRemainingFrameInfoKHR}, {@link VkVideoEncodeH265RateControlInfoKHR}, or {@link VkVideoEncodeRateControlInfoKHR}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code videoSession} <b>must</b> be a valid {@code VkVideoSessionKHR} handle</li>
- * <li>If {@code videoSessionParameters} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code videoSessionParameters} <b>must</b> be a valid {@code VkVideoSessionParametersKHR} handle</li>
- * <li>If {@code referenceSlotCount} is not 0, {@code pReferenceSlots} <b>must</b> be a valid pointer to an array of {@code referenceSlotCount} valid {@link VkVideoReferenceSlotInfoKHR} structures</li>
- * <li>If {@code videoSessionParameters} is a valid handle, it <b>must</b> have been created, allocated, or retrieved from {@code videoSession}</li>
- * <li>Both of {@code videoSession}, and {@code videoSessionParameters} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoReferenceSlotInfoKHR}, {@link KHRVideoQueue#vkCmdBeginVideoCodingKHR CmdBeginVideoCodingKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoBeginCodingInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkVideoBeginCodingFlagsKHR {@link #flags};
- *     VkVideoSessionKHR {@link #videoSession};
- *     VkVideoSessionParametersKHR {@link #videoSessionParameters};
- *     uint32_t {@link #referenceSlotCount};
- *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * {@link #pReferenceSlots};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkVideoBeginCodingFlagsKHR flags;
+ *     VkVideoSessionKHR videoSession;
+ *     VkVideoSessionParametersKHR videoSessionParameters;
+ *     uint32_t referenceSlotCount;
+ *     {@link VkVideoReferenceSlotInfoKHR VkVideoReferenceSlotInfoKHR} const * pReferenceSlots;
+ * }}</pre>
  */
 public class VkVideoBeginCodingInfoKHR extends Struct<VkVideoBeginCodingInfoKHR> implements NativeResource {
 
@@ -148,33 +91,33 @@ public class VkVideoBeginCodingInfoKHR extends Struct<VkVideoBeginCodingInfoKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkVideoBeginCodingFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the video session object to be bound for the processing of the video commands. */
+    /** @return the value of the {@code videoSession} field. */
     @NativeType("VkVideoSessionKHR")
     public long videoSession() { return nvideoSession(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a handle of a {@code VkVideoSessionParametersKHR} object to be used for the processing of the video commands. If {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then no video session parameters object is bound for the duration of the video coding scope. */
+    /** @return the value of the {@code videoSessionParameters} field. */
     @NativeType("VkVideoSessionParametersKHR")
     public long videoSessionParameters() { return nvideoSessionParameters(address()); }
-    /** the number of elements in the {@code pReferenceSlots} array. */
+    /** @return the value of the {@code referenceSlotCount} field. */
     @NativeType("uint32_t")
     public int referenceSlotCount() { return nreferenceSlotCount(address()); }
-    /** a pointer to an array of {@link VkVideoReferenceSlotInfoKHR} structures specifying the information used to determine the set of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#bound-reference-picture-resources">bound reference picture resources</a> for the video coding scope and their initial association with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> indices. */
+    /** @return a {@link VkVideoReferenceSlotInfoKHR.Buffer} view of the struct array pointed to by the {@code pReferenceSlots} field. */
     @NativeType("VkVideoReferenceSlotInfoKHR const *")
     public VkVideoReferenceSlotInfoKHR.@Nullable Buffer pReferenceSlots() { return npReferenceSlots(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoBeginCodingInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR} value to the {@code sType} field. */
     public VkVideoBeginCodingInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoBeginCodingInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR} value to the {@code pNext} chain. */
     public VkVideoBeginCodingInfoKHR pNext(VkVideoEncodeAV1GopRemainingFrameInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -190,13 +133,13 @@ public class VkVideoBeginCodingInfoKHR extends Struct<VkVideoBeginCodingInfoKHR>
     public VkVideoBeginCodingInfoKHR pNext(VkVideoEncodeH265RateControlInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeRateControlInfoKHR} value to the {@code pNext} chain. */
     public VkVideoBeginCodingInfoKHR pNext(VkVideoEncodeRateControlInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkVideoBeginCodingInfoKHR flags(@NativeType("VkVideoBeginCodingFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #videoSession} field. */
+    /** Sets the specified value to the {@code videoSession} field. */
     public VkVideoBeginCodingInfoKHR videoSession(@NativeType("VkVideoSessionKHR") long value) { nvideoSession(address(), value); return this; }
-    /** Sets the specified value to the {@link #videoSessionParameters} field. */
+    /** Sets the specified value to the {@code videoSessionParameters} field. */
     public VkVideoBeginCodingInfoKHR videoSessionParameters(@NativeType("VkVideoSessionParametersKHR") long value) { nvideoSessionParameters(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@link #pReferenceSlots} field. */
+    /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@code pReferenceSlots} field. */
     public VkVideoBeginCodingInfoKHR pReferenceSlots(@NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR.@Nullable Buffer value) { npReferenceSlots(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -425,33 +368,33 @@ public class VkVideoBeginCodingInfoKHR extends Struct<VkVideoBeginCodingInfoKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoBeginCodingInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoBeginCodingInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoBeginCodingInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoBeginCodingInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoBeginCodingInfoKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkVideoBeginCodingFlagsKHR")
         public int flags() { return VkVideoBeginCodingInfoKHR.nflags(address()); }
-        /** @return the value of the {@link VkVideoBeginCodingInfoKHR#videoSession} field. */
+        /** @return the value of the {@code videoSession} field. */
         @NativeType("VkVideoSessionKHR")
         public long videoSession() { return VkVideoBeginCodingInfoKHR.nvideoSession(address()); }
-        /** @return the value of the {@link VkVideoBeginCodingInfoKHR#videoSessionParameters} field. */
+        /** @return the value of the {@code videoSessionParameters} field. */
         @NativeType("VkVideoSessionParametersKHR")
         public long videoSessionParameters() { return VkVideoBeginCodingInfoKHR.nvideoSessionParameters(address()); }
-        /** @return the value of the {@link VkVideoBeginCodingInfoKHR#referenceSlotCount} field. */
+        /** @return the value of the {@code referenceSlotCount} field. */
         @NativeType("uint32_t")
         public int referenceSlotCount() { return VkVideoBeginCodingInfoKHR.nreferenceSlotCount(address()); }
-        /** @return a {@link VkVideoReferenceSlotInfoKHR.Buffer} view of the struct array pointed to by the {@link VkVideoBeginCodingInfoKHR#pReferenceSlots} field. */
+        /** @return a {@link VkVideoReferenceSlotInfoKHR.Buffer} view of the struct array pointed to by the {@code pReferenceSlots} field. */
         @NativeType("VkVideoReferenceSlotInfoKHR const *")
         public VkVideoReferenceSlotInfoKHR.@Nullable Buffer pReferenceSlots() { return VkVideoBeginCodingInfoKHR.npReferenceSlots(address()); }
 
-        /** Sets the specified value to the {@link VkVideoBeginCodingInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoBeginCodingInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoBeginCodingInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR} value to the {@link VkVideoBeginCodingInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR} value to the {@code sType} field. */
         public VkVideoBeginCodingInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoBeginCodingInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoBeginCodingInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoBeginCodingInfoKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoEncodeAV1GopRemainingFrameInfoKHR} value to the {@code pNext} chain. */
         public VkVideoBeginCodingInfoKHR.Buffer pNext(VkVideoEncodeAV1GopRemainingFrameInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -467,13 +410,13 @@ public class VkVideoBeginCodingInfoKHR extends Struct<VkVideoBeginCodingInfoKHR>
         public VkVideoBeginCodingInfoKHR.Buffer pNext(VkVideoEncodeH265RateControlInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeRateControlInfoKHR} value to the {@code pNext} chain. */
         public VkVideoBeginCodingInfoKHR.Buffer pNext(VkVideoEncodeRateControlInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkVideoBeginCodingInfoKHR#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkVideoBeginCodingInfoKHR.Buffer flags(@NativeType("VkVideoBeginCodingFlagsKHR") int value) { VkVideoBeginCodingInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoBeginCodingInfoKHR#videoSession} field. */
+        /** Sets the specified value to the {@code videoSession} field. */
         public VkVideoBeginCodingInfoKHR.Buffer videoSession(@NativeType("VkVideoSessionKHR") long value) { VkVideoBeginCodingInfoKHR.nvideoSession(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoBeginCodingInfoKHR#videoSessionParameters} field. */
+        /** Sets the specified value to the {@code videoSessionParameters} field. */
         public VkVideoBeginCodingInfoKHR.Buffer videoSessionParameters(@NativeType("VkVideoSessionParametersKHR") long value) { VkVideoBeginCodingInfoKHR.nvideoSessionParameters(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@link VkVideoBeginCodingInfoKHR#pReferenceSlots} field. */
+        /** Sets the address of the specified {@link VkVideoReferenceSlotInfoKHR.Buffer} to the {@code pReferenceSlots} field. */
         public VkVideoBeginCodingInfoKHR.Buffer pReferenceSlots(@NativeType("VkVideoReferenceSlotInfoKHR const *") VkVideoReferenceSlotInfoKHR.@Nullable Buffer value) { VkVideoBeginCodingInfoKHR.npReferenceSlots(address(), value); return this; }
 
     }

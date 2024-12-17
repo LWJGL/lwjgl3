@@ -16,19 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Tracking-related properties of a particular system.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSystemGraphicsProperties}, {@link XrSystemProperties}, {@link XR10#xrGetSystem GetSystem}, {@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemTrackingProperties {
- *     XrBool32 {@link #orientationTracking};
- *     XrBool32 {@link #positionTracking};
- * }</code></pre>
+ *     XrBool32 orientationTracking;
+ *     XrBool32 positionTracking;
+ * }}</pre>
  */
 public class XrSystemTrackingProperties extends Struct<XrSystemTrackingProperties> implements NativeResource {
 
@@ -78,16 +70,16 @@ public class XrSystemTrackingProperties extends Struct<XrSystemTrackingPropertie
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** set to {@link XR10#XR_TRUE TRUE} to indicate the system supports orientational tracking of the view pose(s), {@link XR10#XR_FALSE FALSE} otherwise. */
+    /** @return the value of the {@code orientationTracking} field. */
     @NativeType("XrBool32")
     public boolean orientationTracking() { return norientationTracking(address()) != 0; }
-    /** set to {@link XR10#XR_TRUE TRUE} to indicate the system supports positional tracking of the view pose(s), {@link XR10#XR_FALSE FALSE} otherwise. */
+    /** @return the value of the {@code positionTracking} field. */
     @NativeType("XrBool32")
     public boolean positionTracking() { return npositionTracking(address()) != 0; }
 
-    /** Sets the specified value to the {@link #orientationTracking} field. */
+    /** Sets the specified value to the {@code orientationTracking} field. */
     public XrSystemTrackingProperties orientationTracking(@NativeType("XrBool32") boolean value) { norientationTracking(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #positionTracking} field. */
+    /** Sets the specified value to the {@code positionTracking} field. */
     public XrSystemTrackingProperties positionTracking(@NativeType("XrBool32") boolean value) { npositionTracking(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -277,16 +269,16 @@ public class XrSystemTrackingProperties extends Struct<XrSystemTrackingPropertie
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemTrackingProperties#orientationTracking} field. */
+        /** @return the value of the {@code orientationTracking} field. */
         @NativeType("XrBool32")
         public boolean orientationTracking() { return XrSystemTrackingProperties.norientationTracking(address()) != 0; }
-        /** @return the value of the {@link XrSystemTrackingProperties#positionTracking} field. */
+        /** @return the value of the {@code positionTracking} field. */
         @NativeType("XrBool32")
         public boolean positionTracking() { return XrSystemTrackingProperties.npositionTracking(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemTrackingProperties#orientationTracking} field. */
+        /** Sets the specified value to the {@code orientationTracking} field. */
         public XrSystemTrackingProperties.Buffer orientationTracking(@NativeType("XrBool32") boolean value) { XrSystemTrackingProperties.norientationTracking(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrSystemTrackingProperties#positionTracking} field. */
+        /** Sets the specified value to the {@code positionTracking} field. */
         public XrSystemTrackingProperties.Buffer positionTracking(@NativeType("XrBool32") boolean value) { XrSystemTrackingProperties.npositionTracking(address(), value ? 1 : 0); return this; }
 
     }

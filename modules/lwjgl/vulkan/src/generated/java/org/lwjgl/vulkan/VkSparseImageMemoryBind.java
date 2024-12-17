@@ -16,49 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying sparse image memory bind.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-sparseResidencyAliased">{@code sparseResidencyAliased}</a> feature is not enabled, and if any other resources are bound to ranges of {@code memory}, the range of {@code memory} being bound <b>must</b> not overlap with those bound ranges</li>
- * <li>{@code memory} and {@code memoryOffset} <b>must</b> match the memory requirements of the calling command’s {@code image}, as described in section <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-association">Resource Memory Association</a></li>
- * <li>{@code offset.x} <b>must</b> be a multiple of the sparse image block width ({@link VkSparseImageFormatProperties}{@code ::imageGranularity.width}) of the image</li>
- * <li>{@code extent.width} <b>must</b> be greater than 0</li>
- * <li>{@code extent.width} <b>must</b> either be a multiple of the sparse image block width of the image, or else <code>(extent.width + offset.x)</code> <b>must</b> equal the width of the image subresource</li>
- * <li>{@code offset.y} <b>must</b> be a multiple of the sparse image block height ({@link VkSparseImageFormatProperties}{@code ::imageGranularity.height}) of the image</li>
- * <li>{@code extent.height} <b>must</b> be greater than 0</li>
- * <li>{@code extent.height} <b>must</b> either be a multiple of the sparse image block height of the image, or else <code>(extent.height + offset.y)</code> <b>must</b> equal the height of the image subresource</li>
- * <li>{@code offset.z} <b>must</b> be a multiple of the sparse image block depth ({@link VkSparseImageFormatProperties}{@code ::imageGranularity.depth}) of the image</li>
- * <li>{@code extent.depth} <b>must</b> be greater than 0</li>
- * <li>{@code extent.depth} <b>must</b> either be a multiple of the sparse image block depth of the image, or else <code>(extent.depth + offset.z)</code> <b>must</b> equal the depth of the image subresource</li>
- * <li>If {@code memory} was created with {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} not equal to 0, at least one handle type it contained <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when the image was created</li>
- * <li>If {@code memory} was created by a memory import operation, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when {@code image} was created</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code subresource} <b>must</b> be a valid {@link VkImageSubresource} structure</li>
- * <li>If {@code memory} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkSparseMemoryBindFlagBits} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent3D}, {@link VkImageSubresource}, {@link VkOffset3D}, {@link VkSparseImageMemoryBindInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSparseImageMemoryBind {
- *     {@link VkImageSubresource VkImageSubresource} {@link #subresource};
- *     {@link VkOffset3D VkOffset3D} {@link #offset};
- *     {@link VkExtent3D VkExtent3D} {@link #extent};
- *     VkDeviceMemory {@link #memory};
- *     VkDeviceSize {@link #memoryOffset};
- *     VkSparseMemoryBindFlags {@link #flags};
- * }</code></pre>
+ *     {@link VkImageSubresource VkImageSubresource} subresource;
+ *     {@link VkOffset3D VkOffset3D} offset;
+ *     {@link VkExtent3D VkExtent3D} extent;
+ *     VkDeviceMemory memory;
+ *     VkDeviceSize memoryOffset;
+ *     VkSparseMemoryBindFlags flags;
+ * }}</pre>
  */
 public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> implements NativeResource {
 
@@ -120,39 +86,39 @@ public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the image <em>aspect</em> and region of interest in the image. */
+    /** @return a {@link VkImageSubresource} view of the {@code subresource} field. */
     public VkImageSubresource subresource() { return nsubresource(address()); }
-    /** are the coordinates of the first texel within the image subresource to bind. */
+    /** @return a {@link VkOffset3D} view of the {@code offset} field. */
     public VkOffset3D offset() { return noffset(address()); }
-    /** the size in texels of the region within the image subresource to bind. The extent <b>must</b> be a multiple of the sparse image block dimensions, except when binding sparse image blocks along the edge of an image subresource it <b>can</b> instead be such that any coordinate of <code>offset + extent</code> equals the corresponding dimensions of the image subresource. */
+    /** @return a {@link VkExtent3D} view of the {@code extent} field. */
     public VkExtent3D extent() { return nextent(address()); }
-    /** the {@code VkDeviceMemory} object that the sparse image blocks of the image are bound to. If {@code memory} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the sparse image blocks are unbound. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** an offset into {@code VkDeviceMemory} object. If {@code memory} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, this value is ignored. */
+    /** @return the value of the {@code memoryOffset} field. */
     @NativeType("VkDeviceSize")
     public long memoryOffset() { return nmemoryOffset(address()); }
-    /** are sparse memory binding flags. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkSparseMemoryBindFlags")
     public int flags() { return nflags(address()); }
 
-    /** Copies the specified {@link VkImageSubresource} to the {@link #subresource} field. */
+    /** Copies the specified {@link VkImageSubresource} to the {@code subresource} field. */
     public VkSparseImageMemoryBind subresource(VkImageSubresource value) { nsubresource(address(), value); return this; }
-    /** Passes the {@link #subresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code subresource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkSparseImageMemoryBind subresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(subresource()); return this; }
-    /** Copies the specified {@link VkOffset3D} to the {@link #offset} field. */
+    /** Copies the specified {@link VkOffset3D} to the {@code offset} field. */
     public VkSparseImageMemoryBind offset(VkOffset3D value) { noffset(address(), value); return this; }
-    /** Passes the {@link #offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkSparseImageMemoryBind offset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(offset()); return this; }
-    /** Copies the specified {@link VkExtent3D} to the {@link #extent} field. */
+    /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
     public VkSparseImageMemoryBind extent(VkExtent3D value) { nextent(address(), value); return this; }
-    /** Passes the {@link #extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkSparseImageMemoryBind extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkSparseImageMemoryBind memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryOffset} field. */
+    /** Sets the specified value to the {@code memoryOffset} field. */
     public VkSparseImageMemoryBind memoryOffset(@NativeType("VkDeviceSize") long value) { nmemoryOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkSparseImageMemoryBind flags(@NativeType("VkSparseMemoryBindFlags") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -385,39 +351,39 @@ public class VkSparseImageMemoryBind extends Struct<VkSparseImageMemoryBind> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VkImageSubresource} view of the {@link VkSparseImageMemoryBind#subresource} field. */
+        /** @return a {@link VkImageSubresource} view of the {@code subresource} field. */
         public VkImageSubresource subresource() { return VkSparseImageMemoryBind.nsubresource(address()); }
-        /** @return a {@link VkOffset3D} view of the {@link VkSparseImageMemoryBind#offset} field. */
+        /** @return a {@link VkOffset3D} view of the {@code offset} field. */
         public VkOffset3D offset() { return VkSparseImageMemoryBind.noffset(address()); }
-        /** @return a {@link VkExtent3D} view of the {@link VkSparseImageMemoryBind#extent} field. */
+        /** @return a {@link VkExtent3D} view of the {@code extent} field. */
         public VkExtent3D extent() { return VkSparseImageMemoryBind.nextent(address()); }
-        /** @return the value of the {@link VkSparseImageMemoryBind#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkSparseImageMemoryBind.nmemory(address()); }
-        /** @return the value of the {@link VkSparseImageMemoryBind#memoryOffset} field. */
+        /** @return the value of the {@code memoryOffset} field. */
         @NativeType("VkDeviceSize")
         public long memoryOffset() { return VkSparseImageMemoryBind.nmemoryOffset(address()); }
-        /** @return the value of the {@link VkSparseImageMemoryBind#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkSparseMemoryBindFlags")
         public int flags() { return VkSparseImageMemoryBind.nflags(address()); }
 
-        /** Copies the specified {@link VkImageSubresource} to the {@link VkSparseImageMemoryBind#subresource} field. */
+        /** Copies the specified {@link VkImageSubresource} to the {@code subresource} field. */
         public VkSparseImageMemoryBind.Buffer subresource(VkImageSubresource value) { VkSparseImageMemoryBind.nsubresource(address(), value); return this; }
-        /** Passes the {@link VkSparseImageMemoryBind#subresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code subresource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkSparseImageMemoryBind.Buffer subresource(java.util.function.Consumer<VkImageSubresource> consumer) { consumer.accept(subresource()); return this; }
-        /** Copies the specified {@link VkOffset3D} to the {@link VkSparseImageMemoryBind#offset} field. */
+        /** Copies the specified {@link VkOffset3D} to the {@code offset} field. */
         public VkSparseImageMemoryBind.Buffer offset(VkOffset3D value) { VkSparseImageMemoryBind.noffset(address(), value); return this; }
-        /** Passes the {@link VkSparseImageMemoryBind#offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkSparseImageMemoryBind.Buffer offset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(offset()); return this; }
-        /** Copies the specified {@link VkExtent3D} to the {@link VkSparseImageMemoryBind#extent} field. */
+        /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
         public VkSparseImageMemoryBind.Buffer extent(VkExtent3D value) { VkSparseImageMemoryBind.nextent(address(), value); return this; }
-        /** Passes the {@link VkSparseImageMemoryBind#extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkSparseImageMemoryBind.Buffer extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
-        /** Sets the specified value to the {@link VkSparseImageMemoryBind#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkSparseImageMemoryBind.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkSparseImageMemoryBind.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSparseImageMemoryBind#memoryOffset} field. */
+        /** Sets the specified value to the {@code memoryOffset} field. */
         public VkSparseImageMemoryBind.Buffer memoryOffset(@NativeType("VkDeviceSize") long value) { VkSparseImageMemoryBind.nmemoryOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSparseImageMemoryBind#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkSparseImageMemoryBind.Buffer flags(@NativeType("VkSparseMemoryBindFlags") int value) { VkSparseImageMemoryBind.nflags(address(), value); return this; }
 
     }

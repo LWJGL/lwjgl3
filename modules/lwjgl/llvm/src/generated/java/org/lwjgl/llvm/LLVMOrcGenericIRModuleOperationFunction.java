@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMOrc#LLVMOrcThreadSafeModuleWithModuleDo OrcThreadSafeModuleWithModuleDo} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LLVMErrorRef (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMModuleRef M
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcGenericIRModuleOperationFunction} */
 public abstract class LLVMOrcGenericIRModuleOperationFunction extends Callback implements LLVMOrcGenericIRModuleOperationFunctionI {
 
     /**

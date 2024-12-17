@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkRenderingInputAttachmentIndexInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderingInputAttachmentIndexInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t const * pColorAttachmentInputIndices;
  *     uint32_t const * pDepthInputAttachmentIndex;
  *     uint32_t const * pStencilInputAttachmentIndex;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkRenderingInputAttachmentIndexInfoKHR extends VkRenderingInputAttachmentIndexInfo {
 

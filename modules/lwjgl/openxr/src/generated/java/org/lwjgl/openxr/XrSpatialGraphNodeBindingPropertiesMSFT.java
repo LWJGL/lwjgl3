@@ -19,29 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.MSFTSpatialGraphBridge.*;
 
 /**
- * The spatial graph node binding properties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSpatialGraphBridge XR_MSFT_spatial_graph_bridge} extension <b>must</b> be enabled prior to using {@link XrSpatialGraphNodeBindingPropertiesMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSpatialGraphBridge#XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link MSFTSpatialGraphBridge#xrGetSpatialGraphNodeBindingPropertiesMSFT GetSpatialGraphNodeBindingPropertiesMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialGraphNodeBindingPropertiesMSFT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint8_t {@link #nodeId}[XR_GUID_SIZE_MSFT];
- *     {@link XrPosef XrPosef} {@link #poseInNodeSpace};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint8_t nodeId[XR_GUID_SIZE_MSFT];
+ *     {@link XrPosef XrPosef} poseInNodeSpace;
+ * }}</pre>
  */
 public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct<XrSpatialGraphNodeBindingPropertiesMSFT> implements NativeResource {
 
@@ -97,34 +81,34 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct<XrSpatialGra
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a global unique identifier (a.k.a. GUID or 16 byte array), representing the spatial graph node. */
+    /** @return a {@link ByteBuffer} view of the {@code nodeId} field. */
     @NativeType("uint8_t[XR_GUID_SIZE_MSFT]")
     public ByteBuffer nodeId() { return nnodeId(address()); }
-    /** a global unique identifier (a.k.a. GUID or 16 byte array), representing the spatial graph node. */
+    /** @return the value at the specified index of the {@code nodeId} field. */
     @NativeType("uint8_t")
     public byte nodeId(int index) { return nnodeId(address(), index); }
-    /** an {@link XrPosef} defining the pose in the underlying node’s space. */
+    /** @return a {@link XrPosef} view of the {@code poseInNodeSpace} field. */
     public XrPosef poseInNodeSpace() { return nposeInNodeSpace(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialGraphNodeBindingPropertiesMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSpatialGraphBridge#XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSpatialGraphBridge#XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT} value to the {@code type} field. */
     public XrSpatialGraphNodeBindingPropertiesMSFT type$Default() { return type(MSFTSpatialGraphBridge.XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialGraphNodeBindingPropertiesMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #nodeId} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code nodeId} field. */
     public XrSpatialGraphNodeBindingPropertiesMSFT nodeId(@NativeType("uint8_t[XR_GUID_SIZE_MSFT]") ByteBuffer value) { nnodeId(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #nodeId} field. */
+    /** Sets the specified value at the specified index of the {@code nodeId} field. */
     public XrSpatialGraphNodeBindingPropertiesMSFT nodeId(int index, @NativeType("uint8_t") byte value) { nnodeId(address(), index, value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #poseInNodeSpace} field. */
+    /** Copies the specified {@link XrPosef} to the {@code poseInNodeSpace} field. */
     public XrSpatialGraphNodeBindingPropertiesMSFT poseInNodeSpace(XrPosef value) { nposeInNodeSpace(address(), value); return this; }
-    /** Passes the {@link #poseInNodeSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code poseInNodeSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpatialGraphNodeBindingPropertiesMSFT poseInNodeSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInNodeSpace()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,34 +321,34 @@ public class XrSpatialGraphNodeBindingPropertiesMSFT extends Struct<XrSpatialGra
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialGraphNodeBindingPropertiesMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialGraphNodeBindingPropertiesMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSpatialGraphNodeBindingPropertiesMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpatialGraphNodeBindingPropertiesMSFT.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrSpatialGraphNodeBindingPropertiesMSFT#nodeId} field. */
+        /** @return a {@link ByteBuffer} view of the {@code nodeId} field. */
         @NativeType("uint8_t[XR_GUID_SIZE_MSFT]")
         public ByteBuffer nodeId() { return XrSpatialGraphNodeBindingPropertiesMSFT.nnodeId(address()); }
-        /** @return the value at the specified index of the {@link XrSpatialGraphNodeBindingPropertiesMSFT#nodeId} field. */
+        /** @return the value at the specified index of the {@code nodeId} field. */
         @NativeType("uint8_t")
         public byte nodeId(int index) { return XrSpatialGraphNodeBindingPropertiesMSFT.nnodeId(address(), index); }
-        /** @return a {@link XrPosef} view of the {@link XrSpatialGraphNodeBindingPropertiesMSFT#poseInNodeSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInNodeSpace} field. */
         public XrPosef poseInNodeSpace() { return XrSpatialGraphNodeBindingPropertiesMSFT.nposeInNodeSpace(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialGraphNodeBindingPropertiesMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialGraphNodeBindingPropertiesMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialGraphNodeBindingPropertiesMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSpatialGraphBridge#XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT} value to the {@link XrSpatialGraphNodeBindingPropertiesMSFT#type} field. */
+        /** Sets the {@link MSFTSpatialGraphBridge#XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT} value to the {@code type} field. */
         public XrSpatialGraphNodeBindingPropertiesMSFT.Buffer type$Default() { return type(MSFTSpatialGraphBridge.XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT); }
-        /** Sets the specified value to the {@link XrSpatialGraphNodeBindingPropertiesMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialGraphNodeBindingPropertiesMSFT.Buffer next(@NativeType("void *") long value) { XrSpatialGraphNodeBindingPropertiesMSFT.nnext(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link XrSpatialGraphNodeBindingPropertiesMSFT#nodeId} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code nodeId} field. */
         public XrSpatialGraphNodeBindingPropertiesMSFT.Buffer nodeId(@NativeType("uint8_t[XR_GUID_SIZE_MSFT]") ByteBuffer value) { XrSpatialGraphNodeBindingPropertiesMSFT.nnodeId(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link XrSpatialGraphNodeBindingPropertiesMSFT#nodeId} field. */
+        /** Sets the specified value at the specified index of the {@code nodeId} field. */
         public XrSpatialGraphNodeBindingPropertiesMSFT.Buffer nodeId(int index, @NativeType("uint8_t") byte value) { XrSpatialGraphNodeBindingPropertiesMSFT.nnodeId(address(), index, value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrSpatialGraphNodeBindingPropertiesMSFT#poseInNodeSpace} field. */
+        /** Copies the specified {@link XrPosef} to the {@code poseInNodeSpace} field. */
         public XrSpatialGraphNodeBindingPropertiesMSFT.Buffer poseInNodeSpace(XrPosef value) { XrSpatialGraphNodeBindingPropertiesMSFT.nposeInNodeSpace(address(), value); return this; }
-        /** Passes the {@link XrSpatialGraphNodeBindingPropertiesMSFT#poseInNodeSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code poseInNodeSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpatialGraphNodeBindingPropertiesMSFT.Buffer poseInNodeSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInNodeSpace()); return this; }
 
     }

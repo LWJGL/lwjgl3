@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSubpassDependency2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubpassDependency2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkAccessFlags dstAccessMask;
  *     VkDependencyFlags dependencyFlags;
  *     int32_t viewOffset;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSubpassDependency2KHR extends VkSubpassDependency2 {
 

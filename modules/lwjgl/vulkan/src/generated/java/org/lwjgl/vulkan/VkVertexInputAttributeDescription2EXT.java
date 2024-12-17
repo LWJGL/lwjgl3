@@ -16,40 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the extended vertex input attribute description.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code location} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputAttributes}</li>
- * <li>{@code binding} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
- * <li>{@code offset} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputAttributeOffset}</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-buffer-view-format-features">format features</a> of {@code format} <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT FORMAT_FEATURE_VERTEX_BUFFER_BIT}</li>
- * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::vertexAttributeAccessBeyondStride} is {@link VK10#VK_FALSE FALSE}, the sum of {@code offset} plus the size of the vertex attribute data described by {@code format} <b>must</b> not be greater than {@code stride} in the {@link VkVertexInputBindingDescription2EXT} referenced in {@code binding}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT}</li>
- * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTShaderObject#vkCmdSetVertexInputEXT CmdSetVertexInputEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVertexInputAttributeDescription2EXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #location};
- *     uint32_t {@link #binding};
- *     VkFormat {@link #format};
- *     uint32_t {@link #offset};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t location;
+ *     uint32_t binding;
+ *     VkFormat format;
+ *     uint32_t offset;
+ * }}</pre>
  */
 public class VkVertexInputAttributeDescription2EXT extends Struct<VkVertexInputAttributeDescription2EXT> implements NativeResource {
 
@@ -111,38 +86,38 @@ public class VkVertexInputAttributeDescription2EXT extends Struct<VkVertexInputA
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the shader input location number for this attribute. */
+    /** @return the value of the {@code location} field. */
     @NativeType("uint32_t")
     public int location() { return nlocation(address()); }
-    /** the binding number which this attribute takes its data from. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("uint32_t")
     public int binding() { return nbinding(address()); }
-    /** the size and type of the vertex attribute data. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** a byte offset of this attribute relative to the start of an element in the vertex input binding. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("uint32_t")
     public int offset() { return noffset(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVertexInputAttributeDescription2EXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT} value to the {@code sType} field. */
     public VkVertexInputAttributeDescription2EXT sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVertexInputAttributeDescription2EXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #location} field. */
+    /** Sets the specified value to the {@code location} field. */
     public VkVertexInputAttributeDescription2EXT location(@NativeType("uint32_t") int value) { nlocation(address(), value); return this; }
-    /** Sets the specified value to the {@link #binding} field. */
+    /** Sets the specified value to the {@code binding} field. */
     public VkVertexInputAttributeDescription2EXT binding(@NativeType("uint32_t") int value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkVertexInputAttributeDescription2EXT format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkVertexInputAttributeDescription2EXT offset(@NativeType("uint32_t") int value) { noffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,38 +331,38 @@ public class VkVertexInputAttributeDescription2EXT extends Struct<VkVertexInputA
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVertexInputAttributeDescription2EXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVertexInputAttributeDescription2EXT.nsType(address()); }
-        /** @return the value of the {@link VkVertexInputAttributeDescription2EXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVertexInputAttributeDescription2EXT.npNext(address()); }
-        /** @return the value of the {@link VkVertexInputAttributeDescription2EXT#location} field. */
+        /** @return the value of the {@code location} field. */
         @NativeType("uint32_t")
         public int location() { return VkVertexInputAttributeDescription2EXT.nlocation(address()); }
-        /** @return the value of the {@link VkVertexInputAttributeDescription2EXT#binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("uint32_t")
         public int binding() { return VkVertexInputAttributeDescription2EXT.nbinding(address()); }
-        /** @return the value of the {@link VkVertexInputAttributeDescription2EXT#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkVertexInputAttributeDescription2EXT.nformat(address()); }
-        /** @return the value of the {@link VkVertexInputAttributeDescription2EXT#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("uint32_t")
         public int offset() { return VkVertexInputAttributeDescription2EXT.noffset(address()); }
 
-        /** Sets the specified value to the {@link VkVertexInputAttributeDescription2EXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVertexInputAttributeDescription2EXT.Buffer sType(@NativeType("VkStructureType") int value) { VkVertexInputAttributeDescription2EXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT} value to the {@link VkVertexInputAttributeDescription2EXT#sType} field. */
+        /** Sets the {@link EXTShaderObject#VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT} value to the {@code sType} field. */
         public VkVertexInputAttributeDescription2EXT.Buffer sType$Default() { return sType(EXTShaderObject.VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT); }
-        /** Sets the specified value to the {@link VkVertexInputAttributeDescription2EXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVertexInputAttributeDescription2EXT.Buffer pNext(@NativeType("void *") long value) { VkVertexInputAttributeDescription2EXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputAttributeDescription2EXT#location} field. */
+        /** Sets the specified value to the {@code location} field. */
         public VkVertexInputAttributeDescription2EXT.Buffer location(@NativeType("uint32_t") int value) { VkVertexInputAttributeDescription2EXT.nlocation(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputAttributeDescription2EXT#binding} field. */
+        /** Sets the specified value to the {@code binding} field. */
         public VkVertexInputAttributeDescription2EXT.Buffer binding(@NativeType("uint32_t") int value) { VkVertexInputAttributeDescription2EXT.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputAttributeDescription2EXT#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkVertexInputAttributeDescription2EXT.Buffer format(@NativeType("VkFormat") int value) { VkVertexInputAttributeDescription2EXT.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputAttributeDescription2EXT#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkVertexInputAttributeDescription2EXT.Buffer offset(@NativeType("uint32_t") int value) { VkVertexInputAttributeDescription2EXT.noffset(address(), value); return this; }
 
     }

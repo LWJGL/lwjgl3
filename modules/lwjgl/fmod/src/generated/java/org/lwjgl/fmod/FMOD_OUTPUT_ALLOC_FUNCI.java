@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     unsigned int size,
- *     unsigned int align,
- *     char const *file,
- *     int line
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_OUTPUT_ALLOC_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_OUTPUT_ALLOC_FUNC")
 public interface FMOD_OUTPUT_ALLOC_FUNCI extends CallbackI {
@@ -47,6 +37,7 @@ public interface FMOD_OUTPUT_ALLOC_FUNCI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code void * (* FMOD_OUTPUT_ALLOC_FUNC) (unsigned int size, unsigned int align, char const * file, int line)} */
     @NativeType("void *") long invoke(@NativeType("unsigned int") int size, @NativeType("unsigned int") int align, @NativeType("char const *") long file, int line);
 
 }

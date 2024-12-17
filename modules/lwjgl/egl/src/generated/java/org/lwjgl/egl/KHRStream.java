@@ -15,40 +15,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_stream.txt">KHR_stream</a> extension.
- * 
- * <p>This extension defines a new object, the EGLStream, that can be used to efficiently transfer a sequence of image frames from one API to another. The
- * EGLStream has mechanisms that can help keep audio data synchronized to video data.</p>
- * 
- * <p>Each EGLStream is associated with a "producer" that generates image frames and inserts them into the EGLStream. The producer is responsible for
- * inserting each image frame into the EGLStream at the correct time so that the consumer can display the image frame for the appropriate period of time.</p>
- * 
- * <p>Each EGLStream is also associated with a "consumer" that retrieves image frames from the EGLStream. The consumer is responsible for noticing that an
- * image frame is available and displaying it (or otherwise consuming it). The consumer is also responsible for indicating the latency when that is
- * possible (the latency is the time that elapses between the time it is retrieved from the EGLStream until the time it is displayed to the user).</p>
- * 
- * <p>Some APIs are stream oriented (examples: OpenMAX IL, OpenMAX AL). These APIs may be connected directly to an EGLStream as a producer or consumer. Once
- * a stream oriented producer is "connected" to an EGLStream and "started" it may insert image frames into the EGLStream automatically with no further
- * interaction from the application. Likewise, once a stream oriented consumer is "connected" to an EGLStream and "started" it may retrieve image frames
- * from the EGLStream automatically with no further interaction from the application.</p>
- * 
- * <p>Some APIs are rendering oriented and require interaction with the application during the rendering of each frame (examples: OpenGL, OpenGL ES, OpenVG).
- * These APIs will not automatically insert or retrieve image frames into/from the EGLStream. Instead the application must take explicit action to cause a
- * rendering oriented producer to insert an image frame or to cause a rendering oriented consumer to retrieve an image frame.</p>
- * 
- * <p>The EGLStream conceptually operates as a mailbox. When the producer has a new image frame it empties the mailbox (discards the old contents) and
- * inserts the new image frame into the mailbox. The consumer retrieves the image frame from the mailbox and examines it. When the consumer is finished
- * examining the image frame it is either placed back in the mailbox (if the mailbox is empty) or discarded (if the mailbox is not empty).</p>
- * 
- * <p>Timing is mainly controlled by the producer. The consumer operated with a fixed latency that it indicates to the producer through the
- * EGL_CONSUMER_LATENCY_USEC_KHR attribute. The consumer is expected to notice when a new image frame is available in the EGLStream, retrieve it, and
- * display it to the user in the time indicated by EGL_CONSUMER_LATENCY_USEC_KHR. The producer controls when the image frame will be displayed by
- * inserting it into the stream at time T - EGL_CONSUMER_LATENCY_USEC_KHR where T is the time that the image frame is intended to appear to the user.</p>
- * 
- * <p>This extension does not cover the details of how a producer or a consumer works or is "connected" to an EGLStream. Different kinds of producers and
- * consumers work differently and are described in additional extension specifications.</p>
- */
 public class KHRStream {
 
     public static final long EGL_NO_STREAM_KHR = 0x0L;
@@ -73,6 +39,7 @@ public class KHRStream {
 
     // --- [ eglCreateStreamKHR ] ---
 
+    /** {@code EGLStreamKHR eglCreateStreamKHR(EGLDisplay dpy, EGLint const * attrib_list)} */
     public static long neglCreateStreamKHR(long dpy, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateStreamKHR;
         if (CHECKS) {
@@ -82,6 +49,7 @@ public class KHRStream {
         return callPPP(dpy, attrib_list, __functionAddress);
     }
 
+    /** {@code EGLStreamKHR eglCreateStreamKHR(EGLDisplay dpy, EGLint const * attrib_list)} */
     @NativeType("EGLStreamKHR")
     public static long eglCreateStreamKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
@@ -92,6 +60,7 @@ public class KHRStream {
 
     // --- [ eglDestroyStreamKHR ] ---
 
+    /** {@code EGLBoolean eglDestroyStreamKHR(EGLDisplay dpy, EGLStreamKHR stream)} */
     @NativeType("EGLBoolean")
     public static boolean eglDestroyStreamKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream) {
         long __functionAddress = EGL.getCapabilities().eglDestroyStreamKHR;
@@ -105,6 +74,7 @@ public class KHRStream {
 
     // --- [ eglStreamAttribKHR ] ---
 
+    /** {@code EGLBoolean eglStreamAttribKHR(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLint value)} */
     @NativeType("EGLBoolean")
     public static boolean eglStreamAttribKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int attribute, @NativeType("EGLint") int value) {
         long __functionAddress = EGL.getCapabilities().eglStreamAttribKHR;
@@ -118,6 +88,7 @@ public class KHRStream {
 
     // --- [ eglQueryStreamKHR ] ---
 
+    /** {@code EGLBoolean eglQueryStreamKHR(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLint * value)} */
     public static int neglQueryStreamKHR(long dpy, long stream, int attribute, long value) {
         long __functionAddress = EGL.getCapabilities().eglQueryStreamKHR;
         if (CHECKS) {
@@ -128,6 +99,7 @@ public class KHRStream {
         return callPPPI(dpy, stream, attribute, value, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglQueryStreamKHR(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryStreamKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int attribute, @NativeType("EGLint *") IntBuffer value) {
         if (CHECKS) {
@@ -138,6 +110,7 @@ public class KHRStream {
 
     // --- [ eglQueryStreamu64KHR ] ---
 
+    /** {@code EGLBoolean eglQueryStreamu64KHR(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLuint64KHR * value)} */
     public static int neglQueryStreamu64KHR(long dpy, long stream, int attribute, long value) {
         long __functionAddress = EGL.getCapabilities().eglQueryStreamu64KHR;
         if (CHECKS) {
@@ -148,6 +121,7 @@ public class KHRStream {
         return callPPPI(dpy, stream, attribute, value, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglQueryStreamu64KHR(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLuint64KHR * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryStreamu64KHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int attribute, @NativeType("EGLuint64KHR *") LongBuffer value) {
         if (CHECKS) {
@@ -156,7 +130,7 @@ public class KHRStream {
         return neglQueryStreamu64KHR(dpy, stream, attribute, memAddress(value)) != 0;
     }
 
-    /** Array version of: {@link #eglCreateStreamKHR CreateStreamKHR} */
+    /** {@code EGLStreamKHR eglCreateStreamKHR(EGLDisplay dpy, EGLint const * attrib_list)} */
     @NativeType("EGLStreamKHR")
     public static long eglCreateStreamKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateStreamKHR;
@@ -168,7 +142,7 @@ public class KHRStream {
         return callPPP(dpy, attrib_list, __functionAddress);
     }
 
-    /** Array version of: {@link #eglQueryStreamKHR QueryStreamKHR} */
+    /** {@code EGLBoolean eglQueryStreamKHR(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryStreamKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int attribute, @NativeType("EGLint *") int[] value) {
         long __functionAddress = EGL.getCapabilities().eglQueryStreamKHR;
@@ -181,7 +155,7 @@ public class KHRStream {
         return callPPPI(dpy, stream, attribute, value, __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #eglQueryStreamu64KHR QueryStreamu64KHR} */
+    /** {@code EGLBoolean eglQueryStreamu64KHR(EGLDisplay dpy, EGLStreamKHR stream, EGLenum attribute, EGLuint64KHR * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryStreamu64KHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int attribute, @NativeType("EGLuint64KHR *") long[] value) {
         long __functionAddress = EGL.getCapabilities().eglQueryStreamu64KHR;

@@ -17,40 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying striped rendering information.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure can be included in the {@code pNext} chain of {@link VkRenderPassBeginInfo} or {@link VkRenderingInfo} to define how the render pass instance is split into stripes.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code stripeInfoCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceRenderPassStripedPropertiesARM}{@code ::maxRenderPassStripes}</li>
- * <li>The {@code stripeArea} defined by each element of {@code pStripeInfos} <b>must</b> not overlap the {@code stripeArea} of any other element</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM}</li>
- * <li>{@code pStripeInfos} <b>must</b> be a valid pointer to an array of {@code stripeInfoCount} valid {@link VkRenderPassStripeInfoARM} structures</li>
- * <li>{@code stripeInfoCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRenderPassStripeInfoARM}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderPassStripeBeginInfoARM {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #stripeInfoCount};
- *     {@link VkRenderPassStripeInfoARM VkRenderPassStripeInfoARM} const * {@link #pStripeInfos};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t stripeInfoCount;
+ *     {@link VkRenderPassStripeInfoARM VkRenderPassStripeInfoARM} const * pStripeInfos;
+ * }}</pre>
  */
 public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeginInfoARM> implements NativeResource {
 
@@ -106,26 +79,26 @@ public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeg
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of stripes in this render pass instance */
+    /** @return the value of the {@code stripeInfoCount} field. */
     @NativeType("uint32_t")
     public int stripeInfoCount() { return nstripeInfoCount(address()); }
-    /** a pointer to an array of {@code stripeInfoCount} {@link VkRenderPassStripeInfoARM} structures describing the stripes used by the render pass instance. */
+    /** @return a {@link VkRenderPassStripeInfoARM.Buffer} view of the struct array pointed to by the {@code pStripeInfos} field. */
     @NativeType("VkRenderPassStripeInfoARM const *")
     public VkRenderPassStripeInfoARM.Buffer pStripeInfos() { return npStripeInfos(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRenderPassStripeBeginInfoARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM} value to the {@link #sType} field. */
+    /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM} value to the {@code sType} field. */
     public VkRenderPassStripeBeginInfoARM sType$Default() { return sType(ARMRenderPassStriped.VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRenderPassStripeBeginInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkRenderPassStripeInfoARM.Buffer} to the {@link #pStripeInfos} field. */
+    /** Sets the address of the specified {@link VkRenderPassStripeInfoARM.Buffer} to the {@code pStripeInfos} field. */
     public VkRenderPassStripeBeginInfoARM pStripeInfos(@NativeType("VkRenderPassStripeInfoARM const *") VkRenderPassStripeInfoARM.Buffer value) { npStripeInfos(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,26 +307,26 @@ public class VkRenderPassStripeBeginInfoARM extends Struct<VkRenderPassStripeBeg
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderPassStripeBeginInfoARM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassStripeBeginInfoARM.nsType(address()); }
-        /** @return the value of the {@link VkRenderPassStripeBeginInfoARM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassStripeBeginInfoARM.npNext(address()); }
-        /** @return the value of the {@link VkRenderPassStripeBeginInfoARM#stripeInfoCount} field. */
+        /** @return the value of the {@code stripeInfoCount} field. */
         @NativeType("uint32_t")
         public int stripeInfoCount() { return VkRenderPassStripeBeginInfoARM.nstripeInfoCount(address()); }
-        /** @return a {@link VkRenderPassStripeInfoARM.Buffer} view of the struct array pointed to by the {@link VkRenderPassStripeBeginInfoARM#pStripeInfos} field. */
+        /** @return a {@link VkRenderPassStripeInfoARM.Buffer} view of the struct array pointed to by the {@code pStripeInfos} field. */
         @NativeType("VkRenderPassStripeInfoARM const *")
         public VkRenderPassStripeInfoARM.Buffer pStripeInfos() { return VkRenderPassStripeBeginInfoARM.npStripeInfos(address()); }
 
-        /** Sets the specified value to the {@link VkRenderPassStripeBeginInfoARM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRenderPassStripeBeginInfoARM.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassStripeBeginInfoARM.nsType(address(), value); return this; }
-        /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM} value to the {@link VkRenderPassStripeBeginInfoARM#sType} field. */
+        /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM} value to the {@code sType} field. */
         public VkRenderPassStripeBeginInfoARM.Buffer sType$Default() { return sType(ARMRenderPassStriped.VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM); }
-        /** Sets the specified value to the {@link VkRenderPassStripeBeginInfoARM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRenderPassStripeBeginInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassStripeBeginInfoARM.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkRenderPassStripeInfoARM.Buffer} to the {@link VkRenderPassStripeBeginInfoARM#pStripeInfos} field. */
+        /** Sets the address of the specified {@link VkRenderPassStripeInfoARM.Buffer} to the {@code pStripeInfos} field. */
         public VkRenderPassStripeBeginInfoARM.Buffer pStripeInfos(@NativeType("VkRenderPassStripeInfoARM const *") VkRenderPassStripeInfoARM.Buffer value) { VkRenderPassStripeBeginInfoARM.npStripeInfos(address(), value); return this; }
 
     }

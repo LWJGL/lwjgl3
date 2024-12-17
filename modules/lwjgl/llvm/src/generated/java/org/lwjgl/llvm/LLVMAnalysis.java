@@ -30,15 +30,6 @@ public class LLVMAnalysis {
 
     }
 
-    /**
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMAbortProcessAction AbortProcessAction} - verifier will print to {@code stderr} and {@code abort()}</li>
-     * <li>{@link #LLVMPrintMessageAction PrintMessageAction} - verifier will print to {@code stderr} and {@code return 1}</li>
-     * <li>{@link #LLVMReturnStatusAction ReturnStatusAction} - verifier will just {@code return 1}</li>
-     * </ul>
-     */
     public static final int
         LLVMAbortProcessAction = 0,
         LLVMPrintMessageAction = 1,
@@ -50,7 +41,7 @@ public class LLVMAnalysis {
 
     // --- [ LLVMVerifyModule ] ---
 
-    /** Unsafe version of: {@link #LLVMVerifyModule VerifyModule} */
+    /** {@code LLVMBool LLVMVerifyModule(LLVMModuleRef M, LLVMVerifierFailureAction Action, char ** OutMessage)} */
     public static int nLLVMVerifyModule(long M, int Action, long OutMessage) {
         long __functionAddress = Functions.VerifyModule;
         if (CHECKS) {
@@ -59,10 +50,7 @@ public class LLVMAnalysis {
         return invokePPI(M, Action, OutMessage, __functionAddress);
     }
 
-    /**
-     * Verifies that a module is valid, taking the specified action if not. Optionally returns a human-readable description of any invalid constructs.
-     * {@code OutMessage} must be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.
-     */
+    /** {@code LLVMBool LLVMVerifyModule(LLVMModuleRef M, LLVMVerifierFailureAction Action, char ** OutMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMVerifyModule(@NativeType("LLVMModuleRef") long M, @NativeType("LLVMVerifierFailureAction") int Action, @NativeType("char **") PointerBuffer OutMessage) {
         if (CHECKS) {
@@ -73,7 +61,7 @@ public class LLVMAnalysis {
 
     // --- [ LLVMVerifyFunction ] ---
 
-    /** Verifies that a single function is valid, taking the specified action. Useful for debugging. */
+    /** {@code LLVMBool LLVMVerifyFunction(LLVMValueRef Fn, LLVMVerifierFailureAction Action)} */
     @NativeType("LLVMBool")
     public static boolean LLVMVerifyFunction(@NativeType("LLVMValueRef") long Fn, @NativeType("LLVMVerifierFailureAction") int Action) {
         long __functionAddress = Functions.VerifyFunction;
@@ -85,7 +73,7 @@ public class LLVMAnalysis {
 
     // --- [ LLVMViewFunctionCFG ] ---
 
-    /** Open up a ghostview window that displays the CFG of the current function. Useful for debugging. */
+    /** {@code void LLVMViewFunctionCFG(LLVMValueRef Fn)} */
     public static void LLVMViewFunctionCFG(@NativeType("LLVMValueRef") long Fn) {
         long __functionAddress = Functions.ViewFunctionCFG;
         if (CHECKS) {
@@ -96,6 +84,7 @@ public class LLVMAnalysis {
 
     // --- [ LLVMViewFunctionCFGOnly ] ---
 
+    /** {@code void LLVMViewFunctionCFGOnly(LLVMValueRef Fn)} */
     public static void LLVMViewFunctionCFGOnly(@NativeType("LLVMValueRef") long Fn) {
         long __functionAddress = Functions.ViewFunctionCFGOnly;
         if (CHECKS) {

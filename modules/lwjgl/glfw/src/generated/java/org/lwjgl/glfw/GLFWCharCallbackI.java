@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetCharCallback SetCharCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window,
- *     unsigned int codepoint
- * )</code></pre>
- *
- * @since version 2.4
- */
+/** Callback function: {@link #invoke GLFWcharfun} */
 @FunctionalInterface
 @NativeType("GLFWcharfun")
 public interface GLFWCharCallbackI extends CallbackI {
@@ -46,12 +34,7 @@ public interface GLFWCharCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when a Unicode character is input.
-     *
-     * @param window    the window that received the event
-     * @param codepoint the Unicode code point of the character
-     */
+    /** {@code void (* GLFWcharfun) (GLFWwindow * window, unsigned int codepoint)} */
     void invoke(@NativeType("GLFWwindow *") long window, @NativeType("unsigned int") int codepoint);
 
 }

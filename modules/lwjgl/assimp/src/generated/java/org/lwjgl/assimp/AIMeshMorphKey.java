@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Binds a morph anim mesh to a specific point in time.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiMeshMorphKey {
- *     double {@link #mTime};
- *     unsigned int * {@link #mValues};
- *     double * {@link #mWeights};
- *     unsigned int {@link #mNumValuesAndWeights};
- * }</code></pre>
+ *     double mTime;
+ *     unsigned int * mValues;
+ *     double * mWeights;
+ *     unsigned int mNumValuesAndWeights;
+ * }}</pre>
  */
 @NativeType("struct aiMeshMorphKey")
 public class AIMeshMorphKey extends Struct<AIMeshMorphKey> implements NativeResource {
@@ -84,25 +80,25 @@ public class AIMeshMorphKey extends Struct<AIMeshMorphKey> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the time of this key */
+    /** @return the value of the {@code mTime} field. */
     public double mTime() { return nmTime(address()); }
-    /** index of attachment mesh to apply weight at the same position in {@code mWeights} */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code mValues} field. */
     @NativeType("unsigned int *")
     public IntBuffer mValues() { return nmValues(address()); }
-    /** weight to apply to the blend shape index at the same position in {@code mValues} */
+    /** @return a {@link DoubleBuffer} view of the data pointed to by the {@code mWeights} field. */
     @NativeType("double *")
     public DoubleBuffer mWeights() { return nmWeights(address()); }
-    /** the number of values and weights */
+    /** @return the value of the {@code mNumValuesAndWeights} field. */
     @NativeType("unsigned int")
     public int mNumValuesAndWeights() { return nmNumValuesAndWeights(address()); }
 
-    /** Sets the specified value to the {@link #mTime} field. */
+    /** Sets the specified value to the {@code mTime} field. */
     public AIMeshMorphKey mTime(double value) { nmTime(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #mValues} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code mValues} field. */
     public AIMeshMorphKey mValues(@NativeType("unsigned int *") IntBuffer value) { nmValues(address(), value); return this; }
-    /** Sets the address of the specified {@link DoubleBuffer} to the {@link #mWeights} field. */
+    /** Sets the address of the specified {@link DoubleBuffer} to the {@code mWeights} field. */
     public AIMeshMorphKey mWeights(@NativeType("double *") DoubleBuffer value) { nmWeights(address(), value); return this; }
-    /** Sets the specified value to the {@link #mNumValuesAndWeights} field. */
+    /** Sets the specified value to the {@code mNumValuesAndWeights} field. */
     public AIMeshMorphKey mNumValuesAndWeights(@NativeType("unsigned int") int value) { nmNumValuesAndWeights(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -333,25 +329,25 @@ public class AIMeshMorphKey extends Struct<AIMeshMorphKey> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AIMeshMorphKey#mTime} field. */
+        /** @return the value of the {@code mTime} field. */
         public double mTime() { return AIMeshMorphKey.nmTime(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link AIMeshMorphKey#mValues} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code mValues} field. */
         @NativeType("unsigned int *")
         public IntBuffer mValues() { return AIMeshMorphKey.nmValues(address()); }
-        /** @return a {@link DoubleBuffer} view of the data pointed to by the {@link AIMeshMorphKey#mWeights} field. */
+        /** @return a {@link DoubleBuffer} view of the data pointed to by the {@code mWeights} field. */
         @NativeType("double *")
         public DoubleBuffer mWeights() { return AIMeshMorphKey.nmWeights(address()); }
-        /** @return the value of the {@link AIMeshMorphKey#mNumValuesAndWeights} field. */
+        /** @return the value of the {@code mNumValuesAndWeights} field. */
         @NativeType("unsigned int")
         public int mNumValuesAndWeights() { return AIMeshMorphKey.nmNumValuesAndWeights(address()); }
 
-        /** Sets the specified value to the {@link AIMeshMorphKey#mTime} field. */
+        /** Sets the specified value to the {@code mTime} field. */
         public AIMeshMorphKey.Buffer mTime(double value) { AIMeshMorphKey.nmTime(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link AIMeshMorphKey#mValues} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code mValues} field. */
         public AIMeshMorphKey.Buffer mValues(@NativeType("unsigned int *") IntBuffer value) { AIMeshMorphKey.nmValues(address(), value); return this; }
-        /** Sets the address of the specified {@link DoubleBuffer} to the {@link AIMeshMorphKey#mWeights} field. */
+        /** Sets the address of the specified {@link DoubleBuffer} to the {@code mWeights} field. */
         public AIMeshMorphKey.Buffer mWeights(@NativeType("double *") DoubleBuffer value) { AIMeshMorphKey.nmWeights(address(), value); return this; }
-        /** Sets the specified value to the {@link AIMeshMorphKey#mNumValuesAndWeights} field. */
+        /** Sets the specified value to the {@code mNumValuesAndWeights} field. */
         public AIMeshMorphKey.Buffer mNumValuesAndWeights(@NativeType("unsigned int") int value) { AIMeshMorphKey.nmNumValuesAndWeights(address(), value); return this; }
 
     }

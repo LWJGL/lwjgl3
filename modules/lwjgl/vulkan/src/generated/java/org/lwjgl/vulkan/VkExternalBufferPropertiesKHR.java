@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkExternalBufferProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExternalBufferPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkExternalMemoryProperties VkExternalMemoryProperties} externalMemoryProperties;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkExternalBufferPropertiesKHR extends VkExternalBufferProperties {
 

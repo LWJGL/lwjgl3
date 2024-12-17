@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSamplerReductionModeCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerReductionModeCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkSamplerReductionMode reductionMode;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSamplerReductionModeCreateInfoEXT extends VkSamplerReductionModeCreateInfo {
 

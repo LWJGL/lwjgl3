@@ -16,34 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters of vkLatencySleepNV.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code signalSemaphore} <b>must</b> be a timeline semaphore</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV}</li>
- * <li>{@code signalSemaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVLowLatency2#vkLatencySleepNV LatencySleepNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkLatencySleepInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSemaphore {@link #signalSemaphore};
- *     uint64_t {@link #value};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSemaphore signalSemaphore;
+ *     uint64_t value;
+ * }}</pre>
  */
 public class VkLatencySleepInfoNV extends Struct<VkLatencySleepInfoNV> implements NativeResource {
 
@@ -99,28 +78,28 @@ public class VkLatencySleepInfoNV extends Struct<VkLatencySleepInfoNV> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a semaphore that is signaled to indicate that the application <b>should</b> resume input sampling work. */
+    /** @return the value of the {@code signalSemaphore} field. */
     @NativeType("VkSemaphore")
     public long signalSemaphore() { return nsignalSemaphore(address()); }
-    /** the value that {@code signalSemaphore} is set to for resuming sampling work. */
+    /** @return the value of the {@code value} field. */
     @NativeType("uint64_t")
     public long value() { return nvalue(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkLatencySleepInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV} value to the {@code sType} field. */
     public VkLatencySleepInfoNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkLatencySleepInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #signalSemaphore} field. */
+    /** Sets the specified value to the {@code signalSemaphore} field. */
     public VkLatencySleepInfoNV signalSemaphore(@NativeType("VkSemaphore") long value) { nsignalSemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@link #value} field. */
+    /** Sets the specified value to the {@code value} field. */
     public VkLatencySleepInfoNV value(@NativeType("uint64_t") long value) { nvalue(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,28 +301,28 @@ public class VkLatencySleepInfoNV extends Struct<VkLatencySleepInfoNV> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkLatencySleepInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkLatencySleepInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkLatencySleepInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkLatencySleepInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkLatencySleepInfoNV#signalSemaphore} field. */
+        /** @return the value of the {@code signalSemaphore} field. */
         @NativeType("VkSemaphore")
         public long signalSemaphore() { return VkLatencySleepInfoNV.nsignalSemaphore(address()); }
-        /** @return the value of the {@link VkLatencySleepInfoNV#value} field. */
+        /** @return the value of the {@code value} field. */
         @NativeType("uint64_t")
         public long value() { return VkLatencySleepInfoNV.nvalue(address()); }
 
-        /** Sets the specified value to the {@link VkLatencySleepInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkLatencySleepInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkLatencySleepInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV} value to the {@link VkLatencySleepInfoNV#sType} field. */
+        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV} value to the {@code sType} field. */
         public VkLatencySleepInfoNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV); }
-        /** Sets the specified value to the {@link VkLatencySleepInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkLatencySleepInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkLatencySleepInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencySleepInfoNV#signalSemaphore} field. */
+        /** Sets the specified value to the {@code signalSemaphore} field. */
         public VkLatencySleepInfoNV.Buffer signalSemaphore(@NativeType("VkSemaphore") long value) { VkLatencySleepInfoNV.nsignalSemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencySleepInfoNV#value} field. */
+        /** Sets the specified value to the {@code value} field. */
         public VkLatencySleepInfoNV.Buffer value(@NativeType("uint64_t") long value) { VkLatencySleepInfoNV.nvalue(address(), value); return this; }
 
     }

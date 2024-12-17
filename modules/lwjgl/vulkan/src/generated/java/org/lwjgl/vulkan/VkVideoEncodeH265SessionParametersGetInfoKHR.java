@@ -16,43 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters for retrieving encoded H.265 parameter set data.
- * 
- * <h5>Description</h5>
- * 
- * <p>When this structure is specified in the {@code pNext} chain of the {@link VkVideoEncodeSessionParametersGetInfoKHR} structure passed to {@link KHRVideoEncodeQueue#vkGetEncodedVideoSessionParametersKHR GetEncodedVideoSessionParametersKHR}, the command will write encoded parameter data to the output buffer in the following order:</p>
- * 
- * <ul>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-vps">H.265 video parameter set</a> identified by {@code stdVPSId}, if {@code writeStdVPS} is {@link VK10#VK_TRUE TRUE}.</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-sps">H.265 sequence parameter set</a> identified by the pair constructed from {@code stdVPSId} and {@code stdSPSId}, if {@code writeStdSPS} is {@link VK10#VK_TRUE TRUE}.</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-pps">H.265 picture parameter set</a> identified by the triplet constructed from {@code stdVPSId}, {@code stdSPSId}, and {@code stdPPSId}, if {@code writeStdPPS} is {@link VK10#VK_TRUE TRUE}.</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>At least one of {@code writeStdVPS}, {@code writeStdSPS}, and {@code writeStdPPS} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH265SessionParametersGetInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #writeStdVPS};
- *     VkBool32 {@link #writeStdSPS};
- *     VkBool32 {@link #writeStdPPS};
- *     uint32_t {@link #stdVPSId};
- *     uint32_t {@link #stdSPSId};
- *     uint32_t {@link #stdPPSId};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 writeStdVPS;
+ *     VkBool32 writeStdSPS;
+ *     VkBool32 writeStdPPS;
+ *     uint32_t stdVPSId;
+ *     uint32_t stdSPSId;
+ *     uint32_t stdPPSId;
+ * }}</pre>
  */
 public class VkVideoEncodeH265SessionParametersGetInfoKHR extends Struct<VkVideoEncodeH265SessionParametersGetInfoKHR> implements NativeResource {
 
@@ -120,48 +94,48 @@ public class VkVideoEncodeH265SessionParametersGetInfoKHR extends Struct<VkVideo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the encoded <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-vps">H.265 video parameter set</a> identified by {@code stdVPSId} is requested to be retrieved. */
+    /** @return the value of the {@code writeStdVPS} field. */
     @NativeType("VkBool32")
     public boolean writeStdVPS() { return nwriteStdVPS(address()) != 0; }
-    /** indicates whether the encoded <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-sps">H.265 sequence parameter set</a> identified by the pair constructed from {@code stdVPSId} and {@code stdSPSId} is requested to be retrieved. */
+    /** @return the value of the {@code writeStdSPS} field. */
     @NativeType("VkBool32")
     public boolean writeStdSPS() { return nwriteStdSPS(address()) != 0; }
-    /** indicates whether the encoded <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-pps">H.265 picture parameter set</a> identified by the triplet constructed from {@code stdVPSId}, {@code stdSPSId}, and {@code stdPPSId} is requested to be retrieved. */
+    /** @return the value of the {@code writeStdPPS} field. */
     @NativeType("VkBool32")
     public boolean writeStdPPS() { return nwriteStdPPS(address()) != 0; }
-    /** specifies the H.265 video parameter set ID used to identify the retrieved H.265 video, sequence, and/or picture parameter set(s). */
+    /** @return the value of the {@code stdVPSId} field. */
     @NativeType("uint32_t")
     public int stdVPSId() { return nstdVPSId(address()); }
-    /** specifies the H.265 sequence parameter set ID used to identify the retrieved H.265 sequence and/or picture parameter set(s) when {@code writeStdSPS} and/or {@code writeStdPPS} is {@link VK10#VK_TRUE TRUE}. */
+    /** @return the value of the {@code stdSPSId} field. */
     @NativeType("uint32_t")
     public int stdSPSId() { return nstdSPSId(address()); }
-    /** specifies the H.265 picture parameter set ID used to identify the retrieved H.265 picture parameter set when {@code writeStdPPS} is {@link VK10#VK_TRUE TRUE}. */
+    /** @return the value of the {@code stdPPSId} field. */
     @NativeType("uint32_t")
     public int stdPPSId() { return nstdPPSId(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #writeStdVPS} field. */
+    /** Sets the specified value to the {@code writeStdVPS} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR writeStdVPS(@NativeType("VkBool32") boolean value) { nwriteStdVPS(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #writeStdSPS} field. */
+    /** Sets the specified value to the {@code writeStdSPS} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR writeStdSPS(@NativeType("VkBool32") boolean value) { nwriteStdSPS(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #writeStdPPS} field. */
+    /** Sets the specified value to the {@code writeStdPPS} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR writeStdPPS(@NativeType("VkBool32") boolean value) { nwriteStdPPS(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #stdVPSId} field. */
+    /** Sets the specified value to the {@code stdVPSId} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR stdVPSId(@NativeType("uint32_t") int value) { nstdVPSId(address(), value); return this; }
-    /** Sets the specified value to the {@link #stdSPSId} field. */
+    /** Sets the specified value to the {@code stdSPSId} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR stdSPSId(@NativeType("uint32_t") int value) { nstdSPSId(address(), value); return this; }
-    /** Sets the specified value to the {@link #stdPPSId} field. */
+    /** Sets the specified value to the {@code stdPPSId} field. */
     public VkVideoEncodeH265SessionParametersGetInfoKHR stdPPSId(@NativeType("uint32_t") int value) { nstdPPSId(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -387,48 +361,48 @@ public class VkVideoEncodeH265SessionParametersGetInfoKHR extends Struct<VkVideo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH265SessionParametersGetInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265SessionParametersGetInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#writeStdVPS} field. */
+        /** @return the value of the {@code writeStdVPS} field. */
         @NativeType("VkBool32")
         public boolean writeStdVPS() { return VkVideoEncodeH265SessionParametersGetInfoKHR.nwriteStdVPS(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#writeStdSPS} field. */
+        /** @return the value of the {@code writeStdSPS} field. */
         @NativeType("VkBool32")
         public boolean writeStdSPS() { return VkVideoEncodeH265SessionParametersGetInfoKHR.nwriteStdSPS(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#writeStdPPS} field. */
+        /** @return the value of the {@code writeStdPPS} field. */
         @NativeType("VkBool32")
         public boolean writeStdPPS() { return VkVideoEncodeH265SessionParametersGetInfoKHR.nwriteStdPPS(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#stdVPSId} field. */
+        /** @return the value of the {@code stdVPSId} field. */
         @NativeType("uint32_t")
         public int stdVPSId() { return VkVideoEncodeH265SessionParametersGetInfoKHR.nstdVPSId(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#stdSPSId} field. */
+        /** @return the value of the {@code stdSPSId} field. */
         @NativeType("uint32_t")
         public int stdSPSId() { return VkVideoEncodeH265SessionParametersGetInfoKHR.nstdSPSId(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#stdPPSId} field. */
+        /** @return the value of the {@code stdPPSId} field. */
         @NativeType("uint32_t")
         public int stdPPSId() { return VkVideoEncodeH265SessionParametersGetInfoKHR.nstdPPSId(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265SessionParametersGetInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR} value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_GET_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265SessionParametersGetInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#writeStdVPS} field. */
+        /** Sets the specified value to the {@code writeStdVPS} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer writeStdVPS(@NativeType("VkBool32") boolean value) { VkVideoEncodeH265SessionParametersGetInfoKHR.nwriteStdVPS(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#writeStdSPS} field. */
+        /** Sets the specified value to the {@code writeStdSPS} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer writeStdSPS(@NativeType("VkBool32") boolean value) { VkVideoEncodeH265SessionParametersGetInfoKHR.nwriteStdSPS(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#writeStdPPS} field. */
+        /** Sets the specified value to the {@code writeStdPPS} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer writeStdPPS(@NativeType("VkBool32") boolean value) { VkVideoEncodeH265SessionParametersGetInfoKHR.nwriteStdPPS(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#stdVPSId} field. */
+        /** Sets the specified value to the {@code stdVPSId} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer stdVPSId(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersGetInfoKHR.nstdVPSId(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#stdSPSId} field. */
+        /** Sets the specified value to the {@code stdSPSId} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer stdSPSId(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersGetInfoKHR.nstdSPSId(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionParametersGetInfoKHR#stdPPSId} field. */
+        /** Sets the specified value to the {@code stdPPSId} field. */
         public VkVideoEncodeH265SessionParametersGetInfoKHR.Buffer stdPPSId(@NativeType("uint32_t") int value) { VkVideoEncodeH265SessionParametersGetInfoKHR.nstdPPSId(address(), value); return this; }
 
     }

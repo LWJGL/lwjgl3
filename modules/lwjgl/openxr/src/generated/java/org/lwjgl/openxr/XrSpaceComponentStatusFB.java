@@ -16,33 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Current status of an entity.
- * 
- * <h5>Description</h5>
- * 
- * <p>It holds information on the current state of a component.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntity XR_FB_spatial_entity} extension <b>must</b> be enabled prior to using {@link XrSpaceComponentStatusFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntity#XR_TYPE_SPACE_COMPONENT_STATUS_FB TYPE_SPACE_COMPONENT_STATUS_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBSpatialEntity#xrGetSpaceComponentStatusFB GetSpaceComponentStatusFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceComponentStatusFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #enabled};
- *     XrBool32 {@link #changePending};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 enabled;
+ *     XrBool32 changePending;
+ * }}</pre>
  */
 public class XrSpaceComponentStatusFB extends Struct<XrSpaceComponentStatusFB> implements NativeResource {
 
@@ -98,24 +78,24 @@ public class XrSpaceComponentStatusFB extends Struct<XrSpaceComponentStatusFB> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a boolean value that determines if a component is currently enabled or disabled. */
+    /** @return the value of the {@code enabled} field. */
     @NativeType("XrBool32")
     public boolean enabled() { return nenabled(address()) != 0; }
-    /** a boolean value that determines if the component’s enabled state is about to change. */
+    /** @return the value of the {@code changePending} field. */
     @NativeType("XrBool32")
     public boolean changePending() { return nchangePending(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceComponentStatusFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntity#XR_TYPE_SPACE_COMPONENT_STATUS_FB TYPE_SPACE_COMPONENT_STATUS_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntity#XR_TYPE_SPACE_COMPONENT_STATUS_FB TYPE_SPACE_COMPONENT_STATUS_FB} value to the {@code type} field. */
     public XrSpaceComponentStatusFB type$Default() { return type(FBSpatialEntity.XR_TYPE_SPACE_COMPONENT_STATUS_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceComponentStatusFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,24 +289,24 @@ public class XrSpaceComponentStatusFB extends Struct<XrSpaceComponentStatusFB> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceComponentStatusFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceComponentStatusFB.ntype(address()); }
-        /** @return the value of the {@link XrSpaceComponentStatusFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpaceComponentStatusFB.nnext(address()); }
-        /** @return the value of the {@link XrSpaceComponentStatusFB#enabled} field. */
+        /** @return the value of the {@code enabled} field. */
         @NativeType("XrBool32")
         public boolean enabled() { return XrSpaceComponentStatusFB.nenabled(address()) != 0; }
-        /** @return the value of the {@link XrSpaceComponentStatusFB#changePending} field. */
+        /** @return the value of the {@code changePending} field. */
         @NativeType("XrBool32")
         public boolean changePending() { return XrSpaceComponentStatusFB.nchangePending(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSpaceComponentStatusFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceComponentStatusFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceComponentStatusFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntity#XR_TYPE_SPACE_COMPONENT_STATUS_FB TYPE_SPACE_COMPONENT_STATUS_FB} value to the {@link XrSpaceComponentStatusFB#type} field. */
+        /** Sets the {@link FBSpatialEntity#XR_TYPE_SPACE_COMPONENT_STATUS_FB TYPE_SPACE_COMPONENT_STATUS_FB} value to the {@code type} field. */
         public XrSpaceComponentStatusFB.Buffer type$Default() { return type(FBSpatialEntity.XR_TYPE_SPACE_COMPONENT_STATUS_FB); }
-        /** Sets the specified value to the {@link XrSpaceComponentStatusFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceComponentStatusFB.Buffer next(@NativeType("void *") long value) { XrSpaceComponentStatusFB.nnext(address(), value); return this; }
 
     }

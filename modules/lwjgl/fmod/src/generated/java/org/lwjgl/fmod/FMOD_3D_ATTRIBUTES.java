@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_3D_ATTRIBUTES {
  *     {@link FMOD_VECTOR FMOD_VECTOR} position;
  *     {@link FMOD_VECTOR FMOD_VECTOR} velocity;
  *     {@link FMOD_VECTOR FMOD_VECTOR} forward;
  *     {@link FMOD_VECTOR FMOD_VECTOR} up;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_3D_ATTRIBUTES extends Struct<FMOD_3D_ATTRIBUTES> implements NativeResource {
 

@@ -16,28 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Stub description of VkDescriptorSetLayoutHostMappingInfoVALVE.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VALVEDescriptorSetHostMapping#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VALVEDescriptorSetHostMapping#vkGetDescriptorSetLayoutHostMappingInfoVALVE GetDescriptorSetLayoutHostMappingInfoVALVE}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetLayoutHostMappingInfoVALVE {
  *     VkStructureType sType;
  *     void * pNext;
  *     size_t descriptorOffset;
  *     uint32_t descriptorSize;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDescriptorSetLayoutHostMappingInfoVALVE extends Struct<VkDescriptorSetLayoutHostMappingInfoVALVE> implements NativeResource {
 

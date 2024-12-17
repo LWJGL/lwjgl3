@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_VECTOR {
  *     float x;
  *     float y;
  *     float z;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_VECTOR extends Struct<FMOD_VECTOR> implements NativeResource {
 

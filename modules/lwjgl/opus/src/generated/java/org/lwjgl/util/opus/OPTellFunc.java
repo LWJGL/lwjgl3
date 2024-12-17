@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to {@link OpusFileCallbacks}.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * long long (*{@link #invoke}) (
- *     void *_stream
- * )</code></pre>
- */
+/** Callback function: {@link #invoke op_tell_func} */
 public abstract class OPTellFunc extends Callback implements OPTellFuncI {
 
     /**

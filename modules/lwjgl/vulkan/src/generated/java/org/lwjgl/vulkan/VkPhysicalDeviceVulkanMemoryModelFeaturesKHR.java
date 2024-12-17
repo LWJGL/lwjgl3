@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceVulkanMemoryModelFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceVulkanMemoryModelFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 vulkanMemoryModel;
  *     VkBool32 vulkanMemoryModelDeviceScope;
  *     VkBool32 vulkanMemoryModelAvailabilityVisibilityChains;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceVulkanMemoryModelFeaturesKHR extends VkPhysicalDeviceVulkanMemoryModelFeatures {
 

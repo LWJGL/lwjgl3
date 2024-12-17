@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     FTC_FaceID face_id,
- *     FT_Library library,
- *     FT_Pointer req_data,
- *     FT_Face *aface
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FTC_Face_Requester} */
 public abstract class FTC_Face_Requester extends Callback implements FTC_Face_RequesterI {
 
     /**

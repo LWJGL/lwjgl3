@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMOrcEE#LLVMOrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks OrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *CtxCtx
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMMemoryManagerCreateContextCallback} */
 public abstract class LLVMMemoryManagerCreateContextCallback extends Callback implements LLVMMemoryManagerCreateContextCallbackI {
 
     /**

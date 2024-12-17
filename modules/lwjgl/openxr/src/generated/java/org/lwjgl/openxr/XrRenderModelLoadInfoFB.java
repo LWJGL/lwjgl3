@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The information for which render model to load.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrRenderModelLoadInfoFB} is used to provide information about which render model to load. {@link XrRenderModelLoadInfoFB} <b>must</b> be provided when calling {@link FBRenderModel#xrLoadRenderModelFB LoadRenderModelFB}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using {@link XrRenderModelLoadInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBRenderModel#XR_TYPE_RENDER_MODEL_LOAD_INFO_FB TYPE_RENDER_MODEL_LOAD_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBRenderModel#xrLoadRenderModelFB LoadRenderModelFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrRenderModelLoadInfoFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrRenderModelKeyFB {@link #modelKey};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrRenderModelKeyFB modelKey;
+ * }}</pre>
  */
 public class XrRenderModelLoadInfoFB extends Struct<XrRenderModelLoadInfoFB> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class XrRenderModelLoadInfoFB extends Struct<XrRenderModelLoadInfoFB> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the unique model key for a connected device. */
+    /** @return the value of the {@code modelKey} field. */
     @NativeType("XrRenderModelKeyFB")
     public long modelKey() { return nmodelKey(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrRenderModelLoadInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_LOAD_INFO_FB TYPE_RENDER_MODEL_LOAD_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_LOAD_INFO_FB TYPE_RENDER_MODEL_LOAD_INFO_FB} value to the {@code type} field. */
     public XrRenderModelLoadInfoFB type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_LOAD_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrRenderModelLoadInfoFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #modelKey} field. */
+    /** Sets the specified value to the {@code modelKey} field. */
     public XrRenderModelLoadInfoFB modelKey(@NativeType("XrRenderModelKeyFB") long value) { nmodelKey(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class XrRenderModelLoadInfoFB extends Struct<XrRenderModelLoadInfoFB> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrRenderModelLoadInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrRenderModelLoadInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrRenderModelLoadInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrRenderModelLoadInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrRenderModelLoadInfoFB#modelKey} field. */
+        /** @return the value of the {@code modelKey} field. */
         @NativeType("XrRenderModelKeyFB")
         public long modelKey() { return XrRenderModelLoadInfoFB.nmodelKey(address()); }
 
-        /** Sets the specified value to the {@link XrRenderModelLoadInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrRenderModelLoadInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrRenderModelLoadInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_LOAD_INFO_FB TYPE_RENDER_MODEL_LOAD_INFO_FB} value to the {@link XrRenderModelLoadInfoFB#type} field. */
+        /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_LOAD_INFO_FB TYPE_RENDER_MODEL_LOAD_INFO_FB} value to the {@code type} field. */
         public XrRenderModelLoadInfoFB.Buffer type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_LOAD_INFO_FB); }
-        /** Sets the specified value to the {@link XrRenderModelLoadInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrRenderModelLoadInfoFB.Buffer next(@NativeType("void *") long value) { XrRenderModelLoadInfoFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrRenderModelLoadInfoFB#modelKey} field. */
+        /** Sets the specified value to the {@code modelKey} field. */
         public XrRenderModelLoadInfoFB.Buffer modelKey(@NativeType("XrRenderModelKeyFB") long value) { XrRenderModelLoadInfoFB.nmodelKey(address(), value); return this; }
 
     }

@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     FT_Incremental incremental,
- *     FT_Data *data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Incremental_FreeGlyphDataFunc} */
 public abstract class FT_Incremental_FreeGlyphDataFunc extends Callback implements FT_Incremental_FreeGlyphDataFuncI {
 
     /**

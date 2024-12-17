@@ -16,44 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify the subset of 3D slices of an image view.
- * 
- * <h5>Description</h5>
- * 
- * <p>When this structure is chained to {@link VkImageViewCreateInfo} the {@code sliceOffset} field is treated as a Z-offset for the sliced view and {@code sliceCount} specifies the range. Shader accesses using a Z coordinate of 0 will access the depth slice corresponding to {@code sliceOffset} in the image, and in a shader, the maximum in-bounds Z coordinate for the view is <code>sliceCount - 1</code>.</p>
- * 
- * <p>A sliced 3D view <b>must</b> only be used with a single mip level. The slice coordinates are integer coordinates within the {@code subresourceRange.baseMipLevel} used to create the image view.</p>
- * 
- * <p>The effective view depth is equal to {@code extent.depth} used to create the {@code image} for this view adjusted by {@code subresourceRange.baseMipLevel} as specified in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a>.</p>
- * 
- * <p>Shader access to this image view is only affected by {@link VkImageViewSlicedCreateInfoEXT} if it uses a descriptor of type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}. For access using any other descriptor type, the contents of {@link VkImageViewSlicedCreateInfoEXT} are ignored; instead, {@code sliceOffset} is treated as being equal to 0, and {@code sliceCount} is treated as being equal to {@link EXTImageSlicedViewOf3d#VK_REMAINING_3D_SLICES_EXT REMAINING_3D_SLICES_EXT}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code sliceOffset} <b>must</b> be less than the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
- * <li>If {@code sliceCount} is not {@link EXTImageSlicedViewOf3d#VK_REMAINING_3D_SLICES_EXT REMAINING_3D_SLICES_EXT}, it <b>must</b> be non-zero and <code>sliceOffset + sliceCount</code> <b>must</b> be less than or equal to the effective view depth as specified in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-mip-level-sizing">Image Mip Level Sizing</a></li>
- * <li>{@code image} <b>must</b> have been created with {@code imageType} equal to {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</li>
- * <li>{@code viewType} <b>must</b> be {@link VK10#VK_IMAGE_VIEW_TYPE_3D IMAGE_VIEW_TYPE_3D}</li>
- * <li>The image view <b>must</b> reference exactly 1 mip level</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-imageSlicedViewOf3D">imageSlicedViewOf3D</a> feature <b>must</b> be enabled</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImageSlicedViewOf3d#VK_STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageViewSlicedCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #sliceOffset};
- *     uint32_t {@link #sliceCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t sliceOffset;
+ *     uint32_t sliceCount;
+ * }}</pre>
  */
 public class VkImageViewSlicedCreateInfoEXT extends Struct<VkImageViewSlicedCreateInfoEXT> implements NativeResource {
 
@@ -109,28 +78,28 @@ public class VkImageViewSlicedCreateInfoEXT extends Struct<VkImageViewSlicedCrea
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the Z-offset for the first 3D slice accessible to the image view. */
+    /** @return the value of the {@code sliceOffset} field. */
     @NativeType("uint32_t")
     public int sliceOffset() { return nsliceOffset(address()); }
-    /** the number of 3D slices accessible to the image view. */
+    /** @return the value of the {@code sliceCount} field. */
     @NativeType("uint32_t")
     public int sliceCount() { return nsliceCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageViewSlicedCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImageSlicedViewOf3d#VK_STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTImageSlicedViewOf3d#VK_STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkImageViewSlicedCreateInfoEXT sType$Default() { return sType(EXTImageSlicedViewOf3d.VK_STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageViewSlicedCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #sliceOffset} field. */
+    /** Sets the specified value to the {@code sliceOffset} field. */
     public VkImageViewSlicedCreateInfoEXT sliceOffset(@NativeType("uint32_t") int value) { nsliceOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #sliceCount} field. */
+    /** Sets the specified value to the {@code sliceCount} field. */
     public VkImageViewSlicedCreateInfoEXT sliceCount(@NativeType("uint32_t") int value) { nsliceCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,28 +301,28 @@ public class VkImageViewSlicedCreateInfoEXT extends Struct<VkImageViewSlicedCrea
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageViewSlicedCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageViewSlicedCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkImageViewSlicedCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageViewSlicedCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkImageViewSlicedCreateInfoEXT#sliceOffset} field. */
+        /** @return the value of the {@code sliceOffset} field. */
         @NativeType("uint32_t")
         public int sliceOffset() { return VkImageViewSlicedCreateInfoEXT.nsliceOffset(address()); }
-        /** @return the value of the {@link VkImageViewSlicedCreateInfoEXT#sliceCount} field. */
+        /** @return the value of the {@code sliceCount} field. */
         @NativeType("uint32_t")
         public int sliceCount() { return VkImageViewSlicedCreateInfoEXT.nsliceCount(address()); }
 
-        /** Sets the specified value to the {@link VkImageViewSlicedCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageViewSlicedCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewSlicedCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImageSlicedViewOf3d#VK_STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT} value to the {@link VkImageViewSlicedCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTImageSlicedViewOf3d#VK_STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkImageViewSlicedCreateInfoEXT.Buffer sType$Default() { return sType(EXTImageSlicedViewOf3d.VK_STRUCTURE_TYPE_IMAGE_VIEW_SLICED_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkImageViewSlicedCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageViewSlicedCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImageViewSlicedCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewSlicedCreateInfoEXT#sliceOffset} field. */
+        /** Sets the specified value to the {@code sliceOffset} field. */
         public VkImageViewSlicedCreateInfoEXT.Buffer sliceOffset(@NativeType("uint32_t") int value) { VkImageViewSlicedCreateInfoEXT.nsliceOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewSlicedCreateInfoEXT#sliceCount} field. */
+        /** Sets the specified value to the {@code sliceCount} field. */
         public VkImageViewSlicedCreateInfoEXT.Buffer sliceCount(@NativeType("uint32_t") int value) { VkImageViewSlicedCreateInfoEXT.nsliceCount(address(), value); return this; }
 
     }

@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing feature to control zero to one depth clamping.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDepthClampZeroOne#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDepthClampZeroOneFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #depthClampZeroOne};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 depthClampZeroOne;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDepthClampZeroOneFeaturesEXT extends Struct<VkPhysicalDeviceDepthClampZeroOneFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceDepthClampZeroOneFeaturesEXT extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports clamping the depth to a range of 0 to 1. */
+    /** @return the value of the {@code depthClampZeroOne} field. */
     @NativeType("VkBool32")
     public boolean depthClampZeroOne() { return ndepthClampZeroOne(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDepthClampZeroOneFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDepthClampZeroOne#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDepthClampZeroOne#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDepthClampZeroOneFeaturesEXT sType$Default() { return sType(EXTDepthClampZeroOne.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDepthClampZeroOneFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthClampZeroOne} field. */
+    /** Sets the specified value to the {@code depthClampZeroOne} field. */
     public VkPhysicalDeviceDepthClampZeroOneFeaturesEXT depthClampZeroOne(@NativeType("VkBool32") boolean value) { ndepthClampZeroOne(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceDepthClampZeroOneFeaturesEXT extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT#depthClampZeroOne} field. */
+        /** @return the value of the {@code depthClampZeroOne} field. */
         @NativeType("VkBool32")
         public boolean depthClampZeroOne() { return VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.ndepthClampZeroOne(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDepthClampZeroOne#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT} value to the {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTDepthClampZeroOne#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.Buffer sType$Default() { return sType(EXTDepthClampZeroOne.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT#depthClampZeroOne} field. */
+        /** Sets the specified value to the {@code depthClampZeroOne} field. */
         public VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.Buffer depthClampZeroOne(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDepthClampZeroOneFeaturesEXT.ndepthClampZeroOne(address(), value ? 1 : 0); return this; }
 
     }

@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265VpsFlags {
  *     uint32_t vps_temporal_id_nesting_flag : 1;
  *     uint32_t vps_sub_layer_ordering_info_present_flag : 1;
  *     uint32_t vps_timing_info_present_flag : 1;
  *     uint32_t vps_poc_proportional_to_timing_flag : 1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH265VpsFlags extends Struct<StdVideoH265VpsFlags> implements NativeResource {
 

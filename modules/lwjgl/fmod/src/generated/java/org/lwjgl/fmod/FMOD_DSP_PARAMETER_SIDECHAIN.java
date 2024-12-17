@@ -16,12 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_PARAMETER_SIDECHAIN {
  *     FMOD_BOOL sidechainenable;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_PARAMETER_SIDECHAIN extends Struct<FMOD_DSP_PARAMETER_SIDECHAIN> implements NativeResource {
 

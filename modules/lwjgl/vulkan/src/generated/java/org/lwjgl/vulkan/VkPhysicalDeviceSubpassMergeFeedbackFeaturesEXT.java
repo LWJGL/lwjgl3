@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether subpass merging feedback can be supported by the implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #subpassMergeFeedback};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 subpassMergeFeedback;
+ * }}</pre>
  */
 public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct<VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct<VkPh
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports feedback of subpass merging. */
+    /** @return the value of the {@code subpassMergeFeedback} field. */
     @NativeType("VkBool32")
     public boolean subpassMergeFeedback() { return nsubpassMergeFeedback(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT sType$Default() { return sType(EXTSubpassMergeFeedback.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #subpassMergeFeedback} field. */
+    /** Sets the specified value to the {@code subpassMergeFeedback} field. */
     public VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT subpassMergeFeedback(@NativeType("VkBool32") boolean value) { nsubpassMergeFeedback(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT extends Struct<VkPh
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#subpassMergeFeedback} field. */
+        /** @return the value of the {@code subpassMergeFeedback} field. */
         @NativeType("VkBool32")
         public boolean subpassMergeFeedback() { return VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.nsubpassMergeFeedback(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT} value to the {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTSubpassMergeFeedback#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer sType$Default() { return sType(EXTSubpassMergeFeedback.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT#subpassMergeFeedback} field. */
+        /** Sets the specified value to the {@code subpassMergeFeedback} field. */
         public VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.Buffer subpassMergeFeedback(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT.nsubpassMergeFeedback(address(), value ? 1 : 0); return this; }
 
     }

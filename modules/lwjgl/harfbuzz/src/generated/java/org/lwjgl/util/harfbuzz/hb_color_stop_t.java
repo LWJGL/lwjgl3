@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_color_stop_t {
  *     float offset;
  *     hb_bool_t is_foreground;
  *     hb_color_t color;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_color_stop_t extends Struct<hb_color_stop_t> implements NativeResource {
 

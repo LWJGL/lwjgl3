@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDevice8BitStorageFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDevice8BitStorageFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 storageBuffer8BitAccess;
  *     VkBool32 uniformAndStorageBuffer8BitAccess;
  *     VkBool32 storagePushConstant8;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDevice8BitStorageFeaturesKHR extends VkPhysicalDevice8BitStorageFeatures {
 

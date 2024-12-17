@@ -17,28 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify layer capabilities for a Vulkan instance.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTLayerSettings#VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT}</li>
- * <li>If {@code settingCount} is not 0, {@code pSettings} <b>must</b> be a valid pointer to an array of {@code settingCount} valid {@link VkLayerSettingEXT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkLayerSettingEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkLayerSettingsCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #settingCount};
- *     {@link VkLayerSettingEXT VkLayerSettingEXT} const * {@link #pSettings};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t settingCount;
+ *     {@link VkLayerSettingEXT VkLayerSettingEXT} const * pSettings;
+ * }}</pre>
  */
 public class VkLayerSettingsCreateInfoEXT extends Struct<VkLayerSettingsCreateInfoEXT> implements NativeResource {
 
@@ -94,26 +79,26 @@ public class VkLayerSettingsCreateInfoEXT extends Struct<VkLayerSettingsCreateIn
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of settings to configure. */
+    /** @return the value of the {@code settingCount} field. */
     @NativeType("uint32_t")
     public int settingCount() { return nsettingCount(address()); }
-    /** a pointer to an array of {@code settingCount} {@link VkLayerSettingEXT} values specifying the settings to be configured. */
+    /** @return a {@link VkLayerSettingEXT.Buffer} view of the struct array pointed to by the {@code pSettings} field. */
     @NativeType("VkLayerSettingEXT const *")
     public VkLayerSettingEXT.@Nullable Buffer pSettings() { return npSettings(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkLayerSettingsCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTLayerSettings#VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTLayerSettings#VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkLayerSettingsCreateInfoEXT sType$Default() { return sType(EXTLayerSettings.VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkLayerSettingsCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkLayerSettingEXT.Buffer} to the {@link #pSettings} field. */
+    /** Sets the address of the specified {@link VkLayerSettingEXT.Buffer} to the {@code pSettings} field. */
     public VkLayerSettingsCreateInfoEXT pSettings(@NativeType("VkLayerSettingEXT const *") VkLayerSettingEXT.@Nullable Buffer value) { npSettings(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,26 +312,26 @@ public class VkLayerSettingsCreateInfoEXT extends Struct<VkLayerSettingsCreateIn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkLayerSettingsCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkLayerSettingsCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkLayerSettingsCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkLayerSettingsCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkLayerSettingsCreateInfoEXT#settingCount} field. */
+        /** @return the value of the {@code settingCount} field. */
         @NativeType("uint32_t")
         public int settingCount() { return VkLayerSettingsCreateInfoEXT.nsettingCount(address()); }
-        /** @return a {@link VkLayerSettingEXT.Buffer} view of the struct array pointed to by the {@link VkLayerSettingsCreateInfoEXT#pSettings} field. */
+        /** @return a {@link VkLayerSettingEXT.Buffer} view of the struct array pointed to by the {@code pSettings} field. */
         @NativeType("VkLayerSettingEXT const *")
         public VkLayerSettingEXT.@Nullable Buffer pSettings() { return VkLayerSettingsCreateInfoEXT.npSettings(address()); }
 
-        /** Sets the specified value to the {@link VkLayerSettingsCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkLayerSettingsCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkLayerSettingsCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTLayerSettings#VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT} value to the {@link VkLayerSettingsCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTLayerSettings#VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkLayerSettingsCreateInfoEXT.Buffer sType$Default() { return sType(EXTLayerSettings.VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkLayerSettingsCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkLayerSettingsCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkLayerSettingsCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkLayerSettingEXT.Buffer} to the {@link VkLayerSettingsCreateInfoEXT#pSettings} field. */
+        /** Sets the address of the specified {@link VkLayerSettingEXT.Buffer} to the {@code pSettings} field. */
         public VkLayerSettingsCreateInfoEXT.Buffer pSettings(@NativeType("VkLayerSettingEXT const *") VkLayerSettingEXT.@Nullable Buffer value) { VkLayerSettingsCreateInfoEXT.npSettings(address(), value); return this; }
 
     }

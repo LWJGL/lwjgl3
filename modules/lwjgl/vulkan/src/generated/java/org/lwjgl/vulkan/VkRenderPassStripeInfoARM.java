@@ -16,40 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying per rendering stripe information.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code stripeArea} is the render area that is affected by this stripe of the render pass instance. It <b>must</b> be a subregion of the {@code renderArea} of the render pass instance.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code stripeArea.offset.x} <b>must</b> be a multiple of {@link VkPhysicalDeviceRenderPassStripedPropertiesARM}{@code ::renderPassStripeGranularity.width}</li>
- * <li>{@code stripeArea.extent.width} <b>must</b> be a multiple of {@link VkPhysicalDeviceRenderPassStripedPropertiesARM}{@code ::renderPassStripeGranularity.width}, or the sum of {@code stripeArea.offset.x} and {@code stripeArea.extent.width} <b>must</b> be equal to the {@code renderArea.extent.width} of the render pass instance</li>
- * <li>{@code stripeArea.offset.y} <b>must</b> be a multiple of {@link VkPhysicalDeviceRenderPassStripedPropertiesARM}{@code ::renderPassStripeGranularity.height}</li>
- * <li>{@code stripeArea.extent.height} <b>must</b> be a multiple of {@link VkPhysicalDeviceRenderPassStripedPropertiesARM}{@code ::renderPassStripeGranularity.height}, or the sum of {@code stripeArea.offset.y} and {@code stripeArea.extent.height} <b>must</b> be equal to the {@code renderArea.extent.height} of the render pass instance</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRect2D}, {@link VkRenderPassStripeBeginInfoARM}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderPassStripeInfoARM {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkRect2D VkRect2D} {@link #stripeArea};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkRect2D VkRect2D} stripeArea;
+ * }}</pre>
  */
 public class VkRenderPassStripeInfoARM extends Struct<VkRenderPassStripeInfoARM> implements NativeResource {
 
@@ -102,24 +74,24 @@ public class VkRenderPassStripeInfoARM extends Struct<VkRenderPassStripeInfoARM>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the stripe area, and is described in more detail below. */
+    /** @return a {@link VkRect2D} view of the {@code stripeArea} field. */
     public VkRect2D stripeArea() { return nstripeArea(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRenderPassStripeInfoARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM} value to the {@link #sType} field. */
+    /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM} value to the {@code sType} field. */
     public VkRenderPassStripeInfoARM sType$Default() { return sType(ARMRenderPassStriped.VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRenderPassStripeInfoARM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkRect2D} to the {@link #stripeArea} field. */
+    /** Copies the specified {@link VkRect2D} to the {@code stripeArea} field. */
     public VkRenderPassStripeInfoARM stripeArea(VkRect2D value) { nstripeArea(address(), value); return this; }
-    /** Passes the {@link #stripeArea} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code stripeArea} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkRenderPassStripeInfoARM stripeArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(stripeArea()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,24 +287,24 @@ public class VkRenderPassStripeInfoARM extends Struct<VkRenderPassStripeInfoARM>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderPassStripeInfoARM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderPassStripeInfoARM.nsType(address()); }
-        /** @return the value of the {@link VkRenderPassStripeInfoARM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderPassStripeInfoARM.npNext(address()); }
-        /** @return a {@link VkRect2D} view of the {@link VkRenderPassStripeInfoARM#stripeArea} field. */
+        /** @return a {@link VkRect2D} view of the {@code stripeArea} field. */
         public VkRect2D stripeArea() { return VkRenderPassStripeInfoARM.nstripeArea(address()); }
 
-        /** Sets the specified value to the {@link VkRenderPassStripeInfoARM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRenderPassStripeInfoARM.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderPassStripeInfoARM.nsType(address(), value); return this; }
-        /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM} value to the {@link VkRenderPassStripeInfoARM#sType} field. */
+        /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM} value to the {@code sType} field. */
         public VkRenderPassStripeInfoARM.Buffer sType$Default() { return sType(ARMRenderPassStriped.VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM); }
-        /** Sets the specified value to the {@link VkRenderPassStripeInfoARM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRenderPassStripeInfoARM.Buffer pNext(@NativeType("void const *") long value) { VkRenderPassStripeInfoARM.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkRect2D} to the {@link VkRenderPassStripeInfoARM#stripeArea} field. */
+        /** Copies the specified {@link VkRect2D} to the {@code stripeArea} field. */
         public VkRenderPassStripeInfoARM.Buffer stripeArea(VkRect2D value) { VkRenderPassStripeInfoARM.nstripeArea(address(), value); return this; }
-        /** Passes the {@link VkRenderPassStripeInfoARM#stripeArea} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code stripeArea} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkRenderPassStripeInfoARM.Buffer stripeArea(java.util.function.Consumer<VkRect2D> consumer) { consumer.accept(stripeArea()); return this; }
 
     }

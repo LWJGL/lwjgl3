@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_cqring_offsets {
  *     __u32 head;
  *     __u32 tail;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u32 flags;
  *     __u32 resv1;
  *     __u64 user_addr;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_cqring_offsets")
 public class IOCQRingOffsets extends Struct<IOCQRingOffsets> implements NativeResource {

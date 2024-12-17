@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Defines the coordinates of the upper-left and lower-right corners of a rectangle.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct RECT {
- *     LONG {@link #left};
- *     LONG {@link #top};
- *     LONG {@link #right};
- *     LONG {@link #bottom};
- * }</code></pre>
+ *     LONG left;
+ *     LONG top;
+ *     LONG right;
+ *     LONG bottom;
+ * }}</pre>
  */
 public class RECT extends Struct<RECT> implements NativeResource {
 
@@ -82,26 +78,26 @@ public class RECT extends Struct<RECT> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the x-coordinate of the upper-left corner of the rectangle */
+    /** @return the value of the {@code left} field. */
     @NativeType("LONG")
     public int left() { return nleft(address()); }
-    /** the y-coordinate of the upper-left corner of the rectangle */
+    /** @return the value of the {@code top} field. */
     @NativeType("LONG")
     public int top() { return ntop(address()); }
-    /** the x-coordinate of the lower-right corner of the rectangle */
+    /** @return the value of the {@code right} field. */
     @NativeType("LONG")
     public int right() { return nright(address()); }
-    /** the y-coordinate of the lower-right corner of the rectangle */
+    /** @return the value of the {@code bottom} field. */
     @NativeType("LONG")
     public int bottom() { return nbottom(address()); }
 
-    /** Sets the specified value to the {@link #left} field. */
+    /** Sets the specified value to the {@code left} field. */
     public RECT left(@NativeType("LONG") int value) { nleft(address(), value); return this; }
-    /** Sets the specified value to the {@link #top} field. */
+    /** Sets the specified value to the {@code top} field. */
     public RECT top(@NativeType("LONG") int value) { ntop(address(), value); return this; }
-    /** Sets the specified value to the {@link #right} field. */
+    /** Sets the specified value to the {@code right} field. */
     public RECT right(@NativeType("LONG") int value) { nright(address(), value); return this; }
-    /** Sets the specified value to the {@link #bottom} field. */
+    /** Sets the specified value to the {@code bottom} field. */
     public RECT bottom(@NativeType("LONG") int value) { nbottom(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,26 +318,26 @@ public class RECT extends Struct<RECT> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link RECT#left} field. */
+        /** @return the value of the {@code left} field. */
         @NativeType("LONG")
         public int left() { return RECT.nleft(address()); }
-        /** @return the value of the {@link RECT#top} field. */
+        /** @return the value of the {@code top} field. */
         @NativeType("LONG")
         public int top() { return RECT.ntop(address()); }
-        /** @return the value of the {@link RECT#right} field. */
+        /** @return the value of the {@code right} field. */
         @NativeType("LONG")
         public int right() { return RECT.nright(address()); }
-        /** @return the value of the {@link RECT#bottom} field. */
+        /** @return the value of the {@code bottom} field. */
         @NativeType("LONG")
         public int bottom() { return RECT.nbottom(address()); }
 
-        /** Sets the specified value to the {@link RECT#left} field. */
+        /** Sets the specified value to the {@code left} field. */
         public RECT.Buffer left(@NativeType("LONG") int value) { RECT.nleft(address(), value); return this; }
-        /** Sets the specified value to the {@link RECT#top} field. */
+        /** Sets the specified value to the {@code top} field. */
         public RECT.Buffer top(@NativeType("LONG") int value) { RECT.ntop(address(), value); return this; }
-        /** Sets the specified value to the {@link RECT#right} field. */
+        /** Sets the specified value to the {@code right} field. */
         public RECT.Buffer right(@NativeType("LONG") int value) { RECT.nright(address(), value); return this; }
-        /** Sets the specified value to the {@link RECT#bottom} field. */
+        /** Sets the specified value to the {@code bottom} field. */
         public RECT.Buffer bottom(@NativeType("LONG") int value) { RECT.nbottom(address(), value); return this; }
 
     }

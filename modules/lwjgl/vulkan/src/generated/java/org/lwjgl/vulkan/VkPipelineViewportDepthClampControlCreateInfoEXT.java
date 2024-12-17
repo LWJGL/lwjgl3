@@ -16,39 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created pipeline depth clamp control state.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure extends {@link VkPipelineViewportStateCreateInfo} and specifies the depth clamp range used in the pipeline. If this structure is not provided in the next chain then {@code depthClampMode} defaults to {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT DEPTH_CLAMP_MODE_VIEWPORT_RANGE_EXT}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code depthClampMode} is {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}, and the pipeline is not created with {@link EXTDepthClampControl#VK_DYNAMIC_STATE_DEPTH_CLAMP_RANGE_EXT DYNAMIC_STATE_DEPTH_CLAMP_RANGE_EXT}, then {@code pDepthClampRange} <b>must</b> be a valid pointer to a valid {@link VkDepthClampRangeEXT} structure</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT}</li>
- * <li>{@code depthClampMode} <b>must</b> be a valid {@code VkDepthClampModeEXT} value</li>
- * <li>If {@code pDepthClampRange} is not {@code NULL}, {@code pDepthClampRange} <b>must</b> be a valid pointer to a valid {@link VkDepthClampRangeEXT} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDepthClampRangeEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineViewportDepthClampControlCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDepthClampModeEXT {@link #depthClampMode};
- *     {@link VkDepthClampRangeEXT VkDepthClampRangeEXT} const * {@link #pDepthClampRange};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDepthClampModeEXT depthClampMode;
+ *     {@link VkDepthClampRangeEXT VkDepthClampRangeEXT} const * pDepthClampRange;
+ * }}</pre>
  */
 public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkPipelineViewportDepthClampControlCreateInfoEXT> implements NativeResource {
 
@@ -104,28 +78,28 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** determines how the clamp range is determined for each viewport. */
+    /** @return the value of the {@code depthClampMode} field. */
     @NativeType("VkDepthClampModeEXT")
     public int depthClampMode() { return ndepthClampMode(address()); }
-    /** sets the depth clamp range for all viewports if {@code depthClampMode} is {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}. */
+    /** @return a {@link VkDepthClampRangeEXT} view of the struct pointed to by the {@code pDepthClampRange} field. */
     @NativeType("VkDepthClampRangeEXT const *")
     public @Nullable VkDepthClampRangeEXT pDepthClampRange() { return npDepthClampRange(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineViewportDepthClampControlCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkPipelineViewportDepthClampControlCreateInfoEXT sType$Default() { return sType(EXTDepthClampControl.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineViewportDepthClampControlCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthClampMode} field. */
+    /** Sets the specified value to the {@code depthClampMode} field. */
     public VkPipelineViewportDepthClampControlCreateInfoEXT depthClampMode(@NativeType("VkDepthClampModeEXT") int value) { ndepthClampMode(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDepthClampRangeEXT} to the {@link #pDepthClampRange} field. */
+    /** Sets the address of the specified {@link VkDepthClampRangeEXT} to the {@code pDepthClampRange} field. */
     public VkPipelineViewportDepthClampControlCreateInfoEXT pDepthClampRange(@Nullable @NativeType("VkDepthClampRangeEXT const *") VkDepthClampRangeEXT value) { npDepthClampRange(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,28 +301,28 @@ public class VkPipelineViewportDepthClampControlCreateInfoEXT extends Struct<VkP
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineViewportDepthClampControlCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineViewportDepthClampControlCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#depthClampMode} field. */
+        /** @return the value of the {@code depthClampMode} field. */
         @NativeType("VkDepthClampModeEXT")
         public int depthClampMode() { return VkPipelineViewportDepthClampControlCreateInfoEXT.ndepthClampMode(address()); }
-        /** @return a {@link VkDepthClampRangeEXT} view of the struct pointed to by the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#pDepthClampRange} field. */
+        /** @return a {@link VkDepthClampRangeEXT} view of the struct pointed to by the {@code pDepthClampRange} field. */
         @NativeType("VkDepthClampRangeEXT const *")
         public @Nullable VkDepthClampRangeEXT pDepthClampRange() { return VkPipelineViewportDepthClampControlCreateInfoEXT.npDepthClampRange(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineViewportDepthClampControlCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineViewportDepthClampControlCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT} value to the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkPipelineViewportDepthClampControlCreateInfoEXT.Buffer sType$Default() { return sType(EXTDepthClampControl.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineViewportDepthClampControlCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkPipelineViewportDepthClampControlCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#depthClampMode} field. */
+        /** Sets the specified value to the {@code depthClampMode} field. */
         public VkPipelineViewportDepthClampControlCreateInfoEXT.Buffer depthClampMode(@NativeType("VkDepthClampModeEXT") int value) { VkPipelineViewportDepthClampControlCreateInfoEXT.ndepthClampMode(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDepthClampRangeEXT} to the {@link VkPipelineViewportDepthClampControlCreateInfoEXT#pDepthClampRange} field. */
+        /** Sets the address of the specified {@link VkDepthClampRangeEXT} to the {@code pDepthClampRange} field. */
         public VkPipelineViewportDepthClampControlCreateInfoEXT.Buffer pDepthClampRange(@Nullable @NativeType("VkDepthClampRangeEXT const *") VkDepthClampRangeEXT value) { VkPipelineViewportDepthClampControlCreateInfoEXT.npDepthClampRange(address(), value); return this; }
 
     }

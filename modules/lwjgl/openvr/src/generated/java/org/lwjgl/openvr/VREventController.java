@@ -14,14 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Used for controller button events.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Controller_t {
- *     uint32_t {@link #button};
- * }</code></pre>
+ *     uint32_t button;
+ * }}</pre>
  */
 @NativeType("struct VREvent_Controller_t")
 public class VREventController extends Struct<VREventController> {
@@ -69,7 +65,7 @@ public class VREventController extends Struct<VREventController> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** one of:<br><table><tr><td>{@link VR#EVRButtonId_k_EButton_System}</td><td>{@link VR#EVRButtonId_k_EButton_ApplicationMenu}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_Grip}</td><td>{@link VR#EVRButtonId_k_EButton_DPad_Left}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_DPad_Up}</td><td>{@link VR#EVRButtonId_k_EButton_DPad_Right}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_DPad_Down}</td><td>{@link VR#EVRButtonId_k_EButton_A}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_ProximitySensor}</td><td>{@link VR#EVRButtonId_k_EButton_Axis0}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_Axis1}</td><td>{@link VR#EVRButtonId_k_EButton_Axis2}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_Axis3}</td><td>{@link VR#EVRButtonId_k_EButton_Axis4}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_SteamVR_Touchpad}</td><td>{@link VR#EVRButtonId_k_EButton_SteamVR_Trigger}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_Dashboard_Back}</td><td>{@link VR#EVRButtonId_k_EButton_IndexController_A}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_IndexController_B}</td><td>{@link VR#EVRButtonId_k_EButton_IndexController_JoyStick}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_Reserved0}</td><td>{@link VR#EVRButtonId_k_EButton_Reserved1}</td></tr><tr><td>{@link VR#EVRButtonId_k_EButton_Max}</td></tr></table> */
+    /** @return the value of the {@code button} field. */
     @NativeType("uint32_t")
     public int button() { return nbutton(address()); }
 
@@ -148,7 +144,7 @@ public class VREventController extends Struct<VREventController> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VREventController#button} field. */
+        /** @return the value of the {@code button} field. */
         @NativeType("uint32_t")
         public int button() { return VREventController.nbutton(address()); }
 

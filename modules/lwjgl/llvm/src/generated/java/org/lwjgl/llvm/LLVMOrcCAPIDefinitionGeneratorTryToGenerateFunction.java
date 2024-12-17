@@ -11,23 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMOrc#LLVMOrcCreateCustomCAPIDefinitionGenerator OrcCreateCustomCAPIDefinitionGenerator} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LLVMErrorRef (*{@link #invoke}) (
- *     LLVMOrcDefinitionGeneratorRef GeneratorObj,
- *     void *Ctx,
- *     LLVMOrcLookupStateRef *LookupState,
- *     LLVMOrcLookupKind Kind,
- *     LLVMOrcJITDylibRef JD,
- *     LLVMOrcJITDylibLookupFlags JDLookupFlags,
- *     LLVMOrcCLookupSet LookupSet,
- *     size_t LookupSetSize
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction} */
 public abstract class LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunction extends Callback implements LLVMOrcCAPIDefinitionGeneratorTryToGenerateFunctionI {
 
     /**

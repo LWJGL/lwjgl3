@@ -17,62 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created debug messenger.
- * 
- * <h5>Description</h5>
- * 
- * <p>For each {@code VkDebugUtilsMessengerEXT} that is created the {@link VkDebugUtilsMessengerCreateInfoEXT}{@code ::messageSeverity} and {@link VkDebugUtilsMessengerCreateInfoEXT}{@code ::messageType} determine when that {@link VkDebugUtilsMessengerCreateInfoEXT}{@code ::pfnUserCallback} is called. The process to determine if the user’s {@code pfnUserCallback} is triggered when an event occurs is as follows:</p>
- * 
- * <ul>
- * <li>The implementation will perform a bitwise AND of the event’s {@code VkDebugUtilsMessageSeverityFlagBitsEXT} with the {@code messageSeverity} provided during creation of the {@code VkDebugUtilsMessengerEXT} object.
- * 
- * <ul>
- * <li>If the value is 0, the message is skipped.</li>
- * </ul>
- * </li>
- * <li>The implementation will perform bitwise AND of the event’s {@code VkDebugUtilsMessageTypeFlagBitsEXT} with the {@code messageType} provided during the creation of the {@code VkDebugUtilsMessengerEXT} object.
- * 
- * <ul>
- * <li>If the value is 0, the message is skipped.</li>
- * </ul>
- * </li>
- * <li>The callback will trigger a debug message for the current event</li>
- * </ul>
- * 
- * <p>The callback will come directly from the component that detected the event, unless some other layer intercepts the calls for its own purposes (filter them in a different way, log to a system error log, etc.).</p>
- * 
- * <p>An application <b>can</b> receive multiple callbacks if multiple {@code VkDebugUtilsMessengerEXT} objects are created. A callback will always be executed in the same thread as the originating Vulkan call.</p>
- * 
- * <p>A callback <b>can</b> be called from multiple threads simultaneously (if the application is making Vulkan calls from multiple threads).</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code messageSeverity} <b>must</b> be a valid combination of {@code VkDebugUtilsMessageSeverityFlagBitsEXT} values</li>
- * <li>{@code messageSeverity} <b>must</b> not be 0</li>
- * <li>{@code messageType} <b>must</b> be a valid combination of {@code VkDebugUtilsMessageTypeFlagBitsEXT} values</li>
- * <li>{@code messageType} <b>must</b> not be 0</li>
- * <li>{@code pfnUserCallback} <b>must</b> be a valid {@link VkDebugUtilsMessengerCallbackEXT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDebugUtilsMessengerCallbackEXT}, {@link EXTDebugUtils#vkCreateDebugUtilsMessengerEXT CreateDebugUtilsMessengerEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDebugUtilsMessengerCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDebugUtilsMessengerCreateFlagsEXT {@link #flags};
- *     VkDebugUtilsMessageSeverityFlagsEXT {@link #messageSeverity};
- *     VkDebugUtilsMessageTypeFlagsEXT {@link #messageType};
- *     {@link VkDebugUtilsMessengerCallbackEXTI PFN_vkDebugUtilsMessengerCallbackEXT} {@link #pfnUserCallback};
- *     void * {@link #pUserData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDebugUtilsMessengerCreateFlagsEXT flags;
+ *     VkDebugUtilsMessageSeverityFlagsEXT messageSeverity;
+ *     VkDebugUtilsMessageTypeFlagsEXT messageType;
+ *     {@link VkDebugUtilsMessengerCallbackEXTI PFN_vkDebugUtilsMessengerCallbackEXT} pfnUserCallback;
+ *     void * pUserData;
+ * }}</pre>
  */
 public class VkDebugUtilsMessengerCreateInfoEXT extends Struct<VkDebugUtilsMessengerCreateInfoEXT> implements NativeResource {
 
@@ -137,43 +91,43 @@ public class VkDebugUtilsMessengerCreateInfoEXT extends Struct<VkDebugUtilsMesse
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** 0 and is reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkDebugUtilsMessengerCreateFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** a bitmask of {@code VkDebugUtilsMessageSeverityFlagBitsEXT} specifying which severity of event(s) will cause this callback to be called. */
+    /** @return the value of the {@code messageSeverity} field. */
     @NativeType("VkDebugUtilsMessageSeverityFlagsEXT")
     public int messageSeverity() { return nmessageSeverity(address()); }
-    /** a bitmask of {@code VkDebugUtilsMessageTypeFlagBitsEXT} specifying which type of event(s) will cause this callback to be called. */
+    /** @return the value of the {@code messageType} field. */
     @NativeType("VkDebugUtilsMessageTypeFlagsEXT")
     public int messageType() { return nmessageType(address()); }
-    /** the application callback function to call. */
+    /** @return the value of the {@code pfnUserCallback} field. */
     @NativeType("PFN_vkDebugUtilsMessengerCallbackEXT")
     public VkDebugUtilsMessengerCallbackEXT pfnUserCallback() { return npfnUserCallback(address()); }
-    /** user data to be passed to the callback. */
+    /** @return the value of the {@code pUserData} field. */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDebugUtilsMessengerCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkDebugUtilsMessengerCreateInfoEXT sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDebugUtilsMessengerCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkDebugUtilsMessengerCreateInfoEXT flags(@NativeType("VkDebugUtilsMessengerCreateFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #messageSeverity} field. */
+    /** Sets the specified value to the {@code messageSeverity} field. */
     public VkDebugUtilsMessengerCreateInfoEXT messageSeverity(@NativeType("VkDebugUtilsMessageSeverityFlagsEXT") int value) { nmessageSeverity(address(), value); return this; }
-    /** Sets the specified value to the {@link #messageType} field. */
+    /** Sets the specified value to the {@code messageType} field. */
     public VkDebugUtilsMessengerCreateInfoEXT messageType(@NativeType("VkDebugUtilsMessageTypeFlagsEXT") int value) { nmessageType(address(), value); return this; }
-    /** Sets the specified value to the {@link #pfnUserCallback} field. */
+    /** Sets the specified value to the {@code pfnUserCallback} field. */
     public VkDebugUtilsMessengerCreateInfoEXT pfnUserCallback(@NativeType("PFN_vkDebugUtilsMessengerCallbackEXT") VkDebugUtilsMessengerCallbackEXTI value) { npfnUserCallback(address(), value); return this; }
-    /** Sets the specified value to the {@link #pUserData} field. */
+    /** Sets the specified value to the {@code pUserData} field. */
     public VkDebugUtilsMessengerCreateInfoEXT pUserData(@NativeType("void *") long value) { npUserData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -421,43 +375,43 @@ public class VkDebugUtilsMessengerCreateInfoEXT extends Struct<VkDebugUtilsMesse
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDebugUtilsMessengerCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDebugUtilsMessengerCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDebugUtilsMessengerCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCreateInfoEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkDebugUtilsMessengerCreateFlagsEXT")
         public int flags() { return VkDebugUtilsMessengerCreateInfoEXT.nflags(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCreateInfoEXT#messageSeverity} field. */
+        /** @return the value of the {@code messageSeverity} field. */
         @NativeType("VkDebugUtilsMessageSeverityFlagsEXT")
         public int messageSeverity() { return VkDebugUtilsMessengerCreateInfoEXT.nmessageSeverity(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCreateInfoEXT#messageType} field. */
+        /** @return the value of the {@code messageType} field. */
         @NativeType("VkDebugUtilsMessageTypeFlagsEXT")
         public int messageType() { return VkDebugUtilsMessengerCreateInfoEXT.nmessageType(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCreateInfoEXT#pfnUserCallback} field. */
+        /** @return the value of the {@code pfnUserCallback} field. */
         @NativeType("PFN_vkDebugUtilsMessengerCallbackEXT")
         public VkDebugUtilsMessengerCallbackEXT pfnUserCallback() { return VkDebugUtilsMessengerCreateInfoEXT.npfnUserCallback(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCreateInfoEXT#pUserData} field. */
+        /** @return the value of the {@code pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VkDebugUtilsMessengerCreateInfoEXT.npUserData(address()); }
 
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDebugUtilsMessengerCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugUtilsMessengerCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT} value to the {@link VkDebugUtilsMessengerCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkDebugUtilsMessengerCreateInfoEXT.Buffer sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDebugUtilsMessengerCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugUtilsMessengerCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCreateInfoEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkDebugUtilsMessengerCreateInfoEXT.Buffer flags(@NativeType("VkDebugUtilsMessengerCreateFlagsEXT") int value) { VkDebugUtilsMessengerCreateInfoEXT.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCreateInfoEXT#messageSeverity} field. */
+        /** Sets the specified value to the {@code messageSeverity} field. */
         public VkDebugUtilsMessengerCreateInfoEXT.Buffer messageSeverity(@NativeType("VkDebugUtilsMessageSeverityFlagsEXT") int value) { VkDebugUtilsMessengerCreateInfoEXT.nmessageSeverity(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCreateInfoEXT#messageType} field. */
+        /** Sets the specified value to the {@code messageType} field. */
         public VkDebugUtilsMessengerCreateInfoEXT.Buffer messageType(@NativeType("VkDebugUtilsMessageTypeFlagsEXT") int value) { VkDebugUtilsMessengerCreateInfoEXT.nmessageType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCreateInfoEXT#pfnUserCallback} field. */
+        /** Sets the specified value to the {@code pfnUserCallback} field. */
         public VkDebugUtilsMessengerCreateInfoEXT.Buffer pfnUserCallback(@NativeType("PFN_vkDebugUtilsMessengerCallbackEXT") VkDebugUtilsMessengerCallbackEXTI value) { VkDebugUtilsMessengerCreateInfoEXT.npfnUserCallback(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCreateInfoEXT#pUserData} field. */
+        /** Sets the specified value to the {@code pUserData} field. */
         public VkDebugUtilsMessengerCreateInfoEXT.Buffer pUserData(@NativeType("void *") long value) { VkDebugUtilsMessengerCreateInfoEXT.npUserData(address(), value); return this; }
 
     }

@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure used to associate a queueSubmit with a presentId.
- * 
- * <h5>Description</h5>
- * 
- * <p>For any submission to be tracked with low latency mode pacing, it needs to be associated with other submissions in a given present. To associate a submission with {@code presentID} for low latency mode, the {@code pNext} chain of {@link VK10#vkQueueSubmit QueueSubmit} <b>must</b> include a {@link VkLatencySubmissionPresentIdNV} structure.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkLatencySubmissionPresentIdNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint64_t {@link #presentID};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint64_t presentID;
+ * }}</pre>
  */
 public class VkLatencySubmissionPresentIdNV extends Struct<VkLatencySubmissionPresentIdNV> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkLatencySubmissionPresentIdNV extends Struct<VkLatencySubmissionPr
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** used to associate the {@code vkQueueSubmit} with the presentId used for a given {@code vkQueuePresentKHR} via {@link VkPresentIdKHR}{@code ::pPresentIds}. */
+    /** @return the value of the {@code presentID} field. */
     @NativeType("uint64_t")
     public long presentID() { return npresentID(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkLatencySubmissionPresentIdNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV} value to the {@code sType} field. */
     public VkLatencySubmissionPresentIdNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkLatencySubmissionPresentIdNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #presentID} field. */
+    /** Sets the specified value to the {@code presentID} field. */
     public VkLatencySubmissionPresentIdNV presentID(@NativeType("uint64_t") long value) { npresentID(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkLatencySubmissionPresentIdNV extends Struct<VkLatencySubmissionPr
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkLatencySubmissionPresentIdNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkLatencySubmissionPresentIdNV.nsType(address()); }
-        /** @return the value of the {@link VkLatencySubmissionPresentIdNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkLatencySubmissionPresentIdNV.npNext(address()); }
-        /** @return the value of the {@link VkLatencySubmissionPresentIdNV#presentID} field. */
+        /** @return the value of the {@code presentID} field. */
         @NativeType("uint64_t")
         public long presentID() { return VkLatencySubmissionPresentIdNV.npresentID(address()); }
 
-        /** Sets the specified value to the {@link VkLatencySubmissionPresentIdNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkLatencySubmissionPresentIdNV.Buffer sType(@NativeType("VkStructureType") int value) { VkLatencySubmissionPresentIdNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV} value to the {@link VkLatencySubmissionPresentIdNV#sType} field. */
+        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV} value to the {@code sType} field. */
         public VkLatencySubmissionPresentIdNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV); }
-        /** Sets the specified value to the {@link VkLatencySubmissionPresentIdNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkLatencySubmissionPresentIdNV.Buffer pNext(@NativeType("void const *") long value) { VkLatencySubmissionPresentIdNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencySubmissionPresentIdNV#presentID} field. */
+        /** Sets the specified value to the {@code presentID} field. */
         public VkLatencySubmissionPresentIdNV.Buffer presentID(@NativeType("uint64_t") long value) { VkLatencySubmissionPresentIdNV.npresentID(address(), value); return this; }
 
     }

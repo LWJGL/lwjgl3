@@ -16,43 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an image copy operation.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@link KHRSamplerYcbcrConversion VK_KHR_sampler_ycbcr_conversion} extension is not enabled, and {@link VkPhysicalDeviceProperties}{@code ::apiVersion} is less than Vulkan 1.1, the {@code aspectMask} member of {@code srcSubresource} and {@code dstSubresource} <b>must</b> match</li>
- * <li>If the {@link KHRMaintenance1 VK_KHR_maintenance1} extension is not enabled, and {@link VkPhysicalDeviceProperties}{@code ::apiVersion} is less than Vulkan 1.1, the {@code layerCount} member of {@code srcSubresource} and {@code dstSubresource} <b>must</b> match</li>
- * <li>{@code extent.width} <b>must</b> not be 0</li>
- * <li>{@code extent.height} <b>must</b> not be 0</li>
- * <li>{@code extent.depth} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_IMAGE_COPY_2 STRUCTURE_TYPE_IMAGE_COPY_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code srcSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
- * <li>{@code dstSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkCopyImageInfo2}, {@link VkCopyImageToImageInfo}, {@link VkExtent3D}, {@link VkImageSubresourceLayers}, {@link VkOffset3D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageCopy2 {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} {@link #srcSubresource};
- *     {@link VkOffset3D VkOffset3D} {@link #srcOffset};
- *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} {@link #dstSubresource};
- *     {@link VkOffset3D VkOffset3D} {@link #dstOffset};
- *     {@link VkExtent3D VkExtent3D} {@link #extent};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} srcSubresource;
+ *     {@link VkOffset3D VkOffset3D} srcOffset;
+ *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} dstSubresource;
+ *     {@link VkOffset3D VkOffset3D} dstOffset;
+ *     {@link VkExtent3D VkExtent3D} extent;
+ * }}</pre>
  */
 public class VkImageCopy2 extends Struct<VkImageCopy2> implements NativeResource {
 
@@ -117,48 +90,48 @@ public class VkImageCopy2 extends Struct<VkImageCopy2> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** {@code srcSubresource} and {@code dstSubresource} are {@link VkImageSubresourceLayers} structures specifying the image subresources of the images used for the source and destination image data, respectively. */
+    /** @return a {@link VkImageSubresourceLayers} view of the {@code srcSubresource} field. */
     public VkImageSubresourceLayers srcSubresource() { return nsrcSubresource(address()); }
-    /** {@code srcOffset} and {@code dstOffset} select the initial {@code x}, {@code y}, and {@code z} offsets in texels of the sub-regions of the source and destination image data. */
+    /** @return a {@link VkOffset3D} view of the {@code srcOffset} field. */
     public VkOffset3D srcOffset() { return nsrcOffset(address()); }
-    /** see {@code srcSubresource} */
+    /** @return a {@link VkImageSubresourceLayers} view of the {@code dstSubresource} field. */
     public VkImageSubresourceLayers dstSubresource() { return ndstSubresource(address()); }
-    /** see {@code srcOffset} */
+    /** @return a {@link VkOffset3D} view of the {@code dstOffset} field. */
     public VkOffset3D dstOffset() { return ndstOffset(address()); }
-    /** the size in texels of the image to copy in {@code width}, {@code height} and {@code depth}. */
+    /** @return a {@link VkExtent3D} view of the {@code extent} field. */
     public VkExtent3D extent() { return nextent(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageCopy2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_IMAGE_COPY_2 STRUCTURE_TYPE_IMAGE_COPY_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_IMAGE_COPY_2 STRUCTURE_TYPE_IMAGE_COPY_2} value to the {@code sType} field. */
     public VkImageCopy2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_IMAGE_COPY_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageCopy2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #srcSubresource} field. */
+    /** Copies the specified {@link VkImageSubresourceLayers} to the {@code srcSubresource} field. */
     public VkImageCopy2 srcSubresource(VkImageSubresourceLayers value) { nsrcSubresource(address(), value); return this; }
-    /** Passes the {@link #srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageCopy2 srcSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(srcSubresource()); return this; }
-    /** Copies the specified {@link VkOffset3D} to the {@link #srcOffset} field. */
+    /** Copies the specified {@link VkOffset3D} to the {@code srcOffset} field. */
     public VkImageCopy2 srcOffset(VkOffset3D value) { nsrcOffset(address(), value); return this; }
-    /** Passes the {@link #srcOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code srcOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageCopy2 srcOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(srcOffset()); return this; }
-    /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #dstSubresource} field. */
+    /** Copies the specified {@link VkImageSubresourceLayers} to the {@code dstSubresource} field. */
     public VkImageCopy2 dstSubresource(VkImageSubresourceLayers value) { ndstSubresource(address(), value); return this; }
-    /** Passes the {@link #dstSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code dstSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageCopy2 dstSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(dstSubresource()); return this; }
-    /** Copies the specified {@link VkOffset3D} to the {@link #dstOffset} field. */
+    /** Copies the specified {@link VkOffset3D} to the {@code dstOffset} field. */
     public VkImageCopy2 dstOffset(VkOffset3D value) { ndstOffset(address(), value); return this; }
-    /** Passes the {@link #dstOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code dstOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageCopy2 dstOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(dstOffset()); return this; }
-    /** Copies the specified {@link VkExtent3D} to the {@link #extent} field. */
+    /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
     public VkImageCopy2 extent(VkExtent3D value) { nextent(address(), value); return this; }
-    /** Passes the {@link #extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageCopy2 extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -378,48 +351,48 @@ public class VkImageCopy2 extends Struct<VkImageCopy2> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageCopy2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageCopy2.nsType(address()); }
-        /** @return the value of the {@link VkImageCopy2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageCopy2.npNext(address()); }
-        /** @return a {@link VkImageSubresourceLayers} view of the {@link VkImageCopy2#srcSubresource} field. */
+        /** @return a {@link VkImageSubresourceLayers} view of the {@code srcSubresource} field. */
         public VkImageSubresourceLayers srcSubresource() { return VkImageCopy2.nsrcSubresource(address()); }
-        /** @return a {@link VkOffset3D} view of the {@link VkImageCopy2#srcOffset} field. */
+        /** @return a {@link VkOffset3D} view of the {@code srcOffset} field. */
         public VkOffset3D srcOffset() { return VkImageCopy2.nsrcOffset(address()); }
-        /** @return a {@link VkImageSubresourceLayers} view of the {@link VkImageCopy2#dstSubresource} field. */
+        /** @return a {@link VkImageSubresourceLayers} view of the {@code dstSubresource} field. */
         public VkImageSubresourceLayers dstSubresource() { return VkImageCopy2.ndstSubresource(address()); }
-        /** @return a {@link VkOffset3D} view of the {@link VkImageCopy2#dstOffset} field. */
+        /** @return a {@link VkOffset3D} view of the {@code dstOffset} field. */
         public VkOffset3D dstOffset() { return VkImageCopy2.ndstOffset(address()); }
-        /** @return a {@link VkExtent3D} view of the {@link VkImageCopy2#extent} field. */
+        /** @return a {@link VkExtent3D} view of the {@code extent} field. */
         public VkExtent3D extent() { return VkImageCopy2.nextent(address()); }
 
-        /** Sets the specified value to the {@link VkImageCopy2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageCopy2.Buffer sType(@NativeType("VkStructureType") int value) { VkImageCopy2.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_IMAGE_COPY_2 STRUCTURE_TYPE_IMAGE_COPY_2} value to the {@link VkImageCopy2#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_IMAGE_COPY_2 STRUCTURE_TYPE_IMAGE_COPY_2} value to the {@code sType} field. */
         public VkImageCopy2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_IMAGE_COPY_2); }
-        /** Sets the specified value to the {@link VkImageCopy2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageCopy2.Buffer pNext(@NativeType("void const *") long value) { VkImageCopy2.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkImageCopy2#srcSubresource} field. */
+        /** Copies the specified {@link VkImageSubresourceLayers} to the {@code srcSubresource} field. */
         public VkImageCopy2.Buffer srcSubresource(VkImageSubresourceLayers value) { VkImageCopy2.nsrcSubresource(address(), value); return this; }
-        /** Passes the {@link VkImageCopy2#srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageCopy2.Buffer srcSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(srcSubresource()); return this; }
-        /** Copies the specified {@link VkOffset3D} to the {@link VkImageCopy2#srcOffset} field. */
+        /** Copies the specified {@link VkOffset3D} to the {@code srcOffset} field. */
         public VkImageCopy2.Buffer srcOffset(VkOffset3D value) { VkImageCopy2.nsrcOffset(address(), value); return this; }
-        /** Passes the {@link VkImageCopy2#srcOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code srcOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageCopy2.Buffer srcOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(srcOffset()); return this; }
-        /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkImageCopy2#dstSubresource} field. */
+        /** Copies the specified {@link VkImageSubresourceLayers} to the {@code dstSubresource} field. */
         public VkImageCopy2.Buffer dstSubresource(VkImageSubresourceLayers value) { VkImageCopy2.ndstSubresource(address(), value); return this; }
-        /** Passes the {@link VkImageCopy2#dstSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code dstSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageCopy2.Buffer dstSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(dstSubresource()); return this; }
-        /** Copies the specified {@link VkOffset3D} to the {@link VkImageCopy2#dstOffset} field. */
+        /** Copies the specified {@link VkOffset3D} to the {@code dstOffset} field. */
         public VkImageCopy2.Buffer dstOffset(VkOffset3D value) { VkImageCopy2.ndstOffset(address(), value); return this; }
-        /** Passes the {@link VkImageCopy2#dstOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code dstOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageCopy2.Buffer dstOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(dstOffset()); return this; }
-        /** Copies the specified {@link VkExtent3D} to the {@link VkImageCopy2#extent} field. */
+        /** Copies the specified {@link VkExtent3D} to the {@code extent} field. */
         public VkImageCopy2.Buffer extent(VkExtent3D value) { VkImageCopy2.nextent(address(), value); return this; }
-        /** Passes the {@link VkImageCopy2#extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageCopy2.Buffer extent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(extent()); return this; }
 
     }

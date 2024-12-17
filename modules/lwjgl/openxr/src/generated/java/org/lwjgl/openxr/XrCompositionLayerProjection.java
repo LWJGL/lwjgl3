@@ -17,41 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Composition layer for projection.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Because a runtime may reproject the layer over time, a projection layer should specify an {@code XrSpace} in which to maximize stability of the layer content. For example, a projection layer containing world-locked content should use an {@code XrSpace} which is also world-locked, such as the {@code LOCAL} or {@code STAGE} reference spaces. In the case that the projection layer should be head-locked, such as a heads up display, the {@code VIEW} reference space would provide the highest quality layer reprojection.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION TYPE_COMPOSITION_LAYER_PROJECTION}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrCompositionLayerDepthTestVARJO}, {@link XrCompositionLayerReprojectionInfoMSFT}, {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}</li>
- * <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>{@code views} <b>must</b> be a pointer to an array of {@code viewCount} valid {@link XrCompositionLayerProjectionView} structures</li>
- * <li>The {@code viewCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}, {@link XrCompositionLayerProjectionView}, {@link XrSwapchainSubImage}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerProjection {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrCompositionLayerFlags {@link #layerFlags};
- *     XrSpace {@link #space};
- *     uint32_t {@link #viewCount};
- *     {@link XrCompositionLayerProjectionView XrCompositionLayerProjectionView} const * {@link #views};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrCompositionLayerFlags layerFlags;
+ *     XrSpace space;
+ *     uint32_t viewCount;
+ *     {@link XrCompositionLayerProjectionView XrCompositionLayerProjectionView} const * views;
+ * }}</pre>
  */
 public class XrCompositionLayerProjection extends Struct<XrCompositionLayerProjection> implements NativeResource {
 
@@ -113,30 +87,30 @@ public class XrCompositionLayerProjection extends Struct<XrCompositionLayerProje
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a bitmask of {@code XrCompositionLayerFlagBits} describing flags to apply to the layer. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** the {@code XrSpace} in which the {@code pose} of each {@link XrCompositionLayerProjectionView} is evaluated over time by the compositor. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the count of views in the {@code views} array. This <b>must</b> be equal to the number of view poses returned by {@link XR10#xrLocateViews LocateViews}. */
+    /** @return the value of the {@code viewCount} field. */
     @NativeType("uint32_t")
     public int viewCount() { return nviewCount(address()); }
-    /** the array of type {@link XrCompositionLayerProjectionView} containing each projection layer view. */
+    /** @return a {@link XrCompositionLayerProjectionView.Buffer} view of the struct array pointed to by the {@code views} field. */
     @NativeType("XrCompositionLayerProjectionView const *")
     public XrCompositionLayerProjectionView.Buffer views() { return nviews(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerProjection type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION TYPE_COMPOSITION_LAYER_PROJECTION} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION TYPE_COMPOSITION_LAYER_PROJECTION} value to the {@code type} field. */
     public XrCompositionLayerProjection type$Default() { return type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerProjection next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrCompositionLayerDepthTestVARJO} value to the {@code next} chain. */
     public XrCompositionLayerProjection next(XrCompositionLayerDepthTestVARJO value) { return this.next(value.next(this.next()).address()); }
@@ -144,11 +118,11 @@ public class XrCompositionLayerProjection extends Struct<XrCompositionLayerProje
     public XrCompositionLayerProjection next(XrCompositionLayerReprojectionInfoMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrCompositionLayerReprojectionPlaneOverrideMSFT} value to the {@code next} chain. */
     public XrCompositionLayerProjection next(XrCompositionLayerReprojectionPlaneOverrideMSFT value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #layerFlags} field. */
+    /** Sets the specified value to the {@code layerFlags} field. */
     public XrCompositionLayerProjection layerFlags(@NativeType("XrCompositionLayerFlags") long value) { nlayerFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrCompositionLayerProjection space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the address of the specified {@link XrCompositionLayerProjectionView.Buffer} to the {@link #views} field. */
+    /** Sets the address of the specified {@link XrCompositionLayerProjectionView.Buffer} to the {@code views} field. */
     public XrCompositionLayerProjection views(@NativeType("XrCompositionLayerProjectionView const *") XrCompositionLayerProjectionView.Buffer value) { nviews(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -383,30 +357,30 @@ public class XrCompositionLayerProjection extends Struct<XrCompositionLayerProje
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerProjection#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerProjection.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerProjection#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerProjection.nnext(address()); }
-        /** @return the value of the {@link XrCompositionLayerProjection#layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerProjection.nlayerFlags(address()); }
-        /** @return the value of the {@link XrCompositionLayerProjection#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerProjection.nspace(address()); }
-        /** @return the value of the {@link XrCompositionLayerProjection#viewCount} field. */
+        /** @return the value of the {@code viewCount} field. */
         @NativeType("uint32_t")
         public int viewCount() { return XrCompositionLayerProjection.nviewCount(address()); }
-        /** @return a {@link XrCompositionLayerProjectionView.Buffer} view of the struct array pointed to by the {@link XrCompositionLayerProjection#views} field. */
+        /** @return a {@link XrCompositionLayerProjectionView.Buffer} view of the struct array pointed to by the {@code views} field. */
         @NativeType("XrCompositionLayerProjectionView const *")
         public XrCompositionLayerProjectionView.Buffer views() { return XrCompositionLayerProjection.nviews(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerProjection#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerProjection.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerProjection.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION TYPE_COMPOSITION_LAYER_PROJECTION} value to the {@link XrCompositionLayerProjection#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_COMPOSITION_LAYER_PROJECTION TYPE_COMPOSITION_LAYER_PROJECTION} value to the {@code type} field. */
         public XrCompositionLayerProjection.Buffer type$Default() { return type(XR10.XR_TYPE_COMPOSITION_LAYER_PROJECTION); }
-        /** Sets the specified value to the {@link XrCompositionLayerProjection#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerProjection.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerProjection.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrCompositionLayerDepthTestVARJO} value to the {@code next} chain. */
         public XrCompositionLayerProjection.Buffer next(XrCompositionLayerDepthTestVARJO value) { return this.next(value.next(this.next()).address()); }
@@ -414,11 +388,11 @@ public class XrCompositionLayerProjection extends Struct<XrCompositionLayerProje
         public XrCompositionLayerProjection.Buffer next(XrCompositionLayerReprojectionInfoMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrCompositionLayerReprojectionPlaneOverrideMSFT} value to the {@code next} chain. */
         public XrCompositionLayerProjection.Buffer next(XrCompositionLayerReprojectionPlaneOverrideMSFT value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrCompositionLayerProjection#layerFlags} field. */
+        /** Sets the specified value to the {@code layerFlags} field. */
         public XrCompositionLayerProjection.Buffer layerFlags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerProjection.nlayerFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerProjection#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrCompositionLayerProjection.Buffer space(XrSpace value) { XrCompositionLayerProjection.nspace(address(), value); return this; }
-        /** Sets the address of the specified {@link XrCompositionLayerProjectionView.Buffer} to the {@link XrCompositionLayerProjection#views} field. */
+        /** Sets the address of the specified {@link XrCompositionLayerProjectionView.Buffer} to the {@code views} field. */
         public XrCompositionLayerProjection.Buffer views(@NativeType("XrCompositionLayerProjectionView const *") XrCompositionLayerProjectionView.Buffer value) { XrCompositionLayerProjection.nviews(address(), value); return this; }
 
     }

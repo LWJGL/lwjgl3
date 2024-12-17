@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct par_octasphere_config {
  *     float corner_radius;
  *     float width;
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int num_subdivisions;
  *     par_octasphere_uv_mode uv_mode;
  *     par_octasphere_normals_mode normals_mode;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct par_octasphere_config")
 public class ParOctasphereConfig extends Struct<ParOctasphereConfig> implements NativeResource {

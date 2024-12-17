@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link CL30#clSetContextDestructorCallback SetContextDestructorCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     cl_context context,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (cl_context, void *)")
 public interface CLContextDestructorCallbackI extends CallbackI {
@@ -44,14 +34,7 @@ public interface CLContextDestructorCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when a context is destroyed.
-     *
-     * @param context   the OpenCL context being deleted.
-     *                  
-     *                  <p>When the callback function is called by the implementation, this context is no longer valid. {@code context} is only provided for reference purposes.</p>
-     * @param user_data the user-specified value that was passed when calling {@link CL30#clSetContextDestructorCallback SetContextDestructorCallback}
-     */
+    /** {@code void (*) (cl_context context, void * user_data)} */
     void invoke(@NativeType("cl_context") long context, @NativeType("void *") long user_data);
 
 }

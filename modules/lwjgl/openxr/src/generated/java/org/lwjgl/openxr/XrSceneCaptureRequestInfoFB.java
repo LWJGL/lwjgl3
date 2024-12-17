@@ -16,34 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes how a scene capture should be conducted by the system.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSceneCaptureRequestInfoFB} structure is used by an application to instruct the system what to look for during a scene capture. If the {@code request} parameter is {@code NULL}, then the runtime <b>must</b> conduct a default scene capture.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSceneCapture XR_FB_scene_capture} extension <b>must</b> be enabled prior to using {@link XrSceneCaptureRequestInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSceneCapture#XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB TYPE_SCENE_CAPTURE_REQUEST_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code requestByteCount} is not 0, {@code request} <b>must</b> be a pointer to an array of {@code requestByteCount} char values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBSceneCapture#xrRequestSceneCaptureFB RequestSceneCaptureFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneCaptureRequestInfoFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #requestByteCount};
- *     char const * {@link #request};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t requestByteCount;
+ *     char const * request;
+ * }}</pre>
  */
 public class XrSceneCaptureRequestInfoFB extends Struct<XrSceneCaptureRequestInfoFB> implements NativeResource {
 
@@ -99,28 +78,28 @@ public class XrSceneCaptureRequestInfoFB extends Struct<XrSceneCaptureRequestInf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** byte length of the {@code request} parameter. */
+    /** @return the value of the {@code requestByteCount} field. */
     @NativeType("uint32_t")
     public int requestByteCount() { return nrequestByteCount(address()); }
-    /** a string which the application <b>can</b> use to specify which type of scene capture should be initiated by the runtime. The contents of buffer pointed to by the {@code request} parameter is runtime-specific. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code request} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer request() { return nrequest(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSceneCaptureRequestInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSceneCapture#XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB TYPE_SCENE_CAPTURE_REQUEST_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSceneCapture#XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB TYPE_SCENE_CAPTURE_REQUEST_INFO_FB} value to the {@code type} field. */
     public XrSceneCaptureRequestInfoFB type$Default() { return type(FBSceneCapture.XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSceneCaptureRequestInfoFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #requestByteCount} field. */
+    /** Sets the specified value to the {@code requestByteCount} field. */
     public XrSceneCaptureRequestInfoFB requestByteCount(@NativeType("uint32_t") int value) { nrequestByteCount(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #request} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code request} field. */
     public XrSceneCaptureRequestInfoFB request(@Nullable @NativeType("char const *") ByteBuffer value) { nrequest(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,28 +301,28 @@ public class XrSceneCaptureRequestInfoFB extends Struct<XrSceneCaptureRequestInf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneCaptureRequestInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSceneCaptureRequestInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrSceneCaptureRequestInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSceneCaptureRequestInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrSceneCaptureRequestInfoFB#requestByteCount} field. */
+        /** @return the value of the {@code requestByteCount} field. */
         @NativeType("uint32_t")
         public int requestByteCount() { return XrSceneCaptureRequestInfoFB.nrequestByteCount(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link XrSceneCaptureRequestInfoFB#request} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code request} field. */
         @NativeType("char const *")
         public @Nullable ByteBuffer request() { return XrSceneCaptureRequestInfoFB.nrequest(address()); }
 
-        /** Sets the specified value to the {@link XrSceneCaptureRequestInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSceneCaptureRequestInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrSceneCaptureRequestInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSceneCapture#XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB TYPE_SCENE_CAPTURE_REQUEST_INFO_FB} value to the {@link XrSceneCaptureRequestInfoFB#type} field. */
+        /** Sets the {@link FBSceneCapture#XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB TYPE_SCENE_CAPTURE_REQUEST_INFO_FB} value to the {@code type} field. */
         public XrSceneCaptureRequestInfoFB.Buffer type$Default() { return type(FBSceneCapture.XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB); }
-        /** Sets the specified value to the {@link XrSceneCaptureRequestInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSceneCaptureRequestInfoFB.Buffer next(@NativeType("void const *") long value) { XrSceneCaptureRequestInfoFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneCaptureRequestInfoFB#requestByteCount} field. */
+        /** Sets the specified value to the {@code requestByteCount} field. */
         public XrSceneCaptureRequestInfoFB.Buffer requestByteCount(@NativeType("uint32_t") int value) { XrSceneCaptureRequestInfoFB.nrequestByteCount(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link XrSceneCaptureRequestInfoFB#request} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code request} field. */
         public XrSceneCaptureRequestInfoFB.Buffer request(@Nullable @NativeType("char const *") ByteBuffer value) { XrSceneCaptureRequestInfoFB.nrequest(address(), value); return this; }
 
     }

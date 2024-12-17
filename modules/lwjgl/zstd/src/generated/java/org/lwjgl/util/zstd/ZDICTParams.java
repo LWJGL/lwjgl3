@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ZDICT_params_t {
- *     int {@link #compressionLevel};
- *     unsigned {@link #notificationLevel};
- *     unsigned {@link #dictID};
- * }</code></pre>
+ *     int compressionLevel;
+ *     unsigned notificationLevel;
+ *     unsigned dictID;
+ * }}</pre>
  */
 @NativeType("struct ZDICT_params_t")
 public class ZDICTParams extends Struct<ZDICTParams> implements NativeResource {
@@ -77,29 +75,20 @@ public class ZDICTParams extends Struct<ZDICTParams> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** optimize for a specific zstd compression level; 0 means default */
+    /** @return the value of the {@code compressionLevel} field. */
     public int compressionLevel() { return ncompressionLevel(address()); }
-    /** write log to {@code stderr}; 0 = none (default); 1 = errors; 2 = progression; 3 = details; 4 = debug; */
+    /** @return the value of the {@code notificationLevel} field. */
     @NativeType("unsigned")
     public int notificationLevel() { return nnotificationLevel(address()); }
-    /**
-     * force {@code dictID} value; 0 means auto mode (32-bits random value).
-     * 
-     * <p>NOTE: The zstd format reserves some dictionary IDs for future use. You may use them in private settings, but be warned that they may be used by zstd in
-     * a public dictionary registry in the future. These dictionary IDs are:</p>
-     * 
-     * <pre><code>
-     * - low range  : &le; 32767
-     * - high range : &ge; (2^31)</code></pre>
-     */
+    /** @return the value of the {@code dictID} field. */
     @NativeType("unsigned")
     public int dictID() { return ndictID(address()); }
 
-    /** Sets the specified value to the {@link #compressionLevel} field. */
+    /** Sets the specified value to the {@code compressionLevel} field. */
     public ZDICTParams compressionLevel(int value) { ncompressionLevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #notificationLevel} field. */
+    /** Sets the specified value to the {@code notificationLevel} field. */
     public ZDICTParams notificationLevel(@NativeType("unsigned") int value) { nnotificationLevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #dictID} field. */
+    /** Sets the specified value to the {@code dictID} field. */
     public ZDICTParams dictID(@NativeType("unsigned") int value) { ndictID(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,20 +303,20 @@ public class ZDICTParams extends Struct<ZDICTParams> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ZDICTParams#compressionLevel} field. */
+        /** @return the value of the {@code compressionLevel} field. */
         public int compressionLevel() { return ZDICTParams.ncompressionLevel(address()); }
-        /** @return the value of the {@link ZDICTParams#notificationLevel} field. */
+        /** @return the value of the {@code notificationLevel} field. */
         @NativeType("unsigned")
         public int notificationLevel() { return ZDICTParams.nnotificationLevel(address()); }
-        /** @return the value of the {@link ZDICTParams#dictID} field. */
+        /** @return the value of the {@code dictID} field. */
         @NativeType("unsigned")
         public int dictID() { return ZDICTParams.ndictID(address()); }
 
-        /** Sets the specified value to the {@link ZDICTParams#compressionLevel} field. */
+        /** Sets the specified value to the {@code compressionLevel} field. */
         public ZDICTParams.Buffer compressionLevel(int value) { ZDICTParams.ncompressionLevel(address(), value); return this; }
-        /** Sets the specified value to the {@link ZDICTParams#notificationLevel} field. */
+        /** Sets the specified value to the {@code notificationLevel} field. */
         public ZDICTParams.Buffer notificationLevel(@NativeType("unsigned") int value) { ZDICTParams.nnotificationLevel(address(), value); return this; }
-        /** Sets the specified value to the {@link ZDICTParams#dictID} field. */
+        /** Sets the specified value to the {@code dictID} field. */
         public ZDICTParams.Buffer dictID(@NativeType("unsigned") int value) { ZDICTParams.ndictID(address(), value); return this; }
 
     }

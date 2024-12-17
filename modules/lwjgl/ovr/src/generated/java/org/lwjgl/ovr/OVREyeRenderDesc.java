@@ -16,19 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * rendering information for each eye. Computed by either {@link OVR#ovr_GetRenderDesc GetRenderDesc} based on the specified FOV. Note that the rendering viewport is not
- * included here as it can be specified separately and modified per frame by passing different viewport values in the layer structure.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrEyeRenderDesc {
- *     ovrEyeType {@link #Eye};
- *     {@link OVRFovPort ovrFovPort} {@link #Fov};
- *     {@link OVRRecti ovrRecti} {@link #DistortedViewport};
- *     {@link OVRVector2f ovrVector2f} {@link #PixelsPerTanAngleAtCenter};
- *     {@link OVRPosef ovrPosef} {@link #HmdToEyePose};
- * }</code></pre>
+ *     ovrEyeType Eye;
+ *     {@link OVRFovPort ovrFovPort} Fov;
+ *     {@link OVRRecti ovrRecti} DistortedViewport;
+ *     {@link OVRVector2f ovrVector2f} PixelsPerTanAngleAtCenter;
+ *     {@link OVRPosef ovrPosef} HmdToEyePose;
+ * }}</pre>
  */
 @NativeType("struct ovrEyeRenderDesc")
 public class OVREyeRenderDesc extends Struct<OVREyeRenderDesc> implements NativeResource {
@@ -88,19 +83,19 @@ public class OVREyeRenderDesc extends Struct<OVREyeRenderDesc> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the eye index this instance corresponds to. One of:<br><table><tr><td>{@link OVR#ovrEye_Left Eye_Left}</td><td>{@link OVR#ovrEye_Right Eye_Right}</td></tr></table> */
+    /** @return the value of the {@code Eye} field. */
     @NativeType("ovrEyeType")
     public int Eye() { return nEye(address()); }
-    /** the field of view */
+    /** @return a {@link OVRFovPort} view of the {@code Fov} field. */
     @NativeType("ovrFovPort")
     public OVRFovPort Fov() { return nFov(address()); }
-    /** distortion viewport */
+    /** @return a {@link OVRRecti} view of the {@code DistortedViewport} field. */
     @NativeType("ovrRecti")
     public OVRRecti DistortedViewport() { return nDistortedViewport(address()); }
-    /** wow many display pixels will fit in tan(angle) = 1 */
+    /** @return a {@link OVRVector2f} view of the {@code PixelsPerTanAngleAtCenter} field. */
     @NativeType("ovrVector2f")
     public OVRVector2f PixelsPerTanAngleAtCenter() { return nPixelsPerTanAngleAtCenter(address()); }
-    /** transform of eye from the HMD center, in meters */
+    /** @return a {@link OVRPosef} view of the {@code HmdToEyePose} field. */
     @NativeType("ovrPosef")
     public OVRPosef HmdToEyePose() { return nHmdToEyePose(address()); }
 
@@ -288,19 +283,19 @@ public class OVREyeRenderDesc extends Struct<OVREyeRenderDesc> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVREyeRenderDesc#Eye} field. */
+        /** @return the value of the {@code Eye} field. */
         @NativeType("ovrEyeType")
         public int Eye() { return OVREyeRenderDesc.nEye(address()); }
-        /** @return a {@link OVRFovPort} view of the {@link OVREyeRenderDesc#Fov} field. */
+        /** @return a {@link OVRFovPort} view of the {@code Fov} field. */
         @NativeType("ovrFovPort")
         public OVRFovPort Fov() { return OVREyeRenderDesc.nFov(address()); }
-        /** @return a {@link OVRRecti} view of the {@link OVREyeRenderDesc#DistortedViewport} field. */
+        /** @return a {@link OVRRecti} view of the {@code DistortedViewport} field. */
         @NativeType("ovrRecti")
         public OVRRecti DistortedViewport() { return OVREyeRenderDesc.nDistortedViewport(address()); }
-        /** @return a {@link OVRVector2f} view of the {@link OVREyeRenderDesc#PixelsPerTanAngleAtCenter} field. */
+        /** @return a {@link OVRVector2f} view of the {@code PixelsPerTanAngleAtCenter} field. */
         @NativeType("ovrVector2f")
         public OVRVector2f PixelsPerTanAngleAtCenter() { return OVREyeRenderDesc.nPixelsPerTanAngleAtCenter(address()); }
-        /** @return a {@link OVRPosef} view of the {@link OVREyeRenderDesc#HmdToEyePose} field. */
+        /** @return a {@link OVRPosef} view of the {@code HmdToEyePose} field. */
         @NativeType("ovrPosef")
         public OVRPosef HmdToEyePose() { return OVREyeRenderDesc.nHmdToEyePose(address()); }
 

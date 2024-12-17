@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * A mutation handler.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     id id
- * )</code></pre>
- */
+/** Callback function: {@link #invoke EnumerationMutationHandler} */
 @FunctionalInterface
 @NativeType("EnumerationMutationHandler")
 public interface EnumerationMutationHandlerI extends CallbackI {
@@ -42,11 +33,7 @@ public interface EnumerationMutationHandlerI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when an object is mutated during a foreach iteration.
-     *
-     * @param id the object that was mutated
-     */
+    /** {@code void (* EnumerationMutationHandler) (id id)} */
     void invoke(@NativeType("id") long id);
 
 }

@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMCore#LLVMContextSetYieldCallback ContextSetYieldCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     LLVMContextRef Context,
- *     void *OpaqueHandle
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (LLVMContextRef, void *)")
 public interface LLVMYieldCallbackI extends CallbackI {
@@ -44,6 +34,7 @@ public interface LLVMYieldCallbackI extends CallbackI {
         );
     }
 
+    /** {@code void (*) (LLVMContextRef Context, void * OpaqueHandle)} */
     void invoke(@NativeType("LLVMContextRef") long Context, @NativeType("void *") long OpaqueHandle);
 
 }

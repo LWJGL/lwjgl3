@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ZSTD_customMem {
  *     {@link ZSTDAllocFunctionI ZSTD_allocFunction} customAlloc;
  *     {@link ZSTDFreeFunctionI ZSTD_freeFunction} customFree;
  *     void * opaque;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct ZSTD_customMem")
 public class ZSTDCustomMem extends Struct<ZSTDCustomMem> implements NativeResource {

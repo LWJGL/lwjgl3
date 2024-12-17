@@ -16,49 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying creation flags for descriptor set layout bindings.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code bindingCount} is zero or if this structure is not included in the {@code pNext} chain, the {@code VkDescriptorBindingFlags} for each descriptor set layout binding is considered to be zero. Otherwise, the descriptor set layout binding at {@link VkDescriptorSetLayoutCreateInfo}{@code ::pBindings}[i] uses the flags in {@code pBindingFlags}[i].</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code bindingCount} is not zero, {@code bindingCount} <b>must</b> equal {@link VkDescriptorSetLayoutCreateInfo}{@code ::bindingCount}</li>
- * <li>If {@link VkDescriptorSetLayoutCreateInfo}{@code ::flags} includes {@link VK14#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT}, then all elements of {@code pBindingFlags} <b>must</b> not include {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}, {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT}, or {@link VK12#VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT}</li>
- * <li>If an element of {@code pBindingFlags} includes {@link VK12#VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT}, then it <b>must</b> be the element with the highest {@code binding} number</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingUniformBufferUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingSampledImageUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, or {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingStorageImageUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingStorageBufferUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingUniformTexelBufferUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingStorageTexelBufferUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceInlineUniformBlockFeatures}{@code ::descriptorBindingInlineUniformBlockUpdateAfterBind} is not enabled, all bindings with descriptor type {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR}{@code ::descriptorBindingAccelerationStructureUpdateAfterBind} is not enabled, all bindings with descriptor type {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} or {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>All bindings with descriptor type {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}, {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC}, or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} <b>must</b> not use {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingUpdateUnusedWhilePending} is not enabled, all elements of {@code pBindingFlags} <b>must</b> not include {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT}</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingPartiallyBound} is not enabled, all elements of {@code pBindingFlags} <b>must</b> not include {@link VK12#VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT}</li>
- * <li>If {@link VkPhysicalDeviceDescriptorIndexingFeatures}{@code ::descriptorBindingVariableDescriptorCount} is not enabled, all elements of {@code pBindingFlags} <b>must</b> not include {@link VK12#VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT}</li>
- * <li>If an element of {@code pBindingFlags} includes {@link VK12#VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT}, that element’s {@code descriptorType} <b>must</b> not be {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO}</li>
- * <li>If {@code bindingCount} is not 0, {@code pBindingFlags} <b>must</b> be a valid pointer to an array of {@code bindingCount} valid combinations of {@code VkDescriptorBindingFlagBits} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetLayoutBindingFlagsCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #bindingCount};
- *     VkDescriptorBindingFlags const * {@link #pBindingFlags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t bindingCount;
+ *     VkDescriptorBindingFlags const * pBindingFlags;
+ * }}</pre>
  */
 public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct<VkDescriptorSetLayoutBindingFlagsCreateInfo> implements NativeResource {
 
@@ -114,28 +78,28 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct<VkDescri
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** zero or the number of elements in {@code pBindingFlags}. */
+    /** @return the value of the {@code bindingCount} field. */
     @NativeType("uint32_t")
     public int bindingCount() { return nbindingCount(address()); }
-    /** a pointer to an array of {@code VkDescriptorBindingFlags} bitfields, one for each descriptor set layout binding. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pBindingFlags} field. */
     @NativeType("VkDescriptorBindingFlags const *")
     public @Nullable IntBuffer pBindingFlags() { return npBindingFlags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO} value to the {@code sType} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #bindingCount} field. */
+    /** Sets the specified value to the {@code bindingCount} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfo bindingCount(@NativeType("uint32_t") int value) { nbindingCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pBindingFlags} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pBindingFlags} field. */
     public VkDescriptorSetLayoutBindingFlagsCreateInfo pBindingFlags(@Nullable @NativeType("VkDescriptorBindingFlags const *") IntBuffer value) { npBindingFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,28 +301,28 @@ public class VkDescriptorSetLayoutBindingFlagsCreateInfo extends Struct<VkDescri
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorSetLayoutBindingFlagsCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDescriptorSetLayoutBindingFlagsCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#bindingCount} field. */
+        /** @return the value of the {@code bindingCount} field. */
         @NativeType("uint32_t")
         public int bindingCount() { return VkDescriptorSetLayoutBindingFlagsCreateInfo.nbindingCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#pBindingFlags} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pBindingFlags} field. */
         @NativeType("VkDescriptorBindingFlags const *")
         public @Nullable IntBuffer pBindingFlags() { return VkDescriptorSetLayoutBindingFlagsCreateInfo.npBindingFlags(address()); }
 
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorSetLayoutBindingFlagsCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO} value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO} value to the {@code sType} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorSetLayoutBindingFlagsCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#bindingCount} field. */
+        /** Sets the specified value to the {@code bindingCount} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer bindingCount(@NativeType("uint32_t") int value) { VkDescriptorSetLayoutBindingFlagsCreateInfo.nbindingCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkDescriptorSetLayoutBindingFlagsCreateInfo#pBindingFlags} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pBindingFlags} field. */
         public VkDescriptorSetLayoutBindingFlagsCreateInfo.Buffer pBindingFlags(@Nullable @NativeType("VkDescriptorBindingFlags const *") IntBuffer value) { VkDescriptorSetLayoutBindingFlagsCreateInfo.npBindingFlags(address(), value); return this; }
 
     }

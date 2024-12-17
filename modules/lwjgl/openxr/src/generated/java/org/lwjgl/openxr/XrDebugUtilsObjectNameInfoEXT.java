@@ -17,39 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Debug utils object name info.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code objectType} is {@link XR10#XR_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}, {@code objectHandle} <b>must</b> not be {@link XR10#XR_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code objectType} is not {@link XR10#XR_OBJECT_TYPE_UNKNOWN OBJECT_TYPE_UNKNOWN}, {@code objectHandle} <b>must</b> be {@link XR10#XR_NULL_HANDLE NULL_HANDLE} or an OpenXR handle of the type associated with {@code objectType}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTDebugUtils XR_EXT_debug_utils} extension <b>must</b> be enabled prior to using {@link XrDebugUtilsObjectNameInfoEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTDebugUtils#XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code objectType} <b>must</b> be a valid {@code XrObjectType} value</li>
- * <li>If {@code objectName} is not {@code NULL}, {@code objectName} <b>must</b> be a null-terminated UTF-8 string</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrDebugUtilsMessengerCallbackDataEXT}, {@link EXTDebugUtils#xrSetDebugUtilsObjectNameEXT SetDebugUtilsObjectNameEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrDebugUtilsObjectNameInfoEXT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrObjectType {@link #objectType};
- *     uint64_t {@link #objectHandle};
- *     char const * {@link #objectName};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrObjectType objectType;
+ *     uint64_t objectHandle;
+ *     char const * objectName;
+ * }}</pre>
  */
 public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectNameInfoEXT> implements NativeResource {
 
@@ -108,36 +83,36 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectName
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrObjectType} specifying the type of the object to be named. */
+    /** @return the value of the {@code objectType} field. */
     @NativeType("XrObjectType")
     public int objectType() { return nobjectType(address()); }
-    /** the object to be named. */
+    /** @return the value of the {@code objectHandle} field. */
     @NativeType("uint64_t")
     public long objectHandle() { return nobjectHandle(address()); }
-    /** a {@code NULL} terminated UTF-8 string specifying the name to apply to objectHandle. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code objectName} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer objectName() { return nobjectName(address()); }
-    /** a {@code NULL} terminated UTF-8 string specifying the name to apply to objectHandle. */
+    /** @return the null-terminated string pointed to by the {@code objectName} field. */
     @NativeType("char const *")
     public @Nullable String objectNameString() { return nobjectNameString(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrDebugUtilsObjectNameInfoEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTDebugUtils#XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTDebugUtils#XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT} value to the {@code type} field. */
     public XrDebugUtilsObjectNameInfoEXT type$Default() { return type(EXTDebugUtils.XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrDebugUtilsObjectNameInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #objectType} field. */
+    /** Sets the specified value to the {@code objectType} field. */
     public XrDebugUtilsObjectNameInfoEXT objectType(@NativeType("XrObjectType") int value) { nobjectType(address(), value); return this; }
-    /** Sets the specified value to the {@link #objectHandle} field. */
+    /** Sets the specified value to the {@code objectHandle} field. */
     public XrDebugUtilsObjectNameInfoEXT objectHandle(@NativeType("uint64_t") long value) { nobjectHandle(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #objectName} field. */
+    /** Sets the address of the specified encoded string to the {@code objectName} field. */
     public XrDebugUtilsObjectNameInfoEXT objectName(@Nullable @NativeType("char const *") ByteBuffer value) { nobjectName(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,36 +325,36 @@ public class XrDebugUtilsObjectNameInfoEXT extends Struct<XrDebugUtilsObjectName
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrDebugUtilsObjectNameInfoEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrDebugUtilsObjectNameInfoEXT.ntype(address()); }
-        /** @return the value of the {@link XrDebugUtilsObjectNameInfoEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrDebugUtilsObjectNameInfoEXT.nnext(address()); }
-        /** @return the value of the {@link XrDebugUtilsObjectNameInfoEXT#objectType} field. */
+        /** @return the value of the {@code objectType} field. */
         @NativeType("XrObjectType")
         public int objectType() { return XrDebugUtilsObjectNameInfoEXT.nobjectType(address()); }
-        /** @return the value of the {@link XrDebugUtilsObjectNameInfoEXT#objectHandle} field. */
+        /** @return the value of the {@code objectHandle} field. */
         @NativeType("uint64_t")
         public long objectHandle() { return XrDebugUtilsObjectNameInfoEXT.nobjectHandle(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link XrDebugUtilsObjectNameInfoEXT#objectName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code objectName} field. */
         @NativeType("char const *")
         public @Nullable ByteBuffer objectName() { return XrDebugUtilsObjectNameInfoEXT.nobjectName(address()); }
-        /** @return the null-terminated string pointed to by the {@link XrDebugUtilsObjectNameInfoEXT#objectName} field. */
+        /** @return the null-terminated string pointed to by the {@code objectName} field. */
         @NativeType("char const *")
         public @Nullable String objectNameString() { return XrDebugUtilsObjectNameInfoEXT.nobjectNameString(address()); }
 
-        /** Sets the specified value to the {@link XrDebugUtilsObjectNameInfoEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrDebugUtilsObjectNameInfoEXT.Buffer type(@NativeType("XrStructureType") int value) { XrDebugUtilsObjectNameInfoEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTDebugUtils#XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT} value to the {@link XrDebugUtilsObjectNameInfoEXT#type} field. */
+        /** Sets the {@link EXTDebugUtils#XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT} value to the {@code type} field. */
         public XrDebugUtilsObjectNameInfoEXT.Buffer type$Default() { return type(EXTDebugUtils.XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT); }
-        /** Sets the specified value to the {@link XrDebugUtilsObjectNameInfoEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrDebugUtilsObjectNameInfoEXT.Buffer next(@NativeType("void const *") long value) { XrDebugUtilsObjectNameInfoEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrDebugUtilsObjectNameInfoEXT#objectType} field. */
+        /** Sets the specified value to the {@code objectType} field. */
         public XrDebugUtilsObjectNameInfoEXT.Buffer objectType(@NativeType("XrObjectType") int value) { XrDebugUtilsObjectNameInfoEXT.nobjectType(address(), value); return this; }
-        /** Sets the specified value to the {@link XrDebugUtilsObjectNameInfoEXT#objectHandle} field. */
+        /** Sets the specified value to the {@code objectHandle} field. */
         public XrDebugUtilsObjectNameInfoEXT.Buffer objectHandle(@NativeType("uint64_t") long value) { XrDebugUtilsObjectNameInfoEXT.nobjectHandle(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link XrDebugUtilsObjectNameInfoEXT#objectName} field. */
+        /** Sets the address of the specified encoded string to the {@code objectName} field. */
         public XrDebugUtilsObjectNameInfoEXT.Buffer objectName(@Nullable @NativeType("char const *") ByteBuffer value) { XrDebugUtilsObjectNameInfoEXT.nobjectName(address(), value); return this; }
 
     }

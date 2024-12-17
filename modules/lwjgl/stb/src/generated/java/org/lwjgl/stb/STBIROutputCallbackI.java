@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void const *output_ptr,
- *     int num_pixels,
- *     int x,
- *     int y,
- *     void *context
- * )</code></pre>
- */
+/** Callback function: {@link #invoke stbir_output_callback *} */
 @FunctionalInterface
 @NativeType("stbir_output_callback *")
 public interface STBIROutputCallbackI extends CallbackI {
@@ -48,7 +37,7 @@ public interface STBIROutputCallbackI extends CallbackI {
         );
     }
 
-    /** Callback used for output scanlines. */
+    /** {@code void (* stbir_output_callback *) (void const * output_ptr, int num_pixels, int x, int y, void * context)} */
     void invoke(@NativeType("void const *") long output_ptr, int num_pixels, int x, int y, @NativeType("void *") long context);
 
 }

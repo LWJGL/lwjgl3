@@ -16,23 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a pipeline for use with indirect command preprocessing.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT}</li>
- * <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkGeneratedCommandsPipelineInfoEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkPipeline {@link #pipeline};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkPipeline pipeline;
+ * }}</pre>
  */
 public class VkGeneratedCommandsPipelineInfoEXT extends Struct<VkGeneratedCommandsPipelineInfoEXT> implements NativeResource {
 
@@ -85,23 +74,23 @@ public class VkGeneratedCommandsPipelineInfoEXT extends Struct<VkGeneratedComman
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a valid pipeline object. */
+    /** @return the value of the {@code pipeline} field. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkGeneratedCommandsPipelineInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT} value to the {@code sType} field. */
     public VkGeneratedCommandsPipelineInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkGeneratedCommandsPipelineInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipeline} field. */
+    /** Sets the specified value to the {@code pipeline} field. */
     public VkGeneratedCommandsPipelineInfoEXT pipeline(@NativeType("VkPipeline") long value) { npipeline(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,23 +286,23 @@ public class VkGeneratedCommandsPipelineInfoEXT extends Struct<VkGeneratedComman
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkGeneratedCommandsPipelineInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGeneratedCommandsPipelineInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsPipelineInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkGeneratedCommandsPipelineInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsPipelineInfoEXT#pipeline} field. */
+        /** @return the value of the {@code pipeline} field. */
         @NativeType("VkPipeline")
         public long pipeline() { return VkGeneratedCommandsPipelineInfoEXT.npipeline(address()); }
 
-        /** Sets the specified value to the {@link VkGeneratedCommandsPipelineInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkGeneratedCommandsPipelineInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkGeneratedCommandsPipelineInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT} value to the {@link VkGeneratedCommandsPipelineInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT} value to the {@code sType} field. */
         public VkGeneratedCommandsPipelineInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkGeneratedCommandsPipelineInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkGeneratedCommandsPipelineInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkGeneratedCommandsPipelineInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkGeneratedCommandsPipelineInfoEXT#pipeline} field. */
+        /** Sets the specified value to the {@code pipeline} field. */
         public VkGeneratedCommandsPipelineInfoEXT.Buffer pipeline(@NativeType("VkPipeline") long value) { VkGeneratedCommandsPipelineInfoEXT.npipeline(address(), value); return this; }
 
     }

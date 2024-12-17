@@ -16,43 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying sparse image format inputs.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value that is set in {@link VkImageFormatProperties}{@code ::sampleCounts} returned by {@code vkGetPhysicalDeviceImageFormatProperties} with {@code format}, {@code type}, {@code tiling}, and {@code usage} equal to those in this command</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code type} <b>must</b> be a valid {@code VkImageType} value</li>
- * <li>{@code samples} <b>must</b> be a valid {@code VkSampleCountFlagBits} value</li>
- * <li>{@code usage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
- * <li>{@code usage} <b>must</b> not be 0</li>
- * <li>{@code tiling} <b>must</b> be a valid {@code VkImageTiling} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK11#vkGetPhysicalDeviceSparseImageFormatProperties2 GetPhysicalDeviceSparseImageFormatProperties2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceSparseImageFormatProperties2KHR GetPhysicalDeviceSparseImageFormatProperties2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSparseImageFormatInfo2 {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkFormat {@link #format};
- *     VkImageType {@link #type};
- *     VkSampleCountFlagBits {@link #samples};
- *     VkImageUsageFlags {@link #usage};
- *     VkImageTiling {@link #tiling};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkFormat format;
+ *     VkImageType type;
+ *     VkSampleCountFlagBits samples;
+ *     VkImageUsageFlags usage;
+ *     VkImageTiling tiling;
+ * }}</pre>
  */
 public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDeviceSparseImageFormatInfo2> implements NativeResource {
 
@@ -117,43 +90,43 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the image format. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** the dimensionality of the image. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkImageType")
     public int type() { return ntype(address()); }
-    /** a {@code VkSampleCountFlagBits} value specifying the number of samples per texel. */
+    /** @return the value of the {@code samples} field. */
     @NativeType("VkSampleCountFlagBits")
     public int samples() { return nsamples(address()); }
-    /** a bitmask describing the intended usage of the image. */
+    /** @return the value of the {@code usage} field. */
     @NativeType("VkImageUsageFlags")
     public int usage() { return nusage(address()); }
-    /** the tiling arrangement of the texel blocks in memory. */
+    /** @return the value of the {@code tiling} field. */
     @NativeType("VkImageTiling")
     public int tiling() { return ntiling(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2} value to the {@code sType} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 type(@NativeType("VkImageType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #samples} field. */
+    /** Sets the specified value to the {@code samples} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 samples(@NativeType("VkSampleCountFlagBits") int value) { nsamples(address(), value); return this; }
-    /** Sets the specified value to the {@link #usage} field. */
+    /** Sets the specified value to the {@code usage} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 usage(@NativeType("VkImageUsageFlags") int value) { nusage(address(), value); return this; }
-    /** Sets the specified value to the {@link #tiling} field. */
+    /** Sets the specified value to the {@code tiling} field. */
     public VkPhysicalDeviceSparseImageFormatInfo2 tiling(@NativeType("VkImageTiling") int value) { ntiling(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -392,43 +365,43 @@ public class VkPhysicalDeviceSparseImageFormatInfo2 extends Struct<VkPhysicalDev
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceSparseImageFormatInfo2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSparseImageFormatInfo2.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSparseImageFormatInfo2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPhysicalDeviceSparseImageFormatInfo2.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSparseImageFormatInfo2#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkPhysicalDeviceSparseImageFormatInfo2.nformat(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSparseImageFormatInfo2#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkImageType")
         public int type() { return VkPhysicalDeviceSparseImageFormatInfo2.ntype(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSparseImageFormatInfo2#samples} field. */
+        /** @return the value of the {@code samples} field. */
         @NativeType("VkSampleCountFlagBits")
         public int samples() { return VkPhysicalDeviceSparseImageFormatInfo2.nsamples(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSparseImageFormatInfo2#usage} field. */
+        /** @return the value of the {@code usage} field. */
         @NativeType("VkImageUsageFlags")
         public int usage() { return VkPhysicalDeviceSparseImageFormatInfo2.nusage(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSparseImageFormatInfo2#tiling} field. */
+        /** @return the value of the {@code tiling} field. */
         @NativeType("VkImageTiling")
         public int tiling() { return VkPhysicalDeviceSparseImageFormatInfo2.ntiling(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceSparseImageFormatInfo2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSparseImageFormatInfo2.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2} value to the {@link VkPhysicalDeviceSparseImageFormatInfo2#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2} value to the {@code sType} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSparseImageFormatInfo2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceSparseImageFormatInfo2.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSparseImageFormatInfo2#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer format(@NativeType("VkFormat") int value) { VkPhysicalDeviceSparseImageFormatInfo2.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSparseImageFormatInfo2#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer type(@NativeType("VkImageType") int value) { VkPhysicalDeviceSparseImageFormatInfo2.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSparseImageFormatInfo2#samples} field. */
+        /** Sets the specified value to the {@code samples} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer samples(@NativeType("VkSampleCountFlagBits") int value) { VkPhysicalDeviceSparseImageFormatInfo2.nsamples(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSparseImageFormatInfo2#usage} field. */
+        /** Sets the specified value to the {@code usage} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer usage(@NativeType("VkImageUsageFlags") int value) { VkPhysicalDeviceSparseImageFormatInfo2.nusage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSparseImageFormatInfo2#tiling} field. */
+        /** Sets the specified value to the {@code tiling} field. */
         public VkPhysicalDeviceSparseImageFormatInfo2.Buffer tiling(@NativeType("VkImageTiling") int value) { VkPhysicalDeviceSparseImageFormatInfo2.ntiling(address(), value); return this; }
 
     }

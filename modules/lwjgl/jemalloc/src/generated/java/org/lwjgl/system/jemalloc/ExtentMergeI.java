@@ -12,22 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@link ExtentHooks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * bool (*{@link #invoke}) (
- *     extent_hooks_t *extent_hooks,
- *     void *addr_a,
- *     size_t size_a,
- *     void *addr_b,
- *     size_t size_b,
- *     bool committed,
- *     unsigned int arena_ind
- * )</code></pre>
- */
+/** Callback function: {@link #invoke extent_merge_t} */
 @FunctionalInterface
 @NativeType("extent_merge_t")
 public interface ExtentMergeI extends CallbackI {
@@ -55,14 +40,7 @@ public interface ExtentMergeI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Extent merge hook.
-     * 
-     * <p>An extent merge function conforms to the {@code extent_merge_t} type and optionally merges adjacent extents, at given {@code addr_a} and {@code size_a}
-     * with given {@code addr_b} and {@code size_b} into one contiguous extent, operating on {@code committed}/decommitted memory as indicated, on behalf of arena
-     * {@code arena_ind}, returning false upon success. If the function returns true, this indicates that the extents remain distinct mappings and therefore
-     * should continue to be operated on independently.</p>
-     */
+    /** {@code bool (* extent_merge_t) (extent_hooks_t * extent_hooks, void * addr_a, size_t size_a, void * addr_b, size_t size_b, bool committed, unsigned int arena_ind)} */
     @NativeType("bool") boolean invoke(@NativeType("extent_hooks_t *") long extent_hooks, @NativeType("void *") long addr_a, @NativeType("size_t") long size_a, @NativeType("void *") long addr_b, @NativeType("size_t") long size_b, @NativeType("bool") boolean committed, @NativeType("unsigned int") int arena_ind);
 
 }

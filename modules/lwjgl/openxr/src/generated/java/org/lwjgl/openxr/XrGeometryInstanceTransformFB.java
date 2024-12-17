@@ -17,35 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A geometry transformation.
- * 
- * <h5>Member Descriptions</h5>
- * 
- * <ul>
- * <li>{@code type} is the {@code XrStructureType} of this structure.</li>
- * <li>{@code next} is {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension.</li>
- * <li>{@code baseSpace} is the {@code XrSpace} that defines the geometry instance’s base space for transformations.</li>
- * <li>{@code time} is the {@code XrTime} that define the time at which the transform is applied.</li>
- * <li>{@code pose} is the {@link XrPosef} that defines the geometry instance’s pose.</li>
- * <li>{@code scale} is the {@link XrVector3f} that defines the geometry instance’s scale.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using {@link XrGeometryInstanceTransformFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBPassthrough#XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link XrVector3f}, {@link FBPassthrough#xrGeometryInstanceSetTransformFB GeometryInstanceSetTransformFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGeometryInstanceTransformFB {
  *     XrStructureType type;
  *     void const * next;
@@ -53,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTime time;
  *     {@link XrPosef XrPosef} pose;
  *     {@link XrVector3f XrVector3f} scale;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrGeometryInstanceTransformFB extends Struct<XrGeometryInstanceTransformFB> implements NativeResource {
 

@@ -16,33 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying acceleration structure descriptor information.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code accelerationStructureCount} <b>must</b> be equal to {@code descriptorCount} in the extended structure</li>
- * <li>Each acceleration structure in {@code pAccelerationStructures} <b>must</b> have been created with a {@code type} of {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR} or {@link KHRAccelerationStructure#VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, each element of {@code pAccelerationStructures} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR}</li>
- * <li>{@code pAccelerationStructures} <b>must</b> be a valid pointer to an array of {@code accelerationStructureCount} valid or {@link VK10#VK_NULL_HANDLE NULL_HANDLE} {@code VkAccelerationStructureKHR} handles</li>
- * <li>{@code accelerationStructureCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkWriteDescriptorSetAccelerationStructureKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #accelerationStructureCount};
- *     VkAccelerationStructureKHR const * {@link #pAccelerationStructures};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t accelerationStructureCount;
+ *     VkAccelerationStructureKHR const * pAccelerationStructures;
+ * }}</pre>
  */
 public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct<VkWriteDescriptorSetAccelerationStructureKHR> implements NativeResource {
 
@@ -98,28 +78,28 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct<VkWrite
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of elements in {@code pAccelerationStructures}. */
+    /** @return the value of the {@code accelerationStructureCount} field. */
     @NativeType("uint32_t")
     public int accelerationStructureCount() { return naccelerationStructureCount(address()); }
-    /** a pointer to an array of {@code VkAccelerationStructureKHR} structures specifying the acceleration structures to update. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAccelerationStructures} field. */
     @NativeType("VkAccelerationStructureKHR const *")
     public @Nullable LongBuffer pAccelerationStructures() { return npAccelerationStructures(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkWriteDescriptorSetAccelerationStructureKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR} value to the {@code sType} field. */
     public VkWriteDescriptorSetAccelerationStructureKHR sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkWriteDescriptorSetAccelerationStructureKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #accelerationStructureCount} field. */
+    /** Sets the specified value to the {@code accelerationStructureCount} field. */
     public VkWriteDescriptorSetAccelerationStructureKHR accelerationStructureCount(@NativeType("uint32_t") int value) { naccelerationStructureCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pAccelerationStructures} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pAccelerationStructures} field. */
     public VkWriteDescriptorSetAccelerationStructureKHR pAccelerationStructures(@Nullable @NativeType("VkAccelerationStructureKHR const *") LongBuffer value) { npAccelerationStructures(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,28 +301,28 @@ public class VkWriteDescriptorSetAccelerationStructureKHR extends Struct<VkWrite
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkWriteDescriptorSetAccelerationStructureKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkWriteDescriptorSetAccelerationStructureKHR.nsType(address()); }
-        /** @return the value of the {@link VkWriteDescriptorSetAccelerationStructureKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkWriteDescriptorSetAccelerationStructureKHR.npNext(address()); }
-        /** @return the value of the {@link VkWriteDescriptorSetAccelerationStructureKHR#accelerationStructureCount} field. */
+        /** @return the value of the {@code accelerationStructureCount} field. */
         @NativeType("uint32_t")
         public int accelerationStructureCount() { return VkWriteDescriptorSetAccelerationStructureKHR.naccelerationStructureCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkWriteDescriptorSetAccelerationStructureKHR#pAccelerationStructures} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pAccelerationStructures} field. */
         @NativeType("VkAccelerationStructureKHR const *")
         public @Nullable LongBuffer pAccelerationStructures() { return VkWriteDescriptorSetAccelerationStructureKHR.npAccelerationStructures(address()); }
 
-        /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkWriteDescriptorSetAccelerationStructureKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteDescriptorSetAccelerationStructureKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR} value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#sType} field. */
+        /** Sets the {@link KHRAccelerationStructure#VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR} value to the {@code sType} field. */
         public VkWriteDescriptorSetAccelerationStructureKHR.Buffer sType$Default() { return sType(KHRAccelerationStructure.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR); }
-        /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkWriteDescriptorSetAccelerationStructureKHR.Buffer pNext(@NativeType("void const *") long value) { VkWriteDescriptorSetAccelerationStructureKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkWriteDescriptorSetAccelerationStructureKHR#accelerationStructureCount} field. */
+        /** Sets the specified value to the {@code accelerationStructureCount} field. */
         public VkWriteDescriptorSetAccelerationStructureKHR.Buffer accelerationStructureCount(@NativeType("uint32_t") int value) { VkWriteDescriptorSetAccelerationStructureKHR.naccelerationStructureCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkWriteDescriptorSetAccelerationStructureKHR#pAccelerationStructures} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pAccelerationStructures} field. */
         public VkWriteDescriptorSetAccelerationStructureKHR.Buffer pAccelerationStructures(@Nullable @NativeType("VkAccelerationStructureKHR const *") LongBuffer value) { VkWriteDescriptorSetAccelerationStructureKHR.npAccelerationStructures(address(), value); return this; }
 
     }

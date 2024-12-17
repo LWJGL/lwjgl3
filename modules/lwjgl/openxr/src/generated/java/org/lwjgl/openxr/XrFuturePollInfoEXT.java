@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Input for xrPollFutureEXT.
- * 
- * <h5>Description</h5>
- * 
- * <p>An {@link XrFuturePollInfoEXT} structure is used to pass {@code future} to {@link EXTFuture#xrPollFutureEXT PollFutureEXT}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using {@link XrFuturePollInfoEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTFuture#XR_TYPE_FUTURE_POLL_INFO_EXT TYPE_FUTURE_POLL_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTFuture#xrPollFutureEXT PollFutureEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFuturePollInfoEXT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrFutureEXT {@link #future};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrFutureEXT future;
+ * }}</pre>
  */
 public class XrFuturePollInfoEXT extends Struct<XrFuturePollInfoEXT> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class XrFuturePollInfoEXT extends Struct<XrFuturePollInfoEXT> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrFutureEXT} future being polled. */
+    /** @return the value of the {@code future} field. */
     @NativeType("XrFutureEXT")
     public long future() { return nfuture(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFuturePollInfoEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_POLL_INFO_EXT TYPE_FUTURE_POLL_INFO_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_POLL_INFO_EXT TYPE_FUTURE_POLL_INFO_EXT} value to the {@code type} field. */
     public XrFuturePollInfoEXT type$Default() { return type(EXTFuture.XR_TYPE_FUTURE_POLL_INFO_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFuturePollInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #future} field. */
+    /** Sets the specified value to the {@code future} field. */
     public XrFuturePollInfoEXT future(@NativeType("XrFutureEXT") long value) { nfuture(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class XrFuturePollInfoEXT extends Struct<XrFuturePollInfoEXT> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFuturePollInfoEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFuturePollInfoEXT.ntype(address()); }
-        /** @return the value of the {@link XrFuturePollInfoEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFuturePollInfoEXT.nnext(address()); }
-        /** @return the value of the {@link XrFuturePollInfoEXT#future} field. */
+        /** @return the value of the {@code future} field. */
         @NativeType("XrFutureEXT")
         public long future() { return XrFuturePollInfoEXT.nfuture(address()); }
 
-        /** Sets the specified value to the {@link XrFuturePollInfoEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFuturePollInfoEXT.Buffer type(@NativeType("XrStructureType") int value) { XrFuturePollInfoEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_POLL_INFO_EXT TYPE_FUTURE_POLL_INFO_EXT} value to the {@link XrFuturePollInfoEXT#type} field. */
+        /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_POLL_INFO_EXT TYPE_FUTURE_POLL_INFO_EXT} value to the {@code type} field. */
         public XrFuturePollInfoEXT.Buffer type$Default() { return type(EXTFuture.XR_TYPE_FUTURE_POLL_INFO_EXT); }
-        /** Sets the specified value to the {@link XrFuturePollInfoEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFuturePollInfoEXT.Buffer next(@NativeType("void const *") long value) { XrFuturePollInfoEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFuturePollInfoEXT#future} field. */
+        /** Sets the specified value to the {@code future} field. */
         public XrFuturePollInfoEXT.Buffer future(@NativeType("XrFutureEXT") long value) { XrFuturePollInfoEXT.nfuture(address(), value); return this; }
 
     }

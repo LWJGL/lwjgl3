@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * An element type for a symbol lookup set.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LLVMOrcCLookupSetElement {
  *     LLVMOrcSymbolStringPoolEntryRef Name;
  *     LLVMOrcSymbolLookupFlags LookupFlags;
- * }</code></pre>
+ * }}</pre>
  */
 public class LLVMOrcCLookupSetElement extends Struct<LLVMOrcCLookupSetElement> implements NativeResource {
 

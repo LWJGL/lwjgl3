@@ -17,38 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * XrEnvironmentDepthImageMETA.
- * 
- * <h5>Description</h5>
- * 
- * <p>Depth is provided as textures in the same format as described in the {@link KHRCompositionLayerDepth XR_KHR_composition_layer_depth} extension.</p>
- * 
- * <p>The frustum’s Z-planes are placed at {@code nearZ} and {@code farZ} meters. When {@code farZ} is less than {@code nearZ}, an infinite projection matrix is used.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using {@link XrEnvironmentDepthImageMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META TYPE_ENVIRONMENT_DEPTH_IMAGE_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>Any given element of {@code views} <b>must</b> be a valid {@link XrEnvironmentDepthImageViewMETA} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEnvironmentDepthImageViewMETA}, {@link METAEnvironmentDepth#xrAcquireEnvironmentDepthImageMETA AcquireEnvironmentDepthImageMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEnvironmentDepthImageMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #swapchainIndex};
- *     float {@link #nearZ};
- *     float {@link #farZ};
- *     {@link XrEnvironmentDepthImageViewMETA XrEnvironmentDepthImageViewMETA} {@link #views}[2];
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t swapchainIndex;
+ *     float nearZ;
+ *     float farZ;
+ *     {@link XrEnvironmentDepthImageViewMETA XrEnvironmentDepthImageViewMETA} views[2];
+ * }}</pre>
  */
 public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageMETA> implements NativeResource {
 
@@ -110,44 +87,44 @@ public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageM
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the index of the acquired texture in the depth swapchain. */
+    /** @return the value of the {@code swapchainIndex} field. */
     @NativeType("uint32_t")
     public int swapchainIndex() { return nswapchainIndex(address()); }
-    /** the distance to the near Z plane in meters. */
+    /** @return the value of the {@code nearZ} field. */
     public float nearZ() { return nnearZ(address()); }
-    /** the distance to the far Z plane in meters. */
+    /** @return the value of the {@code farZ} field. */
     public float farZ() { return nfarZ(address()); }
-    /** an array of two {@link XrEnvironmentDepthImageViewMETA}, one for each eye, where index 0 is left eye and index 1 is the right eye. */
+    /** @return a {@link XrEnvironmentDepthImageViewMETA}.Buffer view of the {@code views} field. */
     @NativeType("XrEnvironmentDepthImageViewMETA[2]")
     public XrEnvironmentDepthImageViewMETA.Buffer views() { return nviews(address()); }
-    /** an array of two {@link XrEnvironmentDepthImageViewMETA}, one for each eye, where index 0 is left eye and index 1 is the right eye. */
+    /** @return a {@link XrEnvironmentDepthImageViewMETA} view of the struct at the specified index of the {@code views} field. */
     public XrEnvironmentDepthImageViewMETA views(int index) { return nviews(address(), index); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEnvironmentDepthImageMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META TYPE_ENVIRONMENT_DEPTH_IMAGE_META} value to the {@link #type} field. */
+    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META TYPE_ENVIRONMENT_DEPTH_IMAGE_META} value to the {@code type} field. */
     public XrEnvironmentDepthImageMETA type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEnvironmentDepthImageMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #swapchainIndex} field. */
+    /** Sets the specified value to the {@code swapchainIndex} field. */
     public XrEnvironmentDepthImageMETA swapchainIndex(@NativeType("uint32_t") int value) { nswapchainIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #nearZ} field. */
+    /** Sets the specified value to the {@code nearZ} field. */
     public XrEnvironmentDepthImageMETA nearZ(float value) { nnearZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #farZ} field. */
+    /** Sets the specified value to the {@code farZ} field. */
     public XrEnvironmentDepthImageMETA farZ(float value) { nfarZ(address(), value); return this; }
-    /** Copies the specified {@link XrEnvironmentDepthImageViewMETA.Buffer} to the {@link #views} field. */
+    /** Copies the specified {@link XrEnvironmentDepthImageViewMETA.Buffer} to the {@code views} field. */
     public XrEnvironmentDepthImageMETA views(@NativeType("XrEnvironmentDepthImageViewMETA[2]") XrEnvironmentDepthImageViewMETA.Buffer value) { nviews(address(), value); return this; }
-    /** Copies the specified {@link XrEnvironmentDepthImageViewMETA} at the specified index of the {@link #views} field. */
+    /** Copies the specified {@link XrEnvironmentDepthImageViewMETA} at the specified index of the {@code views} field. */
     public XrEnvironmentDepthImageMETA views(int index, XrEnvironmentDepthImageViewMETA value) { nviews(address(), index, value); return this; }
-    /** Passes the {@link #views} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code views} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrEnvironmentDepthImageMETA views(java.util.function.Consumer<XrEnvironmentDepthImageViewMETA.Buffer> consumer) { consumer.accept(views()); return this; }
-    /** Passes the element at {@code index} of the {@link #views} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@code views} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrEnvironmentDepthImageMETA views(int index, java.util.function.Consumer<XrEnvironmentDepthImageViewMETA> consumer) { consumer.accept(views(index)); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -372,44 +349,44 @@ public class XrEnvironmentDepthImageMETA extends Struct<XrEnvironmentDepthImageM
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEnvironmentDepthImageMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEnvironmentDepthImageMETA.ntype(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthImageMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEnvironmentDepthImageMETA.nnext(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthImageMETA#swapchainIndex} field. */
+        /** @return the value of the {@code swapchainIndex} field. */
         @NativeType("uint32_t")
         public int swapchainIndex() { return XrEnvironmentDepthImageMETA.nswapchainIndex(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthImageMETA#nearZ} field. */
+        /** @return the value of the {@code nearZ} field. */
         public float nearZ() { return XrEnvironmentDepthImageMETA.nnearZ(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthImageMETA#farZ} field. */
+        /** @return the value of the {@code farZ} field. */
         public float farZ() { return XrEnvironmentDepthImageMETA.nfarZ(address()); }
-        /** @return a {@link XrEnvironmentDepthImageViewMETA}.Buffer view of the {@link XrEnvironmentDepthImageMETA#views} field. */
+        /** @return a {@link XrEnvironmentDepthImageViewMETA}.Buffer view of the {@code views} field. */
         @NativeType("XrEnvironmentDepthImageViewMETA[2]")
         public XrEnvironmentDepthImageViewMETA.Buffer views() { return XrEnvironmentDepthImageMETA.nviews(address()); }
-        /** @return a {@link XrEnvironmentDepthImageViewMETA} view of the struct at the specified index of the {@link XrEnvironmentDepthImageMETA#views} field. */
+        /** @return a {@link XrEnvironmentDepthImageViewMETA} view of the struct at the specified index of the {@code views} field. */
         public XrEnvironmentDepthImageViewMETA views(int index) { return XrEnvironmentDepthImageMETA.nviews(address(), index); }
 
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEnvironmentDepthImageMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEnvironmentDepthImageMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META TYPE_ENVIRONMENT_DEPTH_IMAGE_META} value to the {@link XrEnvironmentDepthImageMETA#type} field. */
+        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META TYPE_ENVIRONMENT_DEPTH_IMAGE_META} value to the {@code type} field. */
         public XrEnvironmentDepthImageMETA.Buffer type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META); }
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEnvironmentDepthImageMETA.Buffer next(@NativeType("void const *") long value) { XrEnvironmentDepthImageMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageMETA#swapchainIndex} field. */
+        /** Sets the specified value to the {@code swapchainIndex} field. */
         public XrEnvironmentDepthImageMETA.Buffer swapchainIndex(@NativeType("uint32_t") int value) { XrEnvironmentDepthImageMETA.nswapchainIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageMETA#nearZ} field. */
+        /** Sets the specified value to the {@code nearZ} field. */
         public XrEnvironmentDepthImageMETA.Buffer nearZ(float value) { XrEnvironmentDepthImageMETA.nnearZ(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthImageMETA#farZ} field. */
+        /** Sets the specified value to the {@code farZ} field. */
         public XrEnvironmentDepthImageMETA.Buffer farZ(float value) { XrEnvironmentDepthImageMETA.nfarZ(address(), value); return this; }
-        /** Copies the specified {@link XrEnvironmentDepthImageViewMETA.Buffer} to the {@link XrEnvironmentDepthImageMETA#views} field. */
+        /** Copies the specified {@link XrEnvironmentDepthImageViewMETA.Buffer} to the {@code views} field. */
         public XrEnvironmentDepthImageMETA.Buffer views(@NativeType("XrEnvironmentDepthImageViewMETA[2]") XrEnvironmentDepthImageViewMETA.Buffer value) { XrEnvironmentDepthImageMETA.nviews(address(), value); return this; }
-        /** Copies the specified {@link XrEnvironmentDepthImageViewMETA} at the specified index of the {@link XrEnvironmentDepthImageMETA#views} field. */
+        /** Copies the specified {@link XrEnvironmentDepthImageViewMETA} at the specified index of the {@code views} field. */
         public XrEnvironmentDepthImageMETA.Buffer views(int index, XrEnvironmentDepthImageViewMETA value) { XrEnvironmentDepthImageMETA.nviews(address(), index, value); return this; }
-        /** Passes the {@link XrEnvironmentDepthImageMETA#views} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code views} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrEnvironmentDepthImageMETA.Buffer views(java.util.function.Consumer<XrEnvironmentDepthImageViewMETA.Buffer> consumer) { consumer.accept(views()); return this; }
-        /** Passes the element at {@code index} of the {@link XrEnvironmentDepthImageMETA#views} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@code views} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrEnvironmentDepthImageMETA.Buffer views(int index, java.util.function.Consumer<XrEnvironmentDepthImageViewMETA> consumer) { consumer.accept(views(index)); return this; }
 
     }

@@ -16,23 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Compression properties of an image.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageCompressionPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkImageCompressionFlagsEXT {@link #imageCompressionFlags};
- *     VkImageCompressionFixedRateFlagsEXT {@link #imageCompressionFixedRateFlags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkImageCompressionFlagsEXT imageCompressionFlags;
+ *     VkImageCompressionFixedRateFlagsEXT imageCompressionFixedRateFlags;
+ * }}</pre>
  */
 public class VkImageCompressionPropertiesEXT extends Struct<VkImageCompressionPropertiesEXT> implements NativeResource {
 
@@ -88,24 +78,24 @@ public class VkImageCompressionPropertiesEXT extends Struct<VkImageCompressionPr
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** returns a value describing the compression controls that apply to the image. The value will be either {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_DEFAULT_EXT IMAGE_COMPRESSION_DEFAULT_EXT} to indicate no fixed-rate compression, {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT} to indicate fixed-rate compression, or {@link EXTImageCompressionControl#VK_IMAGE_COMPRESSION_DISABLED_EXT IMAGE_COMPRESSION_DISABLED_EXT} to indicate no compression. */
+    /** @return the value of the {@code imageCompressionFlags} field. */
     @NativeType("VkImageCompressionFlagsEXT")
     public int imageCompressionFlags() { return nimageCompressionFlags(address()); }
-    /** returns a {@code VkImageCompressionFixedRateFlagsEXT} value describing the compression rates that apply to the specified aspect of the image. */
+    /** @return the value of the {@code imageCompressionFixedRateFlags} field. */
     @NativeType("VkImageCompressionFixedRateFlagsEXT")
     public int imageCompressionFixedRateFlags() { return nimageCompressionFixedRateFlags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageCompressionPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkImageCompressionPropertiesEXT sType$Default() { return sType(EXTImageCompressionControl.VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageCompressionPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,24 +289,24 @@ public class VkImageCompressionPropertiesEXT extends Struct<VkImageCompressionPr
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageCompressionPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageCompressionPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkImageCompressionPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkImageCompressionPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkImageCompressionPropertiesEXT#imageCompressionFlags} field. */
+        /** @return the value of the {@code imageCompressionFlags} field. */
         @NativeType("VkImageCompressionFlagsEXT")
         public int imageCompressionFlags() { return VkImageCompressionPropertiesEXT.nimageCompressionFlags(address()); }
-        /** @return the value of the {@link VkImageCompressionPropertiesEXT#imageCompressionFixedRateFlags} field. */
+        /** @return the value of the {@code imageCompressionFixedRateFlags} field. */
         @NativeType("VkImageCompressionFixedRateFlagsEXT")
         public int imageCompressionFixedRateFlags() { return VkImageCompressionPropertiesEXT.nimageCompressionFixedRateFlags(address()); }
 
-        /** Sets the specified value to the {@link VkImageCompressionPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageCompressionPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImageCompressionPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT} value to the {@link VkImageCompressionPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkImageCompressionPropertiesEXT.Buffer sType$Default() { return sType(EXTImageCompressionControl.VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkImageCompressionPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageCompressionPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkImageCompressionPropertiesEXT.npNext(address(), value); return this; }
 
     }

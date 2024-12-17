@@ -15,20 +15,16 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a TrueType horizontal header, the {@code hhea} table, as well as the corresponding horizontal metrics table, {@code hmtx}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TT_HoriHeader {
  *     FT_Fixed Version;
  *     FT_Short Ascender;
  *     FT_Short Descender;
  *     FT_Short Line_Gap;
- *     FT_UShort {@link #advance_Width_Max};
- *     FT_Short {@link #min_Left_Side_Bearing};
- *     FT_Short {@link #min_Right_Side_Bearing};
- *     FT_Short {@link #xMax_Extent};
+ *     FT_UShort advance_Width_Max;
+ *     FT_Short min_Left_Side_Bearing;
+ *     FT_Short min_Right_Side_Bearing;
+ *     FT_Short xMax_Extent;
  *     FT_Short caret_Slope_Rise;
  *     FT_Short caret_Slope_Run;
  *     FT_Short caret_Offset;
@@ -37,7 +33,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UShort number_Of_HMetrics;
  *     void * long_metrics;
  *     void * short_metrics;
- * }</code></pre>
+ * }}</pre>
  */
 public class TT_HoriHeader extends Struct<TT_HoriHeader> {
 
@@ -141,16 +137,16 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
     /** @return the value of the {@code Line_Gap} field. */
     @NativeType("FT_Short")
     public short Line_Gap() { return nLine_Gap(address()); }
-    /** advance width maximum */
+    /** @return the value of the {@code advance_Width_Max} field. */
     @NativeType("FT_UShort")
     public short advance_Width_Max() { return nadvance_Width_Max(address()); }
-    /** minimum left-sb */
+    /** @return the value of the {@code min_Left_Side_Bearing} field. */
     @NativeType("FT_Short")
     public short min_Left_Side_Bearing() { return nmin_Left_Side_Bearing(address()); }
-    /** minimum right-sb */
+    /** @return the value of the {@code min_Right_Side_Bearing} field. */
     @NativeType("FT_Short")
     public short min_Right_Side_Bearing() { return nmin_Right_Side_Bearing(address()); }
-    /** xmax extents */
+    /** @return the value of the {@code xMax_Extent} field. */
     @NativeType("FT_Short")
     public short xMax_Extent() { return nxMax_Extent(address()); }
     /** @return the value of the {@code caret_Slope_Rise} field. */
@@ -174,18 +170,10 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
     /** @return the value of the {@code number_Of_HMetrics} field. */
     @NativeType("FT_UShort")
     public short number_Of_HMetrics() { return nnumber_Of_HMetrics(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code long_metrics} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code long_metrics} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer long_metrics(int capacity) { return nlong_metrics(address(), capacity); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer short_metrics(int capacity) { return nshort_metrics(address(), capacity); }
 
@@ -310,16 +298,16 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
         /** @return the value of the {@code Line_Gap} field. */
         @NativeType("FT_Short")
         public short Line_Gap() { return TT_HoriHeader.nLine_Gap(address()); }
-        /** @return the value of the {@link TT_HoriHeader#advance_Width_Max} field. */
+        /** @return the value of the {@code advance_Width_Max} field. */
         @NativeType("FT_UShort")
         public short advance_Width_Max() { return TT_HoriHeader.nadvance_Width_Max(address()); }
-        /** @return the value of the {@link TT_HoriHeader#min_Left_Side_Bearing} field. */
+        /** @return the value of the {@code min_Left_Side_Bearing} field. */
         @NativeType("FT_Short")
         public short min_Left_Side_Bearing() { return TT_HoriHeader.nmin_Left_Side_Bearing(address()); }
-        /** @return the value of the {@link TT_HoriHeader#min_Right_Side_Bearing} field. */
+        /** @return the value of the {@code min_Right_Side_Bearing} field. */
         @NativeType("FT_Short")
         public short min_Right_Side_Bearing() { return TT_HoriHeader.nmin_Right_Side_Bearing(address()); }
-        /** @return the value of the {@link TT_HoriHeader#xMax_Extent} field. */
+        /** @return the value of the {@code xMax_Extent} field. */
         @NativeType("FT_Short")
         public short xMax_Extent() { return TT_HoriHeader.nxMax_Extent(address()); }
         /** @return the value of the {@code caret_Slope_Rise} field. */
@@ -343,18 +331,10 @@ public class TT_HoriHeader extends Struct<TT_HoriHeader> {
         /** @return the value of the {@code number_Of_HMetrics} field. */
         @NativeType("FT_UShort")
         public short number_Of_HMetrics() { return TT_HoriHeader.nnumber_Of_HMetrics(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code long_metrics} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code long_metrics} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer long_metrics(int capacity) { return TT_HoriHeader.nlong_metrics(address(), capacity); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code short_metrics} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer short_metrics(int capacity) { return TT_HoriHeader.nshort_metrics(address(), capacity); }
 

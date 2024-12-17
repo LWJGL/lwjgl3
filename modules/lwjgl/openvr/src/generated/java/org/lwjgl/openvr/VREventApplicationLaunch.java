@@ -14,13 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_ApplicationLaunch_t {
  *     uint32_t pid;
  *     uint32_t unArgsHandle;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_ApplicationLaunch_t")
 public class VREventApplicationLaunch extends Struct<VREventApplicationLaunch> {

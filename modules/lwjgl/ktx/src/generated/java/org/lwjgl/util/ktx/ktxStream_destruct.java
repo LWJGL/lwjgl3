@@ -11,14 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     ktxStream *str
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ktxStream_destruct} */
 public abstract class ktxStream_destruct extends Callback implements ktxStream_destructI {
 
     /**

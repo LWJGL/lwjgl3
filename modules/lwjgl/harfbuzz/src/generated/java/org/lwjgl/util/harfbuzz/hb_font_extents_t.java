@@ -16,17 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Font-wide extent values, measured in font units.
- * 
- * <p>Note that typically {@code ascender} is positive and {@code descender} negative, in coordinate systems that grow up.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_font_extents_t {
- *     hb_position_t {@link #ascender};
- *     hb_position_t {@link #descender};
- *     hb_position_t {@link #line_gap};
+ *     hb_position_t ascender;
+ *     hb_position_t descender;
+ *     hb_position_t line_gap;
  *     hb_position_t reserved9;
  *     hb_position_t reserved8;
  *     hb_position_t reserved7;
@@ -36,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     hb_position_t reserved3;
  *     hb_position_t reserved2;
  *     hb_position_t reserved1;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_font_extents_t extends Struct<hb_font_extents_t> implements NativeResource {
 
@@ -116,21 +110,21 @@ public class hb_font_extents_t extends Struct<hb_font_extents_t> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the height of typographic ascenders */
+    /** @return the value of the {@code ascender} field. */
     @NativeType("hb_position_t")
     public int ascender() { return nascender(address()); }
-    /** the depth of typographic descenders */
+    /** @return the value of the {@code descender} field. */
     @NativeType("hb_position_t")
     public int descender() { return ndescender(address()); }
-    /** the suggested line-spacing gap */
+    /** @return the value of the {@code line_gap} field. */
     @NativeType("hb_position_t")
     public int line_gap() { return nline_gap(address()); }
 
-    /** Sets the specified value to the {@link #ascender} field. */
+    /** Sets the specified value to the {@code ascender} field. */
     public hb_font_extents_t ascender(@NativeType("hb_position_t") int value) { nascender(address(), value); return this; }
-    /** Sets the specified value to the {@link #descender} field. */
+    /** Sets the specified value to the {@code descender} field. */
     public hb_font_extents_t descender(@NativeType("hb_position_t") int value) { ndescender(address(), value); return this; }
-    /** Sets the specified value to the {@link #line_gap} field. */
+    /** Sets the specified value to the {@code line_gap} field. */
     public hb_font_extents_t line_gap(@NativeType("hb_position_t") int value) { nline_gap(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -344,21 +338,21 @@ public class hb_font_extents_t extends Struct<hb_font_extents_t> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_font_extents_t#ascender} field. */
+        /** @return the value of the {@code ascender} field. */
         @NativeType("hb_position_t")
         public int ascender() { return hb_font_extents_t.nascender(address()); }
-        /** @return the value of the {@link hb_font_extents_t#descender} field. */
+        /** @return the value of the {@code descender} field. */
         @NativeType("hb_position_t")
         public int descender() { return hb_font_extents_t.ndescender(address()); }
-        /** @return the value of the {@link hb_font_extents_t#line_gap} field. */
+        /** @return the value of the {@code line_gap} field. */
         @NativeType("hb_position_t")
         public int line_gap() { return hb_font_extents_t.nline_gap(address()); }
 
-        /** Sets the specified value to the {@link hb_font_extents_t#ascender} field. */
+        /** Sets the specified value to the {@code ascender} field. */
         public hb_font_extents_t.Buffer ascender(@NativeType("hb_position_t") int value) { hb_font_extents_t.nascender(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_font_extents_t#descender} field. */
+        /** Sets the specified value to the {@code descender} field. */
         public hb_font_extents_t.Buffer descender(@NativeType("hb_position_t") int value) { hb_font_extents_t.ndescender(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_font_extents_t#line_gap} field. */
+        /** Sets the specified value to the {@code line_gap} field. */
         public hb_font_extents_t.Buffer line_gap(@NativeType("hb_position_t") int value) { hb_font_extents_t.nline_gap(address(), value); return this; }
 
     }

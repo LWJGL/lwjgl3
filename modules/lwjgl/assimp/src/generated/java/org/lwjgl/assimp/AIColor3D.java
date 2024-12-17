@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Represents a color in Red-Green-Blue space.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiColor3D {
- *     float {@link #r};
- *     float {@link #g};
- *     float {@link #b};
- * }</code></pre>
+ *     float r;
+ *     float g;
+ *     float b;
+ * }}</pre>
  */
 @NativeType("struct aiColor3D")
 public class AIColor3D extends Struct<AIColor3D> {
@@ -77,11 +73,11 @@ public class AIColor3D extends Struct<AIColor3D> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** The red color value */
+    /** @return the value of the {@code r} field. */
     public float r() { return nr(address()); }
-    /** The green color value */
+    /** @return the value of the {@code g} field. */
     public float g() { return ng(address()); }
-    /** The blue color value */
+    /** @return the value of the {@code b} field. */
     public float b() { return nb(address()); }
 
     // -----------------------------------
@@ -163,11 +159,11 @@ public class AIColor3D extends Struct<AIColor3D> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AIColor3D#r} field. */
+        /** @return the value of the {@code r} field. */
         public float r() { return AIColor3D.nr(address()); }
-        /** @return the value of the {@link AIColor3D#g} field. */
+        /** @return the value of the {@code g} field. */
         public float g() { return AIColor3D.ng(address()); }
-        /** @return the value of the {@link AIColor3D#b} field. */
+        /** @return the value of the {@code b} field. */
         public float b() { return AIColor3D.nb(address()); }
 
     }

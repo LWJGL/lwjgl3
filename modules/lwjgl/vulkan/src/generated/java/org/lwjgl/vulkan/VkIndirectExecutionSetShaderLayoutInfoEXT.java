@@ -16,34 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct specifying descriptor layout parameters of a newly created indirect execution set containing only shader objects.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>All members of {@code pSetLayouts} <b>must</b> not contain descriptors of type {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT}</li>
- * <li>If {@code setLayoutCount} is not 0, {@code pSetLayouts} <b>must</b> be a valid pointer to an array of {@code setLayoutCount} valid or {@link VK10#VK_NULL_HANDLE NULL_HANDLE} {@code VkDescriptorSetLayout} handles</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectExecutionSetShaderInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectExecutionSetShaderLayoutInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
- *     uint32_t {@link #setLayoutCount};
- *     VkDescriptorSetLayout const * {@link #pSetLayouts};
- * }</code></pre>
+ *     uint32_t setLayoutCount;
+ *     VkDescriptorSetLayout const * pSetLayouts;
+ * }}</pre>
  */
 public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirectExecutionSetShaderLayoutInfoEXT> implements NativeResource {
 
@@ -105,10 +84,10 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
     /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of members in the {@code pSetLayouts} array */
+    /** @return the value of the {@code setLayoutCount} field. */
     @NativeType("uint32_t")
     public int setLayoutCount() { return nsetLayoutCount(address()); }
-    /** a pointer to an array containing {@code VkDescriptorSetLayout} objects used by the shader stage. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pSetLayouts} field. */
     @NativeType("VkDescriptorSetLayout const *")
     public @Nullable LongBuffer pSetLayouts() { return npSetLayouts(address()); }
 
@@ -118,9 +97,9 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
     public VkIndirectExecutionSetShaderLayoutInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectExecutionSetShaderLayoutInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #setLayoutCount} field. */
+    /** Sets the specified value to the {@code setLayoutCount} field. */
     public VkIndirectExecutionSetShaderLayoutInfoEXT setLayoutCount(@NativeType("uint32_t") int value) { nsetLayoutCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pSetLayouts} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pSetLayouts} field. */
     public VkIndirectExecutionSetShaderLayoutInfoEXT pSetLayouts(@Nullable @NativeType("VkDescriptorSetLayout const *") LongBuffer value) { npSetLayouts(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,10 +307,10 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
         /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkIndirectExecutionSetShaderLayoutInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetShaderLayoutInfoEXT#setLayoutCount} field. */
+        /** @return the value of the {@code setLayoutCount} field. */
         @NativeType("uint32_t")
         public int setLayoutCount() { return VkIndirectExecutionSetShaderLayoutInfoEXT.nsetLayoutCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkIndirectExecutionSetShaderLayoutInfoEXT#pSetLayouts} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pSetLayouts} field. */
         @NativeType("VkDescriptorSetLayout const *")
         public @Nullable LongBuffer pSetLayouts() { return VkIndirectExecutionSetShaderLayoutInfoEXT.npSetLayouts(address()); }
 
@@ -341,9 +320,9 @@ public class VkIndirectExecutionSetShaderLayoutInfoEXT extends Struct<VkIndirect
         public VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkIndirectExecutionSetShaderLayoutInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetShaderLayoutInfoEXT#setLayoutCount} field. */
+        /** Sets the specified value to the {@code setLayoutCount} field. */
         public VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer setLayoutCount(@NativeType("uint32_t") int value) { VkIndirectExecutionSetShaderLayoutInfoEXT.nsetLayoutCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkIndirectExecutionSetShaderLayoutInfoEXT#pSetLayouts} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pSetLayouts} field. */
         public VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer pSetLayouts(@Nullable @NativeType("VkDescriptorSetLayout const *") LongBuffer value) { VkIndirectExecutionSetShaderLayoutInfoEXT.npSetLayouts(address(), value); return this; }
 
     }

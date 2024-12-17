@@ -17,22 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A single bone of a mesh.
- * 
- * <p>A bone has a name by which it can be found in the frame hierarchy and by which it can be addressed by animations. In addition it has a number of
- * influences on vertices, and a matrix relating the mesh position to the position of the bone at the time of binding.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiBone {
- *     {@link AIString struct aiString} {@link #mName};
- *     unsigned int {@link #mNumWeights};
- *     {@link AINode struct aiNode} * {@link #mArmature};
- *     {@link AINode struct aiNode} * {@link #mNode};
- *     {@link AIVertexWeight struct aiVertexWeight} * {@link #mWeights};
- *     {@link AIMatrix4x4 struct aiMatrix4x4} {@link #mOffsetMatrix};
- * }</code></pre>
+ *     {@link AIString struct aiString} mName;
+ *     unsigned int mNumWeights;
+ *     {@link AINode struct aiNode} * mArmature;
+ *     {@link AINode struct aiNode} * mNode;
+ *     {@link AIVertexWeight struct aiVertexWeight} * mWeights;
+ *     {@link AIMatrix4x4 struct aiMatrix4x4} mOffsetMatrix;
+ * }}</pre>
  */
 @NativeType("struct aiBone")
 public class AIBone extends Struct<AIBone> implements NativeResource {
@@ -95,45 +88,38 @@ public class AIBone extends Struct<AIBone> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the name of the bone. */
+    /** @return a {@link AIString} view of the {@code mName} field. */
     @NativeType("struct aiString")
     public AIString mName() { return nmName(address()); }
-    /** the number of vertices affected by this bone. The maximum value for this member is {@link Assimp#AI_MAX_BONE_WEIGHTS}. */
+    /** @return the value of the {@code mNumWeights} field. */
     @NativeType("unsigned int")
     public int mNumWeights() { return nmNumWeights(address()); }
-    /** the bone armature node - used for skeleton conversion you must enable {@link Assimp#aiProcess_PopulateArmatureData Process_PopulateArmatureData} to populate this */
+    /** @return a {@link AINode} view of the struct pointed to by the {@code mArmature} field. */
     @NativeType("struct aiNode *")
     public AINode mArmature() { return nmArmature(address()); }
-    /** the bone node in the scene - used for skeleton conversion you must enable {@link Assimp#aiProcess_PopulateArmatureData Process_PopulateArmatureData} to populate this */
+    /** @return a {@link AINode} view of the struct pointed to by the {@code mNode} field. */
     @NativeType("struct aiNode *")
     public AINode mNode() { return nmNode(address()); }
-    /** the influence weights of this bone, by vertex index */
+    /** @return a {@link AIVertexWeight.Buffer} view of the struct array pointed to by the {@code mWeights} field. */
     @NativeType("struct aiVertexWeight *")
     public AIVertexWeight.Buffer mWeights() { return nmWeights(address()); }
-    /**
-     * matrix that transforms from mesh space to bone space in bind pose.
-     * 
-     * <p>This matrix describes the position of the mesh in the local space of this bone when the skeleton was bound. Thus it can be used directly to determine a
-     * desired vertex position, given the world-space transform of the bone when animated, and the position of the vertex in mesh space.</p>
-     * 
-     * <p>It is sometimes called an inverse-bind matrix, or inverse bind pose matrix.</p>
-     */
+    /** @return a {@link AIMatrix4x4} view of the {@code mOffsetMatrix} field. */
     @NativeType("struct aiMatrix4x4")
     public AIMatrix4x4 mOffsetMatrix() { return nmOffsetMatrix(address()); }
 
-    /** Copies the specified {@link AIString} to the {@link #mName} field. */
+    /** Copies the specified {@link AIString} to the {@code mName} field. */
     public AIBone mName(@NativeType("struct aiString") AIString value) { nmName(address(), value); return this; }
-    /** Passes the {@link #mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIBone mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-    /** Sets the address of the specified {@link AINode} to the {@link #mArmature} field. */
+    /** Sets the address of the specified {@link AINode} to the {@code mArmature} field. */
     public AIBone mArmature(@NativeType("struct aiNode *") AINode value) { nmArmature(address(), value); return this; }
-    /** Sets the address of the specified {@link AINode} to the {@link #mNode} field. */
+    /** Sets the address of the specified {@link AINode} to the {@code mNode} field. */
     public AIBone mNode(@NativeType("struct aiNode *") AINode value) { nmNode(address(), value); return this; }
-    /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@link #mWeights} field. */
+    /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@code mWeights} field. */
     public AIBone mWeights(@NativeType("struct aiVertexWeight *") AIVertexWeight.Buffer value) { nmWeights(address(), value); return this; }
-    /** Copies the specified {@link AIMatrix4x4} to the {@link #mOffsetMatrix} field. */
+    /** Copies the specified {@link AIMatrix4x4} to the {@code mOffsetMatrix} field. */
     public AIBone mOffsetMatrix(@NativeType("struct aiMatrix4x4") AIMatrix4x4 value) { nmOffsetMatrix(address(), value); return this; }
-    /** Passes the {@link #mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIBone mOffsetMatrix(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mOffsetMatrix()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -379,38 +365,38 @@ public class AIBone extends Struct<AIBone> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link AIString} view of the {@link AIBone#mName} field. */
+        /** @return a {@link AIString} view of the {@code mName} field. */
         @NativeType("struct aiString")
         public AIString mName() { return AIBone.nmName(address()); }
-        /** @return the value of the {@link AIBone#mNumWeights} field. */
+        /** @return the value of the {@code mNumWeights} field. */
         @NativeType("unsigned int")
         public int mNumWeights() { return AIBone.nmNumWeights(address()); }
-        /** @return a {@link AINode} view of the struct pointed to by the {@link AIBone#mArmature} field. */
+        /** @return a {@link AINode} view of the struct pointed to by the {@code mArmature} field. */
         @NativeType("struct aiNode *")
         public AINode mArmature() { return AIBone.nmArmature(address()); }
-        /** @return a {@link AINode} view of the struct pointed to by the {@link AIBone#mNode} field. */
+        /** @return a {@link AINode} view of the struct pointed to by the {@code mNode} field. */
         @NativeType("struct aiNode *")
         public AINode mNode() { return AIBone.nmNode(address()); }
-        /** @return a {@link AIVertexWeight.Buffer} view of the struct array pointed to by the {@link AIBone#mWeights} field. */
+        /** @return a {@link AIVertexWeight.Buffer} view of the struct array pointed to by the {@code mWeights} field. */
         @NativeType("struct aiVertexWeight *")
         public AIVertexWeight.Buffer mWeights() { return AIBone.nmWeights(address()); }
-        /** @return a {@link AIMatrix4x4} view of the {@link AIBone#mOffsetMatrix} field. */
+        /** @return a {@link AIMatrix4x4} view of the {@code mOffsetMatrix} field. */
         @NativeType("struct aiMatrix4x4")
         public AIMatrix4x4 mOffsetMatrix() { return AIBone.nmOffsetMatrix(address()); }
 
-        /** Copies the specified {@link AIString} to the {@link AIBone#mName} field. */
+        /** Copies the specified {@link AIString} to the {@code mName} field. */
         public AIBone.Buffer mName(@NativeType("struct aiString") AIString value) { AIBone.nmName(address(), value); return this; }
-        /** Passes the {@link AIBone#mName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIBone.Buffer mName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mName()); return this; }
-        /** Sets the address of the specified {@link AINode} to the {@link AIBone#mArmature} field. */
+        /** Sets the address of the specified {@link AINode} to the {@code mArmature} field. */
         public AIBone.Buffer mArmature(@NativeType("struct aiNode *") AINode value) { AIBone.nmArmature(address(), value); return this; }
-        /** Sets the address of the specified {@link AINode} to the {@link AIBone#mNode} field. */
+        /** Sets the address of the specified {@link AINode} to the {@code mNode} field. */
         public AIBone.Buffer mNode(@NativeType("struct aiNode *") AINode value) { AIBone.nmNode(address(), value); return this; }
-        /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@link AIBone#mWeights} field. */
+        /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@code mWeights} field. */
         public AIBone.Buffer mWeights(@NativeType("struct aiVertexWeight *") AIVertexWeight.Buffer value) { AIBone.nmWeights(address(), value); return this; }
-        /** Copies the specified {@link AIMatrix4x4} to the {@link AIBone#mOffsetMatrix} field. */
+        /** Copies the specified {@link AIMatrix4x4} to the {@code mOffsetMatrix} field. */
         public AIBone.Buffer mOffsetMatrix(@NativeType("struct aiMatrix4x4") AIMatrix4x4 value) { AIBone.nmOffsetMatrix(address(), value); return this; }
-        /** Passes the {@link AIBone#mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIBone.Buffer mOffsetMatrix(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mOffsetMatrix()); return this; }
 
     }

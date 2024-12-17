@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_METERING_INFO {
  *     int numsamples;
  *     float peaklevel[32];
  *     float rmslevel[32];
  *     short numchannels;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_METERING_INFO extends Struct<FMOD_DSP_METERING_INFO> implements NativeResource {
 

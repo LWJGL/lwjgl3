@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the state of a spatial anchor.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchors XR_ML_spatial_anchors} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorStateML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHOR_STATE_ML TYPE_SPATIAL_ANCHOR_STATE_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code confidence} is not 0, {@code confidence} <b>must</b> be a valid {@code XrSpatialAnchorConfidenceML} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLSpatialAnchors#xrGetSpatialAnchorStateML GetSpatialAnchorStateML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorStateML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrSpatialAnchorConfidenceML {@link #confidence};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrSpatialAnchorConfidenceML confidence;
+ * }}</pre>
  */
 public class XrSpatialAnchorStateML extends Struct<XrSpatialAnchorStateML> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class XrSpatialAnchorStateML extends Struct<XrSpatialAnchorStateML> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSpatialAnchorConfidenceML} of the anchor. */
+    /** @return the value of the {@code confidence} field. */
     @NativeType("XrSpatialAnchorConfidenceML")
     public int confidence() { return nconfidence(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorStateML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHOR_STATE_ML TYPE_SPATIAL_ANCHOR_STATE_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHOR_STATE_ML TYPE_SPATIAL_ANCHOR_STATE_ML} value to the {@code type} field. */
     public XrSpatialAnchorStateML type$Default() { return type(MLSpatialAnchors.XR_TYPE_SPATIAL_ANCHOR_STATE_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorStateML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #confidence} field. */
+    /** Sets the specified value to the {@code confidence} field. */
     public XrSpatialAnchorStateML confidence(@NativeType("XrSpatialAnchorConfidenceML") int value) { nconfidence(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,23 +286,23 @@ public class XrSpatialAnchorStateML extends Struct<XrSpatialAnchorStateML> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorStateML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorStateML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorStateML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpatialAnchorStateML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorStateML#confidence} field. */
+        /** @return the value of the {@code confidence} field. */
         @NativeType("XrSpatialAnchorConfidenceML")
         public int confidence() { return XrSpatialAnchorStateML.nconfidence(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorStateML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorStateML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorStateML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHOR_STATE_ML TYPE_SPATIAL_ANCHOR_STATE_ML} value to the {@link XrSpatialAnchorStateML#type} field. */
+        /** Sets the {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHOR_STATE_ML TYPE_SPATIAL_ANCHOR_STATE_ML} value to the {@code type} field. */
         public XrSpatialAnchorStateML.Buffer type$Default() { return type(MLSpatialAnchors.XR_TYPE_SPATIAL_ANCHOR_STATE_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorStateML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorStateML.Buffer next(@NativeType("void *") long value) { XrSpatialAnchorStateML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorStateML#confidence} field. */
+        /** Sets the specified value to the {@code confidence} field. */
         public XrSpatialAnchorStateML.Buffer confidence(@NativeType("XrSpatialAnchorConfidenceML") int value) { XrSpatialAnchorStateML.nconfidence(address(), value); return this; }
 
     }

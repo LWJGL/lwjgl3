@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing subpass shading properties supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSubpassShadingPropertiesHUAWEI {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxSubpassShadingWorkgroupSizeAspectRatio};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxSubpassShadingWorkgroupSizeAspectRatio;
+ * }}</pre>
  */
 public class VkPhysicalDeviceSubpassShadingPropertiesHUAWEI extends Struct<VkPhysicalDeviceSubpassShadingPropertiesHUAWEI> implements NativeResource {
 
@@ -88,21 +74,21 @@ public class VkPhysicalDeviceSubpassShadingPropertiesHUAWEI extends Struct<VkPhy
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the maximum ratio between the width and height of the portion of the subpass shading shader workgroup size. {@code maxSubpassShadingWorkgroupSizeAspectRatio} <b>must</b> be a power-of-two value, and <b>must</b> be less than or equal to max({@code WorkgroupSize.x} / {@code WorkgroupSize.y}, {@code WorkgroupSize.y} / {@code WorkgroupSize.x}). */
+    /** @return the value of the {@code maxSubpassShadingWorkgroupSizeAspectRatio} field. */
     @NativeType("uint32_t")
     public int maxSubpassShadingWorkgroupSizeAspectRatio() { return nmaxSubpassShadingWorkgroupSizeAspectRatio(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI} value to the {@link #sType} field. */
+    /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI} value to the {@code sType} field. */
     public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,21 +280,21 @@ public class VkPhysicalDeviceSubpassShadingPropertiesHUAWEI extends Struct<VkPhy
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#maxSubpassShadingWorkgroupSizeAspectRatio} field. */
+        /** @return the value of the {@code maxSubpassShadingWorkgroupSizeAspectRatio} field. */
         @NativeType("uint32_t")
         public int maxSubpassShadingWorkgroupSizeAspectRatio() { return VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.nmaxSubpassShadingWorkgroupSizeAspectRatio(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.nsType(address(), value); return this; }
-        /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI} value to the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#sType} field. */
+        /** Sets the {@link HUAWEISubpassShading#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI} value to the {@code sType} field. */
         public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer sType$Default() { return sType(HUAWEISubpassShading.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubpassShadingPropertiesHUAWEI#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubpassShadingPropertiesHUAWEI.npNext(address(), value); return this; }
 
     }

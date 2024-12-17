@@ -16,38 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Individual view configuration.
- * 
- * <h5>Description</h5>
- * 
- * <p>See {@link XrSwapchainSubImage} for more information about {@link XrSwapchainSubImage}{@code ::imageRect} values, and {@link XrSwapchainCreateInfo} for more information about creating swapchains appropriately sized to support those {@link XrSwapchainSubImage}{@code ::imageRect} values.</p>
- * 
- * <p>The array of {@link XrViewConfigurationView} returned by the runtime <b>must</b> adhere to the rules defined in {@code XrViewConfigurationType}, such as the count and association to the left and right eyes.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_VIEW_CONFIGURATION_VIEW TYPE_VIEW_CONFIGURATION_VIEW}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFoveatedViewConfigurationViewVARJO}, {@link XrViewConfigurationDepthRangeEXT}, {@link XrViewConfigurationViewFovEPIC}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrViewConfigurationProperties}, {@link XR10#xrEnumerateViewConfigurationViews EnumerateViewConfigurationViews}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrViewConfigurationView {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #recommendedImageRectWidth};
- *     uint32_t {@link #maxImageRectWidth};
- *     uint32_t {@link #recommendedImageRectHeight};
- *     uint32_t {@link #maxImageRectHeight};
- *     uint32_t {@link #recommendedSwapchainSampleCount};
- *     uint32_t {@link #maxSwapchainSampleCount};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t recommendedImageRectWidth;
+ *     uint32_t maxImageRectWidth;
+ *     uint32_t recommendedImageRectHeight;
+ *     uint32_t maxImageRectHeight;
+ *     uint32_t recommendedSwapchainSampleCount;
+ *     uint32_t maxSwapchainSampleCount;
+ * }}</pre>
  */
 public class XrViewConfigurationView extends Struct<XrViewConfigurationView> implements NativeResource {
 
@@ -115,36 +94,36 @@ public class XrViewConfigurationView extends Struct<XrViewConfigurationView> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the optimal width of {@link XrSwapchainSubImage}{@code ::imageRect} to use when rendering this view into a swapchain. */
+    /** @return the value of the {@code recommendedImageRectWidth} field. */
     @NativeType("uint32_t")
     public int recommendedImageRectWidth() { return nrecommendedImageRectWidth(address()); }
-    /** the maximum width of {@link XrSwapchainSubImage}{@code ::imageRect} supported when rendering this view into a swapchain. */
+    /** @return the value of the {@code maxImageRectWidth} field. */
     @NativeType("uint32_t")
     public int maxImageRectWidth() { return nmaxImageRectWidth(address()); }
-    /** the optimal height of {@link XrSwapchainSubImage}{@code ::imageRect} to use when rendering this view into a swapchain. */
+    /** @return the value of the {@code recommendedImageRectHeight} field. */
     @NativeType("uint32_t")
     public int recommendedImageRectHeight() { return nrecommendedImageRectHeight(address()); }
-    /** the maximum height of {@link XrSwapchainSubImage}{@code ::imageRect} supported when rendering this view into a swapchain. */
+    /** @return the value of the {@code maxImageRectHeight} field. */
     @NativeType("uint32_t")
     public int maxImageRectHeight() { return nmaxImageRectHeight(address()); }
-    /** the recommended number of sub-data element samples to create for each swapchain image that will be rendered into for this view. */
+    /** @return the value of the {@code recommendedSwapchainSampleCount} field. */
     @NativeType("uint32_t")
     public int recommendedSwapchainSampleCount() { return nrecommendedSwapchainSampleCount(address()); }
-    /** the maximum number of sub-data element samples supported for swapchain images that will be rendered into for this view. */
+    /** @return the value of the {@code maxSwapchainSampleCount} field. */
     @NativeType("uint32_t")
     public int maxSwapchainSampleCount() { return nmaxSwapchainSampleCount(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrViewConfigurationView type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_VIEW_CONFIGURATION_VIEW TYPE_VIEW_CONFIGURATION_VIEW} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_VIEW_CONFIGURATION_VIEW TYPE_VIEW_CONFIGURATION_VIEW} value to the {@code type} field. */
     public XrViewConfigurationView type$Default() { return type(XR10.XR_TYPE_VIEW_CONFIGURATION_VIEW); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrViewConfigurationView next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrFoveatedViewConfigurationViewVARJO} value to the {@code next} chain. */
     public XrViewConfigurationView next(XrFoveatedViewConfigurationViewVARJO value) { return this.next(value.next(this.next()).address()); }
@@ -152,17 +131,17 @@ public class XrViewConfigurationView extends Struct<XrViewConfigurationView> imp
     public XrViewConfigurationView next(XrViewConfigurationDepthRangeEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrViewConfigurationViewFovEPIC} value to the {@code next} chain. */
     public XrViewConfigurationView next(XrViewConfigurationViewFovEPIC value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #recommendedImageRectWidth} field. */
+    /** Sets the specified value to the {@code recommendedImageRectWidth} field. */
     public XrViewConfigurationView recommendedImageRectWidth(@NativeType("uint32_t") int value) { nrecommendedImageRectWidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxImageRectWidth} field. */
+    /** Sets the specified value to the {@code maxImageRectWidth} field. */
     public XrViewConfigurationView maxImageRectWidth(@NativeType("uint32_t") int value) { nmaxImageRectWidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #recommendedImageRectHeight} field. */
+    /** Sets the specified value to the {@code recommendedImageRectHeight} field. */
     public XrViewConfigurationView recommendedImageRectHeight(@NativeType("uint32_t") int value) { nrecommendedImageRectHeight(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxImageRectHeight} field. */
+    /** Sets the specified value to the {@code maxImageRectHeight} field. */
     public XrViewConfigurationView maxImageRectHeight(@NativeType("uint32_t") int value) { nmaxImageRectHeight(address(), value); return this; }
-    /** Sets the specified value to the {@link #recommendedSwapchainSampleCount} field. */
+    /** Sets the specified value to the {@code recommendedSwapchainSampleCount} field. */
     public XrViewConfigurationView recommendedSwapchainSampleCount(@NativeType("uint32_t") int value) { nrecommendedSwapchainSampleCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxSwapchainSampleCount} field. */
+    /** Sets the specified value to the {@code maxSwapchainSampleCount} field. */
     public XrViewConfigurationView maxSwapchainSampleCount(@NativeType("uint32_t") int value) { nmaxSwapchainSampleCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -388,36 +367,36 @@ public class XrViewConfigurationView extends Struct<XrViewConfigurationView> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrViewConfigurationView#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewConfigurationView.ntype(address()); }
-        /** @return the value of the {@link XrViewConfigurationView#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrViewConfigurationView.nnext(address()); }
-        /** @return the value of the {@link XrViewConfigurationView#recommendedImageRectWidth} field. */
+        /** @return the value of the {@code recommendedImageRectWidth} field. */
         @NativeType("uint32_t")
         public int recommendedImageRectWidth() { return XrViewConfigurationView.nrecommendedImageRectWidth(address()); }
-        /** @return the value of the {@link XrViewConfigurationView#maxImageRectWidth} field. */
+        /** @return the value of the {@code maxImageRectWidth} field. */
         @NativeType("uint32_t")
         public int maxImageRectWidth() { return XrViewConfigurationView.nmaxImageRectWidth(address()); }
-        /** @return the value of the {@link XrViewConfigurationView#recommendedImageRectHeight} field. */
+        /** @return the value of the {@code recommendedImageRectHeight} field. */
         @NativeType("uint32_t")
         public int recommendedImageRectHeight() { return XrViewConfigurationView.nrecommendedImageRectHeight(address()); }
-        /** @return the value of the {@link XrViewConfigurationView#maxImageRectHeight} field. */
+        /** @return the value of the {@code maxImageRectHeight} field. */
         @NativeType("uint32_t")
         public int maxImageRectHeight() { return XrViewConfigurationView.nmaxImageRectHeight(address()); }
-        /** @return the value of the {@link XrViewConfigurationView#recommendedSwapchainSampleCount} field. */
+        /** @return the value of the {@code recommendedSwapchainSampleCount} field. */
         @NativeType("uint32_t")
         public int recommendedSwapchainSampleCount() { return XrViewConfigurationView.nrecommendedSwapchainSampleCount(address()); }
-        /** @return the value of the {@link XrViewConfigurationView#maxSwapchainSampleCount} field. */
+        /** @return the value of the {@code maxSwapchainSampleCount} field. */
         @NativeType("uint32_t")
         public int maxSwapchainSampleCount() { return XrViewConfigurationView.nmaxSwapchainSampleCount(address()); }
 
-        /** Sets the specified value to the {@link XrViewConfigurationView#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrViewConfigurationView.Buffer type(@NativeType("XrStructureType") int value) { XrViewConfigurationView.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_VIEW_CONFIGURATION_VIEW TYPE_VIEW_CONFIGURATION_VIEW} value to the {@link XrViewConfigurationView#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_VIEW_CONFIGURATION_VIEW TYPE_VIEW_CONFIGURATION_VIEW} value to the {@code type} field. */
         public XrViewConfigurationView.Buffer type$Default() { return type(XR10.XR_TYPE_VIEW_CONFIGURATION_VIEW); }
-        /** Sets the specified value to the {@link XrViewConfigurationView#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrViewConfigurationView.Buffer next(@NativeType("void *") long value) { XrViewConfigurationView.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrFoveatedViewConfigurationViewVARJO} value to the {@code next} chain. */
         public XrViewConfigurationView.Buffer next(XrFoveatedViewConfigurationViewVARJO value) { return this.next(value.next(this.next()).address()); }
@@ -425,17 +404,17 @@ public class XrViewConfigurationView extends Struct<XrViewConfigurationView> imp
         public XrViewConfigurationView.Buffer next(XrViewConfigurationDepthRangeEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrViewConfigurationViewFovEPIC} value to the {@code next} chain. */
         public XrViewConfigurationView.Buffer next(XrViewConfigurationViewFovEPIC value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrViewConfigurationView#recommendedImageRectWidth} field. */
+        /** Sets the specified value to the {@code recommendedImageRectWidth} field. */
         public XrViewConfigurationView.Buffer recommendedImageRectWidth(@NativeType("uint32_t") int value) { XrViewConfigurationView.nrecommendedImageRectWidth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationView#maxImageRectWidth} field. */
+        /** Sets the specified value to the {@code maxImageRectWidth} field. */
         public XrViewConfigurationView.Buffer maxImageRectWidth(@NativeType("uint32_t") int value) { XrViewConfigurationView.nmaxImageRectWidth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationView#recommendedImageRectHeight} field. */
+        /** Sets the specified value to the {@code recommendedImageRectHeight} field. */
         public XrViewConfigurationView.Buffer recommendedImageRectHeight(@NativeType("uint32_t") int value) { XrViewConfigurationView.nrecommendedImageRectHeight(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationView#maxImageRectHeight} field. */
+        /** Sets the specified value to the {@code maxImageRectHeight} field. */
         public XrViewConfigurationView.Buffer maxImageRectHeight(@NativeType("uint32_t") int value) { XrViewConfigurationView.nmaxImageRectHeight(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationView#recommendedSwapchainSampleCount} field. */
+        /** Sets the specified value to the {@code recommendedSwapchainSampleCount} field. */
         public XrViewConfigurationView.Buffer recommendedSwapchainSampleCount(@NativeType("uint32_t") int value) { XrViewConfigurationView.nrecommendedSwapchainSampleCount(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewConfigurationView#maxSwapchainSampleCount} field. */
+        /** Sets the specified value to the {@code maxSwapchainSampleCount} field. */
         public XrViewConfigurationView.Buffer maxSwapchainSampleCount(@NativeType("uint32_t") int value) { XrViewConfigurationView.nmaxSwapchainSampleCount(address(), value); return this; }
 
     }

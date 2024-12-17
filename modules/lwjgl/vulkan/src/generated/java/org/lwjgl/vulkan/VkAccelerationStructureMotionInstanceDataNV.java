@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Union specifying an acceleration structure motion instance data for building into an acceleration structure geometry.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAccelerationStructureInstanceKHR}, {@link VkAccelerationStructureMatrixMotionInstanceNV}, {@link VkAccelerationStructureMotionInstanceNV}, {@link VkAccelerationStructureSRTMotionInstanceNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union VkAccelerationStructureMotionInstanceDataNV {
- *     {@link VkAccelerationStructureInstanceKHR VkAccelerationStructureInstanceKHR} {@link #staticInstance};
- *     {@link VkAccelerationStructureMatrixMotionInstanceNV VkAccelerationStructureMatrixMotionInstanceNV} {@link #matrixMotionInstance};
- *     {@link VkAccelerationStructureSRTMotionInstanceNV VkAccelerationStructureSRTMotionInstanceNV} {@link #srtMotionInstance};
- * }</code></pre>
+ *     {@link VkAccelerationStructureInstanceKHR VkAccelerationStructureInstanceKHR} staticInstance;
+ *     {@link VkAccelerationStructureMatrixMotionInstanceNV VkAccelerationStructureMatrixMotionInstanceNV} matrixMotionInstance;
+ *     {@link VkAccelerationStructureSRTMotionInstanceNV VkAccelerationStructureSRTMotionInstanceNV} srtMotionInstance;
+ * }}</pre>
  */
 public class VkAccelerationStructureMotionInstanceDataNV extends Struct<VkAccelerationStructureMotionInstanceDataNV> implements NativeResource {
 
@@ -82,24 +74,24 @@ public class VkAccelerationStructureMotionInstanceDataNV extends Struct<VkAccele
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@link VkAccelerationStructureInstanceKHR} structure containing data for a static instance. */
+    /** @return a {@link VkAccelerationStructureInstanceKHR} view of the {@code staticInstance} field. */
     public VkAccelerationStructureInstanceKHR staticInstance() { return nstaticInstance(address()); }
-    /** a {@link VkAccelerationStructureMatrixMotionInstanceNV} structure containing data for a matrix motion instance. */
+    /** @return a {@link VkAccelerationStructureMatrixMotionInstanceNV} view of the {@code matrixMotionInstance} field. */
     public VkAccelerationStructureMatrixMotionInstanceNV matrixMotionInstance() { return nmatrixMotionInstance(address()); }
-    /** a {@link VkAccelerationStructureSRTMotionInstanceNV} structure containing data for an SRT motion instance. */
+    /** @return a {@link VkAccelerationStructureSRTMotionInstanceNV} view of the {@code srtMotionInstance} field. */
     public VkAccelerationStructureSRTMotionInstanceNV srtMotionInstance() { return nsrtMotionInstance(address()); }
 
-    /** Copies the specified {@link VkAccelerationStructureInstanceKHR} to the {@link #staticInstance} field. */
+    /** Copies the specified {@link VkAccelerationStructureInstanceKHR} to the {@code staticInstance} field. */
     public VkAccelerationStructureMotionInstanceDataNV staticInstance(VkAccelerationStructureInstanceKHR value) { nstaticInstance(address(), value); return this; }
-    /** Passes the {@link #staticInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code staticInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureMotionInstanceDataNV staticInstance(java.util.function.Consumer<VkAccelerationStructureInstanceKHR> consumer) { consumer.accept(staticInstance()); return this; }
-    /** Copies the specified {@link VkAccelerationStructureMatrixMotionInstanceNV} to the {@link #matrixMotionInstance} field. */
+    /** Copies the specified {@link VkAccelerationStructureMatrixMotionInstanceNV} to the {@code matrixMotionInstance} field. */
     public VkAccelerationStructureMotionInstanceDataNV matrixMotionInstance(VkAccelerationStructureMatrixMotionInstanceNV value) { nmatrixMotionInstance(address(), value); return this; }
-    /** Passes the {@link #matrixMotionInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code matrixMotionInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureMotionInstanceDataNV matrixMotionInstance(java.util.function.Consumer<VkAccelerationStructureMatrixMotionInstanceNV> consumer) { consumer.accept(matrixMotionInstance()); return this; }
-    /** Copies the specified {@link VkAccelerationStructureSRTMotionInstanceNV} to the {@link #srtMotionInstance} field. */
+    /** Copies the specified {@link VkAccelerationStructureSRTMotionInstanceNV} to the {@code srtMotionInstance} field. */
     public VkAccelerationStructureMotionInstanceDataNV srtMotionInstance(VkAccelerationStructureSRTMotionInstanceNV value) { nsrtMotionInstance(address(), value); return this; }
-    /** Passes the {@link #srtMotionInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code srtMotionInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkAccelerationStructureMotionInstanceDataNV srtMotionInstance(java.util.function.Consumer<VkAccelerationStructureSRTMotionInstanceNV> consumer) { consumer.accept(srtMotionInstance()); return this; }
 
     /**
@@ -282,24 +274,24 @@ public class VkAccelerationStructureMotionInstanceDataNV extends Struct<VkAccele
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VkAccelerationStructureInstanceKHR} view of the {@link VkAccelerationStructureMotionInstanceDataNV#staticInstance} field. */
+        /** @return a {@link VkAccelerationStructureInstanceKHR} view of the {@code staticInstance} field. */
         public VkAccelerationStructureInstanceKHR staticInstance() { return VkAccelerationStructureMotionInstanceDataNV.nstaticInstance(address()); }
-        /** @return a {@link VkAccelerationStructureMatrixMotionInstanceNV} view of the {@link VkAccelerationStructureMotionInstanceDataNV#matrixMotionInstance} field. */
+        /** @return a {@link VkAccelerationStructureMatrixMotionInstanceNV} view of the {@code matrixMotionInstance} field. */
         public VkAccelerationStructureMatrixMotionInstanceNV matrixMotionInstance() { return VkAccelerationStructureMotionInstanceDataNV.nmatrixMotionInstance(address()); }
-        /** @return a {@link VkAccelerationStructureSRTMotionInstanceNV} view of the {@link VkAccelerationStructureMotionInstanceDataNV#srtMotionInstance} field. */
+        /** @return a {@link VkAccelerationStructureSRTMotionInstanceNV} view of the {@code srtMotionInstance} field. */
         public VkAccelerationStructureSRTMotionInstanceNV srtMotionInstance() { return VkAccelerationStructureMotionInstanceDataNV.nsrtMotionInstance(address()); }
 
-        /** Copies the specified {@link VkAccelerationStructureInstanceKHR} to the {@link VkAccelerationStructureMotionInstanceDataNV#staticInstance} field. */
+        /** Copies the specified {@link VkAccelerationStructureInstanceKHR} to the {@code staticInstance} field. */
         public VkAccelerationStructureMotionInstanceDataNV.Buffer staticInstance(VkAccelerationStructureInstanceKHR value) { VkAccelerationStructureMotionInstanceDataNV.nstaticInstance(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureMotionInstanceDataNV#staticInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code staticInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureMotionInstanceDataNV.Buffer staticInstance(java.util.function.Consumer<VkAccelerationStructureInstanceKHR> consumer) { consumer.accept(staticInstance()); return this; }
-        /** Copies the specified {@link VkAccelerationStructureMatrixMotionInstanceNV} to the {@link VkAccelerationStructureMotionInstanceDataNV#matrixMotionInstance} field. */
+        /** Copies the specified {@link VkAccelerationStructureMatrixMotionInstanceNV} to the {@code matrixMotionInstance} field. */
         public VkAccelerationStructureMotionInstanceDataNV.Buffer matrixMotionInstance(VkAccelerationStructureMatrixMotionInstanceNV value) { VkAccelerationStructureMotionInstanceDataNV.nmatrixMotionInstance(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureMotionInstanceDataNV#matrixMotionInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code matrixMotionInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureMotionInstanceDataNV.Buffer matrixMotionInstance(java.util.function.Consumer<VkAccelerationStructureMatrixMotionInstanceNV> consumer) { consumer.accept(matrixMotionInstance()); return this; }
-        /** Copies the specified {@link VkAccelerationStructureSRTMotionInstanceNV} to the {@link VkAccelerationStructureMotionInstanceDataNV#srtMotionInstance} field. */
+        /** Copies the specified {@link VkAccelerationStructureSRTMotionInstanceNV} to the {@code srtMotionInstance} field. */
         public VkAccelerationStructureMotionInstanceDataNV.Buffer srtMotionInstance(VkAccelerationStructureSRTMotionInstanceNV value) { VkAccelerationStructureMotionInstanceDataNV.nsrtMotionInstance(address(), value); return this; }
-        /** Passes the {@link VkAccelerationStructureMotionInstanceDataNV#srtMotionInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code srtMotionInstance} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkAccelerationStructureMotionInstanceDataNV.Buffer srtMotionInstance(java.util.function.Consumer<VkAccelerationStructureSRTMotionInstanceNV> consumer) { consumer.accept(srtMotionInstance()); return this; }
 
     }

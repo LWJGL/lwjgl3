@@ -17,16 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Argument for {@code IORING_REGISTER_PBUF_STATUS}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_buf_status {
- *     __u32 {@link #buf_group};
- *     __u32 {@link #head};
+ *     __u32 buf_group;
+ *     __u32 head;
  *     __u32 resv[8];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_buf_status")
 public class IOURingBufStatus extends Struct<IOURingBufStatus> implements NativeResource {
@@ -80,16 +76,16 @@ public class IOURingBufStatus extends Struct<IOURingBufStatus> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** input */
+    /** @return the value of the {@code buf_group} field. */
     @NativeType("__u32")
     public int buf_group() { return nbuf_group(address()); }
-    /** output */
+    /** @return the value of the {@code head} field. */
     @NativeType("__u32")
     public int head() { return nhead(address()); }
 
-    /** Sets the specified value to the {@link #buf_group} field. */
+    /** Sets the specified value to the {@code buf_group} field. */
     public IOURingBufStatus buf_group(@NativeType("__u32") int value) { nbuf_group(address(), value); return this; }
-    /** Sets the specified value to the {@link #head} field. */
+    /** Sets the specified value to the {@code head} field. */
     public IOURingBufStatus head(@NativeType("__u32") int value) { nhead(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -290,16 +286,16 @@ public class IOURingBufStatus extends Struct<IOURingBufStatus> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link IOURingBufStatus#buf_group} field. */
+        /** @return the value of the {@code buf_group} field. */
         @NativeType("__u32")
         public int buf_group() { return IOURingBufStatus.nbuf_group(address()); }
-        /** @return the value of the {@link IOURingBufStatus#head} field. */
+        /** @return the value of the {@code head} field. */
         @NativeType("__u32")
         public int head() { return IOURingBufStatus.nhead(address()); }
 
-        /** Sets the specified value to the {@link IOURingBufStatus#buf_group} field. */
+        /** Sets the specified value to the {@code buf_group} field. */
         public IOURingBufStatus.Buffer buf_group(@NativeType("__u32") int value) { IOURingBufStatus.nbuf_group(address(), value); return this; }
-        /** Sets the specified value to the {@link IOURingBufStatus#head} field. */
+        /** Sets the specified value to the {@code head} field. */
         public IOURingBufStatus.Buffer head(@NativeType("__u32") int value) { IOURingBufStatus.nhead(address(), value); return this; }
 
     }

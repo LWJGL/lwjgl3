@@ -14,25 +14,12 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_draw_buffers.txt">EXT_draw_buffers</a> extension.
- * 
- * <p>This extension increases the number of available framebuffer object color attachment points, extends OpenGL ES 2.0 to allow multiple output colors, and
- * provides a mechanism for directing those outputs to multiple color buffers.</p>
- * 
- * <p>This extension is similar to the combination of the GL_NV_draw_buffers and GL_NV_fbo_color_attachments extensions, but imposes certain restrictions
- * informed by the OpenGL ES 3.0 API.</p>
- * 
- * <p>Requires {@link GLES20 GLES 2.0}.</p>
- */
 public class EXTDrawBuffers {
 
     static { GLES.initialize(); }
 
-    /** Accepted by the {@code pname} parameter of GetIntegerv. */
     public static final int GL_MAX_COLOR_ATTACHMENTS_EXT = 0x8CDF;
 
-    /** Accepted by the {@code pname} parameters of GetIntegerv and GetFloatv. */
     public static final int
         GL_MAX_DRAW_BUFFERS_EXT = 0x8824,
         GL_DRAW_BUFFER0_EXT     = 0x8825,
@@ -52,10 +39,6 @@ public class EXTDrawBuffers {
         GL_DRAW_BUFFER14_EXT    = 0x8833,
         GL_DRAW_BUFFER15_EXT    = 0x8834;
 
-    /**
-     * Accepted by the {@code attachment} parameter of FramebufferRenderbuffer, FramebufferTexture2D and GetFramebufferAttachmentParameteriv, and by the
-     * {@code bufs} parameter of DrawBuffersEXT.
-     */
     public static final int
         GL_COLOR_ATTACHMENT0_EXT  = 0x8CE0,
         GL_COLOR_ATTACHMENT1_EXT  = 0x8CE1,
@@ -80,12 +63,15 @@ public class EXTDrawBuffers {
 
     // --- [ glDrawBuffersEXT ] ---
 
+    /** {@code void glDrawBuffersEXT(GLsizei n, GLenum const * bufs)} */
     public static native void nglDrawBuffersEXT(int n, long bufs);
 
+    /** {@code void glDrawBuffersEXT(GLsizei n, GLenum const * bufs)} */
     public static void glDrawBuffersEXT(@NativeType("GLenum const *") IntBuffer bufs) {
         nglDrawBuffersEXT(bufs.remaining(), memAddress(bufs));
     }
 
+    /** {@code void glDrawBuffersEXT(GLsizei n, GLenum const * bufs)} */
     public static void glDrawBuffersEXT(@NativeType("GLenum const *") int buf) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -96,7 +82,7 @@ public class EXTDrawBuffers {
         }
     }
 
-    /** Array version of: {@link #glDrawBuffersEXT DrawBuffersEXT} */
+    /** {@code void glDrawBuffersEXT(GLsizei n, GLenum const * bufs)} */
     public static void glDrawBuffersEXT(@NativeType("GLenum const *") int[] bufs) {
         long __functionAddress = GLES.getICD().glDrawBuffersEXT;
         if (CHECKS) {

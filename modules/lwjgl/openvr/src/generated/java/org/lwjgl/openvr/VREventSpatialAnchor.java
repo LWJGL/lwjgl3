@@ -14,12 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_SpatialAnchor_t {
  *     SpatialAnchorHandle_t unHandle;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_SpatialAnchor_t")
 public class VREventSpatialAnchor extends Struct<VREventSpatialAnchor> {

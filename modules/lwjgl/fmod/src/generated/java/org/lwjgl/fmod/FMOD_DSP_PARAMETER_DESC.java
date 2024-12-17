@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_PARAMETER_DESC {
  *     FMOD_DSP_PARAMETER_TYPE type;
  *     char name[16];
@@ -31,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link FMOD_DSP_PARAMETER_DESC_BOOL FMOD_DSP_PARAMETER_DESC_BOOL} booldesc;
  *         {@link FMOD_DSP_PARAMETER_DESC_DATA FMOD_DSP_PARAMETER_DESC_DATA} datadesc;
  *     };
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_PARAMETER_DESC extends Struct<FMOD_DSP_PARAMETER_DESC> implements NativeResource {
 

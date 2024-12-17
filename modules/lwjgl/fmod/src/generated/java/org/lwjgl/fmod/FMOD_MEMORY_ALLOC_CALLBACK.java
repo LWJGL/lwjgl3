@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     unsigned int size,
- *     FMOD_MEMORY_TYPE type,
- *     char const *sourcestr
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_MEMORY_ALLOC_CALLBACK} */
 public abstract class FMOD_MEMORY_ALLOC_CALLBACK extends Callback implements FMOD_MEMORY_ALLOC_CALLBACKI {
 
     /**

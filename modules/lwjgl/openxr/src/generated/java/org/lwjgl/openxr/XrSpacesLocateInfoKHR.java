@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrSpacesLocateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpacesLocateInfoKHR {
  *     XrStructureType type;
  *     void const * next;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     XrTime time;
  *     uint32_t spaceCount;
  *     XrSpace const * spaces;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrSpacesLocateInfoKHR extends XrSpacesLocateInfo {
 

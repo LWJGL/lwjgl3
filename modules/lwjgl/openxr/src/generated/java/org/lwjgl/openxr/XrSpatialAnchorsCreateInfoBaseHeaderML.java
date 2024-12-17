@@ -16,31 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Base structure used in the creation of spatial anchors.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is not directly used in the API, please see {@link XrSpatialAnchorsCreateInfoFromPoseML} for an example of a child structure.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchors XR_ML_spatial_anchors} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsCreateInfoBaseHeaderML}</li>
- * <li>{@code type} <b>must</b> be one of the following XrStructureType values: {@link MLSpatialAnchors#XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML}, {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLSpatialAnchors#xrCreateSpatialAnchorsAsyncML CreateSpatialAnchorsAsyncML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsCreateInfoBaseHeaderML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrSpatialAnchorsCreateInfoBaseHeaderML extends Struct<XrSpatialAnchorsCreateInfoBaseHeaderML> implements NativeResource {
 
@@ -90,16 +70,16 @@ public class XrSpatialAnchorsCreateInfoBaseHeaderML extends Struct<XrSpatialAnch
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsCreateInfoBaseHeaderML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsCreateInfoBaseHeaderML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,16 +289,16 @@ public class XrSpatialAnchorsCreateInfoBaseHeaderML extends Struct<XrSpatialAnch
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsCreateInfoBaseHeaderML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsCreateInfoBaseHeaderML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsCreateInfoBaseHeaderML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorsCreateInfoBaseHeaderML.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsCreateInfoBaseHeaderML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsCreateInfoBaseHeaderML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsCreateInfoBaseHeaderML.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsCreateInfoBaseHeaderML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsCreateInfoBaseHeaderML.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorsCreateInfoBaseHeaderML.nnext(address(), value); return this; }
 
     }

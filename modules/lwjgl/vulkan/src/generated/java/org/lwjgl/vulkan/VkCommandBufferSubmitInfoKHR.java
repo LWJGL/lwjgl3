@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkCommandBufferSubmitInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCommandBufferSubmitInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkCommandBuffer commandBuffer;
  *     uint32_t deviceMask;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkCommandBufferSubmitInfoKHR extends VkCommandBufferSubmitInfo {
 

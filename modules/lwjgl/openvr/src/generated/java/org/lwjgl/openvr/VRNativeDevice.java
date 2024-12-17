@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRNativeDevice_t {
  *     void * handle;
  *     EDeviceType eType;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VRNativeDevice_t")
 public class VRNativeDevice extends Struct<VRNativeDevice> implements NativeResource {

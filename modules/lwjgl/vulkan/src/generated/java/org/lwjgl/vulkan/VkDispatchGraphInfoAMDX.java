@@ -16,31 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying node parameters for execution graph dispatch.
- * 
- * <h5>Description</h5>
- * 
- * <p>Whether {@code payloads} is consumed as a device or host pointer is defined by the command this structure is used in.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code payloadCount} <b>must</b> be no greater than <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxExecutionGraphShaderPayloadCount">{@code maxExecutionGraphShaderPayloadCount}</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceOrHostAddressConstAMDX}, {@link VkDispatchGraphCountInfoAMDX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDispatchGraphInfoAMDX {
- *     uint32_t {@link #nodeIndex};
- *     uint32_t {@link #payloadCount};
- *     {@link VkDeviceOrHostAddressConstAMDX VkDeviceOrHostAddressConstAMDX} {@link #payloads};
- *     uint64_t {@link #payloadStride};
- * }</code></pre>
+ *     uint32_t nodeIndex;
+ *     uint32_t payloadCount;
+ *     {@link VkDeviceOrHostAddressConstAMDX VkDeviceOrHostAddressConstAMDX} payloads;
+ *     uint64_t payloadStride;
+ * }}</pre>
  */
 public class VkDispatchGraphInfoAMDX extends Struct<VkDispatchGraphInfoAMDX> implements NativeResource {
 
@@ -96,27 +78,27 @@ public class VkDispatchGraphInfoAMDX extends Struct<VkDispatchGraphInfoAMDX> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the index of a node in an execution graph to be dispatched. */
+    /** @return the value of the {@code nodeIndex} field. */
     @NativeType("uint32_t")
     public int nodeIndex() { return nnodeIndex(address()); }
-    /** the number of payloads to dispatch for the specified node. */
+    /** @return the value of the {@code payloadCount} field. */
     @NativeType("uint32_t")
     public int payloadCount() { return npayloadCount(address()); }
-    /** a device or host address pointer to a flat array of payloads with size equal to the product of {@code payloadCount} and {@code payloadStride} */
+    /** @return a {@link VkDeviceOrHostAddressConstAMDX} view of the {@code payloads} field. */
     public VkDeviceOrHostAddressConstAMDX payloads() { return npayloads(address()); }
-    /** the byte stride between successive payloads in {@code payloads} */
+    /** @return the value of the {@code payloadStride} field. */
     @NativeType("uint64_t")
     public long payloadStride() { return npayloadStride(address()); }
 
-    /** Sets the specified value to the {@link #nodeIndex} field. */
+    /** Sets the specified value to the {@code nodeIndex} field. */
     public VkDispatchGraphInfoAMDX nodeIndex(@NativeType("uint32_t") int value) { nnodeIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #payloadCount} field. */
+    /** Sets the specified value to the {@code payloadCount} field. */
     public VkDispatchGraphInfoAMDX payloadCount(@NativeType("uint32_t") int value) { npayloadCount(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstAMDX} to the {@link #payloads} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstAMDX} to the {@code payloads} field. */
     public VkDispatchGraphInfoAMDX payloads(VkDeviceOrHostAddressConstAMDX value) { npayloads(address(), value); return this; }
-    /** Passes the {@link #payloads} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code payloads} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkDispatchGraphInfoAMDX payloads(java.util.function.Consumer<VkDeviceOrHostAddressConstAMDX> consumer) { consumer.accept(payloads()); return this; }
-    /** Sets the specified value to the {@link #payloadStride} field. */
+    /** Sets the specified value to the {@code payloadStride} field. */
     public VkDispatchGraphInfoAMDX payloadStride(@NativeType("uint64_t") long value) { npayloadStride(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,27 +300,27 @@ public class VkDispatchGraphInfoAMDX extends Struct<VkDispatchGraphInfoAMDX> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDispatchGraphInfoAMDX#nodeIndex} field. */
+        /** @return the value of the {@code nodeIndex} field. */
         @NativeType("uint32_t")
         public int nodeIndex() { return VkDispatchGraphInfoAMDX.nnodeIndex(address()); }
-        /** @return the value of the {@link VkDispatchGraphInfoAMDX#payloadCount} field. */
+        /** @return the value of the {@code payloadCount} field. */
         @NativeType("uint32_t")
         public int payloadCount() { return VkDispatchGraphInfoAMDX.npayloadCount(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstAMDX} view of the {@link VkDispatchGraphInfoAMDX#payloads} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstAMDX} view of the {@code payloads} field. */
         public VkDeviceOrHostAddressConstAMDX payloads() { return VkDispatchGraphInfoAMDX.npayloads(address()); }
-        /** @return the value of the {@link VkDispatchGraphInfoAMDX#payloadStride} field. */
+        /** @return the value of the {@code payloadStride} field. */
         @NativeType("uint64_t")
         public long payloadStride() { return VkDispatchGraphInfoAMDX.npayloadStride(address()); }
 
-        /** Sets the specified value to the {@link VkDispatchGraphInfoAMDX#nodeIndex} field. */
+        /** Sets the specified value to the {@code nodeIndex} field. */
         public VkDispatchGraphInfoAMDX.Buffer nodeIndex(@NativeType("uint32_t") int value) { VkDispatchGraphInfoAMDX.nnodeIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDispatchGraphInfoAMDX#payloadCount} field. */
+        /** Sets the specified value to the {@code payloadCount} field. */
         public VkDispatchGraphInfoAMDX.Buffer payloadCount(@NativeType("uint32_t") int value) { VkDispatchGraphInfoAMDX.npayloadCount(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstAMDX} to the {@link VkDispatchGraphInfoAMDX#payloads} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstAMDX} to the {@code payloads} field. */
         public VkDispatchGraphInfoAMDX.Buffer payloads(VkDeviceOrHostAddressConstAMDX value) { VkDispatchGraphInfoAMDX.npayloads(address(), value); return this; }
-        /** Passes the {@link VkDispatchGraphInfoAMDX#payloads} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code payloads} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkDispatchGraphInfoAMDX.Buffer payloads(java.util.function.Consumer<VkDeviceOrHostAddressConstAMDX> consumer) { consumer.accept(payloads()); return this; }
-        /** Sets the specified value to the {@link VkDispatchGraphInfoAMDX#payloadStride} field. */
+        /** Sets the specified value to the {@code payloadStride} field. */
         public VkDispatchGraphInfoAMDX.Buffer payloadStride(@NativeType("uint64_t") long value) { VkDispatchGraphInfoAMDX.npayloadStride(address(), value); return this; }
 
     }

@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@code abortQuery} field of the {@link IndexerCallbacks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     CXClientData client_data,
- *     void *reserved
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("int (*) (CXClientData, void *)")
 public interface IndexerAbortQueryI extends CallbackI {
@@ -45,7 +35,7 @@ public interface IndexerAbortQueryI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** The {@code IndexerCallbacks.abortQuery} callback. */
+    /** {@code int (*) (CXClientData client_data, void * reserved)} */
     int invoke(@NativeType("CXClientData") long client_data, @NativeType("void *") long reserved);
 
 }

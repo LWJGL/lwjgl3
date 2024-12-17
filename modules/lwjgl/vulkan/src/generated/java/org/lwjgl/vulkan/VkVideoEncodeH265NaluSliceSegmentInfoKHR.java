@@ -19,46 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifies H.265 encode slice segment NALU parameters.
- * 
- * <h5>Description</h5>
- * 
- * <dl>
- * <dt>Std Slice Segment Header Parameters</dt>
- * <dd><ul>
- * <li>{@code flags.reserved} and {@code reserved1} are used only for padding purposes and are otherwise ignored;</li>
- * <li>if {@code pWeightTable} is not {@code NULL}, then it is a pointer to a {@code StdVideoEncodeH265WeightTable} that is interpreted as follows:
- * 
- * <ul>
- * <li>{@code flags.luma_weight_l0_flag}, {@code flags.chroma_weight_l0_flag}, {@code flags.luma_weight_l1_flag}, and {@code flags.chroma_weight_l1_flag} are bitmasks where bit index <code>i</code> corresponds to {@code luma_weight_l0_flag[i]}, {@code chroma_weight_l0_flag[i]}, {@code luma_weight_l1_flag[i]}, and {@code chroma_weight_l1_flag[i]}, respectively, as defined in section 7.4.7.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>;</li>
- * <li>all other members of {@code StdVideoEncodeH265WeightTable} are interpreted as defined in section 7.4.7.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>;</li>
- * </ul>
- * </li>
- * <li>all other members are interpreted as defined in section 7.4.7.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>.</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pStdSliceSegmentHeader} <b>must</b> be a valid pointer to a valid {@code StdVideoEncodeH265SliceSegmentHeader} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeH265PictureInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH265NaluSliceSegmentInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     int32_t {@link #constantQp};
- *     {@link StdVideoEncodeH265SliceSegmentHeader StdVideoEncodeH265SliceSegmentHeader} const * {@link #pStdSliceSegmentHeader};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     int32_t constantQp;
+ *     {@link StdVideoEncodeH265SliceSegmentHeader StdVideoEncodeH265SliceSegmentHeader} const * pStdSliceSegmentHeader;
+ * }}</pre>
  */
 public class VkVideoEncodeH265NaluSliceSegmentInfoKHR extends Struct<VkVideoEncodeH265NaluSliceSegmentInfoKHR> implements NativeResource {
 
@@ -114,28 +81,28 @@ public class VkVideoEncodeH265NaluSliceSegmentInfoKHR extends Struct<VkVideoEnco
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the QP to use for the slice segment if the current <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control mode</a> configured for the video session is {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
+    /** @return the value of the {@code constantQp} field. */
     @NativeType("int32_t")
     public int constantQp() { return nconstantQp(address()); }
-    /** a pointer to a {@code StdVideoEncodeH265SliceSegmentHeader} structure specifying <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-slice-segment-header-params">H.265 slice segment header parameters</a> for the slice segment. */
+    /** @return a {@link StdVideoEncodeH265SliceSegmentHeader} view of the struct pointed to by the {@code pStdSliceSegmentHeader} field. */
     @NativeType("StdVideoEncodeH265SliceSegmentHeader const *")
     public StdVideoEncodeH265SliceSegmentHeader pStdSliceSegmentHeader() { return npStdSliceSegmentHeader(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH265NaluSliceSegmentInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH265NaluSliceSegmentInfoKHR sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH265NaluSliceSegmentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #constantQp} field. */
+    /** Sets the specified value to the {@code constantQp} field. */
     public VkVideoEncodeH265NaluSliceSegmentInfoKHR constantQp(@NativeType("int32_t") int value) { nconstantQp(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoEncodeH265SliceSegmentHeader} to the {@link #pStdSliceSegmentHeader} field. */
+    /** Sets the address of the specified {@link StdVideoEncodeH265SliceSegmentHeader} to the {@code pStdSliceSegmentHeader} field. */
     public VkVideoEncodeH265NaluSliceSegmentInfoKHR pStdSliceSegmentHeader(@NativeType("StdVideoEncodeH265SliceSegmentHeader const *") StdVideoEncodeH265SliceSegmentHeader value) { npStdSliceSegmentHeader(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -348,28 +315,28 @@ public class VkVideoEncodeH265NaluSliceSegmentInfoKHR extends Struct<VkVideoEnco
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH265NaluSliceSegmentInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265NaluSliceSegmentInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#constantQp} field. */
+        /** @return the value of the {@code constantQp} field. */
         @NativeType("int32_t")
         public int constantQp() { return VkVideoEncodeH265NaluSliceSegmentInfoKHR.nconstantQp(address()); }
-        /** @return a {@link StdVideoEncodeH265SliceSegmentHeader} view of the struct pointed to by the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#pStdSliceSegmentHeader} field. */
+        /** @return a {@link StdVideoEncodeH265SliceSegmentHeader} view of the struct pointed to by the {@code pStdSliceSegmentHeader} field. */
         @NativeType("StdVideoEncodeH265SliceSegmentHeader const *")
         public StdVideoEncodeH265SliceSegmentHeader pStdSliceSegmentHeader() { return VkVideoEncodeH265NaluSliceSegmentInfoKHR.npStdSliceSegmentHeader(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH265NaluSliceSegmentInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265NaluSliceSegmentInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR} value to the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH265NaluSliceSegmentInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH265NaluSliceSegmentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265NaluSliceSegmentInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#constantQp} field. */
+        /** Sets the specified value to the {@code constantQp} field. */
         public VkVideoEncodeH265NaluSliceSegmentInfoKHR.Buffer constantQp(@NativeType("int32_t") int value) { VkVideoEncodeH265NaluSliceSegmentInfoKHR.nconstantQp(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoEncodeH265SliceSegmentHeader} to the {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR#pStdSliceSegmentHeader} field. */
+        /** Sets the address of the specified {@link StdVideoEncodeH265SliceSegmentHeader} to the {@code pStdSliceSegmentHeader} field. */
         public VkVideoEncodeH265NaluSliceSegmentInfoKHR.Buffer pStdSliceSegmentHeader(@NativeType("StdVideoEncodeH265SliceSegmentHeader const *") StdVideoEncodeH265SliceSegmentHeader value) { VkVideoEncodeH265NaluSliceSegmentInfoKHR.npStdSliceSegmentHeader(address(), value); return this; }
 
     }

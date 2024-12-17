@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetWindowCloseCallback SetWindowCloseCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window
- * )</code></pre>
- *
- * @since version 2.5
- */
+/** Callback function: {@link #invoke GLFWwindowclosefun} */
 @FunctionalInterface
 @NativeType("GLFWwindowclosefun")
 public interface GLFWWindowCloseCallbackI extends CallbackI {
@@ -44,11 +33,7 @@ public interface GLFWWindowCloseCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when the user attempts to close the specified window, for example by clicking the close widget in the title bar.
-     *
-     * @param window the window that the user attempted to close
-     */
+    /** {@code void (* GLFWwindowclosefun) (GLFWwindow * window)} */
     void invoke(@NativeType("GLFWwindow *") long window);
 
 }

@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The maximum profile ({@code maxp}) table contains many max values, which can be used to pre-allocate arrays for speeding up glyph loading and hinting.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TT_MaxProfile {
  *     FT_Fixed version;
  *     FT_UShort numGlyphs;
@@ -35,7 +31,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UShort maxSizeOfInstructions;
  *     FT_UShort maxComponentElements;
  *     FT_UShort maxComponentDepth;
- * }</code></pre>
+ * }}</pre>
  */
 public class TT_MaxProfile extends Struct<TT_MaxProfile> {
 

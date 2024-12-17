@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_MEM_ALLOC_NODE_PARAMS {
  *     {@link CUmemPoolProps CUmemPoolProps} poolProps;
  *     {@link CUmemAccessDesc CUmemAccessDesc} const * accessDescs;
  *     size_t accessDescCount;
  *     size_t bytesize;
  *     CUdeviceptr dptr;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_MEM_ALLOC_NODE_PARAMS extends Struct<CUDA_MEM_ALLOC_NODE_PARAMS> implements NativeResource {
 

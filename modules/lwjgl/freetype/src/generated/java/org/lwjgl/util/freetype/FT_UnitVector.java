@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A simple structure used to store a 2D vector unit vector. Uses {@code FT_F2Dot14} types.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_UnitVector {
  *     FT_F2Dot14 x;
  *     FT_F2Dot14 y;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_UnitVector extends Struct<FT_UnitVector> implements NativeResource {
 

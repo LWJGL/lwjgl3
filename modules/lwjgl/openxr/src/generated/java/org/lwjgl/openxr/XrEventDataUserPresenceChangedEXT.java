@@ -17,45 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event notifying the change of user presence.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrEventDataUserPresenceChangedEXT} event is queued for retrieval using {@link XR10#xrPollEvent PollEvent} when the user presence is changed, as well as when a session starts running.</p>
- * 
- * <p>Receiving {@link XrEventDataUserPresenceChangedEXT} with the {@code isUserPresent} is {@link XR10#XR_TRUE TRUE} indicates that the system has detected the presence of a user in the XR experience. For example, this may indicate that the user has put on the headset, or has entered the tracking area of a non-head-worn XR system.</p>
- * 
- * <p>Receiving {@link XrEventDataUserPresenceChangedEXT} with the {@code isUserPresent} is {@link XR10#XR_FALSE FALSE} indicates that the system has detected the absence of a user in the XR experience. For example, this may indicate that the user has removed the headset or has stepped away from the tracking area of a non-head-worn XR system.</p>
- * 
- * <p>The runtime <b>must</b> queue this event upon a successful call to the {@link XR10#xrBeginSession BeginSession} function, regardless of the value of {@code isUserPresent}, so that the application can be in sync on the state when a session begins running.</p>
- * 
- * <p>The runtime <b>must</b> return a valid {@code XrSession} handle for <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#session-running">a running session</a>.</p>
- * 
- * <p>After the application calls {@link XR10#xrEndSession EndSession}, a <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#session-running">running session</a> is ended and the runtime <b>must</b> not enqueue any more user presence events. Therefore, the application will no longer observe any changes of the {@code isUserPresent} until another <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#session-running">running session</a>.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>This extension does not require any specific correlation between user presence state and session state except that the {@link XrEventDataUserPresenceChangedEXT} event can not be observed without a running session. A runtime may choose to correlate the two states or keep them independent.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTUserPresence XR_EXT_user_presence} extension <b>must</b> be enabled prior to using {@link XrEventDataUserPresenceChangedEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTUserPresence#XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code session} <b>must</b> be a valid {@code XrSession} handle</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataUserPresenceChangedEXT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSession {@link #session};
- *     XrBool32 {@link #isUserPresent};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSession session;
+ *     XrBool32 isUserPresent;
+ * }}</pre>
  */
 public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPresenceChangedEXT> implements NativeResource {
 
@@ -111,28 +79,28 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSession} that is receiving the notification. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
-    /** an {@code XrBool32} value for new state of user presence after the change. */
+    /** @return the value of the {@code isUserPresent} field. */
     @NativeType("XrBool32")
     public boolean isUserPresent() { return nisUserPresent(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataUserPresenceChangedEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTUserPresence#XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTUserPresence#XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT} value to the {@code type} field. */
     public XrEventDataUserPresenceChangedEXT type$Default() { return type(EXTUserPresence.XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataUserPresenceChangedEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #session} field. */
+    /** Sets the specified value to the {@code session} field. */
     public XrEventDataUserPresenceChangedEXT session(XrSession value) { nsession(address(), value); return this; }
-    /** Sets the specified value to the {@link #isUserPresent} field. */
+    /** Sets the specified value to the {@code isUserPresent} field. */
     public XrEventDataUserPresenceChangedEXT isUserPresent(@NativeType("XrBool32") boolean value) { nisUserPresent(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,28 +311,28 @@ public class XrEventDataUserPresenceChangedEXT extends Struct<XrEventDataUserPre
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataUserPresenceChangedEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataUserPresenceChangedEXT.ntype(address()); }
-        /** @return the value of the {@link XrEventDataUserPresenceChangedEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataUserPresenceChangedEXT.nnext(address()); }
-        /** @return the value of the {@link XrEventDataUserPresenceChangedEXT#session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataUserPresenceChangedEXT.nsession(address()); }
-        /** @return the value of the {@link XrEventDataUserPresenceChangedEXT#isUserPresent} field. */
+        /** @return the value of the {@code isUserPresent} field. */
         @NativeType("XrBool32")
         public boolean isUserPresent() { return XrEventDataUserPresenceChangedEXT.nisUserPresent(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrEventDataUserPresenceChangedEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataUserPresenceChangedEXT.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataUserPresenceChangedEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTUserPresence#XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT} value to the {@link XrEventDataUserPresenceChangedEXT#type} field. */
+        /** Sets the {@link EXTUserPresence#XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT} value to the {@code type} field. */
         public XrEventDataUserPresenceChangedEXT.Buffer type$Default() { return type(EXTUserPresence.XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT); }
-        /** Sets the specified value to the {@link XrEventDataUserPresenceChangedEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataUserPresenceChangedEXT.Buffer next(@NativeType("void const *") long value) { XrEventDataUserPresenceChangedEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataUserPresenceChangedEXT#session} field. */
+        /** Sets the specified value to the {@code session} field. */
         public XrEventDataUserPresenceChangedEXT.Buffer session(XrSession value) { XrEventDataUserPresenceChangedEXT.nsession(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataUserPresenceChangedEXT#isUserPresent} field. */
+        /** Sets the specified value to the {@code isUserPresent} field. */
         public XrEventDataUserPresenceChangedEXT.Buffer isUserPresent(@NativeType("XrBool32") boolean value) { XrEventDataUserPresenceChangedEXT.nisUserPresent(address(), value ? 1 : 0); return this; }
 
     }

@@ -16,28 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters of vkSetLatencyMarkerNV.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVLowLatency2#VK_STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV}</li>
- * <li>{@code marker} <b>must</b> be a valid {@code VkLatencyMarkerNV} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVLowLatency2#vkSetLatencyMarkerNV SetLatencyMarkerNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSetLatencyMarkerInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint64_t {@link #presentID};
- *     VkLatencyMarkerNV {@link #marker};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint64_t presentID;
+ *     VkLatencyMarkerNV marker;
+ * }}</pre>
  */
 public class VkSetLatencyMarkerInfoNV extends Struct<VkSetLatencyMarkerInfoNV> implements NativeResource {
 
@@ -93,28 +78,28 @@ public class VkSetLatencyMarkerInfoNV extends Struct<VkSetLatencyMarkerInfoNV> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** an application provided value that is used to associate the timestamp with a {@code vkQueuePresentKHR} command using {@link VkPresentIdKHR}{@code ::pPresentIds} for a given present. */
+    /** @return the value of the {@code presentID} field. */
     @NativeType("uint64_t")
     public long presentID() { return npresentID(address()); }
-    /** the type of timestamp to be recorded. */
+    /** @return the value of the {@code marker} field. */
     @NativeType("VkLatencyMarkerNV")
     public int marker() { return nmarker(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSetLatencyMarkerInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV} value to the {@code sType} field. */
     public VkSetLatencyMarkerInfoNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSetLatencyMarkerInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #presentID} field. */
+    /** Sets the specified value to the {@code presentID} field. */
     public VkSetLatencyMarkerInfoNV presentID(@NativeType("uint64_t") long value) { npresentID(address(), value); return this; }
-    /** Sets the specified value to the {@link #marker} field. */
+    /** Sets the specified value to the {@code marker} field. */
     public VkSetLatencyMarkerInfoNV marker(@NativeType("VkLatencyMarkerNV") int value) { nmarker(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,28 +301,28 @@ public class VkSetLatencyMarkerInfoNV extends Struct<VkSetLatencyMarkerInfoNV> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSetLatencyMarkerInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSetLatencyMarkerInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkSetLatencyMarkerInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSetLatencyMarkerInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkSetLatencyMarkerInfoNV#presentID} field. */
+        /** @return the value of the {@code presentID} field. */
         @NativeType("uint64_t")
         public long presentID() { return VkSetLatencyMarkerInfoNV.npresentID(address()); }
-        /** @return the value of the {@link VkSetLatencyMarkerInfoNV#marker} field. */
+        /** @return the value of the {@code marker} field. */
         @NativeType("VkLatencyMarkerNV")
         public int marker() { return VkSetLatencyMarkerInfoNV.nmarker(address()); }
 
-        /** Sets the specified value to the {@link VkSetLatencyMarkerInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSetLatencyMarkerInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkSetLatencyMarkerInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV} value to the {@link VkSetLatencyMarkerInfoNV#sType} field. */
+        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV} value to the {@code sType} field. */
         public VkSetLatencyMarkerInfoNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV); }
-        /** Sets the specified value to the {@link VkSetLatencyMarkerInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSetLatencyMarkerInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkSetLatencyMarkerInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSetLatencyMarkerInfoNV#presentID} field. */
+        /** Sets the specified value to the {@code presentID} field. */
         public VkSetLatencyMarkerInfoNV.Buffer presentID(@NativeType("uint64_t") long value) { VkSetLatencyMarkerInfoNV.npresentID(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSetLatencyMarkerInfoNV#marker} field. */
+        /** Sets the specified value to the {@code marker} field. */
         public VkSetLatencyMarkerInfoNV.Buffer marker(@NativeType("VkLatencyMarkerNV") int value) { VkSetLatencyMarkerInfoNV.nmarker(address(), value); return this; }
 
     }

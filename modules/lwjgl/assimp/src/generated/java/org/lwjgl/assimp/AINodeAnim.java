@@ -17,32 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the animation of a single node. The name specifies the bone/node which is affected by this animation channel. The keyframes are given in
- * three separate series of values, one each for position, rotation and scaling. The transformation matrix computed from these values replaces the node's
- * original transformation matrix at a specific time.
- * 
- * <p>This means all keys are absolute and not relative to the bone default pose. The order in which the transformations are applied is - as usual - scaling,
- * rotation, translation.</p>
- * 
- * <h5>Note:</h5>
- * 
- * <p>All keys are returned in their correct, chronological order. Duplicate keys don't pass the validation step. Most likely there will be no negative time
- * values, but they are not forbidden also ( so implementations need to cope with them! )</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiNodeAnim {
- *     {@link AIString struct aiString} {@link #mNodeName};
- *     unsigned int {@link #mNumPositionKeys};
- *     {@link AIVectorKey struct aiVectorKey} * {@link #mPositionKeys};
- *     unsigned int {@link #mNumRotationKeys};
- *     {@link AIQuatKey struct aiQuatKey} * {@link #mRotationKeys};
- *     unsigned int {@link #mNumScalingKeys};
- *     {@link AIVectorKey struct aiVectorKey} * {@link #mScalingKeys};
- *     aiAnimBehaviour {@link #mPreState};
- *     aiAnimBehaviour {@link #mPostState};
- * }</code></pre>
+ *     {@link AIString struct aiString} mNodeName;
+ *     unsigned int mNumPositionKeys;
+ *     {@link AIVectorKey struct aiVectorKey} * mPositionKeys;
+ *     unsigned int mNumRotationKeys;
+ *     {@link AIQuatKey struct aiQuatKey} * mRotationKeys;
+ *     unsigned int mNumScalingKeys;
+ *     {@link AIVectorKey struct aiVectorKey} * mScalingKeys;
+ *     aiAnimBehaviour mPreState;
+ *     aiAnimBehaviour mPostState;
+ * }}</pre>
  */
 @NativeType("struct aiNodeAnim")
 public class AINodeAnim extends Struct<AINodeAnim> implements NativeResource {
@@ -114,62 +100,47 @@ public class AINodeAnim extends Struct<AINodeAnim> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** The name of the node affected by this animation. The node must exist and it must be unique. */
+    /** @return a {@link AIString} view of the {@code mNodeName} field. */
     @NativeType("struct aiString")
     public AIString mNodeName() { return nmNodeName(address()); }
-    /** The number of position keys */
+    /** @return the value of the {@code mNumPositionKeys} field. */
     @NativeType("unsigned int")
     public int mNumPositionKeys() { return nmNumPositionKeys(address()); }
-    /**
-     * The position keys of this animation channel. Positions are specified as 3D vector. The array is {@code mNumPositionKeys} in size. If there are position
-     * keys, there will also be at least one scaling and one rotation key.
-     */
+    /** @return a {@link AIVectorKey.Buffer} view of the struct array pointed to by the {@code mPositionKeys} field. */
     @NativeType("struct aiVectorKey *")
     public AIVectorKey.@Nullable Buffer mPositionKeys() { return nmPositionKeys(address()); }
-    /** The number of rotation keys */
+    /** @return the value of the {@code mNumRotationKeys} field. */
     @NativeType("unsigned int")
     public int mNumRotationKeys() { return nmNumRotationKeys(address()); }
-    /**
-     * The rotation keys of this animation channel. Rotations are given as quaternions,  which are 4D vectors. The array is {@code mNumRotationKeys} in size.
-     * If there are rotation keys, there will also be at least one scaling and one position key.
-     */
+    /** @return a {@link AIQuatKey.Buffer} view of the struct array pointed to by the {@code mRotationKeys} field. */
     @NativeType("struct aiQuatKey *")
     public AIQuatKey.@Nullable Buffer mRotationKeys() { return nmRotationKeys(address()); }
-    /** The number of scaling keys */
+    /** @return the value of the {@code mNumScalingKeys} field. */
     @NativeType("unsigned int")
     public int mNumScalingKeys() { return nmNumScalingKeys(address()); }
-    /**
-     * The scaling keys of this animation channel. Scalings are specified as 3D vector. The array is {@code mNumScalingKeys} in size. If there are scaling
-     * keys, there will also be at least one position and one rotation key.
-     */
+    /** @return a {@link AIVectorKey.Buffer} view of the struct array pointed to by the {@code mScalingKeys} field. */
     @NativeType("struct aiVectorKey *")
     public AIVectorKey.@Nullable Buffer mScalingKeys() { return nmScalingKeys(address()); }
-    /**
-     * Defines how the animation behaves before the first key is encountered. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix
-     * of the affected node is used). One of:<br><table><tr><td>{@link Assimp#aiAnimBehaviour_DEFAULT AnimBehaviour_DEFAULT}</td><td>{@link Assimp#aiAnimBehaviour_CONSTANT AnimBehaviour_CONSTANT}</td><td>{@link Assimp#aiAnimBehaviour_LINEAR AnimBehaviour_LINEAR}</td></tr><tr><td>{@link Assimp#aiAnimBehaviour_REPEAT AnimBehaviour_REPEAT}</td></tr></table>
-     */
+    /** @return the value of the {@code mPreState} field. */
     @NativeType("aiAnimBehaviour")
     public int mPreState() { return nmPreState(address()); }
-    /**
-     * Defines how the animation behaves after the last key was processed. The default value is aiAnimBehaviour_DEFAULT (the original transformation matrix of
-     * the affected node is taken). One of:<br><table><tr><td>{@link Assimp#aiAnimBehaviour_DEFAULT AnimBehaviour_DEFAULT}</td><td>{@link Assimp#aiAnimBehaviour_CONSTANT AnimBehaviour_CONSTANT}</td><td>{@link Assimp#aiAnimBehaviour_LINEAR AnimBehaviour_LINEAR}</td></tr><tr><td>{@link Assimp#aiAnimBehaviour_REPEAT AnimBehaviour_REPEAT}</td></tr></table>
-     */
+    /** @return the value of the {@code mPostState} field. */
     @NativeType("aiAnimBehaviour")
     public int mPostState() { return nmPostState(address()); }
 
-    /** Copies the specified {@link AIString} to the {@link #mNodeName} field. */
+    /** Copies the specified {@link AIString} to the {@code mNodeName} field. */
     public AINodeAnim mNodeName(@NativeType("struct aiString") AIString value) { nmNodeName(address(), value); return this; }
-    /** Passes the {@link #mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AINodeAnim mNodeName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mNodeName()); return this; }
-    /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@link #mPositionKeys} field. */
+    /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@code mPositionKeys} field. */
     public AINodeAnim mPositionKeys(@NativeType("struct aiVectorKey *") AIVectorKey.@Nullable Buffer value) { nmPositionKeys(address(), value); return this; }
-    /** Sets the address of the specified {@link AIQuatKey.Buffer} to the {@link #mRotationKeys} field. */
+    /** Sets the address of the specified {@link AIQuatKey.Buffer} to the {@code mRotationKeys} field. */
     public AINodeAnim mRotationKeys(@NativeType("struct aiQuatKey *") AIQuatKey.@Nullable Buffer value) { nmRotationKeys(address(), value); return this; }
-    /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@link #mScalingKeys} field. */
+    /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@code mScalingKeys} field. */
     public AINodeAnim mScalingKeys(@NativeType("struct aiVectorKey *") AIVectorKey.@Nullable Buffer value) { nmScalingKeys(address(), value); return this; }
-    /** Sets the specified value to the {@link #mPreState} field. */
+    /** Sets the specified value to the {@code mPreState} field. */
     public AINodeAnim mPreState(@NativeType("aiAnimBehaviour") int value) { nmPreState(address(), value); return this; }
-    /** Sets the specified value to the {@link #mPostState} field. */
+    /** Sets the specified value to the {@code mPostState} field. */
     public AINodeAnim mPostState(@NativeType("aiAnimBehaviour") int value) { nmPostState(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -431,47 +402,47 @@ public class AINodeAnim extends Struct<AINodeAnim> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link AIString} view of the {@link AINodeAnim#mNodeName} field. */
+        /** @return a {@link AIString} view of the {@code mNodeName} field. */
         @NativeType("struct aiString")
         public AIString mNodeName() { return AINodeAnim.nmNodeName(address()); }
-        /** @return the value of the {@link AINodeAnim#mNumPositionKeys} field. */
+        /** @return the value of the {@code mNumPositionKeys} field. */
         @NativeType("unsigned int")
         public int mNumPositionKeys() { return AINodeAnim.nmNumPositionKeys(address()); }
-        /** @return a {@link AIVectorKey.Buffer} view of the struct array pointed to by the {@link AINodeAnim#mPositionKeys} field. */
+        /** @return a {@link AIVectorKey.Buffer} view of the struct array pointed to by the {@code mPositionKeys} field. */
         @NativeType("struct aiVectorKey *")
         public AIVectorKey.@Nullable Buffer mPositionKeys() { return AINodeAnim.nmPositionKeys(address()); }
-        /** @return the value of the {@link AINodeAnim#mNumRotationKeys} field. */
+        /** @return the value of the {@code mNumRotationKeys} field. */
         @NativeType("unsigned int")
         public int mNumRotationKeys() { return AINodeAnim.nmNumRotationKeys(address()); }
-        /** @return a {@link AIQuatKey.Buffer} view of the struct array pointed to by the {@link AINodeAnim#mRotationKeys} field. */
+        /** @return a {@link AIQuatKey.Buffer} view of the struct array pointed to by the {@code mRotationKeys} field. */
         @NativeType("struct aiQuatKey *")
         public AIQuatKey.@Nullable Buffer mRotationKeys() { return AINodeAnim.nmRotationKeys(address()); }
-        /** @return the value of the {@link AINodeAnim#mNumScalingKeys} field. */
+        /** @return the value of the {@code mNumScalingKeys} field. */
         @NativeType("unsigned int")
         public int mNumScalingKeys() { return AINodeAnim.nmNumScalingKeys(address()); }
-        /** @return a {@link AIVectorKey.Buffer} view of the struct array pointed to by the {@link AINodeAnim#mScalingKeys} field. */
+        /** @return a {@link AIVectorKey.Buffer} view of the struct array pointed to by the {@code mScalingKeys} field. */
         @NativeType("struct aiVectorKey *")
         public AIVectorKey.@Nullable Buffer mScalingKeys() { return AINodeAnim.nmScalingKeys(address()); }
-        /** @return the value of the {@link AINodeAnim#mPreState} field. */
+        /** @return the value of the {@code mPreState} field. */
         @NativeType("aiAnimBehaviour")
         public int mPreState() { return AINodeAnim.nmPreState(address()); }
-        /** @return the value of the {@link AINodeAnim#mPostState} field. */
+        /** @return the value of the {@code mPostState} field. */
         @NativeType("aiAnimBehaviour")
         public int mPostState() { return AINodeAnim.nmPostState(address()); }
 
-        /** Copies the specified {@link AIString} to the {@link AINodeAnim#mNodeName} field. */
+        /** Copies the specified {@link AIString} to the {@code mNodeName} field. */
         public AINodeAnim.Buffer mNodeName(@NativeType("struct aiString") AIString value) { AINodeAnim.nmNodeName(address(), value); return this; }
-        /** Passes the {@link AINodeAnim#mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mNodeName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AINodeAnim.Buffer mNodeName(java.util.function.Consumer<AIString> consumer) { consumer.accept(mNodeName()); return this; }
-        /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@link AINodeAnim#mPositionKeys} field. */
+        /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@code mPositionKeys} field. */
         public AINodeAnim.Buffer mPositionKeys(@NativeType("struct aiVectorKey *") AIVectorKey.@Nullable Buffer value) { AINodeAnim.nmPositionKeys(address(), value); return this; }
-        /** Sets the address of the specified {@link AIQuatKey.Buffer} to the {@link AINodeAnim#mRotationKeys} field. */
+        /** Sets the address of the specified {@link AIQuatKey.Buffer} to the {@code mRotationKeys} field. */
         public AINodeAnim.Buffer mRotationKeys(@NativeType("struct aiQuatKey *") AIQuatKey.@Nullable Buffer value) { AINodeAnim.nmRotationKeys(address(), value); return this; }
-        /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@link AINodeAnim#mScalingKeys} field. */
+        /** Sets the address of the specified {@link AIVectorKey.Buffer} to the {@code mScalingKeys} field. */
         public AINodeAnim.Buffer mScalingKeys(@NativeType("struct aiVectorKey *") AIVectorKey.@Nullable Buffer value) { AINodeAnim.nmScalingKeys(address(), value); return this; }
-        /** Sets the specified value to the {@link AINodeAnim#mPreState} field. */
+        /** Sets the specified value to the {@code mPreState} field. */
         public AINodeAnim.Buffer mPreState(@NativeType("aiAnimBehaviour") int value) { AINodeAnim.nmPreState(address(), value); return this; }
-        /** Sets the specified value to the {@link AINodeAnim#mPostState} field. */
+        /** Sets the specified value to the {@code mPostState} field. */
         public AINodeAnim.Buffer mPostState(@NativeType("aiAnimBehaviour") int value) { AINodeAnim.nmPostState(address(), value); return this; }
 
     }

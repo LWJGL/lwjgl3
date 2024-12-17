@@ -16,19 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Union specifying a const device or host address.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDispatchGraphCountInfoAMDX}, {@link VkDispatchGraphInfoAMDX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union VkDeviceOrHostAddressConstAMDX {
- *     VkDeviceAddress {@link #deviceAddress};
- *     void const * {@link #hostAddress};
- * }</code></pre>
+ *     VkDeviceAddress deviceAddress;
+ *     void const * hostAddress;
+ * }}</pre>
  */
 public class VkDeviceOrHostAddressConstAMDX extends Struct<VkDeviceOrHostAddressConstAMDX> implements NativeResource {
 
@@ -78,16 +70,16 @@ public class VkDeviceOrHostAddressConstAMDX extends Struct<VkDeviceOrHostAddress
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a buffer device address as returned by the {@link KHRBufferDeviceAddress#vkGetBufferDeviceAddressKHR GetBufferDeviceAddressKHR} command. */
+    /** @return the value of the {@code deviceAddress} field. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
-    /** a const host memory address. */
+    /** @return the value of the {@code hostAddress} field. */
     @NativeType("void const *")
     public long hostAddress() { return nhostAddress(address()); }
 
-    /** Sets the specified value to the {@link #deviceAddress} field. */
+    /** Sets the specified value to the {@code deviceAddress} field. */
     public VkDeviceOrHostAddressConstAMDX deviceAddress(@NativeType("VkDeviceAddress") long value) { ndeviceAddress(address(), value); return this; }
-    /** Sets the specified value to the {@link #hostAddress} field. */
+    /** Sets the specified value to the {@code hostAddress} field. */
     public VkDeviceOrHostAddressConstAMDX hostAddress(@NativeType("void const *") long value) { nhostAddress(address(), value); return this; }
 
     /**
@@ -266,16 +258,16 @@ public class VkDeviceOrHostAddressConstAMDX extends Struct<VkDeviceOrHostAddress
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceOrHostAddressConstAMDX#deviceAddress} field. */
+        /** @return the value of the {@code deviceAddress} field. */
         @NativeType("VkDeviceAddress")
         public long deviceAddress() { return VkDeviceOrHostAddressConstAMDX.ndeviceAddress(address()); }
-        /** @return the value of the {@link VkDeviceOrHostAddressConstAMDX#hostAddress} field. */
+        /** @return the value of the {@code hostAddress} field. */
         @NativeType("void const *")
         public long hostAddress() { return VkDeviceOrHostAddressConstAMDX.nhostAddress(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceOrHostAddressConstAMDX#deviceAddress} field. */
+        /** Sets the specified value to the {@code deviceAddress} field. */
         public VkDeviceOrHostAddressConstAMDX.Buffer deviceAddress(@NativeType("VkDeviceAddress") long value) { VkDeviceOrHostAddressConstAMDX.ndeviceAddress(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceOrHostAddressConstAMDX#hostAddress} field. */
+        /** Sets the specified value to the {@code hostAddress} field. */
         public VkDeviceOrHostAddressConstAMDX.Buffer hostAddress(@NativeType("void const *") long value) { VkDeviceOrHostAddressConstAMDX.nhostAddress(address(), value); return this; }
 
     }

@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     unsigned int pos
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_SETPOSITION_CALLBACK} */
 public abstract class FMOD_DSP_SETPOSITION_CALLBACK extends Callback implements FMOD_DSP_SETPOSITION_CALLBACKI {
 
     /**

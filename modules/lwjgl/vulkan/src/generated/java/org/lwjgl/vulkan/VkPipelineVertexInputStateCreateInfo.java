@@ -17,45 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created pipeline vertex input state.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code vertexBindingDescriptionCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
- * <li>{@code vertexAttributeDescriptionCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputAttributes}</li>
- * <li>For every {@code binding} specified by each element of {@code pVertexAttributeDescriptions}, a {@link VkVertexInputBindingDescription} <b>must</b> exist in {@code pVertexBindingDescriptions} with the same value of {@code binding}</li>
- * <li>All elements of {@code pVertexBindingDescriptions} <b>must</b> describe distinct binding numbers</li>
- * <li>All elements of {@code pVertexAttributeDescriptions} <b>must</b> describe distinct attribute locations</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineVertexInputDivisorStateCreateInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>If {@code vertexBindingDescriptionCount} is not 0, {@code pVertexBindingDescriptions} <b>must</b> be a valid pointer to an array of {@code vertexBindingDescriptionCount} valid {@link VkVertexInputBindingDescription} structures</li>
- * <li>If {@code vertexAttributeDescriptionCount} is not 0, {@code pVertexAttributeDescriptions} <b>must</b> be a valid pointer to an array of {@code vertexAttributeDescriptionCount} valid {@link VkVertexInputAttributeDescription} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkGraphicsPipelineCreateInfo}, {@link VkGraphicsShaderGroupCreateInfoNV}, {@link VkVertexInputAttributeDescription}, {@link VkVertexInputBindingDescription}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineVertexInputStateCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineVertexInputStateCreateFlags {@link #flags};
- *     uint32_t {@link #vertexBindingDescriptionCount};
- *     {@link VkVertexInputBindingDescription VkVertexInputBindingDescription} const * {@link #pVertexBindingDescriptions};
- *     uint32_t {@link #vertexAttributeDescriptionCount};
- *     {@link VkVertexInputAttributeDescription VkVertexInputAttributeDescription} const * {@link #pVertexAttributeDescriptions};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineVertexInputStateCreateFlags flags;
+ *     uint32_t vertexBindingDescriptionCount;
+ *     {@link VkVertexInputBindingDescription VkVertexInputBindingDescription} const * pVertexBindingDescriptions;
+ *     uint32_t vertexAttributeDescriptionCount;
+ *     {@link VkVertexInputAttributeDescription VkVertexInputAttributeDescription} const * pVertexAttributeDescriptions;
+ * }}</pre>
  */
 public class VkPipelineVertexInputStateCreateInfo extends Struct<VkPipelineVertexInputStateCreateInfo> implements NativeResource {
 
@@ -120,33 +91,33 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct<VkPipelineVerte
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkPipelineVertexInputStateCreateFlags")
     public int flags() { return nflags(address()); }
-    /** the number of vertex binding descriptions provided in {@code pVertexBindingDescriptions}. */
+    /** @return the value of the {@code vertexBindingDescriptionCount} field. */
     @NativeType("uint32_t")
     public int vertexBindingDescriptionCount() { return nvertexBindingDescriptionCount(address()); }
-    /** a pointer to an array of {@link VkVertexInputBindingDescription} structures. */
+    /** @return a {@link VkVertexInputBindingDescription.Buffer} view of the struct array pointed to by the {@code pVertexBindingDescriptions} field. */
     @NativeType("VkVertexInputBindingDescription const *")
     public VkVertexInputBindingDescription.@Nullable Buffer pVertexBindingDescriptions() { return npVertexBindingDescriptions(address()); }
-    /** the number of vertex attribute descriptions provided in {@code pVertexAttributeDescriptions}. */
+    /** @return the value of the {@code vertexAttributeDescriptionCount} field. */
     @NativeType("uint32_t")
     public int vertexAttributeDescriptionCount() { return nvertexAttributeDescriptionCount(address()); }
-    /** a pointer to an array of {@link VkVertexInputAttributeDescription} structures. */
+    /** @return a {@link VkVertexInputAttributeDescription.Buffer} view of the struct array pointed to by the {@code pVertexAttributeDescriptions} field. */
     @NativeType("VkVertexInputAttributeDescription const *")
     public VkVertexInputAttributeDescription.@Nullable Buffer pVertexAttributeDescriptions() { return npVertexAttributeDescriptions(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineVertexInputStateCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO} value to the {@code sType} field. */
     public VkPipelineVertexInputStateCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineVertexInputStateCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfo} value to the {@code pNext} chain. */
     public VkPipelineVertexInputStateCreateInfo pNext(VkPipelineVertexInputDivisorStateCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -154,11 +125,11 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct<VkPipelineVerte
     public VkPipelineVertexInputStateCreateInfo pNext(VkPipelineVertexInputDivisorStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfoKHR} value to the {@code pNext} chain. */
     public VkPipelineVertexInputStateCreateInfo pNext(VkPipelineVertexInputDivisorStateCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkPipelineVertexInputStateCreateInfo flags(@NativeType("VkPipelineVertexInputStateCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVertexInputBindingDescription.Buffer} to the {@link #pVertexBindingDescriptions} field. */
+    /** Sets the address of the specified {@link VkVertexInputBindingDescription.Buffer} to the {@code pVertexBindingDescriptions} field. */
     public VkPipelineVertexInputStateCreateInfo pVertexBindingDescriptions(@NativeType("VkVertexInputBindingDescription const *") VkVertexInputBindingDescription.@Nullable Buffer value) { npVertexBindingDescriptions(address(), value); return this; }
-    /** Sets the address of the specified {@link VkVertexInputAttributeDescription.Buffer} to the {@link #pVertexAttributeDescriptions} field. */
+    /** Sets the address of the specified {@link VkVertexInputAttributeDescription.Buffer} to the {@code pVertexAttributeDescriptions} field. */
     public VkPipelineVertexInputStateCreateInfo pVertexAttributeDescriptions(@NativeType("VkVertexInputAttributeDescription const *") VkVertexInputAttributeDescription.@Nullable Buffer value) { npVertexAttributeDescriptions(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -407,33 +378,33 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct<VkPipelineVerte
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineVertexInputStateCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineVertexInputStateCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkPipelineVertexInputStateCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineVertexInputStateCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkPipelineVertexInputStateCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkPipelineVertexInputStateCreateFlags")
         public int flags() { return VkPipelineVertexInputStateCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkPipelineVertexInputStateCreateInfo#vertexBindingDescriptionCount} field. */
+        /** @return the value of the {@code vertexBindingDescriptionCount} field. */
         @NativeType("uint32_t")
         public int vertexBindingDescriptionCount() { return VkPipelineVertexInputStateCreateInfo.nvertexBindingDescriptionCount(address()); }
-        /** @return a {@link VkVertexInputBindingDescription.Buffer} view of the struct array pointed to by the {@link VkPipelineVertexInputStateCreateInfo#pVertexBindingDescriptions} field. */
+        /** @return a {@link VkVertexInputBindingDescription.Buffer} view of the struct array pointed to by the {@code pVertexBindingDescriptions} field. */
         @NativeType("VkVertexInputBindingDescription const *")
         public VkVertexInputBindingDescription.@Nullable Buffer pVertexBindingDescriptions() { return VkPipelineVertexInputStateCreateInfo.npVertexBindingDescriptions(address()); }
-        /** @return the value of the {@link VkPipelineVertexInputStateCreateInfo#vertexAttributeDescriptionCount} field. */
+        /** @return the value of the {@code vertexAttributeDescriptionCount} field. */
         @NativeType("uint32_t")
         public int vertexAttributeDescriptionCount() { return VkPipelineVertexInputStateCreateInfo.nvertexAttributeDescriptionCount(address()); }
-        /** @return a {@link VkVertexInputAttributeDescription.Buffer} view of the struct array pointed to by the {@link VkPipelineVertexInputStateCreateInfo#pVertexAttributeDescriptions} field. */
+        /** @return a {@link VkVertexInputAttributeDescription.Buffer} view of the struct array pointed to by the {@code pVertexAttributeDescriptions} field. */
         @NativeType("VkVertexInputAttributeDescription const *")
         public VkVertexInputAttributeDescription.@Nullable Buffer pVertexAttributeDescriptions() { return VkPipelineVertexInputStateCreateInfo.npVertexAttributeDescriptions(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineVertexInputStateCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineVertexInputStateCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO} value to the {@link VkPipelineVertexInputStateCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO} value to the {@code sType} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkPipelineVertexInputStateCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineVertexInputStateCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfo} value to the {@code pNext} chain. */
         public VkPipelineVertexInputStateCreateInfo.Buffer pNext(VkPipelineVertexInputDivisorStateCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -441,11 +412,11 @@ public class VkPipelineVertexInputStateCreateInfo extends Struct<VkPipelineVerte
         public VkPipelineVertexInputStateCreateInfo.Buffer pNext(VkPipelineVertexInputDivisorStateCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineVertexInputDivisorStateCreateInfoKHR} value to the {@code pNext} chain. */
         public VkPipelineVertexInputStateCreateInfo.Buffer pNext(VkPipelineVertexInputDivisorStateCreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkPipelineVertexInputStateCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer flags(@NativeType("VkPipelineVertexInputStateCreateFlags") int value) { VkPipelineVertexInputStateCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVertexInputBindingDescription.Buffer} to the {@link VkPipelineVertexInputStateCreateInfo#pVertexBindingDescriptions} field. */
+        /** Sets the address of the specified {@link VkVertexInputBindingDescription.Buffer} to the {@code pVertexBindingDescriptions} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer pVertexBindingDescriptions(@NativeType("VkVertexInputBindingDescription const *") VkVertexInputBindingDescription.@Nullable Buffer value) { VkPipelineVertexInputStateCreateInfo.npVertexBindingDescriptions(address(), value); return this; }
-        /** Sets the address of the specified {@link VkVertexInputAttributeDescription.Buffer} to the {@link VkPipelineVertexInputStateCreateInfo#pVertexAttributeDescriptions} field. */
+        /** Sets the address of the specified {@link VkVertexInputAttributeDescription.Buffer} to the {@code pVertexAttributeDescriptions} field. */
         public VkPipelineVertexInputStateCreateInfo.Buffer pVertexAttributeDescriptions(@NativeType("VkVertexInputAttributeDescription const *") VkVertexInputAttributeDescription.@Nullable Buffer value) { VkPipelineVertexInputStateCreateInfo.npVertexAttributeDescriptions(address(), value); return this; }
 
     }

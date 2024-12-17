@@ -16,22 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether cluster culling shader support VRS.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link HUAWEIClusterCullingShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #clusterShadingRate};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 clusterShadingRate;
+ * }}</pre>
  */
 public class VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI extends Struct<VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI> implements NativeResource {
 
@@ -84,23 +74,23 @@ public class VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI extends Struc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether per-cluster shading rates is supported. */
+    /** @return the value of the {@code clusterShadingRate} field. */
     @NativeType("VkBool32")
     public boolean clusterShadingRate() { return nclusterShadingRate(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link HUAWEIClusterCullingShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI} value to the {@link #sType} field. */
+    /** Sets the {@link HUAWEIClusterCullingShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI} value to the {@code sType} field. */
     public VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI sType$Default() { return sType(HUAWEIClusterCullingShader.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #clusterShadingRate} field. */
+    /** Sets the specified value to the {@code clusterShadingRate} field. */
     public VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI clusterShadingRate(@NativeType("VkBool32") boolean value) { nclusterShadingRate(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,23 +286,23 @@ public class VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI#clusterShadingRate} field. */
+        /** @return the value of the {@code clusterShadingRate} field. */
         @NativeType("VkBool32")
         public boolean clusterShadingRate() { return VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.nclusterShadingRate(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.nsType(address(), value); return this; }
-        /** Sets the {@link HUAWEIClusterCullingShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI} value to the {@link VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI#sType} field. */
+        /** Sets the {@link HUAWEIClusterCullingShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI} value to the {@code sType} field. */
         public VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.Buffer sType$Default() { return sType(HUAWEIClusterCullingShader.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI#clusterShadingRate} field. */
+        /** Sets the specified value to the {@code clusterShadingRate} field. */
         public VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.Buffer clusterShadingRate(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI.nclusterShadingRate(address(), value ? 1 : 0); return this; }
 
     }

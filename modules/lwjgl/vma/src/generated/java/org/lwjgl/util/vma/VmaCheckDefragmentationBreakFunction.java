@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to the {@link VmaDefragmentationInfo} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * VkBool32 (*{@link #invoke}) (
- *     void *pUserData
- * )</code></pre>
- */
+/** Callback function: {@link #invoke PFN_vmaCheckDefragmentationBreakFunction} */
 public abstract class VmaCheckDefragmentationBreakFunction extends Callback implements VmaCheckDefragmentationBreakFunctionI {
 
     /**

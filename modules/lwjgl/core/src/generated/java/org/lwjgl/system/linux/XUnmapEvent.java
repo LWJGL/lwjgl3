@@ -17,18 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XUnmapEvent {
  *     int type;
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
  *     Window event;
  *     Window window;
  *     int from_configure;
- * }</code></pre>
+ * }}</pre>
  */
 public class XUnmapEvent extends Struct<XUnmapEvent> implements NativeResource {
 
@@ -95,13 +93,13 @@ public class XUnmapEvent extends Struct<XUnmapEvent> implements NativeResource {
 
     /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
     /** @return the value of the {@code event} field. */
@@ -115,11 +113,11 @@ public class XUnmapEvent extends Struct<XUnmapEvent> implements NativeResource {
 
     /** Sets the specified value to the {@code type} field. */
     public XUnmapEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XUnmapEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XUnmapEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XUnmapEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
     /** Sets the specified value to the {@code event} field. */
     public XUnmapEvent event(@NativeType("Window") long value) { nevent(address(), value); return this; }
@@ -375,13 +373,13 @@ public class XUnmapEvent extends Struct<XUnmapEvent> implements NativeResource {
 
         /** @return the value of the {@code type} field. */
         public int type() { return XUnmapEvent.ntype(address()); }
-        /** @return the value of the {@link XUnmapEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XUnmapEvent.nserial(address()); }
-        /** @return the value of the {@link XUnmapEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XUnmapEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XUnmapEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XUnmapEvent.ndisplay(address()); }
         /** @return the value of the {@code event} field. */
@@ -395,11 +393,11 @@ public class XUnmapEvent extends Struct<XUnmapEvent> implements NativeResource {
 
         /** Sets the specified value to the {@code type} field. */
         public XUnmapEvent.Buffer type(int value) { XUnmapEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XUnmapEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XUnmapEvent.Buffer serial(@NativeType("unsigned long") long value) { XUnmapEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XUnmapEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XUnmapEvent.Buffer send_event(@NativeType("Bool") boolean value) { XUnmapEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XUnmapEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XUnmapEvent.Buffer display(@NativeType("Display *") long value) { XUnmapEvent.ndisplay(address(), value); return this; }
         /** Sets the specified value to the {@code event} field. */
         public XUnmapEvent.Buffer event(@NativeType("Window") long value) { XUnmapEvent.nevent(address(), value); return this; }

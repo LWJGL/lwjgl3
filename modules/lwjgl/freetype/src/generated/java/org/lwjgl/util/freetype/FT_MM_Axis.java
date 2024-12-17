@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a given axis in design space for Multiple Masters fonts.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_MM_Axis {
  *     FT_String * name;
  *     FT_Long minimum;
  *     FT_Long maximum;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_MM_Axis extends Struct<FT_MM_Axis> {
 

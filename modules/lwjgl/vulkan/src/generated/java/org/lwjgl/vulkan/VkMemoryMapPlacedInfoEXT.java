@@ -16,30 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing memory map placement parameters.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@link VkMemoryMapInfo}{@code ::flags} contains {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT}, {@code pPlacedAddress} <b>must</b> not be {@code NULL}</li>
- * <li>{@code pPlacedAddress} <b>must</b> be aligned to an integer multiple of {@link VkPhysicalDeviceMapMemoryPlacedPropertiesEXT}{@code ::minPlacedMemoryMapAlignment}</li>
- * <li>The address range specified by {@code pPlacedAddress} and {@link VkMemoryMapInfo}{@code ::size} <b>must</b> not overlap any existing Vulkan memory object mapping</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMapMemoryPlaced#VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryMapPlacedInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     void * {@link #pPlacedAddress};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     void * pPlacedAddress;
+ * }}</pre>
  */
 public class VkMemoryMapPlacedInfoEXT extends Struct<VkMemoryMapPlacedInfoEXT> implements NativeResource {
 
@@ -92,23 +74,23 @@ public class VkMemoryMapPlacedInfoEXT extends Struct<VkMemoryMapPlacedInfoEXT> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the virtual address at which to place the address. If {@link VkMemoryMapInfo}{@code ::flags} does not contain {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT}, this value is ignored. */
+    /** @return the value of the {@code pPlacedAddress} field. */
     @NativeType("void *")
     public long pPlacedAddress() { return npPlacedAddress(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryMapPlacedInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMapMemoryPlaced#VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMapMemoryPlaced#VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT} value to the {@code sType} field. */
     public VkMemoryMapPlacedInfoEXT sType$Default() { return sType(EXTMapMemoryPlaced.VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryMapPlacedInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pPlacedAddress} field. */
+    /** Sets the specified value to the {@code pPlacedAddress} field. */
     public VkMemoryMapPlacedInfoEXT pPlacedAddress(@NativeType("void *") long value) { npPlacedAddress(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -304,23 +286,23 @@ public class VkMemoryMapPlacedInfoEXT extends Struct<VkMemoryMapPlacedInfoEXT> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryMapPlacedInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryMapPlacedInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkMemoryMapPlacedInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryMapPlacedInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkMemoryMapPlacedInfoEXT#pPlacedAddress} field. */
+        /** @return the value of the {@code pPlacedAddress} field. */
         @NativeType("void *")
         public long pPlacedAddress() { return VkMemoryMapPlacedInfoEXT.npPlacedAddress(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryMapPlacedInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryMapPlacedInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryMapPlacedInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMapMemoryPlaced#VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT} value to the {@link VkMemoryMapPlacedInfoEXT#sType} field. */
+        /** Sets the {@link EXTMapMemoryPlaced#VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT} value to the {@code sType} field. */
         public VkMemoryMapPlacedInfoEXT.Buffer sType$Default() { return sType(EXTMapMemoryPlaced.VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT); }
-        /** Sets the specified value to the {@link VkMemoryMapPlacedInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryMapPlacedInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkMemoryMapPlacedInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryMapPlacedInfoEXT#pPlacedAddress} field. */
+        /** Sets the specified value to the {@code pPlacedAddress} field. */
         public VkMemoryMapPlacedInfoEXT.Buffer pPlacedAddress(@NativeType("void *") long value) { VkMemoryMapPlacedInfoEXT.npPlacedAddress(address(), value); return this; }
 
     }

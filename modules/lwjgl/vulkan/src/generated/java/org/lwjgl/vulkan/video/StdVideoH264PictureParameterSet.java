@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH264PictureParameterSet {
  *     {@link StdVideoH264PpsFlags StdVideoH264PpsFlags} flags;
  *     uint8_t seq_parameter_set_id;
@@ -31,8 +29,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int8_t pic_init_qs_minus26;
  *     int8_t chroma_qp_index_offset;
  *     int8_t second_chroma_qp_index_offset;
- *     {@link StdVideoH264ScalingLists StdVideoH264ScalingLists} const * {@link #pScalingLists};
- * }</code></pre>
+ *     {@link StdVideoH264ScalingLists StdVideoH264ScalingLists} const * pScalingLists;
+ * }}</pre>
  */
 public class StdVideoH264PictureParameterSet extends Struct<StdVideoH264PictureParameterSet> implements NativeResource {
 
@@ -138,7 +136,7 @@ public class StdVideoH264PictureParameterSet extends Struct<StdVideoH264PictureP
     /** @return the value of the {@code second_chroma_qp_index_offset} field. */
     @NativeType("int8_t")
     public byte second_chroma_qp_index_offset() { return nsecond_chroma_qp_index_offset(address()); }
-    /** must be a valid pointer if  StdVideoH264PpsFlags::pic_scaling_matrix_present_flag is set */
+    /** @return a {@link StdVideoH264ScalingLists} view of the struct pointed to by the {@code pScalingLists} field. */
     @NativeType("StdVideoH264ScalingLists const *")
     public StdVideoH264ScalingLists pScalingLists() { return npScalingLists(address()); }
 
@@ -164,7 +162,7 @@ public class StdVideoH264PictureParameterSet extends Struct<StdVideoH264PictureP
     public StdVideoH264PictureParameterSet chroma_qp_index_offset(@NativeType("int8_t") byte value) { nchroma_qp_index_offset(address(), value); return this; }
     /** Sets the specified value to the {@code second_chroma_qp_index_offset} field. */
     public StdVideoH264PictureParameterSet second_chroma_qp_index_offset(@NativeType("int8_t") byte value) { nsecond_chroma_qp_index_offset(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@link #pScalingLists} field. */
+    /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@code pScalingLists} field. */
     public StdVideoH264PictureParameterSet pScalingLists(@NativeType("StdVideoH264ScalingLists const *") StdVideoH264ScalingLists value) { npScalingLists(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -446,7 +444,7 @@ public class StdVideoH264PictureParameterSet extends Struct<StdVideoH264PictureP
         /** @return the value of the {@code second_chroma_qp_index_offset} field. */
         @NativeType("int8_t")
         public byte second_chroma_qp_index_offset() { return StdVideoH264PictureParameterSet.nsecond_chroma_qp_index_offset(address()); }
-        /** @return a {@link StdVideoH264ScalingLists} view of the struct pointed to by the {@link StdVideoH264PictureParameterSet#pScalingLists} field. */
+        /** @return a {@link StdVideoH264ScalingLists} view of the struct pointed to by the {@code pScalingLists} field. */
         @NativeType("StdVideoH264ScalingLists const *")
         public StdVideoH264ScalingLists pScalingLists() { return StdVideoH264PictureParameterSet.npScalingLists(address()); }
 
@@ -472,7 +470,7 @@ public class StdVideoH264PictureParameterSet extends Struct<StdVideoH264PictureP
         public StdVideoH264PictureParameterSet.Buffer chroma_qp_index_offset(@NativeType("int8_t") byte value) { StdVideoH264PictureParameterSet.nchroma_qp_index_offset(address(), value); return this; }
         /** Sets the specified value to the {@code second_chroma_qp_index_offset} field. */
         public StdVideoH264PictureParameterSet.Buffer second_chroma_qp_index_offset(@NativeType("int8_t") byte value) { StdVideoH264PictureParameterSet.nsecond_chroma_qp_index_offset(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@link StdVideoH264PictureParameterSet#pScalingLists} field. */
+        /** Sets the address of the specified {@link StdVideoH264ScalingLists} to the {@code pScalingLists} field. */
         public StdVideoH264PictureParameterSet.Buffer pScalingLists(@NativeType("StdVideoH264ScalingLists const *") StdVideoH264ScalingLists value) { StdVideoH264PictureParameterSet.npScalingLists(address(), value); return this; }
 
     }

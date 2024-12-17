@@ -17,43 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Haptic Effect Description.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure describes a PCM haptic effect.</p>
- * 
- * <p>The runtime <b>may</b> resample the provided samples in the {@code buffer}, and maintain an internal buffer which <b>should</b> be of {@link FBHapticPcm#XR_MAX_HAPTIC_PCM_BUFFER_SIZE_FB MAX_HAPTIC_PCM_BUFFER_SIZE_FB} length. The resampling <b>should</b> happen based on the {@code sampleRate} and the device’s sample rate.</p>
- * 
- * <p>If {@code append} is {@link XR10#XR_TRUE TRUE} and a preceding {@link XrHapticPcmVibrationFB} haptic effect on this action has not yet completed, then the runtime <b>must</b> finish playing the preceding samples and then play the new haptic effect. If a preceding haptic event on this action has not yet completed, and either the preceding effect is not an {@link XrHapticPcmVibrationFB} haptic effect or {@code append} is {@link XR10#XR_FALSE FALSE}, the runtime <b>must</b> cancel the preceding incomplete effects on that action and start playing the new haptic effect, as usual for the core specification.</p>
- * 
- * <p>When {@code append} is true and a preceding {@link XrHapticPcmVibrationFB} haptic effect on this action has not yet completed, then the application can provide a different {@code sampleRate} in the new haptic effect.</p>
- * 
- * <p>The runtime <b>must</b> populate the {@code samplesConsumed} with the count of the samples from {@code buffer} which were consumed. The {@code samplesConsumed} is populated before the {@link XR10#xrApplyHapticFeedback ApplyHapticFeedback} returns.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBHapticPcm XR_FB_haptic_pcm} extension <b>must</b> be enabled prior to using {@link XrHapticPcmVibrationFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBHapticPcm#XR_TYPE_HAPTIC_PCM_VIBRATION_FB TYPE_HAPTIC_PCM_VIBRATION_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} {@code float} values</li>
- * <li>{@code samplesConsumed} <b>must</b> be a pointer to a {@code uint32_t} value</li>
- * <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHapticPcmVibrationFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #bufferSize};
- *     float const * {@link #buffer};
- *     float {@link #sampleRate};
- *     XrBool32 {@link #append};
- *     uint32_t * {@link #samplesConsumed};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t bufferSize;
+ *     float const * buffer;
+ *     float sampleRate;
+ *     XrBool32 append;
+ *     uint32_t * samplesConsumed;
+ * }}</pre>
  */
 public class XrHapticPcmVibrationFB extends Struct<XrHapticPcmVibrationFB> implements NativeResource {
 
@@ -118,44 +91,40 @@ public class XrHapticPcmVibrationFB extends Struct<XrHapticPcmVibrationFB> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of samples in the buffer. */
+    /** @return the value of the {@code bufferSize} field. */
     @NativeType("uint32_t")
     public int bufferSize() { return nbufferSize(address()); }
-    /** a pointer to a float array representing the PCM samples. If you consider the haptic effect as a sampled analog audio, then this buffer will contain the samples representing that effect. The values in this buffer are expected to be in the range [-1.0, 1.0]. */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("float const *")
     public FloatBuffer buffer() { return nbuffer(address()); }
-    /** the number of samples to be played per second, this is used to determine the duration of the haptic effect. */
+    /** @return the value of the {@code sampleRate} field. */
     public float sampleRate() { return nsampleRate(address()); }
-    /** if set to {@link XR10#XR_FALSE FALSE}, any existing samples will be cleared and a new haptic effect will begin, if {@link XR10#XR_TRUE TRUE}, samples will be appended to the currently playing effect */
+    /** @return the value of the {@code append} field. */
     @NativeType("XrBool32")
     public boolean append() { return nappend(address()) != 0; }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return a pointer to an unsigned integer; it is populated by runtime, to tell the application about how many samples were consumed from the input {@code buffer}
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code samplesConsumed} field. */
     @NativeType("uint32_t *")
     public IntBuffer samplesConsumed(int capacity) { return nsamplesConsumed(address(), capacity); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHapticPcmVibrationFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBHapticPcm#XR_TYPE_HAPTIC_PCM_VIBRATION_FB TYPE_HAPTIC_PCM_VIBRATION_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBHapticPcm#XR_TYPE_HAPTIC_PCM_VIBRATION_FB TYPE_HAPTIC_PCM_VIBRATION_FB} value to the {@code type} field. */
     public XrHapticPcmVibrationFB type$Default() { return type(FBHapticPcm.XR_TYPE_HAPTIC_PCM_VIBRATION_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHapticPcmVibrationFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link FloatBuffer} to the {@link #buffer} field. */
+    /** Sets the address of the specified {@link FloatBuffer} to the {@code buffer} field. */
     public XrHapticPcmVibrationFB buffer(@NativeType("float const *") FloatBuffer value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #sampleRate} field. */
+    /** Sets the specified value to the {@code sampleRate} field. */
     public XrHapticPcmVibrationFB sampleRate(float value) { nsampleRate(address(), value); return this; }
-    /** Sets the specified value to the {@link #append} field. */
+    /** Sets the specified value to the {@code append} field. */
     public XrHapticPcmVibrationFB append(@NativeType("XrBool32") boolean value) { nappend(address(), value ? 1 : 0); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #samplesConsumed} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code samplesConsumed} field. */
     public XrHapticPcmVibrationFB samplesConsumed(@NativeType("uint32_t *") IntBuffer value) { nsamplesConsumed(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -393,44 +362,40 @@ public class XrHapticPcmVibrationFB extends Struct<XrHapticPcmVibrationFB> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHapticPcmVibrationFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHapticPcmVibrationFB.ntype(address()); }
-        /** @return the value of the {@link XrHapticPcmVibrationFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHapticPcmVibrationFB.nnext(address()); }
-        /** @return the value of the {@link XrHapticPcmVibrationFB#bufferSize} field. */
+        /** @return the value of the {@code bufferSize} field. */
         @NativeType("uint32_t")
         public int bufferSize() { return XrHapticPcmVibrationFB.nbufferSize(address()); }
-        /** @return a {@link FloatBuffer} view of the data pointed to by the {@link XrHapticPcmVibrationFB#buffer} field. */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("float const *")
         public FloatBuffer buffer() { return XrHapticPcmVibrationFB.nbuffer(address()); }
-        /** @return the value of the {@link XrHapticPcmVibrationFB#sampleRate} field. */
+        /** @return the value of the {@code sampleRate} field. */
         public float sampleRate() { return XrHapticPcmVibrationFB.nsampleRate(address()); }
-        /** @return the value of the {@link XrHapticPcmVibrationFB#append} field. */
+        /** @return the value of the {@code append} field. */
         @NativeType("XrBool32")
         public boolean append() { return XrHapticPcmVibrationFB.nappend(address()) != 0; }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@link XrHapticPcmVibrationFB#samplesConsumed} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code samplesConsumed} field. */
         @NativeType("uint32_t *")
         public IntBuffer samplesConsumed(int capacity) { return XrHapticPcmVibrationFB.nsamplesConsumed(address(), capacity); }
 
-        /** Sets the specified value to the {@link XrHapticPcmVibrationFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHapticPcmVibrationFB.Buffer type(@NativeType("XrStructureType") int value) { XrHapticPcmVibrationFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBHapticPcm#XR_TYPE_HAPTIC_PCM_VIBRATION_FB TYPE_HAPTIC_PCM_VIBRATION_FB} value to the {@link XrHapticPcmVibrationFB#type} field. */
+        /** Sets the {@link FBHapticPcm#XR_TYPE_HAPTIC_PCM_VIBRATION_FB TYPE_HAPTIC_PCM_VIBRATION_FB} value to the {@code type} field. */
         public XrHapticPcmVibrationFB.Buffer type$Default() { return type(FBHapticPcm.XR_TYPE_HAPTIC_PCM_VIBRATION_FB); }
-        /** Sets the specified value to the {@link XrHapticPcmVibrationFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHapticPcmVibrationFB.Buffer next(@NativeType("void const *") long value) { XrHapticPcmVibrationFB.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link FloatBuffer} to the {@link XrHapticPcmVibrationFB#buffer} field. */
+        /** Sets the address of the specified {@link FloatBuffer} to the {@code buffer} field. */
         public XrHapticPcmVibrationFB.Buffer buffer(@NativeType("float const *") FloatBuffer value) { XrHapticPcmVibrationFB.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHapticPcmVibrationFB#sampleRate} field. */
+        /** Sets the specified value to the {@code sampleRate} field. */
         public XrHapticPcmVibrationFB.Buffer sampleRate(float value) { XrHapticPcmVibrationFB.nsampleRate(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHapticPcmVibrationFB#append} field. */
+        /** Sets the specified value to the {@code append} field. */
         public XrHapticPcmVibrationFB.Buffer append(@NativeType("XrBool32") boolean value) { XrHapticPcmVibrationFB.nappend(address(), value ? 1 : 0); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link XrHapticPcmVibrationFB#samplesConsumed} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code samplesConsumed} field. */
         public XrHapticPcmVibrationFB.Buffer samplesConsumed(@NativeType("uint32_t *") IntBuffer value) { XrHapticPcmVibrationFB.nsamplesConsumed(address(), value); return this; }
 
     }

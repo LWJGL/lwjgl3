@@ -16,30 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying input data for a single index buffer command token.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The buffer’s usage flag from which the address was acquired <b>must</b> have the {@link VK10#VK_BUFFER_USAGE_INDEX_BUFFER_BIT BUFFER_USAGE_INDEX_BUFFER_BIT} bit set</li>
- * <li>The {@code bufferAddress} <b>must</b> be aligned to the {@code indexType} used</li>
- * <li>Each element of the buffer from which the address was acquired and that is non-sparse <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code indexType} <b>must</b> be a valid {@code VkIndexType} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindIndexBufferIndirectCommandNV {
- *     VkDeviceAddress {@link #bufferAddress};
- *     uint32_t {@link #size};
- *     VkIndexType {@link #indexType};
- * }</code></pre>
+ *     VkDeviceAddress bufferAddress;
+ *     uint32_t size;
+ *     VkIndexType indexType;
+ * }}</pre>
  */
 public class VkBindIndexBufferIndirectCommandNV extends Struct<VkBindIndexBufferIndirectCommandNV> implements NativeResource {
 
@@ -92,21 +74,21 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct<VkBindIndexBuffer
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies a physical address of the {@code VkBuffer} used as index buffer. */
+    /** @return the value of the {@code bufferAddress} field. */
     @NativeType("VkDeviceAddress")
     public long bufferAddress() { return nbufferAddress(address()); }
-    /** the byte size range which is available for this operation from the provided address. */
+    /** @return the value of the {@code size} field. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
-    /** a {@code VkIndexType} value specifying how indices are treated. Instead of the Vulkan enum values, a custom {@code uint32_t} value <b>can</b> be mapped to {@code VkIndexType} by specifying the {@link VkIndirectCommandsLayoutTokenNV}{@code ::pIndexTypes} and {@link VkIndirectCommandsLayoutTokenNV}{@code ::pIndexTypeValues} arrays. */
+    /** @return the value of the {@code indexType} field. */
     @NativeType("VkIndexType")
     public int indexType() { return nindexType(address()); }
 
-    /** Sets the specified value to the {@link #bufferAddress} field. */
+    /** Sets the specified value to the {@code bufferAddress} field. */
     public VkBindIndexBufferIndirectCommandNV bufferAddress(@NativeType("VkDeviceAddress") long value) { nbufferAddress(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkBindIndexBufferIndirectCommandNV size(@NativeType("uint32_t") int value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@link #indexType} field. */
+    /** Sets the specified value to the {@code indexType} field. */
     public VkBindIndexBufferIndirectCommandNV indexType(@NativeType("VkIndexType") int value) { nindexType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,21 +284,21 @@ public class VkBindIndexBufferIndirectCommandNV extends Struct<VkBindIndexBuffer
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindIndexBufferIndirectCommandNV#bufferAddress} field. */
+        /** @return the value of the {@code bufferAddress} field. */
         @NativeType("VkDeviceAddress")
         public long bufferAddress() { return VkBindIndexBufferIndirectCommandNV.nbufferAddress(address()); }
-        /** @return the value of the {@link VkBindIndexBufferIndirectCommandNV#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("uint32_t")
         public int size() { return VkBindIndexBufferIndirectCommandNV.nsize(address()); }
-        /** @return the value of the {@link VkBindIndexBufferIndirectCommandNV#indexType} field. */
+        /** @return the value of the {@code indexType} field. */
         @NativeType("VkIndexType")
         public int indexType() { return VkBindIndexBufferIndirectCommandNV.nindexType(address()); }
 
-        /** Sets the specified value to the {@link VkBindIndexBufferIndirectCommandNV#bufferAddress} field. */
+        /** Sets the specified value to the {@code bufferAddress} field. */
         public VkBindIndexBufferIndirectCommandNV.Buffer bufferAddress(@NativeType("VkDeviceAddress") long value) { VkBindIndexBufferIndirectCommandNV.nbufferAddress(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindIndexBufferIndirectCommandNV#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkBindIndexBufferIndirectCommandNV.Buffer size(@NativeType("uint32_t") int value) { VkBindIndexBufferIndirectCommandNV.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindIndexBufferIndirectCommandNV#indexType} field. */
+        /** Sets the specified value to the {@code indexType} field. */
         public VkBindIndexBufferIndirectCommandNV.Buffer indexType(@NativeType("VkIndexType") int value) { VkBindIndexBufferIndirectCommandNV.nindexType(address(), value); return this; }
 
     }

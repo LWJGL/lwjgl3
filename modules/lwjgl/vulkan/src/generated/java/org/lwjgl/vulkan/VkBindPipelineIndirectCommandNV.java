@@ -16,23 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying input data for the compute pipeline dispatch token.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-deviceGeneratedComputePipelines">{@link VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV}{@code ::deviceGeneratedComputePipelines}</a> feature <b>must</b> be enabled</li>
- * <li>The referenced pipeline <b>must</b> have been created with {@link NVDeviceGeneratedCommands#VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV}</li>
- * <li>The referenced pipeline <b>must</b> have been updated with {@link NVDeviceGeneratedCommandsCompute#vkCmdUpdatePipelineIndirectBufferNV CmdUpdatePipelineIndirectBufferNV}</li>
- * <li>The referenced pipeline’s address <b>must</b> have been queried with {@link NVDeviceGeneratedCommandsCompute#vkGetPipelineIndirectDeviceAddressNV GetPipelineIndirectDeviceAddressNV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindPipelineIndirectCommandNV {
- *     VkDeviceAddress {@link #pipelineAddress};
- * }</code></pre>
+ *     VkDeviceAddress pipelineAddress;
+ * }}</pre>
  */
 public class VkBindPipelineIndirectCommandNV extends Struct<VkBindPipelineIndirectCommandNV> implements NativeResource {
 
@@ -79,11 +66,11 @@ public class VkBindPipelineIndirectCommandNV extends Struct<VkBindPipelineIndire
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies the pipeline address of the compute pipeline that will be used in device generated rendering. */
+    /** @return the value of the {@code pipelineAddress} field. */
     @NativeType("VkDeviceAddress")
     public long pipelineAddress() { return npipelineAddress(address()); }
 
-    /** Sets the specified value to the {@link #pipelineAddress} field. */
+    /** Sets the specified value to the {@code pipelineAddress} field. */
     public VkBindPipelineIndirectCommandNV pipelineAddress(@NativeType("VkDeviceAddress") long value) { npipelineAddress(address(), value); return this; }
 
     /**
@@ -258,11 +245,11 @@ public class VkBindPipelineIndirectCommandNV extends Struct<VkBindPipelineIndire
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindPipelineIndirectCommandNV#pipelineAddress} field. */
+        /** @return the value of the {@code pipelineAddress} field. */
         @NativeType("VkDeviceAddress")
         public long pipelineAddress() { return VkBindPipelineIndirectCommandNV.npipelineAddress(address()); }
 
-        /** Sets the specified value to the {@link VkBindPipelineIndirectCommandNV#pipelineAddress} field. */
+        /** Sets the specified value to the {@code pipelineAddress} field. */
         public VkBindPipelineIndirectCommandNV.Buffer pipelineAddress(@NativeType("VkDeviceAddress") long value) { VkBindPipelineIndirectCommandNV.npipelineAddress(address(), value); return this; }
 
     }

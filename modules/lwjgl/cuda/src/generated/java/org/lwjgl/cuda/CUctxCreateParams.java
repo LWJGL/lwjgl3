@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUctxCreateParams {
  *     {@link CUexecAffinityParam CUexecAffinityParam} * execAffinityParams;
  *     unsigned int numExecAffinityParams;
  *     {@link CUctxCigParam CUctxCigParam} * cigParams;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUctxCreateParams extends Struct<CUctxCreateParams> implements NativeResource {
 

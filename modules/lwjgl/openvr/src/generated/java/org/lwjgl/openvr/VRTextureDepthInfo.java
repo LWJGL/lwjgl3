@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRTextureDepthInfo_t {
  *     void * handle;
  *     {@link HmdMatrix44 HmdMatrix44_t} mProjection;
  *     {@link HmdVector2 HmdVector2_t} vRange;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VRTextureDepthInfo_t")
 public class VRTextureDepthInfo extends Struct<VRTextureDepthInfo> implements NativeResource {

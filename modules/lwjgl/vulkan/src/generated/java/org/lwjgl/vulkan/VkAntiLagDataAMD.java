@@ -16,34 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the parameters for vkAntiLagUpdateAMD.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure specifies anti-lag parameters.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD STRUCTURE_TYPE_ANTI_LAG_DATA_AMD}</li>
- * <li>{@code mode} <b>must</b> be a valid {@code VkAntiLagModeAMD} value</li>
- * <li>If {@code pPresentationInfo} is not {@code NULL}, {@code pPresentationInfo} <b>must</b> be a valid pointer to a valid {@link VkAntiLagPresentationInfoAMD} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAntiLagPresentationInfoAMD}, {@link AMDAntiLag#vkAntiLagUpdateAMD AntiLagUpdateAMD}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAntiLagDataAMD {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkAntiLagModeAMD {@link #mode};
- *     uint32_t {@link #maxFPS};
- *     {@link VkAntiLagPresentationInfoAMD VkAntiLagPresentationInfoAMD} const * {@link #pPresentationInfo};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkAntiLagModeAMD mode;
+ *     uint32_t maxFPS;
+ *     {@link VkAntiLagPresentationInfoAMD VkAntiLagPresentationInfoAMD} const * pPresentationInfo;
+ * }}</pre>
  */
 public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements NativeResource {
 
@@ -102,33 +82,33 @@ public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkAntiLagModeAMD} value specifying the anti-lag status. */
+    /** @return the value of the {@code mode} field. */
     @NativeType("VkAntiLagModeAMD")
     public int mode() { return nmode(address()); }
-    /** the framerate limit, in frames per second, used by the application. This limit will be imposed if anti-lag is enabled. If the application tries to render faster, the framerate will be reduced to match this limit. A value of 0 will disable the limit. */
+    /** @return the value of the {@code maxFPS} field. */
     @NativeType("uint32_t")
     public int maxFPS() { return nmaxFPS(address()); }
-    /** a pointer to a {@link VkAntiLagPresentationInfoAMD} structure containing information about the application stage. */
+    /** @return a {@link VkAntiLagPresentationInfoAMD} view of the struct pointed to by the {@code pPresentationInfo} field. */
     @NativeType("VkAntiLagPresentationInfoAMD const *")
     public @Nullable VkAntiLagPresentationInfoAMD pPresentationInfo() { return npPresentationInfo(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAntiLagDataAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD STRUCTURE_TYPE_ANTI_LAG_DATA_AMD} value to the {@link #sType} field. */
+    /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD STRUCTURE_TYPE_ANTI_LAG_DATA_AMD} value to the {@code sType} field. */
     public VkAntiLagDataAMD sType$Default() { return sType(AMDAntiLag.VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAntiLagDataAMD pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public VkAntiLagDataAMD mode(@NativeType("VkAntiLagModeAMD") int value) { nmode(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxFPS} field. */
+    /** Sets the specified value to the {@code maxFPS} field. */
     public VkAntiLagDataAMD maxFPS(@NativeType("uint32_t") int value) { nmaxFPS(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAntiLagPresentationInfoAMD} to the {@link #pPresentationInfo} field. */
+    /** Sets the address of the specified {@link VkAntiLagPresentationInfoAMD} to the {@code pPresentationInfo} field. */
     public VkAntiLagDataAMD pPresentationInfo(@Nullable @NativeType("VkAntiLagPresentationInfoAMD const *") VkAntiLagPresentationInfoAMD value) { npPresentationInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,33 +316,33 @@ public class VkAntiLagDataAMD extends Struct<VkAntiLagDataAMD> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAntiLagDataAMD#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAntiLagDataAMD.nsType(address()); }
-        /** @return the value of the {@link VkAntiLagDataAMD#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAntiLagDataAMD.npNext(address()); }
-        /** @return the value of the {@link VkAntiLagDataAMD#mode} field. */
+        /** @return the value of the {@code mode} field. */
         @NativeType("VkAntiLagModeAMD")
         public int mode() { return VkAntiLagDataAMD.nmode(address()); }
-        /** @return the value of the {@link VkAntiLagDataAMD#maxFPS} field. */
+        /** @return the value of the {@code maxFPS} field. */
         @NativeType("uint32_t")
         public int maxFPS() { return VkAntiLagDataAMD.nmaxFPS(address()); }
-        /** @return a {@link VkAntiLagPresentationInfoAMD} view of the struct pointed to by the {@link VkAntiLagDataAMD#pPresentationInfo} field. */
+        /** @return a {@link VkAntiLagPresentationInfoAMD} view of the struct pointed to by the {@code pPresentationInfo} field. */
         @NativeType("VkAntiLagPresentationInfoAMD const *")
         public @Nullable VkAntiLagPresentationInfoAMD pPresentationInfo() { return VkAntiLagDataAMD.npPresentationInfo(address()); }
 
-        /** Sets the specified value to the {@link VkAntiLagDataAMD#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAntiLagDataAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkAntiLagDataAMD.nsType(address(), value); return this; }
-        /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD STRUCTURE_TYPE_ANTI_LAG_DATA_AMD} value to the {@link VkAntiLagDataAMD#sType} field. */
+        /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD STRUCTURE_TYPE_ANTI_LAG_DATA_AMD} value to the {@code sType} field. */
         public VkAntiLagDataAMD.Buffer sType$Default() { return sType(AMDAntiLag.VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD); }
-        /** Sets the specified value to the {@link VkAntiLagDataAMD#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAntiLagDataAMD.Buffer pNext(@NativeType("void const *") long value) { VkAntiLagDataAMD.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAntiLagDataAMD#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public VkAntiLagDataAMD.Buffer mode(@NativeType("VkAntiLagModeAMD") int value) { VkAntiLagDataAMD.nmode(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAntiLagDataAMD#maxFPS} field. */
+        /** Sets the specified value to the {@code maxFPS} field. */
         public VkAntiLagDataAMD.Buffer maxFPS(@NativeType("uint32_t") int value) { VkAntiLagDataAMD.nmaxFPS(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAntiLagPresentationInfoAMD} to the {@link VkAntiLagDataAMD#pPresentationInfo} field. */
+        /** Sets the address of the specified {@link VkAntiLagPresentationInfoAMD} to the {@code pPresentationInfo} field. */
         public VkAntiLagDataAMD.Buffer pPresentationInfo(@Nullable @NativeType("VkAntiLagPresentationInfoAMD const *") VkAntiLagPresentationInfoAMD value) { VkAntiLagDataAMD.npPresentationInfo(address(), value); return this; }
 
     }

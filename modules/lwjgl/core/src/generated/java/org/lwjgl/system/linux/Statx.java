@@ -17,34 +17,32 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct statx {
- *     __u32 {@link #stx_mask};
- *     __u32 {@link #stx_blksize};
- *     __u64 {@link #stx_attributes};
- *     __u32 {@link #stx_nlink};
- *     __u32 {@link #stx_uid};
- *     __u32 {@link #stx_gid};
- *     __u16 {@link #stx_mode};
+ *     __u32 stx_mask;
+ *     __u32 stx_blksize;
+ *     __u64 stx_attributes;
+ *     __u32 stx_nlink;
+ *     __u32 stx_uid;
+ *     __u32 stx_gid;
+ *     __u16 stx_mode;
  *     __u16 __spare0[1];
- *     __u64 {@link #stx_ino};
- *     __u64 {@link #stx_size};
- *     __u64 {@link #stx_blocks};
- *     __u64 {@link #stx_attributes_mask};
- *     {@link StatxTimestamp struct statx_timestamp} {@link #stx_atime};
- *     {@link StatxTimestamp struct statx_timestamp} {@link #stx_btime};
- *     {@link StatxTimestamp struct statx_timestamp} {@link #stx_ctime};
- *     {@link StatxTimestamp struct statx_timestamp} {@link #stx_mtime};
- *     __u32 {@link #stx_rdev_major};
+ *     __u64 stx_ino;
+ *     __u64 stx_size;
+ *     __u64 stx_blocks;
+ *     __u64 stx_attributes_mask;
+ *     {@link StatxTimestamp struct statx_timestamp} stx_atime;
+ *     {@link StatxTimestamp struct statx_timestamp} stx_btime;
+ *     {@link StatxTimestamp struct statx_timestamp} stx_ctime;
+ *     {@link StatxTimestamp struct statx_timestamp} stx_mtime;
+ *     __u32 stx_rdev_major;
  *     __u32 stx_rdev_minor;
- *     __u32 {@link #stx_dev_major};
+ *     __u32 stx_dev_major;
  *     __u32 stx_dev_minor;
  *     __u64 stx_mnt_id;
  *     __u64 __spare2;
  *     __u64 __spare3[12];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct statx")
 public class Statx extends Struct<Statx> implements NativeResource {
@@ -158,58 +156,58 @@ public class Statx extends Struct<Statx> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** what results were written [uncond] */
+    /** @return the value of the {@code stx_mask} field. */
     @NativeType("__u32")
     public int stx_mask() { return nstx_mask(address()); }
-    /** preferred general I/O size [uncond] */
+    /** @return the value of the {@code stx_blksize} field. */
     @NativeType("__u32")
     public int stx_blksize() { return nstx_blksize(address()); }
-    /** flags conveying information about the file [uncond] */
+    /** @return the value of the {@code stx_attributes} field. */
     @NativeType("__u64")
     public long stx_attributes() { return nstx_attributes(address()); }
-    /** number of hard links */
+    /** @return the value of the {@code stx_nlink} field. */
     @NativeType("__u32")
     public int stx_nlink() { return nstx_nlink(address()); }
-    /** user ID of owner */
+    /** @return the value of the {@code stx_uid} field. */
     @NativeType("__u32")
     public int stx_uid() { return nstx_uid(address()); }
-    /** group ID of owner */
+    /** @return the value of the {@code stx_gid} field. */
     @NativeType("__u32")
     public int stx_gid() { return nstx_gid(address()); }
-    /** file mode */
+    /** @return the value of the {@code stx_mode} field. */
     @NativeType("__u16")
     public short stx_mode() { return nstx_mode(address()); }
-    /** {@code inode} number */
+    /** @return the value of the {@code stx_ino} field. */
     @NativeType("__u64")
     public long stx_ino() { return nstx_ino(address()); }
-    /** file size */
+    /** @return the value of the {@code stx_size} field. */
     @NativeType("__u64")
     public long stx_size() { return nstx_size(address()); }
-    /** number of 512-byte blocks allocated */
+    /** @return the value of the {@code stx_blocks} field. */
     @NativeType("__u64")
     public long stx_blocks() { return nstx_blocks(address()); }
-    /** mask to show what's supported in {@code stx_attributes} */
+    /** @return the value of the {@code stx_attributes_mask} field. */
     @NativeType("__u64")
     public long stx_attributes_mask() { return nstx_attributes_mask(address()); }
-    /** last access time */
+    /** @return a {@link StatxTimestamp} view of the {@code stx_atime} field. */
     @NativeType("struct statx_timestamp")
     public StatxTimestamp stx_atime() { return nstx_atime(address()); }
-    /** file creation time */
+    /** @return a {@link StatxTimestamp} view of the {@code stx_btime} field. */
     @NativeType("struct statx_timestamp")
     public StatxTimestamp stx_btime() { return nstx_btime(address()); }
-    /** last attribute change time */
+    /** @return a {@link StatxTimestamp} view of the {@code stx_ctime} field. */
     @NativeType("struct statx_timestamp")
     public StatxTimestamp stx_ctime() { return nstx_ctime(address()); }
-    /** last data modification time */
+    /** @return a {@link StatxTimestamp} view of the {@code stx_mtime} field. */
     @NativeType("struct statx_timestamp")
     public StatxTimestamp stx_mtime() { return nstx_mtime(address()); }
-    /** device ID of special file [if bdev/cdev] */
+    /** @return the value of the {@code stx_rdev_major} field. */
     @NativeType("__u32")
     public int stx_rdev_major() { return nstx_rdev_major(address()); }
     /** @return the value of the {@code stx_rdev_minor} field. */
     @NativeType("__u32")
     public int stx_rdev_minor() { return nstx_rdev_minor(address()); }
-    /** ID of device containing file [uncond] */
+    /** @return the value of the {@code stx_dev_major} field. */
     @NativeType("__u32")
     public int stx_dev_major() { return nstx_dev_major(address()); }
     /** @return the value of the {@code stx_dev_minor} field. */
@@ -219,49 +217,49 @@ public class Statx extends Struct<Statx> implements NativeResource {
     @NativeType("__u64")
     public long stx_mnt_id() { return nstx_mnt_id(address()); }
 
-    /** Sets the specified value to the {@link #stx_mask} field. */
+    /** Sets the specified value to the {@code stx_mask} field. */
     public Statx stx_mask(@NativeType("__u32") int value) { nstx_mask(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_blksize} field. */
+    /** Sets the specified value to the {@code stx_blksize} field. */
     public Statx stx_blksize(@NativeType("__u32") int value) { nstx_blksize(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_attributes} field. */
+    /** Sets the specified value to the {@code stx_attributes} field. */
     public Statx stx_attributes(@NativeType("__u64") long value) { nstx_attributes(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_nlink} field. */
+    /** Sets the specified value to the {@code stx_nlink} field. */
     public Statx stx_nlink(@NativeType("__u32") int value) { nstx_nlink(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_uid} field. */
+    /** Sets the specified value to the {@code stx_uid} field. */
     public Statx stx_uid(@NativeType("__u32") int value) { nstx_uid(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_gid} field. */
+    /** Sets the specified value to the {@code stx_gid} field. */
     public Statx stx_gid(@NativeType("__u32") int value) { nstx_gid(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_mode} field. */
+    /** Sets the specified value to the {@code stx_mode} field. */
     public Statx stx_mode(@NativeType("__u16") short value) { nstx_mode(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_ino} field. */
+    /** Sets the specified value to the {@code stx_ino} field. */
     public Statx stx_ino(@NativeType("__u64") long value) { nstx_ino(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_size} field. */
+    /** Sets the specified value to the {@code stx_size} field. */
     public Statx stx_size(@NativeType("__u64") long value) { nstx_size(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_blocks} field. */
+    /** Sets the specified value to the {@code stx_blocks} field. */
     public Statx stx_blocks(@NativeType("__u64") long value) { nstx_blocks(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_attributes_mask} field. */
+    /** Sets the specified value to the {@code stx_attributes_mask} field. */
     public Statx stx_attributes_mask(@NativeType("__u64") long value) { nstx_attributes_mask(address(), value); return this; }
-    /** Copies the specified {@link StatxTimestamp} to the {@link #stx_atime} field. */
+    /** Copies the specified {@link StatxTimestamp} to the {@code stx_atime} field. */
     public Statx stx_atime(@NativeType("struct statx_timestamp") StatxTimestamp value) { nstx_atime(address(), value); return this; }
-    /** Passes the {@link #stx_atime} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code stx_atime} field to the specified {@link java.util.function.Consumer Consumer}. */
     public Statx stx_atime(java.util.function.Consumer<StatxTimestamp> consumer) { consumer.accept(stx_atime()); return this; }
-    /** Copies the specified {@link StatxTimestamp} to the {@link #stx_btime} field. */
+    /** Copies the specified {@link StatxTimestamp} to the {@code stx_btime} field. */
     public Statx stx_btime(@NativeType("struct statx_timestamp") StatxTimestamp value) { nstx_btime(address(), value); return this; }
-    /** Passes the {@link #stx_btime} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code stx_btime} field to the specified {@link java.util.function.Consumer Consumer}. */
     public Statx stx_btime(java.util.function.Consumer<StatxTimestamp> consumer) { consumer.accept(stx_btime()); return this; }
-    /** Copies the specified {@link StatxTimestamp} to the {@link #stx_ctime} field. */
+    /** Copies the specified {@link StatxTimestamp} to the {@code stx_ctime} field. */
     public Statx stx_ctime(@NativeType("struct statx_timestamp") StatxTimestamp value) { nstx_ctime(address(), value); return this; }
-    /** Passes the {@link #stx_ctime} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code stx_ctime} field to the specified {@link java.util.function.Consumer Consumer}. */
     public Statx stx_ctime(java.util.function.Consumer<StatxTimestamp> consumer) { consumer.accept(stx_ctime()); return this; }
-    /** Copies the specified {@link StatxTimestamp} to the {@link #stx_mtime} field. */
+    /** Copies the specified {@link StatxTimestamp} to the {@code stx_mtime} field. */
     public Statx stx_mtime(@NativeType("struct statx_timestamp") StatxTimestamp value) { nstx_mtime(address(), value); return this; }
-    /** Passes the {@link #stx_mtime} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code stx_mtime} field to the specified {@link java.util.function.Consumer Consumer}. */
     public Statx stx_mtime(java.util.function.Consumer<StatxTimestamp> consumer) { consumer.accept(stx_mtime()); return this; }
-    /** Sets the specified value to the {@link #stx_rdev_major} field. */
+    /** Sets the specified value to the {@code stx_rdev_major} field. */
     public Statx stx_rdev_major(@NativeType("__u32") int value) { nstx_rdev_major(address(), value); return this; }
     /** Sets the specified value to the {@code stx_rdev_minor} field. */
     public Statx stx_rdev_minor(@NativeType("__u32") int value) { nstx_rdev_minor(address(), value); return this; }
-    /** Sets the specified value to the {@link #stx_dev_major} field. */
+    /** Sets the specified value to the {@code stx_dev_major} field. */
     public Statx stx_dev_major(@NativeType("__u32") int value) { nstx_dev_major(address(), value); return this; }
     /** Sets the specified value to the {@code stx_dev_minor} field. */
     public Statx stx_dev_minor(@NativeType("__u32") int value) { nstx_dev_minor(address(), value); return this; }
@@ -587,58 +585,58 @@ public class Statx extends Struct<Statx> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link Statx#stx_mask} field. */
+        /** @return the value of the {@code stx_mask} field. */
         @NativeType("__u32")
         public int stx_mask() { return Statx.nstx_mask(address()); }
-        /** @return the value of the {@link Statx#stx_blksize} field. */
+        /** @return the value of the {@code stx_blksize} field. */
         @NativeType("__u32")
         public int stx_blksize() { return Statx.nstx_blksize(address()); }
-        /** @return the value of the {@link Statx#stx_attributes} field. */
+        /** @return the value of the {@code stx_attributes} field. */
         @NativeType("__u64")
         public long stx_attributes() { return Statx.nstx_attributes(address()); }
-        /** @return the value of the {@link Statx#stx_nlink} field. */
+        /** @return the value of the {@code stx_nlink} field. */
         @NativeType("__u32")
         public int stx_nlink() { return Statx.nstx_nlink(address()); }
-        /** @return the value of the {@link Statx#stx_uid} field. */
+        /** @return the value of the {@code stx_uid} field. */
         @NativeType("__u32")
         public int stx_uid() { return Statx.nstx_uid(address()); }
-        /** @return the value of the {@link Statx#stx_gid} field. */
+        /** @return the value of the {@code stx_gid} field. */
         @NativeType("__u32")
         public int stx_gid() { return Statx.nstx_gid(address()); }
-        /** @return the value of the {@link Statx#stx_mode} field. */
+        /** @return the value of the {@code stx_mode} field. */
         @NativeType("__u16")
         public short stx_mode() { return Statx.nstx_mode(address()); }
-        /** @return the value of the {@link Statx#stx_ino} field. */
+        /** @return the value of the {@code stx_ino} field. */
         @NativeType("__u64")
         public long stx_ino() { return Statx.nstx_ino(address()); }
-        /** @return the value of the {@link Statx#stx_size} field. */
+        /** @return the value of the {@code stx_size} field. */
         @NativeType("__u64")
         public long stx_size() { return Statx.nstx_size(address()); }
-        /** @return the value of the {@link Statx#stx_blocks} field. */
+        /** @return the value of the {@code stx_blocks} field. */
         @NativeType("__u64")
         public long stx_blocks() { return Statx.nstx_blocks(address()); }
-        /** @return the value of the {@link Statx#stx_attributes_mask} field. */
+        /** @return the value of the {@code stx_attributes_mask} field. */
         @NativeType("__u64")
         public long stx_attributes_mask() { return Statx.nstx_attributes_mask(address()); }
-        /** @return a {@link StatxTimestamp} view of the {@link Statx#stx_atime} field. */
+        /** @return a {@link StatxTimestamp} view of the {@code stx_atime} field. */
         @NativeType("struct statx_timestamp")
         public StatxTimestamp stx_atime() { return Statx.nstx_atime(address()); }
-        /** @return a {@link StatxTimestamp} view of the {@link Statx#stx_btime} field. */
+        /** @return a {@link StatxTimestamp} view of the {@code stx_btime} field. */
         @NativeType("struct statx_timestamp")
         public StatxTimestamp stx_btime() { return Statx.nstx_btime(address()); }
-        /** @return a {@link StatxTimestamp} view of the {@link Statx#stx_ctime} field. */
+        /** @return a {@link StatxTimestamp} view of the {@code stx_ctime} field. */
         @NativeType("struct statx_timestamp")
         public StatxTimestamp stx_ctime() { return Statx.nstx_ctime(address()); }
-        /** @return a {@link StatxTimestamp} view of the {@link Statx#stx_mtime} field. */
+        /** @return a {@link StatxTimestamp} view of the {@code stx_mtime} field. */
         @NativeType("struct statx_timestamp")
         public StatxTimestamp stx_mtime() { return Statx.nstx_mtime(address()); }
-        /** @return the value of the {@link Statx#stx_rdev_major} field. */
+        /** @return the value of the {@code stx_rdev_major} field. */
         @NativeType("__u32")
         public int stx_rdev_major() { return Statx.nstx_rdev_major(address()); }
         /** @return the value of the {@code stx_rdev_minor} field. */
         @NativeType("__u32")
         public int stx_rdev_minor() { return Statx.nstx_rdev_minor(address()); }
-        /** @return the value of the {@link Statx#stx_dev_major} field. */
+        /** @return the value of the {@code stx_dev_major} field. */
         @NativeType("__u32")
         public int stx_dev_major() { return Statx.nstx_dev_major(address()); }
         /** @return the value of the {@code stx_dev_minor} field. */
@@ -648,49 +646,49 @@ public class Statx extends Struct<Statx> implements NativeResource {
         @NativeType("__u64")
         public long stx_mnt_id() { return Statx.nstx_mnt_id(address()); }
 
-        /** Sets the specified value to the {@link Statx#stx_mask} field. */
+        /** Sets the specified value to the {@code stx_mask} field. */
         public Statx.Buffer stx_mask(@NativeType("__u32") int value) { Statx.nstx_mask(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_blksize} field. */
+        /** Sets the specified value to the {@code stx_blksize} field. */
         public Statx.Buffer stx_blksize(@NativeType("__u32") int value) { Statx.nstx_blksize(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_attributes} field. */
+        /** Sets the specified value to the {@code stx_attributes} field. */
         public Statx.Buffer stx_attributes(@NativeType("__u64") long value) { Statx.nstx_attributes(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_nlink} field. */
+        /** Sets the specified value to the {@code stx_nlink} field. */
         public Statx.Buffer stx_nlink(@NativeType("__u32") int value) { Statx.nstx_nlink(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_uid} field. */
+        /** Sets the specified value to the {@code stx_uid} field. */
         public Statx.Buffer stx_uid(@NativeType("__u32") int value) { Statx.nstx_uid(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_gid} field. */
+        /** Sets the specified value to the {@code stx_gid} field. */
         public Statx.Buffer stx_gid(@NativeType("__u32") int value) { Statx.nstx_gid(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_mode} field. */
+        /** Sets the specified value to the {@code stx_mode} field. */
         public Statx.Buffer stx_mode(@NativeType("__u16") short value) { Statx.nstx_mode(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_ino} field. */
+        /** Sets the specified value to the {@code stx_ino} field. */
         public Statx.Buffer stx_ino(@NativeType("__u64") long value) { Statx.nstx_ino(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_size} field. */
+        /** Sets the specified value to the {@code stx_size} field. */
         public Statx.Buffer stx_size(@NativeType("__u64") long value) { Statx.nstx_size(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_blocks} field. */
+        /** Sets the specified value to the {@code stx_blocks} field. */
         public Statx.Buffer stx_blocks(@NativeType("__u64") long value) { Statx.nstx_blocks(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_attributes_mask} field. */
+        /** Sets the specified value to the {@code stx_attributes_mask} field. */
         public Statx.Buffer stx_attributes_mask(@NativeType("__u64") long value) { Statx.nstx_attributes_mask(address(), value); return this; }
-        /** Copies the specified {@link StatxTimestamp} to the {@link Statx#stx_atime} field. */
+        /** Copies the specified {@link StatxTimestamp} to the {@code stx_atime} field. */
         public Statx.Buffer stx_atime(@NativeType("struct statx_timestamp") StatxTimestamp value) { Statx.nstx_atime(address(), value); return this; }
-        /** Passes the {@link Statx#stx_atime} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code stx_atime} field to the specified {@link java.util.function.Consumer Consumer}. */
         public Statx.Buffer stx_atime(java.util.function.Consumer<StatxTimestamp> consumer) { consumer.accept(stx_atime()); return this; }
-        /** Copies the specified {@link StatxTimestamp} to the {@link Statx#stx_btime} field. */
+        /** Copies the specified {@link StatxTimestamp} to the {@code stx_btime} field. */
         public Statx.Buffer stx_btime(@NativeType("struct statx_timestamp") StatxTimestamp value) { Statx.nstx_btime(address(), value); return this; }
-        /** Passes the {@link Statx#stx_btime} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code stx_btime} field to the specified {@link java.util.function.Consumer Consumer}. */
         public Statx.Buffer stx_btime(java.util.function.Consumer<StatxTimestamp> consumer) { consumer.accept(stx_btime()); return this; }
-        /** Copies the specified {@link StatxTimestamp} to the {@link Statx#stx_ctime} field. */
+        /** Copies the specified {@link StatxTimestamp} to the {@code stx_ctime} field. */
         public Statx.Buffer stx_ctime(@NativeType("struct statx_timestamp") StatxTimestamp value) { Statx.nstx_ctime(address(), value); return this; }
-        /** Passes the {@link Statx#stx_ctime} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code stx_ctime} field to the specified {@link java.util.function.Consumer Consumer}. */
         public Statx.Buffer stx_ctime(java.util.function.Consumer<StatxTimestamp> consumer) { consumer.accept(stx_ctime()); return this; }
-        /** Copies the specified {@link StatxTimestamp} to the {@link Statx#stx_mtime} field. */
+        /** Copies the specified {@link StatxTimestamp} to the {@code stx_mtime} field. */
         public Statx.Buffer stx_mtime(@NativeType("struct statx_timestamp") StatxTimestamp value) { Statx.nstx_mtime(address(), value); return this; }
-        /** Passes the {@link Statx#stx_mtime} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code stx_mtime} field to the specified {@link java.util.function.Consumer Consumer}. */
         public Statx.Buffer stx_mtime(java.util.function.Consumer<StatxTimestamp> consumer) { consumer.accept(stx_mtime()); return this; }
-        /** Sets the specified value to the {@link Statx#stx_rdev_major} field. */
+        /** Sets the specified value to the {@code stx_rdev_major} field. */
         public Statx.Buffer stx_rdev_major(@NativeType("__u32") int value) { Statx.nstx_rdev_major(address(), value); return this; }
         /** Sets the specified value to the {@code stx_rdev_minor} field. */
         public Statx.Buffer stx_rdev_minor(@NativeType("__u32") int value) { Statx.nstx_rdev_minor(address(), value); return this; }
-        /** Sets the specified value to the {@link Statx#stx_dev_major} field. */
+        /** Sets the specified value to the {@code stx_dev_major} field. */
         public Statx.Buffer stx_dev_major(@NativeType("__u32") int value) { Statx.nstx_dev_major(address(), value); return this; }
         /** Sets the specified value to the {@code stx_dev_minor} field. */
         public Statx.Buffer stx_dev_minor(@NativeType("__u32") int value) { Statx.nstx_dev_minor(address(), value); return this; }

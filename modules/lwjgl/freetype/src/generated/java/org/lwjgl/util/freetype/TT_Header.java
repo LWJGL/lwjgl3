@@ -16,11 +16,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a TrueType font header table.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TT_Header {
  *     FT_Fixed Table_Version;
  *     FT_Fixed Font_Revision;
@@ -39,7 +35,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Short Font_Direction;
  *     FT_Short Index_To_Loc_Format;
  *     FT_Short Glyph_Data_Format;
- * }</code></pre>
+ * }}</pre>
  */
 public class TT_Header extends Struct<TT_Header> {
 

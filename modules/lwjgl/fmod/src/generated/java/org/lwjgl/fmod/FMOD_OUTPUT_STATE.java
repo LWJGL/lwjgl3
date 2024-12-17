@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_OUTPUT_STATE {
  *     void * plugindata;
  *     {@link FMOD_OUTPUT_READFROMMIXER_FUNCI FMOD_OUTPUT_READFROMMIXER_FUNC} readfrommixer;
@@ -28,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_OUTPUT_LOG_FUNCI FMOD_OUTPUT_LOG_FUNC} log;
  *     {@link FMOD_OUTPUT_COPYPORT_FUNCI FMOD_OUTPUT_COPYPORT_FUNC} copyport;
  *     {@link FMOD_OUTPUT_REQUESTRESET_FUNCI FMOD_OUTPUT_REQUESTRESET_FUNC} requestreset;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FMOD_OUTPUT_STATE")
 public class FMOD_OUTPUT_STATE extends Struct<FMOD_OUTPUT_STATE> implements NativeResource {

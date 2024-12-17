@@ -17,22 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure that identifies a VkDevice object and corresponding Metal MTLDevice object.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExportMetalDeviceInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     MTLDevice_id {@link #mtlDevice};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     MTLDevice_id mtlDevice;
+ * }}</pre>
  */
 public class VkExportMetalDeviceInfoEXT extends Struct<VkExportMetalDeviceInfoEXT> implements NativeResource {
 
@@ -85,23 +75,23 @@ public class VkExportMetalDeviceInfoEXT extends Struct<VkExportMetalDeviceInfoEX
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the Metal {@code id&lt;MTLDevice&gt;} object underlying the {@code VkPhysicalDevice} associated with the {@code VkDevice} object identified in the call. The implementation will return the {@code MTLDevice} in this member, or it will return {@code NULL} if no {@code MTLDevice} could be found underlying the {@code VkPhysicalDevice} object. */
+    /** @return the value of the {@code mtlDevice} field. */
     @NativeType("MTLDevice_id")
     public long mtlDevice() { return nmtlDevice(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkExportMetalDeviceInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT} value to the {@code sType} field. */
     public VkExportMetalDeviceInfoEXT sType$Default() { return sType(EXTMetalObjects.VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkExportMetalDeviceInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #mtlDevice} field. */
+    /** Sets the specified value to the {@code mtlDevice} field. */
     public VkExportMetalDeviceInfoEXT mtlDevice(@NativeType("MTLDevice_id") long value) { nmtlDevice(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +296,23 @@ public class VkExportMetalDeviceInfoEXT extends Struct<VkExportMetalDeviceInfoEX
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkExportMetalDeviceInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExportMetalDeviceInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkExportMetalDeviceInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExportMetalDeviceInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkExportMetalDeviceInfoEXT#mtlDevice} field. */
+        /** @return the value of the {@code mtlDevice} field. */
         @NativeType("MTLDevice_id")
         public long mtlDevice() { return VkExportMetalDeviceInfoEXT.nmtlDevice(address()); }
 
-        /** Sets the specified value to the {@link VkExportMetalDeviceInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkExportMetalDeviceInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkExportMetalDeviceInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT} value to the {@link VkExportMetalDeviceInfoEXT#sType} field. */
+        /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT} value to the {@code sType} field. */
         public VkExportMetalDeviceInfoEXT.Buffer sType$Default() { return sType(EXTMetalObjects.VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkExportMetalDeviceInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkExportMetalDeviceInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkExportMetalDeviceInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExportMetalDeviceInfoEXT#mtlDevice} field. */
+        /** Sets the specified value to the {@code mtlDevice} field. */
         public VkExportMetalDeviceInfoEXT.Buffer mtlDevice(@NativeType("MTLDevice_id") long value) { VkExportMetalDeviceInfoEXT.nmtlDevice(address(), value); return this; }
 
     }

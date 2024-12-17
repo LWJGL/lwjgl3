@@ -16,37 +16,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing push descriptor limits that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxIndirectPipelineCount};
- *     uint32_t {@link #maxIndirectShaderObjectCount};
- *     uint32_t {@link #maxIndirectSequenceCount};
- *     uint32_t {@link #maxIndirectCommandsTokenCount};
- *     uint32_t {@link #maxIndirectCommandsTokenOffset};
- *     uint32_t {@link #maxIndirectCommandsIndirectStride};
- *     VkIndirectCommandsInputModeFlagsEXT {@link #supportedIndirectCommandsInputModes};
- *     VkShaderStageFlags {@link #supportedIndirectCommandsShaderStages};
- *     VkShaderStageFlags {@link #supportedIndirectCommandsShaderStagesPipelineBinding};
- *     VkShaderStageFlags {@link #supportedIndirectCommandsShaderStagesShaderBinding};
- *     VkBool32 {@link #deviceGeneratedCommandsTransformFeedback};
- *     VkBool32 {@link #deviceGeneratedCommandsMultiDrawIndirectCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxIndirectPipelineCount;
+ *     uint32_t maxIndirectShaderObjectCount;
+ *     uint32_t maxIndirectSequenceCount;
+ *     uint32_t maxIndirectCommandsTokenCount;
+ *     uint32_t maxIndirectCommandsTokenOffset;
+ *     uint32_t maxIndirectCommandsIndirectStride;
+ *     VkIndirectCommandsInputModeFlagsEXT supportedIndirectCommandsInputModes;
+ *     VkShaderStageFlags supportedIndirectCommandsShaderStages;
+ *     VkShaderStageFlags supportedIndirectCommandsShaderStagesPipelineBinding;
+ *     VkShaderStageFlags supportedIndirectCommandsShaderStagesShaderBinding;
+ *     VkBool32 deviceGeneratedCommandsTransformFeedback;
+ *     VkBool32 deviceGeneratedCommandsMultiDrawIndirectCount;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT extends Struct<VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT> implements NativeResource {
 
@@ -132,54 +118,54 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of pipelines passed to {@link EXTDeviceGeneratedCommands#vkCreateIndirectExecutionSetEXT CreateIndirectExecutionSetEXT}. */
+    /** @return the value of the {@code maxIndirectPipelineCount} field. */
     @NativeType("uint32_t")
     public int maxIndirectPipelineCount() { return nmaxIndirectPipelineCount(address()); }
-    /** the maximum number of shader objects passed to {@link EXTDeviceGeneratedCommands#vkCreateIndirectExecutionSetEXT CreateIndirectExecutionSetEXT}. If this value is zero, binding shader objects indirectly is not supported. */
+    /** @return the value of the {@code maxIndirectShaderObjectCount} field. */
     @NativeType("uint32_t")
     public int maxIndirectShaderObjectCount() { return nmaxIndirectShaderObjectCount(address()); }
-    /** the maximum number of sequences in {@link VkGeneratedCommandsInfoEXT} and in {@link VkGeneratedCommandsMemoryRequirementsInfoEXT}. */
+    /** @return the value of the {@code maxIndirectSequenceCount} field. */
     @NativeType("uint32_t")
     public int maxIndirectSequenceCount() { return nmaxIndirectSequenceCount(address()); }
-    /** the maximum number of tokens in {@link VkIndirectCommandsLayoutCreateInfoEXT}. */
+    /** @return the value of the {@code maxIndirectCommandsTokenCount} field. */
     @NativeType("uint32_t")
     public int maxIndirectCommandsTokenCount() { return nmaxIndirectCommandsTokenCount(address()); }
-    /** the maximum offset in {@link VkIndirectCommandsLayoutTokenEXT}. */
+    /** @return the value of the {@code maxIndirectCommandsTokenOffset} field. */
     @NativeType("uint32_t")
     public int maxIndirectCommandsTokenOffset() { return nmaxIndirectCommandsTokenOffset(address()); }
-    /** the maximum stream stride in {@link VkIndirectCommandsLayoutCreateInfoEXT}. */
+    /** @return the value of the {@code maxIndirectCommandsIndirectStride} field. */
     @NativeType("uint32_t")
     public int maxIndirectCommandsIndirectStride() { return nmaxIndirectCommandsIndirectStride(address()); }
-    /** indicates the supported input modes. */
+    /** @return the value of the {@code supportedIndirectCommandsInputModes} field. */
     @NativeType("VkIndirectCommandsInputModeFlagsEXT")
     public int supportedIndirectCommandsInputModes() { return nsupportedIndirectCommandsInputModes(address()); }
-    /** indicates the stages which <b>can</b> be used to generate indirect commands. Implementations are required to support, at minimum: {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT}, {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}. */
+    /** @return the value of the {@code supportedIndirectCommandsShaderStages} field. */
     @NativeType("VkShaderStageFlags")
     public int supportedIndirectCommandsShaderStages() { return nsupportedIndirectCommandsShaderStages(address()); }
-    /** indicates the stages which <b>can</b> be used within indirect execution sets for indirectly binding shader stages using pipelines. */
+    /** @return the value of the {@code supportedIndirectCommandsShaderStagesPipelineBinding} field. */
     @NativeType("VkShaderStageFlags")
     public int supportedIndirectCommandsShaderStagesPipelineBinding() { return nsupportedIndirectCommandsShaderStagesPipelineBinding(address()); }
-    /** indicates the stages which <b>can</b> be used within indirect execution sets for indirectly binding shader stages using shader objects. */
+    /** @return the value of the {@code supportedIndirectCommandsShaderStagesShaderBinding} field. */
     @NativeType("VkShaderStageFlags")
     public int supportedIndirectCommandsShaderStagesShaderBinding() { return nsupportedIndirectCommandsShaderStagesShaderBinding(address()); }
-    /** indicates whether the implementation supports interactions with {@link EXTTransformFeedback VK_EXT_transform_feedback} for pipelines not created with {@link EXTDeviceGeneratedCommands#VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT}. */
+    /** @return the value of the {@code deviceGeneratedCommandsTransformFeedback} field. */
     @NativeType("VkBool32")
     public boolean deviceGeneratedCommandsTransformFeedback() { return ndeviceGeneratedCommandsTransformFeedback(address()) != 0; }
-    /** indicates whether the implementation supports COUNT variants of multi-draw indirect tokens. */
+    /** @return the value of the {@code deviceGeneratedCommandsMultiDrawIndirectCount} field. */
     @NativeType("VkBool32")
     public boolean deviceGeneratedCommandsMultiDrawIndirectCount() { return ndeviceGeneratedCommandsMultiDrawIndirectCount(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -393,54 +379,54 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#maxIndirectPipelineCount} field. */
+        /** @return the value of the {@code maxIndirectPipelineCount} field. */
         @NativeType("uint32_t")
         public int maxIndirectPipelineCount() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nmaxIndirectPipelineCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#maxIndirectShaderObjectCount} field. */
+        /** @return the value of the {@code maxIndirectShaderObjectCount} field. */
         @NativeType("uint32_t")
         public int maxIndirectShaderObjectCount() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nmaxIndirectShaderObjectCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#maxIndirectSequenceCount} field. */
+        /** @return the value of the {@code maxIndirectSequenceCount} field. */
         @NativeType("uint32_t")
         public int maxIndirectSequenceCount() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nmaxIndirectSequenceCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#maxIndirectCommandsTokenCount} field. */
+        /** @return the value of the {@code maxIndirectCommandsTokenCount} field. */
         @NativeType("uint32_t")
         public int maxIndirectCommandsTokenCount() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nmaxIndirectCommandsTokenCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#maxIndirectCommandsTokenOffset} field. */
+        /** @return the value of the {@code maxIndirectCommandsTokenOffset} field. */
         @NativeType("uint32_t")
         public int maxIndirectCommandsTokenOffset() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nmaxIndirectCommandsTokenOffset(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#maxIndirectCommandsIndirectStride} field. */
+        /** @return the value of the {@code maxIndirectCommandsIndirectStride} field. */
         @NativeType("uint32_t")
         public int maxIndirectCommandsIndirectStride() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nmaxIndirectCommandsIndirectStride(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#supportedIndirectCommandsInputModes} field. */
+        /** @return the value of the {@code supportedIndirectCommandsInputModes} field. */
         @NativeType("VkIndirectCommandsInputModeFlagsEXT")
         public int supportedIndirectCommandsInputModes() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nsupportedIndirectCommandsInputModes(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#supportedIndirectCommandsShaderStages} field. */
+        /** @return the value of the {@code supportedIndirectCommandsShaderStages} field. */
         @NativeType("VkShaderStageFlags")
         public int supportedIndirectCommandsShaderStages() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nsupportedIndirectCommandsShaderStages(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#supportedIndirectCommandsShaderStagesPipelineBinding} field. */
+        /** @return the value of the {@code supportedIndirectCommandsShaderStagesPipelineBinding} field. */
         @NativeType("VkShaderStageFlags")
         public int supportedIndirectCommandsShaderStagesPipelineBinding() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nsupportedIndirectCommandsShaderStagesPipelineBinding(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#supportedIndirectCommandsShaderStagesShaderBinding} field. */
+        /** @return the value of the {@code supportedIndirectCommandsShaderStagesShaderBinding} field. */
         @NativeType("VkShaderStageFlags")
         public int supportedIndirectCommandsShaderStagesShaderBinding() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nsupportedIndirectCommandsShaderStagesShaderBinding(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#deviceGeneratedCommandsTransformFeedback} field. */
+        /** @return the value of the {@code deviceGeneratedCommandsTransformFeedback} field. */
         @NativeType("VkBool32")
         public boolean deviceGeneratedCommandsTransformFeedback() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.ndeviceGeneratedCommandsTransformFeedback(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#deviceGeneratedCommandsMultiDrawIndirectCount} field. */
+        /** @return the value of the {@code deviceGeneratedCommandsMultiDrawIndirectCount} field. */
         @NativeType("VkBool32")
         public boolean deviceGeneratedCommandsMultiDrawIndirectCount() { return VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.ndeviceGeneratedCommandsMultiDrawIndirectCount(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT.npNext(address(), value); return this; }
 
     }

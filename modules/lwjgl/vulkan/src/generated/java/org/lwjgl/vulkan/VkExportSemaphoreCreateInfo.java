@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying handle types that can be exported from a semaphore.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The bits in {@code handleTypes} <b>must</b> be supported and compatible, as reported by {@link VkExternalSemaphoreProperties}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO}</li>
- * <li>{@code handleTypes} <b>must</b> be a valid combination of {@code VkExternalSemaphoreHandleTypeFlagBits} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExportSemaphoreCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkExternalSemaphoreHandleTypeFlags {@link #handleTypes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkExternalSemaphoreHandleTypeFlags handleTypes;
+ * }}</pre>
  */
 public class VkExportSemaphoreCreateInfo extends Struct<VkExportSemaphoreCreateInfo> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class VkExportSemaphoreCreateInfo extends Struct<VkExportSemaphoreCreateI
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkExternalSemaphoreHandleTypeFlagBits} specifying one or more semaphore handle types the application <b>can</b> export from the resulting semaphore. The application <b>can</b> request multiple handle types for the same semaphore. */
+    /** @return the value of the {@code handleTypes} field. */
     @NativeType("VkExternalSemaphoreHandleTypeFlags")
     public int handleTypes() { return nhandleTypes(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkExportSemaphoreCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO} value to the {@code sType} field. */
     public VkExportSemaphoreCreateInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkExportSemaphoreCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #handleTypes} field. */
+    /** Sets the specified value to the {@code handleTypes} field. */
     public VkExportSemaphoreCreateInfo handleTypes(@NativeType("VkExternalSemaphoreHandleTypeFlags") int value) { nhandleTypes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,23 +305,23 @@ public class VkExportSemaphoreCreateInfo extends Struct<VkExportSemaphoreCreateI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkExportSemaphoreCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExportSemaphoreCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkExportSemaphoreCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExportSemaphoreCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkExportSemaphoreCreateInfo#handleTypes} field. */
+        /** @return the value of the {@code handleTypes} field. */
         @NativeType("VkExternalSemaphoreHandleTypeFlags")
         public int handleTypes() { return VkExportSemaphoreCreateInfo.nhandleTypes(address()); }
 
-        /** Sets the specified value to the {@link VkExportSemaphoreCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkExportSemaphoreCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkExportSemaphoreCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO} value to the {@link VkExportSemaphoreCreateInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO} value to the {@code sType} field. */
         public VkExportSemaphoreCreateInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkExportSemaphoreCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkExportSemaphoreCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkExportSemaphoreCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExportSemaphoreCreateInfo#handleTypes} field. */
+        /** Sets the specified value to the {@code handleTypes} field. */
         public VkExportSemaphoreCreateInfo.Buffer handleTypes(@NativeType("VkExternalSemaphoreHandleTypeFlags") int value) { VkExportSemaphoreCreateInfo.nhandleTypes(address(), value); return this; }
 
     }

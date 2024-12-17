@@ -17,14 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Custom allocator. When custom allocator is not specified, library uses default CRT allocator. The library assumes custom allocator is thread safe.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct bgfx_allocator_interface_t {
- *     {@link BGFXAllocatorVtbl bgfx_allocator_vtbl_t} const * {@link #vtbl};
- * }</code></pre>
+ *     {@link BGFXAllocatorVtbl bgfx_allocator_vtbl_t} const * vtbl;
+ * }}</pre>
  */
 @NativeType("struct bgfx_allocator_interface_t")
 public class BGFXAllocatorInterface extends Struct<BGFXAllocatorInterface> implements NativeResource {
@@ -72,11 +68,11 @@ public class BGFXAllocatorInterface extends Struct<BGFXAllocatorInterface> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the allocator virtual table */
+    /** @return a {@link BGFXAllocatorVtbl} view of the struct pointed to by the {@code vtbl} field. */
     @NativeType("bgfx_allocator_vtbl_t const *")
     public BGFXAllocatorVtbl vtbl() { return nvtbl(address()); }
 
-    /** Sets the address of the specified {@link BGFXAllocatorVtbl} to the {@link #vtbl} field. */
+    /** Sets the address of the specified {@link BGFXAllocatorVtbl} to the {@code vtbl} field. */
     public BGFXAllocatorInterface vtbl(@NativeType("bgfx_allocator_vtbl_t const *") BGFXAllocatorVtbl value) { nvtbl(address(), value); return this; }
 
     /**

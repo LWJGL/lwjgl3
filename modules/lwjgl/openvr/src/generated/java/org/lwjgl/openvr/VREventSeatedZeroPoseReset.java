@@ -14,12 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_SeatedZeroPoseReset_t {
  *     bool bResetBySystemMenu;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_SeatedZeroPoseReset_t")
 public class VREventSeatedZeroPoseReset extends Struct<VREventSeatedZeroPoseReset> {

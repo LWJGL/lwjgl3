@@ -17,21 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct that contains all callbacks necessary for suballocation.
- * 
- * <p>These pointers must all be provided for upload or destroy to occur using suballocator callbacks.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ktxVulkanTexture_subAllocatorCallbacks {
- *     void * (*{@link ktxVulkanTexture_subAllocatorAllocMemFuncPtrI allocMemFuncPtr}) (VkMemoryAllocateInfo *allocInfo, VkMemoryRequirements *memReq, uint64_t *pageCount);
- *     void * (*{@link ktxVulkanTexture_subAllocatorBindBufferFuncPtrI bindBufferFuncPtr}) (VkBuffer buffer, uint64_t allocId);
- *     void * (*{@link ktxVulkanTexture_subAllocatorBindImageFuncPtrI bindImageFuncPtr}) (VkImage image, uint64_t allocId);
- *     void * (*{@link ktxVulkanTexture_subAllocatorMemoryMapFuncPtrI memoryMapFuncPtr}) (uint64_t allocId, uint64_t pageNumber, VkDeviceSize *mapLength, void **dataPtr);
- *     void * (*{@link ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI memoryUnmapFuncPtr}) (uint64_t allocId, uint64_t pageNumber);
- *     void * (*{@link ktxVulkanTexture_subAllocatorFreeMemFuncPtrI freeMemFuncPtr}) (uint64_t allocId);
- * }</code></pre>
+ *     void * (* allocMemFuncPtr) (VkMemoryAllocateInfo * allocInfo, VkMemoryRequirements * memReq, uint64_t * pageCount);
+ *     void * (* bindBufferFuncPtr) (VkBuffer buffer, uint64_t allocId);
+ *     void * (* bindImageFuncPtr) (VkImage image, uint64_t allocId);
+ *     void * (* memoryMapFuncPtr) (uint64_t allocId, uint64_t pageNumber, VkDeviceSize * mapLength, void ** dataPtr);
+ *     void * (* memoryUnmapFuncPtr) (uint64_t allocId, uint64_t pageNumber);
+ *     void * (* freeMemFuncPtr) (uint64_t allocId);
+ * }}</pre>
  */
 public class ktxVulkanTexture_subAllocatorCallbacks extends Struct<ktxVulkanTexture_subAllocatorCallbacks> implements NativeResource {
 
@@ -93,36 +87,36 @@ public class ktxVulkanTexture_subAllocatorCallbacks extends Struct<ktxVulkanText
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** pointer to the memory procurement function. Can suballocate one or more pages. */
+    /** @return the value of the {@code allocMemFuncPtr} field. */
     @NativeType("void * (*) (VkMemoryAllocateInfo *, VkMemoryRequirements *, uint64_t *)")
     public ktxVulkanTexture_subAllocatorAllocMemFuncPtr allocMemFuncPtr() { return nallocMemFuncPtr(address()); }
-    /** pointer to bind-buffer-to-suballocation(s) function */
+    /** @return the value of the {@code bindBufferFuncPtr} field. */
     @NativeType("void * (*) (VkBuffer, uint64_t)")
     public ktxVulkanTexture_subAllocatorBindBufferFuncPtr bindBufferFuncPtr() { return nbindBufferFuncPtr(address()); }
-    /** ointer to bind-image-to-suballocation(s) function */
+    /** @return the value of the {@code bindImageFuncPtr} field. */
     @NativeType("void * (*) (VkImage, uint64_t)")
     public ktxVulkanTexture_subAllocatorBindImageFuncPtr bindImageFuncPtr() { return nbindImageFuncPtr(address()); }
-    /** pointer to function for mapping the memory of a specific page */
+    /** @return the value of the {@code memoryMapFuncPtr} field. */
     @NativeType("void * (*) (uint64_t, uint64_t, VkDeviceSize *, void **)")
     public ktxVulkanTexture_subAllocatorMemoryMapFuncPtr memoryMapFuncPtr() { return nmemoryMapFuncPtr(address()); }
-    /** pointer to function for unmapping the memory of a specific page */
+    /** @return the value of the {@code memoryUnmapFuncPtr} field. */
     @NativeType("void * (*) (uint64_t, uint64_t)")
     public ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr memoryUnmapFuncPtr() { return nmemoryUnmapFuncPtr(address()); }
-    /** pointer to the free procurement function */
+    /** @return the value of the {@code freeMemFuncPtr} field. */
     @NativeType("void * (*) (uint64_t)")
     public ktxVulkanTexture_subAllocatorFreeMemFuncPtr freeMemFuncPtr() { return nfreeMemFuncPtr(address()); }
 
-    /** Sets the specified value to the {@link #allocMemFuncPtr} field. */
+    /** Sets the specified value to the {@code allocMemFuncPtr} field. */
     public ktxVulkanTexture_subAllocatorCallbacks allocMemFuncPtr(@NativeType("void * (*) (VkMemoryAllocateInfo *, VkMemoryRequirements *, uint64_t *)") ktxVulkanTexture_subAllocatorAllocMemFuncPtrI value) { nallocMemFuncPtr(address(), value); return this; }
-    /** Sets the specified value to the {@link #bindBufferFuncPtr} field. */
+    /** Sets the specified value to the {@code bindBufferFuncPtr} field. */
     public ktxVulkanTexture_subAllocatorCallbacks bindBufferFuncPtr(@NativeType("void * (*) (VkBuffer, uint64_t)") ktxVulkanTexture_subAllocatorBindBufferFuncPtrI value) { nbindBufferFuncPtr(address(), value); return this; }
-    /** Sets the specified value to the {@link #bindImageFuncPtr} field. */
+    /** Sets the specified value to the {@code bindImageFuncPtr} field. */
     public ktxVulkanTexture_subAllocatorCallbacks bindImageFuncPtr(@NativeType("void * (*) (VkImage, uint64_t)") ktxVulkanTexture_subAllocatorBindImageFuncPtrI value) { nbindImageFuncPtr(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryMapFuncPtr} field. */
+    /** Sets the specified value to the {@code memoryMapFuncPtr} field. */
     public ktxVulkanTexture_subAllocatorCallbacks memoryMapFuncPtr(@NativeType("void * (*) (uint64_t, uint64_t, VkDeviceSize *, void **)") ktxVulkanTexture_subAllocatorMemoryMapFuncPtrI value) { nmemoryMapFuncPtr(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryUnmapFuncPtr} field. */
+    /** Sets the specified value to the {@code memoryUnmapFuncPtr} field. */
     public ktxVulkanTexture_subAllocatorCallbacks memoryUnmapFuncPtr(@NativeType("void * (*) (uint64_t, uint64_t)") ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI value) { nmemoryUnmapFuncPtr(address(), value); return this; }
-    /** Sets the specified value to the {@link #freeMemFuncPtr} field. */
+    /** Sets the specified value to the {@code freeMemFuncPtr} field. */
     public ktxVulkanTexture_subAllocatorCallbacks freeMemFuncPtr(@NativeType("void * (*) (uint64_t)") ktxVulkanTexture_subAllocatorFreeMemFuncPtrI value) { nfreeMemFuncPtr(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,36 +344,36 @@ public class ktxVulkanTexture_subAllocatorCallbacks extends Struct<ktxVulkanText
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ktxVulkanTexture_subAllocatorCallbacks#allocMemFuncPtr} field. */
+        /** @return the value of the {@code allocMemFuncPtr} field. */
         @NativeType("void * (*) (VkMemoryAllocateInfo *, VkMemoryRequirements *, uint64_t *)")
         public ktxVulkanTexture_subAllocatorAllocMemFuncPtr allocMemFuncPtr() { return ktxVulkanTexture_subAllocatorCallbacks.nallocMemFuncPtr(address()); }
-        /** @return the value of the {@link ktxVulkanTexture_subAllocatorCallbacks#bindBufferFuncPtr} field. */
+        /** @return the value of the {@code bindBufferFuncPtr} field. */
         @NativeType("void * (*) (VkBuffer, uint64_t)")
         public ktxVulkanTexture_subAllocatorBindBufferFuncPtr bindBufferFuncPtr() { return ktxVulkanTexture_subAllocatorCallbacks.nbindBufferFuncPtr(address()); }
-        /** @return the value of the {@link ktxVulkanTexture_subAllocatorCallbacks#bindImageFuncPtr} field. */
+        /** @return the value of the {@code bindImageFuncPtr} field. */
         @NativeType("void * (*) (VkImage, uint64_t)")
         public ktxVulkanTexture_subAllocatorBindImageFuncPtr bindImageFuncPtr() { return ktxVulkanTexture_subAllocatorCallbacks.nbindImageFuncPtr(address()); }
-        /** @return the value of the {@link ktxVulkanTexture_subAllocatorCallbacks#memoryMapFuncPtr} field. */
+        /** @return the value of the {@code memoryMapFuncPtr} field. */
         @NativeType("void * (*) (uint64_t, uint64_t, VkDeviceSize *, void **)")
         public ktxVulkanTexture_subAllocatorMemoryMapFuncPtr memoryMapFuncPtr() { return ktxVulkanTexture_subAllocatorCallbacks.nmemoryMapFuncPtr(address()); }
-        /** @return the value of the {@link ktxVulkanTexture_subAllocatorCallbacks#memoryUnmapFuncPtr} field. */
+        /** @return the value of the {@code memoryUnmapFuncPtr} field. */
         @NativeType("void * (*) (uint64_t, uint64_t)")
         public ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr memoryUnmapFuncPtr() { return ktxVulkanTexture_subAllocatorCallbacks.nmemoryUnmapFuncPtr(address()); }
-        /** @return the value of the {@link ktxVulkanTexture_subAllocatorCallbacks#freeMemFuncPtr} field. */
+        /** @return the value of the {@code freeMemFuncPtr} field. */
         @NativeType("void * (*) (uint64_t)")
         public ktxVulkanTexture_subAllocatorFreeMemFuncPtr freeMemFuncPtr() { return ktxVulkanTexture_subAllocatorCallbacks.nfreeMemFuncPtr(address()); }
 
-        /** Sets the specified value to the {@link ktxVulkanTexture_subAllocatorCallbacks#allocMemFuncPtr} field. */
+        /** Sets the specified value to the {@code allocMemFuncPtr} field. */
         public ktxVulkanTexture_subAllocatorCallbacks.Buffer allocMemFuncPtr(@NativeType("void * (*) (VkMemoryAllocateInfo *, VkMemoryRequirements *, uint64_t *)") ktxVulkanTexture_subAllocatorAllocMemFuncPtrI value) { ktxVulkanTexture_subAllocatorCallbacks.nallocMemFuncPtr(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxVulkanTexture_subAllocatorCallbacks#bindBufferFuncPtr} field. */
+        /** Sets the specified value to the {@code bindBufferFuncPtr} field. */
         public ktxVulkanTexture_subAllocatorCallbacks.Buffer bindBufferFuncPtr(@NativeType("void * (*) (VkBuffer, uint64_t)") ktxVulkanTexture_subAllocatorBindBufferFuncPtrI value) { ktxVulkanTexture_subAllocatorCallbacks.nbindBufferFuncPtr(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxVulkanTexture_subAllocatorCallbacks#bindImageFuncPtr} field. */
+        /** Sets the specified value to the {@code bindImageFuncPtr} field. */
         public ktxVulkanTexture_subAllocatorCallbacks.Buffer bindImageFuncPtr(@NativeType("void * (*) (VkImage, uint64_t)") ktxVulkanTexture_subAllocatorBindImageFuncPtrI value) { ktxVulkanTexture_subAllocatorCallbacks.nbindImageFuncPtr(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxVulkanTexture_subAllocatorCallbacks#memoryMapFuncPtr} field. */
+        /** Sets the specified value to the {@code memoryMapFuncPtr} field. */
         public ktxVulkanTexture_subAllocatorCallbacks.Buffer memoryMapFuncPtr(@NativeType("void * (*) (uint64_t, uint64_t, VkDeviceSize *, void **)") ktxVulkanTexture_subAllocatorMemoryMapFuncPtrI value) { ktxVulkanTexture_subAllocatorCallbacks.nmemoryMapFuncPtr(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxVulkanTexture_subAllocatorCallbacks#memoryUnmapFuncPtr} field. */
+        /** Sets the specified value to the {@code memoryUnmapFuncPtr} field. */
         public ktxVulkanTexture_subAllocatorCallbacks.Buffer memoryUnmapFuncPtr(@NativeType("void * (*) (uint64_t, uint64_t)") ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI value) { ktxVulkanTexture_subAllocatorCallbacks.nmemoryUnmapFuncPtr(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxVulkanTexture_subAllocatorCallbacks#freeMemFuncPtr} field. */
+        /** Sets the specified value to the {@code freeMemFuncPtr} field. */
         public ktxVulkanTexture_subAllocatorCallbacks.Buffer freeMemFuncPtr(@NativeType("void * (*) (uint64_t)") ktxVulkanTexture_subAllocatorFreeMemFuncPtrI value) { ktxVulkanTexture_subAllocatorCallbacks.nfreeMemFuncPtr(address(), value); return this; }
 
     }

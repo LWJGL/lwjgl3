@@ -16,28 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the location and position of a joint in the skeleton.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrBodySkeletonJointHTC} structure describes the position, orientation of the joint in space, and position of the joint in the skeleton.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using {@link XrBodySkeletonJointHTC}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrBodySkeletonHTC}, {@link XrPosef}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBodySkeletonJointHTC {
- *     {@link XrPosef XrPosef} {@link #pose};
- * }</code></pre>
+ *     {@link XrPosef XrPosef} pose;
+ * }}</pre>
  */
 public class XrBodySkeletonJointHTC extends Struct<XrBodySkeletonJointHTC> implements NativeResource {
 
@@ -84,12 +66,12 @@ public class XrBodySkeletonJointHTC extends Struct<XrBodySkeletonJointHTC> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@link XrPosef} defining the position and orientation of the origin of a body joint within the reference frame of the corresponding {@link HTCBodyTracking#xrGetBodySkeletonHTC GetBodySkeletonHTC}{@code ::baseSpace}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
 
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrBodySkeletonJointHTC pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrBodySkeletonJointHTC pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
 
     /**
@@ -264,12 +246,12 @@ public class XrBodySkeletonJointHTC extends Struct<XrBodySkeletonJointHTC> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrPosef} view of the {@link XrBodySkeletonJointHTC#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrBodySkeletonJointHTC.npose(address()); }
 
-        /** Copies the specified {@link XrPosef} to the {@link XrBodySkeletonJointHTC#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrBodySkeletonJointHTC.Buffer pose(XrPosef value) { XrBodySkeletonJointHTC.npose(address(), value); return this; }
-        /** Passes the {@link XrBodySkeletonJointHTC#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrBodySkeletonJointHTC.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
 
     }

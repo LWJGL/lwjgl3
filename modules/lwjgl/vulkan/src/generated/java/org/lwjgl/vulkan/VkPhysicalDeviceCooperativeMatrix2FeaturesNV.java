@@ -16,32 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing cooperative matrix features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCooperativeMatrix2FeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #cooperativeMatrixWorkgroupScope};
- *     VkBool32 {@link #cooperativeMatrixFlexibleDimensions};
- *     VkBool32 {@link #cooperativeMatrixReductions};
- *     VkBool32 {@link #cooperativeMatrixConversions};
- *     VkBool32 {@link #cooperativeMatrixPerElementOperations};
- *     VkBool32 {@link #cooperativeMatrixTensorAddressing};
- *     VkBool32 {@link #cooperativeMatrixBlockLoads};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 cooperativeMatrixWorkgroupScope;
+ *     VkBool32 cooperativeMatrixFlexibleDimensions;
+ *     VkBool32 cooperativeMatrixReductions;
+ *     VkBool32 cooperativeMatrixConversions;
+ *     VkBool32 cooperativeMatrixPerElementOperations;
+ *     VkBool32 cooperativeMatrixTensorAddressing;
+ *     VkBool32 cooperativeMatrixBlockLoads;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCooperativeMatrix2FeaturesNV extends Struct<VkPhysicalDeviceCooperativeMatrix2FeaturesNV> implements NativeResource {
 
@@ -112,53 +98,53 @@ public class VkPhysicalDeviceCooperativeMatrix2FeaturesNV extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports workgroup scope cooperative matrices. */
+    /** @return the value of the {@code cooperativeMatrixWorkgroupScope} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrixWorkgroupScope() { return ncooperativeMatrixWorkgroupScope(address()) != 0; }
-    /** indicates that the implementation supports cooperative matrix sizes that are a multiple of the granularity advertised in {@link VkCooperativeMatrixFlexibleDimensionsPropertiesNV}. */
+    /** @return the value of the {@code cooperativeMatrixFlexibleDimensions} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrixFlexibleDimensions() { return ncooperativeMatrixFlexibleDimensions(address()) != 0; }
-    /** indicates that the implementation supports the {@code CooperativeMatrixReductionsNV} SPIR-V capability. This allows performing (row, column, 2x2, or all element) reductions on matrices. */
+    /** @return the value of the {@code cooperativeMatrixReductions} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrixReductions() { return ncooperativeMatrixReductions(address()) != 0; }
-    /** indicates that the implementation supports the {@code CooperativeMatrixConversionsNV} SPIR-V capability. This allows converting accumulator matrices to A or B matrices. */
+    /** @return the value of the {@code cooperativeMatrixConversions} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrixConversions() { return ncooperativeMatrixConversions(address()) != 0; }
-    /** indicates that the implementation supports the {@code CooperativeMatrixPerElementOperationsNV} SPIR-V capability. This allows performing element-wise operations on matrix elements using a callback function. */
+    /** @return the value of the {@code cooperativeMatrixPerElementOperations} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrixPerElementOperations() { return ncooperativeMatrixPerElementOperations(address()) != 0; }
-    /** indicates that the implementation supports the {@code TensorAddressingNV} and {@code CooperativeMatrixTensorAddressingNV} SPIR-V capabilities. This allows using tensor layout and tensor view types for matrix loads and stores. */
+    /** @return the value of the {@code cooperativeMatrixTensorAddressing} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrixTensorAddressing() { return ncooperativeMatrixTensorAddressing(address()) != 0; }
-    /** indicates that the implementation supports the {@code CooperativeMatrixBlockLoadsNV} SPIR-V capability. This allows setting block size for loads and using a callback function to decode block elements. */
+    /** @return the value of the {@code cooperativeMatrixBlockLoads} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrixBlockLoads() { return ncooperativeMatrixBlockLoads(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV sType$Default() { return sType(NVCooperativeMatrix2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrixWorkgroupScope} field. */
+    /** Sets the specified value to the {@code cooperativeMatrixWorkgroupScope} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV cooperativeMatrixWorkgroupScope(@NativeType("VkBool32") boolean value) { ncooperativeMatrixWorkgroupScope(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrixFlexibleDimensions} field. */
+    /** Sets the specified value to the {@code cooperativeMatrixFlexibleDimensions} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV cooperativeMatrixFlexibleDimensions(@NativeType("VkBool32") boolean value) { ncooperativeMatrixFlexibleDimensions(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrixReductions} field. */
+    /** Sets the specified value to the {@code cooperativeMatrixReductions} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV cooperativeMatrixReductions(@NativeType("VkBool32") boolean value) { ncooperativeMatrixReductions(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrixConversions} field. */
+    /** Sets the specified value to the {@code cooperativeMatrixConversions} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV cooperativeMatrixConversions(@NativeType("VkBool32") boolean value) { ncooperativeMatrixConversions(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrixPerElementOperations} field. */
+    /** Sets the specified value to the {@code cooperativeMatrixPerElementOperations} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV cooperativeMatrixPerElementOperations(@NativeType("VkBool32") boolean value) { ncooperativeMatrixPerElementOperations(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrixTensorAddressing} field. */
+    /** Sets the specified value to the {@code cooperativeMatrixTensorAddressing} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV cooperativeMatrixTensorAddressing(@NativeType("VkBool32") boolean value) { ncooperativeMatrixTensorAddressing(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrixBlockLoads} field. */
+    /** Sets the specified value to the {@code cooperativeMatrixBlockLoads} field. */
     public VkPhysicalDeviceCooperativeMatrix2FeaturesNV cooperativeMatrixBlockLoads(@NativeType("VkBool32") boolean value) { ncooperativeMatrixBlockLoads(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -390,53 +376,53 @@ public class VkPhysicalDeviceCooperativeMatrix2FeaturesNV extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixWorkgroupScope} field. */
+        /** @return the value of the {@code cooperativeMatrixWorkgroupScope} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrixWorkgroupScope() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixWorkgroupScope(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixFlexibleDimensions} field. */
+        /** @return the value of the {@code cooperativeMatrixFlexibleDimensions} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrixFlexibleDimensions() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixFlexibleDimensions(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixReductions} field. */
+        /** @return the value of the {@code cooperativeMatrixReductions} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrixReductions() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixReductions(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixConversions} field. */
+        /** @return the value of the {@code cooperativeMatrixConversions} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrixConversions() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixConversions(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixPerElementOperations} field. */
+        /** @return the value of the {@code cooperativeMatrixPerElementOperations} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrixPerElementOperations() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixPerElementOperations(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixTensorAddressing} field. */
+        /** @return the value of the {@code cooperativeMatrixTensorAddressing} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrixTensorAddressing() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixTensorAddressing(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixBlockLoads} field. */
+        /** @return the value of the {@code cooperativeMatrixBlockLoads} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrixBlockLoads() { return VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixBlockLoads(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV} value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#sType} field. */
+        /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer sType$Default() { return sType(NVCooperativeMatrix2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixWorkgroupScope} field. */
+        /** Sets the specified value to the {@code cooperativeMatrixWorkgroupScope} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer cooperativeMatrixWorkgroupScope(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixWorkgroupScope(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixFlexibleDimensions} field. */
+        /** Sets the specified value to the {@code cooperativeMatrixFlexibleDimensions} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer cooperativeMatrixFlexibleDimensions(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixFlexibleDimensions(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixReductions} field. */
+        /** Sets the specified value to the {@code cooperativeMatrixReductions} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer cooperativeMatrixReductions(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixReductions(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixConversions} field. */
+        /** Sets the specified value to the {@code cooperativeMatrixConversions} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer cooperativeMatrixConversions(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixConversions(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixPerElementOperations} field. */
+        /** Sets the specified value to the {@code cooperativeMatrixPerElementOperations} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer cooperativeMatrixPerElementOperations(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixPerElementOperations(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixTensorAddressing} field. */
+        /** Sets the specified value to the {@code cooperativeMatrixTensorAddressing} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer cooperativeMatrixTensorAddressing(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixTensorAddressing(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV#cooperativeMatrixBlockLoads} field. */
+        /** Sets the specified value to the {@code cooperativeMatrixBlockLoads} field. */
         public VkPhysicalDeviceCooperativeMatrix2FeaturesNV.Buffer cooperativeMatrixBlockLoads(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrix2FeaturesNV.ncooperativeMatrixBlockLoads(address(), value ? 1 : 0); return this; }
 
     }

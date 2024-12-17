@@ -17,24 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Index initialization options.
- * 
- * <p>0 is the default value of each member of this struct except for {@code Size}.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXIndexOptions {
- *     unsigned {@link #Size};
- *     unsigned char {@link #ThreadBackgroundPriorityForIndexing};
- *     unsigned char {@link #ThreadBackgroundPriorityForEditing};
- *     unsigned {@link #ExcludeDeclarationsFromPCH} : 1;
- *     unsigned {@link #DisplayDiagnostics} : 1;
- *     unsigned {@link #StorePreamblesInMemory} : 1;
+ *     unsigned Size;
+ *     unsigned char ThreadBackgroundPriorityForIndexing;
+ *     unsigned char ThreadBackgroundPriorityForEditing;
+ *     unsigned ExcludeDeclarationsFromPCH : 1;
+ *     unsigned DisplayDiagnostics : 1;
+ *     unsigned StorePreamblesInMemory : 1;
  *     unsigned Reserved : 13;
- *     char const * {@link #PreambleStoragePath};
- *     char const * {@link #InvocationEmissionPath};
- * }</code></pre>
+ *     char const * PreambleStoragePath;
+ *     char const * InvocationEmissionPath;
+ * }}</pre>
  */
 public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeResource {
 
@@ -96,85 +90,54 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * The size of struct {@code CXIndexOptions} used for option versioning.
-     * 
-     * <p>Always initialize this member to {@code sizeof(CXIndexOptions)}, or assign {@code sizeof(CXIndexOptions)} to it right after creating a
-     * {@code CXIndexOptions} object.</p>
-     */
+    /** @return the value of the {@code Size} field. */
     @NativeType("unsigned")
     public int Size() { return nSize(address()); }
-    /** a {@code CXChoice} enumerator that specifies the indexing priority policy. One of:<br><table><tr><td>{@link ClangIndex#CXChoice_Default Choice_Default}</td><td>{@link ClangIndex#CXChoice_Enabled Choice_Enabled}</td><td>{@link ClangIndex#CXChoice_Disabled Choice_Disabled}</td></tr></table> */
+    /** @return the value of the {@code ThreadBackgroundPriorityForIndexing} field. */
     @NativeType("unsigned char")
     public byte ThreadBackgroundPriorityForIndexing() { return nThreadBackgroundPriorityForIndexing(address()); }
-    /** a {@code CXChoice} enumerator that specifies the editing priority policy. One of:<br><table><tr><td>{@link ClangIndex#CXChoice_Default Choice_Default}</td><td>{@link ClangIndex#CXChoice_Enabled Choice_Enabled}</td><td>{@link ClangIndex#CXChoice_Disabled Choice_Disabled}</td></tr></table> */
+    /** @return the value of the {@code ThreadBackgroundPriorityForEditing} field. */
     @NativeType("unsigned char")
     public byte ThreadBackgroundPriorityForEditing() { return nThreadBackgroundPriorityForEditing(address()); }
-    /** see {@link ClangIndex#clang_createIndex createIndex} */
+    /** @return the value of the {@code ExcludeDeclarationsFromPCH} field. */
     @NativeType("unsigned")
     public boolean ExcludeDeclarationsFromPCH() { return nExcludeDeclarationsFromPCH(address()) != 0; }
-    /** see {@link ClangIndex#clang_createIndex createIndex} */
+    /** @return the value of the {@code DisplayDiagnostics} field. */
     @NativeType("unsigned")
     public boolean DisplayDiagnostics() { return nDisplayDiagnostics(address()) != 0; }
-    /** see {@link ClangIndex#clang_createIndex createIndex} */
+    /** @return the value of the {@code StorePreamblesInMemory} field. */
     @NativeType("unsigned")
     public boolean StorePreamblesInMemory() { return nStorePreamblesInMemory(address()) != 0; }
-    /**
-     * the path to a directory, in which to store temporary PCH files.
-     * 
-     * <p>If null or empty, the default system temporary directory is used. These PCH files are deleted on clean exit but stay on disk if the program crashes or
-     * is killed.</p>
-     * 
-     * <p>This option is ignored if {@code StorePreamblesInMemory} is non-zero.</p>
-     * 
-     * <p>Libclang does not create the directory at the specified path in the file system. Therefore it must exist, or storing PCH files will fail.</p>
-     */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code PreambleStoragePath} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer PreambleStoragePath() { return nPreambleStoragePath(address()); }
-    /**
-     * the path to a directory, in which to store temporary PCH files.
-     * 
-     * <p>If null or empty, the default system temporary directory is used. These PCH files are deleted on clean exit but stay on disk if the program crashes or
-     * is killed.</p>
-     * 
-     * <p>This option is ignored if {@code StorePreamblesInMemory} is non-zero.</p>
-     * 
-     * <p>Libclang does not create the directory at the specified path in the file system. Therefore it must exist, or storing PCH files will fail.</p>
-     */
+    /** @return the null-terminated string pointed to by the {@code PreambleStoragePath} field. */
     @NativeType("char const *")
     public @Nullable String PreambleStoragePathString() { return nPreambleStoragePathString(address()); }
-    /**
-     * specifies a path which will contain log files for certain libclang invocations.
-     * 
-     * <p>A null value implies that libclang invocations are not logged.</p>
-     */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code InvocationEmissionPath} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer InvocationEmissionPath() { return nInvocationEmissionPath(address()); }
-    /**
-     * specifies a path which will contain log files for certain libclang invocations.
-     * 
-     * <p>A null value implies that libclang invocations are not logged.</p>
-     */
+    /** @return the null-terminated string pointed to by the {@code InvocationEmissionPath} field. */
     @NativeType("char const *")
     public @Nullable String InvocationEmissionPathString() { return nInvocationEmissionPathString(address()); }
 
-    /** Sets the specified value to the {@link #Size} field. */
+    /** Sets the specified value to the {@code Size} field. */
     public CXIndexOptions Size(@NativeType("unsigned") int value) { nSize(address(), value); return this; }
-    /** Sets the default value to the {@link #Size} field. */
+    /** Sets the default value to the {@code Size} field. */
     public CXIndexOptions Size$Default() { return Size(SIZEOF); }
-    /** Sets the specified value to the {@link #ThreadBackgroundPriorityForIndexing} field. */
+    /** Sets the specified value to the {@code ThreadBackgroundPriorityForIndexing} field. */
     public CXIndexOptions ThreadBackgroundPriorityForIndexing(@NativeType("unsigned char") byte value) { nThreadBackgroundPriorityForIndexing(address(), value); return this; }
-    /** Sets the specified value to the {@link #ThreadBackgroundPriorityForEditing} field. */
+    /** Sets the specified value to the {@code ThreadBackgroundPriorityForEditing} field. */
     public CXIndexOptions ThreadBackgroundPriorityForEditing(@NativeType("unsigned char") byte value) { nThreadBackgroundPriorityForEditing(address(), value); return this; }
-    /** Sets the specified value to the {@link #ExcludeDeclarationsFromPCH} field. */
+    /** Sets the specified value to the {@code ExcludeDeclarationsFromPCH} field. */
     public CXIndexOptions ExcludeDeclarationsFromPCH(@NativeType("unsigned") boolean value) { nExcludeDeclarationsFromPCH(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #DisplayDiagnostics} field. */
+    /** Sets the specified value to the {@code DisplayDiagnostics} field. */
     public CXIndexOptions DisplayDiagnostics(@NativeType("unsigned") boolean value) { nDisplayDiagnostics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #StorePreamblesInMemory} field. */
+    /** Sets the specified value to the {@code StorePreamblesInMemory} field. */
     public CXIndexOptions StorePreamblesInMemory(@NativeType("unsigned") boolean value) { nStorePreamblesInMemory(address(), value ? 1 : 0); return this; }
-    /** Sets the address of the specified encoded string to the {@link #PreambleStoragePath} field. */
+    /** Sets the address of the specified encoded string to the {@code PreambleStoragePath} field. */
     public CXIndexOptions PreambleStoragePath(@Nullable @NativeType("char const *") ByteBuffer value) { nPreambleStoragePath(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #InvocationEmissionPath} field. */
+    /** Sets the address of the specified encoded string to the {@code InvocationEmissionPath} field. */
     public CXIndexOptions InvocationEmissionPath(@Nullable @NativeType("char const *") ByteBuffer value) { nInvocationEmissionPath(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -414,54 +377,54 @@ public class CXIndexOptions extends Struct<CXIndexOptions> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CXIndexOptions#Size} field. */
+        /** @return the value of the {@code Size} field. */
         @NativeType("unsigned")
         public int Size() { return CXIndexOptions.nSize(address()); }
-        /** @return the value of the {@link CXIndexOptions#ThreadBackgroundPriorityForIndexing} field. */
+        /** @return the value of the {@code ThreadBackgroundPriorityForIndexing} field. */
         @NativeType("unsigned char")
         public byte ThreadBackgroundPriorityForIndexing() { return CXIndexOptions.nThreadBackgroundPriorityForIndexing(address()); }
-        /** @return the value of the {@link CXIndexOptions#ThreadBackgroundPriorityForEditing} field. */
+        /** @return the value of the {@code ThreadBackgroundPriorityForEditing} field. */
         @NativeType("unsigned char")
         public byte ThreadBackgroundPriorityForEditing() { return CXIndexOptions.nThreadBackgroundPriorityForEditing(address()); }
-        /** @return the value of the {@link CXIndexOptions#ExcludeDeclarationsFromPCH} field. */
+        /** @return the value of the {@code ExcludeDeclarationsFromPCH} field. */
         @NativeType("unsigned")
         public boolean ExcludeDeclarationsFromPCH() { return CXIndexOptions.nExcludeDeclarationsFromPCH(address()) != 0; }
-        /** @return the value of the {@link CXIndexOptions#DisplayDiagnostics} field. */
+        /** @return the value of the {@code DisplayDiagnostics} field. */
         @NativeType("unsigned")
         public boolean DisplayDiagnostics() { return CXIndexOptions.nDisplayDiagnostics(address()) != 0; }
-        /** @return the value of the {@link CXIndexOptions#StorePreamblesInMemory} field. */
+        /** @return the value of the {@code StorePreamblesInMemory} field. */
         @NativeType("unsigned")
         public boolean StorePreamblesInMemory() { return CXIndexOptions.nStorePreamblesInMemory(address()) != 0; }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link CXIndexOptions#PreambleStoragePath} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code PreambleStoragePath} field. */
         @NativeType("char const *")
         public @Nullable ByteBuffer PreambleStoragePath() { return CXIndexOptions.nPreambleStoragePath(address()); }
-        /** @return the null-terminated string pointed to by the {@link CXIndexOptions#PreambleStoragePath} field. */
+        /** @return the null-terminated string pointed to by the {@code PreambleStoragePath} field. */
         @NativeType("char const *")
         public @Nullable String PreambleStoragePathString() { return CXIndexOptions.nPreambleStoragePathString(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link CXIndexOptions#InvocationEmissionPath} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code InvocationEmissionPath} field. */
         @NativeType("char const *")
         public @Nullable ByteBuffer InvocationEmissionPath() { return CXIndexOptions.nInvocationEmissionPath(address()); }
-        /** @return the null-terminated string pointed to by the {@link CXIndexOptions#InvocationEmissionPath} field. */
+        /** @return the null-terminated string pointed to by the {@code InvocationEmissionPath} field. */
         @NativeType("char const *")
         public @Nullable String InvocationEmissionPathString() { return CXIndexOptions.nInvocationEmissionPathString(address()); }
 
-        /** Sets the specified value to the {@link CXIndexOptions#Size} field. */
+        /** Sets the specified value to the {@code Size} field. */
         public CXIndexOptions.Buffer Size(@NativeType("unsigned") int value) { CXIndexOptions.nSize(address(), value); return this; }
-        /** Sets the default value to the {@link CXIndexOptions#Size} field. */
+        /** Sets the default value to the {@code Size} field. */
         public CXIndexOptions.Buffer Size$Default() { return Size(SIZEOF); }
-        /** Sets the specified value to the {@link CXIndexOptions#ThreadBackgroundPriorityForIndexing} field. */
+        /** Sets the specified value to the {@code ThreadBackgroundPriorityForIndexing} field. */
         public CXIndexOptions.Buffer ThreadBackgroundPriorityForIndexing(@NativeType("unsigned char") byte value) { CXIndexOptions.nThreadBackgroundPriorityForIndexing(address(), value); return this; }
-        /** Sets the specified value to the {@link CXIndexOptions#ThreadBackgroundPriorityForEditing} field. */
+        /** Sets the specified value to the {@code ThreadBackgroundPriorityForEditing} field. */
         public CXIndexOptions.Buffer ThreadBackgroundPriorityForEditing(@NativeType("unsigned char") byte value) { CXIndexOptions.nThreadBackgroundPriorityForEditing(address(), value); return this; }
-        /** Sets the specified value to the {@link CXIndexOptions#ExcludeDeclarationsFromPCH} field. */
+        /** Sets the specified value to the {@code ExcludeDeclarationsFromPCH} field. */
         public CXIndexOptions.Buffer ExcludeDeclarationsFromPCH(@NativeType("unsigned") boolean value) { CXIndexOptions.nExcludeDeclarationsFromPCH(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link CXIndexOptions#DisplayDiagnostics} field. */
+        /** Sets the specified value to the {@code DisplayDiagnostics} field. */
         public CXIndexOptions.Buffer DisplayDiagnostics(@NativeType("unsigned") boolean value) { CXIndexOptions.nDisplayDiagnostics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link CXIndexOptions#StorePreamblesInMemory} field. */
+        /** Sets the specified value to the {@code StorePreamblesInMemory} field. */
         public CXIndexOptions.Buffer StorePreamblesInMemory(@NativeType("unsigned") boolean value) { CXIndexOptions.nStorePreamblesInMemory(address(), value ? 1 : 0); return this; }
-        /** Sets the address of the specified encoded string to the {@link CXIndexOptions#PreambleStoragePath} field. */
+        /** Sets the address of the specified encoded string to the {@code PreambleStoragePath} field. */
         public CXIndexOptions.Buffer PreambleStoragePath(@Nullable @NativeType("char const *") ByteBuffer value) { CXIndexOptions.nPreambleStoragePath(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link CXIndexOptions#InvocationEmissionPath} field. */
+        /** Sets the address of the specified encoded string to the {@code InvocationEmissionPath} field. */
         public CXIndexOptions.Buffer InvocationEmissionPath(@Nullable @NativeType("char const *") ByteBuffer value) { CXIndexOptions.nInvocationEmissionPath(address(), value); return this; }
 
     }

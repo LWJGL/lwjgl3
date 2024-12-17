@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     int index,
- *     float *value,
- *     char *valuestr
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_GETPARAM_FLOAT_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_DSP_GETPARAM_FLOAT_CALLBACK")
 public interface FMOD_DSP_GETPARAM_FLOAT_CALLBACKI extends CallbackI {
@@ -47,6 +37,7 @@ public interface FMOD_DSP_GETPARAM_FLOAT_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_DSP_GETPARAM_FLOAT_CALLBACK) (struct FMOD_DSP_STATE * dsp_state, int index, float * value, char * valuestr)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_DSP_STATE *") long dsp_state, int index, @NativeType("float *") long value, @NativeType("char *") long valuestr);
 
 }

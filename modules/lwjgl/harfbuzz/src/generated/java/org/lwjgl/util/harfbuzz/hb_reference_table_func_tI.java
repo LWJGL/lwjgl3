@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_blob_t * (*{@link #invoke}) (
- *     hb_face_t *face,
- *     hb_tag_t tag,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_reference_table_func_t} */
 @FunctionalInterface
 @NativeType("hb_reference_table_func_t")
 public interface hb_reference_table_func_tI extends CallbackI {
@@ -45,15 +36,7 @@ public interface hb_reference_table_func_tI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /**
-     * Callback function for {@link HarfBuzz#hb_face_create_for_tables face_create_for_tables}.
-     * 
-     * <p>Return value: (transfer full): A pointer to the tag table within face</p>
-     *
-     * @param face      an {@code hb_face_t} to reference table for
-     * @param tag       the tag of the table to reference
-     * @param user_data user data pointer passed by the caller
-     */
+    /** {@code hb_blob_t * (* hb_reference_table_func_t) (hb_face_t * face, hb_tag_t tag, void * user_data)} */
     @NativeType("hb_blob_t *") long invoke(@NativeType("hb_face_t *") long face, @NativeType("hb_tag_t") int tag, @NativeType("void *") long user_data);
 
 }

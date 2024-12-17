@@ -5,18 +5,8 @@
  */
 package org.lwjgl.opengl;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_texture_float.txt">ARB_texture_float</a> extension.
- * 
- * <p>This extension adds texture internal formats with 16- and 32-bit floating-point components. The 32-bit floating-point components are in the standard
- * IEEE float format. The 16-bit floating-point components have 1 sign bit, 5 exponent bits, and 10 mantissa bits. Floating-point components are clamped to
- * the limits of the range representable by their format.</p>
- * 
- * <p>Promoted to core in {@link GL30 OpenGL 3.0}.</p>
- */
 public final class ARBTextureFloat {
 
-    /** Accepted by the {@code value} parameter of GetTexLevelParameter. */
     public static final int
         GL_TEXTURE_RED_TYPE_ARB       = 0x8C10,
         GL_TEXTURE_GREEN_TYPE_ARB     = 0x8C11,
@@ -26,10 +16,8 @@ public final class ARBTextureFloat {
         GL_TEXTURE_INTENSITY_TYPE_ARB = 0x8C15,
         GL_TEXTURE_DEPTH_TYPE_ARB     = 0x8C16;
 
-    /** Returned by the {@code params} parameter of GetTexLevelParameter. */
     public static final int GL_UNSIGNED_NORMALIZED_ARB = 0x8C17;
 
-    /** Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D. */
     public static final int
         GL_RGBA32F_ARB            = 0x8814,
         GL_RGB32F_ARB             = 0x8815,

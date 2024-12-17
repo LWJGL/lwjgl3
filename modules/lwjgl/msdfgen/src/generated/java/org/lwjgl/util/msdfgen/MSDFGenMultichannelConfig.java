@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct msdf_multichannel_config {
  *     int overlap_support;
- *     int {@link #mode};
- *     int {@link #distance_check_mode};
+ *     int mode;
+ *     int distance_check_mode;
  *     double min_deviation_ratio;
  *     double min_improve_ratio;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct msdf_multichannel_config")
 public class MSDFGenMultichannelConfig extends Struct<MSDFGenMultichannelConfig> implements NativeResource {
@@ -87,9 +85,9 @@ public class MSDFGenMultichannelConfig extends Struct<MSDFGenMultichannelConfig>
 
     /** @return the value of the {@code overlap_support} field. */
     public int overlap_support() { return noverlap_support(address()); }
-    /** one of:<br><table><tr><td>{@link MSDFGen#MSDF_ERROR_CORRECTION_MODE_DISABLED ERROR_CORRECTION_MODE_DISABLED}</td><td>{@link MSDFGen#MSDF_ERROR_CORRECTION_MODE_INDISCRIMINATE ERROR_CORRECTION_MODE_INDISCRIMINATE}</td></tr><tr><td>{@link MSDFGen#MSDF_ERROR_CORRECTION_MODE_EDGE_PRIORITY ERROR_CORRECTION_MODE_EDGE_PRIORITY}</td><td>{@link MSDFGen#MSDF_ERROR_CORRECTION_MODE_EDGE_ONLY ERROR_CORRECTION_MODE_EDGE_ONLY}</td></tr></table> */
+    /** @return the value of the {@code mode} field. */
     public int mode() { return nmode(address()); }
-    /** one of:<br><table><tr><td>{@link MSDFGen#MSDF_DISTANCE_CHECK_MODE_NONE DISTANCE_CHECK_MODE_NONE}</td><td>{@link MSDFGen#MSDF_DISTANCE_CHECK_MODE_AT_EDGE DISTANCE_CHECK_MODE_AT_EDGE}</td><td>{@link MSDFGen#MSDF_DISTANCE_CHECK_MODE_ALWAYS DISTANCE_CHECK_MODE_ALWAYS}</td></tr></table> */
+    /** @return the value of the {@code distance_check_mode} field. */
     public int distance_check_mode() { return ndistance_check_mode(address()); }
     /** @return the value of the {@code min_deviation_ratio} field. */
     public double min_deviation_ratio() { return nmin_deviation_ratio(address()); }
@@ -98,9 +96,9 @@ public class MSDFGenMultichannelConfig extends Struct<MSDFGenMultichannelConfig>
 
     /** Sets the specified value to the {@code overlap_support} field. */
     public MSDFGenMultichannelConfig overlap_support(int value) { noverlap_support(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public MSDFGenMultichannelConfig mode(int value) { nmode(address(), value); return this; }
-    /** Sets the specified value to the {@link #distance_check_mode} field. */
+    /** Sets the specified value to the {@code distance_check_mode} field. */
     public MSDFGenMultichannelConfig distance_check_mode(int value) { ndistance_check_mode(address(), value); return this; }
     /** Sets the specified value to the {@code min_deviation_ratio} field. */
     public MSDFGenMultichannelConfig min_deviation_ratio(double value) { nmin_deviation_ratio(address(), value); return this; }
@@ -314,9 +312,9 @@ public class MSDFGenMultichannelConfig extends Struct<MSDFGenMultichannelConfig>
 
         /** @return the value of the {@code overlap_support} field. */
         public int overlap_support() { return MSDFGenMultichannelConfig.noverlap_support(address()); }
-        /** @return the value of the {@link MSDFGenMultichannelConfig#mode} field. */
+        /** @return the value of the {@code mode} field. */
         public int mode() { return MSDFGenMultichannelConfig.nmode(address()); }
-        /** @return the value of the {@link MSDFGenMultichannelConfig#distance_check_mode} field. */
+        /** @return the value of the {@code distance_check_mode} field. */
         public int distance_check_mode() { return MSDFGenMultichannelConfig.ndistance_check_mode(address()); }
         /** @return the value of the {@code min_deviation_ratio} field. */
         public double min_deviation_ratio() { return MSDFGenMultichannelConfig.nmin_deviation_ratio(address()); }
@@ -325,9 +323,9 @@ public class MSDFGenMultichannelConfig extends Struct<MSDFGenMultichannelConfig>
 
         /** Sets the specified value to the {@code overlap_support} field. */
         public MSDFGenMultichannelConfig.Buffer overlap_support(int value) { MSDFGenMultichannelConfig.noverlap_support(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenMultichannelConfig#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public MSDFGenMultichannelConfig.Buffer mode(int value) { MSDFGenMultichannelConfig.nmode(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenMultichannelConfig#distance_check_mode} field. */
+        /** Sets the specified value to the {@code distance_check_mode} field. */
         public MSDFGenMultichannelConfig.Buffer distance_check_mode(int value) { MSDFGenMultichannelConfig.ndistance_check_mode(address(), value); return this; }
         /** Sets the specified value to the {@code min_deviation_ratio} field. */
         public MSDFGenMultichannelConfig.Buffer min_deviation_ratio(double value) { MSDFGenMultichannelConfig.nmin_deviation_ratio(address(), value); return this; }

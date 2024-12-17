@@ -16,17 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Cumulative stats for current application.  These are not cleared until a new app connects, but they do stop accumulating once the associated app
- * disconnects.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct Compositor_CumulativeStats {
- *     uint32_t {@link #m_nPid};
- *     uint32_t {@link #m_nNumFramePresents};
- *     uint32_t {@link #m_nNumDroppedFrames};
- *     uint32_t {@link #m_nNumReprojectedFrames};
+ *     uint32_t m_nPid;
+ *     uint32_t m_nNumFramePresents;
+ *     uint32_t m_nNumDroppedFrames;
+ *     uint32_t m_nNumReprojectedFrames;
  *     uint32_t m_nNumFramePresentsOnStartup;
  *     uint32_t m_nNumDroppedFramesOnStartup;
  *     uint32_t m_nNumReprojectedFramesOnStartup;
@@ -39,13 +34,13 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t m_nNumDroppedFramesTimedOut;
  *     uint32_t m_nNumReprojectedFramesTimedOut;
  *     uint32_t m_nNumFrameSubmits;
- *     vrshared_double {@link #m_flSumCompositorCPUTimeMS};
- *     vrshared_double {@link #m_flSumCompositorGPUTimeMS};
- *     vrshared_double {@link #m_flSumTargetFrameTimes};
- *     vrshared_double {@link #m_flSumApplicationCPUTimeMS};
- *     vrshared_double {@link #m_flSumApplicationGPUTimeMS};
- *     uint32_t {@link #m_nNumFramesWithDepth};
- * }</code></pre>
+ *     vrshared_double m_flSumCompositorCPUTimeMS;
+ *     vrshared_double m_flSumCompositorGPUTimeMS;
+ *     vrshared_double m_flSumTargetFrameTimes;
+ *     vrshared_double m_flSumApplicationCPUTimeMS;
+ *     vrshared_double m_flSumApplicationGPUTimeMS;
+ *     uint32_t m_nNumFramesWithDepth;
+ * }}</pre>
  */
 @NativeType("struct Compositor_CumulativeStats")
 public class CompositorCumulativeStats extends Struct<CompositorCumulativeStats> implements NativeResource {
@@ -156,16 +151,16 @@ public class CompositorCumulativeStats extends Struct<CompositorCumulativeStats>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Process id associated with these stats (may no longer be running). */
+    /** @return the value of the {@code m_nPid} field. */
     @NativeType("uint32_t")
     public int m_nPid() { return nm_nPid(address()); }
-    /** total number of times we called present (includes reprojected frames) */
+    /** @return the value of the {@code m_nNumFramePresents} field. */
     @NativeType("uint32_t")
     public int m_nNumFramePresents() { return nm_nNumFramePresents(address()); }
-    /** total number of times an old frame was re-scanned out (without reprojection) */
+    /** @return the value of the {@code m_nNumDroppedFrames} field. */
     @NativeType("uint32_t")
     public int m_nNumDroppedFrames() { return nm_nNumDroppedFrames(address()); }
-    /** total number of times a frame was scanned out a second time (with reprojection) */
+    /** @return the value of the {@code m_nNumReprojectedFrames} field. */
     @NativeType("uint32_t")
     public int m_nNumReprojectedFrames() { return nm_nNumReprojectedFrames(address()); }
     /** @return the value of the {@code m_nNumFramePresentsOnStartup} field. */
@@ -204,22 +199,22 @@ public class CompositorCumulativeStats extends Struct<CompositorCumulativeStats>
     /** @return the value of the {@code m_nNumFrameSubmits} field. */
     @NativeType("uint32_t")
     public int m_nNumFrameSubmits() { return nm_nNumFrameSubmits(address()); }
-    /** divide by {@code m_nNumFrameSubmits} */
+    /** @return the value of the {@code m_flSumCompositorCPUTimeMS} field. */
     @NativeType("vrshared_double")
     public double m_flSumCompositorCPUTimeMS() { return nm_flSumCompositorCPUTimeMS(address()); }
-    /** divide by {@code m_nNumFrameSubmits} */
+    /** @return the value of the {@code m_flSumCompositorGPUTimeMS} field. */
     @NativeType("vrshared_double")
     public double m_flSumCompositorGPUTimeMS() { return nm_flSumCompositorGPUTimeMS(address()); }
-    /** divide by {@code m_nNumFrameSubmits} */
+    /** @return the value of the {@code m_flSumTargetFrameTimes} field. */
     @NativeType("vrshared_double")
     public double m_flSumTargetFrameTimes() { return nm_flSumTargetFrameTimes(address()); }
-    /** divide by {@code m_nNumFrameSubmits} */
+    /** @return the value of the {@code m_flSumApplicationCPUTimeMS} field. */
     @NativeType("vrshared_double")
     public double m_flSumApplicationCPUTimeMS() { return nm_flSumApplicationCPUTimeMS(address()); }
-    /** divide by {@code m_nNumFrameSubmits} */
+    /** @return the value of the {@code m_flSumApplicationGPUTimeMS} field. */
     @NativeType("vrshared_double")
     public double m_flSumApplicationGPUTimeMS() { return nm_flSumApplicationGPUTimeMS(address()); }
-    /** total frames submitted with depth by the current application */
+    /** @return the value of the {@code m_nNumFramesWithDepth} field. */
     @NativeType("uint32_t")
     public int m_nNumFramesWithDepth() { return nm_nNumFramesWithDepth(address()); }
 
@@ -441,16 +436,16 @@ public class CompositorCumulativeStats extends Struct<CompositorCumulativeStats>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CompositorCumulativeStats#m_nPid} field. */
+        /** @return the value of the {@code m_nPid} field. */
         @NativeType("uint32_t")
         public int m_nPid() { return CompositorCumulativeStats.nm_nPid(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_nNumFramePresents} field. */
+        /** @return the value of the {@code m_nNumFramePresents} field. */
         @NativeType("uint32_t")
         public int m_nNumFramePresents() { return CompositorCumulativeStats.nm_nNumFramePresents(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_nNumDroppedFrames} field. */
+        /** @return the value of the {@code m_nNumDroppedFrames} field. */
         @NativeType("uint32_t")
         public int m_nNumDroppedFrames() { return CompositorCumulativeStats.nm_nNumDroppedFrames(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_nNumReprojectedFrames} field. */
+        /** @return the value of the {@code m_nNumReprojectedFrames} field. */
         @NativeType("uint32_t")
         public int m_nNumReprojectedFrames() { return CompositorCumulativeStats.nm_nNumReprojectedFrames(address()); }
         /** @return the value of the {@code m_nNumFramePresentsOnStartup} field. */
@@ -489,22 +484,22 @@ public class CompositorCumulativeStats extends Struct<CompositorCumulativeStats>
         /** @return the value of the {@code m_nNumFrameSubmits} field. */
         @NativeType("uint32_t")
         public int m_nNumFrameSubmits() { return CompositorCumulativeStats.nm_nNumFrameSubmits(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_flSumCompositorCPUTimeMS} field. */
+        /** @return the value of the {@code m_flSumCompositorCPUTimeMS} field. */
         @NativeType("vrshared_double")
         public double m_flSumCompositorCPUTimeMS() { return CompositorCumulativeStats.nm_flSumCompositorCPUTimeMS(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_flSumCompositorGPUTimeMS} field. */
+        /** @return the value of the {@code m_flSumCompositorGPUTimeMS} field. */
         @NativeType("vrshared_double")
         public double m_flSumCompositorGPUTimeMS() { return CompositorCumulativeStats.nm_flSumCompositorGPUTimeMS(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_flSumTargetFrameTimes} field. */
+        /** @return the value of the {@code m_flSumTargetFrameTimes} field. */
         @NativeType("vrshared_double")
         public double m_flSumTargetFrameTimes() { return CompositorCumulativeStats.nm_flSumTargetFrameTimes(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_flSumApplicationCPUTimeMS} field. */
+        /** @return the value of the {@code m_flSumApplicationCPUTimeMS} field. */
         @NativeType("vrshared_double")
         public double m_flSumApplicationCPUTimeMS() { return CompositorCumulativeStats.nm_flSumApplicationCPUTimeMS(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_flSumApplicationGPUTimeMS} field. */
+        /** @return the value of the {@code m_flSumApplicationGPUTimeMS} field. */
         @NativeType("vrshared_double")
         public double m_flSumApplicationGPUTimeMS() { return CompositorCumulativeStats.nm_flSumApplicationGPUTimeMS(address()); }
-        /** @return the value of the {@link CompositorCumulativeStats#m_nNumFramesWithDepth} field. */
+        /** @return the value of the {@code m_nNumFramesWithDepth} field. */
         @NativeType("uint32_t")
         public int m_nNumFramesWithDepth() { return CompositorCumulativeStats.nm_nNumFramesWithDepth(address()); }
 

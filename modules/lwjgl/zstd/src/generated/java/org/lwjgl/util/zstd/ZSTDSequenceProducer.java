@@ -11,22 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     void *sequenceProducerState,
- *     ZSTD_Sequence *outSeqs,
- *     size_t outSeqsCapacity,
- *     void const *src,
- *     size_t srcSize,
- *     void const *dict,
- *     size_t dictSize,
- *     int compressionLevel,
- *     size_t windowSize
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ZSTD_sequenceProducer_F} */
 public abstract class ZSTDSequenceProducer extends Callback implements ZSTDSequenceProducerI {
 
     /**

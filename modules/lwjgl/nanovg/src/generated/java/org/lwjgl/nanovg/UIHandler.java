@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link OUI#uiSetHandler SetHandler} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     int item,
- *     UIevent event
- * )</code></pre>
- */
+/** Callback function: {@link #invoke UIhandler} */
 public abstract class UIHandler extends Callback implements UIHandlerI {
 
     /**

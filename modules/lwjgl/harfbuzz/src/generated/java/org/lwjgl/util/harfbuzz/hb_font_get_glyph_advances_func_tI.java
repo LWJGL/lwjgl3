@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_font_t *font,
- *     void *font_data,
- *     unsigned int count,
- *     hb_codepoint_t const *first_glyph,
- *     unsigned int glyph_stride,
- *     hb_position_t *first_advance,
- *     unsigned int advance_stride,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_font_get_glyph_advances_func_t} */
 @FunctionalInterface
 @NativeType("hb_font_get_glyph_advances_func_t")
 public interface hb_font_get_glyph_advances_func_tI extends CallbackI {
@@ -54,20 +40,7 @@ public interface hb_font_get_glyph_advances_func_tI extends CallbackI {
         );
     }
 
-    /**
-     * A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.
-     * 
-     * <p>This method should retrieve the advances for a sequence of glyphs.</p>
-     *
-     * @param font           {@code hb_font_t} to work upon
-     * @param font_data      {@code font} user data pointer
-     * @param count          the number of glyph IDs in the sequence queried
-     * @param first_glyph    the first glyph ID to query
-     * @param glyph_stride   the stride between successive glyph IDs
-     * @param first_advance  the first advance retrieved
-     * @param advance_stride the stride between successive advances
-     * @param user_data      user data pointer passed by the caller
-     */
+    /** {@code void (* hb_font_get_glyph_advances_func_t) (hb_font_t * font, void * font_data, unsigned int count, hb_codepoint_t const * first_glyph, unsigned int glyph_stride, hb_position_t * first_advance, unsigned int advance_stride, void * user_data)} */
     void invoke(@NativeType("hb_font_t *") long font, @NativeType("void *") long font_data, @NativeType("unsigned int") int count, @NativeType("hb_codepoint_t const *") long first_glyph, @NativeType("unsigned int") int glyph_stride, @NativeType("hb_position_t *") long first_advance, @NativeType("unsigned int") int advance_stride, @NativeType("void *") long user_data);
 
 }

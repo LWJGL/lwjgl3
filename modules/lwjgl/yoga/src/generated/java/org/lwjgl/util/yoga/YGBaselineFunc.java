@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     YGNodeConstRef node,
- *     float width,
- *     float height
- * )</code></pre>
- */
+/** Callback function: {@link #invoke YGBaselineFunc} */
 public abstract class YGBaselineFunc extends Callback implements YGBaselineFuncI {
 
     /**

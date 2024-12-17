@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct f_owner_ex {
  *     int type;
  *     pid_t pid;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct f_owner_ex")
 public class FOwnerEx extends Struct<FOwnerEx> implements NativeResource {

@@ -16,33 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the list of DRM format modifiers supported for a format.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code pDrmFormatModifierProperties} is {@code NULL}, then the function returns in {@code drmFormatModifierCount} the number of modifiers compatible with the queried {@code format}. Otherwise, the application <b>must</b> set {@code drmFormatModifierCount} to the length of the array {@code pDrmFormatModifierProperties}; the function will write at most {@code drmFormatModifierCount} elements to the array, and will return in {@code drmFormatModifierCount} the number of elements written.</p>
- * 
- * <p>Among the elements in array {@code pDrmFormatModifierProperties}, each returned {@code drmFormatModifier} <b>must</b> be unique.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDrmFormatModifierPropertiesEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDrmFormatModifierPropertiesListEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #drmFormatModifierCount};
- *     {@link VkDrmFormatModifierPropertiesEXT VkDrmFormatModifierPropertiesEXT} * {@link #pDrmFormatModifierProperties};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t drmFormatModifierCount;
+ *     {@link VkDrmFormatModifierPropertiesEXT VkDrmFormatModifierPropertiesEXT} * pDrmFormatModifierProperties;
+ * }}</pre>
  */
 public class VkDrmFormatModifierPropertiesListEXT extends Struct<VkDrmFormatModifierPropertiesListEXT> implements NativeResource {
 
@@ -98,24 +78,24 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct<VkDrmFormatModi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an inout parameter related to the number of modifiers compatible with the {@code format}, as described below. */
+    /** @return the value of the {@code drmFormatModifierCount} field. */
     @NativeType("uint32_t")
     public int drmFormatModifierCount() { return ndrmFormatModifierCount(address()); }
-    /** either {@code NULL} or a pointer to an array of {@link VkDrmFormatModifierPropertiesEXT} structures. */
+    /** @return a {@link VkDrmFormatModifierPropertiesEXT.Buffer} view of the struct array pointed to by the {@code pDrmFormatModifierProperties} field. */
     @NativeType("VkDrmFormatModifierPropertiesEXT *")
     public VkDrmFormatModifierPropertiesEXT.@Nullable Buffer pDrmFormatModifierProperties() { return npDrmFormatModifierProperties(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDrmFormatModifierPropertiesListEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT} value to the {@code sType} field. */
     public VkDrmFormatModifierPropertiesListEXT sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDrmFormatModifierPropertiesListEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,24 +308,24 @@ public class VkDrmFormatModifierPropertiesListEXT extends Struct<VkDrmFormatModi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDrmFormatModifierPropertiesListEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDrmFormatModifierPropertiesListEXT.nsType(address()); }
-        /** @return the value of the {@link VkDrmFormatModifierPropertiesListEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDrmFormatModifierPropertiesListEXT.npNext(address()); }
-        /** @return the value of the {@link VkDrmFormatModifierPropertiesListEXT#drmFormatModifierCount} field. */
+        /** @return the value of the {@code drmFormatModifierCount} field. */
         @NativeType("uint32_t")
         public int drmFormatModifierCount() { return VkDrmFormatModifierPropertiesListEXT.ndrmFormatModifierCount(address()); }
-        /** @return a {@link VkDrmFormatModifierPropertiesEXT.Buffer} view of the struct array pointed to by the {@link VkDrmFormatModifierPropertiesListEXT#pDrmFormatModifierProperties} field. */
+        /** @return a {@link VkDrmFormatModifierPropertiesEXT.Buffer} view of the struct array pointed to by the {@code pDrmFormatModifierProperties} field. */
         @NativeType("VkDrmFormatModifierPropertiesEXT *")
         public VkDrmFormatModifierPropertiesEXT.@Nullable Buffer pDrmFormatModifierProperties() { return VkDrmFormatModifierPropertiesListEXT.npDrmFormatModifierProperties(address()); }
 
-        /** Sets the specified value to the {@link VkDrmFormatModifierPropertiesListEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDrmFormatModifierPropertiesListEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDrmFormatModifierPropertiesListEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT} value to the {@link VkDrmFormatModifierPropertiesListEXT#sType} field. */
+        /** Sets the {@link EXTImageDrmFormatModifier#VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT} value to the {@code sType} field. */
         public VkDrmFormatModifierPropertiesListEXT.Buffer sType$Default() { return sType(EXTImageDrmFormatModifier.VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT); }
-        /** Sets the specified value to the {@link VkDrmFormatModifierPropertiesListEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDrmFormatModifierPropertiesListEXT.Buffer pNext(@NativeType("void *") long value) { VkDrmFormatModifierPropertiesListEXT.npNext(address(), value); return this; }
 
     }

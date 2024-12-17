@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stb_vorbis_comment {
  *     char * vendor;
  *     int comment_list_length;
  *     char ** comment_list;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stb_vorbis_comment")
 public class STBVorbisComment extends Struct<STBVorbisComment> implements NativeResource {

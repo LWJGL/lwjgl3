@@ -15,11 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a TrueType {@code OS/2} table.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TT_OS2 {
  *     FT_UShort version;
  *     FT_Short xAvgCharWidth;
@@ -60,7 +56,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_UShort usMaxContext;
  *     FT_UShort usLowerOpticalPointSize;
  *     FT_UShort usUpperOpticalPointSize;
- * }</code></pre>
+ * }}</pre>
  */
 public class TT_OS2 extends Struct<TT_OS2> {
 

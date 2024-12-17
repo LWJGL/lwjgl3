@@ -5,20 +5,10 @@
  */
 package org.lwjgl.opengles;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/APPLE/APPLE_clip_distance.txt">APPLE_clip_distance</a> extension.
- * 
- * <p>This extension adds support for hardware clip planes to OpenGL ES 2.0 and 3.0. These were present in OpenGL ES 1.1, but were removed to better match
- * certain hardware. Since they're useful for certain applications, notable CAD, we return them here.</p>
- * 
- * <p>Requires {@link GLES20 GLES 2.0}.</p>
- */
 public final class APPLEClipDistance {
 
-    /** ccepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, and GetFloatv. */
     public static final int GL_MAX_CLIP_DISTANCES_APPLE = 0xD32;
 
-    /** Accepted by the {@code pname} parameters of Enable, Disable and IsEnabled. */
     public static final int
         GL_CLIP_DISTANCE0_APPLE = 0x3000,
         GL_CLIP_DISTANCE1_APPLE = 0x3001,

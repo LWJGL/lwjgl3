@@ -10,7 +10,6 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** Native bindings to GLX 1.2. */
 public class GLX12 extends GLX11 {
 
     protected GLX12() {
@@ -19,7 +18,7 @@ public class GLX12 extends GLX11 {
 
     // --- [ glXGetCurrentDisplay ] ---
 
-    /** Returns the display associated with the current context and drawable. */
+    /** {@code Display * glXGetCurrentDisplay(void)} */
     @NativeType("Display *")
     public static long glXGetCurrentDisplay() {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetCurrentDisplay;

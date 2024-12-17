@@ -12,28 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Application-defined memory free notification function.
- * 
- * <h5>C Specification</h5>
- * 
- * <p>The type of {@code pfnInternalFree} is:</p>
- * 
- * <pre><code>
- * typedef void (VKAPI_PTR *PFN_vkInternalFreeNotification)(
- *     void*                                       pUserData,
- *     size_t                                      size,
- *     VkInternalAllocationType                    allocationType,
- *     VkSystemAllocationScope                     allocationScope);</code></pre>
- * 
- * <h5>Description</h5>
- * 
- * <p>This is a purely informational callback.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAllocationCallbacks}</p>
- */
+/** Callback function: {@link #invoke PFN_vkInternalFreeNotification} */
 @FunctionalInterface
 @NativeType("PFN_vkInternalFreeNotification")
 public interface VkInternalFreeNotificationI extends CallbackI {
@@ -57,14 +36,7 @@ public interface VkInternalFreeNotificationI extends CallbackI {
         );
     }
 
-    /**
-     * Application-defined memory free notification function.
-     *
-     * @param pUserData       the value specified for {@link VkAllocationCallbacks}{@code ::pUserData} in the allocator specified by the application.
-     * @param size            the requested size of an allocation.
-     * @param allocationType  a {@code VkInternalAllocationType} value specifying the requested type of an allocation.
-     * @param allocationScope a {@code VkSystemAllocationScope} value specifying the allocation scope of the lifetime of the allocation, as described <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-host-allocation-scope">here</a>.
-     */
+    /** {@code void (* PFN_vkInternalFreeNotification) (void * pUserData, size_t size, VkInternalAllocationType allocationType, VkSystemAllocationScope allocationScope)} */
     void invoke(@NativeType("void *") long pUserData, @NativeType("size_t") long size, @NativeType("VkInternalAllocationType") int allocationType, @NativeType("VkSystemAllocationScope") int allocationScope);
 
 }

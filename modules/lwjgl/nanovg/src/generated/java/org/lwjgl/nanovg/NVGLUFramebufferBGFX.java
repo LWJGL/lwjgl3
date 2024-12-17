@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A framebuffer object.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct NVGLUframebuffer {
  *     NVGcontext * ctx;
  *     bgfx_frame_buffer_handle_t handle;
  *     int image;
  *     bgfx_view_id_t viewId;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct NVGLUframebuffer")
 public class NVGLUFramebufferBGFX extends Struct<NVGLUFramebufferBGFX> {

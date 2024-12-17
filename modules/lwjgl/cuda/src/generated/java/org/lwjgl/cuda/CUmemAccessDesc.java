@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUmemAccessDesc {
  *     {@link CUmemLocation CUmemLocation} location;
  *     CUmemAccess_flags flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUmemAccessDesc extends Struct<CUmemAccessDesc> implements NativeResource {
 

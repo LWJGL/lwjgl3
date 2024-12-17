@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to {@link OpusFileCallbacks}.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *_stream
- * )</code></pre>
- */
+/** Callback function: {@link #invoke op_close_func} */
 @FunctionalInterface
 @NativeType("op_close_func")
 public interface OPCloseFuncI extends CallbackI {
@@ -43,11 +34,7 @@ public interface OPCloseFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Closes the underlying stream.
-     *
-     * @return {@code 0:} Success. {@code EOF}: An error occurred. {@code errno} need not be set.}
-     */
+    /** {@code int (* op_close_func) (void * _stream)} */
     int invoke(@NativeType("void *") long _stream);
 
 }

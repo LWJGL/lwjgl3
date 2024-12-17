@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetJoystickCallback SetJoystickCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     int jid,
- *     int event
- * )</code></pre>
- *
- * @since version 3.2
- */
+/** Callback function: {@link #invoke GLFWjoystickfun} */
 @FunctionalInterface
 @NativeType("GLFWjoystickfun")
 public interface GLFWJoystickCallbackI extends CallbackI {
@@ -46,12 +34,7 @@ public interface GLFWJoystickCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when a joystick is connected to or disconnected from the system.
-     *
-     * @param jid   the joystick that was connected or disconnected
-     * @param event one of {@link GLFW#GLFW_CONNECTED CONNECTED} or {@link GLFW#GLFW_DISCONNECTED DISCONNECTED}. Remaining values reserved for future use.
-     */
+    /** {@code void (* GLFWjoystickfun) (int jid, int event)} */
     void invoke(int jid, int event);
 
 }

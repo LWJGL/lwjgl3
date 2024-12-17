@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing cooperative matrix features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCooperativeMatrixFeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #cooperativeMatrix};
- *     VkBool32 {@link #cooperativeMatrixRobustBufferAccess};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 cooperativeMatrix;
+ *     VkBool32 cooperativeMatrixRobustBufferAccess;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCooperativeMatrixFeaturesNV extends Struct<VkPhysicalDeviceCooperativeMatrixFeaturesNV> implements NativeResource {
 
@@ -92,28 +78,28 @@ public class VkPhysicalDeviceCooperativeMatrixFeaturesNV extends Struct<VkPhysic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports the {@code CooperativeMatrixNV} SPIR-V capability. */
+    /** @return the value of the {@code cooperativeMatrix} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrix() { return ncooperativeMatrix(address()) != 0; }
-    /** indicates that the implementation supports robust buffer access for SPIR-V {@code OpCooperativeMatrixLoadNV} and {@code OpCooperativeMatrixStoreNV} instructions. */
+    /** @return the value of the {@code cooperativeMatrixRobustBufferAccess} field. */
     @NativeType("VkBool32")
     public boolean cooperativeMatrixRobustBufferAccess() { return ncooperativeMatrixRobustBufferAccess(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceCooperativeMatrixFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceCooperativeMatrixFeaturesNV sType$Default() { return sType(NVCooperativeMatrix.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCooperativeMatrixFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrix} field. */
+    /** Sets the specified value to the {@code cooperativeMatrix} field. */
     public VkPhysicalDeviceCooperativeMatrixFeaturesNV cooperativeMatrix(@NativeType("VkBool32") boolean value) { ncooperativeMatrix(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #cooperativeMatrixRobustBufferAccess} field. */
+    /** Sets the specified value to the {@code cooperativeMatrixRobustBufferAccess} field. */
     public VkPhysicalDeviceCooperativeMatrixFeaturesNV cooperativeMatrixRobustBufferAccess(@NativeType("VkBool32") boolean value) { ncooperativeMatrixRobustBufferAccess(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,28 +320,28 @@ public class VkPhysicalDeviceCooperativeMatrixFeaturesNV extends Struct<VkPhysic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCooperativeMatrixFeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCooperativeMatrixFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#cooperativeMatrix} field. */
+        /** @return the value of the {@code cooperativeMatrix} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrix() { return VkPhysicalDeviceCooperativeMatrixFeaturesNV.ncooperativeMatrix(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#cooperativeMatrixRobustBufferAccess} field. */
+        /** @return the value of the {@code cooperativeMatrixRobustBufferAccess} field. */
         @NativeType("VkBool32")
         public boolean cooperativeMatrixRobustBufferAccess() { return VkPhysicalDeviceCooperativeMatrixFeaturesNV.ncooperativeMatrixRobustBufferAccess(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceCooperativeMatrixFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCooperativeMatrixFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV} value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#sType} field. */
+        /** Sets the {@link NVCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceCooperativeMatrixFeaturesNV.Buffer sType$Default() { return sType(NVCooperativeMatrix.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCooperativeMatrixFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCooperativeMatrixFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#cooperativeMatrix} field. */
+        /** Sets the specified value to the {@code cooperativeMatrix} field. */
         public VkPhysicalDeviceCooperativeMatrixFeaturesNV.Buffer cooperativeMatrix(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrixFeaturesNV.ncooperativeMatrix(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV#cooperativeMatrixRobustBufferAccess} field. */
+        /** Sets the specified value to the {@code cooperativeMatrixRobustBufferAccess} field. */
         public VkPhysicalDeviceCooperativeMatrixFeaturesNV.Buffer cooperativeMatrixRobustBufferAccess(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCooperativeMatrixFeaturesNV.ncooperativeMatrixRobustBufferAccess(address(), value ? 1 : 0); return this; }
 
     }

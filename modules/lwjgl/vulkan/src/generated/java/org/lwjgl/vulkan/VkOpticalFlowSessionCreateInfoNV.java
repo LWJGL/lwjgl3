@@ -16,61 +16,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created optical flow session.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code width} <b>must</b> be greater than or equal to {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::minWidth} and less than or equal to {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::maxWidth}</li>
- * <li>{@code height} <b>must</b> be greater than or equal to {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::minHeight} and less than or equal to {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::maxHeight}</li>
- * <li>{@code imageFormat} <b>must</b> be one of the formats returned by {@link NVOpticalFlow#vkGetPhysicalDeviceOpticalFlowImageFormatsNV GetPhysicalDeviceOpticalFlowImageFormatsNV} for {@link NVOpticalFlow#VK_OPTICAL_FLOW_USAGE_INPUT_BIT_NV OPTICAL_FLOW_USAGE_INPUT_BIT_NV}</li>
- * <li>{@code flowVectorFormat} <b>must</b> be one of the formats returned by {@link NVOpticalFlow#vkGetPhysicalDeviceOpticalFlowImageFormatsNV GetPhysicalDeviceOpticalFlowImageFormatsNV} for {@link NVOpticalFlow#VK_OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV}</li>
- * <li>{@code costFormat} <b>must</b> be one of the formats returned by {@link NVOpticalFlow#vkGetPhysicalDeviceOpticalFlowImageFormatsNV GetPhysicalDeviceOpticalFlowImageFormatsNV} for {@link NVOpticalFlow#VK_OPTICAL_FLOW_USAGE_COST_BIT_NV OPTICAL_FLOW_USAGE_COST_BIT_NV} if {@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_ENABLE_COST_BIT_NV OPTICAL_FLOW_SESSION_CREATE_ENABLE_COST_BIT_NV} is set in {@code flags}</li>
- * <li>{@code outputGridSize} <b>must</b> be exactly one of the bits reported in {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::supportedOutputGridSizes}</li>
- * <li>{@code hintGridSize} <b>must</b> be exactly one of the bits reported in {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::supportedHintGridSizes} if {@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_ENABLE_HINT_BIT_NV OPTICAL_FLOW_SESSION_CREATE_ENABLE_HINT_BIT_NV} is set in {@code flags}</li>
- * <li>{@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_ENABLE_HINT_BIT_NV OPTICAL_FLOW_SESSION_CREATE_ENABLE_HINT_BIT_NV} <b>must</b> not be set in {@code flags} if {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::hintSupported} is {@link VK10#VK_FALSE FALSE}</li>
- * <li>{@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_ENABLE_COST_BIT_NV OPTICAL_FLOW_SESSION_CREATE_ENABLE_COST_BIT_NV} <b>must</b> not be set in {@code flags} if {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::costSupported} is {@link VK10#VK_FALSE FALSE}</li>
- * <li>{@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_ENABLE_GLOBAL_FLOW_BIT_NV OPTICAL_FLOW_SESSION_CREATE_ENABLE_GLOBAL_FLOW_BIT_NV} <b>must</b> not be set in {@code flags} if {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::globalFlowSupported} is {@link VK10#VK_FALSE FALSE}</li>
- * <li>{@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_ALLOW_REGIONS_BIT_NV OPTICAL_FLOW_SESSION_CREATE_ALLOW_REGIONS_BIT_NV} <b>must</b> not be set in {@code flags} if {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::maxNumRegionsOfInterest} is 0</li>
- * <li>{@link NVOpticalFlow#VK_OPTICAL_FLOW_SESSION_CREATE_BOTH_DIRECTIONS_BIT_NV OPTICAL_FLOW_SESSION_CREATE_BOTH_DIRECTIONS_BIT_NV} <b>must</b> not be set in {@code flags} if {@link VkPhysicalDeviceOpticalFlowPropertiesNV}{@code ::bidirectionalFlowSupported} is {@link VK10#VK_FALSE FALSE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkOpticalFlowSessionCreatePrivateDataInfoNV}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code imageFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code flowVectorFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>If {@code costFormat} is not 0, {@code costFormat} <b>must</b> be a valid {@code VkFormat} value</li>
- * <li>{@code outputGridSize} <b>must</b> be a valid combination of {@code VkOpticalFlowGridSizeFlagBitsNV} values</li>
- * <li>{@code outputGridSize} <b>must</b> not be 0</li>
- * <li>{@code hintGridSize} <b>must</b> be a valid combination of {@code VkOpticalFlowGridSizeFlagBitsNV} values</li>
- * <li>If {@code performanceLevel} is not 0, {@code performanceLevel} <b>must</b> be a valid {@code VkOpticalFlowPerformanceLevelNV} value</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkOpticalFlowSessionCreateFlagBitsNV} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVOpticalFlow#vkCreateOpticalFlowSessionNV CreateOpticalFlowSessionNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkOpticalFlowSessionCreateInfoNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #width};
- *     uint32_t {@link #height};
- *     VkFormat {@link #imageFormat};
- *     VkFormat {@link #flowVectorFormat};
- *     VkFormat {@link #costFormat};
- *     VkOpticalFlowGridSizeFlagsNV {@link #outputGridSize};
- *     VkOpticalFlowGridSizeFlagsNV {@link #hintGridSize};
- *     VkOpticalFlowPerformanceLevelNV {@link #performanceLevel};
- *     VkOpticalFlowSessionCreateFlagsNV {@link #flags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t width;
+ *     uint32_t height;
+ *     VkFormat imageFormat;
+ *     VkFormat flowVectorFormat;
+ *     VkFormat costFormat;
+ *     VkOpticalFlowGridSizeFlagsNV outputGridSize;
+ *     VkOpticalFlowGridSizeFlagsNV hintGridSize;
+ *     VkOpticalFlowPerformanceLevelNV performanceLevel;
+ *     VkOpticalFlowSessionCreateFlagsNV flags;
+ * }}</pre>
  */
 public class VkOpticalFlowSessionCreateInfoNV extends Struct<VkOpticalFlowSessionCreateInfoNV> implements NativeResource {
 
@@ -147,65 +106,65 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct<VkOpticalFlowSessio
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the width in pixels of the input or reference frame to be bound to this optical flow session. */
+    /** @return the value of the {@code width} field. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** the height in pixels of the input or reference frame to be bound to this optical flow session. */
+    /** @return the value of the {@code height} field. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** the {@code VkFormat} of the input and reference frame to be bound to this optical flow session. */
+    /** @return the value of the {@code imageFormat} field. */
     @NativeType("VkFormat")
     public int imageFormat() { return nimageFormat(address()); }
-    /** the {@code VkFormat} of the flow vector maps (output or hint) to be bound to this optical flow session. */
+    /** @return the value of the {@code flowVectorFormat} field. */
     @NativeType("VkFormat")
     public int flowVectorFormat() { return nflowVectorFormat(address()); }
-    /** the {@code VkFormat} of the cost maps to be bound to this optical flow session. */
+    /** @return the value of the {@code costFormat} field. */
     @NativeType("VkFormat")
     public int costFormat() { return ncostFormat(address()); }
-    /** exactly one bit of {@code VkOpticalFlowGridSizeFlagsNV} specifying the grid size of the output flow and cost maps to be bound to this optical flow session. The size of the output flow and cost maps is determined by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::width} and {@link VkOpticalFlowSessionCreateInfoNV}{@code ::height} divided by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::outputGridSize}. */
+    /** @return the value of the {@code outputGridSize} field. */
     @NativeType("VkOpticalFlowGridSizeFlagsNV")
     public int outputGridSize() { return noutputGridSize(address()); }
-    /** one exactly bit of {@code VkOpticalFlowGridSizeFlagsNV} specifying the grid size of the hint flow vector maps to be bound to this optical flow session. The size of the hint maps is determined by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::width} and {@link VkOpticalFlowSessionCreateInfoNV}{@code ::height} divided by {@link VkOpticalFlowSessionCreateInfoNV}{@code ::hintGridSize}. */
+    /** @return the value of the {@code hintGridSize} field. */
     @NativeType("VkOpticalFlowGridSizeFlagsNV")
     public int hintGridSize() { return nhintGridSize(address()); }
-    /** the {@code VkOpticalFlowPerformanceLevelNV} used for this optical flow session. */
+    /** @return the value of the {@code performanceLevel} field. */
     @NativeType("VkOpticalFlowPerformanceLevelNV")
     public int performanceLevel() { return nperformanceLevel(address()); }
-    /** are the {@code VkOpticalFlowSessionCreateFlagsNV} used for this optical flow session. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkOpticalFlowSessionCreateFlagsNV")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkOpticalFlowSessionCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV} value to the {@code sType} field. */
     public VkOpticalFlowSessionCreateInfoNV sType$Default() { return sType(NVOpticalFlow.VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkOpticalFlowSessionCreateInfoNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkOpticalFlowSessionCreatePrivateDataInfoNV} value to the {@code pNext} chain. */
     public VkOpticalFlowSessionCreateInfoNV pNext(VkOpticalFlowSessionCreatePrivateDataInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public VkOpticalFlowSessionCreateInfoNV width(@NativeType("uint32_t") int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public VkOpticalFlowSessionCreateInfoNV height(@NativeType("uint32_t") int value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageFormat} field. */
+    /** Sets the specified value to the {@code imageFormat} field. */
     public VkOpticalFlowSessionCreateInfoNV imageFormat(@NativeType("VkFormat") int value) { nimageFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #flowVectorFormat} field. */
+    /** Sets the specified value to the {@code flowVectorFormat} field. */
     public VkOpticalFlowSessionCreateInfoNV flowVectorFormat(@NativeType("VkFormat") int value) { nflowVectorFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #costFormat} field. */
+    /** Sets the specified value to the {@code costFormat} field. */
     public VkOpticalFlowSessionCreateInfoNV costFormat(@NativeType("VkFormat") int value) { ncostFormat(address(), value); return this; }
-    /** Sets the specified value to the {@link #outputGridSize} field. */
+    /** Sets the specified value to the {@code outputGridSize} field. */
     public VkOpticalFlowSessionCreateInfoNV outputGridSize(@NativeType("VkOpticalFlowGridSizeFlagsNV") int value) { noutputGridSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #hintGridSize} field. */
+    /** Sets the specified value to the {@code hintGridSize} field. */
     public VkOpticalFlowSessionCreateInfoNV hintGridSize(@NativeType("VkOpticalFlowGridSizeFlagsNV") int value) { nhintGridSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #performanceLevel} field. */
+    /** Sets the specified value to the {@code performanceLevel} field. */
     public VkOpticalFlowSessionCreateInfoNV performanceLevel(@NativeType("VkOpticalFlowPerformanceLevelNV") int value) { nperformanceLevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkOpticalFlowSessionCreateInfoNV flags(@NativeType("VkOpticalFlowSessionCreateFlagsNV") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -449,65 +408,65 @@ public class VkOpticalFlowSessionCreateInfoNV extends Struct<VkOpticalFlowSessio
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkOpticalFlowSessionCreateInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkOpticalFlowSessionCreateInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("uint32_t")
         public int width() { return VkOpticalFlowSessionCreateInfoNV.nwidth(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("uint32_t")
         public int height() { return VkOpticalFlowSessionCreateInfoNV.nheight(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#imageFormat} field. */
+        /** @return the value of the {@code imageFormat} field. */
         @NativeType("VkFormat")
         public int imageFormat() { return VkOpticalFlowSessionCreateInfoNV.nimageFormat(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#flowVectorFormat} field. */
+        /** @return the value of the {@code flowVectorFormat} field. */
         @NativeType("VkFormat")
         public int flowVectorFormat() { return VkOpticalFlowSessionCreateInfoNV.nflowVectorFormat(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#costFormat} field. */
+        /** @return the value of the {@code costFormat} field. */
         @NativeType("VkFormat")
         public int costFormat() { return VkOpticalFlowSessionCreateInfoNV.ncostFormat(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#outputGridSize} field. */
+        /** @return the value of the {@code outputGridSize} field. */
         @NativeType("VkOpticalFlowGridSizeFlagsNV")
         public int outputGridSize() { return VkOpticalFlowSessionCreateInfoNV.noutputGridSize(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#hintGridSize} field. */
+        /** @return the value of the {@code hintGridSize} field. */
         @NativeType("VkOpticalFlowGridSizeFlagsNV")
         public int hintGridSize() { return VkOpticalFlowSessionCreateInfoNV.nhintGridSize(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#performanceLevel} field. */
+        /** @return the value of the {@code performanceLevel} field. */
         @NativeType("VkOpticalFlowPerformanceLevelNV")
         public int performanceLevel() { return VkOpticalFlowSessionCreateInfoNV.nperformanceLevel(address()); }
-        /** @return the value of the {@link VkOpticalFlowSessionCreateInfoNV#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkOpticalFlowSessionCreateFlagsNV")
         public int flags() { return VkOpticalFlowSessionCreateInfoNV.nflags(address()); }
 
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkOpticalFlowSessionCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV} value to the {@link VkOpticalFlowSessionCreateInfoNV#sType} field. */
+        /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV} value to the {@code sType} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer sType$Default() { return sType(NVOpticalFlow.VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV); }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer pNext(@NativeType("void *") long value) { VkOpticalFlowSessionCreateInfoNV.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkOpticalFlowSessionCreatePrivateDataInfoNV} value to the {@code pNext} chain. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer pNext(VkOpticalFlowSessionCreatePrivateDataInfoNV value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer width(@NativeType("uint32_t") int value) { VkOpticalFlowSessionCreateInfoNV.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer height(@NativeType("uint32_t") int value) { VkOpticalFlowSessionCreateInfoNV.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#imageFormat} field. */
+        /** Sets the specified value to the {@code imageFormat} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer imageFormat(@NativeType("VkFormat") int value) { VkOpticalFlowSessionCreateInfoNV.nimageFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#flowVectorFormat} field. */
+        /** Sets the specified value to the {@code flowVectorFormat} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer flowVectorFormat(@NativeType("VkFormat") int value) { VkOpticalFlowSessionCreateInfoNV.nflowVectorFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#costFormat} field. */
+        /** Sets the specified value to the {@code costFormat} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer costFormat(@NativeType("VkFormat") int value) { VkOpticalFlowSessionCreateInfoNV.ncostFormat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#outputGridSize} field. */
+        /** Sets the specified value to the {@code outputGridSize} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer outputGridSize(@NativeType("VkOpticalFlowGridSizeFlagsNV") int value) { VkOpticalFlowSessionCreateInfoNV.noutputGridSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#hintGridSize} field. */
+        /** Sets the specified value to the {@code hintGridSize} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer hintGridSize(@NativeType("VkOpticalFlowGridSizeFlagsNV") int value) { VkOpticalFlowSessionCreateInfoNV.nhintGridSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#performanceLevel} field. */
+        /** Sets the specified value to the {@code performanceLevel} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer performanceLevel(@NativeType("VkOpticalFlowPerformanceLevelNV") int value) { VkOpticalFlowSessionCreateInfoNV.nperformanceLevel(address(), value); return this; }
-        /** Sets the specified value to the {@link VkOpticalFlowSessionCreateInfoNV#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkOpticalFlowSessionCreateInfoNV.Buffer flags(@NativeType("VkOpticalFlowSessionCreateFlagsNV") int value) { VkOpticalFlowSessionCreateInfoNV.nflags(address(), value); return this; }
 
     }

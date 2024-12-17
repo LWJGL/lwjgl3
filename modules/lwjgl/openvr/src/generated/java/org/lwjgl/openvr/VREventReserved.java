@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Not actually used for any events.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Reserved_t {
  *     uint64_t reserved0;
  *     uint64_t reserved1;
@@ -26,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint64_t reserved3;
  *     uint64_t reserved4;
  *     uint64_t reserved5;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_Reserved_t")
 public class VREventReserved extends Struct<VREventReserved> {

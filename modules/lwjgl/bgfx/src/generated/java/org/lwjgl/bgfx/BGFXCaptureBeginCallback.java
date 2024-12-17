@@ -11,21 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Called when video capture begins.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     bgfx_callback_interface_t *_this,
- *     uint32_t _width,
- *     uint32_t _height,
- *     uint32_t _pitch,
- *     bgfx_texture_format_t _format,
- *     bool _yflip
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class BGFXCaptureBeginCallback extends Callback implements BGFXCaptureBeginCallbackI {
 
     /**

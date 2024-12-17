@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     FMOD_DEBUG_FLAGS level,
- *     char const *file,
- *     int line,
- *     char const *function,
- *     char const *string
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_OUTPUT_LOG_FUNC} */
 public abstract class FMOD_OUTPUT_LOG_FUNC extends Callback implements FMOD_OUTPUT_LOG_FUNCI {
 
     /**

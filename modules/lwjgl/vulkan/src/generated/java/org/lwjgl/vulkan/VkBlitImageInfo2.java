@@ -17,94 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of blit image command.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The source region specified by each element of {@code pRegions} <b>must</b> be a region that is contained within {@code srcImage}</li>
- * <li>The destination region specified by each element of {@code pRegions} <b>must</b> be a region that is contained within {@code dstImage}</li>
- * <li>The union of all destination regions, specified by the elements of {@code pRegions}, <b>must</b> not overlap in memory with any texel that <b>may</b> be sampled during the blit operation</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-format-features">format features</a> of {@code srcImage} <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_BLIT_SRC_BIT FORMAT_FEATURE_BLIT_SRC_BIT}</li>
- * <li>{@code srcImage} <b>must</b> not use a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">format that requires a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a></li>
- * <li>{@code srcImage} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_TRANSFER_SRC_BIT IMAGE_USAGE_TRANSFER_SRC_BIT} usage flag</li>
- * <li>If {@code srcImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>{@code srcImageLayout} <b>must</b> specify the layout of the image subresources of {@code srcImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
- * <li>{@code srcImageLayout} <b>must</b> be {@link KHRSharedPresentableImage#VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR IMAGE_LAYOUT_SHARED_PRESENT_KHR}, {@link VK10#VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL} or {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL}</li>
- * <li>If {@code srcImage} and {@code dstImage} are the same, and an elements of {@code pRegions} contains the {@code srcSubresource} and {@code dstSubresource} with matching {@code mipLevel} and overlapping array layers, then the {@code srcImageLayout} and {@code dstImageLayout} <b>must</b> be {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} or {@link KHRSharedPresentableImage#VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR IMAGE_LAYOUT_SHARED_PRESENT_KHR}</li>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-format-features">format features</a> of {@code dstImage} <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_BLIT_DST_BIT FORMAT_FEATURE_BLIT_DST_BIT}</li>
- * <li>{@code dstImage} <b>must</b> not use a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">format that requires a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a></li>
- * <li>{@code dstImage} <b>must</b> have been created with {@link VK10#VK_IMAGE_USAGE_TRANSFER_DST_BIT IMAGE_USAGE_TRANSFER_DST_BIT} usage flag</li>
- * <li>If {@code dstImage} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>{@code dstImageLayout} <b>must</b> specify the layout of the image subresources of {@code dstImage} specified in {@code pRegions} at the time this command is executed on a {@code VkDevice}</li>
- * <li>{@code dstImageLayout} <b>must</b> be {@link KHRSharedPresentableImage#VK_IMAGE_LAYOUT_SHARED_PRESENT_KHR IMAGE_LAYOUT_SHARED_PRESENT_KHR}, {@link VK10#VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL} or {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL}</li>
- * <li>If either of {@code srcImage} or {@code dstImage} was created with a signed integer {@code VkFormat}, the other <b>must</b> also have been created with a signed integer {@code VkFormat}</li>
- * <li>If either of {@code srcImage} or {@code dstImage} was created with an unsigned integer {@code VkFormat}, the other <b>must</b> also have been created with an unsigned integer {@code VkFormat}</li>
- * <li>If either of {@code srcImage} or {@code dstImage} was created with a depth/stencil format, the other <b>must</b> have exactly the same format</li>
- * <li>If {@code srcImage} was created with a depth/stencil format, {@code filter} <b>must</b> be {@link VK10#VK_FILTER_NEAREST FILTER_NEAREST}</li>
- * <li>{@code srcImage} <b>must</b> have been created with a {@code samples} value of {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}</li>
- * <li>{@code dstImage} <b>must</b> have been created with a {@code samples} value of {@link VK10#VK_SAMPLE_COUNT_1_BIT SAMPLE_COUNT_1_BIT}</li>
- * <li>If {@code filter} is {@link VK10#VK_FILTER_LINEAR FILTER_LINEAR}, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-format-features">format features</a> of {@code srcImage} <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT}</li>
- * <li>If {@code filter} is {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-image-format-features">format features</a> of {@code srcImage} <b>must</b> contain {@link EXTFilterCubic#VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT}</li>
- * <li>If {@code filter} is {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT}, {@code srcImage} <b>must</b> be of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</li>
- * <li>The {@code srcSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
- * <li>The {@code dstSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
- * <li>If {@code srcSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, <code>srcSubresource.baseArrayLayer + srcSubresource.layerCount</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
- * <li>If {@code srcSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, <code>dstSubresource.baseArrayLayer + dstSubresource.layerCount</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
- * <li>{@code dstImage} and {@code srcImage} <b>must</b> not have been created with {@code flags} containing {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
- * <li>If either {@code srcImage} or {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, then for each element of {@code pRegions}, {@code srcSubresource.baseArrayLayer} and {@code dstSubresource.baseArrayLayer} <b>must</b> each be 0, and {@code srcSubresource.layerCount} and {@code dstSubresource.layerCount} <b>must</b> each be 1</li>
- * <li>For each element of {@code pRegions}, {@code srcSubresource.aspectMask} <b>must</b> specify aspects present in {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> specify aspects present in {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, {@code srcOffsets}[0].x and {@code srcOffsets}[1].x <b>must</b> both be greater than or equal to 0 and less than or equal to the width of the specified {@code srcSubresource} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, {@code srcOffsets}[0].y and {@code srcOffsets}[1].y <b>must</b> both be greater than or equal to 0 and less than or equal to the height of the specified {@code srcSubresource} of {@code srcImage}</li>
- * <li>If {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}, then for each element of {@code pRegions}, {@code srcOffsets}[0].y <b>must</b> be 0 and {@code srcOffsets}[1].y <b>must</b> be 1</li>
- * <li>For each element of {@code pRegions}, {@code srcOffsets}[0].z and {@code srcOffsets}[1].z <b>must</b> both be greater than or equal to 0 and less than or equal to the depth of the specified {@code srcSubresource} of {@code srcImage}</li>
- * <li>If {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D} or {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then for each element of {@code pRegions}, {@code srcOffsets}[0].z <b>must</b> be 0 and {@code srcOffsets}[1].z <b>must</b> be 1</li>
- * <li>For each element of {@code pRegions}, {@code dstOffsets}[0].x and {@code dstOffsets}[1].x <b>must</b> both be greater than or equal to 0 and less than or equal to the width of the specified {@code dstSubresource} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, {@code dstOffsets}[0].y and {@code dstOffsets}[1].y <b>must</b> both be greater than or equal to 0 and less than or equal to the height of the specified {@code dstSubresource} of {@code dstImage}</li>
- * <li>If {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}, then for each element of {@code pRegions}, {@code dstOffsets}[0].y <b>must</b> be 0 and {@code dstOffsets}[1].y <b>must</b> be 1</li>
- * <li>For each element of {@code pRegions}, {@code dstOffsets}[0].z and {@code dstOffsets}[1].z <b>must</b> both be greater than or equal to 0 and less than or equal to the depth of the specified {@code dstSubresource} of {@code dstImage}</li>
- * <li>If {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D} or {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then for each element of {@code pRegions}, {@code dstOffsets}[0].z <b>must</b> be 0 and {@code dstOffsets}[1].z <b>must</b> be 1</li>
- * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} and {@code dstImage} <b>must</b> not be block-compressed images</li>
- * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} <b>must</b> be of type {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}</li>
- * <li>If any element of {@code pRegions} contains {@link VkCopyCommandTransformInfoQCOM} in its {@code pNext} chain, then {@code srcImage} <b>must</b> not have a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar format</a></li>
- * <li>If {@code filter} is {@link EXTFilterCubic#VK_FILTER_CUBIC_EXT FILTER_CUBIC_EXT} and if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-selectableCubicWeights">selectableCubicWeights</a> feature is not enabled then the cubic weights <b>must</b> be {@link QCOMFilterCubicWeights#VK_CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM CUBIC_FILTER_WEIGHTS_CATMULL_ROM_QCOM}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2 STRUCTURE_TYPE_BLIT_IMAGE_INFO_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkBlitImageCubicWeightsInfoQCOM}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code srcImage} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>{@code srcImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code pRegions} <b>must</b> be a valid pointer to an array of {@code regionCount} valid {@link VkImageBlit2} structures</li>
- * <li>{@code filter} <b>must</b> be a valid {@code VkFilter} value</li>
- * <li>{@code regionCount} <b>must</b> be greater than 0</li>
- * <li>Both of {@code dstImage}, and {@code srcImage} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkImageBlit2}, {@link VK13#vkCmdBlitImage2 CmdBlitImage2}, {@link KHRCopyCommands2#vkCmdBlitImage2KHR CmdBlitImage2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBlitImageInfo2 {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImage {@link #srcImage};
- *     VkImageLayout {@link #srcImageLayout};
- *     VkImage {@link #dstImage};
- *     VkImageLayout {@link #dstImageLayout};
- *     uint32_t {@link #regionCount};
- *     {@link VkImageBlit2 VkImageBlit2} const * {@link #pRegions};
- *     VkFilter {@link #filter};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImage srcImage;
+ *     VkImageLayout srcImageLayout;
+ *     VkImage dstImage;
+ *     VkImageLayout dstImageLayout;
+ *     uint32_t regionCount;
+ *     {@link VkImageBlit2 VkImageBlit2} const * pRegions;
+ *     VkFilter filter;
+ * }}</pre>
  */
 public class VkBlitImageInfo2 extends Struct<VkBlitImageInfo2> implements NativeResource {
 
@@ -175,53 +99,53 @@ public class VkBlitImageInfo2 extends Struct<VkBlitImageInfo2> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the source image. */
+    /** @return the value of the {@code srcImage} field. */
     @NativeType("VkImage")
     public long srcImage() { return nsrcImage(address()); }
-    /** the layout of the source image subresources for the blit. */
+    /** @return the value of the {@code srcImageLayout} field. */
     @NativeType("VkImageLayout")
     public int srcImageLayout() { return nsrcImageLayout(address()); }
-    /** the destination image. */
+    /** @return the value of the {@code dstImage} field. */
     @NativeType("VkImage")
     public long dstImage() { return ndstImage(address()); }
-    /** the layout of the destination image subresources for the blit. */
+    /** @return the value of the {@code dstImageLayout} field. */
     @NativeType("VkImageLayout")
     public int dstImageLayout() { return ndstImageLayout(address()); }
-    /** the number of regions to blit. */
+    /** @return the value of the {@code regionCount} field. */
     @NativeType("uint32_t")
     public int regionCount() { return nregionCount(address()); }
-    /** a pointer to an array of {@link VkImageBlit2} structures specifying the regions to blit. */
+    /** @return a {@link VkImageBlit2.Buffer} view of the struct array pointed to by the {@code pRegions} field. */
     @NativeType("VkImageBlit2 const *")
     public VkImageBlit2.Buffer pRegions() { return npRegions(address()); }
-    /** a {@code VkFilter} specifying the filter to apply if the blits require scaling. */
+    /** @return the value of the {@code filter} field. */
     @NativeType("VkFilter")
     public int filter() { return nfilter(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBlitImageInfo2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2 STRUCTURE_TYPE_BLIT_IMAGE_INFO_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2 STRUCTURE_TYPE_BLIT_IMAGE_INFO_2} value to the {@code sType} field. */
     public VkBlitImageInfo2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBlitImageInfo2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkBlitImageCubicWeightsInfoQCOM} value to the {@code pNext} chain. */
     public VkBlitImageInfo2 pNext(VkBlitImageCubicWeightsInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #srcImage} field. */
+    /** Sets the specified value to the {@code srcImage} field. */
     public VkBlitImageInfo2 srcImage(@NativeType("VkImage") long value) { nsrcImage(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcImageLayout} field. */
+    /** Sets the specified value to the {@code srcImageLayout} field. */
     public VkBlitImageInfo2 srcImageLayout(@NativeType("VkImageLayout") int value) { nsrcImageLayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstImage} field. */
+    /** Sets the specified value to the {@code dstImage} field. */
     public VkBlitImageInfo2 dstImage(@NativeType("VkImage") long value) { ndstImage(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstImageLayout} field. */
+    /** Sets the specified value to the {@code dstImageLayout} field. */
     public VkBlitImageInfo2 dstImageLayout(@NativeType("VkImageLayout") int value) { ndstImageLayout(address(), value); return this; }
-    /** Sets the address of the specified {@link VkImageBlit2.Buffer} to the {@link #pRegions} field. */
+    /** Sets the address of the specified {@link VkImageBlit2.Buffer} to the {@code pRegions} field. */
     public VkBlitImageInfo2 pRegions(@NativeType("VkImageBlit2 const *") VkImageBlit2.Buffer value) { npRegions(address(), value); return this; }
-    /** Sets the specified value to the {@link #filter} field. */
+    /** Sets the specified value to the {@code filter} field. */
     public VkBlitImageInfo2 filter(@NativeType("VkFilter") int value) { nfilter(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -460,53 +384,53 @@ public class VkBlitImageInfo2 extends Struct<VkBlitImageInfo2> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBlitImageInfo2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBlitImageInfo2.nsType(address()); }
-        /** @return the value of the {@link VkBlitImageInfo2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBlitImageInfo2.npNext(address()); }
-        /** @return the value of the {@link VkBlitImageInfo2#srcImage} field. */
+        /** @return the value of the {@code srcImage} field. */
         @NativeType("VkImage")
         public long srcImage() { return VkBlitImageInfo2.nsrcImage(address()); }
-        /** @return the value of the {@link VkBlitImageInfo2#srcImageLayout} field. */
+        /** @return the value of the {@code srcImageLayout} field. */
         @NativeType("VkImageLayout")
         public int srcImageLayout() { return VkBlitImageInfo2.nsrcImageLayout(address()); }
-        /** @return the value of the {@link VkBlitImageInfo2#dstImage} field. */
+        /** @return the value of the {@code dstImage} field. */
         @NativeType("VkImage")
         public long dstImage() { return VkBlitImageInfo2.ndstImage(address()); }
-        /** @return the value of the {@link VkBlitImageInfo2#dstImageLayout} field. */
+        /** @return the value of the {@code dstImageLayout} field. */
         @NativeType("VkImageLayout")
         public int dstImageLayout() { return VkBlitImageInfo2.ndstImageLayout(address()); }
-        /** @return the value of the {@link VkBlitImageInfo2#regionCount} field. */
+        /** @return the value of the {@code regionCount} field. */
         @NativeType("uint32_t")
         public int regionCount() { return VkBlitImageInfo2.nregionCount(address()); }
-        /** @return a {@link VkImageBlit2.Buffer} view of the struct array pointed to by the {@link VkBlitImageInfo2#pRegions} field. */
+        /** @return a {@link VkImageBlit2.Buffer} view of the struct array pointed to by the {@code pRegions} field. */
         @NativeType("VkImageBlit2 const *")
         public VkImageBlit2.Buffer pRegions() { return VkBlitImageInfo2.npRegions(address()); }
-        /** @return the value of the {@link VkBlitImageInfo2#filter} field. */
+        /** @return the value of the {@code filter} field. */
         @NativeType("VkFilter")
         public int filter() { return VkBlitImageInfo2.nfilter(address()); }
 
-        /** Sets the specified value to the {@link VkBlitImageInfo2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBlitImageInfo2.Buffer sType(@NativeType("VkStructureType") int value) { VkBlitImageInfo2.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2 STRUCTURE_TYPE_BLIT_IMAGE_INFO_2} value to the {@link VkBlitImageInfo2#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2 STRUCTURE_TYPE_BLIT_IMAGE_INFO_2} value to the {@code sType} field. */
         public VkBlitImageInfo2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2); }
-        /** Sets the specified value to the {@link VkBlitImageInfo2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBlitImageInfo2.Buffer pNext(@NativeType("void const *") long value) { VkBlitImageInfo2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkBlitImageCubicWeightsInfoQCOM} value to the {@code pNext} chain. */
         public VkBlitImageInfo2.Buffer pNext(VkBlitImageCubicWeightsInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkBlitImageInfo2#srcImage} field. */
+        /** Sets the specified value to the {@code srcImage} field. */
         public VkBlitImageInfo2.Buffer srcImage(@NativeType("VkImage") long value) { VkBlitImageInfo2.nsrcImage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBlitImageInfo2#srcImageLayout} field. */
+        /** Sets the specified value to the {@code srcImageLayout} field. */
         public VkBlitImageInfo2.Buffer srcImageLayout(@NativeType("VkImageLayout") int value) { VkBlitImageInfo2.nsrcImageLayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBlitImageInfo2#dstImage} field. */
+        /** Sets the specified value to the {@code dstImage} field. */
         public VkBlitImageInfo2.Buffer dstImage(@NativeType("VkImage") long value) { VkBlitImageInfo2.ndstImage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBlitImageInfo2#dstImageLayout} field. */
+        /** Sets the specified value to the {@code dstImageLayout} field. */
         public VkBlitImageInfo2.Buffer dstImageLayout(@NativeType("VkImageLayout") int value) { VkBlitImageInfo2.ndstImageLayout(address(), value); return this; }
-        /** Sets the address of the specified {@link VkImageBlit2.Buffer} to the {@link VkBlitImageInfo2#pRegions} field. */
+        /** Sets the address of the specified {@link VkImageBlit2.Buffer} to the {@code pRegions} field. */
         public VkBlitImageInfo2.Buffer pRegions(@NativeType("VkImageBlit2 const *") VkImageBlit2.Buffer value) { VkBlitImageInfo2.npRegions(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBlitImageInfo2#filter} field. */
+        /** Sets the specified value to the {@code filter} field. */
         public VkBlitImageInfo2.Buffer filter(@NativeType("VkFilter") int value) { VkBlitImageInfo2.nfilter(address(), value); return this; }
 
     }

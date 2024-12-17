@@ -14,16 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_cache_attr_s {
  *     hwloc_uint64_t size;
  *     unsigned depth;
  *     unsigned linesize;
  *     int associativity;
  *     hwloc_obj_cache_type_t type;
- * }</code></pre>
+ * }}</pre>
  */
 public class hwloc_cache_attr_s extends Struct<hwloc_cache_attr_s> {
 

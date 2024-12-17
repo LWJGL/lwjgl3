@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * KTX_error_code (*{@link #invoke}) (
- *     ktxStream *str,
- *     ktx_off_t * const offset
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ktxStream_getpos} */
 @FunctionalInterface
 @NativeType("ktxStream_getpos")
 public interface ktxStream_getposI extends CallbackI {
@@ -43,7 +35,7 @@ public interface ktxStream_getposI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** Type for a pointer to a stream position query function. */
+    /** {@code KTX_error_code (* ktxStream_getpos) (ktxStream * str, ktx_off_t * const offset)} */
     @NativeType("KTX_error_code") int invoke(@NativeType("ktxStream *") long str, @NativeType("ktx_off_t * const") long offset);
 
 }

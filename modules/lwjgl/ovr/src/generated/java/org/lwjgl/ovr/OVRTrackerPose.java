@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specifies the pose for a single sensor.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrTrackerPose {
- *     unsigned int {@link #TrackerFlags};
- *     {@link OVRPosef ovrPosef} {@link #Pose};
- *     {@link OVRPosef ovrPosef} {@link #LeveledPose};
- * }</code></pre>
+ *     unsigned int TrackerFlags;
+ *     {@link OVRPosef ovrPosef} Pose;
+ *     {@link OVRPosef ovrPosef} LeveledPose;
+ * }}</pre>
  */
 @NativeType("struct ovrTrackerPose")
 public class OVRTrackerPose extends Struct<OVRTrackerPose> implements NativeResource {
@@ -80,17 +76,13 @@ public class OVRTrackerPose extends Struct<OVRTrackerPose> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** {@code ovrTrackerFlags}. */
+    /** @return the value of the {@code TrackerFlags} field. */
     @NativeType("unsigned int")
     public int TrackerFlags() { return nTrackerFlags(address()); }
-    /** the sensor's pose. This pose includes sensor tilt (roll and pitch). For a leveled coordinate system use {@code LeveledPose}. */
+    /** @return a {@link OVRPosef} view of the {@code Pose} field. */
     @NativeType("ovrPosef")
     public OVRPosef Pose() { return nPose(address()); }
-    /**
-     * t
-     * the sensor's leveled pose, aligned with gravity. This value includes pos and yaw of the sensor, but not roll and pitch. It can be used as a
-     * reference point to render real-world objects in the correct location.
-     */
+    /** @return a {@link OVRPosef} view of the {@code LeveledPose} field. */
     @NativeType("ovrPosef")
     public OVRPosef LeveledPose() { return nLeveledPose(address()); }
 
@@ -274,13 +266,13 @@ public class OVRTrackerPose extends Struct<OVRTrackerPose> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRTrackerPose#TrackerFlags} field. */
+        /** @return the value of the {@code TrackerFlags} field. */
         @NativeType("unsigned int")
         public int TrackerFlags() { return OVRTrackerPose.nTrackerFlags(address()); }
-        /** @return a {@link OVRPosef} view of the {@link OVRTrackerPose#Pose} field. */
+        /** @return a {@link OVRPosef} view of the {@code Pose} field. */
         @NativeType("ovrPosef")
         public OVRPosef Pose() { return OVRTrackerPose.nPose(address()); }
-        /** @return a {@link OVRPosef} view of the {@link OVRTrackerPose#LeveledPose} field. */
+        /** @return a {@link OVRPosef} view of the {@code LeveledPose} field. */
         @NativeType("ovrPosef")
         public OVRPosef LeveledPose() { return OVRTrackerPose.nLeveledPose(address()); }
 

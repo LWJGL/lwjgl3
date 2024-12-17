@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A property value as a union of all its possible types.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union rmtPropertyValue {
  *     rmtBool Bool;
  *     rmtS32 S32;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     rmtS64 S64;
  *     rmtU64 U64;
  *     rmtF64 F64;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("union rmtPropertyValue")
 public class RMTPropertyValue extends Struct<RMTPropertyValue> implements NativeResource {

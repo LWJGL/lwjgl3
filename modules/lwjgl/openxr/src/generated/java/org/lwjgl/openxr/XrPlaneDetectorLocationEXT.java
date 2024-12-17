@@ -16,37 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the location of a plane.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTPlaneDetection XR_EXT_plane_detection} extension <b>must</b> be enabled prior to using {@link XrPlaneDetectorLocationEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTPlaneDetection#XR_TYPE_PLANE_DETECTOR_LOCATION_EXT TYPE_PLANE_DETECTOR_LOCATION_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code locationFlags} <b>must</b> be 0 or a valid combination of {@code XrSpaceLocationFlagBits} values</li>
- * <li>If {@code orientation} is not 0, {@code orientation} <b>must</b> be a valid {@code XrPlaneDetectorOrientationEXT} value</li>
- * <li>If {@code semanticType} is not 0, {@code semanticType} <b>must</b> be a valid {@code XrPlaneDetectorSemanticTypeEXT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent2Df}, {@link XrPlaneDetectorLocationsEXT}, {@link XrPosef}, {@link EXTPlaneDetection#xrGetPlaneDetectionsEXT GetPlaneDetectionsEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPlaneDetectorLocationEXT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint64_t {@link #planeId};
- *     XrSpaceLocationFlags {@link #locationFlags};
- *     {@link XrPosef XrPosef} {@link #pose};
- *     {@link XrExtent2Df XrExtent2Df} {@link #extents};
- *     XrPlaneDetectorOrientationEXT {@link #orientation};
- *     XrPlaneDetectorSemanticTypeEXT {@link #semanticType};
- *     uint32_t {@link #polygonBufferCount};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint64_t planeId;
+ *     XrSpaceLocationFlags locationFlags;
+ *     {@link XrPosef XrPosef} pose;
+ *     {@link XrExtent2Df XrExtent2Df} extents;
+ *     XrPlaneDetectorOrientationEXT orientation;
+ *     XrPlaneDetectorSemanticTypeEXT semanticType;
+ *     uint32_t polygonBufferCount;
+ * }}</pre>
  */
 public class XrPlaneDetectorLocationEXT extends Struct<XrPlaneDetectorLocationEXT> implements NativeResource {
 
@@ -117,55 +98,55 @@ public class XrPlaneDetectorLocationEXT extends Struct<XrPlaneDetectorLocationEX
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code uint64_t} unique identifier of the plane. The planeId <b>should</b> remain the same for the duration of the {@code XrPlaneDetectorEXT} handle for a physical plane. A runtime on occasion <b>may</b> assign a different id to the same physical plane, for example when several planes merge into one plane. {@code planeId} <b>must</b> remain valid until the next call to {@link EXTPlaneDetection#xrBeginPlaneDetectionEXT BeginPlaneDetectionEXT} or {@link EXTPlaneDetection#xrDestroyPlaneDetectorEXT DestroyPlaneDetectorEXT}. This id is used by {@link EXTPlaneDetection#xrGetPlanePolygonBufferEXT GetPlanePolygonBufferEXT}. */
+    /** @return the value of the {@code planeId} field. */
     @NativeType("uint64_t")
     public long planeId() { return nplaneId(address()); }
-    /** a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. If none of the bits are set, no other fields in this structure <b>should</b> be considered to be valid or meaningful. */
+    /** @return the value of the {@code locationFlags} field. */
     @NativeType("XrSpaceLocationFlags")
     public long locationFlags() { return nlocationFlags(address()); }
-    /** an {@link XrPosef} defining the position and orientation of the origin of a plane within the reference frame of the corresponding {@link XrPlaneDetectorGetInfoEXT}{@code ::baseSpace}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** the extent of the plane along the x-axis ({@code extents.width}) and y-axis ({@code extents.height}) centered on the {@code pose}. */
+    /** @return a {@link XrExtent2Df} view of the {@code extents} field. */
     public XrExtent2Df extents() { return nextents(address()); }
-    /** the detected orientation of the plane. */
+    /** @return the value of the {@code orientation} field. */
     @NativeType("XrPlaneDetectorOrientationEXT")
     public int orientation() { return norientation(address()); }
-    /** {@code semanticType} {@code XrPlaneDetectorSemanticTypeEXT} type of the plane. */
+    /** @return the value of the {@code semanticType} field. */
     @NativeType("XrPlaneDetectorSemanticTypeEXT")
     public int semanticType() { return nsemanticType(address()); }
-    /** the number of polygon buffers associated with this plane. If this is zero no polygon buffer was generated. The first polygon buffer is always the outside contour. If contours are requested with {@link EXTPlaneDetection#XR_PLANE_DETECTOR_ENABLE_CONTOUR_BIT_EXT PLANE_DETECTOR_ENABLE_CONTOUR_BIT_EXT} this value <b>must</b> always be at least 1. */
+    /** @return the value of the {@code polygonBufferCount} field. */
     @NativeType("uint32_t")
     public int polygonBufferCount() { return npolygonBufferCount(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPlaneDetectorLocationEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTPlaneDetection#XR_TYPE_PLANE_DETECTOR_LOCATION_EXT TYPE_PLANE_DETECTOR_LOCATION_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTPlaneDetection#XR_TYPE_PLANE_DETECTOR_LOCATION_EXT TYPE_PLANE_DETECTOR_LOCATION_EXT} value to the {@code type} field. */
     public XrPlaneDetectorLocationEXT type$Default() { return type(EXTPlaneDetection.XR_TYPE_PLANE_DETECTOR_LOCATION_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPlaneDetectorLocationEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #planeId} field. */
+    /** Sets the specified value to the {@code planeId} field. */
     public XrPlaneDetectorLocationEXT planeId(@NativeType("uint64_t") long value) { nplaneId(address(), value); return this; }
-    /** Sets the specified value to the {@link #locationFlags} field. */
+    /** Sets the specified value to the {@code locationFlags} field. */
     public XrPlaneDetectorLocationEXT locationFlags(@NativeType("XrSpaceLocationFlags") long value) { nlocationFlags(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrPlaneDetectorLocationEXT pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrPlaneDetectorLocationEXT pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-    /** Copies the specified {@link XrExtent2Df} to the {@link #extents} field. */
+    /** Copies the specified {@link XrExtent2Df} to the {@code extents} field. */
     public XrPlaneDetectorLocationEXT extents(XrExtent2Df value) { nextents(address(), value); return this; }
-    /** Passes the {@link #extents} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code extents} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrPlaneDetectorLocationEXT extents(java.util.function.Consumer<XrExtent2Df> consumer) { consumer.accept(extents()); return this; }
-    /** Sets the specified value to the {@link #orientation} field. */
+    /** Sets the specified value to the {@code orientation} field. */
     public XrPlaneDetectorLocationEXT orientation(@NativeType("XrPlaneDetectorOrientationEXT") int value) { norientation(address(), value); return this; }
-    /** Sets the specified value to the {@link #semanticType} field. */
+    /** Sets the specified value to the {@code semanticType} field. */
     public XrPlaneDetectorLocationEXT semanticType(@NativeType("XrPlaneDetectorSemanticTypeEXT") int value) { nsemanticType(address(), value); return this; }
-    /** Sets the specified value to the {@link #polygonBufferCount} field. */
+    /** Sets the specified value to the {@code polygonBufferCount} field. */
     public XrPlaneDetectorLocationEXT polygonBufferCount(@NativeType("uint32_t") int value) { npolygonBufferCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -397,55 +378,55 @@ public class XrPlaneDetectorLocationEXT extends Struct<XrPlaneDetectorLocationEX
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPlaneDetectorLocationEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPlaneDetectorLocationEXT.ntype(address()); }
-        /** @return the value of the {@link XrPlaneDetectorLocationEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrPlaneDetectorLocationEXT.nnext(address()); }
-        /** @return the value of the {@link XrPlaneDetectorLocationEXT#planeId} field. */
+        /** @return the value of the {@code planeId} field. */
         @NativeType("uint64_t")
         public long planeId() { return XrPlaneDetectorLocationEXT.nplaneId(address()); }
-        /** @return the value of the {@link XrPlaneDetectorLocationEXT#locationFlags} field. */
+        /** @return the value of the {@code locationFlags} field. */
         @NativeType("XrSpaceLocationFlags")
         public long locationFlags() { return XrPlaneDetectorLocationEXT.nlocationFlags(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrPlaneDetectorLocationEXT#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrPlaneDetectorLocationEXT.npose(address()); }
-        /** @return a {@link XrExtent2Df} view of the {@link XrPlaneDetectorLocationEXT#extents} field. */
+        /** @return a {@link XrExtent2Df} view of the {@code extents} field. */
         public XrExtent2Df extents() { return XrPlaneDetectorLocationEXT.nextents(address()); }
-        /** @return the value of the {@link XrPlaneDetectorLocationEXT#orientation} field. */
+        /** @return the value of the {@code orientation} field. */
         @NativeType("XrPlaneDetectorOrientationEXT")
         public int orientation() { return XrPlaneDetectorLocationEXT.norientation(address()); }
-        /** @return the value of the {@link XrPlaneDetectorLocationEXT#semanticType} field. */
+        /** @return the value of the {@code semanticType} field. */
         @NativeType("XrPlaneDetectorSemanticTypeEXT")
         public int semanticType() { return XrPlaneDetectorLocationEXT.nsemanticType(address()); }
-        /** @return the value of the {@link XrPlaneDetectorLocationEXT#polygonBufferCount} field. */
+        /** @return the value of the {@code polygonBufferCount} field. */
         @NativeType("uint32_t")
         public int polygonBufferCount() { return XrPlaneDetectorLocationEXT.npolygonBufferCount(address()); }
 
-        /** Sets the specified value to the {@link XrPlaneDetectorLocationEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPlaneDetectorLocationEXT.Buffer type(@NativeType("XrStructureType") int value) { XrPlaneDetectorLocationEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTPlaneDetection#XR_TYPE_PLANE_DETECTOR_LOCATION_EXT TYPE_PLANE_DETECTOR_LOCATION_EXT} value to the {@link XrPlaneDetectorLocationEXT#type} field. */
+        /** Sets the {@link EXTPlaneDetection#XR_TYPE_PLANE_DETECTOR_LOCATION_EXT TYPE_PLANE_DETECTOR_LOCATION_EXT} value to the {@code type} field. */
         public XrPlaneDetectorLocationEXT.Buffer type$Default() { return type(EXTPlaneDetection.XR_TYPE_PLANE_DETECTOR_LOCATION_EXT); }
-        /** Sets the specified value to the {@link XrPlaneDetectorLocationEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPlaneDetectorLocationEXT.Buffer next(@NativeType("void *") long value) { XrPlaneDetectorLocationEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPlaneDetectorLocationEXT#planeId} field. */
+        /** Sets the specified value to the {@code planeId} field. */
         public XrPlaneDetectorLocationEXT.Buffer planeId(@NativeType("uint64_t") long value) { XrPlaneDetectorLocationEXT.nplaneId(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPlaneDetectorLocationEXT#locationFlags} field. */
+        /** Sets the specified value to the {@code locationFlags} field. */
         public XrPlaneDetectorLocationEXT.Buffer locationFlags(@NativeType("XrSpaceLocationFlags") long value) { XrPlaneDetectorLocationEXT.nlocationFlags(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrPlaneDetectorLocationEXT#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrPlaneDetectorLocationEXT.Buffer pose(XrPosef value) { XrPlaneDetectorLocationEXT.npose(address(), value); return this; }
-        /** Passes the {@link XrPlaneDetectorLocationEXT#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrPlaneDetectorLocationEXT.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-        /** Copies the specified {@link XrExtent2Df} to the {@link XrPlaneDetectorLocationEXT#extents} field. */
+        /** Copies the specified {@link XrExtent2Df} to the {@code extents} field. */
         public XrPlaneDetectorLocationEXT.Buffer extents(XrExtent2Df value) { XrPlaneDetectorLocationEXT.nextents(address(), value); return this; }
-        /** Passes the {@link XrPlaneDetectorLocationEXT#extents} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code extents} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrPlaneDetectorLocationEXT.Buffer extents(java.util.function.Consumer<XrExtent2Df> consumer) { consumer.accept(extents()); return this; }
-        /** Sets the specified value to the {@link XrPlaneDetectorLocationEXT#orientation} field. */
+        /** Sets the specified value to the {@code orientation} field. */
         public XrPlaneDetectorLocationEXT.Buffer orientation(@NativeType("XrPlaneDetectorOrientationEXT") int value) { XrPlaneDetectorLocationEXT.norientation(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPlaneDetectorLocationEXT#semanticType} field. */
+        /** Sets the specified value to the {@code semanticType} field. */
         public XrPlaneDetectorLocationEXT.Buffer semanticType(@NativeType("XrPlaneDetectorSemanticTypeEXT") int value) { XrPlaneDetectorLocationEXT.nsemanticType(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPlaneDetectorLocationEXT#polygonBufferCount} field. */
+        /** Sets the specified value to the {@code polygonBufferCount} field. */
         public XrPlaneDetectorLocationEXT.Buffer polygonBufferCount(@NativeType("uint32_t") int value) { XrPlaneDetectorLocationEXT.npolygonBufferCount(address(), value); return this; }
 
     }

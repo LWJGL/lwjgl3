@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@link OpusEncCallbacks}.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ope_close_func} */
 @FunctionalInterface
 @NativeType("ope_close_func")
 public interface OPECloseFuncI extends CallbackI {
@@ -43,13 +34,7 @@ public interface OPECloseFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Called for closing a stream.
-     *
-     * @param user_data user-defined data passed to the callback
-     *
-     * @return error code; {@code 0: success}, {@code 1: failure}
-     */
+    /** {@code int (* ope_close_func) (void * user_data)} */
     int invoke(@NativeType("void *") long user_data);
 
 }

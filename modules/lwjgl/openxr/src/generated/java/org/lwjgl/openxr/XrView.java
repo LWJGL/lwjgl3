@@ -16,32 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct containing view projection state.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrView} structure contains view pose and projection state necessary to render a single projection view in the view configuration.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_VIEW TYPE_VIEW}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFovf}, {@link XrPosef}, {@link XrViewLocateInfo}, {@link XrViewState}, {@link XR10#xrLocateViews LocateViews}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrView {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrPosef XrPosef} {@link #pose};
- *     {@link XrFovf XrFovf} {@link #fov};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrPosef XrPosef} pose;
+ *     {@link XrFovf XrFovf} fov;
+ * }}</pre>
  */
 public class XrView extends Struct<XrView> implements NativeResource {
 
@@ -97,30 +78,30 @@ public class XrView extends Struct<XrView> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@link XrPosef} defining the location and orientation of the view in the {@code space} specified by the {@link XR10#xrLocateViews LocateViews} function. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** the {@link XrFovf} for the four sides of the projection. */
+    /** @return a {@link XrFovf} view of the {@code fov} field. */
     public XrFovf fov() { return nfov(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrView type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_VIEW TYPE_VIEW} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_VIEW TYPE_VIEW} value to the {@code type} field. */
     public XrView type$Default() { return type(XR10.XR_TYPE_VIEW); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrView next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrView pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrView pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-    /** Copies the specified {@link XrFovf} to the {@link #fov} field. */
+    /** Copies the specified {@link XrFovf} to the {@code fov} field. */
     public XrView fov(XrFovf value) { nfov(address(), value); return this; }
-    /** Passes the {@link #fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrView fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,30 +303,30 @@ public class XrView extends Struct<XrView> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrView#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrView.ntype(address()); }
-        /** @return the value of the {@link XrView#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrView.nnext(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrView#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrView.npose(address()); }
-        /** @return a {@link XrFovf} view of the {@link XrView#fov} field. */
+        /** @return a {@link XrFovf} view of the {@code fov} field. */
         public XrFovf fov() { return XrView.nfov(address()); }
 
-        /** Sets the specified value to the {@link XrView#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrView.Buffer type(@NativeType("XrStructureType") int value) { XrView.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_VIEW TYPE_VIEW} value to the {@link XrView#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_VIEW TYPE_VIEW} value to the {@code type} field. */
         public XrView.Buffer type$Default() { return type(XR10.XR_TYPE_VIEW); }
-        /** Sets the specified value to the {@link XrView#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrView.Buffer next(@NativeType("void *") long value) { XrView.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrView#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrView.Buffer pose(XrPosef value) { XrView.npose(address(), value); return this; }
-        /** Passes the {@link XrView#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrView.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-        /** Copies the specified {@link XrFovf} to the {@link XrView#fov} field. */
+        /** Copies the specified {@link XrFovf} to the {@code fov} field. */
         public XrView.Buffer fov(XrFovf value) { XrView.nfov(address(), value); return this; }
-        /** Passes the {@link XrView#fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrView.Buffer fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
 
     }

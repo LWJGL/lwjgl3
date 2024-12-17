@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The module class descriptor.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Module_Class {
  *     FT_ULong module_flags;
  *     FT_Long module_size;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FT_Module_ConstructorI FT_Module_Constructor} module_init;
  *     {@link FT_Module_DestructorI FT_Module_Destructor} module_done;
  *     {@link FT_Module_RequesterI FT_Module_Requester} get_interface;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Module_Class extends Struct<FT_Module_Class> implements NativeResource {
 
@@ -121,11 +117,7 @@ public class FT_Module_Class extends Struct<FT_Module_Class> implements NativeRe
     /** @return the value of the {@code module_requires} field. */
     @NativeType("FT_Fixed")
     public long module_requires() { return nmodule_requires(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code module_interface} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code module_interface} field. */
     @NativeType("void const *")
     public @Nullable ByteBuffer module_interface(int capacity) { return nmodule_interface(address(), capacity); }
     /** @return the value of the {@code module_init} field. */
@@ -415,11 +407,7 @@ public class FT_Module_Class extends Struct<FT_Module_Class> implements NativeRe
         /** @return the value of the {@code module_requires} field. */
         @NativeType("FT_Fixed")
         public long module_requires() { return FT_Module_Class.nmodule_requires(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code module_interface} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code module_interface} field. */
         @NativeType("void const *")
         public @Nullable ByteBuffer module_interface(int capacity) { return FT_Module_Class.nmodule_interface(address(), capacity); }
         /** @return the value of the {@code module_init} field. */

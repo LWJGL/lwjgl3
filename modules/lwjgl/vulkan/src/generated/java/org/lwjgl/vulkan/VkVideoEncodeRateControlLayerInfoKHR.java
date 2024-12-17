@@ -16,54 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure to set encode per-layer rate control parameters.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The ability of the implementation’s rate control algorithm to be able to match the requested average and/or peak bitrates <b>may</b> be limited by the set of other codec-independent and codec-specific rate control parameters specified by the application, the input content, as well as the application conforming to the rate control guidance provided to the implementation, as described <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control">earlier</a>.</p>
- * </div>
- * 
- * <p>Additional structures providing codec-specific rate control parameters <b>can</b> be included in the {@code pNext} chain of {@link VkVideoEncodeRateControlLayerInfoKHR} depending on the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-profiles">video profile</a> the bound video session was created with. For further details see:</p>
- * 
- * <ul>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding-control">Video Coding Control</a></li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-rate-control">H.264 Encode Rate Control</a></li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-rate-control">H.265 Encode Rate Control</a></li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-rate-control">AV1 Encode Rate Control</a></li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code frameRateNumerator} <b>must</b> be greater than zero</li>
- * <li>{@code frameRateDenominator} <b>must</b> be greater than zero</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoEncodeAV1RateControlLayerInfoKHR}, {@link VkVideoEncodeH264RateControlLayerInfoKHR}, or {@link VkVideoEncodeH265RateControlLayerInfoKHR}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeRateControlInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeRateControlLayerInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint64_t {@link #averageBitrate};
- *     uint64_t {@link #maxBitrate};
- *     uint32_t {@link #frameRateNumerator};
- *     uint32_t {@link #frameRateDenominator};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint64_t averageBitrate;
+ *     uint64_t maxBitrate;
+ *     uint32_t frameRateNumerator;
+ *     uint32_t frameRateDenominator;
+ * }}</pre>
  */
 public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRateControlLayerInfoKHR> implements NativeResource {
 
@@ -125,30 +86,30 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the average <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-bitrate">bitrate</a> to be targeted by the implementation’s rate control algorithm. */
+    /** @return the value of the {@code averageBitrate} field. */
     @NativeType("uint64_t")
     public long averageBitrate() { return naverageBitrate(address()); }
-    /** the peak <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-bitrate">bitrate</a> to be targeted by the implementation’s rate control algorithm. */
+    /** @return the value of the {@code maxBitrate} field. */
     @NativeType("uint64_t")
     public long maxBitrate() { return nmaxBitrate(address()); }
-    /** the numerator of the frame rate assumed by the implementation’s rate control algorithm. */
+    /** @return the value of the {@code frameRateNumerator} field. */
     @NativeType("uint32_t")
     public int frameRateNumerator() { return nframeRateNumerator(address()); }
-    /** the denominator of the frame rate assumed by the implementation’s rate control algorithm. */
+    /** @return the value of the {@code frameRateDenominator} field. */
     @NativeType("uint32_t")
     public int frameRateDenominator() { return nframeRateDenominator(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeRateControlLayerInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeRateControlLayerInfoKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeRateControlLayerInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoEncodeAV1RateControlLayerInfoKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeRateControlLayerInfoKHR pNext(VkVideoEncodeAV1RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -156,13 +117,13 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
     public VkVideoEncodeRateControlLayerInfoKHR pNext(VkVideoEncodeH264RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeH265RateControlLayerInfoKHR} value to the {@code pNext} chain. */
     public VkVideoEncodeRateControlLayerInfoKHR pNext(VkVideoEncodeH265RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #averageBitrate} field. */
+    /** Sets the specified value to the {@code averageBitrate} field. */
     public VkVideoEncodeRateControlLayerInfoKHR averageBitrate(@NativeType("uint64_t") long value) { naverageBitrate(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxBitrate} field. */
+    /** Sets the specified value to the {@code maxBitrate} field. */
     public VkVideoEncodeRateControlLayerInfoKHR maxBitrate(@NativeType("uint64_t") long value) { nmaxBitrate(address(), value); return this; }
-    /** Sets the specified value to the {@link #frameRateNumerator} field. */
+    /** Sets the specified value to the {@code frameRateNumerator} field. */
     public VkVideoEncodeRateControlLayerInfoKHR frameRateNumerator(@NativeType("uint32_t") int value) { nframeRateNumerator(address(), value); return this; }
-    /** Sets the specified value to the {@link #frameRateDenominator} field. */
+    /** Sets the specified value to the {@code frameRateDenominator} field. */
     public VkVideoEncodeRateControlLayerInfoKHR frameRateDenominator(@NativeType("uint32_t") int value) { nframeRateDenominator(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -376,30 +337,30 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeRateControlLayerInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeRateControlLayerInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#averageBitrate} field. */
+        /** @return the value of the {@code averageBitrate} field. */
         @NativeType("uint64_t")
         public long averageBitrate() { return VkVideoEncodeRateControlLayerInfoKHR.naverageBitrate(address()); }
-        /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#maxBitrate} field. */
+        /** @return the value of the {@code maxBitrate} field. */
         @NativeType("uint64_t")
         public long maxBitrate() { return VkVideoEncodeRateControlLayerInfoKHR.nmaxBitrate(address()); }
-        /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#frameRateNumerator} field. */
+        /** @return the value of the {@code frameRateNumerator} field. */
         @NativeType("uint32_t")
         public int frameRateNumerator() { return VkVideoEncodeRateControlLayerInfoKHR.nframeRateNumerator(address()); }
-        /** @return the value of the {@link VkVideoEncodeRateControlLayerInfoKHR#frameRateDenominator} field. */
+        /** @return the value of the {@code frameRateDenominator} field. */
         @NativeType("uint32_t")
         public int frameRateDenominator() { return VkVideoEncodeRateControlLayerInfoKHR.nframeRateDenominator(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeRateControlLayerInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR} value to the {@link VkVideoEncodeRateControlLayerInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeRateControlLayerInfoKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoEncodeAV1RateControlLayerInfoKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer pNext(VkVideoEncodeAV1RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -407,13 +368,13 @@ public class VkVideoEncodeRateControlLayerInfoKHR extends Struct<VkVideoEncodeRa
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer pNext(VkVideoEncodeH264RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeH265RateControlLayerInfoKHR} value to the {@code pNext} chain. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer pNext(VkVideoEncodeH265RateControlLayerInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#averageBitrate} field. */
+        /** Sets the specified value to the {@code averageBitrate} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer averageBitrate(@NativeType("uint64_t") long value) { VkVideoEncodeRateControlLayerInfoKHR.naverageBitrate(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#maxBitrate} field. */
+        /** Sets the specified value to the {@code maxBitrate} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer maxBitrate(@NativeType("uint64_t") long value) { VkVideoEncodeRateControlLayerInfoKHR.nmaxBitrate(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#frameRateNumerator} field. */
+        /** Sets the specified value to the {@code frameRateNumerator} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer frameRateNumerator(@NativeType("uint32_t") int value) { VkVideoEncodeRateControlLayerInfoKHR.nframeRateNumerator(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeRateControlLayerInfoKHR#frameRateDenominator} field. */
+        /** Sets the specified value to the {@code frameRateDenominator} field. */
         public VkVideoEncodeRateControlLayerInfoKHR.Buffer frameRateDenominator(@NativeType("uint32_t") int value) { VkVideoEncodeRateControlLayerInfoKHR.nframeRateDenominator(address(), value); return this; }
 
     }

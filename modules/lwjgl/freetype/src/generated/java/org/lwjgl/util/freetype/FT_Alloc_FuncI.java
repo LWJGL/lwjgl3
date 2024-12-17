@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     FT_Memory memory,
- *     long size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Alloc_Func} */
 @FunctionalInterface
 @NativeType("FT_Alloc_Func")
 public interface FT_Alloc_FuncI extends CallbackI {
@@ -43,7 +35,7 @@ public interface FT_Alloc_FuncI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /** A function used to allocate {@code size} bytes from {@code memory}. */
+    /** {@code void * (* FT_Alloc_Func) (FT_Memory memory, long size)} */
     @NativeType("void *") long invoke(@NativeType("FT_Memory") long memory, long size);
 
 }

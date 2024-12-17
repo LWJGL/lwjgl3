@@ -16,24 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying layout token info for a single index buffer command token.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code vertexBindingUnit} <b>must</b> be less than the total number of vertex input bindings in use by the current graphics state</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsTokenDataEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectCommandsVertexBufferTokenEXT {
- *     uint32_t {@link #vertexBindingUnit};
- * }</code></pre>
+ *     uint32_t vertexBindingUnit;
+ * }}</pre>
  */
 public class VkIndirectCommandsVertexBufferTokenEXT extends Struct<VkIndirectCommandsVertexBufferTokenEXT> implements NativeResource {
 
@@ -80,11 +66,11 @@ public class VkIndirectCommandsVertexBufferTokenEXT extends Struct<VkIndirectCom
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the vertex input binding number to be bound. */
+    /** @return the value of the {@code vertexBindingUnit} field. */
     @NativeType("uint32_t")
     public int vertexBindingUnit() { return nvertexBindingUnit(address()); }
 
-    /** Sets the specified value to the {@link #vertexBindingUnit} field. */
+    /** Sets the specified value to the {@code vertexBindingUnit} field. */
     public VkIndirectCommandsVertexBufferTokenEXT vertexBindingUnit(@NativeType("uint32_t") int value) { nvertexBindingUnit(address(), value); return this; }
 
     /**
@@ -259,11 +245,11 @@ public class VkIndirectCommandsVertexBufferTokenEXT extends Struct<VkIndirectCom
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectCommandsVertexBufferTokenEXT#vertexBindingUnit} field. */
+        /** @return the value of the {@code vertexBindingUnit} field. */
         @NativeType("uint32_t")
         public int vertexBindingUnit() { return VkIndirectCommandsVertexBufferTokenEXT.nvertexBindingUnit(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectCommandsVertexBufferTokenEXT#vertexBindingUnit} field. */
+        /** Sets the specified value to the {@code vertexBindingUnit} field. */
         public VkIndirectCommandsVertexBufferTokenEXT.Buffer vertexBindingUnit(@NativeType("uint32_t") int value) { VkIndirectCommandsVertexBufferTokenEXT.nvertexBindingUnit(address(), value); return this; }
 
     }

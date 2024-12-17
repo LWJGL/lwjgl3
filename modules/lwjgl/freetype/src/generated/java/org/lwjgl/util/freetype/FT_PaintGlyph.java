@@ -14,15 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code COLR} v1 {@code PaintGlyph} paint table.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintGlyph {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     FT_UInt glyphID;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintGlyph extends Struct<FT_PaintGlyph> {
 

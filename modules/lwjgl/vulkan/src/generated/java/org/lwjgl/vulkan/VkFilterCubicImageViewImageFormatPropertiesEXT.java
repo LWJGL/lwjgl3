@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure for querying cubic filtering capabilities of an image view type.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTFilterCubic#VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@code pNext} chain of the {@link VkImageFormatProperties2} structure includes a {@link VkFilterCubicImageViewImageFormatPropertiesEXT} structure, the {@code pNext} chain of the {@link VkPhysicalDeviceImageFormatInfo2} structure <b>must</b> include a {@link VkPhysicalDeviceImageViewImageFormatInfoEXT} structure with an {@code imageViewType} that is compatible with {@code imageType}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkFilterCubicImageViewImageFormatPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #filterCubic};
- *     VkBool32 {@link #filterCubicMinmax};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 filterCubic;
+ *     VkBool32 filterCubicMinmax;
+ * }}</pre>
  */
 public class VkFilterCubicImageViewImageFormatPropertiesEXT extends Struct<VkFilterCubicImageViewImageFormatPropertiesEXT> implements NativeResource {
 
@@ -94,24 +78,24 @@ public class VkFilterCubicImageViewImageFormatPropertiesEXT extends Struct<VkFil
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** tells if image format, image type and image view type <b>can</b> be used with cubic filtering. This field is set by the implementation. An application-specified value is ignored. */
+    /** @return the value of the {@code filterCubic} field. */
     @NativeType("VkBool32")
     public boolean filterCubic() { return nfilterCubic(address()) != 0; }
-    /** tells if image format, image type and image view type <b>can</b> be used with cubic filtering and minmax filtering. This field is set by the implementation. An application-specified value is ignored. */
+    /** @return the value of the {@code filterCubicMinmax} field. */
     @NativeType("VkBool32")
     public boolean filterCubicMinmax() { return nfilterCubicMinmax(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkFilterCubicImageViewImageFormatPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTFilterCubic#VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTFilterCubic#VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkFilterCubicImageViewImageFormatPropertiesEXT sType$Default() { return sType(EXTFilterCubic.VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkFilterCubicImageViewImageFormatPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,24 +308,24 @@ public class VkFilterCubicImageViewImageFormatPropertiesEXT extends Struct<VkFil
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkFilterCubicImageViewImageFormatPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkFilterCubicImageViewImageFormatPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#filterCubic} field. */
+        /** @return the value of the {@code filterCubic} field. */
         @NativeType("VkBool32")
         public boolean filterCubic() { return VkFilterCubicImageViewImageFormatPropertiesEXT.nfilterCubic(address()) != 0; }
-        /** @return the value of the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#filterCubicMinmax} field. */
+        /** @return the value of the {@code filterCubicMinmax} field. */
         @NativeType("VkBool32")
         public boolean filterCubicMinmax() { return VkFilterCubicImageViewImageFormatPropertiesEXT.nfilterCubicMinmax(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkFilterCubicImageViewImageFormatPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkFilterCubicImageViewImageFormatPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTFilterCubic#VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT} value to the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTFilterCubic#VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkFilterCubicImageViewImageFormatPropertiesEXT.Buffer sType$Default() { return sType(EXTFilterCubic.VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkFilterCubicImageViewImageFormatPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkFilterCubicImageViewImageFormatPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkFilterCubicImageViewImageFormatPropertiesEXT.npNext(address(), value); return this; }
 
     }

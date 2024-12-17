@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_PLUGINLIST {
  *     FMOD_PLUGINTYPE type;
  *     void * description;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_PLUGINLIST extends Struct<FMOD_PLUGINLIST> implements NativeResource {
 

@@ -16,31 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * System property for face tracking.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>can</b> inspect whether the system is capable of receiving face tracking input by extending the {@link XrSystemProperties} with {@link XrSystemFaceTrackingProperties2FB} structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
- * 
- * <p>If an application calls {@link FBFaceTracking2#xrCreateFaceTracker2FB CreateFaceTracker2FB} only with unsupported {@link XrFaceTrackerCreateInfo2FB}{@code ::requestedDataSources}, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link FBFaceTracking2#xrCreateFaceTracker2FB CreateFaceTracker2FB}. For example, if an application calls {@link FBFaceTracking2#xrCreateFaceTracker2FB CreateFaceTracker2FB} only with {@link FBFaceTracking2#XR_FACE_TRACKING_DATA_SOURCE2_AUDIO_FB FACE_TRACKING_DATA_SOURCE2_AUDIO_FB} in {@link XrFaceTrackerCreateInfo2FB}{@code ::requestedDataSources} when the runtime returns {@link XR10#XR_FALSE FALSE} for {@code supportsAudioFaceTracking}, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link FBFaceTracking2#xrCreateFaceTracker2FB CreateFaceTracker2FB}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBFaceTracking2 XR_FB_face_tracking2} extension <b>must</b> be enabled prior to using {@link XrSystemFaceTrackingProperties2FB}</li>
- * <li>{@code type} <b>must</b> be {@link FBFaceTracking2#XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemFaceTrackingProperties2FB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsVisualFaceTracking};
- *     XrBool32 {@link #supportsAudioFaceTracking};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsVisualFaceTracking;
+ *     XrBool32 supportsAudioFaceTracking;
+ * }}</pre>
  */
 public class XrSystemFaceTrackingProperties2FB extends Struct<XrSystemFaceTrackingProperties2FB> implements NativeResource {
 
@@ -96,24 +78,24 @@ public class XrSystemFaceTrackingProperties2FB extends Struct<XrSystemFaceTracki
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32}, indicating if the current system is capable of receiving face tracking input that is estimated based on visual data source. */
+    /** @return the value of the {@code supportsVisualFaceTracking} field. */
     @NativeType("XrBool32")
     public boolean supportsVisualFaceTracking() { return nsupportsVisualFaceTracking(address()) != 0; }
-    /** an {@code XrBool32}, indicating if the current system is capable of receiving face tracking input that is estimated based on audio data source. */
+    /** @return the value of the {@code supportsAudioFaceTracking} field. */
     @NativeType("XrBool32")
     public boolean supportsAudioFaceTracking() { return nsupportsAudioFaceTracking(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemFaceTrackingProperties2FB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBFaceTracking2#XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBFaceTracking2#XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB} value to the {@code type} field. */
     public XrSystemFaceTrackingProperties2FB type$Default() { return type(FBFaceTracking2.XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemFaceTrackingProperties2FB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,24 +289,24 @@ public class XrSystemFaceTrackingProperties2FB extends Struct<XrSystemFaceTracki
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemFaceTrackingProperties2FB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemFaceTrackingProperties2FB.ntype(address()); }
-        /** @return the value of the {@link XrSystemFaceTrackingProperties2FB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemFaceTrackingProperties2FB.nnext(address()); }
-        /** @return the value of the {@link XrSystemFaceTrackingProperties2FB#supportsVisualFaceTracking} field. */
+        /** @return the value of the {@code supportsVisualFaceTracking} field. */
         @NativeType("XrBool32")
         public boolean supportsVisualFaceTracking() { return XrSystemFaceTrackingProperties2FB.nsupportsVisualFaceTracking(address()) != 0; }
-        /** @return the value of the {@link XrSystemFaceTrackingProperties2FB#supportsAudioFaceTracking} field. */
+        /** @return the value of the {@code supportsAudioFaceTracking} field. */
         @NativeType("XrBool32")
         public boolean supportsAudioFaceTracking() { return XrSystemFaceTrackingProperties2FB.nsupportsAudioFaceTracking(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemFaceTrackingProperties2FB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemFaceTrackingProperties2FB.Buffer type(@NativeType("XrStructureType") int value) { XrSystemFaceTrackingProperties2FB.ntype(address(), value); return this; }
-        /** Sets the {@link FBFaceTracking2#XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB} value to the {@link XrSystemFaceTrackingProperties2FB#type} field. */
+        /** Sets the {@link FBFaceTracking2#XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB} value to the {@code type} field. */
         public XrSystemFaceTrackingProperties2FB.Buffer type$Default() { return type(FBFaceTracking2.XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB); }
-        /** Sets the specified value to the {@link XrSystemFaceTrackingProperties2FB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemFaceTrackingProperties2FB.Buffer next(@NativeType("void *") long value) { XrSystemFaceTrackingProperties2FB.nnext(address(), value); return this; }
 
     }

@@ -16,32 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * End frame information.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_FRAME_END_INFO TYPE_FRAME_END_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrFrameEndInfoML}, {@link XrGlobalDimmerFrameEndInfoML}, {@link XrLocalDimmingFrameEndInfoMETA}, {@link XrSecondaryViewConfigurationFrameEndInfoMSFT}</li>
- * <li>{@code environmentBlendMode} <b>must</b> be a valid {@code XrEnvironmentBlendMode} value</li>
- * <li>If {@code layerCount} is not 0, {@code layers} <b>must</b> be a pointer to an array of {@code layerCount} valid {@link XrCompositionLayerBaseHeader}-based structures. See also: {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerPassthroughFB}, {@link XrCompositionLayerPassthroughHTC}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerQuad}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}, {@link XR10#xrEndFrame EndFrame}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFrameEndInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrTime {@link #displayTime};
- *     XrEnvironmentBlendMode {@link #environmentBlendMode};
- *     uint32_t {@link #layerCount};
- *     {@link XrCompositionLayerBaseHeader XrCompositionLayerBaseHeader} const * const * {@link #layers};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrTime displayTime;
+ *     XrEnvironmentBlendMode environmentBlendMode;
+ *     uint32_t layerCount;
+ *     {@link XrCompositionLayerBaseHeader XrCompositionLayerBaseHeader} const * const * layers;
+ * }}</pre>
  */
 public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeResource {
 
@@ -103,30 +86,30 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrTime} at which this frame <b>should</b> be displayed. */
+    /** @return the value of the {@code displayTime} field. */
     @NativeType("XrTime")
     public long displayTime() { return ndisplayTime(address()); }
-    /** the {@code XrEnvironmentBlendMode} value representing the desired <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#rendering-environment-blend-mode">environment blend mode</a> for this frame. */
+    /** @return the value of the {@code environmentBlendMode} field. */
     @NativeType("XrEnvironmentBlendMode")
     public int environmentBlendMode() { return nenvironmentBlendMode(address()); }
-    /** the number of composition layers in this frame. The maximum supported layer count is identified by {@link XrSystemGraphicsProperties}::maxLayerCount. If layerCount is greater than the maximum supported layer count then {@link XR10#XR_ERROR_LAYER_LIMIT_EXCEEDED ERROR_LAYER_LIMIT_EXCEEDED} <b>must</b> be returned. */
+    /** @return the value of the {@code layerCount} field. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
-    /** a pointer to an array of {@link XrCompositionLayerBaseHeader} pointers. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
     @NativeType("XrCompositionLayerBaseHeader const * const *")
     public @Nullable PointerBuffer layers() { return nlayers(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFrameEndInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_FRAME_END_INFO TYPE_FRAME_END_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_FRAME_END_INFO TYPE_FRAME_END_INFO} value to the {@code type} field. */
     public XrFrameEndInfo type$Default() { return type(XR10.XR_TYPE_FRAME_END_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFrameEndInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrFrameEndInfoML} value to the {@code next} chain. */
     public XrFrameEndInfo next(XrFrameEndInfoML value) { return this.next(value.next(this.next()).address()); }
@@ -136,13 +119,13 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
     public XrFrameEndInfo next(XrLocalDimmingFrameEndInfoMETA value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSecondaryViewConfigurationFrameEndInfoMSFT} value to the {@code next} chain. */
     public XrFrameEndInfo next(XrSecondaryViewConfigurationFrameEndInfoMSFT value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #displayTime} field. */
+    /** Sets the specified value to the {@code displayTime} field. */
     public XrFrameEndInfo displayTime(@NativeType("XrTime") long value) { ndisplayTime(address(), value); return this; }
-    /** Sets the specified value to the {@link #environmentBlendMode} field. */
+    /** Sets the specified value to the {@code environmentBlendMode} field. */
     public XrFrameEndInfo environmentBlendMode(@NativeType("XrEnvironmentBlendMode") int value) { nenvironmentBlendMode(address(), value); return this; }
-    /** Sets the specified value to the {@link #layerCount} field. */
+    /** Sets the specified value to the {@code layerCount} field. */
     public XrFrameEndInfo layerCount(@NativeType("uint32_t") int value) { nlayerCount(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #layers} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code layers} field. */
     public XrFrameEndInfo layers(@Nullable @NativeType("XrCompositionLayerBaseHeader const * const *") PointerBuffer value) { nlayers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,30 +339,30 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFrameEndInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFrameEndInfo.ntype(address()); }
-        /** @return the value of the {@link XrFrameEndInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFrameEndInfo.nnext(address()); }
-        /** @return the value of the {@link XrFrameEndInfo#displayTime} field. */
+        /** @return the value of the {@code displayTime} field. */
         @NativeType("XrTime")
         public long displayTime() { return XrFrameEndInfo.ndisplayTime(address()); }
-        /** @return the value of the {@link XrFrameEndInfo#environmentBlendMode} field. */
+        /** @return the value of the {@code environmentBlendMode} field. */
         @NativeType("XrEnvironmentBlendMode")
         public int environmentBlendMode() { return XrFrameEndInfo.nenvironmentBlendMode(address()); }
-        /** @return the value of the {@link XrFrameEndInfo#layerCount} field. */
+        /** @return the value of the {@code layerCount} field. */
         @NativeType("uint32_t")
         public int layerCount() { return XrFrameEndInfo.nlayerCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrFrameEndInfo#layers} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code layers} field. */
         @NativeType("XrCompositionLayerBaseHeader const * const *")
         public @Nullable PointerBuffer layers() { return XrFrameEndInfo.nlayers(address()); }
 
-        /** Sets the specified value to the {@link XrFrameEndInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFrameEndInfo.Buffer type(@NativeType("XrStructureType") int value) { XrFrameEndInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_FRAME_END_INFO TYPE_FRAME_END_INFO} value to the {@link XrFrameEndInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_FRAME_END_INFO TYPE_FRAME_END_INFO} value to the {@code type} field. */
         public XrFrameEndInfo.Buffer type$Default() { return type(XR10.XR_TYPE_FRAME_END_INFO); }
-        /** Sets the specified value to the {@link XrFrameEndInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFrameEndInfo.Buffer next(@NativeType("void const *") long value) { XrFrameEndInfo.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrFrameEndInfoML} value to the {@code next} chain. */
         public XrFrameEndInfo.Buffer next(XrFrameEndInfoML value) { return this.next(value.next(this.next()).address()); }
@@ -389,13 +372,13 @@ public class XrFrameEndInfo extends Struct<XrFrameEndInfo> implements NativeReso
         public XrFrameEndInfo.Buffer next(XrLocalDimmingFrameEndInfoMETA value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSecondaryViewConfigurationFrameEndInfoMSFT} value to the {@code next} chain. */
         public XrFrameEndInfo.Buffer next(XrSecondaryViewConfigurationFrameEndInfoMSFT value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrFrameEndInfo#displayTime} field. */
+        /** Sets the specified value to the {@code displayTime} field. */
         public XrFrameEndInfo.Buffer displayTime(@NativeType("XrTime") long value) { XrFrameEndInfo.ndisplayTime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFrameEndInfo#environmentBlendMode} field. */
+        /** Sets the specified value to the {@code environmentBlendMode} field. */
         public XrFrameEndInfo.Buffer environmentBlendMode(@NativeType("XrEnvironmentBlendMode") int value) { XrFrameEndInfo.nenvironmentBlendMode(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFrameEndInfo#layerCount} field. */
+        /** Sets the specified value to the {@code layerCount} field. */
         public XrFrameEndInfo.Buffer layerCount(@NativeType("uint32_t") int value) { XrFrameEndInfo.nlayerCount(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link XrFrameEndInfo#layers} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code layers} field. */
         public XrFrameEndInfo.Buffer layers(@Nullable @NativeType("XrCompositionLayerBaseHeader const * const *") PointerBuffer value) { XrFrameEndInfo.nlayers(address(), value); return this; }
 
     }

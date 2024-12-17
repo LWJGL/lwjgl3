@@ -17,34 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.openxr.FBHandTrackingCapsules.*;
 
 /**
- * A 3D capsule defined by two points and a radius.
- * 
- * <h5>Member Descriptions</h5>
- * 
- * <ul>
- * <li>{@code points} are the two points defining the capsule length.</li>
- * <li>{@code radius} is the radius of the capsule.</li>
- * <li>{@code joint} is the hand joint that drives this capsule’s transform. Multiple capsules <b>may</b> be attached to the same joint.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBHandTrackingCapsules XR_FB_hand_tracking_capsules} extension <b>must</b> be enabled prior to using {@link XrHandCapsuleFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandTrackingCapsulesStateFB}, {@link XrVector3f}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandCapsuleFB {
  *     {@link XrVector3f XrVector3f} points[XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB];
  *     float radius;
  *     XrHandJointEXT joint;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrHandCapsuleFB extends Struct<XrHandCapsuleFB> {
 

@@ -7,12 +7,6 @@ package org.lwjgl.system.macosx;
 
 import org.lwjgl.system.*;
 
-/**
- * Native bindings to libSystem, the MacOS system library.
- * 
- * <p>This class contains no functionality and is only responsible for loading the system library. Other libraries (contained in libSystem) reuse the library
- * handle loaded by this class.</p>
- */
 public final class LibSystem {
 
     private static final SharedLibrary SYSTEM = Library.loadNative(LibSystem.class, "org.lwjgl", "System");

@@ -14,15 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_InputBindingLoad_t {
  *     PropertyContainerHandle_t ulAppContainer;
  *     uint64_t pathMessage;
  *     uint64_t pathUrl;
  *     uint64_t pathControllerType;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_InputBindingLoad_t")
 public class VREventInputBindingLoad extends Struct<VREventInputBindingLoad> {

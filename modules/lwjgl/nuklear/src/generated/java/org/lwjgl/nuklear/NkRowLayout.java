@@ -15,11 +15,9 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_row_layout {
- *     enum nk_panel_row_layout_type {@link #type};
+ *     enum nk_panel_row_layout_type type;
  *     int index;
  *     float height;
  *     float min_height;
@@ -32,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkRect struct nk_rect} item;
  *     int tree_depth;
  *     float templates[16];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_row_layout")
 public class NkRowLayout extends Struct<NkRowLayout> {
@@ -116,7 +114,7 @@ public class NkRowLayout extends Struct<NkRowLayout> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** one of:<br><table><tr><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_FIXED LAYOUT_DYNAMIC_FIXED}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_ROW LAYOUT_DYNAMIC_ROW}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC_FREE LAYOUT_DYNAMIC_FREE}</td><td>{@link Nuklear#NK_LAYOUT_DYNAMIC LAYOUT_DYNAMIC}</td></tr><tr><td>{@link Nuklear#NK_LAYOUT_STATIC_FIXED LAYOUT_STATIC_FIXED}</td><td>{@link Nuklear#NK_LAYOUT_STATIC_ROW LAYOUT_STATIC_ROW}</td><td>{@link Nuklear#NK_LAYOUT_STATIC_FREE LAYOUT_STATIC_FREE}</td><td>{@link Nuklear#NK_LAYOUT_STATIC LAYOUT_STATIC}</td></tr><tr><td>{@link Nuklear#NK_LAYOUT_TEMPLATE LAYOUT_TEMPLATE}</td><td>{@link Nuklear#NK_LAYOUT_COUNT LAYOUT_COUNT}</td></tr></table> */
+    /** @return the value of the {@code type} field. */
     @NativeType("enum nk_panel_row_layout_type")
     public int type() { return ntype(address()); }
     /** @return the value of the {@code index} field. */
@@ -127,11 +125,7 @@ public class NkRowLayout extends Struct<NkRowLayout> {
     public float min_height() { return nmin_height(address()); }
     /** @return the value of the {@code columns} field. */
     public int columns() { return ncolumns(address()); }
-    /**
-     * @return a {@link FloatBuffer} view of the data pointed to by the {@code ratio} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code ratio} field. */
     @NativeType("float const *")
     public FloatBuffer ratio(int capacity) { return nratio(address(), capacity); }
     /** @return the value of the {@code item_width} field. */
@@ -256,7 +250,7 @@ public class NkRowLayout extends Struct<NkRowLayout> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link NkRowLayout#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("enum nk_panel_row_layout_type")
         public int type() { return NkRowLayout.ntype(address()); }
         /** @return the value of the {@code index} field. */
@@ -267,11 +261,7 @@ public class NkRowLayout extends Struct<NkRowLayout> {
         public float min_height() { return NkRowLayout.nmin_height(address()); }
         /** @return the value of the {@code columns} field. */
         public int columns() { return NkRowLayout.ncolumns(address()); }
-        /**
-         * @return a {@link FloatBuffer} view of the data pointed to by the {@code ratio} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code ratio} field. */
         @NativeType("float const *")
         public FloatBuffer ratio(int capacity) { return NkRowLayout.nratio(address(), capacity); }
         /** @return the value of the {@code item_width} field. */

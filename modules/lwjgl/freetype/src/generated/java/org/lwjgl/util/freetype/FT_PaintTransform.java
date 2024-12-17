@@ -14,15 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code COLR} v1 {@code PaintTransform} paint table.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintTransform {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} paint;
  *     {@link FT_Affine23 FT_Affine23} affine;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintTransform extends Struct<FT_PaintTransform> {
 

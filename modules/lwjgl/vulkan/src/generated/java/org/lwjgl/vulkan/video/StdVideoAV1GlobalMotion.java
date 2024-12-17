@@ -19,13 +19,11 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1GlobalMotion {
  *     uint8_t GmType[STD_VIDEO_AV1_NUM_REF_FRAMES];
  *     int32_t gm_params[STD_VIDEO_AV1_GLOBAL_MOTION_PARAMS];
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1GlobalMotion extends Struct<StdVideoAV1GlobalMotion> implements NativeResource {
 

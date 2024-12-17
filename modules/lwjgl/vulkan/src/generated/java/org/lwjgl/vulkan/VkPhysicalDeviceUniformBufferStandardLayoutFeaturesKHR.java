@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceUniformBufferStandardLayoutFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 uniformBufferStandardLayout;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR extends VkPhysicalDeviceUniformBufferStandardLayoutFeatures {
 

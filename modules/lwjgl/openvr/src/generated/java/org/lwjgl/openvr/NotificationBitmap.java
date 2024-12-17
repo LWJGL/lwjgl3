@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Used for passing graphic data.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct NotificationBitmap_t {
  *     void * m_pImageData;
  *     int32_t m_nWidth;
  *     int32_t m_nHeight;
  *     int32_t m_nBytesPerPixel;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct NotificationBitmap_t")
 public class NotificationBitmap extends Struct<NotificationBitmap> implements NativeResource {
@@ -84,11 +80,7 @@ public class NotificationBitmap extends Struct<NotificationBitmap> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code m_pImageData} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code m_pImageData} field. */
     @NativeType("void *")
     public ByteBuffer m_pImageData(int capacity) { return nm_pImageData(address(), capacity); }
     /** @return the value of the {@code m_nWidth} field. */
@@ -337,11 +329,7 @@ public class NotificationBitmap extends Struct<NotificationBitmap> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code m_pImageData} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code m_pImageData} field. */
         @NativeType("void *")
         public ByteBuffer m_pImageData(int capacity) { return NotificationBitmap.nm_pImageData(address(), capacity); }
         /** @return the value of the {@code m_nWidth} field. */

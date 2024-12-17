@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct msdf_bitmap {
- *     int {@link #type};
- *     int {@link #width};
- *     int {@link #height};
- *     void * {@link #handle};
- * }</code></pre>
+ *     int type;
+ *     int width;
+ *     int height;
+ *     void * handle;
+ * }}</pre>
  */
 @NativeType("struct msdf_bitmap")
 public class MSDFGenBitmap extends Struct<MSDFGenBitmap> implements NativeResource {
@@ -82,23 +80,23 @@ public class MSDFGenBitmap extends Struct<MSDFGenBitmap> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of this bitmap. One of:<br><table><tr><td>{@link MSDFGen#MSDF_BITMAP_TYPE_SDF BITMAP_TYPE_SDF}</td><td>{@link MSDFGen#MSDF_BITMAP_TYPE_PSDF BITMAP_TYPE_PSDF}</td><td>{@link MSDFGen#MSDF_BITMAP_TYPE_MSDF BITMAP_TYPE_MSDF}</td><td>{@link MSDFGen#MSDF_BITMAP_TYPE_MTSDF BITMAP_TYPE_MTSDF}</td></tr></table> */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** the width of this bitmap in pixels */
+    /** @return the value of the {@code width} field. */
     public int width() { return nwidth(address()); }
-    /** the height of this bitmap in pixels */
+    /** @return the value of the {@code height} field. */
     public int height() { return nheight(address()); }
-    /** the handle of the associated bitmap C++ object */
+    /** @return the value of the {@code handle} field. */
     @NativeType("void *")
     public long handle() { return nhandle(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public MSDFGenBitmap type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public MSDFGenBitmap width(int value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public MSDFGenBitmap height(int value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@link #handle} field. */
+    /** Sets the specified value to the {@code handle} field. */
     public MSDFGenBitmap handle(@NativeType("void *") long value) { nhandle(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,23 +307,23 @@ public class MSDFGenBitmap extends Struct<MSDFGenBitmap> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link MSDFGenBitmap#type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return MSDFGenBitmap.ntype(address()); }
-        /** @return the value of the {@link MSDFGenBitmap#width} field. */
+        /** @return the value of the {@code width} field. */
         public int width() { return MSDFGenBitmap.nwidth(address()); }
-        /** @return the value of the {@link MSDFGenBitmap#height} field. */
+        /** @return the value of the {@code height} field. */
         public int height() { return MSDFGenBitmap.nheight(address()); }
-        /** @return the value of the {@link MSDFGenBitmap#handle} field. */
+        /** @return the value of the {@code handle} field. */
         @NativeType("void *")
         public long handle() { return MSDFGenBitmap.nhandle(address()); }
 
-        /** Sets the specified value to the {@link MSDFGenBitmap#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public MSDFGenBitmap.Buffer type(int value) { MSDFGenBitmap.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenBitmap#width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public MSDFGenBitmap.Buffer width(int value) { MSDFGenBitmap.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenBitmap#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public MSDFGenBitmap.Buffer height(int value) { MSDFGenBitmap.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenBitmap#handle} field. */
+        /** Sets the specified value to the {@code handle} field. */
         public MSDFGenBitmap.Buffer handle(@NativeType("void *") long value) { MSDFGenBitmap.nhandle(address(), value); return this; }
 
     }

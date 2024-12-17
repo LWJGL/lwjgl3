@@ -16,22 +16,8 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/WGL_ARB_pixel_format.txt">WGL_ARB_pixel_format</a> extension.
- * 
- * <p>This extension adds functions to query pixel format attributes and to choose from the list of supported pixel formats.</p>
- * 
- * <p>These functions treat pixel formats as opaque types: attributes are specified by name rather than by accessing them directly as fields in a structure.
- * Thus the list of attributes can be easily extended.</p>
- * 
- * <p>Requires {@link WGLARBExtensionsString WGL_ARB_extensions_string}.</p>
- */
 public class WGLARBPixelFormat {
 
-    /**
-     * Accepted in the {@code attributes} parameter array of {@link #wglGetPixelFormatAttribivARB GetPixelFormatAttribivARB}, and {@link #wglGetPixelFormatAttribfvARB GetPixelFormatAttribfvARB}, and as a type in
-     * the {@code attribIList} and {@code attribFList} parameter arrays of {@link #wglChoosePixelFormatARB ChoosePixelFormatARB}.
-     */
     public static final int
         WGL_NUMBER_PIXEL_FORMATS_ARB    = 0x2000,
         WGL_DRAW_TO_WINDOW_ARB          = 0x2001,
@@ -75,10 +61,6 @@ public class WGLARBPixelFormat {
         WGL_STENCIL_BITS_ARB            = 0x2023,
         WGL_AUX_BUFFERS_ARB             = 0x2024;
 
-    /**
-     * Accepted as a value in the {@code attribIList} and {@code attribFList} parameter arrays of {@link #wglChoosePixelFormatARB ChoosePixelFormatARB}, and returned in the
-     * {@code values} parameter array of {@link #wglGetPixelFormatAttribivARB GetPixelFormatAttribivARB} and {@link #wglGetPixelFormatAttribfvARB GetPixelFormatAttribfvARB}.
-     */
     public static final int
         WGL_NO_ACCELERATION_ARB      = 0x2025,
         WGL_GENERIC_ACCELERATION_ARB = 0x2026,
@@ -95,11 +77,7 @@ public class WGLARBPixelFormat {
 
     // --- [ wglGetPixelFormatAttribivARB ] ---
 
-    /**
-     * Unsafe version of: {@link #wglGetPixelFormatAttribivARB GetPixelFormatAttribivARB}
-     *
-     * @param n the number of attributes being queried
-     */
+    /** {@code BOOL wglGetPixelFormatAttribivARB(HDC hdc, int pixelFormat, int layerPlane, UINT n, int const * attributes, int * values)} */
     public static int nwglGetPixelFormatAttribivARB(long hdc, int pixelFormat, int layerPlane, int n, long attributes, long values) {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetPixelFormatAttribivARB;
         if (CHECKS) {
@@ -109,13 +87,7 @@ public class WGLARBPixelFormat {
         return callPPPI(hdc, pixelFormat, layerPlane, n, attributes, values, __functionAddress);
     }
 
-    /**
-     * @param hdc         the device context on which the pixel format is supported
-     * @param pixelFormat an index that specifies the pixel format
-     * @param layerPlane  the plane being queried
-     * @param attributes  an array of pixel format attribute identifiers which specify the attributes to be queried. One of:<br><table><tr><td>{@link #WGL_NUMBER_PIXEL_FORMATS_ARB NUMBER_PIXEL_FORMATS_ARB}</td><td>{@link #WGL_DRAW_TO_WINDOW_ARB DRAW_TO_WINDOW_ARB}</td><td>{@link #WGL_DRAW_TO_BITMAP_ARB DRAW_TO_BITMAP_ARB}</td><td>{@link #WGL_ACCELERATION_ARB ACCELERATION_ARB}</td></tr><tr><td>{@link #WGL_NEED_PALETTE_ARB NEED_PALETTE_ARB}</td><td>{@link #WGL_NEED_SYSTEM_PALETTE_ARB NEED_SYSTEM_PALETTE_ARB}</td><td>{@link #WGL_SWAP_LAYER_BUFFERS_ARB SWAP_LAYER_BUFFERS_ARB}</td><td>{@link #WGL_SWAP_METHOD_ARB SWAP_METHOD_ARB}</td></tr><tr><td>{@link #WGL_NUMBER_OVERLAYS_ARB NUMBER_OVERLAYS_ARB}</td><td>{@link #WGL_NUMBER_UNDERLAYS_ARB NUMBER_UNDERLAYS_ARB}</td><td>{@link #WGL_TRANSPARENT_ARB TRANSPARENT_ARB}</td><td>{@link #WGL_TRANSPARENT_RED_VALUE_ARB TRANSPARENT_RED_VALUE_ARB}</td></tr><tr><td>{@link #WGL_TRANSPARENT_GREEN_VALUE_ARB TRANSPARENT_GREEN_VALUE_ARB}</td><td>{@link #WGL_TRANSPARENT_BLUE_VALUE_ARB TRANSPARENT_BLUE_VALUE_ARB}</td><td>{@link #WGL_TRANSPARENT_ALPHA_VALUE_ARB TRANSPARENT_ALPHA_VALUE_ARB}</td><td>{@link #WGL_TRANSPARENT_INDEX_VALUE_ARB TRANSPARENT_INDEX_VALUE_ARB}</td></tr><tr><td>{@link #WGL_SHARE_DEPTH_ARB SHARE_DEPTH_ARB}</td><td>{@link #WGL_SHARE_STENCIL_ARB SHARE_STENCIL_ARB}</td><td>{@link #WGL_SHARE_ACCUM_ARB SHARE_ACCUM_ARB}</td><td>{@link #WGL_SUPPORT_GDI_ARB SUPPORT_GDI_ARB}</td></tr><tr><td>{@link #WGL_SUPPORT_OPENGL_ARB SUPPORT_OPENGL_ARB}</td><td>{@link #WGL_DOUBLE_BUFFER_ARB DOUBLE_BUFFER_ARB}</td><td>{@link #WGL_STEREO_ARB STEREO_ARB}</td><td>{@link #WGL_PIXEL_TYPE_ARB PIXEL_TYPE_ARB}</td></tr><tr><td>{@link #WGL_COLOR_BITS_ARB COLOR_BITS_ARB}</td><td>{@link #WGL_RED_BITS_ARB RED_BITS_ARB}</td><td>{@link #WGL_RED_SHIFT_ARB RED_SHIFT_ARB}</td><td>{@link #WGL_GREEN_BITS_ARB GREEN_BITS_ARB}</td></tr><tr><td>{@link #WGL_GREEN_SHIFT_ARB GREEN_SHIFT_ARB}</td><td>{@link #WGL_BLUE_BITS_ARB BLUE_BITS_ARB}</td><td>{@link #WGL_BLUE_SHIFT_ARB BLUE_SHIFT_ARB}</td><td>{@link #WGL_ALPHA_BITS_ARB ALPHA_BITS_ARB}</td></tr><tr><td>{@link #WGL_ALPHA_SHIFT_ARB ALPHA_SHIFT_ARB}</td><td>{@link #WGL_ACCUM_BITS_ARB ACCUM_BITS_ARB}</td><td>{@link #WGL_ACCUM_RED_BITS_ARB ACCUM_RED_BITS_ARB}</td><td>{@link #WGL_ACCUM_GREEN_BITS_ARB ACCUM_GREEN_BITS_ARB}</td></tr><tr><td>{@link #WGL_ACCUM_BLUE_BITS_ARB ACCUM_BLUE_BITS_ARB}</td><td>{@link #WGL_ACCUM_ALPHA_BITS_ARB ACCUM_ALPHA_BITS_ARB}</td><td>{@link #WGL_DEPTH_BITS_ARB DEPTH_BITS_ARB}</td><td>{@link #WGL_STENCIL_BITS_ARB STENCIL_BITS_ARB}</td></tr><tr><td>{@link #WGL_AUX_BUFFERS_ARB AUX_BUFFERS_ARB}</td></tr></table>
-     * @param values      a buffer into which the results of the query will be placed
-     */
+    /** {@code BOOL wglGetPixelFormatAttribivARB(HDC hdc, int pixelFormat, int layerPlane, UINT n, int const * attributes, int * values)} */
     @NativeType("BOOL")
     public static boolean wglGetPixelFormatAttribivARB(@NativeType("HDC") long hdc, int pixelFormat, int layerPlane, @NativeType("int const *") IntBuffer attributes, @NativeType("int *") IntBuffer values) {
         if (CHECKS) {
@@ -124,12 +96,7 @@ public class WGLARBPixelFormat {
         return nwglGetPixelFormatAttribivARB(hdc, pixelFormat, layerPlane, attributes.remaining(), memAddress(attributes), memAddress(values)) != 0;
     }
 
-    /**
-     * @param hdc         the device context on which the pixel format is supported
-     * @param pixelFormat an index that specifies the pixel format
-     * @param layerPlane  the plane being queried
-     * @param values      a buffer into which the results of the query will be placed
-     */
+    /** {@code BOOL wglGetPixelFormatAttribivARB(HDC hdc, int pixelFormat, int layerPlane, UINT n, int const * attributes, int * values)} */
     @NativeType("BOOL")
     public static boolean wglGetPixelFormatAttribiARB(@NativeType("HDC") long hdc, int pixelFormat, int layerPlane, @NativeType("int const *") int attribute, @NativeType("int *") IntBuffer values) {
         if (CHECKS) {
@@ -146,11 +113,7 @@ public class WGLARBPixelFormat {
 
     // --- [ wglGetPixelFormatAttribfvARB ] ---
 
-    /**
-     * Unsafe version of: {@link #wglGetPixelFormatAttribfvARB GetPixelFormatAttribfvARB}
-     *
-     * @param n the number of attributes being queried
-     */
+    /** {@code BOOL wglGetPixelFormatAttribfvARB(HDC hdc, int pixelFormat, int layerPlane, UINT n, int const * attributes, FLOAT * values)} */
     public static int nwglGetPixelFormatAttribfvARB(long hdc, int pixelFormat, int layerPlane, int n, long attributes, long values) {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetPixelFormatAttribfvARB;
         if (CHECKS) {
@@ -160,15 +123,7 @@ public class WGLARBPixelFormat {
         return callPPPI(hdc, pixelFormat, layerPlane, n, attributes, values, __functionAddress);
     }
 
-    /**
-     * Float version of {@link #wglGetPixelFormatAttribivARB GetPixelFormatAttribivARB}.
-     *
-     * @param hdc         the device context on which the pixel format is supported
-     * @param pixelFormat an index that specifies the pixel format
-     * @param layerPlane  the plane being queried
-     * @param attributes  an array of pixel format attribute identifiers which specify the attributes to be queried
-     * @param values      a buffer into which the results of the query will be placed
-     */
+    /** {@code BOOL wglGetPixelFormatAttribfvARB(HDC hdc, int pixelFormat, int layerPlane, UINT n, int const * attributes, FLOAT * values)} */
     @NativeType("BOOL")
     public static boolean wglGetPixelFormatAttribfvARB(@NativeType("HDC") long hdc, int pixelFormat, int layerPlane, @NativeType("int const *") IntBuffer attributes, @NativeType("FLOAT *") FloatBuffer values) {
         if (CHECKS) {
@@ -177,14 +132,7 @@ public class WGLARBPixelFormat {
         return nwglGetPixelFormatAttribfvARB(hdc, pixelFormat, layerPlane, attributes.remaining(), memAddress(attributes), memAddress(values)) != 0;
     }
 
-    /**
-     * Float version of {@link #wglGetPixelFormatAttribivARB GetPixelFormatAttribivARB}.
-     *
-     * @param hdc         the device context on which the pixel format is supported
-     * @param pixelFormat an index that specifies the pixel format
-     * @param layerPlane  the plane being queried
-     * @param values      a buffer into which the results of the query will be placed
-     */
+    /** {@code BOOL wglGetPixelFormatAttribfvARB(HDC hdc, int pixelFormat, int layerPlane, UINT n, int const * attributes, FLOAT * values)} */
     @NativeType("BOOL")
     public static boolean wglGetPixelFormatAttribfARB(@NativeType("HDC") long hdc, int pixelFormat, int layerPlane, @NativeType("int const *") int attribute, @NativeType("FLOAT *") FloatBuffer values) {
         if (CHECKS) {
@@ -201,11 +149,7 @@ public class WGLARBPixelFormat {
 
     // --- [ wglChoosePixelFormatARB ] ---
 
-    /**
-     * Unsafe version of: {@link #wglChoosePixelFormatARB ChoosePixelFormatARB}
-     *
-     * @param maxFormats the number of attributes being queried
-     */
+    /** {@code BOOL wglChoosePixelFormatARB(HDC hdc, int const * attribIList, FLOAT const * attribFList, UINT maxFormats, int * formats, UINT * numFormats)} */
     public static int nwglChoosePixelFormatARB(long hdc, long attribIList, long attribFList, int maxFormats, long formats, long numFormats) {
         long __functionAddress = GL.getCapabilitiesWGL().wglChoosePixelFormatARB;
         if (CHECKS) {
@@ -215,18 +159,7 @@ public class WGLARBPixelFormat {
         return callPPPPPI(hdc, attribIList, attribFList, maxFormats, formats, numFormats, __functionAddress);
     }
 
-    /**
-     * Selects from among all of the available pixel formats (including both accelerated and generic formats and non-displayable formats). This function
-     * accepts attributes for the main planes. A list of pixel formats that match the specified attributes is returned with the "best" pixel formats at the
-     * start of the list (order is device dependent).
-     *
-     * @param hdc         the device context on which the pixel format is supported
-     * @param attribIList a list of attribute {type, value} pairs containing integer attribute values. One of:<br><table><tr><td>{@link #WGL_NUMBER_PIXEL_FORMATS_ARB NUMBER_PIXEL_FORMATS_ARB}</td><td>{@link #WGL_DRAW_TO_WINDOW_ARB DRAW_TO_WINDOW_ARB}</td><td>{@link #WGL_DRAW_TO_BITMAP_ARB DRAW_TO_BITMAP_ARB}</td><td>{@link #WGL_ACCELERATION_ARB ACCELERATION_ARB}</td></tr><tr><td>{@link #WGL_NEED_PALETTE_ARB NEED_PALETTE_ARB}</td><td>{@link #WGL_NEED_SYSTEM_PALETTE_ARB NEED_SYSTEM_PALETTE_ARB}</td><td>{@link #WGL_SWAP_LAYER_BUFFERS_ARB SWAP_LAYER_BUFFERS_ARB}</td><td>{@link #WGL_SWAP_METHOD_ARB SWAP_METHOD_ARB}</td></tr><tr><td>{@link #WGL_NUMBER_OVERLAYS_ARB NUMBER_OVERLAYS_ARB}</td><td>{@link #WGL_NUMBER_UNDERLAYS_ARB NUMBER_UNDERLAYS_ARB}</td><td>{@link #WGL_TRANSPARENT_ARB TRANSPARENT_ARB}</td><td>{@link #WGL_TRANSPARENT_RED_VALUE_ARB TRANSPARENT_RED_VALUE_ARB}</td></tr><tr><td>{@link #WGL_TRANSPARENT_GREEN_VALUE_ARB TRANSPARENT_GREEN_VALUE_ARB}</td><td>{@link #WGL_TRANSPARENT_BLUE_VALUE_ARB TRANSPARENT_BLUE_VALUE_ARB}</td><td>{@link #WGL_TRANSPARENT_ALPHA_VALUE_ARB TRANSPARENT_ALPHA_VALUE_ARB}</td><td>{@link #WGL_TRANSPARENT_INDEX_VALUE_ARB TRANSPARENT_INDEX_VALUE_ARB}</td></tr><tr><td>{@link #WGL_SHARE_DEPTH_ARB SHARE_DEPTH_ARB}</td><td>{@link #WGL_SHARE_STENCIL_ARB SHARE_STENCIL_ARB}</td><td>{@link #WGL_SHARE_ACCUM_ARB SHARE_ACCUM_ARB}</td><td>{@link #WGL_SUPPORT_GDI_ARB SUPPORT_GDI_ARB}</td></tr><tr><td>{@link #WGL_SUPPORT_OPENGL_ARB SUPPORT_OPENGL_ARB}</td><td>{@link #WGL_DOUBLE_BUFFER_ARB DOUBLE_BUFFER_ARB}</td><td>{@link #WGL_STEREO_ARB STEREO_ARB}</td><td>{@link #WGL_PIXEL_TYPE_ARB PIXEL_TYPE_ARB}</td></tr><tr><td>{@link #WGL_COLOR_BITS_ARB COLOR_BITS_ARB}</td><td>{@link #WGL_RED_BITS_ARB RED_BITS_ARB}</td><td>{@link #WGL_RED_SHIFT_ARB RED_SHIFT_ARB}</td><td>{@link #WGL_GREEN_BITS_ARB GREEN_BITS_ARB}</td></tr><tr><td>{@link #WGL_GREEN_SHIFT_ARB GREEN_SHIFT_ARB}</td><td>{@link #WGL_BLUE_BITS_ARB BLUE_BITS_ARB}</td><td>{@link #WGL_BLUE_SHIFT_ARB BLUE_SHIFT_ARB}</td><td>{@link #WGL_ALPHA_BITS_ARB ALPHA_BITS_ARB}</td></tr><tr><td>{@link #WGL_ALPHA_SHIFT_ARB ALPHA_SHIFT_ARB}</td><td>{@link #WGL_ACCUM_BITS_ARB ACCUM_BITS_ARB}</td><td>{@link #WGL_ACCUM_RED_BITS_ARB ACCUM_RED_BITS_ARB}</td><td>{@link #WGL_ACCUM_GREEN_BITS_ARB ACCUM_GREEN_BITS_ARB}</td></tr><tr><td>{@link #WGL_ACCUM_BLUE_BITS_ARB ACCUM_BLUE_BITS_ARB}</td><td>{@link #WGL_ACCUM_ALPHA_BITS_ARB ACCUM_ALPHA_BITS_ARB}</td><td>{@link #WGL_DEPTH_BITS_ARB DEPTH_BITS_ARB}</td><td>{@link #WGL_STENCIL_BITS_ARB STENCIL_BITS_ARB}</td></tr><tr><td>{@link #WGL_AUX_BUFFERS_ARB AUX_BUFFERS_ARB}</td></tr></table>
-     * @param attribFList a list of attribute {type, value} pairs containing floating point attribute values
-     * @param formats     an array of returned indices of the matching pixel formats. The best pixel formats (i.e. closest match and best format for the hardware) are at the
-     *                    head of the list.
-     * @param numFormats  returns the number of matching formats
-     */
+    /** {@code BOOL wglChoosePixelFormatARB(HDC hdc, int const * attribIList, FLOAT const * attribFList, UINT maxFormats, int * formats, UINT * numFormats)} */
     @NativeType("BOOL")
     public static boolean wglChoosePixelFormatARB(@NativeType("HDC") long hdc, @NativeType("int const *") @Nullable IntBuffer attribIList, @NativeType("FLOAT const *") @Nullable FloatBuffer attribFList, @NativeType("int *") IntBuffer formats, @NativeType("UINT *") IntBuffer numFormats) {
         if (CHECKS) {
@@ -237,7 +170,7 @@ public class WGLARBPixelFormat {
         return nwglChoosePixelFormatARB(hdc, memAddressSafe(attribIList), memAddressSafe(attribFList), formats.remaining(), memAddress(formats), memAddress(numFormats)) != 0;
     }
 
-    /** Array version of: {@link #wglGetPixelFormatAttribivARB GetPixelFormatAttribivARB} */
+    /** {@code BOOL wglGetPixelFormatAttribivARB(HDC hdc, int pixelFormat, int layerPlane, UINT n, int const * attributes, int * values)} */
     @NativeType("BOOL")
     public static boolean wglGetPixelFormatAttribivARB(@NativeType("HDC") long hdc, int pixelFormat, int layerPlane, @NativeType("int const *") int[] attributes, @NativeType("int *") int[] values) {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetPixelFormatAttribivARB;
@@ -249,7 +182,7 @@ public class WGLARBPixelFormat {
         return callPPPI(hdc, pixelFormat, layerPlane, attributes.length, attributes, values, __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #wglGetPixelFormatAttribfvARB GetPixelFormatAttribfvARB} */
+    /** {@code BOOL wglGetPixelFormatAttribfvARB(HDC hdc, int pixelFormat, int layerPlane, UINT n, int const * attributes, FLOAT * values)} */
     @NativeType("BOOL")
     public static boolean wglGetPixelFormatAttribfvARB(@NativeType("HDC") long hdc, int pixelFormat, int layerPlane, @NativeType("int const *") int[] attributes, @NativeType("FLOAT *") float[] values) {
         long __functionAddress = GL.getCapabilitiesWGL().wglGetPixelFormatAttribfvARB;
@@ -261,7 +194,7 @@ public class WGLARBPixelFormat {
         return callPPPI(hdc, pixelFormat, layerPlane, attributes.length, attributes, values, __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #wglChoosePixelFormatARB ChoosePixelFormatARB} */
+    /** {@code BOOL wglChoosePixelFormatARB(HDC hdc, int const * attribIList, FLOAT const * attribFList, UINT maxFormats, int * formats, UINT * numFormats)} */
     @NativeType("BOOL")
     public static boolean wglChoosePixelFormatARB(@NativeType("HDC") long hdc, @NativeType("int const *") int @Nullable [] attribIList, @NativeType("FLOAT const *") float @Nullable [] attribFList, @NativeType("int *") int[] formats, @NativeType("UINT *") int[] numFormats) {
         long __functionAddress = GL.getCapabilitiesWGL().wglChoosePixelFormatARB;

@@ -18,25 +18,16 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_mapbuffer.txt">OES_mapbuffer</a> extension.
- * 
- * <p>This extension adds to the vertex buffer object functionality supported by OpenGL ES 1.1 or ES 2.0 by allowing the entire data storage of a buffer
- * object to be mapped into the client's address space.</p>
- */
 public class OESMapbuffer {
 
     static { GLES.initialize(); }
 
-    /** Accepted by the {@code access} parameter of MapBufferOES. */
     public static final int GL_WRITE_ONLY_OES = 0x88B9;
 
-    /** Accepted by the {@code value} parameter of GetBufferParameteriv. */
     public static final int
         GL_BUFFER_ACCESS_OES = 0x88BB,
         GL_BUFFER_MAPPED_OES = 0x88BC;
 
-    /** Accepted by the {@code pname} parameter of GetBufferPointervOES. */
     public static final int GL_BUFFER_MAP_POINTER_OES = 0x88BD;
 
     protected OESMapbuffer() {
@@ -45,14 +36,17 @@ public class OESMapbuffer {
 
     // --- [ glMapBufferOES ] ---
 
+    /** {@code void * glMapBufferOES(GLenum target, GLenum access)} */
     public static native long nglMapBufferOES(int target, int access);
 
+    /** {@code void * glMapBufferOES(GLenum target, GLenum access)} */
     @NativeType("void *")
     public static @Nullable ByteBuffer glMapBufferOES(@NativeType("GLenum") int target, @NativeType("GLenum") int access) {
         long __result = nglMapBufferOES(target, access);
         return memByteBufferSafe(__result, GLES20.glGetBufferParameteri(target, GLES20.GL_BUFFER_SIZE));
     }
 
+    /** {@code void * glMapBufferOES(GLenum target, GLenum access)} */
     @NativeType("void *")
     public static @Nullable ByteBuffer glMapBufferOES(@NativeType("GLenum") int target, @NativeType("GLenum") int access, @Nullable ByteBuffer old_buffer) {
         long __result = nglMapBufferOES(target, access);
@@ -60,6 +54,7 @@ public class OESMapbuffer {
         return apiGetMappedBuffer(old_buffer, __result, length);
     }
 
+    /** {@code void * glMapBufferOES(GLenum target, GLenum access)} */
     @NativeType("void *")
     public static @Nullable ByteBuffer glMapBufferOES(@NativeType("GLenum") int target, @NativeType("GLenum") int access, long length, @Nullable ByteBuffer old_buffer) {
         long __result = nglMapBufferOES(target, access);
@@ -68,13 +63,16 @@ public class OESMapbuffer {
 
     // --- [ glUnmapBufferOES ] ---
 
+    /** {@code GLboolean glUnmapBufferOES(GLenum target)} */
     @NativeType("GLboolean")
     public static native boolean glUnmapBufferOES(@NativeType("GLenum") int target);
 
     // --- [ glGetBufferPointervOES ] ---
 
+    /** {@code void glGetBufferPointervOES(GLenum target, GLenum pname, void ** params)} */
     public static native void nglGetBufferPointervOES(int target, int pname, long params);
 
+    /** {@code void glGetBufferPointervOES(GLenum target, GLenum pname, void ** params)} */
     public static void glGetBufferPointervOES(@NativeType("GLenum") int target, @NativeType("GLenum") int pname, @NativeType("void **") PointerBuffer params) {
         if (CHECKS) {
             check(params, 1);
@@ -82,6 +80,7 @@ public class OESMapbuffer {
         nglGetBufferPointervOES(target, pname, memAddress(params));
     }
 
+    /** {@code void glGetBufferPointervOES(GLenum target, GLenum pname, void ** params)} */
     @NativeType("void")
     public static long glGetBufferPointerOES(@NativeType("GLenum") int target, @NativeType("GLenum") int pname) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();

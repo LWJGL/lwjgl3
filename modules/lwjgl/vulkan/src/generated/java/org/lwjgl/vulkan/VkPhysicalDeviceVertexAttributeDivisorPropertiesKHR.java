@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceVertexAttributeDivisorProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint32_t maxVertexAttribDivisor;
  *     VkBool32 supportsNonZeroFirstInstance;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR extends VkPhysicalDeviceVertexAttributeDivisorProperties {
 

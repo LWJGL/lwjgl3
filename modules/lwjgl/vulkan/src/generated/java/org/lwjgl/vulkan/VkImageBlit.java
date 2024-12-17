@@ -17,40 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an image blit operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>For each element of the {@code pRegions} array, a blit operation is performed for the specified source and destination regions.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The {@code aspectMask} member of {@code srcSubresource} and {@code dstSubresource} <b>must</b> match</li>
- * <li>If neither of the {@code layerCount} members of {@code srcSubresource} or {@code dstSubresource} are {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the {@code layerCount} members of {@code srcSubresource} or {@code dstSubresource} <b>must</b> match</li>
- * <li>If one of the {@code layerCount} members of {@code srcSubresource} or {@code dstSubresource} is {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, the other member <b>must</b> be either {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS} or equal to the {@code arrayLayers} member of the {@link VkImageCreateInfo} used to create the image minus {@code baseArrayLayer}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code srcSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
- * <li>{@code dstSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkImageSubresourceLayers}, {@link VkOffset3D}, {@link VK10#vkCmdBlitImage CmdBlitImage}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageBlit {
- *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} {@link #srcSubresource};
- *     {@link VkOffset3D VkOffset3D} {@link #srcOffsets}[2];
- *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} {@link #dstSubresource};
- *     {@link VkOffset3D VkOffset3D} {@link #dstOffsets}[2];
- * }</code></pre>
+ *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} srcSubresource;
+ *     {@link VkOffset3D VkOffset3D} srcOffsets[2];
+ *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} dstSubresource;
+ *     {@link VkOffset3D VkOffset3D} dstOffsets[2];
+ * }}</pre>
  */
 public class VkImageBlit extends Struct<VkImageBlit> implements NativeResource {
 
@@ -106,44 +79,44 @@ public class VkImageBlit extends Struct<VkImageBlit> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the subresource to blit from. */
+    /** @return a {@link VkImageSubresourceLayers} view of the {@code srcSubresource} field. */
     public VkImageSubresourceLayers srcSubresource() { return nsrcSubresource(address()); }
-    /** a pointer to an array of two {@link VkOffset3D} structures specifying the bounds of the source region within {@code srcSubresource}. */
+    /** @return a {@link VkOffset3D}.Buffer view of the {@code srcOffsets} field. */
     @NativeType("VkOffset3D[2]")
     public VkOffset3D.Buffer srcOffsets() { return nsrcOffsets(address()); }
-    /** a pointer to an array of two {@link VkOffset3D} structures specifying the bounds of the source region within {@code srcSubresource}. */
+    /** @return a {@link VkOffset3D} view of the struct at the specified index of the {@code srcOffsets} field. */
     public VkOffset3D srcOffsets(int index) { return nsrcOffsets(address(), index); }
-    /** the subresource to blit into. */
+    /** @return a {@link VkImageSubresourceLayers} view of the {@code dstSubresource} field. */
     public VkImageSubresourceLayers dstSubresource() { return ndstSubresource(address()); }
-    /** a pointer to an array of two {@link VkOffset3D} structures specifying the bounds of the destination region within {@code dstSubresource}. */
+    /** @return a {@link VkOffset3D}.Buffer view of the {@code dstOffsets} field. */
     @NativeType("VkOffset3D[2]")
     public VkOffset3D.Buffer dstOffsets() { return ndstOffsets(address()); }
-    /** a pointer to an array of two {@link VkOffset3D} structures specifying the bounds of the destination region within {@code dstSubresource}. */
+    /** @return a {@link VkOffset3D} view of the struct at the specified index of the {@code dstOffsets} field. */
     public VkOffset3D dstOffsets(int index) { return ndstOffsets(address(), index); }
 
-    /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #srcSubresource} field. */
+    /** Copies the specified {@link VkImageSubresourceLayers} to the {@code srcSubresource} field. */
     public VkImageBlit srcSubresource(VkImageSubresourceLayers value) { nsrcSubresource(address(), value); return this; }
-    /** Passes the {@link #srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageBlit srcSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(srcSubresource()); return this; }
-    /** Copies the specified {@link VkOffset3D.Buffer} to the {@link #srcOffsets} field. */
+    /** Copies the specified {@link VkOffset3D.Buffer} to the {@code srcOffsets} field. */
     public VkImageBlit srcOffsets(@NativeType("VkOffset3D[2]") VkOffset3D.Buffer value) { nsrcOffsets(address(), value); return this; }
-    /** Copies the specified {@link VkOffset3D} at the specified index of the {@link #srcOffsets} field. */
+    /** Copies the specified {@link VkOffset3D} at the specified index of the {@code srcOffsets} field. */
     public VkImageBlit srcOffsets(int index, VkOffset3D value) { nsrcOffsets(address(), index, value); return this; }
-    /** Passes the {@link #srcOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code srcOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageBlit srcOffsets(java.util.function.Consumer<VkOffset3D.Buffer> consumer) { consumer.accept(srcOffsets()); return this; }
-    /** Passes the element at {@code index} of the {@link #srcOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@code srcOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageBlit srcOffsets(int index, java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(srcOffsets(index)); return this; }
-    /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #dstSubresource} field. */
+    /** Copies the specified {@link VkImageSubresourceLayers} to the {@code dstSubresource} field. */
     public VkImageBlit dstSubresource(VkImageSubresourceLayers value) { ndstSubresource(address(), value); return this; }
-    /** Passes the {@link #dstSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code dstSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageBlit dstSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(dstSubresource()); return this; }
-    /** Copies the specified {@link VkOffset3D.Buffer} to the {@link #dstOffsets} field. */
+    /** Copies the specified {@link VkOffset3D.Buffer} to the {@code dstOffsets} field. */
     public VkImageBlit dstOffsets(@NativeType("VkOffset3D[2]") VkOffset3D.Buffer value) { ndstOffsets(address(), value); return this; }
-    /** Copies the specified {@link VkOffset3D} at the specified index of the {@link #dstOffsets} field. */
+    /** Copies the specified {@link VkOffset3D} at the specified index of the {@code dstOffsets} field. */
     public VkImageBlit dstOffsets(int index, VkOffset3D value) { ndstOffsets(address(), index, value); return this; }
-    /** Passes the {@link #dstOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code dstOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageBlit dstOffsets(java.util.function.Consumer<VkOffset3D.Buffer> consumer) { consumer.accept(dstOffsets()); return this; }
-    /** Passes the element at {@code index} of the {@link #dstOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@code dstOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkImageBlit dstOffsets(int index, java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(dstOffsets(index)); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -386,44 +359,44 @@ public class VkImageBlit extends Struct<VkImageBlit> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VkImageSubresourceLayers} view of the {@link VkImageBlit#srcSubresource} field. */
+        /** @return a {@link VkImageSubresourceLayers} view of the {@code srcSubresource} field. */
         public VkImageSubresourceLayers srcSubresource() { return VkImageBlit.nsrcSubresource(address()); }
-        /** @return a {@link VkOffset3D}.Buffer view of the {@link VkImageBlit#srcOffsets} field. */
+        /** @return a {@link VkOffset3D}.Buffer view of the {@code srcOffsets} field. */
         @NativeType("VkOffset3D[2]")
         public VkOffset3D.Buffer srcOffsets() { return VkImageBlit.nsrcOffsets(address()); }
-        /** @return a {@link VkOffset3D} view of the struct at the specified index of the {@link VkImageBlit#srcOffsets} field. */
+        /** @return a {@link VkOffset3D} view of the struct at the specified index of the {@code srcOffsets} field. */
         public VkOffset3D srcOffsets(int index) { return VkImageBlit.nsrcOffsets(address(), index); }
-        /** @return a {@link VkImageSubresourceLayers} view of the {@link VkImageBlit#dstSubresource} field. */
+        /** @return a {@link VkImageSubresourceLayers} view of the {@code dstSubresource} field. */
         public VkImageSubresourceLayers dstSubresource() { return VkImageBlit.ndstSubresource(address()); }
-        /** @return a {@link VkOffset3D}.Buffer view of the {@link VkImageBlit#dstOffsets} field. */
+        /** @return a {@link VkOffset3D}.Buffer view of the {@code dstOffsets} field. */
         @NativeType("VkOffset3D[2]")
         public VkOffset3D.Buffer dstOffsets() { return VkImageBlit.ndstOffsets(address()); }
-        /** @return a {@link VkOffset3D} view of the struct at the specified index of the {@link VkImageBlit#dstOffsets} field. */
+        /** @return a {@link VkOffset3D} view of the struct at the specified index of the {@code dstOffsets} field. */
         public VkOffset3D dstOffsets(int index) { return VkImageBlit.ndstOffsets(address(), index); }
 
-        /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkImageBlit#srcSubresource} field. */
+        /** Copies the specified {@link VkImageSubresourceLayers} to the {@code srcSubresource} field. */
         public VkImageBlit.Buffer srcSubresource(VkImageSubresourceLayers value) { VkImageBlit.nsrcSubresource(address(), value); return this; }
-        /** Passes the {@link VkImageBlit#srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code srcSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageBlit.Buffer srcSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(srcSubresource()); return this; }
-        /** Copies the specified {@link VkOffset3D.Buffer} to the {@link VkImageBlit#srcOffsets} field. */
+        /** Copies the specified {@link VkOffset3D.Buffer} to the {@code srcOffsets} field. */
         public VkImageBlit.Buffer srcOffsets(@NativeType("VkOffset3D[2]") VkOffset3D.Buffer value) { VkImageBlit.nsrcOffsets(address(), value); return this; }
-        /** Copies the specified {@link VkOffset3D} at the specified index of the {@link VkImageBlit#srcOffsets} field. */
+        /** Copies the specified {@link VkOffset3D} at the specified index of the {@code srcOffsets} field. */
         public VkImageBlit.Buffer srcOffsets(int index, VkOffset3D value) { VkImageBlit.nsrcOffsets(address(), index, value); return this; }
-        /** Passes the {@link VkImageBlit#srcOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code srcOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageBlit.Buffer srcOffsets(java.util.function.Consumer<VkOffset3D.Buffer> consumer) { consumer.accept(srcOffsets()); return this; }
-        /** Passes the element at {@code index} of the {@link VkImageBlit#srcOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@code srcOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageBlit.Buffer srcOffsets(int index, java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(srcOffsets(index)); return this; }
-        /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkImageBlit#dstSubresource} field. */
+        /** Copies the specified {@link VkImageSubresourceLayers} to the {@code dstSubresource} field. */
         public VkImageBlit.Buffer dstSubresource(VkImageSubresourceLayers value) { VkImageBlit.ndstSubresource(address(), value); return this; }
-        /** Passes the {@link VkImageBlit#dstSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code dstSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageBlit.Buffer dstSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(dstSubresource()); return this; }
-        /** Copies the specified {@link VkOffset3D.Buffer} to the {@link VkImageBlit#dstOffsets} field. */
+        /** Copies the specified {@link VkOffset3D.Buffer} to the {@code dstOffsets} field. */
         public VkImageBlit.Buffer dstOffsets(@NativeType("VkOffset3D[2]") VkOffset3D.Buffer value) { VkImageBlit.ndstOffsets(address(), value); return this; }
-        /** Copies the specified {@link VkOffset3D} at the specified index of the {@link VkImageBlit#dstOffsets} field. */
+        /** Copies the specified {@link VkOffset3D} at the specified index of the {@code dstOffsets} field. */
         public VkImageBlit.Buffer dstOffsets(int index, VkOffset3D value) { VkImageBlit.ndstOffsets(address(), index, value); return this; }
-        /** Passes the {@link VkImageBlit#dstOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code dstOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageBlit.Buffer dstOffsets(java.util.function.Consumer<VkOffset3D.Buffer> consumer) { consumer.accept(dstOffsets()); return this; }
-        /** Passes the element at {@code index} of the {@link VkImageBlit#dstOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@code dstOffsets} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkImageBlit.Buffer dstOffsets(int index, java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(dstOffsets(index)); return this; }
 
     }

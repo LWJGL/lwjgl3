@@ -16,42 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing AV1 stream rate control parameters.
- * 
- * <h5>Description</h5>
- * 
- * <p>When an instance of this structure is included in the {@code pNext} chain of the {@link VkVideoCodingControlInfoKHR} structure passed to the {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} command, and {@link VkVideoCodingControlInfoKHR}{@code ::flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, the parameters in this structure are used as guidance for the implementation’s rate control algorithm (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding-control">Video Coding Control</a>).</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code flags} contains {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR} or {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR}, then it <b>must</b> also contain {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REGULAR_GOP_BIT_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_REGULAR_GOP_BIT_KHR}</li>
- * <li>If {@code flags} contains {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR}, then it <b>must</b> not also contain {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR}</li>
- * <li>If {@code flags} contains {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REGULAR_GOP_BIT_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_REGULAR_GOP_BIT_KHR}, then {@code gopFrameCount} <b>must</b> be greater than 0</li>
- * <li>If {@code keyFramePeriod} is not 0, then it <b>must</b> be greater than or equal to {@code gopFrameCount}</li>
- * <li>If {@code consecutiveBipredictiveFrameCount} is not 0, then it <b>must</b> be less than {@code gopFrameCount}</li>
- * <li>{@code temporalLayerCount} <b>must</b> be less than or equal to {@link VkVideoEncodeAV1CapabilitiesKHR}{@code ::maxTemporalLayerCount}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeAV1RateControlFlagBitsKHR} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeAV1RateControlInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkVideoEncodeAV1RateControlFlagsKHR {@link #flags};
- *     uint32_t {@link #gopFrameCount};
- *     uint32_t {@link #keyFramePeriod};
- *     uint32_t {@link #consecutiveBipredictiveFrameCount};
- *     uint32_t {@link #temporalLayerCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkVideoEncodeAV1RateControlFlagsKHR flags;
+ *     uint32_t gopFrameCount;
+ *     uint32_t keyFramePeriod;
+ *     uint32_t consecutiveBipredictiveFrameCount;
+ *     uint32_t temporalLayerCount;
+ * }}</pre>
  */
 public class VkVideoEncodeAV1RateControlInfoKHR extends Struct<VkVideoEncodeAV1RateControlInfoKHR> implements NativeResource {
 
@@ -116,43 +90,43 @@ public class VkVideoEncodeAV1RateControlInfoKHR extends Struct<VkVideoEncodeAV1R
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoEncodeAV1RateControlFlagBitsKHR} specifying AV1 rate control flags. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkVideoEncodeAV1RateControlFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the number of frames within a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-gop">group of pictures (GOP)</a> intended to be used by the application. If it is set to 0, the rate control algorithm <b>may</b> assume an implementation-dependent GOP length. If it is set to {@code UINT32_MAX}, the GOP length is treated as infinite. */
+    /** @return the value of the {@code gopFrameCount} field. */
     @NativeType("uint32_t")
     public int gopFrameCount() { return ngopFrameCount(address()); }
-    /** the interval, in terms of number of frames, between two frames with the AV1 frame type {@code STD_VIDEO_AV1_FRAME_TYPE_KEY} (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-key-frame-period">key frame period</a>). If it is set to 0, the rate control algorithm <b>may</b> assume an implementation-dependent key frame period. If it is set to {@code UINT32_MAX}, the key frame period is treated as infinite. */
+    /** @return the value of the {@code keyFramePeriod} field. */
     @NativeType("uint32_t")
     public int keyFramePeriod() { return nkeyFramePeriod(address()); }
-    /** the number of consecutive frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR} between frames encoded with other <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-rate-control-group">rate control groups</a> within the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-gop">GOP</a>. */
+    /** @return the value of the {@code consecutiveBipredictiveFrameCount} field. */
     @NativeType("uint32_t")
     public int consecutiveBipredictiveFrameCount() { return nconsecutiveBipredictiveFrameCount(address()); }
-    /** specifies the number of AV1 temporal layers that the application intends to use. */
+    /** @return the value of the {@code temporalLayerCount} field. */
     @NativeType("uint32_t")
     public int temporalLayerCount() { return ntemporalLayerCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeAV1RateControlInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeAV1RateControlInfoKHR sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeAV1RateControlInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkVideoEncodeAV1RateControlInfoKHR flags(@NativeType("VkVideoEncodeAV1RateControlFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #gopFrameCount} field. */
+    /** Sets the specified value to the {@code gopFrameCount} field. */
     public VkVideoEncodeAV1RateControlInfoKHR gopFrameCount(@NativeType("uint32_t") int value) { ngopFrameCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #keyFramePeriod} field. */
+    /** Sets the specified value to the {@code keyFramePeriod} field. */
     public VkVideoEncodeAV1RateControlInfoKHR keyFramePeriod(@NativeType("uint32_t") int value) { nkeyFramePeriod(address(), value); return this; }
-    /** Sets the specified value to the {@link #consecutiveBipredictiveFrameCount} field. */
+    /** Sets the specified value to the {@code consecutiveBipredictiveFrameCount} field. */
     public VkVideoEncodeAV1RateControlInfoKHR consecutiveBipredictiveFrameCount(@NativeType("uint32_t") int value) { nconsecutiveBipredictiveFrameCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #temporalLayerCount} field. */
+    /** Sets the specified value to the {@code temporalLayerCount} field. */
     public VkVideoEncodeAV1RateControlInfoKHR temporalLayerCount(@NativeType("uint32_t") int value) { ntemporalLayerCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -372,43 +346,43 @@ public class VkVideoEncodeAV1RateControlInfoKHR extends Struct<VkVideoEncodeAV1R
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeAV1RateControlInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeAV1RateControlInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1RateControlInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeAV1RateControlInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1RateControlInfoKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkVideoEncodeAV1RateControlFlagsKHR")
         public int flags() { return VkVideoEncodeAV1RateControlInfoKHR.nflags(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1RateControlInfoKHR#gopFrameCount} field. */
+        /** @return the value of the {@code gopFrameCount} field. */
         @NativeType("uint32_t")
         public int gopFrameCount() { return VkVideoEncodeAV1RateControlInfoKHR.ngopFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1RateControlInfoKHR#keyFramePeriod} field. */
+        /** @return the value of the {@code keyFramePeriod} field. */
         @NativeType("uint32_t")
         public int keyFramePeriod() { return VkVideoEncodeAV1RateControlInfoKHR.nkeyFramePeriod(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1RateControlInfoKHR#consecutiveBipredictiveFrameCount} field. */
+        /** @return the value of the {@code consecutiveBipredictiveFrameCount} field. */
         @NativeType("uint32_t")
         public int consecutiveBipredictiveFrameCount() { return VkVideoEncodeAV1RateControlInfoKHR.nconsecutiveBipredictiveFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1RateControlInfoKHR#temporalLayerCount} field. */
+        /** @return the value of the {@code temporalLayerCount} field. */
         @NativeType("uint32_t")
         public int temporalLayerCount() { return VkVideoEncodeAV1RateControlInfoKHR.ntemporalLayerCount(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeAV1RateControlInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeAV1RateControlInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeAV1RateControlInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR} value to the {@link VkVideoEncodeAV1RateControlInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeAV1RateControlInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_RATE_CONTROL_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1RateControlInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeAV1RateControlInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeAV1RateControlInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1RateControlInfoKHR#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkVideoEncodeAV1RateControlInfoKHR.Buffer flags(@NativeType("VkVideoEncodeAV1RateControlFlagsKHR") int value) { VkVideoEncodeAV1RateControlInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1RateControlInfoKHR#gopFrameCount} field. */
+        /** Sets the specified value to the {@code gopFrameCount} field. */
         public VkVideoEncodeAV1RateControlInfoKHR.Buffer gopFrameCount(@NativeType("uint32_t") int value) { VkVideoEncodeAV1RateControlInfoKHR.ngopFrameCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1RateControlInfoKHR#keyFramePeriod} field. */
+        /** Sets the specified value to the {@code keyFramePeriod} field. */
         public VkVideoEncodeAV1RateControlInfoKHR.Buffer keyFramePeriod(@NativeType("uint32_t") int value) { VkVideoEncodeAV1RateControlInfoKHR.nkeyFramePeriod(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1RateControlInfoKHR#consecutiveBipredictiveFrameCount} field. */
+        /** Sets the specified value to the {@code consecutiveBipredictiveFrameCount} field. */
         public VkVideoEncodeAV1RateControlInfoKHR.Buffer consecutiveBipredictiveFrameCount(@NativeType("uint32_t") int value) { VkVideoEncodeAV1RateControlInfoKHR.nconsecutiveBipredictiveFrameCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1RateControlInfoKHR#temporalLayerCount} field. */
+        /** Sets the specified value to the {@code temporalLayerCount} field. */
         public VkVideoEncodeAV1RateControlInfoKHR.Buffer temporalLayerCount(@NativeType("uint32_t") int value) { VkVideoEncodeAV1RateControlInfoKHR.ntemporalLayerCount(address(), value); return this; }
 
     }

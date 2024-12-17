@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing mesh shading features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMeshShaderFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMeshShaderFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMeshShaderFeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #taskShader};
- *     VkBool32 {@link #meshShader};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 taskShader;
+ *     VkBool32 meshShader;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct<VkPhysicalDeviceMeshShaderFeaturesNV> implements NativeResource {
 
@@ -92,28 +78,28 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct<VkPhysicalDevic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether task shaders are supported. If this feature is not enabled, the {@link NVMeshShader#VK_SHADER_STAGE_TASK_BIT_NV SHADER_STAGE_TASK_BIT_NV} and {@link NVMeshShader#VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV PIPELINE_STAGE_TASK_SHADER_BIT_NV} enum values <b>must</b> not be used. */
+    /** @return the value of the {@code taskShader} field. */
     @NativeType("VkBool32")
     public boolean taskShader() { return ntaskShader(address()) != 0; }
-    /** specifies whether mesh shaders are supported. If this feature is not enabled, the {@link NVMeshShader#VK_SHADER_STAGE_MESH_BIT_NV SHADER_STAGE_MESH_BIT_NV} and {@link NVMeshShader#VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV PIPELINE_STAGE_MESH_SHADER_BIT_NV} enum values <b>must</b> not be used. */
+    /** @return the value of the {@code meshShader} field. */
     @NativeType("VkBool32")
     public boolean meshShader() { return nmeshShader(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMeshShaderFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceMeshShaderFeaturesNV sType$Default() { return sType(NVMeshShader.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMeshShaderFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #taskShader} field. */
+    /** Sets the specified value to the {@code taskShader} field. */
     public VkPhysicalDeviceMeshShaderFeaturesNV taskShader(@NativeType("VkBool32") boolean value) { ntaskShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #meshShader} field. */
+    /** Sets the specified value to the {@code meshShader} field. */
     public VkPhysicalDeviceMeshShaderFeaturesNV meshShader(@NativeType("VkBool32") boolean value) { nmeshShader(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,28 +320,28 @@ public class VkPhysicalDeviceMeshShaderFeaturesNV extends Struct<VkPhysicalDevic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMeshShaderFeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMeshShaderFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesNV#taskShader} field. */
+        /** @return the value of the {@code taskShader} field. */
         @NativeType("VkBool32")
         public boolean taskShader() { return VkPhysicalDeviceMeshShaderFeaturesNV.ntaskShader(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesNV#meshShader} field. */
+        /** @return the value of the {@code meshShader} field. */
         @NativeType("VkBool32")
         public boolean meshShader() { return VkPhysicalDeviceMeshShaderFeaturesNV.nmeshShader(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMeshShaderFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMeshShaderFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV} value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#sType} field. */
+        /** Sets the {@link NVMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceMeshShaderFeaturesNV.Buffer sType$Default() { return sType(NVMeshShader.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMeshShaderFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMeshShaderFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#taskShader} field. */
+        /** Sets the specified value to the {@code taskShader} field. */
         public VkPhysicalDeviceMeshShaderFeaturesNV.Buffer taskShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMeshShaderFeaturesNV.ntaskShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesNV#meshShader} field. */
+        /** Sets the specified value to the {@code meshShader} field. */
         public VkPhysicalDeviceMeshShaderFeaturesNV.Buffer meshShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMeshShaderFeaturesNV.nmeshShader(address(), value ? 1 : 0); return this; }
 
     }

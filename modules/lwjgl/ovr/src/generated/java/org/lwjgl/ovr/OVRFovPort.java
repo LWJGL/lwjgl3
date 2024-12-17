@@ -16,20 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Field Of View (FOV) in tangent of the angle units. As an example, for a standard 90 degree vertical FOV, we would have:
- * 
- * <pre><code>
- * { UpTan = tan(90 degrees / 2), DownTan = tan(90 degrees / 2) }</code></pre>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrFovPort {
- *     float {@link #UpTan};
- *     float {@link #DownTan};
- *     float {@link #LeftTan};
- *     float {@link #RightTan};
- * }</code></pre>
+ *     float UpTan;
+ *     float DownTan;
+ *     float LeftTan;
+ *     float RightTan;
+ * }}</pre>
  */
 @NativeType("struct ovrFovPort")
 public class OVRFovPort extends Struct<OVRFovPort> implements NativeResource {
@@ -86,22 +79,22 @@ public class OVRFovPort extends Struct<OVRFovPort> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** tangent of the angle between the viewing vector and top edge of the FOV */
+    /** @return the value of the {@code UpTan} field. */
     public float UpTan() { return nUpTan(address()); }
-    /** tangent of the angle between the viewing vector and bottom edge of the FOV */
+    /** @return the value of the {@code DownTan} field. */
     public float DownTan() { return nDownTan(address()); }
-    /** tangent of the angle between the viewing vector and left edge of the FOV */
+    /** @return the value of the {@code LeftTan} field. */
     public float LeftTan() { return nLeftTan(address()); }
-    /** tangent of the angle between the viewing vector and right edge of the FOV */
+    /** @return the value of the {@code RightTan} field. */
     public float RightTan() { return nRightTan(address()); }
 
-    /** Sets the specified value to the {@link #UpTan} field. */
+    /** Sets the specified value to the {@code UpTan} field. */
     public OVRFovPort UpTan(float value) { nUpTan(address(), value); return this; }
-    /** Sets the specified value to the {@link #DownTan} field. */
+    /** Sets the specified value to the {@code DownTan} field. */
     public OVRFovPort DownTan(float value) { nDownTan(address(), value); return this; }
-    /** Sets the specified value to the {@link #LeftTan} field. */
+    /** Sets the specified value to the {@code LeftTan} field. */
     public OVRFovPort LeftTan(float value) { nLeftTan(address(), value); return this; }
-    /** Sets the specified value to the {@link #RightTan} field. */
+    /** Sets the specified value to the {@code RightTan} field. */
     public OVRFovPort RightTan(float value) { nRightTan(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,22 +315,22 @@ public class OVRFovPort extends Struct<OVRFovPort> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRFovPort#UpTan} field. */
+        /** @return the value of the {@code UpTan} field. */
         public float UpTan() { return OVRFovPort.nUpTan(address()); }
-        /** @return the value of the {@link OVRFovPort#DownTan} field. */
+        /** @return the value of the {@code DownTan} field. */
         public float DownTan() { return OVRFovPort.nDownTan(address()); }
-        /** @return the value of the {@link OVRFovPort#LeftTan} field. */
+        /** @return the value of the {@code LeftTan} field. */
         public float LeftTan() { return OVRFovPort.nLeftTan(address()); }
-        /** @return the value of the {@link OVRFovPort#RightTan} field. */
+        /** @return the value of the {@code RightTan} field. */
         public float RightTan() { return OVRFovPort.nRightTan(address()); }
 
-        /** Sets the specified value to the {@link OVRFovPort#UpTan} field. */
+        /** Sets the specified value to the {@code UpTan} field. */
         public OVRFovPort.Buffer UpTan(float value) { OVRFovPort.nUpTan(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRFovPort#DownTan} field. */
+        /** Sets the specified value to the {@code DownTan} field. */
         public OVRFovPort.Buffer DownTan(float value) { OVRFovPort.nDownTan(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRFovPort#LeftTan} field. */
+        /** Sets the specified value to the {@code LeftTan} field. */
         public OVRFovPort.Buffer LeftTan(float value) { OVRFovPort.nLeftTan(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRFovPort#RightTan} field. */
+        /** Sets the specified value to the {@code RightTan} field. */
         public OVRFovPort.Buffer RightTan(float value) { OVRFovPort.nRightTan(address(), value); return this; }
 
     }

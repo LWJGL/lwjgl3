@@ -14,14 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code PaintSolid} value of the {@code COLR} v1 extensions.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintSolid {
  *     {@link FT_ColorIndex FT_ColorIndex} color;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintSolid extends Struct<FT_PaintSolid> {
 

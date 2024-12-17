@@ -17,97 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created pipeline shader stage.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code module} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the shader code used by the pipeline is defined by {@code module}. If {@code module} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the shader code is defined by the chained {@link VkShaderModuleCreateInfo} if present.</p>
- * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderModuleIdentifier">{@code shaderModuleIdentifier}</a> feature is enabled, applications <b>can</b> omit shader code for {@code stage} and instead provide a module identifier. This is done by including a {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT} struct with {@code identifierSize} not equal to 0 in the {@code pNext} chain. A shader stage created in this way is equivalent to one created using a shader module with the same identifier. The identifier allows an implementation to look up a pipeline without consuming a valid SPIR-V module. If a pipeline is not found, pipeline compilation is not possible and the implementation <b>must</b> fail as specified by {@link VK13#VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT}.</p>
- * 
- * <p>When an identifier is used in lieu of a shader module, implementations <b>may</b> fail pipeline compilation with {@link VK13#VK_PIPELINE_COMPILE_REQUIRED PIPELINE_COMPILE_REQUIRED} for any reason.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The rationale for the relaxed requirement on implementations to return a pipeline with {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT} is that layers or tools may intercept pipeline creation calls and require the full SPIR-V context to operate correctly. ICDs are not expected to fail pipeline compilation if the pipeline exists in a cache somewhere.</p>
- * </div>
- * 
- * <p>Applications <b>can</b> use identifiers when creating pipelines with {@link KHRPipelineLibrary#VK_PIPELINE_CREATE_LIBRARY_BIT_KHR PIPELINE_CREATE_LIBRARY_BIT_KHR}. When creating such pipelines, {@link VK10#VK_SUCCESS SUCCESS} <b>may</b> be returned, but subsequently fail when referencing the pipeline in a {@link VkPipelineLibraryCreateInfoKHR} struct. Applications <b>must</b> allow pipeline compilation to fail during link steps with {@link VK13#VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT} as it <b>may</b> not be possible to determine if a pipeline <b>can</b> be created from identifiers until the link step.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-geometryShader">{@code geometryShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-tessellationShader">{@code tessellationShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT} or {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-meshShader">{@code meshShaders}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-taskShader">{@code taskShaders}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-clustercullingShader">{@code clustercullingShader}</a> feature is not enabled, {@code stage} <b>must</b> not be {@link HUAWEIClusterCullingShader#VK_SHADER_STAGE_CLUSTER_CULLING_BIT_HUAWEI SHADER_STAGE_CLUSTER_CULLING_BIT_HUAWEI}</li>
- * <li>{@code stage} <b>must</b> not be {@link VK10#VK_SHADER_STAGE_ALL_GRAPHICS SHADER_STAGE_ALL_GRAPHICS}, or {@link VK10#VK_SHADER_STAGE_ALL SHADER_STAGE_ALL}</li>
- * <li>{@code pName} <b>must</b> be the name of an {@code OpEntryPoint} in {@code module} with an execution model that matches {@code stage}</li>
- * <li>If the identified entry point includes any variable in its interface that is declared with the {@code ClipDistance} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than {@link VkPhysicalDeviceLimits}{@code ::maxClipDistances}</li>
- * <li>If the identified entry point includes any variable in its interface that is declared with the {@code CullDistance} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than {@link VkPhysicalDeviceLimits}{@code ::maxCullDistances}</li>
- * <li>If the identified entry point includes variables in its interface that are declared with the {@code ClipDistance} {@code BuiltIn} decoration and variables in its interface that are declared with the {@code CullDistance} {@code BuiltIn} decoration, those variables <b>must</b> not have array sizes which sum to more than {@link VkPhysicalDeviceLimits}{@code ::maxCombinedClipAndCullDistances}</li>
- * <li>If the identified entry point includes any variable in its interface that is declared with the {@code SampleMask} {@code BuiltIn} decoration, that variable <b>must</b> not have an array size greater than {@link VkPhysicalDeviceLimits}{@code ::maxSampleMaskWords}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT} or {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, and the identified entry point has an {@code OpExecutionMode} instruction specifying a patch size with {@code OutputVertices}, the patch size <b>must</b> be greater than 0 and less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxTessellationPatchSize}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, the identified entry point <b>must</b> have an {@code OpExecutionMode} instruction specifying a maximum output vertex count that is greater than 0 and less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxGeometryOutputVertices}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, the identified entry point <b>must</b> have an {@code OpExecutionMode} instruction specifying an invocation count that is greater than 0 and less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxGeometryShaderInvocations}</li>
- * <li>If {@code stage} is either {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, or {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, and the identified entry point writes to {@code Layer} for any primitive, it <b>must</b> write the same value to {@code Layer} for all vertices of a given primitive</li>
- * <li>If {@code stage} is either {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, or {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, and the identified entry point writes to {@code ViewportIndex} for any primitive, it <b>must</b> write the same value to {@code ViewportIndex} for all vertices of a given primitive</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, and the identified entry point writes to {@code FragDepth} in any execution path, all execution paths that are not exclusive to helper invocations <b>must</b> either discard the fragment, or write or initialize the value of {@code FragDepth}</li>
- * <li>If {@code stage} is {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, and the identified entry point writes to {@code FragStencilRefEXT} in any execution path, all execution paths that are not exclusive to helper invocations <b>must</b> either discard the fragment, or write or initialize the value of {@code FragStencilRefEXT}</li>
- * <li>If {@code flags} has the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flag set, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-subgroupSizeControl">{@code subgroupSizeControl}</a> feature <b>must</b> be enabled</li>
- * <li>If {@code flags} has the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} flag set, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-computeFullSubgroups">{@code computeFullSubgroups}</a> feature <b>must</b> be enabled</li>
- * <li>If {@code flags} includes {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT}, {@code stage} <b>must</b> be one of {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}, or {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}</li>
- * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain, {@code flags} <b>must</b> not have the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flag set</li>
- * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-subgroupSizeControl">{@code subgroupSizeControl}</a> feature <b>must</b> be enabled, and {@code stage} <b>must</b> be a valid bit specified in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-requiredSubgroupSizeStages">{@code requiredSubgroupSizeStages}</a></li>
- * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain and {@code stage} is {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}, {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT}, or {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT}, the local workgroup size of the shader <b>must</b> be less than or equal to the product of {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}{@code ::requiredSubgroupSize} and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxComputeWorkgroupSubgroups">{@code maxComputeWorkgroupSubgroups}</a></li>
- * <li>If a {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain, and {@code flags} has the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} flag set, the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}{@code ::requiredSubgroupSize}</li>
- * <li>If {@code flags} has both the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} and {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flags set, the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxSubgroupSize">{@code maxSubgroupSize}</a></li>
- * <li>If {@code flags} has the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT} flag set and {@code flags} does not have the {@link VK13#VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT} flag set and no {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo} structure is included in the {@code pNext} chain, the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-subgroupSize">{@code subgroupSize}</a></li>
- * <li>If {@code module} uses the {@code OpTypeCooperativeMatrixKHR} instruction with a {@code Scope} equal to {@code Subgroup}, then the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-subgroupSize">{@code subgroupSize}</a></li>
- * <li>If {@code module} uses the {@code OpTypeCooperativeMatrixKHR} instruction with a {@code Scope} equal to {@code Workgroup}, then the local workgroup size in the X dimension of the pipeline <b>must</b> be a multiple of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-subgroupSize">{@code subgroupSize}</a> and the total local workgroup size <b>must</b> be a power of two multiple of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-subgroupSize">{@code subgroupSize}</a> and <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-cooperativeMatrixWorkgroupScopeMaxWorkgroupSize">cooperativeMatrixWorkgroupScopeMaxWorkgroupSize</a></li>
- * <li>If a shader module identifier is not specified for this {@code stage}, {@code module} <b>must</b> be a valid {@code VkShaderModule} , or the {@code pNext} chain of the parent stext:Vk*CreateInfo structure <b>must</b> set {@link VkPipelineBinaryInfoKHR}{@code ::binaryCount} to a value greater than 0, if none of the following features are enabled:
- * 
- * <ul>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-graphicsPipelineLibrary">{@code graphicsPipelineLibrary}</a></li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-maintenance5">{@code maintenance5}</a></li>
- * </ul>
- * </li>
- * <li>If a shader module identifier is not specified for this {@code stage}, {@code module} <b>must</b> be a valid {@code VkShaderModule}, or there <b>must</b> be a valid {@link VkShaderModuleCreateInfo} structure in the {@code pNext} chain , or the {@code pNext} chain of the parent stext:Vk*CreateInfo structure <b>must</b> set {@link VkPipelineBinaryInfoKHR}{@code ::binaryCount} to a value greater than 0,</li>
- * <li>If a shader module identifier is specified for this {@code stage}, the {@code pNext} chain <b>must</b> not include a {@link VkShaderModuleCreateInfo} structure</li>
- * <li>If a shader module identifier is specified for this {@code stage}, {@code module} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If a shader module identifier is not specified, the shader code used by the pipeline <b>must</b> be valid as described by the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#spirv-spec">Khronos SPIR-V Specification</a> after applying the specializations provided in {@code pSpecializationInfo}, if any, and then converting all specialization constants into fixed constants</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDebugUtilsObjectNameInfoEXT}, {@link VkPipelineRobustnessCreateInfo}, {@link VkPipelineShaderStageModuleIdentifierCreateInfoEXT}, {@link VkPipelineShaderStageNodeCreateInfoAMDX}, {@link VkPipelineShaderStageRequiredSubgroupSizeCreateInfo}, {@link VkShaderModuleCreateInfo}, or {@link VkShaderModuleValidationCacheCreateInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineShaderStageCreateFlagBits} values</li>
- * <li>{@code stage} <b>must</b> be a valid {@code VkShaderStageFlagBits} value</li>
- * <li>If {@code module} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code module} <b>must</b> be a valid {@code VkShaderModule} handle</li>
- * <li>{@code pName} <b>must</b> be a null-terminated UTF-8 string</li>
- * <li>If {@code pSpecializationInfo} is not {@code NULL}, {@code pSpecializationInfo} <b>must</b> be a valid pointer to a valid {@link VkSpecializationInfo} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkComputePipelineCreateInfo}, {@link VkExecutionGraphPipelineCreateInfoAMDX}, {@link VkGraphicsPipelineCreateInfo}, {@link VkGraphicsShaderGroupCreateInfoNV}, {@link VkRayTracingPipelineCreateInfoKHR}, {@link VkRayTracingPipelineCreateInfoNV}, {@link VkSpecializationInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineShaderStageCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineShaderStageCreateFlags {@link #flags};
- *     VkShaderStageFlagBits {@link #stage};
- *     VkShaderModule {@link #module};
- *     char const * {@link #pName};
- *     {@link VkSpecializationInfo VkSpecializationInfo} const * {@link #pSpecializationInfo};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineShaderStageCreateFlags flags;
+ *     VkShaderStageFlagBits stage;
+ *     VkShaderModule module;
+ *     char const * pName;
+ *     {@link VkSpecializationInfo VkSpecializationInfo} const * pSpecializationInfo;
+ * }}</pre>
  */
 public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStageCreateInfo> implements NativeResource {
 
@@ -172,36 +91,36 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkPipelineShaderStageCreateFlagBits} specifying how the pipeline shader stage will be generated. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkPipelineShaderStageCreateFlags")
     public int flags() { return nflags(address()); }
-    /** a {@code VkShaderStageFlagBits} value specifying a single pipeline stage. */
+    /** @return the value of the {@code stage} field. */
     @NativeType("VkShaderStageFlagBits")
     public int stage() { return nstage(address()); }
-    /** optionally a {@code VkShaderModule} object containing the shader code for this stage. */
+    /** @return the value of the {@code module} field. */
     @NativeType("VkShaderModule")
     public long module() { return nmodule(address()); }
-    /** a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pName} field. */
     @NativeType("char const *")
     public ByteBuffer pName() { return npName(address()); }
-    /** a pointer to a null-terminated UTF-8 string specifying the entry point name of the shader for this stage. */
+    /** @return the null-terminated string pointed to by the {@code pName} field. */
     @NativeType("char const *")
     public String pNameString() { return npNameString(address()); }
-    /** a pointer to a {@link VkSpecializationInfo} structure, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-specialization-constants">Specialization Constants</a>, or {@code NULL}. */
+    /** @return a {@link VkSpecializationInfo} view of the struct pointed to by the {@code pSpecializationInfo} field. */
     @NativeType("VkSpecializationInfo const *")
     public @Nullable VkSpecializationInfo pSpecializationInfo() { return npSpecializationInfo(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineShaderStageCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO} value to the {@code sType} field. */
     public VkPipelineShaderStageCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineShaderStageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDebugUtilsObjectNameInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkDebugUtilsObjectNameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -223,15 +142,15 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
     public VkPipelineShaderStageCreateInfo pNext(VkShaderModuleValidationCacheCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
     public VkPipelineShaderStageCreateInfo pNext(VkShaderRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkPipelineShaderStageCreateInfo flags(@NativeType("VkPipelineShaderStageCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #stage} field. */
+    /** Sets the specified value to the {@code stage} field. */
     public VkPipelineShaderStageCreateInfo stage(@NativeType("VkShaderStageFlagBits") int value) { nstage(address(), value); return this; }
-    /** Sets the specified value to the {@link #module} field. */
+    /** Sets the specified value to the {@code module} field. */
     public VkPipelineShaderStageCreateInfo module(@NativeType("VkShaderModule") long value) { nmodule(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #pName} field. */
+    /** Sets the address of the specified encoded string to the {@code pName} field. */
     public VkPipelineShaderStageCreateInfo pName(@NativeType("char const *") ByteBuffer value) { npName(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSpecializationInfo} to the {@link #pSpecializationInfo} field. */
+    /** Sets the address of the specified {@link VkSpecializationInfo} to the {@code pSpecializationInfo} field. */
     public VkPipelineShaderStageCreateInfo pSpecializationInfo(@Nullable @NativeType("VkSpecializationInfo const *") VkSpecializationInfo value) { npSpecializationInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -488,36 +407,36 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineShaderStageCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineShaderStageCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkPipelineShaderStageCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineShaderStageCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkPipelineShaderStageCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkPipelineShaderStageCreateFlags")
         public int flags() { return VkPipelineShaderStageCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkPipelineShaderStageCreateInfo#stage} field. */
+        /** @return the value of the {@code stage} field. */
         @NativeType("VkShaderStageFlagBits")
         public int stage() { return VkPipelineShaderStageCreateInfo.nstage(address()); }
-        /** @return the value of the {@link VkPipelineShaderStageCreateInfo#module} field. */
+        /** @return the value of the {@code module} field. */
         @NativeType("VkShaderModule")
         public long module() { return VkPipelineShaderStageCreateInfo.nmodule(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkPipelineShaderStageCreateInfo#pName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pName} field. */
         @NativeType("char const *")
         public ByteBuffer pName() { return VkPipelineShaderStageCreateInfo.npName(address()); }
-        /** @return the null-terminated string pointed to by the {@link VkPipelineShaderStageCreateInfo#pName} field. */
+        /** @return the null-terminated string pointed to by the {@code pName} field. */
         @NativeType("char const *")
         public String pNameString() { return VkPipelineShaderStageCreateInfo.npNameString(address()); }
-        /** @return a {@link VkSpecializationInfo} view of the struct pointed to by the {@link VkPipelineShaderStageCreateInfo#pSpecializationInfo} field. */
+        /** @return a {@link VkSpecializationInfo} view of the struct pointed to by the {@code pSpecializationInfo} field. */
         @NativeType("VkSpecializationInfo const *")
         public @Nullable VkSpecializationInfo pSpecializationInfo() { return VkPipelineShaderStageCreateInfo.npSpecializationInfo(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineShaderStageCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineShaderStageCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO} value to the {@link VkPipelineShaderStageCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO} value to the {@code sType} field. */
         public VkPipelineShaderStageCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineShaderStageCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDebugUtilsObjectNameInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkDebugUtilsObjectNameInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -539,15 +458,15 @@ public class VkPipelineShaderStageCreateInfo extends Struct<VkPipelineShaderStag
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkShaderModuleValidationCacheCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkShaderRequiredSubgroupSizeCreateInfoEXT} value to the {@code pNext} chain. */
         public VkPipelineShaderStageCreateInfo.Buffer pNext(VkShaderRequiredSubgroupSizeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkPipelineShaderStageCreateInfo.Buffer flags(@NativeType("VkPipelineShaderStageCreateFlags") int value) { VkPipelineShaderStageCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#stage} field. */
+        /** Sets the specified value to the {@code stage} field. */
         public VkPipelineShaderStageCreateInfo.Buffer stage(@NativeType("VkShaderStageFlagBits") int value) { VkPipelineShaderStageCreateInfo.nstage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineShaderStageCreateInfo#module} field. */
+        /** Sets the specified value to the {@code module} field. */
         public VkPipelineShaderStageCreateInfo.Buffer module(@NativeType("VkShaderModule") long value) { VkPipelineShaderStageCreateInfo.nmodule(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link VkPipelineShaderStageCreateInfo#pName} field. */
+        /** Sets the address of the specified encoded string to the {@code pName} field. */
         public VkPipelineShaderStageCreateInfo.Buffer pName(@NativeType("char const *") ByteBuffer value) { VkPipelineShaderStageCreateInfo.npName(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSpecializationInfo} to the {@link VkPipelineShaderStageCreateInfo#pSpecializationInfo} field. */
+        /** Sets the address of the specified {@link VkSpecializationInfo} to the {@code pSpecializationInfo} field. */
         public VkPipelineShaderStageCreateInfo.Buffer pSpecializationInfo(@Nullable @NativeType("VkSpecializationInfo const *") VkSpecializationInfo value) { VkPipelineShaderStageCreateInfo.npSpecializationInfo(address(), value); return this; }
 
     }

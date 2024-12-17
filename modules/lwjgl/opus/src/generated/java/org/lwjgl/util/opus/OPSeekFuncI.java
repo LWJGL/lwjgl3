@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to {@link OpusFileCallbacks}.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *_stream,
- *     long long _offset,
- *     int _whence
- * )</code></pre>
- */
+/** Callback function: {@link #invoke op_seek_func} */
 @FunctionalInterface
 @NativeType("op_seek_func")
 public interface OPSeekFuncI extends CallbackI {
@@ -47,15 +36,7 @@ public interface OPSeekFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Sets the position indicator for {@code _stream}.
-     * 
-     * <p>The new position, measured in bytes, is obtained by adding {@code _offset} bytes to the position specified by {@code _whence}. If {@code _whence} is
-     * set to {@code SEEK_SET}, {@code SEEK_CUR}, or {@code SEEK_END}, the offset is relative to the start of the stream, the current position indicator, or
-     * end-of-file, respectively.</p>
-     *
-     * @return {@code 0}: Success. {@code -1}: Seeking is not supported or an error occurred. {@code errno} need not be set.
-     */
+    /** {@code int (* op_seek_func) (void * _stream, long long _offset, int _whence)} */
     int invoke(@NativeType("void *") long _stream, @NativeType("long long") long _offset, int _whence);
 
 }

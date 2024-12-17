@@ -17,39 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a command buffer submission.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code commandBuffer} <b>must</b> not have been allocated with {@link VK10#VK_COMMAND_BUFFER_LEVEL_SECONDARY COMMAND_BUFFER_LEVEL_SECONDARY}</li>
- * <li>If {@code deviceMask} is not 0, it <b>must</b> be a valid device mask</li>
- * <li>If any render pass instance in {@code commandBuffer} was recorded with a {@link VkRenderPassStripeBeginInfoARM} structure in its pNext chain and did not specify the {@link VK13#VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT} flag, a {@link VkRenderPassStripeSubmitInfoARM} <b>must</b> be included in the {@code pNext} chain</li>
- * <li>If a {@link VkRenderPassStripeSubmitInfoARM} is included in the {@code pNext} chain, the value of {@link VkRenderPassStripeSubmitInfoARM}{@code ::stripeSemaphoreInfoCount} <b>must</b> be equal to the sum of the {@link VkRenderPassStripeBeginInfoARM}{@code ::stripeInfoCount} parameters provided to render pass instances recorded in {@code commandBuffer} that did not specify the {@link VK13#VK_RENDERING_RESUMING_BIT RENDERING_RESUMING_BIT} flag</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkRenderPassStripeSubmitInfoARM}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code commandBuffer} <b>must</b> be a valid {@code VkCommandBuffer} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSubmitInfo2}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCommandBufferSubmitInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkCommandBuffer {@link #commandBuffer};
- *     uint32_t {@link #deviceMask};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkCommandBuffer commandBuffer;
+ *     uint32_t deviceMask;
+ * }}</pre>
  */
 public class VkCommandBufferSubmitInfo extends Struct<VkCommandBufferSubmitInfo> implements NativeResource {
 
@@ -105,30 +79,30 @@ public class VkCommandBufferSubmitInfo extends Struct<VkCommandBufferSubmitInfo>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkCommandBuffer} to be submitted for execution. */
+    /** @return the value of the {@code commandBuffer} field. */
     @NativeType("VkCommandBuffer")
     public long commandBuffer() { return ncommandBuffer(address()); }
-    /** a bitmask indicating which devices in a device group execute the command buffer. A {@code deviceMask} of 0 is equivalent to setting all bits corresponding to valid devices in the group to 1. */
+    /** @return the value of the {@code deviceMask} field. */
     @NativeType("uint32_t")
     public int deviceMask() { return ndeviceMask(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCommandBufferSubmitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO} value to the {@code sType} field. */
     public VkCommandBufferSubmitInfo sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCommandBufferSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkRenderPassStripeSubmitInfoARM} value to the {@code pNext} chain. */
     public VkCommandBufferSubmitInfo pNext(VkRenderPassStripeSubmitInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #commandBuffer} field. */
+    /** Sets the specified value to the {@code commandBuffer} field. */
     public VkCommandBufferSubmitInfo commandBuffer(VkCommandBuffer value) { ncommandBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceMask} field. */
+    /** Sets the specified value to the {@code deviceMask} field. */
     public VkCommandBufferSubmitInfo deviceMask(@NativeType("uint32_t") int value) { ndeviceMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,30 +313,30 @@ public class VkCommandBufferSubmitInfo extends Struct<VkCommandBufferSubmitInfo>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCommandBufferSubmitInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCommandBufferSubmitInfo.nsType(address()); }
-        /** @return the value of the {@link VkCommandBufferSubmitInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCommandBufferSubmitInfo.npNext(address()); }
-        /** @return the value of the {@link VkCommandBufferSubmitInfo#commandBuffer} field. */
+        /** @return the value of the {@code commandBuffer} field. */
         @NativeType("VkCommandBuffer")
         public long commandBuffer() { return VkCommandBufferSubmitInfo.ncommandBuffer(address()); }
-        /** @return the value of the {@link VkCommandBufferSubmitInfo#deviceMask} field. */
+        /** @return the value of the {@code deviceMask} field. */
         @NativeType("uint32_t")
         public int deviceMask() { return VkCommandBufferSubmitInfo.ndeviceMask(address()); }
 
-        /** Sets the specified value to the {@link VkCommandBufferSubmitInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCommandBufferSubmitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferSubmitInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO} value to the {@link VkCommandBufferSubmitInfo#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO} value to the {@code sType} field. */
         public VkCommandBufferSubmitInfo.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO); }
-        /** Sets the specified value to the {@link VkCommandBufferSubmitInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCommandBufferSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferSubmitInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkRenderPassStripeSubmitInfoARM} value to the {@code pNext} chain. */
         public VkCommandBufferSubmitInfo.Buffer pNext(VkRenderPassStripeSubmitInfoARM value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkCommandBufferSubmitInfo#commandBuffer} field. */
+        /** Sets the specified value to the {@code commandBuffer} field. */
         public VkCommandBufferSubmitInfo.Buffer commandBuffer(VkCommandBuffer value) { VkCommandBufferSubmitInfo.ncommandBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferSubmitInfo#deviceMask} field. */
+        /** Sets the specified value to the {@code deviceMask} field. */
         public VkCommandBufferSubmitInfo.Buffer deviceMask(@NativeType("uint32_t") int value) { VkCommandBufferSubmitInfo.ndeviceMask(address(), value); return this; }
 
     }

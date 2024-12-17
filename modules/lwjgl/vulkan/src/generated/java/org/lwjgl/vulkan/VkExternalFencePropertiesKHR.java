@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkExternalFenceProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExternalFencePropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkExternalFenceHandleTypeFlags exportFromImportedHandleTypes;
  *     VkExternalFenceHandleTypeFlags compatibleHandleTypes;
  *     VkExternalFenceFeatureFlags externalFenceFeatures;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkExternalFencePropertiesKHR extends VkExternalFenceProperties {
 

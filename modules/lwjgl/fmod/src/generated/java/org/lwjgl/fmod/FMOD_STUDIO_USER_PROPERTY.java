@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_USER_PROPERTY {
  *     char const * name;
  *     FMOD_STUDIO_USER_PROPERTY_TYPE type;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         float floatvalue;
  *         char const * stringvalue;
  *     };
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_USER_PROPERTY extends Struct<FMOD_STUDIO_USER_PROPERTY> implements NativeResource {
 

@@ -16,30 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the subsets of the graphics pipeline being compiled.
- * 
- * <h5>Description</h5>
- * 
- * <p>If a {@link VkGraphicsPipelineLibraryCreateInfoEXT} structure is included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, it specifies the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-graphics-subsets">subsets of the graphics pipeline</a> being created, excluding any subsets from linked pipeline libraries. If the pipeline is created with pipeline libraries, state from those libraries is aggregated with said subset.</p>
- * 
- * <p>If this structure is omitted, and either {@link VkGraphicsPipelineCreateInfo}{@code ::flags} includes {@link KHRPipelineLibrary#VK_PIPELINE_CREATE_LIBRARY_BIT_KHR PIPELINE_CREATE_LIBRARY_BIT_KHR} or the {@link VkGraphicsPipelineCreateInfo}{@code ::pNext} chain includes a {@link VkPipelineLibraryCreateInfoKHR} structure with a {@code libraryCount} greater than 0, it is as if {@code flags} is 0. Otherwise if this structure is omitted, it is as if {@code flags} includes all possible subsets of the graphics pipeline (i.e. a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-graphics-subsets-complete">complete graphics pipeline</a>).</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkGraphicsPipelineLibraryFlagBitsEXT} values</li>
- * <li>{@code flags} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkGraphicsPipelineLibraryCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkGraphicsPipelineLibraryFlagsEXT {@link #flags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkGraphicsPipelineLibraryFlagsEXT flags;
+ * }}</pre>
  */
 public class VkGraphicsPipelineLibraryCreateInfoEXT extends Struct<VkGraphicsPipelineLibraryCreateInfoEXT> implements NativeResource {
 
@@ -92,23 +74,23 @@ public class VkGraphicsPipelineLibraryCreateInfoEXT extends Struct<VkGraphicsPip
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkGraphicsPipelineLibraryFlagBitsEXT} specifying the subsets of the graphics pipeline that are being compiled. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkGraphicsPipelineLibraryFlagsEXT")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkGraphicsPipelineLibraryCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkGraphicsPipelineLibraryCreateInfoEXT sType$Default() { return sType(EXTGraphicsPipelineLibrary.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkGraphicsPipelineLibraryCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkGraphicsPipelineLibraryCreateInfoEXT flags(@NativeType("VkGraphicsPipelineLibraryFlagsEXT") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -304,23 +286,23 @@ public class VkGraphicsPipelineLibraryCreateInfoEXT extends Struct<VkGraphicsPip
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkGraphicsPipelineLibraryCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGraphicsPipelineLibraryCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkGraphicsPipelineLibraryCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGraphicsPipelineLibraryCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkGraphicsPipelineLibraryCreateInfoEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkGraphicsPipelineLibraryFlagsEXT")
         public int flags() { return VkGraphicsPipelineLibraryCreateInfoEXT.nflags(address()); }
 
-        /** Sets the specified value to the {@link VkGraphicsPipelineLibraryCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkGraphicsPipelineLibraryCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkGraphicsPipelineLibraryCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT} value to the {@link VkGraphicsPipelineLibraryCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkGraphicsPipelineLibraryCreateInfoEXT.Buffer sType$Default() { return sType(EXTGraphicsPipelineLibrary.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkGraphicsPipelineLibraryCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkGraphicsPipelineLibraryCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkGraphicsPipelineLibraryCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkGraphicsPipelineLibraryCreateInfoEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkGraphicsPipelineLibraryCreateInfoEXT.Buffer flags(@NativeType("VkGraphicsPipelineLibraryFlagsEXT") int value) { VkGraphicsPipelineLibraryCreateInfoEXT.nflags(address(), value); return this; }
 
     }

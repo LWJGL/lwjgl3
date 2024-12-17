@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The opaque {@code stbrp_context} struct.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stbrp_context {
  *     int width;
  *     int height;
@@ -31,8 +27,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int num_nodes;
  *     {@link STBRPNode stbrp_node} * active_head;
  *     {@link STBRPNode stbrp_node} * free_head;
- *     {@link STBRPNode stbrp_node} {@link #extra}[2];
- * }</code></pre>
+ *     {@link STBRPNode stbrp_node} extra[2];
+ * }}</pre>
  */
 @NativeType("struct stbrp_context")
 public class STBRPContext extends Struct<STBRPContext> implements NativeResource {
@@ -122,10 +118,10 @@ public class STBRPContext extends Struct<STBRPContext> implements NativeResource
     /** @return a {@link STBRPNode} view of the struct pointed to by the {@code free_head} field. */
     @NativeType("stbrp_node *")
     public @Nullable STBRPNode free_head() { return nfree_head(address()); }
-    /** we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2} */
+    /** @return a {@link STBRPNode}.Buffer view of the {@code extra} field. */
     @NativeType("stbrp_node[2]")
     public STBRPNode.Buffer extra() { return nextra(address()); }
-    /** we allocate two extra nodes so optimal user-node-count is {@code width} not {@code width+2} */
+    /** @return a {@link STBRPNode} view of the struct at the specified index of the {@code extra} field. */
     @NativeType("stbrp_node")
     public STBRPNode extra(int index) { return nextra(address(), index); }
 
@@ -343,10 +339,10 @@ public class STBRPContext extends Struct<STBRPContext> implements NativeResource
         /** @return a {@link STBRPNode} view of the struct pointed to by the {@code free_head} field. */
         @NativeType("stbrp_node *")
         public @Nullable STBRPNode free_head() { return STBRPContext.nfree_head(address()); }
-        /** @return a {@link STBRPNode}.Buffer view of the {@link STBRPContext#extra} field. */
+        /** @return a {@link STBRPNode}.Buffer view of the {@code extra} field. */
         @NativeType("stbrp_node[2]")
         public STBRPNode.Buffer extra() { return STBRPContext.nextra(address()); }
-        /** @return a {@link STBRPNode} view of the struct at the specified index of the {@link STBRPContext#extra} field. */
+        /** @return a {@link STBRPNode} view of the struct at the specified index of the {@code extra} field. */
         @NativeType("stbrp_node")
         public STBRPNode extra(int index) { return STBRPContext.nextra(address(), index); }
 

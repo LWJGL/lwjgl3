@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     nk_handle handle,
- *     void *old,
- *     nk_size size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_plugin_alloc} */
 public abstract class NkPluginAlloc extends Callback implements NkPluginAllocI {
 
     /**

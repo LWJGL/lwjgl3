@@ -16,22 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Stub description of VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VALVEDescriptorSetHostMapping#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 descriptorSetHostMapping;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE extends Struct<VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE> implements NativeResource {
 

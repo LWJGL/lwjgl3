@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1ColorConfigFlags {
  *     uint32_t mono_chrome : 1;
  *     uint32_t color_range : 1;
  *     uint32_t separate_uv_delta_q : 1;
  *     uint32_t color_description_present_flag : 1;
  *     uint32_t reserved : 28;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1ColorConfigFlags extends Struct<StdVideoAV1ColorConfigFlags> implements NativeResource {
 

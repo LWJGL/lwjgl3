@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_TAG {
  *     FMOD_TAGTYPE type;
  *     FMOD_TAGDATATYPE datatype;
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * data;
  *     unsigned int datalen;
  *     FMOD_BOOL updated;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_TAG extends Struct<FMOD_TAG> implements NativeResource {
 

@@ -17,26 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying data and length of a pipeline binary.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code pData} <b>must</b> be a valid pointer to an array of {@code dataSize} bytes</li>
- * <li>{@code dataSize} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineBinaryKeysAndDataKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineBinaryDataKHR {
- *     size_t {@link #dataSize};
- *     void * {@link #pData};
- * }</code></pre>
+ *     size_t dataSize;
+ *     void * pData;
+ * }}</pre>
  */
 public class VkPipelineBinaryDataKHR extends Struct<VkPipelineBinaryDataKHR> implements NativeResource {
 
@@ -86,14 +71,14 @@ public class VkPipelineBinaryDataKHR extends Struct<VkPipelineBinaryDataKHR> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the size of the {@code pData} buffer in bytes. */
+    /** @return the value of the {@code dataSize} field. */
     @NativeType("size_t")
     public long dataSize() { return ndataSize(address()); }
-    /** a pointer to a buffer of {@code size} bytes that contains pipeline binary data obtained from {@code vkGetPipelineBinaryDataKHR}. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
     @NativeType("void *")
     public ByteBuffer pData() { return npData(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pData} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
     public VkPipelineBinaryDataKHR pData(@NativeType("void *") ByteBuffer value) { npData(address(), value); return this; }
 
     /**
@@ -281,14 +266,14 @@ public class VkPipelineBinaryDataKHR extends Struct<VkPipelineBinaryDataKHR> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineBinaryDataKHR#dataSize} field. */
+        /** @return the value of the {@code dataSize} field. */
         @NativeType("size_t")
         public long dataSize() { return VkPipelineBinaryDataKHR.ndataSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkPipelineBinaryDataKHR#pData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
         @NativeType("void *")
         public ByteBuffer pData() { return VkPipelineBinaryDataKHR.npData(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkPipelineBinaryDataKHR#pData} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pData} field. */
         public VkPipelineBinaryDataKHR.Buffer pData(@NativeType("void *") ByteBuffer value) { VkPipelineBinaryDataKHR.npData(address(), value); return this; }
 
     }

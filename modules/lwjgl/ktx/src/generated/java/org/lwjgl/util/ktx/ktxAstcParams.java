@@ -17,25 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure for passing extended parameters to {@code ktxTexture_CompressAstc}.
- * 
- * <p>Passing a struct initialized to 0 will use {@code blockDimension} 4x4, {@code mode} {@code LDR} and {@code qualityLevel} {@code FASTEST}. Setting
- * {@code qualityLevel} to {@link KTX#KTX_PACK_ASTC_QUALITY_LEVEL_MEDIUM PACK_ASTC_QUALITY_LEVEL_MEDIUM} is recommended.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ktxAstcParams {
- *     ktx_uint32_t {@link #structSize};
- *     ktx_bool_t {@link #verbose};
- *     ktx_uint32_t {@link #threadCount};
- *     ktx_uint32_t {@link #blockDimension};
- *     ktx_uint32_t {@link #mode};
- *     ktx_uint32_t {@link #qualityLevel};
- *     ktx_bool_t {@link #normalMap};
- *     ktx_bool_t {@link #perceptual};
- *     char {@link #inputSwizzle}[4];
- * }</code></pre>
+ *     ktx_uint32_t structSize;
+ *     ktx_bool_t verbose;
+ *     ktx_uint32_t threadCount;
+ *     ktx_uint32_t blockDimension;
+ *     ktx_uint32_t mode;
+ *     ktx_uint32_t qualityLevel;
+ *     ktx_bool_t normalMap;
+ *     ktx_bool_t perceptual;
+ *     char inputSwizzle[4];
+ * }}</pre>
  */
 public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResource {
 
@@ -106,73 +99,56 @@ public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * Size of this struct.
-     * 
-     * <p>Used so library can tell which version of struct is being passed.</p>
-     */
+    /** @return the value of the {@code structSize} field. */
     @NativeType("ktx_uint32_t")
     public int structSize() { return nstructSize(address()); }
-    /**
-     * If true, prints Astc encoder operation details to {@code stdout}.
-     * 
-     * <p>Not recommended for GUI apps.</p>
-     */
+    /** @return the value of the {@code verbose} field. */
     @NativeType("ktx_bool_t")
     public boolean verbose() { return nverbose(address()); }
-    /** Number of threads used for compression. Default is 1. */
+    /** @return the value of the {@code threadCount} field. */
     @NativeType("ktx_uint32_t")
     public int threadCount() { return nthreadCount(address()); }
-    /** Combinations of block dimensions that astcenc supports */
+    /** @return the value of the {@code blockDimension} field. */
     @NativeType("ktx_uint32_t")
     public int blockDimension() { return nblockDimension(address()); }
-    /** Can be {ldr/hdr} from astcenc */
+    /** @return the value of the {@code mode} field. */
     @NativeType("ktx_uint32_t")
     public int mode() { return nmode(address()); }
-    /** astcenc supports -fastest, -fast, -medium, -thorough, -exhaustive */
+    /** @return the value of the {@code qualityLevel} field. */
     @NativeType("ktx_uint32_t")
     public int qualityLevel() { return nqualityLevel(address()); }
-    /**
-     * Tunes codec parameters for better quality on normal maps.
-     * 
-     * <p>In this mode normals are compressed to X,Y components, Discarding Z component, reader will need to generate Z component in shaders.</p>
-     */
+    /** @return the value of the {@code normalMap} field. */
     @NativeType("ktx_bool_t")
     public boolean normalMap() { return nnormalMap(address()); }
-    /**
-     * The codec should optimize for perceptual error, instead of direct RMS error.
-     * 
-     * <p>This aims to improves perceived image quality, but typically lowers the measured PSNR score. Perceptual methods are currently only available for normal
-     * maps and RGB color data.</p>
-     */
+    /** @return the value of the {@code perceptual} field. */
     @NativeType("ktx_bool_t")
     public boolean perceptual() { return nperceptual(address()); }
-    /** A swizzle to provide as input to astcenc. It must match the regular expression {@code /^[rgba01]{4}$/}. */
+    /** @return a {@link ByteBuffer} view of the {@code inputSwizzle} field. */
     @NativeType("char[4]")
     public ByteBuffer inputSwizzle() { return ninputSwizzle(address()); }
-    /** A swizzle to provide as input to astcenc. It must match the regular expression {@code /^[rgba01]{4}$/}. */
+    /** @return the value at the specified index of the {@code inputSwizzle} field. */
     @NativeType("char")
     public byte inputSwizzle(int index) { return ninputSwizzle(address(), index); }
 
-    /** Sets the specified value to the {@link #structSize} field. */
+    /** Sets the specified value to the {@code structSize} field. */
     public ktxAstcParams structSize(@NativeType("ktx_uint32_t") int value) { nstructSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #verbose} field. */
+    /** Sets the specified value to the {@code verbose} field. */
     public ktxAstcParams verbose(@NativeType("ktx_bool_t") boolean value) { nverbose(address(), value); return this; }
-    /** Sets the specified value to the {@link #threadCount} field. */
+    /** Sets the specified value to the {@code threadCount} field. */
     public ktxAstcParams threadCount(@NativeType("ktx_uint32_t") int value) { nthreadCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #blockDimension} field. */
+    /** Sets the specified value to the {@code blockDimension} field. */
     public ktxAstcParams blockDimension(@NativeType("ktx_uint32_t") int value) { nblockDimension(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public ktxAstcParams mode(@NativeType("ktx_uint32_t") int value) { nmode(address(), value); return this; }
-    /** Sets the specified value to the {@link #qualityLevel} field. */
+    /** Sets the specified value to the {@code qualityLevel} field. */
     public ktxAstcParams qualityLevel(@NativeType("ktx_uint32_t") int value) { nqualityLevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #normalMap} field. */
+    /** Sets the specified value to the {@code normalMap} field. */
     public ktxAstcParams normalMap(@NativeType("ktx_bool_t") boolean value) { nnormalMap(address(), value); return this; }
-    /** Sets the specified value to the {@link #perceptual} field. */
+    /** Sets the specified value to the {@code perceptual} field. */
     public ktxAstcParams perceptual(@NativeType("ktx_bool_t") boolean value) { nperceptual(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #inputSwizzle} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code inputSwizzle} field. */
     public ktxAstcParams inputSwizzle(@NativeType("char[4]") ByteBuffer value) { ninputSwizzle(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #inputSwizzle} field. */
+    /** Sets the specified value at the specified index of the {@code inputSwizzle} field. */
     public ktxAstcParams inputSwizzle(int index, @NativeType("char") byte value) { ninputSwizzle(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -415,56 +391,56 @@ public class ktxAstcParams extends Struct<ktxAstcParams> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ktxAstcParams#structSize} field. */
+        /** @return the value of the {@code structSize} field. */
         @NativeType("ktx_uint32_t")
         public int structSize() { return ktxAstcParams.nstructSize(address()); }
-        /** @return the value of the {@link ktxAstcParams#verbose} field. */
+        /** @return the value of the {@code verbose} field. */
         @NativeType("ktx_bool_t")
         public boolean verbose() { return ktxAstcParams.nverbose(address()); }
-        /** @return the value of the {@link ktxAstcParams#threadCount} field. */
+        /** @return the value of the {@code threadCount} field. */
         @NativeType("ktx_uint32_t")
         public int threadCount() { return ktxAstcParams.nthreadCount(address()); }
-        /** @return the value of the {@link ktxAstcParams#blockDimension} field. */
+        /** @return the value of the {@code blockDimension} field. */
         @NativeType("ktx_uint32_t")
         public int blockDimension() { return ktxAstcParams.nblockDimension(address()); }
-        /** @return the value of the {@link ktxAstcParams#mode} field. */
+        /** @return the value of the {@code mode} field. */
         @NativeType("ktx_uint32_t")
         public int mode() { return ktxAstcParams.nmode(address()); }
-        /** @return the value of the {@link ktxAstcParams#qualityLevel} field. */
+        /** @return the value of the {@code qualityLevel} field. */
         @NativeType("ktx_uint32_t")
         public int qualityLevel() { return ktxAstcParams.nqualityLevel(address()); }
-        /** @return the value of the {@link ktxAstcParams#normalMap} field. */
+        /** @return the value of the {@code normalMap} field. */
         @NativeType("ktx_bool_t")
         public boolean normalMap() { return ktxAstcParams.nnormalMap(address()); }
-        /** @return the value of the {@link ktxAstcParams#perceptual} field. */
+        /** @return the value of the {@code perceptual} field. */
         @NativeType("ktx_bool_t")
         public boolean perceptual() { return ktxAstcParams.nperceptual(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link ktxAstcParams#inputSwizzle} field. */
+        /** @return a {@link ByteBuffer} view of the {@code inputSwizzle} field. */
         @NativeType("char[4]")
         public ByteBuffer inputSwizzle() { return ktxAstcParams.ninputSwizzle(address()); }
-        /** @return the value at the specified index of the {@link ktxAstcParams#inputSwizzle} field. */
+        /** @return the value at the specified index of the {@code inputSwizzle} field. */
         @NativeType("char")
         public byte inputSwizzle(int index) { return ktxAstcParams.ninputSwizzle(address(), index); }
 
-        /** Sets the specified value to the {@link ktxAstcParams#structSize} field. */
+        /** Sets the specified value to the {@code structSize} field. */
         public ktxAstcParams.Buffer structSize(@NativeType("ktx_uint32_t") int value) { ktxAstcParams.nstructSize(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxAstcParams#verbose} field. */
+        /** Sets the specified value to the {@code verbose} field. */
         public ktxAstcParams.Buffer verbose(@NativeType("ktx_bool_t") boolean value) { ktxAstcParams.nverbose(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxAstcParams#threadCount} field. */
+        /** Sets the specified value to the {@code threadCount} field. */
         public ktxAstcParams.Buffer threadCount(@NativeType("ktx_uint32_t") int value) { ktxAstcParams.nthreadCount(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxAstcParams#blockDimension} field. */
+        /** Sets the specified value to the {@code blockDimension} field. */
         public ktxAstcParams.Buffer blockDimension(@NativeType("ktx_uint32_t") int value) { ktxAstcParams.nblockDimension(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxAstcParams#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public ktxAstcParams.Buffer mode(@NativeType("ktx_uint32_t") int value) { ktxAstcParams.nmode(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxAstcParams#qualityLevel} field. */
+        /** Sets the specified value to the {@code qualityLevel} field. */
         public ktxAstcParams.Buffer qualityLevel(@NativeType("ktx_uint32_t") int value) { ktxAstcParams.nqualityLevel(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxAstcParams#normalMap} field. */
+        /** Sets the specified value to the {@code normalMap} field. */
         public ktxAstcParams.Buffer normalMap(@NativeType("ktx_bool_t") boolean value) { ktxAstcParams.nnormalMap(address(), value); return this; }
-        /** Sets the specified value to the {@link ktxAstcParams#perceptual} field. */
+        /** Sets the specified value to the {@code perceptual} field. */
         public ktxAstcParams.Buffer perceptual(@NativeType("ktx_bool_t") boolean value) { ktxAstcParams.nperceptual(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link ktxAstcParams#inputSwizzle} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code inputSwizzle} field. */
         public ktxAstcParams.Buffer inputSwizzle(@NativeType("char[4]") ByteBuffer value) { ktxAstcParams.ninputSwizzle(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link ktxAstcParams#inputSwizzle} field. */
+        /** Sets the specified value at the specified index of the {@code inputSwizzle} field. */
         public ktxAstcParams.Buffer inputSwizzle(int index, @NativeType("char") byte value) { ktxAstcParams.ninputSwizzle(address(), index, value); return this; }
 
     }

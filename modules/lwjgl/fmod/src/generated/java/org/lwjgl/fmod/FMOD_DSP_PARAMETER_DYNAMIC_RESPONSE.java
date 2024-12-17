@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_PARAMETER_DYNAMIC_RESPONSE {
  *     int numchannels;
  *     float rms[32];
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_PARAMETER_DYNAMIC_RESPONSE extends Struct<FMOD_DSP_PARAMETER_DYNAMIC_RESPONSE> implements NativeResource {
 

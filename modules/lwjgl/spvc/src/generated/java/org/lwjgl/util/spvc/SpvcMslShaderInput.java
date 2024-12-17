@@ -16,22 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Defines MSL characteristics of an input variable at a particular location.
- * 
- * <p>After compilation, it is possible to query whether or not this location was used. If {@code vecsize} is nonzero, it must be greater than or equal to
- * the {@code vecsize} declared in the shader, or behavior is undefined.</p>
- * 
- * <p>Deprecated; use {@code spvc_msl_shader_interface_var_2}.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_msl_shader_input {
  *     unsigned location;
  *     spvc_msl_vertex_format format;
  *     SpvBuiltIn builtin;
  *     unsigned vecsize;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_msl_shader_input")
 public class SpvcMslShaderInput extends Struct<SpvcMslShaderInput> implements NativeResource {

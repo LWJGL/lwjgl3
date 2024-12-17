@@ -16,29 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Query result.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSpaceQueryResultFB} structure is a query result returned in the {@link FBSpatialEntityQuery#xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB}{@code ::results} output parameter of the {@link FBSpatialEntityQuery#xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB} function.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using {@link XrSpaceQueryResultFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpaceQueryResultsFB}, {@link XrUuidEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceQueryResultFB {
- *     XrSpace {@link #space};
- *     {@link XrUuidEXT XrUuidEXT} {@link #uuid};
- * }</code></pre>
+ *     XrSpace space;
+ *     {@link XrUuidEXT XrUuidEXT} uuid;
+ * }}</pre>
  */
 public class XrSpaceQueryResultFB extends Struct<XrSpaceQueryResultFB> implements NativeResource {
 
@@ -88,10 +70,10 @@ public class XrSpaceQueryResultFB extends Struct<XrSpaceQueryResultFB> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrSpace} handle to the spatial entity found by the query. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the UUID that identifies the entity. */
+    /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
     public XrUuidEXT uuid() { return nuuid(address()); }
 
     // -----------------------------------
@@ -253,10 +235,10 @@ public class XrSpaceQueryResultFB extends Struct<XrSpaceQueryResultFB> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceQueryResultFB#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrSpaceQueryResultFB.nspace(address()); }
-        /** @return a {@link XrUuidEXT} view of the {@link XrSpaceQueryResultFB#uuid} field. */
+        /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
         public XrUuidEXT uuid() { return XrSpaceQueryResultFB.nuuid(address()); }
 
     }

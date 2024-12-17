@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union LARGE_INTEGER {
  *     struct {
  *         DWORD LowPart;
  *         LONG HighPart;
  *     } u;
  *     LONGLONG QuadPart;
- * }</code></pre>
+ * }}</pre>
  */
 public class LARGE_INTEGER extends Struct<LARGE_INTEGER> implements NativeResource {
 

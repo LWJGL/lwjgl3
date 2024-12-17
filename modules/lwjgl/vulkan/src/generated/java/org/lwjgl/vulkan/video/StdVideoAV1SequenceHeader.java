@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1SequenceHeader {
  *     {@link StdVideoAV1SequenceHeaderFlags StdVideoAV1SequenceHeaderFlags} flags;
  *     StdVideoAV1Profile seq_profile;
@@ -35,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t reserved1[5];
  *     {@link StdVideoAV1ColorConfig StdVideoAV1ColorConfig} const * pColorConfig;
  *     {@link StdVideoAV1TimingInfo StdVideoAV1TimingInfo} const * pTimingInfo;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1SequenceHeader extends Struct<StdVideoAV1SequenceHeader> implements NativeResource {
 

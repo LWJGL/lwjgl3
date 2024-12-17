@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Contains info about a space.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SPACE_LOCATION TYPE_SPACE_LOCATION}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrEyeGazeSampleTimeEXT}, {@link XrSpaceVelocity}</li>
- * <li>{@code locationFlags} <b>must</b> be 0 or a valid combination of {@code XrSpaceLocationFlagBits} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link XrSpaceVelocity}, {@link XR10#xrLocateSpace LocateSpace}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceLocation {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrSpaceLocationFlags {@link #locationFlags};
- *     {@link XrPosef XrPosef} {@link #pose};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrSpaceLocationFlags locationFlags;
+ *     {@link XrPosef XrPosef} pose;
+ * }}</pre>
  */
 public class XrSpaceLocation extends Struct<XrSpaceLocation> implements NativeResource {
 
@@ -94,33 +78,33 @@ public class XrSpaceLocation extends Struct<XrSpaceLocation> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain, such as {@link XrSpaceVelocity}. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. If none of the bits are set, no other fields in this structure <b>should</b> be considered to be valid or meaningful. */
+    /** @return the value of the {@code locationFlags} field. */
     @NativeType("XrSpaceLocationFlags")
     public long locationFlags() { return nlocationFlags(address()); }
-    /** an {@link XrPosef} defining the position and orientation of the origin of {@link XR10#xrLocateSpace LocateSpace}{@code ::space} within the reference frame of {@link XR10#xrLocateSpace LocateSpace}{@code ::baseSpace}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceLocation type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_SPACE_LOCATION TYPE_SPACE_LOCATION} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_SPACE_LOCATION TYPE_SPACE_LOCATION} value to the {@code type} field. */
     public XrSpaceLocation type$Default() { return type(XR10.XR_TYPE_SPACE_LOCATION); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceLocation next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrEyeGazeSampleTimeEXT} value to the {@code next} chain. */
     public XrSpaceLocation next(XrEyeGazeSampleTimeEXT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpaceVelocity} value to the {@code next} chain. */
     public XrSpaceLocation next(XrSpaceVelocity value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #locationFlags} field. */
+    /** Sets the specified value to the {@code locationFlags} field. */
     public XrSpaceLocation locationFlags(@NativeType("XrSpaceLocationFlags") long value) { nlocationFlags(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrSpaceLocation pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpaceLocation pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,33 +306,33 @@ public class XrSpaceLocation extends Struct<XrSpaceLocation> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceLocation#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceLocation.ntype(address()); }
-        /** @return the value of the {@link XrSpaceLocation#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpaceLocation.nnext(address()); }
-        /** @return the value of the {@link XrSpaceLocation#locationFlags} field. */
+        /** @return the value of the {@code locationFlags} field. */
         @NativeType("XrSpaceLocationFlags")
         public long locationFlags() { return XrSpaceLocation.nlocationFlags(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrSpaceLocation#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrSpaceLocation.npose(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceLocation#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceLocation.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceLocation.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_SPACE_LOCATION TYPE_SPACE_LOCATION} value to the {@link XrSpaceLocation#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_SPACE_LOCATION TYPE_SPACE_LOCATION} value to the {@code type} field. */
         public XrSpaceLocation.Buffer type$Default() { return type(XR10.XR_TYPE_SPACE_LOCATION); }
-        /** Sets the specified value to the {@link XrSpaceLocation#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceLocation.Buffer next(@NativeType("void *") long value) { XrSpaceLocation.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrEyeGazeSampleTimeEXT} value to the {@code next} chain. */
         public XrSpaceLocation.Buffer next(XrEyeGazeSampleTimeEXT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpaceVelocity} value to the {@code next} chain. */
         public XrSpaceLocation.Buffer next(XrSpaceVelocity value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrSpaceLocation#locationFlags} field. */
+        /** Sets the specified value to the {@code locationFlags} field. */
         public XrSpaceLocation.Buffer locationFlags(@NativeType("XrSpaceLocationFlags") long value) { XrSpaceLocation.nlocationFlags(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrSpaceLocation#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrSpaceLocation.Buffer pose(XrPosef value) { XrSpaceLocation.npose(address(), value); return this; }
-        /** Passes the {@link XrSpaceLocation#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpaceLocation.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
 
     }

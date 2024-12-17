@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link Shaderc#shaderc_compile_options_set_include_callbacks compile_options_set_include_callbacks} function.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *user_data,
- *     shaderc_include_result *include_result
- * )</code></pre>
- */
+/** Callback function: {@link #invoke shaderc_include_result_release_fn} */
 @FunctionalInterface
 @NativeType("shaderc_include_result_release_fn")
 public interface ShadercIncludeResultReleaseI extends CallbackI {
@@ -44,7 +34,7 @@ public interface ShadercIncludeResultReleaseI extends CallbackI {
         );
     }
 
-    /** An includer callback type for destroying an include result. */
+    /** {@code void (* shaderc_include_result_release_fn) (void * user_data, shaderc_include_result * include_result)} */
     void invoke(@NativeType("void *") long user_data, @NativeType("shaderc_include_result *") long include_result);
 
 }

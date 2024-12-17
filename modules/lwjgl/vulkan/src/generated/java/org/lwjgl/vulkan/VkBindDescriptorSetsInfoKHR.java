@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkBindDescriptorSetsInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindDescriptorSetsInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDescriptorSet const * pDescriptorSets;
  *     uint32_t dynamicOffsetCount;
  *     uint32_t const * pDynamicOffsets;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkBindDescriptorSetsInfoKHR extends VkBindDescriptorSetsInfo {
 

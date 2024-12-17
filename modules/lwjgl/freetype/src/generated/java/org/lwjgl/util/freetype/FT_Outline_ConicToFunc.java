@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     FT_Vector const *control,
- *     FT_Vector const *to,
- *     void *user
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Outline_ConicToFunc} */
 public abstract class FT_Outline_ConicToFunc extends Callback implements FT_Outline_ConicToFuncI {
 
     /**

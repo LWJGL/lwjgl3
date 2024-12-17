@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_style_tab {
  *     {@link NkStyleItem struct nk_style_item} background;
  *     {@link NkColor struct nk_color} border_color;
@@ -36,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkVec2 struct nk_vec2} spacing;
  *     float color_factor;
  *     float disabled_factor;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_style_tab")
 public class NkStyleTab extends Struct<NkStyleTab> implements NativeResource {

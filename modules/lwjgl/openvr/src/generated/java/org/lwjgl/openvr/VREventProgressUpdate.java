@@ -14,9 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_ProgressUpdate_t {
  *     uint64_t ulApplicationPropertyContainer;
  *     uint64_t pathDevice;
@@ -24,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     uint64_t pathProgressAction;
  *     uint64_t pathIcon;
  *     float fProgress;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_ProgressUpdate_t")
 public class VREventProgressUpdate extends Struct<VREventProgressUpdate> {

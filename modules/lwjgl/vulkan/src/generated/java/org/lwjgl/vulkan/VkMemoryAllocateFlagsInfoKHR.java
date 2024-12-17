@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkMemoryAllocateFlagsInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryAllocateFlagsInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkMemoryAllocateFlags flags;
  *     uint32_t deviceMask;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkMemoryAllocateFlagsInfoKHR extends VkMemoryAllocateFlagsInfo {
 

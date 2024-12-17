@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkWriteDescriptorSetInlineUniformBlock}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkWriteDescriptorSetInlineUniformBlockEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t dataSize;
  *     void const * pData;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkWriteDescriptorSetInlineUniformBlockEXT extends VkWriteDescriptorSetInlineUniformBlock {
 

@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *Ctx
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcDisposeCAPIDefinitionGeneratorFunction} */
 @FunctionalInterface
 @NativeType("LLVMOrcDisposeCAPIDefinitionGeneratorFunction")
 public interface LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI extends CallbackI {
@@ -40,11 +33,7 @@ public interface LLVMOrcDisposeCAPIDefinitionGeneratorFunctionI extends Callback
         );
     }
 
-    /**
-     * Disposer for a custom generator.
-     * 
-     * <p>Will be called by ORC when the {@code JITDylib} that the generator is attached to is destroyed.</p>
-     */
+    /** {@code void (* LLVMOrcDisposeCAPIDefinitionGeneratorFunction) (void * Ctx)} */
     void invoke(@NativeType("void *") long Ctx);
 
 }

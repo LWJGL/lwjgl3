@@ -17,145 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of an image to image host copy command.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code vkCopyImageToImage} does not check whether the device memory associated with {@code srcImage} or {@code dstImage} is currently in use before performing the copy. The application <b>must</b> guarantee that any previously submitted command that writes to the copy regions has completed before the host performs the copy.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code srcImage} and {@code dstImage} <b>must</b> have been created with identical image creation parameters</li>
- * </ul>
- * 
- * <ul>
- * <li>If {@code srcImage} is sparse then all memory ranges accessed by the copy command <b>must</b> be bound as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#sparsememory-resource-binding">Binding Resource Memory</a></li>
- * <li>If the stencil aspect of {@code srcImage} is accessed, and {@code srcImage} was not created with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkImageStencilUsageCreateInfo">separate stencil usage</a>, {@code srcImage} <b>must</b> have been created with {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} set in {@link VkImageCreateInfo}{@code ::usage}</li>
- * <li>If the stencil aspect of {@code srcImage} is accessed, and {@code srcImage} was created with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkImageStencilUsageCreateInfo">separate stencil usage</a>, {@code srcImage} <b>must</b> have been created with {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} set in {@link VkImageStencilUsageCreateInfo}{@code ::stencilUsage}</li>
- * <li>If non-stencil aspects of {@code srcImage} are accessed, {@code srcImage} <b>must</b> have been created with {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} set in {@link VkImageCreateInfo}{@code ::usage}</li>
- * <li>If {@code flags} contains {@link VK14#VK_HOST_IMAGE_COPY_MEMCPY HOST_IMAGE_COPY_MEMCPY}, the {@code x}, {@code y}, and {@code z} members of the {@code srcOffset} member of each element of {@code pRegions} <b>must</b> be 0</li>
- * <li>If {@code flags} contains {@link VK14#VK_HOST_IMAGE_COPY_MEMCPY HOST_IMAGE_COPY_MEMCPY}, the {@code extent} member of each element of {@code pRegions} <b>must</b> equal the extents of {@code srcImage} identified by {@code srcSubresource}</li>
- * </ul>
- * 
- * <ul>
- * <li>If {@code srcImage} is non-sparse then the image or the specified <em>disjoint</em> plane <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>The {@code srcSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
- * <li>If {@code srcSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, <code>{@code srcSubresource.baseArrayLayer} + {@code srcSubresource.layerCount}</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code srcImage} was created</li>
- * <li>{@code srcImage} <b>must</b> not have been created with {@code flags} containing {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
- * </ul>
- * 
- * <ul>
- * <li>The image region specified by each element of {@code pRegions} <b>must</b> be contained within the specified {@code srcSubresource} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, {@code srcOffset.x} and <code>({@code extent.width} + {@code srcOffset.x})</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the width of the specified {@code srcSubresource} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, {@code srcOffset.y} and <code>({@code extent.height} + {@code srcOffset.y})</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the height of the specified {@code srcSubresource} of {@code srcImage}</li>
- * </ul>
- * 
- * <ul>
- * <li>If {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}, then for each element of {@code pRegions}, {@code srcOffset.y} <b>must</b> be 0 and {@code extent.height} <b>must</b> be 1</li>
- * <li>For each element of {@code pRegions}, {@code srcOffset.z} and <code>({@code extent.depth} + {@code srcOffset.z})</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the depth of the specified {@code srcSubresource} of {@code srcImage}</li>
- * <li>If {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D} or {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then for each element of {@code pRegions}, {@code srcOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR} or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR}, {@code srcOffset.x} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR} or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, and {@code srcOffset.x} does not equal the width of the subresource specified by {@code srcSubresource}, {@code srcOffset.x} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR} or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, {@code srcOffset.y} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR} or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR}, and {@code srcOffset.y} does not equal the height of the subresource specified by {@code srcSubresource}, {@code srcOffset.y} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, {@code srcOffset.z} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent depth</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR}, the sum of {@code srcOffset.x} and {@code extent.width} does not equal the width of the subresource specified by {@code srcSubresource}, {@code extent.width} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, the difference of {@code srcOffset.x} and {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR}, the difference of {@code srcOffset.x} and {@code extent.width} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR}, the sum of {@code srcOffset.x} and {@code extent.height} does not equal the width of the subresource specified by {@code srcSubresource}, {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR}, and the sum of {@code srcOffset.y} and {@code extent.height} does not equal the height of the subresource specified by {@code srcSubresource}, {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, the sum of {@code srcOffset.y} and {@code extent.width} does not equal the height of the subresource specified by {@code srcSubresource}, {@code extent.width} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR}, the difference of {@code srcOffset.y} and {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR}, the difference of {@code srcOffset.y} and {@code extent.width} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, if the sum of {@code srcOffset.z} and {@code extent.depth} does not equal the depth of the subresource specified by {@code srcSubresource}, {@code extent.depth} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent depth</a> of the {@code VkFormat} of {@code srcImage}</li>
- * <li>For each element of {@code pRegions}, {@code srcSubresource.aspectMask} <b>must</b> specify aspects present in {@code srcImage}</li>
- * <li>If {@code srcImage} has a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then for each element of {@code pRegions}, {@code srcSubresource.aspectMask} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
- * <li>If {@code srcImage} is of type {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, for each element of {@code pRegions}, {@code srcSubresource.baseArrayLayer} <b>must</b> be 0 and {@code srcSubresource.layerCount} <b>must</b> be 1</li>
- * </ul>
- * 
- * <ul>
- * <li>If {@code dstImage} is sparse then all memory ranges accessed by the copy command <b>must</b> be bound as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#sparsememory-resource-binding">Binding Resource Memory</a></li>
- * <li>If the stencil aspect of {@code dstImage} is accessed, and {@code dstImage} was not created with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkImageStencilUsageCreateInfo">separate stencil usage</a>, {@code dstImage} <b>must</b> have been created with {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} set in {@link VkImageCreateInfo}{@code ::usage}</li>
- * <li>If the stencil aspect of {@code dstImage} is accessed, and {@code dstImage} was created with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#VkImageStencilUsageCreateInfo">separate stencil usage</a>, {@code dstImage} <b>must</b> have been created with {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} set in {@link VkImageStencilUsageCreateInfo}{@code ::stencilUsage}</li>
- * <li>If non-stencil aspects of {@code dstImage} are accessed, {@code dstImage} <b>must</b> have been created with {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} set in {@link VkImageCreateInfo}{@code ::usage}</li>
- * <li>If {@code flags} contains {@link VK14#VK_HOST_IMAGE_COPY_MEMCPY HOST_IMAGE_COPY_MEMCPY}, the {@code x}, {@code y}, and {@code z} members of the {@code dstOffset} member of each element of {@code pRegions} <b>must</b> be 0</li>
- * <li>If {@code flags} contains {@link VK14#VK_HOST_IMAGE_COPY_MEMCPY HOST_IMAGE_COPY_MEMCPY}, the {@code extent} member of each element of {@code pRegions} <b>must</b> equal the extents of {@code dstImage} identified by {@code dstSubresource}</li>
- * </ul>
- * 
- * <ul>
- * <li>If {@code dstImage} is non-sparse then the image or the specified <em>disjoint</em> plane <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>The {@code dstSubresource.mipLevel} member of each element of {@code pRegions} <b>must</b> be less than the {@code mipLevels} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
- * <li>If {@code dstSubresource.layerCount} is not {@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS}, <code>{@code dstSubresource.baseArrayLayer} + {@code dstSubresource.layerCount}</code> of each element of {@code pRegions} <b>must</b> be less than or equal to the {@code arrayLayers} specified in {@link VkImageCreateInfo} when {@code dstImage} was created</li>
- * <li>{@code dstImage} <b>must</b> not have been created with {@code flags} containing {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
- * </ul>
- * 
- * <ul>
- * <li>The image region specified by each element of {@code pRegions} <b>must</b> be contained within the specified {@code dstSubresource} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, {@code dstOffset.x} and <code>({@code extent.width} + {@code dstOffset.x})</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the width of the specified {@code dstSubresource} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, {@code dstOffset.y} and <code>({@code extent.height} + {@code dstOffset.y})</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the height of the specified {@code dstSubresource} of {@code dstImage}</li>
- * </ul>
- * 
- * <ul>
- * <li>If {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}, then for each element of {@code pRegions}, {@code dstOffset.y} <b>must</b> be 0 and {@code extent.height} <b>must</b> be 1</li>
- * <li>For each element of {@code pRegions}, {@code dstOffset.z} and <code>({@code extent.depth} + {@code dstOffset.z})</code> <b>must</b> both be greater than or equal to 0 and less than or equal to the depth of the specified {@code dstSubresource} of {@code dstImage}</li>
- * <li>If {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D} or {@link VK10#VK_IMAGE_TYPE_2D IMAGE_TYPE_2D}, then for each element of {@code pRegions}, {@code dstOffset.z} <b>must</b> be 0 and {@code extent.depth} <b>must</b> be 1</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR} or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR}, {@code dstOffset.x} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR} or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, and {@code dstOffset.x} does not equal the width of the subresource specified by {@code dstSubresource}, {@code dstOffset.x} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR} or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, {@code dstOffset.y} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR} or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR}, and {@code dstOffset.y} does not equal the height of the subresource specified by {@code dstSubresource}, {@code dstOffset.y} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, {@code dstOffset.z} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent depth</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR}, the sum of {@code dstOffset.x} and {@code extent.width} does not equal the width of the subresource specified by {@code dstSubresource}, {@code extent.width} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, the difference of {@code dstOffset.x} and {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR}, the difference of {@code dstOffset.x} and {@code extent.width} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR}, the sum of {@code dstOffset.x} and {@code extent.height} does not equal the width of the subresource specified by {@code dstSubresource}, {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent width</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR}, and the sum of {@code dstOffset.y} and {@code extent.height} does not equal the height of the subresource specified by {@code dstSubresource}, {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, the sum of {@code dstOffset.y} and {@code extent.width} does not equal the height of the subresource specified by {@code dstSubresource}, {@code extent.width} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR}, the difference of {@code dstOffset.y} and {@code extent.height} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if {@link VkCopyCommandTransformInfoQCOM}{@code ::transform} is equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR}, the difference of {@code dstOffset.y} and {@code extent.width} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent height</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, if the sum of {@code dstOffset.z} and {@code extent.depth} does not equal the depth of the subresource specified by {@code srcSubresource}, {@code extent.depth} <b>must</b> be a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent depth</a> of the {@code VkFormat} of {@code dstImage}</li>
- * <li>For each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> specify aspects present in {@code dstImage}</li>
- * <li>If {@code dstImage} has a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">multi-planar image format</a>, then for each element of {@code pRegions}, {@code dstSubresource.aspectMask} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
- * <li>If {@code dstImage} is of type {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}, for each element of {@code pRegions}, {@code dstSubresource.baseArrayLayer} <b>must</b> be 0 and {@code dstSubresource.layerCount} <b>must</b> be 1</li>
- * <li>{@code srcImageLayout} <b>must</b> specify the current layout of the image subresources of {@code srcImage} specified in {@code pRegions}</li>
- * <li>{@code dstImageLayout} <b>must</b> specify the current layout of the image subresources of {@code dstImage} specified in {@code pRegions}</li>
- * <li>{@code srcImageLayout} <b>must</b> be one of the image layouts returned in {@link VkPhysicalDeviceHostImageCopyProperties}{@code ::pCopySrcLayouts}</li>
- * <li>{@code dstImageLayout} <b>must</b> be one of the image layouts returned in {@link VkPhysicalDeviceHostImageCopyProperties}{@code ::pCopyDstLayouts}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkHostImageCopyFlagBits} values</li>
- * <li>{@code srcImage} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>{@code srcImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code dstImage} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>{@code dstImageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * <li>{@code pRegions} <b>must</b> be a valid pointer to an array of {@code regionCount} valid {@link VkImageCopy2} structures</li>
- * <li>{@code regionCount} <b>must</b> be greater than 0</li>
- * <li>Both of {@code dstImage}, and {@code srcImage} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkImageCopy2}, {@link VK14#vkCopyImageToImage CopyImageToImage}, {@link EXTHostImageCopy#vkCopyImageToImageEXT CopyImageToImageEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCopyImageToImageInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkHostImageCopyFlags {@link #flags};
- *     VkImage {@link #srcImage};
- *     VkImageLayout {@link #srcImageLayout};
- *     VkImage {@link #dstImage};
- *     VkImageLayout {@link #dstImageLayout};
- *     uint32_t {@link #regionCount};
- *     {@link VkImageCopy2 VkImageCopy2} const * {@link #pRegions};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkHostImageCopyFlags flags;
+ *     VkImage srcImage;
+ *     VkImageLayout srcImageLayout;
+ *     VkImage dstImage;
+ *     VkImageLayout dstImageLayout;
+ *     uint32_t regionCount;
+ *     {@link VkImageCopy2 VkImageCopy2} const * pRegions;
+ * }}</pre>
  */
 public class VkCopyImageToImageInfo extends Struct<VkCopyImageToImageInfo> implements NativeResource {
 
@@ -226,51 +99,51 @@ public class VkCopyImageToImageInfo extends Struct<VkCopyImageToImageInfo> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkHostImageCopyFlagBits} values describing additional copy parameters. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkHostImageCopyFlags")
     public int flags() { return nflags(address()); }
-    /** the source image. */
+    /** @return the value of the {@code srcImage} field. */
     @NativeType("VkImage")
     public long srcImage() { return nsrcImage(address()); }
-    /** the layout of the source image subresources for the copy. */
+    /** @return the value of the {@code srcImageLayout} field. */
     @NativeType("VkImageLayout")
     public int srcImageLayout() { return nsrcImageLayout(address()); }
-    /** the destination image. */
+    /** @return the value of the {@code dstImage} field. */
     @NativeType("VkImage")
     public long dstImage() { return ndstImage(address()); }
-    /** the layout of the destination image subresources for the copy. */
+    /** @return the value of the {@code dstImageLayout} field. */
     @NativeType("VkImageLayout")
     public int dstImageLayout() { return ndstImageLayout(address()); }
-    /** the number of regions to copy. */
+    /** @return the value of the {@code regionCount} field. */
     @NativeType("uint32_t")
     public int regionCount() { return nregionCount(address()); }
-    /** a pointer to an array of {@link VkImageCopy2} structures specifying the regions to copy. */
+    /** @return a {@link VkImageCopy2.Buffer} view of the struct array pointed to by the {@code pRegions} field. */
     @NativeType("VkImageCopy2 const *")
     public VkImageCopy2.Buffer pRegions() { return npRegions(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCopyImageToImageInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO} value to the {@code sType} field. */
     public VkCopyImageToImageInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCopyImageToImageInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkCopyImageToImageInfo flags(@NativeType("VkHostImageCopyFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcImage} field. */
+    /** Sets the specified value to the {@code srcImage} field. */
     public VkCopyImageToImageInfo srcImage(@NativeType("VkImage") long value) { nsrcImage(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcImageLayout} field. */
+    /** Sets the specified value to the {@code srcImageLayout} field. */
     public VkCopyImageToImageInfo srcImageLayout(@NativeType("VkImageLayout") int value) { nsrcImageLayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstImage} field. */
+    /** Sets the specified value to the {@code dstImage} field. */
     public VkCopyImageToImageInfo dstImage(@NativeType("VkImage") long value) { ndstImage(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstImageLayout} field. */
+    /** Sets the specified value to the {@code dstImageLayout} field. */
     public VkCopyImageToImageInfo dstImageLayout(@NativeType("VkImageLayout") int value) { ndstImageLayout(address(), value); return this; }
-    /** Sets the address of the specified {@link VkImageCopy2.Buffer} to the {@link #pRegions} field. */
+    /** Sets the address of the specified {@link VkImageCopy2.Buffer} to the {@code pRegions} field. */
     public VkCopyImageToImageInfo pRegions(@NativeType("VkImageCopy2 const *") VkImageCopy2.Buffer value) { npRegions(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -509,51 +382,51 @@ public class VkCopyImageToImageInfo extends Struct<VkCopyImageToImageInfo> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCopyImageToImageInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCopyImageToImageInfo.nsType(address()); }
-        /** @return the value of the {@link VkCopyImageToImageInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCopyImageToImageInfo.npNext(address()); }
-        /** @return the value of the {@link VkCopyImageToImageInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkHostImageCopyFlags")
         public int flags() { return VkCopyImageToImageInfo.nflags(address()); }
-        /** @return the value of the {@link VkCopyImageToImageInfo#srcImage} field. */
+        /** @return the value of the {@code srcImage} field. */
         @NativeType("VkImage")
         public long srcImage() { return VkCopyImageToImageInfo.nsrcImage(address()); }
-        /** @return the value of the {@link VkCopyImageToImageInfo#srcImageLayout} field. */
+        /** @return the value of the {@code srcImageLayout} field. */
         @NativeType("VkImageLayout")
         public int srcImageLayout() { return VkCopyImageToImageInfo.nsrcImageLayout(address()); }
-        /** @return the value of the {@link VkCopyImageToImageInfo#dstImage} field. */
+        /** @return the value of the {@code dstImage} field. */
         @NativeType("VkImage")
         public long dstImage() { return VkCopyImageToImageInfo.ndstImage(address()); }
-        /** @return the value of the {@link VkCopyImageToImageInfo#dstImageLayout} field. */
+        /** @return the value of the {@code dstImageLayout} field. */
         @NativeType("VkImageLayout")
         public int dstImageLayout() { return VkCopyImageToImageInfo.ndstImageLayout(address()); }
-        /** @return the value of the {@link VkCopyImageToImageInfo#regionCount} field. */
+        /** @return the value of the {@code regionCount} field. */
         @NativeType("uint32_t")
         public int regionCount() { return VkCopyImageToImageInfo.nregionCount(address()); }
-        /** @return a {@link VkImageCopy2.Buffer} view of the struct array pointed to by the {@link VkCopyImageToImageInfo#pRegions} field. */
+        /** @return a {@link VkImageCopy2.Buffer} view of the struct array pointed to by the {@code pRegions} field. */
         @NativeType("VkImageCopy2 const *")
         public VkImageCopy2.Buffer pRegions() { return VkCopyImageToImageInfo.npRegions(address()); }
 
-        /** Sets the specified value to the {@link VkCopyImageToImageInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCopyImageToImageInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyImageToImageInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO} value to the {@link VkCopyImageToImageInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO} value to the {@code sType} field. */
         public VkCopyImageToImageInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_COPY_IMAGE_TO_IMAGE_INFO); }
-        /** Sets the specified value to the {@link VkCopyImageToImageInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCopyImageToImageInfo.Buffer pNext(@NativeType("void const *") long value) { VkCopyImageToImageInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyImageToImageInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkCopyImageToImageInfo.Buffer flags(@NativeType("VkHostImageCopyFlags") int value) { VkCopyImageToImageInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyImageToImageInfo#srcImage} field. */
+        /** Sets the specified value to the {@code srcImage} field. */
         public VkCopyImageToImageInfo.Buffer srcImage(@NativeType("VkImage") long value) { VkCopyImageToImageInfo.nsrcImage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyImageToImageInfo#srcImageLayout} field. */
+        /** Sets the specified value to the {@code srcImageLayout} field. */
         public VkCopyImageToImageInfo.Buffer srcImageLayout(@NativeType("VkImageLayout") int value) { VkCopyImageToImageInfo.nsrcImageLayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyImageToImageInfo#dstImage} field. */
+        /** Sets the specified value to the {@code dstImage} field. */
         public VkCopyImageToImageInfo.Buffer dstImage(@NativeType("VkImage") long value) { VkCopyImageToImageInfo.ndstImage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyImageToImageInfo#dstImageLayout} field. */
+        /** Sets the specified value to the {@code dstImageLayout} field. */
         public VkCopyImageToImageInfo.Buffer dstImageLayout(@NativeType("VkImageLayout") int value) { VkCopyImageToImageInfo.ndstImageLayout(address(), value); return this; }
-        /** Sets the address of the specified {@link VkImageCopy2.Buffer} to the {@link VkCopyImageToImageInfo#pRegions} field. */
+        /** Sets the address of the specified {@link VkImageCopy2.Buffer} to the {@code pRegions} field. */
         public VkCopyImageToImageInfo.Buffer pRegions(@NativeType("VkImageCopy2 const *") VkImageCopy2.Buffer value) { VkCopyImageToImageInfo.npRegions(address(), value); return this; }
 
     }

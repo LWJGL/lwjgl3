@@ -17,37 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A color map defined by the interpolation between two LUTs.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrPassthroughColorMapInterpolatedLutMETA} lets applications apply the interpolation between two color LUTs to a passthrough layer. Applications <b>may</b> use this feature to smoothly transition between two color LUTs. Other Passthrough style elements (such as edges) <b>must</b> not be affected by color LUTs.</p>
- * 
- * <p>The blend between {@code sourceColorLut} and {@code targetColorLut} is computed as <code>(1 - weight) * sourceColorLut [C<sub>in</sub>] + weight * targetColorLut [C<sub>in</sub>]</code>.</p>
- * 
- * <p>{@link XrPassthroughColorMapInterpolatedLutMETA} is provided in the {@code next} chain of {@link XrPassthroughStyleFB} when calling {@link FBPassthrough#xrPassthroughLayerSetStyleFB PassthroughLayerSetStyleFB}. Subsequent calls to {@link FBPassthrough#xrPassthroughLayerSetStyleFB PassthroughLayerSetStyleFB} with {@link XrPassthroughColorMapInterpolatedLutMETA} in the next chain update the color LUT for that layer. Subsequent calls to {@link FBPassthrough#xrPassthroughLayerSetStyleFB PassthroughLayerSetStyleFB} without this {@link XrPassthroughColorMapInterpolatedLutMETA} (or {@link XrPassthroughColorMapLutMETA}) in the next chain disable color LUTs for that layer.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using {@link XrPassthroughColorMapInterpolatedLutMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code sourceColorLut} <b>must</b> be a valid {@code XrPassthroughColorLutMETA} handle</li>
- * <li>{@code targetColorLut} <b>must</b> be a valid {@code XrPassthroughColorLutMETA} handle</li>
- * <li>Both of {@code sourceColorLut} and {@code targetColorLut} <b>must</b> have been created, allocated, or retrieved from the same {@code XrPassthroughFB}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPassthroughColorMapInterpolatedLutMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrPassthroughColorLutMETA {@link #sourceColorLut};
- *     XrPassthroughColorLutMETA {@link #targetColorLut};
- *     float {@link #weight};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrPassthroughColorLutMETA sourceColorLut;
+ *     XrPassthroughColorLutMETA targetColorLut;
+ *     float weight;
+ * }}</pre>
  */
 public class XrPassthroughColorMapInterpolatedLutMETA extends Struct<XrPassthroughColorMapInterpolatedLutMETA> implements NativeResource {
 
@@ -106,32 +83,32 @@ public class XrPassthroughColorMapInterpolatedLutMETA extends Struct<XrPassthrou
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the initial {@code XrPassthroughColorLutMETA}. */
+    /** @return the value of the {@code sourceColorLut} field. */
     @NativeType("XrPassthroughColorLutMETA")
     public long sourceColorLut() { return nsourceColorLut(address()); }
-    /** the final {@code XrPassthroughColorLutMETA}. */
+    /** @return the value of the {@code targetColorLut} field. */
     @NativeType("XrPassthroughColorLutMETA")
     public long targetColorLut() { return ntargetColorLut(address()); }
-    /** a factor in the range <code>[0, 1]</code> which defines the linear blend between the initial and the final color LUT. */
+    /** @return the value of the {@code weight} field. */
     public float weight() { return nweight(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPassthroughColorMapInterpolatedLutMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META} value to the {@link #type} field. */
+    /** Sets the {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META} value to the {@code type} field. */
     public XrPassthroughColorMapInterpolatedLutMETA type$Default() { return type(METAPassthroughColorLut.XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPassthroughColorMapInterpolatedLutMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #sourceColorLut} field. */
+    /** Sets the specified value to the {@code sourceColorLut} field. */
     public XrPassthroughColorMapInterpolatedLutMETA sourceColorLut(XrPassthroughColorLutMETA value) { nsourceColorLut(address(), value); return this; }
-    /** Sets the specified value to the {@link #targetColorLut} field. */
+    /** Sets the specified value to the {@code targetColorLut} field. */
     public XrPassthroughColorMapInterpolatedLutMETA targetColorLut(XrPassthroughColorLutMETA value) { ntargetColorLut(address(), value); return this; }
-    /** Sets the specified value to the {@link #weight} field. */
+    /** Sets the specified value to the {@code weight} field. */
     public XrPassthroughColorMapInterpolatedLutMETA weight(float value) { nweight(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,32 +326,32 @@ public class XrPassthroughColorMapInterpolatedLutMETA extends Struct<XrPassthrou
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPassthroughColorMapInterpolatedLutMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughColorMapInterpolatedLutMETA.ntype(address()); }
-        /** @return the value of the {@link XrPassthroughColorMapInterpolatedLutMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughColorMapInterpolatedLutMETA.nnext(address()); }
-        /** @return the value of the {@link XrPassthroughColorMapInterpolatedLutMETA#sourceColorLut} field. */
+        /** @return the value of the {@code sourceColorLut} field. */
         @NativeType("XrPassthroughColorLutMETA")
         public long sourceColorLut() { return XrPassthroughColorMapInterpolatedLutMETA.nsourceColorLut(address()); }
-        /** @return the value of the {@link XrPassthroughColorMapInterpolatedLutMETA#targetColorLut} field. */
+        /** @return the value of the {@code targetColorLut} field. */
         @NativeType("XrPassthroughColorLutMETA")
         public long targetColorLut() { return XrPassthroughColorMapInterpolatedLutMETA.ntargetColorLut(address()); }
-        /** @return the value of the {@link XrPassthroughColorMapInterpolatedLutMETA#weight} field. */
+        /** @return the value of the {@code weight} field. */
         public float weight() { return XrPassthroughColorMapInterpolatedLutMETA.nweight(address()); }
 
-        /** Sets the specified value to the {@link XrPassthroughColorMapInterpolatedLutMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPassthroughColorMapInterpolatedLutMETA.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughColorMapInterpolatedLutMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META} value to the {@link XrPassthroughColorMapInterpolatedLutMETA#type} field. */
+        /** Sets the {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META} value to the {@code type} field. */
         public XrPassthroughColorMapInterpolatedLutMETA.Buffer type$Default() { return type(METAPassthroughColorLut.XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META); }
-        /** Sets the specified value to the {@link XrPassthroughColorMapInterpolatedLutMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPassthroughColorMapInterpolatedLutMETA.Buffer next(@NativeType("void const *") long value) { XrPassthroughColorMapInterpolatedLutMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughColorMapInterpolatedLutMETA#sourceColorLut} field. */
+        /** Sets the specified value to the {@code sourceColorLut} field. */
         public XrPassthroughColorMapInterpolatedLutMETA.Buffer sourceColorLut(XrPassthroughColorLutMETA value) { XrPassthroughColorMapInterpolatedLutMETA.nsourceColorLut(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughColorMapInterpolatedLutMETA#targetColorLut} field. */
+        /** Sets the specified value to the {@code targetColorLut} field. */
         public XrPassthroughColorMapInterpolatedLutMETA.Buffer targetColorLut(XrPassthroughColorLutMETA value) { XrPassthroughColorMapInterpolatedLutMETA.ntargetColorLut(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughColorMapInterpolatedLutMETA#weight} field. */
+        /** Sets the specified value to the {@code weight} field. */
         public XrPassthroughColorMapInterpolatedLutMETA.Buffer weight(float value) { XrPassthroughColorMapInterpolatedLutMETA.nweight(address(), value); return this; }
 
     }

@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_probe_op {
  *     __u8 op;
  *     __u8 resv;
- *     __u16 {@link #flags};
+ *     __u16 flags;
  *     __u32 resv2;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_probe_op")
 public class IOURingProbeOp extends Struct<IOURingProbeOp> implements NativeResource {
@@ -84,13 +82,13 @@ public class IOURingProbeOp extends Struct<IOURingProbeOp> implements NativeReso
     /** @return the value of the {@code op} field. */
     @NativeType("__u8")
     public byte op() { return nop(address()); }
-    /** one or more of:<br><table><tr><td>{@link LibIOURing#IO_URING_OP_SUPPORTED}</td></tr></table> */
+    /** @return the value of the {@code flags} field. */
     @NativeType("__u16")
     public short flags() { return nflags(address()); }
 
     /** Sets the specified value to the {@code op} field. */
     public IOURingProbeOp op(@NativeType("__u8") byte value) { nop(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public IOURingProbeOp flags(@NativeType("__u16") short value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -287,13 +285,13 @@ public class IOURingProbeOp extends Struct<IOURingProbeOp> implements NativeReso
         /** @return the value of the {@code op} field. */
         @NativeType("__u8")
         public byte op() { return IOURingProbeOp.nop(address()); }
-        /** @return the value of the {@link IOURingProbeOp#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("__u16")
         public short flags() { return IOURingProbeOp.nflags(address()); }
 
         /** Sets the specified value to the {@code op} field. */
         public IOURingProbeOp.Buffer op(@NativeType("__u8") byte value) { IOURingProbeOp.nop(address(), value); return this; }
-        /** Sets the specified value to the {@link IOURingProbeOp#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public IOURingProbeOp.Buffer flags(@NativeType("__u16") short value) { IOURingProbeOp.nflags(address(), value); return this; }
 
     }

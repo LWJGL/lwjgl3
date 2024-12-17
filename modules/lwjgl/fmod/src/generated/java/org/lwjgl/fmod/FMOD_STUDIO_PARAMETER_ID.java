@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_PARAMETER_ID {
  *     unsigned int data1;
  *     unsigned int data2;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_PARAMETER_ID extends Struct<FMOD_STUDIO_PARAMETER_ID> implements NativeResource {
 

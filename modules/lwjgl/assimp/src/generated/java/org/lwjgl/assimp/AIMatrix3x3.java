@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents a row-major 3x3 matrix.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiMatrix3x3 {
  *     float a1;
  *     float a2;
@@ -31,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float c1;
  *     float c2;
  *     float c3;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct aiMatrix3x3")
 public class AIMatrix3x3 extends Struct<AIMatrix3x3> implements NativeResource {

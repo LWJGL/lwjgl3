@@ -16,17 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_baked_font {
- *     float {@link #height};
- *     float {@link #ascent};
- *     float {@link #descent};
- *     nk_rune {@link #glyph_offset};
- *     nk_rune {@link #glyph_count};
- *     nk_rune const * {@link #ranges};
- * }</code></pre>
+ *     float height;
+ *     float ascent;
+ *     float descent;
+ *     nk_rune glyph_offset;
+ *     nk_rune glyph_count;
+ *     nk_rune const * ranges;
+ * }}</pre>
  */
 @NativeType("struct nk_baked_font")
 public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
@@ -89,37 +87,33 @@ public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** height of the font */
+    /** @return the value of the {@code height} field. */
     public float height() { return nheight(address()); }
-    /** font glyph ascent */
+    /** @return the value of the {@code ascent} field. */
     public float ascent() { return nascent(address()); }
-    /** font glyph descent */
+    /** @return the value of the {@code descent} field. */
     public float descent() { return ndescent(address()); }
-    /** glyph array offset inside the font glyph baking output array */
+    /** @return the value of the {@code glyph_offset} field. */
     @NativeType("nk_rune")
     public int glyph_offset() { return nglyph_offset(address()); }
-    /** number of glyphs of this font inside the glyph baking array output */
+    /** @return the value of the {@code glyph_count} field. */
     @NativeType("nk_rune")
     public int glyph_count() { return nglyph_count(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return font codepoint ranges as pairs of (from/to) and 0 as last element
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code ranges} field. */
     @NativeType("nk_rune const *")
     public @Nullable IntBuffer ranges(int capacity) { return nranges(address(), capacity); }
 
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public NkBakedFont height(float value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@link #ascent} field. */
+    /** Sets the specified value to the {@code ascent} field. */
     public NkBakedFont ascent(float value) { nascent(address(), value); return this; }
-    /** Sets the specified value to the {@link #descent} field. */
+    /** Sets the specified value to the {@code descent} field. */
     public NkBakedFont descent(float value) { ndescent(address(), value); return this; }
-    /** Sets the specified value to the {@link #glyph_offset} field. */
+    /** Sets the specified value to the {@code glyph_offset} field. */
     public NkBakedFont glyph_offset(@NativeType("nk_rune") int value) { nglyph_offset(address(), value); return this; }
-    /** Sets the specified value to the {@link #glyph_count} field. */
+    /** Sets the specified value to the {@code glyph_count} field. */
     public NkBakedFont glyph_count(@NativeType("nk_rune") int value) { nglyph_count(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #ranges} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code ranges} field. */
     public NkBakedFont ranges(@Nullable @NativeType("nk_rune const *") IntBuffer value) { nranges(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -333,37 +327,33 @@ public class NkBakedFont extends Struct<NkBakedFont> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link NkBakedFont#height} field. */
+        /** @return the value of the {@code height} field. */
         public float height() { return NkBakedFont.nheight(address()); }
-        /** @return the value of the {@link NkBakedFont#ascent} field. */
+        /** @return the value of the {@code ascent} field. */
         public float ascent() { return NkBakedFont.nascent(address()); }
-        /** @return the value of the {@link NkBakedFont#descent} field. */
+        /** @return the value of the {@code descent} field. */
         public float descent() { return NkBakedFont.ndescent(address()); }
-        /** @return the value of the {@link NkBakedFont#glyph_offset} field. */
+        /** @return the value of the {@code glyph_offset} field. */
         @NativeType("nk_rune")
         public int glyph_offset() { return NkBakedFont.nglyph_offset(address()); }
-        /** @return the value of the {@link NkBakedFont#glyph_count} field. */
+        /** @return the value of the {@code glyph_count} field. */
         @NativeType("nk_rune")
         public int glyph_count() { return NkBakedFont.nglyph_count(address()); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@link NkBakedFont#ranges} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code ranges} field. */
         @NativeType("nk_rune const *")
         public @Nullable IntBuffer ranges(int capacity) { return NkBakedFont.nranges(address(), capacity); }
 
-        /** Sets the specified value to the {@link NkBakedFont#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public NkBakedFont.Buffer height(float value) { NkBakedFont.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@link NkBakedFont#ascent} field. */
+        /** Sets the specified value to the {@code ascent} field. */
         public NkBakedFont.Buffer ascent(float value) { NkBakedFont.nascent(address(), value); return this; }
-        /** Sets the specified value to the {@link NkBakedFont#descent} field. */
+        /** Sets the specified value to the {@code descent} field. */
         public NkBakedFont.Buffer descent(float value) { NkBakedFont.ndescent(address(), value); return this; }
-        /** Sets the specified value to the {@link NkBakedFont#glyph_offset} field. */
+        /** Sets the specified value to the {@code glyph_offset} field. */
         public NkBakedFont.Buffer glyph_offset(@NativeType("nk_rune") int value) { NkBakedFont.nglyph_offset(address(), value); return this; }
-        /** Sets the specified value to the {@link NkBakedFont#glyph_count} field. */
+        /** Sets the specified value to the {@code glyph_count} field. */
         public NkBakedFont.Buffer glyph_count(@NativeType("nk_rune") int value) { NkBakedFont.nglyph_count(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link NkBakedFont#ranges} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code ranges} field. */
         public NkBakedFont.Buffer ranges(@Nullable @NativeType("nk_rune const *") IntBuffer value) { NkBakedFont.nranges(address(), value); return this; }
 
     }

@@ -17,18 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XSelectionClearEvent {
  *     int type;
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
- *     Window {@link #window};
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
+ *     Window window;
  *     Atom selection;
  *     Time time;
- * }</code></pre>
+ * }}</pre>
  */
 public class XSelectionClearEvent extends Struct<XSelectionClearEvent> implements NativeResource {
 
@@ -95,16 +93,16 @@ public class XSelectionClearEvent extends Struct<XSelectionClearEvent> implement
 
     /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** window it reported relative to */
+    /** @return the value of the {@code window} field. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
     /** @return the value of the {@code selection} field. */
@@ -116,13 +114,13 @@ public class XSelectionClearEvent extends Struct<XSelectionClearEvent> implement
 
     /** Sets the specified value to the {@code type} field. */
     public XSelectionClearEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XSelectionClearEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XSelectionClearEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XSelectionClearEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #window} field. */
+    /** Sets the specified value to the {@code window} field. */
     public XSelectionClearEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
     /** Sets the specified value to the {@code selection} field. */
     public XSelectionClearEvent selection(@NativeType("Atom") long value) { nselection(address(), value); return this; }
@@ -376,16 +374,16 @@ public class XSelectionClearEvent extends Struct<XSelectionClearEvent> implement
 
         /** @return the value of the {@code type} field. */
         public int type() { return XSelectionClearEvent.ntype(address()); }
-        /** @return the value of the {@link XSelectionClearEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XSelectionClearEvent.nserial(address()); }
-        /** @return the value of the {@link XSelectionClearEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XSelectionClearEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XSelectionClearEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XSelectionClearEvent.ndisplay(address()); }
-        /** @return the value of the {@link XSelectionClearEvent#window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("Window")
         public long window() { return XSelectionClearEvent.nwindow(address()); }
         /** @return the value of the {@code selection} field. */
@@ -397,13 +395,13 @@ public class XSelectionClearEvent extends Struct<XSelectionClearEvent> implement
 
         /** Sets the specified value to the {@code type} field. */
         public XSelectionClearEvent.Buffer type(int value) { XSelectionClearEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XSelectionClearEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XSelectionClearEvent.Buffer serial(@NativeType("unsigned long") long value) { XSelectionClearEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XSelectionClearEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XSelectionClearEvent.Buffer send_event(@NativeType("Bool") boolean value) { XSelectionClearEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XSelectionClearEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XSelectionClearEvent.Buffer display(@NativeType("Display *") long value) { XSelectionClearEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XSelectionClearEvent#window} field. */
+        /** Sets the specified value to the {@code window} field. */
         public XSelectionClearEvent.Buffer window(@NativeType("Window") long value) { XSelectionClearEvent.nwindow(address(), value); return this; }
         /** Sets the specified value to the {@code selection} field. */
         public XSelectionClearEvent.Buffer selection(@NativeType("Atom") long value) { XSelectionClearEvent.nselection(address(), value); return this; }

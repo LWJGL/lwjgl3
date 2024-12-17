@@ -16,38 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a geometry in a bottom-level acceleration structure.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code geometryType} <b>must</b> be {@link NVRayTracing#VK_GEOMETRY_TYPE_TRIANGLES_NV GEOMETRY_TYPE_TRIANGLES_NV} or {@link NVRayTracing#VK_GEOMETRY_TYPE_AABBS_NV GEOMETRY_TYPE_AABBS_NV}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVRayTracing#VK_STRUCTURE_TYPE_GEOMETRY_NV STRUCTURE_TYPE_GEOMETRY_NV}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code geometryType} <b>must</b> be a valid {@code VkGeometryTypeKHR} value</li>
- * <li>{@code geometry} <b>must</b> be a valid {@link VkGeometryDataNV} structure</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkGeometryFlagBitsKHR} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAccelerationStructureInfoNV}, {@link VkGeometryDataNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkGeometryNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkGeometryTypeKHR {@link #geometryType};
- *     {@link VkGeometryDataNV VkGeometryDataNV} {@link #geometry};
- *     VkGeometryFlagsKHR {@link #flags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkGeometryTypeKHR geometryType;
+ *     {@link VkGeometryDataNV VkGeometryDataNV} geometry;
+ *     VkGeometryFlagsKHR flags;
+ * }}</pre>
  */
 public class VkGeometryNV extends Struct<VkGeometryNV> implements NativeResource {
 
@@ -106,34 +82,34 @@ public class VkGeometryNV extends Struct<VkGeometryNV> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the {@code VkGeometryTypeKHR} which this geometry refers to. */
+    /** @return the value of the {@code geometryType} field. */
     @NativeType("VkGeometryTypeKHR")
     public int geometryType() { return ngeometryType(address()); }
-    /** contains the geometry data as described in {@link VkGeometryDataNV}. */
+    /** @return a {@link VkGeometryDataNV} view of the {@code geometry} field. */
     public VkGeometryDataNV geometry() { return ngeometry(address()); }
-    /** has {@code VkGeometryFlagBitsKHR} describing options for this geometry. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkGeometryFlagsKHR")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkGeometryNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_GEOMETRY_NV STRUCTURE_TYPE_GEOMETRY_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_GEOMETRY_NV STRUCTURE_TYPE_GEOMETRY_NV} value to the {@code sType} field. */
     public VkGeometryNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_GEOMETRY_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkGeometryNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #geometryType} field. */
+    /** Sets the specified value to the {@code geometryType} field. */
     public VkGeometryNV geometryType(@NativeType("VkGeometryTypeKHR") int value) { ngeometryType(address(), value); return this; }
-    /** Copies the specified {@link VkGeometryDataNV} to the {@link #geometry} field. */
+    /** Copies the specified {@link VkGeometryDataNV} to the {@code geometry} field. */
     public VkGeometryNV geometry(VkGeometryDataNV value) { ngeometry(address(), value); return this; }
-    /** Passes the {@link #geometry} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code geometry} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkGeometryNV geometry(java.util.function.Consumer<VkGeometryDataNV> consumer) { consumer.accept(geometry()); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkGeometryNV flags(@NativeType("VkGeometryFlagsKHR") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -360,34 +336,34 @@ public class VkGeometryNV extends Struct<VkGeometryNV> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkGeometryNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGeometryNV.nsType(address()); }
-        /** @return the value of the {@link VkGeometryNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkGeometryNV.npNext(address()); }
-        /** @return the value of the {@link VkGeometryNV#geometryType} field. */
+        /** @return the value of the {@code geometryType} field. */
         @NativeType("VkGeometryTypeKHR")
         public int geometryType() { return VkGeometryNV.ngeometryType(address()); }
-        /** @return a {@link VkGeometryDataNV} view of the {@link VkGeometryNV#geometry} field. */
+        /** @return a {@link VkGeometryDataNV} view of the {@code geometry} field. */
         public VkGeometryDataNV geometry() { return VkGeometryNV.ngeometry(address()); }
-        /** @return the value of the {@link VkGeometryNV#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkGeometryFlagsKHR")
         public int flags() { return VkGeometryNV.nflags(address()); }
 
-        /** Sets the specified value to the {@link VkGeometryNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkGeometryNV.Buffer sType(@NativeType("VkStructureType") int value) { VkGeometryNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_GEOMETRY_NV STRUCTURE_TYPE_GEOMETRY_NV} value to the {@link VkGeometryNV#sType} field. */
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_GEOMETRY_NV STRUCTURE_TYPE_GEOMETRY_NV} value to the {@code sType} field. */
         public VkGeometryNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_GEOMETRY_NV); }
-        /** Sets the specified value to the {@link VkGeometryNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkGeometryNV.Buffer pNext(@NativeType("void const *") long value) { VkGeometryNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkGeometryNV#geometryType} field. */
+        /** Sets the specified value to the {@code geometryType} field. */
         public VkGeometryNV.Buffer geometryType(@NativeType("VkGeometryTypeKHR") int value) { VkGeometryNV.ngeometryType(address(), value); return this; }
-        /** Copies the specified {@link VkGeometryDataNV} to the {@link VkGeometryNV#geometry} field. */
+        /** Copies the specified {@link VkGeometryDataNV} to the {@code geometry} field. */
         public VkGeometryNV.Buffer geometry(VkGeometryDataNV value) { VkGeometryNV.ngeometry(address(), value); return this; }
-        /** Passes the {@link VkGeometryNV#geometry} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code geometry} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkGeometryNV.Buffer geometry(java.util.function.Consumer<VkGeometryDataNV> consumer) { consumer.accept(geometry()); return this; }
-        /** Sets the specified value to the {@link VkGeometryNV#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkGeometryNV.Buffer flags(@NativeType("VkGeometryFlagsKHR") int value) { VkGeometryNV.nflags(address(), value); return this; }
 
     }

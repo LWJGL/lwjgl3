@@ -8,7 +8,6 @@ package org.lwjgl.system;
 
 import static org.lwjgl.system.Checks.*;
 
-/** Memory access utilities. */
 final class MemoryAccessJNI {
 
     static { Library.initialize(); }
@@ -19,7 +18,7 @@ final class MemoryAccessJNI {
 
     // --- [ getPointerSize ] ---
 
-    /** Returns the {@code sizeof(void *)}. */
+    /** {@code int getPointerSize(void)} */
     static native int getPointerSize();
 
     // --- [ malloc ] ---
@@ -27,7 +26,7 @@ final class MemoryAccessJNI {
     @NativeType("void * (*) (size_t)")
     private static native long malloc();
 
-    /** Returns the address of the stdlib {@code malloc} function. */
+    /** {@code void * (*) (size_t) malloc(void)} */
     static final long malloc = malloc();
 
     // --- [ calloc ] ---
@@ -35,7 +34,7 @@ final class MemoryAccessJNI {
     @NativeType("void * (*) (size_t, size_t)")
     private static native long calloc();
 
-    /** Returns the address of the stdlib {@code calloc} function. */
+    /** {@code void * (*) (size_t, size_t) calloc(void)} */
     static final long calloc = calloc();
 
     // --- [ realloc ] ---
@@ -43,7 +42,7 @@ final class MemoryAccessJNI {
     @NativeType("void * (*) (void *, size_t)")
     private static native long realloc();
 
-    /** Returns the address of the stdlib {@code realloc} function. */
+    /** {@code void * (*) (void *, size_t) realloc(void)} */
     static final long realloc = realloc();
 
     // --- [ free ] ---
@@ -51,7 +50,7 @@ final class MemoryAccessJNI {
     @NativeType("void (*) (void *)")
     private static native long free();
 
-    /** Returns the address of the stdlib {@code free} function. */
+    /** {@code void (*) (void *) free(void)} */
     static final long free = free();
 
     // --- [ aligned_alloc ] ---
@@ -59,7 +58,7 @@ final class MemoryAccessJNI {
     @NativeType("void * (*) (size_t, size_t)")
     private static native long aligned_alloc();
 
-    /** Returns the address of the stdlib {@code aligned_alloc} function. */
+    /** {@code void * (*) (size_t, size_t) aligned_alloc(void)} */
     static final long aligned_alloc = aligned_alloc();
 
     // --- [ aligned_free ] ---
@@ -67,19 +66,15 @@ final class MemoryAccessJNI {
     @NativeType("void (*) (void *)")
     private static native long aligned_free();
 
-    /** Returns the address of the stdlib {@code aligned_free} function. */
+    /** {@code void (*) (void *) aligned_free(void)} */
     static final long aligned_free = aligned_free();
 
     // --- [ getByte ] ---
 
-    /** Unsafe version of: {@link #getByte} */
+    /** {@code int8_t getByte(void * ptr)} */
     static native byte ngetByte(long ptr);
 
-    /**
-     * Reads a byte value from the specified memory address.
-     *
-     * @param ptr the memory address to read
-     */
+    /** {@code int8_t getByte(void * ptr)} */
     @NativeType("int8_t")
     static byte getByte(@NativeType("void *") long ptr) {
         if (CHECKS) {
@@ -90,14 +85,10 @@ final class MemoryAccessJNI {
 
     // --- [ getShort ] ---
 
-    /** Unsafe version of: {@link #getShort} */
+    /** {@code int16_t getShort(void * ptr)} */
     static native short ngetShort(long ptr);
 
-    /**
-     * Reads a short value from the specified memory address.
-     *
-     * @param ptr the memory address to read
-     */
+    /** {@code int16_t getShort(void * ptr)} */
     @NativeType("int16_t")
     static short getShort(@NativeType("void *") long ptr) {
         if (CHECKS) {
@@ -108,14 +99,10 @@ final class MemoryAccessJNI {
 
     // --- [ getInt ] ---
 
-    /** Unsafe version of: {@link #getInt} */
+    /** {@code int32_t getInt(void * ptr)} */
     static native int ngetInt(long ptr);
 
-    /**
-     * Reads an int value from the specified memory address.
-     *
-     * @param ptr the memory address to read
-     */
+    /** {@code int32_t getInt(void * ptr)} */
     @NativeType("int32_t")
     static int getInt(@NativeType("void *") long ptr) {
         if (CHECKS) {
@@ -126,14 +113,10 @@ final class MemoryAccessJNI {
 
     // --- [ getLong ] ---
 
-    /** Unsafe version of: {@link #getLong} */
+    /** {@code int64_t getLong(void * ptr)} */
     static native long ngetLong(long ptr);
 
-    /**
-     * Reads a long value from the specified memory address.
-     *
-     * @param ptr the memory address to read
-     */
+    /** {@code int64_t getLong(void * ptr)} */
     @NativeType("int64_t")
     static long getLong(@NativeType("void *") long ptr) {
         if (CHECKS) {
@@ -144,14 +127,10 @@ final class MemoryAccessJNI {
 
     // --- [ getFloat ] ---
 
-    /** Unsafe version of: {@link #getFloat} */
+    /** {@code float getFloat(void * ptr)} */
     static native float ngetFloat(long ptr);
 
-    /**
-     * Reads a float value from the specified memory address.
-     *
-     * @param ptr the memory address to read
-     */
+    /** {@code float getFloat(void * ptr)} */
     static float getFloat(@NativeType("void *") long ptr) {
         if (CHECKS) {
             check(ptr);
@@ -161,14 +140,10 @@ final class MemoryAccessJNI {
 
     // --- [ getDouble ] ---
 
-    /** Unsafe version of: {@link #getDouble} */
+    /** {@code double getDouble(void * ptr)} */
     static native double ngetDouble(long ptr);
 
-    /**
-     * Reads a double value from the specified memory address.
-     *
-     * @param ptr the memory address to read
-     */
+    /** {@code double getDouble(void * ptr)} */
     static double getDouble(@NativeType("void *") long ptr) {
         if (CHECKS) {
             check(ptr);
@@ -178,14 +153,10 @@ final class MemoryAccessJNI {
 
     // --- [ getAddress ] ---
 
-    /** Unsafe version of: {@link #getAddress} */
+    /** {@code uintptr_t getAddress(void * ptr)} */
     static native long ngetAddress(long ptr);
 
-    /**
-     * Reads a pointer address from the specified memory address.
-     *
-     * @param ptr the memory address to read
-     */
+    /** {@code uintptr_t getAddress(void * ptr)} */
     @NativeType("uintptr_t")
     static long getAddress(@NativeType("void *") long ptr) {
         if (CHECKS) {
@@ -196,15 +167,10 @@ final class MemoryAccessJNI {
 
     // --- [ putByte ] ---
 
-    /** Unsafe version of: {@link #putByte} */
+    /** {@code void putByte(void * ptr, int8_t value)} */
     static native void nputByte(long ptr, byte value);
 
-    /**
-     * Writes a byte value to the specified memory address.
-     *
-     * @param ptr   the memory address to write
-     * @param value the value to write
-     */
+    /** {@code void putByte(void * ptr, int8_t value)} */
     static void putByte(@NativeType("void *") long ptr, @NativeType("int8_t") byte value) {
         if (CHECKS) {
             check(ptr);
@@ -214,15 +180,10 @@ final class MemoryAccessJNI {
 
     // --- [ putShort ] ---
 
-    /** Unsafe version of: {@link #putShort} */
+    /** {@code void putShort(void * ptr, int16_t value)} */
     static native void nputShort(long ptr, short value);
 
-    /**
-     * Writes a short value to the specified memory address.
-     *
-     * @param ptr   the memory address to write
-     * @param value the value to write
-     */
+    /** {@code void putShort(void * ptr, int16_t value)} */
     static void putShort(@NativeType("void *") long ptr, @NativeType("int16_t") short value) {
         if (CHECKS) {
             check(ptr);
@@ -232,15 +193,10 @@ final class MemoryAccessJNI {
 
     // --- [ putInt ] ---
 
-    /** Unsafe version of: {@link #putInt} */
+    /** {@code void putInt(void * ptr, int32_t value)} */
     static native void nputInt(long ptr, int value);
 
-    /**
-     * Writes an int value to the specified memory address.
-     *
-     * @param ptr   the memory address to write
-     * @param value the value to write
-     */
+    /** {@code void putInt(void * ptr, int32_t value)} */
     static void putInt(@NativeType("void *") long ptr, @NativeType("int32_t") int value) {
         if (CHECKS) {
             check(ptr);
@@ -250,15 +206,10 @@ final class MemoryAccessJNI {
 
     // --- [ putLong ] ---
 
-    /** Unsafe version of: {@link #putLong} */
+    /** {@code void putLong(void * ptr, int64_t value)} */
     static native void nputLong(long ptr, long value);
 
-    /**
-     * Writes a long value to the specified memory address.
-     *
-     * @param ptr   the memory address to write
-     * @param value the value to write
-     */
+    /** {@code void putLong(void * ptr, int64_t value)} */
     static void putLong(@NativeType("void *") long ptr, @NativeType("int64_t") long value) {
         if (CHECKS) {
             check(ptr);
@@ -268,15 +219,10 @@ final class MemoryAccessJNI {
 
     // --- [ putFloat ] ---
 
-    /** Unsafe version of: {@link #putFloat} */
+    /** {@code void putFloat(void * ptr, float value)} */
     static native void nputFloat(long ptr, float value);
 
-    /**
-     * Writes a float value to the specified memory address.
-     *
-     * @param ptr   the memory address to write
-     * @param value the value to write
-     */
+    /** {@code void putFloat(void * ptr, float value)} */
     static void putFloat(@NativeType("void *") long ptr, float value) {
         if (CHECKS) {
             check(ptr);
@@ -286,15 +232,10 @@ final class MemoryAccessJNI {
 
     // --- [ putDouble ] ---
 
-    /** Unsafe version of: {@link #putDouble} */
+    /** {@code void putDouble(void * ptr, double value)} */
     static native void nputDouble(long ptr, double value);
 
-    /**
-     * Writes a double value to the specified memory address.
-     *
-     * @param ptr   the memory address to write
-     * @param value the value to write
-     */
+    /** {@code void putDouble(void * ptr, double value)} */
     static void putDouble(@NativeType("void *") long ptr, double value) {
         if (CHECKS) {
             check(ptr);
@@ -304,15 +245,10 @@ final class MemoryAccessJNI {
 
     // --- [ putAddress ] ---
 
-    /** Unsafe version of: {@link #putAddress} */
+    /** {@code void putAddress(void * ptr, uintptr_t value)} */
     static native void nputAddress(long ptr, long value);
 
-    /**
-     * Writes a pointer address to the specified memory address.
-     *
-     * @param ptr   the memory address to write
-     * @param value the value to write
-     */
+    /** {@code void putAddress(void * ptr, uintptr_t value)} */
     static void putAddress(@NativeType("void *") long ptr, @NativeType("uintptr_t") long value) {
         if (CHECKS) {
             check(ptr);

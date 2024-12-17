@@ -7,32 +7,12 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_storage.txt">EXT_texture_storage</a> extension.
- * 
- * <p>The texture image specification commands in OpenGL allow each level to be separately specified with different sizes, formats, types and so on, and only
- * imposes consistency checks at draw time. This adds overhead for implementations.</p>
- * 
- * <p>This extension provides a mechanism for specifying the entire structure of a texture in a single call, allowing certain consistency checks and memory
- * allocations to be done up front. Once specified, the format and dimensions of the image array become immutable, to simplify completeness checks in the
- * implementation.</p>
- * 
- * <p>When using this extension, it is no longer possible to supply texture data using TexImage*. Instead, data can be uploaded using TexSubImage*, or
- * produced by other means (such as render-to-texture, mipmap generation, or rendering to a sibling EGLImage).</p>
- * 
- * <p>This extension has complicated interactions with other extensions. The goal of most of these interactions is to ensure that a texture is always mipmap
- * complete (and cube complete for cubemap textures).</p>
- * 
- * <p>Requires {@link GL12 OpenGL 1.2}.</p>
- */
 public class EXTTextureStorage {
 
     static { GL.initialize(); }
 
-    /** Accepted by the {@code value} parameter of GetTexParameter{if}v. */
     public static final int GL_TEXTURE_IMMUTABLE_FORMAT_EXT = 0x912F;
 
-    /** Accepted by the {@code internalformat} parameter of {@code TexStorage*}. */
     public static final int
         GL_ALPHA8_EXT             = 0x803C,
         GL_LUMINANCE8_EXT         = 0x8040,
@@ -64,26 +44,32 @@ public class EXTTextureStorage {
 
     // --- [ glTexStorage1DEXT ] ---
 
+    /** {@code void glTexStorage1DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)} */
     public static native void glTexStorage1DEXT(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width);
 
     // --- [ glTexStorage2DEXT ] ---
 
+    /** {@code void glTexStorage2DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)} */
     public static native void glTexStorage2DEXT(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
 
     // --- [ glTexStorage3DEXT ] ---
 
+    /** {@code void glTexStorage3DEXT(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)} */
     public static native void glTexStorage3DEXT(@NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth);
 
     // --- [ glTextureStorage1DEXT ] ---
 
+    /** {@code void glTextureStorage1DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width)} */
     public static native void glTextureStorage1DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width);
 
     // --- [ glTextureStorage2DEXT ] ---
 
+    /** {@code void glTextureStorage2DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height)} */
     public static native void glTextureStorage2DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
 
     // --- [ glTextureStorage3DEXT ] ---
 
+    /** {@code void glTextureStorage3DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth)} */
     public static native void glTextureStorage3DEXT(@NativeType("GLuint") int texture, @NativeType("GLenum") int target, @NativeType("GLsizei") int levels, @NativeType("GLenum") int internalformat, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height, @NativeType("GLsizei") int depth);
 
 }

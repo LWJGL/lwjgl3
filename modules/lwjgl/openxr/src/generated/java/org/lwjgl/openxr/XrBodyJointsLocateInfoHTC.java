@@ -17,34 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the information to locate body joints.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrBodyJointsLocateInfoHTC} structure describes the information to locate individual body joints.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using {@link XrBodyJointsLocateInfoHTC}</li>
- * <li>{@code type} <b>must</b> be {@link HTCBodyTracking#XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC TYPE_BODY_JOINTS_LOCATE_INFO_HTC}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link HTCBodyTracking#xrLocateBodyJointsHTC LocateBodyJointsHTC}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBodyJointsLocateInfoHTC {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #baseSpace};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace baseSpace;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrBodyJointsLocateInfoHTC extends Struct<XrBodyJointsLocateInfoHTC> implements NativeResource {
 
@@ -100,28 +79,28 @@ public class XrBodyJointsLocateInfoHTC extends Struct<XrBodyJointsLocateInfoHTC>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrSpace} within which the returned body joint locations will be represented. */
+    /** @return the value of the {@code baseSpace} field. */
     @NativeType("XrSpace")
     public long baseSpace() { return nbaseSpace(address()); }
-    /** an {@code XrTime} at which to locate the body joints. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrBodyJointsLocateInfoHTC type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link HTCBodyTracking#XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC TYPE_BODY_JOINTS_LOCATE_INFO_HTC} value to the {@link #type} field. */
+    /** Sets the {@link HTCBodyTracking#XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC TYPE_BODY_JOINTS_LOCATE_INFO_HTC} value to the {@code type} field. */
     public XrBodyJointsLocateInfoHTC type$Default() { return type(HTCBodyTracking.XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrBodyJointsLocateInfoHTC next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #baseSpace} field. */
+    /** Sets the specified value to the {@code baseSpace} field. */
     public XrBodyJointsLocateInfoHTC baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrBodyJointsLocateInfoHTC time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,28 +311,28 @@ public class XrBodyJointsLocateInfoHTC extends Struct<XrBodyJointsLocateInfoHTC>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrBodyJointsLocateInfoHTC#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBodyJointsLocateInfoHTC.ntype(address()); }
-        /** @return the value of the {@link XrBodyJointsLocateInfoHTC#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrBodyJointsLocateInfoHTC.nnext(address()); }
-        /** @return the value of the {@link XrBodyJointsLocateInfoHTC#baseSpace} field. */
+        /** @return the value of the {@code baseSpace} field. */
         @NativeType("XrSpace")
         public long baseSpace() { return XrBodyJointsLocateInfoHTC.nbaseSpace(address()); }
-        /** @return the value of the {@link XrBodyJointsLocateInfoHTC#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrBodyJointsLocateInfoHTC.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrBodyJointsLocateInfoHTC#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrBodyJointsLocateInfoHTC.Buffer type(@NativeType("XrStructureType") int value) { XrBodyJointsLocateInfoHTC.ntype(address(), value); return this; }
-        /** Sets the {@link HTCBodyTracking#XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC TYPE_BODY_JOINTS_LOCATE_INFO_HTC} value to the {@link XrBodyJointsLocateInfoHTC#type} field. */
+        /** Sets the {@link HTCBodyTracking#XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC TYPE_BODY_JOINTS_LOCATE_INFO_HTC} value to the {@code type} field. */
         public XrBodyJointsLocateInfoHTC.Buffer type$Default() { return type(HTCBodyTracking.XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC); }
-        /** Sets the specified value to the {@link XrBodyJointsLocateInfoHTC#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrBodyJointsLocateInfoHTC.Buffer next(@NativeType("void const *") long value) { XrBodyJointsLocateInfoHTC.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrBodyJointsLocateInfoHTC#baseSpace} field. */
+        /** Sets the specified value to the {@code baseSpace} field. */
         public XrBodyJointsLocateInfoHTC.Buffer baseSpace(XrSpace value) { XrBodyJointsLocateInfoHTC.nbaseSpace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrBodyJointsLocateInfoHTC#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrBodyJointsLocateInfoHTC.Buffer time(@NativeType("XrTime") long value) { XrBodyJointsLocateInfoHTC.ntime(address(), value); return this; }
 
     }

@@ -16,36 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an image format properties.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>There is no mechanism to query the size of an image before creating it, to compare that size against {@code maxResourceSize}. If an application attempts to create an image that exceeds this limit, the creation will fail and {@link VK10#vkCreateImage CreateImage} will return {@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}. While the advertised limit <b>must</b> be at least 2<sup>31</sup>, it <b>may</b> not be possible to create an image that approaches that size, particularly for {@link VK10#VK_IMAGE_TYPE_1D IMAGE_TYPE_1D}.</p>
- * </div>
- * 
- * <p>If the combination of parameters to {@code vkGetPhysicalDeviceImageFormatProperties} is not supported by the implementation for use in {@link VK10#vkCreateImage CreateImage}, then all members of {@link VkImageFormatProperties} will be filled with zero.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Filling {@link VkImageFormatProperties} with zero for unsupported formats is an exception to the usual rule that output structures have undefined contents on error. This exception was unintentional, but is preserved for backwards compatibility.</p>
- * </div>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent3D}, {@link VkExternalImageFormatPropertiesNV}, {@link VkImageFormatProperties2}, {@link VK10#vkGetPhysicalDeviceImageFormatProperties GetPhysicalDeviceImageFormatProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageFormatProperties {
- *     {@link VkExtent3D VkExtent3D} {@link #maxExtent};
- *     uint32_t {@link #maxMipLevels};
- *     uint32_t {@link #maxArrayLayers};
- *     VkSampleCountFlags {@link #sampleCounts};
- *     VkDeviceSize {@link #maxResourceSize};
- * }</code></pre>
+ *     {@link VkExtent3D VkExtent3D} maxExtent;
+ *     uint32_t maxMipLevels;
+ *     uint32_t maxArrayLayers;
+ *     VkSampleCountFlags sampleCounts;
+ *     VkDeviceSize maxResourceSize;
+ * }}</pre>
  */
 public class VkImageFormatProperties extends Struct<VkImageFormatProperties> implements NativeResource {
 
@@ -104,37 +82,18 @@ public class VkImageFormatProperties extends Struct<VkImageFormatProperties> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** are the maximum image dimensions. See the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-extentperimagetype">Allowed Extent Values</a> section below for how these values are constrained by {@code type}. */
+    /** @return a {@link VkExtent3D} view of the {@code maxExtent} field. */
     public VkExtent3D maxExtent() { return nmaxExtent(address()); }
-    /**
-     * the maximum number of mipmap levels. {@code maxMipLevels} <b>must</b> be equal to the number of levels in the complete mipmap chain based on the <code>maxExtent.width</code>, <code>maxExtent.height</code>, and <code>maxExtent.depth</code>, except when one of the following conditions is true, in which case it <b>may</b> instead be 1:
-     * 
-     * <ul>
-     * <li>{@code vkGetPhysicalDeviceImageFormatProperties}{@code ::tiling} was {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
-     * <li>{@link VkPhysicalDeviceImageFormatInfo2}{@code ::tiling} was {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}</li>
-     * <li>the {@link VkPhysicalDeviceImageFormatInfo2}{@code ::pNext} chain included a {@link VkPhysicalDeviceExternalImageFormatInfo} structure with a handle type included in the {@code handleTypes} member for which mipmap image support is not required</li>
-     * <li>image {@code format} is one of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a></li>
-     * <li>{@code flags} contains {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
-     * </ul>
-     */
+    /** @return the value of the {@code maxMipLevels} field. */
     @NativeType("uint32_t")
     public int maxMipLevels() { return nmaxMipLevels(address()); }
-    /**
-     * the maximum number of array layers. {@code maxArrayLayers} <b>must</b> be no less than {@link VkPhysicalDeviceLimits}{@code ::maxImageArrayLayers}, except when one of the following conditions is true, in which case it <b>may</b> instead be 1:
-     * 
-     * <ul>
-     * <li>{@code tiling} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}</li>
-     * <li>{@code tiling} is {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL} and {@code type} is {@link VK10#VK_IMAGE_TYPE_3D IMAGE_TYPE_3D}</li>
-     * <li>{@code format} is one of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a></li>
-     * <li>If {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then {@code maxArrayLayers} <b>must</b> not be 0.</li>
-     * </ul>
-     */
+    /** @return the value of the {@code maxArrayLayers} field. */
     @NativeType("uint32_t")
     public int maxArrayLayers() { return nmaxArrayLayers(address()); }
-    /** a bitmask of {@code VkSampleCountFlagBits} specifying all the supported sample counts for this image as described <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-supported-sample-counts">below</a>. */
+    /** @return the value of the {@code sampleCounts} field. */
     @NativeType("VkSampleCountFlags")
     public int sampleCounts() { return nsampleCounts(address()); }
-    /** an upper bound on the total image size in bytes, inclusive of all image subresources. Implementations <b>may</b> have an address space limit on total size of a resource, which is advertised by this property. {@code maxResourceSize} <b>must</b> be at least 2<sup>31</sup>. */
+    /** @return the value of the {@code maxResourceSize} field. */
     @NativeType("VkDeviceSize")
     public long maxResourceSize() { return nmaxResourceSize(address()); }
 
@@ -322,18 +281,18 @@ public class VkImageFormatProperties extends Struct<VkImageFormatProperties> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VkExtent3D} view of the {@link VkImageFormatProperties#maxExtent} field. */
+        /** @return a {@link VkExtent3D} view of the {@code maxExtent} field. */
         public VkExtent3D maxExtent() { return VkImageFormatProperties.nmaxExtent(address()); }
-        /** @return the value of the {@link VkImageFormatProperties#maxMipLevels} field. */
+        /** @return the value of the {@code maxMipLevels} field. */
         @NativeType("uint32_t")
         public int maxMipLevels() { return VkImageFormatProperties.nmaxMipLevels(address()); }
-        /** @return the value of the {@link VkImageFormatProperties#maxArrayLayers} field. */
+        /** @return the value of the {@code maxArrayLayers} field. */
         @NativeType("uint32_t")
         public int maxArrayLayers() { return VkImageFormatProperties.nmaxArrayLayers(address()); }
-        /** @return the value of the {@link VkImageFormatProperties#sampleCounts} field. */
+        /** @return the value of the {@code sampleCounts} field. */
         @NativeType("VkSampleCountFlags")
         public int sampleCounts() { return VkImageFormatProperties.nsampleCounts(address()); }
-        /** @return the value of the {@link VkImageFormatProperties#maxResourceSize} field. */
+        /** @return the value of the {@code maxResourceSize} field. */
         @NativeType("VkDeviceSize")
         public long maxResourceSize() { return VkImageFormatProperties.nmaxResourceSize(address()); }
 

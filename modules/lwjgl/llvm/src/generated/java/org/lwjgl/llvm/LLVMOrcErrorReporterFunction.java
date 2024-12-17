@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMOrc#LLVMOrcExecutionSessionSetErrorReporter OrcExecutionSessionSetErrorReporter} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMErrorRef Err
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcErrorReporterFunction} */
 public abstract class LLVMOrcErrorReporterFunction extends Callback implements LLVMOrcErrorReporterFunctionI {
 
     /**

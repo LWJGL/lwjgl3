@@ -16,67 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying how to bind an image to memory.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code image} <b>must</b> not have been bound to a memory object</li>
- * <li>{@code image} <b>must</b> not have been created with any sparse memory binding flags</li>
- * <li>{@code memoryOffset} <b>must</b> be less than the size of {@code memory}</li>
- * <li>If {@code image} requires a dedicated allocation (as reported by {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2} in {@link VkMemoryDedicatedRequirements}{@code ::requiresDedicatedAllocation} for {@code image}), {@code memory} <b>must</b> have been created with {@link VkMemoryDedicatedAllocateInfo}{@code ::image} equal to {@code image}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dedicatedAllocationImageAliasing">{@code dedicatedAllocationImageAliasing}</a> feature is not enabled, and the {@link VkMemoryAllocateInfo} provided when {@code memory} was allocated included a {@link VkMemoryDedicatedAllocateInfo} structure in its {@code pNext} chain, and {@link VkMemoryDedicatedAllocateInfo}{@code ::image} was not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then {@code image} <b>must</b> equal {@link VkMemoryDedicatedAllocateInfo}{@code ::image} and {@code memoryOffset} <b>must</b> be zero</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dedicatedAllocationImageAliasing">{@code dedicatedAllocationImageAliasing}</a> feature is enabled, and the {@link VkMemoryAllocateInfo} provided when {@code memory} was allocated included a {@link VkMemoryDedicatedAllocateInfo} structure in its {@code pNext} chain, and {@link VkMemoryDedicatedAllocateInfo}{@code ::image} was not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then {@code memoryOffset} <b>must</b> be zero, and {@code image} <b>must</b> be either equal to {@link VkMemoryDedicatedAllocateInfo}{@code ::image} or an image that was created using the same parameters in {@link VkImageCreateInfo}, with the exception that {@code extent} and {@code arrayLayers} <b>may</b> differ subject to the following restrictions: every dimension in the {@code extent} parameter of the image being bound <b>must</b> be equal to or smaller than the original image for which the allocation was created; and the {@code arrayLayers} parameter of the image being bound <b>must</b> be equal to or smaller than the original image for which the allocation was created</li>
- * <li>If image was created with the {@link VK11#VK_IMAGE_CREATE_PROTECTED_BIT IMAGE_CREATE_PROTECTED_BIT} bit set, the image <b>must</b> be bound to a memory object allocated with a memory type that reports {@link VK11#VK_MEMORY_PROPERTY_PROTECTED_BIT MEMORY_PROPERTY_PROTECTED_BIT}</li>
- * <li>If image was created with the {@link VK11#VK_IMAGE_CREATE_PROTECTED_BIT IMAGE_CREATE_PROTECTED_BIT} bit not set, the image <b>must</b> not be bound to a memory object created with a memory type that reports {@link VK11#VK_MEMORY_PROPERTY_PROTECTED_BIT MEMORY_PROPERTY_PROTECTED_BIT}</li>
- * <li>If {@code image} was created with {@link VkDedicatedAllocationImageCreateInfoNV}{@code ::dedicatedAllocation} equal to {@link VK10#VK_TRUE TRUE}, {@code memory} <b>must</b> have been created with {@link VkDedicatedAllocationMemoryAllocateInfoNV}{@code ::image} equal to an image handle created with identical creation parameters to {@code image} and {@code memoryOffset} <b>must</b> be zero</li>
- * <li>If the {@link KHRDedicatedAllocation VK_KHR_dedicated_allocation} extension is not enabled, {@link VkPhysicalDeviceProperties}{@code ::apiVersion} is less than Vulkan 1.1, and {@code image} was not created with {@link VkDedicatedAllocationImageCreateInfoNV}{@code ::dedicatedAllocation} equal to {@link VK10#VK_TRUE TRUE}, {@code memory} <b>must</b> not have been allocated dedicated for a specific buffer or image</li>
- * <li>If the value of {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} used to allocate {@code memory} is not 0, it <b>must</b> include at least one of the handles set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when {@code image} was created</li>
- * <li>If {@code memory} was created by a memory import operation, that is not {@link VkImportAndroidHardwareBufferInfoANDROID} with a non-{@code NULL} {@code buffer} value, the external handle type of the imported memory <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when {@code image} was created</li>
- * <li>If {@code memory} was created with the {@link VkImportAndroidHardwareBufferInfoANDROID} memory import operation with a non-{@code NULL} {@code buffer} value, {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} <b>must</b> also have been set in {@link VkExternalMemoryImageCreateInfo}{@code ::handleTypes} when {@code image} was created</li>
- * <li>If the {@code image} was created with the {@link EXTDescriptorBuffer#VK_IMAGE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT IMAGE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT} bit set</li>
- * <li>If the {@code image} was created with the {@link EXTDescriptorBuffer#VK_IMAGE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT IMAGE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} bit set, {@code memory} <b>must</b> have been allocated with the {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT} bit set</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBindImagePlaneMemoryInfo} structure, {@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the {@link VkMemoryRequirements} structure returned from a call to {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2} with {@code image}</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBindImagePlaneMemoryInfo} structure, {@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the {@link VkMemoryRequirements} structure returned from a call to {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2} with {@code image}</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBindImagePlaneMemoryInfo} structure, the difference of the size of {@code memory} and {@code memoryOffset} <b>must</b> be greater than or equal to the {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2} with the same {@code image}</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImagePlaneMemoryInfo} structure, {@code image} <b>must</b> have been created with the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} bit set</li>
- * <li>If {@code image} was created with the {@link VK11#VK_IMAGE_CREATE_DISJOINT_BIT IMAGE_CREATE_DISJOINT_BIT} bit set, then the {@code pNext} chain <b>must</b> include a {@link VkBindImagePlaneMemoryInfo} structure</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImagePlaneMemoryInfo} structure, {@code memory} <b>must</b> have been allocated using one of the memory types allowed in the {@code memoryTypeBits} member of the {@link VkMemoryRequirements} structure returned from a call to {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2} with {@code image} and where {@link VkBindImagePlaneMemoryInfo}{@code ::planeAspect} corresponds to the {@link VkImagePlaneMemoryRequirementsInfo}{@code ::planeAspect} in the {@link VkImageMemoryRequirementsInfo2} structure’s {@code pNext} chain</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImagePlaneMemoryInfo} structure, {@code memoryOffset} <b>must</b> be an integer multiple of the {@code alignment} member of the {@link VkMemoryRequirements} structure returned from a call to {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2} with {@code image} and where {@link VkBindImagePlaneMemoryInfo}{@code ::planeAspect} corresponds to the {@link VkImagePlaneMemoryRequirementsInfo}{@code ::planeAspect} in the {@link VkImageMemoryRequirementsInfo2} structure’s {@code pNext} chain</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImagePlaneMemoryInfo} structure, the difference of the size of {@code memory} and {@code memoryOffset} <b>must</b> be greater than or equal to the {@code size} member of the {@link VkMemoryRequirements} structure returned from a call to {@link VK11#vkGetImageMemoryRequirements2 GetImageMemoryRequirements2} with the same {@code image} and where {@link VkBindImagePlaneMemoryInfo}{@code ::planeAspect} corresponds to the {@link VkImagePlaneMemoryRequirementsInfo}{@code ::planeAspect} in the {@link VkImageMemoryRequirementsInfo2} structure’s {@code pNext} chain</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImageMemoryDeviceGroupInfo} structure, all instances of {@code memory} specified by {@link VkBindImageMemoryDeviceGroupInfo}{@code ::pDeviceIndices} <b>must</b> have been allocated</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImageMemoryDeviceGroupInfo} structure, and {@link VkBindImageMemoryDeviceGroupInfo}{@code ::splitInstanceBindRegionCount} is not zero, then {@code image} <b>must</b> have been created with the {@link VK11#VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT} bit set</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImageMemoryDeviceGroupInfo} structure, all elements of {@link VkBindImageMemoryDeviceGroupInfo}{@code ::pSplitInstanceBindRegions} <b>must</b> be valid rectangles contained within the dimensions of {@code image}</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImageMemoryDeviceGroupInfo} structure, the union of the areas of all elements of {@link VkBindImageMemoryDeviceGroupInfo}{@code ::pSplitInstanceBindRegions} that correspond to the same instance of {@code image} <b>must</b> cover the entire image</li>
- * <li>If {@code image} was created with a valid swapchain handle in {@link VkImageSwapchainCreateInfoKHR}{@code ::swapchain}, then the {@code pNext} chain <b>must</b> include a {@link VkBindImageMemorySwapchainInfoKHR} structure containing the same swapchain handle</li>
- * <li>If the {@code pNext} chain includes a {@link VkBindImageMemorySwapchainInfoKHR} structure, {@code memory} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If the {@code pNext} chain does not include a {@link VkBindImageMemorySwapchainInfoKHR} structure, {@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBindImageMemoryDeviceGroupInfo}, {@link VkBindImageMemorySwapchainInfoKHR}, {@link VkBindImagePlaneMemoryInfo}, or {@link VkBindMemoryStatus}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>Both of {@code image}, and {@code memory} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK11#vkBindImageMemory2 BindImageMemory2}, {@link KHRBindMemory2#vkBindImageMemory2KHR BindImageMemory2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindImageMemoryInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImage {@link #image};
- *     VkDeviceMemory {@link #memory};
- *     VkDeviceSize {@link #memoryOffset};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImage image;
+ *     VkDeviceMemory memory;
+ *     VkDeviceSize memoryOffset;
+ * }}</pre>
  */
 public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> implements NativeResource {
 
@@ -135,27 +82,27 @@ public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the image to be attached to memory. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** a {@code VkDeviceMemory} object describing the device memory to attach. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** the start offset of the region of {@code memory} which is to be bound to the image. The number of bytes returned in the {@link VkMemoryRequirements}{@code ::size} member in {@code memory}, starting from {@code memoryOffset} bytes, will be bound to the specified image. */
+    /** @return the value of the {@code memoryOffset} field. */
     @NativeType("VkDeviceSize")
     public long memoryOffset() { return nmemoryOffset(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBindImageMemoryInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO} value to the {@code sType} field. */
     public VkBindImageMemoryInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBindImageMemoryInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkBindImageMemoryDeviceGroupInfo} value to the {@code pNext} chain. */
     public VkBindImageMemoryInfo pNext(VkBindImageMemoryDeviceGroupInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -171,11 +118,11 @@ public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> impleme
     public VkBindImageMemoryInfo pNext(VkBindMemoryStatus value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkBindMemoryStatusKHR} value to the {@code pNext} chain. */
     public VkBindImageMemoryInfo pNext(VkBindMemoryStatusKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #image} field. */
+    /** Sets the specified value to the {@code image} field. */
     public VkBindImageMemoryInfo image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkBindImageMemoryInfo memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryOffset} field. */
+    /** Sets the specified value to the {@code memoryOffset} field. */
     public VkBindImageMemoryInfo memoryOffset(@NativeType("VkDeviceSize") long value) { nmemoryOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -402,27 +349,27 @@ public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindImageMemoryInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindImageMemoryInfo.nsType(address()); }
-        /** @return the value of the {@link VkBindImageMemoryInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindImageMemoryInfo.npNext(address()); }
-        /** @return the value of the {@link VkBindImageMemoryInfo#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return VkBindImageMemoryInfo.nimage(address()); }
-        /** @return the value of the {@link VkBindImageMemoryInfo#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkBindImageMemoryInfo.nmemory(address()); }
-        /** @return the value of the {@link VkBindImageMemoryInfo#memoryOffset} field. */
+        /** @return the value of the {@code memoryOffset} field. */
         @NativeType("VkDeviceSize")
         public long memoryOffset() { return VkBindImageMemoryInfo.nmemoryOffset(address()); }
 
-        /** Sets the specified value to the {@link VkBindImageMemoryInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBindImageMemoryInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindImageMemoryInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO} value to the {@link VkBindImageMemoryInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO} value to the {@code sType} field. */
         public VkBindImageMemoryInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO); }
-        /** Sets the specified value to the {@link VkBindImageMemoryInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBindImageMemoryInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindImageMemoryInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkBindImageMemoryDeviceGroupInfo} value to the {@code pNext} chain. */
         public VkBindImageMemoryInfo.Buffer pNext(VkBindImageMemoryDeviceGroupInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -438,11 +385,11 @@ public class VkBindImageMemoryInfo extends Struct<VkBindImageMemoryInfo> impleme
         public VkBindImageMemoryInfo.Buffer pNext(VkBindMemoryStatus value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkBindMemoryStatusKHR} value to the {@code pNext} chain. */
         public VkBindImageMemoryInfo.Buffer pNext(VkBindMemoryStatusKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkBindImageMemoryInfo#image} field. */
+        /** Sets the specified value to the {@code image} field. */
         public VkBindImageMemoryInfo.Buffer image(@NativeType("VkImage") long value) { VkBindImageMemoryInfo.nimage(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindImageMemoryInfo#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkBindImageMemoryInfo.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkBindImageMemoryInfo.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBindImageMemoryInfo#memoryOffset} field. */
+        /** Sets the specified value to the {@code memoryOffset} field. */
         public VkBindImageMemoryInfo.Buffer memoryOffset(@NativeType("VkDeviceSize") long value) { VkBindImageMemoryInfo.nmemoryOffset(address(), value); return this; }
 
     }

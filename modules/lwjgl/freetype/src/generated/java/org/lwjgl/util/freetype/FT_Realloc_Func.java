@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     FT_Memory memory,
- *     long cur_size,
- *     long new_size,
- *     void *block
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Realloc_Func} */
 public abstract class FT_Realloc_Func extends Callback implements FT_Realloc_FuncI {
 
     /**

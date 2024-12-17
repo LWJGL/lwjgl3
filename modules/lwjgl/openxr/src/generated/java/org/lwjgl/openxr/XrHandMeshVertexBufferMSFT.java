@@ -16,44 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The vertex buffer of a hand mesh.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>should</b> preallocate the vertices array using the {@link XrSystemHandTrackingMeshPropertiesMSFT}{@code ::maxHandMeshVertexCount} returned from {@link XR10#xrGetSystemProperties GetSystemProperties}. In this way, the application can avoid possible insufficient buffer sizes for each query, and therefore avoid reallocating memory each frame.</p>
- * 
- * <p>The input {@code vertexCapacityInput} <b>must</b> not be 0, and {@code vertices} <b>must</b> not be {@code NULL}, or else the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} on calls to the {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT} function.</p>
- * 
- * <p>If the input {@code vertexCapacityInput} is not sufficient to contain all output vertices, the runtime <b>must</b> return {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} on calls to the {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT}, do not change content in {@code vertexUpdateTime} and {@code vertices}, and return 0 for {@code vertexCountOutput}.</p>
- * 
- * <p>If the input {@code vertexCapacityInput} is equal to or larger than the {@link XrSystemHandTrackingMeshPropertiesMSFT}{@code ::maxHandMeshVertexCount} returned from {@link XR10#xrGetSystemProperties GetSystemProperties}, the runtime <b>must</b> not return {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} on calls to the {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT} because of insufficient vertex buffer size.</p>
- * 
- * <p>If the input {@code vertexUpdateTime} is 0, and the capacity of the vertices array is sufficient, and hand mesh tracking is active, the runtime <b>must</b> return the latest non-zero {@code vertexUpdateTime}, and fill in the {@code vertexCountOutput} and {@code vertices} fields.</p>
- * 
- * <p>If the input {@code vertexUpdateTime} is not 0, the runtime <b>can</b> either return without changing {@code vertexCountOutput} or the content in {@code vertices}, and return {@link XR10#XR_FALSE FALSE} for {@link XrHandMeshMSFT}{@code ::vertexBufferChanged} indicating the vertices are not changed; or return a new non-zero {@code vertexUpdateTime} and fill in latest data in {@code vertexCountOutput} and {@code vertices} and return {@link XR10#XR_TRUE TRUE} for {@link XrHandMeshMSFT}{@code ::vertexBufferChanged} indicating the vertices are updated to a newer version.</p>
- * 
- * <p>An application <b>can</b> keep the {@link XrHandMeshVertexBufferMSFT} structure for each frame in frame loop and use the returned {@code vertexUpdateTime} to detect the changes of the content in {@code vertices}. The application can therefore avoid unnecessary processing of vertices, such as coping them to GPU memory.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using {@link XrHandMeshVertexBufferMSFT}</li>
- * <li>If {@code vertexCapacityInput} is not 0, {@code vertices} <b>must</b> be a pointer to an array of {@code vertexCapacityInput} {@link XrHandMeshVertexMSFT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandMeshMSFT}, {@link XrHandMeshVertexMSFT}, {@link XrSystemHandTrackingMeshPropertiesMSFT}, {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandMeshVertexBufferMSFT {
- *     XrTime {@link #vertexUpdateTime};
- *     uint32_t {@link #vertexCapacityInput};
- *     uint32_t {@link #vertexCountOutput};
- *     {@link XrHandMeshVertexMSFT XrHandMeshVertexMSFT} * {@link #vertices};
- * }</code></pre>
+ *     XrTime vertexUpdateTime;
+ *     uint32_t vertexCapacityInput;
+ *     uint32_t vertexCountOutput;
+ *     {@link XrHandMeshVertexMSFT XrHandMeshVertexMSFT} * vertices;
+ * }}</pre>
  */
 public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSFT> implements NativeResource {
 
@@ -109,26 +78,26 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@code XrTime} representing the time when the runtime receives the vertex buffer content or 0 to indicate a request to retrieve latest vertices regardless of existing content in {@code vertices}. */
+    /** @return the value of the {@code vertexUpdateTime} field. */
     @NativeType("XrTime")
     public long vertexUpdateTime() { return nvertexUpdateTime(address()); }
-    /** a positive {@code uint32_t} describes the capacity of the {@code vertices} array. */
+    /** @return the value of the {@code vertexCapacityInput} field. */
     @NativeType("uint32_t")
     public int vertexCapacityInput() { return nvertexCapacityInput(address()); }
-    /** a {@code uint32_t} filled in by the runtime with the count of vertices written in {@code vertices}. */
+    /** @return the value of the {@code vertexCountOutput} field. */
     @NativeType("uint32_t")
     public int vertexCountOutput() { return nvertexCountOutput(address()); }
-    /** an array of {@link XrHandMeshVertexMSFT} filled in by the runtime, specifying the vertices of the hand mesh including the position and normal vector in the hand mesh space. */
+    /** @return a {@link XrHandMeshVertexMSFT.Buffer} view of the struct array pointed to by the {@code vertices} field. */
     @NativeType("XrHandMeshVertexMSFT *")
     public XrHandMeshVertexMSFT.@Nullable Buffer vertices() { return nvertices(address()); }
 
-    /** Sets the specified value to the {@link #vertexUpdateTime} field. */
+    /** Sets the specified value to the {@code vertexUpdateTime} field. */
     public XrHandMeshVertexBufferMSFT vertexUpdateTime(@NativeType("XrTime") long value) { nvertexUpdateTime(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertexCapacityInput} field. */
+    /** Sets the specified value to the {@code vertexCapacityInput} field. */
     public XrHandMeshVertexBufferMSFT vertexCapacityInput(@NativeType("uint32_t") int value) { nvertexCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertexCountOutput} field. */
+    /** Sets the specified value to the {@code vertexCountOutput} field. */
     public XrHandMeshVertexBufferMSFT vertexCountOutput(@NativeType("uint32_t") int value) { nvertexCountOutput(address(), value); return this; }
-    /** Sets the address of the specified {@link XrHandMeshVertexMSFT.Buffer} to the {@link #vertices} field. */
+    /** Sets the address of the specified {@link XrHandMeshVertexMSFT.Buffer} to the {@code vertices} field. */
     public XrHandMeshVertexBufferMSFT vertices(@NativeType("XrHandMeshVertexMSFT *") XrHandMeshVertexMSFT.@Nullable Buffer value) { nvertices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -330,26 +299,26 @@ public class XrHandMeshVertexBufferMSFT extends Struct<XrHandMeshVertexBufferMSF
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHandMeshVertexBufferMSFT#vertexUpdateTime} field. */
+        /** @return the value of the {@code vertexUpdateTime} field. */
         @NativeType("XrTime")
         public long vertexUpdateTime() { return XrHandMeshVertexBufferMSFT.nvertexUpdateTime(address()); }
-        /** @return the value of the {@link XrHandMeshVertexBufferMSFT#vertexCapacityInput} field. */
+        /** @return the value of the {@code vertexCapacityInput} field. */
         @NativeType("uint32_t")
         public int vertexCapacityInput() { return XrHandMeshVertexBufferMSFT.nvertexCapacityInput(address()); }
-        /** @return the value of the {@link XrHandMeshVertexBufferMSFT#vertexCountOutput} field. */
+        /** @return the value of the {@code vertexCountOutput} field. */
         @NativeType("uint32_t")
         public int vertexCountOutput() { return XrHandMeshVertexBufferMSFT.nvertexCountOutput(address()); }
-        /** @return a {@link XrHandMeshVertexMSFT.Buffer} view of the struct array pointed to by the {@link XrHandMeshVertexBufferMSFT#vertices} field. */
+        /** @return a {@link XrHandMeshVertexMSFT.Buffer} view of the struct array pointed to by the {@code vertices} field. */
         @NativeType("XrHandMeshVertexMSFT *")
         public XrHandMeshVertexMSFT.@Nullable Buffer vertices() { return XrHandMeshVertexBufferMSFT.nvertices(address()); }
 
-        /** Sets the specified value to the {@link XrHandMeshVertexBufferMSFT#vertexUpdateTime} field. */
+        /** Sets the specified value to the {@code vertexUpdateTime} field. */
         public XrHandMeshVertexBufferMSFT.Buffer vertexUpdateTime(@NativeType("XrTime") long value) { XrHandMeshVertexBufferMSFT.nvertexUpdateTime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHandMeshVertexBufferMSFT#vertexCapacityInput} field. */
+        /** Sets the specified value to the {@code vertexCapacityInput} field. */
         public XrHandMeshVertexBufferMSFT.Buffer vertexCapacityInput(@NativeType("uint32_t") int value) { XrHandMeshVertexBufferMSFT.nvertexCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHandMeshVertexBufferMSFT#vertexCountOutput} field. */
+        /** Sets the specified value to the {@code vertexCountOutput} field. */
         public XrHandMeshVertexBufferMSFT.Buffer vertexCountOutput(@NativeType("uint32_t") int value) { XrHandMeshVertexBufferMSFT.nvertexCountOutput(address(), value); return this; }
-        /** Sets the address of the specified {@link XrHandMeshVertexMSFT.Buffer} to the {@link XrHandMeshVertexBufferMSFT#vertices} field. */
+        /** Sets the address of the specified {@link XrHandMeshVertexMSFT.Buffer} to the {@code vertices} field. */
         public XrHandMeshVertexBufferMSFT.Buffer vertices(@NativeType("XrHandMeshVertexMSFT *") XrHandMeshVertexMSFT.@Nullable Buffer value) { XrHandMeshVertexBufferMSFT.nvertices(address(), value); return this; }
 
     }

@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing compute shader derivative operations supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRComputeShaderDerivatives#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #meshAndTaskShaderDerivatives};
- * }</code></pre>
+ *     VkBool32 meshAndTaskShaderDerivatives;
+ * }}</pre>
  */
 public class VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR extends Struct<VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR extends Struc
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the mesh and task shader stages support the {@code ComputeDerivativeGroupQuadsKHR} and {@code ComputeDerivativeGroupLinearKHR} SPIR-V capabilities. */
+    /** @return the value of the {@code meshAndTaskShaderDerivatives} field. */
     @NativeType("VkBool32")
     public boolean meshAndTaskShaderDerivatives() { return nmeshAndTaskShaderDerivatives(address()) != 0; }
 
@@ -300,7 +286,7 @@ public class VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR extends Struc
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR#meshAndTaskShaderDerivatives} field. */
+        /** @return the value of the {@code meshAndTaskShaderDerivatives} field. */
         @NativeType("VkBool32")
         public boolean meshAndTaskShaderDerivatives() { return VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR.nmeshAndTaskShaderDerivatives(address()) != 0; }
 

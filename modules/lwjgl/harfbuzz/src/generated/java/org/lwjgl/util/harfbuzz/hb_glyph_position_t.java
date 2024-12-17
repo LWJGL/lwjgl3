@@ -16,20 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The structure that holds the positions of the glyph in both horizontal and vertical directions.
- * 
- * <p>All positions in {@code hb_glyph_position_t} are relative to the current point.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_glyph_position_t {
- *     hb_position_t {@link #x_advance};
- *     hb_position_t {@link #y_advance};
- *     hb_position_t {@link #x_offset};
- *     hb_position_t {@link #y_offset};
+ *     hb_position_t x_advance;
+ *     hb_position_t y_advance;
+ *     hb_position_t x_offset;
+ *     hb_position_t y_offset;
  *     {@link hb_var_int_t hb_var_int_t} var;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements NativeResource {
 
@@ -88,26 +82,26 @@ public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** how much the line advances after drawing this glyph when setting text in horizontal direction */
+    /** @return the value of the {@code x_advance} field. */
     @NativeType("hb_position_t")
     public int x_advance() { return nx_advance(address()); }
-    /** how much the line advances after drawing this glyph when setting text in vertical direction */
+    /** @return the value of the {@code y_advance} field. */
     @NativeType("hb_position_t")
     public int y_advance() { return ny_advance(address()); }
-    /** how much the glyph moves on the X-axis before drawing it, this should not affect how much the line advances */
+    /** @return the value of the {@code x_offset} field. */
     @NativeType("hb_position_t")
     public int x_offset() { return nx_offset(address()); }
-    /** how much the glyph moves on the Y-axis before drawing it, this should not affect how much the line advances. */
+    /** @return the value of the {@code y_offset} field. */
     @NativeType("hb_position_t")
     public int y_offset() { return ny_offset(address()); }
 
-    /** Sets the specified value to the {@link #x_advance} field. */
+    /** Sets the specified value to the {@code x_advance} field. */
     public hb_glyph_position_t x_advance(@NativeType("hb_position_t") int value) { nx_advance(address(), value); return this; }
-    /** Sets the specified value to the {@link #y_advance} field. */
+    /** Sets the specified value to the {@code y_advance} field. */
     public hb_glyph_position_t y_advance(@NativeType("hb_position_t") int value) { ny_advance(address(), value); return this; }
-    /** Sets the specified value to the {@link #x_offset} field. */
+    /** Sets the specified value to the {@code x_offset} field. */
     public hb_glyph_position_t x_offset(@NativeType("hb_position_t") int value) { nx_offset(address(), value); return this; }
-    /** Sets the specified value to the {@link #y_offset} field. */
+    /** Sets the specified value to the {@code y_offset} field. */
     public hb_glyph_position_t y_offset(@NativeType("hb_position_t") int value) { ny_offset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -311,26 +305,26 @@ public class hb_glyph_position_t extends Struct<hb_glyph_position_t> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_glyph_position_t#x_advance} field. */
+        /** @return the value of the {@code x_advance} field. */
         @NativeType("hb_position_t")
         public int x_advance() { return hb_glyph_position_t.nx_advance(address()); }
-        /** @return the value of the {@link hb_glyph_position_t#y_advance} field. */
+        /** @return the value of the {@code y_advance} field. */
         @NativeType("hb_position_t")
         public int y_advance() { return hb_glyph_position_t.ny_advance(address()); }
-        /** @return the value of the {@link hb_glyph_position_t#x_offset} field. */
+        /** @return the value of the {@code x_offset} field. */
         @NativeType("hb_position_t")
         public int x_offset() { return hb_glyph_position_t.nx_offset(address()); }
-        /** @return the value of the {@link hb_glyph_position_t#y_offset} field. */
+        /** @return the value of the {@code y_offset} field. */
         @NativeType("hb_position_t")
         public int y_offset() { return hb_glyph_position_t.ny_offset(address()); }
 
-        /** Sets the specified value to the {@link hb_glyph_position_t#x_advance} field. */
+        /** Sets the specified value to the {@code x_advance} field. */
         public hb_glyph_position_t.Buffer x_advance(@NativeType("hb_position_t") int value) { hb_glyph_position_t.nx_advance(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_glyph_position_t#y_advance} field. */
+        /** Sets the specified value to the {@code y_advance} field. */
         public hb_glyph_position_t.Buffer y_advance(@NativeType("hb_position_t") int value) { hb_glyph_position_t.ny_advance(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_glyph_position_t#x_offset} field. */
+        /** Sets the specified value to the {@code x_offset} field. */
         public hb_glyph_position_t.Buffer x_offset(@NativeType("hb_position_t") int value) { hb_glyph_position_t.nx_offset(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_glyph_position_t#y_offset} field. */
+        /** Sets the specified value to the {@code y_offset} field. */
         public hb_glyph_position_t.Buffer y_offset(@NativeType("hb_position_t") int value) { hb_glyph_position_t.ny_offset(address(), value); return this; }
 
     }

@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMOrcEE#LLVMOrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks OrcCreateRTDyldObjectLinkingLayerWithMCJITMemoryManagerLikeCallbacks} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *CtxCtx
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMMemoryManagerNotifyTerminatingCallback} */
 @FunctionalInterface
 @NativeType("LLVMMemoryManagerNotifyTerminatingCallback")
 public interface LLVMMemoryManagerNotifyTerminatingCallbackI extends CallbackI {
@@ -42,6 +33,7 @@ public interface LLVMMemoryManagerNotifyTerminatingCallbackI extends CallbackI {
         );
     }
 
+    /** {@code void (* LLVMMemoryManagerNotifyTerminatingCallback) (void * CtxCtx)} */
     void invoke(@NativeType("void *") long CtxCtx);
 
 }

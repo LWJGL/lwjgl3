@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_EXT_SEM_WAIT_NODE_PARAMS {
  *     CUexternalSemaphore * extSemArray;
  *     {@link CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS} const * paramsArray;
  *     unsigned int numExtSems;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_EXT_SEM_WAIT_NODE_PARAMS extends Struct<CUDA_EXT_SEM_WAIT_NODE_PARAMS> implements NativeResource {
 

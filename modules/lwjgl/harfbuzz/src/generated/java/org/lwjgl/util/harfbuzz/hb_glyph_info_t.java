@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The structure that holds information about the glyphs and their relation to input text.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_glyph_info_t {
- *     hb_codepoint_t {@link #codepoint};
- *     hb_mask_t {@link #mask};
- *     uint32_t {@link #cluster};
+ *     hb_codepoint_t codepoint;
+ *     hb_mask_t mask;
+ *     uint32_t cluster;
  *     {@link hb_var_int_t hb_var_int_t} var1;
  *     {@link hb_var_int_t hb_var_int_t} var2;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_glyph_info_t extends Struct<hb_glyph_info_t> implements NativeResource {
 
@@ -86,28 +82,21 @@ public class hb_glyph_info_t extends Struct<hb_glyph_info_t> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** either a Unicode code point (before shaping) or a glyph index (after shaping). */
+    /** @return the value of the {@code codepoint} field. */
     @NativeType("hb_codepoint_t")
     public int codepoint() { return ncodepoint(address()); }
-    /** private */
+    /** @return the value of the {@code mask} field. */
     @NativeType("hb_mask_t")
     public int mask() { return nmask(address()); }
-    /**
-     * the index of the character in the original text that corresponds to this {@code hb_glyph_info_t}, or whatever the client passes to {@link HarfBuzz#hb_buffer_add buffer_add}.
-     * 
-     * <p>More than one {@code hb_glyph_info_t} can have the same {@code cluster} value, if they resulted from the same character (e.g. one to many glyph
-     * substitution), and when more than one character gets merged in the same glyph (e.g. many to one glyph substitution) the {@code hb_glyph_info_t} will
-     * have the smallest cluster value of them. By default some characters are merged into the same cluster (e.g. combining marks have the same cluster as
-     * their bases) even if they are separate glyphs, {@link HarfBuzz#hb_buffer_set_cluster_level buffer_set_cluster_level} allow selecting more fine-grained cluster handling.</p>
-     */
+    /** @return the value of the {@code cluster} field. */
     @NativeType("uint32_t")
     public int cluster() { return ncluster(address()); }
 
-    /** Sets the specified value to the {@link #codepoint} field. */
+    /** Sets the specified value to the {@code codepoint} field. */
     public hb_glyph_info_t codepoint(@NativeType("hb_codepoint_t") int value) { ncodepoint(address(), value); return this; }
-    /** Sets the specified value to the {@link #mask} field. */
+    /** Sets the specified value to the {@code mask} field. */
     public hb_glyph_info_t mask(@NativeType("hb_mask_t") int value) { nmask(address(), value); return this; }
-    /** Sets the specified value to the {@link #cluster} field. */
+    /** Sets the specified value to the {@code cluster} field. */
     public hb_glyph_info_t cluster(@NativeType("uint32_t") int value) { ncluster(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,21 +296,21 @@ public class hb_glyph_info_t extends Struct<hb_glyph_info_t> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_glyph_info_t#codepoint} field. */
+        /** @return the value of the {@code codepoint} field. */
         @NativeType("hb_codepoint_t")
         public int codepoint() { return hb_glyph_info_t.ncodepoint(address()); }
-        /** @return the value of the {@link hb_glyph_info_t#mask} field. */
+        /** @return the value of the {@code mask} field. */
         @NativeType("hb_mask_t")
         public int mask() { return hb_glyph_info_t.nmask(address()); }
-        /** @return the value of the {@link hb_glyph_info_t#cluster} field. */
+        /** @return the value of the {@code cluster} field. */
         @NativeType("uint32_t")
         public int cluster() { return hb_glyph_info_t.ncluster(address()); }
 
-        /** Sets the specified value to the {@link hb_glyph_info_t#codepoint} field. */
+        /** Sets the specified value to the {@code codepoint} field. */
         public hb_glyph_info_t.Buffer codepoint(@NativeType("hb_codepoint_t") int value) { hb_glyph_info_t.ncodepoint(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_glyph_info_t#mask} field. */
+        /** Sets the specified value to the {@code mask} field. */
         public hb_glyph_info_t.Buffer mask(@NativeType("hb_mask_t") int value) { hb_glyph_info_t.nmask(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_glyph_info_t#cluster} field. */
+        /** Sets the specified value to the {@code cluster} field. */
         public hb_glyph_info_t.Buffer cluster(@NativeType("uint32_t") int value) { hb_glyph_info_t.ncluster(address(), value); return this; }
 
     }

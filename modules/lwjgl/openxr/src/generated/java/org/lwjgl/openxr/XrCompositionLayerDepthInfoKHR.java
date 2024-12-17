@@ -16,53 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Depth map layer info.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The window space depth values {@code minDepth} and {@code maxDepth} are akin to the parameters of {@code glDepthRange} that specify the mapping from normalized device coordinates into window space.</p>
- * </div>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>A reversed mapping of depth, such that points closer to the view have a window space depth that is greater than points further away can be achieved by making nearZ &gt; farZ.</p>
- * </div>
- * 
- * <p>{@link XrCompositionLayerDepthInfoKHR} contains the information needed to associate depth with the color information in a projection layer. When submitting depth images along with projection layers, add the {@link XrCompositionLayerDepthInfoKHR} to the {@code next} chain for all {@link XrCompositionLayerProjectionView} structures in the given layer.</p>
- * 
- * <p>The homogeneous transform from view space z to window space depth is given by the following matrix, where a = minDepth, b = maxDepth, n = nearZ, and f = farZ.</p>
- * 
- * <p>Homogeneous values are constructed from real values by appending a w component with value 1.0.</p>
- * 
- * <p>General homogeneous values are projected back to real space by dividing by the w component.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHRCompositionLayerDepth XR_KHR_composition_layer_depth} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerDepthInfoKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHRCompositionLayerDepth#XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code subImage} <b>must</b> be a valid {@link XrSwapchainSubImage} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerProjectionView}, {@link XrFrameEndInfo}, {@link XrSwapchainSubImage}, {@link XR10#xrEndFrame EndFrame}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerDepthInfoKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrSwapchainSubImage XrSwapchainSubImage} {@link #subImage};
- *     float {@link #minDepth};
- *     float {@link #maxDepth};
- *     float {@link #nearZ};
- *     float {@link #farZ};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrSwapchainSubImage XrSwapchainSubImage} subImage;
+ *     float minDepth;
+ *     float maxDepth;
+ *     float nearZ;
+ *     float farZ;
+ * }}</pre>
  */
 public class XrCompositionLayerDepthInfoKHR extends Struct<XrCompositionLayerDepthInfoKHR> implements NativeResource {
 
@@ -127,40 +90,40 @@ public class XrCompositionLayerDepthInfoKHR extends Struct<XrCompositionLayerDep
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** identifies the depth image {@link XrSwapchainSubImage} to be associated with the color swapchain. The swapchain <b>must</b> have been created with a {@link XrSwapchainCreateInfo}{@code ::faceCount} of 1. */
+    /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
     public XrSwapchainSubImage subImage() { return nsubImage(address()); }
-    /** {@code minDepth} and {@code maxDepth} are the window space depths that correspond to the near and far frustum planes, respectively. {@code minDepth} must be less than {@code maxDepth}. {@code minDepth} and {@code maxDepth} must be in the range [0, 1]. */
+    /** @return the value of the {@code minDepth} field. */
     public float minDepth() { return nminDepth(address()); }
-    /** see {@code minDepth} */
+    /** @return the value of the {@code maxDepth} field. */
     public float maxDepth() { return nmaxDepth(address()); }
-    /** {@code nearZ} and {@code farZ} are the positive distances in meters to the near and far frustum planes, respectively. {@code nearZ} and {@code farZ} <b>must</b> not be equal. {@code nearZ} and {@code farZ} <b>must</b> be in the range (0, +infinity]. */
+    /** @return the value of the {@code nearZ} field. */
     public float nearZ() { return nnearZ(address()); }
-    /** see {@code nearZ} */
+    /** @return the value of the {@code farZ} field. */
     public float farZ() { return nfarZ(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerDepthInfoKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRCompositionLayerDepth#XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHRCompositionLayerDepth#XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR} value to the {@code type} field. */
     public XrCompositionLayerDepthInfoKHR type$Default() { return type(KHRCompositionLayerDepth.XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerDepthInfoKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrSwapchainSubImage} to the {@link #subImage} field. */
+    /** Copies the specified {@link XrSwapchainSubImage} to the {@code subImage} field. */
     public XrCompositionLayerDepthInfoKHR subImage(XrSwapchainSubImage value) { nsubImage(address(), value); return this; }
-    /** Passes the {@link #subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerDepthInfoKHR subImage(java.util.function.Consumer<XrSwapchainSubImage> consumer) { consumer.accept(subImage()); return this; }
-    /** Sets the specified value to the {@link #minDepth} field. */
+    /** Sets the specified value to the {@code minDepth} field. */
     public XrCompositionLayerDepthInfoKHR minDepth(float value) { nminDepth(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxDepth} field. */
+    /** Sets the specified value to the {@code maxDepth} field. */
     public XrCompositionLayerDepthInfoKHR maxDepth(float value) { nmaxDepth(address(), value); return this; }
-    /** Sets the specified value to the {@link #nearZ} field. */
+    /** Sets the specified value to the {@code nearZ} field. */
     public XrCompositionLayerDepthInfoKHR nearZ(float value) { nnearZ(address(), value); return this; }
-    /** Sets the specified value to the {@link #farZ} field. */
+    /** Sets the specified value to the {@code farZ} field. */
     public XrCompositionLayerDepthInfoKHR farZ(float value) { nfarZ(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -389,40 +352,40 @@ public class XrCompositionLayerDepthInfoKHR extends Struct<XrCompositionLayerDep
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerDepthInfoKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerDepthInfoKHR.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthInfoKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerDepthInfoKHR.nnext(address()); }
-        /** @return a {@link XrSwapchainSubImage} view of the {@link XrCompositionLayerDepthInfoKHR#subImage} field. */
+        /** @return a {@link XrSwapchainSubImage} view of the {@code subImage} field. */
         public XrSwapchainSubImage subImage() { return XrCompositionLayerDepthInfoKHR.nsubImage(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthInfoKHR#minDepth} field. */
+        /** @return the value of the {@code minDepth} field. */
         public float minDepth() { return XrCompositionLayerDepthInfoKHR.nminDepth(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthInfoKHR#maxDepth} field. */
+        /** @return the value of the {@code maxDepth} field. */
         public float maxDepth() { return XrCompositionLayerDepthInfoKHR.nmaxDepth(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthInfoKHR#nearZ} field. */
+        /** @return the value of the {@code nearZ} field. */
         public float nearZ() { return XrCompositionLayerDepthInfoKHR.nnearZ(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthInfoKHR#farZ} field. */
+        /** @return the value of the {@code farZ} field. */
         public float farZ() { return XrCompositionLayerDepthInfoKHR.nfarZ(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerDepthInfoKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerDepthInfoKHR.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerDepthInfoKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRCompositionLayerDepth#XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR} value to the {@link XrCompositionLayerDepthInfoKHR#type} field. */
+        /** Sets the {@link KHRCompositionLayerDepth#XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR} value to the {@code type} field. */
         public XrCompositionLayerDepthInfoKHR.Buffer type$Default() { return type(KHRCompositionLayerDepth.XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR); }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthInfoKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerDepthInfoKHR.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerDepthInfoKHR.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrSwapchainSubImage} to the {@link XrCompositionLayerDepthInfoKHR#subImage} field. */
+        /** Copies the specified {@link XrSwapchainSubImage} to the {@code subImage} field. */
         public XrCompositionLayerDepthInfoKHR.Buffer subImage(XrSwapchainSubImage value) { XrCompositionLayerDepthInfoKHR.nsubImage(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerDepthInfoKHR#subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code subImage} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerDepthInfoKHR.Buffer subImage(java.util.function.Consumer<XrSwapchainSubImage> consumer) { consumer.accept(subImage()); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthInfoKHR#minDepth} field. */
+        /** Sets the specified value to the {@code minDepth} field. */
         public XrCompositionLayerDepthInfoKHR.Buffer minDepth(float value) { XrCompositionLayerDepthInfoKHR.nminDepth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthInfoKHR#maxDepth} field. */
+        /** Sets the specified value to the {@code maxDepth} field. */
         public XrCompositionLayerDepthInfoKHR.Buffer maxDepth(float value) { XrCompositionLayerDepthInfoKHR.nmaxDepth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthInfoKHR#nearZ} field. */
+        /** Sets the specified value to the {@code nearZ} field. */
         public XrCompositionLayerDepthInfoKHR.Buffer nearZ(float value) { XrCompositionLayerDepthInfoKHR.nnearZ(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthInfoKHR#farZ} field. */
+        /** Sets the specified value to the {@code farZ} field. */
         public XrCompositionLayerDepthInfoKHR.Buffer farZ(float value) { XrCompositionLayerDepthInfoKHR.nfarZ(address(), value); return this; }
 
     }

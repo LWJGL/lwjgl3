@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     FT_Stream stream
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Stream_CloseFunc} */
 @FunctionalInterface
 @NativeType("FT_Stream_CloseFunc")
 public interface FT_Stream_CloseFuncI extends CallbackI {
@@ -40,6 +33,7 @@ public interface FT_Stream_CloseFuncI extends CallbackI {
         );
     }
 
+    /** {@code void (* FT_Stream_CloseFunc) (FT_Stream stream)} */
     void invoke(@NativeType("FT_Stream") long stream);
 
 }

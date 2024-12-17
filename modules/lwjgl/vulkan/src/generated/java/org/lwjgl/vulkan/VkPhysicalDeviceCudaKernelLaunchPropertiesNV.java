@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the compute capability version available.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCudaKernelLaunchPropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCudaKernelLaunchPropertiesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint32_t {@link #computeCapabilityMinor};
- *     uint32_t {@link #computeCapabilityMajor};
- * }</code></pre>
+ *     uint32_t computeCapabilityMinor;
+ *     uint32_t computeCapabilityMajor;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCudaKernelLaunchPropertiesNV extends Struct<VkPhysicalDeviceCudaKernelLaunchPropertiesNV> implements NativeResource {
 
@@ -98,10 +84,10 @@ public class VkPhysicalDeviceCudaKernelLaunchPropertiesNV extends Struct<VkPhysi
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the minor version number of the compute code. */
+    /** @return the value of the {@code computeCapabilityMinor} field. */
     @NativeType("uint32_t")
     public int computeCapabilityMinor() { return ncomputeCapabilityMinor(address()); }
-    /** indicates the major version number of the compute code. */
+    /** @return the value of the {@code computeCapabilityMajor} field. */
     @NativeType("uint32_t")
     public int computeCapabilityMajor() { return ncomputeCapabilityMajor(address()); }
 
@@ -309,10 +295,10 @@ public class VkPhysicalDeviceCudaKernelLaunchPropertiesNV extends Struct<VkPhysi
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCudaKernelLaunchPropertiesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCudaKernelLaunchPropertiesNV#computeCapabilityMinor} field. */
+        /** @return the value of the {@code computeCapabilityMinor} field. */
         @NativeType("uint32_t")
         public int computeCapabilityMinor() { return VkPhysicalDeviceCudaKernelLaunchPropertiesNV.ncomputeCapabilityMinor(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCudaKernelLaunchPropertiesNV#computeCapabilityMajor} field. */
+        /** @return the value of the {@code computeCapabilityMajor} field. */
         @NativeType("uint32_t")
         public int computeCapabilityMajor() { return VkPhysicalDeviceCudaKernelLaunchPropertiesNV.ncomputeCapabilityMajor(address()); }
 

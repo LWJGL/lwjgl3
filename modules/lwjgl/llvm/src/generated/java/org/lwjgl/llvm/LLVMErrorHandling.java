@@ -32,24 +32,20 @@ public class LLVMErrorHandling {
 
     // --- [ LLVMInstallFatalErrorHandler ] ---
 
-    /** Unsafe version of: {@link #LLVMInstallFatalErrorHandler InstallFatalErrorHandler} */
+    /** {@code void LLVMInstallFatalErrorHandler(void (*) (char const *) Handler)} */
     public static void nLLVMInstallFatalErrorHandler(long Handler) {
         long __functionAddress = Functions.InstallFatalErrorHandler;
         invokePV(Handler, __functionAddress);
     }
 
-    /**
-     * Install a fatal error handler. By default, if LLVM detects a fatal error, it will call {@code exit(1)}. This may not be appropriate in many contexts.
-     * For example, doing {@code exit(1)} will bypass many crash reporting/tracing system tools. This function allows you to install a callback that will be
-     * invoked prior to the call to {@code exit(1)}.
-     */
+    /** {@code void LLVMInstallFatalErrorHandler(void (*) (char const *) Handler)} */
     public static void LLVMInstallFatalErrorHandler(@NativeType("void (*) (char const *)") LLVMFatalErrorHandlerI Handler) {
         nLLVMInstallFatalErrorHandler(Handler.address());
     }
 
     // --- [ LLVMResetFatalErrorHandler ] ---
 
-    /** Reset the fatal error handler. This resets LLVM's fatal error handling behavior to the default. */
+    /** {@code void LLVMResetFatalErrorHandler(void)} */
     public static void LLVMResetFatalErrorHandler() {
         long __functionAddress = Functions.ResetFatalErrorHandler;
         invokeV(__functionAddress);
@@ -57,10 +53,7 @@ public class LLVMErrorHandling {
 
     // --- [ LLVMEnablePrettyStackTrace ] ---
 
-    /**
-     * Enable LLVM's built-in stack trace code. This intercepts the OS's crash signals and prints which component of LLVM you were in at the time if the
-     * crash.
-     */
+    /** {@code void LLVMEnablePrettyStackTrace(void)} */
     public static void LLVMEnablePrettyStackTrace() {
         long __functionAddress = Functions.EnablePrettyStackTrace;
         invokeV(__functionAddress);

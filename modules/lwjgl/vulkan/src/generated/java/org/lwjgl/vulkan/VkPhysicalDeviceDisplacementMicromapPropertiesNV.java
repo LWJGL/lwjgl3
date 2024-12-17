@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the displacement micromap properties of a physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDisplacementMicromapPropertiesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxDisplacementMicromapSubdivisionLevel};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxDisplacementMicromapSubdivisionLevel;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDisplacementMicromapPropertiesNV extends Struct<VkPhysicalDeviceDisplacementMicromapPropertiesNV> implements NativeResource {
 
@@ -88,21 +74,21 @@ public class VkPhysicalDeviceDisplacementMicromapPropertiesNV extends Struct<VkP
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum allowed {@code subdivisionLevel} for displacement micromaps. */
+    /** @return the value of the {@code maxDisplacementMicromapSubdivisionLevel} field. */
     @NativeType("uint32_t")
     public int maxDisplacementMicromapSubdivisionLevel() { return nmaxDisplacementMicromapSubdivisionLevel(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDisplacementMicromapPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceDisplacementMicromapPropertiesNV sType$Default() { return sType(NVDisplacementMicromap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDisplacementMicromapPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,21 +280,21 @@ public class VkPhysicalDeviceDisplacementMicromapPropertiesNV extends Struct<VkP
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDisplacementMicromapPropertiesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDisplacementMicromapPropertiesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV#maxDisplacementMicromapSubdivisionLevel} field. */
+        /** @return the value of the {@code maxDisplacementMicromapSubdivisionLevel} field. */
         @NativeType("uint32_t")
         public int maxDisplacementMicromapSubdivisionLevel() { return VkPhysicalDeviceDisplacementMicromapPropertiesNV.nmaxDisplacementMicromapSubdivisionLevel(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDisplacementMicromapPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDisplacementMicromapPropertiesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV} value to the {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV#sType} field. */
+        /** Sets the {@link NVDisplacementMicromap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceDisplacementMicromapPropertiesNV.Buffer sType$Default() { return sType(NVDisplacementMicromap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDisplacementMicromapPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDisplacementMicromapPropertiesNV.npNext(address(), value); return this; }
 
     }

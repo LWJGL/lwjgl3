@@ -14,9 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_pcidev_attr_s {
  *     unsigned int domain;
  *     unsigned char bus;
@@ -30,7 +28,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned short subdevice_id;
  *     unsigned char revision;
  *     float linkspeed;
- * }</code></pre>
+ * }}</pre>
  */
 public class hwloc_pcidev_attr_s extends Struct<hwloc_pcidev_attr_s> {
 

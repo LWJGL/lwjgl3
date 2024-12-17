@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether image compression controls can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceImageCompressionControlFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #imageCompressionControl};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 imageCompressionControl;
+ * }}</pre>
  */
 public class VkPhysicalDeviceImageCompressionControlFeaturesEXT extends Struct<VkPhysicalDeviceImageCompressionControlFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceImageCompressionControlFeaturesEXT extends Struct<V
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports providing controls for image compression at image creation time. */
+    /** @return the value of the {@code imageCompressionControl} field. */
     @NativeType("VkBool32")
     public boolean imageCompressionControl() { return nimageCompressionControl(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceImageCompressionControlFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceImageCompressionControlFeaturesEXT sType$Default() { return sType(EXTImageCompressionControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceImageCompressionControlFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageCompressionControl} field. */
+    /** Sets the specified value to the {@code imageCompressionControl} field. */
     public VkPhysicalDeviceImageCompressionControlFeaturesEXT imageCompressionControl(@NativeType("VkBool32") boolean value) { nimageCompressionControl(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceImageCompressionControlFeaturesEXT extends Struct<V
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceImageCompressionControlFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceImageCompressionControlFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT#imageCompressionControl} field. */
+        /** @return the value of the {@code imageCompressionControl} field. */
         @NativeType("VkBool32")
         public boolean imageCompressionControl() { return VkPhysicalDeviceImageCompressionControlFeaturesEXT.nimageCompressionControl(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceImageCompressionControlFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageCompressionControlFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT} value to the {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTImageCompressionControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceImageCompressionControlFeaturesEXT.Buffer sType$Default() { return sType(EXTImageCompressionControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceImageCompressionControlFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageCompressionControlFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT#imageCompressionControl} field. */
+        /** Sets the specified value to the {@code imageCompressionControl} field. */
         public VkPhysicalDeviceImageCompressionControlFeaturesEXT.Buffer imageCompressionControl(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceImageCompressionControlFeaturesEXT.nimageCompressionControl(address(), value ? 1 : 0); return this; }
 
     }

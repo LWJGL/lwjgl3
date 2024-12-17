@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct rmtVulkanBind {
- *     VkInstance {@link #instance};
- *     VkPhysicalDevice {@link #physical_device};
- *     VkDevice {@link #device};
- *     VkQueue {@link #queue};
- * }</code></pre>
+ *     VkInstance instance;
+ *     VkPhysicalDevice physical_device;
+ *     VkDevice device;
+ *     VkQueue queue;
+ * }}</pre>
  */
 @NativeType("struct rmtVulkanBind")
 public class RMTVulkanBind extends Struct<RMTVulkanBind> implements NativeResource {
@@ -81,16 +79,16 @@ public class RMTVulkanBind extends Struct<RMTVulkanBind> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** The Vulkan instance, of type {@code VkInstance} */
+    /** @return the value of the {@code instance} field. */
     @NativeType("VkInstance")
     public long instance() { return ninstance(address()); }
-    /** The physical Vulkan device, of type {@code VkPhysicalDevice} */
+    /** @return the value of the {@code physical_device} field. */
     @NativeType("VkPhysicalDevice")
     public long physical_device() { return nphysical_device(address()); }
-    /** The logical Vulkan device, of type {@code VkDevice} */
+    /** @return the value of the {@code device} field. */
     @NativeType("VkDevice")
     public long device() { return ndevice(address()); }
-    /** The queue command buffers are executed on for profiling, of type {@code VkQueue} */
+    /** @return the value of the {@code queue} field. */
     @NativeType("VkQueue")
     public long queue() { return nqueue(address()); }
 
@@ -257,16 +255,16 @@ public class RMTVulkanBind extends Struct<RMTVulkanBind> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link RMTVulkanBind#instance} field. */
+        /** @return the value of the {@code instance} field. */
         @NativeType("VkInstance")
         public long instance() { return RMTVulkanBind.ninstance(address()); }
-        /** @return the value of the {@link RMTVulkanBind#physical_device} field. */
+        /** @return the value of the {@code physical_device} field. */
         @NativeType("VkPhysicalDevice")
         public long physical_device() { return RMTVulkanBind.nphysical_device(address()); }
-        /** @return the value of the {@link RMTVulkanBind#device} field. */
+        /** @return the value of the {@code device} field. */
         @NativeType("VkDevice")
         public long device() { return RMTVulkanBind.ndevice(address()); }
-        /** @return the value of the {@link RMTVulkanBind#queue} field. */
+        /** @return the value of the {@code queue} field. */
         @NativeType("VkQueue")
         public long queue() { return RMTVulkanBind.nqueue(address()); }
 

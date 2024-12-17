@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH264RefListModEntry {
  *     StdVideoH264ModificationOfPicNumsIdc modification_of_pic_nums_idc;
  *     uint16_t abs_diff_pic_num_minus1;
  *     uint16_t long_term_pic_num;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH264RefListModEntry extends Struct<StdVideoEncodeH264RefListModEntry> implements NativeResource {
 

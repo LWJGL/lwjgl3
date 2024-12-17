@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkCopyImageToImageInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCopyImageToImageInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageLayout dstImageLayout;
  *     uint32_t regionCount;
  *     {@link VkImageCopy2 VkImageCopy2} const * pRegions;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkCopyImageToImageInfoEXT extends VkCopyImageToImageInfo {
 

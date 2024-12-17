@@ -16,40 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an acceleration structure for descriptor capture.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code accelerationStructure} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructure} <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} set in {@link VkAccelerationStructureCreateInfoKHR}{@code ::createFlags}</li>
- * <li>If {@code accelerationStructureNV} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructureNV} <b>must</b> have been created with {@link EXTDescriptorBuffer#VK_ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT ACCELERATION_STRUCTURE_CREATE_DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT} set in {@link VkAccelerationStructureCreateInfoNV}{@code ::info.flags}</li>
- * <li>If {@code accelerationStructure} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructureNV} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code accelerationStructureNV} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE} then {@code accelerationStructure} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>If {@code accelerationStructure} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code accelerationStructure} <b>must</b> be a valid {@code VkAccelerationStructureKHR} handle</li>
- * <li>If {@code accelerationStructureNV} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code accelerationStructureNV} <b>must</b> be a valid {@code VkAccelerationStructureNV} handle</li>
- * <li>Both of {@code accelerationStructure}, and {@code accelerationStructureNV} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDescriptorBuffer#vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT GetAccelerationStructureOpaqueCaptureDescriptorDataEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAccelerationStructureCaptureDescriptorDataInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkAccelerationStructureKHR {@link #accelerationStructure};
- *     VkAccelerationStructureNV {@link #accelerationStructureNV};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkAccelerationStructureKHR accelerationStructure;
+ *     VkAccelerationStructureNV accelerationStructureNV;
+ * }}</pre>
  */
 public class VkAccelerationStructureCaptureDescriptorDataInfoEXT extends Struct<VkAccelerationStructureCaptureDescriptorDataInfoEXT> implements NativeResource {
 
@@ -105,28 +78,28 @@ public class VkAccelerationStructureCaptureDescriptorDataInfoEXT extends Struct<
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the {@code VkAccelerationStructureKHR} handle of the acceleration structure to get opaque capture data for. */
+    /** @return the value of the {@code accelerationStructure} field. */
     @NativeType("VkAccelerationStructureKHR")
     public long accelerationStructure() { return naccelerationStructure(address()); }
-    /** the {@code VkAccelerationStructureNV} handle of the acceleration structure to get opaque capture data for. */
+    /** @return the value of the {@code accelerationStructureNV} field. */
     @NativeType("VkAccelerationStructureNV")
     public long accelerationStructureNV() { return naccelerationStructureNV(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAccelerationStructureCaptureDescriptorDataInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@code sType} field. */
     public VkAccelerationStructureCaptureDescriptorDataInfoEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAccelerationStructureCaptureDescriptorDataInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #accelerationStructure} field. */
+    /** Sets the specified value to the {@code accelerationStructure} field. */
     public VkAccelerationStructureCaptureDescriptorDataInfoEXT accelerationStructure(@NativeType("VkAccelerationStructureKHR") long value) { naccelerationStructure(address(), value); return this; }
-    /** Sets the specified value to the {@link #accelerationStructureNV} field. */
+    /** Sets the specified value to the {@code accelerationStructureNV} field. */
     public VkAccelerationStructureCaptureDescriptorDataInfoEXT accelerationStructureNV(@NativeType("VkAccelerationStructureNV") long value) { naccelerationStructureNV(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,28 +301,28 @@ public class VkAccelerationStructureCaptureDescriptorDataInfoEXT extends Struct<
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAccelerationStructureCaptureDescriptorDataInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAccelerationStructureCaptureDescriptorDataInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#accelerationStructure} field. */
+        /** @return the value of the {@code accelerationStructure} field. */
         @NativeType("VkAccelerationStructureKHR")
         public long accelerationStructure() { return VkAccelerationStructureCaptureDescriptorDataInfoEXT.naccelerationStructure(address()); }
-        /** @return the value of the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#accelerationStructureNV} field. */
+        /** @return the value of the {@code accelerationStructureNV} field. */
         @NativeType("VkAccelerationStructureNV")
         public long accelerationStructureNV() { return VkAccelerationStructureCaptureDescriptorDataInfoEXT.naccelerationStructureNV(address()); }
 
-        /** Sets the specified value to the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAccelerationStructureCaptureDescriptorDataInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkAccelerationStructureCaptureDescriptorDataInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT} value to the {@code sType} field. */
         public VkAccelerationStructureCaptureDescriptorDataInfoEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT); }
-        /** Sets the specified value to the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAccelerationStructureCaptureDescriptorDataInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkAccelerationStructureCaptureDescriptorDataInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#accelerationStructure} field. */
+        /** Sets the specified value to the {@code accelerationStructure} field. */
         public VkAccelerationStructureCaptureDescriptorDataInfoEXT.Buffer accelerationStructure(@NativeType("VkAccelerationStructureKHR") long value) { VkAccelerationStructureCaptureDescriptorDataInfoEXT.naccelerationStructure(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAccelerationStructureCaptureDescriptorDataInfoEXT#accelerationStructureNV} field. */
+        /** Sets the specified value to the {@code accelerationStructureNV} field. */
         public VkAccelerationStructureCaptureDescriptorDataInfoEXT.Buffer accelerationStructureNV(@NativeType("VkAccelerationStructureNV") long value) { VkAccelerationStructureCaptureDescriptorDataInfoEXT.naccelerationStructureNV(address(), value); return this; }
 
     }

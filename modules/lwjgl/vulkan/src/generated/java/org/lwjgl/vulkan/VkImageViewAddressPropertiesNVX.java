@@ -16,28 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the image view for handle queries.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVXImageViewHandle#vkGetImageViewAddressNVX GetImageViewAddressNVX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageViewAddressPropertiesNVX {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceAddress {@link #deviceAddress};
- *     VkDeviceSize {@link #size};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceAddress deviceAddress;
+ *     VkDeviceSize size;
+ * }}</pre>
  */
 public class VkImageViewAddressPropertiesNVX extends Struct<VkImageViewAddressPropertiesNVX> implements NativeResource {
 
@@ -93,24 +78,24 @@ public class VkImageViewAddressPropertiesNVX extends Struct<VkImageViewAddressPr
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the device address of the image view. */
+    /** @return the value of the {@code deviceAddress} field. */
     @NativeType("VkDeviceAddress")
     public long deviceAddress() { return ndeviceAddress(address()); }
-    /** the size in bytes of the image view device memory. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageViewAddressPropertiesNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX} value to the {@link #sType} field. */
+    /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX} value to the {@code sType} field. */
     public VkImageViewAddressPropertiesNVX sType$Default() { return sType(NVXImageViewHandle.VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageViewAddressPropertiesNVX pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -304,24 +289,24 @@ public class VkImageViewAddressPropertiesNVX extends Struct<VkImageViewAddressPr
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageViewAddressPropertiesNVX#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageViewAddressPropertiesNVX.nsType(address()); }
-        /** @return the value of the {@link VkImageViewAddressPropertiesNVX#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkImageViewAddressPropertiesNVX.npNext(address()); }
-        /** @return the value of the {@link VkImageViewAddressPropertiesNVX#deviceAddress} field. */
+        /** @return the value of the {@code deviceAddress} field. */
         @NativeType("VkDeviceAddress")
         public long deviceAddress() { return VkImageViewAddressPropertiesNVX.ndeviceAddress(address()); }
-        /** @return the value of the {@link VkImageViewAddressPropertiesNVX#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkImageViewAddressPropertiesNVX.nsize(address()); }
 
-        /** Sets the specified value to the {@link VkImageViewAddressPropertiesNVX#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageViewAddressPropertiesNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewAddressPropertiesNVX.nsType(address(), value); return this; }
-        /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX} value to the {@link VkImageViewAddressPropertiesNVX#sType} field. */
+        /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX} value to the {@code sType} field. */
         public VkImageViewAddressPropertiesNVX.Buffer sType$Default() { return sType(NVXImageViewHandle.VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX); }
-        /** Sets the specified value to the {@link VkImageViewAddressPropertiesNVX#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageViewAddressPropertiesNVX.Buffer pNext(@NativeType("void *") long value) { VkImageViewAddressPropertiesNVX.npNext(address(), value); return this; }
 
     }

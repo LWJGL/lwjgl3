@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkAttachmentDescriptionStencilLayout}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAttachmentDescriptionStencilLayoutKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkImageLayout stencilInitialLayout;
  *     VkImageLayout stencilFinalLayout;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkAttachmentDescriptionStencilLayoutKHR extends VkAttachmentDescriptionStencilLayout {
 

@@ -16,23 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Stub description of VkAmigoProfilingSubmitInfoSEC.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link SECAmigoProfiling#VK_STRUCTURE_TYPE_AMIGO_PROFILING_SUBMIT_INFO_SEC STRUCTURE_TYPE_AMIGO_PROFILING_SUBMIT_INFO_SEC}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAmigoProfilingSubmitInfoSEC {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint64_t firstDrawTimestamp;
  *     uint64_t swapBufferTimestamp;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkAmigoProfilingSubmitInfoSEC extends Struct<VkAmigoProfilingSubmitInfoSEC> implements NativeResource {
 

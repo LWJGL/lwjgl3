@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The base charmap structure.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_CharMapRec {
- *     {@link FT_Face FT_Face} {@link #face};
- *     FT_Encoding {@link #encoding};
- *     FT_UShort {@link #platform_id};
- *     FT_UShort {@link #encoding_id};
- * }</code></pre>
+ *     {@link FT_Face FT_Face} face;
+ *     FT_Encoding encoding;
+ *     FT_UShort platform_id;
+ *     FT_UShort encoding_id;
+ * }}</pre>
  */
 @NativeType("struct FT_CharMapRec")
 public class FT_CharMap extends Struct<FT_CharMap> {
@@ -81,18 +77,15 @@ public class FT_CharMap extends Struct<FT_CharMap> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a handle to the parent face object */
+    /** @return a {@link FT_Face} view of the struct pointed to by the {@code face} field. */
     public FT_Face face() { return nface(address()); }
-    /** an {@code FT_Encoding} tag identifying the charmap. Use this with {@link FreeType#FT_Select_Charmap Select_Charmap}. */
+    /** @return the value of the {@code encoding} field. */
     @NativeType("FT_Encoding")
     public int encoding() { return nencoding(address()); }
-    /**
-     * an ID number describing the platform for the following encoding ID. This comes directly from the TrueType specification and gets emulated for other
-     * formats.
-     */
+    /** @return the value of the {@code platform_id} field. */
     @NativeType("FT_UShort")
     public short platform_id() { return nplatform_id(address()); }
-    /** a platform-specific encoding number. This also comes from the TrueType specification and gets emulated similarly. */
+    /** @return the value of the {@code encoding_id} field. */
     @NativeType("FT_UShort")
     public short encoding_id() { return nencoding_id(address()); }
 
@@ -177,15 +170,15 @@ public class FT_CharMap extends Struct<FT_CharMap> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link FT_Face} view of the struct pointed to by the {@link FT_CharMap#face} field. */
+        /** @return a {@link FT_Face} view of the struct pointed to by the {@code face} field. */
         public FT_Face face() { return FT_CharMap.nface(address()); }
-        /** @return the value of the {@link FT_CharMap#encoding} field. */
+        /** @return the value of the {@code encoding} field. */
         @NativeType("FT_Encoding")
         public int encoding() { return FT_CharMap.nencoding(address()); }
-        /** @return the value of the {@link FT_CharMap#platform_id} field. */
+        /** @return the value of the {@code platform_id} field. */
         @NativeType("FT_UShort")
         public short platform_id() { return FT_CharMap.nplatform_id(address()); }
-        /** @return the value of the {@link FT_CharMap#encoding_id} field. */
+        /** @return the value of the {@code encoding_id} field. */
         @NativeType("FT_UShort")
         public short encoding_id() { return FT_CharMap.nencoding_id(address()); }
 

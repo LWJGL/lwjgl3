@@ -19,14 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.ovr.OVR.ovrEye_Count;
 
 /**
- * Combines texture layout descriptors.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union ovrTextureLayoutDesc_Union {
  *     {@link OVRTextureLayoutOctilinear ovrTextureLayoutOctilinear} Octilinear[ovrEye_Count];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("union ovrTextureLayoutDesc_Union")
 public class OVRTextureLayoutDescUnion extends Struct<OVRTextureLayoutDescUnion> implements NativeResource {

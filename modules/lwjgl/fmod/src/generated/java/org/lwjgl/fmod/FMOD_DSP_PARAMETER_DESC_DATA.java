@@ -16,12 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_PARAMETER_DESC_DATA {
  *     int datatype;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_PARAMETER_DESC_DATA extends Struct<FMOD_DSP_PARAMETER_DESC_DATA> implements NativeResource {
 

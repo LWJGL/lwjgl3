@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_STUDIO_COMMANDREPLAY *replay,
- *     int commandindex,
- *     FMOD_STUDIO_EVENTDESCRIPTION *eventdescription,
- *     FMOD_STUDIO_EVENTINSTANCE **instance,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACK")
 public interface FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACKI extends CallbackI {
@@ -49,6 +38,7 @@ public interface FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACKI extends Cal
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_STUDIO_COMMANDREPLAY_CREATE_INSTANCE_CALLBACK) (FMOD_STUDIO_COMMANDREPLAY * replay, int commandindex, FMOD_STUDIO_EVENTDESCRIPTION * eventdescription, FMOD_STUDIO_EVENTINSTANCE ** instance, void * userdata)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, int commandindex, @NativeType("FMOD_STUDIO_EVENTDESCRIPTION *") long eventdescription, @NativeType("FMOD_STUDIO_EVENTINSTANCE **") long instance, @NativeType("void *") long userdata);
 
 }

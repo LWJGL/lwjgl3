@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     struct FMOD_ASYNCREADINFO *info,
- *     FMOD_RESULT result
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_FILE_ASYNCDONE_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_FILE_ASYNCDONE_FUNC")
 public interface FMOD_FILE_ASYNCDONE_FUNCI extends CallbackI {
@@ -42,6 +34,7 @@ public interface FMOD_FILE_ASYNCDONE_FUNCI extends CallbackI {
         );
     }
 
+    /** {@code void (* FMOD_FILE_ASYNCDONE_FUNC) (struct FMOD_ASYNCREADINFO * info, FMOD_RESULT result)} */
     void invoke(@NativeType("struct FMOD_ASYNCREADINFO *") long info, @NativeType("FMOD_RESULT") int result);
 
 }

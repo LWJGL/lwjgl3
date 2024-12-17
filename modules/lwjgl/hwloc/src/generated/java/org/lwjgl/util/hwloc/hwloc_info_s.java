@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_info_s {
  *     char * name;
  *     char * value;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct hwloc_info_s")
 public class hwloc_info_s extends Struct<hwloc_info_s> implements NativeResource {

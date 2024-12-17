@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * size_t (*{@link #invoke}) (
- *     int blockSize
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("size_t (*) (int)")
 public interface CUoccupancyB2DSizeI extends CallbackI {
@@ -41,7 +34,7 @@ public interface CUoccupancyB2DSizeI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /** @return the dynamic shared memory needed by a block */
+    /** {@code size_t (*) (int blockSize)} */
     @NativeType("size_t") long invoke(int blockSize);
 
 }

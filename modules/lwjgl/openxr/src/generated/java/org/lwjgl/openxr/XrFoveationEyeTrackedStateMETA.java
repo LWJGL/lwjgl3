@@ -19,33 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.METAFoveationEyeTracked.*;
 
 /**
- * Foveation data returned from the runtime.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrFoveationEyeTrackedStateMETA} <b>must</b> be provided when calling {@link METAFoveationEyeTracked#xrGetFoveationEyeTrackedStateMETA GetFoveationEyeTrackedStateMETA}. The runtime <b>must</b> interpret {@link XrFoveationEyeTrackedStateMETA} without any additional structs in its {@code next} chain in order to query eye tracked foveation state, e.g. the center of the foveal region.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAFoveationEyeTracked XR_META_foveation_eye_tracked} extension <b>must</b> be enabled prior to using {@link XrFoveationEyeTrackedStateMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAFoveationEyeTracked#XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META TYPE_FOVEATION_EYE_TRACKED_STATE_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrVector2f}, {@link METAFoveationEyeTracked#xrGetFoveationEyeTrackedStateMETA GetFoveationEyeTrackedStateMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFoveationEyeTrackedStateMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrVector2f XrVector2f} {@link #foveationCenter}[XR_FOVEATION_CENTER_SIZE_META];
- *     XrFoveationEyeTrackedStateFlagsMETA {@link #flags};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrVector2f XrVector2f} foveationCenter[XR_FOVEATION_CENTER_SIZE_META];
+ *     XrFoveationEyeTrackedStateFlagsMETA flags;
+ * }}</pre>
  */
 public class XrFoveationEyeTrackedStateMETA extends Struct<XrFoveationEyeTrackedStateMETA> implements NativeResource {
 
@@ -101,26 +81,26 @@ public class XrFoveationEyeTrackedStateMETA extends Struct<XrFoveationEyeTracked
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the center of the foveal region defined in NDC space in the range of -1 to 1 for both eyes. */
+    /** @return a {@link XrVector2f}.Buffer view of the {@code foveationCenter} field. */
     @NativeType("XrVector2f[XR_FOVEATION_CENTER_SIZE_META]")
     public XrVector2f.Buffer foveationCenter() { return nfoveationCenter(address()); }
-    /** the center of the foveal region defined in NDC space in the range of -1 to 1 for both eyes. */
+    /** @return a {@link XrVector2f} view of the struct at the specified index of the {@code foveationCenter} field. */
     public XrVector2f foveationCenter(int index) { return nfoveationCenter(address(), index); }
-    /** a bitmask of {@code XrFoveationEyeTrackedStateFlagBitsMETA} which indicates various characteristics for current foveation state. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrFoveationEyeTrackedStateFlagsMETA")
     public long flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFoveationEyeTrackedStateMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAFoveationEyeTracked#XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META TYPE_FOVEATION_EYE_TRACKED_STATE_META} value to the {@link #type} field. */
+    /** Sets the {@link METAFoveationEyeTracked#XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META TYPE_FOVEATION_EYE_TRACKED_STATE_META} value to the {@code type} field. */
     public XrFoveationEyeTrackedStateMETA type$Default() { return type(METAFoveationEyeTracked.XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFoveationEyeTrackedStateMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,26 +298,26 @@ public class XrFoveationEyeTrackedStateMETA extends Struct<XrFoveationEyeTracked
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFoveationEyeTrackedStateMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFoveationEyeTrackedStateMETA.ntype(address()); }
-        /** @return the value of the {@link XrFoveationEyeTrackedStateMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrFoveationEyeTrackedStateMETA.nnext(address()); }
-        /** @return a {@link XrVector2f}.Buffer view of the {@link XrFoveationEyeTrackedStateMETA#foveationCenter} field. */
+        /** @return a {@link XrVector2f}.Buffer view of the {@code foveationCenter} field. */
         @NativeType("XrVector2f[XR_FOVEATION_CENTER_SIZE_META]")
         public XrVector2f.Buffer foveationCenter() { return XrFoveationEyeTrackedStateMETA.nfoveationCenter(address()); }
-        /** @return a {@link XrVector2f} view of the struct at the specified index of the {@link XrFoveationEyeTrackedStateMETA#foveationCenter} field. */
+        /** @return a {@link XrVector2f} view of the struct at the specified index of the {@code foveationCenter} field. */
         public XrVector2f foveationCenter(int index) { return XrFoveationEyeTrackedStateMETA.nfoveationCenter(address(), index); }
-        /** @return the value of the {@link XrFoveationEyeTrackedStateMETA#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrFoveationEyeTrackedStateFlagsMETA")
         public long flags() { return XrFoveationEyeTrackedStateMETA.nflags(address()); }
 
-        /** Sets the specified value to the {@link XrFoveationEyeTrackedStateMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFoveationEyeTrackedStateMETA.Buffer type(@NativeType("XrStructureType") int value) { XrFoveationEyeTrackedStateMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAFoveationEyeTracked#XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META TYPE_FOVEATION_EYE_TRACKED_STATE_META} value to the {@link XrFoveationEyeTrackedStateMETA#type} field. */
+        /** Sets the {@link METAFoveationEyeTracked#XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META TYPE_FOVEATION_EYE_TRACKED_STATE_META} value to the {@code type} field. */
         public XrFoveationEyeTrackedStateMETA.Buffer type$Default() { return type(METAFoveationEyeTracked.XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META); }
-        /** Sets the specified value to the {@link XrFoveationEyeTrackedStateMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFoveationEyeTrackedStateMETA.Buffer next(@NativeType("void *") long value) { XrFoveationEyeTrackedStateMETA.nnext(address(), value); return this; }
 
     }

@@ -19,15 +19,9 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * Struct for applications to pass Vulkan function pointers to the {@link KTXVulkan#ktxTexture_VkUpload Texture_VkUpload} functions via a {@code ktxVulkanDeviceInfo} struct.
- * 
- * <p>{@code vkGetInstanceProcAddr} and {@code vkGetDeviceProcAddr} should be set, others are optional.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ktxVulkanFunctions {
- *     PFN_vkGetInstanceProcAddr {@link #vkGetInstanceProcAddr};
+ *     PFN_vkGetInstanceProcAddr vkGetInstanceProcAddr;
  *     PFN_vkGetDeviceProcAddr vkGetDeviceProcAddr;
  *     PFN_vkAllocateCommandBuffers vkAllocateCommandBuffers;
  *     PFN_vkAllocateMemory vkAllocateMemory;
@@ -57,7 +51,7 @@ import org.lwjgl.vulkan.*;
  *     PFN_vkQueueWaitIdle vkQueueWaitIdle;
  *     PFN_vkUnmapMemory vkUnmapMemory;
  *     PFN_vkWaitForFences vkWaitForFences;
- * }</code></pre>
+ * }}</pre>
  */
 public class ktxVulkanFunctions extends Struct<ktxVulkanFunctions> implements NativeResource {
 
@@ -191,7 +185,7 @@ public class ktxVulkanFunctions extends Struct<ktxVulkanFunctions> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** these are functions pointers we need to perform our vulkan duties */
+    /** @return the value of the {@code vkGetInstanceProcAddr} field. */
     @NativeType("PFN_vkGetInstanceProcAddr")
     public long vkGetInstanceProcAddr() { return nvkGetInstanceProcAddr(address()); }
     /** @return the value of the {@code vkGetDeviceProcAddr} field. */
@@ -282,7 +276,7 @@ public class ktxVulkanFunctions extends Struct<ktxVulkanFunctions> implements Na
     @NativeType("PFN_vkWaitForFences")
     public long vkWaitForFences() { return nvkWaitForFences(address()); }
 
-    /** Sets the specified value to the {@link #vkGetInstanceProcAddr} field. */
+    /** Sets the specified value to the {@code vkGetInstanceProcAddr} field. */
     public ktxVulkanFunctions vkGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { nvkGetInstanceProcAddr(address(), value); return this; }
     /** Sets the specified value to the {@code vkGetDeviceProcAddr} field. */
     public ktxVulkanFunctions vkGetDeviceProcAddr(@NativeType("PFN_vkGetDeviceProcAddr") long value) { nvkGetDeviceProcAddr(address(), value); return this; }
@@ -751,7 +745,7 @@ public class ktxVulkanFunctions extends Struct<ktxVulkanFunctions> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ktxVulkanFunctions#vkGetInstanceProcAddr} field. */
+        /** @return the value of the {@code vkGetInstanceProcAddr} field. */
         @NativeType("PFN_vkGetInstanceProcAddr")
         public long vkGetInstanceProcAddr() { return ktxVulkanFunctions.nvkGetInstanceProcAddr(address()); }
         /** @return the value of the {@code vkGetDeviceProcAddr} field. */
@@ -842,7 +836,7 @@ public class ktxVulkanFunctions extends Struct<ktxVulkanFunctions> implements Na
         @NativeType("PFN_vkWaitForFences")
         public long vkWaitForFences() { return ktxVulkanFunctions.nvkWaitForFences(address()); }
 
-        /** Sets the specified value to the {@link ktxVulkanFunctions#vkGetInstanceProcAddr} field. */
+        /** Sets the specified value to the {@code vkGetInstanceProcAddr} field. */
         public ktxVulkanFunctions.Buffer vkGetInstanceProcAddr(@NativeType("PFN_vkGetInstanceProcAddr") long value) { ktxVulkanFunctions.nvkGetInstanceProcAddr(address(), value); return this; }
         /** Sets the specified value to the {@code vkGetDeviceProcAddr} field. */
         public ktxVulkanFunctions.Buffer vkGetDeviceProcAddr(@NativeType("PFN_vkGetDeviceProcAddr") long value) { ktxVulkanFunctions.nvkGetDeviceProcAddr(address(), value); return this; }

@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the information to obtain facial expression.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrFaceExpressionInfo2FB} structure describes the information to obtain facial expression. The application <b>should</b> pass a time equal to the predicted display time for the rendered frame. The system <b>must</b> employ appropriate modeling to provide expressions for this time.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBFaceTracking2 XR_FB_face_tracking2} extension <b>must</b> be enabled prior to using {@link XrFaceExpressionInfo2FB}</li>
- * <li>{@code type} <b>must</b> be {@link FBFaceTracking2#XR_TYPE_FACE_EXPRESSION_INFO2_FB TYPE_FACE_EXPRESSION_INFO2_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBFaceTracking2#xrGetFaceExpressionWeights2FB GetFaceExpressionWeights2FB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFaceExpressionInfo2FB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrFaceExpressionInfo2FB extends Struct<XrFaceExpressionInfo2FB> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class XrFaceExpressionInfo2FB extends Struct<XrFaceExpressionInfo2FB> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrTime} at which the facial expression weights are requested. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFaceExpressionInfo2FB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBFaceTracking2#XR_TYPE_FACE_EXPRESSION_INFO2_FB TYPE_FACE_EXPRESSION_INFO2_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBFaceTracking2#XR_TYPE_FACE_EXPRESSION_INFO2_FB TYPE_FACE_EXPRESSION_INFO2_FB} value to the {@code type} field. */
     public XrFaceExpressionInfo2FB type$Default() { return type(FBFaceTracking2.XR_TYPE_FACE_EXPRESSION_INFO2_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFaceExpressionInfo2FB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrFaceExpressionInfo2FB time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class XrFaceExpressionInfo2FB extends Struct<XrFaceExpressionInfo2FB> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFaceExpressionInfo2FB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFaceExpressionInfo2FB.ntype(address()); }
-        /** @return the value of the {@link XrFaceExpressionInfo2FB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFaceExpressionInfo2FB.nnext(address()); }
-        /** @return the value of the {@link XrFaceExpressionInfo2FB#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrFaceExpressionInfo2FB.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrFaceExpressionInfo2FB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFaceExpressionInfo2FB.Buffer type(@NativeType("XrStructureType") int value) { XrFaceExpressionInfo2FB.ntype(address(), value); return this; }
-        /** Sets the {@link FBFaceTracking2#XR_TYPE_FACE_EXPRESSION_INFO2_FB TYPE_FACE_EXPRESSION_INFO2_FB} value to the {@link XrFaceExpressionInfo2FB#type} field. */
+        /** Sets the {@link FBFaceTracking2#XR_TYPE_FACE_EXPRESSION_INFO2_FB TYPE_FACE_EXPRESSION_INFO2_FB} value to the {@code type} field. */
         public XrFaceExpressionInfo2FB.Buffer type$Default() { return type(FBFaceTracking2.XR_TYPE_FACE_EXPRESSION_INFO2_FB); }
-        /** Sets the specified value to the {@link XrFaceExpressionInfo2FB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFaceExpressionInfo2FB.Buffer next(@NativeType("void const *") long value) { XrFaceExpressionInfo2FB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFaceExpressionInfo2FB#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrFaceExpressionInfo2FB.Buffer time(@NativeType("XrTime") long value) { XrFaceExpressionInfo2FB.ntime(address(), value); return this; }
 
     }

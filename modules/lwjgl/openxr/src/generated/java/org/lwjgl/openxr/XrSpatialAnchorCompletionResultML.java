@@ -16,49 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Per Anchor Completion detail.
- * 
- * <h5>Anchor Operation Result Codes</h5>
- * 
- * <p>{@code result} values:</p>
- * 
- * <dl>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-successcodes">Success</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
- * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
- * </ul></dd>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-errorcodes">Failure</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
- * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
- * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
- * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
- * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
- * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML}</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorCompletionResultML}</li>
- * <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpatialAnchorsDeleteCompletionDetailsML}, {@link XrSpatialAnchorsPublishCompletionDetailsML}, {@link XrSpatialAnchorsPublishCompletionML}, {@link XrSpatialAnchorsUpdateExpirationCompletionDetailsML}, {@link XrUuidEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorCompletionResultML {
- *     {@link XrUuidEXT XrUuidEXT} {@link #uuid};
- *     XrResult {@link #result};
- * }</code></pre>
+ *     {@link XrUuidEXT XrUuidEXT} uuid;
+ *     XrResult result;
+ * }}</pre>
  */
 public class XrSpatialAnchorCompletionResultML extends Struct<XrSpatialAnchorCompletionResultML> implements NativeResource {
 
@@ -108,17 +70,17 @@ public class XrSpatialAnchorCompletionResultML extends Struct<XrSpatialAnchorCom
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the UUID of the anchor. */
+    /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
     public XrUuidEXT uuid() { return nuuid(address()); }
-    /** the result of the operation. */
+    /** @return the value of the {@code result} field. */
     @NativeType("XrResult")
     public int result() { return nresult(address()); }
 
-    /** Copies the specified {@link XrUuidEXT} to the {@link #uuid} field. */
+    /** Copies the specified {@link XrUuidEXT} to the {@code uuid} field. */
     public XrSpatialAnchorCompletionResultML uuid(XrUuidEXT value) { nuuid(address(), value); return this; }
-    /** Passes the {@link #uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpatialAnchorCompletionResultML uuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(uuid()); return this; }
-    /** Sets the specified value to the {@link #result} field. */
+    /** Sets the specified value to the {@code result} field. */
     public XrSpatialAnchorCompletionResultML result(@NativeType("XrResult") int value) { nresult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -308,17 +270,17 @@ public class XrSpatialAnchorCompletionResultML extends Struct<XrSpatialAnchorCom
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrUuidEXT} view of the {@link XrSpatialAnchorCompletionResultML#uuid} field. */
+        /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
         public XrUuidEXT uuid() { return XrSpatialAnchorCompletionResultML.nuuid(address()); }
-        /** @return the value of the {@link XrSpatialAnchorCompletionResultML#result} field. */
+        /** @return the value of the {@code result} field. */
         @NativeType("XrResult")
         public int result() { return XrSpatialAnchorCompletionResultML.nresult(address()); }
 
-        /** Copies the specified {@link XrUuidEXT} to the {@link XrSpatialAnchorCompletionResultML#uuid} field. */
+        /** Copies the specified {@link XrUuidEXT} to the {@code uuid} field. */
         public XrSpatialAnchorCompletionResultML.Buffer uuid(XrUuidEXT value) { XrSpatialAnchorCompletionResultML.nuuid(address(), value); return this; }
-        /** Passes the {@link XrSpatialAnchorCompletionResultML#uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpatialAnchorCompletionResultML.Buffer uuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(uuid()); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorCompletionResultML#result} field. */
+        /** Sets the specified value to the {@code result} field. */
         public XrSpatialAnchorCompletionResultML.Buffer result(@NativeType("XrResult") int value) { XrSpatialAnchorCompletionResultML.nresult(address(), value); return this; }
 
     }

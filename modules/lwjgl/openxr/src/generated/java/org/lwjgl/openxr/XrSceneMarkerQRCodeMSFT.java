@@ -14,25 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Properties specific to QR Codes.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using {@link XrSceneMarkerQRCodeMSFT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSceneMarkerQRCodesMSFT}, {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneMarkerQRCodeMSFT {
  *     XrSceneMarkerQRCodeSymbolTypeMSFT symbolType;
  *     uint8_t version;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrSceneMarkerQRCodeMSFT extends Struct<XrSceneMarkerQRCodeMSFT> {
 

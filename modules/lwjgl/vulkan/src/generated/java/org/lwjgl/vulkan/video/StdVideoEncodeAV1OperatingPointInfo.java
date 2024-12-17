@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeAV1OperatingPointInfo {
  *     {@link StdVideoEncodeAV1OperatingPointInfoFlags StdVideoEncodeAV1OperatingPointInfoFlags} flags;
  *     uint16_t operating_point_idc;
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t decoder_buffer_delay;
  *     uint32_t encoder_buffer_delay;
  *     uint8_t initial_display_delay_minus_1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeAV1OperatingPointInfo extends Struct<StdVideoEncodeAV1OperatingPointInfo> implements NativeResource {
 

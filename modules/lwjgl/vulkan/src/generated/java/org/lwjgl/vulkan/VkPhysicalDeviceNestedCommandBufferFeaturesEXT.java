@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether nested command buffers are supported by the implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTNestedCommandBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceNestedCommandBufferFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #nestedCommandBuffer};
- *     VkBool32 {@link #nestedCommandBufferRendering};
- *     VkBool32 {@link #nestedCommandBufferSimultaneousUse};
- * }</code></pre>
+ *     VkBool32 nestedCommandBuffer;
+ *     VkBool32 nestedCommandBufferRendering;
+ *     VkBool32 nestedCommandBufferSimultaneousUse;
+ * }}</pre>
  */
 public class VkPhysicalDeviceNestedCommandBufferFeaturesEXT extends Struct<VkPhysicalDeviceNestedCommandBufferFeaturesEXT> implements NativeResource {
 
@@ -102,13 +88,13 @@ public class VkPhysicalDeviceNestedCommandBufferFeaturesEXT extends Struct<VkPhy
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the implementation supports nested command buffers, which allows <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary">Secondary Command Buffers</a> to execute other <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary">Secondary Command Buffers</a>. */
+    /** @return the value of the {@code nestedCommandBuffer} field. */
     @NativeType("VkBool32")
     public boolean nestedCommandBuffer() { return nnestedCommandBuffer(address()) != 0; }
-    /** indicates that it is valid to call {@link VK10#vkCmdExecuteCommands CmdExecuteCommands} inside a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#glossary">Secondary Command Buffer</a> recorded with {@link VK10#VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT}. */
+    /** @return the value of the {@code nestedCommandBufferRendering} field. */
     @NativeType("VkBool32")
     public boolean nestedCommandBufferRendering() { return nnestedCommandBufferRendering(address()) != 0; }
-    /** indicates that the implementation supports nested command buffers with command buffers that are recorded with {@link VK10#VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT}. */
+    /** @return the value of the {@code nestedCommandBufferSimultaneousUse} field. */
     @NativeType("VkBool32")
     public boolean nestedCommandBufferSimultaneousUse() { return nnestedCommandBufferSimultaneousUse(address()) != 0; }
 
@@ -118,11 +104,11 @@ public class VkPhysicalDeviceNestedCommandBufferFeaturesEXT extends Struct<VkPhy
     public VkPhysicalDeviceNestedCommandBufferFeaturesEXT sType$Default() { return sType(EXTNestedCommandBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceNestedCommandBufferFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #nestedCommandBuffer} field. */
+    /** Sets the specified value to the {@code nestedCommandBuffer} field. */
     public VkPhysicalDeviceNestedCommandBufferFeaturesEXT nestedCommandBuffer(@NativeType("VkBool32") boolean value) { nnestedCommandBuffer(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #nestedCommandBufferRendering} field. */
+    /** Sets the specified value to the {@code nestedCommandBufferRendering} field. */
     public VkPhysicalDeviceNestedCommandBufferFeaturesEXT nestedCommandBufferRendering(@NativeType("VkBool32") boolean value) { nnestedCommandBufferRendering(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #nestedCommandBufferSimultaneousUse} field. */
+    /** Sets the specified value to the {@code nestedCommandBufferSimultaneousUse} field. */
     public VkPhysicalDeviceNestedCommandBufferFeaturesEXT nestedCommandBufferSimultaneousUse(@NativeType("VkBool32") boolean value) { nnestedCommandBufferSimultaneousUse(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -336,13 +322,13 @@ public class VkPhysicalDeviceNestedCommandBufferFeaturesEXT extends Struct<VkPhy
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceNestedCommandBufferFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT#nestedCommandBuffer} field. */
+        /** @return the value of the {@code nestedCommandBuffer} field. */
         @NativeType("VkBool32")
         public boolean nestedCommandBuffer() { return VkPhysicalDeviceNestedCommandBufferFeaturesEXT.nnestedCommandBuffer(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT#nestedCommandBufferRendering} field. */
+        /** @return the value of the {@code nestedCommandBufferRendering} field. */
         @NativeType("VkBool32")
         public boolean nestedCommandBufferRendering() { return VkPhysicalDeviceNestedCommandBufferFeaturesEXT.nnestedCommandBufferRendering(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT#nestedCommandBufferSimultaneousUse} field. */
+        /** @return the value of the {@code nestedCommandBufferSimultaneousUse} field. */
         @NativeType("VkBool32")
         public boolean nestedCommandBufferSimultaneousUse() { return VkPhysicalDeviceNestedCommandBufferFeaturesEXT.nnestedCommandBufferSimultaneousUse(address()) != 0; }
 
@@ -352,11 +338,11 @@ public class VkPhysicalDeviceNestedCommandBufferFeaturesEXT extends Struct<VkPhy
         public VkPhysicalDeviceNestedCommandBufferFeaturesEXT.Buffer sType$Default() { return sType(EXTNestedCommandBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceNestedCommandBufferFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceNestedCommandBufferFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT#nestedCommandBuffer} field. */
+        /** Sets the specified value to the {@code nestedCommandBuffer} field. */
         public VkPhysicalDeviceNestedCommandBufferFeaturesEXT.Buffer nestedCommandBuffer(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceNestedCommandBufferFeaturesEXT.nnestedCommandBuffer(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT#nestedCommandBufferRendering} field. */
+        /** Sets the specified value to the {@code nestedCommandBufferRendering} field. */
         public VkPhysicalDeviceNestedCommandBufferFeaturesEXT.Buffer nestedCommandBufferRendering(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceNestedCommandBufferFeaturesEXT.nnestedCommandBufferRendering(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT#nestedCommandBufferSimultaneousUse} field. */
+        /** Sets the specified value to the {@code nestedCommandBufferSimultaneousUse} field. */
         public VkPhysicalDeviceNestedCommandBufferFeaturesEXT.Buffer nestedCommandBufferSimultaneousUse(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceNestedCommandBufferFeaturesEXT.nnestedCommandBufferSimultaneousUse(address(), value ? 1 : 0); return this; }
 
     }

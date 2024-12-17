@@ -13,18 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-/**
- * Instances of this class may be passed to the {@link GLFW#glfwSetIMEStatusCallback SetIMEStatusCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window
- * )</code></pre>
- *
- * @since version 3.X
- */
+/** Callback function: {@link #invoke GLFWimestatusfun} */
 public abstract class GLFWIMEStatusCallback extends Callback implements GLFWIMEStatusCallbackI {
 
     /**

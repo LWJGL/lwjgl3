@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceImageRobustnessFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceImageRobustnessFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 robustImageAccess;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceImageRobustnessFeaturesEXT extends VkPhysicalDeviceImageRobustnessFeatures {
 

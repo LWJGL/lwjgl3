@@ -16,23 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying video decode usage information.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR}</li>
- * <li>{@code videoUsageHints} <b>must</b> be a valid combination of {@code VkVideoDecodeUsageFlagBitsKHR} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoDecodeUsageInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkVideoDecodeUsageFlagsKHR {@link #videoUsageHints};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkVideoDecodeUsageFlagsKHR videoUsageHints;
+ * }}</pre>
  */
 public class VkVideoDecodeUsageInfoKHR extends Struct<VkVideoDecodeUsageInfoKHR> implements NativeResource {
 
@@ -85,23 +74,23 @@ public class VkVideoDecodeUsageInfoKHR extends Struct<VkVideoDecodeUsageInfoKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoDecodeUsageFlagBitsKHR} specifying hints about the intended use of the video decode profile. */
+    /** @return the value of the {@code videoUsageHints} field. */
     @NativeType("VkVideoDecodeUsageFlagsKHR")
     public int videoUsageHints() { return nvideoUsageHints(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeUsageInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoDecodeUsageInfoKHR sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeUsageInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #videoUsageHints} field. */
+    /** Sets the specified value to the {@code videoUsageHints} field. */
     public VkVideoDecodeUsageInfoKHR videoUsageHints(@NativeType("VkVideoDecodeUsageFlagsKHR") int value) { nvideoUsageHints(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,23 +286,23 @@ public class VkVideoDecodeUsageInfoKHR extends Struct<VkVideoDecodeUsageInfoKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoDecodeUsageInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeUsageInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoDecodeUsageInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoDecodeUsageInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoDecodeUsageInfoKHR#videoUsageHints} field. */
+        /** @return the value of the {@code videoUsageHints} field. */
         @NativeType("VkVideoDecodeUsageFlagsKHR")
         public int videoUsageHints() { return VkVideoDecodeUsageInfoKHR.nvideoUsageHints(address()); }
 
-        /** Sets the specified value to the {@link VkVideoDecodeUsageInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeUsageInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeUsageInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR} value to the {@link VkVideoDecodeUsageInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoDecodeQueue#VK_STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoDecodeUsageInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeQueue.VK_STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoDecodeUsageInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeUsageInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeUsageInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoDecodeUsageInfoKHR#videoUsageHints} field. */
+        /** Sets the specified value to the {@code videoUsageHints} field. */
         public VkVideoDecodeUsageInfoKHR.Buffer videoUsageHints(@NativeType("VkVideoDecodeUsageFlagsKHR") int value) { VkVideoDecodeUsageInfoKHR.nvideoUsageHints(address(), value); return this; }
 
     }

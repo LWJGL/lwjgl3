@@ -16,30 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Return structure for command buffer checkpoint data.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <p>The stages at which a checkpoint marker <b>can</b> be executed are implementation-defined and <b>can</b> be queried by calling {@link VK11#vkGetPhysicalDeviceQueueFamilyProperties2 GetPhysicalDeviceQueueFamilyProperties2}.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVDeviceDiagnosticCheckpoints#vkGetQueueCheckpointData2NV GetQueueCheckpointData2NV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCheckpointData2NV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkPipelineStageFlags2 {@link #stage};
- *     void * {@link #pCheckpointMarker};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkPipelineStageFlags2 stage;
+ *     void * pCheckpointMarker;
+ * }}</pre>
  */
 public class VkCheckpointData2NV extends Struct<VkCheckpointData2NV> implements NativeResource {
 
@@ -95,24 +78,24 @@ public class VkCheckpointData2NV extends Struct<VkCheckpointData2NV> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates a single pipeline stage which the checkpoint marker data refers to. */
+    /** @return the value of the {@code stage} field. */
     @NativeType("VkPipelineStageFlags2")
     public long stage() { return nstage(address()); }
-    /** contains the value of the last checkpoint marker executed in the stage that {@code stage} refers to. */
+    /** @return the value of the {@code pCheckpointMarker} field. */
     @NativeType("void *")
     public long pCheckpointMarker() { return npCheckpointMarker(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCheckpointData2NV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV} value to the {@code sType} field. */
     public VkCheckpointData2NV sType$Default() { return sType(NVDeviceDiagnosticCheckpoints.VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCheckpointData2NV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,24 +289,24 @@ public class VkCheckpointData2NV extends Struct<VkCheckpointData2NV> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCheckpointData2NV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCheckpointData2NV.nsType(address()); }
-        /** @return the value of the {@link VkCheckpointData2NV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkCheckpointData2NV.npNext(address()); }
-        /** @return the value of the {@link VkCheckpointData2NV#stage} field. */
+        /** @return the value of the {@code stage} field. */
         @NativeType("VkPipelineStageFlags2")
         public long stage() { return VkCheckpointData2NV.nstage(address()); }
-        /** @return the value of the {@link VkCheckpointData2NV#pCheckpointMarker} field. */
+        /** @return the value of the {@code pCheckpointMarker} field. */
         @NativeType("void *")
         public long pCheckpointMarker() { return VkCheckpointData2NV.npCheckpointMarker(address()); }
 
-        /** Sets the specified value to the {@link VkCheckpointData2NV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCheckpointData2NV.Buffer sType(@NativeType("VkStructureType") int value) { VkCheckpointData2NV.nsType(address(), value); return this; }
-        /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV} value to the {@link VkCheckpointData2NV#sType} field. */
+        /** Sets the {@link NVDeviceDiagnosticCheckpoints#VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV} value to the {@code sType} field. */
         public VkCheckpointData2NV.Buffer sType$Default() { return sType(NVDeviceDiagnosticCheckpoints.VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV); }
-        /** Sets the specified value to the {@link VkCheckpointData2NV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCheckpointData2NV.Buffer pNext(@NativeType("void *") long value) { VkCheckpointData2NV.npNext(address(), value); return this; }
 
     }

@@ -17,41 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying device within a group to bind to.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkBindBufferMemoryInfo} includes a {@link VkBindBufferMemoryDeviceGroupInfo} structure, then that structure determines how memory is bound to buffers across multiple devices in a device group.</p>
- * 
- * <p>If {@code deviceIndexCount} is greater than zero, then on device index <code>i</code> the buffer is attached to the instance of {@code memory} on the physical device with device index <code>pDeviceIndices[i]</code>.</p>
- * 
- * <p>If {@code deviceIndexCount} is zero and {@code memory} comes from a memory heap with the {@link VK11#VK_MEMORY_HEAP_MULTI_INSTANCE_BIT MEMORY_HEAP_MULTI_INSTANCE_BIT} bit set, then it is as if {@code pDeviceIndices} contains consecutive indices from zero to the number of physical devices in the logical device, minus one. In other words, by default each physical device attaches to its own instance of {@code memory}.</p>
- * 
- * <p>If {@code deviceIndexCount} is zero and {@code memory} comes from a memory heap without the {@link VK11#VK_MEMORY_HEAP_MULTI_INSTANCE_BIT MEMORY_HEAP_MULTI_INSTANCE_BIT} bit set, then it is as if {@code pDeviceIndices} contains an array of zeros. In other words, by default each physical device attaches to instance zero.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code deviceIndexCount} <b>must</b> either be zero or equal to the number of physical devices in the logical device</li>
- * <li>All elements of {@code pDeviceIndices} <b>must</b> be valid device indices</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO}</li>
- * <li>If {@code deviceIndexCount} is not 0, {@code pDeviceIndices} <b>must</b> be a valid pointer to an array of {@code deviceIndexCount} {@code uint32_t} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindBufferMemoryDeviceGroupInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #deviceIndexCount};
- *     uint32_t const * {@link #pDeviceIndices};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t deviceIndexCount;
+ *     uint32_t const * pDeviceIndices;
+ * }}</pre>
  */
 public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemoryDeviceGroupInfo> implements NativeResource {
 
@@ -107,26 +79,26 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemory
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of elements in {@code pDeviceIndices}. */
+    /** @return the value of the {@code deviceIndexCount} field. */
     @NativeType("uint32_t")
     public int deviceIndexCount() { return ndeviceIndexCount(address()); }
-    /** a pointer to an array of device indices. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pDeviceIndices() { return npDeviceIndices(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBindBufferMemoryDeviceGroupInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO} value to the {@code sType} field. */
     public VkBindBufferMemoryDeviceGroupInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBindBufferMemoryDeviceGroupInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDeviceIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pDeviceIndices} field. */
     public VkBindBufferMemoryDeviceGroupInfo pDeviceIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npDeviceIndices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,26 +328,26 @@ public class VkBindBufferMemoryDeviceGroupInfo extends Struct<VkBindBufferMemory
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindBufferMemoryDeviceGroupInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBindBufferMemoryDeviceGroupInfo.nsType(address()); }
-        /** @return the value of the {@link VkBindBufferMemoryDeviceGroupInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBindBufferMemoryDeviceGroupInfo.npNext(address()); }
-        /** @return the value of the {@link VkBindBufferMemoryDeviceGroupInfo#deviceIndexCount} field. */
+        /** @return the value of the {@code deviceIndexCount} field. */
         @NativeType("uint32_t")
         public int deviceIndexCount() { return VkBindBufferMemoryDeviceGroupInfo.ndeviceIndexCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkBindBufferMemoryDeviceGroupInfo#pDeviceIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDeviceIndices} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pDeviceIndices() { return VkBindBufferMemoryDeviceGroupInfo.npDeviceIndices(address()); }
 
-        /** Sets the specified value to the {@link VkBindBufferMemoryDeviceGroupInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBindBufferMemoryDeviceGroupInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBindBufferMemoryDeviceGroupInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO} value to the {@link VkBindBufferMemoryDeviceGroupInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO} value to the {@code sType} field. */
         public VkBindBufferMemoryDeviceGroupInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO); }
-        /** Sets the specified value to the {@link VkBindBufferMemoryDeviceGroupInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBindBufferMemoryDeviceGroupInfo.Buffer pNext(@NativeType("void const *") long value) { VkBindBufferMemoryDeviceGroupInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkBindBufferMemoryDeviceGroupInfo#pDeviceIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pDeviceIndices} field. */
         public VkBindBufferMemoryDeviceGroupInfo.Buffer pDeviceIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkBindBufferMemoryDeviceGroupInfo.npDeviceIndices(address(), value); return this; }
 
     }

@@ -17,34 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The structure provided by the application to the runtime, describing the information required for a recommendation to be made.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code predictedDisplayTime} is older than the predicted display time returned from most recent {@link XR10#xrWaitFrame WaitFrame} then, the runtime <b>must</b> return {@link XR10#XR_ERROR_TIME_INVALID ERROR_TIME_INVALID}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METARecommendedLayerResolution XR_META_recommended_layer_resolution} extension <b>must</b> be enabled prior to using {@link XrRecommendedLayerResolutionGetInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code layer} <b>must</b> be a pointer to a valid {@link XrCompositionLayerBaseHeader}-based structure. See also: {@link XrCompositionLayerCubeKHR}, {@link XrCompositionLayerCylinderKHR}, {@link XrCompositionLayerEquirect2KHR}, {@link XrCompositionLayerEquirectKHR}, {@link XrCompositionLayerPassthroughFB}, {@link XrCompositionLayerPassthroughHTC}, {@link XrCompositionLayerProjection}, {@link XrCompositionLayerQuad}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}, {@link METARecommendedLayerResolution#xrGetRecommendedLayerResolutionMETA GetRecommendedLayerResolutionMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrRecommendedLayerResolutionGetInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrCompositionLayerBaseHeader XrCompositionLayerBaseHeader} const * {@link #layer};
- *     XrTime {@link #predictedDisplayTime};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrCompositionLayerBaseHeader XrCompositionLayerBaseHeader} const * layer;
+ *     XrTime predictedDisplayTime;
+ * }}</pre>
  */
 public class XrRecommendedLayerResolutionGetInfoMETA extends Struct<XrRecommendedLayerResolutionGetInfoMETA> implements NativeResource {
 
@@ -100,28 +79,28 @@ public class XrRecommendedLayerResolutionGetInfoMETA extends Struct<XrRecommende
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a pointer to a structure based on {@link XrCompositionLayerBaseHeader}, describing the layer for which the application wants a runtime-recommended swapchain resolution. Layers with multiple views <b>may</b> scale the views to match the scaled swapchain resolution. */
+    /** @return a {@link XrCompositionLayerBaseHeader} view of the struct pointed to by the {@code layer} field. */
     @NativeType("XrCompositionLayerBaseHeader const *")
     public XrCompositionLayerBaseHeader layer() { return nlayer(address()); }
-    /** the {@code XrTime} that the application intends to submit the layer for. */
+    /** @return the value of the {@code predictedDisplayTime} field. */
     @NativeType("XrTime")
     public long predictedDisplayTime() { return npredictedDisplayTime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrRecommendedLayerResolutionGetInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META} value to the {@code type} field. */
     public XrRecommendedLayerResolutionGetInfoMETA type$Default() { return type(METARecommendedLayerResolution.XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrRecommendedLayerResolutionGetInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrCompositionLayerBaseHeader} to the {@link #layer} field. */
+    /** Sets the address of the specified {@link XrCompositionLayerBaseHeader} to the {@code layer} field. */
     public XrRecommendedLayerResolutionGetInfoMETA layer(@NativeType("XrCompositionLayerBaseHeader const *") XrCompositionLayerBaseHeader value) { nlayer(address(), value); return this; }
-    /** Sets the specified value to the {@link #predictedDisplayTime} field. */
+    /** Sets the specified value to the {@code predictedDisplayTime} field. */
     public XrRecommendedLayerResolutionGetInfoMETA predictedDisplayTime(@NativeType("XrTime") long value) { npredictedDisplayTime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,28 +313,28 @@ public class XrRecommendedLayerResolutionGetInfoMETA extends Struct<XrRecommende
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrRecommendedLayerResolutionGetInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrRecommendedLayerResolutionGetInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrRecommendedLayerResolutionGetInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrRecommendedLayerResolutionGetInfoMETA.nnext(address()); }
-        /** @return a {@link XrCompositionLayerBaseHeader} view of the struct pointed to by the {@link XrRecommendedLayerResolutionGetInfoMETA#layer} field. */
+        /** @return a {@link XrCompositionLayerBaseHeader} view of the struct pointed to by the {@code layer} field. */
         @NativeType("XrCompositionLayerBaseHeader const *")
         public XrCompositionLayerBaseHeader layer() { return XrRecommendedLayerResolutionGetInfoMETA.nlayer(address()); }
-        /** @return the value of the {@link XrRecommendedLayerResolutionGetInfoMETA#predictedDisplayTime} field. */
+        /** @return the value of the {@code predictedDisplayTime} field. */
         @NativeType("XrTime")
         public long predictedDisplayTime() { return XrRecommendedLayerResolutionGetInfoMETA.npredictedDisplayTime(address()); }
 
-        /** Sets the specified value to the {@link XrRecommendedLayerResolutionGetInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrRecommendedLayerResolutionGetInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrRecommendedLayerResolutionGetInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META} value to the {@link XrRecommendedLayerResolutionGetInfoMETA#type} field. */
+        /** Sets the {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META} value to the {@code type} field. */
         public XrRecommendedLayerResolutionGetInfoMETA.Buffer type$Default() { return type(METARecommendedLayerResolution.XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META); }
-        /** Sets the specified value to the {@link XrRecommendedLayerResolutionGetInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrRecommendedLayerResolutionGetInfoMETA.Buffer next(@NativeType("void const *") long value) { XrRecommendedLayerResolutionGetInfoMETA.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrCompositionLayerBaseHeader} to the {@link XrRecommendedLayerResolutionGetInfoMETA#layer} field. */
+        /** Sets the address of the specified {@link XrCompositionLayerBaseHeader} to the {@code layer} field. */
         public XrRecommendedLayerResolutionGetInfoMETA.Buffer layer(@NativeType("XrCompositionLayerBaseHeader const *") XrCompositionLayerBaseHeader value) { XrRecommendedLayerResolutionGetInfoMETA.nlayer(address(), value); return this; }
-        /** Sets the specified value to the {@link XrRecommendedLayerResolutionGetInfoMETA#predictedDisplayTime} field. */
+        /** Sets the specified value to the {@code predictedDisplayTime} field. */
         public XrRecommendedLayerResolutionGetInfoMETA.Buffer predictedDisplayTime(@NativeType("XrTime") long value) { XrRecommendedLayerResolutionGetInfoMETA.npredictedDisplayTime(address(), value); return this; }
 
     }

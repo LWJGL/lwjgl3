@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct DBMONEY {
  *     LONG mnyhigh;
  *     ULONG mnylow;
- * }</code></pre>
+ * }}</pre>
  */
 public class DBMONEY extends Struct<DBMONEY> implements NativeResource {
 

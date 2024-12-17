@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link ParShapes#par_shapes_create_lsystem create_lsystem} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     void *context
- * )</code></pre>
- */
+/** Callback function: {@link #invoke par_shapes_rand_fn} */
 @FunctionalInterface
 @NativeType("par_shapes_rand_fn")
 public interface ParShapesRandFnI extends CallbackI {
@@ -43,6 +34,7 @@ public interface ParShapesRandFnI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code float (* par_shapes_rand_fn) (void * context)} */
     float invoke(@NativeType("void *") long context);
 
 }

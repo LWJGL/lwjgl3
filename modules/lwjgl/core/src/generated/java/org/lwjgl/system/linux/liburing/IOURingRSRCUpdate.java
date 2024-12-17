@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_rsrc_update {
  *     __u32 offset;
  *     __u32 resv;
  *     __u64 data;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_rsrc_update")
 public class IOURingRSRCUpdate extends Struct<IOURingRSRCUpdate> implements NativeResource {

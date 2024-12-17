@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Field of view.
- * 
- * <h5>Description</h5>
- * 
- * <p>Angles to the right of the center and upwards from the center are positive, and angles to the left of the center and down from the center are negative. The total horizontal field of view is {@code angleRight} minus {@code angleLeft}, and the total vertical field of view is {@code angleUp} minus {@code angleDown}. For a symmetric FoV, {@code angleRight} and {@code angleUp} will have positive values, {@code angleLeft} will be -{@code angleRight}, and {@code angleDown} will be -{@code angleUp}.</p>
- * 
- * <p>The angles <b>must</b> be specified in radians, and <b>must</b> be between <code>-π/2</code> and <code>π/2</code> exclusively.</p>
- * 
- * <p>When {@code angleLeft} &gt; {@code angleRight}, the content of the view <b>must</b> be flipped horizontally. When {@code angleDown} &gt; {@code angleUp}, the content of the view <b>must</b> be flipped vertically.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerProjectionView}, {@link XrEnvironmentDepthImageViewMETA}, {@link XrExternalCameraIntrinsicsOCULUS}, {@link XrFrustumf}, {@link XrSceneFrustumBoundMSFT}, {@link XrView}, {@link XrViewConfigurationViewFovEPIC}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFovf {
- *     float {@link #angleLeft};
- *     float {@link #angleRight};
- *     float {@link #angleUp};
- *     float {@link #angleDown};
- * }</code></pre>
+ *     float angleLeft;
+ *     float angleRight;
+ *     float angleUp;
+ *     float angleDown;
+ * }}</pre>
  */
 public class XrFovf extends Struct<XrFovf> implements NativeResource {
 
@@ -94,22 +78,22 @@ public class XrFovf extends Struct<XrFovf> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the angle of the left side of the field of view. For a symmetric field of view this value is negative. */
+    /** @return the value of the {@code angleLeft} field. */
     public float angleLeft() { return nangleLeft(address()); }
-    /** the angle of the right side of the field of view. */
+    /** @return the value of the {@code angleRight} field. */
     public float angleRight() { return nangleRight(address()); }
-    /** the angle of the top part of the field of view. */
+    /** @return the value of the {@code angleUp} field. */
     public float angleUp() { return nangleUp(address()); }
-    /** the angle of the bottom part of the field of view. For a symmetric field of view this value is negative. */
+    /** @return the value of the {@code angleDown} field. */
     public float angleDown() { return nangleDown(address()); }
 
-    /** Sets the specified value to the {@link #angleLeft} field. */
+    /** Sets the specified value to the {@code angleLeft} field. */
     public XrFovf angleLeft(float value) { nangleLeft(address(), value); return this; }
-    /** Sets the specified value to the {@link #angleRight} field. */
+    /** Sets the specified value to the {@code angleRight} field. */
     public XrFovf angleRight(float value) { nangleRight(address(), value); return this; }
-    /** Sets the specified value to the {@link #angleUp} field. */
+    /** Sets the specified value to the {@code angleUp} field. */
     public XrFovf angleUp(float value) { nangleUp(address(), value); return this; }
-    /** Sets the specified value to the {@link #angleDown} field. */
+    /** Sets the specified value to the {@code angleDown} field. */
     public XrFovf angleDown(float value) { nangleDown(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -311,22 +295,22 @@ public class XrFovf extends Struct<XrFovf> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFovf#angleLeft} field. */
+        /** @return the value of the {@code angleLeft} field. */
         public float angleLeft() { return XrFovf.nangleLeft(address()); }
-        /** @return the value of the {@link XrFovf#angleRight} field. */
+        /** @return the value of the {@code angleRight} field. */
         public float angleRight() { return XrFovf.nangleRight(address()); }
-        /** @return the value of the {@link XrFovf#angleUp} field. */
+        /** @return the value of the {@code angleUp} field. */
         public float angleUp() { return XrFovf.nangleUp(address()); }
-        /** @return the value of the {@link XrFovf#angleDown} field. */
+        /** @return the value of the {@code angleDown} field. */
         public float angleDown() { return XrFovf.nangleDown(address()); }
 
-        /** Sets the specified value to the {@link XrFovf#angleLeft} field. */
+        /** Sets the specified value to the {@code angleLeft} field. */
         public XrFovf.Buffer angleLeft(float value) { XrFovf.nangleLeft(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFovf#angleRight} field. */
+        /** Sets the specified value to the {@code angleRight} field. */
         public XrFovf.Buffer angleRight(float value) { XrFovf.nangleRight(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFovf#angleUp} field. */
+        /** Sets the specified value to the {@code angleUp} field. */
         public XrFovf.Buffer angleUp(float value) { XrFovf.nangleUp(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFovf#angleDown} field. */
+        /** Sets the specified value to the {@code angleDown} field. */
         public XrFovf.Buffer angleDown(float value) { XrFovf.nangleDown(address(), value); return this; }
 
     }

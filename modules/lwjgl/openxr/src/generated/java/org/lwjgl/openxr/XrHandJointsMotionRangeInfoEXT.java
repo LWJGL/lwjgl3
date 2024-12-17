@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Chains to XrHandJointsLocateInfoEXT to specify final hand tracking grip pose.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTHandJointsMotionRange XR_EXT_hand_joints_motion_range} extension <b>must</b> be enabled prior to using {@link XrHandJointsMotionRangeInfoEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTHandJointsMotionRange#XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code handJointsMotionRange} <b>must</b> be a valid {@code XrHandJointsMotionRangeEXT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandJointsLocateInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandJointsMotionRangeInfoEXT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrHandJointsMotionRangeEXT {@link #handJointsMotionRange};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrHandJointsMotionRangeEXT handJointsMotionRange;
+ * }}</pre>
  */
 public class XrHandJointsMotionRangeInfoEXT extends Struct<XrHandJointsMotionRangeInfoEXT> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class XrHandJointsMotionRangeInfoEXT extends Struct<XrHandJointsMotionRan
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrHandJointsMotionRangeEXT} that defines the hand joint range of motion the application wants. */
+    /** @return the value of the {@code handJointsMotionRange} field. */
     @NativeType("XrHandJointsMotionRangeEXT")
     public int handJointsMotionRange() { return nhandJointsMotionRange(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHandJointsMotionRangeInfoEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTHandJointsMotionRange#XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTHandJointsMotionRange#XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT} value to the {@code type} field. */
     public XrHandJointsMotionRangeInfoEXT type$Default() { return type(EXTHandJointsMotionRange.XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHandJointsMotionRangeInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #handJointsMotionRange} field. */
+    /** Sets the specified value to the {@code handJointsMotionRange} field. */
     public XrHandJointsMotionRangeInfoEXT handJointsMotionRange(@NativeType("XrHandJointsMotionRangeEXT") int value) { nhandJointsMotionRange(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,23 +286,23 @@ public class XrHandJointsMotionRangeInfoEXT extends Struct<XrHandJointsMotionRan
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHandJointsMotionRangeInfoEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandJointsMotionRangeInfoEXT.ntype(address()); }
-        /** @return the value of the {@link XrHandJointsMotionRangeInfoEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHandJointsMotionRangeInfoEXT.nnext(address()); }
-        /** @return the value of the {@link XrHandJointsMotionRangeInfoEXT#handJointsMotionRange} field. */
+        /** @return the value of the {@code handJointsMotionRange} field. */
         @NativeType("XrHandJointsMotionRangeEXT")
         public int handJointsMotionRange() { return XrHandJointsMotionRangeInfoEXT.nhandJointsMotionRange(address()); }
 
-        /** Sets the specified value to the {@link XrHandJointsMotionRangeInfoEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHandJointsMotionRangeInfoEXT.Buffer type(@NativeType("XrStructureType") int value) { XrHandJointsMotionRangeInfoEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTHandJointsMotionRange#XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT} value to the {@link XrHandJointsMotionRangeInfoEXT#type} field. */
+        /** Sets the {@link EXTHandJointsMotionRange#XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT} value to the {@code type} field. */
         public XrHandJointsMotionRangeInfoEXT.Buffer type$Default() { return type(EXTHandJointsMotionRange.XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT); }
-        /** Sets the specified value to the {@link XrHandJointsMotionRangeInfoEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHandJointsMotionRangeInfoEXT.Buffer next(@NativeType("void const *") long value) { XrHandJointsMotionRangeInfoEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHandJointsMotionRangeInfoEXT#handJointsMotionRange} field. */
+        /** Sets the specified value to the {@code handJointsMotionRange} field. */
         public XrHandJointsMotionRangeInfoEXT.Buffer handJointsMotionRange(@NativeType("XrHandJointsMotionRangeEXT") int value) { XrHandJointsMotionRangeInfoEXT.nhandJointsMotionRange(address(), value); return this; }
 
     }

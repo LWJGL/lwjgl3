@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying quantization map texel size for video session parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkExtent2D VkExtent2D} {@link #quantizationMapTexelSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkExtent2D VkExtent2D} quantizationMapTexelSize;
+ * }}</pre>
  */
 public class VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR extends Struct<VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR> implements NativeResource {
 
@@ -88,24 +74,24 @@ public class VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR extends 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-quantization-map-texel-size">quantization map texel size</a> a video session parameters object created with {@link KHRVideoEncodeQuantizationMap#VK_VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR VIDEO_SESSION_PARAMETERS_CREATE_QUANTIZATION_MAP_COMPATIBLE_BIT_KHR} is compatible with. */
+    /** @return a {@link VkExtent2D} view of the {@code quantizationMapTexelSize} field. */
     public VkExtent2D quantizationMapTexelSize() { return nquantizationMapTexelSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #quantizationMapTexelSize} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@code quantizationMapTexelSize} field. */
     public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR quantizationMapTexelSize(VkExtent2D value) { nquantizationMapTexelSize(address(), value); return this; }
-    /** Passes the {@link #quantizationMapTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code quantizationMapTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR quantizationMapTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(quantizationMapTexelSize()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -301,24 +287,24 @@ public class VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR extends 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.npNext(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR#quantizationMapTexelSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@code quantizationMapTexelSize} field. */
         public VkExtent2D quantizationMapTexelSize() { return VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.nquantizationMapTexelSize(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@link VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_ENCODE_QUANTIZATION_MAP_SESSION_PARAMETERS_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR#quantizationMapTexelSize} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@code quantizationMapTexelSize} field. */
         public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.Buffer quantizationMapTexelSize(VkExtent2D value) { VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.nquantizationMapTexelSize(address(), value); return this; }
-        /** Passes the {@link VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR#quantizationMapTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code quantizationMapTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR.Buffer quantizationMapTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(quantizationMapTexelSize()); return this; }
 
     }

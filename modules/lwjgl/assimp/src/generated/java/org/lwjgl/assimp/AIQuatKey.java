@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A time-value pair specifying a rotation for the given time. Rotations are expressed with quaternions.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiQuatKey {
- *     double {@link #mTime};
- *     {@link AIQuaternion struct aiQuaternion} {@link #mValue};
- *     aiAnimInterpolation {@link #mInterpolation};
- * }</code></pre>
+ *     double mTime;
+ *     {@link AIQuaternion struct aiQuaternion} mValue;
+ *     aiAnimInterpolation mInterpolation;
+ * }}</pre>
  */
 @NativeType("struct aiQuatKey")
 public class AIQuatKey extends Struct<AIQuatKey> implements NativeResource {
@@ -79,22 +75,22 @@ public class AIQuatKey extends Struct<AIQuatKey> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** The time of this key */
+    /** @return the value of the {@code mTime} field. */
     public double mTime() { return nmTime(address()); }
-    /** The value of this key */
+    /** @return a {@link AIQuaternion} view of the {@code mValue} field. */
     @NativeType("struct aiQuaternion")
     public AIQuaternion mValue() { return nmValue(address()); }
-    /** The interpolation setting of this key */
+    /** @return the value of the {@code mInterpolation} field. */
     @NativeType("aiAnimInterpolation")
     public int mInterpolation() { return nmInterpolation(address()); }
 
-    /** Sets the specified value to the {@link #mTime} field. */
+    /** Sets the specified value to the {@code mTime} field. */
     public AIQuatKey mTime(double value) { nmTime(address(), value); return this; }
-    /** Copies the specified {@link AIQuaternion} to the {@link #mValue} field. */
+    /** Copies the specified {@link AIQuaternion} to the {@code mValue} field. */
     public AIQuatKey mValue(@NativeType("struct aiQuaternion") AIQuaternion value) { nmValue(address(), value); return this; }
-    /** Passes the {@link #mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AIQuatKey mValue(java.util.function.Consumer<AIQuaternion> consumer) { consumer.accept(mValue()); return this; }
-    /** Sets the specified value to the {@link #mInterpolation} field. */
+    /** Sets the specified value to the {@code mInterpolation} field. */
     public AIQuatKey mInterpolation(@NativeType("aiAnimInterpolation") int value) { nmInterpolation(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,22 +305,22 @@ public class AIQuatKey extends Struct<AIQuatKey> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AIQuatKey#mTime} field. */
+        /** @return the value of the {@code mTime} field. */
         public double mTime() { return AIQuatKey.nmTime(address()); }
-        /** @return a {@link AIQuaternion} view of the {@link AIQuatKey#mValue} field. */
+        /** @return a {@link AIQuaternion} view of the {@code mValue} field. */
         @NativeType("struct aiQuaternion")
         public AIQuaternion mValue() { return AIQuatKey.nmValue(address()); }
-        /** @return the value of the {@link AIQuatKey#mInterpolation} field. */
+        /** @return the value of the {@code mInterpolation} field. */
         @NativeType("aiAnimInterpolation")
         public int mInterpolation() { return AIQuatKey.nmInterpolation(address()); }
 
-        /** Sets the specified value to the {@link AIQuatKey#mTime} field. */
+        /** Sets the specified value to the {@code mTime} field. */
         public AIQuatKey.Buffer mTime(double value) { AIQuatKey.nmTime(address(), value); return this; }
-        /** Copies the specified {@link AIQuaternion} to the {@link AIQuatKey#mValue} field. */
+        /** Copies the specified {@link AIQuaternion} to the {@code mValue} field. */
         public AIQuatKey.Buffer mValue(@NativeType("struct aiQuaternion") AIQuaternion value) { AIQuatKey.nmValue(address(), value); return this; }
-        /** Passes the {@link AIQuatKey#mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mValue} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AIQuatKey.Buffer mValue(java.util.function.Consumer<AIQuaternion> consumer) { consumer.accept(mValue()); return this; }
-        /** Sets the specified value to the {@link AIQuatKey#mInterpolation} field. */
+        /** Sets the specified value to the {@code mInterpolation} field. */
         public AIQuatKey.Buffer mInterpolation(@NativeType("aiAnimInterpolation") int value) { AIQuatKey.nmInterpolation(address(), value); return this; }
 
     }

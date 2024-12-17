@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     ALenum source,
- *     ALenum type,
- *     ALuint id,
- *     ALenum severity,
- *     ALsizei length,
- *     ALchar const *message,
- *     ALvoid *userParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ALDEBUGPROCEXT} */
 @FunctionalInterface
 @NativeType("ALDEBUGPROCEXT")
 public interface EXTDebugProcI extends CallbackI {
@@ -52,6 +39,7 @@ public interface EXTDebugProcI extends CallbackI {
         );
     }
 
+    /** {@code void (* ALDEBUGPROCEXT) (ALenum source, ALenum type, ALuint id, ALenum severity, ALsizei length, ALchar const * message, ALvoid * userParam)} */
     void invoke(@NativeType("ALenum") int source, @NativeType("ALenum") int type, @NativeType("ALuint") int id, @NativeType("ALenum") int severity, @NativeType("ALsizei") int length, @NativeType("ALchar const *") long message, @NativeType("ALvoid *") long userParam);
 
 }

@@ -11,14 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     void *arg
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_DebugHook_Func} */
 public abstract class FT_DebugHook_Func extends Callback implements FT_DebugHook_FuncI {
 
     /**

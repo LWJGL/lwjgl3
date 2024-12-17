@@ -16,42 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the image view for handle queries.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code descriptorType} <b>must</b> be {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, or {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}</li>
- * <li>{@code sampler} <b>must</b> be a valid {@code VkSampler} if {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}</li>
- * <li>If descriptorType is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} or {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, the image that {@code imageView} was created from <b>must</b> have been created with the {@link VK10#VK_IMAGE_USAGE_SAMPLED_BIT IMAGE_USAGE_SAMPLED_BIT} usage bit set</li>
- * <li>If descriptorType is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, the image that {@code imageView} was created from <b>must</b> have been created with the {@link VK10#VK_IMAGE_USAGE_STORAGE_BIT IMAGE_USAGE_STORAGE_BIT} usage bit set</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
- * <li>{@code descriptorType} <b>must</b> be a valid {@code VkDescriptorType} value</li>
- * <li>If {@code sampler} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code sampler} <b>must</b> be a valid {@code VkSampler} handle</li>
- * <li>Both of {@code imageView}, and {@code sampler} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVXImageViewHandle#vkGetImageViewHandle64NVX GetImageViewHandle64NVX}, {@link NVXImageViewHandle#vkGetImageViewHandleNVX GetImageViewHandleNVX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageViewHandleInfoNVX {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImageView {@link #imageView};
- *     VkDescriptorType {@link #descriptorType};
- *     VkSampler {@link #sampler};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImageView imageView;
+ *     VkDescriptorType descriptorType;
+ *     VkSampler sampler;
+ * }}</pre>
  */
 public class VkImageViewHandleInfoNVX extends Struct<VkImageViewHandleInfoNVX> implements NativeResource {
 
@@ -110,33 +82,33 @@ public class VkImageViewHandleInfoNVX extends Struct<VkImageViewHandleInfoNVX> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the image view to query. */
+    /** @return the value of the {@code imageView} field. */
     @NativeType("VkImageView")
     public long imageView() { return nimageView(address()); }
-    /** the type of descriptor for which to query a handle. */
+    /** @return the value of the {@code descriptorType} field. */
     @NativeType("VkDescriptorType")
     public int descriptorType() { return ndescriptorType(address()); }
-    /** the sampler to combine with the image view when generating the handle. */
+    /** @return the value of the {@code sampler} field. */
     @NativeType("VkSampler")
     public long sampler() { return nsampler(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageViewHandleInfoNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX} value to the {@link #sType} field. */
+    /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX} value to the {@code sType} field. */
     public VkImageViewHandleInfoNVX sType$Default() { return sType(NVXImageViewHandle.VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageViewHandleInfoNVX pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageView} field. */
+    /** Sets the specified value to the {@code imageView} field. */
     public VkImageViewHandleInfoNVX imageView(@NativeType("VkImageView") long value) { nimageView(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorType} field. */
+    /** Sets the specified value to the {@code descriptorType} field. */
     public VkImageViewHandleInfoNVX descriptorType(@NativeType("VkDescriptorType") int value) { ndescriptorType(address(), value); return this; }
-    /** Sets the specified value to the {@link #sampler} field. */
+    /** Sets the specified value to the {@code sampler} field. */
     public VkImageViewHandleInfoNVX sampler(@NativeType("VkSampler") long value) { nsampler(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -363,33 +335,33 @@ public class VkImageViewHandleInfoNVX extends Struct<VkImageViewHandleInfoNVX> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageViewHandleInfoNVX#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageViewHandleInfoNVX.nsType(address()); }
-        /** @return the value of the {@link VkImageViewHandleInfoNVX#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageViewHandleInfoNVX.npNext(address()); }
-        /** @return the value of the {@link VkImageViewHandleInfoNVX#imageView} field. */
+        /** @return the value of the {@code imageView} field. */
         @NativeType("VkImageView")
         public long imageView() { return VkImageViewHandleInfoNVX.nimageView(address()); }
-        /** @return the value of the {@link VkImageViewHandleInfoNVX#descriptorType} field. */
+        /** @return the value of the {@code descriptorType} field. */
         @NativeType("VkDescriptorType")
         public int descriptorType() { return VkImageViewHandleInfoNVX.ndescriptorType(address()); }
-        /** @return the value of the {@link VkImageViewHandleInfoNVX#sampler} field. */
+        /** @return the value of the {@code sampler} field. */
         @NativeType("VkSampler")
         public long sampler() { return VkImageViewHandleInfoNVX.nsampler(address()); }
 
-        /** Sets the specified value to the {@link VkImageViewHandleInfoNVX#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageViewHandleInfoNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkImageViewHandleInfoNVX.nsType(address(), value); return this; }
-        /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX} value to the {@link VkImageViewHandleInfoNVX#sType} field. */
+        /** Sets the {@link NVXImageViewHandle#VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX} value to the {@code sType} field. */
         public VkImageViewHandleInfoNVX.Buffer sType$Default() { return sType(NVXImageViewHandle.VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX); }
-        /** Sets the specified value to the {@link VkImageViewHandleInfoNVX#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageViewHandleInfoNVX.Buffer pNext(@NativeType("void const *") long value) { VkImageViewHandleInfoNVX.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewHandleInfoNVX#imageView} field. */
+        /** Sets the specified value to the {@code imageView} field. */
         public VkImageViewHandleInfoNVX.Buffer imageView(@NativeType("VkImageView") long value) { VkImageViewHandleInfoNVX.nimageView(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewHandleInfoNVX#descriptorType} field. */
+        /** Sets the specified value to the {@code descriptorType} field. */
         public VkImageViewHandleInfoNVX.Buffer descriptorType(@NativeType("VkDescriptorType") int value) { VkImageViewHandleInfoNVX.ndescriptorType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageViewHandleInfoNVX#sampler} field. */
+        /** Sets the specified value to the {@code sampler} field. */
         public VkImageViewHandleInfoNVX.Buffer sampler(@NativeType("VkSampler") long value) { VkImageViewHandleInfoNVX.nsampler(address(), value); return this; }
 
     }

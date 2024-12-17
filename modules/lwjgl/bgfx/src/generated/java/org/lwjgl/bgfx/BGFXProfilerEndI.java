@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Profiler region end.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     bgfx_callback_interface_t *_this
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (bgfx_callback_interface_t *)")
 public interface BGFXProfilerEndI extends CallbackI {
@@ -42,13 +33,7 @@ public interface BGFXProfilerEndI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when a profiler region ends.
-     * 
-     * <p>Not thread safe and it can be called from any thread.</p>
-     *
-     * @param _this the callback interface
-     */
+    /** {@code void (*) (bgfx_callback_interface_t * _this)} */
     void invoke(@NativeType("bgfx_callback_interface_t *") long _this);
 
 }

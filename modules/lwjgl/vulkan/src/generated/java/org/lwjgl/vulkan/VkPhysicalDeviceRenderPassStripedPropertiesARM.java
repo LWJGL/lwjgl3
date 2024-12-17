@@ -16,31 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing striped rendering limits of an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceRenderPassStripedPropertiesARM} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceRenderPassStripedPropertiesARM {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkExtent2D VkExtent2D} {@link #renderPassStripeGranularity};
- *     uint32_t {@link #maxRenderPassStripes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkExtent2D VkExtent2D} renderPassStripeGranularity;
+ *     uint32_t maxRenderPassStripes;
+ * }}</pre>
  */
 public class VkPhysicalDeviceRenderPassStripedPropertiesARM extends Struct<VkPhysicalDeviceRenderPassStripedPropertiesARM> implements NativeResource {
 
@@ -96,23 +78,23 @@ public class VkPhysicalDeviceRenderPassStripedPropertiesARM extends Struct<VkPhy
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the minimum supported granularity of striped render pass regions. */
+    /** @return a {@link VkExtent2D} view of the {@code renderPassStripeGranularity} field. */
     public VkExtent2D renderPassStripeGranularity() { return nrenderPassStripeGranularity(address()); }
-    /** indicates the maximum number of stripes supported in striped rendering. */
+    /** @return the value of the {@code maxRenderPassStripes} field. */
     @NativeType("uint32_t")
     public int maxRenderPassStripes() { return nmaxRenderPassStripes(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceRenderPassStripedPropertiesARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM} value to the {@link #sType} field. */
+    /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM} value to the {@code sType} field. */
     public VkPhysicalDeviceRenderPassStripedPropertiesARM sType$Default() { return sType(ARMRenderPassStriped.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceRenderPassStripedPropertiesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +288,23 @@ public class VkPhysicalDeviceRenderPassStripedPropertiesARM extends Struct<VkPhy
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceRenderPassStripedPropertiesARM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceRenderPassStripedPropertiesARM.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRenderPassStripedPropertiesARM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRenderPassStripedPropertiesARM.npNext(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkPhysicalDeviceRenderPassStripedPropertiesARM#renderPassStripeGranularity} field. */
+        /** @return a {@link VkExtent2D} view of the {@code renderPassStripeGranularity} field. */
         public VkExtent2D renderPassStripeGranularity() { return VkPhysicalDeviceRenderPassStripedPropertiesARM.nrenderPassStripeGranularity(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRenderPassStripedPropertiesARM#maxRenderPassStripes} field. */
+        /** @return the value of the {@code maxRenderPassStripes} field. */
         @NativeType("uint32_t")
         public int maxRenderPassStripes() { return VkPhysicalDeviceRenderPassStripedPropertiesARM.nmaxRenderPassStripes(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceRenderPassStripedPropertiesARM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceRenderPassStripedPropertiesARM.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRenderPassStripedPropertiesARM.nsType(address(), value); return this; }
-        /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM} value to the {@link VkPhysicalDeviceRenderPassStripedPropertiesARM#sType} field. */
+        /** Sets the {@link ARMRenderPassStriped#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM} value to the {@code sType} field. */
         public VkPhysicalDeviceRenderPassStripedPropertiesARM.Buffer sType$Default() { return sType(ARMRenderPassStriped.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRenderPassStripedPropertiesARM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceRenderPassStripedPropertiesARM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRenderPassStripedPropertiesARM.npNext(address(), value); return this; }
 
     }

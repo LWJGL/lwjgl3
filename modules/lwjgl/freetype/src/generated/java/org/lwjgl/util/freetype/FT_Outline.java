@@ -16,19 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * This structure is used to describe an outline to the scan-line converter.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Outline {
- *     unsigned short {@link #n_contours};
- *     unsigned short {@link #n_points};
- *     {@link FT_Vector FT_Vector} * {@link #points};
- *     unsigned char * {@link #tags};
- *     unsigned short * {@link #contours};
- *     int {@link #flags};
- * }</code></pre>
+ *     unsigned short n_contours;
+ *     unsigned short n_points;
+ *     {@link FT_Vector FT_Vector} * points;
+ *     unsigned char * tags;
+ *     unsigned short * contours;
+ *     int flags;
+ * }}</pre>
  */
 public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
 
@@ -90,22 +86,22 @@ public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** number of contours in glyph */
+    /** @return the value of the {@code n_contours} field. */
     @NativeType("unsigned short")
     public short n_contours() { return nn_contours(address()); }
-    /** number of points in the glyph */
+    /** @return the value of the {@code n_points} field. */
     @NativeType("unsigned short")
     public short n_points() { return nn_points(address()); }
-    /** the outline's points */
+    /** @return a {@link FT_Vector.Buffer} view of the struct array pointed to by the {@code points} field. */
     @NativeType("FT_Vector *")
     public FT_Vector.Buffer points() { return npoints(address()); }
-    /** the points flags */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code tags} field. */
     @NativeType("unsigned char *")
     public ByteBuffer tags() { return ntags(address()); }
-    /** the contour end points */
+    /** @return a {@link ShortBuffer} view of the data pointed to by the {@code contours} field. */
     @NativeType("unsigned short *")
     public ShortBuffer contours() { return ncontours(address()); }
-    /** outline masks */
+    /** @return the value of the {@code flags} field. */
     public int flags() { return nflags(address()); }
 
     // -----------------------------------
@@ -275,22 +271,22 @@ public class FT_Outline extends Struct<FT_Outline> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link FT_Outline#n_contours} field. */
+        /** @return the value of the {@code n_contours} field. */
         @NativeType("unsigned short")
         public short n_contours() { return FT_Outline.nn_contours(address()); }
-        /** @return the value of the {@link FT_Outline#n_points} field. */
+        /** @return the value of the {@code n_points} field. */
         @NativeType("unsigned short")
         public short n_points() { return FT_Outline.nn_points(address()); }
-        /** @return a {@link FT_Vector.Buffer} view of the struct array pointed to by the {@link FT_Outline#points} field. */
+        /** @return a {@link FT_Vector.Buffer} view of the struct array pointed to by the {@code points} field. */
         @NativeType("FT_Vector *")
         public FT_Vector.Buffer points() { return FT_Outline.npoints(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link FT_Outline#tags} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code tags} field. */
         @NativeType("unsigned char *")
         public ByteBuffer tags() { return FT_Outline.ntags(address()); }
-        /** @return a {@link ShortBuffer} view of the data pointed to by the {@link FT_Outline#contours} field. */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@code contours} field. */
         @NativeType("unsigned short *")
         public ShortBuffer contours() { return FT_Outline.ncontours(address()); }
-        /** @return the value of the {@link FT_Outline#flags} field. */
+        /** @return the value of the {@code flags} field. */
         public int flags() { return FT_Outline.nflags(address()); }
 
     }

@@ -17,78 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created device.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The {@code queueFamilyIndex} member of each element of {@code pQueueCreateInfos} <b>must</b> be unique within {@code pQueueCreateInfos} , except that two members can share the same {@code queueFamilyIndex} if one describes protected-capable queues and one describes queues that are not protected-capable</li>
- * <li>If multiple elements of {@code pQueueCreateInfos} share the same {@code queueFamilyIndex}, the sum of their {@code queueCount} members <b>must</b> be less than or equal to the {@code queueCount} member of the {@link VkQueueFamilyProperties} structure, as returned by {@code vkGetPhysicalDeviceQueueFamilyProperties} in the {@code pQueueFamilyProperties}[queueFamilyIndex]</li>
- * <li>If multiple elements of {@code pQueueCreateInfos} share the same {@code queueFamilyIndex}, then all of such elements <b>must</b> have the same global priority level, which <b>can</b> be specified explicitly by the including a {@link VkDeviceQueueGlobalPriorityCreateInfo} structure in the {@code pNext} chain, or by the implicit default value</li>
- * <li>If the {@code pNext} chain includes a {@link VkPhysicalDeviceFeatures2} structure, then {@code pEnabledFeatures} <b>must</b> be {@code NULL}</li>
- * <li>If {@link VkPhysicalDeviceProperties}{@code ::apiVersion} advertises Vulkan 1.1 or later, {@code ppEnabledExtensionNames} <b>must</b> not contain {@link AMDNegativeViewportHeight VK_AMD_negative_viewport_height}</li>
- * <li>{@code ppEnabledExtensionNames} <b>must</b> not contain both {@link KHRMaintenance1 VK_KHR_maintenance1} and {@link AMDNegativeViewportHeight VK_AMD_negative_viewport_height}</li>
- * <li>{@code ppEnabledExtensionNames} <b>must</b> not contain both {@link KHRBufferDeviceAddress VK_KHR_buffer_device_address} and {@link EXTBufferDeviceAddress VK_EXT_buffer_device_address}</li>
- * <li>If the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan12Features} structure and {@link VkPhysicalDeviceVulkan12Features}{@code ::bufferDeviceAddress} is {@link VK10#VK_TRUE TRUE}, {@code ppEnabledExtensionNames} <b>must</b> not contain {@link EXTBufferDeviceAddress VK_EXT_buffer_device_address}</li>
- * <li>If the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan11Features} structure, then it <b>must</b> not include a {@link VkPhysicalDevice16BitStorageFeatures}, {@link VkPhysicalDeviceMultiviewFeatures}, {@link VkPhysicalDeviceVariablePointersFeatures}, {@link VkPhysicalDeviceProtectedMemoryFeatures}, {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures}, or {@link VkPhysicalDeviceShaderDrawParametersFeatures} structure</li>
- * <li>If the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan12Features} structure, then it <b>must</b> not include a {@link VkPhysicalDevice8BitStorageFeatures}, {@link VkPhysicalDeviceShaderAtomicInt64Features}, {@link VkPhysicalDeviceShaderFloat16Int8Features}, {@link VkPhysicalDeviceDescriptorIndexingFeatures}, {@link VkPhysicalDeviceScalarBlockLayoutFeatures}, {@link VkPhysicalDeviceImagelessFramebufferFeatures}, {@link VkPhysicalDeviceUniformBufferStandardLayoutFeatures}, {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures}, {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures}, {@link VkPhysicalDeviceHostQueryResetFeatures}, {@link VkPhysicalDeviceTimelineSemaphoreFeatures}, {@link VkPhysicalDeviceBufferDeviceAddressFeatures}, or {@link VkPhysicalDeviceVulkanMemoryModelFeatures} structure</li>
- * <li>If {@code ppEnabledExtensionNames} contains {@code "VK_KHR_shader_draw_parameters"} and the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan11Features} structure, then {@link VkPhysicalDeviceVulkan11Features}{@code ::shaderDrawParameters} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
- * <li>If {@code ppEnabledExtensionNames} contains {@code "VK_KHR_draw_indirect_count"} and the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan12Features} structure, then {@link VkPhysicalDeviceVulkan12Features}{@code ::drawIndirectCount} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
- * <li>If {@code ppEnabledExtensionNames} contains {@code "VK_KHR_sampler_mirror_clamp_to_edge"} and the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan12Features} structure, then {@link VkPhysicalDeviceVulkan12Features}{@code ::samplerMirrorClampToEdge} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
- * <li>If {@code ppEnabledExtensionNames} contains {@code "VK_EXT_descriptor_indexing"} and the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan12Features} structure, then {@link VkPhysicalDeviceVulkan12Features}{@code ::descriptorIndexing} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
- * <li>If {@code ppEnabledExtensionNames} contains {@code "VK_EXT_sampler_filter_minmax"} and the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan12Features} structure, then {@link VkPhysicalDeviceVulkan12Features}{@code ::samplerFilterMinmax} <b>must</b> be {@link VK10#VK_TRUE TRUE}</li>
- * <li>If {@code ppEnabledExtensionNames} contains {@code "VK_EXT_shader_viewport_index_layer"} and the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan12Features} structure, then {@link VkPhysicalDeviceVulkan12Features}{@code ::shaderOutputViewportIndex} and {@link VkPhysicalDeviceVulkan12Features}{@code ::shaderOutputLayer} <b>must</b> both be {@link VK10#VK_TRUE TRUE}</li>
- * <li>If the {@code pNext} chain includes a {@link VkPhysicalDeviceVulkan13Features} structure, then it <b>must</b> not include a {@link VkPhysicalDeviceDynamicRenderingFeatures}, {@link VkPhysicalDeviceImageRobustnessFeatures}, {@link VkPhysicalDeviceInlineUniformBlockFeatures}, {@link VkPhysicalDeviceMaintenance4Features}, {@link VkPhysicalDevicePipelineCreationCacheControlFeatures}, {@link VkPhysicalDevicePrivateDataFeatures}, {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures}, {@link VkPhysicalDeviceShaderIntegerDotProductFeatures}, {@link VkPhysicalDeviceShaderTerminateInvocationFeatures}, {@link VkPhysicalDeviceSubgroupSizeControlFeatures}, {@link VkPhysicalDeviceSynchronization2Features}, {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures}, or {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures} structure</li>
- * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is included in {@code pProperties} of {@link VK10#vkEnumerateDeviceExtensionProperties EnumerateDeviceExtensionProperties}, {@code ppEnabledExtensionNames} <b>must</b> include {@code "VK_KHR_portability_subset"}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shadingRateImage">{@code shadingRateImage}</a> feature is enabled, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> feature <b>must</b> not be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shadingRateImage">{@code shadingRateImage}</a> feature is enabled, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a> feature <b>must</b> not be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shadingRateImage">{@code shadingRateImage}</a> feature is enabled, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature <b>must</b> not be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is enabled, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineFragmentShadingRate">{@code pipelineFragmentShadingRate}</a> feature <b>must</b> not be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is enabled, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-primitiveFragmentShadingRate">{@code primitiveFragmentShadingRate}</a> feature <b>must</b> not be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-fragmentDensityMap">{@code fragmentDensityMap}</a> feature is enabled, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-attachmentFragmentShadingRate">{@code attachmentFragmentShadingRate}</a> feature <b>must</b> not be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-sparseImageInt64Atomics">{@code sparseImageInt64Atomics}</a> feature is enabled, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderImageInt64Atomics">{@code shaderImageInt64Atomics}</a> <b>must</b> be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-sparseImageFloat32Atomics">{@code sparseImageFloat32Atomics}</a> feature is enabled, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderImageFloat32Atomics">{@code shaderImageFloat32Atomics}</a> <b>must</b> be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-sparseImageFloat32AtomicAdd">{@code sparseImageFloat32AtomicAdd}</a> feature is enabled, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderImageFloat32AtomicAdd">{@code shaderImageFloat32AtomicAdd}</a> <b>must</b> be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-sparseImageFloat32AtomicMinMax">{@code sparseImageFloat32AtomicMinMax}</a> feature is enabled, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderImageFloat32AtomicMinMax">{@code shaderImageFloat32AtomicMinMax}</a> <b>must</b> be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is enabled, and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-robustBufferAccessUpdateAfterBind">{@code robustBufferAccessUpdateAfterBind}</a> is {@link VK10#VK_FALSE FALSE}, then <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBindingUniformBufferUpdateAfterBind">{@code descriptorBindingUniformBufferUpdateAfterBind}</a>, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBindingStorageBufferUpdateAfterBind">{@code descriptorBindingStorageBufferUpdateAfterBind}</a>, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBindingUniformTexelBufferUpdateAfterBind">{@code descriptorBindingUniformTexelBufferUpdateAfterBind}</a>, and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBindingStorageTexelBufferUpdateAfterBind">{@code descriptorBindingStorageTexelBufferUpdateAfterBind}</a> <b>must</b> not be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorBuffer">{@code descriptorBuffer}</a> feature is enabled, {@code ppEnabledExtensionNames} <b>must</b> not contain {@link AMDShaderFragmentMask VK_AMD_shader_fragment_mask}</li>
- * <li>If the {@code pNext} chain includes a {@link VkDeviceQueueShaderCoreControlCreateInfoARM} structure, then it <b>must</b> not be included in the {@code pNext} chain of any of the {@link VkDeviceQueueCreateInfo} structures in {@code pQueueCreateInfos}</li>
- * <li>If the {@code pNext} chain includes a {@link VkDeviceQueueShaderCoreControlCreateInfoARM} structure then {@link VkPhysicalDeviceSchedulingControlsPropertiesARM}{@code ::schedulingControlsFlags} <b>must</b> contain {@link ARMSchedulingControls#VK_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM PHYSICAL_DEVICE_SCHEDULING_CONTROLS_SHADER_CORE_COUNT_ARM}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDeviceDeviceMemoryReportCreateInfoEXT}, {@link VkDeviceDiagnosticsConfigCreateInfoNV}, {@link VkDeviceGroupDeviceCreateInfo}, {@link VkDeviceMemoryOverallocationCreateInfoAMD}, {@link VkDevicePipelineBinaryInternalCacheControlKHR}, {@link VkDevicePrivateDataCreateInfo}, {@link VkDeviceQueueShaderCoreControlCreateInfoARM}, {@link VkPhysicalDevice16BitStorageFeatures}, {@link VkPhysicalDevice4444FormatsFeaturesEXT}, {@link VkPhysicalDevice8BitStorageFeatures}, {@link VkPhysicalDeviceASTCDecodeFeaturesEXT}, {@link VkPhysicalDeviceAccelerationStructureFeaturesKHR}, {@link VkPhysicalDeviceAddressBindingReportFeaturesEXT}, {@link VkPhysicalDeviceAmigoProfilingFeaturesSEC}, {@link VkPhysicalDeviceAntiLagFeaturesAMD}, {@link VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT}, {@link VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT}, {@link VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT}, {@link VkPhysicalDeviceBorderColorSwizzleFeaturesEXT}, {@link VkPhysicalDeviceBufferDeviceAddressFeatures}, {@link VkPhysicalDeviceBufferDeviceAddressFeaturesEXT}, {@link VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI}, {@link VkPhysicalDeviceCoherentMemoryFeaturesAMD}, {@link VkPhysicalDeviceColorWriteEnableFeaturesEXT}, {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV}, {@link VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR}, {@link VkPhysicalDeviceConditionalRenderingFeaturesEXT}, {@link VkPhysicalDeviceCooperativeMatrix2FeaturesNV}, {@link VkPhysicalDeviceCooperativeMatrixFeaturesKHR}, {@link VkPhysicalDeviceCooperativeMatrixFeaturesNV}, {@link VkPhysicalDeviceCopyMemoryIndirectFeaturesNV}, {@link VkPhysicalDeviceCornerSampledImageFeaturesNV}, {@link VkPhysicalDeviceCoverageReductionModeFeaturesNV}, {@link VkPhysicalDeviceCubicClampFeaturesQCOM}, {@link VkPhysicalDeviceCubicWeightsFeaturesQCOM}, {@link VkPhysicalDeviceCudaKernelLaunchFeaturesNV}, {@link VkPhysicalDeviceCustomBorderColorFeaturesEXT}, {@link VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV}, {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT}, {@link VkPhysicalDeviceDepthClampControlFeaturesEXT}, {@link VkPhysicalDeviceDepthClampZeroOneFeaturesEXT}, {@link VkPhysicalDeviceDepthClipControlFeaturesEXT}, {@link VkPhysicalDeviceDepthClipEnableFeaturesEXT}, {@link VkPhysicalDeviceDescriptorBufferFeaturesEXT}, {@link VkPhysicalDeviceDescriptorIndexingFeatures}, {@link VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV}, {@link VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE}, {@link VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV}, {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT}, {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV}, {@link VkPhysicalDeviceDeviceMemoryReportFeaturesEXT}, {@link VkPhysicalDeviceDiagnosticsConfigFeaturesNV}, {@link VkPhysicalDeviceDisplacementMicromapFeaturesNV}, {@link VkPhysicalDeviceDynamicRenderingFeatures}, {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures}, {@link VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT}, {@link VkPhysicalDeviceExclusiveScissorFeaturesNV}, {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT}, {@link VkPhysicalDeviceExtendedDynamicState3FeaturesEXT}, {@link VkPhysicalDeviceExtendedDynamicStateFeaturesEXT}, {@link VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV}, {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID}, {@link VkPhysicalDeviceExternalMemoryRDMAFeaturesNV}, {@link VkPhysicalDeviceFaultFeaturesEXT}, {@link VkPhysicalDeviceFeatures2}, {@link VkPhysicalDeviceFragmentDensityMap2FeaturesEXT}, {@link VkPhysicalDeviceFragmentDensityMapFeaturesEXT}, {@link VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM}, {@link VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR}, {@link VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT}, {@link VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV}, {@link VkPhysicalDeviceFragmentShadingRateFeaturesKHR}, {@link VkPhysicalDeviceFrameBoundaryFeaturesEXT}, {@link VkPhysicalDeviceGlobalPriorityQueryFeatures}, {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT}, {@link VkPhysicalDeviceHdrVividFeaturesHUAWEI}, {@link VkPhysicalDeviceHostImageCopyFeatures}, {@link VkPhysicalDeviceHostQueryResetFeatures}, {@link VkPhysicalDeviceImage2DViewOf3DFeaturesEXT}, {@link VkPhysicalDeviceImageAlignmentControlFeaturesMESA}, {@link VkPhysicalDeviceImageCompressionControlFeaturesEXT}, {@link VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT}, {@link VkPhysicalDeviceImageProcessing2FeaturesQCOM}, {@link VkPhysicalDeviceImageProcessingFeaturesQCOM}, {@link VkPhysicalDeviceImageRobustnessFeatures}, {@link VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT}, {@link VkPhysicalDeviceImageViewMinLodFeaturesEXT}, {@link VkPhysicalDeviceImagelessFramebufferFeatures}, {@link VkPhysicalDeviceIndexTypeUint8Features}, {@link VkPhysicalDeviceInheritedViewportScissorFeaturesNV}, {@link VkPhysicalDeviceInlineUniformBlockFeatures}, {@link VkPhysicalDeviceInvocationMaskFeaturesHUAWEI}, {@link VkPhysicalDeviceLegacyDitheringFeaturesEXT}, {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT}, {@link VkPhysicalDeviceLineRasterizationFeatures}, {@link VkPhysicalDeviceLinearColorAttachmentFeaturesNV}, {@link VkPhysicalDeviceMaintenance4Features}, {@link VkPhysicalDeviceMaintenance5Features}, {@link VkPhysicalDeviceMaintenance6Features}, {@link VkPhysicalDeviceMaintenance7FeaturesKHR}, {@link VkPhysicalDeviceMapMemoryPlacedFeaturesEXT}, {@link VkPhysicalDeviceMemoryDecompressionFeaturesNV}, {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT}, {@link VkPhysicalDeviceMeshShaderFeaturesEXT}, {@link VkPhysicalDeviceMeshShaderFeaturesNV}, {@link VkPhysicalDeviceMultiDrawFeaturesEXT}, {@link VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT}, {@link VkPhysicalDeviceMultiviewFeatures}, {@link VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM}, {@link VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM}, {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT}, {@link VkPhysicalDeviceNestedCommandBufferFeaturesEXT}, {@link VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT}, {@link VkPhysicalDeviceOpacityMicromapFeaturesEXT}, {@link VkPhysicalDeviceOpticalFlowFeaturesNV}, {@link VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT}, {@link VkPhysicalDevicePerStageDescriptorSetFeaturesNV}, {@link VkPhysicalDevicePerformanceQueryFeaturesKHR}, {@link VkPhysicalDevicePipelineBinaryFeaturesKHR}, {@link VkPhysicalDevicePipelineCreationCacheControlFeatures}, {@link VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR}, {@link VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT}, {@link VkPhysicalDevicePipelinePropertiesFeaturesEXT}, {@link VkPhysicalDevicePipelineProtectedAccessFeatures}, {@link VkPhysicalDevicePipelineRobustnessFeatures}, {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}, {@link VkPhysicalDevicePresentBarrierFeaturesNV}, {@link VkPhysicalDevicePresentIdFeaturesKHR}, {@link VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT}, {@link VkPhysicalDevicePresentWaitFeaturesKHR}, {@link VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT}, {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT}, {@link VkPhysicalDevicePrivateDataFeatures}, {@link VkPhysicalDeviceProtectedMemoryFeatures}, {@link VkPhysicalDeviceProvokingVertexFeaturesEXT}, {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT}, {@link VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT}, {@link VkPhysicalDeviceRawAccessChainsFeaturesNV}, {@link VkPhysicalDeviceRayQueryFeaturesKHR}, {@link VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV}, {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR}, {@link VkPhysicalDeviceRayTracingMotionBlurFeaturesNV}, {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR}, {@link VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR}, {@link VkPhysicalDeviceRayTracingValidationFeaturesNV}, {@link VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG}, {@link VkPhysicalDeviceRenderPassStripedFeaturesARM}, {@link VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV}, {@link VkPhysicalDeviceRobustness2FeaturesEXT}, {@link VkPhysicalDeviceSamplerYcbcrConversionFeatures}, {@link VkPhysicalDeviceScalarBlockLayoutFeatures}, {@link VkPhysicalDeviceSchedulingControlsFeaturesARM}, {@link VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures}, {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV}, {@link VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT}, {@link VkPhysicalDeviceShaderAtomicFloatFeaturesEXT}, {@link VkPhysicalDeviceShaderAtomicInt64Features}, {@link VkPhysicalDeviceShaderClockFeaturesKHR}, {@link VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM}, {@link VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures}, {@link VkPhysicalDeviceShaderDrawParametersFeatures}, {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD}, {@link VkPhysicalDeviceShaderEnqueueFeaturesAMDX}, {@link VkPhysicalDeviceShaderExpectAssumeFeatures}, {@link VkPhysicalDeviceShaderFloat16Int8Features}, {@link VkPhysicalDeviceShaderFloatControls2Features}, {@link VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT}, {@link VkPhysicalDeviceShaderImageFootprintFeaturesNV}, {@link VkPhysicalDeviceShaderIntegerDotProductFeatures}, {@link VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL}, {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR}, {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT}, {@link VkPhysicalDeviceShaderObjectFeaturesEXT}, {@link VkPhysicalDeviceShaderQuadControlFeaturesKHR}, {@link VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR}, {@link VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT}, {@link VkPhysicalDeviceShaderSMBuiltinsFeaturesNV}, {@link VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures}, {@link VkPhysicalDeviceShaderSubgroupRotateFeatures}, {@link VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR}, {@link VkPhysicalDeviceShaderTerminateInvocationFeatures}, {@link VkPhysicalDeviceShaderTileImageFeaturesEXT}, {@link VkPhysicalDeviceShadingRateImageFeaturesNV}, {@link VkPhysicalDeviceSubgroupSizeControlFeatures}, {@link VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT}, {@link VkPhysicalDeviceSubpassShadingFeaturesHUAWEI}, {@link VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT}, {@link VkPhysicalDeviceSynchronization2Features}, {@link VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT}, {@link VkPhysicalDeviceTextureCompressionASTCHDRFeatures}, {@link VkPhysicalDeviceTilePropertiesFeaturesQCOM}, {@link VkPhysicalDeviceTimelineSemaphoreFeatures}, {@link VkPhysicalDeviceTransformFeedbackFeaturesEXT}, {@link VkPhysicalDeviceUniformBufferStandardLayoutFeatures}, {@link VkPhysicalDeviceVariablePointersFeatures}, {@link VkPhysicalDeviceVertexAttributeDivisorFeatures}, {@link VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT}, {@link VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT}, {@link VkPhysicalDeviceVideoEncodeAV1FeaturesKHR}, {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR}, {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR}, {@link VkPhysicalDeviceVulkan11Features}, {@link VkPhysicalDeviceVulkan12Features}, {@link VkPhysicalDeviceVulkan13Features}, {@link VkPhysicalDeviceVulkan14Features}, {@link VkPhysicalDeviceVulkanMemoryModelFeatures}, {@link VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR}, {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT}, {@link VkPhysicalDeviceYcbcrDegammaFeaturesQCOM}, {@link VkPhysicalDeviceYcbcrImageArraysFeaturesEXT}, or {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkDeviceDeviceMemoryReportCreateInfoEXT} or {@link VkDevicePrivateDataCreateInfo}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code pQueueCreateInfos} <b>must</b> be a valid pointer to an array of {@code queueCreateInfoCount} valid {@link VkDeviceQueueCreateInfo} structures</li>
- * <li>If {@code enabledLayerCount} is not 0, {@code ppEnabledLayerNames} <b>must</b> be a valid pointer to an array of {@code enabledLayerCount} null-terminated UTF-8 strings</li>
- * <li>If {@code enabledExtensionCount} is not 0, {@code ppEnabledExtensionNames} <b>must</b> be a valid pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings</li>
- * <li>If {@code pEnabledFeatures} is not {@code NULL}, {@code pEnabledFeatures} <b>must</b> be a valid pointer to a valid {@link VkPhysicalDeviceFeatures} structure</li>
- * <li>{@code queueCreateInfoCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceQueueCreateInfo}, {@link VkPhysicalDeviceFeatures}, {@link VK10#vkCreateDevice CreateDevice}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceCreateFlags {@link #flags};
- *     uint32_t {@link #queueCreateInfoCount};
- *     {@link VkDeviceQueueCreateInfo VkDeviceQueueCreateInfo} const * {@link #pQueueCreateInfos};
- *     uint32_t {@link #enabledLayerCount};
- *     char const * const * {@link #ppEnabledLayerNames};
- *     uint32_t {@link #enabledExtensionCount};
- *     char const * const * {@link #ppEnabledExtensionNames};
- *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} const * {@link #pEnabledFeatures};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceCreateFlags flags;
+ *     uint32_t queueCreateInfoCount;
+ *     {@link VkDeviceQueueCreateInfo VkDeviceQueueCreateInfo} const * pQueueCreateInfos;
+ *     uint32_t enabledLayerCount;
+ *     char const * const * ppEnabledLayerNames;
+ *     uint32_t enabledExtensionCount;
+ *     char const * const * ppEnabledExtensionNames;
+ *     {@link VkPhysicalDeviceFeatures VkPhysicalDeviceFeatures} const * pEnabledFeatures;
+ * }}</pre>
  */
 public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements NativeResource {
 
@@ -162,42 +103,42 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkDeviceCreateFlags")
     public int flags() { return nflags(address()); }
-    /** the unsigned integer size of the {@code pQueueCreateInfos} array. Refer to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-queue-creation">Queue Creation</a> section below for further details. */
+    /** @return the value of the {@code queueCreateInfoCount} field. */
     @NativeType("uint32_t")
     public int queueCreateInfoCount() { return nqueueCreateInfoCount(address()); }
-    /** a pointer to an array of {@link VkDeviceQueueCreateInfo} structures describing the queues that are requested to be created along with the logical device. Refer to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-queue-creation">Queue Creation</a> section below for further details. */
+    /** @return a {@link VkDeviceQueueCreateInfo.Buffer} view of the struct array pointed to by the {@code pQueueCreateInfos} field. */
     @NativeType("VkDeviceQueueCreateInfo const *")
     public VkDeviceQueueCreateInfo.Buffer pQueueCreateInfos() { return npQueueCreateInfos(address()); }
-    /** deprecated and ignored. */
+    /** @return the value of the {@code enabledLayerCount} field. */
     @NativeType("uint32_t")
     public int enabledLayerCount() { return nenabledLayerCount(address()); }
-    /** deprecated and ignored. See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#extendingvulkan-layers-devicelayerdeprecation">Device Layer Deprecation</a>. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledLayerNames} field. */
     @NativeType("char const * const *")
     public @Nullable PointerBuffer ppEnabledLayerNames() { return nppEnabledLayerNames(address()); }
-    /** the number of device extensions to enable. */
+    /** @return the value of the {@code enabledExtensionCount} field. */
     @NativeType("uint32_t")
     public int enabledExtensionCount() { return nenabledExtensionCount(address()); }
-    /** a pointer to an array of {@code enabledExtensionCount} null-terminated UTF-8 strings containing the names of extensions to enable for the created device. See the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#extendingvulkan-extensions">Extensions</a> section for further details. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledExtensionNames} field. */
     @NativeType("char const * const *")
     public @Nullable PointerBuffer ppEnabledExtensionNames() { return nppEnabledExtensionNames(address()); }
-    /** {@code NULL} or a pointer to a {@link VkPhysicalDeviceFeatures} structure containing boolean indicators of all the features to be enabled. Refer to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features">Features</a> section for further details. */
+    /** @return a {@link VkPhysicalDeviceFeatures} view of the struct pointed to by the {@code pEnabledFeatures} field. */
     @NativeType("VkPhysicalDeviceFeatures const *")
     public @Nullable VkPhysicalDeviceFeatures pEnabledFeatures() { return npEnabledFeatures(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_CREATE_INFO} value to the {@code sType} field. */
     public VkDeviceCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDeviceDeviceMemoryReportCreateInfoEXT} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkDeviceDeviceMemoryReportCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -739,15 +680,15 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} value to the {@code pNext} chain. */
     public VkDeviceCreateInfo pNext(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkDeviceCreateInfo flags(@NativeType("VkDeviceCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@link #pQueueCreateInfos} field. */
+    /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@code pQueueCreateInfos} field. */
     public VkDeviceCreateInfo pQueueCreateInfos(@NativeType("VkDeviceQueueCreateInfo const *") VkDeviceQueueCreateInfo.Buffer value) { npQueueCreateInfos(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppEnabledLayerNames} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledLayerNames} field. */
     public VkDeviceCreateInfo ppEnabledLayerNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { nppEnabledLayerNames(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #ppEnabledExtensionNames} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledExtensionNames} field. */
     public VkDeviceCreateInfo ppEnabledExtensionNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { nppEnabledExtensionNames(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPhysicalDeviceFeatures} to the {@link #pEnabledFeatures} field. */
+    /** Sets the address of the specified {@link VkPhysicalDeviceFeatures} to the {@code pEnabledFeatures} field. */
     public VkDeviceCreateInfo pEnabledFeatures(@Nullable @NativeType("VkPhysicalDeviceFeatures const *") VkPhysicalDeviceFeatures value) { npEnabledFeatures(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -1016,42 +957,42 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkDeviceCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkDeviceCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkDeviceCreateFlags")
         public int flags() { return VkDeviceCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkDeviceCreateInfo#queueCreateInfoCount} field. */
+        /** @return the value of the {@code queueCreateInfoCount} field. */
         @NativeType("uint32_t")
         public int queueCreateInfoCount() { return VkDeviceCreateInfo.nqueueCreateInfoCount(address()); }
-        /** @return a {@link VkDeviceQueueCreateInfo.Buffer} view of the struct array pointed to by the {@link VkDeviceCreateInfo#pQueueCreateInfos} field. */
+        /** @return a {@link VkDeviceQueueCreateInfo.Buffer} view of the struct array pointed to by the {@code pQueueCreateInfos} field. */
         @NativeType("VkDeviceQueueCreateInfo const *")
         public VkDeviceQueueCreateInfo.Buffer pQueueCreateInfos() { return VkDeviceCreateInfo.npQueueCreateInfos(address()); }
-        /** @return the value of the {@link VkDeviceCreateInfo#enabledLayerCount} field. */
+        /** @return the value of the {@code enabledLayerCount} field. */
         @NativeType("uint32_t")
         public int enabledLayerCount() { return VkDeviceCreateInfo.nenabledLayerCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkDeviceCreateInfo#ppEnabledLayerNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledLayerNames} field. */
         @NativeType("char const * const *")
         public @Nullable PointerBuffer ppEnabledLayerNames() { return VkDeviceCreateInfo.nppEnabledLayerNames(address()); }
-        /** @return the value of the {@link VkDeviceCreateInfo#enabledExtensionCount} field. */
+        /** @return the value of the {@code enabledExtensionCount} field. */
         @NativeType("uint32_t")
         public int enabledExtensionCount() { return VkDeviceCreateInfo.nenabledExtensionCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link VkDeviceCreateInfo#ppEnabledExtensionNames} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code ppEnabledExtensionNames} field. */
         @NativeType("char const * const *")
         public @Nullable PointerBuffer ppEnabledExtensionNames() { return VkDeviceCreateInfo.nppEnabledExtensionNames(address()); }
-        /** @return a {@link VkPhysicalDeviceFeatures} view of the struct pointed to by the {@link VkDeviceCreateInfo#pEnabledFeatures} field. */
+        /** @return a {@link VkPhysicalDeviceFeatures} view of the struct pointed to by the {@code pEnabledFeatures} field. */
         @NativeType("VkPhysicalDeviceFeatures const *")
         public @Nullable VkPhysicalDeviceFeatures pEnabledFeatures() { return VkDeviceCreateInfo.npEnabledFeatures(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_CREATE_INFO} value to the {@link VkDeviceCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO STRUCTURE_TYPE_DEVICE_CREATE_INFO} value to the {@code sType} field. */
         public VkDeviceCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkDeviceCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDeviceDeviceMemoryReportCreateInfoEXT} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkDeviceDeviceMemoryReportCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -1593,15 +1534,15 @@ public class VkDeviceCreateInfo extends Struct<VkDeviceCreateInfo> implements Na
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR} value to the {@code pNext} chain. */
         public VkDeviceCreateInfo.Buffer pNext(VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkDeviceCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkDeviceCreateInfo.Buffer flags(@NativeType("VkDeviceCreateFlags") int value) { VkDeviceCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@link VkDeviceCreateInfo#pQueueCreateInfos} field. */
+        /** Sets the address of the specified {@link VkDeviceQueueCreateInfo.Buffer} to the {@code pQueueCreateInfos} field. */
         public VkDeviceCreateInfo.Buffer pQueueCreateInfos(@NativeType("VkDeviceQueueCreateInfo const *") VkDeviceQueueCreateInfo.Buffer value) { VkDeviceCreateInfo.npQueueCreateInfos(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkDeviceCreateInfo#ppEnabledLayerNames} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledLayerNames} field. */
         public VkDeviceCreateInfo.Buffer ppEnabledLayerNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { VkDeviceCreateInfo.nppEnabledLayerNames(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link VkDeviceCreateInfo#ppEnabledExtensionNames} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code ppEnabledExtensionNames} field. */
         public VkDeviceCreateInfo.Buffer ppEnabledExtensionNames(@Nullable @NativeType("char const * const *") PointerBuffer value) { VkDeviceCreateInfo.nppEnabledExtensionNames(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPhysicalDeviceFeatures} to the {@link VkDeviceCreateInfo#pEnabledFeatures} field. */
+        /** Sets the address of the specified {@link VkPhysicalDeviceFeatures} to the {@code pEnabledFeatures} field. */
         public VkDeviceCreateInfo.Buffer pEnabledFeatures(@Nullable @NativeType("VkPhysicalDeviceFeatures const *") VkPhysicalDeviceFeatures value) { VkDeviceCreateInfo.npEnabledFeatures(address(), value); return this; }
 
     }

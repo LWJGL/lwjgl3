@@ -19,16 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265SubLayerHrdParameters {
  *     uint32_t bit_rate_value_minus1[STD_VIDEO_H265_CPB_CNT_LIST_SIZE];
  *     uint32_t cpb_size_value_minus1[STD_VIDEO_H265_CPB_CNT_LIST_SIZE];
  *     uint32_t cpb_size_du_value_minus1[STD_VIDEO_H265_CPB_CNT_LIST_SIZE];
  *     uint32_t bit_rate_du_value_minus1[STD_VIDEO_H265_CPB_CNT_LIST_SIZE];
- *     uint32_t {@link #cbr_flag};
- * }</code></pre>
+ *     uint32_t cbr_flag;
+ * }}</pre>
  */
 public class StdVideoH265SubLayerHrdParameters extends Struct<StdVideoH265SubLayerHrdParameters> implements NativeResource {
 
@@ -111,7 +109,7 @@ public class StdVideoH265SubLayerHrdParameters extends Struct<StdVideoH265SubLay
     /** @return the value at the specified index of the {@code bit_rate_du_value_minus1} field. */
     @NativeType("uint32_t")
     public int bit_rate_du_value_minus1(int index) { return nbit_rate_du_value_minus1(address(), index); }
-    /** each bit represents a range of CpbCounts (bit 0 - cpb_cnt_minus1) per sub-layer */
+    /** @return the value of the {@code cbr_flag} field. */
     @NativeType("uint32_t")
     public int cbr_flag() { return ncbr_flag(address()); }
 
@@ -131,7 +129,7 @@ public class StdVideoH265SubLayerHrdParameters extends Struct<StdVideoH265SubLay
     public StdVideoH265SubLayerHrdParameters bit_rate_du_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { nbit_rate_du_value_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code bit_rate_du_value_minus1} field. */
     public StdVideoH265SubLayerHrdParameters bit_rate_du_value_minus1(int index, @NativeType("uint32_t") int value) { nbit_rate_du_value_minus1(address(), index, value); return this; }
-    /** Sets the specified value to the {@link #cbr_flag} field. */
+    /** Sets the specified value to the {@code cbr_flag} field. */
     public StdVideoH265SubLayerHrdParameters cbr_flag(@NativeType("uint32_t") int value) { ncbr_flag(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -407,7 +405,7 @@ public class StdVideoH265SubLayerHrdParameters extends Struct<StdVideoH265SubLay
         /** @return the value at the specified index of the {@code bit_rate_du_value_minus1} field. */
         @NativeType("uint32_t")
         public int bit_rate_du_value_minus1(int index) { return StdVideoH265SubLayerHrdParameters.nbit_rate_du_value_minus1(address(), index); }
-        /** @return the value of the {@link StdVideoH265SubLayerHrdParameters#cbr_flag} field. */
+        /** @return the value of the {@code cbr_flag} field. */
         @NativeType("uint32_t")
         public int cbr_flag() { return StdVideoH265SubLayerHrdParameters.ncbr_flag(address()); }
 
@@ -427,7 +425,7 @@ public class StdVideoH265SubLayerHrdParameters extends Struct<StdVideoH265SubLay
         public StdVideoH265SubLayerHrdParameters.Buffer bit_rate_du_value_minus1(@NativeType("uint32_t[STD_VIDEO_H265_CPB_CNT_LIST_SIZE]") IntBuffer value) { StdVideoH265SubLayerHrdParameters.nbit_rate_du_value_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code bit_rate_du_value_minus1} field. */
         public StdVideoH265SubLayerHrdParameters.Buffer bit_rate_du_value_minus1(int index, @NativeType("uint32_t") int value) { StdVideoH265SubLayerHrdParameters.nbit_rate_du_value_minus1(address(), index, value); return this; }
-        /** Sets the specified value to the {@link StdVideoH265SubLayerHrdParameters#cbr_flag} field. */
+        /** Sets the specified value to the {@code cbr_flag} field. */
         public StdVideoH265SubLayerHrdParameters.Buffer cbr_flag(@NativeType("uint32_t") int value) { StdVideoH265SubLayerHrdParameters.ncbr_flag(address(), value); return this; }
 
     }

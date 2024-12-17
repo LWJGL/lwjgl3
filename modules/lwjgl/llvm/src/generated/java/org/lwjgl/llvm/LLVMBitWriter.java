@@ -37,7 +37,7 @@ public class LLVMBitWriter {
 
     // --- [ LLVMWriteBitcodeToFile ] ---
 
-    /** Unsafe version of: {@link #LLVMWriteBitcodeToFile WriteBitcodeToFile} */
+    /** {@code int LLVMWriteBitcodeToFile(LLVMModuleRef M, char const * Path)} */
     public static int nLLVMWriteBitcodeToFile(long M, long Path) {
         long __functionAddress = Functions.WriteBitcodeToFile;
         if (CHECKS) {
@@ -46,7 +46,7 @@ public class LLVMBitWriter {
         return invokePPI(M, Path, __functionAddress);
     }
 
-    /** Writes a module to the specified path. Returns 0 on success. */
+    /** {@code int LLVMWriteBitcodeToFile(LLVMModuleRef M, char const * Path)} */
     public static int LLVMWriteBitcodeToFile(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Path) {
         if (CHECKS) {
             checkNT1(Path);
@@ -54,7 +54,7 @@ public class LLVMBitWriter {
         return nLLVMWriteBitcodeToFile(M, memAddress(Path));
     }
 
-    /** Writes a module to the specified path. Returns 0 on success. */
+    /** {@code int LLVMWriteBitcodeToFile(LLVMModuleRef M, char const * Path)} */
     public static int LLVMWriteBitcodeToFile(@NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Path) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -68,7 +68,7 @@ public class LLVMBitWriter {
 
     // --- [ LLVMWriteBitcodeToFD ] ---
 
-    /** Writes a module to an open file descriptor. Returns 0 on success. */
+    /** {@code int LLVMWriteBitcodeToFD(LLVMModuleRef M, int FD, int ShouldClose, int Unbuffered)} */
     public static int LLVMWriteBitcodeToFD(@NativeType("LLVMModuleRef") long M, int FD, int ShouldClose, int Unbuffered) {
         long __functionAddress = Functions.WriteBitcodeToFD;
         if (CHECKS) {
@@ -79,7 +79,7 @@ public class LLVMBitWriter {
 
     // --- [ LLVMWriteBitcodeToFileHandle ] ---
 
-    /** Deprecated for {@link #LLVMWriteBitcodeToFD WriteBitcodeToFD}. Writes a module to an open file descriptor. Returns 0 on success. Closes the {@code Handle}. */
+    /** {@code int LLVMWriteBitcodeToFileHandle(LLVMModuleRef M, int Handle)} */
     public static int LLVMWriteBitcodeToFileHandle(@NativeType("LLVMModuleRef") long M, int Handle) {
         long __functionAddress = Functions.WriteBitcodeToFileHandle;
         if (CHECKS) {
@@ -90,7 +90,7 @@ public class LLVMBitWriter {
 
     // --- [ LLVMWriteBitcodeToMemoryBuffer ] ---
 
-    /** Writes a module to a new memory buffer and returns it. */
+    /** {@code LLVMMemoryBufferRef LLVMWriteBitcodeToMemoryBuffer(LLVMModuleRef M)} */
     @NativeType("LLVMMemoryBufferRef")
     public static long LLVMWriteBitcodeToMemoryBuffer(@NativeType("LLVMModuleRef") long M) {
         long __functionAddress = Functions.WriteBitcodeToMemoryBuffer;

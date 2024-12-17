@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDeviceGroupBindSparseInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceGroupBindSparseInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t resourceDeviceIndex;
  *     uint32_t memoryDeviceIndex;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDeviceGroupBindSparseInfoKHR extends VkDeviceGroupBindSparseInfo {
 

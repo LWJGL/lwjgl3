@@ -16,24 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Meshlet is a small mesh cluster (subset) that consists of:
- * 
- * <ul>
- * <li>triangles, an 8-bit micro triangle (index) buffer, that for each triangle specifies three local vertices to use;</li>
- * <li>vertices, a 32-bit vertex indirection buffer, that for each local vertex specifies which mesh vertex to fetch vertex attributes from.</li>
- * </ul>
- * 
- * <p>For efficiency, meshlet triangles and vertices are packed into two large arrays; this structure contains offsets and counts to access the data.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct meshopt_Meshlet {
- *     unsigned int {@link #vertex_offset};
- *     unsigned int {@link #triangle_offset};
- *     unsigned int {@link #vertex_count};
- *     unsigned int {@link #triangle_count};
- * }</code></pre>
+ *     unsigned int vertex_offset;
+ *     unsigned int triangle_offset;
+ *     unsigned int vertex_count;
+ *     unsigned int triangle_count;
+ * }}</pre>
  */
 @NativeType("struct meshopt_Meshlet")
 public class MeshoptMeshlet extends Struct<MeshoptMeshlet> implements NativeResource {
@@ -90,16 +79,16 @@ public class MeshoptMeshlet extends Struct<MeshoptMeshlet> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** offset within {@code meshlet_vertices} array with meshlet data */
+    /** @return the value of the {@code vertex_offset} field. */
     @NativeType("unsigned int")
     public int vertex_offset() { return nvertex_offset(address()); }
-    /** offset within {@code meshlet_triangles} array with meshlet data */
+    /** @return the value of the {@code triangle_offset} field. */
     @NativeType("unsigned int")
     public int triangle_offset() { return ntriangle_offset(address()); }
-    /** number of vertices used in the meshlet; data is stored in consecutive range defined by offset and count */
+    /** @return the value of the {@code vertex_count} field. */
     @NativeType("unsigned int")
     public int vertex_count() { return nvertex_count(address()); }
-    /** number of triangles used in the meshlet; data is stored in consecutive range defined by offset and count */
+    /** @return the value of the {@code triangle_count} field. */
     @NativeType("unsigned int")
     public int triangle_count() { return ntriangle_count(address()); }
 
@@ -266,16 +255,16 @@ public class MeshoptMeshlet extends Struct<MeshoptMeshlet> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link MeshoptMeshlet#vertex_offset} field. */
+        /** @return the value of the {@code vertex_offset} field. */
         @NativeType("unsigned int")
         public int vertex_offset() { return MeshoptMeshlet.nvertex_offset(address()); }
-        /** @return the value of the {@link MeshoptMeshlet#triangle_offset} field. */
+        /** @return the value of the {@code triangle_offset} field. */
         @NativeType("unsigned int")
         public int triangle_offset() { return MeshoptMeshlet.ntriangle_offset(address()); }
-        /** @return the value of the {@link MeshoptMeshlet#vertex_count} field. */
+        /** @return the value of the {@code vertex_count} field. */
         @NativeType("unsigned int")
         public int vertex_count() { return MeshoptMeshlet.nvertex_count(address()); }
-        /** @return the value of the {@link MeshoptMeshlet#triangle_count} field. */
+        /** @return the value of the {@code triangle_count} field. */
         @NativeType("unsigned int")
         public int triangle_count() { return MeshoptMeshlet.ntriangle_count(address()); }
 

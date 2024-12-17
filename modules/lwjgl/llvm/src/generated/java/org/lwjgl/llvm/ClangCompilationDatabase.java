@@ -43,18 +43,6 @@ public class ClangCompilationDatabase {
 
     }
 
-    /**
-     * Error codes for Compilation Database
-     * 
-     * <p>({@code CXCompilationDatabase_Error})</p>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #CXCompilationDatabase_NoError CompilationDatabase_NoError} - No error occurred</li>
-     * <li>{@link #CXCompilationDatabase_CanNotLoadDatabase CompilationDatabase_CanNotLoadDatabase} - Database can not be loaded</li>
-     * </ul>
-     */
     public static final int
         CXCompilationDatabase_NoError            = 0,
         CXCompilationDatabase_CanNotLoadDatabase = 1;
@@ -65,18 +53,13 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompilationDatabase_fromDirectory ] ---
 
-    /** Unsafe version of: {@link #clang_CompilationDatabase_fromDirectory CompilationDatabase_fromDirectory} */
+    /** {@code CXCompilationDatabase clang_CompilationDatabase_fromDirectory(char const * BuildDir, CXCompilationDatabase_Error * ErrorCode)} */
     public static long nclang_CompilationDatabase_fromDirectory(long BuildDir, long ErrorCode) {
         long __functionAddress = Functions.CompilationDatabase_fromDirectory;
         return invokePPP(BuildDir, ErrorCode, __functionAddress);
     }
 
-    /**
-     * Creates a compilation database from the database found in directory buildDir. For example, CMake can output a compile_commands.json which can be used
-     * to build the database.
-     * 
-     * <p>It must be freed by {@code clang_CompilationDatabase_dispose}.</p>
-     */
+    /** {@code CXCompilationDatabase clang_CompilationDatabase_fromDirectory(char const * BuildDir, CXCompilationDatabase_Error * ErrorCode)} */
     @NativeType("CXCompilationDatabase")
     public static long clang_CompilationDatabase_fromDirectory(@NativeType("char const *") ByteBuffer BuildDir, @NativeType("CXCompilationDatabase_Error *") IntBuffer ErrorCode) {
         if (CHECKS) {
@@ -86,12 +69,7 @@ public class ClangCompilationDatabase {
         return nclang_CompilationDatabase_fromDirectory(memAddress(BuildDir), memAddress(ErrorCode));
     }
 
-    /**
-     * Creates a compilation database from the database found in directory buildDir. For example, CMake can output a compile_commands.json which can be used
-     * to build the database.
-     * 
-     * <p>It must be freed by {@code clang_CompilationDatabase_dispose}.</p>
-     */
+    /** {@code CXCompilationDatabase clang_CompilationDatabase_fromDirectory(char const * BuildDir, CXCompilationDatabase_Error * ErrorCode)} */
     @NativeType("CXCompilationDatabase")
     public static long clang_CompilationDatabase_fromDirectory(@NativeType("char const *") CharSequence BuildDir, @NativeType("CXCompilationDatabase_Error *") IntBuffer ErrorCode) {
         if (CHECKS) {
@@ -109,7 +87,7 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompilationDatabase_dispose ] ---
 
-    /** Free the given compilation database */
+    /** {@code void clang_CompilationDatabase_dispose(CXCompilationDatabase database)} */
     public static void clang_CompilationDatabase_dispose(@NativeType("CXCompilationDatabase") long database) {
         long __functionAddress = Functions.CompilationDatabase_dispose;
         if (CHECKS) {
@@ -120,7 +98,7 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompilationDatabase_getCompileCommands ] ---
 
-    /** Unsafe version of: {@link #clang_CompilationDatabase_getCompileCommands CompilationDatabase_getCompileCommands} */
+    /** {@code CXCompileCommands clang_CompilationDatabase_getCompileCommands(CXCompilationDatabase database, char const * CompleteFileName)} */
     public static long nclang_CompilationDatabase_getCompileCommands(long database, long CompleteFileName) {
         long __functionAddress = Functions.CompilationDatabase_getCompileCommands;
         if (CHECKS) {
@@ -129,7 +107,7 @@ public class ClangCompilationDatabase {
         return invokePPP(database, CompleteFileName, __functionAddress);
     }
 
-    /** Find the compile commands used for a file. The compile commands must be freed by {@code clang_CompileCommands_dispose}. */
+    /** {@code CXCompileCommands clang_CompilationDatabase_getCompileCommands(CXCompilationDatabase database, char const * CompleteFileName)} */
     @NativeType("CXCompileCommands")
     public static long clang_CompilationDatabase_getCompileCommands(@NativeType("CXCompilationDatabase") long database, @NativeType("char const *") ByteBuffer CompleteFileName) {
         if (CHECKS) {
@@ -138,7 +116,7 @@ public class ClangCompilationDatabase {
         return nclang_CompilationDatabase_getCompileCommands(database, memAddress(CompleteFileName));
     }
 
-    /** Find the compile commands used for a file. The compile commands must be freed by {@code clang_CompileCommands_dispose}. */
+    /** {@code CXCompileCommands clang_CompilationDatabase_getCompileCommands(CXCompilationDatabase database, char const * CompleteFileName)} */
     @NativeType("CXCompileCommands")
     public static long clang_CompilationDatabase_getCompileCommands(@NativeType("CXCompilationDatabase") long database, @NativeType("char const *") CharSequence CompleteFileName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -153,7 +131,7 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompilationDatabase_getAllCompileCommands ] ---
 
-    /** Get all the compile commands in the given compilation database. */
+    /** {@code CXCompileCommands clang_CompilationDatabase_getAllCompileCommands(CXCompilationDatabase database)} */
     @NativeType("CXCompileCommands")
     public static long clang_CompilationDatabase_getAllCompileCommands(@NativeType("CXCompilationDatabase") long database) {
         long __functionAddress = Functions.CompilationDatabase_getAllCompileCommands;
@@ -165,7 +143,7 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommands_dispose ] ---
 
-    /** Free the given CompileCommands */
+    /** {@code void clang_CompileCommands_dispose(CXCompileCommands commands)} */
     public static void clang_CompileCommands_dispose(@NativeType("CXCompileCommands") long commands) {
         long __functionAddress = Functions.CompileCommands_dispose;
         if (CHECKS) {
@@ -176,7 +154,7 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommands_getSize ] ---
 
-    /** Get the number of CompileCommand we have for a file */
+    /** {@code unsigned int clang_CompileCommands_getSize(CXCompileCommands commands)} */
     @NativeType("unsigned int")
     public static int clang_CompileCommands_getSize(@NativeType("CXCompileCommands") long commands) {
         long __functionAddress = Functions.CompileCommands_getSize;
@@ -188,11 +166,7 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommands_getCommand ] ---
 
-    /**
-     * Get the I'th CompileCommand for a file
-     * 
-     * <p>Note : 0 &lt;= i &lt;clang_CompileCommands_getSize(CXCompileCommands)</p>
-     */
+    /** {@code CXCompileCommand clang_CompileCommands_getCommand(CXCompileCommands commands, unsigned int I)} */
     @NativeType("CXCompileCommand")
     public static long clang_CompileCommands_getCommand(@NativeType("CXCompileCommands") long commands, @NativeType("unsigned int") int I) {
         long __functionAddress = Functions.CompileCommands_getCommand;
@@ -204,10 +178,10 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommand_getDirectory ] ---
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getDirectory CompileCommand_getDirectory} */
+    /** {@code CXString clang_CompileCommand_getDirectory(CXCompileCommand command)} */
     public static native void nclang_CompileCommand_getDirectory(long command, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getDirectory CompileCommand_getDirectory} */
+    /** {@code CXString clang_CompileCommand_getDirectory(CXCompileCommand command)} */
     public static void nclang_CompileCommand_getDirectory(long command, long __result) {
         long __functionAddress = Functions.CompileCommand_getDirectory;
         if (CHECKS) {
@@ -216,7 +190,7 @@ public class ClangCompilationDatabase {
         nclang_CompileCommand_getDirectory(command, __functionAddress, __result);
     }
 
-    /** Get the working directory where the CompileCommand was executed from */
+    /** {@code CXString clang_CompileCommand_getDirectory(CXCompileCommand command)} */
     public static CXString clang_CompileCommand_getDirectory(@NativeType("CXCompileCommand") long command, CXString __result) {
         nclang_CompileCommand_getDirectory(command, __result.address());
         return __result;
@@ -224,10 +198,10 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommand_getFilename ] ---
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getFilename CompileCommand_getFilename} */
+    /** {@code CXString clang_CompileCommand_getFilename(CXCompileCommand command)} */
     public static native void nclang_CompileCommand_getFilename(long command, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getFilename CompileCommand_getFilename} */
+    /** {@code CXString clang_CompileCommand_getFilename(CXCompileCommand command)} */
     public static void nclang_CompileCommand_getFilename(long command, long __result) {
         long __functionAddress = Functions.CompileCommand_getFilename;
         if (CHECKS) {
@@ -236,7 +210,7 @@ public class ClangCompilationDatabase {
         nclang_CompileCommand_getFilename(command, __functionAddress, __result);
     }
 
-    /** Get the filename associated with the CompileCommand. */
+    /** {@code CXString clang_CompileCommand_getFilename(CXCompileCommand command)} */
     public static CXString clang_CompileCommand_getFilename(@NativeType("CXCompileCommand") long command, CXString __result) {
         nclang_CompileCommand_getFilename(command, __result.address());
         return __result;
@@ -244,7 +218,7 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommand_getNumArgs ] ---
 
-    /** Get the number of arguments in the compiler invocation. */
+    /** {@code unsigned int clang_CompileCommand_getNumArgs(CXCompileCommand command)} */
     @NativeType("unsigned int")
     public static int clang_CompileCommand_getNumArgs(@NativeType("CXCompileCommand") long command) {
         long __functionAddress = Functions.CompileCommand_getNumArgs;
@@ -256,10 +230,10 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommand_getArg ] ---
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getArg CompileCommand_getArg} */
+    /** {@code CXString clang_CompileCommand_getArg(CXCompileCommand command, unsigned int I)} */
     public static native void nclang_CompileCommand_getArg(long command, int I, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getArg CompileCommand_getArg} */
+    /** {@code CXString clang_CompileCommand_getArg(CXCompileCommand command, unsigned int I)} */
     public static void nclang_CompileCommand_getArg(long command, int I, long __result) {
         long __functionAddress = Functions.CompileCommand_getArg;
         if (CHECKS) {
@@ -268,15 +242,7 @@ public class ClangCompilationDatabase {
         nclang_CompileCommand_getArg(command, I, __functionAddress, __result);
     }
 
-    /**
-     * Get the I'th argument value in the compiler invocations
-     * 
-     * <p>Invariant :</p>
-     * 
-     * <ul>
-     * <li>argument 0 is the compiler executable</li>
-     * </ul>
-     */
+    /** {@code CXString clang_CompileCommand_getArg(CXCompileCommand command, unsigned int I)} */
     public static CXString clang_CompileCommand_getArg(@NativeType("CXCompileCommand") long command, @NativeType("unsigned int") int I, CXString __result) {
         nclang_CompileCommand_getArg(command, I, __result.address());
         return __result;
@@ -284,7 +250,7 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommand_getNumMappedSources ] ---
 
-    /** Get the number of source mappings for the compiler invocation. */
+    /** {@code unsigned int clang_CompileCommand_getNumMappedSources(CXCompileCommand command)} */
     @NativeType("unsigned int")
     public static int clang_CompileCommand_getNumMappedSources(@NativeType("CXCompileCommand") long command) {
         long __functionAddress = Functions.CompileCommand_getNumMappedSources;
@@ -296,10 +262,10 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommand_getMappedSourcePath ] ---
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getMappedSourcePath CompileCommand_getMappedSourcePath} */
+    /** {@code CXString clang_CompileCommand_getMappedSourcePath(CXCompileCommand command, unsigned int I)} */
     public static native void nclang_CompileCommand_getMappedSourcePath(long command, int I, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getMappedSourcePath CompileCommand_getMappedSourcePath} */
+    /** {@code CXString clang_CompileCommand_getMappedSourcePath(CXCompileCommand command, unsigned int I)} */
     public static void nclang_CompileCommand_getMappedSourcePath(long command, int I, long __result) {
         long __functionAddress = Functions.CompileCommand_getMappedSourcePath;
         if (CHECKS) {
@@ -308,7 +274,7 @@ public class ClangCompilationDatabase {
         nclang_CompileCommand_getMappedSourcePath(command, I, __functionAddress, __result);
     }
 
-    /** Get the I'th mapped source path for the compiler invocation. */
+    /** {@code CXString clang_CompileCommand_getMappedSourcePath(CXCompileCommand command, unsigned int I)} */
     public static CXString clang_CompileCommand_getMappedSourcePath(@NativeType("CXCompileCommand") long command, @NativeType("unsigned int") int I, CXString __result) {
         nclang_CompileCommand_getMappedSourcePath(command, I, __result.address());
         return __result;
@@ -316,10 +282,10 @@ public class ClangCompilationDatabase {
 
     // --- [ clang_CompileCommand_getMappedSourceContent ] ---
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getMappedSourceContent CompileCommand_getMappedSourceContent} */
+    /** {@code CXString clang_CompileCommand_getMappedSourceContent(CXCompileCommand command, unsigned int I)} */
     public static native void nclang_CompileCommand_getMappedSourceContent(long command, int I, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #clang_CompileCommand_getMappedSourceContent CompileCommand_getMappedSourceContent} */
+    /** {@code CXString clang_CompileCommand_getMappedSourceContent(CXCompileCommand command, unsigned int I)} */
     public static void nclang_CompileCommand_getMappedSourceContent(long command, int I, long __result) {
         long __functionAddress = Functions.CompileCommand_getMappedSourceContent;
         if (CHECKS) {
@@ -328,7 +294,7 @@ public class ClangCompilationDatabase {
         nclang_CompileCommand_getMappedSourceContent(command, I, __functionAddress, __result);
     }
 
-    /** Get the I'th mapped source content for the compiler invocation. */
+    /** {@code CXString clang_CompileCommand_getMappedSourceContent(CXCompileCommand command, unsigned int I)} */
     public static CXString clang_CompileCommand_getMappedSourceContent(@NativeType("CXCompileCommand") long command, @NativeType("unsigned int") int I, CXString __result) {
         nclang_CompileCommand_getMappedSourceContent(command, I, __result.address());
         return __result;

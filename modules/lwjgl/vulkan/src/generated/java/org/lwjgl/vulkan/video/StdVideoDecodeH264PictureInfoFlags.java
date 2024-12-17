@@ -16,17 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoDecodeH264PictureInfoFlags {
- *     uint32_t {@link #field_pic_flag} : 1;
- *     uint32_t {@link #is_intra} : 1;
- *     uint32_t {@link #IdrPicFlag} : 1;
- *     uint32_t {@link #bottom_field_flag} : 1;
- *     uint32_t {@link #is_reference} : 1;
- *     uint32_t {@link #complementary_field_pair} : 1;
- * }</code></pre>
+ *     uint32_t field_pic_flag : 1;
+ *     uint32_t is_intra : 1;
+ *     uint32_t IdrPicFlag : 1;
+ *     uint32_t bottom_field_flag : 1;
+ *     uint32_t is_reference : 1;
+ *     uint32_t complementary_field_pair : 1;
+ * }}</pre>
  */
 public class StdVideoDecodeH264PictureInfoFlags extends Struct<StdVideoDecodeH264PictureInfoFlags> implements NativeResource {
 
@@ -73,36 +71,36 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct<StdVideoDecodeH26
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** is field picture */
+    /** @return the value of the {@code field_pic_flag} field. */
     @NativeType("uint32_t")
     public boolean field_pic_flag() { return nfield_pic_flag(address()) != 0; }
-    /** is intra picture */
+    /** @return the value of the {@code is_intra} field. */
     @NativeType("uint32_t")
     public boolean is_intra() { return nis_intra(address()) != 0; }
-    /** instantaneous decoding refresh (IDR) picture */
+    /** @return the value of the {@code IdrPicFlag} field. */
     @NativeType("uint32_t")
     public boolean IdrPicFlag() { return nIdrPicFlag(address()) != 0; }
-    /** bottom (true) or top (false) field if field_pic_flag is set */
+    /** @return the value of the {@code bottom_field_flag} field. */
     @NativeType("uint32_t")
     public boolean bottom_field_flag() { return nbottom_field_flag(address()) != 0; }
-    /** this only applies to picture info, and not to the DPB lists */
+    /** @return the value of the {@code is_reference} field. */
     @NativeType("uint32_t")
     public boolean is_reference() { return nis_reference(address()) != 0; }
-    /** complementary field pair, complementary non-reference field pair, complementary reference field pair */
+    /** @return the value of the {@code complementary_field_pair} field. */
     @NativeType("uint32_t")
     public boolean complementary_field_pair() { return ncomplementary_field_pair(address()) != 0; }
 
-    /** Sets the specified value to the {@link #field_pic_flag} field. */
+    /** Sets the specified value to the {@code field_pic_flag} field. */
     public StdVideoDecodeH264PictureInfoFlags field_pic_flag(@NativeType("uint32_t") boolean value) { nfield_pic_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #is_intra} field. */
+    /** Sets the specified value to the {@code is_intra} field. */
     public StdVideoDecodeH264PictureInfoFlags is_intra(@NativeType("uint32_t") boolean value) { nis_intra(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #IdrPicFlag} field. */
+    /** Sets the specified value to the {@code IdrPicFlag} field. */
     public StdVideoDecodeH264PictureInfoFlags IdrPicFlag(@NativeType("uint32_t") boolean value) { nIdrPicFlag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #bottom_field_flag} field. */
+    /** Sets the specified value to the {@code bottom_field_flag} field. */
     public StdVideoDecodeH264PictureInfoFlags bottom_field_flag(@NativeType("uint32_t") boolean value) { nbottom_field_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #is_reference} field. */
+    /** Sets the specified value to the {@code is_reference} field. */
     public StdVideoDecodeH264PictureInfoFlags is_reference(@NativeType("uint32_t") boolean value) { nis_reference(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #complementary_field_pair} field. */
+    /** Sets the specified value to the {@code complementary_field_pair} field. */
     public StdVideoDecodeH264PictureInfoFlags complementary_field_pair(@NativeType("uint32_t") boolean value) { ncomplementary_field_pair(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,36 +316,36 @@ public class StdVideoDecodeH264PictureInfoFlags extends Struct<StdVideoDecodeH26
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#field_pic_flag} field. */
+        /** @return the value of the {@code field_pic_flag} field. */
         @NativeType("uint32_t")
         public boolean field_pic_flag() { return StdVideoDecodeH264PictureInfoFlags.nfield_pic_flag(address()) != 0; }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#is_intra} field. */
+        /** @return the value of the {@code is_intra} field. */
         @NativeType("uint32_t")
         public boolean is_intra() { return StdVideoDecodeH264PictureInfoFlags.nis_intra(address()) != 0; }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#IdrPicFlag} field. */
+        /** @return the value of the {@code IdrPicFlag} field. */
         @NativeType("uint32_t")
         public boolean IdrPicFlag() { return StdVideoDecodeH264PictureInfoFlags.nIdrPicFlag(address()) != 0; }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#bottom_field_flag} field. */
+        /** @return the value of the {@code bottom_field_flag} field. */
         @NativeType("uint32_t")
         public boolean bottom_field_flag() { return StdVideoDecodeH264PictureInfoFlags.nbottom_field_flag(address()) != 0; }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#is_reference} field. */
+        /** @return the value of the {@code is_reference} field. */
         @NativeType("uint32_t")
         public boolean is_reference() { return StdVideoDecodeH264PictureInfoFlags.nis_reference(address()) != 0; }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfoFlags#complementary_field_pair} field. */
+        /** @return the value of the {@code complementary_field_pair} field. */
         @NativeType("uint32_t")
         public boolean complementary_field_pair() { return StdVideoDecodeH264PictureInfoFlags.ncomplementary_field_pair(address()) != 0; }
 
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#field_pic_flag} field. */
+        /** Sets the specified value to the {@code field_pic_flag} field. */
         public StdVideoDecodeH264PictureInfoFlags.Buffer field_pic_flag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nfield_pic_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#is_intra} field. */
+        /** Sets the specified value to the {@code is_intra} field. */
         public StdVideoDecodeH264PictureInfoFlags.Buffer is_intra(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nis_intra(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#IdrPicFlag} field. */
+        /** Sets the specified value to the {@code IdrPicFlag} field. */
         public StdVideoDecodeH264PictureInfoFlags.Buffer IdrPicFlag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nIdrPicFlag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#bottom_field_flag} field. */
+        /** Sets the specified value to the {@code bottom_field_flag} field. */
         public StdVideoDecodeH264PictureInfoFlags.Buffer bottom_field_flag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nbottom_field_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#is_reference} field. */
+        /** Sets the specified value to the {@code is_reference} field. */
         public StdVideoDecodeH264PictureInfoFlags.Buffer is_reference(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.nis_reference(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfoFlags#complementary_field_pair} field. */
+        /** Sets the specified value to the {@code complementary_field_pair} field. */
         public StdVideoDecodeH264PictureInfoFlags.Buffer complementary_field_pair(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264PictureInfoFlags.ncomplementary_field_pair(address(), value ? 1 : 0); return this; }
 
     }

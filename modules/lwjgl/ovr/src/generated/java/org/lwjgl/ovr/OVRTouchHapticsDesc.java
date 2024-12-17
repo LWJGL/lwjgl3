@@ -16,19 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the Touch Haptics engine.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrTouchHapticsDesc {
- *     int {@link #SampleRateHz};
- *     int {@link #SampleSizeInBytes};
- *     int {@link #QueueMinSizeToAvoidStarvation};
- *     int {@link #SubmitMinSamples};
- *     int {@link #SubmitMaxSamples};
- *     int {@link #SubmitOptimalSamples};
- * }</code></pre>
+ *     int SampleRateHz;
+ *     int SampleSizeInBytes;
+ *     int QueueMinSizeToAvoidStarvation;
+ *     int SubmitMinSamples;
+ *     int SubmitMaxSamples;
+ *     int SubmitOptimalSamples;
+ * }}</pre>
  */
 @NativeType("struct ovrTouchHapticsDesc")
 public class OVRTouchHapticsDesc extends Struct<OVRTouchHapticsDesc> implements NativeResource {
@@ -92,17 +88,17 @@ public class OVRTouchHapticsDesc extends Struct<OVRTouchHapticsDesc> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Haptics engine frequency/sample-rate, sample time in seconds equals {@code 1.0/sampleRateHz} */
+    /** @return the value of the {@code SampleRateHz} field. */
     public int SampleRateHz() { return nSampleRateHz(address()); }
-    /** Size of each Haptics sample, sample value range is {@code [0, 2^(Bytes*8)-1]} */
+    /** @return the value of the {@code SampleSizeInBytes} field. */
     public int SampleSizeInBytes() { return nSampleSizeInBytes(address()); }
-    /** Queue size that would guarantee Haptics engine would not starve for data. Make sure size doesn't drop below it for best results. */
+    /** @return the value of the {@code QueueMinSizeToAvoidStarvation} field. */
     public int QueueMinSizeToAvoidStarvation() { return nQueueMinSizeToAvoidStarvation(address()); }
-    /** Minimum number of samples that can be sent to Haptics through {@link OVR#ovr_SubmitControllerVibration SubmitControllerVibration} */
+    /** @return the value of the {@code SubmitMinSamples} field. */
     public int SubmitMinSamples() { return nSubmitMinSamples(address()); }
-    /** Maximum number of samples that can be sent to Haptics through {@link OVR#ovr_SubmitControllerVibration SubmitControllerVibration} */
+    /** @return the value of the {@code SubmitMaxSamples} field. */
     public int SubmitMaxSamples() { return nSubmitMaxSamples(address()); }
-    /** Optimal number of samples that can be sent to Haptics through {@link OVR#ovr_SubmitControllerVibration SubmitControllerVibration} */
+    /** @return the value of the {@code SubmitOptimalSamples} field. */
     public int SubmitOptimalSamples() { return nSubmitOptimalSamples(address()); }
 
     // -----------------------------------
@@ -291,17 +287,17 @@ public class OVRTouchHapticsDesc extends Struct<OVRTouchHapticsDesc> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRTouchHapticsDesc#SampleRateHz} field. */
+        /** @return the value of the {@code SampleRateHz} field. */
         public int SampleRateHz() { return OVRTouchHapticsDesc.nSampleRateHz(address()); }
-        /** @return the value of the {@link OVRTouchHapticsDesc#SampleSizeInBytes} field. */
+        /** @return the value of the {@code SampleSizeInBytes} field. */
         public int SampleSizeInBytes() { return OVRTouchHapticsDesc.nSampleSizeInBytes(address()); }
-        /** @return the value of the {@link OVRTouchHapticsDesc#QueueMinSizeToAvoidStarvation} field. */
+        /** @return the value of the {@code QueueMinSizeToAvoidStarvation} field. */
         public int QueueMinSizeToAvoidStarvation() { return OVRTouchHapticsDesc.nQueueMinSizeToAvoidStarvation(address()); }
-        /** @return the value of the {@link OVRTouchHapticsDesc#SubmitMinSamples} field. */
+        /** @return the value of the {@code SubmitMinSamples} field. */
         public int SubmitMinSamples() { return OVRTouchHapticsDesc.nSubmitMinSamples(address()); }
-        /** @return the value of the {@link OVRTouchHapticsDesc#SubmitMaxSamples} field. */
+        /** @return the value of the {@code SubmitMaxSamples} field. */
         public int SubmitMaxSamples() { return OVRTouchHapticsDesc.nSubmitMaxSamples(address()); }
-        /** @return the value of the {@link OVRTouchHapticsDesc#SubmitOptimalSamples} field. */
+        /** @return the value of the {@code SubmitOptimalSamples} field. */
         public int SubmitOptimalSamples() { return OVRTouchHapticsDesc.nSubmitOptimalSamples(address()); }
 
     }

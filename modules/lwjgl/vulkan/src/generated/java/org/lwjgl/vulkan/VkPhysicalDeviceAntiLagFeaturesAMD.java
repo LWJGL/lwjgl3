@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether VK_AMD_anti_lag can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceAntiLagFeaturesAMD} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceAntiLagFeaturesAMD} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDAntiLag#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceAntiLagFeaturesAMD {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #antiLag};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 antiLag;
+ * }}</pre>
  */
 public class VkPhysicalDeviceAntiLagFeaturesAMD extends Struct<VkPhysicalDeviceAntiLagFeaturesAMD> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceAntiLagFeaturesAMD extends Struct<VkPhysicalDeviceA
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports AMD Radeon™ Anti-Lag functionality. The {@code antiLag} feature only supports a single GPU and <b>must</b> not be enabled if {@link VkDeviceGroupDeviceCreateInfo}{@code ::physicalDeviceCount} is greater than 1. */
+    /** @return the value of the {@code antiLag} field. */
     @NativeType("VkBool32")
     public boolean antiLag() { return nantiLag(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceAntiLagFeaturesAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD} value to the {@link #sType} field. */
+    /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD} value to the {@code sType} field. */
     public VkPhysicalDeviceAntiLagFeaturesAMD sType$Default() { return sType(AMDAntiLag.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceAntiLagFeaturesAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #antiLag} field. */
+    /** Sets the specified value to the {@code antiLag} field. */
     public VkPhysicalDeviceAntiLagFeaturesAMD antiLag(@NativeType("VkBool32") boolean value) { nantiLag(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceAntiLagFeaturesAMD extends Struct<VkPhysicalDeviceA
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceAntiLagFeaturesAMD#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceAntiLagFeaturesAMD.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceAntiLagFeaturesAMD#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceAntiLagFeaturesAMD.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceAntiLagFeaturesAMD#antiLag} field. */
+        /** @return the value of the {@code antiLag} field. */
         @NativeType("VkBool32")
         public boolean antiLag() { return VkPhysicalDeviceAntiLagFeaturesAMD.nantiLag(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceAntiLagFeaturesAMD#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceAntiLagFeaturesAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceAntiLagFeaturesAMD.nsType(address(), value); return this; }
-        /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD} value to the {@link VkPhysicalDeviceAntiLagFeaturesAMD#sType} field. */
+        /** Sets the {@link AMDAntiLag#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD} value to the {@code sType} field. */
         public VkPhysicalDeviceAntiLagFeaturesAMD.Buffer sType$Default() { return sType(AMDAntiLag.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceAntiLagFeaturesAMD#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceAntiLagFeaturesAMD.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceAntiLagFeaturesAMD.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceAntiLagFeaturesAMD#antiLag} field. */
+        /** Sets the specified value to the {@code antiLag} field. */
         public VkPhysicalDeviceAntiLagFeaturesAMD.Buffer antiLag(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceAntiLagFeaturesAMD.nantiLag(address(), value ? 1 : 0); return this; }
 
     }

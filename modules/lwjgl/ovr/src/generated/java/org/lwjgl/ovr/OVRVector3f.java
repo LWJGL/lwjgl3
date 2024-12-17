@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A 3D vector with float components.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrVector3f {
- *     float {@link #x};
- *     float {@link #y};
- *     float {@link #z};
- * }</code></pre>
+ *     float x;
+ *     float y;
+ *     float z;
+ * }}</pre>
  */
 @NativeType("struct ovrVector3f")
 public class OVRVector3f extends Struct<OVRVector3f> implements NativeResource {
@@ -79,18 +75,18 @@ public class OVRVector3f extends Struct<OVRVector3f> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the vector x component */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** the vector y component */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** the vector z component */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public OVRVector3f x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public OVRVector3f y(float value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@link #z} field. */
+    /** Sets the specified value to the {@code z} field. */
     public OVRVector3f z(float value) { nz(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -305,18 +301,18 @@ public class OVRVector3f extends Struct<OVRVector3f> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRVector3f#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return OVRVector3f.nx(address()); }
-        /** @return the value of the {@link OVRVector3f#y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return OVRVector3f.ny(address()); }
-        /** @return the value of the {@link OVRVector3f#z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return OVRVector3f.nz(address()); }
 
-        /** Sets the specified value to the {@link OVRVector3f#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public OVRVector3f.Buffer x(float value) { OVRVector3f.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRVector3f#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public OVRVector3f.Buffer y(float value) { OVRVector3f.ny(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRVector3f#z} field. */
+        /** Sets the specified value to the {@code z} field. */
         public OVRVector3f.Buffer z(float value) { OVRVector3f.nz(address(), value); return this; }
 
     }

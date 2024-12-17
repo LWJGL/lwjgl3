@@ -16,40 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Provide an array to retrieve scene marker properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>Once the application creates an {@code XrSceneMSFT} after a successful scene compute, it <b>can</b> retrieve the scene markers' properties by chaining {@link XrSceneMarkersMSFT} structure to the next pointer of {@link XrSceneComponentsGetInfoMSFT} when calling {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}.</p>
- * 
- * <p>{@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT} follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@link XrSceneComponentsMSFT} structure to which an {@link XrSceneMarkersMSFT} structure <b>can</b> be chained.</p>
- * 
- * <p>The input {@code sceneMarkerCapacityInput} <b>must</b> be equal to or greater than the corresponding {@link XrSceneComponentsMSFT}::componentCapacityInput, otherwise the runtime <b>must</b> return {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT}.</p>
- * 
- * <p>The actual count of elements returned in the array {@code sceneMarkers} is consistent with the extended {@link XrSceneComponentsMSFT} structure and returned in {@link XrSceneComponentsMSFT}{@code ::componentCountOutput}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using {@link XrSceneMarkersMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKERS_MSFT TYPE_SCENE_MARKERS_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code sceneMarkerCapacityInput} is not 0, {@code sceneMarkers} <b>must</b> be a pointer to an array of {@code sceneMarkerCapacityInput} {@link XrSceneMarkerMSFT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSceneMarkerMSFT}, {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneMarkersMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #sceneMarkerCapacityInput};
- *     {@link XrSceneMarkerMSFT XrSceneMarkerMSFT} * {@link #sceneMarkers};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t sceneMarkerCapacityInput;
+ *     {@link XrSceneMarkerMSFT XrSceneMarkerMSFT} * sceneMarkers;
+ * }}</pre>
  */
 public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements NativeResource {
 
@@ -105,28 +78,28 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. See also: {@link XrSceneComponentsMSFT}, {@link XrSceneMarkerQRCodesMSFT} */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} indicating the capacity of elements in the {@code sceneMarkers} array. */
+    /** @return the value of the {@code sceneMarkerCapacityInput} field. */
     @NativeType("uint32_t")
     public int sceneMarkerCapacityInput() { return nsceneMarkerCapacityInput(address()); }
-    /** an array of {@link XrSceneMarkerMSFT} to fill with the properties of the markers. */
+    /** @return a {@link XrSceneMarkerMSFT.Buffer} view of the struct array pointed to by the {@code sceneMarkers} field. */
     @NativeType("XrSceneMarkerMSFT *")
     public XrSceneMarkerMSFT.@Nullable Buffer sceneMarkers() { return nsceneMarkers(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSceneMarkersMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKERS_MSFT TYPE_SCENE_MARKERS_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKERS_MSFT TYPE_SCENE_MARKERS_MSFT} value to the {@code type} field. */
     public XrSceneMarkersMSFT type$Default() { return type(MSFTSceneMarker.XR_TYPE_SCENE_MARKERS_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSceneMarkersMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #sceneMarkerCapacityInput} field. */
+    /** Sets the specified value to the {@code sceneMarkerCapacityInput} field. */
     public XrSceneMarkersMSFT sceneMarkerCapacityInput(@NativeType("uint32_t") int value) { nsceneMarkerCapacityInput(address(), value); return this; }
-    /** Sets the address of the specified {@link XrSceneMarkerMSFT.Buffer} to the {@link #sceneMarkers} field. */
+    /** Sets the address of the specified {@link XrSceneMarkerMSFT.Buffer} to the {@code sceneMarkers} field. */
     public XrSceneMarkersMSFT sceneMarkers(@NativeType("XrSceneMarkerMSFT *") XrSceneMarkerMSFT.@Nullable Buffer value) { nsceneMarkers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,28 +301,28 @@ public class XrSceneMarkersMSFT extends Struct<XrSceneMarkersMSFT> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneMarkersMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSceneMarkersMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSceneMarkersMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSceneMarkersMSFT.nnext(address()); }
-        /** @return the value of the {@link XrSceneMarkersMSFT#sceneMarkerCapacityInput} field. */
+        /** @return the value of the {@code sceneMarkerCapacityInput} field. */
         @NativeType("uint32_t")
         public int sceneMarkerCapacityInput() { return XrSceneMarkersMSFT.nsceneMarkerCapacityInput(address()); }
-        /** @return a {@link XrSceneMarkerMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneMarkersMSFT#sceneMarkers} field. */
+        /** @return a {@link XrSceneMarkerMSFT.Buffer} view of the struct array pointed to by the {@code sceneMarkers} field. */
         @NativeType("XrSceneMarkerMSFT *")
         public XrSceneMarkerMSFT.@Nullable Buffer sceneMarkers() { return XrSceneMarkersMSFT.nsceneMarkers(address()); }
 
-        /** Sets the specified value to the {@link XrSceneMarkersMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSceneMarkersMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneMarkersMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKERS_MSFT TYPE_SCENE_MARKERS_MSFT} value to the {@link XrSceneMarkersMSFT#type} field. */
+        /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKERS_MSFT TYPE_SCENE_MARKERS_MSFT} value to the {@code type} field. */
         public XrSceneMarkersMSFT.Buffer type$Default() { return type(MSFTSceneMarker.XR_TYPE_SCENE_MARKERS_MSFT); }
-        /** Sets the specified value to the {@link XrSceneMarkersMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSceneMarkersMSFT.Buffer next(@NativeType("void const *") long value) { XrSceneMarkersMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneMarkersMSFT#sceneMarkerCapacityInput} field. */
+        /** Sets the specified value to the {@code sceneMarkerCapacityInput} field. */
         public XrSceneMarkersMSFT.Buffer sceneMarkerCapacityInput(@NativeType("uint32_t") int value) { XrSceneMarkersMSFT.nsceneMarkerCapacityInput(address(), value); return this; }
-        /** Sets the address of the specified {@link XrSceneMarkerMSFT.Buffer} to the {@link XrSceneMarkersMSFT#sceneMarkers} field. */
+        /** Sets the address of the specified {@link XrSceneMarkerMSFT.Buffer} to the {@code sceneMarkers} field. */
         public XrSceneMarkersMSFT.Buffer sceneMarkers(@NativeType("XrSceneMarkerMSFT *") XrSceneMarkerMSFT.@Nullable Buffer value) { XrSceneMarkersMSFT.nsceneMarkers(address(), value); return this; }
 
     }

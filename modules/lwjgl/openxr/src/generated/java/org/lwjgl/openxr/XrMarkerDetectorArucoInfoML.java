@@ -16,33 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a marker detection handle for Aruco markers.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is required by the {@link MLMarkerUnderstanding#XR_MARKER_TYPE_ARUCO_ML MARKER_TYPE_ARUCO_ML} detector.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using {@link XrMarkerDetectorArucoInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML TYPE_MARKER_DETECTOR_ARUCO_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code arucoDict} <b>must</b> be a valid {@code XrMarkerArucoDictML} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrMarkerDetectorCreateInfoML}, {@link MLMarkerUnderstanding#xrCreateMarkerDetectorML CreateMarkerDetectorML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMarkerDetectorArucoInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrMarkerArucoDictML {@link #arucoDict};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrMarkerArucoDictML arucoDict;
+ * }}</pre>
  */
 public class XrMarkerDetectorArucoInfoML extends Struct<XrMarkerDetectorArucoInfoML> implements NativeResource {
 
@@ -95,23 +74,23 @@ public class XrMarkerDetectorArucoInfoML extends Struct<XrMarkerDetectorArucoInf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the ArUco dictionary name from which markers will be detected. */
+    /** @return the value of the {@code arucoDict} field. */
     @NativeType("XrMarkerArucoDictML")
     public int arucoDict() { return narucoDict(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMarkerDetectorArucoInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML TYPE_MARKER_DETECTOR_ARUCO_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML TYPE_MARKER_DETECTOR_ARUCO_INFO_ML} value to the {@code type} field. */
     public XrMarkerDetectorArucoInfoML type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMarkerDetectorArucoInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #arucoDict} field. */
+    /** Sets the specified value to the {@code arucoDict} field. */
     public XrMarkerDetectorArucoInfoML arucoDict(@NativeType("XrMarkerArucoDictML") int value) { narucoDict(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,23 +286,23 @@ public class XrMarkerDetectorArucoInfoML extends Struct<XrMarkerDetectorArucoInf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMarkerDetectorArucoInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMarkerDetectorArucoInfoML.ntype(address()); }
-        /** @return the value of the {@link XrMarkerDetectorArucoInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrMarkerDetectorArucoInfoML.nnext(address()); }
-        /** @return the value of the {@link XrMarkerDetectorArucoInfoML#arucoDict} field. */
+        /** @return the value of the {@code arucoDict} field. */
         @NativeType("XrMarkerArucoDictML")
         public int arucoDict() { return XrMarkerDetectorArucoInfoML.narucoDict(address()); }
 
-        /** Sets the specified value to the {@link XrMarkerDetectorArucoInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMarkerDetectorArucoInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrMarkerDetectorArucoInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML TYPE_MARKER_DETECTOR_ARUCO_INFO_ML} value to the {@link XrMarkerDetectorArucoInfoML#type} field. */
+        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML TYPE_MARKER_DETECTOR_ARUCO_INFO_ML} value to the {@code type} field. */
         public XrMarkerDetectorArucoInfoML.Buffer type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML); }
-        /** Sets the specified value to the {@link XrMarkerDetectorArucoInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMarkerDetectorArucoInfoML.Buffer next(@NativeType("void const *") long value) { XrMarkerDetectorArucoInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorArucoInfoML#arucoDict} field. */
+        /** Sets the specified value to the {@code arucoDict} field. */
         public XrMarkerDetectorArucoInfoML.Buffer arucoDict(@NativeType("XrMarkerArucoDictML") int value) { XrMarkerDetectorArucoInfoML.narucoDict(address(), value); return this; }
 
     }

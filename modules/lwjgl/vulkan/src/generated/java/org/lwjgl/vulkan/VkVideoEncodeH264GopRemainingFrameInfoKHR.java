@@ -16,33 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying H.264 encode rate control GOP remaining frame counts.
- * 
- * <h5>Description</h5>
- * 
- * <p>Setting {@code useGopRemainingFrames} to {@link VK10#VK_TRUE TRUE} and including this structure in the {@code pNext} chain of {@link VkVideoBeginCodingInfoKHR} is only mandatory if the {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::requiresGopRemainingFrames} reported for the used <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-profiles">video profile</a> is {@link VK10#VK_TRUE TRUE}. However, implementations <b>may</b> use these remaining frame counts, when specified, even when it is not required. In particular, when the application does not use a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-regular-gop">regular GOP structure</a>, these values <b>may</b> provide additional guidance for the implementation’s rate control algorithm.</p>
- * 
- * <p>The {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::prefersGopRemainingFrames} capability is also used to indicate that the implementation’s rate control algorithm <b>may</b> operate more accurately if the application specifies the remaining frame counts using this structure.</p>
- * 
- * <p>As with other rate control guidance values, if the effective order and number of frames encoded by the application are not in line with the remaining frame counts specified in this structure at any given point, then the behavior of the implementation’s rate control algorithm <b>may</b> deviate from the one expected by the application.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH264GopRemainingFrameInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #useGopRemainingFrames};
- *     uint32_t {@link #gopRemainingI};
- *     uint32_t {@link #gopRemainingP};
- *     uint32_t {@link #gopRemainingB};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 useGopRemainingFrames;
+ *     uint32_t gopRemainingI;
+ *     uint32_t gopRemainingP;
+ *     uint32_t gopRemainingB;
+ * }}</pre>
  */
 public class VkVideoEncodeH264GopRemainingFrameInfoKHR extends Struct<VkVideoEncodeH264GopRemainingFrameInfoKHR> implements NativeResource {
 
@@ -104,38 +86,38 @@ public class VkVideoEncodeH264GopRemainingFrameInfoKHR extends Struct<VkVideoEnc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation’s rate control algorithm <b>should</b> use the values specified in {@code gopRemainingI}, {@code gopRemainingP}, and {@code gopRemainingB}. If {@code useGopRemainingFrames} is {@link VK10#VK_FALSE FALSE}, then the values of {@code gopRemainingI}, {@code gopRemainingP}, and {@code gopRemainingB} are ignored. */
+    /** @return the value of the {@code useGopRemainingFrames} field. */
     @NativeType("VkBool32")
     public boolean useGopRemainingFrames() { return nuseGopRemainingFrames(address()) != 0; }
-    /** specifies the number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-i-pic">I frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-gop">GOP</a> prior to executing the video encode operation. */
+    /** @return the value of the {@code gopRemainingI} field. */
     @NativeType("uint32_t")
     public int gopRemainingI() { return ngopRemainingI(address()); }
-    /** specifies the number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-p-pic">P frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-gop">GOP</a> prior to executing the video encode operation. */
+    /** @return the value of the {@code gopRemainingP} field. */
     @NativeType("uint32_t")
     public int gopRemainingP() { return ngopRemainingP(address()); }
-    /** specifies the number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-b-pic">B frames</a> the implementation’s rate control algorithm <b>should</b> assume to be remaining in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-gop">GOP</a> prior to executing the video encode operation. */
+    /** @return the value of the {@code gopRemainingB} field. */
     @NativeType("uint32_t")
     public int gopRemainingB() { return ngopRemainingB(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH264GopRemainingFrameInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH264GopRemainingFrameInfoKHR sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH264GopRemainingFrameInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #useGopRemainingFrames} field. */
+    /** Sets the specified value to the {@code useGopRemainingFrames} field. */
     public VkVideoEncodeH264GopRemainingFrameInfoKHR useGopRemainingFrames(@NativeType("VkBool32") boolean value) { nuseGopRemainingFrames(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #gopRemainingI} field. */
+    /** Sets the specified value to the {@code gopRemainingI} field. */
     public VkVideoEncodeH264GopRemainingFrameInfoKHR gopRemainingI(@NativeType("uint32_t") int value) { ngopRemainingI(address(), value); return this; }
-    /** Sets the specified value to the {@link #gopRemainingP} field. */
+    /** Sets the specified value to the {@code gopRemainingP} field. */
     public VkVideoEncodeH264GopRemainingFrameInfoKHR gopRemainingP(@NativeType("uint32_t") int value) { ngopRemainingP(address(), value); return this; }
-    /** Sets the specified value to the {@link #gopRemainingB} field. */
+    /** Sets the specified value to the {@code gopRemainingB} field. */
     public VkVideoEncodeH264GopRemainingFrameInfoKHR gopRemainingB(@NativeType("uint32_t") int value) { ngopRemainingB(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,38 +331,38 @@ public class VkVideoEncodeH264GopRemainingFrameInfoKHR extends Struct<VkVideoEnc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH264GopRemainingFrameInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH264GopRemainingFrameInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#useGopRemainingFrames} field. */
+        /** @return the value of the {@code useGopRemainingFrames} field. */
         @NativeType("VkBool32")
         public boolean useGopRemainingFrames() { return VkVideoEncodeH264GopRemainingFrameInfoKHR.nuseGopRemainingFrames(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#gopRemainingI} field. */
+        /** @return the value of the {@code gopRemainingI} field. */
         @NativeType("uint32_t")
         public int gopRemainingI() { return VkVideoEncodeH264GopRemainingFrameInfoKHR.ngopRemainingI(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#gopRemainingP} field. */
+        /** @return the value of the {@code gopRemainingP} field. */
         @NativeType("uint32_t")
         public int gopRemainingP() { return VkVideoEncodeH264GopRemainingFrameInfoKHR.ngopRemainingP(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#gopRemainingB} field. */
+        /** @return the value of the {@code gopRemainingB} field. */
         @NativeType("uint32_t")
         public int gopRemainingB() { return VkVideoEncodeH264GopRemainingFrameInfoKHR.ngopRemainingB(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH264GopRemainingFrameInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264GopRemainingFrameInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR} value to the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH264GopRemainingFrameInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_GOP_REMAINING_FRAME_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH264GopRemainingFrameInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264GopRemainingFrameInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#useGopRemainingFrames} field. */
+        /** Sets the specified value to the {@code useGopRemainingFrames} field. */
         public VkVideoEncodeH264GopRemainingFrameInfoKHR.Buffer useGopRemainingFrames(@NativeType("VkBool32") boolean value) { VkVideoEncodeH264GopRemainingFrameInfoKHR.nuseGopRemainingFrames(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#gopRemainingI} field. */
+        /** Sets the specified value to the {@code gopRemainingI} field. */
         public VkVideoEncodeH264GopRemainingFrameInfoKHR.Buffer gopRemainingI(@NativeType("uint32_t") int value) { VkVideoEncodeH264GopRemainingFrameInfoKHR.ngopRemainingI(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#gopRemainingP} field. */
+        /** Sets the specified value to the {@code gopRemainingP} field. */
         public VkVideoEncodeH264GopRemainingFrameInfoKHR.Buffer gopRemainingP(@NativeType("uint32_t") int value) { VkVideoEncodeH264GopRemainingFrameInfoKHR.ngopRemainingP(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264GopRemainingFrameInfoKHR#gopRemainingB} field. */
+        /** Sets the specified value to the {@code gopRemainingB} field. */
         public VkVideoEncodeH264GopRemainingFrameInfoKHR.Buffer gopRemainingB(@NativeType("uint32_t") int value) { VkVideoEncodeH264GopRemainingFrameInfoKHR.ngopRemainingB(address(), value); return this; }
 
     }

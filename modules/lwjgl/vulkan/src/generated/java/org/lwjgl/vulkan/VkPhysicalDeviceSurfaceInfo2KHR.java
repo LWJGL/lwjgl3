@@ -16,41 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a surface and related swapchain creation parameters.
- * 
- * <h5>Description</h5>
- * 
- * <p>The members of {@link VkPhysicalDeviceSurfaceInfo2KHR} correspond to the arguments to {@link KHRSurface#vkGetPhysicalDeviceSurfaceCapabilitiesKHR GetPhysicalDeviceSurfaceCapabilitiesKHR}, with {@code sType} and {@code pNext} added for extensibility.</p>
- * 
- * <p>Additional capabilities of a surface <b>may</b> be available to swapchains created with different full-screen exclusive settings - particularly if exclusive full-screen access is application controlled. These additional capabilities <b>can</b> be queried by adding a {@link VkSurfaceFullScreenExclusiveInfoEXT} structure to the {@code pNext} chain of this structure when used to query surface properties. Additionally, for Win32 surfaces with application controlled exclusive full-screen access, chaining a {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} structure <b>may</b> also report additional surface capabilities. These additional capabilities only apply to swapchains created with the same parameters included in the {@code pNext} chain of {@link VkSwapchainCreateInfoKHR}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@code pNext} chain includes a {@link VkSurfaceFullScreenExclusiveInfoEXT} structure with its {@code fullScreenExclusive} member set to {@link EXTFullScreenExclusive#VK_FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT FULL_SCREEN_EXCLUSIVE_APPLICATION_CONTROLLED_EXT}, and {@code surface} was created using {@link KHRWin32Surface#vkCreateWin32SurfaceKHR CreateWin32SurfaceKHR}, a {@link VkSurfaceFullScreenExclusiveWin32InfoEXT} structure <b>must</b> be included in the {@code pNext} chain</li>
- * <li>If surface is not VK_NULL_HANDLE, and the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is not enabled, {@code surface} <b>must</b> be a valid {@code VkSurfaceKHR} handle</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkSurfaceFullScreenExclusiveInfoEXT}, {@link VkSurfaceFullScreenExclusiveWin32InfoEXT}, or {@link VkSurfacePresentModeEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTFullScreenExclusive#vkGetDeviceGroupSurfacePresentModes2EXT GetDeviceGroupSurfacePresentModes2EXT}, {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR}, {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceFormats2KHR GetPhysicalDeviceSurfaceFormats2KHR}, {@link EXTFullScreenExclusive#vkGetPhysicalDeviceSurfacePresentModes2EXT GetPhysicalDeviceSurfacePresentModes2EXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSurfaceInfo2KHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSurfaceKHR {@link #surface};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSurfaceKHR surface;
+ * }}</pre>
  */
 public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurfaceInfo2KHR> implements NativeResource {
 
@@ -103,21 +74,21 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the surface that will be associated with the swapchain. */
+    /** @return the value of the {@code surface} field. */
     @NativeType("VkSurfaceKHR")
     public long surface() { return nsurface(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkSurfaceFullScreenExclusiveInfoEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfaceFullScreenExclusiveInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -125,7 +96,7 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfaceFullScreenExclusiveWin32InfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkSurfacePresentModeEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceSurfaceInfo2KHR pNext(VkSurfacePresentModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #surface} field. */
+    /** Sets the specified value to the {@code surface} field. */
     public VkPhysicalDeviceSurfaceInfo2KHR surface(@NativeType("VkSurfaceKHR") long value) { nsurface(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -340,21 +311,21 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceSurfaceInfo2KHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSurfaceInfo2KHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSurfaceInfo2KHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPhysicalDeviceSurfaceInfo2KHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSurfaceInfo2KHR#surface} field. */
+        /** @return the value of the {@code surface} field. */
         @NativeType("VkSurfaceKHR")
         public long surface() { return VkPhysicalDeviceSurfaceInfo2KHR.nsurface(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSurfaceInfo2KHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR} value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#sType} field. */
+        /** Sets the {@link KHRGetSurfaceCapabilities2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer sType$Default() { return sType(KHRGetSurfaceCapabilities2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(@NativeType("void const *") long value) { VkPhysicalDeviceSurfaceInfo2KHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkSurfaceFullScreenExclusiveInfoEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfaceFullScreenExclusiveInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -362,7 +333,7 @@ public class VkPhysicalDeviceSurfaceInfo2KHR extends Struct<VkPhysicalDeviceSurf
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfaceFullScreenExclusiveWin32InfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkSurfacePresentModeEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer pNext(VkSurfacePresentModeEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSurfaceInfo2KHR#surface} field. */
+        /** Sets the specified value to the {@code surface} field. */
         public VkPhysicalDeviceSurfaceInfo2KHR.Buffer surface(@NativeType("VkSurfaceKHR") long value) { VkPhysicalDeviceSurfaceInfo2KHR.nsurface(address(), value); return this; }
 
     }

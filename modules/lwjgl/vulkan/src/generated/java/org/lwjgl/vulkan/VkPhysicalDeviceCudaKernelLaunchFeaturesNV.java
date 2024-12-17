@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether cuda kernel launch is supported by the implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCudaKernelLaunchFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceCudaKernelLaunchFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCudaKernelLaunch#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCudaKernelLaunchFeaturesNV {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #cudaKernelLaunchFeatures};
- * }</code></pre>
+ *     VkBool32 cudaKernelLaunchFeatures;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCudaKernelLaunchFeaturesNV extends Struct<VkPhysicalDeviceCudaKernelLaunchFeaturesNV> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceCudaKernelLaunchFeaturesNV extends Struct<VkPhysica
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** non-zero if cuda kernel launch is supported. */
+    /** @return the value of the {@code cudaKernelLaunchFeatures} field. */
     @NativeType("VkBool32")
     public boolean cudaKernelLaunchFeatures() { return ncudaKernelLaunchFeatures(address()) != 0; }
 
@@ -104,7 +90,7 @@ public class VkPhysicalDeviceCudaKernelLaunchFeaturesNV extends Struct<VkPhysica
     public VkPhysicalDeviceCudaKernelLaunchFeaturesNV sType$Default() { return sType(NVCudaKernelLaunch.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCudaKernelLaunchFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #cudaKernelLaunchFeatures} field. */
+    /** Sets the specified value to the {@code cudaKernelLaunchFeatures} field. */
     public VkPhysicalDeviceCudaKernelLaunchFeaturesNV cudaKernelLaunchFeatures(@NativeType("VkBool32") boolean value) { ncudaKernelLaunchFeatures(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,7 +292,7 @@ public class VkPhysicalDeviceCudaKernelLaunchFeaturesNV extends Struct<VkPhysica
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCudaKernelLaunchFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCudaKernelLaunchFeaturesNV#cudaKernelLaunchFeatures} field. */
+        /** @return the value of the {@code cudaKernelLaunchFeatures} field. */
         @NativeType("VkBool32")
         public boolean cudaKernelLaunchFeatures() { return VkPhysicalDeviceCudaKernelLaunchFeaturesNV.ncudaKernelLaunchFeatures(address()) != 0; }
 
@@ -316,7 +302,7 @@ public class VkPhysicalDeviceCudaKernelLaunchFeaturesNV extends Struct<VkPhysica
         public VkPhysicalDeviceCudaKernelLaunchFeaturesNV.Buffer sType$Default() { return sType(NVCudaKernelLaunch.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCudaKernelLaunchFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCudaKernelLaunchFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCudaKernelLaunchFeaturesNV#cudaKernelLaunchFeatures} field. */
+        /** Sets the specified value to the {@code cudaKernelLaunchFeatures} field. */
         public VkPhysicalDeviceCudaKernelLaunchFeaturesNV.Buffer cudaKernelLaunchFeatures(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCudaKernelLaunchFeaturesNV.ncudaKernelLaunchFeatures(address(), value ? 1 : 0); return this; }
 
     }

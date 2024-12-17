@@ -16,33 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The metadata from an Ogg Opus stream.
- * 
- * <p>This structure holds the in-stream metadata corresponding to the 'comment' header packet of an Ogg Opus stream. The comment header is meant to be used
- * much like someone jotting a quick note on the label of a CD. It should be a short, to the point text note that can be more than a couple words, but not
- * more than a short paragraph.</p>
- * 
- * <p>The metadata is stored as a series of (tag, value) pairs, in length-encoded string vectors, using the same format as Vorbis (without the final "framing
- * bit"), Theora, and Speex, except for the packet header. The first occurrence of the '=' character delimits the tag and value. A particular tag may
- * occur more than once, and order is significant. The character set encoding for the strings is always UTF-8, but the tag names are limited to ASCII, and
- * treated as case-insensitive. See <a href="https://www.xiph.org/vorbis/doc/v-comment.html">the Vorbis comment header specification</a> for details.</p>
- * 
- * <p>In filling in this structure, libopusfile will null-terminate the {@code #user_comments} strings for safety. However, the bitstream format itself
- * treats them as 8-bit clean vectors, possibly containing {@code NUL} characters, so the {@code #comment_lengths} array should be treated as their
- * authoritative length.</p>
- * 
- * <p>This structure is binary and source-compatible with a {@code vorbis_comment}, and pointers to it may be freely cast to {@code vorbis_comment} pointers,
- * and vice versa. It is provided as a separate type to avoid introducing a compile-time dependency on the libvorbis headers.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct OpusTags {
- *     char ** {@link #user_comments};
- *     int * {@link #comment_lengths};
- *     int {@link #comments};
- *     char * {@link #vendor};
- * }</code></pre>
+ *     char ** user_comments;
+ *     int * comment_lengths;
+ *     int comments;
+ *     char * vendor;
+ * }}</pre>
  */
 public class OpusTags extends Struct<OpusTags> implements NativeResource {
 
@@ -98,18 +78,18 @@ public class OpusTags extends Struct<OpusTags> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the array of comment string vectors */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code user_comments} field. */
     @NativeType("char **")
     public PointerBuffer user_comments() { return nuser_comments(address()); }
-    /** an array of the corresponding length of each vector, in bytes */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code comment_lengths} field. */
     @NativeType("int *")
     public IntBuffer comment_lengths() { return ncomment_lengths(address()); }
-    /** the total number of comment streams */
+    /** @return the value of the {@code comments} field. */
     public int comments() { return ncomments(address()); }
-    /** the null-terminated vendor string. This identifies the software used to encode the stream. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code vendor} field. */
     @NativeType("char *")
     public ByteBuffer vendor() { return nvendor(address()); }
-    /** the null-terminated vendor string. This identifies the software used to encode the stream. */
+    /** @return the null-terminated string pointed to by the {@code vendor} field. */
     @NativeType("char *")
     public String vendorString() { return nvendorString(address()); }
 
@@ -278,18 +258,18 @@ public class OpusTags extends Struct<OpusTags> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link OpusTags#user_comments} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code user_comments} field. */
         @NativeType("char **")
         public PointerBuffer user_comments() { return OpusTags.nuser_comments(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link OpusTags#comment_lengths} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code comment_lengths} field. */
         @NativeType("int *")
         public IntBuffer comment_lengths() { return OpusTags.ncomment_lengths(address()); }
-        /** @return the value of the {@link OpusTags#comments} field. */
+        /** @return the value of the {@code comments} field. */
         public int comments() { return OpusTags.ncomments(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link OpusTags#vendor} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code vendor} field. */
         @NativeType("char *")
         public ByteBuffer vendor() { return OpusTags.nvendor(address()); }
-        /** @return the null-terminated string pointed to by the {@link OpusTags#vendor} field. */
+        /** @return the null-terminated string pointed to by the {@code vendor} field. */
         @NativeType("char *")
         public String vendorString() { return OpusTags.nvendorString(address()); }
 

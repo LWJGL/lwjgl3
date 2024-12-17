@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_paint_extend_t (*{@link #invoke}) (
- *     hb_color_line_t *color_line,
- *     void *color_line_data,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_color_line_get_extend_func_t} */
 public abstract class hb_color_line_get_extend_func_t extends Callback implements hb_color_line_get_extend_func_tI {
 
     /**

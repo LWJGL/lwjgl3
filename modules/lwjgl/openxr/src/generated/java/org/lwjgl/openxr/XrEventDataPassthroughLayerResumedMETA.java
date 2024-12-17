@@ -16,41 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * An event that is triggered after a passthrough layer is resumed by client.
- * 
- * <h5>Description</h5>
- * 
- * <p>Runtimes <b>must</b> queue the event exactly once when first presenting passthrough after an app successfully calls one of the following:</p>
- * 
- * <ul>
- * <li>{@link FBPassthrough#xrPassthroughLayerResumeFB PassthroughLayerResumeFB}</li>
- * <li>{@link FBPassthrough#xrCreatePassthroughLayerFB CreatePassthroughLayerFB} with flag {@link FBPassthrough#XR_PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB PASSTHROUGH_IS_RUNNING_AT_CREATION_BIT_FB} set</li>
- * </ul>
- * 
- * <p>The passthrough layer state is reset when the app calls {@link FBPassthrough#xrPassthroughLayerPauseFB PassthroughLayerPauseFB}.</p>
- * 
- * <p>Runtimes <b>must</b> queue the event again, if {@link FBPassthrough#xrPassthroughLayerPauseFB PassthroughLayerPauseFB} is followed by {@link FBPassthrough#xrPassthroughLayerResumeFB PassthroughLayerResumeFB}. During the transition from paused to resumed state, the event is queued exactly once when passthrough has been presented for the first time. If the passthrough feature is not active during the transition, for example because it has been paused using {@link FBPassthrough#xrPassthroughPauseFB PassthroughPauseFB}, the event is queued when passthrough becomes active.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAPassthroughLayerResumedEvent XR_META_passthrough_layer_resumed_event} extension <b>must</b> be enabled prior to using {@link XrEventDataPassthroughLayerResumedMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAPassthroughLayerResumedEvent#XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEventDataBaseHeader}, {@link XR10#xrPollEvent PollEvent}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataPassthroughLayerResumedMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrPassthroughLayerFB {@link #layer};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrPassthroughLayerFB layer;
+ * }}</pre>
  */
 public class XrEventDataPassthroughLayerResumedMETA extends Struct<XrEventDataPassthroughLayerResumedMETA> implements NativeResource {
 
@@ -103,21 +74,21 @@ public class XrEventDataPassthroughLayerResumedMETA extends Struct<XrEventDataPa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrPassthroughLayerFB} for which the event has been triggered. */
+    /** @return the value of the {@code layer} field. */
     @NativeType("XrPassthroughLayerFB")
     public long layer() { return nlayer(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataPassthroughLayerResumedMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAPassthroughLayerResumedEvent#XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META} value to the {@link #type} field. */
+    /** Sets the {@link METAPassthroughLayerResumedEvent#XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META} value to the {@code type} field. */
     public XrEventDataPassthroughLayerResumedMETA type$Default() { return type(METAPassthroughLayerResumedEvent.XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataPassthroughLayerResumedMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,21 +290,21 @@ public class XrEventDataPassthroughLayerResumedMETA extends Struct<XrEventDataPa
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataPassthroughLayerResumedMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataPassthroughLayerResumedMETA.ntype(address()); }
-        /** @return the value of the {@link XrEventDataPassthroughLayerResumedMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataPassthroughLayerResumedMETA.nnext(address()); }
-        /** @return the value of the {@link XrEventDataPassthroughLayerResumedMETA#layer} field. */
+        /** @return the value of the {@code layer} field. */
         @NativeType("XrPassthroughLayerFB")
         public long layer() { return XrEventDataPassthroughLayerResumedMETA.nlayer(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataPassthroughLayerResumedMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataPassthroughLayerResumedMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataPassthroughLayerResumedMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAPassthroughLayerResumedEvent#XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META} value to the {@link XrEventDataPassthroughLayerResumedMETA#type} field. */
+        /** Sets the {@link METAPassthroughLayerResumedEvent#XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META} value to the {@code type} field. */
         public XrEventDataPassthroughLayerResumedMETA.Buffer type$Default() { return type(METAPassthroughLayerResumedEvent.XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META); }
-        /** Sets the specified value to the {@link XrEventDataPassthroughLayerResumedMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataPassthroughLayerResumedMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataPassthroughLayerResumedMETA.nnext(address(), value); return this; }
 
     }

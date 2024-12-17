@@ -18,30 +18,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * Profile with properties defining a foveation pattern.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBFoveationVulkan XR_FB_foveation_vulkan} extension <b>must</b> be enabled prior to using {@link XrSwapchainImageFoveationVulkanFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBFoveationVulkan#XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSwapchainImageVulkanKHR}, {@link XR10#xrEnumerateSwapchainImages EnumerateSwapchainImages}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainImageFoveationVulkanFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     VkImage {@link #image};
- *     uint32_t {@link #width};
- *     uint32_t {@link #height};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     VkImage image;
+ *     uint32_t width;
+ *     uint32_t height;
+ * }}</pre>
  */
 public class XrSwapchainImageFoveationVulkanFB extends Struct<XrSwapchainImageFoveationVulkanFB> implements NativeResource {
 
@@ -100,27 +84,27 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct<XrSwapchainImageFo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a valid Vulkan {@code VkImage} to use. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** the horizontal width in pixels of the image. */
+    /** @return the value of the {@code width} field. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** the vertical height in pixels of the image. */
+    /** @return the value of the {@code height} field. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSwapchainImageFoveationVulkanFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBFoveationVulkan#XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBFoveationVulkan#XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB} value to the {@code type} field. */
     public XrSwapchainImageFoveationVulkanFB type$Default() { return type(FBFoveationVulkan.XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSwapchainImageFoveationVulkanFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,27 +300,27 @@ public class XrSwapchainImageFoveationVulkanFB extends Struct<XrSwapchainImageFo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSwapchainImageFoveationVulkanFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainImageFoveationVulkanFB.ntype(address()); }
-        /** @return the value of the {@link XrSwapchainImageFoveationVulkanFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSwapchainImageFoveationVulkanFB.nnext(address()); }
-        /** @return the value of the {@link XrSwapchainImageFoveationVulkanFB#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return XrSwapchainImageFoveationVulkanFB.nimage(address()); }
-        /** @return the value of the {@link XrSwapchainImageFoveationVulkanFB#width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("uint32_t")
         public int width() { return XrSwapchainImageFoveationVulkanFB.nwidth(address()); }
-        /** @return the value of the {@link XrSwapchainImageFoveationVulkanFB#height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("uint32_t")
         public int height() { return XrSwapchainImageFoveationVulkanFB.nheight(address()); }
 
-        /** Sets the specified value to the {@link XrSwapchainImageFoveationVulkanFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSwapchainImageFoveationVulkanFB.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainImageFoveationVulkanFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBFoveationVulkan#XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB} value to the {@link XrSwapchainImageFoveationVulkanFB#type} field. */
+        /** Sets the {@link FBFoveationVulkan#XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB} value to the {@code type} field. */
         public XrSwapchainImageFoveationVulkanFB.Buffer type$Default() { return type(FBFoveationVulkan.XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB); }
-        /** Sets the specified value to the {@link XrSwapchainImageFoveationVulkanFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSwapchainImageFoveationVulkanFB.Buffer next(@NativeType("void *") long value) { XrSwapchainImageFoveationVulkanFB.nnext(address(), value); return this; }
 
     }

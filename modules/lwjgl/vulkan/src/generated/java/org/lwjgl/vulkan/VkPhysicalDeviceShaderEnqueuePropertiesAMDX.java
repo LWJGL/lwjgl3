@@ -17,32 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing shader enqueue limits of an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderEnqueuePropertiesAMDX {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxExecutionGraphDepth};
- *     uint32_t {@link #maxExecutionGraphShaderOutputNodes};
- *     uint32_t {@link #maxExecutionGraphShaderPayloadSize};
- *     uint32_t {@link #maxExecutionGraphShaderPayloadCount};
- *     uint32_t {@link #executionGraphDispatchAddressAlignment};
- *     uint32_t {@link #maxExecutionGraphWorkgroupCount}[3];
- *     uint32_t {@link #maxExecutionGraphWorkgroups};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxExecutionGraphDepth;
+ *     uint32_t maxExecutionGraphShaderOutputNodes;
+ *     uint32_t maxExecutionGraphShaderPayloadSize;
+ *     uint32_t maxExecutionGraphShaderPayloadCount;
+ *     uint32_t executionGraphDispatchAddressAlignment;
+ *     uint32_t maxExecutionGraphWorkgroupCount[3];
+ *     uint32_t maxExecutionGraphWorkgroups;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysicalDeviceShaderEnqueuePropertiesAMDX> implements NativeResource {
 
@@ -113,58 +99,58 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** defines the maximum node chain depth in the graph. The dispatched node is at depth 1 and the node enqueued by it is at depth 2, and so on. If a node enqueues itself, each recursive enqueue increases the depth by 1 as well. */
+    /** @return the value of the {@code maxExecutionGraphDepth} field. */
     @NativeType("uint32_t")
     public int maxExecutionGraphDepth() { return nmaxExecutionGraphDepth(address()); }
-    /** specifies the maximum number of unique nodes that can be dispatched from a single shader, and <b>must</b> be at least 256. */
+    /** @return the value of the {@code maxExecutionGraphShaderOutputNodes} field. */
     @NativeType("uint32_t")
     public int maxExecutionGraphShaderOutputNodes() { return nmaxExecutionGraphShaderOutputNodes(address()); }
-    /** specifies the maximum total size of payload declarations in a shader. For any payload declarations that share resources, indicated by {@code NodeSharesPayloadLimitsWithAMDX} decorations, the maximum size of each set of shared payload declarations is taken. The sum of each shared set’s maximum size and the size of each unshared payload is counted against this limit. */
+    /** @return the value of the {@code maxExecutionGraphShaderPayloadSize} field. */
     @NativeType("uint32_t")
     public int maxExecutionGraphShaderPayloadSize() { return nmaxExecutionGraphShaderPayloadSize(address()); }
-    /** specifies the maximum number of output payloads that can be initialized in a single workgroup. */
+    /** @return the value of the {@code maxExecutionGraphShaderPayloadCount} field. */
     @NativeType("uint32_t")
     public int maxExecutionGraphShaderPayloadCount() { return nmaxExecutionGraphShaderPayloadCount(address()); }
-    /** specifies the alignment of non-scratch {@code VkDeviceAddress} arguments consumed by graph dispatch commands. */
+    /** @return the value of the {@code executionGraphDispatchAddressAlignment} field. */
     @NativeType("uint32_t")
     public int executionGraphDispatchAddressAlignment() { return nexecutionGraphDispatchAddressAlignment(address()); }
-    /** the maximum number of local workgroups that a shader <b>can</b> be dispatched with in X, Y, and Z dimensions, respectively. */
+    /** @return a {@link IntBuffer} view of the {@code maxExecutionGraphWorkgroupCount} field. */
     @NativeType("uint32_t[3]")
     public IntBuffer maxExecutionGraphWorkgroupCount() { return nmaxExecutionGraphWorkgroupCount(address()); }
-    /** the maximum number of local workgroups that a shader <b>can</b> be dispatched with in X, Y, and Z dimensions, respectively. */
+    /** @return the value at the specified index of the {@code maxExecutionGraphWorkgroupCount} field. */
     @NativeType("uint32_t")
     public int maxExecutionGraphWorkgroupCount(int index) { return nmaxExecutionGraphWorkgroupCount(address(), index); }
-    /** the total number of local workgroups that a shader <b>can</b> be dispatched with. */
+    /** @return the value of the {@code maxExecutionGraphWorkgroups} field. */
     @NativeType("uint32_t")
     public int maxExecutionGraphWorkgroups() { return nmaxExecutionGraphWorkgroups(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX} value to the {@link #sType} field. */
+    /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX sType$Default() { return sType(AMDXShaderEnqueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxExecutionGraphDepth} field. */
+    /** Sets the specified value to the {@code maxExecutionGraphDepth} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphDepth(@NativeType("uint32_t") int value) { nmaxExecutionGraphDepth(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxExecutionGraphShaderOutputNodes} field. */
+    /** Sets the specified value to the {@code maxExecutionGraphShaderOutputNodes} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphShaderOutputNodes(@NativeType("uint32_t") int value) { nmaxExecutionGraphShaderOutputNodes(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxExecutionGraphShaderPayloadSize} field. */
+    /** Sets the specified value to the {@code maxExecutionGraphShaderPayloadSize} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphShaderPayloadSize(@NativeType("uint32_t") int value) { nmaxExecutionGraphShaderPayloadSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxExecutionGraphShaderPayloadCount} field. */
+    /** Sets the specified value to the {@code maxExecutionGraphShaderPayloadCount} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphShaderPayloadCount(@NativeType("uint32_t") int value) { nmaxExecutionGraphShaderPayloadCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #executionGraphDispatchAddressAlignment} field. */
+    /** Sets the specified value to the {@code executionGraphDispatchAddressAlignment} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX executionGraphDispatchAddressAlignment(@NativeType("uint32_t") int value) { nexecutionGraphDispatchAddressAlignment(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@link #maxExecutionGraphWorkgroupCount} field. */
+    /** Copies the specified {@link IntBuffer} to the {@code maxExecutionGraphWorkgroupCount} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphWorkgroupCount(@NativeType("uint32_t[3]") IntBuffer value) { nmaxExecutionGraphWorkgroupCount(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #maxExecutionGraphWorkgroupCount} field. */
+    /** Sets the specified value at the specified index of the {@code maxExecutionGraphWorkgroupCount} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphWorkgroupCount(int index, @NativeType("uint32_t") int value) { nmaxExecutionGraphWorkgroupCount(address(), index, value); return this; }
-    /** Sets the specified value to the {@link #maxExecutionGraphWorkgroups} field. */
+    /** Sets the specified value to the {@code maxExecutionGraphWorkgroups} field. */
     public VkPhysicalDeviceShaderEnqueuePropertiesAMDX maxExecutionGraphWorkgroups(@NativeType("uint32_t") int value) { nmaxExecutionGraphWorkgroups(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -407,58 +393,58 @@ public class VkPhysicalDeviceShaderEnqueuePropertiesAMDX extends Struct<VkPhysic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphDepth} field. */
+        /** @return the value of the {@code maxExecutionGraphDepth} field. */
         @NativeType("uint32_t")
         public int maxExecutionGraphDepth() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphDepth(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphShaderOutputNodes} field. */
+        /** @return the value of the {@code maxExecutionGraphShaderOutputNodes} field. */
         @NativeType("uint32_t")
         public int maxExecutionGraphShaderOutputNodes() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphShaderOutputNodes(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphShaderPayloadSize} field. */
+        /** @return the value of the {@code maxExecutionGraphShaderPayloadSize} field. */
         @NativeType("uint32_t")
         public int maxExecutionGraphShaderPayloadSize() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphShaderPayloadSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphShaderPayloadCount} field. */
+        /** @return the value of the {@code maxExecutionGraphShaderPayloadCount} field. */
         @NativeType("uint32_t")
         public int maxExecutionGraphShaderPayloadCount() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphShaderPayloadCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#executionGraphDispatchAddressAlignment} field. */
+        /** @return the value of the {@code executionGraphDispatchAddressAlignment} field. */
         @NativeType("uint32_t")
         public int executionGraphDispatchAddressAlignment() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nexecutionGraphDispatchAddressAlignment(address()); }
-        /** @return a {@link IntBuffer} view of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroupCount} field. */
+        /** @return a {@link IntBuffer} view of the {@code maxExecutionGraphWorkgroupCount} field. */
         @NativeType("uint32_t[3]")
         public IntBuffer maxExecutionGraphWorkgroupCount() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroupCount(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroupCount} field. */
+        /** @return the value at the specified index of the {@code maxExecutionGraphWorkgroupCount} field. */
         @NativeType("uint32_t")
         public int maxExecutionGraphWorkgroupCount(int index) { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroupCount(address(), index); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroups} field. */
+        /** @return the value of the {@code maxExecutionGraphWorkgroups} field. */
         @NativeType("uint32_t")
         public int maxExecutionGraphWorkgroups() { return VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroups(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nsType(address(), value); return this; }
-        /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX} value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#sType} field. */
+        /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer sType$Default() { return sType(AMDXShaderEnqueue.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphDepth} field. */
+        /** Sets the specified value to the {@code maxExecutionGraphDepth} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphDepth(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphDepth(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphShaderOutputNodes} field. */
+        /** Sets the specified value to the {@code maxExecutionGraphShaderOutputNodes} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphShaderOutputNodes(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphShaderOutputNodes(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphShaderPayloadSize} field. */
+        /** Sets the specified value to the {@code maxExecutionGraphShaderPayloadSize} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphShaderPayloadSize(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphShaderPayloadSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphShaderPayloadCount} field. */
+        /** Sets the specified value to the {@code maxExecutionGraphShaderPayloadCount} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphShaderPayloadCount(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphShaderPayloadCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#executionGraphDispatchAddressAlignment} field. */
+        /** Sets the specified value to the {@code executionGraphDispatchAddressAlignment} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer executionGraphDispatchAddressAlignment(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nexecutionGraphDispatchAddressAlignment(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroupCount} field. */
+        /** Copies the specified {@link IntBuffer} to the {@code maxExecutionGraphWorkgroupCount} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphWorkgroupCount(@NativeType("uint32_t[3]") IntBuffer value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroupCount(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroupCount} field. */
+        /** Sets the specified value at the specified index of the {@code maxExecutionGraphWorkgroupCount} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphWorkgroupCount(int index, @NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroupCount(address(), index, value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEnqueuePropertiesAMDX#maxExecutionGraphWorkgroups} field. */
+        /** Sets the specified value to the {@code maxExecutionGraphWorkgroups} field. */
         public VkPhysicalDeviceShaderEnqueuePropertiesAMDX.Buffer maxExecutionGraphWorkgroups(@NativeType("uint32_t") int value) { VkPhysicalDeviceShaderEnqueuePropertiesAMDX.nmaxExecutionGraphWorkgroups(address(), value); return this; }
 
     }

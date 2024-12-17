@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_font_glyph {
  *     nk_rune codepoint;
  *     float xadvance;
@@ -32,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float v0;
  *     float u1;
  *     float v1;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_font_glyph")
 public class NkFontGlyph extends Struct<NkFontGlyph> implements NativeResource {

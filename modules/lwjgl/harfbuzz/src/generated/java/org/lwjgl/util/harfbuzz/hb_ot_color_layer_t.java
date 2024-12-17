@@ -16,17 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Pairs of glyph and color index.
- * 
- * <p>A color index of 0xFFFF does not refer to a palette color, but indicates that the foreground color should be used.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_ot_color_layer_t {
- *     hb_codepoint_t {@link #glyph};
- *     unsigned int {@link #color_index};
- * }</code></pre>
+ *     hb_codepoint_t glyph;
+ *     unsigned int color_index;
+ * }}</pre>
  */
 public class hb_ot_color_layer_t extends Struct<hb_ot_color_layer_t> implements NativeResource {
 
@@ -76,16 +70,16 @@ public class hb_ot_color_layer_t extends Struct<hb_ot_color_layer_t> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the glyph ID of the layer */
+    /** @return the value of the {@code glyph} field. */
     @NativeType("hb_codepoint_t")
     public int glyph() { return nglyph(address()); }
-    /** the palette color index of the layer */
+    /** @return the value of the {@code color_index} field. */
     @NativeType("unsigned int")
     public int color_index() { return ncolor_index(address()); }
 
-    /** Sets the specified value to the {@link #glyph} field. */
+    /** Sets the specified value to the {@code glyph} field. */
     public hb_ot_color_layer_t glyph(@NativeType("hb_codepoint_t") int value) { nglyph(address(), value); return this; }
-    /** Sets the specified value to the {@link #color_index} field. */
+    /** Sets the specified value to the {@code color_index} field. */
     public hb_ot_color_layer_t color_index(@NativeType("unsigned int") int value) { ncolor_index(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -275,16 +269,16 @@ public class hb_ot_color_layer_t extends Struct<hb_ot_color_layer_t> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_ot_color_layer_t#glyph} field. */
+        /** @return the value of the {@code glyph} field. */
         @NativeType("hb_codepoint_t")
         public int glyph() { return hb_ot_color_layer_t.nglyph(address()); }
-        /** @return the value of the {@link hb_ot_color_layer_t#color_index} field. */
+        /** @return the value of the {@code color_index} field. */
         @NativeType("unsigned int")
         public int color_index() { return hb_ot_color_layer_t.ncolor_index(address()); }
 
-        /** Sets the specified value to the {@link hb_ot_color_layer_t#glyph} field. */
+        /** Sets the specified value to the {@code glyph} field. */
         public hb_ot_color_layer_t.Buffer glyph(@NativeType("hb_codepoint_t") int value) { hb_ot_color_layer_t.nglyph(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_ot_color_layer_t#color_index} field. */
+        /** Sets the specified value to the {@code color_index} field. */
         public hb_ot_color_layer_t.Buffer color_index(@NativeType("unsigned int") int value) { hb_ot_color_layer_t.ncolor_index(address(), value); return this; }
 
     }

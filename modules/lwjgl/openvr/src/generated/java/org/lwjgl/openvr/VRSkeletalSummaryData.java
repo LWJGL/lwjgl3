@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Contains summary information about the current skeletal pose.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRSkeletalSummaryData_t {
- *     float {@link #flFingerCurl}[5];
- *     float {@link #flFingerSplay}[4];
- * }</code></pre>
+ *     float flFingerCurl[5];
+ *     float flFingerSplay[4];
+ * }}</pre>
  */
 @NativeType("struct VRSkeletalSummaryData_t")
 public class VRSkeletalSummaryData extends Struct<VRSkeletalSummaryData> implements NativeResource {
@@ -76,31 +72,15 @@ public class VRSkeletalSummaryData extends Struct<VRSkeletalSummaryData> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * The amount that each finger is 'curled' inwards towards the palm.
-     * 
-     * <p>In the case of the thumb, this represents how much the thumb is wrapped around the fist. 0 means straight, 1 means fully curled.</p>
-     */
+    /** @return a {@link FloatBuffer} view of the {@code flFingerCurl} field. */
     @NativeType("float[5]")
     public FloatBuffer flFingerCurl() { return nflFingerCurl(address()); }
-    /**
-     * The amount that each finger is 'curled' inwards towards the palm.
-     * 
-     * <p>In the case of the thumb, this represents how much the thumb is wrapped around the fist. 0 means straight, 1 means fully curled.</p>
-     */
+    /** @return the value at the specified index of the {@code flFingerCurl} field. */
     public float flFingerCurl(int index) { return nflFingerCurl(address(), index); }
-    /**
-     * The amount that each pair of adjacent fingers are separated.
-     * 
-     * <p>0 means the digits are touching, 1 means they are fully separated.</p>
-     */
+    /** @return a {@link FloatBuffer} view of the {@code flFingerSplay} field. */
     @NativeType("float[4]")
     public FloatBuffer flFingerSplay() { return nflFingerSplay(address()); }
-    /**
-     * The amount that each pair of adjacent fingers are separated.
-     * 
-     * <p>0 means the digits are touching, 1 means they are fully separated.</p>
-     */
+    /** @return the value at the specified index of the {@code flFingerSplay} field. */
     public float flFingerSplay(int index) { return nflFingerSplay(address(), index); }
 
     // -----------------------------------
@@ -289,15 +269,15 @@ public class VRSkeletalSummaryData extends Struct<VRSkeletalSummaryData> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link FloatBuffer} view of the {@link VRSkeletalSummaryData#flFingerCurl} field. */
+        /** @return a {@link FloatBuffer} view of the {@code flFingerCurl} field. */
         @NativeType("float[5]")
         public FloatBuffer flFingerCurl() { return VRSkeletalSummaryData.nflFingerCurl(address()); }
-        /** @return the value at the specified index of the {@link VRSkeletalSummaryData#flFingerCurl} field. */
+        /** @return the value at the specified index of the {@code flFingerCurl} field. */
         public float flFingerCurl(int index) { return VRSkeletalSummaryData.nflFingerCurl(address(), index); }
-        /** @return a {@link FloatBuffer} view of the {@link VRSkeletalSummaryData#flFingerSplay} field. */
+        /** @return a {@link FloatBuffer} view of the {@code flFingerSplay} field. */
         @NativeType("float[4]")
         public FloatBuffer flFingerSplay() { return VRSkeletalSummaryData.nflFingerSplay(address()); }
-        /** @return the value at the specified index of the {@link VRSkeletalSummaryData#flFingerSplay} field. */
+        /** @return the value at the specified index of the {@code flFingerSplay} field. */
         public float flFingerSplay(int index) { return VRSkeletalSummaryData.nflFingerSplay(address(), index); }
 
     }

@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A framebuffer object.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct NVGLUframebuffer {
- *     GLuint {@link #fbo};
- *     GLuint {@link #rbo};
- *     GLuint {@link #texture};
- *     int {@link #image};
- * }</code></pre>
+ *     GLuint fbo;
+ *     GLuint rbo;
+ *     GLuint texture;
+ *     int image;
+ * }}</pre>
  */
 @NativeType("struct NVGLUframebuffer")
 public class NVGLUFramebuffer extends Struct<NVGLUFramebuffer> {
@@ -81,16 +77,16 @@ public class NVGLUFramebuffer extends Struct<NVGLUFramebuffer> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the OpenGL framebuffer object handle */
+    /** @return the value of the {@code fbo} field. */
     @NativeType("GLuint")
     public int fbo() { return nfbo(address()); }
-    /** the OpenGL renderbuffer handle */
+    /** @return the value of the {@code rbo} field. */
     @NativeType("GLuint")
     public int rbo() { return nrbo(address()); }
-    /** the OpenGL texture handle */
+    /** @return the value of the {@code texture} field. */
     @NativeType("GLuint")
     public int texture() { return ntexture(address()); }
-    /** the NanoVG image handle */
+    /** @return the value of the {@code image} field. */
     public int image() { return nimage(address()); }
 
     // -----------------------------------
@@ -174,16 +170,16 @@ public class NVGLUFramebuffer extends Struct<NVGLUFramebuffer> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link NVGLUFramebuffer#fbo} field. */
+        /** @return the value of the {@code fbo} field. */
         @NativeType("GLuint")
         public int fbo() { return NVGLUFramebuffer.nfbo(address()); }
-        /** @return the value of the {@link NVGLUFramebuffer#rbo} field. */
+        /** @return the value of the {@code rbo} field. */
         @NativeType("GLuint")
         public int rbo() { return NVGLUFramebuffer.nrbo(address()); }
-        /** @return the value of the {@link NVGLUFramebuffer#texture} field. */
+        /** @return the value of the {@code texture} field. */
         @NativeType("GLuint")
         public int texture() { return NVGLUFramebuffer.ntexture(address()); }
-        /** @return the value of the {@link NVGLUFramebuffer#image} field. */
+        /** @return the value of the {@code image} field. */
         public int image() { return NVGLUFramebuffer.nimage(address()); }
 
     }

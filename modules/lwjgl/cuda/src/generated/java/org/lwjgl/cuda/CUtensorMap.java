@@ -19,12 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.cuda.CU.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUtensorMap {
  *     cuuint64_t opaque[CU_TENSOR_MAP_NUM_QWORDS];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUtensorMap extends Struct<CUtensorMap> implements NativeResource {
 

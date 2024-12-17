@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     ALenum eventType,
- *     ALuint object,
- *     ALuint param,
- *     ALsizei length,
- *     ALchar const *message,
- *     ALvoid *userParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ALEVENTPROCSOFT} */
 public abstract class SOFTEventProc extends Callback implements SOFTEventProcI {
 
     /**

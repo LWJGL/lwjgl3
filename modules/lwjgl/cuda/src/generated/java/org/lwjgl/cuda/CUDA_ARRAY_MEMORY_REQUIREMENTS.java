@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_ARRAY_MEMORY_REQUIREMENTS {
  *     size_t size;
  *     size_t alignment;
  *     unsigned int reserved[4];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_ARRAY_MEMORY_REQUIREMENTS extends Struct<CUDA_ARRAY_MEMORY_REQUIREMENTS> implements NativeResource {
 

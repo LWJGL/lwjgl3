@@ -15,19 +15,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_reusable_sync.txt">KHR_reusable_sync</a> extension.
- * 
- * <p>This extension introduces the concept of "sync objects" into EGL. Sync objects are a synchronization primitive, representing events whose completion
- * can be tested or waited upon. This extension borrows from the GL_ARB_sync extension but introduces a type of sync object known as "reusable sync
- * object" comparable to an OS semaphore. The specification is designed to allow additional types of sync objects to be easily introduced in later
- * extensions.</p>
- * 
- * <p>Reusable sync objects may be used to synchronize activity between threads or between client APIs. Synchronization is accomplished by explicitly
- * changing the status of a reusable object using EGL API commands.</p>
- * 
- * <p>Requires {@link EGL11 EGL 1.1}.</p>
- */
 public class KHRReusableSync {
 
     public static final int
@@ -50,6 +37,7 @@ public class KHRReusableSync {
 
     // --- [ eglCreateSyncKHR ] ---
 
+    /** {@code EGLSyncKHR eglCreateSyncKHR(EGLDisplay dpy, EGLenum type, EGLint const * attrib_list)} */
     public static long neglCreateSyncKHR(long dpy, int type, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateSyncKHR;
         if (CHECKS) {
@@ -59,6 +47,7 @@ public class KHRReusableSync {
         return callPPP(dpy, type, attrib_list, __functionAddress);
     }
 
+    /** {@code EGLSyncKHR eglCreateSyncKHR(EGLDisplay dpy, EGLenum type, EGLint const * attrib_list)} */
     @NativeType("EGLSyncKHR")
     public static long eglCreateSyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int type, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
@@ -69,6 +58,7 @@ public class KHRReusableSync {
 
     // --- [ eglDestroySyncKHR ] ---
 
+    /** {@code EGLBoolean eglDestroySyncKHR(EGLDisplay dpy, EGLSyncKHR sync)} */
     @NativeType("EGLBoolean")
     public static boolean eglDestroySyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSyncKHR") long sync) {
         long __functionAddress = EGL.getCapabilities().eglDestroySyncKHR;
@@ -82,6 +72,7 @@ public class KHRReusableSync {
 
     // --- [ eglClientWaitSyncKHR ] ---
 
+    /** {@code EGLint eglClientWaitSyncKHR(EGLDisplay dpy, EGLSyncKHR sync, EGLint flags, EGLTimeKHR timeout)} */
     @NativeType("EGLint")
     public static int eglClientWaitSyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSyncKHR") long sync, @NativeType("EGLint") int flags, @NativeType("EGLTimeKHR") long timeout) {
         long __functionAddress = EGL.getCapabilities().eglClientWaitSyncKHR;
@@ -95,6 +86,7 @@ public class KHRReusableSync {
 
     // --- [ eglSignalSyncKHR ] ---
 
+    /** {@code EGLBoolean eglSignalSyncKHR(EGLDisplay dpy, EGLSyncKHR sync, EGLenum mode)} */
     @NativeType("EGLBoolean")
     public static boolean eglSignalSyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSyncKHR") long sync, @NativeType("EGLenum") int mode) {
         long __functionAddress = EGL.getCapabilities().eglSignalSyncKHR;
@@ -108,6 +100,7 @@ public class KHRReusableSync {
 
     // --- [ eglGetSyncAttribKHR ] ---
 
+    /** {@code EGLBoolean eglGetSyncAttribKHR(EGLDisplay dpy, EGLSyncKHR sync, EGLint attribute, EGLint * value)} */
     public static int neglGetSyncAttribKHR(long dpy, long sync, int attribute, long value) {
         long __functionAddress = EGL.getCapabilities().eglGetSyncAttribKHR;
         if (CHECKS) {
@@ -118,6 +111,7 @@ public class KHRReusableSync {
         return callPPPI(dpy, sync, attribute, value, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglGetSyncAttribKHR(EGLDisplay dpy, EGLSyncKHR sync, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglGetSyncAttribKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSyncKHR") long sync, @NativeType("EGLint") int attribute, @NativeType("EGLint *") IntBuffer value) {
         if (CHECKS) {
@@ -126,7 +120,7 @@ public class KHRReusableSync {
         return neglGetSyncAttribKHR(dpy, sync, attribute, memAddress(value)) != 0;
     }
 
-    /** Array version of: {@link #eglCreateSyncKHR CreateSyncKHR} */
+    /** {@code EGLSyncKHR eglCreateSyncKHR(EGLDisplay dpy, EGLenum type, EGLint const * attrib_list)} */
     @NativeType("EGLSyncKHR")
     public static long eglCreateSyncKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int type, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateSyncKHR;
@@ -138,7 +132,7 @@ public class KHRReusableSync {
         return callPPP(dpy, type, attrib_list, __functionAddress);
     }
 
-    /** Array version of: {@link #eglGetSyncAttribKHR GetSyncAttribKHR} */
+    /** {@code EGLBoolean eglGetSyncAttribKHR(EGLDisplay dpy, EGLSyncKHR sync, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglGetSyncAttribKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSyncKHR") long sync, @NativeType("EGLint") int attribute, @NativeType("EGLint *") int[] value) {
         long __functionAddress = EGL.getCapabilities().eglGetSyncAttribKHR;

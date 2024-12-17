@@ -17,33 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A skeleton bone represents a single bone is a skeleton structure.
- * 
- * <p>Skeleton-Animations can be represented via a skeleton struct, which describes a hierarchical tree assembled from skeleton bones. A bone is linked to a
- * mesh. The bone knows its parent bone. If there is no parent bone the parent id is marked with -1.</p>
- * 
- * <p>The skeleton-bone stores a pointer to its used armature. If there is no armature this value if set to {@code nullptr}.</p>
- * 
- * <p>A skeleton bone stores its offset-matrix, which is the absolute transformation for the bone. The bone stores the locale transformation to its parent as
- * well. You can compute the offset matrix by multiplying the hierarchy like:</p>
- * 
- * <pre><code>
- * Tree: s1 -&gt; s2 -&gt; s3
- * Offset-Matrix s3 = locale-s3 * locale-s2 * locale-s1</code></pre>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiSkeletonBone {
- *     int {@link #mParent};
- *     {@link AINode struct aiNode} * {@link #mArmature};
- *     {@link AINode struct aiNode} * {@link #mNode};
- *     unsigned int {@link #mNumnWeights};
- *     {@link AIMesh struct aiMesh} * {@link #mMeshId};
- *     {@link AIVertexWeight struct aiVertexWeight} * {@link #mWeights};
- *     {@link AIMatrix4x4 struct aiMatrix4x4} {@link #mOffsetMatrix};
- *     {@link AIMatrix4x4 struct aiMatrix4x4} {@link #mLocalMatrix};
- * }</code></pre>
+ *     int mParent;
+ *     {@link AINode struct aiNode} * mArmature;
+ *     {@link AINode struct aiNode} * mNode;
+ *     unsigned int mNumnWeights;
+ *     {@link AIMesh struct aiMesh} * mMeshId;
+ *     {@link AIVertexWeight struct aiVertexWeight} * mWeights;
+ *     {@link AIMatrix4x4 struct aiMatrix4x4} mOffsetMatrix;
+ *     {@link AIMatrix4x4 struct aiMatrix4x4} mLocalMatrix;
+ * }}</pre>
  */
 @NativeType("struct aiSkeletonBone")
 public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeResource {
@@ -112,64 +96,49 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the parent bone index, is -1 one if this bone represents the root bone */
+    /** @return the value of the {@code mParent} field. */
     public int mParent() { return nmParent(address()); }
-    /**
-     * The bone armature node - used for skeleton conversion.
-     * 
-     * <p>You must enable {@link Assimp#aiProcess_PopulateArmatureData Process_PopulateArmatureData} to populate this.</p>
-     */
+    /** @return a {@link AINode} view of the struct pointed to by the {@code mArmature} field. */
     @NativeType("struct aiNode *")
     public @Nullable AINode mArmature() { return nmArmature(address()); }
-    /**
-     * The bone node in the scene - used for skeleton conversion.
-     * 
-     * <p>You must enable {@link Assimp#aiProcess_PopulateArmatureData Process_PopulateArmatureData} to populate this.</p>
-     */
+    /** @return a {@link AINode} view of the struct pointed to by the {@code mNode} field. */
     @NativeType("struct aiNode *")
     public @Nullable AINode mNode() { return nmNode(address()); }
-    /** the number of weights */
+    /** @return the value of the {@code mNumnWeights} field. */
     @NativeType("unsigned int")
     public int mNumnWeights() { return nmNumnWeights(address()); }
-    /** the mesh index, which will get influenced by the weight */
+    /** @return a {@link AIMesh.Buffer} view of the struct array pointed to by the {@code mMeshId} field. */
     @NativeType("struct aiMesh *")
     public AIMesh.Buffer mMeshId() { return nmMeshId(address()); }
-    /** the influence weights of this bone, by vertex index */
+    /** @return a {@link AIVertexWeight.Buffer} view of the struct array pointed to by the {@code mWeights} field. */
     @NativeType("struct aiVertexWeight *")
     public AIVertexWeight.Buffer mWeights() { return nmWeights(address()); }
-    /**
-     * Matrix that transforms from bone space to mesh space in bind pose.
-     * 
-     * <p>This matrix describes the position of the mesh in the local space of this bone when the skeleton was bound. Thus it can be used directly to determine a
-     * desired vertex position, given the world-space transform of the bone when animated, and the position of the vertex in mesh space.</p>
-     * 
-     * <p>It is sometimes called an inverse-bind matrix, or inverse bind pose matrix.</p>
-     */
+    /** @return a {@link AIMatrix4x4} view of the {@code mOffsetMatrix} field. */
     @NativeType("struct aiMatrix4x4")
     public AIMatrix4x4 mOffsetMatrix() { return nmOffsetMatrix(address()); }
-    /** matrix that transforms the local bone in bind pose */
+    /** @return a {@link AIMatrix4x4} view of the {@code mLocalMatrix} field. */
     @NativeType("struct aiMatrix4x4")
     public AIMatrix4x4 mLocalMatrix() { return nmLocalMatrix(address()); }
 
-    /** Sets the specified value to the {@link #mParent} field. */
+    /** Sets the specified value to the {@code mParent} field. */
     public AISkeletonBone mParent(int value) { nmParent(address(), value); return this; }
-    /** Sets the address of the specified {@link AINode} to the {@link #mArmature} field. */
+    /** Sets the address of the specified {@link AINode} to the {@code mArmature} field. */
     public AISkeletonBone mArmature(@Nullable @NativeType("struct aiNode *") AINode value) { nmArmature(address(), value); return this; }
-    /** Sets the address of the specified {@link AINode} to the {@link #mNode} field. */
+    /** Sets the address of the specified {@link AINode} to the {@code mNode} field. */
     public AISkeletonBone mNode(@Nullable @NativeType("struct aiNode *") AINode value) { nmNode(address(), value); return this; }
-    /** Sets the specified value to the {@link #mNumnWeights} field. */
+    /** Sets the specified value to the {@code mNumnWeights} field. */
     public AISkeletonBone mNumnWeights(@NativeType("unsigned int") int value) { nmNumnWeights(address(), value); return this; }
-    /** Sets the address of the specified {@link AIMesh.Buffer} to the {@link #mMeshId} field. */
+    /** Sets the address of the specified {@link AIMesh.Buffer} to the {@code mMeshId} field. */
     public AISkeletonBone mMeshId(@NativeType("struct aiMesh *") AIMesh.Buffer value) { nmMeshId(address(), value); return this; }
-    /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@link #mWeights} field. */
+    /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@code mWeights} field. */
     public AISkeletonBone mWeights(@NativeType("struct aiVertexWeight *") AIVertexWeight.Buffer value) { nmWeights(address(), value); return this; }
-    /** Copies the specified {@link AIMatrix4x4} to the {@link #mOffsetMatrix} field. */
+    /** Copies the specified {@link AIMatrix4x4} to the {@code mOffsetMatrix} field. */
     public AISkeletonBone mOffsetMatrix(@NativeType("struct aiMatrix4x4") AIMatrix4x4 value) { nmOffsetMatrix(address(), value); return this; }
-    /** Passes the {@link #mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AISkeletonBone mOffsetMatrix(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mOffsetMatrix()); return this; }
-    /** Copies the specified {@link AIMatrix4x4} to the {@link #mLocalMatrix} field. */
+    /** Copies the specified {@link AIMatrix4x4} to the {@code mLocalMatrix} field. */
     public AISkeletonBone mLocalMatrix(@NativeType("struct aiMatrix4x4") AIMatrix4x4 value) { nmLocalMatrix(address(), value); return this; }
-    /** Passes the {@link #mLocalMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mLocalMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
     public AISkeletonBone mLocalMatrix(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mLocalMatrix()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -416,49 +385,49 @@ public class AISkeletonBone extends Struct<AISkeletonBone> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AISkeletonBone#mParent} field. */
+        /** @return the value of the {@code mParent} field. */
         public int mParent() { return AISkeletonBone.nmParent(address()); }
-        /** @return a {@link AINode} view of the struct pointed to by the {@link AISkeletonBone#mArmature} field. */
+        /** @return a {@link AINode} view of the struct pointed to by the {@code mArmature} field. */
         @NativeType("struct aiNode *")
         public @Nullable AINode mArmature() { return AISkeletonBone.nmArmature(address()); }
-        /** @return a {@link AINode} view of the struct pointed to by the {@link AISkeletonBone#mNode} field. */
+        /** @return a {@link AINode} view of the struct pointed to by the {@code mNode} field. */
         @NativeType("struct aiNode *")
         public @Nullable AINode mNode() { return AISkeletonBone.nmNode(address()); }
-        /** @return the value of the {@link AISkeletonBone#mNumnWeights} field. */
+        /** @return the value of the {@code mNumnWeights} field. */
         @NativeType("unsigned int")
         public int mNumnWeights() { return AISkeletonBone.nmNumnWeights(address()); }
-        /** @return a {@link AIMesh.Buffer} view of the struct array pointed to by the {@link AISkeletonBone#mMeshId} field. */
+        /** @return a {@link AIMesh.Buffer} view of the struct array pointed to by the {@code mMeshId} field. */
         @NativeType("struct aiMesh *")
         public AIMesh.Buffer mMeshId() { return AISkeletonBone.nmMeshId(address()); }
-        /** @return a {@link AIVertexWeight.Buffer} view of the struct array pointed to by the {@link AISkeletonBone#mWeights} field. */
+        /** @return a {@link AIVertexWeight.Buffer} view of the struct array pointed to by the {@code mWeights} field. */
         @NativeType("struct aiVertexWeight *")
         public AIVertexWeight.Buffer mWeights() { return AISkeletonBone.nmWeights(address()); }
-        /** @return a {@link AIMatrix4x4} view of the {@link AISkeletonBone#mOffsetMatrix} field. */
+        /** @return a {@link AIMatrix4x4} view of the {@code mOffsetMatrix} field. */
         @NativeType("struct aiMatrix4x4")
         public AIMatrix4x4 mOffsetMatrix() { return AISkeletonBone.nmOffsetMatrix(address()); }
-        /** @return a {@link AIMatrix4x4} view of the {@link AISkeletonBone#mLocalMatrix} field. */
+        /** @return a {@link AIMatrix4x4} view of the {@code mLocalMatrix} field. */
         @NativeType("struct aiMatrix4x4")
         public AIMatrix4x4 mLocalMatrix() { return AISkeletonBone.nmLocalMatrix(address()); }
 
-        /** Sets the specified value to the {@link AISkeletonBone#mParent} field. */
+        /** Sets the specified value to the {@code mParent} field. */
         public AISkeletonBone.Buffer mParent(int value) { AISkeletonBone.nmParent(address(), value); return this; }
-        /** Sets the address of the specified {@link AINode} to the {@link AISkeletonBone#mArmature} field. */
+        /** Sets the address of the specified {@link AINode} to the {@code mArmature} field. */
         public AISkeletonBone.Buffer mArmature(@Nullable @NativeType("struct aiNode *") AINode value) { AISkeletonBone.nmArmature(address(), value); return this; }
-        /** Sets the address of the specified {@link AINode} to the {@link AISkeletonBone#mNode} field. */
+        /** Sets the address of the specified {@link AINode} to the {@code mNode} field. */
         public AISkeletonBone.Buffer mNode(@Nullable @NativeType("struct aiNode *") AINode value) { AISkeletonBone.nmNode(address(), value); return this; }
-        /** Sets the specified value to the {@link AISkeletonBone#mNumnWeights} field. */
+        /** Sets the specified value to the {@code mNumnWeights} field. */
         public AISkeletonBone.Buffer mNumnWeights(@NativeType("unsigned int") int value) { AISkeletonBone.nmNumnWeights(address(), value); return this; }
-        /** Sets the address of the specified {@link AIMesh.Buffer} to the {@link AISkeletonBone#mMeshId} field. */
+        /** Sets the address of the specified {@link AIMesh.Buffer} to the {@code mMeshId} field. */
         public AISkeletonBone.Buffer mMeshId(@NativeType("struct aiMesh *") AIMesh.Buffer value) { AISkeletonBone.nmMeshId(address(), value); return this; }
-        /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@link AISkeletonBone#mWeights} field. */
+        /** Sets the address of the specified {@link AIVertexWeight.Buffer} to the {@code mWeights} field. */
         public AISkeletonBone.Buffer mWeights(@NativeType("struct aiVertexWeight *") AIVertexWeight.Buffer value) { AISkeletonBone.nmWeights(address(), value); return this; }
-        /** Copies the specified {@link AIMatrix4x4} to the {@link AISkeletonBone#mOffsetMatrix} field. */
+        /** Copies the specified {@link AIMatrix4x4} to the {@code mOffsetMatrix} field. */
         public AISkeletonBone.Buffer mOffsetMatrix(@NativeType("struct aiMatrix4x4") AIMatrix4x4 value) { AISkeletonBone.nmOffsetMatrix(address(), value); return this; }
-        /** Passes the {@link AISkeletonBone#mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mOffsetMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AISkeletonBone.Buffer mOffsetMatrix(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mOffsetMatrix()); return this; }
-        /** Copies the specified {@link AIMatrix4x4} to the {@link AISkeletonBone#mLocalMatrix} field. */
+        /** Copies the specified {@link AIMatrix4x4} to the {@code mLocalMatrix} field. */
         public AISkeletonBone.Buffer mLocalMatrix(@NativeType("struct aiMatrix4x4") AIMatrix4x4 value) { AISkeletonBone.nmLocalMatrix(address(), value); return this; }
-        /** Passes the {@link AISkeletonBone#mLocalMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mLocalMatrix} field to the specified {@link java.util.function.Consumer Consumer}. */
         public AISkeletonBone.Buffer mLocalMatrix(java.util.function.Consumer<AIMatrix4x4> consumer) { consumer.accept(mLocalMatrix()); return this; }
 
     }

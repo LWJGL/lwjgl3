@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information on future to cancel.
- * 
- * <h5>Description</h5>
- * 
- * <p>An {@link XrFutureCancelInfoEXT} describes which future to cancel.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using {@link XrFutureCancelInfoEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTFuture#XR_TYPE_FUTURE_CANCEL_INFO_EXT TYPE_FUTURE_CANCEL_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTFuture#xrCancelFutureEXT CancelFutureEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFutureCancelInfoEXT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrFutureEXT {@link #future};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrFutureEXT future;
+ * }}</pre>
  */
 public class XrFutureCancelInfoEXT extends Struct<XrFutureCancelInfoEXT> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class XrFutureCancelInfoEXT extends Struct<XrFutureCancelInfoEXT> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** {@code XrFutureEXT} to cancel. */
+    /** @return the value of the {@code future} field. */
     @NativeType("XrFutureEXT")
     public long future() { return nfuture(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFutureCancelInfoEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_CANCEL_INFO_EXT TYPE_FUTURE_CANCEL_INFO_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_CANCEL_INFO_EXT TYPE_FUTURE_CANCEL_INFO_EXT} value to the {@code type} field. */
     public XrFutureCancelInfoEXT type$Default() { return type(EXTFuture.XR_TYPE_FUTURE_CANCEL_INFO_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFutureCancelInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #future} field. */
+    /** Sets the specified value to the {@code future} field. */
     public XrFutureCancelInfoEXT future(@NativeType("XrFutureEXT") long value) { nfuture(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class XrFutureCancelInfoEXT extends Struct<XrFutureCancelInfoEXT> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFutureCancelInfoEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFutureCancelInfoEXT.ntype(address()); }
-        /** @return the value of the {@link XrFutureCancelInfoEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFutureCancelInfoEXT.nnext(address()); }
-        /** @return the value of the {@link XrFutureCancelInfoEXT#future} field. */
+        /** @return the value of the {@code future} field. */
         @NativeType("XrFutureEXT")
         public long future() { return XrFutureCancelInfoEXT.nfuture(address()); }
 
-        /** Sets the specified value to the {@link XrFutureCancelInfoEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFutureCancelInfoEXT.Buffer type(@NativeType("XrStructureType") int value) { XrFutureCancelInfoEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_CANCEL_INFO_EXT TYPE_FUTURE_CANCEL_INFO_EXT} value to the {@link XrFutureCancelInfoEXT#type} field. */
+        /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_CANCEL_INFO_EXT TYPE_FUTURE_CANCEL_INFO_EXT} value to the {@code type} field. */
         public XrFutureCancelInfoEXT.Buffer type$Default() { return type(EXTFuture.XR_TYPE_FUTURE_CANCEL_INFO_EXT); }
-        /** Sets the specified value to the {@link XrFutureCancelInfoEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFutureCancelInfoEXT.Buffer next(@NativeType("void const *") long value) { XrFutureCancelInfoEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFutureCancelInfoEXT#future} field. */
+        /** Sets the specified value to the {@code future} field. */
         public XrFutureCancelInfoEXT.Buffer future(@NativeType("XrFutureEXT") long value) { XrFutureCancelInfoEXT.nfuture(address(), value); return this; }
 
     }

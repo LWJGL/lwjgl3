@@ -17,49 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Presentation modes for a vkQueuePresentKHR operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkPresentInfoKHR} includes a {@link VkSwapchainPresentModeInfoEXT} structure, then that structure defines the presentation modes used for the current and subsequent presentation operations.</p>
- * 
- * <p>When the application changes present modes with {@link VkSwapchainPresentModeInfoEXT}, images that have already been queued for presentation will continue to be presented according to the previous present mode. The current image being queued for presentation and subsequent images will be presented according to the new present mode. The behavior during the transition between the two modes is defined as follows.</p>
- * 
- * <ul>
- * <li>Transition from {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR} to {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR}: the presentation engine updates the shared presentable image according to the behavior of {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR}.</li>
- * <li>Transition from {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR PRESENT_MODE_SHARED_DEMAND_REFRESH_KHR} to {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR}: the presentation engine <b>may</b> update the shared presentable image or defer that to its regular refresh cycle, according to the behavior of {@link KHRSharedPresentableImage#VK_PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR PRESENT_MODE_SHARED_CONTINUOUS_REFRESH_KHR}.</li>
- * <li>Transition between {@link KHRSurface#VK_PRESENT_MODE_FIFO_KHR PRESENT_MODE_FIFO_KHR} and {@link KHRSurface#VK_PRESENT_MODE_FIFO_RELAXED_KHR PRESENT_MODE_FIFO_RELAXED_KHR}: Images continue to be appended to the same FIFO queue, and the behavior with respect to waiting for vertical blanking period will follow the new mode for current and subsequent images.</li>
- * <li>Transition from {@link KHRSurface#VK_PRESENT_MODE_IMMEDIATE_KHR PRESENT_MODE_IMMEDIATE_KHR} to {@link KHRSurface#VK_PRESENT_MODE_FIFO_KHR PRESENT_MODE_FIFO_KHR} or {@link KHRSurface#VK_PRESENT_MODE_FIFO_RELAXED_KHR PRESENT_MODE_FIFO_RELAXED_KHR} or {@link EXTPresentModeFifoLatestReady#VK_PRESENT_MODE_FIFO_LATEST_READY_EXT PRESENT_MODE_FIFO_LATEST_READY_EXT} : As all prior present requests in the {@link KHRSurface#VK_PRESENT_MODE_IMMEDIATE_KHR PRESENT_MODE_IMMEDIATE_KHR} mode are applied immediately, there are no outstanding present operations in this mode, and current and subsequent images are appended to the FIFO queue and presented according to the new mode.</li>
- * <li>Transition from {@link KHRSurface#VK_PRESENT_MODE_MAILBOX_KHR PRESENT_MODE_MAILBOX_KHR} to {@link KHRSurface#VK_PRESENT_MODE_FIFO_KHR PRESENT_MODE_FIFO_KHR} or {@link KHRSurface#VK_PRESENT_MODE_FIFO_RELAXED_KHR PRESENT_MODE_FIFO_RELAXED_KHR} or {@link EXTPresentModeFifoLatestReady#VK_PRESENT_MODE_FIFO_LATEST_READY_EXT PRESENT_MODE_FIFO_LATEST_READY_EXT} : Presentation in FIFO modes require waiting for the next vertical blanking period, with {@link KHRSurface#VK_PRESENT_MODE_MAILBOX_KHR PRESENT_MODE_MAILBOX_KHR} allowing the pending present operation to be replaced by a new one. In this case, the current present operation will replace the pending present operation and is applied according to the new mode.</li>
- * <li>Transition from {@link KHRSurface#VK_PRESENT_MODE_FIFO_KHR PRESENT_MODE_FIFO_KHR} or {@link KHRSurface#VK_PRESENT_MODE_FIFO_RELAXED_KHR PRESENT_MODE_FIFO_RELAXED_KHR} or {@link EXTPresentModeFifoLatestReady#VK_PRESENT_MODE_FIFO_LATEST_READY_EXT PRESENT_MODE_FIFO_LATEST_READY_EXT} to {@link KHRSurface#VK_PRESENT_MODE_IMMEDIATE_KHR PRESENT_MODE_IMMEDIATE_KHR} or {@link KHRSurface#VK_PRESENT_MODE_MAILBOX_KHR PRESENT_MODE_MAILBOX_KHR}: If the FIFO queue is empty, presentation is done according to the behavior of the new mode. If there are present operations in the FIFO queue, once the last present operation is performed based on the respective vertical blanking period, the current and subsequent updates are applied according to the new mode.</li>
- * <li>Transition between {@link KHRSurface#VK_PRESENT_MODE_FIFO_KHR PRESENT_MODE_FIFO_KHR} or {@link KHRSurface#VK_PRESENT_MODE_FIFO_RELAXED_KHR PRESENT_MODE_FIFO_RELAXED_KHR}, and {@link EXTPresentModeFifoLatestReady#VK_PRESENT_MODE_FIFO_LATEST_READY_EXT PRESENT_MODE_FIFO_LATEST_READY_EXT}: Images continue to be appended to the same FIFO queue, and the behavior with respect to waiting for vertical blanking period and dequeuing requests will follow the new mode for current and subsequent images.</li>
- * <li>The behavior during transition between any other present modes, if possible, is implementation defined.</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code swapchainCount} <b>must</b> be equal to {@link VkPresentInfoKHR}{@code ::swapchainCount}</li>
- * <li>Each entry in {@code pPresentModes} <b>must</b> be a presentation mode specified in {@link VkSwapchainPresentModesCreateInfoEXT}{@code ::pPresentModes} when creating the entry’s corresponding swapchain</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT}</li>
- * <li>{@code pPresentModes} <b>must</b> be a valid pointer to an array of {@code swapchainCount} valid {@code VkPresentModeKHR} values</li>
- * <li>{@code swapchainCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSwapchainPresentModeInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #swapchainCount};
- *     VkPresentModeKHR const * {@link #pPresentModes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t swapchainCount;
+ *     VkPresentModeKHR const * pPresentModes;
+ * }}</pre>
  */
 public class VkSwapchainPresentModeInfoEXT extends Struct<VkSwapchainPresentModeInfoEXT> implements NativeResource {
 
@@ -115,26 +79,26 @@ public class VkSwapchainPresentModeInfoEXT extends Struct<VkSwapchainPresentMode
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of swapchains being presented to by this command. */
+    /** @return the value of the {@code swapchainCount} field. */
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
-    /** a list of presentation modes with {@code swapchainCount} entries. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pPresentModes} field. */
     @NativeType("VkPresentModeKHR const *")
     public IntBuffer pPresentModes() { return npPresentModes(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSwapchainPresentModeInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT} value to the {@code sType} field. */
     public VkSwapchainPresentModeInfoEXT sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSwapchainPresentModeInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pPresentModes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pPresentModes} field. */
     public VkSwapchainPresentModeInfoEXT pPresentModes(@NativeType("VkPresentModeKHR const *") IntBuffer value) { npPresentModes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,26 +307,26 @@ public class VkSwapchainPresentModeInfoEXT extends Struct<VkSwapchainPresentMode
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSwapchainPresentModeInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSwapchainPresentModeInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkSwapchainPresentModeInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSwapchainPresentModeInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkSwapchainPresentModeInfoEXT#swapchainCount} field. */
+        /** @return the value of the {@code swapchainCount} field. */
         @NativeType("uint32_t")
         public int swapchainCount() { return VkSwapchainPresentModeInfoEXT.nswapchainCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkSwapchainPresentModeInfoEXT#pPresentModes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pPresentModes} field. */
         @NativeType("VkPresentModeKHR const *")
         public IntBuffer pPresentModes() { return VkSwapchainPresentModeInfoEXT.npPresentModes(address()); }
 
-        /** Sets the specified value to the {@link VkSwapchainPresentModeInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSwapchainPresentModeInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainPresentModeInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT} value to the {@link VkSwapchainPresentModeInfoEXT#sType} field. */
+        /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT} value to the {@code sType} field. */
         public VkSwapchainPresentModeInfoEXT.Buffer sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkSwapchainPresentModeInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSwapchainPresentModeInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainPresentModeInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkSwapchainPresentModeInfoEXT#pPresentModes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pPresentModes} field. */
         public VkSwapchainPresentModeInfoEXT.Buffer pPresentModes(@NativeType("VkPresentModeKHR const *") IntBuffer value) { VkSwapchainPresentModeInfoEXT.npPresentModes(address(), value); return this; }
 
     }

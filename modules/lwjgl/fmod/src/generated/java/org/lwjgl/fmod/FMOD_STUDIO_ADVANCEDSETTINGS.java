@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_ADVANCEDSETTINGS {
  *     int cbsize;
  *     unsigned int commandqueuesize;
@@ -28,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int idlesampledatapoolsize;
  *     unsigned int streamingscheduledelay;
  *     char const * encryptionkey;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_ADVANCEDSETTINGS extends Struct<FMOD_STUDIO_ADVANCEDSETTINGS> implements NativeResource {
 

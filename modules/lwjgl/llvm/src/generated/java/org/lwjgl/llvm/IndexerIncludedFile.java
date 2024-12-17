@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to the {@code ppIncludedFile} field of the {@link IndexerCallbacks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * CXIdxClientFile (*{@link #invoke}) (
- *     CXClientData client_data,
- *     CXIdxIncludedFileInfo const *info
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class IndexerIncludedFile extends Callback implements IndexerIncludedFileI {
 
     /**

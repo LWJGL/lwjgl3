@@ -17,12 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_CHILD_GRAPH_NODE_PARAMS {
  *     CUgraph graph;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_CHILD_GRAPH_NODE_PARAMS extends Struct<CUDA_CHILD_GRAPH_NODE_PARAMS> implements NativeResource {
 

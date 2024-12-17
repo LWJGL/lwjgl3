@@ -16,38 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying fragment shading rate attachment information.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure can be included in the {@code pNext} chain of {@link VkRenderingInfo} to define a fragment density map. If this structure is not included in the {@code pNext} chain, {@code imageView} is treated as {@link VK10#VK_NULL_HANDLE NULL_HANDLE}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code imageLayout} <b>must</b> be {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} or {@link EXTFragmentDensityMap#VK_IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT IMAGE_LAYOUT_FRAGMENT_DENSITY_MAP_OPTIMAL_EXT}</li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have been created with {@link EXTFragmentDensityMap#VK_IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT}</li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> not have been created with {@link EXTFragmentDensityMap#VK_IMAGE_CREATE_SUBSAMPLED_BIT_EXT IMAGE_CREATE_SUBSAMPLED_BIT_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-multiview">{@code multiview}</a> feature is not enabled, {@link VkPhysicalDeviceProperties}{@code ::apiVersion} is less than Vulkan 1.1, and {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have a {@code layerCount} equal to 1</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT}</li>
- * <li>{@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
- * <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderingFragmentDensityMapAttachmentInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImageView {@link #imageView};
- *     VkImageLayout {@link #imageLayout};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImageView imageView;
+ *     VkImageLayout imageLayout;
+ * }}</pre>
  */
 public class VkRenderingFragmentDensityMapAttachmentInfoEXT extends Struct<VkRenderingFragmentDensityMapAttachmentInfoEXT> implements NativeResource {
 
@@ -103,28 +78,28 @@ public class VkRenderingFragmentDensityMapAttachmentInfoEXT extends Struct<VkRen
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the image view that will be used as a fragment density map attachment. */
+    /** @return the value of the {@code imageView} field. */
     @NativeType("VkImageView")
     public long imageView() { return nimageView(address()); }
-    /** the layout that {@code imageView} will be in during rendering. */
+    /** @return the value of the {@code imageLayout} field. */
     @NativeType("VkImageLayout")
     public int imageLayout() { return nimageLayout(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRenderingFragmentDensityMapAttachmentInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT} value to the {@code sType} field. */
     public VkRenderingFragmentDensityMapAttachmentInfoEXT sType$Default() { return sType(EXTFragmentDensityMap.VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRenderingFragmentDensityMapAttachmentInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageView} field. */
+    /** Sets the specified value to the {@code imageView} field. */
     public VkRenderingFragmentDensityMapAttachmentInfoEXT imageView(@NativeType("VkImageView") long value) { nimageView(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageLayout} field. */
+    /** Sets the specified value to the {@code imageLayout} field. */
     public VkRenderingFragmentDensityMapAttachmentInfoEXT imageLayout(@NativeType("VkImageLayout") int value) { nimageLayout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,28 +301,28 @@ public class VkRenderingFragmentDensityMapAttachmentInfoEXT extends Struct<VkRen
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderingFragmentDensityMapAttachmentInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderingFragmentDensityMapAttachmentInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#imageView} field. */
+        /** @return the value of the {@code imageView} field. */
         @NativeType("VkImageView")
         public long imageView() { return VkRenderingFragmentDensityMapAttachmentInfoEXT.nimageView(address()); }
-        /** @return the value of the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#imageLayout} field. */
+        /** @return the value of the {@code imageLayout} field. */
         @NativeType("VkImageLayout")
         public int imageLayout() { return VkRenderingFragmentDensityMapAttachmentInfoEXT.nimageLayout(address()); }
 
-        /** Sets the specified value to the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRenderingFragmentDensityMapAttachmentInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderingFragmentDensityMapAttachmentInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT} value to the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#sType} field. */
+        /** Sets the {@link EXTFragmentDensityMap#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT} value to the {@code sType} field. */
         public VkRenderingFragmentDensityMapAttachmentInfoEXT.Buffer sType$Default() { return sType(EXTFragmentDensityMap.VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT); }
-        /** Sets the specified value to the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRenderingFragmentDensityMapAttachmentInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkRenderingFragmentDensityMapAttachmentInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#imageView} field. */
+        /** Sets the specified value to the {@code imageView} field. */
         public VkRenderingFragmentDensityMapAttachmentInfoEXT.Buffer imageView(@NativeType("VkImageView") long value) { VkRenderingFragmentDensityMapAttachmentInfoEXT.nimageView(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingFragmentDensityMapAttachmentInfoEXT#imageLayout} field. */
+        /** Sets the specified value to the {@code imageLayout} field. */
         public VkRenderingFragmentDensityMapAttachmentInfoEXT.Buffer imageLayout(@NativeType("VkImageLayout") int value) { VkRenderingFragmentDensityMapAttachmentInfoEXT.nimageLayout(address(), value); return this; }
 
     }

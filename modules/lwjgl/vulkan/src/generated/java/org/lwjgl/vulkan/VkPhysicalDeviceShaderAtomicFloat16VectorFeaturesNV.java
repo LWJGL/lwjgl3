@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing features supported by VK_NV_shader_atomic_float16_vector.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVShaderAtomicFloat16Vector#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderFloat16VectorAtomics};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderFloat16VectorAtomics;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV extends Struct<VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV extends Struct<
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether shaders <b>can</b> perform 16-bit floating-point, 2- and 4-component vector atomic operations. */
+    /** @return the value of the {@code shaderFloat16VectorAtomics} field. */
     @NativeType("VkBool32")
     public boolean shaderFloat16VectorAtomics() { return nshaderFloat16VectorAtomics(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVShaderAtomicFloat16Vector#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVShaderAtomicFloat16Vector#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV sType$Default() { return sType(NVShaderAtomicFloat16Vector.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderFloat16VectorAtomics} field. */
+    /** Sets the specified value to the {@code shaderFloat16VectorAtomics} field. */
     public VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV shaderFloat16VectorAtomics(@NativeType("VkBool32") boolean value) { nshaderFloat16VectorAtomics(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV extends Struct<
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV#shaderFloat16VectorAtomics} field. */
+        /** @return the value of the {@code shaderFloat16VectorAtomics} field. */
         @NativeType("VkBool32")
         public boolean shaderFloat16VectorAtomics() { return VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.nshaderFloat16VectorAtomics(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVShaderAtomicFloat16Vector#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV} value to the {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV#sType} field. */
+        /** Sets the {@link NVShaderAtomicFloat16Vector#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.Buffer sType$Default() { return sType(NVShaderAtomicFloat16Vector.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV#shaderFloat16VectorAtomics} field. */
+        /** Sets the specified value to the {@code shaderFloat16VectorAtomics} field. */
         public VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.Buffer shaderFloat16VectorAtomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV.nshaderFloat16VectorAtomics(address(), value ? 1 : 0); return this; }
 
     }

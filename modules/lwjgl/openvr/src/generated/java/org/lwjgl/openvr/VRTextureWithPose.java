@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Allows specifying pose used to render provided scene texture (if different from value returned by {@link VRCompositor#VRCompositor_WaitGetPoses WaitGetPoses}).
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRTextureWithPose_t {
  *     void * handle;
  *     ETextureType eType;
  *     EColorSpace eColorSpace;
- *     {@link HmdMatrix34 HmdMatrix34_t} {@link #mDeviceToAbsoluteTracking};
- * }</code></pre>
+ *     {@link HmdMatrix34 HmdMatrix34_t} mDeviceToAbsoluteTracking;
+ * }}</pre>
  */
 @NativeType("struct VRTextureWithPose_t")
 public class VRTextureWithPose extends Struct<VRTextureWithPose> implements NativeResource {
@@ -93,7 +89,7 @@ public class VRTextureWithPose extends Struct<VRTextureWithPose> implements Nati
     /** @return the value of the {@code eColorSpace} field. */
     @NativeType("EColorSpace")
     public int eColorSpace() { return neColorSpace(address()); }
-    /** actual pose used to render scene textures */
+    /** @return a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mDeviceToAbsoluteTracking() { return nmDeviceToAbsoluteTracking(address()); }
 
@@ -103,9 +99,9 @@ public class VRTextureWithPose extends Struct<VRTextureWithPose> implements Nati
     public VRTextureWithPose eType(@NativeType("ETextureType") int value) { neType(address(), value); return this; }
     /** Sets the specified value to the {@code eColorSpace} field. */
     public VRTextureWithPose eColorSpace(@NativeType("EColorSpace") int value) { neColorSpace(address(), value); return this; }
-    /** Copies the specified {@link HmdMatrix34} to the {@link #mDeviceToAbsoluteTracking} field. */
+    /** Copies the specified {@link HmdMatrix34} to the {@code mDeviceToAbsoluteTracking} field. */
     public VRTextureWithPose mDeviceToAbsoluteTracking(@NativeType("HmdMatrix34_t") HmdMatrix34 value) { nmDeviceToAbsoluteTracking(address(), value); return this; }
-    /** Passes the {@link #mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VRTextureWithPose mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -344,7 +340,7 @@ public class VRTextureWithPose extends Struct<VRTextureWithPose> implements Nati
         /** @return the value of the {@code eColorSpace} field. */
         @NativeType("EColorSpace")
         public int eColorSpace() { return VRTextureWithPose.neColorSpace(address()); }
-        /** @return a {@link HmdMatrix34} view of the {@link VRTextureWithPose#mDeviceToAbsoluteTracking} field. */
+        /** @return a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mDeviceToAbsoluteTracking() { return VRTextureWithPose.nmDeviceToAbsoluteTracking(address()); }
 
@@ -354,9 +350,9 @@ public class VRTextureWithPose extends Struct<VRTextureWithPose> implements Nati
         public VRTextureWithPose.Buffer eType(@NativeType("ETextureType") int value) { VRTextureWithPose.neType(address(), value); return this; }
         /** Sets the specified value to the {@code eColorSpace} field. */
         public VRTextureWithPose.Buffer eColorSpace(@NativeType("EColorSpace") int value) { VRTextureWithPose.neColorSpace(address(), value); return this; }
-        /** Copies the specified {@link HmdMatrix34} to the {@link VRTextureWithPose#mDeviceToAbsoluteTracking} field. */
+        /** Copies the specified {@link HmdMatrix34} to the {@code mDeviceToAbsoluteTracking} field. */
         public VRTextureWithPose.Buffer mDeviceToAbsoluteTracking(@NativeType("HmdMatrix34_t") HmdMatrix34 value) { VRTextureWithPose.nmDeviceToAbsoluteTracking(address(), value); return this; }
-        /** Passes the {@link VRTextureWithPose#mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VRTextureWithPose.Buffer mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
 
     }

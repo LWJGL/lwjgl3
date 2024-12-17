@@ -16,27 +16,23 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the theme used to draw widgets.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct BNDtheme {
- *     {@link NVGColor NVGcolor} {@link #backgroundColor};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #regularTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #toolTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #radioTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #textFieldTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #optionTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #choiceTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #numberFieldTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #sliderTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #scrollBarTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #tooltipTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #menuTheme};
- *     {@link BNDwidgetTheme BNDwidgetTheme} {@link #menuItemTheme};
- *     {@link BNDnodeTheme BNDnodeTheme} {@link #nodeTheme};
- * }</code></pre>
+ *     {@link NVGColor NVGcolor} backgroundColor;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} regularTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} toolTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} radioTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} textFieldTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} optionTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} choiceTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} numberFieldTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} sliderTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} scrollBarTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} tooltipTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} menuTheme;
+ *     {@link BNDwidgetTheme BNDwidgetTheme} menuItemTheme;
+ *     {@link BNDnodeTheme BNDnodeTheme} nodeTheme;
+ * }}</pre>
  */
 public class BNDtheme extends Struct<BNDtheme> implements NativeResource {
 
@@ -122,91 +118,91 @@ public class BNDtheme extends Struct<BNDtheme> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the background color of panels and windows */
+    /** @return a {@link NVGColor} view of the {@code backgroundColor} field. */
     @NativeType("NVGcolor")
     public NVGColor backgroundColor() { return nbackgroundColor(address()); }
-    /** theme for labels */
+    /** @return a {@link BNDwidgetTheme} view of the {@code regularTheme} field. */
     public BNDwidgetTheme regularTheme() { return nregularTheme(address()); }
-    /** theme for tool buttons */
+    /** @return a {@link BNDwidgetTheme} view of the {@code toolTheme} field. */
     public BNDwidgetTheme toolTheme() { return ntoolTheme(address()); }
-    /** theme for radio buttons */
+    /** @return a {@link BNDwidgetTheme} view of the {@code radioTheme} field. */
     public BNDwidgetTheme radioTheme() { return nradioTheme(address()); }
-    /** theme for text fields */
+    /** @return a {@link BNDwidgetTheme} view of the {@code textFieldTheme} field. */
     public BNDwidgetTheme textFieldTheme() { return ntextFieldTheme(address()); }
-    /** theme for option buttons (checkboxes) */
+    /** @return a {@link BNDwidgetTheme} view of the {@code optionTheme} field. */
     public BNDwidgetTheme optionTheme() { return noptionTheme(address()); }
-    /** theme for choice buttons (comboboxes) Blender calls them "menu buttons" */
+    /** @return a {@link BNDwidgetTheme} view of the {@code choiceTheme} field. */
     public BNDwidgetTheme choiceTheme() { return nchoiceTheme(address()); }
-    /** theme for number fields */
+    /** @return a {@link BNDwidgetTheme} view of the {@code numberFieldTheme} field. */
     public BNDwidgetTheme numberFieldTheme() { return nnumberFieldTheme(address()); }
-    /** theme for slider controls */
+    /** @return a {@link BNDwidgetTheme} view of the {@code sliderTheme} field. */
     public BNDwidgetTheme sliderTheme() { return nsliderTheme(address()); }
-    /** theme for scrollbars */
+    /** @return a {@link BNDwidgetTheme} view of the {@code scrollBarTheme} field. */
     public BNDwidgetTheme scrollBarTheme() { return nscrollBarTheme(address()); }
-    /** theme for tooltips */
+    /** @return a {@link BNDwidgetTheme} view of the {@code tooltipTheme} field. */
     public BNDwidgetTheme tooltipTheme() { return ntooltipTheme(address()); }
-    /** theme for menu backgrounds */
+    /** @return a {@link BNDwidgetTheme} view of the {@code menuTheme} field. */
     public BNDwidgetTheme menuTheme() { return nmenuTheme(address()); }
-    /** theme for menu items */
+    /** @return a {@link BNDwidgetTheme} view of the {@code menuItemTheme} field. */
     public BNDwidgetTheme menuItemTheme() { return nmenuItemTheme(address()); }
-    /** theme for nodes */
+    /** @return a {@link BNDnodeTheme} view of the {@code nodeTheme} field. */
     public BNDnodeTheme nodeTheme() { return nnodeTheme(address()); }
 
-    /** Copies the specified {@link NVGColor} to the {@link #backgroundColor} field. */
+    /** Copies the specified {@link NVGColor} to the {@code backgroundColor} field. */
     public BNDtheme backgroundColor(@NativeType("NVGcolor") NVGColor value) { nbackgroundColor(address(), value); return this; }
-    /** Passes the {@link #backgroundColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code backgroundColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme backgroundColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(backgroundColor()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #regularTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code regularTheme} field. */
     public BNDtheme regularTheme(BNDwidgetTheme value) { nregularTheme(address(), value); return this; }
-    /** Passes the {@link #regularTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code regularTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme regularTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(regularTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #toolTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code toolTheme} field. */
     public BNDtheme toolTheme(BNDwidgetTheme value) { ntoolTheme(address(), value); return this; }
-    /** Passes the {@link #toolTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code toolTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme toolTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(toolTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #radioTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code radioTheme} field. */
     public BNDtheme radioTheme(BNDwidgetTheme value) { nradioTheme(address(), value); return this; }
-    /** Passes the {@link #radioTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code radioTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme radioTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(radioTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #textFieldTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code textFieldTheme} field. */
     public BNDtheme textFieldTheme(BNDwidgetTheme value) { ntextFieldTheme(address(), value); return this; }
-    /** Passes the {@link #textFieldTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code textFieldTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme textFieldTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(textFieldTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #optionTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code optionTheme} field. */
     public BNDtheme optionTheme(BNDwidgetTheme value) { noptionTheme(address(), value); return this; }
-    /** Passes the {@link #optionTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code optionTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme optionTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(optionTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #choiceTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code choiceTheme} field. */
     public BNDtheme choiceTheme(BNDwidgetTheme value) { nchoiceTheme(address(), value); return this; }
-    /** Passes the {@link #choiceTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code choiceTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme choiceTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(choiceTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #numberFieldTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code numberFieldTheme} field. */
     public BNDtheme numberFieldTheme(BNDwidgetTheme value) { nnumberFieldTheme(address(), value); return this; }
-    /** Passes the {@link #numberFieldTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code numberFieldTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme numberFieldTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(numberFieldTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #sliderTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code sliderTheme} field. */
     public BNDtheme sliderTheme(BNDwidgetTheme value) { nsliderTheme(address(), value); return this; }
-    /** Passes the {@link #sliderTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code sliderTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme sliderTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(sliderTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #scrollBarTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code scrollBarTheme} field. */
     public BNDtheme scrollBarTheme(BNDwidgetTheme value) { nscrollBarTheme(address(), value); return this; }
-    /** Passes the {@link #scrollBarTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code scrollBarTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme scrollBarTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(scrollBarTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #tooltipTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code tooltipTheme} field. */
     public BNDtheme tooltipTheme(BNDwidgetTheme value) { ntooltipTheme(address(), value); return this; }
-    /** Passes the {@link #tooltipTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code tooltipTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme tooltipTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(tooltipTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #menuTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code menuTheme} field. */
     public BNDtheme menuTheme(BNDwidgetTheme value) { nmenuTheme(address(), value); return this; }
-    /** Passes the {@link #menuTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code menuTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme menuTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(menuTheme()); return this; }
-    /** Copies the specified {@link BNDwidgetTheme} to the {@link #menuItemTheme} field. */
+    /** Copies the specified {@link BNDwidgetTheme} to the {@code menuItemTheme} field. */
     public BNDtheme menuItemTheme(BNDwidgetTheme value) { nmenuItemTheme(address(), value); return this; }
-    /** Passes the {@link #menuItemTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code menuItemTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme menuItemTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(menuItemTheme()); return this; }
-    /** Copies the specified {@link BNDnodeTheme} to the {@link #nodeTheme} field. */
+    /** Copies the specified {@link BNDnodeTheme} to the {@code nodeTheme} field. */
     public BNDtheme nodeTheme(BNDnodeTheme value) { nnodeTheme(address(), value); return this; }
-    /** Passes the {@link #nodeTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code nodeTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDtheme nodeTheme(java.util.function.Consumer<BNDnodeTheme> consumer) { consumer.accept(nodeTheme()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -487,91 +483,91 @@ public class BNDtheme extends Struct<BNDtheme> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link NVGColor} view of the {@link BNDtheme#backgroundColor} field. */
+        /** @return a {@link NVGColor} view of the {@code backgroundColor} field. */
         @NativeType("NVGcolor")
         public NVGColor backgroundColor() { return BNDtheme.nbackgroundColor(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#regularTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code regularTheme} field. */
         public BNDwidgetTheme regularTheme() { return BNDtheme.nregularTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#toolTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code toolTheme} field. */
         public BNDwidgetTheme toolTheme() { return BNDtheme.ntoolTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#radioTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code radioTheme} field. */
         public BNDwidgetTheme radioTheme() { return BNDtheme.nradioTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#textFieldTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code textFieldTheme} field. */
         public BNDwidgetTheme textFieldTheme() { return BNDtheme.ntextFieldTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#optionTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code optionTheme} field. */
         public BNDwidgetTheme optionTheme() { return BNDtheme.noptionTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#choiceTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code choiceTheme} field. */
         public BNDwidgetTheme choiceTheme() { return BNDtheme.nchoiceTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#numberFieldTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code numberFieldTheme} field. */
         public BNDwidgetTheme numberFieldTheme() { return BNDtheme.nnumberFieldTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#sliderTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code sliderTheme} field. */
         public BNDwidgetTheme sliderTheme() { return BNDtheme.nsliderTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#scrollBarTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code scrollBarTheme} field. */
         public BNDwidgetTheme scrollBarTheme() { return BNDtheme.nscrollBarTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#tooltipTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code tooltipTheme} field. */
         public BNDwidgetTheme tooltipTheme() { return BNDtheme.ntooltipTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#menuTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code menuTheme} field. */
         public BNDwidgetTheme menuTheme() { return BNDtheme.nmenuTheme(address()); }
-        /** @return a {@link BNDwidgetTheme} view of the {@link BNDtheme#menuItemTheme} field. */
+        /** @return a {@link BNDwidgetTheme} view of the {@code menuItemTheme} field. */
         public BNDwidgetTheme menuItemTheme() { return BNDtheme.nmenuItemTheme(address()); }
-        /** @return a {@link BNDnodeTheme} view of the {@link BNDtheme#nodeTheme} field. */
+        /** @return a {@link BNDnodeTheme} view of the {@code nodeTheme} field. */
         public BNDnodeTheme nodeTheme() { return BNDtheme.nnodeTheme(address()); }
 
-        /** Copies the specified {@link NVGColor} to the {@link BNDtheme#backgroundColor} field. */
+        /** Copies the specified {@link NVGColor} to the {@code backgroundColor} field. */
         public BNDtheme.Buffer backgroundColor(@NativeType("NVGcolor") NVGColor value) { BNDtheme.nbackgroundColor(address(), value); return this; }
-        /** Passes the {@link BNDtheme#backgroundColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code backgroundColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer backgroundColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(backgroundColor()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#regularTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code regularTheme} field. */
         public BNDtheme.Buffer regularTheme(BNDwidgetTheme value) { BNDtheme.nregularTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#regularTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code regularTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer regularTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(regularTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#toolTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code toolTheme} field. */
         public BNDtheme.Buffer toolTheme(BNDwidgetTheme value) { BNDtheme.ntoolTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#toolTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code toolTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer toolTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(toolTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#radioTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code radioTheme} field. */
         public BNDtheme.Buffer radioTheme(BNDwidgetTheme value) { BNDtheme.nradioTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#radioTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code radioTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer radioTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(radioTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#textFieldTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code textFieldTheme} field. */
         public BNDtheme.Buffer textFieldTheme(BNDwidgetTheme value) { BNDtheme.ntextFieldTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#textFieldTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code textFieldTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer textFieldTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(textFieldTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#optionTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code optionTheme} field. */
         public BNDtheme.Buffer optionTheme(BNDwidgetTheme value) { BNDtheme.noptionTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#optionTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code optionTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer optionTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(optionTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#choiceTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code choiceTheme} field. */
         public BNDtheme.Buffer choiceTheme(BNDwidgetTheme value) { BNDtheme.nchoiceTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#choiceTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code choiceTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer choiceTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(choiceTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#numberFieldTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code numberFieldTheme} field. */
         public BNDtheme.Buffer numberFieldTheme(BNDwidgetTheme value) { BNDtheme.nnumberFieldTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#numberFieldTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code numberFieldTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer numberFieldTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(numberFieldTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#sliderTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code sliderTheme} field. */
         public BNDtheme.Buffer sliderTheme(BNDwidgetTheme value) { BNDtheme.nsliderTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#sliderTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code sliderTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer sliderTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(sliderTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#scrollBarTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code scrollBarTheme} field. */
         public BNDtheme.Buffer scrollBarTheme(BNDwidgetTheme value) { BNDtheme.nscrollBarTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#scrollBarTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code scrollBarTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer scrollBarTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(scrollBarTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#tooltipTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code tooltipTheme} field. */
         public BNDtheme.Buffer tooltipTheme(BNDwidgetTheme value) { BNDtheme.ntooltipTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#tooltipTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code tooltipTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer tooltipTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(tooltipTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#menuTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code menuTheme} field. */
         public BNDtheme.Buffer menuTheme(BNDwidgetTheme value) { BNDtheme.nmenuTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#menuTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code menuTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer menuTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(menuTheme()); return this; }
-        /** Copies the specified {@link BNDwidgetTheme} to the {@link BNDtheme#menuItemTheme} field. */
+        /** Copies the specified {@link BNDwidgetTheme} to the {@code menuItemTheme} field. */
         public BNDtheme.Buffer menuItemTheme(BNDwidgetTheme value) { BNDtheme.nmenuItemTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#menuItemTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code menuItemTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer menuItemTheme(java.util.function.Consumer<BNDwidgetTheme> consumer) { consumer.accept(menuItemTheme()); return this; }
-        /** Copies the specified {@link BNDnodeTheme} to the {@link BNDtheme#nodeTheme} field. */
+        /** Copies the specified {@link BNDnodeTheme} to the {@code nodeTheme} field. */
         public BNDtheme.Buffer nodeTheme(BNDnodeTheme value) { BNDtheme.nnodeTheme(address(), value); return this; }
-        /** Passes the {@link BNDtheme#nodeTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code nodeTheme} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDtheme.Buffer nodeTheme(java.util.function.Consumer<BNDnodeTheme> consumer) { consumer.accept(nodeTheme()); return this; }
 
     }

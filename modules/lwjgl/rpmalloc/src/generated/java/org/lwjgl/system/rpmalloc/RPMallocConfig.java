@@ -17,30 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * This struct enables configuration of a memory mapper providing map/unmap of memory pages. Defaults to {@code VirtualAlloc}/{@code mmap} if none
- * provided. This allows rpmalloc to be used in contexts where memory is provided by internal means.
- * 
- * <p>Page size may be set explicitly in initialization. This allows the allocator to be used as a sub-allocator where the page granularity should be lower
- * to reduce risk of wasting unused memory ranges.</p>
- * 
- * <p>If rpmalloc is built with {@code ENABLE_GUARDS}, {@code memory_overwrite} may be set to detect writes before or after allocated memory blocks. This is
- * not enabled in the default LWJGL build.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct rpmalloc_config_t {
- *     void * (*{@link RPMemoryMapCallbackI memory_map}) (size_t size, size_t *offset);
- *     void (*{@link RPMemoryUnmapCallbackI memory_unmap}) (void *address, size_t size, size_t offset, int release);
- *     void (*{@link RPErrorCallbackI error_callback}) (char const *message);
- *     int (*{@link RPMapFailCallbackI map_fail_callback}) (size_t size);
- *     size_t {@link #page_size};
- *     size_t {@link #span_size};
- *     size_t {@link #span_map_count};
- *     int {@link #enable_huge_pages};
- *     char const * {@link #page_name};
- *     char const * {@link #huge_page_name};
- * }</code></pre>
+ *     void * (* memory_map) (size_t size, size_t * offset);
+ *     void (* memory_unmap) (void * address, size_t size, size_t offset, int release);
+ *     void (* error_callback) (char const * message);
+ *     int (* map_fail_callback) (size_t size);
+ *     size_t page_size;
+ *     size_t span_size;
+ *     size_t span_map_count;
+ *     int enable_huge_pages;
+ *     char const * page_name;
+ *     char const * huge_page_name;
+ * }}</pre>
  */
 @NativeType("struct rpmalloc_config_t")
 public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeResource {
@@ -115,90 +104,62 @@ public class RPMallocConfig extends Struct<RPMallocConfig> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the memory map callback function */
+    /** @return the value of the {@code memory_map} field. */
     @NativeType("void * (*) (size_t, size_t *)")
     public @Nullable RPMemoryMapCallback memory_map() { return nmemory_map(address()); }
-    /** the memory unmap callback function */
+    /** @return the value of the {@code memory_unmap} field. */
     @NativeType("void (*) (void *, size_t, size_t, int)")
     public @Nullable RPMemoryUnmapCallback memory_unmap() { return nmemory_unmap(address()); }
-    /** the error callback function */
+    /** @return the value of the {@code error_callback} field. */
     @NativeType("void (*) (char const *)")
     public @Nullable RPErrorCallback error_callback() { return nerror_callback(address()); }
-    /** the map fail callback function */
+    /** @return the value of the {@code map_fail_callback} field. */
     @NativeType("int (*) (size_t)")
     public @Nullable RPMapFailCallback map_fail_callback() { return nmap_fail_callback(address()); }
-    /**
-     * the size of memory pages.
-     * 
-     * <p>The page size MUST be a power of two in {@code [512,16384]} range (2<sup>9</sup> to 2<sup>14</sup>) unless 0 - set to 0 to use system page size. All
-     * memory mapping requests to {@code memory_map} will be made with size set to a multiple of the page size.</p>
-     * 
-     * <p>Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1, otherwise system page size is used.</p>
-     */
+    /** @return the value of the {@code page_size} field. */
     @NativeType("size_t")
     public long page_size() { return npage_size(address()); }
-    /**
-     * size of a span of memory blocks.
-     * 
-     * <p>MUST be a power of two, and in {@code [4096,262144]} range (unless 0 - set to 0 to use the default span size).</p>
-     * 
-     * <p>Used if {@code RPMALLOC_CONFIGURABLE} is defined to 1.</p>
-     */
+    /** @return the value of the {@code span_size} field. */
     @NativeType("size_t")
     public long span_size() { return nspan_size(address()); }
-    /**
-     * number of spans to map at each request to map new virtual memory blocks.
-     * 
-     * <p>This can be used to minimize the system call overhead at the cost of virtual memory address space. The extra mapped pages will not be written until
-     * actually used, so physical committed memory should not be affected in the default implementation.</p>
-     * 
-     * <p>Will be aligned to a multiple of spans that match memory page size in case of huge pages.</p>
-     */
+    /** @return the value of the {@code span_map_count} field. */
     @NativeType("size_t")
     public long span_map_count() { return nspan_map_count(address()); }
-    /**
-     * enable use of large/huge pages.
-     * 
-     * <p>If this flag is set to non-zero and page size is zero, the allocator will try to enable huge pages and auto detect the configuration. If this is set to
-     * non-zero and page_size is also non-zero, the allocator will assume huge pages have been configured and enabled prior to initializing the allocator.</p>
-     * 
-     * <p>For Windows, see <a href="https://docs.microsoft.com/en-us/windows/desktop/memory/large-page-support">large-page-support</a>. For Linux, see
-     * <a href="https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt">hugetlbpage.txt</a>.</p>
-     */
+    /** @return the value of the {@code enable_huge_pages} field. */
     @NativeType("int")
     public boolean enable_huge_pages() { return nenable_huge_pages(address()) != 0; }
-    /** allocated pages name for systems supporting it to be able to distinguish among anonymous regions */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code page_name} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer page_name() { return npage_name(address()); }
-    /** allocated pages name for systems supporting it to be able to distinguish among anonymous regions */
+    /** @return the null-terminated string pointed to by the {@code page_name} field. */
     @NativeType("char const *")
     public @Nullable String page_nameString() { return npage_nameString(address()); }
-    /** huge allocated pages name for systems supporting it to be able to distinguish among anonymous regions */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code huge_page_name} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer huge_page_name() { return nhuge_page_name(address()); }
-    /** huge allocated pages name for systems supporting it to be able to distinguish among anonymous regions */
+    /** @return the null-terminated string pointed to by the {@code huge_page_name} field. */
     @NativeType("char const *")
     public @Nullable String huge_page_nameString() { return nhuge_page_nameString(address()); }
 
-    /** Sets the specified value to the {@link #memory_map} field. */
+    /** Sets the specified value to the {@code memory_map} field. */
     public RPMallocConfig memory_map(@Nullable @NativeType("void * (*) (size_t, size_t *)") RPMemoryMapCallbackI value) { nmemory_map(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory_unmap} field. */
+    /** Sets the specified value to the {@code memory_unmap} field. */
     public RPMallocConfig memory_unmap(@Nullable @NativeType("void (*) (void *, size_t, size_t, int)") RPMemoryUnmapCallbackI value) { nmemory_unmap(address(), value); return this; }
-    /** Sets the specified value to the {@link #error_callback} field. */
+    /** Sets the specified value to the {@code error_callback} field. */
     public RPMallocConfig error_callback(@Nullable @NativeType("void (*) (char const *)") RPErrorCallbackI value) { nerror_callback(address(), value); return this; }
-    /** Sets the specified value to the {@link #map_fail_callback} field. */
+    /** Sets the specified value to the {@code map_fail_callback} field. */
     public RPMallocConfig map_fail_callback(@Nullable @NativeType("int (*) (size_t)") RPMapFailCallbackI value) { nmap_fail_callback(address(), value); return this; }
-    /** Sets the specified value to the {@link #page_size} field. */
+    /** Sets the specified value to the {@code page_size} field. */
     public RPMallocConfig page_size(@NativeType("size_t") long value) { npage_size(address(), value); return this; }
-    /** Sets the specified value to the {@link #span_size} field. */
+    /** Sets the specified value to the {@code span_size} field. */
     public RPMallocConfig span_size(@NativeType("size_t") long value) { nspan_size(address(), value); return this; }
-    /** Sets the specified value to the {@link #span_map_count} field. */
+    /** Sets the specified value to the {@code span_map_count} field. */
     public RPMallocConfig span_map_count(@NativeType("size_t") long value) { nspan_map_count(address(), value); return this; }
-    /** Sets the specified value to the {@link #enable_huge_pages} field. */
+    /** Sets the specified value to the {@code enable_huge_pages} field. */
     public RPMallocConfig enable_huge_pages(@NativeType("int") boolean value) { nenable_huge_pages(address(), value ? 1 : 0); return this; }
-    /** Sets the address of the specified encoded string to the {@link #page_name} field. */
+    /** Sets the address of the specified encoded string to the {@code page_name} field. */
     public RPMallocConfig page_name(@Nullable @NativeType("char const *") ByteBuffer value) { npage_name(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #huge_page_name} field. */
+    /** Sets the address of the specified encoded string to the {@code huge_page_name} field. */
     public RPMallocConfig huge_page_name(@Nullable @NativeType("char const *") ByteBuffer value) { nhuge_page_name(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */

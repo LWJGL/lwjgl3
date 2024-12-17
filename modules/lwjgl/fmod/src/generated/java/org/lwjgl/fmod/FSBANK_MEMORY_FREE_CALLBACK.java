@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *ptr,
- *     unsigned int type,
- *     char const *sourceStr
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FSBANK_MEMORY_FREE_CALLBACK} */
 public abstract class FSBANK_MEMORY_FREE_CALLBACK extends Callback implements FSBANK_MEMORY_FREE_CALLBACKI {
 
     /**

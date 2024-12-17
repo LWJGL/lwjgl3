@@ -17,18 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct PathRead_t {
  *     PathHandle_t ulPath;
  *     void * pvBuffer;
  *     uint32_t unBufferSize;
  *     PropertyTypeTag_t unTag;
  *     uint32_t unRequiredBufferSize;
- *     ETrackedPropertyError {@link #eError};
+ *     ETrackedPropertyError eError;
  *     char * pszPath;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct PathRead_t")
 public class PathRead extends Struct<PathRead> implements NativeResource {
@@ -109,7 +107,7 @@ public class PathRead extends Struct<PathRead> implements NativeResource {
     /** @return the value of the {@code unRequiredBufferSize} field. */
     @NativeType("uint32_t")
     public int unRequiredBufferSize() { return nunRequiredBufferSize(address()); }
-    /** one of:<br><table><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_Success}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_WrongDataType}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_WrongDeviceClass}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_BufferTooSmall}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_UnknownProperty}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidDevice}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_CouldNotContactServer}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_ValueNotProvidedByDevice}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_StringExceedsMaximumLength}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_NotYetAvailable}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_PermissionDenied}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidOperation}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_CannotWriteToWildcards}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_IPCReadFailure}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_OutOfMemory}</td></tr><tr><td>{@link VR#ETrackedPropertyError_TrackedProp_InvalidContainer}</td></tr></table> */
+    /** @return the value of the {@code eError} field. */
     @NativeType("ETrackedPropertyError")
     public int eError() { return neError(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pszPath} field. */
@@ -127,7 +125,7 @@ public class PathRead extends Struct<PathRead> implements NativeResource {
     public PathRead unTag(@NativeType("PropertyTypeTag_t") int value) { nunTag(address(), value); return this; }
     /** Sets the specified value to the {@code unRequiredBufferSize} field. */
     public PathRead unRequiredBufferSize(@NativeType("uint32_t") int value) { nunRequiredBufferSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #eError} field. */
+    /** Sets the specified value to the {@code eError} field. */
     public PathRead eError(@NativeType("ETrackedPropertyError") int value) { neError(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@code pszPath} field. */
     public PathRead pszPath(@NativeType("char *") ByteBuffer value) { npszPath(address(), value); return this; }
@@ -377,7 +375,7 @@ public class PathRead extends Struct<PathRead> implements NativeResource {
         /** @return the value of the {@code unRequiredBufferSize} field. */
         @NativeType("uint32_t")
         public int unRequiredBufferSize() { return PathRead.nunRequiredBufferSize(address()); }
-        /** @return the value of the {@link PathRead#eError} field. */
+        /** @return the value of the {@code eError} field. */
         @NativeType("ETrackedPropertyError")
         public int eError() { return PathRead.neError(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pszPath} field. */
@@ -395,7 +393,7 @@ public class PathRead extends Struct<PathRead> implements NativeResource {
         public PathRead.Buffer unTag(@NativeType("PropertyTypeTag_t") int value) { PathRead.nunTag(address(), value); return this; }
         /** Sets the specified value to the {@code unRequiredBufferSize} field. */
         public PathRead.Buffer unRequiredBufferSize(@NativeType("uint32_t") int value) { PathRead.nunRequiredBufferSize(address(), value); return this; }
-        /** Sets the specified value to the {@link PathRead#eError} field. */
+        /** Sets the specified value to the {@code eError} field. */
         public PathRead.Buffer eError(@NativeType("ETrackedPropertyError") int value) { PathRead.neError(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@code pszPath} field. */
         public PathRead.Buffer pszPath(@NativeType("char *") ByteBuffer value) { PathRead.npszPath(address(), value); return this; }

@@ -17,27 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Union specifying the token-specific details of an indirect command layout token.
- * 
- * <h5>Description</h5>
- * 
- * <p>The appropriate member of the union <b>must</b> be set for each token.</p>
- * 
- * <p>The following code provides detailed information on how an individual sequence is processed. For valid usage, all restrictions from the regular commands apply.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsExecutionSetTokenEXT}, {@link VkIndirectCommandsIndexBufferTokenEXT}, {@link VkIndirectCommandsLayoutTokenEXT}, {@link VkIndirectCommandsPushConstantTokenEXT}, {@link VkIndirectCommandsVertexBufferTokenEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union VkIndirectCommandsTokenDataEXT {
- *     {@link VkIndirectCommandsPushConstantTokenEXT VkIndirectCommandsPushConstantTokenEXT} const * {@link #pPushConstant};
- *     {@link VkIndirectCommandsVertexBufferTokenEXT VkIndirectCommandsVertexBufferTokenEXT} const * {@link #pVertexBuffer};
- *     {@link VkIndirectCommandsIndexBufferTokenEXT VkIndirectCommandsIndexBufferTokenEXT} const * {@link #pIndexBuffer};
- *     {@link VkIndirectCommandsExecutionSetTokenEXT VkIndirectCommandsExecutionSetTokenEXT} const * {@link #pExecutionSet};
- * }</code></pre>
+ *     {@link VkIndirectCommandsPushConstantTokenEXT VkIndirectCommandsPushConstantTokenEXT} const * pPushConstant;
+ *     {@link VkIndirectCommandsVertexBufferTokenEXT VkIndirectCommandsVertexBufferTokenEXT} const * pVertexBuffer;
+ *     {@link VkIndirectCommandsIndexBufferTokenEXT VkIndirectCommandsIndexBufferTokenEXT} const * pIndexBuffer;
+ *     {@link VkIndirectCommandsExecutionSetTokenEXT VkIndirectCommandsExecutionSetTokenEXT} const * pExecutionSet;
+ * }}</pre>
  */
 public class VkIndirectCommandsTokenDataEXT extends Struct<VkIndirectCommandsTokenDataEXT> implements NativeResource {
 
@@ -93,26 +79,26 @@ public class VkIndirectCommandsTokenDataEXT extends Struct<VkIndirectCommandsTok
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a pointer to a {@link VkIndirectCommandsPushConstantTokenEXT} struct needed for {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT} and {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT} tokens */
+    /** @return a {@link VkIndirectCommandsPushConstantTokenEXT} view of the struct pointed to by the {@code pPushConstant} field. */
     @NativeType("VkIndirectCommandsPushConstantTokenEXT const *")
     public VkIndirectCommandsPushConstantTokenEXT pPushConstant() { return npPushConstant(address()); }
-    /** a pointer to a {@link VkIndirectCommandsVertexBufferTokenEXT} struct needed for {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_EXT} tokens */
+    /** @return a {@link VkIndirectCommandsVertexBufferTokenEXT} view of the struct pointed to by the {@code pVertexBuffer} field. */
     @NativeType("VkIndirectCommandsVertexBufferTokenEXT const *")
     public VkIndirectCommandsVertexBufferTokenEXT pVertexBuffer() { return npVertexBuffer(address()); }
-    /** a pointer to a {@link VkIndirectCommandsIndexBufferTokenEXT} struct needed for {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_EXT} tokens */
+    /** @return a {@link VkIndirectCommandsIndexBufferTokenEXT} view of the struct pointed to by the {@code pIndexBuffer} field. */
     @NativeType("VkIndirectCommandsIndexBufferTokenEXT const *")
     public VkIndirectCommandsIndexBufferTokenEXT pIndexBuffer() { return npIndexBuffer(address()); }
-    /** a pointer to a {@link VkIndirectCommandsExecutionSetTokenEXT} struct needed for {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT INDIRECT_COMMANDS_TOKEN_TYPE_EXECUTION_SET_EXT} tokens */
+    /** @return a {@link VkIndirectCommandsExecutionSetTokenEXT} view of the struct pointed to by the {@code pExecutionSet} field. */
     @NativeType("VkIndirectCommandsExecutionSetTokenEXT const *")
     public VkIndirectCommandsExecutionSetTokenEXT pExecutionSet() { return npExecutionSet(address()); }
 
-    /** Sets the address of the specified {@link VkIndirectCommandsPushConstantTokenEXT} to the {@link #pPushConstant} field. */
+    /** Sets the address of the specified {@link VkIndirectCommandsPushConstantTokenEXT} to the {@code pPushConstant} field. */
     public VkIndirectCommandsTokenDataEXT pPushConstant(@NativeType("VkIndirectCommandsPushConstantTokenEXT const *") VkIndirectCommandsPushConstantTokenEXT value) { npPushConstant(address(), value); return this; }
-    /** Sets the address of the specified {@link VkIndirectCommandsVertexBufferTokenEXT} to the {@link #pVertexBuffer} field. */
+    /** Sets the address of the specified {@link VkIndirectCommandsVertexBufferTokenEXT} to the {@code pVertexBuffer} field. */
     public VkIndirectCommandsTokenDataEXT pVertexBuffer(@NativeType("VkIndirectCommandsVertexBufferTokenEXT const *") VkIndirectCommandsVertexBufferTokenEXT value) { npVertexBuffer(address(), value); return this; }
-    /** Sets the address of the specified {@link VkIndirectCommandsIndexBufferTokenEXT} to the {@link #pIndexBuffer} field. */
+    /** Sets the address of the specified {@link VkIndirectCommandsIndexBufferTokenEXT} to the {@code pIndexBuffer} field. */
     public VkIndirectCommandsTokenDataEXT pIndexBuffer(@NativeType("VkIndirectCommandsIndexBufferTokenEXT const *") VkIndirectCommandsIndexBufferTokenEXT value) { npIndexBuffer(address(), value); return this; }
-    /** Sets the address of the specified {@link VkIndirectCommandsExecutionSetTokenEXT} to the {@link #pExecutionSet} field. */
+    /** Sets the address of the specified {@link VkIndirectCommandsExecutionSetTokenEXT} to the {@code pExecutionSet} field. */
     public VkIndirectCommandsTokenDataEXT pExecutionSet(@NativeType("VkIndirectCommandsExecutionSetTokenEXT const *") VkIndirectCommandsExecutionSetTokenEXT value) { npExecutionSet(address(), value); return this; }
 
     /**
@@ -299,26 +285,26 @@ public class VkIndirectCommandsTokenDataEXT extends Struct<VkIndirectCommandsTok
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VkIndirectCommandsPushConstantTokenEXT} view of the struct pointed to by the {@link VkIndirectCommandsTokenDataEXT#pPushConstant} field. */
+        /** @return a {@link VkIndirectCommandsPushConstantTokenEXT} view of the struct pointed to by the {@code pPushConstant} field. */
         @NativeType("VkIndirectCommandsPushConstantTokenEXT const *")
         public VkIndirectCommandsPushConstantTokenEXT pPushConstant() { return VkIndirectCommandsTokenDataEXT.npPushConstant(address()); }
-        /** @return a {@link VkIndirectCommandsVertexBufferTokenEXT} view of the struct pointed to by the {@link VkIndirectCommandsTokenDataEXT#pVertexBuffer} field. */
+        /** @return a {@link VkIndirectCommandsVertexBufferTokenEXT} view of the struct pointed to by the {@code pVertexBuffer} field. */
         @NativeType("VkIndirectCommandsVertexBufferTokenEXT const *")
         public VkIndirectCommandsVertexBufferTokenEXT pVertexBuffer() { return VkIndirectCommandsTokenDataEXT.npVertexBuffer(address()); }
-        /** @return a {@link VkIndirectCommandsIndexBufferTokenEXT} view of the struct pointed to by the {@link VkIndirectCommandsTokenDataEXT#pIndexBuffer} field. */
+        /** @return a {@link VkIndirectCommandsIndexBufferTokenEXT} view of the struct pointed to by the {@code pIndexBuffer} field. */
         @NativeType("VkIndirectCommandsIndexBufferTokenEXT const *")
         public VkIndirectCommandsIndexBufferTokenEXT pIndexBuffer() { return VkIndirectCommandsTokenDataEXT.npIndexBuffer(address()); }
-        /** @return a {@link VkIndirectCommandsExecutionSetTokenEXT} view of the struct pointed to by the {@link VkIndirectCommandsTokenDataEXT#pExecutionSet} field. */
+        /** @return a {@link VkIndirectCommandsExecutionSetTokenEXT} view of the struct pointed to by the {@code pExecutionSet} field. */
         @NativeType("VkIndirectCommandsExecutionSetTokenEXT const *")
         public VkIndirectCommandsExecutionSetTokenEXT pExecutionSet() { return VkIndirectCommandsTokenDataEXT.npExecutionSet(address()); }
 
-        /** Sets the address of the specified {@link VkIndirectCommandsPushConstantTokenEXT} to the {@link VkIndirectCommandsTokenDataEXT#pPushConstant} field. */
+        /** Sets the address of the specified {@link VkIndirectCommandsPushConstantTokenEXT} to the {@code pPushConstant} field. */
         public VkIndirectCommandsTokenDataEXT.Buffer pPushConstant(@NativeType("VkIndirectCommandsPushConstantTokenEXT const *") VkIndirectCommandsPushConstantTokenEXT value) { VkIndirectCommandsTokenDataEXT.npPushConstant(address(), value); return this; }
-        /** Sets the address of the specified {@link VkIndirectCommandsVertexBufferTokenEXT} to the {@link VkIndirectCommandsTokenDataEXT#pVertexBuffer} field. */
+        /** Sets the address of the specified {@link VkIndirectCommandsVertexBufferTokenEXT} to the {@code pVertexBuffer} field. */
         public VkIndirectCommandsTokenDataEXT.Buffer pVertexBuffer(@NativeType("VkIndirectCommandsVertexBufferTokenEXT const *") VkIndirectCommandsVertexBufferTokenEXT value) { VkIndirectCommandsTokenDataEXT.npVertexBuffer(address(), value); return this; }
-        /** Sets the address of the specified {@link VkIndirectCommandsIndexBufferTokenEXT} to the {@link VkIndirectCommandsTokenDataEXT#pIndexBuffer} field. */
+        /** Sets the address of the specified {@link VkIndirectCommandsIndexBufferTokenEXT} to the {@code pIndexBuffer} field. */
         public VkIndirectCommandsTokenDataEXT.Buffer pIndexBuffer(@NativeType("VkIndirectCommandsIndexBufferTokenEXT const *") VkIndirectCommandsIndexBufferTokenEXT value) { VkIndirectCommandsTokenDataEXT.npIndexBuffer(address(), value); return this; }
-        /** Sets the address of the specified {@link VkIndirectCommandsExecutionSetTokenEXT} to the {@link VkIndirectCommandsTokenDataEXT#pExecutionSet} field. */
+        /** Sets the address of the specified {@link VkIndirectCommandsExecutionSetTokenEXT} to the {@code pExecutionSet} field. */
         public VkIndirectCommandsTokenDataEXT.Buffer pExecutionSet(@NativeType("VkIndirectCommandsExecutionSetTokenEXT const *") VkIndirectCommandsExecutionSetTokenEXT value) { VkIndirectCommandsTokenDataEXT.npExecutionSet(address(), value); return this; }
 
     }

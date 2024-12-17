@@ -18,41 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * Vulkan-specific swapchain image structure.
- * 
- * <h5>Description</h5>
- * 
- * <p>If a given session was created with {@link XrGraphicsBindingVulkanKHR}, the following conditions <b>must</b> apply.</p>
- * 
- * <ul>
- * <li>Calls to {@link XR10#xrEnumerateSwapchainImages EnumerateSwapchainImages} on an {@code XrSwapchain} in that session <b>must</b> return an array of {@link XrSwapchainImageVulkanKHR} structures.</li>
- * <li>Whenever an OpenXR function accepts an {@link XrSwapchainImageBaseHeader} pointer as a parameter in that session, the runtime <b>must</b> also accept a pointer to an {@link XrSwapchainImageVulkanKHR}.</li>
- * </ul>
- * 
- * <p>The OpenXR runtime <b>must</b> interpret the top-left corner of the swapchain image as the coordinate origin unless specified otherwise by extension functionality.</p>
- * 
- * <p>The OpenXR runtime <b>must</b> interpret the swapchain images in a clip space of positive Y pointing down, near Z plane at 0, and far Z plane at 1.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHRVulkanEnable XR_KHR_vulkan_enable} extension <b>must</b> be enabled prior to using {@link XrSwapchainImageVulkanKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHRVulkanEnable#XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSwapchainImageFoveationVulkanFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSwapchainImageBaseHeader}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainImageVulkanKHR {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     VkImage {@link #image};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     VkImage image;
+ * }}</pre>
  */
 public class XrSwapchainImageVulkanKHR extends Struct<XrSwapchainImageVulkanKHR> implements NativeResource {
 
@@ -105,21 +76,21 @@ public class XrSwapchainImageVulkanKHR extends Struct<XrSwapchainImageVulkanKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a valid Vulkan {@code VkImage} to use. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSwapchainImageVulkanKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRVulkanEnable#XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHRVulkanEnable#XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR} value to the {@code type} field. */
     public XrSwapchainImageVulkanKHR type$Default() { return type(KHRVulkanEnable.XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSwapchainImageVulkanKHR next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrSwapchainImageFoveationVulkanFB} value to the {@code next} chain. */
     public XrSwapchainImageVulkanKHR next(XrSwapchainImageFoveationVulkanFB value) { return this.next(value.next(this.next()).address()); }
@@ -323,21 +294,21 @@ public class XrSwapchainImageVulkanKHR extends Struct<XrSwapchainImageVulkanKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSwapchainImageVulkanKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainImageVulkanKHR.ntype(address()); }
-        /** @return the value of the {@link XrSwapchainImageVulkanKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSwapchainImageVulkanKHR.nnext(address()); }
-        /** @return the value of the {@link XrSwapchainImageVulkanKHR#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return XrSwapchainImageVulkanKHR.nimage(address()); }
 
-        /** Sets the specified value to the {@link XrSwapchainImageVulkanKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSwapchainImageVulkanKHR.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainImageVulkanKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRVulkanEnable#XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR} value to the {@link XrSwapchainImageVulkanKHR#type} field. */
+        /** Sets the {@link KHRVulkanEnable#XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR} value to the {@code type} field. */
         public XrSwapchainImageVulkanKHR.Buffer type$Default() { return type(KHRVulkanEnable.XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR); }
-        /** Sets the specified value to the {@link XrSwapchainImageVulkanKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSwapchainImageVulkanKHR.Buffer next(@NativeType("void *") long value) { XrSwapchainImageVulkanKHR.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrSwapchainImageFoveationVulkanFB} value to the {@code next} chain. */
         public XrSwapchainImageVulkanKHR.Buffer next(XrSwapchainImageFoveationVulkanFB value) { return this.next(value.next(this.next()).address()); }

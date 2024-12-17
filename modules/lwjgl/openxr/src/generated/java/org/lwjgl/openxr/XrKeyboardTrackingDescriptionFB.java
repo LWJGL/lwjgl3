@@ -18,31 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.FBKeyboardTracking.*;
 
 /**
- * Description of a trackable keyboard.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrKeyboardTrackingDescriptionFB} describes a trackable keyboard and its associated metadata.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBKeyboardTracking XR_FB_keyboard_tracking} extension <b>must</b> be enabled prior to using {@link XrKeyboardTrackingDescriptionFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrVector3f}, {@link FBKeyboardTracking#xrQuerySystemTrackedKeyboardFB QuerySystemTrackedKeyboardFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrKeyboardTrackingDescriptionFB {
- *     uint64_t {@link #trackedKeyboardId};
- *     {@link XrVector3f XrVector3f} {@link #size};
- *     XrKeyboardTrackingFlagsFB {@link #flags};
- *     char {@link #name}[XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB];
- * }</code></pre>
+ *     uint64_t trackedKeyboardId;
+ *     {@link XrVector3f XrVector3f} size;
+ *     XrKeyboardTrackingFlagsFB flags;
+ *     char name[XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB];
+ * }}</pre>
  */
 public class XrKeyboardTrackingDescriptionFB extends Struct<XrKeyboardTrackingDescriptionFB> implements NativeResource {
 
@@ -98,18 +80,18 @@ public class XrKeyboardTrackingDescriptionFB extends Struct<XrKeyboardTrackingDe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** abstract identifier describing the type of keyboard. */
+    /** @return the value of the {@code trackedKeyboardId} field. */
     @NativeType("uint64_t")
     public long trackedKeyboardId() { return ntrackedKeyboardId(address()); }
-    /** bounding box. */
+    /** @return a {@link XrVector3f} view of the {@code size} field. */
     public XrVector3f size() { return nsize(address()); }
-    /** additional information on the type of keyboard available. If {@link FBKeyboardTracking#XR_KEYBOARD_TRACKING_EXISTS_BIT_FB KEYBOARD_TRACKING_EXISTS_BIT_FB} is not set there is no keyboard. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrKeyboardTrackingFlagsFB")
     public long flags() { return nflags(address()); }
-    /** human readable keyboard identifier. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB]")
     public ByteBuffer name() { return nname(address()); }
-    /** human readable keyboard identifier. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB]")
     public String nameString() { return nnameString(address()); }
 
@@ -278,18 +260,18 @@ public class XrKeyboardTrackingDescriptionFB extends Struct<XrKeyboardTrackingDe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrKeyboardTrackingDescriptionFB#trackedKeyboardId} field. */
+        /** @return the value of the {@code trackedKeyboardId} field. */
         @NativeType("uint64_t")
         public long trackedKeyboardId() { return XrKeyboardTrackingDescriptionFB.ntrackedKeyboardId(address()); }
-        /** @return a {@link XrVector3f} view of the {@link XrKeyboardTrackingDescriptionFB#size} field. */
+        /** @return a {@link XrVector3f} view of the {@code size} field. */
         public XrVector3f size() { return XrKeyboardTrackingDescriptionFB.nsize(address()); }
-        /** @return the value of the {@link XrKeyboardTrackingDescriptionFB#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrKeyboardTrackingFlagsFB")
         public long flags() { return XrKeyboardTrackingDescriptionFB.nflags(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrKeyboardTrackingDescriptionFB#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB]")
         public ByteBuffer name() { return XrKeyboardTrackingDescriptionFB.nname(address()); }
-        /** @return the null-terminated string stored in the {@link XrKeyboardTrackingDescriptionFB#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB]")
         public String nameString() { return XrKeyboardTrackingDescriptionFB.nnameString(address()); }
 

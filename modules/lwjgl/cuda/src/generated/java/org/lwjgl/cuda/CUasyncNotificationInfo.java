@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUasyncNotificationInfo {
  *     CUasyncNotificationType type;
  *     union {
@@ -26,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *             unsigned long long bytesOverBudget;
  *         } overBudget;
  *     } info;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUasyncNotificationInfo extends Struct<CUasyncNotificationInfo> implements NativeResource {
 

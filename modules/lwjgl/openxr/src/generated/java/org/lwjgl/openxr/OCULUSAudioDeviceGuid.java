@@ -13,22 +13,12 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_OCULUS_audio_device_guid">XR_OCULUS_audio_device_guid</a> extension.
- * 
- * <p>This extension enables the querying of audio device information associated with an OpenXR instance.</p>
- * 
- * <p>On Windows, there may be multiple audio devices available on the system. This extensions allows applications to query the runtime for the appropriate audio devices for the active HMD.</p>
- */
 public class OCULUSAudioDeviceGuid {
 
-    /** The extension specification version. */
     public static final int XR_OCULUS_audio_device_guid_SPEC_VERSION = 1;
 
-    /** The extension name. */
     public static final String XR_OCULUS_AUDIO_DEVICE_GUID_EXTENSION_NAME = "XR_OCULUS_audio_device_guid";
 
-    /** XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS */
     public static final int XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS = 128;
 
     protected OCULUSAudioDeviceGuid() {
@@ -37,7 +27,7 @@ public class OCULUSAudioDeviceGuid {
 
     // --- [ xrGetAudioOutputDeviceGuidOculus ] ---
 
-    /** Unsafe version of: {@link #xrGetAudioOutputDeviceGuidOculus GetAudioOutputDeviceGuidOculus} */
+    /** {@code XrResult xrGetAudioOutputDeviceGuidOculus(XrInstance instance, wchar_t * buffer)} */
     public static int nxrGetAudioOutputDeviceGuidOculus(XrInstance instance, long buffer) {
         long __functionAddress = instance.getCapabilities().xrGetAudioOutputDeviceGuidOculus;
         if (CHECKS) {
@@ -46,49 +36,7 @@ public class OCULUSAudioDeviceGuid {
         return callPPI(instance.address(), buffer, __functionAddress);
     }
 
-    /**
-     * Query the GUID for the active audio output device.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <pre><code>
-     * XrResult xrGetAudioOutputDeviceGuidOculus(
-     *     XrInstance                                  instance,
-     *     wchar_t                                     buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link OCULUSAudioDeviceGuid XR_OCULUS_audio_device_guid} extension <b>must</b> be enabled prior to calling {@link #xrGetAudioOutputDeviceGuidOculus GetAudioOutputDeviceGuidOculus}</li>
-     * <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
-     * <li>{@code buffer} <b>must</b> be a wide character array of length {@link #XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS MAX_AUDIO_DEVICE_STR_SIZE_OCULUS}</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link #xrGetAudioInputDeviceGuidOculus GetAudioInputDeviceGuidOculus}</p>
-     *
-     * @param instance the {@code XrInstance} to query the audio device state in.
-     * @param buffer   a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid">IMMDevice::GetId</a> API.
-     */
+    /** {@code XrResult xrGetAudioOutputDeviceGuidOculus(XrInstance instance, wchar_t * buffer)} */
     @NativeType("XrResult")
     public static int xrGetAudioOutputDeviceGuidOculus(XrInstance instance, @NativeType("wchar_t *") ByteBuffer buffer) {
         if (CHECKS) {
@@ -99,7 +47,7 @@ public class OCULUSAudioDeviceGuid {
 
     // --- [ xrGetAudioInputDeviceGuidOculus ] ---
 
-    /** Unsafe version of: {@link #xrGetAudioInputDeviceGuidOculus GetAudioInputDeviceGuidOculus} */
+    /** {@code XrResult xrGetAudioInputDeviceGuidOculus(XrInstance instance, wchar_t * buffer)} */
     public static int nxrGetAudioInputDeviceGuidOculus(XrInstance instance, long buffer) {
         long __functionAddress = instance.getCapabilities().xrGetAudioInputDeviceGuidOculus;
         if (CHECKS) {
@@ -108,49 +56,7 @@ public class OCULUSAudioDeviceGuid {
         return callPPI(instance.address(), buffer, __functionAddress);
     }
 
-    /**
-     * Query the GUID for the active audio input device.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <pre><code>
-     * XrResult xrGetAudioInputDeviceGuidOculus(
-     *     XrInstance                                  instance,
-     *     wchar_t                                     buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>The {@link OCULUSAudioDeviceGuid XR_OCULUS_audio_device_guid} extension <b>must</b> be enabled prior to calling {@link #xrGetAudioInputDeviceGuidOculus GetAudioInputDeviceGuidOculus}</li>
-     * <li>{@code instance} <b>must</b> be a valid {@code XrInstance} handle</li>
-     * <li>{@code buffer} <b>must</b> be a wide character array of length {@link #XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS MAX_AUDIO_DEVICE_STR_SIZE_OCULUS}</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link XR10#XR_ERROR_FUNCTION_UNSUPPORTED ERROR_FUNCTION_UNSUPPORTED}</li>
-     * <li>{@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
-     * <li>{@link XR10#XR_ERROR_HANDLE_INVALID ERROR_HANDLE_INVALID}</li>
-     * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
-     * <li>{@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link #xrGetAudioOutputDeviceGuidOculus GetAudioOutputDeviceGuidOculus}</p>
-     *
-     * @param instance the {@code XrInstance} to query the audio device state in.
-     * @param buffer   a fixed size buffer which will contain the audio device GUID. The format of this data matches the <a href="https://docs.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-getid">IMMDevice::GetId</a> API.
-     */
+    /** {@code XrResult xrGetAudioInputDeviceGuidOculus(XrInstance instance, wchar_t * buffer)} */
     @NativeType("XrResult")
     public static int xrGetAudioInputDeviceGuidOculus(XrInstance instance, @NativeType("wchar_t *") ByteBuffer buffer) {
         if (CHECKS) {

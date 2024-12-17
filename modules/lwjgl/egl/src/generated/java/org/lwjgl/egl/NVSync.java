@@ -13,19 +13,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_sync.txt">NV_sync</a> extension.
- * 
- * <p>This extension introduces the concept of "sync objects" into EGL. Sync objects are a synchronization primitive, representing events whose completion
- * can be tested or waited upon. This extension borrows heavily from the GL_ARB_sync extension, and like that extension, introduces only a single type of
- * sync object, the "fence sync object." Additional types of sync objects may be introduced in later extensions.</p>
- * 
- * <p>Fence sync objects have corresponding fences, which are inserted into client API command streams. A sync object can be queried for a given condition,
- * such as completion of the corresponding fence. Fence completion allows applications to request a partial Finish of an API command stream, wherein all
- * commands issued in a particular client API context will be forced to complete before control is returned to the calling thread.</p>
- * 
- * <p>Requires {@link EGL11 EGL 1.1}.</p>
- */
 public class NVSync {
 
     public static final int
@@ -51,6 +38,7 @@ public class NVSync {
 
     // --- [ eglCreateFenceSyncNV ] ---
 
+    /** {@code EGLSyncNV eglCreateFenceSyncNV(EGLDisplay dpy, EGLenum condition, EGLint const * attrib_list)} */
     public static long neglCreateFenceSyncNV(long dpy, int condition, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateFenceSyncNV;
         if (CHECKS) {
@@ -60,6 +48,7 @@ public class NVSync {
         return callPPP(dpy, condition, attrib_list, __functionAddress);
     }
 
+    /** {@code EGLSyncNV eglCreateFenceSyncNV(EGLDisplay dpy, EGLenum condition, EGLint const * attrib_list)} */
     @NativeType("EGLSyncNV")
     public static long eglCreateFenceSyncNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int condition, @NativeType("EGLint const *") IntBuffer attrib_list) {
         if (CHECKS) {
@@ -70,6 +59,7 @@ public class NVSync {
 
     // --- [ eglDestroySyncNV ] ---
 
+    /** {@code EGLBoolean eglDestroySyncNV(EGLSyncNV sync)} */
     @NativeType("EGLBoolean")
     public static boolean eglDestroySyncNV(@NativeType("EGLSyncNV") long sync) {
         long __functionAddress = EGL.getCapabilities().eglDestroySyncNV;
@@ -82,6 +72,7 @@ public class NVSync {
 
     // --- [ eglFenceNV ] ---
 
+    /** {@code EGLBoolean eglFenceNV(EGLSyncNV sync)} */
     @NativeType("EGLBoolean")
     public static boolean eglFenceNV(@NativeType("EGLSyncNV") long sync) {
         long __functionAddress = EGL.getCapabilities().eglFenceNV;
@@ -94,6 +85,7 @@ public class NVSync {
 
     // --- [ eglClientWaitSyncNV ] ---
 
+    /** {@code EGLint eglClientWaitSyncNV(EGLSyncNV sync, EGLint flags, EGLTimeNV timeout)} */
     @NativeType("EGLint")
     public static int eglClientWaitSyncNV(@NativeType("EGLSyncNV") long sync, @NativeType("EGLint") int flags, @NativeType("EGLTimeNV") long timeout) {
         long __functionAddress = EGL.getCapabilities().eglClientWaitSyncNV;
@@ -106,6 +98,7 @@ public class NVSync {
 
     // --- [ eglSignalSyncNV ] ---
 
+    /** {@code EGLBoolean eglSignalSyncNV(EGLSyncNV sync, EGLenum mode)} */
     @NativeType("EGLBoolean")
     public static boolean eglSignalSyncNV(@NativeType("EGLSyncNV") long sync, @NativeType("EGLenum") int mode) {
         long __functionAddress = EGL.getCapabilities().eglSignalSyncNV;
@@ -118,6 +111,7 @@ public class NVSync {
 
     // --- [ eglGetSyncAttribNV ] ---
 
+    /** {@code EGLBoolean eglGetSyncAttribNV(EGLSyncNV sync, EGLint attribute, EGLint * value)} */
     public static int neglGetSyncAttribNV(long sync, int attribute, long value) {
         long __functionAddress = EGL.getCapabilities().eglGetSyncAttribNV;
         if (CHECKS) {
@@ -127,6 +121,7 @@ public class NVSync {
         return callPPI(sync, attribute, value, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglGetSyncAttribNV(EGLSyncNV sync, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglGetSyncAttribNV(@NativeType("EGLSyncNV") long sync, @NativeType("EGLint") int attribute, @NativeType("EGLint *") IntBuffer value) {
         if (CHECKS) {
@@ -135,7 +130,7 @@ public class NVSync {
         return neglGetSyncAttribNV(sync, attribute, memAddress(value)) != 0;
     }
 
-    /** Array version of: {@link #eglCreateFenceSyncNV CreateFenceSyncNV} */
+    /** {@code EGLSyncNV eglCreateFenceSyncNV(EGLDisplay dpy, EGLenum condition, EGLint const * attrib_list)} */
     @NativeType("EGLSyncNV")
     public static long eglCreateFenceSyncNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLenum") int condition, @NativeType("EGLint const *") int[] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateFenceSyncNV;
@@ -147,7 +142,7 @@ public class NVSync {
         return callPPP(dpy, condition, attrib_list, __functionAddress);
     }
 
-    /** Array version of: {@link #eglGetSyncAttribNV GetSyncAttribNV} */
+    /** {@code EGLBoolean eglGetSyncAttribNV(EGLSyncNV sync, EGLint attribute, EGLint * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglGetSyncAttribNV(@NativeType("EGLSyncNV") long sync, @NativeType("EGLint") int attribute, @NativeType("EGLint *") int[] value) {
         long __functionAddress = EGL.getCapabilities().eglGetSyncAttribNV;

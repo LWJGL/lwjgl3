@@ -11,14 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *object
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Generic_Finalizer} */
 public abstract class FT_Generic_Finalizer extends Callback implements FT_Generic_FinalizerI {
 
     /**

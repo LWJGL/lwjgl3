@@ -13,10 +13,8 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to GLX 1.1. */
 public class GLX11 extends GLX {
 
-    /** Names for attributes to {@link #glXGetClientString GetClientString}. */
     public static final int
         GLX_VENDOR     = 0x1,
         GLX_VERSION    = 0x2,
@@ -28,7 +26,7 @@ public class GLX11 extends GLX {
 
     // --- [ glXQueryExtensionsString ] ---
 
-    /** Unsafe version of: {@link #glXQueryExtensionsString QueryExtensionsString} */
+    /** {@code char const * glXQueryExtensionsString(Display * display, int screen)} */
     public static long nglXQueryExtensionsString(long display, int screen) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryExtensionsString;
         if (CHECKS) {
@@ -38,12 +36,7 @@ public class GLX11 extends GLX {
         return callPP(display, screen, __functionAddress);
     }
 
-    /**
-     * Returns a string describing which GLX extensions are supported on the connection.
-     *
-     * @param display the connection to the X server
-     * @param screen  the screen number
-     */
+    /** {@code char const * glXQueryExtensionsString(Display * display, int screen)} */
     @NativeType("char const *")
     public static @Nullable String glXQueryExtensionsString(@NativeType("Display *") long display, int screen) {
         long __result = nglXQueryExtensionsString(display, screen);
@@ -52,7 +45,7 @@ public class GLX11 extends GLX {
 
     // --- [ glXGetClientString ] ---
 
-    /** Unsafe version of: {@link #glXGetClientString GetClientString} */
+    /** {@code char const * glXGetClientString(Display * display, int name)} */
     public static long nglXGetClientString(long display, int name) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetClientString;
         if (CHECKS) {
@@ -62,12 +55,7 @@ public class GLX11 extends GLX {
         return callPP(display, name, __functionAddress);
     }
 
-    /**
-     * Returns a pointer to a string describing some aspect of the client library.
-     *
-     * @param display the connection to the X server
-     * @param name    the string to query
-     */
+    /** {@code char const * glXGetClientString(Display * display, int name)} */
     @NativeType("char const *")
     public static @Nullable String glXGetClientString(@NativeType("Display *") long display, int name) {
         long __result = nglXGetClientString(display, name);
@@ -76,7 +64,7 @@ public class GLX11 extends GLX {
 
     // --- [ glXQueryServerString ] ---
 
-    /** Unsafe version of: {@link #glXQueryServerString QueryServerString} */
+    /** {@code char const * glXQueryServerString(Display * display, int screen, int name)} */
     public static long nglXQueryServerString(long display, int screen, int name) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXQueryServerString;
         if (CHECKS) {
@@ -86,13 +74,7 @@ public class GLX11 extends GLX {
         return callPP(display, screen, name, __functionAddress);
     }
 
-    /**
-     * Returns a pointer to a string describing some aspect of the server's GLX extension.
-     *
-     * @param display the connection to the X server
-     * @param screen  the screen number
-     * @param name    the string to query
-     */
+    /** {@code char const * glXQueryServerString(Display * display, int screen, int name)} */
     @NativeType("char const *")
     public static @Nullable String glXQueryServerString(@NativeType("Display *") long display, int screen, int name) {
         long __result = nglXQueryServerString(display, screen, name);

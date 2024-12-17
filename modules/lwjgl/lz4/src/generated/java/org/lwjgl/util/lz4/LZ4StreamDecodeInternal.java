@@ -14,15 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LZ4_streamDecode_t_internal {
  *     LZ4_byte const * externalDict;
  *     LZ4_byte const * prefixEnd;
  *     size_t extDictSize;
  *     size_t prefixSize;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct LZ4_streamDecode_t_internal")
 public class LZ4StreamDecodeInternal extends Struct<LZ4StreamDecodeInternal> {
@@ -79,18 +77,10 @@ public class LZ4StreamDecodeInternal extends Struct<LZ4StreamDecodeInternal> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code externalDict} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code externalDict} field. */
     @NativeType("LZ4_byte const *")
     public ByteBuffer externalDict(int capacity) { return nexternalDict(address(), capacity); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code prefixEnd} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code prefixEnd} field. */
     @NativeType("LZ4_byte const *")
     public ByteBuffer prefixEnd(int capacity) { return nprefixEnd(address(), capacity); }
     /** @return the value of the {@code extDictSize} field. */
@@ -181,18 +171,10 @@ public class LZ4StreamDecodeInternal extends Struct<LZ4StreamDecodeInternal> {
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code externalDict} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code externalDict} field. */
         @NativeType("LZ4_byte const *")
         public ByteBuffer externalDict(int capacity) { return LZ4StreamDecodeInternal.nexternalDict(address(), capacity); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code prefixEnd} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code prefixEnd} field. */
         @NativeType("LZ4_byte const *")
         public ByteBuffer prefixEnd(int capacity) { return LZ4StreamDecodeInternal.nprefixEnd(address(), capacity); }
         /** @return the value of the {@code extDictSize} field. */

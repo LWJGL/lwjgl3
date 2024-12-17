@@ -14,9 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_bridge_attr_s {
  *     union {
  *         {@link hwloc_pcidev_attr_s hwloc_pcidev_attr_s} pci;
@@ -31,7 +29,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     } downstream;
  *     hwloc_obj_bridge_type_t downstream_type;
  *     unsigned depth;
- * }</code></pre>
+ * }}</pre>
  */
 public class hwloc_bridge_attr_s extends Struct<hwloc_bridge_attr_s> {
 

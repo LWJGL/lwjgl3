@@ -25,38 +25,6 @@ private val CLBinding = Generator.register(object : APIBinding(
     APICapabilities.JAVA_CAPABILITIES
 ) {
 
-    override fun printCustomJavadoc(writer: PrintWriter, function: Func, documentation: String): Boolean {
-        if (function.nativeClass.templateName.startsWith("CL")) {
-            writer.printOpenCLJavaDoc(documentation, function.nativeName, if (function.has<DeprecatedCL>()) function.get<DeprecatedCL>().after else "2.1") // TODO: update to 2.2 when available
-            return true
-        }
-        return false
-    }
-
-    private fun PrintWriter.printOpenCLJavaDoc(documentation: String, function: String, version: String) {
-        val link = url("https://www.khronos.org/registry/OpenCL/sdk/$version/docs/man/xhtml/$function.html", "Reference Page")
-        val injectedJavaDoc =
-            if (version != "2.1")
-                "$link - <em>This function is deprecated after OpenCL $version</em>"
-            else
-                link
-
-        if (documentation.isEmpty())
-            println("$t/** $injectedJavaDoc */")
-        else {
-            if (documentation.indexOf('\n') == -1) {
-                println("$t/**")
-                print("$t * ")
-                print(documentation.substring("$t/** ".length, documentation.length - " */".length))
-            } else {
-                print(documentation.substring(0, documentation.length - "\n$t */".length))
-            }
-            print("\n$t * ")
-            print("\n$t * @see $injectedJavaDoc")
-            println("\n$t */")
-        }
-    }
-
     override fun shouldCheckFunctionAddress(function: Func): Boolean = function.nativeClass.templateName != "CL10"
 
     override fun generateFunctionAddress(writer: PrintWriter, function: Func) {
@@ -90,7 +58,7 @@ private val CLBinding = Generator.register(object : APIBinding(
         val addresses = classes.getFunctionPointers()
 
         println("${t}public final long")
-        println(addresses.map(Func::name).joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n"))
+        println(addresses.joinToString(",\n$t$t", prefix = "$t$t", postfix = ";\n", transform = Func::name))
 
         classes.forEach {
             println(it.getCapabilityJavadoc())
@@ -151,15 +119,3 @@ private val CLBinding = Generator.register(object : APIBinding(
 
 fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
     nativeClass(Module.OPENCL, templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", binding = CLBinding, init = init)
-
-val NativeClass.extensionLink: String
-    get() = extensionLink(templateName)
-
-fun NativeClass.extensionLink(
-    txt: String,
-    prefix: String = txt.substring(0, txt.indexOf('_')),
-    name: String = templateName
-) = url("https://www.khronos.org/registry/OpenCL/extensions/$prefix/cl_$txt.txt", name)
-
-val NativeClass.extensionName: String
-    get() = "<strong>$templateName</strong>"

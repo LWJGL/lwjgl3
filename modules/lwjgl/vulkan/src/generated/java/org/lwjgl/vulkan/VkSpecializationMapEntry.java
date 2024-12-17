@@ -16,30 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a specialization map entry.
- * 
- * <h5>Description</h5>
- * 
- * <p>If a {@code constantID} value is not a specialization constant ID used in the shader, that map entry does not affect the behavior of the pipeline.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>For a {@code constantID} specialization constant declared in a shader, {@code size} <b>must</b> match the byte size of the {@code constantID}. If the specialization constant is of type {@code boolean}, {@code size} <b>must</b> be the byte size of {@code VkBool32}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSpecializationInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSpecializationMapEntry {
- *     uint32_t {@link #constantID};
- *     uint32_t {@link #offset};
- *     size_t {@link #size};
- * }</code></pre>
+ *     uint32_t constantID;
+ *     uint32_t offset;
+ *     size_t size;
+ * }}</pre>
  */
 public class VkSpecializationMapEntry extends Struct<VkSpecializationMapEntry> implements NativeResource {
 
@@ -92,21 +74,21 @@ public class VkSpecializationMapEntry extends Struct<VkSpecializationMapEntry> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the ID of the specialization constant in SPIR-V. */
+    /** @return the value of the {@code constantID} field. */
     @NativeType("uint32_t")
     public int constantID() { return nconstantID(address()); }
-    /** the byte offset of the specialization constant value within the supplied data buffer. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("uint32_t")
     public int offset() { return noffset(address()); }
-    /** the byte size of the specialization constant value within the supplied data buffer. */
+    /** @return the value of the {@code size} field. */
     @NativeType("size_t")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #constantID} field. */
+    /** Sets the specified value to the {@code constantID} field. */
     public VkSpecializationMapEntry constantID(@NativeType("uint32_t") int value) { nconstantID(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkSpecializationMapEntry offset(@NativeType("uint32_t") int value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkSpecializationMapEntry size(@NativeType("size_t") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,21 +303,21 @@ public class VkSpecializationMapEntry extends Struct<VkSpecializationMapEntry> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSpecializationMapEntry#constantID} field. */
+        /** @return the value of the {@code constantID} field. */
         @NativeType("uint32_t")
         public int constantID() { return VkSpecializationMapEntry.nconstantID(address()); }
-        /** @return the value of the {@link VkSpecializationMapEntry#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("uint32_t")
         public int offset() { return VkSpecializationMapEntry.noffset(address()); }
-        /** @return the value of the {@link VkSpecializationMapEntry#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("size_t")
         public long size() { return VkSpecializationMapEntry.nsize(address()); }
 
-        /** Sets the specified value to the {@link VkSpecializationMapEntry#constantID} field. */
+        /** Sets the specified value to the {@code constantID} field. */
         public VkSpecializationMapEntry.Buffer constantID(@NativeType("uint32_t") int value) { VkSpecializationMapEntry.nconstantID(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSpecializationMapEntry#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkSpecializationMapEntry.Buffer offset(@NativeType("uint32_t") int value) { VkSpecializationMapEntry.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSpecializationMapEntry#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkSpecializationMapEntry.Buffer size(@NativeType("size_t") long value) { VkSpecializationMapEntry.nsize(address(), value); return this; }
 
     }

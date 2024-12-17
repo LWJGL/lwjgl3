@@ -16,26 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Session creation extension struct providing overlay session parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTXOverlay XR_EXTX_overlay} extension <b>must</b> be enabled prior to using {@link XrSessionCreateInfoOverlayEXTX}</li>
- * <li>{@code type} <b>must</b> be {@link EXTXOverlay#XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code createFlags} <b>must</b> be 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSessionCreateInfoOverlayEXTX {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrOverlaySessionCreateFlagsEXTX {@link #createFlags};
- *     uint32_t {@link #sessionLayersPlacement};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrOverlaySessionCreateFlagsEXTX createFlags;
+ *     uint32_t sessionLayersPlacement;
+ * }}</pre>
  */
 public class XrSessionCreateInfoOverlayEXTX extends Struct<XrSessionCreateInfoOverlayEXTX> implements NativeResource {
 
@@ -91,28 +78,28 @@ public class XrSessionCreateInfoOverlayEXTX extends Struct<XrSessionCreateInfoOv
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** 0 or one or more {@code XrOverlaySessionCreateFlagBitsEXTX} which indicate various characteristics desired for the overlay session. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("XrOverlaySessionCreateFlagsEXTX")
     public long createFlags() { return ncreateFlags(address()); }
-    /** a value indicating the desired placement of the session’s composition layers in terms of other sessions. */
+    /** @return the value of the {@code sessionLayersPlacement} field. */
     @NativeType("uint32_t")
     public int sessionLayersPlacement() { return nsessionLayersPlacement(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSessionCreateInfoOverlayEXTX type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTXOverlay#XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX} value to the {@link #type} field. */
+    /** Sets the {@link EXTXOverlay#XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX} value to the {@code type} field. */
     public XrSessionCreateInfoOverlayEXTX type$Default() { return type(EXTXOverlay.XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSessionCreateInfoOverlayEXTX next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #createFlags} field. */
+    /** Sets the specified value to the {@code createFlags} field. */
     public XrSessionCreateInfoOverlayEXTX createFlags(@NativeType("XrOverlaySessionCreateFlagsEXTX") long value) { ncreateFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #sessionLayersPlacement} field. */
+    /** Sets the specified value to the {@code sessionLayersPlacement} field. */
     public XrSessionCreateInfoOverlayEXTX sessionLayersPlacement(@NativeType("uint32_t") int value) { nsessionLayersPlacement(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,28 +301,28 @@ public class XrSessionCreateInfoOverlayEXTX extends Struct<XrSessionCreateInfoOv
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSessionCreateInfoOverlayEXTX#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSessionCreateInfoOverlayEXTX.ntype(address()); }
-        /** @return the value of the {@link XrSessionCreateInfoOverlayEXTX#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSessionCreateInfoOverlayEXTX.nnext(address()); }
-        /** @return the value of the {@link XrSessionCreateInfoOverlayEXTX#createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("XrOverlaySessionCreateFlagsEXTX")
         public long createFlags() { return XrSessionCreateInfoOverlayEXTX.ncreateFlags(address()); }
-        /** @return the value of the {@link XrSessionCreateInfoOverlayEXTX#sessionLayersPlacement} field. */
+        /** @return the value of the {@code sessionLayersPlacement} field. */
         @NativeType("uint32_t")
         public int sessionLayersPlacement() { return XrSessionCreateInfoOverlayEXTX.nsessionLayersPlacement(address()); }
 
-        /** Sets the specified value to the {@link XrSessionCreateInfoOverlayEXTX#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSessionCreateInfoOverlayEXTX.Buffer type(@NativeType("XrStructureType") int value) { XrSessionCreateInfoOverlayEXTX.ntype(address(), value); return this; }
-        /** Sets the {@link EXTXOverlay#XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX} value to the {@link XrSessionCreateInfoOverlayEXTX#type} field. */
+        /** Sets the {@link EXTXOverlay#XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX} value to the {@code type} field. */
         public XrSessionCreateInfoOverlayEXTX.Buffer type$Default() { return type(EXTXOverlay.XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX); }
-        /** Sets the specified value to the {@link XrSessionCreateInfoOverlayEXTX#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSessionCreateInfoOverlayEXTX.Buffer next(@NativeType("void const *") long value) { XrSessionCreateInfoOverlayEXTX.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSessionCreateInfoOverlayEXTX#createFlags} field. */
+        /** Sets the specified value to the {@code createFlags} field. */
         public XrSessionCreateInfoOverlayEXTX.Buffer createFlags(@NativeType("XrOverlaySessionCreateFlagsEXTX") long value) { XrSessionCreateInfoOverlayEXTX.ncreateFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSessionCreateInfoOverlayEXTX#sessionLayersPlacement} field. */
+        /** Sets the specified value to the {@code sessionLayersPlacement} field. */
         public XrSessionCreateInfoOverlayEXTX.Buffer sessionLayersPlacement(@NativeType("uint32_t") int value) { XrSessionCreateInfoOverlayEXTX.nsessionLayersPlacement(address(), value); return this; }
 
     }

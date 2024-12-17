@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH264HrdParameters {
  *     uint8_t cpb_cnt_minus1;
  *     uint8_t bit_rate_scale;
@@ -34,7 +32,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
  *     uint32_t cpb_removal_delay_length_minus1;
  *     uint32_t dpb_output_delay_length_minus1;
  *     uint32_t time_offset_length;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH264HrdParameters extends Struct<StdVideoH264HrdParameters> implements NativeResource {
 

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceDescriptorIndexingFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDescriptorIndexingFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -44,7 +40,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 descriptorBindingPartiallyBound;
  *     VkBool32 descriptorBindingVariableDescriptorCount;
  *     VkBool32 runtimeDescriptorArray;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceDescriptorIndexingFeaturesEXT extends VkPhysicalDeviceDescriptorIndexingFeatures {
 

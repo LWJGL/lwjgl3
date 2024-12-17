@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_CODEC_WAVEFORMAT {
  *     char const * name;
  *     FMOD_SOUND_FORMAT format;
@@ -34,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FMOD_CHANNELMASK channelmask;
  *     FMOD_CHANNELORDER channelorder;
  *     float peakvolume;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FMOD_CODEC_WAVEFORMAT")
 public class FMOD_CODEC_WAVEFORMAT extends Struct<FMOD_CODEC_WAVEFORMAT> implements NativeResource {

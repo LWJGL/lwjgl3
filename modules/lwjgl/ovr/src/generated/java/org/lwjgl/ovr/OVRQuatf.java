@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A quaternion rotation.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrQuatf {
- *     float {@link #x};
- *     float {@link #y};
- *     float {@link #z};
- *     float {@link #w};
- * }</code></pre>
+ *     float x;
+ *     float y;
+ *     float z;
+ *     float w;
+ * }}</pre>
  */
 @NativeType("struct ovrQuatf")
 public class OVRQuatf extends Struct<OVRQuatf> implements NativeResource {
@@ -83,22 +79,22 @@ public class OVRQuatf extends Struct<OVRQuatf> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the vector x component */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** the vector y component */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** the vector z component */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
-    /** the vector w component */
+    /** @return the value of the {@code w} field. */
     public float w() { return nw(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public OVRQuatf x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public OVRQuatf y(float value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@link #z} field. */
+    /** Sets the specified value to the {@code z} field. */
     public OVRQuatf z(float value) { nz(address(), value); return this; }
-    /** Sets the specified value to the {@link #w} field. */
+    /** Sets the specified value to the {@code w} field. */
     public OVRQuatf w(float value) { nw(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,22 +315,22 @@ public class OVRQuatf extends Struct<OVRQuatf> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRQuatf#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return OVRQuatf.nx(address()); }
-        /** @return the value of the {@link OVRQuatf#y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return OVRQuatf.ny(address()); }
-        /** @return the value of the {@link OVRQuatf#z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return OVRQuatf.nz(address()); }
-        /** @return the value of the {@link OVRQuatf#w} field. */
+        /** @return the value of the {@code w} field. */
         public float w() { return OVRQuatf.nw(address()); }
 
-        /** Sets the specified value to the {@link OVRQuatf#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public OVRQuatf.Buffer x(float value) { OVRQuatf.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRQuatf#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public OVRQuatf.Buffer y(float value) { OVRQuatf.ny(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRQuatf#z} field. */
+        /** Sets the specified value to the {@code z} field. */
         public OVRQuatf.Buffer z(float value) { OVRQuatf.nz(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRQuatf#w} field. */
+        /** Sets the specified value to the {@code w} field. */
         public OVRQuatf.Buffer w(float value) { OVRQuatf.nw(address(), value); return this; }
 
     }

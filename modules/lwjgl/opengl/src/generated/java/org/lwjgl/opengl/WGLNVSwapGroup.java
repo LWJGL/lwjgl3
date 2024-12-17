@@ -13,17 +13,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/WGL_NV_swap_group.txt">WGL_NV_swap_group</a> extension.
- * 
- * <p>This extension provides the capability to synchronize the buffer swaps of a group of OpenGL windows. A swap group is created, and windows are added as
- * members to the swap group. Buffer swaps to members of the swap group will then take place concurrently.</p>
- * 
- * <p>This extension also provides the capability to sychronize the buffer swaps of different swap groups, which may reside on distributed systems on a
- * network. For this purpose swap groups can be bound to a swap barrier.</p>
- * 
- * <p>This extension extends the set of conditions that must be met before a buffer swap can take place.</p>
- */
 public class WGLNVSwapGroup {
 
     protected WGLNVSwapGroup() {
@@ -32,6 +21,7 @@ public class WGLNVSwapGroup {
 
     // --- [ wglJoinSwapGroupNV ] ---
 
+    /** {@code BOOL wglJoinSwapGroupNV(HDC hDC, GLuint group)} */
     @NativeType("BOOL")
     public static boolean wglJoinSwapGroupNV(@NativeType("HDC") long hDC, @NativeType("GLuint") int group) {
         long __functionAddress = GL.getCapabilitiesWGL().wglJoinSwapGroupNV;
@@ -44,6 +34,7 @@ public class WGLNVSwapGroup {
 
     // --- [ wglBindSwapBarrierNV ] ---
 
+    /** {@code BOOL wglBindSwapBarrierNV(GLuint group, GLuint barrier)} */
     @NativeType("BOOL")
     public static boolean wglBindSwapBarrierNV(@NativeType("GLuint") int group, @NativeType("GLuint") int barrier) {
         long __functionAddress = GL.getCapabilitiesWGL().wglBindSwapBarrierNV;
@@ -55,6 +46,7 @@ public class WGLNVSwapGroup {
 
     // --- [ wglQuerySwapGroupNV ] ---
 
+    /** {@code BOOL wglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * barrier)} */
     public static int nwglQuerySwapGroupNV(long hDC, long group, long barrier) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQuerySwapGroupNV;
         if (CHECKS) {
@@ -64,6 +56,7 @@ public class WGLNVSwapGroup {
         return callPPPI(hDC, group, barrier, __functionAddress);
     }
 
+    /** {@code BOOL wglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * barrier)} */
     @NativeType("BOOL")
     public static boolean wglQuerySwapGroupNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") IntBuffer group, @NativeType("GLuint *") IntBuffer barrier) {
         if (CHECKS) {
@@ -75,6 +68,7 @@ public class WGLNVSwapGroup {
 
     // --- [ wglQueryMaxSwapGroupsNV ] ---
 
+    /** {@code BOOL wglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers)} */
     public static int nwglQueryMaxSwapGroupsNV(long hDC, long maxGroups, long maxBarriers) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQueryMaxSwapGroupsNV;
         if (CHECKS) {
@@ -84,6 +78,7 @@ public class WGLNVSwapGroup {
         return callPPPI(hDC, maxGroups, maxBarriers, __functionAddress);
     }
 
+    /** {@code BOOL wglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers)} */
     @NativeType("BOOL")
     public static boolean wglQueryMaxSwapGroupsNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") IntBuffer maxGroups, @NativeType("GLuint *") IntBuffer maxBarriers) {
         if (CHECKS) {
@@ -95,6 +90,7 @@ public class WGLNVSwapGroup {
 
     // --- [ wglQueryFrameCountNV ] ---
 
+    /** {@code BOOL wglQueryFrameCountNV(HDC hDC, GLuint * count)} */
     public static int nwglQueryFrameCountNV(long hDC, long count) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQueryFrameCountNV;
         if (CHECKS) {
@@ -104,6 +100,7 @@ public class WGLNVSwapGroup {
         return callPPI(hDC, count, __functionAddress);
     }
 
+    /** {@code BOOL wglQueryFrameCountNV(HDC hDC, GLuint * count)} */
     @NativeType("BOOL")
     public static boolean wglQueryFrameCountNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") IntBuffer count) {
         if (CHECKS) {
@@ -114,6 +111,7 @@ public class WGLNVSwapGroup {
 
     // --- [ wglResetFrameCountNV ] ---
 
+    /** {@code BOOL wglResetFrameCountNV(HDC hDC)} */
     @NativeType("BOOL")
     public static boolean wglResetFrameCountNV(@NativeType("HDC") long hDC) {
         long __functionAddress = GL.getCapabilitiesWGL().wglResetFrameCountNV;
@@ -124,7 +122,7 @@ public class WGLNVSwapGroup {
         return callPI(hDC, __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #wglQuerySwapGroupNV QuerySwapGroupNV} */
+    /** {@code BOOL wglQuerySwapGroupNV(HDC hDC, GLuint * group, GLuint * barrier)} */
     @NativeType("BOOL")
     public static boolean wglQuerySwapGroupNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") int[] group, @NativeType("GLuint *") int[] barrier) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQuerySwapGroupNV;
@@ -137,7 +135,7 @@ public class WGLNVSwapGroup {
         return callPPPI(hDC, group, barrier, __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #wglQueryMaxSwapGroupsNV QueryMaxSwapGroupsNV} */
+    /** {@code BOOL wglQueryMaxSwapGroupsNV(HDC hDC, GLuint * maxGroups, GLuint * maxBarriers)} */
     @NativeType("BOOL")
     public static boolean wglQueryMaxSwapGroupsNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") int[] maxGroups, @NativeType("GLuint *") int[] maxBarriers) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQueryMaxSwapGroupsNV;
@@ -150,7 +148,7 @@ public class WGLNVSwapGroup {
         return callPPPI(hDC, maxGroups, maxBarriers, __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #wglQueryFrameCountNV QueryFrameCountNV} */
+    /** {@code BOOL wglQueryFrameCountNV(HDC hDC, GLuint * count)} */
     @NativeType("BOOL")
     public static boolean wglQueryFrameCountNV(@NativeType("HDC") long hDC, @NativeType("GLuint *") int[] count) {
         long __functionAddress = GL.getCapabilitiesWGL().wglQueryFrameCountNV;

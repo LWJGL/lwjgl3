@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a passthrough handle.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link HTCPassthrough XR_HTC_passthrough} extension <b>must</b> be enabled prior to using {@link XrPassthroughCreateInfoHTC}</li>
- * <li>{@code type} <b>must</b> be {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC TYPE_PASSTHROUGH_CREATE_INFO_HTC}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code form} <b>must</b> be a valid {@code XrPassthroughFormHTC} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link HTCPassthrough#xrCreatePassthroughHTC CreatePassthroughHTC}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPassthroughCreateInfoHTC {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrPassthroughFormHTC {@link #form};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrPassthroughFormHTC form;
+ * }}</pre>
  */
 public class XrPassthroughCreateInfoHTC extends Struct<XrPassthroughCreateInfoHTC> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class XrPassthroughCreateInfoHTC extends Struct<XrPassthroughCreateInfoHT
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** NULL or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** {@code form} {@code XrPassthroughFormHTC} that specifies the form of passthrough. */
+    /** @return the value of the {@code form} field. */
     @NativeType("XrPassthroughFormHTC")
     public int form() { return nform(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPassthroughCreateInfoHTC type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC TYPE_PASSTHROUGH_CREATE_INFO_HTC} value to the {@link #type} field. */
+    /** Sets the {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC TYPE_PASSTHROUGH_CREATE_INFO_HTC} value to the {@code type} field. */
     public XrPassthroughCreateInfoHTC type$Default() { return type(HTCPassthrough.XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPassthroughCreateInfoHTC next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #form} field. */
+    /** Sets the specified value to the {@code form} field. */
     public XrPassthroughCreateInfoHTC form(@NativeType("XrPassthroughFormHTC") int value) { nform(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,23 +286,23 @@ public class XrPassthroughCreateInfoHTC extends Struct<XrPassthroughCreateInfoHT
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPassthroughCreateInfoHTC#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughCreateInfoHTC.ntype(address()); }
-        /** @return the value of the {@link XrPassthroughCreateInfoHTC#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughCreateInfoHTC.nnext(address()); }
-        /** @return the value of the {@link XrPassthroughCreateInfoHTC#form} field. */
+        /** @return the value of the {@code form} field. */
         @NativeType("XrPassthroughFormHTC")
         public int form() { return XrPassthroughCreateInfoHTC.nform(address()); }
 
-        /** Sets the specified value to the {@link XrPassthroughCreateInfoHTC#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPassthroughCreateInfoHTC.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughCreateInfoHTC.ntype(address(), value); return this; }
-        /** Sets the {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC TYPE_PASSTHROUGH_CREATE_INFO_HTC} value to the {@link XrPassthroughCreateInfoHTC#type} field. */
+        /** Sets the {@link HTCPassthrough#XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC TYPE_PASSTHROUGH_CREATE_INFO_HTC} value to the {@code type} field. */
         public XrPassthroughCreateInfoHTC.Buffer type$Default() { return type(HTCPassthrough.XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC); }
-        /** Sets the specified value to the {@link XrPassthroughCreateInfoHTC#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPassthroughCreateInfoHTC.Buffer next(@NativeType("void const *") long value) { XrPassthroughCreateInfoHTC.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughCreateInfoHTC#form} field. */
+        /** Sets the specified value to the {@code form} field. */
         public XrPassthroughCreateInfoHTC.Buffer form(@NativeType("XrPassthroughFormHTC") int value) { XrPassthroughCreateInfoHTC.nform(address(), value); return this; }
 
     }

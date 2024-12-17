@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrDevicePcmSampleRateStateFB}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrDevicePcmSampleRateGetInfoFB {
  *     XrStructureType type;
  *     void * next;
  *     float sampleRate;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrDevicePcmSampleRateGetInfoFB extends XrDevicePcmSampleRateStateFB {
 

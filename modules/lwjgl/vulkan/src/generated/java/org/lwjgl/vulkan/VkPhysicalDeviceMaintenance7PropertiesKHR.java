@@ -16,33 +16,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing various implementation-defined properties introduced with VK_KHR_maintenance7.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMaintenance7PropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMaintenance7PropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #robustFragmentShadingRateAttachmentAccess};
- *     VkBool32 {@link #separateDepthStencilAttachmentAccess};
- *     uint32_t {@link #maxDescriptorSetTotalUniformBuffersDynamic};
- *     uint32_t {@link #maxDescriptorSetTotalStorageBuffersDynamic};
- *     uint32_t {@link #maxDescriptorSetTotalBuffersDynamic};
- *     uint32_t {@link #maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic};
- *     uint32_t {@link #maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic};
- *     uint32_t {@link #maxDescriptorSetUpdateAfterBindTotalBuffersDynamic};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 robustFragmentShadingRateAttachmentAccess;
+ *     VkBool32 separateDepthStencilAttachmentAccess;
+ *     uint32_t maxDescriptorSetTotalUniformBuffersDynamic;
+ *     uint32_t maxDescriptorSetTotalStorageBuffersDynamic;
+ *     uint32_t maxDescriptorSetTotalBuffersDynamic;
+ *     uint32_t maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic;
+ *     uint32_t maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic;
+ *     uint32_t maxDescriptorSetUpdateAfterBindTotalBuffersDynamic;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMaintenance7PropertiesKHR extends Struct<VkPhysicalDeviceMaintenance7PropertiesKHR> implements NativeResource {
 
@@ -116,42 +102,42 @@ public class VkPhysicalDeviceMaintenance7PropertiesKHR extends Struct<VkPhysical
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the scaled size of a fragment shading rate attachment <b>can</b> be less than the size of the render area. If {@code robustFragmentShadingRateAttachmentAccess} is {@link VK10#VK_FALSE FALSE}, the size of the attachment multiplied by the texel size <b>must</b> be greater than or equal to the size of the render area. If it is {@link VK10#VK_TRUE TRUE} and the fragment shading rate attachment was created with {@link VkImageSubresourceRange}{@code ::baseMipLevel} equal to 0, the scaled size <b>can</b> be smaller than the render area, and shading rates for missing texels are defined by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-texel-replacement">texel replacement for invalid texels</a>. */
+    /** @return the value of the {@code robustFragmentShadingRateAttachmentAccess} field. */
     @NativeType("VkBool32")
     public boolean robustFragmentShadingRateAttachmentAccess() { return nrobustFragmentShadingRateAttachmentAccess(address()) != 0; }
-    /** indicates support for writing to one aspect of a depth/stencil attachment without performing read-modify-write operations on the other aspect. If this property is {@link VK10#VK_TRUE TRUE}, writes to one aspect <b>must</b> not result in read-modify-write operations on the other aspect. If {@link VK10#VK_FALSE FALSE}, writes to one aspect <b>may</b> result in writes to the other aspect as defined by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-load-operations">render pass load operations</a>, <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-store-operations">render pass store operations</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#renderpass-resolve-operations">render pass resolve operations</a>. */
+    /** @return the value of the {@code separateDepthStencilAttachmentAccess} field. */
     @NativeType("VkBool32")
     public boolean separateDepthStencilAttachmentAccess() { return nseparateDepthStencilAttachmentAccess(address()) != 0; }
-    /** the maximum total count of dynamic uniform buffers that <b>can</b> be included in a pipeline layout. Descriptors with a type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} count against this limit. Only descriptors in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit. See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-uniformbufferdynamic">Dynamic Uniform Buffer</a>. */
+    /** @return the value of the {@code maxDescriptorSetTotalUniformBuffersDynamic} field. */
     @NativeType("uint32_t")
     public int maxDescriptorSetTotalUniformBuffersDynamic() { return nmaxDescriptorSetTotalUniformBuffersDynamic(address()); }
-    /** the maximum total count of dynamic storage buffers that <b>can</b> be included in a pipeline layout. Descriptors with a type of {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} count against this limit. Only descriptors in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit. See <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-storagebufferdynamic">Dynamic Storage Buffer</a>. */
+    /** @return the value of the {@code maxDescriptorSetTotalStorageBuffersDynamic} field. */
     @NativeType("uint32_t")
     public int maxDescriptorSetTotalStorageBuffersDynamic() { return nmaxDescriptorSetTotalStorageBuffersDynamic(address()); }
-    /** the maximum total count of dynamic uniform buffers and storage buffers that <b>can</b> be included in a pipeline layout. Descriptors with a type of {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} count against this limit. Only descriptors in descriptor set layouts created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set count against this limit. */
+    /** @return the value of the {@code maxDescriptorSetTotalBuffersDynamic} field. */
     @NativeType("uint32_t")
     public int maxDescriptorSetTotalBuffersDynamic() { return nmaxDescriptorSetTotalBuffersDynamic(address()); }
-    /** similar to {@code maxDescriptorSetTotalUniformBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
+    /** @return the value of the {@code maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic} field. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic() { return nmaxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic(address()); }
-    /** similar to {@code maxDescriptorSetTotalStorageBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. */
+    /** @return the value of the {@code maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic} field. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic() { return nmaxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic(address()); }
-    /** similar to {@code maxDescriptorSetTotalBuffersDynamic} but counts descriptors from descriptor sets created with or without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} bit set. While an application <b>can</b> allocate dynamic storage buffer descriptors from a pool created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT}, bindings for these descriptors <b>must</b> not be present in any descriptor set layout that includes bindings created with {@link VK12#VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT}. */
+    /** @return the value of the {@code maxDescriptorSetUpdateAfterBindTotalBuffersDynamic} field. */
     @NativeType("uint32_t")
     public int maxDescriptorSetUpdateAfterBindTotalBuffersDynamic() { return nmaxDescriptorSetUpdateAfterBindTotalBuffersDynamic(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMaintenance7PropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceMaintenance7PropertiesKHR sType$Default() { return sType(KHRMaintenance7.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMaintenance7PropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -357,42 +343,42 @@ public class VkPhysicalDeviceMaintenance7PropertiesKHR extends Struct<VkPhysical
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMaintenance7PropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#robustFragmentShadingRateAttachmentAccess} field. */
+        /** @return the value of the {@code robustFragmentShadingRateAttachmentAccess} field. */
         @NativeType("VkBool32")
         public boolean robustFragmentShadingRateAttachmentAccess() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nrobustFragmentShadingRateAttachmentAccess(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#separateDepthStencilAttachmentAccess} field. */
+        /** @return the value of the {@code separateDepthStencilAttachmentAccess} field. */
         @NativeType("VkBool32")
         public boolean separateDepthStencilAttachmentAccess() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nseparateDepthStencilAttachmentAccess(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#maxDescriptorSetTotalUniformBuffersDynamic} field. */
+        /** @return the value of the {@code maxDescriptorSetTotalUniformBuffersDynamic} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetTotalUniformBuffersDynamic() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nmaxDescriptorSetTotalUniformBuffersDynamic(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#maxDescriptorSetTotalStorageBuffersDynamic} field. */
+        /** @return the value of the {@code maxDescriptorSetTotalStorageBuffersDynamic} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetTotalStorageBuffersDynamic() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nmaxDescriptorSetTotalStorageBuffersDynamic(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#maxDescriptorSetTotalBuffersDynamic} field. */
+        /** @return the value of the {@code maxDescriptorSetTotalBuffersDynamic} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetTotalBuffersDynamic() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nmaxDescriptorSetTotalBuffersDynamic(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic} field. */
+        /** @return the value of the {@code maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nmaxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic} field. */
+        /** @return the value of the {@code maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nmaxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#maxDescriptorSetUpdateAfterBindTotalBuffersDynamic} field. */
+        /** @return the value of the {@code maxDescriptorSetUpdateAfterBindTotalBuffersDynamic} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetUpdateAfterBindTotalBuffersDynamic() { return VkPhysicalDeviceMaintenance7PropertiesKHR.nmaxDescriptorSetUpdateAfterBindTotalBuffersDynamic(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMaintenance7PropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance7PropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#sType} field. */
+        /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceMaintenance7PropertiesKHR.Buffer sType$Default() { return sType(KHRMaintenance7.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance7PropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMaintenance7PropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance7PropertiesKHR.npNext(address(), value); return this; }
 
     }

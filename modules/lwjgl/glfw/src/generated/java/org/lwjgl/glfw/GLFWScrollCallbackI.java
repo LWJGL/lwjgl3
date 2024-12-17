@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetScrollCallback SetScrollCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window,
- *     double xoffset,
- *     double yoffset
- * )</code></pre>
- *
- * @since version 3.0
- */
+/** Callback function: {@link #invoke GLFWscrollfun} */
 @FunctionalInterface
 @NativeType("GLFWscrollfun")
 public interface GLFWScrollCallbackI extends CallbackI {
@@ -48,13 +35,7 @@ public interface GLFWScrollCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when a scrolling device is used, such as a mouse wheel or scrolling area of a touchpad.
-     *
-     * @param window  the window that received the event
-     * @param xoffset the scroll offset along the x-axis
-     * @param yoffset the scroll offset along the y-axis
-     */
+    /** {@code void (* GLFWscrollfun) (GLFWwindow * window, double xoffset, double yoffset)} */
     void invoke(@NativeType("GLFWwindow *") long window, double xoffset, double yoffset);
 
 }

@@ -16,60 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing H.264 per-layer rate control parameters.
- * 
- * <h5>Description</h5>
- * 
- * <p>When used, the values in {@code minQp} and {@code maxQp} guarantee that the effective QP values used by the implementation will respect those lower and upper bounds, respectively. However, limiting the range of QP values that the implementation is able to use will also limit the capabilities of the implementation’s rate control algorithm to comply to other constraints. In particular, the implementation <b>may</b> not be able to comply to the following:</p>
- * 
- * <ul>
- * <li>The average and/or peak <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-bitrate">bitrate</a> values to be used for the encoded bitstream specified in the {@code averageBitrate} and {@code maxBitrate} members of the {@link VkVideoEncodeRateControlLayerInfoKHR} structure.</li>
- * <li>The upper bounds on the encoded frame size, for each picture type, specified in the {@code maxFrameSize} member of {@link VkVideoEncodeH264RateControlLayerInfoKHR}.</li>
- * </ul>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>In general, applications need to configure rate control parameters appropriately in order to be able to get the desired rate control behavior, as described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control">Video Encode Rate Control</a> section.</p>
- * </div>
- * 
- * <p>When an instance of this structure is included in the {@code pNext} chain of a {@link VkVideoEncodeRateControlLayerInfoKHR} structure specified in one of the elements of the {@code pLayers} array member of the {@link VkVideoEncodeRateControlInfoKHR} structure passed to the {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} command, {@link VkVideoCodingControlInfoKHR}{@code ::flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, and the bound video session was created with the video codec operation {@link KHRVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR}, it specifies the H.264-specific rate control parameters of the rate control layer corresponding to that element of {@code pLayers}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code useMinQp} is {@link VK10#VK_TRUE TRUE}, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all be between {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::minQp} and {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::maxQp}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
- * <li>If {@code useMaxQp} is {@link VK10#VK_TRUE TRUE}, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code maxQp} <b>must</b> all be between {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::minQp} and {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::maxQp}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile</li>
- * <li>If {@code useMinQp} is {@link VK10#VK_TRUE TRUE} and {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::flags}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile, does not include {@link KHRVideoEncodeH264#VK_VIDEO_ENCODE_H264_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR VIDEO_ENCODE_H264_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR}, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all specify the same value</li>
- * <li>If {@code useMaxQp} is {@link VK10#VK_TRUE TRUE} and {@link VkVideoEncodeH264CapabilitiesKHR}{@code ::flags}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile, does not include {@link KHRVideoEncodeH264#VK_VIDEO_ENCODE_H264_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR VIDEO_ENCODE_H264_CAPABILITY_PER_PICTURE_TYPE_MIN_MAX_QP_BIT_KHR}, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code maxQp} <b>must</b> all specify the same value</li>
- * <li>If {@code useMinQp} and {@code useMaxQp} are both {@link VK10#VK_TRUE TRUE}, then the {@code qpI}, {@code qpP}, and {@code qpB} members of {@code minQp} <b>must</b> all be less than or equal to the respective members of {@code maxQp}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR}</li>
- * <li>{@code minQp} <b>must</b> be a valid {@link VkVideoEncodeH264QpKHR} structure</li>
- * <li>{@code maxQp} <b>must</b> be a valid {@link VkVideoEncodeH264QpKHR} structure</li>
- * <li>{@code maxFrameSize} <b>must</b> be a valid {@link VkVideoEncodeH264FrameSizeKHR} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeH264FrameSizeKHR}, {@link VkVideoEncodeH264QpKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH264RateControlLayerInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #useMinQp};
- *     {@link VkVideoEncodeH264QpKHR VkVideoEncodeH264QpKHR} {@link #minQp};
- *     VkBool32 {@link #useMaxQp};
- *     {@link VkVideoEncodeH264QpKHR VkVideoEncodeH264QpKHR} {@link #maxQp};
- *     VkBool32 {@link #useMaxFrameSize};
- *     {@link VkVideoEncodeH264FrameSizeKHR VkVideoEncodeH264FrameSizeKHR} {@link #maxFrameSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 useMinQp;
+ *     {@link VkVideoEncodeH264QpKHR VkVideoEncodeH264QpKHR} minQp;
+ *     VkBool32 useMaxQp;
+ *     {@link VkVideoEncodeH264QpKHR VkVideoEncodeH264QpKHR} maxQp;
+ *     VkBool32 useMaxFrameSize;
+ *     {@link VkVideoEncodeH264FrameSizeKHR VkVideoEncodeH264FrameSizeKHR} maxFrameSize;
+ * }}</pre>
  */
 public class VkVideoEncodeH264RateControlLayerInfoKHR extends Struct<VkVideoEncodeH264RateControlLayerInfoKHR> implements NativeResource {
 
@@ -137,51 +94,51 @@ public class VkVideoEncodeH264RateControlLayerInfoKHR extends Struct<VkVideoEnco
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the QP values determined by rate control will be clamped to the lower bounds on the QP values specified in {@code minQp}. */
+    /** @return the value of the {@code useMinQp} field. */
     @NativeType("VkBool32")
     public boolean useMinQp() { return nuseMinQp(address()) != 0; }
-    /** specifies the lower bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMinQp} is {@link VK10#VK_TRUE TRUE}. */
+    /** @return a {@link VkVideoEncodeH264QpKHR} view of the {@code minQp} field. */
     public VkVideoEncodeH264QpKHR minQp() { return nminQp(address()); }
-    /** indicates whether the QP values determined by rate control will be clamped to the upper bounds on the QP values specified in {@code maxQp}. */
+    /** @return the value of the {@code useMaxQp} field. */
     @NativeType("VkBool32")
     public boolean useMaxQp() { return nuseMaxQp(address()) != 0; }
-    /** specifies the upper bounds on the QP values, for each picture type, that the implementation’s rate control algorithm will use when {@code useMaxQp} is {@link VK10#VK_TRUE TRUE}. */
+    /** @return a {@link VkVideoEncodeH264QpKHR} view of the {@code maxQp} field. */
     public VkVideoEncodeH264QpKHR maxQp() { return nmaxQp(address()); }
-    /** indicates whether the implementation’s rate control algorithm <b>should</b> use the values specified in {@code maxFrameSize} as the upper bounds on the encoded frame size for each picture type. */
+    /** @return the value of the {@code useMaxFrameSize} field. */
     @NativeType("VkBool32")
     public boolean useMaxFrameSize() { return nuseMaxFrameSize(address()) != 0; }
-    /** specifies the upper bounds on the encoded frame size, for each picture type, when {@code useMaxFrameSize} is {@link VK10#VK_TRUE TRUE}. */
+    /** @return a {@link VkVideoEncodeH264FrameSizeKHR} view of the {@code maxFrameSize} field. */
     public VkVideoEncodeH264FrameSizeKHR maxFrameSize() { return nmaxFrameSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #useMinQp} field. */
+    /** Sets the specified value to the {@code useMinQp} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR useMinQp(@NativeType("VkBool32") boolean value) { nuseMinQp(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link VkVideoEncodeH264QpKHR} to the {@link #minQp} field. */
+    /** Copies the specified {@link VkVideoEncodeH264QpKHR} to the {@code minQp} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR minQp(VkVideoEncodeH264QpKHR value) { nminQp(address(), value); return this; }
-    /** Passes the {@link #minQp} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code minQp} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoEncodeH264RateControlLayerInfoKHR minQp(java.util.function.Consumer<VkVideoEncodeH264QpKHR> consumer) { consumer.accept(minQp()); return this; }
-    /** Sets the specified value to the {@link #useMaxQp} field. */
+    /** Sets the specified value to the {@code useMaxQp} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR useMaxQp(@NativeType("VkBool32") boolean value) { nuseMaxQp(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link VkVideoEncodeH264QpKHR} to the {@link #maxQp} field. */
+    /** Copies the specified {@link VkVideoEncodeH264QpKHR} to the {@code maxQp} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR maxQp(VkVideoEncodeH264QpKHR value) { nmaxQp(address(), value); return this; }
-    /** Passes the {@link #maxQp} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code maxQp} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoEncodeH264RateControlLayerInfoKHR maxQp(java.util.function.Consumer<VkVideoEncodeH264QpKHR> consumer) { consumer.accept(maxQp()); return this; }
-    /** Sets the specified value to the {@link #useMaxFrameSize} field. */
+    /** Sets the specified value to the {@code useMaxFrameSize} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR useMaxFrameSize(@NativeType("VkBool32") boolean value) { nuseMaxFrameSize(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link VkVideoEncodeH264FrameSizeKHR} to the {@link #maxFrameSize} field. */
+    /** Copies the specified {@link VkVideoEncodeH264FrameSizeKHR} to the {@code maxFrameSize} field. */
     public VkVideoEncodeH264RateControlLayerInfoKHR maxFrameSize(VkVideoEncodeH264FrameSizeKHR value) { nmaxFrameSize(address(), value); return this; }
-    /** Passes the {@link #maxFrameSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code maxFrameSize} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkVideoEncodeH264RateControlLayerInfoKHR maxFrameSize(java.util.function.Consumer<VkVideoEncodeH264FrameSizeKHR> consumer) { consumer.accept(maxFrameSize()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -407,51 +364,51 @@ public class VkVideoEncodeH264RateControlLayerInfoKHR extends Struct<VkVideoEnco
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH264RateControlLayerInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH264RateControlLayerInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264RateControlLayerInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH264RateControlLayerInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264RateControlLayerInfoKHR#useMinQp} field. */
+        /** @return the value of the {@code useMinQp} field. */
         @NativeType("VkBool32")
         public boolean useMinQp() { return VkVideoEncodeH264RateControlLayerInfoKHR.nuseMinQp(address()) != 0; }
-        /** @return a {@link VkVideoEncodeH264QpKHR} view of the {@link VkVideoEncodeH264RateControlLayerInfoKHR#minQp} field. */
+        /** @return a {@link VkVideoEncodeH264QpKHR} view of the {@code minQp} field. */
         public VkVideoEncodeH264QpKHR minQp() { return VkVideoEncodeH264RateControlLayerInfoKHR.nminQp(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264RateControlLayerInfoKHR#useMaxQp} field. */
+        /** @return the value of the {@code useMaxQp} field. */
         @NativeType("VkBool32")
         public boolean useMaxQp() { return VkVideoEncodeH264RateControlLayerInfoKHR.nuseMaxQp(address()) != 0; }
-        /** @return a {@link VkVideoEncodeH264QpKHR} view of the {@link VkVideoEncodeH264RateControlLayerInfoKHR#maxQp} field. */
+        /** @return a {@link VkVideoEncodeH264QpKHR} view of the {@code maxQp} field. */
         public VkVideoEncodeH264QpKHR maxQp() { return VkVideoEncodeH264RateControlLayerInfoKHR.nmaxQp(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264RateControlLayerInfoKHR#useMaxFrameSize} field. */
+        /** @return the value of the {@code useMaxFrameSize} field. */
         @NativeType("VkBool32")
         public boolean useMaxFrameSize() { return VkVideoEncodeH264RateControlLayerInfoKHR.nuseMaxFrameSize(address()) != 0; }
-        /** @return a {@link VkVideoEncodeH264FrameSizeKHR} view of the {@link VkVideoEncodeH264RateControlLayerInfoKHR#maxFrameSize} field. */
+        /** @return a {@link VkVideoEncodeH264FrameSizeKHR} view of the {@code maxFrameSize} field. */
         public VkVideoEncodeH264FrameSizeKHR maxFrameSize() { return VkVideoEncodeH264RateControlLayerInfoKHR.nmaxFrameSize(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264RateControlLayerInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR} value to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH264RateControlLayerInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#useMinQp} field. */
+        /** Sets the specified value to the {@code useMinQp} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer useMinQp(@NativeType("VkBool32") boolean value) { VkVideoEncodeH264RateControlLayerInfoKHR.nuseMinQp(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link VkVideoEncodeH264QpKHR} to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#minQp} field. */
+        /** Copies the specified {@link VkVideoEncodeH264QpKHR} to the {@code minQp} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer minQp(VkVideoEncodeH264QpKHR value) { VkVideoEncodeH264RateControlLayerInfoKHR.nminQp(address(), value); return this; }
-        /** Passes the {@link VkVideoEncodeH264RateControlLayerInfoKHR#minQp} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code minQp} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer minQp(java.util.function.Consumer<VkVideoEncodeH264QpKHR> consumer) { consumer.accept(minQp()); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#useMaxQp} field. */
+        /** Sets the specified value to the {@code useMaxQp} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer useMaxQp(@NativeType("VkBool32") boolean value) { VkVideoEncodeH264RateControlLayerInfoKHR.nuseMaxQp(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link VkVideoEncodeH264QpKHR} to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#maxQp} field. */
+        /** Copies the specified {@link VkVideoEncodeH264QpKHR} to the {@code maxQp} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer maxQp(VkVideoEncodeH264QpKHR value) { VkVideoEncodeH264RateControlLayerInfoKHR.nmaxQp(address(), value); return this; }
-        /** Passes the {@link VkVideoEncodeH264RateControlLayerInfoKHR#maxQp} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code maxQp} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer maxQp(java.util.function.Consumer<VkVideoEncodeH264QpKHR> consumer) { consumer.accept(maxQp()); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#useMaxFrameSize} field. */
+        /** Sets the specified value to the {@code useMaxFrameSize} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer useMaxFrameSize(@NativeType("VkBool32") boolean value) { VkVideoEncodeH264RateControlLayerInfoKHR.nuseMaxFrameSize(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link VkVideoEncodeH264FrameSizeKHR} to the {@link VkVideoEncodeH264RateControlLayerInfoKHR#maxFrameSize} field. */
+        /** Copies the specified {@link VkVideoEncodeH264FrameSizeKHR} to the {@code maxFrameSize} field. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer maxFrameSize(VkVideoEncodeH264FrameSizeKHR value) { VkVideoEncodeH264RateControlLayerInfoKHR.nmaxFrameSize(address(), value); return this; }
-        /** Passes the {@link VkVideoEncodeH264RateControlLayerInfoKHR#maxFrameSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code maxFrameSize} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkVideoEncodeH264RateControlLayerInfoKHR.Buffer maxFrameSize(java.util.function.Consumer<VkVideoEncodeH264FrameSizeKHR> consumer) { consumer.accept(maxFrameSize()); return this; }
 
     }

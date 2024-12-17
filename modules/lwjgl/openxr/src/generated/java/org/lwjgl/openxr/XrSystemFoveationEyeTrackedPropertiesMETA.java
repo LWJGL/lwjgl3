@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information about the current system support for eye tracked foveation.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>can</b> inspect whether the system is capable of eye tracked foveation by extending the {@link XrSystemProperties} with {@link XrSystemFoveationEyeTrackedPropertiesMETA} structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAFoveationEyeTracked XR_META_foveation_eye_tracked} extension <b>must</b> be enabled prior to using {@link XrSystemFoveationEyeTrackedPropertiesMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAFoveationEyeTracked#XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemFoveationEyeTrackedPropertiesMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsFoveationEyeTracked};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsFoveationEyeTracked;
+ * }}</pre>
  */
 public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct<XrSystemFoveationEyeTrackedPropertiesMETA> implements NativeResource {
 
@@ -94,21 +74,21 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct<XrSystemFo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** indicates if the current system is capable of eye tracked foveation. */
+    /** @return the value of the {@code supportsFoveationEyeTracked} field. */
     @NativeType("XrBool32")
     public boolean supportsFoveationEyeTracked() { return nsupportsFoveationEyeTracked(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemFoveationEyeTrackedPropertiesMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAFoveationEyeTracked#XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META} value to the {@link #type} field. */
+    /** Sets the {@link METAFoveationEyeTracked#XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META} value to the {@code type} field. */
     public XrSystemFoveationEyeTrackedPropertiesMETA type$Default() { return type(METAFoveationEyeTracked.XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemFoveationEyeTrackedPropertiesMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,21 +280,21 @@ public class XrSystemFoveationEyeTrackedPropertiesMETA extends Struct<XrSystemFo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemFoveationEyeTrackedPropertiesMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemFoveationEyeTrackedPropertiesMETA.ntype(address()); }
-        /** @return the value of the {@link XrSystemFoveationEyeTrackedPropertiesMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemFoveationEyeTrackedPropertiesMETA.nnext(address()); }
-        /** @return the value of the {@link XrSystemFoveationEyeTrackedPropertiesMETA#supportsFoveationEyeTracked} field. */
+        /** @return the value of the {@code supportsFoveationEyeTracked} field. */
         @NativeType("XrBool32")
         public boolean supportsFoveationEyeTracked() { return XrSystemFoveationEyeTrackedPropertiesMETA.nsupportsFoveationEyeTracked(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemFoveationEyeTrackedPropertiesMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemFoveationEyeTrackedPropertiesMETA.Buffer type(@NativeType("XrStructureType") int value) { XrSystemFoveationEyeTrackedPropertiesMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAFoveationEyeTracked#XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META} value to the {@link XrSystemFoveationEyeTrackedPropertiesMETA#type} field. */
+        /** Sets the {@link METAFoveationEyeTracked#XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META} value to the {@code type} field. */
         public XrSystemFoveationEyeTrackedPropertiesMETA.Buffer type$Default() { return type(METAFoveationEyeTracked.XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META); }
-        /** Sets the specified value to the {@link XrSystemFoveationEyeTrackedPropertiesMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemFoveationEyeTrackedPropertiesMETA.Buffer next(@NativeType("void *") long value) { XrSystemFoveationEyeTrackedPropertiesMETA.nnext(address(), value); return this; }
 
     }

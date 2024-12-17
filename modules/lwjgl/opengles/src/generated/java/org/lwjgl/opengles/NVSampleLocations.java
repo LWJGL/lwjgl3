@@ -13,44 +13,20 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_sample_locations.txt">NV_sample_locations</a> extension.
- * 
- * <p>This extension allows an application to modify the locations of samples within a pixel used in multisample rasterization. Additionally, it allows
- * applications to specify different sample locations for each pixel in a group of adjacent pixels, which may increase antialiasing quality (particularly
- * if a custom resolve shader is used that takes advantage of these different locations).</p>
- * 
- * <p>It is common for implementations to optimize the storage of depth values by storing values that can be used to reconstruct depth at each sample
- * location, rather than storing separate depth values for each sample. For example, the depth values from a single triangle can be represented using
- * plane equations. When the depth value for a sample is needed, it is automatically evaluated at the sample location. Modifying the sample locations
- * causes the reconstruction to no longer evaluate the same depth values as when the samples were originally generated. This extension provides a command
- * to "resolve" and store per-sample depth values using the currently programmed sample locations, which allows the application to manage this issue
- * if/when necessary.</p>
- * 
- * <p>The programmable sample locations are used during rasterization and for evaluation of depth functions during normal geometric rendering. The
- * programmable locations are associated with a framebuffer object rather than an individual depth buffer, so if the depth buffer is used as a texture the
- * texture sampling may be done at the standard sample locations. Additionally, commands that do not render geometric primitives (e.g. ReadPixels,
- * BlitFramebuffer, CopyTexSubImage2D, etc.) may use the standard sample locations to resolve depth functions rather than the programmable locations. If a
- * single depth buffer is used at different times with different sample locations, the depth functions may be interpreted using the current sample
- * locations.</p>
- */
 public class NVSampleLocations {
 
     static { GLES.initialize(); }
 
-    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
         GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV           = 0x933D,
         GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV        = 0x933E,
         GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV       = 0x933F,
         GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV = 0x9340;
 
-    /** Accepted by the {@code pname} parameter of GetMultisamplefv. */
     public static final int
         GL_SAMPLE_LOCATION_NV              = 0x8E50,
         GL_PROGRAMMABLE_SAMPLE_LOCATION_NV = 0x9341;
 
-    /** Accepted by the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv. */
     public static final int
         GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV = 0x9342,
         GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV    = 0x9343;
@@ -61,25 +37,30 @@ public class NVSampleLocations {
 
     // --- [ glFramebufferSampleLocationsfvNV ] ---
 
+    /** {@code void glFramebufferSampleLocationsfvNV(GLenum target, GLuint start, GLsizei count, GLfloat const * v)} */
     public static native void nglFramebufferSampleLocationsfvNV(int target, int start, int count, long v);
 
+    /** {@code void glFramebufferSampleLocationsfvNV(GLenum target, GLuint start, GLsizei count, GLfloat const * v)} */
     public static void glFramebufferSampleLocationsfvNV(@NativeType("GLenum") int target, @NativeType("GLuint") int start, @NativeType("GLfloat const *") FloatBuffer v) {
         nglFramebufferSampleLocationsfvNV(target, start, v.remaining(), memAddress(v));
     }
 
     // --- [ glNamedFramebufferSampleLocationsfvNV ] ---
 
+    /** {@code void glNamedFramebufferSampleLocationsfvNV(GLuint framebuffer, GLuint start, GLsizei count, GLfloat const * v)} */
     public static native void nglNamedFramebufferSampleLocationsfvNV(int framebuffer, int start, int count, long v);
 
+    /** {@code void glNamedFramebufferSampleLocationsfvNV(GLuint framebuffer, GLuint start, GLsizei count, GLfloat const * v)} */
     public static void glNamedFramebufferSampleLocationsfvNV(@NativeType("GLuint") int framebuffer, @NativeType("GLuint") int start, @NativeType("GLfloat const *") FloatBuffer v) {
         nglNamedFramebufferSampleLocationsfvNV(framebuffer, start, v.remaining(), memAddress(v));
     }
 
     // --- [ glResolveDepthValuesNV ] ---
 
+    /** {@code void glResolveDepthValuesNV(void)} */
     public static native void glResolveDepthValuesNV();
 
-    /** Array version of: {@link #glFramebufferSampleLocationsfvNV FramebufferSampleLocationsfvNV} */
+    /** {@code void glFramebufferSampleLocationsfvNV(GLenum target, GLuint start, GLsizei count, GLfloat const * v)} */
     public static void glFramebufferSampleLocationsfvNV(@NativeType("GLenum") int target, @NativeType("GLuint") int start, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GLES.getICD().glFramebufferSampleLocationsfvNV;
         if (CHECKS) {
@@ -88,7 +69,7 @@ public class NVSampleLocations {
         callPV(target, start, v.length, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glNamedFramebufferSampleLocationsfvNV NamedFramebufferSampleLocationsfvNV} */
+    /** {@code void glNamedFramebufferSampleLocationsfvNV(GLuint framebuffer, GLuint start, GLsizei count, GLfloat const * v)} */
     public static void glNamedFramebufferSampleLocationsfvNV(@NativeType("GLuint") int framebuffer, @NativeType("GLuint") int start, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GLES.getICD().glNamedFramebufferSampleLocationsfvNV;
         if (CHECKS) {

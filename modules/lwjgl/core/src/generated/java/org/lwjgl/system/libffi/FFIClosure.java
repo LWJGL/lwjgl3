@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The libffi closure structure.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ffi_closure {
- *     {@link FFICIF ffi_cif} * {@link #cif};
- *     void (*)(ffi_cif*,void*,void**,void*) {@link #fun};
- *     void * {@link #user_data};
- * }</code></pre>
+ *     {@link FFICIF ffi_cif} * cif;
+ *     void (*)(ffi_cif*,void*,void**,void*) fun;
+ *     void * user_data;
+ * }}</pre>
  */
 @NativeType("struct ffi_closure")
 public class FFIClosure extends Struct<FFIClosure> implements NativeResource {
@@ -79,13 +75,13 @@ public class FFIClosure extends Struct<FFIClosure> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a pointer to an {@code ffi_cif} structure */
+    /** @return a {@link FFICIF} view of the struct pointed to by the {@code cif} field. */
     @NativeType("ffi_cif *")
     public FFICIF cif() { return ncif(address()); }
-    /** a pointer to a function */
+    /** @return the value of the {@code fun} field. */
     @NativeType("void (*)(ffi_cif*,void*,void**,void*)")
     public long fun() { return nfun(address()); }
-    /** a pointer to user-specified data */
+    /** @return the value of the {@code user_data} field. */
     @NativeType("void *")
     public long user_data() { return nuser_data(address()); }
 
@@ -250,13 +246,13 @@ public class FFIClosure extends Struct<FFIClosure> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link FFICIF} view of the struct pointed to by the {@link FFIClosure#cif} field. */
+        /** @return a {@link FFICIF} view of the struct pointed to by the {@code cif} field. */
         @NativeType("ffi_cif *")
         public FFICIF cif() { return FFIClosure.ncif(address()); }
-        /** @return the value of the {@link FFIClosure#fun} field. */
+        /** @return the value of the {@code fun} field. */
         @NativeType("void (*)(ffi_cif*,void*,void**,void*)")
         public long fun() { return FFIClosure.nfun(address()); }
-        /** @return the value of the {@link FFIClosure#user_data} field. */
+        /** @return the value of the {@code user_data} field. */
         @NativeType("void *")
         public long user_data() { return FFIClosure.nuser_data(address()); }
 

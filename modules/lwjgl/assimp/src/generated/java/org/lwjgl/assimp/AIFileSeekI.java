@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * aiReturn (*{@link #invoke}) (
- *     struct aiFile *pFile,
- *     size_t offset,
- *     aiOrigin origin
- * )</code></pre>
- */
+/** Callback function: {@link #invoke aiFileSeek} */
 @FunctionalInterface
 @NativeType("aiFileSeek")
 public interface AIFileSeekI extends CallbackI {
@@ -45,15 +36,7 @@ public interface AIFileSeekI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * File seek procedure
-     *
-     * @param pFile  file pointer to seek
-     * @param offset number of bytes to shift from origin
-     * @param origin position used as reference for the offset
-     *
-     * @return an {@code aiReturn} value
-     */
+    /** {@code aiReturn (* aiFileSeek) (struct aiFile * pFile, size_t offset, aiOrigin origin)} */
     @NativeType("aiReturn") int invoke(@NativeType("struct aiFile *") long pFile, @NativeType("size_t") long offset, @NativeType("aiOrigin") int origin);
 
 }

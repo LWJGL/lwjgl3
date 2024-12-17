@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_CONDITIONAL_NODE_PARAMS {
  *     CUgraphConditionalHandle handle;
  *     CUgraphConditionalNodeType type;
  *     unsigned int size;
  *     CUgraph * phGraph_out;
  *     CUcontext ctx;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_CONDITIONAL_NODE_PARAMS extends Struct<CUDA_CONDITIONAL_NODE_PARAMS> implements NativeResource {
 

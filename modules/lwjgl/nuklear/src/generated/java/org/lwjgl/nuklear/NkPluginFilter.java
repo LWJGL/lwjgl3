@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to the {@link NkTextEdit} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * nk_bool (*{@link #invoke}) (
- *     struct nk_text_edit const *edit,
- *     nk_rune unicode
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_plugin_filter} */
 public abstract class NkPluginFilter extends Callback implements NkPluginFilterI {
 
     /**

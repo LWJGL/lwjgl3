@@ -13,14 +13,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_sync.txt">NV_stream_sync</a> extension.
- * 
- * <p>This extension defines a new type of reusable sync object. This sync object will be signaled each time a new image frame becomes available in an
- * EGLStream for the consumer to consume.</p>
- * 
- * <p>Requires {@link EGL12 EGL 1.2}, {@link KHRStream KHR_stream} and {@link KHRReusableSync KHR_reusable_sync}.</p>
- */
 public class NVStreamSync {
 
     public static final int
@@ -33,6 +25,7 @@ public class NVStreamSync {
 
     // --- [ eglCreateStreamSyncNV ] ---
 
+    /** {@code EGLSyncKHR eglCreateStreamSyncNV(EGLDisplay dpy, EGLStreamKHR stream, EGLenum type, EGLint const * attrib_list)} */
     public static long neglCreateStreamSyncNV(long dpy, long stream, int type, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateStreamSyncNV;
         if (CHECKS) {
@@ -43,6 +36,7 @@ public class NVStreamSync {
         return callPPPP(dpy, stream, type, attrib_list, __functionAddress);
     }
 
+    /** {@code EGLSyncKHR eglCreateStreamSyncNV(EGLDisplay dpy, EGLStreamKHR stream, EGLenum type, EGLint const * attrib_list)} */
     @NativeType("EGLSyncKHR")
     public static long eglCreateStreamSyncNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int type, @NativeType("EGLint const *") IntBuffer attrib_list) {
         if (CHECKS) {
@@ -51,7 +45,7 @@ public class NVStreamSync {
         return neglCreateStreamSyncNV(dpy, stream, type, memAddress(attrib_list));
     }
 
-    /** Array version of: {@link #eglCreateStreamSyncNV CreateStreamSyncNV} */
+    /** {@code EGLSyncKHR eglCreateStreamSyncNV(EGLDisplay dpy, EGLStreamKHR stream, EGLenum type, EGLint const * attrib_list)} */
     @NativeType("EGLSyncKHR")
     public static long eglCreateStreamSyncNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLenum") int type, @NativeType("EGLint const *") int[] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateStreamSyncNV;

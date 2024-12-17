@@ -11,21 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_font_t *font,
- *     void *font_data,
- *     hb_codepoint_t glyph,
- *     hb_paint_funcs_t *paint_funcs,
- *     void *paint_data,
- *     unsigned int palette_index,
- *     hb_color_t foreground,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_font_paint_glyph_func_t} */
 public abstract class hb_font_paint_glyph_func_t extends Callback implements hb_font_paint_glyph_func_tI {
 
     /**

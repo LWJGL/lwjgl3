@@ -19,29 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.MSFTSpatialAnchorPersistence.*;
 
 /**
- * The name to identify a Spatial anchor persistence operations.
- * 
- * <h5>Description</h5>
- * 
- * <p>If an {@link XrSpatialAnchorPersistenceNameMSFT} with an empty {@code name} value is passed to any function as a parameter, that function <b>must</b> return {@link MSFTSpatialAnchorPersistence#XR_ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT ERROR_SPATIAL_ANCHOR_NAME_INVALID_MSFT}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorPersistenceNameMSFT}</li>
- * <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link MSFTSpatialAnchorPersistence#XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT}, {@link XrSpatialAnchorPersistenceInfoMSFT}, {@link MSFTSpatialAnchorPersistence#xrClearSpatialAnchorStoreMSFT ClearSpatialAnchorStoreMSFT}, {@link MSFTSpatialAnchorPersistence#xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT}, {@link MSFTSpatialAnchorPersistence#xrUnpersistSpatialAnchorMSFT UnpersistSpatialAnchorMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorPersistenceNameMSFT {
- *     char {@link #name}[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT];
- * }</code></pre>
+ *     char name[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT];
+ * }}</pre>
  */
 public class XrSpatialAnchorPersistenceNameMSFT extends Struct<XrSpatialAnchorPersistenceNameMSFT> implements NativeResource {
 
@@ -88,14 +69,14 @@ public class XrSpatialAnchorPersistenceNameMSFT extends Struct<XrSpatialAnchorPe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a null terminated character array of size {@link MSFTSpatialAnchorPersistence#XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT}. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT]")
     public ByteBuffer name() { return nname(address()); }
-    /** a null terminated character array of size {@link MSFTSpatialAnchorPersistence#XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT}. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT]")
     public String nameString() { return nnameString(address()); }
 
-    /** Copies the specified encoded string to the {@link #name} field. */
+    /** Copies the specified encoded string to the {@code name} field. */
     public XrSpatialAnchorPersistenceNameMSFT name(@NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT]") ByteBuffer value) { nname(address(), value); return this; }
 
     /**
@@ -278,14 +259,14 @@ public class XrSpatialAnchorPersistenceNameMSFT extends Struct<XrSpatialAnchorPe
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link XrSpatialAnchorPersistenceNameMSFT#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT]")
         public ByteBuffer name() { return XrSpatialAnchorPersistenceNameMSFT.nname(address()); }
-        /** @return the null-terminated string stored in the {@link XrSpatialAnchorPersistenceNameMSFT#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT]")
         public String nameString() { return XrSpatialAnchorPersistenceNameMSFT.nnameString(address()); }
 
-        /** Copies the specified encoded string to the {@link XrSpatialAnchorPersistenceNameMSFT#name} field. */
+        /** Copies the specified encoded string to the {@code name} field. */
         public XrSpatialAnchorPersistenceNameMSFT.Buffer name(@NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT]") ByteBuffer value) { XrSpatialAnchorPersistenceNameMSFT.nname(address(), value); return this; }
 
     }

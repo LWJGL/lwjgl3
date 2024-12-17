@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH264ReferenceInfoFlags {
  *     uint32_t used_for_long_term_reference : 1;
  *     uint32_t reserved : 31;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH264ReferenceInfoFlags extends Struct<StdVideoEncodeH264ReferenceInfoFlags> implements NativeResource {
 

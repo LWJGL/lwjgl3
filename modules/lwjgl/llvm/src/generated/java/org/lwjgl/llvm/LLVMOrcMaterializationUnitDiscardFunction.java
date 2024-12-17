@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMOrc#LLVMOrcCreateCustomMaterializationUnit OrcCreateCustomMaterializationUnit} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMOrcJITDylibRef JD,
- *     LLVMOrcSymbolStringPoolEntryRef Symbol
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcMaterializationUnitDiscardFunction} */
 public abstract class LLVMOrcMaterializationUnitDiscardFunction extends Callback implements LLVMOrcMaterializationUnitDiscardFunctionI {
 
     /**

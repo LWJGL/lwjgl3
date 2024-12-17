@@ -14,13 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_memory_page_type_s {
  *     hwloc_uint64_t size;
  *     hwloc_uint64_t count;
- * }</code></pre>
+ * }}</pre>
  */
 public class hwloc_memory_page_type_s extends Struct<hwloc_memory_page_type_s> {
 

@@ -17,22 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The callbacks used to access non-{@code FILE} stream resources.
- * 
- * <p>The function prototypes are basically the same as for the stdio functions {@code fread()}, {@code fseek()}, {@code ftell()}, and {@code fclose()}. The
- * differences are that the {@code FILE *} arguments have been replaced with a {@code void *}, which is to be used as a pointer to whatever internal data
- * these functions might need, that {@code seek} and {@code tell} take and return 64-bit offsets, and that {@code seek} <em>must</em> return {@code -1} if
- * the stream is unseekable.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct OpusFileCallbacks {
- *     {@link OPReadFuncI op_read_func} {@link #read};
- *     {@link OPSeekFuncI op_seek_func} {@link #seek};
- *     {@link OPTellFuncI op_tell_func} {@link #tell};
- *     {@link OPCloseFuncI op_close_func} {@link #close$ close};
- * }</code></pre>
+ *     {@link OPReadFuncI op_read_func} read;
+ *     {@link OPSeekFuncI op_seek_func} seek;
+ *     {@link OPTellFuncI op_tell_func} tell;
+ *     {@link OPCloseFuncI op_close_func} close;
+ * }}</pre>
  */
 public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements NativeResource {
 
@@ -88,26 +79,26 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** used to read data from the stream. This must not be {@code NULL}. */
+    /** @return the value of the {@code read} field. */
     @NativeType("op_read_func")
     public OPReadFunc read() { return nread(address()); }
-    /** used to seek in the stream. This may be {@code NULL} if seeking is not implemented. */
+    /** @return the value of the {@code seek} field. */
     @NativeType("op_seek_func")
     public @Nullable OPSeekFunc seek() { return nseek(address()); }
-    /** used to return the current read position in the stream. This may be {@code NULL} if seeking is not implemented. */
+    /** @return the value of the {@code tell} field. */
     @NativeType("op_tell_func")
     public @Nullable OPTellFunc tell() { return ntell(address()); }
-    /** used to close the stream when the decoder is freed. This may be {@code NULL} to leave the stream open. */
+    /** @return the value of the {@code close} field. */
     @NativeType("op_close_func")
     public @Nullable OPCloseFunc close$() { return nclose$(address()); }
 
-    /** Sets the specified value to the {@link #read} field. */
+    /** Sets the specified value to the {@code read} field. */
     public OpusFileCallbacks read(@NativeType("op_read_func") OPReadFuncI value) { nread(address(), value); return this; }
-    /** Sets the specified value to the {@link #seek} field. */
+    /** Sets the specified value to the {@code seek} field. */
     public OpusFileCallbacks seek(@Nullable @NativeType("op_seek_func") OPSeekFuncI value) { nseek(address(), value); return this; }
-    /** Sets the specified value to the {@link #tell} field. */
+    /** Sets the specified value to the {@code tell} field. */
     public OpusFileCallbacks tell(@Nullable @NativeType("op_tell_func") OPTellFuncI value) { ntell(address(), value); return this; }
-    /** Sets the specified value to the {@link #close$} field. */
+    /** Sets the specified value to the {@code close} field. */
     public OpusFileCallbacks close$(@Nullable @NativeType("op_close_func") OPCloseFuncI value) { nclose$(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,26 +309,26 @@ public class OpusFileCallbacks extends Struct<OpusFileCallbacks> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OpusFileCallbacks#read} field. */
+        /** @return the value of the {@code read} field. */
         @NativeType("op_read_func")
         public OPReadFunc read() { return OpusFileCallbacks.nread(address()); }
-        /** @return the value of the {@link OpusFileCallbacks#seek} field. */
+        /** @return the value of the {@code seek} field. */
         @NativeType("op_seek_func")
         public @Nullable OPSeekFunc seek() { return OpusFileCallbacks.nseek(address()); }
-        /** @return the value of the {@link OpusFileCallbacks#tell} field. */
+        /** @return the value of the {@code tell} field. */
         @NativeType("op_tell_func")
         public @Nullable OPTellFunc tell() { return OpusFileCallbacks.ntell(address()); }
-        /** @return the value of the {@link OpusFileCallbacks#close$} field. */
+        /** @return the value of the {@code close} field. */
         @NativeType("op_close_func")
         public @Nullable OPCloseFunc close$() { return OpusFileCallbacks.nclose$(address()); }
 
-        /** Sets the specified value to the {@link OpusFileCallbacks#read} field. */
+        /** Sets the specified value to the {@code read} field. */
         public OpusFileCallbacks.Buffer read(@NativeType("op_read_func") OPReadFuncI value) { OpusFileCallbacks.nread(address(), value); return this; }
-        /** Sets the specified value to the {@link OpusFileCallbacks#seek} field. */
+        /** Sets the specified value to the {@code seek} field. */
         public OpusFileCallbacks.Buffer seek(@Nullable @NativeType("op_seek_func") OPSeekFuncI value) { OpusFileCallbacks.nseek(address(), value); return this; }
-        /** Sets the specified value to the {@link OpusFileCallbacks#tell} field. */
+        /** Sets the specified value to the {@code tell} field. */
         public OpusFileCallbacks.Buffer tell(@Nullable @NativeType("op_tell_func") OPTellFuncI value) { OpusFileCallbacks.ntell(address(), value); return this; }
-        /** Sets the specified value to the {@link OpusFileCallbacks#close$} field. */
+        /** Sets the specified value to the {@code close} field. */
         public OpusFileCallbacks.Buffer close$(@Nullable @NativeType("op_close_func") OPCloseFuncI value) { OpusFileCallbacks.nclose$(address(), value); return this; }
 
     }

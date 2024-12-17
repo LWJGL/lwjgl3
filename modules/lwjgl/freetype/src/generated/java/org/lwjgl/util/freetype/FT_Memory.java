@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A structure used to describe a given memory manager to FreeType~2.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_MemoryRec_ {
  *     void * user;
  *     {@link FT_Alloc_FuncI FT_Alloc_Func} alloc;
  *     {@link FT_Free_FuncI FT_Free_Func} free;
  *     {@link FT_Realloc_FuncI FT_Realloc_Func} realloc;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_MemoryRec_")
 public class FT_Memory extends Struct<FT_Memory> implements NativeResource {

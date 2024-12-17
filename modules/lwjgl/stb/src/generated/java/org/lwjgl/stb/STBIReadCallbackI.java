@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@code read} field of the {@link STBIIOCallbacks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *user,
- *     char *data,
- *     int size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("int (*) (void *, char *, int)")
 public interface STBIReadCallbackI extends CallbackI {
@@ -47,15 +36,7 @@ public interface STBIReadCallbackI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * The {@code stbi_io_callbacks.read} callback.
-     *
-     * @param user a pointer to user data
-     * @param data the data buffer to fill
-     * @param size the number of bytes to read
-     *
-     * @return the number of bytes actually read
-     */
+    /** {@code int (*) (void * user, char * data, int size)} */
     int invoke(@NativeType("void *") long user, @NativeType("char *") long data, int size);
 
 }

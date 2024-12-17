@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMOrc#LLVMOrcThreadSafeModuleWithModuleDo OrcThreadSafeModuleWithModuleDo} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LLVMErrorRef (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMModuleRef M
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcGenericIRModuleOperationFunction} */
 @FunctionalInterface
 @NativeType("LLVMOrcGenericIRModuleOperationFunction")
 public interface LLVMOrcGenericIRModuleOperationFunctionI extends CallbackI {
@@ -45,7 +35,7 @@ public interface LLVMOrcGenericIRModuleOperationFunctionI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /** A function for inspecting/mutating IR modules, suitable for use with {@link LLVMOrc#LLVMOrcThreadSafeModuleWithModuleDo OrcThreadSafeModuleWithModuleDo}. */
+    /** {@code LLVMErrorRef (* LLVMOrcGenericIRModuleOperationFunction) (void * Ctx, LLVMModuleRef M)} */
     @NativeType("LLVMErrorRef") long invoke(@NativeType("void *") long Ctx, @NativeType("LLVMModuleRef") long M);
 
 }

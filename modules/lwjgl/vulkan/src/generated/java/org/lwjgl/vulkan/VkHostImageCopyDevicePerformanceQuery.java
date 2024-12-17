@@ -16,46 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct containing information about optimality of device access.
- * 
- * <h5>Description</h5>
- * 
- * <p>The implementation <b>may</b> return {@link VK10#VK_FALSE FALSE} in {@code optimalDeviceAccess} if {@code identicalMemoryLayout} is {@link VK10#VK_FALSE FALSE}. If {@code identicalMemoryLayout} is {@link VK10#VK_TRUE TRUE}, {@code optimalDeviceAccess} <b>must</b> be {@link VK10#VK_TRUE TRUE}.</p>
- * 
- * <p>The implementation <b>may</b> return {@link VK10#VK_TRUE TRUE} in {@code optimalDeviceAccess} while {@code identicalMemoryLayout} is {@link VK10#VK_FALSE FALSE}. In this situation, any device performance impact <b>should</b> not be measurable.</p>
- * 
- * <p>If {@link VkPhysicalDeviceImageFormatInfo2}{@code ::format} is a block-compressed format and {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2} returns {@link VK10#VK_SUCCESS SUCCESS}, the implementation <b>must</b> return {@link VK10#VK_TRUE TRUE} in {@code optimalDeviceAccess}.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Applications can make use of {@code optimalDeviceAccess} to determine their resource copying strategy. If a resource is expected to be accessed more on device than on the host, and the implementation considers the resource sub-optimally accessed, it is likely better to use device copies instead.</p>
- * </div>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Layout not being identical yet still considered optimal for device access could happen if the implementation has different memory layout patterns, some of which are easier to access on the host.</p>
- * </div>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The most practical reason for {@code optimalDeviceAccess} to be {@link VK10#VK_FALSE FALSE} is that host image access may disable framebuffer compression where it would otherwise have been enabled. This represents far more efficient host image access since no compression algorithm is required to read or write to the image, but it would impact device access performance. Some implementations may only set {@code optimalDeviceAccess} to {@link VK10#VK_FALSE FALSE} if certain conditions are met, such as specific image usage flags or creation flags.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkHostImageCopyDevicePerformanceQuery {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #optimalDeviceAccess};
- *     VkBool32 {@link #identicalMemoryLayout};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 optimalDeviceAccess;
+ *     VkBool32 identicalMemoryLayout;
+ * }}</pre>
  */
 public class VkHostImageCopyDevicePerformanceQuery extends Struct<VkHostImageCopyDevicePerformanceQuery> implements NativeResource {
 
@@ -111,24 +78,24 @@ public class VkHostImageCopyDevicePerformanceQuery extends Struct<VkHostImageCop
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** returns {@link VK10#VK_TRUE TRUE} if use of host image copy has no adverse effect on device access performance, compared to an image that is created with exact same creation parameters, and bound to the same {@code VkDeviceMemory}, except that {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} is replaced with {@link VK10#VK_IMAGE_USAGE_TRANSFER_SRC_BIT IMAGE_USAGE_TRANSFER_SRC_BIT} and {@link VK10#VK_IMAGE_USAGE_TRANSFER_DST_BIT IMAGE_USAGE_TRANSFER_DST_BIT}. */
+    /** @return the value of the {@code optimalDeviceAccess} field. */
     @NativeType("VkBool32")
     public boolean optimalDeviceAccess() { return noptimalDeviceAccess(address()) != 0; }
-    /** returns {@link VK10#VK_TRUE TRUE} if use of host image copy has no impact on memory layout compared to an image that is created with exact same creation parameters, and bound to the same {@code VkDeviceMemory}, except that {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} is replaced with {@link VK10#VK_IMAGE_USAGE_TRANSFER_SRC_BIT IMAGE_USAGE_TRANSFER_SRC_BIT} and {@link VK10#VK_IMAGE_USAGE_TRANSFER_DST_BIT IMAGE_USAGE_TRANSFER_DST_BIT}. */
+    /** @return the value of the {@code identicalMemoryLayout} field. */
     @NativeType("VkBool32")
     public boolean identicalMemoryLayout() { return nidenticalMemoryLayout(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkHostImageCopyDevicePerformanceQuery sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY} value to the {@code sType} field. */
     public VkHostImageCopyDevicePerformanceQuery sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkHostImageCopyDevicePerformanceQuery pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,24 +289,24 @@ public class VkHostImageCopyDevicePerformanceQuery extends Struct<VkHostImageCop
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkHostImageCopyDevicePerformanceQuery#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkHostImageCopyDevicePerformanceQuery.nsType(address()); }
-        /** @return the value of the {@link VkHostImageCopyDevicePerformanceQuery#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkHostImageCopyDevicePerformanceQuery.npNext(address()); }
-        /** @return the value of the {@link VkHostImageCopyDevicePerformanceQuery#optimalDeviceAccess} field. */
+        /** @return the value of the {@code optimalDeviceAccess} field. */
         @NativeType("VkBool32")
         public boolean optimalDeviceAccess() { return VkHostImageCopyDevicePerformanceQuery.noptimalDeviceAccess(address()) != 0; }
-        /** @return the value of the {@link VkHostImageCopyDevicePerformanceQuery#identicalMemoryLayout} field. */
+        /** @return the value of the {@code identicalMemoryLayout} field. */
         @NativeType("VkBool32")
         public boolean identicalMemoryLayout() { return VkHostImageCopyDevicePerformanceQuery.nidenticalMemoryLayout(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkHostImageCopyDevicePerformanceQuery#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkHostImageCopyDevicePerformanceQuery.Buffer sType(@NativeType("VkStructureType") int value) { VkHostImageCopyDevicePerformanceQuery.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY} value to the {@link VkHostImageCopyDevicePerformanceQuery#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY} value to the {@code sType} field. */
         public VkHostImageCopyDevicePerformanceQuery.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY); }
-        /** Sets the specified value to the {@link VkHostImageCopyDevicePerformanceQuery#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkHostImageCopyDevicePerformanceQuery.Buffer pNext(@NativeType("void *") long value) { VkHostImageCopyDevicePerformanceQuery.npNext(address(), value); return this; }
 
     }

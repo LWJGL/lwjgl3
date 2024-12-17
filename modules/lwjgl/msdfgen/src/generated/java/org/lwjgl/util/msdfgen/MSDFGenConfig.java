@@ -16,12 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct msdf_config {
  *     int overlap_support;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct msdf_config")
 public class MSDFGenConfig extends Struct<MSDFGenConfig> implements NativeResource {

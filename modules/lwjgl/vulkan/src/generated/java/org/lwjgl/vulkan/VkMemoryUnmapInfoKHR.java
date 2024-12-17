@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkMemoryUnmapInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryUnmapInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkMemoryUnmapFlags flags;
  *     VkDeviceMemory memory;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkMemoryUnmapInfoKHR extends VkMemoryUnmapInfo {
 

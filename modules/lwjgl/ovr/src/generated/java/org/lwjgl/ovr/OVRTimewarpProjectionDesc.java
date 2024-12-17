@@ -16,18 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Projection information for {@link OVRLayerEyeFovDepth}.
- * 
- * <p>Use the utility function {@link OVRUtil#ovrTimewarpProjectionDesc_FromProjection TimewarpProjectionDesc_FromProjection} to generate this structure from the application's projection matrix.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrTimewarpProjectionDesc {
- *     float {@link #Projection22};
- *     float {@link #Projection23};
- *     float {@link #Projection32};
- * }</code></pre>
+ *     float Projection22;
+ *     float Projection23;
+ *     float Projection32;
+ * }}</pre>
  */
 @NativeType("struct ovrTimewarpProjectionDesc")
 public class OVRTimewarpProjectionDesc extends Struct<OVRTimewarpProjectionDesc> implements NativeResource {
@@ -81,11 +75,11 @@ public class OVRTimewarpProjectionDesc extends Struct<OVRTimewarpProjectionDesc>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** projection matrix element [2][2] */
+    /** @return the value of the {@code Projection22} field. */
     public float Projection22() { return nProjection22(address()); }
-    /** projection matrix element [2][3] */
+    /** @return the value of the {@code Projection23} field. */
     public float Projection23() { return nProjection23(address()); }
-    /** projection matrix element [3][2] */
+    /** @return the value of the {@code Projection32} field. */
     public float Projection32() { return nProjection32(address()); }
 
     // -----------------------------------
@@ -268,11 +262,11 @@ public class OVRTimewarpProjectionDesc extends Struct<OVRTimewarpProjectionDesc>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRTimewarpProjectionDesc#Projection22} field. */
+        /** @return the value of the {@code Projection22} field. */
         public float Projection22() { return OVRTimewarpProjectionDesc.nProjection22(address()); }
-        /** @return the value of the {@link OVRTimewarpProjectionDesc#Projection23} field. */
+        /** @return the value of the {@code Projection23} field. */
         public float Projection23() { return OVRTimewarpProjectionDesc.nProjection23(address()); }
-        /** @return the value of the {@link OVRTimewarpProjectionDesc#Projection32} field. */
+        /** @return the value of the {@code Projection32} field. */
         public float Projection32() { return OVRTimewarpProjectionDesc.nProjection32(address()); }
 
     }

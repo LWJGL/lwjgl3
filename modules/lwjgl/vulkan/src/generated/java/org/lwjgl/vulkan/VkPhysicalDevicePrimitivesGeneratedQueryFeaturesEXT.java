@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing support for primitives generated query.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTPrimitivesGeneratedQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #primitivesGeneratedQuery};
- *     VkBool32 {@link #primitivesGeneratedQueryWithRasterizerDiscard};
- *     VkBool32 {@link #primitivesGeneratedQueryWithNonZeroStreams};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 primitivesGeneratedQuery;
+ *     VkBool32 primitivesGeneratedQueryWithRasterizerDiscard;
+ *     VkBool32 primitivesGeneratedQueryWithNonZeroStreams;
+ * }}</pre>
  */
 public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct<VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT> implements NativeResource {
 
@@ -96,33 +82,33 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct<
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the {@link EXTPrimitivesGeneratedQuery#VK_QUERY_TYPE_PRIMITIVES_GENERATED_EXT QUERY_TYPE_PRIMITIVES_GENERATED_EXT} query type. */
+    /** @return the value of the {@code primitivesGeneratedQuery} field. */
     @NativeType("VkBool32")
     public boolean primitivesGeneratedQuery() { return nprimitivesGeneratedQuery(address()) != 0; }
-    /** indicates whether the implementation supports this query when <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-discard">rasterization discard</a> is enabled. */
+    /** @return the value of the {@code primitivesGeneratedQueryWithRasterizerDiscard} field. */
     @NativeType("VkBool32")
     public boolean primitivesGeneratedQueryWithRasterizerDiscard() { return nprimitivesGeneratedQueryWithRasterizerDiscard(address()) != 0; }
-    /** indicates whether the implementation supports this query with a non-zero index in {@link EXTTransformFeedback#vkCmdBeginQueryIndexedEXT CmdBeginQueryIndexedEXT}. */
+    /** @return the value of the {@code primitivesGeneratedQueryWithNonZeroStreams} field. */
     @NativeType("VkBool32")
     public boolean primitivesGeneratedQueryWithNonZeroStreams() { return nprimitivesGeneratedQueryWithNonZeroStreams(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPrimitivesGeneratedQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTPrimitivesGeneratedQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT sType$Default() { return sType(EXTPrimitivesGeneratedQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #primitivesGeneratedQuery} field. */
+    /** Sets the specified value to the {@code primitivesGeneratedQuery} field. */
     public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT primitivesGeneratedQuery(@NativeType("VkBool32") boolean value) { nprimitivesGeneratedQuery(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #primitivesGeneratedQueryWithRasterizerDiscard} field. */
+    /** Sets the specified value to the {@code primitivesGeneratedQueryWithRasterizerDiscard} field. */
     public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT primitivesGeneratedQueryWithRasterizerDiscard(@NativeType("VkBool32") boolean value) { nprimitivesGeneratedQueryWithRasterizerDiscard(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #primitivesGeneratedQueryWithNonZeroStreams} field. */
+    /** Sets the specified value to the {@code primitivesGeneratedQueryWithNonZeroStreams} field. */
     public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT primitivesGeneratedQueryWithNonZeroStreams(@NativeType("VkBool32") boolean value) { nprimitivesGeneratedQueryWithNonZeroStreams(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -330,33 +316,33 @@ public class VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT extends Struct<
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#primitivesGeneratedQuery} field. */
+        /** @return the value of the {@code primitivesGeneratedQuery} field. */
         @NativeType("VkBool32")
         public boolean primitivesGeneratedQuery() { return VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.nprimitivesGeneratedQuery(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#primitivesGeneratedQueryWithRasterizerDiscard} field. */
+        /** @return the value of the {@code primitivesGeneratedQueryWithRasterizerDiscard} field. */
         @NativeType("VkBool32")
         public boolean primitivesGeneratedQueryWithRasterizerDiscard() { return VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.nprimitivesGeneratedQueryWithRasterizerDiscard(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#primitivesGeneratedQueryWithNonZeroStreams} field. */
+        /** @return the value of the {@code primitivesGeneratedQueryWithNonZeroStreams} field. */
         @NativeType("VkBool32")
         public boolean primitivesGeneratedQueryWithNonZeroStreams() { return VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.nprimitivesGeneratedQueryWithNonZeroStreams(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPrimitivesGeneratedQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT} value to the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTPrimitivesGeneratedQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer sType$Default() { return sType(EXTPrimitivesGeneratedQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#primitivesGeneratedQuery} field. */
+        /** Sets the specified value to the {@code primitivesGeneratedQuery} field. */
         public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer primitivesGeneratedQuery(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.nprimitivesGeneratedQuery(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#primitivesGeneratedQueryWithRasterizerDiscard} field. */
+        /** Sets the specified value to the {@code primitivesGeneratedQueryWithRasterizerDiscard} field. */
         public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer primitivesGeneratedQueryWithRasterizerDiscard(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.nprimitivesGeneratedQueryWithRasterizerDiscard(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT#primitivesGeneratedQueryWithNonZeroStreams} field. */
+        /** Sets the specified value to the {@code primitivesGeneratedQueryWithNonZeroStreams} field. */
         public VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.Buffer primitivesGeneratedQueryWithNonZeroStreams(@NativeType("VkBool32") boolean value) { VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT.nprimitivesGeneratedQueryWithNonZeroStreams(address(), value ? 1 : 0); return this; }
 
     }

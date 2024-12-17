@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_SfntLangTag {
  *     FT_Byte * string;
  *     FT_UInt string_len;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_SfntLangTag extends Struct<FT_SfntLangTag> implements NativeResource {
 

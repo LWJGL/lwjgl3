@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES {
  *     char const * name;
  *     FMOD_SOUND * sound;
  *     int subsoundIndex;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES extends Struct<FMOD_STUDIO_PROGRAMMER_SOUND_PROPERTIES> implements NativeResource {
 

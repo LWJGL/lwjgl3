@@ -16,33 +16,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the H.265 encode quality level properties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeH265QpKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH265QualityLevelPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkVideoEncodeH265RateControlFlagsKHR {@link #preferredRateControlFlags};
- *     uint32_t {@link #preferredGopFrameCount};
- *     uint32_t {@link #preferredIdrPeriod};
- *     uint32_t {@link #preferredConsecutiveBFrameCount};
- *     uint32_t {@link #preferredSubLayerCount};
- *     {@link VkVideoEncodeH265QpKHR VkVideoEncodeH265QpKHR} {@link #preferredConstantQp};
- *     uint32_t {@link #preferredMaxL0ReferenceCount};
- *     uint32_t {@link #preferredMaxL1ReferenceCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkVideoEncodeH265RateControlFlagsKHR preferredRateControlFlags;
+ *     uint32_t preferredGopFrameCount;
+ *     uint32_t preferredIdrPeriod;
+ *     uint32_t preferredConsecutiveBFrameCount;
+ *     uint32_t preferredSubLayerCount;
+ *     {@link VkVideoEncodeH265QpKHR VkVideoEncodeH265QpKHR} preferredConstantQp;
+ *     uint32_t preferredMaxL0ReferenceCount;
+ *     uint32_t preferredMaxL1ReferenceCount;
+ * }}</pre>
  */
 public class VkVideoEncodeH265QualityLevelPropertiesKHR extends Struct<VkVideoEncodeH265QualityLevelPropertiesKHR> implements NativeResource {
 
@@ -116,41 +102,41 @@ public class VkVideoEncodeH265QualityLevelPropertiesKHR extends Struct<VkVideoEn
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoEncodeH265RateControlFlagBitsKHR} values indicating the preferred flags to use for {@link VkVideoEncodeH265RateControlInfoKHR}{@code ::flags}. */
+    /** @return the value of the {@code preferredRateControlFlags} field. */
     @NativeType("VkVideoEncodeH265RateControlFlagsKHR")
     public int preferredRateControlFlags() { return npreferredRateControlFlags(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeH265RateControlInfoKHR}{@code ::gopFrameCount}. */
+    /** @return the value of the {@code preferredGopFrameCount} field. */
     @NativeType("uint32_t")
     public int preferredGopFrameCount() { return npreferredGopFrameCount(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeH265RateControlInfoKHR}{@code ::idrPeriod}. */
+    /** @return the value of the {@code preferredIdrPeriod} field. */
     @NativeType("uint32_t")
     public int preferredIdrPeriod() { return npreferredIdrPeriod(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeH265RateControlInfoKHR}{@code ::consecutiveBFrameCount}. */
+    /** @return the value of the {@code preferredConsecutiveBFrameCount} field. */
     @NativeType("uint32_t")
     public int preferredConsecutiveBFrameCount() { return npreferredConsecutiveBFrameCount(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeH265RateControlInfoKHR}{@code ::subLayerCount}. */
+    /** @return the value of the {@code preferredSubLayerCount} field. */
     @NativeType("uint32_t")
     public int preferredSubLayerCount() { return npreferredSubLayerCount(address()); }
-    /** indicates the preferred values to use for {@link VkVideoEncodeH265NaluSliceSegmentInfoKHR}{@code ::constantQp} for each picture type when using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control mode</a> {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
+    /** @return a {@link VkVideoEncodeH265QpKHR} view of the {@code preferredConstantQp} field. */
     public VkVideoEncodeH265QpKHR preferredConstantQp() { return npreferredConstantQp(address()); }
-    /** indicates the preferred maximum number of reference pictures to use in the reference list L0. */
+    /** @return the value of the {@code preferredMaxL0ReferenceCount} field. */
     @NativeType("uint32_t")
     public int preferredMaxL0ReferenceCount() { return npreferredMaxL0ReferenceCount(address()); }
-    /** indicates the preferred maximum number of reference pictures to use in the reference list L1. */
+    /** @return the value of the {@code preferredMaxL1ReferenceCount} field. */
     @NativeType("uint32_t")
     public int preferredMaxL1ReferenceCount() { return npreferredMaxL1ReferenceCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH265QualityLevelPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH265QualityLevelPropertiesKHR sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH265QualityLevelPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,41 +342,41 @@ public class VkVideoEncodeH265QualityLevelPropertiesKHR extends Struct<VkVideoEn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH265QualityLevelPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#preferredRateControlFlags} field. */
+        /** @return the value of the {@code preferredRateControlFlags} field. */
         @NativeType("VkVideoEncodeH265RateControlFlagsKHR")
         public int preferredRateControlFlags() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npreferredRateControlFlags(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#preferredGopFrameCount} field. */
+        /** @return the value of the {@code preferredGopFrameCount} field. */
         @NativeType("uint32_t")
         public int preferredGopFrameCount() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npreferredGopFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#preferredIdrPeriod} field. */
+        /** @return the value of the {@code preferredIdrPeriod} field. */
         @NativeType("uint32_t")
         public int preferredIdrPeriod() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npreferredIdrPeriod(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#preferredConsecutiveBFrameCount} field. */
+        /** @return the value of the {@code preferredConsecutiveBFrameCount} field. */
         @NativeType("uint32_t")
         public int preferredConsecutiveBFrameCount() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npreferredConsecutiveBFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#preferredSubLayerCount} field. */
+        /** @return the value of the {@code preferredSubLayerCount} field. */
         @NativeType("uint32_t")
         public int preferredSubLayerCount() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npreferredSubLayerCount(address()); }
-        /** @return a {@link VkVideoEncodeH265QpKHR} view of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#preferredConstantQp} field. */
+        /** @return a {@link VkVideoEncodeH265QpKHR} view of the {@code preferredConstantQp} field. */
         public VkVideoEncodeH265QpKHR preferredConstantQp() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npreferredConstantQp(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#preferredMaxL0ReferenceCount} field. */
+        /** @return the value of the {@code preferredMaxL0ReferenceCount} field. */
         @NativeType("uint32_t")
         public int preferredMaxL0ReferenceCount() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npreferredMaxL0ReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#preferredMaxL1ReferenceCount} field. */
+        /** @return the value of the {@code preferredMaxL1ReferenceCount} field. */
         @NativeType("uint32_t")
         public int preferredMaxL1ReferenceCount() { return VkVideoEncodeH265QualityLevelPropertiesKHR.npreferredMaxL1ReferenceCount(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH265QualityLevelPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265QualityLevelPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR} value to the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH265QualityLevelPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_QUALITY_LEVEL_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH265QualityLevelPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH265QualityLevelPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeH265QualityLevelPropertiesKHR.npNext(address(), value); return this; }
 
     }

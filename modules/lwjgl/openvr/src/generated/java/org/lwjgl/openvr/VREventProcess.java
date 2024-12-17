@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Used for events about processes.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Process_t {
  *     uint32_t pid;
  *     uint32_t oldPid;
  *     bool bForced;
- *     bool {@link #bConnectionLost};
- * }</code></pre>
+ *     bool bConnectionLost;
+ * }}</pre>
  */
 @NativeType("struct VREvent_Process_t")
 public class VREventProcess extends Struct<VREventProcess> {
@@ -90,7 +86,7 @@ public class VREventProcess extends Struct<VREventProcess> {
     /** @return the value of the {@code bForced} field. */
     @NativeType("bool")
     public boolean bForced() { return nbForced(address()); }
-    /** if the associated event was triggered by a connection loss */
+    /** @return the value of the {@code bConnectionLost} field. */
     @NativeType("bool")
     public boolean bConnectionLost() { return nbConnectionLost(address()); }
 
@@ -184,7 +180,7 @@ public class VREventProcess extends Struct<VREventProcess> {
         /** @return the value of the {@code bForced} field. */
         @NativeType("bool")
         public boolean bForced() { return VREventProcess.nbForced(address()); }
-        /** @return the value of the {@link VREventProcess#bConnectionLost} field. */
+        /** @return the value of the {@code bConnectionLost} field. */
         @NativeType("bool")
         public boolean bConnectionLost() { return VREventProcess.nbConnectionLost(address()); }
 

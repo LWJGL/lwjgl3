@@ -16,12 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.cuda.CUDA.*;
 
-/**
- * Contains bindings to <a href="https://docs.nvidia.com/cuda/cuda-driver-api/group__CUDA__GL.html#group__CUDA__GL">CUDA Driver OpenGL
- * Interoperability API</a>.
- * 
- * <p>This class contains Windows-specific functionality.</p>
- */
 public class CUWGL {
 
     /** Contains the function pointers loaded from {@code CU.getLibrary()}. */
@@ -41,6 +35,7 @@ public class CUWGL {
 
     // --- [ cuWGLGetDevice ] ---
 
+    /** {@code CUresult cuWGLGetDevice(CUdevice * pDevice, HGPUNV hGpu)} */
     public static int ncuWGLGetDevice(long pDevice, long hGpu) {
         long __functionAddress = Functions.WGLGetDevice;
         if (CHECKS) {
@@ -49,6 +44,7 @@ public class CUWGL {
         return callPPI(pDevice, hGpu, __functionAddress);
     }
 
+    /** {@code CUresult cuWGLGetDevice(CUdevice * pDevice, HGPUNV hGpu)} */
     @NativeType("CUresult")
     public static int cuWGLGetDevice(@NativeType("CUdevice *") IntBuffer pDevice, @NativeType("HGPUNV") long hGpu) {
         if (CHECKS) {

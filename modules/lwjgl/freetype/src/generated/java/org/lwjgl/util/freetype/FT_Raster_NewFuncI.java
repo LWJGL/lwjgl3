@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *memory,
- *     FT_Raster *raster
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Raster_NewFunc} */
 @FunctionalInterface
 @NativeType("FT_Raster_NewFunc")
 public interface FT_Raster_NewFuncI extends CallbackI {
@@ -43,7 +35,7 @@ public interface FT_Raster_NewFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** A function used to create a new raster object. */
+    /** {@code int (* FT_Raster_NewFunc) (void * memory, FT_Raster * raster)} */
     int invoke(@NativeType("void *") long memory, @NativeType("FT_Raster *") long raster);
 
 }

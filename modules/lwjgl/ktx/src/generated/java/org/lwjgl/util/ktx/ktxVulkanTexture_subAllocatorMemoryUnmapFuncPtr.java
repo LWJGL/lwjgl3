@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     uint64_t allocId,
- *     uint64_t pageNumber
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtr extends Callback implements ktxVulkanTexture_subAllocatorMemoryUnmapFuncPtrI {
 
     /**

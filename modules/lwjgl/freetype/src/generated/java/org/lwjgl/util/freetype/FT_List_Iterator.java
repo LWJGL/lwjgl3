@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     FT_ListNode node,
- *     void *user
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_List_Iterator} */
 public abstract class FT_List_Iterator extends Callback implements FT_List_IteratorI {
 
     /**

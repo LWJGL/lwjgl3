@@ -17,31 +17,25 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Definition of a property that should be stored globally.
- * 
- * <p>Note: Use the callback api and the {@code rmt_PropertyGetxxx} accessors to traverse this structure.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct rmtProperty {
- *     rmtBool {@link #initialised};
- *     rmtPropertyType {@link #type};
+ *     rmtBool initialised;
+ *     rmtPropertyType type;
  *     rmtPropertyFlags flags;
- *     {@link RMTPropertyValue rmtPropertyValue} {@link #value};
- *     {@link RMTPropertyValue rmtPropertyValue} {@link #lastFrameValue};
- *     {@link RMTPropertyValue rmtPropertyValue} {@link #prevValue};
+ *     {@link RMTPropertyValue rmtPropertyValue} value;
+ *     {@link RMTPropertyValue rmtPropertyValue} lastFrameValue;
+ *     {@link RMTPropertyValue rmtPropertyValue} prevValue;
  *     rmtU32 prevValueFrame;
- *     char const * {@link #name};
+ *     char const * name;
  *     char const * description;
- *     {@link RMTPropertyValue rmtPropertyValue} {@link #defaultValue};
- *     {@link RMTProperty rmtProperty} * {@link #parent};
- *     {@link RMTProperty rmtProperty} * {@link #firstChild};
- *     {@link RMTProperty rmtProperty} * {@link #lastChild};
- *     {@link RMTProperty rmtProperty} * {@link #nextSibling};
- *     rmtU32 {@link #nameHash};
- *     rmtU32 {@link #uniqueID};
- * }</code></pre>
+ *     {@link RMTPropertyValue rmtPropertyValue} defaultValue;
+ *     {@link RMTProperty rmtProperty} * parent;
+ *     {@link RMTProperty rmtProperty} * firstChild;
+ *     {@link RMTProperty rmtProperty} * lastChild;
+ *     {@link RMTProperty rmtProperty} * nextSibling;
+ *     rmtU32 nameHash;
+ *     rmtU32 uniqueID;
+ * }}</pre>
  */
 @NativeType("struct rmtProperty")
 public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
@@ -134,31 +128,31 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** gets set to {@link Remotery#RMT_TRUE TRUE} after a property has been modified, when it gets initialised for the first time */
+    /** @return the value of the {@code initialised} field. */
     @NativeType("rmtBool")
     public boolean initialised() { return ninitialised(address()) != 0; }
-    /** runtime description */
+    /** @return the value of the {@code type} field. */
     @NativeType("rmtPropertyType")
     public int type() { return ntype(address()); }
     /** @return the value of the {@code flags} field. */
     @NativeType("rmtPropertyFlags")
     public int flags() { return nflags(address()); }
-    /** current value */
+    /** @return a {@link RMTPropertyValue} view of the {@code value} field. */
     @NativeType("rmtPropertyValue")
     public RMTPropertyValue value() { return nvalue(address()); }
-    /** last frame value to see if previous value needs to be updated */
+    /** @return a {@link RMTPropertyValue} view of the {@code lastFrameValue} field. */
     @NativeType("rmtPropertyValue")
     public RMTPropertyValue lastFrameValue() { return nlastFrameValue(address()); }
-    /** previous value only if it's different from the current value, and when it changed */
+    /** @return a {@link RMTPropertyValue} view of the {@code prevValue} field. */
     @NativeType("rmtPropertyValue")
     public RMTPropertyValue prevValue() { return nprevValue(address()); }
     /** @return the value of the {@code prevValueFrame} field. */
     @NativeType("rmtU32")
     public int prevValueFrame() { return nprevValueFrame(address()); }
-    /** text description */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
     @NativeType("char const *")
     public ByteBuffer name() { return nname(address()); }
-    /** text description */
+    /** @return the null-terminated string pointed to by the {@code name} field. */
     @NativeType("char const *")
     public String nameString() { return nnameString(address()); }
     /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code description} field. */
@@ -167,67 +161,67 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
     /** @return the null-terminated string pointed to by the {@code description} field. */
     @NativeType("char const *")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** default value for Reset calls */
+    /** @return a {@link RMTPropertyValue} view of the {@code defaultValue} field. */
     @NativeType("rmtPropertyValue")
     public RMTPropertyValue defaultValue() { return ndefaultValue(address()); }
-    /** parent link specifically placed after default value so that variadic macro can initialise it */
+    /** @return a {@link RMTProperty} view of the struct pointed to by the {@code parent} field. */
     @NativeType("rmtProperty *")
     public @Nullable RMTProperty parent() { return nparent(address()); }
-    /** links within the property tree */
+    /** @return a {@link RMTProperty} view of the struct pointed to by the {@code firstChild} field. */
     @NativeType("rmtProperty *")
     public @Nullable RMTProperty firstChild() { return nfirstChild(address()); }
-    /** links within the property tree */
+    /** @return a {@link RMTProperty} view of the struct pointed to by the {@code lastChild} field. */
     @NativeType("rmtProperty *")
     public @Nullable RMTProperty lastChild() { return nlastChild(address()); }
-    /** links within the property tree */
+    /** @return a {@link RMTProperty} view of the struct pointed to by the {@code nextSibling} field. */
     @NativeType("rmtProperty *")
     public @Nullable RMTProperty nextSibling() { return nnextSibling(address()); }
-    /** hash for efficient sending of properties to the viewer */
+    /** @return the value of the {@code nameHash} field. */
     @NativeType("rmtU32")
     public int nameHash() { return nnameHash(address()); }
-    /** unique, persistent ID among all properties */
+    /** @return the value of the {@code uniqueID} field. */
     @NativeType("rmtU32")
     public int uniqueID() { return nuniqueID(address()); }
 
-    /** Sets the specified value to the {@link #initialised} field. */
+    /** Sets the specified value to the {@code initialised} field. */
     public RMTProperty initialised(@NativeType("rmtBool") boolean value) { ninitialised(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public RMTProperty type(@NativeType("rmtPropertyType") int value) { ntype(address(), value); return this; }
     /** Sets the specified value to the {@code flags} field. */
     public RMTProperty flags(@NativeType("rmtPropertyFlags") int value) { nflags(address(), value); return this; }
-    /** Copies the specified {@link RMTPropertyValue} to the {@link #value} field. */
+    /** Copies the specified {@link RMTPropertyValue} to the {@code value} field. */
     public RMTProperty value(@NativeType("rmtPropertyValue") RMTPropertyValue value) { nvalue(address(), value); return this; }
-    /** Passes the {@link #value} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code value} field to the specified {@link java.util.function.Consumer Consumer}. */
     public RMTProperty value(java.util.function.Consumer<RMTPropertyValue> consumer) { consumer.accept(value()); return this; }
-    /** Copies the specified {@link RMTPropertyValue} to the {@link #lastFrameValue} field. */
+    /** Copies the specified {@link RMTPropertyValue} to the {@code lastFrameValue} field. */
     public RMTProperty lastFrameValue(@NativeType("rmtPropertyValue") RMTPropertyValue value) { nlastFrameValue(address(), value); return this; }
-    /** Passes the {@link #lastFrameValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code lastFrameValue} field to the specified {@link java.util.function.Consumer Consumer}. */
     public RMTProperty lastFrameValue(java.util.function.Consumer<RMTPropertyValue> consumer) { consumer.accept(lastFrameValue()); return this; }
-    /** Copies the specified {@link RMTPropertyValue} to the {@link #prevValue} field. */
+    /** Copies the specified {@link RMTPropertyValue} to the {@code prevValue} field. */
     public RMTProperty prevValue(@NativeType("rmtPropertyValue") RMTPropertyValue value) { nprevValue(address(), value); return this; }
-    /** Passes the {@link #prevValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code prevValue} field to the specified {@link java.util.function.Consumer Consumer}. */
     public RMTProperty prevValue(java.util.function.Consumer<RMTPropertyValue> consumer) { consumer.accept(prevValue()); return this; }
     /** Sets the specified value to the {@code prevValueFrame} field. */
     public RMTProperty prevValueFrame(@NativeType("rmtU32") int value) { nprevValueFrame(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #name} field. */
+    /** Sets the address of the specified encoded string to the {@code name} field. */
     public RMTProperty name(@NativeType("char const *") ByteBuffer value) { nname(address(), value); return this; }
     /** Sets the address of the specified encoded string to the {@code description} field. */
     public RMTProperty description(@NativeType("char const *") ByteBuffer value) { ndescription(address(), value); return this; }
-    /** Copies the specified {@link RMTPropertyValue} to the {@link #defaultValue} field. */
+    /** Copies the specified {@link RMTPropertyValue} to the {@code defaultValue} field. */
     public RMTProperty defaultValue(@NativeType("rmtPropertyValue") RMTPropertyValue value) { ndefaultValue(address(), value); return this; }
-    /** Passes the {@link #defaultValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code defaultValue} field to the specified {@link java.util.function.Consumer Consumer}. */
     public RMTProperty defaultValue(java.util.function.Consumer<RMTPropertyValue> consumer) { consumer.accept(defaultValue()); return this; }
-    /** Sets the address of the specified {@link RMTProperty} to the {@link #parent} field. */
+    /** Sets the address of the specified {@link RMTProperty} to the {@code parent} field. */
     public RMTProperty parent(@Nullable @NativeType("rmtProperty *") RMTProperty value) { nparent(address(), value); return this; }
-    /** Sets the address of the specified {@link RMTProperty} to the {@link #firstChild} field. */
+    /** Sets the address of the specified {@link RMTProperty} to the {@code firstChild} field. */
     public RMTProperty firstChild(@Nullable @NativeType("rmtProperty *") RMTProperty value) { nfirstChild(address(), value); return this; }
-    /** Sets the address of the specified {@link RMTProperty} to the {@link #lastChild} field. */
+    /** Sets the address of the specified {@link RMTProperty} to the {@code lastChild} field. */
     public RMTProperty lastChild(@Nullable @NativeType("rmtProperty *") RMTProperty value) { nlastChild(address(), value); return this; }
-    /** Sets the address of the specified {@link RMTProperty} to the {@link #nextSibling} field. */
+    /** Sets the address of the specified {@link RMTProperty} to the {@code nextSibling} field. */
     public RMTProperty nextSibling(@Nullable @NativeType("rmtProperty *") RMTProperty value) { nnextSibling(address(), value); return this; }
-    /** Sets the specified value to the {@link #nameHash} field. */
+    /** Sets the specified value to the {@code nameHash} field. */
     public RMTProperty nameHash(@NativeType("rmtU32") int value) { nnameHash(address(), value); return this; }
-    /** Sets the specified value to the {@link #uniqueID} field. */
+    /** Sets the specified value to the {@code uniqueID} field. */
     public RMTProperty uniqueID(@NativeType("rmtU32") int value) { nuniqueID(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -521,31 +515,31 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link RMTProperty#initialised} field. */
+        /** @return the value of the {@code initialised} field. */
         @NativeType("rmtBool")
         public boolean initialised() { return RMTProperty.ninitialised(address()) != 0; }
-        /** @return the value of the {@link RMTProperty#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("rmtPropertyType")
         public int type() { return RMTProperty.ntype(address()); }
         /** @return the value of the {@code flags} field. */
         @NativeType("rmtPropertyFlags")
         public int flags() { return RMTProperty.nflags(address()); }
-        /** @return a {@link RMTPropertyValue} view of the {@link RMTProperty#value} field. */
+        /** @return a {@link RMTPropertyValue} view of the {@code value} field. */
         @NativeType("rmtPropertyValue")
         public RMTPropertyValue value() { return RMTProperty.nvalue(address()); }
-        /** @return a {@link RMTPropertyValue} view of the {@link RMTProperty#lastFrameValue} field. */
+        /** @return a {@link RMTPropertyValue} view of the {@code lastFrameValue} field. */
         @NativeType("rmtPropertyValue")
         public RMTPropertyValue lastFrameValue() { return RMTProperty.nlastFrameValue(address()); }
-        /** @return a {@link RMTPropertyValue} view of the {@link RMTProperty#prevValue} field. */
+        /** @return a {@link RMTPropertyValue} view of the {@code prevValue} field. */
         @NativeType("rmtPropertyValue")
         public RMTPropertyValue prevValue() { return RMTProperty.nprevValue(address()); }
         /** @return the value of the {@code prevValueFrame} field. */
         @NativeType("rmtU32")
         public int prevValueFrame() { return RMTProperty.nprevValueFrame(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link RMTProperty#name} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
         @NativeType("char const *")
         public ByteBuffer name() { return RMTProperty.nname(address()); }
-        /** @return the null-terminated string pointed to by the {@link RMTProperty#name} field. */
+        /** @return the null-terminated string pointed to by the {@code name} field. */
         @NativeType("char const *")
         public String nameString() { return RMTProperty.nnameString(address()); }
         /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code description} field. */
@@ -554,67 +548,67 @@ public class RMTProperty extends Struct<RMTProperty> implements NativeResource {
         /** @return the null-terminated string pointed to by the {@code description} field. */
         @NativeType("char const *")
         public String descriptionString() { return RMTProperty.ndescriptionString(address()); }
-        /** @return a {@link RMTPropertyValue} view of the {@link RMTProperty#defaultValue} field. */
+        /** @return a {@link RMTPropertyValue} view of the {@code defaultValue} field. */
         @NativeType("rmtPropertyValue")
         public RMTPropertyValue defaultValue() { return RMTProperty.ndefaultValue(address()); }
-        /** @return a {@link RMTProperty} view of the struct pointed to by the {@link RMTProperty#parent} field. */
+        /** @return a {@link RMTProperty} view of the struct pointed to by the {@code parent} field. */
         @NativeType("rmtProperty *")
         public @Nullable RMTProperty parent() { return RMTProperty.nparent(address()); }
-        /** @return a {@link RMTProperty} view of the struct pointed to by the {@link RMTProperty#firstChild} field. */
+        /** @return a {@link RMTProperty} view of the struct pointed to by the {@code firstChild} field. */
         @NativeType("rmtProperty *")
         public @Nullable RMTProperty firstChild() { return RMTProperty.nfirstChild(address()); }
-        /** @return a {@link RMTProperty} view of the struct pointed to by the {@link RMTProperty#lastChild} field. */
+        /** @return a {@link RMTProperty} view of the struct pointed to by the {@code lastChild} field. */
         @NativeType("rmtProperty *")
         public @Nullable RMTProperty lastChild() { return RMTProperty.nlastChild(address()); }
-        /** @return a {@link RMTProperty} view of the struct pointed to by the {@link RMTProperty#nextSibling} field. */
+        /** @return a {@link RMTProperty} view of the struct pointed to by the {@code nextSibling} field. */
         @NativeType("rmtProperty *")
         public @Nullable RMTProperty nextSibling() { return RMTProperty.nnextSibling(address()); }
-        /** @return the value of the {@link RMTProperty#nameHash} field. */
+        /** @return the value of the {@code nameHash} field. */
         @NativeType("rmtU32")
         public int nameHash() { return RMTProperty.nnameHash(address()); }
-        /** @return the value of the {@link RMTProperty#uniqueID} field. */
+        /** @return the value of the {@code uniqueID} field. */
         @NativeType("rmtU32")
         public int uniqueID() { return RMTProperty.nuniqueID(address()); }
 
-        /** Sets the specified value to the {@link RMTProperty#initialised} field. */
+        /** Sets the specified value to the {@code initialised} field. */
         public RMTProperty.Buffer initialised(@NativeType("rmtBool") boolean value) { RMTProperty.ninitialised(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link RMTProperty#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public RMTProperty.Buffer type(@NativeType("rmtPropertyType") int value) { RMTProperty.ntype(address(), value); return this; }
         /** Sets the specified value to the {@code flags} field. */
         public RMTProperty.Buffer flags(@NativeType("rmtPropertyFlags") int value) { RMTProperty.nflags(address(), value); return this; }
-        /** Copies the specified {@link RMTPropertyValue} to the {@link RMTProperty#value} field. */
+        /** Copies the specified {@link RMTPropertyValue} to the {@code value} field. */
         public RMTProperty.Buffer value(@NativeType("rmtPropertyValue") RMTPropertyValue value) { RMTProperty.nvalue(address(), value); return this; }
-        /** Passes the {@link RMTProperty#value} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code value} field to the specified {@link java.util.function.Consumer Consumer}. */
         public RMTProperty.Buffer value(java.util.function.Consumer<RMTPropertyValue> consumer) { consumer.accept(value()); return this; }
-        /** Copies the specified {@link RMTPropertyValue} to the {@link RMTProperty#lastFrameValue} field. */
+        /** Copies the specified {@link RMTPropertyValue} to the {@code lastFrameValue} field. */
         public RMTProperty.Buffer lastFrameValue(@NativeType("rmtPropertyValue") RMTPropertyValue value) { RMTProperty.nlastFrameValue(address(), value); return this; }
-        /** Passes the {@link RMTProperty#lastFrameValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code lastFrameValue} field to the specified {@link java.util.function.Consumer Consumer}. */
         public RMTProperty.Buffer lastFrameValue(java.util.function.Consumer<RMTPropertyValue> consumer) { consumer.accept(lastFrameValue()); return this; }
-        /** Copies the specified {@link RMTPropertyValue} to the {@link RMTProperty#prevValue} field. */
+        /** Copies the specified {@link RMTPropertyValue} to the {@code prevValue} field. */
         public RMTProperty.Buffer prevValue(@NativeType("rmtPropertyValue") RMTPropertyValue value) { RMTProperty.nprevValue(address(), value); return this; }
-        /** Passes the {@link RMTProperty#prevValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code prevValue} field to the specified {@link java.util.function.Consumer Consumer}. */
         public RMTProperty.Buffer prevValue(java.util.function.Consumer<RMTPropertyValue> consumer) { consumer.accept(prevValue()); return this; }
         /** Sets the specified value to the {@code prevValueFrame} field. */
         public RMTProperty.Buffer prevValueFrame(@NativeType("rmtU32") int value) { RMTProperty.nprevValueFrame(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link RMTProperty#name} field. */
+        /** Sets the address of the specified encoded string to the {@code name} field. */
         public RMTProperty.Buffer name(@NativeType("char const *") ByteBuffer value) { RMTProperty.nname(address(), value); return this; }
         /** Sets the address of the specified encoded string to the {@code description} field. */
         public RMTProperty.Buffer description(@NativeType("char const *") ByteBuffer value) { RMTProperty.ndescription(address(), value); return this; }
-        /** Copies the specified {@link RMTPropertyValue} to the {@link RMTProperty#defaultValue} field. */
+        /** Copies the specified {@link RMTPropertyValue} to the {@code defaultValue} field. */
         public RMTProperty.Buffer defaultValue(@NativeType("rmtPropertyValue") RMTPropertyValue value) { RMTProperty.ndefaultValue(address(), value); return this; }
-        /** Passes the {@link RMTProperty#defaultValue} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code defaultValue} field to the specified {@link java.util.function.Consumer Consumer}. */
         public RMTProperty.Buffer defaultValue(java.util.function.Consumer<RMTPropertyValue> consumer) { consumer.accept(defaultValue()); return this; }
-        /** Sets the address of the specified {@link RMTProperty} to the {@link RMTProperty#parent} field. */
+        /** Sets the address of the specified {@link RMTProperty} to the {@code parent} field. */
         public RMTProperty.Buffer parent(@Nullable @NativeType("rmtProperty *") RMTProperty value) { RMTProperty.nparent(address(), value); return this; }
-        /** Sets the address of the specified {@link RMTProperty} to the {@link RMTProperty#firstChild} field. */
+        /** Sets the address of the specified {@link RMTProperty} to the {@code firstChild} field. */
         public RMTProperty.Buffer firstChild(@Nullable @NativeType("rmtProperty *") RMTProperty value) { RMTProperty.nfirstChild(address(), value); return this; }
-        /** Sets the address of the specified {@link RMTProperty} to the {@link RMTProperty#lastChild} field. */
+        /** Sets the address of the specified {@link RMTProperty} to the {@code lastChild} field. */
         public RMTProperty.Buffer lastChild(@Nullable @NativeType("rmtProperty *") RMTProperty value) { RMTProperty.nlastChild(address(), value); return this; }
-        /** Sets the address of the specified {@link RMTProperty} to the {@link RMTProperty#nextSibling} field. */
+        /** Sets the address of the specified {@link RMTProperty} to the {@code nextSibling} field. */
         public RMTProperty.Buffer nextSibling(@Nullable @NativeType("rmtProperty *") RMTProperty value) { RMTProperty.nnextSibling(address(), value); return this; }
-        /** Sets the specified value to the {@link RMTProperty#nameHash} field. */
+        /** Sets the specified value to the {@code nameHash} field. */
         public RMTProperty.Buffer nameHash(@NativeType("rmtU32") int value) { RMTProperty.nnameHash(address(), value); return this; }
-        /** Sets the specified value to the {@link RMTProperty#uniqueID} field. */
+        /** Sets the specified value to the {@code uniqueID} field. */
         public RMTProperty.Buffer uniqueID(@NativeType("rmtU32") int value) { RMTProperty.nuniqueID(address(), value); return this; }
 
     }

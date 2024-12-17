@@ -36,6 +36,7 @@ public class LLVMTargetRISCV {
 
     // --- [ LLVMInitializeRISCVTargetInfo ] ---
 
+    /** {@code void LLVMInitializeRISCVTargetInfo(void)} */
     public static void LLVMInitializeRISCVTargetInfo() {
         long __functionAddress = Functions.InitializeRISCVTargetInfo;
         invokeV(__functionAddress);
@@ -43,6 +44,7 @@ public class LLVMTargetRISCV {
 
     // --- [ LLVMInitializeRISCVTarget ] ---
 
+    /** {@code void LLVMInitializeRISCVTarget(void)} */
     public static void LLVMInitializeRISCVTarget() {
         long __functionAddress = Functions.InitializeRISCVTarget;
         invokeV(__functionAddress);
@@ -50,6 +52,7 @@ public class LLVMTargetRISCV {
 
     // --- [ LLVMInitializeRISCVTargetMC ] ---
 
+    /** {@code void LLVMInitializeRISCVTargetMC(void)} */
     public static void LLVMInitializeRISCVTargetMC() {
         long __functionAddress = Functions.InitializeRISCVTargetMC;
         invokeV(__functionAddress);
@@ -57,6 +60,7 @@ public class LLVMTargetRISCV {
 
     // --- [ LLVMInitializeRISCVTargetMCA ] ---
 
+    /** {@code void LLVMInitializeRISCVTargetMCA(void)} */
     public static void LLVMInitializeRISCVTargetMCA() {
         long __functionAddress = Functions.InitializeRISCVTargetMCA;
         if (CHECKS) {
@@ -67,6 +71,7 @@ public class LLVMTargetRISCV {
 
     // --- [ LLVMInitializeRISCVAsmPrinter ] ---
 
+    /** {@code void LLVMInitializeRISCVAsmPrinter(void)} */
     public static void LLVMInitializeRISCVAsmPrinter() {
         long __functionAddress = Functions.InitializeRISCVAsmPrinter;
         invokeV(__functionAddress);
@@ -74,6 +79,7 @@ public class LLVMTargetRISCV {
 
     // --- [ LLVMInitializeRISCVAsmParser ] ---
 
+    /** {@code void LLVMInitializeRISCVAsmParser(void)} */
     public static void LLVMInitializeRISCVAsmParser() {
         long __functionAddress = Functions.InitializeRISCVAsmParser;
         invokeV(__functionAddress);
@@ -81,6 +87,7 @@ public class LLVMTargetRISCV {
 
     // --- [ LLVMInitializeRISCVDisassembler ] ---
 
+    /** {@code void LLVMInitializeRISCVDisassembler(void)} */
     public static void LLVMInitializeRISCVDisassembler() {
         long __functionAddress = Functions.InitializeRISCVDisassembler;
         invokeV(__functionAddress);

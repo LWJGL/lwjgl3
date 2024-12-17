@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_paint_funcs_t *funcs,
- *     void *paint_data,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_paint_pop_transform_func_t} */
 public abstract class hb_paint_pop_transform_func_t extends Callback implements hb_paint_pop_transform_func_tI {
 
     /**

@@ -16,30 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Enumeration filter for the available localization maps.
- * 
- * <h5>Description</h5>
- * 
- * <p>Currently no filters are available.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using {@link XrLocalizationMapQueryInfoBaseHeaderML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLLocalizationMap#xrQueryLocalizationMapsML QueryLocalizationMapsML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrLocalizationMapQueryInfoBaseHeaderML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrLocalizationMapQueryInfoBaseHeaderML extends Struct<XrLocalizationMapQueryInfoBaseHeaderML> implements NativeResource {
 
@@ -89,16 +70,16 @@ public class XrLocalizationMapQueryInfoBaseHeaderML extends Struct<XrLocalizatio
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrLocalizationMapQueryInfoBaseHeaderML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrLocalizationMapQueryInfoBaseHeaderML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -288,16 +269,16 @@ public class XrLocalizationMapQueryInfoBaseHeaderML extends Struct<XrLocalizatio
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrLocalizationMapQueryInfoBaseHeaderML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrLocalizationMapQueryInfoBaseHeaderML.ntype(address()); }
-        /** @return the value of the {@link XrLocalizationMapQueryInfoBaseHeaderML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrLocalizationMapQueryInfoBaseHeaderML.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrLocalizationMapQueryInfoBaseHeaderML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrLocalizationMapQueryInfoBaseHeaderML.Buffer type(@NativeType("XrStructureType") int value) { XrLocalizationMapQueryInfoBaseHeaderML.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XrLocalizationMapQueryInfoBaseHeaderML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrLocalizationMapQueryInfoBaseHeaderML.Buffer next(@NativeType("void const *") long value) { XrLocalizationMapQueryInfoBaseHeaderML.nnext(address(), value); return this; }
 
     }

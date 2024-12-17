@@ -16,23 +16,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The structure used to report information about event taps.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CGEventTapInformation {
  *     uint32_t eventTapID;
- *     CGEventTapLocation {@link #tapPoint};
- *     CGEventTapOptions {@link #options};
- *     CGEventMask {@link #eventsOfInterest};
- *     pid_t {@link #tappingProcess};
- *     pid_t {@link #processBeingTapped};
- *     bool {@link #enabled};
- *     float {@link #minUsecLatency};
- *     float {@link #avgUsecLatency};
- *     float {@link #maxUsecLatency};
- * }</code></pre>
+ *     CGEventTapLocation tapPoint;
+ *     CGEventTapOptions options;
+ *     CGEventMask eventsOfInterest;
+ *     pid_t tappingProcess;
+ *     pid_t processBeingTapped;
+ *     bool enabled;
+ *     float minUsecLatency;
+ *     float avgUsecLatency;
+ *     float maxUsecLatency;
+ * }}</pre>
  */
 public class CGEventTapInformation extends Struct<CGEventTapInformation> implements NativeResource {
 
@@ -109,29 +105,29 @@ public class CGEventTapInformation extends Struct<CGEventTapInformation> impleme
     /** @return the value of the {@code eventTapID} field. */
     @NativeType("uint32_t")
     public int eventTapID() { return neventTapID(address()); }
-    /** HID, session, annotated session */
+    /** @return the value of the {@code tapPoint} field. */
     @NativeType("CGEventTapLocation")
     public int tapPoint() { return ntapPoint(address()); }
-    /** listener, filter */
+    /** @return the value of the {@code options} field. */
     @NativeType("CGEventTapOptions")
     public int options() { return noptions(address()); }
-    /** mask of events being tapped */
+    /** @return the value of the {@code eventsOfInterest} field. */
     @NativeType("CGEventMask")
     public long eventsOfInterest() { return neventsOfInterest(address()); }
-    /** process that is tapping events */
+    /** @return the value of the {@code tappingProcess} field. */
     @NativeType("pid_t")
     public long tappingProcess() { return ntappingProcess(address()); }
-    /** zero if not a per-process tap */
+    /** @return the value of the {@code processBeingTapped} field. */
     @NativeType("pid_t")
     public long processBeingTapped() { return nprocessBeingTapped(address()); }
-    /** true if tap is enabled */
+    /** @return the value of the {@code enabled} field. */
     @NativeType("bool")
     public boolean enabled() { return nenabled(address()); }
-    /** minimum latency in microseconds */
+    /** @return the value of the {@code minUsecLatency} field. */
     public float minUsecLatency() { return nminUsecLatency(address()); }
-    /** average latency in microseconds */
+    /** @return the value of the {@code avgUsecLatency} field. */
     public float avgUsecLatency() { return navgUsecLatency(address()); }
-    /** maximum latency in microseconds */
+    /** @return the value of the {@code maxUsecLatency} field. */
     public float maxUsecLatency() { return nmaxUsecLatency(address()); }
 
     // -----------------------------------
@@ -331,29 +327,29 @@ public class CGEventTapInformation extends Struct<CGEventTapInformation> impleme
         /** @return the value of the {@code eventTapID} field. */
         @NativeType("uint32_t")
         public int eventTapID() { return CGEventTapInformation.neventTapID(address()); }
-        /** @return the value of the {@link CGEventTapInformation#tapPoint} field. */
+        /** @return the value of the {@code tapPoint} field. */
         @NativeType("CGEventTapLocation")
         public int tapPoint() { return CGEventTapInformation.ntapPoint(address()); }
-        /** @return the value of the {@link CGEventTapInformation#options} field. */
+        /** @return the value of the {@code options} field. */
         @NativeType("CGEventTapOptions")
         public int options() { return CGEventTapInformation.noptions(address()); }
-        /** @return the value of the {@link CGEventTapInformation#eventsOfInterest} field. */
+        /** @return the value of the {@code eventsOfInterest} field. */
         @NativeType("CGEventMask")
         public long eventsOfInterest() { return CGEventTapInformation.neventsOfInterest(address()); }
-        /** @return the value of the {@link CGEventTapInformation#tappingProcess} field. */
+        /** @return the value of the {@code tappingProcess} field. */
         @NativeType("pid_t")
         public long tappingProcess() { return CGEventTapInformation.ntappingProcess(address()); }
-        /** @return the value of the {@link CGEventTapInformation#processBeingTapped} field. */
+        /** @return the value of the {@code processBeingTapped} field. */
         @NativeType("pid_t")
         public long processBeingTapped() { return CGEventTapInformation.nprocessBeingTapped(address()); }
-        /** @return the value of the {@link CGEventTapInformation#enabled} field. */
+        /** @return the value of the {@code enabled} field. */
         @NativeType("bool")
         public boolean enabled() { return CGEventTapInformation.nenabled(address()); }
-        /** @return the value of the {@link CGEventTapInformation#minUsecLatency} field. */
+        /** @return the value of the {@code minUsecLatency} field. */
         public float minUsecLatency() { return CGEventTapInformation.nminUsecLatency(address()); }
-        /** @return the value of the {@link CGEventTapInformation#avgUsecLatency} field. */
+        /** @return the value of the {@code avgUsecLatency} field. */
         public float avgUsecLatency() { return CGEventTapInformation.navgUsecLatency(address()); }
-        /** @return the value of the {@link CGEventTapInformation#maxUsecLatency} field. */
+        /** @return the value of the {@code maxUsecLatency} field. */
         public float maxUsecLatency() { return CGEventTapInformation.nmaxUsecLatency(address()); }
 
     }

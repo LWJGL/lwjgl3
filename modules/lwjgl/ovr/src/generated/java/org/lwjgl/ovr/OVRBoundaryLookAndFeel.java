@@ -16,14 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Boundary system look and feel.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrBoundaryLookAndFeel {
- *     {@link OVRColorf ovrColorf} {@link #Color};
- * }</code></pre>
+ *     {@link OVRColorf ovrColorf} Color;
+ * }}</pre>
  */
 @NativeType("struct ovrBoundaryLookAndFeel")
 public class OVRBoundaryLookAndFeel extends Struct<OVRBoundaryLookAndFeel> implements NativeResource {
@@ -71,13 +67,13 @@ public class OVRBoundaryLookAndFeel extends Struct<OVRBoundaryLookAndFeel> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Boundary color (alpha channel is ignored) */
+    /** @return a {@link OVRColorf} view of the {@code Color} field. */
     @NativeType("ovrColorf")
     public OVRColorf Color() { return nColor(address()); }
 
-    /** Copies the specified {@link OVRColorf} to the {@link #Color} field. */
+    /** Copies the specified {@link OVRColorf} to the {@code Color} field. */
     public OVRBoundaryLookAndFeel Color(@NativeType("ovrColorf") OVRColorf value) { nColor(address(), value); return this; }
-    /** Passes the {@link #Color} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code Color} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRBoundaryLookAndFeel Color(java.util.function.Consumer<OVRColorf> consumer) { consumer.accept(Color()); return this; }
 
     /**
@@ -271,13 +267,13 @@ public class OVRBoundaryLookAndFeel extends Struct<OVRBoundaryLookAndFeel> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link OVRColorf} view of the {@link OVRBoundaryLookAndFeel#Color} field. */
+        /** @return a {@link OVRColorf} view of the {@code Color} field. */
         @NativeType("ovrColorf")
         public OVRColorf Color() { return OVRBoundaryLookAndFeel.nColor(address()); }
 
-        /** Copies the specified {@link OVRColorf} to the {@link OVRBoundaryLookAndFeel#Color} field. */
+        /** Copies the specified {@link OVRColorf} to the {@code Color} field. */
         public OVRBoundaryLookAndFeel.Buffer Color(@NativeType("ovrColorf") OVRColorf value) { OVRBoundaryLookAndFeel.nColor(address(), value); return this; }
-        /** Passes the {@link OVRBoundaryLookAndFeel#Color} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code Color} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRBoundaryLookAndFeel.Buffer Color(java.util.function.Consumer<OVRColorf> consumer) { consumer.accept(Color()); return this; }
 
     }

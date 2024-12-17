@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Extended parameters of a {@code VmaAllocation} object that can be retrieved using function {@link Vma#vmaGetAllocationInfo2 GetAllocationInfo2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaAllocationInfo2 {
- *     {@link VmaAllocationInfo VmaAllocationInfo} {@link #allocationInfo};
- *     VkDeviceSize {@link #blockSize};
- *     VkBool32 {@link #dedicatedMemory};
- * }</code></pre>
+ *     {@link VmaAllocationInfo VmaAllocationInfo} allocationInfo;
+ *     VkDeviceSize blockSize;
+ *     VkBool32 dedicatedMemory;
+ * }}</pre>
  */
 public class VmaAllocationInfo2 extends Struct<VmaAllocationInfo2> implements NativeResource {
 
@@ -78,25 +74,12 @@ public class VmaAllocationInfo2 extends Struct<VmaAllocationInfo2> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * Basic parameters of the allocation.
-     * 
-     * <p>If you need only these, you can use function {@link Vma#vmaGetAllocationInfo GetAllocationInfo} and structure {@code VmaAllocationInfo} instead.</p>
-     */
+    /** @return a {@link VmaAllocationInfo} view of the {@code allocationInfo} field. */
     public VmaAllocationInfo allocationInfo() { return nallocationInfo(address()); }
-    /**
-     * Size of the {@code VkDeviceMemory} block that the allocation belongs to.
-     * 
-     * <p>In case of an allocation with dedicated memory, it will be equal to {@code allocationInfo.size}.</p>
-     */
+    /** @return the value of the {@code blockSize} field. */
     @NativeType("VkDeviceSize")
     public long blockSize() { return nblockSize(address()); }
-    /**
-     * {@code VK_TRUE} if the allocation has dedicated memory, {@code VK_FALSE} if it was placed as part of a larger memory block.
-     * 
-     * <p>When {@code VK_TRUE}, it also means {@code VkMemoryDedicatedAllocateInfo} was used when creating the allocation (if {@code VK_KHR_dedicated_allocation}
-     * extension or Vulkan version &ge; 1.1 is enabled).</p>
-     */
+    /** @return the value of the {@code dedicatedMemory} field. */
     @NativeType("VkBool32")
     public boolean dedicatedMemory() { return ndedicatedMemory(address()) != 0; }
 
@@ -261,12 +244,12 @@ public class VmaAllocationInfo2 extends Struct<VmaAllocationInfo2> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VmaAllocationInfo} view of the {@link VmaAllocationInfo2#allocationInfo} field. */
+        /** @return a {@link VmaAllocationInfo} view of the {@code allocationInfo} field. */
         public VmaAllocationInfo allocationInfo() { return VmaAllocationInfo2.nallocationInfo(address()); }
-        /** @return the value of the {@link VmaAllocationInfo2#blockSize} field. */
+        /** @return the value of the {@code blockSize} field. */
         @NativeType("VkDeviceSize")
         public long blockSize() { return VmaAllocationInfo2.nblockSize(address()); }
-        /** @return the value of the {@link VmaAllocationInfo2#dedicatedMemory} field. */
+        /** @return the value of the {@code dedicatedMemory} field. */
         @NativeType("VkBool32")
         public boolean dedicatedMemory() { return VmaAllocationInfo2.ndedicatedMemory(address()) != 0; }
 

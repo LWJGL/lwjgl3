@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_ADVANCEDSETTINGS {
  *     int cbSize;
  *     int maxMPEGCodecs;
@@ -43,7 +41,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int randomSeed;
  *     int maxConvolutionThreads;
  *     int maxSpatialObjects;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_ADVANCEDSETTINGS extends Struct<FMOD_ADVANCEDSETTINGS> implements NativeResource {
 

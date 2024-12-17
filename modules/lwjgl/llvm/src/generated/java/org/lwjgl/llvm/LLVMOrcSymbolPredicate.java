@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMOrc#LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess OrcCreateDynamicLibrarySearchGeneratorForProcess} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMOrcSymbolStringPoolEntryRef Sym
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcSymbolPredicate} */
 public abstract class LLVMOrcSymbolPredicate extends Callback implements LLVMOrcSymbolPredicateI {
 
     /**

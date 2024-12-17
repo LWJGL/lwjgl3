@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     FT_Module module
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Module_Constructor} */
 @FunctionalInterface
 @NativeType("FT_Module_Constructor")
 public interface FT_Module_ConstructorI extends CallbackI {
@@ -41,7 +34,7 @@ public interface FT_Module_ConstructorI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** A function used to initialize (not create) a new module object. */
+    /** {@code FT_Error (* FT_Module_Constructor) (FT_Module module)} */
     @NativeType("FT_Error") int invoke(@NativeType("FT_Module") long module);
 
 }

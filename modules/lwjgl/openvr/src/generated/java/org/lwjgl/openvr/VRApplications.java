@@ -16,7 +16,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Application management. */
 public class VRApplications {
 
     protected VRApplications() {
@@ -25,7 +24,7 @@ public class VRApplications {
 
     // --- [ VRApplications_AddApplicationManifest ] ---
 
-    /** Unsafe version of: {@link #VRApplications_AddApplicationManifest AddApplicationManifest} */
+    /** {@code EVRApplicationError VRApplications_AddApplicationManifest(char const * pchApplicationManifestFullPath, bool bTemporary)} */
     public static int nVRApplications_AddApplicationManifest(long pchApplicationManifestFullPath, boolean bTemporary) {
         long __functionAddress = OpenVR.VRApplications.AddApplicationManifest;
         if (CHECKS) {
@@ -34,11 +33,7 @@ public class VRApplications {
         return callPI(pchApplicationManifestFullPath, bTemporary, __functionAddress);
     }
 
-    /**
-     * Adds an application manifest to the list to load when building the list of installed applications.
-     * 
-     * <p>Temporary manifests are not automatically loaded.</p>
-     */
+    /** {@code EVRApplicationError VRApplications_AddApplicationManifest(char const * pchApplicationManifestFullPath, bool bTemporary)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_AddApplicationManifest(@NativeType("char const *") ByteBuffer pchApplicationManifestFullPath, @NativeType("bool") boolean bTemporary) {
         if (CHECKS) {
@@ -47,11 +42,7 @@ public class VRApplications {
         return nVRApplications_AddApplicationManifest(memAddress(pchApplicationManifestFullPath), bTemporary);
     }
 
-    /**
-     * Adds an application manifest to the list to load when building the list of installed applications.
-     * 
-     * <p>Temporary manifests are not automatically loaded.</p>
-     */
+    /** {@code EVRApplicationError VRApplications_AddApplicationManifest(char const * pchApplicationManifestFullPath, bool bTemporary)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_AddApplicationManifest(@NativeType("char const *") CharSequence pchApplicationManifestFullPath, @NativeType("bool") boolean bTemporary) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -66,7 +57,7 @@ public class VRApplications {
 
     // --- [ VRApplications_RemoveApplicationManifest ] ---
 
-    /** Unsafe version of: {@link #VRApplications_RemoveApplicationManifest RemoveApplicationManifest} */
+    /** {@code EVRApplicationError VRApplications_RemoveApplicationManifest(char const * pchApplicationManifestFullPath)} */
     public static int nVRApplications_RemoveApplicationManifest(long pchApplicationManifestFullPath) {
         long __functionAddress = OpenVR.VRApplications.RemoveApplicationManifest;
         if (CHECKS) {
@@ -75,7 +66,7 @@ public class VRApplications {
         return callPI(pchApplicationManifestFullPath, __functionAddress);
     }
 
-    /** Removes an application manifest from the list to load when building the list of installed applications. */
+    /** {@code EVRApplicationError VRApplications_RemoveApplicationManifest(char const * pchApplicationManifestFullPath)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_RemoveApplicationManifest(@NativeType("char const *") ByteBuffer pchApplicationManifestFullPath) {
         if (CHECKS) {
@@ -84,7 +75,7 @@ public class VRApplications {
         return nVRApplications_RemoveApplicationManifest(memAddress(pchApplicationManifestFullPath));
     }
 
-    /** Removes an application manifest from the list to load when building the list of installed applications. */
+    /** {@code EVRApplicationError VRApplications_RemoveApplicationManifest(char const * pchApplicationManifestFullPath)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_RemoveApplicationManifest(@NativeType("char const *") CharSequence pchApplicationManifestFullPath) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -99,7 +90,7 @@ public class VRApplications {
 
     // --- [ VRApplications_IsApplicationInstalled ] ---
 
-    /** Unsafe version of: {@link #VRApplications_IsApplicationInstalled IsApplicationInstalled} */
+    /** {@code bool VRApplications_IsApplicationInstalled(char const * pchAppKey)} */
     public static boolean nVRApplications_IsApplicationInstalled(long pchAppKey) {
         long __functionAddress = OpenVR.VRApplications.IsApplicationInstalled;
         if (CHECKS) {
@@ -108,7 +99,7 @@ public class VRApplications {
         return callPZ(pchAppKey, __functionAddress);
     }
 
-    /** Returns true if an application is installed. */
+    /** {@code bool VRApplications_IsApplicationInstalled(char const * pchAppKey)} */
     @NativeType("bool")
     public static boolean VRApplications_IsApplicationInstalled(@NativeType("char const *") ByteBuffer pchAppKey) {
         if (CHECKS) {
@@ -117,7 +108,7 @@ public class VRApplications {
         return nVRApplications_IsApplicationInstalled(memAddress(pchAppKey));
     }
 
-    /** Returns true if an application is installed. */
+    /** {@code bool VRApplications_IsApplicationInstalled(char const * pchAppKey)} */
     @NativeType("bool")
     public static boolean VRApplications_IsApplicationInstalled(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -132,7 +123,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationCount ] ---
 
-    /** Returns the number of applications available in the list. */
+    /** {@code uint32_t VRApplications_GetApplicationCount(void)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetApplicationCount() {
         long __functionAddress = OpenVR.VRApplications.GetApplicationCount;
@@ -144,7 +135,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationKeyByIndex ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationKeyByIndex GetApplicationKeyByIndex} */
+    /** {@code EVRApplicationError VRApplications_GetApplicationKeyByIndex(uint32_t unApplicationIndex, char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     public static int nVRApplications_GetApplicationKeyByIndex(int unApplicationIndex, long pchAppKeyBuffer, int unAppKeyBufferLen) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationKeyByIndex;
         if (CHECKS) {
@@ -153,10 +144,7 @@ public class VRApplications {
         return callPI(unApplicationIndex, pchAppKeyBuffer, unAppKeyBufferLen, __functionAddress);
     }
 
-    /**
-     * Returns the key of the specified application. The index is at least 0 and is less than the return value of {@link #VRApplications_GetApplicationCount GetApplicationCount}. The buffer should be
-     * at least {@link VR#k_unMaxApplicationKeyLength} in order to fit the key.
-     */
+    /** {@code EVRApplicationError VRApplications_GetApplicationKeyByIndex(uint32_t unApplicationIndex, char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_GetApplicationKeyByIndex(@NativeType("uint32_t") int unApplicationIndex, @NativeType("char *") @Nullable ByteBuffer pchAppKeyBuffer) {
         return nVRApplications_GetApplicationKeyByIndex(unApplicationIndex, memAddressSafe(pchAppKeyBuffer), remainingSafe(pchAppKeyBuffer));
@@ -164,7 +152,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationKeyByProcessId ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationKeyByProcessId GetApplicationKeyByProcessId} */
+    /** {@code EVRApplicationError VRApplications_GetApplicationKeyByProcessId(uint32_t unProcessId, char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     public static int nVRApplications_GetApplicationKeyByProcessId(int unProcessId, long pchAppKeyBuffer, int unAppKeyBufferLen) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationKeyByProcessId;
         if (CHECKS) {
@@ -173,7 +161,7 @@ public class VRApplications {
         return callPI(unProcessId, pchAppKeyBuffer, unAppKeyBufferLen, __functionAddress);
     }
 
-    /** Returns the key of the application for the specified Process Id. The buffer should be at least {@link VR#k_unMaxApplicationKeyLength} in order to fit the key. */
+    /** {@code EVRApplicationError VRApplications_GetApplicationKeyByProcessId(uint32_t unProcessId, char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_GetApplicationKeyByProcessId(@NativeType("uint32_t") int unProcessId, @NativeType("char *") @Nullable ByteBuffer pchAppKeyBuffer) {
         return nVRApplications_GetApplicationKeyByProcessId(unProcessId, memAddressSafe(pchAppKeyBuffer), remainingSafe(pchAppKeyBuffer));
@@ -181,7 +169,7 @@ public class VRApplications {
 
     // --- [ VRApplications_LaunchApplication ] ---
 
-    /** Unsafe version of: {@link #VRApplications_LaunchApplication LaunchApplication} */
+    /** {@code EVRApplicationError VRApplications_LaunchApplication(char const * pchAppKey)} */
     public static int nVRApplications_LaunchApplication(long pchAppKey) {
         long __functionAddress = OpenVR.VRApplications.LaunchApplication;
         if (CHECKS) {
@@ -190,11 +178,7 @@ public class VRApplications {
         return callPI(pchAppKey, __functionAddress);
     }
 
-    /**
-     * Launches the application. The existing scene application will exit and then the new application will start.
-     * 
-     * <p>This call is not valid for dashboard overlay applications.</p>
-     */
+    /** {@code EVRApplicationError VRApplications_LaunchApplication(char const * pchAppKey)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchApplication(@NativeType("char const *") ByteBuffer pchAppKey) {
         if (CHECKS) {
@@ -203,11 +187,7 @@ public class VRApplications {
         return nVRApplications_LaunchApplication(memAddress(pchAppKey));
     }
 
-    /**
-     * Launches the application. The existing scene application will exit and then the new application will start.
-     * 
-     * <p>This call is not valid for dashboard overlay applications.</p>
-     */
+    /** {@code EVRApplicationError VRApplications_LaunchApplication(char const * pchAppKey)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchApplication(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -222,7 +202,7 @@ public class VRApplications {
 
     // --- [ VRApplications_LaunchTemplateApplication ] ---
 
-    /** Unsafe version of: {@link #VRApplications_LaunchTemplateApplication LaunchTemplateApplication} */
+    /** {@code EVRApplicationError VRApplications_LaunchTemplateApplication(char const * pchTemplateAppKey, char const * pchNewAppKey, AppOverrideKeys_t const * pKeys, uint32_t unKeys)} */
     public static int nVRApplications_LaunchTemplateApplication(long pchTemplateAppKey, long pchNewAppKey, long pKeys, int unKeys) {
         long __functionAddress = OpenVR.VRApplications.LaunchTemplateApplication;
         if (CHECKS) {
@@ -232,10 +212,7 @@ public class VRApplications {
         return callPPPI(pchTemplateAppKey, pchNewAppKey, pKeys, unKeys, __functionAddress);
     }
 
-    /**
-     * Launches an instance of an application of type template, with its app key being {@code pchNewAppKey} (which must be unique) and optionally override
-     * sections from the manifest file via {@link AppOverrideKeys}.
-     */
+    /** {@code EVRApplicationError VRApplications_LaunchTemplateApplication(char const * pchTemplateAppKey, char const * pchNewAppKey, AppOverrideKeys_t const * pKeys, uint32_t unKeys)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchTemplateApplication(@NativeType("char const *") ByteBuffer pchTemplateAppKey, @NativeType("char const *") ByteBuffer pchNewAppKey, @NativeType("AppOverrideKeys_t const *") AppOverrideKeys.Buffer pKeys) {
         if (CHECKS) {
@@ -245,10 +222,7 @@ public class VRApplications {
         return nVRApplications_LaunchTemplateApplication(memAddress(pchTemplateAppKey), memAddress(pchNewAppKey), pKeys.address(), pKeys.remaining());
     }
 
-    /**
-     * Launches an instance of an application of type template, with its app key being {@code pchNewAppKey} (which must be unique) and optionally override
-     * sections from the manifest file via {@link AppOverrideKeys}.
-     */
+    /** {@code EVRApplicationError VRApplications_LaunchTemplateApplication(char const * pchTemplateAppKey, char const * pchNewAppKey, AppOverrideKeys_t const * pKeys, uint32_t unKeys)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchTemplateApplication(@NativeType("char const *") CharSequence pchTemplateAppKey, @NativeType("char const *") CharSequence pchNewAppKey, @NativeType("AppOverrideKeys_t const *") AppOverrideKeys.Buffer pKeys) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -265,7 +239,7 @@ public class VRApplications {
 
     // --- [ VRApplications_LaunchApplicationFromMimeType ] ---
 
-    /** Unsafe version of: {@link #VRApplications_LaunchApplicationFromMimeType LaunchApplicationFromMimeType} */
+    /** {@code EVRApplicationError VRApplications_LaunchApplicationFromMimeType(char const * pchMimeType, char const * pchArgs)} */
     public static int nVRApplications_LaunchApplicationFromMimeType(long pchMimeType, long pchArgs) {
         long __functionAddress = OpenVR.VRApplications.LaunchApplicationFromMimeType;
         if (CHECKS) {
@@ -274,10 +248,7 @@ public class VRApplications {
         return callPPI(pchMimeType, pchArgs, __functionAddress);
     }
 
-    /**
-     * Launches the application currently associated with this mime type and passes it the option args, typically the filename or object name of the item
-     * being launched.
-     */
+    /** {@code EVRApplicationError VRApplications_LaunchApplicationFromMimeType(char const * pchMimeType, char const * pchArgs)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchApplicationFromMimeType(@NativeType("char const *") ByteBuffer pchMimeType, @NativeType("char const *") ByteBuffer pchArgs) {
         if (CHECKS) {
@@ -287,10 +258,7 @@ public class VRApplications {
         return nVRApplications_LaunchApplicationFromMimeType(memAddress(pchMimeType), memAddress(pchArgs));
     }
 
-    /**
-     * Launches the application currently associated with this mime type and passes it the option args, typically the filename or object name of the item
-     * being launched.
-     */
+    /** {@code EVRApplicationError VRApplications_LaunchApplicationFromMimeType(char const * pchMimeType, char const * pchArgs)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchApplicationFromMimeType(@NativeType("char const *") CharSequence pchMimeType, @NativeType("char const *") CharSequence pchArgs) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -307,7 +275,7 @@ public class VRApplications {
 
     // --- [ VRApplications_LaunchDashboardOverlay ] ---
 
-    /** Unsafe version of: {@link #VRApplications_LaunchDashboardOverlay LaunchDashboardOverlay} */
+    /** {@code EVRApplicationError VRApplications_LaunchDashboardOverlay(char const * pchAppKey)} */
     public static int nVRApplications_LaunchDashboardOverlay(long pchAppKey) {
         long __functionAddress = OpenVR.VRApplications.LaunchDashboardOverlay;
         if (CHECKS) {
@@ -316,7 +284,7 @@ public class VRApplications {
         return callPI(pchAppKey, __functionAddress);
     }
 
-    /** Launches the dashboard overlay application if it is not already running. This call is only valid for dashboard overlay applications. */
+    /** {@code EVRApplicationError VRApplications_LaunchDashboardOverlay(char const * pchAppKey)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchDashboardOverlay(@NativeType("char const *") ByteBuffer pchAppKey) {
         if (CHECKS) {
@@ -325,7 +293,7 @@ public class VRApplications {
         return nVRApplications_LaunchDashboardOverlay(memAddress(pchAppKey));
     }
 
-    /** Launches the dashboard overlay application if it is not already running. This call is only valid for dashboard overlay applications. */
+    /** {@code EVRApplicationError VRApplications_LaunchDashboardOverlay(char const * pchAppKey)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchDashboardOverlay(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -340,7 +308,7 @@ public class VRApplications {
 
     // --- [ VRApplications_CancelApplicationLaunch ] ---
 
-    /** Unsafe version of: {@link #VRApplications_CancelApplicationLaunch CancelApplicationLaunch} */
+    /** {@code bool VRApplications_CancelApplicationLaunch(char const * pchAppKey)} */
     public static boolean nVRApplications_CancelApplicationLaunch(long pchAppKey) {
         long __functionAddress = OpenVR.VRApplications.CancelApplicationLaunch;
         if (CHECKS) {
@@ -349,7 +317,7 @@ public class VRApplications {
         return callPZ(pchAppKey, __functionAddress);
     }
 
-    /** Cancel a pending launch for an application. */
+    /** {@code bool VRApplications_CancelApplicationLaunch(char const * pchAppKey)} */
     @NativeType("bool")
     public static boolean VRApplications_CancelApplicationLaunch(@NativeType("char const *") ByteBuffer pchAppKey) {
         if (CHECKS) {
@@ -358,7 +326,7 @@ public class VRApplications {
         return nVRApplications_CancelApplicationLaunch(memAddress(pchAppKey));
     }
 
-    /** Cancel a pending launch for an application. */
+    /** {@code bool VRApplications_CancelApplicationLaunch(char const * pchAppKey)} */
     @NativeType("bool")
     public static boolean VRApplications_CancelApplicationLaunch(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -373,7 +341,7 @@ public class VRApplications {
 
     // --- [ VRApplications_IdentifyApplication ] ---
 
-    /** Unsafe version of: {@link #VRApplications_IdentifyApplication IdentifyApplication} */
+    /** {@code EVRApplicationError VRApplications_IdentifyApplication(uint32_t unProcessId, char const * pchAppKey)} */
     public static int nVRApplications_IdentifyApplication(int unProcessId, long pchAppKey) {
         long __functionAddress = OpenVR.VRApplications.IdentifyApplication;
         if (CHECKS) {
@@ -382,11 +350,7 @@ public class VRApplications {
         return callPI(unProcessId, pchAppKey, __functionAddress);
     }
 
-    /**
-     * Identifies a running application. OpenVR can't always tell which process started in response to a URL. This function allows a URL handler (or the
-     * process itself) to identify the app key for the now running application. Passing a process ID of 0 identifies the calling process. The application must
-     * be one that's known to the system via a call to {@link #VRApplications_AddApplicationManifest AddApplicationManifest}.
-     */
+    /** {@code EVRApplicationError VRApplications_IdentifyApplication(uint32_t unProcessId, char const * pchAppKey)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_IdentifyApplication(@NativeType("uint32_t") int unProcessId, @NativeType("char const *") ByteBuffer pchAppKey) {
         if (CHECKS) {
@@ -395,11 +359,7 @@ public class VRApplications {
         return nVRApplications_IdentifyApplication(unProcessId, memAddress(pchAppKey));
     }
 
-    /**
-     * Identifies a running application. OpenVR can't always tell which process started in response to a URL. This function allows a URL handler (or the
-     * process itself) to identify the app key for the now running application. Passing a process ID of 0 identifies the calling process. The application must
-     * be one that's known to the system via a call to {@link #VRApplications_AddApplicationManifest AddApplicationManifest}.
-     */
+    /** {@code EVRApplicationError VRApplications_IdentifyApplication(uint32_t unProcessId, char const * pchAppKey)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_IdentifyApplication(@NativeType("uint32_t") int unProcessId, @NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -414,7 +374,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationProcessId ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationProcessId GetApplicationProcessId} */
+    /** {@code uint32_t VRApplications_GetApplicationProcessId(char const * pchAppKey)} */
     public static int nVRApplications_GetApplicationProcessId(long pchAppKey) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationProcessId;
         if (CHECKS) {
@@ -423,7 +383,7 @@ public class VRApplications {
         return callPI(pchAppKey, __functionAddress);
     }
 
-    /** Returns the process ID for an application. Return 0 if the application was not found or is not running. */
+    /** {@code uint32_t VRApplications_GetApplicationProcessId(char const * pchAppKey)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetApplicationProcessId(@NativeType("char const *") ByteBuffer pchAppKey) {
         if (CHECKS) {
@@ -432,7 +392,7 @@ public class VRApplications {
         return nVRApplications_GetApplicationProcessId(memAddress(pchAppKey));
     }
 
-    /** Returns the process ID for an application. Return 0 if the application was not found or is not running. */
+    /** {@code uint32_t VRApplications_GetApplicationProcessId(char const * pchAppKey)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetApplicationProcessId(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -447,7 +407,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationsErrorNameFromEnum ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationsErrorNameFromEnum GetApplicationsErrorNameFromEnum} */
+    /** {@code char const * VRApplications_GetApplicationsErrorNameFromEnum(EVRApplicationError error)} */
     public static long nVRApplications_GetApplicationsErrorNameFromEnum(int error) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationsErrorNameFromEnum;
         if (CHECKS) {
@@ -456,11 +416,7 @@ public class VRApplications {
         return callP(error, __functionAddress);
     }
 
-    /**
-     * Returns a string for an applications error.
-     *
-     * @param error one of:<br><table><tr><td>{@link VR#EVRApplicationError_VRApplicationError_None}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_AppKeyAlreadyExists}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_NoManifest}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_NoApplication}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_InvalidIndex}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_UnknownApplication}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_IPCFailed}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_ApplicationAlreadyRunning}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_InvalidManifest}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_InvalidApplication}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_LaunchFailed}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_ApplicationAlreadyStarting}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_LaunchInProgress}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_OldApplicationQuitting}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_TransitionAborted}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_IsTemplate}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_SteamVRIsExiting}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_BufferTooSmall}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_PropertyNotSet}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_UnknownProperty}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_InvalidParameter}</td></tr><tr><td>{@link VR#EVRApplicationError_VRApplicationError_NotImplemented}</td></tr></table>
-     */
+    /** {@code char const * VRApplications_GetApplicationsErrorNameFromEnum(EVRApplicationError error)} */
     @NativeType("char const *")
     public static @Nullable String VRApplications_GetApplicationsErrorNameFromEnum(@NativeType("EVRApplicationError") int error) {
         long __result = nVRApplications_GetApplicationsErrorNameFromEnum(error);
@@ -469,7 +425,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationPropertyString ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationPropertyString GetApplicationPropertyString} */
+    /** {@code uint32_t VRApplications_GetApplicationPropertyString(char const * pchAppKey, EVRApplicationProperty eProperty, char * pchPropertyValueBuffer, uint32_t unPropertyValueBufferLen, EVRApplicationError * peError)} */
     public static int nVRApplications_GetApplicationPropertyString(long pchAppKey, int eProperty, long pchPropertyValueBuffer, int unPropertyValueBufferLen, long peError) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationPropertyString;
         if (CHECKS) {
@@ -478,11 +434,7 @@ public class VRApplications {
         return callPPPI(pchAppKey, eProperty, pchPropertyValueBuffer, unPropertyValueBufferLen, peError, __functionAddress);
     }
 
-    /**
-     * Returns a value for an application property. The required buffer size to fit this value will be returned.
-     *
-     * @param eProperty one of:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Name_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_LaunchType_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_WorkingDirectory_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_BinaryPath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Arguments_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_URL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Description_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_NewsURL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ImagePath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Source_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ActionManifestURL_String}</td></tr></table>
-     */
+    /** {@code uint32_t VRApplications_GetApplicationPropertyString(char const * pchAppKey, EVRApplicationProperty eProperty, char * pchPropertyValueBuffer, uint32_t unPropertyValueBufferLen, EVRApplicationError * peError)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetApplicationPropertyString(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("char *") @Nullable ByteBuffer pchPropertyValueBuffer, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
@@ -492,11 +444,7 @@ public class VRApplications {
         return nVRApplications_GetApplicationPropertyString(memAddress(pchAppKey), eProperty, memAddressSafe(pchPropertyValueBuffer), remainingSafe(pchPropertyValueBuffer), memAddress(peError));
     }
 
-    /**
-     * Returns a value for an application property. The required buffer size to fit this value will be returned.
-     *
-     * @param eProperty one of:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Name_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_LaunchType_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_WorkingDirectory_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_BinaryPath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Arguments_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_URL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Description_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_NewsURL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ImagePath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Source_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ActionManifestURL_String}</td></tr></table>
-     */
+    /** {@code uint32_t VRApplications_GetApplicationPropertyString(char const * pchAppKey, EVRApplicationProperty eProperty, char * pchPropertyValueBuffer, uint32_t unPropertyValueBufferLen, EVRApplicationError * peError)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetApplicationPropertyString(@NativeType("char const *") CharSequence pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("char *") @Nullable ByteBuffer pchPropertyValueBuffer, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
@@ -512,11 +460,7 @@ public class VRApplications {
         }
     }
 
-    /**
-     * Returns a value for an application property. The required buffer size to fit this value will be returned.
-     *
-     * @param eProperty one of:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Name_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_LaunchType_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_WorkingDirectory_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_BinaryPath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Arguments_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_URL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Description_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_NewsURL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ImagePath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Source_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ActionManifestURL_String}</td></tr></table>
-     */
+    /** {@code uint32_t VRApplications_GetApplicationPropertyString(char const * pchAppKey, EVRApplicationProperty eProperty, char * pchPropertyValueBuffer, uint32_t unPropertyValueBufferLen, EVRApplicationError * peError)} */
     @NativeType("uint32_t")
     public static String VRApplications_GetApplicationPropertyString(@NativeType("char const *") CharSequence pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("uint32_t") int unPropertyValueBufferLen, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
@@ -534,11 +478,7 @@ public class VRApplications {
         }
     }
 
-    /**
-     * Returns a value for an application property. The required buffer size to fit this value will be returned.
-     *
-     * @param eProperty one of:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Name_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_LaunchType_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_WorkingDirectory_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_BinaryPath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Arguments_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_URL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Description_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_NewsURL_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ImagePath_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_Source_String}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_ActionManifestURL_String}</td></tr></table>
-     */
+    /** {@code uint32_t VRApplications_GetApplicationPropertyString(char const * pchAppKey, EVRApplicationProperty eProperty, char * pchPropertyValueBuffer, uint32_t unPropertyValueBufferLen, EVRApplicationError * peError)} */
     @NativeType("uint32_t")
     public static String VRApplications_GetApplicationPropertyString(@NativeType("char const *") CharSequence pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("EVRApplicationError *") IntBuffer peError) {
         return VRApplications_GetApplicationPropertyString(pchAppKey, eProperty, VR.k_unMaxPropertyStringSize, peError);
@@ -546,7 +486,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationPropertyBool ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationPropertyBool GetApplicationPropertyBool} */
+    /** {@code bool VRApplications_GetApplicationPropertyBool(char const * pchAppKey, EVRApplicationProperty eProperty, EVRApplicationError * peError)} */
     public static boolean nVRApplications_GetApplicationPropertyBool(long pchAppKey, int eProperty, long peError) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationPropertyBool;
         if (CHECKS) {
@@ -555,11 +495,7 @@ public class VRApplications {
         return callPPZ(pchAppKey, eProperty, peError, __functionAddress);
     }
 
-    /**
-     * Returns a bool value for an application property. Returns false in all error cases.
-     *
-     * @param eProperty one of:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsDashboardOverlay_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsTemplate_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsInstanced_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsInternal_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_WantsCompositorPauseInStandby_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsHidden_Bool}</td></tr></table>
-     */
+    /** {@code bool VRApplications_GetApplicationPropertyBool(char const * pchAppKey, EVRApplicationProperty eProperty, EVRApplicationError * peError)} */
     @NativeType("bool")
     public static boolean VRApplications_GetApplicationPropertyBool(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
@@ -569,11 +505,7 @@ public class VRApplications {
         return nVRApplications_GetApplicationPropertyBool(memAddress(pchAppKey), eProperty, memAddress(peError));
     }
 
-    /**
-     * Returns a bool value for an application property. Returns false in all error cases.
-     *
-     * @param eProperty one of:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsDashboardOverlay_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsTemplate_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsInstanced_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsInternal_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_WantsCompositorPauseInStandby_Bool}</td></tr><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_IsHidden_Bool}</td></tr></table>
-     */
+    /** {@code bool VRApplications_GetApplicationPropertyBool(char const * pchAppKey, EVRApplicationProperty eProperty, EVRApplicationError * peError)} */
     @NativeType("bool")
     public static boolean VRApplications_GetApplicationPropertyBool(@NativeType("char const *") CharSequence pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
@@ -591,7 +523,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationPropertyUint64 ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationPropertyUint64 GetApplicationPropertyUint64} */
+    /** {@code uint64_t VRApplications_GetApplicationPropertyUint64(char const * pchAppKey, EVRApplicationProperty eProperty, EVRApplicationError * peError)} */
     public static long nVRApplications_GetApplicationPropertyUint64(long pchAppKey, int eProperty, long peError) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationPropertyUint64;
         if (CHECKS) {
@@ -600,11 +532,7 @@ public class VRApplications {
         return callPPJ(pchAppKey, eProperty, peError, __functionAddress);
     }
 
-    /**
-     * Returns a uint64 value for an application property. Returns 0 in all error cases.
-     *
-     * @param eProperty must be:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_LastLaunchTime_Uint64}</td></tr></table>
-     */
+    /** {@code uint64_t VRApplications_GetApplicationPropertyUint64(char const * pchAppKey, EVRApplicationProperty eProperty, EVRApplicationError * peError)} */
     @NativeType("uint64_t")
     public static long VRApplications_GetApplicationPropertyUint64(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
@@ -614,11 +542,7 @@ public class VRApplications {
         return nVRApplications_GetApplicationPropertyUint64(memAddress(pchAppKey), eProperty, memAddress(peError));
     }
 
-    /**
-     * Returns a uint64 value for an application property. Returns 0 in all error cases.
-     *
-     * @param eProperty must be:<br><table><tr><td>{@link VR#EVRApplicationProperty_VRApplicationProperty_LastLaunchTime_Uint64}</td></tr></table>
-     */
+    /** {@code uint64_t VRApplications_GetApplicationPropertyUint64(char const * pchAppKey, EVRApplicationProperty eProperty, EVRApplicationError * peError)} */
     @NativeType("uint64_t")
     public static long VRApplications_GetApplicationPropertyUint64(@NativeType("char const *") CharSequence pchAppKey, @NativeType("EVRApplicationProperty") int eProperty, @NativeType("EVRApplicationError *") IntBuffer peError) {
         if (CHECKS) {
@@ -636,7 +560,7 @@ public class VRApplications {
 
     // --- [ VRApplications_SetApplicationAutoLaunch ] ---
 
-    /** Unsafe version of: {@link #VRApplications_SetApplicationAutoLaunch SetApplicationAutoLaunch} */
+    /** {@code EVRApplicationError VRApplications_SetApplicationAutoLaunch(char const * pchAppKey, bool bAutoLaunch)} */
     public static int nVRApplications_SetApplicationAutoLaunch(long pchAppKey, boolean bAutoLaunch) {
         long __functionAddress = OpenVR.VRApplications.SetApplicationAutoLaunch;
         if (CHECKS) {
@@ -645,10 +569,7 @@ public class VRApplications {
         return callPI(pchAppKey, bAutoLaunch, __functionAddress);
     }
 
-    /**
-     * Sets the application auto-launch flag. This is only valid for applications which return true for
-     * {@link VR#EVRApplicationProperty_VRApplicationProperty_IsDashboardOverlay_Bool}.
-     */
+    /** {@code EVRApplicationError VRApplications_SetApplicationAutoLaunch(char const * pchAppKey, bool bAutoLaunch)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_SetApplicationAutoLaunch(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("bool") boolean bAutoLaunch) {
         if (CHECKS) {
@@ -657,10 +578,7 @@ public class VRApplications {
         return nVRApplications_SetApplicationAutoLaunch(memAddress(pchAppKey), bAutoLaunch);
     }
 
-    /**
-     * Sets the application auto-launch flag. This is only valid for applications which return true for
-     * {@link VR#EVRApplicationProperty_VRApplicationProperty_IsDashboardOverlay_Bool}.
-     */
+    /** {@code EVRApplicationError VRApplications_SetApplicationAutoLaunch(char const * pchAppKey, bool bAutoLaunch)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_SetApplicationAutoLaunch(@NativeType("char const *") CharSequence pchAppKey, @NativeType("bool") boolean bAutoLaunch) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -675,7 +593,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationAutoLaunch ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationAutoLaunch GetApplicationAutoLaunch} */
+    /** {@code bool VRApplications_GetApplicationAutoLaunch(char const * pchAppKey)} */
     public static boolean nVRApplications_GetApplicationAutoLaunch(long pchAppKey) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationAutoLaunch;
         if (CHECKS) {
@@ -684,10 +602,7 @@ public class VRApplications {
         return callPZ(pchAppKey, __functionAddress);
     }
 
-    /**
-     * Gets the application auto-launch flag. This is only valid for applications which return true for
-     * {@link VR#EVRApplicationProperty_VRApplicationProperty_IsDashboardOverlay_Bool}.
-     */
+    /** {@code bool VRApplications_GetApplicationAutoLaunch(char const * pchAppKey)} */
     @NativeType("bool")
     public static boolean VRApplications_GetApplicationAutoLaunch(@NativeType("char const *") ByteBuffer pchAppKey) {
         if (CHECKS) {
@@ -696,10 +611,7 @@ public class VRApplications {
         return nVRApplications_GetApplicationAutoLaunch(memAddress(pchAppKey));
     }
 
-    /**
-     * Gets the application auto-launch flag. This is only valid for applications which return true for
-     * {@link VR#EVRApplicationProperty_VRApplicationProperty_IsDashboardOverlay_Bool}.
-     */
+    /** {@code bool VRApplications_GetApplicationAutoLaunch(char const * pchAppKey)} */
     @NativeType("bool")
     public static boolean VRApplications_GetApplicationAutoLaunch(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -714,7 +626,7 @@ public class VRApplications {
 
     // --- [ VRApplications_SetDefaultApplicationForMimeType ] ---
 
-    /** Unsafe version of: {@link #VRApplications_SetDefaultApplicationForMimeType SetDefaultApplicationForMimeType} */
+    /** {@code EVRApplicationError VRApplications_SetDefaultApplicationForMimeType(char const * pchAppKey, char const * pchMimeType)} */
     public static int nVRApplications_SetDefaultApplicationForMimeType(long pchAppKey, long pchMimeType) {
         long __functionAddress = OpenVR.VRApplications.SetDefaultApplicationForMimeType;
         if (CHECKS) {
@@ -723,7 +635,7 @@ public class VRApplications {
         return callPPI(pchAppKey, pchMimeType, __functionAddress);
     }
 
-    /** Adds this mime-type to the list of supported mime types for this application. */
+    /** {@code EVRApplicationError VRApplications_SetDefaultApplicationForMimeType(char const * pchAppKey, char const * pchMimeType)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_SetDefaultApplicationForMimeType(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("char const *") ByteBuffer pchMimeType) {
         if (CHECKS) {
@@ -733,7 +645,7 @@ public class VRApplications {
         return nVRApplications_SetDefaultApplicationForMimeType(memAddress(pchAppKey), memAddress(pchMimeType));
     }
 
-    /** Adds this mime-type to the list of supported mime types for this application. */
+    /** {@code EVRApplicationError VRApplications_SetDefaultApplicationForMimeType(char const * pchAppKey, char const * pchMimeType)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_SetDefaultApplicationForMimeType(@NativeType("char const *") CharSequence pchAppKey, @NativeType("char const *") CharSequence pchMimeType) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -750,7 +662,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetDefaultApplicationForMimeType ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetDefaultApplicationForMimeType GetDefaultApplicationForMimeType} */
+    /** {@code bool VRApplications_GetDefaultApplicationForMimeType(char const * pchMimeType, char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     public static boolean nVRApplications_GetDefaultApplicationForMimeType(long pchMimeType, long pchAppKeyBuffer, int unAppKeyBufferLen) {
         long __functionAddress = OpenVR.VRApplications.GetDefaultApplicationForMimeType;
         if (CHECKS) {
@@ -759,7 +671,7 @@ public class VRApplications {
         return callPPZ(pchMimeType, pchAppKeyBuffer, unAppKeyBufferLen, __functionAddress);
     }
 
-    /** Return the app key that will open this mime type. */
+    /** {@code bool VRApplications_GetDefaultApplicationForMimeType(char const * pchMimeType, char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     @NativeType("bool")
     public static boolean VRApplications_GetDefaultApplicationForMimeType(@NativeType("char const *") ByteBuffer pchMimeType, @NativeType("char *") @Nullable ByteBuffer pchAppKeyBuffer) {
         if (CHECKS) {
@@ -768,7 +680,7 @@ public class VRApplications {
         return nVRApplications_GetDefaultApplicationForMimeType(memAddress(pchMimeType), memAddressSafe(pchAppKeyBuffer), remainingSafe(pchAppKeyBuffer));
     }
 
-    /** Return the app key that will open this mime type. */
+    /** {@code bool VRApplications_GetDefaultApplicationForMimeType(char const * pchMimeType, char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     @NativeType("bool")
     public static boolean VRApplications_GetDefaultApplicationForMimeType(@NativeType("char const *") CharSequence pchMimeType, @NativeType("char *") @Nullable ByteBuffer pchAppKeyBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -783,7 +695,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationSupportedMimeTypes ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationSupportedMimeTypes GetApplicationSupportedMimeTypes} */
+    /** {@code bool VRApplications_GetApplicationSupportedMimeTypes(char const * pchAppKey, char * pchMimeTypesBuffer, uint32_t unMimeTypesBuffer)} */
     public static boolean nVRApplications_GetApplicationSupportedMimeTypes(long pchAppKey, long pchMimeTypesBuffer, int unMimeTypesBuffer) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationSupportedMimeTypes;
         if (CHECKS) {
@@ -792,7 +704,7 @@ public class VRApplications {
         return callPPZ(pchAppKey, pchMimeTypesBuffer, unMimeTypesBuffer, __functionAddress);
     }
 
-    /** Get the list of supported mime types for this application, comma-delimited. */
+    /** {@code bool VRApplications_GetApplicationSupportedMimeTypes(char const * pchAppKey, char * pchMimeTypesBuffer, uint32_t unMimeTypesBuffer)} */
     @NativeType("bool")
     public static boolean VRApplications_GetApplicationSupportedMimeTypes(@NativeType("char const *") ByteBuffer pchAppKey, @NativeType("char *") @Nullable ByteBuffer pchMimeTypesBuffer) {
         if (CHECKS) {
@@ -801,7 +713,7 @@ public class VRApplications {
         return nVRApplications_GetApplicationSupportedMimeTypes(memAddress(pchAppKey), memAddressSafe(pchMimeTypesBuffer), remainingSafe(pchMimeTypesBuffer));
     }
 
-    /** Get the list of supported mime types for this application, comma-delimited. */
+    /** {@code bool VRApplications_GetApplicationSupportedMimeTypes(char const * pchAppKey, char * pchMimeTypesBuffer, uint32_t unMimeTypesBuffer)} */
     @NativeType("bool")
     public static boolean VRApplications_GetApplicationSupportedMimeTypes(@NativeType("char const *") CharSequence pchAppKey, @NativeType("char *") @Nullable ByteBuffer pchMimeTypesBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -816,7 +728,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationsThatSupportMimeType ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationsThatSupportMimeType GetApplicationsThatSupportMimeType} */
+    /** {@code uint32_t VRApplications_GetApplicationsThatSupportMimeType(char const * pchMimeType, char * pchAppKeysThatSupportBuffer, uint32_t unAppKeysThatSupportBuffer)} */
     public static int nVRApplications_GetApplicationsThatSupportMimeType(long pchMimeType, long pchAppKeysThatSupportBuffer, int unAppKeysThatSupportBuffer) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationsThatSupportMimeType;
         if (CHECKS) {
@@ -825,7 +737,7 @@ public class VRApplications {
         return callPPI(pchMimeType, pchAppKeysThatSupportBuffer, unAppKeysThatSupportBuffer, __functionAddress);
     }
 
-    /** Get the list of app-keys that support this mime type, comma-delimited, the return value is number of bytes you need to return the full string. */
+    /** {@code uint32_t VRApplications_GetApplicationsThatSupportMimeType(char const * pchMimeType, char * pchAppKeysThatSupportBuffer, uint32_t unAppKeysThatSupportBuffer)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") ByteBuffer pchMimeType, @NativeType("char *") @Nullable ByteBuffer pchAppKeysThatSupportBuffer) {
         if (CHECKS) {
@@ -834,7 +746,7 @@ public class VRApplications {
         return nVRApplications_GetApplicationsThatSupportMimeType(memAddress(pchMimeType), memAddressSafe(pchAppKeysThatSupportBuffer), remainingSafe(pchAppKeysThatSupportBuffer));
     }
 
-    /** Get the list of app-keys that support this mime type, comma-delimited, the return value is number of bytes you need to return the full string. */
+    /** {@code uint32_t VRApplications_GetApplicationsThatSupportMimeType(char const * pchMimeType, char * pchAppKeysThatSupportBuffer, uint32_t unAppKeysThatSupportBuffer)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") CharSequence pchMimeType, @NativeType("char *") @Nullable ByteBuffer pchAppKeysThatSupportBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -847,7 +759,7 @@ public class VRApplications {
         }
     }
 
-    /** Get the list of app-keys that support this mime type, comma-delimited, the return value is number of bytes you need to return the full string. */
+    /** {@code uint32_t VRApplications_GetApplicationsThatSupportMimeType(char const * pchMimeType, char * pchAppKeysThatSupportBuffer, uint32_t unAppKeysThatSupportBuffer)} */
     @NativeType("uint32_t")
     public static String VRApplications_GetApplicationsThatSupportMimeType(@NativeType("char const *") CharSequence pchMimeType, @NativeType("uint32_t") int unAppKeysThatSupportBuffer) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -864,7 +776,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetApplicationLaunchArguments ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetApplicationLaunchArguments GetApplicationLaunchArguments} */
+    /** {@code uint32_t VRApplications_GetApplicationLaunchArguments(uint32_t unHandle, char * pchArgs, uint32_t unArgs)} */
     public static int nVRApplications_GetApplicationLaunchArguments(int unHandle, long pchArgs, int unArgs) {
         long __functionAddress = OpenVR.VRApplications.GetApplicationLaunchArguments;
         if (CHECKS) {
@@ -873,13 +785,13 @@ public class VRApplications {
         return callPI(unHandle, pchArgs, unArgs, __functionAddress);
     }
 
-    /** Get the args list from an app launch that had the process already running, you call this when you get a {@link VR#EVREventType_VREvent_ApplicationMimeTypeLoad}. */
+    /** {@code uint32_t VRApplications_GetApplicationLaunchArguments(uint32_t unHandle, char * pchArgs, uint32_t unArgs)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetApplicationLaunchArguments(@NativeType("uint32_t") int unHandle, @NativeType("char *") @Nullable ByteBuffer pchArgs) {
         return nVRApplications_GetApplicationLaunchArguments(unHandle, memAddressSafe(pchArgs), remainingSafe(pchArgs));
     }
 
-    /** Get the args list from an app launch that had the process already running, you call this when you get a {@link VR#EVREventType_VREvent_ApplicationMimeTypeLoad}. */
+    /** {@code uint32_t VRApplications_GetApplicationLaunchArguments(uint32_t unHandle, char * pchArgs, uint32_t unArgs)} */
     @NativeType("uint32_t")
     public static String VRApplications_GetApplicationLaunchArguments(@NativeType("uint32_t") int unHandle, @NativeType("uint32_t") int unArgs) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -894,7 +806,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetStartingApplication ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetStartingApplication GetStartingApplication} */
+    /** {@code EVRApplicationError VRApplications_GetStartingApplication(char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     public static int nVRApplications_GetStartingApplication(long pchAppKeyBuffer, int unAppKeyBufferLen) {
         long __functionAddress = OpenVR.VRApplications.GetStartingApplication;
         if (CHECKS) {
@@ -903,7 +815,7 @@ public class VRApplications {
         return callPI(pchAppKeyBuffer, unAppKeyBufferLen, __functionAddress);
     }
 
-    /** Returns the app key for the application that is starting up. */
+    /** {@code EVRApplicationError VRApplications_GetStartingApplication(char * pchAppKeyBuffer, uint32_t unAppKeyBufferLen)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_GetStartingApplication(@NativeType("char *") ByteBuffer pchAppKeyBuffer) {
         return nVRApplications_GetStartingApplication(memAddress(pchAppKeyBuffer), pchAppKeyBuffer.remaining());
@@ -911,7 +823,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetSceneApplicationState ] ---
 
-    /** Returns the application transition state. */
+    /** {@code EVRSceneApplicationState VRApplications_GetSceneApplicationState(void)} */
     @NativeType("EVRSceneApplicationState")
     public static int VRApplications_GetSceneApplicationState() {
         long __functionAddress = OpenVR.VRApplications.GetSceneApplicationState;
@@ -923,7 +835,7 @@ public class VRApplications {
 
     // --- [ VRApplications_PerformApplicationPrelaunchCheck ] ---
 
-    /** Unsafe version of: {@link #VRApplications_PerformApplicationPrelaunchCheck PerformApplicationPrelaunchCheck} */
+    /** {@code EVRApplicationError VRApplications_PerformApplicationPrelaunchCheck(char const * pchAppKey)} */
     public static int nVRApplications_PerformApplicationPrelaunchCheck(long pchAppKey) {
         long __functionAddress = OpenVR.VRApplications.PerformApplicationPrelaunchCheck;
         if (CHECKS) {
@@ -932,20 +844,7 @@ public class VRApplications {
         return callPI(pchAppKey, __functionAddress);
     }
 
-    /**
-     * Returns errors that would prevent the specified application from launching immediately. Calling this function will cause the current scene application
-     * to quit, so only call it when you are actually about to launch something else.
-     * 
-     * <p>What the caller should do about these failures depends on the failure:</p>
-     * 
-     * <ul>
-     * <li>{@link VR#EVRApplicationError_VRApplicationError_OldApplicationQuitting} - An existing application has been told to quit. Wait for a
-     * {@link VR#EVREventType_VREvent_ProcessQuit} and try again.</li>
-     * <li>{@link VR#EVRApplicationError_VRApplicationError_ApplicationAlreadyStarting} - This application is already starting. This is a permanent failure.</li>
-     * <li>{@link VR#EVRApplicationError_VRApplicationError_LaunchInProgress} - A different application is already starting. This is a permanent failure.</li>
-     * <li>{@link VR#EVRApplicationError_VRApplicationError_None} - Go ahead and launch. Everything is clear.</li>
-     * </ul>
-     */
+    /** {@code EVRApplicationError VRApplications_PerformApplicationPrelaunchCheck(char const * pchAppKey)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_PerformApplicationPrelaunchCheck(@NativeType("char const *") ByteBuffer pchAppKey) {
         if (CHECKS) {
@@ -954,20 +853,7 @@ public class VRApplications {
         return nVRApplications_PerformApplicationPrelaunchCheck(memAddress(pchAppKey));
     }
 
-    /**
-     * Returns errors that would prevent the specified application from launching immediately. Calling this function will cause the current scene application
-     * to quit, so only call it when you are actually about to launch something else.
-     * 
-     * <p>What the caller should do about these failures depends on the failure:</p>
-     * 
-     * <ul>
-     * <li>{@link VR#EVRApplicationError_VRApplicationError_OldApplicationQuitting} - An existing application has been told to quit. Wait for a
-     * {@link VR#EVREventType_VREvent_ProcessQuit} and try again.</li>
-     * <li>{@link VR#EVRApplicationError_VRApplicationError_ApplicationAlreadyStarting} - This application is already starting. This is a permanent failure.</li>
-     * <li>{@link VR#EVRApplicationError_VRApplicationError_LaunchInProgress} - A different application is already starting. This is a permanent failure.</li>
-     * <li>{@link VR#EVRApplicationError_VRApplicationError_None} - Go ahead and launch. Everything is clear.</li>
-     * </ul>
-     */
+    /** {@code EVRApplicationError VRApplications_PerformApplicationPrelaunchCheck(char const * pchAppKey)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_PerformApplicationPrelaunchCheck(@NativeType("char const *") CharSequence pchAppKey) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -982,7 +868,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetSceneApplicationStateNameFromEnum ] ---
 
-    /** Unsafe version of: {@link #VRApplications_GetSceneApplicationStateNameFromEnum GetSceneApplicationStateNameFromEnum} */
+    /** {@code char const * VRApplications_GetSceneApplicationStateNameFromEnum(EVRSceneApplicationState state)} */
     public static long nVRApplications_GetSceneApplicationStateNameFromEnum(int state) {
         long __functionAddress = OpenVR.VRApplications.GetSceneApplicationStateNameFromEnum;
         if (CHECKS) {
@@ -991,11 +877,7 @@ public class VRApplications {
         return callP(state, __functionAddress);
     }
 
-    /**
-     * Returns a string for an application transition state.
-     *
-     * @param state one of:<br><table><tr><td>{@link VR#EVRSceneApplicationState_None}</td><td>{@link VR#EVRSceneApplicationState_Starting}</td></tr><tr><td>{@link VR#EVRSceneApplicationState_Quitting}</td><td>{@link VR#EVRSceneApplicationState_Running}</td></tr><tr><td>{@link VR#EVRSceneApplicationState_Waiting}</td></tr></table>
-     */
+    /** {@code char const * VRApplications_GetSceneApplicationStateNameFromEnum(EVRSceneApplicationState state)} */
     @NativeType("char const *")
     public static @Nullable String VRApplications_GetSceneApplicationStateNameFromEnum(@NativeType("EVRSceneApplicationState") int state) {
         long __result = nVRApplications_GetSceneApplicationStateNameFromEnum(state);
@@ -1004,7 +886,7 @@ public class VRApplications {
 
     // --- [ VRApplications_LaunchInternalProcess ] ---
 
-    /** Unsafe version of: {@link #VRApplications_LaunchInternalProcess LaunchInternalProcess} */
+    /** {@code EVRApplicationError VRApplications_LaunchInternalProcess(char const * pchBinaryPath, char const * pchArguments, char const * pchWorkingDirectory)} */
     public static int nVRApplications_LaunchInternalProcess(long pchBinaryPath, long pchArguments, long pchWorkingDirectory) {
         long __functionAddress = OpenVR.VRApplications.LaunchInternalProcess;
         if (CHECKS) {
@@ -1013,11 +895,7 @@ public class VRApplications {
         return callPPPI(pchBinaryPath, pchArguments, pchWorkingDirectory, __functionAddress);
     }
 
-    /**
-     * Starts a subprocess within the calling application. This suppresses all application transition UI and automatically identifies the new executable as
-     * part of the same application. On success the calling process should exit immediately. If working directory is {@code NULL} or "" the directory portion of the
-     * binary path will be the working directory.
-     */
+    /** {@code EVRApplicationError VRApplications_LaunchInternalProcess(char const * pchBinaryPath, char const * pchArguments, char const * pchWorkingDirectory)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchInternalProcess(@NativeType("char const *") ByteBuffer pchBinaryPath, @NativeType("char const *") ByteBuffer pchArguments, @NativeType("char const *") ByteBuffer pchWorkingDirectory) {
         if (CHECKS) {
@@ -1028,11 +906,7 @@ public class VRApplications {
         return nVRApplications_LaunchInternalProcess(memAddress(pchBinaryPath), memAddress(pchArguments), memAddress(pchWorkingDirectory));
     }
 
-    /**
-     * Starts a subprocess within the calling application. This suppresses all application transition UI and automatically identifies the new executable as
-     * part of the same application. On success the calling process should exit immediately. If working directory is {@code NULL} or "" the directory portion of the
-     * binary path will be the working directory.
-     */
+    /** {@code EVRApplicationError VRApplications_LaunchInternalProcess(char const * pchBinaryPath, char const * pchArguments, char const * pchWorkingDirectory)} */
     @NativeType("EVRApplicationError")
     public static int VRApplications_LaunchInternalProcess(@NativeType("char const *") CharSequence pchBinaryPath, @NativeType("char const *") CharSequence pchArguments, @NativeType("char const *") CharSequence pchWorkingDirectory) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -1051,10 +925,7 @@ public class VRApplications {
 
     // --- [ VRApplications_GetCurrentSceneProcessId ] ---
 
-    /**
-     * Returns the current scene process ID according to the application system. A scene process will get scene focus once it starts rendering, but it will
-     * appear here once it calls {@code VR_Init} with the Scene application type.
-     */
+    /** {@code uint32_t VRApplications_GetCurrentSceneProcessId(void)} */
     @NativeType("uint32_t")
     public static int VRApplications_GetCurrentSceneProcessId() {
         long __functionAddress = OpenVR.VRApplications.GetCurrentSceneProcessId;

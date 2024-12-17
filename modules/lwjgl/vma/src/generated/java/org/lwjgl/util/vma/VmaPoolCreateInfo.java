@@ -18,21 +18,17 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * Describes parameter of created {@code VmaPool}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaPoolCreateInfo {
- *     uint32_t {@link #memoryTypeIndex};
- *     VmaPoolCreateFlags {@link #flags};
- *     VkDeviceSize {@link #blockSize};
- *     size_t {@link #minBlockCount};
- *     size_t {@link #maxBlockCount};
- *     float {@link #priority};
- *     VkDeviceSize {@link #minAllocationAlignment};
- *     void * {@link #pMemoryAllocateNext};
- * }</code></pre>
+ *     uint32_t memoryTypeIndex;
+ *     VmaPoolCreateFlags flags;
+ *     VkDeviceSize blockSize;
+ *     size_t minBlockCount;
+ *     size_t maxBlockCount;
+ *     float priority;
+ *     VkDeviceSize minAllocationAlignment;
+ *     void * pMemoryAllocateNext;
+ * }}</pre>
  */
 public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements NativeResource {
 
@@ -100,78 +96,45 @@ public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Vulkan memory type index to allocate this pool from */
+    /** @return the value of the {@code memoryTypeIndex} field. */
     @NativeType("uint32_t")
     public int memoryTypeIndex() { return nmemoryTypeIndex(address()); }
-    /** Use combination of {@code VmaPoolCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT}</td><td>{@link Vma#VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT POOL_CREATE_LINEAR_ALGORITHM_BIT}</td></tr><tr><td>{@link Vma#VMA_POOL_CREATE_ALGORITHM_MASK POOL_CREATE_ALGORITHM_MASK}</td></tr></table> */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VmaPoolCreateFlags")
     public int flags() { return nflags(address()); }
-    /**
-     * size of a single {@code VkDeviceMemory} block to be allocated as part of this pool, in bytes. Optional.
-     * 
-     * <p>Specify nonzero to set explicit, constant size of memory blocks used by this pool. Leave 0 to use default and let the library manage block sizes
-     * automatically. Sizes of particular blocks may vary. In this case, the pool will also support dedicated allocations.</p>
-     */
+    /** @return the value of the {@code blockSize} field. */
     @NativeType("VkDeviceSize")
     public long blockSize() { return nblockSize(address()); }
-    /**
-     * minimum number of blocks to be always allocated in this pool, even if they stay empty.
-     * 
-     * <p>Set to 0 to have no preallocated blocks and allow the pool be completely empty.</p>
-     */
+    /** @return the value of the {@code minBlockCount} field. */
     @NativeType("size_t")
     public long minBlockCount() { return nminBlockCount(address()); }
-    /**
-     * maximum number of blocks that can be allocated in this pool. Optional.
-     * 
-     * <p>Set to 0 to use default, which is {@code SIZE_MAX}, which means no limit. Set to same value as {@link VmaPoolCreateInfo}{@code ::minBlockCount} to have fixed
-     * amount of memory allocated throughout whole lifetime of this pool.</p>
-     */
+    /** @return the value of the {@code maxBlockCount} field. */
     @NativeType("size_t")
     public long maxBlockCount() { return nmaxBlockCount(address()); }
-    /**
-     * A floating-point value between 0 and 1, indicating the priority of the allocations in this pool relative to other memory allocations.
-     * 
-     * <p>It is used only when {@link Vma#VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT} flag was used during creation of the {@code VmaAllocator} object. Otherwise, this
-     * variable is ignored.</p>
-     */
+    /** @return the value of the {@code priority} field. */
     public float priority() { return npriority(address()); }
-    /**
-     * Additional minimum alignment to be used for all allocations created from this pool. Can be 0.
-     * 
-     * <p>Leave 0 (default) not to impose any additional alignment. If not 0, it must be a power of two. It can be useful in cases where alignment returned by
-     * Vulkan by functions like {@code vkGetBufferMemoryRequirements} is not enough, e.g. when doing interop with OpenGL.</p>
-     */
+    /** @return the value of the {@code minAllocationAlignment} field. */
     @NativeType("VkDeviceSize")
     public long minAllocationAlignment() { return nminAllocationAlignment(address()); }
-    /**
-     * Additional {@code pNext} chain to be attached to {@code VkMemoryAllocateInfo} used for every allocation made by this pool. Optional.
-     * 
-     * <p>Optional, can be null. If not null, it must point to a {@code pNext} chain of structures that can be attached to {@code VkMemoryAllocateInfo}. It can
-     * be useful for special needs such as adding {@code VkExportMemoryAllocateInfoKHR}. Structures pointed by this member must remain alive and unchanged for
-     * the whole lifetime of the custom pool.</p>
-     * 
-     * <p>Please note that some structures, e.g. {@code VkMemoryPriorityAllocateInfoEXT}, {@code VkMemoryDedicatedAllocateInfoKHR}, can be attached automatically
-     * by this library when using other, more convenient of its features.</p>
-     */
+    /** @return the value of the {@code pMemoryAllocateNext} field. */
     @NativeType("void *")
     public long pMemoryAllocateNext() { return npMemoryAllocateNext(address()); }
 
-    /** Sets the specified value to the {@link #memoryTypeIndex} field. */
+    /** Sets the specified value to the {@code memoryTypeIndex} field. */
     public VmaPoolCreateInfo memoryTypeIndex(@NativeType("uint32_t") int value) { nmemoryTypeIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VmaPoolCreateInfo flags(@NativeType("VmaPoolCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #blockSize} field. */
+    /** Sets the specified value to the {@code blockSize} field. */
     public VmaPoolCreateInfo blockSize(@NativeType("VkDeviceSize") long value) { nblockSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #minBlockCount} field. */
+    /** Sets the specified value to the {@code minBlockCount} field. */
     public VmaPoolCreateInfo minBlockCount(@NativeType("size_t") long value) { nminBlockCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxBlockCount} field. */
+    /** Sets the specified value to the {@code maxBlockCount} field. */
     public VmaPoolCreateInfo maxBlockCount(@NativeType("size_t") long value) { nmaxBlockCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #priority} field. */
+    /** Sets the specified value to the {@code priority} field. */
     public VmaPoolCreateInfo priority(float value) { npriority(address(), value); return this; }
-    /** Sets the specified value to the {@link #minAllocationAlignment} field. */
+    /** Sets the specified value to the {@code minAllocationAlignment} field. */
     public VmaPoolCreateInfo minAllocationAlignment(@NativeType("VkDeviceSize") long value) { nminAllocationAlignment(address(), value); return this; }
-    /** Sets the specified value to the {@link #pMemoryAllocateNext} field. */
+    /** Sets the specified value to the {@code pMemoryAllocateNext} field. */
     public VmaPoolCreateInfo pMemoryAllocateNext(@NativeType("void *") long value) { npMemoryAllocateNext(address(), value); return this; }
     /** Prepends the specified {@link VkDedicatedAllocationMemoryAllocateInfoNV} value to the {@code pMemoryAllocateNext} chain. */
     public VmaPoolCreateInfo pMemoryAllocateNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }
@@ -456,45 +419,45 @@ public class VmaPoolCreateInfo extends Struct<VmaPoolCreateInfo> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VmaPoolCreateInfo#memoryTypeIndex} field. */
+        /** @return the value of the {@code memoryTypeIndex} field. */
         @NativeType("uint32_t")
         public int memoryTypeIndex() { return VmaPoolCreateInfo.nmemoryTypeIndex(address()); }
-        /** @return the value of the {@link VmaPoolCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VmaPoolCreateFlags")
         public int flags() { return VmaPoolCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VmaPoolCreateInfo#blockSize} field. */
+        /** @return the value of the {@code blockSize} field. */
         @NativeType("VkDeviceSize")
         public long blockSize() { return VmaPoolCreateInfo.nblockSize(address()); }
-        /** @return the value of the {@link VmaPoolCreateInfo#minBlockCount} field. */
+        /** @return the value of the {@code minBlockCount} field. */
         @NativeType("size_t")
         public long minBlockCount() { return VmaPoolCreateInfo.nminBlockCount(address()); }
-        /** @return the value of the {@link VmaPoolCreateInfo#maxBlockCount} field. */
+        /** @return the value of the {@code maxBlockCount} field. */
         @NativeType("size_t")
         public long maxBlockCount() { return VmaPoolCreateInfo.nmaxBlockCount(address()); }
-        /** @return the value of the {@link VmaPoolCreateInfo#priority} field. */
+        /** @return the value of the {@code priority} field. */
         public float priority() { return VmaPoolCreateInfo.npriority(address()); }
-        /** @return the value of the {@link VmaPoolCreateInfo#minAllocationAlignment} field. */
+        /** @return the value of the {@code minAllocationAlignment} field. */
         @NativeType("VkDeviceSize")
         public long minAllocationAlignment() { return VmaPoolCreateInfo.nminAllocationAlignment(address()); }
-        /** @return the value of the {@link VmaPoolCreateInfo#pMemoryAllocateNext} field. */
+        /** @return the value of the {@code pMemoryAllocateNext} field. */
         @NativeType("void *")
         public long pMemoryAllocateNext() { return VmaPoolCreateInfo.npMemoryAllocateNext(address()); }
 
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#memoryTypeIndex} field. */
+        /** Sets the specified value to the {@code memoryTypeIndex} field. */
         public VmaPoolCreateInfo.Buffer memoryTypeIndex(@NativeType("uint32_t") int value) { VmaPoolCreateInfo.nmemoryTypeIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VmaPoolCreateInfo.Buffer flags(@NativeType("VmaPoolCreateFlags") int value) { VmaPoolCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#blockSize} field. */
+        /** Sets the specified value to the {@code blockSize} field. */
         public VmaPoolCreateInfo.Buffer blockSize(@NativeType("VkDeviceSize") long value) { VmaPoolCreateInfo.nblockSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#minBlockCount} field. */
+        /** Sets the specified value to the {@code minBlockCount} field. */
         public VmaPoolCreateInfo.Buffer minBlockCount(@NativeType("size_t") long value) { VmaPoolCreateInfo.nminBlockCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#maxBlockCount} field. */
+        /** Sets the specified value to the {@code maxBlockCount} field. */
         public VmaPoolCreateInfo.Buffer maxBlockCount(@NativeType("size_t") long value) { VmaPoolCreateInfo.nmaxBlockCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#priority} field. */
+        /** Sets the specified value to the {@code priority} field. */
         public VmaPoolCreateInfo.Buffer priority(float value) { VmaPoolCreateInfo.npriority(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#minAllocationAlignment} field. */
+        /** Sets the specified value to the {@code minAllocationAlignment} field. */
         public VmaPoolCreateInfo.Buffer minAllocationAlignment(@NativeType("VkDeviceSize") long value) { VmaPoolCreateInfo.nminAllocationAlignment(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaPoolCreateInfo#pMemoryAllocateNext} field. */
+        /** Sets the specified value to the {@code pMemoryAllocateNext} field. */
         public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(@NativeType("void *") long value) { VmaPoolCreateInfo.npMemoryAllocateNext(address(), value); return this; }
         /** Prepends the specified {@link VkDedicatedAllocationMemoryAllocateInfoNV} value to the {@code pMemoryAllocateNext} chain. */
         public VmaPoolCreateInfo.Buffer pMemoryAllocateNext(VkDedicatedAllocationMemoryAllocateInfoNV value) { return this.pMemoryAllocateNext(value.pNext(this.pMemoryAllocateNext()).address()); }

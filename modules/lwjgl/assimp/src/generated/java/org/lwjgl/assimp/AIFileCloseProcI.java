@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     struct aiFileIO *pFileIO,
- *     struct aiFile *pFile
- * )</code></pre>
- */
+/** Callback function: {@link #invoke aiFileCloseProc} */
 @FunctionalInterface
 @NativeType("aiFileCloseProc")
 public interface AIFileCloseProcI extends CallbackI {
@@ -42,12 +34,7 @@ public interface AIFileCloseProcI extends CallbackI {
         );
     }
 
-    /**
-     * File close procedure
-     *
-     * @param pFileIO {@code FileIO} pointer
-     * @param pFile   file pointer to close
-     */
+    /** {@code void (* aiFileCloseProc) (struct aiFileIO * pFileIO, struct aiFile * pFile)} */
     void invoke(@NativeType("struct aiFileIO *") long pFileIO, @NativeType("struct aiFile *") long pFile);
 
 }

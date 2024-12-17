@@ -19,30 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifies AV1 decoder parameter set information.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>As AV1 video session parameters objects will only ever contain a single AV1 sequence header, this has to be specified at object creation time and such video session parameters objects cannot be updated using the {@link KHRVideoQueue#vkUpdateVideoSessionParametersKHR UpdateVideoSessionParametersKHR} command. When a new AV1 sequence header is decoded from the input video bitstream the application needs to create a new video session parameters object to store it.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR}</li>
- * <li>{@code pStdSequenceHeader} <b>must</b> be a valid pointer to a valid {@code StdVideoAV1SequenceHeader} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoDecodeAV1SessionParametersCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link StdVideoAV1SequenceHeader StdVideoAV1SequenceHeader} const * {@link #pStdSequenceHeader};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link StdVideoAV1SequenceHeader StdVideoAV1SequenceHeader} const * pStdSequenceHeader;
+ * }}</pre>
  */
 public class VkVideoDecodeAV1SessionParametersCreateInfoKHR extends Struct<VkVideoDecodeAV1SessionParametersCreateInfoKHR> implements NativeResource {
 
@@ -95,23 +77,23 @@ public class VkVideoDecodeAV1SessionParametersCreateInfoKHR extends Struct<VkVid
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to a {@code StdVideoAV1SequenceHeader} structure describing the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-av1-sequence-header">AV1 sequence header</a> entry to store in the created object. */
+    /** @return a {@link StdVideoAV1SequenceHeader} view of the struct pointed to by the {@code pStdSequenceHeader} field. */
     @NativeType("StdVideoAV1SequenceHeader const *")
     public StdVideoAV1SequenceHeader pStdSequenceHeader() { return npStdSequenceHeader(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeAV1SessionParametersCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoDecodeAV1SessionParametersCreateInfoKHR sType$Default() { return sType(KHRVideoDecodeAV1.VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeAV1SessionParametersCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoAV1SequenceHeader} to the {@link #pStdSequenceHeader} field. */
+    /** Sets the address of the specified {@link StdVideoAV1SequenceHeader} to the {@code pStdSequenceHeader} field. */
     public VkVideoDecodeAV1SessionParametersCreateInfoKHR pStdSequenceHeader(@NativeType("StdVideoAV1SequenceHeader const *") StdVideoAV1SequenceHeader value) { npStdSequenceHeader(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,23 +300,23 @@ public class VkVideoDecodeAV1SessionParametersCreateInfoKHR extends Struct<VkVid
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoDecodeAV1SessionParametersCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeAV1SessionParametersCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoDecodeAV1SessionParametersCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoDecodeAV1SessionParametersCreateInfoKHR.npNext(address()); }
-        /** @return a {@link StdVideoAV1SequenceHeader} view of the struct pointed to by the {@link VkVideoDecodeAV1SessionParametersCreateInfoKHR#pStdSequenceHeader} field. */
+        /** @return a {@link StdVideoAV1SequenceHeader} view of the struct pointed to by the {@code pStdSequenceHeader} field. */
         @NativeType("StdVideoAV1SequenceHeader const *")
         public StdVideoAV1SequenceHeader pStdSequenceHeader() { return VkVideoDecodeAV1SessionParametersCreateInfoKHR.npStdSequenceHeader(address()); }
 
-        /** Sets the specified value to the {@link VkVideoDecodeAV1SessionParametersCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeAV1SessionParametersCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeAV1SessionParametersCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@link VkVideoDecodeAV1SessionParametersCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoDecodeAV1#VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoDecodeAV1SessionParametersCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeAV1.VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_SESSION_PARAMETERS_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoDecodeAV1SessionParametersCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeAV1SessionParametersCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeAV1SessionParametersCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoAV1SequenceHeader} to the {@link VkVideoDecodeAV1SessionParametersCreateInfoKHR#pStdSequenceHeader} field. */
+        /** Sets the address of the specified {@link StdVideoAV1SequenceHeader} to the {@code pStdSequenceHeader} field. */
         public VkVideoDecodeAV1SessionParametersCreateInfoKHR.Buffer pStdSequenceHeader(@NativeType("StdVideoAV1SequenceHeader const *") StdVideoAV1SequenceHeader value) { VkVideoDecodeAV1SessionParametersCreateInfoKHR.npStdSequenceHeader(address(), value); return this; }
 
     }

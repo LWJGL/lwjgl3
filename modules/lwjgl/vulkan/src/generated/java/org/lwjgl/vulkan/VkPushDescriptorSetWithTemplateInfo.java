@@ -17,52 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a descriptor set push operation using a descriptor update template.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The {@code pipelineBindPoint} specified during the creation of the descriptor update template <b>must</b> be supported by the {@code commandBuffer}’s parent {@code VkCommandPool}’s queue family</li>
- * <li>{@code pData} <b>must</b> be a valid pointer to a memory containing one or more valid instances of {@link VkDescriptorImageInfo}, {@link VkDescriptorBufferInfo}, or {@code VkBufferView} in a layout defined by {@code descriptorUpdateTemplate} when it was created with {@link VK11#vkCreateDescriptorUpdateTemplate CreateDescriptorUpdateTemplate}</li>
- * <li>{@code layout} <b>must</b> be compatible with the layout used to create {@code descriptorUpdateTemplate}</li>
- * <li>{@code descriptorUpdateTemplate} <b>must</b> have been created with a {@code templateType} of {@link VK14#VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS}</li>
- * <li>{@code set} <b>must</b> be the same value used to create {@code descriptorUpdateTemplate}</li>
- * <li>{@code set} <b>must</b> be less than {@link VkPipelineLayoutCreateInfo}{@code ::setLayoutCount} provided when {@code layout} was created</li>
- * <li>{@code set} <b>must</b> be the unique set number in the pipeline layout that uses a descriptor set layout that was created with {@link VK14#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT}</li>
- * </ul>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>If {@code layout} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the {@code pNext} chain <b>must</b> include a valid {@link VkPipelineLayoutCreateInfo} structure</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineLayoutCreateInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code descriptorUpdateTemplate} <b>must</b> be a valid {@code VkDescriptorUpdateTemplate} handle</li>
- * <li>If {@code layout} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>{@code pData} <b>must</b> be a pointer value</li>
- * <li>Both of {@code descriptorUpdateTemplate}, and {@code layout} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK14#vkCmdPushDescriptorSetWithTemplate2 CmdPushDescriptorSetWithTemplate2}, {@link KHRMaintenance6#vkCmdPushDescriptorSetWithTemplate2KHR CmdPushDescriptorSetWithTemplate2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPushDescriptorSetWithTemplateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDescriptorUpdateTemplate {@link #descriptorUpdateTemplate};
- *     VkPipelineLayout {@link #layout};
- *     uint32_t {@link #set};
- *     void const * {@link #pData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDescriptorUpdateTemplate descriptorUpdateTemplate;
+ *     VkPipelineLayout layout;
+ *     uint32_t set;
+ *     void const * pData;
+ * }}</pre>
  */
 public class VkPushDescriptorSetWithTemplateInfo extends Struct<VkPushDescriptorSetWithTemplateInfo> implements NativeResource {
 
@@ -124,40 +87,40 @@ public class VkPushDescriptorSetWithTemplateInfo extends Struct<VkPushDescriptor
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a descriptor update template defining how to interpret the descriptor information in {@code pData}. */
+    /** @return the value of the {@code descriptorUpdateTemplate} field. */
     @NativeType("VkDescriptorUpdateTemplate")
     public long descriptorUpdateTemplate() { return ndescriptorUpdateTemplate(address()); }
-    /** a {@code VkPipelineLayout} object used to program the bindings. It <b>must</b> be compatible with the layout used to create the {@code descriptorUpdateTemplate} handle. If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and the layout <b>must</b> be specified by chaining {@link VkPipelineLayoutCreateInfo} structure off the {@code pNext} */
+    /** @return the value of the {@code layout} field. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
-    /** the set number of the descriptor set in the pipeline layout that will be updated. This <b>must</b> be the same number used to create the {@code descriptorUpdateTemplate} handle. */
+    /** @return the value of the {@code set} field. */
     @NativeType("uint32_t")
     public int set() { return nset(address()); }
-    /** a pointer to memory containing descriptors for the templated update. */
+    /** @return the value of the {@code pData} field. */
     @NativeType("void const *")
     public long pData() { return npData(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPushDescriptorSetWithTemplateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO} value to the {@code sType} field. */
     public VkPushDescriptorSetWithTemplateInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPushDescriptorSetWithTemplateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
     public VkPushDescriptorSetWithTemplateInfo pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #descriptorUpdateTemplate} field. */
+    /** Sets the specified value to the {@code descriptorUpdateTemplate} field. */
     public VkPushDescriptorSetWithTemplateInfo descriptorUpdateTemplate(@NativeType("VkDescriptorUpdateTemplate") long value) { ndescriptorUpdateTemplate(address(), value); return this; }
-    /** Sets the specified value to the {@link #layout} field. */
+    /** Sets the specified value to the {@code layout} field. */
     public VkPushDescriptorSetWithTemplateInfo layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #set} field. */
+    /** Sets the specified value to the {@code set} field. */
     public VkPushDescriptorSetWithTemplateInfo set(@NativeType("uint32_t") int value) { nset(address(), value); return this; }
-    /** Sets the specified value to the {@link #pData} field. */
+    /** Sets the specified value to the {@code pData} field. */
     public VkPushDescriptorSetWithTemplateInfo pData(@NativeType("void const *") long value) { npData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -380,40 +343,40 @@ public class VkPushDescriptorSetWithTemplateInfo extends Struct<VkPushDescriptor
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPushDescriptorSetWithTemplateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPushDescriptorSetWithTemplateInfo.nsType(address()); }
-        /** @return the value of the {@link VkPushDescriptorSetWithTemplateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPushDescriptorSetWithTemplateInfo.npNext(address()); }
-        /** @return the value of the {@link VkPushDescriptorSetWithTemplateInfo#descriptorUpdateTemplate} field. */
+        /** @return the value of the {@code descriptorUpdateTemplate} field. */
         @NativeType("VkDescriptorUpdateTemplate")
         public long descriptorUpdateTemplate() { return VkPushDescriptorSetWithTemplateInfo.ndescriptorUpdateTemplate(address()); }
-        /** @return the value of the {@link VkPushDescriptorSetWithTemplateInfo#layout} field. */
+        /** @return the value of the {@code layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkPushDescriptorSetWithTemplateInfo.nlayout(address()); }
-        /** @return the value of the {@link VkPushDescriptorSetWithTemplateInfo#set} field. */
+        /** @return the value of the {@code set} field. */
         @NativeType("uint32_t")
         public int set() { return VkPushDescriptorSetWithTemplateInfo.nset(address()); }
-        /** @return the value of the {@link VkPushDescriptorSetWithTemplateInfo#pData} field. */
+        /** @return the value of the {@code pData} field. */
         @NativeType("void const *")
         public long pData() { return VkPushDescriptorSetWithTemplateInfo.npData(address()); }
 
-        /** Sets the specified value to the {@link VkPushDescriptorSetWithTemplateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPushDescriptorSetWithTemplateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPushDescriptorSetWithTemplateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO} value to the {@link VkPushDescriptorSetWithTemplateInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO} value to the {@code sType} field. */
         public VkPushDescriptorSetWithTemplateInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PUSH_DESCRIPTOR_SET_WITH_TEMPLATE_INFO); }
-        /** Sets the specified value to the {@link VkPushDescriptorSetWithTemplateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPushDescriptorSetWithTemplateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPushDescriptorSetWithTemplateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
         public VkPushDescriptorSetWithTemplateInfo.Buffer pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkPushDescriptorSetWithTemplateInfo#descriptorUpdateTemplate} field. */
+        /** Sets the specified value to the {@code descriptorUpdateTemplate} field. */
         public VkPushDescriptorSetWithTemplateInfo.Buffer descriptorUpdateTemplate(@NativeType("VkDescriptorUpdateTemplate") long value) { VkPushDescriptorSetWithTemplateInfo.ndescriptorUpdateTemplate(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPushDescriptorSetWithTemplateInfo#layout} field. */
+        /** Sets the specified value to the {@code layout} field. */
         public VkPushDescriptorSetWithTemplateInfo.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkPushDescriptorSetWithTemplateInfo.nlayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPushDescriptorSetWithTemplateInfo#set} field. */
+        /** Sets the specified value to the {@code set} field. */
         public VkPushDescriptorSetWithTemplateInfo.Buffer set(@NativeType("uint32_t") int value) { VkPushDescriptorSetWithTemplateInfo.nset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPushDescriptorSetWithTemplateInfo#pData} field. */
+        /** Sets the specified value to the {@code pData} field. */
         public VkPushDescriptorSetWithTemplateInfo.Buffer pData(@NativeType("void const *") long value) { VkPushDescriptorSetWithTemplateInfo.npData(address(), value); return this; }
 
     }

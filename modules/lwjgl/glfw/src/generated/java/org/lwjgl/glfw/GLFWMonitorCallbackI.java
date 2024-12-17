@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetMonitorCallback SetMonitorCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWmonitor *monitor,
- *     int event
- * )</code></pre>
- *
- * @since version 3.0
- */
+/** Callback function: {@link #invoke GLFWmonitorfun} */
 @FunctionalInterface
 @NativeType("GLFWmonitorfun")
 public interface GLFWMonitorCallbackI extends CallbackI {
@@ -46,12 +34,7 @@ public interface GLFWMonitorCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when a monitor is connected to or disconnected from the system.
-     *
-     * @param monitor the monitor that was connected or disconnected
-     * @param event   one of {@link GLFW#GLFW_CONNECTED CONNECTED} or {@link GLFW#GLFW_DISCONNECTED DISCONNECTED}. Remaining values reserved for future use.
-     */
+    /** {@code void (* GLFWmonitorfun) (GLFWmonitor * monitor, int event)} */
     void invoke(@NativeType("GLFWmonitor *") long monitor, int event);
 
 }

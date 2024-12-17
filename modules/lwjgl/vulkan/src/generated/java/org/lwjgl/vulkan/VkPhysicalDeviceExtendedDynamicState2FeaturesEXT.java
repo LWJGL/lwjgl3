@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing what extended dynamic state can be used.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTExtendedDynamicState2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExtendedDynamicState2FeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #extendedDynamicState2};
- *     VkBool32 {@link #extendedDynamicState2LogicOp};
- *     VkBool32 {@link #extendedDynamicState2PatchControlPoints};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 extendedDynamicState2;
+ *     VkBool32 extendedDynamicState2LogicOp;
+ *     VkBool32 extendedDynamicState2PatchControlPoints;
+ * }}</pre>
  */
 public class VkPhysicalDeviceExtendedDynamicState2FeaturesEXT extends Struct<VkPhysicalDeviceExtendedDynamicState2FeaturesEXT> implements NativeResource {
 
@@ -96,53 +82,33 @@ public class VkPhysicalDeviceExtendedDynamicState2FeaturesEXT extends Struct<VkP
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /**
-     * indicates that the implementation supports the following dynamic states:
-     * 
-     * <ul>
-     * <li>{@link VK13#VK_DYNAMIC_STATE_DEPTH_BIAS_ENABLE DYNAMIC_STATE_DEPTH_BIAS_ENABLE}</li>
-     * <li>{@link VK13#VK_DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE}</li>
-     * <li>{@link VK13#VK_DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE}</li>
-     * </ul>
-     */
+    /** @return the value of the {@code extendedDynamicState2} field. */
     @NativeType("VkBool32")
     public boolean extendedDynamicState2() { return nextendedDynamicState2(address()) != 0; }
-    /**
-     * indicates that the implementation supports the following dynamic state:
-     * 
-     * <ul>
-     * <li>{@link EXTExtendedDynamicState2#VK_DYNAMIC_STATE_LOGIC_OP_EXT DYNAMIC_STATE_LOGIC_OP_EXT}</li>
-     * </ul>
-     */
+    /** @return the value of the {@code extendedDynamicState2LogicOp} field. */
     @NativeType("VkBool32")
     public boolean extendedDynamicState2LogicOp() { return nextendedDynamicState2LogicOp(address()) != 0; }
-    /**
-     * indicates that the implementation supports the following dynamic state:
-     * 
-     * <ul>
-     * <li>{@link EXTExtendedDynamicState2#VK_DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT}</li>
-     * </ul>
-     */
+    /** @return the value of the {@code extendedDynamicState2PatchControlPoints} field. */
     @NativeType("VkBool32")
     public boolean extendedDynamicState2PatchControlPoints() { return nextendedDynamicState2PatchControlPoints(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTExtendedDynamicState2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTExtendedDynamicState2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT sType$Default() { return sType(EXTExtendedDynamicState2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #extendedDynamicState2} field. */
+    /** Sets the specified value to the {@code extendedDynamicState2} field. */
     public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT extendedDynamicState2(@NativeType("VkBool32") boolean value) { nextendedDynamicState2(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #extendedDynamicState2LogicOp} field. */
+    /** Sets the specified value to the {@code extendedDynamicState2LogicOp} field. */
     public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT extendedDynamicState2LogicOp(@NativeType("VkBool32") boolean value) { nextendedDynamicState2LogicOp(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #extendedDynamicState2PatchControlPoints} field. */
+    /** Sets the specified value to the {@code extendedDynamicState2PatchControlPoints} field. */
     public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT extendedDynamicState2PatchControlPoints(@NativeType("VkBool32") boolean value) { nextendedDynamicState2PatchControlPoints(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,33 +316,33 @@ public class VkPhysicalDeviceExtendedDynamicState2FeaturesEXT extends Struct<VkP
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#extendedDynamicState2} field. */
+        /** @return the value of the {@code extendedDynamicState2} field. */
         @NativeType("VkBool32")
         public boolean extendedDynamicState2() { return VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.nextendedDynamicState2(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#extendedDynamicState2LogicOp} field. */
+        /** @return the value of the {@code extendedDynamicState2LogicOp} field. */
         @NativeType("VkBool32")
         public boolean extendedDynamicState2LogicOp() { return VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.nextendedDynamicState2LogicOp(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#extendedDynamicState2PatchControlPoints} field. */
+        /** @return the value of the {@code extendedDynamicState2PatchControlPoints} field. */
         @NativeType("VkBool32")
         public boolean extendedDynamicState2PatchControlPoints() { return VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.nextendedDynamicState2PatchControlPoints(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTExtendedDynamicState2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT} value to the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#sType} field. */
+        /** Sets the {@link EXTExtendedDynamicState2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.Buffer sType$Default() { return sType(EXTExtendedDynamicState2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#extendedDynamicState2} field. */
+        /** Sets the specified value to the {@code extendedDynamicState2} field. */
         public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.Buffer extendedDynamicState2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.nextendedDynamicState2(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#extendedDynamicState2LogicOp} field. */
+        /** Sets the specified value to the {@code extendedDynamicState2LogicOp} field. */
         public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.Buffer extendedDynamicState2LogicOp(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.nextendedDynamicState2LogicOp(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicState2FeaturesEXT#extendedDynamicState2PatchControlPoints} field. */
+        /** Sets the specified value to the {@code extendedDynamicState2PatchControlPoints} field. */
         public VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.Buffer extendedDynamicState2PatchControlPoints(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceExtendedDynamicState2FeaturesEXT.nextendedDynamicState2PatchControlPoints(address(), value ? 1 : 0); return this; }
 
     }

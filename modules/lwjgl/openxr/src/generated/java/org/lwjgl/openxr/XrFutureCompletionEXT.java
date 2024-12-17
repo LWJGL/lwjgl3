@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Implementation of the XrResult-only completion structure.
- * 
- * <h5>Description</h5>
- * 
- * <p>This is a minimal implementation of {@link XrFutureCompletionBaseHeaderEXT}, containing only the fields present in the base header structure. It is intended for use by asynchronous operations that do not have other outputs or return values beyond an {@code XrResult} value, as the output parameter of their completion function.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTFuture XR_EXT_future} extension <b>must</b> be enabled prior to using {@link XrFutureCompletionEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTFuture#XR_TYPE_FUTURE_COMPLETION_EXT TYPE_FUTURE_COMPLETION_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFutureCompletionEXT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrResult {@link #futureResult};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrResult futureResult;
+ * }}</pre>
  */
 public class XrFutureCompletionEXT extends Struct<XrFutureCompletionEXT> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class XrFutureCompletionEXT extends Struct<XrFutureCompletionEXT> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** {@code XrResult} of the async operation associated with future passed to the completion function. */
+    /** @return the value of the {@code futureResult} field. */
     @NativeType("XrResult")
     public int futureResult() { return nfutureResult(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFutureCompletionEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_COMPLETION_EXT TYPE_FUTURE_COMPLETION_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_COMPLETION_EXT TYPE_FUTURE_COMPLETION_EXT} value to the {@code type} field. */
     public XrFutureCompletionEXT type$Default() { return type(EXTFuture.XR_TYPE_FUTURE_COMPLETION_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFutureCompletionEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #futureResult} field. */
+    /** Sets the specified value to the {@code futureResult} field. */
     public XrFutureCompletionEXT futureResult(@NativeType("XrResult") int value) { nfutureResult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,23 +296,23 @@ public class XrFutureCompletionEXT extends Struct<XrFutureCompletionEXT> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFutureCompletionEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFutureCompletionEXT.ntype(address()); }
-        /** @return the value of the {@link XrFutureCompletionEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrFutureCompletionEXT.nnext(address()); }
-        /** @return the value of the {@link XrFutureCompletionEXT#futureResult} field. */
+        /** @return the value of the {@code futureResult} field. */
         @NativeType("XrResult")
         public int futureResult() { return XrFutureCompletionEXT.nfutureResult(address()); }
 
-        /** Sets the specified value to the {@link XrFutureCompletionEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFutureCompletionEXT.Buffer type(@NativeType("XrStructureType") int value) { XrFutureCompletionEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_COMPLETION_EXT TYPE_FUTURE_COMPLETION_EXT} value to the {@link XrFutureCompletionEXT#type} field. */
+        /** Sets the {@link EXTFuture#XR_TYPE_FUTURE_COMPLETION_EXT TYPE_FUTURE_COMPLETION_EXT} value to the {@code type} field. */
         public XrFutureCompletionEXT.Buffer type$Default() { return type(EXTFuture.XR_TYPE_FUTURE_COMPLETION_EXT); }
-        /** Sets the specified value to the {@link XrFutureCompletionEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFutureCompletionEXT.Buffer next(@NativeType("void *") long value) { XrFutureCompletionEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFutureCompletionEXT#futureResult} field. */
+        /** Sets the specified value to the {@code futureResult} field. */
         public XrFutureCompletionEXT.Buffer futureResult(@NativeType("XrResult") int value) { XrFutureCompletionEXT.nfutureResult(address(), value); return this; }
 
     }

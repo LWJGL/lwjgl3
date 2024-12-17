@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link CL20#clEnqueueSVMFree EnqueueSVMFree} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     cl_command_queue queue,
- *     cl_uint num_svm_pointers,
- *     void **svm_pointers,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class CLSVMFreeCallback extends Callback implements CLSVMFreeCallbackI {
 
     /**

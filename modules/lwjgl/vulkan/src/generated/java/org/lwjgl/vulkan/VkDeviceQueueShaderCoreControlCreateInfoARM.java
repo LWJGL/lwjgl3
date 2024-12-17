@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Control the number of shader cores used by queues.
- * 
- * <h5>Description</h5>
- * 
- * <p>Queues created without specifying {@link VkDeviceQueueShaderCoreControlCreateInfoARM} will default to using all the shader cores available.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code shaderCoreCount} <b>must</b> be greater than 0 and less than or equal to the total number of shader cores as reported via {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM}{@code ::shaderCoreCount}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ARMSchedulingControls#VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceQueueShaderCoreControlCreateInfoARM {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #shaderCoreCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t shaderCoreCount;
+ * }}</pre>
  */
 public class VkDeviceQueueShaderCoreControlCreateInfoARM extends Struct<VkDeviceQueueShaderCoreControlCreateInfoARM> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class VkDeviceQueueShaderCoreControlCreateInfoARM extends Struct<VkDevice
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the number of shader cores this queue uses. */
+    /** @return the value of the {@code shaderCoreCount} field. */
     @NativeType("uint32_t")
     public int shaderCoreCount() { return nshaderCoreCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceQueueShaderCoreControlCreateInfoARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ARMSchedulingControls#VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM} value to the {@link #sType} field. */
+    /** Sets the {@link ARMSchedulingControls#VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM} value to the {@code sType} field. */
     public VkDeviceQueueShaderCoreControlCreateInfoARM sType$Default() { return sType(ARMSchedulingControls.VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceQueueShaderCoreControlCreateInfoARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderCoreCount} field. */
+    /** Sets the specified value to the {@code shaderCoreCount} field. */
     public VkDeviceQueueShaderCoreControlCreateInfoARM shaderCoreCount(@NativeType("uint32_t") int value) { nshaderCoreCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class VkDeviceQueueShaderCoreControlCreateInfoARM extends Struct<VkDevice
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceQueueShaderCoreControlCreateInfoARM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceQueueShaderCoreControlCreateInfoARM.nsType(address()); }
-        /** @return the value of the {@link VkDeviceQueueShaderCoreControlCreateInfoARM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDeviceQueueShaderCoreControlCreateInfoARM.npNext(address()); }
-        /** @return the value of the {@link VkDeviceQueueShaderCoreControlCreateInfoARM#shaderCoreCount} field. */
+        /** @return the value of the {@code shaderCoreCount} field. */
         @NativeType("uint32_t")
         public int shaderCoreCount() { return VkDeviceQueueShaderCoreControlCreateInfoARM.nshaderCoreCount(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceQueueShaderCoreControlCreateInfoARM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceQueueShaderCoreControlCreateInfoARM.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceQueueShaderCoreControlCreateInfoARM.nsType(address(), value); return this; }
-        /** Sets the {@link ARMSchedulingControls#VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM} value to the {@link VkDeviceQueueShaderCoreControlCreateInfoARM#sType} field. */
+        /** Sets the {@link ARMSchedulingControls#VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM} value to the {@code sType} field. */
         public VkDeviceQueueShaderCoreControlCreateInfoARM.Buffer sType$Default() { return sType(ARMSchedulingControls.VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM); }
-        /** Sets the specified value to the {@link VkDeviceQueueShaderCoreControlCreateInfoARM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceQueueShaderCoreControlCreateInfoARM.Buffer pNext(@NativeType("void *") long value) { VkDeviceQueueShaderCoreControlCreateInfoARM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceQueueShaderCoreControlCreateInfoARM#shaderCoreCount} field. */
+        /** Sets the specified value to the {@code shaderCoreCount} field. */
         public VkDeviceQueueShaderCoreControlCreateInfoARM.Buffer shaderCoreCount(@NativeType("uint32_t") int value) { VkDeviceQueueShaderCoreControlCreateInfoARM.nshaderCoreCount(address(), value); return this; }
 
     }

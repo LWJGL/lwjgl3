@@ -11,22 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_bool_t (*{@link #invoke}) (
- *     hb_paint_funcs_t *funcs,
- *     void *paint_data,
- *     hb_blob_t *image,
- *     unsigned int width,
- *     unsigned int height,
- *     hb_tag_t format,
- *     float slant,
- *     hb_glyph_extents_t *extents,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_paint_image_func_t} */
 public abstract class hb_paint_image_func_t extends Callback implements hb_paint_image_func_tI {
 
     /**

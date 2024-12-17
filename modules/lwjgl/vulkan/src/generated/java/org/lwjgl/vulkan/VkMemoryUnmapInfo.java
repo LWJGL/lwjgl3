@@ -16,44 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing parameters of a memory unmap operation.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code memory} <b>must</b> be currently host mapped</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_UNMAP_RESERVE_BIT_EXT MEMORY_UNMAP_RESERVE_BIT_EXT} is set in {@code flags}, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-memoryUnmapReserve">{@code memoryUnmapReserve}</a> <b>must</b> be enabled</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_UNMAP_RESERVE_BIT_EXT MEMORY_UNMAP_RESERVE_BIT_EXT} is set in {@code flags}, the memory object <b>must</b> not have been imported from a handle type of {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT} or {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO STRUCTURE_TYPE_MEMORY_UNMAP_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkMemoryUnmapFlagBits} values</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * </ul>
- * 
- * <h5>Host Synchronization</h5>
- * 
- * <ul>
- * <li>Host access to {@code memory} <b>must</b> be externally synchronized</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK14#vkUnmapMemory2 UnmapMemory2}, {@link KHRMapMemory2#vkUnmapMemory2KHR UnmapMemory2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryUnmapInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkMemoryUnmapFlags {@link #flags};
- *     VkDeviceMemory {@link #memory};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkMemoryUnmapFlags flags;
+ *     VkDeviceMemory memory;
+ * }}</pre>
  */
 public class VkMemoryUnmapInfo extends Struct<VkMemoryUnmapInfo> implements NativeResource {
 
@@ -109,28 +78,28 @@ public class VkMemoryUnmapInfo extends Struct<VkMemoryUnmapInfo> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkMemoryUnmapFlagBits} specifying additional parameters of the memory map operation. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkMemoryUnmapFlags")
     public int flags() { return nflags(address()); }
-    /** the {@code VkDeviceMemory} object to be unmapped. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryUnmapInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO STRUCTURE_TYPE_MEMORY_UNMAP_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO STRUCTURE_TYPE_MEMORY_UNMAP_INFO} value to the {@code sType} field. */
     public VkMemoryUnmapInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryUnmapInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkMemoryUnmapInfo flags(@NativeType("VkMemoryUnmapFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkMemoryUnmapInfo memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,28 +301,28 @@ public class VkMemoryUnmapInfo extends Struct<VkMemoryUnmapInfo> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryUnmapInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryUnmapInfo.nsType(address()); }
-        /** @return the value of the {@link VkMemoryUnmapInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryUnmapInfo.npNext(address()); }
-        /** @return the value of the {@link VkMemoryUnmapInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkMemoryUnmapFlags")
         public int flags() { return VkMemoryUnmapInfo.nflags(address()); }
-        /** @return the value of the {@link VkMemoryUnmapInfo#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkMemoryUnmapInfo.nmemory(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryUnmapInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryUnmapInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryUnmapInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO STRUCTURE_TYPE_MEMORY_UNMAP_INFO} value to the {@link VkMemoryUnmapInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO STRUCTURE_TYPE_MEMORY_UNMAP_INFO} value to the {@code sType} field. */
         public VkMemoryUnmapInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO); }
-        /** Sets the specified value to the {@link VkMemoryUnmapInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryUnmapInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryUnmapInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryUnmapInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkMemoryUnmapInfo.Buffer flags(@NativeType("VkMemoryUnmapFlags") int value) { VkMemoryUnmapInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryUnmapInfo#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkMemoryUnmapInfo.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkMemoryUnmapInfo.nmemory(address(), value); return this; }
 
     }

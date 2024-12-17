@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing a generic socket address.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct sockaddr {
- *     sa_family_t {@link #sa_family};
- *     char {@link #sa_data}[14];
- * }</code></pre>
+ *     sa_family_t sa_family;
+ *     char sa_data[14];
+ * }}</pre>
  */
 @NativeType("struct sockaddr")
 public class Sockaddr extends Struct<Sockaddr> implements NativeResource {
@@ -76,21 +72,21 @@ public class Sockaddr extends Struct<Sockaddr> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** address family and length */
+    /** @return the value of the {@code sa_family} field. */
     @NativeType("sa_family_t")
     public short sa_family() { return nsa_family(address()); }
-    /** address data */
+    /** @return a {@link ByteBuffer} view of the {@code sa_data} field. */
     @NativeType("char[14]")
     public ByteBuffer sa_data() { return nsa_data(address()); }
-    /** address data */
+    /** @return the value at the specified index of the {@code sa_data} field. */
     @NativeType("char")
     public byte sa_data(int index) { return nsa_data(address(), index); }
 
-    /** Sets the specified value to the {@link #sa_family} field. */
+    /** Sets the specified value to the {@code sa_family} field. */
     public Sockaddr sa_family(@NativeType("sa_family_t") short value) { nsa_family(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #sa_data} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code sa_data} field. */
     public Sockaddr sa_data(@NativeType("char[14]") ByteBuffer value) { nsa_data(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #sa_data} field. */
+    /** Sets the specified value at the specified index of the {@code sa_data} field. */
     public Sockaddr sa_data(int index, @NativeType("char") byte value) { nsa_data(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -291,21 +287,21 @@ public class Sockaddr extends Struct<Sockaddr> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link Sockaddr#sa_family} field. */
+        /** @return the value of the {@code sa_family} field. */
         @NativeType("sa_family_t")
         public short sa_family() { return Sockaddr.nsa_family(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link Sockaddr#sa_data} field. */
+        /** @return a {@link ByteBuffer} view of the {@code sa_data} field. */
         @NativeType("char[14]")
         public ByteBuffer sa_data() { return Sockaddr.nsa_data(address()); }
-        /** @return the value at the specified index of the {@link Sockaddr#sa_data} field. */
+        /** @return the value at the specified index of the {@code sa_data} field. */
         @NativeType("char")
         public byte sa_data(int index) { return Sockaddr.nsa_data(address(), index); }
 
-        /** Sets the specified value to the {@link Sockaddr#sa_family} field. */
+        /** Sets the specified value to the {@code sa_family} field. */
         public Sockaddr.Buffer sa_family(@NativeType("sa_family_t") short value) { Sockaddr.nsa_family(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link Sockaddr#sa_data} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code sa_data} field. */
         public Sockaddr.Buffer sa_data(@NativeType("char[14]") ByteBuffer value) { Sockaddr.nsa_data(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link Sockaddr#sa_data} field. */
+        /** Sets the specified value at the specified index of the {@code sa_data} field. */
         public Sockaddr.Buffer sa_data(int index, @NativeType("char") byte value) { Sockaddr.nsa_data(address(), index, value); return this; }
 
     }

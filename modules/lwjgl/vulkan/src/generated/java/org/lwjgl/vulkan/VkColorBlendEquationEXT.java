@@ -16,46 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the color blend factors and operations for an attachment.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dualSrcBlend">{@code dualSrcBlend}</a> feature is not enabled, {@code srcColorBlendFactor} <b>must</b> not be {@link VK10#VK_BLEND_FACTOR_SRC1_COLOR BLEND_FACTOR_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR BLEND_FACTOR_ONE_MINUS_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_SRC1_ALPHA BLEND_FACTOR_SRC1_ALPHA}, or {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dualSrcBlend">{@code dualSrcBlend}</a> feature is not enabled, {@code dstColorBlendFactor} <b>must</b> not be {@link VK10#VK_BLEND_FACTOR_SRC1_COLOR BLEND_FACTOR_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR BLEND_FACTOR_ONE_MINUS_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_SRC1_ALPHA BLEND_FACTOR_SRC1_ALPHA}, or {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dualSrcBlend">{@code dualSrcBlend}</a> feature is not enabled, {@code srcAlphaBlendFactor} <b>must</b> not be {@link VK10#VK_BLEND_FACTOR_SRC1_COLOR BLEND_FACTOR_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR BLEND_FACTOR_ONE_MINUS_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_SRC1_ALPHA BLEND_FACTOR_SRC1_ALPHA}, or {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dualSrcBlend">{@code dualSrcBlend}</a> feature is not enabled, {@code dstAlphaBlendFactor} <b>must</b> not be {@link VK10#VK_BLEND_FACTOR_SRC1_COLOR BLEND_FACTOR_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR BLEND_FACTOR_ONE_MINUS_SRC1_COLOR}, {@link VK10#VK_BLEND_FACTOR_SRC1_ALPHA BLEND_FACTOR_SRC1_ALPHA}, or {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA}</li>
- * <li>{@code colorBlendOp} and {@code alphaBlendOp} <b>must</b> not be {@link EXTBlendOperationAdvanced#VK_BLEND_OP_ZERO_EXT BLEND_OP_ZERO_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_SRC_EXT BLEND_OP_SRC_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_DST_EXT BLEND_OP_DST_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_SRC_OVER_EXT BLEND_OP_SRC_OVER_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_DST_OVER_EXT BLEND_OP_DST_OVER_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_SRC_IN_EXT BLEND_OP_SRC_IN_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_DST_IN_EXT BLEND_OP_DST_IN_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_SRC_OUT_EXT BLEND_OP_SRC_OUT_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_DST_OUT_EXT BLEND_OP_DST_OUT_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_SRC_ATOP_EXT BLEND_OP_SRC_ATOP_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_DST_ATOP_EXT BLEND_OP_DST_ATOP_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_XOR_EXT BLEND_OP_XOR_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_MULTIPLY_EXT BLEND_OP_MULTIPLY_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_SCREEN_EXT BLEND_OP_SCREEN_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_OVERLAY_EXT BLEND_OP_OVERLAY_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_DARKEN_EXT BLEND_OP_DARKEN_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_LIGHTEN_EXT BLEND_OP_LIGHTEN_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_COLORDODGE_EXT BLEND_OP_COLORDODGE_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_COLORBURN_EXT BLEND_OP_COLORBURN_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_HARDLIGHT_EXT BLEND_OP_HARDLIGHT_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_SOFTLIGHT_EXT BLEND_OP_SOFTLIGHT_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_DIFFERENCE_EXT BLEND_OP_DIFFERENCE_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_EXCLUSION_EXT BLEND_OP_EXCLUSION_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_INVERT_EXT BLEND_OP_INVERT_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_INVERT_RGB_EXT BLEND_OP_INVERT_RGB_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_LINEARDODGE_EXT BLEND_OP_LINEARDODGE_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_LINEARBURN_EXT BLEND_OP_LINEARBURN_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_VIVIDLIGHT_EXT BLEND_OP_VIVIDLIGHT_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_LINEARLIGHT_EXT BLEND_OP_LINEARLIGHT_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_PINLIGHT_EXT BLEND_OP_PINLIGHT_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_HARDMIX_EXT BLEND_OP_HARDMIX_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_HSL_HUE_EXT BLEND_OP_HSL_HUE_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_HSL_SATURATION_EXT BLEND_OP_HSL_SATURATION_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_HSL_COLOR_EXT BLEND_OP_HSL_COLOR_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_HSL_LUMINOSITY_EXT BLEND_OP_HSL_LUMINOSITY_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_PLUS_EXT BLEND_OP_PLUS_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_PLUS_CLAMPED_EXT BLEND_OP_PLUS_CLAMPED_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_PLUS_CLAMPED_ALPHA_EXT BLEND_OP_PLUS_CLAMPED_ALPHA_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_PLUS_DARKER_EXT BLEND_OP_PLUS_DARKER_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_MINUS_EXT BLEND_OP_MINUS_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_MINUS_CLAMPED_EXT BLEND_OP_MINUS_CLAMPED_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_CONTRAST_EXT BLEND_OP_CONTRAST_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_INVERT_OVG_EXT BLEND_OP_INVERT_OVG_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_RED_EXT BLEND_OP_RED_EXT}, {@link EXTBlendOperationAdvanced#VK_BLEND_OP_GREEN_EXT BLEND_OP_GREEN_EXT}, or {@link EXTBlendOperationAdvanced#VK_BLEND_OP_BLUE_EXT BLEND_OP_BLUE_EXT}</li>
- * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::constantAlphaColorBlendFactors} is {@link VK10#VK_FALSE FALSE}, {@code srcColorBlendFactor} <b>must</b> not be {@link VK10#VK_BLEND_FACTOR_CONSTANT_ALPHA BLEND_FACTOR_CONSTANT_ALPHA} or {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA}</li>
- * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, and {@link VkPhysicalDevicePortabilitySubsetFeaturesKHR}{@code ::constantAlphaColorBlendFactors} is {@link VK10#VK_FALSE FALSE}, {@code dstColorBlendFactor} <b>must</b> not be {@link VK10#VK_BLEND_FACTOR_CONSTANT_ALPHA BLEND_FACTOR_CONSTANT_ALPHA} or {@link VK10#VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code srcColorBlendFactor} <b>must</b> be a valid {@code VkBlendFactor} value</li>
- * <li>{@code dstColorBlendFactor} <b>must</b> be a valid {@code VkBlendFactor} value</li>
- * <li>{@code colorBlendOp} <b>must</b> be a valid {@code VkBlendOp} value</li>
- * <li>{@code srcAlphaBlendFactor} <b>must</b> be a valid {@code VkBlendFactor} value</li>
- * <li>{@code dstAlphaBlendFactor} <b>must</b> be a valid {@code VkBlendFactor} value</li>
- * <li>{@code alphaBlendOp} <b>must</b> be a valid {@code VkBlendOp} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTShaderObject#vkCmdSetColorBlendEquationEXT CmdSetColorBlendEquationEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkColorBlendEquationEXT {
- *     VkBlendFactor {@link #srcColorBlendFactor};
- *     VkBlendFactor {@link #dstColorBlendFactor};
- *     VkBlendOp {@link #colorBlendOp};
- *     VkBlendFactor {@link #srcAlphaBlendFactor};
- *     VkBlendFactor {@link #dstAlphaBlendFactor};
- *     VkBlendOp {@link #alphaBlendOp};
- * }</code></pre>
+ *     VkBlendFactor srcColorBlendFactor;
+ *     VkBlendFactor dstColorBlendFactor;
+ *     VkBlendOp colorBlendOp;
+ *     VkBlendFactor srcAlphaBlendFactor;
+ *     VkBlendFactor dstAlphaBlendFactor;
+ *     VkBlendOp alphaBlendOp;
+ * }}</pre>
  */
 public class VkColorBlendEquationEXT extends Struct<VkColorBlendEquationEXT> implements NativeResource {
 
@@ -117,36 +86,36 @@ public class VkColorBlendEquationEXT extends Struct<VkColorBlendEquationEXT> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** selects which blend factor is used to determine the source factors <code>(S<sub>r</sub>,S<sub>g</sub>,S<sub>b</sub>)</code>. */
+    /** @return the value of the {@code srcColorBlendFactor} field. */
     @NativeType("VkBlendFactor")
     public int srcColorBlendFactor() { return nsrcColorBlendFactor(address()); }
-    /** selects which blend factor is used to determine the destination factors <code>(D<sub>r</sub>,D<sub>g</sub>,D<sub>b</sub>)</code>. */
+    /** @return the value of the {@code dstColorBlendFactor} field. */
     @NativeType("VkBlendFactor")
     public int dstColorBlendFactor() { return ndstColorBlendFactor(address()); }
-    /** selects which blend operation is used to calculate the RGB values to write to the color attachment. */
+    /** @return the value of the {@code colorBlendOp} field. */
     @NativeType("VkBlendOp")
     public int colorBlendOp() { return ncolorBlendOp(address()); }
-    /** selects which blend factor is used to determine the source factor <code>S<sub>a</sub></code>. */
+    /** @return the value of the {@code srcAlphaBlendFactor} field. */
     @NativeType("VkBlendFactor")
     public int srcAlphaBlendFactor() { return nsrcAlphaBlendFactor(address()); }
-    /** selects which blend factor is used to determine the destination factor <code>D<sub>a</sub></code>. */
+    /** @return the value of the {@code dstAlphaBlendFactor} field. */
     @NativeType("VkBlendFactor")
     public int dstAlphaBlendFactor() { return ndstAlphaBlendFactor(address()); }
-    /** selects which blend operation is use to calculate the alpha values to write to the color attachment. */
+    /** @return the value of the {@code alphaBlendOp} field. */
     @NativeType("VkBlendOp")
     public int alphaBlendOp() { return nalphaBlendOp(address()); }
 
-    /** Sets the specified value to the {@link #srcColorBlendFactor} field. */
+    /** Sets the specified value to the {@code srcColorBlendFactor} field. */
     public VkColorBlendEquationEXT srcColorBlendFactor(@NativeType("VkBlendFactor") int value) { nsrcColorBlendFactor(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstColorBlendFactor} field. */
+    /** Sets the specified value to the {@code dstColorBlendFactor} field. */
     public VkColorBlendEquationEXT dstColorBlendFactor(@NativeType("VkBlendFactor") int value) { ndstColorBlendFactor(address(), value); return this; }
-    /** Sets the specified value to the {@link #colorBlendOp} field. */
+    /** Sets the specified value to the {@code colorBlendOp} field. */
     public VkColorBlendEquationEXT colorBlendOp(@NativeType("VkBlendOp") int value) { ncolorBlendOp(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcAlphaBlendFactor} field. */
+    /** Sets the specified value to the {@code srcAlphaBlendFactor} field. */
     public VkColorBlendEquationEXT srcAlphaBlendFactor(@NativeType("VkBlendFactor") int value) { nsrcAlphaBlendFactor(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstAlphaBlendFactor} field. */
+    /** Sets the specified value to the {@code dstAlphaBlendFactor} field. */
     public VkColorBlendEquationEXT dstAlphaBlendFactor(@NativeType("VkBlendFactor") int value) { ndstAlphaBlendFactor(address(), value); return this; }
-    /** Sets the specified value to the {@link #alphaBlendOp} field. */
+    /** Sets the specified value to the {@code alphaBlendOp} field. */
     public VkColorBlendEquationEXT alphaBlendOp(@NativeType("VkBlendOp") int value) { nalphaBlendOp(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -360,36 +329,36 @@ public class VkColorBlendEquationEXT extends Struct<VkColorBlendEquationEXT> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkColorBlendEquationEXT#srcColorBlendFactor} field. */
+        /** @return the value of the {@code srcColorBlendFactor} field. */
         @NativeType("VkBlendFactor")
         public int srcColorBlendFactor() { return VkColorBlendEquationEXT.nsrcColorBlendFactor(address()); }
-        /** @return the value of the {@link VkColorBlendEquationEXT#dstColorBlendFactor} field. */
+        /** @return the value of the {@code dstColorBlendFactor} field. */
         @NativeType("VkBlendFactor")
         public int dstColorBlendFactor() { return VkColorBlendEquationEXT.ndstColorBlendFactor(address()); }
-        /** @return the value of the {@link VkColorBlendEquationEXT#colorBlendOp} field. */
+        /** @return the value of the {@code colorBlendOp} field. */
         @NativeType("VkBlendOp")
         public int colorBlendOp() { return VkColorBlendEquationEXT.ncolorBlendOp(address()); }
-        /** @return the value of the {@link VkColorBlendEquationEXT#srcAlphaBlendFactor} field. */
+        /** @return the value of the {@code srcAlphaBlendFactor} field. */
         @NativeType("VkBlendFactor")
         public int srcAlphaBlendFactor() { return VkColorBlendEquationEXT.nsrcAlphaBlendFactor(address()); }
-        /** @return the value of the {@link VkColorBlendEquationEXT#dstAlphaBlendFactor} field. */
+        /** @return the value of the {@code dstAlphaBlendFactor} field. */
         @NativeType("VkBlendFactor")
         public int dstAlphaBlendFactor() { return VkColorBlendEquationEXT.ndstAlphaBlendFactor(address()); }
-        /** @return the value of the {@link VkColorBlendEquationEXT#alphaBlendOp} field. */
+        /** @return the value of the {@code alphaBlendOp} field. */
         @NativeType("VkBlendOp")
         public int alphaBlendOp() { return VkColorBlendEquationEXT.nalphaBlendOp(address()); }
 
-        /** Sets the specified value to the {@link VkColorBlendEquationEXT#srcColorBlendFactor} field. */
+        /** Sets the specified value to the {@code srcColorBlendFactor} field. */
         public VkColorBlendEquationEXT.Buffer srcColorBlendFactor(@NativeType("VkBlendFactor") int value) { VkColorBlendEquationEXT.nsrcColorBlendFactor(address(), value); return this; }
-        /** Sets the specified value to the {@link VkColorBlendEquationEXT#dstColorBlendFactor} field. */
+        /** Sets the specified value to the {@code dstColorBlendFactor} field. */
         public VkColorBlendEquationEXT.Buffer dstColorBlendFactor(@NativeType("VkBlendFactor") int value) { VkColorBlendEquationEXT.ndstColorBlendFactor(address(), value); return this; }
-        /** Sets the specified value to the {@link VkColorBlendEquationEXT#colorBlendOp} field. */
+        /** Sets the specified value to the {@code colorBlendOp} field. */
         public VkColorBlendEquationEXT.Buffer colorBlendOp(@NativeType("VkBlendOp") int value) { VkColorBlendEquationEXT.ncolorBlendOp(address(), value); return this; }
-        /** Sets the specified value to the {@link VkColorBlendEquationEXT#srcAlphaBlendFactor} field. */
+        /** Sets the specified value to the {@code srcAlphaBlendFactor} field. */
         public VkColorBlendEquationEXT.Buffer srcAlphaBlendFactor(@NativeType("VkBlendFactor") int value) { VkColorBlendEquationEXT.nsrcAlphaBlendFactor(address(), value); return this; }
-        /** Sets the specified value to the {@link VkColorBlendEquationEXT#dstAlphaBlendFactor} field. */
+        /** Sets the specified value to the {@code dstAlphaBlendFactor} field. */
         public VkColorBlendEquationEXT.Buffer dstAlphaBlendFactor(@NativeType("VkBlendFactor") int value) { VkColorBlendEquationEXT.ndstAlphaBlendFactor(address(), value); return this; }
-        /** Sets the specified value to the {@link VkColorBlendEquationEXT#alphaBlendOp} field. */
+        /** Sets the specified value to the {@code alphaBlendOp} field. */
         public VkColorBlendEquationEXT.Buffer alphaBlendOp(@NativeType("VkBlendOp") int value) { VkColorBlendEquationEXT.nalphaBlendOp(address(), value); return this; }
 
     }

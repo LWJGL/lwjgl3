@@ -17,31 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying shader objects for use with indirect command preprocessing.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code pShaders} <b>must</b> not contain more than one shader object for a given {@code VkShaderStageFlagBits} stage</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT}</li>
- * <li>{@code pShaders} <b>must</b> be a valid pointer to an array of {@code shaderCount} valid {@code VkShaderEXT} handles</li>
- * <li>{@code shaderCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkGeneratedCommandsShaderInfoEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #shaderCount};
- *     VkShaderEXT const * {@link #pShaders};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t shaderCount;
+ *     VkShaderEXT const * pShaders;
+ * }}</pre>
  */
 public class VkGeneratedCommandsShaderInfoEXT extends Struct<VkGeneratedCommandsShaderInfoEXT> implements NativeResource {
 
@@ -97,26 +79,26 @@ public class VkGeneratedCommandsShaderInfoEXT extends Struct<VkGeneratedCommands
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the size of the {@code pShaders} array. */
+    /** @return the value of the {@code shaderCount} field. */
     @NativeType("uint32_t")
     public int shaderCount() { return nshaderCount(address()); }
-    /** a pointer to an array of shader objects. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pShaders} field. */
     @NativeType("VkShaderEXT const *")
     public LongBuffer pShaders() { return npShaders(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkGeneratedCommandsShaderInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT} value to the {@code sType} field. */
     public VkGeneratedCommandsShaderInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkGeneratedCommandsShaderInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pShaders} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pShaders} field. */
     public VkGeneratedCommandsShaderInfoEXT pShaders(@NativeType("VkShaderEXT const *") LongBuffer value) { npShaders(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,26 +307,26 @@ public class VkGeneratedCommandsShaderInfoEXT extends Struct<VkGeneratedCommands
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkGeneratedCommandsShaderInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkGeneratedCommandsShaderInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsShaderInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkGeneratedCommandsShaderInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkGeneratedCommandsShaderInfoEXT#shaderCount} field. */
+        /** @return the value of the {@code shaderCount} field. */
         @NativeType("uint32_t")
         public int shaderCount() { return VkGeneratedCommandsShaderInfoEXT.nshaderCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkGeneratedCommandsShaderInfoEXT#pShaders} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pShaders} field. */
         @NativeType("VkShaderEXT const *")
         public LongBuffer pShaders() { return VkGeneratedCommandsShaderInfoEXT.npShaders(address()); }
 
-        /** Sets the specified value to the {@link VkGeneratedCommandsShaderInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkGeneratedCommandsShaderInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkGeneratedCommandsShaderInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT} value to the {@link VkGeneratedCommandsShaderInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT} value to the {@code sType} field. */
         public VkGeneratedCommandsShaderInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT); }
-        /** Sets the specified value to the {@link VkGeneratedCommandsShaderInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkGeneratedCommandsShaderInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkGeneratedCommandsShaderInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkGeneratedCommandsShaderInfoEXT#pShaders} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pShaders} field. */
         public VkGeneratedCommandsShaderInfoEXT.Buffer pShaders(@NativeType("VkShaderEXT const *") LongBuffer value) { VkGeneratedCommandsShaderInfoEXT.npShaders(address(), value); return this; }
 
     }

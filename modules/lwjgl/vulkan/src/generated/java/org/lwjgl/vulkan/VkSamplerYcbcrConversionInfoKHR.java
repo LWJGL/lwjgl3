@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSamplerYcbcrConversionInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerYcbcrConversionInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkSamplerYcbcrConversion conversion;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSamplerYcbcrConversionInfoKHR extends VkSamplerYcbcrConversionInfo {
 

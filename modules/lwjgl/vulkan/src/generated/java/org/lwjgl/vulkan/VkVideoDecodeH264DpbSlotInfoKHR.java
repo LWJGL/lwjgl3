@@ -19,67 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifies H.264 decode DPB picture information.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is specified in the {@code pNext} chain of {@link VkVideoDecodeInfoKHR}{@code ::pSetupReferenceSlot}, if not {@code NULL}, and the {@code pNext} chain of the elements of {@link VkVideoDecodeInfoKHR}{@code ::pReferenceSlots} to specify the codec-specific reference picture information for an <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264">H.264 decode operation</a>.</p>
- * 
- * <dl>
- * <dt>Active Reference Picture Information</dt>
- * <dd><ul>
- * <li>If neither {@code pStdReferenceInfo→flags.top_field_flag} nor {@code pStdReferenceInfo→flags.bottom_field_flag} is set, then the picture is added as a frame reference to the list of active reference pictures.</li>
- * <li>If {@code pStdReferenceInfo→flags.top_field_flag} is set, then the picture is added as a top field reference to the list of active reference pictures.</li>
- * <li>If {@code pStdReferenceInfo→flags.bottom_field_flag} is set, then the picture is added as a bottom field reference to the list of active reference pictures.</li>
- * <li>For each added reference picture, the corresponding image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264-picture-data-access">H.264 Decode Picture Data Access</a> section.</li>
- * <li>Each added reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> index specified in the {@code slotIndex} member of the corresponding element of {@link VkVideoDecodeInfoKHR}{@code ::pReferenceSlots}.</li>
- * <li>Each added reference picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264-reference-info">H.264 reference information</a> provided in {@code pStdReferenceInfo}.</li>
- * </ul></dd>
- * </dl>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>When both the top and bottom field of an interlaced frame currently associated with a DPB slot is intended to be used as an active reference picture and both fields are stored in the same image subregion (which is the case when using {@link KHRVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_KHR VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_INTERLEAVED_LINES_BIT_KHR} which stores the two fields at even and odd scanlines of the same image subregion), both references have to be provided through a single {@link VkVideoReferenceSlotInfoKHR} structure that has both {@code flags.top_field_flag} and {@code flags.bottom_field_flag} set in the {@code StdVideoDecodeH264ReferenceInfo} structure pointed to by the {@code pStdReferenceInfo} member of the {@link VkVideoDecodeH264DpbSlotInfoKHR} structure included in the corresponding {@link VkVideoReferenceSlotInfoKHR} structure’s {@code pNext} chain. However, this approach can only be used when both fields are stored in the same image subregion. If that is not the case (e.g. when using {@link KHRVideoDecodeH264#VK_VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR VIDEO_DECODE_H264_PICTURE_LAYOUT_INTERLACED_SEPARATE_PLANES_BIT_KHR} which requires separate {@code codedOffset} values for the two fields and also allows storing the two fields of a frame in separate image layers or entirely separate images), then a separate {@link VkVideoReferenceSlotInfoKHR} structure needs to be provided for referencing the two fields, each only setting one of {@code flags.top_field_flag} or {@code flags.bottom_field_flag}, and providing the appropriate video picture resource information in {@link VkVideoReferenceSlotInfoKHR}{@code ::pPictureResource}.</p>
- * </div>
- * 
- * <dl>
- * <dt>Reconstructed Picture Information</dt>
- * <dd><ul>
- * <li>If neither {@code pStdReferenceInfo→flags.top_field_flag} nor {@code pStdReferenceInfo→flags.bottom_field_flag} is set, then the picture represents a frame.</li>
- * <li>If {@code pStdReferenceInfo→flags.top_field_flag} is set, then the picture represents a field, specifically, the top field of the frame.</li>
- * <li>If {@code pStdReferenceInfo→flags.bottom_field_flag} is set, then the picture represents a field, specifically, the bottom field of the frame.</li>
- * <li>The image subregion used is determined according to the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264-picture-data-access">H.264 Decode Picture Data Access</a> section.</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-ref-pic-setup">reference picture setup</a> is requested, then the reconstructed picture is used to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot-states">activate</a> the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#dpb-slot">DPB slot</a> with the index specified in {@link VkVideoDecodeInfoKHR}{@code ::pSetupReferenceSlot→slotIndex}.</li>
- * <li>The reconstructed picture is associated with the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264-reference-info">H.264 reference information</a> provided in {@code pStdReferenceInfo}.</li>
- * </ul></dd>
- * </dl>
- * 
- * <dl>
- * <dt>Std Reference Information</dt>
- * <dd><ul>
- * <li>{@code flags.top_field_flag} is used to indicate whether the reference is used as top field reference;</li>
- * <li>{@code flags.bottom_field_flag} is used to indicate whether the reference is used as bottom field reference;</li>
- * <li>{@code flags.used_for_long_term_reference} is used to indicate whether the picture is marked as “used for long-term reference” as defined in section 8.2.5.1 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>{@code flags.is_non_existing} is used to indicate whether the picture is marked as “non-existing” as defined in section 8.2.5.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>;</li>
- * <li>all other members are interpreted as defined in section 8.2 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>.</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR}</li>
- * <li>{@code pStdReferenceInfo} <b>must</b> be a valid pointer to a valid {@code StdVideoDecodeH264ReferenceInfo} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoDecodeH264DpbSlotInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link StdVideoDecodeH264ReferenceInfo StdVideoDecodeH264ReferenceInfo} const * {@link #pStdReferenceInfo};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link StdVideoDecodeH264ReferenceInfo StdVideoDecodeH264ReferenceInfo} const * pStdReferenceInfo;
+ * }}</pre>
  */
 public class VkVideoDecodeH264DpbSlotInfoKHR extends Struct<VkVideoDecodeH264DpbSlotInfoKHR> implements NativeResource {
 
@@ -132,23 +77,23 @@ public class VkVideoDecodeH264DpbSlotInfoKHR extends Struct<VkVideoDecodeH264Dpb
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a pointer to a {@code StdVideoDecodeH264ReferenceInfo} structure specifying <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#decode-h264-reference-info">H.264 reference information</a>. */
+    /** @return a {@link StdVideoDecodeH264ReferenceInfo} view of the struct pointed to by the {@code pStdReferenceInfo} field. */
     @NativeType("StdVideoDecodeH264ReferenceInfo const *")
     public StdVideoDecodeH264ReferenceInfo pStdReferenceInfo() { return npStdReferenceInfo(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoDecodeH264DpbSlotInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR} value to the {@code sType} field. */
     public VkVideoDecodeH264DpbSlotInfoKHR sType$Default() { return sType(KHRVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoDecodeH264DpbSlotInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoDecodeH264ReferenceInfo} to the {@link #pStdReferenceInfo} field. */
+    /** Sets the address of the specified {@link StdVideoDecodeH264ReferenceInfo} to the {@code pStdReferenceInfo} field. */
     public VkVideoDecodeH264DpbSlotInfoKHR pStdReferenceInfo(@NativeType("StdVideoDecodeH264ReferenceInfo const *") StdVideoDecodeH264ReferenceInfo value) { npStdReferenceInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -353,23 +298,23 @@ public class VkVideoDecodeH264DpbSlotInfoKHR extends Struct<VkVideoDecodeH264Dpb
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoDecodeH264DpbSlotInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoDecodeH264DpbSlotInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoDecodeH264DpbSlotInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoDecodeH264DpbSlotInfoKHR.npNext(address()); }
-        /** @return a {@link StdVideoDecodeH264ReferenceInfo} view of the struct pointed to by the {@link VkVideoDecodeH264DpbSlotInfoKHR#pStdReferenceInfo} field. */
+        /** @return a {@link StdVideoDecodeH264ReferenceInfo} view of the struct pointed to by the {@code pStdReferenceInfo} field. */
         @NativeType("StdVideoDecodeH264ReferenceInfo const *")
         public StdVideoDecodeH264ReferenceInfo pStdReferenceInfo() { return VkVideoDecodeH264DpbSlotInfoKHR.npStdReferenceInfo(address()); }
 
-        /** Sets the specified value to the {@link VkVideoDecodeH264DpbSlotInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoDecodeH264DpbSlotInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoDecodeH264DpbSlotInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR} value to the {@link VkVideoDecodeH264DpbSlotInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoDecodeH264#VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR} value to the {@code sType} field. */
         public VkVideoDecodeH264DpbSlotInfoKHR.Buffer sType$Default() { return sType(KHRVideoDecodeH264.VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoDecodeH264DpbSlotInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoDecodeH264DpbSlotInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoDecodeH264DpbSlotInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoDecodeH264ReferenceInfo} to the {@link VkVideoDecodeH264DpbSlotInfoKHR#pStdReferenceInfo} field. */
+        /** Sets the address of the specified {@link StdVideoDecodeH264ReferenceInfo} to the {@code pStdReferenceInfo} field. */
         public VkVideoDecodeH264DpbSlotInfoKHR.Buffer pStdReferenceInfo(@NativeType("StdVideoDecodeH264ReferenceInfo const *") StdVideoDecodeH264ReferenceInfo value) { VkVideoDecodeH264DpbSlotInfoKHR.npStdReferenceInfo(address(), value); return this; }
 
     }

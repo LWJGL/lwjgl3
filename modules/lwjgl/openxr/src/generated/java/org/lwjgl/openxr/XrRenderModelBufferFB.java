@@ -16,35 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The buffer containing the data for the render model.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrRenderModelBufferFB} is used when loading the binary data for a render model. {@link XrRenderModelBufferFB} <b>must</b> be provided when calling {@link FBRenderModel#xrLoadRenderModelFB LoadRenderModelFB}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBRenderModel XR_FB_render_model} extension <b>must</b> be enabled prior to using {@link XrRenderModelBufferFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBRenderModel#XR_TYPE_RENDER_MODEL_BUFFER_FB TYPE_RENDER_MODEL_BUFFER_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code bufferCapacityInput} is not 0, {@code buffer} <b>must</b> be a pointer to an array of {@code bufferCapacityInput} {@code uint8_t} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBRenderModel#xrLoadRenderModelFB LoadRenderModelFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrRenderModelBufferFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #bufferCapacityInput};
- *     uint32_t {@link #bufferCountOutput};
- *     uint8_t * {@link #buffer};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t bufferCapacityInput;
+ *     uint32_t bufferCountOutput;
+ *     uint8_t * buffer;
+ * }}</pre>
  */
 public class XrRenderModelBufferFB extends Struct<XrRenderModelBufferFB> implements NativeResource {
 
@@ -103,33 +82,33 @@ public class XrRenderModelBufferFB extends Struct<XrRenderModelBufferFB> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the capacity of the {@code buffer}, or 0 to retrieve the required capacity. */
+    /** @return the value of the {@code bufferCapacityInput} field. */
     @NativeType("uint32_t")
     public int bufferCapacityInput() { return nbufferCapacityInput(address()); }
-    /** the count of {@code uint8_t} {@code buffer} written, or the required capacity in the case that {@code bufferCapacityInput} is insufficient. */
+    /** @return the value of the {@code bufferCountOutput} field. */
     @NativeType("uint32_t")
     public int bufferCountOutput() { return nbufferCountOutput(address()); }
-    /** a pointer to an application-allocated array that will be filled with the render model binary data. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("uint8_t *")
     public @Nullable ByteBuffer buffer() { return nbuffer(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrRenderModelBufferFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_BUFFER_FB TYPE_RENDER_MODEL_BUFFER_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_BUFFER_FB TYPE_RENDER_MODEL_BUFFER_FB} value to the {@code type} field. */
     public XrRenderModelBufferFB type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_BUFFER_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrRenderModelBufferFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #bufferCapacityInput} field. */
+    /** Sets the specified value to the {@code bufferCapacityInput} field. */
     public XrRenderModelBufferFB bufferCapacityInput(@NativeType("uint32_t") int value) { nbufferCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@link #bufferCountOutput} field. */
+    /** Sets the specified value to the {@code bufferCountOutput} field. */
     public XrRenderModelBufferFB bufferCountOutput(@NativeType("uint32_t") int value) { nbufferCountOutput(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #buffer} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
     public XrRenderModelBufferFB buffer(@Nullable @NativeType("uint8_t *") ByteBuffer value) { nbuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,33 +316,33 @@ public class XrRenderModelBufferFB extends Struct<XrRenderModelBufferFB> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrRenderModelBufferFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrRenderModelBufferFB.ntype(address()); }
-        /** @return the value of the {@link XrRenderModelBufferFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrRenderModelBufferFB.nnext(address()); }
-        /** @return the value of the {@link XrRenderModelBufferFB#bufferCapacityInput} field. */
+        /** @return the value of the {@code bufferCapacityInput} field. */
         @NativeType("uint32_t")
         public int bufferCapacityInput() { return XrRenderModelBufferFB.nbufferCapacityInput(address()); }
-        /** @return the value of the {@link XrRenderModelBufferFB#bufferCountOutput} field. */
+        /** @return the value of the {@code bufferCountOutput} field. */
         @NativeType("uint32_t")
         public int bufferCountOutput() { return XrRenderModelBufferFB.nbufferCountOutput(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link XrRenderModelBufferFB#buffer} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("uint8_t *")
         public @Nullable ByteBuffer buffer() { return XrRenderModelBufferFB.nbuffer(address()); }
 
-        /** Sets the specified value to the {@link XrRenderModelBufferFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrRenderModelBufferFB.Buffer type(@NativeType("XrStructureType") int value) { XrRenderModelBufferFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_BUFFER_FB TYPE_RENDER_MODEL_BUFFER_FB} value to the {@link XrRenderModelBufferFB#type} field. */
+        /** Sets the {@link FBRenderModel#XR_TYPE_RENDER_MODEL_BUFFER_FB TYPE_RENDER_MODEL_BUFFER_FB} value to the {@code type} field. */
         public XrRenderModelBufferFB.Buffer type$Default() { return type(FBRenderModel.XR_TYPE_RENDER_MODEL_BUFFER_FB); }
-        /** Sets the specified value to the {@link XrRenderModelBufferFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrRenderModelBufferFB.Buffer next(@NativeType("void *") long value) { XrRenderModelBufferFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrRenderModelBufferFB#bufferCapacityInput} field. */
+        /** Sets the specified value to the {@code bufferCapacityInput} field. */
         public XrRenderModelBufferFB.Buffer bufferCapacityInput(@NativeType("uint32_t") int value) { XrRenderModelBufferFB.nbufferCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrRenderModelBufferFB#bufferCountOutput} field. */
+        /** Sets the specified value to the {@code bufferCountOutput} field. */
         public XrRenderModelBufferFB.Buffer bufferCountOutput(@NativeType("uint32_t") int value) { XrRenderModelBufferFB.nbufferCountOutput(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link XrRenderModelBufferFB#buffer} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
         public XrRenderModelBufferFB.Buffer buffer(@Nullable @NativeType("uint8_t *") ByteBuffer value) { XrRenderModelBufferFB.nbuffer(address(), value); return this; }
 
     }

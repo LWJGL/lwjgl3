@@ -11,14 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     FT_Pointer *data_pointer
- * )</code></pre>
- */
+/** Callback function: {@link #invoke SVG_Lib_Init_Func} */
 public abstract class SVG_Lib_Init_Func extends Callback implements SVG_Lib_Init_FuncI {
 
     /**

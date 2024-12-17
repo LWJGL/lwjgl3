@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     nk_handle handle,
- *     void *old,
- *     nk_size size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke nk_plugin_alloc} */
 @FunctionalInterface
 @NativeType("nk_plugin_alloc")
 public interface NkPluginAllocI extends CallbackI {
@@ -45,6 +36,7 @@ public interface NkPluginAllocI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code void * (* nk_plugin_alloc) (nk_handle handle, void * old, nk_size size)} */
     @NativeType("void *") long invoke(@NativeType("nk_handle") long handle, @NativeType("void *") long old, @NativeType("nk_size") long size);
 
 }

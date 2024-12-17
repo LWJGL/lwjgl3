@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the memory object to query an address for.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code memory} <b>must</b> have been allocated with {@link VK12#VK_MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT MEMORY_ALLOCATE_DEVICE_ADDRESS_BIT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK12#vkGetDeviceMemoryOpaqueCaptureAddress GetDeviceMemoryOpaqueCaptureAddress}, {@link KHRBufferDeviceAddress#vkGetDeviceMemoryOpaqueCaptureAddressKHR GetDeviceMemoryOpaqueCaptureAddressKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceMemoryOpaqueCaptureAddressInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceMemory {@link #memory};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceMemory memory;
+ * }}</pre>
  */
 public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct<VkDeviceMemoryOpaqueCaptureAddressInfo> implements NativeResource {
 
@@ -96,23 +74,23 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct<VkDeviceMemor
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies the memory whose address is being queried. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceMemoryOpaqueCaptureAddressInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO} value to the {@code sType} field. */
     public VkDeviceMemoryOpaqueCaptureAddressInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceMemoryOpaqueCaptureAddressInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkDeviceMemoryOpaqueCaptureAddressInfo memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -308,23 +286,23 @@ public class VkDeviceMemoryOpaqueCaptureAddressInfo extends Struct<VkDeviceMemor
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceMemoryOpaqueCaptureAddressInfo.nsType(address()); }
-        /** @return the value of the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceMemoryOpaqueCaptureAddressInfo.npNext(address()); }
-        /** @return the value of the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkDeviceMemoryOpaqueCaptureAddressInfo.nmemory(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceMemoryOpaqueCaptureAddressInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO} value to the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO} value to the {@code sType} field. */
         public VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO); }
-        /** Sets the specified value to the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceMemoryOpaqueCaptureAddressInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceMemoryOpaqueCaptureAddressInfo#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkDeviceMemoryOpaqueCaptureAddressInfo.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkDeviceMemoryOpaqueCaptureAddressInfo.nmemory(address(), value); return this; }
 
     }

@@ -17,19 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Union specifying parameters of a newly created indirect execution set.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectExecutionSetCreateInfoEXT}, {@link VkIndirectExecutionSetPipelineInfoEXT}, {@link VkIndirectExecutionSetShaderInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union VkIndirectExecutionSetInfoEXT {
- *     {@link VkIndirectExecutionSetPipelineInfoEXT VkIndirectExecutionSetPipelineInfoEXT} const * {@link #pPipelineInfo};
- *     {@link VkIndirectExecutionSetShaderInfoEXT VkIndirectExecutionSetShaderInfoEXT} const * {@link #pShaderInfo};
- * }</code></pre>
+ *     {@link VkIndirectExecutionSetPipelineInfoEXT VkIndirectExecutionSetPipelineInfoEXT} const * pPipelineInfo;
+ *     {@link VkIndirectExecutionSetShaderInfoEXT VkIndirectExecutionSetShaderInfoEXT} const * pShaderInfo;
+ * }}</pre>
  */
 public class VkIndirectExecutionSetInfoEXT extends Struct<VkIndirectExecutionSetInfoEXT> implements NativeResource {
 
@@ -79,16 +71,16 @@ public class VkIndirectExecutionSetInfoEXT extends Struct<VkIndirectExecutionSet
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a pointer to a {@link VkIndirectExecutionSetPipelineInfoEXT} struct containing pipeline layout information for the set. */
+    /** @return a {@link VkIndirectExecutionSetPipelineInfoEXT} view of the struct pointed to by the {@code pPipelineInfo} field. */
     @NativeType("VkIndirectExecutionSetPipelineInfoEXT const *")
     public VkIndirectExecutionSetPipelineInfoEXT pPipelineInfo() { return npPipelineInfo(address()); }
-    /** a pointer to a {@link VkIndirectExecutionSetShaderInfoEXT} struct containing shader object layout information for the set. */
+    /** @return a {@link VkIndirectExecutionSetShaderInfoEXT} view of the struct pointed to by the {@code pShaderInfo} field. */
     @NativeType("VkIndirectExecutionSetShaderInfoEXT const *")
     public VkIndirectExecutionSetShaderInfoEXT pShaderInfo() { return npShaderInfo(address()); }
 
-    /** Sets the address of the specified {@link VkIndirectExecutionSetPipelineInfoEXT} to the {@link #pPipelineInfo} field. */
+    /** Sets the address of the specified {@link VkIndirectExecutionSetPipelineInfoEXT} to the {@code pPipelineInfo} field. */
     public VkIndirectExecutionSetInfoEXT pPipelineInfo(@NativeType("VkIndirectExecutionSetPipelineInfoEXT const *") VkIndirectExecutionSetPipelineInfoEXT value) { npPipelineInfo(address(), value); return this; }
-    /** Sets the address of the specified {@link VkIndirectExecutionSetShaderInfoEXT} to the {@link #pShaderInfo} field. */
+    /** Sets the address of the specified {@link VkIndirectExecutionSetShaderInfoEXT} to the {@code pShaderInfo} field. */
     public VkIndirectExecutionSetInfoEXT pShaderInfo(@NativeType("VkIndirectExecutionSetShaderInfoEXT const *") VkIndirectExecutionSetShaderInfoEXT value) { npShaderInfo(address(), value); return this; }
 
     /**
@@ -267,16 +259,16 @@ public class VkIndirectExecutionSetInfoEXT extends Struct<VkIndirectExecutionSet
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VkIndirectExecutionSetPipelineInfoEXT} view of the struct pointed to by the {@link VkIndirectExecutionSetInfoEXT#pPipelineInfo} field. */
+        /** @return a {@link VkIndirectExecutionSetPipelineInfoEXT} view of the struct pointed to by the {@code pPipelineInfo} field. */
         @NativeType("VkIndirectExecutionSetPipelineInfoEXT const *")
         public VkIndirectExecutionSetPipelineInfoEXT pPipelineInfo() { return VkIndirectExecutionSetInfoEXT.npPipelineInfo(address()); }
-        /** @return a {@link VkIndirectExecutionSetShaderInfoEXT} view of the struct pointed to by the {@link VkIndirectExecutionSetInfoEXT#pShaderInfo} field. */
+        /** @return a {@link VkIndirectExecutionSetShaderInfoEXT} view of the struct pointed to by the {@code pShaderInfo} field. */
         @NativeType("VkIndirectExecutionSetShaderInfoEXT const *")
         public VkIndirectExecutionSetShaderInfoEXT pShaderInfo() { return VkIndirectExecutionSetInfoEXT.npShaderInfo(address()); }
 
-        /** Sets the address of the specified {@link VkIndirectExecutionSetPipelineInfoEXT} to the {@link VkIndirectExecutionSetInfoEXT#pPipelineInfo} field. */
+        /** Sets the address of the specified {@link VkIndirectExecutionSetPipelineInfoEXT} to the {@code pPipelineInfo} field. */
         public VkIndirectExecutionSetInfoEXT.Buffer pPipelineInfo(@NativeType("VkIndirectExecutionSetPipelineInfoEXT const *") VkIndirectExecutionSetPipelineInfoEXT value) { VkIndirectExecutionSetInfoEXT.npPipelineInfo(address(), value); return this; }
-        /** Sets the address of the specified {@link VkIndirectExecutionSetShaderInfoEXT} to the {@link VkIndirectExecutionSetInfoEXT#pShaderInfo} field. */
+        /** Sets the address of the specified {@link VkIndirectExecutionSetShaderInfoEXT} to the {@code pShaderInfo} field. */
         public VkIndirectExecutionSetInfoEXT.Buffer pShaderInfo(@NativeType("VkIndirectExecutionSetShaderInfoEXT const *") VkIndirectExecutionSetShaderInfoEXT value) { VkIndirectExecutionSetInfoEXT.npShaderInfo(address(), value); return this; }
 
     }

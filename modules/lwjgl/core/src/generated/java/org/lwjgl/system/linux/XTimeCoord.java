@@ -14,14 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XTimeCoord {
- *     Time {@link #time};
- *     short {@link #x};
- *     short {@link #y};
- * }</code></pre>
+ *     Time time;
+ *     short x;
+ *     short y;
+ * }}</pre>
  */
 public class XTimeCoord extends Struct<XTimeCoord> {
 
@@ -74,12 +72,12 @@ public class XTimeCoord extends Struct<XTimeCoord> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the time, in milliseconds */
+    /** @return the value of the {@code time} field. */
     @NativeType("Time")
     public long time() { return ntime(address()); }
-    /** the x coordinate of the pointer relative to the origin of the specified window */
+    /** @return the value of the {@code x} field. */
     public short x() { return nx(address()); }
-    /** the y coordinate of the pointer relative to the origin of the specified window */
+    /** @return the value of the {@code y} field. */
     public short y() { return ny(address()); }
 
     // -----------------------------------
@@ -161,12 +159,12 @@ public class XTimeCoord extends Struct<XTimeCoord> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XTimeCoord#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("Time")
         public long time() { return XTimeCoord.ntime(address()); }
-        /** @return the value of the {@link XTimeCoord#x} field. */
+        /** @return the value of the {@code x} field. */
         public short x() { return XTimeCoord.nx(address()); }
-        /** @return the value of the {@link XTimeCoord#y} field. */
+        /** @return the value of the {@code y} field. */
         public short y() { return XTimeCoord.ny(address()); }
 
     }

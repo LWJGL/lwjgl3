@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing quantization map properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>The values returned in this structure are only defined if the allowed image usage flags returned in {@link VkVideoFormatPropertiesKHR}{@code ::imageUsageFlags} for this video format include {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR} or {@link KHRVideoEncodeQuantizationMap#VK_IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR IMAGE_USAGE_VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR}.</p>
- * 
- * <p>Implementations <b>may</b> support multiple quantization map texel sizes for a particular video format which is indicated by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} returning multiple entries with different {@code quantizationMapTexelSize} values.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoFormatQuantizationMapPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkExtent2D VkExtent2D} {@link #quantizationMapTexelSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkExtent2D VkExtent2D} quantizationMapTexelSize;
+ * }}</pre>
  */
 public class VkVideoFormatQuantizationMapPropertiesKHR extends Struct<VkVideoFormatQuantizationMapPropertiesKHR> implements NativeResource {
 
@@ -94,20 +74,20 @@ public class VkVideoFormatQuantizationMapPropertiesKHR extends Struct<VkVideoFor
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-quantization-map-texel-size">quantization map texel size</a> of the video format, i.e. the number of pixels corresponding to each quantization map texel. */
+    /** @return a {@link VkExtent2D} view of the {@code quantizationMapTexelSize} field. */
     public VkExtent2D quantizationMapTexelSize() { return nquantizationMapTexelSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoFormatQuantizationMapPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkVideoFormatQuantizationMapPropertiesKHR sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoFormatQuantizationMapPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,20 +279,20 @@ public class VkVideoFormatQuantizationMapPropertiesKHR extends Struct<VkVideoFor
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoFormatQuantizationMapPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoFormatQuantizationMapPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoFormatQuantizationMapPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoFormatQuantizationMapPropertiesKHR.npNext(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoFormatQuantizationMapPropertiesKHR#quantizationMapTexelSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@code quantizationMapTexelSize} field. */
         public VkExtent2D quantizationMapTexelSize() { return VkVideoFormatQuantizationMapPropertiesKHR.nquantizationMapTexelSize(address()); }
 
-        /** Sets the specified value to the {@link VkVideoFormatQuantizationMapPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoFormatQuantizationMapPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoFormatQuantizationMapPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR} value to the {@link VkVideoFormatQuantizationMapPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkVideoFormatQuantizationMapPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_VIDEO_FORMAT_QUANTIZATION_MAP_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoFormatQuantizationMapPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoFormatQuantizationMapPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoFormatQuantizationMapPropertiesKHR.npNext(address(), value); return this; }
 
     }

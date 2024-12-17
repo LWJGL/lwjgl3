@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_SOUND *sound,
- *     int subsound,
- *     unsigned int position,
- *     FMOD_TIMEUNIT postype
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_SOUND_PCMSETPOS_CALLBACK} */
 public abstract class FMOD_SOUND_PCMSETPOS_CALLBACK extends Callback implements FMOD_SOUND_PCMSETPOS_CALLBACKI {
 
     /**

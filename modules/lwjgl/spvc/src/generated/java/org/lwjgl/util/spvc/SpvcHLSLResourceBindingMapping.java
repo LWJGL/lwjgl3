@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_hlsl_resource_binding_mapping {
  *     unsigned register_space;
  *     unsigned register_binding;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_hlsl_resource_binding_mapping")
 public class SpvcHLSLResourceBindingMapping extends Struct<SpvcHLSLResourceBindingMapping> implements NativeResource {

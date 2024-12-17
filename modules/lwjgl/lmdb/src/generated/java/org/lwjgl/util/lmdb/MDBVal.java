@@ -16,21 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Generic structure used for passing keys and data in and out of the database.
- * 
- * <p>Values returned from the database are valid only until a subsequent update operation, or the end of the transaction. Do not modify or free them, they
- * commonly point into the database itself.</p>
- * 
- * <p>Key sizes must be between 1 and {@link LMDB#mdb_env_get_maxkeysize env_get_maxkeysize} inclusive. The same applies to data sizes in databases with the {@link LMDB#MDB_DUPSORT DUPSORT} flag.
- * Other data items can in theory be from 0 to {@code 0xffffffff} bytes long.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct MDB_val {
- *     size_t {@link #mv_size};
- *     void * {@link #mv_data};
- * }</code></pre>
+ *     size_t mv_size;
+ *     void * mv_data;
+ * }}</pre>
  */
 @NativeType("struct MDB_val")
 public class MDBVal extends Struct<MDBVal> implements NativeResource {
@@ -81,16 +71,16 @@ public class MDBVal extends Struct<MDBVal> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Size of the data item. */
+    /** @return the value of the {@code mv_size} field. */
     @NativeType("size_t")
     public long mv_size() { return nmv_size(address()); }
-    /** Address of the data item. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code mv_data} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer mv_data() { return nmv_data(address()); }
 
-    /** Sets the specified value to the {@link #mv_size} field. */
+    /** Sets the specified value to the {@code mv_size} field. */
     public MDBVal mv_size(@NativeType("size_t") long value) { nmv_size(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #mv_data} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code mv_data} field. */
     public MDBVal mv_data(@Nullable @NativeType("void *") ByteBuffer value) { nmv_data(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,16 +289,16 @@ public class MDBVal extends Struct<MDBVal> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link MDBVal#mv_size} field. */
+        /** @return the value of the {@code mv_size} field. */
         @NativeType("size_t")
         public long mv_size() { return MDBVal.nmv_size(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link MDBVal#mv_data} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code mv_data} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer mv_data() { return MDBVal.nmv_data(address()); }
 
-        /** Sets the specified value to the {@link MDBVal#mv_size} field. */
+        /** Sets the specified value to the {@code mv_size} field. */
         public MDBVal.Buffer mv_size(@NativeType("size_t") long value) { MDBVal.nmv_size(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link MDBVal#mv_data} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code mv_data} field. */
         public MDBVal.Buffer mv_data(@Nullable @NativeType("void *") ByteBuffer value) { MDBVal.nmv_data(address(), value); return this; }
 
     }

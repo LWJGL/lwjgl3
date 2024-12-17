@@ -16,33 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * XrEnvironmentDepthSwapchainCreateInfoMETA.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrEnvironmentDepthSwapchainCreateInfoMETA} contains creation options for the readable depth swapchain, and is passed to {@link METAEnvironmentDepth#xrCreateEnvironmentDepthSwapchainMETA CreateEnvironmentDepthSwapchainMETA}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using {@link XrEnvironmentDepthSwapchainCreateInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code createFlags} <b>must</b> be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAEnvironmentDepth#xrCreateEnvironmentDepthSwapchainMETA CreateEnvironmentDepthSwapchainMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEnvironmentDepthSwapchainCreateInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrEnvironmentDepthSwapchainCreateFlagsMETA {@link #createFlags};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrEnvironmentDepthSwapchainCreateFlagsMETA createFlags;
+ * }}</pre>
  */
 public class XrEnvironmentDepthSwapchainCreateInfoMETA extends Struct<XrEnvironmentDepthSwapchainCreateInfoMETA> implements NativeResource {
 
@@ -95,23 +74,23 @@ public class XrEnvironmentDepthSwapchainCreateInfoMETA extends Struct<XrEnvironm
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a bitmask of {@code XrEnvironmentDepthSwapchainCreateFlagBitsMETA}. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("XrEnvironmentDepthSwapchainCreateFlagsMETA")
     public long createFlags() { return ncreateFlags(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEnvironmentDepthSwapchainCreateInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META} value to the {@code type} field. */
     public XrEnvironmentDepthSwapchainCreateInfoMETA type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEnvironmentDepthSwapchainCreateInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #createFlags} field. */
+    /** Sets the specified value to the {@code createFlags} field. */
     public XrEnvironmentDepthSwapchainCreateInfoMETA createFlags(@NativeType("XrEnvironmentDepthSwapchainCreateFlagsMETA") long value) { ncreateFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,23 +286,23 @@ public class XrEnvironmentDepthSwapchainCreateInfoMETA extends Struct<XrEnvironm
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEnvironmentDepthSwapchainCreateInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEnvironmentDepthSwapchainCreateInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthSwapchainCreateInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEnvironmentDepthSwapchainCreateInfoMETA.nnext(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthSwapchainCreateInfoMETA#createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("XrEnvironmentDepthSwapchainCreateFlagsMETA")
         public long createFlags() { return XrEnvironmentDepthSwapchainCreateInfoMETA.ncreateFlags(address()); }
 
-        /** Sets the specified value to the {@link XrEnvironmentDepthSwapchainCreateInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEnvironmentDepthSwapchainCreateInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEnvironmentDepthSwapchainCreateInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META} value to the {@link XrEnvironmentDepthSwapchainCreateInfoMETA#type} field. */
+        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META} value to the {@code type} field. */
         public XrEnvironmentDepthSwapchainCreateInfoMETA.Buffer type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META); }
-        /** Sets the specified value to the {@link XrEnvironmentDepthSwapchainCreateInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEnvironmentDepthSwapchainCreateInfoMETA.Buffer next(@NativeType("void const *") long value) { XrEnvironmentDepthSwapchainCreateInfoMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthSwapchainCreateInfoMETA#createFlags} field. */
+        /** Sets the specified value to the {@code createFlags} field. */
         public XrEnvironmentDepthSwapchainCreateInfoMETA.Buffer createFlags(@NativeType("XrEnvironmentDepthSwapchainCreateFlagsMETA") long value) { XrEnvironmentDepthSwapchainCreateInfoMETA.ncreateFlags(address(), value); return this; }
 
     }

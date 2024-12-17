@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether rendering to VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 formats can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTRgba10x6Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #formatRgba10x6WithoutYCbCrSampler};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 formatRgba10x6WithoutYCbCrSampler;
+ * }}</pre>
  */
 public class VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT extends Struct<VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT extends Struct<VkPhysica
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that {@link VK11#VK_FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16 FORMAT_R10X6G10X6B10X6A10X6_UNORM_4PACK16} <b>can</b> be used with a {@code VkImageView} with {@code subresourceRange.aspectMask} equal to {@link VK10#VK_IMAGE_ASPECT_COLOR_BIT IMAGE_ASPECT_COLOR_BIT} without a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#samplers-YCbCr-conversion">sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> enabled. */
+    /** @return the value of the {@code formatRgba10x6WithoutYCbCrSampler} field. */
     @NativeType("VkBool32")
     public boolean formatRgba10x6WithoutYCbCrSampler() { return nformatRgba10x6WithoutYCbCrSampler(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTRgba10x6Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTRgba10x6Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT sType$Default() { return sType(EXTRgba10x6Formats.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #formatRgba10x6WithoutYCbCrSampler} field. */
+    /** Sets the specified value to the {@code formatRgba10x6WithoutYCbCrSampler} field. */
     public VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT formatRgba10x6WithoutYCbCrSampler(@NativeType("VkBool32") boolean value) { nformatRgba10x6WithoutYCbCrSampler(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT extends Struct<VkPhysica
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT#formatRgba10x6WithoutYCbCrSampler} field. */
+        /** @return the value of the {@code formatRgba10x6WithoutYCbCrSampler} field. */
         @NativeType("VkBool32")
         public boolean formatRgba10x6WithoutYCbCrSampler() { return VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.nformatRgba10x6WithoutYCbCrSampler(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTRgba10x6Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT} value to the {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTRgba10x6Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.Buffer sType$Default() { return sType(EXTRgba10x6Formats.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT#formatRgba10x6WithoutYCbCrSampler} field. */
+        /** Sets the specified value to the {@code formatRgba10x6WithoutYCbCrSampler} field. */
         public VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.Buffer formatRgba10x6WithoutYCbCrSampler(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT.nformatRgba10x6WithoutYCbCrSampler(address(), value ? 1 : 0); return this; }
 
     }

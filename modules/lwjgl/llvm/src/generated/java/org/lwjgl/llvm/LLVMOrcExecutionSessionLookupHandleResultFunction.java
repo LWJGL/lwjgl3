@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMOrc#LLVMOrcExecutionSessionLookup OrcExecutionSessionLookup} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     LLVMErrorRef Err,
- *     LLVMOrcCSymbolMapPairs Result,
- *     size_t NumPairs,
- *     void *Ctx
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcExecutionSessionLookupHandleResultFunction} */
 public abstract class LLVMOrcExecutionSessionLookupHandleResultFunction extends Callback implements LLVMOrcExecutionSessionLookupHandleResultFunctionI {
 
     /**

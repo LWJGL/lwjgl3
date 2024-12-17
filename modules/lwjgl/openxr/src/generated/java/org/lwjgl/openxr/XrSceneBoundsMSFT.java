@@ -17,35 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The scene bounds.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneBoundsMSFT}</li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>If {@code sphereCount} is not 0, {@code spheres} <b>must</b> be a pointer to an array of {@code sphereCount} {@link XrSceneSphereBoundMSFT} structures</li>
- * <li>If {@code boxCount} is not 0, {@code boxes} <b>must</b> be a pointer to an array of {@code boxCount} {@link XrSceneOrientedBoxBoundMSFT} structures</li>
- * <li>If {@code frustumCount} is not 0, {@code frustums} <b>must</b> be a pointer to an array of {@code frustumCount} {@link XrSceneFrustumBoundMSFT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrNewSceneComputeInfoMSFT}, {@link XrSceneFrustumBoundMSFT}, {@link XrSceneOrientedBoxBoundMSFT}, {@link XrSceneSphereBoundMSFT}, {@link MSFTSceneUnderstanding#xrComputeNewSceneMSFT ComputeNewSceneMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneBoundsMSFT {
- *     XrSpace {@link #space};
- *     XrTime {@link #time};
- *     uint32_t {@link #sphereCount};
- *     {@link XrSceneSphereBoundMSFT XrSceneSphereBoundMSFT} const * {@link #spheres};
- *     uint32_t {@link #boxCount};
- *     {@link XrSceneOrientedBoxBoundMSFT XrSceneOrientedBoxBoundMSFT} const * {@link #boxes};
- *     uint32_t {@link #frustumCount};
- *     {@link XrSceneFrustumBoundMSFT XrSceneFrustumBoundMSFT} const * {@link #frustums};
- * }</code></pre>
+ *     XrSpace space;
+ *     XrTime time;
+ *     uint32_t sphereCount;
+ *     {@link XrSceneSphereBoundMSFT XrSceneSphereBoundMSFT} const * spheres;
+ *     uint32_t boxCount;
+ *     {@link XrSceneOrientedBoxBoundMSFT XrSceneOrientedBoxBoundMSFT} const * boxes;
+ *     uint32_t frustumCount;
+ *     {@link XrSceneFrustumBoundMSFT XrSceneFrustumBoundMSFT} const * frustums;
+ * }}</pre>
  */
 public class XrSceneBoundsMSFT extends Struct<XrSceneBoundsMSFT> implements NativeResource {
 
@@ -113,46 +95,46 @@ public class XrSceneBoundsMSFT extends Struct<XrSceneBoundsMSFT> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a handle to the {@code XrSpace} in which the bounds are specified. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the {@code XrTime} at which the bounds will be evaluated within {@code space}. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
-    /** the number of sphere bounds. */
+    /** @return the value of the {@code sphereCount} field. */
     @NativeType("uint32_t")
     public int sphereCount() { return nsphereCount(address()); }
-    /** an array of {@link XrSceneSphereBoundMSFT}. */
+    /** @return a {@link XrSceneSphereBoundMSFT.Buffer} view of the struct array pointed to by the {@code spheres} field. */
     @NativeType("XrSceneSphereBoundMSFT const *")
     public XrSceneSphereBoundMSFT.@Nullable Buffer spheres() { return nspheres(address()); }
-    /** the number of oriented box bounds. */
+    /** @return the value of the {@code boxCount} field. */
     @NativeType("uint32_t")
     public int boxCount() { return nboxCount(address()); }
-    /** an array of {@link XrSceneOrientedBoxBoundMSFT}. */
+    /** @return a {@link XrSceneOrientedBoxBoundMSFT.Buffer} view of the struct array pointed to by the {@code boxes} field. */
     @NativeType("XrSceneOrientedBoxBoundMSFT const *")
     public XrSceneOrientedBoxBoundMSFT.@Nullable Buffer boxes() { return nboxes(address()); }
-    /** the number of frustum bounds. */
+    /** @return the value of the {@code frustumCount} field. */
     @NativeType("uint32_t")
     public int frustumCount() { return nfrustumCount(address()); }
-    /** an array of {@link XrSceneFrustumBoundMSFT}. */
+    /** @return a {@link XrSceneFrustumBoundMSFT.Buffer} view of the struct array pointed to by the {@code frustums} field. */
     @NativeType("XrSceneFrustumBoundMSFT const *")
     public XrSceneFrustumBoundMSFT.@Nullable Buffer frustums() { return nfrustums(address()); }
 
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrSceneBoundsMSFT space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrSceneBoundsMSFT time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
-    /** Sets the specified value to the {@link #sphereCount} field. */
+    /** Sets the specified value to the {@code sphereCount} field. */
     public XrSceneBoundsMSFT sphereCount(@NativeType("uint32_t") int value) { nsphereCount(address(), value); return this; }
-    /** Sets the address of the specified {@link XrSceneSphereBoundMSFT.Buffer} to the {@link #spheres} field. */
+    /** Sets the address of the specified {@link XrSceneSphereBoundMSFT.Buffer} to the {@code spheres} field. */
     public XrSceneBoundsMSFT spheres(@NativeType("XrSceneSphereBoundMSFT const *") XrSceneSphereBoundMSFT.@Nullable Buffer value) { nspheres(address(), value); return this; }
-    /** Sets the specified value to the {@link #boxCount} field. */
+    /** Sets the specified value to the {@code boxCount} field. */
     public XrSceneBoundsMSFT boxCount(@NativeType("uint32_t") int value) { nboxCount(address(), value); return this; }
-    /** Sets the address of the specified {@link XrSceneOrientedBoxBoundMSFT.Buffer} to the {@link #boxes} field. */
+    /** Sets the address of the specified {@link XrSceneOrientedBoxBoundMSFT.Buffer} to the {@code boxes} field. */
     public XrSceneBoundsMSFT boxes(@NativeType("XrSceneOrientedBoxBoundMSFT const *") XrSceneOrientedBoxBoundMSFT.@Nullable Buffer value) { nboxes(address(), value); return this; }
-    /** Sets the specified value to the {@link #frustumCount} field. */
+    /** Sets the specified value to the {@code frustumCount} field. */
     public XrSceneBoundsMSFT frustumCount(@NativeType("uint32_t") int value) { nfrustumCount(address(), value); return this; }
-    /** Sets the address of the specified {@link XrSceneFrustumBoundMSFT.Buffer} to the {@link #frustums} field. */
+    /** Sets the address of the specified {@link XrSceneFrustumBoundMSFT.Buffer} to the {@code frustums} field. */
     public XrSceneBoundsMSFT frustums(@NativeType("XrSceneFrustumBoundMSFT const *") XrSceneFrustumBoundMSFT.@Nullable Buffer value) { nfrustums(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -387,46 +369,46 @@ public class XrSceneBoundsMSFT extends Struct<XrSceneBoundsMSFT> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneBoundsMSFT#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrSceneBoundsMSFT.nspace(address()); }
-        /** @return the value of the {@link XrSceneBoundsMSFT#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrSceneBoundsMSFT.ntime(address()); }
-        /** @return the value of the {@link XrSceneBoundsMSFT#sphereCount} field. */
+        /** @return the value of the {@code sphereCount} field. */
         @NativeType("uint32_t")
         public int sphereCount() { return XrSceneBoundsMSFT.nsphereCount(address()); }
-        /** @return a {@link XrSceneSphereBoundMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneBoundsMSFT#spheres} field. */
+        /** @return a {@link XrSceneSphereBoundMSFT.Buffer} view of the struct array pointed to by the {@code spheres} field. */
         @NativeType("XrSceneSphereBoundMSFT const *")
         public XrSceneSphereBoundMSFT.@Nullable Buffer spheres() { return XrSceneBoundsMSFT.nspheres(address()); }
-        /** @return the value of the {@link XrSceneBoundsMSFT#boxCount} field. */
+        /** @return the value of the {@code boxCount} field. */
         @NativeType("uint32_t")
         public int boxCount() { return XrSceneBoundsMSFT.nboxCount(address()); }
-        /** @return a {@link XrSceneOrientedBoxBoundMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneBoundsMSFT#boxes} field. */
+        /** @return a {@link XrSceneOrientedBoxBoundMSFT.Buffer} view of the struct array pointed to by the {@code boxes} field. */
         @NativeType("XrSceneOrientedBoxBoundMSFT const *")
         public XrSceneOrientedBoxBoundMSFT.@Nullable Buffer boxes() { return XrSceneBoundsMSFT.nboxes(address()); }
-        /** @return the value of the {@link XrSceneBoundsMSFT#frustumCount} field. */
+        /** @return the value of the {@code frustumCount} field. */
         @NativeType("uint32_t")
         public int frustumCount() { return XrSceneBoundsMSFT.nfrustumCount(address()); }
-        /** @return a {@link XrSceneFrustumBoundMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneBoundsMSFT#frustums} field. */
+        /** @return a {@link XrSceneFrustumBoundMSFT.Buffer} view of the struct array pointed to by the {@code frustums} field. */
         @NativeType("XrSceneFrustumBoundMSFT const *")
         public XrSceneFrustumBoundMSFT.@Nullable Buffer frustums() { return XrSceneBoundsMSFT.nfrustums(address()); }
 
-        /** Sets the specified value to the {@link XrSceneBoundsMSFT#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrSceneBoundsMSFT.Buffer space(XrSpace value) { XrSceneBoundsMSFT.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneBoundsMSFT#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrSceneBoundsMSFT.Buffer time(@NativeType("XrTime") long value) { XrSceneBoundsMSFT.ntime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneBoundsMSFT#sphereCount} field. */
+        /** Sets the specified value to the {@code sphereCount} field. */
         public XrSceneBoundsMSFT.Buffer sphereCount(@NativeType("uint32_t") int value) { XrSceneBoundsMSFT.nsphereCount(address(), value); return this; }
-        /** Sets the address of the specified {@link XrSceneSphereBoundMSFT.Buffer} to the {@link XrSceneBoundsMSFT#spheres} field. */
+        /** Sets the address of the specified {@link XrSceneSphereBoundMSFT.Buffer} to the {@code spheres} field. */
         public XrSceneBoundsMSFT.Buffer spheres(@NativeType("XrSceneSphereBoundMSFT const *") XrSceneSphereBoundMSFT.@Nullable Buffer value) { XrSceneBoundsMSFT.nspheres(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneBoundsMSFT#boxCount} field. */
+        /** Sets the specified value to the {@code boxCount} field. */
         public XrSceneBoundsMSFT.Buffer boxCount(@NativeType("uint32_t") int value) { XrSceneBoundsMSFT.nboxCount(address(), value); return this; }
-        /** Sets the address of the specified {@link XrSceneOrientedBoxBoundMSFT.Buffer} to the {@link XrSceneBoundsMSFT#boxes} field. */
+        /** Sets the address of the specified {@link XrSceneOrientedBoxBoundMSFT.Buffer} to the {@code boxes} field. */
         public XrSceneBoundsMSFT.Buffer boxes(@NativeType("XrSceneOrientedBoxBoundMSFT const *") XrSceneOrientedBoxBoundMSFT.@Nullable Buffer value) { XrSceneBoundsMSFT.nboxes(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneBoundsMSFT#frustumCount} field. */
+        /** Sets the specified value to the {@code frustumCount} field. */
         public XrSceneBoundsMSFT.Buffer frustumCount(@NativeType("uint32_t") int value) { XrSceneBoundsMSFT.nfrustumCount(address(), value); return this; }
-        /** Sets the address of the specified {@link XrSceneFrustumBoundMSFT.Buffer} to the {@link XrSceneBoundsMSFT#frustums} field. */
+        /** Sets the address of the specified {@link XrSceneFrustumBoundMSFT.Buffer} to the {@code frustums} field. */
         public XrSceneBoundsMSFT.Buffer frustums(@NativeType("XrSceneFrustumBoundMSFT const *") XrSceneFrustumBoundMSFT.@Nullable Buffer value) { XrSceneBoundsMSFT.nfrustums(address(), value); return this; }
 
     }

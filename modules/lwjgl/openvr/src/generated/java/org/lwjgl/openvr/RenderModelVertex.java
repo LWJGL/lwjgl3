@@ -15,16 +15,12 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A single vertex in a render model.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct RenderModel_Vertex_t {
- *     {@link HmdVector3 HmdVector3_t} {@link #vPosition};
+ *     {@link HmdVector3 HmdVector3_t} vPosition;
  *     {@link HmdVector3 HmdVector3_t} vNormal;
  *     float rfTextureCoord[2];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct RenderModel_Vertex_t")
 public class RenderModelVertex extends Struct<RenderModelVertex> {
@@ -78,7 +74,7 @@ public class RenderModelVertex extends Struct<RenderModelVertex> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** position in meters in device space */
+    /** @return a {@link HmdVector3} view of the {@code vPosition} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vPosition() { return nvPosition(address()); }
     /** @return a {@link HmdVector3} view of the {@code vNormal} field. */
@@ -173,7 +169,7 @@ public class RenderModelVertex extends Struct<RenderModelVertex> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link HmdVector3} view of the {@link RenderModelVertex#vPosition} field. */
+        /** @return a {@link HmdVector3} view of the {@code vPosition} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vPosition() { return RenderModelVertex.nvPosition(address()); }
         /** @return a {@link HmdVector3} view of the {@code vNormal} field. */

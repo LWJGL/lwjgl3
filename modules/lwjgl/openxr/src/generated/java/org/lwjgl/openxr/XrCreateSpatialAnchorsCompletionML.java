@@ -16,54 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Completion struct to retrieve the result of the anchor creation.
- * 
- * <h5>Future Return Codes</h5>
- * 
- * <p>{@code futureResult} values:</p>
- * 
- * <dl>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-successcodes">Success</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
- * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
- * </ul></dd>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-errorcodes">Failure</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
- * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
- * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
- * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
- * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_SPACE_NOT_LOCATABLE_ML ERROR_SPATIAL_ANCHORS_SPACE_NOT_LOCATABLE_ML}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML}</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchors XR_ML_spatial_anchors} extension <b>must</b> be enabled prior to using {@link XrCreateSpatialAnchorsCompletionML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchors#XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code futureResult} is not 0, {@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
- * <li>If {@code spaceCount} is not 0, {@code spaces} <b>must</b> be a pointer to an array of {@code spaceCount} {@code XrSpace} handles</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLSpatialAnchors#xrCreateSpatialAnchorsCompleteML CreateSpatialAnchorsCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCreateSpatialAnchorsCompletionML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrResult {@link #futureResult};
- *     uint32_t {@link #spaceCount};
- *     XrSpace * {@link #spaces};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrResult futureResult;
+ *     uint32_t spaceCount;
+ *     XrSpace * spaces;
+ * }}</pre>
  */
 public class XrCreateSpatialAnchorsCompletionML extends Struct<XrCreateSpatialAnchorsCompletionML> implements NativeResource {
 
@@ -122,33 +82,33 @@ public class XrCreateSpatialAnchorsCompletionML extends Struct<XrCreateSpatialAn
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrResult} of the create spatial anchor operation. */
+    /** @return the value of the {@code futureResult} field. */
     @NativeType("XrResult")
     public int futureResult() { return nfutureResult(address()); }
-    /** the number of elements in the {@code spaces} array. This <b>must</b> match the number of spaces requested to be created. */
+    /** @return the value of the {@code spaceCount} field. */
     @NativeType("uint32_t")
     public int spaceCount() { return nspaceCount(address()); }
-    /** an array of {@code XrSpace} values to populate with the results of the anchor creation. If creation failed, the {@code XrSpace} values <b>must</b> be set to {@link XR10#XR_NULL_HANDLE NULL_HANDLE}. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code spaces} field. */
     @NativeType("XrSpace *")
     public @Nullable PointerBuffer spaces() { return nspaces(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCreateSpatialAnchorsCompletionML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchors#XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchors#XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML} value to the {@code type} field. */
     public XrCreateSpatialAnchorsCompletionML type$Default() { return type(MLSpatialAnchors.XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCreateSpatialAnchorsCompletionML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #futureResult} field. */
+    /** Sets the specified value to the {@code futureResult} field. */
     public XrCreateSpatialAnchorsCompletionML futureResult(@NativeType("XrResult") int value) { nfutureResult(address(), value); return this; }
-    /** Sets the specified value to the {@link #spaceCount} field. */
+    /** Sets the specified value to the {@code spaceCount} field. */
     public XrCreateSpatialAnchorsCompletionML spaceCount(@NativeType("uint32_t") int value) { nspaceCount(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #spaces} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code spaces} field. */
     public XrCreateSpatialAnchorsCompletionML spaces(@Nullable @NativeType("XrSpace *") PointerBuffer value) { nspaces(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -366,33 +326,33 @@ public class XrCreateSpatialAnchorsCompletionML extends Struct<XrCreateSpatialAn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCreateSpatialAnchorsCompletionML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCreateSpatialAnchorsCompletionML.ntype(address()); }
-        /** @return the value of the {@link XrCreateSpatialAnchorsCompletionML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrCreateSpatialAnchorsCompletionML.nnext(address()); }
-        /** @return the value of the {@link XrCreateSpatialAnchorsCompletionML#futureResult} field. */
+        /** @return the value of the {@code futureResult} field. */
         @NativeType("XrResult")
         public int futureResult() { return XrCreateSpatialAnchorsCompletionML.nfutureResult(address()); }
-        /** @return the value of the {@link XrCreateSpatialAnchorsCompletionML#spaceCount} field. */
+        /** @return the value of the {@code spaceCount} field. */
         @NativeType("uint32_t")
         public int spaceCount() { return XrCreateSpatialAnchorsCompletionML.nspaceCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrCreateSpatialAnchorsCompletionML#spaces} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code spaces} field. */
         @NativeType("XrSpace *")
         public @Nullable PointerBuffer spaces() { return XrCreateSpatialAnchorsCompletionML.nspaces(address()); }
 
-        /** Sets the specified value to the {@link XrCreateSpatialAnchorsCompletionML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCreateSpatialAnchorsCompletionML.Buffer type(@NativeType("XrStructureType") int value) { XrCreateSpatialAnchorsCompletionML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchors#XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML} value to the {@link XrCreateSpatialAnchorsCompletionML#type} field. */
+        /** Sets the {@link MLSpatialAnchors#XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML} value to the {@code type} field. */
         public XrCreateSpatialAnchorsCompletionML.Buffer type$Default() { return type(MLSpatialAnchors.XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML); }
-        /** Sets the specified value to the {@link XrCreateSpatialAnchorsCompletionML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCreateSpatialAnchorsCompletionML.Buffer next(@NativeType("void *") long value) { XrCreateSpatialAnchorsCompletionML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCreateSpatialAnchorsCompletionML#futureResult} field. */
+        /** Sets the specified value to the {@code futureResult} field. */
         public XrCreateSpatialAnchorsCompletionML.Buffer futureResult(@NativeType("XrResult") int value) { XrCreateSpatialAnchorsCompletionML.nfutureResult(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCreateSpatialAnchorsCompletionML#spaceCount} field. */
+        /** Sets the specified value to the {@code spaceCount} field. */
         public XrCreateSpatialAnchorsCompletionML.Buffer spaceCount(@NativeType("uint32_t") int value) { XrCreateSpatialAnchorsCompletionML.nspaceCount(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link XrCreateSpatialAnchorsCompletionML#spaces} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code spaces} field. */
         public XrCreateSpatialAnchorsCompletionML.Buffer spaces(@Nullable @NativeType("XrSpace *") PointerBuffer value) { XrCreateSpatialAnchorsCompletionML.nspaces(address(), value); return this; }
 
     }

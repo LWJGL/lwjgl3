@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying vertex input binding description.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code binding} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindings}</li>
- * <li>{@code stride} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxVertexInputBindingStride}</li>
- * <li>If the {@link KHRPortabilitySubset VK_KHR_portability_subset} extension is enabled, {@code stride} <b>must</b> be a multiple of, and at least as large as, {@link VkPhysicalDevicePortabilitySubsetPropertiesKHR}{@code ::minVertexInputBindingStrideAlignment}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code inputRate} <b>must</b> be a valid {@code VkVertexInputRate} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineVertexInputStateCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVertexInputBindingDescription {
- *     uint32_t {@link #binding};
- *     uint32_t {@link #stride};
- *     VkVertexInputRate {@link #inputRate};
- * }</code></pre>
+ *     uint32_t binding;
+ *     uint32_t stride;
+ *     VkVertexInputRate inputRate;
+ * }}</pre>
  */
 public class VkVertexInputBindingDescription extends Struct<VkVertexInputBindingDescription> implements NativeResource {
 
@@ -96,21 +74,21 @@ public class VkVertexInputBindingDescription extends Struct<VkVertexInputBinding
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the binding number that this structure describes. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("uint32_t")
     public int binding() { return nbinding(address()); }
-    /** the byte stride between consecutive elements within the buffer. */
+    /** @return the value of the {@code stride} field. */
     @NativeType("uint32_t")
     public int stride() { return nstride(address()); }
-    /** a {@code VkVertexInputRate} value specifying whether vertex attribute addressing is a function of the vertex index or of the instance index. */
+    /** @return the value of the {@code inputRate} field. */
     @NativeType("VkVertexInputRate")
     public int inputRate() { return ninputRate(address()); }
 
-    /** Sets the specified value to the {@link #binding} field. */
+    /** Sets the specified value to the {@code binding} field. */
     public VkVertexInputBindingDescription binding(@NativeType("uint32_t") int value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #stride} field. */
+    /** Sets the specified value to the {@code stride} field. */
     public VkVertexInputBindingDescription stride(@NativeType("uint32_t") int value) { nstride(address(), value); return this; }
-    /** Sets the specified value to the {@link #inputRate} field. */
+    /** Sets the specified value to the {@code inputRate} field. */
     public VkVertexInputBindingDescription inputRate(@NativeType("VkVertexInputRate") int value) { ninputRate(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,21 +303,21 @@ public class VkVertexInputBindingDescription extends Struct<VkVertexInputBinding
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVertexInputBindingDescription#binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("uint32_t")
         public int binding() { return VkVertexInputBindingDescription.nbinding(address()); }
-        /** @return the value of the {@link VkVertexInputBindingDescription#stride} field. */
+        /** @return the value of the {@code stride} field. */
         @NativeType("uint32_t")
         public int stride() { return VkVertexInputBindingDescription.nstride(address()); }
-        /** @return the value of the {@link VkVertexInputBindingDescription#inputRate} field. */
+        /** @return the value of the {@code inputRate} field. */
         @NativeType("VkVertexInputRate")
         public int inputRate() { return VkVertexInputBindingDescription.ninputRate(address()); }
 
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription#binding} field. */
+        /** Sets the specified value to the {@code binding} field. */
         public VkVertexInputBindingDescription.Buffer binding(@NativeType("uint32_t") int value) { VkVertexInputBindingDescription.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription#stride} field. */
+        /** Sets the specified value to the {@code stride} field. */
         public VkVertexInputBindingDescription.Buffer stride(@NativeType("uint32_t") int value) { VkVertexInputBindingDescription.nstride(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVertexInputBindingDescription#inputRate} field. */
+        /** Sets the specified value to the {@code inputRate} field. */
         public VkVertexInputBindingDescription.Buffer inputRate(@NativeType("VkVertexInputRate") int value) { VkVertexInputBindingDescription.ninputRate(address(), value); return this; }
 
     }

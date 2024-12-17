@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link ParStreamlines#parsl_mesh_from_streamlines mesh_from_streamlines} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     parsl_position *point,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke parsl_advection_callback} */
 @FunctionalInterface
 @NativeType("parsl_advection_callback")
 public interface ParSLAdvectionCallbackI extends CallbackI {
@@ -44,7 +34,7 @@ public interface ParSLAdvectionCallbackI extends CallbackI {
         );
     }
 
-    /** Client function that moves a streamline particle by a single time step. */
+    /** {@code void (* parsl_advection_callback) (parsl_position * point, void * userdata)} */
     void invoke(@NativeType("parsl_position *") long point, @NativeType("void *") long userdata);
 
 }

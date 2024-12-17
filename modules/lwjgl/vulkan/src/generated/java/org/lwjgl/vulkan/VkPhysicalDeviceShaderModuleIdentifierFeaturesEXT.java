@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether querying and providing an identifier of a shader module is supported by the implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTShaderModuleIdentifier#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderModuleIdentifier};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderModuleIdentifier;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT extends Struct<VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports querying an identifier of a {@code VkShaderModule} or {@link VkShaderModuleCreateInfo} structure, and creating pipelines from identifiers only. */
+    /** @return the value of the {@code shaderModuleIdentifier} field. */
     @NativeType("VkBool32")
     public boolean shaderModuleIdentifier() { return nshaderModuleIdentifier(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTShaderModuleIdentifier#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTShaderModuleIdentifier#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT sType$Default() { return sType(EXTShaderModuleIdentifier.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderModuleIdentifier} field. */
+    /** Sets the specified value to the {@code shaderModuleIdentifier} field. */
     public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT shaderModuleIdentifier(@NativeType("VkBool32") boolean value) { nshaderModuleIdentifier(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT#shaderModuleIdentifier} field. */
+        /** @return the value of the {@code shaderModuleIdentifier} field. */
         @NativeType("VkBool32")
         public boolean shaderModuleIdentifier() { return VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.nshaderModuleIdentifier(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTShaderModuleIdentifier#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT} value to the {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTShaderModuleIdentifier#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.Buffer sType$Default() { return sType(EXTShaderModuleIdentifier.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT#shaderModuleIdentifier} field. */
+        /** Sets the specified value to the {@code shaderModuleIdentifier} field. */
         public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.Buffer shaderModuleIdentifier(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT.nshaderModuleIdentifier(address(), value ? 1 : 0); return this; }
 
     }

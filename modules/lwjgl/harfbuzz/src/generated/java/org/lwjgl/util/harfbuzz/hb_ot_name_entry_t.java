@@ -17,16 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure representing a name ID in a particular language.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_ot_name_entry_t {
  *     hb_ot_name_id_t name_id;
  *     {@link hb_var_int_t hb_var_int_t} var;
  *     hb_language_t language;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_ot_name_entry_t extends Struct<hb_ot_name_entry_t> implements NativeResource {
 

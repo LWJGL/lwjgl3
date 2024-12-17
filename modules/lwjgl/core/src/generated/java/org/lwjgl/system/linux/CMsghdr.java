@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct cmsghdr {
- *     socklen_t {@link #cmsg_len};
- *     int {@link #cmsg_level};
- *     int {@link #cmsg_type};
+ *     socklen_t cmsg_len;
+ *     int cmsg_level;
+ *     int cmsg_type;
  *     char cmsg_data[0];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct cmsghdr")
 public class CMsghdr extends Struct<CMsghdr> implements NativeResource {
@@ -82,12 +80,12 @@ public class CMsghdr extends Struct<CMsghdr> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** data byte count, including header */
+    /** @return the value of the {@code cmsg_len} field. */
     @NativeType("socklen_t")
     public int cmsg_len() { return ncmsg_len(address()); }
-    /** originating protocol */
+    /** @return the value of the {@code cmsg_level} field. */
     public int cmsg_level() { return ncmsg_level(address()); }
-    /** protocol-specific type */
+    /** @return the value of the {@code cmsg_type} field. */
     public int cmsg_type() { return ncmsg_type(address()); }
     /** @return a {@link ByteBuffer} view of the {@code cmsg_data} field. */
     @NativeType("char[0]")
@@ -96,11 +94,11 @@ public class CMsghdr extends Struct<CMsghdr> implements NativeResource {
     @NativeType("char")
     public byte cmsg_data(int index) { return ncmsg_data(address(), index); }
 
-    /** Sets the specified value to the {@link #cmsg_len} field. */
+    /** Sets the specified value to the {@code cmsg_len} field. */
     public CMsghdr cmsg_len(@NativeType("socklen_t") int value) { ncmsg_len(address(), value); return this; }
-    /** Sets the specified value to the {@link #cmsg_level} field. */
+    /** Sets the specified value to the {@code cmsg_level} field. */
     public CMsghdr cmsg_level(int value) { ncmsg_level(address(), value); return this; }
-    /** Sets the specified value to the {@link #cmsg_type} field. */
+    /** Sets the specified value to the {@code cmsg_type} field. */
     public CMsghdr cmsg_type(int value) { ncmsg_type(address(), value); return this; }
     /** Copies the specified {@link ByteBuffer} to the {@code cmsg_data} field. */
     public CMsghdr cmsg_data(@NativeType("char[0]") ByteBuffer value) { ncmsg_data(address(), value); return this; }
@@ -317,12 +315,12 @@ public class CMsghdr extends Struct<CMsghdr> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CMsghdr#cmsg_len} field. */
+        /** @return the value of the {@code cmsg_len} field. */
         @NativeType("socklen_t")
         public int cmsg_len() { return CMsghdr.ncmsg_len(address()); }
-        /** @return the value of the {@link CMsghdr#cmsg_level} field. */
+        /** @return the value of the {@code cmsg_level} field. */
         public int cmsg_level() { return CMsghdr.ncmsg_level(address()); }
-        /** @return the value of the {@link CMsghdr#cmsg_type} field. */
+        /** @return the value of the {@code cmsg_type} field. */
         public int cmsg_type() { return CMsghdr.ncmsg_type(address()); }
         /** @return a {@link ByteBuffer} view of the {@code cmsg_data} field. */
         @NativeType("char[0]")
@@ -331,11 +329,11 @@ public class CMsghdr extends Struct<CMsghdr> implements NativeResource {
         @NativeType("char")
         public byte cmsg_data(int index) { return CMsghdr.ncmsg_data(address(), index); }
 
-        /** Sets the specified value to the {@link CMsghdr#cmsg_len} field. */
+        /** Sets the specified value to the {@code cmsg_len} field. */
         public CMsghdr.Buffer cmsg_len(@NativeType("socklen_t") int value) { CMsghdr.ncmsg_len(address(), value); return this; }
-        /** Sets the specified value to the {@link CMsghdr#cmsg_level} field. */
+        /** Sets the specified value to the {@code cmsg_level} field. */
         public CMsghdr.Buffer cmsg_level(int value) { CMsghdr.ncmsg_level(address(), value); return this; }
-        /** Sets the specified value to the {@link CMsghdr#cmsg_type} field. */
+        /** Sets the specified value to the {@code cmsg_type} field. */
         public CMsghdr.Buffer cmsg_type(int value) { CMsghdr.ncmsg_type(address(), value); return this; }
         /** Copies the specified {@link ByteBuffer} to the {@code cmsg_data} field. */
         public CMsghdr.Buffer cmsg_data(@NativeType("char[0]") ByteBuffer value) { CMsghdr.ncmsg_data(address(), value); return this; }

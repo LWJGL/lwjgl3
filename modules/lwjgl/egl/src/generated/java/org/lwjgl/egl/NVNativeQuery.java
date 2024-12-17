@@ -13,11 +13,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_native_query.txt">NV_native_query</a> extension.
- * 
- * <p>This extension allows an application to query which native display, pixmap and surface corresponds to a EGL object.</p>
- */
 public class NVNativeQuery {
 
     protected NVNativeQuery() {
@@ -26,6 +21,7 @@ public class NVNativeQuery {
 
     // --- [ eglQueryNativeDisplayNV ] ---
 
+    /** {@code EGLBoolean eglQueryNativeDisplayNV(EGLDisplay dpy, EGLNativeDisplayType * display_id)} */
     public static int neglQueryNativeDisplayNV(long dpy, long display_id) {
         long __functionAddress = EGL.getCapabilities().eglQueryNativeDisplayNV;
         if (CHECKS) {
@@ -35,6 +31,7 @@ public class NVNativeQuery {
         return callPPI(dpy, display_id, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglQueryNativeDisplayNV(EGLDisplay dpy, EGLNativeDisplayType * display_id)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryNativeDisplayNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLNativeDisplayType *") PointerBuffer display_id) {
         if (CHECKS) {
@@ -45,6 +42,7 @@ public class NVNativeQuery {
 
     // --- [ eglQueryNativeWindowNV ] ---
 
+    /** {@code EGLBoolean eglQueryNativeWindowNV(EGLDisplay dpy, EGLSurface surf, EGLNativeWindowType * window)} */
     public static int neglQueryNativeWindowNV(long dpy, long surf, long window) {
         long __functionAddress = EGL.getCapabilities().eglQueryNativeWindowNV;
         if (CHECKS) {
@@ -55,6 +53,7 @@ public class NVNativeQuery {
         return callPPPI(dpy, surf, window, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglQueryNativeWindowNV(EGLDisplay dpy, EGLSurface surf, EGLNativeWindowType * window)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryNativeWindowNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surf, @NativeType("EGLNativeWindowType *") PointerBuffer window) {
         if (CHECKS) {
@@ -65,6 +64,7 @@ public class NVNativeQuery {
 
     // --- [ eglQueryNativePixmapNV ] ---
 
+    /** {@code EGLBoolean eglQueryNativePixmapNV(EGLDisplay dpy, EGLSurface surf, EGLNativePixmapType * pixmap)} */
     public static int neglQueryNativePixmapNV(long dpy, long surf, long pixmap) {
         long __functionAddress = EGL.getCapabilities().eglQueryNativePixmapNV;
         if (CHECKS) {
@@ -75,6 +75,7 @@ public class NVNativeQuery {
         return callPPPI(dpy, surf, pixmap, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglQueryNativePixmapNV(EGLDisplay dpy, EGLSurface surf, EGLNativePixmapType * pixmap)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryNativePixmapNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surf, @NativeType("EGLNativePixmapType *") PointerBuffer pixmap) {
         if (CHECKS) {

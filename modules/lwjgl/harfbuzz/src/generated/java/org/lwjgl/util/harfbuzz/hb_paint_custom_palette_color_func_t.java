@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_paint_funcs_t *funcs,
- *     void *paint_data,
- *     unsigned int color_index,
- *     hb_color_t *color,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_paint_custom_palette_color_func_t} */
 public abstract class hb_paint_custom_palette_color_func_t extends Callback implements hb_paint_custom_palette_color_func_tI {
 
     /**

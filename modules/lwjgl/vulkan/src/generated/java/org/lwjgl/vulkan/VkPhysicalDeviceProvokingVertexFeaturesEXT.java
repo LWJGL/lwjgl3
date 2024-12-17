@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the provoking vertex features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <p>When {@link VkPhysicalDeviceProvokingVertexFeaturesEXT} is in the {@code pNext} chain of {@link VkDeviceCreateInfo} but the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-transformFeedback">{@code transformFeedback}</a> feature is not enabled, the value of {@code transformFeedbackPreservesProvokingVertex} is ignored.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceProvokingVertexFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #provokingVertexLast};
- *     VkBool32 {@link #transformFeedbackPreservesProvokingVertex};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 provokingVertexLast;
+ *     VkBool32 transformFeedbackPreservesProvokingVertex;
+ * }}</pre>
  */
 public class VkPhysicalDeviceProvokingVertexFeaturesEXT extends Struct<VkPhysicalDeviceProvokingVertexFeaturesEXT> implements NativeResource {
 
@@ -94,28 +78,28 @@ public class VkPhysicalDeviceProvokingVertexFeaturesEXT extends Struct<VkPhysica
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the {@link EXTProvokingVertex#VK_PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT PROVOKING_VERTEX_MODE_LAST_VERTEX_EXT} provoking vertex mode ({@code VkProvokingVertexModeEXT}) for flat shading. */
+    /** @return the value of the {@code provokingVertexLast} field. */
     @NativeType("VkBool32")
     public boolean provokingVertexLast() { return nprovokingVertexLast(address()) != 0; }
-    /** indicates that the order of vertices within each primitive written by transform feedback will preserve the provoking vertex. This does not apply to triangle fan primitives when <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-transformFeedbackPreservesTriangleFanProvokingVertex">{@code transformFeedbackPreservesTriangleFanProvokingVertex}</a> is {@link VK10#VK_FALSE FALSE}. {@code transformFeedbackPreservesProvokingVertex} <b>must</b> be {@link VK10#VK_FALSE FALSE} when the {@link EXTTransformFeedback VK_EXT_transform_feedback} extension is not supported. */
+    /** @return the value of the {@code transformFeedbackPreservesProvokingVertex} field. */
     @NativeType("VkBool32")
     public boolean transformFeedbackPreservesProvokingVertex() { return ntransformFeedbackPreservesProvokingVertex(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceProvokingVertexFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceProvokingVertexFeaturesEXT sType$Default() { return sType(EXTProvokingVertex.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceProvokingVertexFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #provokingVertexLast} field. */
+    /** Sets the specified value to the {@code provokingVertexLast} field. */
     public VkPhysicalDeviceProvokingVertexFeaturesEXT provokingVertexLast(@NativeType("VkBool32") boolean value) { nprovokingVertexLast(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #transformFeedbackPreservesProvokingVertex} field. */
+    /** Sets the specified value to the {@code transformFeedbackPreservesProvokingVertex} field. */
     public VkPhysicalDeviceProvokingVertexFeaturesEXT transformFeedbackPreservesProvokingVertex(@NativeType("VkBool32") boolean value) { ntransformFeedbackPreservesProvokingVertex(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -317,28 +301,28 @@ public class VkPhysicalDeviceProvokingVertexFeaturesEXT extends Struct<VkPhysica
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceProvokingVertexFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceProvokingVertexFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#provokingVertexLast} field. */
+        /** @return the value of the {@code provokingVertexLast} field. */
         @NativeType("VkBool32")
         public boolean provokingVertexLast() { return VkPhysicalDeviceProvokingVertexFeaturesEXT.nprovokingVertexLast(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#transformFeedbackPreservesProvokingVertex} field. */
+        /** @return the value of the {@code transformFeedbackPreservesProvokingVertex} field. */
         @NativeType("VkBool32")
         public boolean transformFeedbackPreservesProvokingVertex() { return VkPhysicalDeviceProvokingVertexFeaturesEXT.ntransformFeedbackPreservesProvokingVertex(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceProvokingVertexFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceProvokingVertexFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT} value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTProvokingVertex#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceProvokingVertexFeaturesEXT.Buffer sType$Default() { return sType(EXTProvokingVertex.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceProvokingVertexFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceProvokingVertexFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#provokingVertexLast} field. */
+        /** Sets the specified value to the {@code provokingVertexLast} field. */
         public VkPhysicalDeviceProvokingVertexFeaturesEXT.Buffer provokingVertexLast(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceProvokingVertexFeaturesEXT.nprovokingVertexLast(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceProvokingVertexFeaturesEXT#transformFeedbackPreservesProvokingVertex} field. */
+        /** Sets the specified value to the {@code transformFeedbackPreservesProvokingVertex} field. */
         public VkPhysicalDeviceProvokingVertexFeaturesEXT.Buffer transformFeedbackPreservesProvokingVertex(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceProvokingVertexFeaturesEXT.ntransformFeedbackPreservesProvokingVertex(address(), value ? 1 : 0); return this; }
 
     }

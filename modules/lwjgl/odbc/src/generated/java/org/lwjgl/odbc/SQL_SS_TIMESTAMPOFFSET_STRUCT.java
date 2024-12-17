@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SQL_SS_TIMESTAMPOFFSET_STRUCT {
  *     SQLSMALLINT year;
  *     SQLUSMALLINT month;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     SQLUINTEGER fraction;
  *     SQLSMALLINT timezone_hour;
  *     SQLSMALLINT timezone_minute;
- * }</code></pre>
+ * }}</pre>
  */
 public class SQL_SS_TIMESTAMPOFFSET_STRUCT extends Struct<SQL_SS_TIMESTAMPOFFSET_STRUCT> implements NativeResource {
 

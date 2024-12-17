@@ -16,36 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Creates a session.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code systemId} <b>must</b> be a valid {@code XrSystemId} or {@link XR10#XR_ERROR_SYSTEM_INVALID ERROR_SYSTEM_INVALID} <b>must</b> be returned.</li>
- * <li>{@code next}, unless otherwise specified via an extension, <b>must</b> contain exactly one graphics API binding structure (a structure whose name begins with “XrGraphicsBinding”) or {@link XR10#XR_ERROR_GRAPHICS_DEVICE_INVALID ERROR_GRAPHICS_DEVICE_INVALID} <b>must</b> be returned.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SESSION_CREATE_INFO TYPE_SESSION_CREATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrGraphicsBindingEGLMNDX}, {@link XrGraphicsBindingOpenGLWaylandKHR}, {@link XrGraphicsBindingOpenGLWin32KHR}, {@link XrGraphicsBindingOpenGLXcbKHR}, {@link XrGraphicsBindingOpenGLXlibKHR}, {@link XrGraphicsBindingVulkanKHR}, {@link XrHolographicWindowAttachmentMSFT}, {@link XrSessionCreateInfoOverlayEXTX}</li>
- * <li>{@code createFlags} <b>must</b> be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateSession CreateSession}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSessionCreateInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSessionCreateFlags {@link #createFlags};
- *     XrSystemId {@link #systemId};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSessionCreateFlags createFlags;
+ *     XrSystemId systemId;
+ * }}</pre>
  */
 public class XrSessionCreateInfo extends Struct<XrSessionCreateInfo> implements NativeResource {
 
@@ -101,24 +78,24 @@ public class XrSessionCreateInfo extends Struct<XrSessionCreateInfo> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. Note that in most cases one graphics API extension specific struct needs to be in this next chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** identifies {@code XrSessionCreateFlags} that apply to the creation. */
+    /** @return the value of the {@code createFlags} field. */
     @NativeType("XrSessionCreateFlags")
     public long createFlags() { return ncreateFlags(address()); }
-    /** the {@code XrSystemId} representing the system of devices to be used by this session. */
+    /** @return the value of the {@code systemId} field. */
     @NativeType("XrSystemId")
     public long systemId() { return nsystemId(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSessionCreateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_SESSION_CREATE_INFO TYPE_SESSION_CREATE_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_SESSION_CREATE_INFO TYPE_SESSION_CREATE_INFO} value to the {@code type} field. */
     public XrSessionCreateInfo type$Default() { return type(XR10.XR_TYPE_SESSION_CREATE_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSessionCreateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrGraphicsBindingEGLMNDX} value to the {@code next} chain. */
     public XrSessionCreateInfo next(XrGraphicsBindingEGLMNDX value) { return this.next(value.next(this.next()).address()); }
@@ -138,9 +115,9 @@ public class XrSessionCreateInfo extends Struct<XrSessionCreateInfo> implements 
     public XrSessionCreateInfo next(XrHolographicWindowAttachmentMSFT value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSessionCreateInfoOverlayEXTX} value to the {@code next} chain. */
     public XrSessionCreateInfo next(XrSessionCreateInfoOverlayEXTX value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #createFlags} field. */
+    /** Sets the specified value to the {@code createFlags} field. */
     public XrSessionCreateInfo createFlags(@NativeType("XrSessionCreateFlags") long value) { ncreateFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #systemId} field. */
+    /** Sets the specified value to the {@code systemId} field. */
     public XrSessionCreateInfo systemId(@NativeType("XrSystemId") long value) { nsystemId(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -342,24 +319,24 @@ public class XrSessionCreateInfo extends Struct<XrSessionCreateInfo> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSessionCreateInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSessionCreateInfo.ntype(address()); }
-        /** @return the value of the {@link XrSessionCreateInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSessionCreateInfo.nnext(address()); }
-        /** @return the value of the {@link XrSessionCreateInfo#createFlags} field. */
+        /** @return the value of the {@code createFlags} field. */
         @NativeType("XrSessionCreateFlags")
         public long createFlags() { return XrSessionCreateInfo.ncreateFlags(address()); }
-        /** @return the value of the {@link XrSessionCreateInfo#systemId} field. */
+        /** @return the value of the {@code systemId} field. */
         @NativeType("XrSystemId")
         public long systemId() { return XrSessionCreateInfo.nsystemId(address()); }
 
-        /** Sets the specified value to the {@link XrSessionCreateInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSessionCreateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrSessionCreateInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_SESSION_CREATE_INFO TYPE_SESSION_CREATE_INFO} value to the {@link XrSessionCreateInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_SESSION_CREATE_INFO TYPE_SESSION_CREATE_INFO} value to the {@code type} field. */
         public XrSessionCreateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_SESSION_CREATE_INFO); }
-        /** Sets the specified value to the {@link XrSessionCreateInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSessionCreateInfo.Buffer next(@NativeType("void const *") long value) { XrSessionCreateInfo.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrGraphicsBindingEGLMNDX} value to the {@code next} chain. */
         public XrSessionCreateInfo.Buffer next(XrGraphicsBindingEGLMNDX value) { return this.next(value.next(this.next()).address()); }
@@ -379,9 +356,9 @@ public class XrSessionCreateInfo extends Struct<XrSessionCreateInfo> implements 
         public XrSessionCreateInfo.Buffer next(XrHolographicWindowAttachmentMSFT value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSessionCreateInfoOverlayEXTX} value to the {@code next} chain. */
         public XrSessionCreateInfo.Buffer next(XrSessionCreateInfoOverlayEXTX value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrSessionCreateInfo#createFlags} field. */
+        /** Sets the specified value to the {@code createFlags} field. */
         public XrSessionCreateInfo.Buffer createFlags(@NativeType("XrSessionCreateFlags") long value) { XrSessionCreateInfo.ncreateFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSessionCreateInfo#systemId} field. */
+        /** Sets the specified value to the {@code systemId} field. */
         public XrSessionCreateInfo.Buffer systemId(@NativeType("XrSystemId") long value) { XrSessionCreateInfo.nsystemId(address(), value); return this; }
 
     }

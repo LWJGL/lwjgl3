@@ -5,17 +5,8 @@
  */
 package org.lwjgl.opengles;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_compressed_paletted_texture.txt">OES_compressed_paletted_texture</a> extension.
- * 
- * <p>The goal of this extension is to allow direct support of palettized textures in OpenGL ES.</p>
- * 
- * <p>Palettized textures are implemented in OpenGL ES using the CompressedTexImage2D call. The definition of the following parameters "level" and
- * "internalformat" in the CompressedTexImage2D call have been extended to support paletted textures.</p>
- */
 public final class OESCompressedPalettedTexture {
 
-    /** Accepted by the {@code internalformat} paramter of CompressedTexImage2D. */
     public static final int
         GL_PALETTE4_RGB8_OES     = 0x8B90,
         GL_PALETTE4_RGBA8_OES    = 0x8B91,

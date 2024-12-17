@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing AV1 quantizer index values per prediction mode.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeAV1QualityLevelPropertiesKHR}, {@link VkVideoEncodeAV1RateControlLayerInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeAV1QIndexKHR {
- *     uint32_t {@link #intraQIndex};
- *     uint32_t {@link #predictiveQIndex};
- *     uint32_t {@link #bipredictiveQIndex};
- * }</code></pre>
+ *     uint32_t intraQIndex;
+ *     uint32_t predictiveQIndex;
+ *     uint32_t bipredictiveQIndex;
+ * }}</pre>
  */
 public class VkVideoEncodeAV1QIndexKHR extends Struct<VkVideoEncodeAV1QIndexKHR> implements NativeResource {
 
@@ -82,21 +74,21 @@ public class VkVideoEncodeAV1QIndexKHR extends Struct<VkVideoEncodeAV1QIndexKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the quantizer index to be used for frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA_KHR}. */
+    /** @return the value of the {@code intraQIndex} field. */
     @NativeType("uint32_t")
     public int intraQIndex() { return nintraQIndex(address()); }
-    /** the quantizer index to be used for frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE_KHR}. */
+    /** @return the value of the {@code predictiveQIndex} field. */
     @NativeType("uint32_t")
     public int predictiveQIndex() { return npredictiveQIndex(address()); }
-    /** the quantizer index to be used for frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR}. */
+    /** @return the value of the {@code bipredictiveQIndex} field. */
     @NativeType("uint32_t")
     public int bipredictiveQIndex() { return nbipredictiveQIndex(address()); }
 
-    /** Sets the specified value to the {@link #intraQIndex} field. */
+    /** Sets the specified value to the {@code intraQIndex} field. */
     public VkVideoEncodeAV1QIndexKHR intraQIndex(@NativeType("uint32_t") int value) { nintraQIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #predictiveQIndex} field. */
+    /** Sets the specified value to the {@code predictiveQIndex} field. */
     public VkVideoEncodeAV1QIndexKHR predictiveQIndex(@NativeType("uint32_t") int value) { npredictiveQIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #bipredictiveQIndex} field. */
+    /** Sets the specified value to the {@code bipredictiveQIndex} field. */
     public VkVideoEncodeAV1QIndexKHR bipredictiveQIndex(@NativeType("uint32_t") int value) { nbipredictiveQIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,21 +284,21 @@ public class VkVideoEncodeAV1QIndexKHR extends Struct<VkVideoEncodeAV1QIndexKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeAV1QIndexKHR#intraQIndex} field. */
+        /** @return the value of the {@code intraQIndex} field. */
         @NativeType("uint32_t")
         public int intraQIndex() { return VkVideoEncodeAV1QIndexKHR.nintraQIndex(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QIndexKHR#predictiveQIndex} field. */
+        /** @return the value of the {@code predictiveQIndex} field. */
         @NativeType("uint32_t")
         public int predictiveQIndex() { return VkVideoEncodeAV1QIndexKHR.npredictiveQIndex(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QIndexKHR#bipredictiveQIndex} field. */
+        /** @return the value of the {@code bipredictiveQIndex} field. */
         @NativeType("uint32_t")
         public int bipredictiveQIndex() { return VkVideoEncodeAV1QIndexKHR.nbipredictiveQIndex(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeAV1QIndexKHR#intraQIndex} field. */
+        /** Sets the specified value to the {@code intraQIndex} field. */
         public VkVideoEncodeAV1QIndexKHR.Buffer intraQIndex(@NativeType("uint32_t") int value) { VkVideoEncodeAV1QIndexKHR.nintraQIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1QIndexKHR#predictiveQIndex} field. */
+        /** Sets the specified value to the {@code predictiveQIndex} field. */
         public VkVideoEncodeAV1QIndexKHR.Buffer predictiveQIndex(@NativeType("uint32_t") int value) { VkVideoEncodeAV1QIndexKHR.npredictiveQIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1QIndexKHR#bipredictiveQIndex} field. */
+        /** Sets the specified value to the {@code bipredictiveQIndex} field. */
         public VkVideoEncodeAV1QIndexKHR.Buffer bipredictiveQIndex(@NativeType("uint32_t") int value) { VkVideoEncodeAV1QIndexKHR.nbipredictiveQIndex(address(), value); return this; }
 
     }

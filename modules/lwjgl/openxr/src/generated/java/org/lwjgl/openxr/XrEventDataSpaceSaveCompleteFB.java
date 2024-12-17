@@ -16,36 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the result of a save operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>The save result event contains the success of the save/write operation to the specified location, as well as the {@code XrSpace} handle on which the save operation was attempted on, the unique UUID, and the triggered async request ID from the initial calling function.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntityStorage XR_FB_spatial_entity_storage} extension <b>must</b> be enabled prior to using {@link XrEventDataSpaceSaveCompleteFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataSpaceSaveCompleteFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrAsyncRequestIdFB {@link #requestId};
- *     XrResult {@link #result};
- *     XrSpace {@link #space};
- *     {@link XrUuidEXT XrUuidEXT} {@link #uuid};
- *     XrSpaceStorageLocationFB {@link #location};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrAsyncRequestIdFB requestId;
+ *     XrResult result;
+ *     XrSpace space;
+ *     {@link XrUuidEXT XrUuidEXT} uuid;
+ *     XrSpaceStorageLocationFB location;
+ * }}</pre>
  */
 public class XrEventDataSpaceSaveCompleteFB extends Struct<XrEventDataSpaceSaveCompleteFB> implements NativeResource {
 
@@ -110,32 +90,32 @@ public class XrEventDataSpaceSaveCompleteFB extends Struct<XrEventDataSpaceSaveC
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the ID of the asynchronous request to save an entity. */
+    /** @return the value of the {@code requestId} field. */
     @NativeType("XrAsyncRequestIdFB")
     public long requestId() { return nrequestId(address()); }
-    /** an {@code XrResult} that describes whether the request succeeded or if an error occurred. */
+    /** @return the value of the {@code result} field. */
     @NativeType("XrResult")
     public int result() { return nresult(address()); }
-    /** the spatial entity being saved. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the UUID for the spatial entity being saved. */
+    /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
     public XrUuidEXT uuid() { return nuuid(address()); }
-    /** the location of the spatial entity being saved. */
+    /** @return the value of the {@code location} field. */
     @NativeType("XrSpaceStorageLocationFB")
     public int location() { return nlocation(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataSpaceSaveCompleteFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB} value to the {@code type} field. */
     public XrEventDataSpaceSaveCompleteFB type$Default() { return type(FBSpatialEntityStorage.XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataSpaceSaveCompleteFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -345,32 +325,32 @@ public class XrEventDataSpaceSaveCompleteFB extends Struct<XrEventDataSpaceSaveC
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataSpaceSaveCompleteFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataSpaceSaveCompleteFB.ntype(address()); }
-        /** @return the value of the {@link XrEventDataSpaceSaveCompleteFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataSpaceSaveCompleteFB.nnext(address()); }
-        /** @return the value of the {@link XrEventDataSpaceSaveCompleteFB#requestId} field. */
+        /** @return the value of the {@code requestId} field. */
         @NativeType("XrAsyncRequestIdFB")
         public long requestId() { return XrEventDataSpaceSaveCompleteFB.nrequestId(address()); }
-        /** @return the value of the {@link XrEventDataSpaceSaveCompleteFB#result} field. */
+        /** @return the value of the {@code result} field. */
         @NativeType("XrResult")
         public int result() { return XrEventDataSpaceSaveCompleteFB.nresult(address()); }
-        /** @return the value of the {@link XrEventDataSpaceSaveCompleteFB#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrEventDataSpaceSaveCompleteFB.nspace(address()); }
-        /** @return a {@link XrUuidEXT} view of the {@link XrEventDataSpaceSaveCompleteFB#uuid} field. */
+        /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
         public XrUuidEXT uuid() { return XrEventDataSpaceSaveCompleteFB.nuuid(address()); }
-        /** @return the value of the {@link XrEventDataSpaceSaveCompleteFB#location} field. */
+        /** @return the value of the {@code location} field. */
         @NativeType("XrSpaceStorageLocationFB")
         public int location() { return XrEventDataSpaceSaveCompleteFB.nlocation(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataSpaceSaveCompleteFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataSpaceSaveCompleteFB.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataSpaceSaveCompleteFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB} value to the {@link XrEventDataSpaceSaveCompleteFB#type} field. */
+        /** Sets the {@link FBSpatialEntityStorage#XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB} value to the {@code type} field. */
         public XrEventDataSpaceSaveCompleteFB.Buffer type$Default() { return type(FBSpatialEntityStorage.XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB); }
-        /** Sets the specified value to the {@link XrEventDataSpaceSaveCompleteFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataSpaceSaveCompleteFB.Buffer next(@NativeType("void const *") long value) { XrEventDataSpaceSaveCompleteFB.nnext(address(), value); return this; }
 
     }

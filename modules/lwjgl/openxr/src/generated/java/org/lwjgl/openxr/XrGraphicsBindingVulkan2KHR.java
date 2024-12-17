@@ -19,11 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * See {@link XrGraphicsBindingVulkanKHR}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGraphicsBindingVulkan2KHR {
  *     XrStructureType type;
  *     void const * next;
@@ -32,7 +28,7 @@ import org.lwjgl.vulkan.*;
  *     VkDevice device;
  *     uint32_t queueFamilyIndex;
  *     uint32_t queueIndex;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrGraphicsBindingVulkan2KHR extends XrGraphicsBindingVulkanKHR {
 

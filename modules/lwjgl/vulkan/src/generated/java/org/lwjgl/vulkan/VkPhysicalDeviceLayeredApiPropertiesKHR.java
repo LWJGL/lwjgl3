@@ -18,35 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure describing a single layered implementation underneath the Vulkan physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code layeredAPI} is {@link KHRMaintenance7#VK_PHYSICAL_DEVICE_LAYERED_API_VULKAN_KHR PHYSICAL_DEVICE_LAYERED_API_VULKAN_KHR}, additional Vulkan-specific information can be queried by including the {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR} structure in the {@code pNext} chain. Otherwise if such a structure is included in the {@code pNext} chain, it is ignored.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPhysicalDeviceLayeredApiPropertiesListKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceLayeredApiPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #vendorID};
- *     uint32_t {@link #deviceID};
- *     VkPhysicalDeviceLayeredApiKHR {@link #layeredAPI};
- *     char {@link #deviceName}[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t vendorID;
+ *     uint32_t deviceID;
+ *     VkPhysicalDeviceLayeredApiKHR layeredAPI;
+ *     char deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
+ * }}</pre>
  */
 public class VkPhysicalDeviceLayeredApiPropertiesKHR extends Struct<VkPhysicalDeviceLayeredApiPropertiesKHR> implements NativeResource {
 
@@ -108,33 +88,33 @@ public class VkPhysicalDeviceLayeredApiPropertiesKHR extends Struct<VkPhysicalDe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a unique identifier for the vendor of the layered implementation. */
+    /** @return the value of the {@code vendorID} field. */
     @NativeType("uint32_t")
     public int vendorID() { return nvendorID(address()); }
-    /** a unique identifier for the layered implementation among devices available from the vendor. */
+    /** @return the value of the {@code deviceID} field. */
     @NativeType("uint32_t")
     public int deviceID() { return ndeviceID(address()); }
-    /** a {@code VkPhysicalDeviceLayeredApiKHR} specifying the API implemented by the layered implementation. */
+    /** @return the value of the {@code layeredAPI} field. */
     @NativeType("VkPhysicalDeviceLayeredApiKHR")
     public int layeredAPI() { return nlayeredAPI(address()); }
-    /** an array of {@link VK10#VK_MAX_PHYSICAL_DEVICE_NAME_SIZE MAX_PHYSICAL_DEVICE_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the device. */
+    /** @return a {@link ByteBuffer} view of the {@code deviceName} field. */
     @NativeType("char[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]")
     public ByteBuffer deviceName() { return ndeviceName(address()); }
-    /** an array of {@link VK10#VK_MAX_PHYSICAL_DEVICE_NAME_SIZE MAX_PHYSICAL_DEVICE_NAME_SIZE} {@code char} containing a null-terminated UTF-8 string which is the name of the device. */
+    /** @return the null-terminated string stored in the {@code deviceName} field. */
     @NativeType("char[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]")
     public String deviceNameString() { return ndeviceNameString(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceLayeredApiPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceLayeredApiPropertiesKHR sType$Default() { return sType(KHRMaintenance7.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceLayeredApiPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR} value to the {@code pNext} chain. */
     public VkPhysicalDeviceLayeredApiPropertiesKHR pNext(VkPhysicalDeviceLayeredApiVulkanPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -336,33 +316,33 @@ public class VkPhysicalDeviceLayeredApiPropertiesKHR extends Struct<VkPhysicalDe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceLayeredApiPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceLayeredApiPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#vendorID} field. */
+        /** @return the value of the {@code vendorID} field. */
         @NativeType("uint32_t")
         public int vendorID() { return VkPhysicalDeviceLayeredApiPropertiesKHR.nvendorID(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#deviceID} field. */
+        /** @return the value of the {@code deviceID} field. */
         @NativeType("uint32_t")
         public int deviceID() { return VkPhysicalDeviceLayeredApiPropertiesKHR.ndeviceID(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#layeredAPI} field. */
+        /** @return the value of the {@code layeredAPI} field. */
         @NativeType("VkPhysicalDeviceLayeredApiKHR")
         public int layeredAPI() { return VkPhysicalDeviceLayeredApiPropertiesKHR.nlayeredAPI(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#deviceName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code deviceName} field. */
         @NativeType("char[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]")
         public ByteBuffer deviceName() { return VkPhysicalDeviceLayeredApiPropertiesKHR.ndeviceName(address()); }
-        /** @return the null-terminated string stored in the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#deviceName} field. */
+        /** @return the null-terminated string stored in the {@code deviceName} field. */
         @NativeType("char[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE]")
         public String deviceNameString() { return VkPhysicalDeviceLayeredApiPropertiesKHR.ndeviceNameString(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLayeredApiPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer sType$Default() { return sType(KHRMaintenance7.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLayeredApiPropertiesKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPhysicalDeviceLayeredApiVulkanPropertiesKHR} value to the {@code pNext} chain. */
         public VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer pNext(VkPhysicalDeviceLayeredApiVulkanPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }

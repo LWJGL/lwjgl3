@@ -16,58 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying attachment locations.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure allows applications to remap the locations of color attachments to different fragment shader output locations.</p>
- * 
- * <p>Each element of {@code pColorAttachmentLocations} set to {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} will be inaccessible to this pipeline as a color attachment; no location will map to it. Each element of {@code pColorAttachmentLocations} set to any other value will map the specified location value to the color attachment specified in the render pass at the corresponding index in the {@code pColorAttachmentLocations} array. Any writes to a fragment output location that is not mapped to an attachment <b>must</b> be discarded.</p>
- * 
- * <p>If {@code pColorAttachmentLocations} is {@code NULL}, it is equivalent to setting each element to its index within the array.</p>
- * 
- * <p>This structure <b>can</b> be included in the {@code pNext} chain of a {@link VkGraphicsPipelineCreateInfo} structure to set this state for a pipeline. If this structure is not included in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}, it is equivalent to specifying this structure with the following properties:</p>
- * 
- * <ul>
- * <li>{@code colorAttachmentCount} set to {@link VkPipelineRenderingCreateInfo}{@code ::colorAttachmentCount}.</li>
- * <li>{@code pColorAttachmentLocations} set to {@code NULL}.</li>
- * </ul>
- * 
- * <p>This structure <b>can</b> be included in the {@code pNext} chain of a {@link VkCommandBufferInheritanceInfo} structure to specify inherited state from the primary command buffer. If {@link VkCommandBufferInheritanceInfo}::renderPass is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or {@link VK10#VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT} is not specified in {@link VkCommandBufferBeginInfo}::flags, members of this structure are ignored. If this structure is not included in the {@code pNext} chain of {@link VkCommandBufferInheritanceInfo}, it is equivalent to specifying this structure with the following properties:</p>
- * 
- * <ul>
- * <li>{@code colorAttachmentCount} set to {@link VkCommandBufferInheritanceRenderingInfo}{@code ::colorAttachmentCount}.</li>
- * <li>{@code pColorAttachmentLocations} set to {@code NULL}.</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicRenderingLocalRead">{@code dynamicRenderingLocalRead}</a> feature is not enabled, and {@code pColorAttachmentLocations} is not {@code NULL}, each element <b>must</b> be the value of its index within the array</li>
- * <li>Elements of {@code pColorAttachmentLocations} that are not {@link VK10#VK_ATTACHMENT_UNUSED ATTACHMENT_UNUSED} <b>must</b> each be unique</li>
- * <li>{@code colorAttachmentCount} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxColorAttachments">{@code maxColorAttachments}</a></li>
- * <li>Each element of {@code pColorAttachmentLocations} <b>must</b> be less than <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxColorAttachments">{@code maxColorAttachments}</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK14#vkCmdSetRenderingAttachmentLocations CmdSetRenderingAttachmentLocations}, {@link KHRDynamicRenderingLocalRead#vkCmdSetRenderingAttachmentLocationsKHR CmdSetRenderingAttachmentLocationsKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderingAttachmentLocationInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #colorAttachmentCount};
- *     uint32_t const * {@link #pColorAttachmentLocations};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t colorAttachmentCount;
+ *     uint32_t const * pColorAttachmentLocations;
+ * }}</pre>
  */
 public class VkRenderingAttachmentLocationInfo extends Struct<VkRenderingAttachmentLocationInfo> implements NativeResource {
 
@@ -123,28 +78,28 @@ public class VkRenderingAttachmentLocationInfo extends Struct<VkRenderingAttachm
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of elements in {@code pColorAttachmentLocations}. */
+    /** @return the value of the {@code colorAttachmentCount} field. */
     @NativeType("uint32_t")
     public int colorAttachmentCount() { return ncolorAttachmentCount(address()); }
-    /** a pointer to an array of {@code colorAttachmentCount} {@code uint32_t} values defining remapped locations for color attachments. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pColorAttachmentLocations} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pColorAttachmentLocations() { return npColorAttachmentLocations(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRenderingAttachmentLocationInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO} value to the {@code sType} field. */
     public VkRenderingAttachmentLocationInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRenderingAttachmentLocationInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #colorAttachmentCount} field. */
+    /** Sets the specified value to the {@code colorAttachmentCount} field. */
     public VkRenderingAttachmentLocationInfo colorAttachmentCount(@NativeType("uint32_t") int value) { ncolorAttachmentCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pColorAttachmentLocations} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentLocations} field. */
     public VkRenderingAttachmentLocationInfo pColorAttachmentLocations(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npColorAttachmentLocations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,28 +301,28 @@ public class VkRenderingAttachmentLocationInfo extends Struct<VkRenderingAttachm
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderingAttachmentLocationInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderingAttachmentLocationInfo.nsType(address()); }
-        /** @return the value of the {@link VkRenderingAttachmentLocationInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderingAttachmentLocationInfo.npNext(address()); }
-        /** @return the value of the {@link VkRenderingAttachmentLocationInfo#colorAttachmentCount} field. */
+        /** @return the value of the {@code colorAttachmentCount} field. */
         @NativeType("uint32_t")
         public int colorAttachmentCount() { return VkRenderingAttachmentLocationInfo.ncolorAttachmentCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkRenderingAttachmentLocationInfo#pColorAttachmentLocations} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pColorAttachmentLocations} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pColorAttachmentLocations() { return VkRenderingAttachmentLocationInfo.npColorAttachmentLocations(address()); }
 
-        /** Sets the specified value to the {@link VkRenderingAttachmentLocationInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRenderingAttachmentLocationInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderingAttachmentLocationInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO} value to the {@link VkRenderingAttachmentLocationInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO} value to the {@code sType} field. */
         public VkRenderingAttachmentLocationInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO); }
-        /** Sets the specified value to the {@link VkRenderingAttachmentLocationInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRenderingAttachmentLocationInfo.Buffer pNext(@NativeType("void const *") long value) { VkRenderingAttachmentLocationInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingAttachmentLocationInfo#colorAttachmentCount} field. */
+        /** Sets the specified value to the {@code colorAttachmentCount} field. */
         public VkRenderingAttachmentLocationInfo.Buffer colorAttachmentCount(@NativeType("uint32_t") int value) { VkRenderingAttachmentLocationInfo.ncolorAttachmentCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkRenderingAttachmentLocationInfo#pColorAttachmentLocations} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pColorAttachmentLocations} field. */
         public VkRenderingAttachmentLocationInfo.Buffer pColorAttachmentLocations(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkRenderingAttachmentLocationInfo.npColorAttachmentLocations(address(), value); return this; }
 
     }

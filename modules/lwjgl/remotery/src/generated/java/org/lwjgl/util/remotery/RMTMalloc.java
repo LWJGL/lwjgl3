@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     void *mm_context,
- *     rmtU32 size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke rmtMallocPtr} */
 public abstract class RMTMalloc extends Callback implements RMTMallocI {
 
     /**

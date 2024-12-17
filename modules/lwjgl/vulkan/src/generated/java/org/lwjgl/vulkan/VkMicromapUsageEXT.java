@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the usage information used to build a micromap.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} then {@code format} <b>must</b> be {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} or {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} and {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT}{@code ::maxOpacity2StateSubdivisionLevel}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} and {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT}{@code ::maxOpacity4StateSubdivisionLevel}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} then {@code format} <b>must</b> be {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV}, {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV} or {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV}{@code ::maxDisplacementMicromapSubdivisionLevel}</li>
- * </ul>
- * 
- * <p>The {@code format} is interpreted based on the {@code type} of the micromap using it.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkAccelerationStructureTrianglesDisplacementMicromapNV}, {@link VkAccelerationStructureTrianglesOpacityMicromapEXT}, {@link VkMicromapBuildInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMicromapUsageEXT {
- *     uint32_t {@link #count};
- *     uint32_t {@link #subdivisionLevel};
- *     uint32_t {@link #format};
- * }</code></pre>
+ *     uint32_t count;
+ *     uint32_t subdivisionLevel;
+ *     uint32_t format;
+ * }}</pre>
  */
 public class VkMicromapUsageEXT extends Struct<VkMicromapUsageEXT> implements NativeResource {
 
@@ -94,21 +74,21 @@ public class VkMicromapUsageEXT extends Struct<VkMicromapUsageEXT> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of triangles in the usage format defined by the {@code subdivisionLevel} and {@code format} below in the micromap */
+    /** @return the value of the {@code count} field. */
     @NativeType("uint32_t")
     public int count() { return ncount(address()); }
-    /** the subdivision level of this usage format */
+    /** @return the value of the {@code subdivisionLevel} field. */
     @NativeType("uint32_t")
     public int subdivisionLevel() { return nsubdivisionLevel(address()); }
-    /** the format of this usage format */
+    /** @return the value of the {@code format} field. */
     @NativeType("uint32_t")
     public int format() { return nformat(address()); }
 
-    /** Sets the specified value to the {@link #count} field. */
+    /** Sets the specified value to the {@code count} field. */
     public VkMicromapUsageEXT count(@NativeType("uint32_t") int value) { ncount(address(), value); return this; }
-    /** Sets the specified value to the {@link #subdivisionLevel} field. */
+    /** Sets the specified value to the {@code subdivisionLevel} field. */
     public VkMicromapUsageEXT subdivisionLevel(@NativeType("uint32_t") int value) { nsubdivisionLevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkMicromapUsageEXT format(@NativeType("uint32_t") int value) { nformat(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -304,21 +284,21 @@ public class VkMicromapUsageEXT extends Struct<VkMicromapUsageEXT> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMicromapUsageEXT#count} field. */
+        /** @return the value of the {@code count} field. */
         @NativeType("uint32_t")
         public int count() { return VkMicromapUsageEXT.ncount(address()); }
-        /** @return the value of the {@link VkMicromapUsageEXT#subdivisionLevel} field. */
+        /** @return the value of the {@code subdivisionLevel} field. */
         @NativeType("uint32_t")
         public int subdivisionLevel() { return VkMicromapUsageEXT.nsubdivisionLevel(address()); }
-        /** @return the value of the {@link VkMicromapUsageEXT#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("uint32_t")
         public int format() { return VkMicromapUsageEXT.nformat(address()); }
 
-        /** Sets the specified value to the {@link VkMicromapUsageEXT#count} field. */
+        /** Sets the specified value to the {@code count} field. */
         public VkMicromapUsageEXT.Buffer count(@NativeType("uint32_t") int value) { VkMicromapUsageEXT.ncount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapUsageEXT#subdivisionLevel} field. */
+        /** Sets the specified value to the {@code subdivisionLevel} field. */
         public VkMicromapUsageEXT.Buffer subdivisionLevel(@NativeType("uint32_t") int value) { VkMicromapUsageEXT.nsubdivisionLevel(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapUsageEXT#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkMicromapUsageEXT.Buffer format(@NativeType("uint32_t") int value) { VkMicromapUsageEXT.nformat(address(), value); return this; }
 
     }

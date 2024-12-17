@@ -16,42 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The data of a hand mesh.
- * 
- * <h5>Description</h5>
- * 
- * <p>When the returned {@code isActive} value is {@link XR10#XR_FALSE FALSE}, the runtime indicates the hand is not actively tracked, for example, the hand is outside of sensor’s range, or the input focus is taken away from the application. When the runtime returns {@link XR10#XR_FALSE FALSE} to {@code isActive}, it <b>must</b> set {@code indexBufferChanged} and {@code vertexBufferChanged} to {@link XR10#XR_FALSE FALSE}, and <b>must</b> not change the content in {@code indexBuffer} or {@code vertexBuffer},</p>
- * 
- * <p>When the returned {@code isActive} value is {@link XR10#XR_TRUE TRUE}, the hand tracking mesh represented in {@code indexBuffer} and {@code vertexBuffer} are updated to the latest data of the {@link XrHandMeshUpdateInfoMSFT}{@code ::time} given to the {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT} function. The runtime <b>must</b> set {@code indexBufferChanged} and {@code vertexBufferChanged} to reflect whether the index or vertex buffer’s content are changed during the update. In this way, the application can easily avoid unnecessary processing of buffers when there’s no new data.</p>
- * 
- * <p>The hand mesh is represented in triangle lists and each triangle’s vertices are in clockwise order when looking from outside of the hand. When hand tracking is active, i.e. when {@code isActive} is returned as {@link XR10#XR_TRUE TRUE}, the returned {@code indexBuffer.indexCountOutput} value <b>must</b> be positive and multiple of 3, and {@code vertexBuffer.vertexCountOutput} value <b>must</b> be equal to or larger than 3.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using {@link XrHandMeshMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTHandTrackingMesh#XR_TYPE_HAND_MESH_MSFT TYPE_HAND_MESH_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code indexBuffer} <b>must</b> be a valid {@link XrHandMeshIndexBufferMSFT} structure</li>
- * <li>{@code vertexBuffer} <b>must</b> be a valid {@link XrHandMeshVertexBufferMSFT} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandMeshIndexBufferMSFT}, {@link XrHandMeshVertexBufferMSFT}, {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandMeshMSFT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #isActive};
- *     XrBool32 {@link #indexBufferChanged};
- *     XrBool32 {@link #vertexBufferChanged};
- *     {@link XrHandMeshIndexBufferMSFT XrHandMeshIndexBufferMSFT} {@link #indexBuffer};
- *     {@link XrHandMeshVertexBufferMSFT XrHandMeshVertexBufferMSFT} {@link #vertexBuffer};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 isActive;
+ *     XrBool32 indexBufferChanged;
+ *     XrBool32 vertexBufferChanged;
+ *     {@link XrHandMeshIndexBufferMSFT XrHandMeshIndexBufferMSFT} indexBuffer;
+ *     {@link XrHandMeshVertexBufferMSFT XrHandMeshVertexBufferMSFT} vertexBuffer;
+ * }}</pre>
  */
 public class XrHandMeshMSFT extends Struct<XrHandMeshMSFT> implements NativeResource {
 
@@ -116,45 +90,45 @@ public class XrHandMeshMSFT extends Struct<XrHandMeshMSFT> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32} indicating if the current hand tracker is active. */
+    /** @return the value of the {@code isActive} field. */
     @NativeType("XrBool32")
     public boolean isActive() { return nisActive(address()) != 0; }
-    /** an {@code XrBool32} indicating if the {@code indexBuffer} content was changed during the update. */
+    /** @return the value of the {@code indexBufferChanged} field. */
     @NativeType("XrBool32")
     public boolean indexBufferChanged() { return nindexBufferChanged(address()) != 0; }
-    /** an {@code XrBool32} indicating if the {@code vertexBuffer} content was changed during the update. */
+    /** @return the value of the {@code vertexBufferChanged} field. */
     @NativeType("XrBool32")
     public boolean vertexBufferChanged() { return nvertexBufferChanged(address()) != 0; }
-    /** an {@link XrHandMeshIndexBufferMSFT} returns the index buffer of the tracked hand mesh. */
+    /** @return a {@link XrHandMeshIndexBufferMSFT} view of the {@code indexBuffer} field. */
     public XrHandMeshIndexBufferMSFT indexBuffer() { return nindexBuffer(address()); }
-    /** an {@link XrHandMeshVertexBufferMSFT} returns the vertex buffer of the tracked hand mesh. */
+    /** @return a {@link XrHandMeshVertexBufferMSFT} view of the {@code vertexBuffer} field. */
     public XrHandMeshVertexBufferMSFT vertexBuffer() { return nvertexBuffer(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHandMeshMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTHandTrackingMesh#XR_TYPE_HAND_MESH_MSFT TYPE_HAND_MESH_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTHandTrackingMesh#XR_TYPE_HAND_MESH_MSFT TYPE_HAND_MESH_MSFT} value to the {@code type} field. */
     public XrHandMeshMSFT type$Default() { return type(MSFTHandTrackingMesh.XR_TYPE_HAND_MESH_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHandMeshMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #isActive} field. */
+    /** Sets the specified value to the {@code isActive} field. */
     public XrHandMeshMSFT isActive(@NativeType("XrBool32") boolean value) { nisActive(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #indexBufferChanged} field. */
+    /** Sets the specified value to the {@code indexBufferChanged} field. */
     public XrHandMeshMSFT indexBufferChanged(@NativeType("XrBool32") boolean value) { nindexBufferChanged(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #vertexBufferChanged} field. */
+    /** Sets the specified value to the {@code vertexBufferChanged} field. */
     public XrHandMeshMSFT vertexBufferChanged(@NativeType("XrBool32") boolean value) { nvertexBufferChanged(address(), value ? 1 : 0); return this; }
-    /** Copies the specified {@link XrHandMeshIndexBufferMSFT} to the {@link #indexBuffer} field. */
+    /** Copies the specified {@link XrHandMeshIndexBufferMSFT} to the {@code indexBuffer} field. */
     public XrHandMeshMSFT indexBuffer(XrHandMeshIndexBufferMSFT value) { nindexBuffer(address(), value); return this; }
-    /** Passes the {@link #indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrHandMeshMSFT indexBuffer(java.util.function.Consumer<XrHandMeshIndexBufferMSFT> consumer) { consumer.accept(indexBuffer()); return this; }
-    /** Copies the specified {@link XrHandMeshVertexBufferMSFT} to the {@link #vertexBuffer} field. */
+    /** Copies the specified {@link XrHandMeshVertexBufferMSFT} to the {@code vertexBuffer} field. */
     public XrHandMeshMSFT vertexBuffer(XrHandMeshVertexBufferMSFT value) { nvertexBuffer(address(), value); return this; }
-    /** Passes the {@link #vertexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code vertexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrHandMeshMSFT vertexBuffer(java.util.function.Consumer<XrHandMeshVertexBufferMSFT> consumer) { consumer.accept(vertexBuffer()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -374,45 +348,45 @@ public class XrHandMeshMSFT extends Struct<XrHandMeshMSFT> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHandMeshMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandMeshMSFT.ntype(address()); }
-        /** @return the value of the {@link XrHandMeshMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrHandMeshMSFT.nnext(address()); }
-        /** @return the value of the {@link XrHandMeshMSFT#isActive} field. */
+        /** @return the value of the {@code isActive} field. */
         @NativeType("XrBool32")
         public boolean isActive() { return XrHandMeshMSFT.nisActive(address()) != 0; }
-        /** @return the value of the {@link XrHandMeshMSFT#indexBufferChanged} field. */
+        /** @return the value of the {@code indexBufferChanged} field. */
         @NativeType("XrBool32")
         public boolean indexBufferChanged() { return XrHandMeshMSFT.nindexBufferChanged(address()) != 0; }
-        /** @return the value of the {@link XrHandMeshMSFT#vertexBufferChanged} field. */
+        /** @return the value of the {@code vertexBufferChanged} field. */
         @NativeType("XrBool32")
         public boolean vertexBufferChanged() { return XrHandMeshMSFT.nvertexBufferChanged(address()) != 0; }
-        /** @return a {@link XrHandMeshIndexBufferMSFT} view of the {@link XrHandMeshMSFT#indexBuffer} field. */
+        /** @return a {@link XrHandMeshIndexBufferMSFT} view of the {@code indexBuffer} field. */
         public XrHandMeshIndexBufferMSFT indexBuffer() { return XrHandMeshMSFT.nindexBuffer(address()); }
-        /** @return a {@link XrHandMeshVertexBufferMSFT} view of the {@link XrHandMeshMSFT#vertexBuffer} field. */
+        /** @return a {@link XrHandMeshVertexBufferMSFT} view of the {@code vertexBuffer} field. */
         public XrHandMeshVertexBufferMSFT vertexBuffer() { return XrHandMeshMSFT.nvertexBuffer(address()); }
 
-        /** Sets the specified value to the {@link XrHandMeshMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHandMeshMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrHandMeshMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTHandTrackingMesh#XR_TYPE_HAND_MESH_MSFT TYPE_HAND_MESH_MSFT} value to the {@link XrHandMeshMSFT#type} field. */
+        /** Sets the {@link MSFTHandTrackingMesh#XR_TYPE_HAND_MESH_MSFT TYPE_HAND_MESH_MSFT} value to the {@code type} field. */
         public XrHandMeshMSFT.Buffer type$Default() { return type(MSFTHandTrackingMesh.XR_TYPE_HAND_MESH_MSFT); }
-        /** Sets the specified value to the {@link XrHandMeshMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHandMeshMSFT.Buffer next(@NativeType("void *") long value) { XrHandMeshMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHandMeshMSFT#isActive} field. */
+        /** Sets the specified value to the {@code isActive} field. */
         public XrHandMeshMSFT.Buffer isActive(@NativeType("XrBool32") boolean value) { XrHandMeshMSFT.nisActive(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrHandMeshMSFT#indexBufferChanged} field. */
+        /** Sets the specified value to the {@code indexBufferChanged} field. */
         public XrHandMeshMSFT.Buffer indexBufferChanged(@NativeType("XrBool32") boolean value) { XrHandMeshMSFT.nindexBufferChanged(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrHandMeshMSFT#vertexBufferChanged} field. */
+        /** Sets the specified value to the {@code vertexBufferChanged} field. */
         public XrHandMeshMSFT.Buffer vertexBufferChanged(@NativeType("XrBool32") boolean value) { XrHandMeshMSFT.nvertexBufferChanged(address(), value ? 1 : 0); return this; }
-        /** Copies the specified {@link XrHandMeshIndexBufferMSFT} to the {@link XrHandMeshMSFT#indexBuffer} field. */
+        /** Copies the specified {@link XrHandMeshIndexBufferMSFT} to the {@code indexBuffer} field. */
         public XrHandMeshMSFT.Buffer indexBuffer(XrHandMeshIndexBufferMSFT value) { XrHandMeshMSFT.nindexBuffer(address(), value); return this; }
-        /** Passes the {@link XrHandMeshMSFT#indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code indexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrHandMeshMSFT.Buffer indexBuffer(java.util.function.Consumer<XrHandMeshIndexBufferMSFT> consumer) { consumer.accept(indexBuffer()); return this; }
-        /** Copies the specified {@link XrHandMeshVertexBufferMSFT} to the {@link XrHandMeshMSFT#vertexBuffer} field. */
+        /** Copies the specified {@link XrHandMeshVertexBufferMSFT} to the {@code vertexBuffer} field. */
         public XrHandMeshMSFT.Buffer vertexBuffer(XrHandMeshVertexBufferMSFT value) { XrHandMeshMSFT.nvertexBuffer(address(), value); return this; }
-        /** Passes the {@link XrHandMeshMSFT#vertexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code vertexBuffer} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrHandMeshMSFT.Buffer vertexBuffer(java.util.function.Consumer<XrHandMeshVertexBufferMSFT> consumer) { consumer.accept(vertexBuffer()); return this; }
 
     }

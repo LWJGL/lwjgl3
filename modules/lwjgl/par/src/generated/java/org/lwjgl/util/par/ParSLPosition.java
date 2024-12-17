@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The simple two-tuple math type used for mesh and spine vertices.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct parsl_position {
  *     float x;
  *     float y;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct parsl_position")
 public class ParSLPosition extends Struct<ParSLPosition> implements NativeResource {

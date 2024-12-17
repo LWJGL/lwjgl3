@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.ovr.OVR.OVR_MAX_EXTENSION_NAME_SIZE;
 
 /**
- * Describes the properties of an API extension.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrExtensionProperties {
- *     int {@link #extensionId};
+ *     int extensionId;
  *     char extensionName[OVR_MAX_EXTENSION_NAME_SIZE];
- *     uint32_t {@link #extensionVersion};
- * }</code></pre>
+ *     uint32_t extensionVersion;
+ * }}</pre>
  */
 @NativeType("struct ovrExtensionProperties")
 public class OVRExtensionProperties extends Struct<OVRExtensionProperties> {
@@ -79,7 +75,7 @@ public class OVRExtensionProperties extends Struct<OVRExtensionProperties> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** One of enum {@code ovrExtensions} or a dynamic value. */
+    /** @return the value of the {@code extensionId} field. */
     public int extensionId() { return nextensionId(address()); }
     /** @return a {@link ByteBuffer} view of the {@code extensionName} field. */
     @NativeType("char[OVR_MAX_EXTENSION_NAME_SIZE]")
@@ -87,7 +83,7 @@ public class OVRExtensionProperties extends Struct<OVRExtensionProperties> {
     /** @return the null-terminated string stored in the {@code extensionName} field. */
     @NativeType("char[OVR_MAX_EXTENSION_NAME_SIZE]")
     public String extensionNameString() { return nextensionNameString(address()); }
-    /** OpenXR-like version. Version compatibility is identified by the extension documentation. */
+    /** @return the value of the {@code extensionVersion} field. */
     @NativeType("uint32_t")
     public int extensionVersion() { return nextensionVersion(address()); }
 
@@ -172,7 +168,7 @@ public class OVRExtensionProperties extends Struct<OVRExtensionProperties> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRExtensionProperties#extensionId} field. */
+        /** @return the value of the {@code extensionId} field. */
         public int extensionId() { return OVRExtensionProperties.nextensionId(address()); }
         /** @return a {@link ByteBuffer} view of the {@code extensionName} field. */
         @NativeType("char[OVR_MAX_EXTENSION_NAME_SIZE]")
@@ -180,7 +176,7 @@ public class OVRExtensionProperties extends Struct<OVRExtensionProperties> {
         /** @return the null-terminated string stored in the {@code extensionName} field. */
         @NativeType("char[OVR_MAX_EXTENSION_NAME_SIZE]")
         public String extensionNameString() { return OVRExtensionProperties.nextensionNameString(address()); }
-        /** @return the value of the {@link OVRExtensionProperties#extensionVersion} field. */
+        /** @return the value of the {@code extensionVersion} field. */
         @NativeType("uint32_t")
         public int extensionVersion() { return OVRExtensionProperties.nextensionVersion(address()); }
 

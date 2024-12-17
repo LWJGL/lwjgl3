@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing capabilities of extended dynamic state.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceExtendedDynamicState3PropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTExtendedDynamicState3#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExtendedDynamicState3PropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #dynamicPrimitiveTopologyUnrestricted};
- * }</code></pre>
+ *     VkBool32 dynamicPrimitiveTopologyUnrestricted;
+ * }}</pre>
  */
 public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<VkPhysicalDeviceExtendedDynamicState3PropertiesEXT> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation allows {@code vkCmdSetPrimitiveTopology} to use a different <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#drawing-primitive-topology-class">primitive topology class</a> to the one specified in the active graphics pipeline. */
+    /** @return the value of the {@code dynamicPrimitiveTopologyUnrestricted} field. */
     @NativeType("VkBool32")
     public boolean dynamicPrimitiveTopologyUnrestricted() { return ndynamicPrimitiveTopologyUnrestricted(address()) != 0; }
 
@@ -104,7 +90,7 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
     public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT sType$Default() { return sType(EXTExtendedDynamicState3.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #dynamicPrimitiveTopologyUnrestricted} field. */
+    /** Sets the specified value to the {@code dynamicPrimitiveTopologyUnrestricted} field. */
     public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT dynamicPrimitiveTopologyUnrestricted(@NativeType("VkBool32") boolean value) { ndynamicPrimitiveTopologyUnrestricted(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,7 +292,7 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExtendedDynamicState3PropertiesEXT#dynamicPrimitiveTopologyUnrestricted} field. */
+        /** @return the value of the {@code dynamicPrimitiveTopologyUnrestricted} field. */
         @NativeType("VkBool32")
         public boolean dynamicPrimitiveTopologyUnrestricted() { return VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.ndynamicPrimitiveTopologyUnrestricted(address()) != 0; }
 
@@ -316,7 +302,7 @@ public class VkPhysicalDeviceExtendedDynamicState3PropertiesEXT extends Struct<V
         public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.Buffer sType$Default() { return sType(EXTExtendedDynamicState3.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExtendedDynamicState3PropertiesEXT#dynamicPrimitiveTopologyUnrestricted} field. */
+        /** Sets the specified value to the {@code dynamicPrimitiveTopologyUnrestricted} field. */
         public VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.Buffer dynamicPrimitiveTopologyUnrestricted(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceExtendedDynamicState3PropertiesEXT.ndynamicPrimitiveTopologyUnrestricted(address(), value ? 1 : 0); return this; }
 
     }

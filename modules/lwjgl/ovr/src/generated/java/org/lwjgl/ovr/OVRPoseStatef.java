@@ -16,23 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A full pose (rigid body) configuration with first and second derivatives.
- * 
- * <p>Body refers to any object for which ovrPoseStatef is providing data.  It can be the HMD, Touch controller, sensor or something else. The context
- * depends on the usage of the struct.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrPoseStatef {
- *     {@link OVRPosef ovrPosef} {@link #ThePose};
- *     {@link OVRVector3f ovrVector3f} {@link #AngularVelocity};
- *     {@link OVRVector3f ovrVector3f} {@link #LinearVelocity};
- *     {@link OVRVector3f ovrVector3f} {@link #AngularAcceleration};
- *     {@link OVRVector3f ovrVector3f} {@link #LinearAcceleration};
+ *     {@link OVRPosef ovrPosef} ThePose;
+ *     {@link OVRVector3f ovrVector3f} AngularVelocity;
+ *     {@link OVRVector3f ovrVector3f} LinearVelocity;
+ *     {@link OVRVector3f ovrVector3f} AngularAcceleration;
+ *     {@link OVRVector3f ovrVector3f} LinearAcceleration;
  *     char[4];
- *     double {@link #TimeInSeconds};
- * }</code></pre>
+ *     double TimeInSeconds;
+ * }}</pre>
  */
 @NativeType("struct ovrPoseStatef")
 public class OVRPoseStatef extends Struct<OVRPoseStatef> implements NativeResource {
@@ -96,22 +89,22 @@ public class OVRPoseStatef extends Struct<OVRPoseStatef> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** position and orientation */
+    /** @return a {@link OVRPosef} view of the {@code ThePose} field. */
     @NativeType("ovrPosef")
     public OVRPosef ThePose() { return nThePose(address()); }
-    /** angular velocity in radians per second */
+    /** @return a {@link OVRVector3f} view of the {@code AngularVelocity} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f AngularVelocity() { return nAngularVelocity(address()); }
-    /** velocity in meters per second */
+    /** @return a {@link OVRVector3f} view of the {@code LinearVelocity} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f LinearVelocity() { return nLinearVelocity(address()); }
-    /** angular acceleration in radians per second per second */
+    /** @return a {@link OVRVector3f} view of the {@code AngularAcceleration} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f AngularAcceleration() { return nAngularAcceleration(address()); }
-    /** acceleration in meters per second per second */
+    /** @return a {@link OVRVector3f} view of the {@code LinearAcceleration} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f LinearAcceleration() { return nLinearAcceleration(address()); }
-    /** absolute time that this pose refers to. See {@link OVR#ovr_GetTimeInSeconds GetTimeInSeconds} */
+    /** @return the value of the {@code TimeInSeconds} field. */
     public double TimeInSeconds() { return nTimeInSeconds(address()); }
 
     // -----------------------------------
@@ -300,22 +293,22 @@ public class OVRPoseStatef extends Struct<OVRPoseStatef> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link OVRPosef} view of the {@link OVRPoseStatef#ThePose} field. */
+        /** @return a {@link OVRPosef} view of the {@code ThePose} field. */
         @NativeType("ovrPosef")
         public OVRPosef ThePose() { return OVRPoseStatef.nThePose(address()); }
-        /** @return a {@link OVRVector3f} view of the {@link OVRPoseStatef#AngularVelocity} field. */
+        /** @return a {@link OVRVector3f} view of the {@code AngularVelocity} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f AngularVelocity() { return OVRPoseStatef.nAngularVelocity(address()); }
-        /** @return a {@link OVRVector3f} view of the {@link OVRPoseStatef#LinearVelocity} field. */
+        /** @return a {@link OVRVector3f} view of the {@code LinearVelocity} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f LinearVelocity() { return OVRPoseStatef.nLinearVelocity(address()); }
-        /** @return a {@link OVRVector3f} view of the {@link OVRPoseStatef#AngularAcceleration} field. */
+        /** @return a {@link OVRVector3f} view of the {@code AngularAcceleration} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f AngularAcceleration() { return OVRPoseStatef.nAngularAcceleration(address()); }
-        /** @return a {@link OVRVector3f} view of the {@link OVRPoseStatef#LinearAcceleration} field. */
+        /** @return a {@link OVRVector3f} view of the {@code LinearAcceleration} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f LinearAcceleration() { return OVRPoseStatef.nLinearAcceleration(address()); }
-        /** @return the value of the {@link OVRPoseStatef#TimeInSeconds} field. */
+        /** @return the value of the {@code TimeInSeconds} field. */
         public double TimeInSeconds() { return OVRPoseStatef.nTimeInSeconds(address()); }
 
     }

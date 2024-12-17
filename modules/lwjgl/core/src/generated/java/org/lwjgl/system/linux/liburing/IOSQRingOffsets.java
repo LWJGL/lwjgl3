@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Filled with the offset for {@code mmap(2)}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_sqring_offsets {
  *     __u32 head;
  *     __u32 tail;
@@ -31,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     __u32 array;
  *     __u32 resv1;
  *     __u64 user_addr;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_sqring_offsets")
 public class IOSQRingOffsets extends Struct<IOSQRingOffsets> implements NativeResource {

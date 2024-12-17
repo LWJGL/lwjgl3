@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing H.265 QP values per picture type.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeH265QualityLevelPropertiesKHR}, {@link VkVideoEncodeH265RateControlLayerInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH265QpKHR {
- *     int32_t {@link #qpI};
- *     int32_t {@link #qpP};
- *     int32_t {@link #qpB};
- * }</code></pre>
+ *     int32_t qpI;
+ *     int32_t qpP;
+ *     int32_t qpB;
+ * }}</pre>
  */
 public class VkVideoEncodeH265QpKHR extends Struct<VkVideoEncodeH265QpKHR> implements NativeResource {
 
@@ -82,21 +74,21 @@ public class VkVideoEncodeH265QpKHR extends Struct<VkVideoEncodeH265QpKHR> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-i-pic">I pictures</a>. */
+    /** @return the value of the {@code qpI} field. */
     @NativeType("int32_t")
     public int qpI() { return nqpI(address()); }
-    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-p-pic">P pictures</a>. */
+    /** @return the value of the {@code qpP} field. */
     @NativeType("int32_t")
     public int qpP() { return nqpP(address()); }
-    /** the QP to be used for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-b-pic">B pictures</a>. */
+    /** @return the value of the {@code qpB} field. */
     @NativeType("int32_t")
     public int qpB() { return nqpB(address()); }
 
-    /** Sets the specified value to the {@link #qpI} field. */
+    /** Sets the specified value to the {@code qpI} field. */
     public VkVideoEncodeH265QpKHR qpI(@NativeType("int32_t") int value) { nqpI(address(), value); return this; }
-    /** Sets the specified value to the {@link #qpP} field. */
+    /** Sets the specified value to the {@code qpP} field. */
     public VkVideoEncodeH265QpKHR qpP(@NativeType("int32_t") int value) { nqpP(address(), value); return this; }
-    /** Sets the specified value to the {@link #qpB} field. */
+    /** Sets the specified value to the {@code qpB} field. */
     public VkVideoEncodeH265QpKHR qpB(@NativeType("int32_t") int value) { nqpB(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,21 +284,21 @@ public class VkVideoEncodeH265QpKHR extends Struct<VkVideoEncodeH265QpKHR> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH265QpKHR#qpI} field. */
+        /** @return the value of the {@code qpI} field. */
         @NativeType("int32_t")
         public int qpI() { return VkVideoEncodeH265QpKHR.nqpI(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QpKHR#qpP} field. */
+        /** @return the value of the {@code qpP} field. */
         @NativeType("int32_t")
         public int qpP() { return VkVideoEncodeH265QpKHR.nqpP(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265QpKHR#qpB} field. */
+        /** @return the value of the {@code qpB} field. */
         @NativeType("int32_t")
         public int qpB() { return VkVideoEncodeH265QpKHR.nqpB(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH265QpKHR#qpI} field. */
+        /** Sets the specified value to the {@code qpI} field. */
         public VkVideoEncodeH265QpKHR.Buffer qpI(@NativeType("int32_t") int value) { VkVideoEncodeH265QpKHR.nqpI(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265QpKHR#qpP} field. */
+        /** Sets the specified value to the {@code qpP} field. */
         public VkVideoEncodeH265QpKHR.Buffer qpP(@NativeType("int32_t") int value) { VkVideoEncodeH265QpKHR.nqpP(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265QpKHR#qpB} field. */
+        /** Sets the specified value to the {@code qpB} field. */
         public VkVideoEncodeH265QpKHR.Buffer qpB(@NativeType("int32_t") int value) { VkVideoEncodeH265QpKHR.nqpB(address(), value); return this; }
 
     }

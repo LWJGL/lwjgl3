@@ -14,14 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct NSVGimage {
- *     float {@link #width};
- *     float {@link #height};
- *     {@link NSVGShape NSVGshape} * {@link #shapes};
- * }</code></pre>
+ *     float width;
+ *     float height;
+ *     {@link NSVGShape NSVGshape} * shapes;
+ * }}</pre>
  */
 @NativeType("struct NSVGimage")
 public class NSVGImage extends Struct<NSVGImage> {
@@ -75,11 +73,11 @@ public class NSVGImage extends Struct<NSVGImage> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Width of the image. */
+    /** @return the value of the {@code width} field. */
     public float width() { return nwidth(address()); }
-    /** Height of the image. */
+    /** @return the value of the {@code height} field. */
     public float height() { return nheight(address()); }
-    /** lLinked list of shapes in the image */
+    /** @return a {@link NSVGShape} view of the struct pointed to by the {@code shapes} field. */
     @NativeType("NSVGshape *")
     public NSVGShape shapes() { return nshapes(address()); }
 
@@ -162,11 +160,11 @@ public class NSVGImage extends Struct<NSVGImage> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link NSVGImage#width} field. */
+        /** @return the value of the {@code width} field. */
         public float width() { return NSVGImage.nwidth(address()); }
-        /** @return the value of the {@link NSVGImage#height} field. */
+        /** @return the value of the {@code height} field. */
         public float height() { return NSVGImage.nheight(address()); }
-        /** @return a {@link NSVGShape} view of the struct pointed to by the {@link NSVGImage#shapes} field. */
+        /** @return a {@link NSVGShape} view of the struct pointed to by the {@code shapes} field. */
         @NativeType("NSVGshape *")
         public NSVGShape shapes() { return NSVGImage.nshapes(address()); }
 

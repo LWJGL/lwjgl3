@@ -16,44 +16,26 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the AV1 encode quality level properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code preferredSingleReferenceNameMask}, {@code preferredUnidirectionalCompoundReferenceNameMask}, and {@code preferredBidirectionalCompoundReferenceNameMask} are encoded such that when bit index <code>i</code> is set, it indicates preference for using the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-reference-names">AV1 reference name</a> <code>STD_VIDEO_AV1_REFERENCE_NAME_LAST_FRAME + i</code>.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeAV1QIndexKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeAV1QualityLevelPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkVideoEncodeAV1RateControlFlagsKHR {@link #preferredRateControlFlags};
- *     uint32_t {@link #preferredGopFrameCount};
- *     uint32_t {@link #preferredKeyFramePeriod};
- *     uint32_t {@link #preferredConsecutiveBipredictiveFrameCount};
- *     uint32_t {@link #preferredTemporalLayerCount};
- *     {@link VkVideoEncodeAV1QIndexKHR VkVideoEncodeAV1QIndexKHR} {@link #preferredConstantQIndex};
- *     uint32_t {@link #preferredMaxSingleReferenceCount};
- *     uint32_t {@link #preferredSingleReferenceNameMask};
- *     uint32_t {@link #preferredMaxUnidirectionalCompoundReferenceCount};
- *     uint32_t {@link #preferredMaxUnidirectionalCompoundGroup1ReferenceCount};
- *     uint32_t {@link #preferredUnidirectionalCompoundReferenceNameMask};
- *     uint32_t {@link #preferredMaxBidirectionalCompoundReferenceCount};
- *     uint32_t {@link #preferredMaxBidirectionalCompoundGroup1ReferenceCount};
- *     uint32_t {@link #preferredMaxBidirectionalCompoundGroup2ReferenceCount};
- *     uint32_t {@link #preferredBidirectionalCompoundReferenceNameMask};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkVideoEncodeAV1RateControlFlagsKHR preferredRateControlFlags;
+ *     uint32_t preferredGopFrameCount;
+ *     uint32_t preferredKeyFramePeriod;
+ *     uint32_t preferredConsecutiveBipredictiveFrameCount;
+ *     uint32_t preferredTemporalLayerCount;
+ *     {@link VkVideoEncodeAV1QIndexKHR VkVideoEncodeAV1QIndexKHR} preferredConstantQIndex;
+ *     uint32_t preferredMaxSingleReferenceCount;
+ *     uint32_t preferredSingleReferenceNameMask;
+ *     uint32_t preferredMaxUnidirectionalCompoundReferenceCount;
+ *     uint32_t preferredMaxUnidirectionalCompoundGroup1ReferenceCount;
+ *     uint32_t preferredUnidirectionalCompoundReferenceNameMask;
+ *     uint32_t preferredMaxBidirectionalCompoundReferenceCount;
+ *     uint32_t preferredMaxBidirectionalCompoundGroup1ReferenceCount;
+ *     uint32_t preferredMaxBidirectionalCompoundGroup2ReferenceCount;
+ *     uint32_t preferredBidirectionalCompoundReferenceNameMask;
+ * }}</pre>
  */
 public class VkVideoEncodeAV1QualityLevelPropertiesKHR extends Struct<VkVideoEncodeAV1QualityLevelPropertiesKHR> implements NativeResource {
 
@@ -148,62 +130,62 @@ public class VkVideoEncodeAV1QualityLevelPropertiesKHR extends Struct<VkVideoEnc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoEncodeAV1RateControlFlagBitsKHR} values indicating the preferred flags to use for {@link VkVideoEncodeAV1RateControlInfoKHR}{@code ::flags}. */
+    /** @return the value of the {@code preferredRateControlFlags} field. */
     @NativeType("VkVideoEncodeAV1RateControlFlagsKHR")
     public int preferredRateControlFlags() { return npreferredRateControlFlags(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeAV1RateControlInfoKHR}{@code ::gopFrameCount}. */
+    /** @return the value of the {@code preferredGopFrameCount} field. */
     @NativeType("uint32_t")
     public int preferredGopFrameCount() { return npreferredGopFrameCount(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeAV1RateControlInfoKHR}{@code ::keyFramePeriod}. */
+    /** @return the value of the {@code preferredKeyFramePeriod} field. */
     @NativeType("uint32_t")
     public int preferredKeyFramePeriod() { return npreferredKeyFramePeriod(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeAV1RateControlInfoKHR}{@code ::consecutiveBipredictiveFrameCount}. */
+    /** @return the value of the {@code preferredConsecutiveBipredictiveFrameCount} field. */
     @NativeType("uint32_t")
     public int preferredConsecutiveBipredictiveFrameCount() { return npreferredConsecutiveBipredictiveFrameCount(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeAV1RateControlInfoKHR}{@code ::temporalLayerCount}. */
+    /** @return the value of the {@code preferredTemporalLayerCount} field. */
     @NativeType("uint32_t")
     public int preferredTemporalLayerCount() { return npreferredTemporalLayerCount(address()); }
-    /** indicates the preferred value to use for {@link VkVideoEncodeAV1PictureInfoKHR}{@code ::constantQIndex} when using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control mode</a> {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR VIDEO_ENCODE_RATE_CONTROL_MODE_DISABLED_BIT_KHR}. */
+    /** @return a {@link VkVideoEncodeAV1QIndexKHR} view of the {@code preferredConstantQIndex} field. */
     public VkVideoEncodeAV1QIndexKHR preferredConstantQIndex() { return npreferredConstantQIndex(address()); }
-    /** indicates the preferred maximum number of reference pictures to use with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">single reference prediction mode</a>. */
+    /** @return the value of the {@code preferredMaxSingleReferenceCount} field. */
     @NativeType("uint32_t")
     public int preferredMaxSingleReferenceCount() { return npreferredMaxSingleReferenceCount(address()); }
-    /** a bitmask of preferred <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-reference-names">AV1 reference names</a> when using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">single reference prediction mode</a>. */
+    /** @return the value of the {@code preferredSingleReferenceNameMask} field. */
     @NativeType("uint32_t")
     public int preferredSingleReferenceNameMask() { return npreferredSingleReferenceNameMask(address()); }
-    /** indicates the preferred maximum number of reference pictures to use with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">unidirectional compound prediction mode</a>. */
+    /** @return the value of the {@code preferredMaxUnidirectionalCompoundReferenceCount} field. */
     @NativeType("uint32_t")
     public int preferredMaxUnidirectionalCompoundReferenceCount() { return npreferredMaxUnidirectionalCompoundReferenceCount(address()); }
-    /** indicates the preferred maximum number of reference pictures to use with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">unidirectional compound prediction mode</a> from reference frame group 1, as defined in section 6.10.24 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
+    /** @return the value of the {@code preferredMaxUnidirectionalCompoundGroup1ReferenceCount} field. */
     @NativeType("uint32_t")
     public int preferredMaxUnidirectionalCompoundGroup1ReferenceCount() { return npreferredMaxUnidirectionalCompoundGroup1ReferenceCount(address()); }
-    /** a bitmask of preferred <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-reference-names">AV1 reference names</a> when using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">unidirectional compound prediction mode</a>. */
+    /** @return the value of the {@code preferredUnidirectionalCompoundReferenceNameMask} field. */
     @NativeType("uint32_t")
     public int preferredUnidirectionalCompoundReferenceNameMask() { return npreferredUnidirectionalCompoundReferenceNameMask(address()); }
-    /** indicates the preferred maximum number of reference pictures to use with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">bidirectional compound prediction mode</a>. */
+    /** @return the value of the {@code preferredMaxBidirectionalCompoundReferenceCount} field. */
     @NativeType("uint32_t")
     public int preferredMaxBidirectionalCompoundReferenceCount() { return npreferredMaxBidirectionalCompoundReferenceCount(address()); }
-    /** indicates the preferred maximum number of reference pictures to use with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">bidirectional compound prediction mode</a> from reference frame group 1, as defined in section 6.10.24 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
+    /** @return the value of the {@code preferredMaxBidirectionalCompoundGroup1ReferenceCount} field. */
     @NativeType("uint32_t")
     public int preferredMaxBidirectionalCompoundGroup1ReferenceCount() { return npreferredMaxBidirectionalCompoundGroup1ReferenceCount(address()); }
-    /** indicates the preferred maximum number of reference pictures to use with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">bidirectional compound prediction mode</a> from reference frame group 2, as defined in section 6.10.24 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#aomedia-av1">AV1 Specification</a>. */
+    /** @return the value of the {@code preferredMaxBidirectionalCompoundGroup2ReferenceCount} field. */
     @NativeType("uint32_t")
     public int preferredMaxBidirectionalCompoundGroup2ReferenceCount() { return npreferredMaxBidirectionalCompoundGroup2ReferenceCount(address()); }
-    /** a bitmask of preferred <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-reference-names">AV1 reference names</a> when using <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-av1-prediction-modes">bidirectional compound prediction mode</a>. */
+    /** @return the value of the {@code preferredBidirectionalCompoundReferenceNameMask} field. */
     @NativeType("uint32_t")
     public int preferredBidirectionalCompoundReferenceNameMask() { return npreferredBidirectionalCompoundReferenceNameMask(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeAV1QualityLevelPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkVideoEncodeAV1QualityLevelPropertiesKHR sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeAV1QualityLevelPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -423,62 +405,62 @@ public class VkVideoEncodeAV1QualityLevelPropertiesKHR extends Struct<VkVideoEnc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredRateControlFlags} field. */
+        /** @return the value of the {@code preferredRateControlFlags} field. */
         @NativeType("VkVideoEncodeAV1RateControlFlagsKHR")
         public int preferredRateControlFlags() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredRateControlFlags(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredGopFrameCount} field. */
+        /** @return the value of the {@code preferredGopFrameCount} field. */
         @NativeType("uint32_t")
         public int preferredGopFrameCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredGopFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredKeyFramePeriod} field. */
+        /** @return the value of the {@code preferredKeyFramePeriod} field. */
         @NativeType("uint32_t")
         public int preferredKeyFramePeriod() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredKeyFramePeriod(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredConsecutiveBipredictiveFrameCount} field. */
+        /** @return the value of the {@code preferredConsecutiveBipredictiveFrameCount} field. */
         @NativeType("uint32_t")
         public int preferredConsecutiveBipredictiveFrameCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredConsecutiveBipredictiveFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredTemporalLayerCount} field. */
+        /** @return the value of the {@code preferredTemporalLayerCount} field. */
         @NativeType("uint32_t")
         public int preferredTemporalLayerCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredTemporalLayerCount(address()); }
-        /** @return a {@link VkVideoEncodeAV1QIndexKHR} view of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredConstantQIndex} field. */
+        /** @return a {@link VkVideoEncodeAV1QIndexKHR} view of the {@code preferredConstantQIndex} field. */
         public VkVideoEncodeAV1QIndexKHR preferredConstantQIndex() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredConstantQIndex(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredMaxSingleReferenceCount} field. */
+        /** @return the value of the {@code preferredMaxSingleReferenceCount} field. */
         @NativeType("uint32_t")
         public int preferredMaxSingleReferenceCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredMaxSingleReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredSingleReferenceNameMask} field. */
+        /** @return the value of the {@code preferredSingleReferenceNameMask} field. */
         @NativeType("uint32_t")
         public int preferredSingleReferenceNameMask() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredSingleReferenceNameMask(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredMaxUnidirectionalCompoundReferenceCount} field. */
+        /** @return the value of the {@code preferredMaxUnidirectionalCompoundReferenceCount} field. */
         @NativeType("uint32_t")
         public int preferredMaxUnidirectionalCompoundReferenceCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredMaxUnidirectionalCompoundReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredMaxUnidirectionalCompoundGroup1ReferenceCount} field. */
+        /** @return the value of the {@code preferredMaxUnidirectionalCompoundGroup1ReferenceCount} field. */
         @NativeType("uint32_t")
         public int preferredMaxUnidirectionalCompoundGroup1ReferenceCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredMaxUnidirectionalCompoundGroup1ReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredUnidirectionalCompoundReferenceNameMask} field. */
+        /** @return the value of the {@code preferredUnidirectionalCompoundReferenceNameMask} field. */
         @NativeType("uint32_t")
         public int preferredUnidirectionalCompoundReferenceNameMask() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredUnidirectionalCompoundReferenceNameMask(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredMaxBidirectionalCompoundReferenceCount} field. */
+        /** @return the value of the {@code preferredMaxBidirectionalCompoundReferenceCount} field. */
         @NativeType("uint32_t")
         public int preferredMaxBidirectionalCompoundReferenceCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredMaxBidirectionalCompoundReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredMaxBidirectionalCompoundGroup1ReferenceCount} field. */
+        /** @return the value of the {@code preferredMaxBidirectionalCompoundGroup1ReferenceCount} field. */
         @NativeType("uint32_t")
         public int preferredMaxBidirectionalCompoundGroup1ReferenceCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredMaxBidirectionalCompoundGroup1ReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredMaxBidirectionalCompoundGroup2ReferenceCount} field. */
+        /** @return the value of the {@code preferredMaxBidirectionalCompoundGroup2ReferenceCount} field. */
         @NativeType("uint32_t")
         public int preferredMaxBidirectionalCompoundGroup2ReferenceCount() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredMaxBidirectionalCompoundGroup2ReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#preferredBidirectionalCompoundReferenceNameMask} field. */
+        /** @return the value of the {@code preferredBidirectionalCompoundReferenceNameMask} field. */
         @NativeType("uint32_t")
         public int preferredBidirectionalCompoundReferenceNameMask() { return VkVideoEncodeAV1QualityLevelPropertiesKHR.npreferredBidirectionalCompoundReferenceNameMask(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeAV1QualityLevelPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeAV1QualityLevelPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR} value to the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeAV1#VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkVideoEncodeAV1QualityLevelPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeAV1.VK_STRUCTURE_TYPE_VIDEO_ENCODE_AV1_QUALITY_LEVEL_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1QualityLevelPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeAV1QualityLevelPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeAV1QualityLevelPropertiesKHR.npNext(address(), value); return this; }
 
     }

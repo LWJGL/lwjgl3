@@ -17,52 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct specifying parameters of a newly created indirect execution set containing only shader objects.
- * 
- * <h5>Description</h5>
- * 
- * <p>The characteristics of {@code pInitialShaders} will be used to validate all shaders added to the set even if they are removed from the set or destroyed.</p>
- * 
- * <p>When an Indirect Execution Set created with shader objects is used, {@code pInitialShaders} constitutes the initial shader state.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>All members of {@code pInitialShaders} <b>must</b> have a {@code stage} supported by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesShaderBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesShaderBinding}</a></li>
- * <li>{@code maxShaderCount} <b>must</b> not be zero</li>
- * <li>{@code maxShaderCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectShaderObjectCount}</li>
- * <li>{@code maxShaderCount} <b>must</b> be greater than or equal to {@code shaderCount}</li>
- * <li>The {@code stage} of each element in the {@code pInitialShaders} array <b>must</b> be unique</li>
- * <li>Each member of {@code pInitialShaders} <b>must</b> have been created with {@link EXTDeviceGeneratedCommands#VK_SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT}</li>
- * <li>{@code pInitialShaders} <b>must</b> be a valid pointer to an array of {@code shaderCount} valid {@code VkShaderEXT} handles</li>
- * <li>If {@code pSetLayoutInfos} is not {@code NULL}, {@code pSetLayoutInfos} <b>must</b> be a valid pointer to an array of {@code shaderCount} valid {@link VkIndirectExecutionSetShaderLayoutInfoEXT} structures</li>
- * <li>If {@code pushConstantRangeCount} is not 0, {@code pPushConstantRanges} <b>must</b> be a valid pointer to an array of {@code pushConstantRangeCount} valid {@link VkPushConstantRange} structures</li>
- * <li>{@code shaderCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectExecutionSetInfoEXT}, {@link VkIndirectExecutionSetShaderLayoutInfoEXT}, {@link VkPushConstantRange}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectExecutionSetShaderInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #shaderCount};
- *     VkShaderEXT const * {@link #pInitialShaders};
- *     {@link VkIndirectExecutionSetShaderLayoutInfoEXT VkIndirectExecutionSetShaderLayoutInfoEXT} const * {@link #pSetLayoutInfos};
- *     uint32_t {@link #maxShaderCount};
- *     uint32_t {@link #pushConstantRangeCount};
- *     {@link VkPushConstantRange VkPushConstantRange} const * {@link #pPushConstantRanges};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t shaderCount;
+ *     VkShaderEXT const * pInitialShaders;
+ *     {@link VkIndirectExecutionSetShaderLayoutInfoEXT VkIndirectExecutionSetShaderLayoutInfoEXT} const * pSetLayoutInfos;
+ *     uint32_t maxShaderCount;
+ *     uint32_t pushConstantRangeCount;
+ *     {@link VkPushConstantRange VkPushConstantRange} const * pPushConstantRanges;
+ * }}</pre>
  */
 public class VkIndirectExecutionSetShaderInfoEXT extends Struct<VkIndirectExecutionSetShaderInfoEXT> implements NativeResource {
 
@@ -130,46 +95,46 @@ public class VkIndirectExecutionSetShaderInfoEXT extends Struct<VkIndirectExecut
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of members in the {@code pInitialShaders} and {@code pSetLayoutInfos} arrays. */
+    /** @return the value of the {@code shaderCount} field. */
     @NativeType("uint32_t")
     public int shaderCount() { return nshaderCount(address()); }
-    /** a pointer to an array containing a {@code VkShaderEXT} object for each shader stage that will be used in the set. These shaders will be automatically added to the set beginning at index 0. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pInitialShaders} field. */
     @NativeType("VkShaderEXT const *")
     public LongBuffer pInitialShaders() { return npInitialShaders(address()); }
-    /** a pointer to an array containing a {@link VkIndirectExecutionSetShaderLayoutInfoEXT} used by each corresponding {@code pInitialShaders} shader stage in the set. */
+    /** @return a {@link VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer} view of the struct array pointed to by the {@code pSetLayoutInfos} field. */
     @NativeType("VkIndirectExecutionSetShaderLayoutInfoEXT const *")
     public VkIndirectExecutionSetShaderLayoutInfoEXT.@Nullable Buffer pSetLayoutInfos() { return npSetLayoutInfos(address()); }
-    /** the maximum number of shader objects stored in the set. */
+    /** @return the value of the {@code maxShaderCount} field. */
     @NativeType("uint32_t")
     public int maxShaderCount() { return nmaxShaderCount(address()); }
-    /** the number of members in the {@code pPushConstantRanges} array. */
+    /** @return the value of the {@code pushConstantRangeCount} field. */
     @NativeType("uint32_t")
     public int pushConstantRangeCount() { return npushConstantRangeCount(address()); }
-    /** a pointer to the array of {@link VkPushConstantRange} ranges used by all shaders in the set. */
+    /** @return a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@code pPushConstantRanges} field. */
     @NativeType("VkPushConstantRange const *")
     public VkPushConstantRange.@Nullable Buffer pPushConstantRanges() { return npPushConstantRanges(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkIndirectExecutionSetShaderInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT} value to the {@code sType} field. */
     public VkIndirectExecutionSetShaderInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectExecutionSetShaderInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderCount} field. */
+    /** Sets the specified value to the {@code shaderCount} field. */
     public VkIndirectExecutionSetShaderInfoEXT shaderCount(@NativeType("uint32_t") int value) { nshaderCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pInitialShaders} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pInitialShaders} field. */
     public VkIndirectExecutionSetShaderInfoEXT pInitialShaders(@NativeType("VkShaderEXT const *") LongBuffer value) { npInitialShaders(address(), value); return this; }
-    /** Sets the address of the specified {@link VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer} to the {@link #pSetLayoutInfos} field. */
+    /** Sets the address of the specified {@link VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer} to the {@code pSetLayoutInfos} field. */
     public VkIndirectExecutionSetShaderInfoEXT pSetLayoutInfos(@NativeType("VkIndirectExecutionSetShaderLayoutInfoEXT const *") VkIndirectExecutionSetShaderLayoutInfoEXT.@Nullable Buffer value) { npSetLayoutInfos(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxShaderCount} field. */
+    /** Sets the specified value to the {@code maxShaderCount} field. */
     public VkIndirectExecutionSetShaderInfoEXT maxShaderCount(@NativeType("uint32_t") int value) { nmaxShaderCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@link #pPushConstantRanges} field. */
+    /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@code pPushConstantRanges} field. */
     public VkIndirectExecutionSetShaderInfoEXT pPushConstantRanges(@NativeType("VkPushConstantRange const *") VkPushConstantRange.@Nullable Buffer value) { npPushConstantRanges(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -405,46 +370,46 @@ public class VkIndirectExecutionSetShaderInfoEXT extends Struct<VkIndirectExecut
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectExecutionSetShaderInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkIndirectExecutionSetShaderInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetShaderInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkIndirectExecutionSetShaderInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetShaderInfoEXT#shaderCount} field. */
+        /** @return the value of the {@code shaderCount} field. */
         @NativeType("uint32_t")
         public int shaderCount() { return VkIndirectExecutionSetShaderInfoEXT.nshaderCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkIndirectExecutionSetShaderInfoEXT#pInitialShaders} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pInitialShaders} field. */
         @NativeType("VkShaderEXT const *")
         public LongBuffer pInitialShaders() { return VkIndirectExecutionSetShaderInfoEXT.npInitialShaders(address()); }
-        /** @return a {@link VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer} view of the struct array pointed to by the {@link VkIndirectExecutionSetShaderInfoEXT#pSetLayoutInfos} field. */
+        /** @return a {@link VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer} view of the struct array pointed to by the {@code pSetLayoutInfos} field. */
         @NativeType("VkIndirectExecutionSetShaderLayoutInfoEXT const *")
         public VkIndirectExecutionSetShaderLayoutInfoEXT.@Nullable Buffer pSetLayoutInfos() { return VkIndirectExecutionSetShaderInfoEXT.npSetLayoutInfos(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetShaderInfoEXT#maxShaderCount} field. */
+        /** @return the value of the {@code maxShaderCount} field. */
         @NativeType("uint32_t")
         public int maxShaderCount() { return VkIndirectExecutionSetShaderInfoEXT.nmaxShaderCount(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetShaderInfoEXT#pushConstantRangeCount} field. */
+        /** @return the value of the {@code pushConstantRangeCount} field. */
         @NativeType("uint32_t")
         public int pushConstantRangeCount() { return VkIndirectExecutionSetShaderInfoEXT.npushConstantRangeCount(address()); }
-        /** @return a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@link VkIndirectExecutionSetShaderInfoEXT#pPushConstantRanges} field. */
+        /** @return a {@link VkPushConstantRange.Buffer} view of the struct array pointed to by the {@code pPushConstantRanges} field. */
         @NativeType("VkPushConstantRange const *")
         public VkPushConstantRange.@Nullable Buffer pPushConstantRanges() { return VkIndirectExecutionSetShaderInfoEXT.npPushConstantRanges(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectExecutionSetShaderInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkIndirectExecutionSetShaderInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectExecutionSetShaderInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT} value to the {@link VkIndirectExecutionSetShaderInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT} value to the {@code sType} field. */
         public VkIndirectExecutionSetShaderInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT); }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetShaderInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectExecutionSetShaderInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkIndirectExecutionSetShaderInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetShaderInfoEXT#shaderCount} field. */
+        /** Sets the specified value to the {@code shaderCount} field. */
         public VkIndirectExecutionSetShaderInfoEXT.Buffer shaderCount(@NativeType("uint32_t") int value) { VkIndirectExecutionSetShaderInfoEXT.nshaderCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkIndirectExecutionSetShaderInfoEXT#pInitialShaders} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pInitialShaders} field. */
         public VkIndirectExecutionSetShaderInfoEXT.Buffer pInitialShaders(@NativeType("VkShaderEXT const *") LongBuffer value) { VkIndirectExecutionSetShaderInfoEXT.npInitialShaders(address(), value); return this; }
-        /** Sets the address of the specified {@link VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer} to the {@link VkIndirectExecutionSetShaderInfoEXT#pSetLayoutInfos} field. */
+        /** Sets the address of the specified {@link VkIndirectExecutionSetShaderLayoutInfoEXT.Buffer} to the {@code pSetLayoutInfos} field. */
         public VkIndirectExecutionSetShaderInfoEXT.Buffer pSetLayoutInfos(@NativeType("VkIndirectExecutionSetShaderLayoutInfoEXT const *") VkIndirectExecutionSetShaderLayoutInfoEXT.@Nullable Buffer value) { VkIndirectExecutionSetShaderInfoEXT.npSetLayoutInfos(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetShaderInfoEXT#maxShaderCount} field. */
+        /** Sets the specified value to the {@code maxShaderCount} field. */
         public VkIndirectExecutionSetShaderInfoEXT.Buffer maxShaderCount(@NativeType("uint32_t") int value) { VkIndirectExecutionSetShaderInfoEXT.nmaxShaderCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@link VkIndirectExecutionSetShaderInfoEXT#pPushConstantRanges} field. */
+        /** Sets the address of the specified {@link VkPushConstantRange.Buffer} to the {@code pPushConstantRanges} field. */
         public VkIndirectExecutionSetShaderInfoEXT.Buffer pPushConstantRanges(@NativeType("VkPushConstantRange const *") VkPushConstantRange.@Nullable Buffer value) { VkIndirectExecutionSetShaderInfoEXT.npPushConstantRanges(address(), value); return this; }
 
     }

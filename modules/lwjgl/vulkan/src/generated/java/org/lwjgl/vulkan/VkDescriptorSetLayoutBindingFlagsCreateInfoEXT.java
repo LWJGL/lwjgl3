@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDescriptorSetLayoutBindingFlagsCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetLayoutBindingFlagsCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t bindingCount;
  *     VkDescriptorBindingFlags const * pBindingFlags;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDescriptorSetLayoutBindingFlagsCreateInfoEXT extends VkDescriptorSetLayoutBindingFlagsCreateInfo {
 

@@ -17,35 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event buffer.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrEventDataBuffer} is a structure passed to {@link XR10#xrPollEvent PollEvent} large enough to contain any returned event data element. The maximum size is specified by {@link XR10#XR_MAX_EVENT_DATA_SIZE MAX_EVENT_DATA_SIZE}.</p>
- * 
- * <p>An application <b>can</b> set (or reset) only the {@code type} member and clear the {@code next} member of an {@link XrEventDataBuffer} before passing it as an input to {@link XR10#xrPollEvent PollEvent}. The runtime <b>must</b> ignore the contents of the {@code varying} field and overwrite it without reading it.</p>
- * 
- * <p>A pointer to an {@link XrEventDataBuffer} <b>may</b> be type-cast to an {@link XrEventDataBaseHeader} pointer, or a pointer to any other appropriate event data based on the {@code type} parameter.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_BUFFER TYPE_EVENT_DATA_BUFFER}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrEventDataBaseHeader}, {@link XR10#xrPollEvent PollEvent}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataBuffer {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint8_t {@link #varying}[4000];
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint8_t varying[4000];
+ * }}</pre>
  */
 public class XrEventDataBuffer extends Struct<XrEventDataBuffer> implements NativeResource {
 
@@ -98,28 +75,28 @@ public class XrEventDataBuffer extends Struct<XrEventDataBuffer> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a fixed sized output buffer big enough to hold returned data elements for all specified event data types. */
+    /** @return a {@link ByteBuffer} view of the {@code varying} field. */
     @NativeType("uint8_t[4000]")
     public ByteBuffer varying() { return nvarying(address()); }
-    /** a fixed sized output buffer big enough to hold returned data elements for all specified event data types. */
+    /** @return the value at the specified index of the {@code varying} field. */
     @NativeType("uint8_t")
     public byte varying(int index) { return nvarying(address(), index); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataBuffer type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_BUFFER TYPE_EVENT_DATA_BUFFER} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_BUFFER TYPE_EVENT_DATA_BUFFER} value to the {@code type} field. */
     public XrEventDataBuffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_BUFFER); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataBuffer next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #varying} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code varying} field. */
     public XrEventDataBuffer varying(@NativeType("uint8_t[4000]") ByteBuffer value) { nvarying(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #varying} field. */
+    /** Sets the specified value at the specified index of the {@code varying} field. */
     public XrEventDataBuffer varying(int index, @NativeType("uint8_t") byte value) { nvarying(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -326,28 +303,28 @@ public class XrEventDataBuffer extends Struct<XrEventDataBuffer> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataBuffer#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataBuffer.ntype(address()); }
-        /** @return the value of the {@link XrEventDataBuffer#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataBuffer.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrEventDataBuffer#varying} field. */
+        /** @return a {@link ByteBuffer} view of the {@code varying} field. */
         @NativeType("uint8_t[4000]")
         public ByteBuffer varying() { return XrEventDataBuffer.nvarying(address()); }
-        /** @return the value at the specified index of the {@link XrEventDataBuffer#varying} field. */
+        /** @return the value at the specified index of the {@code varying} field. */
         @NativeType("uint8_t")
         public byte varying(int index) { return XrEventDataBuffer.nvarying(address(), index); }
 
-        /** Sets the specified value to the {@link XrEventDataBuffer#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataBuffer.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataBuffer.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_BUFFER TYPE_EVENT_DATA_BUFFER} value to the {@link XrEventDataBuffer#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_BUFFER TYPE_EVENT_DATA_BUFFER} value to the {@code type} field. */
         public XrEventDataBuffer.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_BUFFER); }
-        /** Sets the specified value to the {@link XrEventDataBuffer#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataBuffer.Buffer next(@NativeType("void const *") long value) { XrEventDataBuffer.nnext(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link XrEventDataBuffer#varying} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code varying} field. */
         public XrEventDataBuffer.Buffer varying(@NativeType("uint8_t[4000]") ByteBuffer value) { XrEventDataBuffer.nvarying(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link XrEventDataBuffer#varying} field. */
+        /** Sets the specified value at the specified index of the {@code varying} field. */
         public XrEventDataBuffer.Buffer varying(int index, @NativeType("uint8_t") byte value) { XrEventDataBuffer.nvarying(address(), index, value); return this; }
 
     }

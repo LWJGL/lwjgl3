@@ -16,60 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created buffer view.
- * 
- * <h5>Description</h5>
- * 
- * <p>The buffer view has a <em>buffer view usage</em> identifying which descriptor types can be created from it. This usage <b>can</b> be defined by including the {@link VkBufferUsageFlags2CreateInfo} structure in the {@code pNext} chain, and specifying the {@code usage} value there. If this structure is not included, it is equal to the {@link VkBufferCreateInfo}{@code ::usage} value used to create {@code buffer}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code offset} <b>must</b> be less than the size of {@code buffer}</li>
- * <li>If {@code range} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code range} <b>must</b> be greater than 0</li>
- * <li>If {@code range} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code range} <b>must</b> be an integer multiple of the texel block size of {@code format}</li>
- * <li>If {@code range} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the number of texel buffer elements given by <code>(⌊range / (texel block size)⌋ × (texels per block))</code> where texel block size and texels per block are as defined in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility">Compatible Formats</a> table for {@code format}, <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxTexelBufferElements}</li>
- * <li>If {@code range} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the sum of {@code offset} and {@code range} <b>must</b> be less than or equal to the size of {@code buffer}</li>
- * <li>If {@code range} is equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the number of texel buffer elements given by <code>(⌊(size - offset) / (texel block size)⌋ × (texels per block))</code> where size is the size of {@code buffer}, and texel block size and texels per block are as defined in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility">Compatible Formats</a> table for {@code format}, <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxTexelBufferElements}</li>
- * <li>{@code buffer} <b>must</b> have been created with a {@code usage} value containing at least one of {@link VK10#VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT} or {@link VK10#VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-buffer-views-usage">buffer view usage</a> contains {@link VK10#VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT}, then <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-buffer-view-format-features">format features</a> of {@code format} <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-buffer-views-usage">buffer view usage</a> contains {@link VK10#VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT}, then <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#resources-buffer-view-format-features">format features</a> of {@code format} <b>must</b> contain {@link VK10#VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT}</li>
- * <li>If {@code buffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-texelBufferAlignment">{@code texelBufferAlignment}</a> feature is not enabled, {@code offset} <b>must</b> be a multiple of {@link VkPhysicalDeviceLimits}{@code ::minTexelBufferOffsetAlignment}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-texelBufferAlignment">{@code texelBufferAlignment}</a> feature is enabled and if {@code buffer} was created with {@code usage} containing {@link VK10#VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT}, {@code offset} <b>must</b> be a multiple of the lesser of {@link VkPhysicalDeviceTexelBufferAlignmentProperties}{@code ::storageTexelBufferOffsetAlignmentBytes} or, if {@link VkPhysicalDeviceTexelBufferAlignmentProperties}{@code ::storageTexelBufferOffsetSingleTexelAlignment} is {@link VK10#VK_TRUE TRUE}, the size of a texel of the requested {@code format}. If the size of a texel is a multiple of three bytes, then the size of a single component of {@code format} is used instead</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-texelBufferAlignment">{@code texelBufferAlignment}</a> feature is enabled and if {@code buffer} was created with {@code usage} containing {@link VK10#VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT}, {@code offset} <b>must</b> be a multiple of the lesser of {@link VkPhysicalDeviceTexelBufferAlignmentProperties}{@code ::uniformTexelBufferOffsetAlignmentBytes} or, if {@link VkPhysicalDeviceTexelBufferAlignmentProperties}{@code ::uniformTexelBufferOffsetSingleTexelAlignment} is {@link VK10#VK_TRUE TRUE}, the size of a texel of the requested {@code format}. If the size of a texel is a multiple of three bytes, then the size of a single component of {@code format} is used instead</li>
- * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_TEXTURE_BIT_EXT}</li>
- * <li>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfo}, its {@code usage} <b>must</b> not contain any other bit than {@link VK14#VK_BUFFER_USAGE_2_UNIFORM_TEXEL_BUFFER_BIT BUFFER_USAGE_2_UNIFORM_TEXEL_BUFFER_BIT} or {@link VK14#VK_BUFFER_USAGE_2_STORAGE_TEXEL_BUFFER_BIT BUFFER_USAGE_2_STORAGE_TEXEL_BUFFER_BIT}</li>
- * <li>If the {@code pNext} chain includes a {@link VkBufferUsageFlags2CreateInfo}, its {@code usage} <b>must</b> be a subset of the {@link VkBufferCreateInfo}{@code ::usage} specified or {@link VkBufferUsageFlags2CreateInfo}{@code ::usage} from {@link VkBufferCreateInfo}{@code ::pNext} when creating {@code buffer}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkBufferUsageFlags2CreateInfo} or {@link VkExportMetalObjectCreateInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkExportMetalObjectCreateInfoEXT}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkCreateBufferView CreateBufferView}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferViewCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBufferViewCreateFlags {@link #flags};
- *     VkBuffer {@link #buffer};
- *     VkFormat {@link #format};
- *     VkDeviceSize {@link #offset};
- *     VkDeviceSize {@link #range};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBufferViewCreateFlags flags;
+ *     VkBuffer buffer;
+ *     VkFormat format;
+ *     VkDeviceSize offset;
+ *     VkDeviceSize range;
+ * }}</pre>
  */
 public class VkBufferViewCreateInfo extends Struct<VkBufferViewCreateInfo> implements NativeResource {
 
@@ -134,33 +90,33 @@ public class VkBufferViewCreateInfo extends Struct<VkBufferViewCreateInfo> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkBufferViewCreateFlags")
     public int flags() { return nflags(address()); }
-    /** a {@code VkBuffer} on which the view will be created. */
+    /** @return the value of the {@code buffer} field. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** a {@code VkFormat} describing the format of the data elements in the buffer. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** an offset in bytes from the base address of the buffer. Accesses to the buffer view from shaders use addressing that is relative to this starting offset. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** a size in bytes of the buffer view. If {@code range} is equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, the range from {@code offset} to the end of the buffer is used. If {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} is used and the remaining size of the buffer is not a multiple of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#texel-block-size">texel block size</a> of {@code format}, the nearest smaller multiple is used. */
+    /** @return the value of the {@code range} field. */
     @NativeType("VkDeviceSize")
     public long range() { return nrange(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBufferViewCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO} value to the {@code sType} field. */
     public VkBufferViewCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBufferViewCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
     public VkBufferViewCreateInfo pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -168,15 +124,15 @@ public class VkBufferViewCreateInfo extends Struct<VkBufferViewCreateInfo> imple
     public VkBufferViewCreateInfo pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
     public VkBufferViewCreateInfo pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkBufferViewCreateInfo flags(@NativeType("VkBufferViewCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #buffer} field. */
+    /** Sets the specified value to the {@code buffer} field. */
     public VkBufferViewCreateInfo buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkBufferViewCreateInfo format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkBufferViewCreateInfo offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #range} field. */
+    /** Sets the specified value to the {@code range} field. */
     public VkBufferViewCreateInfo range(@NativeType("VkDeviceSize") long value) { nrange(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -415,33 +371,33 @@ public class VkBufferViewCreateInfo extends Struct<VkBufferViewCreateInfo> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBufferViewCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferViewCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkBufferViewCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferViewCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkBufferViewCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkBufferViewCreateFlags")
         public int flags() { return VkBufferViewCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkBufferViewCreateInfo#buffer} field. */
+        /** @return the value of the {@code buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkBufferViewCreateInfo.nbuffer(address()); }
-        /** @return the value of the {@link VkBufferViewCreateInfo#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkBufferViewCreateInfo.nformat(address()); }
-        /** @return the value of the {@link VkBufferViewCreateInfo#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkBufferViewCreateInfo.noffset(address()); }
-        /** @return the value of the {@link VkBufferViewCreateInfo#range} field. */
+        /** @return the value of the {@code range} field. */
         @NativeType("VkDeviceSize")
         public long range() { return VkBufferViewCreateInfo.nrange(address()); }
 
-        /** Sets the specified value to the {@link VkBufferViewCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBufferViewCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferViewCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO} value to the {@link VkBufferViewCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO} value to the {@code sType} field. */
         public VkBufferViewCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkBufferViewCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBufferViewCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkBufferViewCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkBufferUsageFlags2CreateInfo} value to the {@code pNext} chain. */
         public VkBufferViewCreateInfo.Buffer pNext(VkBufferUsageFlags2CreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -449,15 +405,15 @@ public class VkBufferViewCreateInfo extends Struct<VkBufferViewCreateInfo> imple
         public VkBufferViewCreateInfo.Buffer pNext(VkBufferUsageFlags2CreateInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
         public VkBufferViewCreateInfo.Buffer pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkBufferViewCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkBufferViewCreateInfo.Buffer flags(@NativeType("VkBufferViewCreateFlags") int value) { VkBufferViewCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferViewCreateInfo#buffer} field. */
+        /** Sets the specified value to the {@code buffer} field. */
         public VkBufferViewCreateInfo.Buffer buffer(@NativeType("VkBuffer") long value) { VkBufferViewCreateInfo.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferViewCreateInfo#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkBufferViewCreateInfo.Buffer format(@NativeType("VkFormat") int value) { VkBufferViewCreateInfo.nformat(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferViewCreateInfo#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkBufferViewCreateInfo.Buffer offset(@NativeType("VkDeviceSize") long value) { VkBufferViewCreateInfo.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferViewCreateInfo#range} field. */
+        /** Sets the specified value to the {@code range} field. */
         public VkBufferViewCreateInfo.Buffer range(@NativeType("VkDeviceSize") long value) { VkBufferViewCreateInfo.nrange(address(), value); return this; }
 
     }

@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying image format properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>The bits reported in {@code linearTilingFeatures}, {@code optimalTilingFeatures} and {@code bufferFeatures} <b>must</b> include the bits reported in the corresponding fields of {@link VkFormatProperties2}{@code ::formatProperties}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3 STRUCTURE_TYPE_FORMAT_PROPERTIES_3}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkFormatProperties3 {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkFormatFeatureFlags2 {@link #linearTilingFeatures};
- *     VkFormatFeatureFlags2 {@link #optimalTilingFeatures};
- *     VkFormatFeatureFlags2 {@link #bufferFeatures};
- * }</code></pre>
+ *     VkFormatFeatureFlags2 linearTilingFeatures;
+ *     VkFormatFeatureFlags2 optimalTilingFeatures;
+ *     VkFormatFeatureFlags2 bufferFeatures;
+ * }}</pre>
  */
 public class VkFormatProperties3 extends Struct<VkFormatProperties3> implements NativeResource {
 
@@ -102,13 +88,13 @@ public class VkFormatProperties3 extends Struct<VkFormatProperties3> implements 
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkFormatFeatureFlagBits2} specifying features supported by images created with a {@code tiling} parameter of {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR}. */
+    /** @return the value of the {@code linearTilingFeatures} field. */
     @NativeType("VkFormatFeatureFlags2")
     public long linearTilingFeatures() { return nlinearTilingFeatures(address()); }
-    /** a bitmask of {@code VkFormatFeatureFlagBits2} specifying features supported by images created with a {@code tiling} parameter of {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. */
+    /** @return the value of the {@code optimalTilingFeatures} field. */
     @NativeType("VkFormatFeatureFlags2")
     public long optimalTilingFeatures() { return noptimalTilingFeatures(address()); }
-    /** a bitmask of {@code VkFormatFeatureFlagBits2} specifying features supported by buffers. */
+    /** @return the value of the {@code bufferFeatures} field. */
     @NativeType("VkFormatFeatureFlags2")
     public long bufferFeatures() { return nbufferFeatures(address()); }
 
@@ -318,13 +304,13 @@ public class VkFormatProperties3 extends Struct<VkFormatProperties3> implements 
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkFormatProperties3.npNext(address()); }
-        /** @return the value of the {@link VkFormatProperties3#linearTilingFeatures} field. */
+        /** @return the value of the {@code linearTilingFeatures} field. */
         @NativeType("VkFormatFeatureFlags2")
         public long linearTilingFeatures() { return VkFormatProperties3.nlinearTilingFeatures(address()); }
-        /** @return the value of the {@link VkFormatProperties3#optimalTilingFeatures} field. */
+        /** @return the value of the {@code optimalTilingFeatures} field. */
         @NativeType("VkFormatFeatureFlags2")
         public long optimalTilingFeatures() { return VkFormatProperties3.noptimalTilingFeatures(address()); }
-        /** @return the value of the {@link VkFormatProperties3#bufferFeatures} field. */
+        /** @return the value of the {@code bufferFeatures} field. */
         @NativeType("VkFormatFeatureFlags2")
         public long bufferFeatures() { return VkFormatProperties3.nbufferFeatures(address()); }
 

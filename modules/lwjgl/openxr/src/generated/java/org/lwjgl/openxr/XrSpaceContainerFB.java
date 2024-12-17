@@ -16,35 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents a collection of other spaces, represented by UUIDs, contained by this space.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSpaceContainerFB} structure <b>can</b> be used by an application to perform the two calls required to obtain information about which spatial entities are contained by a specified spatial entity.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntityContainer XR_FB_spatial_entity_container} extension <b>must</b> be enabled prior to using {@link XrSpaceContainerFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntityContainer#XR_TYPE_SPACE_CONTAINER_FB TYPE_SPACE_CONTAINER_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code uuidCapacityInput} is not 0, {@code uuids} <b>must</b> be a pointer to an array of {@code uuidCapacityInput} {@link XrUuidEXT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}, {@link FBSpatialEntityContainer#xrGetSpaceContainerFB GetSpaceContainerFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceContainerFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #uuidCapacityInput};
- *     uint32_t {@link #uuidCountOutput};
- *     {@link XrUuidEXT XrUuidEXT} * {@link #uuids};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t uuidCapacityInput;
+ *     uint32_t uuidCountOutput;
+ *     {@link XrUuidEXT XrUuidEXT} * uuids;
+ * }}</pre>
  */
 public class XrSpaceContainerFB extends Struct<XrSpaceContainerFB> implements NativeResource {
 
@@ -103,33 +82,33 @@ public class XrSpaceContainerFB extends Struct<XrSpaceContainerFB> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the capacity of the {@code uuids} array, or 0 to indicate a request to retrieve the required capacity. */
+    /** @return the value of the {@code uuidCapacityInput} field. */
     @NativeType("uint32_t")
     public int uuidCapacityInput() { return nuuidCapacityInput(address()); }
-    /** an output parameter which will hold the number of UUIDs included in the output list, or the required capacity in the case that {@code uuidCapacityInput} is insufficient */
+    /** @return the value of the {@code uuidCountOutput} field. */
     @NativeType("uint32_t")
     public int uuidCountOutput() { return nuuidCountOutput(address()); }
-    /** an output parameter which will hold a list of space UUIDs contained by the space to which the component is attached. */
+    /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
     @NativeType("XrUuidEXT *")
     public XrUuidEXT.@Nullable Buffer uuids() { return nuuids(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceContainerFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntityContainer#XR_TYPE_SPACE_CONTAINER_FB TYPE_SPACE_CONTAINER_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntityContainer#XR_TYPE_SPACE_CONTAINER_FB TYPE_SPACE_CONTAINER_FB} value to the {@code type} field. */
     public XrSpaceContainerFB type$Default() { return type(FBSpatialEntityContainer.XR_TYPE_SPACE_CONTAINER_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceContainerFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #uuidCapacityInput} field. */
+    /** Sets the specified value to the {@code uuidCapacityInput} field. */
     public XrSpaceContainerFB uuidCapacityInput(@NativeType("uint32_t") int value) { nuuidCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@link #uuidCountOutput} field. */
+    /** Sets the specified value to the {@code uuidCountOutput} field. */
     public XrSpaceContainerFB uuidCountOutput(@NativeType("uint32_t") int value) { nuuidCountOutput(address(), value); return this; }
-    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link #uuids} field. */
+    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
     public XrSpaceContainerFB uuids(@NativeType("XrUuidEXT *") XrUuidEXT.@Nullable Buffer value) { nuuids(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,33 +316,33 @@ public class XrSpaceContainerFB extends Struct<XrSpaceContainerFB> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceContainerFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceContainerFB.ntype(address()); }
-        /** @return the value of the {@link XrSpaceContainerFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpaceContainerFB.nnext(address()); }
-        /** @return the value of the {@link XrSpaceContainerFB#uuidCapacityInput} field. */
+        /** @return the value of the {@code uuidCapacityInput} field. */
         @NativeType("uint32_t")
         public int uuidCapacityInput() { return XrSpaceContainerFB.nuuidCapacityInput(address()); }
-        /** @return the value of the {@link XrSpaceContainerFB#uuidCountOutput} field. */
+        /** @return the value of the {@code uuidCountOutput} field. */
         @NativeType("uint32_t")
         public int uuidCountOutput() { return XrSpaceContainerFB.nuuidCountOutput(address()); }
-        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@link XrSpaceContainerFB#uuids} field. */
+        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
         @NativeType("XrUuidEXT *")
         public XrUuidEXT.@Nullable Buffer uuids() { return XrSpaceContainerFB.nuuids(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceContainerFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceContainerFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceContainerFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntityContainer#XR_TYPE_SPACE_CONTAINER_FB TYPE_SPACE_CONTAINER_FB} value to the {@link XrSpaceContainerFB#type} field. */
+        /** Sets the {@link FBSpatialEntityContainer#XR_TYPE_SPACE_CONTAINER_FB TYPE_SPACE_CONTAINER_FB} value to the {@code type} field. */
         public XrSpaceContainerFB.Buffer type$Default() { return type(FBSpatialEntityContainer.XR_TYPE_SPACE_CONTAINER_FB); }
-        /** Sets the specified value to the {@link XrSpaceContainerFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceContainerFB.Buffer next(@NativeType("void const *") long value) { XrSpaceContainerFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceContainerFB#uuidCapacityInput} field. */
+        /** Sets the specified value to the {@code uuidCapacityInput} field. */
         public XrSpaceContainerFB.Buffer uuidCapacityInput(@NativeType("uint32_t") int value) { XrSpaceContainerFB.nuuidCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceContainerFB#uuidCountOutput} field. */
+        /** Sets the specified value to the {@code uuidCountOutput} field. */
         public XrSpaceContainerFB.Buffer uuidCountOutput(@NativeType("uint32_t") int value) { XrSpaceContainerFB.nuuidCountOutput(address(), value); return this; }
-        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link XrSpaceContainerFB#uuids} field. */
+        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
         public XrSpaceContainerFB.Buffer uuids(@NativeType("XrUuidEXT *") XrUuidEXT.@Nullable Buffer value) { XrSpaceContainerFB.nuuids(address(), value); return this; }
 
     }

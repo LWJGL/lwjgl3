@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Current drawing state.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_draw_state_t {
- *     hb_bool_t {@link #path_open};
- *     float {@link #path_start_x};
- *     float {@link #path_start_y};
- *     float {@link #current_x};
- *     float {@link #current_y};
+ *     hb_bool_t path_open;
+ *     float path_start_x;
+ *     float path_start_y;
+ *     float current_x;
+ *     float current_y;
  *     {@link hb_var_num_t hb_var_num_t} reserved1;
  *     {@link hb_var_num_t hb_var_num_t} reserved2;
  *     {@link hb_var_num_t hb_var_num_t} reserved3;
@@ -34,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link hb_var_num_t hb_var_num_t} reserved5;
  *     {@link hb_var_num_t hb_var_num_t} reserved6;
  *     {@link hb_var_num_t hb_var_num_t} reserved7;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeResource {
 
@@ -114,27 +110,27 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** whether there is an open path */
+    /** @return the value of the {@code path_open} field. */
     @NativeType("hb_bool_t")
     public boolean path_open() { return npath_open(address()) != 0; }
-    /** X component of the start of current path */
+    /** @return the value of the {@code path_start_x} field. */
     public float path_start_x() { return npath_start_x(address()); }
-    /** Y component of the start of current path */
+    /** @return the value of the {@code path_start_y} field. */
     public float path_start_y() { return npath_start_y(address()); }
-    /** X component of current point */
+    /** @return the value of the {@code current_x} field. */
     public float current_x() { return ncurrent_x(address()); }
-    /** Y component of current point */
+    /** @return the value of the {@code current_y} field. */
     public float current_y() { return ncurrent_y(address()); }
 
-    /** Sets the specified value to the {@link #path_open} field. */
+    /** Sets the specified value to the {@code path_open} field. */
     public hb_draw_state_t path_open(@NativeType("hb_bool_t") boolean value) { npath_open(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #path_start_x} field. */
+    /** Sets the specified value to the {@code path_start_x} field. */
     public hb_draw_state_t path_start_x(float value) { npath_start_x(address(), value); return this; }
-    /** Sets the specified value to the {@link #path_start_y} field. */
+    /** Sets the specified value to the {@code path_start_y} field. */
     public hb_draw_state_t path_start_y(float value) { npath_start_y(address(), value); return this; }
-    /** Sets the specified value to the {@link #current_x} field. */
+    /** Sets the specified value to the {@code current_x} field. */
     public hb_draw_state_t current_x(float value) { ncurrent_x(address(), value); return this; }
-    /** Sets the specified value to the {@link #current_y} field. */
+    /** Sets the specified value to the {@code current_y} field. */
     public hb_draw_state_t current_y(float value) { ncurrent_y(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,27 +352,27 @@ public class hb_draw_state_t extends Struct<hb_draw_state_t> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_draw_state_t#path_open} field. */
+        /** @return the value of the {@code path_open} field. */
         @NativeType("hb_bool_t")
         public boolean path_open() { return hb_draw_state_t.npath_open(address()) != 0; }
-        /** @return the value of the {@link hb_draw_state_t#path_start_x} field. */
+        /** @return the value of the {@code path_start_x} field. */
         public float path_start_x() { return hb_draw_state_t.npath_start_x(address()); }
-        /** @return the value of the {@link hb_draw_state_t#path_start_y} field. */
+        /** @return the value of the {@code path_start_y} field. */
         public float path_start_y() { return hb_draw_state_t.npath_start_y(address()); }
-        /** @return the value of the {@link hb_draw_state_t#current_x} field. */
+        /** @return the value of the {@code current_x} field. */
         public float current_x() { return hb_draw_state_t.ncurrent_x(address()); }
-        /** @return the value of the {@link hb_draw_state_t#current_y} field. */
+        /** @return the value of the {@code current_y} field. */
         public float current_y() { return hb_draw_state_t.ncurrent_y(address()); }
 
-        /** Sets the specified value to the {@link hb_draw_state_t#path_open} field. */
+        /** Sets the specified value to the {@code path_open} field. */
         public hb_draw_state_t.Buffer path_open(@NativeType("hb_bool_t") boolean value) { hb_draw_state_t.npath_open(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link hb_draw_state_t#path_start_x} field. */
+        /** Sets the specified value to the {@code path_start_x} field. */
         public hb_draw_state_t.Buffer path_start_x(float value) { hb_draw_state_t.npath_start_x(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_draw_state_t#path_start_y} field. */
+        /** Sets the specified value to the {@code path_start_y} field. */
         public hb_draw_state_t.Buffer path_start_y(float value) { hb_draw_state_t.npath_start_y(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_draw_state_t#current_x} field. */
+        /** Sets the specified value to the {@code current_x} field. */
         public hb_draw_state_t.Buffer current_x(float value) { hb_draw_state_t.ncurrent_x(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_draw_state_t#current_y} field. */
+        /** Sets the specified value to the {@code current_y} field. */
         public hb_draw_state_t.Buffer current_y(float value) { hb_draw_state_t.ncurrent_y(address(), value); return this; }
 
     }

@@ -11,21 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMExecutionEngine#LLVMCreateSimpleMCJITMemoryManager CreateSimpleMCJITMemoryManager} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * uint8_t * (*{@link #invoke}) (
- *     void *Opaque,
- *     uintptr_t Size,
- *     unsigned int Alignment,
- *     unsigned int SectionID,
- *     char const *SectionName,
- *     LLVMBool IsReadOnly
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class LLVMMemoryManagerAllocateDataSectionCallback extends Callback implements LLVMMemoryManagerAllocateDataSectionCallbackI {
 
     /**

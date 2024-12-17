@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing capability of a surface to be protected.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link GOOGLESurfacelessQuery VK_GOOGLE_surfaceless_query} extension is enabled, the value returned in {@code supportsProtected} will be identical for every valid surface created on this physical device, and so in the {@link KHRGetSurfaceCapabilities2#vkGetPhysicalDeviceSurfaceCapabilities2KHR GetPhysicalDeviceSurfaceCapabilities2KHR} call, {@link VkPhysicalDeviceSurfaceInfo2KHR}{@code ::surface} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}. In that case, the contents of {@link VkSurfaceCapabilities2KHR}{@code ::surfaceCapabilities} as well as any other struct chained to it will be undefined.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSurfaceProtectedCapabilitiesKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #supportsProtected};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 supportsProtected;
+ * }}</pre>
  */
 public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtectedCapabilitiesKHR> implements NativeResource {
 
@@ -88,21 +74,21 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether a protected swapchain created from {@link VkPhysicalDeviceSurfaceInfo2KHR}{@code ::surface} for a particular windowing system <b>can</b> be displayed on screen or not. If {@code supportsProtected} is {@link VK10#VK_TRUE TRUE}, then creation of swapchains with the {@link KHRSwapchain#VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR SWAPCHAIN_CREATE_PROTECTED_BIT_KHR} flag set <b>must</b> be supported for {@code surface}. */
+    /** @return the value of the {@code supportsProtected} field. */
     @NativeType("VkBool32")
     public boolean supportsProtected() { return nsupportsProtected(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSurfaceProtectedCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR} value to the {@code sType} field. */
     public VkSurfaceProtectedCapabilitiesKHR sType$Default() { return sType(KHRSurfaceProtectedCapabilities.VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSurfaceProtectedCapabilitiesKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,21 +299,21 @@ public class VkSurfaceProtectedCapabilitiesKHR extends Struct<VkSurfaceProtected
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSurfaceProtectedCapabilitiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSurfaceProtectedCapabilitiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkSurfaceProtectedCapabilitiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSurfaceProtectedCapabilitiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkSurfaceProtectedCapabilitiesKHR#supportsProtected} field. */
+        /** @return the value of the {@code supportsProtected} field. */
         @NativeType("VkBool32")
         public boolean supportsProtected() { return VkSurfaceProtectedCapabilitiesKHR.nsupportsProtected(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkSurfaceProtectedCapabilitiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR} value to the {@link VkSurfaceProtectedCapabilitiesKHR#sType} field. */
+        /** Sets the {@link KHRSurfaceProtectedCapabilities#VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR} value to the {@code sType} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer sType$Default() { return sType(KHRSurfaceProtectedCapabilities.VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR); }
-        /** Sets the specified value to the {@link VkSurfaceProtectedCapabilitiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSurfaceProtectedCapabilitiesKHR.Buffer pNext(@NativeType("void const *") long value) { VkSurfaceProtectedCapabilitiesKHR.npNext(address(), value); return this; }
 
     }

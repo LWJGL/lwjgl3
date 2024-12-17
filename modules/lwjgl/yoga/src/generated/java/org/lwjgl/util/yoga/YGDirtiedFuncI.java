@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     YGNodeConstRef node
- * )</code></pre>
- */
+/** Callback function: {@link #invoke YGDirtiedFunc} */
 @FunctionalInterface
 @NativeType("YGDirtiedFunc")
 public interface YGDirtiedFuncI extends CallbackI {
@@ -40,6 +33,7 @@ public interface YGDirtiedFuncI extends CallbackI {
         );
     }
 
+    /** {@code void (* YGDirtiedFunc) (YGNodeConstRef node)} */
     void invoke(@NativeType("YGNodeConstRef") long node);
 
 }

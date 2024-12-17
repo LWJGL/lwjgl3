@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_PARAMETER_ATTENUATION_RANGE {
  *     float min;
  *     float max;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_PARAMETER_ATTENUATION_RANGE extends Struct<FMOD_DSP_PARAMETER_ATTENUATION_RANGE> implements NativeResource {
 

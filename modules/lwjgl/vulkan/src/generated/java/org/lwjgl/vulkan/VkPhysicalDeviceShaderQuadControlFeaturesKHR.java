@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether quad scopes are supported by the implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderQuadControlFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderQuadControlFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRShaderQuadControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderQuadControlFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #shaderQuadControl};
- * }</code></pre>
+ *     VkBool32 shaderQuadControl;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderQuadControlFeaturesKHR extends Struct<VkPhysicalDeviceShaderQuadControlFeaturesKHR> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceShaderQuadControlFeaturesKHR extends Struct<VkPhysi
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports shaders with the {@code QuadControlKHR} capability. */
+    /** @return the value of the {@code shaderQuadControl} field. */
     @NativeType("VkBool32")
     public boolean shaderQuadControl() { return nshaderQuadControl(address()) != 0; }
 
@@ -104,7 +90,7 @@ public class VkPhysicalDeviceShaderQuadControlFeaturesKHR extends Struct<VkPhysi
     public VkPhysicalDeviceShaderQuadControlFeaturesKHR sType$Default() { return sType(KHRShaderQuadControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderQuadControlFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderQuadControl} field. */
+    /** Sets the specified value to the {@code shaderQuadControl} field. */
     public VkPhysicalDeviceShaderQuadControlFeaturesKHR shaderQuadControl(@NativeType("VkBool32") boolean value) { nshaderQuadControl(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,7 +292,7 @@ public class VkPhysicalDeviceShaderQuadControlFeaturesKHR extends Struct<VkPhysi
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderQuadControlFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderQuadControlFeaturesKHR#shaderQuadControl} field. */
+        /** @return the value of the {@code shaderQuadControl} field. */
         @NativeType("VkBool32")
         public boolean shaderQuadControl() { return VkPhysicalDeviceShaderQuadControlFeaturesKHR.nshaderQuadControl(address()) != 0; }
 
@@ -316,7 +302,7 @@ public class VkPhysicalDeviceShaderQuadControlFeaturesKHR extends Struct<VkPhysi
         public VkPhysicalDeviceShaderQuadControlFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderQuadControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderQuadControlFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderQuadControlFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderQuadControlFeaturesKHR#shaderQuadControl} field. */
+        /** Sets the specified value to the {@code shaderQuadControl} field. */
         public VkPhysicalDeviceShaderQuadControlFeaturesKHR.Buffer shaderQuadControl(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderQuadControlFeaturesKHR.nshaderQuadControl(address(), value ? 1 : 0); return this; }
 
     }

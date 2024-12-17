@@ -11,14 +11,6 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/**
- * Windows-specific helpers.
- * 
- * <p>These functions query Windows processor groups. These groups partition the operating system into virtual sets of up to 64 neighbor PUs. Threads and
- * processes may only be bound inside a single group. Although Windows processor groups may be exposed in the hwloc hierarchy as hwloc Groups, they are
- * also often merged into existing hwloc objects such as NUMA nodes or Packages. This API provides explicit information about Windows processor groups so
- * that applications know whether binding to a large set of PUs may fail because it spans over multiple Windows processor groups.</p>
- */
 public class HWLocWindows {
 
     /** Contains the function pointers loaded from {@code HWLoc.getLibrary()}. */
@@ -39,6 +31,7 @@ public class HWLocWindows {
 
     // --- [ hwloc_windows_get_nr_processor_groups ] ---
 
+    /** {@code int hwloc_windows_get_nr_processor_groups(hwloc_topology_t topology, unsigned long flags)} */
     public static int hwloc_windows_get_nr_processor_groups(@NativeType("hwloc_topology_t") long topology, @NativeType("unsigned long") long flags) {
         long __functionAddress = Functions.windows_get_nr_processor_groups;
         if (CHECKS) {
@@ -49,6 +42,7 @@ public class HWLocWindows {
 
     // --- [ hwloc_windows_get_processor_group_cpuset ] ---
 
+    /** {@code int hwloc_windows_get_processor_group_cpuset(hwloc_topology_t topology, unsigned pg_index, hwloc_cpuset_t cpuset, unsigned long flags)} */
     public static int hwloc_windows_get_processor_group_cpuset(@NativeType("hwloc_topology_t") long topology, @NativeType("unsigned") int pg_index, @NativeType("hwloc_cpuset_t") long cpuset, @NativeType("unsigned long") long flags) {
         long __functionAddress = Functions.windows_get_processor_group_cpuset;
         if (CHECKS) {

@@ -7,7 +7,6 @@ package org.lwjgl.system.linux;
 
 import org.lwjgl.system.*;
 
-/** Native bindings to &lt;pthread.h&gt;. */
 public class PThread {
 
     static { Library.initialize(); }
@@ -18,6 +17,7 @@ public class PThread {
 
     // --- [ pthread_self ] ---
 
+    /** {@code pthread_t pthread_self(void)} */
     @NativeType("pthread_t")
     public static native long pthread_self();
 

@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMCore#LLVMContextSetYieldCallback ContextSetYieldCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     LLVMContextRef Context,
- *     void *OpaqueHandle
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class LLVMYieldCallback extends Callback implements LLVMYieldCallbackI {
 
     /**

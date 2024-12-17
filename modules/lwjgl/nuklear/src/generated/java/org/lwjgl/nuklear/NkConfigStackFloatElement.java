@@ -14,13 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_config_stack_float_element {
  *     float * pValues;
  *     float old_value;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_config_stack_float_element")
 class NkConfigStackFloatElement extends Struct<NkConfigStackFloatElement> {
@@ -71,11 +69,7 @@ class NkConfigStackFloatElement extends Struct<NkConfigStackFloatElement> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link FloatBuffer} view of the data pointed to by the {@code pValues} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code pValues} field. */
     @NativeType("float *")
     public FloatBuffer pValues(int capacity) { return npValues(address(), capacity); }
     /** @return the value of the {@code old_value} field. */
@@ -158,11 +152,7 @@ class NkConfigStackFloatElement extends Struct<NkConfigStackFloatElement> {
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link FloatBuffer} view of the data pointed to by the {@code pValues} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code pValues} field. */
         @NativeType("float *")
         public FloatBuffer pValues(int capacity) { return NkConfigStackFloatElement.npValues(address(), capacity); }
         /** @return the value of the {@code old_value} field. */

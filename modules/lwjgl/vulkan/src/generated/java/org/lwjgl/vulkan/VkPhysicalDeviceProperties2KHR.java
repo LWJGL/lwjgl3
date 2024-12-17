@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceProperties2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceProperties2KHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkPhysicalDeviceProperties VkPhysicalDeviceProperties} properties;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceProperties2KHR extends VkPhysicalDeviceProperties2 {
 

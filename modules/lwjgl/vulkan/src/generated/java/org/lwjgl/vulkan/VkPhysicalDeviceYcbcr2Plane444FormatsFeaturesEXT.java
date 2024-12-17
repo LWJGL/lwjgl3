@@ -16,31 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether the implementation supports additional 2-plane 444 Y′C<sub>B</sub>C<sub>R</sub> formats.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTYcbcr2plane444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT}</li>
- * </ul>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Although the formats defined by the {@link EXTYcbcr2plane444Formats VK_EXT_ycbcr_2plane_444_formats} were promoted to Vulkan 1.3 as optional formats, the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT} structure was not promoted to Vulkan 1.3.</p>
- * </div>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #ycbcr2plane444Formats};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 ycbcr2plane444Formats;
+ * }}</pre>
  */
 public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct<VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT> implements NativeResource {
 
@@ -93,32 +74,23 @@ public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct<VkP
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /**
-     * indicates that the implementation supports the following 2-plane 444 Y′C<sub>B</sub>C<sub>R</sub> formats:
-     * 
-     * <ul>
-     * <li>{@link VK13#VK_FORMAT_G8_B8R8_2PLANE_444_UNORM FORMAT_G8_B8R8_2PLANE_444_UNORM}</li>
-     * <li>{@link VK13#VK_FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16 FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16}</li>
-     * <li>{@link VK13#VK_FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16 FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16}</li>
-     * <li>{@link VK13#VK_FORMAT_G16_B16R16_2PLANE_444_UNORM FORMAT_G16_B16R16_2PLANE_444_UNORM}</li>
-     * </ul>
-     */
+    /** @return the value of the {@code ycbcr2plane444Formats} field. */
     @NativeType("VkBool32")
     public boolean ycbcr2plane444Formats() { return nycbcr2plane444Formats(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTYcbcr2plane444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTYcbcr2plane444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT sType$Default() { return sType(EXTYcbcr2plane444Formats.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #ycbcr2plane444Formats} field. */
+    /** Sets the specified value to the {@code ycbcr2plane444Formats} field. */
     public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT ycbcr2plane444Formats(@NativeType("VkBool32") boolean value) { nycbcr2plane444Formats(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,23 +286,23 @@ public class VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT extends Struct<VkP
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#ycbcr2plane444Formats} field. */
+        /** @return the value of the {@code ycbcr2plane444Formats} field. */
         @NativeType("VkBool32")
         public boolean ycbcr2plane444Formats() { return VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.nycbcr2plane444Formats(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTYcbcr2plane444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT} value to the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTYcbcr2plane444Formats#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.Buffer sType$Default() { return sType(EXTYcbcr2plane444Formats.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT#ycbcr2plane444Formats} field. */
+        /** Sets the specified value to the {@code ycbcr2plane444Formats} field. */
         public VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.Buffer ycbcr2plane444Formats(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT.nycbcr2plane444Formats(address(), value ? 1 : 0); return this; }
 
     }

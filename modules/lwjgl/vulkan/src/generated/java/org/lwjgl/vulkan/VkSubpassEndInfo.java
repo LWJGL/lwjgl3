@@ -16,27 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying subpass end information.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_END_INFO STRUCTURE_TYPE_SUBPASS_END_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK12#vkCmdEndRenderPass2 CmdEndRenderPass2}, {@link KHRCreateRenderpass2#vkCmdEndRenderPass2KHR CmdEndRenderPass2KHR}, {@link VK12#vkCmdNextSubpass2 CmdNextSubpass2}, {@link KHRCreateRenderpass2#vkCmdNextSubpass2KHR CmdNextSubpass2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubpassEndInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ * }}</pre>
  */
 public class VkSubpassEndInfo extends Struct<VkSubpassEndInfo> implements NativeResource {
 
@@ -86,18 +70,18 @@ public class VkSubpassEndInfo extends Struct<VkSubpassEndInfo> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSubpassEndInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_END_INFO STRUCTURE_TYPE_SUBPASS_END_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_END_INFO STRUCTURE_TYPE_SUBPASS_END_INFO} value to the {@code sType} field. */
     public VkSubpassEndInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_END_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSubpassEndInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM} value to the {@code pNext} chain. */
     public VkSubpassEndInfo pNext(VkSubpassFragmentDensityMapOffsetEndInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -289,18 +273,18 @@ public class VkSubpassEndInfo extends Struct<VkSubpassEndInfo> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSubpassEndInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubpassEndInfo.nsType(address()); }
-        /** @return the value of the {@link VkSubpassEndInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSubpassEndInfo.npNext(address()); }
 
-        /** Sets the specified value to the {@link VkSubpassEndInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSubpassEndInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassEndInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_END_INFO STRUCTURE_TYPE_SUBPASS_END_INFO} value to the {@link VkSubpassEndInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_END_INFO STRUCTURE_TYPE_SUBPASS_END_INFO} value to the {@code sType} field. */
         public VkSubpassEndInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_END_INFO); }
-        /** Sets the specified value to the {@link VkSubpassEndInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSubpassEndInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubpassEndInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkSubpassFragmentDensityMapOffsetEndInfoQCOM} value to the {@code pNext} chain. */
         public VkSubpassEndInfo.Buffer pNext(VkSubpassFragmentDensityMapOffsetEndInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }

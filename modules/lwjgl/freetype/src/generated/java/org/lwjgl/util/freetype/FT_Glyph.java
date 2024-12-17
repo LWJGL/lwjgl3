@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The root glyph structure contains a given glyph image plus its advance width in 16.16 fixed-point format.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_GlyphRec {
  *     FT_Library library;
  *     FT_Glyph_Class const * clazz;
  *     FT_Glyph_Format format;
  *     {@link FT_Vector FT_Vector} advance;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_GlyphRec")
 public class FT_Glyph extends Struct<FT_Glyph> {

@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMExecutionEngine#LLVMCreateSimpleMCJITMemoryManager CreateSimpleMCJITMemoryManager} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * uint8_t * (*{@link #invoke}) (
- *     void *Opaque,
- *     uintptr_t Size,
- *     unsigned int Alignment,
- *     unsigned int SectionID,
- *     char const *SectionName,
- *     LLVMBool IsReadOnly
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("uint8_t * (*) (void *, uintptr_t, unsigned int, unsigned int, char const *, LLVMBool)")
 public interface LLVMMemoryManagerAllocateDataSectionCallbackI extends CallbackI {
@@ -53,6 +39,7 @@ public interface LLVMMemoryManagerAllocateDataSectionCallbackI extends CallbackI
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code uint8_t * (*) (void * Opaque, uintptr_t Size, unsigned int Alignment, unsigned int SectionID, char const * SectionName, LLVMBool IsReadOnly)} */
     @NativeType("uint8_t *") long invoke(@NativeType("void *") long Opaque, @NativeType("uintptr_t") long Size, @NativeType("unsigned int") int Alignment, @NativeType("unsigned int") int SectionID, @NativeType("char const *") long SectionName, @NativeType("LLVMBool") boolean IsReadOnly);
 
 }

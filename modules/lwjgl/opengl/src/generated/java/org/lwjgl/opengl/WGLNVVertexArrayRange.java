@@ -23,6 +23,7 @@ public class WGLNVVertexArrayRange {
 
     // --- [ wglAllocateMemoryNV ] ---
 
+    /** {@code void * wglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority)} */
     public static long nwglAllocateMemoryNV(int size, float readfreq, float writefreq, float priority) {
         long __functionAddress = GL.getCapabilitiesWGL().wglAllocateMemoryNV;
         if (CHECKS) {
@@ -31,6 +32,7 @@ public class WGLNVVertexArrayRange {
         return callP(size, readfreq, writefreq, priority, __functionAddress);
     }
 
+    /** {@code void * wglAllocateMemoryNV(GLsizei size, GLfloat readfreq, GLfloat writefreq, GLfloat priority)} */
     @NativeType("void *")
     public static @Nullable ByteBuffer wglAllocateMemoryNV(@NativeType("GLsizei") int size, @NativeType("GLfloat") float readfreq, @NativeType("GLfloat") float writefreq, @NativeType("GLfloat") float priority) {
         long __result = nwglAllocateMemoryNV(size, readfreq, writefreq, priority);
@@ -39,6 +41,7 @@ public class WGLNVVertexArrayRange {
 
     // --- [ wglFreeMemoryNV ] ---
 
+    /** {@code void wglFreeMemoryNV(void * pointer)} */
     public static void nwglFreeMemoryNV(long pointer) {
         long __functionAddress = GL.getCapabilitiesWGL().wglFreeMemoryNV;
         if (CHECKS) {
@@ -47,6 +50,7 @@ public class WGLNVVertexArrayRange {
         callPV(pointer, __functionAddress);
     }
 
+    /** {@code void wglFreeMemoryNV(void * pointer)} */
     public static void wglFreeMemoryNV(@NativeType("void *") ByteBuffer pointer) {
         nwglFreeMemoryNV(memAddress(pointer));
     }

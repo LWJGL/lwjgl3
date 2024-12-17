@@ -19,41 +19,15 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.egl.*;
 
 /**
- * The graphics binding structure to be passed at session creation to EGL.
- * 
- * <h5>Description</h5>
- * 
- * <p>When creating an EGL based {@code XrSession}, the application will provide a pointer to an {@link XrGraphicsBindingEGLMNDX} structure in the {@code next} chain of the {@link XrSessionCreateInfo}.</p>
- * 
- * <p>The required window system configuration define to expose this structure type is {@link XR10#XR_USE_PLATFORM_EGL USE_PLATFORM_EGL}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MNDXEGLEnable XR_MNDX_egl_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsBindingEGLMNDX}</li>
- * <li>{@code type} <b>must</b> be {@link MNDXEGLEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code getProcAddress} <b>must</b> be a valid {@code PFN_xrEglGetProcAddressMNDX} value</li>
- * <li>{@code display} <b>must</b> be a valid {@code EGLDisplay} value</li>
- * <li>{@code config} <b>must</b> be a valid {@code EGLConfig} value</li>
- * <li>{@code context} <b>must</b> be a valid {@code EGLContext} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateSession CreateSession}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGraphicsBindingEGLMNDX {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     PFN_xrEglGetProcAddressMNDX {@link #getProcAddress};
- *     EGLDisplay {@link #display};
- *     EGLConfig {@link #config};
- *     EGLContext {@link #context};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     PFN_xrEglGetProcAddressMNDX getProcAddress;
+ *     EGLDisplay display;
+ *     EGLConfig config;
+ *     EGLContext context;
+ * }}</pre>
  */
 public class XrGraphicsBindingEGLMNDX extends Struct<XrGraphicsBindingEGLMNDX> implements NativeResource {
 
@@ -115,38 +89,38 @@ public class XrGraphicsBindingEGLMNDX extends Struct<XrGraphicsBindingEGLMNDX> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a valid function pointer to {@code eglGetProcAddress}. */
+    /** @return the value of the {@code getProcAddress} field. */
     @NativeType("PFN_xrEglGetProcAddressMNDX")
     public long getProcAddress() { return ngetProcAddress(address()); }
-    /** a valid EGL {@code EGLDisplay}. */
+    /** @return the value of the {@code display} field. */
     @NativeType("EGLDisplay")
     public long display() { return ndisplay(address()); }
-    /** a valid EGL {@code EGLConfig}. */
+    /** @return the value of the {@code config} field. */
     @NativeType("EGLConfig")
     public long config() { return nconfig(address()); }
-    /** a valid EGL {@code EGLContext}. */
+    /** @return the value of the {@code context} field. */
     @NativeType("EGLContext")
     public long context() { return ncontext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrGraphicsBindingEGLMNDX type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MNDXEGLEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX} value to the {@link #type} field. */
+    /** Sets the {@link MNDXEGLEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX} value to the {@code type} field. */
     public XrGraphicsBindingEGLMNDX type$Default() { return type(MNDXEGLEnable.XR_TYPE_GRAPHICS_BINDING_EGL_MNDX); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrGraphicsBindingEGLMNDX next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #getProcAddress} field. */
+    /** Sets the specified value to the {@code getProcAddress} field. */
     public XrGraphicsBindingEGLMNDX getProcAddress(@NativeType("PFN_xrEglGetProcAddressMNDX") long value) { ngetProcAddress(address(), value); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XrGraphicsBindingEGLMNDX display(@NativeType("EGLDisplay") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #config} field. */
+    /** Sets the specified value to the {@code config} field. */
     public XrGraphicsBindingEGLMNDX config(@NativeType("EGLConfig") long value) { nconfig(address(), value); return this; }
-    /** Sets the specified value to the {@link #context} field. */
+    /** Sets the specified value to the {@code context} field. */
     public XrGraphicsBindingEGLMNDX context(@NativeType("EGLContext") long value) { ncontext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -372,38 +346,38 @@ public class XrGraphicsBindingEGLMNDX extends Struct<XrGraphicsBindingEGLMNDX> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrGraphicsBindingEGLMNDX#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingEGLMNDX.ntype(address()); }
-        /** @return the value of the {@link XrGraphicsBindingEGLMNDX#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingEGLMNDX.nnext(address()); }
-        /** @return the value of the {@link XrGraphicsBindingEGLMNDX#getProcAddress} field. */
+        /** @return the value of the {@code getProcAddress} field. */
         @NativeType("PFN_xrEglGetProcAddressMNDX")
         public long getProcAddress() { return XrGraphicsBindingEGLMNDX.ngetProcAddress(address()); }
-        /** @return the value of the {@link XrGraphicsBindingEGLMNDX#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("EGLDisplay")
         public long display() { return XrGraphicsBindingEGLMNDX.ndisplay(address()); }
-        /** @return the value of the {@link XrGraphicsBindingEGLMNDX#config} field. */
+        /** @return the value of the {@code config} field. */
         @NativeType("EGLConfig")
         public long config() { return XrGraphicsBindingEGLMNDX.nconfig(address()); }
-        /** @return the value of the {@link XrGraphicsBindingEGLMNDX#context} field. */
+        /** @return the value of the {@code context} field. */
         @NativeType("EGLContext")
         public long context() { return XrGraphicsBindingEGLMNDX.ncontext(address()); }
 
-        /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrGraphicsBindingEGLMNDX.Buffer type(@NativeType("XrStructureType") int value) { XrGraphicsBindingEGLMNDX.ntype(address(), value); return this; }
-        /** Sets the {@link MNDXEGLEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX} value to the {@link XrGraphicsBindingEGLMNDX#type} field. */
+        /** Sets the {@link MNDXEGLEnable#XR_TYPE_GRAPHICS_BINDING_EGL_MNDX TYPE_GRAPHICS_BINDING_EGL_MNDX} value to the {@code type} field. */
         public XrGraphicsBindingEGLMNDX.Buffer type$Default() { return type(MNDXEGLEnable.XR_TYPE_GRAPHICS_BINDING_EGL_MNDX); }
-        /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrGraphicsBindingEGLMNDX.Buffer next(@NativeType("void const *") long value) { XrGraphicsBindingEGLMNDX.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#getProcAddress} field. */
+        /** Sets the specified value to the {@code getProcAddress} field. */
         public XrGraphicsBindingEGLMNDX.Buffer getProcAddress(@NativeType("PFN_xrEglGetProcAddressMNDX") long value) { XrGraphicsBindingEGLMNDX.ngetProcAddress(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XrGraphicsBindingEGLMNDX.Buffer display(@NativeType("EGLDisplay") long value) { XrGraphicsBindingEGLMNDX.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#config} field. */
+        /** Sets the specified value to the {@code config} field. */
         public XrGraphicsBindingEGLMNDX.Buffer config(@NativeType("EGLConfig") long value) { XrGraphicsBindingEGLMNDX.nconfig(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingEGLMNDX#context} field. */
+        /** Sets the specified value to the {@code context} field. */
         public XrGraphicsBindingEGLMNDX.Buffer context(@NativeType("EGLContext") long value) { XrGraphicsBindingEGLMNDX.ncontext(address(), value); return this; }
 
     }

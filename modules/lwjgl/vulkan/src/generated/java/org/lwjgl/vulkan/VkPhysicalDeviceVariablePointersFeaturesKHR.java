@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceVariablePointersFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceVariablePointersFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 variablePointersStorageBuffer;
  *     VkBool32 variablePointers;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceVariablePointersFeaturesKHR extends VkPhysicalDeviceVariablePointersFeatures {
 

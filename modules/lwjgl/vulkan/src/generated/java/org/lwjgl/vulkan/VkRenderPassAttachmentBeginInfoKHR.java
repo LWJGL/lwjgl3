@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkRenderPassAttachmentBeginInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderPassAttachmentBeginInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t attachmentCount;
  *     VkImageView const * pAttachments;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkRenderPassAttachmentBeginInfoKHR extends VkRenderPassAttachmentBeginInfo {
 

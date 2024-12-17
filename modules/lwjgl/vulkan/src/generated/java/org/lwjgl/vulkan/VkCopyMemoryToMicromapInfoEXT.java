@@ -16,40 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters for deserializing a micromap.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The source memory pointed to by {@code src} <b>must</b> contain data previously serialized using {@link EXTOpacityMicromap#vkCmdCopyMicromapToMemoryEXT CmdCopyMicromapToMemoryEXT}</li>
- * <li>{@code mode} <b>must</b> be {@link EXTOpacityMicromap#VK_COPY_MICROMAP_MODE_DESERIALIZE_EXT COPY_MICROMAP_MODE_DESERIALIZE_EXT}</li>
- * <li>The data in {@code src} <b>must</b> have a format compatible with the destination physical device as returned by {@link EXTOpacityMicromap#vkGetDeviceMicromapCompatibilityEXT GetDeviceMicromapCompatibilityEXT}</li>
- * <li>{@code dst} <b>must</b> have been created with a {@code size} greater than or equal to that used to serialize the data in {@code src}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code dst} <b>must</b> be a valid {@code VkMicromapEXT} handle</li>
- * <li>{@code mode} <b>must</b> be a valid {@code VkCopyMicromapModeEXT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDeviceOrHostAddressConstKHR}, {@link EXTOpacityMicromap#vkCmdCopyMemoryToMicromapEXT CmdCopyMemoryToMicromapEXT}, {@link EXTOpacityMicromap#vkCopyMemoryToMicromapEXT CopyMemoryToMicromapEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCopyMemoryToMicromapInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} {@link #src};
- *     VkMicromapEXT {@link #dst};
- *     VkCopyMicromapModeEXT {@link #mode};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkDeviceOrHostAddressConstKHR VkDeviceOrHostAddressConstKHR} src;
+ *     VkMicromapEXT dst;
+ *     VkCopyMicromapModeEXT mode;
+ * }}</pre>
  */
 public class VkCopyMemoryToMicromapInfoEXT extends Struct<VkCopyMemoryToMicromapInfoEXT> implements NativeResource {
 
@@ -108,34 +82,34 @@ public class VkCopyMemoryToMicromapInfoEXT extends Struct<VkCopyMemoryToMicromap
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the device or host address to memory containing the source data for the copy. */
+    /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code src} field. */
     public VkDeviceOrHostAddressConstKHR src() { return nsrc(address()); }
-    /** the target micromap for the copy. */
+    /** @return the value of the {@code dst} field. */
     @NativeType("VkMicromapEXT")
     public long dst() { return ndst(address()); }
-    /** a {@code VkCopyMicromapModeEXT} value specifying additional operations to perform during the copy. */
+    /** @return the value of the {@code mode} field. */
     @NativeType("VkCopyMicromapModeEXT")
     public int mode() { return nmode(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCopyMemoryToMicromapInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT} value to the {@code sType} field. */
     public VkCopyMemoryToMicromapInfoEXT sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCopyMemoryToMicromapInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link #src} field. */
+    /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code src} field. */
     public VkCopyMemoryToMicromapInfoEXT src(VkDeviceOrHostAddressConstKHR value) { nsrc(address(), value); return this; }
-    /** Passes the {@link #src} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code src} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkCopyMemoryToMicromapInfoEXT src(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(src()); return this; }
-    /** Sets the specified value to the {@link #dst} field. */
+    /** Sets the specified value to the {@code dst} field. */
     public VkCopyMemoryToMicromapInfoEXT dst(@NativeType("VkMicromapEXT") long value) { ndst(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public VkCopyMemoryToMicromapInfoEXT mode(@NativeType("VkCopyMicromapModeEXT") int value) { nmode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,34 +317,34 @@ public class VkCopyMemoryToMicromapInfoEXT extends Struct<VkCopyMemoryToMicromap
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCopyMemoryToMicromapInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCopyMemoryToMicromapInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkCopyMemoryToMicromapInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCopyMemoryToMicromapInfoEXT.npNext(address()); }
-        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@link VkCopyMemoryToMicromapInfoEXT#src} field. */
+        /** @return a {@link VkDeviceOrHostAddressConstKHR} view of the {@code src} field. */
         public VkDeviceOrHostAddressConstKHR src() { return VkCopyMemoryToMicromapInfoEXT.nsrc(address()); }
-        /** @return the value of the {@link VkCopyMemoryToMicromapInfoEXT#dst} field. */
+        /** @return the value of the {@code dst} field. */
         @NativeType("VkMicromapEXT")
         public long dst() { return VkCopyMemoryToMicromapInfoEXT.ndst(address()); }
-        /** @return the value of the {@link VkCopyMemoryToMicromapInfoEXT#mode} field. */
+        /** @return the value of the {@code mode} field. */
         @NativeType("VkCopyMicromapModeEXT")
         public int mode() { return VkCopyMemoryToMicromapInfoEXT.nmode(address()); }
 
-        /** Sets the specified value to the {@link VkCopyMemoryToMicromapInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCopyMemoryToMicromapInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyMemoryToMicromapInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT} value to the {@link VkCopyMemoryToMicromapInfoEXT#sType} field. */
+        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT} value to the {@code sType} field. */
         public VkCopyMemoryToMicromapInfoEXT.Buffer sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT); }
-        /** Sets the specified value to the {@link VkCopyMemoryToMicromapInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCopyMemoryToMicromapInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkCopyMemoryToMicromapInfoEXT.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@link VkCopyMemoryToMicromapInfoEXT#src} field. */
+        /** Copies the specified {@link VkDeviceOrHostAddressConstKHR} to the {@code src} field. */
         public VkCopyMemoryToMicromapInfoEXT.Buffer src(VkDeviceOrHostAddressConstKHR value) { VkCopyMemoryToMicromapInfoEXT.nsrc(address(), value); return this; }
-        /** Passes the {@link VkCopyMemoryToMicromapInfoEXT#src} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code src} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkCopyMemoryToMicromapInfoEXT.Buffer src(java.util.function.Consumer<VkDeviceOrHostAddressConstKHR> consumer) { consumer.accept(src()); return this; }
-        /** Sets the specified value to the {@link VkCopyMemoryToMicromapInfoEXT#dst} field. */
+        /** Sets the specified value to the {@code dst} field. */
         public VkCopyMemoryToMicromapInfoEXT.Buffer dst(@NativeType("VkMicromapEXT") long value) { VkCopyMemoryToMicromapInfoEXT.ndst(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyMemoryToMicromapInfoEXT#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public VkCopyMemoryToMicromapInfoEXT.Buffer mode(@NativeType("VkCopyMicromapModeEXT") int value) { VkCopyMemoryToMicromapInfoEXT.nmode(address(), value); return this; }
 
     }

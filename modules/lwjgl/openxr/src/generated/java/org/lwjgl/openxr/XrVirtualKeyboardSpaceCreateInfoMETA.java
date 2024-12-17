@@ -17,36 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Virtual keyboard space creation info.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code locationType} is set to {@link METAVirtualKeyboard#XR_VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META}, the runtime <b>must</b> use the value {@code poseInSpace} set by the application. Otherwise, the runtime <b>must</b> provide a default pose and ignore {@code poseInSpace}. In all cases, the runtime <b>must</b> default the scale to 1.0.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using {@link XrVirtualKeyboardSpaceCreateInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code locationType} <b>must</b> be a valid {@code XrVirtualKeyboardLocationTypeMETA} value</li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link METAVirtualKeyboard#xrCreateVirtualKeyboardSpaceMETA CreateVirtualKeyboardSpaceMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrVirtualKeyboardSpaceCreateInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrVirtualKeyboardLocationTypeMETA {@link #locationType};
- *     XrSpace {@link #space};
- *     {@link XrPosef XrPosef} {@link #poseInSpace};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrVirtualKeyboardLocationTypeMETA locationType;
+ *     XrSpace space;
+ *     {@link XrPosef XrPosef} poseInSpace;
+ * }}</pre>
  */
 public class XrVirtualKeyboardSpaceCreateInfoMETA extends Struct<XrVirtualKeyboardSpaceCreateInfoMETA> implements NativeResource {
 
@@ -105,34 +83,34 @@ public class XrVirtualKeyboardSpaceCreateInfoMETA extends Struct<XrVirtualKeyboa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrVirtualKeyboardLocationTypeMETA} enum providing the location type. */
+    /** @return the value of the {@code locationType} field. */
     @NativeType("XrVirtualKeyboardLocationTypeMETA")
     public int locationType() { return nlocationType(address()); }
-    /** an {@code XrSpace} previously created by a function such as {@link XR10#xrCreateReferenceSpace CreateReferenceSpace}. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the desired pose if {@code locationType} is {@link METAVirtualKeyboard#XR_VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META VIRTUAL_KEYBOARD_LOCATION_TYPE_CUSTOM_META}. */
+    /** @return a {@link XrPosef} view of the {@code poseInSpace} field. */
     public XrPosef poseInSpace() { return nposeInSpace(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrVirtualKeyboardSpaceCreateInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META} value to the {@code type} field. */
     public XrVirtualKeyboardSpaceCreateInfoMETA type$Default() { return type(METAVirtualKeyboard.XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrVirtualKeyboardSpaceCreateInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #locationType} field. */
+    /** Sets the specified value to the {@code locationType} field. */
     public XrVirtualKeyboardSpaceCreateInfoMETA locationType(@NativeType("XrVirtualKeyboardLocationTypeMETA") int value) { nlocationType(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrVirtualKeyboardSpaceCreateInfoMETA space(XrSpace value) { nspace(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #poseInSpace} field. */
+    /** Copies the specified {@link XrPosef} to the {@code poseInSpace} field. */
     public XrVirtualKeyboardSpaceCreateInfoMETA poseInSpace(XrPosef value) { nposeInSpace(address(), value); return this; }
-    /** Passes the {@link #poseInSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code poseInSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrVirtualKeyboardSpaceCreateInfoMETA poseInSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInSpace()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -349,34 +327,34 @@ public class XrVirtualKeyboardSpaceCreateInfoMETA extends Struct<XrVirtualKeyboa
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrVirtualKeyboardSpaceCreateInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVirtualKeyboardSpaceCreateInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardSpaceCreateInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrVirtualKeyboardSpaceCreateInfoMETA.nnext(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardSpaceCreateInfoMETA#locationType} field. */
+        /** @return the value of the {@code locationType} field. */
         @NativeType("XrVirtualKeyboardLocationTypeMETA")
         public int locationType() { return XrVirtualKeyboardSpaceCreateInfoMETA.nlocationType(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardSpaceCreateInfoMETA#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrVirtualKeyboardSpaceCreateInfoMETA.nspace(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrVirtualKeyboardSpaceCreateInfoMETA#poseInSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInSpace} field. */
         public XrPosef poseInSpace() { return XrVirtualKeyboardSpaceCreateInfoMETA.nposeInSpace(address()); }
 
-        /** Sets the specified value to the {@link XrVirtualKeyboardSpaceCreateInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrVirtualKeyboardSpaceCreateInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrVirtualKeyboardSpaceCreateInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META} value to the {@link XrVirtualKeyboardSpaceCreateInfoMETA#type} field. */
+        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META} value to the {@code type} field. */
         public XrVirtualKeyboardSpaceCreateInfoMETA.Buffer type$Default() { return type(METAVirtualKeyboard.XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META); }
-        /** Sets the specified value to the {@link XrVirtualKeyboardSpaceCreateInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrVirtualKeyboardSpaceCreateInfoMETA.Buffer next(@NativeType("void const *") long value) { XrVirtualKeyboardSpaceCreateInfoMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardSpaceCreateInfoMETA#locationType} field. */
+        /** Sets the specified value to the {@code locationType} field. */
         public XrVirtualKeyboardSpaceCreateInfoMETA.Buffer locationType(@NativeType("XrVirtualKeyboardLocationTypeMETA") int value) { XrVirtualKeyboardSpaceCreateInfoMETA.nlocationType(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVirtualKeyboardSpaceCreateInfoMETA#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrVirtualKeyboardSpaceCreateInfoMETA.Buffer space(XrSpace value) { XrVirtualKeyboardSpaceCreateInfoMETA.nspace(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrVirtualKeyboardSpaceCreateInfoMETA#poseInSpace} field. */
+        /** Copies the specified {@link XrPosef} to the {@code poseInSpace} field. */
         public XrVirtualKeyboardSpaceCreateInfoMETA.Buffer poseInSpace(XrPosef value) { XrVirtualKeyboardSpaceCreateInfoMETA.nposeInSpace(address(), value); return this; }
-        /** Passes the {@link XrVirtualKeyboardSpaceCreateInfoMETA#poseInSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code poseInSpace} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrVirtualKeyboardSpaceCreateInfoMETA.Buffer poseInSpace(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(poseInSpace()); return this; }
 
     }

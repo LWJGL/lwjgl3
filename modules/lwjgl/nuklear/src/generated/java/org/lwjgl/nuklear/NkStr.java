@@ -16,18 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Basic string buffer which is only used in context with the text editor to manage and manipulate dynamic or
- * fixed size string content. This is <em>NOT</em> the default string handling method. The only instance you
- * should have any contact with this API is if you interact with an {@link NkTextEdit} object inside one of the copy and
- * paste functions and even there only for more advanced cases.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_str {
  *     {@link NkBuffer struct nk_buffer} buffer;
- *     int {@link #len};
- * }</code></pre>
+ *     int len;
+ * }}</pre>
  */
 @NativeType("struct nk_str")
 public class NkStr extends Struct<NkStr> implements NativeResource {
@@ -81,7 +74,7 @@ public class NkStr extends Struct<NkStr> implements NativeResource {
     /** @return a {@link NkBuffer} view of the {@code buffer} field. */
     @NativeType("struct nk_buffer")
     public NkBuffer buffer() { return nbuffer(address()); }
-    /** in codepoints/runes/glyphs */
+    /** @return the value of the {@code len} field. */
     public int len() { return nlen(address()); }
 
     // -----------------------------------
@@ -265,7 +258,7 @@ public class NkStr extends Struct<NkStr> implements NativeResource {
         /** @return a {@link NkBuffer} view of the {@code buffer} field. */
         @NativeType("struct nk_buffer")
         public NkBuffer buffer() { return NkStr.nbuffer(address()); }
-        /** @return the value of the {@link NkStr#len} field. */
+        /** @return the value of the {@code len} field. */
         public int len() { return NkStr.nlen(address()); }
 
     }

@@ -19,52 +19,36 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure specifying physical device properties for functionality promoted to Vulkan 1.4.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceVulkan14Properties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <p>These properties correspond to Vulkan 1.4 functionality.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceVulkan14Properties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #lineSubPixelPrecisionBits};
- *     uint32_t {@link #maxVertexAttribDivisor};
- *     VkBool32 {@link #supportsNonZeroFirstInstance};
- *     uint32_t {@link #maxPushDescriptors};
- *     VkBool32 {@link #dynamicRenderingLocalReadDepthStencilAttachments};
- *     VkBool32 {@link #dynamicRenderingLocalReadMultisampledAttachments};
- *     VkBool32 {@link #earlyFragmentMultisampleCoverageAfterSampleCounting};
- *     VkBool32 {@link #earlyFragmentSampleMaskTestBeforeSampleCounting};
- *     VkBool32 {@link #depthStencilSwizzleOneSupport};
- *     VkBool32 {@link #polygonModePointSize};
- *     VkBool32 {@link #nonStrictSinglePixelWideLinesUseParallelogram};
- *     VkBool32 {@link #nonStrictWideLinesUseParallelogram};
- *     VkBool32 {@link #blockTexelViewCompatibleMultipleLayers};
- *     uint32_t {@link #maxCombinedImageSamplerDescriptorCount};
- *     VkBool32 {@link #fragmentShadingRateClampCombinerInputs};
- *     VkPipelineRobustnessBufferBehavior {@link #defaultRobustnessStorageBuffers};
- *     VkPipelineRobustnessBufferBehavior {@link #defaultRobustnessUniformBuffers};
- *     VkPipelineRobustnessBufferBehavior {@link #defaultRobustnessVertexInputs};
- *     VkPipelineRobustnessImageBehavior {@link #defaultRobustnessImages};
- *     uint32_t {@link #copySrcLayoutCount};
- *     VkImageLayout * {@link #pCopySrcLayouts};
- *     uint32_t {@link #copyDstLayoutCount};
- *     VkImageLayout * {@link #pCopyDstLayouts};
- *     uint8_t {@link #optimalTilingLayoutUUID}[VK_UUID_SIZE];
- *     VkBool32 {@link #identicalMemoryTypeRequirements};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t lineSubPixelPrecisionBits;
+ *     uint32_t maxVertexAttribDivisor;
+ *     VkBool32 supportsNonZeroFirstInstance;
+ *     uint32_t maxPushDescriptors;
+ *     VkBool32 dynamicRenderingLocalReadDepthStencilAttachments;
+ *     VkBool32 dynamicRenderingLocalReadMultisampledAttachments;
+ *     VkBool32 earlyFragmentMultisampleCoverageAfterSampleCounting;
+ *     VkBool32 earlyFragmentSampleMaskTestBeforeSampleCounting;
+ *     VkBool32 depthStencilSwizzleOneSupport;
+ *     VkBool32 polygonModePointSize;
+ *     VkBool32 nonStrictSinglePixelWideLinesUseParallelogram;
+ *     VkBool32 nonStrictWideLinesUseParallelogram;
+ *     VkBool32 blockTexelViewCompatibleMultipleLayers;
+ *     uint32_t maxCombinedImageSamplerDescriptorCount;
+ *     VkBool32 fragmentShadingRateClampCombinerInputs;
+ *     VkPipelineRobustnessBufferBehavior defaultRobustnessStorageBuffers;
+ *     VkPipelineRobustnessBufferBehavior defaultRobustnessUniformBuffers;
+ *     VkPipelineRobustnessBufferBehavior defaultRobustnessVertexInputs;
+ *     VkPipelineRobustnessImageBehavior defaultRobustnessImages;
+ *     uint32_t copySrcLayoutCount;
+ *     VkImageLayout * pCopySrcLayouts;
+ *     uint32_t copyDstLayoutCount;
+ *     VkImageLayout * pCopyDstLayouts;
+ *     uint8_t optimalTilingLayoutUUID[VK_UUID_SIZE];
+ *     VkBool32 identicalMemoryTypeRequirements;
+ * }}</pre>
  */
 public class VkPhysicalDeviceVulkan14Properties extends Struct<VkPhysicalDeviceVulkan14Properties> implements NativeResource {
 
@@ -189,96 +173,96 @@ public class VkPhysicalDeviceVulkan14Properties extends Struct<VkPhysicalDeviceV
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the number of bits of subpixel precision in framebuffer coordinates <code>x<sub>f</sub></code> and <code>y<sub>f</sub></code> when rasterizing <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-lines">line segments</a>. */
+    /** @return the value of the {@code lineSubPixelPrecisionBits} field. */
     @NativeType("uint32_t")
     public int lineSubPixelPrecisionBits() { return nlineSubPixelPrecisionBits(address()); }
-    /** the maximum value of the number of instances that will repeat the value of vertex attribute data when instanced rendering is enabled. */
+    /** @return the value of the {@code maxVertexAttribDivisor} field. */
     @NativeType("uint32_t")
     public int maxVertexAttribDivisor() { return nmaxVertexAttribDivisor(address()); }
-    /** specifies whether a non-zero value for the {@code firstInstance} parameter of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#drawing">drawing commands</a> is supported when {@link VkVertexInputBindingDivisorDescription}{@code ::divisor} is not 1. */
+    /** @return the value of the {@code supportsNonZeroFirstInstance} field. */
     @NativeType("VkBool32")
     public boolean supportsNonZeroFirstInstance() { return nsupportsNonZeroFirstInstance(address()) != 0; }
-    /** the maximum number of descriptors that <b>can</b> be used in a descriptor set layout created with {@link VK14#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT} set. */
+    /** @return the value of the {@code maxPushDescriptors} field. */
     @NativeType("uint32_t")
     public int maxPushDescriptors() { return nmaxPushDescriptors(address()); }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports local reads of depth/stencil attachments, {@link VK10#VK_FALSE FALSE} otherwise. */
+    /** @return the value of the {@code dynamicRenderingLocalReadDepthStencilAttachments} field. */
     @NativeType("VkBool32")
     public boolean dynamicRenderingLocalReadDepthStencilAttachments() { return ndynamicRenderingLocalReadDepthStencilAttachments(address()) != 0; }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports local reads of multisampled attachments, {@link VK10#VK_FALSE FALSE} otherwise. */
+    /** @return the value of the {@code dynamicRenderingLocalReadMultisampledAttachments} field. */
     @NativeType("VkBool32")
     public boolean dynamicRenderingLocalReadMultisampledAttachments() { return ndynamicRenderingLocalReadMultisampledAttachments(address()) != 0; }
-    /** a boolean value indicating whether the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-shader">fragment shading</a> and <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-covg">multisample coverage</a> operations are performed after <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-samplecount">sample counting</a> for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-shader">fragment shaders</a> with {@code EarlyFragmentTests} execution mode. */
+    /** @return the value of the {@code earlyFragmentMultisampleCoverageAfterSampleCounting} field. */
     @NativeType("VkBool32")
     public boolean earlyFragmentMultisampleCoverageAfterSampleCounting() { return nearlyFragmentMultisampleCoverageAfterSampleCounting(address()) != 0; }
-    /** a boolean value indicating whether the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-samplemask">sample mask test</a> operation is performed before <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-samplecount">sample counting</a> for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#fragops-shader">fragment shaders</a> using the {@code EarlyFragmentTests} execution mode. */
+    /** @return the value of the {@code earlyFragmentSampleMaskTestBeforeSampleCounting} field. */
     @NativeType("VkBool32")
     public boolean earlyFragmentSampleMaskTestBeforeSampleCounting() { return nearlyFragmentSampleMaskTestBeforeSampleCounting(address()) != 0; }
-    /** a boolean indicating that depth/stencil texturing operations with {@link VK10#VK_COMPONENT_SWIZZLE_ONE COMPONENT_SWIZZLE_ONE} have defined behavior. */
+    /** @return the value of the {@code depthStencilSwizzleOneSupport} field. */
     @NativeType("VkBool32")
     public boolean depthStencilSwizzleOneSupport() { return ndepthStencilSwizzleOneSupport(address()) != 0; }
-    /** a boolean value indicating whether the point size of the final rasterization of polygons with {@link VK10#VK_POLYGON_MODE_POINT POLYGON_MODE_POINT} is controlled by {@code PointSize}. */
+    /** @return the value of the {@code polygonModePointSize} field. */
     @NativeType("VkBool32")
     public boolean polygonModePointSize() { return npolygonModePointSize(address()) != 0; }
-    /** a boolean value indicating whether non-strict lines with a width of 1.0 are rasterized as parallelograms or using Bresenham’s algorithm. */
+    /** @return the value of the {@code nonStrictSinglePixelWideLinesUseParallelogram} field. */
     @NativeType("VkBool32")
     public boolean nonStrictSinglePixelWideLinesUseParallelogram() { return nnonStrictSinglePixelWideLinesUseParallelogram(address()) != 0; }
-    /** a boolean value indicating whether non-strict lines with a width greater than 1.0 are rasterized as parallelograms or using Bresenham’s algorithm. */
+    /** @return the value of the {@code nonStrictWideLinesUseParallelogram} field. */
     @NativeType("VkBool32")
     public boolean nonStrictWideLinesUseParallelogram() { return nnonStrictWideLinesUseParallelogram(address()) != 0; }
-    /** a boolean value indicating that an implementation supports creating image views with {@link VK11#VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT} where the {@code layerCount} member of {@code subresourceRange} is greater than 1. */
+    /** @return the value of the {@code blockTexelViewCompatibleMultipleLayers} field. */
     @NativeType("VkBool32")
     public boolean blockTexelViewCompatibleMultipleLayers() { return nblockTexelViewCompatibleMultipleLayers(address()) != 0; }
-    /** the maximum number of combined image sampler descriptors that the implementation uses to access any of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-requiring-sampler-ycbcr-conversion">formats that require a sampler Y′C<sub>B</sub>C<sub>R</sub> conversion</a> supported by the implementation. */
+    /** @return the value of the {@code maxCombinedImageSamplerDescriptorCount} field. */
     @NativeType("uint32_t")
     public int maxCombinedImageSamplerDescriptorCount() { return nmaxCombinedImageSamplerDescriptorCount(address()); }
-    /** a boolean value indicating that an implementation clamps the inputs to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-combining">combiner operations</a>. */
+    /** @return the value of the {@code fragmentShadingRateClampCombinerInputs} field. */
     @NativeType("VkBool32")
     public boolean fragmentShadingRateClampCombinerInputs() { return nfragmentShadingRateClampCombinerInputs(address()) != 0; }
-    /** describes the behavior of out of bounds accesses made to storage buffers when no robustness features are enabled */
+    /** @return the value of the {@code defaultRobustnessStorageBuffers} field. */
     @NativeType("VkPipelineRobustnessBufferBehavior")
     public int defaultRobustnessStorageBuffers() { return ndefaultRobustnessStorageBuffers(address()); }
-    /** describes the behavior of out of bounds accesses made to uniform buffers when no robustness features are enabled */
+    /** @return the value of the {@code defaultRobustnessUniformBuffers} field. */
     @NativeType("VkPipelineRobustnessBufferBehavior")
     public int defaultRobustnessUniformBuffers() { return ndefaultRobustnessUniformBuffers(address()); }
-    /** describes the behavior of out of bounds accesses made to vertex input attributes when no robustness features are enabled */
+    /** @return the value of the {@code defaultRobustnessVertexInputs} field. */
     @NativeType("VkPipelineRobustnessBufferBehavior")
     public int defaultRobustnessVertexInputs() { return ndefaultRobustnessVertexInputs(address()); }
-    /** describes the behavior of out of bounds accesses made to images when no robustness features are enabled */
+    /** @return the value of the {@code defaultRobustnessImages} field. */
     @NativeType("VkPipelineRobustnessImageBehavior")
     public int defaultRobustnessImages() { return ndefaultRobustnessImages(address()); }
-    /** an integer related to the number of image layouts for host copies from images available or queried, as described below. */
+    /** @return the value of the {@code copySrcLayoutCount} field. */
     @NativeType("uint32_t")
     public int copySrcLayoutCount() { return ncopySrcLayoutCount(address()); }
-    /** a pointer to an array of {@code VkImageLayout} in which supported image layouts for use with host copy operations from images are returned. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCopySrcLayouts} field. */
     @NativeType("VkImageLayout *")
     public @Nullable IntBuffer pCopySrcLayouts() { return npCopySrcLayouts(address()); }
-    /** an integer related to the number of image layouts for host copies to images available or queried, as described below. */
+    /** @return the value of the {@code copyDstLayoutCount} field. */
     @NativeType("uint32_t")
     public int copyDstLayoutCount() { return ncopyDstLayoutCount(address()); }
-    /** a pointer to an array of {@code VkImageLayout} in which supported image layouts for use with host copy operations to images are returned. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCopyDstLayouts} field. */
     @NativeType("VkImageLayout *")
     public @Nullable IntBuffer pCopyDstLayouts() { return npCopyDstLayouts(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the implementation’s swizzling layout of images created with {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. */
+    /** @return a {@link ByteBuffer} view of the {@code optimalTilingLayoutUUID} field. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer optimalTilingLayoutUUID() { return noptimalTilingLayoutUUID(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the implementation’s swizzling layout of images created with {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. */
+    /** @return the value at the specified index of the {@code optimalTilingLayoutUUID} field. */
     @NativeType("uint8_t")
     public byte optimalTilingLayoutUUID(int index) { return noptimalTilingLayoutUUID(address(), index); }
-    /** indicates that specifying the {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} flag in {@link VkImageCreateInfo}{@code ::usage} does not affect the memory type requirements of the image. */
+    /** @return the value of the {@code identicalMemoryTypeRequirements} field. */
     @NativeType("VkBool32")
     public boolean identicalMemoryTypeRequirements() { return nidenticalMemoryTypeRequirements(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceVulkan14Properties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceVulkan14Properties sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceVulkan14Properties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -522,96 +506,96 @@ public class VkPhysicalDeviceVulkan14Properties extends Struct<VkPhysicalDeviceV
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVulkan14Properties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVulkan14Properties.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#lineSubPixelPrecisionBits} field. */
+        /** @return the value of the {@code lineSubPixelPrecisionBits} field. */
         @NativeType("uint32_t")
         public int lineSubPixelPrecisionBits() { return VkPhysicalDeviceVulkan14Properties.nlineSubPixelPrecisionBits(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#maxVertexAttribDivisor} field. */
+        /** @return the value of the {@code maxVertexAttribDivisor} field. */
         @NativeType("uint32_t")
         public int maxVertexAttribDivisor() { return VkPhysicalDeviceVulkan14Properties.nmaxVertexAttribDivisor(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#supportsNonZeroFirstInstance} field. */
+        /** @return the value of the {@code supportsNonZeroFirstInstance} field. */
         @NativeType("VkBool32")
         public boolean supportsNonZeroFirstInstance() { return VkPhysicalDeviceVulkan14Properties.nsupportsNonZeroFirstInstance(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#maxPushDescriptors} field. */
+        /** @return the value of the {@code maxPushDescriptors} field. */
         @NativeType("uint32_t")
         public int maxPushDescriptors() { return VkPhysicalDeviceVulkan14Properties.nmaxPushDescriptors(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#dynamicRenderingLocalReadDepthStencilAttachments} field. */
+        /** @return the value of the {@code dynamicRenderingLocalReadDepthStencilAttachments} field. */
         @NativeType("VkBool32")
         public boolean dynamicRenderingLocalReadDepthStencilAttachments() { return VkPhysicalDeviceVulkan14Properties.ndynamicRenderingLocalReadDepthStencilAttachments(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#dynamicRenderingLocalReadMultisampledAttachments} field. */
+        /** @return the value of the {@code dynamicRenderingLocalReadMultisampledAttachments} field. */
         @NativeType("VkBool32")
         public boolean dynamicRenderingLocalReadMultisampledAttachments() { return VkPhysicalDeviceVulkan14Properties.ndynamicRenderingLocalReadMultisampledAttachments(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#earlyFragmentMultisampleCoverageAfterSampleCounting} field. */
+        /** @return the value of the {@code earlyFragmentMultisampleCoverageAfterSampleCounting} field. */
         @NativeType("VkBool32")
         public boolean earlyFragmentMultisampleCoverageAfterSampleCounting() { return VkPhysicalDeviceVulkan14Properties.nearlyFragmentMultisampleCoverageAfterSampleCounting(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#earlyFragmentSampleMaskTestBeforeSampleCounting} field. */
+        /** @return the value of the {@code earlyFragmentSampleMaskTestBeforeSampleCounting} field. */
         @NativeType("VkBool32")
         public boolean earlyFragmentSampleMaskTestBeforeSampleCounting() { return VkPhysicalDeviceVulkan14Properties.nearlyFragmentSampleMaskTestBeforeSampleCounting(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#depthStencilSwizzleOneSupport} field. */
+        /** @return the value of the {@code depthStencilSwizzleOneSupport} field. */
         @NativeType("VkBool32")
         public boolean depthStencilSwizzleOneSupport() { return VkPhysicalDeviceVulkan14Properties.ndepthStencilSwizzleOneSupport(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#polygonModePointSize} field. */
+        /** @return the value of the {@code polygonModePointSize} field. */
         @NativeType("VkBool32")
         public boolean polygonModePointSize() { return VkPhysicalDeviceVulkan14Properties.npolygonModePointSize(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#nonStrictSinglePixelWideLinesUseParallelogram} field. */
+        /** @return the value of the {@code nonStrictSinglePixelWideLinesUseParallelogram} field. */
         @NativeType("VkBool32")
         public boolean nonStrictSinglePixelWideLinesUseParallelogram() { return VkPhysicalDeviceVulkan14Properties.nnonStrictSinglePixelWideLinesUseParallelogram(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#nonStrictWideLinesUseParallelogram} field. */
+        /** @return the value of the {@code nonStrictWideLinesUseParallelogram} field. */
         @NativeType("VkBool32")
         public boolean nonStrictWideLinesUseParallelogram() { return VkPhysicalDeviceVulkan14Properties.nnonStrictWideLinesUseParallelogram(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#blockTexelViewCompatibleMultipleLayers} field. */
+        /** @return the value of the {@code blockTexelViewCompatibleMultipleLayers} field. */
         @NativeType("VkBool32")
         public boolean blockTexelViewCompatibleMultipleLayers() { return VkPhysicalDeviceVulkan14Properties.nblockTexelViewCompatibleMultipleLayers(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#maxCombinedImageSamplerDescriptorCount} field. */
+        /** @return the value of the {@code maxCombinedImageSamplerDescriptorCount} field. */
         @NativeType("uint32_t")
         public int maxCombinedImageSamplerDescriptorCount() { return VkPhysicalDeviceVulkan14Properties.nmaxCombinedImageSamplerDescriptorCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#fragmentShadingRateClampCombinerInputs} field. */
+        /** @return the value of the {@code fragmentShadingRateClampCombinerInputs} field. */
         @NativeType("VkBool32")
         public boolean fragmentShadingRateClampCombinerInputs() { return VkPhysicalDeviceVulkan14Properties.nfragmentShadingRateClampCombinerInputs(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#defaultRobustnessStorageBuffers} field. */
+        /** @return the value of the {@code defaultRobustnessStorageBuffers} field. */
         @NativeType("VkPipelineRobustnessBufferBehavior")
         public int defaultRobustnessStorageBuffers() { return VkPhysicalDeviceVulkan14Properties.ndefaultRobustnessStorageBuffers(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#defaultRobustnessUniformBuffers} field. */
+        /** @return the value of the {@code defaultRobustnessUniformBuffers} field. */
         @NativeType("VkPipelineRobustnessBufferBehavior")
         public int defaultRobustnessUniformBuffers() { return VkPhysicalDeviceVulkan14Properties.ndefaultRobustnessUniformBuffers(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#defaultRobustnessVertexInputs} field. */
+        /** @return the value of the {@code defaultRobustnessVertexInputs} field. */
         @NativeType("VkPipelineRobustnessBufferBehavior")
         public int defaultRobustnessVertexInputs() { return VkPhysicalDeviceVulkan14Properties.ndefaultRobustnessVertexInputs(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#defaultRobustnessImages} field. */
+        /** @return the value of the {@code defaultRobustnessImages} field. */
         @NativeType("VkPipelineRobustnessImageBehavior")
         public int defaultRobustnessImages() { return VkPhysicalDeviceVulkan14Properties.ndefaultRobustnessImages(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#copySrcLayoutCount} field. */
+        /** @return the value of the {@code copySrcLayoutCount} field. */
         @NativeType("uint32_t")
         public int copySrcLayoutCount() { return VkPhysicalDeviceVulkan14Properties.ncopySrcLayoutCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPhysicalDeviceVulkan14Properties#pCopySrcLayouts} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCopySrcLayouts} field. */
         @NativeType("VkImageLayout *")
         public @Nullable IntBuffer pCopySrcLayouts() { return VkPhysicalDeviceVulkan14Properties.npCopySrcLayouts(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#copyDstLayoutCount} field. */
+        /** @return the value of the {@code copyDstLayoutCount} field. */
         @NativeType("uint32_t")
         public int copyDstLayoutCount() { return VkPhysicalDeviceVulkan14Properties.ncopyDstLayoutCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPhysicalDeviceVulkan14Properties#pCopyDstLayouts} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCopyDstLayouts} field. */
         @NativeType("VkImageLayout *")
         public @Nullable IntBuffer pCopyDstLayouts() { return VkPhysicalDeviceVulkan14Properties.npCopyDstLayouts(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceVulkan14Properties#optimalTilingLayoutUUID} field. */
+        /** @return a {@link ByteBuffer} view of the {@code optimalTilingLayoutUUID} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer optimalTilingLayoutUUID() { return VkPhysicalDeviceVulkan14Properties.noptimalTilingLayoutUUID(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceVulkan14Properties#optimalTilingLayoutUUID} field. */
+        /** @return the value at the specified index of the {@code optimalTilingLayoutUUID} field. */
         @NativeType("uint8_t")
         public byte optimalTilingLayoutUUID(int index) { return VkPhysicalDeviceVulkan14Properties.noptimalTilingLayoutUUID(address(), index); }
-        /** @return the value of the {@link VkPhysicalDeviceVulkan14Properties#identicalMemoryTypeRequirements} field. */
+        /** @return the value of the {@code identicalMemoryTypeRequirements} field. */
         @NativeType("VkBool32")
         public boolean identicalMemoryTypeRequirements() { return VkPhysicalDeviceVulkan14Properties.nidenticalMemoryTypeRequirements(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Properties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceVulkan14Properties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVulkan14Properties.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES} value to the {@link VkPhysicalDeviceVulkan14Properties#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceVulkan14Properties.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_4_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVulkan14Properties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceVulkan14Properties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVulkan14Properties.npNext(address(), value); return this; }
 
     }

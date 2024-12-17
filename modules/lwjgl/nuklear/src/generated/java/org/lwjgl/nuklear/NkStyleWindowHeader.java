@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_style_window_header {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -31,11 +29,11 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkColor struct nk_color} label_normal;
  *     {@link NkColor struct nk_color} label_hover;
  *     {@link NkColor struct nk_color} label_active;
- *     enum nk_style_header_align {@link #align};
+ *     enum nk_style_header_align align;
  *     {@link NkVec2 struct nk_vec2} padding;
  *     {@link NkVec2 struct nk_vec2} label_padding;
  *     {@link NkVec2 struct nk_vec2} spacing;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_style_window_header")
 public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements NativeResource {
@@ -158,7 +156,7 @@ public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements 
     /** @return a {@link NkColor} view of the {@code label_active} field. */
     @NativeType("struct nk_color")
     public NkColor label_active() { return nlabel_active(address()); }
-    /** one of:<br><table><tr><td>{@link Nuklear#NK_HEADER_LEFT HEADER_LEFT}</td><td>{@link Nuklear#NK_HEADER_RIGHT HEADER_RIGHT}</td></tr></table> */
+    /** @return the value of the {@code align} field. */
     @NativeType("enum nk_style_header_align")
     public int align() { return nalign(address()); }
     /** @return a {@link NkVec2} view of the {@code padding} field. */
@@ -209,7 +207,7 @@ public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements 
     public NkStyleWindowHeader label_active(@NativeType("struct nk_color") NkColor value) { nlabel_active(address(), value); return this; }
     /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleWindowHeader label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
-    /** Sets the specified value to the {@link #align} field. */
+    /** Sets the specified value to the {@code align} field. */
     public NkStyleWindowHeader align(@NativeType("enum nk_style_header_align") int value) { nalign(address(), value); return this; }
     /** Copies the specified {@link NkVec2} to the {@code padding} field. */
     public NkStyleWindowHeader padding(@NativeType("struct nk_vec2") NkVec2 value) { npadding(address(), value); return this; }
@@ -541,7 +539,7 @@ public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements 
         /** @return a {@link NkColor} view of the {@code label_active} field. */
         @NativeType("struct nk_color")
         public NkColor label_active() { return NkStyleWindowHeader.nlabel_active(address()); }
-        /** @return the value of the {@link NkStyleWindowHeader#align} field. */
+        /** @return the value of the {@code align} field. */
         @NativeType("enum nk_style_header_align")
         public int align() { return NkStyleWindowHeader.nalign(address()); }
         /** @return a {@link NkVec2} view of the {@code padding} field. */
@@ -592,7 +590,7 @@ public class NkStyleWindowHeader extends Struct<NkStyleWindowHeader> implements 
         public NkStyleWindowHeader.Buffer label_active(@NativeType("struct nk_color") NkColor value) { NkStyleWindowHeader.nlabel_active(address(), value); return this; }
         /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleWindowHeader.Buffer label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
-        /** Sets the specified value to the {@link NkStyleWindowHeader#align} field. */
+        /** Sets the specified value to the {@code align} field. */
         public NkStyleWindowHeader.Buffer align(@NativeType("enum nk_style_header_align") int value) { NkStyleWindowHeader.nalign(address(), value); return this; }
         /** Copies the specified {@link NkVec2} to the {@code padding} field. */
         public NkStyleWindowHeader.Buffer padding(@NativeType("struct nk_vec2") NkVec2 value) { NkStyleWindowHeader.npadding(address(), value); return this; }

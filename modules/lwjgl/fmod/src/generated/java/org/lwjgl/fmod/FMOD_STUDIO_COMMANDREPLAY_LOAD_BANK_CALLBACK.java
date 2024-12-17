@@ -11,20 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_STUDIO_COMMANDREPLAY *replay,
- *     int commandindex,
- *     FMOD_GUID const *bankguid,
- *     char const *bankfilename,
- *     FMOD_STUDIO_LOAD_BANK_FLAGS flags,
- *     FMOD_STUDIO_BANK **bank,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK} */
 public abstract class FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK extends Callback implements FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI {
 
     /**

@@ -16,7 +16,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.nanovg.NanoVG.*;
 
-/** Implementation of the NanoVG API using bgfx. */
 public class NanoVGBGFX {
 
     /** Contains the function pointers loaded from bgfx. */
@@ -39,15 +38,6 @@ public class NanoVGBGFX {
 
     }
 
-    /**
-     * These are additional flags on top of NVGimageFlags.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #NVG_IMAGE_NODELETE IMAGE_NODELETE} - Do not delete GL texture handle.</li>
-     * </ul>
-     */
     public static final int NVG_IMAGE_NODELETE = 1<<16;
 
     static {
@@ -67,11 +57,13 @@ public class NanoVGBGFX {
 
     // --- [ nvgCreate ] ---
 
+    /** {@code NVGcontext * nvgCreate(int32_t _edgeaa, bgfx_view_id_t _viewId, bgfx_allocator_interface_t * _allocator)} */
     public static long nnvgCreate(int _edgeaa, short _viewId, long _allocator) {
         long __functionAddress = Functions.Create;
         return invokeCPP(_edgeaa, _viewId, _allocator, __functionAddress);
     }
 
+    /** {@code NVGcontext * nvgCreate(int32_t _edgeaa, bgfx_view_id_t _viewId, bgfx_allocator_interface_t * _allocator)} */
     @NativeType("NVGcontext *")
     public static long nvgCreate(@NativeType("int32_t") boolean _edgeaa, @NativeType("bgfx_view_id_t") int _viewId, @NativeType("bgfx_allocator_interface_t *") long _allocator) {
         return nnvgCreate(_edgeaa ? 1 : 0, (short)_viewId, _allocator);
@@ -79,6 +71,7 @@ public class NanoVGBGFX {
 
     // --- [ nvgDelete ] ---
 
+    /** {@code void nvgDelete(NVGcontext * _ctx)} */
     public static void nvgDelete(@NativeType("NVGcontext *") long _ctx) {
         long __functionAddress = Functions.Delete;
         if (CHECKS) {
@@ -89,6 +82,7 @@ public class NanoVGBGFX {
 
     // --- [ nvgSetViewId ] ---
 
+    /** {@code void nvgSetViewId(NVGcontext * _ctx, bgfx_view_id_t _viewId)} */
     public static void nnvgSetViewId(long _ctx, short _viewId) {
         long __functionAddress = Functions.SetViewId;
         if (CHECKS) {
@@ -97,12 +91,14 @@ public class NanoVGBGFX {
         invokePCV(_ctx, _viewId, __functionAddress);
     }
 
+    /** {@code void nvgSetViewId(NVGcontext * _ctx, bgfx_view_id_t _viewId)} */
     public static void nvgSetViewId(@NativeType("NVGcontext *") long _ctx, @NativeType("bgfx_view_id_t") int _viewId) {
         nnvgSetViewId(_ctx, (short)_viewId);
     }
 
     // --- [ nvgGetViewId ] ---
 
+    /** {@code uint16_t nvgGetViewId(NVGcontext * _ctx)} */
     @NativeType("uint16_t")
     public static short nvgGetViewId(@NativeType("NVGcontext *") long _ctx) {
         long __functionAddress = Functions.GetViewId;
@@ -114,6 +110,7 @@ public class NanoVGBGFX {
 
     // --- [ nvgluCreateFramebuffer ] ---
 
+    /** {@code NVGLUframebuffer * nvgluCreateFramebuffer(NVGcontext * _ctx, int32_t _width, int32_t _height, int32_t imageFlags)} */
     public static long nnvgluCreateFramebuffer(long _ctx, int _width, int _height, int imageFlags) {
         long __functionAddress = Functions.luCreateFramebuffer;
         if (CHECKS) {
@@ -122,6 +119,7 @@ public class NanoVGBGFX {
         return invokePP(_ctx, _width, _height, imageFlags, __functionAddress);
     }
 
+    /** {@code NVGLUframebuffer * nvgluCreateFramebuffer(NVGcontext * _ctx, int32_t _width, int32_t _height, int32_t imageFlags)} */
     @NativeType("NVGLUframebuffer *")
     public static @Nullable NVGLUFramebufferBGFX nvgluCreateFramebuffer(@NativeType("NVGcontext *") long _ctx, @NativeType("int32_t") int _width, @NativeType("int32_t") int _height, @NativeType("int32_t") int imageFlags) {
         long __result = nnvgluCreateFramebuffer(_ctx, _width, _height, imageFlags);
@@ -130,39 +128,46 @@ public class NanoVGBGFX {
 
     // --- [ nvgluBindFramebuffer ] ---
 
+    /** {@code void nvgluBindFramebuffer(NVGLUframebuffer * _framebuffer)} */
     public static void nnvgluBindFramebuffer(long _framebuffer) {
         long __functionAddress = Functions.luBindFramebuffer;
         invokePV(_framebuffer, __functionAddress);
     }
 
+    /** {@code void nvgluBindFramebuffer(NVGLUframebuffer * _framebuffer)} */
     public static void nvgluBindFramebuffer(@NativeType("NVGLUframebuffer *") @Nullable NVGLUFramebufferBGFX _framebuffer) {
         nnvgluBindFramebuffer(memAddressSafe(_framebuffer));
     }
 
     // --- [ nvgluDeleteFramebuffer ] ---
 
+    /** {@code void nvgluDeleteFramebuffer(NVGLUframebuffer * _framebuffer)} */
     public static void nnvgluDeleteFramebuffer(long _framebuffer) {
         long __functionAddress = Functions.luDeleteFramebuffer;
         invokePV(_framebuffer, __functionAddress);
     }
 
+    /** {@code void nvgluDeleteFramebuffer(NVGLUframebuffer * _framebuffer)} */
     public static void nvgluDeleteFramebuffer(@NativeType("NVGLUframebuffer *") NVGLUFramebufferBGFX _framebuffer) {
         nnvgluDeleteFramebuffer(_framebuffer.address());
     }
 
     // --- [ nvgluSetViewFramebuffer ] ---
 
+    /** {@code void nvgluSetViewFramebuffer(bgfx_view_id_t _view_id, NVGLUframebuffer * _framebuffer)} */
     public static void nnvgluSetViewFramebuffer(short _view_id, long _framebuffer) {
         long __functionAddress = Functions.luSetViewFramebuffer;
         invokeCPV(_view_id, _framebuffer, __functionAddress);
     }
 
+    /** {@code void nvgluSetViewFramebuffer(bgfx_view_id_t _view_id, NVGLUframebuffer * _framebuffer)} */
     public static void nvgluSetViewFramebuffer(@NativeType("bgfx_view_id_t") int _view_id, @NativeType("NVGLUframebuffer *") NVGLUFramebufferBGFX _framebuffer) {
         nnvgluSetViewFramebuffer((short)_view_id, _framebuffer.address());
     }
 
     // --- [ nvgCreateBgfxTexture ] ---
 
+    /** {@code void nvgCreateBgfxTexture(NVGcontext * _ctx, bgfx_texture_handle_t _id, int _width, int _height, int flags)} */
     public static void nvgCreateBgfxTexture(@NativeType("NVGcontext *") long _ctx, @NativeType("bgfx_texture_handle_t") short _id, int _width, int _height, int flags) {
         long __functionAddress = Functions.CreateBgfxTexture;
         if (CHECKS) {
@@ -173,6 +178,7 @@ public class NanoVGBGFX {
 
     // --- [ org_lwjgl_nanovg_setup ] ---
 
+    /** {@code void org_lwjgl_nanovg_setup(void * realloc, void * free, void * nvgCreateInternal, void * nvgInternalParams, void * nvgDeleteInternal)} */
     private static void org_lwjgl_nanovg_setup(@NativeType("void *") long realloc, @NativeType("void *") long free, @NativeType("void *") long nvgCreateInternal, @NativeType("void *") long nvgInternalParams, @NativeType("void *") long nvgDeleteInternal) {
         long __functionAddress = Functions.org_lwjgl_nanovg_setup;
         if (CHECKS) {

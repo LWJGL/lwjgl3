@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrGraphicsRequirementsVulkanKHR}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGraphicsRequirementsVulkan2KHR {
  *     XrStructureType type;
  *     void * next;
  *     XrVersion minApiVersionSupported;
  *     XrVersion maxApiVersionSupported;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrGraphicsRequirementsVulkan2KHR extends XrGraphicsRequirementsVulkanKHR {
 

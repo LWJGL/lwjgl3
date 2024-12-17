@@ -16,30 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents a point of 3D space.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is used for component values that may be fractional (floating-point). If used to represent physical distances, values must be in meters.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using {@link XrOffset3DfFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrRect3DfFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrOffset3DfFB {
- *     float {@link #x};
- *     float {@link #y};
- *     float {@link #z};
- * }</code></pre>
+ *     float x;
+ *     float y;
+ *     float z;
+ * }}</pre>
  */
 public class XrOffset3DfFB extends Struct<XrOffset3DfFB> implements NativeResource {
 
@@ -92,18 +74,18 @@ public class XrOffset3DfFB extends Struct<XrOffset3DfFB> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the floating-point offset in the x direction. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** the floating-point offset in the y direction. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** the floating-point offset in the z direction. */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public XrOffset3DfFB x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public XrOffset3DfFB y(float value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@link #z} field. */
+    /** Sets the specified value to the {@code z} field. */
     public XrOffset3DfFB z(float value) { nz(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,18 +281,18 @@ public class XrOffset3DfFB extends Struct<XrOffset3DfFB> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrOffset3DfFB#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return XrOffset3DfFB.nx(address()); }
-        /** @return the value of the {@link XrOffset3DfFB#y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return XrOffset3DfFB.ny(address()); }
-        /** @return the value of the {@link XrOffset3DfFB#z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return XrOffset3DfFB.nz(address()); }
 
-        /** Sets the specified value to the {@link XrOffset3DfFB#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public XrOffset3DfFB.Buffer x(float value) { XrOffset3DfFB.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link XrOffset3DfFB#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public XrOffset3DfFB.Buffer y(float value) { XrOffset3DfFB.ny(address(), value); return this; }
-        /** Sets the specified value to the {@link XrOffset3DfFB#z} field. */
+        /** Sets the specified value to the {@code z} field. */
         public XrOffset3DfFB.Buffer z(float value) { XrOffset3DfFB.nz(address(), value); return this; }
 
     }

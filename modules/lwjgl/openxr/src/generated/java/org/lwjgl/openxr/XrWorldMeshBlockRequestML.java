@@ -16,30 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Block Request Info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshBlockRequestML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML TYPE_WORLD_MESH_BLOCK_REQUEST_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code lod} <b>must</b> be a valid {@code XrWorldMeshDetectorLodML} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}, {@link XrWorldMeshGetInfoML}, {@link MLWorldMeshDetection#xrRequestWorldMeshAsyncML RequestWorldMeshAsyncML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshBlockRequestML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrUuidEXT XrUuidEXT} {@link #uuid};
- *     XrWorldMeshDetectorLodML {@link #lod};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrUuidEXT XrUuidEXT} uuid;
+ *     XrWorldMeshDetectorLodML lod;
+ * }}</pre>
  */
 public class XrWorldMeshBlockRequestML extends Struct<XrWorldMeshBlockRequestML> implements NativeResource {
 
@@ -95,29 +78,29 @@ public class XrWorldMeshBlockRequestML extends Struct<XrWorldMeshBlockRequestML>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@link XrUuidEXT} of the mesh block to retrieve. */
+    /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
     public XrUuidEXT uuid() { return nuuid(address()); }
-    /** the {@code XrWorldMeshDetectorLodML} level of detail of the mesh to retrieve. */
+    /** @return the value of the {@code lod} field. */
     @NativeType("XrWorldMeshDetectorLodML")
     public int lod() { return nlod(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshBlockRequestML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML TYPE_WORLD_MESH_BLOCK_REQUEST_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML TYPE_WORLD_MESH_BLOCK_REQUEST_ML} value to the {@code type} field. */
     public XrWorldMeshBlockRequestML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshBlockRequestML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrUuidEXT} to the {@link #uuid} field. */
+    /** Copies the specified {@link XrUuidEXT} to the {@code uuid} field. */
     public XrWorldMeshBlockRequestML uuid(XrUuidEXT value) { nuuid(address(), value); return this; }
-    /** Passes the {@link #uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrWorldMeshBlockRequestML uuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(uuid()); return this; }
-    /** Sets the specified value to the {@link #lod} field. */
+    /** Sets the specified value to the {@code lod} field. */
     public XrWorldMeshBlockRequestML lod(@NativeType("XrWorldMeshDetectorLodML") int value) { nlod(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,29 +302,29 @@ public class XrWorldMeshBlockRequestML extends Struct<XrWorldMeshBlockRequestML>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshBlockRequestML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshBlockRequestML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshBlockRequestML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrWorldMeshBlockRequestML.nnext(address()); }
-        /** @return a {@link XrUuidEXT} view of the {@link XrWorldMeshBlockRequestML#uuid} field. */
+        /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
         public XrUuidEXT uuid() { return XrWorldMeshBlockRequestML.nuuid(address()); }
-        /** @return the value of the {@link XrWorldMeshBlockRequestML#lod} field. */
+        /** @return the value of the {@code lod} field. */
         @NativeType("XrWorldMeshDetectorLodML")
         public int lod() { return XrWorldMeshBlockRequestML.nlod(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshBlockRequestML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshBlockRequestML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshBlockRequestML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML TYPE_WORLD_MESH_BLOCK_REQUEST_ML} value to the {@link XrWorldMeshBlockRequestML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML TYPE_WORLD_MESH_BLOCK_REQUEST_ML} value to the {@code type} field. */
         public XrWorldMeshBlockRequestML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshBlockRequestML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshBlockRequestML.Buffer next(@NativeType("void *") long value) { XrWorldMeshBlockRequestML.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrUuidEXT} to the {@link XrWorldMeshBlockRequestML#uuid} field. */
+        /** Copies the specified {@link XrUuidEXT} to the {@code uuid} field. */
         public XrWorldMeshBlockRequestML.Buffer uuid(XrUuidEXT value) { XrWorldMeshBlockRequestML.nuuid(address(), value); return this; }
-        /** Passes the {@link XrWorldMeshBlockRequestML#uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrWorldMeshBlockRequestML.Buffer uuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(uuid()); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshBlockRequestML#lod} field. */
+        /** Sets the specified value to the {@code lod} field. */
         public XrWorldMeshBlockRequestML.Buffer lod(@NativeType("XrWorldMeshDetectorLodML") int value) { XrWorldMeshBlockRequestML.nlod(address(), value); return this; }
 
     }

@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ZSTD_bounds {
  *     size_t error;
  *     int lowerBound;
  *     int upperBound;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct ZSTD_bounds")
 public class ZSTDBounds extends Struct<ZSTDBounds> implements NativeResource {

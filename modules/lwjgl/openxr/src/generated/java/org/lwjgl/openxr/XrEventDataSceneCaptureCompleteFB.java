@@ -16,30 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event which occurs after a scene capture operation completes.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrEventDataSceneCaptureCompleteFB} structure is used by an application to instruct the system what to look for during a scene capture.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSceneCapture XR_FB_scene_capture} extension <b>must</b> be enabled prior to using {@link XrEventDataSceneCaptureCompleteFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSceneCapture#XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataSceneCaptureCompleteFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrAsyncRequestIdFB {@link #requestId};
- *     XrResult {@link #result};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrAsyncRequestIdFB requestId;
+ *     XrResult result;
+ * }}</pre>
  */
 public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCaptureCompleteFB> implements NativeResource {
 
@@ -95,28 +78,28 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the ID of the asynchronous query request. */
+    /** @return the value of the {@code requestId} field. */
     @NativeType("XrAsyncRequestIdFB")
     public long requestId() { return nrequestId(address()); }
-    /** an {@code XrResult} that indicates if the request succeeded or if an error occurred. */
+    /** @return the value of the {@code result} field. */
     @NativeType("XrResult")
     public int result() { return nresult(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataSceneCaptureCompleteFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSceneCapture#XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSceneCapture#XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB} value to the {@code type} field. */
     public XrEventDataSceneCaptureCompleteFB type$Default() { return type(FBSceneCapture.XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataSceneCaptureCompleteFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #requestId} field. */
+    /** Sets the specified value to the {@code requestId} field. */
     public XrEventDataSceneCaptureCompleteFB requestId(@NativeType("XrAsyncRequestIdFB") long value) { nrequestId(address(), value); return this; }
-    /** Sets the specified value to the {@link #result} field. */
+    /** Sets the specified value to the {@code result} field. */
     public XrEventDataSceneCaptureCompleteFB result(@NativeType("XrResult") int value) { nresult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,28 +301,28 @@ public class XrEventDataSceneCaptureCompleteFB extends Struct<XrEventDataSceneCa
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataSceneCaptureCompleteFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataSceneCaptureCompleteFB.ntype(address()); }
-        /** @return the value of the {@link XrEventDataSceneCaptureCompleteFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataSceneCaptureCompleteFB.nnext(address()); }
-        /** @return the value of the {@link XrEventDataSceneCaptureCompleteFB#requestId} field. */
+        /** @return the value of the {@code requestId} field. */
         @NativeType("XrAsyncRequestIdFB")
         public long requestId() { return XrEventDataSceneCaptureCompleteFB.nrequestId(address()); }
-        /** @return the value of the {@link XrEventDataSceneCaptureCompleteFB#result} field. */
+        /** @return the value of the {@code result} field. */
         @NativeType("XrResult")
         public int result() { return XrEventDataSceneCaptureCompleteFB.nresult(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataSceneCaptureCompleteFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataSceneCaptureCompleteFB.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataSceneCaptureCompleteFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSceneCapture#XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB} value to the {@link XrEventDataSceneCaptureCompleteFB#type} field. */
+        /** Sets the {@link FBSceneCapture#XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB} value to the {@code type} field. */
         public XrEventDataSceneCaptureCompleteFB.Buffer type$Default() { return type(FBSceneCapture.XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB); }
-        /** Sets the specified value to the {@link XrEventDataSceneCaptureCompleteFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataSceneCaptureCompleteFB.Buffer next(@NativeType("void const *") long value) { XrEventDataSceneCaptureCompleteFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataSceneCaptureCompleteFB#requestId} field. */
+        /** Sets the specified value to the {@code requestId} field. */
         public XrEventDataSceneCaptureCompleteFB.Buffer requestId(@NativeType("XrAsyncRequestIdFB") long value) { XrEventDataSceneCaptureCompleteFB.nrequestId(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataSceneCaptureCompleteFB#result} field. */
+        /** Sets the specified value to the {@code result} field. */
         public XrEventDataSceneCaptureCompleteFB.Buffer result(@NativeType("XrResult") int value) { XrEventDataSceneCaptureCompleteFB.nresult(address(), value); return this; }
 
     }

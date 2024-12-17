@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     FMOD_DEBUG_FLAGS level,
- *     char const *file,
- *     int line,
- *     char const *function,
- *     char const *str
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_LOG_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_DSP_LOG_FUNC")
 public interface FMOD_DSP_LOG_FUNCI extends CallbackI {
@@ -48,6 +37,7 @@ public interface FMOD_DSP_LOG_FUNCI extends CallbackI {
         );
     }
 
+    /** {@code void (* FMOD_DSP_LOG_FUNC) (FMOD_DEBUG_FLAGS level, char const * file, int line, char const * function, char const * str)} */
     void invoke(@NativeType("FMOD_DEBUG_FLAGS") int level, @NativeType("char const *") long file, int line, @NativeType("char const *") long function, @NativeType("char const *") long str);
 
 }

@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH264PpsFlags {
  *     uint32_t transform_8x8_mode_flag : 1;
  *     uint32_t redundant_pic_cnt_present_flag : 1;
@@ -28,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t bottom_field_pic_order_in_frame_present_flag : 1;
  *     uint32_t entropy_coding_mode_flag : 1;
  *     uint32_t pic_scaling_matrix_present_flag : 1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH264PpsFlags extends Struct<StdVideoH264PpsFlags> implements NativeResource {
 

@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUmemAllocationProp {
  *     CUmemAllocationType type;
  *     CUmemAllocationHandleType requestedHandleTypes;
@@ -31,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         unsigned short usage;
  *         unsigned char reserved[4];
  *     } allocFlags;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUmemAllocationProp extends Struct<CUmemAllocationProp> implements NativeResource {
 

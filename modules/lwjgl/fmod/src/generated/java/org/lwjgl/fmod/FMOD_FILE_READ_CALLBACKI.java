@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     void *handle,
- *     void *buffer,
- *     unsigned int sizebytes,
- *     unsigned int *bytesread,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_FILE_READ_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_FILE_READ_CALLBACK")
 public interface FMOD_FILE_READ_CALLBACKI extends CallbackI {
@@ -49,6 +38,7 @@ public interface FMOD_FILE_READ_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_FILE_READ_CALLBACK) (void * handle, void * buffer, unsigned int sizebytes, unsigned int * bytesread, void * userdata)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("void *") long handle, @NativeType("void *") long buffer, @NativeType("unsigned int") int sizebytes, @NativeType("unsigned int *") long bytesread, @NativeType("void *") long userdata);
 
 }

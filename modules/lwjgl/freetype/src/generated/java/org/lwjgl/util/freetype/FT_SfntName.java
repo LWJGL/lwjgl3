@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_SfntName {
  *     FT_UShort platform_id;
  *     FT_UShort encoding_id;
@@ -26,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FT_UShort name_id;
  *     FT_Byte * string;
  *     FT_UInt string_len;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_SfntName extends Struct<FT_SfntName> implements NativeResource {
 

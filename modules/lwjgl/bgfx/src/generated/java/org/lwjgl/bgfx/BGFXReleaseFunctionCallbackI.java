@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link BGFX#bgfx_make_ref_release make_ref_release} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *_ptr,
- *     void *_userData
- * )</code></pre>
- */
+/** Callback function: {@link #invoke bgfx_release_fn_t} */
 @FunctionalInterface
 @NativeType("bgfx_release_fn_t")
 public interface BGFXReleaseFunctionCallbackI extends CallbackI {
@@ -44,12 +34,7 @@ public interface BGFXReleaseFunctionCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Memory release callback.
-     *
-     * @param _ptr      pointer to allocated data
-     * @param _userData user defined data if needed
-     */
+    /** {@code void (* bgfx_release_fn_t) (void * _ptr, void * _userData)} */
     void invoke(@NativeType("void *") long _ptr, @NativeType("void *") long _userData);
 
 }

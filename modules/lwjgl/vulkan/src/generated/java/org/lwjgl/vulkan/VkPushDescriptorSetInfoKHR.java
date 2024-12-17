@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPushDescriptorSetInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPushDescriptorSetInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t set;
  *     uint32_t descriptorWriteCount;
  *     {@link VkWriteDescriptorSet VkWriteDescriptorSet} const * pDescriptorWrites;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPushDescriptorSetInfoKHR extends VkPushDescriptorSetInfo {
 

@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMTransforms#LLVMAddInternalizePassWithMustPreservePredicate AddInternalizePassWithMustPreservePredicate} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LLVMBool (*{@link #invoke}) (
- *     LLVMValueRef Val,
- *     void *Context
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class LLVMMustPreserve extends Callback implements LLVMMustPreserveI {
 
     /**

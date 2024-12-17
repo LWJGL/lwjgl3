@@ -16,37 +16,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Properties of the physical device for ray tracing.
- * 
- * <h5>Description</h5>
- * 
- * <p>Due to the fact that the geometry, instance, and triangle counts are specified at acceleration structure creation as 32-bit values, {@code maxGeometryCount}, {@code maxInstanceCount}, and {@code maxTriangleCount} <b>must</b> not exceed <code>2<sup>32</sup>-1</code>.</p>
- * 
- * <p>If the {@link VkPhysicalDeviceRayTracingPropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <p>Limits specified by this structure <b>must</b> match those specified with the same name in {@link VkPhysicalDeviceAccelerationStructurePropertiesKHR} and {@link VkPhysicalDeviceRayTracingPipelinePropertiesKHR}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVRayTracing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceRayTracingPropertiesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #shaderGroupHandleSize};
- *     uint32_t {@link #maxRecursionDepth};
- *     uint32_t {@link #maxShaderGroupStride};
- *     uint32_t {@link #shaderGroupBaseAlignment};
- *     uint64_t {@link #maxGeometryCount};
- *     uint64_t {@link #maxInstanceCount};
- *     uint64_t {@link #maxTriangleCount};
- *     uint32_t {@link #maxDescriptorSetAccelerationStructures};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t shaderGroupHandleSize;
+ *     uint32_t maxRecursionDepth;
+ *     uint32_t maxShaderGroupStride;
+ *     uint32_t shaderGroupBaseAlignment;
+ *     uint64_t maxGeometryCount;
+ *     uint64_t maxInstanceCount;
+ *     uint64_t maxTriangleCount;
+ *     uint32_t maxDescriptorSetAccelerationStructures;
+ * }}</pre>
  */
 public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct<VkPhysicalDeviceRayTracingPropertiesNV> implements NativeResource {
 
@@ -120,42 +102,42 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct<VkPhysicalDev
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the size in bytes of the shader header. */
+    /** @return the value of the {@code shaderGroupHandleSize} field. */
     @NativeType("uint32_t")
     public int shaderGroupHandleSize() { return nshaderGroupHandleSize(address()); }
-    /** the maximum number of levels of recursion allowed in a trace command. */
+    /** @return the value of the {@code maxRecursionDepth} field. */
     @NativeType("uint32_t")
     public int maxRecursionDepth() { return nmaxRecursionDepth(address()); }
-    /** the maximum stride in bytes allowed between shader groups in the shader binding table. */
+    /** @return the value of the {@code maxShaderGroupStride} field. */
     @NativeType("uint32_t")
     public int maxShaderGroupStride() { return nmaxShaderGroupStride(address()); }
-    /** the <b>required</b> alignment in bytes for the base of the shader binding table. */
+    /** @return the value of the {@code shaderGroupBaseAlignment} field. */
     @NativeType("uint32_t")
     public int shaderGroupBaseAlignment() { return nshaderGroupBaseAlignment(address()); }
-    /** the maximum number of geometries in the bottom level acceleration structure. */
+    /** @return the value of the {@code maxGeometryCount} field. */
     @NativeType("uint64_t")
     public long maxGeometryCount() { return nmaxGeometryCount(address()); }
-    /** the maximum number of instances in the top level acceleration structure. */
+    /** @return the value of the {@code maxInstanceCount} field. */
     @NativeType("uint64_t")
     public long maxInstanceCount() { return nmaxInstanceCount(address()); }
-    /** the maximum number of triangles in all geometries in the bottom level acceleration structure. */
+    /** @return the value of the {@code maxTriangleCount} field. */
     @NativeType("uint64_t")
     public long maxTriangleCount() { return nmaxTriangleCount(address()); }
-    /** the maximum number of acceleration structure descriptors that are allowed in a descriptor set. */
+    /** @return the value of the {@code maxDescriptorSetAccelerationStructures} field. */
     @NativeType("uint32_t")
     public int maxDescriptorSetAccelerationStructures() { return nmaxDescriptorSetAccelerationStructures(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceRayTracingPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceRayTracingPropertiesNV sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceRayTracingPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -380,42 +362,42 @@ public class VkPhysicalDeviceRayTracingPropertiesNV extends Struct<VkPhysicalDev
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceRayTracingPropertiesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRayTracingPropertiesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#shaderGroupHandleSize} field. */
+        /** @return the value of the {@code shaderGroupHandleSize} field. */
         @NativeType("uint32_t")
         public int shaderGroupHandleSize() { return VkPhysicalDeviceRayTracingPropertiesNV.nshaderGroupHandleSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#maxRecursionDepth} field. */
+        /** @return the value of the {@code maxRecursionDepth} field. */
         @NativeType("uint32_t")
         public int maxRecursionDepth() { return VkPhysicalDeviceRayTracingPropertiesNV.nmaxRecursionDepth(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#maxShaderGroupStride} field. */
+        /** @return the value of the {@code maxShaderGroupStride} field. */
         @NativeType("uint32_t")
         public int maxShaderGroupStride() { return VkPhysicalDeviceRayTracingPropertiesNV.nmaxShaderGroupStride(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#shaderGroupBaseAlignment} field. */
+        /** @return the value of the {@code shaderGroupBaseAlignment} field. */
         @NativeType("uint32_t")
         public int shaderGroupBaseAlignment() { return VkPhysicalDeviceRayTracingPropertiesNV.nshaderGroupBaseAlignment(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#maxGeometryCount} field. */
+        /** @return the value of the {@code maxGeometryCount} field. */
         @NativeType("uint64_t")
         public long maxGeometryCount() { return VkPhysicalDeviceRayTracingPropertiesNV.nmaxGeometryCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#maxInstanceCount} field. */
+        /** @return the value of the {@code maxInstanceCount} field. */
         @NativeType("uint64_t")
         public long maxInstanceCount() { return VkPhysicalDeviceRayTracingPropertiesNV.nmaxInstanceCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#maxTriangleCount} field. */
+        /** @return the value of the {@code maxTriangleCount} field. */
         @NativeType("uint64_t")
         public long maxTriangleCount() { return VkPhysicalDeviceRayTracingPropertiesNV.nmaxTriangleCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingPropertiesNV#maxDescriptorSetAccelerationStructures} field. */
+        /** @return the value of the {@code maxDescriptorSetAccelerationStructures} field. */
         @NativeType("uint32_t")
         public int maxDescriptorSetAccelerationStructures() { return VkPhysicalDeviceRayTracingPropertiesNV.nmaxDescriptorSetAccelerationStructures(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPropertiesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceRayTracingPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayTracingPropertiesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV} value to the {@link VkPhysicalDeviceRayTracingPropertiesNV#sType} field. */
+        /** Sets the {@link NVRayTracing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceRayTracingPropertiesNV.Buffer sType$Default() { return sType(NVRayTracing.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingPropertiesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceRayTracingPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayTracingPropertiesNV.npNext(address(), value); return this; }
 
     }

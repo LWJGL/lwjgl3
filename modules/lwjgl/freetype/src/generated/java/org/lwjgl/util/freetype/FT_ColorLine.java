@@ -14,15 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code ColorLine} value of the {@code COLR} v1 extensions.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_ColorLine {
  *     FT_PaintExtend extend;
  *     {@link FT_ColorStopIterator FT_ColorStopIterator} color_stop_iterator;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_ColorLine extends Struct<FT_ColorLine> {
 

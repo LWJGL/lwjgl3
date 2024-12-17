@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH264SequenceParameterSetVui {
  *     {@link StdVideoH264SpsVuiFlags StdVideoH264SpsVuiFlags} flags;
  *     StdVideoH264AspectRatioIdc aspect_ratio_idc;
@@ -36,8 +34,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint8_t chroma_sample_loc_type_top_field;
  *     uint8_t chroma_sample_loc_type_bottom_field;
  *     uint32_t reserved1;
- *     {@link StdVideoH264HrdParameters StdVideoH264HrdParameters} const * {@link #pHrdParameters};
- * }</code></pre>
+ *     {@link StdVideoH264HrdParameters StdVideoH264HrdParameters} const * pHrdParameters;
+ * }}</pre>
  */
 public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264SequenceParameterSetVui> implements NativeResource {
 
@@ -170,7 +168,7 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
     /** @return the value of the {@code chroma_sample_loc_type_bottom_field} field. */
     @NativeType("uint8_t")
     public byte chroma_sample_loc_type_bottom_field() { return nchroma_sample_loc_type_bottom_field(address()); }
-    /** must be a valid {@code ptr} to {@code hrd_parameters}, if {@code nal_hrd_parameters_present_flag} or {@code vcl_hrd_parameters_present_flag} are set */
+    /** @return a {@link StdVideoH264HrdParameters} view of the struct pointed to by the {@code pHrdParameters} field. */
     @NativeType("StdVideoH264HrdParameters const *")
     public StdVideoH264HrdParameters pHrdParameters() { return npHrdParameters(address()); }
 
@@ -204,7 +202,7 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
     public StdVideoH264SequenceParameterSetVui chroma_sample_loc_type_top_field(@NativeType("uint8_t") byte value) { nchroma_sample_loc_type_top_field(address(), value); return this; }
     /** Sets the specified value to the {@code chroma_sample_loc_type_bottom_field} field. */
     public StdVideoH264SequenceParameterSetVui chroma_sample_loc_type_bottom_field(@NativeType("uint8_t") byte value) { nchroma_sample_loc_type_bottom_field(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH264HrdParameters} to the {@link #pHrdParameters} field. */
+    /** Sets the address of the specified {@link StdVideoH264HrdParameters} to the {@code pHrdParameters} field. */
     public StdVideoH264SequenceParameterSetVui pHrdParameters(@NativeType("StdVideoH264HrdParameters const *") StdVideoH264HrdParameters value) { npHrdParameters(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -524,7 +522,7 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
         /** @return the value of the {@code chroma_sample_loc_type_bottom_field} field. */
         @NativeType("uint8_t")
         public byte chroma_sample_loc_type_bottom_field() { return StdVideoH264SequenceParameterSetVui.nchroma_sample_loc_type_bottom_field(address()); }
-        /** @return a {@link StdVideoH264HrdParameters} view of the struct pointed to by the {@link StdVideoH264SequenceParameterSetVui#pHrdParameters} field. */
+        /** @return a {@link StdVideoH264HrdParameters} view of the struct pointed to by the {@code pHrdParameters} field. */
         @NativeType("StdVideoH264HrdParameters const *")
         public StdVideoH264HrdParameters pHrdParameters() { return StdVideoH264SequenceParameterSetVui.npHrdParameters(address()); }
 
@@ -558,7 +556,7 @@ public class StdVideoH264SequenceParameterSetVui extends Struct<StdVideoH264Sequ
         public StdVideoH264SequenceParameterSetVui.Buffer chroma_sample_loc_type_top_field(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.nchroma_sample_loc_type_top_field(address(), value); return this; }
         /** Sets the specified value to the {@code chroma_sample_loc_type_bottom_field} field. */
         public StdVideoH264SequenceParameterSetVui.Buffer chroma_sample_loc_type_bottom_field(@NativeType("uint8_t") byte value) { StdVideoH264SequenceParameterSetVui.nchroma_sample_loc_type_bottom_field(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH264HrdParameters} to the {@link StdVideoH264SequenceParameterSetVui#pHrdParameters} field. */
+        /** Sets the address of the specified {@link StdVideoH264HrdParameters} to the {@code pHrdParameters} field. */
         public StdVideoH264SequenceParameterSetVui.Buffer pHrdParameters(@NativeType("StdVideoH264HrdParameters const *") StdVideoH264HrdParameters value) { StdVideoH264SequenceParameterSetVui.npHrdParameters(address(), value); return this; }
 
     }

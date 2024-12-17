@@ -16,40 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Contains information of a blend shape.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrFacialExpressionBlendShapePropertiesML} structure holds the facial expression.</p>
- * 
- * <p>If {@code requestedFacialBlendShape} does not correspond to any {@code XrFacialBlendShapeML} passed into {@link MLFacialExpression#xrCreateFacialExpressionClientML CreateFacialExpressionClientML} then the {@link MLFacialExpression#XR_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_VALID_BIT_ML FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_VALID_BIT_ML} and {@link MLFacialExpression#XR_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_TRACKED_BIT_ML FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_TRACKED_BIT_ML} of {@code flags} <b>must</b> be unset. If the {@code requestedFacialBlendShape} is not available at sample time {@code time} then {@link MLFacialExpression#XR_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_TRACKED_BIT_ML FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_TRACKED_BIT_ML} <b>must</b> be set to false.</p>
- * 
- * <p>The runtime <b>must</b> populate {@code weight} with the weight of the queried blend shape.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLFacialExpression XR_ML_facial_expression} extension <b>must</b> be enabled prior to using {@link XrFacialExpressionBlendShapePropertiesML}</li>
- * <li>{@code type} <b>must</b> be {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code requestedFacialBlendShape} <b>must</b> be a valid {@code XrFacialBlendShapeML} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLFacialExpression#xrCreateFacialExpressionClientML CreateFacialExpressionClientML}, {@link MLFacialExpression#xrGetFacialExpressionBlendShapePropertiesML GetFacialExpressionBlendShapePropertiesML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFacialExpressionBlendShapePropertiesML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrFacialBlendShapeML {@link #requestedFacialBlendShape};
- *     float {@link #weight};
- *     XrFacialExpressionBlendShapePropertiesFlagsML {@link #flags};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrFacialBlendShapeML requestedFacialBlendShape;
+ *     float weight;
+ *     XrFacialExpressionBlendShapePropertiesFlagsML flags;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrFacialExpressionBlendShapePropertiesML extends Struct<XrFacialExpressionBlendShapePropertiesML> implements NativeResource {
 
@@ -111,37 +86,37 @@ public class XrFacialExpressionBlendShapePropertiesML extends Struct<XrFacialExp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the type of {@code XrFacialBlendShapeML} to query the runtime for. */
+    /** @return the value of the {@code requestedFacialBlendShape} field. */
     @NativeType("XrFacialBlendShapeML")
     public int requestedFacialBlendShape() { return nrequestedFacialBlendShape(address()); }
-    /** a {@code float} describing the weight of a facial expression’s blend shape. */
+    /** @return the value of the {@code weight} field. */
     public float weight() { return nweight(address()); }
-    /** an {@code XrFacialExpressionBlendShapePropertiesFlagsML} whose bits are specified in {@code XrFacialExpressionBlendShapePropertiesFlagBitsML} */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrFacialExpressionBlendShapePropertiesFlagsML")
     public long flags() { return nflags(address()); }
-    /** the {@code XrTime} that corresponds to the moment at which the {@code requestedFacialBlendShape} is captured. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFacialExpressionBlendShapePropertiesML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML} value to the {@code type} field. */
     public XrFacialExpressionBlendShapePropertiesML type$Default() { return type(MLFacialExpression.XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFacialExpressionBlendShapePropertiesML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #requestedFacialBlendShape} field. */
+    /** Sets the specified value to the {@code requestedFacialBlendShape} field. */
     public XrFacialExpressionBlendShapePropertiesML requestedFacialBlendShape(@NativeType("XrFacialBlendShapeML") int value) { nrequestedFacialBlendShape(address(), value); return this; }
-    /** Sets the specified value to the {@link #weight} field. */
+    /** Sets the specified value to the {@code weight} field. */
     public XrFacialExpressionBlendShapePropertiesML weight(float value) { nweight(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public XrFacialExpressionBlendShapePropertiesML flags(@NativeType("XrFacialExpressionBlendShapePropertiesFlagsML") long value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrFacialExpressionBlendShapePropertiesML time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -355,37 +330,37 @@ public class XrFacialExpressionBlendShapePropertiesML extends Struct<XrFacialExp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFacialExpressionBlendShapePropertiesML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFacialExpressionBlendShapePropertiesML.ntype(address()); }
-        /** @return the value of the {@link XrFacialExpressionBlendShapePropertiesML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrFacialExpressionBlendShapePropertiesML.nnext(address()); }
-        /** @return the value of the {@link XrFacialExpressionBlendShapePropertiesML#requestedFacialBlendShape} field. */
+        /** @return the value of the {@code requestedFacialBlendShape} field. */
         @NativeType("XrFacialBlendShapeML")
         public int requestedFacialBlendShape() { return XrFacialExpressionBlendShapePropertiesML.nrequestedFacialBlendShape(address()); }
-        /** @return the value of the {@link XrFacialExpressionBlendShapePropertiesML#weight} field. */
+        /** @return the value of the {@code weight} field. */
         public float weight() { return XrFacialExpressionBlendShapePropertiesML.nweight(address()); }
-        /** @return the value of the {@link XrFacialExpressionBlendShapePropertiesML#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrFacialExpressionBlendShapePropertiesFlagsML")
         public long flags() { return XrFacialExpressionBlendShapePropertiesML.nflags(address()); }
-        /** @return the value of the {@link XrFacialExpressionBlendShapePropertiesML#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrFacialExpressionBlendShapePropertiesML.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrFacialExpressionBlendShapePropertiesML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFacialExpressionBlendShapePropertiesML.Buffer type(@NativeType("XrStructureType") int value) { XrFacialExpressionBlendShapePropertiesML.ntype(address(), value); return this; }
-        /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML} value to the {@link XrFacialExpressionBlendShapePropertiesML#type} field. */
+        /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML} value to the {@code type} field. */
         public XrFacialExpressionBlendShapePropertiesML.Buffer type$Default() { return type(MLFacialExpression.XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML); }
-        /** Sets the specified value to the {@link XrFacialExpressionBlendShapePropertiesML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFacialExpressionBlendShapePropertiesML.Buffer next(@NativeType("void *") long value) { XrFacialExpressionBlendShapePropertiesML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFacialExpressionBlendShapePropertiesML#requestedFacialBlendShape} field. */
+        /** Sets the specified value to the {@code requestedFacialBlendShape} field. */
         public XrFacialExpressionBlendShapePropertiesML.Buffer requestedFacialBlendShape(@NativeType("XrFacialBlendShapeML") int value) { XrFacialExpressionBlendShapePropertiesML.nrequestedFacialBlendShape(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFacialExpressionBlendShapePropertiesML#weight} field. */
+        /** Sets the specified value to the {@code weight} field. */
         public XrFacialExpressionBlendShapePropertiesML.Buffer weight(float value) { XrFacialExpressionBlendShapePropertiesML.nweight(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFacialExpressionBlendShapePropertiesML#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public XrFacialExpressionBlendShapePropertiesML.Buffer flags(@NativeType("XrFacialExpressionBlendShapePropertiesFlagsML") long value) { XrFacialExpressionBlendShapePropertiesML.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFacialExpressionBlendShapePropertiesML#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrFacialExpressionBlendShapePropertiesML.Buffer time(@NativeType("XrTime") long value) { XrFacialExpressionBlendShapePropertiesML.ntime(address(), value); return this; }
 
     }

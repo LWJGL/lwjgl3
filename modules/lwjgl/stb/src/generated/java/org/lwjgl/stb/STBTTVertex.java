@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Vertex data.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct stbtt_vertex {
  *     stbtt_vertex_type x;
  *     stbtt_vertex_type y;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     stbtt_vertex_type cx1;
  *     stbtt_vertex_type cy1;
  *     unsigned char type;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct stbtt_vertex")
 public class STBTTVertex extends Struct<STBTTVertex> implements NativeResource {

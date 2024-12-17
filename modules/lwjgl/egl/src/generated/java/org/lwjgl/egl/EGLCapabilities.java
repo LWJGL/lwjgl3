@@ -11,7 +11,6 @@ import java.util.Set;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the capabilities of an EGLDisplay or the EGL client library. */
 public class EGLCapabilities {
 
     public final long
@@ -165,438 +164,321 @@ public class EGLCapabilities {
         eglQueryWaylandBufferWL,
         eglCreateWaylandBufferFromImageWL;
 
-    /** When true, {@link EGL10} is supported. */
+    /** When true, {@code EGL10} is supported. */
     public final boolean EGL10;
-    /** When true, {@link EGL11} is supported. */
+    /** When true, {@code EGL11} is supported. */
     public final boolean EGL11;
-    /** When true, {@link EGL12} is supported. */
+    /** When true, {@code EGL12} is supported. */
     public final boolean EGL12;
-    /** When true, {@link EGL13} is supported. */
+    /** When true, {@code EGL13} is supported. */
     public final boolean EGL13;
-    /** When true, {@link EGL14} is supported. */
+    /** When true, {@code EGL14} is supported. */
     public final boolean EGL14;
-    /** When true, {@link EGL15} is supported. */
+    /** When true, {@code EGL15} is supported. */
     public final boolean EGL15;
-    /** When true, {@link ANDROIDBlobCache} is supported. */
+    /** When true, {@code ANDROID_blob_cache} is supported. */
     public final boolean EGL_ANDROID_blob_cache;
-    /** When true, {@link ANDROIDCreateNativeClientBuffer} is supported. */
+    /** When true, {@code ANDROID_create_native_client_buffer} is supported. */
     public final boolean EGL_ANDROID_create_native_client_buffer;
-    /** When true, {@link ANDROIDFramebufferTarget} is supported. */
+    /** When true, {@code ANDROID_framebuffer_target} is supported. */
     public final boolean EGL_ANDROID_framebuffer_target;
-    /** When true, {@link ANDROIDFrontBufferAutoRefresh} is supported. */
+    /** When true, {@code ANDROID_front_buffer_auto_refresh} is supported. */
     public final boolean EGL_ANDROID_front_buffer_auto_refresh;
-    /** When true, {@link ANDROIDImageNativeBuffer} is supported. */
+    /** When true, {@code ANDROID_image_native_buffer} is supported. */
     public final boolean EGL_ANDROID_image_native_buffer;
-    /** When true, {@link ANDROIDNativeFenceSync} is supported. */
+    /** When true, {@code ANDROID_native_fence_sync} is supported. */
     public final boolean EGL_ANDROID_native_fence_sync;
-    /** When true, {@link ANDROIDPresentationTime} is supported. */
+    /** When true, {@code ANDROID_presentation_time} is supported. */
     public final boolean EGL_ANDROID_presentation_time;
-    /** When true, {@link ANDROIDRecordable} is supported. */
+    /** When true, {@code ANDROID_recordable} is supported. */
     public final boolean EGL_ANDROID_recordable;
-    /** When true, {@link ANGLED3DShareHandleClientBuffer} is supported. */
+    /** When true, {@code ANGLE_d3d_share_handle_client_buffer} is supported. */
     public final boolean EGL_ANGLE_d3d_share_handle_client_buffer;
-    /** When true, {@link ANGLEDeviceD3D} is supported. */
+    /** When true, {@code ANGLE_device_d3d} is supported. */
     public final boolean EGL_ANGLE_device_d3d;
-    /** When true, {@link ANGLEQuerySurfacePointer} is supported. */
+    /** When true, {@code ANGLE_query_surface_pointer} is supported. */
     public final boolean EGL_ANGLE_query_surface_pointer;
-    /** When true, {@link ANGLESurfaceD3DTexture2DShareHandle} is supported. */
+    /** When true, {@code ANGLE_surface_d3d_texture_2d_share_handle} is supported. */
     public final boolean EGL_ANGLE_surface_d3d_texture_2d_share_handle;
-    /** When true, {@link ANGLESyncControlRate} is supported. */
+    /** When true, {@code ANGLE_sync_control_rate} is supported. */
     public final boolean EGL_ANGLE_sync_control_rate;
-    /** When true, {@link ANGLEWindowFixedSize} is supported. */
+    /** When true, {@code ANGLE_window_fixed_size} is supported. */
     public final boolean EGL_ANGLE_window_fixed_size;
-    /** When true, {@link ARMImageFormat} is supported. */
+    /** When true, {@code ARM_image_format} is supported. */
     public final boolean EGL_ARM_image_format;
-    /** When true, {@link ARMPixmapMultisampleDiscard} is supported. */
+    /** When true, {@code ARM_pixmap_multisample_discard} is supported. */
     public final boolean EGL_ARM_pixmap_multisample_discard;
-    /** When true, {@link EXTBindToFront} is supported. */
+    /** When true, {@code EXT_bind_to_front} is supported. */
     public final boolean EGL_EXT_bind_to_front;
-    /** When true, {@link EXTBufferAge} is supported. */
+    /** When true, {@code EXT_buffer_age} is supported. */
     public final boolean EGL_EXT_buffer_age;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_client_extensions.txt">EXT_client_extensions</a> extension is supported.
-     * 
-     * <p>This extension introduces the concept of *extension type*, requires that each EGL extension belong to exactly one type, and defines two types: display
-     * and client. It also provides a method to query, without initializing a display, the set of supported client extensions.</p>
-     * 
-     * <p>A display extension adds functionality to an individual EGLDisplay. This type of extension has always existed but, until EGL_EXT_client_extensions,
-     * lacked an identifying name.</p>
-     * 
-     * <p>A client extension adds functionality that is independent of any display. In other words, it adds functionality to the EGL client library itself. This
-     * is a new type of extension defined by EGL_EXT_client_extensions. EGL_EXT_client_extensions is itself a client extension.</p>
-     * 
-     * <p>We suggest that each future extension clearly state its type by including the following toplevel section in its extension specification, preceding the
-     * Dependencies section. For client extensions, this suggestion is a requirement.</p>
-     * 
-     * <pre><code>
-     *         Extension Type
-     * 
-     *             &lt;Either "EGL display extension" or "EGL client extension" or
-     *              a future extension type.&gt;</code></pre>
-     * 
-     * <p>By cleanly separating display extensions from client extensions, EGL_EXT_client_extensions solves a bootstrap problem for future EGL extensions that
-     * will modify display initialization. To query for such extensions without EGL_EXT_client_extensions, an EGL client would need to initialize a throw-away
-     * EGLDisplay solely to query its extension string. Initialization of the throw-away display may have undesired side-effects (discussed in the issues
-     * section below) for EGL clients that wish to use the new methods of display initialization.</p>
-     */
+    /** When true, {@code EXT_client_extensions} is supported. */
     public final boolean EGL_EXT_client_extensions;
-    /** When true, {@link EXTClientSync} is supported. */
+    /** When true, {@code EXT_client_sync} is supported. */
     public final boolean EGL_EXT_client_sync;
-    /** When true, {@link EXTCompositor} is supported. */
+    /** When true, {@code EXT_compositor} is supported. */
     public final boolean EGL_EXT_compositor;
-    /** When true, {@link EXTConfigSelectGroup} is supported. */
+    /** When true, {@code EXT_config_select_group} is supported. */
     public final boolean EGL_EXT_config_select_group;
-    /** When true, {@link EXTCreateContextRobustness} is supported. */
+    /** When true, {@code EXT_create_context_robustness} is supported. */
     public final boolean EGL_EXT_create_context_robustness;
-    /** When true, {@link EXTDeviceBase} is supported. */
+    /** When true, {@code EXT_device_base} is supported. */
     public final boolean EGL_EXT_device_base;
-    /** When true, {@link EXTDeviceDRM} is supported. */
+    /** When true, {@code EXT_device_drm} is supported. */
     public final boolean EGL_EXT_device_drm;
-    /** When true, {@link EXTDeviceDRMRenderNode} is supported. */
+    /** When true, {@code EXT_device_drm_render_node} is supported. */
     public final boolean EGL_EXT_device_drm_render_node;
-    /** When true, {@link EXTDeviceEnumeration} is supported. */
+    /** When true, {@code EXT_device_enumeration} is supported. */
     public final boolean EGL_EXT_device_enumeration;
-    /** When true, {@link EXTDeviceOpenWF} is supported. */
+    /** When true, {@code EXT_device_openwf} is supported. */
     public final boolean EGL_EXT_device_openwf;
-    /** When true, {@link EXTDevicePersistentID} is supported. */
+    /** When true, {@code EXT_device_persistent_id} is supported. */
     public final boolean EGL_EXT_device_persistent_id;
-    /** When true, {@link EXTDeviceQuery} is supported. */
+    /** When true, {@code EXT_device_query} is supported. */
     public final boolean EGL_EXT_device_query;
-    /** When true, {@link EXTDeviceQueryName} is supported. */
+    /** When true, {@code EXT_device_query_name} is supported. */
     public final boolean EGL_EXT_device_query_name;
-    /** When true, {@link EXTDisplayAlloc} is supported. */
+    /** When true, {@code EXT_display_alloc} is supported. */
     public final boolean EGL_EXT_display_alloc;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_explicit_device.txt">EXT_explicit_device</a> extension is supported.
-     * 
-     * <p>A system may support rendering with multiple devices for the same windowing system. In that case, an EGL implementation must select a default device
-     * based on the native display.</p>
-     * 
-     * <p>This extension allows an application to explicitly request a device to use for rendering instead of the implementation's default.</p>
-     * 
-     * <p>This differs from {@link EXTPlatformDevice EXT_platform_device} in that {@code EGL_EXT_platform_device} uses an {@code EGLDeviceEXT} instead of a native display. Thus,
-     * {@code EGL_EXT_platform_device} allows offscreen rendering to a pbuffer or FBO, but it does not require or use a windowing system, and thus does not
-     * allow pixmap or window surfaces.</p>
-     * 
-     * <p>Using {@code EGL_EXT_explicit_device} with {@code EGL_MESA_platform_surfaceless} is functionally identical to {@code EGL_EXT_platform_device}.</p>
-     */
+    /** When true, {@code EXT_explicit_device} is supported. */
     public final boolean EGL_EXT_explicit_device;
-    /** When true, {@link EXTGLColorspaceBT2020HLG} is supported. */
+    /** When true, {@code EXT_gl_colorspace_bt2020_hlg} is supported. */
     public final boolean EGL_EXT_gl_colorspace_bt2020_hlg;
-    /** When true, {@link EXTGLColorspaceBT2020Linear} is supported. */
+    /** When true, {@code EXT_gl_colorspace_bt2020_linear} is supported. */
     public final boolean EGL_EXT_gl_colorspace_bt2020_linear;
-    /** When true, {@link EXTGLColorspaceBT2020PQ} is supported. */
+    /** When true, {@code EXT_gl_colorspace_bt2020_pq} is supported. */
     public final boolean EGL_EXT_gl_colorspace_bt2020_pq;
-    /** When true, {@link EXTGLColorspaceDisplayP3} is supported. */
+    /** When true, {@code EXT_gl_colorspace_display_p3} is supported. */
     public final boolean EGL_EXT_gl_colorspace_display_p3;
-    /** When true, {@link EXTGLColorspaceDisplayP3Linear} is supported. */
+    /** When true, {@code EXT_gl_colorspace_display_p3_linear} is supported. */
     public final boolean EGL_EXT_gl_colorspace_display_p3_linear;
-    /** When true, {@link EXTGLColorspaceDisplayP3Passthrough} is supported. */
+    /** When true, {@code EXT_gl_colorspace_display_p3_passthrough} is supported. */
     public final boolean EGL_EXT_gl_colorspace_display_p3_passthrough;
-    /** When true, {@link EXTGLColorspaceSCRGB} is supported. */
+    /** When true, {@code EXT_gl_colorspace_scrgb} is supported. */
     public final boolean EGL_EXT_gl_colorspace_scrgb;
-    /** When true, {@link EXTGLColorspaceSCRGBLinear} is supported. */
+    /** When true, {@code EXT_gl_colorspace_scrgb_linear} is supported. */
     public final boolean EGL_EXT_gl_colorspace_scrgb_linear;
-    /** When true, {@link EXTImageDMABufImport} is supported. */
+    /** When true, {@code EXT_image_dma_buf_import} is supported. */
     public final boolean EGL_EXT_image_dma_buf_import;
-    /** When true, {@link EXTImageDMABufImportModifiers} is supported. */
+    /** When true, {@code EXT_image_dma_buf_import_modifiers} is supported. */
     public final boolean EGL_EXT_image_dma_buf_import_modifiers;
-    /** When true, {@link EXTImageGLColorspace} is supported. */
+    /** When true, {@code EXT_image_gl_colorspace} is supported. */
     public final boolean EGL_EXT_image_gl_colorspace;
-    /** When true, {@link EXTImageImplicitSyncControl} is supported. */
+    /** When true, {@code EXT_image_implicit_sync_control} is supported. */
     public final boolean EGL_EXT_image_implicit_sync_control;
-    /** When true, {@link EXTMultiviewWindow} is supported. */
+    /** When true, {@code EXT_multiview_window} is supported. */
     public final boolean EGL_EXT_multiview_window;
-    /** When true, {@link EXTOutputBase} is supported. */
+    /** When true, {@code EXT_output_base} is supported. */
     public final boolean EGL_EXT_output_base;
-    /** When true, {@link EXTOutputDRM} is supported. */
+    /** When true, {@code EXT_output_drm} is supported. */
     public final boolean EGL_EXT_output_drm;
-    /** When true, {@link EXTOutputOpenWF} is supported. */
+    /** When true, {@code EXT_output_openwf} is supported. */
     public final boolean EGL_EXT_output_openwf;
-    /** When true, {@link EXTPixelFormatFloat} is supported. */
+    /** When true, {@code EXT_pixel_format_float} is supported. */
     public final boolean EGL_EXT_pixel_format_float;
-    /** When true, {@link EXTPlatformBase} is supported. */
+    /** When true, {@code EXT_platform_base} is supported. */
     public final boolean EGL_EXT_platform_base;
-    /** When true, {@link EXTPlatformDevice} is supported. */
+    /** When true, {@code EXT_platform_device} is supported. */
     public final boolean EGL_EXT_platform_device;
-    /** When true, {@link EXTPlatformWayland} is supported. */
+    /** When true, {@code EXT_platform_wayland} is supported. */
     public final boolean EGL_EXT_platform_wayland;
-    /** When true, {@link EXTPlatformX11} is supported. */
+    /** When true, {@code EXT_platform_x11} is supported. */
     public final boolean EGL_EXT_platform_x11;
-    /** When true, {@link EXTPlatformXCB} is supported. */
+    /** When true, {@code EXT_platform_xcb} is supported. */
     public final boolean EGL_EXT_platform_xcb;
-    /** When true, {@link EXTPresentOpaque} is supported. */
+    /** When true, {@code EXT_present_opaque} is supported. */
     public final boolean EGL_EXT_present_opaque;
-    /** When true, {@link EXTProtectedContent} is supported. */
+    /** When true, {@code EXT_protected_content} is supported. */
     public final boolean EGL_EXT_protected_content;
-    /** When true, {@link EXTProtectedSurface} is supported. */
+    /** When true, {@code EXT_protected_surface} is supported. */
     public final boolean EGL_EXT_protected_surface;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_query_reset_notification_strategy.txt">EXT_query_reset_notification_strategy</a> extension is supported.
-     * 
-     * <p>This extension complements {@code EXT_create_context_robustness} and enables an application or framework to retrieve an existing context's reset
-     * notification strategy in order to create a compatible shared context.</p>
-     * 
-     * <p>Requires {@link EGL14 EGL 1.4} and {@link EXTCreateContextRobustness EXT_create_context_robustness}.</p>
-     */
+    /** When true, {@code EXT_query_reset_notification_strategy} is supported. */
     public final boolean EGL_EXT_query_reset_notification_strategy;
-    /** When true, {@link EXTStreamConsumerEGLOutput} is supported. */
+    /** When true, {@code EXT_stream_consumer_egloutput} is supported. */
     public final boolean EGL_EXT_stream_consumer_egloutput;
-    /** When true, {@link EXTSurfaceCompression} is supported. */
+    /** When true, {@code EXT_surface_compression} is supported. */
     public final boolean EGL_EXT_surface_compression;
-    /** When true, {@link EXTSurfaceCTA861_3Metadata} is supported. */
+    /** When true, {@code EXT_surface_CTA861_3_metadata} is supported. */
     public final boolean EGL_EXT_surface_CTA861_3_metadata;
-    /** When true, {@link EXTSurfaceSMPTE2086Metadata} is supported. */
+    /** When true, {@code EXT_surface_SMPTE2086_metadata} is supported. */
     public final boolean EGL_EXT_surface_SMPTE2086_metadata;
-    /** When true, {@link EXTSwapBuffersWithDamage} is supported. */
+    /** When true, {@code EXT_swap_buffers_with_damage} is supported. */
     public final boolean EGL_EXT_swap_buffers_with_damage;
-    /** When true, {@link EXTSyncReuse} is supported. */
+    /** When true, {@code EXT_sync_reuse} is supported. */
     public final boolean EGL_EXT_sync_reuse;
-    /** When true, {@link EXTYUVSurface} is supported. */
+    /** When true, {@code EXT_yuv_surface} is supported. */
     public final boolean EGL_EXT_yuv_surface;
-    /** When true, {@link HIClientpixmap} is supported. */
+    /** When true, {@code HI_clientpixmap} is supported. */
     public final boolean EGL_HI_clientpixmap;
-    /** When true, {@link HIColorformats} is supported. */
+    /** When true, {@code HI_colorformats} is supported. */
     public final boolean EGL_HI_colorformats;
-    /** When true, {@link IMGContextPriority} is supported. */
+    /** When true, {@code IMG_context_priority} is supported. */
     public final boolean EGL_IMG_context_priority;
-    /** When true, {@link IMGImagePlaneAttribs} is supported. */
+    /** When true, {@code IMG_image_plane_attribs} is supported. */
     public final boolean EGL_IMG_image_plane_attribs;
-    /** When true, {@link KHRCLEvent2} is supported. */
+    /** When true, {@code KHR_cl_event2} is supported. */
     public final boolean EGL_KHR_cl_event2;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_get_all_proc_addresses.txt">KHR_client_get_all_proc_addresses</a> extension is supported.
-     * 
-     * <p>eglGetProcAddress is currently defined to not support the querying of non-extension EGL or client API functions. Non-extension functions are expected
-     * to be exposed as library symbols that can be resolved statically at link time, or dynamically at run time using OS-specific runtime linking mechanisms.</p>
-     * 
-     * <p>With the addition of OpenGL and OpenGL ES 3 support to EGL, the definition of a non-extension function becomes less clear. It is common for one OpenGL
-     * library to implement many versions of OpenGL. The suggested library name for OpenGL ES 3 is the same as that of OpenGL ES 2. If OpenGL ES 3
-     * applications linked statically to OpenGL ES 3 functions are run on a system with only OpenGL ES 2 support, they may fail to load. Similar problems
-     * would be encountered by an application linking statically to various OpenGL functions.</p>
-     * 
-     * <p>To avoid requiring applications to fall back to OS-specific dynamic linking mechanisms, this extension drops the requirement that eglGetProcAddress
-     * return only non-extension functions. If the extension string is present, applications can query all EGL and client API functions using
-     * eglGetProcAddress.</p>
-     * 
-     * <p>To allow users to query this extension before initializing a display, and to also allow vendors to ship this extension without
-     * EGL_EXT_client_extensions, two names are assigned to this extension: one a display extension and the other a client extension. Identical functionality
-     * is exposed by each name, but users query each name using different methods. Users query EGL_KHR_get_all_proc_addresses in the usual way; that is, by
-     * calling eglQueryString(dpy, EGL_EXTENSIONS) on an initialized display. To query EGL_KHR_client_get_all_proc_addresses, users must use a different
-     * method which is described below in the section concerning EGL_EXT_client_extensions.</p>
-     * 
-     * <p>Requires {@link EGL12 EGL 1.2}.</p>
-     */
+    /** When true, {@code KHR_client_get_all_proc_addresses} is supported. */
     public final boolean EGL_KHR_client_get_all_proc_addresses;
-    /** When true, {@link KHRConfigAttribs} is supported. */
+    /** When true, {@code KHR_config_attribs} is supported. */
     public final boolean EGL_KHR_config_attribs;
-    /** When true, {@link KHRContextFlushControl} is supported. */
+    /** When true, {@code KHR_context_flush_control} is supported. */
     public final boolean EGL_KHR_context_flush_control;
-    /** When true, {@link KHRCreateContext} is supported. */
+    /** When true, {@code KHR_create_context} is supported. */
     public final boolean EGL_KHR_create_context;
-    /** When true, {@link KHRCreateContextNoError} is supported. */
+    /** When true, {@code KHR_create_context_no_error} is supported. */
     public final boolean EGL_KHR_create_context_no_error;
-    /** When true, {@link KHRDebug} is supported. */
+    /** When true, {@code KHR_debug} is supported. */
     public final boolean EGL_KHR_debug;
-    /** When true, {@link KHRDisplayReference} is supported. */
+    /** When true, {@code KHR_display_reference} is supported. */
     public final boolean EGL_KHR_display_reference;
-    /** When true, {@link KHRFenceSync} is supported. */
+    /** When true, {@code KHR_fence_sync} is supported. */
     public final boolean EGL_KHR_fence_sync;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_get_all_proc_addresses.txt">KHR_get_all_proc_addresses</a> extension is supported.
-     * 
-     * <p>eglGetProcAddress is currently defined to not support the querying of non-extension EGL or client API functions. Non-extension functions are expected
-     * to be exposed as library symbols that can be resolved statically at link time, or dynamically at run time using OS-specific runtime linking mechanisms.</p>
-     * 
-     * <p>With the addition of OpenGL and OpenGL ES 3 support to EGL, the definition of a non-extension function becomes less clear. It is common for one OpenGL
-     * library to implement many versions of OpenGL. The suggested library name for OpenGL ES 3 is the same as that of OpenGL ES 2. If OpenGL ES 3
-     * applications linked statically to OpenGL ES 3 functions are run on a system with only OpenGL ES 2 support, they may fail to load. Similar problems
-     * would be encountered by an application linking statically to various OpenGL functions.</p>
-     * 
-     * <p>To avoid requiring applications to fall back to OS-specific dynamic linking mechanisms, this extension drops the requirement that eglGetProcAddress
-     * return only non-extension functions. If the extension string is present, applications can query all EGL and client API functions using
-     * eglGetProcAddress.</p>
-     * 
-     * <p>To allow users to query this extension before initializing a display, and to also allow vendors to ship this extension without
-     * EGL_EXT_client_extensions, two names are assigned to this extension: one a display extension and the other a client extension. Identical functionality
-     * is exposed by each name, but users query each name using different methods. Users query EGL_KHR_get_all_proc_addresses in the usual way; that is, by
-     * calling eglQueryString(dpy, EGL_EXTENSIONS) on an initialized display. To query EGL_KHR_client_get_all_proc_addresses, users must use a different
-     * method which is described below in the section concerning EGL_EXT_client_extensions.</p>
-     * 
-     * <p>Requires {@link EGL12 EGL 1.2}.</p>
-     */
+    /** When true, {@code KHR_get_all_proc_addresses} is supported. */
     public final boolean EGL_KHR_get_all_proc_addresses;
-    /** When true, {@link KHRGLColorspace} is supported. */
+    /** When true, {@code KHR_gl_colorspace} is supported. */
     public final boolean EGL_KHR_gl_colorspace;
-    /** When true, {@link KHRGLRenderbufferImage} is supported. */
+    /** When true, {@code KHR_gl_renderbuffer_image} is supported. */
     public final boolean EGL_KHR_gl_renderbuffer_image;
-    /** When true, {@link KHRGLTexture2DImage} is supported. */
+    /** When true, {@code KHR_gl_texture_2D_image} is supported. */
     public final boolean EGL_KHR_gl_texture_2D_image;
-    /** When true, {@link KHRGLTexture3DImage} is supported. */
+    /** When true, {@code KHR_gl_texture_3D_image} is supported. */
     public final boolean EGL_KHR_gl_texture_3D_image;
-    /** When true, {@link KHRGLTextureCubemapImage} is supported. */
+    /** When true, {@code KHR_gl_texture_cubemap_image} is supported. */
     public final boolean EGL_KHR_gl_texture_cubemap_image;
-    /** When true, {@link KHRImage} is supported. */
+    /** When true, {@code KHR_image} is supported. */
     public final boolean EGL_KHR_image;
-    /** When true, {@link KHRImageBase} is supported. */
+    /** When true, {@code KHR_image_base} is supported. */
     public final boolean EGL_KHR_image_base;
-    /** When true, {@link KHRImagePixmap} is supported. */
+    /** When true, {@code KHR_image_pixmap} is supported. */
     public final boolean EGL_KHR_image_pixmap;
-    /** When true, {@link KHRLockSurface3} is supported. */
+    /** When true, {@code KHR_lock_surface3} is supported. */
     public final boolean EGL_KHR_lock_surface3;
-    /** When true, {@link KHRMutableRenderBuffer} is supported. */
+    /** When true, {@code KHR_mutable_render_buffer} is supported. */
     public final boolean EGL_KHR_mutable_render_buffer;
-    /** When true, {@link KHRNoConfigContext} is supported. */
+    /** When true, {@code KHR_no_config_context} is supported. */
     public final boolean EGL_KHR_no_config_context;
-    /** When true, {@link KHRPartialUpdate} is supported. */
+    /** When true, {@code KHR_partial_update} is supported. */
     public final boolean EGL_KHR_partial_update;
-    /** When true, {@link KHRPlatformAndroid} is supported. */
+    /** When true, {@code KHR_platform_android} is supported. */
     public final boolean EGL_KHR_platform_android;
-    /** When true, {@link KHRPlatformGBM} is supported. */
+    /** When true, {@code KHR_platform_gbm} is supported. */
     public final boolean EGL_KHR_platform_gbm;
-    /** When true, {@link KHRPlatformWayland} is supported. */
+    /** When true, {@code KHR_platform_wayland} is supported. */
     public final boolean EGL_KHR_platform_wayland;
-    /** When true, {@link KHRPlatformX11} is supported. */
+    /** When true, {@code KHR_platform_x11} is supported. */
     public final boolean EGL_KHR_platform_x11;
-    /** When true, {@link KHRReusableSync} is supported. */
+    /** When true, {@code KHR_reusable_sync} is supported. */
     public final boolean EGL_KHR_reusable_sync;
-    /** When true, {@link KHRStream} is supported. */
+    /** When true, {@code KHR_stream} is supported. */
     public final boolean EGL_KHR_stream;
-    /** When true, {@link KHRStreamAttrib} is supported. */
+    /** When true, {@code KHR_stream_attrib} is supported. */
     public final boolean EGL_KHR_stream_attrib;
-    /** When true, {@link KHRStreamConsumerGLTexture} is supported. */
+    /** When true, {@code KHR_stream_consumer_gltexture} is supported. */
     public final boolean EGL_KHR_stream_consumer_gltexture;
-    /** When true, {@link KHRStreamCrossProcessFD} is supported. */
+    /** When true, {@code KHR_stream_cross_process_fd} is supported. */
     public final boolean EGL_KHR_stream_cross_process_fd;
-    /** When true, {@link KHRStreamFIFO} is supported. */
+    /** When true, {@code KHR_stream_fifo} is supported. */
     public final boolean EGL_KHR_stream_fifo;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_stream_producer_aldatalocator.txt">KHR_stream_producer_aldatalocator</a> extension is supported.
-     * 
-     * <p>This extension (in conjunction with the OpenMAX_AL_EGLStream_DataLocator extension to OpenMAX AL) allows an OpenMAX AL MediaPlayer object to be
-     * connected as the producer of an EGLStream.</p>
-     * 
-     * <p>After the EGLStream is created and connected to a consumer, the OpenMAX AL MediaPlayer object is created by calling &lt;pEngine&gt;'s
-     * CreateMediaPlayer() method. The &lt;pImageVideoSnk&gt; argument points to an XADataLocator_EGLStream containing the EGLStreamKHR handle of the stream.
-     * The CreateMediaPlayer() method creates a MediaPlayer object and connects it as the producer of the EGLStream. (Note that the pFormat member of the
-     * XADataSink structure is ignored in this case and may be {@code NULL}.)</p>
-     * 
-     * <p>Once connected the MediaPlayer inserts image frames into the EGLStream.</p>
-     * 
-     * <p>Requires {@link EGL12 EGL 1.2} and {@link KHRStream KHR_stream}. Requires OpenMAX AL 1.1 and OpenMAX_AL_EGLStream_DataLocator.</p>
-     */
+    /** When true, {@code KHR_stream_producer_aldatalocator} is supported. */
     public final boolean EGL_KHR_stream_producer_aldatalocator;
-    /** When true, {@link KHRStreamProducerEGLSurface} is supported. */
+    /** When true, {@code KHR_stream_producer_eglsurface} is supported. */
     public final boolean EGL_KHR_stream_producer_eglsurface;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_surfaceless_context.txt">KHR_surfaceless_context</a> extension is supported.
-     * 
-     * <p>These extensions allows an application to make a context current by passing EGL_NO_SURFACE for the write and read surface in the call to
-     * eglMakeCurrent. The motivation is that applications that only want to render to client API targets (such as OpenGL framebuffer objects) should not need
-     * to create a throw-away EGL surface just to get a current context.</p>
-     * 
-     * <p>The state of an OpenGL ES context with no default framebuffer provided by EGL is the same as a context with an incomplete framebuffer object bound.</p>
-     */
+    /** When true, {@code KHR_surfaceless_context} is supported. */
     public final boolean EGL_KHR_surfaceless_context;
-    /** When true, {@link KHRSwapBuffersWithDamage} is supported. */
+    /** When true, {@code KHR_swap_buffers_with_damage} is supported. */
     public final boolean EGL_KHR_swap_buffers_with_damage;
-    /** When true, {@link KHRVGParentImage} is supported. */
+    /** When true, {@code KHR_vg_parent_image} is supported. */
     public final boolean EGL_KHR_vg_parent_image;
-    /** When true, {@link KHRWaitSync} is supported. */
+    /** When true, {@code KHR_wait_sync} is supported. */
     public final boolean EGL_KHR_wait_sync;
-    /** When true, {@link MESADRMImage} is supported. */
+    /** When true, {@code MESA_drm_image} is supported. */
     public final boolean EGL_MESA_drm_image;
-    /** When true, {@link MESAImageDMABufExport} is supported. */
+    /** When true, {@code MESA_image_dma_buf_export} is supported. */
     public final boolean EGL_MESA_image_dma_buf_export;
-    /** When true, {@link MESAPlatformGBM} is supported. */
+    /** When true, {@code MESA_platform_gbm} is supported. */
     public final boolean EGL_MESA_platform_gbm;
-    /** When true, {@link NOKSwapRegion2} is supported. */
+    /** When true, {@code NOK_swap_region2} is supported. */
     public final boolean EGL_NOK_swap_region2;
-    /** When true, {@link NOKTextureFromPixmap} is supported. */
+    /** When true, {@code NOK_texture_from_pixmap} is supported. */
     public final boolean EGL_NOK_texture_from_pixmap;
-    /** When true, {@link NV3dvisionSurface} is supported. */
+    /** When true, {@code NV_3dvision_surface} is supported. */
     public final boolean EGL_NV_3dvision_surface;
-    /** When true, {@link NVContextPriorityRealtime} is supported. */
+    /** When true, {@code NV_context_priority_realtime} is supported. */
     public final boolean EGL_NV_context_priority_realtime;
-    /** When true, {@link NVCoverageSample} is supported. */
+    /** When true, {@code NV_coverage_sample} is supported. */
     public final boolean EGL_NV_coverage_sample;
-    /** When true, {@link NVCoverageSampleResolve} is supported. */
+    /** When true, {@code NV_coverage_sample_resolve} is supported. */
     public final boolean EGL_NV_coverage_sample_resolve;
-    /** When true, {@link NVCUDAEvent} is supported. */
+    /** When true, {@code NV_cuda_event} is supported. */
     public final boolean EGL_NV_cuda_event;
-    /** When true, {@link NVDepthNonlinear} is supported. */
+    /** When true, {@code NV_depth_nonlinear} is supported. */
     public final boolean EGL_NV_depth_nonlinear;
-    /** When true, {@link NVDeviceCUDA} is supported. */
+    /** When true, {@code NV_device_cuda} is supported. */
     public final boolean EGL_NV_device_cuda;
-    /** When true, {@link NVNativeQuery} is supported. */
+    /** When true, {@code NV_native_query} is supported. */
     public final boolean EGL_NV_native_query;
-    /**
-     * When true, the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_post_convert_rounding.txt">NV_post_convert_rounding</a> extension is supported.
-     * 
-     * <p>This extension defines the conversions for posting operations when the destination's number of components or component sizes do not match the color
-     * buffer. This extension supports posting a 24 bit (888) color buffer to a 16 bit (565) destination buffer, posting a 16 bit (565) color buffer to a 24
-     * bit (888) destination buffer, and posting a component that is present in the source buffer, but not present in the destination buffer.</p>
-     */
+    /** When true, {@code NV_post_convert_rounding} is supported. */
     public final boolean EGL_NV_post_convert_rounding;
-    /** When true, {@link NVPostSubBuffer} is supported. */
+    /** When true, {@code NV_post_sub_buffer} is supported. */
     public final boolean EGL_NV_post_sub_buffer;
-    /** When true, {@link NVQuadrupleBuffer} is supported. */
+    /** When true, {@code NV_quadruple_buffer} is supported. */
     public final boolean EGL_NV_quadruple_buffer;
-    /** When true, {@link NVRobustnessVideoMemoryPurge} is supported. */
+    /** When true, {@code NV_robustness_video_memory_purge} is supported. */
     public final boolean EGL_NV_robustness_video_memory_purge;
-    /** When true, {@link NVStreamConsumerEGLImage} is supported. */
+    /** When true, {@code NV_stream_consumer_eglimage} is supported. */
     public final boolean EGL_NV_stream_consumer_eglimage;
-    /** When true, {@link NVStreamConsumerEGLImageUseScanoutAttrib} is supported. */
+    /** When true, {@code NV_stream_consumer_eglimage_use_scanout_attrib} is supported. */
     public final boolean EGL_NV_stream_consumer_eglimage_use_scanout_attrib;
-    /** When true, {@link NVStreamConsumerGLTextureYUV} is supported. */
+    /** When true, {@code NV_stream_consumer_gltexture_yuv} is supported. */
     public final boolean EGL_NV_stream_consumer_gltexture_yuv;
-    /** See {@link NVStreamRemote NV_stream_remote}. */
+    /** When true, {@code NV_stream_cross_display} is supported. */
     public final boolean EGL_NV_stream_cross_display;
-    /** See {@link NVStreamRemote NV_stream_remote}. */
+    /** When true, {@code NV_stream_cross_object} is supported. */
     public final boolean EGL_NV_stream_cross_object;
-    /** See {@link NVStreamRemote NV_stream_remote}. */
+    /** When true, {@code NV_stream_cross_partition} is supported. */
     public final boolean EGL_NV_stream_cross_partition;
-    /** See {@link NVStreamRemote NV_stream_remote}. */
+    /** When true, {@code NV_stream_cross_process} is supported. */
     public final boolean EGL_NV_stream_cross_process;
-    /** See {@link NVStreamRemote NV_stream_remote}. */
+    /** When true, {@code NV_stream_cross_system} is supported. */
     public final boolean EGL_NV_stream_cross_system;
-    /** When true, {@link NVStreamDMA} is supported. */
+    /** When true, {@code NV_stream_dma} is supported. */
     public final boolean EGL_NV_stream_dma;
-    /** When true, {@link NVStreamFIFONext} is supported. */
+    /** When true, {@code NV_stream_fifo_next} is supported. */
     public final boolean EGL_NV_stream_fifo_next;
-    /** When true, {@link NVStreamFIFOSynchronous} is supported. */
+    /** When true, {@code NV_stream_fifo_synchronous} is supported. */
     public final boolean EGL_NV_stream_fifo_synchronous;
-    /** When true, {@link NVStreamFlush} is supported. */
+    /** When true, {@code NV_stream_flush} is supported. */
     public final boolean EGL_NV_stream_flush;
-    /** When true, {@link NVStreamFrameLimits} is supported. */
+    /** When true, {@code NV_stream_frame_limits} is supported. */
     public final boolean EGL_NV_stream_frame_limits;
-    /** When true, {@link NVStreamMetadata} is supported. */
+    /** When true, {@code NV_stream_metadata} is supported. */
     public final boolean EGL_NV_stream_metadata;
-    /** When true, {@link NVStreamRemote} is supported. */
+    /** When true, {@code NV_stream_remote} is supported. */
     public final boolean EGL_NV_stream_remote;
-    /** When true, {@link NVStreamReset} is supported. */
+    /** When true, {@code NV_stream_reset} is supported. */
     public final boolean EGL_NV_stream_reset;
-    /** When true, {@link NVStreamSocket} is supported. */
+    /** When true, {@code NV_stream_socket} is supported. */
     public final boolean EGL_NV_stream_socket;
-    /** When true, {@link NVStreamSocketINet} is supported. */
+    /** When true, {@code NV_stream_socket_inet} is supported. */
     public final boolean EGL_NV_stream_socket_inet;
-    /** When true, {@link NVStreamSocketUnix} is supported. */
+    /** When true, {@code NV_stream_socket_unix} is supported. */
     public final boolean EGL_NV_stream_socket_unix;
-    /** When true, {@link NVStreamSync} is supported. */
+    /** When true, {@code NV_stream_sync} is supported. */
     public final boolean EGL_NV_stream_sync;
-    /** When true, {@link NVSync} is supported. */
+    /** When true, {@code NV_sync} is supported. */
     public final boolean EGL_NV_sync;
-    /** When true, {@link NVSystemTime} is supported. */
+    /** When true, {@code NV_system_time} is supported. */
     public final boolean EGL_NV_system_time;
-    /** When true, {@link NVTripleBuffer} is supported. */
+    /** When true, {@code NV_triple_buffer} is supported. */
     public final boolean EGL_NV_triple_buffer;
-    /** When true, {@link TIZENImageNativeBuffer} is supported. */
+    /** When true, {@code TIZEN_image_native_buffer} is supported. */
     public final boolean EGL_TIZEN_image_native_buffer;
-    /** When true, {@link TIZENImageNativeSurface} is supported. */
+    /** When true, {@code TIZEN_image_native_surface} is supported. */
     public final boolean EGL_TIZEN_image_native_surface;
-    /** When true, {@link WLBindWaylandDisplay} is supported. */
+    /** When true, {@code WL_bind_wayland_display} is supported. */
     public final boolean EGL_WL_bind_wayland_display;
-    /** When true, {@link WLCreateWaylandBufferFromImage} is supported. */
+    /** When true, {@code WL_create_wayland_buffer_from_image} is supported. */
     public final boolean EGL_WL_create_wayland_buffer_from_image;
 
     EGLCapabilities(FunctionProvider provider, Set<String> ext) {

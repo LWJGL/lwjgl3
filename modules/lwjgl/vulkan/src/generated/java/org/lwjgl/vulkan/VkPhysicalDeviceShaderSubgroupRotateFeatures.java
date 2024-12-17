@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether subgroup rotation is enabled.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderSubgroupRotateFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderSubgroupRotateFeatures {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderSubgroupRotate};
- *     VkBool32 {@link #shaderSubgroupRotateClustered};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderSubgroupRotate;
+ *     VkBool32 shaderSubgroupRotateClustered;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderSubgroupRotateFeatures extends Struct<VkPhysicalDeviceShaderSubgroupRotateFeatures> implements NativeResource {
 
@@ -92,28 +78,28 @@ public class VkPhysicalDeviceShaderSubgroupRotateFeatures extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether shader modules <b>can</b> declare the {@code GroupNonUniformRotateKHR} capability. */
+    /** @return the value of the {@code shaderSubgroupRotate} field. */
     @NativeType("VkBool32")
     public boolean shaderSubgroupRotate() { return nshaderSubgroupRotate(address()) != 0; }
-    /** specifies whether shader modules <b>can</b> use the {@code ClusterSize} operand to {@code OpGroupNonUniformRotateKHR}. */
+    /** @return the value of the {@code shaderSubgroupRotateClustered} field. */
     @NativeType("VkBool32")
     public boolean shaderSubgroupRotateClustered() { return nshaderSubgroupRotateClustered(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderSubgroupRotateFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderSubgroupRotateFeatures sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderSubgroupRotateFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderSubgroupRotate} field. */
+    /** Sets the specified value to the {@code shaderSubgroupRotate} field. */
     public VkPhysicalDeviceShaderSubgroupRotateFeatures shaderSubgroupRotate(@NativeType("VkBool32") boolean value) { nshaderSubgroupRotate(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #shaderSubgroupRotateClustered} field. */
+    /** Sets the specified value to the {@code shaderSubgroupRotateClustered} field. */
     public VkPhysicalDeviceShaderSubgroupRotateFeatures shaderSubgroupRotateClustered(@NativeType("VkBool32") boolean value) { nshaderSubgroupRotateClustered(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,28 +301,28 @@ public class VkPhysicalDeviceShaderSubgroupRotateFeatures extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderSubgroupRotateFeatures.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderSubgroupRotateFeatures.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#shaderSubgroupRotate} field. */
+        /** @return the value of the {@code shaderSubgroupRotate} field. */
         @NativeType("VkBool32")
         public boolean shaderSubgroupRotate() { return VkPhysicalDeviceShaderSubgroupRotateFeatures.nshaderSubgroupRotate(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#shaderSubgroupRotateClustered} field. */
+        /** @return the value of the {@code shaderSubgroupRotateClustered} field. */
         @NativeType("VkBool32")
         public boolean shaderSubgroupRotateClustered() { return VkPhysicalDeviceShaderSubgroupRotateFeatures.nshaderSubgroupRotateClustered(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderSubgroupRotateFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderSubgroupRotateFeatures.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES} value to the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderSubgroupRotateFeatures.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_ROTATE_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderSubgroupRotateFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderSubgroupRotateFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#shaderSubgroupRotate} field. */
+        /** Sets the specified value to the {@code shaderSubgroupRotate} field. */
         public VkPhysicalDeviceShaderSubgroupRotateFeatures.Buffer shaderSubgroupRotate(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderSubgroupRotateFeatures.nshaderSubgroupRotate(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderSubgroupRotateFeatures#shaderSubgroupRotateClustered} field. */
+        /** Sets the specified value to the {@code shaderSubgroupRotateClustered} field. */
         public VkPhysicalDeviceShaderSubgroupRotateFeatures.Buffer shaderSubgroupRotateClustered(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderSubgroupRotateFeatures.nshaderSubgroupRotateClustered(address(), value ? 1 : 0); return this; }
 
     }

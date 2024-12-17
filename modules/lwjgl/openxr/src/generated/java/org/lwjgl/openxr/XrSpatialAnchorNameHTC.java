@@ -19,25 +19,10 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.HTCAnchor.*;
 
 /**
- * The name of a spatial anchor.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link HTCAnchor XR_HTC_anchor} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorNameHTC}</li>
- * <li>{@code name} <b>must</b> be a null-terminated UTF-8 string whose length is less than or equal to {@link HTCAnchor#XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpatialAnchorCreateInfoHTC}, {@link HTCAnchor#xrGetSpatialAnchorNameHTC GetSpatialAnchorNameHTC}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorNameHTC {
- *     char {@link #name}[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC];
- * }</code></pre>
+ *     char name[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC];
+ * }}</pre>
  */
 public class XrSpatialAnchorNameHTC extends Struct<XrSpatialAnchorNameHTC> implements NativeResource {
 
@@ -84,14 +69,14 @@ public class XrSpatialAnchorNameHTC extends Struct<XrSpatialAnchorNameHTC> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a null-terminated UTF-8 string whose length is less than or equal to {@link HTCAnchor#XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC}. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC]")
     public ByteBuffer name() { return nname(address()); }
-    /** a null-terminated UTF-8 string whose length is less than or equal to {@link HTCAnchor#XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC}. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC]")
     public String nameString() { return nnameString(address()); }
 
-    /** Copies the specified encoded string to the {@link #name} field. */
+    /** Copies the specified encoded string to the {@code name} field. */
     public XrSpatialAnchorNameHTC name(@NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC]") ByteBuffer value) { nname(address(), value); return this; }
 
     /**
@@ -274,14 +259,14 @@ public class XrSpatialAnchorNameHTC extends Struct<XrSpatialAnchorNameHTC> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link XrSpatialAnchorNameHTC#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC]")
         public ByteBuffer name() { return XrSpatialAnchorNameHTC.nname(address()); }
-        /** @return the null-terminated string stored in the {@link XrSpatialAnchorNameHTC#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC]")
         public String nameString() { return XrSpatialAnchorNameHTC.nnameString(address()); }
 
-        /** Copies the specified encoded string to the {@link XrSpatialAnchorNameHTC#name} field. */
+        /** Copies the specified encoded string to the {@code name} field. */
         public XrSpatialAnchorNameHTC.Buffer name(@NativeType("char[XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC]") ByteBuffer value) { XrSpatialAnchorNameHTC.nname(address(), value); return this; }
 
     }

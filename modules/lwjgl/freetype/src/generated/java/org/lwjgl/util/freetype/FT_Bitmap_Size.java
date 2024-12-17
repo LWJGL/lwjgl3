@@ -14,29 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This structure models the metrics of a bitmap strike (i.e., a set of glyphs for a given point size and resolution) in a bitmap font. It
- * is used for the {@code available_sizes} field of {@code FT_Face}.
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Windows FNT: The nominal size given in a FNT font is not reliable. If the driver finds it incorrect, it sets {@code size} to some calculated
- * values, and {@code x_ppem} and {@code y_ppem} to the pixel width and height given in the font, respectively.</p></div>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>TrueType embedded bitmaps: {@code size}, {@code width}, and {@code height} values are not contained in the bitmap strike itself. They are
- * computed from the global font parameters.</p></div>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Bitmap_Size {
- *     FT_Short {@link #height};
- *     FT_Short {@link #width};
- *     FT_Pos {@link #size};
- *     FT_Pos {@link #x_ppem};
- *     FT_Pos {@link #y_ppem};
- * }</code></pre>
+ *     FT_Short height;
+ *     FT_Short width;
+ *     FT_Pos size;
+ *     FT_Pos x_ppem;
+ *     FT_Pos y_ppem;
+ * }}</pre>
  */
 public class FT_Bitmap_Size extends Struct<FT_Bitmap_Size> {
 
@@ -95,19 +80,19 @@ public class FT_Bitmap_Size extends Struct<FT_Bitmap_Size> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the vertical distance, in pixels, between two consecutive baselines. It is always positive. */
+    /** @return the value of the {@code height} field. */
     @NativeType("FT_Short")
     public short height() { return nheight(address()); }
-    /** the average width, in pixels, of all glyphs in the strike */
+    /** @return the value of the {@code width} field. */
     @NativeType("FT_Short")
     public short width() { return nwidth(address()); }
-    /** the nominal size of the strike in 26.6 fractional points. This field is not very useful. */
+    /** @return the value of the {@code size} field. */
     @NativeType("FT_Pos")
     public long size() { return nsize(address()); }
-    /** the horizontal ppem (nominal width) in 26.6 fractional pixels */
+    /** @return the value of the {@code x_ppem} field. */
     @NativeType("FT_Pos")
     public long x_ppem() { return nx_ppem(address()); }
-    /** the vertical ppem (nominal height) in 26.6 fractional pixels */
+    /** @return the value of the {@code y_ppem} field. */
     @NativeType("FT_Pos")
     public long y_ppem() { return ny_ppem(address()); }
 
@@ -194,19 +179,19 @@ public class FT_Bitmap_Size extends Struct<FT_Bitmap_Size> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link FT_Bitmap_Size#height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("FT_Short")
         public short height() { return FT_Bitmap_Size.nheight(address()); }
-        /** @return the value of the {@link FT_Bitmap_Size#width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("FT_Short")
         public short width() { return FT_Bitmap_Size.nwidth(address()); }
-        /** @return the value of the {@link FT_Bitmap_Size#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("FT_Pos")
         public long size() { return FT_Bitmap_Size.nsize(address()); }
-        /** @return the value of the {@link FT_Bitmap_Size#x_ppem} field. */
+        /** @return the value of the {@code x_ppem} field. */
         @NativeType("FT_Pos")
         public long x_ppem() { return FT_Bitmap_Size.nx_ppem(address()); }
-        /** @return the value of the {@link FT_Bitmap_Size#y_ppem} field. */
+        /** @return the value of the {@code y_ppem} field. */
         @NativeType("FT_Pos")
         public long y_ppem() { return FT_Bitmap_Size.ny_ppem(address()); }
 

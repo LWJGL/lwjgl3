@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_style_scrollbar {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -38,12 +36,12 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int show_buttons;
  *     {@link NkStyleButton struct nk_style_button} inc_button;
  *     {@link NkStyleButton struct nk_style_button} dec_button;
- *     enum nk_symbol_type {@link #inc_symbol};
- *     enum nk_symbol_type {@link #dec_symbol};
+ *     enum nk_symbol_type inc_symbol;
+ *     enum nk_symbol_type dec_symbol;
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkDrawBeginCallbackI nk_draw_begin} draw_begin;
  *     {@link NkDrawEndCallbackI nk_draw_end} draw_end;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_style_scrollbar")
 public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements NativeResource {
@@ -204,10 +202,10 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
     /** @return a {@link NkStyleButton} view of the {@code dec_button} field. */
     @NativeType("struct nk_style_button")
     public NkStyleButton dec_button() { return ndec_button(address()); }
-    /** one of:<br><table><tr><td>{@link Nuklear#NK_SYMBOL_NONE SYMBOL_NONE}</td><td>{@link Nuklear#NK_SYMBOL_X SYMBOL_X}</td><td>{@link Nuklear#NK_SYMBOL_UNDERSCORE SYMBOL_UNDERSCORE}</td><td>{@link Nuklear#NK_SYMBOL_CIRCLE_SOLID SYMBOL_CIRCLE_SOLID}</td></tr><tr><td>{@link Nuklear#NK_SYMBOL_CIRCLE_OUTLINE SYMBOL_CIRCLE_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_RECT_SOLID SYMBOL_RECT_SOLID}</td><td>{@link Nuklear#NK_SYMBOL_RECT_OUTLINE SYMBOL_RECT_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_UP SYMBOL_TRIANGLE_UP}</td></tr><tr><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_DOWN SYMBOL_TRIANGLE_DOWN}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_LEFT SYMBOL_TRIANGLE_LEFT}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_RIGHT SYMBOL_TRIANGLE_RIGHT}</td><td>{@link Nuklear#NK_SYMBOL_PLUS SYMBOL_PLUS}</td></tr><tr><td>{@link Nuklear#NK_SYMBOL_MINUS SYMBOL_MINUS}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_UP_OUTLINE SYMBOL_TRIANGLE_UP_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_DOWN_OUTLINE SYMBOL_TRIANGLE_DOWN_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_LEFT_OUTLINE SYMBOL_TRIANGLE_LEFT_OUTLINE}</td></tr><tr><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_RIGHT_OUTLINE SYMBOL_TRIANGLE_RIGHT_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_MAX SYMBOL_MAX}</td></tr></table> */
+    /** @return the value of the {@code inc_symbol} field. */
     @NativeType("enum nk_symbol_type")
     public int inc_symbol() { return ninc_symbol(address()); }
-    /** see {@code inc_symbol} */
+    /** @return the value of the {@code dec_symbol} field. */
     @NativeType("enum nk_symbol_type")
     public int dec_symbol() { return ndec_symbol(address()); }
     /** @return a {@link NkHandle} view of the {@code userdata} field. */
@@ -278,9 +276,9 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
     public NkStyleScrollbar dec_button(@NativeType("struct nk_style_button") NkStyleButton value) { ndec_button(address(), value); return this; }
     /** Passes the {@code dec_button} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleScrollbar dec_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(dec_button()); return this; }
-    /** Sets the specified value to the {@link #inc_symbol} field. */
+    /** Sets the specified value to the {@code inc_symbol} field. */
     public NkStyleScrollbar inc_symbol(@NativeType("enum nk_symbol_type") int value) { ninc_symbol(address(), value); return this; }
-    /** Sets the specified value to the {@link #dec_symbol} field. */
+    /** Sets the specified value to the {@code dec_symbol} field. */
     public NkStyleScrollbar dec_symbol(@NativeType("enum nk_symbol_type") int value) { ndec_symbol(address(), value); return this; }
     /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
     public NkStyleScrollbar userdata(@NativeType("nk_handle") NkHandle value) { nuserdata(address(), value); return this; }
@@ -670,10 +668,10 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         /** @return a {@link NkStyleButton} view of the {@code dec_button} field. */
         @NativeType("struct nk_style_button")
         public NkStyleButton dec_button() { return NkStyleScrollbar.ndec_button(address()); }
-        /** @return the value of the {@link NkStyleScrollbar#inc_symbol} field. */
+        /** @return the value of the {@code inc_symbol} field. */
         @NativeType("enum nk_symbol_type")
         public int inc_symbol() { return NkStyleScrollbar.ninc_symbol(address()); }
-        /** @return the value of the {@link NkStyleScrollbar#dec_symbol} field. */
+        /** @return the value of the {@code dec_symbol} field. */
         @NativeType("enum nk_symbol_type")
         public int dec_symbol() { return NkStyleScrollbar.ndec_symbol(address()); }
         /** @return a {@link NkHandle} view of the {@code userdata} field. */
@@ -744,9 +742,9 @@ public class NkStyleScrollbar extends Struct<NkStyleScrollbar> implements Native
         public NkStyleScrollbar.Buffer dec_button(@NativeType("struct nk_style_button") NkStyleButton value) { NkStyleScrollbar.ndec_button(address(), value); return this; }
         /** Passes the {@code dec_button} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleScrollbar.Buffer dec_button(java.util.function.Consumer<NkStyleButton> consumer) { consumer.accept(dec_button()); return this; }
-        /** Sets the specified value to the {@link NkStyleScrollbar#inc_symbol} field. */
+        /** Sets the specified value to the {@code inc_symbol} field. */
         public NkStyleScrollbar.Buffer inc_symbol(@NativeType("enum nk_symbol_type") int value) { NkStyleScrollbar.ninc_symbol(address(), value); return this; }
-        /** Sets the specified value to the {@link NkStyleScrollbar#dec_symbol} field. */
+        /** Sets the specified value to the {@code dec_symbol} field. */
         public NkStyleScrollbar.Buffer dec_symbol(@NativeType("enum nk_symbol_type") int value) { NkStyleScrollbar.ndec_symbol(address(), value); return this; }
         /** Copies the specified {@link NkHandle} to the {@code userdata} field. */
         public NkStyleScrollbar.Buffer userdata(@NativeType("nk_handle") NkHandle value) { NkStyleScrollbar.nuserdata(address(), value); return this; }

@@ -14,17 +14,15 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ogg_packet {
  *     unsigned char * packet;
  *     long bytes;
  *     long b_o_s;
  *     long e_o_s;
  *     ogg_int64_t granulepos;
- *     ogg_int64_t {@link #packetno};
- * }</code></pre>
+ *     ogg_int64_t packetno;
+ * }}</pre>
  */
 @NativeType("struct ogg_packet")
 public class OGGPacket extends Struct<OGGPacket> {
@@ -99,10 +97,7 @@ public class OGGPacket extends Struct<OGGPacket> {
     /** @return the value of the {@code granulepos} field. */
     @NativeType("ogg_int64_t")
     public long granulepos() { return ngranulepos(address()); }
-    /**
-     * sequence number for decode; the framing knows where there's a hole in the data, but we need coupling so that the codec (which is in a separate
-     * abstraction layer) also knows about the gap
-     */
+    /** @return the value of the {@code packetno} field. */
     @NativeType("ogg_int64_t")
     public long packetno() { return npacketno(address()); }
 
@@ -203,7 +198,7 @@ public class OGGPacket extends Struct<OGGPacket> {
         /** @return the value of the {@code granulepos} field. */
         @NativeType("ogg_int64_t")
         public long granulepos() { return OGGPacket.ngranulepos(address()); }
-        /** @return the value of the {@link OGGPacket#packetno} field. */
+        /** @return the value of the {@code packetno} field. */
         @NativeType("ogg_int64_t")
         public long packetno() { return OGGPacket.npacketno(address()); }
 

@@ -16,35 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a pipeline whose captured data is to be released.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code pipeline} <b>must</b> have been created with {@link KHRPipelineBinary#VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR}</li>
- * <li>{@code pipeline} <b>must</b> not have been used in a previous call to {@code vkReleaseCapturedPipelineDataKHR}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRPipelineBinary#vkReleaseCapturedPipelineDataKHR ReleaseCapturedPipelineDataKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkReleaseCapturedPipelineDataInfoKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkPipeline {@link #pipeline};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkPipeline pipeline;
+ * }}</pre>
  */
 public class VkReleaseCapturedPipelineDataInfoKHR extends Struct<VkReleaseCapturedPipelineDataInfoKHR> implements NativeResource {
 
@@ -97,23 +74,23 @@ public class VkReleaseCapturedPipelineDataInfoKHR extends Struct<VkReleaseCaptur
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the handle of the pipeline object to release the data from. */
+    /** @return the value of the {@code pipeline} field. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkReleaseCapturedPipelineDataInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR} value to the {@code sType} field. */
     public VkReleaseCapturedPipelineDataInfoKHR sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkReleaseCapturedPipelineDataInfoKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipeline} field. */
+    /** Sets the specified value to the {@code pipeline} field. */
     public VkReleaseCapturedPipelineDataInfoKHR pipeline(@NativeType("VkPipeline") long value) { npipeline(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,23 +286,23 @@ public class VkReleaseCapturedPipelineDataInfoKHR extends Struct<VkReleaseCaptur
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkReleaseCapturedPipelineDataInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkReleaseCapturedPipelineDataInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkReleaseCapturedPipelineDataInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkReleaseCapturedPipelineDataInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkReleaseCapturedPipelineDataInfoKHR#pipeline} field. */
+        /** @return the value of the {@code pipeline} field. */
         @NativeType("VkPipeline")
         public long pipeline() { return VkReleaseCapturedPipelineDataInfoKHR.npipeline(address()); }
 
-        /** Sets the specified value to the {@link VkReleaseCapturedPipelineDataInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkReleaseCapturedPipelineDataInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkReleaseCapturedPipelineDataInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR} value to the {@link VkReleaseCapturedPipelineDataInfoKHR#sType} field. */
+        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR} value to the {@code sType} field. */
         public VkReleaseCapturedPipelineDataInfoKHR.Buffer sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR); }
-        /** Sets the specified value to the {@link VkReleaseCapturedPipelineDataInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkReleaseCapturedPipelineDataInfoKHR.Buffer pNext(@NativeType("void *") long value) { VkReleaseCapturedPipelineDataInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkReleaseCapturedPipelineDataInfoKHR#pipeline} field. */
+        /** Sets the specified value to the {@code pipeline} field. */
         public VkReleaseCapturedPipelineDataInfoKHR.Buffer pipeline(@NativeType("VkPipeline") long value) { VkReleaseCapturedPipelineDataInfoKHR.npipeline(address(), value); return this; }
 
     }

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceTexelBufferAlignmentProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 storageTexelBufferOffsetSingleTexelAlignment;
  *     VkDeviceSize uniformTexelBufferOffsetAlignmentBytes;
  *     VkBool32 uniformTexelBufferOffsetSingleTexelAlignment;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT extends VkPhysicalDeviceTexelBufferAlignmentProperties {
 

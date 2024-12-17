@@ -15,11 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a TrueType {@code PCLT} table.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TT_PCLT {
  *     FT_Fixed Version;
  *     FT_ULong FontNumber;
@@ -36,7 +32,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Char WidthType;
  *     FT_Byte SerifStyle;
  *     FT_Byte Reserved;
- * }</code></pre>
+ * }}</pre>
  */
 public class TT_PCLT extends Struct<TT_PCLT> {
 

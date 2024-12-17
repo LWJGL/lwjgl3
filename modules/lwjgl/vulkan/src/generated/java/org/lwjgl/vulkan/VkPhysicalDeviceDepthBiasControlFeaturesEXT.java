@@ -16,25 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure indicating support for depth bias scaling and representation control.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDepthBiasControlFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #depthBiasControl};
- *     VkBool32 {@link #leastRepresentableValueForceUnormRepresentation};
- *     VkBool32 {@link #floatRepresentation};
- *     VkBool32 {@link #depthBiasExact};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 depthBiasControl;
+ *     VkBool32 leastRepresentableValueForceUnormRepresentation;
+ *     VkBool32 floatRepresentation;
+ *     VkBool32 depthBiasExact;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDepthBiasControlFeaturesEXT extends Struct<VkPhysicalDeviceDepthBiasControlFeaturesEXT> implements NativeResource {
 
@@ -96,38 +86,38 @@ public class VkPhysicalDeviceDepthBiasControlFeaturesEXT extends Struct<VkPhysic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the {@code vkCmdSetDepthBias2EXT} command and the {@link VkDepthBiasRepresentationInfoEXT} structure. */
+    /** @return the value of the {@code depthBiasControl} field. */
     @NativeType("VkBool32")
     public boolean depthBiasControl() { return ndepthBiasControl(address()) != 0; }
-    /** indicates whether the implementation supports using the {@link EXTDepthBiasControl#VK_DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORCE_UNORM_EXT DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORCE_UNORM_EXT} depth bias representation. */
+    /** @return the value of the {@code leastRepresentableValueForceUnormRepresentation} field. */
     @NativeType("VkBool32")
     public boolean leastRepresentableValueForceUnormRepresentation() { return nleastRepresentableValueForceUnormRepresentation(address()) != 0; }
-    /** indicates whether the implementation supports using the {@link EXTDepthBiasControl#VK_DEPTH_BIAS_REPRESENTATION_FLOAT_EXT DEPTH_BIAS_REPRESENTATION_FLOAT_EXT} depth bias representation. */
+    /** @return the value of the {@code floatRepresentation} field. */
     @NativeType("VkBool32")
     public boolean floatRepresentation() { return nfloatRepresentation(address()) != 0; }
-    /** indicates whether the implementation supports forcing depth bias to not be scaled to ensure a minimum resolvable difference using {@link VkDepthBiasRepresentationInfoEXT}{@code ::depthBiasExact}. */
+    /** @return the value of the {@code depthBiasExact} field. */
     @NativeType("VkBool32")
     public boolean depthBiasExact() { return ndepthBiasExact(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDepthBiasControlFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDepthBiasControlFeaturesEXT sType$Default() { return sType(EXTDepthBiasControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDepthBiasControlFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthBiasControl} field. */
+    /** Sets the specified value to the {@code depthBiasControl} field. */
     public VkPhysicalDeviceDepthBiasControlFeaturesEXT depthBiasControl(@NativeType("VkBool32") boolean value) { ndepthBiasControl(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #leastRepresentableValueForceUnormRepresentation} field. */
+    /** Sets the specified value to the {@code leastRepresentableValueForceUnormRepresentation} field. */
     public VkPhysicalDeviceDepthBiasControlFeaturesEXT leastRepresentableValueForceUnormRepresentation(@NativeType("VkBool32") boolean value) { nleastRepresentableValueForceUnormRepresentation(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #floatRepresentation} field. */
+    /** Sets the specified value to the {@code floatRepresentation} field. */
     public VkPhysicalDeviceDepthBiasControlFeaturesEXT floatRepresentation(@NativeType("VkBool32") boolean value) { nfloatRepresentation(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #depthBiasExact} field. */
+    /** Sets the specified value to the {@code depthBiasExact} field. */
     public VkPhysicalDeviceDepthBiasControlFeaturesEXT depthBiasExact(@NativeType("VkBool32") boolean value) { ndepthBiasExact(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -341,38 +331,38 @@ public class VkPhysicalDeviceDepthBiasControlFeaturesEXT extends Struct<VkPhysic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDepthBiasControlFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDepthBiasControlFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#depthBiasControl} field. */
+        /** @return the value of the {@code depthBiasControl} field. */
         @NativeType("VkBool32")
         public boolean depthBiasControl() { return VkPhysicalDeviceDepthBiasControlFeaturesEXT.ndepthBiasControl(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#leastRepresentableValueForceUnormRepresentation} field. */
+        /** @return the value of the {@code leastRepresentableValueForceUnormRepresentation} field. */
         @NativeType("VkBool32")
         public boolean leastRepresentableValueForceUnormRepresentation() { return VkPhysicalDeviceDepthBiasControlFeaturesEXT.nleastRepresentableValueForceUnormRepresentation(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#floatRepresentation} field. */
+        /** @return the value of the {@code floatRepresentation} field. */
         @NativeType("VkBool32")
         public boolean floatRepresentation() { return VkPhysicalDeviceDepthBiasControlFeaturesEXT.nfloatRepresentation(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#depthBiasExact} field. */
+        /** @return the value of the {@code depthBiasExact} field. */
         @NativeType("VkBool32")
         public boolean depthBiasExact() { return VkPhysicalDeviceDepthBiasControlFeaturesEXT.ndepthBiasExact(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDepthBiasControlFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthBiasControlFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT} value to the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTDepthBiasControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDepthBiasControlFeaturesEXT.Buffer sType$Default() { return sType(EXTDepthBiasControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDepthBiasControlFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthBiasControlFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#depthBiasControl} field. */
+        /** Sets the specified value to the {@code depthBiasControl} field. */
         public VkPhysicalDeviceDepthBiasControlFeaturesEXT.Buffer depthBiasControl(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDepthBiasControlFeaturesEXT.ndepthBiasControl(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#leastRepresentableValueForceUnormRepresentation} field. */
+        /** Sets the specified value to the {@code leastRepresentableValueForceUnormRepresentation} field. */
         public VkPhysicalDeviceDepthBiasControlFeaturesEXT.Buffer leastRepresentableValueForceUnormRepresentation(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDepthBiasControlFeaturesEXT.nleastRepresentableValueForceUnormRepresentation(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#floatRepresentation} field. */
+        /** Sets the specified value to the {@code floatRepresentation} field. */
         public VkPhysicalDeviceDepthBiasControlFeaturesEXT.Buffer floatRepresentation(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDepthBiasControlFeaturesEXT.nfloatRepresentation(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthBiasControlFeaturesEXT#depthBiasExact} field. */
+        /** Sets the specified value to the {@code depthBiasExact} field. */
         public VkPhysicalDeviceDepthBiasControlFeaturesEXT.Buffer depthBiasExact(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDepthBiasControlFeaturesEXT.ndepthBiasExact(address(), value ? 1 : 0); return this; }
 
     }

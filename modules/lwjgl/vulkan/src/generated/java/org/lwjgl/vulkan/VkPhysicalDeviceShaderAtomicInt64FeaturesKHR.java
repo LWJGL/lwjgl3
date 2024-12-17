@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceShaderAtomicInt64Features}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderAtomicInt64FeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 shaderBufferInt64Atomics;
  *     VkBool32 shaderSharedInt64Atomics;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderAtomicInt64FeaturesKHR extends VkPhysicalDeviceShaderAtomicInt64Features {
 

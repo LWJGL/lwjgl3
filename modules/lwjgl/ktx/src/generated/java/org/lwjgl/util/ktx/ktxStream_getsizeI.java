@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * KTX_error_code (*{@link #invoke}) (
- *     ktxStream *str,
- *     ktx_size_t * const size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ktxStream_getsize} */
 @FunctionalInterface
 @NativeType("ktxStream_getsize")
 public interface ktxStream_getsizeI extends CallbackI {
@@ -43,7 +35,7 @@ public interface ktxStream_getsizeI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** Type for a pointer to a stream size query function */
+    /** {@code KTX_error_code (* ktxStream_getsize) (ktxStream * str, ktx_size_t * const size)} */
     @NativeType("KTX_error_code") int invoke(@NativeType("ktxStream *") long str, @NativeType("ktx_size_t * const") long size);
 
 }

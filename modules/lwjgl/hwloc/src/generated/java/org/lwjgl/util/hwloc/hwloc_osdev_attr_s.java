@@ -14,12 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_osdev_attr_s {
  *     hwloc_obj_osdev_types_t types;
- * }</code></pre>
+ * }}</pre>
  */
 public class hwloc_osdev_attr_s extends Struct<hwloc_osdev_attr_s> {
 

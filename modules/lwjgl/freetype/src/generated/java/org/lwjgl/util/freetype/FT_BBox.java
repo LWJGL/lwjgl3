@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A structure used to hold an outline's bounding box, i.e., the coordinates of its extrema in the horizontal and vertical directions.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_BBox {
  *     FT_Pos xMin;
  *     FT_Pos yMin;
  *     FT_Pos xMax;
  *     FT_Pos yMax;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_BBox extends Struct<FT_BBox> implements NativeResource {
 

@@ -14,20 +14,10 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_draw_buffers.txt">NV_draw_buffers</a> extension.
- * 
- * <p>This extension extends OpenGL ES 2.0 to allow multiple output colors, and provides a mechanism for directing those outputs to multiple color buffers.</p>
- * 
- * <p>This extension serves a similar purpose to ARB_draw_buffers except that this is for OpenGL ES 2.0.</p>
- * 
- * <p>When OpenGL ES 3.0 is present, this extension relaxes the order restriction on color attachments to draw framebuffer objects.</p>
- */
 public class NVDrawBuffers {
 
     static { GLES.initialize(); }
 
-    /** Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev. */
     public static final int
         GL_MAX_DRAW_BUFFERS_NV = 0x8824,
         GL_DRAW_BUFFER0_NV     = 0x8825,
@@ -47,7 +37,6 @@ public class NVDrawBuffers {
         GL_DRAW_BUFFER14_NV    = 0x8833,
         GL_DRAW_BUFFER15_NV    = 0x8834;
 
-    /** Accepted by the {@code bufs} parameter of DrawBuffersNV. */
     public static final int
         GL_COLOR_ATTACHMENT0_NV  = 0x8CE0,
         GL_COLOR_ATTACHMENT1_NV  = 0x8CE1,
@@ -72,12 +61,15 @@ public class NVDrawBuffers {
 
     // --- [ glDrawBuffersNV ] ---
 
+    /** {@code void glDrawBuffersNV(GLsizei n, GLenum const * bufs)} */
     public static native void nglDrawBuffersNV(int n, long bufs);
 
+    /** {@code void glDrawBuffersNV(GLsizei n, GLenum const * bufs)} */
     public static void glDrawBuffersNV(@NativeType("GLenum const *") IntBuffer bufs) {
         nglDrawBuffersNV(bufs.remaining(), memAddress(bufs));
     }
 
+    /** {@code void glDrawBuffersNV(GLsizei n, GLenum const * bufs)} */
     public static void glDrawBuffersNV(@NativeType("GLenum const *") int buf) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -88,7 +80,7 @@ public class NVDrawBuffers {
         }
     }
 
-    /** Array version of: {@link #glDrawBuffersNV DrawBuffersNV} */
+    /** {@code void glDrawBuffersNV(GLsizei n, GLenum const * bufs)} */
     public static void glDrawBuffersNV(@NativeType("GLenum const *") int[] bufs) {
         long __functionAddress = GLES.getICD().glDrawBuffersNV;
         if (CHECKS) {

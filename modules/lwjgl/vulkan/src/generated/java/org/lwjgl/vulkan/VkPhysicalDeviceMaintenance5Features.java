@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether the implementation supports maintenance5 functionality.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMaintenance5Features} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMaintenance5Features} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMaintenance5Features {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #maintenance5};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 maintenance5;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMaintenance5Features extends Struct<VkPhysicalDeviceMaintenance5Features> implements NativeResource {
 
@@ -88,46 +74,23 @@ public class VkPhysicalDeviceMaintenance5Features extends Struct<VkPhysicalDevic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /**
-     * indicates that the implementation supports the following:
-     * 
-     * <ul>
-     * <li>The ability to expose support for the optional format {@link VK14#VK_FORMAT_A1B5G5R5_UNORM_PACK16 FORMAT_A1B5G5R5_UNORM_PACK16}.</li>
-     * <li>The ability to expose support for the optional format {@link VK14#VK_FORMAT_A8_UNORM FORMAT_A8_UNORM}.</li>
-     * <li>A property to indicate that multisample coverage operations are performed after sample counting in EarlyFragmentTests mode.</li>
-     * <li>Creating a {@code VkBufferView} with a subset of the associated {@code VkBuffer} usage using {@link VkBufferUsageFlags2CreateInfo}.</li>
-     * <li>A new function {@link VK14#vkCmdBindIndexBuffer2 CmdBindIndexBuffer2}, allowing a range of memory to be bound as an index buffer.</li>
-     * <li>{@link VK10#vkGetDeviceProcAddr GetDeviceProcAddr} will return {@code NULL} for function pointers of core functions for versions higher than the version requested by the application.</li>
-     * <li>{@link VK13#vkCmdBindVertexBuffers2 CmdBindVertexBuffers2} supports using {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} in the {@code pSizes} parameter.</li>
-     * <li>If {@code PointSize} is not written, a default value of {@code 1.0} is used for the size of points.</li>
-     * <li>{@link VkShaderModuleCreateInfo} <b>can</b> be added as a chained structure to pipeline creation via {@link VkPipelineShaderStageCreateInfo}, rather than having to create a shader module.</li>
-     * <li>A function {@link VK14#vkGetRenderingAreaGranularity GetRenderingAreaGranularity} to query the optimal render area for a dynamic rendering instance.</li>
-     * <li>A property to indicate that depth/stencil texturing operations with {@link VK10#VK_COMPONENT_SWIZZLE_ONE COMPONENT_SWIZZLE_ONE} have defined behavior.</li>
-     * <li>{@link VK14#vkGetDeviceImageSubresourceLayout GetDeviceImageSubresourceLayout} allows an application to perform a {@link VK10#vkGetImageSubresourceLayout GetImageSubresourceLayout} query without having to create an image.</li>
-     * <li>{@link VK10#VK_REMAINING_ARRAY_LAYERS REMAINING_ARRAY_LAYERS} as the {@code layerCount} member of {@link VkImageSubresourceLayers}.</li>
-     * <li>A property to indicate whether {@code PointSize} controls the final rasterization of polygons if <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-polygonmode">polygon mode</a> is {@link VK10#VK_POLYGON_MODE_POINT POLYGON_MODE_POINT}.</li>
-     * <li>Two properties to indicate the non-strict line rasterization algorithm used.</li>
-     * <li>Two new flags words {@code VkPipelineCreateFlagBits2} and {@code VkBufferUsageFlagBits2}.</li>
-     * <li>Physical-device-level functions <b>can</b> now be called with any value in the valid range for a type beyond the defined enumerants, such that applications can avoid checking individual features, extensions, or versions before querying supported properties of a particular enumerant.</li>
-     * <li>Copies between images of any type are allowed, with 1D images treated as 2D images with a height of 1.</li>
-     * </ul>
-     */
+    /** @return the value of the {@code maintenance5} field. */
     @NativeType("VkBool32")
     public boolean maintenance5() { return nmaintenance5(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMaintenance5Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceMaintenance5Features sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMaintenance5Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #maintenance5} field. */
+    /** Sets the specified value to the {@code maintenance5} field. */
     public VkPhysicalDeviceMaintenance5Features maintenance5(@NativeType("VkBool32") boolean value) { nmaintenance5(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,23 +286,23 @@ public class VkPhysicalDeviceMaintenance5Features extends Struct<VkPhysicalDevic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Features#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMaintenance5Features.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Features#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMaintenance5Features.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMaintenance5Features#maintenance5} field. */
+        /** @return the value of the {@code maintenance5} field. */
         @NativeType("VkBool32")
         public boolean maintenance5() { return VkPhysicalDeviceMaintenance5Features.nmaintenance5(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance5Features#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMaintenance5Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMaintenance5Features.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES} value to the {@link VkPhysicalDeviceMaintenance5Features#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceMaintenance5Features.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance5Features#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMaintenance5Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMaintenance5Features.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMaintenance5Features#maintenance5} field. */
+        /** Sets the specified value to the {@code maintenance5} field. */
         public VkPhysicalDeviceMaintenance5Features.Buffer maintenance5(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMaintenance5Features.nmaintenance5(address(), value ? 1 : 0); return this; }
 
     }

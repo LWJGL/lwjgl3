@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * layout rectangle
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct UIrect {
  *     union {
  *         int v[4];
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *             int h;
  *         };
  *     };
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct UIrect")
 public class UIRect extends Struct<UIRect> implements NativeResource {

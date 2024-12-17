@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSubpassBeginInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubpassBeginInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkSubpassContents contents;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSubpassBeginInfoKHR extends VkSubpassBeginInfo {
 

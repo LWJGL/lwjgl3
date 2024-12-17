@@ -16,25 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Four-dimensional vector.
- * 
- * <h5>Description</h5>
- * 
- * <p>If used to represent physical distances, {@code x}, {@code y}, and {@code z} values <b>must</b> be in meters.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandTrackingMeshFB}, {@link XrPosef}, {@link XrQuaternionf}, {@link XrVector2f}, {@link XrVector3f}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrVector4f {
- *     float {@link #x};
- *     float {@link #y};
- *     float {@link #z};
- *     float {@link #w};
- * }</code></pre>
+ *     float x;
+ *     float y;
+ *     float z;
+ *     float w;
+ * }}</pre>
  */
 public class XrVector4f extends Struct<XrVector4f> implements NativeResource {
 
@@ -90,22 +78,22 @@ public class XrVector4f extends Struct<XrVector4f> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the x coordinate of the vector. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** the y coordinate of the vector. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** the z coordinate of the vector. */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
-    /** the w coordinate of the vector. */
+    /** @return the value of the {@code w} field. */
     public float w() { return nw(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public XrVector4f x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public XrVector4f y(float value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@link #z} field. */
+    /** Sets the specified value to the {@code z} field. */
     public XrVector4f z(float value) { nz(address(), value); return this; }
-    /** Sets the specified value to the {@link #w} field. */
+    /** Sets the specified value to the {@code w} field. */
     public XrVector4f w(float value) { nw(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,22 +295,22 @@ public class XrVector4f extends Struct<XrVector4f> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrVector4f#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return XrVector4f.nx(address()); }
-        /** @return the value of the {@link XrVector4f#y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return XrVector4f.ny(address()); }
-        /** @return the value of the {@link XrVector4f#z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return XrVector4f.nz(address()); }
-        /** @return the value of the {@link XrVector4f#w} field. */
+        /** @return the value of the {@code w} field. */
         public float w() { return XrVector4f.nw(address()); }
 
-        /** Sets the specified value to the {@link XrVector4f#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public XrVector4f.Buffer x(float value) { XrVector4f.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVector4f#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public XrVector4f.Buffer y(float value) { XrVector4f.ny(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVector4f#z} field. */
+        /** Sets the specified value to the {@code z} field. */
         public XrVector4f.Buffer z(float value) { XrVector4f.nz(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVector4f#w} field. */
+        /** Sets the specified value to the {@code w} field. */
         public XrVector4f.Buffer w(float value) { XrVector4f.nw(address(), value); return this; }
 
     }

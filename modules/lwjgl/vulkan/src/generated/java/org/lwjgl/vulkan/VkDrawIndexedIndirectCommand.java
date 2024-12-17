@@ -16,38 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying an indexed indirect drawing command.
- * 
- * <h5>Description</h5>
- * 
- * <p>The members of {@link VkDrawIndexedIndirectCommand} have the same meaning as the similarly named parameters of {@link VK10#vkCmdDrawIndexed CmdDrawIndexed}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the bound graphics pipeline state was created with {@link VkPipelineVertexInputDivisorStateCreateInfo} in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo}{@code ::pVertexInputState}, any member of {@link VkPipelineVertexInputDivisorStateCreateInfo}{@code ::pVertexBindingDivisors} has a value other than 1 in {@code divisor}, and {@link VkPhysicalDeviceVertexAttributeDivisorProperties}{@code ::supportsNonZeroFirstInstance} is {@link VK10#VK_FALSE FALSE}, then {@code firstInstance} <b>must</b> be 0</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#shaders-objects">shader objects</a> are used for drawing or the bound graphics pipeline state was created with the {@link EXTVertexInputDynamicState#VK_DYNAMIC_STATE_VERTEX_INPUT_EXT DYNAMIC_STATE_VERTEX_INPUT_EXT} dynamic state enabled, any member of the {@code pVertexBindingDescriptions} parameter to the {@link EXTShaderObject#vkCmdSetVertexInputEXT CmdSetVertexInputEXT} call that sets this dynamic state has a value other than 1 in {@code divisor}, and {@link VkPhysicalDeviceVertexAttributeDivisorProperties}{@code ::supportsNonZeroFirstInstance} is {@link VK10#VK_FALSE FALSE}, then {@code firstInstance} <b>must</b> be 0</li>
- * </ul>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess2">{@code robustBufferAccess2}</a> feature is not enabled, <code>(indexSize × (firstIndex + indexCount) + offset)</code> <b>must</b> be less than or equal to the size of the bound index buffer, with {@code indexSize} being based on the type specified by {@code indexType}, where the index buffer, {@code indexType}, and {@code offset} are specified via {@code vkCmdBindIndexBuffer} or {@code vkCmdBindIndexBuffer2}. If {@code vkCmdBindIndexBuffer2} is used to bind the index buffer, the size of the bound index buffer is {@link VK14#vkCmdBindIndexBuffer2 CmdBindIndexBuffer2}{@code ::size}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-drawIndirectFirstInstance">{@code drawIndirectFirstInstance}</a> feature is not enabled, {@code firstInstance} <b>must</b> be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkCmdDrawIndexedIndirect CmdDrawIndexedIndirect}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDrawIndexedIndirectCommand {
- *     uint32_t {@link #indexCount};
- *     uint32_t {@link #instanceCount};
- *     uint32_t {@link #firstIndex};
- *     int32_t {@link #vertexOffset};
- *     uint32_t {@link #firstInstance};
- * }</code></pre>
+ *     uint32_t indexCount;
+ *     uint32_t instanceCount;
+ *     uint32_t firstIndex;
+ *     int32_t vertexOffset;
+ *     uint32_t firstInstance;
+ * }}</pre>
  */
 public class VkDrawIndexedIndirectCommand extends Struct<VkDrawIndexedIndirectCommand> implements NativeResource {
 
@@ -106,31 +82,31 @@ public class VkDrawIndexedIndirectCommand extends Struct<VkDrawIndexedIndirectCo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of vertices to draw. */
+    /** @return the value of the {@code indexCount} field. */
     @NativeType("uint32_t")
     public int indexCount() { return nindexCount(address()); }
-    /** the number of instances to draw. */
+    /** @return the value of the {@code instanceCount} field. */
     @NativeType("uint32_t")
     public int instanceCount() { return ninstanceCount(address()); }
-    /** the base index within the index buffer. */
+    /** @return the value of the {@code firstIndex} field. */
     @NativeType("uint32_t")
     public int firstIndex() { return nfirstIndex(address()); }
-    /** the value added to the vertex index before indexing into the vertex buffer. */
+    /** @return the value of the {@code vertexOffset} field. */
     @NativeType("int32_t")
     public int vertexOffset() { return nvertexOffset(address()); }
-    /** the instance ID of the first instance to draw. */
+    /** @return the value of the {@code firstInstance} field. */
     @NativeType("uint32_t")
     public int firstInstance() { return nfirstInstance(address()); }
 
-    /** Sets the specified value to the {@link #indexCount} field. */
+    /** Sets the specified value to the {@code indexCount} field. */
     public VkDrawIndexedIndirectCommand indexCount(@NativeType("uint32_t") int value) { nindexCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #instanceCount} field. */
+    /** Sets the specified value to the {@code instanceCount} field. */
     public VkDrawIndexedIndirectCommand instanceCount(@NativeType("uint32_t") int value) { ninstanceCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #firstIndex} field. */
+    /** Sets the specified value to the {@code firstIndex} field. */
     public VkDrawIndexedIndirectCommand firstIndex(@NativeType("uint32_t") int value) { nfirstIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertexOffset} field. */
+    /** Sets the specified value to the {@code vertexOffset} field. */
     public VkDrawIndexedIndirectCommand vertexOffset(@NativeType("int32_t") int value) { nvertexOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #firstInstance} field. */
+    /** Sets the specified value to the {@code firstInstance} field. */
     public VkDrawIndexedIndirectCommand firstInstance(@NativeType("uint32_t") int value) { nfirstInstance(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -357,31 +333,31 @@ public class VkDrawIndexedIndirectCommand extends Struct<VkDrawIndexedIndirectCo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDrawIndexedIndirectCommand#indexCount} field. */
+        /** @return the value of the {@code indexCount} field. */
         @NativeType("uint32_t")
         public int indexCount() { return VkDrawIndexedIndirectCommand.nindexCount(address()); }
-        /** @return the value of the {@link VkDrawIndexedIndirectCommand#instanceCount} field. */
+        /** @return the value of the {@code instanceCount} field. */
         @NativeType("uint32_t")
         public int instanceCount() { return VkDrawIndexedIndirectCommand.ninstanceCount(address()); }
-        /** @return the value of the {@link VkDrawIndexedIndirectCommand#firstIndex} field. */
+        /** @return the value of the {@code firstIndex} field. */
         @NativeType("uint32_t")
         public int firstIndex() { return VkDrawIndexedIndirectCommand.nfirstIndex(address()); }
-        /** @return the value of the {@link VkDrawIndexedIndirectCommand#vertexOffset} field. */
+        /** @return the value of the {@code vertexOffset} field. */
         @NativeType("int32_t")
         public int vertexOffset() { return VkDrawIndexedIndirectCommand.nvertexOffset(address()); }
-        /** @return the value of the {@link VkDrawIndexedIndirectCommand#firstInstance} field. */
+        /** @return the value of the {@code firstInstance} field. */
         @NativeType("uint32_t")
         public int firstInstance() { return VkDrawIndexedIndirectCommand.nfirstInstance(address()); }
 
-        /** Sets the specified value to the {@link VkDrawIndexedIndirectCommand#indexCount} field. */
+        /** Sets the specified value to the {@code indexCount} field. */
         public VkDrawIndexedIndirectCommand.Buffer indexCount(@NativeType("uint32_t") int value) { VkDrawIndexedIndirectCommand.nindexCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDrawIndexedIndirectCommand#instanceCount} field. */
+        /** Sets the specified value to the {@code instanceCount} field. */
         public VkDrawIndexedIndirectCommand.Buffer instanceCount(@NativeType("uint32_t") int value) { VkDrawIndexedIndirectCommand.ninstanceCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDrawIndexedIndirectCommand#firstIndex} field. */
+        /** Sets the specified value to the {@code firstIndex} field. */
         public VkDrawIndexedIndirectCommand.Buffer firstIndex(@NativeType("uint32_t") int value) { VkDrawIndexedIndirectCommand.nfirstIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDrawIndexedIndirectCommand#vertexOffset} field. */
+        /** Sets the specified value to the {@code vertexOffset} field. */
         public VkDrawIndexedIndirectCommand.Buffer vertexOffset(@NativeType("int32_t") int value) { VkDrawIndexedIndirectCommand.nvertexOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDrawIndexedIndirectCommand#firstInstance} field. */
+        /** Sets the specified value to the {@code firstInstance} field. */
         public VkDrawIndexedIndirectCommand.Buffer firstInstance(@NativeType("uint32_t") int value) { VkDrawIndexedIndirectCommand.nfirstInstance(address(), value); return this; }
 
     }

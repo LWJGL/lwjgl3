@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_COMMAND_INFO {
  *     char const * commandname;
  *     int parentcommandindex;
@@ -29,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FMOD_STUDIO_INSTANCETYPE outputtype;
  *     unsigned int instancehandle;
  *     unsigned int outputhandle;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_COMMAND_INFO extends Struct<FMOD_STUDIO_COMMAND_INFO> implements NativeResource {
 

@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SQLPERF {
  *     DWORD TimerResolution;
  *     DWORD SQLidu;
@@ -53,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     DWORD BytesRec;
  *     DWORD msExecutionTime;
  *     DWORD msNetWorkServerTime;
- * }</code></pre>
+ * }}</pre>
  */
 public class SQLPERF extends Struct<SQLPERF> implements NativeResource {
 

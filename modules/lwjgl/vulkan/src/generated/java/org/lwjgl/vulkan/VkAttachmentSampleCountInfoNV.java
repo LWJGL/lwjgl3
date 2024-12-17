@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkAttachmentSampleCountInfoAMD}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAttachmentSampleCountInfoNV {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t colorAttachmentCount;
  *     VkSampleCountFlagBits const * pColorAttachmentSamples;
  *     VkSampleCountFlagBits depthStencilAttachmentSamples;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkAttachmentSampleCountInfoNV extends VkAttachmentSampleCountInfoAMD {
 

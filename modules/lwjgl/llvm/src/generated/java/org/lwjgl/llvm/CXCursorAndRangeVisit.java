@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to the {@code visit} field of the {@link CXCursorAndRangeVisitor} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * enum CXVisitorResult (*{@link #invoke}) (
- *     void *context,
- *     CXCursor cursor,
- *     CXSourceRange range
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class CXCursorAndRangeVisit extends Callback implements CXCursorAndRangeVisitI {
 
     /**

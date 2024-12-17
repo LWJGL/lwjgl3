@@ -16,28 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing surface optimized presentation modes for use with low latency mode.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code pPresentModes} is {@code NULL}, then the number of present modes that are optimized for use with low latency mode returned in {@code presentModeCount}. Otherwise, {@code presentModeCount} <b>must</b> be set by the application to the number of elements in the {@code pPresentModes} array, and on return the variable is overwritten with the number of values actually written to {@code pPresentModes}. If the value of {@code presentModeCount} is less than the number of optimized present modes, at most {@code presentModeCount} values will be written to {@code pPresentModes}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV}</li>
- * <li>If {@code presentModeCount} is not 0, and {@code pPresentModes} is not {@code NULL}, {@code pPresentModes} <b>must</b> be a valid pointer to an array of {@code presentModeCount} {@code VkPresentModeKHR} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkLatencySurfaceCapabilitiesNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #presentModeCount};
- *     VkPresentModeKHR * {@link #pPresentModes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t presentModeCount;
+ *     VkPresentModeKHR * pPresentModes;
+ * }}</pre>
  */
 public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapabilitiesNV> implements NativeResource {
 
@@ -93,28 +78,28 @@ public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapab
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of presentation modes provided. */
+    /** @return the value of the {@code presentModeCount} field. */
     @NativeType("uint32_t")
     public int presentModeCount() { return npresentModeCount(address()); }
-    /** list of presentation modes optimized for use with low latency mode with {@code presentModeCount} entries. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pPresentModes} field. */
     @NativeType("VkPresentModeKHR *")
     public @Nullable IntBuffer pPresentModes() { return npPresentModes(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkLatencySurfaceCapabilitiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV} value to the {@code sType} field. */
     public VkLatencySurfaceCapabilitiesNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkLatencySurfaceCapabilitiesNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #presentModeCount} field. */
+    /** Sets the specified value to the {@code presentModeCount} field. */
     public VkLatencySurfaceCapabilitiesNV presentModeCount(@NativeType("uint32_t") int value) { npresentModeCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pPresentModes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pPresentModes} field. */
     public VkLatencySurfaceCapabilitiesNV pPresentModes(@Nullable @NativeType("VkPresentModeKHR *") IntBuffer value) { npPresentModes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -316,28 +301,28 @@ public class VkLatencySurfaceCapabilitiesNV extends Struct<VkLatencySurfaceCapab
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkLatencySurfaceCapabilitiesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkLatencySurfaceCapabilitiesNV.nsType(address()); }
-        /** @return the value of the {@link VkLatencySurfaceCapabilitiesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkLatencySurfaceCapabilitiesNV.npNext(address()); }
-        /** @return the value of the {@link VkLatencySurfaceCapabilitiesNV#presentModeCount} field. */
+        /** @return the value of the {@code presentModeCount} field. */
         @NativeType("uint32_t")
         public int presentModeCount() { return VkLatencySurfaceCapabilitiesNV.npresentModeCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkLatencySurfaceCapabilitiesNV#pPresentModes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pPresentModes} field. */
         @NativeType("VkPresentModeKHR *")
         public @Nullable IntBuffer pPresentModes() { return VkLatencySurfaceCapabilitiesNV.npPresentModes(address()); }
 
-        /** Sets the specified value to the {@link VkLatencySurfaceCapabilitiesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkLatencySurfaceCapabilitiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkLatencySurfaceCapabilitiesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV} value to the {@link VkLatencySurfaceCapabilitiesNV#sType} field. */
+        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV} value to the {@code sType} field. */
         public VkLatencySurfaceCapabilitiesNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV); }
-        /** Sets the specified value to the {@link VkLatencySurfaceCapabilitiesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkLatencySurfaceCapabilitiesNV.Buffer pNext(@NativeType("void const *") long value) { VkLatencySurfaceCapabilitiesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencySurfaceCapabilitiesNV#presentModeCount} field. */
+        /** Sets the specified value to the {@code presentModeCount} field. */
         public VkLatencySurfaceCapabilitiesNV.Buffer presentModeCount(@NativeType("uint32_t") int value) { VkLatencySurfaceCapabilitiesNV.npresentModeCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkLatencySurfaceCapabilitiesNV#pPresentModes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pPresentModes} field. */
         public VkLatencySurfaceCapabilitiesNV.Buffer pPresentModes(@Nullable @NativeType("VkPresentModeKHR *") IntBuffer value) { VkLatencySurfaceCapabilitiesNV.npPresentModes(address(), value); return this; }
 
     }

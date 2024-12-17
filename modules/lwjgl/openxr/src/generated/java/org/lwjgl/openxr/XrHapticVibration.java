@@ -16,35 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Base header for haptic feedback.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrHapticVibration} is used in calls to {@link XR10#xrApplyHapticFeedback ApplyHapticFeedback} that trigger actionname:vibration output actions.</p>
- * 
- * <p>The {@code duration}, and {@code frequency} parameters <b>may</b> be clamped to implementation-dependent ranges.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_HAPTIC_VIBRATION TYPE_HAPTIC_VIBRATION}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHapticBaseHeader}, {@link XR10#xrApplyHapticFeedback ApplyHapticFeedback}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHapticVibration {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrDuration {@link #duration};
- *     float {@link #frequency};
- *     float {@link #amplitude};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrDuration duration;
+ *     float frequency;
+ *     float amplitude;
+ * }}</pre>
  */
 public class XrHapticVibration extends Struct<XrHapticVibration> implements NativeResource {
 
@@ -103,31 +82,31 @@ public class XrHapticVibration extends Struct<XrHapticVibration> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of nanoseconds the vibration <b>should</b> last. If {@link XR10#XR_MIN_HAPTIC_DURATION MIN_HAPTIC_DURATION} is specified, the runtime <b>must</b> produce a short haptics pulse of minimal supported duration for the haptic device. */
+    /** @return the value of the {@code duration} field. */
     @NativeType("XrDuration")
     public long duration() { return nduration(address()); }
-    /** the frequency of the vibration in Hz. If {@link XR10#XR_FREQUENCY_UNSPECIFIED FREQUENCY_UNSPECIFIED} is specified, it is left to the runtime to decide the optimal frequency value to use. */
+    /** @return the value of the {@code frequency} field. */
     public float frequency() { return nfrequency(address()); }
-    /** the amplitude of the vibration between <code>0.0</code> and <code>1.0</code>. */
+    /** @return the value of the {@code amplitude} field. */
     public float amplitude() { return namplitude(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHapticVibration type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_HAPTIC_VIBRATION TYPE_HAPTIC_VIBRATION} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_HAPTIC_VIBRATION TYPE_HAPTIC_VIBRATION} value to the {@code type} field. */
     public XrHapticVibration type$Default() { return type(XR10.XR_TYPE_HAPTIC_VIBRATION); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHapticVibration next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #duration} field. */
+    /** Sets the specified value to the {@code duration} field. */
     public XrHapticVibration duration(@NativeType("XrDuration") long value) { nduration(address(), value); return this; }
-    /** Sets the specified value to the {@link #frequency} field. */
+    /** Sets the specified value to the {@code frequency} field. */
     public XrHapticVibration frequency(float value) { nfrequency(address(), value); return this; }
-    /** Sets the specified value to the {@link #amplitude} field. */
+    /** Sets the specified value to the {@code amplitude} field. */
     public XrHapticVibration amplitude(float value) { namplitude(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -345,31 +324,31 @@ public class XrHapticVibration extends Struct<XrHapticVibration> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHapticVibration#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHapticVibration.ntype(address()); }
-        /** @return the value of the {@link XrHapticVibration#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHapticVibration.nnext(address()); }
-        /** @return the value of the {@link XrHapticVibration#duration} field. */
+        /** @return the value of the {@code duration} field. */
         @NativeType("XrDuration")
         public long duration() { return XrHapticVibration.nduration(address()); }
-        /** @return the value of the {@link XrHapticVibration#frequency} field. */
+        /** @return the value of the {@code frequency} field. */
         public float frequency() { return XrHapticVibration.nfrequency(address()); }
-        /** @return the value of the {@link XrHapticVibration#amplitude} field. */
+        /** @return the value of the {@code amplitude} field. */
         public float amplitude() { return XrHapticVibration.namplitude(address()); }
 
-        /** Sets the specified value to the {@link XrHapticVibration#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHapticVibration.Buffer type(@NativeType("XrStructureType") int value) { XrHapticVibration.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_HAPTIC_VIBRATION TYPE_HAPTIC_VIBRATION} value to the {@link XrHapticVibration#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_HAPTIC_VIBRATION TYPE_HAPTIC_VIBRATION} value to the {@code type} field. */
         public XrHapticVibration.Buffer type$Default() { return type(XR10.XR_TYPE_HAPTIC_VIBRATION); }
-        /** Sets the specified value to the {@link XrHapticVibration#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHapticVibration.Buffer next(@NativeType("void const *") long value) { XrHapticVibration.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHapticVibration#duration} field. */
+        /** Sets the specified value to the {@code duration} field. */
         public XrHapticVibration.Buffer duration(@NativeType("XrDuration") long value) { XrHapticVibration.nduration(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHapticVibration#frequency} field. */
+        /** Sets the specified value to the {@code frequency} field. */
         public XrHapticVibration.Buffer frequency(float value) { XrHapticVibration.nfrequency(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHapticVibration#amplitude} field. */
+        /** Sets the specified value to the {@code amplitude} field. */
         public XrHapticVibration.Buffer amplitude(float value) { XrHapticVibration.namplitude(address(), value); return this; }
 
     }

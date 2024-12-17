@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the ray query features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceRayQueryFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceRayQueryFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRRayQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceRayQueryFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #rayQuery};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 rayQuery;
+ * }}</pre>
  */
 public class VkPhysicalDeviceRayQueryFeaturesKHR extends Struct<VkPhysicalDeviceRayQueryFeaturesKHR> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceRayQueryFeaturesKHR extends Struct<VkPhysicalDevice
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports ray query ({@code OpRayQueryProceedKHR}) functionality. */
+    /** @return the value of the {@code rayQuery} field. */
     @NativeType("VkBool32")
     public boolean rayQuery() { return nrayQuery(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceRayQueryFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRRayQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRRayQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceRayQueryFeaturesKHR sType$Default() { return sType(KHRRayQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceRayQueryFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #rayQuery} field. */
+    /** Sets the specified value to the {@code rayQuery} field. */
     public VkPhysicalDeviceRayQueryFeaturesKHR rayQuery(@NativeType("VkBool32") boolean value) { nrayQuery(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceRayQueryFeaturesKHR extends Struct<VkPhysicalDevice
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceRayQueryFeaturesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceRayQueryFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayQueryFeaturesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRayQueryFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayQueryFeaturesKHR#rayQuery} field. */
+        /** @return the value of the {@code rayQuery} field. */
         @NativeType("VkBool32")
         public boolean rayQuery() { return VkPhysicalDeviceRayQueryFeaturesKHR.nrayQuery(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayQueryFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceRayQueryFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayQueryFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRRayQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR} value to the {@link VkPhysicalDeviceRayQueryFeaturesKHR#sType} field. */
+        /** Sets the {@link KHRRayQuery#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceRayQueryFeaturesKHR.Buffer sType$Default() { return sType(KHRRayQuery.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayQueryFeaturesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceRayQueryFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayQueryFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayQueryFeaturesKHR#rayQuery} field. */
+        /** Sets the specified value to the {@code rayQuery} field. */
         public VkPhysicalDeviceRayQueryFeaturesKHR.Buffer rayQuery(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRayQueryFeaturesKHR.nrayQuery(address(), value ? 1 : 0); return this; }
 
     }

@@ -16,23 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Offset in two dimensions.
- * 
- * <h5>Description</h5>
- * 
- * <p>This variant is for representing discrete values such as texels. For representing physical distances, the floating-point variant {@link XrOffset2Df} is used instead.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent2Di}, {@link XrOffset2Df}, {@link XrRect2Di}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrOffset2Di {
- *     int32_t {@link #x};
- *     int32_t {@link #y};
- * }</code></pre>
+ *     int32_t x;
+ *     int32_t y;
+ * }}</pre>
  */
 public class XrOffset2Di extends Struct<XrOffset2Di> implements NativeResource {
 
@@ -82,16 +70,16 @@ public class XrOffset2Di extends Struct<XrOffset2Di> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the integer offset in the x direction. */
+    /** @return the value of the {@code x} field. */
     @NativeType("int32_t")
     public int x() { return nx(address()); }
-    /** the integer offset in the y direction. */
+    /** @return the value of the {@code y} field. */
     @NativeType("int32_t")
     public int y() { return ny(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public XrOffset2Di x(@NativeType("int32_t") int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public XrOffset2Di y(@NativeType("int32_t") int value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -281,16 +269,16 @@ public class XrOffset2Di extends Struct<XrOffset2Di> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrOffset2Di#x} field. */
+        /** @return the value of the {@code x} field. */
         @NativeType("int32_t")
         public int x() { return XrOffset2Di.nx(address()); }
-        /** @return the value of the {@link XrOffset2Di#y} field. */
+        /** @return the value of the {@code y} field. */
         @NativeType("int32_t")
         public int y() { return XrOffset2Di.ny(address()); }
 
-        /** Sets the specified value to the {@link XrOffset2Di#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public XrOffset2Di.Buffer x(@NativeType("int32_t") int value) { XrOffset2Di.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link XrOffset2Di#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public XrOffset2Di.Buffer y(@NativeType("int32_t") int value) { XrOffset2Di.ny(address(), value); return this; }
 
     }

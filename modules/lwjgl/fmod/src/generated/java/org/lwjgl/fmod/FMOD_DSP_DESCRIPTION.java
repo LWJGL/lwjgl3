@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_DSP_DESCRIPTION {
  *     unsigned int pluginsdkversion;
  *     char name[32];
@@ -47,7 +45,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_DSP_SYSTEM_REGISTER_CALLBACKI FMOD_DSP_SYSTEM_REGISTER_CALLBACK} sys_register;
  *     {@link FMOD_DSP_SYSTEM_DEREGISTER_CALLBACKI FMOD_DSP_SYSTEM_DEREGISTER_CALLBACK} sys_deregister;
  *     {@link FMOD_DSP_SYSTEM_MIX_CALLBACKI FMOD_DSP_SYSTEM_MIX_CALLBACK} sys_mix;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_DSP_DESCRIPTION extends Struct<FMOD_DSP_DESCRIPTION> implements NativeResource {
 

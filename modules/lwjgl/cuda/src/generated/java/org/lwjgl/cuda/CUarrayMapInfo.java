@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUarrayMapInfo {
  *     CUresourcetype resourceType;
  *     union {
@@ -53,7 +51,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int deviceBitMask;
  *     unsigned int flags;
  *     unsigned int reserved[2];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUarrayMapInfo extends Struct<CUarrayMapInfo> implements NativeResource {
 

@@ -16,30 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describe a scene frustum bounds.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@code farDistance} is less than or equal to zero. The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if the {@code fov} angles are not between between <code>-π/2</code> and <code>π/2</code> exclusively.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneFrustumBoundMSFT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFovf}, {@link XrPosef}, {@link XrSceneBoundsMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneFrustumBoundMSFT {
- *     {@link XrPosef XrPosef} {@link #pose};
- *     {@link XrFovf XrFovf} {@link #fov};
- *     float {@link #farDistance};
- * }</code></pre>
+ *     {@link XrPosef XrPosef} pose;
+ *     {@link XrFovf XrFovf} fov;
+ *     float farDistance;
+ * }}</pre>
  */
 public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> implements NativeResource {
 
@@ -92,22 +74,22 @@ public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@link XrPosef} defining the position and orientation of the tip of the frustum bound within the reference frame of the corresponding {@link XrSceneBoundsMSFT}{@code ::space}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** an {@link XrFovf} for the four sides of the frustum bound where {@link XrFovf}{@code ::angleLeft} and {@link XrFovf}{@code ::angleRight} are along the X axis and {@link XrFovf}{@code ::angleUp} and {@link XrFovf}{@code ::angleDown} are along the Y axis of the frustum bound space. */
+    /** @return a {@link XrFovf} view of the {@code fov} field. */
     public XrFovf fov() { return nfov(address()); }
-    /** the positive distance of the far plane of the frustum bound along the -Z direction of the frustum bound space. */
+    /** @return the value of the {@code farDistance} field. */
     public float farDistance() { return nfarDistance(address()); }
 
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrSceneFrustumBoundMSFT pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSceneFrustumBoundMSFT pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-    /** Copies the specified {@link XrFovf} to the {@link #fov} field. */
+    /** Copies the specified {@link XrFovf} to the {@code fov} field. */
     public XrSceneFrustumBoundMSFT fov(XrFovf value) { nfov(address(), value); return this; }
-    /** Passes the {@link #fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSceneFrustumBoundMSFT fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
-    /** Sets the specified value to the {@link #farDistance} field. */
+    /** Sets the specified value to the {@code farDistance} field. */
     public XrSceneFrustumBoundMSFT farDistance(float value) { nfarDistance(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,22 +285,22 @@ public class XrSceneFrustumBoundMSFT extends Struct<XrSceneFrustumBoundMSFT> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrPosef} view of the {@link XrSceneFrustumBoundMSFT#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrSceneFrustumBoundMSFT.npose(address()); }
-        /** @return a {@link XrFovf} view of the {@link XrSceneFrustumBoundMSFT#fov} field. */
+        /** @return a {@link XrFovf} view of the {@code fov} field. */
         public XrFovf fov() { return XrSceneFrustumBoundMSFT.nfov(address()); }
-        /** @return the value of the {@link XrSceneFrustumBoundMSFT#farDistance} field. */
+        /** @return the value of the {@code farDistance} field. */
         public float farDistance() { return XrSceneFrustumBoundMSFT.nfarDistance(address()); }
 
-        /** Copies the specified {@link XrPosef} to the {@link XrSceneFrustumBoundMSFT#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrSceneFrustumBoundMSFT.Buffer pose(XrPosef value) { XrSceneFrustumBoundMSFT.npose(address(), value); return this; }
-        /** Passes the {@link XrSceneFrustumBoundMSFT#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSceneFrustumBoundMSFT.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-        /** Copies the specified {@link XrFovf} to the {@link XrSceneFrustumBoundMSFT#fov} field. */
+        /** Copies the specified {@link XrFovf} to the {@code fov} field. */
         public XrSceneFrustumBoundMSFT.Buffer fov(XrFovf value) { XrSceneFrustumBoundMSFT.nfov(address(), value); return this; }
-        /** Passes the {@link XrSceneFrustumBoundMSFT#fov} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code fov} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSceneFrustumBoundMSFT.Buffer fov(java.util.function.Consumer<XrFovf> consumer) { consumer.accept(fov()); return this; }
-        /** Sets the specified value to the {@link XrSceneFrustumBoundMSFT#farDistance} field. */
+        /** Sets the specified value to the {@code farDistance} field. */
         public XrSceneFrustumBoundMSFT.Buffer farDistance(float value) { XrSceneFrustumBoundMSFT.nfarDistance(address(), value); return this; }
 
     }

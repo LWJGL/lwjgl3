@@ -17,21 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_convert_config {
- *     float {@link #global_alpha};
- *     enum nk_anti_aliasing {@link #line_AA};
- *     enum nk_anti_aliasing {@link #shape_AA};
- *     unsigned int {@link #circle_segment_count};
- *     unsigned int {@link #arc_segment_count};
- *     unsigned int {@link #curve_segment_count};
- *     {@link NkDrawNullTexture struct nk_draw_null_texture} {@link #tex_null};
- *     {@link NkDrawVertexLayoutElement struct nk_draw_vertex_layout_element} * {@link #vertex_layout};
- *     nk_size {@link #vertex_size};
- *     nk_size {@link #vertex_alignment};
- * }</code></pre>
+ *     float global_alpha;
+ *     enum nk_anti_aliasing line_AA;
+ *     enum nk_anti_aliasing shape_AA;
+ *     unsigned int circle_segment_count;
+ *     unsigned int arc_segment_count;
+ *     unsigned int curve_segment_count;
+ *     {@link NkDrawNullTexture struct nk_draw_null_texture} tex_null;
+ *     {@link NkDrawVertexLayoutElement struct nk_draw_vertex_layout_element} * vertex_layout;
+ *     nk_size vertex_size;
+ *     nk_size vertex_alignment;
+ * }}</pre>
  */
 @NativeType("struct nk_convert_config")
 public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeResource {
@@ -106,61 +104,57 @@ public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** global alpha value */
+    /** @return the value of the {@code global_alpha} field. */
     public float global_alpha() { return nglobal_alpha(address()); }
-    /** line anti-aliasing flag can be turned off if you are tight on memory. One of:<br><table><tr><td>{@link Nuklear#NK_ANTI_ALIASING_OFF ANTI_ALIASING_OFF}</td><td>{@link Nuklear#NK_ANTI_ALIASING_ON ANTI_ALIASING_ON}</td></tr></table> */
+    /** @return the value of the {@code line_AA} field. */
     @NativeType("enum nk_anti_aliasing")
     public int line_AA() { return nline_AA(address()); }
-    /** shape anti-aliasing flag can be turned off if you are tight on memory. One of:<br><table><tr><td>{@link Nuklear#NK_ANTI_ALIASING_OFF ANTI_ALIASING_OFF}</td><td>{@link Nuklear#NK_ANTI_ALIASING_ON ANTI_ALIASING_ON}</td></tr></table> */
+    /** @return the value of the {@code shape_AA} field. */
     @NativeType("enum nk_anti_aliasing")
     public int shape_AA() { return nshape_AA(address()); }
-    /** number of segments used for circles: default to 22 */
+    /** @return the value of the {@code circle_segment_count} field. */
     @NativeType("unsigned int")
     public int circle_segment_count() { return ncircle_segment_count(address()); }
-    /** number of segments used for arcs: default to 22 */
+    /** @return the value of the {@code arc_segment_count} field. */
     @NativeType("unsigned int")
     public int arc_segment_count() { return narc_segment_count(address()); }
-    /** number of segments used for curves: default to 22 */
+    /** @return the value of the {@code curve_segment_count} field. */
     @NativeType("unsigned int")
     public int curve_segment_count() { return ncurve_segment_count(address()); }
-    /** handle to texture with a white pixel for shape drawing */
+    /** @return a {@link NkDrawNullTexture} view of the {@code tex_null} field. */
     @NativeType("struct nk_draw_null_texture")
     public NkDrawNullTexture tex_null() { return ntex_null(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return describes the vertex output format and packing
-     */
+    /** @return a {@link NkDrawVertexLayoutElement.Buffer} view of the struct array pointed to by the {@code vertex_layout} field. */
     @NativeType("struct nk_draw_vertex_layout_element *")
     public NkDrawVertexLayoutElement.Buffer vertex_layout(int capacity) { return nvertex_layout(address(), capacity); }
-    /** sizeof one vertex for vertex packing */
+    /** @return the value of the {@code vertex_size} field. */
     @NativeType("nk_size")
     public long vertex_size() { return nvertex_size(address()); }
-    /** vertex alignment: Can be optained by NK_ALIGNOF */
+    /** @return the value of the {@code vertex_alignment} field. */
     @NativeType("nk_size")
     public long vertex_alignment() { return nvertex_alignment(address()); }
 
-    /** Sets the specified value to the {@link #global_alpha} field. */
+    /** Sets the specified value to the {@code global_alpha} field. */
     public NkConvertConfig global_alpha(float value) { nglobal_alpha(address(), value); return this; }
-    /** Sets the specified value to the {@link #line_AA} field. */
+    /** Sets the specified value to the {@code line_AA} field. */
     public NkConvertConfig line_AA(@NativeType("enum nk_anti_aliasing") int value) { nline_AA(address(), value); return this; }
-    /** Sets the specified value to the {@link #shape_AA} field. */
+    /** Sets the specified value to the {@code shape_AA} field. */
     public NkConvertConfig shape_AA(@NativeType("enum nk_anti_aliasing") int value) { nshape_AA(address(), value); return this; }
-    /** Sets the specified value to the {@link #circle_segment_count} field. */
+    /** Sets the specified value to the {@code circle_segment_count} field. */
     public NkConvertConfig circle_segment_count(@NativeType("unsigned int") int value) { ncircle_segment_count(address(), value); return this; }
-    /** Sets the specified value to the {@link #arc_segment_count} field. */
+    /** Sets the specified value to the {@code arc_segment_count} field. */
     public NkConvertConfig arc_segment_count(@NativeType("unsigned int") int value) { narc_segment_count(address(), value); return this; }
-    /** Sets the specified value to the {@link #curve_segment_count} field. */
+    /** Sets the specified value to the {@code curve_segment_count} field. */
     public NkConvertConfig curve_segment_count(@NativeType("unsigned int") int value) { ncurve_segment_count(address(), value); return this; }
-    /** Copies the specified {@link NkDrawNullTexture} to the {@link #tex_null} field. */
+    /** Copies the specified {@link NkDrawNullTexture} to the {@code tex_null} field. */
     public NkConvertConfig tex_null(@NativeType("struct nk_draw_null_texture") NkDrawNullTexture value) { ntex_null(address(), value); return this; }
-    /** Passes the {@link #tex_null} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code tex_null} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkConvertConfig tex_null(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(tex_null()); return this; }
-    /** Sets the address of the specified {@link NkDrawVertexLayoutElement.Buffer} to the {@link #vertex_layout} field. */
+    /** Sets the address of the specified {@link NkDrawVertexLayoutElement.Buffer} to the {@code vertex_layout} field. */
     public NkConvertConfig vertex_layout(@NativeType("struct nk_draw_vertex_layout_element *") NkDrawVertexLayoutElement.Buffer value) { nvertex_layout(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertex_size} field. */
+    /** Sets the specified value to the {@code vertex_size} field. */
     public NkConvertConfig vertex_size(@NativeType("nk_size") long value) { nvertex_size(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertex_alignment} field. */
+    /** Sets the specified value to the {@code vertex_alignment} field. */
     public NkConvertConfig vertex_alignment(@NativeType("nk_size") long value) { nvertex_alignment(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -426,61 +420,57 @@ public class NkConvertConfig extends Struct<NkConvertConfig> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link NkConvertConfig#global_alpha} field. */
+        /** @return the value of the {@code global_alpha} field. */
         public float global_alpha() { return NkConvertConfig.nglobal_alpha(address()); }
-        /** @return the value of the {@link NkConvertConfig#line_AA} field. */
+        /** @return the value of the {@code line_AA} field. */
         @NativeType("enum nk_anti_aliasing")
         public int line_AA() { return NkConvertConfig.nline_AA(address()); }
-        /** @return the value of the {@link NkConvertConfig#shape_AA} field. */
+        /** @return the value of the {@code shape_AA} field. */
         @NativeType("enum nk_anti_aliasing")
         public int shape_AA() { return NkConvertConfig.nshape_AA(address()); }
-        /** @return the value of the {@link NkConvertConfig#circle_segment_count} field. */
+        /** @return the value of the {@code circle_segment_count} field. */
         @NativeType("unsigned int")
         public int circle_segment_count() { return NkConvertConfig.ncircle_segment_count(address()); }
-        /** @return the value of the {@link NkConvertConfig#arc_segment_count} field. */
+        /** @return the value of the {@code arc_segment_count} field. */
         @NativeType("unsigned int")
         public int arc_segment_count() { return NkConvertConfig.narc_segment_count(address()); }
-        /** @return the value of the {@link NkConvertConfig#curve_segment_count} field. */
+        /** @return the value of the {@code curve_segment_count} field. */
         @NativeType("unsigned int")
         public int curve_segment_count() { return NkConvertConfig.ncurve_segment_count(address()); }
-        /** @return a {@link NkDrawNullTexture} view of the {@link NkConvertConfig#tex_null} field. */
+        /** @return a {@link NkDrawNullTexture} view of the {@code tex_null} field. */
         @NativeType("struct nk_draw_null_texture")
         public NkDrawNullTexture tex_null() { return NkConvertConfig.ntex_null(address()); }
-        /**
-         * @return a {@link NkDrawVertexLayoutElement.Buffer} view of the struct array pointed to by the {@link NkConvertConfig#vertex_layout} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link NkDrawVertexLayoutElement.Buffer} view of the struct array pointed to by the {@code vertex_layout} field. */
         @NativeType("struct nk_draw_vertex_layout_element *")
         public NkDrawVertexLayoutElement.Buffer vertex_layout(int capacity) { return NkConvertConfig.nvertex_layout(address(), capacity); }
-        /** @return the value of the {@link NkConvertConfig#vertex_size} field. */
+        /** @return the value of the {@code vertex_size} field. */
         @NativeType("nk_size")
         public long vertex_size() { return NkConvertConfig.nvertex_size(address()); }
-        /** @return the value of the {@link NkConvertConfig#vertex_alignment} field. */
+        /** @return the value of the {@code vertex_alignment} field. */
         @NativeType("nk_size")
         public long vertex_alignment() { return NkConvertConfig.nvertex_alignment(address()); }
 
-        /** Sets the specified value to the {@link NkConvertConfig#global_alpha} field. */
+        /** Sets the specified value to the {@code global_alpha} field. */
         public NkConvertConfig.Buffer global_alpha(float value) { NkConvertConfig.nglobal_alpha(address(), value); return this; }
-        /** Sets the specified value to the {@link NkConvertConfig#line_AA} field. */
+        /** Sets the specified value to the {@code line_AA} field. */
         public NkConvertConfig.Buffer line_AA(@NativeType("enum nk_anti_aliasing") int value) { NkConvertConfig.nline_AA(address(), value); return this; }
-        /** Sets the specified value to the {@link NkConvertConfig#shape_AA} field. */
+        /** Sets the specified value to the {@code shape_AA} field. */
         public NkConvertConfig.Buffer shape_AA(@NativeType("enum nk_anti_aliasing") int value) { NkConvertConfig.nshape_AA(address(), value); return this; }
-        /** Sets the specified value to the {@link NkConvertConfig#circle_segment_count} field. */
+        /** Sets the specified value to the {@code circle_segment_count} field. */
         public NkConvertConfig.Buffer circle_segment_count(@NativeType("unsigned int") int value) { NkConvertConfig.ncircle_segment_count(address(), value); return this; }
-        /** Sets the specified value to the {@link NkConvertConfig#arc_segment_count} field. */
+        /** Sets the specified value to the {@code arc_segment_count} field. */
         public NkConvertConfig.Buffer arc_segment_count(@NativeType("unsigned int") int value) { NkConvertConfig.narc_segment_count(address(), value); return this; }
-        /** Sets the specified value to the {@link NkConvertConfig#curve_segment_count} field. */
+        /** Sets the specified value to the {@code curve_segment_count} field. */
         public NkConvertConfig.Buffer curve_segment_count(@NativeType("unsigned int") int value) { NkConvertConfig.ncurve_segment_count(address(), value); return this; }
-        /** Copies the specified {@link NkDrawNullTexture} to the {@link NkConvertConfig#tex_null} field. */
+        /** Copies the specified {@link NkDrawNullTexture} to the {@code tex_null} field. */
         public NkConvertConfig.Buffer tex_null(@NativeType("struct nk_draw_null_texture") NkDrawNullTexture value) { NkConvertConfig.ntex_null(address(), value); return this; }
-        /** Passes the {@link NkConvertConfig#tex_null} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code tex_null} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkConvertConfig.Buffer tex_null(java.util.function.Consumer<NkDrawNullTexture> consumer) { consumer.accept(tex_null()); return this; }
-        /** Sets the address of the specified {@link NkDrawVertexLayoutElement.Buffer} to the {@link NkConvertConfig#vertex_layout} field. */
+        /** Sets the address of the specified {@link NkDrawVertexLayoutElement.Buffer} to the {@code vertex_layout} field. */
         public NkConvertConfig.Buffer vertex_layout(@NativeType("struct nk_draw_vertex_layout_element *") NkDrawVertexLayoutElement.Buffer value) { NkConvertConfig.nvertex_layout(address(), value); return this; }
-        /** Sets the specified value to the {@link NkConvertConfig#vertex_size} field. */
+        /** Sets the specified value to the {@code vertex_size} field. */
         public NkConvertConfig.Buffer vertex_size(@NativeType("nk_size") long value) { NkConvertConfig.nvertex_size(address(), value); return this; }
-        /** Sets the specified value to the {@link NkConvertConfig#vertex_alignment} field. */
+        /** Sets the specified value to the {@code vertex_alignment} field. */
         public NkConvertConfig.Buffer vertex_alignment(@NativeType("nk_size") long value) { NkConvertConfig.nvertex_alignment(address(), value); return this; }
 
     }

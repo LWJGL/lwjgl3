@@ -17,33 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to output haptic feedback.
- * 
- * <h5>Description</h5>
- * 
- * <p>See {@link XrActionCreateInfo} for a description of subaction paths, and the restrictions on their use.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_HAPTIC_ACTION_INFO TYPE_HAPTIC_ACTION_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code action} <b>must</b> be a valid {@code XrAction} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrApplyHapticFeedback ApplyHapticFeedback}, {@link FBHapticPcm#xrGetDeviceSampleRateFB GetDeviceSampleRateFB}, {@link XR10#xrStopHapticFeedback StopHapticFeedback}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHapticActionInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrAction {@link #action};
- *     XrPath {@link #subactionPath};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrAction action;
+ *     XrPath subactionPath;
+ * }}</pre>
  */
 public class XrHapticActionInfo extends Struct<XrHapticActionInfo> implements NativeResource {
 
@@ -99,28 +79,28 @@ public class XrHapticActionInfo extends Struct<XrHapticActionInfo> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrAction} handle for the desired output haptic action. */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** the subaction path {@code XrPath} of the device to send the haptic event to, or {@link XR10#XR_NULL_PATH NULL_PATH} to specify all subaction paths. If the subaction path is specified, it is one of the subaction paths that were specified when the action was created. If the subaction path was not specified when the action was created, the runtime <b>must</b> return {@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}. If this parameter is specified, the runtime <b>must</b> trigger the haptic events only on the device from the subaction path. */
+    /** @return the value of the {@code subactionPath} field. */
     @NativeType("XrPath")
     public long subactionPath() { return nsubactionPath(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHapticActionInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_HAPTIC_ACTION_INFO TYPE_HAPTIC_ACTION_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_HAPTIC_ACTION_INFO TYPE_HAPTIC_ACTION_INFO} value to the {@code type} field. */
     public XrHapticActionInfo type$Default() { return type(XR10.XR_TYPE_HAPTIC_ACTION_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHapticActionInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #action} field. */
+    /** Sets the specified value to the {@code action} field. */
     public XrHapticActionInfo action(XrAction value) { naction(address(), value); return this; }
-    /** Sets the specified value to the {@link #subactionPath} field. */
+    /** Sets the specified value to the {@code subactionPath} field. */
     public XrHapticActionInfo subactionPath(@NativeType("XrPath") long value) { nsubactionPath(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -331,28 +311,28 @@ public class XrHapticActionInfo extends Struct<XrHapticActionInfo> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHapticActionInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHapticActionInfo.ntype(address()); }
-        /** @return the value of the {@link XrHapticActionInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHapticActionInfo.nnext(address()); }
-        /** @return the value of the {@link XrHapticActionInfo#action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrHapticActionInfo.naction(address()); }
-        /** @return the value of the {@link XrHapticActionInfo#subactionPath} field. */
+        /** @return the value of the {@code subactionPath} field. */
         @NativeType("XrPath")
         public long subactionPath() { return XrHapticActionInfo.nsubactionPath(address()); }
 
-        /** Sets the specified value to the {@link XrHapticActionInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHapticActionInfo.Buffer type(@NativeType("XrStructureType") int value) { XrHapticActionInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_HAPTIC_ACTION_INFO TYPE_HAPTIC_ACTION_INFO} value to the {@link XrHapticActionInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_HAPTIC_ACTION_INFO TYPE_HAPTIC_ACTION_INFO} value to the {@code type} field. */
         public XrHapticActionInfo.Buffer type$Default() { return type(XR10.XR_TYPE_HAPTIC_ACTION_INFO); }
-        /** Sets the specified value to the {@link XrHapticActionInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHapticActionInfo.Buffer next(@NativeType("void const *") long value) { XrHapticActionInfo.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHapticActionInfo#action} field. */
+        /** Sets the specified value to the {@code action} field. */
         public XrHapticActionInfo.Buffer action(XrAction value) { XrHapticActionInfo.naction(address(), value); return this; }
-        /** Sets the specified value to the {@link XrHapticActionInfo#subactionPath} field. */
+        /** Sets the specified value to the {@code subactionPath} field. */
         public XrHapticActionInfo.Buffer subactionPath(@NativeType("XrPath") long value) { XrHapticActionInfo.nsubactionPath(address(), value); return this; }
 
     }

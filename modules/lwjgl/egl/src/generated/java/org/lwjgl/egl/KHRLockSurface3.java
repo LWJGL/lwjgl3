@@ -17,14 +17,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_lock_surface3.txt">KHR_lock_surface3</a> extension.
- * 
- * <p>This extension allows mapping color buffers of EGL surfaces into the client address space. This is useful primarily for software rendering on low-end
- * devices which do not support EGL client rendering APIs, although it may be implemented efficiently on more capable devices as well.</p>
- * 
- * <p>Requires {@link EGL14 EGL 1.4}.</p>
- */
 public class KHRLockSurface3 {
 
     public static final int
@@ -57,6 +49,7 @@ public class KHRLockSurface3 {
 
     // --- [ eglLockSurfaceKHR ] ---
 
+    /** {@code EGLBoolean eglLockSurfaceKHR(EGLDisplay dpy, EGLSurface surface, EGLint const * attrib_list)} */
     public static int neglLockSurfaceKHR(long dpy, long surface, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglLockSurfaceKHR;
         if (CHECKS) {
@@ -67,6 +60,7 @@ public class KHRLockSurface3 {
         return callPPPI(dpy, surface, attrib_list, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglLockSurfaceKHR(EGLDisplay dpy, EGLSurface surface, EGLint const * attrib_list)} */
     @NativeType("EGLBoolean")
     public static boolean eglLockSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
@@ -77,6 +71,7 @@ public class KHRLockSurface3 {
 
     // --- [ eglUnlockSurfaceKHR ] ---
 
+    /** {@code EGLBoolean eglUnlockSurfaceKHR(EGLDisplay dpy, EGLSurface surface)} */
     @NativeType("EGLBoolean")
     public static boolean eglUnlockSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface) {
         long __functionAddress = EGL.getCapabilities().eglUnlockSurfaceKHR;
@@ -90,6 +85,7 @@ public class KHRLockSurface3 {
 
     // --- [ eglQuerySurface64KHR ] ---
 
+    /** {@code EGLBoolean eglQuerySurface64KHR(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLAttribKHR * value)} */
     public static int neglQuerySurface64KHR(long dpy, long surface, int attribute, long value) {
         long __functionAddress = EGL.getCapabilities().eglQuerySurface64KHR;
         if (CHECKS) {
@@ -100,6 +96,7 @@ public class KHRLockSurface3 {
         return callPPPI(dpy, surface, attribute, value, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglQuerySurface64KHR(EGLDisplay dpy, EGLSurface surface, EGLint attribute, EGLAttribKHR * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQuerySurface64KHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint") int attribute, @NativeType("EGLAttribKHR *") PointerBuffer value) {
         if (CHECKS) {
@@ -108,7 +105,7 @@ public class KHRLockSurface3 {
         return neglQuerySurface64KHR(dpy, surface, attribute, memAddress(value)) != 0;
     }
 
-    /** Array version of: {@link #eglLockSurfaceKHR LockSurfaceKHR} */
+    /** {@code EGLBoolean eglLockSurfaceKHR(EGLDisplay dpy, EGLSurface surface, EGLint const * attrib_list)} */
     @NativeType("EGLBoolean")
     public static boolean eglLockSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLSurface") long surface, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglLockSurfaceKHR;

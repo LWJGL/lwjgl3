@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a TrueType 'post' table.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TT_Postscript {
  *     FT_Fixed FormatType;
  *     FT_Fixed italicAngle;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_ULong maxMemType42;
  *     FT_ULong minMemType1;
  *     FT_ULong maxMemType1;
- * }</code></pre>
+ * }}</pre>
  */
 public class TT_Postscript extends Struct<TT_Postscript> {
 

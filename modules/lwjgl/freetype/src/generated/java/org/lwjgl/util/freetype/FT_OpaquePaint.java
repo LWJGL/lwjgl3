@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A structure representing an offset to a {@code Paint} value stored in any of the paint tables of a {@code COLR} v1 font.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_OpaquePaintRec {
  *     FT_Byte * p;
  *     FT_Bool insert_root_transform;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_OpaquePaintRec")
 public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeResource {
@@ -75,11 +71,7 @@ public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field. */
     @NativeType("FT_Byte *")
     public @Nullable ByteBuffer p(int capacity) { return np(address(), capacity); }
     /** @return the value of the {@code insert_root_transform} field. */
@@ -245,11 +237,7 @@ public class FT_OpaquePaint extends Struct<FT_OpaquePaint> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code p} field. */
         @NativeType("FT_Byte *")
         public @Nullable ByteBuffer p(int capacity) { return FT_OpaquePaint.np(address(), capacity); }
         /** @return the value of the {@code insert_root_transform} field. */

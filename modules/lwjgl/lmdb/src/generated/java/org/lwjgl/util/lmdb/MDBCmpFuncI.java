@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     MDB_val const *a,
- *     MDB_val const *b
- * )</code></pre>
- */
+/** Callback function: {@link #invoke MDB_cmp_func *} */
 @FunctionalInterface
 @NativeType("MDB_cmp_func *")
 public interface MDBCmpFuncI extends CallbackI {
@@ -43,14 +35,7 @@ public interface MDBCmpFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A callback function used to compare two keys in a database.
-     *
-     * @param a the first item to compare
-     * @param b the second item to compare
-     *
-     * @return &lt; 0 if a &lt; b, 0 if a == b, &gt; 0 if a &gt; b
-     */
+    /** {@code int (* MDB_cmp_func *) (MDB_val const * a, MDB_val const * b)} */
     int invoke(@NativeType("MDB_val const *") long a, @NativeType("MDB_val const *") long b);
 
 }

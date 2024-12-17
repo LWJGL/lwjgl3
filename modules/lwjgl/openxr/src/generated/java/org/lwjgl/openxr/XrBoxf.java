@@ -16,23 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describe a scene oriented box.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if width, height or depth values are negative.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent3Df}, {@link XrPosef}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBoxf {
- *     {@link XrPosef XrPosef} {@link #center};
- *     {@link XrExtent3Df XrExtent3Df} {@link #extents};
- * }</code></pre>
+ *     {@link XrPosef XrPosef} center;
+ *     {@link XrExtent3Df XrExtent3Df} extents;
+ * }}</pre>
  */
 public class XrBoxf extends Struct<XrBoxf> implements NativeResource {
 
@@ -82,18 +70,18 @@ public class XrBoxf extends Struct<XrBoxf> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@link XrPosef} defining the center position and orientation of the oriented bounding box bound within the reference frame of the corresponding {@code XrSpace}. */
+    /** @return a {@link XrPosef} view of the {@code center} field. */
     public XrPosef center() { return ncenter(address()); }
-    /** an {@link XrExtent3Df} defining the edge-to-edge length of the box along each dimension with {@code center} as the center. */
+    /** @return a {@link XrExtent3Df} view of the {@code extents} field. */
     public XrExtent3Df extents() { return nextents(address()); }
 
-    /** Copies the specified {@link XrPosef} to the {@link #center} field. */
+    /** Copies the specified {@link XrPosef} to the {@code center} field. */
     public XrBoxf center(XrPosef value) { ncenter(address(), value); return this; }
-    /** Passes the {@link #center} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code center} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrBoxf center(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(center()); return this; }
-    /** Copies the specified {@link XrExtent3Df} to the {@link #extents} field. */
+    /** Copies the specified {@link XrExtent3Df} to the {@code extents} field. */
     public XrBoxf extents(XrExtent3Df value) { nextents(address(), value); return this; }
-    /** Passes the {@link #extents} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code extents} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrBoxf extents(java.util.function.Consumer<XrExtent3Df> consumer) { consumer.accept(extents()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -283,18 +271,18 @@ public class XrBoxf extends Struct<XrBoxf> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrPosef} view of the {@link XrBoxf#center} field. */
+        /** @return a {@link XrPosef} view of the {@code center} field. */
         public XrPosef center() { return XrBoxf.ncenter(address()); }
-        /** @return a {@link XrExtent3Df} view of the {@link XrBoxf#extents} field. */
+        /** @return a {@link XrExtent3Df} view of the {@code extents} field. */
         public XrExtent3Df extents() { return XrBoxf.nextents(address()); }
 
-        /** Copies the specified {@link XrPosef} to the {@link XrBoxf#center} field. */
+        /** Copies the specified {@link XrPosef} to the {@code center} field. */
         public XrBoxf.Buffer center(XrPosef value) { XrBoxf.ncenter(address(), value); return this; }
-        /** Passes the {@link XrBoxf#center} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code center} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrBoxf.Buffer center(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(center()); return this; }
-        /** Copies the specified {@link XrExtent3Df} to the {@link XrBoxf#extents} field. */
+        /** Copies the specified {@link XrExtent3Df} to the {@code extents} field. */
         public XrBoxf.Buffer extents(XrExtent3Df value) { XrBoxf.nextents(address(), value); return this; }
-        /** Passes the {@link XrBoxf#extents} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code extents} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrBoxf.Buffer extents(java.util.function.Consumer<XrExtent3Df> consumer) { consumer.accept(extents()); return this; }
 
     }

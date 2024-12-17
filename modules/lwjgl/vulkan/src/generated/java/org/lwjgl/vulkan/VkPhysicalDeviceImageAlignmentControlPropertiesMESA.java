@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing supported image alignments for a physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceImageAlignmentControlPropertiesMESA} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link MESAImageAlignmentControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceImageAlignmentControlPropertiesMESA {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint32_t {@link #supportedImageAlignmentMask};
- * }</code></pre>
+ *     uint32_t supportedImageAlignmentMask;
+ * }}</pre>
  */
 public class VkPhysicalDeviceImageAlignmentControlPropertiesMESA extends Struct<VkPhysicalDeviceImageAlignmentControlPropertiesMESA> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceImageAlignmentControlPropertiesMESA extends Struct<
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitwise-or of all potentially supported image alignments for a given physical device when using {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. If a given alignment is supported, the application <b>can</b> request an image to have that alignment. A given set of image creation parameters <b>may</b> support a subset of these alignments. To determine if a particular alignment is supported for a given set of image creation parameters, check {@link VkMemoryRequirements}{@code ::alignment} after chaining in {@link VkImageAlignmentControlCreateInfoMESA}. */
+    /** @return the value of the {@code supportedImageAlignmentMask} field. */
     @NativeType("uint32_t")
     public int supportedImageAlignmentMask() { return nsupportedImageAlignmentMask(address()); }
 
@@ -104,7 +90,7 @@ public class VkPhysicalDeviceImageAlignmentControlPropertiesMESA extends Struct<
     public VkPhysicalDeviceImageAlignmentControlPropertiesMESA sType$Default() { return sType(MESAImageAlignmentControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceImageAlignmentControlPropertiesMESA pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportedImageAlignmentMask} field. */
+    /** Sets the specified value to the {@code supportedImageAlignmentMask} field. */
     public VkPhysicalDeviceImageAlignmentControlPropertiesMESA supportedImageAlignmentMask(@NativeType("uint32_t") int value) { nsupportedImageAlignmentMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,7 +292,7 @@ public class VkPhysicalDeviceImageAlignmentControlPropertiesMESA extends Struct<
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceImageAlignmentControlPropertiesMESA.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceImageAlignmentControlPropertiesMESA#supportedImageAlignmentMask} field. */
+        /** @return the value of the {@code supportedImageAlignmentMask} field. */
         @NativeType("uint32_t")
         public int supportedImageAlignmentMask() { return VkPhysicalDeviceImageAlignmentControlPropertiesMESA.nsupportedImageAlignmentMask(address()); }
 
@@ -316,7 +302,7 @@ public class VkPhysicalDeviceImageAlignmentControlPropertiesMESA extends Struct<
         public VkPhysicalDeviceImageAlignmentControlPropertiesMESA.Buffer sType$Default() { return sType(MESAImageAlignmentControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ALIGNMENT_CONTROL_PROPERTIES_MESA); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceImageAlignmentControlPropertiesMESA.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageAlignmentControlPropertiesMESA.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceImageAlignmentControlPropertiesMESA#supportedImageAlignmentMask} field. */
+        /** Sets the specified value to the {@code supportedImageAlignmentMask} field. */
         public VkPhysicalDeviceImageAlignmentControlPropertiesMESA.Buffer supportedImageAlignmentMask(@NativeType("uint32_t") int value) { VkPhysicalDeviceImageAlignmentControlPropertiesMESA.nsupportedImageAlignmentMask(address(), value); return this; }
 
     }

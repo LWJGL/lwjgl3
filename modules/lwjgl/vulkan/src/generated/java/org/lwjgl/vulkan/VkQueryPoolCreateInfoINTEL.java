@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkQueryPoolPerformanceQueryCreateInfoINTEL}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkQueryPoolCreateInfoINTEL {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkQueryPoolSamplingModeINTEL performanceCountersSampling;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkQueryPoolCreateInfoINTEL extends VkQueryPoolPerformanceQueryCreateInfoINTEL {
 

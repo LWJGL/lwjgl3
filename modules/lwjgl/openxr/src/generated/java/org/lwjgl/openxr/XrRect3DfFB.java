@@ -16,31 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents a rectangular prism containing a region of space.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is used for component values that may be fractional (floating-point).</p>
- * 
- * <p>The bounding box is defined by an {@code offset} and {@code extent}. The {@code offset} refers to the coordinate of the minimum corner of the box in the local space of the {@code XrSpace}; that is, the corner whose coordinate has the minimum value on each axis. The {@code extent} refers to the dimensions of the box along each axis. The maximum corner can therefore be computed as <code>offset extent</code>.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBScene XR_FB_scene} extension <b>must</b> be enabled prior to using {@link XrRect3DfFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent3DfFB}, {@link XrOffset3DfFB}, {@link FBScene#xrGetSpaceBoundingBox3DFB GetSpaceBoundingBox3DFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrRect3DfFB {
- *     {@link XrOffset3DfFB XrOffset3DfFB} {@link #offset};
- *     {@link XrExtent3DfFB XrExtent3DfFB} {@link #extent};
- * }</code></pre>
+ *     {@link XrOffset3DfFB XrOffset3DfFB} offset;
+ *     {@link XrExtent3DfFB XrExtent3DfFB} extent;
+ * }}</pre>
  */
 public class XrRect3DfFB extends Struct<XrRect3DfFB> implements NativeResource {
 
@@ -90,18 +70,18 @@ public class XrRect3DfFB extends Struct<XrRect3DfFB> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@link XrOffset3DfFB} specifying the rectangle offset. */
+    /** @return a {@link XrOffset3DfFB} view of the {@code offset} field. */
     public XrOffset3DfFB offset() { return noffset(address()); }
-    /** the {@link XrExtent3DfFB} specifying the rectangle extent. */
+    /** @return a {@link XrExtent3DfFB} view of the {@code extent} field. */
     public XrExtent3DfFB extent() { return nextent(address()); }
 
-    /** Copies the specified {@link XrOffset3DfFB} to the {@link #offset} field. */
+    /** Copies the specified {@link XrOffset3DfFB} to the {@code offset} field. */
     public XrRect3DfFB offset(XrOffset3DfFB value) { noffset(address(), value); return this; }
-    /** Passes the {@link #offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrRect3DfFB offset(java.util.function.Consumer<XrOffset3DfFB> consumer) { consumer.accept(offset()); return this; }
-    /** Copies the specified {@link XrExtent3DfFB} to the {@link #extent} field. */
+    /** Copies the specified {@link XrExtent3DfFB} to the {@code extent} field. */
     public XrRect3DfFB extent(XrExtent3DfFB value) { nextent(address(), value); return this; }
-    /** Passes the {@link #extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrRect3DfFB extent(java.util.function.Consumer<XrExtent3DfFB> consumer) { consumer.accept(extent()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -291,18 +271,18 @@ public class XrRect3DfFB extends Struct<XrRect3DfFB> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrOffset3DfFB} view of the {@link XrRect3DfFB#offset} field. */
+        /** @return a {@link XrOffset3DfFB} view of the {@code offset} field. */
         public XrOffset3DfFB offset() { return XrRect3DfFB.noffset(address()); }
-        /** @return a {@link XrExtent3DfFB} view of the {@link XrRect3DfFB#extent} field. */
+        /** @return a {@link XrExtent3DfFB} view of the {@code extent} field. */
         public XrExtent3DfFB extent() { return XrRect3DfFB.nextent(address()); }
 
-        /** Copies the specified {@link XrOffset3DfFB} to the {@link XrRect3DfFB#offset} field. */
+        /** Copies the specified {@link XrOffset3DfFB} to the {@code offset} field. */
         public XrRect3DfFB.Buffer offset(XrOffset3DfFB value) { XrRect3DfFB.noffset(address(), value); return this; }
-        /** Passes the {@link XrRect3DfFB#offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrRect3DfFB.Buffer offset(java.util.function.Consumer<XrOffset3DfFB> consumer) { consumer.accept(offset()); return this; }
-        /** Copies the specified {@link XrExtent3DfFB} to the {@link XrRect3DfFB#extent} field. */
+        /** Copies the specified {@link XrExtent3DfFB} to the {@code extent} field. */
         public XrRect3DfFB.Buffer extent(XrExtent3DfFB value) { XrRect3DfFB.nextent(address(), value); return this; }
-        /** Passes the {@link XrRect3DfFB#extent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code extent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrRect3DfFB.Buffer extent(java.util.function.Consumer<XrExtent3DfFB> consumer) { consumer.accept(extent()); return this; }
 
     }

@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to store a 2x3 matrix. Coefficients are in 16.16 fixed-point format.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Affine23 {
  *     FT_Fixed xx;
  *     FT_Fixed xy;
@@ -26,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Fixed yx;
  *     FT_Fixed yy;
  *     FT_Fixed dy;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Affine23 extends Struct<FT_Affine23> {
 

@@ -7,33 +7,19 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.system.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_blend_equation_advanced.txt">NV_blend_equation_advanced</a> extension.
- * 
- * <p>This extension adds a number of "advanced" blending equations that can be used to perform new color blending operations, many of which are more complex
- * than the standard blend modes provided by unextended OpenGL.</p>
- * 
- * <p>Provides the new blending equations, but guarantees defined results only if each sample is touched no more than once in any single rendering pass. The
- * command {@link #glBlendBarrierNV BlendBarrierNV} is provided to indicate a boundary between passes.</p>
- * 
- * <p>Requires {@link GL20 OpenGL 2.0}.</p>
- */
 public class NVBlendEquationAdvanced {
 
     static { GL.initialize(); }
 
-    /** Accepted by the {@code pname} parameter of BlendParameteriNV, GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev. */
     public static final int
         GL_BLEND_PREMULTIPLIED_SRC_NV = 0x9280,
         GL_BLEND_OVERLAP_NV           = 0x9281;
 
-    /** Accepted by the {@code value} parameter of BlendParameteriNV when {@code pname} is BLEND_OVERLAP_NV. */
     public static final int
         GL_UNCORRELATED_NV = 0x8521,
         GL_DISJOINT_NV     = 0x9283,
         GL_CONJOINT_NV     = 0x9284;
 
-    /** Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi. */
     public static final int
         GL_SRC_NV                = 0x9286,
         GL_DST_NV                = 0x9287,
@@ -86,10 +72,12 @@ public class NVBlendEquationAdvanced {
 
     // --- [ glBlendParameteriNV ] ---
 
+    /** {@code void glBlendParameteriNV(GLenum pname, GLint value)} */
     public static native void glBlendParameteriNV(@NativeType("GLenum") int pname, @NativeType("GLint") int value);
 
     // --- [ glBlendBarrierNV ] ---
 
+    /** {@code void glBlendBarrierNV(void)} */
     public static native void glBlendBarrierNV();
 
 }

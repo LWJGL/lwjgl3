@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link ANDROIDBlobCache#eglSetBlobCacheFuncsANDROID SetBlobCacheFuncsANDROID} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * EGLsizeiANDROID (*{@link #invoke}) (
- *     void const *key,
- *     EGLsizeiANDROID keySize,
- *     void *value,
- *     EGLsizeiANDROID valueSize
- * )</code></pre>
- */
+/** Callback function: {@link #invoke EGLGetBlobFuncANDROID} */
 @FunctionalInterface
 @NativeType("EGLGetBlobFuncANDROID")
 public interface EGLGetBlobFuncANDROIDI extends CallbackI {
@@ -49,6 +37,7 @@ public interface EGLGetBlobFuncANDROIDI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code EGLsizeiANDROID (* EGLGetBlobFuncANDROID) (void const * key, EGLsizeiANDROID keySize, void * value, EGLsizeiANDROID valueSize)} */
     @NativeType("EGLsizeiANDROID") long invoke(@NativeType("void const *") long key, @NativeType("EGLsizeiANDROID") long keySize, @NativeType("void *") long value, @NativeType("EGLsizeiANDROID") long valueSize);
 
 }

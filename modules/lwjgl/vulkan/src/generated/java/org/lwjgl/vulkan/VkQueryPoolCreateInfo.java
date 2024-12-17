@@ -16,53 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created query pool.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code pipelineStatistics} is ignored if {@code queryType} is not {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineStatisticsQuery">{@code pipelineStatisticsQuery}</a> feature is not enabled, {@code queryType} <b>must</b> not be {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-meshShaderQueries">{@code meshShaderQueries}</a> feature is not enabled, {@code queryType} <b>must</b> not be {@link EXTMeshShader#VK_QUERY_TYPE_MESH_PRIMITIVES_GENERATED_EXT QUERY_TYPE_MESH_PRIMITIVES_GENERATED_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-meshShaderQueries">{@code meshShaderQueries}</a> feature is not enabled, and {@code queryType} is {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS}, {@code pipelineStatistics} <b>must</b> not contain {@link EXTMeshShader#VK_QUERY_PIPELINE_STATISTIC_TASK_SHADER_INVOCATIONS_BIT_EXT QUERY_PIPELINE_STATISTIC_TASK_SHADER_INVOCATIONS_BIT_EXT} or {@link EXTMeshShader#VK_QUERY_PIPELINE_STATISTIC_MESH_SHADER_INVOCATIONS_BIT_EXT QUERY_PIPELINE_STATISTIC_MESH_SHADER_INVOCATIONS_BIT_EXT}</li>
- * <li>If {@code queryType} is {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS}, {@code pipelineStatistics} <b>must</b> be a valid combination of {@code VkQueryPipelineStatisticFlagBits} values</li>
- * <li>If {@code queryType} is {@link VK10#VK_QUERY_TYPE_PIPELINE_STATISTICS QUERY_TYPE_PIPELINE_STATISTICS}, {@code pipelineStatistics} <b>must</b> not be zero</li>
- * <li>If {@code queryType} is {@link KHRPerformanceQuery#VK_QUERY_TYPE_PERFORMANCE_QUERY_KHR QUERY_TYPE_PERFORMANCE_QUERY_KHR}, the {@code pNext} chain <b>must</b> include a {@link VkQueryPoolPerformanceCreateInfoKHR} structure</li>
- * <li>{@code queryCount} <b>must</b> be greater than 0</li>
- * <li>If {@code queryType} is {@link KHRVideoEncodeQueue#VK_QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoProfileInfoKHR} structure with {@code videoCodecOperation} specifying an encode operation</li>
- * <li>If {@code queryType} is {@link KHRVideoEncodeQueue#VK_QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR} structure</li>
- * <li>If {@code queryType} is {@link KHRVideoEncodeQueue#VK_QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR QUERY_TYPE_VIDEO_ENCODE_FEEDBACK_KHR}, and the {@code pNext} chain includes a {@link VkVideoProfileInfoKHR} structure and a {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR} structure, then {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR}{@code ::encodeFeedbackFlags} <b>must</b> not contain any bits that are not set in {@link VkVideoEncodeCapabilitiesKHR}{@code ::supportedEncodeFeedbackFlags}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-profiles">video profile</a> described by {@link VkVideoProfileInfoKHR} and its {@code pNext} chain</li>
- * <li>If the {@code pNext} chain includes a {@link VkVideoProfileInfoKHR} structure and its {@code videoCodecOperation} member is {@link KHRVideoEncodeAV1#VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR}, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-videoEncodeAV1">{@code videoEncodeAV1}</a> feature <b>must</b> be enabled</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkQueryPoolPerformanceCreateInfoKHR}, {@link VkQueryPoolPerformanceQueryCreateInfoINTEL}, {@link VkQueryPoolVideoEncodeFeedbackCreateInfoKHR}, {@link VkVideoDecodeAV1ProfileInfoKHR}, {@link VkVideoDecodeH264ProfileInfoKHR}, {@link VkVideoDecodeH265ProfileInfoKHR}, {@link VkVideoDecodeUsageInfoKHR}, {@link VkVideoEncodeAV1ProfileInfoKHR}, {@link VkVideoEncodeH264ProfileInfoKHR}, {@link VkVideoEncodeH265ProfileInfoKHR}, {@link VkVideoEncodeUsageInfoKHR}, or {@link VkVideoProfileInfoKHR}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>{@code queryType} <b>must</b> be a valid {@code VkQueryType} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkCreateQueryPool CreateQueryPool}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkQueryPoolCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkQueryPoolCreateFlags {@link #flags};
- *     VkQueryType {@link #queryType};
- *     uint32_t {@link #queryCount};
- *     VkQueryPipelineStatisticFlags {@link #pipelineStatistics};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkQueryPoolCreateFlags flags;
+ *     VkQueryType queryType;
+ *     uint32_t queryCount;
+ *     VkQueryPipelineStatisticFlags pipelineStatistics;
+ * }}</pre>
  */
 public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> implements NativeResource {
 
@@ -124,30 +86,30 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkQueryPoolCreateFlags")
     public int flags() { return nflags(address()); }
-    /** a {@code VkQueryType} value specifying the type of queries managed by the pool. */
+    /** @return the value of the {@code queryType} field. */
     @NativeType("VkQueryType")
     public int queryType() { return nqueryType(address()); }
-    /** the number of queries managed by the pool. */
+    /** @return the value of the {@code queryCount} field. */
     @NativeType("uint32_t")
     public int queryCount() { return nqueryCount(address()); }
-    /** a bitmask of {@code VkQueryPipelineStatisticFlagBits} specifying which counters will be returned in queries on the new pool, as described below in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#queries-pipestats">Pipeline Statistics Queries</a>. */
+    /** @return the value of the {@code pipelineStatistics} field. */
     @NativeType("VkQueryPipelineStatisticFlags")
     public int pipelineStatistics() { return npipelineStatistics(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkQueryPoolCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO} value to the {@code sType} field. */
     public VkQueryPoolCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkQueryPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkQueryPoolCreateInfoINTEL} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkQueryPoolCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -175,13 +137,13 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
     public VkQueryPoolCreateInfo pNext(VkVideoEncodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoProfileInfoKHR} value to the {@code pNext} chain. */
     public VkQueryPoolCreateInfo pNext(VkVideoProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkQueryPoolCreateInfo flags(@NativeType("VkQueryPoolCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #queryType} field. */
+    /** Sets the specified value to the {@code queryType} field. */
     public VkQueryPoolCreateInfo queryType(@NativeType("VkQueryType") int value) { nqueryType(address(), value); return this; }
-    /** Sets the specified value to the {@link #queryCount} field. */
+    /** Sets the specified value to the {@code queryCount} field. */
     public VkQueryPoolCreateInfo queryCount(@NativeType("uint32_t") int value) { nqueryCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipelineStatistics} field. */
+    /** Sets the specified value to the {@code pipelineStatistics} field. */
     public VkQueryPoolCreateInfo pipelineStatistics(@NativeType("VkQueryPipelineStatisticFlags") int value) { npipelineStatistics(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -414,30 +376,30 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkQueryPoolCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkQueryPoolCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkQueryPoolCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkQueryPoolCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkQueryPoolCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkQueryPoolCreateFlags")
         public int flags() { return VkQueryPoolCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkQueryPoolCreateInfo#queryType} field. */
+        /** @return the value of the {@code queryType} field. */
         @NativeType("VkQueryType")
         public int queryType() { return VkQueryPoolCreateInfo.nqueryType(address()); }
-        /** @return the value of the {@link VkQueryPoolCreateInfo#queryCount} field. */
+        /** @return the value of the {@code queryCount} field. */
         @NativeType("uint32_t")
         public int queryCount() { return VkQueryPoolCreateInfo.nqueryCount(address()); }
-        /** @return the value of the {@link VkQueryPoolCreateInfo#pipelineStatistics} field. */
+        /** @return the value of the {@code pipelineStatistics} field. */
         @NativeType("VkQueryPipelineStatisticFlags")
         public int pipelineStatistics() { return VkQueryPoolCreateInfo.npipelineStatistics(address()); }
 
-        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkQueryPoolCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkQueryPoolCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO} value to the {@link VkQueryPoolCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO} value to the {@code sType} field. */
         public VkQueryPoolCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkQueryPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkQueryPoolCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkQueryPoolCreateInfoINTEL} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkQueryPoolCreateInfoINTEL value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -465,13 +427,13 @@ public class VkQueryPoolCreateInfo extends Struct<VkQueryPoolCreateInfo> impleme
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoEncodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoProfileInfoKHR} value to the {@code pNext} chain. */
         public VkQueryPoolCreateInfo.Buffer pNext(VkVideoProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkQueryPoolCreateInfo.Buffer flags(@NativeType("VkQueryPoolCreateFlags") int value) { VkQueryPoolCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#queryType} field. */
+        /** Sets the specified value to the {@code queryType} field. */
         public VkQueryPoolCreateInfo.Buffer queryType(@NativeType("VkQueryType") int value) { VkQueryPoolCreateInfo.nqueryType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#queryCount} field. */
+        /** Sets the specified value to the {@code queryCount} field. */
         public VkQueryPoolCreateInfo.Buffer queryCount(@NativeType("uint32_t") int value) { VkQueryPoolCreateInfo.nqueryCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkQueryPoolCreateInfo#pipelineStatistics} field. */
+        /** Sets the specified value to the {@code pipelineStatistics} field. */
         public VkQueryPoolCreateInfo.Buffer pipelineStatistics(@NativeType("VkQueryPipelineStatisticFlags") int value) { VkQueryPoolCreateInfo.npipelineStatistics(address(), value); return this; }
 
     }

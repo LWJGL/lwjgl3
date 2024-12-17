@@ -16,19 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Container for value and types of parameters that can be queried.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPerformanceValueDataINTEL}, {@link INTELPerformanceQuery#vkGetPerformanceParameterINTEL GetPerformanceParameterINTEL}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPerformanceValueINTEL {
- *     VkPerformanceValueTypeINTEL {@link #type};
- *     {@link VkPerformanceValueDataINTEL VkPerformanceValueDataINTEL} {@link #data};
- * }</code></pre>
+ *     VkPerformanceValueTypeINTEL type;
+ *     {@link VkPerformanceValueDataINTEL VkPerformanceValueDataINTEL} data;
+ * }}</pre>
  */
 public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> implements NativeResource {
 
@@ -78,10 +70,10 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkPerformanceValueTypeINTEL} value specifying the type of the returned data. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkPerformanceValueTypeINTEL")
     public int type() { return ntype(address()); }
-    /** a {@link VkPerformanceValueDataINTEL} union specifying the value of the returned data. */
+    /** @return a {@link VkPerformanceValueDataINTEL} view of the {@code data} field. */
     public VkPerformanceValueDataINTEL data() { return ndata(address()); }
 
     // -----------------------------------
@@ -262,10 +254,10 @@ public class VkPerformanceValueINTEL extends Struct<VkPerformanceValueINTEL> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPerformanceValueINTEL#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkPerformanceValueTypeINTEL")
         public int type() { return VkPerformanceValueINTEL.ntype(address()); }
-        /** @return a {@link VkPerformanceValueDataINTEL} view of the {@link VkPerformanceValueINTEL#data} field. */
+        /** @return a {@link VkPerformanceValueDataINTEL} view of the {@code data} field. */
         public VkPerformanceValueDataINTEL data() { return VkPerformanceValueINTEL.ndata(address()); }
 
     }

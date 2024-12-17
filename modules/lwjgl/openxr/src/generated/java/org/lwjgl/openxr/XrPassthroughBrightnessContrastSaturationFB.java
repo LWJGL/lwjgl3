@@ -16,41 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A color adjustment for passthrough layers.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrPassthroughBrightnessContrastSaturationFB} lets applications adjust the brightness, contrast, and saturation of passthrough layers. The adjustments only are applied before any additional effects (such as edges) are rendered on top.</p>
- * 
- * <p>The adjustments are applied in CIELAB color space (white point D65) using the following formulas:</p>
- * 
- * <ul>
- * <li><code>L*' = clamp((L* - 50) × contrast + 50, 0, 100)</code></li>
- * <li><code>L*'' = clamp(L*' + brightness, 0, 100)</code></li>
- * <li><code>(a*', b*') = (a*, b*) × saturation</code></li>
- * <li>Resulting color: (L*'', a*', b*')</li>
- * </ul>
- * 
- * <p>{@link XrPassthroughBrightnessContrastSaturationFB} is provided in the {@code next} chain of {@link XrPassthroughStyleFB}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBPassthrough XR_FB_passthrough} extension <b>must</b> be enabled prior to using {@link XrPassthroughBrightnessContrastSaturationFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBPassthrough#XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPassthroughBrightnessContrastSaturationFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     float {@link #brightness};
- *     float {@link #contrast};
- *     float {@link #saturation};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     float brightness;
+ *     float contrast;
+ *     float saturation;
+ * }}</pre>
  */
 public class XrPassthroughBrightnessContrastSaturationFB extends Struct<XrPassthroughBrightnessContrastSaturationFB> implements NativeResource {
 
@@ -109,30 +82,30 @@ public class XrPassthroughBrightnessContrastSaturationFB extends Struct<XrPassth
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the brightness adjustment value in the range [-100, 100]. The neutral element is 0. */
+    /** @return the value of the {@code brightness} field. */
     public float brightness() { return nbrightness(address()); }
-    /** the contrast adjustment value in the range [0, Infinity]. The neutral element is 1. */
+    /** @return the value of the {@code contrast} field. */
     public float contrast() { return ncontrast(address()); }
-    /** the saturation adjustment value in the range [0, Infinity]. The neutral element is 1. */
+    /** @return the value of the {@code saturation} field. */
     public float saturation() { return nsaturation(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPassthroughBrightnessContrastSaturationFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB} value to the {@code type} field. */
     public XrPassthroughBrightnessContrastSaturationFB type$Default() { return type(FBPassthrough.XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPassthroughBrightnessContrastSaturationFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #brightness} field. */
+    /** Sets the specified value to the {@code brightness} field. */
     public XrPassthroughBrightnessContrastSaturationFB brightness(float value) { nbrightness(address(), value); return this; }
-    /** Sets the specified value to the {@link #contrast} field. */
+    /** Sets the specified value to the {@code contrast} field. */
     public XrPassthroughBrightnessContrastSaturationFB contrast(float value) { ncontrast(address(), value); return this; }
-    /** Sets the specified value to the {@link #saturation} field. */
+    /** Sets the specified value to the {@code saturation} field. */
     public XrPassthroughBrightnessContrastSaturationFB saturation(float value) { nsaturation(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -340,30 +313,30 @@ public class XrPassthroughBrightnessContrastSaturationFB extends Struct<XrPassth
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPassthroughBrightnessContrastSaturationFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughBrightnessContrastSaturationFB.ntype(address()); }
-        /** @return the value of the {@link XrPassthroughBrightnessContrastSaturationFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughBrightnessContrastSaturationFB.nnext(address()); }
-        /** @return the value of the {@link XrPassthroughBrightnessContrastSaturationFB#brightness} field. */
+        /** @return the value of the {@code brightness} field. */
         public float brightness() { return XrPassthroughBrightnessContrastSaturationFB.nbrightness(address()); }
-        /** @return the value of the {@link XrPassthroughBrightnessContrastSaturationFB#contrast} field. */
+        /** @return the value of the {@code contrast} field. */
         public float contrast() { return XrPassthroughBrightnessContrastSaturationFB.ncontrast(address()); }
-        /** @return the value of the {@link XrPassthroughBrightnessContrastSaturationFB#saturation} field. */
+        /** @return the value of the {@code saturation} field. */
         public float saturation() { return XrPassthroughBrightnessContrastSaturationFB.nsaturation(address()); }
 
-        /** Sets the specified value to the {@link XrPassthroughBrightnessContrastSaturationFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPassthroughBrightnessContrastSaturationFB.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughBrightnessContrastSaturationFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB} value to the {@link XrPassthroughBrightnessContrastSaturationFB#type} field. */
+        /** Sets the {@link FBPassthrough#XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB} value to the {@code type} field. */
         public XrPassthroughBrightnessContrastSaturationFB.Buffer type$Default() { return type(FBPassthrough.XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB); }
-        /** Sets the specified value to the {@link XrPassthroughBrightnessContrastSaturationFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPassthroughBrightnessContrastSaturationFB.Buffer next(@NativeType("void const *") long value) { XrPassthroughBrightnessContrastSaturationFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughBrightnessContrastSaturationFB#brightness} field. */
+        /** Sets the specified value to the {@code brightness} field. */
         public XrPassthroughBrightnessContrastSaturationFB.Buffer brightness(float value) { XrPassthroughBrightnessContrastSaturationFB.nbrightness(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughBrightnessContrastSaturationFB#contrast} field. */
+        /** Sets the specified value to the {@code contrast} field. */
         public XrPassthroughBrightnessContrastSaturationFB.Buffer contrast(float value) { XrPassthroughBrightnessContrastSaturationFB.ncontrast(address(), value); return this; }
-        /** Sets the specified value to the {@link XrPassthroughBrightnessContrastSaturationFB#saturation} field. */
+        /** Sets the specified value to the {@code saturation} field. */
         public XrPassthroughBrightnessContrastSaturationFB.Buffer saturation(float value) { XrPassthroughBrightnessContrastSaturationFB.nsaturation(address(), value); return this; }
 
     }

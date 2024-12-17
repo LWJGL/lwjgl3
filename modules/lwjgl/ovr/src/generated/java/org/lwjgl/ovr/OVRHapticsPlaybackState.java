@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * State of the Haptics playback for Touch vibration.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrHapticsPlaybackState {
- *     int {@link #RemainingQueueSpace};
- *     int {@link #SamplesQueued};
- * }</code></pre>
+ *     int RemainingQueueSpace;
+ *     int SamplesQueued;
+ * }}</pre>
  */
 @NativeType("struct ovrHapticsPlaybackState")
 public class OVRHapticsPlaybackState extends Struct<OVRHapticsPlaybackState> implements NativeResource {
@@ -75,9 +71,9 @@ public class OVRHapticsPlaybackState extends Struct<OVRHapticsPlaybackState> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Remaining space available to queue more samples */
+    /** @return the value of the {@code RemainingQueueSpace} field. */
     public int RemainingQueueSpace() { return nRemainingQueueSpace(address()); }
-    /** Number of samples currently queued */
+    /** @return the value of the {@code SamplesQueued} field. */
     public int SamplesQueued() { return nSamplesQueued(address()); }
 
     // -----------------------------------
@@ -258,9 +254,9 @@ public class OVRHapticsPlaybackState extends Struct<OVRHapticsPlaybackState> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRHapticsPlaybackState#RemainingQueueSpace} field. */
+        /** @return the value of the {@code RemainingQueueSpace} field. */
         public int RemainingQueueSpace() { return OVRHapticsPlaybackState.nRemainingQueueSpace(address()); }
-        /** @return the value of the {@link OVRHapticsPlaybackState#SamplesQueued} field. */
+        /** @return the value of the {@code SamplesQueued} field. */
         public int SamplesQueued() { return OVRHapticsPlaybackState.nSamplesQueued(address()); }
 
     }

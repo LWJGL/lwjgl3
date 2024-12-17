@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPipelineCreationFeedback}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineCreationFeedbackEXT {
  *     VkPipelineCreationFeedbackFlags flags;
  *     uint64_t duration;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPipelineCreationFeedbackEXT extends VkPipelineCreationFeedback {
 

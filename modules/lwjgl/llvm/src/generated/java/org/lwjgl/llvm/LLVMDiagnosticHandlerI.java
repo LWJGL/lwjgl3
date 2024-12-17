@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMCore#LLVMContextSetDiagnosticHandler ContextSetDiagnosticHandler} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     LLVMDiagnosticInfoRef DiagnosticInfo,
- *     void *DiagnosticContext
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (LLVMDiagnosticInfoRef, void *)")
 public interface LLVMDiagnosticHandlerI extends CallbackI {
@@ -44,6 +34,7 @@ public interface LLVMDiagnosticHandlerI extends CallbackI {
         );
     }
 
+    /** {@code void (*) (LLVMDiagnosticInfoRef DiagnosticInfo, void * DiagnosticContext)} */
     void invoke(@NativeType("LLVMDiagnosticInfoRef") long DiagnosticInfo, @NativeType("void *") long DiagnosticContext);
 
 }

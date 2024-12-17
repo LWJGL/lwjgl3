@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceInlineUniformBlockProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceInlineUniformBlockPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
  *     uint32_t maxDescriptorSetInlineUniformBlocks;
  *     uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceInlineUniformBlockPropertiesEXT extends VkPhysicalDeviceInlineUniformBlockProperties {
 

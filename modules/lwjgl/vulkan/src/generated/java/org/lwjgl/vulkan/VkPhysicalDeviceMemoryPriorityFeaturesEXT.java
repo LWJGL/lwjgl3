@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing memory priority features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMemoryPriority#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMemoryPriorityFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #memoryPriority};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 memoryPriority;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMemoryPriorityFeaturesEXT extends Struct<VkPhysicalDeviceMemoryPriorityFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceMemoryPriorityFeaturesEXT extends Struct<VkPhysical
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports memory priorities specified at memory allocation time via {@link VkMemoryPriorityAllocateInfoEXT}. */
+    /** @return the value of the {@code memoryPriority} field. */
     @NativeType("VkBool32")
     public boolean memoryPriority() { return nmemoryPriority(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMemoryPriorityFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMemoryPriority#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMemoryPriority#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceMemoryPriorityFeaturesEXT sType$Default() { return sType(EXTMemoryPriority.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMemoryPriorityFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #memoryPriority} field. */
+    /** Sets the specified value to the {@code memoryPriority} field. */
     public VkPhysicalDeviceMemoryPriorityFeaturesEXT memoryPriority(@NativeType("VkBool32") boolean value) { nmemoryPriority(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,23 +305,23 @@ public class VkPhysicalDeviceMemoryPriorityFeaturesEXT extends Struct<VkPhysical
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMemoryPriorityFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMemoryPriorityFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT#memoryPriority} field. */
+        /** @return the value of the {@code memoryPriority} field. */
         @NativeType("VkBool32")
         public boolean memoryPriority() { return VkPhysicalDeviceMemoryPriorityFeaturesEXT.nmemoryPriority(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMemoryPriorityFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMemoryPriorityFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMemoryPriority#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT} value to the {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTMemoryPriority#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceMemoryPriorityFeaturesEXT.Buffer sType$Default() { return sType(EXTMemoryPriority.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMemoryPriorityFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMemoryPriorityFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMemoryPriorityFeaturesEXT#memoryPriority} field. */
+        /** Sets the specified value to the {@code memoryPriority} field. */
         public VkPhysicalDeviceMemoryPriorityFeaturesEXT.Buffer memoryPriority(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMemoryPriorityFeaturesEXT.nmemoryPriority(address(), value ? 1 : 0); return this; }
 
     }

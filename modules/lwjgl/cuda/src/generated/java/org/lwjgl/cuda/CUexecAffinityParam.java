@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUexecAffinityParam {
  *     CUexecAffinityType type;
  *     union {
  *         {@link CUexecAffinitySmCount CUexecAffinitySmCount} smCount;
  *     } param;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUexecAffinityParam extends Struct<CUexecAffinityParam> implements NativeResource {
 

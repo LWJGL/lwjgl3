@@ -11,23 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_paint_funcs_t *funcs,
- *     void *paint_data,
- *     hb_color_line_t *color_line,
- *     float x0,
- *     float y0,
- *     float x1,
- *     float y1,
- *     float x2,
- *     float y2,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_paint_linear_gradient_func_t} */
 public abstract class hb_paint_linear_gradient_func_t extends Callback implements hb_paint_linear_gradient_func_tI {
 
     /**

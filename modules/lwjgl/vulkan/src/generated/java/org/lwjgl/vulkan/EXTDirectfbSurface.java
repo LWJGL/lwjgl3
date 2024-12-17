@@ -15,48 +15,12 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * The {@code VK_EXT_directfb_surface} extension is an instance extension. It provides a mechanism to create a {@code VkSurfaceKHR} object (defined by the {@link KHRSurface VK_KHR_surface} extension) that refers to a DirectFB {@code IDirectFBSurface}, as well as a query to determine support for rendering via DirectFB.
- * 
- * <dl>
- * <dt><b>Name String</b></dt>
- * <dd>{@code VK_EXT_directfb_surface}</dd>
- * <dt><b>Extension Type</b></dt>
- * <dd>Instance extension</dd>
- * <dt><b>Registered Extension Number</b></dt>
- * <dd>347</dd>
- * <dt><b>Revision</b></dt>
- * <dd>1</dd>
- * <dt><b>Extension and Version Dependencies</b></dt>
- * <dd>{@link KHRSurface VK_KHR_surface}</dd>
- * <dt><b>Contact</b></dt>
- * <dd><ul>
- * <li>Nicolas Caramelli <a href="https://github.com/KhronosGroup/Vulkan-Docs/issues/new?body=[VK_EXT_directfb_surface]%20@caramelli%250A*Here%20describe%20the%20issue%20or%20question%20you%20have%20about%20the%20VK_EXT_directfb_surface%20extension*">caramelli</a></li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Other Extension Metadata</h5>
- * 
- * <dl>
- * <dt><b>Last Modified Date</b></dt>
- * <dd>2020-06-16</dd>
- * <dt><b>IP Status</b></dt>
- * <dd>No known IP claims.</dd>
- * <dt><b>Contributors</b></dt>
- * <dd><ul>
- * <li>Nicolas Caramelli</li>
- * </ul></dd>
- * </dl>
- */
 public class EXTDirectfbSurface {
 
-    /** The extension specification version. */
     public static final int VK_EXT_DIRECTFB_SURFACE_SPEC_VERSION = 1;
 
-    /** The extension name. */
     public static final String VK_EXT_DIRECTFB_SURFACE_EXTENSION_NAME = "VK_EXT_directfb_surface";
 
-    /** Extends {@code VkStructureType}. */
     public static final int VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT = 1000346000;
 
     protected EXTDirectfbSurface() {
@@ -65,7 +29,7 @@ public class EXTDirectfbSurface {
 
     // --- [ vkCreateDirectFBSurfaceEXT ] ---
 
-    /** Unsafe version of: {@link #vkCreateDirectFBSurfaceEXT CreateDirectFBSurfaceEXT} */
+    /** {@code VkResult vkCreateDirectFBSurfaceEXT(VkInstance instance, VkDirectFBSurfaceCreateInfoEXT const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSurfaceKHR * pSurface)} */
     public static int nvkCreateDirectFBSurfaceEXT(VkInstance instance, long pCreateInfo, long pAllocator, long pSurface) {
         long __functionAddress = instance.getCapabilities().vkCreateDirectFBSurfaceEXT;
         if (CHECKS) {
@@ -74,52 +38,7 @@ public class EXTDirectfbSurface {
         return callPPPPI(instance.address(), pCreateInfo, pAllocator, pSurface, __functionAddress);
     }
 
-    /**
-     * Create a {@code VkSurfaceKHR} object for a DirectFB surface.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To create a {@code VkSurfaceKHR} object for a DirectFB surface, call:</p>
-     * 
-     * <pre><code>
-     * VkResult vkCreateDirectFBSurfaceEXT(
-     *     VkInstance                                  instance,
-     *     const VkDirectFBSurfaceCreateInfoEXT*       pCreateInfo,
-     *     const VkAllocationCallbacks*                pAllocator,
-     *     VkSurfaceKHR*                               pSurface);</code></pre>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code instance} <b>must</b> be a valid {@code VkInstance} handle</li>
-     * <li>{@code pCreateInfo} <b>must</b> be a valid pointer to a valid {@link VkDirectFBSurfaceCreateInfoEXT} structure</li>
-     * <li>If {@code pAllocator} is not {@code NULL}, {@code pAllocator} <b>must</b> be a valid pointer to a valid {@link VkAllocationCallbacks} structure</li>
-     * <li>{@code pSurface} <b>must</b> be a valid pointer to a {@code VkSurfaceKHR} handle</li>
-     * </ul>
-     * 
-     * <h5>Return Codes</h5>
-     * 
-     * <dl>
-     * <dt>On success, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_SUCCESS SUCCESS}</li>
-     * </ul></dd>
-     * <dt>On failure, this command returns</dt>
-     * <dd><ul>
-     * <li>{@link VK10#VK_ERROR_OUT_OF_HOST_MEMORY ERROR_OUT_OF_HOST_MEMORY}</li>
-     * <li>{@link VK10#VK_ERROR_OUT_OF_DEVICE_MEMORY ERROR_OUT_OF_DEVICE_MEMORY}</li>
-     * </ul></dd>
-     * </dl>
-     * 
-     * <h5>See Also</h5>
-     * 
-     * <p>{@link VkAllocationCallbacks}, {@link VkDirectFBSurfaceCreateInfoEXT}</p>
-     *
-     * @param instance    the instance to associate the surface with.
-     * @param pCreateInfo a pointer to a {@link VkDirectFBSurfaceCreateInfoEXT} structure containing parameters affecting the creation of the surface object.
-     * @param pAllocator  the allocator used for host memory allocated for the surface object when there is no more specific allocator available (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-allocation">Memory Allocation</a>).
-     * @param pSurface    a pointer to a {@code VkSurfaceKHR} handle in which the created surface object is returned.
-     */
+    /** {@code VkResult vkCreateDirectFBSurfaceEXT(VkInstance instance, VkDirectFBSurfaceCreateInfoEXT const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSurfaceKHR * pSurface)} */
     @NativeType("VkResult")
     public static int vkCreateDirectFBSurfaceEXT(VkInstance instance, @NativeType("VkDirectFBSurfaceCreateInfoEXT const *") VkDirectFBSurfaceCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") LongBuffer pSurface) {
         if (CHECKS) {
@@ -130,40 +49,7 @@ public class EXTDirectfbSurface {
 
     // --- [ vkGetPhysicalDeviceDirectFBPresentationSupportEXT ] ---
 
-    /**
-     * Query physical device for presentation with DirectFB.
-     * 
-     * <h5>C Specification</h5>
-     * 
-     * <p>To determine whether a queue family of a physical device supports presentation with DirectFB library, call:</p>
-     * 
-     * <pre><code>
-     * VkBool32 vkGetPhysicalDeviceDirectFBPresentationSupportEXT(
-     *     VkPhysicalDevice                            physicalDevice,
-     *     uint32_t                                    queueFamilyIndex,
-     *     IDirectFB*                                  dfb);</code></pre>
-     * 
-     * <h5>Description</h5>
-     * 
-     * <p>This platform-specific function <b>can</b> be called prior to creating a surface.</p>
-     * 
-     * <h5>Valid Usage</h5>
-     * 
-     * <ul>
-     * <li>{@code queueFamilyIndex} <b>must</b> be less than {@code pQueueFamilyPropertyCount} returned by {@code vkGetPhysicalDeviceQueueFamilyProperties} for the given {@code physicalDevice}</li>
-     * </ul>
-     * 
-     * <h5>Valid Usage (Implicit)</h5>
-     * 
-     * <ul>
-     * <li>{@code physicalDevice} <b>must</b> be a valid {@code VkPhysicalDevice} handle</li>
-     * <li>{@code dfb} <b>must</b> be a valid pointer to an {@code IDirectFB} value</li>
-     * </ul>
-     *
-     * @param physicalDevice   the physical device.
-     * @param queueFamilyIndex the queue family index.
-     * @param dfb              a pointer to the {@code IDirectFB} main interface of DirectFB.
-     */
+    /** {@code VkBool32 vkGetPhysicalDeviceDirectFBPresentationSupportEXT(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, IDirectFB * dfb)} */
     @NativeType("VkBool32")
     public static boolean vkGetPhysicalDeviceDirectFBPresentationSupportEXT(VkPhysicalDevice physicalDevice, @NativeType("uint32_t") int queueFamilyIndex, @NativeType("IDirectFB *") long dfb) {
         long __functionAddress = physicalDevice.getCapabilities().vkGetPhysicalDeviceDirectFBPresentationSupportEXT;
@@ -174,7 +60,7 @@ public class EXTDirectfbSurface {
         return callPPI(physicalDevice.address(), queueFamilyIndex, dfb, __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #vkCreateDirectFBSurfaceEXT CreateDirectFBSurfaceEXT} */
+    /** {@code VkResult vkCreateDirectFBSurfaceEXT(VkInstance instance, VkDirectFBSurfaceCreateInfoEXT const * pCreateInfo, VkAllocationCallbacks const * pAllocator, VkSurfaceKHR * pSurface)} */
     @NativeType("VkResult")
     public static int vkCreateDirectFBSurfaceEXT(VkInstance instance, @NativeType("VkDirectFBSurfaceCreateInfoEXT const *") VkDirectFBSurfaceCreateInfoEXT pCreateInfo, @NativeType("VkAllocationCallbacks const *") @Nullable VkAllocationCallbacks pAllocator, @NativeType("VkSurfaceKHR *") long[] pSurface) {
         long __functionAddress = instance.getCapabilities().vkCreateDirectFBSurfaceEXT;

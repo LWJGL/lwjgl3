@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkFormatProperties3}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkFormatProperties3KHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkFormatFeatureFlags2 linearTilingFeatures;
  *     VkFormatFeatureFlags2 optimalTilingFeatures;
  *     VkFormatFeatureFlags2 bufferFeatures;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkFormatProperties3KHR extends VkFormatProperties3 {
 

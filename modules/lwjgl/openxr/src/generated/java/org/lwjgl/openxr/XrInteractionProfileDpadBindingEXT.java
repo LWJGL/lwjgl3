@@ -17,67 +17,20 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Interaction profile dpad binding.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrInteractionProfileDpadBindingEXT} structure is an input struct that defines how to use any two-axis input to provide dpad-like functionality to the application. The struct <b>must</b> be added for each input that should be treated as a dpad to the {@link XrBindingModificationsKHR}{@code ::bindingModifications} array in the {@link XrBindingModificationsKHR} structure (See {@link KHRBindingModification XR_KHR_binding_modification} extension).</p>
- * 
- * <p>Runtimes are free to ignore any of the fields when not obeying the bindings, but <b>may</b> use it for automatic rebindings of actions.</p>
- * 
- * <p>The implementation <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} from {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings} if any of the following are true:</p>
- * 
- * <ul>
- * <li>{@code forceThreshold} or {@code forceThresholdReleased} are outside the half-open range <code>(0, 1]</code></li>
- * <li><code>forceThreshold &lt; forceThresholdReleased</code></li>
- * <li>{@code centerRegion} is outside the exclusive range <code>(0, 1)</code></li>
- * <li>{@code wedgeAngle} outside the half-open range <code>[0, π)</code></li>
- * </ul>
- * 
- * <p>If more than one {@link XrInteractionProfileDpadBindingEXT} is provided for the same input identifier, including top level path (e.g. pathname:/user/hand/left/input/thumbstick), and two or more of them specify the same actionset, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}. If the same input identifier, including top level path, is used for more than one action set, in addition to inputs being <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#input-action-sets">suppressed by higher priority action sets</a>, haptic events from dpads are also suppressed.</p>
- * 
- * <p>For example, a Valve Index controller binding with a "Walking" action set can have a dpad on each of:</p>
- * 
- * <ul>
- * <li>left thumbstick</li>
- * <li>right thumbstick</li>
- * <li>left trackpad</li>
- * <li>right trackpad</li>
- * </ul>
- * 
- * <p>Another action set can also have a dpad active on each of those inputs, and they can have different settings. If both action sets are active, the higher priority one trumps the lower priority one, and the lower priority one is suppressed.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTDpadBinding XR_EXT_dpad_binding} extension <b>must</b> be enabled prior to using {@link XrInteractionProfileDpadBindingEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTDpadBinding#XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code actionSet} <b>must</b> be a valid {@code XrActionSet} handle</li>
- * <li>If {@code onHaptic} is not {@code NULL}, {@code onHaptic} <b>must</b> be a pointer to a valid {@link XrHapticBaseHeader}-based structure. See also: {@link XrHapticAmplitudeEnvelopeVibrationFB}, {@link XrHapticPcmVibrationFB}, {@link XrHapticVibration}</li>
- * <li>If {@code offHaptic} is not {@code NULL}, {@code offHaptic} <b>must</b> be a pointer to a valid {@link XrHapticBaseHeader}-based structure. See also: {@link XrHapticAmplitudeEnvelopeVibrationFB}, {@link XrHapticPcmVibrationFB}, {@link XrHapticVibration}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrBindingModificationBaseHeaderKHR}, {@link XrHapticBaseHeader}, {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrInteractionProfileDpadBindingEXT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrPath {@link #binding};
- *     XrActionSet {@link #actionSet};
- *     float {@link #forceThreshold};
- *     float {@link #forceThresholdReleased};
- *     float {@link #centerRegion};
- *     float {@link #wedgeAngle};
- *     XrBool32 {@link #isSticky};
- *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * {@link #onHaptic};
- *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * {@link #offHaptic};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrPath binding;
+ *     XrActionSet actionSet;
+ *     float forceThreshold;
+ *     float forceThresholdReleased;
+ *     float centerRegion;
+ *     float wedgeAngle;
+ *     XrBool32 isSticky;
+ *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * onHaptic;
+ *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * offHaptic;
+ * }}</pre>
  */
 public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProfileDpadBindingEXT> implements NativeResource {
 
@@ -154,59 +107,59 @@ public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the input path used for the specified actions in the suggested binding list to be used as a dpad. E.g. path:/user/hand/right/input/thumbstick */
+    /** @return the value of the {@code binding} field. */
     @NativeType("XrPath")
     public long binding() { return nbinding(address()); }
-    /** the action set for which this dpad will be active. The implementation <b>must</b> use the parameters from this structure for any actions from this action set that are bound to one of the dpad subpaths for this input path. */
+    /** @return the value of the {@code actionSet} field. */
     @NativeType("XrActionSet")
     public long actionSet() { return nactionSet(address()); }
-    /** a number in the half-open range <code>(0, 1]</code> representing the force value threshold at or above which (≥) a dpad input will transition from inactive to active. */
+    /** @return the value of the {@code forceThreshold} field. */
     public float forceThreshold() { return nforceThreshold(address()); }
-    /** a number in the half-open range <code>(0, 1]</code> representing the force value threshold strictly below which (&lt;) a dpad input will transition from active to inactive. */
+    /** @return the value of the {@code forceThresholdReleased} field. */
     public float forceThresholdReleased() { return nforceThresholdReleased(address()); }
-    /** defines the center region of the thumbstick or trackpad. This is the radius, in the input value space, of a logically circular region in the center of the input, in the range <code>(0, 1)</code>. */
+    /** @return the value of the {@code centerRegion} field. */
     public float centerRegion() { return ncenterRegion(address()); }
-    /** indicates the angle in radians of each direction region and is a value in the half-open range <code>[0, π)</code>. */
+    /** @return the value of the {@code wedgeAngle} field. */
     public float wedgeAngle() { return nwedgeAngle(address()); }
-    /** indicates that the implementation will latch the first region that is activated and continue to indicate that the binding for that region is true until the user releases the input underlying the virtual dpad. */
+    /** @return the value of the {@code isSticky} field. */
     @NativeType("XrBool32")
     public boolean isSticky() { return nisSticky(address()) != 0; }
-    /** the haptic output that the runtime <b>must</b> trigger when the binding changes from false to true. If this field is {@code NULL}, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of {@link XrHapticBaseHeader}. */
+    /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code onHaptic} field. */
     @NativeType("XrHapticBaseHeader const *")
     public @Nullable XrHapticBaseHeader onHaptic() { return nonHaptic(address()); }
-    /** the haptic output that the runtime <b>must</b> trigger when the binding changes from true to false. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of {@link XrHapticBaseHeader}. */
+    /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code offHaptic} field. */
     @NativeType("XrHapticBaseHeader const *")
     public @Nullable XrHapticBaseHeader offHaptic() { return noffHaptic(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrInteractionProfileDpadBindingEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTDpadBinding#XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTDpadBinding#XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT} value to the {@code type} field. */
     public XrInteractionProfileDpadBindingEXT type$Default() { return type(EXTDpadBinding.XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrInteractionProfileDpadBindingEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #binding} field. */
+    /** Sets the specified value to the {@code binding} field. */
     public XrInteractionProfileDpadBindingEXT binding(@NativeType("XrPath") long value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #actionSet} field. */
+    /** Sets the specified value to the {@code actionSet} field. */
     public XrInteractionProfileDpadBindingEXT actionSet(XrActionSet value) { nactionSet(address(), value); return this; }
-    /** Sets the specified value to the {@link #forceThreshold} field. */
+    /** Sets the specified value to the {@code forceThreshold} field. */
     public XrInteractionProfileDpadBindingEXT forceThreshold(float value) { nforceThreshold(address(), value); return this; }
-    /** Sets the specified value to the {@link #forceThresholdReleased} field. */
+    /** Sets the specified value to the {@code forceThresholdReleased} field. */
     public XrInteractionProfileDpadBindingEXT forceThresholdReleased(float value) { nforceThresholdReleased(address(), value); return this; }
-    /** Sets the specified value to the {@link #centerRegion} field. */
+    /** Sets the specified value to the {@code centerRegion} field. */
     public XrInteractionProfileDpadBindingEXT centerRegion(float value) { ncenterRegion(address(), value); return this; }
-    /** Sets the specified value to the {@link #wedgeAngle} field. */
+    /** Sets the specified value to the {@code wedgeAngle} field. */
     public XrInteractionProfileDpadBindingEXT wedgeAngle(float value) { nwedgeAngle(address(), value); return this; }
-    /** Sets the specified value to the {@link #isSticky} field. */
+    /** Sets the specified value to the {@code isSticky} field. */
     public XrInteractionProfileDpadBindingEXT isSticky(@NativeType("XrBool32") boolean value) { nisSticky(address(), value ? 1 : 0); return this; }
-    /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@link #onHaptic} field. */
+    /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@code onHaptic} field. */
     public XrInteractionProfileDpadBindingEXT onHaptic(@Nullable @NativeType("XrHapticBaseHeader const *") XrHapticBaseHeader value) { nonHaptic(address(), value); return this; }
-    /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@link #offHaptic} field. */
+    /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@code offHaptic} field. */
     public XrInteractionProfileDpadBindingEXT offHaptic(@Nullable @NativeType("XrHapticBaseHeader const *") XrHapticBaseHeader value) { noffHaptic(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -469,59 +422,59 @@ public class XrInteractionProfileDpadBindingEXT extends Struct<XrInteractionProf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInteractionProfileDpadBindingEXT.ntype(address()); }
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrInteractionProfileDpadBindingEXT.nnext(address()); }
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("XrPath")
         public long binding() { return XrInteractionProfileDpadBindingEXT.nbinding(address()); }
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#actionSet} field. */
+        /** @return the value of the {@code actionSet} field. */
         @NativeType("XrActionSet")
         public long actionSet() { return XrInteractionProfileDpadBindingEXT.nactionSet(address()); }
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#forceThreshold} field. */
+        /** @return the value of the {@code forceThreshold} field. */
         public float forceThreshold() { return XrInteractionProfileDpadBindingEXT.nforceThreshold(address()); }
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#forceThresholdReleased} field. */
+        /** @return the value of the {@code forceThresholdReleased} field. */
         public float forceThresholdReleased() { return XrInteractionProfileDpadBindingEXT.nforceThresholdReleased(address()); }
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#centerRegion} field. */
+        /** @return the value of the {@code centerRegion} field. */
         public float centerRegion() { return XrInteractionProfileDpadBindingEXT.ncenterRegion(address()); }
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#wedgeAngle} field. */
+        /** @return the value of the {@code wedgeAngle} field. */
         public float wedgeAngle() { return XrInteractionProfileDpadBindingEXT.nwedgeAngle(address()); }
-        /** @return the value of the {@link XrInteractionProfileDpadBindingEXT#isSticky} field. */
+        /** @return the value of the {@code isSticky} field. */
         @NativeType("XrBool32")
         public boolean isSticky() { return XrInteractionProfileDpadBindingEXT.nisSticky(address()) != 0; }
-        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@link XrInteractionProfileDpadBindingEXT#onHaptic} field. */
+        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code onHaptic} field. */
         @NativeType("XrHapticBaseHeader const *")
         public @Nullable XrHapticBaseHeader onHaptic() { return XrInteractionProfileDpadBindingEXT.nonHaptic(address()); }
-        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@link XrInteractionProfileDpadBindingEXT#offHaptic} field. */
+        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code offHaptic} field. */
         @NativeType("XrHapticBaseHeader const *")
         public @Nullable XrHapticBaseHeader offHaptic() { return XrInteractionProfileDpadBindingEXT.noffHaptic(address()); }
 
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer type(@NativeType("XrStructureType") int value) { XrInteractionProfileDpadBindingEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTDpadBinding#XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT} value to the {@link XrInteractionProfileDpadBindingEXT#type} field. */
+        /** Sets the {@link EXTDpadBinding#XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT} value to the {@code type} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer type$Default() { return type(EXTDpadBinding.XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT); }
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer next(@NativeType("void const *") long value) { XrInteractionProfileDpadBindingEXT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#binding} field. */
+        /** Sets the specified value to the {@code binding} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer binding(@NativeType("XrPath") long value) { XrInteractionProfileDpadBindingEXT.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#actionSet} field. */
+        /** Sets the specified value to the {@code actionSet} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer actionSet(XrActionSet value) { XrInteractionProfileDpadBindingEXT.nactionSet(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#forceThreshold} field. */
+        /** Sets the specified value to the {@code forceThreshold} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer forceThreshold(float value) { XrInteractionProfileDpadBindingEXT.nforceThreshold(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#forceThresholdReleased} field. */
+        /** Sets the specified value to the {@code forceThresholdReleased} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer forceThresholdReleased(float value) { XrInteractionProfileDpadBindingEXT.nforceThresholdReleased(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#centerRegion} field. */
+        /** Sets the specified value to the {@code centerRegion} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer centerRegion(float value) { XrInteractionProfileDpadBindingEXT.ncenterRegion(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#wedgeAngle} field. */
+        /** Sets the specified value to the {@code wedgeAngle} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer wedgeAngle(float value) { XrInteractionProfileDpadBindingEXT.nwedgeAngle(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileDpadBindingEXT#isSticky} field. */
+        /** Sets the specified value to the {@code isSticky} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer isSticky(@NativeType("XrBool32") boolean value) { XrInteractionProfileDpadBindingEXT.nisSticky(address(), value ? 1 : 0); return this; }
-        /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@link XrInteractionProfileDpadBindingEXT#onHaptic} field. */
+        /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@code onHaptic} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer onHaptic(@Nullable @NativeType("XrHapticBaseHeader const *") XrHapticBaseHeader value) { XrInteractionProfileDpadBindingEXT.nonHaptic(address(), value); return this; }
-        /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@link XrInteractionProfileDpadBindingEXT#offHaptic} field. */
+        /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@code offHaptic} field. */
         public XrInteractionProfileDpadBindingEXT.Buffer offHaptic(@Nullable @NativeType("XrHapticBaseHeader const *") XrHapticBaseHeader value) { XrInteractionProfileDpadBindingEXT.noffHaptic(address(), value); return this; }
 
     }

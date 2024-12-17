@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the video encode quantization map features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #videoEncodeQuantizationMap};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 videoEncodeQuantizationMap;
+ * }}</pre>
  */
 public class VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR extends Struct<VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR> implements NativeResource {
 
@@ -88,30 +74,23 @@ public class VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR extends Struc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /**
-     * indicates that the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-quantization-map">video encode quantization maps</a>.
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>Support for {@code videoEncodeQuantizationMap} does not indicate that all video encode profiles support quantization maps. Support for quantization maps for any specific video encode profile is subject to video-profile-specific capabilities.</p>
-     * </div>
-     */
+    /** @return the value of the {@code videoEncodeQuantizationMap} field. */
     @NativeType("VkBool32")
     public boolean videoEncodeQuantizationMap() { return nvideoEncodeQuantizationMap(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #videoEncodeQuantizationMap} field. */
+    /** Sets the specified value to the {@code videoEncodeQuantizationMap} field. */
     public VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR videoEncodeQuantizationMap(@NativeType("VkBool32") boolean value) { nvideoEncodeQuantizationMap(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,23 +286,23 @@ public class VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR#videoEncodeQuantizationMap} field. */
+        /** @return the value of the {@code videoEncodeQuantizationMap} field. */
         @NativeType("VkBool32")
         public boolean videoEncodeQuantizationMap() { return VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.nvideoEncodeQuantizationMap(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR} value to the {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQuantizationMap#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQuantizationMap.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_QUANTIZATION_MAP_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR#videoEncodeQuantizationMap} field. */
+        /** Sets the specified value to the {@code videoEncodeQuantizationMap} field. */
         public VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.Buffer videoEncodeQuantizationMap(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR.nvideoEncodeQuantizationMap(address(), value ? 1 : 0); return this; }
 
     }

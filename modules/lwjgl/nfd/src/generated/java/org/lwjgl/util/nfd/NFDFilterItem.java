@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nfdfilteritem_t {
  *     nfdchar_t const * name;
  *     nfdchar_t const * spec;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nfdfilteritem_t")
 public class NFDFilterItem extends Struct<NFDFilterItem> implements NativeResource {

@@ -33,7 +33,7 @@ public class LLVMIRReader {
 
     // --- [ LLVMParseIRInContext ] ---
 
-    /** Unsafe version of: {@link #LLVMParseIRInContext ParseIRInContext} */
+    /** {@code LLVMBool LLVMParseIRInContext(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM, char ** OutMessage)} */
     public static int nLLVMParseIRInContext(long ContextRef, long MemBuf, long OutM, long OutMessage) {
         long __functionAddress = Functions.ParseIRInContext;
         if (CHECKS) {
@@ -43,12 +43,7 @@ public class LLVMIRReader {
         return invokePPPPI(ContextRef, MemBuf, OutM, OutMessage, __functionAddress);
     }
 
-    /**
-     * Read LLVM IR from a memory buffer and convert it into an in-memory {@code Module} object.
-     * 
-     * <p>Returns 0 on success. Optionally returns a human-readable description of any errors that occurred during parsing IR. {@code OutMessage} must be
-     * disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.</p>
-     */
+    /** {@code LLVMBool LLVMParseIRInContext(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM, char ** OutMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMParseIRInContext(@NativeType("LLVMContextRef") long ContextRef, @NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutM, @NativeType("char **") PointerBuffer OutMessage) {
         if (CHECKS) {

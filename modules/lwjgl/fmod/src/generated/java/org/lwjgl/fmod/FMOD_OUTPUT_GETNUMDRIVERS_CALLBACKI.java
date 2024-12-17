@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_OUTPUT_STATE *output_state,
- *     int *numdrivers
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_OUTPUT_GETNUMDRIVERS_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_OUTPUT_GETNUMDRIVERS_CALLBACK")
 public interface FMOD_OUTPUT_GETNUMDRIVERS_CALLBACKI extends CallbackI {
@@ -43,7 +35,7 @@ public interface FMOD_OUTPUT_GETNUMDRIVERS_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** Output callbacks */
+    /** {@code FMOD_RESULT (* FMOD_OUTPUT_GETNUMDRIVERS_CALLBACK) (struct FMOD_OUTPUT_STATE * output_state, int * numdrivers)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_OUTPUT_STATE *") long output_state, @NativeType("int *") long numdrivers);
 
 }

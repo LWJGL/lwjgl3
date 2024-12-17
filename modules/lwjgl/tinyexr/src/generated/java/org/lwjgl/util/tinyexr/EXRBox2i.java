@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct EXRBox2i {
  *     int min_x;
  *     int min_y;
  *     int max_x;
  *     int max_y;
- * }</code></pre>
+ * }}</pre>
  */
 public class EXRBox2i extends Struct<EXRBox2i> implements NativeResource {
 

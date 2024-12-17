@@ -5,14 +5,6 @@
  */
 package org.lwjgl.egl;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_create_context_robustness.txt">EXT_create_context_robustness</a> extension.
- * 
- * <p>This extension allows creating an OpenGL or OpenGL ES context supporting robust buffer access behavior and a specified graphics reset notification
- * behavior.</p>
- * 
- * <p>Requires {@link EGL14 EGL 1.4}.</p>
- */
 public final class EXTCreateContextRobustness {
 
     public static final int

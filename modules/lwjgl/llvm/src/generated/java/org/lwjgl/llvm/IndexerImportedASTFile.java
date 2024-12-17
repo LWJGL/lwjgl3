@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to the {@code importedASTFile} field of the {@link IndexerCallbacks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * CXIdxClientASTFile (*{@link #invoke}) (
- *     CXClientData client_data,
- *     CXIdxImportedASTFileInfo const *info
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class IndexerImportedASTFile extends Callback implements IndexerImportedASTFileI {
 
     /**

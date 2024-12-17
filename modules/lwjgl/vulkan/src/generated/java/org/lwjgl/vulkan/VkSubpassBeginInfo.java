@@ -16,40 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying subpass begin information.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code contents} is {@link KHRMaintenance7#VK_SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR SUBPASS_CONTENTS_INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR}, then at least one of the following features <b>must</b> be enabled:
- * 
- * <ul>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-maintenance7">{@code maintenance7}</a></li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nestedCommandBuffer">{@code nestedCommandBuffer}</a></li>
- * </ul>
- * </li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code contents} <b>must</b> be a valid {@code VkSubpassContents} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK12#vkCmdBeginRenderPass2 CmdBeginRenderPass2}, {@link KHRCreateRenderpass2#vkCmdBeginRenderPass2KHR CmdBeginRenderPass2KHR}, {@link VK12#vkCmdNextSubpass2 CmdNextSubpass2}, {@link KHRCreateRenderpass2#vkCmdNextSubpass2KHR CmdNextSubpass2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubpassBeginInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSubpassContents {@link #contents};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSubpassContents contents;
+ * }}</pre>
  */
 public class VkSubpassBeginInfo extends Struct<VkSubpassBeginInfo> implements NativeResource {
 
@@ -102,23 +74,23 @@ public class VkSubpassBeginInfo extends Struct<VkSubpassBeginInfo> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkSubpassContents} value specifying how the commands in the next subpass will be provided. */
+    /** @return the value of the {@code contents} field. */
     @NativeType("VkSubpassContents")
     public int contents() { return ncontents(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSubpassBeginInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO} value to the {@code sType} field. */
     public VkSubpassBeginInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSubpassBeginInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #contents} field. */
+    /** Sets the specified value to the {@code contents} field. */
     public VkSubpassBeginInfo contents(@NativeType("VkSubpassContents") int value) { ncontents(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,23 +286,23 @@ public class VkSubpassBeginInfo extends Struct<VkSubpassBeginInfo> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSubpassBeginInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubpassBeginInfo.nsType(address()); }
-        /** @return the value of the {@link VkSubpassBeginInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSubpassBeginInfo.npNext(address()); }
-        /** @return the value of the {@link VkSubpassBeginInfo#contents} field. */
+        /** @return the value of the {@code contents} field. */
         @NativeType("VkSubpassContents")
         public int contents() { return VkSubpassBeginInfo.ncontents(address()); }
 
-        /** Sets the specified value to the {@link VkSubpassBeginInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSubpassBeginInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSubpassBeginInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO} value to the {@link VkSubpassBeginInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO STRUCTURE_TYPE_SUBPASS_BEGIN_INFO} value to the {@code sType} field. */
         public VkSubpassBeginInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO); }
-        /** Sets the specified value to the {@link VkSubpassBeginInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSubpassBeginInfo.Buffer pNext(@NativeType("void const *") long value) { VkSubpassBeginInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSubpassBeginInfo#contents} field. */
+        /** Sets the specified value to the {@code contents} field. */
         public VkSubpassBeginInfo.Buffer contents(@NativeType("VkSubpassContents") int value) { VkSubpassBeginInfo.ncontents(address(), value); return this; }
 
     }

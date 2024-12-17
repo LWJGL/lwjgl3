@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Struct describing the logical orientation of an image.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ktxOrientation {
- *     ktxOrientationX {@link #x};
- *     ktxOrientationY {@link #y};
- *     ktxOrientationZ {@link #z};
- * }</code></pre>
+ *     ktxOrientationX x;
+ *     ktxOrientationY y;
+ *     ktxOrientationZ z;
+ * }}</pre>
  */
 @NativeType("struct ktxOrientation")
 public class ktxOrientation extends Struct<ktxOrientation> {
@@ -77,13 +73,13 @@ public class ktxOrientation extends Struct<ktxOrientation> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** orientation in X */
+    /** @return the value of the {@code x} field. */
     @NativeType("ktxOrientationX")
     public int x() { return nx(address()); }
-    /** orientation in Y */
+    /** @return the value of the {@code y} field. */
     @NativeType("ktxOrientationY")
     public int y() { return ny(address()); }
-    /** orientation in Z */
+    /** @return the value of the {@code z} field. */
     @NativeType("ktxOrientationZ")
     public int z() { return nz(address()); }
 
@@ -166,13 +162,13 @@ public class ktxOrientation extends Struct<ktxOrientation> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ktxOrientation#x} field. */
+        /** @return the value of the {@code x} field. */
         @NativeType("ktxOrientationX")
         public int x() { return ktxOrientation.nx(address()); }
-        /** @return the value of the {@link ktxOrientation#y} field. */
+        /** @return the value of the {@code y} field. */
         @NativeType("ktxOrientationY")
         public int y() { return ktxOrientation.ny(address()); }
-        /** @return the value of the {@link ktxOrientation#z} field. */
+        /** @return the value of the {@code z} field. */
         @NativeType("ktxOrientationZ")
         public int z() { return ktxOrientation.nz(address()); }
 

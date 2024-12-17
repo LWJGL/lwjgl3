@@ -16,36 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing layered implementations underneath the Vulkan physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code pLayeredApis} is {@code NULL}, then the number of layered implementations that are underneath the top-most Vulkan physical device (i.e. the one returned by {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}) is returned in {@code layeredApiCount}. Otherwise, {@code layeredApiCount} <b>must</b> be set by the application to the number of elements in the {@code pLayeredApis} array, and on return the variable is overwritten with the number of values actually written to {@code pLayeredApis}. If the value of {@code layeredApiCount} is less than the number of layered implementations underneath the Vulkan physical device, at most {@code layeredApiCount} values will be written to {@code pLayeredApis}. An implementation that is not a layer will return 0 in {@code layeredApiCount}.</p>
- * 
- * <p>In the presence of multiple layered implementations, each element of {@code pLayeredApis} corresponds to an API implementation that is implemented on top of the API at the previous index. If there are layered implementations underneath a non-Vulkan implementation, they may not be visible in this query as the corresponding APIs may lack such a query.</p>
- * 
- * <p>If the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR}</li>
- * <li>If {@code layeredApiCount} is not 0, and {@code pLayeredApis} is not {@code NULL}, {@code pLayeredApis} <b>must</b> be a valid pointer to an array of {@code layeredApiCount} {@link VkPhysicalDeviceLayeredApiPropertiesKHR} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPhysicalDeviceLayeredApiPropertiesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceLayeredApiPropertiesListKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #layeredApiCount};
- *     {@link VkPhysicalDeviceLayeredApiPropertiesKHR VkPhysicalDeviceLayeredApiPropertiesKHR} * {@link #pLayeredApis};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t layeredApiCount;
+ *     {@link VkPhysicalDeviceLayeredApiPropertiesKHR VkPhysicalDeviceLayeredApiPropertiesKHR} * pLayeredApis;
+ * }}</pre>
  */
 public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysicalDeviceLayeredApiPropertiesListKHR> implements NativeResource {
 
@@ -101,28 +78,28 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an integer related to the number of layered implementations underneath the Vulkan physical device, as described below. */
+    /** @return the value of the {@code layeredApiCount} field. */
     @NativeType("uint32_t")
     public int layeredApiCount() { return nlayeredApiCount(address()); }
-    /** a pointer to an array of {@link VkPhysicalDeviceLayeredApiPropertiesKHR} in which information regarding the layered implementations underneath the Vulkan physical device are returned. */
+    /** @return a {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} view of the struct array pointed to by the {@code pLayeredApis} field. */
     @NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *")
     public VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer pLayeredApis() { return npLayeredApis(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceLayeredApiPropertiesListKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceLayeredApiPropertiesListKHR sType$Default() { return sType(KHRMaintenance7.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceLayeredApiPropertiesListKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #layeredApiCount} field. */
+    /** Sets the specified value to the {@code layeredApiCount} field. */
     public VkPhysicalDeviceLayeredApiPropertiesListKHR layeredApiCount(@NativeType("uint32_t") int value) { nlayeredApiCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} to the {@link #pLayeredApis} field. */
+    /** Sets the address of the specified {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} to the {@code pLayeredApis} field. */
     public VkPhysicalDeviceLayeredApiPropertiesListKHR pLayeredApis(@NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *") VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer value) { npLayeredApis(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,28 +301,28 @@ public class VkPhysicalDeviceLayeredApiPropertiesListKHR extends Struct<VkPhysic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceLayeredApiPropertiesListKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceLayeredApiPropertiesListKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#layeredApiCount} field. */
+        /** @return the value of the {@code layeredApiCount} field. */
         @NativeType("uint32_t")
         public int layeredApiCount() { return VkPhysicalDeviceLayeredApiPropertiesListKHR.nlayeredApiCount(address()); }
-        /** @return a {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} view of the struct array pointed to by the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#pLayeredApis} field. */
+        /** @return a {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} view of the struct array pointed to by the {@code pLayeredApis} field. */
         @NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *")
         public VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer pLayeredApis() { return VkPhysicalDeviceLayeredApiPropertiesListKHR.npLayeredApis(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLayeredApiPropertiesListKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR} value to the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#sType} field. */
+        /** Sets the {@link KHRMaintenance7#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer sType$Default() { return sType(KHRMaintenance7.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLayeredApiPropertiesListKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#layeredApiCount} field. */
+        /** Sets the specified value to the {@code layeredApiCount} field. */
         public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer layeredApiCount(@NativeType("uint32_t") int value) { VkPhysicalDeviceLayeredApiPropertiesListKHR.nlayeredApiCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} to the {@link VkPhysicalDeviceLayeredApiPropertiesListKHR#pLayeredApis} field. */
+        /** Sets the address of the specified {@link VkPhysicalDeviceLayeredApiPropertiesKHR.Buffer} to the {@code pLayeredApis} field. */
         public VkPhysicalDeviceLayeredApiPropertiesListKHR.Buffer pLayeredApis(@NativeType("VkPhysicalDeviceLayeredApiPropertiesKHR *") VkPhysicalDeviceLayeredApiPropertiesKHR.@Nullable Buffer value) { VkPhysicalDeviceLayeredApiPropertiesListKHR.npLayeredApis(address(), value); return this; }
 
     }

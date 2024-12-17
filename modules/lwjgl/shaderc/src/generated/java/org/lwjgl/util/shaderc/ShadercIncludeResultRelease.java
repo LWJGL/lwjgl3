@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link Shaderc#shaderc_compile_options_set_include_callbacks compile_options_set_include_callbacks} function.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *user_data,
- *     shaderc_include_result *include_result
- * )</code></pre>
- */
+/** Callback function: {@link #invoke shaderc_include_result_release_fn} */
 public abstract class ShadercIncludeResultRelease extends Callback implements ShadercIncludeResultReleaseI {
 
     /**

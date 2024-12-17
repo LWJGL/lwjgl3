@@ -16,30 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Suggested bindings with binding modification details.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHRBindingModification XR_KHR_binding_modification} extension <b>must</b> be enabled prior to using {@link XrBindingModificationsKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHRBindingModification#XR_TYPE_BINDING_MODIFICATIONS_KHR TYPE_BINDING_MODIFICATIONS_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code bindingModificationCount} is not 0, {@code bindingModifications} <b>must</b> be a pointer to an array of {@code bindingModificationCount} valid {@link XrBindingModificationBaseHeaderKHR}-based structures. See also: {@link XrInteractionProfileAnalogThresholdVALVE}, {@link XrInteractionProfileDpadBindingEXT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrBindingModificationBaseHeaderKHR}, {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBindingModificationsKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #bindingModificationCount};
- *     {@link XrBindingModificationBaseHeaderKHR XrBindingModificationBaseHeaderKHR} const * const * {@link #bindingModifications};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t bindingModificationCount;
+ *     {@link XrBindingModificationBaseHeaderKHR XrBindingModificationBaseHeaderKHR} const * const * bindingModifications;
+ * }}</pre>
  */
 public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR> implements NativeResource {
 
@@ -95,28 +78,28 @@ public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of binding modifications in the array pointed to by {@code bindingModifications}. */
+    /** @return the value of the {@code bindingModificationCount} field. */
     @NativeType("uint32_t")
     public int bindingModificationCount() { return nbindingModificationCount(address()); }
-    /** a pointer to an array of pointers to binding modification structures based on {@link XrBindingModificationBaseHeaderKHR}, that define all of the application’s suggested binding modifications for the specified interaction profile. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code bindingModifications} field. */
     @NativeType("XrBindingModificationBaseHeaderKHR const * const *")
     public @Nullable PointerBuffer bindingModifications() { return nbindingModifications(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrBindingModificationsKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRBindingModification#XR_TYPE_BINDING_MODIFICATIONS_KHR TYPE_BINDING_MODIFICATIONS_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHRBindingModification#XR_TYPE_BINDING_MODIFICATIONS_KHR TYPE_BINDING_MODIFICATIONS_KHR} value to the {@code type} field. */
     public XrBindingModificationsKHR type$Default() { return type(KHRBindingModification.XR_TYPE_BINDING_MODIFICATIONS_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrBindingModificationsKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #bindingModificationCount} field. */
+    /** Sets the specified value to the {@code bindingModificationCount} field. */
     public XrBindingModificationsKHR bindingModificationCount(@NativeType("uint32_t") int value) { nbindingModificationCount(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #bindingModifications} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code bindingModifications} field. */
     public XrBindingModificationsKHR bindingModifications(@Nullable @NativeType("XrBindingModificationBaseHeaderKHR const * const *") PointerBuffer value) { nbindingModifications(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -318,28 +301,28 @@ public class XrBindingModificationsKHR extends Struct<XrBindingModificationsKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrBindingModificationsKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBindingModificationsKHR.ntype(address()); }
-        /** @return the value of the {@link XrBindingModificationsKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrBindingModificationsKHR.nnext(address()); }
-        /** @return the value of the {@link XrBindingModificationsKHR#bindingModificationCount} field. */
+        /** @return the value of the {@code bindingModificationCount} field. */
         @NativeType("uint32_t")
         public int bindingModificationCount() { return XrBindingModificationsKHR.nbindingModificationCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrBindingModificationsKHR#bindingModifications} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code bindingModifications} field. */
         @NativeType("XrBindingModificationBaseHeaderKHR const * const *")
         public @Nullable PointerBuffer bindingModifications() { return XrBindingModificationsKHR.nbindingModifications(address()); }
 
-        /** Sets the specified value to the {@link XrBindingModificationsKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrBindingModificationsKHR.Buffer type(@NativeType("XrStructureType") int value) { XrBindingModificationsKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRBindingModification#XR_TYPE_BINDING_MODIFICATIONS_KHR TYPE_BINDING_MODIFICATIONS_KHR} value to the {@link XrBindingModificationsKHR#type} field. */
+        /** Sets the {@link KHRBindingModification#XR_TYPE_BINDING_MODIFICATIONS_KHR TYPE_BINDING_MODIFICATIONS_KHR} value to the {@code type} field. */
         public XrBindingModificationsKHR.Buffer type$Default() { return type(KHRBindingModification.XR_TYPE_BINDING_MODIFICATIONS_KHR); }
-        /** Sets the specified value to the {@link XrBindingModificationsKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrBindingModificationsKHR.Buffer next(@NativeType("void const *") long value) { XrBindingModificationsKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrBindingModificationsKHR#bindingModificationCount} field. */
+        /** Sets the specified value to the {@code bindingModificationCount} field. */
         public XrBindingModificationsKHR.Buffer bindingModificationCount(@NativeType("uint32_t") int value) { XrBindingModificationsKHR.nbindingModificationCount(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link XrBindingModificationsKHR#bindingModifications} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code bindingModifications} field. */
         public XrBindingModificationsKHR.Buffer bindingModifications(@Nullable @NativeType("XrBindingModificationBaseHeaderKHR const * const *") PointerBuffer value) { XrBindingModificationsKHR.nbindingModifications(address(), value); return this; }
 
     }

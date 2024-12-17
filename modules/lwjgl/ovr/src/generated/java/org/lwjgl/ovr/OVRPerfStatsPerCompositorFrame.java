@@ -14,33 +14,27 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Contains the performance stats for a given SDK compositor frame.
- * 
- * <p>All of the int fields can be reset via the {@link OVR#ovr_ResetPerfStats ResetPerfStats} call.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrPerfStatsPerCompositorFrame {
- *     int {@link #HmdVsyncIndex};
- *     int {@link #AppFrameIndex};
- *     int {@link #AppDroppedFrameCount};
- *     float {@link #AppMotionToPhotonLatency};
- *     float {@link #AppQueueAheadTime};
- *     float {@link #AppCpuElapsedTime};
- *     float {@link #AppGpuElapsedTime};
- *     int {@link #CompositorFrameIndex};
- *     int {@link #CompositorDroppedFrameCount};
- *     float {@link #CompositorLatency};
- *     float {@link #CompositorCpuElapsedTime};
- *     float {@link #CompositorGpuElapsedTime};
- *     float {@link #CompositorCpuStartToGpuEndElapsedTime};
- *     float {@link #CompositorGpuEndToVsyncElapsedTime};
- *     ovrBool {@link #AswIsActive};
- *     int {@link #AswActivatedToggleCount};
- *     int {@link #AswPresentedFrameCount};
- *     int {@link #AswFailedFrameCount};
- * }</code></pre>
+ *     int HmdVsyncIndex;
+ *     int AppFrameIndex;
+ *     int AppDroppedFrameCount;
+ *     float AppMotionToPhotonLatency;
+ *     float AppQueueAheadTime;
+ *     float AppCpuElapsedTime;
+ *     float AppGpuElapsedTime;
+ *     int CompositorFrameIndex;
+ *     int CompositorDroppedFrameCount;
+ *     float CompositorLatency;
+ *     float CompositorCpuElapsedTime;
+ *     float CompositorGpuElapsedTime;
+ *     float CompositorCpuStartToGpuEndElapsedTime;
+ *     float CompositorGpuEndToVsyncElapsedTime;
+ *     ovrBool AswIsActive;
+ *     int AswActivatedToggleCount;
+ *     int AswPresentedFrameCount;
+ *     int AswFailedFrameCount;
+ * }}</pre>
  */
 @NativeType("struct ovrPerfStatsPerCompositorFrame")
 public class OVRPerfStatsPerCompositorFrame extends Struct<OVRPerfStatsPerCompositorFrame> {
@@ -139,97 +133,42 @@ public class OVRPerfStatsPerCompositorFrame extends Struct<OVRPerfStatsPerCompos
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * Vsync Frame Index - increments with each HMD vertical synchronization signal (i.e. vsync or refresh rate).
-     * 
-     * <p>If the compositor drops a frame, expect this value to increment more than 1 at a time.</p>
-     */
+    /** @return the value of the {@code HmdVsyncIndex} field. */
     public int HmdVsyncIndex() { return nHmdVsyncIndex(address()); }
-    /** index that increments with each successive {@link OVR#ovr_SubmitFrame SubmitFrame} call */
+    /** @return the value of the {@code AppFrameIndex} field. */
     public int AppFrameIndex() { return nAppFrameIndex(address()); }
-    /** if the app fails to call {@link OVR#ovr_SubmitFrame SubmitFrame} on time, then expect this value to increment with each missed frame */
+    /** @return the value of the {@code AppDroppedFrameCount} field. */
     public int AppDroppedFrameCount() { return nAppDroppedFrameCount(address()); }
-    /**
-     * motion-to-photon latency for the application
-     * 
-     * <p>This value is calculated by either using the {@code SensorSampleTime} provided for the {@link OVRLayerEyeFov} or if that is not available, then the call to
-     * {@link OVR#ovr_GetTrackingState GetTrackingState} which has {@code latencyMarker} set to {@link OVR#ovrTrue True}.</p>
-     */
+    /** @return the value of the {@code AppMotionToPhotonLatency} field. */
     public float AppMotionToPhotonLatency() { return nAppMotionToPhotonLatency(address()); }
-    /**
-     * amount of queue-ahead in seconds provided to the app based on performance and overlap of CPU and GPU utilization.
-     * 
-     * <p>A value of 0.0 would mean the CPU &amp; GPU workload is being completed in 1 frame's worth of time, while 11 ms (on the CV1) of queue ahead would
-     * indicate that the app's CPU workload for the next frame is overlapping the app's GPU workload for the current frame.</p>
-     */
+    /** @return the value of the {@code AppQueueAheadTime} field. */
     public float AppQueueAheadTime() { return nAppQueueAheadTime(address()); }
-    /**
-     * amount of time in seconds spent on the CPU by the app's render-thread that calls {@link OVR#ovr_SubmitFrame SubmitFrame}.
-     * 
-     * <p>Measured as elapsed time between from when app regains control from {@link OVR#ovr_SubmitFrame SubmitFrame} to the next time the app calls {@link OVR#ovr_SubmitFrame SubmitFrame}.</p>
-     */
+    /** @return the value of the {@code AppCpuElapsedTime} field. */
     public float AppCpuElapsedTime() { return nAppCpuElapsedTime(address()); }
-    /**
-     * amount of time in seconds spent on the GPU by the app.
-     * 
-     * <p>Measured as elapsed time between each {@link OVR#ovr_SubmitFrame SubmitFrame} call using GPU timing queries.</p>
-     */
+    /** @return the value of the {@code AppGpuElapsedTime} field. */
     public float AppGpuElapsedTime() { return nAppGpuElapsedTime(address()); }
-    /**
-     * index that increments each time the SDK compositor completes a distortion and timewarp pass.
-     * 
-     * <p>Since the compositor operates asynchronously, even if the app calls {@link OVR#ovr_SubmitFrame SubmitFrame} too late, the compositor will kick off for each vsync.</p>
-     */
+    /** @return the value of the {@code CompositorFrameIndex} field. */
     public int CompositorFrameIndex() { return nCompositorFrameIndex(address()); }
-    /**
-     * increments each time the SDK compositor fails to complete in time.
-     * 
-     * <p>This is not tied to the app's performance, but failure to complete can be related to other factors such as OS capabilities, overall available hardware
-     * cycles to execute the compositor in time and other factors outside of the app's control.</p>
-     */
+    /** @return the value of the {@code CompositorDroppedFrameCount} field. */
     public int CompositorDroppedFrameCount() { return nCompositorDroppedFrameCount(address()); }
-    /**
-     * motion-to-photon latency of the SDK compositor in seconds.
-     * 
-     * <p>This is the latency of timewarp which corrects the higher app latency as well as dropped app frames.</p>
-     */
+    /** @return the value of the {@code CompositorLatency} field. */
     public float CompositorLatency() { return nCompositorLatency(address()); }
-    /**
-     * the amount of time in seconds spent on the CPU by the SDK compositor.
-     * 
-     * <p>Unless the VR app is utilizing all of the CPU cores at their peak performance, there is a good chance the compositor CPU times will not affect the
-     * app's CPU performance in a major way.</p>
-     */
+    /** @return the value of the {@code CompositorCpuElapsedTime} field. */
     public float CompositorCpuElapsedTime() { return nCompositorCpuElapsedTime(address()); }
-    /**
-     * the amount of time in seconds spent on the GPU by the SDK compositor. Any time spent on the compositor will eat away from the available GPU time for
-     * the app.
-     */
+    /** @return the value of the {@code CompositorGpuElapsedTime} field. */
     public float CompositorGpuElapsedTime() { return nCompositorGpuElapsedTime(address()); }
-    /**
-     * the amount of time in seconds spent from the point the CPU kicks off the compositor to the point in time the compositor completes the distortion &amp;
-     * timewarp on the GPU.
-     * 
-     * <p>In the event the GPU time is not available, expect this value to be -1.0f.</p>
-     */
+    /** @return the value of the {@code CompositorCpuStartToGpuEndElapsedTime} field. */
     public float CompositorCpuStartToGpuEndElapsedTime() { return nCompositorCpuStartToGpuEndElapsedTime(address()); }
-    /**
-     * the amount of time in seconds left after the compositor is done on the GPU to the associated V-Sync time.
-     * 
-     * <p>In the event the GPU time is not available, expect this value to be -1.0f.</p>
-     */
+    /** @return the value of the {@code CompositorGpuEndToVsyncElapsedTime} field. */
     public float CompositorGpuEndToVsyncElapsedTime() { return nCompositorGpuEndToVsyncElapsedTime(address()); }
-    /**
-     * Will be true if ASW is active for the given frame such that the application is being forced into  half the frame-rate while the compositor continues to
-     * run at full frame-rate.
-     */
+    /** @return the value of the {@code AswIsActive} field. */
     @NativeType("ovrBool")
     public boolean AswIsActive() { return nAswIsActive(address()); }
-    /** Increments each time ASW it activated where the app was forced in and out of half-rate rendering. */
+    /** @return the value of the {@code AswActivatedToggleCount} field. */
     public int AswActivatedToggleCount() { return nAswActivatedToggleCount(address()); }
-    /** Accumulates the number of frames presented by the compositor which had extrapolated ASW frames presented */
+    /** @return the value of the {@code AswPresentedFrameCount} field. */
     public int AswPresentedFrameCount() { return nAswPresentedFrameCount(address()); }
-    /** Accumulates the number of frames that the compositor tried to present when ASW is active but failed */
+    /** @return the value of the {@code AswFailedFrameCount} field. */
     public int AswFailedFrameCount() { return nAswFailedFrameCount(address()); }
 
     // -----------------------------------
@@ -341,42 +280,42 @@ public class OVRPerfStatsPerCompositorFrame extends Struct<OVRPerfStatsPerCompos
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#HmdVsyncIndex} field. */
+        /** @return the value of the {@code HmdVsyncIndex} field. */
         public int HmdVsyncIndex() { return OVRPerfStatsPerCompositorFrame.nHmdVsyncIndex(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AppFrameIndex} field. */
+        /** @return the value of the {@code AppFrameIndex} field. */
         public int AppFrameIndex() { return OVRPerfStatsPerCompositorFrame.nAppFrameIndex(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AppDroppedFrameCount} field. */
+        /** @return the value of the {@code AppDroppedFrameCount} field. */
         public int AppDroppedFrameCount() { return OVRPerfStatsPerCompositorFrame.nAppDroppedFrameCount(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AppMotionToPhotonLatency} field. */
+        /** @return the value of the {@code AppMotionToPhotonLatency} field. */
         public float AppMotionToPhotonLatency() { return OVRPerfStatsPerCompositorFrame.nAppMotionToPhotonLatency(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AppQueueAheadTime} field. */
+        /** @return the value of the {@code AppQueueAheadTime} field. */
         public float AppQueueAheadTime() { return OVRPerfStatsPerCompositorFrame.nAppQueueAheadTime(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AppCpuElapsedTime} field. */
+        /** @return the value of the {@code AppCpuElapsedTime} field. */
         public float AppCpuElapsedTime() { return OVRPerfStatsPerCompositorFrame.nAppCpuElapsedTime(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AppGpuElapsedTime} field. */
+        /** @return the value of the {@code AppGpuElapsedTime} field. */
         public float AppGpuElapsedTime() { return OVRPerfStatsPerCompositorFrame.nAppGpuElapsedTime(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#CompositorFrameIndex} field. */
+        /** @return the value of the {@code CompositorFrameIndex} field. */
         public int CompositorFrameIndex() { return OVRPerfStatsPerCompositorFrame.nCompositorFrameIndex(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#CompositorDroppedFrameCount} field. */
+        /** @return the value of the {@code CompositorDroppedFrameCount} field. */
         public int CompositorDroppedFrameCount() { return OVRPerfStatsPerCompositorFrame.nCompositorDroppedFrameCount(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#CompositorLatency} field. */
+        /** @return the value of the {@code CompositorLatency} field. */
         public float CompositorLatency() { return OVRPerfStatsPerCompositorFrame.nCompositorLatency(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#CompositorCpuElapsedTime} field. */
+        /** @return the value of the {@code CompositorCpuElapsedTime} field. */
         public float CompositorCpuElapsedTime() { return OVRPerfStatsPerCompositorFrame.nCompositorCpuElapsedTime(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#CompositorGpuElapsedTime} field. */
+        /** @return the value of the {@code CompositorGpuElapsedTime} field. */
         public float CompositorGpuElapsedTime() { return OVRPerfStatsPerCompositorFrame.nCompositorGpuElapsedTime(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#CompositorCpuStartToGpuEndElapsedTime} field. */
+        /** @return the value of the {@code CompositorCpuStartToGpuEndElapsedTime} field. */
         public float CompositorCpuStartToGpuEndElapsedTime() { return OVRPerfStatsPerCompositorFrame.nCompositorCpuStartToGpuEndElapsedTime(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#CompositorGpuEndToVsyncElapsedTime} field. */
+        /** @return the value of the {@code CompositorGpuEndToVsyncElapsedTime} field. */
         public float CompositorGpuEndToVsyncElapsedTime() { return OVRPerfStatsPerCompositorFrame.nCompositorGpuEndToVsyncElapsedTime(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AswIsActive} field. */
+        /** @return the value of the {@code AswIsActive} field. */
         @NativeType("ovrBool")
         public boolean AswIsActive() { return OVRPerfStatsPerCompositorFrame.nAswIsActive(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AswActivatedToggleCount} field. */
+        /** @return the value of the {@code AswActivatedToggleCount} field. */
         public int AswActivatedToggleCount() { return OVRPerfStatsPerCompositorFrame.nAswActivatedToggleCount(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AswPresentedFrameCount} field. */
+        /** @return the value of the {@code AswPresentedFrameCount} field. */
         public int AswPresentedFrameCount() { return OVRPerfStatsPerCompositorFrame.nAswPresentedFrameCount(address()); }
-        /** @return the value of the {@link OVRPerfStatsPerCompositorFrame#AswFailedFrameCount} field. */
+        /** @return the value of the {@code AswFailedFrameCount} field. */
         public int AswFailedFrameCount() { return OVRPerfStatsPerCompositorFrame.nAswFailedFrameCount(address()); }
 
     }

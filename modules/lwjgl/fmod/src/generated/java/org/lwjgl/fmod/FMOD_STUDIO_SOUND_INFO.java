@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_SOUND_INFO {
  *     char const * name_or_data;
  *     FMOD_MODE mode;
  *     {@link FMOD_CREATESOUNDEXINFO FMOD_CREATESOUNDEXINFO} exinfo;
  *     int subsoundindex;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_SOUND_INFO extends Struct<FMOD_STUDIO_SOUND_INFO> implements NativeResource {
 
@@ -81,11 +79,7 @@ public class FMOD_STUDIO_SOUND_INFO extends Struct<FMOD_STUDIO_SOUND_INFO> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code name_or_data} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code name_or_data} field. */
     @NativeType("char const *")
     public ByteBuffer name_or_data(int capacity) { return nname_or_data(address(), capacity); }
     /** @return the value of the {@code mode} field. */
@@ -316,11 +310,7 @@ public class FMOD_STUDIO_SOUND_INFO extends Struct<FMOD_STUDIO_SOUND_INFO> imple
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code name_or_data} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code name_or_data} field. */
         @NativeType("char const *")
         public ByteBuffer name_or_data(int capacity) { return FMOD_STUDIO_SOUND_INFO.nname_or_data(address(), capacity); }
         /** @return the value of the {@code mode} field. */

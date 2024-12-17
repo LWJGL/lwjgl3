@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSubpassDescription2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubpassDescription2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -36,7 +32,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkAttachmentReference2 VkAttachmentReference2} const * pDepthStencilAttachment;
  *     uint32_t preserveAttachmentCount;
  *     uint32_t const * pPreserveAttachments;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSubpassDescription2KHR extends VkSubpassDescription2 {
 

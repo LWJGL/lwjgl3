@@ -14,14 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Used for a few events about overlays.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Status_t {
  *     uint32_t statusState;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_Status_t")
 public class VREventStatus extends Struct<VREventStatus> {

@@ -16,62 +16,41 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing information about integer dot product support for a physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderIntegerDotProductProperties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <p>These are properties of the integer dot product acceleration information of a physical device.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>A dot product operation is deemed accelerated if its implementation provides a performance advantage over application-provided code composed from elementary instructions and/or other dot product instructions, either because the implementation uses optimized machine code sequences whose generation from application-provided code cannot be guaranteed or because it uses hardware features that cannot otherwise be targeted from application-provided code.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderIntegerDotProductProperties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #integerDotProduct8BitUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProduct8BitSignedAccelerated};
- *     VkBool32 {@link #integerDotProduct8BitMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProduct4x8BitPackedUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProduct4x8BitPackedSignedAccelerated};
- *     VkBool32 {@link #integerDotProduct4x8BitPackedMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProduct16BitUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProduct16BitSignedAccelerated};
- *     VkBool32 {@link #integerDotProduct16BitMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProduct32BitUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProduct32BitSignedAccelerated};
- *     VkBool32 {@link #integerDotProduct32BitMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProduct64BitUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProduct64BitSignedAccelerated};
- *     VkBool32 {@link #integerDotProduct64BitMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating8BitUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating8BitSignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating16BitUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating16BitSignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating32BitUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating32BitSignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating64BitUnsignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating64BitSignedAccelerated};
- *     VkBool32 {@link #integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 integerDotProduct8BitUnsignedAccelerated;
+ *     VkBool32 integerDotProduct8BitSignedAccelerated;
+ *     VkBool32 integerDotProduct8BitMixedSignednessAccelerated;
+ *     VkBool32 integerDotProduct4x8BitPackedUnsignedAccelerated;
+ *     VkBool32 integerDotProduct4x8BitPackedSignedAccelerated;
+ *     VkBool32 integerDotProduct4x8BitPackedMixedSignednessAccelerated;
+ *     VkBool32 integerDotProduct16BitUnsignedAccelerated;
+ *     VkBool32 integerDotProduct16BitSignedAccelerated;
+ *     VkBool32 integerDotProduct16BitMixedSignednessAccelerated;
+ *     VkBool32 integerDotProduct32BitUnsignedAccelerated;
+ *     VkBool32 integerDotProduct32BitSignedAccelerated;
+ *     VkBool32 integerDotProduct32BitMixedSignednessAccelerated;
+ *     VkBool32 integerDotProduct64BitUnsignedAccelerated;
+ *     VkBool32 integerDotProduct64BitSignedAccelerated;
+ *     VkBool32 integerDotProduct64BitMixedSignednessAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating8BitUnsignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating8BitSignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating16BitUnsignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating16BitSignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating32BitUnsignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating32BitSignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating64BitUnsignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating64BitSignedAccelerated;
+ *     VkBool32 integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderIntegerDotProductProperties extends Struct<VkPhysicalDeviceShaderIntegerDotProductProperties> implements NativeResource {
 
@@ -211,108 +190,108 @@ public class VkPhysicalDeviceShaderIntegerDotProductProperties extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit unsigned dot product operations using the {@code OpUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct8BitUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct8BitUnsignedAccelerated() { return nintegerDotProduct8BitUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit signed dot product operations using the {@code OpSDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct8BitSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct8BitSignedAccelerated() { return nintegerDotProduct8BitSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit mixed signedness dot product operations using the {@code OpSUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct8BitMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct8BitMixedSignednessAccelerated() { return nintegerDotProduct8BitMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit unsigned dot product operations from operands packed into 32-bit integers using the {@code OpUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct4x8BitPackedUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct4x8BitPackedUnsignedAccelerated() { return nintegerDotProduct4x8BitPackedUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit signed dot product operations from operands packed into 32-bit integers using the {@code OpSDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct4x8BitPackedSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct4x8BitPackedSignedAccelerated() { return nintegerDotProduct4x8BitPackedSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit mixed signedness dot product operations from operands packed into 32-bit integers using the {@code OpSUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct4x8BitPackedMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct4x8BitPackedMixedSignednessAccelerated() { return nintegerDotProduct4x8BitPackedMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 16-bit unsigned dot product operations using the {@code OpUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct16BitUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct16BitUnsignedAccelerated() { return nintegerDotProduct16BitUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 16-bit signed dot product operations using the {@code OpSDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct16BitSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct16BitSignedAccelerated() { return nintegerDotProduct16BitSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 16-bit mixed signedness dot product operations using the {@code OpSUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct16BitMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct16BitMixedSignednessAccelerated() { return nintegerDotProduct16BitMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 32-bit unsigned dot product operations using the {@code OpUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct32BitUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct32BitUnsignedAccelerated() { return nintegerDotProduct32BitUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 32-bit signed dot product operations using the {@code OpSDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct32BitSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct32BitSignedAccelerated() { return nintegerDotProduct32BitSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 32-bit mixed signedness dot product operations using the {@code OpSUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct32BitMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct32BitMixedSignednessAccelerated() { return nintegerDotProduct32BitMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 64-bit unsigned dot product operations using the {@code OpUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct64BitUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct64BitUnsignedAccelerated() { return nintegerDotProduct64BitUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 64-bit signed dot product operations using the {@code OpSDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct64BitSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct64BitSignedAccelerated() { return nintegerDotProduct64BitSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 64-bit mixed signedness dot product operations using the {@code OpSUDotKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProduct64BitMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProduct64BitMixedSignednessAccelerated() { return nintegerDotProduct64BitMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit unsigned accumulating saturating dot product operations using the {@code OpUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating8BitUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating8BitUnsignedAccelerated() { return nintegerDotProductAccumulatingSaturating8BitUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit signed accumulating saturating dot product operations using the {@code OpSDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating8BitSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating8BitSignedAccelerated() { return nintegerDotProductAccumulatingSaturating8BitSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit mixed signedness accumulating saturating dot product operations using the {@code OpSUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated() { return nintegerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit unsigned accumulating saturating dot product operations from operands packed into 32-bit integers using the {@code OpUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated() { return nintegerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit signed accumulating saturating dot product operations from operands packed into 32-bit integers using the {@code OpSDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated() { return nintegerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 8-bit mixed signedness accumulating saturating dot product operations from operands packed into 32-bit integers using the {@code OpSUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated() { return nintegerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 16-bit unsigned accumulating saturating dot product operations using the {@code OpUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating16BitUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating16BitUnsignedAccelerated() { return nintegerDotProductAccumulatingSaturating16BitUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 16-bit signed accumulating saturating dot product operations using the {@code OpSDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating16BitSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating16BitSignedAccelerated() { return nintegerDotProductAccumulatingSaturating16BitSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 16-bit mixed signedness accumulating saturating dot product operations using the {@code OpSUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated() { return nintegerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 32-bit unsigned accumulating saturating dot product operations using the {@code OpUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating32BitUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating32BitUnsignedAccelerated() { return nintegerDotProductAccumulatingSaturating32BitUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 32-bit signed accumulating saturating dot product operations using the {@code OpSDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating32BitSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating32BitSignedAccelerated() { return nintegerDotProductAccumulatingSaturating32BitSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 32-bit mixed signedness accumulating saturating dot product operations using the {@code OpSUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated() { return nintegerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 64-bit unsigned accumulating saturating dot product operations using the {@code OpUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating64BitUnsignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating64BitUnsignedAccelerated() { return nintegerDotProductAccumulatingSaturating64BitUnsignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 64-bit signed accumulating saturating dot product operations using the {@code OpSDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating64BitSignedAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating64BitSignedAccelerated() { return nintegerDotProductAccumulatingSaturating64BitSignedAccelerated(address()) != 0; }
-    /** a boolean that will be {@link VK10#VK_TRUE TRUE} if the support for 64-bit mixed signedness accumulating saturating dot product operations using the {@code OpSUDotAccSatKHR} SPIR-V instruction is accelerated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#devsandqueues-integer-dot-product-accelerated">as defined below</a>. */
+    /** @return the value of the {@code integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated} field. */
     @NativeType("VkBool32")
     public boolean integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated() { return nintegerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderIntegerDotProductProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderIntegerDotProductProperties sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderIntegerDotProductProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -562,108 +541,108 @@ public class VkPhysicalDeviceShaderIntegerDotProductProperties extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderIntegerDotProductProperties.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct8BitUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct8BitUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct8BitUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct8BitUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct8BitSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct8BitSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct8BitSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct8BitSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct8BitMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct8BitMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct8BitMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct8BitMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct4x8BitPackedUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct4x8BitPackedUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct4x8BitPackedUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct4x8BitPackedUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct4x8BitPackedSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct4x8BitPackedSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct4x8BitPackedSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct4x8BitPackedSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct4x8BitPackedMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct4x8BitPackedMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct4x8BitPackedMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct4x8BitPackedMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct16BitUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct16BitUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct16BitUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct16BitUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct16BitSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct16BitSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct16BitSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct16BitSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct16BitMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct16BitMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct16BitMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct16BitMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct32BitUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct32BitUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct32BitUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct32BitUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct32BitSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct32BitSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct32BitSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct32BitSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct32BitMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct32BitMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct32BitMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct32BitMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct64BitUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct64BitUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct64BitUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct64BitUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct64BitSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct64BitSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct64BitSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct64BitSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProduct64BitMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProduct64BitMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProduct64BitMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProduct64BitMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating8BitUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating8BitUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating8BitUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating8BitUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating8BitSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating8BitSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating8BitSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating8BitSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating16BitUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating16BitUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating16BitUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating16BitUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating16BitSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating16BitSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating16BitSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating16BitSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating32BitUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating32BitUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating32BitUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating32BitUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating32BitSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating32BitSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating32BitSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating32BitSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating64BitUnsignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating64BitUnsignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating64BitUnsignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating64BitUnsignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating64BitSignedAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating64BitSignedAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating64BitSignedAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating64BitSignedAccelerated(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated} field. */
+        /** @return the value of the {@code integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated} field. */
         @NativeType("VkBool32")
         public boolean integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated() { return VkPhysicalDeviceShaderIntegerDotProductProperties.nintegerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderIntegerDotProductProperties.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES} value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderIntegerDotProductProperties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderIntegerDotProductProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderIntegerDotProductProperties.npNext(address(), value); return this; }
 
     }

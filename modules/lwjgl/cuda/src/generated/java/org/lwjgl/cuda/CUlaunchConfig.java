@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUlaunchConfig {
  *     unsigned int gridDimX;
  *     unsigned int gridDimY;
@@ -30,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     CUstream hStream;
  *     {@link CUlaunchAttribute CUlaunchAttribute} * attrs;
  *     unsigned int numAttrs;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUlaunchConfig extends Struct<CUlaunchConfig> implements NativeResource {
 

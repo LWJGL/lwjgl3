@@ -14,30 +14,18 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_vertex_buffer_unified_memory.txt">NV_vertex_buffer_unified_memory</a> extension.
- * 
- * <p>This extension provides a mechanism to specify vertex attrib and element array locations using GPU addresses.</p>
- * 
- * <p>Binding vertex buffers is one of the most frequent and expensive operations in many GL applications, due to the cost of chasing pointers and binding
- * objects described in the Overview of {@link NVShaderBufferLoad NV_shader_buffer_load}. The intent of this extension is to enable a way for the application to specify
- * vertex attrib state that alleviates the overhead of object binds and driver memory management.</p>
- */
 public class NVVertexBufferUnifiedMemory {
 
     static { GL.initialize(); }
 
-    /** Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled. */
     public static final int
         GL_VERTEX_ATTRIB_ARRAY_UNIFIED_NV = 0x8F1E,
         GL_ELEMENT_ARRAY_UNIFIED_NV       = 0x8F1F;
 
-    /** Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64i_vNV. */
     public static final int
         GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV = 0x8F20,
         GL_TEXTURE_COORD_ARRAY_ADDRESS_NV = 0x8F25;
 
-    /** Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64vNV. */
     public static final int
         GL_VERTEX_ARRAY_ADDRESS_NV          = 0x8F21,
         GL_NORMAL_ARRAY_ADDRESS_NV          = 0x8F22,
@@ -48,12 +36,10 @@ public class NVVertexBufferUnifiedMemory {
         GL_FOG_COORD_ARRAY_ADDRESS_NV       = 0x8F28,
         GL_ELEMENT_ARRAY_ADDRESS_NV         = 0x8F29;
 
-    /** Accepted by the {@code target} parameter of GetIntegeri_vNV. */
     public static final int
         GL_VERTEX_ATTRIB_ARRAY_LENGTH_NV = 0x8F2A,
         GL_TEXTURE_COORD_ARRAY_LENGTH_NV = 0x8F2F;
 
-    /** Accepted by the {@code value} parameter of GetIntegerv. */
     public static final int
         GL_VERTEX_ARRAY_LENGTH_NV          = 0x8F2B,
         GL_NORMAL_ARRAY_LENGTH_NV          = 0x8F2C,
@@ -70,52 +56,65 @@ public class NVVertexBufferUnifiedMemory {
 
     // --- [ glBufferAddressRangeNV ] ---
 
+    /** {@code void glBufferAddressRangeNV(GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length)} */
     public static native void glBufferAddressRangeNV(@NativeType("GLenum") int pname, @NativeType("GLuint") int index, @NativeType("GLuint64EXT") long address, @NativeType("GLsizeiptr") long length);
 
     // --- [ glVertexFormatNV ] ---
 
+    /** {@code void glVertexFormatNV(GLint size, GLenum type, GLsizei stride)} */
     public static native void glVertexFormatNV(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride);
 
     // --- [ glNormalFormatNV ] ---
 
+    /** {@code void glNormalFormatNV(GLenum type, GLsizei stride)} */
     public static native void glNormalFormatNV(@NativeType("GLenum") int type, @NativeType("GLsizei") int stride);
 
     // --- [ glColorFormatNV ] ---
 
+    /** {@code void glColorFormatNV(GLint size, GLenum type, GLsizei stride)} */
     public static native void glColorFormatNV(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride);
 
     // --- [ glIndexFormatNV ] ---
 
+    /** {@code void glIndexFormatNV(GLenum type, GLsizei stride)} */
     public static native void glIndexFormatNV(@NativeType("GLenum") int type, @NativeType("GLsizei") int stride);
 
     // --- [ glTexCoordFormatNV ] ---
 
+    /** {@code void glTexCoordFormatNV(GLint size, GLenum type, GLsizei stride)} */
     public static native void glTexCoordFormatNV(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride);
 
     // --- [ glEdgeFlagFormatNV ] ---
 
+    /** {@code void glEdgeFlagFormatNV(GLsizei stride)} */
     public static native void glEdgeFlagFormatNV(@NativeType("GLsizei") int stride);
 
     // --- [ glSecondaryColorFormatNV ] ---
 
+    /** {@code void glSecondaryColorFormatNV(GLint size, GLenum type, GLsizei stride)} */
     public static native void glSecondaryColorFormatNV(@NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride);
 
     // --- [ glFogCoordFormatNV ] ---
 
+    /** {@code void glFogCoordFormatNV(GLenum type, GLsizei stride)} */
     public static native void glFogCoordFormatNV(@NativeType("GLenum") int type, @NativeType("GLsizei") int stride);
 
     // --- [ glVertexAttribFormatNV ] ---
 
+    /** {@code void glVertexAttribFormatNV(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride)} */
     public static native void glVertexAttribFormatNV(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLboolean") boolean normalized, @NativeType("GLsizei") int stride);
 
     // --- [ glVertexAttribIFormatNV ] ---
 
+    /** {@code void glVertexAttribIFormatNV(GLuint index, GLint size, GLenum type, GLsizei stride)} */
     public static native void glVertexAttribIFormatNV(@NativeType("GLuint") int index, @NativeType("GLint") int size, @NativeType("GLenum") int type, @NativeType("GLsizei") int stride);
 
     // --- [ glGetIntegerui64i_vNV ] ---
 
+    /** {@code void glGetIntegerui64i_vNV(GLenum value, GLuint index, GLuint64EXT * result)} */
     public static native void nglGetIntegerui64i_vNV(int value, int index, long result);
 
+    /** {@code void glGetIntegerui64i_vNV(GLenum value, GLuint index, GLuint64EXT * result)} */
     public static void glGetIntegerui64i_vNV(@NativeType("GLenum") int value, @NativeType("GLuint") int index, @NativeType("GLuint64EXT *") LongBuffer result) {
         if (CHECKS) {
             check(result, 1);
@@ -123,6 +122,7 @@ public class NVVertexBufferUnifiedMemory {
         nglGetIntegerui64i_vNV(value, index, memAddress(result));
     }
 
+    /** {@code void glGetIntegerui64i_vNV(GLenum value, GLuint index, GLuint64EXT * result)} */
     @NativeType("void")
     public static long glGetIntegerui64iNV(@NativeType("GLenum") int value, @NativeType("GLuint") int index) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -135,7 +135,7 @@ public class NVVertexBufferUnifiedMemory {
         }
     }
 
-    /** Array version of: {@link #glGetIntegerui64i_vNV GetIntegerui64i_vNV} */
+    /** {@code void glGetIntegerui64i_vNV(GLenum value, GLuint index, GLuint64EXT * result)} */
     public static void glGetIntegerui64i_vNV(@NativeType("GLenum") int value, @NativeType("GLuint") int index, @NativeType("GLuint64EXT *") long[] result) {
         long __functionAddress = GL.getICD().glGetIntegerui64i_vNV;
         if (CHECKS) {

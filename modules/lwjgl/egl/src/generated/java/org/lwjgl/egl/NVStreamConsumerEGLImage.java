@@ -17,20 +17,10 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_stream_consumer_eglimage.txt">NV_stream_consumer_eglimage</a> extension.
- * 
- * <p>An {@code EGLStream} consists of a sequence of image frames. This extension allows these frames to be acquired as {@code EGLImages}. Frames from the
- * stream would be used as the content for the EGLImage.</p>
- * 
- * <p>Requires {@link KHRStream KHR_stream} and {@link EXTSyncReuse EXT_sync_reuse}.</p>
- */
 public class NVStreamConsumerEGLImage {
 
-    /** Accepted by the {@code target} parameter of {@link EGL15#eglCreateImage CreateImage}. */
     public static final int EGL_STREAM_CONSUMER_IMAGE_NV = 0x3373;
 
-    /** Returned as an {@code event} from {@link #eglQueryStreamConsumerEventNV QueryStreamConsumerEventNV}. */
     public static final int
         EGL_STREAM_IMAGE_ADD_NV       = 0x3374,
         EGL_STREAM_IMAGE_REMOVE_NV    = 0x3375,
@@ -42,6 +32,7 @@ public class NVStreamConsumerEGLImage {
 
     // --- [ eglStreamImageConsumerConnectNV ] ---
 
+    /** {@code EGLBoolean eglStreamImageConsumerConnectNV(EGLDisplay dpy, EGLStreamKHR stream, EGLint num_modifiers, EGLuint64KHR const * modifiers, EGLAttrib const * attrib_list)} */
     public static int neglStreamImageConsumerConnectNV(long dpy, long stream, int num_modifiers, long modifiers, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglStreamImageConsumerConnectNV;
         if (CHECKS) {
@@ -52,6 +43,7 @@ public class NVStreamConsumerEGLImage {
         return callPPPPI(dpy, stream, num_modifiers, modifiers, attrib_list, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglStreamImageConsumerConnectNV(EGLDisplay dpy, EGLStreamKHR stream, EGLint num_modifiers, EGLuint64KHR const * modifiers, EGLAttrib const * attrib_list)} */
     @NativeType("EGLBoolean")
     public static boolean eglStreamImageConsumerConnectNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLuint64KHR const *") LongBuffer modifiers, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list) {
         if (CHECKS) {
@@ -62,6 +54,7 @@ public class NVStreamConsumerEGLImage {
 
     // --- [ eglQueryStreamConsumerEventNV ] ---
 
+    /** {@code EGLint eglQueryStreamConsumerEventNV(EGLDisplay dpy, EGLStreamKHR stream, EGLTime timeout, EGLenum * event, EGLAttrib * aux)} */
     public static int neglQueryStreamConsumerEventNV(long dpy, long stream, long timeout, long event, long aux) {
         long __functionAddress = EGL.getCapabilities().eglQueryStreamConsumerEventNV;
         if (CHECKS) {
@@ -72,6 +65,7 @@ public class NVStreamConsumerEGLImage {
         return callPPJPPI(dpy, stream, timeout, event, aux, __functionAddress);
     }
 
+    /** {@code EGLint eglQueryStreamConsumerEventNV(EGLDisplay dpy, EGLStreamKHR stream, EGLTime timeout, EGLenum * event, EGLAttrib * aux)} */
     @NativeType("EGLint")
     public static int eglQueryStreamConsumerEventNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLTime") long timeout, @NativeType("EGLenum *") IntBuffer event, @NativeType("EGLAttrib *") PointerBuffer aux) {
         if (CHECKS) {
@@ -83,6 +77,7 @@ public class NVStreamConsumerEGLImage {
 
     // --- [ eglStreamAcquireImageNV ] ---
 
+    /** {@code EGLBoolean eglStreamAcquireImageNV(EGLDisplay dpy, EGLStreamKHR stream, EGLImage * pImage, EGLSync sync)} */
     public static int neglStreamAcquireImageNV(long dpy, long stream, long pImage, long sync) {
         long __functionAddress = EGL.getCapabilities().eglStreamAcquireImageNV;
         if (CHECKS) {
@@ -94,6 +89,7 @@ public class NVStreamConsumerEGLImage {
         return callPPPPI(dpy, stream, pImage, sync, __functionAddress);
     }
 
+    /** {@code EGLBoolean eglStreamAcquireImageNV(EGLDisplay dpy, EGLStreamKHR stream, EGLImage * pImage, EGLSync sync)} */
     @NativeType("EGLBoolean")
     public static boolean eglStreamAcquireImageNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLImage *") PointerBuffer pImage, @NativeType("EGLSync") long sync) {
         if (CHECKS) {
@@ -104,6 +100,7 @@ public class NVStreamConsumerEGLImage {
 
     // --- [ eglStreamReleaseImageNV ] ---
 
+    /** {@code EGLBoolean eglStreamReleaseImageNV(EGLDisplay dpy, EGLStreamKHR stream, EGLImage image, EGLSync sync)} */
     @NativeType("EGLBoolean")
     public static boolean eglStreamReleaseImageNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLImage") long image, @NativeType("EGLSync") long sync) {
         long __functionAddress = EGL.getCapabilities().eglStreamReleaseImageNV;
@@ -117,7 +114,7 @@ public class NVStreamConsumerEGLImage {
         return callPPPPI(dpy, stream, image, sync, __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #eglStreamImageConsumerConnectNV StreamImageConsumerConnectNV} */
+    /** {@code EGLBoolean eglStreamImageConsumerConnectNV(EGLDisplay dpy, EGLStreamKHR stream, EGLint num_modifiers, EGLuint64KHR const * modifiers, EGLAttrib const * attrib_list)} */
     @NativeType("EGLBoolean")
     public static boolean eglStreamImageConsumerConnectNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLuint64KHR const *") long[] modifiers, @NativeType("EGLAttrib const *") @Nullable PointerBuffer attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglStreamImageConsumerConnectNV;
@@ -130,7 +127,7 @@ public class NVStreamConsumerEGLImage {
         return callPPPPI(dpy, stream, modifiers.length, modifiers, memAddressSafe(attrib_list), __functionAddress) != 0;
     }
 
-    /** Array version of: {@link #eglQueryStreamConsumerEventNV QueryStreamConsumerEventNV} */
+    /** {@code EGLint eglQueryStreamConsumerEventNV(EGLDisplay dpy, EGLStreamKHR stream, EGLTime timeout, EGLenum * event, EGLAttrib * aux)} */
     @NativeType("EGLint")
     public static int eglQueryStreamConsumerEventNV(@NativeType("EGLDisplay") long dpy, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLTime") long timeout, @NativeType("EGLenum *") int[] event, @NativeType("EGLAttrib *") PointerBuffer aux) {
         long __functionAddress = EGL.getCapabilities().eglQueryStreamConsumerEventNV;

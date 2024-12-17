@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link Spvc#spvc_context_set_error_callback context_set_error_callback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *userdata,
- *     char const *error
- * )</code></pre>
- */
+/** Callback function: {@link #invoke spvc_error_callback} */
 @FunctionalInterface
 @NativeType("spvc_error_callback")
 public interface SpvcErrorCallbackI extends CallbackI {
@@ -44,7 +34,7 @@ public interface SpvcErrorCallbackI extends CallbackI {
         );
     }
 
-    /** Get notified in a callback when an error triggers. Useful for debugging. */
+    /** {@code void (* spvc_error_callback) (void * userdata, char const * error)} */
     void invoke(@NativeType("void *") long userdata, @NativeType("char const *") long error);
 
 }

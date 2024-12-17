@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES {
  *     char const * name;
  *     FMOD_DSP * dsp;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES extends Struct<FMOD_STUDIO_PLUGIN_INSTANCE_PROPERTIES> implements NativeResource {
 

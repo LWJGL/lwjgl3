@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_TIMELINE_MARKER_PROPERTIES {
  *     char const * name;
  *     int position;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_TIMELINE_MARKER_PROPERTIES extends Struct<FMOD_STUDIO_TIMELINE_MARKER_PROPERTIES> implements NativeResource {
 

@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     FMOD_SPEAKERMODE sourceSpeakerMode,
- *     float pan,
- *     float lowFrequencyGain,
- *     float overallGain,
- *     int matrixHop,
- *     float *matrix
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC} */
 @FunctionalInterface
 @NativeType("FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC")
 public interface FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNCI extends CallbackI {
@@ -53,6 +40,7 @@ public interface FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNCI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC) (struct FMOD_DSP_STATE * dsp_state, FMOD_SPEAKERMODE sourceSpeakerMode, float pan, float lowFrequencyGain, float overallGain, int matrixHop, float * matrix)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_DSP_STATE *") long dsp_state, @NativeType("FMOD_SPEAKERMODE") int sourceSpeakerMode, float pan, float lowFrequencyGain, float overallGain, int matrixHop, @NativeType("float *") long matrix);
 
 }

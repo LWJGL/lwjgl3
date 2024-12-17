@@ -34,6 +34,7 @@ public class LLVMTargetARM {
 
     // --- [ LLVMInitializeARMTargetInfo ] ---
 
+    /** {@code void LLVMInitializeARMTargetInfo(void)} */
     public static void LLVMInitializeARMTargetInfo() {
         long __functionAddress = Functions.InitializeARMTargetInfo;
         invokeV(__functionAddress);
@@ -41,6 +42,7 @@ public class LLVMTargetARM {
 
     // --- [ LLVMInitializeARMTarget ] ---
 
+    /** {@code void LLVMInitializeARMTarget(void)} */
     public static void LLVMInitializeARMTarget() {
         long __functionAddress = Functions.InitializeARMTarget;
         invokeV(__functionAddress);
@@ -48,6 +50,7 @@ public class LLVMTargetARM {
 
     // --- [ LLVMInitializeARMTargetMC ] ---
 
+    /** {@code void LLVMInitializeARMTargetMC(void)} */
     public static void LLVMInitializeARMTargetMC() {
         long __functionAddress = Functions.InitializeARMTargetMC;
         invokeV(__functionAddress);
@@ -55,6 +58,7 @@ public class LLVMTargetARM {
 
     // --- [ LLVMInitializeARMAsmPrinter ] ---
 
+    /** {@code void LLVMInitializeARMAsmPrinter(void)} */
     public static void LLVMInitializeARMAsmPrinter() {
         long __functionAddress = Functions.InitializeARMAsmPrinter;
         invokeV(__functionAddress);
@@ -62,6 +66,7 @@ public class LLVMTargetARM {
 
     // --- [ LLVMInitializeARMAsmParser ] ---
 
+    /** {@code void LLVMInitializeARMAsmParser(void)} */
     public static void LLVMInitializeARMAsmParser() {
         long __functionAddress = Functions.InitializeARMAsmParser;
         invokeV(__functionAddress);
@@ -69,6 +74,7 @@ public class LLVMTargetARM {
 
     // --- [ LLVMInitializeARMDisassembler ] ---
 
+    /** {@code void LLVMInitializeARMDisassembler(void)} */
     public static void LLVMInitializeARMDisassembler() {
         long __functionAddress = Functions.InitializeARMDisassembler;
         invokeV(__functionAddress);

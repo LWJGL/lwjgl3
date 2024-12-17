@@ -17,31 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a spatial anchor.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSpatialAnchor XR_MSFT_spatial_anchor} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorCreateInfoMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSpatialAnchor#XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link MSFTSpatialAnchor#xrCreateSpatialAnchorMSFT CreateSpatialAnchorMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorCreateInfoMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #space};
- *     {@link XrPosef XrPosef} {@link #pose};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace space;
+ *     {@link XrPosef XrPosef} pose;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrSpatialAnchorCreateInfoMSFT extends Struct<XrSpatialAnchorCreateInfoMSFT> implements NativeResource {
 
@@ -100,34 +83,34 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct<XrSpatialAnchorCreateI
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a handle to the {@code XrSpace} in which {@code pose} is specified. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the {@link XrPosef} within {@code space} at {@code time} that specifies the point in the real world used to initialize the new anchor. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
-    /** the {@code XrTime} at which {@code pose} will be evaluated within {@code space}. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorCreateInfoMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSpatialAnchor#XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSpatialAnchor#XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT} value to the {@code type} field. */
     public XrSpatialAnchorCreateInfoMSFT type$Default() { return type(MSFTSpatialAnchor.XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorCreateInfoMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrSpatialAnchorCreateInfoMSFT space(XrSpace value) { nspace(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #pose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code pose} field. */
     public XrSpatialAnchorCreateInfoMSFT pose(XrPosef value) { npose(address(), value); return this; }
-    /** Passes the {@link #pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpatialAnchorCreateInfoMSFT pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrSpatialAnchorCreateInfoMSFT time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -344,34 +327,34 @@ public class XrSpatialAnchorCreateInfoMSFT extends Struct<XrSpatialAnchorCreateI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorCreateInfoMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorCreateInfoMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorCreateInfoMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorCreateInfoMSFT.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorCreateInfoMSFT#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrSpatialAnchorCreateInfoMSFT.nspace(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrSpatialAnchorCreateInfoMSFT#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrSpatialAnchorCreateInfoMSFT.npose(address()); }
-        /** @return the value of the {@link XrSpatialAnchorCreateInfoMSFT#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrSpatialAnchorCreateInfoMSFT.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorCreateInfoMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorCreateInfoMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorCreateInfoMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSpatialAnchor#XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT} value to the {@link XrSpatialAnchorCreateInfoMSFT#type} field. */
+        /** Sets the {@link MSFTSpatialAnchor#XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT} value to the {@code type} field. */
         public XrSpatialAnchorCreateInfoMSFT.Buffer type$Default() { return type(MSFTSpatialAnchor.XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT); }
-        /** Sets the specified value to the {@link XrSpatialAnchorCreateInfoMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorCreateInfoMSFT.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorCreateInfoMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorCreateInfoMSFT#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrSpatialAnchorCreateInfoMSFT.Buffer space(XrSpace value) { XrSpatialAnchorCreateInfoMSFT.nspace(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrSpatialAnchorCreateInfoMSFT#pose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code pose} field. */
         public XrSpatialAnchorCreateInfoMSFT.Buffer pose(XrPosef value) { XrSpatialAnchorCreateInfoMSFT.npose(address(), value); return this; }
-        /** Passes the {@link XrSpatialAnchorCreateInfoMSFT#pose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code pose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpatialAnchorCreateInfoMSFT.Buffer pose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(pose()); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorCreateInfoMSFT#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrSpatialAnchorCreateInfoMSFT.Buffer time(@NativeType("XrTime") long value) { XrSpatialAnchorCreateInfoMSFT.ntime(address(), value); return this; }
 
     }

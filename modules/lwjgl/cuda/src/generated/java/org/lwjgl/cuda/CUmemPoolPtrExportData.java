@@ -17,12 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUmemPoolPtrExportData {
  *     unsigned char reserved[64];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUmemPoolPtrExportData extends Struct<CUmemPoolPtrExportData> implements NativeResource {
 

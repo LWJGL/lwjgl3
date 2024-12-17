@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the ray tracing maintenance features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRRayTracingMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #rayTracingMaintenance1};
- *     VkBool32 {@link #rayTracingPipelineTraceRaysIndirect2};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 rayTracingMaintenance1;
+ *     VkBool32 rayTracingPipelineTraceRaysIndirect2;
+ * }}</pre>
  */
 public class VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR extends Struct<VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR> implements NativeResource {
 
@@ -92,37 +78,28 @@ public class VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /**
-     * indicates that the implementation supports the following:
-     * 
-     * <ul>
-     * <li>The {@code CullMaskKHR} SPIR-V builtin using the {@code SPV_KHR_ray_cull_mask} SPIR-V extension.</li>
-     * <li>Additional acceleration structure property queries: {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR} and {@link KHRRayTracingMaintenance1#VK_QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR QUERY_TYPE_ACCELERATION_STRUCTURE_SIZE_KHR}.</li>
-     * <li>A new access flag {@link KHRRayTracingMaintenance1#VK_ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR ACCESS_2_SHADER_BINDING_TABLE_READ_BIT_KHR}.</li>
-     * <li>A new pipeline stage flag bit {@link KHRRayTracingMaintenance1#VK_PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR PIPELINE_STAGE_2_ACCELERATION_STRUCTURE_COPY_BIT_KHR}</li>
-     * </ul>
-     */
+    /** @return the value of the {@code rayTracingMaintenance1} field. */
     @NativeType("VkBool32")
     public boolean rayTracingMaintenance1() { return nrayTracingMaintenance1(address()) != 0; }
-    /** indicates whether the implementation supports the extended indirect ray tracing command {@link KHRRayTracingMaintenance1#vkCmdTraceRaysIndirect2KHR CmdTraceRaysIndirect2KHR}. */
+    /** @return the value of the {@code rayTracingPipelineTraceRaysIndirect2} field. */
     @NativeType("VkBool32")
     public boolean rayTracingPipelineTraceRaysIndirect2() { return nrayTracingPipelineTraceRaysIndirect2(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRRayTracingMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRRayTracingMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR sType$Default() { return sType(KHRRayTracingMaintenance1.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #rayTracingMaintenance1} field. */
+    /** Sets the specified value to the {@code rayTracingMaintenance1} field. */
     public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR rayTracingMaintenance1(@NativeType("VkBool32") boolean value) { nrayTracingMaintenance1(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #rayTracingPipelineTraceRaysIndirect2} field. */
+    /** Sets the specified value to the {@code rayTracingPipelineTraceRaysIndirect2} field. */
     public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR rayTracingPipelineTraceRaysIndirect2(@NativeType("VkBool32") boolean value) { nrayTracingPipelineTraceRaysIndirect2(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,28 +301,28 @@ public class VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#rayTracingMaintenance1} field. */
+        /** @return the value of the {@code rayTracingMaintenance1} field. */
         @NativeType("VkBool32")
         public boolean rayTracingMaintenance1() { return VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.nrayTracingMaintenance1(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#rayTracingPipelineTraceRaysIndirect2} field. */
+        /** @return the value of the {@code rayTracingPipelineTraceRaysIndirect2} field. */
         @NativeType("VkBool32")
         public boolean rayTracingPipelineTraceRaysIndirect2() { return VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.nrayTracingPipelineTraceRaysIndirect2(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRRayTracingMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR} value to the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#sType} field. */
+        /** Sets the {@link KHRRayTracingMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.Buffer sType$Default() { return sType(KHRRayTracingMaintenance1.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#rayTracingMaintenance1} field. */
+        /** Sets the specified value to the {@code rayTracingMaintenance1} field. */
         public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.Buffer rayTracingMaintenance1(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.nrayTracingMaintenance1(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR#rayTracingPipelineTraceRaysIndirect2} field. */
+        /** Sets the specified value to the {@code rayTracingPipelineTraceRaysIndirect2} field. */
         public VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.Buffer rayTracingPipelineTraceRaysIndirect2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR.nrayTracingPipelineTraceRaysIndirect2(address(), value ? 1 : 0); return this; }
 
     }

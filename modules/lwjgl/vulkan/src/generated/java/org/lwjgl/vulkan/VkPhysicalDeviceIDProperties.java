@@ -19,67 +19,16 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure specifying IDs related to the physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceIDProperties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <p>{@code deviceUUID} <b>must</b> be immutable for a given device across instances, processes, driver APIs, driver versions, and system reboots.</p>
- * 
- * <p>Applications <b>can</b> compare the {@code driverUUID} value across instance and process boundaries, and <b>can</b> make similar queries in external APIs to determine whether they are capable of sharing memory objects and resources using them with the device.</p>
- * 
- * <p>{@code deviceUUID} and/or {@code driverUUID} <b>must</b> be used to determine whether a particular external object can be shared between driver components, where such a restriction exists as defined in the compatibility table for the particular object type:</p>
- * 
- * <ul>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#external-memory-handle-types-compatibility">External memory handle types compatibility</a></li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#external-semaphore-handle-types-compatibility">External semaphore handle types compatibility</a></li>
- * <li><a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#external-fence-handle-types-compatibility">External fence handle types compatibility</a></li>
- * </ul>
- * 
- * <p>If {@code deviceLUIDValid} is {@link VK10#VK_FALSE FALSE}, the values of {@code deviceLUID} and {@code deviceNodeMask} are undefined. If {@code deviceLUIDValid} is {@link VK10#VK_TRUE TRUE} and Vulkan is running on the Windows operating system, the contents of {@code deviceLUID} <b>can</b> be cast to an {@code LUID} object and <b>must</b> be equal to the locally unique identifier of a {@code IDXGIAdapter1} object that corresponds to {@code physicalDevice}. If {@code deviceLUIDValid} is {@link VK10#VK_TRUE TRUE}, {@code deviceNodeMask} <b>must</b> contain exactly one bit. If Vulkan is running on an operating system that supports the Direct3D 12 API and {@code physicalDevice} corresponds to an individual device in a linked device adapter, {@code deviceNodeMask} identifies the Direct3D 12 node corresponding to {@code physicalDevice}. Otherwise, {@code deviceNodeMask} <b>must</b> be 1.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Although they have identical descriptions, {@link VkPhysicalDeviceIDProperties}{@code ::deviceUUID} may differ from {@link VkPhysicalDeviceProperties2}{@code ::pipelineCacheUUID}. The former is intended to identify and correlate devices across API and driver boundaries, while the latter is used to identify a compatible device and driver combination to use when serializing and de-serializing pipeline state.</p>
- * 
- * <p>Implementations <b>should</b> return {@code deviceUUID} values which are likely to be unique even in the presence of multiple Vulkan implementations (such as a GPU driver and a software renderer; two drivers for different GPUs; or the same Vulkan driver running on two logically different devices).</p>
- * 
- * <p>Khronos' conformance testing is unable to guarantee that {@code deviceUUID} values are actually unique, so implementors <b>should</b> make their own best efforts to ensure this. In particular, hard-coded {@code deviceUUID} values, especially all-0 bits, <b>should</b> never be used.</p>
- * 
- * <p>A combination of values unique to the vendor, the driver, and the hardware environment can be used to provide a {@code deviceUUID} which is unique to a high degree of certainty. Some possible inputs to such a computation are:</p>
- * 
- * <ul>
- * <li>Information reported by {@link VK10#vkGetPhysicalDeviceProperties GetPhysicalDeviceProperties}</li>
- * <li>PCI device ID (if defined)</li>
- * <li>PCI bus ID, or similar system configuration information.</li>
- * <li>Driver binary checksums.</li>
- * </ul>
- * </div>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>While {@link VkPhysicalDeviceIDProperties}{@code ::deviceUUID} is specified to remain consistent across driver versions and system reboots, it is not intended to be usable as a serializable persistent identifier for a device. It may change when a device is physically added to, removed from, or moved to a different connector in a system while that system is powered down. Further, there is no reasonable way to verify with conformance testing that a given device retains the same UUID in a given system across all driver versions supported in that system. While implementations should make every effort to report consistent device UUIDs across driver versions, applications should avoid relying on the persistence of this value for uses other than identifying compatible devices for external object sharing purposes.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceIDProperties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint8_t {@link #deviceUUID}[VK_UUID_SIZE];
- *     uint8_t {@link #driverUUID}[VK_UUID_SIZE];
- *     uint8_t {@link #deviceLUID}[VK_LUID_SIZE];
- *     uint32_t {@link #deviceNodeMask};
- *     VkBool32 {@link #deviceLUIDValid};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint8_t deviceUUID[VK_UUID_SIZE];
+ *     uint8_t driverUUID[VK_UUID_SIZE];
+ *     uint8_t deviceLUID[VK_LUID_SIZE];
+ *     uint32_t deviceNodeMask;
+ *     VkBool32 deviceLUIDValid;
+ * }}</pre>
  */
 public class VkPhysicalDeviceIDProperties extends Struct<VkPhysicalDeviceIDProperties> implements NativeResource {
 
@@ -144,42 +93,42 @@ public class VkPhysicalDeviceIDProperties extends Struct<VkPhysicalDeviceIDPrope
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the device. */
+    /** @return a {@link ByteBuffer} view of the {@code deviceUUID} field. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer deviceUUID() { return ndeviceUUID(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the device. */
+    /** @return the value at the specified index of the {@code deviceUUID} field. */
     @NativeType("uint8_t")
     public byte deviceUUID(int index) { return ndeviceUUID(address(), index); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the driver build in use by the device. */
+    /** @return a {@link ByteBuffer} view of the {@code driverUUID} field. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer driverUUID() { return ndriverUUID(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the driver build in use by the device. */
+    /** @return the value at the specified index of the {@code driverUUID} field. */
     @NativeType("uint8_t")
     public byte driverUUID(int index) { return ndriverUUID(address(), index); }
-    /** an array of {@link VK10#VK_LUID_SIZE LUID_SIZE} {@code uint8_t} values representing a locally unique identifier for the device. */
+    /** @return a {@link ByteBuffer} view of the {@code deviceLUID} field. */
     @NativeType("uint8_t[VK_LUID_SIZE]")
     public ByteBuffer deviceLUID() { return ndeviceLUID(address()); }
-    /** an array of {@link VK10#VK_LUID_SIZE LUID_SIZE} {@code uint8_t} values representing a locally unique identifier for the device. */
+    /** @return the value at the specified index of the {@code deviceLUID} field. */
     @NativeType("uint8_t")
     public byte deviceLUID(int index) { return ndeviceLUID(address(), index); }
-    /** a {@code uint32_t} bitfield identifying the node within a linked device adapter corresponding to the device. */
+    /** @return the value of the {@code deviceNodeMask} field. */
     @NativeType("uint32_t")
     public int deviceNodeMask() { return ndeviceNodeMask(address()); }
-    /** a boolean value that will be {@link VK10#VK_TRUE TRUE} if {@code deviceLUID} contains a valid LUID and {@code deviceNodeMask} contains a valid node mask, and {@link VK10#VK_FALSE FALSE} if they do not. */
+    /** @return the value of the {@code deviceLUIDValid} field. */
     @NativeType("VkBool32")
     public boolean deviceLUIDValid() { return ndeviceLUIDValid(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceIDProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceIDProperties sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceIDProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -410,42 +359,42 @@ public class VkPhysicalDeviceIDProperties extends Struct<VkPhysicalDeviceIDPrope
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceIDProperties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceIDProperties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceIDProperties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceIDProperties.npNext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceIDProperties#deviceUUID} field. */
+        /** @return a {@link ByteBuffer} view of the {@code deviceUUID} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer deviceUUID() { return VkPhysicalDeviceIDProperties.ndeviceUUID(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceIDProperties#deviceUUID} field. */
+        /** @return the value at the specified index of the {@code deviceUUID} field. */
         @NativeType("uint8_t")
         public byte deviceUUID(int index) { return VkPhysicalDeviceIDProperties.ndeviceUUID(address(), index); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceIDProperties#driverUUID} field. */
+        /** @return a {@link ByteBuffer} view of the {@code driverUUID} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer driverUUID() { return VkPhysicalDeviceIDProperties.ndriverUUID(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceIDProperties#driverUUID} field. */
+        /** @return the value at the specified index of the {@code driverUUID} field. */
         @NativeType("uint8_t")
         public byte driverUUID(int index) { return VkPhysicalDeviceIDProperties.ndriverUUID(address(), index); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceIDProperties#deviceLUID} field. */
+        /** @return a {@link ByteBuffer} view of the {@code deviceLUID} field. */
         @NativeType("uint8_t[VK_LUID_SIZE]")
         public ByteBuffer deviceLUID() { return VkPhysicalDeviceIDProperties.ndeviceLUID(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceIDProperties#deviceLUID} field. */
+        /** @return the value at the specified index of the {@code deviceLUID} field. */
         @NativeType("uint8_t")
         public byte deviceLUID(int index) { return VkPhysicalDeviceIDProperties.ndeviceLUID(address(), index); }
-        /** @return the value of the {@link VkPhysicalDeviceIDProperties#deviceNodeMask} field. */
+        /** @return the value of the {@code deviceNodeMask} field. */
         @NativeType("uint32_t")
         public int deviceNodeMask() { return VkPhysicalDeviceIDProperties.ndeviceNodeMask(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceIDProperties#deviceLUIDValid} field. */
+        /** @return the value of the {@code deviceLUIDValid} field. */
         @NativeType("VkBool32")
         public boolean deviceLUIDValid() { return VkPhysicalDeviceIDProperties.ndeviceLUIDValid(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceIDProperties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceIDProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceIDProperties.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES} value to the {@link VkPhysicalDeviceIDProperties#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceIDProperties.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceIDProperties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceIDProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceIDProperties.npNext(address(), value); return this; }
 
     }

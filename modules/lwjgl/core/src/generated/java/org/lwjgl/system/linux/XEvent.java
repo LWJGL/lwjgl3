@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * This union is defined so Xlib can always use the same sized event structure internally, to avoid memory fragmentation.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union XEvent {
  *     int type;
  *     {@link XAnyEvent XAnyEvent} xany;
@@ -57,7 +53,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link XGenericEvent XGenericEvent} xgeneric;
  *     {@link XGenericEventCookie XGenericEventCookie} xcookie;
  *     long[24];
- * }</code></pre>
+ * }}</pre>
  */
 public class XEvent extends Struct<XEvent> implements NativeResource {
 

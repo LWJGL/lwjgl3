@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1FilmGrain {
  *     {@link StdVideoAV1FilmGrainFlags StdVideoAV1FilmGrainFlags} flags;
  *     uint8_t grain_scaling_minus_8;
@@ -48,7 +46,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
  *     uint8_t cr_mult;
  *     uint8_t cr_luma_mult;
  *     uint16_t cr_offset;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1FilmGrain extends Struct<StdVideoAV1FilmGrain> implements NativeResource {
 

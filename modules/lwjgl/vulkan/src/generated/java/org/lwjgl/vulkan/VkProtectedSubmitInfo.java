@@ -16,22 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure indicating whether the submission is protected.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkProtectedSubmitInfo {
  *     VkStructureType sType;
  *     void const * pNext;
- *     VkBool32 {@link #protectedSubmit};
- * }</code></pre>
+ *     VkBool32 protectedSubmit;
+ * }}</pre>
  */
 public class VkProtectedSubmitInfo extends Struct<VkProtectedSubmitInfo> implements NativeResource {
 
@@ -90,7 +80,7 @@ public class VkProtectedSubmitInfo extends Struct<VkProtectedSubmitInfo> impleme
     /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether the batch is protected. If {@code protectedSubmit} is {@link VK10#VK_TRUE TRUE}, the batch is protected. If {@code protectedSubmit} is {@link VK10#VK_FALSE FALSE}, the batch is unprotected. If the {@link VkSubmitInfo}{@code ::pNext} chain does not include this structure, the batch is unprotected. */
+    /** @return the value of the {@code protectedSubmit} field. */
     @NativeType("VkBool32")
     public boolean protectedSubmit() { return nprotectedSubmit(address()) != 0; }
 
@@ -100,7 +90,7 @@ public class VkProtectedSubmitInfo extends Struct<VkProtectedSubmitInfo> impleme
     public VkProtectedSubmitInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkProtectedSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #protectedSubmit} field. */
+    /** Sets the specified value to the {@code protectedSubmit} field. */
     public VkProtectedSubmitInfo protectedSubmit(@NativeType("VkBool32") boolean value) { nprotectedSubmit(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,7 +311,7 @@ public class VkProtectedSubmitInfo extends Struct<VkProtectedSubmitInfo> impleme
         /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkProtectedSubmitInfo.npNext(address()); }
-        /** @return the value of the {@link VkProtectedSubmitInfo#protectedSubmit} field. */
+        /** @return the value of the {@code protectedSubmit} field. */
         @NativeType("VkBool32")
         public boolean protectedSubmit() { return VkProtectedSubmitInfo.nprotectedSubmit(address()) != 0; }
 
@@ -331,7 +321,7 @@ public class VkProtectedSubmitInfo extends Struct<VkProtectedSubmitInfo> impleme
         public VkProtectedSubmitInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkProtectedSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkProtectedSubmitInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkProtectedSubmitInfo#protectedSubmit} field. */
+        /** Sets the specified value to the {@code protectedSubmit} field. */
         public VkProtectedSubmitInfo.Buffer protectedSubmit(@NativeType("VkBool32") boolean value) { VkProtectedSubmitInfo.nprotectedSubmit(address(), value ? 1 : 0); return this; }
 
     }

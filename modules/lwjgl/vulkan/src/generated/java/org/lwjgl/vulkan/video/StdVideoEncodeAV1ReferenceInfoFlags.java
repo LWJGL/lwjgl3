@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeAV1ReferenceInfoFlags {
  *     uint32_t disable_frame_end_update_cdf : 1;
  *     uint32_t segmentation_enabled : 1;
  *     uint32_t reserved : 30;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeAV1ReferenceInfoFlags extends Struct<StdVideoEncodeAV1ReferenceInfoFlags> implements NativeResource {
 

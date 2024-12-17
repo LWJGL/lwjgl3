@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing an Android hardware buffer external format.
- * 
- * <h5>Description</h5>
- * 
- * <p>When included in the {@code pNext} chain of another structure, it indicates <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-external-android-hardware-buffer-external-formats">additional format information</a> beyond what is provided by {@code VkFormat} values for an Android hardware buffer. If {@code externalFormat} is zero, it indicates that no external format is used, and implementations should rely only on other format information. If this structure is not present, it is equivalent to setting {@code externalFormat} to zero.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code externalFormat} <b>must</b> be 0 or a value returned in the {@code externalFormat} member of {@link VkAndroidHardwareBufferFormatPropertiesANDROID} by an earlier call to {@link ANDROIDExternalMemoryAndroidHardwareBuffer#vkGetAndroidHardwareBufferPropertiesANDROID GetAndroidHardwareBufferPropertiesANDROID}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExternalFormatANDROID {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint64_t {@link #externalFormat};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint64_t externalFormat;
+ * }}</pre>
  */
 public class VkExternalFormatANDROID extends Struct<VkExternalFormatANDROID> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class VkExternalFormatANDROID extends Struct<VkExternalFormatANDROID> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an implementation-defined identifier for the external format */
+    /** @return the value of the {@code externalFormat} field. */
     @NativeType("uint64_t")
     public long externalFormat() { return nexternalFormat(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkExternalFormatANDROID sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID} value to the {@link #sType} field. */
+    /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID} value to the {@code sType} field. */
     public VkExternalFormatANDROID sType$Default() { return sType(ANDROIDExternalMemoryAndroidHardwareBuffer.VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkExternalFormatANDROID pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #externalFormat} field. */
+    /** Sets the specified value to the {@code externalFormat} field. */
     public VkExternalFormatANDROID externalFormat(@NativeType("uint64_t") long value) { nexternalFormat(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class VkExternalFormatANDROID extends Struct<VkExternalFormatANDROID> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkExternalFormatANDROID#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExternalFormatANDROID.nsType(address()); }
-        /** @return the value of the {@link VkExternalFormatANDROID#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkExternalFormatANDROID.npNext(address()); }
-        /** @return the value of the {@link VkExternalFormatANDROID#externalFormat} field. */
+        /** @return the value of the {@code externalFormat} field. */
         @NativeType("uint64_t")
         public long externalFormat() { return VkExternalFormatANDROID.nexternalFormat(address()); }
 
-        /** Sets the specified value to the {@link VkExternalFormatANDROID#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkExternalFormatANDROID.Buffer sType(@NativeType("VkStructureType") int value) { VkExternalFormatANDROID.nsType(address(), value); return this; }
-        /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID} value to the {@link VkExternalFormatANDROID#sType} field. */
+        /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID} value to the {@code sType} field. */
         public VkExternalFormatANDROID.Buffer sType$Default() { return sType(ANDROIDExternalMemoryAndroidHardwareBuffer.VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID); }
-        /** Sets the specified value to the {@link VkExternalFormatANDROID#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkExternalFormatANDROID.Buffer pNext(@NativeType("void *") long value) { VkExternalFormatANDROID.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExternalFormatANDROID#externalFormat} field. */
+        /** Sets the specified value to the {@code externalFormat} field. */
         public VkExternalFormatANDROID.Buffer externalFormat(@NativeType("uint64_t") long value) { VkExternalFormatANDROID.nexternalFormat(address(), value); return this; }
 
     }

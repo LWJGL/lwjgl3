@@ -11,20 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link HWLoc#hwloc_topology_set_userdata_import_callback topology_set_userdata_import_callback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hwloc_topology_t topology,
- *     hwloc_obj_t obj,
- *     char const *name,
- *     void const *buffer,
- *     size_t length
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class topology_set_userdata_import_callback extends Callback implements topology_set_userdata_import_callbackI {
 
     /**

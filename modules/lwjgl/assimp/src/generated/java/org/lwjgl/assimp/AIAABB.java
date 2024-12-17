@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiAABB {
  *     {@link AIVector3D struct aiVector3D} mMin;
  *     {@link AIVector3D struct aiVector3D} mMax;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct aiAABB")
 public class AIAABB extends Struct<AIAABB> implements NativeResource {

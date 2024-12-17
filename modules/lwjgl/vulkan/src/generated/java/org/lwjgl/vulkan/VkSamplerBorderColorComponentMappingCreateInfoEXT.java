@@ -16,38 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the component mapping of the border color.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link VkComponentMapping} {@code components} member describes a remapping from components of the border color to components of the vector returned by shader image instructions when the border color is used.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-borderColorSwizzle">{@code borderColorSwizzle}</a> feature <b>must</b> be enabled</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTBorderColorSwizzle#VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT}</li>
- * <li>{@code components} <b>must</b> be a valid {@link VkComponentMapping} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkComponentMapping}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerBorderColorComponentMappingCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkComponentMapping VkComponentMapping} {@link #components};
- *     VkBool32 {@link #srgb};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkComponentMapping VkComponentMapping} components;
+ *     VkBool32 srgb;
+ * }}</pre>
  */
 public class VkSamplerBorderColorComponentMappingCreateInfoEXT extends Struct<VkSamplerBorderColorComponentMappingCreateInfoEXT> implements NativeResource {
 
@@ -103,29 +78,29 @@ public class VkSamplerBorderColorComponentMappingCreateInfoEXT extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkComponentMapping} structure specifying a remapping of the border color components. */
+    /** @return a {@link VkComponentMapping} view of the {@code components} field. */
     public VkComponentMapping components() { return ncomponents(address()); }
-    /** indicates that the sampler will be combined with an image view that has an image format which is sRGB encoded. */
+    /** @return the value of the {@code srgb} field. */
     @NativeType("VkBool32")
     public boolean srgb() { return nsrgb(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSamplerBorderColorComponentMappingCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTBorderColorSwizzle#VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTBorderColorSwizzle#VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkSamplerBorderColorComponentMappingCreateInfoEXT sType$Default() { return sType(EXTBorderColorSwizzle.VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerBorderColorComponentMappingCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkComponentMapping} to the {@link #components} field. */
+    /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
     public VkSamplerBorderColorComponentMappingCreateInfoEXT components(VkComponentMapping value) { ncomponents(address(), value); return this; }
-    /** Passes the {@link #components} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkSamplerBorderColorComponentMappingCreateInfoEXT components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
-    /** Sets the specified value to the {@link #srgb} field. */
+    /** Sets the specified value to the {@code srgb} field. */
     public VkSamplerBorderColorComponentMappingCreateInfoEXT srgb(@NativeType("VkBool32") boolean value) { nsrgb(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -327,29 +302,29 @@ public class VkSamplerBorderColorComponentMappingCreateInfoEXT extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerBorderColorComponentMappingCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerBorderColorComponentMappingCreateInfoEXT.npNext(address()); }
-        /** @return a {@link VkComponentMapping} view of the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#components} field. */
+        /** @return a {@link VkComponentMapping} view of the {@code components} field. */
         public VkComponentMapping components() { return VkSamplerBorderColorComponentMappingCreateInfoEXT.ncomponents(address()); }
-        /** @return the value of the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#srgb} field. */
+        /** @return the value of the {@code srgb} field. */
         @NativeType("VkBool32")
         public boolean srgb() { return VkSamplerBorderColorComponentMappingCreateInfoEXT.nsrgb(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSamplerBorderColorComponentMappingCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerBorderColorComponentMappingCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTBorderColorSwizzle#VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT} value to the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTBorderColorSwizzle#VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkSamplerBorderColorComponentMappingCreateInfoEXT.Buffer sType$Default() { return sType(EXTBorderColorSwizzle.VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerBorderColorComponentMappingCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSamplerBorderColorComponentMappingCreateInfoEXT.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkComponentMapping} to the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#components} field. */
+        /** Copies the specified {@link VkComponentMapping} to the {@code components} field. */
         public VkSamplerBorderColorComponentMappingCreateInfoEXT.Buffer components(VkComponentMapping value) { VkSamplerBorderColorComponentMappingCreateInfoEXT.ncomponents(address(), value); return this; }
-        /** Passes the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#components} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code components} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkSamplerBorderColorComponentMappingCreateInfoEXT.Buffer components(java.util.function.Consumer<VkComponentMapping> consumer) { consumer.accept(components()); return this; }
-        /** Sets the specified value to the {@link VkSamplerBorderColorComponentMappingCreateInfoEXT#srgb} field. */
+        /** Sets the specified value to the {@code srgb} field. */
         public VkSamplerBorderColorComponentMappingCreateInfoEXT.Buffer srgb(@NativeType("VkBool32") boolean value) { VkSamplerBorderColorComponentMappingCreateInfoEXT.nsrgb(address(), value ? 1 : 0); return this; }
 
     }

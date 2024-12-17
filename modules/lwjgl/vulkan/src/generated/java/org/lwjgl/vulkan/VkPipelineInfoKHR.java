@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing a pipeline.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR STRUCTURE_TYPE_PIPELINE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRPipelineExecutableProperties#vkGetPipelineExecutablePropertiesKHR GetPipelineExecutablePropertiesKHR}, {@link EXTPipelineProperties#vkGetPipelinePropertiesEXT GetPipelinePropertiesEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipeline {@link #pipeline};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipeline pipeline;
+ * }}</pre>
  */
 public class VkPipelineInfoKHR extends Struct<VkPipelineInfoKHR> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class VkPipelineInfoKHR extends Struct<VkPipelineInfoKHR> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkPipeline} handle. */
+    /** @return the value of the {@code pipeline} field. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR STRUCTURE_TYPE_PIPELINE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR STRUCTURE_TYPE_PIPELINE_INFO_KHR} value to the {@code sType} field. */
     public VkPipelineInfoKHR sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipeline} field. */
+    /** Sets the specified value to the {@code pipeline} field. */
     public VkPipelineInfoKHR pipeline(@NativeType("VkPipeline") long value) { npipeline(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,23 +305,23 @@ public class VkPipelineInfoKHR extends Struct<VkPipelineInfoKHR> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkPipelineInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkPipelineInfoKHR#pipeline} field. */
+        /** @return the value of the {@code pipeline} field. */
         @NativeType("VkPipeline")
         public long pipeline() { return VkPipelineInfoKHR.npipeline(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR STRUCTURE_TYPE_PIPELINE_INFO_KHR} value to the {@link VkPipelineInfoKHR#sType} field. */
+        /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR STRUCTURE_TYPE_PIPELINE_INFO_KHR} value to the {@code sType} field. */
         public VkPipelineInfoKHR.Buffer sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkPipelineInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPipelineInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineInfoKHR#pipeline} field. */
+        /** Sets the specified value to the {@code pipeline} field. */
         public VkPipelineInfoKHR.Buffer pipeline(@NativeType("VkPipeline") long value) { VkPipelineInfoKHR.npipeline(address(), value); return this; }
 
     }

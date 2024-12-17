@@ -16,49 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying fragment shading rate attachment information.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure can be included in the {@code pNext} chain of {@link VkRenderingInfo} to define a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-attachment">fragment shading rate attachment</a>. If {@code imageView} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, or if this structure is not specified, the implementation behaves as if a valid shading rate attachment was specified with all texels specifying a single pixel per fragment.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code layout} <b>must</b> be {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} or {@link KHRFragmentShadingRate#VK_IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR IMAGE_LAYOUT_FRAGMENT_SHADING_RATE_ATTACHMENT_OPTIMAL_KHR}</li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> have been created with {@link KHRFragmentShadingRate#VK_IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR}</li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code shadingRateAttachmentTexelSize.width} <b>must</b> be a power of two value</li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code shadingRateAttachmentTexelSize.width} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFragmentShadingRateAttachmentTexelSize">{@code maxFragmentShadingRateAttachmentTexelSize.width}</a></li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code shadingRateAttachmentTexelSize.width} <b>must</b> be greater than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-minFragmentShadingRateAttachmentTexelSize">{@code minFragmentShadingRateAttachmentTexelSize.width}</a></li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code shadingRateAttachmentTexelSize.height} <b>must</b> be a power of two value</li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code shadingRateAttachmentTexelSize.height} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFragmentShadingRateAttachmentTexelSize">{@code maxFragmentShadingRateAttachmentTexelSize.height}</a></li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code shadingRateAttachmentTexelSize.height} <b>must</b> be greater than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-minFragmentShadingRateAttachmentTexelSize">{@code minFragmentShadingRateAttachmentTexelSize.height}</a></li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the quotient of {@code shadingRateAttachmentTexelSize.width} and {@code shadingRateAttachmentTexelSize.height} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFragmentShadingRateAttachmentTexelSizeAspectRatio">{@code maxFragmentShadingRateAttachmentTexelSizeAspectRatio}</a></li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the quotient of {@code shadingRateAttachmentTexelSize.height} and {@code shadingRateAttachmentTexelSize.width} <b>must</b> be less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-maxFragmentShadingRateAttachmentTexelSizeAspectRatio">{@code maxFragmentShadingRateAttachmentTexelSizeAspectRatio}</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR}</li>
- * <li>If {@code imageView} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code imageView} <b>must</b> be a valid {@code VkImageView} handle</li>
- * <li>{@code imageLayout} <b>must</b> be a valid {@code VkImageLayout} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderingFragmentShadingRateAttachmentInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImageView {@link #imageView};
- *     VkImageLayout {@link #imageLayout};
- *     {@link VkExtent2D VkExtent2D} {@link #shadingRateAttachmentTexelSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImageView imageView;
+ *     VkImageLayout imageLayout;
+ *     {@link VkExtent2D VkExtent2D} shadingRateAttachmentTexelSize;
+ * }}</pre>
  */
 public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRenderingFragmentShadingRateAttachmentInfoKHR> implements NativeResource {
 
@@ -117,34 +82,34 @@ public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the image view that will be used as a fragment shading rate attachment. */
+    /** @return the value of the {@code imageView} field. */
     @NativeType("VkImageView")
     public long imageView() { return nimageView(address()); }
-    /** the layout that {@code imageView} will be in during rendering. */
+    /** @return the value of the {@code imageLayout} field. */
     @NativeType("VkImageLayout")
     public int imageLayout() { return nimageLayout(address()); }
-    /** specifies the number of pixels corresponding to each texel in {@code imageView}. */
+    /** @return a {@link VkExtent2D} view of the {@code shadingRateAttachmentTexelSize} field. */
     public VkExtent2D shadingRateAttachmentTexelSize() { return nshadingRateAttachmentTexelSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@code sType} field. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageView} field. */
+    /** Sets the specified value to the {@code imageView} field. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR imageView(@NativeType("VkImageView") long value) { nimageView(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageLayout} field. */
+    /** Sets the specified value to the {@code imageLayout} field. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR imageLayout(@NativeType("VkImageLayout") int value) { nimageLayout(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #shadingRateAttachmentTexelSize} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@code shadingRateAttachmentTexelSize} field. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR shadingRateAttachmentTexelSize(VkExtent2D value) { nshadingRateAttachmentTexelSize(address(), value); return this; }
-    /** Passes the {@link #shadingRateAttachmentTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code shadingRateAttachmentTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkRenderingFragmentShadingRateAttachmentInfoKHR shadingRateAttachmentTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(shadingRateAttachmentTexelSize()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -352,34 +317,34 @@ public class VkRenderingFragmentShadingRateAttachmentInfoKHR extends Struct<VkRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRenderingFragmentShadingRateAttachmentInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRenderingFragmentShadingRateAttachmentInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#imageView} field. */
+        /** @return the value of the {@code imageView} field. */
         @NativeType("VkImageView")
         public long imageView() { return VkRenderingFragmentShadingRateAttachmentInfoKHR.nimageView(address()); }
-        /** @return the value of the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#imageLayout} field. */
+        /** @return the value of the {@code imageLayout} field. */
         @NativeType("VkImageLayout")
         public int imageLayout() { return VkRenderingFragmentShadingRateAttachmentInfoKHR.nimageLayout(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#shadingRateAttachmentTexelSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@code shadingRateAttachmentTexelSize} field. */
         public VkExtent2D shadingRateAttachmentTexelSize() { return VkRenderingFragmentShadingRateAttachmentInfoKHR.nshadingRateAttachmentTexelSize(address()); }
 
-        /** Sets the specified value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRenderingFragmentShadingRateAttachmentInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#sType} field. */
+        /** Sets the {@link KHRFragmentShadingRate#VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR} value to the {@code sType} field. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer sType$Default() { return sType(KHRFragmentShadingRate.VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR); }
-        /** Sets the specified value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRenderingFragmentShadingRateAttachmentInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#imageView} field. */
+        /** Sets the specified value to the {@code imageView} field. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer imageView(@NativeType("VkImageView") long value) { VkRenderingFragmentShadingRateAttachmentInfoKHR.nimageView(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#imageLayout} field. */
+        /** Sets the specified value to the {@code imageLayout} field. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer imageLayout(@NativeType("VkImageLayout") int value) { VkRenderingFragmentShadingRateAttachmentInfoKHR.nimageLayout(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#shadingRateAttachmentTexelSize} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@code shadingRateAttachmentTexelSize} field. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer shadingRateAttachmentTexelSize(VkExtent2D value) { VkRenderingFragmentShadingRateAttachmentInfoKHR.nshadingRateAttachmentTexelSize(address(), value); return this; }
-        /** Passes the {@link VkRenderingFragmentShadingRateAttachmentInfoKHR#shadingRateAttachmentTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code shadingRateAttachmentTexelSize} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkRenderingFragmentShadingRateAttachmentInfoKHR.Buffer shadingRateAttachmentTexelSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(shadingRateAttachmentTexelSize()); return this; }
 
     }

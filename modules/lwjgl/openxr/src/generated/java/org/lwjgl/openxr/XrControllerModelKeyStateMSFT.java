@@ -16,36 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The model key state for a controller.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code modelKey} value for the session represents a unique controller model that can be retrieved from {@link MSFTControllerModel#xrLoadControllerModelMSFT LoadControllerModelMSFT} function. Therefore, the application <b>can</b> use {@code modelKey} to cache the returned data from {@link MSFTControllerModel#xrLoadControllerModelMSFT LoadControllerModelMSFT} for the session.</p>
- * 
- * <p>A {@code modelKey} value of {@link MSFTControllerModel#XR_NULL_CONTROLLER_MODEL_KEY_MSFT NULL_CONTROLLER_MODEL_KEY_MSFT}, represents an invalid model key and indicates there is no controller model yet available. The application <b>should</b> keep calling {@link MSFTControllerModel#xrGetControllerModelKeyMSFT GetControllerModelKeyMSFT} because the model <b>may</b> become available at a later point.</p>
- * 
- * <p>The returned {@code modelKey} value depends on an active action binding to the corresponding subpathname:/grip/pose of the controller. Therefore, the application <b>must</b> have provided a valid action set containing an action for subpathname:/grip/pose, and have successfully completed an {@link XR10#xrSyncActions SyncActions} call, in order to obtain a valid {@code modelKey}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using {@link XrControllerModelKeyStateMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MSFTControllerModel#xrGetControllerModelKeyMSFT GetControllerModelKeyMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrControllerModelKeyStateMSFT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrControllerModelKeyMSFT {@link #modelKey};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrControllerModelKeyMSFT modelKey;
+ * }}</pre>
  */
 public class XrControllerModelKeyStateMSFT extends Struct<XrControllerModelKeyStateMSFT> implements NativeResource {
 
@@ -98,23 +74,23 @@ public class XrControllerModelKeyStateMSFT extends Struct<XrControllerModelKeySt
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the model key corresponding to the controller render model being queried. */
+    /** @return the value of the {@code modelKey} field. */
     @NativeType("XrControllerModelKeyMSFT")
     public long modelKey() { return nmodelKey(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrControllerModelKeyStateMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT} value to the {@code type} field. */
     public XrControllerModelKeyStateMSFT type$Default() { return type(MSFTControllerModel.XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrControllerModelKeyStateMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #modelKey} field. */
+    /** Sets the specified value to the {@code modelKey} field. */
     public XrControllerModelKeyStateMSFT modelKey(@NativeType("XrControllerModelKeyMSFT") long value) { nmodelKey(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -310,23 +286,23 @@ public class XrControllerModelKeyStateMSFT extends Struct<XrControllerModelKeySt
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrControllerModelKeyStateMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrControllerModelKeyStateMSFT.ntype(address()); }
-        /** @return the value of the {@link XrControllerModelKeyStateMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrControllerModelKeyStateMSFT.nnext(address()); }
-        /** @return the value of the {@link XrControllerModelKeyStateMSFT#modelKey} field. */
+        /** @return the value of the {@code modelKey} field. */
         @NativeType("XrControllerModelKeyMSFT")
         public long modelKey() { return XrControllerModelKeyStateMSFT.nmodelKey(address()); }
 
-        /** Sets the specified value to the {@link XrControllerModelKeyStateMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrControllerModelKeyStateMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrControllerModelKeyStateMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT} value to the {@link XrControllerModelKeyStateMSFT#type} field. */
+        /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT} value to the {@code type} field. */
         public XrControllerModelKeyStateMSFT.Buffer type$Default() { return type(MSFTControllerModel.XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT); }
-        /** Sets the specified value to the {@link XrControllerModelKeyStateMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrControllerModelKeyStateMSFT.Buffer next(@NativeType("void *") long value) { XrControllerModelKeyStateMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrControllerModelKeyStateMSFT#modelKey} field. */
+        /** Sets the specified value to the {@code modelKey} field. */
         public XrControllerModelKeyStateMSFT.Buffer modelKey(@NativeType("XrControllerModelKeyMSFT") long value) { XrControllerModelKeyStateMSFT.nmodelKey(address(), value); return this; }
 
     }

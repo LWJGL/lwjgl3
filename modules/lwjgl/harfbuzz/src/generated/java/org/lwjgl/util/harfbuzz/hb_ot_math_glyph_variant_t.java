@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Data type to hold math-variant information for a glyph.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_ot_math_glyph_variant_t {
- *     hb_codepoint_t {@link #glyph};
- *     hb_position_t {@link #advance};
- * }</code></pre>
+ *     hb_codepoint_t glyph;
+ *     hb_position_t advance;
+ * }}</pre>
  */
 public class hb_ot_math_glyph_variant_t extends Struct<hb_ot_math_glyph_variant_t> implements NativeResource {
 
@@ -74,16 +70,16 @@ public class hb_ot_math_glyph_variant_t extends Struct<hb_ot_math_glyph_variant_
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the glyph index of the variant */
+    /** @return the value of the {@code glyph} field. */
     @NativeType("hb_codepoint_t")
     public int glyph() { return nglyph(address()); }
-    /** the advance width of the variant */
+    /** @return the value of the {@code advance} field. */
     @NativeType("hb_position_t")
     public int advance() { return nadvance(address()); }
 
-    /** Sets the specified value to the {@link #glyph} field. */
+    /** Sets the specified value to the {@code glyph} field. */
     public hb_ot_math_glyph_variant_t glyph(@NativeType("hb_codepoint_t") int value) { nglyph(address(), value); return this; }
-    /** Sets the specified value to the {@link #advance} field. */
+    /** Sets the specified value to the {@code advance} field. */
     public hb_ot_math_glyph_variant_t advance(@NativeType("hb_position_t") int value) { nadvance(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -273,16 +269,16 @@ public class hb_ot_math_glyph_variant_t extends Struct<hb_ot_math_glyph_variant_
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_ot_math_glyph_variant_t#glyph} field. */
+        /** @return the value of the {@code glyph} field. */
         @NativeType("hb_codepoint_t")
         public int glyph() { return hb_ot_math_glyph_variant_t.nglyph(address()); }
-        /** @return the value of the {@link hb_ot_math_glyph_variant_t#advance} field. */
+        /** @return the value of the {@code advance} field. */
         @NativeType("hb_position_t")
         public int advance() { return hb_ot_math_glyph_variant_t.nadvance(address()); }
 
-        /** Sets the specified value to the {@link hb_ot_math_glyph_variant_t#glyph} field. */
+        /** Sets the specified value to the {@code glyph} field. */
         public hb_ot_math_glyph_variant_t.Buffer glyph(@NativeType("hb_codepoint_t") int value) { hb_ot_math_glyph_variant_t.nglyph(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_ot_math_glyph_variant_t#advance} field. */
+        /** Sets the specified value to the {@code advance} field. */
         public hb_ot_math_glyph_variant_t.Buffer advance(@NativeType("hb_position_t") int value) { hb_ot_math_glyph_variant_t.nadvance(address(), value); return this; }
 
     }

@@ -16,40 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A custom marker tracking profile.
- * 
- * <h5>Description</h5>
- * 
- * <p>All marker detectors share some underlying hardware and resources, and thus not all combinations of profiles between multiple detectors are possible. If a profile (preset or custom) specified during marker detector creation is different from those used by existing marker detectors the runtime will attempt to honor the highest frame rate and fps requested.</p>
- * 
- * <p>CPU load due to marker tracking is a function of the chosen {@code XrMarkerTypeML}, {@code XrMarkerDetectorFpsML}, and {@code XrMarkerDetectorResolutionML}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using {@link XrMarkerDetectorCustomProfileInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code fpsHint} <b>must</b> be a valid {@code XrMarkerDetectorFpsML} value</li>
- * <li>{@code resolutionHint} <b>must</b> be a valid {@code XrMarkerDetectorResolutionML} value</li>
- * <li>{@code cameraHint} <b>must</b> be a valid {@code XrMarkerDetectorCameraML} value</li>
- * <li>{@code cornerRefineMethod} <b>must</b> be a valid {@code XrMarkerDetectorCornerRefineMethodML} value</li>
- * <li>{@code fullAnalysisIntervalHint} <b>must</b> be a valid {@code XrMarkerDetectorFullAnalysisIntervalML} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMarkerDetectorCustomProfileInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrMarkerDetectorFpsML {@link #fpsHint};
- *     XrMarkerDetectorResolutionML {@link #resolutionHint};
- *     XrMarkerDetectorCameraML {@link #cameraHint};
- *     XrMarkerDetectorCornerRefineMethodML {@link #cornerRefineMethod};
- *     XrBool32 {@link #useEdgeRefinement};
- *     XrMarkerDetectorFullAnalysisIntervalML {@link #fullAnalysisIntervalHint};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrMarkerDetectorFpsML fpsHint;
+ *     XrMarkerDetectorResolutionML resolutionHint;
+ *     XrMarkerDetectorCameraML cameraHint;
+ *     XrMarkerDetectorCornerRefineMethodML cornerRefineMethod;
+ *     XrBool32 useEdgeRefinement;
+ *     XrMarkerDetectorFullAnalysisIntervalML fullAnalysisIntervalHint;
+ * }}</pre>
  */
 public class XrMarkerDetectorCustomProfileInfoML extends Struct<XrMarkerDetectorCustomProfileInfoML> implements NativeResource {
 
@@ -117,48 +94,48 @@ public class XrMarkerDetectorCustomProfileInfoML extends Struct<XrMarkerDetector
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a suggestion of the category of frame rate for the detector to use. */
+    /** @return the value of the {@code fpsHint} field. */
     @NativeType("XrMarkerDetectorFpsML")
     public int fpsHint() { return nfpsHint(address()); }
-    /** a suggestion of the category of camera resolution for the detector to use. */
+    /** @return the value of the {@code resolutionHint} field. */
     @NativeType("XrMarkerDetectorResolutionML")
     public int resolutionHint() { return nresolutionHint(address()); }
-    /** a suggestion of the camera set for the detector to use */
+    /** @return the value of the {@code cameraHint} field. */
     @NativeType("XrMarkerDetectorCameraML")
     public int cameraHint() { return ncameraHint(address()); }
-    /** selects a method for corner refinement for ArUco/AprilTag detectors. This member is ignored for detectors of other marker types. */
+    /** @return the value of the {@code cornerRefineMethod} field. */
     @NativeType("XrMarkerDetectorCornerRefineMethodML")
     public int cornerRefineMethod() { return ncornerRefineMethod(address()); }
-    /** specifies whether to run a refinement step that uses marker edges to generate even more accurate corners, but slow down tracking rate overall by consuming more compute. It affects ArUco/AprilTag markers only: this member is ignored for detectors of other marker types. */
+    /** @return the value of the {@code useEdgeRefinement} field. */
     @NativeType("XrBool32")
     public boolean useEdgeRefinement() { return nuseEdgeRefinement(address()) != 0; }
-    /** the suggested interval between fully analyzed frames that introduce new detected markers, in addition to updating the state of already detected markers. */
+    /** @return the value of the {@code fullAnalysisIntervalHint} field. */
     @NativeType("XrMarkerDetectorFullAnalysisIntervalML")
     public int fullAnalysisIntervalHint() { return nfullAnalysisIntervalHint(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMarkerDetectorCustomProfileInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML} value to the {@code type} field. */
     public XrMarkerDetectorCustomProfileInfoML type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMarkerDetectorCustomProfileInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #fpsHint} field. */
+    /** Sets the specified value to the {@code fpsHint} field. */
     public XrMarkerDetectorCustomProfileInfoML fpsHint(@NativeType("XrMarkerDetectorFpsML") int value) { nfpsHint(address(), value); return this; }
-    /** Sets the specified value to the {@link #resolutionHint} field. */
+    /** Sets the specified value to the {@code resolutionHint} field. */
     public XrMarkerDetectorCustomProfileInfoML resolutionHint(@NativeType("XrMarkerDetectorResolutionML") int value) { nresolutionHint(address(), value); return this; }
-    /** Sets the specified value to the {@link #cameraHint} field. */
+    /** Sets the specified value to the {@code cameraHint} field. */
     public XrMarkerDetectorCustomProfileInfoML cameraHint(@NativeType("XrMarkerDetectorCameraML") int value) { ncameraHint(address(), value); return this; }
-    /** Sets the specified value to the {@link #cornerRefineMethod} field. */
+    /** Sets the specified value to the {@code cornerRefineMethod} field. */
     public XrMarkerDetectorCustomProfileInfoML cornerRefineMethod(@NativeType("XrMarkerDetectorCornerRefineMethodML") int value) { ncornerRefineMethod(address(), value); return this; }
-    /** Sets the specified value to the {@link #useEdgeRefinement} field. */
+    /** Sets the specified value to the {@code useEdgeRefinement} field. */
     public XrMarkerDetectorCustomProfileInfoML useEdgeRefinement(@NativeType("XrBool32") boolean value) { nuseEdgeRefinement(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #fullAnalysisIntervalHint} field. */
+    /** Sets the specified value to the {@code fullAnalysisIntervalHint} field. */
     public XrMarkerDetectorCustomProfileInfoML fullAnalysisIntervalHint(@NativeType("XrMarkerDetectorFullAnalysisIntervalML") int value) { nfullAnalysisIntervalHint(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -384,48 +361,48 @@ public class XrMarkerDetectorCustomProfileInfoML extends Struct<XrMarkerDetector
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMarkerDetectorCustomProfileInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMarkerDetectorCustomProfileInfoML.ntype(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCustomProfileInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrMarkerDetectorCustomProfileInfoML.nnext(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCustomProfileInfoML#fpsHint} field. */
+        /** @return the value of the {@code fpsHint} field. */
         @NativeType("XrMarkerDetectorFpsML")
         public int fpsHint() { return XrMarkerDetectorCustomProfileInfoML.nfpsHint(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCustomProfileInfoML#resolutionHint} field. */
+        /** @return the value of the {@code resolutionHint} field. */
         @NativeType("XrMarkerDetectorResolutionML")
         public int resolutionHint() { return XrMarkerDetectorCustomProfileInfoML.nresolutionHint(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCustomProfileInfoML#cameraHint} field. */
+        /** @return the value of the {@code cameraHint} field. */
         @NativeType("XrMarkerDetectorCameraML")
         public int cameraHint() { return XrMarkerDetectorCustomProfileInfoML.ncameraHint(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCustomProfileInfoML#cornerRefineMethod} field. */
+        /** @return the value of the {@code cornerRefineMethod} field. */
         @NativeType("XrMarkerDetectorCornerRefineMethodML")
         public int cornerRefineMethod() { return XrMarkerDetectorCustomProfileInfoML.ncornerRefineMethod(address()); }
-        /** @return the value of the {@link XrMarkerDetectorCustomProfileInfoML#useEdgeRefinement} field. */
+        /** @return the value of the {@code useEdgeRefinement} field. */
         @NativeType("XrBool32")
         public boolean useEdgeRefinement() { return XrMarkerDetectorCustomProfileInfoML.nuseEdgeRefinement(address()) != 0; }
-        /** @return the value of the {@link XrMarkerDetectorCustomProfileInfoML#fullAnalysisIntervalHint} field. */
+        /** @return the value of the {@code fullAnalysisIntervalHint} field. */
         @NativeType("XrMarkerDetectorFullAnalysisIntervalML")
         public int fullAnalysisIntervalHint() { return XrMarkerDetectorCustomProfileInfoML.nfullAnalysisIntervalHint(address()); }
 
-        /** Sets the specified value to the {@link XrMarkerDetectorCustomProfileInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrMarkerDetectorCustomProfileInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML} value to the {@link XrMarkerDetectorCustomProfileInfoML#type} field. */
+        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML} value to the {@code type} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML); }
-        /** Sets the specified value to the {@link XrMarkerDetectorCustomProfileInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer next(@NativeType("void const *") long value) { XrMarkerDetectorCustomProfileInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorCustomProfileInfoML#fpsHint} field. */
+        /** Sets the specified value to the {@code fpsHint} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer fpsHint(@NativeType("XrMarkerDetectorFpsML") int value) { XrMarkerDetectorCustomProfileInfoML.nfpsHint(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorCustomProfileInfoML#resolutionHint} field. */
+        /** Sets the specified value to the {@code resolutionHint} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer resolutionHint(@NativeType("XrMarkerDetectorResolutionML") int value) { XrMarkerDetectorCustomProfileInfoML.nresolutionHint(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorCustomProfileInfoML#cameraHint} field. */
+        /** Sets the specified value to the {@code cameraHint} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer cameraHint(@NativeType("XrMarkerDetectorCameraML") int value) { XrMarkerDetectorCustomProfileInfoML.ncameraHint(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorCustomProfileInfoML#cornerRefineMethod} field. */
+        /** Sets the specified value to the {@code cornerRefineMethod} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer cornerRefineMethod(@NativeType("XrMarkerDetectorCornerRefineMethodML") int value) { XrMarkerDetectorCustomProfileInfoML.ncornerRefineMethod(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorCustomProfileInfoML#useEdgeRefinement} field. */
+        /** Sets the specified value to the {@code useEdgeRefinement} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer useEdgeRefinement(@NativeType("XrBool32") boolean value) { XrMarkerDetectorCustomProfileInfoML.nuseEdgeRefinement(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorCustomProfileInfoML#fullAnalysisIntervalHint} field. */
+        /** Sets the specified value to the {@code fullAnalysisIntervalHint} field. */
         public XrMarkerDetectorCustomProfileInfoML.Buffer fullAnalysisIntervalHint(@NativeType("XrMarkerDetectorFullAnalysisIntervalML") int value) { XrMarkerDetectorCustomProfileInfoML.nfullAnalysisIntervalHint(address(), value); return this; }
 
     }

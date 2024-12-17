@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying physical device memory properties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPhysicalDeviceMemoryProperties}, {@link VK11#vkGetPhysicalDeviceMemoryProperties2 GetPhysicalDeviceMemoryProperties2}, {@link KHRGetPhysicalDeviceProperties2#vkGetPhysicalDeviceMemoryProperties2KHR GetPhysicalDeviceMemoryProperties2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMemoryProperties2 {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkPhysicalDeviceMemoryProperties VkPhysicalDeviceMemoryProperties} {@link #memoryProperties};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkPhysicalDeviceMemoryProperties VkPhysicalDeviceMemoryProperties} memoryProperties;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMemoryProperties2 extends Struct<VkPhysicalDeviceMemoryProperties2> implements NativeResource {
 
@@ -90,20 +74,20 @@ public class VkPhysicalDeviceMemoryProperties2 extends Struct<VkPhysicalDeviceMe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkPhysicalDeviceMemoryProperties} structure which is populated with the same values as in {@link VK10#vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties}. */
+    /** @return a {@link VkPhysicalDeviceMemoryProperties} view of the {@code memoryProperties} field. */
     public VkPhysicalDeviceMemoryProperties memoryProperties() { return nmemoryProperties(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMemoryProperties2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2} value to the {@code sType} field. */
     public VkPhysicalDeviceMemoryProperties2 sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMemoryProperties2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT} value to the {@code pNext} chain. */
     public VkPhysicalDeviceMemoryProperties2 pNext(VkPhysicalDeviceMemoryBudgetPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -316,20 +300,20 @@ public class VkPhysicalDeviceMemoryProperties2 extends Struct<VkPhysicalDeviceMe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMemoryProperties2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMemoryProperties2.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMemoryProperties2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMemoryProperties2.npNext(address()); }
-        /** @return a {@link VkPhysicalDeviceMemoryProperties} view of the {@link VkPhysicalDeviceMemoryProperties2#memoryProperties} field. */
+        /** @return a {@link VkPhysicalDeviceMemoryProperties} view of the {@code memoryProperties} field. */
         public VkPhysicalDeviceMemoryProperties memoryProperties() { return VkPhysicalDeviceMemoryProperties2.nmemoryProperties(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMemoryProperties2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMemoryProperties2.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMemoryProperties2.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2} value to the {@link VkPhysicalDeviceMemoryProperties2#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2 STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2} value to the {@code sType} field. */
         public VkPhysicalDeviceMemoryProperties2.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMemoryProperties2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMemoryProperties2.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMemoryProperties2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPhysicalDeviceMemoryBudgetPropertiesEXT} value to the {@code pNext} chain. */
         public VkPhysicalDeviceMemoryProperties2.Buffer pNext(VkPhysicalDeviceMemoryBudgetPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }

@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_color_line_t {
  *     void * data;
  *     {@link hb_color_line_get_color_stops_func_tI hb_color_line_get_color_stops_func_t} get_color_stops;
@@ -35,7 +33,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * reserved6;
  *     void * reserved7;
  *     void * reserved8;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_color_line_t extends Struct<hb_color_line_t> implements NativeResource {
 

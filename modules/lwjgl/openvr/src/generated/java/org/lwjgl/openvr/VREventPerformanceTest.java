@@ -14,12 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_PerformanceTest_t {
  *     uint32_t m_nFidelityLevel;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VREvent_PerformanceTest_t")
 public class VREventPerformanceTest extends Struct<VREventPerformanceTest> {

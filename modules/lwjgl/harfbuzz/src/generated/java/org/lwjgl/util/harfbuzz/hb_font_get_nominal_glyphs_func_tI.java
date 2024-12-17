@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * unsigned int (*{@link #invoke}) (
- *     hb_font_t *font,
- *     void *font_data,
- *     unsigned int count,
- *     hb_codepoint_t const *first_unicode,
- *     unsigned int unicode_stride,
- *     hb_codepoint_t *first_glyph,
- *     unsigned int glyph_stride,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_font_get_nominal_glyphs_func_t} */
 @FunctionalInterface
 @NativeType("hb_font_get_nominal_glyphs_func_t")
 public interface hb_font_get_nominal_glyphs_func_tI extends CallbackI {
@@ -55,23 +41,7 @@ public interface hb_font_get_nominal_glyphs_func_tI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.
-     * 
-     * <p>This method should retrieve the nominal glyph IDs for a sequence of Unicode code points. Glyph IDs must be returned in a {@code hb_codepoint_t} output
-     * parameter.</p>
-     * 
-     * <p>Return value: the number of code points processed.</p>
-     *
-     * @param font           {@code hb_font_t} to work upon
-     * @param font_data      {@code font} user data pointer
-     * @param count          number of code points to query
-     * @param first_unicode  the first Unicode code point to query
-     * @param unicode_stride the stride between successive code points
-     * @param first_glyph    the first glyph ID retrieved
-     * @param glyph_stride   the stride between successive glyph IDs
-     * @param user_data      user data pointer passed by the caller
-     */
+    /** {@code unsigned int (* hb_font_get_nominal_glyphs_func_t) (hb_font_t * font, void * font_data, unsigned int count, hb_codepoint_t const * first_unicode, unsigned int unicode_stride, hb_codepoint_t * first_glyph, unsigned int glyph_stride, void * user_data)} */
     @NativeType("unsigned int") int invoke(@NativeType("hb_font_t *") long font, @NativeType("void *") long font_data, @NativeType("unsigned int") int count, @NativeType("hb_codepoint_t const *") long first_unicode, @NativeType("unsigned int") int unicode_stride, @NativeType("hb_codepoint_t *") long first_glyph, @NativeType("unsigned int") int glyph_stride, @NativeType("void *") long user_data);
 
 }

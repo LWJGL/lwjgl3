@@ -16,31 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters to acquire the profiling lock.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * </ul>
- * 
- * <p>If {@code timeout} is 0, {@code vkAcquireProfilingLockKHR} will not block while attempting to acquire the profiling lock. If {@code timeout} is {@code UINT64_MAX}, the function will not return until the profiling lock was acquired.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRPerformanceQuery#vkAcquireProfilingLockKHR AcquireProfilingLockKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAcquireProfilingLockInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkAcquireProfilingLockFlagsKHR {@link #flags};
- *     uint64_t {@link #timeout};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkAcquireProfilingLockFlagsKHR flags;
+ *     uint64_t timeout;
+ * }}</pre>
  */
 public class VkAcquireProfilingLockInfoKHR extends Struct<VkAcquireProfilingLockInfoKHR> implements NativeResource {
 
@@ -96,28 +78,28 @@ public class VkAcquireProfilingLockInfoKHR extends Struct<VkAcquireProfilingLock
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkAcquireProfilingLockFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** indicates how long the function waits, in nanoseconds, if the profiling lock is not available. */
+    /** @return the value of the {@code timeout} field. */
     @NativeType("uint64_t")
     public long timeout() { return ntimeout(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAcquireProfilingLockInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR} value to the {@code sType} field. */
     public VkAcquireProfilingLockInfoKHR sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAcquireProfilingLockInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkAcquireProfilingLockInfoKHR flags(@NativeType("VkAcquireProfilingLockFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #timeout} field. */
+    /** Sets the specified value to the {@code timeout} field. */
     public VkAcquireProfilingLockInfoKHR timeout(@NativeType("uint64_t") long value) { ntimeout(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,28 +301,28 @@ public class VkAcquireProfilingLockInfoKHR extends Struct<VkAcquireProfilingLock
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAcquireProfilingLockInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAcquireProfilingLockInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkAcquireProfilingLockInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAcquireProfilingLockInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkAcquireProfilingLockInfoKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkAcquireProfilingLockFlagsKHR")
         public int flags() { return VkAcquireProfilingLockInfoKHR.nflags(address()); }
-        /** @return the value of the {@link VkAcquireProfilingLockInfoKHR#timeout} field. */
+        /** @return the value of the {@code timeout} field. */
         @NativeType("uint64_t")
         public long timeout() { return VkAcquireProfilingLockInfoKHR.ntimeout(address()); }
 
-        /** Sets the specified value to the {@link VkAcquireProfilingLockInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAcquireProfilingLockInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAcquireProfilingLockInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR} value to the {@link VkAcquireProfilingLockInfoKHR#sType} field. */
+        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR} value to the {@code sType} field. */
         public VkAcquireProfilingLockInfoKHR.Buffer sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR); }
-        /** Sets the specified value to the {@link VkAcquireProfilingLockInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAcquireProfilingLockInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAcquireProfilingLockInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAcquireProfilingLockInfoKHR#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkAcquireProfilingLockInfoKHR.Buffer flags(@NativeType("VkAcquireProfilingLockFlagsKHR") int value) { VkAcquireProfilingLockInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAcquireProfilingLockInfoKHR#timeout} field. */
+        /** Sets the specified value to the {@code timeout} field. */
         public VkAcquireProfilingLockInfoKHR.Buffer timeout(@NativeType("uint64_t") long value) { VkAcquireProfilingLockInfoKHR.ntimeout(address(), value); return this; }
 
     }

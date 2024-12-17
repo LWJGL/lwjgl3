@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_COMPLEX {
  *     float real;
  *     float imag;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FMOD_COMPLEX")
 public class FMOD_COMPLEX extends Struct<FMOD_COMPLEX> implements NativeResource {

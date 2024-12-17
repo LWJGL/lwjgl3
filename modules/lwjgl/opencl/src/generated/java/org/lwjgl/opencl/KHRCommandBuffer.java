@@ -18,57 +18,33 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.Pointer.*;
 
-/**
- * Native bindings to the <strong>khr_command_buffer</strong> extension.
- * 
- * <p>Command-buffers enable a reduction in overhead when enqueuing the same workload multiple times. By separating the command-queue setup from dispatch,
- * the ability to replay a set of previously created commands is introduced.</p>
- * 
- * <p>Device-side {@code cl_sync_point_khr} synchronization-points can be used within command-buffers to define command dependencies. This allows the
- * commands of a command-buffer to execute out-of-order on a single compatible command-queue. The command-buffer itself has no inherent
- * in-order/out-of-order property, this ordering is inferred from the command-queue used on command recording. Out-of-order enqueues without event
- * dependencies of both regular commands, such as {@link CL12#clEnqueueFillBuffer EnqueueFillBuffer}, and command-buffers are allowed to execute concurrently, and it is up to the user
- * to express any dependencies using events.</p>
- * 
- * <p>The command-queues a command-buffer will be executed on can be set on replay via parameters to {@link #clEnqueueCommandBufferKHR EnqueueCommandBufferKHR}, provided they are compatible
- * with the command-queues used on command-buffer recording.</p>
- * 
- * <p>Requires {@link CL12 CL12}.</p>
- */
 public class KHRCommandBuffer {
 
-    /** Accepted values for the {@code param_name} parameter to {@link CL10#clGetDeviceInfo GetDeviceInfo}. */
     public static final int
         CL_DEVICE_COMMAND_BUFFER_CAPABILITIES_KHR              = 0x12A9,
         CL_DEVICE_COMMAND_BUFFER_REQUIRED_QUEUE_PROPERTIES_KHR = 0x12AA;
 
-    /** Bits for {@code cl_device_command_buffer_capabilities_khr} bitfield. */
     public static final int
         CL_COMMAND_BUFFER_CAPABILITY_KERNEL_PRINTF_KHR       = 0x1 << 0,
         CL_COMMAND_BUFFER_CAPABILITY_DEVICE_SIDE_ENQUEUE_KHR = 0x1 << 1,
         CL_COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR    = 0x1 << 2,
         CL_COMMAND_BUFFER_CAPABILITY_OUT_OF_ORDER_KHR        = 0x1 << 3;
 
-    /** Values for {@code cl_command_buffer_state_khr}. */
     public static final int
         CL_COMMAND_BUFFER_STATE_RECORDING_KHR  = 0x0,
         CL_COMMAND_BUFFER_STATE_EXECUTABLE_KHR = 0x1,
         CL_COMMAND_BUFFER_STATE_PENDING_KHR    = 0x2,
         CL_COMMAND_BUFFER_STATE_INVALID_KHR    = 0x3;
 
-    /** Error codes. */
     public static final int
         CL_INVALID_COMMAND_BUFFER_KHR       = -1138,
         CL_INVALID_SYNC_POINT_WAIT_LIST_KHR = -1139,
         CL_INCOMPATIBLE_COMMAND_QUEUE_KHR   = -1140;
 
-    /** Bitfield to {@link #clCreateCommandBufferKHR CreateCommandBufferKHR}. */
     public static final int CL_COMMAND_BUFFER_FLAGS_KHR = 0x1293;
 
-    /** Bits for {@code cl_command_buffer_flags_khr} bitfield. */
     public static final int CL_COMMAND_BUFFER_SIMULTANEOUS_USE_KHR = 0x1 << 0;
 
-    /** {@code cl_command_buffer_info_khr} queries to {@link #clGetCommandBufferInfoKHR GetCommandBufferInfoKHR}. */
     public static final int
         CL_COMMAND_BUFFER_QUEUES_KHR           = 0x1294,
         CL_COMMAND_BUFFER_NUM_QUEUES_KHR       = 0x1295,
@@ -76,7 +52,6 @@ public class KHRCommandBuffer {
         CL_COMMAND_BUFFER_STATE_KHR            = 0x1297,
         CL_COMMAND_BUFFER_PROPERTIES_ARRAY_KHR = 0x1298;
 
-    /** {@code cl_event} command-buffer enqueue command type. */
     public static final int CL_COMMAND_COMMAND_BUFFER_KHR = 0x12A8;
 
     protected KHRCommandBuffer() {
@@ -85,11 +60,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCreateCommandBufferKHR ] ---
 
-    /**
-     * Unsafe version of: {@link #clCreateCommandBufferKHR CreateCommandBufferKHR}
-     *
-     * @param num_queues the number of command-queues listed in {@code queues}. This extension only supports a single command-queue, so this <b>must</b> be one.
-     */
+    /** {@code cl_command_buffer_khr clCreateCommandBufferKHR(cl_uint num_queues, cl_command_queue const * queues, cl_command_buffer_properties_khr const * properties, cl_int * errcode_ret)} */
     public static long nclCreateCommandBufferKHR(int num_queues, long queues, long properties, long errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandBufferKHR;
         if (CHECKS) {
@@ -98,17 +69,7 @@ public class KHRCommandBuffer {
         return callPPPP(num_queues, queues, properties, errcode_ret, __functionAddress);
     }
 
-    /**
-     * Creates a command-buffer that can record commands to the specified queues.
-     *
-     * @param queues      a pointer to a command-queue that the command-buffer commands will be recorded to. {@code queues must} be a non-{@code NULL} value.
-     * @param properties  a list of properties for the command-buffer and their corresponding values.
-     *                    
-     *                    <p>Each property name is immediately followed by the corresponding desired value. The list is terminated with 0. If a supported property and its value
-     *                    is not specified in properties, its default value will be used. {@code properties} can be {@code NULL} in which case the default values for supported
-     *                    command-buffer properties will be used.</p>
-     * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
-     */
+    /** {@code cl_command_buffer_khr clCreateCommandBufferKHR(cl_uint num_queues, cl_command_queue const * queues, cl_command_buffer_properties_khr const * properties, cl_int * errcode_ret)} */
     @NativeType("cl_command_buffer_khr")
     public static long clCreateCommandBufferKHR(@NativeType("cl_command_queue const *") PointerBuffer queues, @NativeType("cl_command_buffer_properties_khr const *") @Nullable LongBuffer properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
@@ -120,11 +81,7 @@ public class KHRCommandBuffer {
 
     // --- [ clRetainCommandBufferKHR ] ---
 
-    /**
-     * Increments the {@code command_buffer} reference count.
-     *
-     * @param command_buffer the command-buffer to retain
-     */
+    /** {@code cl_int clRetainCommandBufferKHR(cl_command_buffer_khr command_buffer)} */
     @NativeType("cl_int")
     public static int clRetainCommandBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer) {
         long __functionAddress = CL.getICD().clRetainCommandBufferKHR;
@@ -137,11 +94,7 @@ public class KHRCommandBuffer {
 
     // --- [ clReleaseCommandBufferKHR ] ---
 
-    /**
-     * Decrements the {@code command_buffer} reference count.
-     *
-     * @param command_buffer the command-buffer to release
-     */
+    /** {@code cl_int clReleaseCommandBufferKHR(cl_command_buffer_khr command_buffer)} */
     @NativeType("cl_int")
     public static int clReleaseCommandBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer) {
         long __functionAddress = CL.getICD().clReleaseCommandBufferKHR;
@@ -154,11 +107,7 @@ public class KHRCommandBuffer {
 
     // --- [ clFinalizeCommandBufferKHR ] ---
 
-    /**
-     * Finalizes command recording ready for enqueuing the command-buffer on a command-queue.
-     *
-     * @param command_buffer a valid command-buffer object
-     */
+    /** {@code cl_int clFinalizeCommandBufferKHR(cl_command_buffer_khr command_buffer)} */
     @NativeType("cl_int")
     public static int clFinalizeCommandBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer) {
         long __functionAddress = CL.getICD().clFinalizeCommandBufferKHR;
@@ -171,12 +120,7 @@ public class KHRCommandBuffer {
 
     // --- [ clEnqueueCommandBufferKHR ] ---
 
-    /**
-     * Unsafe version of: {@link #clEnqueueCommandBufferKHR EnqueueCommandBufferKHR}
-     *
-     * @param num_queues              the number of command-queues listed in {@code queues}
-     * @param num_events_in_wait_list the number of events in {@code event_wait_list}
-     */
+    /** {@code cl_int clEnqueueCommandBufferKHR(cl_uint num_queues, cl_command_queue * queues, cl_command_buffer_khr command_buffer, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     public static int nclEnqueueCommandBufferKHR(int num_queues, long queues, long command_buffer, int num_events_in_wait_list, long event_wait_list, long event) {
         long __functionAddress = CL.getICD().clEnqueueCommandBufferKHR;
         if (CHECKS) {
@@ -186,22 +130,7 @@ public class KHRCommandBuffer {
         return callPPPPI(num_queues, queues, command_buffer, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
-    /**
-     * Enqueues a command-buffer to execute on command-queues specified by {@code queues, or} on default command-queues used during recording if
-     * {@code queues} is empty.
-     *
-     * @param queues          a pointer to an ordered list of command-queues compatible with the command-queues used on recording.
-     *                        
-     *                        <p>{@code queues} can be {@code NULL} in which case the default command-queues used on command-buffer creation are used and {@code num_queues} must be 0.</p>
-     * @param command_buffer  a valid command-buffer object
-     * @param event_wait_list a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is {@code NULL}, then this particular command
-     *                        does not wait on any event to complete. The events specified in {@code event_wait_list} act as synchronization points. The context associated with events in
-     *                        {@code event_wait_list} and {@code command_queue} must be the same.
-     * @param event           Returns an event object that identifies this particular command and can be used to query or queue a wait for this particular command to complete.
-     *                        {@code event} can be {@code NULL} in which case it will not be possible for the application to query the status of this command or queue a wait for this command to
-     *                        complete. If the {@code event_wait_list} and the {@code event} arguments are not {@code NULL}, the event argument should not refer to an element of the
-     *                        {@code event_wait_list} array.
-     */
+    /** {@code cl_int clEnqueueCommandBufferKHR(cl_uint num_queues, cl_command_queue * queues, cl_command_buffer_khr command_buffer, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     @NativeType("cl_int")
     public static int clEnqueueCommandBufferKHR(@NativeType("cl_command_queue *") @Nullable PointerBuffer queues, @NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
@@ -212,7 +141,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandBarrierWithWaitListKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandBarrierWithWaitListKHR CommandBarrierWithWaitListKHR} */
+    /** {@code cl_int clCommandBarrierWithWaitListKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandBarrierWithWaitListKHR(long command_buffer, long command_queue, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandBarrierWithWaitListKHR;
         if (CHECKS) {
@@ -222,33 +151,7 @@ public class KHRCommandBuffer {
         return callPPPPPI(command_buffer, command_queue, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a barrier operation used as a synchronization point.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandBarrierWithWaitListKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandBarrierWithWaitListKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -260,7 +163,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandCopyBufferKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandCopyBufferKHR CommandCopyBufferKHR} */
+    /** {@code cl_int clCommandCopyBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer, size_t src_offset, size_t dst_offset, size_t size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandCopyBufferKHR(long command_buffer, long command_queue, long src_buffer, long dst_buffer, long src_offset, long dst_offset, long size, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferKHR;
         if (CHECKS) {
@@ -272,33 +175,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, src_buffer, dst_buffer, src_offset, dst_offset, size, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a command to copy from one buffer object to another.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandCopyBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer, size_t src_offset, size_t dst_offset, size_t size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t") long src_offset, @NativeType("size_t") long dst_offset, @NativeType("size_t") long size, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -310,7 +187,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandCopyBufferRectKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandCopyBufferRectKHR CommandCopyBufferRectKHR} */
+    /** {@code cl_int clCommandCopyBufferRectKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer, size_t const * src_origin, size_t const * dst_origin, size_t const * region, size_t src_row_pitch, size_t src_slice_pitch, size_t dst_row_pitch, size_t dst_slice_pitch, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandCopyBufferRectKHR(long command_buffer, long command_queue, long src_buffer, long dst_buffer, long src_origin, long dst_origin, long region, long src_row_pitch, long src_slice_pitch, long dst_row_pitch, long dst_slice_pitch, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferRectKHR;
         if (CHECKS) {
@@ -322,33 +199,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPPPPPI(command_buffer, command_queue, src_buffer, dst_buffer, src_origin, dst_origin, region, src_row_pitch, src_slice_pitch, dst_row_pitch, dst_slice_pitch, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a command to copy a rectangular region from a buffer object to another buffer object.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandCopyBufferRectKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer, size_t const * src_origin, size_t const * dst_origin, size_t const * region, size_t src_row_pitch, size_t src_slice_pitch, size_t dst_row_pitch, size_t dst_slice_pitch, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyBufferRectKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -363,7 +214,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandCopyBufferToImageKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandCopyBufferToImageKHR CommandCopyBufferToImageKHR} */
+    /** {@code cl_int clCommandCopyBufferToImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_image, size_t src_offset, size_t const * dst_origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandCopyBufferToImageKHR(long command_buffer, long command_queue, long src_buffer, long dst_image, long src_offset, long dst_origin, long region, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferToImageKHR;
         if (CHECKS) {
@@ -375,33 +226,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, src_buffer, dst_image, src_offset, dst_origin, region, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a command to copy a buffer object to an image object.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandCopyBufferToImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_image, size_t src_offset, size_t const * dst_origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyBufferToImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_image, @NativeType("size_t") long src_offset, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -415,7 +240,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandCopyImageKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandCopyImageKHR CommandCopyImageKHR} */
+    /** {@code cl_int clCommandCopyImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_image, cl_mem dst_image, size_t const * src_origin, size_t const * dst_origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandCopyImageKHR(long command_buffer, long command_queue, long src_image, long dst_image, long src_origin, long dst_origin, long region, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyImageKHR;
         if (CHECKS) {
@@ -427,33 +252,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, src_image, dst_image, src_origin, dst_origin, region, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a command to copy image objects.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandCopyImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_image, cl_mem dst_image, size_t const * src_origin, size_t const * dst_origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -468,7 +267,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandCopyImageToBufferKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandCopyImageToBufferKHR CommandCopyImageToBufferKHR} */
+    /** {@code cl_int clCommandCopyImageToBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_image, cl_mem dst_buffer, size_t const * src_origin, size_t const * region, size_t dst_offset, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandCopyImageToBufferKHR(long command_buffer, long command_queue, long src_image, long dst_buffer, long src_origin, long region, long dst_offset, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyImageToBufferKHR;
         if (CHECKS) {
@@ -480,33 +279,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, src_image, dst_buffer, src_origin, region, dst_offset, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a command to copy an image object to a buffer object.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandCopyImageToBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_image, cl_mem dst_buffer, size_t const * src_origin, size_t const * region, size_t dst_offset, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyImageToBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long dst_offset, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -520,7 +293,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandFillBufferKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandFillBufferKHR CommandFillBufferKHR} */
+    /** {@code cl_int clCommandFillBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem buffer, void const * pattern, size_t pattern_size, size_t offset, size_t size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandFillBufferKHR(long command_buffer, long command_queue, long buffer, long pattern, long pattern_size, long offset, long size, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillBufferKHR;
         if (CHECKS) {
@@ -531,33 +304,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, buffer, pattern, pattern_size, offset, size, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a command to fill a buffer object with a pattern of a given pattern size.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandFillBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem buffer, void const * pattern, size_t pattern_size, size_t offset, size_t size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandFillBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("void const *") ByteBuffer pattern, @NativeType("size_t") long offset, @NativeType("size_t") long size, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -569,7 +316,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandFillImageKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandFillImageKHR CommandFillImageKHR} */
+    /** {@code cl_int clCommandFillImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem image, void const * fill_color, size_t const * origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandFillImageKHR(long command_buffer, long command_queue, long image, long fill_color, long origin, long region, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillImageKHR;
         if (CHECKS) {
@@ -580,33 +327,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPI(command_buffer, command_queue, image, fill_color, origin, region, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a command to fill an image object with a specified color.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandFillImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem image, void const * fill_color, size_t const * origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") ByteBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -619,33 +340,7 @@ public class KHRCommandBuffer {
         return nclCommandFillImageKHR(command_buffer, command_queue, image, memAddress(fill_color), memAddress(origin), memAddress(region), remainingSafe(sync_point_wait_list), memAddressSafe(sync_point_wait_list), memAddressSafe(sync_point), memAddressSafe(mutable_handle));
     }
 
-    /**
-     * Records a command to fill an image object with a specified color.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandFillImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem image, void const * fill_color, size_t const * origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") IntBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -658,33 +353,7 @@ public class KHRCommandBuffer {
         return nclCommandFillImageKHR(command_buffer, command_queue, image, memAddress(fill_color), memAddress(origin), memAddress(region), remainingSafe(sync_point_wait_list), memAddressSafe(sync_point_wait_list), memAddressSafe(sync_point), memAddressSafe(mutable_handle));
     }
 
-    /**
-     * Records a command to fill an image object with a specified color.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandFillImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem image, void const * fill_color, size_t const * origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") FloatBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -699,7 +368,7 @@ public class KHRCommandBuffer {
 
     // --- [ clCommandNDRangeKernelKHR ] ---
 
-    /** Unsafe version of: {@link #clCommandNDRangeKernelKHR CommandNDRangeKernelKHR} */
+    /** {@code cl_int clCommandNDRangeKernelKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_ndrange_kernel_command_properties_khr const * properties, cl_kernel kernel, cl_uint work_dim, size_t const * global_work_offset, size_t const * global_work_size, size_t const * local_work_size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     public static int nclCommandNDRangeKernelKHR(long command_buffer, long command_queue, long properties, long kernel, int work_dim, long global_work_offset, long global_work_size, long local_work_size, int num_sync_points_in_wait_list, long sync_point_wait_list, long sync_point, long mutable_handle) {
         long __functionAddress = CL.getICD().clCommandNDRangeKernelKHR;
         if (CHECKS) {
@@ -710,34 +379,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, properties, kernel, work_dim, global_work_offset, global_work_size, local_work_size, num_sync_points_in_wait_list, sync_point_wait_list, sync_point, mutable_handle, __functionAddress);
     }
 
-    /**
-     * Records a command to execute a kernel on a device.
-     *
-     * @param command_buffer       a valid command-buffer object
-     * @param command_queue        the command-queue the command will be recorded to.
-     *                             
-     *                             <p>Parameter is unused by this extension as only a single command-queue is supported and <b>must</b> be {@code NULL}.</p>
-     * @param kernel               a valid kernel object
-     * @param sync_point_wait_list the synchronization-points that need to complete before this particular command can be executed.
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, {@code num_sync_points_in_wait_list} must be 0. If {@code sync_point_wait_list} is not {@code NULL}, the list of
-     *                             synchronization-points pointed to by {@code sync_point_wait_list} must be valid and {@code num_sync_points_in_wait_list} must be greater than 0.
-     *                             The synchronization-points specified in {@code sync_point_wait_list} are <b>device side</b> synchronization-points. The command-buffer associated 
-     *                             with synchronization-points in {@code sync_point_wait_list} must be the same as {@code command_buffer}. The memory associated with
-     *                             {@code sync_point_wait_list} can be reused or freed after the function returns.</p>
-     *                             
-     *                             <p>If {@code sync_point_wait_list} is {@code NULL}, then this particular command waits until all previous recorded commands to {@code command_queue} have
-     *                             completed.</p>
-     * @param sync_point           returns a synchronization-point ID that identifies this particular command.
-     *                             
-     *                             <p>Synchronization-point objects are unique and can be used to identify this barrier command later on. {@code sync_point} can be {@code NULL} in which case
-     *                             it will not be possible for the application to record a wait for this command to complete. If the {@code sync_point_wait_list} and the
-     *                             {@code sync_point} arguments are not {@code NULL}, the {@code sync_point} argument should not refer to an element of the {@code sync_point_wait_list}
-     *                             array.</p>
-     * @param mutable_handle       returns a handle to the command.
-     *                             
-     *                             <p>Handle is unused by this extension and must be passed as {@code NULL}.</p>
-     */
+    /** {@code cl_int clCommandNDRangeKernelKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_ndrange_kernel_command_properties_khr const * properties, cl_kernel kernel, cl_uint work_dim, size_t const * global_work_offset, size_t const * global_work_size, size_t const * local_work_size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandNDRangeKernelKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_ndrange_kernel_command_properties_khr const *") @Nullable LongBuffer properties, @NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int work_dim, @NativeType("size_t const *") @Nullable PointerBuffer global_work_offset, @NativeType("size_t const *") @Nullable PointerBuffer global_work_size, @NativeType("size_t const *") @Nullable PointerBuffer local_work_size, @NativeType("cl_sync_point_khr const *") @Nullable IntBuffer sync_point_wait_list, @NativeType("cl_sync_point_khr *") @Nullable IntBuffer sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         if (CHECKS) {
@@ -753,11 +395,7 @@ public class KHRCommandBuffer {
 
     // --- [ clGetCommandBufferInfoKHR ] ---
 
-    /**
-     * Unsafe version of: {@link #clGetCommandBufferInfoKHR GetCommandBufferInfoKHR}
-     *
-     * @param param_value_size the size in bytes of memory pointed to by {@code param_value}. This size must be &#x2265; size of return type. If {@code param_value} is {@code NULL}, it is ignored.
-     */
+    /** {@code cl_int clGetCommandBufferInfoKHR(cl_command_buffer_khr command_buffer, cl_command_buffer_info_khr param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret)} */
     public static int nclGetCommandBufferInfoKHR(long command_buffer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetCommandBufferInfoKHR;
         if (CHECKS) {
@@ -767,14 +405,7 @@ public class KHRCommandBuffer {
         return callPPPPI(command_buffer, param_name, param_value_size, param_value, param_value_size_ret, __functionAddress);
     }
 
-    /**
-     * Queries information about a command-buffer.
-     *
-     * @param command_buffer       the command-buffer being queried
-     * @param param_name           the information to query
-     * @param param_value          a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is {@code NULL}, it is ignored.
-     * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
-     */
+    /** {@code cl_int clGetCommandBufferInfoKHR(cl_command_buffer_khr command_buffer, cl_command_buffer_info_khr param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret)} */
     @NativeType("cl_int")
     public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @NativeType("void *") @Nullable ByteBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
@@ -783,14 +414,7 @@ public class KHRCommandBuffer {
         return nclGetCommandBufferInfoKHR(command_buffer, param_name, remainingSafe(param_value), memAddressSafe(param_value), memAddressSafe(param_value_size_ret));
     }
 
-    /**
-     * Queries information about a command-buffer.
-     *
-     * @param command_buffer       the command-buffer being queried
-     * @param param_name           the information to query
-     * @param param_value          a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is {@code NULL}, it is ignored.
-     * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
-     */
+    /** {@code cl_int clGetCommandBufferInfoKHR(cl_command_buffer_khr command_buffer, cl_command_buffer_info_khr param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret)} */
     @NativeType("cl_int")
     public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @NativeType("void *") @Nullable IntBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
@@ -799,14 +423,7 @@ public class KHRCommandBuffer {
         return nclGetCommandBufferInfoKHR(command_buffer, param_name, Integer.toUnsignedLong(remainingSafe(param_value)) << 2, memAddressSafe(param_value), memAddressSafe(param_value_size_ret));
     }
 
-    /**
-     * Queries information about a command-buffer.
-     *
-     * @param command_buffer       the command-buffer being queried
-     * @param param_name           the information to query
-     * @param param_value          a pointer to memory where the appropriate result being queried is returned. If {@code param_value} is {@code NULL}, it is ignored.
-     * @param param_value_size_ret the actual size in bytes of data being queried by {@code param_value}. If {@code NULL}, it is ignored.
-     */
+    /** {@code cl_int clGetCommandBufferInfoKHR(cl_command_buffer_khr command_buffer, cl_command_buffer_info_khr param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret)} */
     @NativeType("cl_int")
     public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @NativeType("void *") @Nullable PointerBuffer param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         if (CHECKS) {
@@ -815,7 +432,7 @@ public class KHRCommandBuffer {
         return nclGetCommandBufferInfoKHR(command_buffer, param_name, Integer.toUnsignedLong(remainingSafe(param_value)) << POINTER_SHIFT, memAddressSafe(param_value), memAddressSafe(param_value_size_ret));
     }
 
-    /** Array version of: {@link #clCreateCommandBufferKHR CreateCommandBufferKHR} */
+    /** {@code cl_command_buffer_khr clCreateCommandBufferKHR(cl_uint num_queues, cl_command_queue const * queues, cl_command_buffer_properties_khr const * properties, cl_int * errcode_ret)} */
     @NativeType("cl_command_buffer_khr")
     public static long clCreateCommandBufferKHR(@NativeType("cl_command_queue const *") PointerBuffer queues, @NativeType("cl_command_buffer_properties_khr const *") long @Nullable [] properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateCommandBufferKHR;
@@ -827,7 +444,7 @@ public class KHRCommandBuffer {
         return callPPPP(queues.remaining(), memAddress(queues), properties, errcode_ret, __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandBarrierWithWaitListKHR CommandBarrierWithWaitListKHR} */
+    /** {@code cl_int clCommandBarrierWithWaitListKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandBarrierWithWaitListKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandBarrierWithWaitListKHR;
@@ -840,7 +457,7 @@ public class KHRCommandBuffer {
         return callPPPPPI(command_buffer, command_queue, lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandCopyBufferKHR CommandCopyBufferKHR} */
+    /** {@code cl_int clCommandCopyBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer, size_t src_offset, size_t dst_offset, size_t size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t") long src_offset, @NativeType("size_t") long dst_offset, @NativeType("size_t") long size, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferKHR;
@@ -855,7 +472,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, src_buffer, dst_buffer, src_offset, dst_offset, size, lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandCopyBufferRectKHR CommandCopyBufferRectKHR} */
+    /** {@code cl_int clCommandCopyBufferRectKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer, size_t const * src_origin, size_t const * dst_origin, size_t const * region, size_t src_row_pitch, size_t src_slice_pitch, size_t dst_row_pitch, size_t dst_slice_pitch, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyBufferRectKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long src_row_pitch, @NativeType("size_t") long src_slice_pitch, @NativeType("size_t") long dst_row_pitch, @NativeType("size_t") long dst_slice_pitch, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferRectKHR;
@@ -873,7 +490,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPPPPPI(command_buffer, command_queue, src_buffer, dst_buffer, memAddress(src_origin), memAddress(dst_origin), memAddress(region), src_row_pitch, src_slice_pitch, dst_row_pitch, dst_slice_pitch, lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandCopyBufferToImageKHR CommandCopyBufferToImageKHR} */
+    /** {@code cl_int clCommandCopyBufferToImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_image, size_t src_offset, size_t const * dst_origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyBufferToImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_buffer, @NativeType("cl_mem") long dst_image, @NativeType("size_t") long src_offset, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyBufferToImageKHR;
@@ -890,7 +507,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, src_buffer, dst_image, src_offset, memAddress(dst_origin), memAddress(region), lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandCopyImageKHR CommandCopyImageKHR} */
+    /** {@code cl_int clCommandCopyImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_image, cl_mem dst_image, size_t const * src_origin, size_t const * dst_origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_image, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer dst_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyImageKHR;
@@ -908,7 +525,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, src_image, dst_image, memAddress(src_origin), memAddress(dst_origin), memAddress(region), lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandCopyImageToBufferKHR CommandCopyImageToBufferKHR} */
+    /** {@code cl_int clCommandCopyImageToBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem src_image, cl_mem dst_buffer, size_t const * src_origin, size_t const * region, size_t dst_offset, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandCopyImageToBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long src_image, @NativeType("cl_mem") long dst_buffer, @NativeType("size_t const *") PointerBuffer src_origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("size_t") long dst_offset, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandCopyImageToBufferKHR;
@@ -925,7 +542,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, src_image, dst_buffer, memAddress(src_origin), memAddress(region), dst_offset, lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandFillBufferKHR CommandFillBufferKHR} */
+    /** {@code cl_int clCommandFillBufferKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem buffer, void const * pattern, size_t pattern_size, size_t offset, size_t size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandFillBufferKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long buffer, @NativeType("void const *") ByteBuffer pattern, @NativeType("size_t") long offset, @NativeType("size_t") long size, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillBufferKHR;
@@ -939,7 +556,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, buffer, memAddress(pattern), (long)pattern.remaining(), offset, size, lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandFillImageKHR CommandFillImageKHR} */
+    /** {@code cl_int clCommandFillImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem image, void const * fill_color, size_t const * origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") ByteBuffer fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillImageKHR;
@@ -956,7 +573,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPI(command_buffer, command_queue, image, memAddress(fill_color), memAddress(origin), memAddress(region), lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandFillImageKHR CommandFillImageKHR} */
+    /** {@code cl_int clCommandFillImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem image, void const * fill_color, size_t const * origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") int[] fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillImageKHR;
@@ -973,7 +590,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPI(command_buffer, command_queue, image, fill_color, memAddress(origin), memAddress(region), lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandFillImageKHR CommandFillImageKHR} */
+    /** {@code cl_int clCommandFillImageKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_mem image, void const * fill_color, size_t const * origin, size_t const * region, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandFillImageKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem") long image, @NativeType("void const *") float[] fill_color, @NativeType("size_t const *") PointerBuffer origin, @NativeType("size_t const *") PointerBuffer region, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandFillImageKHR;
@@ -990,7 +607,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPI(command_buffer, command_queue, image, fill_color, memAddress(origin), memAddress(region), lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clCommandNDRangeKernelKHR CommandNDRangeKernelKHR} */
+    /** {@code cl_int clCommandNDRangeKernelKHR(cl_command_buffer_khr command_buffer, cl_command_queue command_queue, cl_ndrange_kernel_command_properties_khr const * properties, cl_kernel kernel, cl_uint work_dim, size_t const * global_work_offset, size_t const * global_work_size, size_t const * local_work_size, cl_uint num_sync_points_in_wait_list, cl_sync_point_khr const * sync_point_wait_list, cl_sync_point_khr * sync_point, cl_mutable_command_khr * mutable_handle)} */
     @NativeType("cl_int")
     public static int clCommandNDRangeKernelKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_queue") long command_queue, @NativeType("cl_ndrange_kernel_command_properties_khr const *") long @Nullable [] properties, @NativeType("cl_kernel") long kernel, @NativeType("cl_uint") int work_dim, @NativeType("size_t const *") @Nullable PointerBuffer global_work_offset, @NativeType("size_t const *") @Nullable PointerBuffer global_work_size, @NativeType("size_t const *") @Nullable PointerBuffer local_work_size, @NativeType("cl_sync_point_khr const *") int @Nullable [] sync_point_wait_list, @NativeType("cl_sync_point_khr *") int @Nullable [] sync_point, @NativeType("cl_mutable_command_khr *") @Nullable PointerBuffer mutable_handle) {
         long __functionAddress = CL.getICD().clCommandNDRangeKernelKHR;
@@ -1008,7 +625,7 @@ public class KHRCommandBuffer {
         return callPPPPPPPPPPI(command_buffer, command_queue, properties, kernel, work_dim, memAddressSafe(global_work_offset), memAddressSafe(global_work_size), memAddressSafe(local_work_size), lengthSafe(sync_point_wait_list), sync_point_wait_list, sync_point, memAddressSafe(mutable_handle), __functionAddress);
     }
 
-    /** Array version of: {@link #clGetCommandBufferInfoKHR GetCommandBufferInfoKHR} */
+    /** {@code cl_int clGetCommandBufferInfoKHR(cl_command_buffer_khr command_buffer, cl_command_buffer_info_khr param_name, size_t param_value_size, void * param_value, size_t * param_value_size_ret)} */
     @NativeType("cl_int")
     public static int clGetCommandBufferInfoKHR(@NativeType("cl_command_buffer_khr") long command_buffer, @NativeType("cl_command_buffer_info_khr") int param_name, @NativeType("void *") int @Nullable [] param_value, @NativeType("size_t *") @Nullable PointerBuffer param_value_size_ret) {
         long __functionAddress = CL.getICD().clGetCommandBufferInfoKHR;

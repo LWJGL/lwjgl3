@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_recvmsg_out {
  *     __u32 namelen;
  *     __u32 controllen;
  *     __u32 payloadlen;
  *     __u32 flags;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_recvmsg_out")
 public class IOURingRecvmsgOut extends Struct<IOURingRecvmsgOut> implements NativeResource {

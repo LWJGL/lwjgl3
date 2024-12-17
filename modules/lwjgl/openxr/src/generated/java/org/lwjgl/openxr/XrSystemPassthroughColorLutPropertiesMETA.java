@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Passthrough color LUT system properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>When the {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension is enabled, an application <b>may</b> pass in an {@link XrSystemPassthroughColorLutPropertiesMETA} structure in next chain structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties} to acquire information about the connected system.</p>
- * 
- * <p>The runtime <b>must</b> populate the {@link XrSystemPassthroughColorLutPropertiesMETA} structure with the relevant information to the {@link XrSystemProperties} returned by the {@link XR10#xrGetSystemProperties GetSystemProperties} call.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using {@link XrSystemPassthroughColorLutPropertiesMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAPassthroughColorLut#XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemPassthroughColorLutPropertiesMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #maxColorLutResolution};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t maxColorLutResolution;
+ * }}</pre>
  */
 public class XrSystemPassthroughColorLutPropertiesMETA extends Struct<XrSystemPassthroughColorLutPropertiesMETA> implements NativeResource {
 
@@ -96,21 +74,21 @@ public class XrSystemPassthroughColorLutPropertiesMETA extends Struct<XrSystemPa
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** Maximum value for {@link XrPassthroughColorLutCreateInfoMETA}{@code ::resolution} supported by the system. Runtimes implementing this extension <b>must</b> support a value of at least 32 for this property. */
+    /** @return the value of the {@code maxColorLutResolution} field. */
     @NativeType("uint32_t")
     public int maxColorLutResolution() { return nmaxColorLutResolution(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemPassthroughColorLutPropertiesMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAPassthroughColorLut#XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META} value to the {@link #type} field. */
+    /** Sets the {@link METAPassthroughColorLut#XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META} value to the {@code type} field. */
     public XrSystemPassthroughColorLutPropertiesMETA type$Default() { return type(METAPassthroughColorLut.XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemPassthroughColorLutPropertiesMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,21 +280,21 @@ public class XrSystemPassthroughColorLutPropertiesMETA extends Struct<XrSystemPa
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemPassthroughColorLutPropertiesMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemPassthroughColorLutPropertiesMETA.ntype(address()); }
-        /** @return the value of the {@link XrSystemPassthroughColorLutPropertiesMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSystemPassthroughColorLutPropertiesMETA.nnext(address()); }
-        /** @return the value of the {@link XrSystemPassthroughColorLutPropertiesMETA#maxColorLutResolution} field. */
+        /** @return the value of the {@code maxColorLutResolution} field. */
         @NativeType("uint32_t")
         public int maxColorLutResolution() { return XrSystemPassthroughColorLutPropertiesMETA.nmaxColorLutResolution(address()); }
 
-        /** Sets the specified value to the {@link XrSystemPassthroughColorLutPropertiesMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemPassthroughColorLutPropertiesMETA.Buffer type(@NativeType("XrStructureType") int value) { XrSystemPassthroughColorLutPropertiesMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAPassthroughColorLut#XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META} value to the {@link XrSystemPassthroughColorLutPropertiesMETA#type} field. */
+        /** Sets the {@link METAPassthroughColorLut#XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META} value to the {@code type} field. */
         public XrSystemPassthroughColorLutPropertiesMETA.Buffer type$Default() { return type(METAPassthroughColorLut.XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META); }
-        /** Sets the specified value to the {@link XrSystemPassthroughColorLutPropertiesMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemPassthroughColorLutPropertiesMETA.Buffer next(@NativeType("void const *") long value) { XrSystemPassthroughColorLutPropertiesMETA.nnext(address(), value); return this; }
 
     }

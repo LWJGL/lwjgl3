@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkRenderingInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderingInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -33,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link VkRenderingAttachmentInfo VkRenderingAttachmentInfo} const * pColorAttachments;
  *     {@link VkRenderingAttachmentInfo VkRenderingAttachmentInfo} const * pDepthAttachment;
  *     {@link VkRenderingAttachmentInfo VkRenderingAttachmentInfo} const * pStencilAttachment;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkRenderingInfoKHR extends VkRenderingInfo {
 

@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUgraphNodeParams {
  *     CUgraphNodeType type;
  *     int reserved0[3];
@@ -40,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link CUDA_CONDITIONAL_NODE_PARAMS CUDA_CONDITIONAL_NODE_PARAMS} conditional;
  *     } params;
  *     long long reserved2;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUgraphNodeParams extends Struct<CUgraphNodeParams> implements NativeResource {
 

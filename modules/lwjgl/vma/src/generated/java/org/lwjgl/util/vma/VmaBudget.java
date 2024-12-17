@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Statistics of current memory usage and available budget for a specific memory heap.
- * 
- * <p>These are fast to calculate.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaBudget {
- *     {@link VmaStatistics VmaStatistics} {@link #statistics};
- *     VkDeviceSize {@link #usage};
- *     VkDeviceSize {@link #budget};
- * }</code></pre>
- *
- * @see Vma#vmaGetHeapBudgets
+ *     {@link VmaStatistics VmaStatistics} statistics;
+ *     VkDeviceSize usage;
+ *     VkDeviceSize budget;
+ * }}</pre>
  */
 public class VmaBudget extends Struct<VmaBudget> implements NativeResource {
 
@@ -82,27 +74,12 @@ public class VmaBudget extends Struct<VmaBudget> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** statistics fetched from the library */
+    /** @return a {@link VmaStatistics} view of the {@code statistics} field. */
     public VmaStatistics statistics() { return nstatistics(address()); }
-    /**
-     * Estimated current memory usage of the program, in bytes.
-     * 
-     * <p>Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.</p>
-     * 
-     * <p>It might be different than {@code statistics.blockBytes} (usually higher) due to additional implicit objects also occupying the memory, like swapchain,
-     * pipelines, descriptor heaps, command buffers, or {@code VkDeviceMemory} blocks allocated outside of this library, if any.</p>
-     */
+    /** @return the value of the {@code usage} field. */
     @NativeType("VkDeviceSize")
     public long usage() { return nusage(address()); }
-    /**
-     * Estimated amount of memory available to the program, in bytes.
-     * 
-     * <p>Fetched from system using {@code VK_EXT_memory_budget} extension if enabled.</p>
-     * 
-     * <p>It might be different (most probably smaller) than {@code VkMemoryHeap::size[heapIndex]} due to factors external to the program, decided by the
-     * operating system. Difference {@code budget - usage} is the amount of additional memory that can probably be allocated without problems. Exceeding
-     * the budget may result in various problems.</p>
-     */
+    /** @return the value of the {@code budget} field. */
     @NativeType("VkDeviceSize")
     public long budget() { return nbudget(address()); }
 
@@ -267,12 +244,12 @@ public class VmaBudget extends Struct<VmaBudget> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VmaStatistics} view of the {@link VmaBudget#statistics} field. */
+        /** @return a {@link VmaStatistics} view of the {@code statistics} field. */
         public VmaStatistics statistics() { return VmaBudget.nstatistics(address()); }
-        /** @return the value of the {@link VmaBudget#usage} field. */
+        /** @return the value of the {@code usage} field. */
         @NativeType("VkDeviceSize")
         public long usage() { return VmaBudget.nusage(address()); }
-        /** @return the value of the {@link VmaBudget#budget} field. */
+        /** @return the value of the {@code budget} field. */
         @NativeType("VkDeviceSize")
         public long budget() { return VmaBudget.nbudget(address()); }
 

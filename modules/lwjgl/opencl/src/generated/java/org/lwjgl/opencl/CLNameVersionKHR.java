@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes a combination of a name alongside a version number.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct cl_name_version_khr {
  *     cl_version_khr version;
  *     char name[64];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct cl_name_version_khr")
 public class CLNameVersionKHR extends Struct<CLNameVersionKHR> implements NativeResource {

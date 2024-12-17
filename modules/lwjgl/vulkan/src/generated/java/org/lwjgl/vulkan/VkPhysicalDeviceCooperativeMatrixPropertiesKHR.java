@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing cooperative matrix properties supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@code cooperativeMatrixSupportedStages} <b>must</b> not have any bits other than {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} set.</p>
- * 
- * <p>If the {@link VkPhysicalDeviceCooperativeMatrixPropertiesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCooperativeMatrixPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkShaderStageFlags {@link #cooperativeMatrixSupportedStages};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkShaderStageFlags cooperativeMatrixSupportedStages;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCooperativeMatrixPropertiesKHR extends Struct<VkPhysicalDeviceCooperativeMatrixPropertiesKHR> implements NativeResource {
 
@@ -90,21 +74,21 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesKHR extends Struct<VkPhy
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitfield of {@code VkShaderStageFlagBits} describing the shader stages that cooperative matrix instructions are supported in. {@code cooperativeMatrixSupportedStages} will have the {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} bit set if any of the physical device’s queues support {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. */
+    /** @return the value of the {@code cooperativeMatrixSupportedStages} field. */
     @NativeType("VkShaderStageFlags")
     public int cooperativeMatrixSupportedStages() { return ncooperativeMatrixSupportedStages(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceCooperativeMatrixPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceCooperativeMatrixPropertiesKHR sType$Default() { return sType(KHRCooperativeMatrix.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCooperativeMatrixPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,21 +280,21 @@ public class VkPhysicalDeviceCooperativeMatrixPropertiesKHR extends Struct<VkPhy
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrixPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCooperativeMatrixPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrixPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCooperativeMatrixPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrixPropertiesKHR#cooperativeMatrixSupportedStages} field. */
+        /** @return the value of the {@code cooperativeMatrixSupportedStages} field. */
         @NativeType("VkShaderStageFlags")
         public int cooperativeMatrixSupportedStages() { return VkPhysicalDeviceCooperativeMatrixPropertiesKHR.ncooperativeMatrixSupportedStages(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceCooperativeMatrixPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCooperativeMatrixPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR} value to the {@link VkPhysicalDeviceCooperativeMatrixPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRCooperativeMatrix#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceCooperativeMatrixPropertiesKHR.Buffer sType$Default() { return sType(KHRCooperativeMatrix.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrixPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCooperativeMatrixPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCooperativeMatrixPropertiesKHR.npNext(address(), value); return this; }
 
     }

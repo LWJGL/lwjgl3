@@ -16,35 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created event.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@code pNext} chain includes a {@link VkExportMetalObjectCreateInfoEXT} structure, its {@code exportObjectType} member <b>must</b> be {@link EXTMetalObjects#VK_EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT EXPORT_METAL_OBJECT_TYPE_METAL_SHARED_EVENT_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_EVENT_CREATE_INFO STRUCTURE_TYPE_EVENT_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkExportMetalObjectCreateInfoEXT} or {@link VkImportMetalSharedEventInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique, with the exception of structures of type {@link VkExportMetalObjectCreateInfoEXT}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkEventCreateFlagBits} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkCreateEvent CreateEvent}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkEventCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkEventCreateFlags {@link #flags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkEventCreateFlags flags;
+ * }}</pre>
  */
 public class VkEventCreateInfo extends Struct<VkEventCreateInfo> implements NativeResource {
 
@@ -97,27 +74,27 @@ public class VkEventCreateInfo extends Struct<VkEventCreateInfo> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkEventCreateFlagBits} defining additional creation parameters. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkEventCreateFlags")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkEventCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_EVENT_CREATE_INFO STRUCTURE_TYPE_EVENT_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_EVENT_CREATE_INFO STRUCTURE_TYPE_EVENT_CREATE_INFO} value to the {@code sType} field. */
     public VkEventCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_EVENT_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkEventCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
     public VkEventCreateInfo pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkImportMetalSharedEventInfoEXT} value to the {@code pNext} chain. */
     public VkEventCreateInfo pNext(VkImportMetalSharedEventInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkEventCreateInfo flags(@NativeType("VkEventCreateFlags") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,27 +309,27 @@ public class VkEventCreateInfo extends Struct<VkEventCreateInfo> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkEventCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkEventCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkEventCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkEventCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkEventCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkEventCreateFlags")
         public int flags() { return VkEventCreateInfo.nflags(address()); }
 
-        /** Sets the specified value to the {@link VkEventCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkEventCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkEventCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_EVENT_CREATE_INFO STRUCTURE_TYPE_EVENT_CREATE_INFO} value to the {@link VkEventCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_EVENT_CREATE_INFO STRUCTURE_TYPE_EVENT_CREATE_INFO} value to the {@code sType} field. */
         public VkEventCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_EVENT_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkEventCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkEventCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkEventCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExportMetalObjectCreateInfoEXT} value to the {@code pNext} chain. */
         public VkEventCreateInfo.Buffer pNext(VkExportMetalObjectCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkImportMetalSharedEventInfoEXT} value to the {@code pNext} chain. */
         public VkEventCreateInfo.Buffer pNext(VkImportMetalSharedEventInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkEventCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkEventCreateInfo.Buffer flags(@NativeType("VkEventCreateFlags") int value) { VkEventCreateInfo.nflags(address(), value); return this; }
 
     }

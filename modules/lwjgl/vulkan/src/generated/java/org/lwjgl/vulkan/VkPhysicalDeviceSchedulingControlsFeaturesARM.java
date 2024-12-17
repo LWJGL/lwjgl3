@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing scheduling controls features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceSchedulingControlsFeaturesARM} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceSchedulingControlsFeaturesARM} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ARMSchedulingControls#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSchedulingControlsFeaturesARM {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #schedulingControls};
- * }</code></pre>
+ *     VkBool32 schedulingControls;
+ * }}</pre>
  */
 public class VkPhysicalDeviceSchedulingControlsFeaturesARM extends Struct<VkPhysicalDeviceSchedulingControlsFeaturesARM> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceSchedulingControlsFeaturesARM extends Struct<VkPhys
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports scheduling controls. */
+    /** @return the value of the {@code schedulingControls} field. */
     @NativeType("VkBool32")
     public boolean schedulingControls() { return nschedulingControls(address()) != 0; }
 
@@ -104,7 +90,7 @@ public class VkPhysicalDeviceSchedulingControlsFeaturesARM extends Struct<VkPhys
     public VkPhysicalDeviceSchedulingControlsFeaturesARM sType$Default() { return sType(ARMSchedulingControls.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSchedulingControlsFeaturesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #schedulingControls} field. */
+    /** Sets the specified value to the {@code schedulingControls} field. */
     public VkPhysicalDeviceSchedulingControlsFeaturesARM schedulingControls(@NativeType("VkBool32") boolean value) { nschedulingControls(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,7 +292,7 @@ public class VkPhysicalDeviceSchedulingControlsFeaturesARM extends Struct<VkPhys
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSchedulingControlsFeaturesARM.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSchedulingControlsFeaturesARM#schedulingControls} field. */
+        /** @return the value of the {@code schedulingControls} field. */
         @NativeType("VkBool32")
         public boolean schedulingControls() { return VkPhysicalDeviceSchedulingControlsFeaturesARM.nschedulingControls(address()) != 0; }
 
@@ -316,7 +302,7 @@ public class VkPhysicalDeviceSchedulingControlsFeaturesARM extends Struct<VkPhys
         public VkPhysicalDeviceSchedulingControlsFeaturesARM.Buffer sType$Default() { return sType(ARMSchedulingControls.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSchedulingControlsFeaturesARM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSchedulingControlsFeaturesARM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSchedulingControlsFeaturesARM#schedulingControls} field. */
+        /** Sets the specified value to the {@code schedulingControls} field. */
         public VkPhysicalDeviceSchedulingControlsFeaturesARM.Buffer schedulingControls(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceSchedulingControlsFeaturesARM.nschedulingControls(address(), value ? 1 : 0); return this; }
 
     }

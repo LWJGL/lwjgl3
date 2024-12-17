@@ -15,11 +15,7 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to model a Type~1 or Type~2 private dictionary. Note that for Multiple Master fonts, each instance has its own Private dictionary.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct PS_PrivateRec {
  *     FT_Int unique_id;
  *     FT_Int lenIV;
@@ -40,13 +36,13 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Byte num_snap_heights;
  *     FT_Bool force_bold;
  *     FT_Bool round_stem_up;
- *     FT_Short {@link #snap_widths}[13];
- *     FT_Short {@link #snap_heights}[13];
+ *     FT_Short snap_widths[13];
+ *     FT_Short snap_heights[13];
  *     FT_Fixed expansion_factor;
  *     FT_Long language_group;
  *     FT_Long password;
  *     FT_Short min_feature[2];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct PS_PrivateRec")
 public class PS_Private extends Struct<PS_Private> {
@@ -241,16 +237,16 @@ public class PS_Private extends Struct<PS_Private> {
     /** @return the value of the {@code round_stem_up} field. */
     @NativeType("FT_Bool")
     public boolean round_stem_up() { return nround_stem_up(address()); }
-    /** including std width */
+    /** @return a {@link ShortBuffer} view of the {@code snap_widths} field. */
     @NativeType("FT_Short[13]")
     public ShortBuffer snap_widths() { return nsnap_widths(address()); }
-    /** including std width */
+    /** @return the value at the specified index of the {@code snap_widths} field. */
     @NativeType("FT_Short")
     public short snap_widths(int index) { return nsnap_widths(address(), index); }
-    /** including std height */
+    /** @return a {@link ShortBuffer} view of the {@code snap_heights} field. */
     @NativeType("FT_Short[13]")
     public ShortBuffer snap_heights() { return nsnap_heights(address()); }
-    /** including std height */
+    /** @return the value at the specified index of the {@code snap_heights} field. */
     @NativeType("FT_Short")
     public short snap_heights(int index) { return nsnap_heights(address(), index); }
     /** @return the value of the {@code expansion_factor} field. */
@@ -503,16 +499,16 @@ public class PS_Private extends Struct<PS_Private> {
         /** @return the value of the {@code round_stem_up} field. */
         @NativeType("FT_Bool")
         public boolean round_stem_up() { return PS_Private.nround_stem_up(address()); }
-        /** @return a {@link ShortBuffer} view of the {@link PS_Private#snap_widths} field. */
+        /** @return a {@link ShortBuffer} view of the {@code snap_widths} field. */
         @NativeType("FT_Short[13]")
         public ShortBuffer snap_widths() { return PS_Private.nsnap_widths(address()); }
-        /** @return the value at the specified index of the {@link PS_Private#snap_widths} field. */
+        /** @return the value at the specified index of the {@code snap_widths} field. */
         @NativeType("FT_Short")
         public short snap_widths(int index) { return PS_Private.nsnap_widths(address(), index); }
-        /** @return a {@link ShortBuffer} view of the {@link PS_Private#snap_heights} field. */
+        /** @return a {@link ShortBuffer} view of the {@code snap_heights} field. */
         @NativeType("FT_Short[13]")
         public ShortBuffer snap_heights() { return PS_Private.nsnap_heights(address()); }
-        /** @return the value at the specified index of the {@link PS_Private#snap_heights} field. */
+        /** @return the value at the specified index of the {@code snap_heights} field. */
         @NativeType("FT_Short")
         public short snap_heights(int index) { return PS_Private.nsnap_heights(address(), index); }
         /** @return the value of the {@code expansion_factor} field. */

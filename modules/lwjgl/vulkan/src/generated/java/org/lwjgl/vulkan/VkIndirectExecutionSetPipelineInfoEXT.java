@@ -16,45 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct specifying parameters of a newly created indirect execution set containing only pipelines.
- * 
- * <h5>Description</h5>
- * 
- * <p>The characteristics of {@code initialPipeline} will be used to validate all pipelines added to the set even if they are removed from the set or destroyed.</p>
- * 
- * <p>When an Indirect Execution Set created with pipelines is used, {@code initialPipeline} constitutes the initial shader state.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesPipelineBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a> does not contain {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}, the {@code VkPipelineBindPoint} of {@code initialPipeline} <b>must</b> not be {@link VK10#VK_PIPELINE_BIND_POINT_COMPUTE PIPELINE_BIND_POINT_COMPUTE}</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesPipelineBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a> does not contain {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}, the {@code VkPipelineBindPoint} of {@code initialPipeline} <b>must</b> not be {@link VK10#VK_PIPELINE_BIND_POINT_GRAPHICS PIPELINE_BIND_POINT_GRAPHICS}</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesPipelineBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a> does not contain ray tracing stages, the {@code VkPipelineBindPoint} of {@code initialPipeline} <b>must</b> not be {@link KHRRayTracingPipeline#VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR PIPELINE_BIND_POINT_RAY_TRACING_KHR}</li>
- * <li>{@code maxPipelineCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::maxIndirectPipelineCount}</li>
- * <li>{@code initialPipeline} <b>must</b> not use descriptors of type {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC}</li>
- * <li>{@code initialPipeline} <b>must</b> have been created with {@link EXTDeviceGeneratedCommands#VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT}</li>
- * <li>{@code initialPipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectExecutionSetInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectExecutionSetPipelineInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipeline {@link #initialPipeline};
- *     uint32_t {@link #maxPipelineCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipeline initialPipeline;
+ *     uint32_t maxPipelineCount;
+ * }}</pre>
  */
 public class VkIndirectExecutionSetPipelineInfoEXT extends Struct<VkIndirectExecutionSetPipelineInfoEXT> implements NativeResource {
 
@@ -110,28 +78,28 @@ public class VkIndirectExecutionSetPipelineInfoEXT extends Struct<VkIndirectExec
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the initial pipeline for the set. This pipeline will be automatically added to the set at index 0. */
+    /** @return the value of the {@code initialPipeline} field. */
     @NativeType("VkPipeline")
     public long initialPipeline() { return ninitialPipeline(address()); }
-    /** the maximum number of pipelines stored in the set. */
+    /** @return the value of the {@code maxPipelineCount} field. */
     @NativeType("uint32_t")
     public int maxPipelineCount() { return nmaxPipelineCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkIndirectExecutionSetPipelineInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT} value to the {@code sType} field. */
     public VkIndirectExecutionSetPipelineInfoEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkIndirectExecutionSetPipelineInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #initialPipeline} field. */
+    /** Sets the specified value to the {@code initialPipeline} field. */
     public VkIndirectExecutionSetPipelineInfoEXT initialPipeline(@NativeType("VkPipeline") long value) { ninitialPipeline(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxPipelineCount} field. */
+    /** Sets the specified value to the {@code maxPipelineCount} field. */
     public VkIndirectExecutionSetPipelineInfoEXT maxPipelineCount(@NativeType("uint32_t") int value) { nmaxPipelineCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -333,28 +301,28 @@ public class VkIndirectExecutionSetPipelineInfoEXT extends Struct<VkIndirectExec
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkIndirectExecutionSetPipelineInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkIndirectExecutionSetPipelineInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetPipelineInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkIndirectExecutionSetPipelineInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetPipelineInfoEXT#initialPipeline} field. */
+        /** @return the value of the {@code initialPipeline} field. */
         @NativeType("VkPipeline")
         public long initialPipeline() { return VkIndirectExecutionSetPipelineInfoEXT.ninitialPipeline(address()); }
-        /** @return the value of the {@link VkIndirectExecutionSetPipelineInfoEXT#maxPipelineCount} field. */
+        /** @return the value of the {@code maxPipelineCount} field. */
         @NativeType("uint32_t")
         public int maxPipelineCount() { return VkIndirectExecutionSetPipelineInfoEXT.nmaxPipelineCount(address()); }
 
-        /** Sets the specified value to the {@link VkIndirectExecutionSetPipelineInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkIndirectExecutionSetPipelineInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkIndirectExecutionSetPipelineInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT} value to the {@link VkIndirectExecutionSetPipelineInfoEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT} value to the {@code sType} field. */
         public VkIndirectExecutionSetPipelineInfoEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetPipelineInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkIndirectExecutionSetPipelineInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkIndirectExecutionSetPipelineInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetPipelineInfoEXT#initialPipeline} field. */
+        /** Sets the specified value to the {@code initialPipeline} field. */
         public VkIndirectExecutionSetPipelineInfoEXT.Buffer initialPipeline(@NativeType("VkPipeline") long value) { VkIndirectExecutionSetPipelineInfoEXT.ninitialPipeline(address(), value); return this; }
-        /** Sets the specified value to the {@link VkIndirectExecutionSetPipelineInfoEXT#maxPipelineCount} field. */
+        /** Sets the specified value to the {@code maxPipelineCount} field. */
         public VkIndirectExecutionSetPipelineInfoEXT.Buffer maxPipelineCount(@NativeType("uint32_t") int value) { VkIndirectExecutionSetPipelineInfoEXT.nmaxPipelineCount(address(), value); return this; }
 
     }

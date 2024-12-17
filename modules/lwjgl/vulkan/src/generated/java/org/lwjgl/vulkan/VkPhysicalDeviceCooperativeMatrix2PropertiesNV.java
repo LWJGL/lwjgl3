@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing cooperative matrix properties supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCooperativeMatrix2PropertiesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #cooperativeMatrixWorkgroupScopeMaxWorkgroupSize};
- *     uint32_t {@link #cooperativeMatrixFlexibleDimensionsMaxDimension};
- *     uint32_t {@link #cooperativeMatrixWorkgroupScopeReservedSharedMemory};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t cooperativeMatrixWorkgroupScopeMaxWorkgroupSize;
+ *     uint32_t cooperativeMatrixFlexibleDimensionsMaxDimension;
+ *     uint32_t cooperativeMatrixWorkgroupScopeReservedSharedMemory;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCooperativeMatrix2PropertiesNV extends Struct<VkPhysicalDeviceCooperativeMatrix2PropertiesNV> implements NativeResource {
 
@@ -96,27 +82,27 @@ public class VkPhysicalDeviceCooperativeMatrix2PropertiesNV extends Struct<VkPhy
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum number of invocations in a workgroup when the module uses {@code OpTypeCooperativeMatrixKHR} with {@code Scope} equal to {@code Workgroup}. */
+    /** @return the value of the {@code cooperativeMatrixWorkgroupScopeMaxWorkgroupSize} field. */
     @NativeType("uint32_t")
     public int cooperativeMatrixWorkgroupScopeMaxWorkgroupSize() { return ncooperativeMatrixWorkgroupScopeMaxWorkgroupSize(address()); }
-    /** the maximum supported dimension for cooperative matrix types when the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-cooperativeMatrixFlexibleDimensions">{@code cooperativeMatrixFlexibleDimensions}</a> feature is enabled. */
+    /** @return the value of the {@code cooperativeMatrixFlexibleDimensionsMaxDimension} field. */
     @NativeType("uint32_t")
     public int cooperativeMatrixFlexibleDimensionsMaxDimension() { return ncooperativeMatrixFlexibleDimensionsMaxDimension(address()); }
-    /** the number of bytes of shared memory reserved for the implementation when the module uses {@code OpTypeCooperativeMatrixKHR} with {@code Scope} equal to {@code Workgroup}. */
+    /** @return the value of the {@code cooperativeMatrixWorkgroupScopeReservedSharedMemory} field. */
     @NativeType("uint32_t")
     public int cooperativeMatrixWorkgroupScopeReservedSharedMemory() { return ncooperativeMatrixWorkgroupScopeReservedSharedMemory(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceCooperativeMatrix2PropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceCooperativeMatrix2PropertiesNV sType$Default() { return sType(NVCooperativeMatrix2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCooperativeMatrix2PropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,27 +298,27 @@ public class VkPhysicalDeviceCooperativeMatrix2PropertiesNV extends Struct<VkPhy
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCooperativeMatrix2PropertiesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCooperativeMatrix2PropertiesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV#cooperativeMatrixWorkgroupScopeMaxWorkgroupSize} field. */
+        /** @return the value of the {@code cooperativeMatrixWorkgroupScopeMaxWorkgroupSize} field. */
         @NativeType("uint32_t")
         public int cooperativeMatrixWorkgroupScopeMaxWorkgroupSize() { return VkPhysicalDeviceCooperativeMatrix2PropertiesNV.ncooperativeMatrixWorkgroupScopeMaxWorkgroupSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV#cooperativeMatrixFlexibleDimensionsMaxDimension} field. */
+        /** @return the value of the {@code cooperativeMatrixFlexibleDimensionsMaxDimension} field. */
         @NativeType("uint32_t")
         public int cooperativeMatrixFlexibleDimensionsMaxDimension() { return VkPhysicalDeviceCooperativeMatrix2PropertiesNV.ncooperativeMatrixFlexibleDimensionsMaxDimension(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV#cooperativeMatrixWorkgroupScopeReservedSharedMemory} field. */
+        /** @return the value of the {@code cooperativeMatrixWorkgroupScopeReservedSharedMemory} field. */
         @NativeType("uint32_t")
         public int cooperativeMatrixWorkgroupScopeReservedSharedMemory() { return VkPhysicalDeviceCooperativeMatrix2PropertiesNV.ncooperativeMatrixWorkgroupScopeReservedSharedMemory(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceCooperativeMatrix2PropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCooperativeMatrix2PropertiesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV} value to the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV#sType} field. */
+        /** Sets the {@link NVCooperativeMatrix2#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceCooperativeMatrix2PropertiesNV.Buffer sType$Default() { return sType(NVCooperativeMatrix2.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCooperativeMatrix2PropertiesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCooperativeMatrix2PropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCooperativeMatrix2PropertiesNV.npNext(address(), value); return this; }
 
     }

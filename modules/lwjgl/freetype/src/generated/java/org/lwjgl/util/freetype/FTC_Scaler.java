@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used to describe a given character size in either pixels or points to the cache manager. See {@link FreeType#FTC_Manager_LookupSize}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FTC_ScalerRec {
  *     FTC_FaceID face_id;
  *     FT_UInt width;
@@ -26,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     FT_Int pixel;
  *     FT_UInt x_res;
  *     FT_UInt y_res;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FTC_ScalerRec")
 public class FTC_Scaler extends Struct<FTC_Scaler> {

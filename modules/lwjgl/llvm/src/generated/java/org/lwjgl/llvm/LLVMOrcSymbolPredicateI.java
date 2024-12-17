@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMOrc#LLVMOrcCreateDynamicLibrarySearchGeneratorForProcess OrcCreateDynamicLibrarySearchGeneratorForProcess} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMOrcSymbolStringPoolEntryRef Sym
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcSymbolPredicate} */
 @FunctionalInterface
 @NativeType("LLVMOrcSymbolPredicate")
 public interface LLVMOrcSymbolPredicateI extends CallbackI {
@@ -45,7 +35,7 @@ public interface LLVMOrcSymbolPredicateI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** Predicate function for {@code SymbolStringPoolEntries}. */
+    /** {@code int (* LLVMOrcSymbolPredicate) (void * Ctx, LLVMOrcSymbolStringPoolEntryRef Sym)} */
     int invoke(@NativeType("void *") long Ctx, @NativeType("LLVMOrcSymbolStringPoolEntryRef") long Sym);
 
 }

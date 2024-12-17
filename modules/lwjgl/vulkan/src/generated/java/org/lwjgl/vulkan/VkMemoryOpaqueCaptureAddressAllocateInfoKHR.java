@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkMemoryOpaqueCaptureAddressAllocateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryOpaqueCaptureAddressAllocateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint64_t opaqueCaptureAddress;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkMemoryOpaqueCaptureAddressAllocateInfoKHR extends VkMemoryOpaqueCaptureAddressAllocateInfo {
 

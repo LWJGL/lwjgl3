@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1QuantizationFlags {
  *     uint32_t using_qmatrix : 1;
  *     uint32_t diff_uv_delta : 1;
  *     uint32_t reserved : 30;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1QuantizationFlags extends Struct<StdVideoAV1QuantizationFlags> implements NativeResource {
 

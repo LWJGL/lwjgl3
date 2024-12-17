@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkCommandBufferInheritanceRenderingInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCommandBufferInheritanceRenderingInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkFormat depthAttachmentFormat;
  *     VkFormat stencilAttachmentFormat;
  *     VkSampleCountFlagBits rasterizationSamples;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkCommandBufferInheritanceRenderingInfoKHR extends VkCommandBufferInheritanceRenderingInfo {
 

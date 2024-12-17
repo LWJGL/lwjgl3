@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing support for graphics pipeline libraries.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #graphicsPipelineLibrary};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 graphicsPipelineLibrary;
+ * }}</pre>
  */
 public class VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT extends Struct<VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT extends Struct<V
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-library">graphics pipeline libraries</a>. */
+    /** @return the value of the {@code graphicsPipelineLibrary} field. */
     @NativeType("VkBool32")
     public boolean graphicsPipelineLibrary() { return ngraphicsPipelineLibrary(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT sType$Default() { return sType(EXTGraphicsPipelineLibrary.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #graphicsPipelineLibrary} field. */
+    /** Sets the specified value to the {@code graphicsPipelineLibrary} field. */
     public VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT graphicsPipelineLibrary(@NativeType("VkBool32") boolean value) { ngraphicsPipelineLibrary(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT extends Struct<V
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT#graphicsPipelineLibrary} field. */
+        /** @return the value of the {@code graphicsPipelineLibrary} field. */
         @NativeType("VkBool32")
         public boolean graphicsPipelineLibrary() { return VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.ngraphicsPipelineLibrary(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT} value to the {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTGraphicsPipelineLibrary#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.Buffer sType$Default() { return sType(EXTGraphicsPipelineLibrary.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT#graphicsPipelineLibrary} field. */
+        /** Sets the specified value to the {@code graphicsPipelineLibrary} field. */
         public VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.Buffer graphicsPipelineLibrary(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT.ngraphicsPipelineLibrary(address(), value ? 1 : 0); return this; }
 
     }

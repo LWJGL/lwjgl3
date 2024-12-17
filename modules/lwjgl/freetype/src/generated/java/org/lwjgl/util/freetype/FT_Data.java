@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Read-only binary data represented as a pointer and a length.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Data {
  *     FT_Byte const * pointer;
  *     FT_UInt length;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Data extends Struct<FT_Data> implements NativeResource {
 

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkTimelineSemaphoreSubmitInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkTimelineSemaphoreSubmitInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint64_t const * pWaitSemaphoreValues;
  *     uint32_t signalSemaphoreValueCount;
  *     uint64_t const * pSignalSemaphoreValues;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkTimelineSemaphoreSubmitInfoKHR extends VkTimelineSemaphoreSubmitInfo {
 

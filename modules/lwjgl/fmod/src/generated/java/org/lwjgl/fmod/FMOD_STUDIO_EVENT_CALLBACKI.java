@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_STUDIO_EVENT_CALLBACK_TYPE type,
- *     FMOD_STUDIO_EVENTINSTANCE *event,
- *     void *parameters
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_STUDIO_EVENT_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_STUDIO_EVENT_CALLBACK")
 public interface FMOD_STUDIO_EVENT_CALLBACKI extends CallbackI {
@@ -45,6 +36,7 @@ public interface FMOD_STUDIO_EVENT_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_STUDIO_EVENT_CALLBACK) (FMOD_STUDIO_EVENT_CALLBACK_TYPE type, FMOD_STUDIO_EVENTINSTANCE * event, void * parameters)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("FMOD_STUDIO_EVENT_CALLBACK_TYPE") int type, @NativeType("FMOD_STUDIO_EVENTINSTANCE *") long event, @NativeType("void *") long parameters);
 
 }

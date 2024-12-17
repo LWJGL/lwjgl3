@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeAV1OperatingPointInfoFlags {
  *     uint32_t decoder_model_present_for_this_op : 1;
  *     uint32_t low_delay_mode_flag : 1;
  *     uint32_t initial_display_delay_present_for_this_op : 1;
  *     uint32_t reserved : 29;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeAV1OperatingPointInfoFlags extends Struct<StdVideoEncodeAV1OperatingPointInfoFlags> implements NativeResource {
 

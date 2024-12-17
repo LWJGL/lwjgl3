@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceShaderTerminateInvocationFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 shaderTerminateInvocation;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR extends VkPhysicalDeviceShaderTerminateInvocationFeatures {
 

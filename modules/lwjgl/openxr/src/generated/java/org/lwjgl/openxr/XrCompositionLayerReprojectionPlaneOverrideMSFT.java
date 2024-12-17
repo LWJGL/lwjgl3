@@ -16,38 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describe the parameters to override the reprojection plane.
- * 
- * <h5>Description</h5>
- * 
- * <p>A runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if the {@code normal} vector deviates by more than 1% from unit length.</p>
- * 
- * <p>Adding a reprojection plane override <b>may</b> benefit various reprojection modes including {@link MSFTCompositionLayerReprojection#XR_REPROJECTION_MODE_DEPTH_MSFT REPROJECTION_MODE_DEPTH_MSFT}, {@link MSFTCompositionLayerReprojection#XR_REPROJECTION_MODE_PLANAR_FROM_DEPTH_MSFT REPROJECTION_MODE_PLANAR_FROM_DEPTH_MSFT} and {@link MSFTCompositionLayerReprojection#XR_REPROJECTION_MODE_PLANAR_MANUAL_MSFT REPROJECTION_MODE_PLANAR_MANUAL_MSFT}.</p>
- * 
- * <p>When application choose {@link MSFTCompositionLayerReprojection#XR_REPROJECTION_MODE_ORIENTATION_ONLY_MSFT REPROJECTION_MODE_ORIENTATION_ONLY_MSFT} mode, the reprojection plane override <b>may</b> be ignored by the runtime.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTCompositionLayerReprojection XR_MSFT_composition_layer_reprojection} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerReprojectionPlaneOverrideMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrVector3f}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerReprojectionPlaneOverrideMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrVector3f XrVector3f} {@link #position$ position};
- *     {@link XrVector3f XrVector3f} {@link #normal};
- *     {@link XrVector3f XrVector3f} {@link #velocity};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrVector3f XrVector3f} position;
+ *     {@link XrVector3f XrVector3f} normal;
+ *     {@link XrVector3f XrVector3f} velocity;
+ * }}</pre>
  */
 public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCompositionLayerReprojectionPlaneOverrideMSFT> implements NativeResource {
 
@@ -106,36 +82,36 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** describes the position of the focus plane represented in the corresponding {@link XrCompositionLayerProjection}{@code ::space}. */
+    /** @return a {@link XrVector3f} view of the {@code position} field. */
     public XrVector3f position$() { return nposition$(address()); }
-    /** a unit vector describes the focus plane normal represented in the corresponding {@link XrCompositionLayerProjection}{@code ::space}. */
+    /** @return a {@link XrVector3f} view of the {@code normal} field. */
     public XrVector3f normal() { return nnormal(address()); }
-    /** a velocity of the position in the corresponding {@link XrCompositionLayerProjection}{@code ::space} measured in meters per second. */
+    /** @return a {@link XrVector3f} view of the {@code velocity} field. */
     public XrVector3f velocity() { return nvelocity(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT} value to the {@code type} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT type$Default() { return type(MSFTCompositionLayerReprojection.XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrVector3f} to the {@link #position$} field. */
+    /** Copies the specified {@link XrVector3f} to the {@code position} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT position$(XrVector3f value) { nposition$(address(), value); return this; }
-    /** Passes the {@link #position$} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code position} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT position$(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(position$()); return this; }
-    /** Copies the specified {@link XrVector3f} to the {@link #normal} field. */
+    /** Copies the specified {@link XrVector3f} to the {@code normal} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT normal(XrVector3f value) { nnormal(address(), value); return this; }
-    /** Passes the {@link #normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT normal(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(normal()); return this; }
-    /** Copies the specified {@link XrVector3f} to the {@link #velocity} field. */
+    /** Copies the specified {@link XrVector3f} to the {@code velocity} field. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT velocity(XrVector3f value) { nvelocity(address(), value); return this; }
-    /** Passes the {@link #velocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code velocity} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerReprojectionPlaneOverrideMSFT velocity(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(velocity()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,36 +319,36 @@ public class XrCompositionLayerReprojectionPlaneOverrideMSFT extends Struct<XrCo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerReprojectionPlaneOverrideMSFT.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerReprojectionPlaneOverrideMSFT.nnext(address()); }
-        /** @return a {@link XrVector3f} view of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#position$} field. */
+        /** @return a {@link XrVector3f} view of the {@code position} field. */
         public XrVector3f position$() { return XrCompositionLayerReprojectionPlaneOverrideMSFT.nposition$(address()); }
-        /** @return a {@link XrVector3f} view of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#normal} field. */
+        /** @return a {@link XrVector3f} view of the {@code normal} field. */
         public XrVector3f normal() { return XrCompositionLayerReprojectionPlaneOverrideMSFT.nnormal(address()); }
-        /** @return a {@link XrVector3f} view of the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#velocity} field. */
+        /** @return a {@link XrVector3f} view of the {@code velocity} field. */
         public XrVector3f velocity() { return XrCompositionLayerReprojectionPlaneOverrideMSFT.nvelocity(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerReprojectionPlaneOverrideMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT} value to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#type} field. */
+        /** Sets the {@link MSFTCompositionLayerReprojection#XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT} value to the {@code type} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer type$Default() { return type(MSFTCompositionLayerReprojection.XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT); }
-        /** Sets the specified value to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerReprojectionPlaneOverrideMSFT.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrVector3f} to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#position$} field. */
+        /** Copies the specified {@link XrVector3f} to the {@code position} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer position$(XrVector3f value) { XrCompositionLayerReprojectionPlaneOverrideMSFT.nposition$(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#position$} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code position} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer position$(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(position$()); return this; }
-        /** Copies the specified {@link XrVector3f} to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#normal} field. */
+        /** Copies the specified {@link XrVector3f} to the {@code normal} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer normal(XrVector3f value) { XrCompositionLayerReprojectionPlaneOverrideMSFT.nnormal(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer normal(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(normal()); return this; }
-        /** Copies the specified {@link XrVector3f} to the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#velocity} field. */
+        /** Copies the specified {@link XrVector3f} to the {@code velocity} field. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer velocity(XrVector3f value) { XrCompositionLayerReprojectionPlaneOverrideMSFT.nvelocity(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerReprojectionPlaneOverrideMSFT#velocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code velocity} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerReprojectionPlaneOverrideMSFT.Buffer velocity(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(velocity()); return this; }
 
     }

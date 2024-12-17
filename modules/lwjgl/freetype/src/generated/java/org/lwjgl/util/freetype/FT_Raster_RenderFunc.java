@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     FT_Raster raster,
- *     FT_Raster_Params const *params
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Raster_RenderFunc} */
 public abstract class FT_Raster_RenderFunc extends Callback implements FT_Raster_RenderFuncI {
 
     /**

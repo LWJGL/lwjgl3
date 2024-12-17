@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkBufferDeviceAddressInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferDeviceAddressInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkBuffer buffer;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkBufferDeviceAddressInfoEXT extends VkBufferDeviceAddressInfo {
 

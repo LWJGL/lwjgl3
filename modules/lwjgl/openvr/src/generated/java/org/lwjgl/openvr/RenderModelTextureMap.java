@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A texture map for use on a render model.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct RenderModel_TextureMap_t {
  *     uint16_t unWidth;
- *     uint16_t {@link #unHeight};
- *     uint8_t const * {@link #rubTextureMapData};
- *     EVRRenderModelTextureFormat {@link #format};
+ *     uint16_t unHeight;
+ *     uint8_t const * rubTextureMapData;
+ *     EVRRenderModelTextureFormat format;
  *     uint16_t unMipLevels;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct RenderModel_TextureMap_t")
 public class RenderModelTextureMap extends Struct<RenderModelTextureMap> implements NativeResource {
@@ -91,17 +87,13 @@ public class RenderModelTextureMap extends Struct<RenderModelTextureMap> impleme
     /** @return the value of the {@code unWidth} field. */
     @NativeType("uint16_t")
     public short unWidth() { return nunWidth(address()); }
-    /** width and height of the texture map in pixels */
+    /** @return the value of the {@code unHeight} field. */
     @NativeType("uint16_t")
     public short unHeight() { return nunHeight(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return Map texture data.
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code rubTextureMapData} field. */
     @NativeType("uint8_t const *")
     public ByteBuffer rubTextureMapData(int capacity) { return nrubTextureMapData(address(), capacity); }
-    /** one of:<br><table><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_RGBA8_SRGB}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC2}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC4}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_BC7_SRGB}</td></tr><tr><td>{@link VR#EVRRenderModelTextureFormat_VRRenderModelTextureFormat_RGBA16_FLOAT}</td></tr></table> */
+    /** @return the value of the {@code format} field. */
     @NativeType("EVRRenderModelTextureFormat")
     public int format() { return nformat(address()); }
     /** @return the value of the {@code unMipLevels} field. */
@@ -295,17 +287,13 @@ public class RenderModelTextureMap extends Struct<RenderModelTextureMap> impleme
         /** @return the value of the {@code unWidth} field. */
         @NativeType("uint16_t")
         public short unWidth() { return RenderModelTextureMap.nunWidth(address()); }
-        /** @return the value of the {@link RenderModelTextureMap#unHeight} field. */
+        /** @return the value of the {@code unHeight} field. */
         @NativeType("uint16_t")
         public short unHeight() { return RenderModelTextureMap.nunHeight(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@link RenderModelTextureMap#rubTextureMapData} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code rubTextureMapData} field. */
         @NativeType("uint8_t const *")
         public ByteBuffer rubTextureMapData(int capacity) { return RenderModelTextureMap.nrubTextureMapData(address(), capacity); }
-        /** @return the value of the {@link RenderModelTextureMap#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("EVRRenderModelTextureFormat")
         public int format() { return RenderModelTextureMap.nformat(address()); }
         /** @return the value of the {@code unMipLevels} field. */

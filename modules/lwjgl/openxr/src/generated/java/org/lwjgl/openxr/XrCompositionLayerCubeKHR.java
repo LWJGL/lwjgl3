@@ -17,42 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Cube map layer composition info.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrCompositionLayerCubeKHR} contains the information needed to render a cube map when calling {@link XR10#xrEndFrame EndFrame}. {@link XrCompositionLayerCubeKHR} is an alias type for the base struct {@link XrCompositionLayerBaseHeader} used in {@link XrFrameEndInfo}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHRCompositionLayerCube XR_KHR_composition_layer_cube} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerCubeKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHRCompositionLayerCube#XR_TYPE_COMPOSITION_LAYER_CUBE_KHR TYPE_COMPOSITION_LAYER_CUBE_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code layerFlags} <b>must</b> be 0 or a valid combination of {@code XrCompositionLayerFlagBits} values</li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>{@code eyeVisibility} <b>must</b> be a valid {@code XrEyeVisibility} value</li>
- * <li>{@code swapchain} <b>must</b> be a valid {@code XrSwapchain} handle</li>
- * <li>Both of {@code space} and {@code swapchain} <b>must</b> have been created, allocated, or retrieved from the same {@code XrSession}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}, {@link XrFrameEndInfo}, {@link XrQuaternionf}, {@link XR10#xrEndFrame EndFrame}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerCubeKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrCompositionLayerFlags {@link #layerFlags};
- *     XrSpace {@link #space};
- *     XrEyeVisibility {@link #eyeVisibility};
- *     XrSwapchain {@link #swapchain};
- *     uint32_t {@link #imageArrayIndex};
- *     {@link XrQuaternionf XrQuaternionf} {@link #orientation};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrCompositionLayerFlags layerFlags;
+ *     XrSpace space;
+ *     XrEyeVisibility eyeVisibility;
+ *     XrSwapchain swapchain;
+ *     uint32_t imageArrayIndex;
+ *     {@link XrQuaternionf XrQuaternionf} orientation;
+ * }}</pre>
  */
 public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR> implements NativeResource {
 
@@ -120,49 +95,49 @@ public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** any flags to apply to this layer. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerFlags")
     public long layerFlags() { return nlayerFlags(address()); }
-    /** the {@code XrSpace} in which the {@code orientation} of the cube layer is evaluated over time. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
-    /** the eye represented by this layer. */
+    /** @return the value of the {@code eyeVisibility} field. */
     @NativeType("XrEyeVisibility")
     public int eyeVisibility() { return neyeVisibility(address()); }
-    /** the swapchain, which <b>must</b> have been created with a {@link XrSwapchainCreateInfo}{@code ::faceCount} of 6. */
+    /** @return the value of the {@code swapchain} field. */
     @NativeType("XrSwapchain")
     public long swapchain() { return nswapchain(address()); }
-    /** the image array index, with 0 meaning the first or only array element. */
+    /** @return the value of the {@code imageArrayIndex} field. */
     @NativeType("uint32_t")
     public int imageArrayIndex() { return nimageArrayIndex(address()); }
-    /** the orientation of the environment map in the {@code space}. */
+    /** @return a {@link XrQuaternionf} view of the {@code orientation} field. */
     public XrQuaternionf orientation() { return norientation(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerCubeKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRCompositionLayerCube#XR_TYPE_COMPOSITION_LAYER_CUBE_KHR TYPE_COMPOSITION_LAYER_CUBE_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHRCompositionLayerCube#XR_TYPE_COMPOSITION_LAYER_CUBE_KHR TYPE_COMPOSITION_LAYER_CUBE_KHR} value to the {@code type} field. */
     public XrCompositionLayerCubeKHR type$Default() { return type(KHRCompositionLayerCube.XR_TYPE_COMPOSITION_LAYER_CUBE_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerCubeKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #layerFlags} field. */
+    /** Sets the specified value to the {@code layerFlags} field. */
     public XrCompositionLayerCubeKHR layerFlags(@NativeType("XrCompositionLayerFlags") long value) { nlayerFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrCompositionLayerCubeKHR space(XrSpace value) { nspace(address(), value); return this; }
-    /** Sets the specified value to the {@link #eyeVisibility} field. */
+    /** Sets the specified value to the {@code eyeVisibility} field. */
     public XrCompositionLayerCubeKHR eyeVisibility(@NativeType("XrEyeVisibility") int value) { neyeVisibility(address(), value); return this; }
-    /** Sets the specified value to the {@link #swapchain} field. */
+    /** Sets the specified value to the {@code swapchain} field. */
     public XrCompositionLayerCubeKHR swapchain(XrSwapchain value) { nswapchain(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageArrayIndex} field. */
+    /** Sets the specified value to the {@code imageArrayIndex} field. */
     public XrCompositionLayerCubeKHR imageArrayIndex(@NativeType("uint32_t") int value) { nimageArrayIndex(address(), value); return this; }
-    /** Copies the specified {@link XrQuaternionf} to the {@link #orientation} field. */
+    /** Copies the specified {@link XrQuaternionf} to the {@code orientation} field. */
     public XrCompositionLayerCubeKHR orientation(XrQuaternionf value) { norientation(address(), value); return this; }
-    /** Passes the {@link #orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerCubeKHR orientation(java.util.function.Consumer<XrQuaternionf> consumer) { consumer.accept(orientation()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -408,49 +383,49 @@ public class XrCompositionLayerCubeKHR extends Struct<XrCompositionLayerCubeKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerCubeKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerCubeKHR.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerCubeKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerCubeKHR.nnext(address()); }
-        /** @return the value of the {@link XrCompositionLayerCubeKHR#layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerFlags")
         public long layerFlags() { return XrCompositionLayerCubeKHR.nlayerFlags(address()); }
-        /** @return the value of the {@link XrCompositionLayerCubeKHR#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrCompositionLayerCubeKHR.nspace(address()); }
-        /** @return the value of the {@link XrCompositionLayerCubeKHR#eyeVisibility} field. */
+        /** @return the value of the {@code eyeVisibility} field. */
         @NativeType("XrEyeVisibility")
         public int eyeVisibility() { return XrCompositionLayerCubeKHR.neyeVisibility(address()); }
-        /** @return the value of the {@link XrCompositionLayerCubeKHR#swapchain} field. */
+        /** @return the value of the {@code swapchain} field. */
         @NativeType("XrSwapchain")
         public long swapchain() { return XrCompositionLayerCubeKHR.nswapchain(address()); }
-        /** @return the value of the {@link XrCompositionLayerCubeKHR#imageArrayIndex} field. */
+        /** @return the value of the {@code imageArrayIndex} field. */
         @NativeType("uint32_t")
         public int imageArrayIndex() { return XrCompositionLayerCubeKHR.nimageArrayIndex(address()); }
-        /** @return a {@link XrQuaternionf} view of the {@link XrCompositionLayerCubeKHR#orientation} field. */
+        /** @return a {@link XrQuaternionf} view of the {@code orientation} field. */
         public XrQuaternionf orientation() { return XrCompositionLayerCubeKHR.norientation(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerCubeKHR.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerCubeKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRCompositionLayerCube#XR_TYPE_COMPOSITION_LAYER_CUBE_KHR TYPE_COMPOSITION_LAYER_CUBE_KHR} value to the {@link XrCompositionLayerCubeKHR#type} field. */
+        /** Sets the {@link KHRCompositionLayerCube#XR_TYPE_COMPOSITION_LAYER_CUBE_KHR TYPE_COMPOSITION_LAYER_CUBE_KHR} value to the {@code type} field. */
         public XrCompositionLayerCubeKHR.Buffer type$Default() { return type(KHRCompositionLayerCube.XR_TYPE_COMPOSITION_LAYER_CUBE_KHR); }
-        /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerCubeKHR.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerCubeKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#layerFlags} field. */
+        /** Sets the specified value to the {@code layerFlags} field. */
         public XrCompositionLayerCubeKHR.Buffer layerFlags(@NativeType("XrCompositionLayerFlags") long value) { XrCompositionLayerCubeKHR.nlayerFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrCompositionLayerCubeKHR.Buffer space(XrSpace value) { XrCompositionLayerCubeKHR.nspace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#eyeVisibility} field. */
+        /** Sets the specified value to the {@code eyeVisibility} field. */
         public XrCompositionLayerCubeKHR.Buffer eyeVisibility(@NativeType("XrEyeVisibility") int value) { XrCompositionLayerCubeKHR.neyeVisibility(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#swapchain} field. */
+        /** Sets the specified value to the {@code swapchain} field. */
         public XrCompositionLayerCubeKHR.Buffer swapchain(XrSwapchain value) { XrCompositionLayerCubeKHR.nswapchain(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerCubeKHR#imageArrayIndex} field. */
+        /** Sets the specified value to the {@code imageArrayIndex} field. */
         public XrCompositionLayerCubeKHR.Buffer imageArrayIndex(@NativeType("uint32_t") int value) { XrCompositionLayerCubeKHR.nimageArrayIndex(address(), value); return this; }
-        /** Copies the specified {@link XrQuaternionf} to the {@link XrCompositionLayerCubeKHR#orientation} field. */
+        /** Copies the specified {@link XrQuaternionf} to the {@code orientation} field. */
         public XrCompositionLayerCubeKHR.Buffer orientation(XrQuaternionf value) { XrCompositionLayerCubeKHR.norientation(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerCubeKHR#orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerCubeKHR.Buffer orientation(java.util.function.Consumer<XrQuaternionf> consumer) { consumer.accept(orientation()); return this; }
 
     }

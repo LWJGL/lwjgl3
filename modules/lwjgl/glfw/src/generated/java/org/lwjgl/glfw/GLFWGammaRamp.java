@@ -17,19 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the gamma ramp for a monitor.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct GLFWgammaramp {
- *     unsigned short * {@link #red};
- *     unsigned short * {@link #green};
- *     unsigned short * {@link #blue};
- *     unsigned int {@link #size};
- * }</code></pre>
- *
- * @since version 3.0
+ *     unsigned short * red;
+ *     unsigned short * green;
+ *     unsigned short * blue;
+ *     unsigned int size;
+ * }}</pre>
  */
 @NativeType("struct GLFWgammaramp")
 public class GLFWGammaRamp extends Struct<GLFWGammaRamp> implements NativeResource {
@@ -86,26 +80,26 @@ public class GLFWGammaRamp extends Struct<GLFWGammaRamp> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an array of values describing the response of the red channel */
+    /** @return a {@link ShortBuffer} view of the data pointed to by the {@code red} field. */
     @NativeType("unsigned short *")
     public ShortBuffer red() { return nred(address()); }
-    /** an array of values describing the response of the green channel */
+    /** @return a {@link ShortBuffer} view of the data pointed to by the {@code green} field. */
     @NativeType("unsigned short *")
     public ShortBuffer green() { return ngreen(address()); }
-    /** an array of values describing the response of the blue channel */
+    /** @return a {@link ShortBuffer} view of the data pointed to by the {@code blue} field. */
     @NativeType("unsigned short *")
     public ShortBuffer blue() { return nblue(address()); }
-    /** the number of elements in each array */
+    /** @return the value of the {@code size} field. */
     @NativeType("unsigned int")
     public int size() { return nsize(address()); }
 
-    /** Sets the address of the specified {@link ShortBuffer} to the {@link #red} field. */
+    /** Sets the address of the specified {@link ShortBuffer} to the {@code red} field. */
     public GLFWGammaRamp red(@NativeType("unsigned short *") ShortBuffer value) { nred(address(), value); return this; }
-    /** Sets the address of the specified {@link ShortBuffer} to the {@link #green} field. */
+    /** Sets the address of the specified {@link ShortBuffer} to the {@code green} field. */
     public GLFWGammaRamp green(@NativeType("unsigned short *") ShortBuffer value) { ngreen(address(), value); return this; }
-    /** Sets the address of the specified {@link ShortBuffer} to the {@link #blue} field. */
+    /** Sets the address of the specified {@link ShortBuffer} to the {@code blue} field. */
     public GLFWGammaRamp blue(@NativeType("unsigned short *") ShortBuffer value) { nblue(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public GLFWGammaRamp size(@NativeType("unsigned int") int value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,26 +331,26 @@ public class GLFWGammaRamp extends Struct<GLFWGammaRamp> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ShortBuffer} view of the data pointed to by the {@link GLFWGammaRamp#red} field. */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@code red} field. */
         @NativeType("unsigned short *")
         public ShortBuffer red() { return GLFWGammaRamp.nred(address()); }
-        /** @return a {@link ShortBuffer} view of the data pointed to by the {@link GLFWGammaRamp#green} field. */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@code green} field. */
         @NativeType("unsigned short *")
         public ShortBuffer green() { return GLFWGammaRamp.ngreen(address()); }
-        /** @return a {@link ShortBuffer} view of the data pointed to by the {@link GLFWGammaRamp#blue} field. */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@code blue} field. */
         @NativeType("unsigned short *")
         public ShortBuffer blue() { return GLFWGammaRamp.nblue(address()); }
-        /** @return the value of the {@link GLFWGammaRamp#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("unsigned int")
         public int size() { return GLFWGammaRamp.nsize(address()); }
 
-        /** Sets the address of the specified {@link ShortBuffer} to the {@link GLFWGammaRamp#red} field. */
+        /** Sets the address of the specified {@link ShortBuffer} to the {@code red} field. */
         public GLFWGammaRamp.Buffer red(@NativeType("unsigned short *") ShortBuffer value) { GLFWGammaRamp.nred(address(), value); return this; }
-        /** Sets the address of the specified {@link ShortBuffer} to the {@link GLFWGammaRamp#green} field. */
+        /** Sets the address of the specified {@link ShortBuffer} to the {@code green} field. */
         public GLFWGammaRamp.Buffer green(@NativeType("unsigned short *") ShortBuffer value) { GLFWGammaRamp.ngreen(address(), value); return this; }
-        /** Sets the address of the specified {@link ShortBuffer} to the {@link GLFWGammaRamp#blue} field. */
+        /** Sets the address of the specified {@link ShortBuffer} to the {@code blue} field. */
         public GLFWGammaRamp.Buffer blue(@NativeType("unsigned short *") ShortBuffer value) { GLFWGammaRamp.nblue(address(), value); return this; }
-        /** Sets the specified value to the {@link GLFWGammaRamp#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public GLFWGammaRamp.Buffer size(@NativeType("unsigned int") int value) { GLFWGammaRamp.nsize(address(), value); return this; }
 
     }

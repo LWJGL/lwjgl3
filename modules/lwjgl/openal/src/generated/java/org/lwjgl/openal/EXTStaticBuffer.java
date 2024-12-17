@@ -13,13 +13,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the {@code AL_EXT_STATIC_BUFFER} extension.
- * 
- * <p>This extension provides a means for the caller to avoid the overhead associated with the {@link AL10#alBufferData BufferData} call which performs a physical copy of the
- * data provided by the caller to internal buffers. When using the {@code AL_EXT_STATIC_BUFFER} extension, OpenAL's internal buffers use the data pointer provided by
- * the caller for all data access.</p>
- */
 public class EXTStaticBuffer {
 
     protected EXTStaticBuffer() {
@@ -28,11 +21,7 @@ public class EXTStaticBuffer {
 
     // --- [ alBufferDataStatic ] ---
 
-    /**
-     * Unsafe version of: {@link #alBufferDataStatic BufferDataStatic}
-     *
-     * @param len the data buffer size, in bytes
-     */
+    /** {@code ALvoid alBufferDataStatic(ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     public static void nalBufferDataStatic(int buffer, int format, long data, int len, int freq) {
         long __functionAddress = AL.getICD().alBufferDataStatic;
         if (CHECKS) {
@@ -41,53 +30,25 @@ public class EXTStaticBuffer {
         invokePV(buffer, format, data, len, freq, __functionAddress);
     }
 
-    /**
-     * Sets the sample data of the specified buffer.
-     *
-     * @param buffer the buffer handle
-     * @param format the data format
-     * @param data   the sample data
-     * @param freq   the data frequency
-     */
+    /** {@code ALvoid alBufferDataStatic(ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") ByteBuffer data, @NativeType("ALsizei") int freq) {
         nalBufferDataStatic(buffer, format, memAddress(data), data.remaining(), freq);
     }
 
-    /**
-     * Sets the sample data of the specified buffer.
-     *
-     * @param buffer the buffer handle
-     * @param format the data format
-     * @param data   the sample data
-     * @param freq   the data frequency
-     */
+    /** {@code ALvoid alBufferDataStatic(ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") ShortBuffer data, @NativeType("ALsizei") int freq) {
         nalBufferDataStatic(buffer, format, memAddress(data), data.remaining() << 1, freq);
     }
 
-    /**
-     * Sets the sample data of the specified buffer.
-     *
-     * @param buffer the buffer handle
-     * @param format the data format
-     * @param data   the sample data
-     * @param freq   the data frequency
-     */
+    /** {@code ALvoid alBufferDataStatic(ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") IntBuffer data, @NativeType("ALsizei") int freq) {
         nalBufferDataStatic(buffer, format, memAddress(data), data.remaining() << 2, freq);
     }
 
-    /**
-     * Sets the sample data of the specified buffer.
-     *
-     * @param buffer the buffer handle
-     * @param format the data format
-     * @param data   the sample data
-     * @param freq   the data frequency
-     */
+    /** {@code ALvoid alBufferDataStatic(ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") FloatBuffer data, @NativeType("ALsizei") int freq) {
         nalBufferDataStatic(buffer, format, memAddress(data), data.remaining() << 2, freq);
@@ -95,11 +56,7 @@ public class EXTStaticBuffer {
 
     // --- [ alBufferDataStaticDirect ] ---
 
-    /**
-     * Unsafe version of: {@link #alBufferDataStaticDirect}
-     *
-     * @param len the data buffer size, in bytes
-     */
+    /** {@code ALvoid alBufferDataStaticDirect(ALCcontext * context, ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     public static void nalBufferDataStaticDirect(long context, int buffer, int format, long data, int len, int freq) {
         long __functionAddress = AL.getICD().alBufferDataStaticDirect;
         if (CHECKS) {
@@ -109,59 +66,31 @@ public class EXTStaticBuffer {
         invokePPV(context, buffer, format, data, len, freq, __functionAddress);
     }
 
-    /**
-     * Sets the sample data of the specified buffer.
-     *
-     * @param buffer the buffer handle
-     * @param format the data format
-     * @param data   the sample data
-     * @param freq   the data frequency
-     */
+    /** {@code ALvoid alBufferDataStaticDirect(ALCcontext * context, ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStaticDirect(@NativeType("ALCcontext *") long context, @NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") ByteBuffer data, @NativeType("ALsizei") int freq) {
         nalBufferDataStaticDirect(context, buffer, format, memAddress(data), data.remaining(), freq);
     }
 
-    /**
-     * Sets the sample data of the specified buffer.
-     *
-     * @param buffer the buffer handle
-     * @param format the data format
-     * @param data   the sample data
-     * @param freq   the data frequency
-     */
+    /** {@code ALvoid alBufferDataStaticDirect(ALCcontext * context, ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStaticDirect(@NativeType("ALCcontext *") long context, @NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") ShortBuffer data, @NativeType("ALsizei") int freq) {
         nalBufferDataStaticDirect(context, buffer, format, memAddress(data), data.remaining() << 1, freq);
     }
 
-    /**
-     * Sets the sample data of the specified buffer.
-     *
-     * @param buffer the buffer handle
-     * @param format the data format
-     * @param data   the sample data
-     * @param freq   the data frequency
-     */
+    /** {@code ALvoid alBufferDataStaticDirect(ALCcontext * context, ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStaticDirect(@NativeType("ALCcontext *") long context, @NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") IntBuffer data, @NativeType("ALsizei") int freq) {
         nalBufferDataStaticDirect(context, buffer, format, memAddress(data), data.remaining() << 2, freq);
     }
 
-    /**
-     * Sets the sample data of the specified buffer.
-     *
-     * @param buffer the buffer handle
-     * @param format the data format
-     * @param data   the sample data
-     * @param freq   the data frequency
-     */
+    /** {@code ALvoid alBufferDataStaticDirect(ALCcontext * context, ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStaticDirect(@NativeType("ALCcontext *") long context, @NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") FloatBuffer data, @NativeType("ALsizei") int freq) {
         nalBufferDataStaticDirect(context, buffer, format, memAddress(data), data.remaining() << 2, freq);
     }
 
-    /** Array version of: {@link #alBufferDataStatic BufferDataStatic} */
+    /** {@code ALvoid alBufferDataStatic(ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") short[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStatic;
@@ -171,7 +100,7 @@ public class EXTStaticBuffer {
         invokePV(buffer, format, data, data.length << 1, freq, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferDataStatic BufferDataStatic} */
+    /** {@code ALvoid alBufferDataStatic(ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") int[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStatic;
@@ -181,7 +110,7 @@ public class EXTStaticBuffer {
         invokePV(buffer, format, data, data.length << 2, freq, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferDataStatic BufferDataStatic} */
+    /** {@code ALvoid alBufferDataStatic(ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStatic(@NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") float[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStatic;
@@ -191,7 +120,7 @@ public class EXTStaticBuffer {
         invokePV(buffer, format, data, data.length << 2, freq, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferDataStaticDirect} */
+    /** {@code ALvoid alBufferDataStaticDirect(ALCcontext * context, ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStaticDirect(@NativeType("ALCcontext *") long context, @NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") short[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStaticDirect;
@@ -202,7 +131,7 @@ public class EXTStaticBuffer {
         invokePPV(context, buffer, format, data, data.length << 1, freq, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferDataStaticDirect} */
+    /** {@code ALvoid alBufferDataStaticDirect(ALCcontext * context, ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStaticDirect(@NativeType("ALCcontext *") long context, @NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") int[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStaticDirect;
@@ -213,7 +142,7 @@ public class EXTStaticBuffer {
         invokePPV(context, buffer, format, data, data.length << 2, freq, __functionAddress);
     }
 
-    /** Array version of: {@link #alBufferDataStaticDirect} */
+    /** {@code ALvoid alBufferDataStaticDirect(ALCcontext * context, ALint buffer, ALenum format, ALvoid * data, ALsizei len, ALsizei freq)} */
     @NativeType("ALvoid")
     public static void alBufferDataStaticDirect(@NativeType("ALCcontext *") long context, @NativeType("ALint") int buffer, @NativeType("ALenum") int format, @NativeType("ALvoid *") float[] data, @NativeType("ALsizei") int freq) {
         long __functionAddress = AL.getICD().alBufferDataStaticDirect;

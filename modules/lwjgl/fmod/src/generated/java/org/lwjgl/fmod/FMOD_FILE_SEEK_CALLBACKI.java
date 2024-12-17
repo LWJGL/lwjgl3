@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     void *handle,
- *     unsigned int pos,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_FILE_SEEK_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_FILE_SEEK_CALLBACK")
 public interface FMOD_FILE_SEEK_CALLBACKI extends CallbackI {
@@ -45,6 +36,7 @@ public interface FMOD_FILE_SEEK_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_FILE_SEEK_CALLBACK) (void * handle, unsigned int pos, void * userdata)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("void *") long handle, @NativeType("unsigned int") int pos, @NativeType("void *") long userdata);
 
 }

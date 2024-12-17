@@ -5,17 +5,8 @@
  */
 package org.lwjgl.opengl;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/AMD/AMD_gpu_shader_half_float_fetch.txt">AMD_gpu_shader_half_float_fetch</a> extension.
- * 
- * <p>This extension was developed based on the {@code AMD_gpu_shader_half_float} extension to allow implementations supporting half-precision floating-point
- * both in shader texture functions and in shader image memory functions.</p>
- * 
- * <p>Requires {@link GL40 OpenGL 4.0}, GLSL 4.00 and {@link AMDGPUShaderHalfFloat AMD_gpu_shader_half_float}.</p>
- */
 public final class AMDGPUShaderHalfFloatFetch {
 
-    /** Returned by the {@code type} parameter of {@link GL20C#glGetActiveUniform GetActiveUniform} and {@link GL43C#glGetProgramResourceiv GetProgramResourceiv}. */
     public static final int
         GL_FLOAT16_SAMPLER_1D_AMD                    = 0x91CE,
         GL_FLOAT16_SAMPLER_2D_AMD                    = 0x91CF,

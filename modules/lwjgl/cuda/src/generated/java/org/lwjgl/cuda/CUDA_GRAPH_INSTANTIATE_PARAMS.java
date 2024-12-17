@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_GRAPH_INSTANTIATE_PARAMS {
  *     cuuint64_t flags;
  *     CUstream hUploadStream;
  *     CUgraphNode hErrNode_out;
  *     CUgraphInstantiateResult result_out;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_GRAPH_INSTANTIATE_PARAMS extends Struct<CUDA_GRAPH_INSTANTIATE_PARAMS> implements NativeResource {
 

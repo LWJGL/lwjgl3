@@ -16,35 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying layout token info for a single push constant command token.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code stageFlags} member of {@code updateRange} is ignored.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code updateRange} <b>must</b> be contained within the push constant info used by {@link VkIndirectCommandsLayoutCreateInfoEXT}</li>
- * <li>If the token type is {@link EXTDeviceGeneratedCommands#VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT}, the {@code size} member of {@code updateRange} <b>must</b> be 4</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code updateRange} <b>must</b> be a valid {@link VkPushConstantRange} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkIndirectCommandsTokenDataEXT}, {@link VkPushConstantRange}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkIndirectCommandsPushConstantTokenEXT {
- *     {@link VkPushConstantRange VkPushConstantRange} {@link #updateRange};
- * }</code></pre>
+ *     {@link VkPushConstantRange VkPushConstantRange} updateRange;
+ * }}</pre>
  */
 public class VkIndirectCommandsPushConstantTokenEXT extends Struct<VkIndirectCommandsPushConstantTokenEXT> implements NativeResource {
 
@@ -91,12 +66,12 @@ public class VkIndirectCommandsPushConstantTokenEXT extends Struct<VkIndirectCom
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the push constant range that will be updated by the token. */
+    /** @return a {@link VkPushConstantRange} view of the {@code updateRange} field. */
     public VkPushConstantRange updateRange() { return nupdateRange(address()); }
 
-    /** Copies the specified {@link VkPushConstantRange} to the {@link #updateRange} field. */
+    /** Copies the specified {@link VkPushConstantRange} to the {@code updateRange} field. */
     public VkIndirectCommandsPushConstantTokenEXT updateRange(VkPushConstantRange value) { nupdateRange(address(), value); return this; }
-    /** Passes the {@link #updateRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code updateRange} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkIndirectCommandsPushConstantTokenEXT updateRange(java.util.function.Consumer<VkPushConstantRange> consumer) { consumer.accept(updateRange()); return this; }
 
     /**
@@ -271,12 +246,12 @@ public class VkIndirectCommandsPushConstantTokenEXT extends Struct<VkIndirectCom
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link VkPushConstantRange} view of the {@link VkIndirectCommandsPushConstantTokenEXT#updateRange} field. */
+        /** @return a {@link VkPushConstantRange} view of the {@code updateRange} field. */
         public VkPushConstantRange updateRange() { return VkIndirectCommandsPushConstantTokenEXT.nupdateRange(address()); }
 
-        /** Copies the specified {@link VkPushConstantRange} to the {@link VkIndirectCommandsPushConstantTokenEXT#updateRange} field. */
+        /** Copies the specified {@link VkPushConstantRange} to the {@code updateRange} field. */
         public VkIndirectCommandsPushConstantTokenEXT.Buffer updateRange(VkPushConstantRange value) { VkIndirectCommandsPushConstantTokenEXT.nupdateRange(address(), value); return this; }
-        /** Passes the {@link VkIndirectCommandsPushConstantTokenEXT#updateRange} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code updateRange} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkIndirectCommandsPushConstantTokenEXT.Buffer updateRange(java.util.function.Consumer<VkPushConstantRange> consumer) { consumer.accept(updateRange()); return this; }
 
     }

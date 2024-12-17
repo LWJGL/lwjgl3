@@ -16,24 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Eye gaze interaction system properties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTEyeGazeInteraction XR_EXT_eye_gaze_interaction} extension <b>must</b> be enabled prior to using {@link XrSystemEyeGazeInteractionPropertiesEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTEyeGazeInteraction#XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemEyeGazeInteractionPropertiesEXT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsEyeGazeInteraction};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsEyeGazeInteraction;
+ * }}</pre>
  */
 public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct<XrSystemEyeGazeInteractionPropertiesEXT> implements NativeResource {
 
@@ -86,21 +74,21 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct<XrSystemEyeG
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the runtime <b>must</b> set this value to {@link XR10#XR_TRUE TRUE} when eye gaze sufficient for use cases such as aiming or targeting is supported by the current device, otherwise the runtime <b>must</b> set this to {@link XR10#XR_FALSE FALSE}. */
+    /** @return the value of the {@code supportsEyeGazeInteraction} field. */
     @NativeType("XrBool32")
     public boolean supportsEyeGazeInteraction() { return nsupportsEyeGazeInteraction(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemEyeGazeInteractionPropertiesEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTEyeGazeInteraction#XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTEyeGazeInteraction#XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT} value to the {@code type} field. */
     public XrSystemEyeGazeInteractionPropertiesEXT type$Default() { return type(EXTEyeGazeInteraction.XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemEyeGazeInteractionPropertiesEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,21 +280,21 @@ public class XrSystemEyeGazeInteractionPropertiesEXT extends Struct<XrSystemEyeG
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemEyeGazeInteractionPropertiesEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemEyeGazeInteractionPropertiesEXT.ntype(address()); }
-        /** @return the value of the {@link XrSystemEyeGazeInteractionPropertiesEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemEyeGazeInteractionPropertiesEXT.nnext(address()); }
-        /** @return the value of the {@link XrSystemEyeGazeInteractionPropertiesEXT#supportsEyeGazeInteraction} field. */
+        /** @return the value of the {@code supportsEyeGazeInteraction} field. */
         @NativeType("XrBool32")
         public boolean supportsEyeGazeInteraction() { return XrSystemEyeGazeInteractionPropertiesEXT.nsupportsEyeGazeInteraction(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemEyeGazeInteractionPropertiesEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemEyeGazeInteractionPropertiesEXT.Buffer type(@NativeType("XrStructureType") int value) { XrSystemEyeGazeInteractionPropertiesEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTEyeGazeInteraction#XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT} value to the {@link XrSystemEyeGazeInteractionPropertiesEXT#type} field. */
+        /** Sets the {@link EXTEyeGazeInteraction#XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT} value to the {@code type} field. */
         public XrSystemEyeGazeInteractionPropertiesEXT.Buffer type$Default() { return type(EXTEyeGazeInteraction.XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link XrSystemEyeGazeInteractionPropertiesEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemEyeGazeInteractionPropertiesEXT.Buffer next(@NativeType("void *") long value) { XrSystemEyeGazeInteractionPropertiesEXT.nnext(address(), value); return this; }
 
     }

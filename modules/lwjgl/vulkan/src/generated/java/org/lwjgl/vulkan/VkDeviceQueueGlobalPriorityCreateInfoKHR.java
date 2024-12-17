@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDeviceQueueGlobalPriorityCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceQueueGlobalPriorityCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkQueueGlobalPriority globalPriority;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDeviceQueueGlobalPriorityCreateInfoKHR extends VkDeviceQueueGlobalPriorityCreateInfo {
 

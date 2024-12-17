@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union epoll_data_t {
  *     void * ptr;
  *     int fd;
  *     uint32_t u32;
  *     uint64_t u64;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("union epoll_data_t")
 public class EpollData extends Struct<EpollData> implements NativeResource {

@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The {@code DATA_BLOB} structure contains an arbitrary array of bytes.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct DATA_BLOB {
- *     DWORD {@link #cbData};
- *     BYTE * {@link #pbData};
- * }</code></pre>
+ *     DWORD cbData;
+ *     BYTE * pbData;
+ * }}</pre>
  */
 public class DATA_BLOB extends Struct<DATA_BLOB> implements NativeResource {
 
@@ -75,14 +71,14 @@ public class DATA_BLOB extends Struct<DATA_BLOB> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the count, in bytes, of data */
+    /** @return the value of the {@code cbData} field. */
     @NativeType("DWORD")
     public int cbData() { return ncbData(address()); }
-    /** a pointer to the data buffer */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pbData} field. */
     @NativeType("BYTE *")
     public ByteBuffer pbData() { return npbData(address()); }
 
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pbData} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pbData} field. */
     public DATA_BLOB pbData(@NativeType("BYTE *") ByteBuffer value) { npbData(address(), value); return this; }
 
     /**
@@ -270,14 +266,14 @@ public class DATA_BLOB extends Struct<DATA_BLOB> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link DATA_BLOB#cbData} field. */
+        /** @return the value of the {@code cbData} field. */
         @NativeType("DWORD")
         public int cbData() { return DATA_BLOB.ncbData(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link DATA_BLOB#pbData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pbData} field. */
         @NativeType("BYTE *")
         public ByteBuffer pbData() { return DATA_BLOB.npbData(address()); }
 
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link DATA_BLOB#pbData} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pbData} field. */
         public DATA_BLOB.Buffer pbData(@NativeType("BYTE *") ByteBuffer value) { DATA_BLOB.npbData(address(), value); return this; }
 
     }

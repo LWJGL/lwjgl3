@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A structure to model a size request.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Size_RequestRec {
  *     FT_Size_Request_Type type;
  *     FT_Long width;
  *     FT_Long height;
  *     FT_UInt horiResolution;
  *     FT_UInt vertResolution;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_Size_RequestRec")
 public class FT_Size_Request extends Struct<FT_Size_Request> implements NativeResource {

@@ -14,24 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Returns the data of a space.
- * 
- * <h5>Description</h5>
- * 
- * <p>This is a single element of the array in {@link XrSpaceVelocities}{@code ::velocities}, and is used to return the linear and angular velocity and velocity flags for a single space with respect to the specified base space from a call to {@link XR11#xrLocateSpaces LocateSpaces}. It does not accept chained structures to allow for easier use in dynamically allocated container datatypes.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpaceVelocities}, {@link XrVector3f}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceVelocityData {
- *     XrSpaceVelocityFlags {@link #velocityFlags};
- *     {@link XrVector3f XrVector3f} {@link #linearVelocity};
- *     {@link XrVector3f XrVector3f} {@link #angularVelocity};
- * }</code></pre>
+ *     XrSpaceVelocityFlags velocityFlags;
+ *     {@link XrVector3f XrVector3f} linearVelocity;
+ *     {@link XrVector3f XrVector3f} angularVelocity;
+ * }}</pre>
  */
 public class XrSpaceVelocityData extends Struct<XrSpaceVelocityData> {
 
@@ -84,12 +72,12 @@ public class XrSpaceVelocityData extends Struct<XrSpaceVelocityData> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a bitfield, with bit values defined in {@code XrSpaceVelocityFlagBits}. It behaves the same as {@link XrSpaceVelocity}{@code ::velocityFlags}. */
+    /** @return the value of the {@code velocityFlags} field. */
     @NativeType("XrSpaceVelocityFlags")
     public long velocityFlags() { return nvelocityFlags(address()); }
-    /** an {@link XrVector3f}. It behaves the same as {@link XrSpaceVelocity}{@code ::linearVelocity}. */
+    /** @return a {@link XrVector3f} view of the {@code linearVelocity} field. */
     public XrVector3f linearVelocity() { return nlinearVelocity(address()); }
-    /** an {@link XrVector3f}. It behaves the same as {@link XrSpaceVelocity}{@code ::angularVelocity}. */
+    /** @return a {@link XrVector3f} view of the {@code angularVelocity} field. */
     public XrVector3f angularVelocity() { return nangularVelocity(address()); }
 
     // -----------------------------------
@@ -171,12 +159,12 @@ public class XrSpaceVelocityData extends Struct<XrSpaceVelocityData> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceVelocityData#velocityFlags} field. */
+        /** @return the value of the {@code velocityFlags} field. */
         @NativeType("XrSpaceVelocityFlags")
         public long velocityFlags() { return XrSpaceVelocityData.nvelocityFlags(address()); }
-        /** @return a {@link XrVector3f} view of the {@link XrSpaceVelocityData#linearVelocity} field. */
+        /** @return a {@link XrVector3f} view of the {@code linearVelocity} field. */
         public XrVector3f linearVelocity() { return XrSpaceVelocityData.nlinearVelocity(address()); }
-        /** @return a {@link XrVector3f} view of the {@link XrSpaceVelocityData#angularVelocity} field. */
+        /** @return a {@link XrVector3f} view of the {@code angularVelocity} field. */
         public XrVector3f angularVelocity() { return XrSpaceVelocityData.nangularVelocity(address()); }
 
     }

@@ -17,50 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Returns the facial expression.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@code weightCount} is not equal to the number of blend shapes defined by the {@code XrFaceExpressionSetFB} used to create the {@code XrFaceTrackerFB}.</p>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@code confidenceCount} is not equal to the number of confidence areas defined by the {@code XrFaceExpressionSetFB} used to create the {@code XrFaceTrackerFB}.</p>
- * 
- * <p>The runtime <b>must</b> return {@code weights} representing the weights of blend shapes of current facial expression.</p>
- * 
- * <p>The runtime <b>must</b> update the {@code weights} array ordered so that the application <b>can</b> index elements using the corresponding facial expression enum (e.g. {@code XrFaceExpressionFB}) as described by {@code XrFaceExpressionSetFB} when creating the {@code XrFaceTrackerFB}. For example, when the {@code XrFaceTrackerFB} is created with {@link FBFaceTracking#XR_FACE_EXPRESSION_SET_DEFAULT_FB FACE_EXPRESSION_SET_DEFAULT_FB}, the application sets the {@code weightCount} to {@link FBFaceTracking#XR_FACE_EXPRESSION_COUNT_FB FACE_EXPRESSION_COUNT_FB}, and the runtime <b>must</b> fill the {@code weights} array ordered so that it <b>can</b> be indexed by the {@code XrFaceExpressionFB} enum.</p>
- * 
- * <p>The runtime <b>must</b> update the {@code confidences} array ordered so that the application <b>can</b> index elements using the corresponding confidence area enum (e.g. {@code XrFaceConfidenceFB}) as described by {@code XrFaceExpressionSetFB} when creating the {@code XrFaceTrackerFB}. For example, when the {@code XrFaceTrackerFB} is created with {@link FBFaceTracking#XR_FACE_EXPRESSION_SET_DEFAULT_FB FACE_EXPRESSION_SET_DEFAULT_FB}, the application sets the {@code confidenceCount} to {@link FBFaceTracking#XR_FACE_CONFIDENCE_COUNT_FB FACE_CONFIDENCE_COUNT_FB}, and the runtime <b>must</b> fill the {@code confidences} array ordered so that it <b>can</b> be indexed by the {@code XrFaceConfidenceFB} enum.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBFaceTracking XR_FB_face_tracking} extension <b>must</b> be enabled prior to using {@link XrFaceExpressionWeightsFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBFaceTracking#XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB TYPE_FACE_EXPRESSION_WEIGHTS_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code weights} <b>must</b> be a pointer to an array of {@code weightCount} {@code float} values</li>
- * <li>{@code confidences} <b>must</b> be a pointer to an array of {@code confidenceCount} {@code float} values</li>
- * <li>{@code status} <b>must</b> be a valid {@link XrFaceExpressionStatusFB} structure</li>
- * <li>The {@code weightCount} parameter <b>must</b> be greater than 0</li>
- * <li>The {@code confidenceCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFaceExpressionStatusFB}, {@link FBFaceTracking#xrGetFaceExpressionWeightsFB GetFaceExpressionWeightsFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFaceExpressionWeightsFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #weightCount};
- *     float * {@link #weights};
- *     uint32_t {@link #confidenceCount};
- *     float * {@link #confidences};
- *     {@link XrFaceExpressionStatusFB XrFaceExpressionStatusFB} {@link #status};
- *     XrTime {@link #time};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t weightCount;
+ *     float * weights;
+ *     uint32_t confidenceCount;
+ *     float * confidences;
+ *     {@link XrFaceExpressionStatusFB XrFaceExpressionStatusFB} status;
+ *     XrTime time;
+ * }}</pre>
  */
 public class XrFaceExpressionWeightsFB extends Struct<XrFaceExpressionWeightsFB> implements NativeResource {
 
@@ -128,45 +95,45 @@ public class XrFaceExpressionWeightsFB extends Struct<XrFaceExpressionWeightsFB>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} describing the count of elements in {@code weights} array. */
+    /** @return the value of the {@code weightCount} field. */
     @NativeType("uint32_t")
     public int weightCount() { return nweightCount(address()); }
-    /** a pointer to an application-allocated array of {@code float} that will be filled with weights of facial expression blend shapes. */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code weights} field. */
     @NativeType("float *")
     public FloatBuffer weights() { return nweights(address()); }
-    /** a {@code uint32_t} describing the count of elements in {@code confidences} array. */
+    /** @return the value of the {@code confidenceCount} field. */
     @NativeType("uint32_t")
     public int confidenceCount() { return nconfidenceCount(address()); }
-    /** a pointer to an application-allocated array of {@code float} that will be filled with confidence of tracking specific parts of a face. */
+    /** @return a {@link FloatBuffer} view of the data pointed to by the {@code confidences} field. */
     @NativeType("float *")
     public FloatBuffer confidences() { return nconfidences(address()); }
-    /** the {@link XrFaceExpressionStatusFB} of validity status of the expression weights. */
+    /** @return a {@link XrFaceExpressionStatusFB} view of the {@code status} field. */
     public XrFaceExpressionStatusFB status() { return nstatus(address()); }
-    /** an {@code XrTime} time at which the returned expression weights are tracked or extrapolated to. Equals the time at which the expression weights were requested if the extrapolating at the time was successful. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFaceExpressionWeightsFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBFaceTracking#XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB TYPE_FACE_EXPRESSION_WEIGHTS_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBFaceTracking#XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB TYPE_FACE_EXPRESSION_WEIGHTS_FB} value to the {@code type} field. */
     public XrFaceExpressionWeightsFB type$Default() { return type(FBFaceTracking.XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFaceExpressionWeightsFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link FloatBuffer} to the {@link #weights} field. */
+    /** Sets the address of the specified {@link FloatBuffer} to the {@code weights} field. */
     public XrFaceExpressionWeightsFB weights(@NativeType("float *") FloatBuffer value) { nweights(address(), value); return this; }
-    /** Sets the address of the specified {@link FloatBuffer} to the {@link #confidences} field. */
+    /** Sets the address of the specified {@link FloatBuffer} to the {@code confidences} field. */
     public XrFaceExpressionWeightsFB confidences(@NativeType("float *") FloatBuffer value) { nconfidences(address(), value); return this; }
-    /** Copies the specified {@link XrFaceExpressionStatusFB} to the {@link #status} field. */
+    /** Copies the specified {@link XrFaceExpressionStatusFB} to the {@code status} field. */
     public XrFaceExpressionWeightsFB status(XrFaceExpressionStatusFB value) { nstatus(address(), value); return this; }
-    /** Passes the {@link #status} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code status} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrFaceExpressionWeightsFB status(java.util.function.Consumer<XrFaceExpressionStatusFB> consumer) { consumer.accept(status()); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrFaceExpressionWeightsFB time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -398,45 +365,45 @@ public class XrFaceExpressionWeightsFB extends Struct<XrFaceExpressionWeightsFB>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFaceExpressionWeightsFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFaceExpressionWeightsFB.ntype(address()); }
-        /** @return the value of the {@link XrFaceExpressionWeightsFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrFaceExpressionWeightsFB.nnext(address()); }
-        /** @return the value of the {@link XrFaceExpressionWeightsFB#weightCount} field. */
+        /** @return the value of the {@code weightCount} field. */
         @NativeType("uint32_t")
         public int weightCount() { return XrFaceExpressionWeightsFB.nweightCount(address()); }
-        /** @return a {@link FloatBuffer} view of the data pointed to by the {@link XrFaceExpressionWeightsFB#weights} field. */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code weights} field. */
         @NativeType("float *")
         public FloatBuffer weights() { return XrFaceExpressionWeightsFB.nweights(address()); }
-        /** @return the value of the {@link XrFaceExpressionWeightsFB#confidenceCount} field. */
+        /** @return the value of the {@code confidenceCount} field. */
         @NativeType("uint32_t")
         public int confidenceCount() { return XrFaceExpressionWeightsFB.nconfidenceCount(address()); }
-        /** @return a {@link FloatBuffer} view of the data pointed to by the {@link XrFaceExpressionWeightsFB#confidences} field. */
+        /** @return a {@link FloatBuffer} view of the data pointed to by the {@code confidences} field. */
         @NativeType("float *")
         public FloatBuffer confidences() { return XrFaceExpressionWeightsFB.nconfidences(address()); }
-        /** @return a {@link XrFaceExpressionStatusFB} view of the {@link XrFaceExpressionWeightsFB#status} field. */
+        /** @return a {@link XrFaceExpressionStatusFB} view of the {@code status} field. */
         public XrFaceExpressionStatusFB status() { return XrFaceExpressionWeightsFB.nstatus(address()); }
-        /** @return the value of the {@link XrFaceExpressionWeightsFB#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrFaceExpressionWeightsFB.ntime(address()); }
 
-        /** Sets the specified value to the {@link XrFaceExpressionWeightsFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFaceExpressionWeightsFB.Buffer type(@NativeType("XrStructureType") int value) { XrFaceExpressionWeightsFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBFaceTracking#XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB TYPE_FACE_EXPRESSION_WEIGHTS_FB} value to the {@link XrFaceExpressionWeightsFB#type} field. */
+        /** Sets the {@link FBFaceTracking#XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB TYPE_FACE_EXPRESSION_WEIGHTS_FB} value to the {@code type} field. */
         public XrFaceExpressionWeightsFB.Buffer type$Default() { return type(FBFaceTracking.XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB); }
-        /** Sets the specified value to the {@link XrFaceExpressionWeightsFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFaceExpressionWeightsFB.Buffer next(@NativeType("void *") long value) { XrFaceExpressionWeightsFB.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link FloatBuffer} to the {@link XrFaceExpressionWeightsFB#weights} field. */
+        /** Sets the address of the specified {@link FloatBuffer} to the {@code weights} field. */
         public XrFaceExpressionWeightsFB.Buffer weights(@NativeType("float *") FloatBuffer value) { XrFaceExpressionWeightsFB.nweights(address(), value); return this; }
-        /** Sets the address of the specified {@link FloatBuffer} to the {@link XrFaceExpressionWeightsFB#confidences} field. */
+        /** Sets the address of the specified {@link FloatBuffer} to the {@code confidences} field. */
         public XrFaceExpressionWeightsFB.Buffer confidences(@NativeType("float *") FloatBuffer value) { XrFaceExpressionWeightsFB.nconfidences(address(), value); return this; }
-        /** Copies the specified {@link XrFaceExpressionStatusFB} to the {@link XrFaceExpressionWeightsFB#status} field. */
+        /** Copies the specified {@link XrFaceExpressionStatusFB} to the {@code status} field. */
         public XrFaceExpressionWeightsFB.Buffer status(XrFaceExpressionStatusFB value) { XrFaceExpressionWeightsFB.nstatus(address(), value); return this; }
-        /** Passes the {@link XrFaceExpressionWeightsFB#status} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code status} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrFaceExpressionWeightsFB.Buffer status(java.util.function.Consumer<XrFaceExpressionStatusFB> consumer) { consumer.accept(status()); return this; }
-        /** Sets the specified value to the {@link XrFaceExpressionWeightsFB#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrFaceExpressionWeightsFB.Buffer time(@NativeType("XrTime") long value) { XrFaceExpressionWeightsFB.ntime(address(), value); return this; }
 
     }

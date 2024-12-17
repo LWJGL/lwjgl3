@@ -17,31 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Persistence info for a spatial anchor.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSpatialAnchorPersistence XR_MSFT_spatial_anchor_persistence} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorPersistenceInfoMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSpatialAnchorPersistence#XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code spatialAnchorPersistenceName} <b>must</b> be a valid {@link XrSpatialAnchorPersistenceNameMSFT} structure</li>
- * <li>{@code spatialAnchor} <b>must</b> be a valid {@code XrSpatialAnchorMSFT} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpatialAnchorPersistenceNameMSFT}, {@link MSFTSpatialAnchorPersistence#xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorPersistenceInfoMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrSpatialAnchorPersistenceNameMSFT XrSpatialAnchorPersistenceNameMSFT} {@link #spatialAnchorPersistenceName};
- *     XrSpatialAnchorMSFT {@link #spatialAnchor};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrSpatialAnchorPersistenceNameMSFT XrSpatialAnchorPersistenceNameMSFT} spatialAnchorPersistenceName;
+ *     XrSpatialAnchorMSFT spatialAnchor;
+ * }}</pre>
  */
 public class XrSpatialAnchorPersistenceInfoMSFT extends Struct<XrSpatialAnchorPersistenceInfoMSFT> implements NativeResource {
 
@@ -97,29 +79,29 @@ public class XrSpatialAnchorPersistenceInfoMSFT extends Struct<XrSpatialAnchorPe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@link XrSpatialAnchorPersistenceNameMSFT} containing the name associated with the {@code XrSpatialAnchorMSFT} in the spatial anchor store. */
+    /** @return a {@link XrSpatialAnchorPersistenceNameMSFT} view of the {@code spatialAnchorPersistenceName} field. */
     public XrSpatialAnchorPersistenceNameMSFT spatialAnchorPersistenceName() { return nspatialAnchorPersistenceName(address()); }
-    /** the {@code XrSpatialAnchorMSFT} that the application wishes to perform persistence operations on. */
+    /** @return the value of the {@code spatialAnchor} field. */
     @NativeType("XrSpatialAnchorMSFT")
     public long spatialAnchor() { return nspatialAnchor(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorPersistenceInfoMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSpatialAnchorPersistence#XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSpatialAnchorPersistence#XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT} value to the {@code type} field. */
     public XrSpatialAnchorPersistenceInfoMSFT type$Default() { return type(MSFTSpatialAnchorPersistence.XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorPersistenceInfoMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrSpatialAnchorPersistenceNameMSFT} to the {@link #spatialAnchorPersistenceName} field. */
+    /** Copies the specified {@link XrSpatialAnchorPersistenceNameMSFT} to the {@code spatialAnchorPersistenceName} field. */
     public XrSpatialAnchorPersistenceInfoMSFT spatialAnchorPersistenceName(XrSpatialAnchorPersistenceNameMSFT value) { nspatialAnchorPersistenceName(address(), value); return this; }
-    /** Passes the {@link #spatialAnchorPersistenceName} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code spatialAnchorPersistenceName} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrSpatialAnchorPersistenceInfoMSFT spatialAnchorPersistenceName(java.util.function.Consumer<XrSpatialAnchorPersistenceNameMSFT> consumer) { consumer.accept(spatialAnchorPersistenceName()); return this; }
-    /** Sets the specified value to the {@link #spatialAnchor} field. */
+    /** Sets the specified value to the {@code spatialAnchor} field. */
     public XrSpatialAnchorPersistenceInfoMSFT spatialAnchor(XrSpatialAnchorMSFT value) { nspatialAnchor(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -330,29 +312,29 @@ public class XrSpatialAnchorPersistenceInfoMSFT extends Struct<XrSpatialAnchorPe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorPersistenceInfoMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorPersistenceInfoMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorPersistenceInfoMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorPersistenceInfoMSFT.nnext(address()); }
-        /** @return a {@link XrSpatialAnchorPersistenceNameMSFT} view of the {@link XrSpatialAnchorPersistenceInfoMSFT#spatialAnchorPersistenceName} field. */
+        /** @return a {@link XrSpatialAnchorPersistenceNameMSFT} view of the {@code spatialAnchorPersistenceName} field. */
         public XrSpatialAnchorPersistenceNameMSFT spatialAnchorPersistenceName() { return XrSpatialAnchorPersistenceInfoMSFT.nspatialAnchorPersistenceName(address()); }
-        /** @return the value of the {@link XrSpatialAnchorPersistenceInfoMSFT#spatialAnchor} field. */
+        /** @return the value of the {@code spatialAnchor} field. */
         @NativeType("XrSpatialAnchorMSFT")
         public long spatialAnchor() { return XrSpatialAnchorPersistenceInfoMSFT.nspatialAnchor(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorPersistenceInfoMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorPersistenceInfoMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorPersistenceInfoMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSpatialAnchorPersistence#XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT} value to the {@link XrSpatialAnchorPersistenceInfoMSFT#type} field. */
+        /** Sets the {@link MSFTSpatialAnchorPersistence#XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT} value to the {@code type} field. */
         public XrSpatialAnchorPersistenceInfoMSFT.Buffer type$Default() { return type(MSFTSpatialAnchorPersistence.XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT); }
-        /** Sets the specified value to the {@link XrSpatialAnchorPersistenceInfoMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorPersistenceInfoMSFT.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorPersistenceInfoMSFT.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrSpatialAnchorPersistenceNameMSFT} to the {@link XrSpatialAnchorPersistenceInfoMSFT#spatialAnchorPersistenceName} field. */
+        /** Copies the specified {@link XrSpatialAnchorPersistenceNameMSFT} to the {@code spatialAnchorPersistenceName} field. */
         public XrSpatialAnchorPersistenceInfoMSFT.Buffer spatialAnchorPersistenceName(XrSpatialAnchorPersistenceNameMSFT value) { XrSpatialAnchorPersistenceInfoMSFT.nspatialAnchorPersistenceName(address(), value); return this; }
-        /** Passes the {@link XrSpatialAnchorPersistenceInfoMSFT#spatialAnchorPersistenceName} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code spatialAnchorPersistenceName} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrSpatialAnchorPersistenceInfoMSFT.Buffer spatialAnchorPersistenceName(java.util.function.Consumer<XrSpatialAnchorPersistenceNameMSFT> consumer) { consumer.accept(spatialAnchorPersistenceName()); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorPersistenceInfoMSFT#spatialAnchor} field. */
+        /** Sets the specified value to the {@code spatialAnchor} field. */
         public XrSpatialAnchorPersistenceInfoMSFT.Buffer spatialAnchor(XrSpatialAnchorMSFT value) { XrSpatialAnchorPersistenceInfoMSFT.nspatialAnchor(address(), value); return this; }
 
     }

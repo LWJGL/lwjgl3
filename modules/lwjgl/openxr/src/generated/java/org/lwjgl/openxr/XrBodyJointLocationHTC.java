@@ -16,29 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the location and location flag of a body joint.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrBodyJointLocationHTC} structure describes the position, orientation, and location flag of a body joint. It is populated by the runtime during a call to {@link HTCBodyTracking#xrLocateBodyJointsHTC LocateBodyJointsHTC}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link HTCBodyTracking XR_HTC_body_tracking} extension <b>must</b> be enabled prior to using {@link XrBodyJointLocationHTC}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrBodyJointLocationsHTC}, {@link XrPosef}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBodyJointLocationHTC {
- *     XrSpaceLocationFlags {@link #locationFlags};
- *     {@link XrPosef XrPosef} {@link #pose};
- * }</code></pre>
+ *     XrSpaceLocationFlags locationFlags;
+ *     {@link XrPosef XrPosef} pose;
+ * }}</pre>
  */
 public class XrBodyJointLocationHTC extends Struct<XrBodyJointLocationHTC> implements NativeResource {
 
@@ -88,10 +70,10 @@ public class XrBodyJointLocationHTC extends Struct<XrBodyJointLocationHTC> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a bitfield, with bit masks defined in {@code XrSpaceLocationFlagBits}, to indicate which members contain valid data. For those bits that are not set, reading the relevant fields in this structure and its nested structures <b>must</b> be defined, but the values are unspecified and not meaningful. */
+    /** @return the value of the {@code locationFlags} field. */
     @NativeType("XrSpaceLocationFlags")
     public long locationFlags() { return nlocationFlags(address()); }
-    /** an {@link XrPosef} describing the position and orientation of the origin of a body joint within the reference frame of the corresponding {@link XrBodyJointsLocateInfoHTC}{@code ::baseSpace}. */
+    /** @return a {@link XrPosef} view of the {@code pose} field. */
     public XrPosef pose() { return npose(address()); }
 
     // -----------------------------------
@@ -253,10 +235,10 @@ public class XrBodyJointLocationHTC extends Struct<XrBodyJointLocationHTC> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrBodyJointLocationHTC#locationFlags} field. */
+        /** @return the value of the {@code locationFlags} field. */
         @NativeType("XrSpaceLocationFlags")
         public long locationFlags() { return XrBodyJointLocationHTC.nlocationFlags(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrBodyJointLocationHTC#pose} field. */
+        /** @return a {@link XrPosef} view of the {@code pose} field. */
         public XrPosef pose() { return XrBodyJointLocationHTC.npose(address()); }
 
     }

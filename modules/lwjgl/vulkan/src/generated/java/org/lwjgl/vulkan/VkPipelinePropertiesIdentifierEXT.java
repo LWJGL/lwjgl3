@@ -19,23 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure used to retrieve pipeline properties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTPipelineProperties#VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelinePropertiesIdentifierEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint8_t {@link #pipelineIdentifier}[VK_UUID_SIZE];
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint8_t pipelineIdentifier[VK_UUID_SIZE];
+ * }}</pre>
  */
 public class VkPipelinePropertiesIdentifierEXT extends Struct<VkPipelinePropertiesIdentifierEXT> implements NativeResource {
 
@@ -88,24 +77,24 @@ public class VkPipelinePropertiesIdentifierEXT extends Struct<VkPipelineProperti
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values into which the pipeline identifier will be written. */
+    /** @return a {@link ByteBuffer} view of the {@code pipelineIdentifier} field. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer pipelineIdentifier() { return npipelineIdentifier(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values into which the pipeline identifier will be written. */
+    /** @return the value at the specified index of the {@code pipelineIdentifier} field. */
     @NativeType("uint8_t")
     public byte pipelineIdentifier(int index) { return npipelineIdentifier(address(), index); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelinePropertiesIdentifierEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTPipelineProperties#VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTPipelineProperties#VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT} value to the {@code sType} field. */
     public VkPipelinePropertiesIdentifierEXT sType$Default() { return sType(EXTPipelineProperties.VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelinePropertiesIdentifierEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -301,24 +290,24 @@ public class VkPipelinePropertiesIdentifierEXT extends Struct<VkPipelineProperti
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelinePropertiesIdentifierEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelinePropertiesIdentifierEXT.nsType(address()); }
-        /** @return the value of the {@link VkPipelinePropertiesIdentifierEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelinePropertiesIdentifierEXT.npNext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPipelinePropertiesIdentifierEXT#pipelineIdentifier} field. */
+        /** @return a {@link ByteBuffer} view of the {@code pipelineIdentifier} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer pipelineIdentifier() { return VkPipelinePropertiesIdentifierEXT.npipelineIdentifier(address()); }
-        /** @return the value at the specified index of the {@link VkPipelinePropertiesIdentifierEXT#pipelineIdentifier} field. */
+        /** @return the value at the specified index of the {@code pipelineIdentifier} field. */
         @NativeType("uint8_t")
         public byte pipelineIdentifier(int index) { return VkPipelinePropertiesIdentifierEXT.npipelineIdentifier(address(), index); }
 
-        /** Sets the specified value to the {@link VkPipelinePropertiesIdentifierEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelinePropertiesIdentifierEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelinePropertiesIdentifierEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTPipelineProperties#VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT} value to the {@link VkPipelinePropertiesIdentifierEXT#sType} field. */
+        /** Sets the {@link EXTPipelineProperties#VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT} value to the {@code sType} field. */
         public VkPipelinePropertiesIdentifierEXT.Buffer sType$Default() { return sType(EXTPipelineProperties.VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT); }
-        /** Sets the specified value to the {@link VkPipelinePropertiesIdentifierEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelinePropertiesIdentifierEXT.Buffer pNext(@NativeType("void *") long value) { VkPipelinePropertiesIdentifierEXT.npNext(address(), value); return this; }
 
     }

@@ -17,32 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure used to list the anchors that need to be updated.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsUpdateExpirationInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} {@link XrUuidEXT} structures</li>
- * <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}, {@link MLSpatialAnchorsStorage#xrUpdateSpatialAnchorsExpirationAsyncML UpdateSpatialAnchorsExpirationAsyncML}, {@link MLSpatialAnchorsStorage#xrUpdateSpatialAnchorsExpirationCompleteML UpdateSpatialAnchorsExpirationCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsUpdateExpirationInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #uuidCount};
- *     {@link XrUuidEXT XrUuidEXT} const * {@link #uuids};
- *     uint64_t {@link #expiration};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t uuidCount;
+ *     {@link XrUuidEXT XrUuidEXT} const * uuids;
+ *     uint64_t expiration;
+ * }}</pre>
  */
 public class XrSpatialAnchorsUpdateExpirationInfoML extends Struct<XrSpatialAnchorsUpdateExpirationInfoML> implements NativeResource {
 
@@ -101,31 +83,31 @@ public class XrSpatialAnchorsUpdateExpirationInfoML extends Struct<XrSpatialAnch
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of anchors in the anchors array. */
+    /** @return the value of the {@code uuidCount} field. */
     @NativeType("uint32_t")
     public int uuidCount() { return nuuidCount(address()); }
-    /** an array of {@link XrUuidEXT}. */
+    /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
     @NativeType("XrUuidEXT const *")
     public XrUuidEXT.Buffer uuids() { return nuuids(address()); }
-    /** an {@code uint64_t}, is the time in seconds since epoch after which these anchors <b>may</b> expire. */
+    /** @return the value of the {@code expiration} field. */
     @NativeType("uint64_t")
     public long expiration() { return nexpiration(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsUpdateExpirationInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML} value to the {@code type} field. */
     public XrSpatialAnchorsUpdateExpirationInfoML type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsUpdateExpirationInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link #uuids} field. */
+    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
     public XrSpatialAnchorsUpdateExpirationInfoML uuids(@NativeType("XrUuidEXT const *") XrUuidEXT.Buffer value) { nuuids(address(), value); return this; }
-    /** Sets the specified value to the {@link #expiration} field. */
+    /** Sets the specified value to the {@code expiration} field. */
     public XrSpatialAnchorsUpdateExpirationInfoML expiration(@NativeType("uint64_t") long value) { nexpiration(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -340,31 +322,31 @@ public class XrSpatialAnchorsUpdateExpirationInfoML extends Struct<XrSpatialAnch
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsUpdateExpirationInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsUpdateExpirationInfoML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsUpdateExpirationInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorsUpdateExpirationInfoML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsUpdateExpirationInfoML#uuidCount} field. */
+        /** @return the value of the {@code uuidCount} field. */
         @NativeType("uint32_t")
         public int uuidCount() { return XrSpatialAnchorsUpdateExpirationInfoML.nuuidCount(address()); }
-        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@link XrSpatialAnchorsUpdateExpirationInfoML#uuids} field. */
+        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
         @NativeType("XrUuidEXT const *")
         public XrUuidEXT.Buffer uuids() { return XrSpatialAnchorsUpdateExpirationInfoML.nuuids(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsUpdateExpirationInfoML#expiration} field. */
+        /** @return the value of the {@code expiration} field. */
         @NativeType("uint64_t")
         public long expiration() { return XrSpatialAnchorsUpdateExpirationInfoML.nexpiration(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsUpdateExpirationInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsUpdateExpirationInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsUpdateExpirationInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML} value to the {@link XrSpatialAnchorsUpdateExpirationInfoML#type} field. */
+        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML} value to the {@code type} field. */
         public XrSpatialAnchorsUpdateExpirationInfoML.Buffer type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsUpdateExpirationInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsUpdateExpirationInfoML.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorsUpdateExpirationInfoML.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link XrSpatialAnchorsUpdateExpirationInfoML#uuids} field. */
+        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
         public XrSpatialAnchorsUpdateExpirationInfoML.Buffer uuids(@NativeType("XrUuidEXT const *") XrUuidEXT.Buffer value) { XrSpatialAnchorsUpdateExpirationInfoML.nuuids(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsUpdateExpirationInfoML#expiration} field. */
+        /** Sets the specified value to the {@code expiration} field. */
         public XrSpatialAnchorsUpdateExpirationInfoML.Buffer expiration(@NativeType("uint64_t") long value) { XrSpatialAnchorsUpdateExpirationInfoML.nexpiration(address(), value); return this; }
 
     }

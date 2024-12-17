@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMOrc#LLVMOrcCreateCustomMaterializationUnit OrcCreateCustomMaterializationUnit} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMOrcJITDylibRef JD,
- *     LLVMOrcSymbolStringPoolEntryRef Symbol
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcMaterializationUnitDiscardFunction} */
 @FunctionalInterface
 @NativeType("LLVMOrcMaterializationUnitDiscardFunction")
 public interface LLVMOrcMaterializationUnitDiscardFunctionI extends CallbackI {
@@ -46,11 +35,7 @@ public interface LLVMOrcMaterializationUnitDiscardFunctionI extends CallbackI {
         );
     }
 
-    /**
-     * A {@code MaterializationUnit} discard callback.
-     * 
-     * <p>Ownership of {@code JD} and {@code Symbol} remain with the caller: These arguments should not be disposed of or released.</p>
-     */
+    /** {@code void (* LLVMOrcMaterializationUnitDiscardFunction) (void * Ctx, LLVMOrcJITDylibRef JD, LLVMOrcSymbolStringPoolEntryRef Symbol)} */
     void invoke(@NativeType("void *") long Ctx, @NativeType("LLVMOrcJITDylibRef") long JD, @NativeType("LLVMOrcSymbolStringPoolEntryRef") long Symbol);
 
 }

@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes where a spatial entity is stored.
- * 
- * <h5>Description</h5>
- * 
- * <p>Extends a query filter to limit a query to a specific storage location. Set the {@code next} pointer of an {@link XrSpaceFilterInfoBaseHeaderFB} to chain this extra filtering functionality.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using {@link XrSpaceStorageLocationFilterInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntityQuery#XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code location} <b>must</b> be a valid {@code XrSpaceStorageLocationFB} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceStorageLocationFilterInfoFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpaceStorageLocationFB {@link #location};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpaceStorageLocationFB location;
+ * }}</pre>
  */
 public class XrSpaceStorageLocationFilterInfoFB extends Struct<XrSpaceStorageLocationFilterInfoFB> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct<XrSpaceStorageLoc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the location to limit the query to. */
+    /** @return the value of the {@code location} field. */
     @NativeType("XrSpaceStorageLocationFB")
     public int location() { return nlocation(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceStorageLocationFilterInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntityQuery#XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntityQuery#XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB} value to the {@code type} field. */
     public XrSpaceStorageLocationFilterInfoFB type$Default() { return type(FBSpatialEntityQuery.XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceStorageLocationFilterInfoFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #location} field. */
+    /** Sets the specified value to the {@code location} field. */
     public XrSpaceStorageLocationFilterInfoFB location(@NativeType("XrSpaceStorageLocationFB") int value) { nlocation(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,23 +286,23 @@ public class XrSpaceStorageLocationFilterInfoFB extends Struct<XrSpaceStorageLoc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceStorageLocationFilterInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceStorageLocationFilterInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrSpaceStorageLocationFilterInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpaceStorageLocationFilterInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrSpaceStorageLocationFilterInfoFB#location} field. */
+        /** @return the value of the {@code location} field. */
         @NativeType("XrSpaceStorageLocationFB")
         public int location() { return XrSpaceStorageLocationFilterInfoFB.nlocation(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceStorageLocationFilterInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceStorageLocationFilterInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceStorageLocationFilterInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntityQuery#XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB} value to the {@link XrSpaceStorageLocationFilterInfoFB#type} field. */
+        /** Sets the {@link FBSpatialEntityQuery#XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB} value to the {@code type} field. */
         public XrSpaceStorageLocationFilterInfoFB.Buffer type$Default() { return type(FBSpatialEntityQuery.XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB); }
-        /** Sets the specified value to the {@link XrSpaceStorageLocationFilterInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceStorageLocationFilterInfoFB.Buffer next(@NativeType("void const *") long value) { XrSpaceStorageLocationFilterInfoFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceStorageLocationFilterInfoFB#location} field. */
+        /** Sets the specified value to the {@code location} field. */
         public XrSpaceStorageLocationFilterInfoFB.Buffer location(@NativeType("XrSpaceStorageLocationFB") int value) { XrSpaceStorageLocationFilterInfoFB.nlocation(address(), value); return this; }
 
     }

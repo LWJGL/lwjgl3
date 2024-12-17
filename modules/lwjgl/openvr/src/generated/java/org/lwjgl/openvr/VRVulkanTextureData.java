@@ -17,16 +17,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Data required for passing Vulkan textures to {@link VRCompositor#VRCompositor_Submit Submit}. Be sure to call {@link VR#VR_ShutdownInternal ShutdownInternal} before destroying these resources.
- * 
- * <p>Please see <a href="https://github.com/ValveSoftware/openvr/wiki/Vulkan">https://github.com/ValveSoftware/openvr/wiki/Vulkan</a> for Vulkan-specific
- * documentation.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRVulkanTextureData_t {
- *     uint64_t {@link #m_nImage};
+ *     uint64_t m_nImage;
  *     VkDevice_T * m_pDevice;
  *     VkPhysicalDevice_T * m_pPhysicalDevice;
  *     VkInstance_T * m_pInstance;
@@ -36,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t m_nHeight;
  *     uint32_t m_nFormat;
  *     uint32_t m_nSampleCount;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VRVulkanTextureData_t")
 public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements NativeResource {
@@ -111,7 +104,7 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** VkImage */
+    /** @return the value of the {@code m_nImage} field. */
     @NativeType("uint64_t")
     public long m_nImage() { return nm_nImage(address()); }
     /** @return the value of the {@code m_pDevice} field. */
@@ -142,7 +135,7 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
     @NativeType("uint32_t")
     public int m_nSampleCount() { return nm_nSampleCount(address()); }
 
-    /** Sets the specified value to the {@link #m_nImage} field. */
+    /** Sets the specified value to the {@code m_nImage} field. */
     public VRVulkanTextureData m_nImage(@NativeType("uint64_t") long value) { nm_nImage(address(), value); return this; }
     /** Sets the specified value to the {@code m_pDevice} field. */
     public VRVulkanTextureData m_pDevice(@NativeType("VkDevice_T *") long value) { nm_pDevice(address(), value); return this; }
@@ -429,7 +422,7 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VRVulkanTextureData#m_nImage} field. */
+        /** @return the value of the {@code m_nImage} field. */
         @NativeType("uint64_t")
         public long m_nImage() { return VRVulkanTextureData.nm_nImage(address()); }
         /** @return the value of the {@code m_pDevice} field. */
@@ -460,7 +453,7 @@ public class VRVulkanTextureData extends Struct<VRVulkanTextureData> implements 
         @NativeType("uint32_t")
         public int m_nSampleCount() { return VRVulkanTextureData.nm_nSampleCount(address()); }
 
-        /** Sets the specified value to the {@link VRVulkanTextureData#m_nImage} field. */
+        /** Sets the specified value to the {@code m_nImage} field. */
         public VRVulkanTextureData.Buffer m_nImage(@NativeType("uint64_t") long value) { VRVulkanTextureData.nm_nImage(address(), value); return this; }
         /** Sets the specified value to the {@code m_pDevice} field. */
         public VRVulkanTextureData.Buffer m_pDevice(@NativeType("VkDevice_T *") long value) { VRVulkanTextureData.nm_pDevice(address(), value); return this; }

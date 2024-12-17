@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether slice-based views of 3D images can be used in storage image descriptors.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTImageSlicedViewOf3d#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkBool32 {@link #imageSlicedViewOf3D};
- * }</code></pre>
+ *     VkBool32 imageSlicedViewOf3D;
+ * }}</pre>
  */
 public class VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT extends Struct<VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT extends Struct<VkPhy
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports using a sliced view of a 3D image in a descriptor of type {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} by using a {@link VkImageViewSlicedCreateInfoEXT} structure when creating the view. */
+    /** @return the value of the {@code imageSlicedViewOf3D} field. */
     @NativeType("VkBool32")
     public boolean imageSlicedViewOf3D() { return nimageSlicedViewOf3D(address()) != 0; }
 
@@ -104,7 +90,7 @@ public class VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT extends Struct<VkPhy
     public VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT sType$Default() { return sType(EXTImageSlicedViewOf3d.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT); }
     /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #imageSlicedViewOf3D} field. */
+    /** Sets the specified value to the {@code imageSlicedViewOf3D} field. */
     public VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT imageSlicedViewOf3D(@NativeType("VkBool32") boolean value) { nimageSlicedViewOf3D(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,7 +292,7 @@ public class VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT extends Struct<VkPhy
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT#imageSlicedViewOf3D} field. */
+        /** @return the value of the {@code imageSlicedViewOf3D} field. */
         @NativeType("VkBool32")
         public boolean imageSlicedViewOf3D() { return VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.nimageSlicedViewOf3D(address()) != 0; }
 
@@ -316,7 +302,7 @@ public class VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT extends Struct<VkPhy
         public VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.Buffer sType$Default() { return sType(EXTImageSlicedViewOf3d.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT); }
         /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT#imageSlicedViewOf3D} field. */
+        /** Sets the specified value to the {@code imageSlicedViewOf3D} field. */
         public VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.Buffer imageSlicedViewOf3D(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT.nimageSlicedViewOf3D(address(), value ? 1 : 0); return this; }
 
     }

@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceTimelineSemaphoreProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceTimelineSemaphorePropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     uint64_t maxTimelineSemaphoreValueDifference;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceTimelineSemaphorePropertiesKHR extends VkPhysicalDeviceTimelineSemaphoreProperties {
 

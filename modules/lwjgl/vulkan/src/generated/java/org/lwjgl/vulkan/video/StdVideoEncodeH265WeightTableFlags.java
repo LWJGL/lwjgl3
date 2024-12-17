@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH265WeightTableFlags {
  *     uint16_t luma_weight_l0_flag;
  *     uint16_t chroma_weight_l0_flag;
  *     uint16_t luma_weight_l1_flag;
  *     uint16_t chroma_weight_l1_flag;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH265WeightTableFlags extends Struct<StdVideoEncodeH265WeightTableFlags> implements NativeResource {
 

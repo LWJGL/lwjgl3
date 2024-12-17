@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 shaderZeroInitializeWorkgroupMemory;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR extends VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures {
 

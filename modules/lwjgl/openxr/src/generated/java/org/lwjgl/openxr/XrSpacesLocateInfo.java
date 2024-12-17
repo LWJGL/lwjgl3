@@ -17,44 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Inputs the information to locate spaces.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code time}, the {@code baseSpace}, and each space in {@code spaces} all follow the same specifics as the corresponding inputs to the {@link XR10#xrLocateSpace LocateSpace} function.</p>
- * 
- * <p>The {@code baseSpace} and all of the {@code XrSpace} handles in the {@code spaces} array <b>must</b> be valid and share the same parent {@code XrSession}.</p>
- * 
- * <p>If the {@code time} is invalid, the {@link XR11#xrLocateSpaces LocateSpaces} <b>must</b> return {@link XR10#XR_ERROR_TIME_INVALID ERROR_TIME_INVALID}.</p>
- * 
- * <p>The {@code spaceCount} <b>must</b> be a positive number, i.e. the array {@code spaces} <b>must</b> not be empty. Otherwise, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR11#XR_TYPE_SPACES_LOCATE_INFO TYPE_SPACES_LOCATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>{@code spaces} <b>must</b> be a pointer to an array of {@code spaceCount} valid {@code XrSpace} handles</li>
- * <li>The {@code spaceCount} parameter <b>must</b> be greater than 0</li>
- * <li>Both of {@code baseSpace} and the elements of {@code spaces} <b>must</b> have been created, allocated, or retrieved from the same {@code XrSession}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR11#xrLocateSpaces LocateSpaces}, {@link KHRLocateSpaces#xrLocateSpacesKHR LocateSpacesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpacesLocateInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #baseSpace};
- *     XrTime {@link #time};
- *     uint32_t {@link #spaceCount};
- *     XrSpace const * {@link #spaces};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace baseSpace;
+ *     XrTime time;
+ *     uint32_t spaceCount;
+ *     XrSpace const * spaces;
+ * }}</pre>
  */
 public class XrSpacesLocateInfo extends Struct<XrSpacesLocateInfo> implements NativeResource {
 
@@ -116,36 +87,36 @@ public class XrSpacesLocateInfo extends Struct<XrSpacesLocateInfo> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** identifies the underlying space in which to locate {@code spaces}. */
+    /** @return the value of the {@code baseSpace} field. */
     @NativeType("XrSpace")
     public long baseSpace() { return nbaseSpace(address()); }
-    /** the time for which the location is requested. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
-    /** a {@code uint32_t} specifying the count of elements in the {@code spaces} array. */
+    /** @return the value of the {@code spaceCount} field. */
     @NativeType("uint32_t")
     public int spaceCount() { return nspaceCount(address()); }
-    /** an array of valid {@code XrSpace} handles to be located. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code spaces} field. */
     @NativeType("XrSpace const *")
     public PointerBuffer spaces() { return nspaces(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpacesLocateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR11#XR_TYPE_SPACES_LOCATE_INFO TYPE_SPACES_LOCATE_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR11#XR_TYPE_SPACES_LOCATE_INFO TYPE_SPACES_LOCATE_INFO} value to the {@code type} field. */
     public XrSpacesLocateInfo type$Default() { return type(XR11.XR_TYPE_SPACES_LOCATE_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpacesLocateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #baseSpace} field. */
+    /** Sets the specified value to the {@code baseSpace} field. */
     public XrSpacesLocateInfo baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrSpacesLocateInfo time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #spaces} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code spaces} field. */
     public XrSpacesLocateInfo spaces(@NativeType("XrSpace const *") PointerBuffer value) { nspaces(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -367,36 +338,36 @@ public class XrSpacesLocateInfo extends Struct<XrSpacesLocateInfo> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpacesLocateInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpacesLocateInfo.ntype(address()); }
-        /** @return the value of the {@link XrSpacesLocateInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpacesLocateInfo.nnext(address()); }
-        /** @return the value of the {@link XrSpacesLocateInfo#baseSpace} field. */
+        /** @return the value of the {@code baseSpace} field. */
         @NativeType("XrSpace")
         public long baseSpace() { return XrSpacesLocateInfo.nbaseSpace(address()); }
-        /** @return the value of the {@link XrSpacesLocateInfo#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrSpacesLocateInfo.ntime(address()); }
-        /** @return the value of the {@link XrSpacesLocateInfo#spaceCount} field. */
+        /** @return the value of the {@code spaceCount} field. */
         @NativeType("uint32_t")
         public int spaceCount() { return XrSpacesLocateInfo.nspaceCount(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrSpacesLocateInfo#spaces} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code spaces} field. */
         @NativeType("XrSpace const *")
         public PointerBuffer spaces() { return XrSpacesLocateInfo.nspaces(address()); }
 
-        /** Sets the specified value to the {@link XrSpacesLocateInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpacesLocateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrSpacesLocateInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR11#XR_TYPE_SPACES_LOCATE_INFO TYPE_SPACES_LOCATE_INFO} value to the {@link XrSpacesLocateInfo#type} field. */
+        /** Sets the {@link XR11#XR_TYPE_SPACES_LOCATE_INFO TYPE_SPACES_LOCATE_INFO} value to the {@code type} field. */
         public XrSpacesLocateInfo.Buffer type$Default() { return type(XR11.XR_TYPE_SPACES_LOCATE_INFO); }
-        /** Sets the specified value to the {@link XrSpacesLocateInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpacesLocateInfo.Buffer next(@NativeType("void const *") long value) { XrSpacesLocateInfo.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpacesLocateInfo#baseSpace} field. */
+        /** Sets the specified value to the {@code baseSpace} field. */
         public XrSpacesLocateInfo.Buffer baseSpace(XrSpace value) { XrSpacesLocateInfo.nbaseSpace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpacesLocateInfo#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrSpacesLocateInfo.Buffer time(@NativeType("XrTime") long value) { XrSpacesLocateInfo.ntime(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link XrSpacesLocateInfo#spaces} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code spaces} field. */
         public XrSpacesLocateInfo.Buffer spaces(@NativeType("XrSpace const *") PointerBuffer value) { XrSpacesLocateInfo.nspaces(address(), value); return this; }
 
     }

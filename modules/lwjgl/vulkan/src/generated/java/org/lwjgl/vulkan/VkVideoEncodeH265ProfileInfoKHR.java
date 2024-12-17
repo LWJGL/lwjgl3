@@ -18,22 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifying H.265 encode-specific video profile parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH265ProfileInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     StdVideoH265ProfileIdc {@link #stdProfileIdc};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     StdVideoH265ProfileIdc stdProfileIdc;
+ * }}</pre>
  */
 public class VkVideoEncodeH265ProfileInfoKHR extends Struct<VkVideoEncodeH265ProfileInfoKHR> implements NativeResource {
 
@@ -86,23 +76,23 @@ public class VkVideoEncodeH265ProfileInfoKHR extends Struct<VkVideoEncodeH265Pro
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code StdVideoH265ProfileIdc} value specifying the H.265 codec profile IDC, as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>. */
+    /** @return the value of the {@code stdProfileIdc} field. */
     @NativeType("StdVideoH265ProfileIdc")
     public int stdProfileIdc() { return nstdProfileIdc(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH265ProfileInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH265ProfileInfoKHR sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH265ProfileInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #stdProfileIdc} field. */
+    /** Sets the specified value to the {@code stdProfileIdc} field. */
     public VkVideoEncodeH265ProfileInfoKHR stdProfileIdc(@NativeType("StdVideoH265ProfileIdc") int value) { nstdProfileIdc(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -298,23 +288,23 @@ public class VkVideoEncodeH265ProfileInfoKHR extends Struct<VkVideoEncodeH265Pro
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH265ProfileInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH265ProfileInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265ProfileInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265ProfileInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265ProfileInfoKHR#stdProfileIdc} field. */
+        /** @return the value of the {@code stdProfileIdc} field. */
         @NativeType("StdVideoH265ProfileIdc")
         public int stdProfileIdc() { return VkVideoEncodeH265ProfileInfoKHR.nstdProfileIdc(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH265ProfileInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH265ProfileInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265ProfileInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR} value to the {@link VkVideoEncodeH265ProfileInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH265ProfileInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH265ProfileInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH265ProfileInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265ProfileInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265ProfileInfoKHR#stdProfileIdc} field. */
+        /** Sets the specified value to the {@code stdProfileIdc} field. */
         public VkVideoEncodeH265ProfileInfoKHR.Buffer stdProfileIdc(@NativeType("StdVideoH265ProfileIdc") int value) { VkVideoEncodeH265ProfileInfoKHR.nstdProfileIdc(address(), value); return this; }
 
     }

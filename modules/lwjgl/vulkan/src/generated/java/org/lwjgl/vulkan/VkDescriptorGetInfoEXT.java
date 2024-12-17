@@ -16,57 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of descriptor to get.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> not be {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC}, {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC} or {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, the {@code pCombinedImageSampler→sampler} member of {@code data} <b>must</b> be a {@code VkSampler} created on {@code device}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, the {@code pCombinedImageSampler→imageView} member of {@code data} <b>must</b> be a {@code VkImageView} created on {@code device}, or {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}, the {@code pInputAttachmentImage→imageView} member of {@code data} <b>must</b> be a {@code VkImageView} created on {@code device}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, and if {@code pSampledImage} is not {@code NULL}, the {@code pSampledImage→imageView} member of {@code data} <b>must</b> be a {@code VkImageView} created on {@code device}, or {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, and if {@code pStorageImage} is not {@code NULL}, the {@code pStorageImage→imageView} member of {@code data} <b>must</b> be a {@code VkImageView} created on {@code device}, or {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}, {@code pUniformTexelBuffer} is not {@code NULL} and {@code pUniformTexelBuffer→address} is not zero, {@code pUniformTexelBuffer→address} <b>must</b> be an address within a {@code VkBuffer} created on {@code device}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}, {@code pStorageTexelBuffer} is not {@code NULL} and {@code pStorageTexelBuffer→address} is not zero, {@code pStorageTexelBuffer→address} <b>must</b> be an address within a {@code VkBuffer} created on {@code device}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}, {@code pUniformBuffer} is not {@code NULL} and {@code pUniformBuffer→address} is not zero, {@code pUniformBuffer→address} <b>must</b> be an address within a {@code VkBuffer} created on {@code device}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}, {@code pStorageBuffer} is not {@code NULL} and {@code pStorageBuffer→address} is not zero, {@code pStorageBuffer→address} <b>must</b> be an address within a {@code VkBuffer} created on {@code device}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}, {@code pUniformBuffer} is not {@code NULL} , the number of texel buffer elements given by <code>(⌊pUniformBuffer→range / (texel block size)⌋ × (texels per block))</code> where texel block size and texels per block are as defined in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility">Compatible Formats</a> table for {@code pUniformBuffer→format}, <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxTexelBufferElements}</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}, {@code pStorageBuffer} is not {@code NULL} , the number of texel buffer elements given by <code>(⌊pStorageBuffer→range / (texel block size)⌋ × (texels per block))</code> where texel block size and texels per block are as defined in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility">Compatible Formats</a> table for {@code pStorageBuffer→format}, <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxTexelBufferElements}</li>
- * <li>If {@code type} is {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} and {@code accelerationStructure} is not 0, {@code accelerationStructure} <b>must</b> contain the address of a {@code VkAccelerationStructureKHR} created on {@code device}</li>
- * <li>If {@code type} is {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV} and {@code accelerationStructure} is not 0, {@code accelerationStructure} <b>must</b> contain the handle of a {@code VkAccelerationStructureNV} created on {@code device}, returned by {@link NVRayTracing#vkGetAccelerationStructureHandleNV GetAccelerationStructureHandleNV}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code type} <b>must</b> be a valid {@code VkDescriptorType} value</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, the {@code pSampler} member of {@code data} <b>must</b> be a valid pointer to a valid {@code VkSampler} handle</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, the {@code pCombinedImageSampler} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkDescriptorImageInfo} structure</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT}, the {@code pInputAttachmentImage} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkDescriptorImageInfo} structure</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, and if {@code pSampledImage} is not {@code NULL}, the {@code pSampledImage} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkDescriptorImageInfo} structure</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, and if {@code pStorageImage} is not {@code NULL}, the {@code pStorageImage} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkDescriptorImageInfo} structure</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}, and if {@code pUniformTexelBuffer} is not {@code NULL}, the {@code pUniformTexelBuffer} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkDescriptorAddressInfoEXT} structure</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}, and if {@code pStorageTexelBuffer} is not {@code NULL}, the {@code pStorageTexelBuffer} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkDescriptorAddressInfoEXT} structure</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}, and if {@code pUniformBuffer} is not {@code NULL}, the {@code pUniformBuffer} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkDescriptorAddressInfoEXT} structure</li>
- * <li>If {@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}, and if {@code pStorageBuffer} is not {@code NULL}, the {@code pStorageBuffer} member of {@code data} <b>must</b> be a valid pointer to a valid {@link VkDescriptorAddressInfoEXT} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDescriptorDataEXT}, {@link EXTDescriptorBuffer#vkGetDescriptorEXT GetDescriptorEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorGetInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDescriptorType {@link #type};
- *     {@link VkDescriptorDataEXT VkDescriptorDataEXT} {@link #data};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDescriptorType type;
+ *     {@link VkDescriptorDataEXT VkDescriptorDataEXT} data;
+ * }}</pre>
  */
 public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> implements NativeResource {
 
@@ -122,29 +78,29 @@ public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the type of descriptor to get. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkDescriptorType")
     public int type() { return ntype(address()); }
-    /** a structure containing the information needed to get the descriptor. */
+    /** @return a {@link VkDescriptorDataEXT} view of the {@code data} field. */
     public VkDescriptorDataEXT data() { return ndata(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDescriptorGetInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT} value to the {@code sType} field. */
     public VkDescriptorGetInfoEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorGetInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkDescriptorGetInfoEXT type(@NativeType("VkDescriptorType") int value) { ntype(address(), value); return this; }
-    /** Copies the specified {@link VkDescriptorDataEXT} to the {@link #data} field. */
+    /** Copies the specified {@link VkDescriptorDataEXT} to the {@code data} field. */
     public VkDescriptorGetInfoEXT data(VkDescriptorDataEXT value) { ndata(address(), value); return this; }
-    /** Passes the {@link #data} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkDescriptorGetInfoEXT data(java.util.function.Consumer<VkDescriptorDataEXT> consumer) { consumer.accept(data()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,29 +302,29 @@ public class VkDescriptorGetInfoEXT extends Struct<VkDescriptorGetInfoEXT> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorGetInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorGetInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDescriptorGetInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDescriptorGetInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDescriptorGetInfoEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkDescriptorType")
         public int type() { return VkDescriptorGetInfoEXT.ntype(address()); }
-        /** @return a {@link VkDescriptorDataEXT} view of the {@link VkDescriptorGetInfoEXT#data} field. */
+        /** @return a {@link VkDescriptorDataEXT} view of the {@code data} field. */
         public VkDescriptorDataEXT data() { return VkDescriptorGetInfoEXT.ndata(address()); }
 
-        /** Sets the specified value to the {@link VkDescriptorGetInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDescriptorGetInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorGetInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT} value to the {@link VkDescriptorGetInfoEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT} value to the {@code sType} field. */
         public VkDescriptorGetInfoEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDescriptorGetInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorGetInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorGetInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorGetInfoEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkDescriptorGetInfoEXT.Buffer type(@NativeType("VkDescriptorType") int value) { VkDescriptorGetInfoEXT.ntype(address(), value); return this; }
-        /** Copies the specified {@link VkDescriptorDataEXT} to the {@link VkDescriptorGetInfoEXT#data} field. */
+        /** Copies the specified {@link VkDescriptorDataEXT} to the {@code data} field. */
         public VkDescriptorGetInfoEXT.Buffer data(VkDescriptorDataEXT value) { VkDescriptorGetInfoEXT.ndata(address(), value); return this; }
-        /** Passes the {@link VkDescriptorGetInfoEXT#data} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkDescriptorGetInfoEXT.Buffer data(java.util.function.Consumer<VkDescriptorDataEXT> consumer) { consumer.accept(data()); return this; }
 
     }

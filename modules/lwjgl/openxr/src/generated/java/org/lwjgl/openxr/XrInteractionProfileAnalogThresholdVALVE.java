@@ -17,48 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Interaction profile dpad binding.
- * 
- * <h5>Description</h5>
- * 
- * <p>Applications can also chain a single {@link XrInteractionProfileAnalogThresholdVALVE} structure on the next chain of any {@link XR10#xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings} call. Runtimes <b>must</b> support this kind of chaining. This method of specifying analog thresholds is deprecated however, and should not be used by any new applications.</p>
- * 
- * <p>If a threshold struct is present for a given conversion, the runtime <b>must</b> use those thresholds instead of applying its own whenever it is using the binding suggested by the application.</p>
- * 
- * <p>{@code onThreshold} and {@code offThreshold} permit allow the application to specify that it wants hysteresis to be applied to the threshold operation. If {@code onThreshold} is smaller than {@code offThreshold}, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
- * 
- * <p>{@code onHaptic} and {@code offHaptic} allow the application to specify that it wants automatic haptic feedback to be generated when the boolean output of the threshold operation changes from false to true or vice versa. If these fields are not NULL, the runtime <b>must</b> trigger a haptic output with the specified characteristics. If the device has multiple haptic outputs, the runtime <b>should</b> use the haptic output that is most appropriate for the specified input path.</p>
- * 
- * <p>If a suggested binding with {@code action} and {@code binding} is not in the binding list for this interaction profile, the runtime <b>must</b> return {@link XR10#XR_ERROR_PATH_UNSUPPORTED ERROR_PATH_UNSUPPORTED}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link VALVEAnalogThreshold XR_VALVE_analog_threshold} extension <b>must</b> be enabled prior to using {@link XrInteractionProfileAnalogThresholdVALVE}</li>
- * <li>{@code type} <b>must</b> be {@link VALVEAnalogThreshold#XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code action} <b>must</b> be a valid {@code XrAction} handle</li>
- * <li>If {@code onHaptic} is not {@code NULL}, {@code onHaptic} <b>must</b> be a pointer to a valid {@link XrHapticBaseHeader}-based structure. See also: {@link XrHapticAmplitudeEnvelopeVibrationFB}, {@link XrHapticPcmVibrationFB}, {@link XrHapticVibration}</li>
- * <li>If {@code offHaptic} is not {@code NULL}, {@code offHaptic} <b>must</b> be a pointer to a valid {@link XrHapticBaseHeader}-based structure. See also: {@link XrHapticAmplitudeEnvelopeVibrationFB}, {@link XrHapticPcmVibrationFB}, {@link XrHapticVibration}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHapticBaseHeader}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrInteractionProfileAnalogThresholdVALVE {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrAction {@link #action};
- *     XrPath {@link #binding};
- *     float {@link #onThreshold};
- *     float {@link #offThreshold};
- *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * {@link #onHaptic};
- *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * {@link #offHaptic};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrAction action;
+ *     XrPath binding;
+ *     float onThreshold;
+ *     float offThreshold;
+ *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * onHaptic;
+ *     {@link XrHapticBaseHeader XrHapticBaseHeader} const * offHaptic;
+ * }}</pre>
  */
 public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteractionProfileAnalogThresholdVALVE> implements NativeResource {
 
@@ -126,46 +95,46 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteracti
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the handle of an action in the suggested binding list. */
+    /** @return the value of the {@code action} field. */
     @NativeType("XrAction")
     public long action() { return naction(address()); }
-    /** the input path used for the specified action in the suggested binding list. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("XrPath")
     public long binding() { return nbinding(address()); }
-    /** the value between 0.0 and 1.0 at which the runtime <b>must</b> consider the binding to be true. The binding must remain true until the input analog value falls below {@code offThreshold}. */
+    /** @return the value of the {@code onThreshold} field. */
     public float onThreshold() { return nonThreshold(address()); }
-    /** the value between 0.0 and 1.0 at which the runtime <b>must</b> consider the binding to be false if it was previous true. */
+    /** @return the value of the {@code offThreshold} field. */
     public float offThreshold() { return noffThreshold(address()); }
-    /** the haptic output that the runtime <b>must</b> trigger when the binding changes from false to true. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of {@link XrHapticBaseHeader}. */
+    /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code onHaptic} field. */
     @NativeType("XrHapticBaseHeader const *")
     public @Nullable XrHapticBaseHeader onHaptic() { return nonHaptic(address()); }
-    /** the haptic output that the runtime <b>must</b> trigger when the binding changes from true to false. If this field is NULL, the runtime <b>must</b> not trigger any haptic output on the threshold. This field <b>can</b> point to any supported sub-type of {@link XrHapticBaseHeader}. */
+    /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code offHaptic} field. */
     @NativeType("XrHapticBaseHeader const *")
     public @Nullable XrHapticBaseHeader offHaptic() { return noffHaptic(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrInteractionProfileAnalogThresholdVALVE type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link VALVEAnalogThreshold#XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE} value to the {@link #type} field. */
+    /** Sets the {@link VALVEAnalogThreshold#XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE} value to the {@code type} field. */
     public XrInteractionProfileAnalogThresholdVALVE type$Default() { return type(VALVEAnalogThreshold.XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrInteractionProfileAnalogThresholdVALVE next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #action} field. */
+    /** Sets the specified value to the {@code action} field. */
     public XrInteractionProfileAnalogThresholdVALVE action(XrAction value) { naction(address(), value); return this; }
-    /** Sets the specified value to the {@link #binding} field. */
+    /** Sets the specified value to the {@code binding} field. */
     public XrInteractionProfileAnalogThresholdVALVE binding(@NativeType("XrPath") long value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #onThreshold} field. */
+    /** Sets the specified value to the {@code onThreshold} field. */
     public XrInteractionProfileAnalogThresholdVALVE onThreshold(float value) { nonThreshold(address(), value); return this; }
-    /** Sets the specified value to the {@link #offThreshold} field. */
+    /** Sets the specified value to the {@code offThreshold} field. */
     public XrInteractionProfileAnalogThresholdVALVE offThreshold(float value) { noffThreshold(address(), value); return this; }
-    /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@link #onHaptic} field. */
+    /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@code onHaptic} field. */
     public XrInteractionProfileAnalogThresholdVALVE onHaptic(@Nullable @NativeType("XrHapticBaseHeader const *") XrHapticBaseHeader value) { nonHaptic(address(), value); return this; }
-    /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@link #offHaptic} field. */
+    /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@code offHaptic} field. */
     public XrInteractionProfileAnalogThresholdVALVE offHaptic(@Nullable @NativeType("XrHapticBaseHeader const *") XrHapticBaseHeader value) { noffHaptic(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -410,46 +379,46 @@ public class XrInteractionProfileAnalogThresholdVALVE extends Struct<XrInteracti
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrInteractionProfileAnalogThresholdVALVE#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrInteractionProfileAnalogThresholdVALVE.ntype(address()); }
-        /** @return the value of the {@link XrInteractionProfileAnalogThresholdVALVE#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrInteractionProfileAnalogThresholdVALVE.nnext(address()); }
-        /** @return the value of the {@link XrInteractionProfileAnalogThresholdVALVE#action} field. */
+        /** @return the value of the {@code action} field. */
         @NativeType("XrAction")
         public long action() { return XrInteractionProfileAnalogThresholdVALVE.naction(address()); }
-        /** @return the value of the {@link XrInteractionProfileAnalogThresholdVALVE#binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("XrPath")
         public long binding() { return XrInteractionProfileAnalogThresholdVALVE.nbinding(address()); }
-        /** @return the value of the {@link XrInteractionProfileAnalogThresholdVALVE#onThreshold} field. */
+        /** @return the value of the {@code onThreshold} field. */
         public float onThreshold() { return XrInteractionProfileAnalogThresholdVALVE.nonThreshold(address()); }
-        /** @return the value of the {@link XrInteractionProfileAnalogThresholdVALVE#offThreshold} field. */
+        /** @return the value of the {@code offThreshold} field. */
         public float offThreshold() { return XrInteractionProfileAnalogThresholdVALVE.noffThreshold(address()); }
-        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@link XrInteractionProfileAnalogThresholdVALVE#onHaptic} field. */
+        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code onHaptic} field. */
         @NativeType("XrHapticBaseHeader const *")
         public @Nullable XrHapticBaseHeader onHaptic() { return XrInteractionProfileAnalogThresholdVALVE.nonHaptic(address()); }
-        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@link XrInteractionProfileAnalogThresholdVALVE#offHaptic} field. */
+        /** @return a {@link XrHapticBaseHeader} view of the struct pointed to by the {@code offHaptic} field. */
         @NativeType("XrHapticBaseHeader const *")
         public @Nullable XrHapticBaseHeader offHaptic() { return XrInteractionProfileAnalogThresholdVALVE.noffHaptic(address()); }
 
-        /** Sets the specified value to the {@link XrInteractionProfileAnalogThresholdVALVE#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer type(@NativeType("XrStructureType") int value) { XrInteractionProfileAnalogThresholdVALVE.ntype(address(), value); return this; }
-        /** Sets the {@link VALVEAnalogThreshold#XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE} value to the {@link XrInteractionProfileAnalogThresholdVALVE#type} field. */
+        /** Sets the {@link VALVEAnalogThreshold#XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE} value to the {@code type} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer type$Default() { return type(VALVEAnalogThreshold.XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE); }
-        /** Sets the specified value to the {@link XrInteractionProfileAnalogThresholdVALVE#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer next(@NativeType("void const *") long value) { XrInteractionProfileAnalogThresholdVALVE.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileAnalogThresholdVALVE#action} field. */
+        /** Sets the specified value to the {@code action} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer action(XrAction value) { XrInteractionProfileAnalogThresholdVALVE.naction(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileAnalogThresholdVALVE#binding} field. */
+        /** Sets the specified value to the {@code binding} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer binding(@NativeType("XrPath") long value) { XrInteractionProfileAnalogThresholdVALVE.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileAnalogThresholdVALVE#onThreshold} field. */
+        /** Sets the specified value to the {@code onThreshold} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer onThreshold(float value) { XrInteractionProfileAnalogThresholdVALVE.nonThreshold(address(), value); return this; }
-        /** Sets the specified value to the {@link XrInteractionProfileAnalogThresholdVALVE#offThreshold} field. */
+        /** Sets the specified value to the {@code offThreshold} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer offThreshold(float value) { XrInteractionProfileAnalogThresholdVALVE.noffThreshold(address(), value); return this; }
-        /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@link XrInteractionProfileAnalogThresholdVALVE#onHaptic} field. */
+        /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@code onHaptic} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer onHaptic(@Nullable @NativeType("XrHapticBaseHeader const *") XrHapticBaseHeader value) { XrInteractionProfileAnalogThresholdVALVE.nonHaptic(address(), value); return this; }
-        /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@link XrInteractionProfileAnalogThresholdVALVE#offHaptic} field. */
+        /** Sets the address of the specified {@link XrHapticBaseHeader} to the {@code offHaptic} field. */
         public XrInteractionProfileAnalogThresholdVALVE.Buffer offHaptic(@Nullable @NativeType("XrHapticBaseHeader const *") XrHapticBaseHeader value) { XrInteractionProfileAnalogThresholdVALVE.noffHaptic(address(), value); return this; }
 
     }

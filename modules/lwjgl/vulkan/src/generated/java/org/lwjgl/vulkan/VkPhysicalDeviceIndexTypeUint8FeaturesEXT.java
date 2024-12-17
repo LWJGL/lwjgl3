@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceIndexTypeUint8Features}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceIndexTypeUint8FeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 indexTypeUint8;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceIndexTypeUint8FeaturesEXT extends VkPhysicalDeviceIndexTypeUint8Features {
 

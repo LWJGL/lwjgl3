@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link ClangIndex#clang_visitChildren visitChildren} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * enum CXChildVisitResult (*{@link #invoke}) (
- *     CXCursor cursor,
- *     CXCursor parent,
- *     CXClientData client_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("enum CXChildVisitResult (*) (CXCursor, CXCursor, CXClientData)")
 public interface CXCursorVisitorI extends CallbackI {
@@ -47,14 +36,7 @@ public interface CXCursorVisitorI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Visitor invoked for each cursor found by a traversal.
-     * 
-     * <p>This visitor function will be invoked for each cursor found by {@link ClangIndex#clang_visitChildren visitChildren}. Its first argument is the cursor being visited, its second
-     * argument is the parent visitor for that cursor, and its third argument is the client data provided to {@code clang_visitChildren()}.</p>
-     * 
-     * <p>The visitor should return one of the {@code CXChildVisitResult} values to direct {@code clang_visitChildren()}.</p>
-     */
+    /** {@code enum CXChildVisitResult (*) (CXCursor cursor, CXCursor parent, CXClientData client_data)} */
     @NativeType("enum CXChildVisitResult") int invoke(CXCursor cursor, CXCursor parent, @NativeType("CXClientData") long client_data);
 
 }

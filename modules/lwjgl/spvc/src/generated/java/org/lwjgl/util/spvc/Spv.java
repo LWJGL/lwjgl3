@@ -5,12 +5,11 @@
  */
 package org.lwjgl.util.spvc;
 
-/** Enumeration tokens for SPIR-V. */
 public final class Spv {
 
-    public static final int SPV_VERSION = 0x10600;
-
-    public static final int SPV_REVISION = 1;
+    public static final int
+        SPV_VERSION  = 0x10600,
+        SPV_REVISION = 1;
 
     public static final int SpvMagicNumber = 0x07230203;
 
@@ -22,23 +21,6 @@ public final class Spv {
 
     public static final int SpvWordCountShift = 16;
 
-    /**
-     * {@code SpvSourceLanguage}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvSourceLanguageUnknown SourceLanguageUnknown}</li>
-     * <li>{@link #SpvSourceLanguageESSL SourceLanguageESSL}</li>
-     * <li>{@link #SpvSourceLanguageGLSL SourceLanguageGLSL}</li>
-     * <li>{@link #SpvSourceLanguageOpenCL_C SourceLanguageOpenCL_C}</li>
-     * <li>{@link #SpvSourceLanguageOpenCL_CPP SourceLanguageOpenCL_CPP}</li>
-     * <li>{@link #SpvSourceLanguageHLSL SourceLanguageHLSL}</li>
-     * <li>{@link #SpvSourceLanguageCPP_for_OpenCL SourceLanguageCPP_for_OpenCL}</li>
-     * <li>{@link #SpvSourceLanguageSYCL SourceLanguageSYCL}</li>
-     * <li>{@link #SpvSourceLanguageMax SourceLanguageMax}</li>
-     * </ul>
-     */
     public static final int
         SpvSourceLanguageUnknown        = 0,
         SpvSourceLanguageESSL           = 1,
@@ -50,38 +32,6 @@ public final class Spv {
         SpvSourceLanguageSYCL           = 7,
         SpvSourceLanguageMax            = 0x7fffffff;
 
-    /**
-     * {@code SpvExecutionModel}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvExecutionModelVertex ExecutionModelVertex}</li>
-     * <li>{@link #SpvExecutionModelTessellationControl ExecutionModelTessellationControl}</li>
-     * <li>{@link #SpvExecutionModelTessellationEvaluation ExecutionModelTessellationEvaluation}</li>
-     * <li>{@link #SpvExecutionModelGeometry ExecutionModelGeometry}</li>
-     * <li>{@link #SpvExecutionModelFragment ExecutionModelFragment}</li>
-     * <li>{@link #SpvExecutionModelGLCompute ExecutionModelGLCompute}</li>
-     * <li>{@link #SpvExecutionModelKernel ExecutionModelKernel}</li>
-     * <li>{@link #SpvExecutionModelTaskNV ExecutionModelTaskNV}</li>
-     * <li>{@link #SpvExecutionModelMeshNV ExecutionModelMeshNV}</li>
-     * <li>{@link #SpvExecutionModelRayGenerationKHR ExecutionModelRayGenerationKHR}</li>
-     * <li>{@link #SpvExecutionModelRayGenerationNV ExecutionModelRayGenerationNV}</li>
-     * <li>{@link #SpvExecutionModelIntersectionKHR ExecutionModelIntersectionKHR}</li>
-     * <li>{@link #SpvExecutionModelIntersectionNV ExecutionModelIntersectionNV}</li>
-     * <li>{@link #SpvExecutionModelAnyHitKHR ExecutionModelAnyHitKHR}</li>
-     * <li>{@link #SpvExecutionModelAnyHitNV ExecutionModelAnyHitNV}</li>
-     * <li>{@link #SpvExecutionModelClosestHitKHR ExecutionModelClosestHitKHR}</li>
-     * <li>{@link #SpvExecutionModelClosestHitNV ExecutionModelClosestHitNV}</li>
-     * <li>{@link #SpvExecutionModelMissKHR ExecutionModelMissKHR}</li>
-     * <li>{@link #SpvExecutionModelMissNV ExecutionModelMissNV}</li>
-     * <li>{@link #SpvExecutionModelCallableKHR ExecutionModelCallableKHR}</li>
-     * <li>{@link #SpvExecutionModelCallableNV ExecutionModelCallableNV}</li>
-     * <li>{@link #SpvExecutionModelTaskEXT ExecutionModelTaskEXT}</li>
-     * <li>{@link #SpvExecutionModelMeshEXT ExecutionModelMeshEXT}</li>
-     * <li>{@link #SpvExecutionModelMax ExecutionModelMax}</li>
-     * </ul>
-     */
     public static final int
         SpvExecutionModelVertex                 = 0,
         SpvExecutionModelTessellationControl    = 1,
@@ -108,20 +58,6 @@ public final class Spv {
         SpvExecutionModelMeshEXT                = 5365,
         SpvExecutionModelMax                    = 0x7fffffff;
 
-    /**
-     * {@code SpvAddressingModel}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvAddressingModelLogical AddressingModelLogical}</li>
-     * <li>{@link #SpvAddressingModelPhysical32 AddressingModelPhysical32}</li>
-     * <li>{@link #SpvAddressingModelPhysical64 AddressingModelPhysical64}</li>
-     * <li>{@link #SpvAddressingModelPhysicalStorageBuffer64 AddressingModelPhysicalStorageBuffer64}</li>
-     * <li>{@link #SpvAddressingModelPhysicalStorageBuffer64EXT AddressingModelPhysicalStorageBuffer64EXT}</li>
-     * <li>{@link #SpvAddressingModelMax AddressingModelMax}</li>
-     * </ul>
-     */
     public static final int
         SpvAddressingModelLogical                    = 0,
         SpvAddressingModelPhysical32                 = 1,
@@ -130,20 +66,6 @@ public final class Spv {
         SpvAddressingModelPhysicalStorageBuffer64EXT = 5348,
         SpvAddressingModelMax                        = 0x7fffffff;
 
-    /**
-     * {@code SpvMemoryModel}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvMemoryModelSimple MemoryModelSimple}</li>
-     * <li>{@link #SpvMemoryModelGLSL450 MemoryModelGLSL450}</li>
-     * <li>{@link #SpvMemoryModelOpenCL MemoryModelOpenCL}</li>
-     * <li>{@link #SpvMemoryModelVulkan MemoryModelVulkan}</li>
-     * <li>{@link #SpvMemoryModelVulkanKHR MemoryModelVulkanKHR}</li>
-     * <li>{@link #SpvMemoryModelMax MemoryModelMax}</li>
-     * </ul>
-     */
     public static final int
         SpvMemoryModelSimple    = 0,
         SpvMemoryModelGLSL450   = 1,
@@ -152,93 +74,6 @@ public final class Spv {
         SpvMemoryModelVulkanKHR = 3,
         SpvMemoryModelMax       = 0x7fffffff;
 
-    /**
-     * {@code SpvExecutionMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvExecutionModeInvocations ExecutionModeInvocations}</li>
-     * <li>{@link #SpvExecutionModeSpacingEqual ExecutionModeSpacingEqual}</li>
-     * <li>{@link #SpvExecutionModeSpacingFractionalEven ExecutionModeSpacingFractionalEven}</li>
-     * <li>{@link #SpvExecutionModeSpacingFractionalOdd ExecutionModeSpacingFractionalOdd}</li>
-     * <li>{@link #SpvExecutionModeVertexOrderCw ExecutionModeVertexOrderCw}</li>
-     * <li>{@link #SpvExecutionModeVertexOrderCcw ExecutionModeVertexOrderCcw}</li>
-     * <li>{@link #SpvExecutionModePixelCenterInteger ExecutionModePixelCenterInteger}</li>
-     * <li>{@link #SpvExecutionModeOriginUpperLeft ExecutionModeOriginUpperLeft}</li>
-     * <li>{@link #SpvExecutionModeOriginLowerLeft ExecutionModeOriginLowerLeft}</li>
-     * <li>{@link #SpvExecutionModeEarlyFragmentTests ExecutionModeEarlyFragmentTests}</li>
-     * <li>{@link #SpvExecutionModePointMode ExecutionModePointMode}</li>
-     * <li>{@link #SpvExecutionModeXfb ExecutionModeXfb}</li>
-     * <li>{@link #SpvExecutionModeDepthReplacing ExecutionModeDepthReplacing}</li>
-     * <li>{@link #SpvExecutionModeDepthGreater ExecutionModeDepthGreater}</li>
-     * <li>{@link #SpvExecutionModeDepthLess ExecutionModeDepthLess}</li>
-     * <li>{@link #SpvExecutionModeDepthUnchanged ExecutionModeDepthUnchanged}</li>
-     * <li>{@link #SpvExecutionModeLocalSize ExecutionModeLocalSize}</li>
-     * <li>{@link #SpvExecutionModeLocalSizeHint ExecutionModeLocalSizeHint}</li>
-     * <li>{@link #SpvExecutionModeInputPoints ExecutionModeInputPoints}</li>
-     * <li>{@link #SpvExecutionModeInputLines ExecutionModeInputLines}</li>
-     * <li>{@link #SpvExecutionModeInputLinesAdjacency ExecutionModeInputLinesAdjacency}</li>
-     * <li>{@link #SpvExecutionModeTriangles ExecutionModeTriangles}</li>
-     * <li>{@link #SpvExecutionModeInputTrianglesAdjacency ExecutionModeInputTrianglesAdjacency}</li>
-     * <li>{@link #SpvExecutionModeQuads ExecutionModeQuads}</li>
-     * <li>{@link #SpvExecutionModeIsolines ExecutionModeIsolines}</li>
-     * <li>{@link #SpvExecutionModeOutputVertices ExecutionModeOutputVertices}</li>
-     * <li>{@link #SpvExecutionModeOutputPoints ExecutionModeOutputPoints}</li>
-     * <li>{@link #SpvExecutionModeOutputLineStrip ExecutionModeOutputLineStrip}</li>
-     * <li>{@link #SpvExecutionModeOutputTriangleStrip ExecutionModeOutputTriangleStrip}</li>
-     * <li>{@link #SpvExecutionModeVecTypeHint ExecutionModeVecTypeHint}</li>
-     * <li>{@link #SpvExecutionModeContractionOff ExecutionModeContractionOff}</li>
-     * <li>{@link #SpvExecutionModeInitializer ExecutionModeInitializer}</li>
-     * <li>{@link #SpvExecutionModeFinalizer ExecutionModeFinalizer}</li>
-     * <li>{@link #SpvExecutionModeSubgroupSize ExecutionModeSubgroupSize}</li>
-     * <li>{@link #SpvExecutionModeSubgroupsPerWorkgroup ExecutionModeSubgroupsPerWorkgroup}</li>
-     * <li>{@link #SpvExecutionModeSubgroupsPerWorkgroupId ExecutionModeSubgroupsPerWorkgroupId}</li>
-     * <li>{@link #SpvExecutionModeLocalSizeId ExecutionModeLocalSizeId}</li>
-     * <li>{@link #SpvExecutionModeLocalSizeHintId ExecutionModeLocalSizeHintId}</li>
-     * <li>{@link #SpvExecutionModeSubgroupUniformControlFlowKHR ExecutionModeSubgroupUniformControlFlowKHR}</li>
-     * <li>{@link #SpvExecutionModePostDepthCoverage ExecutionModePostDepthCoverage}</li>
-     * <li>{@link #SpvExecutionModeDenormPreserve ExecutionModeDenormPreserve}</li>
-     * <li>{@link #SpvExecutionModeDenormFlushToZero ExecutionModeDenormFlushToZero}</li>
-     * <li>{@link #SpvExecutionModeSignedZeroInfNanPreserve ExecutionModeSignedZeroInfNanPreserve}</li>
-     * <li>{@link #SpvExecutionModeRoundingModeRTE ExecutionModeRoundingModeRTE}</li>
-     * <li>{@link #SpvExecutionModeRoundingModeRTZ ExecutionModeRoundingModeRTZ}</li>
-     * <li>{@link #SpvExecutionModeEarlyAndLateFragmentTestsAMD ExecutionModeEarlyAndLateFragmentTestsAMD}</li>
-     * <li>{@link #SpvExecutionModeStencilRefReplacingEXT ExecutionModeStencilRefReplacingEXT}</li>
-     * <li>{@link #SpvExecutionModeStencilRefUnchangedFrontAMD ExecutionModeStencilRefUnchangedFrontAMD}</li>
-     * <li>{@link #SpvExecutionModeStencilRefGreaterFrontAMD ExecutionModeStencilRefGreaterFrontAMD}</li>
-     * <li>{@link #SpvExecutionModeStencilRefLessFrontAMD ExecutionModeStencilRefLessFrontAMD}</li>
-     * <li>{@link #SpvExecutionModeStencilRefUnchangedBackAMD ExecutionModeStencilRefUnchangedBackAMD}</li>
-     * <li>{@link #SpvExecutionModeStencilRefGreaterBackAMD ExecutionModeStencilRefGreaterBackAMD}</li>
-     * <li>{@link #SpvExecutionModeStencilRefLessBackAMD ExecutionModeStencilRefLessBackAMD}</li>
-     * <li>{@link #SpvExecutionModeOutputLinesEXT ExecutionModeOutputLinesEXT}</li>
-     * <li>{@link #SpvExecutionModeOutputLinesNV ExecutionModeOutputLinesNV}</li>
-     * <li>{@link #SpvExecutionModeOutputPrimitivesEXT ExecutionModeOutputPrimitivesEXT}</li>
-     * <li>{@link #SpvExecutionModeOutputPrimitivesNV ExecutionModeOutputPrimitivesNV}</li>
-     * <li>{@link #SpvExecutionModeDerivativeGroupQuadsNV ExecutionModeDerivativeGroupQuadsNV}</li>
-     * <li>{@link #SpvExecutionModeDerivativeGroupLinearNV ExecutionModeDerivativeGroupLinearNV}</li>
-     * <li>{@link #SpvExecutionModeOutputTrianglesEXT ExecutionModeOutputTrianglesEXT}</li>
-     * <li>{@link #SpvExecutionModeOutputTrianglesNV ExecutionModeOutputTrianglesNV}</li>
-     * <li>{@link #SpvExecutionModePixelInterlockOrderedEXT ExecutionModePixelInterlockOrderedEXT}</li>
-     * <li>{@link #SpvExecutionModePixelInterlockUnorderedEXT ExecutionModePixelInterlockUnorderedEXT}</li>
-     * <li>{@link #SpvExecutionModeSampleInterlockOrderedEXT ExecutionModeSampleInterlockOrderedEXT}</li>
-     * <li>{@link #SpvExecutionModeSampleInterlockUnorderedEXT ExecutionModeSampleInterlockUnorderedEXT}</li>
-     * <li>{@link #SpvExecutionModeShadingRateInterlockOrderedEXT ExecutionModeShadingRateInterlockOrderedEXT}</li>
-     * <li>{@link #SpvExecutionModeShadingRateInterlockUnorderedEXT ExecutionModeShadingRateInterlockUnorderedEXT}</li>
-     * <li>{@link #SpvExecutionModeSharedLocalMemorySizeINTEL ExecutionModeSharedLocalMemorySizeINTEL}</li>
-     * <li>{@link #SpvExecutionModeRoundingModeRTPINTEL ExecutionModeRoundingModeRTPINTEL}</li>
-     * <li>{@link #SpvExecutionModeRoundingModeRTNINTEL ExecutionModeRoundingModeRTNINTEL}</li>
-     * <li>{@link #SpvExecutionModeFloatingPointModeALTINTEL ExecutionModeFloatingPointModeALTINTEL}</li>
-     * <li>{@link #SpvExecutionModeFloatingPointModeIEEEINTEL ExecutionModeFloatingPointModeIEEEINTEL}</li>
-     * <li>{@link #SpvExecutionModeMaxWorkgroupSizeINTEL ExecutionModeMaxWorkgroupSizeINTEL}</li>
-     * <li>{@link #SpvExecutionModeMaxWorkDimINTEL ExecutionModeMaxWorkDimINTEL}</li>
-     * <li>{@link #SpvExecutionModeNoGlobalOffsetINTEL ExecutionModeNoGlobalOffsetINTEL}</li>
-     * <li>{@link #SpvExecutionModeNumSIMDWorkitemsINTEL ExecutionModeNumSIMDWorkitemsINTEL}</li>
-     * <li>{@link #SpvExecutionModeSchedulerTargetFmaxMhzINTEL ExecutionModeSchedulerTargetFmaxMhzINTEL}</li>
-     * <li>{@link #SpvExecutionModeNamedBarrierCountINTEL ExecutionModeNamedBarrierCountINTEL}</li>
-     * <li>{@link #SpvExecutionModeMax ExecutionModeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvExecutionModeInvocations                      = 0,
         SpvExecutionModeSpacingEqual                     = 1,
@@ -320,46 +155,6 @@ public final class Spv {
         SpvExecutionModeNamedBarrierCountINTEL           = 6417,
         SpvExecutionModeMax                              = 0x7fffffff;
 
-    /**
-     * {@code SpvStorageClass}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvStorageClassUniformConstant StorageClassUniformConstant}</li>
-     * <li>{@link #SpvStorageClassInput StorageClassInput}</li>
-     * <li>{@link #SpvStorageClassUniform StorageClassUniform}</li>
-     * <li>{@link #SpvStorageClassOutput StorageClassOutput}</li>
-     * <li>{@link #SpvStorageClassWorkgroup StorageClassWorkgroup}</li>
-     * <li>{@link #SpvStorageClassCrossWorkgroup StorageClassCrossWorkgroup}</li>
-     * <li>{@link #SpvStorageClassPrivate StorageClassPrivate}</li>
-     * <li>{@link #SpvStorageClassFunction StorageClassFunction}</li>
-     * <li>{@link #SpvStorageClassGeneric StorageClassGeneric}</li>
-     * <li>{@link #SpvStorageClassPushConstant StorageClassPushConstant}</li>
-     * <li>{@link #SpvStorageClassAtomicCounter StorageClassAtomicCounter}</li>
-     * <li>{@link #SpvStorageClassImage StorageClassImage}</li>
-     * <li>{@link #SpvStorageClassStorageBuffer StorageClassStorageBuffer}</li>
-     * <li>{@link #SpvStorageClassCallableDataKHR StorageClassCallableDataKHR}</li>
-     * <li>{@link #SpvStorageClassCallableDataNV StorageClassCallableDataNV}</li>
-     * <li>{@link #SpvStorageClassIncomingCallableDataKHR StorageClassIncomingCallableDataKHR}</li>
-     * <li>{@link #SpvStorageClassIncomingCallableDataNV StorageClassIncomingCallableDataNV}</li>
-     * <li>{@link #SpvStorageClassRayPayloadKHR StorageClassRayPayloadKHR}</li>
-     * <li>{@link #SpvStorageClassRayPayloadNV StorageClassRayPayloadNV}</li>
-     * <li>{@link #SpvStorageClassHitAttributeKHR StorageClassHitAttributeKHR}</li>
-     * <li>{@link #SpvStorageClassHitAttributeNV StorageClassHitAttributeNV}</li>
-     * <li>{@link #SpvStorageClassIncomingRayPayloadKHR StorageClassIncomingRayPayloadKHR}</li>
-     * <li>{@link #SpvStorageClassIncomingRayPayloadNV StorageClassIncomingRayPayloadNV}</li>
-     * <li>{@link #SpvStorageClassShaderRecordBufferKHR StorageClassShaderRecordBufferKHR}</li>
-     * <li>{@link #SpvStorageClassShaderRecordBufferNV StorageClassShaderRecordBufferNV}</li>
-     * <li>{@link #SpvStorageClassPhysicalStorageBuffer StorageClassPhysicalStorageBuffer}</li>
-     * <li>{@link #SpvStorageClassPhysicalStorageBufferEXT StorageClassPhysicalStorageBufferEXT}</li>
-     * <li>{@link #SpvStorageClassTaskPayloadWorkgroupEXT StorageClassTaskPayloadWorkgroupEXT}</li>
-     * <li>{@link #SpvStorageClassCodeSectionINTEL StorageClassCodeSectionINTEL}</li>
-     * <li>{@link #SpvStorageClassDeviceOnlyINTEL StorageClassDeviceOnlyINTEL}</li>
-     * <li>{@link #SpvStorageClassHostOnlyINTEL StorageClassHostOnlyINTEL}</li>
-     * <li>{@link #SpvStorageClassMax StorageClassMax}</li>
-     * </ul>
-     */
     public static final int
         SpvStorageClassUniformConstant          = 0,
         SpvStorageClassInput                    = 1,
@@ -394,22 +189,6 @@ public final class Spv {
         SpvStorageClassHostOnlyINTEL            = 5937,
         SpvStorageClassMax                      = 0x7fffffff;
 
-    /**
-     * {@code SpvDim}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvDim1D Dim1D}</li>
-     * <li>{@link #SpvDim2D Dim2D}</li>
-     * <li>{@link #SpvDim3D Dim3D}</li>
-     * <li>{@link #SpvDimCube DimCube}</li>
-     * <li>{@link #SpvDimRect DimRect}</li>
-     * <li>{@link #SpvDimBuffer DimBuffer}</li>
-     * <li>{@link #SpvDimSubpassData DimSubpassData}</li>
-     * <li>{@link #SpvDimMax DimMax}</li>
-     * </ul>
-     */
     public static final int
         SpvDim1D          = 0,
         SpvDim2D          = 1,
@@ -420,20 +199,6 @@ public final class Spv {
         SpvDimSubpassData = 6,
         SpvDimMax         = 0x7fffffff;
 
-    /**
-     * {@code SpvSamplerAddressingMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvSamplerAddressingModeNone SamplerAddressingModeNone}</li>
-     * <li>{@link #SpvSamplerAddressingModeClampToEdge SamplerAddressingModeClampToEdge}</li>
-     * <li>{@link #SpvSamplerAddressingModeClamp SamplerAddressingModeClamp}</li>
-     * <li>{@link #SpvSamplerAddressingModeRepeat SamplerAddressingModeRepeat}</li>
-     * <li>{@link #SpvSamplerAddressingModeRepeatMirrored SamplerAddressingModeRepeatMirrored}</li>
-     * <li>{@link #SpvSamplerAddressingModeMax SamplerAddressingModeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvSamplerAddressingModeNone           = 0,
         SpvSamplerAddressingModeClampToEdge    = 1,
@@ -442,73 +207,11 @@ public final class Spv {
         SpvSamplerAddressingModeRepeatMirrored = 4,
         SpvSamplerAddressingModeMax            = 0x7fffffff;
 
-    /**
-     * {@code SpvSamplerFilterMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvSamplerFilterModeNearest SamplerFilterModeNearest}</li>
-     * <li>{@link #SpvSamplerFilterModeLinear SamplerFilterModeLinear}</li>
-     * <li>{@link #SpvSamplerFilterModeMax SamplerFilterModeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvSamplerFilterModeNearest = 0,
         SpvSamplerFilterModeLinear  = 1,
         SpvSamplerFilterModeMax     = 0x7fffffff;
 
-    /**
-     * {@code SpvImageFormat}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvImageFormatUnknown ImageFormatUnknown}</li>
-     * <li>{@link #SpvImageFormatRgba32f ImageFormatRgba32f}</li>
-     * <li>{@link #SpvImageFormatRgba16f ImageFormatRgba16f}</li>
-     * <li>{@link #SpvImageFormatR32f ImageFormatR32f}</li>
-     * <li>{@link #SpvImageFormatRgba8 ImageFormatRgba8}</li>
-     * <li>{@link #SpvImageFormatRgba8Snorm ImageFormatRgba8Snorm}</li>
-     * <li>{@link #SpvImageFormatRg32f ImageFormatRg32f}</li>
-     * <li>{@link #SpvImageFormatRg16f ImageFormatRg16f}</li>
-     * <li>{@link #SpvImageFormatR11fG11fB10f ImageFormatR11fG11fB10f}</li>
-     * <li>{@link #SpvImageFormatR16f ImageFormatR16f}</li>
-     * <li>{@link #SpvImageFormatRgba16 ImageFormatRgba16}</li>
-     * <li>{@link #SpvImageFormatRgb10A2 ImageFormatRgb10A2}</li>
-     * <li>{@link #SpvImageFormatRg16 ImageFormatRg16}</li>
-     * <li>{@link #SpvImageFormatRg8 ImageFormatRg8}</li>
-     * <li>{@link #SpvImageFormatR16 ImageFormatR16}</li>
-     * <li>{@link #SpvImageFormatR8 ImageFormatR8}</li>
-     * <li>{@link #SpvImageFormatRgba16Snorm ImageFormatRgba16Snorm}</li>
-     * <li>{@link #SpvImageFormatRg16Snorm ImageFormatRg16Snorm}</li>
-     * <li>{@link #SpvImageFormatRg8Snorm ImageFormatRg8Snorm}</li>
-     * <li>{@link #SpvImageFormatR16Snorm ImageFormatR16Snorm}</li>
-     * <li>{@link #SpvImageFormatR8Snorm ImageFormatR8Snorm}</li>
-     * <li>{@link #SpvImageFormatRgba32i ImageFormatRgba32i}</li>
-     * <li>{@link #SpvImageFormatRgba16i ImageFormatRgba16i}</li>
-     * <li>{@link #SpvImageFormatRgba8i ImageFormatRgba8i}</li>
-     * <li>{@link #SpvImageFormatR32i ImageFormatR32i}</li>
-     * <li>{@link #SpvImageFormatRg32i ImageFormatRg32i}</li>
-     * <li>{@link #SpvImageFormatRg16i ImageFormatRg16i}</li>
-     * <li>{@link #SpvImageFormatRg8i ImageFormatRg8i}</li>
-     * <li>{@link #SpvImageFormatR16i ImageFormatR16i}</li>
-     * <li>{@link #SpvImageFormatR8i ImageFormatR8i}</li>
-     * <li>{@link #SpvImageFormatRgba32ui ImageFormatRgba32ui}</li>
-     * <li>{@link #SpvImageFormatRgba16ui ImageFormatRgba16ui}</li>
-     * <li>{@link #SpvImageFormatRgba8ui ImageFormatRgba8ui}</li>
-     * <li>{@link #SpvImageFormatR32ui ImageFormatR32ui}</li>
-     * <li>{@link #SpvImageFormatRgb10a2ui ImageFormatRgb10a2ui}</li>
-     * <li>{@link #SpvImageFormatRg32ui ImageFormatRg32ui}</li>
-     * <li>{@link #SpvImageFormatRg16ui ImageFormatRg16ui}</li>
-     * <li>{@link #SpvImageFormatRg8ui ImageFormatRg8ui}</li>
-     * <li>{@link #SpvImageFormatR16ui ImageFormatR16ui}</li>
-     * <li>{@link #SpvImageFormatR8ui ImageFormatR8ui}</li>
-     * <li>{@link #SpvImageFormatR64ui ImageFormatR64ui}</li>
-     * <li>{@link #SpvImageFormatR64i ImageFormatR64i}</li>
-     * <li>{@link #SpvImageFormatMax ImageFormatMax}</li>
-     * </ul>
-     */
     public static final int
         SpvImageFormatUnknown      = 0,
         SpvImageFormatRgba32f      = 1,
@@ -554,35 +257,6 @@ public final class Spv {
         SpvImageFormatR64i         = 41,
         SpvImageFormatMax          = 0x7fffffff;
 
-    /**
-     * {@code SpvImageChannelOrder}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvImageChannelOrderR ImageChannelOrderR}</li>
-     * <li>{@link #SpvImageChannelOrderA ImageChannelOrderA}</li>
-     * <li>{@link #SpvImageChannelOrderRG ImageChannelOrderRG}</li>
-     * <li>{@link #SpvImageChannelOrderRA ImageChannelOrderRA}</li>
-     * <li>{@link #SpvImageChannelOrderRGB ImageChannelOrderRGB}</li>
-     * <li>{@link #SpvImageChannelOrderRGBA ImageChannelOrderRGBA}</li>
-     * <li>{@link #SpvImageChannelOrderBGRA ImageChannelOrderBGRA}</li>
-     * <li>{@link #SpvImageChannelOrderARGB ImageChannelOrderARGB}</li>
-     * <li>{@link #SpvImageChannelOrderIntensity ImageChannelOrderIntensity}</li>
-     * <li>{@link #SpvImageChannelOrderLuminance ImageChannelOrderLuminance}</li>
-     * <li>{@link #SpvImageChannelOrderRx ImageChannelOrderRx}</li>
-     * <li>{@link #SpvImageChannelOrderRGx ImageChannelOrderRGx}</li>
-     * <li>{@link #SpvImageChannelOrderRGBx ImageChannelOrderRGBx}</li>
-     * <li>{@link #SpvImageChannelOrderDepth ImageChannelOrderDepth}</li>
-     * <li>{@link #SpvImageChannelOrderDepthStencil ImageChannelOrderDepthStencil}</li>
-     * <li>{@link #SpvImageChannelOrdersRGB ImageChannelOrdersRGB}</li>
-     * <li>{@link #SpvImageChannelOrdersRGBx ImageChannelOrdersRGBx}</li>
-     * <li>{@link #SpvImageChannelOrdersRGBA ImageChannelOrdersRGBA}</li>
-     * <li>{@link #SpvImageChannelOrdersBGRA ImageChannelOrdersBGRA}</li>
-     * <li>{@link #SpvImageChannelOrderABGR ImageChannelOrderABGR}</li>
-     * <li>{@link #SpvImageChannelOrderMax ImageChannelOrderMax}</li>
-     * </ul>
-     */
     public static final int
         SpvImageChannelOrderR            = 0,
         SpvImageChannelOrderA            = 1,
@@ -606,32 +280,6 @@ public final class Spv {
         SpvImageChannelOrderABGR         = 19,
         SpvImageChannelOrderMax          = 0x7fffffff;
 
-    /**
-     * {@code SpvImageChannelDataType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvImageChannelDataTypeSnormInt8 ImageChannelDataTypeSnormInt8}</li>
-     * <li>{@link #SpvImageChannelDataTypeSnormInt16 ImageChannelDataTypeSnormInt16}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnormInt8 ImageChannelDataTypeUnormInt8}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnormInt16 ImageChannelDataTypeUnormInt16}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnormShort565 ImageChannelDataTypeUnormShort565}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnormShort555 ImageChannelDataTypeUnormShort555}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnormInt101010 ImageChannelDataTypeUnormInt101010}</li>
-     * <li>{@link #SpvImageChannelDataTypeSignedInt8 ImageChannelDataTypeSignedInt8}</li>
-     * <li>{@link #SpvImageChannelDataTypeSignedInt16 ImageChannelDataTypeSignedInt16}</li>
-     * <li>{@link #SpvImageChannelDataTypeSignedInt32 ImageChannelDataTypeSignedInt32}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnsignedInt8 ImageChannelDataTypeUnsignedInt8}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnsignedInt16 ImageChannelDataTypeUnsignedInt16}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnsignedInt32 ImageChannelDataTypeUnsignedInt32}</li>
-     * <li>{@link #SpvImageChannelDataTypeHalfFloat ImageChannelDataTypeHalfFloat}</li>
-     * <li>{@link #SpvImageChannelDataTypeFloat ImageChannelDataTypeFloat}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnormInt24 ImageChannelDataTypeUnormInt24}</li>
-     * <li>{@link #SpvImageChannelDataTypeUnormInt101010_2 ImageChannelDataTypeUnormInt101010_2}</li>
-     * <li>{@link #SpvImageChannelDataTypeMax ImageChannelDataTypeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvImageChannelDataTypeSnormInt8        = 0,
         SpvImageChannelDataTypeSnormInt16       = 1,
@@ -652,35 +300,6 @@ public final class Spv {
         SpvImageChannelDataTypeUnormInt101010_2 = 16,
         SpvImageChannelDataTypeMax              = 0x7fffffff;
 
-    /**
-     * {@code SpvImageOperandsShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvImageOperandsBiasShift ImageOperandsBiasShift}</li>
-     * <li>{@link #SpvImageOperandsLodShift ImageOperandsLodShift}</li>
-     * <li>{@link #SpvImageOperandsGradShift ImageOperandsGradShift}</li>
-     * <li>{@link #SpvImageOperandsConstOffsetShift ImageOperandsConstOffsetShift}</li>
-     * <li>{@link #SpvImageOperandsOffsetShift ImageOperandsOffsetShift}</li>
-     * <li>{@link #SpvImageOperandsConstOffsetsShift ImageOperandsConstOffsetsShift}</li>
-     * <li>{@link #SpvImageOperandsSampleShift ImageOperandsSampleShift}</li>
-     * <li>{@link #SpvImageOperandsMinLodShift ImageOperandsMinLodShift}</li>
-     * <li>{@link #SpvImageOperandsMakeTexelAvailableShift ImageOperandsMakeTexelAvailableShift}</li>
-     * <li>{@link #SpvImageOperandsMakeTexelAvailableKHRShift ImageOperandsMakeTexelAvailableKHRShift}</li>
-     * <li>{@link #SpvImageOperandsMakeTexelVisibleShift ImageOperandsMakeTexelVisibleShift}</li>
-     * <li>{@link #SpvImageOperandsMakeTexelVisibleKHRShift ImageOperandsMakeTexelVisibleKHRShift}</li>
-     * <li>{@link #SpvImageOperandsNonPrivateTexelShift ImageOperandsNonPrivateTexelShift}</li>
-     * <li>{@link #SpvImageOperandsNonPrivateTexelKHRShift ImageOperandsNonPrivateTexelKHRShift}</li>
-     * <li>{@link #SpvImageOperandsVolatileTexelShift ImageOperandsVolatileTexelShift}</li>
-     * <li>{@link #SpvImageOperandsVolatileTexelKHRShift ImageOperandsVolatileTexelKHRShift}</li>
-     * <li>{@link #SpvImageOperandsSignExtendShift ImageOperandsSignExtendShift}</li>
-     * <li>{@link #SpvImageOperandsZeroExtendShift ImageOperandsZeroExtendShift}</li>
-     * <li>{@link #SpvImageOperandsNontemporalShift ImageOperandsNontemporalShift}</li>
-     * <li>{@link #SpvImageOperandsOffsetsShift ImageOperandsOffsetsShift}</li>
-     * <li>{@link #SpvImageOperandsMax ImageOperandsMax}</li>
-     * </ul>
-     */
     public static final int
         SpvImageOperandsBiasShift                  = 0,
         SpvImageOperandsLodShift                   = 1,
@@ -704,35 +323,6 @@ public final class Spv {
         SpvImageOperandsOffsetsShift               = 16,
         SpvImageOperandsMax                        = 0x7fffffff;
 
-    /**
-     * {@code SpvImageOperandsMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvImageOperandsMaskNone ImageOperandsMaskNone}</li>
-     * <li>{@link #SpvImageOperandsBiasMask ImageOperandsBiasMask}</li>
-     * <li>{@link #SpvImageOperandsLodMask ImageOperandsLodMask}</li>
-     * <li>{@link #SpvImageOperandsGradMask ImageOperandsGradMask}</li>
-     * <li>{@link #SpvImageOperandsConstOffsetMask ImageOperandsConstOffsetMask}</li>
-     * <li>{@link #SpvImageOperandsOffsetMask ImageOperandsOffsetMask}</li>
-     * <li>{@link #SpvImageOperandsConstOffsetsMask ImageOperandsConstOffsetsMask}</li>
-     * <li>{@link #SpvImageOperandsSampleMask ImageOperandsSampleMask}</li>
-     * <li>{@link #SpvImageOperandsMinLodMask ImageOperandsMinLodMask}</li>
-     * <li>{@link #SpvImageOperandsMakeTexelAvailableMask ImageOperandsMakeTexelAvailableMask}</li>
-     * <li>{@link #SpvImageOperandsMakeTexelAvailableKHRMask ImageOperandsMakeTexelAvailableKHRMask}</li>
-     * <li>{@link #SpvImageOperandsMakeTexelVisibleMask ImageOperandsMakeTexelVisibleMask}</li>
-     * <li>{@link #SpvImageOperandsMakeTexelVisibleKHRMask ImageOperandsMakeTexelVisibleKHRMask}</li>
-     * <li>{@link #SpvImageOperandsNonPrivateTexelMask ImageOperandsNonPrivateTexelMask}</li>
-     * <li>{@link #SpvImageOperandsNonPrivateTexelKHRMask ImageOperandsNonPrivateTexelKHRMask}</li>
-     * <li>{@link #SpvImageOperandsVolatileTexelMask ImageOperandsVolatileTexelMask}</li>
-     * <li>{@link #SpvImageOperandsVolatileTexelKHRMask ImageOperandsVolatileTexelKHRMask}</li>
-     * <li>{@link #SpvImageOperandsSignExtendMask ImageOperandsSignExtendMask}</li>
-     * <li>{@link #SpvImageOperandsZeroExtendMask ImageOperandsZeroExtendMask}</li>
-     * <li>{@link #SpvImageOperandsNontemporalMask ImageOperandsNontemporalMask}</li>
-     * <li>{@link #SpvImageOperandsOffsetsMask ImageOperandsOffsetsMask}</li>
-     * </ul>
-     */
     public static final int
         SpvImageOperandsMaskNone                  = 0,
         SpvImageOperandsBiasMask                  = 0x00000001,
@@ -756,22 +346,6 @@ public final class Spv {
         SpvImageOperandsNontemporalMask           = 0x00004000,
         SpvImageOperandsOffsetsMask               = 0x00010000;
 
-    /**
-     * {@code SpvFPFastMathModeShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFPFastMathModeNotNaNShift FPFastMathModeNotNaNShift}</li>
-     * <li>{@link #SpvFPFastMathModeNotInfShift FPFastMathModeNotInfShift}</li>
-     * <li>{@link #SpvFPFastMathModeNSZShift FPFastMathModeNSZShift}</li>
-     * <li>{@link #SpvFPFastMathModeAllowRecipShift FPFastMathModeAllowRecipShift}</li>
-     * <li>{@link #SpvFPFastMathModeFastShift FPFastMathModeFastShift}</li>
-     * <li>{@link #SpvFPFastMathModeAllowContractFastINTELShift FPFastMathModeAllowContractFastINTELShift}</li>
-     * <li>{@link #SpvFPFastMathModeAllowReassocINTELShift FPFastMathModeAllowReassocINTELShift}</li>
-     * <li>{@link #SpvFPFastMathModeMax FPFastMathModeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvFPFastMathModeNotNaNShift                 = 0,
         SpvFPFastMathModeNotInfShift                 = 1,
@@ -782,22 +356,6 @@ public final class Spv {
         SpvFPFastMathModeAllowReassocINTELShift      = 17,
         SpvFPFastMathModeMax                         = 0x7fffffff;
 
-    /**
-     * {@code SpvFPFastMathModeMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFPFastMathModeMaskNone FPFastMathModeMaskNone}</li>
-     * <li>{@link #SpvFPFastMathModeNotNaNMask FPFastMathModeNotNaNMask}</li>
-     * <li>{@link #SpvFPFastMathModeNotInfMask FPFastMathModeNotInfMask}</li>
-     * <li>{@link #SpvFPFastMathModeNSZMask FPFastMathModeNSZMask}</li>
-     * <li>{@link #SpvFPFastMathModeAllowRecipMask FPFastMathModeAllowRecipMask}</li>
-     * <li>{@link #SpvFPFastMathModeFastMask FPFastMathModeFastMask}</li>
-     * <li>{@link #SpvFPFastMathModeAllowContractFastINTELMask FPFastMathModeAllowContractFastINTELMask}</li>
-     * <li>{@link #SpvFPFastMathModeAllowReassocINTELMask FPFastMathModeAllowReassocINTELMask}</li>
-     * </ul>
-     */
     public static final int
         SpvFPFastMathModeMaskNone                   = 0,
         SpvFPFastMathModeNotNaNMask                 = 0x00000001,
@@ -808,19 +366,6 @@ public final class Spv {
         SpvFPFastMathModeAllowContractFastINTELMask = 0x00010000,
         SpvFPFastMathModeAllowReassocINTELMask      = 0x00020000;
 
-    /**
-     * {@code SpvFPRoundingMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFPRoundingModeRTE FPRoundingModeRTE}</li>
-     * <li>{@link #SpvFPRoundingModeRTZ FPRoundingModeRTZ}</li>
-     * <li>{@link #SpvFPRoundingModeRTP FPRoundingModeRTP}</li>
-     * <li>{@link #SpvFPRoundingModeRTN FPRoundingModeRTN}</li>
-     * <li>{@link #SpvFPRoundingModeMax FPRoundingModeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvFPRoundingModeRTE = 0,
         SpvFPRoundingModeRTZ = 1,
@@ -828,59 +373,18 @@ public final class Spv {
         SpvFPRoundingModeRTN = 3,
         SpvFPRoundingModeMax = 0x7fffffff;
 
-    /**
-     * {@code SpvLinkageType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvLinkageTypeExport LinkageTypeExport}</li>
-     * <li>{@link #SpvLinkageTypeImport LinkageTypeImport}</li>
-     * <li>{@link #SpvLinkageTypeLinkOnceODR LinkageTypeLinkOnceODR}</li>
-     * <li>{@link #SpvLinkageTypeMax LinkageTypeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvLinkageTypeExport      = 0,
         SpvLinkageTypeImport      = 1,
         SpvLinkageTypeLinkOnceODR = 2,
         SpvLinkageTypeMax         = 0x7fffffff;
 
-    /**
-     * {@code SpvAccessQualifier}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvAccessQualifierReadOnly AccessQualifierReadOnly}</li>
-     * <li>{@link #SpvAccessQualifierWriteOnly AccessQualifierWriteOnly}</li>
-     * <li>{@link #SpvAccessQualifierReadWrite AccessQualifierReadWrite}</li>
-     * <li>{@link #SpvAccessQualifierMax AccessQualifierMax}</li>
-     * </ul>
-     */
     public static final int
         SpvAccessQualifierReadOnly  = 0,
         SpvAccessQualifierWriteOnly = 1,
         SpvAccessQualifierReadWrite = 2,
         SpvAccessQualifierMax       = 0x7fffffff;
 
-    /**
-     * {@code SpvFunctionParameterAttribute}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFunctionParameterAttributeZext FunctionParameterAttributeZext}</li>
-     * <li>{@link #SpvFunctionParameterAttributeSext FunctionParameterAttributeSext}</li>
-     * <li>{@link #SpvFunctionParameterAttributeByVal FunctionParameterAttributeByVal}</li>
-     * <li>{@link #SpvFunctionParameterAttributeSret FunctionParameterAttributeSret}</li>
-     * <li>{@link #SpvFunctionParameterAttributeNoAlias FunctionParameterAttributeNoAlias}</li>
-     * <li>{@link #SpvFunctionParameterAttributeNoCapture FunctionParameterAttributeNoCapture}</li>
-     * <li>{@link #SpvFunctionParameterAttributeNoWrite FunctionParameterAttributeNoWrite}</li>
-     * <li>{@link #SpvFunctionParameterAttributeNoReadWrite FunctionParameterAttributeNoReadWrite}</li>
-     * <li>{@link #SpvFunctionParameterAttributeMax FunctionParameterAttributeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvFunctionParameterAttributeZext        = 0,
         SpvFunctionParameterAttributeSext        = 1,
@@ -892,130 +396,6 @@ public final class Spv {
         SpvFunctionParameterAttributeNoReadWrite = 7,
         SpvFunctionParameterAttributeMax         = 0x7fffffff;
 
-    /**
-     * {@code SpvDecoration}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvDecorationRelaxedPrecision DecorationRelaxedPrecision}</li>
-     * <li>{@link #SpvDecorationSpecId DecorationSpecId}</li>
-     * <li>{@link #SpvDecorationBlock DecorationBlock}</li>
-     * <li>{@link #SpvDecorationBufferBlock DecorationBufferBlock}</li>
-     * <li>{@link #SpvDecorationRowMajor DecorationRowMajor}</li>
-     * <li>{@link #SpvDecorationColMajor DecorationColMajor}</li>
-     * <li>{@link #SpvDecorationArrayStride DecorationArrayStride}</li>
-     * <li>{@link #SpvDecorationMatrixStride DecorationMatrixStride}</li>
-     * <li>{@link #SpvDecorationGLSLShared DecorationGLSLShared}</li>
-     * <li>{@link #SpvDecorationGLSLPacked DecorationGLSLPacked}</li>
-     * <li>{@link #SpvDecorationCPacked DecorationCPacked}</li>
-     * <li>{@link #SpvDecorationBuiltIn DecorationBuiltIn}</li>
-     * <li>{@link #SpvDecorationNoPerspective DecorationNoPerspective}</li>
-     * <li>{@link #SpvDecorationFlat DecorationFlat}</li>
-     * <li>{@link #SpvDecorationPatch DecorationPatch}</li>
-     * <li>{@link #SpvDecorationCentroid DecorationCentroid}</li>
-     * <li>{@link #SpvDecorationSample DecorationSample}</li>
-     * <li>{@link #SpvDecorationInvariant DecorationInvariant}</li>
-     * <li>{@link #SpvDecorationRestrict DecorationRestrict}</li>
-     * <li>{@link #SpvDecorationAliased DecorationAliased}</li>
-     * <li>{@link #SpvDecorationVolatile DecorationVolatile}</li>
-     * <li>{@link #SpvDecorationConstant DecorationConstant}</li>
-     * <li>{@link #SpvDecorationCoherent DecorationCoherent}</li>
-     * <li>{@link #SpvDecorationNonWritable DecorationNonWritable}</li>
-     * <li>{@link #SpvDecorationNonReadable DecorationNonReadable}</li>
-     * <li>{@link #SpvDecorationUniform DecorationUniform}</li>
-     * <li>{@link #SpvDecorationUniformId DecorationUniformId}</li>
-     * <li>{@link #SpvDecorationSaturatedConversion DecorationSaturatedConversion}</li>
-     * <li>{@link #SpvDecorationStream DecorationStream}</li>
-     * <li>{@link #SpvDecorationLocation DecorationLocation}</li>
-     * <li>{@link #SpvDecorationComponent DecorationComponent}</li>
-     * <li>{@link #SpvDecorationIndex DecorationIndex}</li>
-     * <li>{@link #SpvDecorationBinding DecorationBinding}</li>
-     * <li>{@link #SpvDecorationDescriptorSet DecorationDescriptorSet}</li>
-     * <li>{@link #SpvDecorationOffset DecorationOffset}</li>
-     * <li>{@link #SpvDecorationXfbBuffer DecorationXfbBuffer}</li>
-     * <li>{@link #SpvDecorationXfbStride DecorationXfbStride}</li>
-     * <li>{@link #SpvDecorationFuncParamAttr DecorationFuncParamAttr}</li>
-     * <li>{@link #SpvDecorationFPRoundingMode DecorationFPRoundingMode}</li>
-     * <li>{@link #SpvDecorationFPFastMathMode DecorationFPFastMathMode}</li>
-     * <li>{@link #SpvDecorationLinkageAttributes DecorationLinkageAttributes}</li>
-     * <li>{@link #SpvDecorationNoContraction DecorationNoContraction}</li>
-     * <li>{@link #SpvDecorationInputAttachmentIndex DecorationInputAttachmentIndex}</li>
-     * <li>{@link #SpvDecorationAlignment DecorationAlignment}</li>
-     * <li>{@link #SpvDecorationMaxByteOffset DecorationMaxByteOffset}</li>
-     * <li>{@link #SpvDecorationAlignmentId DecorationAlignmentId}</li>
-     * <li>{@link #SpvDecorationMaxByteOffsetId DecorationMaxByteOffsetId}</li>
-     * <li>{@link #SpvDecorationNoSignedWrap DecorationNoSignedWrap}</li>
-     * <li>{@link #SpvDecorationNoUnsignedWrap DecorationNoUnsignedWrap}</li>
-     * <li>{@link #SpvDecorationWeightTextureQCOM DecorationWeightTextureQCOM}</li>
-     * <li>{@link #SpvDecorationBlockMatchTextureQCOM DecorationBlockMatchTextureQCOM}</li>
-     * <li>{@link #SpvDecorationBlockMatchSamplerQCOM DecorationBlockMatchSamplerQCOM}</li>
-     * <li>{@link #SpvDecorationExplicitInterpAMD DecorationExplicitInterpAMD}</li>
-     * <li>{@link #SpvDecorationOverrideCoverageNV DecorationOverrideCoverageNV}</li>
-     * <li>{@link #SpvDecorationPassthroughNV DecorationPassthroughNV}</li>
-     * <li>{@link #SpvDecorationViewportRelativeNV DecorationViewportRelativeNV}</li>
-     * <li>{@link #SpvDecorationSecondaryViewportRelativeNV DecorationSecondaryViewportRelativeNV}</li>
-     * <li>{@link #SpvDecorationPerPrimitiveEXT DecorationPerPrimitiveEXT}</li>
-     * <li>{@link #SpvDecorationPerPrimitiveNV DecorationPerPrimitiveNV}</li>
-     * <li>{@link #SpvDecorationPerViewNV DecorationPerViewNV}</li>
-     * <li>{@link #SpvDecorationPerTaskNV DecorationPerTaskNV}</li>
-     * <li>{@link #SpvDecorationPerVertexKHR DecorationPerVertexKHR}</li>
-     * <li>{@link #SpvDecorationPerVertexNV DecorationPerVertexNV}</li>
-     * <li>{@link #SpvDecorationNonUniform DecorationNonUniform}</li>
-     * <li>{@link #SpvDecorationNonUniformEXT DecorationNonUniformEXT}</li>
-     * <li>{@link #SpvDecorationRestrictPointer DecorationRestrictPointer}</li>
-     * <li>{@link #SpvDecorationRestrictPointerEXT DecorationRestrictPointerEXT}</li>
-     * <li>{@link #SpvDecorationAliasedPointer DecorationAliasedPointer}</li>
-     * <li>{@link #SpvDecorationAliasedPointerEXT DecorationAliasedPointerEXT}</li>
-     * <li>{@link #SpvDecorationBindlessSamplerNV DecorationBindlessSamplerNV}</li>
-     * <li>{@link #SpvDecorationBindlessImageNV DecorationBindlessImageNV}</li>
-     * <li>{@link #SpvDecorationBoundSamplerNV DecorationBoundSamplerNV}</li>
-     * <li>{@link #SpvDecorationBoundImageNV DecorationBoundImageNV}</li>
-     * <li>{@link #SpvDecorationSIMTCallINTEL DecorationSIMTCallINTEL}</li>
-     * <li>{@link #SpvDecorationReferencedIndirectlyINTEL DecorationReferencedIndirectlyINTEL}</li>
-     * <li>{@link #SpvDecorationClobberINTEL DecorationClobberINTEL}</li>
-     * <li>{@link #SpvDecorationSideEffectsINTEL DecorationSideEffectsINTEL}</li>
-     * <li>{@link #SpvDecorationVectorComputeVariableINTEL DecorationVectorComputeVariableINTEL}</li>
-     * <li>{@link #SpvDecorationFuncParamIOKindINTEL DecorationFuncParamIOKindINTEL}</li>
-     * <li>{@link #SpvDecorationVectorComputeFunctionINTEL DecorationVectorComputeFunctionINTEL}</li>
-     * <li>{@link #SpvDecorationStackCallINTEL DecorationStackCallINTEL}</li>
-     * <li>{@link #SpvDecorationGlobalVariableOffsetINTEL DecorationGlobalVariableOffsetINTEL}</li>
-     * <li>{@link #SpvDecorationCounterBuffer DecorationCounterBuffer}</li>
-     * <li>{@link #SpvDecorationHlslCounterBufferGOOGLE DecorationHlslCounterBufferGOOGLE}</li>
-     * <li>{@link #SpvDecorationHlslSemanticGOOGLE DecorationHlslSemanticGOOGLE}</li>
-     * <li>{@link #SpvDecorationUserSemantic DecorationUserSemantic}</li>
-     * <li>{@link #SpvDecorationUserTypeGOOGLE DecorationUserTypeGOOGLE}</li>
-     * <li>{@link #SpvDecorationFunctionRoundingModeINTEL DecorationFunctionRoundingModeINTEL}</li>
-     * <li>{@link #SpvDecorationFunctionDenormModeINTEL DecorationFunctionDenormModeINTEL}</li>
-     * <li>{@link #SpvDecorationRegisterINTEL DecorationRegisterINTEL}</li>
-     * <li>{@link #SpvDecorationMemoryINTEL DecorationMemoryINTEL}</li>
-     * <li>{@link #SpvDecorationNumbanksINTEL DecorationNumbanksINTEL}</li>
-     * <li>{@link #SpvDecorationBankwidthINTEL DecorationBankwidthINTEL}</li>
-     * <li>{@link #SpvDecorationMaxPrivateCopiesINTEL DecorationMaxPrivateCopiesINTEL}</li>
-     * <li>{@link #SpvDecorationSinglepumpINTEL DecorationSinglepumpINTEL}</li>
-     * <li>{@link #SpvDecorationDoublepumpINTEL DecorationDoublepumpINTEL}</li>
-     * <li>{@link #SpvDecorationMaxReplicatesINTEL DecorationMaxReplicatesINTEL}</li>
-     * <li>{@link #SpvDecorationSimpleDualPortINTEL DecorationSimpleDualPortINTEL}</li>
-     * <li>{@link #SpvDecorationMergeINTEL DecorationMergeINTEL}</li>
-     * <li>{@link #SpvDecorationBankBitsINTEL DecorationBankBitsINTEL}</li>
-     * <li>{@link #SpvDecorationForcePow2DepthINTEL DecorationForcePow2DepthINTEL}</li>
-     * <li>{@link #SpvDecorationBurstCoalesceINTEL DecorationBurstCoalesceINTEL}</li>
-     * <li>{@link #SpvDecorationCacheSizeINTEL DecorationCacheSizeINTEL}</li>
-     * <li>{@link #SpvDecorationDontStaticallyCoalesceINTEL DecorationDontStaticallyCoalesceINTEL}</li>
-     * <li>{@link #SpvDecorationPrefetchINTEL DecorationPrefetchINTEL}</li>
-     * <li>{@link #SpvDecorationStallEnableINTEL DecorationStallEnableINTEL}</li>
-     * <li>{@link #SpvDecorationFuseLoopsInFunctionINTEL DecorationFuseLoopsInFunctionINTEL}</li>
-     * <li>{@link #SpvDecorationAliasScopeINTEL DecorationAliasScopeINTEL}</li>
-     * <li>{@link #SpvDecorationNoAliasINTEL DecorationNoAliasINTEL}</li>
-     * <li>{@link #SpvDecorationBufferLocationINTEL DecorationBufferLocationINTEL}</li>
-     * <li>{@link #SpvDecorationIOPipeStorageINTEL DecorationIOPipeStorageINTEL}</li>
-     * <li>{@link #SpvDecorationFunctionFloatingPointModeINTEL DecorationFunctionFloatingPointModeINTEL}</li>
-     * <li>{@link #SpvDecorationSingleElementVectorINTEL DecorationSingleElementVectorINTEL}</li>
-     * <li>{@link #SpvDecorationVectorComputeCallableFunctionINTEL DecorationVectorComputeCallableFunctionINTEL}</li>
-     * <li>{@link #SpvDecorationMediaBlockIOINTEL DecorationMediaBlockIOINTEL}</li>
-     * <li>{@link #SpvDecorationMax DecorationMax}</li>
-     * </ul>
-     */
     public static final int
         SpvDecorationRelaxedPrecision                   = 0,
         SpvDecorationSpecId                             = 1,
@@ -1134,141 +514,6 @@ public final class Spv {
         SpvDecorationMediaBlockIOINTEL                  = 6140,
         SpvDecorationMax                                = 0x7fffffff;
 
-    /**
-     * {@code SpvBuiltIn}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvBuiltInPosition BuiltInPosition}</li>
-     * <li>{@link #SpvBuiltInPointSize BuiltInPointSize}</li>
-     * <li>{@link #SpvBuiltInClipDistance BuiltInClipDistance}</li>
-     * <li>{@link #SpvBuiltInCullDistance BuiltInCullDistance}</li>
-     * <li>{@link #SpvBuiltInVertexId BuiltInVertexId}</li>
-     * <li>{@link #SpvBuiltInInstanceId BuiltInInstanceId}</li>
-     * <li>{@link #SpvBuiltInPrimitiveId BuiltInPrimitiveId}</li>
-     * <li>{@link #SpvBuiltInInvocationId BuiltInInvocationId}</li>
-     * <li>{@link #SpvBuiltInLayer BuiltInLayer}</li>
-     * <li>{@link #SpvBuiltInViewportIndex BuiltInViewportIndex}</li>
-     * <li>{@link #SpvBuiltInTessLevelOuter BuiltInTessLevelOuter}</li>
-     * <li>{@link #SpvBuiltInTessLevelInner BuiltInTessLevelInner}</li>
-     * <li>{@link #SpvBuiltInTessCoord BuiltInTessCoord}</li>
-     * <li>{@link #SpvBuiltInPatchVertices BuiltInPatchVertices}</li>
-     * <li>{@link #SpvBuiltInFragCoord BuiltInFragCoord}</li>
-     * <li>{@link #SpvBuiltInPointCoord BuiltInPointCoord}</li>
-     * <li>{@link #SpvBuiltInFrontFacing BuiltInFrontFacing}</li>
-     * <li>{@link #SpvBuiltInSampleId BuiltInSampleId}</li>
-     * <li>{@link #SpvBuiltInSamplePosition BuiltInSamplePosition}</li>
-     * <li>{@link #SpvBuiltInSampleMask BuiltInSampleMask}</li>
-     * <li>{@link #SpvBuiltInFragDepth BuiltInFragDepth}</li>
-     * <li>{@link #SpvBuiltInHelperInvocation BuiltInHelperInvocation}</li>
-     * <li>{@link #SpvBuiltInNumWorkgroups BuiltInNumWorkgroups}</li>
-     * <li>{@link #SpvBuiltInWorkgroupSize BuiltInWorkgroupSize}</li>
-     * <li>{@link #SpvBuiltInWorkgroupId BuiltInWorkgroupId}</li>
-     * <li>{@link #SpvBuiltInLocalInvocationId BuiltInLocalInvocationId}</li>
-     * <li>{@link #SpvBuiltInGlobalInvocationId BuiltInGlobalInvocationId}</li>
-     * <li>{@link #SpvBuiltInLocalInvocationIndex BuiltInLocalInvocationIndex}</li>
-     * <li>{@link #SpvBuiltInWorkDim BuiltInWorkDim}</li>
-     * <li>{@link #SpvBuiltInGlobalSize BuiltInGlobalSize}</li>
-     * <li>{@link #SpvBuiltInEnqueuedWorkgroupSize BuiltInEnqueuedWorkgroupSize}</li>
-     * <li>{@link #SpvBuiltInGlobalOffset BuiltInGlobalOffset}</li>
-     * <li>{@link #SpvBuiltInGlobalLinearId BuiltInGlobalLinearId}</li>
-     * <li>{@link #SpvBuiltInSubgroupSize BuiltInSubgroupSize}</li>
-     * <li>{@link #SpvBuiltInSubgroupMaxSize BuiltInSubgroupMaxSize}</li>
-     * <li>{@link #SpvBuiltInNumSubgroups BuiltInNumSubgroups}</li>
-     * <li>{@link #SpvBuiltInNumEnqueuedSubgroups BuiltInNumEnqueuedSubgroups}</li>
-     * <li>{@link #SpvBuiltInSubgroupId BuiltInSubgroupId}</li>
-     * <li>{@link #SpvBuiltInSubgroupLocalInvocationId BuiltInSubgroupLocalInvocationId}</li>
-     * <li>{@link #SpvBuiltInVertexIndex BuiltInVertexIndex}</li>
-     * <li>{@link #SpvBuiltInInstanceIndex BuiltInInstanceIndex}</li>
-     * <li>{@link #SpvBuiltInSubgroupEqMask BuiltInSubgroupEqMask}</li>
-     * <li>{@link #SpvBuiltInSubgroupEqMaskKHR BuiltInSubgroupEqMaskKHR}</li>
-     * <li>{@link #SpvBuiltInSubgroupGeMask BuiltInSubgroupGeMask}</li>
-     * <li>{@link #SpvBuiltInSubgroupGeMaskKHR BuiltInSubgroupGeMaskKHR}</li>
-     * <li>{@link #SpvBuiltInSubgroupGtMask BuiltInSubgroupGtMask}</li>
-     * <li>{@link #SpvBuiltInSubgroupGtMaskKHR BuiltInSubgroupGtMaskKHR}</li>
-     * <li>{@link #SpvBuiltInSubgroupLeMask BuiltInSubgroupLeMask}</li>
-     * <li>{@link #SpvBuiltInSubgroupLeMaskKHR BuiltInSubgroupLeMaskKHR}</li>
-     * <li>{@link #SpvBuiltInSubgroupLtMask BuiltInSubgroupLtMask}</li>
-     * <li>{@link #SpvBuiltInSubgroupLtMaskKHR BuiltInSubgroupLtMaskKHR}</li>
-     * <li>{@link #SpvBuiltInBaseVertex BuiltInBaseVertex}</li>
-     * <li>{@link #SpvBuiltInBaseInstance BuiltInBaseInstance}</li>
-     * <li>{@link #SpvBuiltInDrawIndex BuiltInDrawIndex}</li>
-     * <li>{@link #SpvBuiltInPrimitiveShadingRateKHR BuiltInPrimitiveShadingRateKHR}</li>
-     * <li>{@link #SpvBuiltInDeviceIndex BuiltInDeviceIndex}</li>
-     * <li>{@link #SpvBuiltInViewIndex BuiltInViewIndex}</li>
-     * <li>{@link #SpvBuiltInShadingRateKHR BuiltInShadingRateKHR}</li>
-     * <li>{@link #SpvBuiltInBaryCoordNoPerspAMD BuiltInBaryCoordNoPerspAMD}</li>
-     * <li>{@link #SpvBuiltInBaryCoordNoPerspCentroidAMD BuiltInBaryCoordNoPerspCentroidAMD}</li>
-     * <li>{@link #SpvBuiltInBaryCoordNoPerspSampleAMD BuiltInBaryCoordNoPerspSampleAMD}</li>
-     * <li>{@link #SpvBuiltInBaryCoordSmoothAMD BuiltInBaryCoordSmoothAMD}</li>
-     * <li>{@link #SpvBuiltInBaryCoordSmoothCentroidAMD BuiltInBaryCoordSmoothCentroidAMD}</li>
-     * <li>{@link #SpvBuiltInBaryCoordSmoothSampleAMD BuiltInBaryCoordSmoothSampleAMD}</li>
-     * <li>{@link #SpvBuiltInBaryCoordPullModelAMD BuiltInBaryCoordPullModelAMD}</li>
-     * <li>{@link #SpvBuiltInFragStencilRefEXT BuiltInFragStencilRefEXT}</li>
-     * <li>{@link #SpvBuiltInViewportMaskNV BuiltInViewportMaskNV}</li>
-     * <li>{@link #SpvBuiltInSecondaryPositionNV BuiltInSecondaryPositionNV}</li>
-     * <li>{@link #SpvBuiltInSecondaryViewportMaskNV BuiltInSecondaryViewportMaskNV}</li>
-     * <li>{@link #SpvBuiltInPositionPerViewNV BuiltInPositionPerViewNV}</li>
-     * <li>{@link #SpvBuiltInViewportMaskPerViewNV BuiltInViewportMaskPerViewNV}</li>
-     * <li>{@link #SpvBuiltInFullyCoveredEXT BuiltInFullyCoveredEXT}</li>
-     * <li>{@link #SpvBuiltInTaskCountNV BuiltInTaskCountNV}</li>
-     * <li>{@link #SpvBuiltInPrimitiveCountNV BuiltInPrimitiveCountNV}</li>
-     * <li>{@link #SpvBuiltInPrimitiveIndicesNV BuiltInPrimitiveIndicesNV}</li>
-     * <li>{@link #SpvBuiltInClipDistancePerViewNV BuiltInClipDistancePerViewNV}</li>
-     * <li>{@link #SpvBuiltInCullDistancePerViewNV BuiltInCullDistancePerViewNV}</li>
-     * <li>{@link #SpvBuiltInLayerPerViewNV BuiltInLayerPerViewNV}</li>
-     * <li>{@link #SpvBuiltInMeshViewCountNV BuiltInMeshViewCountNV}</li>
-     * <li>{@link #SpvBuiltInMeshViewIndicesNV BuiltInMeshViewIndicesNV}</li>
-     * <li>{@link #SpvBuiltInBaryCoordKHR BuiltInBaryCoordKHR}</li>
-     * <li>{@link #SpvBuiltInBaryCoordNV BuiltInBaryCoordNV}</li>
-     * <li>{@link #SpvBuiltInBaryCoordNoPerspKHR BuiltInBaryCoordNoPerspKHR}</li>
-     * <li>{@link #SpvBuiltInBaryCoordNoPerspNV BuiltInBaryCoordNoPerspNV}</li>
-     * <li>{@link #SpvBuiltInFragSizeEXT BuiltInFragSizeEXT}</li>
-     * <li>{@link #SpvBuiltInFragmentSizeNV BuiltInFragmentSizeNV}</li>
-     * <li>{@link #SpvBuiltInFragInvocationCountEXT BuiltInFragInvocationCountEXT}</li>
-     * <li>{@link #SpvBuiltInInvocationsPerPixelNV BuiltInInvocationsPerPixelNV}</li>
-     * <li>{@link #SpvBuiltInPrimitivePointIndicesEXT BuiltInPrimitivePointIndicesEXT}</li>
-     * <li>{@link #SpvBuiltInPrimitiveLineIndicesEXT BuiltInPrimitiveLineIndicesEXT}</li>
-     * <li>{@link #SpvBuiltInPrimitiveTriangleIndicesEXT BuiltInPrimitiveTriangleIndicesEXT}</li>
-     * <li>{@link #SpvBuiltInCullPrimitiveEXT BuiltInCullPrimitiveEXT}</li>
-     * <li>{@link #SpvBuiltInLaunchIdKHR BuiltInLaunchIdKHR}</li>
-     * <li>{@link #SpvBuiltInLaunchIdNV BuiltInLaunchIdNV}</li>
-     * <li>{@link #SpvBuiltInLaunchSizeKHR BuiltInLaunchSizeKHR}</li>
-     * <li>{@link #SpvBuiltInLaunchSizeNV BuiltInLaunchSizeNV}</li>
-     * <li>{@link #SpvBuiltInWorldRayOriginKHR BuiltInWorldRayOriginKHR}</li>
-     * <li>{@link #SpvBuiltInWorldRayOriginNV BuiltInWorldRayOriginNV}</li>
-     * <li>{@link #SpvBuiltInWorldRayDirectionKHR BuiltInWorldRayDirectionKHR}</li>
-     * <li>{@link #SpvBuiltInWorldRayDirectionNV BuiltInWorldRayDirectionNV}</li>
-     * <li>{@link #SpvBuiltInObjectRayOriginKHR BuiltInObjectRayOriginKHR}</li>
-     * <li>{@link #SpvBuiltInObjectRayOriginNV BuiltInObjectRayOriginNV}</li>
-     * <li>{@link #SpvBuiltInObjectRayDirectionKHR BuiltInObjectRayDirectionKHR}</li>
-     * <li>{@link #SpvBuiltInObjectRayDirectionNV BuiltInObjectRayDirectionNV}</li>
-     * <li>{@link #SpvBuiltInRayTminKHR BuiltInRayTminKHR}</li>
-     * <li>{@link #SpvBuiltInRayTminNV BuiltInRayTminNV}</li>
-     * <li>{@link #SpvBuiltInRayTmaxKHR BuiltInRayTmaxKHR}</li>
-     * <li>{@link #SpvBuiltInRayTmaxNV BuiltInRayTmaxNV}</li>
-     * <li>{@link #SpvBuiltInInstanceCustomIndexKHR BuiltInInstanceCustomIndexKHR}</li>
-     * <li>{@link #SpvBuiltInInstanceCustomIndexNV BuiltInInstanceCustomIndexNV}</li>
-     * <li>{@link #SpvBuiltInObjectToWorldKHR BuiltInObjectToWorldKHR}</li>
-     * <li>{@link #SpvBuiltInObjectToWorldNV BuiltInObjectToWorldNV}</li>
-     * <li>{@link #SpvBuiltInWorldToObjectKHR BuiltInWorldToObjectKHR}</li>
-     * <li>{@link #SpvBuiltInWorldToObjectNV BuiltInWorldToObjectNV}</li>
-     * <li>{@link #SpvBuiltInHitTNV BuiltInHitTNV}</li>
-     * <li>{@link #SpvBuiltInHitKindKHR BuiltInHitKindKHR}</li>
-     * <li>{@link #SpvBuiltInHitKindNV BuiltInHitKindNV}</li>
-     * <li>{@link #SpvBuiltInCurrentRayTimeNV BuiltInCurrentRayTimeNV}</li>
-     * <li>{@link #SpvBuiltInIncomingRayFlagsKHR BuiltInIncomingRayFlagsKHR}</li>
-     * <li>{@link #SpvBuiltInIncomingRayFlagsNV BuiltInIncomingRayFlagsNV}</li>
-     * <li>{@link #SpvBuiltInRayGeometryIndexKHR BuiltInRayGeometryIndexKHR}</li>
-     * <li>{@link #SpvBuiltInWarpsPerSMNV BuiltInWarpsPerSMNV}</li>
-     * <li>{@link #SpvBuiltInSMCountNV BuiltInSMCountNV}</li>
-     * <li>{@link #SpvBuiltInWarpIDNV BuiltInWarpIDNV}</li>
-     * <li>{@link #SpvBuiltInSMIDNV BuiltInSMIDNV}</li>
-     * <li>{@link #SpvBuiltInCullMaskKHR BuiltInCullMaskKHR}</li>
-     * <li>{@link #SpvBuiltInMax BuiltInMax}</li>
-     * </ul>
-     */
     public static final int
         SpvBuiltInPosition                    = 0,
         SpvBuiltInPointSize                   = 1,
@@ -1398,64 +643,16 @@ public final class Spv {
         SpvBuiltInCullMaskKHR                 = 6021,
         SpvBuiltInMax                         = 0x7fffffff;
 
-    /**
-     * {@code SpvSelectionControlShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvSelectionControlFlattenShift SelectionControlFlattenShift}</li>
-     * <li>{@link #SpvSelectionControlDontFlattenShift SelectionControlDontFlattenShift}</li>
-     * <li>{@link #SpvSelectionControlMax SelectionControlMax}</li>
-     * </ul>
-     */
     public static final int
         SpvSelectionControlFlattenShift     = 0,
         SpvSelectionControlDontFlattenShift = 1,
         SpvSelectionControlMax              = 0x7fffffff;
 
-    /**
-     * {@code SpvSelectionControlMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvSelectionControlMaskNone SelectionControlMaskNone}</li>
-     * <li>{@link #SpvSelectionControlFlattenMask SelectionControlFlattenMask}</li>
-     * <li>{@link #SpvSelectionControlDontFlattenMask SelectionControlDontFlattenMask}</li>
-     * </ul>
-     */
     public static final int
         SpvSelectionControlMaskNone        = 0,
         SpvSelectionControlFlattenMask     = 0x00000001,
         SpvSelectionControlDontFlattenMask = 0x00000002;
 
-    /**
-     * {@code SpvLoopControlShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvLoopControlUnrollShift LoopControlUnrollShift}</li>
-     * <li>{@link #SpvLoopControlDontUnrollShift LoopControlDontUnrollShift}</li>
-     * <li>{@link #SpvLoopControlDependencyInfiniteShift LoopControlDependencyInfiniteShift}</li>
-     * <li>{@link #SpvLoopControlDependencyLengthShift LoopControlDependencyLengthShift}</li>
-     * <li>{@link #SpvLoopControlMinIterationsShift LoopControlMinIterationsShift}</li>
-     * <li>{@link #SpvLoopControlMaxIterationsShift LoopControlMaxIterationsShift}</li>
-     * <li>{@link #SpvLoopControlIterationMultipleShift LoopControlIterationMultipleShift}</li>
-     * <li>{@link #SpvLoopControlPeelCountShift LoopControlPeelCountShift}</li>
-     * <li>{@link #SpvLoopControlPartialCountShift LoopControlPartialCountShift}</li>
-     * <li>{@link #SpvLoopControlInitiationIntervalINTELShift LoopControlInitiationIntervalINTELShift}</li>
-     * <li>{@link #SpvLoopControlMaxConcurrencyINTELShift LoopControlMaxConcurrencyINTELShift}</li>
-     * <li>{@link #SpvLoopControlDependencyArrayINTELShift LoopControlDependencyArrayINTELShift}</li>
-     * <li>{@link #SpvLoopControlPipelineEnableINTELShift LoopControlPipelineEnableINTELShift}</li>
-     * <li>{@link #SpvLoopControlLoopCoalesceINTELShift LoopControlLoopCoalesceINTELShift}</li>
-     * <li>{@link #SpvLoopControlMaxInterleavingINTELShift LoopControlMaxInterleavingINTELShift}</li>
-     * <li>{@link #SpvLoopControlSpeculatedIterationsINTELShift LoopControlSpeculatedIterationsINTELShift}</li>
-     * <li>{@link #SpvLoopControlNoFusionINTELShift LoopControlNoFusionINTELShift}</li>
-     * <li>{@link #SpvLoopControlMax LoopControlMax}</li>
-     * </ul>
-     */
     public static final int
         SpvLoopControlUnrollShift                    = 0,
         SpvLoopControlDontUnrollShift                = 1,
@@ -1476,32 +673,6 @@ public final class Spv {
         SpvLoopControlNoFusionINTELShift             = 23,
         SpvLoopControlMax                            = 0x7fffffff;
 
-    /**
-     * {@code SpvLoopControlMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvLoopControlMaskNone LoopControlMaskNone}</li>
-     * <li>{@link #SpvLoopControlUnrollMask LoopControlUnrollMask}</li>
-     * <li>{@link #SpvLoopControlDontUnrollMask LoopControlDontUnrollMask}</li>
-     * <li>{@link #SpvLoopControlDependencyInfiniteMask LoopControlDependencyInfiniteMask}</li>
-     * <li>{@link #SpvLoopControlDependencyLengthMask LoopControlDependencyLengthMask}</li>
-     * <li>{@link #SpvLoopControlMinIterationsMask LoopControlMinIterationsMask}</li>
-     * <li>{@link #SpvLoopControlMaxIterationsMask LoopControlMaxIterationsMask}</li>
-     * <li>{@link #SpvLoopControlIterationMultipleMask LoopControlIterationMultipleMask}</li>
-     * <li>{@link #SpvLoopControlPeelCountMask LoopControlPeelCountMask}</li>
-     * <li>{@link #SpvLoopControlPartialCountMask LoopControlPartialCountMask}</li>
-     * <li>{@link #SpvLoopControlInitiationIntervalINTELMask LoopControlInitiationIntervalINTELMask}</li>
-     * <li>{@link #SpvLoopControlMaxConcurrencyINTELMask LoopControlMaxConcurrencyINTELMask}</li>
-     * <li>{@link #SpvLoopControlDependencyArrayINTELMask LoopControlDependencyArrayINTELMask}</li>
-     * <li>{@link #SpvLoopControlPipelineEnableINTELMask LoopControlPipelineEnableINTELMask}</li>
-     * <li>{@link #SpvLoopControlLoopCoalesceINTELMask LoopControlLoopCoalesceINTELMask}</li>
-     * <li>{@link #SpvLoopControlMaxInterleavingINTELMask LoopControlMaxInterleavingINTELMask}</li>
-     * <li>{@link #SpvLoopControlSpeculatedIterationsINTELMask LoopControlSpeculatedIterationsINTELMask}</li>
-     * <li>{@link #SpvLoopControlNoFusionINTELMask LoopControlNoFusionINTELMask}</li>
-     * </ul>
-     */
     public static final int
         SpvLoopControlMaskNone                      = 0,
         SpvLoopControlUnrollMask                    = 0x00000001,
@@ -1522,20 +693,6 @@ public final class Spv {
         SpvLoopControlSpeculatedIterationsINTELMask = 0x00400000,
         SpvLoopControlNoFusionINTELMask             = 0x00800000;
 
-    /**
-     * {@code SpvFunctionControlShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFunctionControlInlineShift FunctionControlInlineShift}</li>
-     * <li>{@link #SpvFunctionControlDontInlineShift FunctionControlDontInlineShift}</li>
-     * <li>{@link #SpvFunctionControlPureShift FunctionControlPureShift}</li>
-     * <li>{@link #SpvFunctionControlConstShift FunctionControlConstShift}</li>
-     * <li>{@link #SpvFunctionControlOptNoneINTELShift FunctionControlOptNoneINTELShift}</li>
-     * <li>{@link #SpvFunctionControlMax FunctionControlMax}</li>
-     * </ul>
-     */
     public static final int
         SpvFunctionControlInlineShift       = 0,
         SpvFunctionControlDontInlineShift   = 1,
@@ -1544,20 +701,6 @@ public final class Spv {
         SpvFunctionControlOptNoneINTELShift = 16,
         SpvFunctionControlMax               = 0x7fffffff;
 
-    /**
-     * {@code SpvFunctionControlMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFunctionControlMaskNone FunctionControlMaskNone}</li>
-     * <li>{@link #SpvFunctionControlInlineMask FunctionControlInlineMask}</li>
-     * <li>{@link #SpvFunctionControlDontInlineMask FunctionControlDontInlineMask}</li>
-     * <li>{@link #SpvFunctionControlPureMask FunctionControlPureMask}</li>
-     * <li>{@link #SpvFunctionControlConstMask FunctionControlConstMask}</li>
-     * <li>{@link #SpvFunctionControlOptNoneINTELMask FunctionControlOptNoneINTELMask}</li>
-     * </ul>
-     */
     public static final int
         SpvFunctionControlMaskNone         = 0,
         SpvFunctionControlInlineMask       = 0x00000001,
@@ -1566,32 +709,6 @@ public final class Spv {
         SpvFunctionControlConstMask        = 0x00000008,
         SpvFunctionControlOptNoneINTELMask = 0x00010000;
 
-    /**
-     * {@code SpvMemorySemanticsShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvMemorySemanticsAcquireShift MemorySemanticsAcquireShift}</li>
-     * <li>{@link #SpvMemorySemanticsReleaseShift MemorySemanticsReleaseShift}</li>
-     * <li>{@link #SpvMemorySemanticsAcquireReleaseShift MemorySemanticsAcquireReleaseShift}</li>
-     * <li>{@link #SpvMemorySemanticsSequentiallyConsistentShift MemorySemanticsSequentiallyConsistentShift}</li>
-     * <li>{@link #SpvMemorySemanticsUniformMemoryShift MemorySemanticsUniformMemoryShift}</li>
-     * <li>{@link #SpvMemorySemanticsSubgroupMemoryShift MemorySemanticsSubgroupMemoryShift}</li>
-     * <li>{@link #SpvMemorySemanticsWorkgroupMemoryShift MemorySemanticsWorkgroupMemoryShift}</li>
-     * <li>{@link #SpvMemorySemanticsCrossWorkgroupMemoryShift MemorySemanticsCrossWorkgroupMemoryShift}</li>
-     * <li>{@link #SpvMemorySemanticsAtomicCounterMemoryShift MemorySemanticsAtomicCounterMemoryShift}</li>
-     * <li>{@link #SpvMemorySemanticsImageMemoryShift MemorySemanticsImageMemoryShift}</li>
-     * <li>{@link #SpvMemorySemanticsOutputMemoryShift MemorySemanticsOutputMemoryShift}</li>
-     * <li>{@link #SpvMemorySemanticsOutputMemoryKHRShift MemorySemanticsOutputMemoryKHRShift}</li>
-     * <li>{@link #SpvMemorySemanticsMakeAvailableShift MemorySemanticsMakeAvailableShift}</li>
-     * <li>{@link #SpvMemorySemanticsMakeAvailableKHRShift MemorySemanticsMakeAvailableKHRShift}</li>
-     * <li>{@link #SpvMemorySemanticsMakeVisibleShift MemorySemanticsMakeVisibleShift}</li>
-     * <li>{@link #SpvMemorySemanticsMakeVisibleKHRShift MemorySemanticsMakeVisibleKHRShift}</li>
-     * <li>{@link #SpvMemorySemanticsVolatileShift MemorySemanticsVolatileShift}</li>
-     * <li>{@link #SpvMemorySemanticsMax MemorySemanticsMax}</li>
-     * </ul>
-     */
     public static final int
         SpvMemorySemanticsAcquireShift                = 1,
         SpvMemorySemanticsReleaseShift                = 2,
@@ -1612,32 +729,6 @@ public final class Spv {
         SpvMemorySemanticsVolatileShift               = 15,
         SpvMemorySemanticsMax                         = 0x7fffffff;
 
-    /**
-     * {@code SpvMemorySemanticsMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvMemorySemanticsMaskNone MemorySemanticsMaskNone}</li>
-     * <li>{@link #SpvMemorySemanticsAcquireMask MemorySemanticsAcquireMask}</li>
-     * <li>{@link #SpvMemorySemanticsReleaseMask MemorySemanticsReleaseMask}</li>
-     * <li>{@link #SpvMemorySemanticsAcquireReleaseMask MemorySemanticsAcquireReleaseMask}</li>
-     * <li>{@link #SpvMemorySemanticsSequentiallyConsistentMask MemorySemanticsSequentiallyConsistentMask}</li>
-     * <li>{@link #SpvMemorySemanticsUniformMemoryMask MemorySemanticsUniformMemoryMask}</li>
-     * <li>{@link #SpvMemorySemanticsSubgroupMemoryMask MemorySemanticsSubgroupMemoryMask}</li>
-     * <li>{@link #SpvMemorySemanticsWorkgroupMemoryMask MemorySemanticsWorkgroupMemoryMask}</li>
-     * <li>{@link #SpvMemorySemanticsCrossWorkgroupMemoryMask MemorySemanticsCrossWorkgroupMemoryMask}</li>
-     * <li>{@link #SpvMemorySemanticsAtomicCounterMemoryMask MemorySemanticsAtomicCounterMemoryMask}</li>
-     * <li>{@link #SpvMemorySemanticsImageMemoryMask MemorySemanticsImageMemoryMask}</li>
-     * <li>{@link #SpvMemorySemanticsOutputMemoryMask MemorySemanticsOutputMemoryMask}</li>
-     * <li>{@link #SpvMemorySemanticsOutputMemoryKHRMask MemorySemanticsOutputMemoryKHRMask}</li>
-     * <li>{@link #SpvMemorySemanticsMakeAvailableMask MemorySemanticsMakeAvailableMask}</li>
-     * <li>{@link #SpvMemorySemanticsMakeAvailableKHRMask MemorySemanticsMakeAvailableKHRMask}</li>
-     * <li>{@link #SpvMemorySemanticsMakeVisibleMask MemorySemanticsMakeVisibleMask}</li>
-     * <li>{@link #SpvMemorySemanticsMakeVisibleKHRMask MemorySemanticsMakeVisibleKHRMask}</li>
-     * <li>{@link #SpvMemorySemanticsVolatileMask MemorySemanticsVolatileMask}</li>
-     * </ul>
-     */
     public static final int
         SpvMemorySemanticsMaskNone                   = 0,
         SpvMemorySemanticsAcquireMask                = 0x00000002,
@@ -1658,26 +749,6 @@ public final class Spv {
         SpvMemorySemanticsMakeVisibleKHRMask         = 0x00004000,
         SpvMemorySemanticsVolatileMask               = 0x00008000;
 
-    /**
-     * {@code SpvMemoryAccessShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvMemoryAccessVolatileShift MemoryAccessVolatileShift}</li>
-     * <li>{@link #SpvMemoryAccessAlignedShift MemoryAccessAlignedShift}</li>
-     * <li>{@link #SpvMemoryAccessNontemporalShift MemoryAccessNontemporalShift}</li>
-     * <li>{@link #SpvMemoryAccessMakePointerAvailableShift MemoryAccessMakePointerAvailableShift}</li>
-     * <li>{@link #SpvMemoryAccessMakePointerAvailableKHRShift MemoryAccessMakePointerAvailableKHRShift}</li>
-     * <li>{@link #SpvMemoryAccessMakePointerVisibleShift MemoryAccessMakePointerVisibleShift}</li>
-     * <li>{@link #SpvMemoryAccessMakePointerVisibleKHRShift MemoryAccessMakePointerVisibleKHRShift}</li>
-     * <li>{@link #SpvMemoryAccessNonPrivatePointerShift MemoryAccessNonPrivatePointerShift}</li>
-     * <li>{@link #SpvMemoryAccessNonPrivatePointerKHRShift MemoryAccessNonPrivatePointerKHRShift}</li>
-     * <li>{@link #SpvMemoryAccessAliasScopeINTELMaskShift MemoryAccessAliasScopeINTELMaskShift}</li>
-     * <li>{@link #SpvMemoryAccessNoAliasINTELMaskShift MemoryAccessNoAliasINTELMaskShift}</li>
-     * <li>{@link #SpvMemoryAccessMax MemoryAccessMax}</li>
-     * </ul>
-     */
     public static final int
         SpvMemoryAccessVolatileShift                = 0,
         SpvMemoryAccessAlignedShift                 = 1,
@@ -1692,26 +763,6 @@ public final class Spv {
         SpvMemoryAccessNoAliasINTELMaskShift        = 17,
         SpvMemoryAccessMax                          = 0x7fffffff;
 
-    /**
-     * {@code SpvMemoryAccessMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvMemoryAccessMaskNone MemoryAccessMaskNone}</li>
-     * <li>{@link #SpvMemoryAccessVolatileMask MemoryAccessVolatileMask}</li>
-     * <li>{@link #SpvMemoryAccessAlignedMask MemoryAccessAlignedMask}</li>
-     * <li>{@link #SpvMemoryAccessNontemporalMask MemoryAccessNontemporalMask}</li>
-     * <li>{@link #SpvMemoryAccessMakePointerAvailableMask MemoryAccessMakePointerAvailableMask}</li>
-     * <li>{@link #SpvMemoryAccessMakePointerAvailableKHRMask MemoryAccessMakePointerAvailableKHRMask}</li>
-     * <li>{@link #SpvMemoryAccessMakePointerVisibleMask MemoryAccessMakePointerVisibleMask}</li>
-     * <li>{@link #SpvMemoryAccessMakePointerVisibleKHRMask MemoryAccessMakePointerVisibleKHRMask}</li>
-     * <li>{@link #SpvMemoryAccessNonPrivatePointerMask MemoryAccessNonPrivatePointerMask}</li>
-     * <li>{@link #SpvMemoryAccessNonPrivatePointerKHRMask MemoryAccessNonPrivatePointerKHRMask}</li>
-     * <li>{@link #SpvMemoryAccessAliasScopeINTELMaskMask MemoryAccessAliasScopeINTELMaskMask}</li>
-     * <li>{@link #SpvMemoryAccessNoAliasINTELMaskMask MemoryAccessNoAliasINTELMaskMask}</li>
-     * </ul>
-     */
     public static final int
         SpvMemoryAccessMaskNone                    = 0,
         SpvMemoryAccessVolatileMask                = 0x00000001,
@@ -1726,23 +777,6 @@ public final class Spv {
         SpvMemoryAccessAliasScopeINTELMaskMask     = 0x00010000,
         SpvMemoryAccessNoAliasINTELMaskMask        = 0x00020000;
 
-    /**
-     * {@code SpvScope}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvScopeCrossDevice ScopeCrossDevice}</li>
-     * <li>{@link #SpvScopeDevice ScopeDevice}</li>
-     * <li>{@link #SpvScopeWorkgroup ScopeWorkgroup}</li>
-     * <li>{@link #SpvScopeSubgroup ScopeSubgroup}</li>
-     * <li>{@link #SpvScopeInvocation ScopeInvocation}</li>
-     * <li>{@link #SpvScopeQueueFamily ScopeQueueFamily}</li>
-     * <li>{@link #SpvScopeQueueFamilyKHR ScopeQueueFamilyKHR}</li>
-     * <li>{@link #SpvScopeShaderCallKHR ScopeShaderCallKHR}</li>
-     * <li>{@link #SpvScopeMax ScopeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvScopeCrossDevice    = 0,
         SpvScopeDevice         = 1,
@@ -1754,22 +788,6 @@ public final class Spv {
         SpvScopeShaderCallKHR  = 6,
         SpvScopeMax            = 0x7fffffff;
 
-    /**
-     * {@code SpvGroupOperation}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvGroupOperationReduce GroupOperationReduce}</li>
-     * <li>{@link #SpvGroupOperationInclusiveScan GroupOperationInclusiveScan}</li>
-     * <li>{@link #SpvGroupOperationExclusiveScan GroupOperationExclusiveScan}</li>
-     * <li>{@link #SpvGroupOperationClusteredReduce GroupOperationClusteredReduce}</li>
-     * <li>{@link #SpvGroupOperationPartitionedReduceNV GroupOperationPartitionedReduceNV}</li>
-     * <li>{@link #SpvGroupOperationPartitionedInclusiveScanNV GroupOperationPartitionedInclusiveScanNV}</li>
-     * <li>{@link #SpvGroupOperationPartitionedExclusiveScanNV GroupOperationPartitionedExclusiveScanNV}</li>
-     * <li>{@link #SpvGroupOperationMax GroupOperationMax}</li>
-     * </ul>
-     */
     public static final int
         SpvGroupOperationReduce                     = 0,
         SpvGroupOperationInclusiveScan              = 1,
@@ -1780,290 +798,20 @@ public final class Spv {
         SpvGroupOperationPartitionedExclusiveScanNV = 8,
         SpvGroupOperationMax                        = 0x7fffffff;
 
-    /**
-     * {@code SpvKernelEnqueueFlags}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvKernelEnqueueFlagsNoWait KernelEnqueueFlagsNoWait}</li>
-     * <li>{@link #SpvKernelEnqueueFlagsWaitKernel KernelEnqueueFlagsWaitKernel}</li>
-     * <li>{@link #SpvKernelEnqueueFlagsWaitWorkGroup KernelEnqueueFlagsWaitWorkGroup}</li>
-     * <li>{@link #SpvKernelEnqueueFlagsMax KernelEnqueueFlagsMax}</li>
-     * </ul>
-     */
     public static final int
         SpvKernelEnqueueFlagsNoWait        = 0,
         SpvKernelEnqueueFlagsWaitKernel    = 1,
         SpvKernelEnqueueFlagsWaitWorkGroup = 2,
         SpvKernelEnqueueFlagsMax           = 0x7fffffff;
 
-    /**
-     * {@code SpvKernelProfilingInfoShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvKernelProfilingInfoCmdExecTimeShift KernelProfilingInfoCmdExecTimeShift}</li>
-     * <li>{@link #SpvKernelProfilingInfoMax KernelProfilingInfoMax}</li>
-     * </ul>
-     */
     public static final int
         SpvKernelProfilingInfoCmdExecTimeShift = 0,
         SpvKernelProfilingInfoMax              = 0x7fffffff;
 
-    /**
-     * {@code SpvKernelProfilingInfoMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvKernelProfilingInfoMaskNone KernelProfilingInfoMaskNone}</li>
-     * <li>{@link #SpvKernelProfilingInfoCmdExecTimeMask KernelProfilingInfoCmdExecTimeMask}</li>
-     * </ul>
-     */
     public static final int
         SpvKernelProfilingInfoMaskNone        = 0,
         SpvKernelProfilingInfoCmdExecTimeMask = 0x00000001;
 
-    /**
-     * {@code SpvCapability}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvCapabilityMatrix CapabilityMatrix}</li>
-     * <li>{@link #SpvCapabilityShader CapabilityShader}</li>
-     * <li>{@link #SpvCapabilityGeometry CapabilityGeometry}</li>
-     * <li>{@link #SpvCapabilityTessellation CapabilityTessellation}</li>
-     * <li>{@link #SpvCapabilityAddresses CapabilityAddresses}</li>
-     * <li>{@link #SpvCapabilityLinkage CapabilityLinkage}</li>
-     * <li>{@link #SpvCapabilityKernel CapabilityKernel}</li>
-     * <li>{@link #SpvCapabilityVector16 CapabilityVector16}</li>
-     * <li>{@link #SpvCapabilityFloat16Buffer CapabilityFloat16Buffer}</li>
-     * <li>{@link #SpvCapabilityFloat16 CapabilityFloat16}</li>
-     * <li>{@link #SpvCapabilityFloat64 CapabilityFloat64}</li>
-     * <li>{@link #SpvCapabilityInt64 CapabilityInt64}</li>
-     * <li>{@link #SpvCapabilityInt64Atomics CapabilityInt64Atomics}</li>
-     * <li>{@link #SpvCapabilityImageBasic CapabilityImageBasic}</li>
-     * <li>{@link #SpvCapabilityImageReadWrite CapabilityImageReadWrite}</li>
-     * <li>{@link #SpvCapabilityImageMipmap CapabilityImageMipmap}</li>
-     * <li>{@link #SpvCapabilityPipes CapabilityPipes}</li>
-     * <li>{@link #SpvCapabilityGroups CapabilityGroups}</li>
-     * <li>{@link #SpvCapabilityDeviceEnqueue CapabilityDeviceEnqueue}</li>
-     * <li>{@link #SpvCapabilityLiteralSampler CapabilityLiteralSampler}</li>
-     * <li>{@link #SpvCapabilityAtomicStorage CapabilityAtomicStorage}</li>
-     * <li>{@link #SpvCapabilityInt16 CapabilityInt16}</li>
-     * <li>{@link #SpvCapabilityTessellationPointSize CapabilityTessellationPointSize}</li>
-     * <li>{@link #SpvCapabilityGeometryPointSize CapabilityGeometryPointSize}</li>
-     * <li>{@link #SpvCapabilityImageGatherExtended CapabilityImageGatherExtended}</li>
-     * <li>{@link #SpvCapabilityStorageImageMultisample CapabilityStorageImageMultisample}</li>
-     * <li>{@link #SpvCapabilityUniformBufferArrayDynamicIndexing CapabilityUniformBufferArrayDynamicIndexing}</li>
-     * <li>{@link #SpvCapabilitySampledImageArrayDynamicIndexing CapabilitySampledImageArrayDynamicIndexing}</li>
-     * <li>{@link #SpvCapabilityStorageBufferArrayDynamicIndexing CapabilityStorageBufferArrayDynamicIndexing}</li>
-     * <li>{@link #SpvCapabilityStorageImageArrayDynamicIndexing CapabilityStorageImageArrayDynamicIndexing}</li>
-     * <li>{@link #SpvCapabilityClipDistance CapabilityClipDistance}</li>
-     * <li>{@link #SpvCapabilityCullDistance CapabilityCullDistance}</li>
-     * <li>{@link #SpvCapabilityImageCubeArray CapabilityImageCubeArray}</li>
-     * <li>{@link #SpvCapabilitySampleRateShading CapabilitySampleRateShading}</li>
-     * <li>{@link #SpvCapabilityImageRect CapabilityImageRect}</li>
-     * <li>{@link #SpvCapabilitySampledRect CapabilitySampledRect}</li>
-     * <li>{@link #SpvCapabilityGenericPointer CapabilityGenericPointer}</li>
-     * <li>{@link #SpvCapabilityInt8 CapabilityInt8}</li>
-     * <li>{@link #SpvCapabilityInputAttachment CapabilityInputAttachment}</li>
-     * <li>{@link #SpvCapabilitySparseResidency CapabilitySparseResidency}</li>
-     * <li>{@link #SpvCapabilityMinLod CapabilityMinLod}</li>
-     * <li>{@link #SpvCapabilitySampled1D CapabilitySampled1D}</li>
-     * <li>{@link #SpvCapabilityImage1D CapabilityImage1D}</li>
-     * <li>{@link #SpvCapabilitySampledCubeArray CapabilitySampledCubeArray}</li>
-     * <li>{@link #SpvCapabilitySampledBuffer CapabilitySampledBuffer}</li>
-     * <li>{@link #SpvCapabilityImageBuffer CapabilityImageBuffer}</li>
-     * <li>{@link #SpvCapabilityImageMSArray CapabilityImageMSArray}</li>
-     * <li>{@link #SpvCapabilityStorageImageExtendedFormats CapabilityStorageImageExtendedFormats}</li>
-     * <li>{@link #SpvCapabilityImageQuery CapabilityImageQuery}</li>
-     * <li>{@link #SpvCapabilityDerivativeControl CapabilityDerivativeControl}</li>
-     * <li>{@link #SpvCapabilityInterpolationFunction CapabilityInterpolationFunction}</li>
-     * <li>{@link #SpvCapabilityTransformFeedback CapabilityTransformFeedback}</li>
-     * <li>{@link #SpvCapabilityGeometryStreams CapabilityGeometryStreams}</li>
-     * <li>{@link #SpvCapabilityStorageImageReadWithoutFormat CapabilityStorageImageReadWithoutFormat}</li>
-     * <li>{@link #SpvCapabilityStorageImageWriteWithoutFormat CapabilityStorageImageWriteWithoutFormat}</li>
-     * <li>{@link #SpvCapabilityMultiViewport CapabilityMultiViewport}</li>
-     * <li>{@link #SpvCapabilitySubgroupDispatch CapabilitySubgroupDispatch}</li>
-     * <li>{@link #SpvCapabilityNamedBarrier CapabilityNamedBarrier}</li>
-     * <li>{@link #SpvCapabilityPipeStorage CapabilityPipeStorage}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniform CapabilityGroupNonUniform}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformVote CapabilityGroupNonUniformVote}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformArithmetic CapabilityGroupNonUniformArithmetic}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformBallot CapabilityGroupNonUniformBallot}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformShuffle CapabilityGroupNonUniformShuffle}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformShuffleRelative CapabilityGroupNonUniformShuffleRelative}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformClustered CapabilityGroupNonUniformClustered}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformQuad CapabilityGroupNonUniformQuad}</li>
-     * <li>{@link #SpvCapabilityShaderLayer CapabilityShaderLayer}</li>
-     * <li>{@link #SpvCapabilityShaderViewportIndex CapabilityShaderViewportIndex}</li>
-     * <li>{@link #SpvCapabilityUniformDecoration CapabilityUniformDecoration}</li>
-     * <li>{@link #SpvCapabilityFragmentShadingRateKHR CapabilityFragmentShadingRateKHR}</li>
-     * <li>{@link #SpvCapabilitySubgroupBallotKHR CapabilitySubgroupBallotKHR}</li>
-     * <li>{@link #SpvCapabilityDrawParameters CapabilityDrawParameters}</li>
-     * <li>{@link #SpvCapabilityWorkgroupMemoryExplicitLayoutKHR CapabilityWorkgroupMemoryExplicitLayoutKHR}</li>
-     * <li>{@link #SpvCapabilityWorkgroupMemoryExplicitLayout8BitAccessKHR CapabilityWorkgroupMemoryExplicitLayout8BitAccessKHR}</li>
-     * <li>{@link #SpvCapabilityWorkgroupMemoryExplicitLayout16BitAccessKHR CapabilityWorkgroupMemoryExplicitLayout16BitAccessKHR}</li>
-     * <li>{@link #SpvCapabilitySubgroupVoteKHR CapabilitySubgroupVoteKHR}</li>
-     * <li>{@link #SpvCapabilityStorageBuffer16BitAccess CapabilityStorageBuffer16BitAccess}</li>
-     * <li>{@link #SpvCapabilityStorageUniformBufferBlock16 CapabilityStorageUniformBufferBlock16}</li>
-     * <li>{@link #SpvCapabilityStorageUniform16 CapabilityStorageUniform16}</li>
-     * <li>{@link #SpvCapabilityUniformAndStorageBuffer16BitAccess CapabilityUniformAndStorageBuffer16BitAccess}</li>
-     * <li>{@link #SpvCapabilityStoragePushConstant16 CapabilityStoragePushConstant16}</li>
-     * <li>{@link #SpvCapabilityStorageInputOutput16 CapabilityStorageInputOutput16}</li>
-     * <li>{@link #SpvCapabilityDeviceGroup CapabilityDeviceGroup}</li>
-     * <li>{@link #SpvCapabilityMultiView CapabilityMultiView}</li>
-     * <li>{@link #SpvCapabilityVariablePointersStorageBuffer CapabilityVariablePointersStorageBuffer}</li>
-     * <li>{@link #SpvCapabilityVariablePointers CapabilityVariablePointers}</li>
-     * <li>{@link #SpvCapabilityAtomicStorageOps CapabilityAtomicStorageOps}</li>
-     * <li>{@link #SpvCapabilitySampleMaskPostDepthCoverage CapabilitySampleMaskPostDepthCoverage}</li>
-     * <li>{@link #SpvCapabilityStorageBuffer8BitAccess CapabilityStorageBuffer8BitAccess}</li>
-     * <li>{@link #SpvCapabilityUniformAndStorageBuffer8BitAccess CapabilityUniformAndStorageBuffer8BitAccess}</li>
-     * <li>{@link #SpvCapabilityStoragePushConstant8 CapabilityStoragePushConstant8}</li>
-     * <li>{@link #SpvCapabilityDenormPreserve CapabilityDenormPreserve}</li>
-     * <li>{@link #SpvCapabilityDenormFlushToZero CapabilityDenormFlushToZero}</li>
-     * <li>{@link #SpvCapabilitySignedZeroInfNanPreserve CapabilitySignedZeroInfNanPreserve}</li>
-     * <li>{@link #SpvCapabilityRoundingModeRTE CapabilityRoundingModeRTE}</li>
-     * <li>{@link #SpvCapabilityRoundingModeRTZ CapabilityRoundingModeRTZ}</li>
-     * <li>{@link #SpvCapabilityRayQueryProvisionalKHR CapabilityRayQueryProvisionalKHR}</li>
-     * <li>{@link #SpvCapabilityRayQueryKHR CapabilityRayQueryKHR}</li>
-     * <li>{@link #SpvCapabilityRayTraversalPrimitiveCullingKHR CapabilityRayTraversalPrimitiveCullingKHR}</li>
-     * <li>{@link #SpvCapabilityRayTracingKHR CapabilityRayTracingKHR}</li>
-     * <li>{@link #SpvCapabilityTextureSampleWeightedQCOM CapabilityTextureSampleWeightedQCOM}</li>
-     * <li>{@link #SpvCapabilityTextureBoxFilterQCOM CapabilityTextureBoxFilterQCOM}</li>
-     * <li>{@link #SpvCapabilityTextureBlockMatchQCOM CapabilityTextureBlockMatchQCOM}</li>
-     * <li>{@link #SpvCapabilityTextureBlockMatch2QCOM CapabilityTextureBlockMatch2QCOM}</li>
-     * <li>{@link #SpvCapabilityFloat16ImageAMD CapabilityFloat16ImageAMD}</li>
-     * <li>{@link #SpvCapabilityImageGatherBiasLodAMD CapabilityImageGatherBiasLodAMD}</li>
-     * <li>{@link #SpvCapabilityFragmentMaskAMD CapabilityFragmentMaskAMD}</li>
-     * <li>{@link #SpvCapabilityStencilExportEXT CapabilityStencilExportEXT}</li>
-     * <li>{@link #SpvCapabilityImageReadWriteLodAMD CapabilityImageReadWriteLodAMD}</li>
-     * <li>{@link #SpvCapabilityInt64ImageEXT CapabilityInt64ImageEXT}</li>
-     * <li>{@link #SpvCapabilityShaderClockKHR CapabilityShaderClockKHR}</li>
-     * <li>{@link #SpvCapabilitySampleMaskOverrideCoverageNV CapabilitySampleMaskOverrideCoverageNV}</li>
-     * <li>{@link #SpvCapabilityGeometryShaderPassthroughNV CapabilityGeometryShaderPassthroughNV}</li>
-     * <li>{@link #SpvCapabilityShaderViewportIndexLayerEXT CapabilityShaderViewportIndexLayerEXT}</li>
-     * <li>{@link #SpvCapabilityShaderViewportIndexLayerNV CapabilityShaderViewportIndexLayerNV}</li>
-     * <li>{@link #SpvCapabilityShaderViewportMaskNV CapabilityShaderViewportMaskNV}</li>
-     * <li>{@link #SpvCapabilityShaderStereoViewNV CapabilityShaderStereoViewNV}</li>
-     * <li>{@link #SpvCapabilityPerViewAttributesNV CapabilityPerViewAttributesNV}</li>
-     * <li>{@link #SpvCapabilityFragmentFullyCoveredEXT CapabilityFragmentFullyCoveredEXT}</li>
-     * <li>{@link #SpvCapabilityMeshShadingNV CapabilityMeshShadingNV}</li>
-     * <li>{@link #SpvCapabilityImageFootprintNV CapabilityImageFootprintNV}</li>
-     * <li>{@link #SpvCapabilityMeshShadingEXT CapabilityMeshShadingEXT}</li>
-     * <li>{@link #SpvCapabilityFragmentBarycentricKHR CapabilityFragmentBarycentricKHR}</li>
-     * <li>{@link #SpvCapabilityFragmentBarycentricNV CapabilityFragmentBarycentricNV}</li>
-     * <li>{@link #SpvCapabilityComputeDerivativeGroupQuadsNV CapabilityComputeDerivativeGroupQuadsNV}</li>
-     * <li>{@link #SpvCapabilityFragmentDensityEXT CapabilityFragmentDensityEXT}</li>
-     * <li>{@link #SpvCapabilityShadingRateNV CapabilityShadingRateNV}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformPartitionedNV CapabilityGroupNonUniformPartitionedNV}</li>
-     * <li>{@link #SpvCapabilityShaderNonUniform CapabilityShaderNonUniform}</li>
-     * <li>{@link #SpvCapabilityShaderNonUniformEXT CapabilityShaderNonUniformEXT}</li>
-     * <li>{@link #SpvCapabilityRuntimeDescriptorArray CapabilityRuntimeDescriptorArray}</li>
-     * <li>{@link #SpvCapabilityRuntimeDescriptorArrayEXT CapabilityRuntimeDescriptorArrayEXT}</li>
-     * <li>{@link #SpvCapabilityInputAttachmentArrayDynamicIndexing CapabilityInputAttachmentArrayDynamicIndexing}</li>
-     * <li>{@link #SpvCapabilityInputAttachmentArrayDynamicIndexingEXT CapabilityInputAttachmentArrayDynamicIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityUniformTexelBufferArrayDynamicIndexing CapabilityUniformTexelBufferArrayDynamicIndexing}</li>
-     * <li>{@link #SpvCapabilityUniformTexelBufferArrayDynamicIndexingEXT CapabilityUniformTexelBufferArrayDynamicIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityStorageTexelBufferArrayDynamicIndexing CapabilityStorageTexelBufferArrayDynamicIndexing}</li>
-     * <li>{@link #SpvCapabilityStorageTexelBufferArrayDynamicIndexingEXT CapabilityStorageTexelBufferArrayDynamicIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityUniformBufferArrayNonUniformIndexing CapabilityUniformBufferArrayNonUniformIndexing}</li>
-     * <li>{@link #SpvCapabilityUniformBufferArrayNonUniformIndexingEXT CapabilityUniformBufferArrayNonUniformIndexingEXT}</li>
-     * <li>{@link #SpvCapabilitySampledImageArrayNonUniformIndexing CapabilitySampledImageArrayNonUniformIndexing}</li>
-     * <li>{@link #SpvCapabilitySampledImageArrayNonUniformIndexingEXT CapabilitySampledImageArrayNonUniformIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityStorageBufferArrayNonUniformIndexing CapabilityStorageBufferArrayNonUniformIndexing}</li>
-     * <li>{@link #SpvCapabilityStorageBufferArrayNonUniformIndexingEXT CapabilityStorageBufferArrayNonUniformIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityStorageImageArrayNonUniformIndexing CapabilityStorageImageArrayNonUniformIndexing}</li>
-     * <li>{@link #SpvCapabilityStorageImageArrayNonUniformIndexingEXT CapabilityStorageImageArrayNonUniformIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityInputAttachmentArrayNonUniformIndexing CapabilityInputAttachmentArrayNonUniformIndexing}</li>
-     * <li>{@link #SpvCapabilityInputAttachmentArrayNonUniformIndexingEXT CapabilityInputAttachmentArrayNonUniformIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityUniformTexelBufferArrayNonUniformIndexing CapabilityUniformTexelBufferArrayNonUniformIndexing}</li>
-     * <li>{@link #SpvCapabilityUniformTexelBufferArrayNonUniformIndexingEXT CapabilityUniformTexelBufferArrayNonUniformIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityStorageTexelBufferArrayNonUniformIndexing CapabilityStorageTexelBufferArrayNonUniformIndexing}</li>
-     * <li>{@link #SpvCapabilityStorageTexelBufferArrayNonUniformIndexingEXT CapabilityStorageTexelBufferArrayNonUniformIndexingEXT}</li>
-     * <li>{@link #SpvCapabilityRayTracingNV CapabilityRayTracingNV}</li>
-     * <li>{@link #SpvCapabilityRayTracingMotionBlurNV CapabilityRayTracingMotionBlurNV}</li>
-     * <li>{@link #SpvCapabilityVulkanMemoryModel CapabilityVulkanMemoryModel}</li>
-     * <li>{@link #SpvCapabilityVulkanMemoryModelKHR CapabilityVulkanMemoryModelKHR}</li>
-     * <li>{@link #SpvCapabilityVulkanMemoryModelDeviceScope CapabilityVulkanMemoryModelDeviceScope}</li>
-     * <li>{@link #SpvCapabilityVulkanMemoryModelDeviceScopeKHR CapabilityVulkanMemoryModelDeviceScopeKHR}</li>
-     * <li>{@link #SpvCapabilityPhysicalStorageBufferAddresses CapabilityPhysicalStorageBufferAddresses}</li>
-     * <li>{@link #SpvCapabilityPhysicalStorageBufferAddressesEXT CapabilityPhysicalStorageBufferAddressesEXT}</li>
-     * <li>{@link #SpvCapabilityComputeDerivativeGroupLinearNV CapabilityComputeDerivativeGroupLinearNV}</li>
-     * <li>{@link #SpvCapabilityRayTracingProvisionalKHR CapabilityRayTracingProvisionalKHR}</li>
-     * <li>{@link #SpvCapabilityCooperativeMatrixNV CapabilityCooperativeMatrixNV}</li>
-     * <li>{@link #SpvCapabilityFragmentShaderSampleInterlockEXT CapabilityFragmentShaderSampleInterlockEXT}</li>
-     * <li>{@link #SpvCapabilityFragmentShaderShadingRateInterlockEXT CapabilityFragmentShaderShadingRateInterlockEXT}</li>
-     * <li>{@link #SpvCapabilityShaderSMBuiltinsNV CapabilityShaderSMBuiltinsNV}</li>
-     * <li>{@link #SpvCapabilityFragmentShaderPixelInterlockEXT CapabilityFragmentShaderPixelInterlockEXT}</li>
-     * <li>{@link #SpvCapabilityDemoteToHelperInvocation CapabilityDemoteToHelperInvocation}</li>
-     * <li>{@link #SpvCapabilityDemoteToHelperInvocationEXT CapabilityDemoteToHelperInvocationEXT}</li>
-     * <li>{@link #SpvCapabilityBindlessTextureNV CapabilityBindlessTextureNV}</li>
-     * <li>{@link #SpvCapabilitySubgroupShuffleINTEL CapabilitySubgroupShuffleINTEL}</li>
-     * <li>{@link #SpvCapabilitySubgroupBufferBlockIOINTEL CapabilitySubgroupBufferBlockIOINTEL}</li>
-     * <li>{@link #SpvCapabilitySubgroupImageBlockIOINTEL CapabilitySubgroupImageBlockIOINTEL}</li>
-     * <li>{@link #SpvCapabilitySubgroupImageMediaBlockIOINTEL CapabilitySubgroupImageMediaBlockIOINTEL}</li>
-     * <li>{@link #SpvCapabilityRoundToInfinityINTEL CapabilityRoundToInfinityINTEL}</li>
-     * <li>{@link #SpvCapabilityFloatingPointModeINTEL CapabilityFloatingPointModeINTEL}</li>
-     * <li>{@link #SpvCapabilityIntegerFunctions2INTEL CapabilityIntegerFunctions2INTEL}</li>
-     * <li>{@link #SpvCapabilityFunctionPointersINTEL CapabilityFunctionPointersINTEL}</li>
-     * <li>{@link #SpvCapabilityIndirectReferencesINTEL CapabilityIndirectReferencesINTEL}</li>
-     * <li>{@link #SpvCapabilityAsmINTEL CapabilityAsmINTEL}</li>
-     * <li>{@link #SpvCapabilityAtomicFloat32MinMaxEXT CapabilityAtomicFloat32MinMaxEXT}</li>
-     * <li>{@link #SpvCapabilityAtomicFloat64MinMaxEXT CapabilityAtomicFloat64MinMaxEXT}</li>
-     * <li>{@link #SpvCapabilityAtomicFloat16MinMaxEXT CapabilityAtomicFloat16MinMaxEXT}</li>
-     * <li>{@link #SpvCapabilityVectorComputeINTEL CapabilityVectorComputeINTEL}</li>
-     * <li>{@link #SpvCapabilityVectorAnyINTEL CapabilityVectorAnyINTEL}</li>
-     * <li>{@link #SpvCapabilityExpectAssumeKHR CapabilityExpectAssumeKHR}</li>
-     * <li>{@link #SpvCapabilitySubgroupAvcMotionEstimationINTEL CapabilitySubgroupAvcMotionEstimationINTEL}</li>
-     * <li>{@link #SpvCapabilitySubgroupAvcMotionEstimationIntraINTEL CapabilitySubgroupAvcMotionEstimationIntraINTEL}</li>
-     * <li>{@link #SpvCapabilitySubgroupAvcMotionEstimationChromaINTEL CapabilitySubgroupAvcMotionEstimationChromaINTEL}</li>
-     * <li>{@link #SpvCapabilityVariableLengthArrayINTEL CapabilityVariableLengthArrayINTEL}</li>
-     * <li>{@link #SpvCapabilityFunctionFloatControlINTEL CapabilityFunctionFloatControlINTEL}</li>
-     * <li>{@link #SpvCapabilityFPGAMemoryAttributesINTEL CapabilityFPGAMemoryAttributesINTEL}</li>
-     * <li>{@link #SpvCapabilityFPFastMathModeINTEL CapabilityFPFastMathModeINTEL}</li>
-     * <li>{@link #SpvCapabilityArbitraryPrecisionIntegersINTEL CapabilityArbitraryPrecisionIntegersINTEL}</li>
-     * <li>{@link #SpvCapabilityArbitraryPrecisionFloatingPointINTEL CapabilityArbitraryPrecisionFloatingPointINTEL}</li>
-     * <li>{@link #SpvCapabilityUnstructuredLoopControlsINTEL CapabilityUnstructuredLoopControlsINTEL}</li>
-     * <li>{@link #SpvCapabilityFPGALoopControlsINTEL CapabilityFPGALoopControlsINTEL}</li>
-     * <li>{@link #SpvCapabilityKernelAttributesINTEL CapabilityKernelAttributesINTEL}</li>
-     * <li>{@link #SpvCapabilityFPGAKernelAttributesINTEL CapabilityFPGAKernelAttributesINTEL}</li>
-     * <li>{@link #SpvCapabilityFPGAMemoryAccessesINTEL CapabilityFPGAMemoryAccessesINTEL}</li>
-     * <li>{@link #SpvCapabilityFPGAClusterAttributesINTEL CapabilityFPGAClusterAttributesINTEL}</li>
-     * <li>{@link #SpvCapabilityLoopFuseINTEL CapabilityLoopFuseINTEL}</li>
-     * <li>{@link #SpvCapabilityMemoryAccessAliasingINTEL CapabilityMemoryAccessAliasingINTEL}</li>
-     * <li>{@link #SpvCapabilityFPGABufferLocationINTEL CapabilityFPGABufferLocationINTEL}</li>
-     * <li>{@link #SpvCapabilityArbitraryPrecisionFixedPointINTEL CapabilityArbitraryPrecisionFixedPointINTEL}</li>
-     * <li>{@link #SpvCapabilityUSMStorageClassesINTEL CapabilityUSMStorageClassesINTEL}</li>
-     * <li>{@link #SpvCapabilityIOPipesINTEL CapabilityIOPipesINTEL}</li>
-     * <li>{@link #SpvCapabilityBlockingPipesINTEL CapabilityBlockingPipesINTEL}</li>
-     * <li>{@link #SpvCapabilityFPGARegINTEL CapabilityFPGARegINTEL}</li>
-     * <li>{@link #SpvCapabilityDotProductInputAll CapabilityDotProductInputAll}</li>
-     * <li>{@link #SpvCapabilityDotProductInputAllKHR CapabilityDotProductInputAllKHR}</li>
-     * <li>{@link #SpvCapabilityDotProductInput4x8Bit CapabilityDotProductInput4x8Bit}</li>
-     * <li>{@link #SpvCapabilityDotProductInput4x8BitKHR CapabilityDotProductInput4x8BitKHR}</li>
-     * <li>{@link #SpvCapabilityDotProductInput4x8BitPacked CapabilityDotProductInput4x8BitPacked}</li>
-     * <li>{@link #SpvCapabilityDotProductInput4x8BitPackedKHR CapabilityDotProductInput4x8BitPackedKHR}</li>
-     * <li>{@link #SpvCapabilityDotProduct CapabilityDotProduct}</li>
-     * <li>{@link #SpvCapabilityDotProductKHR CapabilityDotProductKHR}</li>
-     * <li>{@link #SpvCapabilityRayCullMaskKHR CapabilityRayCullMaskKHR}</li>
-     * <li>{@link #SpvCapabilityBitInstructions CapabilityBitInstructions}</li>
-     * <li>{@link #SpvCapabilityGroupNonUniformRotateKHR CapabilityGroupNonUniformRotateKHR}</li>
-     * <li>{@link #SpvCapabilityAtomicFloat32AddEXT CapabilityAtomicFloat32AddEXT}</li>
-     * <li>{@link #SpvCapabilityAtomicFloat64AddEXT CapabilityAtomicFloat64AddEXT}</li>
-     * <li>{@link #SpvCapabilityLongConstantCompositeINTEL CapabilityLongConstantCompositeINTEL}</li>
-     * <li>{@link #SpvCapabilityOptNoneINTEL CapabilityOptNoneINTEL}</li>
-     * <li>{@link #SpvCapabilityAtomicFloat16AddEXT CapabilityAtomicFloat16AddEXT}</li>
-     * <li>{@link #SpvCapabilityDebugInfoModuleINTEL CapabilityDebugInfoModuleINTEL}</li>
-     * <li>{@link #SpvCapabilitySplitBarrierINTEL CapabilitySplitBarrierINTEL}</li>
-     * <li>{@link #SpvCapabilityGroupUniformArithmeticKHR CapabilityGroupUniformArithmeticKHR}</li>
-     * <li>{@link #SpvCapabilityMax CapabilityMax}</li>
-     * </ul>
-     */
     public static final int
         SpvCapabilityMatrix                                       = 0,
         SpvCapabilityShader                                       = 1,
@@ -2296,25 +1044,6 @@ public final class Spv {
         SpvCapabilityGroupUniformArithmeticKHR                    = 6400,
         SpvCapabilityMax                                          = 0x7fffffff;
 
-    /**
-     * {@code SpvRayFlagsShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvRayFlagsOpaqueKHRShift RayFlagsOpaqueKHRShift}</li>
-     * <li>{@link #SpvRayFlagsNoOpaqueKHRShift RayFlagsNoOpaqueKHRShift}</li>
-     * <li>{@link #SpvRayFlagsTerminateOnFirstHitKHRShift RayFlagsTerminateOnFirstHitKHRShift}</li>
-     * <li>{@link #SpvRayFlagsSkipClosestHitShaderKHRShift RayFlagsSkipClosestHitShaderKHRShift}</li>
-     * <li>{@link #SpvRayFlagsCullBackFacingTrianglesKHRShift RayFlagsCullBackFacingTrianglesKHRShift}</li>
-     * <li>{@link #SpvRayFlagsCullFrontFacingTrianglesKHRShift RayFlagsCullFrontFacingTrianglesKHRShift}</li>
-     * <li>{@link #SpvRayFlagsCullOpaqueKHRShift RayFlagsCullOpaqueKHRShift}</li>
-     * <li>{@link #SpvRayFlagsCullNoOpaqueKHRShift RayFlagsCullNoOpaqueKHRShift}</li>
-     * <li>{@link #SpvRayFlagsSkipTrianglesKHRShift RayFlagsSkipTrianglesKHRShift}</li>
-     * <li>{@link #SpvRayFlagsSkipAABBsKHRShift RayFlagsSkipAABBsKHRShift}</li>
-     * <li>{@link #SpvRayFlagsMax RayFlagsMax}</li>
-     * </ul>
-     */
     public static final int
         SpvRayFlagsOpaqueKHRShift                   = 0,
         SpvRayFlagsNoOpaqueKHRShift                 = 1,
@@ -2328,25 +1057,6 @@ public final class Spv {
         SpvRayFlagsSkipAABBsKHRShift                = 9,
         SpvRayFlagsMax                              = 0x7fffffff;
 
-    /**
-     * {@code SpvRayFlagsMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvRayFlagsMaskNone RayFlagsMaskNone}</li>
-     * <li>{@link #SpvRayFlagsOpaqueKHRMask RayFlagsOpaqueKHRMask}</li>
-     * <li>{@link #SpvRayFlagsNoOpaqueKHRMask RayFlagsNoOpaqueKHRMask}</li>
-     * <li>{@link #SpvRayFlagsTerminateOnFirstHitKHRMask RayFlagsTerminateOnFirstHitKHRMask}</li>
-     * <li>{@link #SpvRayFlagsSkipClosestHitShaderKHRMask RayFlagsSkipClosestHitShaderKHRMask}</li>
-     * <li>{@link #SpvRayFlagsCullBackFacingTrianglesKHRMask RayFlagsCullBackFacingTrianglesKHRMask}</li>
-     * <li>{@link #SpvRayFlagsCullFrontFacingTrianglesKHRMask RayFlagsCullFrontFacingTrianglesKHRMask}</li>
-     * <li>{@link #SpvRayFlagsCullOpaqueKHRMask RayFlagsCullOpaqueKHRMask}</li>
-     * <li>{@link #SpvRayFlagsCullNoOpaqueKHRMask RayFlagsCullNoOpaqueKHRMask}</li>
-     * <li>{@link #SpvRayFlagsSkipTrianglesKHRMask RayFlagsSkipTrianglesKHRMask}</li>
-     * <li>{@link #SpvRayFlagsSkipAABBsKHRMask RayFlagsSkipAABBsKHRMask}</li>
-     * </ul>
-     */
     public static final int
         SpvRayFlagsMaskNone                        = 0,
         SpvRayFlagsOpaqueKHRMask                   = 0x00000001,
@@ -2360,69 +1070,22 @@ public final class Spv {
         SpvRayFlagsSkipTrianglesKHRMask            = 0x00000100,
         SpvRayFlagsSkipAABBsKHRMask                = 0x00000200;
 
-    /**
-     * {@code SpvRayQueryIntersection}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvRayQueryIntersectionRayQueryCandidateIntersectionKHR RayQueryIntersectionRayQueryCandidateIntersectionKHR}</li>
-     * <li>{@link #SpvRayQueryIntersectionRayQueryCommittedIntersectionKHR RayQueryIntersectionRayQueryCommittedIntersectionKHR}</li>
-     * <li>{@link #SpvRayQueryIntersectionMax RayQueryIntersectionMax}</li>
-     * </ul>
-     */
     public static final int
         SpvRayQueryIntersectionRayQueryCandidateIntersectionKHR = 0,
         SpvRayQueryIntersectionRayQueryCommittedIntersectionKHR = 1,
         SpvRayQueryIntersectionMax                              = 0x7fffffff;
 
-    /**
-     * {@code SpvRayQueryCommittedIntersectionType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvRayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionNoneKHR RayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionNoneKHR}</li>
-     * <li>{@link #SpvRayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionTriangleKHR RayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionTriangleKHR}</li>
-     * <li>{@link #SpvRayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionGeneratedKHR RayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionGeneratedKHR}</li>
-     * <li>{@link #SpvRayQueryCommittedIntersectionTypeMax RayQueryCommittedIntersectionTypeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvRayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionNoneKHR      = 0,
         SpvRayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionTriangleKHR  = 1,
         SpvRayQueryCommittedIntersectionTypeRayQueryCommittedIntersectionGeneratedKHR = 2,
         SpvRayQueryCommittedIntersectionTypeMax                                       = 0x7fffffff;
 
-    /**
-     * {@code SpvRayQueryCandidateIntersectionType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvRayQueryCandidateIntersectionTypeRayQueryCandidateIntersectionTriangleKHR RayQueryCandidateIntersectionTypeRayQueryCandidateIntersectionTriangleKHR}</li>
-     * <li>{@link #SpvRayQueryCandidateIntersectionTypeRayQueryCandidateIntersectionAABBKHR RayQueryCandidateIntersectionTypeRayQueryCandidateIntersectionAABBKHR}</li>
-     * <li>{@link #SpvRayQueryCandidateIntersectionTypeMax RayQueryCandidateIntersectionTypeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvRayQueryCandidateIntersectionTypeRayQueryCandidateIntersectionTriangleKHR = 0,
         SpvRayQueryCandidateIntersectionTypeRayQueryCandidateIntersectionAABBKHR     = 1,
         SpvRayQueryCandidateIntersectionTypeMax                                      = 0x7fffffff;
 
-    /**
-     * {@code SpvFragmentShadingRateShift}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFragmentShadingRateVertical2PixelsShift FragmentShadingRateVertical2PixelsShift}</li>
-     * <li>{@link #SpvFragmentShadingRateVertical4PixelsShift FragmentShadingRateVertical4PixelsShift}</li>
-     * <li>{@link #SpvFragmentShadingRateHorizontal2PixelsShift FragmentShadingRateHorizontal2PixelsShift}</li>
-     * <li>{@link #SpvFragmentShadingRateHorizontal4PixelsShift FragmentShadingRateHorizontal4PixelsShift}</li>
-     * <li>{@link #SpvFragmentShadingRateMax FragmentShadingRateMax}</li>
-     * </ul>
-     */
     public static final int
         SpvFragmentShadingRateVertical2PixelsShift   = 0,
         SpvFragmentShadingRateVertical4PixelsShift   = 1,
@@ -2430,19 +1093,6 @@ public final class Spv {
         SpvFragmentShadingRateHorizontal4PixelsShift = 3,
         SpvFragmentShadingRateMax                    = 0x7fffffff;
 
-    /**
-     * {@code SpvFragmentShadingRateMask}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFragmentShadingRateMaskNone FragmentShadingRateMaskNone}</li>
-     * <li>{@link #SpvFragmentShadingRateVertical2PixelsMask FragmentShadingRateVertical2PixelsMask}</li>
-     * <li>{@link #SpvFragmentShadingRateVertical4PixelsMask FragmentShadingRateVertical4PixelsMask}</li>
-     * <li>{@link #SpvFragmentShadingRateHorizontal2PixelsMask FragmentShadingRateHorizontal2PixelsMask}</li>
-     * <li>{@link #SpvFragmentShadingRateHorizontal4PixelsMask FragmentShadingRateHorizontal4PixelsMask}</li>
-     * </ul>
-     */
     public static final int
         SpvFragmentShadingRateMaskNone              = 0,
         SpvFragmentShadingRateVertical2PixelsMask   = 0x00000001,
@@ -2450,55 +1100,16 @@ public final class Spv {
         SpvFragmentShadingRateHorizontal2PixelsMask = 0x00000004,
         SpvFragmentShadingRateHorizontal4PixelsMask = 0x00000008;
 
-    /**
-     * {@code SpvFPDenormMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFPDenormModePreserve FPDenormModePreserve}</li>
-     * <li>{@link #SpvFPDenormModeFlushToZero FPDenormModeFlushToZero}</li>
-     * <li>{@link #SpvFPDenormModeMax FPDenormModeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvFPDenormModePreserve    = 0,
         SpvFPDenormModeFlushToZero = 1,
         SpvFPDenormModeMax         = 0x7fffffff;
 
-    /**
-     * {@code SpvFPOperationMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvFPOperationModeIEEE FPOperationModeIEEE}</li>
-     * <li>{@link #SpvFPOperationModeALT FPOperationModeALT}</li>
-     * <li>{@link #SpvFPOperationModeMax FPOperationModeMax}</li>
-     * </ul>
-     */
     public static final int
         SpvFPOperationModeIEEE = 0,
         SpvFPOperationModeALT  = 1,
         SpvFPOperationModeMax  = 0x7fffffff;
 
-    /**
-     * {@code SpvQuantizationModes}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvQuantizationModesTRN QuantizationModesTRN}</li>
-     * <li>{@link #SpvQuantizationModesTRN_ZERO QuantizationModesTRN_ZERO}</li>
-     * <li>{@link #SpvQuantizationModesRND QuantizationModesRND}</li>
-     * <li>{@link #SpvQuantizationModesRND_ZERO QuantizationModesRND_ZERO}</li>
-     * <li>{@link #SpvQuantizationModesRND_INF QuantizationModesRND_INF}</li>
-     * <li>{@link #SpvQuantizationModesRND_MIN_INF QuantizationModesRND_MIN_INF}</li>
-     * <li>{@link #SpvQuantizationModesRND_CONV QuantizationModesRND_CONV}</li>
-     * <li>{@link #SpvQuantizationModesRND_CONV_ODD QuantizationModesRND_CONV_ODD}</li>
-     * <li>{@link #SpvQuantizationModesMax QuantizationModesMax}</li>
-     * </ul>
-     */
     public static final int
         SpvQuantizationModesTRN          = 0,
         SpvQuantizationModesTRN_ZERO     = 1,
@@ -2510,19 +1121,6 @@ public final class Spv {
         SpvQuantizationModesRND_CONV_ODD = 7,
         SpvQuantizationModesMax          = 0x7fffffff;
 
-    /**
-     * {@code SpvOverflowModes}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvOverflowModesWRAP OverflowModesWRAP}</li>
-     * <li>{@link #SpvOverflowModesSAT OverflowModesSAT}</li>
-     * <li>{@link #SpvOverflowModesSAT_ZERO OverflowModesSAT_ZERO}</li>
-     * <li>{@link #SpvOverflowModesSAT_SYM OverflowModesSAT_SYM}</li>
-     * <li>{@link #SpvOverflowModesMax OverflowModesMax}</li>
-     * </ul>
-     */
     public static final int
         SpvOverflowModesWRAP     = 0,
         SpvOverflowModesSAT      = 1,
@@ -2530,709 +1128,11 @@ public final class Spv {
         SpvOverflowModesSAT_SYM  = 3,
         SpvOverflowModesMax      = 0x7fffffff;
 
-    /**
-     * {@code SpvPackedVectorFormat}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvPackedVectorFormatPackedVectorFormat4x8Bit PackedVectorFormatPackedVectorFormat4x8Bit}</li>
-     * <li>{@link #SpvPackedVectorFormatPackedVectorFormat4x8BitKHR PackedVectorFormatPackedVectorFormat4x8BitKHR}</li>
-     * <li>{@link #SpvPackedVectorFormatMax PackedVectorFormatMax}</li>
-     * </ul>
-     */
     public static final int
         SpvPackedVectorFormatPackedVectorFormat4x8Bit    = 0,
         SpvPackedVectorFormatPackedVectorFormat4x8BitKHR = 0,
         SpvPackedVectorFormatMax                         = 0x7fffffff;
 
-    /**
-     * {@code SpvOp}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #SpvOpNop OpNop}</li>
-     * <li>{@link #SpvOpUndef OpUndef}</li>
-     * <li>{@link #SpvOpSourceContinued OpSourceContinued}</li>
-     * <li>{@link #SpvOpSource OpSource}</li>
-     * <li>{@link #SpvOpSourceExtension OpSourceExtension}</li>
-     * <li>{@link #SpvOpName OpName}</li>
-     * <li>{@link #SpvOpMemberName OpMemberName}</li>
-     * <li>{@link #SpvOpString OpString}</li>
-     * <li>{@link #SpvOpLine OpLine}</li>
-     * <li>{@link #SpvOpExtension OpExtension}</li>
-     * <li>{@link #SpvOpExtInstImport OpExtInstImport}</li>
-     * <li>{@link #SpvOpExtInst OpExtInst}</li>
-     * <li>{@link #SpvOpMemoryModel OpMemoryModel}</li>
-     * <li>{@link #SpvOpEntryPoint OpEntryPoint}</li>
-     * <li>{@link #SpvOpExecutionMode OpExecutionMode}</li>
-     * <li>{@link #SpvOpCapability OpCapability}</li>
-     * <li>{@link #SpvOpTypeVoid OpTypeVoid}</li>
-     * <li>{@link #SpvOpTypeBool OpTypeBool}</li>
-     * <li>{@link #SpvOpTypeInt OpTypeInt}</li>
-     * <li>{@link #SpvOpTypeFloat OpTypeFloat}</li>
-     * <li>{@link #SpvOpTypeVector OpTypeVector}</li>
-     * <li>{@link #SpvOpTypeMatrix OpTypeMatrix}</li>
-     * <li>{@link #SpvOpTypeImage OpTypeImage}</li>
-     * <li>{@link #SpvOpTypeSampler OpTypeSampler}</li>
-     * <li>{@link #SpvOpTypeSampledImage OpTypeSampledImage}</li>
-     * <li>{@link #SpvOpTypeArray OpTypeArray}</li>
-     * <li>{@link #SpvOpTypeRuntimeArray OpTypeRuntimeArray}</li>
-     * <li>{@link #SpvOpTypeStruct OpTypeStruct}</li>
-     * <li>{@link #SpvOpTypeOpaque OpTypeOpaque}</li>
-     * <li>{@link #SpvOpTypePointer OpTypePointer}</li>
-     * <li>{@link #SpvOpTypeFunction OpTypeFunction}</li>
-     * <li>{@link #SpvOpTypeEvent OpTypeEvent}</li>
-     * <li>{@link #SpvOpTypeDeviceEvent OpTypeDeviceEvent}</li>
-     * <li>{@link #SpvOpTypeReserveId OpTypeReserveId}</li>
-     * <li>{@link #SpvOpTypeQueue OpTypeQueue}</li>
-     * <li>{@link #SpvOpTypePipe OpTypePipe}</li>
-     * <li>{@link #SpvOpTypeForwardPointer OpTypeForwardPointer}</li>
-     * <li>{@link #SpvOpConstantTrue OpConstantTrue}</li>
-     * <li>{@link #SpvOpConstantFalse OpConstantFalse}</li>
-     * <li>{@link #SpvOpConstant OpConstant}</li>
-     * <li>{@link #SpvOpConstantComposite OpConstantComposite}</li>
-     * <li>{@link #SpvOpConstantSampler OpConstantSampler}</li>
-     * <li>{@link #SpvOpConstantNull OpConstantNull}</li>
-     * <li>{@link #SpvOpSpecConstantTrue OpSpecConstantTrue}</li>
-     * <li>{@link #SpvOpSpecConstantFalse OpSpecConstantFalse}</li>
-     * <li>{@link #SpvOpSpecConstant OpSpecConstant}</li>
-     * <li>{@link #SpvOpSpecConstantComposite OpSpecConstantComposite}</li>
-     * <li>{@link #SpvOpSpecConstantOp OpSpecConstantOp}</li>
-     * <li>{@link #SpvOpFunction OpFunction}</li>
-     * <li>{@link #SpvOpFunctionParameter OpFunctionParameter}</li>
-     * <li>{@link #SpvOpFunctionEnd OpFunctionEnd}</li>
-     * <li>{@link #SpvOpFunctionCall OpFunctionCall}</li>
-     * <li>{@link #SpvOpVariable OpVariable}</li>
-     * <li>{@link #SpvOpImageTexelPointer OpImageTexelPointer}</li>
-     * <li>{@link #SpvOpLoad OpLoad}</li>
-     * <li>{@link #SpvOpStore OpStore}</li>
-     * <li>{@link #SpvOpCopyMemory OpCopyMemory}</li>
-     * <li>{@link #SpvOpCopyMemorySized OpCopyMemorySized}</li>
-     * <li>{@link #SpvOpAccessChain OpAccessChain}</li>
-     * <li>{@link #SpvOpInBoundsAccessChain OpInBoundsAccessChain}</li>
-     * <li>{@link #SpvOpPtrAccessChain OpPtrAccessChain}</li>
-     * <li>{@link #SpvOpArrayLength OpArrayLength}</li>
-     * <li>{@link #SpvOpGenericPtrMemSemantics OpGenericPtrMemSemantics}</li>
-     * <li>{@link #SpvOpInBoundsPtrAccessChain OpInBoundsPtrAccessChain}</li>
-     * <li>{@link #SpvOpDecorate OpDecorate}</li>
-     * <li>{@link #SpvOpMemberDecorate OpMemberDecorate}</li>
-     * <li>{@link #SpvOpDecorationGroup OpDecorationGroup}</li>
-     * <li>{@link #SpvOpGroupDecorate OpGroupDecorate}</li>
-     * <li>{@link #SpvOpGroupMemberDecorate OpGroupMemberDecorate}</li>
-     * <li>{@link #SpvOpVectorExtractDynamic OpVectorExtractDynamic}</li>
-     * <li>{@link #SpvOpVectorInsertDynamic OpVectorInsertDynamic}</li>
-     * <li>{@link #SpvOpVectorShuffle OpVectorShuffle}</li>
-     * <li>{@link #SpvOpCompositeConstruct OpCompositeConstruct}</li>
-     * <li>{@link #SpvOpCompositeExtract OpCompositeExtract}</li>
-     * <li>{@link #SpvOpCompositeInsert OpCompositeInsert}</li>
-     * <li>{@link #SpvOpCopyObject OpCopyObject}</li>
-     * <li>{@link #SpvOpTranspose OpTranspose}</li>
-     * <li>{@link #SpvOpSampledImage OpSampledImage}</li>
-     * <li>{@link #SpvOpImageSampleImplicitLod OpImageSampleImplicitLod}</li>
-     * <li>{@link #SpvOpImageSampleExplicitLod OpImageSampleExplicitLod}</li>
-     * <li>{@link #SpvOpImageSampleDrefImplicitLod OpImageSampleDrefImplicitLod}</li>
-     * <li>{@link #SpvOpImageSampleDrefExplicitLod OpImageSampleDrefExplicitLod}</li>
-     * <li>{@link #SpvOpImageSampleProjImplicitLod OpImageSampleProjImplicitLod}</li>
-     * <li>{@link #SpvOpImageSampleProjExplicitLod OpImageSampleProjExplicitLod}</li>
-     * <li>{@link #SpvOpImageSampleProjDrefImplicitLod OpImageSampleProjDrefImplicitLod}</li>
-     * <li>{@link #SpvOpImageSampleProjDrefExplicitLod OpImageSampleProjDrefExplicitLod}</li>
-     * <li>{@link #SpvOpImageFetch OpImageFetch}</li>
-     * <li>{@link #SpvOpImageGather OpImageGather}</li>
-     * <li>{@link #SpvOpImageDrefGather OpImageDrefGather}</li>
-     * <li>{@link #SpvOpImageRead OpImageRead}</li>
-     * <li>{@link #SpvOpImageWrite OpImageWrite}</li>
-     * <li>{@link #SpvOpImage OpImage}</li>
-     * <li>{@link #SpvOpImageQueryFormat OpImageQueryFormat}</li>
-     * <li>{@link #SpvOpImageQueryOrder OpImageQueryOrder}</li>
-     * <li>{@link #SpvOpImageQuerySizeLod OpImageQuerySizeLod}</li>
-     * <li>{@link #SpvOpImageQuerySize OpImageQuerySize}</li>
-     * <li>{@link #SpvOpImageQueryLod OpImageQueryLod}</li>
-     * <li>{@link #SpvOpImageQueryLevels OpImageQueryLevels}</li>
-     * <li>{@link #SpvOpImageQuerySamples OpImageQuerySamples}</li>
-     * <li>{@link #SpvOpConvertFToU OpConvertFToU}</li>
-     * <li>{@link #SpvOpConvertFToS OpConvertFToS}</li>
-     * <li>{@link #SpvOpConvertSToF OpConvertSToF}</li>
-     * <li>{@link #SpvOpConvertUToF OpConvertUToF}</li>
-     * <li>{@link #SpvOpUConvert OpUConvert}</li>
-     * <li>{@link #SpvOpSConvert OpSConvert}</li>
-     * <li>{@link #SpvOpFConvert OpFConvert}</li>
-     * <li>{@link #SpvOpQuantizeToF16 OpQuantizeToF16}</li>
-     * <li>{@link #SpvOpConvertPtrToU OpConvertPtrToU}</li>
-     * <li>{@link #SpvOpSatConvertSToU OpSatConvertSToU}</li>
-     * <li>{@link #SpvOpSatConvertUToS OpSatConvertUToS}</li>
-     * <li>{@link #SpvOpConvertUToPtr OpConvertUToPtr}</li>
-     * <li>{@link #SpvOpPtrCastToGeneric OpPtrCastToGeneric}</li>
-     * <li>{@link #SpvOpGenericCastToPtr OpGenericCastToPtr}</li>
-     * <li>{@link #SpvOpGenericCastToPtrExplicit OpGenericCastToPtrExplicit}</li>
-     * <li>{@link #SpvOpBitcast OpBitcast}</li>
-     * <li>{@link #SpvOpSNegate OpSNegate}</li>
-     * <li>{@link #SpvOpFNegate OpFNegate}</li>
-     * <li>{@link #SpvOpIAdd OpIAdd}</li>
-     * <li>{@link #SpvOpFAdd OpFAdd}</li>
-     * <li>{@link #SpvOpISub OpISub}</li>
-     * <li>{@link #SpvOpFSub OpFSub}</li>
-     * <li>{@link #SpvOpIMul OpIMul}</li>
-     * <li>{@link #SpvOpFMul OpFMul}</li>
-     * <li>{@link #SpvOpUDiv OpUDiv}</li>
-     * <li>{@link #SpvOpSDiv OpSDiv}</li>
-     * <li>{@link #SpvOpFDiv OpFDiv}</li>
-     * <li>{@link #SpvOpUMod OpUMod}</li>
-     * <li>{@link #SpvOpSRem OpSRem}</li>
-     * <li>{@link #SpvOpSMod OpSMod}</li>
-     * <li>{@link #SpvOpFRem OpFRem}</li>
-     * <li>{@link #SpvOpFMod OpFMod}</li>
-     * <li>{@link #SpvOpVectorTimesScalar OpVectorTimesScalar}</li>
-     * <li>{@link #SpvOpMatrixTimesScalar OpMatrixTimesScalar}</li>
-     * <li>{@link #SpvOpVectorTimesMatrix OpVectorTimesMatrix}</li>
-     * <li>{@link #SpvOpMatrixTimesVector OpMatrixTimesVector}</li>
-     * <li>{@link #SpvOpMatrixTimesMatrix OpMatrixTimesMatrix}</li>
-     * <li>{@link #SpvOpOuterProduct OpOuterProduct}</li>
-     * <li>{@link #SpvOpDot OpDot}</li>
-     * <li>{@link #SpvOpIAddCarry OpIAddCarry}</li>
-     * <li>{@link #SpvOpISubBorrow OpISubBorrow}</li>
-     * <li>{@link #SpvOpUMulExtended OpUMulExtended}</li>
-     * <li>{@link #SpvOpSMulExtended OpSMulExtended}</li>
-     * <li>{@link #SpvOpAny OpAny}</li>
-     * <li>{@link #SpvOpAll OpAll}</li>
-     * <li>{@link #SpvOpIsNan OpIsNan}</li>
-     * <li>{@link #SpvOpIsInf OpIsInf}</li>
-     * <li>{@link #SpvOpIsFinite OpIsFinite}</li>
-     * <li>{@link #SpvOpIsNormal OpIsNormal}</li>
-     * <li>{@link #SpvOpSignBitSet OpSignBitSet}</li>
-     * <li>{@link #SpvOpLessOrGreater OpLessOrGreater}</li>
-     * <li>{@link #SpvOpOrdered OpOrdered}</li>
-     * <li>{@link #SpvOpUnordered OpUnordered}</li>
-     * <li>{@link #SpvOpLogicalEqual OpLogicalEqual}</li>
-     * <li>{@link #SpvOpLogicalNotEqual OpLogicalNotEqual}</li>
-     * <li>{@link #SpvOpLogicalOr OpLogicalOr}</li>
-     * <li>{@link #SpvOpLogicalAnd OpLogicalAnd}</li>
-     * <li>{@link #SpvOpLogicalNot OpLogicalNot}</li>
-     * <li>{@link #SpvOpSelect OpSelect}</li>
-     * <li>{@link #SpvOpIEqual OpIEqual}</li>
-     * <li>{@link #SpvOpINotEqual OpINotEqual}</li>
-     * <li>{@link #SpvOpUGreaterThan OpUGreaterThan}</li>
-     * <li>{@link #SpvOpSGreaterThan OpSGreaterThan}</li>
-     * <li>{@link #SpvOpUGreaterThanEqual OpUGreaterThanEqual}</li>
-     * <li>{@link #SpvOpSGreaterThanEqual OpSGreaterThanEqual}</li>
-     * <li>{@link #SpvOpULessThan OpULessThan}</li>
-     * <li>{@link #SpvOpSLessThan OpSLessThan}</li>
-     * <li>{@link #SpvOpULessThanEqual OpULessThanEqual}</li>
-     * <li>{@link #SpvOpSLessThanEqual OpSLessThanEqual}</li>
-     * <li>{@link #SpvOpFOrdEqual OpFOrdEqual}</li>
-     * <li>{@link #SpvOpFUnordEqual OpFUnordEqual}</li>
-     * <li>{@link #SpvOpFOrdNotEqual OpFOrdNotEqual}</li>
-     * <li>{@link #SpvOpFUnordNotEqual OpFUnordNotEqual}</li>
-     * <li>{@link #SpvOpFOrdLessThan OpFOrdLessThan}</li>
-     * <li>{@link #SpvOpFUnordLessThan OpFUnordLessThan}</li>
-     * <li>{@link #SpvOpFOrdGreaterThan OpFOrdGreaterThan}</li>
-     * <li>{@link #SpvOpFUnordGreaterThan OpFUnordGreaterThan}</li>
-     * <li>{@link #SpvOpFOrdLessThanEqual OpFOrdLessThanEqual}</li>
-     * <li>{@link #SpvOpFUnordLessThanEqual OpFUnordLessThanEqual}</li>
-     * <li>{@link #SpvOpFOrdGreaterThanEqual OpFOrdGreaterThanEqual}</li>
-     * <li>{@link #SpvOpFUnordGreaterThanEqual OpFUnordGreaterThanEqual}</li>
-     * <li>{@link #SpvOpShiftRightLogical OpShiftRightLogical}</li>
-     * <li>{@link #SpvOpShiftRightArithmetic OpShiftRightArithmetic}</li>
-     * <li>{@link #SpvOpShiftLeftLogical OpShiftLeftLogical}</li>
-     * <li>{@link #SpvOpBitwiseOr OpBitwiseOr}</li>
-     * <li>{@link #SpvOpBitwiseXor OpBitwiseXor}</li>
-     * <li>{@link #SpvOpBitwiseAnd OpBitwiseAnd}</li>
-     * <li>{@link #SpvOpNot OpNot}</li>
-     * <li>{@link #SpvOpBitFieldInsert OpBitFieldInsert}</li>
-     * <li>{@link #SpvOpBitFieldSExtract OpBitFieldSExtract}</li>
-     * <li>{@link #SpvOpBitFieldUExtract OpBitFieldUExtract}</li>
-     * <li>{@link #SpvOpBitReverse OpBitReverse}</li>
-     * <li>{@link #SpvOpBitCount OpBitCount}</li>
-     * <li>{@link #SpvOpDPdx OpDPdx}</li>
-     * <li>{@link #SpvOpDPdy OpDPdy}</li>
-     * <li>{@link #SpvOpFwidth OpFwidth}</li>
-     * <li>{@link #SpvOpDPdxFine OpDPdxFine}</li>
-     * <li>{@link #SpvOpDPdyFine OpDPdyFine}</li>
-     * <li>{@link #SpvOpFwidthFine OpFwidthFine}</li>
-     * <li>{@link #SpvOpDPdxCoarse OpDPdxCoarse}</li>
-     * <li>{@link #SpvOpDPdyCoarse OpDPdyCoarse}</li>
-     * <li>{@link #SpvOpFwidthCoarse OpFwidthCoarse}</li>
-     * <li>{@link #SpvOpEmitVertex OpEmitVertex}</li>
-     * <li>{@link #SpvOpEndPrimitive OpEndPrimitive}</li>
-     * <li>{@link #SpvOpEmitStreamVertex OpEmitStreamVertex}</li>
-     * <li>{@link #SpvOpEndStreamPrimitive OpEndStreamPrimitive}</li>
-     * <li>{@link #SpvOpControlBarrier OpControlBarrier}</li>
-     * <li>{@link #SpvOpMemoryBarrier OpMemoryBarrier}</li>
-     * <li>{@link #SpvOpAtomicLoad OpAtomicLoad}</li>
-     * <li>{@link #SpvOpAtomicStore OpAtomicStore}</li>
-     * <li>{@link #SpvOpAtomicExchange OpAtomicExchange}</li>
-     * <li>{@link #SpvOpAtomicCompareExchange OpAtomicCompareExchange}</li>
-     * <li>{@link #SpvOpAtomicCompareExchangeWeak OpAtomicCompareExchangeWeak}</li>
-     * <li>{@link #SpvOpAtomicIIncrement OpAtomicIIncrement}</li>
-     * <li>{@link #SpvOpAtomicIDecrement OpAtomicIDecrement}</li>
-     * <li>{@link #SpvOpAtomicIAdd OpAtomicIAdd}</li>
-     * <li>{@link #SpvOpAtomicISub OpAtomicISub}</li>
-     * <li>{@link #SpvOpAtomicSMin OpAtomicSMin}</li>
-     * <li>{@link #SpvOpAtomicUMin OpAtomicUMin}</li>
-     * <li>{@link #SpvOpAtomicSMax OpAtomicSMax}</li>
-     * <li>{@link #SpvOpAtomicUMax OpAtomicUMax}</li>
-     * <li>{@link #SpvOpAtomicAnd OpAtomicAnd}</li>
-     * <li>{@link #SpvOpAtomicOr OpAtomicOr}</li>
-     * <li>{@link #SpvOpAtomicXor OpAtomicXor}</li>
-     * <li>{@link #SpvOpPhi OpPhi}</li>
-     * <li>{@link #SpvOpLoopMerge OpLoopMerge}</li>
-     * <li>{@link #SpvOpSelectionMerge OpSelectionMerge}</li>
-     * <li>{@link #SpvOpLabel OpLabel}</li>
-     * <li>{@link #SpvOpBranch OpBranch}</li>
-     * <li>{@link #SpvOpBranchConditional OpBranchConditional}</li>
-     * <li>{@link #SpvOpSwitch OpSwitch}</li>
-     * <li>{@link #SpvOpKill OpKill}</li>
-     * <li>{@link #SpvOpReturn OpReturn}</li>
-     * <li>{@link #SpvOpReturnValue OpReturnValue}</li>
-     * <li>{@link #SpvOpUnreachable OpUnreachable}</li>
-     * <li>{@link #SpvOpLifetimeStart OpLifetimeStart}</li>
-     * <li>{@link #SpvOpLifetimeStop OpLifetimeStop}</li>
-     * <li>{@link #SpvOpGroupAsyncCopy OpGroupAsyncCopy}</li>
-     * <li>{@link #SpvOpGroupWaitEvents OpGroupWaitEvents}</li>
-     * <li>{@link #SpvOpGroupAll OpGroupAll}</li>
-     * <li>{@link #SpvOpGroupAny OpGroupAny}</li>
-     * <li>{@link #SpvOpGroupBroadcast OpGroupBroadcast}</li>
-     * <li>{@link #SpvOpGroupIAdd OpGroupIAdd}</li>
-     * <li>{@link #SpvOpGroupFAdd OpGroupFAdd}</li>
-     * <li>{@link #SpvOpGroupFMin OpGroupFMin}</li>
-     * <li>{@link #SpvOpGroupUMin OpGroupUMin}</li>
-     * <li>{@link #SpvOpGroupSMin OpGroupSMin}</li>
-     * <li>{@link #SpvOpGroupFMax OpGroupFMax}</li>
-     * <li>{@link #SpvOpGroupUMax OpGroupUMax}</li>
-     * <li>{@link #SpvOpGroupSMax OpGroupSMax}</li>
-     * <li>{@link #SpvOpReadPipe OpReadPipe}</li>
-     * <li>{@link #SpvOpWritePipe OpWritePipe}</li>
-     * <li>{@link #SpvOpReservedReadPipe OpReservedReadPipe}</li>
-     * <li>{@link #SpvOpReservedWritePipe OpReservedWritePipe}</li>
-     * <li>{@link #SpvOpReserveReadPipePackets OpReserveReadPipePackets}</li>
-     * <li>{@link #SpvOpReserveWritePipePackets OpReserveWritePipePackets}</li>
-     * <li>{@link #SpvOpCommitReadPipe OpCommitReadPipe}</li>
-     * <li>{@link #SpvOpCommitWritePipe OpCommitWritePipe}</li>
-     * <li>{@link #SpvOpIsValidReserveId OpIsValidReserveId}</li>
-     * <li>{@link #SpvOpGetNumPipePackets OpGetNumPipePackets}</li>
-     * <li>{@link #SpvOpGetMaxPipePackets OpGetMaxPipePackets}</li>
-     * <li>{@link #SpvOpGroupReserveReadPipePackets OpGroupReserveReadPipePackets}</li>
-     * <li>{@link #SpvOpGroupReserveWritePipePackets OpGroupReserveWritePipePackets}</li>
-     * <li>{@link #SpvOpGroupCommitReadPipe OpGroupCommitReadPipe}</li>
-     * <li>{@link #SpvOpGroupCommitWritePipe OpGroupCommitWritePipe}</li>
-     * <li>{@link #SpvOpEnqueueMarker OpEnqueueMarker}</li>
-     * <li>{@link #SpvOpEnqueueKernel OpEnqueueKernel}</li>
-     * <li>{@link #SpvOpGetKernelNDrangeSubGroupCount OpGetKernelNDrangeSubGroupCount}</li>
-     * <li>{@link #SpvOpGetKernelNDrangeMaxSubGroupSize OpGetKernelNDrangeMaxSubGroupSize}</li>
-     * <li>{@link #SpvOpGetKernelWorkGroupSize OpGetKernelWorkGroupSize}</li>
-     * <li>{@link #SpvOpGetKernelPreferredWorkGroupSizeMultiple OpGetKernelPreferredWorkGroupSizeMultiple}</li>
-     * <li>{@link #SpvOpRetainEvent OpRetainEvent}</li>
-     * <li>{@link #SpvOpReleaseEvent OpReleaseEvent}</li>
-     * <li>{@link #SpvOpCreateUserEvent OpCreateUserEvent}</li>
-     * <li>{@link #SpvOpIsValidEvent OpIsValidEvent}</li>
-     * <li>{@link #SpvOpSetUserEventStatus OpSetUserEventStatus}</li>
-     * <li>{@link #SpvOpCaptureEventProfilingInfo OpCaptureEventProfilingInfo}</li>
-     * <li>{@link #SpvOpGetDefaultQueue OpGetDefaultQueue}</li>
-     * <li>{@link #SpvOpBuildNDRange OpBuildNDRange}</li>
-     * <li>{@link #SpvOpImageSparseSampleImplicitLod OpImageSparseSampleImplicitLod}</li>
-     * <li>{@link #SpvOpImageSparseSampleExplicitLod OpImageSparseSampleExplicitLod}</li>
-     * <li>{@link #SpvOpImageSparseSampleDrefImplicitLod OpImageSparseSampleDrefImplicitLod}</li>
-     * <li>{@link #SpvOpImageSparseSampleDrefExplicitLod OpImageSparseSampleDrefExplicitLod}</li>
-     * <li>{@link #SpvOpImageSparseSampleProjImplicitLod OpImageSparseSampleProjImplicitLod}</li>
-     * <li>{@link #SpvOpImageSparseSampleProjExplicitLod OpImageSparseSampleProjExplicitLod}</li>
-     * <li>{@link #SpvOpImageSparseSampleProjDrefImplicitLod OpImageSparseSampleProjDrefImplicitLod}</li>
-     * <li>{@link #SpvOpImageSparseSampleProjDrefExplicitLod OpImageSparseSampleProjDrefExplicitLod}</li>
-     * <li>{@link #SpvOpImageSparseFetch OpImageSparseFetch}</li>
-     * <li>{@link #SpvOpImageSparseGather OpImageSparseGather}</li>
-     * <li>{@link #SpvOpImageSparseDrefGather OpImageSparseDrefGather}</li>
-     * <li>{@link #SpvOpImageSparseTexelsResident OpImageSparseTexelsResident}</li>
-     * <li>{@link #SpvOpNoLine OpNoLine}</li>
-     * <li>{@link #SpvOpAtomicFlagTestAndSet OpAtomicFlagTestAndSet}</li>
-     * <li>{@link #SpvOpAtomicFlagClear OpAtomicFlagClear}</li>
-     * <li>{@link #SpvOpImageSparseRead OpImageSparseRead}</li>
-     * <li>{@link #SpvOpSizeOf OpSizeOf}</li>
-     * <li>{@link #SpvOpTypePipeStorage OpTypePipeStorage}</li>
-     * <li>{@link #SpvOpConstantPipeStorage OpConstantPipeStorage}</li>
-     * <li>{@link #SpvOpCreatePipeFromPipeStorage OpCreatePipeFromPipeStorage}</li>
-     * <li>{@link #SpvOpGetKernelLocalSizeForSubgroupCount OpGetKernelLocalSizeForSubgroupCount}</li>
-     * <li>{@link #SpvOpGetKernelMaxNumSubgroups OpGetKernelMaxNumSubgroups}</li>
-     * <li>{@link #SpvOpTypeNamedBarrier OpTypeNamedBarrier}</li>
-     * <li>{@link #SpvOpNamedBarrierInitialize OpNamedBarrierInitialize}</li>
-     * <li>{@link #SpvOpMemoryNamedBarrier OpMemoryNamedBarrier}</li>
-     * <li>{@link #SpvOpModuleProcessed OpModuleProcessed}</li>
-     * <li>{@link #SpvOpExecutionModeId OpExecutionModeId}</li>
-     * <li>{@link #SpvOpDecorateId OpDecorateId}</li>
-     * <li>{@link #SpvOpGroupNonUniformElect OpGroupNonUniformElect}</li>
-     * <li>{@link #SpvOpGroupNonUniformAll OpGroupNonUniformAll}</li>
-     * <li>{@link #SpvOpGroupNonUniformAny OpGroupNonUniformAny}</li>
-     * <li>{@link #SpvOpGroupNonUniformAllEqual OpGroupNonUniformAllEqual}</li>
-     * <li>{@link #SpvOpGroupNonUniformBroadcast OpGroupNonUniformBroadcast}</li>
-     * <li>{@link #SpvOpGroupNonUniformBroadcastFirst OpGroupNonUniformBroadcastFirst}</li>
-     * <li>{@link #SpvOpGroupNonUniformBallot OpGroupNonUniformBallot}</li>
-     * <li>{@link #SpvOpGroupNonUniformInverseBallot OpGroupNonUniformInverseBallot}</li>
-     * <li>{@link #SpvOpGroupNonUniformBallotBitExtract OpGroupNonUniformBallotBitExtract}</li>
-     * <li>{@link #SpvOpGroupNonUniformBallotBitCount OpGroupNonUniformBallotBitCount}</li>
-     * <li>{@link #SpvOpGroupNonUniformBallotFindLSB OpGroupNonUniformBallotFindLSB}</li>
-     * <li>{@link #SpvOpGroupNonUniformBallotFindMSB OpGroupNonUniformBallotFindMSB}</li>
-     * <li>{@link #SpvOpGroupNonUniformShuffle OpGroupNonUniformShuffle}</li>
-     * <li>{@link #SpvOpGroupNonUniformShuffleXor OpGroupNonUniformShuffleXor}</li>
-     * <li>{@link #SpvOpGroupNonUniformShuffleUp OpGroupNonUniformShuffleUp}</li>
-     * <li>{@link #SpvOpGroupNonUniformShuffleDown OpGroupNonUniformShuffleDown}</li>
-     * <li>{@link #SpvOpGroupNonUniformIAdd OpGroupNonUniformIAdd}</li>
-     * <li>{@link #SpvOpGroupNonUniformFAdd OpGroupNonUniformFAdd}</li>
-     * <li>{@link #SpvOpGroupNonUniformIMul OpGroupNonUniformIMul}</li>
-     * <li>{@link #SpvOpGroupNonUniformFMul OpGroupNonUniformFMul}</li>
-     * <li>{@link #SpvOpGroupNonUniformSMin OpGroupNonUniformSMin}</li>
-     * <li>{@link #SpvOpGroupNonUniformUMin OpGroupNonUniformUMin}</li>
-     * <li>{@link #SpvOpGroupNonUniformFMin OpGroupNonUniformFMin}</li>
-     * <li>{@link #SpvOpGroupNonUniformSMax OpGroupNonUniformSMax}</li>
-     * <li>{@link #SpvOpGroupNonUniformUMax OpGroupNonUniformUMax}</li>
-     * <li>{@link #SpvOpGroupNonUniformFMax OpGroupNonUniformFMax}</li>
-     * <li>{@link #SpvOpGroupNonUniformBitwiseAnd OpGroupNonUniformBitwiseAnd}</li>
-     * <li>{@link #SpvOpGroupNonUniformBitwiseOr OpGroupNonUniformBitwiseOr}</li>
-     * <li>{@link #SpvOpGroupNonUniformBitwiseXor OpGroupNonUniformBitwiseXor}</li>
-     * <li>{@link #SpvOpGroupNonUniformLogicalAnd OpGroupNonUniformLogicalAnd}</li>
-     * <li>{@link #SpvOpGroupNonUniformLogicalOr OpGroupNonUniformLogicalOr}</li>
-     * <li>{@link #SpvOpGroupNonUniformLogicalXor OpGroupNonUniformLogicalXor}</li>
-     * <li>{@link #SpvOpGroupNonUniformQuadBroadcast OpGroupNonUniformQuadBroadcast}</li>
-     * <li>{@link #SpvOpGroupNonUniformQuadSwap OpGroupNonUniformQuadSwap}</li>
-     * <li>{@link #SpvOpCopyLogical OpCopyLogical}</li>
-     * <li>{@link #SpvOpPtrEqual OpPtrEqual}</li>
-     * <li>{@link #SpvOpPtrNotEqual OpPtrNotEqual}</li>
-     * <li>{@link #SpvOpPtrDiff OpPtrDiff}</li>
-     * <li>{@link #SpvOpTerminateInvocation OpTerminateInvocation}</li>
-     * <li>{@link #SpvOpSubgroupBallotKHR OpSubgroupBallotKHR}</li>
-     * <li>{@link #SpvOpSubgroupFirstInvocationKHR OpSubgroupFirstInvocationKHR}</li>
-     * <li>{@link #SpvOpSubgroupAllKHR OpSubgroupAllKHR}</li>
-     * <li>{@link #SpvOpSubgroupAnyKHR OpSubgroupAnyKHR}</li>
-     * <li>{@link #SpvOpSubgroupAllEqualKHR OpSubgroupAllEqualKHR}</li>
-     * <li>{@link #SpvOpGroupNonUniformRotateKHR OpGroupNonUniformRotateKHR}</li>
-     * <li>{@link #SpvOpSubgroupReadInvocationKHR OpSubgroupReadInvocationKHR}</li>
-     * <li>{@link #SpvOpTraceRayKHR OpTraceRayKHR}</li>
-     * <li>{@link #SpvOpExecuteCallableKHR OpExecuteCallableKHR}</li>
-     * <li>{@link #SpvOpConvertUToAccelerationStructureKHR OpConvertUToAccelerationStructureKHR}</li>
-     * <li>{@link #SpvOpIgnoreIntersectionKHR OpIgnoreIntersectionKHR}</li>
-     * <li>{@link #SpvOpTerminateRayKHR OpTerminateRayKHR}</li>
-     * <li>{@link #SpvOpSDot OpSDot}</li>
-     * <li>{@link #SpvOpSDotKHR OpSDotKHR}</li>
-     * <li>{@link #SpvOpUDot OpUDot}</li>
-     * <li>{@link #SpvOpUDotKHR OpUDotKHR}</li>
-     * <li>{@link #SpvOpSUDot OpSUDot}</li>
-     * <li>{@link #SpvOpSUDotKHR OpSUDotKHR}</li>
-     * <li>{@link #SpvOpSDotAccSat OpSDotAccSat}</li>
-     * <li>{@link #SpvOpSDotAccSatKHR OpSDotAccSatKHR}</li>
-     * <li>{@link #SpvOpUDotAccSat OpUDotAccSat}</li>
-     * <li>{@link #SpvOpUDotAccSatKHR OpUDotAccSatKHR}</li>
-     * <li>{@link #SpvOpSUDotAccSat OpSUDotAccSat}</li>
-     * <li>{@link #SpvOpSUDotAccSatKHR OpSUDotAccSatKHR}</li>
-     * <li>{@link #SpvOpTypeRayQueryKHR OpTypeRayQueryKHR}</li>
-     * <li>{@link #SpvOpRayQueryInitializeKHR OpRayQueryInitializeKHR}</li>
-     * <li>{@link #SpvOpRayQueryTerminateKHR OpRayQueryTerminateKHR}</li>
-     * <li>{@link #SpvOpRayQueryGenerateIntersectionKHR OpRayQueryGenerateIntersectionKHR}</li>
-     * <li>{@link #SpvOpRayQueryConfirmIntersectionKHR OpRayQueryConfirmIntersectionKHR}</li>
-     * <li>{@link #SpvOpRayQueryProceedKHR OpRayQueryProceedKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionTypeKHR OpRayQueryGetIntersectionTypeKHR}</li>
-     * <li>{@link #SpvOpImageSampleWeightedQCOM OpImageSampleWeightedQCOM}</li>
-     * <li>{@link #SpvOpImageBoxFilterQCOM OpImageBoxFilterQCOM}</li>
-     * <li>{@link #SpvOpImageBlockMatchSSDQCOM OpImageBlockMatchSSDQCOM}</li>
-     * <li>{@link #SpvOpImageBlockMatchSADQCOM OpImageBlockMatchSADQCOM}</li>
-     * <li>{@link #SpvOpImageBlockMatchWindowSSDQCOM OpImageBlockMatchWindowSSDQCOM}</li>
-     * <li>{@link #SpvOpImageBlockMatchWindowSADQCOM OpImageBlockMatchWindowSADQCOM}</li>
-     * <li>{@link #SpvOpImageBlockMatchGatherSSDQCOM OpImageBlockMatchGatherSSDQCOM}</li>
-     * <li>{@link #SpvOpImageBlockMatchGatherSADQCOM OpImageBlockMatchGatherSADQCOM}</li>
-     * <li>{@link #SpvOpGroupIAddNonUniformAMD OpGroupIAddNonUniformAMD}</li>
-     * <li>{@link #SpvOpGroupFAddNonUniformAMD OpGroupFAddNonUniformAMD}</li>
-     * <li>{@link #SpvOpGroupFMinNonUniformAMD OpGroupFMinNonUniformAMD}</li>
-     * <li>{@link #SpvOpGroupUMinNonUniformAMD OpGroupUMinNonUniformAMD}</li>
-     * <li>{@link #SpvOpGroupSMinNonUniformAMD OpGroupSMinNonUniformAMD}</li>
-     * <li>{@link #SpvOpGroupFMaxNonUniformAMD OpGroupFMaxNonUniformAMD}</li>
-     * <li>{@link #SpvOpGroupUMaxNonUniformAMD OpGroupUMaxNonUniformAMD}</li>
-     * <li>{@link #SpvOpGroupSMaxNonUniformAMD OpGroupSMaxNonUniformAMD}</li>
-     * <li>{@link #SpvOpFragmentMaskFetchAMD OpFragmentMaskFetchAMD}</li>
-     * <li>{@link #SpvOpFragmentFetchAMD OpFragmentFetchAMD}</li>
-     * <li>{@link #SpvOpReadClockKHR OpReadClockKHR}</li>
-     * <li>{@link #SpvOpImageSampleFootprintNV OpImageSampleFootprintNV}</li>
-     * <li>{@link #SpvOpEmitMeshTasksEXT OpEmitMeshTasksEXT}</li>
-     * <li>{@link #SpvOpSetMeshOutputsEXT OpSetMeshOutputsEXT}</li>
-     * <li>{@link #SpvOpGroupNonUniformPartitionNV OpGroupNonUniformPartitionNV}</li>
-     * <li>{@link #SpvOpWritePackedPrimitiveIndices4x8NV OpWritePackedPrimitiveIndices4x8NV}</li>
-     * <li>{@link #SpvOpReportIntersectionKHR OpReportIntersectionKHR}</li>
-     * <li>{@link #SpvOpReportIntersectionNV OpReportIntersectionNV}</li>
-     * <li>{@link #SpvOpIgnoreIntersectionNV OpIgnoreIntersectionNV}</li>
-     * <li>{@link #SpvOpTerminateRayNV OpTerminateRayNV}</li>
-     * <li>{@link #SpvOpTraceNV OpTraceNV}</li>
-     * <li>{@link #SpvOpTraceMotionNV OpTraceMotionNV}</li>
-     * <li>{@link #SpvOpTraceRayMotionNV OpTraceRayMotionNV}</li>
-     * <li>{@link #SpvOpTypeAccelerationStructureKHR OpTypeAccelerationStructureKHR}</li>
-     * <li>{@link #SpvOpTypeAccelerationStructureNV OpTypeAccelerationStructureNV}</li>
-     * <li>{@link #SpvOpExecuteCallableNV OpExecuteCallableNV}</li>
-     * <li>{@link #SpvOpTypeCooperativeMatrixNV OpTypeCooperativeMatrixNV}</li>
-     * <li>{@link #SpvOpCooperativeMatrixLoadNV OpCooperativeMatrixLoadNV}</li>
-     * <li>{@link #SpvOpCooperativeMatrixStoreNV OpCooperativeMatrixStoreNV}</li>
-     * <li>{@link #SpvOpCooperativeMatrixMulAddNV OpCooperativeMatrixMulAddNV}</li>
-     * <li>{@link #SpvOpCooperativeMatrixLengthNV OpCooperativeMatrixLengthNV}</li>
-     * <li>{@link #SpvOpBeginInvocationInterlockEXT OpBeginInvocationInterlockEXT}</li>
-     * <li>{@link #SpvOpEndInvocationInterlockEXT OpEndInvocationInterlockEXT}</li>
-     * <li>{@link #SpvOpDemoteToHelperInvocation OpDemoteToHelperInvocation}</li>
-     * <li>{@link #SpvOpDemoteToHelperInvocationEXT OpDemoteToHelperInvocationEXT}</li>
-     * <li>{@link #SpvOpIsHelperInvocationEXT OpIsHelperInvocationEXT}</li>
-     * <li>{@link #SpvOpConvertUToImageNV OpConvertUToImageNV}</li>
-     * <li>{@link #SpvOpConvertUToSamplerNV OpConvertUToSamplerNV}</li>
-     * <li>{@link #SpvOpConvertImageToUNV OpConvertImageToUNV}</li>
-     * <li>{@link #SpvOpConvertSamplerToUNV OpConvertSamplerToUNV}</li>
-     * <li>{@link #SpvOpConvertUToSampledImageNV OpConvertUToSampledImageNV}</li>
-     * <li>{@link #SpvOpConvertSampledImageToUNV OpConvertSampledImageToUNV}</li>
-     * <li>{@link #SpvOpSamplerImageAddressingModeNV OpSamplerImageAddressingModeNV}</li>
-     * <li>{@link #SpvOpSubgroupShuffleINTEL OpSubgroupShuffleINTEL}</li>
-     * <li>{@link #SpvOpSubgroupShuffleDownINTEL OpSubgroupShuffleDownINTEL}</li>
-     * <li>{@link #SpvOpSubgroupShuffleUpINTEL OpSubgroupShuffleUpINTEL}</li>
-     * <li>{@link #SpvOpSubgroupShuffleXorINTEL OpSubgroupShuffleXorINTEL}</li>
-     * <li>{@link #SpvOpSubgroupBlockReadINTEL OpSubgroupBlockReadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupBlockWriteINTEL OpSubgroupBlockWriteINTEL}</li>
-     * <li>{@link #SpvOpSubgroupImageBlockReadINTEL OpSubgroupImageBlockReadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupImageBlockWriteINTEL OpSubgroupImageBlockWriteINTEL}</li>
-     * <li>{@link #SpvOpSubgroupImageMediaBlockReadINTEL OpSubgroupImageMediaBlockReadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupImageMediaBlockWriteINTEL OpSubgroupImageMediaBlockWriteINTEL}</li>
-     * <li>{@link #SpvOpUCountLeadingZerosINTEL OpUCountLeadingZerosINTEL}</li>
-     * <li>{@link #SpvOpUCountTrailingZerosINTEL OpUCountTrailingZerosINTEL}</li>
-     * <li>{@link #SpvOpAbsISubINTEL OpAbsISubINTEL}</li>
-     * <li>{@link #SpvOpAbsUSubINTEL OpAbsUSubINTEL}</li>
-     * <li>{@link #SpvOpIAddSatINTEL OpIAddSatINTEL}</li>
-     * <li>{@link #SpvOpUAddSatINTEL OpUAddSatINTEL}</li>
-     * <li>{@link #SpvOpIAverageINTEL OpIAverageINTEL}</li>
-     * <li>{@link #SpvOpUAverageINTEL OpUAverageINTEL}</li>
-     * <li>{@link #SpvOpIAverageRoundedINTEL OpIAverageRoundedINTEL}</li>
-     * <li>{@link #SpvOpUAverageRoundedINTEL OpUAverageRoundedINTEL}</li>
-     * <li>{@link #SpvOpISubSatINTEL OpISubSatINTEL}</li>
-     * <li>{@link #SpvOpUSubSatINTEL OpUSubSatINTEL}</li>
-     * <li>{@link #SpvOpIMul32x16INTEL OpIMul32x16INTEL}</li>
-     * <li>{@link #SpvOpUMul32x16INTEL OpUMul32x16INTEL}</li>
-     * <li>{@link #SpvOpConstantFunctionPointerINTEL OpConstantFunctionPointerINTEL}</li>
-     * <li>{@link #SpvOpFunctionPointerCallINTEL OpFunctionPointerCallINTEL}</li>
-     * <li>{@link #SpvOpAsmTargetINTEL OpAsmTargetINTEL}</li>
-     * <li>{@link #SpvOpAsmINTEL OpAsmINTEL}</li>
-     * <li>{@link #SpvOpAsmCallINTEL OpAsmCallINTEL}</li>
-     * <li>{@link #SpvOpAtomicFMinEXT OpAtomicFMinEXT}</li>
-     * <li>{@link #SpvOpAtomicFMaxEXT OpAtomicFMaxEXT}</li>
-     * <li>{@link #SpvOpAssumeTrueKHR OpAssumeTrueKHR}</li>
-     * <li>{@link #SpvOpExpectKHR OpExpectKHR}</li>
-     * <li>{@link #SpvOpDecorateString OpDecorateString}</li>
-     * <li>{@link #SpvOpDecorateStringGOOGLE OpDecorateStringGOOGLE}</li>
-     * <li>{@link #SpvOpMemberDecorateString OpMemberDecorateString}</li>
-     * <li>{@link #SpvOpMemberDecorateStringGOOGLE OpMemberDecorateStringGOOGLE}</li>
-     * <li>{@link #SpvOpVmeImageINTEL OpVmeImageINTEL}</li>
-     * <li>{@link #SpvOpTypeVmeImageINTEL OpTypeVmeImageINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcImePayloadINTEL OpTypeAvcImePayloadINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcRefPayloadINTEL OpTypeAvcRefPayloadINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcSicPayloadINTEL OpTypeAvcSicPayloadINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcMcePayloadINTEL OpTypeAvcMcePayloadINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcMceResultINTEL OpTypeAvcMceResultINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcImeResultINTEL OpTypeAvcImeResultINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcImeResultSingleReferenceStreamoutINTEL OpTypeAvcImeResultSingleReferenceStreamoutINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcImeResultDualReferenceStreamoutINTEL OpTypeAvcImeResultDualReferenceStreamoutINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcImeSingleReferenceStreaminINTEL OpTypeAvcImeSingleReferenceStreaminINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcImeDualReferenceStreaminINTEL OpTypeAvcImeDualReferenceStreaminINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcRefResultINTEL OpTypeAvcRefResultINTEL}</li>
-     * <li>{@link #SpvOpTypeAvcSicResultINTEL OpTypeAvcSicResultINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultInterBaseMultiReferencePenaltyINTEL OpSubgroupAvcMceGetDefaultInterBaseMultiReferencePenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceSetInterBaseMultiReferencePenaltyINTEL OpSubgroupAvcMceSetInterBaseMultiReferencePenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultInterShapePenaltyINTEL OpSubgroupAvcMceGetDefaultInterShapePenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceSetInterShapePenaltyINTEL OpSubgroupAvcMceSetInterShapePenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultInterDirectionPenaltyINTEL OpSubgroupAvcMceGetDefaultInterDirectionPenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceSetInterDirectionPenaltyINTEL OpSubgroupAvcMceSetInterDirectionPenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultIntraLumaShapePenaltyINTEL OpSubgroupAvcMceGetDefaultIntraLumaShapePenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultInterMotionVectorCostTableINTEL OpSubgroupAvcMceGetDefaultInterMotionVectorCostTableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultHighPenaltyCostTableINTEL OpSubgroupAvcMceGetDefaultHighPenaltyCostTableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultMediumPenaltyCostTableINTEL OpSubgroupAvcMceGetDefaultMediumPenaltyCostTableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultLowPenaltyCostTableINTEL OpSubgroupAvcMceGetDefaultLowPenaltyCostTableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceSetMotionVectorCostFunctionINTEL OpSubgroupAvcMceSetMotionVectorCostFunctionINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultIntraLumaModePenaltyINTEL OpSubgroupAvcMceGetDefaultIntraLumaModePenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultNonDcLumaIntraPenaltyINTEL OpSubgroupAvcMceGetDefaultNonDcLumaIntraPenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetDefaultIntraChromaModeBasePenaltyINTEL OpSubgroupAvcMceGetDefaultIntraChromaModeBasePenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceSetAcOnlyHaarINTEL OpSubgroupAvcMceSetAcOnlyHaarINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceSetSourceInterlacedFieldPolarityINTEL OpSubgroupAvcMceSetSourceInterlacedFieldPolarityINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceSetSingleReferenceInterlacedFieldPolarityINTEL OpSubgroupAvcMceSetSingleReferenceInterlacedFieldPolarityINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceSetDualReferenceInterlacedFieldPolaritiesINTEL OpSubgroupAvcMceSetDualReferenceInterlacedFieldPolaritiesINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceConvertToImePayloadINTEL OpSubgroupAvcMceConvertToImePayloadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceConvertToImeResultINTEL OpSubgroupAvcMceConvertToImeResultINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceConvertToRefPayloadINTEL OpSubgroupAvcMceConvertToRefPayloadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceConvertToRefResultINTEL OpSubgroupAvcMceConvertToRefResultINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceConvertToSicPayloadINTEL OpSubgroupAvcMceConvertToSicPayloadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceConvertToSicResultINTEL OpSubgroupAvcMceConvertToSicResultINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetMotionVectorsINTEL OpSubgroupAvcMceGetMotionVectorsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetInterDistortionsINTEL OpSubgroupAvcMceGetInterDistortionsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetBestInterDistortionsINTEL OpSubgroupAvcMceGetBestInterDistortionsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetInterMajorShapeINTEL OpSubgroupAvcMceGetInterMajorShapeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetInterMinorShapeINTEL OpSubgroupAvcMceGetInterMinorShapeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetInterDirectionsINTEL OpSubgroupAvcMceGetInterDirectionsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetInterMotionVectorCountINTEL OpSubgroupAvcMceGetInterMotionVectorCountINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetInterReferenceIdsINTEL OpSubgroupAvcMceGetInterReferenceIdsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcMceGetInterReferenceInterlacedFieldPolaritiesINTEL OpSubgroupAvcMceGetInterReferenceInterlacedFieldPolaritiesINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeInitializeINTEL OpSubgroupAvcImeInitializeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeSetSingleReferenceINTEL OpSubgroupAvcImeSetSingleReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeSetDualReferenceINTEL OpSubgroupAvcImeSetDualReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeRefWindowSizeINTEL OpSubgroupAvcImeRefWindowSizeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeAdjustRefOffsetINTEL OpSubgroupAvcImeAdjustRefOffsetINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeConvertToMcePayloadINTEL OpSubgroupAvcImeConvertToMcePayloadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeSetMaxMotionVectorCountINTEL OpSubgroupAvcImeSetMaxMotionVectorCountINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeSetUnidirectionalMixDisableINTEL OpSubgroupAvcImeSetUnidirectionalMixDisableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeSetEarlySearchTerminationThresholdINTEL OpSubgroupAvcImeSetEarlySearchTerminationThresholdINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeSetWeightedSadINTEL OpSubgroupAvcImeSetWeightedSadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeEvaluateWithSingleReferenceINTEL OpSubgroupAvcImeEvaluateWithSingleReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeEvaluateWithDualReferenceINTEL OpSubgroupAvcImeEvaluateWithDualReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeEvaluateWithSingleReferenceStreaminINTEL OpSubgroupAvcImeEvaluateWithSingleReferenceStreaminINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeEvaluateWithDualReferenceStreaminINTEL OpSubgroupAvcImeEvaluateWithDualReferenceStreaminINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeEvaluateWithSingleReferenceStreamoutINTEL OpSubgroupAvcImeEvaluateWithSingleReferenceStreamoutINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeEvaluateWithDualReferenceStreamoutINTEL OpSubgroupAvcImeEvaluateWithDualReferenceStreamoutINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeEvaluateWithSingleReferenceStreaminoutINTEL OpSubgroupAvcImeEvaluateWithSingleReferenceStreaminoutINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeEvaluateWithDualReferenceStreaminoutINTEL OpSubgroupAvcImeEvaluateWithDualReferenceStreaminoutINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeConvertToMceResultINTEL OpSubgroupAvcImeConvertToMceResultINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetSingleReferenceStreaminINTEL OpSubgroupAvcImeGetSingleReferenceStreaminINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetDualReferenceStreaminINTEL OpSubgroupAvcImeGetDualReferenceStreaminINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeStripSingleReferenceStreamoutINTEL OpSubgroupAvcImeStripSingleReferenceStreamoutINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeStripDualReferenceStreamoutINTEL OpSubgroupAvcImeStripDualReferenceStreamoutINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetStreamoutSingleReferenceMajorShapeMotionVectorsINTEL OpSubgroupAvcImeGetStreamoutSingleReferenceMajorShapeMotionVectorsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetStreamoutSingleReferenceMajorShapeDistortionsINTEL OpSubgroupAvcImeGetStreamoutSingleReferenceMajorShapeDistortionsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetStreamoutSingleReferenceMajorShapeReferenceIdsINTEL OpSubgroupAvcImeGetStreamoutSingleReferenceMajorShapeReferenceIdsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetStreamoutDualReferenceMajorShapeMotionVectorsINTEL OpSubgroupAvcImeGetStreamoutDualReferenceMajorShapeMotionVectorsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetStreamoutDualReferenceMajorShapeDistortionsINTEL OpSubgroupAvcImeGetStreamoutDualReferenceMajorShapeDistortionsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetStreamoutDualReferenceMajorShapeReferenceIdsINTEL OpSubgroupAvcImeGetStreamoutDualReferenceMajorShapeReferenceIdsINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetBorderReachedINTEL OpSubgroupAvcImeGetBorderReachedINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetTruncatedSearchIndicationINTEL OpSubgroupAvcImeGetTruncatedSearchIndicationINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetUnidirectionalEarlySearchTerminationINTEL OpSubgroupAvcImeGetUnidirectionalEarlySearchTerminationINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetWeightingPatternMinimumMotionVectorINTEL OpSubgroupAvcImeGetWeightingPatternMinimumMotionVectorINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcImeGetWeightingPatternMinimumDistortionINTEL OpSubgroupAvcImeGetWeightingPatternMinimumDistortionINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcFmeInitializeINTEL OpSubgroupAvcFmeInitializeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcBmeInitializeINTEL OpSubgroupAvcBmeInitializeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcRefConvertToMcePayloadINTEL OpSubgroupAvcRefConvertToMcePayloadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcRefSetBidirectionalMixDisableINTEL OpSubgroupAvcRefSetBidirectionalMixDisableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcRefSetBilinearFilterEnableINTEL OpSubgroupAvcRefSetBilinearFilterEnableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcRefEvaluateWithSingleReferenceINTEL OpSubgroupAvcRefEvaluateWithSingleReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcRefEvaluateWithDualReferenceINTEL OpSubgroupAvcRefEvaluateWithDualReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcRefEvaluateWithMultiReferenceINTEL OpSubgroupAvcRefEvaluateWithMultiReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcRefEvaluateWithMultiReferenceInterlacedINTEL OpSubgroupAvcRefEvaluateWithMultiReferenceInterlacedINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcRefConvertToMceResultINTEL OpSubgroupAvcRefConvertToMceResultINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicInitializeINTEL OpSubgroupAvcSicInitializeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicConfigureSkcINTEL OpSubgroupAvcSicConfigureSkcINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicConfigureIpeLumaINTEL OpSubgroupAvcSicConfigureIpeLumaINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicConfigureIpeLumaChromaINTEL OpSubgroupAvcSicConfigureIpeLumaChromaINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetMotionVectorMaskINTEL OpSubgroupAvcSicGetMotionVectorMaskINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicConvertToMcePayloadINTEL OpSubgroupAvcSicConvertToMcePayloadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicSetIntraLumaShapePenaltyINTEL OpSubgroupAvcSicSetIntraLumaShapePenaltyINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicSetIntraLumaModeCostFunctionINTEL OpSubgroupAvcSicSetIntraLumaModeCostFunctionINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicSetIntraChromaModeCostFunctionINTEL OpSubgroupAvcSicSetIntraChromaModeCostFunctionINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicSetBilinearFilterEnableINTEL OpSubgroupAvcSicSetBilinearFilterEnableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicSetSkcForwardTransformEnableINTEL OpSubgroupAvcSicSetSkcForwardTransformEnableINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicSetBlockBasedRawSkipSadINTEL OpSubgroupAvcSicSetBlockBasedRawSkipSadINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicEvaluateIpeINTEL OpSubgroupAvcSicEvaluateIpeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicEvaluateWithSingleReferenceINTEL OpSubgroupAvcSicEvaluateWithSingleReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicEvaluateWithDualReferenceINTEL OpSubgroupAvcSicEvaluateWithDualReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicEvaluateWithMultiReferenceINTEL OpSubgroupAvcSicEvaluateWithMultiReferenceINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicEvaluateWithMultiReferenceInterlacedINTEL OpSubgroupAvcSicEvaluateWithMultiReferenceInterlacedINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicConvertToMceResultINTEL OpSubgroupAvcSicConvertToMceResultINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetIpeLumaShapeINTEL OpSubgroupAvcSicGetIpeLumaShapeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetBestIpeLumaDistortionINTEL OpSubgroupAvcSicGetBestIpeLumaDistortionINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetBestIpeChromaDistortionINTEL OpSubgroupAvcSicGetBestIpeChromaDistortionINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetPackedIpeLumaModesINTEL OpSubgroupAvcSicGetPackedIpeLumaModesINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetIpeChromaModeINTEL OpSubgroupAvcSicGetIpeChromaModeINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetPackedSkcLumaCountThresholdINTEL OpSubgroupAvcSicGetPackedSkcLumaCountThresholdINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetPackedSkcLumaSumThresholdINTEL OpSubgroupAvcSicGetPackedSkcLumaSumThresholdINTEL}</li>
-     * <li>{@link #SpvOpSubgroupAvcSicGetInterRawSadsINTEL OpSubgroupAvcSicGetInterRawSadsINTEL}</li>
-     * <li>{@link #SpvOpVariableLengthArrayINTEL OpVariableLengthArrayINTEL}</li>
-     * <li>{@link #SpvOpSaveMemoryINTEL OpSaveMemoryINTEL}</li>
-     * <li>{@link #SpvOpRestoreMemoryINTEL OpRestoreMemoryINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatSinCosPiINTEL OpArbitraryFloatSinCosPiINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatCastINTEL OpArbitraryFloatCastINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatCastFromIntINTEL OpArbitraryFloatCastFromIntINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatCastToIntINTEL OpArbitraryFloatCastToIntINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatAddINTEL OpArbitraryFloatAddINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatSubINTEL OpArbitraryFloatSubINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatMulINTEL OpArbitraryFloatMulINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatDivINTEL OpArbitraryFloatDivINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatGTINTEL OpArbitraryFloatGTINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatGEINTEL OpArbitraryFloatGEINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatLTINTEL OpArbitraryFloatLTINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatLEINTEL OpArbitraryFloatLEINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatEQINTEL OpArbitraryFloatEQINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatRecipINTEL OpArbitraryFloatRecipINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatRSqrtINTEL OpArbitraryFloatRSqrtINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatCbrtINTEL OpArbitraryFloatCbrtINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatHypotINTEL OpArbitraryFloatHypotINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatSqrtINTEL OpArbitraryFloatSqrtINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatLogINTEL OpArbitraryFloatLogINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatLog2INTEL OpArbitraryFloatLog2INTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatLog10INTEL OpArbitraryFloatLog10INTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatLog1pINTEL OpArbitraryFloatLog1pINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatExpINTEL OpArbitraryFloatExpINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatExp2INTEL OpArbitraryFloatExp2INTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatExp10INTEL OpArbitraryFloatExp10INTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatExpm1INTEL OpArbitraryFloatExpm1INTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatSinINTEL OpArbitraryFloatSinINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatCosINTEL OpArbitraryFloatCosINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatSinCosINTEL OpArbitraryFloatSinCosINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatSinPiINTEL OpArbitraryFloatSinPiINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatCosPiINTEL OpArbitraryFloatCosPiINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatASinINTEL OpArbitraryFloatASinINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatASinPiINTEL OpArbitraryFloatASinPiINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatACosINTEL OpArbitraryFloatACosINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatACosPiINTEL OpArbitraryFloatACosPiINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatATanINTEL OpArbitraryFloatATanINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatATanPiINTEL OpArbitraryFloatATanPiINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatATan2INTEL OpArbitraryFloatATan2INTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatPowINTEL OpArbitraryFloatPowINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatPowRINTEL OpArbitraryFloatPowRINTEL}</li>
-     * <li>{@link #SpvOpArbitraryFloatPowNINTEL OpArbitraryFloatPowNINTEL}</li>
-     * <li>{@link #SpvOpLoopControlINTEL OpLoopControlINTEL}</li>
-     * <li>{@link #SpvOpAliasDomainDeclINTEL OpAliasDomainDeclINTEL}</li>
-     * <li>{@link #SpvOpAliasScopeDeclINTEL OpAliasScopeDeclINTEL}</li>
-     * <li>{@link #SpvOpAliasScopeListDeclINTEL OpAliasScopeListDeclINTEL}</li>
-     * <li>{@link #SpvOpFixedSqrtINTEL OpFixedSqrtINTEL}</li>
-     * <li>{@link #SpvOpFixedRecipINTEL OpFixedRecipINTEL}</li>
-     * <li>{@link #SpvOpFixedRsqrtINTEL OpFixedRsqrtINTEL}</li>
-     * <li>{@link #SpvOpFixedSinINTEL OpFixedSinINTEL}</li>
-     * <li>{@link #SpvOpFixedCosINTEL OpFixedCosINTEL}</li>
-     * <li>{@link #SpvOpFixedSinCosINTEL OpFixedSinCosINTEL}</li>
-     * <li>{@link #SpvOpFixedSinPiINTEL OpFixedSinPiINTEL}</li>
-     * <li>{@link #SpvOpFixedCosPiINTEL OpFixedCosPiINTEL}</li>
-     * <li>{@link #SpvOpFixedSinCosPiINTEL OpFixedSinCosPiINTEL}</li>
-     * <li>{@link #SpvOpFixedLogINTEL OpFixedLogINTEL}</li>
-     * <li>{@link #SpvOpFixedExpINTEL OpFixedExpINTEL}</li>
-     * <li>{@link #SpvOpPtrCastToCrossWorkgroupINTEL OpPtrCastToCrossWorkgroupINTEL}</li>
-     * <li>{@link #SpvOpCrossWorkgroupCastToPtrINTEL OpCrossWorkgroupCastToPtrINTEL}</li>
-     * <li>{@link #SpvOpReadPipeBlockingINTEL OpReadPipeBlockingINTEL}</li>
-     * <li>{@link #SpvOpWritePipeBlockingINTEL OpWritePipeBlockingINTEL}</li>
-     * <li>{@link #SpvOpFPGARegINTEL OpFPGARegINTEL}</li>
-     * <li>{@link #SpvOpRayQueryGetRayTMinKHR OpRayQueryGetRayTMinKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetRayFlagsKHR OpRayQueryGetRayFlagsKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionTKHR OpRayQueryGetIntersectionTKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionInstanceCustomIndexKHR OpRayQueryGetIntersectionInstanceCustomIndexKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionInstanceIdKHR OpRayQueryGetIntersectionInstanceIdKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionInstanceShaderBindingTableRecordOffsetKHR OpRayQueryGetIntersectionInstanceShaderBindingTableRecordOffsetKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionGeometryIndexKHR OpRayQueryGetIntersectionGeometryIndexKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionPrimitiveIndexKHR OpRayQueryGetIntersectionPrimitiveIndexKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionBarycentricsKHR OpRayQueryGetIntersectionBarycentricsKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionFrontFaceKHR OpRayQueryGetIntersectionFrontFaceKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionCandidateAABBOpaqueKHR OpRayQueryGetIntersectionCandidateAABBOpaqueKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionObjectRayDirectionKHR OpRayQueryGetIntersectionObjectRayDirectionKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionObjectRayOriginKHR OpRayQueryGetIntersectionObjectRayOriginKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetWorldRayDirectionKHR OpRayQueryGetWorldRayDirectionKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetWorldRayOriginKHR OpRayQueryGetWorldRayOriginKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionObjectToWorldKHR OpRayQueryGetIntersectionObjectToWorldKHR}</li>
-     * <li>{@link #SpvOpRayQueryGetIntersectionWorldToObjectKHR OpRayQueryGetIntersectionWorldToObjectKHR}</li>
-     * <li>{@link #SpvOpAtomicFAddEXT OpAtomicFAddEXT}</li>
-     * <li>{@link #SpvOpTypeBufferSurfaceINTEL OpTypeBufferSurfaceINTEL}</li>
-     * <li>{@link #SpvOpTypeStructContinuedINTEL OpTypeStructContinuedINTEL}</li>
-     * <li>{@link #SpvOpConstantCompositeContinuedINTEL OpConstantCompositeContinuedINTEL}</li>
-     * <li>{@link #SpvOpSpecConstantCompositeContinuedINTEL OpSpecConstantCompositeContinuedINTEL}</li>
-     * <li>{@link #SpvOpControlBarrierArriveINTEL OpControlBarrierArriveINTEL}</li>
-     * <li>{@link #SpvOpControlBarrierWaitINTEL OpControlBarrierWaitINTEL}</li>
-     * <li>{@link #SpvOpGroupIMulKHR OpGroupIMulKHR}</li>
-     * <li>{@link #SpvOpGroupFMulKHR OpGroupFMulKHR}</li>
-     * <li>{@link #SpvOpGroupBitwiseAndKHR OpGroupBitwiseAndKHR}</li>
-     * <li>{@link #SpvOpGroupBitwiseOrKHR OpGroupBitwiseOrKHR}</li>
-     * <li>{@link #SpvOpGroupBitwiseXorKHR OpGroupBitwiseXorKHR}</li>
-     * <li>{@link #SpvOpGroupLogicalAndKHR OpGroupLogicalAndKHR}</li>
-     * <li>{@link #SpvOpGroupLogicalOrKHR OpGroupLogicalOrKHR}</li>
-     * <li>{@link #SpvOpGroupLogicalXorKHR OpGroupLogicalXorKHR}</li>
-     * <li>{@link #SpvOpMax OpMax}</li>
-     * </ul>
-     */
     public static final int
         SpvOpNop                                                                   = 0,
         SpvOpUndef                                                                 = 1,

@@ -16,32 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure to set low latency mode.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code lowLatencyMode} is {@link VK10#VK_FALSE FALSE}, {@code lowLatencyBoost} will still hint to the GPU to increase its power state and {@code vkLatencySleepNV} will still enforce {@code minimumIntervalUs} between {@code vkQueuePresentKHR} calls.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link NVLowLatency2#vkSetLatencySleepModeNV SetLatencySleepModeNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkLatencySleepModeInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #lowLatencyMode};
- *     VkBool32 {@link #lowLatencyBoost};
- *     uint32_t {@link #minimumIntervalUs};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 lowLatencyMode;
+ *     VkBool32 lowLatencyBoost;
+ *     uint32_t minimumIntervalUs;
+ * }}</pre>
  */
 public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> implements NativeResource {
 
@@ -100,33 +82,33 @@ public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the toggle to enable or disable low latency mode. */
+    /** @return the value of the {@code lowLatencyMode} field. */
     @NativeType("VkBool32")
     public boolean lowLatencyMode() { return nlowLatencyMode(address()) != 0; }
-    /** allows an application to hint to the GPU to increase performance to provide additional latency savings at a cost of increased power consumption. */
+    /** @return the value of the {@code lowLatencyBoost} field. */
     @NativeType("VkBool32")
     public boolean lowLatencyBoost() { return nlowLatencyBoost(address()) != 0; }
-    /** the microseconds between {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} calls for a given swapchain that {@link NVLowLatency2#vkLatencySleepNV LatencySleepNV} will enforce. */
+    /** @return the value of the {@code minimumIntervalUs} field. */
     @NativeType("uint32_t")
     public int minimumIntervalUs() { return nminimumIntervalUs(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkLatencySleepModeInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV} value to the {@code sType} field. */
     public VkLatencySleepModeInfoNV sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkLatencySleepModeInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #lowLatencyMode} field. */
+    /** Sets the specified value to the {@code lowLatencyMode} field. */
     public VkLatencySleepModeInfoNV lowLatencyMode(@NativeType("VkBool32") boolean value) { nlowLatencyMode(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #lowLatencyBoost} field. */
+    /** Sets the specified value to the {@code lowLatencyBoost} field. */
     public VkLatencySleepModeInfoNV lowLatencyBoost(@NativeType("VkBool32") boolean value) { nlowLatencyBoost(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #minimumIntervalUs} field. */
+    /** Sets the specified value to the {@code minimumIntervalUs} field. */
     public VkLatencySleepModeInfoNV minimumIntervalUs(@NativeType("uint32_t") int value) { nminimumIntervalUs(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,33 +316,33 @@ public class VkLatencySleepModeInfoNV extends Struct<VkLatencySleepModeInfoNV> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkLatencySleepModeInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkLatencySleepModeInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkLatencySleepModeInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkLatencySleepModeInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkLatencySleepModeInfoNV#lowLatencyMode} field. */
+        /** @return the value of the {@code lowLatencyMode} field. */
         @NativeType("VkBool32")
         public boolean lowLatencyMode() { return VkLatencySleepModeInfoNV.nlowLatencyMode(address()) != 0; }
-        /** @return the value of the {@link VkLatencySleepModeInfoNV#lowLatencyBoost} field. */
+        /** @return the value of the {@code lowLatencyBoost} field. */
         @NativeType("VkBool32")
         public boolean lowLatencyBoost() { return VkLatencySleepModeInfoNV.nlowLatencyBoost(address()) != 0; }
-        /** @return the value of the {@link VkLatencySleepModeInfoNV#minimumIntervalUs} field. */
+        /** @return the value of the {@code minimumIntervalUs} field. */
         @NativeType("uint32_t")
         public int minimumIntervalUs() { return VkLatencySleepModeInfoNV.nminimumIntervalUs(address()); }
 
-        /** Sets the specified value to the {@link VkLatencySleepModeInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkLatencySleepModeInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkLatencySleepModeInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV} value to the {@link VkLatencySleepModeInfoNV#sType} field. */
+        /** Sets the {@link NVLowLatency2#VK_STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV} value to the {@code sType} field. */
         public VkLatencySleepModeInfoNV.Buffer sType$Default() { return sType(NVLowLatency2.VK_STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV); }
-        /** Sets the specified value to the {@link VkLatencySleepModeInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkLatencySleepModeInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkLatencySleepModeInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkLatencySleepModeInfoNV#lowLatencyMode} field. */
+        /** Sets the specified value to the {@code lowLatencyMode} field. */
         public VkLatencySleepModeInfoNV.Buffer lowLatencyMode(@NativeType("VkBool32") boolean value) { VkLatencySleepModeInfoNV.nlowLatencyMode(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkLatencySleepModeInfoNV#lowLatencyBoost} field. */
+        /** Sets the specified value to the {@code lowLatencyBoost} field. */
         public VkLatencySleepModeInfoNV.Buffer lowLatencyBoost(@NativeType("VkBool32") boolean value) { VkLatencySleepModeInfoNV.nlowLatencyBoost(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkLatencySleepModeInfoNV#minimumIntervalUs} field. */
+        /** Sets the specified value to the {@code minimumIntervalUs} field. */
         public VkLatencySleepModeInfoNV.Buffer minimumIntervalUs(@NativeType("uint32_t") int value) { VkLatencySleepModeInfoNV.nminimumIntervalUs(address(), value); return this; }
 
     }

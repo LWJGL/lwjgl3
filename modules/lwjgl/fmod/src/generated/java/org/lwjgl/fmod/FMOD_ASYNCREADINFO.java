@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * FMOD structs
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_ASYNCREADINFO {
  *     void * handle;
  *     unsigned int offset;
@@ -31,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     void * buffer;
  *     unsigned int bytesread;
  *     {@link FMOD_FILE_ASYNCDONE_FUNCI FMOD_FILE_ASYNCDONE_FUNC} done;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FMOD_ASYNCREADINFO")
 public class FMOD_ASYNCREADINFO extends Struct<FMOD_ASYNCREADINFO> implements NativeResource {

@@ -16,25 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The information to create a swapchain supporting foveation.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBFoveation XR_FB_foveation} extension <b>must</b> be enabled prior to using {@link XrSwapchainCreateInfoFoveationFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBFoveation#XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrSwapchainCreateFoveationFlagBitsFB} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSwapchainCreateInfoFoveationFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrSwapchainCreateFoveationFlagsFB {@link #flags};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrSwapchainCreateFoveationFlagsFB flags;
+ * }}</pre>
  */
 public class XrSwapchainCreateInfoFoveationFB extends Struct<XrSwapchainCreateInfoFoveationFB> implements NativeResource {
 
@@ -87,23 +74,23 @@ public class XrSwapchainCreateInfoFoveationFB extends Struct<XrSwapchainCreateIn
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a bitmask of {@code XrSwapchainCreateFoveationFlagBitsFB} which indicate various characteristics for how foveation is enabled on the swapchain. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrSwapchainCreateFoveationFlagsFB")
     public long flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSwapchainCreateInfoFoveationFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBFoveation#XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBFoveation#XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB} value to the {@code type} field. */
     public XrSwapchainCreateInfoFoveationFB type$Default() { return type(FBFoveation.XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSwapchainCreateInfoFoveationFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public XrSwapchainCreateInfoFoveationFB flags(@NativeType("XrSwapchainCreateFoveationFlagsFB") long value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,23 +286,23 @@ public class XrSwapchainCreateInfoFoveationFB extends Struct<XrSwapchainCreateIn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSwapchainCreateInfoFoveationFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSwapchainCreateInfoFoveationFB.ntype(address()); }
-        /** @return the value of the {@link XrSwapchainCreateInfoFoveationFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSwapchainCreateInfoFoveationFB.nnext(address()); }
-        /** @return the value of the {@link XrSwapchainCreateInfoFoveationFB#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrSwapchainCreateFoveationFlagsFB")
         public long flags() { return XrSwapchainCreateInfoFoveationFB.nflags(address()); }
 
-        /** Sets the specified value to the {@link XrSwapchainCreateInfoFoveationFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSwapchainCreateInfoFoveationFB.Buffer type(@NativeType("XrStructureType") int value) { XrSwapchainCreateInfoFoveationFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBFoveation#XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB} value to the {@link XrSwapchainCreateInfoFoveationFB#type} field. */
+        /** Sets the {@link FBFoveation#XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB} value to the {@code type} field. */
         public XrSwapchainCreateInfoFoveationFB.Buffer type$Default() { return type(FBFoveation.XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB); }
-        /** Sets the specified value to the {@link XrSwapchainCreateInfoFoveationFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSwapchainCreateInfoFoveationFB.Buffer next(@NativeType("void *") long value) { XrSwapchainCreateInfoFoveationFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSwapchainCreateInfoFoveationFB#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public XrSwapchainCreateInfoFoveationFB.Buffer flags(@NativeType("XrSwapchainCreateFoveationFlagsFB") long value) { XrSwapchainCreateInfoFoveationFB.nflags(address(), value); return this; }
 
     }

@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkCalibratedTimestampInfoKHR}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCalibratedTimestampInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkTimeDomainKHR timeDomain;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkCalibratedTimestampInfoEXT extends VkCalibratedTimestampInfoKHR {
 

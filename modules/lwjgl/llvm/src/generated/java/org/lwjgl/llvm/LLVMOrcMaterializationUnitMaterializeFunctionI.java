@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMOrc#LLVMOrcCreateCustomMaterializationUnit OrcCreateCustomMaterializationUnit} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMOrcMaterializationResponsibilityRef MR
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcMaterializationUnitMaterializeFunction} */
 @FunctionalInterface
 @NativeType("LLVMOrcMaterializationUnitMaterializeFunction")
 public interface LLVMOrcMaterializationUnitMaterializeFunctionI extends CallbackI {
@@ -44,14 +34,7 @@ public interface LLVMOrcMaterializationUnitMaterializeFunctionI extends Callback
         );
     }
 
-    /**
-     * A {@code MaterializationUnit} materialize callback.
-     * 
-     * <p>Ownership of the {@code Ctx} and {@code MR} arguments passes to the callback which must adhere to the {@code LLVMOrcMaterializationResponsibilityRef}
-     * contract (see comment for that type).</p>
-     * 
-     * <p>If this callback is called then the {@link LLVMOrcMaterializationUnitDestroyFunction} callback will NOT be called.</p>
-     */
+    /** {@code void (* LLVMOrcMaterializationUnitMaterializeFunction) (void * Ctx, LLVMOrcMaterializationResponsibilityRef MR)} */
     void invoke(@NativeType("void *") long Ctx, @NativeType("LLVMOrcMaterializationResponsibilityRef") long MR);
 
 }

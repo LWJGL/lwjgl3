@@ -18,31 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure providing information about an active tool.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK13#vkGetPhysicalDeviceToolProperties GetPhysicalDeviceToolProperties}, {@link EXTToolingInfo#vkGetPhysicalDeviceToolPropertiesEXT GetPhysicalDeviceToolPropertiesEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceToolProperties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     char {@link #name}[VK_MAX_EXTENSION_NAME_SIZE];
- *     char {@link #version}[VK_MAX_EXTENSION_NAME_SIZE];
- *     VkToolPurposeFlags {@link #purposes};
- *     char {@link #description}[VK_MAX_DESCRIPTION_SIZE];
- *     char {@link #layer}[VK_MAX_EXTENSION_NAME_SIZE];
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     char name[VK_MAX_EXTENSION_NAME_SIZE];
+ *     char version[VK_MAX_EXTENSION_NAME_SIZE];
+ *     VkToolPurposeFlags purposes;
+ *     char description[VK_MAX_DESCRIPTION_SIZE];
+ *     char layer[VK_MAX_EXTENSION_NAME_SIZE];
+ * }}</pre>
  */
 public class VkPhysicalDeviceToolProperties extends Struct<VkPhysicalDeviceToolProperties> implements NativeResource {
 
@@ -107,45 +92,45 @@ public class VkPhysicalDeviceToolProperties extends Struct<VkPhysicalDeviceToolP
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a null-terminated UTF-8 string containing the name of the tool. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer name() { return nname(address()); }
-    /** a null-terminated UTF-8 string containing the name of the tool. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public String nameString() { return nnameString(address()); }
-    /** a null-terminated UTF-8 string containing the version of the tool. */
+    /** @return a {@link ByteBuffer} view of the {@code version} field. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer version() { return nversion(address()); }
-    /** a null-terminated UTF-8 string containing the version of the tool. */
+    /** @return the null-terminated string stored in the {@code version} field. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public String versionString() { return nversionString(address()); }
-    /** a bitmask of {@code VkToolPurposeFlagBits} which is populated with purposes supported by the tool. */
+    /** @return the value of the {@code purposes} field. */
     @NativeType("VkToolPurposeFlags")
     public int purposes() { return npurposes(address()); }
-    /** a null-terminated UTF-8 string containing a description of the tool. */
+    /** @return a {@link ByteBuffer} view of the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** a null-terminated UTF-8 string containing a description of the tool. */
+    /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** a null-terminated UTF-8 string containing the name of the layer implementing the tool, if the tool is implemented in a layer - otherwise it <b>may</b> be an empty string. */
+    /** @return a {@link ByteBuffer} view of the {@code layer} field. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer layer() { return nlayer(address()); }
-    /** a null-terminated UTF-8 string containing the name of the layer implementing the tool, if the tool is implemented in a layer - otherwise it <b>may</b> be an empty string. */
+    /** @return the null-terminated string stored in the {@code layer} field. */
     @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
     public String layerString() { return nlayerString(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceToolProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceToolProperties sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceToolProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -353,45 +338,45 @@ public class VkPhysicalDeviceToolProperties extends Struct<VkPhysicalDeviceToolP
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceToolProperties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceToolProperties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceToolProperties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceToolProperties.npNext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceToolProperties#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public ByteBuffer name() { return VkPhysicalDeviceToolProperties.nname(address()); }
-        /** @return the null-terminated string stored in the {@link VkPhysicalDeviceToolProperties#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public String nameString() { return VkPhysicalDeviceToolProperties.nnameString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceToolProperties#version} field. */
+        /** @return a {@link ByteBuffer} view of the {@code version} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public ByteBuffer version() { return VkPhysicalDeviceToolProperties.nversion(address()); }
-        /** @return the null-terminated string stored in the {@link VkPhysicalDeviceToolProperties#version} field. */
+        /** @return the null-terminated string stored in the {@code version} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public String versionString() { return VkPhysicalDeviceToolProperties.nversionString(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceToolProperties#purposes} field. */
+        /** @return the value of the {@code purposes} field. */
         @NativeType("VkToolPurposeFlags")
         public int purposes() { return VkPhysicalDeviceToolProperties.npurposes(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceToolProperties#description} field. */
+        /** @return a {@link ByteBuffer} view of the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return VkPhysicalDeviceToolProperties.ndescription(address()); }
-        /** @return the null-terminated string stored in the {@link VkPhysicalDeviceToolProperties#description} field. */
+        /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkPhysicalDeviceToolProperties.ndescriptionString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceToolProperties#layer} field. */
+        /** @return a {@link ByteBuffer} view of the {@code layer} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public ByteBuffer layer() { return VkPhysicalDeviceToolProperties.nlayer(address()); }
-        /** @return the null-terminated string stored in the {@link VkPhysicalDeviceToolProperties#layer} field. */
+        /** @return the null-terminated string stored in the {@code layer} field. */
         @NativeType("char[VK_MAX_EXTENSION_NAME_SIZE]")
         public String layerString() { return VkPhysicalDeviceToolProperties.nlayerString(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceToolProperties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceToolProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceToolProperties.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES} value to the {@link VkPhysicalDeviceToolProperties#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceToolProperties.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceToolProperties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceToolProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceToolProperties.npNext(address(), value); return this; }
 
     }

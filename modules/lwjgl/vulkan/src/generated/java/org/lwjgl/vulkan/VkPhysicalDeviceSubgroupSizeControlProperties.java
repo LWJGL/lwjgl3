@@ -16,31 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the control subgroup size properties of an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceSubgroupSizeControlProperties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <p>If {@link VkPhysicalDeviceSubgroupProperties}{@code ::supportedOperations} includes <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-subgroup-quad">{@link VK11#VK_SUBGROUP_FEATURE_QUAD_BIT SUBGROUP_FEATURE_QUAD_BIT}</a>, {@code minSubgroupSize} <b>must</b> be greater than or equal to 4.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSubgroupSizeControlProperties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #minSubgroupSize};
- *     uint32_t {@link #maxSubgroupSize};
- *     uint32_t {@link #maxComputeWorkgroupSubgroups};
- *     VkShaderStageFlags {@link #requiredSubgroupSizeStages};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t minSubgroupSize;
+ *     uint32_t maxSubgroupSize;
+ *     uint32_t maxComputeWorkgroupSubgroups;
+ *     VkShaderStageFlags requiredSubgroupSizeStages;
+ * }}</pre>
  */
 public class VkPhysicalDeviceSubgroupSizeControlProperties extends Struct<VkPhysicalDeviceSubgroupSizeControlProperties> implements NativeResource {
 
@@ -102,30 +86,30 @@ public class VkPhysicalDeviceSubgroupSizeControlProperties extends Struct<VkPhys
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the minimum subgroup size supported by this device. {@code minSubgroupSize} is at least one if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code minSubgroupSize} is a power-of-two. {@code minSubgroupSize} is less than or equal to {@code maxSubgroupSize}. {@code minSubgroupSize} is less than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-subgroupSize">{@code subgroupSize}</a>. */
+    /** @return the value of the {@code minSubgroupSize} field. */
     @NativeType("uint32_t")
     public int minSubgroupSize() { return nminSubgroupSize(address()); }
-    /** the maximum subgroup size supported by this device. {@code maxSubgroupSize} is at least one if any of the physical device’s queues support {@link VK10#VK_QUEUE_GRAPHICS_BIT QUEUE_GRAPHICS_BIT} or {@link VK10#VK_QUEUE_COMPUTE_BIT QUEUE_COMPUTE_BIT}. {@code maxSubgroupSize} is a power-of-two. {@code maxSubgroupSize} is greater than or equal to {@code minSubgroupSize}. {@code maxSubgroupSize} is greater than or equal to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-subgroupSize">{@code subgroupSize}</a>. */
+    /** @return the value of the {@code maxSubgroupSize} field. */
     @NativeType("uint32_t")
     public int maxSubgroupSize() { return nmaxSubgroupSize(address()); }
-    /** the maximum number of subgroups supported by the implementation within a workgroup. */
+    /** @return the value of the {@code maxComputeWorkgroupSubgroups} field. */
     @NativeType("uint32_t")
     public int maxComputeWorkgroupSubgroups() { return nmaxComputeWorkgroupSubgroups(address()); }
-    /** a bitfield of what shader stages support having a required subgroup size specified. */
+    /** @return the value of the {@code requiredSubgroupSizeStages} field. */
     @NativeType("VkShaderStageFlags")
     public int requiredSubgroupSizeStages() { return nrequiredSubgroupSizeStages(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceSubgroupSizeControlProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceSubgroupSizeControlProperties sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceSubgroupSizeControlProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,30 +307,30 @@ public class VkPhysicalDeviceSubgroupSizeControlProperties extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlProperties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceSubgroupSizeControlProperties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlProperties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceSubgroupSizeControlProperties.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlProperties#minSubgroupSize} field. */
+        /** @return the value of the {@code minSubgroupSize} field. */
         @NativeType("uint32_t")
         public int minSubgroupSize() { return VkPhysicalDeviceSubgroupSizeControlProperties.nminSubgroupSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlProperties#maxSubgroupSize} field. */
+        /** @return the value of the {@code maxSubgroupSize} field. */
         @NativeType("uint32_t")
         public int maxSubgroupSize() { return VkPhysicalDeviceSubgroupSizeControlProperties.nmaxSubgroupSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlProperties#maxComputeWorkgroupSubgroups} field. */
+        /** @return the value of the {@code maxComputeWorkgroupSubgroups} field. */
         @NativeType("uint32_t")
         public int maxComputeWorkgroupSubgroups() { return VkPhysicalDeviceSubgroupSizeControlProperties.nmaxComputeWorkgroupSubgroups(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceSubgroupSizeControlProperties#requiredSubgroupSizeStages} field. */
+        /** @return the value of the {@code requiredSubgroupSizeStages} field. */
         @NativeType("VkShaderStageFlags")
         public int requiredSubgroupSizeStages() { return VkPhysicalDeviceSubgroupSizeControlProperties.nrequiredSubgroupSizeStages(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlProperties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceSubgroupSizeControlProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceSubgroupSizeControlProperties.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES} value to the {@link VkPhysicalDeviceSubgroupSizeControlProperties#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceSubgroupSizeControlProperties.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceSubgroupSizeControlProperties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceSubgroupSizeControlProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceSubgroupSizeControlProperties.npNext(address(), value); return this; }
 
     }

@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Describes a version number of the form {@code major.minor.subminor}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXVersion {
- *     int {@link #Major};
- *     int {@link #Minor};
- *     int {@link #Subminor};
- * }</code></pre>
+ *     int Major;
+ *     int Minor;
+ *     int Subminor;
+ * }}</pre>
  */
 public class CXVersion extends Struct<CXVersion> {
 
@@ -76,14 +72,11 @@ public class CXVersion extends Struct<CXVersion> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the major version number, e.g., the '10' in '10.7.3'. A negative value indicates that there is no version number at all. */
+    /** @return the value of the {@code Major} field. */
     public int Major() { return nMajor(address()); }
-    /** the minor version number, e.g., the '7' in '10.7.3'. This value will be negative if no minor version number was provided, e.g., for version '10'. */
+    /** @return the value of the {@code Minor} field. */
     public int Minor() { return nMinor(address()); }
-    /**
-     * the subminor version number, e.g., the '3' in '10.7.3'. This value will be negative if no minor or subminor version number was provided, e.g., in
-     * version '10' or '10.7'.
-     */
+    /** @return the value of the {@code Subminor} field. */
     public int Subminor() { return nSubminor(address()); }
 
     // -----------------------------------
@@ -165,11 +158,11 @@ public class CXVersion extends Struct<CXVersion> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CXVersion#Major} field. */
+        /** @return the value of the {@code Major} field. */
         public int Major() { return CXVersion.nMajor(address()); }
-        /** @return the value of the {@link CXVersion#Minor} field. */
+        /** @return the value of the {@code Minor} field. */
         public int Minor() { return CXVersion.nMinor(address()); }
-        /** @return the value of the {@link CXVersion#Subminor} field. */
+        /** @return the value of the {@code Subminor} field. */
         public int Subminor() { return CXVersion.nSubminor(address()); }
 
     }

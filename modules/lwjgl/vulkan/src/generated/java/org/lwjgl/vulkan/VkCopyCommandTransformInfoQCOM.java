@@ -16,36 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing transform parameters of rotated copy command.
- * 
- * <h5>Description</h5>
- * 
- * <p>Including this structure in the {@code pNext} chain of {@link VkBufferImageCopy2} defines a rotation to be performed when copying between an image and a buffer. Including this structure in the {@code pNext} chain of {@link VkBlitImageInfo2} defines a rotation to be performed when blitting between two images. If this structure is not specified in either case, the implementation behaves as if it was specified with a {@code transform} equal to {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR}.</p>
- * 
- * <p>Specifying a transform for a copy between an image and a buffer <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#copies-buffers-images-rotation-addressing">rotates the region accessed in the image around the offset</a>. Specifying a transform for a blit performs a similar transform as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#copies-images-scaling-rotation">Image Blits with Scaling and Rotation</a>.</p>
- * 
- * <p>Rotations other than {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR} <b>can</b> only be specified for single-plane 2D images with a 1x1x1 <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-compatibility-classes">texel block extent</a>.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code transform} <b>must</b> be {@link KHRSurface#VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR SURFACE_TRANSFORM_IDENTITY_BIT_KHR}, {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR SURFACE_TRANSFORM_ROTATE_90_BIT_KHR}, {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR SURFACE_TRANSFORM_ROTATE_180_BIT_KHR}, or {@link KHRSurface#VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR SURFACE_TRANSFORM_ROTATE_270_BIT_KHR}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link QCOMRotatedCopyCommands#VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCopyCommandTransformInfoQCOM {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSurfaceTransformFlagBitsKHR {@link #transform};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSurfaceTransformFlagBitsKHR transform;
+ * }}</pre>
  */
 public class VkCopyCommandTransformInfoQCOM extends Struct<VkCopyCommandTransformInfoQCOM> implements NativeResource {
 
@@ -98,23 +74,23 @@ public class VkCopyCommandTransformInfoQCOM extends Struct<VkCopyCommandTransfor
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkSurfaceTransformFlagBitsKHR} value describing the transform to be applied. */
+    /** @return the value of the {@code transform} field. */
     @NativeType("VkSurfaceTransformFlagBitsKHR")
     public int transform() { return ntransform(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCopyCommandTransformInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link QCOMRotatedCopyCommands#VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM} value to the {@link #sType} field. */
+    /** Sets the {@link QCOMRotatedCopyCommands#VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM} value to the {@code sType} field. */
     public VkCopyCommandTransformInfoQCOM sType$Default() { return sType(QCOMRotatedCopyCommands.VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCopyCommandTransformInfoQCOM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #transform} field. */
+    /** Sets the specified value to the {@code transform} field. */
     public VkCopyCommandTransformInfoQCOM transform(@NativeType("VkSurfaceTransformFlagBitsKHR") int value) { ntransform(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -310,23 +286,23 @@ public class VkCopyCommandTransformInfoQCOM extends Struct<VkCopyCommandTransfor
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCopyCommandTransformInfoQCOM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCopyCommandTransformInfoQCOM.nsType(address()); }
-        /** @return the value of the {@link VkCopyCommandTransformInfoQCOM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCopyCommandTransformInfoQCOM.npNext(address()); }
-        /** @return the value of the {@link VkCopyCommandTransformInfoQCOM#transform} field. */
+        /** @return the value of the {@code transform} field. */
         @NativeType("VkSurfaceTransformFlagBitsKHR")
         public int transform() { return VkCopyCommandTransformInfoQCOM.ntransform(address()); }
 
-        /** Sets the specified value to the {@link VkCopyCommandTransformInfoQCOM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCopyCommandTransformInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyCommandTransformInfoQCOM.nsType(address(), value); return this; }
-        /** Sets the {@link QCOMRotatedCopyCommands#VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM} value to the {@link VkCopyCommandTransformInfoQCOM#sType} field. */
+        /** Sets the {@link QCOMRotatedCopyCommands#VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM} value to the {@code sType} field. */
         public VkCopyCommandTransformInfoQCOM.Buffer sType$Default() { return sType(QCOMRotatedCopyCommands.VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM); }
-        /** Sets the specified value to the {@link VkCopyCommandTransformInfoQCOM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCopyCommandTransformInfoQCOM.Buffer pNext(@NativeType("void const *") long value) { VkCopyCommandTransformInfoQCOM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyCommandTransformInfoQCOM#transform} field. */
+        /** Sets the specified value to the {@code transform} field. */
         public VkCopyCommandTransformInfoQCOM.Buffer transform(@NativeType("VkSurfaceTransformFlagBitsKHR") int value) { VkCopyCommandTransformInfoQCOM.ntransform(address(), value); return this; }
 
     }

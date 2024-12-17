@@ -16,18 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Argument for {@link LibIOURing#IORING_REGISTER_FILE_ALLOC_RANGE REGISTER_FILE_ALLOC_RANGE}.
- * 
- * <p>The range is specified as {@code [off, off + len)}.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_file_index_range {
  *     __u32 off;
  *     __u32 len;
  *     __u64 resv;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_file_index_range")
 public class IOURingFileIndexRange extends Struct<IOURingFileIndexRange> implements NativeResource {

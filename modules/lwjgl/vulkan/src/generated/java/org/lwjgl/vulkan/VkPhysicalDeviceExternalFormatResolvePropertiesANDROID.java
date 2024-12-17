@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing external format resolve supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExternalFormatResolvePropertiesANDROID {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #nullColorAttachmentWithExternalFormatResolve};
- *     VkChromaLocation {@link #externalFormatResolveChromaOffsetX};
- *     VkChromaLocation {@link #externalFormatResolveChromaOffsetY};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 nullColorAttachmentWithExternalFormatResolve;
+ *     VkChromaLocation externalFormatResolveChromaOffsetX;
+ *     VkChromaLocation externalFormatResolveChromaOffsetY;
+ * }}</pre>
  */
 public class VkPhysicalDeviceExternalFormatResolvePropertiesANDROID extends Struct<VkPhysicalDeviceExternalFormatResolvePropertiesANDROID> implements NativeResource {
 
@@ -96,27 +82,27 @@ public class VkPhysicalDeviceExternalFormatResolvePropertiesANDROID extends Stru
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that there <b>must</b> be no color attachment image when performing external format resolves if it is {@link VK10#VK_TRUE TRUE}. */
+    /** @return the value of the {@code nullColorAttachmentWithExternalFormatResolve} field. */
     @NativeType("VkBool32")
     public boolean nullColorAttachmentWithExternalFormatResolve() { return nnullColorAttachmentWithExternalFormatResolve(address()) != 0; }
-    /** indicates the {@code VkChromaLocation} that an implementation uses in the X axis for accesses to an external format image as a resolve attachment. This <b>must</b> be consistent between external format resolves and load operations from external format resolve attachments to color attachments when {@code nullColorAttachmentWithExternalFormatResolve} is {@link VK10#VK_TRUE TRUE}. */
+    /** @return the value of the {@code externalFormatResolveChromaOffsetX} field. */
     @NativeType("VkChromaLocation")
     public int externalFormatResolveChromaOffsetX() { return nexternalFormatResolveChromaOffsetX(address()); }
-    /** indicates the {@code VkChromaLocation} that an implementation uses in the Y axis for accesses to an external format image as a resolve attachment. This <b>must</b> be consistent between external format resolves and load operations from external format resolve attachments to color attachments when {@code nullColorAttachmentWithExternalFormatResolve} is {@link VK10#VK_TRUE TRUE}. */
+    /** @return the value of the {@code externalFormatResolveChromaOffsetY} field. */
     @NativeType("VkChromaLocation")
     public int externalFormatResolveChromaOffsetY() { return nexternalFormatResolveChromaOffsetY(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceExternalFormatResolvePropertiesANDROID sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID} value to the {@link #sType} field. */
+    /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID} value to the {@code sType} field. */
     public VkPhysicalDeviceExternalFormatResolvePropertiesANDROID sType$Default() { return sType(ANDROIDExternalFormatResolve.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExternalFormatResolvePropertiesANDROID pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,27 +298,27 @@ public class VkPhysicalDeviceExternalFormatResolvePropertiesANDROID extends Stru
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID#nullColorAttachmentWithExternalFormatResolve} field. */
+        /** @return the value of the {@code nullColorAttachmentWithExternalFormatResolve} field. */
         @NativeType("VkBool32")
         public boolean nullColorAttachmentWithExternalFormatResolve() { return VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.nnullColorAttachmentWithExternalFormatResolve(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID#externalFormatResolveChromaOffsetX} field. */
+        /** @return the value of the {@code externalFormatResolveChromaOffsetX} field. */
         @NativeType("VkChromaLocation")
         public int externalFormatResolveChromaOffsetX() { return VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.nexternalFormatResolveChromaOffsetX(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID#externalFormatResolveChromaOffsetY} field. */
+        /** @return the value of the {@code externalFormatResolveChromaOffsetY} field. */
         @NativeType("VkChromaLocation")
         public int externalFormatResolveChromaOffsetY() { return VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.nexternalFormatResolveChromaOffsetY(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.nsType(address(), value); return this; }
-        /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID} value to the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID#sType} field. */
+        /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID} value to the {@code sType} field. */
         public VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.Buffer sType$Default() { return sType(ANDROIDExternalFormatResolve.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExternalFormatResolvePropertiesANDROID#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExternalFormatResolvePropertiesANDROID.npNext(address(), value); return this; }
 
     }

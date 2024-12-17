@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     FT_GlyphSlot slot,
- *     FT_Bool cache,
- *     FT_Pointer *state
- * )</code></pre>
- */
+/** Callback function: {@link #invoke SVG_Lib_Preset_Slot_Func} */
 public abstract class SVG_Lib_Preset_Slot_Func extends Callback implements SVG_Lib_Preset_Slot_FuncI {
 
     /**

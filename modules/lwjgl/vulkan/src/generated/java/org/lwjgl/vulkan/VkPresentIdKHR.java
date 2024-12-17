@@ -16,42 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The list of presentation identifiers.
- * 
- * <h5>Description</h5>
- * 
- * <p>For applications to be able to reference specific presentation events queued by a call to {@code vkQueuePresentKHR}, an identifier needs to be associated with them. When the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-presentId">{@code presentId}</a> feature is enabled, applications <b>can</b> include the {@link VkPresentIdKHR} structure in the {@code pNext} chain of the {@link VkPresentInfoKHR} structure to supply identifiers.</p>
- * 
- * <p>Each {@code VkSwapchainKHR} has a presentId associated with it. This value is initially zero when the {@code VkSwapchainKHR} is created.</p>
- * 
- * <p>When a {@link VkPresentIdKHR} structure with a non-NULL {@code pPresentIds} is included in the {@code pNext} chain of a {@link VkPresentInfoKHR} structure, each {@code pSwapchains} entry has a presentId associated in the {@code pPresentIds} array at the same index as the swapchain in the {@code pSwapchains} array. If this presentId is non-zero, then the application <b>can</b> later use this value to refer to that image presentation. A value of zero indicates that this presentation has no associated presentId. A non-zero presentId <b>must</b> be greater than any non-zero presentId passed previously by the application for the same swapchain.</p>
- * 
- * <p>There is no requirement for any precise timing relationship between the presentation of the image to the user and the update of the presentId value, but implementations <b>should</b> make this as close as possible to the presentation of the first pixel in the new image to the user.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code swapchainCount} <b>must</b> be the same value as {@link VkPresentInfoKHR}{@code ::swapchainCount}, where this {@link VkPresentIdKHR} is in the {@code pNext} chain of the {@link VkPresentInfoKHR} structure</li>
- * <li>Each {@code presentIds} entry <b>must</b> be greater than any previous {@code presentIds} entry passed for the associated {@code pSwapchains} entry</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPresentId#VK_STRUCTURE_TYPE_PRESENT_ID_KHR STRUCTURE_TYPE_PRESENT_ID_KHR}</li>
- * <li>If {@code pPresentIds} is not {@code NULL}, {@code pPresentIds} <b>must</b> be a valid pointer to an array of {@code swapchainCount} {@code uint64_t} values</li>
- * <li>{@code swapchainCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPresentIdKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #swapchainCount};
- *     uint64_t const * {@link #pPresentIds};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t swapchainCount;
+ *     uint64_t const * pPresentIds;
+ * }}</pre>
  */
 public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeResource {
 
@@ -107,28 +78,28 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of swapchains being presented to the {@code vkQueuePresentKHR} command. */
+    /** @return the value of the {@code swapchainCount} field. */
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@code uint64_t} with {@code swapchainCount} entries. If not {@code NULL}, each non-zero value in {@code pPresentIds} specifies the present id to be associated with the presentation of the swapchain with the same index in the {@link KHRSwapchain#vkQueuePresentKHR QueuePresentKHR} call. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pPresentIds} field. */
     @NativeType("uint64_t const *")
     public @Nullable LongBuffer pPresentIds() { return npPresentIds(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPresentIdKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PRESENT_ID_KHR STRUCTURE_TYPE_PRESENT_ID_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PRESENT_ID_KHR STRUCTURE_TYPE_PRESENT_ID_KHR} value to the {@code sType} field. */
     public VkPresentIdKHR sType$Default() { return sType(KHRPresentId.VK_STRUCTURE_TYPE_PRESENT_ID_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPresentIdKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #swapchainCount} field. */
+    /** Sets the specified value to the {@code swapchainCount} field. */
     public VkPresentIdKHR swapchainCount(@NativeType("uint32_t") int value) { nswapchainCount(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pPresentIds} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pPresentIds} field. */
     public VkPresentIdKHR pPresentIds(@Nullable @NativeType("uint64_t const *") LongBuffer value) { npPresentIds(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -330,28 +301,28 @@ public class VkPresentIdKHR extends Struct<VkPresentIdKHR> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPresentIdKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPresentIdKHR.nsType(address()); }
-        /** @return the value of the {@link VkPresentIdKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPresentIdKHR.npNext(address()); }
-        /** @return the value of the {@link VkPresentIdKHR#swapchainCount} field. */
+        /** @return the value of the {@code swapchainCount} field. */
         @NativeType("uint32_t")
         public int swapchainCount() { return VkPresentIdKHR.nswapchainCount(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkPresentIdKHR#pPresentIds} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pPresentIds} field. */
         @NativeType("uint64_t const *")
         public @Nullable LongBuffer pPresentIds() { return VkPresentIdKHR.npPresentIds(address()); }
 
-        /** Sets the specified value to the {@link VkPresentIdKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPresentIdKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPresentIdKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PRESENT_ID_KHR STRUCTURE_TYPE_PRESENT_ID_KHR} value to the {@link VkPresentIdKHR#sType} field. */
+        /** Sets the {@link KHRPresentId#VK_STRUCTURE_TYPE_PRESENT_ID_KHR STRUCTURE_TYPE_PRESENT_ID_KHR} value to the {@code sType} field. */
         public VkPresentIdKHR.Buffer sType$Default() { return sType(KHRPresentId.VK_STRUCTURE_TYPE_PRESENT_ID_KHR); }
-        /** Sets the specified value to the {@link VkPresentIdKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPresentIdKHR.Buffer pNext(@NativeType("void const *") long value) { VkPresentIdKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPresentIdKHR#swapchainCount} field. */
+        /** Sets the specified value to the {@code swapchainCount} field. */
         public VkPresentIdKHR.Buffer swapchainCount(@NativeType("uint32_t") int value) { VkPresentIdKHR.nswapchainCount(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkPresentIdKHR#pPresentIds} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pPresentIds} field. */
         public VkPresentIdKHR.Buffer pPresentIds(@Nullable @NativeType("uint64_t const *") LongBuffer value) { VkPresentIdKHR.npPresentIds(address(), value); return this; }
 
     }

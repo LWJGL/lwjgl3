@@ -7,20 +7,10 @@ package org.lwjgl.odbc;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/native-client/sql-server-native-client-programming">SQL Server Native Client</a>.
- * 
- * <p>Microsoft SQL Server Native Client is a single native dynamic link library (DLL) that contains the ODBC driver and OLE DB provider, which together
- * support applications using native-code APIs (ODBC, OLE DB and ADO) to access Microsoft SQL Server. SQL Server Native Client is a component of SQL
- * Server. It is also available for download from the Feature Pack for Microsoft SQL Server 2005 and Microsoft SQL Server 2008 Feature Pack. In SQL Server
- * Native Client, everything (APIs, TDS routines, and netlibs) is packaged into a single DLL.</p>
- */
 public final class SQLNCLI {
 
-    /** Max SQL Server identifier length. */
     public static final short SQL_MAX_SQLSERVERNAME = 128;
 
-    /** Connection attributes. */
     public static final short
         SQL_COPT_SS_BASE                             = 1200,
         SQL_COPT_SS_REMOTE_PWD                       = SQL_COPT_SS_BASE+1,
@@ -66,7 +56,6 @@ public final class SQLNCLI {
         SQL_COPT_SS_MULTISUBNET_FAILOVER             = SQL_COPT_SS_BASE_EX+8,
         SQL_COPT_SS_EX_MAX_USED                      = SQL_COPT_SS_MULTISUBNET_FAILOVER;
 
-    /** Statement attributes. */
     public static final short
         SQL_SOPT_SS_BASE                      = 1225,
         SQL_SOPT_SS_TEXTPTR_LOGGING           = SQL_SOPT_SS_BASE+0,
@@ -84,7 +73,6 @@ public final class SQLNCLI {
         SQL_SOPT_SS_NAME_SCOPE                = SQL_SOPT_SS_BASE+12,
         SQL_SOPT_SS_MAX_USED                  = SQL_SOPT_SS_NAME_SCOPE;
 
-    /** {@link SQL#SQLColAttribute ColAttribute} &amp; {@link SQL#SQLSetDescField SetDescField}/{@link SQL#SQLGetDescField GetDescField} driver specific defines. */
     public static final short
         SQL_CA_SS_BASE                              = 1200,
         SQL_CA_SS_COLUMN_SSTYPE                     = SQL_CA_SS_BASE+0,
@@ -123,92 +111,76 @@ public final class SQLNCLI {
         SQL_CA_SS_SERVER_TYPE                       = SQL_CA_SS_BASE+35,
         SQL_CA_SS_MAX_USED                          = SQL_CA_SS_BASE+36;
 
-    /** Defines returned by {@link SQL#SQL_ATTR_CURSOR_TYPE ATTR_CURSOR_TYPE}. */
     public static final short SQL_CURSOR_FAST_FORWARD_ONLY = 8;
 
-    /** Defines for use with {@link #SQL_COPT_SS_USE_PROC_FOR_PREP COPT_SS_USE_PROC_FOR_PREP}. */
     public static final short
         SQL_UP_OFF     = 0,
         SQL_UP_ON      = 1,
         SQL_UP_ON_DROP = 2,
         SQL_UP_DEFAULT = SQL_UP_ON;
 
-    /** Defines for use with {@link #SQL_COPT_SS_INTEGRATED_SECURITY COPT_SS_INTEGRATED_SECURITY} - Pre-Connect Option only. */
     public static final short
         SQL_IS_OFF     = 0,
         SQL_IS_ON      = 1,
         SQL_IS_DEFAULT = SQL_IS_OFF;
 
-    /** Defines for use with {@link #SQL_COPT_SS_PRESERVE_CURSORS COPT_SS_PRESERVE_CURSORS}. */
     public static final short
         SQL_PC_OFF     = 0,
         SQL_PC_ON      = 1,
         SQL_PC_DEFAULT = SQL_PC_OFF;
 
-    /** Defines for use with {@link #SQL_COPT_SS_USER_DATA COPT_SS_USER_DATA}. */
     public static final long SQL_UD_NOTSET = NULL;
 
-    /** Defines for use with {@link #SQL_COPT_SS_TRANSLATE COPT_SS_TRANSLATE}. */
     public static final short
         SQL_XL_OFF     = 0,
         SQL_XL_ON      = 1,
         SQL_XL_DEFAULT = SQL_XL_ON;
 
-    /** Defines for use with {@link #SQL_COPT_SS_FALLBACK_CONNECT COPT_SS_FALLBACK_CONNECT} - Pre-Connect Option only. */
     public static final short
         SQL_FB_OFF     = 0,
         SQL_FB_ON      = 1,
         SQL_FB_DEFAULT = SQL_FB_OFF;
 
-    /** Defines for use with {@link #SQL_COPT_SS_BCP COPT_SS_BCP} - Pre-Connect Option only. */
     public static final short
         SQL_BCP_OFF     = 0,
         SQL_BCP_ON      = 1,
         SQL_BCP_DEFAULT = SQL_BCP_OFF;
 
-    /** Defines for use with {@link #SQL_COPT_SS_QUOTED_IDENT COPT_SS_QUOTED_IDENT}. */
     public static final short
         SQL_QI_OFF     = 0,
         SQL_QI_ON      = 1,
         SQL_QI_DEFAULT = SQL_QI_ON;
 
-    /** Defines for use with {@link #SQL_COPT_SS_ANSI_NPW COPT_SS_ANSI_NPW} - Pre-Connect Option only. */
     public static final short
         SQL_AD_OFF     = 0,
         SQL_AD_ON      = 1,
         SQL_AD_DEFAULT = SQL_AD_ON;
 
-    /** Defines for use with {@link #SQL_COPT_SS_CONCAT_NULL COPT_SS_CONCAT_NULL} - Pre-Connect Option only. */
     public static final short
         SQL_CN_OFF     = 0,
         SQL_CN_ON      = 1,
         SQL_CN_DEFAULT = SQL_CN_ON;
 
-    /** Defines for use with {@link #SQL_SOPT_SS_TEXTPTR_LOGGING SOPT_SS_TEXTPTR_LOGGING}. */
     public static final short
         SQL_TL_OFF     = 0,
         SQL_TL_ON      = 1,
         SQL_TL_DEFAULT = SQL_TL_ON;
 
-    /** Defines for use with {@link #SQL_SOPT_SS_HIDDEN_COLUMNS SOPT_SS_HIDDEN_COLUMNS}. */
     public static final short
         SQL_HC_OFF     = 0,
         SQL_HC_ON      = 1,
         SQL_HC_DEFAULT = SQL_HC_OFF;
 
-    /** Defines for use with {@link #SQL_SOPT_SS_NOBROWSETABLE SOPT_SS_NOBROWSETABLE}. */
     public static final short
         SQL_NB_OFF     = 0,
         SQL_NB_ON      = 1,
         SQL_NB_DEFAULT = SQL_NB_OFF;
 
-    /** Defines for use with {@link #SQL_SOPT_SS_REGIONALIZE SOPT_SS_REGIONALIZE}. */
     public static final short
         SQL_RE_OFF     = 0,
         SQL_RE_ON      = 1,
         SQL_RE_DEFAULT = SQL_RE_OFF;
 
-    /** Defines for use with {@link #SQL_SOPT_SS_CURSOR_OPTIONS SOPT_SS_CURSOR_OPTIONS}. */
     public static final short
         SQL_CO_OFF         = 0,
         SQL_CO_FFO         = 1,
@@ -217,17 +189,14 @@ public final class SQLNCLI {
         SQL_CO_FIREHOSE_AF = 4,
         SQL_CO_DEFAULT     = SQL_CO_OFF;
 
-    /** {@link #SQL_SOPT_SS_NOCOUNT_STATUS SOPT_SS_NOCOUNT_STATUS}. */
     public static final short
         SQL_NC_OFF = 0,
         SQL_NC_ON  = 1;
 
-    /** {@link #SQL_SOPT_SS_DEFER_PREPARE SOPT_SS_DEFER_PREPARE}. */
     public static final short
         SQL_DP_OFF = 0,
         SQL_DP_ON  = 1;
 
-    /** {@link #SQL_SOPT_SS_NAME_SCOPE SOPT_SS_NAME_SCOPE}. */
     public static final short
         SQL_SS_NAME_SCOPE_TABLE             = 0,
         SQL_SS_NAME_SCOPE_TABLE_TYPE        = 1,
@@ -235,50 +204,40 @@ public final class SQLNCLI {
         SQL_SS_NAME_SCOPE_SPARSE_COLUMN_SET = 3,
         SQL_SS_NAME_SCOPE_DEFAULT           = SQL_SS_NAME_SCOPE_TABLE;
 
-    /** {@link #SQL_COPT_SS_ENCRYPT COPT_SS_ENCRYPT}. */
     public static final short
         SQL_EN_OFF = 0,
         SQL_EN_ON  = 1;
 
-    /** {@link #SQL_COPT_SS_TRUST_SERVER_CERTIFICATE COPT_SS_TRUST_SERVER_CERTIFICATE}. */
     public static final short
         SQL_TRUST_SERVER_CERTIFICATE_NO  = 0,
         SQL_TRUST_SERVER_CERTIFICATE_YES = 1;
 
-    /** {@link #SQL_COPT_SS_BROWSE_CONNECT COPT_SS_BROWSE_CONNECT}. */
     public static final short
         SQL_MORE_INFO_NO  = 0,
         SQL_MORE_INFO_YES = 1;
 
-    /** {@link #SQL_COPT_SS_BROWSE_CACHE_DATA COPT_SS_BROWSE_CACHE_DATA}. */
     public static final short
         SQL_CACHE_DATA_NO  = 0,
         SQL_CACHE_DATA_YES = 1;
 
-    /** {@link #SQL_COPT_SS_RESET_CONNECTION COPT_SS_RESET_CONNECTION}. */
     public static final short SQL_RESET_YES = 1;
 
-    /** {@link #SQL_COPT_SS_WARN_ON_CP_ERROR COPT_SS_WARN_ON_CP_ERROR}. */
     public static final short
         SQL_WARN_NO  = 0,
         SQL_WARN_YES = 1;
 
-    /** {@link #SQL_COPT_SS_MARS_ENABLED COPT_SS_MARS_ENABLED}. */
     public static final short
         SQL_MARS_ENABLED_NO  = 0,
         SQL_MARS_ENABLED_YES = 1;
 
-    /** {@link SQL#SQL_TXN_ISOLATION_OPTION TXN_ISOLATION_OPTION} bitmasks. */
     public static final int SQL_TXN_SS_SNAPSHOT = 0x20;
 
-    /** The following are defines for {@link #SQL_CA_SS_COLUMN_SORT_ORDER CA_SS_COLUMN_SORT_ORDER}. */
     public static final short
         SQL_SS_ORDER_UNSPECIFIED = 0,
         SQL_SS_DESCENDING_ORDER  = 1,
         SQL_SS_ASCENDING_ORDER   = 2,
         SQL_SS_ORDER_DEFAULT     = SQL_SS_ORDER_UNSPECIFIED;
 
-    /** Driver specific SQL data type defines. */
     public static final short
         SQL_SS_VARIANT         = -150,
         SQL_SS_UDT             = -151,
@@ -287,19 +246,16 @@ public final class SQLNCLI {
         SQL_SS_TIME2           = -154,
         SQL_SS_TIMESTAMPOFFSET = -155;
 
-    /** Local types to be used with {@link #SQL_CA_SS_SERVER_TYPE CA_SS_SERVER_TYPE}. */
     public static final short
         SQL_SS_TYPE_DEFAULT       = 0,
         SQL_SS_TYPE_SMALLDATETIME = 1,
         SQL_SS_TYPE_DATETIME      = 2;
 
-    /** Extended C Types range 4000 and above. */
     public static final short
         SQL_C_TYPES_EXTENDED     = 0x4000,
         SQL_C_SS_TIME2           = SQL_C_TYPES_EXTENDED+0,
         SQL_C_SS_TIMESTAMPOFFSET = SQL_C_TYPES_EXTENDED+1;
 
-    /** New types for SQL 6.0 and later servers. */
     public static final short
         SQLTEXT            = 0x23,
         SQLVARBINARY       = 0x25,
@@ -344,10 +300,8 @@ public final class SQLNCLI {
         SQLDECIMALN        = 0x6A,
         SQLNUMERICN        = 0x6C;
 
-    /** {@link #SQL_SS_LENGTH_UNLIMITED SS_LENGTH_UNLIMITED} is used to describe the max length of VARCHAR(max), VARBINARY(max), NVARCHAR(max), and XML columns. */
     public static final short SQL_SS_LENGTH_UNLIMITED = 0;
 
-    /** User Data Type definitions. Returned by {@link SQL#SQLColAttribute ColAttribute}/{@link #SQL_CA_SS_COLUMN_UTYPE CA_SS_COLUMN_UTYPE}. */
     public static final short
         SQLudtBINARY           = 3,
         SQLudtBIT              = 16,
@@ -379,7 +333,6 @@ public final class SQLNCLI {
         SQLudtVARCHAR          = 2,
         MIN_USER_DATATYPE      = 256;
 
-    /** Aggregate operator types. Returned by {@link SQL#SQLColAttribute ColAttribute}/{@link #SQL_CA_SS_COLUMN_OP CA_SS_COLUMN_OP}. */
     public static final int
         SQLAOPSTDEV  = 0x30,
         SQLAOPSTDEVP = 0x31,
@@ -393,7 +346,6 @@ public final class SQLNCLI {
         SQLAOPANY    = 0x53,
         SQLAOPNOOP   = 0x56;
 
-    /** {@link SQL#SQLGetInfo GetInfo} driver specific define. */
     public static final short
         SQL_INFO_SS_FIRST        = 1199,
         SQL_INFO_SS_NETLIB_NAMEW = SQL_INFO_SS_FIRST+0,
@@ -401,7 +353,6 @@ public final class SQLNCLI {
         SQL_INFO_SS_MAX_USED     = SQL_INFO_SS_NETLIB_NAMEA,
         SQL_INFO_SS_NETLIB_NAME  = SQL_INFO_SS_NETLIB_NAMEW;
 
-    /** {@link SQL#SQLGetDiagField GetDiagField} driver specific defines. */
     public static final short
         SQL_DIAG_SS_BASE     = -1150,
         SQL_DIAG_SS_MSGSTATE = SQL_DIAG_SS_BASE,
@@ -410,7 +361,6 @@ public final class SQLNCLI {
         SQL_DIAG_SS_PROCNAME = SQL_DIAG_SS_BASE-3,
         SQL_DIAG_SS_LINE     = SQL_DIAG_SS_BASE-4;
 
-    /** {@link SQL#SQLGetDiagField GetDiagField}/{@link SQL#SQL_DIAG_DYNAMIC_FUNCTION_CODE DIAG_DYNAMIC_FUNCTION_CODE} driver specific defines. */
     public static final short
         SQL_DIAG_DFC_SS_BASE                = -200,
         SQL_DIAG_DFC_SS_ALTER_DATABASE      = SQL_DIAG_DFC_SS_BASE-0,
@@ -476,7 +426,6 @@ public final class SQLNCLI {
         SQL_DIAG_DFC_SS_SET_XCTLVL          = SQL_DIAG_DFC_SS_BASE-55,
         SQL_DIAG_DFC_SS_MERGE               = SQL_DIAG_DFC_SS_BASE-56;
 
-    /** Severity codes for {@link #SQL_DIAG_SS_SEVERITY DIAG_SS_SEVERITY}. */
     public static final short
         EX_ANY          = 0,
         EX_INFO         = 10,
@@ -499,33 +448,26 @@ public final class SQLNCLI {
         EX_HARDWARE     = 24,
         EX_CONTROL      = 25;
 
-    /** Options for {@link #SQL_COPT_SS_PERF_DATA COPT_SS_PERF_DATA} and {@link #SQL_COPT_SS_PERF_QUERY COPT_SS_PERF_QUERY}. */
     public static final short
         SQL_PERF_START = 1,
         SQL_PERF_STOP  = 2;
 
-    /** Defines for {@link #SQL_COPT_SS_PERF_DATA_LOG COPT_SS_PERF_DATA_LOG}. */
     public static final String SQL_SS_DL_DEFAULT = "STATS.LOG";
 
-    /** Defines for {@link #SQL_COPT_SS_PERF_QUERY_LOG COPT_SS_PERF_QUERY_LOG}. */
     public static final String SQL_SS_QL_DEFAULT = "QUERY.LOG";
 
-    /** Defines for {@link #SQL_COPT_SS_PERF_QUERY_INTERVAL COPT_SS_PERF_QUERY_INTERVAL}. */
     public static final short SQL_SS_QI_DEFAULT = 30000;
 
-    /** BCP Return codes. */
     public static final short
         SQL_SUCCEED       = 1,
         SQL_FAIL          = 0,
         SQL_SUCCEED_ABORT = 2,
         SQL_SUCCEED_ASYNC = 3;
 
-    /** BCP Transfer directions. */
     public static final short
         SQL_DB_IN  = 1,
         SQL_DB_OUT = 2;
 
-    /** bcp_control option. */
     public static final short
         SQL_BCPMAXERRS      = 1,
         SQL_BCPFIRST        = 2,
@@ -547,16 +489,13 @@ public final class SQLNCLI {
         SQL_BCPROWCOUNT     = 19,
         SQL_BCPDELAYREADFMT = 20;
 
-    /** BCPFILECP values. */
     public static final short
         SQL_BCPFILECP_ACP   = 0,
         SQL_BCPFILECP_OEMCP = 1,
         SQL_BCPFILECP_RAW   = -1;
 
-    /** bcp_collen definition. */
     public static final short SQL_VARLEN_DATA = -10;
 
-    /** BCP column format properties. */
     public static final int
         SQL_BCP_FMT_TYPE          = 0x1,
         SQL_BCP_FMT_INDICATOR_LEN = 0x2,
@@ -566,14 +505,12 @@ public final class SQLNCLI {
         SQL_BCP_FMT_COLLATION     = 0x6,
         SQL_BCP_FMT_COLLATION_ID  = 0x7;
 
-    /** bcp_setbulkmode properties. */
     public static final int
         SQL_BCP_OUT_CHARACTER_MODE      = 0x1,
         SQL_BCP_OUT_WIDE_CHARACTER_MODE = 0x2,
         SQL_BCP_OUT_NATIVE_TEXT_MODE    = 0x3,
         SQL_BCP_OUT_NATIVE_MODE         = 0x4;
 
-    /** The following facilitates opening a handle to a SQL filestream. */
     public static final int
         SQL_FILESTREAM_READ                       = 0,
         SQL_FILESTREAM_WRITE                      = 1,

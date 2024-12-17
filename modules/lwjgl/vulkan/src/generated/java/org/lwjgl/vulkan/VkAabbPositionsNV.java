@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkAabbPositionsKHR}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAabbPositionsNV {
  *     float minX;
  *     float minY;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float maxX;
  *     float maxY;
  *     float maxZ;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkAabbPositionsNV extends VkAabbPositionsKHR {
 

@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkBindBufferMemoryDeviceGroupInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindBufferMemoryDeviceGroupInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t deviceIndexCount;
  *     uint32_t const * pDeviceIndices;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkBindBufferMemoryDeviceGroupInfoKHR extends VkBindBufferMemoryDeviceGroupInfo {
 

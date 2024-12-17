@@ -19,50 +19,14 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * Import Win32 memory created on the same physical device.
- * 
- * <h5>Description</h5>
- * 
- * <p>Importing memory object payloads from Windows handles does not transfer ownership of the handle to the Vulkan implementation. For handle types defined as NT handles, the application <b>must</b> release handle ownership using the {@code CloseHandle} system call when the handle is no longer needed. For handle types defined as NT handles, the imported memory object holds a reference to its payload.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Non-NT handle import operations do not add a reference to their associated payload. If the original object owning the payload is destroyed, all resources and handles sharing that payload will become invalid.</p>
- * </div>
- * 
- * <p>Applications <b>can</b> import the same payload into multiple instances of Vulkan, into the same instance from which it was exported, and multiple times into a given Vulkan instance. In all cases, each import operation <b>must</b> create a distinct {@code VkDeviceMemory} object.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported by {@link VkExternalImageFormatProperties} or {@link VkExternalBufferProperties}</li>
- * <li>The memory from which {@code handle} was exported, or the memory named by {@code name} <b>must</b> have been created on the same underlying physical device as {@code device}</li>
- * <li>If {@code handleType} is not 0, it <b>must</b> be defined as an NT handle or a global share handle</li>
- * <li>If {@code handleType} is not {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT}, {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT}, or {@link VK11#VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT}, {@code name} <b>must</b> be {@code NULL}</li>
- * <li>If {@code handleType} is not 0 and {@code handle} is {@code NULL}, {@code name} <b>must</b> name a valid memory resource of the type specified by {@code handleType}</li>
- * <li>If {@code handleType} is not 0 and {@code name} is {@code NULL}, {@code handle} <b>must</b> be a valid handle of the type specified by {@code handleType}</li>
- * <li>If {@code handle} is not {@code NULL}, {@code name} <b>must</b> be {@code NULL}</li>
- * <li>If {@code handle} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#external-memory-handle-types-compatibility">external memory handle types compatibility</a></li>
- * <li>If {@code name} is not {@code NULL}, it <b>must</b> obey any requirements listed for {@code handleType} in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#external-memory-handle-types-compatibility">external memory handle types compatibility</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR}</li>
- * <li>If {@code handleType} is not 0, {@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImportMemoryWin32HandleInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkExternalMemoryHandleTypeFlagBits {@link #handleType};
- *     HANDLE {@link #handle};
- *     LPCWSTR {@link #name};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkExternalMemoryHandleTypeFlagBits handleType;
+ *     HANDLE handle;
+ *     LPCWSTR name;
+ * }}</pre>
  */
 public class VkImportMemoryWin32HandleInfoKHR extends Struct<VkImportMemoryWin32HandleInfoKHR> implements NativeResource {
 
@@ -121,36 +85,36 @@ public class VkImportMemoryWin32HandleInfoKHR extends Struct<VkImportMemoryWin32
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the type of {@code handle} or {@code name}. */
+    /** @return the value of the {@code handleType} field. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
-    /** {@code NULL} or the external handle to import. */
+    /** @return the value of the {@code handle} field. */
     @NativeType("HANDLE")
     public long handle() { return nhandle(address()); }
-    /** {@code NULL} or a null-terminated UTF-16 string naming the payload to import. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
     @NativeType("LPCWSTR")
     public ByteBuffer name() { return nname(address()); }
-    /** {@code NULL} or a null-terminated UTF-16 string naming the payload to import. */
+    /** @return the null-terminated string pointed to by the {@code name} field. */
     @NativeType("LPCWSTR")
     public String nameString() { return nnameString(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImportMemoryWin32HandleInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR} value to the {@code sType} field. */
     public VkImportMemoryWin32HandleInfoKHR sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImportMemoryWin32HandleInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #handleType} field. */
+    /** Sets the specified value to the {@code handleType} field. */
     public VkImportMemoryWin32HandleInfoKHR handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
-    /** Sets the specified value to the {@link #handle} field. */
+    /** Sets the specified value to the {@code handle} field. */
     public VkImportMemoryWin32HandleInfoKHR handle(@NativeType("HANDLE") long value) { nhandle(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #name} field. */
+    /** Sets the address of the specified encoded string to the {@code name} field. */
     public VkImportMemoryWin32HandleInfoKHR name(@NativeType("LPCWSTR") ByteBuffer value) { nname(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -392,36 +356,36 @@ public class VkImportMemoryWin32HandleInfoKHR extends Struct<VkImportMemoryWin32
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImportMemoryWin32HandleInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImportMemoryWin32HandleInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkImportMemoryWin32HandleInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImportMemoryWin32HandleInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkImportMemoryWin32HandleInfoKHR#handleType} field. */
+        /** @return the value of the {@code handleType} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagBits")
         public int handleType() { return VkImportMemoryWin32HandleInfoKHR.nhandleType(address()); }
-        /** @return the value of the {@link VkImportMemoryWin32HandleInfoKHR#handle} field. */
+        /** @return the value of the {@code handle} field. */
         @NativeType("HANDLE")
         public long handle() { return VkImportMemoryWin32HandleInfoKHR.nhandle(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkImportMemoryWin32HandleInfoKHR#name} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code name} field. */
         @NativeType("LPCWSTR")
         public ByteBuffer name() { return VkImportMemoryWin32HandleInfoKHR.nname(address()); }
-        /** @return the null-terminated string pointed to by the {@link VkImportMemoryWin32HandleInfoKHR#name} field. */
+        /** @return the null-terminated string pointed to by the {@code name} field. */
         @NativeType("LPCWSTR")
         public String nameString() { return VkImportMemoryWin32HandleInfoKHR.nnameString(address()); }
 
-        /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImportMemoryWin32HandleInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMemoryWin32HandleInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR} value to the {@link VkImportMemoryWin32HandleInfoKHR#sType} field. */
+        /** Sets the {@link KHRExternalMemoryWin32#VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR} value to the {@code sType} field. */
         public VkImportMemoryWin32HandleInfoKHR.Buffer sType$Default() { return sType(KHRExternalMemoryWin32.VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImportMemoryWin32HandleInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkImportMemoryWin32HandleInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoKHR#handleType} field. */
+        /** Sets the specified value to the {@code handleType} field. */
         public VkImportMemoryWin32HandleInfoKHR.Buffer handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { VkImportMemoryWin32HandleInfoKHR.nhandleType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImportMemoryWin32HandleInfoKHR#handle} field. */
+        /** Sets the specified value to the {@code handle} field. */
         public VkImportMemoryWin32HandleInfoKHR.Buffer handle(@NativeType("HANDLE") long value) { VkImportMemoryWin32HandleInfoKHR.nhandle(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link VkImportMemoryWin32HandleInfoKHR#name} field. */
+        /** Sets the address of the specified encoded string to the {@code name} field. */
         public VkImportMemoryWin32HandleInfoKHR.Buffer name(@NativeType("LPCWSTR") ByteBuffer value) { VkImportMemoryWin32HandleInfoKHR.nname(address(), value); return this; }
 
     }

@@ -14,14 +14,10 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code PaintColrLayers} table of a {@code COLR} v1 font.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintColrLayers {
  *     {@link FT_LayerIterator FT_LayerIterator} layer_iterator;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintColrLayers extends Struct<FT_PaintColrLayers> {
 

@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FT_Error (*{@link #invoke}) (
- *     void *arg
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_DebugHook_Func} */
 @FunctionalInterface
 @NativeType("FT_DebugHook_Func")
 public interface FT_DebugHook_FuncI extends CallbackI {
@@ -41,7 +34,7 @@ public interface FT_DebugHook_FuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** A drop-in replacement (or rather a wrapper) for the bytecode or charstring interpreter's main loop function. */
+    /** {@code FT_Error (* FT_DebugHook_Func) (void * arg)} */
     @NativeType("FT_Error") int invoke(@NativeType("void *") long arg);
 
 }

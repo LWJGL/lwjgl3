@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_OUTPUT_STATE *output_state
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_OUTPUT_UPDATE_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_OUTPUT_UPDATE_CALLBACK")
 public interface FMOD_OUTPUT_UPDATE_CALLBACKI extends CallbackI {
@@ -41,6 +34,7 @@ public interface FMOD_OUTPUT_UPDATE_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_OUTPUT_UPDATE_CALLBACK) (struct FMOD_OUTPUT_STATE * output_state)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_OUTPUT_STATE *") long output_state);
 
 }

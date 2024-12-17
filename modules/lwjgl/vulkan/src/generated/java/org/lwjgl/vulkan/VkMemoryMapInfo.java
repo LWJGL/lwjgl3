@@ -16,58 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing parameters of a memory map operation.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code memory} <b>must</b> not be currently host mapped</li>
- * <li>{@code offset} <b>must</b> be less than the size of {@code memory}</li>
- * <li>If {@code size} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> be greater than 0</li>
- * <li>If {@code size} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> be less than or equal to the size of the {@code memory} minus {@code offset}</li>
- * <li>{@code memory} <b>must</b> have been created with a memory type that reports {@link VK10#VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT MEMORY_PROPERTY_HOST_VISIBLE_BIT}</li>
- * <li>{@code memory} <b>must</b> not have been allocated with multiple instances</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT} is set in {@code flags}, the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-memoryMapPlaced">{@code memoryMapPlaced}</a> feature <b>must</b> be enabled</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT} is set in {@code flags}, the {@code pNext} chain <b>must</b> include a {@link VkMemoryMapPlacedInfoEXT} structure and {@link VkMemoryMapPlacedInfoEXT}{@code ::pPlacedAddress} <b>must</b> not be {@code NULL}</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT} is set in {@code flags} and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-memoryMapRangePlaced">{@code memoryMapRangePlaced}</a> feature is not enabled, {@code offset} <b>must</b> be zero</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT} is set in {@code flags} and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-memoryMapRangePlaced">{@code memoryMapRangePlaced}</a> feature is not enabled, {@code size} <b>must</b> be {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} or {@link VkMemoryAllocateInfo}{@code ::allocationSize}</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT} is set in {@code flags} and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-memoryMapRangePlaced">{@code memoryMapRangePlaced}</a> feature is enabled, {@code offset} <b>must</b> be aligned to an integer multiple of {@link VkPhysicalDeviceMapMemoryPlacedPropertiesEXT}{@code ::minPlacedMemoryMapAlignment}</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT} is set in {@code flags} and {@code size} is not {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> be aligned to an integer multiple of {@link VkPhysicalDeviceMapMemoryPlacedPropertiesEXT}{@code ::minPlacedMemoryMapAlignment}</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT} is set in {@code flags} and {@code size} is {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@link VkMemoryAllocateInfo}{@code ::allocationSize} <b>must</b> be aligned to an integer multiple of {@link VkPhysicalDeviceMapMemoryPlacedPropertiesEXT}{@code ::minPlacedMemoryMapAlignment}</li>
- * <li>If {@link EXTMapMemoryPlaced#VK_MEMORY_MAP_PLACED_BIT_EXT MEMORY_MAP_PLACED_BIT_EXT} is set in {@code flags}, the memory object <b>must</b> not have been imported from a handle type of {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT} or {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_MEMORY_MAP_INFO STRUCTURE_TYPE_MEMORY_MAP_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkMemoryMapPlacedInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkMemoryMapFlagBits} values</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * </ul>
- * 
- * <h5>Host Synchronization</h5>
- * 
- * <ul>
- * <li>Host access to {@code memory} <b>must</b> be externally synchronized</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK14#vkMapMemory2 MapMemory2}, {@link KHRMapMemory2#vkMapMemory2KHR MapMemory2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryMapInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkMemoryMapFlags {@link #flags};
- *     VkDeviceMemory {@link #memory};
- *     VkDeviceSize {@link #offset};
- *     VkDeviceSize {@link #size};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkMemoryMapFlags flags;
+ *     VkDeviceMemory memory;
+ *     VkDeviceSize offset;
+ *     VkDeviceSize size;
+ * }}</pre>
  */
 public class VkMemoryMapInfo extends Struct<VkMemoryMapInfo> implements NativeResource {
 
@@ -129,40 +86,40 @@ public class VkMemoryMapInfo extends Struct<VkMemoryMapInfo> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkMemoryMapFlagBits} specifying additional parameters of the memory map operation. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkMemoryMapFlags")
     public int flags() { return nflags(address()); }
-    /** the {@code VkDeviceMemory} object to be mapped. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
-    /** a zero-based byte offset from the beginning of the memory object. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** the size of the memory range to map, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to map from {@code offset} to the end of the allocation. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryMapInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_MEMORY_MAP_INFO STRUCTURE_TYPE_MEMORY_MAP_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_MEMORY_MAP_INFO STRUCTURE_TYPE_MEMORY_MAP_INFO} value to the {@code sType} field. */
     public VkMemoryMapInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_MEMORY_MAP_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryMapInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkMemoryMapPlacedInfoEXT} value to the {@code pNext} chain. */
     public VkMemoryMapInfo pNext(VkMemoryMapPlacedInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkMemoryMapInfo flags(@NativeType("VkMemoryMapFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkMemoryMapInfo memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkMemoryMapInfo offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkMemoryMapInfo size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -376,40 +333,40 @@ public class VkMemoryMapInfo extends Struct<VkMemoryMapInfo> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryMapInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryMapInfo.nsType(address()); }
-        /** @return the value of the {@link VkMemoryMapInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryMapInfo.npNext(address()); }
-        /** @return the value of the {@link VkMemoryMapInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkMemoryMapFlags")
         public int flags() { return VkMemoryMapInfo.nflags(address()); }
-        /** @return the value of the {@link VkMemoryMapInfo#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkMemoryMapInfo.nmemory(address()); }
-        /** @return the value of the {@link VkMemoryMapInfo#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkMemoryMapInfo.noffset(address()); }
-        /** @return the value of the {@link VkMemoryMapInfo#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkMemoryMapInfo.nsize(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryMapInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryMapInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryMapInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_MEMORY_MAP_INFO STRUCTURE_TYPE_MEMORY_MAP_INFO} value to the {@link VkMemoryMapInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_MEMORY_MAP_INFO STRUCTURE_TYPE_MEMORY_MAP_INFO} value to the {@code sType} field. */
         public VkMemoryMapInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_MEMORY_MAP_INFO); }
-        /** Sets the specified value to the {@link VkMemoryMapInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryMapInfo.Buffer pNext(@NativeType("void const *") long value) { VkMemoryMapInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkMemoryMapPlacedInfoEXT} value to the {@code pNext} chain. */
         public VkMemoryMapInfo.Buffer pNext(VkMemoryMapPlacedInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkMemoryMapInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkMemoryMapInfo.Buffer flags(@NativeType("VkMemoryMapFlags") int value) { VkMemoryMapInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryMapInfo#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkMemoryMapInfo.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkMemoryMapInfo.nmemory(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryMapInfo#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkMemoryMapInfo.Buffer offset(@NativeType("VkDeviceSize") long value) { VkMemoryMapInfo.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryMapInfo#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkMemoryMapInfo.Buffer size(@NativeType("VkDeviceSize") long value) { VkMemoryMapInfo.nsize(address(), value); return this; }
 
     }

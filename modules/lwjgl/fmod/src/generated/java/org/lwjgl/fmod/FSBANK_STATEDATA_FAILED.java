@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FSBANK_STATEDATA_FAILED {
  *     FSBANK_RESULT errorCode;
  *     char errorString[256];
- * }</code></pre>
+ * }}</pre>
  */
 public class FSBANK_STATEDATA_FAILED extends Struct<FSBANK_STATEDATA_FAILED> implements NativeResource {
 

@@ -16,23 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Two-dimensional vector.
- * 
- * <h5>Description</h5>
- * 
- * <p>If used to represent physical distances (rather than e.g. normalized direction) and not otherwise specified, values <b>must</b> be in meters.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrActionStateVector2f}, {@link XrBoundary2DFB}, {@link XrCompositionLayerEquirectKHR}, {@link XrFoveationConfigurationHTC}, {@link XrFoveationEyeTrackedStateMETA}, {@link XrHandTrackingMeshFB}, {@link XrPlaneDetectorPolygonBufferEXT}, {@link XrPosef}, {@link XrQuaternionf}, {@link XrVector3f}, {@link XrVector4f}, {@link XrVisibilityMaskKHR}, {@link EXTConformanceAutomation#xrSetInputDeviceStateVector2fEXT SetInputDeviceStateVector2fEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrVector2f {
- *     float {@link #x};
- *     float {@link #y};
- * }</code></pre>
+ *     float x;
+ *     float y;
+ * }}</pre>
  */
 public class XrVector2f extends Struct<XrVector2f> implements NativeResource {
 
@@ -82,14 +70,14 @@ public class XrVector2f extends Struct<XrVector2f> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the x coordinate of the vector. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** the y coordinate of the vector. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public XrVector2f x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public XrVector2f y(float value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -279,14 +267,14 @@ public class XrVector2f extends Struct<XrVector2f> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrVector2f#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return XrVector2f.nx(address()); }
-        /** @return the value of the {@link XrVector2f#y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return XrVector2f.ny(address()); }
 
-        /** Sets the specified value to the {@link XrVector2f#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public XrVector2f.Buffer x(float value) { XrVector2f.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link XrVector2f#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public XrVector2f.Buffer y(float value) { XrVector2f.ny(address(), value); return this; }
 
     }

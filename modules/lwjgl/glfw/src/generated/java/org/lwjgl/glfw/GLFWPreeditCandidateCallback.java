@@ -13,22 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-/**
- * Instances of this class may be passed to the {@link GLFW#glfwSetPreeditCandidateCallback SetPreeditCandidateCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window,
- *     int candidates_count,
- *     int selected_index,
- *     int page_start,
- *     int page_size
- * )</code></pre>
- *
- * @since version 3.X
- */
+/** Callback function: {@link #invoke GLFWpreeditcandidatefun} */
 public abstract class GLFWPreeditCandidateCallback extends Callback implements GLFWPreeditCandidateCallbackI {
 
     /**

@@ -16,55 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Mesh block detection info.
- * 
- * <h5>Future Return Codes</h5>
- * 
- * <p>{@code futureResult} values:</p>
- * 
- * <dl>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-successcodes">Success</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
- * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
- * </ul></dd>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-errorcodes">Failure</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
- * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
- * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
- * <li>{@link XR10#XR_ERROR_OUT_OF_MEMORY ERROR_OUT_OF_MEMORY}</li>
- * <li>{@link XR10#XR_ERROR_LIMIT_REACHED ERROR_LIMIT_REACHED}</li>
- * <li>{@link MLWorldMeshDetection#XR_ERROR_WORLD_MESH_DETECTOR_SPACE_NOT_LOCATABLE_ML ERROR_WORLD_MESH_DETECTOR_SPACE_NOT_LOCATABLE_ML}</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshStateRequestCompletionML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
- * <li>If {@code meshBlockStateCapacityInput} is not 0, {@code meshBlockStates} <b>must</b> be a pointer to an array of {@code meshBlockStateCapacityInput} {@link XrWorldMeshBlockStateML} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrWorldMeshBlockStateML}, {@link MLWorldMeshDetection#xrRequestWorldMeshStateCompleteML RequestWorldMeshStateCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshStateRequestCompletionML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrResult {@link #futureResult};
- *     XrTime {@link #timestamp};
- *     uint32_t {@link #meshBlockStateCapacityInput};
- *     uint32_t {@link #meshBlockStateCountOutput};
- *     {@link XrWorldMeshBlockStateML XrWorldMeshBlockStateML} * {@link #meshBlockStates};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrResult futureResult;
+ *     XrTime timestamp;
+ *     uint32_t meshBlockStateCapacityInput;
+ *     uint32_t meshBlockStateCountOutput;
+ *     {@link XrWorldMeshBlockStateML XrWorldMeshBlockStateML} * meshBlockStates;
+ * }}</pre>
  */
 public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshStateRequestCompletionML> implements NativeResource {
 
@@ -129,43 +90,43 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrResult} of the asynchronous operation. */
+    /** @return the value of the {@code futureResult} field. */
     @NativeType("XrResult")
     public int futureResult() { return nfutureResult(address()); }
-    /** the {@code XrTime} of the request. */
+    /** @return the value of the {@code timestamp} field. */
     @NativeType("XrTime")
     public long timestamp() { return ntimestamp(address()); }
-    /** the capacity of the {@code meshBlockStates} array, or 0 to indicate a request to retrieve the required capacity. */
+    /** @return the value of the {@code meshBlockStateCapacityInput} field. */
     @NativeType("uint32_t")
     public int meshBlockStateCapacityInput() { return nmeshBlockStateCapacityInput(address()); }
-    /** filled in by the runtime with the count of mesh states written or the required capacity in the case that {@code meshBlockStateCapacityInput} is insufficient. */
+    /** @return the value of the {@code meshBlockStateCountOutput} field. */
     @NativeType("uint32_t")
     public int meshBlockStateCountOutput() { return nmeshBlockStateCountOutput(address()); }
-    /** a pointer to an array of {@link XrWorldMeshBlockStateML}. */
+    /** @return a {@link XrWorldMeshBlockStateML.Buffer} view of the struct array pointed to by the {@code meshBlockStates} field. */
     @NativeType("XrWorldMeshBlockStateML *")
     public XrWorldMeshBlockStateML.@Nullable Buffer meshBlockStates() { return nmeshBlockStates(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshStateRequestCompletionML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML} value to the {@code type} field. */
     public XrWorldMeshStateRequestCompletionML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshStateRequestCompletionML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #futureResult} field. */
+    /** Sets the specified value to the {@code futureResult} field. */
     public XrWorldMeshStateRequestCompletionML futureResult(@NativeType("XrResult") int value) { nfutureResult(address(), value); return this; }
-    /** Sets the specified value to the {@link #timestamp} field. */
+    /** Sets the specified value to the {@code timestamp} field. */
     public XrWorldMeshStateRequestCompletionML timestamp(@NativeType("XrTime") long value) { ntimestamp(address(), value); return this; }
-    /** Sets the specified value to the {@link #meshBlockStateCapacityInput} field. */
+    /** Sets the specified value to the {@code meshBlockStateCapacityInput} field. */
     public XrWorldMeshStateRequestCompletionML meshBlockStateCapacityInput(@NativeType("uint32_t") int value) { nmeshBlockStateCapacityInput(address(), value); return this; }
-    /** Sets the specified value to the {@link #meshBlockStateCountOutput} field. */
+    /** Sets the specified value to the {@code meshBlockStateCountOutput} field. */
     public XrWorldMeshStateRequestCompletionML meshBlockStateCountOutput(@NativeType("uint32_t") int value) { nmeshBlockStateCountOutput(address(), value); return this; }
-    /** Sets the address of the specified {@link XrWorldMeshBlockStateML.Buffer} to the {@link #meshBlockStates} field. */
+    /** Sets the address of the specified {@link XrWorldMeshBlockStateML.Buffer} to the {@code meshBlockStates} field. */
     public XrWorldMeshStateRequestCompletionML meshBlockStates(@NativeType("XrWorldMeshBlockStateML *") XrWorldMeshBlockStateML.@Nullable Buffer value) { nmeshBlockStates(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -395,43 +356,43 @@ public class XrWorldMeshStateRequestCompletionML extends Struct<XrWorldMeshState
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshStateRequestCompletionML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshStateRequestCompletionML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshStateRequestCompletionML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrWorldMeshStateRequestCompletionML.nnext(address()); }
-        /** @return the value of the {@link XrWorldMeshStateRequestCompletionML#futureResult} field. */
+        /** @return the value of the {@code futureResult} field. */
         @NativeType("XrResult")
         public int futureResult() { return XrWorldMeshStateRequestCompletionML.nfutureResult(address()); }
-        /** @return the value of the {@link XrWorldMeshStateRequestCompletionML#timestamp} field. */
+        /** @return the value of the {@code timestamp} field. */
         @NativeType("XrTime")
         public long timestamp() { return XrWorldMeshStateRequestCompletionML.ntimestamp(address()); }
-        /** @return the value of the {@link XrWorldMeshStateRequestCompletionML#meshBlockStateCapacityInput} field. */
+        /** @return the value of the {@code meshBlockStateCapacityInput} field. */
         @NativeType("uint32_t")
         public int meshBlockStateCapacityInput() { return XrWorldMeshStateRequestCompletionML.nmeshBlockStateCapacityInput(address()); }
-        /** @return the value of the {@link XrWorldMeshStateRequestCompletionML#meshBlockStateCountOutput} field. */
+        /** @return the value of the {@code meshBlockStateCountOutput} field. */
         @NativeType("uint32_t")
         public int meshBlockStateCountOutput() { return XrWorldMeshStateRequestCompletionML.nmeshBlockStateCountOutput(address()); }
-        /** @return a {@link XrWorldMeshBlockStateML.Buffer} view of the struct array pointed to by the {@link XrWorldMeshStateRequestCompletionML#meshBlockStates} field. */
+        /** @return a {@link XrWorldMeshBlockStateML.Buffer} view of the struct array pointed to by the {@code meshBlockStates} field. */
         @NativeType("XrWorldMeshBlockStateML *")
         public XrWorldMeshBlockStateML.@Nullable Buffer meshBlockStates() { return XrWorldMeshStateRequestCompletionML.nmeshBlockStates(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestCompletionML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshStateRequestCompletionML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML} value to the {@link XrWorldMeshStateRequestCompletionML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML} value to the {@code type} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestCompletionML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer next(@NativeType("void *") long value) { XrWorldMeshStateRequestCompletionML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestCompletionML#futureResult} field. */
+        /** Sets the specified value to the {@code futureResult} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer futureResult(@NativeType("XrResult") int value) { XrWorldMeshStateRequestCompletionML.nfutureResult(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestCompletionML#timestamp} field. */
+        /** Sets the specified value to the {@code timestamp} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer timestamp(@NativeType("XrTime") long value) { XrWorldMeshStateRequestCompletionML.ntimestamp(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestCompletionML#meshBlockStateCapacityInput} field. */
+        /** Sets the specified value to the {@code meshBlockStateCapacityInput} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer meshBlockStateCapacityInput(@NativeType("uint32_t") int value) { XrWorldMeshStateRequestCompletionML.nmeshBlockStateCapacityInput(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestCompletionML#meshBlockStateCountOutput} field. */
+        /** Sets the specified value to the {@code meshBlockStateCountOutput} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer meshBlockStateCountOutput(@NativeType("uint32_t") int value) { XrWorldMeshStateRequestCompletionML.nmeshBlockStateCountOutput(address(), value); return this; }
-        /** Sets the address of the specified {@link XrWorldMeshBlockStateML.Buffer} to the {@link XrWorldMeshStateRequestCompletionML#meshBlockStates} field. */
+        /** Sets the address of the specified {@link XrWorldMeshBlockStateML.Buffer} to the {@code meshBlockStates} field. */
         public XrWorldMeshStateRequestCompletionML.Buffer meshBlockStates(@NativeType("XrWorldMeshBlockStateML *") XrWorldMeshBlockStateML.@Nullable Buffer value) { XrWorldMeshStateRequestCompletionML.nmeshBlockStates(address(), value); return this; }
 
     }

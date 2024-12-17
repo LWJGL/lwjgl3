@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LLVMOpInfo1 {
  *     {@link LLVMOpInfoSymbol1 struct LLVMOpInfoSymbol1} AddSymbol;
  *     {@link LLVMOpInfoSymbol1 struct LLVMOpInfoSymbol1} SubtractSymbol;
  *     uint64_t Value;
  *     uint64_t VariantKind;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct LLVMOpInfo1")
 public class LLVMOpInfo1 extends Struct<LLVMOpInfo1> implements NativeResource {

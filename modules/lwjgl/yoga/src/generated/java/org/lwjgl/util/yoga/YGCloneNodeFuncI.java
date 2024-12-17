@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * YGNodeRef (*{@link #invoke}) (
- *     YGNodeConstRef oldNode,
- *     YGNodeConstRef owner,
- *     int childIndex
- * )</code></pre>
- */
+/** Callback function: {@link #invoke YGCloneNodeFunc} */
 @FunctionalInterface
 @NativeType("YGCloneNodeFunc")
 public interface YGCloneNodeFuncI extends CallbackI {
@@ -45,6 +36,7 @@ public interface YGCloneNodeFuncI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
+    /** {@code YGNodeRef (* YGCloneNodeFunc) (YGNodeConstRef oldNode, YGNodeConstRef owner, int childIndex)} */
     @NativeType("YGNodeRef") long invoke(@NativeType("YGNodeConstRef") long oldNode, @NativeType("YGNodeConstRef") long owner, int childIndex);
 
 }

@@ -12,20 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_STUDIO_COMMANDREPLAY *replay,
- *     int commandindex,
- *     FMOD_GUID const *bankguid,
- *     char const *bankfilename,
- *     FMOD_STUDIO_LOAD_BANK_FLAGS flags,
- *     FMOD_STUDIO_BANK **bank,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK")
 public interface FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI extends CallbackI {
@@ -53,6 +40,7 @@ public interface FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACKI extends CallbackI
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_STUDIO_COMMANDREPLAY_LOAD_BANK_CALLBACK) (FMOD_STUDIO_COMMANDREPLAY * replay, int commandindex, FMOD_GUID const * bankguid, char const * bankfilename, FMOD_STUDIO_LOAD_BANK_FLAGS flags, FMOD_STUDIO_BANK ** bank, void * userdata)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("FMOD_STUDIO_COMMANDREPLAY *") long replay, int commandindex, @NativeType("FMOD_GUID const *") long bankguid, @NativeType("char const *") long bankfilename, @NativeType("FMOD_STUDIO_LOAD_BANK_FLAGS") int flags, @NativeType("FMOD_STUDIO_BANK **") long bank, @NativeType("void *") long userdata);
 
 }

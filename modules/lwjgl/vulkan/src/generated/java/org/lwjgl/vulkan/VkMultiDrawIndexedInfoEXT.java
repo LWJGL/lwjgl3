@@ -16,24 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a multi-draw command.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code firstIndex}, {@code indexCount}, and {@code vertexOffset} members of {@link VkMultiDrawIndexedInfoEXT} have the same meaning as the {@code firstIndex}, {@code indexCount}, and {@code vertexOffset} parameters, respectively, of {@link VK10#vkCmdDrawIndexed CmdDrawIndexed}.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTMultiDraw#vkCmdDrawMultiIndexedEXT CmdDrawMultiIndexedEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMultiDrawIndexedInfoEXT {
- *     uint32_t {@link #firstIndex};
- *     uint32_t {@link #indexCount};
- *     int32_t {@link #vertexOffset};
- * }</code></pre>
+ *     uint32_t firstIndex;
+ *     uint32_t indexCount;
+ *     int32_t vertexOffset;
+ * }}</pre>
  */
 public class VkMultiDrawIndexedInfoEXT extends Struct<VkMultiDrawIndexedInfoEXT> implements NativeResource {
 
@@ -86,21 +74,21 @@ public class VkMultiDrawIndexedInfoEXT extends Struct<VkMultiDrawIndexedInfoEXT>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the first index to draw. */
+    /** @return the value of the {@code firstIndex} field. */
     @NativeType("uint32_t")
     public int firstIndex() { return nfirstIndex(address()); }
-    /** the number of vertices to draw. */
+    /** @return the value of the {@code indexCount} field. */
     @NativeType("uint32_t")
     public int indexCount() { return nindexCount(address()); }
-    /** the value added to the vertex index before indexing into the vertex buffer for indexed multidraws. */
+    /** @return the value of the {@code vertexOffset} field. */
     @NativeType("int32_t")
     public int vertexOffset() { return nvertexOffset(address()); }
 
-    /** Sets the specified value to the {@link #firstIndex} field. */
+    /** Sets the specified value to the {@code firstIndex} field. */
     public VkMultiDrawIndexedInfoEXT firstIndex(@NativeType("uint32_t") int value) { nfirstIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #indexCount} field. */
+    /** Sets the specified value to the {@code indexCount} field. */
     public VkMultiDrawIndexedInfoEXT indexCount(@NativeType("uint32_t") int value) { nindexCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #vertexOffset} field. */
+    /** Sets the specified value to the {@code vertexOffset} field. */
     public VkMultiDrawIndexedInfoEXT vertexOffset(@NativeType("int32_t") int value) { nvertexOffset(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,21 +284,21 @@ public class VkMultiDrawIndexedInfoEXT extends Struct<VkMultiDrawIndexedInfoEXT>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMultiDrawIndexedInfoEXT#firstIndex} field. */
+        /** @return the value of the {@code firstIndex} field. */
         @NativeType("uint32_t")
         public int firstIndex() { return VkMultiDrawIndexedInfoEXT.nfirstIndex(address()); }
-        /** @return the value of the {@link VkMultiDrawIndexedInfoEXT#indexCount} field. */
+        /** @return the value of the {@code indexCount} field. */
         @NativeType("uint32_t")
         public int indexCount() { return VkMultiDrawIndexedInfoEXT.nindexCount(address()); }
-        /** @return the value of the {@link VkMultiDrawIndexedInfoEXT#vertexOffset} field. */
+        /** @return the value of the {@code vertexOffset} field. */
         @NativeType("int32_t")
         public int vertexOffset() { return VkMultiDrawIndexedInfoEXT.nvertexOffset(address()); }
 
-        /** Sets the specified value to the {@link VkMultiDrawIndexedInfoEXT#firstIndex} field. */
+        /** Sets the specified value to the {@code firstIndex} field. */
         public VkMultiDrawIndexedInfoEXT.Buffer firstIndex(@NativeType("uint32_t") int value) { VkMultiDrawIndexedInfoEXT.nfirstIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMultiDrawIndexedInfoEXT#indexCount} field. */
+        /** Sets the specified value to the {@code indexCount} field. */
         public VkMultiDrawIndexedInfoEXT.Buffer indexCount(@NativeType("uint32_t") int value) { VkMultiDrawIndexedInfoEXT.nindexCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMultiDrawIndexedInfoEXT#vertexOffset} field. */
+        /** Sets the specified value to the {@code vertexOffset} field. */
         public VkMultiDrawIndexedInfoEXT.Buffer vertexOffset(@NativeType("int32_t") int value) { VkMultiDrawIndexedInfoEXT.nvertexOffset(address(), value); return this; }
 
     }

@@ -14,17 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code COLR} v1 {@code PaintComposite} paint table. Used for compositing two paints in a {@code COLR} v1 directed acyclic
- * graph.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintComposite {
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} source_paint;
  *     FT_Composite_Mode composite_mode;
  *     {@link FT_OpaquePaint FT_OpaquePaintRec} backdrop_paint;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintComposite extends Struct<FT_PaintComposite> {
 

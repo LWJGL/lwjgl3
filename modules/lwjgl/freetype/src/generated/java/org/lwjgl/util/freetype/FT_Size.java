@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * FreeType root size class structure. A size object models a face object at a given size.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_SizeRec {
- *     {@link FT_Face FT_Face} {@link #face};
- *     {@link FT_Generic FT_Generic} {@link #generic};
- *     {@link FT_Size_Metrics FT_Size_Metrics} {@link #metrics};
+ *     {@link FT_Face FT_Face} face;
+ *     {@link FT_Generic FT_Generic} generic;
+ *     {@link FT_Size_Metrics FT_Size_Metrics} metrics;
  *     {@link FT_Size_Internal FT_Size_Internal} * internal;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_SizeRec")
 public class FT_Size extends Struct<FT_Size> implements NativeResource {
@@ -84,20 +80,20 @@ public class FT_Size extends Struct<FT_Size> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** parent face object */
+    /** @return a {@link FT_Face} view of the struct pointed to by the {@code face} field. */
     public FT_Face face() { return nface(address()); }
-    /** generic pointer for client uses */
+    /** @return a {@link FT_Generic} view of the {@code generic} field. */
     public FT_Generic generic() { return ngeneric(address()); }
-    /** size metrics */
+    /** @return a {@link FT_Size_Metrics} view of the {@code metrics} field. */
     public FT_Size_Metrics metrics() { return nmetrics(address()); }
 
-    /** Sets the address of the specified {@link FT_Face} to the {@link #face} field. */
+    /** Sets the address of the specified {@link FT_Face} to the {@code face} field. */
     public FT_Size face(FT_Face value) { nface(address(), value); return this; }
-    /** Copies the specified {@link FT_Generic} to the {@link #generic} field. */
+    /** Copies the specified {@link FT_Generic} to the {@code generic} field. */
     public FT_Size generic(FT_Generic value) { ngeneric(address(), value); return this; }
-    /** Passes the {@link #generic} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code generic} field to the specified {@link java.util.function.Consumer Consumer}. */
     public FT_Size generic(java.util.function.Consumer<FT_Generic> consumer) { consumer.accept(generic()); return this; }
-    /** Copies the specified {@link FT_Size_Metrics} to the {@link #metrics} field. */
+    /** Copies the specified {@link FT_Size_Metrics} to the {@code metrics} field. */
     public FT_Size metrics(FT_Size_Metrics value) { nmetrics(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -305,20 +301,20 @@ public class FT_Size extends Struct<FT_Size> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link FT_Face} view of the struct pointed to by the {@link FT_Size#face} field. */
+        /** @return a {@link FT_Face} view of the struct pointed to by the {@code face} field. */
         public FT_Face face() { return FT_Size.nface(address()); }
-        /** @return a {@link FT_Generic} view of the {@link FT_Size#generic} field. */
+        /** @return a {@link FT_Generic} view of the {@code generic} field. */
         public FT_Generic generic() { return FT_Size.ngeneric(address()); }
-        /** @return a {@link FT_Size_Metrics} view of the {@link FT_Size#metrics} field. */
+        /** @return a {@link FT_Size_Metrics} view of the {@code metrics} field. */
         public FT_Size_Metrics metrics() { return FT_Size.nmetrics(address()); }
 
-        /** Sets the address of the specified {@link FT_Face} to the {@link FT_Size#face} field. */
+        /** Sets the address of the specified {@link FT_Face} to the {@code face} field. */
         public FT_Size.Buffer face(FT_Face value) { FT_Size.nface(address(), value); return this; }
-        /** Copies the specified {@link FT_Generic} to the {@link FT_Size#generic} field. */
+        /** Copies the specified {@link FT_Generic} to the {@code generic} field. */
         public FT_Size.Buffer generic(FT_Generic value) { FT_Size.ngeneric(address(), value); return this; }
-        /** Passes the {@link FT_Size#generic} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code generic} field to the specified {@link java.util.function.Consumer Consumer}. */
         public FT_Size.Buffer generic(java.util.function.Consumer<FT_Generic> consumer) { consumer.accept(generic()); return this; }
-        /** Copies the specified {@link FT_Size_Metrics} to the {@link FT_Size#metrics} field. */
+        /** Copies the specified {@link FT_Size_Metrics} to the {@code metrics} field. */
         public FT_Size.Buffer metrics(FT_Size_Metrics value) { FT_Size.nmetrics(address(), value); return this; }
 
     }

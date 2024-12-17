@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     YGConfigConstRef config,
- *     YGNodeConstRef node,
- *     YGLogLevel level,
- *     char const *format,
- *     va_list args
- * )</code></pre>
- */
+/** Callback function: {@link #invoke YGLogger} */
 public abstract class YGLogger extends Callback implements YGLoggerI {
 
     /**

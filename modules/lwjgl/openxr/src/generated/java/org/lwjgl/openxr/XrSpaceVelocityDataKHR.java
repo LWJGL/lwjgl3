@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrSpaceVelocityData}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceVelocityDataKHR {
  *     XrSpaceVelocityFlags velocityFlags;
  *     {@link XrVector3f XrVector3f} linearVelocity;
  *     {@link XrVector3f XrVector3f} angularVelocity;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrSpaceVelocityDataKHR extends XrSpaceVelocityData {
 

@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     hb_paint_funcs_t *funcs,
- *     void *paint_data,
- *     hb_color_line_t *color_line,
- *     float x0,
- *     float y0,
- *     float start_angle,
- *     float end_angle,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_paint_sweep_gradient_func_t} */
 @FunctionalInterface
 @NativeType("hb_paint_sweep_gradient_func_t")
 public interface hb_paint_sweep_gradient_func_tI extends CallbackI {
@@ -54,6 +40,7 @@ public interface hb_paint_sweep_gradient_func_tI extends CallbackI {
         );
     }
 
+    /** {@code void (* hb_paint_sweep_gradient_func_t) (hb_paint_funcs_t * funcs, void * paint_data, hb_color_line_t * color_line, float x0, float y0, float start_angle, float end_angle, void * user_data)} */
     void invoke(@NativeType("hb_paint_funcs_t *") long funcs, @NativeType("void *") long paint_data, @NativeType("hb_color_line_t *") long color_line, float x0, float y0, float start_angle, float end_angle, @NativeType("void *") long user_data);
 
 }

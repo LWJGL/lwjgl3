@@ -16,31 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the information to obtain facial expression.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrFacialExpressionBlendShapeGetInfoML} structure specifies properties about blend shapes desired by an application. It <b>must</b> be passed into {@link MLFacialExpression#xrGetFacialExpressionBlendShapePropertiesML GetFacialExpressionBlendShapePropertiesML} and is currently empty for future extensibility.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLFacialExpression XR_ML_facial_expression} extension <b>must</b> be enabled prior to using {@link XrFacialExpressionBlendShapeGetInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLFacialExpression#xrGetFacialExpressionBlendShapePropertiesML GetFacialExpressionBlendShapePropertiesML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFacialExpressionBlendShapeGetInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrFacialExpressionBlendShapeGetInfoML extends Struct<XrFacialExpressionBlendShapeGetInfoML> implements NativeResource {
 
@@ -90,18 +70,18 @@ public class XrFacialExpressionBlendShapeGetInfoML extends Struct<XrFacialExpres
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFacialExpressionBlendShapeGetInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML} value to the {@code type} field. */
     public XrFacialExpressionBlendShapeGetInfoML type$Default() { return type(MLFacialExpression.XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFacialExpressionBlendShapeGetInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -291,18 +271,18 @@ public class XrFacialExpressionBlendShapeGetInfoML extends Struct<XrFacialExpres
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFacialExpressionBlendShapeGetInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFacialExpressionBlendShapeGetInfoML.ntype(address()); }
-        /** @return the value of the {@link XrFacialExpressionBlendShapeGetInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFacialExpressionBlendShapeGetInfoML.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrFacialExpressionBlendShapeGetInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFacialExpressionBlendShapeGetInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrFacialExpressionBlendShapeGetInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML} value to the {@link XrFacialExpressionBlendShapeGetInfoML#type} field. */
+        /** Sets the {@link MLFacialExpression#XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML} value to the {@code type} field. */
         public XrFacialExpressionBlendShapeGetInfoML.Buffer type$Default() { return type(MLFacialExpression.XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML); }
-        /** Sets the specified value to the {@link XrFacialExpressionBlendShapeGetInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFacialExpressionBlendShapeGetInfoML.Buffer next(@NativeType("void const *") long value) { XrFacialExpressionBlendShapeGetInfoML.nnext(address(), value); return this; }
 
     }

@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link GLFW#glfwSetIMEStatusCallback SetIMEStatusCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window
- * )</code></pre>
- *
- * @since version 3.X
- */
+/** Callback function: {@link #invoke GLFWimestatusfun} */
 @FunctionalInterface
 @NativeType("GLFWimestatusfun")
 public interface GLFWIMEStatusCallbackI extends CallbackI {
@@ -44,11 +33,7 @@ public interface GLFWIMEStatusCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * The function pointer type for IME status change callbacks.
-     *
-     * @param window the window that received the event
-     */
+    /** {@code void (* GLFWimestatusfun) (GLFWwindow * window)} */
     void invoke(@NativeType("GLFWwindow *") long window);
 
 }

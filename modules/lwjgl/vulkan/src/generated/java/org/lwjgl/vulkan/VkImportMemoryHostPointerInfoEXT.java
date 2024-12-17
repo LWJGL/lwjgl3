@@ -17,52 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Import memory from a host pointer.
- * 
- * <h5>Description</h5>
- * 
- * <p>Importing memory from a host pointer shares ownership of the memory between the host and the Vulkan implementation. The application <b>can</b> continue to access the memory through the host pointer but it is the application’s responsibility to synchronize device and non-device access to the payload as defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-device-hostaccess">Host Access to Device Memory Objects</a>.</p>
- * 
- * <p>Applications <b>can</b> import the same payload into multiple instances of Vulkan and multiple times into a given Vulkan instance. However, implementations <b>may</b> fail to import the same payload multiple times into a given physical device due to platform constraints.</p>
- * 
- * <p>Importing memory from a particular host pointer <b>may</b> not be possible due to additional platform-specific restrictions beyond the scope of this specification in which case the implementation <b>must</b> fail the memory import operation with the error code {@link KHRExternalMemory#VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR ERROR_INVALID_EXTERNAL_HANDLE_KHR}.</p>
- * 
- * <p>Whether device memory objects imported from a host pointer hold a reference to their payload is undefined. As such, the application <b>must</b> ensure that the imported memory range remains valid and accessible for the lifetime of the imported memory object.</p>
- * 
- * <p>Implementations <b>may</b> support importing host pointers for memory types which are not host-visible. In this case, after a successful call to {@link VK10#vkAllocateMemory AllocateMemory}, the memory range imported from {@code pHostPointer} <b>must</b> not be accessed by the application until the {@code VkDeviceMemory} has been destroyed. Memory contents for the host memory becomes undefined on import, and is left undefined after the {@code VkDeviceMemory} has been destroyed. Applications <b>must</b> also not access host memory which is mapped to the same physical memory as {@code pHostPointer}, but mapped to a different host pointer while the {@code VkDeviceMemory} handle is valid. Implementations running on general-purpose operating systems <b>should</b> not support importing host pointers for memory types which are not host-visible.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Using host pointers to back non-host visible allocations is a platform-specific use case, and applications should not attempt to do this unless instructed by the platform.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code handleType} is not 0, it <b>must</b> be supported for import, as reported in {@link VkExternalMemoryProperties}</li>
- * <li>If {@code handleType} is not 0, it <b>must</b> be {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT} or {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT}</li>
- * <li>{@code pHostPointer} <b>must</b> be a pointer aligned to an integer multiple of {@link VkPhysicalDeviceExternalMemoryHostPropertiesEXT}{@code ::minImportedHostPointerAlignment}</li>
- * <li>If {@code handleType} is {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_ALLOCATION_BIT_EXT}, {@code pHostPointer} <b>must</b> be a pointer to {@code allocationSize} number of bytes of host memory, where {@code allocationSize} is the member of the {@link VkMemoryAllocateInfo} structure this structure is chained to</li>
- * <li>If {@code handleType} is {@link EXTExternalMemoryHost#VK_EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT EXTERNAL_MEMORY_HANDLE_TYPE_HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT}, {@code pHostPointer} <b>must</b> be a pointer to {@code allocationSize} number of bytes of host mapped foreign memory, where {@code allocationSize} is the member of the {@link VkMemoryAllocateInfo} structure this structure is chained to</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT}</li>
- * <li>{@code handleType} <b>must</b> be a valid {@code VkExternalMemoryHandleTypeFlagBits} value</li>
- * <li>{@code pHostPointer} <b>must</b> be a pointer value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImportMemoryHostPointerInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkExternalMemoryHandleTypeFlagBits {@link #handleType};
- *     void * {@link #pHostPointer};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkExternalMemoryHandleTypeFlagBits handleType;
+ *     void * pHostPointer;
+ * }}</pre>
  */
 public class VkImportMemoryHostPointerInfoEXT extends Struct<VkImportMemoryHostPointerInfoEXT> implements NativeResource {
 
@@ -118,28 +79,28 @@ public class VkImportMemoryHostPointerInfoEXT extends Struct<VkImportMemoryHostP
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkExternalMemoryHandleTypeFlagBits} value specifying the handle type. */
+    /** @return the value of the {@code handleType} field. */
     @NativeType("VkExternalMemoryHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
-    /** the host pointer to import from. */
+    /** @return the value of the {@code pHostPointer} field. */
     @NativeType("void *")
     public long pHostPointer() { return npHostPointer(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImportMemoryHostPointerInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT} value to the {@code sType} field. */
     public VkImportMemoryHostPointerInfoEXT sType$Default() { return sType(EXTExternalMemoryHost.VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImportMemoryHostPointerInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #handleType} field. */
+    /** Sets the specified value to the {@code handleType} field. */
     public VkImportMemoryHostPointerInfoEXT handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
-    /** Sets the specified value to the {@link #pHostPointer} field. */
+    /** Sets the specified value to the {@code pHostPointer} field. */
     public VkImportMemoryHostPointerInfoEXT pHostPointer(@NativeType("void *") long value) { npHostPointer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -369,28 +330,28 @@ public class VkImportMemoryHostPointerInfoEXT extends Struct<VkImportMemoryHostP
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImportMemoryHostPointerInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImportMemoryHostPointerInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkImportMemoryHostPointerInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImportMemoryHostPointerInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkImportMemoryHostPointerInfoEXT#handleType} field. */
+        /** @return the value of the {@code handleType} field. */
         @NativeType("VkExternalMemoryHandleTypeFlagBits")
         public int handleType() { return VkImportMemoryHostPointerInfoEXT.nhandleType(address()); }
-        /** @return the value of the {@link VkImportMemoryHostPointerInfoEXT#pHostPointer} field. */
+        /** @return the value of the {@code pHostPointer} field. */
         @NativeType("void *")
         public long pHostPointer() { return VkImportMemoryHostPointerInfoEXT.npHostPointer(address()); }
 
-        /** Sets the specified value to the {@link VkImportMemoryHostPointerInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImportMemoryHostPointerInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMemoryHostPointerInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT} value to the {@link VkImportMemoryHostPointerInfoEXT#sType} field. */
+        /** Sets the {@link EXTExternalMemoryHost#VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT} value to the {@code sType} field. */
         public VkImportMemoryHostPointerInfoEXT.Buffer sType$Default() { return sType(EXTExternalMemoryHost.VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT); }
-        /** Sets the specified value to the {@link VkImportMemoryHostPointerInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImportMemoryHostPointerInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImportMemoryHostPointerInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImportMemoryHostPointerInfoEXT#handleType} field. */
+        /** Sets the specified value to the {@code handleType} field. */
         public VkImportMemoryHostPointerInfoEXT.Buffer handleType(@NativeType("VkExternalMemoryHandleTypeFlagBits") int value) { VkImportMemoryHostPointerInfoEXT.nhandleType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImportMemoryHostPointerInfoEXT#pHostPointer} field. */
+        /** Sets the specified value to the {@code pHostPointer} field. */
         public VkImportMemoryHostPointerInfoEXT.Buffer pHostPointer(@NativeType("void *") long value) { VkImportMemoryHostPointerInfoEXT.npHostPointer(address(), value); return this; }
 
     }

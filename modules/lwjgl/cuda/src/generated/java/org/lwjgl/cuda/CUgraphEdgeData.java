@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUgraphEdgeData {
  *     unsigned char from_port;
  *     unsigned char to_port;
  *     unsigned char type;
  *     unsigned char reserved[5];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUgraphEdgeData extends Struct<CUgraphEdgeData> implements NativeResource {
 

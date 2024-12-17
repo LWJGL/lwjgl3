@@ -18,37 +18,16 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure describing the textual form of a pipeline executable internal representation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code pData} is {@code NULL}, then the size, in bytes, of the internal representation data is returned in {@code dataSize}. Otherwise, {@code dataSize} <b>must</b> be the size of the buffer, in bytes, pointed to by {@code pData} and on return {@code dataSize} is overwritten with the number of bytes of data actually written to {@code pData} including any trailing null character. If {@code dataSize} is less than the size, in bytes, of the internal representation’s data, at most {@code dataSize} bytes of data will be written to {@code pData}, and {@link VK10#VK_INCOMPLETE INCOMPLETE} will be returned instead of {@link VK10#VK_SUCCESS SUCCESS}, to indicate that not all the available representation was returned.</p>
- * 
- * <p>If {@code isText} is {@link VK10#VK_TRUE TRUE} and {@code pData} is not {@code NULL} and {@code dataSize} is not zero, the last byte written to {@code pData} will be a null character.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRPipelineExecutableProperties#vkGetPipelineExecutableInternalRepresentationsKHR GetPipelineExecutableInternalRepresentationsKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineExecutableInternalRepresentationKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     char {@link #name}[VK_MAX_DESCRIPTION_SIZE];
- *     char {@link #description}[VK_MAX_DESCRIPTION_SIZE];
- *     VkBool32 {@link #isText};
- *     size_t {@link #dataSize};
- *     void * {@link #pData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     char name[VK_MAX_DESCRIPTION_SIZE];
+ *     char description[VK_MAX_DESCRIPTION_SIZE];
+ *     VkBool32 isText;
+ *     size_t dataSize;
+ *     void * pData;
+ * }}</pre>
  */
 public class VkPipelineExecutableInternalRepresentationKHR extends Struct<VkPipelineExecutableInternalRepresentationKHR> implements NativeResource {
 
@@ -113,39 +92,39 @@ public class VkPipelineExecutableInternalRepresentationKHR extends Struct<VkPipe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this internal representation. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer name() { return nname(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a short human readable name for this internal representation. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String nameString() { return nnameString(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this internal representation. */
+    /** @return a {@link ByteBuffer} view of the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** an array of {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE} {@code char} containing a null-terminated UTF-8 string which is a human readable description for this internal representation. */
+    /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
-    /** specifies whether the returned data is text or opaque data. If {@code isText} is {@link VK10#VK_TRUE TRUE} then the data returned in {@code pData} is text and is guaranteed to be a null-terminated UTF-8 string. */
+    /** @return the value of the {@code isText} field. */
     @NativeType("VkBool32")
     public boolean isText() { return nisText(address()) != 0; }
-    /** an integer related to the size, in bytes, of the internal representation’s data, as described below. */
+    /** @return the value of the {@code dataSize} field. */
     @NativeType("size_t")
     public long dataSize() { return ndataSize(address()); }
-    /** either {@code NULL} or a pointer to a block of data into which the implementation will write the internal representation. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer pData() { return npData(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineExecutableInternalRepresentationKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR} value to the {@code sType} field. */
     public VkPipelineExecutableInternalRepresentationKHR sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineExecutableInternalRepresentationKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -368,39 +347,39 @@ public class VkPipelineExecutableInternalRepresentationKHR extends Struct<VkPipe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineExecutableInternalRepresentationKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineExecutableInternalRepresentationKHR.nsType(address()); }
-        /** @return the value of the {@link VkPipelineExecutableInternalRepresentationKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPipelineExecutableInternalRepresentationKHR.npNext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPipelineExecutableInternalRepresentationKHR#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer name() { return VkPipelineExecutableInternalRepresentationKHR.nname(address()); }
-        /** @return the null-terminated string stored in the {@link VkPipelineExecutableInternalRepresentationKHR#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String nameString() { return VkPipelineExecutableInternalRepresentationKHR.nnameString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPipelineExecutableInternalRepresentationKHR#description} field. */
+        /** @return a {@link ByteBuffer} view of the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return VkPipelineExecutableInternalRepresentationKHR.ndescription(address()); }
-        /** @return the null-terminated string stored in the {@link VkPipelineExecutableInternalRepresentationKHR#description} field. */
+        /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkPipelineExecutableInternalRepresentationKHR.ndescriptionString(address()); }
-        /** @return the value of the {@link VkPipelineExecutableInternalRepresentationKHR#isText} field. */
+        /** @return the value of the {@code isText} field. */
         @NativeType("VkBool32")
         public boolean isText() { return VkPipelineExecutableInternalRepresentationKHR.nisText(address()) != 0; }
-        /** @return the value of the {@link VkPipelineExecutableInternalRepresentationKHR#dataSize} field. */
+        /** @return the value of the {@code dataSize} field. */
         @NativeType("size_t")
         public long dataSize() { return VkPipelineExecutableInternalRepresentationKHR.ndataSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkPipelineExecutableInternalRepresentationKHR#pData} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pData} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer pData() { return VkPipelineExecutableInternalRepresentationKHR.npData(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineExecutableInternalRepresentationKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineExecutableInternalRepresentationKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineExecutableInternalRepresentationKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR} value to the {@link VkPipelineExecutableInternalRepresentationKHR#sType} field. */
+        /** Sets the {@link KHRPipelineExecutableProperties#VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR} value to the {@code sType} field. */
         public VkPipelineExecutableInternalRepresentationKHR.Buffer sType$Default() { return sType(KHRPipelineExecutableProperties.VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR); }
-        /** Sets the specified value to the {@link VkPipelineExecutableInternalRepresentationKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineExecutableInternalRepresentationKHR.Buffer pNext(@NativeType("void *") long value) { VkPipelineExecutableInternalRepresentationKHR.npNext(address(), value); return this; }
 
     }

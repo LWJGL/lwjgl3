@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct STBIR_RESIZE {
  *     void * user_data;
  *     void const * input_pixels;
@@ -57,7 +55,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link STBIRKernelCallbackI stbir__kernel_callback *}* vertical_filter_kernel;
  *     {@link STBIRSupportCallbackI stbir__support_callback *}* vertical_filter_support;
  *     stbir__info * samplers;
- * }</code></pre>
+ * }}</pre>
  */
 public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource {
 
@@ -212,11 +210,7 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     /** @return the value of the {@code user_data} field. */
     @NativeType("void *")
     public long user_data() { return nuser_data(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code input_pixels} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code input_pixels} field. */
     @NativeType("void const *")
     public ByteBuffer input_pixels(int capacity) { return ninput_pixels(address(), capacity); }
     /** @return the value of the {@code input_w} field. */
@@ -231,18 +225,10 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     public double input_s1() { return ninput_s1(address()); }
     /** @return the value of the {@code input_t1} field. */
     public double input_t1() { return ninput_t1(address()); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code input_cb} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code input_cb} field. */
     @NativeType("stbir_input_callback **")
     public @Nullable PointerBuffer input_cb(int capacity) { return ninput_cb(address(), capacity); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code output_pixels} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code output_pixels} field. */
     @NativeType("void *")
     public @Nullable ByteBuffer output_pixels(int capacity) { return noutput_pixels(address(), capacity); }
     /** @return the value of the {@code output_w} field. */
@@ -257,11 +243,7 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     public int output_subw() { return noutput_subw(address()); }
     /** @return the value of the {@code output_subh} field. */
     public int output_subh() { return noutput_subh(address()); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code output_cb} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code output_cb} field. */
     @NativeType("stbir_output_callback **")
     public @Nullable PointerBuffer output_cb(int capacity) { return noutput_cb(address(), capacity); }
     /** @return the value of the {@code input_stride_in_bytes} field. */
@@ -303,32 +285,16 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
     /** @return the value of the {@code vertical_edge} field. */
     @NativeType("stbir_edge")
     public int vertical_edge() { return nvertical_edge(address()); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_kernel} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_kernel} field. */
     @NativeType("stbir__kernel_callback **")
     public @Nullable PointerBuffer horizontal_filter_kernel(int capacity) { return nhorizontal_filter_kernel(address(), capacity); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_support} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_support} field. */
     @NativeType("stbir__support_callback **")
     public @Nullable PointerBuffer horizontal_filter_support(int capacity) { return nhorizontal_filter_support(address(), capacity); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_kernel} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_kernel} field. */
     @NativeType("stbir__kernel_callback **")
     public @Nullable PointerBuffer vertical_filter_kernel(int capacity) { return nvertical_filter_kernel(address(), capacity); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_support} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_support} field. */
     @NativeType("stbir__support_callback **")
     public @Nullable PointerBuffer vertical_filter_support(int capacity) { return nvertical_filter_support(address(), capacity); }
     /** @return the value of the {@code samplers} field. */
@@ -812,11 +778,7 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
         /** @return the value of the {@code user_data} field. */
         @NativeType("void *")
         public long user_data() { return STBIR_RESIZE.nuser_data(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code input_pixels} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code input_pixels} field. */
         @NativeType("void const *")
         public ByteBuffer input_pixels(int capacity) { return STBIR_RESIZE.ninput_pixels(address(), capacity); }
         /** @return the value of the {@code input_w} field. */
@@ -831,18 +793,10 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
         public double input_s1() { return STBIR_RESIZE.ninput_s1(address()); }
         /** @return the value of the {@code input_t1} field. */
         public double input_t1() { return STBIR_RESIZE.ninput_t1(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code input_cb} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code input_cb} field. */
         @NativeType("stbir_input_callback **")
         public @Nullable PointerBuffer input_cb(int capacity) { return STBIR_RESIZE.ninput_cb(address(), capacity); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code output_pixels} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code output_pixels} field. */
         @NativeType("void *")
         public @Nullable ByteBuffer output_pixels(int capacity) { return STBIR_RESIZE.noutput_pixels(address(), capacity); }
         /** @return the value of the {@code output_w} field. */
@@ -857,11 +811,7 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
         public int output_subw() { return STBIR_RESIZE.noutput_subw(address()); }
         /** @return the value of the {@code output_subh} field. */
         public int output_subh() { return STBIR_RESIZE.noutput_subh(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code output_cb} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code output_cb} field. */
         @NativeType("stbir_output_callback **")
         public @Nullable PointerBuffer output_cb(int capacity) { return STBIR_RESIZE.noutput_cb(address(), capacity); }
         /** @return the value of the {@code input_stride_in_bytes} field. */
@@ -903,32 +853,16 @@ public class STBIR_RESIZE extends Struct<STBIR_RESIZE> implements NativeResource
         /** @return the value of the {@code vertical_edge} field. */
         @NativeType("stbir_edge")
         public int vertical_edge() { return STBIR_RESIZE.nvertical_edge(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_kernel} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_kernel} field. */
         @NativeType("stbir__kernel_callback **")
         public @Nullable PointerBuffer horizontal_filter_kernel(int capacity) { return STBIR_RESIZE.nhorizontal_filter_kernel(address(), capacity); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_support} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code horizontal_filter_support} field. */
         @NativeType("stbir__support_callback **")
         public @Nullable PointerBuffer horizontal_filter_support(int capacity) { return STBIR_RESIZE.nhorizontal_filter_support(address(), capacity); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_kernel} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_kernel} field. */
         @NativeType("stbir__kernel_callback **")
         public @Nullable PointerBuffer vertical_filter_kernel(int capacity) { return STBIR_RESIZE.nvertical_filter_kernel(address(), capacity); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_support} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code vertical_filter_support} field. */
         @NativeType("stbir__support_callback **")
         public @Nullable PointerBuffer vertical_filter_support(int capacity) { return STBIR_RESIZE.nvertical_filter_support(address(), capacity); }
         /** @return the value of the {@code samplers} field. */

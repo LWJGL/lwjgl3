@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * size_t (*{@link #invoke}) (
- *     struct aiFile *pFile,
- *     char const *pBuffer,
- *     size_t memB,
- *     size_t count
- * )</code></pre>
- */
+/** Callback function: {@link #invoke aiFileWriteProc} */
 @FunctionalInterface
 @NativeType("aiFileWriteProc")
 public interface AIFileWriteProcI extends CallbackI {
@@ -47,16 +37,7 @@ public interface AIFileWriteProcI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /**
-     * File write procedure.
-     *
-     * @param pFile   file pointer to write to
-     * @param pBuffer the buffer to be written
-     * @param memB    size of the individual element to be written
-     * @param count   number of elements to be written
-     *
-     * @return the number of elements written
-     */
+    /** {@code size_t (* aiFileWriteProc) (struct aiFile * pFile, char const * pBuffer, size_t memB, size_t count)} */
     @NativeType("size_t") long invoke(@NativeType("struct aiFile *") long pFile, @NativeType("char const *") long pBuffer, @NativeType("size_t") long memB, @NativeType("size_t") long count);
 
 }

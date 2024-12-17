@@ -16,20 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The structure that holds various text properties of an {@code hb_buffer_t}.
- * 
- * <p>Can be set and retrieved using {@link HarfBuzz#hb_buffer_set_segment_properties buffer_set_segment_properties} and {@link HarfBuzz#hb_buffer_get_segment_properties buffer_get_segment_properties}, respectively.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_segment_properties_t {
- *     hb_direction_t {@link #direction};
- *     hb_script_t {@link #script};
- *     hb_language_t {@link #language};
+ *     hb_direction_t direction;
+ *     hb_script_t script;
+ *     hb_language_t language;
  *     void * reserved1;
  *     void * reserved2;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_segment_properties_t extends Struct<hb_segment_properties_t> implements NativeResource {
 
@@ -88,21 +82,21 @@ public class hb_segment_properties_t extends Struct<hb_segment_properties_t> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code hb_direction_t} of the buffer, see {@link HarfBuzz#hb_buffer_set_direction buffer_set_direction}. */
+    /** @return the value of the {@code direction} field. */
     @NativeType("hb_direction_t")
     public int direction() { return ndirection(address()); }
-    /** the {@code hb_script_t} of the buffer, see {@link HarfBuzz#hb_buffer_set_script buffer_set_script}. */
+    /** @return the value of the {@code script} field. */
     @NativeType("hb_script_t")
     public int script() { return nscript(address()); }
-    /** the {@code hb_language_t} of the buffer, see {@link HarfBuzz#hb_buffer_set_language buffer_set_language}. */
+    /** @return the value of the {@code language} field. */
     @NativeType("hb_language_t")
     public long language() { return nlanguage(address()); }
 
-    /** Sets the specified value to the {@link #direction} field. */
+    /** Sets the specified value to the {@code direction} field. */
     public hb_segment_properties_t direction(@NativeType("hb_direction_t") int value) { ndirection(address(), value); return this; }
-    /** Sets the specified value to the {@link #script} field. */
+    /** Sets the specified value to the {@code script} field. */
     public hb_segment_properties_t script(@NativeType("hb_script_t") int value) { nscript(address(), value); return this; }
-    /** Sets the specified value to the {@link #language} field. */
+    /** Sets the specified value to the {@code language} field. */
     public hb_segment_properties_t language(@NativeType("hb_language_t") long value) { nlanguage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,21 +296,21 @@ public class hb_segment_properties_t extends Struct<hb_segment_properties_t> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_segment_properties_t#direction} field. */
+        /** @return the value of the {@code direction} field. */
         @NativeType("hb_direction_t")
         public int direction() { return hb_segment_properties_t.ndirection(address()); }
-        /** @return the value of the {@link hb_segment_properties_t#script} field. */
+        /** @return the value of the {@code script} field. */
         @NativeType("hb_script_t")
         public int script() { return hb_segment_properties_t.nscript(address()); }
-        /** @return the value of the {@link hb_segment_properties_t#language} field. */
+        /** @return the value of the {@code language} field. */
         @NativeType("hb_language_t")
         public long language() { return hb_segment_properties_t.nlanguage(address()); }
 
-        /** Sets the specified value to the {@link hb_segment_properties_t#direction} field. */
+        /** Sets the specified value to the {@code direction} field. */
         public hb_segment_properties_t.Buffer direction(@NativeType("hb_direction_t") int value) { hb_segment_properties_t.ndirection(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_segment_properties_t#script} field. */
+        /** Sets the specified value to the {@code script} field. */
         public hb_segment_properties_t.Buffer script(@NativeType("hb_script_t") int value) { hb_segment_properties_t.nscript(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_segment_properties_t#language} field. */
+        /** Sets the specified value to the {@code language} field. */
         public hb_segment_properties_t.Buffer language(@NativeType("hb_language_t") long value) { hb_segment_properties_t.nlanguage(address(), value); return this; }
 
     }

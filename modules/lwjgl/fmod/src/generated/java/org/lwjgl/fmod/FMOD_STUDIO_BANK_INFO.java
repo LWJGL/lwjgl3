@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_BANK_INFO {
  *     int size;
  *     void * userdata;
@@ -28,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FMOD_FILE_CLOSE_CALLBACKI FMOD_FILE_CLOSE_CALLBACK} closecallback;
  *     {@link FMOD_FILE_READ_CALLBACKI FMOD_FILE_READ_CALLBACK} readcallback;
  *     {@link FMOD_FILE_SEEK_CALLBACKI FMOD_FILE_SEEK_CALLBACK} seekcallback;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_BANK_INFO extends Struct<FMOD_STUDIO_BANK_INFO> implements NativeResource {
 

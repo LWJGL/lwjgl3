@@ -14,39 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * The properties of a scene marker.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSceneMarkerMSFT} structure is an element in the array of {@link XrSceneMarkersMSFT}{@code ::sceneMarkers}.</p>
- * 
- * <p>Refer to the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#msft_scene_marker-qr-code-convention">QR code convention</a> for an example of marker’s center and size in the context of a QR code.</p>
- * 
- * <p>When the runtime updates the location or properties of an observed marker, the runtime <b>must</b> set the {@link XrSceneMarkerMSFT}{@code ::lastSeenTime} to the new timestamp of the update.</p>
- * 
- * <p>When the runtime cannot observe a previously observed {@link XrSceneMarkerMSFT}, the runtime <b>must</b> keep the previous {@code lastSeenTime} for the marker. Hence, the application <b>can</b> use the {@code lastSeenTime} to know how fresh the tracking information is for a given marker.</p>
- * 
- * <p>The {@code center} and {@code size} are measured in meters, relative to the {@link XrPosef} of the marker for the visual bound of the marker in XY plane, regardless of the marker type.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using {@link XrSceneMarkerMSFT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent2Df}, {@link XrOffset2Df}, {@link XrSceneMarkersMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneMarkerMSFT {
- *     XrSceneMarkerTypeMSFT {@link #markerType};
- *     XrTime {@link #lastSeenTime};
- *     {@link XrOffset2Df XrOffset2Df} {@link #center};
- *     {@link XrExtent2Df XrExtent2Df} {@link #size};
- * }</code></pre>
+ *     XrSceneMarkerTypeMSFT markerType;
+ *     XrTime lastSeenTime;
+ *     {@link XrOffset2Df XrOffset2Df} center;
+ *     {@link XrExtent2Df XrExtent2Df} size;
+ * }}</pre>
  */
 public class XrSceneMarkerMSFT extends Struct<XrSceneMarkerMSFT> {
 
@@ -102,15 +76,15 @@ public class XrSceneMarkerMSFT extends Struct<XrSceneMarkerMSFT> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@code XrSceneMarkerTypeMSFT} indicating the type of the marker. */
+    /** @return the value of the {@code markerType} field. */
     @NativeType("XrSceneMarkerTypeMSFT")
     public int markerType() { return nmarkerType(address()); }
-    /** an {@code XrTime} indicating when the marker was seen last. */
+    /** @return the value of the {@code lastSeenTime} field. */
     @NativeType("XrTime")
     public long lastSeenTime() { return nlastSeenTime(address()); }
-    /** an {@link XrOffset2Df} structure representing the location of the center of the axis-aligned bounding box of the marker in the XY plane of the marker’s coordinate system. */
+    /** @return a {@link XrOffset2Df} view of the {@code center} field. */
     public XrOffset2Df center() { return ncenter(address()); }
-    /** an {@link XrExtent2Df} structure representing the width and height of the axis-aligned bounding box of the marker in the XY plane of the marker’s coordinate system. */
+    /** @return a {@link XrExtent2Df} view of the {@code size} field. */
     public XrExtent2Df size() { return nsize(address()); }
 
     // -----------------------------------
@@ -194,15 +168,15 @@ public class XrSceneMarkerMSFT extends Struct<XrSceneMarkerMSFT> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneMarkerMSFT#markerType} field. */
+        /** @return the value of the {@code markerType} field. */
         @NativeType("XrSceneMarkerTypeMSFT")
         public int markerType() { return XrSceneMarkerMSFT.nmarkerType(address()); }
-        /** @return the value of the {@link XrSceneMarkerMSFT#lastSeenTime} field. */
+        /** @return the value of the {@code lastSeenTime} field. */
         @NativeType("XrTime")
         public long lastSeenTime() { return XrSceneMarkerMSFT.nlastSeenTime(address()); }
-        /** @return a {@link XrOffset2Df} view of the {@link XrSceneMarkerMSFT#center} field. */
+        /** @return a {@link XrOffset2Df} view of the {@code center} field. */
         public XrOffset2Df center() { return XrSceneMarkerMSFT.ncenter(address()); }
-        /** @return a {@link XrExtent2Df} view of the {@link XrSceneMarkerMSFT#size} field. */
+        /** @return a {@link XrExtent2Df} view of the {@code size} field. */
         public XrExtent2Df size() { return XrSceneMarkerMSFT.nsize(address()); }
 
     }

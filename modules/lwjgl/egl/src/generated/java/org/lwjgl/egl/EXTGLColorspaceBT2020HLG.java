@@ -5,10 +5,8 @@
  */
 package org.lwjgl.egl;
 
-/** See {@link EXTGLColorspaceBT2020Linear EXT_gl_colorspace_bt2020_linear}. */
 public final class EXTGLColorspaceBT2020HLG {
 
-    /** Accepted as attribute values for {@link EGL15#EGL_GL_COLORSPACE GL_COLORSPACE} by {@link EGL10#eglCreateWindowSurface CreateWindowSurface}, {@link EGL10#eglCreatePbufferSurface CreatePbufferSurface} and {@link EGL10#eglCreatePixmapSurface CreatePixmapSurface}. */
     public static final int EGL_GL_COLORSPACE_BT2020_HLG_EXT = 0x3540;
 
     private EXTGLColorspaceBT2020HLG() {}

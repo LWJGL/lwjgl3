@@ -14,29 +14,10 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/NV/NV_viewport_array.txt">NV_viewport_array</a> extension.
- * 
- * <p>OpenGL ES is modeled on a pipeline of operations. The final stage in this pipeline before rasterization is the viewport transformation. This stage
- * transforms vertices from view space into window coordinates and allows the application to specify a rectangular region of screen space into which
- * OpenGL should draw primitives. Unextended OpenGL implementations provide a single viewport per context. In order to draw primitives into multiple
- * viewports, the OpenGL viewport may be changed between several draw calls. With the advent of Geometry Shaders, it has become possible for an
- * application to amplify geometry and produce multiple output primitives for each primitive input to the Geometry Shader. It is possible to direct these
- * primitives to render into a selected render target. However, all render targets share the same, global OpenGL viewport.</p>
- * 
- * <p>This extension enhances OpenGL by providing a mechanism to expose multiple viewports. Each viewport is specified as a rectangle. The destination
- * viewport may be selected per-primitive by the geometry shader. This allows the Geometry Shader to produce different versions of primitives destined for
- * separate viewport rectangles on the same surface. Additionally, when combined with multiple framebuffer attachments, it allows a different viewport
- * rectangle to be selected for each. This extension also exposes a separate scissor rectangle for each viewport. Finally, the viewport bounds are now
- * floating point quantities allowing fractional pixel offsets to be applied during the viewport transform.</p>
- * 
- * <p>Requires {@link GLES31 GLES 3.1} and {@link EXTGeometryShader EXT_geometry_shader}.</p>
- */
 public class NVViewportArray {
 
     static { GLES.initialize(); }
 
-    /** Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetInteger64v. */
     public static final int
         GL_MAX_VIEWPORTS_NV                   = 0x825B,
         GL_VIEWPORT_SUBPIXEL_BITS_NV          = 0x825C,
@@ -49,20 +30,25 @@ public class NVViewportArray {
 
     // --- [ glViewportArrayvNV ] ---
 
+    /** {@code void glViewportArrayvNV(GLuint first, GLsizei count, GLfloat const * v)} */
     public static native void nglViewportArrayvNV(int first, int count, long v);
 
+    /** {@code void glViewportArrayvNV(GLuint first, GLsizei count, GLfloat const * v)} */
     public static void glViewportArrayvNV(@NativeType("GLuint") int first, @NativeType("GLfloat const *") FloatBuffer v) {
         nglViewportArrayvNV(first, v.remaining() >> 2, memAddress(v));
     }
 
     // --- [ glViewportIndexedfNV ] ---
 
+    /** {@code void glViewportIndexedfNV(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h)} */
     public static native void glViewportIndexedfNV(@NativeType("GLuint") int index, @NativeType("GLfloat") float x, @NativeType("GLfloat") float y, @NativeType("GLfloat") float w, @NativeType("GLfloat") float h);
 
     // --- [ glViewportIndexedfvNV ] ---
 
+    /** {@code void glViewportIndexedfvNV(GLuint index, GLfloat const * v)} */
     public static native void nglViewportIndexedfvNV(int index, long v);
 
+    /** {@code void glViewportIndexedfvNV(GLuint index, GLfloat const * v)} */
     public static void glViewportIndexedfvNV(@NativeType("GLuint") int index, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -72,20 +58,25 @@ public class NVViewportArray {
 
     // --- [ glScissorArrayvNV ] ---
 
+    /** {@code void glScissorArrayvNV(GLuint first, GLsizei count, GLint const * v)} */
     public static native void nglScissorArrayvNV(int first, int count, long v);
 
+    /** {@code void glScissorArrayvNV(GLuint first, GLsizei count, GLint const * v)} */
     public static void glScissorArrayvNV(@NativeType("GLuint") int first, @NativeType("GLint const *") IntBuffer v) {
         nglScissorArrayvNV(first, v.remaining() >> 2, memAddress(v));
     }
 
     // --- [ glScissorIndexedNV ] ---
 
+    /** {@code void glScissorIndexedNV(GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height)} */
     public static native void glScissorIndexedNV(@NativeType("GLuint") int index, @NativeType("GLint") int left, @NativeType("GLint") int bottom, @NativeType("GLsizei") int width, @NativeType("GLsizei") int height);
 
     // --- [ glScissorIndexedvNV ] ---
 
+    /** {@code void glScissorIndexedvNV(GLuint index, GLint const * v)} */
     public static native void nglScissorIndexedvNV(int index, long v);
 
+    /** {@code void glScissorIndexedvNV(GLuint index, GLint const * v)} */
     public static void glScissorIndexedvNV(@NativeType("GLuint") int index, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -95,20 +86,25 @@ public class NVViewportArray {
 
     // --- [ glDepthRangeArrayfvNV ] ---
 
+    /** {@code void glDepthRangeArrayfvNV(GLuint first, GLsizei count, GLfloat const * v)} */
     public static native void nglDepthRangeArrayfvNV(int first, int count, long v);
 
+    /** {@code void glDepthRangeArrayfvNV(GLuint first, GLsizei count, GLfloat const * v)} */
     public static void glDepthRangeArrayfvNV(@NativeType("GLuint") int first, @NativeType("GLfloat const *") FloatBuffer v) {
         nglDepthRangeArrayfvNV(first, v.remaining() >> 1, memAddress(v));
     }
 
     // --- [ glDepthRangeIndexedfNV ] ---
 
+    /** {@code void glDepthRangeIndexedfNV(GLuint index, GLfloat n, GLfloat f)} */
     public static native void glDepthRangeIndexedfNV(@NativeType("GLuint") int index, @NativeType("GLfloat") float n, @NativeType("GLfloat") float f);
 
     // --- [ glGetFloati_vNV ] ---
 
+    /** {@code void glGetFloati_vNV(GLenum target, GLuint index, GLfloat * data)} */
     public static native void nglGetFloati_vNV(int target, int index, long data);
 
+    /** {@code void glGetFloati_vNV(GLenum target, GLuint index, GLfloat * data)} */
     public static void glGetFloati_vNV(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat *") FloatBuffer data) {
         if (CHECKS) {
             check(data, 1);
@@ -116,6 +112,7 @@ public class NVViewportArray {
         nglGetFloati_vNV(target, index, memAddress(data));
     }
 
+    /** {@code void glGetFloati_vNV(GLenum target, GLuint index, GLfloat * data)} */
     @NativeType("void")
     public static float glGetFloatiNV(@NativeType("GLenum") int target, @NativeType("GLuint") int index) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -130,18 +127,21 @@ public class NVViewportArray {
 
     // --- [ glEnableiNV ] ---
 
+    /** {@code void glEnableiNV(GLenum target, GLuint index)} */
     public static native void glEnableiNV(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
 
     // --- [ glDisableiNV ] ---
 
+    /** {@code void glDisableiNV(GLenum target, GLuint index)} */
     public static native void glDisableiNV(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
 
     // --- [ glIsEnablediNV ] ---
 
+    /** {@code GLboolean glIsEnablediNV(GLenum target, GLuint index)} */
     @NativeType("GLboolean")
     public static native boolean glIsEnablediNV(@NativeType("GLenum") int target, @NativeType("GLuint") int index);
 
-    /** Array version of: {@link #glViewportArrayvNV ViewportArrayvNV} */
+    /** {@code void glViewportArrayvNV(GLuint first, GLsizei count, GLfloat const * v)} */
     public static void glViewportArrayvNV(@NativeType("GLuint") int first, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GLES.getICD().glViewportArrayvNV;
         if (CHECKS) {
@@ -150,7 +150,7 @@ public class NVViewportArray {
         callPV(first, v.length >> 2, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glViewportIndexedfvNV ViewportIndexedfvNV} */
+    /** {@code void glViewportIndexedfvNV(GLuint index, GLfloat const * v)} */
     public static void glViewportIndexedfvNV(@NativeType("GLuint") int index, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GLES.getICD().glViewportIndexedfvNV;
         if (CHECKS) {
@@ -160,7 +160,7 @@ public class NVViewportArray {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glScissorArrayvNV ScissorArrayvNV} */
+    /** {@code void glScissorArrayvNV(GLuint first, GLsizei count, GLint const * v)} */
     public static void glScissorArrayvNV(@NativeType("GLuint") int first, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GLES.getICD().glScissorArrayvNV;
         if (CHECKS) {
@@ -169,7 +169,7 @@ public class NVViewportArray {
         callPV(first, v.length >> 2, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glScissorIndexedvNV ScissorIndexedvNV} */
+    /** {@code void glScissorIndexedvNV(GLuint index, GLint const * v)} */
     public static void glScissorIndexedvNV(@NativeType("GLuint") int index, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GLES.getICD().glScissorIndexedvNV;
         if (CHECKS) {
@@ -179,7 +179,7 @@ public class NVViewportArray {
         callPV(index, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glDepthRangeArrayfvNV DepthRangeArrayfvNV} */
+    /** {@code void glDepthRangeArrayfvNV(GLuint first, GLsizei count, GLfloat const * v)} */
     public static void glDepthRangeArrayfvNV(@NativeType("GLuint") int first, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GLES.getICD().glDepthRangeArrayfvNV;
         if (CHECKS) {
@@ -188,7 +188,7 @@ public class NVViewportArray {
         callPV(first, v.length >> 1, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glGetFloati_vNV GetFloati_vNV} */
+    /** {@code void glGetFloati_vNV(GLenum target, GLuint index, GLfloat * data)} */
     public static void glGetFloati_vNV(@NativeType("GLenum") int target, @NativeType("GLuint") int index, @NativeType("GLfloat *") float[] data) {
         long __functionAddress = GLES.getICD().glGetFloati_vNV;
         if (CHECKS) {

@@ -16,23 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify diagnostics config for a Vulkan device.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkDeviceDiagnosticsConfigFlagBitsNV} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceDiagnosticsConfigCreateInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceDiagnosticsConfigFlagsNV {@link #flags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceDiagnosticsConfigFlagsNV flags;
+ * }}</pre>
  */
 public class VkDeviceDiagnosticsConfigCreateInfoNV extends Struct<VkDeviceDiagnosticsConfigCreateInfoNV> implements NativeResource {
 
@@ -85,23 +74,23 @@ public class VkDeviceDiagnosticsConfigCreateInfoNV extends Struct<VkDeviceDiagno
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkDeviceDiagnosticsConfigFlagBitsNV} specifying additional parameters for configuring diagnostic tools. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkDeviceDiagnosticsConfigFlagsNV")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceDiagnosticsConfigCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV} value to the {@code sType} field. */
     public VkDeviceDiagnosticsConfigCreateInfoNV sType$Default() { return sType(NVDeviceDiagnosticsConfig.VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceDiagnosticsConfigCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkDeviceDiagnosticsConfigCreateInfoNV flags(@NativeType("VkDeviceDiagnosticsConfigFlagsNV") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,23 +286,23 @@ public class VkDeviceDiagnosticsConfigCreateInfoNV extends Struct<VkDeviceDiagno
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceDiagnosticsConfigCreateInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceDiagnosticsConfigCreateInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkDeviceDiagnosticsConfigCreateInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceDiagnosticsConfigCreateInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkDeviceDiagnosticsConfigCreateInfoNV#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkDeviceDiagnosticsConfigFlagsNV")
         public int flags() { return VkDeviceDiagnosticsConfigCreateInfoNV.nflags(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceDiagnosticsConfigCreateInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceDiagnosticsConfigCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceDiagnosticsConfigCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV} value to the {@link VkDeviceDiagnosticsConfigCreateInfoNV#sType} field. */
+        /** Sets the {@link NVDeviceDiagnosticsConfig#VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV} value to the {@code sType} field. */
         public VkDeviceDiagnosticsConfigCreateInfoNV.Buffer sType$Default() { return sType(NVDeviceDiagnosticsConfig.VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV); }
-        /** Sets the specified value to the {@link VkDeviceDiagnosticsConfigCreateInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceDiagnosticsConfigCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkDeviceDiagnosticsConfigCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceDiagnosticsConfigCreateInfoNV#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkDeviceDiagnosticsConfigCreateInfoNV.Buffer flags(@NativeType("VkDeviceDiagnosticsConfigFlagsNV") int value) { VkDeviceDiagnosticsConfigCreateInfoNV.nflags(address(), value); return this; }
 
     }

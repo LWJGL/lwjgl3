@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoDecodeH264ReferenceInfoFlags {
- *     uint32_t {@link #top_field_flag} : 1;
- *     uint32_t {@link #bottom_field_flag} : 1;
- *     uint32_t {@link #used_for_long_term_reference} : 1;
- *     uint32_t {@link #is_non_existing} : 1;
- * }</code></pre>
+ *     uint32_t top_field_flag : 1;
+ *     uint32_t bottom_field_flag : 1;
+ *     uint32_t used_for_long_term_reference : 1;
+ *     uint32_t is_non_existing : 1;
+ * }}</pre>
  */
 public class StdVideoDecodeH264ReferenceInfoFlags extends Struct<StdVideoDecodeH264ReferenceInfoFlags> implements NativeResource {
 
@@ -71,26 +69,26 @@ public class StdVideoDecodeH264ReferenceInfoFlags extends Struct<StdVideoDecodeH
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** reference is used for top field reference */
+    /** @return the value of the {@code top_field_flag} field. */
     @NativeType("uint32_t")
     public boolean top_field_flag() { return ntop_field_flag(address()) != 0; }
-    /** reference is used for bottom field reference */
+    /** @return the value of the {@code bottom_field_flag} field. */
     @NativeType("uint32_t")
     public boolean bottom_field_flag() { return nbottom_field_flag(address()) != 0; }
-    /** this is a long term reference */
+    /** @return the value of the {@code used_for_long_term_reference} field. */
     @NativeType("uint32_t")
     public boolean used_for_long_term_reference() { return nused_for_long_term_reference(address()) != 0; }
-    /** must be handled in accordance with 8.2.5.2: Decoding process for gaps in frame_num */
+    /** @return the value of the {@code is_non_existing} field. */
     @NativeType("uint32_t")
     public boolean is_non_existing() { return nis_non_existing(address()) != 0; }
 
-    /** Sets the specified value to the {@link #top_field_flag} field. */
+    /** Sets the specified value to the {@code top_field_flag} field. */
     public StdVideoDecodeH264ReferenceInfoFlags top_field_flag(@NativeType("uint32_t") boolean value) { ntop_field_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #bottom_field_flag} field. */
+    /** Sets the specified value to the {@code bottom_field_flag} field. */
     public StdVideoDecodeH264ReferenceInfoFlags bottom_field_flag(@NativeType("uint32_t") boolean value) { nbottom_field_flag(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #used_for_long_term_reference} field. */
+    /** Sets the specified value to the {@code used_for_long_term_reference} field. */
     public StdVideoDecodeH264ReferenceInfoFlags used_for_long_term_reference(@NativeType("uint32_t") boolean value) { nused_for_long_term_reference(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #is_non_existing} field. */
+    /** Sets the specified value to the {@code is_non_existing} field. */
     public StdVideoDecodeH264ReferenceInfoFlags is_non_existing(@NativeType("uint32_t") boolean value) { nis_non_existing(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,26 +292,26 @@ public class StdVideoDecodeH264ReferenceInfoFlags extends Struct<StdVideoDecodeH
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link StdVideoDecodeH264ReferenceInfoFlags#top_field_flag} field. */
+        /** @return the value of the {@code top_field_flag} field. */
         @NativeType("uint32_t")
         public boolean top_field_flag() { return StdVideoDecodeH264ReferenceInfoFlags.ntop_field_flag(address()) != 0; }
-        /** @return the value of the {@link StdVideoDecodeH264ReferenceInfoFlags#bottom_field_flag} field. */
+        /** @return the value of the {@code bottom_field_flag} field. */
         @NativeType("uint32_t")
         public boolean bottom_field_flag() { return StdVideoDecodeH264ReferenceInfoFlags.nbottom_field_flag(address()) != 0; }
-        /** @return the value of the {@link StdVideoDecodeH264ReferenceInfoFlags#used_for_long_term_reference} field. */
+        /** @return the value of the {@code used_for_long_term_reference} field. */
         @NativeType("uint32_t")
         public boolean used_for_long_term_reference() { return StdVideoDecodeH264ReferenceInfoFlags.nused_for_long_term_reference(address()) != 0; }
-        /** @return the value of the {@link StdVideoDecodeH264ReferenceInfoFlags#is_non_existing} field. */
+        /** @return the value of the {@code is_non_existing} field. */
         @NativeType("uint32_t")
         public boolean is_non_existing() { return StdVideoDecodeH264ReferenceInfoFlags.nis_non_existing(address()) != 0; }
 
-        /** Sets the specified value to the {@link StdVideoDecodeH264ReferenceInfoFlags#top_field_flag} field. */
+        /** Sets the specified value to the {@code top_field_flag} field. */
         public StdVideoDecodeH264ReferenceInfoFlags.Buffer top_field_flag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264ReferenceInfoFlags.ntop_field_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264ReferenceInfoFlags#bottom_field_flag} field. */
+        /** Sets the specified value to the {@code bottom_field_flag} field. */
         public StdVideoDecodeH264ReferenceInfoFlags.Buffer bottom_field_flag(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264ReferenceInfoFlags.nbottom_field_flag(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264ReferenceInfoFlags#used_for_long_term_reference} field. */
+        /** Sets the specified value to the {@code used_for_long_term_reference} field. */
         public StdVideoDecodeH264ReferenceInfoFlags.Buffer used_for_long_term_reference(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264ReferenceInfoFlags.nused_for_long_term_reference(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264ReferenceInfoFlags#is_non_existing} field. */
+        /** Sets the specified value to the {@code is_non_existing} field. */
         public StdVideoDecodeH264ReferenceInfoFlags.Buffer is_non_existing(@NativeType("uint32_t") boolean value) { StdVideoDecodeH264ReferenceInfoFlags.nis_non_existing(address(), value ? 1 : 0); return this; }
 
     }

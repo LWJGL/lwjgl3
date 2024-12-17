@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_bool_t (*{@link #invoke}) (
- *     hb_buffer_t *buffer,
- *     hb_font_t *font,
- *     char const *message,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_buffer_message_func_t} */
 @FunctionalInterface
 @NativeType("hb_buffer_message_func_t")
 public interface hb_buffer_message_func_tI extends CallbackI {
@@ -47,17 +37,7 @@ public interface hb_buffer_message_func_tI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A callback method for {@code hb_buffer_t}. The method gets called with the {@code hb_buffer_t} it was set on, the {@code hb_font_t} the buffer is
-     * shaped with and a message describing what step of the shaping process will be performed. Returning {@code false} from this method will skip this
-     * shaping step and move to the next one.
-     * 
-     * <p>Return value: {@code true} to perform the shaping step, {@code false} to skip it.</p>
-     *
-     * @param buffer  an {@code hb_buffer_t} to work upon
-     * @param font    the {@code hb_font_t} the {@code buffer} is shaped with
-     * @param message {@code NULL}-terminated message passed to the function
-     */
+    /** {@code hb_bool_t (* hb_buffer_message_func_t) (hb_buffer_t * buffer, hb_font_t * font, char const * message, void * user_data)} */
     @NativeType("hb_bool_t") int invoke(@NativeType("hb_buffer_t *") long buffer, @NativeType("hb_font_t *") long font, @NativeType("char const *") long message, @NativeType("void *") long user_data);
 
 }

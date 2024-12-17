@@ -68,39 +68,12 @@ public class LLVMTargetMachine {
 
     }
 
-    /**
-     * {@code LLVMCodeGenOptLevel}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMCodeGenLevelNone CodeGenLevelNone}</li>
-     * <li>{@link #LLVMCodeGenLevelLess CodeGenLevelLess}</li>
-     * <li>{@link #LLVMCodeGenLevelDefault CodeGenLevelDefault}</li>
-     * <li>{@link #LLVMCodeGenLevelAggressive CodeGenLevelAggressive}</li>
-     * </ul>
-     */
     public static final int
         LLVMCodeGenLevelNone       = 0,
         LLVMCodeGenLevelLess       = 1,
         LLVMCodeGenLevelDefault    = 2,
         LLVMCodeGenLevelAggressive = 3;
 
-    /**
-     * {@code LLVMRelocMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMRelocDefault RelocDefault}</li>
-     * <li>{@link #LLVMRelocStatic RelocStatic}</li>
-     * <li>{@link #LLVMRelocPIC RelocPIC}</li>
-     * <li>{@link #LLVMRelocDynamicNoPic RelocDynamicNoPic}</li>
-     * <li>{@link #LLVMRelocROPI RelocROPI}</li>
-     * <li>{@link #LLVMRelocRWPI RelocRWPI}</li>
-     * <li>{@link #LLVMRelocROPI_RWPI RelocROPI_RWPI}</li>
-     * </ul>
-     */
     public static final int
         LLVMRelocDefault      = 0,
         LLVMRelocStatic       = 1,
@@ -110,21 +83,6 @@ public class LLVMTargetMachine {
         LLVMRelocRWPI         = 5,
         LLVMRelocROPI_RWPI    = 6;
 
-    /**
-     * {@code LLVMCodeModel}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMCodeModelDefault CodeModelDefault}</li>
-     * <li>{@link #LLVMCodeModelJITDefault CodeModelJITDefault}</li>
-     * <li>{@link #LLVMCodeModelTiny CodeModelTiny}</li>
-     * <li>{@link #LLVMCodeModelSmall CodeModelSmall}</li>
-     * <li>{@link #LLVMCodeModelKernel CodeModelKernel}</li>
-     * <li>{@link #LLVMCodeModelMedium CodeModelMedium}</li>
-     * <li>{@link #LLVMCodeModelLarge CodeModelLarge}</li>
-     * </ul>
-     */
     public static final int
         LLVMCodeModelDefault    = 0,
         LLVMCodeModelJITDefault = 1,
@@ -134,31 +92,10 @@ public class LLVMTargetMachine {
         LLVMCodeModelMedium     = 5,
         LLVMCodeModelLarge      = 6;
 
-    /**
-     * {@code LLVMCodeGenFileType}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMAssemblyFile AssemblyFile}</li>
-     * <li>{@link #LLVMObjectFile ObjectFile}</li>
-     * </ul>
-     */
     public static final int
         LLVMAssemblyFile = 0,
         LLVMObjectFile   = 1;
 
-    /**
-     * {@code LLVMGlobalISelAbortMode}
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMGlobalISelAbortEnable GlobalISelAbortEnable}</li>
-     * <li>{@link #LLVMGlobalISelAbortDisable GlobalISelAbortDisable}</li>
-     * <li>{@link #LLVMGlobalISelAbortDisableWithDiag GlobalISelAbortDisableWithDiag}</li>
-     * </ul>
-     */
     public static final int
         LLVMGlobalISelAbortEnable          = 0,
         LLVMGlobalISelAbortDisable         = 1,
@@ -170,7 +107,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetFirstTarget ] ---
 
-    /** Returns the first {@code llvm::Target} in the registered targets list. */
+    /** {@code LLVMTargetRef LLVMGetFirstTarget(void)} */
     @NativeType("LLVMTargetRef")
     public static long LLVMGetFirstTarget() {
         long __functionAddress = Functions.GetFirstTarget;
@@ -179,7 +116,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetNextTarget ] ---
 
-    /** Returns the next {@code llvm::Target} given a previous one (or null if there's none) */
+    /** {@code LLVMTargetRef LLVMGetNextTarget(LLVMTargetRef T)} */
     @NativeType("LLVMTargetRef")
     public static long LLVMGetNextTarget(@NativeType("LLVMTargetRef") long T) {
         long __functionAddress = Functions.GetNextTarget;
@@ -191,13 +128,13 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetTargetFromName ] ---
 
-    /** Unsafe version of: {@link #LLVMGetTargetFromName GetTargetFromName} */
+    /** {@code LLVMTargetRef LLVMGetTargetFromName(char const * Name)} */
     public static long nLLVMGetTargetFromName(long Name) {
         long __functionAddress = Functions.GetTargetFromName;
         return invokePP(Name, __functionAddress);
     }
 
-    /** Finds the target corresponding to the given name and stores it in {@code T}. Returns 0 on success. */
+    /** {@code LLVMTargetRef LLVMGetTargetFromName(char const * Name)} */
     @NativeType("LLVMTargetRef")
     public static long LLVMGetTargetFromName(@NativeType("char const *") ByteBuffer Name) {
         if (CHECKS) {
@@ -206,7 +143,7 @@ public class LLVMTargetMachine {
         return nLLVMGetTargetFromName(memAddress(Name));
     }
 
-    /** Finds the target corresponding to the given name and stores it in {@code T}. Returns 0 on success. */
+    /** {@code LLVMTargetRef LLVMGetTargetFromName(char const * Name)} */
     @NativeType("LLVMTargetRef")
     public static long LLVMGetTargetFromName(@NativeType("char const *") CharSequence Name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -221,16 +158,13 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetTargetFromTriple ] ---
 
-    /** Unsafe version of: {@link #LLVMGetTargetFromTriple GetTargetFromTriple} */
+    /** {@code LLVMBool LLVMGetTargetFromTriple(char const * Triple, LLVMTargetRef * T, char ** ErrorMessage)} */
     public static int nLLVMGetTargetFromTriple(long Triple, long T, long ErrorMessage) {
         long __functionAddress = Functions.GetTargetFromTriple;
         return invokePPPI(Triple, T, ErrorMessage, __functionAddress);
     }
 
-    /**
-     * Finds the target corresponding to the given triple and stores it in {@code T}. Returns 0 on success. Optionally returns any error in
-     * {@code ErrorMessage}. Use {@link LLVMCore#LLVMDisposeMessage DisposeMessage} to dispose the message.
-     */
+    /** {@code LLVMBool LLVMGetTargetFromTriple(char const * Triple, LLVMTargetRef * T, char ** ErrorMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMGetTargetFromTriple(@NativeType("char const *") ByteBuffer Triple, @NativeType("LLVMTargetRef *") PointerBuffer T, @NativeType("char **") PointerBuffer ErrorMessage) {
         if (CHECKS) {
@@ -241,10 +175,7 @@ public class LLVMTargetMachine {
         return nLLVMGetTargetFromTriple(memAddress(Triple), memAddress(T), memAddress(ErrorMessage)) != 0;
     }
 
-    /**
-     * Finds the target corresponding to the given triple and stores it in {@code T}. Returns 0 on success. Optionally returns any error in
-     * {@code ErrorMessage}. Use {@link LLVMCore#LLVMDisposeMessage DisposeMessage} to dispose the message.
-     */
+    /** {@code LLVMBool LLVMGetTargetFromTriple(char const * Triple, LLVMTargetRef * T, char ** ErrorMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMGetTargetFromTriple(@NativeType("char const *") CharSequence Triple, @NativeType("LLVMTargetRef *") PointerBuffer T, @NativeType("char **") PointerBuffer ErrorMessage) {
         if (CHECKS) {
@@ -263,7 +194,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetTargetName ] ---
 
-    /** Unsafe version of: {@link #LLVMGetTargetName GetTargetName} */
+    /** {@code char const * LLVMGetTargetName(LLVMTargetRef T)} */
     public static long nLLVMGetTargetName(long T) {
         long __functionAddress = Functions.GetTargetName;
         if (CHECKS) {
@@ -272,7 +203,7 @@ public class LLVMTargetMachine {
         return invokePP(T, __functionAddress);
     }
 
-    /** Returns the name of a target. See {@code llvm::Target::getName} */
+    /** {@code char const * LLVMGetTargetName(LLVMTargetRef T)} */
     @NativeType("char const *")
     public static @Nullable String LLVMGetTargetName(@NativeType("LLVMTargetRef") long T) {
         long __result = nLLVMGetTargetName(T);
@@ -281,7 +212,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetTargetDescription ] ---
 
-    /** Unsafe version of: {@link #LLVMGetTargetDescription GetTargetDescription} */
+    /** {@code char const * LLVMGetTargetDescription(LLVMTargetRef T)} */
     public static long nLLVMGetTargetDescription(long T) {
         long __functionAddress = Functions.GetTargetDescription;
         if (CHECKS) {
@@ -290,7 +221,7 @@ public class LLVMTargetMachine {
         return invokePP(T, __functionAddress);
     }
 
-    /** Returns the description  of a target. See {@code llvm::Target::getDescription} */
+    /** {@code char const * LLVMGetTargetDescription(LLVMTargetRef T)} */
     @NativeType("char const *")
     public static @Nullable String LLVMGetTargetDescription(@NativeType("LLVMTargetRef") long T) {
         long __result = nLLVMGetTargetDescription(T);
@@ -299,7 +230,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetHasJIT ] ---
 
-    /** Returns if the target has a JIT */
+    /** {@code LLVMBool LLVMTargetHasJIT(LLVMTargetRef T)} */
     @NativeType("LLVMBool")
     public static boolean LLVMTargetHasJIT(@NativeType("LLVMTargetRef") long T) {
         long __functionAddress = Functions.TargetHasJIT;
@@ -311,7 +242,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetHasTargetMachine ] ---
 
-    /** Returns if the target has a {@code TargetMachine} associated */
+    /** {@code LLVMBool LLVMTargetHasTargetMachine(LLVMTargetRef T)} */
     @NativeType("LLVMBool")
     public static boolean LLVMTargetHasTargetMachine(@NativeType("LLVMTargetRef") long T) {
         long __functionAddress = Functions.TargetHasTargetMachine;
@@ -323,7 +254,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetHasAsmBackend ] ---
 
-    /** Returns if the target as an ASM backend (required for emitting output) */
+    /** {@code LLVMBool LLVMTargetHasAsmBackend(LLVMTargetRef T)} */
     @NativeType("LLVMBool")
     public static boolean LLVMTargetHasAsmBackend(@NativeType("LLVMTargetRef") long T) {
         long __functionAddress = Functions.TargetHasAsmBackend;
@@ -335,13 +266,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMCreateTargetMachineOptions ] ---
 
-    /**
-     * Create a new set of options for an {@code llvm::TargetMachine}.
-     * 
-     * <p>The returned option structure must be released with {@link #LLVMDisposeTargetMachineOptions DisposeTargetMachineOptions} after the call to {@code LLVMCreateTargetMachineWithOptions()}.</p>
-     *
-     * @since 18
-     */
+    /** {@code LLVMTargetMachineOptionsRef LLVMCreateTargetMachineOptions(void)} */
     @NativeType("LLVMTargetMachineOptionsRef")
     public static long LLVMCreateTargetMachineOptions() {
         long __functionAddress = Functions.CreateTargetMachineOptions;
@@ -353,11 +278,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMDisposeTargetMachineOptions ] ---
 
-    /**
-     * Dispose of an {@code LLVMTargetMachineOptionsRef} instance.
-     *
-     * @since 18
-     */
+    /** {@code void LLVMDisposeTargetMachineOptions(LLVMTargetMachineOptionsRef Options)} */
     public static void LLVMDisposeTargetMachineOptions(@NativeType("LLVMTargetMachineOptionsRef") long Options) {
         long __functionAddress = Functions.DisposeTargetMachineOptions;
         if (CHECKS) {
@@ -369,7 +290,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetMachineOptionsSetCPU ] ---
 
-    /** Unsafe version of: {@link #LLVMTargetMachineOptionsSetCPU TargetMachineOptionsSetCPU} */
+    /** {@code void LLVMTargetMachineOptionsSetCPU(LLVMTargetMachineOptionsRef Options, char const * CPU)} */
     public static void nLLVMTargetMachineOptionsSetCPU(long Options, long CPU) {
         long __functionAddress = Functions.TargetMachineOptionsSetCPU;
         if (CHECKS) {
@@ -379,7 +300,7 @@ public class LLVMTargetMachine {
         invokePPV(Options, CPU, __functionAddress);
     }
 
-    /** @since 18 */
+    /** {@code void LLVMTargetMachineOptionsSetCPU(LLVMTargetMachineOptionsRef Options, char const * CPU)} */
     public static void LLVMTargetMachineOptionsSetCPU(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") ByteBuffer CPU) {
         if (CHECKS) {
             checkNT1(CPU);
@@ -387,7 +308,7 @@ public class LLVMTargetMachine {
         nLLVMTargetMachineOptionsSetCPU(Options, memAddress(CPU));
     }
 
-    /** @since 18 */
+    /** {@code void LLVMTargetMachineOptionsSetCPU(LLVMTargetMachineOptionsRef Options, char const * CPU)} */
     public static void LLVMTargetMachineOptionsSetCPU(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") CharSequence CPU) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -401,7 +322,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetMachineOptionsSetFeatures ] ---
 
-    /** Unsafe version of: {@link #LLVMTargetMachineOptionsSetFeatures TargetMachineOptionsSetFeatures} */
+    /** {@code void LLVMTargetMachineOptionsSetFeatures(LLVMTargetMachineOptionsRef Options, char const * Features)} */
     public static void nLLVMTargetMachineOptionsSetFeatures(long Options, long Features) {
         long __functionAddress = Functions.TargetMachineOptionsSetFeatures;
         if (CHECKS) {
@@ -411,13 +332,7 @@ public class LLVMTargetMachine {
         invokePPV(Options, Features, __functionAddress);
     }
 
-    /**
-     * Set the list of features for the target machine.
-     *
-     * @param Features a comma-separated list of features
-     *
-     * @since 18
-     */
+    /** {@code void LLVMTargetMachineOptionsSetFeatures(LLVMTargetMachineOptionsRef Options, char const * Features)} */
     public static void LLVMTargetMachineOptionsSetFeatures(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") ByteBuffer Features) {
         if (CHECKS) {
             checkNT1(Features);
@@ -425,13 +340,7 @@ public class LLVMTargetMachine {
         nLLVMTargetMachineOptionsSetFeatures(Options, memAddress(Features));
     }
 
-    /**
-     * Set the list of features for the target machine.
-     *
-     * @param Features a comma-separated list of features
-     *
-     * @since 18
-     */
+    /** {@code void LLVMTargetMachineOptionsSetFeatures(LLVMTargetMachineOptionsRef Options, char const * Features)} */
     public static void LLVMTargetMachineOptionsSetFeatures(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") CharSequence Features) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -445,7 +354,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetMachineOptionsSetABI ] ---
 
-    /** Unsafe version of: {@link #LLVMTargetMachineOptionsSetABI TargetMachineOptionsSetABI} */
+    /** {@code void LLVMTargetMachineOptionsSetABI(LLVMTargetMachineOptionsRef Options, char const * ABI)} */
     public static void nLLVMTargetMachineOptionsSetABI(long Options, long ABI) {
         long __functionAddress = Functions.TargetMachineOptionsSetABI;
         if (CHECKS) {
@@ -455,7 +364,7 @@ public class LLVMTargetMachine {
         invokePPV(Options, ABI, __functionAddress);
     }
 
-    /** @since 18 */
+    /** {@code void LLVMTargetMachineOptionsSetABI(LLVMTargetMachineOptionsRef Options, char const * ABI)} */
     public static void LLVMTargetMachineOptionsSetABI(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") ByteBuffer ABI) {
         if (CHECKS) {
             checkNT1(ABI);
@@ -463,7 +372,7 @@ public class LLVMTargetMachine {
         nLLVMTargetMachineOptionsSetABI(Options, memAddress(ABI));
     }
 
-    /** @since 18 */
+    /** {@code void LLVMTargetMachineOptionsSetABI(LLVMTargetMachineOptionsRef Options, char const * ABI)} */
     public static void LLVMTargetMachineOptionsSetABI(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("char const *") CharSequence ABI) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
@@ -477,7 +386,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetMachineOptionsSetCodeGenOptLevel ] ---
 
-    /** @since 18 */
+    /** {@code void LLVMTargetMachineOptionsSetCodeGenOptLevel(LLVMTargetMachineOptionsRef Options, LLVMCodeGenOptLevel Level)} */
     public static void LLVMTargetMachineOptionsSetCodeGenOptLevel(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("LLVMCodeGenOptLevel") int Level) {
         long __functionAddress = Functions.TargetMachineOptionsSetCodeGenOptLevel;
         if (CHECKS) {
@@ -489,7 +398,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetMachineOptionsSetRelocMode ] ---
 
-    /** @since 18 */
+    /** {@code void LLVMTargetMachineOptionsSetRelocMode(LLVMTargetMachineOptionsRef Options, LLVMRelocMode Reloc)} */
     public static void LLVMTargetMachineOptionsSetRelocMode(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("LLVMRelocMode") int Reloc) {
         long __functionAddress = Functions.TargetMachineOptionsSetRelocMode;
         if (CHECKS) {
@@ -501,7 +410,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetMachineOptionsSetCodeModel ] ---
 
-    /** @since 18 */
+    /** {@code void LLVMTargetMachineOptionsSetCodeModel(LLVMTargetMachineOptionsRef Options, LLVMCodeModel CodeModel)} */
     public static void LLVMTargetMachineOptionsSetCodeModel(@NativeType("LLVMTargetMachineOptionsRef") long Options, @NativeType("LLVMCodeModel") int CodeModel) {
         long __functionAddress = Functions.TargetMachineOptionsSetCodeModel;
         if (CHECKS) {
@@ -513,7 +422,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMCreateTargetMachineWithOptions ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateTargetMachineWithOptions CreateTargetMachineWithOptions} */
+    /** {@code LLVMTargetMachineRef LLVMCreateTargetMachineWithOptions(LLVMTargetRef T, char const * Triple, LLVMTargetMachineOptionsRef Options)} */
     public static long nLLVMCreateTargetMachineWithOptions(long T, long Triple, long Options) {
         long __functionAddress = Functions.CreateTargetMachineWithOptions;
         if (CHECKS) {
@@ -524,15 +433,7 @@ public class LLVMTargetMachine {
         return invokePPPP(T, Triple, Options, __functionAddress);
     }
 
-    /**
-     * Create a new {@code llvm::TargetMachine}.
-     *
-     * @param T       the target to create a machine for
-     * @param Triple  a triple describing the target machine
-     * @param Options additional configuration
-     *
-     * @since 18
-     */
+    /** {@code LLVMTargetMachineRef LLVMCreateTargetMachineWithOptions(LLVMTargetRef T, char const * Triple, LLVMTargetMachineOptionsRef Options)} */
     @NativeType("LLVMTargetMachineRef")
     public static long LLVMCreateTargetMachineWithOptions(@NativeType("LLVMTargetRef") long T, @NativeType("char const *") ByteBuffer Triple, @NativeType("LLVMTargetMachineOptionsRef") long Options) {
         if (CHECKS) {
@@ -541,15 +442,7 @@ public class LLVMTargetMachine {
         return nLLVMCreateTargetMachineWithOptions(T, memAddress(Triple), Options);
     }
 
-    /**
-     * Create a new {@code llvm::TargetMachine}.
-     *
-     * @param T       the target to create a machine for
-     * @param Triple  a triple describing the target machine
-     * @param Options additional configuration
-     *
-     * @since 18
-     */
+    /** {@code LLVMTargetMachineRef LLVMCreateTargetMachineWithOptions(LLVMTargetRef T, char const * Triple, LLVMTargetMachineOptionsRef Options)} */
     @NativeType("LLVMTargetMachineRef")
     public static long LLVMCreateTargetMachineWithOptions(@NativeType("LLVMTargetRef") long T, @NativeType("char const *") CharSequence Triple, @NativeType("LLVMTargetMachineOptionsRef") long Options) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -564,7 +457,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMCreateTargetMachine ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateTargetMachine CreateTargetMachine} */
+    /** {@code LLVMTargetMachineRef LLVMCreateTargetMachine(LLVMTargetRef T, char const * Triple, char const * CPU, char const * Features, LLVMCodeGenOptLevel Level, LLVMRelocMode Reloc, LLVMCodeModel CodeModel)} */
     public static long nLLVMCreateTargetMachine(long T, long Triple, long CPU, long Features, int Level, int Reloc, int CodeModel) {
         long __functionAddress = Functions.CreateTargetMachine;
         if (CHECKS) {
@@ -573,7 +466,7 @@ public class LLVMTargetMachine {
         return invokePPPPP(T, Triple, CPU, Features, Level, Reloc, CodeModel, __functionAddress);
     }
 
-    /** Creates a new {@code llvm::TargetMachine}. See {@code llvm::Target::createTargetMachine} */
+    /** {@code LLVMTargetMachineRef LLVMCreateTargetMachine(LLVMTargetRef T, char const * Triple, char const * CPU, char const * Features, LLVMCodeGenOptLevel Level, LLVMRelocMode Reloc, LLVMCodeModel CodeModel)} */
     @NativeType("LLVMTargetMachineRef")
     public static long LLVMCreateTargetMachine(@NativeType("LLVMTargetRef") long T, @NativeType("char const *") ByteBuffer Triple, @NativeType("char const *") ByteBuffer CPU, @NativeType("char const *") ByteBuffer Features, @NativeType("LLVMCodeGenOptLevel") int Level, @NativeType("LLVMRelocMode") int Reloc, @NativeType("LLVMCodeModel") int CodeModel) {
         if (CHECKS) {
@@ -584,7 +477,7 @@ public class LLVMTargetMachine {
         return nLLVMCreateTargetMachine(T, memAddress(Triple), memAddress(CPU), memAddress(Features), Level, Reloc, CodeModel);
     }
 
-    /** Creates a new {@code llvm::TargetMachine}. See {@code llvm::Target::createTargetMachine} */
+    /** {@code LLVMTargetMachineRef LLVMCreateTargetMachine(LLVMTargetRef T, char const * Triple, char const * CPU, char const * Features, LLVMCodeGenOptLevel Level, LLVMRelocMode Reloc, LLVMCodeModel CodeModel)} */
     @NativeType("LLVMTargetMachineRef")
     public static long LLVMCreateTargetMachine(@NativeType("LLVMTargetRef") long T, @NativeType("char const *") CharSequence Triple, @NativeType("char const *") CharSequence CPU, @NativeType("char const *") CharSequence Features, @NativeType("LLVMCodeGenOptLevel") int Level, @NativeType("LLVMRelocMode") int Reloc, @NativeType("LLVMCodeModel") int CodeModel) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -603,7 +496,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMDisposeTargetMachine ] ---
 
-    /** Dispose the {@code LLVMTargetMachineRef} instance generated by {@link #LLVMCreateTargetMachine CreateTargetMachine}. */
+    /** {@code void LLVMDisposeTargetMachine(LLVMTargetMachineRef T)} */
     public static void LLVMDisposeTargetMachine(@NativeType("LLVMTargetMachineRef") long T) {
         long __functionAddress = Functions.DisposeTargetMachine;
         if (CHECKS) {
@@ -614,7 +507,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetTargetMachineTarget ] ---
 
-    /** Returns the {@code Target} used in a {@code TargetMachine} */
+    /** {@code LLVMTargetRef LLVMGetTargetMachineTarget(LLVMTargetMachineRef T)} */
     @NativeType("LLVMTargetRef")
     public static long LLVMGetTargetMachineTarget(@NativeType("LLVMTargetMachineRef") long T) {
         long __functionAddress = Functions.GetTargetMachineTarget;
@@ -626,7 +519,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetTargetMachineTriple ] ---
 
-    /** Unsafe version of: {@link #LLVMGetTargetMachineTriple GetTargetMachineTriple} */
+    /** {@code char * LLVMGetTargetMachineTriple(LLVMTargetMachineRef T)} */
     public static long nLLVMGetTargetMachineTriple(long T) {
         long __functionAddress = Functions.GetTargetMachineTriple;
         if (CHECKS) {
@@ -635,10 +528,7 @@ public class LLVMTargetMachine {
         return invokePP(T, __functionAddress);
     }
 
-    /**
-     * Returns the triple used creating this target machine. See {@code llvm::TargetMachine::getTriple}. The result needs to be disposed with
-     * {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.
-     */
+    /** {@code char * LLVMGetTargetMachineTriple(LLVMTargetMachineRef T)} */
     @NativeType("char *")
     public static @Nullable String LLVMGetTargetMachineTriple(@NativeType("LLVMTargetMachineRef") long T) {
         long __result = nLLVMGetTargetMachineTriple(T);
@@ -647,7 +537,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetTargetMachineCPU ] ---
 
-    /** Unsafe version of: {@link #LLVMGetTargetMachineCPU GetTargetMachineCPU} */
+    /** {@code char * LLVMGetTargetMachineCPU(LLVMTargetMachineRef T)} */
     public static long nLLVMGetTargetMachineCPU(long T) {
         long __functionAddress = Functions.GetTargetMachineCPU;
         if (CHECKS) {
@@ -656,7 +546,7 @@ public class LLVMTargetMachine {
         return invokePP(T, __functionAddress);
     }
 
-    /** Returns the cpu used creating this target machine. See {@code llvm::TargetMachine::getCPU}. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
+    /** {@code char * LLVMGetTargetMachineCPU(LLVMTargetMachineRef T)} */
     @NativeType("char *")
     public static @Nullable String LLVMGetTargetMachineCPU(@NativeType("LLVMTargetMachineRef") long T) {
         long __result = nLLVMGetTargetMachineCPU(T);
@@ -665,7 +555,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetTargetMachineFeatureString ] ---
 
-    /** Unsafe version of: {@link #LLVMGetTargetMachineFeatureString GetTargetMachineFeatureString} */
+    /** {@code char * LLVMGetTargetMachineFeatureString(LLVMTargetMachineRef T)} */
     public static long nLLVMGetTargetMachineFeatureString(long T) {
         long __functionAddress = Functions.GetTargetMachineFeatureString;
         if (CHECKS) {
@@ -674,10 +564,7 @@ public class LLVMTargetMachine {
         return invokePP(T, __functionAddress);
     }
 
-    /**
-     * Returns the feature string used creating this target machine. See {@code llvm::TargetMachine::getFeatureString}. The result needs to be disposed with
-     * {@link LLVMCore#LLVMDisposeMessage DisposeMessage}.
-     */
+    /** {@code char * LLVMGetTargetMachineFeatureString(LLVMTargetMachineRef T)} */
     @NativeType("char *")
     public static @Nullable String LLVMGetTargetMachineFeatureString(@NativeType("LLVMTargetMachineRef") long T) {
         long __result = nLLVMGetTargetMachineFeatureString(T);
@@ -686,7 +573,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMCreateTargetDataLayout ] ---
 
-    /** Create a {@code DataLayout} based on the target machine. */
+    /** {@code LLVMTargetDataRef LLVMCreateTargetDataLayout(LLVMTargetMachineRef T)} */
     @NativeType("LLVMTargetDataRef")
     public static long LLVMCreateTargetDataLayout(@NativeType("LLVMTargetMachineRef") long T) {
         long __functionAddress = Functions.CreateTargetDataLayout;
@@ -698,7 +585,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMSetTargetMachineAsmVerbosity ] ---
 
-    /** Set the target machine's ASM verbosity. */
+    /** {@code void LLVMSetTargetMachineAsmVerbosity(LLVMTargetMachineRef T, LLVMBool VerboseAsm)} */
     public static void LLVMSetTargetMachineAsmVerbosity(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMBool") boolean VerboseAsm) {
         long __functionAddress = Functions.SetTargetMachineAsmVerbosity;
         if (CHECKS) {
@@ -709,11 +596,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMSetTargetMachineFastISel ] ---
 
-    /**
-     * Enable fast-path instruction selection.
-     *
-     * @since 18
-     */
+    /** {@code void LLVMSetTargetMachineFastISel(LLVMTargetMachineRef T, LLVMBool Enable)} */
     public static void LLVMSetTargetMachineFastISel(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMBool") boolean Enable) {
         long __functionAddress = Functions.SetTargetMachineFastISel;
         if (CHECKS) {
@@ -725,11 +608,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMSetTargetMachineGlobalISel ] ---
 
-    /**
-     * Enable global instruction selection.
-     *
-     * @since 18
-     */
+    /** {@code void LLVMSetTargetMachineGlobalISel(LLVMTargetMachineRef T, LLVMBool Enable)} */
     public static void LLVMSetTargetMachineGlobalISel(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMBool") boolean Enable) {
         long __functionAddress = Functions.SetTargetMachineGlobalISel;
         if (CHECKS) {
@@ -741,11 +620,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMSetTargetMachineGlobalISelAbort ] ---
 
-    /**
-     * Set abort behaviour when global instruction selection fails to lower/select an instruction.
-     *
-     * @since 18
-     */
+    /** {@code void LLVMSetTargetMachineGlobalISelAbort(LLVMTargetMachineRef T, LLVMGlobalISelAbortMode Mode)} */
     public static void LLVMSetTargetMachineGlobalISelAbort(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMGlobalISelAbortMode") int Mode) {
         long __functionAddress = Functions.SetTargetMachineGlobalISelAbort;
         if (CHECKS) {
@@ -757,11 +632,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMSetTargetMachineMachineOutliner ] ---
 
-    /**
-     * Enable the {@code MachineOutliner} pass.
-     *
-     * @since 18
-     */
+    /** {@code void LLVMSetTargetMachineMachineOutliner(LLVMTargetMachineRef T, LLVMBool Enable)} */
     public static void LLVMSetTargetMachineMachineOutliner(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMBool") boolean Enable) {
         long __functionAddress = Functions.SetTargetMachineMachineOutliner;
         if (CHECKS) {
@@ -773,7 +644,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetMachineEmitToFile ] ---
 
-    /** Unsafe version of: {@link #LLVMTargetMachineEmitToFile TargetMachineEmitToFile} */
+    /** {@code LLVMBool LLVMTargetMachineEmitToFile(LLVMTargetMachineRef T, LLVMModuleRef M, char const * Filename, LLVMCodeGenFileType codegen, char ** ErrorMessage)} */
     public static int nLLVMTargetMachineEmitToFile(long T, long M, long Filename, int codegen, long ErrorMessage) {
         long __functionAddress = Functions.TargetMachineEmitToFile;
         if (CHECKS) {
@@ -783,10 +654,7 @@ public class LLVMTargetMachine {
         return invokePPPPI(T, M, Filename, codegen, ErrorMessage, __functionAddress);
     }
 
-    /**
-     * Emits an asm or object file for the given module to the filename. This wraps several c++ only classes (among them a file stream). Returns any error in
-     * {@code ErrorMessage}. Use {@link LLVMCore#LLVMDisposeMessage DisposeMessage} to dispose the message.
-     */
+    /** {@code LLVMBool LLVMTargetMachineEmitToFile(LLVMTargetMachineRef T, LLVMModuleRef M, char const * Filename, LLVMCodeGenFileType codegen, char ** ErrorMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMTargetMachineEmitToFile(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMModuleRef") long M, @NativeType("char const *") ByteBuffer Filename, @NativeType("LLVMCodeGenFileType") int codegen, @NativeType("char **") PointerBuffer ErrorMessage) {
         if (CHECKS) {
@@ -796,10 +664,7 @@ public class LLVMTargetMachine {
         return nLLVMTargetMachineEmitToFile(T, M, memAddress(Filename), codegen, memAddress(ErrorMessage)) != 0;
     }
 
-    /**
-     * Emits an asm or object file for the given module to the filename. This wraps several c++ only classes (among them a file stream). Returns any error in
-     * {@code ErrorMessage}. Use {@link LLVMCore#LLVMDisposeMessage DisposeMessage} to dispose the message.
-     */
+    /** {@code LLVMBool LLVMTargetMachineEmitToFile(LLVMTargetMachineRef T, LLVMModuleRef M, char const * Filename, LLVMCodeGenFileType codegen, char ** ErrorMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMTargetMachineEmitToFile(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMModuleRef") long M, @NativeType("char const *") CharSequence Filename, @NativeType("LLVMCodeGenFileType") int codegen, @NativeType("char **") PointerBuffer ErrorMessage) {
         if (CHECKS) {
@@ -817,7 +682,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMTargetMachineEmitToMemoryBuffer ] ---
 
-    /** Unsafe version of: {@link #LLVMTargetMachineEmitToMemoryBuffer TargetMachineEmitToMemoryBuffer} */
+    /** {@code LLVMBool LLVMTargetMachineEmitToMemoryBuffer(LLVMTargetMachineRef T, LLVMModuleRef M, LLVMCodeGenFileType codegen, char ** ErrorMessage, LLVMMemoryBufferRef * OutMemBuf)} */
     public static int nLLVMTargetMachineEmitToMemoryBuffer(long T, long M, int codegen, long ErrorMessage, long OutMemBuf) {
         long __functionAddress = Functions.TargetMachineEmitToMemoryBuffer;
         if (CHECKS) {
@@ -827,7 +692,7 @@ public class LLVMTargetMachine {
         return invokePPPPI(T, M, codegen, ErrorMessage, OutMemBuf, __functionAddress);
     }
 
-    /** Compile the LLVM IR stored in {@code M} and store the result in {@code OutMemBuf}. */
+    /** {@code LLVMBool LLVMTargetMachineEmitToMemoryBuffer(LLVMTargetMachineRef T, LLVMModuleRef M, LLVMCodeGenFileType codegen, char ** ErrorMessage, LLVMMemoryBufferRef * OutMemBuf)} */
     @NativeType("LLVMBool")
     public static boolean LLVMTargetMachineEmitToMemoryBuffer(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMModuleRef") long M, @NativeType("LLVMCodeGenFileType") int codegen, @NativeType("char **") PointerBuffer ErrorMessage, @NativeType("LLVMMemoryBufferRef *") PointerBuffer OutMemBuf) {
         if (CHECKS) {
@@ -839,13 +704,13 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetDefaultTargetTriple ] ---
 
-    /** Unsafe version of: {@link #LLVMGetDefaultTargetTriple GetDefaultTargetTriple} */
+    /** {@code char * LLVMGetDefaultTargetTriple(void)} */
     public static long nLLVMGetDefaultTargetTriple() {
         long __functionAddress = Functions.GetDefaultTargetTriple;
         return invokeP(__functionAddress);
     }
 
-    /** Get a triple for the host machine as a string. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
+    /** {@code char * LLVMGetDefaultTargetTriple(void)} */
     @NativeType("char *")
     public static @Nullable String LLVMGetDefaultTargetTriple() {
         long __result = nLLVMGetDefaultTargetTriple();
@@ -854,7 +719,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMNormalizeTargetTriple ] ---
 
-    /** Unsafe version of: {@link #LLVMNormalizeTargetTriple NormalizeTargetTriple} */
+    /** {@code char * LLVMNormalizeTargetTriple(char const * triple)} */
     public static long nLLVMNormalizeTargetTriple(long triple) {
         long __functionAddress = Functions.NormalizeTargetTriple;
         if (CHECKS) {
@@ -863,7 +728,7 @@ public class LLVMTargetMachine {
         return invokePP(triple, __functionAddress);
     }
 
-    /** Normalize a target triple. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
+    /** {@code char * LLVMNormalizeTargetTriple(char const * triple)} */
     @NativeType("char *")
     public static @Nullable String LLVMNormalizeTargetTriple(@NativeType("char const *") ByteBuffer triple) {
         if (CHECKS) {
@@ -873,7 +738,7 @@ public class LLVMTargetMachine {
         return memUTF8Safe(__result);
     }
 
-    /** Normalize a target triple. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
+    /** {@code char * LLVMNormalizeTargetTriple(char const * triple)} */
     @NativeType("char *")
     public static @Nullable String LLVMNormalizeTargetTriple(@NativeType("char const *") CharSequence triple) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -889,7 +754,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetHostCPUName ] ---
 
-    /** Unsafe version of: {@link #LLVMGetHostCPUName GetHostCPUName} */
+    /** {@code char * LLVMGetHostCPUName(void)} */
     public static long nLLVMGetHostCPUName() {
         long __functionAddress = Functions.GetHostCPUName;
         if (CHECKS) {
@@ -898,7 +763,7 @@ public class LLVMTargetMachine {
         return invokeP(__functionAddress);
     }
 
-    /** Get the host CPU as a string. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
+    /** {@code char * LLVMGetHostCPUName(void)} */
     @NativeType("char *")
     public static @Nullable String LLVMGetHostCPUName() {
         long __result = nLLVMGetHostCPUName();
@@ -907,7 +772,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMGetHostCPUFeatures ] ---
 
-    /** Unsafe version of: {@link #LLVMGetHostCPUFeatures GetHostCPUFeatures} */
+    /** {@code char * LLVMGetHostCPUFeatures(void)} */
     public static long nLLVMGetHostCPUFeatures() {
         long __functionAddress = Functions.GetHostCPUFeatures;
         if (CHECKS) {
@@ -916,7 +781,7 @@ public class LLVMTargetMachine {
         return invokeP(__functionAddress);
     }
 
-    /** Get the host CPU's features as a string. The result needs to be disposed with {@link LLVMCore#LLVMDisposeMessage DisposeMessage}. */
+    /** {@code char * LLVMGetHostCPUFeatures(void)} */
     @NativeType("char *")
     public static @Nullable String LLVMGetHostCPUFeatures() {
         long __result = nLLVMGetHostCPUFeatures();
@@ -925,7 +790,7 @@ public class LLVMTargetMachine {
 
     // --- [ LLVMAddAnalysisPasses ] ---
 
-    /** Adds the target-specific analysis passes to the pass manager. */
+    /** {@code void LLVMAddAnalysisPasses(LLVMTargetMachineRef T, LLVMPassManagerRef PM)} */
     public static void LLVMAddAnalysisPasses(@NativeType("LLVMTargetMachineRef") long T, @NativeType("LLVMPassManagerRef") long PM) {
         long __functionAddress = Functions.AddAnalysisPasses;
         if (CHECKS) {

@@ -14,16 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct RenderModel_t {
- *     {@link RenderModelVertex RenderModel_Vertex_t} const * {@link #rVertexData};
- *     uint32_t {@link #unVertexCount};
- *     uint16_t const * {@link #IndexData};
- *     uint32_t {@link #unTriangleCount};
- *     TextureID_t {@link #diffuseTextureId};
- * }</code></pre>
+ *     {@link RenderModelVertex RenderModel_Vertex_t} const * rVertexData;
+ *     uint32_t unVertexCount;
+ *     uint16_t const * IndexData;
+ *     uint32_t unTriangleCount;
+ *     TextureID_t diffuseTextureId;
+ * }}</pre>
  */
 @NativeType("struct RenderModel_t")
 public class RenderModel extends Struct<RenderModel> {
@@ -84,19 +82,19 @@ public class RenderModel extends Struct<RenderModel> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Vertex data for the mesh */
+    /** @return a {@link RenderModelVertex.Buffer} view of the struct array pointed to by the {@code rVertexData} field. */
     @NativeType("RenderModel_Vertex_t const *")
     public RenderModelVertex.Buffer rVertexData() { return nrVertexData(address()); }
-    /** Number of vertices in the vertex data */
+    /** @return the value of the {@code unVertexCount} field. */
     @NativeType("uint32_t")
     public int unVertexCount() { return nunVertexCount(address()); }
-    /** Indices into the vertex data for each triangle */
+    /** @return a {@link ShortBuffer} view of the data pointed to by the {@code IndexData} field. */
     @NativeType("uint16_t const *")
     public ShortBuffer IndexData() { return nIndexData(address()); }
-    /** Number of triangles in the mesh. Index count is 3 * TriangleCount. */
+    /** @return the value of the {@code unTriangleCount} field. */
     @NativeType("uint32_t")
     public int unTriangleCount() { return nunTriangleCount(address()); }
-    /** Session unique texture identifier. Rendermodels which share the same texture will have the same id. 0 == texture not present. */
+    /** @return the value of the {@code diffuseTextureId} field. */
     @NativeType("TextureID_t")
     public int diffuseTextureId() { return ndiffuseTextureId(address()); }
 
@@ -183,19 +181,19 @@ public class RenderModel extends Struct<RenderModel> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link RenderModelVertex.Buffer} view of the struct array pointed to by the {@link RenderModel#rVertexData} field. */
+        /** @return a {@link RenderModelVertex.Buffer} view of the struct array pointed to by the {@code rVertexData} field. */
         @NativeType("RenderModel_Vertex_t const *")
         public RenderModelVertex.Buffer rVertexData() { return RenderModel.nrVertexData(address()); }
-        /** @return the value of the {@link RenderModel#unVertexCount} field. */
+        /** @return the value of the {@code unVertexCount} field. */
         @NativeType("uint32_t")
         public int unVertexCount() { return RenderModel.nunVertexCount(address()); }
-        /** @return a {@link ShortBuffer} view of the data pointed to by the {@link RenderModel#IndexData} field. */
+        /** @return a {@link ShortBuffer} view of the data pointed to by the {@code IndexData} field. */
         @NativeType("uint16_t const *")
         public ShortBuffer IndexData() { return RenderModel.nIndexData(address()); }
-        /** @return the value of the {@link RenderModel#unTriangleCount} field. */
+        /** @return the value of the {@code unTriangleCount} field. */
         @NativeType("uint32_t")
         public int unTriangleCount() { return RenderModel.nunTriangleCount(address()); }
-        /** @return the value of the {@link RenderModel#diffuseTextureId} field. */
+        /** @return the value of the {@code diffuseTextureId} field. */
         @NativeType("TextureID_t")
         public int diffuseTextureId() { return RenderModel.ndiffuseTextureId(address()); }
 

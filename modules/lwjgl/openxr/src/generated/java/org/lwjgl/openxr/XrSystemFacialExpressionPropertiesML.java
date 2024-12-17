@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * System property for facial expression parsing.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>can</b> inspect whether the system is capable of parsing facial blend shapes by extending the {@link XrSystemProperties} with {@link XrSystemFacialExpressionPropertiesML} structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
- * 
- * <p>If a runtime returns {@link XR10#XR_FALSE FALSE} for {@code supportsFacialExpression}, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link MLFacialExpression#xrCreateFacialExpressionClientML CreateFacialExpressionClientML}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLFacialExpression XR_ML_facial_expression} extension <b>must</b> be enabled prior to using {@link XrSystemFacialExpressionPropertiesML}</li>
- * <li>{@code type} <b>must</b> be {@link MLFacialExpression#XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSystemProperties}, {@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemFacialExpressionPropertiesML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsFacialExpression};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsFacialExpression;
+ * }}</pre>
  */
 public class XrSystemFacialExpressionPropertiesML extends Struct<XrSystemFacialExpressionPropertiesML> implements NativeResource {
 
@@ -96,21 +74,21 @@ public class XrSystemFacialExpressionPropertiesML extends Struct<XrSystemFacialE
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32}, indicating if current system is capable of parsing facial expressions enumerated in {@code XrFacialBlendShapeML} */
+    /** @return the value of the {@code supportsFacialExpression} field. */
     @NativeType("XrBool32")
     public boolean supportsFacialExpression() { return nsupportsFacialExpression(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemFacialExpressionPropertiesML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLFacialExpression#XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLFacialExpression#XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML} value to the {@code type} field. */
     public XrSystemFacialExpressionPropertiesML type$Default() { return type(MLFacialExpression.XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemFacialExpressionPropertiesML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,21 +280,21 @@ public class XrSystemFacialExpressionPropertiesML extends Struct<XrSystemFacialE
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemFacialExpressionPropertiesML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemFacialExpressionPropertiesML.ntype(address()); }
-        /** @return the value of the {@link XrSystemFacialExpressionPropertiesML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemFacialExpressionPropertiesML.nnext(address()); }
-        /** @return the value of the {@link XrSystemFacialExpressionPropertiesML#supportsFacialExpression} field. */
+        /** @return the value of the {@code supportsFacialExpression} field. */
         @NativeType("XrBool32")
         public boolean supportsFacialExpression() { return XrSystemFacialExpressionPropertiesML.nsupportsFacialExpression(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemFacialExpressionPropertiesML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemFacialExpressionPropertiesML.Buffer type(@NativeType("XrStructureType") int value) { XrSystemFacialExpressionPropertiesML.ntype(address(), value); return this; }
-        /** Sets the {@link MLFacialExpression#XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML} value to the {@link XrSystemFacialExpressionPropertiesML#type} field. */
+        /** Sets the {@link MLFacialExpression#XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML} value to the {@code type} field. */
         public XrSystemFacialExpressionPropertiesML.Buffer type$Default() { return type(MLFacialExpression.XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML); }
-        /** Sets the specified value to the {@link XrSystemFacialExpressionPropertiesML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemFacialExpressionPropertiesML.Buffer next(@NativeType("void *") long value) { XrSystemFacialExpressionPropertiesML.nnext(address(), value); return this; }
 
     }

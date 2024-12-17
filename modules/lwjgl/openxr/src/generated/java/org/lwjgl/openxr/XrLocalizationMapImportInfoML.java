@@ -17,31 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Data of a previously exported localization map.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using {@link XrLocalizationMapImportInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code data} <b>must</b> be a pointer to an array of {@code size} char values</li>
- * <li>The {@code size} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLLocalizationMap#xrImportLocalizationMapML ImportLocalizationMapML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrLocalizationMapImportInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #size};
- *     char * {@link #data};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t size;
+ *     char * data;
+ * }}</pre>
  */
 public class XrLocalizationMapImportInfoML extends Struct<XrLocalizationMapImportInfoML> implements NativeResource {
 
@@ -97,26 +79,26 @@ public class XrLocalizationMapImportInfoML extends Struct<XrLocalizationMapImpor
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the size in bytes of the data member. */
+    /** @return the value of the {@code size} field. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
-    /** the byte data of the previously exported localization map. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
     @NativeType("char *")
     public ByteBuffer data() { return ndata(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrLocalizationMapImportInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML} value to the {@code type} field. */
     public XrLocalizationMapImportInfoML type$Default() { return type(MLLocalizationMap.XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrLocalizationMapImportInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #data} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
     public XrLocalizationMapImportInfoML data(@NativeType("char *") ByteBuffer value) { ndata(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,26 +307,26 @@ public class XrLocalizationMapImportInfoML extends Struct<XrLocalizationMapImpor
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrLocalizationMapImportInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrLocalizationMapImportInfoML.ntype(address()); }
-        /** @return the value of the {@link XrLocalizationMapImportInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrLocalizationMapImportInfoML.nnext(address()); }
-        /** @return the value of the {@link XrLocalizationMapImportInfoML#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("uint32_t")
         public int size() { return XrLocalizationMapImportInfoML.nsize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link XrLocalizationMapImportInfoML#data} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
         @NativeType("char *")
         public ByteBuffer data() { return XrLocalizationMapImportInfoML.ndata(address()); }
 
-        /** Sets the specified value to the {@link XrLocalizationMapImportInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrLocalizationMapImportInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrLocalizationMapImportInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML} value to the {@link XrLocalizationMapImportInfoML#type} field. */
+        /** Sets the {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML} value to the {@code type} field. */
         public XrLocalizationMapImportInfoML.Buffer type$Default() { return type(MLLocalizationMap.XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML); }
-        /** Sets the specified value to the {@link XrLocalizationMapImportInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrLocalizationMapImportInfoML.Buffer next(@NativeType("void const *") long value) { XrLocalizationMapImportInfoML.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link XrLocalizationMapImportInfoML#data} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code data} field. */
         public XrLocalizationMapImportInfoML.Buffer data(@NativeType("char *") ByteBuffer value) { XrLocalizationMapImportInfoML.ndata(address(), value); return this; }
 
     }

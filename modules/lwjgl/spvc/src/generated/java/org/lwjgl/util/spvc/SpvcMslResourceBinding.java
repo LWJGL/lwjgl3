@@ -16,19 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Deprecated, use {@link SpvcMslResourceBinding2}.
- * 
- * <p>Matches the binding index of a MSL resource for a binding within a descriptor set.</p>
- * 
- * <p>Taken together, the {@code stage}, {@code desc_set} and {@code binding} combine to form a reference to a resource descriptor used in a particular
- * shading stage. If using MSL 2.0 argument buffers, the descriptor set is not marked as a discrete descriptor set, and (for iOS only) the resource is not
- * a storage image ({@code sampled != 2}), the binding reference we remap to will become an {@code [[id(N)]]} attribute within the "descriptor set"
- * argument buffer structure. For resources which are bound in the "classic" MSL 1.0 way or discrete descriptors, the remap will become a
- * {@code [[buffer(N)]]}, {@code [[texture(N)]]} or {@code [[sampler(N)]]} depending on the resource types used.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_msl_resource_binding {
  *     SpvExecutionModel stage;
  *     unsigned int desc_set;
@@ -36,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned int msl_buffer;
  *     unsigned int msl_texture;
  *     unsigned int msl_sampler;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_msl_resource_binding")
 public class SpvcMslResourceBinding extends Struct<SpvcMslResourceBinding> implements NativeResource {

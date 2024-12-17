@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to enable localization map events.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLLocalizationMap XR_ML_localization_map} extension <b>must</b> be enabled prior to using {@link XrLocalizationEnableEventsInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLLocalizationMap#xrEnableLocalizationEventsML EnableLocalizationEventsML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrLocalizationEnableEventsInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrBool32 {@link #enabled};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrBool32 enabled;
+ * }}</pre>
  */
 public class XrLocalizationEnableEventsInfoML extends Struct<XrLocalizationEnableEventsInfoML> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class XrLocalizationEnableEventsInfoML extends Struct<XrLocalizationEnabl
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the flag to enable/disable localization status events. */
+    /** @return the value of the {@code enabled} field. */
     @NativeType("XrBool32")
     public boolean enabled() { return nenabled(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrLocalizationEnableEventsInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML} value to the {@code type} field. */
     public XrLocalizationEnableEventsInfoML type$Default() { return type(MLLocalizationMap.XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrLocalizationEnableEventsInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #enabled} field. */
+    /** Sets the specified value to the {@code enabled} field. */
     public XrLocalizationEnableEventsInfoML enabled(@NativeType("XrBool32") boolean value) { nenabled(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,23 +286,23 @@ public class XrLocalizationEnableEventsInfoML extends Struct<XrLocalizationEnabl
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrLocalizationEnableEventsInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrLocalizationEnableEventsInfoML.ntype(address()); }
-        /** @return the value of the {@link XrLocalizationEnableEventsInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrLocalizationEnableEventsInfoML.nnext(address()); }
-        /** @return the value of the {@link XrLocalizationEnableEventsInfoML#enabled} field. */
+        /** @return the value of the {@code enabled} field. */
         @NativeType("XrBool32")
         public boolean enabled() { return XrLocalizationEnableEventsInfoML.nenabled(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrLocalizationEnableEventsInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrLocalizationEnableEventsInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrLocalizationEnableEventsInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML} value to the {@link XrLocalizationEnableEventsInfoML#type} field. */
+        /** Sets the {@link MLLocalizationMap#XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML} value to the {@code type} field. */
         public XrLocalizationEnableEventsInfoML.Buffer type$Default() { return type(MLLocalizationMap.XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML); }
-        /** Sets the specified value to the {@link XrLocalizationEnableEventsInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrLocalizationEnableEventsInfoML.Buffer next(@NativeType("void const *") long value) { XrLocalizationEnableEventsInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrLocalizationEnableEventsInfoML#enabled} field. */
+        /** Sets the specified value to the {@code enabled} field. */
         public XrLocalizationEnableEventsInfoML.Buffer enabled(@NativeType("XrBool32") boolean value) { XrLocalizationEnableEventsInfoML.nenabled(address(), value ? 1 : 0); return this; }
 
     }

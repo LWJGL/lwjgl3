@@ -10,13 +10,6 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/NV/EGL_NV_system_time.txt">NV_system_time</a> extension.
- * 
- * <p>This extension exposes an alternative method of querying the system time from the driver instead of the operating system.</p>
- * 
- * <p>Requires {@link EGL12 EGL 1.2}.</p>
- */
 public class NVSystemTime {
 
     protected NVSystemTime() {
@@ -25,6 +18,7 @@ public class NVSystemTime {
 
     // --- [ eglGetSystemTimeFrequencyNV ] ---
 
+    /** {@code EGLuint64NV eglGetSystemTimeFrequencyNV(void)} */
     @NativeType("EGLuint64NV")
     public static long eglGetSystemTimeFrequencyNV() {
         long __functionAddress = EGL.getCapabilities().eglGetSystemTimeFrequencyNV;
@@ -36,6 +30,7 @@ public class NVSystemTime {
 
     // --- [ eglGetSystemTimeNV ] ---
 
+    /** {@code EGLuint64NV eglGetSystemTimeNV(void)} */
     @NativeType("EGLuint64NV")
     public static long eglGetSystemTimeNV() {
         long __functionAddress = EGL.getCapabilities().eglGetSystemTimeNV;

@@ -17,21 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Additional information for an {@code XGenericEvent}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XGenericEventCookie {
- *     int {@link #type};
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
- *     int {@link #extension};
- *     int {@link #evtype};
+ *     int type;
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
+ *     int extension;
+ *     int evtype;
  *     unsigned int cookie;
  *     void * data;
- * }</code></pre>
+ * }}</pre>
  */
 public class XGenericEventCookie extends Struct<XGenericEventCookie> implements NativeResource {
 
@@ -99,43 +95,39 @@ public class XGenericEventCookie extends Struct<XGenericEventCookie> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** of event. Must be:<br><table><tr><td>{@link X11#GenericEvent}</td></tr></table> */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** major opcode of extension that caused the event */
+    /** @return the value of the {@code extension} field. */
     public int extension() { return nextension(address()); }
-    /** actual event type */
+    /** @return the value of the {@code evtype} field. */
     public int evtype() { return nevtype(address()); }
     /** @return the value of the {@code cookie} field. */
     @NativeType("unsigned int")
     public int cookie() { return ncookie(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
     @NativeType("void *")
     public ByteBuffer data(int capacity) { return ndata(address(), capacity); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XGenericEventCookie type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XGenericEventCookie serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XGenericEventCookie send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XGenericEventCookie display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #extension} field. */
+    /** Sets the specified value to the {@code extension} field. */
     public XGenericEventCookie extension(int value) { nextension(address(), value); return this; }
-    /** Sets the specified value to the {@link #evtype} field. */
+    /** Sets the specified value to the {@code evtype} field. */
     public XGenericEventCookie evtype(int value) { nevtype(address(), value); return this; }
     /** Sets the specified value to the {@code cookie} field. */
     public XGenericEventCookie cookie(@NativeType("unsigned int") int value) { ncookie(address(), value); return this; }
@@ -394,43 +386,39 @@ public class XGenericEventCookie extends Struct<XGenericEventCookie> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XGenericEventCookie#type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XGenericEventCookie.ntype(address()); }
-        /** @return the value of the {@link XGenericEventCookie#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XGenericEventCookie.nserial(address()); }
-        /** @return the value of the {@link XGenericEventCookie#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XGenericEventCookie.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XGenericEventCookie#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XGenericEventCookie.ndisplay(address()); }
-        /** @return the value of the {@link XGenericEventCookie#extension} field. */
+        /** @return the value of the {@code extension} field. */
         public int extension() { return XGenericEventCookie.nextension(address()); }
-        /** @return the value of the {@link XGenericEventCookie#evtype} field. */
+        /** @return the value of the {@code evtype} field. */
         public int evtype() { return XGenericEventCookie.nevtype(address()); }
         /** @return the value of the {@code cookie} field. */
         @NativeType("unsigned int")
         public int cookie() { return XGenericEventCookie.ncookie(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
         @NativeType("void *")
         public ByteBuffer data(int capacity) { return XGenericEventCookie.ndata(address(), capacity); }
 
-        /** Sets the specified value to the {@link XGenericEventCookie#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XGenericEventCookie.Buffer type(int value) { XGenericEventCookie.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XGenericEventCookie#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XGenericEventCookie.Buffer serial(@NativeType("unsigned long") long value) { XGenericEventCookie.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XGenericEventCookie#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XGenericEventCookie.Buffer send_event(@NativeType("Bool") boolean value) { XGenericEventCookie.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XGenericEventCookie#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XGenericEventCookie.Buffer display(@NativeType("Display *") long value) { XGenericEventCookie.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XGenericEventCookie#extension} field. */
+        /** Sets the specified value to the {@code extension} field. */
         public XGenericEventCookie.Buffer extension(int value) { XGenericEventCookie.nextension(address(), value); return this; }
-        /** Sets the specified value to the {@link XGenericEventCookie#evtype} field. */
+        /** Sets the specified value to the {@code evtype} field. */
         public XGenericEventCookie.Buffer evtype(int value) { XGenericEventCookie.nevtype(address(), value); return this; }
         /** Sets the specified value to the {@code cookie} field. */
         public XGenericEventCookie.Buffer cookie(@NativeType("unsigned int") int value) { XGenericEventCookie.ncookie(address(), value); return this; }

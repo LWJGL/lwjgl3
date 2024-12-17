@@ -24,6 +24,7 @@ public class VRDriverManager {
 
     // --- [ VRDriverManager_GetDriverCount ] ---
 
+    /** {@code uint32_t VRDriverManager_GetDriverCount(void)} */
     @NativeType("uint32_t")
     public static int VRDriverManager_GetDriverCount() {
         long __functionAddress = OpenVR.VRDriverManager.GetDriverCount;
@@ -35,7 +36,7 @@ public class VRDriverManager {
 
     // --- [ VRDriverManager_GetDriverName ] ---
 
-    /** Unsafe version of: {@link #VRDriverManager_GetDriverName GetDriverName} */
+    /** {@code uint32_t VRDriverManager_GetDriverName(DriverId_t nDriver, char * pchValue, uint32_t unBufferSize)} */
     public static int nVRDriverManager_GetDriverName(int nDriver, long pchValue, int unBufferSize) {
         long __functionAddress = OpenVR.VRDriverManager.GetDriverName;
         if (CHECKS) {
@@ -44,13 +45,13 @@ public class VRDriverManager {
         return callPI(nDriver, pchValue, unBufferSize, __functionAddress);
     }
 
-    /** @return the length of the number of bytes necessary to hold this string including the trailing null */
+    /** {@code uint32_t VRDriverManager_GetDriverName(DriverId_t nDriver, char * pchValue, uint32_t unBufferSize)} */
     @NativeType("uint32_t")
     public static int VRDriverManager_GetDriverName(@NativeType("DriverId_t") int nDriver, @NativeType("char *") @Nullable ByteBuffer pchValue) {
         return nVRDriverManager_GetDriverName(nDriver, memAddressSafe(pchValue), remainingSafe(pchValue));
     }
 
-    /** @return the length of the number of bytes necessary to hold this string including the trailing null */
+    /** {@code uint32_t VRDriverManager_GetDriverName(DriverId_t nDriver, char * pchValue, uint32_t unBufferSize)} */
     @NativeType("uint32_t")
     public static String VRDriverManager_GetDriverName(@NativeType("DriverId_t") int nDriver, @NativeType("uint32_t") int unBufferSize) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -65,7 +66,7 @@ public class VRDriverManager {
 
     // --- [ VRDriverManager_GetDriverHandle ] ---
 
-    /** Unsafe version of: {@link #VRDriverManager_GetDriverHandle GetDriverHandle} */
+    /** {@code DriverHandle_t VRDriverManager_GetDriverHandle(char const * pchDriverName)} */
     public static long nVRDriverManager_GetDriverHandle(long pchDriverName) {
         long __functionAddress = OpenVR.VRDriverManager.GetDriverHandle;
         if (CHECKS) {
@@ -74,11 +75,7 @@ public class VRDriverManager {
         return callPJ(pchDriverName, __functionAddress);
     }
 
-    /**
-     * Returns the property container handle for the specified driver.
-     *
-     * @param pchDriverName the driver name
-     */
+    /** {@code DriverHandle_t VRDriverManager_GetDriverHandle(char const * pchDriverName)} */
     @NativeType("DriverHandle_t")
     public static long VRDriverManager_GetDriverHandle(@NativeType("char const *") ByteBuffer pchDriverName) {
         if (CHECKS) {
@@ -87,11 +84,7 @@ public class VRDriverManager {
         return nVRDriverManager_GetDriverHandle(memAddress(pchDriverName));
     }
 
-    /**
-     * Returns the property container handle for the specified driver.
-     *
-     * @param pchDriverName the driver name
-     */
+    /** {@code DriverHandle_t VRDriverManager_GetDriverHandle(char const * pchDriverName)} */
     @NativeType("DriverHandle_t")
     public static long VRDriverManager_GetDriverHandle(@NativeType("char const *") CharSequence pchDriverName) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -106,6 +99,7 @@ public class VRDriverManager {
 
     // --- [ VRDriverManager_IsEnabled ] ---
 
+    /** {@code bool VRDriverManager_IsEnabled(DriverId_t nDriver)} */
     @NativeType("bool")
     public static boolean VRDriverManager_IsEnabled(@NativeType("DriverId_t") int nDriver) {
         long __functionAddress = OpenVR.VRDriverManager.IsEnabled;

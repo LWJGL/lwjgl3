@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Colocation discovery system properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>An application <b>can</b> inspect whether the system is capable of colocation advertisement and discovery by extending the {@link XrSystemProperties} with {@link XrSystemColocationDiscoveryPropertiesMETA} structure when calling {@link XR10#xrGetSystemProperties GetSystemProperties}.</p>
- * 
- * <p>If a runtime returns {@link XR10#XR_FALSE FALSE} for {@code supportsColocationDiscovery}, the runtime <b>must</b> return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} for all functions in the {@link METAColocationDiscovery XR_META_colocation_discovery} extension.</p>
- * 
- * <p>Colocation advertisement controls whether a device is discoverable using colocation discovery, so the term "colocation discovery" on its own is used here to refer to the combined capability of colocation advertisement and colocation discovery.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using {@link XrSystemColocationDiscoveryPropertiesMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAColocationDiscovery#XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemColocationDiscoveryPropertiesMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #supportsColocationDiscovery};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 supportsColocationDiscovery;
+ * }}</pre>
  */
 public class XrSystemColocationDiscoveryPropertiesMETA extends Struct<XrSystemColocationDiscoveryPropertiesMETA> implements NativeResource {
 
@@ -94,21 +74,21 @@ public class XrSystemColocationDiscoveryPropertiesMETA extends Struct<XrSystemCo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32} specifying if colocation discovery (and relatedly, colocation advertisement) is supported. */
+    /** @return the value of the {@code supportsColocationDiscovery} field. */
     @NativeType("XrBool32")
     public boolean supportsColocationDiscovery() { return nsupportsColocationDiscovery(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSystemColocationDiscoveryPropertiesMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAColocationDiscovery#XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META} value to the {@link #type} field. */
+    /** Sets the {@link METAColocationDiscovery#XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META} value to the {@code type} field. */
     public XrSystemColocationDiscoveryPropertiesMETA type$Default() { return type(METAColocationDiscovery.XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSystemColocationDiscoveryPropertiesMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,21 +280,21 @@ public class XrSystemColocationDiscoveryPropertiesMETA extends Struct<XrSystemCo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemColocationDiscoveryPropertiesMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSystemColocationDiscoveryPropertiesMETA.ntype(address()); }
-        /** @return the value of the {@link XrSystemColocationDiscoveryPropertiesMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSystemColocationDiscoveryPropertiesMETA.nnext(address()); }
-        /** @return the value of the {@link XrSystemColocationDiscoveryPropertiesMETA#supportsColocationDiscovery} field. */
+        /** @return the value of the {@code supportsColocationDiscovery} field. */
         @NativeType("XrBool32")
         public boolean supportsColocationDiscovery() { return XrSystemColocationDiscoveryPropertiesMETA.nsupportsColocationDiscovery(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSystemColocationDiscoveryPropertiesMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSystemColocationDiscoveryPropertiesMETA.Buffer type(@NativeType("XrStructureType") int value) { XrSystemColocationDiscoveryPropertiesMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAColocationDiscovery#XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META} value to the {@link XrSystemColocationDiscoveryPropertiesMETA#type} field. */
+        /** Sets the {@link METAColocationDiscovery#XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META} value to the {@code type} field. */
         public XrSystemColocationDiscoveryPropertiesMETA.Buffer type$Default() { return type(METAColocationDiscovery.XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META); }
-        /** Sets the specified value to the {@link XrSystemColocationDiscoveryPropertiesMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSystemColocationDiscoveryPropertiesMETA.Buffer next(@NativeType("void *") long value) { XrSystemColocationDiscoveryPropertiesMETA.nnext(address(), value); return this; }
 
     }

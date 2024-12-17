@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Extended pipeline create flags.
- * 
- * <h5>Description</h5>
- * 
- * <p>If this structure is included in the {@code pNext} chain of a pipeline creation structure, {@code flags} is used instead of the corresponding {@code flags} value passed in that creation structure, allowing additional creation flags to be specified.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits2} values</li>
- * <li>{@code flags} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineCreateFlags2CreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineCreateFlags2 {@link #flags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineCreateFlags2 flags;
+ * }}</pre>
  */
 public class VkPipelineCreateFlags2CreateInfo extends Struct<VkPipelineCreateFlags2CreateInfo> implements NativeResource {
 
@@ -90,23 +74,23 @@ public class VkPipelineCreateFlags2CreateInfo extends Struct<VkPipelineCreateFla
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkPipelineCreateFlagBits2} specifying how a pipeline will be generated. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkPipelineCreateFlags2")
     public long flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineCreateFlags2CreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO} value to the {@code sType} field. */
     public VkPipelineCreateFlags2CreateInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineCreateFlags2CreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkPipelineCreateFlags2CreateInfo flags(@NativeType("VkPipelineCreateFlags2") long value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -302,23 +286,23 @@ public class VkPipelineCreateFlags2CreateInfo extends Struct<VkPipelineCreateFla
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineCreateFlags2CreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineCreateFlags2CreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkPipelineCreateFlags2CreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineCreateFlags2CreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkPipelineCreateFlags2CreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkPipelineCreateFlags2")
         public long flags() { return VkPipelineCreateFlags2CreateInfo.nflags(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineCreateFlags2CreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineCreateFlags2CreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineCreateFlags2CreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO} value to the {@link VkPipelineCreateFlags2CreateInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO} value to the {@code sType} field. */
         public VkPipelineCreateFlags2CreateInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkPipelineCreateFlags2CreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineCreateFlags2CreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkPipelineCreateFlags2CreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineCreateFlags2CreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkPipelineCreateFlags2CreateInfo.Buffer flags(@NativeType("VkPipelineCreateFlags2") long value) { VkPipelineCreateFlags2CreateInfo.nflags(address(), value); return this; }
 
     }

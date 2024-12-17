@@ -16,18 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing the RC duration of a display.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link GOOGLEDisplayTiming#vkGetRefreshCycleDurationGOOGLE GetRefreshCycleDurationGOOGLE}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRefreshCycleDurationGOOGLE {
- *     uint64_t {@link #refreshDuration};
- * }</code></pre>
+ *     uint64_t refreshDuration;
+ * }}</pre>
  */
 public class VkRefreshCycleDurationGOOGLE extends Struct<VkRefreshCycleDurationGOOGLE> implements NativeResource {
 
@@ -74,7 +66,7 @@ public class VkRefreshCycleDurationGOOGLE extends Struct<VkRefreshCycleDurationG
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of nanoseconds from the start of one refresh cycle to the next. */
+    /** @return the value of the {@code refreshDuration} field. */
     @NativeType("uint64_t")
     public long refreshDuration() { return nrefreshDuration(address()); }
 
@@ -254,7 +246,7 @@ public class VkRefreshCycleDurationGOOGLE extends Struct<VkRefreshCycleDurationG
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRefreshCycleDurationGOOGLE#refreshDuration} field. */
+        /** @return the value of the {@code refreshDuration} field. */
         @NativeType("uint64_t")
         public long refreshDuration() { return VkRefreshCycleDurationGOOGLE.nrefreshDuration(address()); }
 

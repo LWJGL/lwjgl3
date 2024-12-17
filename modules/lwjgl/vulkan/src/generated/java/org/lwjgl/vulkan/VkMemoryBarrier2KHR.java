@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkMemoryBarrier2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryBarrier2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkAccessFlags2 srcAccessMask;
  *     VkPipelineStageFlags2 dstStageMask;
  *     VkAccessFlags2 dstAccessMask;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkMemoryBarrier2KHR extends VkMemoryBarrier2 {
 

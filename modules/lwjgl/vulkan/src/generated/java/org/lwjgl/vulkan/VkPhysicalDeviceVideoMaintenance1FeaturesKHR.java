@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the video maintenance features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceVideoMaintenance1FeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #videoMaintenance1};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 videoMaintenance1;
+ * }}</pre>
  */
 public class VkPhysicalDeviceVideoMaintenance1FeaturesKHR extends Struct<VkPhysicalDeviceVideoMaintenance1FeaturesKHR> implements NativeResource {
 
@@ -88,31 +74,23 @@ public class VkPhysicalDeviceVideoMaintenance1FeaturesKHR extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /**
-     * indicates that the implementation supports the following:
-     * 
-     * <ul>
-     * <li>The new buffer creation flag {@link KHRVideoMaintenance1#VK_BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR BUFFER_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR}.</li>
-     * <li>The new image creation flag {@link KHRVideoMaintenance1#VK_IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR IMAGE_CREATE_VIDEO_PROFILE_INDEPENDENT_BIT_KHR}.</li>
-     * <li>The new video session creation flag {@link KHRVideoMaintenance1#VK_VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR VIDEO_SESSION_CREATE_INLINE_QUERIES_BIT_KHR}.</li>
-     * </ul>
-     */
+    /** @return the value of the {@code videoMaintenance1} field. */
     @NativeType("VkBool32")
     public boolean videoMaintenance1() { return nvideoMaintenance1(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceVideoMaintenance1FeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceVideoMaintenance1FeaturesKHR sType$Default() { return sType(KHRVideoMaintenance1.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceVideoMaintenance1FeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #videoMaintenance1} field. */
+    /** Sets the specified value to the {@code videoMaintenance1} field. */
     public VkPhysicalDeviceVideoMaintenance1FeaturesKHR videoMaintenance1(@NativeType("VkBool32") boolean value) { nvideoMaintenance1(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -308,23 +286,23 @@ public class VkPhysicalDeviceVideoMaintenance1FeaturesKHR extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceVideoMaintenance1FeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceVideoMaintenance1FeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR#videoMaintenance1} field. */
+        /** @return the value of the {@code videoMaintenance1} field. */
         @NativeType("VkBool32")
         public boolean videoMaintenance1() { return VkPhysicalDeviceVideoMaintenance1FeaturesKHR.nvideoMaintenance1(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceVideoMaintenance1FeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceVideoMaintenance1FeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR} value to the {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR#sType} field. */
+        /** Sets the {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceVideoMaintenance1FeaturesKHR.Buffer sType$Default() { return sType(KHRVideoMaintenance1.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_1_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceVideoMaintenance1FeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceVideoMaintenance1FeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceVideoMaintenance1FeaturesKHR#videoMaintenance1} field. */
+        /** Sets the specified value to the {@code videoMaintenance1} field. */
         public VkPhysicalDeviceVideoMaintenance1FeaturesKHR.Buffer videoMaintenance1(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceVideoMaintenance1FeaturesKHR.nvideoMaintenance1(address(), value ? 1 : 0); return this; }
 
     }

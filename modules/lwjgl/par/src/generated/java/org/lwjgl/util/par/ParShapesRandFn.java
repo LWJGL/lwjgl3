@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link ParShapes#par_shapes_create_lsystem create_lsystem} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     void *context
- * )</code></pre>
- */
+/** Callback function: {@link #invoke par_shapes_rand_fn} */
 public abstract class ParShapesRandFn extends Callback implements ParShapesRandFnI {
 
     /**

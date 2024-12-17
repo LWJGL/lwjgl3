@@ -16,39 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing mesh shading features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceMeshShaderFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceMeshShaderFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <p>The corresponding features of the {@link VkPhysicalDeviceMeshShaderFeaturesNV} structure <b>must</b> match those in {@link VkPhysicalDeviceMeshShaderFeaturesEXT}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code multiviewMeshShader} is enabled then {@link VkPhysicalDeviceMultiviewFeaturesKHR}{@code ::multiview} <b>must</b> also be enabled</li>
- * <li>If {@code primitiveFragmentShadingRateMeshShader} is enabled then {@link VkPhysicalDeviceFragmentShadingRateFeaturesKHR}{@code ::primitiveFragmentShadingRate} <b>must</b> also be enabled</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMeshShaderFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #taskShader};
- *     VkBool32 {@link #meshShader};
- *     VkBool32 {@link #multiviewMeshShader};
- *     VkBool32 {@link #primitiveFragmentShadingRateMeshShader};
- *     VkBool32 {@link #meshShaderQueries};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 taskShader;
+ *     VkBool32 meshShader;
+ *     VkBool32 multiviewMeshShader;
+ *     VkBool32 primitiveFragmentShadingRateMeshShader;
+ *     VkBool32 meshShaderQueries;
+ * }}</pre>
  */
 public class VkPhysicalDeviceMeshShaderFeaturesEXT extends Struct<VkPhysicalDeviceMeshShaderFeaturesEXT> implements NativeResource {
 
@@ -113,43 +90,43 @@ public class VkPhysicalDeviceMeshShaderFeaturesEXT extends Struct<VkPhysicalDevi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether task shaders are supported. If this feature is not enabled, the {@link EXTMeshShader#VK_SHADER_STAGE_TASK_BIT_EXT SHADER_STAGE_TASK_BIT_EXT} and {@link EXTMeshShader#VK_PIPELINE_STAGE_TASK_SHADER_BIT_EXT PIPELINE_STAGE_TASK_SHADER_BIT_EXT} enum values <b>must</b> not be used. */
+    /** @return the value of the {@code taskShader} field. */
     @NativeType("VkBool32")
     public boolean taskShader() { return ntaskShader(address()) != 0; }
-    /** specifies whether mesh shaders are supported. If this feature is not enabled, the {@link EXTMeshShader#VK_SHADER_STAGE_MESH_BIT_EXT SHADER_STAGE_MESH_BIT_EXT} and {@link EXTMeshShader#VK_PIPELINE_STAGE_MESH_SHADER_BIT_EXT PIPELINE_STAGE_MESH_SHADER_BIT_EXT} enum values <b>must</b> not be used. */
+    /** @return the value of the {@code meshShader} field. */
     @NativeType("VkBool32")
     public boolean meshShader() { return nmeshShader(address()) != 0; }
-    /** specifies whether the implementation supports <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-multiview">{@code multiview}</a> rendering within a render pass, with mesh shaders. If this feature is not enabled, then a pipeline compiled against a subpass with a non-zero view mask <b>must</b> not include a mesh shader. */
+    /** @return the value of the {@code multiviewMeshShader} field. */
     @NativeType("VkBool32")
     public boolean multiviewMeshShader() { return nmultiviewMeshShader(address()) != 0; }
-    /** indicates that the implementation supports the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#primsrast-fragment-shading-rate-primitive">primitive fragment shading rate</a> in mesh shaders. */
+    /** @return the value of the {@code primitiveFragmentShadingRateMeshShader} field. */
     @NativeType("VkBool32")
     public boolean primitiveFragmentShadingRateMeshShader() { return nprimitiveFragmentShadingRateMeshShader(address()) != 0; }
-    /** indicates that the implementation supports creating query pools using the {@link EXTMeshShader#VK_QUERY_TYPE_MESH_PRIMITIVES_GENERATED_EXT QUERY_TYPE_MESH_PRIMITIVES_GENERATED_EXT} query type and statistic queries containing the {@link EXTMeshShader#VK_QUERY_PIPELINE_STATISTIC_TASK_SHADER_INVOCATIONS_BIT_EXT QUERY_PIPELINE_STATISTIC_TASK_SHADER_INVOCATIONS_BIT_EXT} and {@link EXTMeshShader#VK_QUERY_PIPELINE_STATISTIC_MESH_SHADER_INVOCATIONS_BIT_EXT QUERY_PIPELINE_STATISTIC_MESH_SHADER_INVOCATIONS_BIT_EXT} flags */
+    /** @return the value of the {@code meshShaderQueries} field. */
     @NativeType("VkBool32")
     public boolean meshShaderQueries() { return nmeshShaderQueries(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceMeshShaderFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceMeshShaderFeaturesEXT sType$Default() { return sType(EXTMeshShader.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceMeshShaderFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #taskShader} field. */
+    /** Sets the specified value to the {@code taskShader} field. */
     public VkPhysicalDeviceMeshShaderFeaturesEXT taskShader(@NativeType("VkBool32") boolean value) { ntaskShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #meshShader} field. */
+    /** Sets the specified value to the {@code meshShader} field. */
     public VkPhysicalDeviceMeshShaderFeaturesEXT meshShader(@NativeType("VkBool32") boolean value) { nmeshShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #multiviewMeshShader} field. */
+    /** Sets the specified value to the {@code multiviewMeshShader} field. */
     public VkPhysicalDeviceMeshShaderFeaturesEXT multiviewMeshShader(@NativeType("VkBool32") boolean value) { nmultiviewMeshShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #primitiveFragmentShadingRateMeshShader} field. */
+    /** Sets the specified value to the {@code primitiveFragmentShadingRateMeshShader} field. */
     public VkPhysicalDeviceMeshShaderFeaturesEXT primitiveFragmentShadingRateMeshShader(@NativeType("VkBool32") boolean value) { nprimitiveFragmentShadingRateMeshShader(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #meshShaderQueries} field. */
+    /** Sets the specified value to the {@code meshShaderQueries} field. */
     public VkPhysicalDeviceMeshShaderFeaturesEXT meshShaderQueries(@NativeType("VkBool32") boolean value) { nmeshShaderQueries(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -369,43 +346,43 @@ public class VkPhysicalDeviceMeshShaderFeaturesEXT extends Struct<VkPhysicalDevi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceMeshShaderFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceMeshShaderFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#taskShader} field. */
+        /** @return the value of the {@code taskShader} field. */
         @NativeType("VkBool32")
         public boolean taskShader() { return VkPhysicalDeviceMeshShaderFeaturesEXT.ntaskShader(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#meshShader} field. */
+        /** @return the value of the {@code meshShader} field. */
         @NativeType("VkBool32")
         public boolean meshShader() { return VkPhysicalDeviceMeshShaderFeaturesEXT.nmeshShader(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#multiviewMeshShader} field. */
+        /** @return the value of the {@code multiviewMeshShader} field. */
         @NativeType("VkBool32")
         public boolean multiviewMeshShader() { return VkPhysicalDeviceMeshShaderFeaturesEXT.nmultiviewMeshShader(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#primitiveFragmentShadingRateMeshShader} field. */
+        /** @return the value of the {@code primitiveFragmentShadingRateMeshShader} field. */
         @NativeType("VkBool32")
         public boolean primitiveFragmentShadingRateMeshShader() { return VkPhysicalDeviceMeshShaderFeaturesEXT.nprimitiveFragmentShadingRateMeshShader(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#meshShaderQueries} field. */
+        /** @return the value of the {@code meshShaderQueries} field. */
         @NativeType("VkBool32")
         public boolean meshShaderQueries() { return VkPhysicalDeviceMeshShaderFeaturesEXT.nmeshShaderQueries(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceMeshShaderFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceMeshShaderFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT} value to the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTMeshShader#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceMeshShaderFeaturesEXT.Buffer sType$Default() { return sType(EXTMeshShader.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceMeshShaderFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceMeshShaderFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#taskShader} field. */
+        /** Sets the specified value to the {@code taskShader} field. */
         public VkPhysicalDeviceMeshShaderFeaturesEXT.Buffer taskShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMeshShaderFeaturesEXT.ntaskShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#meshShader} field. */
+        /** Sets the specified value to the {@code meshShader} field. */
         public VkPhysicalDeviceMeshShaderFeaturesEXT.Buffer meshShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMeshShaderFeaturesEXT.nmeshShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#multiviewMeshShader} field. */
+        /** Sets the specified value to the {@code multiviewMeshShader} field. */
         public VkPhysicalDeviceMeshShaderFeaturesEXT.Buffer multiviewMeshShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMeshShaderFeaturesEXT.nmultiviewMeshShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#primitiveFragmentShadingRateMeshShader} field. */
+        /** Sets the specified value to the {@code primitiveFragmentShadingRateMeshShader} field. */
         public VkPhysicalDeviceMeshShaderFeaturesEXT.Buffer primitiveFragmentShadingRateMeshShader(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMeshShaderFeaturesEXT.nprimitiveFragmentShadingRateMeshShader(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceMeshShaderFeaturesEXT#meshShaderQueries} field. */
+        /** Sets the specified value to the {@code meshShaderQueries} field. */
         public VkPhysicalDeviceMeshShaderFeaturesEXT.Buffer meshShaderQueries(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceMeshShaderFeaturesEXT.nmeshShaderQueries(address(), value ? 1 : 0); return this; }
 
     }

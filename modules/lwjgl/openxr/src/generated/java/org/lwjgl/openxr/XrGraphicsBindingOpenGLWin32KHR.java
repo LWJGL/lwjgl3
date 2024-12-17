@@ -19,37 +19,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.system.windows.*;
 
 /**
- * The graphics binding structure to be passed at session creation to use OpenGL on Windows.
- * 
- * <h5>Description</h5>
- * 
- * <p>When creating an OpenGL-backed {@code XrSession} on Microsoft Windows, the application will provide a pointer to an {@link XrGraphicsBindingOpenGLWin32KHR} in the {@code next} chain of the {@link XrSessionCreateInfo}. As no standardized way exists for OpenGL to create the graphics context on a specific GPU, the runtime <b>must</b> assume that the application uses the operating systems default GPU. If the GPU used by the runtime does not match the GPU on which the OpenGL context of the application got created, {@link XR10#xrCreateSession CreateSession} <b>must</b> return {@link XR10#XR_ERROR_GRAPHICS_DEVICE_INVALID ERROR_GRAPHICS_DEVICE_INVALID}.</p>
- * 
- * <p>The required window system configuration define to expose this structure type is {@link XR10#XR_USE_PLATFORM_WIN32 USE_PLATFORM_WIN32}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsBindingOpenGLWin32KHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code hDC} <b>must</b> be a valid {@code HDC} value</li>
- * <li>{@code hGLRC} <b>must</b> be a valid {@code HGLRC} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateSession CreateSession}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGraphicsBindingOpenGLWin32KHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     HDC {@link #hDC};
- *     HGLRC {@link #hGLRC};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     HDC hDC;
+ *     HGLRC hGLRC;
+ * }}</pre>
  */
 public class XrGraphicsBindingOpenGLWin32KHR extends Struct<XrGraphicsBindingOpenGLWin32KHR> implements NativeResource {
 
@@ -105,28 +81,28 @@ public class XrGraphicsBindingOpenGLWin32KHR extends Struct<XrGraphicsBindingOpe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a valid Windows HW device context handle. */
+    /** @return the value of the {@code hDC} field. */
     @NativeType("HDC")
     public long hDC() { return nhDC(address()); }
-    /** a valid Windows OpenGL rendering context handle. */
+    /** @return the value of the {@code hGLRC} field. */
     @NativeType("HGLRC")
     public long hGLRC() { return nhGLRC(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrGraphicsBindingOpenGLWin32KHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR} value to the {@code type} field. */
     public XrGraphicsBindingOpenGLWin32KHR type$Default() { return type(KHROpenGLEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrGraphicsBindingOpenGLWin32KHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #hDC} field. */
+    /** Sets the specified value to the {@code hDC} field. */
     public XrGraphicsBindingOpenGLWin32KHR hDC(@NativeType("HDC") long value) { nhDC(address(), value); return this; }
-    /** Sets the specified value to the {@link #hGLRC} field. */
+    /** Sets the specified value to the {@code hGLRC} field. */
     public XrGraphicsBindingOpenGLWin32KHR hGLRC(@NativeType("HGLRC") long value) { nhGLRC(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -338,28 +314,28 @@ public class XrGraphicsBindingOpenGLWin32KHR extends Struct<XrGraphicsBindingOpe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrGraphicsBindingOpenGLWin32KHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingOpenGLWin32KHR.ntype(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLWin32KHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingOpenGLWin32KHR.nnext(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLWin32KHR#hDC} field. */
+        /** @return the value of the {@code hDC} field. */
         @NativeType("HDC")
         public long hDC() { return XrGraphicsBindingOpenGLWin32KHR.nhDC(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLWin32KHR#hGLRC} field. */
+        /** @return the value of the {@code hGLRC} field. */
         @NativeType("HGLRC")
         public long hGLRC() { return XrGraphicsBindingOpenGLWin32KHR.nhGLRC(address()); }
 
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLWin32KHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrGraphicsBindingOpenGLWin32KHR.Buffer type(@NativeType("XrStructureType") int value) { XrGraphicsBindingOpenGLWin32KHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR} value to the {@link XrGraphicsBindingOpenGLWin32KHR#type} field. */
+        /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR} value to the {@code type} field. */
         public XrGraphicsBindingOpenGLWin32KHR.Buffer type$Default() { return type(KHROpenGLEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR); }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLWin32KHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrGraphicsBindingOpenGLWin32KHR.Buffer next(@NativeType("void const *") long value) { XrGraphicsBindingOpenGLWin32KHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLWin32KHR#hDC} field. */
+        /** Sets the specified value to the {@code hDC} field. */
         public XrGraphicsBindingOpenGLWin32KHR.Buffer hDC(@NativeType("HDC") long value) { XrGraphicsBindingOpenGLWin32KHR.nhDC(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLWin32KHR#hGLRC} field. */
+        /** Sets the specified value to the {@code hGLRC} field. */
         public XrGraphicsBindingOpenGLWin32KHR.Buffer hGLRC(@NativeType("HGLRC") long value) { XrGraphicsBindingOpenGLWin32KHR.nhGLRC(address(), value); return this; }
 
     }

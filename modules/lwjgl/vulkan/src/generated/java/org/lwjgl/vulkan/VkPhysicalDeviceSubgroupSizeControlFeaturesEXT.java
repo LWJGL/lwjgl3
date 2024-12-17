@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceSubgroupSizeControlFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSubgroupSizeControlFeaturesEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 subgroupSizeControl;
  *     VkBool32 computeFullSubgroups;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceSubgroupSizeControlFeaturesEXT extends VkPhysicalDeviceSubgroupSizeControlFeatures {
 

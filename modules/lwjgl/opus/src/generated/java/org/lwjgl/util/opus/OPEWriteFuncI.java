@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@link OpusEncCallbacks}.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *user_data,
- *     unsigned char const *ptr,
- *     opus_int32 len
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ope_write_func} */
 @FunctionalInterface
 @NativeType("ope_write_func")
 public interface OPEWriteFuncI extends CallbackI {
@@ -47,15 +36,7 @@ public interface OPEWriteFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Called for writing a page.
-     *
-     * @param user_data user-defined data passed to the callback
-     * @param ptr       buffer to be written
-     * @param len       number of bytes to be written
-     *
-     * @return error code; {@code 0: success}, {@code 1: failure}
-     */
+    /** {@code int (* ope_write_func) (void * user_data, unsigned char const * ptr, opus_int32 len)} */
     int invoke(@NativeType("void *") long user_data, @NativeType("unsigned char const *") long ptr, @NativeType("opus_int32") int len);
 
 }

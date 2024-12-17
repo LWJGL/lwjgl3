@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceImageFormatInfo2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceImageFormatInfo2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkImageTiling tiling;
  *     VkImageUsageFlags usage;
  *     VkImageCreateFlags flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceImageFormatInfo2KHR extends VkPhysicalDeviceImageFormatInfo2 {
 

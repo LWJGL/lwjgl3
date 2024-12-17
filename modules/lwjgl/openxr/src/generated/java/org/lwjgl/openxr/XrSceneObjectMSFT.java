@@ -16,25 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Scene object.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneObjectMSFT}</li>
- * <li>{@code objectType} <b>must</b> be a valid {@code XrSceneObjectTypeMSFT} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSceneObjectsMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneObjectMSFT {
- *     XrSceneObjectTypeMSFT {@link #objectType};
- * }</code></pre>
+ *     XrSceneObjectTypeMSFT objectType;
+ * }}</pre>
  */
 public class XrSceneObjectMSFT extends Struct<XrSceneObjectMSFT> implements NativeResource {
 
@@ -81,11 +66,11 @@ public class XrSceneObjectMSFT extends Struct<XrSceneObjectMSFT> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the type of the object specified by {@code XrSceneObjectTypeMSFT}. */
+    /** @return the value of the {@code objectType} field. */
     @NativeType("XrSceneObjectTypeMSFT")
     public int objectType() { return nobjectType(address()); }
 
-    /** Sets the specified value to the {@link #objectType} field. */
+    /** Sets the specified value to the {@code objectType} field. */
     public XrSceneObjectMSFT objectType(@NativeType("XrSceneObjectTypeMSFT") int value) { nobjectType(address(), value); return this; }
 
     /**
@@ -260,11 +245,11 @@ public class XrSceneObjectMSFT extends Struct<XrSceneObjectMSFT> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneObjectMSFT#objectType} field. */
+        /** @return the value of the {@code objectType} field. */
         @NativeType("XrSceneObjectTypeMSFT")
         public int objectType() { return XrSceneObjectMSFT.nobjectType(address()); }
 
-        /** Sets the specified value to the {@link XrSceneObjectMSFT#objectType} field. */
+        /** Sets the specified value to the {@code objectType} field. */
         public XrSceneObjectMSFT.Buffer objectType(@NativeType("XrSceneObjectTypeMSFT") int value) { XrSceneObjectMSFT.nobjectType(address(), value); return this; }
 
     }

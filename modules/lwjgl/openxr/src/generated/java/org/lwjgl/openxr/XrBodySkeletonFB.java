@@ -17,37 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Returns the body skeleton hierarchy.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} if {@code jointCount} does not equal to the number of joints defined by the {@code XrBodyJointSetFB} used to create the {@code XrBodyTrackerFB}.</p>
- * 
- * <p>The runtime <b>must</b> return {@code joints} representing the default pose of the current estimation regarding the user’s skeleton.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBBodyTracking XR_FB_body_tracking} extension <b>must</b> be enabled prior to using {@link XrBodySkeletonFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBBodyTracking#XR_TYPE_BODY_SKELETON_FB TYPE_BODY_SKELETON_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code joints} <b>must</b> be a pointer to an array of {@code jointCount} {@link XrBodySkeletonJointFB} structures</li>
- * <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrBodySkeletonJointFB}, {@link FBBodyTracking#xrGetBodySkeletonFB GetBodySkeletonFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBodySkeletonFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #jointCount};
- *     {@link XrBodySkeletonJointFB XrBodySkeletonJointFB} * {@link #joints};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t jointCount;
+ *     {@link XrBodySkeletonJointFB XrBodySkeletonJointFB} * joints;
+ * }}</pre>
  */
 public class XrBodySkeletonFB extends Struct<XrBodySkeletonFB> implements NativeResource {
 
@@ -103,26 +79,26 @@ public class XrBodySkeletonFB extends Struct<XrBodySkeletonFB> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code uint32_t} describing the count of elements in {@code joints} array. */
+    /** @return the value of the {@code jointCount} field. */
     @NativeType("uint32_t")
     public int jointCount() { return njointCount(address()); }
-    /** an application-allocated array of {@link XrBodySkeletonJointFB} that will be filled with skeleton joint elements. */
+    /** @return a {@link XrBodySkeletonJointFB.Buffer} view of the struct array pointed to by the {@code joints} field. */
     @NativeType("XrBodySkeletonJointFB *")
     public XrBodySkeletonJointFB.Buffer joints() { return njoints(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrBodySkeletonFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBBodyTracking#XR_TYPE_BODY_SKELETON_FB TYPE_BODY_SKELETON_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBBodyTracking#XR_TYPE_BODY_SKELETON_FB TYPE_BODY_SKELETON_FB} value to the {@code type} field. */
     public XrBodySkeletonFB type$Default() { return type(FBBodyTracking.XR_TYPE_BODY_SKELETON_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrBodySkeletonFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrBodySkeletonJointFB.Buffer} to the {@link #joints} field. */
+    /** Sets the address of the specified {@link XrBodySkeletonJointFB.Buffer} to the {@code joints} field. */
     public XrBodySkeletonFB joints(@NativeType("XrBodySkeletonJointFB *") XrBodySkeletonJointFB.Buffer value) { njoints(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -331,26 +307,26 @@ public class XrBodySkeletonFB extends Struct<XrBodySkeletonFB> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrBodySkeletonFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBodySkeletonFB.ntype(address()); }
-        /** @return the value of the {@link XrBodySkeletonFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrBodySkeletonFB.nnext(address()); }
-        /** @return the value of the {@link XrBodySkeletonFB#jointCount} field. */
+        /** @return the value of the {@code jointCount} field. */
         @NativeType("uint32_t")
         public int jointCount() { return XrBodySkeletonFB.njointCount(address()); }
-        /** @return a {@link XrBodySkeletonJointFB.Buffer} view of the struct array pointed to by the {@link XrBodySkeletonFB#joints} field. */
+        /** @return a {@link XrBodySkeletonJointFB.Buffer} view of the struct array pointed to by the {@code joints} field. */
         @NativeType("XrBodySkeletonJointFB *")
         public XrBodySkeletonJointFB.Buffer joints() { return XrBodySkeletonFB.njoints(address()); }
 
-        /** Sets the specified value to the {@link XrBodySkeletonFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrBodySkeletonFB.Buffer type(@NativeType("XrStructureType") int value) { XrBodySkeletonFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBBodyTracking#XR_TYPE_BODY_SKELETON_FB TYPE_BODY_SKELETON_FB} value to the {@link XrBodySkeletonFB#type} field. */
+        /** Sets the {@link FBBodyTracking#XR_TYPE_BODY_SKELETON_FB TYPE_BODY_SKELETON_FB} value to the {@code type} field. */
         public XrBodySkeletonFB.Buffer type$Default() { return type(FBBodyTracking.XR_TYPE_BODY_SKELETON_FB); }
-        /** Sets the specified value to the {@link XrBodySkeletonFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrBodySkeletonFB.Buffer next(@NativeType("void *") long value) { XrBodySkeletonFB.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrBodySkeletonJointFB.Buffer} to the {@link XrBodySkeletonFB#joints} field. */
+        /** Sets the address of the specified {@link XrBodySkeletonJointFB.Buffer} to the {@code joints} field. */
         public XrBodySkeletonFB.Buffer joints(@NativeType("XrBodySkeletonJointFB *") XrBodySkeletonJointFB.Buffer value) { XrBodySkeletonFB.njoints(address(), value); return this; }
 
     }

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A structure used to describe an input stream.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_StreamRec {
  *     unsigned char * base;
  *     unsigned long size;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FT_Memory memory;
  *     unsigned char * cursor;
  *     unsigned char * limit;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_StreamRec")
 public class FT_Stream extends Struct<FT_Stream> implements NativeResource {

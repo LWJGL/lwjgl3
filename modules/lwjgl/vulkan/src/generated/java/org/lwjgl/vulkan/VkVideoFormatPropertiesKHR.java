@@ -16,33 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure enumerating the video image formats.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkVideoFormatAV1QuantizationMapPropertiesKHR}, {@link VkVideoFormatH265QuantizationMapPropertiesKHR}, or {@link VkVideoFormatQuantizationMapPropertiesKHR}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkComponentMapping}, {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoFormatPropertiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkFormat {@link #format};
- *     {@link VkComponentMapping VkComponentMapping} {@link #componentMapping};
- *     VkImageCreateFlags {@link #imageCreateFlags};
- *     VkImageType {@link #imageType};
- *     VkImageTiling {@link #imageTiling};
- *     VkImageUsageFlags {@link #imageUsageFlags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkFormat format;
+ *     {@link VkComponentMapping VkComponentMapping} componentMapping;
+ *     VkImageCreateFlags imageCreateFlags;
+ *     VkImageType imageType;
+ *     VkImageTiling imageTiling;
+ *     VkImageUsageFlags imageUsageFlags;
+ * }}</pre>
  */
 public class VkVideoFormatPropertiesKHR extends Struct<VkVideoFormatPropertiesKHR> implements NativeResource {
 
@@ -110,35 +94,35 @@ public class VkVideoFormatPropertiesKHR extends Struct<VkVideoFormatPropertiesKH
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkFormat} that specifies the format that <b>can</b> be used with the specified video profiles and image usages. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
-    /** defines the color channel order used for the format. {@code format} along with {@code componentMapping} describe how the color channels are ordered when producing video decoder output or are expected to be ordered in video encoder input, when applicable. If the {@code format} reported does not require component swizzling then all members of {@code componentMapping} will be set to {@link VK10#VK_COMPONENT_SWIZZLE_IDENTITY COMPONENT_SWIZZLE_IDENTITY}. */
+    /** @return a {@link VkComponentMapping} view of the {@code componentMapping} field. */
     public VkComponentMapping componentMapping() { return ncomponentMapping(address()); }
-    /** a bitmask of {@code VkImageCreateFlagBits} specifying the supported image creation flags for the format. */
+    /** @return the value of the {@code imageCreateFlags} field. */
     @NativeType("VkImageCreateFlags")
     public int imageCreateFlags() { return nimageCreateFlags(address()); }
-    /** a {@code VkImageType} that specifies the image type the format <b>can</b> be used with. */
+    /** @return the value of the {@code imageType} field. */
     @NativeType("VkImageType")
     public int imageType() { return nimageType(address()); }
-    /** a {@code VkImageTiling} that specifies the image tiling the format <b>can</b> be used with. */
+    /** @return the value of the {@code imageTiling} field. */
     @NativeType("VkImageTiling")
     public int imageTiling() { return nimageTiling(address()); }
-    /** a bitmask of {@code VkImageUsageFlagBits} specifying the supported image usage flags for the format. */
+    /** @return the value of the {@code imageUsageFlags} field. */
     @NativeType("VkImageUsageFlags")
     public int imageUsageFlags() { return nimageUsageFlags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoFormatPropertiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR} value to the {@code sType} field. */
     public VkVideoFormatPropertiesKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoFormatPropertiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoFormatAV1QuantizationMapPropertiesKHR} value to the {@code pNext} chain. */
     public VkVideoFormatPropertiesKHR pNext(VkVideoFormatAV1QuantizationMapPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -346,35 +330,35 @@ public class VkVideoFormatPropertiesKHR extends Struct<VkVideoFormatPropertiesKH
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoFormatPropertiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoFormatPropertiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoFormatPropertiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoFormatPropertiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoFormatPropertiesKHR#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkVideoFormatPropertiesKHR.nformat(address()); }
-        /** @return a {@link VkComponentMapping} view of the {@link VkVideoFormatPropertiesKHR#componentMapping} field. */
+        /** @return a {@link VkComponentMapping} view of the {@code componentMapping} field. */
         public VkComponentMapping componentMapping() { return VkVideoFormatPropertiesKHR.ncomponentMapping(address()); }
-        /** @return the value of the {@link VkVideoFormatPropertiesKHR#imageCreateFlags} field. */
+        /** @return the value of the {@code imageCreateFlags} field. */
         @NativeType("VkImageCreateFlags")
         public int imageCreateFlags() { return VkVideoFormatPropertiesKHR.nimageCreateFlags(address()); }
-        /** @return the value of the {@link VkVideoFormatPropertiesKHR#imageType} field. */
+        /** @return the value of the {@code imageType} field. */
         @NativeType("VkImageType")
         public int imageType() { return VkVideoFormatPropertiesKHR.nimageType(address()); }
-        /** @return the value of the {@link VkVideoFormatPropertiesKHR#imageTiling} field. */
+        /** @return the value of the {@code imageTiling} field. */
         @NativeType("VkImageTiling")
         public int imageTiling() { return VkVideoFormatPropertiesKHR.nimageTiling(address()); }
-        /** @return the value of the {@link VkVideoFormatPropertiesKHR#imageUsageFlags} field. */
+        /** @return the value of the {@code imageUsageFlags} field. */
         @NativeType("VkImageUsageFlags")
         public int imageUsageFlags() { return VkVideoFormatPropertiesKHR.nimageUsageFlags(address()); }
 
-        /** Sets the specified value to the {@link VkVideoFormatPropertiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoFormatPropertiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoFormatPropertiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR} value to the {@link VkVideoFormatPropertiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR} value to the {@code sType} field. */
         public VkVideoFormatPropertiesKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoFormatPropertiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoFormatPropertiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoFormatPropertiesKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoFormatAV1QuantizationMapPropertiesKHR} value to the {@code pNext} chain. */
         public VkVideoFormatPropertiesKHR.Buffer pNext(VkVideoFormatAV1QuantizationMapPropertiesKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }

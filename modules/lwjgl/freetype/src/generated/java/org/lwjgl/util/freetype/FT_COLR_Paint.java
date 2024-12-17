@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A union object representing format and details of a paint table of a {@code COLR} v1 font.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_COLR_Paint {
  *     FT_PaintFormat format;
  *     union {
@@ -38,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link FT_PaintComposite FT_PaintComposite} composite;
  *         {@link FT_PaintColrGlyph FT_PaintColrGlyph} colr_glyph;
  *     } u;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_COLR_Paint extends Struct<FT_COLR_Paint> implements NativeResource {
 

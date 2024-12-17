@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing compatibility features for vertex attributes.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTLegacyVertexAttributes#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #legacyVertexAttributes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 legacyVertexAttributes;
+ * }}</pre>
  */
 public class VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT extends Struct<VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether compatibility features for vertex attributes are supported when using dynamic vertex input state. */
+    /** @return the value of the {@code legacyVertexAttributes} field. */
     @NativeType("VkBool32")
     public boolean legacyVertexAttributes() { return nlegacyVertexAttributes(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTLegacyVertexAttributes#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTLegacyVertexAttributes#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT sType$Default() { return sType(EXTLegacyVertexAttributes.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #legacyVertexAttributes} field. */
+    /** Sets the specified value to the {@code legacyVertexAttributes} field. */
     public VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT legacyVertexAttributes(@NativeType("VkBool32") boolean value) { nlegacyVertexAttributes(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT#legacyVertexAttributes} field. */
+        /** @return the value of the {@code legacyVertexAttributes} field. */
         @NativeType("VkBool32")
         public boolean legacyVertexAttributes() { return VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.nlegacyVertexAttributes(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTLegacyVertexAttributes#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT} value to the {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTLegacyVertexAttributes#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.Buffer sType$Default() { return sType(EXTLegacyVertexAttributes.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_VERTEX_ATTRIBUTES_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT#legacyVertexAttributes} field. */
+        /** Sets the specified value to the {@code legacyVertexAttributes} field. */
         public VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.Buffer legacyVertexAttributes(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT.nlegacyVertexAttributes(address(), value ? 1 : 0); return this; }
 
     }

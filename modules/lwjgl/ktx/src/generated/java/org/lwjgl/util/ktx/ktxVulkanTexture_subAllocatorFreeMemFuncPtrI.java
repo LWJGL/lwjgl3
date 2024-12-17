@@ -12,14 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     uint64_t allocId
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void * (*) (uint64_t)")
 public interface ktxVulkanTexture_subAllocatorFreeMemFuncPtrI extends CallbackI {
@@ -41,7 +34,7 @@ public interface ktxVulkanTexture_subAllocatorFreeMemFuncPtrI extends CallbackI 
         apiClosureRetP(ret, __result);
     }
 
-    /** The free procurement function. */
+    /** {@code void * (*) (uint64_t allocId)} */
     @NativeType("void *") long invoke(@NativeType("uint64_t") long allocId);
 
 }

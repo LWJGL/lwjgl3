@@ -17,59 +17,21 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters returned to the callback.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>This structure should only be considered valid during the lifetime of the triggered callback.</p>
- * </div>
- * 
- * <p>Since adding queue and command buffer labels behaves like pushing and popping onto a stack, the order of both {@code pQueueLabels} and {@code pCmdBufLabels} is based on the order the labels were defined. The result is that the first label in either {@code pQueueLabels} or {@code pCmdBufLabels} will be the first defined (and therefore the oldest) while the last label in each list will be the most recent.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>{@code pQueueLabels} will only be non-{@code NULL} if one of the objects in {@code pObjects} can be related directly to a defined {@code VkQueue} which has had one or more labels associated with it.</p>
- * 
- * <p>Likewise, {@code pCmdBufLabels} will only be non-{@code NULL} if one of the objects in {@code pObjects} can be related directly to a defined {@code VkCommandBuffer} which has had one or more labels associated with it. Additionally, while command buffer labels allow for beginning and ending across different command buffers, the debug messaging framework <b>cannot</b> guarantee that labels in {@code pCmdBufLables} will contain those defined outside of the associated command buffer. This is partially due to the fact that the association of one command buffer with another may not have been defined at the time the debug message is triggered.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkDeviceAddressBindingCallbackDataEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be 0</li>
- * <li>If {@code pMessageIdName} is not {@code NULL}, {@code pMessageIdName} <b>must</b> be a null-terminated UTF-8 string</li>
- * <li>If {@code pMessage} is not {@code NULL}, {@code pMessage} <b>must</b> be a null-terminated UTF-8 string</li>
- * <li>If {@code queueLabelCount} is not 0, {@code pQueueLabels} <b>must</b> be a valid pointer to an array of {@code queueLabelCount} valid {@link VkDebugUtilsLabelEXT} structures</li>
- * <li>If {@code cmdBufLabelCount} is not 0, {@code pCmdBufLabels} <b>must</b> be a valid pointer to an array of {@code cmdBufLabelCount} valid {@link VkDebugUtilsLabelEXT} structures</li>
- * <li>If {@code objectCount} is not 0, {@code pObjects} <b>must</b> be a valid pointer to an array of {@code objectCount} valid {@link VkDebugUtilsObjectNameInfoEXT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDebugUtilsMessengerCallbackEXT}, {@link VkDebugUtilsLabelEXT}, {@link VkDebugUtilsObjectNameInfoEXT}, {@link EXTDebugUtils#vkSubmitDebugUtilsMessageEXT SubmitDebugUtilsMessageEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDebugUtilsMessengerCallbackDataEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDebugUtilsMessengerCallbackDataFlagsEXT {@link #flags};
- *     char const * {@link #pMessageIdName};
- *     int32_t {@link #messageIdNumber};
- *     char const * {@link #pMessage};
- *     uint32_t {@link #queueLabelCount};
- *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT} const * {@link #pQueueLabels};
- *     uint32_t {@link #cmdBufLabelCount};
- *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT} const * {@link #pCmdBufLabels};
- *     uint32_t {@link #objectCount};
- *     {@link VkDebugUtilsObjectNameInfoEXT VkDebugUtilsObjectNameInfoEXT} const * {@link #pObjects};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDebugUtilsMessengerCallbackDataFlagsEXT flags;
+ *     char const * pMessageIdName;
+ *     int32_t messageIdNumber;
+ *     char const * pMessage;
+ *     uint32_t queueLabelCount;
+ *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT} const * pQueueLabels;
+ *     uint32_t cmdBufLabelCount;
+ *     {@link VkDebugUtilsLabelEXT VkDebugUtilsLabelEXT} const * pCmdBufLabels;
+ *     uint32_t objectCount;
+ *     {@link VkDebugUtilsObjectNameInfoEXT VkDebugUtilsObjectNameInfoEXT} const * pObjects;
+ * }}</pre>
  */
 public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMessengerCallbackDataEXT> implements NativeResource {
 
@@ -149,70 +111,70 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** 0 and is reserved for future use. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkDebugUtilsMessengerCallbackDataFlagsEXT")
     public int flags() { return nflags(address()); }
-    /** {@code NULL} or a null-terminated UTF-8 string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pMessageIdName} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer pMessageIdName() { return npMessageIdName(address()); }
-    /** {@code NULL} or a null-terminated UTF-8 string that identifies the particular message ID that is associated with the provided message. If the message corresponds to a validation layer message, then this string may contain the portion of the Vulkan specification that is believed to have been violated. */
+    /** @return the null-terminated string pointed to by the {@code pMessageIdName} field. */
     @NativeType("char const *")
     public @Nullable String pMessageIdNameString() { return npMessageIdNameString(address()); }
-    /** the ID number of the triggering message. If the message corresponds to a validation layer message, then this number is related to the internal number associated with the message being triggered. */
+    /** @return the value of the {@code messageIdNumber} field. */
     @NativeType("int32_t")
     public int messageIdNumber() { return nmessageIdNumber(address()); }
-    /** {@code NULL} if {@code messageTypes} is equal to {@link EXTDeviceAddressBindingReport#VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT}, or a null-terminated UTF-8 string detailing the trigger conditions. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pMessage} field. */
     @NativeType("char const *")
     public @Nullable ByteBuffer pMessage() { return npMessage(address()); }
-    /** {@code NULL} if {@code messageTypes} is equal to {@link EXTDeviceAddressBindingReport#VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT}, or a null-terminated UTF-8 string detailing the trigger conditions. */
+    /** @return the null-terminated string pointed to by the {@code pMessage} field. */
     @NativeType("char const *")
     public @Nullable String pMessageString() { return npMessageString(address()); }
-    /** a count of items contained in the {@code pQueueLabels} array. */
+    /** @return the value of the {@code queueLabelCount} field. */
     @NativeType("uint32_t")
     public int queueLabelCount() { return nqueueLabelCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkQueue} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#debugging-queue-labels">Queue Labels</a> for more information. */
+    /** @return a {@link VkDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@code pQueueLabels} field. */
     @NativeType("VkDebugUtilsLabelEXT const *")
     public VkDebugUtilsLabelEXT.@Nullable Buffer pQueueLabels() { return npQueueLabels(address()); }
-    /** a count of items contained in the {@code pCmdBufLabels} array. */
+    /** @return the value of the {@code cmdBufLabelCount} field. */
     @NativeType("uint32_t")
     public int cmdBufLabelCount() { return ncmdBufLabelCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@link VkDebugUtilsLabelEXT} active in the current {@code VkCommandBuffer} at the time the callback was triggered. Refer to <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#debugging-command-buffer-labels">Command Buffer Labels</a> for more information. */
+    /** @return a {@link VkDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@code pCmdBufLabels} field. */
     @NativeType("VkDebugUtilsLabelEXT const *")
     public VkDebugUtilsLabelEXT.@Nullable Buffer pCmdBufLabels() { return npCmdBufLabels(address()); }
-    /** a count of items contained in the {@code pObjects} array. */
+    /** @return the value of the {@code objectCount} field. */
     @NativeType("uint32_t")
     public int objectCount() { return nobjectCount(address()); }
-    /** a pointer to an array of {@link VkDebugUtilsObjectNameInfoEXT} objects related to the detected issue. The array is roughly in order or importance, but the 0th element is always guaranteed to be the most important object for this message. */
+    /** @return a {@link VkDebugUtilsObjectNameInfoEXT.Buffer} view of the struct array pointed to by the {@code pObjects} field. */
     @NativeType("VkDebugUtilsObjectNameInfoEXT const *")
     public VkDebugUtilsObjectNameInfoEXT.@Nullable Buffer pObjects() { return npObjects(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDebugUtilsMessengerCallbackDataEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT} value to the {@code sType} field. */
     public VkDebugUtilsMessengerCallbackDataEXT sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDeviceAddressBindingCallbackDataEXT} value to the {@code pNext} chain. */
     public VkDebugUtilsMessengerCallbackDataEXT pNext(VkDeviceAddressBindingCallbackDataEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkDebugUtilsMessengerCallbackDataEXT flags(@NativeType("VkDebugUtilsMessengerCallbackDataFlagsEXT") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #pMessageIdName} field. */
+    /** Sets the address of the specified encoded string to the {@code pMessageIdName} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pMessageIdName(@Nullable @NativeType("char const *") ByteBuffer value) { npMessageIdName(address(), value); return this; }
-    /** Sets the specified value to the {@link #messageIdNumber} field. */
+    /** Sets the specified value to the {@code messageIdNumber} field. */
     public VkDebugUtilsMessengerCallbackDataEXT messageIdNumber(@NativeType("int32_t") int value) { nmessageIdNumber(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #pMessage} field. */
+    /** Sets the address of the specified encoded string to the {@code pMessage} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pMessage(@Nullable @NativeType("char const *") ByteBuffer value) { npMessage(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@link #pQueueLabels} field. */
+    /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@code pQueueLabels} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pQueueLabels(@NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT.@Nullable Buffer value) { npQueueLabels(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@link #pCmdBufLabels} field. */
+    /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@code pCmdBufLabels} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pCmdBufLabels(@NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT.@Nullable Buffer value) { npCmdBufLabels(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDebugUtilsObjectNameInfoEXT.Buffer} to the {@link #pObjects} field. */
+    /** Sets the address of the specified {@link VkDebugUtilsObjectNameInfoEXT.Buffer} to the {@code pObjects} field. */
     public VkDebugUtilsMessengerCallbackDataEXT pObjects(@NativeType("VkDebugUtilsObjectNameInfoEXT const *") VkDebugUtilsObjectNameInfoEXT.@Nullable Buffer value) { npObjects(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -508,70 +470,70 @@ public class VkDebugUtilsMessengerCallbackDataEXT extends Struct<VkDebugUtilsMes
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDebugUtilsMessengerCallbackDataEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDebugUtilsMessengerCallbackDataEXT.nsType(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCallbackDataEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDebugUtilsMessengerCallbackDataEXT.npNext(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCallbackDataEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkDebugUtilsMessengerCallbackDataFlagsEXT")
         public int flags() { return VkDebugUtilsMessengerCallbackDataEXT.nflags(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessageIdName} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pMessageIdName} field. */
         @NativeType("char const *")
         public @Nullable ByteBuffer pMessageIdName() { return VkDebugUtilsMessengerCallbackDataEXT.npMessageIdName(address()); }
-        /** @return the null-terminated string pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessageIdName} field. */
+        /** @return the null-terminated string pointed to by the {@code pMessageIdName} field. */
         @NativeType("char const *")
         public @Nullable String pMessageIdNameString() { return VkDebugUtilsMessengerCallbackDataEXT.npMessageIdNameString(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCallbackDataEXT#messageIdNumber} field. */
+        /** @return the value of the {@code messageIdNumber} field. */
         @NativeType("int32_t")
         public int messageIdNumber() { return VkDebugUtilsMessengerCallbackDataEXT.nmessageIdNumber(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessage} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code pMessage} field. */
         @NativeType("char const *")
         public @Nullable ByteBuffer pMessage() { return VkDebugUtilsMessengerCallbackDataEXT.npMessage(address()); }
-        /** @return the null-terminated string pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessage} field. */
+        /** @return the null-terminated string pointed to by the {@code pMessage} field. */
         @NativeType("char const *")
         public @Nullable String pMessageString() { return VkDebugUtilsMessengerCallbackDataEXT.npMessageString(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCallbackDataEXT#queueLabelCount} field. */
+        /** @return the value of the {@code queueLabelCount} field. */
         @NativeType("uint32_t")
         public int queueLabelCount() { return VkDebugUtilsMessengerCallbackDataEXT.nqueueLabelCount(address()); }
-        /** @return a {@link VkDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pQueueLabels} field. */
+        /** @return a {@link VkDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@code pQueueLabels} field. */
         @NativeType("VkDebugUtilsLabelEXT const *")
         public VkDebugUtilsLabelEXT.@Nullable Buffer pQueueLabels() { return VkDebugUtilsMessengerCallbackDataEXT.npQueueLabels(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCallbackDataEXT#cmdBufLabelCount} field. */
+        /** @return the value of the {@code cmdBufLabelCount} field. */
         @NativeType("uint32_t")
         public int cmdBufLabelCount() { return VkDebugUtilsMessengerCallbackDataEXT.ncmdBufLabelCount(address()); }
-        /** @return a {@link VkDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pCmdBufLabels} field. */
+        /** @return a {@link VkDebugUtilsLabelEXT.Buffer} view of the struct array pointed to by the {@code pCmdBufLabels} field. */
         @NativeType("VkDebugUtilsLabelEXT const *")
         public VkDebugUtilsLabelEXT.@Nullable Buffer pCmdBufLabels() { return VkDebugUtilsMessengerCallbackDataEXT.npCmdBufLabels(address()); }
-        /** @return the value of the {@link VkDebugUtilsMessengerCallbackDataEXT#objectCount} field. */
+        /** @return the value of the {@code objectCount} field. */
         @NativeType("uint32_t")
         public int objectCount() { return VkDebugUtilsMessengerCallbackDataEXT.nobjectCount(address()); }
-        /** @return a {@link VkDebugUtilsObjectNameInfoEXT.Buffer} view of the struct array pointed to by the {@link VkDebugUtilsMessengerCallbackDataEXT#pObjects} field. */
+        /** @return a {@link VkDebugUtilsObjectNameInfoEXT.Buffer} view of the struct array pointed to by the {@code pObjects} field. */
         @NativeType("VkDebugUtilsObjectNameInfoEXT const *")
         public VkDebugUtilsObjectNameInfoEXT.@Nullable Buffer pObjects() { return VkDebugUtilsMessengerCallbackDataEXT.npObjects(address()); }
 
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugUtilsMessengerCallbackDataEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT} value to the {@link VkDebugUtilsMessengerCallbackDataEXT#sType} field. */
+        /** Sets the {@link EXTDebugUtils#VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT} value to the {@code sType} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer sType$Default() { return sType(EXTDebugUtils.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT); }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugUtilsMessengerCallbackDataEXT.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDeviceAddressBindingCallbackDataEXT} value to the {@code pNext} chain. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pNext(VkDeviceAddressBindingCallbackDataEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer flags(@NativeType("VkDebugUtilsMessengerCallbackDataFlagsEXT") int value) { VkDebugUtilsMessengerCallbackDataEXT.nflags(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessageIdName} field. */
+        /** Sets the address of the specified encoded string to the {@code pMessageIdName} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pMessageIdName(@Nullable @NativeType("char const *") ByteBuffer value) { VkDebugUtilsMessengerCallbackDataEXT.npMessageIdName(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugUtilsMessengerCallbackDataEXT#messageIdNumber} field. */
+        /** Sets the specified value to the {@code messageIdNumber} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer messageIdNumber(@NativeType("int32_t") int value) { VkDebugUtilsMessengerCallbackDataEXT.nmessageIdNumber(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link VkDebugUtilsMessengerCallbackDataEXT#pMessage} field. */
+        /** Sets the address of the specified encoded string to the {@code pMessage} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pMessage(@Nullable @NativeType("char const *") ByteBuffer value) { VkDebugUtilsMessengerCallbackDataEXT.npMessage(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@link VkDebugUtilsMessengerCallbackDataEXT#pQueueLabels} field. */
+        /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@code pQueueLabels} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pQueueLabels(@NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT.@Nullable Buffer value) { VkDebugUtilsMessengerCallbackDataEXT.npQueueLabels(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@link VkDebugUtilsMessengerCallbackDataEXT#pCmdBufLabels} field. */
+        /** Sets the address of the specified {@link VkDebugUtilsLabelEXT.Buffer} to the {@code pCmdBufLabels} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pCmdBufLabels(@NativeType("VkDebugUtilsLabelEXT const *") VkDebugUtilsLabelEXT.@Nullable Buffer value) { VkDebugUtilsMessengerCallbackDataEXT.npCmdBufLabels(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDebugUtilsObjectNameInfoEXT.Buffer} to the {@link VkDebugUtilsMessengerCallbackDataEXT#pObjects} field. */
+        /** Sets the address of the specified {@link VkDebugUtilsObjectNameInfoEXT.Buffer} to the {@code pObjects} field. */
         public VkDebugUtilsMessengerCallbackDataEXT.Buffer pObjects(@NativeType("VkDebugUtilsObjectNameInfoEXT const *") VkDebugUtilsObjectNameInfoEXT.@Nullable Buffer value) { VkDebugUtilsMessengerCallbackDataEXT.npObjects(address(), value); return this; }
 
     }

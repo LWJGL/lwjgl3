@@ -17,22 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A NanoVG color.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct NVGcolor {
  *     union {
- *         float {@link #rgba}[4];
+ *         float rgba[4];
  *         struct {
- *             float {@link #r};
- *             float {@link #g};
- *             float {@link #b};
- *             float {@link #a};
+ *             float r;
+ *             float g;
+ *             float b;
+ *             float a;
  *         };
  *     };
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct NVGcolor")
 public class NVGColor extends Struct<NVGColor> implements NativeResource {
@@ -96,31 +92,31 @@ public class NVGColor extends Struct<NVGColor> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an array of 4 color components */
+    /** @return a {@link FloatBuffer} view of the {@code rgba} field. */
     @NativeType("float[4]")
     public FloatBuffer rgba() { return nrgba(address()); }
-    /** an array of 4 color components */
+    /** @return the value at the specified index of the {@code rgba} field. */
     public float rgba(int index) { return nrgba(address(), index); }
-    /** the color red component */
+    /** @return the value of the {@code r} field. */
     public float r() { return nr(address()); }
-    /** the color green component */
+    /** @return the value of the {@code g} field. */
     public float g() { return ng(address()); }
-    /** the color blue component */
+    /** @return the value of the {@code b} field. */
     public float b() { return nb(address()); }
-    /** the color alpha component */
+    /** @return the value of the {@code a} field. */
     public float a() { return na(address()); }
 
-    /** Copies the specified {@link FloatBuffer} to the {@link #rgba} field. */
+    /** Copies the specified {@link FloatBuffer} to the {@code rgba} field. */
     public NVGColor rgba(@NativeType("float[4]") FloatBuffer value) { nrgba(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #rgba} field. */
+    /** Sets the specified value at the specified index of the {@code rgba} field. */
     public NVGColor rgba(int index, float value) { nrgba(address(), index, value); return this; }
-    /** Sets the specified value to the {@link #r} field. */
+    /** Sets the specified value to the {@code r} field. */
     public NVGColor r(float value) { nr(address(), value); return this; }
-    /** Sets the specified value to the {@link #g} field. */
+    /** Sets the specified value to the {@code g} field. */
     public NVGColor g(float value) { ng(address(), value); return this; }
-    /** Sets the specified value to the {@link #b} field. */
+    /** Sets the specified value to the {@code b} field. */
     public NVGColor b(float value) { nb(address(), value); return this; }
-    /** Sets the specified value to the {@link #a} field. */
+    /** Sets the specified value to the {@code a} field. */
     public NVGColor a(float value) { na(address(), value); return this; }
 
     /**
@@ -341,31 +337,31 @@ public class NVGColor extends Struct<NVGColor> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link FloatBuffer} view of the {@link NVGColor#rgba} field. */
+        /** @return a {@link FloatBuffer} view of the {@code rgba} field. */
         @NativeType("float[4]")
         public FloatBuffer rgba() { return NVGColor.nrgba(address()); }
-        /** @return the value at the specified index of the {@link NVGColor#rgba} field. */
+        /** @return the value at the specified index of the {@code rgba} field. */
         public float rgba(int index) { return NVGColor.nrgba(address(), index); }
-        /** @return the value of the {@link NVGColor#r} field. */
+        /** @return the value of the {@code r} field. */
         public float r() { return NVGColor.nr(address()); }
-        /** @return the value of the {@link NVGColor#g} field. */
+        /** @return the value of the {@code g} field. */
         public float g() { return NVGColor.ng(address()); }
-        /** @return the value of the {@link NVGColor#b} field. */
+        /** @return the value of the {@code b} field. */
         public float b() { return NVGColor.nb(address()); }
-        /** @return the value of the {@link NVGColor#a} field. */
+        /** @return the value of the {@code a} field. */
         public float a() { return NVGColor.na(address()); }
 
-        /** Copies the specified {@link FloatBuffer} to the {@link NVGColor#rgba} field. */
+        /** Copies the specified {@link FloatBuffer} to the {@code rgba} field. */
         public NVGColor.Buffer rgba(@NativeType("float[4]") FloatBuffer value) { NVGColor.nrgba(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link NVGColor#rgba} field. */
+        /** Sets the specified value at the specified index of the {@code rgba} field. */
         public NVGColor.Buffer rgba(int index, float value) { NVGColor.nrgba(address(), index, value); return this; }
-        /** Sets the specified value to the {@link NVGColor#r} field. */
+        /** Sets the specified value to the {@code r} field. */
         public NVGColor.Buffer r(float value) { NVGColor.nr(address(), value); return this; }
-        /** Sets the specified value to the {@link NVGColor#g} field. */
+        /** Sets the specified value to the {@code g} field. */
         public NVGColor.Buffer g(float value) { NVGColor.ng(address(), value); return this; }
-        /** Sets the specified value to the {@link NVGColor#b} field. */
+        /** Sets the specified value to the {@code b} field. */
         public NVGColor.Buffer b(float value) { NVGColor.nb(address(), value); return this; }
-        /** Sets the specified value to the {@link NVGColor#a} field. */
+        /** Sets the specified value to the {@code a} field. */
         public NVGColor.Buffer a(float value) { NVGColor.na(address(), value); return this; }
 
     }

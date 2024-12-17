@@ -16,43 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters for copying a micromap.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code mode} <b>must</b> be {@link EXTOpacityMicromap#VK_COPY_MICROMAP_MODE_COMPACT_EXT COPY_MICROMAP_MODE_COMPACT_EXT} or {@link EXTOpacityMicromap#VK_COPY_MICROMAP_MODE_CLONE_EXT COPY_MICROMAP_MODE_CLONE_EXT}</li>
- * <li>The source acceleration structure {@code src} <b>must</b> have been constructed prior to the execution of this command</li>
- * <li>If {@code mode} is {@link EXTOpacityMicromap#VK_COPY_MICROMAP_MODE_COMPACT_EXT COPY_MICROMAP_MODE_COMPACT_EXT}, {@code src} <b>must</b> have been constructed with {@link EXTOpacityMicromap#VK_BUILD_MICROMAP_ALLOW_COMPACTION_BIT_EXT BUILD_MICROMAP_ALLOW_COMPACTION_BIT_EXT} in the build</li>
- * <li>The {@code buffer} used to create {@code src} <b>must</b> be bound to device memory</li>
- * <li>The {@code buffer} used to create {@code dst} <b>must</b> be bound to device memory</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code src} <b>must</b> be a valid {@code VkMicromapEXT} handle</li>
- * <li>{@code dst} <b>must</b> be a valid {@code VkMicromapEXT} handle</li>
- * <li>{@code mode} <b>must</b> be a valid {@code VkCopyMicromapModeEXT} value</li>
- * <li>Both of {@code dst}, and {@code src} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTOpacityMicromap#vkCmdCopyMicromapEXT CmdCopyMicromapEXT}, {@link EXTOpacityMicromap#vkCopyMicromapEXT CopyMicromapEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCopyMicromapInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkMicromapEXT {@link #src};
- *     VkMicromapEXT {@link #dst};
- *     VkCopyMicromapModeEXT {@link #mode};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkMicromapEXT src;
+ *     VkMicromapEXT dst;
+ *     VkCopyMicromapModeEXT mode;
+ * }}</pre>
  */
 public class VkCopyMicromapInfoEXT extends Struct<VkCopyMicromapInfoEXT> implements NativeResource {
 
@@ -111,33 +82,33 @@ public class VkCopyMicromapInfoEXT extends Struct<VkCopyMicromapInfoEXT> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the source micromap for the copy. */
+    /** @return the value of the {@code src} field. */
     @NativeType("VkMicromapEXT")
     public long src() { return nsrc(address()); }
-    /** the target micromap for the copy. */
+    /** @return the value of the {@code dst} field. */
     @NativeType("VkMicromapEXT")
     public long dst() { return ndst(address()); }
-    /** a {@code VkCopyMicromapModeEXT} value specifying additional operations to perform during the copy. */
+    /** @return the value of the {@code mode} field. */
     @NativeType("VkCopyMicromapModeEXT")
     public int mode() { return nmode(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCopyMicromapInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT} value to the {@code sType} field. */
     public VkCopyMicromapInfoEXT sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCopyMicromapInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #src} field. */
+    /** Sets the specified value to the {@code src} field. */
     public VkCopyMicromapInfoEXT src(@NativeType("VkMicromapEXT") long value) { nsrc(address(), value); return this; }
-    /** Sets the specified value to the {@link #dst} field. */
+    /** Sets the specified value to the {@code dst} field. */
     public VkCopyMicromapInfoEXT dst(@NativeType("VkMicromapEXT") long value) { ndst(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public VkCopyMicromapInfoEXT mode(@NativeType("VkCopyMicromapModeEXT") int value) { nmode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -345,33 +316,33 @@ public class VkCopyMicromapInfoEXT extends Struct<VkCopyMicromapInfoEXT> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCopyMicromapInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCopyMicromapInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkCopyMicromapInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCopyMicromapInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkCopyMicromapInfoEXT#src} field. */
+        /** @return the value of the {@code src} field. */
         @NativeType("VkMicromapEXT")
         public long src() { return VkCopyMicromapInfoEXT.nsrc(address()); }
-        /** @return the value of the {@link VkCopyMicromapInfoEXT#dst} field. */
+        /** @return the value of the {@code dst} field. */
         @NativeType("VkMicromapEXT")
         public long dst() { return VkCopyMicromapInfoEXT.ndst(address()); }
-        /** @return the value of the {@link VkCopyMicromapInfoEXT#mode} field. */
+        /** @return the value of the {@code mode} field. */
         @NativeType("VkCopyMicromapModeEXT")
         public int mode() { return VkCopyMicromapInfoEXT.nmode(address()); }
 
-        /** Sets the specified value to the {@link VkCopyMicromapInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCopyMicromapInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyMicromapInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT} value to the {@link VkCopyMicromapInfoEXT#sType} field. */
+        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT} value to the {@code sType} field. */
         public VkCopyMicromapInfoEXT.Buffer sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT); }
-        /** Sets the specified value to the {@link VkCopyMicromapInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCopyMicromapInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkCopyMicromapInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyMicromapInfoEXT#src} field. */
+        /** Sets the specified value to the {@code src} field. */
         public VkCopyMicromapInfoEXT.Buffer src(@NativeType("VkMicromapEXT") long value) { VkCopyMicromapInfoEXT.nsrc(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyMicromapInfoEXT#dst} field. */
+        /** Sets the specified value to the {@code dst} field. */
         public VkCopyMicromapInfoEXT.Buffer dst(@NativeType("VkMicromapEXT") long value) { VkCopyMicromapInfoEXT.ndst(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyMicromapInfoEXT#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public VkCopyMicromapInfoEXT.Buffer mode(@NativeType("VkCopyMicromapModeEXT") int value) { VkCopyMicromapInfoEXT.nmode(address(), value); return this; }
 
     }

@@ -19,25 +19,11 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.ovr.OVR.ovrEye_Count;
 
 /**
- * Contains the data necessary to properly calculate position info for various layer types.
- * 
- * <ul>
- * <li>{@code HmdToEyePose} is the same value-pair provided in {@link OVREyeRenderDesc}. Modifying this value is suggested only if the app is forcing monoscopic
- * rendering and requires that all layers including quad layers show up in a monoscopic fashion.</li>
- * <li>{@code HmdSpaceToWorldScaleInMeters} is used to scale player motion into in-application units.</li>
- * </ul>
- * 
- * <p>In other words, it is how big an in-application unit is in the player's physical meters. For example, if the application uses inches as its units then
- * {@code HmdSpaceToWorldScaleInMeters} would be 0.0254. Note that if you are scaling the player in size, this must also scale. So if your application
- * units are inches, but you're shrinking the player to half their normal size, then {@code HmdSpaceToWorldScaleInMeters} would be {@code 0.0254*2.0}.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrViewScaleDesc {
- *     {@link OVRPosef ovrPosef} {@link #HmdToEyePose}[ovrEye_Count];
- *     float {@link #HmdSpaceToWorldScaleInMeters};
- * }</code></pre>
+ *     {@link OVRPosef ovrPosef} HmdToEyePose[ovrEye_Count];
+ *     float HmdSpaceToWorldScaleInMeters;
+ * }}</pre>
  */
 @NativeType("struct ovrViewScaleDesc")
 public class OVRViewScaleDesc extends Struct<OVRViewScaleDesc> implements NativeResource {
@@ -88,24 +74,24 @@ public class OVRViewScaleDesc extends Struct<OVRViewScaleDesc> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** transform of each eye from the HMD center, in meters */
+    /** @return a {@link OVRPosef}.Buffer view of the {@code HmdToEyePose} field. */
     @NativeType("ovrPosef[ovrEye_Count]")
     public OVRPosef.Buffer HmdToEyePose() { return nHmdToEyePose(address()); }
-    /** transform of each eye from the HMD center, in meters */
+    /** @return a {@link OVRPosef} view of the struct at the specified index of the {@code HmdToEyePose} field. */
     @NativeType("ovrPosef")
     public OVRPosef HmdToEyePose(int index) { return nHmdToEyePose(address(), index); }
-    /** ratio of viewer units to meter units */
+    /** @return the value of the {@code HmdSpaceToWorldScaleInMeters} field. */
     public float HmdSpaceToWorldScaleInMeters() { return nHmdSpaceToWorldScaleInMeters(address()); }
 
-    /** Copies the specified {@link OVRPosef.Buffer} to the {@link #HmdToEyePose} field. */
+    /** Copies the specified {@link OVRPosef.Buffer} to the {@code HmdToEyePose} field. */
     public OVRViewScaleDesc HmdToEyePose(@NativeType("ovrPosef[ovrEye_Count]") OVRPosef.Buffer value) { nHmdToEyePose(address(), value); return this; }
-    /** Copies the specified {@link OVRPosef} at the specified index of the {@link #HmdToEyePose} field. */
+    /** Copies the specified {@link OVRPosef} at the specified index of the {@code HmdToEyePose} field. */
     public OVRViewScaleDesc HmdToEyePose(int index, @NativeType("ovrPosef") OVRPosef value) { nHmdToEyePose(address(), index, value); return this; }
-    /** Passes the {@link #HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRViewScaleDesc HmdToEyePose(java.util.function.Consumer<OVRPosef.Buffer> consumer) { consumer.accept(HmdToEyePose()); return this; }
-    /** Passes the element at {@code index} of the {@link #HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRViewScaleDesc HmdToEyePose(int index, java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(HmdToEyePose(index)); return this; }
-    /** Sets the specified value to the {@link #HmdSpaceToWorldScaleInMeters} field. */
+    /** Sets the specified value to the {@code HmdSpaceToWorldScaleInMeters} field. */
     public OVRViewScaleDesc HmdSpaceToWorldScaleInMeters(float value) { nHmdSpaceToWorldScaleInMeters(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,24 +311,24 @@ public class OVRViewScaleDesc extends Struct<OVRViewScaleDesc> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link OVRPosef}.Buffer view of the {@link OVRViewScaleDesc#HmdToEyePose} field. */
+        /** @return a {@link OVRPosef}.Buffer view of the {@code HmdToEyePose} field. */
         @NativeType("ovrPosef[ovrEye_Count]")
         public OVRPosef.Buffer HmdToEyePose() { return OVRViewScaleDesc.nHmdToEyePose(address()); }
-        /** @return a {@link OVRPosef} view of the struct at the specified index of the {@link OVRViewScaleDesc#HmdToEyePose} field. */
+        /** @return a {@link OVRPosef} view of the struct at the specified index of the {@code HmdToEyePose} field. */
         @NativeType("ovrPosef")
         public OVRPosef HmdToEyePose(int index) { return OVRViewScaleDesc.nHmdToEyePose(address(), index); }
-        /** @return the value of the {@link OVRViewScaleDesc#HmdSpaceToWorldScaleInMeters} field. */
+        /** @return the value of the {@code HmdSpaceToWorldScaleInMeters} field. */
         public float HmdSpaceToWorldScaleInMeters() { return OVRViewScaleDesc.nHmdSpaceToWorldScaleInMeters(address()); }
 
-        /** Copies the specified {@link OVRPosef.Buffer} to the {@link OVRViewScaleDesc#HmdToEyePose} field. */
+        /** Copies the specified {@link OVRPosef.Buffer} to the {@code HmdToEyePose} field. */
         public OVRViewScaleDesc.Buffer HmdToEyePose(@NativeType("ovrPosef[ovrEye_Count]") OVRPosef.Buffer value) { OVRViewScaleDesc.nHmdToEyePose(address(), value); return this; }
-        /** Copies the specified {@link OVRPosef} at the specified index of the {@link OVRViewScaleDesc#HmdToEyePose} field. */
+        /** Copies the specified {@link OVRPosef} at the specified index of the {@code HmdToEyePose} field. */
         public OVRViewScaleDesc.Buffer HmdToEyePose(int index, @NativeType("ovrPosef") OVRPosef value) { OVRViewScaleDesc.nHmdToEyePose(address(), index, value); return this; }
-        /** Passes the {@link OVRViewScaleDesc#HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRViewScaleDesc.Buffer HmdToEyePose(java.util.function.Consumer<OVRPosef.Buffer> consumer) { consumer.accept(HmdToEyePose()); return this; }
-        /** Passes the element at {@code index} of the {@link OVRViewScaleDesc#HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@code HmdToEyePose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRViewScaleDesc.Buffer HmdToEyePose(int index, java.util.function.Consumer<OVRPosef> consumer) { consumer.accept(HmdToEyePose(index)); return this; }
-        /** Sets the specified value to the {@link OVRViewScaleDesc#HmdSpaceToWorldScaleInMeters} field. */
+        /** Sets the specified value to the {@code HmdSpaceToWorldScaleInMeters} field. */
         public OVRViewScaleDesc.Buffer HmdSpaceToWorldScaleInMeters(float value) { OVRViewScaleDesc.nHmdSpaceToWorldScaleInMeters(address(), value); return this; }
 
     }

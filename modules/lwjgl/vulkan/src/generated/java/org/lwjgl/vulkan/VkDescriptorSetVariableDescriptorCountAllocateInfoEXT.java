@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDescriptorSetVariableDescriptorCountAllocateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetVariableDescriptorCountAllocateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t descriptorSetCount;
  *     uint32_t const * pDescriptorCounts;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDescriptorSetVariableDescriptorCountAllocateInfoEXT extends VkDescriptorSetVariableDescriptorCountAllocateInfo {
 

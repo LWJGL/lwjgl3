@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct msdf_transform {
- *     {@link MSDFGenVector2 struct msdf_vector2} {@link #scale};
- *     {@link MSDFGenVector2 struct msdf_vector2} {@link #translation};
- *     {@link MSDFGenRange struct msdf_range} {@link #distance_mapping};
- * }</code></pre>
+ *     {@link MSDFGenVector2 struct msdf_vector2} scale;
+ *     {@link MSDFGenVector2 struct msdf_vector2} translation;
+ *     {@link MSDFGenRange struct msdf_range} distance_mapping;
+ * }}</pre>
  */
 @NativeType("struct msdf_transform")
 public class MSDFGenTransform extends Struct<MSDFGenTransform> implements NativeResource {
@@ -77,27 +75,27 @@ public class MSDFGenTransform extends Struct<MSDFGenTransform> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the scale vector of this transform */
+    /** @return a {@link MSDFGenVector2} view of the {@code scale} field. */
     @NativeType("struct msdf_vector2")
     public MSDFGenVector2 scale() { return nscale(address()); }
-    /** the translation vector of this transform */
+    /** @return a {@link MSDFGenVector2} view of the {@code translation} field. */
     @NativeType("struct msdf_vector2")
     public MSDFGenVector2 translation() { return ntranslation(address()); }
-    /** the distance mapping of this transform */
+    /** @return a {@link MSDFGenRange} view of the {@code distance_mapping} field. */
     @NativeType("struct msdf_range")
     public MSDFGenRange distance_mapping() { return ndistance_mapping(address()); }
 
-    /** Copies the specified {@link MSDFGenVector2} to the {@link #scale} field. */
+    /** Copies the specified {@link MSDFGenVector2} to the {@code scale} field. */
     public MSDFGenTransform scale(@NativeType("struct msdf_vector2") MSDFGenVector2 value) { nscale(address(), value); return this; }
-    /** Passes the {@link #scale} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code scale} field to the specified {@link java.util.function.Consumer Consumer}. */
     public MSDFGenTransform scale(java.util.function.Consumer<MSDFGenVector2> consumer) { consumer.accept(scale()); return this; }
-    /** Copies the specified {@link MSDFGenVector2} to the {@link #translation} field. */
+    /** Copies the specified {@link MSDFGenVector2} to the {@code translation} field. */
     public MSDFGenTransform translation(@NativeType("struct msdf_vector2") MSDFGenVector2 value) { ntranslation(address(), value); return this; }
-    /** Passes the {@link #translation} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code translation} field to the specified {@link java.util.function.Consumer Consumer}. */
     public MSDFGenTransform translation(java.util.function.Consumer<MSDFGenVector2> consumer) { consumer.accept(translation()); return this; }
-    /** Copies the specified {@link MSDFGenRange} to the {@link #distance_mapping} field. */
+    /** Copies the specified {@link MSDFGenRange} to the {@code distance_mapping} field. */
     public MSDFGenTransform distance_mapping(@NativeType("struct msdf_range") MSDFGenRange value) { ndistance_mapping(address(), value); return this; }
-    /** Passes the {@link #distance_mapping} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code distance_mapping} field to the specified {@link java.util.function.Consumer Consumer}. */
     public MSDFGenTransform distance_mapping(java.util.function.Consumer<MSDFGenRange> consumer) { consumer.accept(distance_mapping()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -293,27 +291,27 @@ public class MSDFGenTransform extends Struct<MSDFGenTransform> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link MSDFGenVector2} view of the {@link MSDFGenTransform#scale} field. */
+        /** @return a {@link MSDFGenVector2} view of the {@code scale} field. */
         @NativeType("struct msdf_vector2")
         public MSDFGenVector2 scale() { return MSDFGenTransform.nscale(address()); }
-        /** @return a {@link MSDFGenVector2} view of the {@link MSDFGenTransform#translation} field. */
+        /** @return a {@link MSDFGenVector2} view of the {@code translation} field. */
         @NativeType("struct msdf_vector2")
         public MSDFGenVector2 translation() { return MSDFGenTransform.ntranslation(address()); }
-        /** @return a {@link MSDFGenRange} view of the {@link MSDFGenTransform#distance_mapping} field. */
+        /** @return a {@link MSDFGenRange} view of the {@code distance_mapping} field. */
         @NativeType("struct msdf_range")
         public MSDFGenRange distance_mapping() { return MSDFGenTransform.ndistance_mapping(address()); }
 
-        /** Copies the specified {@link MSDFGenVector2} to the {@link MSDFGenTransform#scale} field. */
+        /** Copies the specified {@link MSDFGenVector2} to the {@code scale} field. */
         public MSDFGenTransform.Buffer scale(@NativeType("struct msdf_vector2") MSDFGenVector2 value) { MSDFGenTransform.nscale(address(), value); return this; }
-        /** Passes the {@link MSDFGenTransform#scale} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code scale} field to the specified {@link java.util.function.Consumer Consumer}. */
         public MSDFGenTransform.Buffer scale(java.util.function.Consumer<MSDFGenVector2> consumer) { consumer.accept(scale()); return this; }
-        /** Copies the specified {@link MSDFGenVector2} to the {@link MSDFGenTransform#translation} field. */
+        /** Copies the specified {@link MSDFGenVector2} to the {@code translation} field. */
         public MSDFGenTransform.Buffer translation(@NativeType("struct msdf_vector2") MSDFGenVector2 value) { MSDFGenTransform.ntranslation(address(), value); return this; }
-        /** Passes the {@link MSDFGenTransform#translation} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code translation} field to the specified {@link java.util.function.Consumer Consumer}. */
         public MSDFGenTransform.Buffer translation(java.util.function.Consumer<MSDFGenVector2> consumer) { consumer.accept(translation()); return this; }
-        /** Copies the specified {@link MSDFGenRange} to the {@link MSDFGenTransform#distance_mapping} field. */
+        /** Copies the specified {@link MSDFGenRange} to the {@code distance_mapping} field. */
         public MSDFGenTransform.Buffer distance_mapping(@NativeType("struct msdf_range") MSDFGenRange value) { MSDFGenTransform.ndistance_mapping(address(), value); return this; }
-        /** Passes the {@link MSDFGenTransform#distance_mapping} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code distance_mapping} field to the specified {@link java.util.function.Consumer Consumer}. */
         public MSDFGenTransform.Buffer distance_mapping(java.util.function.Consumer<MSDFGenRange> consumer) { consumer.accept(distance_mapping()); return this; }
 
     }

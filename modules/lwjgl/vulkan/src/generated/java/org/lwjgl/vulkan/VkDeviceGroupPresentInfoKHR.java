@@ -17,50 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Mode and mask controlling which physical devices' images are presented.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code mode} is {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR}, then each element of {@code pDeviceMasks} selects which instance of the swapchain image is presented. Each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and the corresponding physical device <b>must</b> have a presentation engine as reported by {@link VkDeviceGroupPresentCapabilitiesKHR}.</p>
- * 
- * <p>If {@code mode} is {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR}, then each element of {@code pDeviceMasks} selects which instance of the swapchain image is presented. Each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and some physical device in the logical device <b>must</b> include that bit in its {@link VkDeviceGroupPresentCapabilitiesKHR}{@code ::presentMask}.</p>
- * 
- * <p>If {@code mode} is {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR}, then each element of {@code pDeviceMasks} selects which instances of the swapchain image are component-wise summed and the sum of those images is presented. If the sum in any component is outside the representable range, the value of that component is undefined. Each element of {@code pDeviceMasks} <b>must</b> have a value for which all set bits are set in one of the elements of {@link VkDeviceGroupPresentCapabilitiesKHR}{@code ::presentMask}.</p>
- * 
- * <p>If {@code mode} is {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR}, then each element of {@code pDeviceMasks} selects which instance(s) of the swapchain images are presented. For each bit set in each element of {@code pDeviceMasks}, the corresponding physical device <b>must</b> have a presentation engine as reported by {@link VkDeviceGroupPresentCapabilitiesKHR}.</p>
- * 
- * <p>If {@link VkDeviceGroupPresentInfoKHR} is not provided or {@code swapchainCount} is zero then the masks are considered to be 1. If {@link VkDeviceGroupPresentInfoKHR} is not provided, {@code mode} is considered to be {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code swapchainCount} <b>must</b> equal 0 or {@link VkPresentInfoKHR}{@code ::swapchainCount}</li>
- * <li>If {@code mode} is {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR}, then each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and the corresponding element of {@link VkDeviceGroupPresentCapabilitiesKHR}{@code ::presentMask} <b>must</b> be non-zero</li>
- * <li>If {@code mode} is {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR}, then each element of {@code pDeviceMasks} <b>must</b> have exactly one bit set, and some physical device in the logical device <b>must</b> include that bit in its {@link VkDeviceGroupPresentCapabilitiesKHR}{@code ::presentMask}</li>
- * <li>If {@code mode} is {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR}, then each element of {@code pDeviceMasks} <b>must</b> have a value for which all set bits are set in one of the elements of {@link VkDeviceGroupPresentCapabilitiesKHR}{@code ::presentMask}</li>
- * <li>If {@code mode} is {@link KHRSwapchain#VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR}, then for each bit set in each element of {@code pDeviceMasks}, the corresponding element of {@link VkDeviceGroupPresentCapabilitiesKHR}{@code ::presentMask} <b>must</b> be non-zero</li>
- * <li>The value of each element of {@code pDeviceMasks} <b>must</b> be equal to the device mask passed in {@link VkAcquireNextImageInfoKHR}{@code ::deviceMask} when the image index was last acquired</li>
- * <li>{@code mode} <b>must</b> have exactly one bit set, and that bit <b>must</b> have been included in {@link VkDeviceGroupSwapchainCreateInfoKHR}{@code ::modes}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR}</li>
- * <li>If {@code swapchainCount} is not 0, {@code pDeviceMasks} <b>must</b> be a valid pointer to an array of {@code swapchainCount} {@code uint32_t} values</li>
- * <li>{@code mode} <b>must</b> be a valid {@code VkDeviceGroupPresentModeFlagBitsKHR} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceGroupPresentInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #swapchainCount};
- *     uint32_t const * {@link #pDeviceMasks};
- *     VkDeviceGroupPresentModeFlagBitsKHR {@link #mode};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t swapchainCount;
+ *     uint32_t const * pDeviceMasks;
+ *     VkDeviceGroupPresentModeFlagBitsKHR mode;
+ * }}</pre>
  */
 public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfoKHR> implements NativeResource {
 
@@ -119,31 +83,31 @@ public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** zero or the number of elements in {@code pDeviceMasks}. */
+    /** @return the value of the {@code swapchainCount} field. */
     @NativeType("uint32_t")
     public int swapchainCount() { return nswapchainCount(address()); }
-    /** a pointer to an array of device masks, one for each element of {@link VkPresentInfoKHR}{@code ::pSwapchains}. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDeviceMasks} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pDeviceMasks() { return npDeviceMasks(address()); }
-    /** a {@code VkDeviceGroupPresentModeFlagBitsKHR} value specifying the device group present mode that will be used for this present. */
+    /** @return the value of the {@code mode} field. */
     @NativeType("VkDeviceGroupPresentModeFlagBitsKHR")
     public int mode() { return nmode(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceGroupPresentInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR} value to the {@code sType} field. */
     public VkDeviceGroupPresentInfoKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceGroupPresentInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDeviceMasks} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pDeviceMasks} field. */
     public VkDeviceGroupPresentInfoKHR pDeviceMasks(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npDeviceMasks(address(), value); return this; }
-    /** Sets the specified value to the {@link #mode} field. */
+    /** Sets the specified value to the {@code mode} field. */
     public VkDeviceGroupPresentInfoKHR mode(@NativeType("VkDeviceGroupPresentModeFlagBitsKHR") int value) { nmode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -379,31 +343,31 @@ public class VkDeviceGroupPresentInfoKHR extends Struct<VkDeviceGroupPresentInfo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceGroupPresentInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceGroupPresentInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#swapchainCount} field. */
+        /** @return the value of the {@code swapchainCount} field. */
         @NativeType("uint32_t")
         public int swapchainCount() { return VkDeviceGroupPresentInfoKHR.nswapchainCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkDeviceGroupPresentInfoKHR#pDeviceMasks} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDeviceMasks} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pDeviceMasks() { return VkDeviceGroupPresentInfoKHR.npDeviceMasks(address()); }
-        /** @return the value of the {@link VkDeviceGroupPresentInfoKHR#mode} field. */
+        /** @return the value of the {@code mode} field. */
         @NativeType("VkDeviceGroupPresentModeFlagBitsKHR")
         public int mode() { return VkDeviceGroupPresentInfoKHR.nmode(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceGroupPresentInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupPresentInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR} value to the {@link VkDeviceGroupPresentInfoKHR#sType} field. */
+        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR} value to the {@code sType} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR); }
-        /** Sets the specified value to the {@link VkDeviceGroupPresentInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupPresentInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkDeviceGroupPresentInfoKHR#pDeviceMasks} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pDeviceMasks} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer pDeviceMasks(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkDeviceGroupPresentInfoKHR.npDeviceMasks(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceGroupPresentInfoKHR#mode} field. */
+        /** Sets the specified value to the {@code mode} field. */
         public VkDeviceGroupPresentInfoKHR.Buffer mode(@NativeType("VkDeviceGroupPresentModeFlagBitsKHR") int value) { VkDeviceGroupPresentInfoKHR.nmode(address(), value); return this; }
 
     }

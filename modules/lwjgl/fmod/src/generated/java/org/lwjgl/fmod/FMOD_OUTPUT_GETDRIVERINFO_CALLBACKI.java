@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_OUTPUT_STATE *output_state,
- *     int id,
- *     char *name,
- *     int namelen,
- *     FMOD_GUID *guid,
- *     int *systemrate,
- *     FMOD_SPEAKERMODE *speakermode,
- *     int *speakermodechannels
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_OUTPUT_GETDRIVERINFO_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_OUTPUT_GETDRIVERINFO_CALLBACK")
 public interface FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI extends CallbackI {
@@ -55,6 +41,7 @@ public interface FMOD_OUTPUT_GETDRIVERINFO_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_OUTPUT_GETDRIVERINFO_CALLBACK) (struct FMOD_OUTPUT_STATE * output_state, int id, char * name, int namelen, FMOD_GUID * guid, int * systemrate, FMOD_SPEAKERMODE * speakermode, int * speakermodechannels)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_OUTPUT_STATE *") long output_state, int id, @NativeType("char *") long name, int namelen, @NativeType("FMOD_GUID *") long guid, @NativeType("int *") long systemrate, @NativeType("FMOD_SPEAKERMODE *") long speakermode, @NativeType("int *") long speakermodechannels);
 
 }

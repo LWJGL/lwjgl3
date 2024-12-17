@@ -16,40 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Properties for QRCode marker.
- * 
- * <h5>Description</h5>
- * 
- * <p>An {@link XrSceneMarkerQRCodesMSFT} structure can be chained to the {@code next} pointer of {@link XrSceneComponentsMSFT} when calling {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT} function to retrieve the QR Code specific properties through an array of {@link XrSceneMarkerQRCodeMSFT} structures.</p>
- * 
- * <p>{@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT} follows the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-buffer-size-parameters">two-call idiom</a> for filling the {@link XrSceneComponentsMSFT} structure to which an {@link XrSceneMarkerQRCodesMSFT} structure <b>can</b> be chained.</p>
- * 
- * <p>The {@code qrCodeCapacityInput} <b>must</b> be equal to or greater than the corresponding {@link XrSceneComponentsMSFT}::componentCapacityInput, otherwise the runtime <b>must</b> return the success code {@link XR10#XR_ERROR_SIZE_INSUFFICIENT ERROR_SIZE_INSUFFICIENT} from {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}.</p>
- * 
- * <p>The actual count of elements returned in the array {@code qrCodes} is consistent to the extended {@link XrSceneComponentsMSFT} structure and returned in {@link XrSceneComponentsMSFT}::componentCountOutput.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneMarker XR_MSFT_scene_marker} extension <b>must</b> be enabled prior to using {@link XrSceneMarkerQRCodesMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_QR_CODES_MSFT TYPE_SCENE_MARKER_QR_CODES_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code qrCodeCapacityInput} is not 0, {@code qrCodes} <b>must</b> be a pointer to an array of {@code qrCodeCapacityInput} {@link XrSceneMarkerQRCodeMSFT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSceneMarkerQRCodeMSFT}, {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneMarkerQRCodesMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #qrCodeCapacityInput};
- *     {@link XrSceneMarkerQRCodeMSFT XrSceneMarkerQRCodeMSFT} * {@link #qrCodes};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t qrCodeCapacityInput;
+ *     {@link XrSceneMarkerQRCodeMSFT XrSceneMarkerQRCodeMSFT} * qrCodes;
+ * }}</pre>
  */
 public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> implements NativeResource {
 
@@ -105,28 +78,28 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. See also: {@link XrSceneComponentsMSFT}, {@link XrSceneMarkersMSFT} */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} indicating the count of elements in the {@code qrCodes} array. */
+    /** @return the value of the {@code qrCodeCapacityInput} field. */
     @NativeType("uint32_t")
     public int qrCodeCapacityInput() { return nqrCodeCapacityInput(address()); }
-    /** an array of {@link XrSceneMarkerQRCodeMSFT} for the runtime to fill with the properties of the QR Codes. */
+    /** @return a {@link XrSceneMarkerQRCodeMSFT.Buffer} view of the struct array pointed to by the {@code qrCodes} field. */
     @NativeType("XrSceneMarkerQRCodeMSFT *")
     public XrSceneMarkerQRCodeMSFT.@Nullable Buffer qrCodes() { return nqrCodes(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSceneMarkerQRCodesMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_QR_CODES_MSFT TYPE_SCENE_MARKER_QR_CODES_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_QR_CODES_MSFT TYPE_SCENE_MARKER_QR_CODES_MSFT} value to the {@code type} field. */
     public XrSceneMarkerQRCodesMSFT type$Default() { return type(MSFTSceneMarker.XR_TYPE_SCENE_MARKER_QR_CODES_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSceneMarkerQRCodesMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #qrCodeCapacityInput} field. */
+    /** Sets the specified value to the {@code qrCodeCapacityInput} field. */
     public XrSceneMarkerQRCodesMSFT qrCodeCapacityInput(@NativeType("uint32_t") int value) { nqrCodeCapacityInput(address(), value); return this; }
-    /** Sets the address of the specified {@link XrSceneMarkerQRCodeMSFT.Buffer} to the {@link #qrCodes} field. */
+    /** Sets the address of the specified {@link XrSceneMarkerQRCodeMSFT.Buffer} to the {@code qrCodes} field. */
     public XrSceneMarkerQRCodesMSFT qrCodes(@NativeType("XrSceneMarkerQRCodeMSFT *") XrSceneMarkerQRCodeMSFT.@Nullable Buffer value) { nqrCodes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,28 +301,28 @@ public class XrSceneMarkerQRCodesMSFT extends Struct<XrSceneMarkerQRCodesMSFT> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneMarkerQRCodesMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSceneMarkerQRCodesMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSceneMarkerQRCodesMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSceneMarkerQRCodesMSFT.nnext(address()); }
-        /** @return the value of the {@link XrSceneMarkerQRCodesMSFT#qrCodeCapacityInput} field. */
+        /** @return the value of the {@code qrCodeCapacityInput} field. */
         @NativeType("uint32_t")
         public int qrCodeCapacityInput() { return XrSceneMarkerQRCodesMSFT.nqrCodeCapacityInput(address()); }
-        /** @return a {@link XrSceneMarkerQRCodeMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneMarkerQRCodesMSFT#qrCodes} field. */
+        /** @return a {@link XrSceneMarkerQRCodeMSFT.Buffer} view of the struct array pointed to by the {@code qrCodes} field. */
         @NativeType("XrSceneMarkerQRCodeMSFT *")
         public XrSceneMarkerQRCodeMSFT.@Nullable Buffer qrCodes() { return XrSceneMarkerQRCodesMSFT.nqrCodes(address()); }
 
-        /** Sets the specified value to the {@link XrSceneMarkerQRCodesMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSceneMarkerQRCodesMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneMarkerQRCodesMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_QR_CODES_MSFT TYPE_SCENE_MARKER_QR_CODES_MSFT} value to the {@link XrSceneMarkerQRCodesMSFT#type} field. */
+        /** Sets the {@link MSFTSceneMarker#XR_TYPE_SCENE_MARKER_QR_CODES_MSFT TYPE_SCENE_MARKER_QR_CODES_MSFT} value to the {@code type} field. */
         public XrSceneMarkerQRCodesMSFT.Buffer type$Default() { return type(MSFTSceneMarker.XR_TYPE_SCENE_MARKER_QR_CODES_MSFT); }
-        /** Sets the specified value to the {@link XrSceneMarkerQRCodesMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSceneMarkerQRCodesMSFT.Buffer next(@NativeType("void const *") long value) { XrSceneMarkerQRCodesMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneMarkerQRCodesMSFT#qrCodeCapacityInput} field. */
+        /** Sets the specified value to the {@code qrCodeCapacityInput} field. */
         public XrSceneMarkerQRCodesMSFT.Buffer qrCodeCapacityInput(@NativeType("uint32_t") int value) { XrSceneMarkerQRCodesMSFT.nqrCodeCapacityInput(address(), value); return this; }
-        /** Sets the address of the specified {@link XrSceneMarkerQRCodeMSFT.Buffer} to the {@link XrSceneMarkerQRCodesMSFT#qrCodes} field. */
+        /** Sets the address of the specified {@link XrSceneMarkerQRCodeMSFT.Buffer} to the {@code qrCodes} field. */
         public XrSceneMarkerQRCodesMSFT.Buffer qrCodes(@NativeType("XrSceneMarkerQRCodeMSFT *") XrSceneMarkerQRCodeMSFT.@Nullable Buffer value) { XrSceneMarkerQRCodesMSFT.nqrCodes(address(), value); return this; }
 
     }

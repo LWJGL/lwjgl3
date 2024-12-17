@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link LLVMLLJIT#LLVMOrcLLJITBuilderSetObjectLinkingLayerCreator OrcLLJITBuilderSetObjectLinkingLayerCreator} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LLVMOrcObjectLayerRef (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMOrcExecutionSessionRef ES,
- *     char const *Triple
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("LLVMOrcObjectLayerRef (*) (void *, LLVMOrcExecutionSessionRef, char const *)")
 public interface LLVMOrcLLJITBuilderObjectLinkingLayerCreatorFunctionI extends CallbackI {
@@ -47,15 +36,7 @@ public interface LLVMOrcLLJITBuilderObjectLinkingLayerCreatorFunctionI extends C
         apiClosureRetP(ret, __result);
     }
 
-    /**
-     * A function for constructing an ObjectLinkingLayer instance to be used by an LLJIT instance.
-     * 
-     * <p>Clients can call {@link LLVMLLJIT#LLVMOrcLLJITBuilderSetObjectLinkingLayerCreator OrcLLJITBuilderSetObjectLinkingLayerCreator} to set the creator function to use when constructing an {@code LLJIT} instance. This
-     * can be used to override the default linking layer implementation that would otherwise be chosen by {@code LLJITBuilder}.</p>
-     * 
-     * <p>Object linking layers returned by this function will become owned by the {@code LLJIT} instance. The client is not responsible for managing their
-     * lifetimes after the function returns.</p>
-     */
+    /** {@code LLVMOrcObjectLayerRef (*) (void * Ctx, LLVMOrcExecutionSessionRef ES, char const * Triple)} */
     @NativeType("LLVMOrcObjectLayerRef") long invoke(@NativeType("void *") long Ctx, @NativeType("LLVMOrcExecutionSessionRef") long ES, @NativeType("char const *") long Triple);
 
 }

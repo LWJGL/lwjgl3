@@ -11,20 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     FMOD_SPEAKERMODE sourceSpeakerMode,
- *     float pan,
- *     float lowFrequencyGain,
- *     float overallGain,
- *     int matrixHop,
- *     float *matrix
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC} */
 public abstract class FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNC extends Callback implements FMOD_DSP_PAN_SUMSTEREOMATRIX_FUNCI {
 
     /**

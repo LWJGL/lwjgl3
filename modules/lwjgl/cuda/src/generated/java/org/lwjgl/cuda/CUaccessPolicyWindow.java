@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUaccessPolicyWindow {
  *     void * base_ptr;
  *     size_t num_bytes;
  *     float hitRatio;
  *     CUaccessProperty hitProp;
  *     CUaccessProperty missProp;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUaccessPolicyWindow extends Struct<CUaccessPolicyWindow> implements NativeResource {
 

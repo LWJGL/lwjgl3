@@ -16,40 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * specifies processing options for composition layers.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrCompositionLayerSettingsFB} contains additional flags to indicate which processing steps to perform on a composition layer.</p>
- * 
- * <p>If both {@link FBCompositionLayerSettings#XR_COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB} and {@link FBCompositionLayerSettings#XR_COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB COMPOSITION_LAYER_SETTINGS_QUALITY_SUPER_SAMPLING_BIT_FB} are set, {@link FBCompositionLayerSettings#XR_COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB COMPOSITION_LAYER_SETTINGS_NORMAL_SUPER_SAMPLING_BIT_FB} will take precedence.</p>
- * 
- * <p>If both {@link FBCompositionLayerSettings#XR_COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB} and {@link FBCompositionLayerSettings#XR_COMPOSITION_LAYER_SETTINGS_QUALITY_SHARPENING_BIT_FB COMPOSITION_LAYER_SETTINGS_QUALITY_SHARPENING_BIT_FB} are set, {@link FBCompositionLayerSettings#XR_COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB COMPOSITION_LAYER_SETTINGS_NORMAL_SHARPENING_BIT_FB} will take precedence.</p>
- * 
- * <p>To specify the additional flags, create an {@link XrCompositionLayerSettingsFB} structure and pass it via the {@link XrCompositionLayerBaseHeader} structure’s {@code next} parameter.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBCompositionLayerSettings XR_FB_composition_layer_settings} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerSettingsFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBCompositionLayerSettings#XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB TYPE_COMPOSITION_LAYER_SETTINGS_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code layerFlags} <b>must</b> be a valid combination of {@code XrCompositionLayerSettingsFlagBitsFB} values</li>
- * <li>{@code layerFlags} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerSettingsFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrCompositionLayerSettingsFlagsFB {@link #layerFlags};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrCompositionLayerSettingsFlagsFB layerFlags;
+ * }}</pre>
  */
 public class XrCompositionLayerSettingsFB extends Struct<XrCompositionLayerSettingsFB> implements NativeResource {
 
@@ -102,23 +74,23 @@ public class XrCompositionLayerSettingsFB extends Struct<XrCompositionLayerSetti
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a bitmask of {@code XrCompositionLayerSettingsFlagBitsFB}. */
+    /** @return the value of the {@code layerFlags} field. */
     @NativeType("XrCompositionLayerSettingsFlagsFB")
     public long layerFlags() { return nlayerFlags(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerSettingsFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBCompositionLayerSettings#XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB TYPE_COMPOSITION_LAYER_SETTINGS_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBCompositionLayerSettings#XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB TYPE_COMPOSITION_LAYER_SETTINGS_FB} value to the {@code type} field. */
     public XrCompositionLayerSettingsFB type$Default() { return type(FBCompositionLayerSettings.XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerSettingsFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #layerFlags} field. */
+    /** Sets the specified value to the {@code layerFlags} field. */
     public XrCompositionLayerSettingsFB layerFlags(@NativeType("XrCompositionLayerSettingsFlagsFB") long value) { nlayerFlags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -314,23 +286,23 @@ public class XrCompositionLayerSettingsFB extends Struct<XrCompositionLayerSetti
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerSettingsFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerSettingsFB.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerSettingsFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerSettingsFB.nnext(address()); }
-        /** @return the value of the {@link XrCompositionLayerSettingsFB#layerFlags} field. */
+        /** @return the value of the {@code layerFlags} field. */
         @NativeType("XrCompositionLayerSettingsFlagsFB")
         public long layerFlags() { return XrCompositionLayerSettingsFB.nlayerFlags(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerSettingsFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerSettingsFB.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerSettingsFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBCompositionLayerSettings#XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB TYPE_COMPOSITION_LAYER_SETTINGS_FB} value to the {@link XrCompositionLayerSettingsFB#type} field. */
+        /** Sets the {@link FBCompositionLayerSettings#XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB TYPE_COMPOSITION_LAYER_SETTINGS_FB} value to the {@code type} field. */
         public XrCompositionLayerSettingsFB.Buffer type$Default() { return type(FBCompositionLayerSettings.XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB); }
-        /** Sets the specified value to the {@link XrCompositionLayerSettingsFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerSettingsFB.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerSettingsFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerSettingsFB#layerFlags} field. */
+        /** Sets the specified value to the {@code layerFlags} field. */
         public XrCompositionLayerSettingsFB.Buffer layerFlags(@NativeType("XrCompositionLayerSettingsFlagsFB") long value) { XrCompositionLayerSettingsFB.nlayerFlags(address(), value); return this; }
 
     }

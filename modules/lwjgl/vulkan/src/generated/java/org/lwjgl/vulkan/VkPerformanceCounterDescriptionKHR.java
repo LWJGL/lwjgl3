@@ -18,30 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure providing more detailed information about a counter.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRPerformanceQuery#vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR EnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPerformanceCounterDescriptionKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkPerformanceCounterDescriptionFlagsKHR {@link #flags};
- *     char {@link #name}[VK_MAX_DESCRIPTION_SIZE];
- *     char {@link #category}[VK_MAX_DESCRIPTION_SIZE];
- *     char {@link #description}[VK_MAX_DESCRIPTION_SIZE];
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkPerformanceCounterDescriptionFlagsKHR flags;
+ *     char name[VK_MAX_DESCRIPTION_SIZE];
+ *     char category[VK_MAX_DESCRIPTION_SIZE];
+ *     char description[VK_MAX_DESCRIPTION_SIZE];
+ * }}</pre>
  */
 public class VkPerformanceCounterDescriptionKHR extends Struct<VkPerformanceCounterDescriptionKHR> implements NativeResource {
 
@@ -103,39 +88,39 @@ public class VkPerformanceCounterDescriptionKHR extends Struct<VkPerformanceCoun
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkPerformanceCounterDescriptionFlagBitsKHR} indicating the usage behavior for the counter. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkPerformanceCounterDescriptionFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** an array of size {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE}, containing a null-terminated UTF-8 string specifying the name of the counter. */
+    /** @return a {@link ByteBuffer} view of the {@code name} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer name() { return nname(address()); }
-    /** an array of size {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE}, containing a null-terminated UTF-8 string specifying the name of the counter. */
+    /** @return the null-terminated string stored in the {@code name} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String nameString() { return nnameString(address()); }
-    /** an array of size {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE}, containing a null-terminated UTF-8 string specifying the category of the counter. */
+    /** @return a {@link ByteBuffer} view of the {@code category} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer category() { return ncategory(address()); }
-    /** an array of size {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE}, containing a null-terminated UTF-8 string specifying the category of the counter. */
+    /** @return the null-terminated string stored in the {@code category} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String categoryString() { return ncategoryString(address()); }
-    /** an array of size {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE}, containing a null-terminated UTF-8 string specifying the description of the counter. */
+    /** @return a {@link ByteBuffer} view of the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** an array of size {@link VK10#VK_MAX_DESCRIPTION_SIZE MAX_DESCRIPTION_SIZE}, containing a null-terminated UTF-8 string specifying the description of the counter. */
+    /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPerformanceCounterDescriptionKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR} value to the {@code sType} field. */
     public VkPerformanceCounterDescriptionKHR sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPerformanceCounterDescriptionKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,39 +324,39 @@ public class VkPerformanceCounterDescriptionKHR extends Struct<VkPerformanceCoun
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPerformanceCounterDescriptionKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPerformanceCounterDescriptionKHR.nsType(address()); }
-        /** @return the value of the {@link VkPerformanceCounterDescriptionKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPerformanceCounterDescriptionKHR.npNext(address()); }
-        /** @return the value of the {@link VkPerformanceCounterDescriptionKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkPerformanceCounterDescriptionFlagsKHR")
         public int flags() { return VkPerformanceCounterDescriptionKHR.nflags(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPerformanceCounterDescriptionKHR#name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer name() { return VkPerformanceCounterDescriptionKHR.nname(address()); }
-        /** @return the null-terminated string stored in the {@link VkPerformanceCounterDescriptionKHR#name} field. */
+        /** @return the null-terminated string stored in the {@code name} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String nameString() { return VkPerformanceCounterDescriptionKHR.nnameString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPerformanceCounterDescriptionKHR#category} field. */
+        /** @return a {@link ByteBuffer} view of the {@code category} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer category() { return VkPerformanceCounterDescriptionKHR.ncategory(address()); }
-        /** @return the null-terminated string stored in the {@link VkPerformanceCounterDescriptionKHR#category} field. */
+        /** @return the null-terminated string stored in the {@code category} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String categoryString() { return VkPerformanceCounterDescriptionKHR.ncategoryString(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPerformanceCounterDescriptionKHR#description} field. */
+        /** @return a {@link ByteBuffer} view of the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return VkPerformanceCounterDescriptionKHR.ndescription(address()); }
-        /** @return the null-terminated string stored in the {@link VkPerformanceCounterDescriptionKHR#description} field. */
+        /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[VK_MAX_DESCRIPTION_SIZE]")
         public String descriptionString() { return VkPerformanceCounterDescriptionKHR.ndescriptionString(address()); }
 
-        /** Sets the specified value to the {@link VkPerformanceCounterDescriptionKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPerformanceCounterDescriptionKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPerformanceCounterDescriptionKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR} value to the {@link VkPerformanceCounterDescriptionKHR#sType} field. */
+        /** Sets the {@link KHRPerformanceQuery#VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR} value to the {@code sType} field. */
         public VkPerformanceCounterDescriptionKHR.Buffer sType$Default() { return sType(KHRPerformanceQuery.VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR); }
-        /** Sets the specified value to the {@link VkPerformanceCounterDescriptionKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPerformanceCounterDescriptionKHR.Buffer pNext(@NativeType("void *") long value) { VkPerformanceCounterDescriptionKHR.npNext(address(), value); return this; }
 
     }

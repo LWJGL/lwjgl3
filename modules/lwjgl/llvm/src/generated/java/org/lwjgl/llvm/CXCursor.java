@@ -17,24 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A cursor representing some element in the abstract syntax tree for a translation unit.
- * 
- * <p>The cursor abstraction unifies the different kinds of entities in a program --declaration, statements, expressions, references to declarations, etc.--
- * under a single "cursor" abstraction with a common set of operations. Common operation for a cursor include: getting the physical location in a source
- * file where the cursor points, getting the name associated with a cursor, and retrieving cursors for any child nodes of a particular cursor.</p>
- * 
- * <p>Cursors can be produced in two specific ways. {@link ClangIndex#clang_getTranslationUnitCursor getTranslationUnitCursor} produces a cursor for a translation unit, from which one can use
- * {@link ClangIndex#clang_visitChildren visitChildren} to explore the rest of the translation unit. {@link ClangIndex#clang_getCursor getCursor} maps from a physical source location to the entity that resides at that
- * location, allowing one to map from the source code into the AST.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXCursor {
  *     enum CXCursorKind kind;
  *     int xdata;
  *     void const * data[3];
- * }</code></pre>
+ * }}</pre>
  */
 public class CXCursor extends Struct<CXCursor> implements NativeResource {
 

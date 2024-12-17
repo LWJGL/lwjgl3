@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * KTX_error_code (*{@link #invoke}) (
- *     ktxStream *str,
- *     void const *src,
- *     ktx_size_t const size,
- *     ktx_size_t const count
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ktxStream_write} */
 public abstract class ktxStream_write extends Callback implements ktxStream_writeI {
 
     /**

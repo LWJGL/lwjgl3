@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265HrdParameters {
  *     {@link StdVideoH265HrdFlags StdVideoH265HrdFlags} flags;
  *     uint8_t tick_divisor_minus2;
@@ -36,9 +34,9 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH265.*;
  *     uint8_t cpb_cnt_minus1[STD_VIDEO_H265_SUBLAYERS_LIST_SIZE];
  *     uint16_t elemental_duration_in_tc_minus1[STD_VIDEO_H265_SUBLAYERS_LIST_SIZE];
  *     uint16_t reserved[3];
- *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * {@link #pSubLayerHrdParametersNal};
- *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * {@link #pSubLayerHrdParametersVcl};
- * }</code></pre>
+ *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * pSubLayerHrdParametersNal;
+ *     {@link StdVideoH265SubLayerHrdParameters StdVideoH265SubLayerHrdParameters} const * pSubLayerHrdParametersVcl;
+ * }}</pre>
  */
 public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters> implements NativeResource {
 
@@ -168,10 +166,10 @@ public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters>
     /** @return the value at the specified index of the {@code elemental_duration_in_tc_minus1} field. */
     @NativeType("uint16_t")
     public short elemental_duration_in_tc_minus1(int index) { return nelemental_duration_in_tc_minus1(address(), index); }
-    /** NAL per layer {@code ptr} to {@code sub_layer_hrd_parameters} */
+    /** @return a {@link StdVideoH265SubLayerHrdParameters} view of the struct pointed to by the {@code pSubLayerHrdParametersNal} field. */
     @NativeType("StdVideoH265SubLayerHrdParameters const *")
     public StdVideoH265SubLayerHrdParameters pSubLayerHrdParametersNal() { return npSubLayerHrdParametersNal(address()); }
-    /** VCL per layer {@code ptr} to {@code sub_layer_hrd_parameters} */
+    /** @return a {@link StdVideoH265SubLayerHrdParameters} view of the struct pointed to by the {@code pSubLayerHrdParametersVcl} field. */
     @NativeType("StdVideoH265SubLayerHrdParameters const *")
     public StdVideoH265SubLayerHrdParameters pSubLayerHrdParametersVcl() { return npSubLayerHrdParametersVcl(address()); }
 
@@ -205,9 +203,9 @@ public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters>
     public StdVideoH265HrdParameters elemental_duration_in_tc_minus1(@NativeType("uint16_t[STD_VIDEO_H265_SUBLAYERS_LIST_SIZE]") ShortBuffer value) { nelemental_duration_in_tc_minus1(address(), value); return this; }
     /** Sets the specified value at the specified index of the {@code elemental_duration_in_tc_minus1} field. */
     public StdVideoH265HrdParameters elemental_duration_in_tc_minus1(int index, @NativeType("uint16_t") short value) { nelemental_duration_in_tc_minus1(address(), index, value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265SubLayerHrdParameters} to the {@link #pSubLayerHrdParametersNal} field. */
+    /** Sets the address of the specified {@link StdVideoH265SubLayerHrdParameters} to the {@code pSubLayerHrdParametersNal} field. */
     public StdVideoH265HrdParameters pSubLayerHrdParametersNal(@NativeType("StdVideoH265SubLayerHrdParameters const *") StdVideoH265SubLayerHrdParameters value) { npSubLayerHrdParametersNal(address(), value); return this; }
-    /** Sets the address of the specified {@link StdVideoH265SubLayerHrdParameters} to the {@link #pSubLayerHrdParametersVcl} field. */
+    /** Sets the address of the specified {@link StdVideoH265SubLayerHrdParameters} to the {@code pSubLayerHrdParametersVcl} field. */
     public StdVideoH265HrdParameters pSubLayerHrdParametersVcl(@NativeType("StdVideoH265SubLayerHrdParameters const *") StdVideoH265SubLayerHrdParameters value) { npSubLayerHrdParametersVcl(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -553,10 +551,10 @@ public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters>
         /** @return the value at the specified index of the {@code elemental_duration_in_tc_minus1} field. */
         @NativeType("uint16_t")
         public short elemental_duration_in_tc_minus1(int index) { return StdVideoH265HrdParameters.nelemental_duration_in_tc_minus1(address(), index); }
-        /** @return a {@link StdVideoH265SubLayerHrdParameters} view of the struct pointed to by the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersNal} field. */
+        /** @return a {@link StdVideoH265SubLayerHrdParameters} view of the struct pointed to by the {@code pSubLayerHrdParametersNal} field. */
         @NativeType("StdVideoH265SubLayerHrdParameters const *")
         public StdVideoH265SubLayerHrdParameters pSubLayerHrdParametersNal() { return StdVideoH265HrdParameters.npSubLayerHrdParametersNal(address()); }
-        /** @return a {@link StdVideoH265SubLayerHrdParameters} view of the struct pointed to by the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersVcl} field. */
+        /** @return a {@link StdVideoH265SubLayerHrdParameters} view of the struct pointed to by the {@code pSubLayerHrdParametersVcl} field. */
         @NativeType("StdVideoH265SubLayerHrdParameters const *")
         public StdVideoH265SubLayerHrdParameters pSubLayerHrdParametersVcl() { return StdVideoH265HrdParameters.npSubLayerHrdParametersVcl(address()); }
 
@@ -590,9 +588,9 @@ public class StdVideoH265HrdParameters extends Struct<StdVideoH265HrdParameters>
         public StdVideoH265HrdParameters.Buffer elemental_duration_in_tc_minus1(@NativeType("uint16_t[STD_VIDEO_H265_SUBLAYERS_LIST_SIZE]") ShortBuffer value) { StdVideoH265HrdParameters.nelemental_duration_in_tc_minus1(address(), value); return this; }
         /** Sets the specified value at the specified index of the {@code elemental_duration_in_tc_minus1} field. */
         public StdVideoH265HrdParameters.Buffer elemental_duration_in_tc_minus1(int index, @NativeType("uint16_t") short value) { StdVideoH265HrdParameters.nelemental_duration_in_tc_minus1(address(), index, value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265SubLayerHrdParameters} to the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersNal} field. */
+        /** Sets the address of the specified {@link StdVideoH265SubLayerHrdParameters} to the {@code pSubLayerHrdParametersNal} field. */
         public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersNal(@NativeType("StdVideoH265SubLayerHrdParameters const *") StdVideoH265SubLayerHrdParameters value) { StdVideoH265HrdParameters.npSubLayerHrdParametersNal(address(), value); return this; }
-        /** Sets the address of the specified {@link StdVideoH265SubLayerHrdParameters} to the {@link StdVideoH265HrdParameters#pSubLayerHrdParametersVcl} field. */
+        /** Sets the address of the specified {@link StdVideoH265SubLayerHrdParameters} to the {@code pSubLayerHrdParametersVcl} field. */
         public StdVideoH265HrdParameters.Buffer pSubLayerHrdParametersVcl(@NativeType("StdVideoH265SubLayerHrdParameters const *") StdVideoH265SubLayerHrdParameters value) { StdVideoH265HrdParameters.npSubLayerHrdParametersVcl(address(), value); return this; }
 
     }

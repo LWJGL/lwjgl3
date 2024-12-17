@@ -18,28 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.XR10.*;
 
 /**
- * Returns properties of available instance extensions.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EXTENSION_PROPERTIES TYPE_EXTENSION_PROPERTIES}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrExtensionProperties {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     char {@link #extensionName}[XR_MAX_EXTENSION_NAME_SIZE];
- *     uint32_t {@link #extensionVersion};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     char extensionName[XR_MAX_EXTENSION_NAME_SIZE];
+ *     uint32_t extensionVersion;
+ * }}</pre>
  */
 public class XrExtensionProperties extends Struct<XrExtensionProperties> implements NativeResource {
 
@@ -95,27 +80,27 @@ public class XrExtensionProperties extends Struct<XrExtensionProperties> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code NULL} terminated string specifying the name of the extension. */
+    /** @return a {@link ByteBuffer} view of the {@code extensionName} field. */
     @NativeType("char[XR_MAX_EXTENSION_NAME_SIZE]")
     public ByteBuffer extensionName() { return nextensionName(address()); }
-    /** a {@code NULL} terminated string specifying the name of the extension. */
+    /** @return the null-terminated string stored in the {@code extensionName} field. */
     @NativeType("char[XR_MAX_EXTENSION_NAME_SIZE]")
     public String extensionNameString() { return nextensionNameString(address()); }
-    /** the version of this extension. It is an integer, incremented with backward compatible changes. */
+    /** @return the value of the {@code extensionVersion} field. */
     @NativeType("uint32_t")
     public int extensionVersion() { return nextensionVersion(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrExtensionProperties type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_EXTENSION_PROPERTIES TYPE_EXTENSION_PROPERTIES} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_EXTENSION_PROPERTIES TYPE_EXTENSION_PROPERTIES} value to the {@code type} field. */
     public XrExtensionProperties type$Default() { return type(XR10.XR_TYPE_EXTENSION_PROPERTIES); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrExtensionProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -311,27 +296,27 @@ public class XrExtensionProperties extends Struct<XrExtensionProperties> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrExtensionProperties#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrExtensionProperties.ntype(address()); }
-        /** @return the value of the {@link XrExtensionProperties#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrExtensionProperties.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrExtensionProperties#extensionName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code extensionName} field. */
         @NativeType("char[XR_MAX_EXTENSION_NAME_SIZE]")
         public ByteBuffer extensionName() { return XrExtensionProperties.nextensionName(address()); }
-        /** @return the null-terminated string stored in the {@link XrExtensionProperties#extensionName} field. */
+        /** @return the null-terminated string stored in the {@code extensionName} field. */
         @NativeType("char[XR_MAX_EXTENSION_NAME_SIZE]")
         public String extensionNameString() { return XrExtensionProperties.nextensionNameString(address()); }
-        /** @return the value of the {@link XrExtensionProperties#extensionVersion} field. */
+        /** @return the value of the {@code extensionVersion} field. */
         @NativeType("uint32_t")
         public int extensionVersion() { return XrExtensionProperties.nextensionVersion(address()); }
 
-        /** Sets the specified value to the {@link XrExtensionProperties#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrExtensionProperties.Buffer type(@NativeType("XrStructureType") int value) { XrExtensionProperties.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_EXTENSION_PROPERTIES TYPE_EXTENSION_PROPERTIES} value to the {@link XrExtensionProperties#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_EXTENSION_PROPERTIES TYPE_EXTENSION_PROPERTIES} value to the {@code type} field. */
         public XrExtensionProperties.Buffer type$Default() { return type(XR10.XR_TYPE_EXTENSION_PROPERTIES); }
-        /** Sets the specified value to the {@link XrExtensionProperties#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrExtensionProperties.Buffer next(@NativeType("void *") long value) { XrExtensionProperties.nnext(address(), value); return this; }
 
     }

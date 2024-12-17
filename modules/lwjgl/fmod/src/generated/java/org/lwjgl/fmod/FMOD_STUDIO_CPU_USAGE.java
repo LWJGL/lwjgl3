@@ -16,12 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_CPU_USAGE {
  *     float update;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_CPU_USAGE extends Struct<FMOD_STUDIO_CPU_USAGE> implements NativeResource {
 

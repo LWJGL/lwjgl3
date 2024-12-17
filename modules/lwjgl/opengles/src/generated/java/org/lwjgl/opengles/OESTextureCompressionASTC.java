@@ -5,43 +5,8 @@
  */
 package org.lwjgl.opengles;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/OES/OES_texture_compression_astc.txt">OES_texture_compression_astc</a> extension.
- * 
- * <p>Adaptive Scalable Texture Compression (ASTC) is a new texture compression technology that offers unprecendented flexibility, while producing better or
- * comparable results than existing texture compressions at all bit rates. It includes support for 2D and 3D textures, with low and high dynamic range, at
- * bitrates from below 1 bit/pixel up to 8 bits/pixel in fine steps.</p>
- * 
- * <p>The goal of this extension is to support the full profile of the ASTC texture compression specification.</p>
- * 
- * <p>ASTC-compressed textures are handled in OpenGL ES and OpenGL by adding new supported formats to the existing mechanisms for handling compressed
- * textures.</p>
- * 
- * <h3>What is ASTC</h3>
- * 
- * <p>ASTC stands for Adaptive Scalable Texture Compression. The ASTC formats form a family of related compressed texture image formats. They are all derived
- * from a common set of definitions.</p>
- * 
- * <p>ASTC textures may be either 2D or 3D.</p>
- * 
- * <p>ASTC textures may be encoded using either high or low dynamic range. Low dynamic range images may optionally be specified using the sRGB color space.</p>
- * 
- * <p>Two sub-profiles ("LDR Profile" and "HDR Profile") may be implemented, which support only 2D images at low or high dynamic range respectively. The LDR
- * profile is indicated by the presence of only the extension string "GL_KHR_texture_compression_astc_ldr". If the HDR profile is implemented, both
- * "GL_KHR_texture_compression_astc_ldr" and "GL_KHR_texture_compression_astc_hdr" must be published. If the full profile (including 3D textures) is
- * implemented, then all three extension strings "GL_KHR_texture_compression_astc_ldr", "GL_KHR_texture_compression_astc_hdr" and
- * "GL_OES_texture_compression_astc" must be published.</p>
- * 
- * <p>ASTC textures may be encoded as 1, 2, 3 or 4 components, but they are all decoded into RGBA.</p>
- * 
- * <p>ASTC has a variable block size, and this is specified as part of the name of the token passed to CompressedImage2D and its related functions.</p>
- */
 public final class OESTextureCompressionASTC {
 
-    /**
-     * Accepted by the {@code internalformat} parameter of CompressedTexImage2D, CompressedTexSubImage2D, TexStorage2D, TextureStorage2D, TexStorage3D, and
-     * TextureStorage3D.
-     */
     public static final int
         GL_COMPRESSED_RGBA_ASTC_4x4_KHR           = 0x93B0,
         GL_COMPRESSED_RGBA_ASTC_5x4_KHR           = 0x93B1,
@@ -72,7 +37,6 @@ public final class OESTextureCompressionASTC {
         GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = 0x93DC,
         GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = 0x93DD;
 
-    /** Accepted by the {@code internalformat} parameter of CompressedTexImage3D, CompressedTexSubImage3D, TexStorage3D, and TextureStorage3D. */
     public static final int
         GL_COMPRESSED_RGBA_ASTC_3x3x3_OES         = 0x93C0,
         GL_COMPRESSED_RGBA_ASTC_4x3x3_OES         = 0x93C1,

@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Used for a few events about overlays.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VREvent_Overlay_t {
- *     uint64_t {@link #overlayHandle};
+ *     uint64_t overlayHandle;
  *     uint64_t devicePath;
  *     uint64_t memoryBlockId;
- *     uint32_t {@link #cursorIndex};
- * }</code></pre>
+ *     uint32_t cursorIndex;
+ * }}</pre>
  */
 @NativeType("struct VREvent_Overlay_t")
 public class VREventOverlay extends Struct<VREventOverlay> {
@@ -81,7 +77,7 @@ public class VREventOverlay extends Struct<VREventOverlay> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** one of:<br><table><tr><td>{@link VR#EVRState_VRState_Undefined}</td><td>{@link VR#EVRState_VRState_Off}</td><td>{@link VR#EVRState_VRState_Searching}</td></tr><tr><td>{@link VR#EVRState_VRState_Searching_Alert}</td><td>{@link VR#EVRState_VRState_Ready}</td><td>{@link VR#EVRState_VRState_Ready_Alert}</td></tr><tr><td>{@link VR#EVRState_VRState_NotReady}</td><td>{@link VR#EVRState_VRState_Standby}</td><td>{@link VR#EVRState_VRState_Ready_Alert_Low}</td></tr></table> */
+    /** @return the value of the {@code overlayHandle} field. */
     @NativeType("uint64_t")
     public long overlayHandle() { return noverlayHandle(address()); }
     /** @return the value of the {@code devicePath} field. */
@@ -90,7 +86,7 @@ public class VREventOverlay extends Struct<VREventOverlay> {
     /** @return the value of the {@code memoryBlockId} field. */
     @NativeType("uint64_t")
     public long memoryBlockId() { return nmemoryBlockId(address()); }
-    /** if from an event triggered by cursor input on an overlay that supports multiple cursors, this is the index of which tracked cursor the event is for */
+    /** @return the value of the {@code cursorIndex} field. */
     @NativeType("uint32_t")
     public int cursorIndex() { return ncursorIndex(address()); }
 
@@ -175,7 +171,7 @@ public class VREventOverlay extends Struct<VREventOverlay> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VREventOverlay#overlayHandle} field. */
+        /** @return the value of the {@code overlayHandle} field. */
         @NativeType("uint64_t")
         public long overlayHandle() { return VREventOverlay.noverlayHandle(address()); }
         /** @return the value of the {@code devicePath} field. */
@@ -184,7 +180,7 @@ public class VREventOverlay extends Struct<VREventOverlay> {
         /** @return the value of the {@code memoryBlockId} field. */
         @NativeType("uint64_t")
         public long memoryBlockId() { return VREventOverlay.nmemoryBlockId(address()); }
-        /** @return the value of the {@link VREventOverlay#cursorIndex} field. */
+        /** @return the value of the {@code cursorIndex} field. */
         @NativeType("uint32_t")
         public int cursorIndex() { return VREventOverlay.ncursorIndex(address()); }
 

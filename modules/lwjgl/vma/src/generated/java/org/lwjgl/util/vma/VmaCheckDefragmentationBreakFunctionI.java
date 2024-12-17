@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@link VmaDefragmentationInfo} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * VkBool32 (*{@link #invoke}) (
- *     void *pUserData
- * )</code></pre>
- */
+/** Callback function: {@link #invoke PFN_vmaCheckDefragmentationBreakFunction} */
 @FunctionalInterface
 @NativeType("PFN_vmaCheckDefragmentationBreakFunction")
 public interface VmaCheckDefragmentationBreakFunctionI extends CallbackI {
@@ -43,11 +34,7 @@ public interface VmaCheckDefragmentationBreakFunctionI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Callback function called during {@link Vma#vmaBeginDefragmentation BeginDefragmentation} to check custom criterion about ending current defragmentation pass.
-     * 
-     * <p>Should return true if the defragmentation needs to stop current pass.</p>
-     */
+    /** {@code VkBool32 (* PFN_vmaCheckDefragmentationBreakFunction) (void * pUserData)} */
     @NativeType("VkBool32") int invoke(@NativeType("void *") long pUserData);
 
 }

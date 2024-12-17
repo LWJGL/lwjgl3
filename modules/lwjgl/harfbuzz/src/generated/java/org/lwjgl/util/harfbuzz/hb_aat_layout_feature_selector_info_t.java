@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure representing a setting for an {@code hb_aat_layout_feature_type_t}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_aat_layout_feature_selector_info_t {
- *     hb_ot_name_id_t {@link #name_id};
- *     hb_aat_layout_feature_selector_t {@link #enable};
- *     hb_aat_layout_feature_selector_t {@link #disable};
+ *     hb_ot_name_id_t name_id;
+ *     hb_aat_layout_feature_selector_t enable;
+ *     hb_aat_layout_feature_selector_t disable;
  *     unsigned int reserved;
- * }</code></pre>
+ * }}</pre>
  */
 public class hb_aat_layout_feature_selector_info_t extends Struct<hb_aat_layout_feature_selector_info_t> implements NativeResource {
 
@@ -82,21 +78,21 @@ public class hb_aat_layout_feature_selector_info_t extends Struct<hb_aat_layout_
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the selector's name identifier */
+    /** @return the value of the {@code name_id} field. */
     @NativeType("hb_ot_name_id_t")
     public int name_id() { return nname_id(address()); }
-    /** the value to turn the selector on disable */
+    /** @return the value of the {@code enable} field. */
     @NativeType("hb_aat_layout_feature_selector_t")
     public int enable() { return nenable(address()); }
-    /** the value to turn the selector off */
+    /** @return the value of the {@code disable} field. */
     @NativeType("hb_aat_layout_feature_selector_t")
     public int disable() { return ndisable(address()); }
 
-    /** Sets the specified value to the {@link #name_id} field. */
+    /** Sets the specified value to the {@code name_id} field. */
     public hb_aat_layout_feature_selector_info_t name_id(@NativeType("hb_ot_name_id_t") int value) { nname_id(address(), value); return this; }
-    /** Sets the specified value to the {@link #enable} field. */
+    /** Sets the specified value to the {@code enable} field. */
     public hb_aat_layout_feature_selector_info_t enable(@NativeType("hb_aat_layout_feature_selector_t") int value) { nenable(address(), value); return this; }
-    /** Sets the specified value to the {@link #disable} field. */
+    /** Sets the specified value to the {@code disable} field. */
     public hb_aat_layout_feature_selector_info_t disable(@NativeType("hb_aat_layout_feature_selector_t") int value) { ndisable(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -294,21 +290,21 @@ public class hb_aat_layout_feature_selector_info_t extends Struct<hb_aat_layout_
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_aat_layout_feature_selector_info_t#name_id} field. */
+        /** @return the value of the {@code name_id} field. */
         @NativeType("hb_ot_name_id_t")
         public int name_id() { return hb_aat_layout_feature_selector_info_t.nname_id(address()); }
-        /** @return the value of the {@link hb_aat_layout_feature_selector_info_t#enable} field. */
+        /** @return the value of the {@code enable} field. */
         @NativeType("hb_aat_layout_feature_selector_t")
         public int enable() { return hb_aat_layout_feature_selector_info_t.nenable(address()); }
-        /** @return the value of the {@link hb_aat_layout_feature_selector_info_t#disable} field. */
+        /** @return the value of the {@code disable} field. */
         @NativeType("hb_aat_layout_feature_selector_t")
         public int disable() { return hb_aat_layout_feature_selector_info_t.ndisable(address()); }
 
-        /** Sets the specified value to the {@link hb_aat_layout_feature_selector_info_t#name_id} field. */
+        /** Sets the specified value to the {@code name_id} field. */
         public hb_aat_layout_feature_selector_info_t.Buffer name_id(@NativeType("hb_ot_name_id_t") int value) { hb_aat_layout_feature_selector_info_t.nname_id(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_aat_layout_feature_selector_info_t#enable} field. */
+        /** Sets the specified value to the {@code enable} field. */
         public hb_aat_layout_feature_selector_info_t.Buffer enable(@NativeType("hb_aat_layout_feature_selector_t") int value) { hb_aat_layout_feature_selector_info_t.nenable(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_aat_layout_feature_selector_info_t#disable} field. */
+        /** Sets the specified value to the {@code disable} field. */
         public hb_aat_layout_feature_selector_info_t.Buffer disable(@NativeType("hb_aat_layout_feature_selector_t") int value) { hb_aat_layout_feature_selector_info_t.ndisable(address(), value); return this; }
 
     }

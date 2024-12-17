@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Holds the transform for a single bone.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRBoneTransform_t {
  *     {@link HmdVector4 HmdVector4_t} position;
  *     {@link HmdQuaternionf HmdQuaternionf_t} orientation;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VRBoneTransform_t")
 public class VRBoneTransform extends Struct<VRBoneTransform> implements NativeResource {

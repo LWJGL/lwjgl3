@@ -15,12 +15,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Linux-specific helpers.
- * 
- * <p>This includes helpers for manipulating Linux kernel cpumap files, and hwloc equivalents of the Linux sched_setaffinity and sched_getaffinity system
- * calls.</p>
- */
 public class HWLocLinux {
 
     /** Contains the function pointers loaded from {@code HWLoc.getLibrary()}. */
@@ -43,6 +37,7 @@ public class HWLocLinux {
 
     // --- [ hwloc_linux_set_tid_cpubind ] ---
 
+    /** {@code int hwloc_linux_set_tid_cpubind(hwloc_topology_t topology, pid_t tid, hwloc_const_cpuset_t set)} */
     public static int hwloc_linux_set_tid_cpubind(@NativeType("hwloc_topology_t") long topology, @NativeType("pid_t") int tid, @NativeType("hwloc_const_cpuset_t") long set) {
         long __functionAddress = Functions.linux_set_tid_cpubind;
         if (CHECKS) {
@@ -54,6 +49,7 @@ public class HWLocLinux {
 
     // --- [ hwloc_linux_get_tid_cpubind ] ---
 
+    /** {@code int hwloc_linux_get_tid_cpubind(hwloc_topology_t topology, pid_t tid, hwloc_cpuset_t set)} */
     public static int hwloc_linux_get_tid_cpubind(@NativeType("hwloc_topology_t") long topology, @NativeType("pid_t") int tid, @NativeType("hwloc_cpuset_t") long set) {
         long __functionAddress = Functions.linux_get_tid_cpubind;
         if (CHECKS) {
@@ -65,6 +61,7 @@ public class HWLocLinux {
 
     // --- [ hwloc_linux_get_tid_last_cpu_location ] ---
 
+    /** {@code int hwloc_linux_get_tid_last_cpu_location(hwloc_topology_t topology, pid_t tid, hwloc_bitmap_t set)} */
     public static int hwloc_linux_get_tid_last_cpu_location(@NativeType("hwloc_topology_t") long topology, @NativeType("pid_t") int tid, @NativeType("hwloc_bitmap_t") long set) {
         long __functionAddress = Functions.linux_get_tid_last_cpu_location;
         if (CHECKS) {
@@ -76,6 +73,7 @@ public class HWLocLinux {
 
     // --- [ hwloc_linux_read_path_as_cpumask ] ---
 
+    /** {@code int hwloc_linux_read_path_as_cpumask(char const * path, hwloc_bitmap_t set)} */
     public static int nhwloc_linux_read_path_as_cpumask(long path, long set) {
         long __functionAddress = Functions.linux_read_path_as_cpumask;
         if (CHECKS) {
@@ -84,6 +82,7 @@ public class HWLocLinux {
         return invokePPI(path, set, __functionAddress);
     }
 
+    /** {@code int hwloc_linux_read_path_as_cpumask(char const * path, hwloc_bitmap_t set)} */
     public static int hwloc_linux_read_path_as_cpumask(@NativeType("char const *") ByteBuffer path, @NativeType("hwloc_bitmap_t") long set) {
         if (CHECKS) {
             checkNT1(path);
@@ -91,6 +90,7 @@ public class HWLocLinux {
         return nhwloc_linux_read_path_as_cpumask(memAddress(path), set);
     }
 
+    /** {@code int hwloc_linux_read_path_as_cpumask(char const * path, hwloc_bitmap_t set)} */
     public static int hwloc_linux_read_path_as_cpumask(@NativeType("char const *") CharSequence path, @NativeType("hwloc_bitmap_t") long set) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {

@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether custom border colors can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCustomBorderColorPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTCustomBorderColor#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCustomBorderColorPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
- *     uint32_t {@link #maxCustomBorderColorSamplers};
- * }</code></pre>
+ *     uint32_t maxCustomBorderColorSamplers;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct<VkPhysicalDeviceCustomBorderColorPropertiesEXT> implements NativeResource {
 
@@ -94,7 +80,7 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct<VkPhy
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates the maximum number of samplers with custom border colors which <b>can</b> simultaneously exist on a device. */
+    /** @return the value of the {@code maxCustomBorderColorSamplers} field. */
     @NativeType("uint32_t")
     public int maxCustomBorderColorSamplers() { return nmaxCustomBorderColorSamplers(address()); }
 
@@ -300,7 +286,7 @@ public class VkPhysicalDeviceCustomBorderColorPropertiesEXT extends Struct<VkPhy
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCustomBorderColorPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCustomBorderColorPropertiesEXT#maxCustomBorderColorSamplers} field. */
+        /** @return the value of the {@code maxCustomBorderColorSamplers} field. */
         @NativeType("uint32_t")
         public int maxCustomBorderColorSamplers() { return VkPhysicalDeviceCustomBorderColorPropertiesEXT.nmaxCustomBorderColorSamplers(address()); }
 

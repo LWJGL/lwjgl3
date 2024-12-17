@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_BUFFER_USAGE {
  *     {@link FMOD_STUDIO_BUFFER_INFO FMOD_STUDIO_BUFFER_INFO} studiocommandqueue;
  *     {@link FMOD_STUDIO_BUFFER_INFO FMOD_STUDIO_BUFFER_INFO} studiohandle;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_BUFFER_USAGE extends Struct<FMOD_STUDIO_BUFFER_USAGE> implements NativeResource {
 

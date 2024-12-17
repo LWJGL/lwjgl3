@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDevicePrivateDataCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDevicePrivateDataCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t privateDataSlotRequestCount;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDevicePrivateDataCreateInfoEXT extends VkDevicePrivateDataCreateInfo {
 

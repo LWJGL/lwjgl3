@@ -17,32 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a single shading rate palette.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code shadingRatePaletteEntryCount} <b>must</b> be between 1 and {@link VkPhysicalDeviceShadingRateImagePropertiesNV}{@code ::shadingRatePaletteSize}, inclusive</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code pShadingRatePaletteEntries} <b>must</b> be a valid pointer to an array of {@code shadingRatePaletteEntryCount} valid {@code VkShadingRatePaletteEntryNV} values</li>
- * <li>{@code shadingRatePaletteEntryCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineViewportShadingRateImageStateCreateInfoNV}, {@link NVShadingRateImage#vkCmdSetViewportShadingRatePaletteNV CmdSetViewportShadingRatePaletteNV}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkShadingRatePaletteNV {
- *     uint32_t {@link #shadingRatePaletteEntryCount};
- *     VkShadingRatePaletteEntryNV const * {@link #pShadingRatePaletteEntries};
- * }</code></pre>
+ *     uint32_t shadingRatePaletteEntryCount;
+ *     VkShadingRatePaletteEntryNV const * pShadingRatePaletteEntries;
+ * }}</pre>
  */
 public class VkShadingRatePaletteNV extends Struct<VkShadingRatePaletteNV> implements NativeResource {
 
@@ -92,14 +71,14 @@ public class VkShadingRatePaletteNV extends Struct<VkShadingRatePaletteNV> imple
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies the number of entries in the shading rate image palette. */
+    /** @return the value of the {@code shadingRatePaletteEntryCount} field. */
     @NativeType("uint32_t")
     public int shadingRatePaletteEntryCount() { return nshadingRatePaletteEntryCount(address()); }
-    /** a pointer to an array of {@code VkShadingRatePaletteEntryNV} enums defining the shading rate for each palette entry. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pShadingRatePaletteEntries} field. */
     @NativeType("VkShadingRatePaletteEntryNV const *")
     public IntBuffer pShadingRatePaletteEntries() { return npShadingRatePaletteEntries(address()); }
 
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pShadingRatePaletteEntries} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pShadingRatePaletteEntries} field. */
     public VkShadingRatePaletteNV pShadingRatePaletteEntries(@NativeType("VkShadingRatePaletteEntryNV const *") IntBuffer value) { npShadingRatePaletteEntries(address(), value); return this; }
 
     /**
@@ -306,14 +285,14 @@ public class VkShadingRatePaletteNV extends Struct<VkShadingRatePaletteNV> imple
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkShadingRatePaletteNV#shadingRatePaletteEntryCount} field. */
+        /** @return the value of the {@code shadingRatePaletteEntryCount} field. */
         @NativeType("uint32_t")
         public int shadingRatePaletteEntryCount() { return VkShadingRatePaletteNV.nshadingRatePaletteEntryCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkShadingRatePaletteNV#pShadingRatePaletteEntries} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pShadingRatePaletteEntries} field. */
         @NativeType("VkShadingRatePaletteEntryNV const *")
         public IntBuffer pShadingRatePaletteEntries() { return VkShadingRatePaletteNV.npShadingRatePaletteEntries(address()); }
 
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkShadingRatePaletteNV#pShadingRatePaletteEntries} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pShadingRatePaletteEntries} field. */
         public VkShadingRatePaletteNV.Buffer pShadingRatePaletteEntries(@NativeType("VkShadingRatePaletteEntryNV const *") IntBuffer value) { VkShadingRatePaletteNV.npShadingRatePaletteEntries(address(), value); return this; }
 
     }

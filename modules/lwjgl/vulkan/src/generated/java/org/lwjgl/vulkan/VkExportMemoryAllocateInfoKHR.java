@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkExportMemoryAllocateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExportMemoryAllocateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkExternalMemoryHandleTypeFlags handleTypes;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkExportMemoryAllocateInfoKHR extends VkExportMemoryAllocateInfo {
 

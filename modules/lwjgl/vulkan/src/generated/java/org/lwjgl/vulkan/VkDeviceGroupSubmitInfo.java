@@ -17,44 +17,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure indicating which physical devices execute semaphore operations and command buffers.
- * 
- * <h5>Description</h5>
- * 
- * <p>If this structure is not present, semaphore operations and command buffers execute on device index zero.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code waitSemaphoreCount} <b>must</b> equal {@link VkSubmitInfo}{@code ::waitSemaphoreCount}</li>
- * <li>{@code commandBufferCount} <b>must</b> equal {@link VkSubmitInfo}{@code ::commandBufferCount}</li>
- * <li>{@code signalSemaphoreCount} <b>must</b> equal {@link VkSubmitInfo}{@code ::signalSemaphoreCount}</li>
- * <li>All elements of {@code pWaitSemaphoreDeviceIndices} and {@code pSignalSemaphoreDeviceIndices} <b>must</b> be valid device indices</li>
- * <li>All elements of {@code pCommandBufferDeviceMasks} <b>must</b> be valid device masks</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO}</li>
- * <li>If {@code waitSemaphoreCount} is not 0, {@code pWaitSemaphoreDeviceIndices} <b>must</b> be a valid pointer to an array of {@code waitSemaphoreCount} {@code uint32_t} values</li>
- * <li>If {@code commandBufferCount} is not 0, {@code pCommandBufferDeviceMasks} <b>must</b> be a valid pointer to an array of {@code commandBufferCount} {@code uint32_t} values</li>
- * <li>If {@code signalSemaphoreCount} is not 0, {@code pSignalSemaphoreDeviceIndices} <b>must</b> be a valid pointer to an array of {@code signalSemaphoreCount} {@code uint32_t} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceGroupSubmitInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #waitSemaphoreCount};
- *     uint32_t const * {@link #pWaitSemaphoreDeviceIndices};
- *     uint32_t {@link #commandBufferCount};
- *     uint32_t const * {@link #pCommandBufferDeviceMasks};
- *     uint32_t {@link #signalSemaphoreCount};
- *     uint32_t const * {@link #pSignalSemaphoreDeviceIndices};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t waitSemaphoreCount;
+ *     uint32_t const * pWaitSemaphoreDeviceIndices;
+ *     uint32_t commandBufferCount;
+ *     uint32_t const * pCommandBufferDeviceMasks;
+ *     uint32_t signalSemaphoreCount;
+ *     uint32_t const * pSignalSemaphoreDeviceIndices;
+ * }}</pre>
  */
 public class VkDeviceGroupSubmitInfo extends Struct<VkDeviceGroupSubmitInfo> implements NativeResource {
 
@@ -122,42 +95,42 @@ public class VkDeviceGroupSubmitInfo extends Struct<VkDeviceGroupSubmitInfo> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of elements in the {@code pWaitSemaphoreDeviceIndices} array. */
+    /** @return the value of the {@code waitSemaphoreCount} field. */
     @NativeType("uint32_t")
     public int waitSemaphoreCount() { return nwaitSemaphoreCount(address()); }
-    /** a pointer to an array of {@code waitSemaphoreCount} device indices indicating which physical device executes the semaphore wait operation in the corresponding element of {@link VkSubmitInfo}{@code ::pWaitSemaphores}. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pWaitSemaphoreDeviceIndices} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pWaitSemaphoreDeviceIndices() { return npWaitSemaphoreDeviceIndices(address()); }
-    /** the number of elements in the {@code pCommandBufferDeviceMasks} array. */
+    /** @return the value of the {@code commandBufferCount} field. */
     @NativeType("uint32_t")
     public int commandBufferCount() { return ncommandBufferCount(address()); }
-    /** a pointer to an array of {@code commandBufferCount} device masks indicating which physical devices execute the command buffer in the corresponding element of {@link VkSubmitInfo}{@code ::pCommandBuffers}. A physical device executes the command buffer if the corresponding bit is set in the mask. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCommandBufferDeviceMasks} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pCommandBufferDeviceMasks() { return npCommandBufferDeviceMasks(address()); }
-    /** the number of elements in the {@code pSignalSemaphoreDeviceIndices} array. */
+    /** @return the value of the {@code signalSemaphoreCount} field. */
     @NativeType("uint32_t")
     public int signalSemaphoreCount() { return nsignalSemaphoreCount(address()); }
-    /** a pointer to an array of {@code signalSemaphoreCount} device indices indicating which physical device executes the semaphore signal operation in the corresponding element of {@link VkSubmitInfo}{@code ::pSignalSemaphores}. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pSignalSemaphoreDeviceIndices} field. */
     @NativeType("uint32_t const *")
     public @Nullable IntBuffer pSignalSemaphoreDeviceIndices() { return npSignalSemaphoreDeviceIndices(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDeviceGroupSubmitInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO} value to the {@code sType} field. */
     public VkDeviceGroupSubmitInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDeviceGroupSubmitInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pWaitSemaphoreDeviceIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pWaitSemaphoreDeviceIndices} field. */
     public VkDeviceGroupSubmitInfo pWaitSemaphoreDeviceIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npWaitSemaphoreDeviceIndices(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pCommandBufferDeviceMasks} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pCommandBufferDeviceMasks} field. */
     public VkDeviceGroupSubmitInfo pCommandBufferDeviceMasks(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npCommandBufferDeviceMasks(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pSignalSemaphoreDeviceIndices} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pSignalSemaphoreDeviceIndices} field. */
     public VkDeviceGroupSubmitInfo pSignalSemaphoreDeviceIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { npSignalSemaphoreDeviceIndices(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -413,42 +386,42 @@ public class VkDeviceGroupSubmitInfo extends Struct<VkDeviceGroupSubmitInfo> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceGroupSubmitInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDeviceGroupSubmitInfo.nsType(address()); }
-        /** @return the value of the {@link VkDeviceGroupSubmitInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDeviceGroupSubmitInfo.npNext(address()); }
-        /** @return the value of the {@link VkDeviceGroupSubmitInfo#waitSemaphoreCount} field. */
+        /** @return the value of the {@code waitSemaphoreCount} field. */
         @NativeType("uint32_t")
         public int waitSemaphoreCount() { return VkDeviceGroupSubmitInfo.nwaitSemaphoreCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkDeviceGroupSubmitInfo#pWaitSemaphoreDeviceIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pWaitSemaphoreDeviceIndices} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pWaitSemaphoreDeviceIndices() { return VkDeviceGroupSubmitInfo.npWaitSemaphoreDeviceIndices(address()); }
-        /** @return the value of the {@link VkDeviceGroupSubmitInfo#commandBufferCount} field. */
+        /** @return the value of the {@code commandBufferCount} field. */
         @NativeType("uint32_t")
         public int commandBufferCount() { return VkDeviceGroupSubmitInfo.ncommandBufferCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkDeviceGroupSubmitInfo#pCommandBufferDeviceMasks} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCommandBufferDeviceMasks} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pCommandBufferDeviceMasks() { return VkDeviceGroupSubmitInfo.npCommandBufferDeviceMasks(address()); }
-        /** @return the value of the {@link VkDeviceGroupSubmitInfo#signalSemaphoreCount} field. */
+        /** @return the value of the {@code signalSemaphoreCount} field. */
         @NativeType("uint32_t")
         public int signalSemaphoreCount() { return VkDeviceGroupSubmitInfo.nsignalSemaphoreCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkDeviceGroupSubmitInfo#pSignalSemaphoreDeviceIndices} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pSignalSemaphoreDeviceIndices} field. */
         @NativeType("uint32_t const *")
         public @Nullable IntBuffer pSignalSemaphoreDeviceIndices() { return VkDeviceGroupSubmitInfo.npSignalSemaphoreDeviceIndices(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceGroupSubmitInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDeviceGroupSubmitInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDeviceGroupSubmitInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO} value to the {@link VkDeviceGroupSubmitInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO} value to the {@code sType} field. */
         public VkDeviceGroupSubmitInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO); }
-        /** Sets the specified value to the {@link VkDeviceGroupSubmitInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDeviceGroupSubmitInfo.Buffer pNext(@NativeType("void const *") long value) { VkDeviceGroupSubmitInfo.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkDeviceGroupSubmitInfo#pWaitSemaphoreDeviceIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pWaitSemaphoreDeviceIndices} field. */
         public VkDeviceGroupSubmitInfo.Buffer pWaitSemaphoreDeviceIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkDeviceGroupSubmitInfo.npWaitSemaphoreDeviceIndices(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkDeviceGroupSubmitInfo#pCommandBufferDeviceMasks} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pCommandBufferDeviceMasks} field. */
         public VkDeviceGroupSubmitInfo.Buffer pCommandBufferDeviceMasks(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkDeviceGroupSubmitInfo.npCommandBufferDeviceMasks(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkDeviceGroupSubmitInfo#pSignalSemaphoreDeviceIndices} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pSignalSemaphoreDeviceIndices} field. */
         public VkDeviceGroupSubmitInfo.Buffer pSignalSemaphoreDeviceIndices(@Nullable @NativeType("uint32_t const *") IntBuffer value) { VkDeviceGroupSubmitInfo.npSignalSemaphoreDeviceIndices(address(), value); return this; }
 
     }

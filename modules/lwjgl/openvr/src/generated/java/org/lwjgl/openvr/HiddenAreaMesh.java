@@ -16,18 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The mesh to draw into the stencil (or depth) buffer to perform early stencil (or depth) kills of pixels that will never appear on the HMD. This mesh draws
- * on all the pixels that will be hidden after distortion.
- * 
- * <p>If the HMD does not provide a visible area mesh {@code pVertexData} will be {@code NULL} and {@code unTriangleCount} will be 0.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct HiddenAreaMesh_t {
  *     {@link HmdVector2 HmdVector2_t} * pVertexData;
  *     uint32_t unTriangleCount;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct HiddenAreaMesh_t")
 public class HiddenAreaMesh extends Struct<HiddenAreaMesh> implements NativeResource {

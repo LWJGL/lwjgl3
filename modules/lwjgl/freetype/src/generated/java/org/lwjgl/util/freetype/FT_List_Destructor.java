@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     FT_Memory memory,
- *     void *data,
- *     void *user
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_List_Destructor} */
 public abstract class FT_List_Destructor extends Callback implements FT_List_DestructorI {
 
     /**

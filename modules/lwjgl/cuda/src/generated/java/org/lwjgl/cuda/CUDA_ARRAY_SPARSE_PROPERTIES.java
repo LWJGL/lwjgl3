@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_ARRAY_SPARSE_PROPERTIES {
  *     struct {
  *         unsigned int width;
@@ -30,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned long long miptailSize;
  *     unsigned int flags;
  *     unsigned int reserved[4];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_ARRAY_SPARSE_PROPERTIES extends Struct<CUDA_ARRAY_SPARSE_PROPERTIES> implements NativeResource {
 

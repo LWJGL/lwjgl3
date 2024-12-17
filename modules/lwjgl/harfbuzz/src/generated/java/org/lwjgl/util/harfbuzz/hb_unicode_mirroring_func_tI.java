@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_codepoint_t (*{@link #invoke}) (
- *     hb_unicode_funcs_t *ufuncs,
- *     hb_codepoint_t unicode,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_unicode_mirroring_func_t} */
 @FunctionalInterface
 @NativeType("hb_unicode_mirroring_func_t")
 public interface hb_unicode_mirroring_func_tI extends CallbackI {
@@ -45,19 +36,7 @@ public interface hb_unicode_mirroring_func_tI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A virtual method for the {@code hb_unicode_funcs_t} structure.
-     * 
-     * <p>This method should retrieve the Bi-Directional Mirroring Glyph code point for a specified Unicode code point.</p>
-     * 
-     * <p>Note: If a code point does not have a specified Bi-Directional Mirroring Glyph defined, the method should return the original code point.</p>
-     * 
-     * <p>Return value: The {@code hb_codepoint_t} of the Mirroring Glyph for unicode</p>
-     *
-     * @param ufuncs    a Unicode-functions structure
-     * @param unicode   the code point to query
-     * @param user_data user data pointer passed by the caller
-     */
+    /** {@code hb_codepoint_t (* hb_unicode_mirroring_func_t) (hb_unicode_funcs_t * ufuncs, hb_codepoint_t unicode, void * user_data)} */
     @NativeType("hb_codepoint_t") int invoke(@NativeType("hb_unicode_funcs_t *") long ufuncs, @NativeType("hb_codepoint_t") int unicode, @NativeType("void *") long user_data);
 
 }

@@ -11,7 +11,6 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** Requires LLVM 18.0 or higher. */
 public class LLVMLLJITUtils {
 
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
@@ -31,11 +30,7 @@ public class LLVMLLJITUtils {
 
     // --- [ LLVMOrcLLJITEnableDebugSupport ] ---
 
-    /**
-     * Install the plugin that submits debug objects to the executor. Executors must expose the {@code llvm_orc_registerJITLoaderGDBWrapper} symbol.
-     *
-     * @since 18
-     */
+    /** {@code LLVMErrorRef LLVMOrcLLJITEnableDebugSupport(LLVMOrcLLJITRef J)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMOrcLLJITEnableDebugSupport(@NativeType("LLVMOrcLLJITRef") long J) {
         long __functionAddress = Functions.OrcLLJITEnableDebugSupport;

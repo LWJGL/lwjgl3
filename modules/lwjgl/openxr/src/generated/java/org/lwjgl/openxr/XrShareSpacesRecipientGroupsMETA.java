@@ -17,35 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information about the share spaces recipient.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrShareSpacesRecipientGroupsMETA} implements the {@link XrShareSpacesRecipientBaseHeaderMETA} base type. Where {@link METASpatialEntitySharing#xrShareSpacesMETA ShareSpacesMETA} specifies that a valid structure based on {@link XrShareSpacesRecipientBaseHeaderMETA} is to be passed, a valid {@link XrShareSpacesRecipientGroupsMETA} structure <b>may</b> be passed.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METASpatialEntityGroupSharing XR_META_spatial_entity_group_sharing} extension <b>must</b> be enabled prior to using {@link XrShareSpacesRecipientGroupsMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METASpatialEntityGroupSharing#XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code groups} <b>must</b> be a pointer to an array of {@code groupCount} {@link XrUuid} structures</li>
- * <li>The {@code groupCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuid}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrShareSpacesRecipientGroupsMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #groupCount};
- *     {@link XrUuid XrUuid} * {@link #groups};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t groupCount;
+ *     {@link XrUuid XrUuid} * groups;
+ * }}</pre>
  */
 public class XrShareSpacesRecipientGroupsMETA extends Struct<XrShareSpacesRecipientGroupsMETA> implements NativeResource {
 
@@ -101,26 +79,26 @@ public class XrShareSpacesRecipientGroupsMETA extends Struct<XrShareSpacesRecipi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of elements in the {@code groups} list. The maximum supported count in a single request is 16. */
+    /** @return the value of the {@code groupCount} field. */
     @NativeType("uint32_t")
     public int groupCount() { return ngroupCount(address()); }
-    /** a list of {@link XrUuid} defined by the application, which the spaces will be shared with. */
+    /** @return a {@link XrUuid.Buffer} view of the struct array pointed to by the {@code groups} field. */
     @NativeType("XrUuid *")
     public XrUuid.Buffer groups() { return ngroups(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrShareSpacesRecipientGroupsMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METASpatialEntityGroupSharing#XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META} value to the {@link #type} field. */
+    /** Sets the {@link METASpatialEntityGroupSharing#XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META} value to the {@code type} field. */
     public XrShareSpacesRecipientGroupsMETA type$Default() { return type(METASpatialEntityGroupSharing.XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrShareSpacesRecipientGroupsMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrUuid.Buffer} to the {@link #groups} field. */
+    /** Sets the address of the specified {@link XrUuid.Buffer} to the {@code groups} field. */
     public XrShareSpacesRecipientGroupsMETA groups(@NativeType("XrUuid *") XrUuid.Buffer value) { ngroups(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,26 +317,26 @@ public class XrShareSpacesRecipientGroupsMETA extends Struct<XrShareSpacesRecipi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrShareSpacesRecipientGroupsMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrShareSpacesRecipientGroupsMETA.ntype(address()); }
-        /** @return the value of the {@link XrShareSpacesRecipientGroupsMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrShareSpacesRecipientGroupsMETA.nnext(address()); }
-        /** @return the value of the {@link XrShareSpacesRecipientGroupsMETA#groupCount} field. */
+        /** @return the value of the {@code groupCount} field. */
         @NativeType("uint32_t")
         public int groupCount() { return XrShareSpacesRecipientGroupsMETA.ngroupCount(address()); }
-        /** @return a {@link XrUuid.Buffer} view of the struct array pointed to by the {@link XrShareSpacesRecipientGroupsMETA#groups} field. */
+        /** @return a {@link XrUuid.Buffer} view of the struct array pointed to by the {@code groups} field. */
         @NativeType("XrUuid *")
         public XrUuid.Buffer groups() { return XrShareSpacesRecipientGroupsMETA.ngroups(address()); }
 
-        /** Sets the specified value to the {@link XrShareSpacesRecipientGroupsMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrShareSpacesRecipientGroupsMETA.Buffer type(@NativeType("XrStructureType") int value) { XrShareSpacesRecipientGroupsMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METASpatialEntityGroupSharing#XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META} value to the {@link XrShareSpacesRecipientGroupsMETA#type} field. */
+        /** Sets the {@link METASpatialEntityGroupSharing#XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META} value to the {@code type} field. */
         public XrShareSpacesRecipientGroupsMETA.Buffer type$Default() { return type(METASpatialEntityGroupSharing.XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META); }
-        /** Sets the specified value to the {@link XrShareSpacesRecipientGroupsMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrShareSpacesRecipientGroupsMETA.Buffer next(@NativeType("void const *") long value) { XrShareSpacesRecipientGroupsMETA.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrUuid.Buffer} to the {@link XrShareSpacesRecipientGroupsMETA#groups} field. */
+        /** Sets the address of the specified {@link XrUuid.Buffer} to the {@code groups} field. */
         public XrShareSpacesRecipientGroupsMETA.Buffer groups(@NativeType("XrUuid *") XrUuid.Buffer value) { XrShareSpacesRecipientGroupsMETA.ngroups(address(), value); return this; }
 
     }

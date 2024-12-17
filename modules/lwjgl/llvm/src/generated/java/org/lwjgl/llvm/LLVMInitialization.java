@@ -11,11 +11,6 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/**
- * This module contains routines used to initialize the LLVM system.
- * 
- * <p>Removed in LLVM 17.</p>
- */
 public class LLVMInitialization {
 
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
@@ -47,6 +42,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeCore ] ---
 
+    /** {@code void LLVMInitializeCore(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeCore(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeCore;
         if (CHECKS) {
@@ -57,6 +53,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeTransformUtils ] ---
 
+    /** {@code void LLVMInitializeTransformUtils(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeTransformUtils(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeTransformUtils;
         if (CHECKS) {
@@ -67,6 +64,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeScalarOpts ] ---
 
+    /** {@code void LLVMInitializeScalarOpts(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeScalarOpts(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeScalarOpts;
         if (CHECKS) {
@@ -77,6 +75,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeObjCARCOpts ] ---
 
+    /** {@code void LLVMInitializeObjCARCOpts(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeObjCARCOpts(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeObjCARCOpts;
         if (CHECKS) {
@@ -88,6 +87,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeVectorization ] ---
 
+    /** {@code void LLVMInitializeVectorization(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeVectorization(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeVectorization;
         if (CHECKS) {
@@ -98,6 +98,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeInstCombine ] ---
 
+    /** {@code void LLVMInitializeInstCombine(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeInstCombine(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeInstCombine;
         if (CHECKS) {
@@ -109,6 +110,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeAggressiveInstCombiner ] ---
 
+    /** {@code void LLVMInitializeAggressiveInstCombiner(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeAggressiveInstCombiner(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeAggressiveInstCombiner;
         if (CHECKS) {
@@ -120,6 +122,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeIPO ] ---
 
+    /** {@code void LLVMInitializeIPO(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeIPO(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeIPO;
         if (CHECKS) {
@@ -130,6 +133,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeInstrumentation ] ---
 
+    /** {@code void LLVMInitializeInstrumentation(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeInstrumentation(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeInstrumentation;
         if (CHECKS) {
@@ -141,6 +145,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeAnalysis ] ---
 
+    /** {@code void LLVMInitializeAnalysis(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeAnalysis(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeAnalysis;
         if (CHECKS) {
@@ -151,6 +156,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeIPA ] ---
 
+    /** {@code void LLVMInitializeIPA(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeIPA(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeIPA;
         if (CHECKS) {
@@ -161,6 +167,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeCodeGen ] ---
 
+    /** {@code void LLVMInitializeCodeGen(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeCodeGen(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeCodeGen;
         if (CHECKS) {
@@ -171,6 +178,7 @@ public class LLVMInitialization {
 
     // --- [ LLVMInitializeTarget ] ---
 
+    /** {@code void LLVMInitializeTarget(LLVMPassRegistryRef R)} */
     public static void LLVMInitializeTarget(@NativeType("LLVMPassRegistryRef") long R) {
         long __functionAddress = Functions.InitializeTarget;
         if (CHECKS) {

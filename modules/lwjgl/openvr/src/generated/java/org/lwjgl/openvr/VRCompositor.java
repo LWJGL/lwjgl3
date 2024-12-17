@@ -18,39 +18,10 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Allows the application to interact with the compositor. */
 public class VRCompositor {
 
     static { OpenVR.initialize(); }
 
-    /**
-     * Compositor frame timing reprojection flags.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #VRCompositor_ReprojectionReason_Cpu ReprojectionReason_Cpu}</li>
-     * <li>{@link #VRCompositor_ReprojectionReason_Gpu ReprojectionReason_Gpu}</li>
-     * <li>{@link #VRCompositor_ReprojectionAsync ReprojectionAsync} - 
-     * This flag indicates the async reprojection mode is active, but does not indicate if reprojection actually happened or not.
-     * 
-     * <p>Use the ReprojectionReason flags above to check if reprojection was actually applied (i.e. scene texture was reused). {@code NumFramePresents > 1}
-     * also indicates the scene texture was reused, and also the number of times that it was presented in total.</p>
-     * </li>
-     * <li>{@link #VRCompositor_ReprojectionMotion ReprojectionMotion} - This flag indicates whether or not motion smoothing was triggered for this frame.</li>
-     * <li>{@link #VRCompositor_PredictionMask PredictionMask} - 
-     * The runtime may predict more than one frame ahead if it detects the application is taking too long to render.
-     * 
-     * <p>These bits will contain the count of additional frames (normally zero). Use the {@code VR_COMPOSITOR_ADDITIONAL_PREDICTED_FRAMES} macro to read
-     * from the latest frame timing entry.</p>
-     * </li>
-     * <li>{@link #VRCompositor_ThrottleMask ThrottleMask} - 
-     * Number of frames the compositor is throttling the application.
-     * 
-     * <p>Use the {@code VR_COMPOSITOR_NUMBER_OF_THROTTLED_FRAMES} macro to read from the latest frame timing entry.</p>
-     * </li>
-     * </ul>
-     */
     public static final int
         VRCompositor_ReprojectionReason_Cpu = 0x01,
         VRCompositor_ReprojectionReason_Gpu = 0x02,
@@ -65,11 +36,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_SetTrackingSpace ] ---
 
-    /**
-     * Sets tracking space returned by {@link #VRCompositor_WaitGetPoses WaitGetPoses}.
-     *
-     * @param eOrigin one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table>
-     */
+    /** {@code void VRCompositor_SetTrackingSpace(ETrackingUniverseOrigin eOrigin)} */
     public static void VRCompositor_SetTrackingSpace(@NativeType("ETrackingUniverseOrigin") int eOrigin) {
         long __functionAddress = OpenVR.VRCompositor.SetTrackingSpace;
         if (CHECKS) {
@@ -80,7 +47,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetTrackingSpace ] ---
 
-    /** Gets current tracking space returned by {@link #VRCompositor_WaitGetPoses WaitGetPoses}. */
+    /** {@code ETrackingUniverseOrigin VRCompositor_GetTrackingSpace(void)} */
     @NativeType("ETrackingUniverseOrigin")
     public static int VRCompositor_GetTrackingSpace() {
         long __functionAddress = OpenVR.VRCompositor.GetTrackingSpace;
@@ -92,7 +59,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_WaitGetPoses ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_WaitGetPoses WaitGetPoses} */
+    /** {@code EVRCompositorError VRCompositor_WaitGetPoses(TrackedDevicePose_t * pRenderPoseArray, uint32_t unRenderPoseArrayCount, TrackedDevicePose_t * pGamePoseArray, uint32_t unGamePoseArrayCount)} */
     public static int nVRCompositor_WaitGetPoses(long pRenderPoseArray, int unRenderPoseArrayCount, long pGamePoseArray, int unGamePoseArrayCount) {
         long __functionAddress = OpenVR.VRCompositor.WaitGetPoses;
         if (CHECKS) {
@@ -101,11 +68,7 @@ public class VRCompositor {
         return callPPI(pRenderPoseArray, unRenderPoseArrayCount, pGamePoseArray, unGamePoseArrayCount, __functionAddress);
     }
 
-    /**
-     * Scene applications should call this function to get poses to render with (and optionally poses predicted an additional frame out to use for gameplay).
-     * This function will block until "running start" milliseconds before the start of the frame, and should be called at the last moment before needing to
-     * start rendering.
-     */
+    /** {@code EVRCompositorError VRCompositor_WaitGetPoses(TrackedDevicePose_t * pRenderPoseArray, uint32_t unRenderPoseArrayCount, TrackedDevicePose_t * pGamePoseArray, uint32_t unGamePoseArrayCount)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_WaitGetPoses(@NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pRenderPoseArray, @NativeType("TrackedDevicePose_t *") TrackedDevicePose.@Nullable Buffer pGamePoseArray) {
         return nVRCompositor_WaitGetPoses(pRenderPoseArray.address(), pRenderPoseArray.remaining(), memAddressSafe(pGamePoseArray), remainingSafe(pGamePoseArray));
@@ -113,7 +76,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetLastPoses ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetLastPoses GetLastPoses} */
+    /** {@code EVRCompositorError VRCompositor_GetLastPoses(TrackedDevicePose_t * pRenderPoseArray, uint32_t unRenderPoseArrayCount, TrackedDevicePose_t * pGamePoseArray, uint32_t unGamePoseArrayCount)} */
     public static int nVRCompositor_GetLastPoses(long pRenderPoseArray, int unRenderPoseArrayCount, long pGamePoseArray, int unGamePoseArrayCount) {
         long __functionAddress = OpenVR.VRCompositor.GetLastPoses;
         if (CHECKS) {
@@ -122,7 +85,7 @@ public class VRCompositor {
         return callPPI(pRenderPoseArray, unRenderPoseArrayCount, pGamePoseArray, unGamePoseArrayCount, __functionAddress);
     }
 
-    /** Get the last set of poses returned by {@link #VRCompositor_WaitGetPoses WaitGetPoses}. */
+    /** {@code EVRCompositorError VRCompositor_GetLastPoses(TrackedDevicePose_t * pRenderPoseArray, uint32_t unRenderPoseArrayCount, TrackedDevicePose_t * pGamePoseArray, uint32_t unGamePoseArrayCount)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_GetLastPoses(@NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pRenderPoseArray, @NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pGamePoseArray) {
         return nVRCompositor_GetLastPoses(pRenderPoseArray.address(), pRenderPoseArray.remaining(), pGamePoseArray.address(), pGamePoseArray.remaining());
@@ -130,7 +93,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetLastPoseForTrackedDeviceIndex ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetLastPoseForTrackedDeviceIndex GetLastPoseForTrackedDeviceIndex} */
+    /** {@code EVRCompositorError VRCompositor_GetLastPoseForTrackedDeviceIndex(TrackedDeviceIndex_t unDeviceIndex, TrackedDevicePose_t * pOutputPose, TrackedDevicePose_t * pOutputGamePose)} */
     public static int nVRCompositor_GetLastPoseForTrackedDeviceIndex(int unDeviceIndex, long pOutputPose, long pOutputGamePose) {
         long __functionAddress = OpenVR.VRCompositor.GetLastPoseForTrackedDeviceIndex;
         if (CHECKS) {
@@ -139,14 +102,7 @@ public class VRCompositor {
         return callPPI(unDeviceIndex, pOutputPose, pOutputGamePose, __functionAddress);
     }
 
-    /**
-     * Interface for accessing last set of poses returned by {@link #VRCompositor_WaitGetPoses WaitGetPoses} one at a time.
-     * 
-     * <p>It is okay to pass {@code NULL} for either pose if you only want one of the values.</p>
-     *
-     * @return {@link VR#EVRCompositorError_VRCompositorError_IndexOutOfRange} if {@code unDeviceIndex} not less than {@link VR#k_unMaxTrackedDeviceCount} otherwise
-     *         {@link VR#EVRCompositorError_VRCompositorError_None}
-     */
+    /** {@code EVRCompositorError VRCompositor_GetLastPoseForTrackedDeviceIndex(TrackedDeviceIndex_t unDeviceIndex, TrackedDevicePose_t * pOutputPose, TrackedDevicePose_t * pOutputGamePose)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_GetLastPoseForTrackedDeviceIndex(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex, @NativeType("TrackedDevicePose_t *") @Nullable TrackedDevicePose pOutputPose, @NativeType("TrackedDevicePose_t *") @Nullable TrackedDevicePose pOutputGamePose) {
         return nVRCompositor_GetLastPoseForTrackedDeviceIndex(unDeviceIndex, memAddressSafe(pOutputPose), memAddressSafe(pOutputGamePose));
@@ -154,7 +110,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_Submit ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_Submit Submit} */
+    /** {@code EVRCompositorError VRCompositor_Submit(EVREye eEye, Texture_t const * pTexture, VRTextureBounds_t const * pBounds, EVRSubmitFlags nSubmitFlags)} */
     public static int nVRCompositor_Submit(int eEye, long pTexture, long pBounds, int nSubmitFlags) {
         long __functionAddress = OpenVR.VRCompositor.Submit;
         if (CHECKS) {
@@ -164,30 +120,7 @@ public class VRCompositor {
         return callPPI(eEye, pTexture, pBounds, nSubmitFlags, __functionAddress);
     }
 
-    /**
-     * Updated scene texture to display.
-     * 
-     * <p>If {@code pBounds} is {@code NULL} the entire texture will be used. If called from an OpenGL app, consider adding a
-     * {@code glFlush} after submitting both frames to signal the driver to start processing, otherwise it may wait until the command buffer fills up, causing
-     * the app to miss frames.</p>
-     * 
-     * <p>OpenGL dirty state: glBindTexture</p>
-     *
-     * @param eEye         one of:<br><table><tr><td>{@link VR#EVREye_Eye_Left}</td><td>{@link VR#EVREye_Eye_Right}</td></tr></table>
-     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_VulkanTextureWithArrayData}</td><td>{@link VR#EVRSubmitFlags_Submit_GlArrayTexture}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_IsEgl}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved2}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_Reserved3}</td></tr></table>
-     *
-     * @return return codes:
-     *         
-     *         <ul>
-     *         <li>IsNotSceneApplication (make sure to call VR_Init with VRApplication_Scene)</li>
-     *         <li>DoNotHaveFocus (some other app has taken focus)</li>
-     *         <li>TextureIsOnWrongDevice (application did not use proper AdapterIndex - see IVRSystem.GetDXGIOutputInfo)</li>
-     *         <li>SharedTexturesNotSupported (application needs to call CreateDXGIFactory1 or later before creating DX device)</li>
-     *         <li>TextureUsesUnsupportedFormat (scene textures must be compatible with DXGI sharing rules - e.g. uncompressed, no mips, etc.)</li>
-     *         <li>InvalidTexture (usually means bad arguments passed in)</li>
-     *         <li>AlreadySubmitted (app has submitted two left textures or two right textures in a single frame - i.e. before calling WaitGetPoses again)</li>
-     *         </ul>
-     */
+    /** {@code EVRCompositorError VRCompositor_Submit(EVREye eEye, Texture_t const * pTexture, VRTextureBounds_t const * pBounds, EVRSubmitFlags nSubmitFlags)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_Submit(@NativeType("EVREye") int eEye, @NativeType("Texture_t const *") Texture pTexture, @NativeType("VRTextureBounds_t const *") @Nullable VRTextureBounds pBounds, @NativeType("EVRSubmitFlags") int nSubmitFlags) {
         return nVRCompositor_Submit(eEye, pTexture.address(), memAddressSafe(pBounds), nSubmitFlags);
@@ -195,7 +128,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_SubmitWithArrayIndex ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_SubmitWithArrayIndex SubmitWithArrayIndex} */
+    /** {@code EVRCompositorError VRCompositor_SubmitWithArrayIndex(EVREye eEye, Texture_t const * pTexture, uint32_t unTextureArrayIndex, VRTextureBounds_t const * pBounds, EVRSubmitFlags nSubmitFlags)} */
     public static int nVRCompositor_SubmitWithArrayIndex(int eEye, long pTexture, int unTextureArrayIndex, long pBounds, int nSubmitFlags) {
         long __functionAddress = OpenVR.VRCompositor.SubmitWithArrayIndex;
         if (CHECKS) {
@@ -205,12 +138,7 @@ public class VRCompositor {
         return callPPI(eEye, pTexture, unTextureArrayIndex, pBounds, nSubmitFlags, __functionAddress);
     }
 
-    /**
-     * See {@link #VRCompositor_Submit Submit}.
-     *
-     * @param eEye         one of:<br><table><tr><td>{@link VR#EVREye_Eye_Left}</td><td>{@link VR#EVREye_Eye_Right}</td></tr></table>
-     * @param nSubmitFlags one of:<br><table><tr><td>{@link VR#EVRSubmitFlags_Submit_Default}</td><td>{@link VR#EVRSubmitFlags_Submit_LensDistortionAlreadyApplied}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_GlRenderBuffer}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_TextureWithDepth}</td><td>{@link VR#EVRSubmitFlags_Submit_FrameDiscontinuty}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_VulkanTextureWithArrayData}</td><td>{@link VR#EVRSubmitFlags_Submit_GlArrayTexture}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_IsEgl}</td><td>{@link VR#EVRSubmitFlags_Submit_Reserved2}</td></tr><tr><td>{@link VR#EVRSubmitFlags_Submit_Reserved3}</td></tr></table>
-     */
+    /** {@code EVRCompositorError VRCompositor_SubmitWithArrayIndex(EVREye eEye, Texture_t const * pTexture, uint32_t unTextureArrayIndex, VRTextureBounds_t const * pBounds, EVRSubmitFlags nSubmitFlags)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_SubmitWithArrayIndex(@NativeType("EVREye") int eEye, @NativeType("Texture_t const *") Texture pTexture, @NativeType("uint32_t") int unTextureArrayIndex, @NativeType("VRTextureBounds_t const *") @Nullable VRTextureBounds pBounds, @NativeType("EVRSubmitFlags") int nSubmitFlags) {
         return nVRCompositor_SubmitWithArrayIndex(eEye, pTexture.address(), unTextureArrayIndex, memAddressSafe(pBounds), nSubmitFlags);
@@ -218,7 +146,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ClearLastSubmittedFrame ] ---
 
-    /** Clears the frame that was sent with the last call to Submit. This will cause the compositor to show the grid until {@link #VRCompositor_Submit Submit} is called again. */
+    /** {@code void VRCompositor_ClearLastSubmittedFrame(void)} */
     public static void VRCompositor_ClearLastSubmittedFrame() {
         long __functionAddress = OpenVR.VRCompositor.ClearLastSubmittedFrame;
         if (CHECKS) {
@@ -229,14 +157,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_PostPresentHandoff ] ---
 
-    /**
-     * Call immediately after presenting your app's window (i.e. companion window) to unblock the compositor.
-     * 
-     * <p>This is an optional call, which only needs to be used if you can't instead call {@link #VRCompositor_WaitGetPoses WaitGetPoses} immediately after {@code Present()}. For example, if
-     * your engine's render and game loop are not on separate threads, or blocking the render thread until 3ms before the next vsync would introduce a
-     * deadlock of some sort. This function tells the compositor that you have finished all rendering after having Submitted buffers for both eyes, and it is
-     * free to start its rendering work. This should only be called from the same thread you are rendering on.</p>
-     */
+    /** {@code void VRCompositor_PostPresentHandoff(void)} */
     public static void VRCompositor_PostPresentHandoff() {
         long __functionAddress = OpenVR.VRCompositor.PostPresentHandoff;
         if (CHECKS) {
@@ -247,7 +168,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetFrameTiming ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetFrameTiming GetFrameTiming} */
+    /** {@code bool VRCompositor_GetFrameTiming(Compositor_FrameTiming * pTiming, uint32_t unFramesAgo)} */
     public static boolean nVRCompositor_GetFrameTiming(long pTiming, int unFramesAgo) {
         long __functionAddress = OpenVR.VRCompositor.GetFrameTiming;
         if (CHECKS) {
@@ -256,11 +177,7 @@ public class VRCompositor {
         return callPZ(pTiming, unFramesAgo, __functionAddress);
     }
 
-    /**
-     * Returns true if timing data is filled it. Sets oldest timing info if {@code nFramesAgo} is larger than the stored history.
-     * 
-     * <p>Be sure to set {@code timing.size = sizeof(Compositor_FrameTiming)} on struct passed in before calling this function.</p>
-     */
+    /** {@code bool VRCompositor_GetFrameTiming(Compositor_FrameTiming * pTiming, uint32_t unFramesAgo)} */
     @NativeType("bool")
     public static boolean VRCompositor_GetFrameTiming(@NativeType("Compositor_FrameTiming *") CompositorFrameTiming.Buffer pTiming) {
         return nVRCompositor_GetFrameTiming(pTiming.address(), pTiming.remaining());
@@ -268,7 +185,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetFrameTimings ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetFrameTimings GetFrameTimings} */
+    /** {@code uint32_t VRCompositor_GetFrameTimings(Compositor_FrameTiming * pTiming, uint32_t nFrames)} */
     public static int nVRCompositor_GetFrameTimings(long pTiming, int nFrames) {
         long __functionAddress = OpenVR.VRCompositor.GetFrameTimings;
         if (CHECKS) {
@@ -277,10 +194,7 @@ public class VRCompositor {
         return callPI(pTiming, nFrames, __functionAddress);
     }
 
-    /**
-     * Interface for copying a range of timing data. Frames are returned in ascending order (oldest to newest) with the last being the most recent frame. Only
-     * the first entry's {@code m_nSize} needs to be set, as the rest will be inferred from that. Returns total number of entries filled out.
-     */
+    /** {@code uint32_t VRCompositor_GetFrameTimings(Compositor_FrameTiming * pTiming, uint32_t nFrames)} */
     @NativeType("uint32_t")
     public static int VRCompositor_GetFrameTimings(@NativeType("Compositor_FrameTiming *") CompositorFrameTiming.Buffer pTiming) {
         return nVRCompositor_GetFrameTimings(pTiming.address(), pTiming.remaining());
@@ -288,11 +202,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetFrameTimeRemaining ] ---
 
-    /**
-     * Returns the time in seconds left in the current (as identified by FrameTiming's frameIndex) frame.
-     * 
-     * <p>Due to "running start", this value may roll over to the next frame before ever reaching 0.0.</p>
-     */
+    /** {@code float VRCompositor_GetFrameTimeRemaining(void)} */
     public static float VRCompositor_GetFrameTimeRemaining() {
         long __functionAddress = OpenVR.VRCompositor.GetFrameTimeRemaining;
         if (CHECKS) {
@@ -303,7 +213,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetCumulativeStats ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetCumulativeStats GetCumulativeStats} */
+    /** {@code void VRCompositor_GetCumulativeStats(Compositor_CumulativeStats * pStats, uint32_t nStatsSizeInBytes)} */
     public static void nVRCompositor_GetCumulativeStats(long pStats, int nStatsSizeInBytes) {
         long __functionAddress = OpenVR.VRCompositor.GetCumulativeStats;
         if (CHECKS) {
@@ -312,28 +222,19 @@ public class VRCompositor {
         callPV(pStats, nStatsSizeInBytes, __functionAddress);
     }
 
-    /**
-     * Fills out stats accumulated for the last connected application.
-     *
-     * @param nStatsSizeInBytes must be {@code sizeof( Compositor_CumulativeStats )}
-     */
+    /** {@code void VRCompositor_GetCumulativeStats(Compositor_CumulativeStats * pStats, uint32_t nStatsSizeInBytes)} */
     public static void VRCompositor_GetCumulativeStats(@NativeType("Compositor_CumulativeStats *") CompositorCumulativeStats pStats, @NativeType("uint32_t") int nStatsSizeInBytes) {
         nVRCompositor_GetCumulativeStats(pStats.address(), nStatsSizeInBytes);
     }
 
-    /** Fills out stats accumulated for the last connected application. */
+    /** {@code void VRCompositor_GetCumulativeStats(Compositor_CumulativeStats * pStats, uint32_t nStatsSizeInBytes)} */
     public static void VRCompositor_GetCumulativeStats(@NativeType("Compositor_CumulativeStats *") CompositorCumulativeStats pStats) {
         nVRCompositor_GetCumulativeStats(pStats.address(), CompositorCumulativeStats.SIZEOF);
     }
 
     // --- [ VRCompositor_FadeToColor ] ---
 
-    /**
-     * Fades the view on the HMD to the specified color.
-     * 
-     * <p>The fade will take {@code fSeconds}, and the color values are between 0.0 and 1.0. This color is faded on top of the scene based on the alpha
-     * parameter. Removing the fade color instantly would be {@code FadeToColor( 0.0, 0.0, 0.0, 0.0, 0.0 )}. Values are in un-premultiplied alpha space.</p>
-     */
+    /** {@code void VRCompositor_FadeToColor(float fSeconds, float fRed, float fGreen, float fBlue, float fAlpha, bool bBackground)} */
     public static void VRCompositor_FadeToColor(float fSeconds, float fRed, float fGreen, float fBlue, float fAlpha, @NativeType("bool") boolean bBackground) {
         long __functionAddress = OpenVR.VRCompositor.FadeToColor;
         if (CHECKS) {
@@ -344,10 +245,10 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetCurrentFadeColor ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetCurrentFadeColor GetCurrentFadeColor} */
+    /** {@code HmdColor_t VRCompositor_GetCurrentFadeColor(bool bBackground)} */
     public static native void nVRCompositor_GetCurrentFadeColor(boolean bBackground, long __functionAddress, long __result);
 
-    /** Unsafe version of: {@link #VRCompositor_GetCurrentFadeColor GetCurrentFadeColor} */
+    /** {@code HmdColor_t VRCompositor_GetCurrentFadeColor(bool bBackground)} */
     public static void nVRCompositor_GetCurrentFadeColor(boolean bBackground, long __result) {
         long __functionAddress = OpenVR.VRCompositor.GetCurrentFadeColor;
         if (CHECKS) {
@@ -356,7 +257,7 @@ public class VRCompositor {
         nVRCompositor_GetCurrentFadeColor(bBackground, __functionAddress, __result);
     }
 
-    /** Get current fade color value. */
+    /** {@code HmdColor_t VRCompositor_GetCurrentFadeColor(bool bBackground)} */
     @NativeType("HmdColor_t")
     public static HmdColor VRCompositor_GetCurrentFadeColor(@NativeType("bool") boolean bBackground, @NativeType("HmdColor_t") HmdColor __result) {
         nVRCompositor_GetCurrentFadeColor(bBackground, __result.address());
@@ -365,7 +266,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_FadeGrid ] ---
 
-    /** Fading the Grid in or out in {@code fSeconds}. */
+    /** {@code void VRCompositor_FadeGrid(float fSeconds, bool bFadeGridIn)} */
     public static void VRCompositor_FadeGrid(float fSeconds, @NativeType("bool") boolean bFadeGridIn) {
         long __functionAddress = OpenVR.VRCompositor.FadeGrid;
         if (CHECKS) {
@@ -376,7 +277,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetCurrentGridAlpha ] ---
 
-    /** Get current alpha value of grid. */
+    /** {@code float VRCompositor_GetCurrentGridAlpha(void)} */
     public static float VRCompositor_GetCurrentGridAlpha() {
         long __functionAddress = OpenVR.VRCompositor.GetCurrentGridAlpha;
         if (CHECKS) {
@@ -387,7 +288,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_SetSkyboxOverride ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_SetSkyboxOverride SetSkyboxOverride} */
+    /** {@code EVRCompositorError VRCompositor_SetSkyboxOverride(Texture_t const * pTextures, uint32_t unTextureCount)} */
     public static int nVRCompositor_SetSkyboxOverride(long pTextures, int unTextureCount) {
         long __functionAddress = OpenVR.VRCompositor.SetSkyboxOverride;
         if (CHECKS) {
@@ -397,12 +298,7 @@ public class VRCompositor {
         return callPI(pTextures, unTextureCount, __functionAddress);
     }
 
-    /**
-     * Override the skybox used in the compositor (e.g. for during level loads when the app can't feed scene images fast enough)
-     * 
-     * <p>Order is Front, Back, Left, Right, Top, Bottom. If only a single texture is passed, it is assumed in lat-long format. If two are passed, it is assumed
-     * a lat-long stereo pair.</p>
-     */
+    /** {@code EVRCompositorError VRCompositor_SetSkyboxOverride(Texture_t const * pTextures, uint32_t unTextureCount)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_SetSkyboxOverride(@NativeType("Texture_t const *") Texture.Buffer pTextures) {
         return nVRCompositor_SetSkyboxOverride(pTextures.address(), pTextures.remaining());
@@ -410,7 +306,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ClearSkyboxOverride ] ---
 
-    /** Resets compositor skybox back to defaults. */
+    /** {@code void VRCompositor_ClearSkyboxOverride(void)} */
     public static void VRCompositor_ClearSkyboxOverride() {
         long __functionAddress = OpenVR.VRCompositor.ClearSkyboxOverride;
         if (CHECKS) {
@@ -421,7 +317,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_CompositorBringToFront ] ---
 
-    /** Brings the compositor window to the front. This is useful for covering any other window that may be on the HMD and is obscuring the compositor window. */
+    /** {@code void VRCompositor_CompositorBringToFront(void)} */
     public static void VRCompositor_CompositorBringToFront() {
         long __functionAddress = OpenVR.VRCompositor.CompositorBringToFront;
         if (CHECKS) {
@@ -432,7 +328,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_CompositorGoToBack ] ---
 
-    /** Pushes the compositor window to the back. This is useful for allowing other applications to draw directly to the HMD. */
+    /** {@code void VRCompositor_CompositorGoToBack(void)} */
     public static void VRCompositor_CompositorGoToBack() {
         long __functionAddress = OpenVR.VRCompositor.CompositorGoToBack;
         if (CHECKS) {
@@ -443,10 +339,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_CompositorQuit ] ---
 
-    /**
-     * DEPRECATED: Tells the compositor process to clean up and exit. You do not need to call this function at shutdown. Under normal circumstances the
-     * compositor will manage its own life cycle based on what applications are running.
-     */
+    /** {@code void VRCompositor_CompositorQuit(void)} */
     public static void VRCompositor_CompositorQuit() {
         long __functionAddress = OpenVR.VRCompositor.CompositorQuit;
         if (CHECKS) {
@@ -457,7 +350,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_IsFullscreen ] ---
 
-    /** Return whether the compositor is fullscreen. */
+    /** {@code bool VRCompositor_IsFullscreen(void)} */
     @NativeType("bool")
     public static boolean VRCompositor_IsFullscreen() {
         long __functionAddress = OpenVR.VRCompositor.IsFullscreen;
@@ -469,7 +362,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetCurrentSceneFocusProcess ] ---
 
-    /** Returns the process ID of the process that is currently rendering the scene. */
+    /** {@code uint32_t VRCompositor_GetCurrentSceneFocusProcess(void)} */
     @NativeType("uint32_t")
     public static int VRCompositor_GetCurrentSceneFocusProcess() {
         long __functionAddress = OpenVR.VRCompositor.GetCurrentSceneFocusProcess;
@@ -481,11 +374,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetLastFrameRenderer ] ---
 
-    /**
-     * Returns the process ID of the process that rendered the last frame (or 0 if the compositor itself rendered the frame).
-     *
-     * @return 0 when fading out from an app and the app's process Id when fading into an app
-     */
+    /** {@code uint32_t VRCompositor_GetLastFrameRenderer(void)} */
     @NativeType("uint32_t")
     public static int VRCompositor_GetLastFrameRenderer() {
         long __functionAddress = OpenVR.VRCompositor.GetLastFrameRenderer;
@@ -497,7 +386,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_CanRenderScene ] ---
 
-    /** Returns true if the current process has the scene focus. */
+    /** {@code bool VRCompositor_CanRenderScene(void)} */
     @NativeType("bool")
     public static boolean VRCompositor_CanRenderScene() {
         long __functionAddress = OpenVR.VRCompositor.CanRenderScene;
@@ -509,7 +398,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ShowMirrorWindow ] ---
 
-    /** DEPRECATED: Opens the headset view (as either a window or docked widget depending on user's preferences) that displays what the user sees in the headset. */
+    /** {@code void VRCompositor_ShowMirrorWindow(void)} */
     public static void VRCompositor_ShowMirrorWindow() {
         long __functionAddress = OpenVR.VRCompositor.ShowMirrorWindow;
         if (CHECKS) {
@@ -520,7 +409,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_HideMirrorWindow ] ---
 
-    /** DEPRECATED: Closes the headset view, either as a window or docked widget. */
+    /** {@code void VRCompositor_HideMirrorWindow(void)} */
     public static void VRCompositor_HideMirrorWindow() {
         long __functionAddress = OpenVR.VRCompositor.HideMirrorWindow;
         if (CHECKS) {
@@ -531,7 +420,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_IsMirrorWindowVisible ] ---
 
-    /** DEPRECATED: Returns true if the headset view (either as a window or docked widget) is shown. */
+    /** {@code bool VRCompositor_IsMirrorWindowVisible(void)} */
     @NativeType("bool")
     public static boolean VRCompositor_IsMirrorWindowVisible() {
         long __functionAddress = OpenVR.VRCompositor.IsMirrorWindowVisible;
@@ -543,7 +432,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_CompositorDumpImages ] ---
 
-    /** Writes back buffer and stereo left/right pair from the application to a 'screenshots' folder in the SteamVR runtime root. */
+    /** {@code void VRCompositor_CompositorDumpImages(void)} */
     public static void VRCompositor_CompositorDumpImages() {
         long __functionAddress = OpenVR.VRCompositor.CompositorDumpImages;
         if (CHECKS) {
@@ -554,7 +443,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ShouldAppRenderWithLowResources ] ---
 
-    /** Let an app know it should be rendering with low resources. */
+    /** {@code bool VRCompositor_ShouldAppRenderWithLowResources(void)} */
     @NativeType("bool")
     public static boolean VRCompositor_ShouldAppRenderWithLowResources() {
         long __functionAddress = OpenVR.VRCompositor.ShouldAppRenderWithLowResources;
@@ -566,7 +455,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ForceInterleavedReprojectionOn ] ---
 
-    /** Override interleaved reprojection logic to force on. */
+    /** {@code void VRCompositor_ForceInterleavedReprojectionOn(bool bOverride)} */
     public static void VRCompositor_ForceInterleavedReprojectionOn(@NativeType("bool") boolean bOverride) {
         long __functionAddress = OpenVR.VRCompositor.ForceInterleavedReprojectionOn;
         if (CHECKS) {
@@ -577,7 +466,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ForceReconnectProcess ] ---
 
-    /** Force reconnecting to the compositor process. */
+    /** {@code void VRCompositor_ForceReconnectProcess(void)} */
     public static void VRCompositor_ForceReconnectProcess() {
         long __functionAddress = OpenVR.VRCompositor.ForceReconnectProcess;
         if (CHECKS) {
@@ -588,7 +477,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_SuspendRendering ] ---
 
-    /** Temporarily suspends rendering (useful for finer control over scene transitions). */
+    /** {@code void VRCompositor_SuspendRendering(bool bSuspend)} */
     public static void VRCompositor_SuspendRendering(@NativeType("bool") boolean bSuspend) {
         long __functionAddress = OpenVR.VRCompositor.SuspendRendering;
         if (CHECKS) {
@@ -599,7 +488,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetMirrorTextureD3D11 ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetMirrorTextureD3D11 GetMirrorTextureD3D11} */
+    /** {@code EVRCompositorError VRCompositor_GetMirrorTextureD3D11(EVREye eEye, void * pD3D11DeviceOrResource, void ** ppD3D11ShaderResourceView)} */
     public static int nVRCompositor_GetMirrorTextureD3D11(int eEye, long pD3D11DeviceOrResource, long ppD3D11ShaderResourceView) {
         long __functionAddress = OpenVR.VRCompositor.GetMirrorTextureD3D11;
         if (CHECKS) {
@@ -609,11 +498,7 @@ public class VRCompositor {
         return callPPI(eEye, pD3D11DeviceOrResource, ppD3D11ShaderResourceView, __functionAddress);
     }
 
-    /**
-     * Opens a shared D3D11 texture with the undistorted composited image for each eye.
-     * 
-     * <p>Use {@link #VRCompositor_ReleaseMirrorTextureD3D11 ReleaseMirrorTextureD3D11} when finished instead of calling Release on the resource itself.</p>
-     */
+    /** {@code EVRCompositorError VRCompositor_GetMirrorTextureD3D11(EVREye eEye, void * pD3D11DeviceOrResource, void ** ppD3D11ShaderResourceView)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_GetMirrorTextureD3D11(@NativeType("EVREye") int eEye, @NativeType("void *") long pD3D11DeviceOrResource, @NativeType("void **") PointerBuffer ppD3D11ShaderResourceView) {
         if (CHECKS) {
@@ -624,7 +509,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ReleaseMirrorTextureD3D11 ] ---
 
-    /** Releases a shared D3D11 texture. */
+    /** {@code void VRCompositor_ReleaseMirrorTextureD3D11(void * pD3D11ShaderResourceView)} */
     public static void VRCompositor_ReleaseMirrorTextureD3D11(@NativeType("void *") long pD3D11ShaderResourceView) {
         long __functionAddress = OpenVR.VRCompositor.ReleaseMirrorTextureD3D11;
         if (CHECKS) {
@@ -636,7 +521,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetMirrorTextureGL ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetMirrorTextureGL GetMirrorTextureGL} */
+    /** {@code EVRCompositorError VRCompositor_GetMirrorTextureGL(EVREye eEye, glUInt_t * pglTextureId, glSharedTextureHandle_t * pglSharedTextureHandle)} */
     public static int nVRCompositor_GetMirrorTextureGL(int eEye, long pglTextureId, long pglSharedTextureHandle) {
         long __functionAddress = OpenVR.VRCompositor.GetMirrorTextureGL;
         if (CHECKS) {
@@ -645,7 +530,7 @@ public class VRCompositor {
         return callPPI(eEye, pglTextureId, pglSharedTextureHandle, __functionAddress);
     }
 
-    /** Access to mirror textures from OpenGL. */
+    /** {@code EVRCompositorError VRCompositor_GetMirrorTextureGL(EVREye eEye, glUInt_t * pglTextureId, glSharedTextureHandle_t * pglSharedTextureHandle)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_GetMirrorTextureGL(@NativeType("EVREye") int eEye, @NativeType("glUInt_t *") IntBuffer pglTextureId, @NativeType("glSharedTextureHandle_t *") PointerBuffer pglSharedTextureHandle) {
         if (CHECKS) {
@@ -657,6 +542,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ReleaseSharedGLTexture ] ---
 
+    /** {@code bool VRCompositor_ReleaseSharedGLTexture(glUInt_t glTextureId, glSharedTextureHandle_t glSharedTextureHandle)} */
     @NativeType("bool")
     public static boolean VRCompositor_ReleaseSharedGLTexture(@NativeType("glUInt_t") int glTextureId, @NativeType("glSharedTextureHandle_t") long glSharedTextureHandle) {
         long __functionAddress = OpenVR.VRCompositor.ReleaseSharedGLTexture;
@@ -669,6 +555,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_LockGLSharedTextureForAccess ] ---
 
+    /** {@code void VRCompositor_LockGLSharedTextureForAccess(glSharedTextureHandle_t glSharedTextureHandle)} */
     public static void VRCompositor_LockGLSharedTextureForAccess(@NativeType("glSharedTextureHandle_t") long glSharedTextureHandle) {
         long __functionAddress = OpenVR.VRCompositor.LockGLSharedTextureForAccess;
         if (CHECKS) {
@@ -680,6 +567,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_UnlockGLSharedTextureForAccess ] ---
 
+    /** {@code void VRCompositor_UnlockGLSharedTextureForAccess(glSharedTextureHandle_t glSharedTextureHandle)} */
     public static void VRCompositor_UnlockGLSharedTextureForAccess(@NativeType("glSharedTextureHandle_t") long glSharedTextureHandle) {
         long __functionAddress = OpenVR.VRCompositor.UnlockGLSharedTextureForAccess;
         if (CHECKS) {
@@ -691,7 +579,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetVulkanInstanceExtensionsRequired ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetVulkanInstanceExtensionsRequired GetVulkanInstanceExtensionsRequired} */
+    /** {@code uint32_t VRCompositor_GetVulkanInstanceExtensionsRequired(char * pchValue, uint32_t unBufferSize)} */
     public static int nVRCompositor_GetVulkanInstanceExtensionsRequired(long pchValue, int unBufferSize) {
         long __functionAddress = OpenVR.VRCompositor.GetVulkanInstanceExtensionsRequired;
         if (CHECKS) {
@@ -700,19 +588,13 @@ public class VRCompositor {
         return callPI(pchValue, unBufferSize, __functionAddress);
     }
 
-    /**
-     * Returns 0. Otherwise it returns the length of the number of bytes necessary to hold this string including the trailing null. The string will be a space
-     * separated list of-required instance extensions to enable in {@code VkCreateInstance}.
-     */
+    /** {@code uint32_t VRCompositor_GetVulkanInstanceExtensionsRequired(char * pchValue, uint32_t unBufferSize)} */
     @NativeType("uint32_t")
     public static int VRCompositor_GetVulkanInstanceExtensionsRequired(@NativeType("char *") @Nullable ByteBuffer pchValue) {
         return nVRCompositor_GetVulkanInstanceExtensionsRequired(memAddressSafe(pchValue), remainingSafe(pchValue));
     }
 
-    /**
-     * Returns 0. Otherwise it returns the length of the number of bytes necessary to hold this string including the trailing null. The string will be a space
-     * separated list of-required instance extensions to enable in {@code VkCreateInstance}.
-     */
+    /** {@code uint32_t VRCompositor_GetVulkanInstanceExtensionsRequired(char * pchValue, uint32_t unBufferSize)} */
     @NativeType("uint32_t")
     public static String VRCompositor_GetVulkanInstanceExtensionsRequired(@NativeType("uint32_t") int unBufferSize) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -727,7 +609,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetVulkanDeviceExtensionsRequired ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetVulkanDeviceExtensionsRequired GetVulkanDeviceExtensionsRequired} */
+    /** {@code uint32_t VRCompositor_GetVulkanDeviceExtensionsRequired(VkPhysicalDevice_T * pPhysicalDevice, char * pchValue, uint32_t unBufferSize)} */
     public static int nVRCompositor_GetVulkanDeviceExtensionsRequired(long pPhysicalDevice, long pchValue, int unBufferSize) {
         long __functionAddress = OpenVR.VRCompositor.GetVulkanDeviceExtensionsRequired;
         if (CHECKS) {
@@ -737,19 +619,13 @@ public class VRCompositor {
         return callPPI(pPhysicalDevice, pchValue, unBufferSize, __functionAddress);
     }
 
-    /**
-     * Returns 0. Otherwise it returns the length of the number of bytes necessary to hold this string including the trailing null. The string will be a space
-     * separated list of required device extensions to enable in {@code VkCreateDevice}.
-     */
+    /** {@code uint32_t VRCompositor_GetVulkanDeviceExtensionsRequired(VkPhysicalDevice_T * pPhysicalDevice, char * pchValue, uint32_t unBufferSize)} */
     @NativeType("uint32_t")
     public static int VRCompositor_GetVulkanDeviceExtensionsRequired(@NativeType("VkPhysicalDevice_T *") long pPhysicalDevice, @NativeType("char *") @Nullable ByteBuffer pchValue) {
         return nVRCompositor_GetVulkanDeviceExtensionsRequired(pPhysicalDevice, memAddressSafe(pchValue), remainingSafe(pchValue));
     }
 
-    /**
-     * Returns 0. Otherwise it returns the length of the number of bytes necessary to hold this string including the trailing null. The string will be a space
-     * separated list of required device extensions to enable in {@code VkCreateDevice}.
-     */
+    /** {@code uint32_t VRCompositor_GetVulkanDeviceExtensionsRequired(VkPhysicalDevice_T * pPhysicalDevice, char * pchValue, uint32_t unBufferSize)} */
     @NativeType("uint32_t")
     public static String VRCompositor_GetVulkanDeviceExtensionsRequired(@NativeType("VkPhysicalDevice_T *") long pPhysicalDevice, @NativeType("uint32_t") int unBufferSize) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -764,29 +640,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_SetExplicitTimingMode ] ---
 
-    /**
-     * <h3>Vulkan/D3D12 Only</h3>
-     * 
-     * <p>There are two purposes for {@code SetExplicitTimingMode}:</p>
-     * 
-     * <ol>
-     * <li>To get a more accurate GPU timestamp for when the frame begins in Vulkan/D3D12 applications.</li>
-     * <li>(Optional) To avoid having {@link #VRCompositor_WaitGetPoses WaitGetPoses} access the Vulkan queue so that the queue can be accessed from another thread while {@code WaitGetPoses}
-     * is executing.</li>
-     * </ol>
-     * 
-     * <p>More accurate GPU timestamp for the start of the frame is achieved by the application calling {@link #VRCompositor_SubmitExplicitTimingData SubmitExplicitTimingData} immediately before its first
-     * submission to the Vulkan/D3D12 queue. This is more accurate because normally this GPU timestamp is recorded during {@link #VRCompositor_WaitGetPoses WaitGetPoses}. In D3D11,
-     * {@code WaitGetPoses} queues a GPU timestamp write, but it does not actually get submitted to the GPU until the application flushes. By using
-     * {@code SubmitExplicitTimingData}, the timestamp is recorded at the same place for Vulkan/D3D12 as it is for D3D11, resulting in a more accurate GPU
-     * time measurement for the frame.</p>
-     * 
-     * <p>Avoiding {@link #VRCompositor_WaitGetPoses WaitGetPoses} accessing the Vulkan queue can be achieved using {@code SetExplicitTimingMode} as well. If this is desired, the application
-     * should set the timing mode to {@link VR#EVRCompositorTimingMode_VRCompositorTimingMode_Explicit_ApplicationPerformsPostPresentHandoff} and <b>MUST</b> call
-     * {@link #VRCompositor_PostPresentHandoff PostPresentHandoff} itself. If these conditions are met, then {@code WaitGetPoses} is guaranteed not to access the queue. Note that
-     * {@code PostPresentHandoff} and {@code SubmitExplicitTimingData} will access the queue, so only {@code WaitGetPoses} becomes safe for accessing the
-     * queue from another thread.</p>
-     */
+    /** {@code void VRCompositor_SetExplicitTimingMode(EVRCompositorTimingMode eTimingMode)} */
     public static void VRCompositor_SetExplicitTimingMode(@NativeType("EVRCompositorTimingMode") int eTimingMode) {
         long __functionAddress = OpenVR.VRCompositor.SetExplicitTimingMode;
         if (CHECKS) {
@@ -797,16 +651,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_SubmitExplicitTimingData ] ---
 
-    /**
-     * <h3>Vulkan/D3D12 Only</h3>
-     * 
-     * <p>Submit explicit timing data. When {@code SetExplicitTimingMode} is true, this must be called immediately before the application's first
-     * {@code vkQueueSubmit} (Vulkan) or {@code ID3D12CommandQueue::ExecuteCommandLists} (D3D12) of each frame. This function will insert a GPU timestamp
-     * write just before the application starts its rendering. This function will perform a {@code vkQueueSubmit} on Vulkan so must not be done simultaneously
-     * with {@code VkQueue} operations on another thread.</p>
-     *
-     * @return {@link VR#EVRCompositorError_VRCompositorError_RequestFailed} if {@code SetExplicitTimingMode} is not enabled
-     */
+    /** {@code EVRCompositorError VRCompositor_SubmitExplicitTimingData(void)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_SubmitExplicitTimingData() {
         long __functionAddress = OpenVR.VRCompositor.SubmitExplicitTimingData;
@@ -818,12 +663,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_IsMotionSmoothingEnabled ] ---
 
-    /**
-     * Indicates whether or not motion smoothing is enabled by the user settings.
-     * 
-     * <p>If you want to know if motion smoothing actually triggered due to a late frame, check {@link CompositorFrameTiming} {@code m_nReprojectionFlags} &amp;
-     * {@code VRCompositor_ReprojectionMotion} instead.</p>
-     */
+    /** {@code bool VRCompositor_IsMotionSmoothingEnabled(void)} */
     @NativeType("bool")
     public static boolean VRCompositor_IsMotionSmoothingEnabled() {
         long __functionAddress = OpenVR.VRCompositor.IsMotionSmoothingEnabled;
@@ -835,7 +675,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_IsMotionSmoothingSupported ] ---
 
-    /** Indicates whether or not motion smoothing is supported by the current hardware. */
+    /** {@code bool VRCompositor_IsMotionSmoothingSupported(void)} */
     @NativeType("bool")
     public static boolean VRCompositor_IsMotionSmoothingSupported() {
         long __functionAddress = OpenVR.VRCompositor.IsMotionSmoothingSupported;
@@ -847,12 +687,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_IsCurrentSceneFocusAppLoading ] ---
 
-    /**
-     * Indicates whether or not the current scene focus app is currently loading.
-     * 
-     * <p>This is inferred from its use of {@code FadeGrid} to explicitly fade to the compositor to cover up the fact that it cannot render at a sustained full
-     * framerate during this time.</p>
-     */
+    /** {@code bool VRCompositor_IsCurrentSceneFocusAppLoading(void)} */
     @NativeType("bool")
     public static boolean VRCompositor_IsCurrentSceneFocusAppLoading() {
         long __functionAddress = OpenVR.VRCompositor.IsCurrentSceneFocusAppLoading;
@@ -864,7 +699,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_SetStageOverride_Async ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_SetStageOverride_Async SetStageOverride_Async} */
+    /** {@code EVRCompositorError VRCompositor_SetStageOverride_Async(char const * pchRenderModelPath, HmdMatrix34_t const * pTransform, Compositor_StageRenderSettings const * pRenderSettings, uint32_t nSizeOfRenderSettings)} */
     public static int nVRCompositor_SetStageOverride_Async(long pchRenderModelPath, long pTransform, long pRenderSettings, int nSizeOfRenderSettings) {
         long __functionAddress = OpenVR.VRCompositor.SetStageOverride_Async;
         if (CHECKS) {
@@ -873,13 +708,7 @@ public class VRCompositor {
         return callPPPI(pchRenderModelPath, pTransform, pRenderSettings, nSizeOfRenderSettings, __functionAddress);
     }
 
-    /**
-     * Override the stage model used in the compositor to replace the grid.
-     * 
-     * <p>{@code RenderModelPath} is a full path the an OBJ file to load. This file will be loaded asynchronously from disk and uploaded to the gpu by the
-     * runtime. Once ready for rendering, the VREvent {@link VR#EVREventType_VREvent_Compositor_StageOverrideReady} will be sent. Use {@code FadeToGrid} to reveal. Call
-     * {@link #VRCompositor_ClearStageOverride ClearStageOverride} to free the associated resources when finished.</p>
-     */
+    /** {@code EVRCompositorError VRCompositor_SetStageOverride_Async(char const * pchRenderModelPath, HmdMatrix34_t const * pTransform, Compositor_StageRenderSettings const * pRenderSettings, uint32_t nSizeOfRenderSettings)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_SetStageOverride_Async(@NativeType("char const *") ByteBuffer pchRenderModelPath, @NativeType("HmdMatrix34_t const *") HmdMatrix34 pTransform, @NativeType("Compositor_StageRenderSettings const *") CompositorStageRenderSettings pRenderSettings, @NativeType("uint32_t") int nSizeOfRenderSettings) {
         if (CHECKS) {
@@ -888,13 +717,7 @@ public class VRCompositor {
         return nVRCompositor_SetStageOverride_Async(memAddress(pchRenderModelPath), pTransform.address(), pRenderSettings.address(), nSizeOfRenderSettings);
     }
 
-    /**
-     * Override the stage model used in the compositor to replace the grid.
-     * 
-     * <p>{@code RenderModelPath} is a full path the an OBJ file to load. This file will be loaded asynchronously from disk and uploaded to the gpu by the
-     * runtime. Once ready for rendering, the VREvent {@link VR#EVREventType_VREvent_Compositor_StageOverrideReady} will be sent. Use {@code FadeToGrid} to reveal. Call
-     * {@link #VRCompositor_ClearStageOverride ClearStageOverride} to free the associated resources when finished.</p>
-     */
+    /** {@code EVRCompositorError VRCompositor_SetStageOverride_Async(char const * pchRenderModelPath, HmdMatrix34_t const * pTransform, Compositor_StageRenderSettings const * pRenderSettings, uint32_t nSizeOfRenderSettings)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_SetStageOverride_Async(@NativeType("char const *") ByteBuffer pchRenderModelPath, @NativeType("HmdMatrix34_t const *") HmdMatrix34 pTransform, @NativeType("Compositor_StageRenderSettings const *") CompositorStageRenderSettings pRenderSettings) {
         if (CHECKS) {
@@ -903,13 +726,7 @@ public class VRCompositor {
         return nVRCompositor_SetStageOverride_Async(memAddress(pchRenderModelPath), pTransform.address(), pRenderSettings.address(), CompositorStageRenderSettings.SIZEOF);
     }
 
-    /**
-     * Override the stage model used in the compositor to replace the grid.
-     * 
-     * <p>{@code RenderModelPath} is a full path the an OBJ file to load. This file will be loaded asynchronously from disk and uploaded to the gpu by the
-     * runtime. Once ready for rendering, the VREvent {@link VR#EVREventType_VREvent_Compositor_StageOverrideReady} will be sent. Use {@code FadeToGrid} to reveal. Call
-     * {@link #VRCompositor_ClearStageOverride ClearStageOverride} to free the associated resources when finished.</p>
-     */
+    /** {@code EVRCompositorError VRCompositor_SetStageOverride_Async(char const * pchRenderModelPath, HmdMatrix34_t const * pTransform, Compositor_StageRenderSettings const * pRenderSettings, uint32_t nSizeOfRenderSettings)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_SetStageOverride_Async(@NativeType("char const *") CharSequence pchRenderModelPath, @NativeType("HmdMatrix34_t const *") HmdMatrix34 pTransform, @NativeType("Compositor_StageRenderSettings const *") CompositorStageRenderSettings pRenderSettings) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -924,7 +741,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_ClearStageOverride ] ---
 
-    /** Resets the stage to its default user specified setting. */
+    /** {@code void VRCompositor_ClearStageOverride(void)} */
     public static void VRCompositor_ClearStageOverride() {
         long __functionAddress = OpenVR.VRCompositor.ClearStageOverride;
         if (CHECKS) {
@@ -935,11 +752,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetCompositorBenchmarkResults ] ---
 
-    /**
-     * Unsafe version of: {@link #VRCompositor_GetCompositorBenchmarkResults GetCompositorBenchmarkResults}
-     *
-     * @param nSizeOfBenchmarkResults should be set to {@code sizeof(Compositor_BenchmarkResults)}
-     */
+    /** {@code bool VRCompositor_GetCompositorBenchmarkResults(Compositor_BenchmarkResults * pBenchmarkResults, uint32_t nSizeOfBenchmarkResults)} */
     public static boolean nVRCompositor_GetCompositorBenchmarkResults(long pBenchmarkResults, int nSizeOfBenchmarkResults) {
         long __functionAddress = OpenVR.VRCompositor.GetCompositorBenchmarkResults;
         if (CHECKS) {
@@ -948,7 +761,7 @@ public class VRCompositor {
         return callPZ(pBenchmarkResults, nSizeOfBenchmarkResults, __functionAddress);
     }
 
-    /** Returns true if {@code pBenchmarkResults} is filled it. Sets {@code pBenchmarkResults} with the result of the compositor benchmark. */
+    /** {@code bool VRCompositor_GetCompositorBenchmarkResults(Compositor_BenchmarkResults * pBenchmarkResults, uint32_t nSizeOfBenchmarkResults)} */
     @NativeType("bool")
     public static boolean VRCompositor_GetCompositorBenchmarkResults(@NativeType("Compositor_BenchmarkResults *") Compositor_BenchmarkResults.Buffer pBenchmarkResults) {
         return nVRCompositor_GetCompositorBenchmarkResults(pBenchmarkResults.address(), pBenchmarkResults.remaining());
@@ -956,7 +769,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetLastPosePredictionIDs ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetLastPosePredictionIDs GetLastPosePredictionIDs} */
+    /** {@code EVRCompositorError VRCompositor_GetLastPosePredictionIDs(uint32_t * pRenderPosePredictionID, uint32_t * pGamePosePredictionID)} */
     public static int nVRCompositor_GetLastPosePredictionIDs(long pRenderPosePredictionID, long pGamePosePredictionID) {
         long __functionAddress = OpenVR.VRCompositor.GetLastPosePredictionIDs;
         if (CHECKS) {
@@ -965,11 +778,7 @@ public class VRCompositor {
         return callPPI(pRenderPosePredictionID, pGamePosePredictionID, __functionAddress);
     }
 
-    /**
-     * Returns the frame id associated with the poses last returned by {@link #VRCompositor_WaitGetPoses WaitGetPoses}.
-     * 
-     * <p>Deltas between IDs correspond to number of headset vsync intervals.</p>
-     */
+    /** {@code EVRCompositorError VRCompositor_GetLastPosePredictionIDs(uint32_t * pRenderPosePredictionID, uint32_t * pGamePosePredictionID)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_GetLastPosePredictionIDs(@NativeType("uint32_t *") IntBuffer pRenderPosePredictionID, @NativeType("uint32_t *") IntBuffer pGamePosePredictionID) {
         if (CHECKS) {
@@ -981,7 +790,7 @@ public class VRCompositor {
 
     // --- [ VRCompositor_GetPosesForFrame ] ---
 
-    /** Unsafe version of: {@link #VRCompositor_GetPosesForFrame GetPosesForFrame} */
+    /** {@code EVRCompositorError VRCompositor_GetPosesForFrame(uint32_t unPosePredictionID, TrackedDevicePose_t * pPoseArray, uint32_t unPoseArrayCount)} */
     public static int nVRCompositor_GetPosesForFrame(int unPosePredictionID, long pPoseArray, int unPoseArrayCount) {
         long __functionAddress = OpenVR.VRCompositor.GetPosesForFrame;
         if (CHECKS) {
@@ -990,7 +799,7 @@ public class VRCompositor {
         return callPI(unPosePredictionID, pPoseArray, unPoseArrayCount, __functionAddress);
     }
 
-    /** Get the most up-to-date predicted (or recorded - up to 100ms old) set of poses for a given frame id. */
+    /** {@code EVRCompositorError VRCompositor_GetPosesForFrame(uint32_t unPosePredictionID, TrackedDevicePose_t * pPoseArray, uint32_t unPoseArrayCount)} */
     @NativeType("EVRCompositorError")
     public static int VRCompositor_GetPosesForFrame(@NativeType("uint32_t") int unPosePredictionID, @NativeType("TrackedDevicePose_t *") TrackedDevicePose.Buffer pPoseArray) {
         return nVRCompositor_GetPosesForFrame(unPosePredictionID, pPoseArray.address(), pPoseArray.remaining());

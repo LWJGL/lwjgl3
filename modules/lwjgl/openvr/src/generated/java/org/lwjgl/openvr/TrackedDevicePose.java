@@ -16,19 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes a single pose for a tracked object.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TrackedDevicePose_t {
  *     {@link HmdMatrix34 HmdMatrix34_t} mDeviceToAbsoluteTracking;
- *     {@link HmdVector3 HmdVector3_t} {@link #vVelocity};
- *     {@link HmdVector3 HmdVector3_t} {@link #vAngularVelocity};
- *     ETrackingResult {@link #eTrackingResult};
+ *     {@link HmdVector3 HmdVector3_t} vVelocity;
+ *     {@link HmdVector3 HmdVector3_t} vAngularVelocity;
+ *     ETrackingResult eTrackingResult;
  *     bool bPoseIsValid;
- *     bool {@link #bDeviceIsConnected};
- * }</code></pre>
+ *     bool bDeviceIsConnected;
+ * }}</pre>
  */
 @NativeType("struct TrackedDevicePose_t")
 public class TrackedDevicePose extends Struct<TrackedDevicePose> implements NativeResource {
@@ -94,19 +90,19 @@ public class TrackedDevicePose extends Struct<TrackedDevicePose> implements Nati
     /** @return a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
     @NativeType("HmdMatrix34_t")
     public HmdMatrix34 mDeviceToAbsoluteTracking() { return nmDeviceToAbsoluteTracking(address()); }
-    /** velocity in tracker space in m/s */
+    /** @return a {@link HmdVector3} view of the {@code vVelocity} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vVelocity() { return nvVelocity(address()); }
-    /** angular velocity in radians/s */
+    /** @return a {@link HmdVector3} view of the {@code vAngularVelocity} field. */
     @NativeType("HmdVector3_t")
     public HmdVector3 vAngularVelocity() { return nvAngularVelocity(address()); }
-    /** one of:<br><table><tr><td>{@link VR#ETrackingResult_TrackingResult_Uninitialized}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Calibrating_InProgress}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Calibrating_OutOfRange}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Running_OK}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Running_OutOfRange}</td></tr><tr><td>{@link VR#ETrackingResult_TrackingResult_Fallback_RotationOnly}</td></tr></table> */
+    /** @return the value of the {@code eTrackingResult} field. */
     @NativeType("ETrackingResult")
     public int eTrackingResult() { return neTrackingResult(address()); }
     /** @return the value of the {@code bPoseIsValid} field. */
     @NativeType("bool")
     public boolean bPoseIsValid() { return nbPoseIsValid(address()); }
-    /** This indicates that there is a device connected for this spot in the pose array. It could go from true to false if the user unplugs the device. */
+    /** @return the value of the {@code bDeviceIsConnected} field. */
     @NativeType("bool")
     public boolean bDeviceIsConnected() { return nbDeviceIsConnected(address()); }
 
@@ -114,19 +110,19 @@ public class TrackedDevicePose extends Struct<TrackedDevicePose> implements Nati
     public TrackedDevicePose mDeviceToAbsoluteTracking(@NativeType("HmdMatrix34_t") HmdMatrix34 value) { nmDeviceToAbsoluteTracking(address(), value); return this; }
     /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
     public TrackedDevicePose mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
-    /** Copies the specified {@link HmdVector3} to the {@link #vVelocity} field. */
+    /** Copies the specified {@link HmdVector3} to the {@code vVelocity} field. */
     public TrackedDevicePose vVelocity(@NativeType("HmdVector3_t") HmdVector3 value) { nvVelocity(address(), value); return this; }
-    /** Passes the {@link #vVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code vVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
     public TrackedDevicePose vVelocity(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vVelocity()); return this; }
-    /** Copies the specified {@link HmdVector3} to the {@link #vAngularVelocity} field. */
+    /** Copies the specified {@link HmdVector3} to the {@code vAngularVelocity} field. */
     public TrackedDevicePose vAngularVelocity(@NativeType("HmdVector3_t") HmdVector3 value) { nvAngularVelocity(address(), value); return this; }
-    /** Passes the {@link #vAngularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code vAngularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
     public TrackedDevicePose vAngularVelocity(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vAngularVelocity()); return this; }
-    /** Sets the specified value to the {@link #eTrackingResult} field. */
+    /** Sets the specified value to the {@code eTrackingResult} field. */
     public TrackedDevicePose eTrackingResult(@NativeType("ETrackingResult") int value) { neTrackingResult(address(), value); return this; }
     /** Sets the specified value to the {@code bPoseIsValid} field. */
     public TrackedDevicePose bPoseIsValid(@NativeType("bool") boolean value) { nbPoseIsValid(address(), value); return this; }
-    /** Sets the specified value to the {@link #bDeviceIsConnected} field. */
+    /** Sets the specified value to the {@code bDeviceIsConnected} field. */
     public TrackedDevicePose bDeviceIsConnected(@NativeType("bool") boolean value) { nbDeviceIsConnected(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -362,19 +358,19 @@ public class TrackedDevicePose extends Struct<TrackedDevicePose> implements Nati
         /** @return a {@link HmdMatrix34} view of the {@code mDeviceToAbsoluteTracking} field. */
         @NativeType("HmdMatrix34_t")
         public HmdMatrix34 mDeviceToAbsoluteTracking() { return TrackedDevicePose.nmDeviceToAbsoluteTracking(address()); }
-        /** @return a {@link HmdVector3} view of the {@link TrackedDevicePose#vVelocity} field. */
+        /** @return a {@link HmdVector3} view of the {@code vVelocity} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vVelocity() { return TrackedDevicePose.nvVelocity(address()); }
-        /** @return a {@link HmdVector3} view of the {@link TrackedDevicePose#vAngularVelocity} field. */
+        /** @return a {@link HmdVector3} view of the {@code vAngularVelocity} field. */
         @NativeType("HmdVector3_t")
         public HmdVector3 vAngularVelocity() { return TrackedDevicePose.nvAngularVelocity(address()); }
-        /** @return the value of the {@link TrackedDevicePose#eTrackingResult} field. */
+        /** @return the value of the {@code eTrackingResult} field. */
         @NativeType("ETrackingResult")
         public int eTrackingResult() { return TrackedDevicePose.neTrackingResult(address()); }
         /** @return the value of the {@code bPoseIsValid} field. */
         @NativeType("bool")
         public boolean bPoseIsValid() { return TrackedDevicePose.nbPoseIsValid(address()); }
-        /** @return the value of the {@link TrackedDevicePose#bDeviceIsConnected} field. */
+        /** @return the value of the {@code bDeviceIsConnected} field. */
         @NativeType("bool")
         public boolean bDeviceIsConnected() { return TrackedDevicePose.nbDeviceIsConnected(address()); }
 
@@ -382,19 +378,19 @@ public class TrackedDevicePose extends Struct<TrackedDevicePose> implements Nati
         public TrackedDevicePose.Buffer mDeviceToAbsoluteTracking(@NativeType("HmdMatrix34_t") HmdMatrix34 value) { TrackedDevicePose.nmDeviceToAbsoluteTracking(address(), value); return this; }
         /** Passes the {@code mDeviceToAbsoluteTracking} field to the specified {@link java.util.function.Consumer Consumer}. */
         public TrackedDevicePose.Buffer mDeviceToAbsoluteTracking(java.util.function.Consumer<HmdMatrix34> consumer) { consumer.accept(mDeviceToAbsoluteTracking()); return this; }
-        /** Copies the specified {@link HmdVector3} to the {@link TrackedDevicePose#vVelocity} field. */
+        /** Copies the specified {@link HmdVector3} to the {@code vVelocity} field. */
         public TrackedDevicePose.Buffer vVelocity(@NativeType("HmdVector3_t") HmdVector3 value) { TrackedDevicePose.nvVelocity(address(), value); return this; }
-        /** Passes the {@link TrackedDevicePose#vVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code vVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
         public TrackedDevicePose.Buffer vVelocity(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vVelocity()); return this; }
-        /** Copies the specified {@link HmdVector3} to the {@link TrackedDevicePose#vAngularVelocity} field. */
+        /** Copies the specified {@link HmdVector3} to the {@code vAngularVelocity} field. */
         public TrackedDevicePose.Buffer vAngularVelocity(@NativeType("HmdVector3_t") HmdVector3 value) { TrackedDevicePose.nvAngularVelocity(address(), value); return this; }
-        /** Passes the {@link TrackedDevicePose#vAngularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code vAngularVelocity} field to the specified {@link java.util.function.Consumer Consumer}. */
         public TrackedDevicePose.Buffer vAngularVelocity(java.util.function.Consumer<HmdVector3> consumer) { consumer.accept(vAngularVelocity()); return this; }
-        /** Sets the specified value to the {@link TrackedDevicePose#eTrackingResult} field. */
+        /** Sets the specified value to the {@code eTrackingResult} field. */
         public TrackedDevicePose.Buffer eTrackingResult(@NativeType("ETrackingResult") int value) { TrackedDevicePose.neTrackingResult(address(), value); return this; }
         /** Sets the specified value to the {@code bPoseIsValid} field. */
         public TrackedDevicePose.Buffer bPoseIsValid(@NativeType("bool") boolean value) { TrackedDevicePose.nbPoseIsValid(address(), value); return this; }
-        /** Sets the specified value to the {@link TrackedDevicePose#bDeviceIsConnected} field. */
+        /** Sets the specified value to the {@code bDeviceIsConnected} field. */
         public TrackedDevicePose.Buffer bDeviceIsConnected(@NativeType("bool") boolean value) { TrackedDevicePose.nbDeviceIsConnected(address(), value); return this; }
 
     }

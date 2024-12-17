@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMOrc#LLVMOrcIRTransformLayerSetTransform OrcIRTransformLayerSetTransform} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * LLVMErrorRef (*{@link #invoke}) (
- *     void *Ctx,
- *     LLVMOrcThreadSafeModuleRef *ModInOut,
- *     LLVMOrcMaterializationResponsibilityRef MR
- * )</code></pre>
- */
+/** Callback function: {@link #invoke LLVMOrcIRTransformLayerTransformFunction} */
 public abstract class LLVMOrcIRTransformLayerTransformFunction extends Callback implements LLVMOrcIRTransformLayerTransformFunctionI {
 
     /**

@@ -16,21 +16,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying input data for a single shader group command token.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>The current bound graphics pipeline, as well as the pipelines it may reference, <b>must</b> have been created with {@link NVDeviceGeneratedCommands#VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV}</li>
- * <li>The {@code index} <b>must</b> be within range of the accessible shader groups of the current bound graphics pipeline. See {@link NVDeviceGeneratedCommands#vkCmdBindPipelineShaderGroupNV CmdBindPipelineShaderGroupNV} for further details</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindShaderGroupIndirectCommandNV {
- *     uint32_t {@link #groupIndex};
- * }</code></pre>
+ *     uint32_t groupIndex;
+ * }}</pre>
  */
 public class VkBindShaderGroupIndirectCommandNV extends Struct<VkBindShaderGroupIndirectCommandNV> implements NativeResource {
 
@@ -77,11 +66,11 @@ public class VkBindShaderGroupIndirectCommandNV extends Struct<VkBindShaderGroup
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** specifies which shader group of the current bound graphics pipeline is used. */
+    /** @return the value of the {@code groupIndex} field. */
     @NativeType("uint32_t")
     public int groupIndex() { return ngroupIndex(address()); }
 
-    /** Sets the specified value to the {@link #groupIndex} field. */
+    /** Sets the specified value to the {@code groupIndex} field. */
     public VkBindShaderGroupIndirectCommandNV groupIndex(@NativeType("uint32_t") int value) { ngroupIndex(address(), value); return this; }
 
     /**
@@ -256,11 +245,11 @@ public class VkBindShaderGroupIndirectCommandNV extends Struct<VkBindShaderGroup
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBindShaderGroupIndirectCommandNV#groupIndex} field. */
+        /** @return the value of the {@code groupIndex} field. */
         @NativeType("uint32_t")
         public int groupIndex() { return VkBindShaderGroupIndirectCommandNV.ngroupIndex(address()); }
 
-        /** Sets the specified value to the {@link VkBindShaderGroupIndirectCommandNV#groupIndex} field. */
+        /** Sets the specified value to the {@code groupIndex} field. */
         public VkBindShaderGroupIndirectCommandNV.Buffer groupIndex(@NativeType("uint32_t") int value) { VkBindShaderGroupIndirectCommandNV.ngroupIndex(address(), value); return this; }
 
     }

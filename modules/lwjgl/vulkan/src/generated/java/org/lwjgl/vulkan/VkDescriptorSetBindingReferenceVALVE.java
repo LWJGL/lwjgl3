@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Stub description of VkDescriptorSetBindingReferenceVALVE.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VALVEDescriptorSetHostMapping#VK_STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code descriptorSetLayout} <b>must</b> be a valid {@code VkDescriptorSetLayout} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VALVEDescriptorSetHostMapping#vkGetDescriptorSetLayoutHostMappingInfoVALVE GetDescriptorSetLayoutHostMappingInfoVALVE}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetBindingReferenceVALVE {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkDescriptorSetLayout descriptorSetLayout;
  *     uint32_t binding;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDescriptorSetBindingReferenceVALVE extends Struct<VkDescriptorSetBindingReferenceVALVE> implements NativeResource {
 

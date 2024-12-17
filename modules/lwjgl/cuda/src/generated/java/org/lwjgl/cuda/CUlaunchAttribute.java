@@ -17,14 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUlaunchAttribute {
  *     CUlaunchAttributeID id;
  *     char pad[4];
  *     {@link CUlaunchAttributeValue CUlaunchAttributeValue} value;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUlaunchAttribute extends Struct<CUlaunchAttribute> implements NativeResource {
 

@@ -14,9 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_topology_discovery_support {
  *     unsigned char pu;
  *     unsigned char numa;
@@ -24,7 +22,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     unsigned char disallowed_pu;
  *     unsigned char disallowed_numa;
  *     unsigned char cpukind_efficiency;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct hwloc_topology_discovery_support")
 public class hwloc_topology_discovery_support extends Struct<hwloc_topology_discovery_support> {

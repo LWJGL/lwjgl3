@@ -17,26 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure that identifies a Metal MTLBuffer object to use when creating a VkDeviceMemory object.
- * 
- * <h5>Description</h5>
- * 
- * <p>The application <b>must</b> ensure that the configuration of the {@code id&lt;MTLBuffer&gt;} object is compatible with the configuration of the {@code VkDeviceMemory}. Failure to do so results in undefined behavior.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImportMetalBufferInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     MTLBuffer_id {@link #mtlBuffer};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     MTLBuffer_id mtlBuffer;
+ * }}</pre>
  */
 public class VkImportMetalBufferInfoEXT extends Struct<VkImportMetalBufferInfoEXT> implements NativeResource {
 
@@ -89,23 +75,23 @@ public class VkImportMetalBufferInfoEXT extends Struct<VkImportMetalBufferInfoEX
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the Metal {@code id&lt;MTLBuffer&gt;} object that is to underlie the {@code VkDeviceMemory}. */
+    /** @return the value of the {@code mtlBuffer} field. */
     @NativeType("MTLBuffer_id")
     public long mtlBuffer() { return nmtlBuffer(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImportMetalBufferInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT} value to the {@code sType} field. */
     public VkImportMetalBufferInfoEXT sType$Default() { return sType(EXTMetalObjects.VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImportMetalBufferInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #mtlBuffer} field. */
+    /** Sets the specified value to the {@code mtlBuffer} field. */
     public VkImportMetalBufferInfoEXT mtlBuffer(@NativeType("MTLBuffer_id") long value) { nmtlBuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -310,23 +296,23 @@ public class VkImportMetalBufferInfoEXT extends Struct<VkImportMetalBufferInfoEX
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImportMetalBufferInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImportMetalBufferInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkImportMetalBufferInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImportMetalBufferInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkImportMetalBufferInfoEXT#mtlBuffer} field. */
+        /** @return the value of the {@code mtlBuffer} field. */
         @NativeType("MTLBuffer_id")
         public long mtlBuffer() { return VkImportMetalBufferInfoEXT.nmtlBuffer(address()); }
 
-        /** Sets the specified value to the {@link VkImportMetalBufferInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImportMetalBufferInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkImportMetalBufferInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT} value to the {@link VkImportMetalBufferInfoEXT#sType} field. */
+        /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT} value to the {@code sType} field. */
         public VkImportMetalBufferInfoEXT.Buffer sType$Default() { return sType(EXTMetalObjects.VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT); }
-        /** Sets the specified value to the {@link VkImportMetalBufferInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImportMetalBufferInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkImportMetalBufferInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImportMetalBufferInfoEXT#mtlBuffer} field. */
+        /** Sets the specified value to the {@code mtlBuffer} field. */
         public VkImportMetalBufferInfoEXT.Buffer mtlBuffer(@NativeType("MTLBuffer_id") long value) { VkImportMetalBufferInfoEXT.nmtlBuffer(address(), value); return this; }
 
     }

@@ -16,7 +16,6 @@ import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Native bindings to the GLFW library's WGL native access functions. */
 public class GLFWNativeWGL {
 
     /** Contains the function pointers loaded from {@code GLFW.getLibrary()}. */
@@ -36,25 +35,7 @@ public class GLFWNativeWGL {
 
     // --- [ glfwGetWGLContext ] ---
 
-    /**
-     * Returns the {@code HGLRC} of the specified window.
-     * 
-     * <p>The {@code HDC} associated with the window can be queried with the
-     * <a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdc">GetDC</a> function.
-     * <code>
-     * HDC dc = GetDC(glfwGetWin32Window(window));</code>
-     * This DC is private and does not need to be released.</p>
-     * 
-     * <p>Note: This function may be called from any thread. Access is not synchronized.</p>
-     *
-     * @param window the GLFW window
-     *
-     * @return the {@code HGLRC} of the specified window, or {@code NULL} if an error occurred.
-     *         
-     *         <p>Possible errors include {@link GLFW#GLFW_NO_WINDOW_CONTEXT NO_WINDOW_CONTEXT} and {@link GLFW#GLFW_NOT_INITIALIZED NOT_INITIALIZED}.</p>
-     *
-     * @since version 3.0
-     */
+    /** {@code HGLRC glfwGetWGLContext(GLFWwindow * window)} */
     @NativeType("HGLRC")
     public static long glfwGetWGLContext(@NativeType("GLFWwindow *") long window) {
         long __functionAddress = Functions.GetWGLContext;
@@ -67,7 +48,7 @@ public class GLFWNativeWGL {
     /**
      * Calls {@link #setPath(String)} with the path of the specified {@link SharedLibrary}.
      * 
-     * <p>Example usage: <code>GLFWNativeWGL.setPath(GL.getFunctionProvider());</code></p> 
+     * <p>Example usage: {@code GLFWNativeWGL.setPath(GL.getFunctionProvider());}</p> 
      *
      * @param sharedLibrary a {@code FunctionProvider} instance that will be cast to {@code SharedLibrary}
      */

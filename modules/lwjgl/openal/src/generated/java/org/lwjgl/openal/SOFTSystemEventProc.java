@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     ALCenum eventType,
- *     ALCenum deviceType,
- *     ALCdevice *device,
- *     ALCsizei length,
- *     ALCchar const *message,
- *     ALCvoid *userParam
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ALCEVENTPROCTYPESOFT} */
 public abstract class SOFTSystemEventProc extends Callback implements SOFTSystemEventProcI {
 
     /**

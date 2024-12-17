@@ -16,66 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Multiresolution descriptor for Octilinear.
- * 
- * <p>Usage of this layer must be successfully enabled via {@link OVR#ovr_EnableExtension EnableExtension} before it can be used.</p>
- * 
- * <p>Size of W quadrants:</p>
- * 
- * <pre><code>
- * SizeLeft + SizeRight &le; Viewport.Size.w
- * SizeUp   + sizeDown  &le; Viewport.Size.h
- * 
- * Clip space (0,0) is located at Viewport.Pos + (SizeLeft,SizeUp) where
- * Viewport is given in the layer description.
- * 
- * Viewport Top left
- * +-----------------------------------------------------+
- * |                        ^                       |    |
- * |                        |                       |    |
- * |           0          SizeUp         1          |    |
- * |                        |                       |&lt;--Portion of viewport
- * |                        |                       |   determined by sizes
- * |                        |                       |    |
- * |&lt;--------SizeLeft-------+-------SizeRight------&gt;|    |
- * |                        |                       |    |
- * |                        |                       |    |
- * |           2         SizeDown        3          |    |
- * |                        |                       |    |
- * |                        |                       |    |
- * |                        v                       |    |
- * +------------------------------------------------+    |
- * |                                                     |
- * +-----------------------------------------------------+
- *                                                       Viewport bottom right
- * 
- * For example, when rendering quadrant 0 its scissor rectangle will be
- * 
- *  Top    = 0
- *  Left   = 0
- *  Right  = SizeLeft
- *  Bottom = SizeUp
- * 
- * and the scissor rectangle for quadrant 1 will be:
- * 
- *  Top    = 0
- *  Left   = SizeLeft
- *  Right  = SizeLeft + SizeRight
- *  Bottom = SizeUp</code></pre>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrTextureLayoutOctilinear {
- *     float {@link #WarpLeft};
- *     float {@link #WarpRight};
- *     float {@link #WarpUp};
- *     float {@link #WarpDown};
- *     float {@link #SizeLeft};
- *     float {@link #SizeRight};
- *     float {@link #SizeUp};
- *     float {@link #SizeDown};
- * }</code></pre>
+ *     float WarpLeft;
+ *     float WarpRight;
+ *     float WarpUp;
+ *     float WarpDown;
+ *     float SizeLeft;
+ *     float SizeRight;
+ *     float SizeUp;
+ *     float SizeDown;
+ * }}</pre>
  */
 @NativeType("struct ovrTextureLayoutOctilinear")
 public class OVRTextureLayoutOctilinear extends Struct<OVRTextureLayoutOctilinear> implements NativeResource {
@@ -145,38 +96,38 @@ public class OVRTextureLayoutOctilinear extends Struct<OVRTextureLayoutOctilinea
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** left W warping */
+    /** @return the value of the {@code WarpLeft} field. */
     public float WarpLeft() { return nWarpLeft(address()); }
-    /** right W warping */
+    /** @return the value of the {@code WarpRight} field. */
     public float WarpRight() { return nWarpRight(address()); }
-    /** up W warping */
+    /** @return the value of the {@code WarpUp} field. */
     public float WarpUp() { return nWarpUp(address()); }
-    /** down W warping */
+    /** @return the value of the {@code WarpDown} field. */
     public float WarpDown() { return nWarpDown(address()); }
-    /** left W quadrant size */
+    /** @return the value of the {@code SizeLeft} field. */
     public float SizeLeft() { return nSizeLeft(address()); }
-    /** right W quadrant size */
+    /** @return the value of the {@code SizeRight} field. */
     public float SizeRight() { return nSizeRight(address()); }
-    /** up W quadrant size */
+    /** @return the value of the {@code SizeUp} field. */
     public float SizeUp() { return nSizeUp(address()); }
-    /** down W quadrant size */
+    /** @return the value of the {@code SizeDown} field. */
     public float SizeDown() { return nSizeDown(address()); }
 
-    /** Sets the specified value to the {@link #WarpLeft} field. */
+    /** Sets the specified value to the {@code WarpLeft} field. */
     public OVRTextureLayoutOctilinear WarpLeft(float value) { nWarpLeft(address(), value); return this; }
-    /** Sets the specified value to the {@link #WarpRight} field. */
+    /** Sets the specified value to the {@code WarpRight} field. */
     public OVRTextureLayoutOctilinear WarpRight(float value) { nWarpRight(address(), value); return this; }
-    /** Sets the specified value to the {@link #WarpUp} field. */
+    /** Sets the specified value to the {@code WarpUp} field. */
     public OVRTextureLayoutOctilinear WarpUp(float value) { nWarpUp(address(), value); return this; }
-    /** Sets the specified value to the {@link #WarpDown} field. */
+    /** Sets the specified value to the {@code WarpDown} field. */
     public OVRTextureLayoutOctilinear WarpDown(float value) { nWarpDown(address(), value); return this; }
-    /** Sets the specified value to the {@link #SizeLeft} field. */
+    /** Sets the specified value to the {@code SizeLeft} field. */
     public OVRTextureLayoutOctilinear SizeLeft(float value) { nSizeLeft(address(), value); return this; }
-    /** Sets the specified value to the {@link #SizeRight} field. */
+    /** Sets the specified value to the {@code SizeRight} field. */
     public OVRTextureLayoutOctilinear SizeRight(float value) { nSizeRight(address(), value); return this; }
-    /** Sets the specified value to the {@link #SizeUp} field. */
+    /** Sets the specified value to the {@code SizeUp} field. */
     public OVRTextureLayoutOctilinear SizeUp(float value) { nSizeUp(address(), value); return this; }
-    /** Sets the specified value to the {@link #SizeDown} field. */
+    /** Sets the specified value to the {@code SizeDown} field. */
     public OVRTextureLayoutOctilinear SizeDown(float value) { nSizeDown(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -421,38 +372,38 @@ public class OVRTextureLayoutOctilinear extends Struct<OVRTextureLayoutOctilinea
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRTextureLayoutOctilinear#WarpLeft} field. */
+        /** @return the value of the {@code WarpLeft} field. */
         public float WarpLeft() { return OVRTextureLayoutOctilinear.nWarpLeft(address()); }
-        /** @return the value of the {@link OVRTextureLayoutOctilinear#WarpRight} field. */
+        /** @return the value of the {@code WarpRight} field. */
         public float WarpRight() { return OVRTextureLayoutOctilinear.nWarpRight(address()); }
-        /** @return the value of the {@link OVRTextureLayoutOctilinear#WarpUp} field. */
+        /** @return the value of the {@code WarpUp} field. */
         public float WarpUp() { return OVRTextureLayoutOctilinear.nWarpUp(address()); }
-        /** @return the value of the {@link OVRTextureLayoutOctilinear#WarpDown} field. */
+        /** @return the value of the {@code WarpDown} field. */
         public float WarpDown() { return OVRTextureLayoutOctilinear.nWarpDown(address()); }
-        /** @return the value of the {@link OVRTextureLayoutOctilinear#SizeLeft} field. */
+        /** @return the value of the {@code SizeLeft} field. */
         public float SizeLeft() { return OVRTextureLayoutOctilinear.nSizeLeft(address()); }
-        /** @return the value of the {@link OVRTextureLayoutOctilinear#SizeRight} field. */
+        /** @return the value of the {@code SizeRight} field. */
         public float SizeRight() { return OVRTextureLayoutOctilinear.nSizeRight(address()); }
-        /** @return the value of the {@link OVRTextureLayoutOctilinear#SizeUp} field. */
+        /** @return the value of the {@code SizeUp} field. */
         public float SizeUp() { return OVRTextureLayoutOctilinear.nSizeUp(address()); }
-        /** @return the value of the {@link OVRTextureLayoutOctilinear#SizeDown} field. */
+        /** @return the value of the {@code SizeDown} field. */
         public float SizeDown() { return OVRTextureLayoutOctilinear.nSizeDown(address()); }
 
-        /** Sets the specified value to the {@link OVRTextureLayoutOctilinear#WarpLeft} field. */
+        /** Sets the specified value to the {@code WarpLeft} field. */
         public OVRTextureLayoutOctilinear.Buffer WarpLeft(float value) { OVRTextureLayoutOctilinear.nWarpLeft(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRTextureLayoutOctilinear#WarpRight} field. */
+        /** Sets the specified value to the {@code WarpRight} field. */
         public OVRTextureLayoutOctilinear.Buffer WarpRight(float value) { OVRTextureLayoutOctilinear.nWarpRight(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRTextureLayoutOctilinear#WarpUp} field. */
+        /** Sets the specified value to the {@code WarpUp} field. */
         public OVRTextureLayoutOctilinear.Buffer WarpUp(float value) { OVRTextureLayoutOctilinear.nWarpUp(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRTextureLayoutOctilinear#WarpDown} field. */
+        /** Sets the specified value to the {@code WarpDown} field. */
         public OVRTextureLayoutOctilinear.Buffer WarpDown(float value) { OVRTextureLayoutOctilinear.nWarpDown(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRTextureLayoutOctilinear#SizeLeft} field. */
+        /** Sets the specified value to the {@code SizeLeft} field. */
         public OVRTextureLayoutOctilinear.Buffer SizeLeft(float value) { OVRTextureLayoutOctilinear.nSizeLeft(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRTextureLayoutOctilinear#SizeRight} field. */
+        /** Sets the specified value to the {@code SizeRight} field. */
         public OVRTextureLayoutOctilinear.Buffer SizeRight(float value) { OVRTextureLayoutOctilinear.nSizeRight(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRTextureLayoutOctilinear#SizeUp} field. */
+        /** Sets the specified value to the {@code SizeUp} field. */
         public OVRTextureLayoutOctilinear.Buffer SizeUp(float value) { OVRTextureLayoutOctilinear.nSizeUp(address(), value); return this; }
-        /** Sets the specified value to the {@link OVRTextureLayoutOctilinear#SizeDown} field. */
+        /** Sets the specified value to the {@code SizeDown} field. */
         public OVRTextureLayoutOctilinear.Buffer SizeDown(float value) { OVRTextureLayoutOctilinear.nSizeDown(address(), value); return this; }
 
     }

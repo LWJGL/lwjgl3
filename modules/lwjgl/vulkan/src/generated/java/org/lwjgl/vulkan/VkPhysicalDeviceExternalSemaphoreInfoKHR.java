@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceExternalSemaphoreInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExternalSemaphoreInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkExternalSemaphoreHandleTypeFlagBits handleType;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceExternalSemaphoreInfoKHR extends VkPhysicalDeviceExternalSemaphoreInfo {
 

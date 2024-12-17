@@ -36,6 +36,7 @@ public class LLVMTargetX86 {
 
     // --- [ LLVMInitializeX86TargetInfo ] ---
 
+    /** {@code void LLVMInitializeX86TargetInfo(void)} */
     public static void LLVMInitializeX86TargetInfo() {
         long __functionAddress = Functions.InitializeX86TargetInfo;
         invokeV(__functionAddress);
@@ -43,6 +44,7 @@ public class LLVMTargetX86 {
 
     // --- [ LLVMInitializeX86Target ] ---
 
+    /** {@code void LLVMInitializeX86Target(void)} */
     public static void LLVMInitializeX86Target() {
         long __functionAddress = Functions.InitializeX86Target;
         invokeV(__functionAddress);
@@ -50,6 +52,7 @@ public class LLVMTargetX86 {
 
     // --- [ LLVMInitializeX86TargetMC ] ---
 
+    /** {@code void LLVMInitializeX86TargetMC(void)} */
     public static void LLVMInitializeX86TargetMC() {
         long __functionAddress = Functions.InitializeX86TargetMC;
         invokeV(__functionAddress);
@@ -57,6 +60,7 @@ public class LLVMTargetX86 {
 
     // --- [ LLVMInitializeX86TargetMCA ] ---
 
+    /** {@code void LLVMInitializeX86TargetMCA(void)} */
     public static void LLVMInitializeX86TargetMCA() {
         long __functionAddress = Functions.InitializeX86TargetMCA;
         if (CHECKS) {
@@ -67,6 +71,7 @@ public class LLVMTargetX86 {
 
     // --- [ LLVMInitializeX86AsmPrinter ] ---
 
+    /** {@code void LLVMInitializeX86AsmPrinter(void)} */
     public static void LLVMInitializeX86AsmPrinter() {
         long __functionAddress = Functions.InitializeX86AsmPrinter;
         invokeV(__functionAddress);
@@ -74,6 +79,7 @@ public class LLVMTargetX86 {
 
     // --- [ LLVMInitializeX86AsmParser ] ---
 
+    /** {@code void LLVMInitializeX86AsmParser(void)} */
     public static void LLVMInitializeX86AsmParser() {
         long __functionAddress = Functions.InitializeX86AsmParser;
         invokeV(__functionAddress);
@@ -81,6 +87,7 @@ public class LLVMTargetX86 {
 
     // --- [ LLVMInitializeX86Disassembler ] ---
 
+    /** {@code void LLVMInitializeX86Disassembler(void)} */
     public static void LLVMInitializeX86Disassembler() {
         long __functionAddress = Functions.InitializeX86Disassembler;
         invokeV(__functionAddress);

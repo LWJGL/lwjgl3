@@ -16,18 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Data required for passing Vulkan textures to {@link VRCompositor#VRCompositor_Submit Submit}. Be sure to call {@link VR#VR_ShutdownInternal ShutdownInternal} before destroying these resources.
- * 
- * <p>Please see <a href="https://github.com/ValveSoftware/openvr/wiki/Vulkan">https://github.com/ValveSoftware/openvr/wiki/Vulkan</a> for Vulkan-specific
- * documentation.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRVulkanTextureArrayData_t {
  *     uint32_t m_unArrayIndex;
  *     uint32_t m_unArraySize;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct VRVulkanTextureArrayData_t")
 public class VRVulkanTextureArrayData extends Struct<VRVulkanTextureArrayData> implements NativeResource {

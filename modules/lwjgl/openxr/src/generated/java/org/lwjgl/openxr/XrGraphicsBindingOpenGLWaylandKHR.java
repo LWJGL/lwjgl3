@@ -17,35 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The graphics binding structure to be passed at session creation to use OpenGL on Wayland.
- * 
- * <h5>Description</h5>
- * 
- * <p>When creating an OpenGL-backed {@code XrSession} on any Linux/Unix platform that utilizes the Wayland protocol with its compositor, the application will provide a pointer to an {@link XrGraphicsBindingOpenGLWaylandKHR} in the {@code next} chain of the {@link XrSessionCreateInfo}.</p>
- * 
- * <p>The required window system configuration define to expose this structure type is {@link XR10#XR_USE_PLATFORM_WAYLAND USE_PLATFORM_WAYLAND}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHROpenGLEnable XR_KHR_opengl_enable} extension <b>must</b> be enabled prior to using {@link XrGraphicsBindingOpenGLWaylandKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code display} <b>must</b> be a pointer to a {@code wl_display} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrCreateSession CreateSession}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGraphicsBindingOpenGLWaylandKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     struct wl_display * {@link #display};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     struct wl_display * display;
+ * }}</pre>
  */
 public class XrGraphicsBindingOpenGLWaylandKHR extends Struct<XrGraphicsBindingOpenGLWaylandKHR> implements NativeResource {
 
@@ -98,23 +75,23 @@ public class XrGraphicsBindingOpenGLWaylandKHR extends Struct<XrGraphicsBindingO
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a valid Wayland {@code wl_display}. */
+    /** @return the value of the {@code display} field. */
     @NativeType("struct wl_display *")
     public long display() { return ndisplay(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrGraphicsBindingOpenGLWaylandKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR} value to the {@code type} field. */
     public XrGraphicsBindingOpenGLWaylandKHR type$Default() { return type(KHROpenGLEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrGraphicsBindingOpenGLWaylandKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XrGraphicsBindingOpenGLWaylandKHR display(@NativeType("struct wl_display *") long value) { ndisplay(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,23 +296,23 @@ public class XrGraphicsBindingOpenGLWaylandKHR extends Struct<XrGraphicsBindingO
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrGraphicsBindingOpenGLWaylandKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGraphicsBindingOpenGLWaylandKHR.ntype(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLWaylandKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGraphicsBindingOpenGLWaylandKHR.nnext(address()); }
-        /** @return the value of the {@link XrGraphicsBindingOpenGLWaylandKHR#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("struct wl_display *")
         public long display() { return XrGraphicsBindingOpenGLWaylandKHR.ndisplay(address()); }
 
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLWaylandKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrGraphicsBindingOpenGLWaylandKHR.Buffer type(@NativeType("XrStructureType") int value) { XrGraphicsBindingOpenGLWaylandKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR} value to the {@link XrGraphicsBindingOpenGLWaylandKHR#type} field. */
+        /** Sets the {@link KHROpenGLEnable#XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR} value to the {@code type} field. */
         public XrGraphicsBindingOpenGLWaylandKHR.Buffer type$Default() { return type(KHROpenGLEnable.XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR); }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLWaylandKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrGraphicsBindingOpenGLWaylandKHR.Buffer next(@NativeType("void const *") long value) { XrGraphicsBindingOpenGLWaylandKHR.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGraphicsBindingOpenGLWaylandKHR#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XrGraphicsBindingOpenGLWaylandKHR.Buffer display(@NativeType("struct wl_display *") long value) { XrGraphicsBindingOpenGLWaylandKHR.ndisplay(address(), value); return this; }
 
     }

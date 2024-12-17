@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkRenderingAttachmentLocationInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderingAttachmentLocationInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t colorAttachmentCount;
  *     uint32_t const * pColorAttachmentLocations;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkRenderingAttachmentLocationInfoKHR extends VkRenderingAttachmentLocationInfo {
 

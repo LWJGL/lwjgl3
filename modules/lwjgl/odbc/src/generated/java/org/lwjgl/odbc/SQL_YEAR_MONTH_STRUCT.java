@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SQL_YEAR_MONTH_STRUCT {
  *     SQLUINTEGER year;
  *     SQLUINTEGER month;
- * }</code></pre>
+ * }}</pre>
  */
 public class SQL_YEAR_MONTH_STRUCT extends Struct<SQL_YEAR_MONTH_STRUCT> implements NativeResource {
 

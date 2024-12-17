@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nfdwindowhandle_t {
  *     size_t type;
  *     void * handle;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nfdwindowhandle_t")
 public class NFDWindowHandle extends Struct<NFDWindowHandle> implements NativeResource {

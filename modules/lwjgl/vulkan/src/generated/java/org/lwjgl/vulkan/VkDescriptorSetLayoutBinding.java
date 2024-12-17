@@ -16,54 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a descriptor set layout binding.
- * 
- * <h5>Description</h5>
- * 
- * <p>The above layout definition allows the descriptor bindings to be specified sparsely such that not all binding numbers between 0 and the maximum binding number need to be specified in the {@code pBindings} array. Bindings that are not specified have a {@code descriptorCount} and {@code stageFlags} of zero, and the value of {@code descriptorType} is undefined. However, all binding numbers between 0 and the maximum binding number in the {@link VkDescriptorSetLayoutCreateInfo}{@code ::pBindings} array <b>may</b> consume memory in the descriptor set layout even if not all descriptor bindings are used, though it <b>should</b> not consume additional memory from the descriptor pool.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The maximum binding number specified <b>should</b> be as compact as possible to avoid wasted memory.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER} or {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, and {@code descriptorCount} is not 0 and {@code pImmutableSamplers} is not {@code NULL}, {@code pImmutableSamplers} <b>must</b> be a valid pointer to an array of {@code descriptorCount} valid {@code VkSampler} handles</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-inlineUniformBlock">{@code inlineUniformBlock}</a> feature is not enabled, {@code descriptorType} <b>must</b> not be {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}</li>
- * <li>If {@code descriptorType} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code descriptorCount} <b>must</b> be a multiple of 4</li>
- * <li>If {@code descriptorType} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} and {@link VkDescriptorSetLayoutCreateInfo}{@code ::flags} does not contain {@link EXTDescriptorBuffer#VK_DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_DESCRIPTOR_BUFFER_BIT_EXT} then {@code descriptorCount} <b>must</b> be less than or equal to {@link VkPhysicalDeviceInlineUniformBlockProperties}{@code ::maxInlineUniformBlockSize}</li>
- * <li>If {@link VkDescriptorSetLayoutCreateInfo}{@code ::flags} contains {@link EXTDescriptorBuffer#VK_DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT}, {@code descriptorType} <b>must</b> be {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}</li>
- * <li>If {@link VkDescriptorSetLayoutCreateInfo}{@code ::flags} contains {@link EXTDescriptorBuffer#VK_DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT}, {@code descriptorCount} <b>must</b> less than or equal to 1</li>
- * <li>If {@link VkDescriptorSetLayoutCreateInfo}{@code ::flags} contains {@link EXTDescriptorBuffer#VK_DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT}, and {@code descriptorCount} is equal to 1, {@code pImmutableSamplers} <b>must</b> not be {@code NULL}</li>
- * <li>If {@code descriptorCount} is not 0, {@code stageFlags} <b>must</b> be {@link VK10#VK_SHADER_STAGE_ALL SHADER_STAGE_ALL} or a valid combination of other {@code VkShaderStageFlagBits} values</li>
- * <li>If {@code descriptorType} is {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} and {@code descriptorCount} is not 0, then {@code stageFlags} <b>must</b> be 0 or {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT}</li>
- * <li>The sampler objects indicated by {@code pImmutableSamplers} <b>must</b> not have a {@code borderColor} with one of the values {@link EXTCustomBorderColor#VK_BORDER_COLOR_FLOAT_CUSTOM_EXT BORDER_COLOR_FLOAT_CUSTOM_EXT} or {@link EXTCustomBorderColor#VK_BORDER_COLOR_INT_CUSTOM_EXT BORDER_COLOR_INT_CUSTOM_EXT}</li>
- * <li>If {@code descriptorType} is {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, then {@code pImmutableSamplers} <b>must</b> be {@code NULL}</li>
- * <li>If {@link VkDescriptorSetLayoutCreateInfo}{@code ::flags} contains {@link NVPerStageDescriptorSet#VK_DESCRIPTOR_SET_LAYOUT_CREATE_PER_STAGE_BIT_NV DESCRIPTOR_SET_LAYOUT_CREATE_PER_STAGE_BIT_NV}, and {@code descriptorCount} is not 0, then {@code stageFlags} <b>must</b> be a valid combination of {@link VK10#VK_SHADER_STAGE_VERTEX_BIT SHADER_STAGE_VERTEX_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT SHADER_STAGE_TESSELLATION_CONTROL_BIT}, {@link VK10#VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT SHADER_STAGE_TESSELLATION_EVALUATION_BIT}, {@link VK10#VK_SHADER_STAGE_GEOMETRY_BIT SHADER_STAGE_GEOMETRY_BIT}, {@link VK10#VK_SHADER_STAGE_FRAGMENT_BIT SHADER_STAGE_FRAGMENT_BIT} and {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT} values</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code descriptorType} <b>must</b> be a valid {@code VkDescriptorType} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDescriptorSetLayoutCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetLayoutBinding {
- *     uint32_t {@link #binding};
- *     VkDescriptorType {@link #descriptorType};
- *     uint32_t {@link #descriptorCount};
- *     VkShaderStageFlags {@link #stageFlags};
- *     VkSampler const * {@link #pImmutableSamplers};
- * }</code></pre>
+ *     uint32_t binding;
+ *     VkDescriptorType descriptorType;
+ *     uint32_t descriptorCount;
+ *     VkShaderStageFlags stageFlags;
+ *     VkSampler const * pImmutableSamplers;
+ * }}</pre>
  */
 public class VkDescriptorSetLayoutBinding extends Struct<VkDescriptorSetLayoutBinding> implements NativeResource {
 
@@ -122,35 +82,31 @@ public class VkDescriptorSetLayoutBinding extends Struct<VkDescriptorSetLayoutBi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the binding number of this entry and corresponds to a resource of the same binding number in the shader stages. */
+    /** @return the value of the {@code binding} field. */
     @NativeType("uint32_t")
     public int binding() { return nbinding(address()); }
-    /** a {@code VkDescriptorType} specifying which type of resource descriptors are used for this binding. */
+    /** @return the value of the {@code descriptorType} field. */
     @NativeType("VkDescriptorType")
     public int descriptorType() { return ndescriptorType(address()); }
-    /** the number of descriptors contained in the binding, accessed in a shader as an array, except if {@code descriptorType} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} in which case {@code descriptorCount} is the size in bytes of the inline uniform block. If {@code descriptorCount} is zero this binding entry is reserved and the resource <b>must</b> not be accessed from any stage via this binding within any pipeline using the set layout. */
+    /** @return the value of the {@code descriptorCount} field. */
     @NativeType("uint32_t")
     public int descriptorCount() { return ndescriptorCount(address()); }
-    /**
-     * member is a bitmask of {@code VkShaderStageFlagBits} specifying which pipeline shader stages <b>can</b> access a resource for this binding. {@link VK10#VK_SHADER_STAGE_ALL SHADER_STAGE_ALL} is a shorthand specifying that all defined shader stages, including any additional stages defined by extensions, <b>can</b> access the resource.
-     * 
-     * <p>If a shader stage is not included in {@code stageFlags}, then a resource <b>must</b> not be accessed from that stage via this binding within any pipeline using the set layout. Other than input attachments which are limited to the fragment shader, there are no limitations on what combinations of stages <b>can</b> use a descriptor binding, and in particular a binding <b>can</b> be used by both graphics stages and the compute stage.</p>
-     */
+    /** @return the value of the {@code stageFlags} field. */
     @NativeType("VkShaderStageFlags")
     public int stageFlags() { return nstageFlags(address()); }
-    /** affects initialization of samplers. If {@code descriptorType} specifies a {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER} or {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} type descriptor, then {@code pImmutableSamplers} <b>can</b> be used to initialize a set of <em>immutable samplers</em>. Immutable samplers are permanently bound into the set layout and <b>must</b> not be changed; updating a {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER} descriptor with immutable samplers is not allowed and updates to a {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} descriptor with immutable samplers does not modify the samplers (the image views are updated, but the sampler updates are ignored). If {@code pImmutableSamplers} is not {@code NULL}, then it is a pointer to an array of sampler handles that will be copied into the set layout and used for the corresponding binding. Only the sampler handles are copied; the sampler objects <b>must</b> not be destroyed before the final use of the set layout and any descriptor pools and sets created using it. If {@code pImmutableSamplers} is {@code NULL}, then the sampler slots are dynamic and sampler handles <b>must</b> be bound into descriptor sets using this layout. If {@code descriptorType} is not one of these descriptor types, then {@code pImmutableSamplers} is ignored. */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pImmutableSamplers} field. */
     @NativeType("VkSampler const *")
     public @Nullable LongBuffer pImmutableSamplers() { return npImmutableSamplers(address()); }
 
-    /** Sets the specified value to the {@link #binding} field. */
+    /** Sets the specified value to the {@code binding} field. */
     public VkDescriptorSetLayoutBinding binding(@NativeType("uint32_t") int value) { nbinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorType} field. */
+    /** Sets the specified value to the {@code descriptorType} field. */
     public VkDescriptorSetLayoutBinding descriptorType(@NativeType("VkDescriptorType") int value) { ndescriptorType(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorCount} field. */
+    /** Sets the specified value to the {@code descriptorCount} field. */
     public VkDescriptorSetLayoutBinding descriptorCount(@NativeType("uint32_t") int value) { ndescriptorCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #stageFlags} field. */
+    /** Sets the specified value to the {@code stageFlags} field. */
     public VkDescriptorSetLayoutBinding stageFlags(@NativeType("VkShaderStageFlags") int value) { nstageFlags(address(), value); return this; }
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pImmutableSamplers} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pImmutableSamplers} field. */
     public VkDescriptorSetLayoutBinding pImmutableSamplers(@Nullable @NativeType("VkSampler const *") LongBuffer value) { npImmutableSamplers(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -377,31 +333,31 @@ public class VkDescriptorSetLayoutBinding extends Struct<VkDescriptorSetLayoutBi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorSetLayoutBinding#binding} field. */
+        /** @return the value of the {@code binding} field. */
         @NativeType("uint32_t")
         public int binding() { return VkDescriptorSetLayoutBinding.nbinding(address()); }
-        /** @return the value of the {@link VkDescriptorSetLayoutBinding#descriptorType} field. */
+        /** @return the value of the {@code descriptorType} field. */
         @NativeType("VkDescriptorType")
         public int descriptorType() { return VkDescriptorSetLayoutBinding.ndescriptorType(address()); }
-        /** @return the value of the {@link VkDescriptorSetLayoutBinding#descriptorCount} field. */
+        /** @return the value of the {@code descriptorCount} field. */
         @NativeType("uint32_t")
         public int descriptorCount() { return VkDescriptorSetLayoutBinding.ndescriptorCount(address()); }
-        /** @return the value of the {@link VkDescriptorSetLayoutBinding#stageFlags} field. */
+        /** @return the value of the {@code stageFlags} field. */
         @NativeType("VkShaderStageFlags")
         public int stageFlags() { return VkDescriptorSetLayoutBinding.nstageFlags(address()); }
-        /** @return a {@link LongBuffer} view of the data pointed to by the {@link VkDescriptorSetLayoutBinding#pImmutableSamplers} field. */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pImmutableSamplers} field. */
         @NativeType("VkSampler const *")
         public @Nullable LongBuffer pImmutableSamplers() { return VkDescriptorSetLayoutBinding.npImmutableSamplers(address()); }
 
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutBinding#binding} field. */
+        /** Sets the specified value to the {@code binding} field. */
         public VkDescriptorSetLayoutBinding.Buffer binding(@NativeType("uint32_t") int value) { VkDescriptorSetLayoutBinding.nbinding(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutBinding#descriptorType} field. */
+        /** Sets the specified value to the {@code descriptorType} field. */
         public VkDescriptorSetLayoutBinding.Buffer descriptorType(@NativeType("VkDescriptorType") int value) { VkDescriptorSetLayoutBinding.ndescriptorType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutBinding#descriptorCount} field. */
+        /** Sets the specified value to the {@code descriptorCount} field. */
         public VkDescriptorSetLayoutBinding.Buffer descriptorCount(@NativeType("uint32_t") int value) { VkDescriptorSetLayoutBinding.ndescriptorCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorSetLayoutBinding#stageFlags} field. */
+        /** Sets the specified value to the {@code stageFlags} field. */
         public VkDescriptorSetLayoutBinding.Buffer stageFlags(@NativeType("VkShaderStageFlags") int value) { VkDescriptorSetLayoutBinding.nstageFlags(address(), value); return this; }
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkDescriptorSetLayoutBinding#pImmutableSamplers} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pImmutableSamplers} field. */
         public VkDescriptorSetLayoutBinding.Buffer pImmutableSamplers(@Nullable @NativeType("VkSampler const *") LongBuffer value) { VkDescriptorSetLayoutBinding.npImmutableSamplers(address(), value); return this; }
 
     }

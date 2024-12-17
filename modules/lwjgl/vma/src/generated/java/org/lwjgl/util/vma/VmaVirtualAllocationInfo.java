@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Parameters of an existing virtual allocation, returned by {@link Vma#vmaGetVirtualAllocationInfo GetVirtualAllocationInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaVirtualAllocationInfo {
- *     VkDeviceSize {@link #offset};
- *     VkDeviceSize {@link #size};
- *     void * {@link #pUserData};
- * }</code></pre>
+ *     VkDeviceSize offset;
+ *     VkDeviceSize size;
+ *     void * pUserData;
+ * }}</pre>
  */
 public class VmaVirtualAllocationInfo extends Struct<VmaVirtualAllocationInfo> implements NativeResource {
 
@@ -78,25 +74,13 @@ public class VmaVirtualAllocationInfo extends Struct<VmaVirtualAllocationInfo> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * offset of the allocation.
-     * 
-     * <p>Offset at which the allocation was made.</p>
-     */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /**
-     * size of the allocation.
-     * 
-     * <p>Same value as passed in {@link VmaVirtualAllocationCreateInfo}{@code ::size}.</p>
-     */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /**
-     * custom pointer associated with the allocation.
-     * 
-     * <p>Same value as passed in {@link VmaVirtualAllocationCreateInfo}{@code ::pUserData} or to {@link Vma#vmaSetVirtualAllocationUserData SetVirtualAllocationUserData}.</p>
-     */
+    /** @return the value of the {@code pUserData} field. */
     @NativeType("void *")
     public long pUserData() { return npUserData(address()); }
 
@@ -261,13 +245,13 @@ public class VmaVirtualAllocationInfo extends Struct<VmaVirtualAllocationInfo> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VmaVirtualAllocationInfo#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VmaVirtualAllocationInfo.noffset(address()); }
-        /** @return the value of the {@link VmaVirtualAllocationInfo#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VmaVirtualAllocationInfo.nsize(address()); }
-        /** @return the value of the {@link VmaVirtualAllocationInfo#pUserData} field. */
+        /** @return the value of the {@code pUserData} field. */
         @NativeType("void *")
         public long pUserData() { return VmaVirtualAllocationInfo.npUserData(address()); }
 

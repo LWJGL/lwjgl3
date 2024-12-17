@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkFramebufferAttachmentImageInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkFramebufferAttachmentImageInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t layerCount;
  *     uint32_t viewFormatCount;
  *     VkFormat const * pViewFormats;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkFramebufferAttachmentImageInfoKHR extends VkFramebufferAttachmentImageInfo {
 

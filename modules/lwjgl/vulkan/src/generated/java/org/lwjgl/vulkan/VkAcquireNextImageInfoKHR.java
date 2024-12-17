@@ -16,66 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of the acquire.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@link KHRSwapchain#vkAcquireNextImageKHR AcquireNextImageKHR} is used, the device mask is considered to include all physical devices in the logical device.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>{@link KHRSwapchain#vkAcquireNextImage2KHR AcquireNextImage2KHR} signals at most one semaphore, even if the application requests waiting for multiple physical devices to be ready via the {@code deviceMask}. However, only a single physical device <b>can</b> wait on that semaphore, since the semaphore becomes unsignaled when the wait succeeds. For other physical devices to wait for the image to be ready, it is necessary for the application to submit semaphore signal operation(s) to that first physical device to signal additional semaphore(s) after the wait succeeds, which the other physical device(s) <b>can</b> wait upon.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code swapchain} <b>must</b> not be in the retired state</li>
- * <li>If {@code semaphore} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> be unsignaled</li>
- * <li>If {@code semaphore} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, it <b>must</b> not have any uncompleted signal or wait operations pending</li>
- * <li>If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> be unsignaled</li>
- * <li>If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> not be associated with any other queue command that has not yet completed execution on that queue</li>
- * <li>{@code semaphore} and {@code fence} <b>must</b> not both be equal to {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>{@code deviceMask} <b>must</b> be a valid device mask</li>
- * <li>{@code deviceMask} <b>must</b> not be zero</li>
- * <li>{@code semaphore} <b>must</b> have a {@code VkSemaphoreType} of {@link VK12#VK_SEMAPHORE_TYPE_BINARY SEMAPHORE_TYPE_BINARY}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRSwapchain#VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code swapchain} <b>must</b> be a valid {@code VkSwapchainKHR} handle</li>
- * <li>If {@code semaphore} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
- * <li>If {@code fence} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
- * <li>Each of {@code fence}, {@code semaphore}, and {@code swapchain} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>Host Synchronization</h5>
- * 
- * <ul>
- * <li>Host access to {@code swapchain} <b>must</b> be externally synchronized</li>
- * <li>Host access to {@code semaphore} <b>must</b> be externally synchronized</li>
- * <li>Host access to {@code fence} <b>must</b> be externally synchronized</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRSwapchain#vkAcquireNextImage2KHR AcquireNextImage2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAcquireNextImageInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSwapchainKHR {@link #swapchain};
- *     uint64_t {@link #timeout};
- *     VkSemaphore {@link #semaphore};
- *     VkFence {@link #fence};
- *     uint32_t {@link #deviceMask};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSwapchainKHR swapchain;
+ *     uint64_t timeout;
+ *     VkSemaphore semaphore;
+ *     VkFence fence;
+ *     uint32_t deviceMask;
+ * }}</pre>
  */
 public class VkAcquireNextImageInfoKHR extends Struct<VkAcquireNextImageInfoKHR> implements NativeResource {
 
@@ -140,43 +90,43 @@ public class VkAcquireNextImageInfoKHR extends Struct<VkAcquireNextImageInfoKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a non-retired swapchain from which an image is acquired. */
+    /** @return the value of the {@code swapchain} field. */
     @NativeType("VkSwapchainKHR")
     public long swapchain() { return nswapchain(address()); }
-    /** specifies how long the function waits, in nanoseconds, if no image is available. */
+    /** @return the value of the {@code timeout} field. */
     @NativeType("uint64_t")
     public long timeout() { return ntimeout(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a semaphore to signal. */
+    /** @return the value of the {@code semaphore} field. */
     @NativeType("VkSemaphore")
     public long semaphore() { return nsemaphore(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a fence to signal. */
+    /** @return the value of the {@code fence} field. */
     @NativeType("VkFence")
     public long fence() { return nfence(address()); }
-    /** a mask of physical devices for which the swapchain image will be ready to use when the semaphore or fence is signaled. */
+    /** @return the value of the {@code deviceMask} field. */
     @NativeType("uint32_t")
     public int deviceMask() { return ndeviceMask(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAcquireNextImageInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR} value to the {@code sType} field. */
     public VkAcquireNextImageInfoKHR sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAcquireNextImageInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #swapchain} field. */
+    /** Sets the specified value to the {@code swapchain} field. */
     public VkAcquireNextImageInfoKHR swapchain(@NativeType("VkSwapchainKHR") long value) { nswapchain(address(), value); return this; }
-    /** Sets the specified value to the {@link #timeout} field. */
+    /** Sets the specified value to the {@code timeout} field. */
     public VkAcquireNextImageInfoKHR timeout(@NativeType("uint64_t") long value) { ntimeout(address(), value); return this; }
-    /** Sets the specified value to the {@link #semaphore} field. */
+    /** Sets the specified value to the {@code semaphore} field. */
     public VkAcquireNextImageInfoKHR semaphore(@NativeType("VkSemaphore") long value) { nsemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@link #fence} field. */
+    /** Sets the specified value to the {@code fence} field. */
     public VkAcquireNextImageInfoKHR fence(@NativeType("VkFence") long value) { nfence(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceMask} field. */
+    /** Sets the specified value to the {@code deviceMask} field. */
     public VkAcquireNextImageInfoKHR deviceMask(@NativeType("uint32_t") int value) { ndeviceMask(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -415,43 +365,43 @@ public class VkAcquireNextImageInfoKHR extends Struct<VkAcquireNextImageInfoKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAcquireNextImageInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAcquireNextImageInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkAcquireNextImageInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkAcquireNextImageInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkAcquireNextImageInfoKHR#swapchain} field. */
+        /** @return the value of the {@code swapchain} field. */
         @NativeType("VkSwapchainKHR")
         public long swapchain() { return VkAcquireNextImageInfoKHR.nswapchain(address()); }
-        /** @return the value of the {@link VkAcquireNextImageInfoKHR#timeout} field. */
+        /** @return the value of the {@code timeout} field. */
         @NativeType("uint64_t")
         public long timeout() { return VkAcquireNextImageInfoKHR.ntimeout(address()); }
-        /** @return the value of the {@link VkAcquireNextImageInfoKHR#semaphore} field. */
+        /** @return the value of the {@code semaphore} field. */
         @NativeType("VkSemaphore")
         public long semaphore() { return VkAcquireNextImageInfoKHR.nsemaphore(address()); }
-        /** @return the value of the {@link VkAcquireNextImageInfoKHR#fence} field. */
+        /** @return the value of the {@code fence} field. */
         @NativeType("VkFence")
         public long fence() { return VkAcquireNextImageInfoKHR.nfence(address()); }
-        /** @return the value of the {@link VkAcquireNextImageInfoKHR#deviceMask} field. */
+        /** @return the value of the {@code deviceMask} field. */
         @NativeType("uint32_t")
         public int deviceMask() { return VkAcquireNextImageInfoKHR.ndeviceMask(address()); }
 
-        /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAcquireNextImageInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkAcquireNextImageInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR} value to the {@link VkAcquireNextImageInfoKHR#sType} field. */
+        /** Sets the {@link KHRSwapchain#VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR} value to the {@code sType} field. */
         public VkAcquireNextImageInfoKHR.Buffer sType$Default() { return sType(KHRSwapchain.VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAcquireNextImageInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkAcquireNextImageInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#swapchain} field. */
+        /** Sets the specified value to the {@code swapchain} field. */
         public VkAcquireNextImageInfoKHR.Buffer swapchain(@NativeType("VkSwapchainKHR") long value) { VkAcquireNextImageInfoKHR.nswapchain(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#timeout} field. */
+        /** Sets the specified value to the {@code timeout} field. */
         public VkAcquireNextImageInfoKHR.Buffer timeout(@NativeType("uint64_t") long value) { VkAcquireNextImageInfoKHR.ntimeout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#semaphore} field. */
+        /** Sets the specified value to the {@code semaphore} field. */
         public VkAcquireNextImageInfoKHR.Buffer semaphore(@NativeType("VkSemaphore") long value) { VkAcquireNextImageInfoKHR.nsemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#fence} field. */
+        /** Sets the specified value to the {@code fence} field. */
         public VkAcquireNextImageInfoKHR.Buffer fence(@NativeType("VkFence") long value) { VkAcquireNextImageInfoKHR.nfence(address(), value); return this; }
-        /** Sets the specified value to the {@link VkAcquireNextImageInfoKHR#deviceMask} field. */
+        /** Sets the specified value to the {@code deviceMask} field. */
         public VkAcquireNextImageInfoKHR.Buffer deviceMask(@NativeType("uint32_t") int value) { VkAcquireNextImageInfoKHR.ndeviceMask(address(), value); return this; }
 
     }

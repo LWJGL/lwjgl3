@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkMemoryMapInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryMapInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkDeviceMemory memory;
  *     VkDeviceSize offset;
  *     VkDeviceSize size;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkMemoryMapInfoKHR extends VkMemoryMapInfo {
 

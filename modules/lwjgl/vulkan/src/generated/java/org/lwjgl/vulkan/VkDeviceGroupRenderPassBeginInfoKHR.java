@@ -17,18 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDeviceGroupRenderPassBeginInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceGroupRenderPassBeginInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t deviceMask;
  *     uint32_t deviceRenderAreaCount;
  *     {@link VkRect2D VkRect2D} const * pDeviceRenderAreas;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDeviceGroupRenderPassBeginInfoKHR extends VkDeviceGroupRenderPassBeginInfo {
 

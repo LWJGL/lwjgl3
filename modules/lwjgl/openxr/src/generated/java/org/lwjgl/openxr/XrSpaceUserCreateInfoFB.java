@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes a user.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSpaceUserCreateInfoFB} structure describes a user with which the application <b>can</b> interact.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntityUser XR_FB_spatial_entity_user} extension <b>must</b> be enabled prior to using {@link XrSpaceUserCreateInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntityUser#XR_TYPE_SPACE_USER_CREATE_INFO_FB TYPE_SPACE_USER_CREATE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBSpatialEntityUser#xrCreateSpaceUserFB CreateSpaceUserFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceUserCreateInfoFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpaceUserIdFB {@link #userId};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpaceUserIdFB userId;
+ * }}</pre>
  */
 public class XrSpaceUserCreateInfoFB extends Struct<XrSpaceUserCreateInfoFB> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class XrSpaceUserCreateInfoFB extends Struct<XrSpaceUserCreateInfoFB> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the user ID with which the application can reference. */
+    /** @return the value of the {@code userId} field. */
     @NativeType("XrSpaceUserIdFB")
     public long userId() { return nuserId(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceUserCreateInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntityUser#XR_TYPE_SPACE_USER_CREATE_INFO_FB TYPE_SPACE_USER_CREATE_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntityUser#XR_TYPE_SPACE_USER_CREATE_INFO_FB TYPE_SPACE_USER_CREATE_INFO_FB} value to the {@code type} field. */
     public XrSpaceUserCreateInfoFB type$Default() { return type(FBSpatialEntityUser.XR_TYPE_SPACE_USER_CREATE_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceUserCreateInfoFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #userId} field. */
+    /** Sets the specified value to the {@code userId} field. */
     public XrSpaceUserCreateInfoFB userId(@NativeType("XrSpaceUserIdFB") long value) { nuserId(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class XrSpaceUserCreateInfoFB extends Struct<XrSpaceUserCreateInfoFB> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceUserCreateInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceUserCreateInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrSpaceUserCreateInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpaceUserCreateInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrSpaceUserCreateInfoFB#userId} field. */
+        /** @return the value of the {@code userId} field. */
         @NativeType("XrSpaceUserIdFB")
         public long userId() { return XrSpaceUserCreateInfoFB.nuserId(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceUserCreateInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceUserCreateInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceUserCreateInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntityUser#XR_TYPE_SPACE_USER_CREATE_INFO_FB TYPE_SPACE_USER_CREATE_INFO_FB} value to the {@link XrSpaceUserCreateInfoFB#type} field. */
+        /** Sets the {@link FBSpatialEntityUser#XR_TYPE_SPACE_USER_CREATE_INFO_FB TYPE_SPACE_USER_CREATE_INFO_FB} value to the {@code type} field. */
         public XrSpaceUserCreateInfoFB.Buffer type$Default() { return type(FBSpatialEntityUser.XR_TYPE_SPACE_USER_CREATE_INFO_FB); }
-        /** Sets the specified value to the {@link XrSpaceUserCreateInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceUserCreateInfoFB.Buffer next(@NativeType("void const *") long value) { XrSpaceUserCreateInfoFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpaceUserCreateInfoFB#userId} field. */
+        /** Sets the specified value to the {@code userId} field. */
         public XrSpaceUserCreateInfoFB.Buffer userId(@NativeType("XrSpaceUserIdFB") long value) { XrSpaceUserCreateInfoFB.nuserId(address(), value); return this; }
 
     }

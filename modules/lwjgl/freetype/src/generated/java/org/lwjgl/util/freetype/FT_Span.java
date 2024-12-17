@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure to model a single span of consecutive pixels when rendering an anti-aliased bitmap.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Span {
  *     short x;
  *     unsigned short len;
  *     unsigned char coverage;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Span extends Struct<FT_Span> {
 

@@ -17,51 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying descriptor data.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is enabled, {@code pSampledImage}, {@code pStorageImage}, {@code pUniformTexelBuffer}, {@code pStorageTexelBuffer}, {@code pUniformBuffer}, and {@code pStorageBuffer} <b>can</b> each be {@code NULL}. Loads from a null descriptor return zero values and stores and atomics to a null descriptor are discarded.</p>
- * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is enabled, {@code accelerationStructure} <b>can</b> be 0. A null acceleration structure descriptor results in the miss shader being invoked.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}, and {@code pUniformBuffer→address} is the address of a non-sparse buffer, then that buffer <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}, and {@code pStorageBuffer→address} is the address of a non-sparse buffer, then that buffer <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}, and {@code pUniformTexelBuffer→address} is the address of a non-sparse buffer, then that buffer <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}, and {@code pStorageTexelBuffer→address} is the address of a non-sparse buffer, then that buffer <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code pCombinedImageSampler→imageView} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code pSampledImage} <b>must</b> not be {@code NULL} and {@code pSampledImage→imageView} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code pStorageImage} <b>must</b> not be {@code NULL} and {@code pStorageImage→imageView} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code pUniformTexelBuffer} <b>must</b> not be {@code NULL}</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code pStorageTexelBuffer} <b>must</b> not be {@code NULL}</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code pUniformBuffer} <b>must</b> not be {@code NULL}</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code pStorageBuffer} <b>must</b> not be {@code NULL}</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code accelerationStructure} <b>must</b> not be 0</li>
- * <li>If {@link VkDescriptorGetInfoEXT}:{@code type} is {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV}, and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code accelerationStructure} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDescriptorAddressInfoEXT}, {@link VkDescriptorGetInfoEXT}, {@link VkDescriptorImageInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * union VkDescriptorDataEXT {
- *     VkSampler const * {@link #pSampler};
- *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * {@link #pCombinedImageSampler};
- *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * {@link #pInputAttachmentImage};
- *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * {@link #pSampledImage};
- *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * {@link #pStorageImage};
- *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * {@link #pUniformTexelBuffer};
- *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * {@link #pStorageTexelBuffer};
- *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * {@link #pUniformBuffer};
- *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * {@link #pStorageBuffer};
- *     VkDeviceAddress {@link #accelerationStructure};
- * }</code></pre>
+ *     VkSampler const * pSampler;
+ *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * pCombinedImageSampler;
+ *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * pInputAttachmentImage;
+ *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * pSampledImage;
+ *     {@link VkDescriptorImageInfo VkDescriptorImageInfo} const * pStorageImage;
+ *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * pUniformTexelBuffer;
+ *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * pStorageTexelBuffer;
+ *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * pUniformBuffer;
+ *     {@link VkDescriptorAddressInfoEXT VkDescriptorAddressInfoEXT} const * pStorageBuffer;
+ *     VkDeviceAddress accelerationStructure;
+ * }}</pre>
  */
 public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements NativeResource {
 
@@ -135,60 +103,56 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return a pointer to a {@code VkSampler} handle specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER} descriptor.
-     */
+    /** @return a {@link LongBuffer} view of the data pointed to by the {@code pSampler} field. */
     @NativeType("VkSampler const *")
     public LongBuffer pSampler(int capacity) { return npSampler(address(), capacity); }
-    /** a pointer to a {@link VkDescriptorImageInfo} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} descriptor. */
+    /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@code pCombinedImageSampler} field. */
     @NativeType("VkDescriptorImageInfo const *")
     public VkDescriptorImageInfo pCombinedImageSampler() { return npCombinedImageSampler(address()); }
-    /** a pointer to a {@link VkDescriptorImageInfo} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} descriptor. */
+    /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@code pInputAttachmentImage} field. */
     @NativeType("VkDescriptorImageInfo const *")
     public VkDescriptorImageInfo pInputAttachmentImage() { return npInputAttachmentImage(address()); }
-    /** a pointer to a {@link VkDescriptorImageInfo} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} descriptor. */
+    /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@code pSampledImage} field. */
     @NativeType("VkDescriptorImageInfo const *")
     public @Nullable VkDescriptorImageInfo pSampledImage() { return npSampledImage(address()); }
-    /** a pointer to a {@link VkDescriptorImageInfo} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} descriptor. */
+    /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@code pStorageImage} field. */
     @NativeType("VkDescriptorImageInfo const *")
     public @Nullable VkDescriptorImageInfo pStorageImage() { return npStorageImage(address()); }
-    /** a pointer to a {@link VkDescriptorAddressInfoEXT} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} descriptor. */
+    /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@code pUniformTexelBuffer} field. */
     @NativeType("VkDescriptorAddressInfoEXT const *")
     public @Nullable VkDescriptorAddressInfoEXT pUniformTexelBuffer() { return npUniformTexelBuffer(address()); }
-    /** a pointer to a {@link VkDescriptorAddressInfoEXT} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} descriptor. */
+    /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@code pStorageTexelBuffer} field. */
     @NativeType("VkDescriptorAddressInfoEXT const *")
     public @Nullable VkDescriptorAddressInfoEXT pStorageTexelBuffer() { return npStorageTexelBuffer(address()); }
-    /** a pointer to a {@link VkDescriptorAddressInfoEXT} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} descriptor. */
+    /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@code pUniformBuffer} field. */
     @NativeType("VkDescriptorAddressInfoEXT const *")
     public @Nullable VkDescriptorAddressInfoEXT pUniformBuffer() { return npUniformBuffer(address()); }
-    /** a pointer to a {@link VkDescriptorAddressInfoEXT} structure specifying the parameters of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} descriptor. */
+    /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@code pStorageBuffer} field. */
     @NativeType("VkDescriptorAddressInfoEXT const *")
     public @Nullable VkDescriptorAddressInfoEXT pStorageBuffer() { return npStorageBuffer(address()); }
-    /** the address of a {@code VkAccelerationStructureKHR} specifying the parameters of a {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} descriptor , or a {@code VkAccelerationStructureNV} handle specifying the parameters of a {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV} descriptor. */
+    /** @return the value of the {@code accelerationStructure} field. */
     @NativeType("VkDeviceAddress")
     public long accelerationStructure() { return naccelerationStructure(address()); }
 
-    /** Sets the address of the specified {@link LongBuffer} to the {@link #pSampler} field. */
+    /** Sets the address of the specified {@link LongBuffer} to the {@code pSampler} field. */
     public VkDescriptorDataEXT pSampler(@NativeType("VkSampler const *") LongBuffer value) { npSampler(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@link #pCombinedImageSampler} field. */
+    /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@code pCombinedImageSampler} field. */
     public VkDescriptorDataEXT pCombinedImageSampler(@NativeType("VkDescriptorImageInfo const *") VkDescriptorImageInfo value) { npCombinedImageSampler(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@link #pInputAttachmentImage} field. */
+    /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@code pInputAttachmentImage} field. */
     public VkDescriptorDataEXT pInputAttachmentImage(@NativeType("VkDescriptorImageInfo const *") VkDescriptorImageInfo value) { npInputAttachmentImage(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@link #pSampledImage} field. */
+    /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@code pSampledImage} field. */
     public VkDescriptorDataEXT pSampledImage(@Nullable @NativeType("VkDescriptorImageInfo const *") VkDescriptorImageInfo value) { npSampledImage(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@link #pStorageImage} field. */
+    /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@code pStorageImage} field. */
     public VkDescriptorDataEXT pStorageImage(@Nullable @NativeType("VkDescriptorImageInfo const *") VkDescriptorImageInfo value) { npStorageImage(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@link #pUniformTexelBuffer} field. */
+    /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@code pUniformTexelBuffer} field. */
     public VkDescriptorDataEXT pUniformTexelBuffer(@Nullable @NativeType("VkDescriptorAddressInfoEXT const *") VkDescriptorAddressInfoEXT value) { npUniformTexelBuffer(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@link #pStorageTexelBuffer} field. */
+    /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@code pStorageTexelBuffer} field. */
     public VkDescriptorDataEXT pStorageTexelBuffer(@Nullable @NativeType("VkDescriptorAddressInfoEXT const *") VkDescriptorAddressInfoEXT value) { npStorageTexelBuffer(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@link #pUniformBuffer} field. */
+    /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@code pUniformBuffer} field. */
     public VkDescriptorDataEXT pUniformBuffer(@Nullable @NativeType("VkDescriptorAddressInfoEXT const *") VkDescriptorAddressInfoEXT value) { npUniformBuffer(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@link #pStorageBuffer} field. */
+    /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@code pStorageBuffer} field. */
     public VkDescriptorDataEXT pStorageBuffer(@Nullable @NativeType("VkDescriptorAddressInfoEXT const *") VkDescriptorAddressInfoEXT value) { npStorageBuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #accelerationStructure} field. */
+    /** Sets the specified value to the {@code accelerationStructure} field. */
     public VkDescriptorDataEXT accelerationStructure(@NativeType("VkDeviceAddress") long value) { naccelerationStructure(address(), value); return this; }
 
     /**
@@ -399,60 +363,56 @@ public class VkDescriptorDataEXT extends Struct<VkDescriptorDataEXT> implements 
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link LongBuffer} view of the data pointed to by the {@link VkDescriptorDataEXT#pSampler} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link LongBuffer} view of the data pointed to by the {@code pSampler} field. */
         @NativeType("VkSampler const *")
         public LongBuffer pSampler(int capacity) { return VkDescriptorDataEXT.npSampler(address(), capacity); }
-        /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@link VkDescriptorDataEXT#pCombinedImageSampler} field. */
+        /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@code pCombinedImageSampler} field. */
         @NativeType("VkDescriptorImageInfo const *")
         public VkDescriptorImageInfo pCombinedImageSampler() { return VkDescriptorDataEXT.npCombinedImageSampler(address()); }
-        /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@link VkDescriptorDataEXT#pInputAttachmentImage} field. */
+        /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@code pInputAttachmentImage} field. */
         @NativeType("VkDescriptorImageInfo const *")
         public VkDescriptorImageInfo pInputAttachmentImage() { return VkDescriptorDataEXT.npInputAttachmentImage(address()); }
-        /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@link VkDescriptorDataEXT#pSampledImage} field. */
+        /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@code pSampledImage} field. */
         @NativeType("VkDescriptorImageInfo const *")
         public @Nullable VkDescriptorImageInfo pSampledImage() { return VkDescriptorDataEXT.npSampledImage(address()); }
-        /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@link VkDescriptorDataEXT#pStorageImage} field. */
+        /** @return a {@link VkDescriptorImageInfo} view of the struct pointed to by the {@code pStorageImage} field. */
         @NativeType("VkDescriptorImageInfo const *")
         public @Nullable VkDescriptorImageInfo pStorageImage() { return VkDescriptorDataEXT.npStorageImage(address()); }
-        /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@link VkDescriptorDataEXT#pUniformTexelBuffer} field. */
+        /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@code pUniformTexelBuffer} field. */
         @NativeType("VkDescriptorAddressInfoEXT const *")
         public @Nullable VkDescriptorAddressInfoEXT pUniformTexelBuffer() { return VkDescriptorDataEXT.npUniformTexelBuffer(address()); }
-        /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@link VkDescriptorDataEXT#pStorageTexelBuffer} field. */
+        /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@code pStorageTexelBuffer} field. */
         @NativeType("VkDescriptorAddressInfoEXT const *")
         public @Nullable VkDescriptorAddressInfoEXT pStorageTexelBuffer() { return VkDescriptorDataEXT.npStorageTexelBuffer(address()); }
-        /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@link VkDescriptorDataEXT#pUniformBuffer} field. */
+        /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@code pUniformBuffer} field. */
         @NativeType("VkDescriptorAddressInfoEXT const *")
         public @Nullable VkDescriptorAddressInfoEXT pUniformBuffer() { return VkDescriptorDataEXT.npUniformBuffer(address()); }
-        /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@link VkDescriptorDataEXT#pStorageBuffer} field. */
+        /** @return a {@link VkDescriptorAddressInfoEXT} view of the struct pointed to by the {@code pStorageBuffer} field. */
         @NativeType("VkDescriptorAddressInfoEXT const *")
         public @Nullable VkDescriptorAddressInfoEXT pStorageBuffer() { return VkDescriptorDataEXT.npStorageBuffer(address()); }
-        /** @return the value of the {@link VkDescriptorDataEXT#accelerationStructure} field. */
+        /** @return the value of the {@code accelerationStructure} field. */
         @NativeType("VkDeviceAddress")
         public long accelerationStructure() { return VkDescriptorDataEXT.naccelerationStructure(address()); }
 
-        /** Sets the address of the specified {@link LongBuffer} to the {@link VkDescriptorDataEXT#pSampler} field. */
+        /** Sets the address of the specified {@link LongBuffer} to the {@code pSampler} field. */
         public VkDescriptorDataEXT.Buffer pSampler(@NativeType("VkSampler const *") LongBuffer value) { VkDescriptorDataEXT.npSampler(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@link VkDescriptorDataEXT#pCombinedImageSampler} field. */
+        /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@code pCombinedImageSampler} field. */
         public VkDescriptorDataEXT.Buffer pCombinedImageSampler(@NativeType("VkDescriptorImageInfo const *") VkDescriptorImageInfo value) { VkDescriptorDataEXT.npCombinedImageSampler(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@link VkDescriptorDataEXT#pInputAttachmentImage} field. */
+        /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@code pInputAttachmentImage} field. */
         public VkDescriptorDataEXT.Buffer pInputAttachmentImage(@NativeType("VkDescriptorImageInfo const *") VkDescriptorImageInfo value) { VkDescriptorDataEXT.npInputAttachmentImage(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@link VkDescriptorDataEXT#pSampledImage} field. */
+        /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@code pSampledImage} field. */
         public VkDescriptorDataEXT.Buffer pSampledImage(@Nullable @NativeType("VkDescriptorImageInfo const *") VkDescriptorImageInfo value) { VkDescriptorDataEXT.npSampledImage(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@link VkDescriptorDataEXT#pStorageImage} field. */
+        /** Sets the address of the specified {@link VkDescriptorImageInfo} to the {@code pStorageImage} field. */
         public VkDescriptorDataEXT.Buffer pStorageImage(@Nullable @NativeType("VkDescriptorImageInfo const *") VkDescriptorImageInfo value) { VkDescriptorDataEXT.npStorageImage(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@link VkDescriptorDataEXT#pUniformTexelBuffer} field. */
+        /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@code pUniformTexelBuffer} field. */
         public VkDescriptorDataEXT.Buffer pUniformTexelBuffer(@Nullable @NativeType("VkDescriptorAddressInfoEXT const *") VkDescriptorAddressInfoEXT value) { VkDescriptorDataEXT.npUniformTexelBuffer(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@link VkDescriptorDataEXT#pStorageTexelBuffer} field. */
+        /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@code pStorageTexelBuffer} field. */
         public VkDescriptorDataEXT.Buffer pStorageTexelBuffer(@Nullable @NativeType("VkDescriptorAddressInfoEXT const *") VkDescriptorAddressInfoEXT value) { VkDescriptorDataEXT.npStorageTexelBuffer(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@link VkDescriptorDataEXT#pUniformBuffer} field. */
+        /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@code pUniformBuffer} field. */
         public VkDescriptorDataEXT.Buffer pUniformBuffer(@Nullable @NativeType("VkDescriptorAddressInfoEXT const *") VkDescriptorAddressInfoEXT value) { VkDescriptorDataEXT.npUniformBuffer(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@link VkDescriptorDataEXT#pStorageBuffer} field. */
+        /** Sets the address of the specified {@link VkDescriptorAddressInfoEXT} to the {@code pStorageBuffer} field. */
         public VkDescriptorDataEXT.Buffer pStorageBuffer(@Nullable @NativeType("VkDescriptorAddressInfoEXT const *") VkDescriptorAddressInfoEXT value) { VkDescriptorDataEXT.npStorageBuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorDataEXT#accelerationStructure} field. */
+        /** Sets the specified value to the {@code accelerationStructure} field. */
         public VkDescriptorDataEXT.Buffer accelerationStructure(@NativeType("VkDeviceAddress") long value) { VkDescriptorDataEXT.naccelerationStructure(address(), value); return this; }
 
     }

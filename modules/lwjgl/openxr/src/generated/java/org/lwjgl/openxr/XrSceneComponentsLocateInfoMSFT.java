@@ -17,33 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the information to locate scene components.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneComponentsLocateInfoMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
- * <li>If {@code componentIdCount} is not 0, {@code componentIds} <b>must</b> be a pointer to an array of {@code componentIdCount} {@link XrUuidMSFT} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidMSFT}, {@link MSFTSceneUnderstanding#xrLocateSceneComponentsMSFT LocateSceneComponentsMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneComponentsLocateInfoMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #baseSpace};
- *     XrTime {@link #time};
- *     uint32_t {@link #componentIdCount};
- *     {@link XrUuidMSFT XrUuidMSFT} const * {@link #componentIds};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace baseSpace;
+ *     XrTime time;
+ *     uint32_t componentIdCount;
+ *     {@link XrUuidMSFT XrUuidMSFT} const * componentIds;
+ * }}</pre>
  */
 public class XrSceneComponentsLocateInfoMSFT extends Struct<XrSceneComponentsLocateInfoMSFT> implements NativeResource {
 
@@ -105,38 +87,38 @@ public class XrSceneComponentsLocateInfoMSFT extends Struct<XrSceneComponentsLoc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrSpace} within which the scene components will be located. */
+    /** @return the value of the {@code baseSpace} field. */
     @NativeType("XrSpace")
     public long baseSpace() { return nbaseSpace(address()); }
-    /** an {@code XrTime} at which to locate the scene components. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
-    /** a {@code uint32_t} describing the count of elements in the {@code componentIds} array. */
+    /** @return the value of the {@code componentIdCount} field. */
     @NativeType("uint32_t")
     public int componentIdCount() { return ncomponentIdCount(address()); }
-    /** an array of {@link XrUuidMSFT} identifiers for the scene components to location. */
+    /** @return a {@link XrUuidMSFT.Buffer} view of the struct array pointed to by the {@code componentIds} field. */
     @NativeType("XrUuidMSFT const *")
     public XrUuidMSFT.@Nullable Buffer componentIds() { return ncomponentIds(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSceneComponentsLocateInfoMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT} value to the {@code type} field. */
     public XrSceneComponentsLocateInfoMSFT type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSceneComponentsLocateInfoMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #baseSpace} field. */
+    /** Sets the specified value to the {@code baseSpace} field. */
     public XrSceneComponentsLocateInfoMSFT baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrSceneComponentsLocateInfoMSFT time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
-    /** Sets the specified value to the {@link #componentIdCount} field. */
+    /** Sets the specified value to the {@code componentIdCount} field. */
     public XrSceneComponentsLocateInfoMSFT componentIdCount(@NativeType("uint32_t") int value) { ncomponentIdCount(address(), value); return this; }
-    /** Sets the address of the specified {@link XrUuidMSFT.Buffer} to the {@link #componentIds} field. */
+    /** Sets the address of the specified {@link XrUuidMSFT.Buffer} to the {@code componentIds} field. */
     public XrSceneComponentsLocateInfoMSFT componentIds(@NativeType("XrUuidMSFT const *") XrUuidMSFT.@Nullable Buffer value) { ncomponentIds(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -359,38 +341,38 @@ public class XrSceneComponentsLocateInfoMSFT extends Struct<XrSceneComponentsLoc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneComponentsLocateInfoMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSceneComponentsLocateInfoMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSceneComponentsLocateInfoMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSceneComponentsLocateInfoMSFT.nnext(address()); }
-        /** @return the value of the {@link XrSceneComponentsLocateInfoMSFT#baseSpace} field. */
+        /** @return the value of the {@code baseSpace} field. */
         @NativeType("XrSpace")
         public long baseSpace() { return XrSceneComponentsLocateInfoMSFT.nbaseSpace(address()); }
-        /** @return the value of the {@link XrSceneComponentsLocateInfoMSFT#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrSceneComponentsLocateInfoMSFT.ntime(address()); }
-        /** @return the value of the {@link XrSceneComponentsLocateInfoMSFT#componentIdCount} field. */
+        /** @return the value of the {@code componentIdCount} field. */
         @NativeType("uint32_t")
         public int componentIdCount() { return XrSceneComponentsLocateInfoMSFT.ncomponentIdCount(address()); }
-        /** @return a {@link XrUuidMSFT.Buffer} view of the struct array pointed to by the {@link XrSceneComponentsLocateInfoMSFT#componentIds} field. */
+        /** @return a {@link XrUuidMSFT.Buffer} view of the struct array pointed to by the {@code componentIds} field. */
         @NativeType("XrUuidMSFT const *")
         public XrUuidMSFT.@Nullable Buffer componentIds() { return XrSceneComponentsLocateInfoMSFT.ncomponentIds(address()); }
 
-        /** Sets the specified value to the {@link XrSceneComponentsLocateInfoMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSceneComponentsLocateInfoMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSceneComponentsLocateInfoMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT} value to the {@link XrSceneComponentsLocateInfoMSFT#type} field. */
+        /** Sets the {@link MSFTSceneUnderstanding#XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT} value to the {@code type} field. */
         public XrSceneComponentsLocateInfoMSFT.Buffer type$Default() { return type(MSFTSceneUnderstanding.XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT); }
-        /** Sets the specified value to the {@link XrSceneComponentsLocateInfoMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSceneComponentsLocateInfoMSFT.Buffer next(@NativeType("void const *") long value) { XrSceneComponentsLocateInfoMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneComponentsLocateInfoMSFT#baseSpace} field. */
+        /** Sets the specified value to the {@code baseSpace} field. */
         public XrSceneComponentsLocateInfoMSFT.Buffer baseSpace(XrSpace value) { XrSceneComponentsLocateInfoMSFT.nbaseSpace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneComponentsLocateInfoMSFT#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrSceneComponentsLocateInfoMSFT.Buffer time(@NativeType("XrTime") long value) { XrSceneComponentsLocateInfoMSFT.ntime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneComponentsLocateInfoMSFT#componentIdCount} field. */
+        /** Sets the specified value to the {@code componentIdCount} field. */
         public XrSceneComponentsLocateInfoMSFT.Buffer componentIdCount(@NativeType("uint32_t") int value) { XrSceneComponentsLocateInfoMSFT.ncomponentIdCount(address(), value); return this; }
-        /** Sets the address of the specified {@link XrUuidMSFT.Buffer} to the {@link XrSceneComponentsLocateInfoMSFT#componentIds} field. */
+        /** Sets the address of the specified {@link XrUuidMSFT.Buffer} to the {@code componentIds} field. */
         public XrSceneComponentsLocateInfoMSFT.Buffer componentIds(@NativeType("XrUuidMSFT const *") XrUuidMSFT.@Nullable Buffer value) { XrSceneComponentsLocateInfoMSFT.ncomponentIds(address(), value); return this; }
 
     }

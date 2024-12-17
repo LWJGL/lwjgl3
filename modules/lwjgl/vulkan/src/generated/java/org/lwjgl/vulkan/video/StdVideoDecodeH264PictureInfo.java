@@ -19,19 +19,17 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoDecodeH264PictureInfo {
  *     {@link StdVideoDecodeH264PictureInfoFlags StdVideoDecodeH264PictureInfoFlags} flags;
- *     uint8_t {@link #seq_parameter_set_id};
- *     uint8_t {@link #pic_parameter_set_id};
+ *     uint8_t seq_parameter_set_id;
+ *     uint8_t pic_parameter_set_id;
  *     uint8_t reserved1;
  *     uint8_t reserved2;
- *     uint16_t {@link #frame_num};
- *     uint16_t {@link #idr_pic_id};
- *     int32_t {@link #PicOrderCnt}[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE];
- * }</code></pre>
+ *     uint16_t frame_num;
+ *     uint16_t idr_pic_id;
+ *     int32_t PicOrderCnt[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE];
+ * }}</pre>
  */
 public class StdVideoDecodeH264PictureInfo extends Struct<StdVideoDecodeH264PictureInfo> implements NativeResource {
 
@@ -101,22 +99,22 @@ public class StdVideoDecodeH264PictureInfo extends Struct<StdVideoDecodeH264Pict
 
     /** @return a {@link StdVideoDecodeH264PictureInfoFlags} view of the {@code flags} field. */
     public StdVideoDecodeH264PictureInfoFlags flags() { return nflags(address()); }
-    /** selecting SPS from the Picture Parameters */
+    /** @return the value of the {@code seq_parameter_set_id} field. */
     @NativeType("uint8_t")
     public byte seq_parameter_set_id() { return nseq_parameter_set_id(address()); }
-    /** selecting PPS from the Picture Parameters and the SPS */
+    /** @return the value of the {@code pic_parameter_set_id} field. */
     @NativeType("uint8_t")
     public byte pic_parameter_set_id() { return npic_parameter_set_id(address()); }
-    /** 7.4.3 Slice header semantics */
+    /** @return the value of the {@code frame_num} field. */
     @NativeType("uint16_t")
     public short frame_num() { return nframe_num(address()); }
-    /** 7.4.3 Slice header semantics */
+    /** @return the value of the {@code idr_pic_id} field. */
     @NativeType("uint16_t")
     public short idr_pic_id() { return nidr_pic_id(address()); }
-    /** topFieldOrderCnt and BottomFieldOrderCnt fields */
+    /** @return a {@link IntBuffer} view of the {@code PicOrderCnt} field. */
     @NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]")
     public IntBuffer PicOrderCnt() { return nPicOrderCnt(address()); }
-    /** topFieldOrderCnt and BottomFieldOrderCnt fields */
+    /** @return the value at the specified index of the {@code PicOrderCnt} field. */
     @NativeType("int32_t")
     public int PicOrderCnt(int index) { return nPicOrderCnt(address(), index); }
 
@@ -124,17 +122,17 @@ public class StdVideoDecodeH264PictureInfo extends Struct<StdVideoDecodeH264Pict
     public StdVideoDecodeH264PictureInfo flags(StdVideoDecodeH264PictureInfoFlags value) { nflags(address(), value); return this; }
     /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
     public StdVideoDecodeH264PictureInfo flags(java.util.function.Consumer<StdVideoDecodeH264PictureInfoFlags> consumer) { consumer.accept(flags()); return this; }
-    /** Sets the specified value to the {@link #seq_parameter_set_id} field. */
+    /** Sets the specified value to the {@code seq_parameter_set_id} field. */
     public StdVideoDecodeH264PictureInfo seq_parameter_set_id(@NativeType("uint8_t") byte value) { nseq_parameter_set_id(address(), value); return this; }
-    /** Sets the specified value to the {@link #pic_parameter_set_id} field. */
+    /** Sets the specified value to the {@code pic_parameter_set_id} field. */
     public StdVideoDecodeH264PictureInfo pic_parameter_set_id(@NativeType("uint8_t") byte value) { npic_parameter_set_id(address(), value); return this; }
-    /** Sets the specified value to the {@link #frame_num} field. */
+    /** Sets the specified value to the {@code frame_num} field. */
     public StdVideoDecodeH264PictureInfo frame_num(@NativeType("uint16_t") short value) { nframe_num(address(), value); return this; }
-    /** Sets the specified value to the {@link #idr_pic_id} field. */
+    /** Sets the specified value to the {@code idr_pic_id} field. */
     public StdVideoDecodeH264PictureInfo idr_pic_id(@NativeType("uint16_t") short value) { nidr_pic_id(address(), value); return this; }
-    /** Copies the specified {@link IntBuffer} to the {@link #PicOrderCnt} field. */
+    /** Copies the specified {@link IntBuffer} to the {@code PicOrderCnt} field. */
     public StdVideoDecodeH264PictureInfo PicOrderCnt(@NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]") IntBuffer value) { nPicOrderCnt(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #PicOrderCnt} field. */
+    /** Sets the specified value at the specified index of the {@code PicOrderCnt} field. */
     public StdVideoDecodeH264PictureInfo PicOrderCnt(int index, @NativeType("int32_t") int value) { nPicOrderCnt(address(), index, value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -365,22 +363,22 @@ public class StdVideoDecodeH264PictureInfo extends Struct<StdVideoDecodeH264Pict
 
         /** @return a {@link StdVideoDecodeH264PictureInfoFlags} view of the {@code flags} field. */
         public StdVideoDecodeH264PictureInfoFlags flags() { return StdVideoDecodeH264PictureInfo.nflags(address()); }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfo#seq_parameter_set_id} field. */
+        /** @return the value of the {@code seq_parameter_set_id} field. */
         @NativeType("uint8_t")
         public byte seq_parameter_set_id() { return StdVideoDecodeH264PictureInfo.nseq_parameter_set_id(address()); }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfo#pic_parameter_set_id} field. */
+        /** @return the value of the {@code pic_parameter_set_id} field. */
         @NativeType("uint8_t")
         public byte pic_parameter_set_id() { return StdVideoDecodeH264PictureInfo.npic_parameter_set_id(address()); }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfo#frame_num} field. */
+        /** @return the value of the {@code frame_num} field. */
         @NativeType("uint16_t")
         public short frame_num() { return StdVideoDecodeH264PictureInfo.nframe_num(address()); }
-        /** @return the value of the {@link StdVideoDecodeH264PictureInfo#idr_pic_id} field. */
+        /** @return the value of the {@code idr_pic_id} field. */
         @NativeType("uint16_t")
         public short idr_pic_id() { return StdVideoDecodeH264PictureInfo.nidr_pic_id(address()); }
-        /** @return a {@link IntBuffer} view of the {@link StdVideoDecodeH264PictureInfo#PicOrderCnt} field. */
+        /** @return a {@link IntBuffer} view of the {@code PicOrderCnt} field. */
         @NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]")
         public IntBuffer PicOrderCnt() { return StdVideoDecodeH264PictureInfo.nPicOrderCnt(address()); }
-        /** @return the value at the specified index of the {@link StdVideoDecodeH264PictureInfo#PicOrderCnt} field. */
+        /** @return the value at the specified index of the {@code PicOrderCnt} field. */
         @NativeType("int32_t")
         public int PicOrderCnt(int index) { return StdVideoDecodeH264PictureInfo.nPicOrderCnt(address(), index); }
 
@@ -388,17 +386,17 @@ public class StdVideoDecodeH264PictureInfo extends Struct<StdVideoDecodeH264Pict
         public StdVideoDecodeH264PictureInfo.Buffer flags(StdVideoDecodeH264PictureInfoFlags value) { StdVideoDecodeH264PictureInfo.nflags(address(), value); return this; }
         /** Passes the {@code flags} field to the specified {@link java.util.function.Consumer Consumer}. */
         public StdVideoDecodeH264PictureInfo.Buffer flags(java.util.function.Consumer<StdVideoDecodeH264PictureInfoFlags> consumer) { consumer.accept(flags()); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfo#seq_parameter_set_id} field. */
+        /** Sets the specified value to the {@code seq_parameter_set_id} field. */
         public StdVideoDecodeH264PictureInfo.Buffer seq_parameter_set_id(@NativeType("uint8_t") byte value) { StdVideoDecodeH264PictureInfo.nseq_parameter_set_id(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfo#pic_parameter_set_id} field. */
+        /** Sets the specified value to the {@code pic_parameter_set_id} field. */
         public StdVideoDecodeH264PictureInfo.Buffer pic_parameter_set_id(@NativeType("uint8_t") byte value) { StdVideoDecodeH264PictureInfo.npic_parameter_set_id(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfo#frame_num} field. */
+        /** Sets the specified value to the {@code frame_num} field. */
         public StdVideoDecodeH264PictureInfo.Buffer frame_num(@NativeType("uint16_t") short value) { StdVideoDecodeH264PictureInfo.nframe_num(address(), value); return this; }
-        /** Sets the specified value to the {@link StdVideoDecodeH264PictureInfo#idr_pic_id} field. */
+        /** Sets the specified value to the {@code idr_pic_id} field. */
         public StdVideoDecodeH264PictureInfo.Buffer idr_pic_id(@NativeType("uint16_t") short value) { StdVideoDecodeH264PictureInfo.nidr_pic_id(address(), value); return this; }
-        /** Copies the specified {@link IntBuffer} to the {@link StdVideoDecodeH264PictureInfo#PicOrderCnt} field. */
+        /** Copies the specified {@link IntBuffer} to the {@code PicOrderCnt} field. */
         public StdVideoDecodeH264PictureInfo.Buffer PicOrderCnt(@NativeType("int32_t[STD_VIDEO_DECODE_H264_FIELD_ORDER_COUNT_LIST_SIZE]") IntBuffer value) { StdVideoDecodeH264PictureInfo.nPicOrderCnt(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link StdVideoDecodeH264PictureInfo#PicOrderCnt} field. */
+        /** Sets the specified value at the specified index of the {@code PicOrderCnt} field. */
         public StdVideoDecodeH264PictureInfo.Buffer PicOrderCnt(int index, @NativeType("int32_t") int value) { StdVideoDecodeH264PictureInfo.nPicOrderCnt(address(), index, value); return this; }
 
     }

@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct msdf_bounds {
- *     double {@link #l};
- *     double {@link #b};
- *     double {@link #r};
- *     double {@link #t};
- * }</code></pre>
+ *     double l;
+ *     double b;
+ *     double r;
+ *     double t;
+ * }}</pre>
  */
 @NativeType("struct msdf_bounds")
 public class MSDFGenBounds extends Struct<MSDFGenBounds> implements NativeResource {
@@ -81,22 +79,22 @@ public class MSDFGenBounds extends Struct<MSDFGenBounds> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the horizontal starting position of this bounding box */
+    /** @return the value of the {@code l} field. */
     public double l() { return nl(address()); }
-    /** the vertical starting position of this bounding box */
+    /** @return the value of the {@code b} field. */
     public double b() { return nb(address()); }
-    /** the horizontal ending position of this bounding box */
+    /** @return the value of the {@code r} field. */
     public double r() { return nr(address()); }
-    /** the vertical ending position of this bounding box */
+    /** @return the value of the {@code t} field. */
     public double t() { return nt(address()); }
 
-    /** Sets the specified value to the {@link #l} field. */
+    /** Sets the specified value to the {@code l} field. */
     public MSDFGenBounds l(double value) { nl(address(), value); return this; }
-    /** Sets the specified value to the {@link #b} field. */
+    /** Sets the specified value to the {@code b} field. */
     public MSDFGenBounds b(double value) { nb(address(), value); return this; }
-    /** Sets the specified value to the {@link #r} field. */
+    /** Sets the specified value to the {@code r} field. */
     public MSDFGenBounds r(double value) { nr(address(), value); return this; }
-    /** Sets the specified value to the {@link #t} field. */
+    /** Sets the specified value to the {@code t} field. */
     public MSDFGenBounds t(double value) { nt(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -298,22 +296,22 @@ public class MSDFGenBounds extends Struct<MSDFGenBounds> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link MSDFGenBounds#l} field. */
+        /** @return the value of the {@code l} field. */
         public double l() { return MSDFGenBounds.nl(address()); }
-        /** @return the value of the {@link MSDFGenBounds#b} field. */
+        /** @return the value of the {@code b} field. */
         public double b() { return MSDFGenBounds.nb(address()); }
-        /** @return the value of the {@link MSDFGenBounds#r} field. */
+        /** @return the value of the {@code r} field. */
         public double r() { return MSDFGenBounds.nr(address()); }
-        /** @return the value of the {@link MSDFGenBounds#t} field. */
+        /** @return the value of the {@code t} field. */
         public double t() { return MSDFGenBounds.nt(address()); }
 
-        /** Sets the specified value to the {@link MSDFGenBounds#l} field. */
+        /** Sets the specified value to the {@code l} field. */
         public MSDFGenBounds.Buffer l(double value) { MSDFGenBounds.nl(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenBounds#b} field. */
+        /** Sets the specified value to the {@code b} field. */
         public MSDFGenBounds.Buffer b(double value) { MSDFGenBounds.nb(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenBounds#r} field. */
+        /** Sets the specified value to the {@code r} field. */
         public MSDFGenBounds.Buffer r(double value) { MSDFGenBounds.nr(address(), value); return this; }
-        /** Sets the specified value to the {@link MSDFGenBounds#t} field. */
+        /** Sets the specified value to the {@code t} field. */
         public MSDFGenBounds.Buffer t(double value) { MSDFGenBounds.nt(address(), value); return this; }
 
     }

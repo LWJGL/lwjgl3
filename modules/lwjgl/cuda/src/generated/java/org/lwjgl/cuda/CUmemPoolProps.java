@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUmemPoolProps {
  *     CUmemAllocationType allocType;
  *     CUmemAllocationHandleType handleTypes;
  *     {@link CUmemLocation CUmemLocation} location;
  *     void * win32SecurityAttributes;
  *     unsigned char reserved[64];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUmemPoolProps extends Struct<CUmemPoolProps> implements NativeResource {
 

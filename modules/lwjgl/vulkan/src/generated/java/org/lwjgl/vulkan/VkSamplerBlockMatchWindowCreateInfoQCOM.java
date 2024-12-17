@@ -16,34 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the block match window parameters.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code WindowExtent} <b>must</b> not be larger than {@link VkPhysicalDeviceImageProcessing2PropertiesQCOM}{@code ::maxBlockMatchWindow}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link QCOMImageProcessing2#VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM}</li>
- * <li>{@code windowCompareMode} <b>must</b> be a valid {@code VkBlockMatchWindowCompareModeQCOM} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerBlockMatchWindowCreateInfoQCOM {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkExtent2D VkExtent2D} {@link #windowExtent};
- *     VkBlockMatchWindowCompareModeQCOM {@link #windowCompareMode};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkExtent2D VkExtent2D} windowExtent;
+ *     VkBlockMatchWindowCompareModeQCOM windowCompareMode;
+ * }}</pre>
  */
 public class VkSamplerBlockMatchWindowCreateInfoQCOM extends Struct<VkSamplerBlockMatchWindowCreateInfoQCOM> implements NativeResource {
 
@@ -99,29 +78,29 @@ public class VkSamplerBlockMatchWindowCreateInfoQCOM extends Struct<VkSamplerBlo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkExtent2D} specifying a the width and height of the block match window. */
+    /** @return a {@link VkExtent2D} view of the {@code windowExtent} field. */
     public VkExtent2D windowExtent() { return nwindowExtent(address()); }
-    /** a {@code VkBlockMatchWindowCompareModeQCOM} specifying the compare mode. */
+    /** @return the value of the {@code windowCompareMode} field. */
     @NativeType("VkBlockMatchWindowCompareModeQCOM")
     public int windowCompareMode() { return nwindowCompareMode(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSamplerBlockMatchWindowCreateInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link QCOMImageProcessing2#VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM} value to the {@link #sType} field. */
+    /** Sets the {@link QCOMImageProcessing2#VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM} value to the {@code sType} field. */
     public VkSamplerBlockMatchWindowCreateInfoQCOM sType$Default() { return sType(QCOMImageProcessing2.VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerBlockMatchWindowCreateInfoQCOM pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #windowExtent} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@code windowExtent} field. */
     public VkSamplerBlockMatchWindowCreateInfoQCOM windowExtent(VkExtent2D value) { nwindowExtent(address(), value); return this; }
-    /** Passes the {@link #windowExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code windowExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkSamplerBlockMatchWindowCreateInfoQCOM windowExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(windowExtent()); return this; }
-    /** Sets the specified value to the {@link #windowCompareMode} field. */
+    /** Sets the specified value to the {@code windowCompareMode} field. */
     public VkSamplerBlockMatchWindowCreateInfoQCOM windowCompareMode(@NativeType("VkBlockMatchWindowCompareModeQCOM") int value) { nwindowCompareMode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,29 +302,29 @@ public class VkSamplerBlockMatchWindowCreateInfoQCOM extends Struct<VkSamplerBlo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerBlockMatchWindowCreateInfoQCOM.nsType(address()); }
-        /** @return the value of the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerBlockMatchWindowCreateInfoQCOM.npNext(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#windowExtent} field. */
+        /** @return a {@link VkExtent2D} view of the {@code windowExtent} field. */
         public VkExtent2D windowExtent() { return VkSamplerBlockMatchWindowCreateInfoQCOM.nwindowExtent(address()); }
-        /** @return the value of the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#windowCompareMode} field. */
+        /** @return the value of the {@code windowCompareMode} field. */
         @NativeType("VkBlockMatchWindowCompareModeQCOM")
         public int windowCompareMode() { return VkSamplerBlockMatchWindowCreateInfoQCOM.nwindowCompareMode(address()); }
 
-        /** Sets the specified value to the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSamplerBlockMatchWindowCreateInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerBlockMatchWindowCreateInfoQCOM.nsType(address(), value); return this; }
-        /** Sets the {@link QCOMImageProcessing2#VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM} value to the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#sType} field. */
+        /** Sets the {@link QCOMImageProcessing2#VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM} value to the {@code sType} field. */
         public VkSamplerBlockMatchWindowCreateInfoQCOM.Buffer sType$Default() { return sType(QCOMImageProcessing2.VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM); }
-        /** Sets the specified value to the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerBlockMatchWindowCreateInfoQCOM.Buffer pNext(@NativeType("void const *") long value) { VkSamplerBlockMatchWindowCreateInfoQCOM.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#windowExtent} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@code windowExtent} field. */
         public VkSamplerBlockMatchWindowCreateInfoQCOM.Buffer windowExtent(VkExtent2D value) { VkSamplerBlockMatchWindowCreateInfoQCOM.nwindowExtent(address(), value); return this; }
-        /** Passes the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#windowExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code windowExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkSamplerBlockMatchWindowCreateInfoQCOM.Buffer windowExtent(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(windowExtent()); return this; }
-        /** Sets the specified value to the {@link VkSamplerBlockMatchWindowCreateInfoQCOM#windowCompareMode} field. */
+        /** Sets the specified value to the {@code windowCompareMode} field. */
         public VkSamplerBlockMatchWindowCreateInfoQCOM.Buffer windowCompareMode(@NativeType("VkBlockMatchWindowCompareModeQCOM") int value) { VkSamplerBlockMatchWindowCreateInfoQCOM.nwindowCompareMode(address(), value); return this; }
 
     }

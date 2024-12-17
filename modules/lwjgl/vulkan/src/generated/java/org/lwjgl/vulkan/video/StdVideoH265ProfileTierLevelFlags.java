@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265ProfileTierLevelFlags {
  *     uint32_t general_tier_flag : 1;
  *     uint32_t general_progressive_source_flag : 1;
  *     uint32_t general_interlaced_source_flag : 1;
  *     uint32_t general_non_packed_constraint_flag : 1;
  *     uint32_t general_frame_only_constraint_flag : 1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH265ProfileTierLevelFlags extends Struct<StdVideoH265ProfileTierLevelFlags> implements NativeResource {
 

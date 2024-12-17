@@ -17,34 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Returns an array of space velocities.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code velocities} member contains an array of space velocities in the member {@code velocities}, to be used as output for {@link XR11#xrLocateSpaces LocateSpaces}. The application <b>must</b> allocate this array to be populated with the function output. The {@code velocityCount} value <b>must</b> be the same as {@link XrSpacesLocateInfo}{@code ::spaceCount}, otherwise, the {@link XR11#xrLocateSpaces LocateSpaces} function <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR11#XR_TYPE_SPACE_VELOCITIES TYPE_SPACE_VELOCITIES}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code velocities} <b>must</b> be a pointer to an array of {@code velocityCount} {@link XrSpaceVelocityData} structures</li>
- * <li>The {@code velocityCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpaceLocations}, {@link XrSpaceVelocityData}, {@link XR11#xrLocateSpaces LocateSpaces}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceVelocities {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #velocityCount};
- *     {@link XrSpaceVelocityData XrSpaceVelocityData} * {@link #velocities};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t velocityCount;
+ *     {@link XrSpaceVelocityData XrSpaceVelocityData} * velocities;
+ * }}</pre>
  */
 public class XrSpaceVelocities extends Struct<XrSpaceVelocities> implements NativeResource {
 
@@ -100,26 +79,26 @@ public class XrSpaceVelocities extends Struct<XrSpaceVelocities> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} specifying the count of elements in the {@code velocities} array. */
+    /** @return the value of the {@code velocityCount} field. */
     @NativeType("uint32_t")
     public int velocityCount() { return nvelocityCount(address()); }
-    /** an array of {@link XrSpaceVelocityData} for the runtime to populate with the velocities of the specified spaces in the {@link XrSpacesLocateInfo}{@code ::baseSpace} at the specified {@link XrSpacesLocateInfo}{@code ::time}. */
+    /** @return a {@link XrSpaceVelocityData.Buffer} view of the struct array pointed to by the {@code velocities} field. */
     @NativeType("XrSpaceVelocityData *")
     public XrSpaceVelocityData.Buffer velocities() { return nvelocities(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceVelocities type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR11#XR_TYPE_SPACE_VELOCITIES TYPE_SPACE_VELOCITIES} value to the {@link #type} field. */
+    /** Sets the {@link XR11#XR_TYPE_SPACE_VELOCITIES TYPE_SPACE_VELOCITIES} value to the {@code type} field. */
     public XrSpaceVelocities type$Default() { return type(XR11.XR_TYPE_SPACE_VELOCITIES); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceVelocities next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrSpaceVelocityData.Buffer} to the {@link #velocities} field. */
+    /** Sets the address of the specified {@link XrSpaceVelocityData.Buffer} to the {@code velocities} field. */
     public XrSpaceVelocities velocities(@NativeType("XrSpaceVelocityData *") XrSpaceVelocityData.Buffer value) { nvelocities(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,26 +307,26 @@ public class XrSpaceVelocities extends Struct<XrSpaceVelocities> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceVelocities#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceVelocities.ntype(address()); }
-        /** @return the value of the {@link XrSpaceVelocities#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpaceVelocities.nnext(address()); }
-        /** @return the value of the {@link XrSpaceVelocities#velocityCount} field. */
+        /** @return the value of the {@code velocityCount} field. */
         @NativeType("uint32_t")
         public int velocityCount() { return XrSpaceVelocities.nvelocityCount(address()); }
-        /** @return a {@link XrSpaceVelocityData.Buffer} view of the struct array pointed to by the {@link XrSpaceVelocities#velocities} field. */
+        /** @return a {@link XrSpaceVelocityData.Buffer} view of the struct array pointed to by the {@code velocities} field. */
         @NativeType("XrSpaceVelocityData *")
         public XrSpaceVelocityData.Buffer velocities() { return XrSpaceVelocities.nvelocities(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceVelocities#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceVelocities.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceVelocities.ntype(address(), value); return this; }
-        /** Sets the {@link XR11#XR_TYPE_SPACE_VELOCITIES TYPE_SPACE_VELOCITIES} value to the {@link XrSpaceVelocities#type} field. */
+        /** Sets the {@link XR11#XR_TYPE_SPACE_VELOCITIES TYPE_SPACE_VELOCITIES} value to the {@code type} field. */
         public XrSpaceVelocities.Buffer type$Default() { return type(XR11.XR_TYPE_SPACE_VELOCITIES); }
-        /** Sets the specified value to the {@link XrSpaceVelocities#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceVelocities.Buffer next(@NativeType("void *") long value) { XrSpaceVelocities.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrSpaceVelocityData.Buffer} to the {@link XrSpaceVelocities#velocities} field. */
+        /** Sets the address of the specified {@link XrSpaceVelocityData.Buffer} to the {@code velocities} field. */
         public XrSpaceVelocities.Buffer velocities(@NativeType("XrSpaceVelocityData *") XrSpaceVelocityData.Buffer value) { XrSpaceVelocities.nvelocities(address(), value); return this; }
 
     }

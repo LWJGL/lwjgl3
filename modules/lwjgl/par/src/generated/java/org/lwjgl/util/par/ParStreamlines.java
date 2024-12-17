@@ -11,46 +11,22 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 
-/**
- * Bindings to <a href="https://github.com/prideout/par/blob/master/par_streamlines.h">par_streamlines.h</a>, a single-file, zero-dependency, C99 library
- * that can triangulate wide lines and curves.
- */
 public class ParStreamlines {
 
     static { LibPar.initialize(); }
 
-    /**
-     * Configures how the library assigns UV coordinates.
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #PAR_U_MODE_NORMALIZED_DISTANCE PAR_U_MODE_NORMALIZED_DISTANCE} - This is the default.</li>
-     * <li>{@link #PAR_U_MODE_DISTANCE PAR_U_MODE_DISTANCE} - Non-normalized distance along the curve.</li>
-     * <li>{@link #PAR_U_MODE_SEGMENT_INDEX PAR_U_MODE_SEGMENT_INDEX} - Starts at zero for each curve, counts up.</li>
-     * <li>{@link #PAR_U_MODE_SEGMENT_FRACTION PAR_U_MODE_SEGMENT_FRACTION} - 0.0, 1.0 / COUNT, 2.0 / COUNT, etc...</li>
-     * </ul>
-     */
     public static final int
         PAR_U_MODE_NORMALIZED_DISTANCE = 0,
         PAR_U_MODE_DISTANCE            = 1,
         PAR_U_MODE_SEGMENT_INDEX       = 2,
         PAR_U_MODE_SEGMENT_FRACTION    = 3;
 
-    /** Enables 4 indices per triangle */
-    public static final int PARSL_FLAG_WIREFRAME = 1 << 0;
-
-    /** Populates {@code mesh.annotations} */
-    public static final int PARSL_FLAG_ANNOTATIONS = 1 << 1;
-
-    /** Populates {@code mesh.lengths} */
-    public static final int PARSL_FLAG_SPINE_LENGTHS = 1 << 2;
-
-    /** Populates {@code mesh.random_offsets} */
-    public static final int PARSL_FLAG_RANDOM_OFFSETS = 1 << 3;
-
-    /** Draws control points */
-    public static final int PARSL_FLAG_CURVE_GUIPARSL_FLAG_DES = 1 << 4;
+    public static final int
+        PARSL_FLAG_WIREFRAME               = 1 << 0,
+        PARSL_FLAG_ANNOTATIONS             = 1 << 1,
+        PARSL_FLAG_SPINE_LENGTHS           = 1 << 2,
+        PARSL_FLAG_RANDOM_OFFSETS          = 1 << 3,
+        PARSL_FLAG_CURVE_GUIPARSL_FLAG_DES = 1 << 4;
 
     protected ParStreamlines() {
         throw new UnsupportedOperationException();
@@ -58,8 +34,10 @@ public class ParStreamlines {
 
     // --- [ parsl_create_context ] ---
 
+    /** {@code parsl_context * parsl_create_context(parsl_config config)} */
     public static native long nparsl_create_context(long config);
 
+    /** {@code parsl_context * parsl_create_context(parsl_config config)} */
     @NativeType("parsl_context *")
     public static long parsl_create_context(@NativeType("parsl_config") ParSLConfig config) {
         return nparsl_create_context(config.address());
@@ -67,8 +45,10 @@ public class ParStreamlines {
 
     // --- [ parsl_destroy_context ] ---
 
+    /** {@code void parsl_destroy_context(parsl_context * ctx)} */
     public static native void nparsl_destroy_context(long ctx);
 
+    /** {@code void parsl_destroy_context(parsl_context * ctx)} */
     public static void parsl_destroy_context(@NativeType("parsl_context *") long ctx) {
         if (CHECKS) {
             check(ctx);
@@ -78,10 +58,10 @@ public class ParStreamlines {
 
     // --- [ parsl_mesh_from_lines ] ---
 
-    /** Unsafe version of: {@link #parsl_mesh_from_lines mesh_from_lines} */
+    /** {@code parsl_mesh * parsl_mesh_from_lines(parsl_context * ctx, parsl_spine_list spines)} */
     public static native long nparsl_mesh_from_lines(long ctx, long spines);
 
-    /** Low-level function that generates two triangles for each line segment. */
+    /** {@code parsl_mesh * parsl_mesh_from_lines(parsl_context * ctx, parsl_spine_list spines)} */
     @NativeType("parsl_mesh *")
     public static @Nullable ParSLMesh parsl_mesh_from_lines(@NativeType("parsl_context *") long ctx, @NativeType("parsl_spine_list") ParSLSpineList spines) {
         if (CHECKS) {
@@ -94,10 +74,10 @@ public class ParStreamlines {
 
     // --- [ parsl_mesh_from_streamlines ] ---
 
-    /** Unsafe version of: {@link #parsl_mesh_from_streamlines mesh_from_streamlines} */
+    /** {@code parsl_mesh * parsl_mesh_from_streamlines(parsl_context * context, parsl_advection_callback advect, uint32_t first_tick, uint32_t num_ticks, void * userdata)} */
     public static native long nparsl_mesh_from_streamlines(long context, long advect, int first_tick, int num_ticks, long userdata);
 
-    /** High-level function that can be used to visualize a vector field. */
+    /** {@code parsl_mesh * parsl_mesh_from_streamlines(parsl_context * context, parsl_advection_callback advect, uint32_t first_tick, uint32_t num_ticks, void * userdata)} */
     @NativeType("parsl_mesh *")
     public static @Nullable ParSLMesh parsl_mesh_from_streamlines(@NativeType("parsl_context *") long context, @NativeType("parsl_advection_callback") ParSLAdvectionCallbackI advect, @NativeType("uint32_t") int first_tick, @NativeType("uint32_t") int num_ticks, @NativeType("void *") long userdata) {
         if (CHECKS) {
@@ -110,20 +90,10 @@ public class ParStreamlines {
 
     // --- [ parsl_mesh_from_curves_cubic ] ---
 
-    /** Unsafe version of: {@link #parsl_mesh_from_curves_cubic mesh_from_curves_cubic} */
+    /** {@code parsl_mesh * parsl_mesh_from_curves_cubic(parsl_context * context, parsl_spine_list spines)} */
     public static native long nparsl_mesh_from_curves_cubic(long context, long spines);
 
-    /**
-     * High-level function that tessellates a series of curves into triangles, where each spine is a series of chained cubic Bézier curves.
-     * 
-     * <p>The first curve of each spine is defined by an endpoint, followed by two control points, followed by an endpoint. Every subsequent curve in the spine
-     * is defined by a single control point followed by an endpoint. Only one control point is required because the first control point is computed via
-     * reflection over the endpoint.</p>
-     * 
-     * <p>The number of vertices in each spine should be {@code 4+(n-1)*2} where {@code n} is the number of piecewise curves.</p>
-     * 
-     * <p>Each spine is equivalent to an SVG path that looks like {@code M C S S S}.</p>
-     */
+    /** {@code parsl_mesh * parsl_mesh_from_curves_cubic(parsl_context * context, parsl_spine_list spines)} */
     @NativeType("parsl_mesh *")
     public static @Nullable ParSLMesh parsl_mesh_from_curves_cubic(@NativeType("parsl_context *") long context, @NativeType("parsl_spine_list") ParSLSpineList spines) {
         if (CHECKS) {
@@ -136,19 +106,10 @@ public class ParStreamlines {
 
     // --- [ parsl_mesh_from_curves_quadratic ] ---
 
-    /** Unsafe version of: {@link #parsl_mesh_from_curves_quadratic mesh_from_curves_quadratic} */
+    /** {@code parsl_mesh * parsl_mesh_from_curves_quadratic(parsl_context * context, parsl_spine_list spines)} */
     public static native long nparsl_mesh_from_curves_quadratic(long context, long spines);
 
-    /**
-     * High-level function that tessellates a series of curves into triangles, where each spine is a series of chained quadratic Bézier curves.
-     * 
-     * <p>The first curve of each spine is defined by an endpoint, followed by one control point, followed by an endpoint. Every subsequent curve in the spine is
-     * defined by a single control point followed by an endpoint.</p>
-     * 
-     * <p>The number of vertices in each spine should be {@code 3+(n-1)*2} where {@code n} is the number of piecewise curves.</p>
-     * 
-     * <p>Each spine is equivalent to an SVG path that looks like {@code M Q M Q M Q}.</p>
-     */
+    /** {@code parsl_mesh * parsl_mesh_from_curves_quadratic(parsl_context * context, parsl_spine_list spines)} */
     @NativeType("parsl_mesh *")
     public static @Nullable ParSLMesh parsl_mesh_from_curves_quadratic(@NativeType("parsl_context *") long context, @NativeType("parsl_spine_list") ParSLSpineList spines) {
         if (CHECKS) {

@@ -16,25 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Float offset in two dimensions.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is used for component values that may be real numbers, represented with single-precision floating point. For representing offsets in discrete values, such as texels, the integer variant {@link XrOffset2Di} is used instead.</p>
- * 
- * <p>If used to represent physical distances, values <b>must</b> be in meters.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent2Df}, {@link XrRect2Df}, {@link XrSceneMarkerMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrOffset2Df {
- *     float {@link #x};
- *     float {@link #y};
- * }</code></pre>
+ *     float x;
+ *     float y;
+ * }}</pre>
  */
 public class XrOffset2Df extends Struct<XrOffset2Df> implements NativeResource {
 
@@ -84,14 +70,14 @@ public class XrOffset2Df extends Struct<XrOffset2Df> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the floating-point offset in the x direction. */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** the floating-point offset in the y direction. */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
 
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public XrOffset2Df x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public XrOffset2Df y(float value) { ny(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -281,14 +267,14 @@ public class XrOffset2Df extends Struct<XrOffset2Df> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrOffset2Df#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return XrOffset2Df.nx(address()); }
-        /** @return the value of the {@link XrOffset2Df#y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return XrOffset2Df.ny(address()); }
 
-        /** Sets the specified value to the {@link XrOffset2Df#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public XrOffset2Df.Buffer x(float value) { XrOffset2Df.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link XrOffset2Df#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public XrOffset2Df.Buffer y(float value) { XrOffset2Df.ny(address(), value); return this; }
 
     }

@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC {
  *     unsigned long long offset;
  *     {@link CUDA_ARRAY3D_DESCRIPTOR CUDA_ARRAY3D_DESCRIPTOR} arrayDesc;
  *     unsigned int numLevels;
  *     unsigned int reserved[16];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC extends Struct<CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC> implements NativeResource {
 

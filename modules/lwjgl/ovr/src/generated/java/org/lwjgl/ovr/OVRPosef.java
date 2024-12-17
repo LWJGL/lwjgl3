@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Position and orientation together.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrPosef {
- *     {@link OVRQuatf ovrQuatf} {@link #Orientation};
- *     {@link OVRVector3f ovrVector3f} {@link #Position};
- * }</code></pre>
+ *     {@link OVRQuatf ovrQuatf} Orientation;
+ *     {@link OVRVector3f ovrVector3f} Position;
+ * }}</pre>
  */
 @NativeType("struct ovrPosef")
 public class OVRPosef extends Struct<OVRPosef> implements NativeResource {
@@ -75,20 +71,20 @@ public class OVRPosef extends Struct<OVRPosef> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the pose orientation */
+    /** @return a {@link OVRQuatf} view of the {@code Orientation} field. */
     @NativeType("ovrQuatf")
     public OVRQuatf Orientation() { return nOrientation(address()); }
-    /** the pose position */
+    /** @return a {@link OVRVector3f} view of the {@code Position} field. */
     @NativeType("ovrVector3f")
     public OVRVector3f Position() { return nPosition(address()); }
 
-    /** Copies the specified {@link OVRQuatf} to the {@link #Orientation} field. */
+    /** Copies the specified {@link OVRQuatf} to the {@code Orientation} field. */
     public OVRPosef Orientation(@NativeType("ovrQuatf") OVRQuatf value) { nOrientation(address(), value); return this; }
-    /** Passes the {@link #Orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code Orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRPosef Orientation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(Orientation()); return this; }
-    /** Copies the specified {@link OVRVector3f} to the {@link #Position} field. */
+    /** Copies the specified {@link OVRVector3f} to the {@code Position} field. */
     public OVRPosef Position(@NativeType("ovrVector3f") OVRVector3f value) { nPosition(address(), value); return this; }
-    /** Passes the {@link #Position} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code Position} field to the specified {@link java.util.function.Consumer Consumer}. */
     public OVRPosef Position(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(Position()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,20 +293,20 @@ public class OVRPosef extends Struct<OVRPosef> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link OVRQuatf} view of the {@link OVRPosef#Orientation} field. */
+        /** @return a {@link OVRQuatf} view of the {@code Orientation} field. */
         @NativeType("ovrQuatf")
         public OVRQuatf Orientation() { return OVRPosef.nOrientation(address()); }
-        /** @return a {@link OVRVector3f} view of the {@link OVRPosef#Position} field. */
+        /** @return a {@link OVRVector3f} view of the {@code Position} field. */
         @NativeType("ovrVector3f")
         public OVRVector3f Position() { return OVRPosef.nPosition(address()); }
 
-        /** Copies the specified {@link OVRQuatf} to the {@link OVRPosef#Orientation} field. */
+        /** Copies the specified {@link OVRQuatf} to the {@code Orientation} field. */
         public OVRPosef.Buffer Orientation(@NativeType("ovrQuatf") OVRQuatf value) { OVRPosef.nOrientation(address(), value); return this; }
-        /** Passes the {@link OVRPosef#Orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code Orientation} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRPosef.Buffer Orientation(java.util.function.Consumer<OVRQuatf> consumer) { consumer.accept(Orientation()); return this; }
-        /** Copies the specified {@link OVRVector3f} to the {@link OVRPosef#Position} field. */
+        /** Copies the specified {@link OVRVector3f} to the {@code Position} field. */
         public OVRPosef.Buffer Position(@NativeType("ovrVector3f") OVRVector3f value) { OVRPosef.nPosition(address(), value); return this; }
-        /** Passes the {@link OVRPosef#Position} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code Position} field to the specified {@link java.util.function.Consumer Consumer}. */
         public OVRPosef.Buffer Position(java.util.function.Consumer<OVRVector3f> consumer) { consumer.accept(Position()); return this; }
 
     }

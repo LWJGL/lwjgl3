@@ -16,29 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to sync actions.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_ACTIONS_SYNC_INFO TYPE_ACTIONS_SYNC_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrActiveActionSetPrioritiesEXT}</li>
- * <li>If {@code countActiveActionSets} is not 0, {@code activeActionSets} <b>must</b> be a pointer to an array of {@code countActiveActionSets} valid {@link XrActiveActionSet} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrActiveActionSet}, {@link XR10#xrSyncActions SyncActions}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrActionsSyncInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #countActiveActionSets};
- *     {@link XrActiveActionSet XrActiveActionSet} const * {@link #activeActionSets};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t countActiveActionSets;
+ *     {@link XrActiveActionSet XrActiveActionSet} const * activeActionSets;
+ * }}</pre>
  */
 public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements NativeResource {
 
@@ -94,30 +78,30 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an integer specifying the number of valid elements in the {@code activeActionSets} array. */
+    /** @return the value of the {@code countActiveActionSets} field. */
     @NativeType("uint32_t")
     public int countActiveActionSets() { return ncountActiveActionSets(address()); }
-    /** {@code NULL} or a pointer to an array of one or more {@link XrActiveActionSet} structures that should be synchronized. */
+    /** @return a {@link XrActiveActionSet.Buffer} view of the struct array pointed to by the {@code activeActionSets} field. */
     @NativeType("XrActiveActionSet const *")
     public XrActiveActionSet.@Nullable Buffer activeActionSets() { return nactiveActionSets(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrActionsSyncInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_ACTIONS_SYNC_INFO TYPE_ACTIONS_SYNC_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_ACTIONS_SYNC_INFO TYPE_ACTIONS_SYNC_INFO} value to the {@code type} field. */
     public XrActionsSyncInfo type$Default() { return type(XR10.XR_TYPE_ACTIONS_SYNC_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrActionsSyncInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrActiveActionSetPrioritiesEXT} value to the {@code next} chain. */
     public XrActionsSyncInfo next(XrActiveActionSetPrioritiesEXT value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #countActiveActionSets} field. */
+    /** Sets the specified value to the {@code countActiveActionSets} field. */
     public XrActionsSyncInfo countActiveActionSets(@NativeType("uint32_t") int value) { ncountActiveActionSets(address(), value); return this; }
-    /** Sets the address of the specified {@link XrActiveActionSet.Buffer} to the {@link #activeActionSets} field. */
+    /** Sets the address of the specified {@link XrActiveActionSet.Buffer} to the {@code activeActionSets} field. */
     public XrActionsSyncInfo activeActionSets(@NativeType("XrActiveActionSet const *") XrActiveActionSet.@Nullable Buffer value) { nactiveActionSets(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,30 +303,30 @@ public class XrActionsSyncInfo extends Struct<XrActionsSyncInfo> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrActionsSyncInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrActionsSyncInfo.ntype(address()); }
-        /** @return the value of the {@link XrActionsSyncInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrActionsSyncInfo.nnext(address()); }
-        /** @return the value of the {@link XrActionsSyncInfo#countActiveActionSets} field. */
+        /** @return the value of the {@code countActiveActionSets} field. */
         @NativeType("uint32_t")
         public int countActiveActionSets() { return XrActionsSyncInfo.ncountActiveActionSets(address()); }
-        /** @return a {@link XrActiveActionSet.Buffer} view of the struct array pointed to by the {@link XrActionsSyncInfo#activeActionSets} field. */
+        /** @return a {@link XrActiveActionSet.Buffer} view of the struct array pointed to by the {@code activeActionSets} field. */
         @NativeType("XrActiveActionSet const *")
         public XrActiveActionSet.@Nullable Buffer activeActionSets() { return XrActionsSyncInfo.nactiveActionSets(address()); }
 
-        /** Sets the specified value to the {@link XrActionsSyncInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrActionsSyncInfo.Buffer type(@NativeType("XrStructureType") int value) { XrActionsSyncInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_ACTIONS_SYNC_INFO TYPE_ACTIONS_SYNC_INFO} value to the {@link XrActionsSyncInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_ACTIONS_SYNC_INFO TYPE_ACTIONS_SYNC_INFO} value to the {@code type} field. */
         public XrActionsSyncInfo.Buffer type$Default() { return type(XR10.XR_TYPE_ACTIONS_SYNC_INFO); }
-        /** Sets the specified value to the {@link XrActionsSyncInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrActionsSyncInfo.Buffer next(@NativeType("void const *") long value) { XrActionsSyncInfo.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrActiveActionSetPrioritiesEXT} value to the {@code next} chain. */
         public XrActionsSyncInfo.Buffer next(XrActiveActionSetPrioritiesEXT value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrActionsSyncInfo#countActiveActionSets} field. */
+        /** Sets the specified value to the {@code countActiveActionSets} field. */
         public XrActionsSyncInfo.Buffer countActiveActionSets(@NativeType("uint32_t") int value) { XrActionsSyncInfo.ncountActiveActionSets(address(), value); return this; }
-        /** Sets the address of the specified {@link XrActiveActionSet.Buffer} to the {@link XrActionsSyncInfo#activeActionSets} field. */
+        /** Sets the address of the specified {@link XrActiveActionSet.Buffer} to the {@code activeActionSets} field. */
         public XrActionsSyncInfo.Buffer activeActionSets(@NativeType("XrActiveActionSet const *") XrActiveActionSet.@Nullable Buffer value) { XrActionsSyncInfo.nactiveActionSets(address(), value); return this; }
 
     }

@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH265SliceSegmentHeaderFlags {
  *     uint32_t first_slice_segment_in_pic_flag : 1;
  *     uint32_t dependent_slice_segment_flag : 1;
@@ -33,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t collocated_from_l0_flag : 1;
  *     uint32_t slice_loop_filter_across_slices_enabled_flag : 1;
  *     uint32_t reserved : 20;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH265SliceSegmentHeaderFlags extends Struct<StdVideoEncodeH265SliceSegmentHeaderFlags> implements NativeResource {
 

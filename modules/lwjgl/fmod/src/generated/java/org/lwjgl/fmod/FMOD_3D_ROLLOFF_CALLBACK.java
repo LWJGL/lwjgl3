@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     FMOD_CHANNELCONTROL *channelcontrol,
- *     float distance
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_3D_ROLLOFF_CALLBACK} */
 public abstract class FMOD_3D_ROLLOFF_CALLBACK extends Callback implements FMOD_3D_ROLLOFF_CALLBACKI {
 
     /**

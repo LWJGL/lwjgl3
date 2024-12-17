@@ -5,44 +5,14 @@
  */
 package org.lwjgl.opencl;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/intel/cl_intel_command_queue_families.txt">intel_command_queue_families</a> extension.
- * 
- * <p>Some OpenCL devices may support different sets of command queues with different capabilities or execution properties. These sets are described in this
- * extension as command queue families. Applications may be able to improve performance or predictability by creating command queues from a specific
- * command queue family.</p>
- * 
- * <p>This extension adds the ability to:</p>
- * 
- * <ul>
- * <li>Query the command queue families supported by an OpenCL device and their capabilities.</li>
- * <li>Create an OpenCL command queue from a specific command queue family.</li>
- * <li>Query the command queue family and command queue index associated with an OpenCL command queue.</li>
- * </ul>
- * 
- * <p>Requires {@link CL20 CL20}.</p>
- */
 public final class INTELCommandQueueFamilies {
 
-    /**
-     * Accepted value for the {@code param_name} parameter to {@link CL10#clGetDeviceInfo GetDeviceInfo} to query the number of command queue families and command queue family
-     * properties supported by an OpenCL device.
-     */
     public static final int CL_DEVICE_QUEUE_FAMILY_PROPERTIES_INTEL = 0x418B;
 
-    /**
-     * Accepted as a property name for the {@code properties} parameter to {@link CL20#clCreateCommandQueueWithProperties CreateCommandQueueWithProperties} to specify the command queue family and command
-     * queue index that this command queue should submit work to; and for the {@code param_name} parameter to {@link CL10#clGetCommandQueueInfo GetCommandQueueInfo} to query the command
-     * queue family or command queue index associated with a command queue.
-     */
     public static final int
         CL_QUEUE_FAMILY_INTEL = 0x418C,
         CL_QUEUE_INDEX_INTEL  = 0x418D;
 
-    /**
-     * Bitfield type describing the capabilities of the queues in a command queue family. Subsequent versions of this extension may add additional queue
-     * capabilities.
-     */
     public static final int
         CL_QUEUE_DEFAULT_CAPABILITIES_INTEL                    = 0,
         CL_QUEUE_CAPABILITY_CREATE_SINGLE_QUEUE_EVENTS_INTEL   = (1 << 0),

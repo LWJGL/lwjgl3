@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * XrEnvironmentDepthHandRemovalSetInfoMETA.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure contains options passed to {@link METAEnvironmentDepth#xrSetEnvironmentDepthHandRemovalMETA SetEnvironmentDepthHandRemovalMETA}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAEnvironmentDepth XR_META_environment_depth} extension <b>must</b> be enabled prior to using {@link XrEnvironmentDepthHandRemovalSetInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAEnvironmentDepth#xrSetEnvironmentDepthHandRemovalMETA SetEnvironmentDepthHandRemovalMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEnvironmentDepthHandRemovalSetInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrBool32 {@link #enabled};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrBool32 enabled;
+ * }}</pre>
  */
 public class XrEnvironmentDepthHandRemovalSetInfoMETA extends Struct<XrEnvironmentDepthHandRemovalSetInfoMETA> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class XrEnvironmentDepthHandRemovalSetInfoMETA extends Struct<XrEnvironme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** {@link XR10#XR_TRUE TRUE} or {@link XR10#XR_FALSE FALSE} to enable/disable hand removal from the depth map, respectively. */
+    /** @return the value of the {@code enabled} field. */
     @NativeType("XrBool32")
     public boolean enabled() { return nenabled(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEnvironmentDepthHandRemovalSetInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META} value to the {@code type} field. */
     public XrEnvironmentDepthHandRemovalSetInfoMETA type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEnvironmentDepthHandRemovalSetInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #enabled} field. */
+    /** Sets the specified value to the {@code enabled} field. */
     public XrEnvironmentDepthHandRemovalSetInfoMETA enabled(@NativeType("XrBool32") boolean value) { nenabled(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,23 +286,23 @@ public class XrEnvironmentDepthHandRemovalSetInfoMETA extends Struct<XrEnvironme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEnvironmentDepthHandRemovalSetInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEnvironmentDepthHandRemovalSetInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthHandRemovalSetInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEnvironmentDepthHandRemovalSetInfoMETA.nnext(address()); }
-        /** @return the value of the {@link XrEnvironmentDepthHandRemovalSetInfoMETA#enabled} field. */
+        /** @return the value of the {@code enabled} field. */
         @NativeType("XrBool32")
         public boolean enabled() { return XrEnvironmentDepthHandRemovalSetInfoMETA.nenabled(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrEnvironmentDepthHandRemovalSetInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEnvironmentDepthHandRemovalSetInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEnvironmentDepthHandRemovalSetInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META} value to the {@link XrEnvironmentDepthHandRemovalSetInfoMETA#type} field. */
+        /** Sets the {@link METAEnvironmentDepth#XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META} value to the {@code type} field. */
         public XrEnvironmentDepthHandRemovalSetInfoMETA.Buffer type$Default() { return type(METAEnvironmentDepth.XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META); }
-        /** Sets the specified value to the {@link XrEnvironmentDepthHandRemovalSetInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEnvironmentDepthHandRemovalSetInfoMETA.Buffer next(@NativeType("void const *") long value) { XrEnvironmentDepthHandRemovalSetInfoMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEnvironmentDepthHandRemovalSetInfoMETA#enabled} field. */
+        /** Sets the specified value to the {@code enabled} field. */
         public XrEnvironmentDepthHandRemovalSetInfoMETA.Buffer enabled(@NativeType("XrBool32") boolean value) { XrEnvironmentDepthHandRemovalSetInfoMETA.nenabled(address(), value ? 1 : 0); return this; }
 
     }

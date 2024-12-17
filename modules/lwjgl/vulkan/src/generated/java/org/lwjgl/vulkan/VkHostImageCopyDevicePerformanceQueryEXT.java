@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkHostImageCopyDevicePerformanceQuery}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkHostImageCopyDevicePerformanceQueryEXT {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 optimalDeviceAccess;
  *     VkBool32 identicalMemoryLayout;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkHostImageCopyDevicePerformanceQueryEXT extends VkHostImageCopyDevicePerformanceQuery {
 

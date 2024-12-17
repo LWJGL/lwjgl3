@@ -16,44 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying descriptor buffer address info.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code address} is not zero, and the descriptor is of type {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} or {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER}, then {@code format} <b>must</b> not be {@link VK10#VK_FORMAT_UNDEFINED FORMAT_UNDEFINED}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is not enabled, {@code address} <b>must</b> not be zero</li>
- * <li>If {@code address} is zero, {@code range} <b>must</b> be {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}</li>
- * <li>If {@code address} is not zero, {@code range} <b>must</b> not be {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}</li>
- * <li>If {@code address} is not zero, {@code address} <b>must</b> be a valid device address at an offset within a {@code VkBuffer}</li>
- * <li>{@code range} <b>must</b> be less than or equal to the size of the buffer containing {@code address} minus the offset of {@code address} from the base address of the buffer</li>
- * <li>{@code range} <b>must</b> not be zero</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code format} <b>must</b> be a valid {@code VkFormat} value</li>
- * </ul>
- * 
- * <p>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-nullDescriptor">{@code nullDescriptor}</a> feature is enabled, {@code address} <b>can</b> be zero. Loads from a null descriptor return zero values and stores and atomics to a null descriptor are discarded.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDescriptorDataEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorAddressInfoEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkDeviceAddress {@link #address$ address};
- *     VkDeviceSize {@link #range};
- *     VkFormat {@link #format};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkDeviceAddress address;
+ *     VkDeviceSize range;
+ *     VkFormat format;
+ * }}</pre>
  */
 public class VkDescriptorAddressInfoEXT extends Struct<VkDescriptorAddressInfoEXT> implements NativeResource {
 
@@ -112,33 +82,33 @@ public class VkDescriptorAddressInfoEXT extends Struct<VkDescriptorAddressInfoEX
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** either 0 or a device address at an offset in a buffer, where the base address can be queried from {@link VK12#vkGetBufferDeviceAddress GetBufferDeviceAddress}. */
+    /** @return the value of the {@code address} field. */
     @NativeType("VkDeviceAddress")
     public long address$() { return naddress$(address()); }
-    /** the size in bytes of the buffer or buffer view used by the descriptor. */
+    /** @return the value of the {@code range} field. */
     @NativeType("VkDeviceSize")
     public long range() { return nrange(address()); }
-    /** the format of the data elements in the buffer view and is ignored for buffers. */
+    /** @return the value of the {@code format} field. */
     @NativeType("VkFormat")
     public int format() { return nformat(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDescriptorAddressInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT} value to the {@code sType} field. */
     public VkDescriptorAddressInfoEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorAddressInfoEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #address$} field. */
+    /** Sets the specified value to the {@code address} field. */
     public VkDescriptorAddressInfoEXT address$(@NativeType("VkDeviceAddress") long value) { naddress$(address(), value); return this; }
-    /** Sets the specified value to the {@link #range} field. */
+    /** Sets the specified value to the {@code range} field. */
     public VkDescriptorAddressInfoEXT range(@NativeType("VkDeviceSize") long value) { nrange(address(), value); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkDescriptorAddressInfoEXT format(@NativeType("VkFormat") int value) { nformat(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,33 +316,33 @@ public class VkDescriptorAddressInfoEXT extends Struct<VkDescriptorAddressInfoEX
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorAddressInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorAddressInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDescriptorAddressInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkDescriptorAddressInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDescriptorAddressInfoEXT#address$} field. */
+        /** @return the value of the {@code address} field. */
         @NativeType("VkDeviceAddress")
         public long address$() { return VkDescriptorAddressInfoEXT.naddress$(address()); }
-        /** @return the value of the {@link VkDescriptorAddressInfoEXT#range} field. */
+        /** @return the value of the {@code range} field. */
         @NativeType("VkDeviceSize")
         public long range() { return VkDescriptorAddressInfoEXT.nrange(address()); }
-        /** @return the value of the {@link VkDescriptorAddressInfoEXT#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("VkFormat")
         public int format() { return VkDescriptorAddressInfoEXT.nformat(address()); }
 
-        /** Sets the specified value to the {@link VkDescriptorAddressInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDescriptorAddressInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorAddressInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT} value to the {@link VkDescriptorAddressInfoEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT} value to the {@code sType} field. */
         public VkDescriptorAddressInfoEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDescriptorAddressInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorAddressInfoEXT.Buffer pNext(@NativeType("void *") long value) { VkDescriptorAddressInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorAddressInfoEXT#address$} field. */
+        /** Sets the specified value to the {@code address} field. */
         public VkDescriptorAddressInfoEXT.Buffer address$(@NativeType("VkDeviceAddress") long value) { VkDescriptorAddressInfoEXT.naddress$(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorAddressInfoEXT#range} field. */
+        /** Sets the specified value to the {@code range} field. */
         public VkDescriptorAddressInfoEXT.Buffer range(@NativeType("VkDeviceSize") long value) { VkDescriptorAddressInfoEXT.nrange(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorAddressInfoEXT#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkDescriptorAddressInfoEXT.Buffer format(@NativeType("VkFormat") int value) { VkDescriptorAddressInfoEXT.nformat(address(), value); return this; }
 
     }

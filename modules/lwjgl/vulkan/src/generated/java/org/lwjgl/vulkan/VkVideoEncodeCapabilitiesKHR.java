@@ -16,50 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing general video encode capabilities for a video profile.
- * 
- * <h5>Description</h5>
- * 
- * <p>Implementations <b>must</b> include support for at least {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR VIDEO_ENCODE_FEEDBACK_BITSTREAM_BUFFER_OFFSET_BIT_KHR} and {@link KHRVideoEncodeQueue#VK_VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR VIDEO_ENCODE_FEEDBACK_BITSTREAM_BYTES_WRITTEN_BIT_KHR} in {@code supportedEncodeFeedbackFlags}.</p>
- * 
- * <p>{@code encodeInputPictureGranularity} provides information about the way <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-input-picture">encode input picture</a> data is used as input to video encode operations. In particular, some implementations <b>may</b> not be able to limit the set of texels used to encode the output video bitstream to the image subregion specified in the {@link VkVideoPictureResourceInfoKHR} structure corresponding to the encode input picture (i.e. to the resolution of the image data to encode specified in its {@code codedExtent} member).</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>For example, the application requests the coded extent to be 1920x1080, but the implementation is only able to source the encode input picture data at the granularity of the codec-specific coding block size which is 16x16 pixels (or as otherwise indicated in {@code encodeInputPictureGranularity}). In this example, the content is horizontally aligned with the coding block size, but not vertically aligned with it. Thus encoding of the last row of coding blocks will be impacted by the contents of the input image at texel rows 1080 to 1087 (the latter being the next row which is vertically aligned with the coding block size, assuming a zero-based texel row index).</p>
- * </div>
- * 
- * <p>If {@code codedExtent} rounded up to the next integer multiple of {@code encodeInputPictureGranularity} is greater than the extent of the image subresource specified for the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-input-picture">encode input picture</a>, then the texel values corresponding to texel coordinates outside of the bounds of the image subresource <b>may</b> be undefined. However, implementations <b>should</b> use well-defined default values for such texels in order to maximize the encoding efficiency for the last coding block row/column, and/or to ensure consistent encoding results across repeated encoding of the same input content. Nonetheless, the values used for such texels <b>must</b> not have an effect on whether the video encode operation produces a compliant bitstream, and <b>must</b> not have any other effects on the encoded picture data beyond what <b>may</b> otherwise result from using these texel values as input to any compression algorithm, as defined in the used video compression standard.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>While not required, it is generally a good practice for applications to make sure that the image subresource used for the encode input picture has an extent that is an integer multiple of the codec-specific coding block size (or at least {@code encodeInputPictureGranularity}) and that this padding area is filled with known values in order to improve encoding efficiency, portability, and reproducibility.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeCapabilitiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkVideoEncodeCapabilityFlagsKHR {@link #flags};
- *     VkVideoEncodeRateControlModeFlagsKHR {@link #rateControlModes};
- *     uint32_t {@link #maxRateControlLayers};
- *     uint64_t {@link #maxBitrate};
- *     uint32_t {@link #maxQualityLevels};
- *     {@link VkExtent2D VkExtent2D} {@link #encodeInputPictureGranularity};
- *     VkVideoEncodeFeedbackFlagsKHR {@link #supportedEncodeFeedbackFlags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkVideoEncodeCapabilityFlagsKHR flags;
+ *     VkVideoEncodeRateControlModeFlagsKHR rateControlModes;
+ *     uint32_t maxRateControlLayers;
+ *     uint64_t maxBitrate;
+ *     uint32_t maxQualityLevels;
+ *     {@link VkExtent2D VkExtent2D} encodeInputPictureGranularity;
+ *     VkVideoEncodeFeedbackFlagsKHR supportedEncodeFeedbackFlags;
+ * }}</pre>
  */
 public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabilitiesKHR> implements NativeResource {
 
@@ -130,38 +98,38 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabiliti
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoEncodeCapabilityFlagBitsKHR} describing supported encoding features. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkVideoEncodeCapabilityFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** a bitmask of {@code VkVideoEncodeRateControlModeFlagBitsKHR} indicating supported <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-modes">rate control modes</a>. */
+    /** @return the value of the {@code rateControlModes} field. */
     @NativeType("VkVideoEncodeRateControlModeFlagsKHR")
     public int rateControlModes() { return nrateControlModes(address()); }
-    /** indicates the maximum number of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-rate-control-layers">rate control layers</a> supported. */
+    /** @return the value of the {@code maxRateControlLayers} field. */
     @NativeType("uint32_t")
     public int maxRateControlLayers() { return nmaxRateControlLayers(address()); }
-    /** indicates the maximum supported bitrate. */
+    /** @return the value of the {@code maxBitrate} field. */
     @NativeType("uint64_t")
     public long maxBitrate() { return nmaxBitrate(address()); }
-    /** indicates the number of discrete <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-quality-level">video encode quality levels</a> supported. Implementations <b>must</b> support at least one quality level. */
+    /** @return the value of the {@code maxQualityLevels} field. */
     @NativeType("uint32_t")
     public int maxQualityLevels() { return nmaxQualityLevels(address()); }
-    /** indicates the granularity at which <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-input-picture">encode input picture</a> data is encoded and <b>may</b> indicate a texel granularity up to the size of the largest supported codec-specific coding block. This capability does not impose any valid usage constraints on the application, however, depending on the contents of the encode input picture, it <b>may</b> have effects on the encoded bitstream, as described in more detail below. */
+    /** @return a {@link VkExtent2D} view of the {@code encodeInputPictureGranularity} field. */
     public VkExtent2D encodeInputPictureGranularity() { return nencodeInputPictureGranularity(address()); }
-    /** a bitmask of {@code VkVideoEncodeFeedbackFlagBitsKHR} values specifying the supported flags for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#queries-video-encode-feedback">video encode feedback queries</a>. */
+    /** @return the value of the {@code supportedEncodeFeedbackFlags} field. */
     @NativeType("VkVideoEncodeFeedbackFlagsKHR")
     public int supportedEncodeFeedbackFlags() { return nsupportedEncodeFeedbackFlags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeCapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR} value to the {@code sType} field. */
     public VkVideoEncodeCapabilitiesKHR sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeCapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -365,38 +333,38 @@ public class VkVideoEncodeCapabilitiesKHR extends Struct<VkVideoEncodeCapabiliti
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeCapabilitiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoEncodeCapabilitiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkVideoEncodeCapabilityFlagsKHR")
         public int flags() { return VkVideoEncodeCapabilitiesKHR.nflags(address()); }
-        /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#rateControlModes} field. */
+        /** @return the value of the {@code rateControlModes} field. */
         @NativeType("VkVideoEncodeRateControlModeFlagsKHR")
         public int rateControlModes() { return VkVideoEncodeCapabilitiesKHR.nrateControlModes(address()); }
-        /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#maxRateControlLayers} field. */
+        /** @return the value of the {@code maxRateControlLayers} field. */
         @NativeType("uint32_t")
         public int maxRateControlLayers() { return VkVideoEncodeCapabilitiesKHR.nmaxRateControlLayers(address()); }
-        /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#maxBitrate} field. */
+        /** @return the value of the {@code maxBitrate} field. */
         @NativeType("uint64_t")
         public long maxBitrate() { return VkVideoEncodeCapabilitiesKHR.nmaxBitrate(address()); }
-        /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#maxQualityLevels} field. */
+        /** @return the value of the {@code maxQualityLevels} field. */
         @NativeType("uint32_t")
         public int maxQualityLevels() { return VkVideoEncodeCapabilitiesKHR.nmaxQualityLevels(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkVideoEncodeCapabilitiesKHR#encodeInputPictureGranularity} field. */
+        /** @return a {@link VkExtent2D} view of the {@code encodeInputPictureGranularity} field. */
         public VkExtent2D encodeInputPictureGranularity() { return VkVideoEncodeCapabilitiesKHR.nencodeInputPictureGranularity(address()); }
-        /** @return the value of the {@link VkVideoEncodeCapabilitiesKHR#supportedEncodeFeedbackFlags} field. */
+        /** @return the value of the {@code supportedEncodeFeedbackFlags} field. */
         @NativeType("VkVideoEncodeFeedbackFlagsKHR")
         public int supportedEncodeFeedbackFlags() { return VkVideoEncodeCapabilitiesKHR.nsupportedEncodeFeedbackFlags(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeCapabilitiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeCapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeCapabilitiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR} value to the {@link VkVideoEncodeCapabilitiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeQueue#VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR} value to the {@code sType} field. */
         public VkVideoEncodeCapabilitiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeQueue.VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeCapabilitiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeCapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeCapabilitiesKHR.npNext(address(), value); return this; }
 
     }

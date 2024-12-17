@@ -17,16 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A set of symbols that share dependencies.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LLVMOrcCSymbolDependenceGroup {
  *     {@link LLVMOrcCSymbolsList LLVMOrcCSymbolsList} Symbols;
  *     {@link LLVMOrcCDependenceMapPair LLVMOrcCDependenceMapPair}s Dependencies;
  *     size_t NumDependencies;
- * }</code></pre>
+ * }}</pre>
  */
 public class LLVMOrcCSymbolDependenceGroup extends Struct<LLVMOrcCSymbolDependenceGroup> implements NativeResource {
 

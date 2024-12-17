@@ -14,18 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code PaintRadialGradient} value of the {@code COLR} v1 extensions.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintRadialGradient {
  *     {@link FT_ColorLine FT_ColorLine} colorline;
  *     {@link FT_Vector FT_Vector} c0;
  *     FT_Pos r0;
  *     {@link FT_Vector FT_Vector} c1;
  *     FT_Pos r1;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintRadialGradient extends Struct<FT_PaintRadialGradient> {
 

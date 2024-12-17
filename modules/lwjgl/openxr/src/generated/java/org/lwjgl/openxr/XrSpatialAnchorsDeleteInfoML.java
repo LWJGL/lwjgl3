@@ -17,31 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure used to list the anchors that need to be deleted.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsDeleteInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} {@link XrUuidEXT} structures</li>
- * <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrUuidEXT}, {@link MLSpatialAnchorsStorage#xrDeleteSpatialAnchorsAsyncML DeleteSpatialAnchorsAsyncML}, {@link MLSpatialAnchorsStorage#xrDeleteSpatialAnchorsCompleteML DeleteSpatialAnchorsCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsDeleteInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #uuidCount};
- *     {@link XrUuidEXT XrUuidEXT} const * {@link #uuids};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t uuidCount;
+ *     {@link XrUuidEXT XrUuidEXT} const * uuids;
+ * }}</pre>
  */
 public class XrSpatialAnchorsDeleteInfoML extends Struct<XrSpatialAnchorsDeleteInfoML> implements NativeResource {
 
@@ -97,26 +79,26 @@ public class XrSpatialAnchorsDeleteInfoML extends Struct<XrSpatialAnchorsDeleteI
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of UUIDs in the {@code uuids} array. */
+    /** @return the value of the {@code uuidCount} field. */
     @NativeType("uint32_t")
     public int uuidCount() { return nuuidCount(address()); }
-    /** an array of {@link XrUuidEXT}. */
+    /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
     @NativeType("XrUuidEXT const *")
     public XrUuidEXT.Buffer uuids() { return nuuids(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsDeleteInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML} value to the {@code type} field. */
     public XrSpatialAnchorsDeleteInfoML type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsDeleteInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link #uuids} field. */
+    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
     public XrSpatialAnchorsDeleteInfoML uuids(@NativeType("XrUuidEXT const *") XrUuidEXT.Buffer value) { nuuids(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,26 +307,26 @@ public class XrSpatialAnchorsDeleteInfoML extends Struct<XrSpatialAnchorsDeleteI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsDeleteInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsDeleteInfoML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsDeleteInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorsDeleteInfoML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsDeleteInfoML#uuidCount} field. */
+        /** @return the value of the {@code uuidCount} field. */
         @NativeType("uint32_t")
         public int uuidCount() { return XrSpatialAnchorsDeleteInfoML.nuuidCount(address()); }
-        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@link XrSpatialAnchorsDeleteInfoML#uuids} field. */
+        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
         @NativeType("XrUuidEXT const *")
         public XrUuidEXT.Buffer uuids() { return XrSpatialAnchorsDeleteInfoML.nuuids(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsDeleteInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsDeleteInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsDeleteInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML} value to the {@link XrSpatialAnchorsDeleteInfoML#type} field. */
+        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML} value to the {@code type} field. */
         public XrSpatialAnchorsDeleteInfoML.Buffer type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsDeleteInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsDeleteInfoML.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorsDeleteInfoML.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link XrSpatialAnchorsDeleteInfoML#uuids} field. */
+        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
         public XrSpatialAnchorsDeleteInfoML.Buffer uuids(@NativeType("XrUuidEXT const *") XrUuidEXT.Buffer value) { XrSpatialAnchorsDeleteInfoML.nuuids(address(), value); return this; }
 
     }

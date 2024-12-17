@@ -17,37 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct containing view locate information.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrViewLocateInfo} structure contains the display time and space used to locate the view {@link XrView} structures.</p>
- * 
- * <p>The runtime <b>must</b> return error {@link XR10#XR_ERROR_VIEW_CONFIGURATION_TYPE_UNSUPPORTED ERROR_VIEW_CONFIGURATION_TYPE_UNSUPPORTED} if the given {@code viewConfigurationType} is not one of the supported type reported by {@link XR10#xrEnumerateViewConfigurations EnumerateViewConfigurations}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrViewLocateFoveatedRenderingVARJO}</li>
- * <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
- * <li>{@code space} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrView}, {@link XrViewState}, {@link XR10#xrLocateViews LocateViews}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrViewLocateInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrViewConfigurationType {@link #viewConfigurationType};
- *     XrTime {@link #displayTime};
- *     XrSpace {@link #space};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrViewConfigurationType viewConfigurationType;
+ *     XrTime displayTime;
+ *     XrSpace space;
+ * }}</pre>
  */
 public class XrViewLocateInfo extends Struct<XrViewLocateInfo> implements NativeResource {
 
@@ -106,35 +83,35 @@ public class XrViewLocateInfo extends Struct<XrViewLocateInfo> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** {@code XrViewConfigurationType} to query for. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
-    /** the time for which the view poses are predicted. */
+    /** @return the value of the {@code displayTime} field. */
     @NativeType("XrTime")
     public long displayTime() { return ndisplayTime(address()); }
-    /** the {@code XrSpace} in which the {@code pose} in each {@link XrView} is expressed. */
+    /** @return the value of the {@code space} field. */
     @NativeType("XrSpace")
     public long space() { return nspace(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrViewLocateInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO} value to the {@code type} field. */
     public XrViewLocateInfo type$Default() { return type(XR10.XR_TYPE_VIEW_LOCATE_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrViewLocateInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrViewLocateFoveatedRenderingVARJO} value to the {@code next} chain. */
     public XrViewLocateInfo next(XrViewLocateFoveatedRenderingVARJO value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #viewConfigurationType} field. */
+    /** Sets the specified value to the {@code viewConfigurationType} field. */
     public XrViewLocateInfo viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { nviewConfigurationType(address(), value); return this; }
-    /** Sets the specified value to the {@link #displayTime} field. */
+    /** Sets the specified value to the {@code displayTime} field. */
     public XrViewLocateInfo displayTime(@NativeType("XrTime") long value) { ndisplayTime(address(), value); return this; }
-    /** Sets the specified value to the {@link #space} field. */
+    /** Sets the specified value to the {@code space} field. */
     public XrViewLocateInfo space(XrSpace value) { nspace(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -351,35 +328,35 @@ public class XrViewLocateInfo extends Struct<XrViewLocateInfo> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrViewLocateInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrViewLocateInfo.ntype(address()); }
-        /** @return the value of the {@link XrViewLocateInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrViewLocateInfo.nnext(address()); }
-        /** @return the value of the {@link XrViewLocateInfo#viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrViewLocateInfo.nviewConfigurationType(address()); }
-        /** @return the value of the {@link XrViewLocateInfo#displayTime} field. */
+        /** @return the value of the {@code displayTime} field. */
         @NativeType("XrTime")
         public long displayTime() { return XrViewLocateInfo.ndisplayTime(address()); }
-        /** @return the value of the {@link XrViewLocateInfo#space} field. */
+        /** @return the value of the {@code space} field. */
         @NativeType("XrSpace")
         public long space() { return XrViewLocateInfo.nspace(address()); }
 
-        /** Sets the specified value to the {@link XrViewLocateInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrViewLocateInfo.Buffer type(@NativeType("XrStructureType") int value) { XrViewLocateInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO} value to the {@link XrViewLocateInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_VIEW_LOCATE_INFO TYPE_VIEW_LOCATE_INFO} value to the {@code type} field. */
         public XrViewLocateInfo.Buffer type$Default() { return type(XR10.XR_TYPE_VIEW_LOCATE_INFO); }
-        /** Sets the specified value to the {@link XrViewLocateInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrViewLocateInfo.Buffer next(@NativeType("void const *") long value) { XrViewLocateInfo.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrViewLocateFoveatedRenderingVARJO} value to the {@code next} chain. */
         public XrViewLocateInfo.Buffer next(XrViewLocateFoveatedRenderingVARJO value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrViewLocateInfo#viewConfigurationType} field. */
+        /** Sets the specified value to the {@code viewConfigurationType} field. */
         public XrViewLocateInfo.Buffer viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { XrViewLocateInfo.nviewConfigurationType(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewLocateInfo#displayTime} field. */
+        /** Sets the specified value to the {@code displayTime} field. */
         public XrViewLocateInfo.Buffer displayTime(@NativeType("XrTime") long value) { XrViewLocateInfo.ndisplayTime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrViewLocateInfo#space} field. */
+        /** Sets the specified value to the {@code space} field. */
         public XrViewLocateInfo.Buffer space(XrSpace value) { XrViewLocateInfo.nspace(address(), value); return this; }
 
     }

@@ -15,17 +15,6 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/EXT/EGL_EXT_device_base.txt">EXT_device_base</a> extension.
- * 
- * <p>Increasingly, EGL and its client APIs are being used in place of "native" rendering APIs to implement the basic graphics functionality of native
- * windowing systems. This creates demand for a method to initialize EGL displays and surfaces directly on top of native GPU or device objects rather than
- * native window system objects. The mechanics of enumerating the underlying native devices and constructing EGL displays and surfaces from them have been
- * solved in various platform and implementation- specific ways. The EGL device family of extensions offers a standardized framework for bootstrapping EGL
- * without the use of any underlying "native" APIs or functionality.</p>
- * 
- * <p>This extension defines the first step of this bootstrapping process: Device enumeration.</p>
- */
 public class EXTDeviceBase {
 
     public static final int
@@ -40,10 +29,12 @@ public class EXTDeviceBase {
 
     // --- [ eglQueryDeviceAttribEXT ] ---
 
+    /** {@code EGLBoolean eglQueryDeviceAttribEXT(EGLDeviceEXT device, EGLint attribute, EGLAttrib * value)} */
     public static int neglQueryDeviceAttribEXT(long device, int attribute, long value) {
         return EXTDeviceQuery.neglQueryDeviceAttribEXT(device, attribute, value);
     }
 
+    /** {@code EGLBoolean eglQueryDeviceAttribEXT(EGLDeviceEXT device, EGLint attribute, EGLAttrib * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryDeviceAttribEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int attribute, @NativeType("EGLAttrib *") PointerBuffer value) {
         return EXTDeviceQuery.eglQueryDeviceAttribEXT(device, attribute, value);
@@ -51,10 +42,12 @@ public class EXTDeviceBase {
 
     // --- [ eglQueryDeviceStringEXT ] ---
 
+    /** {@code char * eglQueryDeviceStringEXT(EGLDeviceEXT device, EGLint name)} */
     public static long neglQueryDeviceStringEXT(long device, int name) {
         return EXTDeviceQuery.neglQueryDeviceStringEXT(device, name);
     }
 
+    /** {@code char * eglQueryDeviceStringEXT(EGLDeviceEXT device, EGLint name)} */
     @NativeType("char *")
     public static @Nullable String eglQueryDeviceStringEXT(@NativeType("EGLDeviceEXT") long device, @NativeType("EGLint") int name) {
         return EXTDeviceQuery.eglQueryDeviceStringEXT(device, name);
@@ -62,10 +55,12 @@ public class EXTDeviceBase {
 
     // --- [ eglQueryDisplayAttribEXT ] ---
 
+    /** {@code EGLBoolean eglQueryDisplayAttribEXT(EGLDisplay dpy, EGLint attribute, EGLAttrib * value)} */
     public static int neglQueryDisplayAttribEXT(long dpy, int attribute, long value) {
         return EXTDeviceQuery.neglQueryDisplayAttribEXT(dpy, attribute, value);
     }
 
+    /** {@code EGLBoolean eglQueryDisplayAttribEXT(EGLDisplay dpy, EGLint attribute, EGLAttrib * value)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryDisplayAttribEXT(@NativeType("EGLDisplay") long dpy, @NativeType("EGLint") int attribute, @NativeType("EGLAttrib *") PointerBuffer value) {
         return EXTDeviceQuery.eglQueryDisplayAttribEXT(dpy, attribute, value);
@@ -73,16 +68,18 @@ public class EXTDeviceBase {
 
     // --- [ eglQueryDevicesEXT ] ---
 
+    /** {@code EGLBoolean eglQueryDevicesEXT(EGLint max_devices, EGLDeviceEXT * devices, EGLint * num_devices)} */
     public static int neglQueryDevicesEXT(int max_devices, long devices, long num_devices) {
         return EXTDeviceEnumeration.neglQueryDevicesEXT(max_devices, devices, num_devices);
     }
 
+    /** {@code EGLBoolean eglQueryDevicesEXT(EGLint max_devices, EGLDeviceEXT * devices, EGLint * num_devices)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryDevicesEXT(@NativeType("EGLDeviceEXT *") @Nullable PointerBuffer devices, @NativeType("EGLint *") IntBuffer num_devices) {
         return EXTDeviceEnumeration.eglQueryDevicesEXT(devices, num_devices);
     }
 
-    /** Array version of: {@link #eglQueryDevicesEXT QueryDevicesEXT} */
+    /** {@code EGLBoolean eglQueryDevicesEXT(EGLint max_devices, EGLDeviceEXT * devices, EGLint * num_devices)} */
     @NativeType("EGLBoolean")
     public static boolean eglQueryDevicesEXT(@NativeType("EGLDeviceEXT *") @Nullable PointerBuffer devices, @NativeType("EGLint *") int[] num_devices) {
         return EXTDeviceEnumeration.eglQueryDevicesEXT(devices, num_devices);

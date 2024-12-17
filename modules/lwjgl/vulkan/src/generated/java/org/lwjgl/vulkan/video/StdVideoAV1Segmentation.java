@@ -19,13 +19,11 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1Segmentation {
  *     uint8_t FeatureEnabled[STD_VIDEO_AV1_MAX_SEGMENTS];
  *     int16_t FeatureData[STD_VIDEO_AV1_SEG_LVL_MAX];
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1Segmentation extends Struct<StdVideoAV1Segmentation> implements NativeResource {
 

@@ -17,64 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created descriptor pool.
- * 
- * <h5>Description</h5>
- * 
- * <p>If multiple {@link VkDescriptorPoolSize} structures containing the same descriptor type appear in the {@code pPoolSizes} array then the pool will be created with enough storage for the total number of descriptors of each type.</p>
- * 
- * <p>Fragmentation of a descriptor pool is possible and <b>may</b> lead to descriptor set allocation failures. A failure due to fragmentation is defined as failing a descriptor set allocation despite the sum of all outstanding descriptor set allocations from the pool plus the requested allocation requiring no more than the total number of descriptors requested at pool creation. Implementations provide certain guarantees of when fragmentation <b>must</b> not cause allocation failure, as described below.</p>
- * 
- * <p>If a descriptor pool has not had any descriptor sets freed since it was created or most recently reset then fragmentation <b>must</b> not cause an allocation failure (note that this is always the case for a pool created without the {@link VK10#VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT} bit set). Additionally, if all sets allocated from the pool since it was created or most recently reset use the same number of descriptors (of each type) and the requested allocation also uses that same number of descriptors (of each type), then fragmentation <b>must</b> not cause an allocation failure.</p>
- * 
- * <p>If an allocation failure occurs due to fragmentation, an application <b>can</b> create an additional descriptor pool to perform further descriptor set allocations.</p>
- * 
- * <p>If {@code flags} has the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} bit set, descriptor pool creation <b>may</b> fail with the error {@link VK12#VK_ERROR_FRAGMENTATION ERROR_FRAGMENTATION} if the total number of descriptors across all pools (including this one) created with this bit set exceeds {@code maxUpdateAfterBindDescriptorsInAllPools}, or if fragmentation of the underlying hardware resources occurs.</p>
- * 
- * <p>If a {@code pPoolSizes}[i]{@code ::type} is {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, a {@link VkMutableDescriptorTypeCreateInfoEXT} struct in the {@code pNext} chain <b>can</b> be used to specify which mutable descriptor types <b>can</b> be allocated from the pool. If included in the {@code pNext} chain, {@link VkMutableDescriptorTypeCreateInfoEXT}{@code ::pMutableDescriptorTypeLists}[i] specifies which kind of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} descriptors <b>can</b> be allocated from this pool entry. If {@link VkMutableDescriptorTypeCreateInfoEXT} does not exist in the {@code pNext} chain, or {@link VkMutableDescriptorTypeCreateInfoEXT}{@code ::pMutableDescriptorTypeLists}[i] is out of range, the descriptor pool allocates enough memory to be able to allocate a {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} descriptor with any supported {@code VkDescriptorType} as a mutable descriptor. A mutable descriptor <b>can</b> be allocated from a pool entry if the type list in {@link VkDescriptorSetLayoutCreateInfo} is a subset of the type list declared in the descriptor pool, or if the pool entry is created without a descriptor type list. Multiple {@code pPoolSizes} entries with {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} <b>can</b> be declared. When multiple such pool entries are present in {@code pPoolSizes}, they specify sets of supported descriptor types which either fully overlap, partially overlap, or are disjoint. Two sets fully overlap if the sets of supported descriptor types are equal. If the sets are not disjoint they partially overlap. A pool entry without a {@link VkMutableDescriptorTypeListEXT} assigned to it is considered to partially overlap any other pool entry which has a {@link VkMutableDescriptorTypeListEXT} assigned to it. The application <b>must</b> ensure that partial overlap does not exist in {@code pPoolSizes}.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The requirement of no partial overlap is intended to resolve ambiguity for validation as there is no confusion which {@code pPoolSizes} entries will be allocated from. An implementation is not expected to depend on this requirement.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorPoolOverallocation">{@code descriptorPoolOverallocation}</a> feature is not enabled, or {@code flags} does not have {@link NVDescriptorPoolOverallocation#VK_DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV} set, {@code maxSets} <b>must</b> be greater than 0</li>
- * <li>If {@code flags} has the {@link NVDescriptorPoolOverallocation#VK_DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_SETS_BIT_NV} or {@link NVDescriptorPoolOverallocation#VK_DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV DESCRIPTOR_POOL_CREATE_ALLOW_OVERALLOCATION_POOLS_BIT_NV} bits set, then <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-descriptorPoolOverallocation">{@code descriptorPoolOverallocation}</a> <b>must</b> be enabled</li>
- * <li>If {@code flags} has the {@link EXTMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT} bit set, then the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} bit <b>must</b> not be set</li>
- * <li>If {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT}{@code ::mutableDescriptorType} is not enabled, {@code pPoolSizes} <b>must</b> not contain a {@code descriptorType} of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}</li>
- * <li>If {@code flags} has the {@link EXTMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT} bit set, {@link VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT}{@code ::mutableDescriptorType} <b>must</b> be enabled</li>
- * <li>If {@code pPoolSizes} contains a {@code descriptorType} of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, any other {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} element in {@code pPoolSizes} <b>must</b> not have sets of supported descriptor types which partially overlap</li>
- * <li>If {@code pPoolSizes} contains a {@code descriptorType} of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, the {@code pNext} chain <b>must</b> include a {@link VkDescriptorPoolInlineUniformBlockCreateInfo} structure whose {@code maxInlineUniformBlockBindings} member is not zero</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkDescriptorPoolInlineUniformBlockCreateInfo} or {@link VkMutableDescriptorTypeCreateInfoEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkDescriptorPoolCreateFlagBits} values</li>
- * <li>If {@code poolSizeCount} is not 0, {@code pPoolSizes} <b>must</b> be a valid pointer to an array of {@code poolSizeCount} valid {@link VkDescriptorPoolSize} structures</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkDescriptorPoolSize}, {@link VK10#vkCreateDescriptorPool CreateDescriptorPool}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorPoolCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDescriptorPoolCreateFlags {@link #flags};
- *     uint32_t {@link #maxSets};
- *     uint32_t {@link #poolSizeCount};
- *     {@link VkDescriptorPoolSize VkDescriptorPoolSize} const * {@link #pPoolSizes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDescriptorPoolCreateFlags flags;
+ *     uint32_t maxSets;
+ *     uint32_t poolSizeCount;
+ *     {@link VkDescriptorPoolSize VkDescriptorPoolSize} const * pPoolSizes;
+ * }}</pre>
  */
 public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInfo> implements NativeResource {
 
@@ -136,30 +87,30 @@ public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInf
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkDescriptorPoolCreateFlagBits} specifying certain supported operations on the pool. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkDescriptorPoolCreateFlags")
     public int flags() { return nflags(address()); }
-    /** the maximum number of descriptor sets that <b>can</b> be allocated from the pool. */
+    /** @return the value of the {@code maxSets} field. */
     @NativeType("uint32_t")
     public int maxSets() { return nmaxSets(address()); }
-    /** the number of elements in {@code pPoolSizes}. */
+    /** @return the value of the {@code poolSizeCount} field. */
     @NativeType("uint32_t")
     public int poolSizeCount() { return npoolSizeCount(address()); }
-    /** a pointer to an array of {@link VkDescriptorPoolSize} structures, each containing a descriptor type and number of descriptors of that type to be allocated in the pool. */
+    /** @return a {@link VkDescriptorPoolSize.Buffer} view of the struct array pointed to by the {@code pPoolSizes} field. */
     @NativeType("VkDescriptorPoolSize const *")
     public VkDescriptorPoolSize.@Nullable Buffer pPoolSizes() { return npPoolSizes(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDescriptorPoolCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO} value to the {@code sType} field. */
     public VkDescriptorPoolCreateInfo sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDescriptorPoolCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkDescriptorPoolInlineUniformBlockCreateInfo} value to the {@code pNext} chain. */
     public VkDescriptorPoolCreateInfo pNext(VkDescriptorPoolInlineUniformBlockCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -169,11 +120,11 @@ public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInf
     public VkDescriptorPoolCreateInfo pNext(VkMutableDescriptorTypeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkMutableDescriptorTypeCreateInfoVALVE} value to the {@code pNext} chain. */
     public VkDescriptorPoolCreateInfo pNext(VkMutableDescriptorTypeCreateInfoVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkDescriptorPoolCreateInfo flags(@NativeType("VkDescriptorPoolCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxSets} field. */
+    /** Sets the specified value to the {@code maxSets} field. */
     public VkDescriptorPoolCreateInfo maxSets(@NativeType("uint32_t") int value) { nmaxSets(address(), value); return this; }
-    /** Sets the address of the specified {@link VkDescriptorPoolSize.Buffer} to the {@link #pPoolSizes} field. */
+    /** Sets the address of the specified {@link VkDescriptorPoolSize.Buffer} to the {@code pPoolSizes} field. */
     public VkDescriptorPoolCreateInfo pPoolSizes(@NativeType("VkDescriptorPoolSize const *") VkDescriptorPoolSize.@Nullable Buffer value) { npPoolSizes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -415,30 +366,30 @@ public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInf
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDescriptorPoolCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDescriptorPoolCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkDescriptorPoolCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDescriptorPoolCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkDescriptorPoolCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkDescriptorPoolCreateFlags")
         public int flags() { return VkDescriptorPoolCreateInfo.nflags(address()); }
-        /** @return the value of the {@link VkDescriptorPoolCreateInfo#maxSets} field. */
+        /** @return the value of the {@code maxSets} field. */
         @NativeType("uint32_t")
         public int maxSets() { return VkDescriptorPoolCreateInfo.nmaxSets(address()); }
-        /** @return the value of the {@link VkDescriptorPoolCreateInfo#poolSizeCount} field. */
+        /** @return the value of the {@code poolSizeCount} field. */
         @NativeType("uint32_t")
         public int poolSizeCount() { return VkDescriptorPoolCreateInfo.npoolSizeCount(address()); }
-        /** @return a {@link VkDescriptorPoolSize.Buffer} view of the struct array pointed to by the {@link VkDescriptorPoolCreateInfo#pPoolSizes} field. */
+        /** @return a {@link VkDescriptorPoolSize.Buffer} view of the struct array pointed to by the {@code pPoolSizes} field. */
         @NativeType("VkDescriptorPoolSize const *")
         public VkDescriptorPoolSize.@Nullable Buffer pPoolSizes() { return VkDescriptorPoolCreateInfo.npPoolSizes(address()); }
 
-        /** Sets the specified value to the {@link VkDescriptorPoolCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDescriptorPoolCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkDescriptorPoolCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO} value to the {@link VkDescriptorPoolCreateInfo#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO} value to the {@code sType} field. */
         public VkDescriptorPoolCreateInfo.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkDescriptorPoolCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDescriptorPoolCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkDescriptorPoolCreateInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkDescriptorPoolInlineUniformBlockCreateInfo} value to the {@code pNext} chain. */
         public VkDescriptorPoolCreateInfo.Buffer pNext(VkDescriptorPoolInlineUniformBlockCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -448,11 +399,11 @@ public class VkDescriptorPoolCreateInfo extends Struct<VkDescriptorPoolCreateInf
         public VkDescriptorPoolCreateInfo.Buffer pNext(VkMutableDescriptorTypeCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkMutableDescriptorTypeCreateInfoVALVE} value to the {@code pNext} chain. */
         public VkDescriptorPoolCreateInfo.Buffer pNext(VkMutableDescriptorTypeCreateInfoVALVE value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkDescriptorPoolCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkDescriptorPoolCreateInfo.Buffer flags(@NativeType("VkDescriptorPoolCreateFlags") int value) { VkDescriptorPoolCreateInfo.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDescriptorPoolCreateInfo#maxSets} field. */
+        /** Sets the specified value to the {@code maxSets} field. */
         public VkDescriptorPoolCreateInfo.Buffer maxSets(@NativeType("uint32_t") int value) { VkDescriptorPoolCreateInfo.nmaxSets(address(), value); return this; }
-        /** Sets the address of the specified {@link VkDescriptorPoolSize.Buffer} to the {@link VkDescriptorPoolCreateInfo#pPoolSizes} field. */
+        /** Sets the address of the specified {@link VkDescriptorPoolSize.Buffer} to the {@code pPoolSizes} field. */
         public VkDescriptorPoolCreateInfo.Buffer pPoolSizes(@NativeType("VkDescriptorPoolSize const *") VkDescriptorPoolSize.@Nullable Buffer value) { VkDescriptorPoolCreateInfo.npPoolSizes(address(), value); return this; }
 
     }

@@ -16,69 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a buffer memory barrier.
- * 
- * <h5>Description</h5>
- * 
- * <p>The first <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> is limited to access to memory through the specified buffer range, via access types in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-access-masks">source access mask</a> specified by {@code srcAccessMask}. If {@code srcAccessMask} includes {@link VK10#VK_ACCESS_HOST_WRITE_BIT ACCESS_HOST_WRITE_BIT}, a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-available-and-visible">memory domain operation</a> is performed where available memory in the host domain is also made available to the device domain.</p>
- * 
- * <p>The second <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-access-scopes">access scope</a> is limited to access to memory through the specified buffer range, via access types in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-access-masks">destination access mask</a> specified by {@code dstAccessMask}. If {@code dstAccessMask} includes {@link VK10#VK_ACCESS_HOST_WRITE_BIT ACCESS_HOST_WRITE_BIT} or {@link VK10#VK_ACCESS_HOST_READ_BIT ACCESS_HOST_READ_BIT}, a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-dependencies-available-and-visible">memory domain operation</a> is performed where available memory in the device domain is also made available to the host domain.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>When {@link VK10#VK_MEMORY_PROPERTY_HOST_COHERENT_BIT MEMORY_PROPERTY_HOST_COHERENT_BIT} is used, available memory in host domain is automatically made visible to host domain, and any host write is automatically made available to host domain.</p>
- * </div>
- * 
- * <p>If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, and {@code srcQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers-release">queue family release operation</a> for the specified buffer range, and the second synchronization scope of the calling command does not apply to this operation.</p>
- * 
- * <p>If {@code dstQueueFamilyIndex} is not equal to {@code srcQueueFamilyIndex}, and {@code dstQueueFamilyIndex} is equal to the current queue family, then the memory barrier defines a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers-acquire">queue family acquire operation</a> for the specified buffer range, and the first synchronization scope of the calling command does not apply to this operation.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code offset} <b>must</b> be less than the size of {@code buffer}</li>
- * <li>If {@code size} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> be greater than 0</li>
- * <li>If {@code size} is not equal to {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE}, {@code size} <b>must</b> be less than or equal to than the size of {@code buffer} minus {@code offset}</li>
- * <li>If {@code buffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>If {@code buffer} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_EXCLUSIVE SHARING_MODE_EXCLUSIVE}, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are not equal, {@code srcQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}, {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}, or a valid queue family</li>
- * <li>If {@code buffer} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_EXCLUSIVE SHARING_MODE_EXCLUSIVE}, and {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} are not equal, {@code dstQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}, {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}, or a valid queue family</li>
- * <li>If {@code srcQueueFamilyIndex} is not equal to {@code dstQueueFamilyIndex}, at least one of {@code srcQueueFamilyIndex} or {@code dstQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL} or {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If the {@link KHRExternalMemory VK_KHR_external_memory} extension is not enabled, and the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} is not greater than or equal to Version 1.1, {@code srcQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * <li>If the {@link KHRExternalMemory VK_KHR_external_memory} extension is not enabled, and the value of {@link VkApplicationInfo}{@code ::apiVersion} used to create the {@code VkInstance} is not greater than or equal to Version 1.1, {@code dstQueueFamilyIndex} <b>must</b> not be {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * <li>If the {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} extension is not enabled {@code srcQueueFamilyIndex} <b>must</b> not be {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If the {@link EXTQueueFamilyForeign VK_EXT_queue_family_foreign} extension is not enabled {@code dstQueueFamilyIndex} <b>must</b> not be {@link EXTQueueFamilyForeign#VK_QUEUE_FAMILY_FOREIGN_EXT QUEUE_FAMILY_FOREIGN_EXT}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, and {@code buffer} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, at least one of {@code srcQueueFamilyIndex} and {@code dstQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_IGNORED QUEUE_FAMILY_IGNORED}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, and {@code buffer} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, {@code srcQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_IGNORED QUEUE_FAMILY_IGNORED} or {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-synchronization2">{@code synchronization2}</a> feature is not enabled, and {@code buffer} was created with a sharing mode of {@link VK10#VK_SHARING_MODE_CONCURRENT SHARING_MODE_CONCURRENT}, {@code dstQueueFamilyIndex} <b>must</b> be {@link VK10#VK_QUEUE_FAMILY_IGNORED QUEUE_FAMILY_IGNORED} or {@link VK10#VK_QUEUE_FAMILY_EXTERNAL QUEUE_FAMILY_EXTERNAL}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkExternalMemoryAcquireUnmodifiedEXT}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkCmdPipelineBarrier CmdPipelineBarrier}, {@link VK10#vkCmdWaitEvents CmdWaitEvents}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferMemoryBarrier {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkAccessFlags {@link #srcAccessMask};
- *     VkAccessFlags {@link #dstAccessMask};
- *     uint32_t {@link #srcQueueFamilyIndex};
- *     uint32_t {@link #dstQueueFamilyIndex};
- *     VkBuffer {@link #buffer};
- *     VkDeviceSize {@link #offset};
- *     VkDeviceSize {@link #size};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkAccessFlags srcAccessMask;
+ *     VkAccessFlags dstAccessMask;
+ *     uint32_t srcQueueFamilyIndex;
+ *     uint32_t dstQueueFamilyIndex;
+ *     VkBuffer buffer;
+ *     VkDeviceSize offset;
+ *     VkDeviceSize size;
+ * }}</pre>
  */
 public class VkBufferMemoryBarrier extends Struct<VkBufferMemoryBarrier> implements NativeResource {
 
@@ -149,55 +98,55 @@ public class VkBufferMemoryBarrier extends Struct<VkBufferMemoryBarrier> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkAccessFlagBits} specifying a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-access-masks">source access mask</a>. */
+    /** @return the value of the {@code srcAccessMask} field. */
     @NativeType("VkAccessFlags")
     public int srcAccessMask() { return nsrcAccessMask(address()); }
-    /** a bitmask of {@code VkAccessFlagBits} specifying a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-access-masks">destination access mask</a>. */
+    /** @return the value of the {@code dstAccessMask} field. */
     @NativeType("VkAccessFlags")
     public int dstAccessMask() { return ndstAccessMask(address()); }
-    /** the source queue family for a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
+    /** @return the value of the {@code srcQueueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int srcQueueFamilyIndex() { return nsrcQueueFamilyIndex(address()); }
-    /** the destination queue family for a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-queue-transfers">queue family ownership transfer</a>. */
+    /** @return the value of the {@code dstQueueFamilyIndex} field. */
     @NativeType("uint32_t")
     public int dstQueueFamilyIndex() { return ndstQueueFamilyIndex(address()); }
-    /** a handle to the buffer whose backing memory is affected by the barrier. */
+    /** @return the value of the {@code buffer} field. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** an offset in bytes into the backing memory for {@code buffer}; this is relative to the base offset as bound to the buffer (see {@link VK10#vkBindBufferMemory BindBufferMemory}). */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** a size in bytes of the affected area of backing memory for {@code buffer}, or {@link VK10#VK_WHOLE_SIZE WHOLE_SIZE} to use the range from {@code offset} to the end of the buffer. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBufferMemoryBarrier sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER} value to the {@code sType} field. */
     public VkBufferMemoryBarrier sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBufferMemoryBarrier pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
     public VkBufferMemoryBarrier pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #srcAccessMask} field. */
+    /** Sets the specified value to the {@code srcAccessMask} field. */
     public VkBufferMemoryBarrier srcAccessMask(@NativeType("VkAccessFlags") int value) { nsrcAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstAccessMask} field. */
+    /** Sets the specified value to the {@code dstAccessMask} field. */
     public VkBufferMemoryBarrier dstAccessMask(@NativeType("VkAccessFlags") int value) { ndstAccessMask(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
     public VkBufferMemoryBarrier srcQueueFamilyIndex(@NativeType("uint32_t") int value) { nsrcQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstQueueFamilyIndex} field. */
+    /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
     public VkBufferMemoryBarrier dstQueueFamilyIndex(@NativeType("uint32_t") int value) { ndstQueueFamilyIndex(address(), value); return this; }
-    /** Sets the specified value to the {@link #buffer} field. */
+    /** Sets the specified value to the {@code buffer} field. */
     public VkBufferMemoryBarrier buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkBufferMemoryBarrier offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VkBufferMemoryBarrier size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -448,55 +397,55 @@ public class VkBufferMemoryBarrier extends Struct<VkBufferMemoryBarrier> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBufferMemoryBarrier#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferMemoryBarrier.nsType(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferMemoryBarrier.npNext(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier#srcAccessMask} field. */
+        /** @return the value of the {@code srcAccessMask} field. */
         @NativeType("VkAccessFlags")
         public int srcAccessMask() { return VkBufferMemoryBarrier.nsrcAccessMask(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier#dstAccessMask} field. */
+        /** @return the value of the {@code dstAccessMask} field. */
         @NativeType("VkAccessFlags")
         public int dstAccessMask() { return VkBufferMemoryBarrier.ndstAccessMask(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier#srcQueueFamilyIndex} field. */
+        /** @return the value of the {@code srcQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int srcQueueFamilyIndex() { return VkBufferMemoryBarrier.nsrcQueueFamilyIndex(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier#dstQueueFamilyIndex} field. */
+        /** @return the value of the {@code dstQueueFamilyIndex} field. */
         @NativeType("uint32_t")
         public int dstQueueFamilyIndex() { return VkBufferMemoryBarrier.ndstQueueFamilyIndex(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier#buffer} field. */
+        /** @return the value of the {@code buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkBufferMemoryBarrier.nbuffer(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkBufferMemoryBarrier.noffset(address()); }
-        /** @return the value of the {@link VkBufferMemoryBarrier#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkBufferMemoryBarrier.nsize(address()); }
 
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBufferMemoryBarrier.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferMemoryBarrier.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER} value to the {@link VkBufferMemoryBarrier#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER} value to the {@code sType} field. */
         public VkBufferMemoryBarrier.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER); }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBufferMemoryBarrier.Buffer pNext(@NativeType("void const *") long value) { VkBufferMemoryBarrier.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkExternalMemoryAcquireUnmodifiedEXT} value to the {@code pNext} chain. */
         public VkBufferMemoryBarrier.Buffer pNext(VkExternalMemoryAcquireUnmodifiedEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#srcAccessMask} field. */
+        /** Sets the specified value to the {@code srcAccessMask} field. */
         public VkBufferMemoryBarrier.Buffer srcAccessMask(@NativeType("VkAccessFlags") int value) { VkBufferMemoryBarrier.nsrcAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#dstAccessMask} field. */
+        /** Sets the specified value to the {@code dstAccessMask} field. */
         public VkBufferMemoryBarrier.Buffer dstAccessMask(@NativeType("VkAccessFlags") int value) { VkBufferMemoryBarrier.ndstAccessMask(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#srcQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@code srcQueueFamilyIndex} field. */
         public VkBufferMemoryBarrier.Buffer srcQueueFamilyIndex(@NativeType("uint32_t") int value) { VkBufferMemoryBarrier.nsrcQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#dstQueueFamilyIndex} field. */
+        /** Sets the specified value to the {@code dstQueueFamilyIndex} field. */
         public VkBufferMemoryBarrier.Buffer dstQueueFamilyIndex(@NativeType("uint32_t") int value) { VkBufferMemoryBarrier.ndstQueueFamilyIndex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#buffer} field. */
+        /** Sets the specified value to the {@code buffer} field. */
         public VkBufferMemoryBarrier.Buffer buffer(@NativeType("VkBuffer") long value) { VkBufferMemoryBarrier.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkBufferMemoryBarrier.Buffer offset(@NativeType("VkDeviceSize") long value) { VkBufferMemoryBarrier.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferMemoryBarrier#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VkBufferMemoryBarrier.Buffer size(@NativeType("VkDeviceSize") long value) { VkBufferMemoryBarrier.nsize(address(), value); return this; }
 
     }

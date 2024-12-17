@@ -16,33 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create a marker detection handle for AprilTag markers.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is required by the {@link MLMarkerUnderstanding#XR_MARKER_TYPE_APRIL_TAG_ML MARKER_TYPE_APRIL_TAG_ML} detector.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using {@link XrMarkerDetectorAprilTagInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code aprilTagDict} <b>must</b> be a valid {@code XrMarkerAprilTagDictML} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrMarkerDetectorCreateInfoML}, {@link MLMarkerUnderstanding#xrCreateMarkerDetectorML CreateMarkerDetectorML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMarkerDetectorAprilTagInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrMarkerAprilTagDictML {@link #aprilTagDict};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrMarkerAprilTagDictML aprilTagDict;
+ * }}</pre>
  */
 public class XrMarkerDetectorAprilTagInfoML extends Struct<XrMarkerDetectorAprilTagInfoML> implements NativeResource {
 
@@ -95,23 +74,23 @@ public class XrMarkerDetectorAprilTagInfoML extends Struct<XrMarkerDetectorApril
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** AprilTag Dictionary name from which markers will be detected. */
+    /** @return the value of the {@code aprilTagDict} field. */
     @NativeType("XrMarkerAprilTagDictML")
     public int aprilTagDict() { return naprilTagDict(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMarkerDetectorAprilTagInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML} value to the {@code type} field. */
     public XrMarkerDetectorAprilTagInfoML type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMarkerDetectorAprilTagInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #aprilTagDict} field. */
+    /** Sets the specified value to the {@code aprilTagDict} field. */
     public XrMarkerDetectorAprilTagInfoML aprilTagDict(@NativeType("XrMarkerAprilTagDictML") int value) { naprilTagDict(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -307,23 +286,23 @@ public class XrMarkerDetectorAprilTagInfoML extends Struct<XrMarkerDetectorApril
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMarkerDetectorAprilTagInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMarkerDetectorAprilTagInfoML.ntype(address()); }
-        /** @return the value of the {@link XrMarkerDetectorAprilTagInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrMarkerDetectorAprilTagInfoML.nnext(address()); }
-        /** @return the value of the {@link XrMarkerDetectorAprilTagInfoML#aprilTagDict} field. */
+        /** @return the value of the {@code aprilTagDict} field. */
         @NativeType("XrMarkerAprilTagDictML")
         public int aprilTagDict() { return XrMarkerDetectorAprilTagInfoML.naprilTagDict(address()); }
 
-        /** Sets the specified value to the {@link XrMarkerDetectorAprilTagInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMarkerDetectorAprilTagInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrMarkerDetectorAprilTagInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML} value to the {@link XrMarkerDetectorAprilTagInfoML#type} field. */
+        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML} value to the {@code type} field. */
         public XrMarkerDetectorAprilTagInfoML.Buffer type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML); }
-        /** Sets the specified value to the {@link XrMarkerDetectorAprilTagInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMarkerDetectorAprilTagInfoML.Buffer next(@NativeType("void const *") long value) { XrMarkerDetectorAprilTagInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrMarkerDetectorAprilTagInfoML#aprilTagDict} field. */
+        /** Sets the specified value to the {@code aprilTagDict} field. */
         public XrMarkerDetectorAprilTagInfoML.Buffer aprilTagDict(@NativeType("XrMarkerAprilTagDictML") int value) { XrMarkerDetectorAprilTagInfoML.naprilTagDict(address(), value); return this; }
 
     }

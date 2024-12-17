@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents a quaternion in a 4D vector.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiQuaternion {
- *     float {@link #w};
- *     float {@link #x};
- *     float {@link #y};
- *     float {@link #z};
- * }</code></pre>
+ *     float w;
+ *     float x;
+ *     float y;
+ *     float z;
+ * }}</pre>
  */
 @NativeType("struct aiQuaternion")
 public class AIQuaternion extends Struct<AIQuaternion> implements NativeResource {
@@ -83,22 +79,22 @@ public class AIQuaternion extends Struct<AIQuaternion> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** The w component */
+    /** @return the value of the {@code w} field. */
     public float w() { return nw(address()); }
-    /** The x component */
+    /** @return the value of the {@code x} field. */
     public float x() { return nx(address()); }
-    /** The y component */
+    /** @return the value of the {@code y} field. */
     public float y() { return ny(address()); }
-    /** The z component */
+    /** @return the value of the {@code z} field. */
     public float z() { return nz(address()); }
 
-    /** Sets the specified value to the {@link #w} field. */
+    /** Sets the specified value to the {@code w} field. */
     public AIQuaternion w(float value) { nw(address(), value); return this; }
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public AIQuaternion x(float value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public AIQuaternion y(float value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@link #z} field. */
+    /** Sets the specified value to the {@code z} field. */
     public AIQuaternion z(float value) { nz(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -319,22 +315,22 @@ public class AIQuaternion extends Struct<AIQuaternion> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link AIQuaternion#w} field. */
+        /** @return the value of the {@code w} field. */
         public float w() { return AIQuaternion.nw(address()); }
-        /** @return the value of the {@link AIQuaternion#x} field. */
+        /** @return the value of the {@code x} field. */
         public float x() { return AIQuaternion.nx(address()); }
-        /** @return the value of the {@link AIQuaternion#y} field. */
+        /** @return the value of the {@code y} field. */
         public float y() { return AIQuaternion.ny(address()); }
-        /** @return the value of the {@link AIQuaternion#z} field. */
+        /** @return the value of the {@code z} field. */
         public float z() { return AIQuaternion.nz(address()); }
 
-        /** Sets the specified value to the {@link AIQuaternion#w} field. */
+        /** Sets the specified value to the {@code w} field. */
         public AIQuaternion.Buffer w(float value) { AIQuaternion.nw(address(), value); return this; }
-        /** Sets the specified value to the {@link AIQuaternion#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public AIQuaternion.Buffer x(float value) { AIQuaternion.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link AIQuaternion#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public AIQuaternion.Buffer y(float value) { AIQuaternion.ny(address(), value); return this; }
-        /** Sets the specified value to the {@link AIQuaternion#z} field. */
+        /** Sets the specified value to the {@code z} field. */
         public AIQuaternion.Buffer z(float value) { AIQuaternion.nz(address(), value); return this; }
 
     }

@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct libdivide_s32_t {
  *     int32_t magic;
  *     uint8_t more;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct libdivide_s32_t")
 public class LibDivideS32 extends Struct<LibDivideS32> implements NativeResource {

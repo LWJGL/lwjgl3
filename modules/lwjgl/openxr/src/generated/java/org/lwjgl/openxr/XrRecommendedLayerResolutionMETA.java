@@ -16,33 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The structure returned by the runtime, containing resolution and whether the recommendation is valid.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the runtime does not wish to make a recommendation, {@code isValid} <b>must</b> be {@link XR10#XR_FALSE FALSE} and {@code recommendedImageDimensions} <b>must</b> be {0,0}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METARecommendedLayerResolution XR_META_recommended_layer_resolution} extension <b>must</b> be enabled prior to using {@link XrRecommendedLayerResolutionMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META TYPE_RECOMMENDED_LAYER_RESOLUTION_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent2Di}, {@link METARecommendedLayerResolution#xrGetRecommendedLayerResolutionMETA GetRecommendedLayerResolutionMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrRecommendedLayerResolutionMETA {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrExtent2Di XrExtent2Di} {@link #recommendedImageDimensions};
- *     XrBool32 {@link #isValid};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrExtent2Di XrExtent2Di} recommendedImageDimensions;
+ *     XrBool32 isValid;
+ * }}</pre>
  */
 public class XrRecommendedLayerResolutionMETA extends Struct<XrRecommendedLayerResolutionMETA> implements NativeResource {
 
@@ -98,23 +78,23 @@ public class XrRecommendedLayerResolutionMETA extends Struct<XrRecommendedLayerR
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@link XrExtent2Di} recommended image dimensions of the layer. */
+    /** @return a {@link XrExtent2Di} view of the {@code recommendedImageDimensions} field. */
     public XrExtent2Di recommendedImageDimensions() { return nrecommendedImageDimensions(address()); }
-    /** the {@code XrBool32} boolean returned by the runtime which indicates whether the runtime returned a valid recommendation or does not have any recommendations to make. */
+    /** @return the value of the {@code isValid} field. */
     @NativeType("XrBool32")
     public boolean isValid() { return nisValid(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrRecommendedLayerResolutionMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META TYPE_RECOMMENDED_LAYER_RESOLUTION_META} value to the {@link #type} field. */
+    /** Sets the {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META TYPE_RECOMMENDED_LAYER_RESOLUTION_META} value to the {@code type} field. */
     public XrRecommendedLayerResolutionMETA type$Default() { return type(METARecommendedLayerResolution.XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrRecommendedLayerResolutionMETA next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -308,23 +288,23 @@ public class XrRecommendedLayerResolutionMETA extends Struct<XrRecommendedLayerR
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrRecommendedLayerResolutionMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrRecommendedLayerResolutionMETA.ntype(address()); }
-        /** @return the value of the {@link XrRecommendedLayerResolutionMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrRecommendedLayerResolutionMETA.nnext(address()); }
-        /** @return a {@link XrExtent2Di} view of the {@link XrRecommendedLayerResolutionMETA#recommendedImageDimensions} field. */
+        /** @return a {@link XrExtent2Di} view of the {@code recommendedImageDimensions} field. */
         public XrExtent2Di recommendedImageDimensions() { return XrRecommendedLayerResolutionMETA.nrecommendedImageDimensions(address()); }
-        /** @return the value of the {@link XrRecommendedLayerResolutionMETA#isValid} field. */
+        /** @return the value of the {@code isValid} field. */
         @NativeType("XrBool32")
         public boolean isValid() { return XrRecommendedLayerResolutionMETA.nisValid(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrRecommendedLayerResolutionMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrRecommendedLayerResolutionMETA.Buffer type(@NativeType("XrStructureType") int value) { XrRecommendedLayerResolutionMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META TYPE_RECOMMENDED_LAYER_RESOLUTION_META} value to the {@link XrRecommendedLayerResolutionMETA#type} field. */
+        /** Sets the {@link METARecommendedLayerResolution#XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META TYPE_RECOMMENDED_LAYER_RESOLUTION_META} value to the {@code type} field. */
         public XrRecommendedLayerResolutionMETA.Buffer type$Default() { return type(METARecommendedLayerResolution.XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META); }
-        /** Sets the specified value to the {@link XrRecommendedLayerResolutionMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrRecommendedLayerResolutionMETA.Buffer next(@NativeType("void *") long value) { XrRecommendedLayerResolutionMETA.nnext(address(), value); return this; }
 
     }

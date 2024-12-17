@@ -16,38 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure holding available tile properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>All tiles will be tightly packed around the first tile, with edges being multiples of tile width and/or height from the origin.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Reported value for {@code apronSize} will be zero and its functionality will be described in a future extension.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link QCOMTileProperties#VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM STRUCTURE_TYPE_TILE_PROPERTIES_QCOM}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}, {@link VkExtent3D}, {@link VkOffset2D}, {@link QCOMTileProperties#vkGetDynamicRenderingTilePropertiesQCOM GetDynamicRenderingTilePropertiesQCOM}, {@link QCOMTileProperties#vkGetFramebufferTilePropertiesQCOM GetFramebufferTilePropertiesQCOM}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkTilePropertiesQCOM {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkExtent3D VkExtent3D} {@link #tileSize};
- *     {@link VkExtent2D VkExtent2D} {@link #apronSize};
- *     {@link VkOffset2D VkOffset2D} {@link #origin};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkExtent3D VkExtent3D} tileSize;
+ *     {@link VkExtent2D VkExtent2D} apronSize;
+ *     {@link VkOffset2D VkOffset2D} origin;
+ * }}</pre>
  */
 public class VkTilePropertiesQCOM extends Struct<VkTilePropertiesQCOM> implements NativeResource {
 
@@ -106,36 +82,36 @@ public class VkTilePropertiesQCOM extends Struct<VkTilePropertiesQCOM> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the dimensions of a tile, with width and height describing the width and height of a tile in pixels, and depth corresponding to the number of slices the tile spans. */
+    /** @return a {@link VkExtent3D} view of the {@code tileSize} field. */
     public VkExtent3D tileSize() { return ntileSize(address()); }
-    /** the dimension of the apron. */
+    /** @return a {@link VkExtent2D} view of the {@code apronSize} field. */
     public VkExtent2D apronSize() { return napronSize(address()); }
-    /** the top-left corner of the first tile in attachment space. */
+    /** @return a {@link VkOffset2D} view of the {@code origin} field. */
     public VkOffset2D origin() { return norigin(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkTilePropertiesQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link QCOMTileProperties#VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM STRUCTURE_TYPE_TILE_PROPERTIES_QCOM} value to the {@link #sType} field. */
+    /** Sets the {@link QCOMTileProperties#VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM STRUCTURE_TYPE_TILE_PROPERTIES_QCOM} value to the {@code sType} field. */
     public VkTilePropertiesQCOM sType$Default() { return sType(QCOMTileProperties.VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkTilePropertiesQCOM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Copies the specified {@link VkExtent3D} to the {@link #tileSize} field. */
+    /** Copies the specified {@link VkExtent3D} to the {@code tileSize} field. */
     public VkTilePropertiesQCOM tileSize(VkExtent3D value) { ntileSize(address(), value); return this; }
-    /** Passes the {@link #tileSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code tileSize} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkTilePropertiesQCOM tileSize(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(tileSize()); return this; }
-    /** Copies the specified {@link VkExtent2D} to the {@link #apronSize} field. */
+    /** Copies the specified {@link VkExtent2D} to the {@code apronSize} field. */
     public VkTilePropertiesQCOM apronSize(VkExtent2D value) { napronSize(address(), value); return this; }
-    /** Passes the {@link #apronSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code apronSize} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkTilePropertiesQCOM apronSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(apronSize()); return this; }
-    /** Copies the specified {@link VkOffset2D} to the {@link #origin} field. */
+    /** Copies the specified {@link VkOffset2D} to the {@code origin} field. */
     public VkTilePropertiesQCOM origin(VkOffset2D value) { norigin(address(), value); return this; }
-    /** Passes the {@link #origin} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code origin} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkTilePropertiesQCOM origin(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(origin()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -343,36 +319,36 @@ public class VkTilePropertiesQCOM extends Struct<VkTilePropertiesQCOM> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkTilePropertiesQCOM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkTilePropertiesQCOM.nsType(address()); }
-        /** @return the value of the {@link VkTilePropertiesQCOM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkTilePropertiesQCOM.npNext(address()); }
-        /** @return a {@link VkExtent3D} view of the {@link VkTilePropertiesQCOM#tileSize} field. */
+        /** @return a {@link VkExtent3D} view of the {@code tileSize} field. */
         public VkExtent3D tileSize() { return VkTilePropertiesQCOM.ntileSize(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkTilePropertiesQCOM#apronSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@code apronSize} field. */
         public VkExtent2D apronSize() { return VkTilePropertiesQCOM.napronSize(address()); }
-        /** @return a {@link VkOffset2D} view of the {@link VkTilePropertiesQCOM#origin} field. */
+        /** @return a {@link VkOffset2D} view of the {@code origin} field. */
         public VkOffset2D origin() { return VkTilePropertiesQCOM.norigin(address()); }
 
-        /** Sets the specified value to the {@link VkTilePropertiesQCOM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkTilePropertiesQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkTilePropertiesQCOM.nsType(address(), value); return this; }
-        /** Sets the {@link QCOMTileProperties#VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM STRUCTURE_TYPE_TILE_PROPERTIES_QCOM} value to the {@link VkTilePropertiesQCOM#sType} field. */
+        /** Sets the {@link QCOMTileProperties#VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM STRUCTURE_TYPE_TILE_PROPERTIES_QCOM} value to the {@code sType} field. */
         public VkTilePropertiesQCOM.Buffer sType$Default() { return sType(QCOMTileProperties.VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM); }
-        /** Sets the specified value to the {@link VkTilePropertiesQCOM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkTilePropertiesQCOM.Buffer pNext(@NativeType("void *") long value) { VkTilePropertiesQCOM.npNext(address(), value); return this; }
-        /** Copies the specified {@link VkExtent3D} to the {@link VkTilePropertiesQCOM#tileSize} field. */
+        /** Copies the specified {@link VkExtent3D} to the {@code tileSize} field. */
         public VkTilePropertiesQCOM.Buffer tileSize(VkExtent3D value) { VkTilePropertiesQCOM.ntileSize(address(), value); return this; }
-        /** Passes the {@link VkTilePropertiesQCOM#tileSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code tileSize} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkTilePropertiesQCOM.Buffer tileSize(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(tileSize()); return this; }
-        /** Copies the specified {@link VkExtent2D} to the {@link VkTilePropertiesQCOM#apronSize} field. */
+        /** Copies the specified {@link VkExtent2D} to the {@code apronSize} field. */
         public VkTilePropertiesQCOM.Buffer apronSize(VkExtent2D value) { VkTilePropertiesQCOM.napronSize(address(), value); return this; }
-        /** Passes the {@link VkTilePropertiesQCOM#apronSize} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code apronSize} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkTilePropertiesQCOM.Buffer apronSize(java.util.function.Consumer<VkExtent2D> consumer) { consumer.accept(apronSize()); return this; }
-        /** Copies the specified {@link VkOffset2D} to the {@link VkTilePropertiesQCOM#origin} field. */
+        /** Copies the specified {@link VkOffset2D} to the {@code origin} field. */
         public VkTilePropertiesQCOM.Buffer origin(VkOffset2D value) { VkTilePropertiesQCOM.norigin(address(), value); return this; }
-        /** Passes the {@link VkTilePropertiesQCOM#origin} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code origin} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkTilePropertiesQCOM.Buffer origin(java.util.function.Consumer<VkOffset2D> consumer) { consumer.accept(origin()); return this; }
 
     }

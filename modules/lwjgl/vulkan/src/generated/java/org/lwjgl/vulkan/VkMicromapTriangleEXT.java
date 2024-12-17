@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the micromap format and data for a triangle.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} then {@code format} <b>must</b> be {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} or {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} and {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_2_STATE_EXT OPACITY_MICROMAP_FORMAT_2_STATE_EXT} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT}{@code ::maxOpacity2StateSubdivisionLevel}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link EXTOpacityMicromap#VK_MICROMAP_TYPE_OPACITY_MICROMAP_EXT MICROMAP_TYPE_OPACITY_MICROMAP_EXT} and {@code format} is {@link EXTOpacityMicromap#VK_OPACITY_MICROMAP_FORMAT_4_STATE_EXT OPACITY_MICROMAP_FORMAT_4_STATE_EXT} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceOpacityMicromapPropertiesEXT}{@code ::maxOpacity4StateSubdivisionLevel}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} then {@code format} <b>must</b> be {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_64_TRIANGLES_64_BYTES_NV}, {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_256_TRIANGLES_128_BYTES_NV} or {@link NVDisplacementMicromap#VK_DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV DISPLACEMENT_MICROMAP_FORMAT_1024_TRIANGLES_128_BYTES_NV}</li>
- * <li>If the {@code VkMicromapTypeEXT} of the micromap is {@link NVDisplacementMicromap#VK_MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV MICROMAP_TYPE_DISPLACEMENT_MICROMAP_NV} then {@code subdivisionLevel} <b>must</b> be less than or equal to {@link VkPhysicalDeviceDisplacementMicromapPropertiesNV}{@code ::maxDisplacementMicromapSubdivisionLevel}</li>
- * </ul>
- * 
- * <p>The {@code format} is interpreted based on the {@code type} of the micromap using it.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMicromapTriangleEXT {
- *     uint32_t {@link #dataOffset};
- *     uint16_t {@link #subdivisionLevel};
- *     uint16_t {@link #format};
- * }</code></pre>
+ *     uint32_t dataOffset;
+ *     uint16_t subdivisionLevel;
+ *     uint16_t format;
+ * }}</pre>
  */
 public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> implements NativeResource {
 
@@ -90,21 +74,21 @@ public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the offset in bytes of the start of the data for this triangle. This is a byte aligned value. */
+    /** @return the value of the {@code dataOffset} field. */
     @NativeType("uint32_t")
     public int dataOffset() { return ndataOffset(address()); }
-    /** the subdivision level of this triangle */
+    /** @return the value of the {@code subdivisionLevel} field. */
     @NativeType("uint16_t")
     public short subdivisionLevel() { return nsubdivisionLevel(address()); }
-    /** the format of this triangle */
+    /** @return the value of the {@code format} field. */
     @NativeType("uint16_t")
     public short format() { return nformat(address()); }
 
-    /** Sets the specified value to the {@link #dataOffset} field. */
+    /** Sets the specified value to the {@code dataOffset} field. */
     public VkMicromapTriangleEXT dataOffset(@NativeType("uint32_t") int value) { ndataOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #subdivisionLevel} field. */
+    /** Sets the specified value to the {@code subdivisionLevel} field. */
     public VkMicromapTriangleEXT subdivisionLevel(@NativeType("uint16_t") short value) { nsubdivisionLevel(address(), value); return this; }
-    /** Sets the specified value to the {@link #format} field. */
+    /** Sets the specified value to the {@code format} field. */
     public VkMicromapTriangleEXT format(@NativeType("uint16_t") short value) { nformat(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,21 +284,21 @@ public class VkMicromapTriangleEXT extends Struct<VkMicromapTriangleEXT> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMicromapTriangleEXT#dataOffset} field. */
+        /** @return the value of the {@code dataOffset} field. */
         @NativeType("uint32_t")
         public int dataOffset() { return VkMicromapTriangleEXT.ndataOffset(address()); }
-        /** @return the value of the {@link VkMicromapTriangleEXT#subdivisionLevel} field. */
+        /** @return the value of the {@code subdivisionLevel} field. */
         @NativeType("uint16_t")
         public short subdivisionLevel() { return VkMicromapTriangleEXT.nsubdivisionLevel(address()); }
-        /** @return the value of the {@link VkMicromapTriangleEXT#format} field. */
+        /** @return the value of the {@code format} field. */
         @NativeType("uint16_t")
         public short format() { return VkMicromapTriangleEXT.nformat(address()); }
 
-        /** Sets the specified value to the {@link VkMicromapTriangleEXT#dataOffset} field. */
+        /** Sets the specified value to the {@code dataOffset} field. */
         public VkMicromapTriangleEXT.Buffer dataOffset(@NativeType("uint32_t") int value) { VkMicromapTriangleEXT.ndataOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapTriangleEXT#subdivisionLevel} field. */
+        /** Sets the specified value to the {@code subdivisionLevel} field. */
         public VkMicromapTriangleEXT.Buffer subdivisionLevel(@NativeType("uint16_t") short value) { VkMicromapTriangleEXT.nsubdivisionLevel(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMicromapTriangleEXT#format} field. */
+        /** Sets the specified value to the {@code format} field. */
         public VkMicromapTriangleEXT.Buffer format(@NativeType("uint16_t") short value) { VkMicromapTriangleEXT.nformat(address(), value); return this; }
 
     }

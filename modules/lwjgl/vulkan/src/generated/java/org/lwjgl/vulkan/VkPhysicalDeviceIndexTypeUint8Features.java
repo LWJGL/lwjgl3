@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether uint8 index type can be used.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceIndexTypeUint8Features} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceIndexTypeUint8Features} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceIndexTypeUint8Features {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #indexTypeUint8};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 indexTypeUint8;
+ * }}</pre>
  */
 public class VkPhysicalDeviceIndexTypeUint8Features extends Struct<VkPhysicalDeviceIndexTypeUint8Features> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceIndexTypeUint8Features extends Struct<VkPhysicalDev
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that {@link VK14#VK_INDEX_TYPE_UINT8 INDEX_TYPE_UINT8} can be used with {@link VK14#vkCmdBindIndexBuffer2 CmdBindIndexBuffer2} and {@link VK10#vkCmdBindIndexBuffer CmdBindIndexBuffer}. */
+    /** @return the value of the {@code indexTypeUint8} field. */
     @NativeType("VkBool32")
     public boolean indexTypeUint8() { return nindexTypeUint8(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceIndexTypeUint8Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceIndexTypeUint8Features sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceIndexTypeUint8Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #indexTypeUint8} field. */
+    /** Sets the specified value to the {@code indexTypeUint8} field. */
     public VkPhysicalDeviceIndexTypeUint8Features indexTypeUint8(@NativeType("VkBool32") boolean value) { nindexTypeUint8(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceIndexTypeUint8Features extends Struct<VkPhysicalDev
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceIndexTypeUint8Features#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceIndexTypeUint8Features.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceIndexTypeUint8Features#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceIndexTypeUint8Features.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceIndexTypeUint8Features#indexTypeUint8} field. */
+        /** @return the value of the {@code indexTypeUint8} field. */
         @NativeType("VkBool32")
         public boolean indexTypeUint8() { return VkPhysicalDeviceIndexTypeUint8Features.nindexTypeUint8(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceIndexTypeUint8Features#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceIndexTypeUint8Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceIndexTypeUint8Features.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES} value to the {@link VkPhysicalDeviceIndexTypeUint8Features#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceIndexTypeUint8Features.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceIndexTypeUint8Features#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceIndexTypeUint8Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceIndexTypeUint8Features.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceIndexTypeUint8Features#indexTypeUint8} field. */
+        /** Sets the specified value to the {@code indexTypeUint8} field. */
         public VkPhysicalDeviceIndexTypeUint8Features.Buffer indexTypeUint8(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceIndexTypeUint8Features.nindexTypeUint8(address(), value ? 1 : 0); return this; }
 
     }

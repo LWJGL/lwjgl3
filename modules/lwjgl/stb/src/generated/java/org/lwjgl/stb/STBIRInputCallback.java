@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *optional_output,
- *     void const *input_ptr,
- *     int num_pixels,
- *     int x,
- *     int y,
- *     void *context
- * )</code></pre>
- */
+/** Callback function: {@link #invoke stbir_input_callback *} */
 public abstract class STBIRInputCallback extends Callback implements STBIRInputCallbackI {
 
     /**

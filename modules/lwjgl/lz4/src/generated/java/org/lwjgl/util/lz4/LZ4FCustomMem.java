@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LZ4F_CustomMem {
  *     {@link LZ4FAllocFunctionI LZ4F_AllocFunction} customAlloc;
- *     {@link LZ4FCallocFunctionI LZ4F_CallocFunction} {@link #customCalloc};
+ *     {@link LZ4FCallocFunctionI LZ4F_CallocFunction} customCalloc;
  *     {@link LZ4FFreeFunctionI LZ4F_FreeFunction} customFree;
  *     void * opaqueState;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct LZ4F_CustomMem")
 public class LZ4FCustomMem extends Struct<LZ4FCustomMem> implements NativeResource {
@@ -85,7 +83,7 @@ public class LZ4FCustomMem extends Struct<LZ4FCustomMem> implements NativeResour
     /** @return the value of the {@code customAlloc} field. */
     @NativeType("LZ4F_AllocFunction")
     public LZ4FAllocFunction customAlloc() { return ncustomAlloc(address()); }
-    /** optional; when not defined, uses {@code customAlloc} + {@code memset} */
+    /** @return the value of the {@code customCalloc} field. */
     @NativeType("LZ4F_CallocFunction")
     public @Nullable LZ4FCallocFunction customCalloc() { return ncustomCalloc(address()); }
     /** @return the value of the {@code customFree} field. */
@@ -97,7 +95,7 @@ public class LZ4FCustomMem extends Struct<LZ4FCustomMem> implements NativeResour
 
     /** Sets the specified value to the {@code customAlloc} field. */
     public LZ4FCustomMem customAlloc(@NativeType("LZ4F_AllocFunction") LZ4FAllocFunctionI value) { ncustomAlloc(address(), value); return this; }
-    /** Sets the specified value to the {@link #customCalloc} field. */
+    /** Sets the specified value to the {@code customCalloc} field. */
     public LZ4FCustomMem customCalloc(@Nullable @NativeType("LZ4F_CallocFunction") LZ4FCallocFunctionI value) { ncustomCalloc(address(), value); return this; }
     /** Sets the specified value to the {@code customFree} field. */
     public LZ4FCustomMem customFree(@NativeType("LZ4F_FreeFunction") LZ4FFreeFunctionI value) { ncustomFree(address(), value); return this; }
@@ -317,7 +315,7 @@ public class LZ4FCustomMem extends Struct<LZ4FCustomMem> implements NativeResour
         /** @return the value of the {@code customAlloc} field. */
         @NativeType("LZ4F_AllocFunction")
         public LZ4FAllocFunction customAlloc() { return LZ4FCustomMem.ncustomAlloc(address()); }
-        /** @return the value of the {@link LZ4FCustomMem#customCalloc} field. */
+        /** @return the value of the {@code customCalloc} field. */
         @NativeType("LZ4F_CallocFunction")
         public @Nullable LZ4FCallocFunction customCalloc() { return LZ4FCustomMem.ncustomCalloc(address()); }
         /** @return the value of the {@code customFree} field. */
@@ -329,7 +327,7 @@ public class LZ4FCustomMem extends Struct<LZ4FCustomMem> implements NativeResour
 
         /** Sets the specified value to the {@code customAlloc} field. */
         public LZ4FCustomMem.Buffer customAlloc(@NativeType("LZ4F_AllocFunction") LZ4FAllocFunctionI value) { LZ4FCustomMem.ncustomAlloc(address(), value); return this; }
-        /** Sets the specified value to the {@link LZ4FCustomMem#customCalloc} field. */
+        /** Sets the specified value to the {@code customCalloc} field. */
         public LZ4FCustomMem.Buffer customCalloc(@Nullable @NativeType("LZ4F_CallocFunction") LZ4FCallocFunctionI value) { LZ4FCustomMem.ncustomCalloc(address(), value); return this; }
         /** Sets the specified value to the {@code customFree} field. */
         public LZ4FCustomMem.Buffer customFree(@NativeType("LZ4F_FreeFunction") LZ4FFreeFunctionI value) { LZ4FCustomMem.ncustomFree(address(), value); return this; }

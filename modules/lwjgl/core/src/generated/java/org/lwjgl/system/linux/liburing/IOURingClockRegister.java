@@ -17,13 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_clock_register {
  *     __u32 clockid;
  *     __u32 __resv[3];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_clock_register")
 public class IOURingClockRegister extends Struct<IOURingClockRegister> implements NativeResource {

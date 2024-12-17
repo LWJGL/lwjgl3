@@ -17,36 +17,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Mesh block detection info.
- * 
- * <h5>Description</h5>
- * 
- * <p>Each mesh block <b>may</b> have a 'skirt' if {@link MLWorldMeshDetection#XR_WORLD_MESH_DETECTOR_REMOVE_MESH_SKIRT_BIT_ML WORLD_MESH_DETECTOR_REMOVE_MESH_SKIRT_BIT_ML} was not specified during the creation of the {@code XrWorldMeshDetectorML}. A skirt provides some overlap between adjacent mesh blocks. While a skirt improves coverage between blocks, it does not create a watertight mesh.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshStateRequestInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code baseSpace} <b>must</b> be a valid {@code XrSpace} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent3DfEXT}, {@link XrPosef}, {@link MLWorldMeshDetection#xrRequestWorldMeshStateAsyncML RequestWorldMeshStateAsyncML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshStateRequestInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSpace {@link #baseSpace};
- *     XrTime {@link #time};
- *     {@link XrPosef XrPosef} {@link #boundingBoxCenter};
- *     {@link XrExtent3DfEXT XrExtent3DfEXT} {@link #boundingBoxExtents};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSpace baseSpace;
+ *     XrTime time;
+ *     {@link XrPosef XrPosef} boundingBoxCenter;
+ *     {@link XrExtent3DfEXT XrExtent3DfEXT} boundingBoxExtents;
+ * }}</pre>
  */
 public class XrWorldMeshStateRequestInfoML extends Struct<XrWorldMeshStateRequestInfoML> implements NativeResource {
 
@@ -108,40 +87,40 @@ public class XrWorldMeshStateRequestInfoML extends Struct<XrWorldMeshStateReques
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the base space used by the bounding box. */
+    /** @return the value of the {@code baseSpace} field. */
     @NativeType("XrSpace")
     public long baseSpace() { return nbaseSpace(address()); }
-    /** the time at which the bounding box location is resolved. */
+    /** @return the value of the {@code time} field. */
     @NativeType("XrTime")
     public long time() { return ntime(address()); }
-    /** the {@link XrPosef} of the bounding box center. */
+    /** @return a {@link XrPosef} view of the {@code boundingBoxCenter} field. */
     public XrPosef boundingBoxCenter() { return nboundingBoxCenter(address()); }
-    /** the {@link XrExtent3DfEXT} of the bounding box. These extents indicate the full size of the box, so an {@link XrExtent3DfEXT} of 1.0,1.0,1.0 has a volume of 1 cubic meter and the box’s center is at {@code boundingBoxCenter}. */
+    /** @return a {@link XrExtent3DfEXT} view of the {@code boundingBoxExtents} field. */
     public XrExtent3DfEXT boundingBoxExtents() { return nboundingBoxExtents(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshStateRequestInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML} value to the {@code type} field. */
     public XrWorldMeshStateRequestInfoML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshStateRequestInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #baseSpace} field. */
+    /** Sets the specified value to the {@code baseSpace} field. */
     public XrWorldMeshStateRequestInfoML baseSpace(XrSpace value) { nbaseSpace(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XrWorldMeshStateRequestInfoML time(@NativeType("XrTime") long value) { ntime(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #boundingBoxCenter} field. */
+    /** Copies the specified {@link XrPosef} to the {@code boundingBoxCenter} field. */
     public XrWorldMeshStateRequestInfoML boundingBoxCenter(XrPosef value) { nboundingBoxCenter(address(), value); return this; }
-    /** Passes the {@link #boundingBoxCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code boundingBoxCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrWorldMeshStateRequestInfoML boundingBoxCenter(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(boundingBoxCenter()); return this; }
-    /** Copies the specified {@link XrExtent3DfEXT} to the {@link #boundingBoxExtents} field. */
+    /** Copies the specified {@link XrExtent3DfEXT} to the {@code boundingBoxExtents} field. */
     public XrWorldMeshStateRequestInfoML boundingBoxExtents(XrExtent3DfEXT value) { nboundingBoxExtents(address(), value); return this; }
-    /** Passes the {@link #boundingBoxExtents} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code boundingBoxExtents} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrWorldMeshStateRequestInfoML boundingBoxExtents(java.util.function.Consumer<XrExtent3DfEXT> consumer) { consumer.accept(boundingBoxExtents()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -364,40 +343,40 @@ public class XrWorldMeshStateRequestInfoML extends Struct<XrWorldMeshStateReques
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshStateRequestInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshStateRequestInfoML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshStateRequestInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrWorldMeshStateRequestInfoML.nnext(address()); }
-        /** @return the value of the {@link XrWorldMeshStateRequestInfoML#baseSpace} field. */
+        /** @return the value of the {@code baseSpace} field. */
         @NativeType("XrSpace")
         public long baseSpace() { return XrWorldMeshStateRequestInfoML.nbaseSpace(address()); }
-        /** @return the value of the {@link XrWorldMeshStateRequestInfoML#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("XrTime")
         public long time() { return XrWorldMeshStateRequestInfoML.ntime(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrWorldMeshStateRequestInfoML#boundingBoxCenter} field. */
+        /** @return a {@link XrPosef} view of the {@code boundingBoxCenter} field. */
         public XrPosef boundingBoxCenter() { return XrWorldMeshStateRequestInfoML.nboundingBoxCenter(address()); }
-        /** @return a {@link XrExtent3DfEXT} view of the {@link XrWorldMeshStateRequestInfoML#boundingBoxExtents} field. */
+        /** @return a {@link XrExtent3DfEXT} view of the {@code boundingBoxExtents} field. */
         public XrExtent3DfEXT boundingBoxExtents() { return XrWorldMeshStateRequestInfoML.nboundingBoxExtents(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshStateRequestInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshStateRequestInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML} value to the {@link XrWorldMeshStateRequestInfoML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML} value to the {@code type} field. */
         public XrWorldMeshStateRequestInfoML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshStateRequestInfoML.Buffer next(@NativeType("void const *") long value) { XrWorldMeshStateRequestInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestInfoML#baseSpace} field. */
+        /** Sets the specified value to the {@code baseSpace} field. */
         public XrWorldMeshStateRequestInfoML.Buffer baseSpace(XrSpace value) { XrWorldMeshStateRequestInfoML.nbaseSpace(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshStateRequestInfoML#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XrWorldMeshStateRequestInfoML.Buffer time(@NativeType("XrTime") long value) { XrWorldMeshStateRequestInfoML.ntime(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrWorldMeshStateRequestInfoML#boundingBoxCenter} field. */
+        /** Copies the specified {@link XrPosef} to the {@code boundingBoxCenter} field. */
         public XrWorldMeshStateRequestInfoML.Buffer boundingBoxCenter(XrPosef value) { XrWorldMeshStateRequestInfoML.nboundingBoxCenter(address(), value); return this; }
-        /** Passes the {@link XrWorldMeshStateRequestInfoML#boundingBoxCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code boundingBoxCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrWorldMeshStateRequestInfoML.Buffer boundingBoxCenter(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(boundingBoxCenter()); return this; }
-        /** Copies the specified {@link XrExtent3DfEXT} to the {@link XrWorldMeshStateRequestInfoML#boundingBoxExtents} field. */
+        /** Copies the specified {@link XrExtent3DfEXT} to the {@code boundingBoxExtents} field. */
         public XrWorldMeshStateRequestInfoML.Buffer boundingBoxExtents(XrExtent3DfEXT value) { XrWorldMeshStateRequestInfoML.nboundingBoxExtents(address(), value); return this; }
-        /** Passes the {@link XrWorldMeshStateRequestInfoML#boundingBoxExtents} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code boundingBoxExtents} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrWorldMeshStateRequestInfoML.Buffer boundingBoxExtents(java.util.function.Consumer<XrExtent3DfEXT> consumer) { consumer.accept(boundingBoxExtents()); return this; }
 
     }

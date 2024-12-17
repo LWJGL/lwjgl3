@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents an evaluated symbol address and flags.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LLVMJITEvaluatedSymbol {
  *     LLVMOrcExecutorAddress Address;
  *     {@link LLVMJITSymbolFlags LLVMJITSymbolFlags} Flags;
- * }</code></pre>
+ * }}</pre>
  */
 public class LLVMJITEvaluatedSymbol extends Struct<LLVMJITEvaluatedSymbol> implements NativeResource {
 

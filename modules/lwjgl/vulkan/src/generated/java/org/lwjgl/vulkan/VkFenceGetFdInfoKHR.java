@@ -16,43 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing a POSIX FD fence export operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>The properties of the file descriptor returned depend on the value of {@code handleType}. See {@code VkExternalFenceHandleTypeFlagBits} for a description of the properties of the defined external fence handle types.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code handleType} <b>must</b> have been included in {@link VkExportFenceCreateInfo}{@code ::handleTypes} when {@code fence}’s current payload was created</li>
- * <li>If {@code handleType} refers to a handle type with copy payload transference semantics, {@code fence} <b>must</b> be signaled, or have an associated <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-fences-signaling">fence signal operation</a> pending execution</li>
- * <li>{@code fence} <b>must</b> not currently have its payload replaced by an imported payload as described below in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#synchronization-fences-importing">Importing Fence Payloads</a> unless that imported payload’s handle type was included in {@link VkExternalFenceProperties}{@code ::exportFromImportedHandleTypes} for {@code handleType}</li>
- * <li>{@code handleType} <b>must</b> be defined as a POSIX file descriptor handle</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRExternalFenceFd#VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code fence} <b>must</b> be a valid {@code VkFence} handle</li>
- * <li>{@code handleType} <b>must</b> be a valid {@code VkExternalFenceHandleTypeFlagBits} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link KHRExternalFenceFd#vkGetFenceFdKHR GetFenceFdKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkFenceGetFdInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkFence {@link #fence};
- *     VkExternalFenceHandleTypeFlagBits {@link #handleType};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkFence fence;
+ *     VkExternalFenceHandleTypeFlagBits handleType;
+ * }}</pre>
  */
 public class VkFenceGetFdInfoKHR extends Struct<VkFenceGetFdInfoKHR> implements NativeResource {
 
@@ -108,28 +78,28 @@ public class VkFenceGetFdInfoKHR extends Struct<VkFenceGetFdInfoKHR> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the fence from which state will be exported. */
+    /** @return the value of the {@code fence} field. */
     @NativeType("VkFence")
     public long fence() { return nfence(address()); }
-    /** a {@code VkExternalFenceHandleTypeFlagBits} value specifying the type of handle requested. */
+    /** @return the value of the {@code handleType} field. */
     @NativeType("VkExternalFenceHandleTypeFlagBits")
     public int handleType() { return nhandleType(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkFenceGetFdInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRExternalFenceFd#VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRExternalFenceFd#VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR} value to the {@code sType} field. */
     public VkFenceGetFdInfoKHR sType$Default() { return sType(KHRExternalFenceFd.VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkFenceGetFdInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #fence} field. */
+    /** Sets the specified value to the {@code fence} field. */
     public VkFenceGetFdInfoKHR fence(@NativeType("VkFence") long value) { nfence(address(), value); return this; }
-    /** Sets the specified value to the {@link #handleType} field. */
+    /** Sets the specified value to the {@code handleType} field. */
     public VkFenceGetFdInfoKHR handleType(@NativeType("VkExternalFenceHandleTypeFlagBits") int value) { nhandleType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,28 +320,28 @@ public class VkFenceGetFdInfoKHR extends Struct<VkFenceGetFdInfoKHR> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkFenceGetFdInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkFenceGetFdInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkFenceGetFdInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkFenceGetFdInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkFenceGetFdInfoKHR#fence} field. */
+        /** @return the value of the {@code fence} field. */
         @NativeType("VkFence")
         public long fence() { return VkFenceGetFdInfoKHR.nfence(address()); }
-        /** @return the value of the {@link VkFenceGetFdInfoKHR#handleType} field. */
+        /** @return the value of the {@code handleType} field. */
         @NativeType("VkExternalFenceHandleTypeFlagBits")
         public int handleType() { return VkFenceGetFdInfoKHR.nhandleType(address()); }
 
-        /** Sets the specified value to the {@link VkFenceGetFdInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkFenceGetFdInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkFenceGetFdInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRExternalFenceFd#VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR} value to the {@link VkFenceGetFdInfoKHR#sType} field. */
+        /** Sets the {@link KHRExternalFenceFd#VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR} value to the {@code sType} field. */
         public VkFenceGetFdInfoKHR.Buffer sType$Default() { return sType(KHRExternalFenceFd.VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR); }
-        /** Sets the specified value to the {@link VkFenceGetFdInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkFenceGetFdInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkFenceGetFdInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkFenceGetFdInfoKHR#fence} field. */
+        /** Sets the specified value to the {@code fence} field. */
         public VkFenceGetFdInfoKHR.Buffer fence(@NativeType("VkFence") long value) { VkFenceGetFdInfoKHR.nfence(address(), value); return this; }
-        /** Sets the specified value to the {@link VkFenceGetFdInfoKHR#handleType} field. */
+        /** Sets the specified value to the {@code handleType} field. */
         public VkFenceGetFdInfoKHR.Buffer handleType(@NativeType("VkExternalFenceHandleTypeFlagBits") int value) { VkFenceGetFdInfoKHR.nhandleType(address(), value); return this; }
 
     }

@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * float (*{@link #invoke}) (
- *     float x,
- *     float scale,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke stbir__kernel_callback *} */
 public abstract class STBIRKernelCallback extends Callback implements STBIRKernelCallbackI {
 
     /**

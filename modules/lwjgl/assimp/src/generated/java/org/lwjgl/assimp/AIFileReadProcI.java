@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * size_t (*{@link #invoke}) (
- *     struct aiFile *pFile,
- *     char *pBuffer,
- *     size_t size,
- *     size_t count
- * )</code></pre>
- */
+/** Callback function: {@link #invoke aiFileReadProc} */
 @FunctionalInterface
 @NativeType("aiFileReadProc")
 public interface AIFileReadProcI extends CallbackI {
@@ -47,16 +37,7 @@ public interface AIFileReadProcI extends CallbackI {
         apiClosureRetP(ret, __result);
     }
 
-    /**
-     * File read procedure
-     *
-     * @param pFile   file pointer to read from
-     * @param pBuffer the buffer to read the values
-     * @param size    size in bytes of each element to be read
-     * @param count   number of elements to be read
-     *
-     * @return the number of elements read
-     */
+    /** {@code size_t (* aiFileReadProc) (struct aiFile * pFile, char * pBuffer, size_t size, size_t count)} */
     @NativeType("size_t") long invoke(@NativeType("struct aiFile *") long pFile, @NativeType("char *") long pBuffer, @NativeType("size_t") long size, @NativeType("size_t") long count);
 
 }

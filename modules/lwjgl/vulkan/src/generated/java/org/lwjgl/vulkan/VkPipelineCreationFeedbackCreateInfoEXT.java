@@ -17,18 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPipelineCreationFeedbackCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineCreationFeedbackCreateInfoEXT {
  *     VkStructureType sType;
  *     void const * pNext;
  *     {@link VkPipelineCreationFeedback VkPipelineCreationFeedback} * pPipelineCreationFeedback;
  *     uint32_t pipelineStageCreationFeedbackCount;
  *     {@link VkPipelineCreationFeedback VkPipelineCreationFeedback} * pPipelineStageCreationFeedbacks;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPipelineCreationFeedbackCreateInfoEXT extends VkPipelineCreationFeedbackCreateInfo {
 

@@ -16,33 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Passthrough color LUT update info.
- * 
- * <h5>Description</h5>
- * 
- * <p>The LUT data <b>may</b> be updated for an existing color LUT, while channels and resolution remain constant after creation. Hence, the value of {@link XrPassthroughColorLutDataMETA}{@code ::bufferSize} in {@code data} <b>must</b> be equal to the buffer size specified at creation. Otherwise, the runtime <b>must</b> return {@link METAPassthroughColorLut#XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAPassthroughColorLut XR_META_passthrough_color_lut} extension <b>must</b> be enabled prior to using {@link XrPassthroughColorLutUpdateInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code data} <b>must</b> be a valid {@link XrPassthroughColorLutDataMETA} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPassthroughColorLutDataMETA}, {@link METAPassthroughColorLut#xrUpdatePassthroughColorLutMETA UpdatePassthroughColorLutMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrPassthroughColorLutUpdateInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrPassthroughColorLutDataMETA XrPassthroughColorLutDataMETA} {@link #data};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrPassthroughColorLutDataMETA XrPassthroughColorLutDataMETA} data;
+ * }}</pre>
  */
 public class XrPassthroughColorLutUpdateInfoMETA extends Struct<XrPassthroughColorLutUpdateInfoMETA> implements NativeResource {
 
@@ -95,24 +74,24 @@ public class XrPassthroughColorLutUpdateInfoMETA extends Struct<XrPassthroughCol
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** contains the updated LUT data. */
+    /** @return a {@link XrPassthroughColorLutDataMETA} view of the {@code data} field. */
     public XrPassthroughColorLutDataMETA data() { return ndata(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrPassthroughColorLutUpdateInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META} value to the {@code type} field. */
     public XrPassthroughColorLutUpdateInfoMETA type$Default() { return type(METAPassthroughColorLut.XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrPassthroughColorLutUpdateInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrPassthroughColorLutDataMETA} to the {@link #data} field. */
+    /** Copies the specified {@link XrPassthroughColorLutDataMETA} to the {@code data} field. */
     public XrPassthroughColorLutUpdateInfoMETA data(XrPassthroughColorLutDataMETA value) { ndata(address(), value); return this; }
-    /** Passes the {@link #data} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrPassthroughColorLutUpdateInfoMETA data(java.util.function.Consumer<XrPassthroughColorLutDataMETA> consumer) { consumer.accept(data()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -317,24 +296,24 @@ public class XrPassthroughColorLutUpdateInfoMETA extends Struct<XrPassthroughCol
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrPassthroughColorLutUpdateInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrPassthroughColorLutUpdateInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrPassthroughColorLutUpdateInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrPassthroughColorLutUpdateInfoMETA.nnext(address()); }
-        /** @return a {@link XrPassthroughColorLutDataMETA} view of the {@link XrPassthroughColorLutUpdateInfoMETA#data} field. */
+        /** @return a {@link XrPassthroughColorLutDataMETA} view of the {@code data} field. */
         public XrPassthroughColorLutDataMETA data() { return XrPassthroughColorLutUpdateInfoMETA.ndata(address()); }
 
-        /** Sets the specified value to the {@link XrPassthroughColorLutUpdateInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrPassthroughColorLutUpdateInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrPassthroughColorLutUpdateInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META} value to the {@link XrPassthroughColorLutUpdateInfoMETA#type} field. */
+        /** Sets the {@link METAPassthroughColorLut#XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META} value to the {@code type} field. */
         public XrPassthroughColorLutUpdateInfoMETA.Buffer type$Default() { return type(METAPassthroughColorLut.XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META); }
-        /** Sets the specified value to the {@link XrPassthroughColorLutUpdateInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrPassthroughColorLutUpdateInfoMETA.Buffer next(@NativeType("void const *") long value) { XrPassthroughColorLutUpdateInfoMETA.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrPassthroughColorLutDataMETA} to the {@link XrPassthroughColorLutUpdateInfoMETA#data} field. */
+        /** Copies the specified {@link XrPassthroughColorLutDataMETA} to the {@code data} field. */
         public XrPassthroughColorLutUpdateInfoMETA.Buffer data(XrPassthroughColorLutDataMETA value) { XrPassthroughColorLutUpdateInfoMETA.ndata(address(), value); return this; }
-        /** Passes the {@link XrPassthroughColorLutUpdateInfoMETA#data} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code data} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrPassthroughColorLutUpdateInfoMETA.Buffer data(java.util.function.Consumer<XrPassthroughColorLutDataMETA> consumer) { consumer.accept(data()); return this; }
 
     }

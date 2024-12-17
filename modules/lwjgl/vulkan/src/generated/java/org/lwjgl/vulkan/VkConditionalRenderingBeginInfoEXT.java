@@ -16,44 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying conditional rendering begin information.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the 32-bit value at {@code offset} in {@code buffer} memory is zero, then the rendering commands are discarded, otherwise they are executed as normal. If the value of the predicate in buffer memory changes while conditional rendering is active, the rendering commands <b>may</b> be discarded in an implementation-dependent way. Some implementations may latch the value of the predicate upon beginning conditional rendering while others may read it before every rendering command.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code buffer} is non-sparse then it <b>must</b> be bound completely and contiguously to a single {@code VkDeviceMemory} object</li>
- * <li>{@code buffer} <b>must</b> have been created with the {@link EXTConditionalRendering#VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT} bit set</li>
- * <li>{@code offset} <b>must</b> be less than the size of {@code buffer} by at least 32 bits</li>
- * <li>{@code offset} <b>must</b> be a multiple of 4</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkConditionalRenderingFlagBitsEXT} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTConditionalRendering#vkCmdBeginConditionalRenderingEXT CmdBeginConditionalRenderingEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkConditionalRenderingBeginInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBuffer {@link #buffer};
- *     VkDeviceSize {@link #offset};
- *     VkConditionalRenderingFlagsEXT {@link #flags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBuffer buffer;
+ *     VkDeviceSize offset;
+ *     VkConditionalRenderingFlagsEXT flags;
+ * }}</pre>
  */
 public class VkConditionalRenderingBeginInfoEXT extends Struct<VkConditionalRenderingBeginInfoEXT> implements NativeResource {
 
@@ -112,33 +82,33 @@ public class VkConditionalRenderingBeginInfoEXT extends Struct<VkConditionalRend
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a buffer containing the predicate for conditional rendering. */
+    /** @return the value of the {@code buffer} field. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** the byte offset into {@code buffer} where the predicate is located. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("VkDeviceSize")
     public long offset() { return noffset(address()); }
-    /** a bitmask of {@code VkConditionalRenderingFlagsEXT} specifying the behavior of conditional rendering. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkConditionalRenderingFlagsEXT")
     public int flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkConditionalRenderingBeginInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT} value to the {@code sType} field. */
     public VkConditionalRenderingBeginInfoEXT sType$Default() { return sType(EXTConditionalRendering.VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkConditionalRenderingBeginInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #buffer} field. */
+    /** Sets the specified value to the {@code buffer} field. */
     public VkConditionalRenderingBeginInfoEXT buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkConditionalRenderingBeginInfoEXT offset(@NativeType("VkDeviceSize") long value) { noffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkConditionalRenderingBeginInfoEXT flags(@NativeType("VkConditionalRenderingFlagsEXT") int value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -365,33 +335,33 @@ public class VkConditionalRenderingBeginInfoEXT extends Struct<VkConditionalRend
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkConditionalRenderingBeginInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkConditionalRenderingBeginInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkConditionalRenderingBeginInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkConditionalRenderingBeginInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkConditionalRenderingBeginInfoEXT#buffer} field. */
+        /** @return the value of the {@code buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkConditionalRenderingBeginInfoEXT.nbuffer(address()); }
-        /** @return the value of the {@link VkConditionalRenderingBeginInfoEXT#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("VkDeviceSize")
         public long offset() { return VkConditionalRenderingBeginInfoEXT.noffset(address()); }
-        /** @return the value of the {@link VkConditionalRenderingBeginInfoEXT#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkConditionalRenderingFlagsEXT")
         public int flags() { return VkConditionalRenderingBeginInfoEXT.nflags(address()); }
 
-        /** Sets the specified value to the {@link VkConditionalRenderingBeginInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkConditionalRenderingBeginInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkConditionalRenderingBeginInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT} value to the {@link VkConditionalRenderingBeginInfoEXT#sType} field. */
+        /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT} value to the {@code sType} field. */
         public VkConditionalRenderingBeginInfoEXT.Buffer sType$Default() { return sType(EXTConditionalRendering.VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT); }
-        /** Sets the specified value to the {@link VkConditionalRenderingBeginInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkConditionalRenderingBeginInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkConditionalRenderingBeginInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkConditionalRenderingBeginInfoEXT#buffer} field. */
+        /** Sets the specified value to the {@code buffer} field. */
         public VkConditionalRenderingBeginInfoEXT.Buffer buffer(@NativeType("VkBuffer") long value) { VkConditionalRenderingBeginInfoEXT.nbuffer(address(), value); return this; }
-        /** Sets the specified value to the {@link VkConditionalRenderingBeginInfoEXT#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkConditionalRenderingBeginInfoEXT.Buffer offset(@NativeType("VkDeviceSize") long value) { VkConditionalRenderingBeginInfoEXT.noffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkConditionalRenderingBeginInfoEXT#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkConditionalRenderingBeginInfoEXT.Buffer flags(@NativeType("VkConditionalRenderingFlagsEXT") int value) { VkConditionalRenderingBeginInfoEXT.nflags(address(), value); return this; }
 
     }

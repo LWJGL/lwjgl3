@@ -17,53 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a push constant update operation.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>For each byte in the range specified by {@code offset} and {@code size} and for each shader stage in {@code stageFlags}, there <b>must</b> be a push constant range in {@code layout} that includes that byte and that stage</li>
- * <li>For each byte in the range specified by {@code offset} and {@code size} and for each push constant range that overlaps that byte, {@code stageFlags} <b>must</b> include all stages in that push constant range’s {@link VkPushConstantRange}{@code ::stageFlags}</li>
- * <li>{@code offset} <b>must</b> be a multiple of 4</li>
- * <li>{@code size} <b>must</b> be a multiple of 4</li>
- * <li>{@code offset} <b>must</b> be less than {@link VkPhysicalDeviceLimits}{@code ::maxPushConstantsSize}</li>
- * <li>{@code size} <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxPushConstantsSize} minus {@code offset}</li>
- * </ul>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is not enabled, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>If {@code layout} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, the {@code pNext} chain <b>must</b> include a valid {@link VkPipelineLayoutCreateInfo} structure</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PUSH_CONSTANTS_INFO STRUCTURE_TYPE_PUSH_CONSTANTS_INFO}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkPipelineLayoutCreateInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>If {@code layout} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>{@code stageFlags} <b>must</b> be a valid combination of {@code VkShaderStageFlagBits} values</li>
- * <li>{@code stageFlags} <b>must</b> not be 0</li>
- * <li>{@code pValues} <b>must</b> be a valid pointer to an array of {@code size} bytes</li>
- * <li>{@code size} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK14#vkCmdPushConstants2 CmdPushConstants2}, {@link KHRMaintenance6#vkCmdPushConstants2KHR CmdPushConstants2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPushConstantsInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineLayout {@link #layout};
- *     VkShaderStageFlags {@link #stageFlags};
- *     uint32_t {@link #offset};
- *     uint32_t {@link #size};
- *     void const * {@link #pValues};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineLayout layout;
+ *     VkShaderStageFlags stageFlags;
+ *     uint32_t offset;
+ *     uint32_t size;
+ *     void const * pValues;
+ * }}</pre>
  */
 public class VkPushConstantsInfo extends Struct<VkPushConstantsInfo> implements NativeResource {
 
@@ -128,43 +91,43 @@ public class VkPushConstantsInfo extends Struct<VkPushConstantsInfo> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the pipeline layout used to program the push constant updates. If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-dynamicPipelineLayout">{@code dynamicPipelineLayout}</a> feature is enabled, {@code layout} <b>can</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and the layout <b>must</b> be specified by chaining {@link VkPipelineLayoutCreateInfo} structure off the {@code pNext} */
+    /** @return the value of the {@code layout} field. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
-    /** a bitmask of {@code VkShaderStageFlagBits} specifying the shader stages that will use the push constants in the updated range. */
+    /** @return the value of the {@code stageFlags} field. */
     @NativeType("VkShaderStageFlags")
     public int stageFlags() { return nstageFlags(address()); }
-    /** the start offset of the push constant range to update, in units of bytes. */
+    /** @return the value of the {@code offset} field. */
     @NativeType("uint32_t")
     public int offset() { return noffset(address()); }
-    /** the size of the push constant range to update, in units of bytes. */
+    /** @return the value of the {@code size} field. */
     @NativeType("uint32_t")
     public int size() { return nsize(address()); }
-    /** a pointer to an array of {@code size} bytes containing the new push constant values. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pValues} field. */
     @NativeType("void const *")
     public ByteBuffer pValues() { return npValues(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPushConstantsInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PUSH_CONSTANTS_INFO STRUCTURE_TYPE_PUSH_CONSTANTS_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PUSH_CONSTANTS_INFO STRUCTURE_TYPE_PUSH_CONSTANTS_INFO} value to the {@code sType} field. */
     public VkPushConstantsInfo sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PUSH_CONSTANTS_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPushConstantsInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
     public VkPushConstantsInfo pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #layout} field. */
+    /** Sets the specified value to the {@code layout} field. */
     public VkPushConstantsInfo layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #stageFlags} field. */
+    /** Sets the specified value to the {@code stageFlags} field. */
     public VkPushConstantsInfo stageFlags(@NativeType("VkShaderStageFlags") int value) { nstageFlags(address(), value); return this; }
-    /** Sets the specified value to the {@link #offset} field. */
+    /** Sets the specified value to the {@code offset} field. */
     public VkPushConstantsInfo offset(@NativeType("uint32_t") int value) { noffset(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pValues} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pValues} field. */
     public VkPushConstantsInfo pValues(@NativeType("void const *") ByteBuffer value) { npValues(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -391,43 +354,43 @@ public class VkPushConstantsInfo extends Struct<VkPushConstantsInfo> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPushConstantsInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPushConstantsInfo.nsType(address()); }
-        /** @return the value of the {@link VkPushConstantsInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPushConstantsInfo.npNext(address()); }
-        /** @return the value of the {@link VkPushConstantsInfo#layout} field. */
+        /** @return the value of the {@code layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkPushConstantsInfo.nlayout(address()); }
-        /** @return the value of the {@link VkPushConstantsInfo#stageFlags} field. */
+        /** @return the value of the {@code stageFlags} field. */
         @NativeType("VkShaderStageFlags")
         public int stageFlags() { return VkPushConstantsInfo.nstageFlags(address()); }
-        /** @return the value of the {@link VkPushConstantsInfo#offset} field. */
+        /** @return the value of the {@code offset} field. */
         @NativeType("uint32_t")
         public int offset() { return VkPushConstantsInfo.noffset(address()); }
-        /** @return the value of the {@link VkPushConstantsInfo#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("uint32_t")
         public int size() { return VkPushConstantsInfo.nsize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkPushConstantsInfo#pValues} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pValues} field. */
         @NativeType("void const *")
         public ByteBuffer pValues() { return VkPushConstantsInfo.npValues(address()); }
 
-        /** Sets the specified value to the {@link VkPushConstantsInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPushConstantsInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkPushConstantsInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PUSH_CONSTANTS_INFO STRUCTURE_TYPE_PUSH_CONSTANTS_INFO} value to the {@link VkPushConstantsInfo#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PUSH_CONSTANTS_INFO STRUCTURE_TYPE_PUSH_CONSTANTS_INFO} value to the {@code sType} field. */
         public VkPushConstantsInfo.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PUSH_CONSTANTS_INFO); }
-        /** Sets the specified value to the {@link VkPushConstantsInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPushConstantsInfo.Buffer pNext(@NativeType("void const *") long value) { VkPushConstantsInfo.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineLayoutCreateInfo} value to the {@code pNext} chain. */
         public VkPushConstantsInfo.Buffer pNext(VkPipelineLayoutCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkPushConstantsInfo#layout} field. */
+        /** Sets the specified value to the {@code layout} field. */
         public VkPushConstantsInfo.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkPushConstantsInfo.nlayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPushConstantsInfo#stageFlags} field. */
+        /** Sets the specified value to the {@code stageFlags} field. */
         public VkPushConstantsInfo.Buffer stageFlags(@NativeType("VkShaderStageFlags") int value) { VkPushConstantsInfo.nstageFlags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPushConstantsInfo#offset} field. */
+        /** Sets the specified value to the {@code offset} field. */
         public VkPushConstantsInfo.Buffer offset(@NativeType("uint32_t") int value) { VkPushConstantsInfo.noffset(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkPushConstantsInfo#pValues} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pValues} field. */
         public VkPushConstantsInfo.Buffer pValues(@NativeType("void const *") ByteBuffer value) { VkPushConstantsInfo.npValues(address(), value); return this; }
 
     }

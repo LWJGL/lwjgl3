@@ -18,34 +18,24 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure describing H.264 encode capabilities.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH264CapabilitiesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkVideoEncodeH264CapabilityFlagsKHR {@link #flags};
- *     StdVideoH264LevelIdc {@link #maxLevelIdc};
- *     uint32_t {@link #maxSliceCount};
- *     uint32_t {@link #maxPPictureL0ReferenceCount};
- *     uint32_t {@link #maxBPictureL0ReferenceCount};
- *     uint32_t {@link #maxL1ReferenceCount};
- *     uint32_t {@link #maxTemporalLayerCount};
- *     VkBool32 {@link #expectDyadicTemporalLayerPattern};
- *     int32_t {@link #minQp};
- *     int32_t {@link #maxQp};
- *     VkBool32 {@link #prefersGopRemainingFrames};
- *     VkBool32 {@link #requiresGopRemainingFrames};
- *     VkVideoEncodeH264StdFlagsKHR {@link #stdSyntaxFlags};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkVideoEncodeH264CapabilityFlagsKHR flags;
+ *     StdVideoH264LevelIdc maxLevelIdc;
+ *     uint32_t maxSliceCount;
+ *     uint32_t maxPPictureL0ReferenceCount;
+ *     uint32_t maxBPictureL0ReferenceCount;
+ *     uint32_t maxL1ReferenceCount;
+ *     uint32_t maxTemporalLayerCount;
+ *     VkBool32 expectDyadicTemporalLayerPattern;
+ *     int32_t minQp;
+ *     int32_t maxQp;
+ *     VkBool32 prefersGopRemainingFrames;
+ *     VkBool32 requiresGopRemainingFrames;
+ *     VkVideoEncodeH264StdFlagsKHR stdSyntaxFlags;
+ * }}</pre>
  */
 public class VkVideoEncodeH264CapabilitiesKHR extends Struct<VkVideoEncodeH264CapabilitiesKHR> implements NativeResource {
 
@@ -134,71 +124,57 @@ public class VkVideoEncodeH264CapabilitiesKHR extends Struct<VkVideoEncodeH264Ca
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoEncodeH264CapabilityFlagBitsKHR} indicating supported H.264 encoding capabilities. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkVideoEncodeH264CapabilityFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** a {@code StdVideoH264LevelIdc} value indicating the maximum H.264 level supported by the profile, where enum constant {@code STD_VIDEO_H264_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.264 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.3 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h264">ITU-T H.264 Specification</a>. */
+    /** @return the value of the {@code maxLevelIdc} field. */
     @NativeType("StdVideoH264LevelIdc")
     public int maxLevelIdc() { return nmaxLevelIdc(address()); }
-    /** indicates the maximum number of slices that <b>can</b> be encoded for a single picture. Further restrictions <b>may</b> apply to the number of slices that <b>can</b> be encoded for a single picture depending on other capabilities and codec-specific rules. */
+    /** @return the value of the {@code maxSliceCount} field. */
     @NativeType("uint32_t")
     public int maxSliceCount() { return nmaxSliceCount(address()); }
-    /**
-     * indicates the maximum number of reference pictures the implementation supports in the reference list L0 for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-p-pic">P pictures</a>.
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>As implementations <b>may</b> <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">override</a> the reference lists, {@code maxPPictureL0ReferenceCount} does not limit the number of elements that the application <b>can</b> specify in the L0 reference list for P pictures. However, if {@code maxPPictureL0ReferenceCount} is zero, then the use of P pictures is not allowed.</p>
-     * </div>
-     */
+    /** @return the value of the {@code maxPPictureL0ReferenceCount} field. */
     @NativeType("uint32_t")
     public int maxPPictureL0ReferenceCount() { return nmaxPPictureL0ReferenceCount(address()); }
-    /** indicates the maximum number of reference pictures the implementation supports in the reference list L0 for <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-b-pic">B pictures</a>. */
+    /** @return the value of the {@code maxBPictureL0ReferenceCount} field. */
     @NativeType("uint32_t")
     public int maxBPictureL0ReferenceCount() { return nmaxBPictureL0ReferenceCount(address()); }
-    /**
-     * indicates the maximum number of reference pictures the implementation supports in the reference list L1 if encoding of <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-b-pic">B pictures</a> is supported.
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>As implementations <b>may</b> <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-overrides">override</a> the reference lists, {@code maxBPictureL0ReferenceCount} and {@code maxL1ReferenceCount} does not limit the number of elements that the application <b>can</b> specify in the L0 and L1 reference lists for B pictures. However, if {@code maxBPictureL0ReferenceCount} and {@code maxL1ReferenceCount} are both zero, then the use of B pictures is not allowed.</p>
-     * </div>
-     */
+    /** @return the value of the {@code maxL1ReferenceCount} field. */
     @NativeType("uint32_t")
     public int maxL1ReferenceCount() { return nmaxL1ReferenceCount(address()); }
-    /** indicates the maximum number of H.264 temporal layers supported by the implementation. */
+    /** @return the value of the {@code maxTemporalLayerCount} field. */
     @NativeType("uint32_t")
     public int maxTemporalLayerCount() { return nmaxTemporalLayerCount(address()); }
-    /** indicates that the implementation’s rate control algorithms expect the application to use a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-layer-pattern-dyadic">dyadic temporal layer pattern</a> when encoding multiple temporal layers. */
+    /** @return the value of the {@code expectDyadicTemporalLayerPattern} field. */
     @NativeType("VkBool32")
     public boolean expectDyadicTemporalLayerPattern() { return nexpectDyadicTemporalLayerPattern(address()) != 0; }
-    /** indicates the minimum QP value supported. */
+    /** @return the value of the {@code minQp} field. */
     @NativeType("int32_t")
     public int minQp() { return nminQp(address()); }
-    /** indicates the maximum QP value supported. */
+    /** @return the value of the {@code maxQp} field. */
     @NativeType("int32_t")
     public int maxQp() { return nmaxQp(address()); }
-    /** indicates that the implementation’s rate control algorithm prefers the application to specify the number of frames of each type <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-gop-remaining-frames">remaining</a> in the current <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-gop">group of pictures</a> when beginning a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding-scope">video coding scope</a>. */
+    /** @return the value of the {@code prefersGopRemainingFrames} field. */
     @NativeType("VkBool32")
     public boolean prefersGopRemainingFrames() { return nprefersGopRemainingFrames(address()) != 0; }
-    /** indicates that the implementation’s rate control algorithm requires the application to specify the number of frames of each type <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-gop-remaining-frames">remaining</a> in the current <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h264-gop">group of pictures</a> when beginning a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding-scope">video coding scope</a>. */
+    /** @return the value of the {@code requiresGopRemainingFrames} field. */
     @NativeType("VkBool32")
     public boolean requiresGopRemainingFrames() { return nrequiresGopRemainingFrames(address()) != 0; }
-    /** a bitmask of {@code VkVideoEncodeH264StdFlagBitsKHR} indicating capabilities related to H.264 syntax elements. */
+    /** @return the value of the {@code stdSyntaxFlags} field. */
     @NativeType("VkVideoEncodeH264StdFlagsKHR")
     public int stdSyntaxFlags() { return nstdSyntaxFlags(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH264CapabilitiesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH264CapabilitiesKHR sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH264CapabilitiesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -414,57 +390,57 @@ public class VkVideoEncodeH264CapabilitiesKHR extends Struct<VkVideoEncodeH264Ca
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH264CapabilitiesKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkVideoEncodeH264CapabilitiesKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkVideoEncodeH264CapabilityFlagsKHR")
         public int flags() { return VkVideoEncodeH264CapabilitiesKHR.nflags(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#maxLevelIdc} field. */
+        /** @return the value of the {@code maxLevelIdc} field. */
         @NativeType("StdVideoH264LevelIdc")
         public int maxLevelIdc() { return VkVideoEncodeH264CapabilitiesKHR.nmaxLevelIdc(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#maxSliceCount} field. */
+        /** @return the value of the {@code maxSliceCount} field. */
         @NativeType("uint32_t")
         public int maxSliceCount() { return VkVideoEncodeH264CapabilitiesKHR.nmaxSliceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#maxPPictureL0ReferenceCount} field. */
+        /** @return the value of the {@code maxPPictureL0ReferenceCount} field. */
         @NativeType("uint32_t")
         public int maxPPictureL0ReferenceCount() { return VkVideoEncodeH264CapabilitiesKHR.nmaxPPictureL0ReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#maxBPictureL0ReferenceCount} field. */
+        /** @return the value of the {@code maxBPictureL0ReferenceCount} field. */
         @NativeType("uint32_t")
         public int maxBPictureL0ReferenceCount() { return VkVideoEncodeH264CapabilitiesKHR.nmaxBPictureL0ReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#maxL1ReferenceCount} field. */
+        /** @return the value of the {@code maxL1ReferenceCount} field. */
         @NativeType("uint32_t")
         public int maxL1ReferenceCount() { return VkVideoEncodeH264CapabilitiesKHR.nmaxL1ReferenceCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#maxTemporalLayerCount} field. */
+        /** @return the value of the {@code maxTemporalLayerCount} field. */
         @NativeType("uint32_t")
         public int maxTemporalLayerCount() { return VkVideoEncodeH264CapabilitiesKHR.nmaxTemporalLayerCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#expectDyadicTemporalLayerPattern} field. */
+        /** @return the value of the {@code expectDyadicTemporalLayerPattern} field. */
         @NativeType("VkBool32")
         public boolean expectDyadicTemporalLayerPattern() { return VkVideoEncodeH264CapabilitiesKHR.nexpectDyadicTemporalLayerPattern(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#minQp} field. */
+        /** @return the value of the {@code minQp} field. */
         @NativeType("int32_t")
         public int minQp() { return VkVideoEncodeH264CapabilitiesKHR.nminQp(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#maxQp} field. */
+        /** @return the value of the {@code maxQp} field. */
         @NativeType("int32_t")
         public int maxQp() { return VkVideoEncodeH264CapabilitiesKHR.nmaxQp(address()); }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#prefersGopRemainingFrames} field. */
+        /** @return the value of the {@code prefersGopRemainingFrames} field. */
         @NativeType("VkBool32")
         public boolean prefersGopRemainingFrames() { return VkVideoEncodeH264CapabilitiesKHR.nprefersGopRemainingFrames(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#requiresGopRemainingFrames} field. */
+        /** @return the value of the {@code requiresGopRemainingFrames} field. */
         @NativeType("VkBool32")
         public boolean requiresGopRemainingFrames() { return VkVideoEncodeH264CapabilitiesKHR.nrequiresGopRemainingFrames(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH264CapabilitiesKHR#stdSyntaxFlags} field. */
+        /** @return the value of the {@code stdSyntaxFlags} field. */
         @NativeType("VkVideoEncodeH264StdFlagsKHR")
         public int stdSyntaxFlags() { return VkVideoEncodeH264CapabilitiesKHR.nstdSyntaxFlags(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH264CapabilitiesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH264CapabilitiesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR} value to the {@link VkVideoEncodeH264CapabilitiesKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH264#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH264CapabilitiesKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH264.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH264CapabilitiesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH264CapabilitiesKHR.Buffer pNext(@NativeType("void *") long value) { VkVideoEncodeH264CapabilitiesKHR.npNext(address(), value); return this; }
 
     }

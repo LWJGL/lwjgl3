@@ -13,18 +13,10 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_multitexture.txt">ARB_multitexture</a> extension.
- * 
- * <p>This extension allows application of multiple textures to a fragment in one rendering pass.</p>
- * 
- * <p>Promoted to core in {@link GL13 OpenGL 1.3}.</p>
- */
 public class ARBMultitexture {
 
     static { GL.initialize(); }
 
-    /** Accepted by the {@code texture} parameter of ActiveTexture and MultiTexCoord. */
     public static final int
         GL_TEXTURE0_ARB  = 0x84C0,
         GL_TEXTURE1_ARB  = 0x84C1,
@@ -59,7 +51,6 @@ public class ARBMultitexture {
         GL_TEXTURE30_ARB = 0x84DE,
         GL_TEXTURE31_ARB = 0x84DF;
 
-    /** Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv. */
     public static final int
         GL_ACTIVE_TEXTURE_ARB        = 0x84E0,
         GL_CLIENT_ACTIVE_TEXTURE_ARB = 0x84E1,
@@ -71,75 +62,40 @@ public class ARBMultitexture {
 
     // --- [ glActiveTextureARB ] ---
 
-    /**
-     * Selects which texture unit subsequent texture state calls will affect. The number of texture units an implementation supports is implementation
-     * dependent.
-     *
-     * @param texture which texture unit to make active. One of:<br><table><tr><td>{@link #GL_TEXTURE0_ARB TEXTURE0_ARB}</td><td>GL_TEXTURE[1-31]</td></tr></table>
-     */
+    /** {@code void glActiveTextureARB(GLenum texture)} */
     public static native void glActiveTextureARB(@NativeType("GLenum") int texture);
 
     // --- [ glClientActiveTextureARB ] ---
 
-    /**
-     * Selects the vertex array client state parameters to be modified by the TexCoordPointer command and the array affected by EnableClientState and
-     * DisableClientState with parameter TEXTURE_COORD_ARRAY.
-     *
-     * @param texture which texture coordinate array to make active. One of:<br><table><tr><td>{@link #GL_TEXTURE0_ARB TEXTURE0_ARB}</td><td>GL_TEXTURE[1-31]</td></tr></table>
-     */
+    /** {@code void glClientActiveTextureARB(GLenum texture)} */
     public static native void glClientActiveTextureARB(@NativeType("GLenum") int texture);
 
     // --- [ glMultiTexCoord1fARB ] ---
 
-    /**
-     * Sets the current one-dimensional texture coordinate for the specified texture coordinate set. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord1fARB(GLenum texture, GLfloat s)} */
     public static native void glMultiTexCoord1fARB(@NativeType("GLenum") int texture, @NativeType("GLfloat") float s);
 
     // --- [ glMultiTexCoord1sARB ] ---
 
-    /**
-     * Short version of {@link #glMultiTexCoord1fARB MultiTexCoord1fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord1sARB(GLenum texture, GLshort s)} */
     public static native void glMultiTexCoord1sARB(@NativeType("GLenum") int texture, @NativeType("GLshort") short s);
 
     // --- [ glMultiTexCoord1iARB ] ---
 
-    /**
-     * Integer version of {@link #glMultiTexCoord1fARB MultiTexCoord1fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord1iARB(GLenum texture, GLint s)} */
     public static native void glMultiTexCoord1iARB(@NativeType("GLenum") int texture, @NativeType("GLint") int s);
 
     // --- [ glMultiTexCoord1dARB ] ---
 
-    /**
-     * Double version of {@link #glMultiTexCoord1fARB MultiTexCoord1fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord1dARB(GLenum texture, GLdouble s)} */
     public static native void glMultiTexCoord1dARB(@NativeType("GLenum") int texture, @NativeType("GLdouble") double s);
 
     // --- [ glMultiTexCoord1fvARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord1fvARB MultiTexCoord1fvARB} */
+    /** {@code void glMultiTexCoord1fvARB(GLenum texture, GLfloat const * v)} */
     public static native void nglMultiTexCoord1fvARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord1fARB MultiTexCoord1fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord1fvARB(GLenum texture, GLfloat const * v)} */
     public static void glMultiTexCoord1fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 1);
@@ -149,15 +105,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord1svARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord1svARB MultiTexCoord1svARB} */
+    /** {@code void glMultiTexCoord1svARB(GLenum texture, GLshort const * v)} */
     public static native void nglMultiTexCoord1svARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord1sARB MultiTexCoord1sARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord1svARB(GLenum texture, GLshort const * v)} */
     public static void glMultiTexCoord1svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 1);
@@ -167,15 +118,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord1ivARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord1ivARB MultiTexCoord1ivARB} */
+    /** {@code void glMultiTexCoord1ivARB(GLenum texture, GLint const * v)} */
     public static native void nglMultiTexCoord1ivARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord1iARB MultiTexCoord1iARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord1ivARB(GLenum texture, GLint const * v)} */
     public static void glMultiTexCoord1ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 1);
@@ -185,15 +131,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord1dvARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord1dvARB MultiTexCoord1dvARB} */
+    /** {@code void glMultiTexCoord1dvARB(GLenum texture, GLdouble const * v)} */
     public static native void nglMultiTexCoord1dvARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord1dARB MultiTexCoord1dARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord1dvARB(GLenum texture, GLdouble const * v)} */
     public static void glMultiTexCoord1dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
             check(v, 1);
@@ -203,59 +144,30 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord2fARB ] ---
 
-    /**
-     * Sets the current two-dimensional texture coordinate for the specified texture coordinate set. {@code r} is implicitly set to 0 and {@code q} to 1.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord2fARB(GLenum texture, GLfloat s, GLfloat t)} */
     public static native void glMultiTexCoord2fARB(@NativeType("GLenum") int texture, @NativeType("GLfloat") float s, @NativeType("GLfloat") float t);
 
     // --- [ glMultiTexCoord2sARB ] ---
 
-    /**
-     * Short version of {@link #glMultiTexCoord2fARB MultiTexCoord2fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord2sARB(GLenum texture, GLshort s, GLshort t)} */
     public static native void glMultiTexCoord2sARB(@NativeType("GLenum") int texture, @NativeType("GLshort") short s, @NativeType("GLshort") short t);
 
     // --- [ glMultiTexCoord2iARB ] ---
 
-    /**
-     * Integer version of {@link #glMultiTexCoord2fARB MultiTexCoord2fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord2iARB(GLenum texture, GLint s, GLint t)} */
     public static native void glMultiTexCoord2iARB(@NativeType("GLenum") int texture, @NativeType("GLint") int s, @NativeType("GLint") int t);
 
     // --- [ glMultiTexCoord2dARB ] ---
 
-    /**
-     * Double version of {@link #glMultiTexCoord2fARB MultiTexCoord2fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord2dARB(GLenum texture, GLdouble s, GLdouble t)} */
     public static native void glMultiTexCoord2dARB(@NativeType("GLenum") int texture, @NativeType("GLdouble") double s, @NativeType("GLdouble") double t);
 
     // --- [ glMultiTexCoord2fvARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord2fvARB MultiTexCoord2fvARB} */
+    /** {@code void glMultiTexCoord2fvARB(GLenum texture, GLfloat const * v)} */
     public static native void nglMultiTexCoord2fvARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord2fARB MultiTexCoord2fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord2fvARB(GLenum texture, GLfloat const * v)} */
     public static void glMultiTexCoord2fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 2);
@@ -265,15 +177,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord2svARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord2svARB MultiTexCoord2svARB} */
+    /** {@code void glMultiTexCoord2svARB(GLenum texture, GLshort const * v)} */
     public static native void nglMultiTexCoord2svARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord2sARB MultiTexCoord2sARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord2svARB(GLenum texture, GLshort const * v)} */
     public static void glMultiTexCoord2svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 2);
@@ -283,15 +190,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord2ivARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord2ivARB MultiTexCoord2ivARB} */
+    /** {@code void glMultiTexCoord2ivARB(GLenum texture, GLint const * v)} */
     public static native void nglMultiTexCoord2ivARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord2iARB MultiTexCoord2iARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord2ivARB(GLenum texture, GLint const * v)} */
     public static void glMultiTexCoord2ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 2);
@@ -301,15 +203,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord2dvARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord2dvARB MultiTexCoord2dvARB} */
+    /** {@code void glMultiTexCoord2dvARB(GLenum texture, GLdouble const * v)} */
     public static native void nglMultiTexCoord2dvARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord2dARB MultiTexCoord2dARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord2dvARB(GLenum texture, GLdouble const * v)} */
     public static void glMultiTexCoord2dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
             check(v, 2);
@@ -319,63 +216,30 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord3fARB ] ---
 
-    /**
-     * Sets the current three-dimensional texture coordinate for the specified texture coordinate set. {@code q} is implicitly set to 1.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     * @param r       the r component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord3fARB(GLenum texture, GLfloat s, GLfloat t, GLfloat r)} */
     public static native void glMultiTexCoord3fARB(@NativeType("GLenum") int texture, @NativeType("GLfloat") float s, @NativeType("GLfloat") float t, @NativeType("GLfloat") float r);
 
     // --- [ glMultiTexCoord3sARB ] ---
 
-    /**
-     * Short version of {@link #glMultiTexCoord3fARB MultiTexCoord3fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     * @param r       the r component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord3sARB(GLenum texture, GLshort s, GLshort t, GLshort r)} */
     public static native void glMultiTexCoord3sARB(@NativeType("GLenum") int texture, @NativeType("GLshort") short s, @NativeType("GLshort") short t, @NativeType("GLshort") short r);
 
     // --- [ glMultiTexCoord3iARB ] ---
 
-    /**
-     * Integer version of {@link #glMultiTexCoord3fARB MultiTexCoord3fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     * @param r       the r component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord3iARB(GLenum texture, GLint s, GLint t, GLint r)} */
     public static native void glMultiTexCoord3iARB(@NativeType("GLenum") int texture, @NativeType("GLint") int s, @NativeType("GLint") int t, @NativeType("GLint") int r);
 
     // --- [ glMultiTexCoord3dARB ] ---
 
-    /**
-     * Double version of {@link #glMultiTexCoord3fARB MultiTexCoord3fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     * @param r       the r component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord3dARB(GLenum texture, GLdouble s, GLdouble t, GLdouble r)} */
     public static native void glMultiTexCoord3dARB(@NativeType("GLenum") int texture, @NativeType("GLdouble") double s, @NativeType("GLdouble") double t, @NativeType("GLdouble") double r);
 
     // --- [ glMultiTexCoord3fvARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord3fvARB MultiTexCoord3fvARB} */
+    /** {@code void glMultiTexCoord3fvARB(GLenum texture, GLfloat const * v)} */
     public static native void nglMultiTexCoord3fvARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord3fARB MultiTexCoord3fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord3fvARB(GLenum texture, GLfloat const * v)} */
     public static void glMultiTexCoord3fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 3);
@@ -385,15 +249,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord3svARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord3svARB MultiTexCoord3svARB} */
+    /** {@code void glMultiTexCoord3svARB(GLenum texture, GLshort const * v)} */
     public static native void nglMultiTexCoord3svARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord3sARB MultiTexCoord3sARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord3svARB(GLenum texture, GLshort const * v)} */
     public static void glMultiTexCoord3svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 3);
@@ -403,15 +262,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord3ivARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord3ivARB MultiTexCoord3ivARB} */
+    /** {@code void glMultiTexCoord3ivARB(GLenum texture, GLint const * v)} */
     public static native void nglMultiTexCoord3ivARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord3iARB MultiTexCoord3iARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord3ivARB(GLenum texture, GLint const * v)} */
     public static void glMultiTexCoord3ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 3);
@@ -421,15 +275,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord3dvARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord3dvARB MultiTexCoord3dvARB} */
+    /** {@code void glMultiTexCoord3dvARB(GLenum texture, GLdouble const * v)} */
     public static native void nglMultiTexCoord3dvARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord3dARB MultiTexCoord3dARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord3dvARB(GLenum texture, GLdouble const * v)} */
     public static void glMultiTexCoord3dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
             check(v, 3);
@@ -439,67 +288,30 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord4fARB ] ---
 
-    /**
-     * Sets the current four-dimensional texture coordinate for the specified texture coordinate set.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     * @param r       the r component of the current texture coordinates
-     * @param q       the q component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord4fARB(GLenum texture, GLfloat s, GLfloat t, GLfloat r, GLfloat q)} */
     public static native void glMultiTexCoord4fARB(@NativeType("GLenum") int texture, @NativeType("GLfloat") float s, @NativeType("GLfloat") float t, @NativeType("GLfloat") float r, @NativeType("GLfloat") float q);
 
     // --- [ glMultiTexCoord4sARB ] ---
 
-    /**
-     * Short version of {@link #glMultiTexCoord4fARB MultiTexCoord4fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     * @param r       the r component of the current texture coordinates
-     * @param q       the q component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord4sARB(GLenum texture, GLshort s, GLshort t, GLshort r, GLshort q)} */
     public static native void glMultiTexCoord4sARB(@NativeType("GLenum") int texture, @NativeType("GLshort") short s, @NativeType("GLshort") short t, @NativeType("GLshort") short r, @NativeType("GLshort") short q);
 
     // --- [ glMultiTexCoord4iARB ] ---
 
-    /**
-     * Integer version of {@link #glMultiTexCoord4fARB MultiTexCoord4fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     * @param r       the r component of the current texture coordinates
-     * @param q       the q component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord4iARB(GLenum texture, GLint s, GLint t, GLint r, GLint q)} */
     public static native void glMultiTexCoord4iARB(@NativeType("GLenum") int texture, @NativeType("GLint") int s, @NativeType("GLint") int t, @NativeType("GLint") int r, @NativeType("GLint") int q);
 
     // --- [ glMultiTexCoord4dARB ] ---
 
-    /**
-     * Double version of {@link #glMultiTexCoord4fARB MultiTexCoord4fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param s       the s component of the current texture coordinates
-     * @param t       the t component of the current texture coordinates
-     * @param r       the r component of the current texture coordinates
-     * @param q       the q component of the current texture coordinates
-     */
+    /** {@code void glMultiTexCoord4dARB(GLenum texture, GLdouble s, GLdouble t, GLdouble r, GLdouble q)} */
     public static native void glMultiTexCoord4dARB(@NativeType("GLenum") int texture, @NativeType("GLdouble") double s, @NativeType("GLdouble") double t, @NativeType("GLdouble") double r, @NativeType("GLdouble") double q);
 
     // --- [ glMultiTexCoord4fvARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord4fvARB MultiTexCoord4fvARB} */
+    /** {@code void glMultiTexCoord4fvARB(GLenum texture, GLfloat const * v)} */
     public static native void nglMultiTexCoord4fvARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord4fARB MultiTexCoord4fARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord4fvARB(GLenum texture, GLfloat const * v)} */
     public static void glMultiTexCoord4fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") FloatBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -509,15 +321,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord4svARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord4svARB MultiTexCoord4svARB} */
+    /** {@code void glMultiTexCoord4svARB(GLenum texture, GLshort const * v)} */
     public static native void nglMultiTexCoord4svARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord4sARB MultiTexCoord4sARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord4svARB(GLenum texture, GLshort const * v)} */
     public static void glMultiTexCoord4svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") ShortBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -527,15 +334,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord4ivARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord4ivARB MultiTexCoord4ivARB} */
+    /** {@code void glMultiTexCoord4ivARB(GLenum texture, GLint const * v)} */
     public static native void nglMultiTexCoord4ivARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord4iARB MultiTexCoord4iARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord4ivARB(GLenum texture, GLint const * v)} */
     public static void glMultiTexCoord4ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") IntBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -545,15 +347,10 @@ public class ARBMultitexture {
 
     // --- [ glMultiTexCoord4dvARB ] ---
 
-    /** Unsafe version of: {@link #glMultiTexCoord4dvARB MultiTexCoord4dvARB} */
+    /** {@code void glMultiTexCoord4dvARB(GLenum texture, GLdouble const * v)} */
     public static native void nglMultiTexCoord4dvARB(int texture, long v);
 
-    /**
-     * Pointer version of {@link #glMultiTexCoord4dARB MultiTexCoord4dARB}.
-     *
-     * @param texture the coordinate set to be modified
-     * @param v       the texture coordinate buffer
-     */
+    /** {@code void glMultiTexCoord4dvARB(GLenum texture, GLdouble const * v)} */
     public static void glMultiTexCoord4dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") DoubleBuffer v) {
         if (CHECKS) {
             check(v, 4);
@@ -561,7 +358,7 @@ public class ARBMultitexture {
         nglMultiTexCoord4dvARB(texture, memAddress(v));
     }
 
-    /** Array version of: {@link #glMultiTexCoord1fvARB MultiTexCoord1fvARB} */
+    /** {@code void glMultiTexCoord1fvARB(GLenum texture, GLfloat const * v)} */
     public static void glMultiTexCoord1fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1fvARB;
         if (CHECKS) {
@@ -571,7 +368,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord1svARB MultiTexCoord1svARB} */
+    /** {@code void glMultiTexCoord1svARB(GLenum texture, GLshort const * v)} */
     public static void glMultiTexCoord1svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1svARB;
         if (CHECKS) {
@@ -581,7 +378,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord1ivARB MultiTexCoord1ivARB} */
+    /** {@code void glMultiTexCoord1ivARB(GLenum texture, GLint const * v)} */
     public static void glMultiTexCoord1ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1ivARB;
         if (CHECKS) {
@@ -591,7 +388,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord1dvARB MultiTexCoord1dvARB} */
+    /** {@code void glMultiTexCoord1dvARB(GLenum texture, GLdouble const * v)} */
     public static void glMultiTexCoord1dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord1dvARB;
         if (CHECKS) {
@@ -601,7 +398,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord2fvARB MultiTexCoord2fvARB} */
+    /** {@code void glMultiTexCoord2fvARB(GLenum texture, GLfloat const * v)} */
     public static void glMultiTexCoord2fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2fvARB;
         if (CHECKS) {
@@ -611,7 +408,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord2svARB MultiTexCoord2svARB} */
+    /** {@code void glMultiTexCoord2svARB(GLenum texture, GLshort const * v)} */
     public static void glMultiTexCoord2svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2svARB;
         if (CHECKS) {
@@ -621,7 +418,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord2ivARB MultiTexCoord2ivARB} */
+    /** {@code void glMultiTexCoord2ivARB(GLenum texture, GLint const * v)} */
     public static void glMultiTexCoord2ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2ivARB;
         if (CHECKS) {
@@ -631,7 +428,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord2dvARB MultiTexCoord2dvARB} */
+    /** {@code void glMultiTexCoord2dvARB(GLenum texture, GLdouble const * v)} */
     public static void glMultiTexCoord2dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord2dvARB;
         if (CHECKS) {
@@ -641,7 +438,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord3fvARB MultiTexCoord3fvARB} */
+    /** {@code void glMultiTexCoord3fvARB(GLenum texture, GLfloat const * v)} */
     public static void glMultiTexCoord3fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3fvARB;
         if (CHECKS) {
@@ -651,7 +448,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord3svARB MultiTexCoord3svARB} */
+    /** {@code void glMultiTexCoord3svARB(GLenum texture, GLshort const * v)} */
     public static void glMultiTexCoord3svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3svARB;
         if (CHECKS) {
@@ -661,7 +458,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord3ivARB MultiTexCoord3ivARB} */
+    /** {@code void glMultiTexCoord3ivARB(GLenum texture, GLint const * v)} */
     public static void glMultiTexCoord3ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3ivARB;
         if (CHECKS) {
@@ -671,7 +468,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord3dvARB MultiTexCoord3dvARB} */
+    /** {@code void glMultiTexCoord3dvARB(GLenum texture, GLdouble const * v)} */
     public static void glMultiTexCoord3dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord3dvARB;
         if (CHECKS) {
@@ -681,7 +478,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord4fvARB MultiTexCoord4fvARB} */
+    /** {@code void glMultiTexCoord4fvARB(GLenum texture, GLfloat const * v)} */
     public static void glMultiTexCoord4fvARB(@NativeType("GLenum") int texture, @NativeType("GLfloat const *") float[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4fvARB;
         if (CHECKS) {
@@ -691,7 +488,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord4svARB MultiTexCoord4svARB} */
+    /** {@code void glMultiTexCoord4svARB(GLenum texture, GLshort const * v)} */
     public static void glMultiTexCoord4svARB(@NativeType("GLenum") int texture, @NativeType("GLshort const *") short[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4svARB;
         if (CHECKS) {
@@ -701,7 +498,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord4ivARB MultiTexCoord4ivARB} */
+    /** {@code void glMultiTexCoord4ivARB(GLenum texture, GLint const * v)} */
     public static void glMultiTexCoord4ivARB(@NativeType("GLenum") int texture, @NativeType("GLint const *") int[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4ivARB;
         if (CHECKS) {
@@ -711,7 +508,7 @@ public class ARBMultitexture {
         callPV(texture, v, __functionAddress);
     }
 
-    /** Array version of: {@link #glMultiTexCoord4dvARB MultiTexCoord4dvARB} */
+    /** {@code void glMultiTexCoord4dvARB(GLenum texture, GLdouble const * v)} */
     public static void glMultiTexCoord4dvARB(@NativeType("GLenum") int texture, @NativeType("GLdouble const *") double[] v) {
         long __functionAddress = GL.getICD().glMultiTexCoord4dvARB;
         if (CHECKS) {

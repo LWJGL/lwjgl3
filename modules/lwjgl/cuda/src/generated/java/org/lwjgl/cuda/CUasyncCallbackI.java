@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     CUasyncNotificationInfo *info,
- *     void *userData,
- *     CUasyncCallbackHandle callback
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (CUasyncNotificationInfo *, void *, CUasyncCallbackHandle)")
 public interface CUasyncCallbackI extends CallbackI {
@@ -44,6 +35,7 @@ public interface CUasyncCallbackI extends CallbackI {
         );
     }
 
+    /** {@code void (*) (CUasyncNotificationInfo * info, void * userData, CUasyncCallbackHandle callback)} */
     void invoke(@NativeType("CUasyncNotificationInfo *") long info, @NativeType("void *") long userData, @NativeType("CUasyncCallbackHandle") long callback);
 
 }

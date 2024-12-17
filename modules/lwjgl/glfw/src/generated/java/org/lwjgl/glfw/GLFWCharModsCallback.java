@@ -13,22 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-/**
- * Instances of this class may be passed to the {@link GLFW#glfwSetCharModsCallback SetCharModsCallback} method.
- * 
- * <p>Deprecared: scheduled for removal in version 4.0.</p>
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window,
- *     unsigned int codepoint,
- *     int mods
- * )</code></pre>
- *
- * @since version 3.1
- */
+/** Callback function: {@link #invoke GLFWcharmodsfun} */
 public abstract class GLFWCharModsCallback extends Callback implements GLFWCharModsCallbackI {
 
     /**

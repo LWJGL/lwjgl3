@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing additional depth clamp control supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDepthClampControlFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDepthClampControlFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDepthClampControlFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #depthClampControl};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 depthClampControl;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDepthClampControlFeaturesEXT extends Struct<VkPhysicalDeviceDepthClampControlFeaturesEXT> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceDepthClampControlFeaturesEXT extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation supports setting {@link VkPipelineViewportDepthClampControlCreateInfoEXT}{@code ::depthClampMode} to {@link EXTShaderObject#VK_DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT DEPTH_CLAMP_MODE_USER_DEFINED_RANGE_EXT}. */
+    /** @return the value of the {@code depthClampControl} field. */
     @NativeType("VkBool32")
     public boolean depthClampControl() { return ndepthClampControl(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDepthClampControlFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDepthClampControlFeaturesEXT sType$Default() { return sType(EXTDepthClampControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDepthClampControlFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthClampControl} field. */
+    /** Sets the specified value to the {@code depthClampControl} field. */
     public VkPhysicalDeviceDepthClampControlFeaturesEXT depthClampControl(@NativeType("VkBool32") boolean value) { ndepthClampControl(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceDepthClampControlFeaturesEXT extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDepthClampControlFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDepthClampControlFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthClampControlFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDepthClampControlFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthClampControlFeaturesEXT#depthClampControl} field. */
+        /** @return the value of the {@code depthClampControl} field. */
         @NativeType("VkBool32")
         public boolean depthClampControl() { return VkPhysicalDeviceDepthClampControlFeaturesEXT.ndepthClampControl(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClampControlFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDepthClampControlFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthClampControlFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT} value to the {@link VkPhysicalDeviceDepthClampControlFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTDepthClampControl#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDepthClampControlFeaturesEXT.Buffer sType$Default() { return sType(EXTDepthClampControl.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClampControlFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDepthClampControlFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthClampControlFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthClampControlFeaturesEXT#depthClampControl} field. */
+        /** Sets the specified value to the {@code depthClampControl} field. */
         public VkPhysicalDeviceDepthClampControlFeaturesEXT.Buffer depthClampControl(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDepthClampControlFeaturesEXT.ndepthClampControl(address(), value ? 1 : 0); return this; }
 
     }

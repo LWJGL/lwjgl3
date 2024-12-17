@@ -17,31 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Memory Block Information.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshBufferML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_ML TYPE_WORLD_MESH_BUFFER_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code buffer} <b>must</b> be a pointer to an array of {@code bufferSize} bytes</li>
- * <li>The {@code bufferSize} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLWorldMeshDetection#xrAllocateWorldMeshBufferML AllocateWorldMeshBufferML}, {@link MLWorldMeshDetection#xrFreeWorldMeshBufferML FreeWorldMeshBufferML}, {@link MLWorldMeshDetection#xrRequestWorldMeshAsyncML RequestWorldMeshAsyncML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshBufferML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #bufferSize};
- *     void * {@link #buffer};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t bufferSize;
+ *     void * buffer;
+ * }}</pre>
  */
 public class XrWorldMeshBufferML extends Struct<XrWorldMeshBufferML> implements NativeResource {
 
@@ -97,26 +79,26 @@ public class XrWorldMeshBufferML extends Struct<XrWorldMeshBufferML> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} indicating the size of the buffer in bytes. */
+    /** @return the value of the {@code bufferSize} field. */
     @NativeType("uint32_t")
     public int bufferSize() { return nbufferSize(address()); }
-    /** a {@code void} memory block. This memory <b>may</b> be allocated using {@link MLWorldMeshDetection#xrAllocateWorldMeshBufferML AllocateWorldMeshBufferML} or otherwise. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("void *")
     public ByteBuffer buffer() { return nbuffer(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshBufferML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_ML TYPE_WORLD_MESH_BUFFER_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_ML TYPE_WORLD_MESH_BUFFER_ML} value to the {@code type} field. */
     public XrWorldMeshBufferML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BUFFER_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshBufferML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #buffer} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
     public XrWorldMeshBufferML buffer(@NativeType("void *") ByteBuffer value) { nbuffer(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,26 +307,26 @@ public class XrWorldMeshBufferML extends Struct<XrWorldMeshBufferML> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshBufferML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshBufferML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshBufferML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrWorldMeshBufferML.nnext(address()); }
-        /** @return the value of the {@link XrWorldMeshBufferML#bufferSize} field. */
+        /** @return the value of the {@code bufferSize} field. */
         @NativeType("uint32_t")
         public int bufferSize() { return XrWorldMeshBufferML.nbufferSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link XrWorldMeshBufferML#buffer} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("void *")
         public ByteBuffer buffer() { return XrWorldMeshBufferML.nbuffer(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshBufferML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshBufferML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshBufferML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_ML TYPE_WORLD_MESH_BUFFER_ML} value to the {@link XrWorldMeshBufferML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BUFFER_ML TYPE_WORLD_MESH_BUFFER_ML} value to the {@code type} field. */
         public XrWorldMeshBufferML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BUFFER_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshBufferML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshBufferML.Buffer next(@NativeType("void *") long value) { XrWorldMeshBufferML.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link XrWorldMeshBufferML#buffer} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code buffer} field. */
         public XrWorldMeshBufferML.Buffer buffer(@NativeType("void *") ByteBuffer value) { XrWorldMeshBufferML.nbuffer(address(), value); return this; }
 
     }

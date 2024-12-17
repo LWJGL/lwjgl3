@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * KTX_error_code (*{@link #invoke}) (
- *     ktxStream *str,
- *     ktx_off_t * const offset
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ktxStream_getpos} */
 public abstract class ktxStream_getpos extends Callback implements ktxStream_getposI {
 
     /**

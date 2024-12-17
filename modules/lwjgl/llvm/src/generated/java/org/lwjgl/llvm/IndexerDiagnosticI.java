@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be set to the {@code diagnostic} field of the {@link IndexerCallbacks} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     CXClientData client_data,
- *     CXDiagnosticSet diagnosticSet,
- *     void *reserved
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (CXClientData, CXDiagnosticSet, void *)")
 public interface IndexerDiagnosticI extends CallbackI {
@@ -46,7 +35,7 @@ public interface IndexerDiagnosticI extends CallbackI {
         );
     }
 
-    /** The {@code IndexerCallbacks.diagnostic} callback. */
+    /** {@code void (*) (CXClientData client_data, CXDiagnosticSet diagnosticSet, void * reserved)} */
     void invoke(@NativeType("CXClientData") long client_data, @NativeType("CXDiagnosticSet") long diagnosticSet, @NativeType("void *") long reserved);
 
 }

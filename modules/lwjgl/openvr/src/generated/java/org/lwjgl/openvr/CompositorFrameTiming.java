@@ -16,40 +16,36 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Provides a single frame's timing information to the app.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct Compositor_FrameTiming {
- *     uint32_t {@link #m_nSize};
+ *     uint32_t m_nSize;
  *     uint32_t m_nFrameIndex;
- *     uint32_t {@link #m_nNumFramePresents};
- *     uint32_t {@link #m_nNumMisPresented};
- *     uint32_t {@link #m_nNumDroppedFrames};
+ *     uint32_t m_nNumFramePresents;
+ *     uint32_t m_nNumMisPresented;
+ *     uint32_t m_nNumDroppedFrames;
  *     uint32_t m_nReprojectionFlags;
- *     double {@link #m_flSystemTimeInSeconds};
- *     float {@link #m_flPreSubmitGpuMs};
- *     float {@link #m_flPostSubmitGpuMs};
- *     float {@link #m_flTotalRenderGpuMs};
- *     float {@link #m_flCompositorRenderGpuMs};
- *     float {@link #m_flCompositorRenderCpuMs};
- *     float {@link #m_flCompositorIdleCpuMs};
- *     float {@link #m_flClientFrameIntervalMs};
- *     float {@link #m_flPresentCallCpuMs};
- *     float {@link #m_flWaitForPresentCpuMs};
- *     float {@link #m_flSubmitFrameMs};
+ *     double m_flSystemTimeInSeconds;
+ *     float m_flPreSubmitGpuMs;
+ *     float m_flPostSubmitGpuMs;
+ *     float m_flTotalRenderGpuMs;
+ *     float m_flCompositorRenderGpuMs;
+ *     float m_flCompositorRenderCpuMs;
+ *     float m_flCompositorIdleCpuMs;
+ *     float m_flClientFrameIntervalMs;
+ *     float m_flPresentCallCpuMs;
+ *     float m_flWaitForPresentCpuMs;
+ *     float m_flSubmitFrameMs;
  *     float m_flWaitGetPosesCalledMs;
  *     float m_flNewPosesReadyMs;
- *     float {@link #m_flNewFrameReadyMs};
+ *     float m_flNewFrameReadyMs;
  *     float m_flCompositorUpdateStartMs;
  *     float m_flCompositorUpdateEndMs;
  *     float m_flCompositorRenderStartMs;
- *     {@link TrackedDevicePose TrackedDevicePose_t} {@link #m_HmdPose};
+ *     {@link TrackedDevicePose TrackedDevicePose_t} m_HmdPose;
  *     uint32_t m_nNumVSyncsReadyForUse;
  *     uint32_t m_nNumVSyncsToFirstView;
  *     float m_flTransferLatencyMs;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct Compositor_FrameTiming")
 public class CompositorFrameTiming extends Struct<CompositorFrameTiming> implements NativeResource {
@@ -175,51 +171,51 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Set to {@code sizeof( Compositor_FrameTiming )} */
+    /** @return the value of the {@code m_nSize} field. */
     @NativeType("uint32_t")
     public int m_nSize() { return nm_nSize(address()); }
     /** @return the value of the {@code m_nFrameIndex} field. */
     @NativeType("uint32_t")
     public int m_nFrameIndex() { return nm_nFrameIndex(address()); }
-    /** number of times this frame was presented */
+    /** @return the value of the {@code m_nNumFramePresents} field. */
     @NativeType("uint32_t")
     public int m_nNumFramePresents() { return nm_nNumFramePresents(address()); }
-    /** number of times this frame was presented on a vsync other than it was originally predicted to */
+    /** @return the value of the {@code m_nNumMisPresented} field. */
     @NativeType("uint32_t")
     public int m_nNumMisPresented() { return nm_nNumMisPresented(address()); }
-    /** number of additional times previous frame was scanned out */
+    /** @return the value of the {@code m_nNumDroppedFrames} field. */
     @NativeType("uint32_t")
     public int m_nNumDroppedFrames() { return nm_nNumDroppedFrames(address()); }
     /** @return the value of the {@code m_nReprojectionFlags} field. */
     @NativeType("uint32_t")
     public int m_nReprojectionFlags() { return nm_nReprojectionFlags(address()); }
-    /** Absolute time reference for comparing frames. This aligns with the vsync that running start is relative to. */
+    /** @return the value of the {@code m_flSystemTimeInSeconds} field. */
     public double m_flSystemTimeInSeconds() { return nm_flSystemTimeInSeconds(address()); }
-    /** time spent rendering the scene (gpu work submitted between WaitGetPoses and second Submit) */
+    /** @return the value of the {@code m_flPreSubmitGpuMs} field. */
     public float m_flPreSubmitGpuMs() { return nm_flPreSubmitGpuMs(address()); }
-    /** additional time spent rendering by application (e.g. companion window) */
+    /** @return the value of the {@code m_flPostSubmitGpuMs} field. */
     public float m_flPostSubmitGpuMs() { return nm_flPostSubmitGpuMs(address()); }
-    /** time between work submitted immediately after present (ideally vsync) until the end of compositor submitted work */
+    /** @return the value of the {@code m_flTotalRenderGpuMs} field. */
     public float m_flTotalRenderGpuMs() { return nm_flTotalRenderGpuMs(address()); }
-    /** time spend performing distortion correction, rendering chaperone, overlays, etc. */
+    /** @return the value of the {@code m_flCompositorRenderGpuMs} field. */
     public float m_flCompositorRenderGpuMs() { return nm_flCompositorRenderGpuMs(address()); }
-    /** time spent on cpu submitting the above work for this frame */
+    /** @return the value of the {@code m_flCompositorRenderCpuMs} field. */
     public float m_flCompositorRenderCpuMs() { return nm_flCompositorRenderCpuMs(address()); }
-    /** time spent waiting for running start (application could have used this much more time) */
+    /** @return the value of the {@code m_flCompositorIdleCpuMs} field. */
     public float m_flCompositorIdleCpuMs() { return nm_flCompositorIdleCpuMs(address()); }
-    /** time between calls to {@link VRCompositor#VRCompositor_WaitGetPoses WaitGetPoses} */
+    /** @return the value of the {@code m_flClientFrameIntervalMs} field. */
     public float m_flClientFrameIntervalMs() { return nm_flClientFrameIntervalMs(address()); }
-    /** time blocked on call to present (usually 0.0, but can go long) */
+    /** @return the value of the {@code m_flPresentCallCpuMs} field. */
     public float m_flPresentCallCpuMs() { return nm_flPresentCallCpuMs(address()); }
-    /** time spent spin-waiting for frame index to change (not near-zero indicates wait object failure) */
+    /** @return the value of the {@code m_flWaitForPresentCpuMs} field. */
     public float m_flWaitForPresentCpuMs() { return nm_flWaitForPresentCpuMs(address()); }
-    /** time spent in {@link VRCompositor#VRCompositor_Submit Submit} (not near-zero indicates driver issue) */
+    /** @return the value of the {@code m_flSubmitFrameMs} field. */
     public float m_flSubmitFrameMs() { return nm_flSubmitFrameMs(address()); }
     /** @return the value of the {@code m_flWaitGetPosesCalledMs} field. */
     public float m_flWaitGetPosesCalledMs() { return nm_flWaitGetPosesCalledMs(address()); }
     /** @return the value of the {@code m_flNewPosesReadyMs} field. */
     public float m_flNewPosesReadyMs() { return nm_flNewPosesReadyMs(address()); }
-    /** second call to {@link VRCompositor#VRCompositor_Submit Submit} */
+    /** @return the value of the {@code m_flNewFrameReadyMs} field. */
     public float m_flNewFrameReadyMs() { return nm_flNewFrameReadyMs(address()); }
     /** @return the value of the {@code m_flCompositorUpdateStartMs} field. */
     public float m_flCompositorUpdateStartMs() { return nm_flCompositorUpdateStartMs(address()); }
@@ -227,7 +223,7 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
     public float m_flCompositorUpdateEndMs() { return nm_flCompositorUpdateEndMs(address()); }
     /** @return the value of the {@code m_flCompositorRenderStartMs} field. */
     public float m_flCompositorRenderStartMs() { return nm_flCompositorRenderStartMs(address()); }
-    /** pose used by app to render this frame */
+    /** @return a {@link TrackedDevicePose} view of the {@code m_HmdPose} field. */
     @NativeType("TrackedDevicePose_t")
     public TrackedDevicePose m_HmdPose() { return nm_HmdPose(address()); }
     /** @return the value of the {@code m_nNumVSyncsReadyForUse} field. */
@@ -467,51 +463,51 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CompositorFrameTiming#m_nSize} field. */
+        /** @return the value of the {@code m_nSize} field. */
         @NativeType("uint32_t")
         public int m_nSize() { return CompositorFrameTiming.nm_nSize(address()); }
         /** @return the value of the {@code m_nFrameIndex} field. */
         @NativeType("uint32_t")
         public int m_nFrameIndex() { return CompositorFrameTiming.nm_nFrameIndex(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_nNumFramePresents} field. */
+        /** @return the value of the {@code m_nNumFramePresents} field. */
         @NativeType("uint32_t")
         public int m_nNumFramePresents() { return CompositorFrameTiming.nm_nNumFramePresents(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_nNumMisPresented} field. */
+        /** @return the value of the {@code m_nNumMisPresented} field. */
         @NativeType("uint32_t")
         public int m_nNumMisPresented() { return CompositorFrameTiming.nm_nNumMisPresented(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_nNumDroppedFrames} field. */
+        /** @return the value of the {@code m_nNumDroppedFrames} field. */
         @NativeType("uint32_t")
         public int m_nNumDroppedFrames() { return CompositorFrameTiming.nm_nNumDroppedFrames(address()); }
         /** @return the value of the {@code m_nReprojectionFlags} field. */
         @NativeType("uint32_t")
         public int m_nReprojectionFlags() { return CompositorFrameTiming.nm_nReprojectionFlags(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flSystemTimeInSeconds} field. */
+        /** @return the value of the {@code m_flSystemTimeInSeconds} field. */
         public double m_flSystemTimeInSeconds() { return CompositorFrameTiming.nm_flSystemTimeInSeconds(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flPreSubmitGpuMs} field. */
+        /** @return the value of the {@code m_flPreSubmitGpuMs} field. */
         public float m_flPreSubmitGpuMs() { return CompositorFrameTiming.nm_flPreSubmitGpuMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flPostSubmitGpuMs} field. */
+        /** @return the value of the {@code m_flPostSubmitGpuMs} field. */
         public float m_flPostSubmitGpuMs() { return CompositorFrameTiming.nm_flPostSubmitGpuMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flTotalRenderGpuMs} field. */
+        /** @return the value of the {@code m_flTotalRenderGpuMs} field. */
         public float m_flTotalRenderGpuMs() { return CompositorFrameTiming.nm_flTotalRenderGpuMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flCompositorRenderGpuMs} field. */
+        /** @return the value of the {@code m_flCompositorRenderGpuMs} field. */
         public float m_flCompositorRenderGpuMs() { return CompositorFrameTiming.nm_flCompositorRenderGpuMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flCompositorRenderCpuMs} field. */
+        /** @return the value of the {@code m_flCompositorRenderCpuMs} field. */
         public float m_flCompositorRenderCpuMs() { return CompositorFrameTiming.nm_flCompositorRenderCpuMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flCompositorIdleCpuMs} field. */
+        /** @return the value of the {@code m_flCompositorIdleCpuMs} field. */
         public float m_flCompositorIdleCpuMs() { return CompositorFrameTiming.nm_flCompositorIdleCpuMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flClientFrameIntervalMs} field. */
+        /** @return the value of the {@code m_flClientFrameIntervalMs} field. */
         public float m_flClientFrameIntervalMs() { return CompositorFrameTiming.nm_flClientFrameIntervalMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flPresentCallCpuMs} field. */
+        /** @return the value of the {@code m_flPresentCallCpuMs} field. */
         public float m_flPresentCallCpuMs() { return CompositorFrameTiming.nm_flPresentCallCpuMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flWaitForPresentCpuMs} field. */
+        /** @return the value of the {@code m_flWaitForPresentCpuMs} field. */
         public float m_flWaitForPresentCpuMs() { return CompositorFrameTiming.nm_flWaitForPresentCpuMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flSubmitFrameMs} field. */
+        /** @return the value of the {@code m_flSubmitFrameMs} field. */
         public float m_flSubmitFrameMs() { return CompositorFrameTiming.nm_flSubmitFrameMs(address()); }
         /** @return the value of the {@code m_flWaitGetPosesCalledMs} field. */
         public float m_flWaitGetPosesCalledMs() { return CompositorFrameTiming.nm_flWaitGetPosesCalledMs(address()); }
         /** @return the value of the {@code m_flNewPosesReadyMs} field. */
         public float m_flNewPosesReadyMs() { return CompositorFrameTiming.nm_flNewPosesReadyMs(address()); }
-        /** @return the value of the {@link CompositorFrameTiming#m_flNewFrameReadyMs} field. */
+        /** @return the value of the {@code m_flNewFrameReadyMs} field. */
         public float m_flNewFrameReadyMs() { return CompositorFrameTiming.nm_flNewFrameReadyMs(address()); }
         /** @return the value of the {@code m_flCompositorUpdateStartMs} field. */
         public float m_flCompositorUpdateStartMs() { return CompositorFrameTiming.nm_flCompositorUpdateStartMs(address()); }
@@ -519,7 +515,7 @@ public class CompositorFrameTiming extends Struct<CompositorFrameTiming> impleme
         public float m_flCompositorUpdateEndMs() { return CompositorFrameTiming.nm_flCompositorUpdateEndMs(address()); }
         /** @return the value of the {@code m_flCompositorRenderStartMs} field. */
         public float m_flCompositorRenderStartMs() { return CompositorFrameTiming.nm_flCompositorRenderStartMs(address()); }
-        /** @return a {@link TrackedDevicePose} view of the {@link CompositorFrameTiming#m_HmdPose} field. */
+        /** @return a {@link TrackedDevicePose} view of the {@code m_HmdPose} field. */
         @NativeType("TrackedDevicePose_t")
         public TrackedDevicePose m_HmdPose() { return CompositorFrameTiming.nm_HmdPose(address()); }
         /** @return the value of the {@code m_nNumVSyncsReadyForUse} field. */

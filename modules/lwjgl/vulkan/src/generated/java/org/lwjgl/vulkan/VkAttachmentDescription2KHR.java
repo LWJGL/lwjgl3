@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkAttachmentDescription2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAttachmentDescription2KHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -33,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkAttachmentStoreOp stencilStoreOp;
  *     VkImageLayout initialLayout;
  *     VkImageLayout finalLayout;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkAttachmentDescription2KHR extends VkAttachmentDescription2 {
 

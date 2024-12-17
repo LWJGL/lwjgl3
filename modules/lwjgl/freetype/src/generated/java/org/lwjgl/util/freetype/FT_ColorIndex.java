@@ -14,15 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code ColorIndex} value of the {@code COLR} v1 extensions.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_ColorIndex {
  *     FT_UInt16 palette_index;
  *     FT_F2Dot14 alpha;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_ColorIndex extends Struct<FT_ColorIndex> {
 

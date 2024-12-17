@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceFloatControlsProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceFloatControlsPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -41,7 +37,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkBool32 shaderRoundingModeRTZFloat16;
  *     VkBool32 shaderRoundingModeRTZFloat32;
  *     VkBool32 shaderRoundingModeRTZFloat64;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceFloatControlsPropertiesKHR extends VkPhysicalDeviceFloatControlsProperties {
 

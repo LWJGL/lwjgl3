@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_color {
  *     nk_byte r;
  *     nk_byte g;
  *     nk_byte b;
  *     nk_byte a;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_color")
 public class NkColor extends Struct<NkColor> implements NativeResource {

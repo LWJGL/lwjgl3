@@ -21,13 +21,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_SetHeadsetViewSize ] ---
 
-    /**
-     * Sets the resolution in pixels to render the headset view.
-     * 
-     * <p>These values are clamped to {@link VR#k_unHeadsetViewMaxWidth} and {@link VR#k_unHeadsetViewMaxHeight} respectively. For cropped views, the rendered output will be fit to
-     * aspect ratio defined by the the specified dimensions. For uncropped views, the caller should use {@link #VRHeadsetView_GetHeadsetViewAspectRatio GetHeadsetViewAspectRatio} to adjust the requested
-     * render size to avoid squashing or stretching, and then apply letterboxing to compensate when displaying the results.</p>
-     */
+    /** {@code void VRHeadsetView_SetHeadsetViewSize(uint32_t nWidth, uint32_t nHeight)} */
     public static void VRHeadsetView_SetHeadsetViewSize(@NativeType("uint32_t") int nWidth, @NativeType("uint32_t") int nHeight) {
         long __functionAddress = OpenVR.VRHeadsetView.SetHeadsetViewSize;
         if (CHECKS) {
@@ -38,7 +32,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_GetHeadsetViewSize ] ---
 
-    /** Unsafe version of: {@link #VRHeadsetView_GetHeadsetViewSize GetHeadsetViewSize} */
+    /** {@code void VRHeadsetView_GetHeadsetViewSize(uint32_t * pnWidth, uint32_t * pnHeight)} */
     public static void nVRHeadsetView_GetHeadsetViewSize(long pnWidth, long pnHeight) {
         long __functionAddress = OpenVR.VRHeadsetView.GetHeadsetViewSize;
         if (CHECKS) {
@@ -47,7 +41,7 @@ public class VRHeadsetView {
         callPPV(pnWidth, pnHeight, __functionAddress);
     }
 
-    /** Gets the current resolution used to render the headset view. */
+    /** {@code void VRHeadsetView_GetHeadsetViewSize(uint32_t * pnWidth, uint32_t * pnHeight)} */
     public static void VRHeadsetView_GetHeadsetViewSize(@NativeType("uint32_t *") IntBuffer pnWidth, @NativeType("uint32_t *") IntBuffer pnHeight) {
         if (CHECKS) {
             check(pnWidth, 1);
@@ -58,11 +52,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_SetHeadsetViewMode ] ---
 
-    /**
-     * Sets the mode used to render the headset view.
-     *
-     * @param eHeadsetViewMode one of:<br><table><tr><td>{@link VR#HeadsetViewMode_t_HeadsetViewMode_Left}</td><td>{@link VR#HeadsetViewMode_t_HeadsetViewMode_Right}</td></tr><tr><td>{@link VR#HeadsetViewMode_t_HeadsetViewMode_Both}</td></tr></table>
-     */
+    /** {@code void VRHeadsetView_SetHeadsetViewMode(HeadsetViewMode_t eHeadsetViewMode)} */
     public static void VRHeadsetView_SetHeadsetViewMode(@NativeType("HeadsetViewMode_t") int eHeadsetViewMode) {
         long __functionAddress = OpenVR.VRHeadsetView.SetHeadsetViewMode;
         if (CHECKS) {
@@ -73,7 +63,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_GetHeadsetViewMode ] ---
 
-    /** Gets the current mode used to render the headset view. */
+    /** {@code HeadsetViewMode_t VRHeadsetView_GetHeadsetViewMode(void)} */
     @NativeType("HeadsetViewMode_t")
     public static int VRHeadsetView_GetHeadsetViewMode() {
         long __functionAddress = OpenVR.VRHeadsetView.GetHeadsetViewMode;
@@ -85,7 +75,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_SetHeadsetViewCropped ] ---
 
-    /** Sets whether or not the headset view should be rendered cropped to hide the hidden area mesh or not. */
+    /** {@code void VRHeadsetView_SetHeadsetViewCropped(bool bCropped)} */
     public static void VRHeadsetView_SetHeadsetViewCropped(@NativeType("bool") boolean bCropped) {
         long __functionAddress = OpenVR.VRHeadsetView.SetHeadsetViewCropped;
         if (CHECKS) {
@@ -96,7 +86,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_GetHeadsetViewCropped ] ---
 
-    /** Gets the current cropping status of the headset view. */
+    /** {@code bool VRHeadsetView_GetHeadsetViewCropped(void)} */
     @NativeType("bool")
     public static boolean VRHeadsetView_GetHeadsetViewCropped() {
         long __functionAddress = OpenVR.VRHeadsetView.GetHeadsetViewCropped;
@@ -108,7 +98,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_GetHeadsetViewAspectRatio ] ---
 
-    /** Gets the aspect ratio (width:height) of the uncropped headset view (accounting for the current set mode). */
+    /** {@code float VRHeadsetView_GetHeadsetViewAspectRatio(void)} */
     public static float VRHeadsetView_GetHeadsetViewAspectRatio() {
         long __functionAddress = OpenVR.VRHeadsetView.GetHeadsetViewAspectRatio;
         if (CHECKS) {
@@ -119,7 +109,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_SetHeadsetViewBlendRange ] ---
 
-    /** Sets the range {@code [0..1]} that the headset view blends across the stereo overlapped area in cropped both mode. */
+    /** {@code void VRHeadsetView_SetHeadsetViewBlendRange(float flStartPct, float flEndPct)} */
     public static void VRHeadsetView_SetHeadsetViewBlendRange(float flStartPct, float flEndPct) {
         long __functionAddress = OpenVR.VRHeadsetView.SetHeadsetViewBlendRange;
         if (CHECKS) {
@@ -130,7 +120,7 @@ public class VRHeadsetView {
 
     // --- [ VRHeadsetView_GetHeadsetViewBlendRange ] ---
 
-    /** Unsafe version of: {@link #VRHeadsetView_GetHeadsetViewBlendRange GetHeadsetViewBlendRange} */
+    /** {@code void VRHeadsetView_GetHeadsetViewBlendRange(float * pStartPct, float * pEndPct)} */
     public static void nVRHeadsetView_GetHeadsetViewBlendRange(long pStartPct, long pEndPct) {
         long __functionAddress = OpenVR.VRHeadsetView.GetHeadsetViewBlendRange;
         if (CHECKS) {
@@ -139,7 +129,7 @@ public class VRHeadsetView {
         callPPV(pStartPct, pEndPct, __functionAddress);
     }
 
-    /** Gets the current range {@code [0..1]} that the headset view blends across the stereo overlapped area in cropped both mode. */
+    /** {@code void VRHeadsetView_GetHeadsetViewBlendRange(float * pStartPct, float * pEndPct)} */
     public static void VRHeadsetView_GetHeadsetViewBlendRange(@NativeType("float *") FloatBuffer pStartPct, @NativeType("float *") FloatBuffer pEndPct) {
         if (CHECKS) {
             check(pStartPct, 1);

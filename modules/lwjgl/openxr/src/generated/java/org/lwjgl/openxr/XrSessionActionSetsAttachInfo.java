@@ -17,30 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to attach action sets to a session.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO TYPE_SESSION_ACTION_SETS_ATTACH_INFO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code actionSets} <b>must</b> be a pointer to an array of {@code countActionSets} valid {@code XrActionSet} handles</li>
- * <li>The {@code countActionSets} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrAttachSessionActionSets AttachSessionActionSets}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSessionActionSetsAttachInfo {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #countActionSets};
- *     XrActionSet const * {@link #actionSets};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t countActionSets;
+ *     XrActionSet const * actionSets;
+ * }}</pre>
  */
 public class XrSessionActionSetsAttachInfo extends Struct<XrSessionActionSetsAttachInfo> implements NativeResource {
 
@@ -96,26 +79,26 @@ public class XrSessionActionSetsAttachInfo extends Struct<XrSessionActionSetsAtt
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an integer specifying the number of valid elements in the {@code actionSets} array. */
+    /** @return the value of the {@code countActionSets} field. */
     @NativeType("uint32_t")
     public int countActionSets() { return ncountActionSets(address()); }
-    /** a pointer to an array of one or more {@code XrActionSet} handles to be attached to the session. */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code actionSets} field. */
     @NativeType("XrActionSet const *")
     public PointerBuffer actionSets() { return nactionSets(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSessionActionSetsAttachInfo type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO TYPE_SESSION_ACTION_SETS_ATTACH_INFO} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO TYPE_SESSION_ACTION_SETS_ATTACH_INFO} value to the {@code type} field. */
     public XrSessionActionSetsAttachInfo type$Default() { return type(XR10.XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSessionActionSetsAttachInfo next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link PointerBuffer} to the {@link #actionSets} field. */
+    /** Sets the address of the specified {@link PointerBuffer} to the {@code actionSets} field. */
     public XrSessionActionSetsAttachInfo actionSets(@NativeType("XrActionSet const *") PointerBuffer value) { nactionSets(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,26 +307,26 @@ public class XrSessionActionSetsAttachInfo extends Struct<XrSessionActionSetsAtt
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSessionActionSetsAttachInfo#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSessionActionSetsAttachInfo.ntype(address()); }
-        /** @return the value of the {@link XrSessionActionSetsAttachInfo#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSessionActionSetsAttachInfo.nnext(address()); }
-        /** @return the value of the {@link XrSessionActionSetsAttachInfo#countActionSets} field. */
+        /** @return the value of the {@code countActionSets} field. */
         @NativeType("uint32_t")
         public int countActionSets() { return XrSessionActionSetsAttachInfo.ncountActionSets(address()); }
-        /** @return a {@link PointerBuffer} view of the data pointed to by the {@link XrSessionActionSetsAttachInfo#actionSets} field. */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code actionSets} field. */
         @NativeType("XrActionSet const *")
         public PointerBuffer actionSets() { return XrSessionActionSetsAttachInfo.nactionSets(address()); }
 
-        /** Sets the specified value to the {@link XrSessionActionSetsAttachInfo#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSessionActionSetsAttachInfo.Buffer type(@NativeType("XrStructureType") int value) { XrSessionActionSetsAttachInfo.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO TYPE_SESSION_ACTION_SETS_ATTACH_INFO} value to the {@link XrSessionActionSetsAttachInfo#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO TYPE_SESSION_ACTION_SETS_ATTACH_INFO} value to the {@code type} field. */
         public XrSessionActionSetsAttachInfo.Buffer type$Default() { return type(XR10.XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO); }
-        /** Sets the specified value to the {@link XrSessionActionSetsAttachInfo#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSessionActionSetsAttachInfo.Buffer next(@NativeType("void const *") long value) { XrSessionActionSetsAttachInfo.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link PointerBuffer} to the {@link XrSessionActionSetsAttachInfo#actionSets} field. */
+        /** Sets the address of the specified {@link PointerBuffer} to the {@code actionSets} field. */
         public XrSessionActionSetsAttachInfo.Buffer actionSets(@NativeType("XrActionSet const *") PointerBuffer value) { XrSessionActionSetsAttachInfo.nactionSets(address(), value); return this; }
 
     }

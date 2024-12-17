@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Set of callbacks that the library will call for {@code vkAllocateMemory} and {@code vkFreeMemory}.
- * 
- * <p>Provided for informative purpose, e.g. to gather statistics about number of allocations or total amount of memory allocated in Vulkan.</p>
- * 
- * <p>Used in {@link VmaAllocatorCreateInfo}{@code ::pDeviceMemoryCallbacks}.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaDeviceMemoryCallbacks {
  *     {@link VmaAllocateDeviceMemoryFunctionI PFN_vmaAllocateDeviceMemoryFunction} pfnAllocate;
  *     {@link VmaFreeDeviceMemoryFunctionI PFN_vmaFreeDeviceMemoryFunction} pfnFree;
  *     void * pUserData;
- * }</code></pre>
+ * }}</pre>
  */
 public class VmaDeviceMemoryCallbacks extends Struct<VmaDeviceMemoryCallbacks> implements NativeResource {
 

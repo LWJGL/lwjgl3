@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * for cursor positions, mainly
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct UIvec2 {
  *     union {
  *         int v[2];
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *             int y;
  *         };
  *     };
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct UIvec2")
 public class UIVec2 extends Struct<UIVec2> implements NativeResource {

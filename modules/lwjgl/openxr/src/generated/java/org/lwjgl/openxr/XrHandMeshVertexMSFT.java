@@ -16,25 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * The vertex of hand mesh.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTHandTrackingMesh XR_MSFT_hand_tracking_mesh} extension <b>must</b> be enabled prior to using {@link XrHandMeshVertexMSFT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandMeshVertexBufferMSFT}, {@link XrVector3f}, {@link MSFTHandTrackingMesh#xrUpdateHandMeshMSFT UpdateHandMeshMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandMeshVertexMSFT {
- *     {@link XrVector3f XrVector3f} {@link #position$ position};
- *     {@link XrVector3f XrVector3f} {@link #normal};
- * }</code></pre>
+ *     {@link XrVector3f XrVector3f} position;
+ *     {@link XrVector3f XrVector3f} normal;
+ * }}</pre>
  */
 public class XrHandMeshVertexMSFT extends Struct<XrHandMeshVertexMSFT> implements NativeResource {
 
@@ -84,18 +70,18 @@ public class XrHandMeshVertexMSFT extends Struct<XrHandMeshVertexMSFT> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** an {@link XrVector3f} structure representing the position of the vertex in the hand mesh space, measured in meters. */
+    /** @return a {@link XrVector3f} view of the {@code position} field. */
     public XrVector3f position$() { return nposition$(address()); }
-    /** an {@link XrVector3f} structure representing the unweighted normal of the triangle surface at the vertex as a unit vector in hand mesh space. */
+    /** @return a {@link XrVector3f} view of the {@code normal} field. */
     public XrVector3f normal() { return nnormal(address()); }
 
-    /** Copies the specified {@link XrVector3f} to the {@link #position$} field. */
+    /** Copies the specified {@link XrVector3f} to the {@code position} field. */
     public XrHandMeshVertexMSFT position$(XrVector3f value) { nposition$(address(), value); return this; }
-    /** Passes the {@link #position$} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code position} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrHandMeshVertexMSFT position$(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(position$()); return this; }
-    /** Copies the specified {@link XrVector3f} to the {@link #normal} field. */
+    /** Copies the specified {@link XrVector3f} to the {@code normal} field. */
     public XrHandMeshVertexMSFT normal(XrVector3f value) { nnormal(address(), value); return this; }
-    /** Passes the {@link #normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrHandMeshVertexMSFT normal(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(normal()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -285,18 +271,18 @@ public class XrHandMeshVertexMSFT extends Struct<XrHandMeshVertexMSFT> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link XrVector3f} view of the {@link XrHandMeshVertexMSFT#position$} field. */
+        /** @return a {@link XrVector3f} view of the {@code position} field. */
         public XrVector3f position$() { return XrHandMeshVertexMSFT.nposition$(address()); }
-        /** @return a {@link XrVector3f} view of the {@link XrHandMeshVertexMSFT#normal} field. */
+        /** @return a {@link XrVector3f} view of the {@code normal} field. */
         public XrVector3f normal() { return XrHandMeshVertexMSFT.nnormal(address()); }
 
-        /** Copies the specified {@link XrVector3f} to the {@link XrHandMeshVertexMSFT#position$} field. */
+        /** Copies the specified {@link XrVector3f} to the {@code position} field. */
         public XrHandMeshVertexMSFT.Buffer position$(XrVector3f value) { XrHandMeshVertexMSFT.nposition$(address(), value); return this; }
-        /** Passes the {@link XrHandMeshVertexMSFT#position$} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code position} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrHandMeshVertexMSFT.Buffer position$(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(position$()); return this; }
-        /** Copies the specified {@link XrVector3f} to the {@link XrHandMeshVertexMSFT#normal} field. */
+        /** Copies the specified {@link XrVector3f} to the {@code normal} field. */
         public XrHandMeshVertexMSFT.Buffer normal(XrVector3f value) { XrHandMeshVertexMSFT.nnormal(address(), value); return this; }
-        /** Passes the {@link XrHandMeshVertexMSFT#normal} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code normal} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrHandMeshVertexMSFT.Buffer normal(java.util.function.Consumer<XrVector3f> consumer) { consumer.accept(normal()); return this; }
 
     }

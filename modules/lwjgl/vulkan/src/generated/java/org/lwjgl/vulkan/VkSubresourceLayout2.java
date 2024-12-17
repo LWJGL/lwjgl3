@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying subresource layout.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkImageCompressionPropertiesEXT} or {@link VkSubresourceHostMemcpySize}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkSubresourceLayout}, {@link VK14#vkGetDeviceImageSubresourceLayout GetDeviceImageSubresourceLayout}, {@link KHRMaintenance5#vkGetDeviceImageSubresourceLayoutKHR GetDeviceImageSubresourceLayoutKHR}, {@link VK14#vkGetImageSubresourceLayout2 GetImageSubresourceLayout2}, {@link EXTHostImageCopy#vkGetImageSubresourceLayout2EXT GetImageSubresourceLayout2EXT}, {@link KHRMaintenance5#vkGetImageSubresourceLayout2KHR GetImageSubresourceLayout2KHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSubresourceLayout2 {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     {@link VkSubresourceLayout VkSubresourceLayout} {@link #subresourceLayout};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     {@link VkSubresourceLayout VkSubresourceLayout} subresourceLayout;
+ * }}</pre>
  */
 public class VkSubresourceLayout2 extends Struct<VkSubresourceLayout2> implements NativeResource {
 
@@ -90,20 +74,20 @@ public class VkSubresourceLayout2 extends Struct<VkSubresourceLayout2> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a {@link VkSubresourceLayout} structure. */
+    /** @return a {@link VkSubresourceLayout} view of the {@code subresourceLayout} field. */
     public VkSubresourceLayout subresourceLayout() { return nsubresourceLayout(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSubresourceLayout2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2} value to the {@code sType} field. */
     public VkSubresourceLayout2 sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSubresourceLayout2 pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkImageCompressionPropertiesEXT} value to the {@code pNext} chain. */
     public VkSubresourceLayout2 pNext(VkImageCompressionPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -301,20 +285,20 @@ public class VkSubresourceLayout2 extends Struct<VkSubresourceLayout2> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSubresourceLayout2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSubresourceLayout2.nsType(address()); }
-        /** @return the value of the {@link VkSubresourceLayout2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSubresourceLayout2.npNext(address()); }
-        /** @return a {@link VkSubresourceLayout} view of the {@link VkSubresourceLayout2#subresourceLayout} field. */
+        /** @return a {@link VkSubresourceLayout} view of the {@code subresourceLayout} field. */
         public VkSubresourceLayout subresourceLayout() { return VkSubresourceLayout2.nsubresourceLayout(address()); }
 
-        /** Sets the specified value to the {@link VkSubresourceLayout2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSubresourceLayout2.Buffer sType(@NativeType("VkStructureType") int value) { VkSubresourceLayout2.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2} value to the {@link VkSubresourceLayout2#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2 STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2} value to the {@code sType} field. */
         public VkSubresourceLayout2.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2); }
-        /** Sets the specified value to the {@link VkSubresourceLayout2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSubresourceLayout2.Buffer pNext(@NativeType("void *") long value) { VkSubresourceLayout2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkImageCompressionPropertiesEXT} value to the {@code pNext} chain. */
         public VkSubresourceLayout2.Buffer pNext(VkImageCompressionPropertiesEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }

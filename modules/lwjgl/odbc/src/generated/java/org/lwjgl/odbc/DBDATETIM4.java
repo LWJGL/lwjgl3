@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct DBDATETIM4 {
  *     USHORT numdays;
  *     USHORT nummins;
- * }</code></pre>
+ * }}</pre>
  */
 public class DBDATETIM4 extends Struct<DBDATETIM4> implements NativeResource {
 

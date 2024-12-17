@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_msl_shader_interface_var_2 {
  *     unsigned location;
  *     spvc_msl_shader_variable_format format;
  *     SpvBuiltIn builtin;
  *     unsigned vecsize;
  *     spvc_msl_shader_variable_rate rate;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_msl_shader_interface_var_2")
 public class SpvcMslShaderInterfaceVar2 extends Struct<SpvcMslShaderInterfaceVar2> implements NativeResource {

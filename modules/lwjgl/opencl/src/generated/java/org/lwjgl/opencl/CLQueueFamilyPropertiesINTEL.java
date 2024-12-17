@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct cl_queue_family_properties_intel {
  *     cl_command_queue_properties properties;
  *     cl_command_queue_capabilities_intel capabilities;
  *     cl_uint count;
  *     char name[64];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct cl_queue_family_properties_intel")
 public class CLQueueFamilyPropertiesINTEL extends Struct<CLQueueFamilyPropertiesINTEL> implements NativeResource {

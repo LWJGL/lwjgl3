@@ -11,15 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *cbk_context,
- *     rmtProperty *root
- * )</code></pre>
- */
+/** Callback function: {@link #invoke rmtPropertyHandlerPtr} */
 public abstract class RMTPropertyHandler extends Callback implements RMTPropertyHandlerI {
 
     /**

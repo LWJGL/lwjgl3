@@ -16,67 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a copy descriptor set operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkDescriptorSetLayoutBinding} for {@code dstBinding} is {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} and {@code srcBinding} is not {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, the new active descriptor type becomes the descriptor type of {@code srcBinding}. If both {@link VkDescriptorSetLayoutBinding} for {@code srcBinding} and {@code dstBinding} are {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, the active descriptor type in each source descriptor is copied into the corresponding destination descriptor. The active descriptor type <b>can</b> be different for each source descriptor.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>The intention is that copies to and from mutable descriptors is a simple memcpy. Copies between non-mutable and mutable descriptors are expected to require one memcpy per descriptor to handle the difference in size, but this use case with more than one {@code descriptorCount} is considered rare.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code srcBinding} <b>must</b> be a valid binding within {@code srcSet}</li>
- * <li>The sum of {@code srcArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding specified by {@code srcBinding}, and all applicable <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-updates-consecutive">consecutive bindings</a></li>
- * <li>{@code dstBinding} <b>must</b> be a valid binding within {@code dstSet}</li>
- * <li>The sum of {@code dstArrayElement} and {@code descriptorCount} <b>must</b> be less than or equal to the number of array elements in the descriptor set binding specified by {@code dstBinding}, and all applicable <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-updates-consecutive">consecutive bindings</a></li>
- * <li>The type of {@code dstBinding} within {@code dstSet} <b>must</b> be equal to the type of {@code srcBinding} within {@code srcSet}</li>
- * <li>If {@code srcSet} is equal to {@code dstSet}, then the source and destination ranges of descriptors <b>must</b> not overlap, where the ranges <b>may</b> include array elements from <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-updates-consecutive">consecutive bindings</a></li>
- * <li>If the descriptor type of the descriptor set binding specified by {@code srcBinding} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, {@code srcArrayElement} <b>must</b> be an integer multiple of 4</li>
- * <li>If the descriptor type of the descriptor set binding specified by {@code dstBinding} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, {@code dstArrayElement} <b>must</b> be an integer multiple of 4</li>
- * <li>If the descriptor type of the descriptor set binding specified by either {@code srcBinding} or {@code dstBinding} is {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}, {@code descriptorCount} <b>must</b> be an integer multiple of 4</li>
- * <li>If {@code srcSet}’s layout was created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} flag set, then {@code dstSet}’s layout <b>must</b> also have been created with the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} flag set</li>
- * <li>If {@code srcSet}’s layout was created without either the {@link EXTMutableDescriptorType#VK_DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_HOST_ONLY_POOL_BIT_EXT} flag or the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} flag set, then {@code dstSet}’s layout <b>must</b> have been created without the {@link VK12#VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT} flag set</li>
- * <li>If the descriptor pool from which {@code srcSet} was allocated was created with the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set, then the descriptor pool from which {@code dstSet} was allocated <b>must</b> also have been created with the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set</li>
- * <li>If the descriptor pool from which {@code srcSet} was allocated was created without either the {@link EXTMutableDescriptorType#VK_DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT DESCRIPTOR_POOL_CREATE_HOST_ONLY_BIT_EXT} flag or the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set, then the descriptor pool from which {@code dstSet} was allocated <b>must</b> have been created without the {@link VK12#VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT} flag set</li>
- * <li>If the descriptor type of the descriptor set binding specified by {@code dstBinding} is {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER}, then {@code dstSet} <b>must</b> not have been allocated with a layout that included immutable samplers for {@code dstBinding}</li>
- * <li>If {@link VkDescriptorSetLayoutBinding} for {@code dstSet} at {@code dstBinding} is {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, the new active descriptor type <b>must</b> exist in the corresponding {@code pMutableDescriptorTypeLists} list for {@code dstBinding} if the new active descriptor type is not {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}</li>
- * <li>If {@link VkDescriptorSetLayoutBinding} for {@code srcSet} at {@code srcBinding} is {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} and the {@link VkDescriptorSetLayoutBinding} for {@code dstSet} at {@code dstBinding} is not {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, the active descriptor type for the source descriptor <b>must</b> match the descriptor type of {@code dstBinding}</li>
- * <li>If {@link VkDescriptorSetLayoutBinding} for {@code dstSet} at {@code dstBinding} is {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, and the new active descriptor type is {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, the {@code pMutableDescriptorTypeLists} for {@code srcBinding} and {@code dstBinding} <b>must</b> match exactly</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK10#VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET STRUCTURE_TYPE_COPY_DESCRIPTOR_SET}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code srcSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
- * <li>{@code dstSet} <b>must</b> be a valid {@code VkDescriptorSet} handle</li>
- * <li>Both of {@code dstSet}, and {@code srcSet} <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK10#vkUpdateDescriptorSets UpdateDescriptorSets}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCopyDescriptorSet {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDescriptorSet {@link #srcSet};
- *     uint32_t {@link #srcBinding};
- *     uint32_t {@link #srcArrayElement};
- *     VkDescriptorSet {@link #dstSet};
- *     uint32_t {@link #dstBinding};
- *     uint32_t {@link #dstArrayElement};
- *     uint32_t {@link #descriptorCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDescriptorSet srcSet;
+ *     uint32_t srcBinding;
+ *     uint32_t srcArrayElement;
+ *     VkDescriptorSet dstSet;
+ *     uint32_t dstBinding;
+ *     uint32_t dstArrayElement;
+ *     uint32_t descriptorCount;
+ * }}</pre>
  */
 public class VkCopyDescriptorSet extends Struct<VkCopyDescriptorSet> implements NativeResource {
 
@@ -147,53 +98,53 @@ public class VkCopyDescriptorSet extends Struct<VkCopyDescriptorSet> implements 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** {@code srcSet}, {@code srcBinding}, and {@code srcArrayElement} are the source set, binding, and array element, respectively. If the descriptor binding identified by {@code srcSet} and {@code srcBinding} has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code srcArrayElement} specifies the starting byte offset within the binding to copy from. */
+    /** @return the value of the {@code srcSet} field. */
     @NativeType("VkDescriptorSet")
     public long srcSet() { return nsrcSet(address()); }
-    /** see {@code srcSet} */
+    /** @return the value of the {@code srcBinding} field. */
     @NativeType("uint32_t")
     public int srcBinding() { return nsrcBinding(address()); }
-    /** see {@code srcSet} */
+    /** @return the value of the {@code srcArrayElement} field. */
     @NativeType("uint32_t")
     public int srcArrayElement() { return nsrcArrayElement(address()); }
-    /** {@code dstSet}, {@code dstBinding}, and {@code dstArrayElement} are the destination set, binding, and array element, respectively. If the descriptor binding identified by {@code dstSet} and {@code dstBinding} has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code dstArrayElement} specifies the starting byte offset within the binding to copy to. */
+    /** @return the value of the {@code dstSet} field. */
     @NativeType("VkDescriptorSet")
     public long dstSet() { return ndstSet(address()); }
-    /** see {@code dstSet} */
+    /** @return the value of the {@code dstBinding} field. */
     @NativeType("uint32_t")
     public int dstBinding() { return ndstBinding(address()); }
-    /** see {@code dstSet} */
+    /** @return the value of the {@code dstArrayElement} field. */
     @NativeType("uint32_t")
     public int dstArrayElement() { return ndstArrayElement(address()); }
-    /** the number of descriptors to copy from the source to destination. If {@code descriptorCount} is greater than the number of remaining array elements in the source or destination binding, those affect consecutive bindings in a manner similar to {@link VkWriteDescriptorSet} above. If the descriptor binding identified by {@code srcSet} and {@code srcBinding} has a descriptor type of {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK} then {@code descriptorCount} specifies the number of bytes to copy and the remaining array elements in the source or destination binding refer to the remaining number of bytes in those. */
+    /** @return the value of the {@code descriptorCount} field. */
     @NativeType("uint32_t")
     public int descriptorCount() { return ndescriptorCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCopyDescriptorSet sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET STRUCTURE_TYPE_COPY_DESCRIPTOR_SET} value to the {@link #sType} field. */
+    /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET STRUCTURE_TYPE_COPY_DESCRIPTOR_SET} value to the {@code sType} field. */
     public VkCopyDescriptorSet sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCopyDescriptorSet pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcSet} field. */
+    /** Sets the specified value to the {@code srcSet} field. */
     public VkCopyDescriptorSet srcSet(@NativeType("VkDescriptorSet") long value) { nsrcSet(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcBinding} field. */
+    /** Sets the specified value to the {@code srcBinding} field. */
     public VkCopyDescriptorSet srcBinding(@NativeType("uint32_t") int value) { nsrcBinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #srcArrayElement} field. */
+    /** Sets the specified value to the {@code srcArrayElement} field. */
     public VkCopyDescriptorSet srcArrayElement(@NativeType("uint32_t") int value) { nsrcArrayElement(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstSet} field. */
+    /** Sets the specified value to the {@code dstSet} field. */
     public VkCopyDescriptorSet dstSet(@NativeType("VkDescriptorSet") long value) { ndstSet(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstBinding} field. */
+    /** Sets the specified value to the {@code dstBinding} field. */
     public VkCopyDescriptorSet dstBinding(@NativeType("uint32_t") int value) { ndstBinding(address(), value); return this; }
-    /** Sets the specified value to the {@link #dstArrayElement} field. */
+    /** Sets the specified value to the {@code dstArrayElement} field. */
     public VkCopyDescriptorSet dstArrayElement(@NativeType("uint32_t") int value) { ndstArrayElement(address(), value); return this; }
-    /** Sets the specified value to the {@link #descriptorCount} field. */
+    /** Sets the specified value to the {@code descriptorCount} field. */
     public VkCopyDescriptorSet descriptorCount(@NativeType("uint32_t") int value) { ndescriptorCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -444,53 +395,53 @@ public class VkCopyDescriptorSet extends Struct<VkCopyDescriptorSet> implements 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCopyDescriptorSet#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCopyDescriptorSet.nsType(address()); }
-        /** @return the value of the {@link VkCopyDescriptorSet#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCopyDescriptorSet.npNext(address()); }
-        /** @return the value of the {@link VkCopyDescriptorSet#srcSet} field. */
+        /** @return the value of the {@code srcSet} field. */
         @NativeType("VkDescriptorSet")
         public long srcSet() { return VkCopyDescriptorSet.nsrcSet(address()); }
-        /** @return the value of the {@link VkCopyDescriptorSet#srcBinding} field. */
+        /** @return the value of the {@code srcBinding} field. */
         @NativeType("uint32_t")
         public int srcBinding() { return VkCopyDescriptorSet.nsrcBinding(address()); }
-        /** @return the value of the {@link VkCopyDescriptorSet#srcArrayElement} field. */
+        /** @return the value of the {@code srcArrayElement} field. */
         @NativeType("uint32_t")
         public int srcArrayElement() { return VkCopyDescriptorSet.nsrcArrayElement(address()); }
-        /** @return the value of the {@link VkCopyDescriptorSet#dstSet} field. */
+        /** @return the value of the {@code dstSet} field. */
         @NativeType("VkDescriptorSet")
         public long dstSet() { return VkCopyDescriptorSet.ndstSet(address()); }
-        /** @return the value of the {@link VkCopyDescriptorSet#dstBinding} field. */
+        /** @return the value of the {@code dstBinding} field. */
         @NativeType("uint32_t")
         public int dstBinding() { return VkCopyDescriptorSet.ndstBinding(address()); }
-        /** @return the value of the {@link VkCopyDescriptorSet#dstArrayElement} field. */
+        /** @return the value of the {@code dstArrayElement} field. */
         @NativeType("uint32_t")
         public int dstArrayElement() { return VkCopyDescriptorSet.ndstArrayElement(address()); }
-        /** @return the value of the {@link VkCopyDescriptorSet#descriptorCount} field. */
+        /** @return the value of the {@code descriptorCount} field. */
         @NativeType("uint32_t")
         public int descriptorCount() { return VkCopyDescriptorSet.ndescriptorCount(address()); }
 
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCopyDescriptorSet.Buffer sType(@NativeType("VkStructureType") int value) { VkCopyDescriptorSet.nsType(address(), value); return this; }
-        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET STRUCTURE_TYPE_COPY_DESCRIPTOR_SET} value to the {@link VkCopyDescriptorSet#sType} field. */
+        /** Sets the {@link VK10#VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET STRUCTURE_TYPE_COPY_DESCRIPTOR_SET} value to the {@code sType} field. */
         public VkCopyDescriptorSet.Buffer sType$Default() { return sType(VK10.VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET); }
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCopyDescriptorSet.Buffer pNext(@NativeType("void const *") long value) { VkCopyDescriptorSet.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#srcSet} field. */
+        /** Sets the specified value to the {@code srcSet} field. */
         public VkCopyDescriptorSet.Buffer srcSet(@NativeType("VkDescriptorSet") long value) { VkCopyDescriptorSet.nsrcSet(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#srcBinding} field. */
+        /** Sets the specified value to the {@code srcBinding} field. */
         public VkCopyDescriptorSet.Buffer srcBinding(@NativeType("uint32_t") int value) { VkCopyDescriptorSet.nsrcBinding(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#srcArrayElement} field. */
+        /** Sets the specified value to the {@code srcArrayElement} field. */
         public VkCopyDescriptorSet.Buffer srcArrayElement(@NativeType("uint32_t") int value) { VkCopyDescriptorSet.nsrcArrayElement(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#dstSet} field. */
+        /** Sets the specified value to the {@code dstSet} field. */
         public VkCopyDescriptorSet.Buffer dstSet(@NativeType("VkDescriptorSet") long value) { VkCopyDescriptorSet.ndstSet(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#dstBinding} field. */
+        /** Sets the specified value to the {@code dstBinding} field. */
         public VkCopyDescriptorSet.Buffer dstBinding(@NativeType("uint32_t") int value) { VkCopyDescriptorSet.ndstBinding(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#dstArrayElement} field. */
+        /** Sets the specified value to the {@code dstArrayElement} field. */
         public VkCopyDescriptorSet.Buffer dstArrayElement(@NativeType("uint32_t") int value) { VkCopyDescriptorSet.ndstArrayElement(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCopyDescriptorSet#descriptorCount} field. */
+        /** Sets the specified value to the {@code descriptorCount} field. */
         public VkCopyDescriptorSet.Buffer descriptorCount(@NativeType("uint32_t") int value) { VkCopyDescriptorSet.ndescriptorCount(address(), value); return this; }
 
     }

@@ -43,7 +43,7 @@ public class LLVMError {
 
     // --- [ LLVMGetErrorTypeId ] ---
 
-    /** Returns the type id for the given error instance, which must be a failure value (i.e. non-null). */
+    /** {@code LLVMErrorTypeId LLVMGetErrorTypeId(LLVMErrorRef Err)} */
     @NativeType("LLVMErrorTypeId")
     public static long LLVMGetErrorTypeId(@NativeType("LLVMErrorRef") long Err) {
         long __functionAddress = Functions.GetErrorTypeId;
@@ -55,12 +55,7 @@ public class LLVMError {
 
     // --- [ LLVMConsumeError ] ---
 
-    /**
-     * Dispose of the given error without handling it.
-     * 
-     * <p>This operation consumes the error, and the given {@code LLVMErrorRef} value is not usable once this call returns. Note: This method <b>only</b> needs
-     * to be called if the error is not being passed to some other consuming operation, e.g. {@link #LLVMGetErrorMessage GetErrorMessage}.</p>
-     */
+    /** {@code void LLVMConsumeError(LLVMErrorRef Err)} */
     public static void LLVMConsumeError(@NativeType("LLVMErrorRef") long Err) {
         long __functionAddress = Functions.ConsumeError;
         if (CHECKS) {
@@ -71,7 +66,7 @@ public class LLVMError {
 
     // --- [ LLVMGetErrorMessage ] ---
 
-    /** Unsafe version of: {@link #LLVMGetErrorMessage GetErrorMessage} */
+    /** {@code char * LLVMGetErrorMessage(LLVMErrorRef Err)} */
     public static long nLLVMGetErrorMessage(long Err) {
         long __functionAddress = Functions.GetErrorMessage;
         if (CHECKS) {
@@ -80,12 +75,7 @@ public class LLVMError {
         return invokePP(Err, __functionAddress);
     }
 
-    /**
-     * Returns the given string's error message.
-     * 
-     * <p>This operation consumes the error, and the given {@code LLVMErrorRef} value is not usable once this call returns. The caller is responsible for
-     * disposing of the string by calling {@link #LLVMDisposeErrorMessage DisposeErrorMessage}.</p>
-     */
+    /** {@code char * LLVMGetErrorMessage(LLVMErrorRef Err)} */
     @NativeType("char *")
     public static @Nullable ByteBuffer LLVMGetErrorMessage(@NativeType("LLVMErrorRef") long Err) {
         long __result = nLLVMGetErrorMessage(Err);
@@ -94,20 +84,20 @@ public class LLVMError {
 
     // --- [ LLVMDisposeErrorMessage ] ---
 
-    /** Unsafe version of: {@link #LLVMDisposeErrorMessage DisposeErrorMessage} */
+    /** {@code void LLVMDisposeErrorMessage(char * ErrMsg)} */
     public static void nLLVMDisposeErrorMessage(long ErrMsg) {
         long __functionAddress = Functions.DisposeErrorMessage;
         invokePV(ErrMsg, __functionAddress);
     }
 
-    /** Dispose of the given error message. */
+    /** {@code void LLVMDisposeErrorMessage(char * ErrMsg)} */
     public static void LLVMDisposeErrorMessage(@NativeType("char *") ByteBuffer ErrMsg) {
         nLLVMDisposeErrorMessage(memAddress(ErrMsg));
     }
 
     // --- [ LLVMGetStringErrorTypeId ] ---
 
-    /** Returns the type id for llvm {@code StringError}. */
+    /** {@code LLVMErrorTypeId LLVMGetStringErrorTypeId(void)} */
     @NativeType("LLVMErrorTypeId")
     public static long LLVMGetStringErrorTypeId() {
         long __functionAddress = Functions.GetStringErrorTypeId;
@@ -116,7 +106,7 @@ public class LLVMError {
 
     // --- [ LLVMCreateStringError ] ---
 
-    /** Unsafe version of: {@link #LLVMCreateStringError CreateStringError} */
+    /** {@code LLVMErrorRef LLVMCreateStringError(char const * ErrMsg)} */
     public static long nLLVMCreateStringError(long ErrMsg) {
         long __functionAddress = Functions.CreateStringError;
         if (CHECKS) {
@@ -125,11 +115,7 @@ public class LLVMError {
         return invokePP(ErrMsg, __functionAddress);
     }
 
-    /**
-     * Create a {@code StringError}.
-     *
-     * @since 12
-     */
+    /** {@code LLVMErrorRef LLVMCreateStringError(char const * ErrMsg)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMCreateStringError(@NativeType("char const *") ByteBuffer ErrMsg) {
         if (CHECKS) {
@@ -138,11 +124,7 @@ public class LLVMError {
         return nLLVMCreateStringError(memAddress(ErrMsg));
     }
 
-    /**
-     * Create a {@code StringError}.
-     *
-     * @since 12
-     */
+    /** {@code LLVMErrorRef LLVMCreateStringError(char const * ErrMsg)} */
     @NativeType("LLVMErrorRef")
     public static long LLVMCreateStringError(@NativeType("char const *") CharSequence ErrMsg) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();

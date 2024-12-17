@@ -14,16 +14,12 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * See {@link VkExternalMemoryProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExternalMemoryPropertiesKHR {
  *     VkExternalMemoryFeatureFlags externalMemoryFeatures;
  *     VkExternalMemoryHandleTypeFlags exportFromImportedHandleTypes;
  *     VkExternalMemoryHandleTypeFlags compatibleHandleTypes;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkExternalMemoryPropertiesKHR extends VkExternalMemoryProperties {
 

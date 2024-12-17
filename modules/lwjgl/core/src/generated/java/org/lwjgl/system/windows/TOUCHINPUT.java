@@ -16,23 +16,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Encapsulates data for touch input.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct TOUCHINPUT {
- *     LONG {@link #x};
- *     LONG {@link #y};
- *     HANDLE {@link #hSource};
- *     DWORD {@link #dwID};
- *     DWORD {@link #dwFlags};
- *     DWORD {@link #dwMask};
- *     DWORD {@link #dwTime};
- *     ULONG_PTR {@link #dwExtraInfo};
- *     DWORD {@link #cxContact};
- *     DWORD {@link #cyContact};
- * }</code></pre>
+ *     LONG x;
+ *     LONG y;
+ *     HANDLE hSource;
+ *     DWORD dwID;
+ *     DWORD dwFlags;
+ *     DWORD dwMask;
+ *     DWORD dwTime;
+ *     ULONG_PTR dwExtraInfo;
+ *     DWORD cxContact;
+ *     DWORD cyContact;
+ * }}</pre>
  */
 public class TOUCHINPUT extends Struct<TOUCHINPUT> implements NativeResource {
 
@@ -106,54 +102,34 @@ public class TOUCHINPUT extends Struct<TOUCHINPUT> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the x-coordinate (horizontal point) of the touch input. This member is indicated in hundredths of a pixel of physical screen coordinates. */
+    /** @return the value of the {@code x} field. */
     @NativeType("LONG")
     public int x() { return nx(address()); }
-    /** the y-coordinate (vertical point) of the touch input. This member is indicated in hundredths of a pixel of physical screen coordinates. */
+    /** @return the value of the {@code y} field. */
     @NativeType("LONG")
     public int y() { return ny(address()); }
-    /** a device handle for the source input device. Each device is given a unique provider at run time by the touch input provider. */
+    /** @return the value of the {@code hSource} field. */
     @NativeType("HANDLE")
     public long hSource() { return nhSource(address()); }
-    /**
-     * a touch point identifier that distinguishes a particular touch input. This value stays consistent in a touch contact sequence from the point a contact
-     * comes down until it comes back up. An ID may be reused later for subsequent contacts.
-     */
+    /** @return the value of the {@code dwID} field. */
     @NativeType("DWORD")
     public int dwID() { return ndwID(address()); }
-    /**
-     * a set of bit flags that specify various aspects of touch point press, release, and motion. The bits in this member can be any reasonable combination of
-     * the values in the Remarks section.
-     */
+    /** @return the value of the {@code dwFlags} field. */
     @NativeType("DWORD")
     public int dwFlags() { return ndwFlags(address()); }
-    /**
-     * a set of bit flags that specify which of the optional fields in the structure contain valid values. The availability of valid information in the
-     * optional fields is device-specific. Applications should use an optional field value only when the corresponding bit is set in {@code dwMask}. This
-     * field may contain a combination of the {@code dwMask} flags mentioned in the Remarks section.
-     */
+    /** @return the value of the {@code dwMask} field. */
     @NativeType("DWORD")
     public int dwMask() { return ndwMask(address()); }
-    /**
-     * the time stamp for the event, in milliseconds. The consuming application should note that the system performs no validation on this field; when the
-     * {@link User32#TOUCHINPUTMASKF_TIMEFROMSYSTEM} flag is not set, the accuracy and sequencing of values in this field are completely dependent on the touch input
-     * provider.
-     */
+    /** @return the value of the {@code dwTime} field. */
     @NativeType("DWORD")
     public int dwTime() { return ndwTime(address()); }
-    /** an additional value associated with the touch event. */
+    /** @return the value of the {@code dwExtraInfo} field. */
     @NativeType("ULONG_PTR")
     public long dwExtraInfo() { return ndwExtraInfo(address()); }
-    /**
-     * the width of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
-     * the {@link User32#TOUCHINPUTMASKF_CONTACTAREA} flag set.
-     */
+    /** @return the value of the {@code cxContact} field. */
     @NativeType("DWORD")
     public int cxContact() { return ncxContact(address()); }
-    /**
-     * the height of the touch contact area in hundredths of a pixel in physical screen coordinates. This value is only valid if the {@code dwMask} member has
-     * the {@link User32#TOUCHINPUTMASKF_CONTACTAREA} flag set.
-     */
+    /** @return the value of the {@code cyContact} field. */
     @NativeType("DWORD")
     public int cyContact() { return ncyContact(address()); }
 
@@ -351,34 +327,34 @@ public class TOUCHINPUT extends Struct<TOUCHINPUT> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link TOUCHINPUT#x} field. */
+        /** @return the value of the {@code x} field. */
         @NativeType("LONG")
         public int x() { return TOUCHINPUT.nx(address()); }
-        /** @return the value of the {@link TOUCHINPUT#y} field. */
+        /** @return the value of the {@code y} field. */
         @NativeType("LONG")
         public int y() { return TOUCHINPUT.ny(address()); }
-        /** @return the value of the {@link TOUCHINPUT#hSource} field. */
+        /** @return the value of the {@code hSource} field. */
         @NativeType("HANDLE")
         public long hSource() { return TOUCHINPUT.nhSource(address()); }
-        /** @return the value of the {@link TOUCHINPUT#dwID} field. */
+        /** @return the value of the {@code dwID} field. */
         @NativeType("DWORD")
         public int dwID() { return TOUCHINPUT.ndwID(address()); }
-        /** @return the value of the {@link TOUCHINPUT#dwFlags} field. */
+        /** @return the value of the {@code dwFlags} field. */
         @NativeType("DWORD")
         public int dwFlags() { return TOUCHINPUT.ndwFlags(address()); }
-        /** @return the value of the {@link TOUCHINPUT#dwMask} field. */
+        /** @return the value of the {@code dwMask} field. */
         @NativeType("DWORD")
         public int dwMask() { return TOUCHINPUT.ndwMask(address()); }
-        /** @return the value of the {@link TOUCHINPUT#dwTime} field. */
+        /** @return the value of the {@code dwTime} field. */
         @NativeType("DWORD")
         public int dwTime() { return TOUCHINPUT.ndwTime(address()); }
-        /** @return the value of the {@link TOUCHINPUT#dwExtraInfo} field. */
+        /** @return the value of the {@code dwExtraInfo} field. */
         @NativeType("ULONG_PTR")
         public long dwExtraInfo() { return TOUCHINPUT.ndwExtraInfo(address()); }
-        /** @return the value of the {@link TOUCHINPUT#cxContact} field. */
+        /** @return the value of the {@code cxContact} field. */
         @NativeType("DWORD")
         public int cxContact() { return TOUCHINPUT.ncxContact(address()); }
-        /** @return the value of the {@link TOUCHINPUT#cyContact} field. */
+        /** @return the value of the {@code cyContact} field. */
         @NativeType("DWORD")
         public int cyContact() { return TOUCHINPUT.ncyContact(address()); }
 

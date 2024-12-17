@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Data for IndexerCallbacks#importedASTFile.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXIdxImportedASTFileInfo {
- *     CXFile {@link #file};
- *     CXModule {@link #module};
- *     {@link CXIdxLoc CXIdxLoc} {@link #loc};
- *     int {@link #isImplicit};
- * }</code></pre>
+ *     CXFile file;
+ *     CXModule module;
+ *     {@link CXIdxLoc CXIdxLoc} loc;
+ *     int isImplicit;
+ * }}</pre>
  */
 public class CXIdxImportedASTFileInfo extends Struct<CXIdxImportedASTFileInfo> {
 
@@ -80,15 +76,15 @@ public class CXIdxImportedASTFileInfo extends Struct<CXIdxImportedASTFileInfo> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** top level AST file containing the imported PCH, module or submodule */
+    /** @return the value of the {@code file} field. */
     @NativeType("CXFile")
     public long file() { return nfile(address()); }
-    /** the imported module or {@code NULL} if the AST file is a PCH */
+    /** @return the value of the {@code module} field. */
     @NativeType("CXModule")
     public long module() { return nmodule(address()); }
-    /** location where the file is imported. Applicable only for modules */
+    /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
     public CXIdxLoc loc() { return nloc(address()); }
-    /** non-zero if an inclusion directive was automatically turned into a module import. Applicable only for modules */
+    /** @return the value of the {@code isImplicit} field. */
     @NativeType("int")
     public boolean isImplicit() { return nisImplicit(address()) != 0; }
 
@@ -173,15 +169,15 @@ public class CXIdxImportedASTFileInfo extends Struct<CXIdxImportedASTFileInfo> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CXIdxImportedASTFileInfo#file} field. */
+        /** @return the value of the {@code file} field. */
         @NativeType("CXFile")
         public long file() { return CXIdxImportedASTFileInfo.nfile(address()); }
-        /** @return the value of the {@link CXIdxImportedASTFileInfo#module} field. */
+        /** @return the value of the {@code module} field. */
         @NativeType("CXModule")
         public long module() { return CXIdxImportedASTFileInfo.nmodule(address()); }
-        /** @return a {@link CXIdxLoc} view of the {@link CXIdxImportedASTFileInfo#loc} field. */
+        /** @return a {@link CXIdxLoc} view of the {@code loc} field. */
         public CXIdxLoc loc() { return CXIdxImportedASTFileInfo.nloc(address()); }
-        /** @return the value of the {@link CXIdxImportedASTFileInfo#isImplicit} field. */
+        /** @return the value of the {@code isImplicit} field. */
         @NativeType("int")
         public boolean isImplicit() { return CXIdxImportedASTFileInfo.nisImplicit(address()) != 0; }
 

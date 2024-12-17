@@ -13,20 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-/**
- * Instances of this class may be passed to the {@link GLFW#glfwSetKeyCallback SetKeyCallback} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     GLFWwindow *window,
- *     int key,
- *     int scancode,
- *     int action,
- *     int mods
- * )</code></pre>
- */
+/** Callback function: {@link #invoke GLFWkeyfun} */
 public abstract class GLFWKeyCallback extends Callback implements GLFWKeyCallbackI {
 
     /**

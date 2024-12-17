@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents the linkage flags for a symbol definition.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LLVMJITSymbolFlags {
  *     uint8_t GenericFlags;
  *     uint8_t TargetFlags;
- * }</code></pre>
+ * }}</pre>
  */
 public class LLVMJITSymbolFlags extends Struct<LLVMJITSymbolFlags> implements NativeResource {
 

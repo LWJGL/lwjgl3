@@ -17,15 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_MEMCPY_NODE_PARAMS {
  *     int flags;
  *     int reserved;
  *     CUcontext copyCtx;
  *     {@link CUDA_MEMCPY3D CUDA_MEMCPY3D} copyParams;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_MEMCPY_NODE_PARAMS extends Struct<CUDA_MEMCPY_NODE_PARAMS> implements NativeResource {
 

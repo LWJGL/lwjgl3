@@ -16,36 +16,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing properties supported by VK_NV_optical_flow.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceOpticalFlowPropertiesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVOpticalFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceOpticalFlowPropertiesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkOpticalFlowGridSizeFlagsNV {@link #supportedOutputGridSizes};
- *     VkOpticalFlowGridSizeFlagsNV {@link #supportedHintGridSizes};
- *     VkBool32 {@link #hintSupported};
- *     VkBool32 {@link #costSupported};
- *     VkBool32 {@link #bidirectionalFlowSupported};
- *     VkBool32 {@link #globalFlowSupported};
- *     uint32_t {@link #minWidth};
- *     uint32_t {@link #minHeight};
- *     uint32_t {@link #maxWidth};
- *     uint32_t {@link #maxHeight};
- *     uint32_t {@link #maxNumRegionsOfInterest};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkOpticalFlowGridSizeFlagsNV supportedOutputGridSizes;
+ *     VkOpticalFlowGridSizeFlagsNV supportedHintGridSizes;
+ *     VkBool32 hintSupported;
+ *     VkBool32 costSupported;
+ *     VkBool32 bidirectionalFlowSupported;
+ *     VkBool32 globalFlowSupported;
+ *     uint32_t minWidth;
+ *     uint32_t minHeight;
+ *     uint32_t maxWidth;
+ *     uint32_t maxHeight;
+ *     uint32_t maxNumRegionsOfInterest;
+ * }}</pre>
  */
 public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct<VkPhysicalDeviceOpticalFlowPropertiesNV> implements NativeResource {
 
@@ -128,51 +114,51 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct<VkPhysicalDe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** are the supported {@code VkOpticalFlowGridSizeFlagsNV} which can be specified in {@link VkOpticalFlowSessionCreateInfoNV}{@code ::outputGridSize}. */
+    /** @return the value of the {@code supportedOutputGridSizes} field. */
     @NativeType("VkOpticalFlowGridSizeFlagsNV")
     public int supportedOutputGridSizes() { return nsupportedOutputGridSizes(address()); }
-    /** are the supported {@code VkOpticalFlowGridSizeFlagsNV} which can be specified in {@link VkOpticalFlowSessionCreateInfoNV}{@code ::hintGridSize}. */
+    /** @return the value of the {@code supportedHintGridSizes} field. */
     @NativeType("VkOpticalFlowGridSizeFlagsNV")
     public int supportedHintGridSizes() { return nsupportedHintGridSizes(address()); }
-    /** a boolean describing whether using hint flow vector map is supported in an optical flow session. */
+    /** @return the value of the {@code hintSupported} field. */
     @NativeType("VkBool32")
     public boolean hintSupported() { return nhintSupported(address()) != 0; }
-    /** a boolean describing whether cost map generation is supported in an optical flow session. */
+    /** @return the value of the {@code costSupported} field. */
     @NativeType("VkBool32")
     public boolean costSupported() { return ncostSupported(address()) != 0; }
-    /** a boolean describing whether bi-directional flow generation is supported in an optical flow session. */
+    /** @return the value of the {@code bidirectionalFlowSupported} field. */
     @NativeType("VkBool32")
     public boolean bidirectionalFlowSupported() { return nbidirectionalFlowSupported(address()) != 0; }
-    /** a boolean describing whether global flow vector map generation is supported in an optical flow session. */
+    /** @return the value of the {@code globalFlowSupported} field. */
     @NativeType("VkBool32")
     public boolean globalFlowSupported() { return nglobalFlowSupported(address()) != 0; }
-    /** the minimum width in pixels for images used in an optical flow session. */
+    /** @return the value of the {@code minWidth} field. */
     @NativeType("uint32_t")
     public int minWidth() { return nminWidth(address()); }
-    /** the minimum height in pixels for images used in an optical flow session. */
+    /** @return the value of the {@code minHeight} field. */
     @NativeType("uint32_t")
     public int minHeight() { return nminHeight(address()); }
-    /** the maximum width in pixels for images used in an optical flow session. */
+    /** @return the value of the {@code maxWidth} field. */
     @NativeType("uint32_t")
     public int maxWidth() { return nmaxWidth(address()); }
-    /** the maximum height in pixels for images used in an optical flow session. */
+    /** @return the value of the {@code maxHeight} field. */
     @NativeType("uint32_t")
     public int maxHeight() { return nmaxHeight(address()); }
-    /** the maximum number of regions of interest which can be used in an optical flow session. If this {@code maxNumRegionsOfInterest} is 0, regions of interest are not supported in an optical flow session. */
+    /** @return the value of the {@code maxNumRegionsOfInterest} field. */
     @NativeType("uint32_t")
     public int maxNumRegionsOfInterest() { return nmaxNumRegionsOfInterest(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceOpticalFlowPropertiesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceOpticalFlowPropertiesNV sType$Default() { return sType(NVOpticalFlow.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceOpticalFlowPropertiesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -384,51 +370,51 @@ public class VkPhysicalDeviceOpticalFlowPropertiesNV extends Struct<VkPhysicalDe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceOpticalFlowPropertiesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#supportedOutputGridSizes} field. */
+        /** @return the value of the {@code supportedOutputGridSizes} field. */
         @NativeType("VkOpticalFlowGridSizeFlagsNV")
         public int supportedOutputGridSizes() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nsupportedOutputGridSizes(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#supportedHintGridSizes} field. */
+        /** @return the value of the {@code supportedHintGridSizes} field. */
         @NativeType("VkOpticalFlowGridSizeFlagsNV")
         public int supportedHintGridSizes() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nsupportedHintGridSizes(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#hintSupported} field. */
+        /** @return the value of the {@code hintSupported} field. */
         @NativeType("VkBool32")
         public boolean hintSupported() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nhintSupported(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#costSupported} field. */
+        /** @return the value of the {@code costSupported} field. */
         @NativeType("VkBool32")
         public boolean costSupported() { return VkPhysicalDeviceOpticalFlowPropertiesNV.ncostSupported(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#bidirectionalFlowSupported} field. */
+        /** @return the value of the {@code bidirectionalFlowSupported} field. */
         @NativeType("VkBool32")
         public boolean bidirectionalFlowSupported() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nbidirectionalFlowSupported(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#globalFlowSupported} field. */
+        /** @return the value of the {@code globalFlowSupported} field. */
         @NativeType("VkBool32")
         public boolean globalFlowSupported() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nglobalFlowSupported(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#minWidth} field. */
+        /** @return the value of the {@code minWidth} field. */
         @NativeType("uint32_t")
         public int minWidth() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nminWidth(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#minHeight} field. */
+        /** @return the value of the {@code minHeight} field. */
         @NativeType("uint32_t")
         public int minHeight() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nminHeight(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#maxWidth} field. */
+        /** @return the value of the {@code maxWidth} field. */
         @NativeType("uint32_t")
         public int maxWidth() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nmaxWidth(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#maxHeight} field. */
+        /** @return the value of the {@code maxHeight} field. */
         @NativeType("uint32_t")
         public int maxHeight() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nmaxHeight(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#maxNumRegionsOfInterest} field. */
+        /** @return the value of the {@code maxNumRegionsOfInterest} field. */
         @NativeType("uint32_t")
         public int maxNumRegionsOfInterest() { return VkPhysicalDeviceOpticalFlowPropertiesNV.nmaxNumRegionsOfInterest(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceOpticalFlowPropertiesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV} value to the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#sType} field. */
+        /** Sets the {@link NVOpticalFlow#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer sType$Default() { return sType(NVOpticalFlow.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceOpticalFlowPropertiesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceOpticalFlowPropertiesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceOpticalFlowPropertiesNV.npNext(address(), value); return this; }
 
     }

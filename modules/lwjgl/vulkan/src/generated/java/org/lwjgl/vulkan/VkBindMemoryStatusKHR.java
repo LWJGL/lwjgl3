@@ -17,16 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkBindMemoryStatus}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBindMemoryStatusKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkResult * pResult;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkBindMemoryStatusKHR extends VkBindMemoryStatus {
 

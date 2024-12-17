@@ -18,16 +18,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.*;
 
 /**
- * Parameters of created {@code VmaVirtualBlock} object to be passed to {@link Vma#vmaCreateVirtualBlock CreateVirtualBlock}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VmaVirtualBlockCreateInfo {
- *     VkDeviceSize {@link #size};
- *     VmaVirtualBlockCreateFlagBits {@link #flags};
- *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * {@link #pAllocationCallbacks};
- * }</code></pre>
+ *     VkDeviceSize size;
+ *     VmaVirtualBlockCreateFlagBits flags;
+ *     {@link VkAllocationCallbacks VkAllocationCallbacks} const * pAllocationCallbacks;
+ * }}</pre>
  */
 public class VmaVirtualBlockCreateInfo extends Struct<VmaVirtualBlockCreateInfo> implements NativeResource {
 
@@ -80,30 +76,21 @@ public class VmaVirtualBlockCreateInfo extends Struct<VmaVirtualBlockCreateInfo>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * total size of the virtual block.
-     * 
-     * <p>Sizes can be expressed in bytes or any units you want as long as you are consistent in using them. For example, if you allocate from some array of
-     * structures, 1 can mean single instance of entire structure.</p>
-     */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** use combination of {@code VmaVirtualBlockCreateFlagBits}. One or more of:<br><table><tr><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT}</td><td>{@link Vma#VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK}</td></tr></table> */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VmaVirtualBlockCreateFlagBits")
     public int flags() { return nflags(address()); }
-    /**
-     * custom CPU memory allocation callbacks. Optional.
-     * 
-     * <p>Optional, can be null. When specified, they will be used for all CPU-side memory allocations.</p>
-     */
+    /** @return a {@link VkAllocationCallbacks} view of the struct pointed to by the {@code pAllocationCallbacks} field. */
     @NativeType("VkAllocationCallbacks const *")
     public @Nullable VkAllocationCallbacks pAllocationCallbacks() { return npAllocationCallbacks(address()); }
 
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public VmaVirtualBlockCreateInfo size(@NativeType("VkDeviceSize") long value) { nsize(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VmaVirtualBlockCreateInfo flags(@NativeType("VmaVirtualBlockCreateFlagBits") int value) { nflags(address(), value); return this; }
-    /** Sets the address of the specified {@link VkAllocationCallbacks} to the {@link #pAllocationCallbacks} field. */
+    /** Sets the address of the specified {@link VkAllocationCallbacks} to the {@code pAllocationCallbacks} field. */
     public VmaVirtualBlockCreateInfo pAllocationCallbacks(@Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks value) { npAllocationCallbacks(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,21 +286,21 @@ public class VmaVirtualBlockCreateInfo extends Struct<VmaVirtualBlockCreateInfo>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VmaVirtualBlockCreateInfo#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VmaVirtualBlockCreateInfo.nsize(address()); }
-        /** @return the value of the {@link VmaVirtualBlockCreateInfo#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VmaVirtualBlockCreateFlagBits")
         public int flags() { return VmaVirtualBlockCreateInfo.nflags(address()); }
-        /** @return a {@link VkAllocationCallbacks} view of the struct pointed to by the {@link VmaVirtualBlockCreateInfo#pAllocationCallbacks} field. */
+        /** @return a {@link VkAllocationCallbacks} view of the struct pointed to by the {@code pAllocationCallbacks} field. */
         @NativeType("VkAllocationCallbacks const *")
         public @Nullable VkAllocationCallbacks pAllocationCallbacks() { return VmaVirtualBlockCreateInfo.npAllocationCallbacks(address()); }
 
-        /** Sets the specified value to the {@link VmaVirtualBlockCreateInfo#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public VmaVirtualBlockCreateInfo.Buffer size(@NativeType("VkDeviceSize") long value) { VmaVirtualBlockCreateInfo.nsize(address(), value); return this; }
-        /** Sets the specified value to the {@link VmaVirtualBlockCreateInfo#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VmaVirtualBlockCreateInfo.Buffer flags(@NativeType("VmaVirtualBlockCreateFlagBits") int value) { VmaVirtualBlockCreateInfo.nflags(address(), value); return this; }
-        /** Sets the address of the specified {@link VkAllocationCallbacks} to the {@link VmaVirtualBlockCreateInfo#pAllocationCallbacks} field. */
+        /** Sets the address of the specified {@link VkAllocationCallbacks} to the {@code pAllocationCallbacks} field. */
         public VmaVirtualBlockCreateInfo.Buffer pAllocationCallbacks(@Nullable @NativeType("VkAllocationCallbacks const *") VkAllocationCallbacks value) { VmaVirtualBlockCreateInfo.npAllocationCallbacks(address(), value); return this; }
 
     }

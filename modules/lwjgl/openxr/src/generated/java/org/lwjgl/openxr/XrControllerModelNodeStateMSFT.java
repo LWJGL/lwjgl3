@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the state of a node in a controller model.
- * 
- * <h5>Description</h5>
- * 
- * <p>The state is corresponding to the glTF node identified by the {@link XrControllerModelNodePropertiesMSFT}{@code ::nodeName} and {@link XrControllerModelNodePropertiesMSFT}{@code ::parentNodeName} of the node property at the same array index in the {@link XrControllerModelPropertiesMSFT}{@code ::nodeProperties} in {@link XrControllerModelPropertiesMSFT}.</p>
- * 
- * <p>The {@code nodePose} is based on the user’s interaction on the controller at the latest {@link XR10#xrSyncActions SyncActions}, represented as the {@link XrPosef} of the node in it’s parent node space.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTControllerModel XR_MSFT_controller_model} extension <b>must</b> be enabled prior to using {@link XrControllerModelNodeStateMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrControllerModelStateMSFT}, {@link XrPosef}, {@link MSFTControllerModel#xrGetControllerModelStateMSFT GetControllerModelStateMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrControllerModelNodeStateMSFT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrPosef XrPosef} {@link #nodePose};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrPosef XrPosef} nodePose;
+ * }}</pre>
  */
 public class XrControllerModelNodeStateMSFT extends Struct<XrControllerModelNodeStateMSFT> implements NativeResource {
 
@@ -96,24 +74,24 @@ public class XrControllerModelNodeStateMSFT extends Struct<XrControllerModelNode
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@link XrPosef} of the node in its parent node space. */
+    /** @return a {@link XrPosef} view of the {@code nodePose} field. */
     public XrPosef nodePose() { return nnodePose(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrControllerModelNodeStateMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT} value to the {@code type} field. */
     public XrControllerModelNodeStateMSFT type$Default() { return type(MSFTControllerModel.XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrControllerModelNodeStateMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #nodePose} field. */
+    /** Copies the specified {@link XrPosef} to the {@code nodePose} field. */
     public XrControllerModelNodeStateMSFT nodePose(XrPosef value) { nnodePose(address(), value); return this; }
-    /** Passes the {@link #nodePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code nodePose} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrControllerModelNodeStateMSFT nodePose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(nodePose()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,24 +287,24 @@ public class XrControllerModelNodeStateMSFT extends Struct<XrControllerModelNode
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrControllerModelNodeStateMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrControllerModelNodeStateMSFT.ntype(address()); }
-        /** @return the value of the {@link XrControllerModelNodeStateMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrControllerModelNodeStateMSFT.nnext(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrControllerModelNodeStateMSFT#nodePose} field. */
+        /** @return a {@link XrPosef} view of the {@code nodePose} field. */
         public XrPosef nodePose() { return XrControllerModelNodeStateMSFT.nnodePose(address()); }
 
-        /** Sets the specified value to the {@link XrControllerModelNodeStateMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrControllerModelNodeStateMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrControllerModelNodeStateMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT} value to the {@link XrControllerModelNodeStateMSFT#type} field. */
+        /** Sets the {@link MSFTControllerModel#XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT} value to the {@code type} field. */
         public XrControllerModelNodeStateMSFT.Buffer type$Default() { return type(MSFTControllerModel.XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT); }
-        /** Sets the specified value to the {@link XrControllerModelNodeStateMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrControllerModelNodeStateMSFT.Buffer next(@NativeType("void *") long value) { XrControllerModelNodeStateMSFT.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrControllerModelNodeStateMSFT#nodePose} field. */
+        /** Copies the specified {@link XrPosef} to the {@code nodePose} field. */
         public XrControllerModelNodeStateMSFT.Buffer nodePose(XrPosef value) { XrControllerModelNodeStateMSFT.nnodePose(address(), value); return this; }
-        /** Passes the {@link XrControllerModelNodeStateMSFT#nodePose} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code nodePose} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrControllerModelNodeStateMSFT.Buffer nodePose(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(nodePose()); return this; }
 
     }

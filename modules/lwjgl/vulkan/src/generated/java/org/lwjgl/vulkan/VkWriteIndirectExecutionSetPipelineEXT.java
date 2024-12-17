@@ -16,37 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct specifying pipeline update information for an indirect execution set.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code index} <b>must</b> be less than the value of {@link VkIndirectExecutionSetPipelineInfoEXT}{@code ::maxPipelineCount} used to create the set</li>
- * <li>{@code pipeline} <b>must</b> have been created with {@link EXTDeviceGeneratedCommands#VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT}</li>
- * <li>{@code index} <b>must</b> not be referenced by submitted command buffers</li>
- * <li>The shader stages contained in {@code pipeline} <b>must</b> be supported by <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-supportedIndirectCommandsShaderStagesPipelineBinding">{@link VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT}{@code ::supportedIndirectCommandsShaderStagesPipelineBinding}</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT}</li>
- * <li>{@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDeviceGeneratedCommands#vkUpdateIndirectExecutionSetPipelineEXT UpdateIndirectExecutionSetPipelineEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkWriteIndirectExecutionSetPipelineEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #index};
- *     VkPipeline {@link #pipeline};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t index;
+ *     VkPipeline pipeline;
+ * }}</pre>
  */
 public class VkWriteIndirectExecutionSetPipelineEXT extends Struct<VkWriteIndirectExecutionSetPipelineEXT> implements NativeResource {
 
@@ -102,28 +78,28 @@ public class VkWriteIndirectExecutionSetPipelineEXT extends Struct<VkWriteIndire
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the element of the set to update */
+    /** @return the value of the {@code index} field. */
     @NativeType("uint32_t")
     public int index() { return nindex(address()); }
-    /** the pipeline to store in the indirect execution set */
+    /** @return the value of the {@code pipeline} field. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkWriteIndirectExecutionSetPipelineEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT} value to the {@code sType} field. */
     public VkWriteIndirectExecutionSetPipelineEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkWriteIndirectExecutionSetPipelineEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #index} field. */
+    /** Sets the specified value to the {@code index} field. */
     public VkWriteIndirectExecutionSetPipelineEXT index(@NativeType("uint32_t") int value) { nindex(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipeline} field. */
+    /** Sets the specified value to the {@code pipeline} field. */
     public VkWriteIndirectExecutionSetPipelineEXT pipeline(@NativeType("VkPipeline") long value) { npipeline(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,28 +301,28 @@ public class VkWriteIndirectExecutionSetPipelineEXT extends Struct<VkWriteIndire
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkWriteIndirectExecutionSetPipelineEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkWriteIndirectExecutionSetPipelineEXT.nsType(address()); }
-        /** @return the value of the {@link VkWriteIndirectExecutionSetPipelineEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkWriteIndirectExecutionSetPipelineEXT.npNext(address()); }
-        /** @return the value of the {@link VkWriteIndirectExecutionSetPipelineEXT#index} field. */
+        /** @return the value of the {@code index} field. */
         @NativeType("uint32_t")
         public int index() { return VkWriteIndirectExecutionSetPipelineEXT.nindex(address()); }
-        /** @return the value of the {@link VkWriteIndirectExecutionSetPipelineEXT#pipeline} field. */
+        /** @return the value of the {@code pipeline} field. */
         @NativeType("VkPipeline")
         public long pipeline() { return VkWriteIndirectExecutionSetPipelineEXT.npipeline(address()); }
 
-        /** Sets the specified value to the {@link VkWriteIndirectExecutionSetPipelineEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkWriteIndirectExecutionSetPipelineEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteIndirectExecutionSetPipelineEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT} value to the {@link VkWriteIndirectExecutionSetPipelineEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT} value to the {@code sType} field. */
         public VkWriteIndirectExecutionSetPipelineEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT); }
-        /** Sets the specified value to the {@link VkWriteIndirectExecutionSetPipelineEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkWriteIndirectExecutionSetPipelineEXT.Buffer pNext(@NativeType("void const *") long value) { VkWriteIndirectExecutionSetPipelineEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkWriteIndirectExecutionSetPipelineEXT#index} field. */
+        /** Sets the specified value to the {@code index} field. */
         public VkWriteIndirectExecutionSetPipelineEXT.Buffer index(@NativeType("uint32_t") int value) { VkWriteIndirectExecutionSetPipelineEXT.nindex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkWriteIndirectExecutionSetPipelineEXT#pipeline} field. */
+        /** Sets the specified value to the {@code pipeline} field. */
         public VkWriteIndirectExecutionSetPipelineEXT.Buffer pipeline(@NativeType("VkPipeline") long value) { VkWriteIndirectExecutionSetPipelineEXT.npipeline(address(), value); return this; }
 
     }

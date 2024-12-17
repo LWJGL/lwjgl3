@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing the device-generated compute features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #deviceGeneratedCommands};
- *     VkBool32 {@link #dynamicGeneratedPipelineLayout};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 deviceGeneratedCommands;
+ *     VkBool32 dynamicGeneratedPipelineLayout;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT extends Struct<VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT> implements NativeResource {
 
@@ -92,28 +78,28 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT extends Struct<V
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports functionality to generate commands on the device. */
+    /** @return the value of the {@code deviceGeneratedCommands} field. */
     @NativeType("VkBool32")
     public boolean deviceGeneratedCommands() { return ndeviceGeneratedCommands(address()) != 0; }
-    /** indicates the implementation allows the {@code pipelineLayout} member of {@link VkIndirectCommandsLayoutCreateInfoEXT} to be {@link VK10#VK_NULL_HANDLE NULL_HANDLE} and {@link VkPipelineLayoutCreateInfo} <b>can</b> be chained off those structures' {@code pNext} instead. */
+    /** @return the value of the {@code dynamicGeneratedPipelineLayout} field. */
     @NativeType("VkBool32")
     public boolean dynamicGeneratedPipelineLayout() { return ndynamicGeneratedPipelineLayout(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceGeneratedCommands} field. */
+    /** Sets the specified value to the {@code deviceGeneratedCommands} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT deviceGeneratedCommands(@NativeType("VkBool32") boolean value) { ndeviceGeneratedCommands(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #dynamicGeneratedPipelineLayout} field. */
+    /** Sets the specified value to the {@code dynamicGeneratedPipelineLayout} field. */
     public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT dynamicGeneratedPipelineLayout(@NativeType("VkBool32") boolean value) { ndynamicGeneratedPipelineLayout(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,28 +301,28 @@ public class VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT extends Struct<V
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#deviceGeneratedCommands} field. */
+        /** @return the value of the {@code deviceGeneratedCommands} field. */
         @NativeType("VkBool32")
         public boolean deviceGeneratedCommands() { return VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.ndeviceGeneratedCommands(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#dynamicGeneratedPipelineLayout} field. */
+        /** @return the value of the {@code dynamicGeneratedPipelineLayout} field. */
         @NativeType("VkBool32")
         public boolean dynamicGeneratedPipelineLayout() { return VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.ndynamicGeneratedPipelineLayout(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT} value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#deviceGeneratedCommands} field. */
+        /** Sets the specified value to the {@code deviceGeneratedCommands} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.Buffer deviceGeneratedCommands(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.ndeviceGeneratedCommands(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT#dynamicGeneratedPipelineLayout} field. */
+        /** Sets the specified value to the {@code dynamicGeneratedPipelineLayout} field. */
         public VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.Buffer dynamicGeneratedPipelineLayout(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT.ndynamicGeneratedPipelineLayout(address(), value ? 1 : 0); return this; }
 
     }

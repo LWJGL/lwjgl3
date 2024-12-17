@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure indicating support for local reads in dynamic render pass instances.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDynamicRenderingLocalReadFeatures {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #dynamicRenderingLocalRead};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 dynamicRenderingLocalRead;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDynamicRenderingLocalReadFeatures extends Struct<VkPhysicalDeviceDynamicRenderingLocalReadFeatures> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceDynamicRenderingLocalReadFeatures extends Struct<Vk
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies that the implementation supports local reads inside dynamic render pass instances using the {@link VK13#vkCmdBeginRendering CmdBeginRendering} command. */
+    /** @return the value of the {@code dynamicRenderingLocalRead} field. */
     @NativeType("VkBool32")
     public boolean dynamicRenderingLocalRead() { return ndynamicRenderingLocalRead(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDynamicRenderingLocalReadFeatures sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceDynamicRenderingLocalReadFeatures sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDynamicRenderingLocalReadFeatures pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #dynamicRenderingLocalRead} field. */
+    /** Sets the specified value to the {@code dynamicRenderingLocalRead} field. */
     public VkPhysicalDeviceDynamicRenderingLocalReadFeatures dynamicRenderingLocalRead(@NativeType("VkBool32") boolean value) { ndynamicRenderingLocalRead(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceDynamicRenderingLocalReadFeatures extends Struct<Vk
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDynamicRenderingLocalReadFeatures.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDynamicRenderingLocalReadFeatures.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures#dynamicRenderingLocalRead} field. */
+        /** @return the value of the {@code dynamicRenderingLocalRead} field. */
         @NativeType("VkBool32")
         public boolean dynamicRenderingLocalRead() { return VkPhysicalDeviceDynamicRenderingLocalReadFeatures.ndynamicRenderingLocalRead(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDynamicRenderingLocalReadFeatures.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDynamicRenderingLocalReadFeatures.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES} value to the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceDynamicRenderingLocalReadFeatures.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDynamicRenderingLocalReadFeatures.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDynamicRenderingLocalReadFeatures.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDynamicRenderingLocalReadFeatures#dynamicRenderingLocalRead} field. */
+        /** Sets the specified value to the {@code dynamicRenderingLocalRead} field. */
         public VkPhysicalDeviceDynamicRenderingLocalReadFeatures.Buffer dynamicRenderingLocalRead(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceDynamicRenderingLocalReadFeatures.ndynamicRenderingLocalRead(address(), value ? 1 : 0); return this; }
 
     }

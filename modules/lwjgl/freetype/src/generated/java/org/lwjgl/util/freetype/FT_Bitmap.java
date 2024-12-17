@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A structure used to describe a bitmap or pixmap to the raster. Note that we now manage pixmaps of various depths through the {@code pixel_mode} field.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Bitmap {
  *     unsigned int rows;
  *     unsigned int width;
@@ -30,7 +26,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     unsigned char pixel_mode;
  *     unsigned char palette_mode;
  *     void * palette;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Bitmap extends Struct<FT_Bitmap> implements NativeResource {
 
@@ -106,11 +102,7 @@ public class FT_Bitmap extends Struct<FT_Bitmap> implements NativeResource {
     public int width() { return nwidth(address()); }
     /** @return the value of the {@code pitch} field. */
     public int pitch() { return npitch(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
     @NativeType("unsigned char *")
     public @Nullable ByteBuffer buffer(int capacity) { return nbuffer(address(), capacity); }
     /** @return the value of the {@code num_grays} field. */
@@ -305,11 +297,7 @@ public class FT_Bitmap extends Struct<FT_Bitmap> implements NativeResource {
         public int width() { return FT_Bitmap.nwidth(address()); }
         /** @return the value of the {@code pitch} field. */
         public int pitch() { return FT_Bitmap.npitch(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code buffer} field. */
         @NativeType("unsigned char *")
         public @Nullable ByteBuffer buffer(int capacity) { return FT_Bitmap.nbuffer(address(), capacity); }
         /** @return the value of the {@code num_grays} field. */

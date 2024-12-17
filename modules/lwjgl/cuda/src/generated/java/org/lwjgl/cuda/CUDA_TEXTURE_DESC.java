@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_TEXTURE_DESC {
  *     CUaddress_mode addressMode[3];
  *     CUfilter_mode filterMode;
@@ -31,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float maxMipmapLevelClamp;
  *     float borderColor[4];
  *     int reserved[12];
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_TEXTURE_DESC extends Struct<CUDA_TEXTURE_DESC> implements NativeResource {
 

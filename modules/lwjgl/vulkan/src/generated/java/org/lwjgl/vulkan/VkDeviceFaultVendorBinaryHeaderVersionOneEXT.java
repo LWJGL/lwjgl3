@@ -19,43 +19,20 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure describing the layout of the vendor binary crash dump header.
- * 
- * <h5>Description</h5>
- * 
- * <p>Unlike most structures declared by the Vulkan API, all fields of this structure are written with the least significant byte first, regardless of host byte-order.</p>
- * 
- * <p>The C language specification does not define the packing of structure members. This layout assumes tight structure member packing, with members laid out in the order listed in the structure, and the intended size of the structure is 56 bytes. If a compiler produces code that diverges from that pattern, applications <b>must</b> employ another method to set values at the correct offsets.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code headerSize} <b>must</b> be 56</li>
- * <li>{@code headerVersion} <b>must</b> be {@link EXTDeviceFault#VK_DEVICE_FAULT_VENDOR_BINARY_HEADER_VERSION_ONE_EXT DEVICE_FAULT_VENDOR_BINARY_HEADER_VERSION_ONE_EXT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code headerVersion} <b>must</b> be a valid {@code VkDeviceFaultVendorBinaryHeaderVersionEXT} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceFaultVendorBinaryHeaderVersionOneEXT {
- *     uint32_t {@link #headerSize};
- *     VkDeviceFaultVendorBinaryHeaderVersionEXT {@link #headerVersion};
- *     uint32_t {@link #vendorID};
- *     uint32_t {@link #deviceID};
- *     uint32_t {@link #driverVersion};
- *     uint8_t {@link #pipelineCacheUUID}[VK_UUID_SIZE];
- *     uint32_t {@link #applicationNameOffset};
- *     uint32_t {@link #applicationVersion};
- *     uint32_t {@link #engineNameOffset};
- *     uint32_t {@link #engineVersion};
- *     uint32_t {@link #apiVersion};
- * }</code></pre>
+ *     uint32_t headerSize;
+ *     VkDeviceFaultVendorBinaryHeaderVersionEXT headerVersion;
+ *     uint32_t vendorID;
+ *     uint32_t deviceID;
+ *     uint32_t driverVersion;
+ *     uint8_t pipelineCacheUUID[VK_UUID_SIZE];
+ *     uint32_t applicationNameOffset;
+ *     uint32_t applicationVersion;
+ *     uint32_t engineNameOffset;
+ *     uint32_t engineVersion;
+ *     uint32_t apiVersion;
+ * }}</pre>
  */
 public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDeviceFaultVendorBinaryHeaderVersionOneEXT> implements NativeResource {
 
@@ -132,66 +109,66 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the length in bytes of the crash dump header. */
+    /** @return the value of the {@code headerSize} field. */
     @NativeType("uint32_t")
     public int headerSize() { return nheaderSize(address()); }
-    /** a {@code VkDeviceFaultVendorBinaryHeaderVersionEXT} enum value specifying the version of the header. A consumer of the crash dump <b>should</b> use the header version to interpret the remainder of the header. */
+    /** @return the value of the {@code headerVersion} field. */
     @NativeType("VkDeviceFaultVendorBinaryHeaderVersionEXT")
     public int headerVersion() { return nheaderVersion(address()); }
-    /** the {@link VkPhysicalDeviceProperties}{@code ::vendorID} of the implementation. */
+    /** @return the value of the {@code vendorID} field. */
     @NativeType("uint32_t")
     public int vendorID() { return nvendorID(address()); }
-    /** the {@link VkPhysicalDeviceProperties}{@code ::deviceID} of the implementation. */
+    /** @return the value of the {@code deviceID} field. */
     @NativeType("uint32_t")
     public int deviceID() { return ndeviceID(address()); }
-    /** the {@link VkPhysicalDeviceProperties}{@code ::driverVersion} of the implementation. */
+    /** @return the value of the {@code driverVersion} field. */
     @NativeType("uint32_t")
     public int driverVersion() { return ndriverVersion(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values matching the {@link VkPhysicalDeviceProperties}{@code ::pipelineCacheUUID} property of the implementation. */
+    /** @return a {@link ByteBuffer} view of the {@code pipelineCacheUUID} field. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer pipelineCacheUUID() { return npipelineCacheUUID(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values matching the {@link VkPhysicalDeviceProperties}{@code ::pipelineCacheUUID} property of the implementation. */
+    /** @return the value at the specified index of the {@code pipelineCacheUUID} field. */
     @NativeType("uint8_t")
     public byte pipelineCacheUUID(int index) { return npipelineCacheUUID(address(), index); }
-    /** zero, or an offset from the base address of the crash dump header to a null-terminated UTF-8 string containing the name of the application. If {@code applicationNameOffset} is non-zero, this string <b>must</b> match the application name specified via {@link VkApplicationInfo}{@code ::pApplicationName} during instance creation. */
+    /** @return the value of the {@code applicationNameOffset} field. */
     @NativeType("uint32_t")
     public int applicationNameOffset() { return napplicationNameOffset(address()); }
-    /** <b>must</b> be zero or the value specified by {@link VkApplicationInfo}{@code ::applicationVersion} during instance creation. */
+    /** @return the value of the {@code applicationVersion} field. */
     @NativeType("uint32_t")
     public int applicationVersion() { return napplicationVersion(address()); }
-    /** zero, or an offset from the base address of the crash dump header to a null-terminated UTF-8 string containing the name of the engine (if any) used to create the application. If {@code engineNameOffset} is non-zero, this string <b>must</b> match the engine name specified via {@link VkApplicationInfo}{@code ::pEngineName} during instance creation. */
+    /** @return the value of the {@code engineNameOffset} field. */
     @NativeType("uint32_t")
     public int engineNameOffset() { return nengineNameOffset(address()); }
-    /** <b>must</b> be zero or the value specified by {@link VkApplicationInfo}{@code ::engineVersion} during instance creation. */
+    /** @return the value of the {@code engineVersion} field. */
     @NativeType("uint32_t")
     public int engineVersion() { return nengineVersion(address()); }
-    /** <b>must</b> be zero or the value specified by {@link VkApplicationInfo}{@code ::apiVersion} during instance creation. */
+    /** @return the value of the {@code apiVersion} field. */
     @NativeType("uint32_t")
     public int apiVersion() { return napiVersion(address()); }
 
-    /** Sets the specified value to the {@link #headerSize} field. */
+    /** Sets the specified value to the {@code headerSize} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT headerSize(@NativeType("uint32_t") int value) { nheaderSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #headerVersion} field. */
+    /** Sets the specified value to the {@code headerVersion} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT headerVersion(@NativeType("VkDeviceFaultVendorBinaryHeaderVersionEXT") int value) { nheaderVersion(address(), value); return this; }
-    /** Sets the specified value to the {@link #vendorID} field. */
+    /** Sets the specified value to the {@code vendorID} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT vendorID(@NativeType("uint32_t") int value) { nvendorID(address(), value); return this; }
-    /** Sets the specified value to the {@link #deviceID} field. */
+    /** Sets the specified value to the {@code deviceID} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT deviceID(@NativeType("uint32_t") int value) { ndeviceID(address(), value); return this; }
-    /** Sets the specified value to the {@link #driverVersion} field. */
+    /** Sets the specified value to the {@code driverVersion} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT driverVersion(@NativeType("uint32_t") int value) { ndriverVersion(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #pipelineCacheUUID} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code pipelineCacheUUID} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT pipelineCacheUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { npipelineCacheUUID(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #pipelineCacheUUID} field. */
+    /** Sets the specified value at the specified index of the {@code pipelineCacheUUID} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT pipelineCacheUUID(int index, @NativeType("uint8_t") byte value) { npipelineCacheUUID(address(), index, value); return this; }
-    /** Sets the specified value to the {@link #applicationNameOffset} field. */
+    /** Sets the specified value to the {@code applicationNameOffset} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT applicationNameOffset(@NativeType("uint32_t") int value) { napplicationNameOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #applicationVersion} field. */
+    /** Sets the specified value to the {@code applicationVersion} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT applicationVersion(@NativeType("uint32_t") int value) { napplicationVersion(address(), value); return this; }
-    /** Sets the specified value to the {@link #engineNameOffset} field. */
+    /** Sets the specified value to the {@code engineNameOffset} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT engineNameOffset(@NativeType("uint32_t") int value) { nengineNameOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #engineVersion} field. */
+    /** Sets the specified value to the {@code engineVersion} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT engineVersion(@NativeType("uint32_t") int value) { nengineVersion(address(), value); return this; }
-    /** Sets the specified value to the {@link #apiVersion} field. */
+    /** Sets the specified value to the {@code apiVersion} field. */
     public VkDeviceFaultVendorBinaryHeaderVersionOneEXT apiVersion(@NativeType("uint32_t") int value) { napiVersion(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -446,66 +423,66 @@ public class VkDeviceFaultVendorBinaryHeaderVersionOneEXT extends Struct<VkDevic
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#headerSize} field. */
+        /** @return the value of the {@code headerSize} field. */
         @NativeType("uint32_t")
         public int headerSize() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderSize(address()); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#headerVersion} field. */
+        /** @return the value of the {@code headerVersion} field. */
         @NativeType("VkDeviceFaultVendorBinaryHeaderVersionEXT")
         public int headerVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderVersion(address()); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#vendorID} field. */
+        /** @return the value of the {@code vendorID} field. */
         @NativeType("uint32_t")
         public int vendorID() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nvendorID(address()); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#deviceID} field. */
+        /** @return the value of the {@code deviceID} field. */
         @NativeType("uint32_t")
         public int deviceID() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ndeviceID(address()); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#driverVersion} field. */
+        /** @return the value of the {@code driverVersion} field. */
         @NativeType("uint32_t")
         public int driverVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ndriverVersion(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#pipelineCacheUUID} field. */
+        /** @return a {@link ByteBuffer} view of the {@code pipelineCacheUUID} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer pipelineCacheUUID() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.npipelineCacheUUID(address()); }
-        /** @return the value at the specified index of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#pipelineCacheUUID} field. */
+        /** @return the value at the specified index of the {@code pipelineCacheUUID} field. */
         @NativeType("uint8_t")
         public byte pipelineCacheUUID(int index) { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.npipelineCacheUUID(address(), index); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#applicationNameOffset} field. */
+        /** @return the value of the {@code applicationNameOffset} field. */
         @NativeType("uint32_t")
         public int applicationNameOffset() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napplicationNameOffset(address()); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#applicationVersion} field. */
+        /** @return the value of the {@code applicationVersion} field. */
         @NativeType("uint32_t")
         public int applicationVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napplicationVersion(address()); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#engineNameOffset} field. */
+        /** @return the value of the {@code engineNameOffset} field. */
         @NativeType("uint32_t")
         public int engineNameOffset() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nengineNameOffset(address()); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#engineVersion} field. */
+        /** @return the value of the {@code engineVersion} field. */
         @NativeType("uint32_t")
         public int engineVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nengineVersion(address()); }
-        /** @return the value of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#apiVersion} field. */
+        /** @return the value of the {@code apiVersion} field. */
         @NativeType("uint32_t")
         public int apiVersion() { return VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napiVersion(address()); }
 
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#headerSize} field. */
+        /** Sets the specified value to the {@code headerSize} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer headerSize(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#headerVersion} field. */
+        /** Sets the specified value to the {@code headerVersion} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer headerVersion(@NativeType("VkDeviceFaultVendorBinaryHeaderVersionEXT") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nheaderVersion(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#vendorID} field. */
+        /** Sets the specified value to the {@code vendorID} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer vendorID(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nvendorID(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#deviceID} field. */
+        /** Sets the specified value to the {@code deviceID} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer deviceID(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ndeviceID(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#driverVersion} field. */
+        /** Sets the specified value to the {@code driverVersion} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer driverVersion(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.ndriverVersion(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#pipelineCacheUUID} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code pipelineCacheUUID} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer pipelineCacheUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.npipelineCacheUUID(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#pipelineCacheUUID} field. */
+        /** Sets the specified value at the specified index of the {@code pipelineCacheUUID} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer pipelineCacheUUID(int index, @NativeType("uint8_t") byte value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.npipelineCacheUUID(address(), index, value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#applicationNameOffset} field. */
+        /** Sets the specified value to the {@code applicationNameOffset} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer applicationNameOffset(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napplicationNameOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#applicationVersion} field. */
+        /** Sets the specified value to the {@code applicationVersion} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer applicationVersion(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napplicationVersion(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#engineNameOffset} field. */
+        /** Sets the specified value to the {@code engineNameOffset} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer engineNameOffset(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nengineNameOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#engineVersion} field. */
+        /** Sets the specified value to the {@code engineVersion} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer engineVersion(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.nengineVersion(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDeviceFaultVendorBinaryHeaderVersionOneEXT#apiVersion} field. */
+        /** Sets the specified value to the {@code apiVersion} field. */
         public VkDeviceFaultVendorBinaryHeaderVersionOneEXT.Buffer apiVersion(@NativeType("uint32_t") int value) { VkDeviceFaultVendorBinaryHeaderVersionOneEXT.napiVersion(address(), value); return this; }
 
     }

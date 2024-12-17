@@ -16,49 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing H.265 stream rate control parameters.
- * 
- * <h5>Description</h5>
- * 
- * <p>When an instance of this structure is included in the {@code pNext} chain of the {@link VkVideoCodingControlInfoKHR} structure passed to the {@link KHRVideoQueue#vkCmdControlVideoCodingKHR CmdControlVideoCodingKHR} command, and {@link VkVideoCodingControlInfoKHR}{@code ::flags} includes {@link KHRVideoEncodeQueue#VK_VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR VIDEO_CODING_CONTROL_ENCODE_RATE_CONTROL_BIT_KHR}, the parameters in this structure are used as guidance for the implementation’s rate control algorithm (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#video-coding-control">Video Coding Control</a>).</p>
- * 
- * <p>If {@code flags} includes {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR}, then the rate control state is reset to an initial state to meet HRD compliance requirements. Otherwise the new rate control state <b>may</b> be applied without a reset depending on the implementation and the specified rate control parameters.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>It would be possible to infer the picture type to be used when encoding a frame, on the basis of the values provided for {@code consecutiveBFrameCount}, {@code idrPeriod}, and {@code gopFrameCount}, but this inferred picture type will not be used by implementations to override the picture type provided to the video encode operation.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@link VkVideoEncodeH265CapabilitiesKHR}{@code ::flags}, as returned by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the used video profile, does not include {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_CAPABILITY_HRD_COMPLIANCE_BIT_KHR VIDEO_ENCODE_H265_CAPABILITY_HRD_COMPLIANCE_BIT_KHR}, then {@code flags} <b>must</b> not contain {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_ATTEMPT_HRD_COMPLIANCE_BIT_KHR}</li>
- * <li>If {@code flags} contains {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR} or {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR}, then it <b>must</b> also contain {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_REGULAR_GOP_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_REGULAR_GOP_BIT_KHR}</li>
- * <li>If {@code flags} contains {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_FLAT_BIT_KHR}, then it <b>must</b> not also contain {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_REFERENCE_PATTERN_DYADIC_BIT_KHR}</li>
- * <li>If {@code flags} contains {@link KHRVideoEncodeH265#VK_VIDEO_ENCODE_H265_RATE_CONTROL_REGULAR_GOP_BIT_KHR VIDEO_ENCODE_H265_RATE_CONTROL_REGULAR_GOP_BIT_KHR}, then {@code gopFrameCount} <b>must</b> be greater than 0</li>
- * <li>If {@code idrPeriod} is not 0, then it <b>must</b> be greater than or equal to {@code gopFrameCount}</li>
- * <li>If {@code consecutiveBFrameCount} is not 0, then it <b>must</b> be less than {@code gopFrameCount}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR}</li>
- * <li>{@code flags} <b>must</b> be a valid combination of {@code VkVideoEncodeH265RateControlFlagBitsKHR} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH265RateControlInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkVideoEncodeH265RateControlFlagsKHR {@link #flags};
- *     uint32_t {@link #gopFrameCount};
- *     uint32_t {@link #idrPeriod};
- *     uint32_t {@link #consecutiveBFrameCount};
- *     uint32_t {@link #subLayerCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkVideoEncodeH265RateControlFlagsKHR flags;
+ *     uint32_t gopFrameCount;
+ *     uint32_t idrPeriod;
+ *     uint32_t consecutiveBFrameCount;
+ *     uint32_t subLayerCount;
+ * }}</pre>
  */
 public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH265RateControlInfoKHR> implements NativeResource {
 
@@ -123,43 +90,43 @@ public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH26
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkVideoEncodeH265RateControlFlagBitsKHR} specifying H.265 rate control flags. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkVideoEncodeH265RateControlFlagsKHR")
     public int flags() { return nflags(address()); }
-    /** the number of frames within a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-gop">group of pictures (GOP)</a> intended to be used by the application. If it is 0, the rate control algorithm <b>may</b> assume an implementation-dependent GOP length. If it is {@code UINT32_MAX}, the GOP length is treated as infinite. */
+    /** @return the value of the {@code gopFrameCount} field. */
     @NativeType("uint32_t")
     public int gopFrameCount() { return ngopFrameCount(address()); }
-    /** the interval, in terms of number of frames, between two <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-idr-pic">IDR frames</a> (see <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-idr-period">IDR period</a>). If it is 0, the rate control algorithm <b>may</b> assume an implementation-dependent IDR period. If it is {@code UINT32_MAX}, the IDR period is treated as infinite. */
+    /** @return the value of the {@code idrPeriod} field. */
     @NativeType("uint32_t")
     public int idrPeriod() { return nidrPeriod(address()); }
-    /** the number of consecutive B frames between I and/or P frames within the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#encode-h265-gop">GOP</a>. */
+    /** @return the value of the {@code consecutiveBFrameCount} field. */
     @NativeType("uint32_t")
     public int consecutiveBFrameCount() { return nconsecutiveBFrameCount(address()); }
-    /** specifies the number of H.265 sub-layers that the application intends to use. */
+    /** @return the value of the {@code subLayerCount} field. */
     @NativeType("uint32_t")
     public int subLayerCount() { return nsubLayerCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH265RateControlInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH265RateControlInfoKHR sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH265RateControlInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkVideoEncodeH265RateControlInfoKHR flags(@NativeType("VkVideoEncodeH265RateControlFlagsKHR") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #gopFrameCount} field. */
+    /** Sets the specified value to the {@code gopFrameCount} field. */
     public VkVideoEncodeH265RateControlInfoKHR gopFrameCount(@NativeType("uint32_t") int value) { ngopFrameCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #idrPeriod} field. */
+    /** Sets the specified value to the {@code idrPeriod} field. */
     public VkVideoEncodeH265RateControlInfoKHR idrPeriod(@NativeType("uint32_t") int value) { nidrPeriod(address(), value); return this; }
-    /** Sets the specified value to the {@link #consecutiveBFrameCount} field. */
+    /** Sets the specified value to the {@code consecutiveBFrameCount} field. */
     public VkVideoEncodeH265RateControlInfoKHR consecutiveBFrameCount(@NativeType("uint32_t") int value) { nconsecutiveBFrameCount(address(), value); return this; }
-    /** Sets the specified value to the {@link #subLayerCount} field. */
+    /** Sets the specified value to the {@code subLayerCount} field. */
     public VkVideoEncodeH265RateControlInfoKHR subLayerCount(@NativeType("uint32_t") int value) { nsubLayerCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -379,43 +346,43 @@ public class VkVideoEncodeH265RateControlInfoKHR extends Struct<VkVideoEncodeH26
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH265RateControlInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265RateControlInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkVideoEncodeH265RateControlFlagsKHR")
         public int flags() { return VkVideoEncodeH265RateControlInfoKHR.nflags(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#gopFrameCount} field. */
+        /** @return the value of the {@code gopFrameCount} field. */
         @NativeType("uint32_t")
         public int gopFrameCount() { return VkVideoEncodeH265RateControlInfoKHR.ngopFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#idrPeriod} field. */
+        /** @return the value of the {@code idrPeriod} field. */
         @NativeType("uint32_t")
         public int idrPeriod() { return VkVideoEncodeH265RateControlInfoKHR.nidrPeriod(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#consecutiveBFrameCount} field. */
+        /** @return the value of the {@code consecutiveBFrameCount} field. */
         @NativeType("uint32_t")
         public int consecutiveBFrameCount() { return VkVideoEncodeH265RateControlInfoKHR.nconsecutiveBFrameCount(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265RateControlInfoKHR#subLayerCount} field. */
+        /** @return the value of the {@code subLayerCount} field. */
         @NativeType("uint32_t")
         public int subLayerCount() { return VkVideoEncodeH265RateControlInfoKHR.nsubLayerCount(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265RateControlInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR} value to the {@link VkVideoEncodeH265RateControlInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265RateControlInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer flags(@NativeType("VkVideoEncodeH265RateControlFlagsKHR") int value) { VkVideoEncodeH265RateControlInfoKHR.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#gopFrameCount} field. */
+        /** Sets the specified value to the {@code gopFrameCount} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer gopFrameCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlInfoKHR.ngopFrameCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#idrPeriod} field. */
+        /** Sets the specified value to the {@code idrPeriod} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer idrPeriod(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlInfoKHR.nidrPeriod(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#consecutiveBFrameCount} field. */
+        /** Sets the specified value to the {@code consecutiveBFrameCount} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer consecutiveBFrameCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlInfoKHR.nconsecutiveBFrameCount(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265RateControlInfoKHR#subLayerCount} field. */
+        /** Sets the specified value to the {@code subLayerCount} field. */
         public VkVideoEncodeH265RateControlInfoKHR.Buffer subLayerCount(@NativeType("uint32_t") int value) { VkVideoEncodeH265RateControlInfoKHR.nsubLayerCount(address(), value); return this; }
 
     }

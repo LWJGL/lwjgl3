@@ -17,34 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * All presentation modes usable by the swapchain.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>Each entry in pPresentModes <b>must</b> be one of the {@code VkPresentModeKHR} values returned by {@code vkGetPhysicalDeviceSurfacePresentModesKHR} for the surface</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-presentModeFifoLatestReady">{@code presentModeFifoLatestReady}</a> feature is not enabled, pPresentModes <b>must</b> not contain {@link EXTPresentModeFifoLatestReady#VK_PRESENT_MODE_FIFO_LATEST_READY_EXT PRESENT_MODE_FIFO_LATEST_READY_EXT}</li>
- * <li>The entries in pPresentModes <b>must</b> be a subset of the present modes returned in {@link VkSurfacePresentModeCompatibilityEXT}{@code ::pPresentModes}, given {@link VkSwapchainCreateInfoKHR}{@code ::presentMode} in {@link VkSurfacePresentModeEXT}</li>
- * <li>{@link VkSwapchainCreateInfoKHR}{@code ::presentMode} <b>must</b> be included in {@code pPresentModes}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT}</li>
- * <li>{@code pPresentModes} <b>must</b> be a valid pointer to an array of {@code presentModeCount} valid {@code VkPresentModeKHR} values</li>
- * <li>{@code presentModeCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSwapchainPresentModesCreateInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #presentModeCount};
- *     VkPresentModeKHR const * {@link #pPresentModes};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t presentModeCount;
+ *     VkPresentModeKHR const * pPresentModes;
+ * }}</pre>
  */
 public class VkSwapchainPresentModesCreateInfoEXT extends Struct<VkSwapchainPresentModesCreateInfoEXT> implements NativeResource {
 
@@ -100,26 +79,26 @@ public class VkSwapchainPresentModesCreateInfoEXT extends Struct<VkSwapchainPres
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the number of presentation modes provided. */
+    /** @return the value of the {@code presentModeCount} field. */
     @NativeType("uint32_t")
     public int presentModeCount() { return npresentModeCount(address()); }
-    /** a list of presentation modes with {@code presentModeCount} entries */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pPresentModes} field. */
     @NativeType("VkPresentModeKHR const *")
     public IntBuffer pPresentModes() { return npPresentModes(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSwapchainPresentModesCreateInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT} value to the {@code sType} field. */
     public VkSwapchainPresentModesCreateInfoEXT sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSwapchainPresentModesCreateInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pPresentModes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pPresentModes} field. */
     public VkSwapchainPresentModesCreateInfoEXT pPresentModes(@NativeType("VkPresentModeKHR const *") IntBuffer value) { npPresentModes(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -328,26 +307,26 @@ public class VkSwapchainPresentModesCreateInfoEXT extends Struct<VkSwapchainPres
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSwapchainPresentModesCreateInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSwapchainPresentModesCreateInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkSwapchainPresentModesCreateInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSwapchainPresentModesCreateInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkSwapchainPresentModesCreateInfoEXT#presentModeCount} field. */
+        /** @return the value of the {@code presentModeCount} field. */
         @NativeType("uint32_t")
         public int presentModeCount() { return VkSwapchainPresentModesCreateInfoEXT.npresentModeCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkSwapchainPresentModesCreateInfoEXT#pPresentModes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pPresentModes} field. */
         @NativeType("VkPresentModeKHR const *")
         public IntBuffer pPresentModes() { return VkSwapchainPresentModesCreateInfoEXT.npPresentModes(address()); }
 
-        /** Sets the specified value to the {@link VkSwapchainPresentModesCreateInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSwapchainPresentModesCreateInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainPresentModesCreateInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT} value to the {@link VkSwapchainPresentModesCreateInfoEXT#sType} field. */
+        /** Sets the {@link EXTSwapchainMaintenance1#VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT} value to the {@code sType} field. */
         public VkSwapchainPresentModesCreateInfoEXT.Buffer sType$Default() { return sType(EXTSwapchainMaintenance1.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODES_CREATE_INFO_EXT); }
-        /** Sets the specified value to the {@link VkSwapchainPresentModesCreateInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSwapchainPresentModesCreateInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainPresentModesCreateInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkSwapchainPresentModesCreateInfoEXT#pPresentModes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pPresentModes} field. */
         public VkSwapchainPresentModesCreateInfoEXT.Buffer pPresentModes(@NativeType("VkPresentModeKHR const *") IntBuffer value) { VkSwapchainPresentModesCreateInfoEXT.npPresentModes(address(), value); return this; }
 
     }

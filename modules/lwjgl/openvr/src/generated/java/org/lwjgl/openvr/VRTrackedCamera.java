@@ -25,7 +25,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetCameraErrorNameFromEnum ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_GetCameraErrorNameFromEnum GetCameraErrorNameFromEnum} */
+    /** {@code char const * VRTrackedCamera_GetCameraErrorNameFromEnum(EVRTrackedCameraError eCameraError)} */
     public static long nVRTrackedCamera_GetCameraErrorNameFromEnum(int eCameraError) {
         long __functionAddress = OpenVR.VRTrackedCamera.GetCameraErrorNameFromEnum;
         if (CHECKS) {
@@ -34,11 +34,7 @@ public class VRTrackedCamera {
         return callP(eCameraError, __functionAddress);
     }
 
-    /**
-     * Returns a string for an error.
-     *
-     * @param eCameraError one of:<br><table><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_None}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_OperationFailed}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_InvalidHandle}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_InvalidFrameHeaderVersion}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_OutOfHandles}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_IPCFailure}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_NotSupportedForThisDevice}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_SharedMemoryFailure}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_FrameBufferingFailure}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_StreamSetupFailure}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_InvalidGLTextureId}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_InvalidSharedTextureHandle}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_FailedToGetGLTextureId}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_SharedTextureFailure}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_NoFrameAvailable}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_InvalidArgument}</td></tr><tr><td>{@link VR#EVRTrackedCameraError_VRTrackedCameraError_InvalidFrameBufferSize}</td></tr></table>
-     */
+    /** {@code char const * VRTrackedCamera_GetCameraErrorNameFromEnum(EVRTrackedCameraError eCameraError)} */
     @NativeType("char const *")
     public static @Nullable String VRTrackedCamera_GetCameraErrorNameFromEnum(@NativeType("EVRTrackedCameraError") int eCameraError) {
         long __result = nVRTrackedCamera_GetCameraErrorNameFromEnum(eCameraError);
@@ -47,7 +43,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_HasCamera ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_HasCamera HasCamera} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_HasCamera(TrackedDeviceIndex_t nDeviceIndex, bool * pHasCamera)} */
     public static int nVRTrackedCamera_HasCamera(int nDeviceIndex, long pHasCamera) {
         long __functionAddress = OpenVR.VRTrackedCamera.HasCamera;
         if (CHECKS) {
@@ -56,7 +52,7 @@ public class VRTrackedCamera {
         return callPI(nDeviceIndex, pHasCamera, __functionAddress);
     }
 
-    /** For convenience, same as tracked property request {@link VR#ETrackedDeviceProperty_Prop_HasCamera_Bool}. */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_HasCamera(TrackedDeviceIndex_t nDeviceIndex, bool * pHasCamera)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_HasCamera(@NativeType("TrackedDeviceIndex_t") int nDeviceIndex, @NativeType("bool *") ByteBuffer pHasCamera) {
         if (CHECKS) {
@@ -67,7 +63,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetCameraFrameSize ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_GetCameraFrameSize GetCameraFrameSize} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetCameraFrameSize(TrackedDeviceIndex_t nDeviceIndex, EVRTrackedCameraFrameType eFrameType, uint32_t * pnWidth, uint32_t * pnHeight, uint32_t * pnFrameBufferSize)} */
     public static int nVRTrackedCamera_GetCameraFrameSize(int nDeviceIndex, int eFrameType, long pnWidth, long pnHeight, long pnFrameBufferSize) {
         long __functionAddress = OpenVR.VRTrackedCamera.GetCameraFrameSize;
         if (CHECKS) {
@@ -76,11 +72,7 @@ public class VRTrackedCamera {
         return callPPPI(nDeviceIndex, eFrameType, pnWidth, pnHeight, pnFrameBufferSize, __functionAddress);
     }
 
-    /**
-     * Gets size of the image frame.
-     *
-     * @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table>
-     */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetCameraFrameSize(TrackedDeviceIndex_t nDeviceIndex, EVRTrackedCameraFrameType eFrameType, uint32_t * pnWidth, uint32_t * pnHeight, uint32_t * pnFrameBufferSize)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetCameraFrameSize(@NativeType("TrackedDeviceIndex_t") int nDeviceIndex, @NativeType("EVRTrackedCameraFrameType") int eFrameType, @NativeType("uint32_t *") IntBuffer pnWidth, @NativeType("uint32_t *") IntBuffer pnHeight, @NativeType("uint32_t *") IntBuffer pnFrameBufferSize) {
         if (CHECKS) {
@@ -93,7 +85,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetCameraIntrinsics ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_GetCameraIntrinsics GetCameraIntrinsics} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetCameraIntrinsics(TrackedDeviceIndex_t nDeviceIndex, uint32_t nCameraIndex, EVRTrackedCameraFrameType eFrameType, HmdVector2_t * pFocalLength, HmdVector2_t * pCenter)} */
     public static int nVRTrackedCamera_GetCameraIntrinsics(int nDeviceIndex, int nCameraIndex, int eFrameType, long pFocalLength, long pCenter) {
         long __functionAddress = OpenVR.VRTrackedCamera.GetCameraIntrinsics;
         if (CHECKS) {
@@ -102,7 +94,7 @@ public class VRTrackedCamera {
         return callPPI(nDeviceIndex, nCameraIndex, eFrameType, pFocalLength, pCenter, __functionAddress);
     }
 
-    /** @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table> */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetCameraIntrinsics(TrackedDeviceIndex_t nDeviceIndex, uint32_t nCameraIndex, EVRTrackedCameraFrameType eFrameType, HmdVector2_t * pFocalLength, HmdVector2_t * pCenter)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetCameraIntrinsics(@NativeType("TrackedDeviceIndex_t") int nDeviceIndex, @NativeType("uint32_t") int nCameraIndex, @NativeType("EVRTrackedCameraFrameType") int eFrameType, @NativeType("HmdVector2_t *") HmdVector2.Buffer pFocalLength, @NativeType("HmdVector2_t *") HmdVector2.Buffer pCenter) {
         if (CHECKS) {
@@ -114,7 +106,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetCameraProjection ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_GetCameraProjection GetCameraProjection} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetCameraProjection(TrackedDeviceIndex_t nDeviceIndex, uint32_t nCameraIndex, EVRTrackedCameraFrameType eFrameType, float flZNear, float flZFar, HmdMatrix44_t * pProjection)} */
     public static int nVRTrackedCamera_GetCameraProjection(int nDeviceIndex, int nCameraIndex, int eFrameType, float flZNear, float flZFar, long pProjection) {
         long __functionAddress = OpenVR.VRTrackedCamera.GetCameraProjection;
         if (CHECKS) {
@@ -123,7 +115,7 @@ public class VRTrackedCamera {
         return callPI(nDeviceIndex, nCameraIndex, eFrameType, flZNear, flZFar, pProjection, __functionAddress);
     }
 
-    /** @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table> */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetCameraProjection(TrackedDeviceIndex_t nDeviceIndex, uint32_t nCameraIndex, EVRTrackedCameraFrameType eFrameType, float flZNear, float flZFar, HmdMatrix44_t * pProjection)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetCameraProjection(@NativeType("TrackedDeviceIndex_t") int nDeviceIndex, @NativeType("uint32_t") int nCameraIndex, @NativeType("EVRTrackedCameraFrameType") int eFrameType, float flZNear, float flZFar, @NativeType("HmdMatrix44_t *") HmdMatrix44 pProjection) {
         return nVRTrackedCamera_GetCameraProjection(nDeviceIndex, nCameraIndex, eFrameType, flZNear, flZFar, pProjection.address());
@@ -131,7 +123,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_AcquireVideoStreamingService ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_AcquireVideoStreamingService AcquireVideoStreamingService} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_AcquireVideoStreamingService(TrackedDeviceIndex_t nDeviceIndex, TrackedCameraHandle_t * pHandle)} */
     public static int nVRTrackedCamera_AcquireVideoStreamingService(int nDeviceIndex, long pHandle) {
         long __functionAddress = OpenVR.VRTrackedCamera.AcquireVideoStreamingService;
         if (CHECKS) {
@@ -140,12 +132,7 @@ public class VRTrackedCamera {
         return callPI(nDeviceIndex, pHandle, __functionAddress);
     }
 
-    /**
-     * Acquiring streaming service permits video streaming for the caller. Releasing hints the system that video services do not need to be maintained for
-     * this client. If the camera has not already been activated, a one time spin up may incur some auto exposure as well as initial streaming frame delays.
-     * The camera should be considered a global resource accessible for shared consumption but not exclusive to any caller. The camera may go inactive due to
-     * lack of active consumers or headset idleness.
-     */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_AcquireVideoStreamingService(TrackedDeviceIndex_t nDeviceIndex, TrackedCameraHandle_t * pHandle)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_AcquireVideoStreamingService(@NativeType("TrackedDeviceIndex_t") int nDeviceIndex, @NativeType("TrackedCameraHandle_t *") LongBuffer pHandle) {
         if (CHECKS) {
@@ -156,6 +143,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_ReleaseVideoStreamingService ] ---
 
+    /** {@code EVRTrackedCameraError VRTrackedCamera_ReleaseVideoStreamingService(TrackedCameraHandle_t hTrackedCamera)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_ReleaseVideoStreamingService(@NativeType("TrackedCameraHandle_t") long hTrackedCamera) {
         long __functionAddress = OpenVR.VRTrackedCamera.ReleaseVideoStreamingService;
@@ -167,7 +155,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetVideoStreamFrameBuffer ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_GetVideoStreamFrameBuffer GetVideoStreamFrameBuffer} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamFrameBuffer(TrackedCameraHandle_t hTrackedCamera, EVRTrackedCameraFrameType eFrameType, void * pFrameBuffer, uint32_t nFrameBufferSize, CameraVideoStreamFrameHeader_t * pFrameHeader, uint32_t nFrameHeaderSize)} */
     public static int nVRTrackedCamera_GetVideoStreamFrameBuffer(long hTrackedCamera, int eFrameType, long pFrameBuffer, int nFrameBufferSize, long pFrameHeader, int nFrameHeaderSize) {
         long __functionAddress = OpenVR.VRTrackedCamera.GetVideoStreamFrameBuffer;
         if (CHECKS) {
@@ -176,14 +164,7 @@ public class VRTrackedCamera {
         return callJPPI(hTrackedCamera, eFrameType, pFrameBuffer, nFrameBufferSize, pFrameHeader, nFrameHeaderSize, __functionAddress);
     }
 
-    /**
-     * Copies the image frame into a caller's provided buffer. The image data is currently provided as RGBA data, 4 bytes per pixel. A caller can provide null
-     * for the framebuffer or frameheader if not desired. Requesting the frame header first, followed by the frame buffer allows the caller to determine if
-     * the frame as advanced per the frame header sequence. If there is no frame available yet, due to initial camera spinup or re-activation, the error will
-     * be {@link VR#EVRTrackedCameraError_VRTrackedCameraError_NoFrameAvailable}. Ideally a caller should be polling at ~16ms intervals.
-     *
-     * @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table>
-     */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamFrameBuffer(TrackedCameraHandle_t hTrackedCamera, EVRTrackedCameraFrameType eFrameType, void * pFrameBuffer, uint32_t nFrameBufferSize, CameraVideoStreamFrameHeader_t * pFrameHeader, uint32_t nFrameHeaderSize)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetVideoStreamFrameBuffer(@NativeType("TrackedCameraHandle_t") long hTrackedCamera, @NativeType("EVRTrackedCameraFrameType") int eFrameType, @NativeType("void *") ByteBuffer pFrameBuffer, @NativeType("CameraVideoStreamFrameHeader_t *") CameraVideoStreamFrameHeader pFrameHeader) {
         return nVRTrackedCamera_GetVideoStreamFrameBuffer(hTrackedCamera, eFrameType, memAddress(pFrameBuffer), pFrameBuffer.remaining(), pFrameHeader.address(), CameraVideoStreamFrameHeader.SIZEOF);
@@ -191,7 +172,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetVideoStreamTextureSize ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_GetVideoStreamTextureSize GetVideoStreamTextureSize} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamTextureSize(TrackedDeviceIndex_t nDeviceIndex, EVRTrackedCameraFrameType eFrameType, VRTextureBounds_t * pTextureBounds, uint32_t * pnWidth, uint32_t * pnHeight)} */
     public static int nVRTrackedCamera_GetVideoStreamTextureSize(int nDeviceIndex, int eFrameType, long pTextureBounds, long pnWidth, long pnHeight) {
         long __functionAddress = OpenVR.VRTrackedCamera.GetVideoStreamTextureSize;
         if (CHECKS) {
@@ -200,11 +181,7 @@ public class VRTrackedCamera {
         return callPPPI(nDeviceIndex, eFrameType, pTextureBounds, pnWidth, pnHeight, __functionAddress);
     }
 
-    /**
-     * Gets size of the image frame.
-     *
-     * @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table>
-     */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamTextureSize(TrackedDeviceIndex_t nDeviceIndex, EVRTrackedCameraFrameType eFrameType, VRTextureBounds_t * pTextureBounds, uint32_t * pnWidth, uint32_t * pnHeight)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetVideoStreamTextureSize(@NativeType("TrackedDeviceIndex_t") int nDeviceIndex, @NativeType("EVRTrackedCameraFrameType") int eFrameType, @NativeType("VRTextureBounds_t *") VRTextureBounds pTextureBounds, @NativeType("uint32_t *") IntBuffer pnWidth, @NativeType("uint32_t *") IntBuffer pnHeight) {
         if (CHECKS) {
@@ -216,7 +193,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetVideoStreamTextureD3D11 ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_GetVideoStreamTextureD3D11 GetVideoStreamTextureD3D11} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamTextureD3D11(TrackedCameraHandle_t hTrackedCamera, EVRTrackedCameraFrameType eFrameType, void * pD3D11DeviceOrResource, void ** ppD3D11ShaderResourceView, CameraVideoStreamFrameHeader_t * pFrameHeader, uint32_t nFrameHeaderSize)} */
     public static int nVRTrackedCamera_GetVideoStreamTextureD3D11(long hTrackedCamera, int eFrameType, long pD3D11DeviceOrResource, long ppD3D11ShaderResourceView, long pFrameHeader, int nFrameHeaderSize) {
         long __functionAddress = OpenVR.VRTrackedCamera.GetVideoStreamTextureD3D11;
         if (CHECKS) {
@@ -226,19 +203,7 @@ public class VRTrackedCamera {
         return callJPPPI(hTrackedCamera, eFrameType, pD3D11DeviceOrResource, ppD3D11ShaderResourceView, pFrameHeader, nFrameHeaderSize, __functionAddress);
     }
 
-    /**
-     * Access a shared D3D11 texture for the specified tracked camera stream.
-     * 
-     * <p>The camera frame type {@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted} is not supported directly as a shared texture. It is an interior
-     * subregion of the shared texture {@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}. Instead, use {@link #VRTrackedCamera_GetVideoStreamTextureSize GetVideoStreamTextureSize} with
-     * {@code VRTrackedCameraFrameType_Undistorted} to determine the proper interior subregion bounds along with
-     * {@code GetVideoStreamTextureD3D11()} with {@code VRTrackedCameraFrameType_MaximumUndistorted} to provide the texture. The
-     * {@code VRTrackedCameraFrameType_MaximumUndistorted} will yield an image where the invalid regions are decoded by the alpha channel having a zero
-     * component. The valid regions all have a non-zero alpha component. The subregion as described by {@code VRTrackedCameraFrameType_Undistorted} guarantees
-     * a rectangle where all pixels are valid.</p>
-     *
-     * @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table>
-     */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamTextureD3D11(TrackedCameraHandle_t hTrackedCamera, EVRTrackedCameraFrameType eFrameType, void * pD3D11DeviceOrResource, void ** ppD3D11ShaderResourceView, CameraVideoStreamFrameHeader_t * pFrameHeader, uint32_t nFrameHeaderSize)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetVideoStreamTextureD3D11(@NativeType("TrackedCameraHandle_t") long hTrackedCamera, @NativeType("EVRTrackedCameraFrameType") int eFrameType, @NativeType("void *") long pD3D11DeviceOrResource, @NativeType("void **") PointerBuffer ppD3D11ShaderResourceView, @NativeType("CameraVideoStreamFrameHeader_t *") CameraVideoStreamFrameHeader pFrameHeader, @NativeType("uint32_t") int nFrameHeaderSize) {
         if (CHECKS) {
@@ -247,19 +212,7 @@ public class VRTrackedCamera {
         return nVRTrackedCamera_GetVideoStreamTextureD3D11(hTrackedCamera, eFrameType, pD3D11DeviceOrResource, memAddress(ppD3D11ShaderResourceView), pFrameHeader.address(), nFrameHeaderSize);
     }
 
-    /**
-     * Access a shared D3D11 texture for the specified tracked camera stream.
-     * 
-     * <p>The camera frame type {@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted} is not supported directly as a shared texture. It is an interior
-     * subregion of the shared texture {@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}. Instead, use {@link #VRTrackedCamera_GetVideoStreamTextureSize GetVideoStreamTextureSize} with
-     * {@code VRTrackedCameraFrameType_Undistorted} to determine the proper interior subregion bounds along with
-     * {@code GetVideoStreamTextureD3D11()} with {@code VRTrackedCameraFrameType_MaximumUndistorted} to provide the texture. The
-     * {@code VRTrackedCameraFrameType_MaximumUndistorted} will yield an image where the invalid regions are decoded by the alpha channel having a zero
-     * component. The valid regions all have a non-zero alpha component. The subregion as described by {@code VRTrackedCameraFrameType_Undistorted} guarantees
-     * a rectangle where all pixels are valid.</p>
-     *
-     * @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table>
-     */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamTextureD3D11(TrackedCameraHandle_t hTrackedCamera, EVRTrackedCameraFrameType eFrameType, void * pD3D11DeviceOrResource, void ** ppD3D11ShaderResourceView, CameraVideoStreamFrameHeader_t * pFrameHeader, uint32_t nFrameHeaderSize)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetVideoStreamTextureD3D11(@NativeType("TrackedCameraHandle_t") long hTrackedCamera, @NativeType("EVRTrackedCameraFrameType") int eFrameType, @NativeType("void *") long pD3D11DeviceOrResource, @NativeType("void **") PointerBuffer ppD3D11ShaderResourceView, @NativeType("CameraVideoStreamFrameHeader_t *") CameraVideoStreamFrameHeader pFrameHeader) {
         if (CHECKS) {
@@ -270,7 +223,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetVideoStreamTextureGL ] ---
 
-    /** Unsafe version of: {@link #VRTrackedCamera_GetVideoStreamTextureGL GetVideoStreamTextureGL} */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamTextureGL(TrackedCameraHandle_t hTrackedCamera, EVRTrackedCameraFrameType eFrameType, glUInt_t * pglTextureId, CameraVideoStreamFrameHeader_t * pFrameHeader, uint32_t nFrameHeaderSize)} */
     public static int nVRTrackedCamera_GetVideoStreamTextureGL(long hTrackedCamera, int eFrameType, long pglTextureId, long pFrameHeader, int nFrameHeaderSize) {
         long __functionAddress = OpenVR.VRTrackedCamera.GetVideoStreamTextureGL;
         if (CHECKS) {
@@ -279,11 +232,7 @@ public class VRTrackedCamera {
         return callJPPI(hTrackedCamera, eFrameType, pglTextureId, pFrameHeader, nFrameHeaderSize, __functionAddress);
     }
 
-    /**
-     * Access a shared GL texture for the specified tracked camera stream.
-     *
-     * @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table>
-     */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamTextureGL(TrackedCameraHandle_t hTrackedCamera, EVRTrackedCameraFrameType eFrameType, glUInt_t * pglTextureId, CameraVideoStreamFrameHeader_t * pFrameHeader, uint32_t nFrameHeaderSize)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetVideoStreamTextureGL(@NativeType("TrackedCameraHandle_t") long hTrackedCamera, @NativeType("EVRTrackedCameraFrameType") int eFrameType, @NativeType("glUInt_t *") IntBuffer pglTextureId, @NativeType("CameraVideoStreamFrameHeader_t *") CameraVideoStreamFrameHeader pFrameHeader, @NativeType("uint32_t") int nFrameHeaderSize) {
         if (CHECKS) {
@@ -292,11 +241,7 @@ public class VRTrackedCamera {
         return nVRTrackedCamera_GetVideoStreamTextureGL(hTrackedCamera, eFrameType, memAddress(pglTextureId), pFrameHeader.address(), nFrameHeaderSize);
     }
 
-    /**
-     * Access a shared GL texture for the specified tracked camera stream.
-     *
-     * @param eFrameType one of:<br><table><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Distorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_Undistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_VRTrackedCameraFrameType_MaximumUndistorted}</td></tr><tr><td>{@link VR#EVRTrackedCameraFrameType_MAX_CAMERA_FRAME_TYPES}</td></tr></table>
-     */
+    /** {@code EVRTrackedCameraError VRTrackedCamera_GetVideoStreamTextureGL(TrackedCameraHandle_t hTrackedCamera, EVRTrackedCameraFrameType eFrameType, glUInt_t * pglTextureId, CameraVideoStreamFrameHeader_t * pFrameHeader, uint32_t nFrameHeaderSize)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_GetVideoStreamTextureGL(@NativeType("TrackedCameraHandle_t") long hTrackedCamera, @NativeType("EVRTrackedCameraFrameType") int eFrameType, @NativeType("glUInt_t *") IntBuffer pglTextureId, @NativeType("CameraVideoStreamFrameHeader_t *") CameraVideoStreamFrameHeader pFrameHeader) {
         if (CHECKS) {
@@ -307,6 +252,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_ReleaseVideoStreamTextureGL ] ---
 
+    /** {@code EVRTrackedCameraError VRTrackedCamera_ReleaseVideoStreamTextureGL(TrackedCameraHandle_t hTrackedCamera, glUInt_t glTextureId)} */
     @NativeType("EVRTrackedCameraError")
     public static int VRTrackedCamera_ReleaseVideoStreamTextureGL(@NativeType("TrackedCameraHandle_t") long hTrackedCamera, @NativeType("glUInt_t") int glTextureId) {
         long __functionAddress = OpenVR.VRTrackedCamera.ReleaseVideoStreamTextureGL;
@@ -318,7 +264,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_SetCameraTrackingSpace ] ---
 
-    /** @param eUniverse one of:<br><table><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseSeated}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseStanding}</td></tr><tr><td>{@link VR#ETrackingUniverseOrigin_TrackingUniverseRawAndUncalibrated}</td></tr></table> */
+    /** {@code void VRTrackedCamera_SetCameraTrackingSpace(ETrackingUniverseOrigin eUniverse)} */
     public static void VRTrackedCamera_SetCameraTrackingSpace(@NativeType("ETrackingUniverseOrigin") int eUniverse) {
         long __functionAddress = OpenVR.VRTrackedCamera.SetCameraTrackingSpace;
         if (CHECKS) {
@@ -329,6 +275,7 @@ public class VRTrackedCamera {
 
     // --- [ VRTrackedCamera_GetCameraTrackingSpace ] ---
 
+    /** {@code ETrackingUniverseOrigin VRTrackedCamera_GetCameraTrackingSpace(void)} */
     @NativeType("ETrackingUniverseOrigin")
     public static int VRTrackedCamera_GetCameraTrackingSpace() {
         long __functionAddress = OpenVR.VRTrackedCamera.GetCameraTrackingSpace;

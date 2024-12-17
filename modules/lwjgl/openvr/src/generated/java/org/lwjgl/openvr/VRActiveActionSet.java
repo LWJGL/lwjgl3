@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VRActiveActionSet_t {
- *     VRActionSetHandle_t {@link #ulActionSet};
- *     VRInputValueHandle_t {@link #ulRestrictedToDevice};
- *     VRActionSetHandle_t {@link #ulSecondaryActionSet};
+ *     VRActionSetHandle_t ulActionSet;
+ *     VRInputValueHandle_t ulRestrictedToDevice;
+ *     VRActionSetHandle_t ulSecondaryActionSet;
  *     char[4];
- *     int32_t {@link #nPriority};
- * }</code></pre>
+ *     int32_t nPriority;
+ * }}</pre>
  */
 @NativeType("struct VRActiveActionSet_t")
 public class VRActiveActionSet extends Struct<VRActiveActionSet> implements NativeResource {
@@ -83,37 +81,26 @@ public class VRActiveActionSet extends Struct<VRActiveActionSet> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** this is the handle of the action set to activate for this frame */
+    /** @return the value of the {@code ulActionSet} field. */
     @NativeType("VRActionSetHandle_t")
     public long ulActionSet() { return nulActionSet(address()); }
-    /** this is the handle of a device path that this action set should be active for. To activate for all devices, set this to {@link VR#k_ulInvalidInputValueHandle}. */
+    /** @return the value of the {@code ulRestrictedToDevice} field. */
     @NativeType("VRInputValueHandle_t")
     public long ulRestrictedToDevice() { return nulRestrictedToDevice(address()); }
-    /**
-     * the action set to activate for all devices other than {@code ulRestrictedDevice}. If {@code ulRestrictedToDevice} is set to
-     * {@link VR#k_ulInvalidInputValueHandle}, this parameter is ignored.
-     */
+    /** @return the value of the {@code ulSecondaryActionSet} field. */
     @NativeType("VRActionSetHandle_t")
     public long ulSecondaryActionSet() { return nulSecondaryActionSet(address()); }
-    /**
-     * the priority of this action set relative to other action sets. Any inputs bound to a source (e.g. trackpad, joystick, trigger) will disable bindings in
-     * other active action sets with a smaller priority.
-     * 
-     * <p>Overlay applications (i.e. ApplicationType_Overlay) may set their action set priority to a value between {@link VR#k_nActionSetOverlayGlobalPriorityMin} and
-     * {@link VR#k_nActionSetOverlayGlobalPriorityMax} to cause any inputs bound to a source used by that action set to be disabled in scene applications.</p>
-     * 
-     * <p>No action set priority may value may be larger than {@link VR#k_nActionSetPriorityReservedMin}.</p>
-     */
+    /** @return the value of the {@code nPriority} field. */
     @NativeType("int32_t")
     public int nPriority() { return nnPriority(address()); }
 
-    /** Sets the specified value to the {@link #ulActionSet} field. */
+    /** Sets the specified value to the {@code ulActionSet} field. */
     public VRActiveActionSet ulActionSet(@NativeType("VRActionSetHandle_t") long value) { nulActionSet(address(), value); return this; }
-    /** Sets the specified value to the {@link #ulRestrictedToDevice} field. */
+    /** Sets the specified value to the {@code ulRestrictedToDevice} field. */
     public VRActiveActionSet ulRestrictedToDevice(@NativeType("VRInputValueHandle_t") long value) { nulRestrictedToDevice(address(), value); return this; }
-    /** Sets the specified value to the {@link #ulSecondaryActionSet} field. */
+    /** Sets the specified value to the {@code ulSecondaryActionSet} field. */
     public VRActiveActionSet ulSecondaryActionSet(@NativeType("VRActionSetHandle_t") long value) { nulSecondaryActionSet(address(), value); return this; }
-    /** Sets the specified value to the {@link #nPriority} field. */
+    /** Sets the specified value to the {@code nPriority} field. */
     public VRActiveActionSet nPriority(@NativeType("int32_t") int value) { nnPriority(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,26 +321,26 @@ public class VRActiveActionSet extends Struct<VRActiveActionSet> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VRActiveActionSet#ulActionSet} field. */
+        /** @return the value of the {@code ulActionSet} field. */
         @NativeType("VRActionSetHandle_t")
         public long ulActionSet() { return VRActiveActionSet.nulActionSet(address()); }
-        /** @return the value of the {@link VRActiveActionSet#ulRestrictedToDevice} field. */
+        /** @return the value of the {@code ulRestrictedToDevice} field. */
         @NativeType("VRInputValueHandle_t")
         public long ulRestrictedToDevice() { return VRActiveActionSet.nulRestrictedToDevice(address()); }
-        /** @return the value of the {@link VRActiveActionSet#ulSecondaryActionSet} field. */
+        /** @return the value of the {@code ulSecondaryActionSet} field. */
         @NativeType("VRActionSetHandle_t")
         public long ulSecondaryActionSet() { return VRActiveActionSet.nulSecondaryActionSet(address()); }
-        /** @return the value of the {@link VRActiveActionSet#nPriority} field. */
+        /** @return the value of the {@code nPriority} field. */
         @NativeType("int32_t")
         public int nPriority() { return VRActiveActionSet.nnPriority(address()); }
 
-        /** Sets the specified value to the {@link VRActiveActionSet#ulActionSet} field. */
+        /** Sets the specified value to the {@code ulActionSet} field. */
         public VRActiveActionSet.Buffer ulActionSet(@NativeType("VRActionSetHandle_t") long value) { VRActiveActionSet.nulActionSet(address(), value); return this; }
-        /** Sets the specified value to the {@link VRActiveActionSet#ulRestrictedToDevice} field. */
+        /** Sets the specified value to the {@code ulRestrictedToDevice} field. */
         public VRActiveActionSet.Buffer ulRestrictedToDevice(@NativeType("VRInputValueHandle_t") long value) { VRActiveActionSet.nulRestrictedToDevice(address(), value); return this; }
-        /** Sets the specified value to the {@link VRActiveActionSet#ulSecondaryActionSet} field. */
+        /** Sets the specified value to the {@code ulSecondaryActionSet} field. */
         public VRActiveActionSet.Buffer ulSecondaryActionSet(@NativeType("VRActionSetHandle_t") long value) { VRActiveActionSet.nulSecondaryActionSet(address(), value); return this; }
-        /** Sets the specified value to the {@link VRActiveActionSet#nPriority} field. */
+        /** Sets the specified value to the {@code nPriority} field. */
         public VRActiveActionSet.Buffer nPriority(@NativeType("int32_t") int value) { VRActiveActionSet.nnPriority(address(), value); return this; }
 
     }

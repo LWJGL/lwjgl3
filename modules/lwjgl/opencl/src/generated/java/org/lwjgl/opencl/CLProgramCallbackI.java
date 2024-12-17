@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@link CL10#clBuildProgram BuildProgram}, {@link CL12#clCompileProgram CompileProgram} and {@link CL12#clLinkProgram LinkProgram} methods.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     cl_program program,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (cl_program, void *)")
 public interface CLProgramCallbackI extends CallbackI {
@@ -44,12 +34,7 @@ public interface CLProgramCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * Will be called when the program is built, compiled or linked.
-     *
-     * @param program   the program that was built, compiled or linked
-     * @param user_data the user-specified value that was passed when calling {@link CL10#clBuildProgram BuildProgram}, {@link CL12#clCompileProgram CompileProgram} or {@link CL12#clLinkProgram LinkProgram}
-     */
+    /** {@code void (*) (cl_program program, void * user_data)} */
     void invoke(@NativeType("cl_program") long program, @NativeType("void *") long user_data);
 
 }

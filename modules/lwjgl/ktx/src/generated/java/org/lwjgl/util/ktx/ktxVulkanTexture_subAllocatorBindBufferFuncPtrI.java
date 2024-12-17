@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     VkBuffer buffer,
- *     uint64_t allocId
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void * (*) (VkBuffer, uint64_t)")
 public interface ktxVulkanTexture_subAllocatorBindBufferFuncPtrI extends CallbackI {
@@ -43,7 +35,7 @@ public interface ktxVulkanTexture_subAllocatorBindBufferFuncPtrI extends Callbac
         apiClosureRetP(ret, __result);
     }
 
-    /** The bind-buffer-to-suballocation(s) function. */
+    /** {@code void * (*) (VkBuffer buffer, uint64_t allocId)} */
     @NativeType("void *") long invoke(@NativeType("VkBuffer") long buffer, @NativeType("uint64_t") long allocId);
 
 }

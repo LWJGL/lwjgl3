@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Viewport for streamline seed placement.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct parsl_viewport {
  *     float left;
  *     float top;
  *     float right;
  *     float bottom;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct parsl_viewport")
 public class ParSLViewport extends Struct<ParSLViewport> implements NativeResource {

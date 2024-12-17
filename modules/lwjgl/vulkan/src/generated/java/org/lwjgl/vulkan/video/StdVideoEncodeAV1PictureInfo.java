@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeAV1PictureInfo {
  *     {@link StdVideoEncodeAV1PictureInfoFlags StdVideoEncodeAV1PictureInfoFlags} flags;
  *     StdVideoAV1FrameType frame_type;
@@ -50,7 +48,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecAV1.*;
  *     {@link StdVideoAV1GlobalMotion StdVideoAV1GlobalMotion} const * pGlobalMotion;
  *     {@link StdVideoEncodeAV1ExtensionHeader StdVideoEncodeAV1ExtensionHeader} const * pExtensionHeader;
  *     uint32_t const * pBufferRemovalTimes;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeAV1PictureInfo extends Struct<StdVideoEncodeAV1PictureInfo> implements NativeResource {
 
@@ -258,11 +256,7 @@ public class StdVideoEncodeAV1PictureInfo extends Struct<StdVideoEncodeAV1Pictur
     /** @return a {@link StdVideoEncodeAV1ExtensionHeader} view of the struct pointed to by the {@code pExtensionHeader} field. */
     @NativeType("StdVideoEncodeAV1ExtensionHeader const *")
     public StdVideoEncodeAV1ExtensionHeader pExtensionHeader() { return npExtensionHeader(address()); }
-    /**
-     * @return a {@link IntBuffer} view of the data pointed to by the {@code pBufferRemovalTimes} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pBufferRemovalTimes} field. */
     @NativeType("uint32_t const *")
     public IntBuffer pBufferRemovalTimes(int capacity) { return npBufferRemovalTimes(address(), capacity); }
 
@@ -804,11 +798,7 @@ public class StdVideoEncodeAV1PictureInfo extends Struct<StdVideoEncodeAV1Pictur
         /** @return a {@link StdVideoEncodeAV1ExtensionHeader} view of the struct pointed to by the {@code pExtensionHeader} field. */
         @NativeType("StdVideoEncodeAV1ExtensionHeader const *")
         public StdVideoEncodeAV1ExtensionHeader pExtensionHeader() { return StdVideoEncodeAV1PictureInfo.npExtensionHeader(address()); }
-        /**
-         * @return a {@link IntBuffer} view of the data pointed to by the {@code pBufferRemovalTimes} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pBufferRemovalTimes} field. */
         @NativeType("uint32_t const *")
         public IntBuffer pBufferRemovalTimes(int capacity) { return StdVideoEncodeAV1PictureInfo.npBufferRemovalTimes(address(), capacity); }
 

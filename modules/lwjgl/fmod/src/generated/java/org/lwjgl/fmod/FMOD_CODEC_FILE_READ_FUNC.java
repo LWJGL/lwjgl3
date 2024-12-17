@@ -11,17 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_CODEC_STATE *codec_state,
- *     void *buffer,
- *     unsigned int sizebytes,
- *     unsigned int *bytesread
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_CODEC_FILE_READ_FUNC} */
 public abstract class FMOD_CODEC_FILE_READ_FUNC extends Callback implements FMOD_CODEC_FILE_READ_FUNCI {
 
     /**

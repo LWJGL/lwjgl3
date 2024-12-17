@@ -18,23 +18,13 @@ import static org.lwjgl.system.MemoryStack.*;
 import org.lwjgl.vulkan.video.*;
 
 /**
- * Structure specifies H.265 encode session parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeH265SessionCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #useMaxLevelIdc};
- *     StdVideoH265LevelIdc {@link #maxLevelIdc};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 useMaxLevelIdc;
+ *     StdVideoH265LevelIdc maxLevelIdc;
+ * }}</pre>
  */
 public class VkVideoEncodeH265SessionCreateInfoKHR extends Struct<VkVideoEncodeH265SessionCreateInfoKHR> implements NativeResource {
 
@@ -90,28 +80,28 @@ public class VkVideoEncodeH265SessionCreateInfoKHR extends Struct<VkVideoEncodeH
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the value of {@code maxLevelIdc} should be used by the implementation. When it is {@link VK10#VK_FALSE FALSE}, the implementation ignores the value of {@code maxLevelIdc} and uses the value of {@link VkVideoEncodeH265CapabilitiesKHR}{@code ::maxLevelIdc}, as reported by {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} for the video profile. */
+    /** @return the value of the {@code useMaxLevelIdc} field. */
     @NativeType("VkBool32")
     public boolean useMaxLevelIdc() { return nuseMaxLevelIdc(address()) != 0; }
-    /** a {@code StdVideoH265LevelIdc} value specifying the upper bound on the H.265 level for the video bitstreams produced by the created video session, where enum constant {@code STD_VIDEO_H265_LEVEL_IDC_&lt;major&gt;_&lt;minor&gt;} identifies H.265 level {@code &lt;major&gt;.&lt;minor&gt;} as defined in section A.4 of the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#itu-t-h265">ITU-T H.265 Specification</a>. */
+    /** @return the value of the {@code maxLevelIdc} field. */
     @NativeType("StdVideoH265LevelIdc")
     public int maxLevelIdc() { return nmaxLevelIdc(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoEncodeH265SessionCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoEncodeH265SessionCreateInfoKHR sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoEncodeH265SessionCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #useMaxLevelIdc} field. */
+    /** Sets the specified value to the {@code useMaxLevelIdc} field. */
     public VkVideoEncodeH265SessionCreateInfoKHR useMaxLevelIdc(@NativeType("VkBool32") boolean value) { nuseMaxLevelIdc(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #maxLevelIdc} field. */
+    /** Sets the specified value to the {@code maxLevelIdc} field. */
     public VkVideoEncodeH265SessionCreateInfoKHR maxLevelIdc(@NativeType("StdVideoH265LevelIdc") int value) { nmaxLevelIdc(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,28 +303,28 @@ public class VkVideoEncodeH265SessionCreateInfoKHR extends Struct<VkVideoEncodeH
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeH265SessionCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoEncodeH265SessionCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoEncodeH265SessionCreateInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoEncodeH265SessionCreateInfoKHR#useMaxLevelIdc} field. */
+        /** @return the value of the {@code useMaxLevelIdc} field. */
         @NativeType("VkBool32")
         public boolean useMaxLevelIdc() { return VkVideoEncodeH265SessionCreateInfoKHR.nuseMaxLevelIdc(address()) != 0; }
-        /** @return the value of the {@link VkVideoEncodeH265SessionCreateInfoKHR#maxLevelIdc} field. */
+        /** @return the value of the {@code maxLevelIdc} field. */
         @NativeType("StdVideoH265LevelIdc")
         public int maxLevelIdc() { return VkVideoEncodeH265SessionCreateInfoKHR.nmaxLevelIdc(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoEncodeH265SessionCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoEncodeH265SessionCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR} value to the {@link VkVideoEncodeH265SessionCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoEncodeH265#VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoEncodeH265SessionCreateInfoKHR.Buffer sType$Default() { return sType(KHRVideoEncodeH265.VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoEncodeH265SessionCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoEncodeH265SessionCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionCreateInfoKHR#useMaxLevelIdc} field. */
+        /** Sets the specified value to the {@code useMaxLevelIdc} field. */
         public VkVideoEncodeH265SessionCreateInfoKHR.Buffer useMaxLevelIdc(@NativeType("VkBool32") boolean value) { VkVideoEncodeH265SessionCreateInfoKHR.nuseMaxLevelIdc(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeH265SessionCreateInfoKHR#maxLevelIdc} field. */
+        /** Sets the specified value to the {@code maxLevelIdc} field. */
         public VkVideoEncodeH265SessionCreateInfoKHR.Buffer maxLevelIdc(@NativeType("StdVideoH265LevelIdc") int value) { VkVideoEncodeH265SessionCreateInfoKHR.nmaxLevelIdc(address(), value); return this; }
 
     }

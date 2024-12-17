@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be used with the {@link STBImageWrite} {@code write_type_to_func} functions.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     void *context,
- *     void *data,
- *     int size
- * )</code></pre>
- */
+/** Callback function: {@link #invoke stbi_write_func *} */
 @FunctionalInterface
 @NativeType("stbi_write_func *")
 public interface STBIWriteCallbackI extends CallbackI {
@@ -46,13 +35,7 @@ public interface STBIWriteCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * The {@code stbi_write_func} callback.
-     *
-     * @param context the context passed to the write function
-     * @param data    the data to write
-     * @param size    the number of bytes in {@code data}
-     */
+    /** {@code void (* stbi_write_func *) (void * context, void * data, int size)} */
     void invoke(@NativeType("void *") long context, @NativeType("void *") long data, int size);
 
 }

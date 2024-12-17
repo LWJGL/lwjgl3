@@ -17,18 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Vertex attribute stream.
- * 
- * <p>Each element takes size bytes, beginning at data, with stride controlling the spacing between successive elements ({@code stride} &ge; {@code size}).</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct meshopt_Stream {
  *     void const * data;
  *     size_t size;
  *     size_t stride;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct meshopt_Stream")
 public class MeshoptStream extends Struct<MeshoptStream> implements NativeResource {
@@ -82,11 +76,7 @@ public class MeshoptStream extends Struct<MeshoptStream> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
     @NativeType("void const *")
     public ByteBuffer data(int capacity) { return ndata(address(), capacity); }
     /** @return the value of the {@code size} field. */
@@ -305,11 +295,7 @@ public class MeshoptStream extends Struct<MeshoptStream> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code data} field. */
         @NativeType("void const *")
         public ByteBuffer data(int capacity) { return MeshoptStream.ndata(address(), capacity); }
         /** @return the value of the {@code size} field. */

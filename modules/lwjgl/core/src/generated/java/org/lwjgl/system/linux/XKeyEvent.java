@@ -17,28 +17,24 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Key event.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XKeyEvent {
- *     int {@link #type};
- *     unsigned long {@link #serial};
- *     Bool {@link #send_event};
- *     Display * {@link #display};
- *     Window {@link #window};
- *     Window {@link #root};
- *     Window {@link #subwindow};
- *     Time {@link #time};
- *     int {@link #x};
- *     int {@link #y};
- *     int {@link #x_root};
- *     int {@link #y_root};
- *     unsigned int {@link #state};
- *     unsigned int {@link #keycode};
- *     Bool {@link #same_screen};
- * }</code></pre>
+ *     int type;
+ *     unsigned long serial;
+ *     Bool send_event;
+ *     Display * display;
+ *     Window window;
+ *     Window root;
+ *     Window subwindow;
+ *     Time time;
+ *     int x;
+ *     int y;
+ *     int x_root;
+ *     int y_root;
+ *     unsigned int state;
+ *     unsigned int keycode;
+ *     Bool same_screen;
+ * }}</pre>
  */
 public class XKeyEvent extends Struct<XKeyEvent> implements NativeResource {
 
@@ -127,76 +123,76 @@ public class XKeyEvent extends Struct<XKeyEvent> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the event type. One of:<br><table><tr><td>{@link X11#KeyPress}</td><td>{@link X11#KeyRelease}</td></tr></table> */
+    /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** # of last request processed by server */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** true if this came from an {@link X11#XSendEvent} request */
+    /** @return the value of the {@code send_event} field. */
     @NativeType("Bool")
     public boolean send_event() { return nsend_event(address()) != 0; }
-    /** {@code Display} the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** window it reported relative to */
+    /** @return the value of the {@code window} field. */
     @NativeType("Window")
     public long window() { return nwindow(address()); }
-    /** root window that the event occurred on */
+    /** @return the value of the {@code root} field. */
     @NativeType("Window")
     public long root() { return nroot(address()); }
-    /** child window */
+    /** @return the value of the {@code subwindow} field. */
     @NativeType("Window")
     public long subwindow() { return nsubwindow(address()); }
-    /** milliseconds */
+    /** @return the value of the {@code time} field. */
     @NativeType("Time")
     public long time() { return ntime(address()); }
-    /** pointer x coordinate in event window */
+    /** @return the value of the {@code x} field. */
     public int x() { return nx(address()); }
-    /** pointer y coordinate in event window */
+    /** @return the value of the {@code y} field. */
     public int y() { return ny(address()); }
-    /** x coordinate relative to {@code root} */
+    /** @return the value of the {@code x_root} field. */
     public int x_root() { return nx_root(address()); }
-    /** y coordinate relative to {@code root} */
+    /** @return the value of the {@code y_root} field. */
     public int y_root() { return ny_root(address()); }
-    /** key mask */
+    /** @return the value of the {@code state} field. */
     @NativeType("unsigned int")
     public int state() { return nstate(address()); }
-    /** detail */
+    /** @return the value of the {@code keycode} field. */
     @NativeType("unsigned int")
     public int keycode() { return nkeycode(address()); }
-    /** same screen flag */
+    /** @return the value of the {@code same_screen} field. */
     @NativeType("Bool")
     public boolean same_screen() { return nsame_screen(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XKeyEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XKeyEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #send_event} field. */
+    /** Sets the specified value to the {@code send_event} field. */
     public XKeyEvent send_event(@NativeType("Bool") boolean value) { nsend_event(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XKeyEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #window} field. */
+    /** Sets the specified value to the {@code window} field. */
     public XKeyEvent window(@NativeType("Window") long value) { nwindow(address(), value); return this; }
-    /** Sets the specified value to the {@link #root} field. */
+    /** Sets the specified value to the {@code root} field. */
     public XKeyEvent root(@NativeType("Window") long value) { nroot(address(), value); return this; }
-    /** Sets the specified value to the {@link #subwindow} field. */
+    /** Sets the specified value to the {@code subwindow} field. */
     public XKeyEvent subwindow(@NativeType("Window") long value) { nsubwindow(address(), value); return this; }
-    /** Sets the specified value to the {@link #time} field. */
+    /** Sets the specified value to the {@code time} field. */
     public XKeyEvent time(@NativeType("Time") long value) { ntime(address(), value); return this; }
-    /** Sets the specified value to the {@link #x} field. */
+    /** Sets the specified value to the {@code x} field. */
     public XKeyEvent x(int value) { nx(address(), value); return this; }
-    /** Sets the specified value to the {@link #y} field. */
+    /** Sets the specified value to the {@code y} field. */
     public XKeyEvent y(int value) { ny(address(), value); return this; }
-    /** Sets the specified value to the {@link #x_root} field. */
+    /** Sets the specified value to the {@code x_root} field. */
     public XKeyEvent x_root(int value) { nx_root(address(), value); return this; }
-    /** Sets the specified value to the {@link #y_root} field. */
+    /** Sets the specified value to the {@code y_root} field. */
     public XKeyEvent y_root(int value) { ny_root(address(), value); return this; }
-    /** Sets the specified value to the {@link #state} field. */
+    /** Sets the specified value to the {@code state} field. */
     public XKeyEvent state(@NativeType("unsigned int") int value) { nstate(address(), value); return this; }
-    /** Sets the specified value to the {@link #keycode} field. */
+    /** Sets the specified value to the {@code keycode} field. */
     public XKeyEvent keycode(@NativeType("unsigned int") int value) { nkeycode(address(), value); return this; }
-    /** Sets the specified value to the {@link #same_screen} field. */
+    /** Sets the specified value to the {@code same_screen} field. */
     public XKeyEvent same_screen(@NativeType("Bool") boolean value) { nsame_screen(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -492,76 +488,76 @@ public class XKeyEvent extends Struct<XKeyEvent> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XKeyEvent#type} field. */
+        /** @return the value of the {@code type} field. */
         public int type() { return XKeyEvent.ntype(address()); }
-        /** @return the value of the {@link XKeyEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XKeyEvent.nserial(address()); }
-        /** @return the value of the {@link XKeyEvent#send_event} field. */
+        /** @return the value of the {@code send_event} field. */
         @NativeType("Bool")
         public boolean send_event() { return XKeyEvent.nsend_event(address()) != 0; }
-        /** @return the value of the {@link XKeyEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XKeyEvent.ndisplay(address()); }
-        /** @return the value of the {@link XKeyEvent#window} field. */
+        /** @return the value of the {@code window} field. */
         @NativeType("Window")
         public long window() { return XKeyEvent.nwindow(address()); }
-        /** @return the value of the {@link XKeyEvent#root} field. */
+        /** @return the value of the {@code root} field. */
         @NativeType("Window")
         public long root() { return XKeyEvent.nroot(address()); }
-        /** @return the value of the {@link XKeyEvent#subwindow} field. */
+        /** @return the value of the {@code subwindow} field. */
         @NativeType("Window")
         public long subwindow() { return XKeyEvent.nsubwindow(address()); }
-        /** @return the value of the {@link XKeyEvent#time} field. */
+        /** @return the value of the {@code time} field. */
         @NativeType("Time")
         public long time() { return XKeyEvent.ntime(address()); }
-        /** @return the value of the {@link XKeyEvent#x} field. */
+        /** @return the value of the {@code x} field. */
         public int x() { return XKeyEvent.nx(address()); }
-        /** @return the value of the {@link XKeyEvent#y} field. */
+        /** @return the value of the {@code y} field. */
         public int y() { return XKeyEvent.ny(address()); }
-        /** @return the value of the {@link XKeyEvent#x_root} field. */
+        /** @return the value of the {@code x_root} field. */
         public int x_root() { return XKeyEvent.nx_root(address()); }
-        /** @return the value of the {@link XKeyEvent#y_root} field. */
+        /** @return the value of the {@code y_root} field. */
         public int y_root() { return XKeyEvent.ny_root(address()); }
-        /** @return the value of the {@link XKeyEvent#state} field. */
+        /** @return the value of the {@code state} field. */
         @NativeType("unsigned int")
         public int state() { return XKeyEvent.nstate(address()); }
-        /** @return the value of the {@link XKeyEvent#keycode} field. */
+        /** @return the value of the {@code keycode} field. */
         @NativeType("unsigned int")
         public int keycode() { return XKeyEvent.nkeycode(address()); }
-        /** @return the value of the {@link XKeyEvent#same_screen} field. */
+        /** @return the value of the {@code same_screen} field. */
         @NativeType("Bool")
         public boolean same_screen() { return XKeyEvent.nsame_screen(address()) != 0; }
 
-        /** Sets the specified value to the {@link XKeyEvent#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XKeyEvent.Buffer type(int value) { XKeyEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XKeyEvent.Buffer serial(@NativeType("unsigned long") long value) { XKeyEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#send_event} field. */
+        /** Sets the specified value to the {@code send_event} field. */
         public XKeyEvent.Buffer send_event(@NativeType("Bool") boolean value) { XKeyEvent.nsend_event(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XKeyEvent.Buffer display(@NativeType("Display *") long value) { XKeyEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#window} field. */
+        /** Sets the specified value to the {@code window} field. */
         public XKeyEvent.Buffer window(@NativeType("Window") long value) { XKeyEvent.nwindow(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#root} field. */
+        /** Sets the specified value to the {@code root} field. */
         public XKeyEvent.Buffer root(@NativeType("Window") long value) { XKeyEvent.nroot(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#subwindow} field. */
+        /** Sets the specified value to the {@code subwindow} field. */
         public XKeyEvent.Buffer subwindow(@NativeType("Window") long value) { XKeyEvent.nsubwindow(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#time} field. */
+        /** Sets the specified value to the {@code time} field. */
         public XKeyEvent.Buffer time(@NativeType("Time") long value) { XKeyEvent.ntime(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#x} field. */
+        /** Sets the specified value to the {@code x} field. */
         public XKeyEvent.Buffer x(int value) { XKeyEvent.nx(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#y} field. */
+        /** Sets the specified value to the {@code y} field. */
         public XKeyEvent.Buffer y(int value) { XKeyEvent.ny(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#x_root} field. */
+        /** Sets the specified value to the {@code x_root} field. */
         public XKeyEvent.Buffer x_root(int value) { XKeyEvent.nx_root(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#y_root} field. */
+        /** Sets the specified value to the {@code y_root} field. */
         public XKeyEvent.Buffer y_root(int value) { XKeyEvent.ny_root(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#state} field. */
+        /** Sets the specified value to the {@code state} field. */
         public XKeyEvent.Buffer state(@NativeType("unsigned int") int value) { XKeyEvent.nstate(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#keycode} field. */
+        /** Sets the specified value to the {@code keycode} field. */
         public XKeyEvent.Buffer keycode(@NativeType("unsigned int") int value) { XKeyEvent.nkeycode(address(), value); return this; }
-        /** Sets the specified value to the {@link XKeyEvent#same_screen} field. */
+        /** Sets the specified value to the {@code same_screen} field. */
         public XKeyEvent.Buffer same_screen(@NativeType("Bool") boolean value) { XKeyEvent.nsame_screen(address(), value ? 1 : 0); return this; }
 
     }

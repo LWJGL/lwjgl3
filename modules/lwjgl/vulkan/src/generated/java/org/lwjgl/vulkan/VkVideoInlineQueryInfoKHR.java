@@ -16,41 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying inline query information for video coding commands.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure <b>can</b> be included in the {@code pNext} chain of the input parameter structure of video coding commands.</p>
- * 
- * <ul>
- * <li>In the {@code pNext} chain of the {@code pDecodeInfo} parameter of the {@link KHRVideoDecodeQueue#vkCmdDecodeVideoKHR CmdDecodeVideoKHR} command to execute a query for each video decode operation issued by the command.</li>
- * <li>In the {@code pNext} chain of the {@code pEncodeInfo} parameter of the {@link KHRVideoEncodeQueue#vkCmdEncodeVideoKHR CmdEncodeVideoKHR} command to execute a query for each video encode operation issued by the command.</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code queryPool} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then {@code firstQuery} <b>must</b> be less than the number of queries in {@code queryPool}</li>
- * <li>If {@code queryPool} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then the sum of {@code firstQuery} and {@code queryCount} <b>must</b> be less than or equal to the number of queries in {@code queryPool}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR}</li>
- * <li>If {@code queryPool} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code queryPool} <b>must</b> be a valid {@code VkQueryPool} handle</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoInlineQueryInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkQueryPool {@link #queryPool};
- *     uint32_t {@link #firstQuery};
- *     uint32_t {@link #queryCount};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkQueryPool queryPool;
+ *     uint32_t firstQuery;
+ *     uint32_t queryCount;
+ * }}</pre>
  */
 public class VkVideoInlineQueryInfoKHR extends Struct<VkVideoInlineQueryInfoKHR> implements NativeResource {
 
@@ -109,40 +82,33 @@ public class VkVideoInlineQueryInfoKHR extends Struct<VkVideoInlineQueryInfoKHR>
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a valid handle to a {@code VkQueryPool} object that will manage the results of the queries. */
+    /** @return the value of the {@code queryPool} field. */
     @NativeType("VkQueryPool")
     public long queryPool() { return nqueryPool(address()); }
-    /** the query index within the query pool that will contain the query results for the first video coding operation. The query results of subsequent video coding operations will be contained by subsequent query indices. */
+    /** @return the value of the {@code firstQuery} field. */
     @NativeType("uint32_t")
     public int firstQuery() { return nfirstQuery(address()); }
-    /**
-     * the number of queries to execute.
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>In practice, if {@code queryPool} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, then {@code queryCount} will always have to match the number of video coding operations issued by the video coding command this structure is specified to, meaning that using inline queries in a video coding command will always execute a query for each issued video coding operation.</p>
-     * </div>
-     */
+    /** @return the value of the {@code queryCount} field. */
     @NativeType("uint32_t")
     public int queryCount() { return nqueryCount(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoInlineQueryInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR} value to the {@code sType} field. */
     public VkVideoInlineQueryInfoKHR sType$Default() { return sType(KHRVideoMaintenance1.VK_STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoInlineQueryInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #queryPool} field. */
+    /** Sets the specified value to the {@code queryPool} field. */
     public VkVideoInlineQueryInfoKHR queryPool(@NativeType("VkQueryPool") long value) { nqueryPool(address(), value); return this; }
-    /** Sets the specified value to the {@link #firstQuery} field. */
+    /** Sets the specified value to the {@code firstQuery} field. */
     public VkVideoInlineQueryInfoKHR firstQuery(@NativeType("uint32_t") int value) { nfirstQuery(address(), value); return this; }
-    /** Sets the specified value to the {@link #queryCount} field. */
+    /** Sets the specified value to the {@code queryCount} field. */
     public VkVideoInlineQueryInfoKHR queryCount(@NativeType("uint32_t") int value) { nqueryCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -350,33 +316,33 @@ public class VkVideoInlineQueryInfoKHR extends Struct<VkVideoInlineQueryInfoKHR>
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoInlineQueryInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoInlineQueryInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoInlineQueryInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoInlineQueryInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoInlineQueryInfoKHR#queryPool} field. */
+        /** @return the value of the {@code queryPool} field. */
         @NativeType("VkQueryPool")
         public long queryPool() { return VkVideoInlineQueryInfoKHR.nqueryPool(address()); }
-        /** @return the value of the {@link VkVideoInlineQueryInfoKHR#firstQuery} field. */
+        /** @return the value of the {@code firstQuery} field. */
         @NativeType("uint32_t")
         public int firstQuery() { return VkVideoInlineQueryInfoKHR.nfirstQuery(address()); }
-        /** @return the value of the {@link VkVideoInlineQueryInfoKHR#queryCount} field. */
+        /** @return the value of the {@code queryCount} field. */
         @NativeType("uint32_t")
         public int queryCount() { return VkVideoInlineQueryInfoKHR.nqueryCount(address()); }
 
-        /** Sets the specified value to the {@link VkVideoInlineQueryInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoInlineQueryInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoInlineQueryInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR} value to the {@link VkVideoInlineQueryInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoMaintenance1#VK_STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR} value to the {@code sType} field. */
         public VkVideoInlineQueryInfoKHR.Buffer sType$Default() { return sType(KHRVideoMaintenance1.VK_STRUCTURE_TYPE_VIDEO_INLINE_QUERY_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoInlineQueryInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoInlineQueryInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoInlineQueryInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoInlineQueryInfoKHR#queryPool} field. */
+        /** Sets the specified value to the {@code queryPool} field. */
         public VkVideoInlineQueryInfoKHR.Buffer queryPool(@NativeType("VkQueryPool") long value) { VkVideoInlineQueryInfoKHR.nqueryPool(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoInlineQueryInfoKHR#firstQuery} field. */
+        /** Sets the specified value to the {@code firstQuery} field. */
         public VkVideoInlineQueryInfoKHR.Buffer firstQuery(@NativeType("uint32_t") int value) { VkVideoInlineQueryInfoKHR.nfirstQuery(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoInlineQueryInfoKHR#queryCount} field. */
+        /** Sets the specified value to the {@code queryCount} field. */
         public VkVideoInlineQueryInfoKHR.Buffer queryCount(@NativeType("uint32_t") int value) { VkVideoInlineQueryInfoKHR.nqueryCount(address(), value); return this; }
 
     }

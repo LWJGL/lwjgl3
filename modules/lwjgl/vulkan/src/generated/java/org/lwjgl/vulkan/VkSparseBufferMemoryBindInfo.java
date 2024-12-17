@@ -17,28 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a sparse buffer memory bind operation.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code buffer} <b>must</b> be a valid {@code VkBuffer} handle</li>
- * <li>{@code pBinds} <b>must</b> be a valid pointer to an array of {@code bindCount} valid {@link VkSparseMemoryBind} structures</li>
- * <li>{@code bindCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkBindSparseInfo}, {@link VkSparseMemoryBind}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSparseBufferMemoryBindInfo {
- *     VkBuffer {@link #buffer};
- *     uint32_t {@link #bindCount};
- *     {@link VkSparseMemoryBind VkSparseMemoryBind} const * {@link #pBinds};
- * }</code></pre>
+ *     VkBuffer buffer;
+ *     uint32_t bindCount;
+ *     {@link VkSparseMemoryBind VkSparseMemoryBind} const * pBinds;
+ * }}</pre>
  */
 public class VkSparseBufferMemoryBindInfo extends Struct<VkSparseBufferMemoryBindInfo> implements NativeResource {
 
@@ -91,19 +75,19 @@ public class VkSparseBufferMemoryBindInfo extends Struct<VkSparseBufferMemoryBin
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code VkBuffer} object to be bound. */
+    /** @return the value of the {@code buffer} field. */
     @NativeType("VkBuffer")
     public long buffer() { return nbuffer(address()); }
-    /** the number of {@link VkSparseMemoryBind} structures in the {@code pBinds} array. */
+    /** @return the value of the {@code bindCount} field. */
     @NativeType("uint32_t")
     public int bindCount() { return nbindCount(address()); }
-    /** a pointer to an array of {@link VkSparseMemoryBind} structures. */
+    /** @return a {@link VkSparseMemoryBind.Buffer} view of the struct array pointed to by the {@code pBinds} field. */
     @NativeType("VkSparseMemoryBind const *")
     public VkSparseMemoryBind.Buffer pBinds() { return npBinds(address()); }
 
-    /** Sets the specified value to the {@link #buffer} field. */
+    /** Sets the specified value to the {@code buffer} field. */
     public VkSparseBufferMemoryBindInfo buffer(@NativeType("VkBuffer") long value) { nbuffer(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSparseMemoryBind.Buffer} to the {@link #pBinds} field. */
+    /** Sets the address of the specified {@link VkSparseMemoryBind.Buffer} to the {@code pBinds} field. */
     public VkSparseBufferMemoryBindInfo pBinds(@NativeType("VkSparseMemoryBind const *") VkSparseMemoryBind.Buffer value) { npBinds(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,19 +309,19 @@ public class VkSparseBufferMemoryBindInfo extends Struct<VkSparseBufferMemoryBin
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSparseBufferMemoryBindInfo#buffer} field. */
+        /** @return the value of the {@code buffer} field. */
         @NativeType("VkBuffer")
         public long buffer() { return VkSparseBufferMemoryBindInfo.nbuffer(address()); }
-        /** @return the value of the {@link VkSparseBufferMemoryBindInfo#bindCount} field. */
+        /** @return the value of the {@code bindCount} field. */
         @NativeType("uint32_t")
         public int bindCount() { return VkSparseBufferMemoryBindInfo.nbindCount(address()); }
-        /** @return a {@link VkSparseMemoryBind.Buffer} view of the struct array pointed to by the {@link VkSparseBufferMemoryBindInfo#pBinds} field. */
+        /** @return a {@link VkSparseMemoryBind.Buffer} view of the struct array pointed to by the {@code pBinds} field. */
         @NativeType("VkSparseMemoryBind const *")
         public VkSparseMemoryBind.Buffer pBinds() { return VkSparseBufferMemoryBindInfo.npBinds(address()); }
 
-        /** Sets the specified value to the {@link VkSparseBufferMemoryBindInfo#buffer} field. */
+        /** Sets the specified value to the {@code buffer} field. */
         public VkSparseBufferMemoryBindInfo.Buffer buffer(@NativeType("VkBuffer") long value) { VkSparseBufferMemoryBindInfo.nbuffer(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSparseMemoryBind.Buffer} to the {@link VkSparseBufferMemoryBindInfo#pBinds} field. */
+        /** Sets the address of the specified {@link VkSparseMemoryBind.Buffer} to the {@code pBinds} field. */
         public VkSparseBufferMemoryBindInfo.Buffer pBinds(@NativeType("VkSparseMemoryBind const *") VkSparseMemoryBind.Buffer value) { VkSparseBufferMemoryBindInfo.npBinds(address(), value); return this; }
 
     }

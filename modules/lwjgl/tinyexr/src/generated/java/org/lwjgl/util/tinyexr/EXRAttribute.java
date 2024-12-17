@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct EXRAttribute {
  *     char name[256];
  *     char type[256];
  *     unsigned char * value;
  *     int size;
  *     char[4];
- * }</code></pre>
+ * }}</pre>
  */
 public class EXRAttribute extends Struct<EXRAttribute> implements NativeResource {
 

@@ -40,7 +40,7 @@ public class LLVMBitReader {
 
     // --- [ LLVMParseBitcode ] ---
 
-    /** Unsafe version of: {@link #LLVMParseBitcode ParseBitcode} */
+    /** {@code LLVMBool LLVMParseBitcode(LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutModule, char ** OutMessage)} */
     public static int nLLVMParseBitcode(long MemBuf, long OutModule, long OutMessage) {
         long __functionAddress = Functions.ParseBitcode;
         if (CHECKS) {
@@ -49,12 +49,7 @@ public class LLVMBitReader {
         return invokePPPI(MemBuf, OutModule, OutMessage, __functionAddress);
     }
 
-    /**
-     * Builds a module from the bitcode in the specified memory buffer, returning a reference to the module via the {@code OutModule} parameter. Returns 0 on
-     * success. Optionally returns a human-readable error message via {@code OutMessage}.
-     * 
-     * <p>This is deprecated. Use LLVMParseBitcode2.</p>
-     */
+    /** {@code LLVMBool LLVMParseBitcode(LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutModule, char ** OutMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMParseBitcode(@NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutModule, @NativeType("char **") PointerBuffer OutMessage) {
         if (CHECKS) {
@@ -66,7 +61,7 @@ public class LLVMBitReader {
 
     // --- [ LLVMParseBitcode2 ] ---
 
-    /** Unsafe version of: {@link #LLVMParseBitcode2 ParseBitcode2} */
+    /** {@code LLVMBool LLVMParseBitcode2(LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutModule)} */
     public static int nLLVMParseBitcode2(long MemBuf, long OutModule) {
         long __functionAddress = Functions.ParseBitcode2;
         if (CHECKS) {
@@ -75,10 +70,7 @@ public class LLVMBitReader {
         return invokePPI(MemBuf, OutModule, __functionAddress);
     }
 
-    /**
-     * Builds a module from the bitcode in the specified memory buffer, returning a reference to the module via the {@code OutModule} parameter. Returns 0 on
-     * success.
-     */
+    /** {@code LLVMBool LLVMParseBitcode2(LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutModule)} */
     @NativeType("LLVMBool")
     public static boolean LLVMParseBitcode2(@NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutModule) {
         if (CHECKS) {
@@ -89,7 +81,7 @@ public class LLVMBitReader {
 
     // --- [ LLVMParseBitcodeInContext ] ---
 
-    /** Unsafe version of: {@link #LLVMParseBitcodeInContext ParseBitcodeInContext} */
+    /** {@code LLVMBool LLVMParseBitcodeInContext(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutModule, char ** OutMessage)} */
     public static int nLLVMParseBitcodeInContext(long ContextRef, long MemBuf, long OutModule, long OutMessage) {
         long __functionAddress = Functions.ParseBitcodeInContext;
         if (CHECKS) {
@@ -99,7 +91,7 @@ public class LLVMBitReader {
         return invokePPPPI(ContextRef, MemBuf, OutModule, OutMessage, __functionAddress);
     }
 
-    /** This is deprecated. Use {@link #LLVMParseBitcodeInContext2 ParseBitcodeInContext2}. */
+    /** {@code LLVMBool LLVMParseBitcodeInContext(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutModule, char ** OutMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMParseBitcodeInContext(@NativeType("LLVMContextRef") long ContextRef, @NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutModule, @NativeType("char **") PointerBuffer OutMessage) {
         if (CHECKS) {
@@ -111,6 +103,7 @@ public class LLVMBitReader {
 
     // --- [ LLVMParseBitcodeInContext2 ] ---
 
+    /** {@code LLVMBool LLVMParseBitcodeInContext2(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutModule)} */
     public static int nLLVMParseBitcodeInContext2(long ContextRef, long MemBuf, long OutModule) {
         long __functionAddress = Functions.ParseBitcodeInContext2;
         if (CHECKS) {
@@ -120,6 +113,7 @@ public class LLVMBitReader {
         return invokePPPI(ContextRef, MemBuf, OutModule, __functionAddress);
     }
 
+    /** {@code LLVMBool LLVMParseBitcodeInContext2(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutModule)} */
     @NativeType("LLVMBool")
     public static boolean LLVMParseBitcodeInContext2(@NativeType("LLVMContextRef") long ContextRef, @NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutModule) {
         if (CHECKS) {
@@ -130,7 +124,7 @@ public class LLVMBitReader {
 
     // --- [ LLVMGetBitcodeModuleInContext ] ---
 
-    /** Unsafe version of: {@link #LLVMGetBitcodeModuleInContext GetBitcodeModuleInContext} */
+    /** {@code LLVMBool LLVMGetBitcodeModuleInContext(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM, char ** OutMessage)} */
     public static int nLLVMGetBitcodeModuleInContext(long ContextRef, long MemBuf, long OutM, long OutMessage) {
         long __functionAddress = Functions.GetBitcodeModuleInContext;
         if (CHECKS) {
@@ -140,10 +134,7 @@ public class LLVMBitReader {
         return invokePPPPI(ContextRef, MemBuf, OutM, OutMessage, __functionAddress);
     }
 
-    /**
-     * Reads a module from the specified path, returning via the {@code OutMP} parameter a module provider which performs lazy deserialization. Returns 0 on
-     * success. Optionally returns a human-readable error message via {@code OutMessage}. This is deprecated. Use {@link #LLVMGetBitcodeModuleInContext2 GetBitcodeModuleInContext2}.
-     */
+    /** {@code LLVMBool LLVMGetBitcodeModuleInContext(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM, char ** OutMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMGetBitcodeModuleInContext(@NativeType("LLVMContextRef") long ContextRef, @NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutM, @NativeType("char **") PointerBuffer OutMessage) {
         if (CHECKS) {
@@ -155,7 +146,7 @@ public class LLVMBitReader {
 
     // --- [ LLVMGetBitcodeModuleInContext2 ] ---
 
-    /** Unsafe version of: {@link #LLVMGetBitcodeModuleInContext2 GetBitcodeModuleInContext2} */
+    /** {@code LLVMBool LLVMGetBitcodeModuleInContext2(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM)} */
     public static int nLLVMGetBitcodeModuleInContext2(long ContextRef, long MemBuf, long OutM) {
         long __functionAddress = Functions.GetBitcodeModuleInContext2;
         if (CHECKS) {
@@ -165,13 +156,7 @@ public class LLVMBitReader {
         return invokePPPI(ContextRef, MemBuf, OutM, __functionAddress);
     }
 
-    /**
-     * Reads a module from the given memory buffer, returning via the {@code OutMP} parameter a module provider which performs lazy deserialization.
-     * 
-     * <p>Takes ownership of {@code MemBuf} if (and only if) the module was read successfully.</p>
-     *
-     * @return 0 on success
-     */
+    /** {@code LLVMBool LLVMGetBitcodeModuleInContext2(LLVMContextRef ContextRef, LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM)} */
     @NativeType("LLVMBool")
     public static boolean LLVMGetBitcodeModuleInContext2(@NativeType("LLVMContextRef") long ContextRef, @NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutM) {
         if (CHECKS) {
@@ -182,7 +167,7 @@ public class LLVMBitReader {
 
     // --- [ LLVMGetBitcodeModule ] ---
 
-    /** Unsafe version of: {@link #LLVMGetBitcodeModule GetBitcodeModule} */
+    /** {@code LLVMBool LLVMGetBitcodeModule(LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM, char ** OutMessage)} */
     public static int nLLVMGetBitcodeModule(long MemBuf, long OutM, long OutMessage) {
         long __functionAddress = Functions.GetBitcodeModule;
         if (CHECKS) {
@@ -191,7 +176,7 @@ public class LLVMBitReader {
         return invokePPPI(MemBuf, OutM, OutMessage, __functionAddress);
     }
 
-    /** This is deprecated. Use {@link #LLVMGetBitcodeModule2 GetBitcodeModule2}. */
+    /** {@code LLVMBool LLVMGetBitcodeModule(LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM, char ** OutMessage)} */
     @NativeType("LLVMBool")
     public static boolean LLVMGetBitcodeModule(@NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutM, @NativeType("char **") PointerBuffer OutMessage) {
         if (CHECKS) {
@@ -203,6 +188,7 @@ public class LLVMBitReader {
 
     // --- [ LLVMGetBitcodeModule2 ] ---
 
+    /** {@code LLVMBool LLVMGetBitcodeModule2(LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM)} */
     public static int nLLVMGetBitcodeModule2(long MemBuf, long OutM) {
         long __functionAddress = Functions.GetBitcodeModule2;
         if (CHECKS) {
@@ -211,6 +197,7 @@ public class LLVMBitReader {
         return invokePPI(MemBuf, OutM, __functionAddress);
     }
 
+    /** {@code LLVMBool LLVMGetBitcodeModule2(LLVMMemoryBufferRef MemBuf, LLVMModuleRef * OutM)} */
     @NativeType("LLVMBool")
     public static boolean LLVMGetBitcodeModule2(@NativeType("LLVMMemoryBufferRef") long MemBuf, @NativeType("LLVMModuleRef *") PointerBuffer OutM) {
         if (CHECKS) {

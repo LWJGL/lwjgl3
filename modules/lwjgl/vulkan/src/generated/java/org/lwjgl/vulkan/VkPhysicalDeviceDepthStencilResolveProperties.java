@@ -16,29 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing depth/stencil resolve properties that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceDepthStencilResolveProperties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDepthStencilResolveProperties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkResolveModeFlags {@link #supportedDepthResolveModes};
- *     VkResolveModeFlags {@link #supportedStencilResolveModes};
- *     VkBool32 {@link #independentResolveNone};
- *     VkBool32 {@link #independentResolve};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkResolveModeFlags supportedDepthResolveModes;
+ *     VkResolveModeFlags supportedStencilResolveModes;
+ *     VkBool32 independentResolveNone;
+ *     VkBool32 independentResolve;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct<VkPhysicalDeviceDepthStencilResolveProperties> implements NativeResource {
 
@@ -100,30 +86,30 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct<VkPhys
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported depth resolve modes. {@link VK12#VK_RESOLVE_MODE_SAMPLE_ZERO_BIT RESOLVE_MODE_SAMPLE_ZERO_BIT} <b>must</b> be included in the set but implementations <b>may</b> support additional modes. */
+    /** @return the value of the {@code supportedDepthResolveModes} field. */
     @NativeType("VkResolveModeFlags")
     public int supportedDepthResolveModes() { return nsupportedDepthResolveModes(address()); }
-    /** a bitmask of {@code VkResolveModeFlagBits} indicating the set of supported stencil resolve modes. {@link VK12#VK_RESOLVE_MODE_SAMPLE_ZERO_BIT RESOLVE_MODE_SAMPLE_ZERO_BIT} <b>must</b> be included in the set but implementations <b>may</b> support additional modes. {@link VK12#VK_RESOLVE_MODE_AVERAGE_BIT RESOLVE_MODE_AVERAGE_BIT} <b>must</b> not be included in the set. */
+    /** @return the value of the {@code supportedStencilResolveModes} field. */
     @NativeType("VkResolveModeFlags")
     public int supportedStencilResolveModes() { return nsupportedStencilResolveModes(address()); }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports setting the depth and stencil resolve modes to different values when one of those modes is {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}. Otherwise the implementation only supports setting both modes to the same value. */
+    /** @return the value of the {@code independentResolveNone} field. */
     @NativeType("VkBool32")
     public boolean independentResolveNone() { return nindependentResolveNone(address()) != 0; }
-    /** {@link VK10#VK_TRUE TRUE} if the implementation supports all combinations of the supported depth and stencil resolve modes, including setting either depth or stencil resolve mode to {@link VK12#VK_RESOLVE_MODE_NONE RESOLVE_MODE_NONE}. An implementation that supports {@code independentResolve} <b>must</b> also support {@code independentResolveNone}. */
+    /** @return the value of the {@code independentResolve} field. */
     @NativeType("VkBool32")
     public boolean independentResolve() { return nindependentResolve(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDepthStencilResolveProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceDepthStencilResolveProperties sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDepthStencilResolveProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,30 +307,30 @@ public class VkPhysicalDeviceDepthStencilResolveProperties extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDepthStencilResolveProperties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDepthStencilResolveProperties.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#supportedDepthResolveModes} field. */
+        /** @return the value of the {@code supportedDepthResolveModes} field. */
         @NativeType("VkResolveModeFlags")
         public int supportedDepthResolveModes() { return VkPhysicalDeviceDepthStencilResolveProperties.nsupportedDepthResolveModes(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#supportedStencilResolveModes} field. */
+        /** @return the value of the {@code supportedStencilResolveModes} field. */
         @NativeType("VkResolveModeFlags")
         public int supportedStencilResolveModes() { return VkPhysicalDeviceDepthStencilResolveProperties.nsupportedStencilResolveModes(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#independentResolveNone} field. */
+        /** @return the value of the {@code independentResolveNone} field. */
         @NativeType("VkBool32")
         public boolean independentResolveNone() { return VkPhysicalDeviceDepthStencilResolveProperties.nindependentResolveNone(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDepthStencilResolveProperties#independentResolve} field. */
+        /** @return the value of the {@code independentResolve} field. */
         @NativeType("VkBool32")
         public boolean independentResolve() { return VkPhysicalDeviceDepthStencilResolveProperties.nindependentResolve(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthStencilResolveProperties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDepthStencilResolveProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDepthStencilResolveProperties.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES} value to the {@link VkPhysicalDeviceDepthStencilResolveProperties#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceDepthStencilResolveProperties.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDepthStencilResolveProperties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDepthStencilResolveProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDepthStencilResolveProperties.npNext(address(), value); return this; }
 
     }

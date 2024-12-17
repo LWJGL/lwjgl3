@@ -16,35 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing an Android hardware buffer memory export operation.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID} <b>must</b> have been included in {@link VkExportMemoryAllocateInfo}{@code ::handleTypes} when {@code memory} was created</li>
- * <li>If the {@code pNext} chain of the {@link VkMemoryAllocateInfo} used to allocate {@code memory} included a {@link VkMemoryDedicatedAllocateInfo} with non-{@code NULL} {@code image} member, then that {@code image} <b>must</b> already be bound to {@code memory}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code memory} <b>must</b> be a valid {@code VkDeviceMemory} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link ANDROIDExternalMemoryAndroidHardwareBuffer#vkGetMemoryAndroidHardwareBufferANDROID GetMemoryAndroidHardwareBufferANDROID}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryGetAndroidHardwareBufferInfoANDROID {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceMemory {@link #memory};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceMemory memory;
+ * }}</pre>
  */
 public class VkMemoryGetAndroidHardwareBufferInfoANDROID extends Struct<VkMemoryGetAndroidHardwareBufferInfoANDROID> implements NativeResource {
 
@@ -97,23 +74,23 @@ public class VkMemoryGetAndroidHardwareBufferInfoANDROID extends Struct<VkMemory
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the memory object from which the Android hardware buffer will be exported. */
+    /** @return the value of the {@code memory} field. */
     @NativeType("VkDeviceMemory")
     public long memory() { return nmemory(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMemoryGetAndroidHardwareBufferInfoANDROID sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID} value to the {@link #sType} field. */
+    /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID} value to the {@code sType} field. */
     public VkMemoryGetAndroidHardwareBufferInfoANDROID sType$Default() { return sType(ANDROIDExternalMemoryAndroidHardwareBuffer.VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMemoryGetAndroidHardwareBufferInfoANDROID pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #memory} field. */
+    /** Sets the specified value to the {@code memory} field. */
     public VkMemoryGetAndroidHardwareBufferInfoANDROID memory(@NativeType("VkDeviceMemory") long value) { nmemory(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,23 +286,23 @@ public class VkMemoryGetAndroidHardwareBufferInfoANDROID extends Struct<VkMemory
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryGetAndroidHardwareBufferInfoANDROID#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMemoryGetAndroidHardwareBufferInfoANDROID.nsType(address()); }
-        /** @return the value of the {@link VkMemoryGetAndroidHardwareBufferInfoANDROID#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMemoryGetAndroidHardwareBufferInfoANDROID.npNext(address()); }
-        /** @return the value of the {@link VkMemoryGetAndroidHardwareBufferInfoANDROID#memory} field. */
+        /** @return the value of the {@code memory} field. */
         @NativeType("VkDeviceMemory")
         public long memory() { return VkMemoryGetAndroidHardwareBufferInfoANDROID.nmemory(address()); }
 
-        /** Sets the specified value to the {@link VkMemoryGetAndroidHardwareBufferInfoANDROID#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMemoryGetAndroidHardwareBufferInfoANDROID.Buffer sType(@NativeType("VkStructureType") int value) { VkMemoryGetAndroidHardwareBufferInfoANDROID.nsType(address(), value); return this; }
-        /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID} value to the {@link VkMemoryGetAndroidHardwareBufferInfoANDROID#sType} field. */
+        /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID} value to the {@code sType} field. */
         public VkMemoryGetAndroidHardwareBufferInfoANDROID.Buffer sType$Default() { return sType(ANDROIDExternalMemoryAndroidHardwareBuffer.VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID); }
-        /** Sets the specified value to the {@link VkMemoryGetAndroidHardwareBufferInfoANDROID#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMemoryGetAndroidHardwareBufferInfoANDROID.Buffer pNext(@NativeType("void const *") long value) { VkMemoryGetAndroidHardwareBufferInfoANDROID.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMemoryGetAndroidHardwareBufferInfoANDROID#memory} field. */
+        /** Sets the specified value to the {@code memory} field. */
         public VkMemoryGetAndroidHardwareBufferInfoANDROID.Buffer memory(@NativeType("VkDeviceMemory") long value) { VkMemoryGetAndroidHardwareBufferInfoANDROID.nmemory(address(), value); return this; }
 
     }

@@ -5,66 +5,14 @@
  */
 package org.lwjgl.openxr;
 
-/**
- * The <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#XR_ULTRALEAP_hand_tracking_forearm">XR_ULTRALEAP_hand_tracking_forearm</a> extension.
- * 
- * <p>This extension augments the {@link EXTHandTracking XR_EXT_hand_tracking} extension to enable applications to request the default set of 26 hand joints, with the addition of a joint representing the user’s elbow.</p>
- * 
- * <p>The application <b>must</b> also enable the {@link EXTHandTracking XR_EXT_hand_tracking} extension in order to use this extension.</p>
- */
 public final class ULTRALEAPHandTrackingForearm {
 
-    /** The extension specification version. */
     public static final int XR_ULTRALEAP_hand_tracking_forearm_SPEC_VERSION = 1;
 
-    /** The extension name. */
     public static final String XR_ULTRALEAP_HAND_TRACKING_FOREARM_EXTENSION_NAME = "XR_ULTRALEAP_hand_tracking_forearm";
 
-    /** Extends {@code XrHandJointSetEXT}. */
     public static final int XR_HAND_JOINT_SET_HAND_WITH_FOREARM_ULTRALEAP = 1000149000;
 
-    /**
-     * XrHandForearmJointULTRALEAP - The name of hand joints that can be tracked including the elbow
-     * 
-     * <h5>Description</h5>
-     * 
-     * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
-     * 
-     * <p>The first {@link EXTHandTracking#XR_HAND_JOINT_COUNT_EXT HAND_JOINT_COUNT_EXT} members of {@code XrHandForearmJointULTRALEAP} are identical to the members of {@code XrHandJointEXT} and <b>can</b> be used interchangeably.</p>
-     * </div>
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_PALM_ULTRALEAP HAND_FOREARM_JOINT_PALM_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_WRIST_ULTRALEAP HAND_FOREARM_JOINT_WRIST_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_THUMB_METACARPAL_ULTRALEAP HAND_FOREARM_JOINT_THUMB_METACARPAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_THUMB_PROXIMAL_ULTRALEAP HAND_FOREARM_JOINT_THUMB_PROXIMAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_THUMB_DISTAL_ULTRALEAP HAND_FOREARM_JOINT_THUMB_DISTAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_THUMB_TIP_ULTRALEAP HAND_FOREARM_JOINT_THUMB_TIP_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_INDEX_METACARPAL_ULTRALEAP HAND_FOREARM_JOINT_INDEX_METACARPAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_INDEX_PROXIMAL_ULTRALEAP HAND_FOREARM_JOINT_INDEX_PROXIMAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_INDEX_INTERMEDIATE_ULTRALEAP HAND_FOREARM_JOINT_INDEX_INTERMEDIATE_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_INDEX_DISTAL_ULTRALEAP HAND_FOREARM_JOINT_INDEX_DISTAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_INDEX_TIP_ULTRALEAP HAND_FOREARM_JOINT_INDEX_TIP_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_MIDDLE_METACARPAL_ULTRALEAP HAND_FOREARM_JOINT_MIDDLE_METACARPAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_MIDDLE_PROXIMAL_ULTRALEAP HAND_FOREARM_JOINT_MIDDLE_PROXIMAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_MIDDLE_INTERMEDIATE_ULTRALEAP HAND_FOREARM_JOINT_MIDDLE_INTERMEDIATE_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_MIDDLE_DISTAL_ULTRALEAP HAND_FOREARM_JOINT_MIDDLE_DISTAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_MIDDLE_TIP_ULTRALEAP HAND_FOREARM_JOINT_MIDDLE_TIP_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_RING_METACARPAL_ULTRALEAP HAND_FOREARM_JOINT_RING_METACARPAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_RING_PROXIMAL_ULTRALEAP HAND_FOREARM_JOINT_RING_PROXIMAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_RING_INTERMEDIATE_ULTRALEAP HAND_FOREARM_JOINT_RING_INTERMEDIATE_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_RING_DISTAL_ULTRALEAP HAND_FOREARM_JOINT_RING_DISTAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_RING_TIP_ULTRALEAP HAND_FOREARM_JOINT_RING_TIP_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_LITTLE_METACARPAL_ULTRALEAP HAND_FOREARM_JOINT_LITTLE_METACARPAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_LITTLE_PROXIMAL_ULTRALEAP HAND_FOREARM_JOINT_LITTLE_PROXIMAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_LITTLE_INTERMEDIATE_ULTRALEAP HAND_FOREARM_JOINT_LITTLE_INTERMEDIATE_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_LITTLE_DISTAL_ULTRALEAP HAND_FOREARM_JOINT_LITTLE_DISTAL_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_LITTLE_TIP_ULTRALEAP HAND_FOREARM_JOINT_LITTLE_TIP_ULTRALEAP}</li>
-     * <li>{@link #XR_HAND_FOREARM_JOINT_ELBOW_ULTRALEAP HAND_FOREARM_JOINT_ELBOW_ULTRALEAP}</li>
-     * </ul>
-     */
     public static final int
         XR_HAND_FOREARM_JOINT_PALM_ULTRALEAP                = 0,
         XR_HAND_FOREARM_JOINT_WRIST_ULTRALEAP               = 1,

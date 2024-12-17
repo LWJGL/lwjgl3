@@ -17,45 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying sparse image opaque memory bind information.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>This structure is normally used to bind memory to fully-resident sparse images or for mip tail regions of partially resident images. However, it <b>can</b> also be used to bind memory for the entire binding range of partially resident images.</p>
- * 
- * <p>If the {@code pBinds}[i].flags of an element <em>i</em> of {@code pBinds} does not contain {@link VK10#VK_SPARSE_MEMORY_BIND_METADATA_BIT SPARSE_MEMORY_BIND_METADATA_BIT}, the {@code resourceOffset} is in the range <code>[0, {@link VkMemoryRequirements}::size)</code>, This range includes data from all aspects of the image, including metadata. For most implementations this will probably mean that the {@code resourceOffset} is a simple device address offset within the resource. It is possible for an application to bind a range of memory that includes both resource data and metadata. However, the application would not know what part of the image the memory is used for, or if any range is being used for metadata.</p>
- * 
- * <p>If the {@code pBinds}[i].flags of an element <em>i</em> of {@code pBinds} contains {@link VK10#VK_SPARSE_MEMORY_BIND_METADATA_BIT SPARSE_MEMORY_BIND_METADATA_BIT}, the binding range specified <b>must</b> be within the mip tail region of the metadata aspect. In this case the {@code resourceOffset} is not <b>required</b> to be a simple device address offset within the resource. However, it <em>is</em> defined to be within <code>[imageMipTailOffset, imageMipTailOffset + imageMipTailSize)</code> for the metadata aspect. See {@link VkSparseMemoryBind} for the full constraints on binding region with this flag present.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@code flags} member of any element of {@code pBinds} contains {@link VK10#VK_SPARSE_MEMORY_BIND_METADATA_BIT SPARSE_MEMORY_BIND_METADATA_BIT}, the binding range defined <b>must</b> be within the mip tail region of the metadata aspect of {@code image}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code image} <b>must</b> be a valid {@code VkImage} handle</li>
- * <li>{@code pBinds} <b>must</b> be a valid pointer to an array of {@code bindCount} valid {@link VkSparseMemoryBind} structures</li>
- * <li>{@code bindCount} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkBindSparseInfo}, {@link VkSparseMemoryBind}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSparseImageOpaqueMemoryBindInfo {
- *     VkImage {@link #image};
- *     uint32_t {@link #bindCount};
- *     {@link VkSparseMemoryBind VkSparseMemoryBind} const * {@link #pBinds};
- * }</code></pre>
+ *     VkImage image;
+ *     uint32_t bindCount;
+ *     {@link VkSparseMemoryBind VkSparseMemoryBind} const * pBinds;
+ * }}</pre>
  */
 public class VkSparseImageOpaqueMemoryBindInfo extends Struct<VkSparseImageOpaqueMemoryBindInfo> implements NativeResource {
 
@@ -108,19 +75,19 @@ public class VkSparseImageOpaqueMemoryBindInfo extends Struct<VkSparseImageOpaqu
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code VkImage} object to be bound. */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** the number of {@link VkSparseMemoryBind} structures in the {@code pBinds} array. */
+    /** @return the value of the {@code bindCount} field. */
     @NativeType("uint32_t")
     public int bindCount() { return nbindCount(address()); }
-    /** a pointer to an array of {@link VkSparseMemoryBind} structures. */
+    /** @return a {@link VkSparseMemoryBind.Buffer} view of the struct array pointed to by the {@code pBinds} field. */
     @NativeType("VkSparseMemoryBind const *")
     public VkSparseMemoryBind.Buffer pBinds() { return npBinds(address()); }
 
-    /** Sets the specified value to the {@link #image} field. */
+    /** Sets the specified value to the {@code image} field. */
     public VkSparseImageOpaqueMemoryBindInfo image(@NativeType("VkImage") long value) { nimage(address(), value); return this; }
-    /** Sets the address of the specified {@link VkSparseMemoryBind.Buffer} to the {@link #pBinds} field. */
+    /** Sets the address of the specified {@link VkSparseMemoryBind.Buffer} to the {@code pBinds} field. */
     public VkSparseImageOpaqueMemoryBindInfo pBinds(@NativeType("VkSparseMemoryBind const *") VkSparseMemoryBind.Buffer value) { npBinds(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -342,19 +309,19 @@ public class VkSparseImageOpaqueMemoryBindInfo extends Struct<VkSparseImageOpaqu
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSparseImageOpaqueMemoryBindInfo#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return VkSparseImageOpaqueMemoryBindInfo.nimage(address()); }
-        /** @return the value of the {@link VkSparseImageOpaqueMemoryBindInfo#bindCount} field. */
+        /** @return the value of the {@code bindCount} field. */
         @NativeType("uint32_t")
         public int bindCount() { return VkSparseImageOpaqueMemoryBindInfo.nbindCount(address()); }
-        /** @return a {@link VkSparseMemoryBind.Buffer} view of the struct array pointed to by the {@link VkSparseImageOpaqueMemoryBindInfo#pBinds} field. */
+        /** @return a {@link VkSparseMemoryBind.Buffer} view of the struct array pointed to by the {@code pBinds} field. */
         @NativeType("VkSparseMemoryBind const *")
         public VkSparseMemoryBind.Buffer pBinds() { return VkSparseImageOpaqueMemoryBindInfo.npBinds(address()); }
 
-        /** Sets the specified value to the {@link VkSparseImageOpaqueMemoryBindInfo#image} field. */
+        /** Sets the specified value to the {@code image} field. */
         public VkSparseImageOpaqueMemoryBindInfo.Buffer image(@NativeType("VkImage") long value) { VkSparseImageOpaqueMemoryBindInfo.nimage(address(), value); return this; }
-        /** Sets the address of the specified {@link VkSparseMemoryBind.Buffer} to the {@link VkSparseImageOpaqueMemoryBindInfo#pBinds} field. */
+        /** Sets the address of the specified {@link VkSparseMemoryBind.Buffer} to the {@code pBinds} field. */
         public VkSparseImageOpaqueMemoryBindInfo.Buffer pBinds(@NativeType("VkSparseMemoryBind const *") VkSparseMemoryBind.Buffer value) { VkSparseImageOpaqueMemoryBindInfo.npBinds(address(), value); return this; }
 
     }

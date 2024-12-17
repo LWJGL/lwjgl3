@@ -15,12 +15,10 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct MLCoordinateFrameUID {
  *     uint64_t data[2];
- * }</code></pre>
+ * }}</pre>
  */
 public class MLCoordinateFrameUID extends Struct<MLCoordinateFrameUID> {
 

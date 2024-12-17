@@ -18,11 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * See {@link VkPhysicalDeviceDriverProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDriverPropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -30,7 +26,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     char driverName[VK_MAX_DRIVER_NAME_SIZE];
  *     char driverInfo[VK_MAX_DRIVER_INFO_SIZE];
  *     {@link VkConformanceVersion VkConformanceVersion} conformanceVersion;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceDriverPropertiesKHR extends VkPhysicalDeviceDriverProperties {
 

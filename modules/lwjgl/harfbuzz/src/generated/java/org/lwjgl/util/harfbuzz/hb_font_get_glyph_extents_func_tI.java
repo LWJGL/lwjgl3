@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * hb_bool_t (*{@link #invoke}) (
- *     hb_font_t *font,
- *     void *font_data,
- *     hb_codepoint_t glyph,
- *     hb_glyph_extents_t *extents,
- *     void *user_data
- * )</code></pre>
- */
+/** Callback function: {@link #invoke hb_font_get_glyph_extents_func_t} */
 @FunctionalInterface
 @NativeType("hb_font_get_glyph_extents_func_t")
 public interface hb_font_get_glyph_extents_func_tI extends CallbackI {
@@ -49,19 +38,7 @@ public interface hb_font_get_glyph_extents_func_tI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A virtual method for the {@code hb_font_funcs_t} of an {@code hb_font_t} object.
-     * 
-     * <p>This method should retrieve the extents for a specified glyph. Extents must be returned in an {@code hb_glyph_extents} output parameter.</p>
-     * 
-     * <p>Return value: {@code true} if data found, {@code false} otherwise.</p>
-     *
-     * @param font      {@code hb_font_t} to work upon
-     * @param font_data {@code font} user data pointer
-     * @param glyph     the glyph ID to query
-     * @param extents   the {@code hb_glyph_extents_t} retrieved
-     * @param user_data user data pointer passed by the caller
-     */
+    /** {@code hb_bool_t (* hb_font_get_glyph_extents_func_t) (hb_font_t * font, void * font_data, hb_codepoint_t glyph, hb_glyph_extents_t * extents, void * user_data)} */
     @NativeType("hb_bool_t") int invoke(@NativeType("hb_font_t *") long font, @NativeType("void *") long font_data, @NativeType("hb_codepoint_t") int glyph, @NativeType("hb_glyph_extents_t *") long extents, @NativeType("void *") long user_data);
 
 }

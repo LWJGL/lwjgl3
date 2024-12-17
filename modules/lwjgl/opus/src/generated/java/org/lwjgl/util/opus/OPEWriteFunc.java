@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be set to the {@link OpusEncCallbacks}.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     void *user_data,
- *     unsigned char const *ptr,
- *     opus_int32 len
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ope_write_func} */
 public abstract class OPEWriteFunc extends Callback implements OPEWriteFuncI {
 
     /**

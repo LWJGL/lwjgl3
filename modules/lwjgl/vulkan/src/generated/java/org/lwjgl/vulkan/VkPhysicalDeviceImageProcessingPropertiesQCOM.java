@@ -16,35 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure containing image processing properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <p>These are properties of the image processing information of a physical device.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link QCOMImageProcessing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkExtent2D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceImageProcessingPropertiesQCOM {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #maxWeightFilterPhases};
- *     {@link VkExtent2D VkExtent2D} {@link #maxWeightFilterDimension};
- *     {@link VkExtent2D VkExtent2D} {@link #maxBlockMatchRegion};
- *     {@link VkExtent2D VkExtent2D} {@link #maxBoxFilterBlockSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t maxWeightFilterPhases;
+ *     {@link VkExtent2D VkExtent2D} maxWeightFilterDimension;
+ *     {@link VkExtent2D VkExtent2D} maxBlockMatchRegion;
+ *     {@link VkExtent2D VkExtent2D} maxBoxFilterBlockSize;
+ * }}</pre>
  */
 public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct<VkPhysicalDeviceImageProcessingPropertiesQCOM> implements NativeResource {
 
@@ -106,27 +86,27 @@ public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct<VkPhys
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** the maximum value that <b>can</b> be specified for {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::numPhases} in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-weightimage-filterphases">weight image sampling</a> operations. */
+    /** @return the value of the {@code maxWeightFilterPhases} field. */
     @NativeType("uint32_t")
     public int maxWeightFilterPhases() { return nmaxWeightFilterPhases(address()); }
-    /** a {@link VkExtent2D} describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@link VkImageViewSampleWeightCreateInfoQCOM}{@code ::filterSize}. */
+    /** @return a {@link VkExtent2D} view of the {@code maxWeightFilterDimension} field. */
     public VkExtent2D maxWeightFilterDimension() { return nmaxWeightFilterDimension(address()); }
-    /** a {@link VkExtent2D} describing the largest dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blockSize} in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-blockmatch">block matching</a> operations. */
+    /** @return a {@link VkExtent2D} view of the {@code maxBlockMatchRegion} field. */
     public VkExtent2D maxBlockMatchRegion() { return nmaxBlockMatchRegion(address()); }
-    /** a {@link VkExtent2D} describing the maximum dimensions ({@code width} and {@code height}) that <b>can</b> be specified for {@code blocksize} in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-boxfilter">box filter sampling</a> operations. */
+    /** @return a {@link VkExtent2D} view of the {@code maxBoxFilterBlockSize} field. */
     public VkExtent2D maxBoxFilterBlockSize() { return nmaxBoxFilterBlockSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceImageProcessingPropertiesQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link QCOMImageProcessing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM} value to the {@link #sType} field. */
+    /** Sets the {@link QCOMImageProcessing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM} value to the {@code sType} field. */
     public VkPhysicalDeviceImageProcessingPropertiesQCOM sType$Default() { return sType(QCOMImageProcessing.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceImageProcessingPropertiesQCOM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -324,27 +304,27 @@ public class VkPhysicalDeviceImageProcessingPropertiesQCOM extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceImageProcessingPropertiesQCOM.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceImageProcessingPropertiesQCOM.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#maxWeightFilterPhases} field. */
+        /** @return the value of the {@code maxWeightFilterPhases} field. */
         @NativeType("uint32_t")
         public int maxWeightFilterPhases() { return VkPhysicalDeviceImageProcessingPropertiesQCOM.nmaxWeightFilterPhases(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#maxWeightFilterDimension} field. */
+        /** @return a {@link VkExtent2D} view of the {@code maxWeightFilterDimension} field. */
         public VkExtent2D maxWeightFilterDimension() { return VkPhysicalDeviceImageProcessingPropertiesQCOM.nmaxWeightFilterDimension(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#maxBlockMatchRegion} field. */
+        /** @return a {@link VkExtent2D} view of the {@code maxBlockMatchRegion} field. */
         public VkExtent2D maxBlockMatchRegion() { return VkPhysicalDeviceImageProcessingPropertiesQCOM.nmaxBlockMatchRegion(address()); }
-        /** @return a {@link VkExtent2D} view of the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#maxBoxFilterBlockSize} field. */
+        /** @return a {@link VkExtent2D} view of the {@code maxBoxFilterBlockSize} field. */
         public VkExtent2D maxBoxFilterBlockSize() { return VkPhysicalDeviceImageProcessingPropertiesQCOM.nmaxBoxFilterBlockSize(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceImageProcessingPropertiesQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceImageProcessingPropertiesQCOM.nsType(address(), value); return this; }
-        /** Sets the {@link QCOMImageProcessing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM} value to the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#sType} field. */
+        /** Sets the {@link QCOMImageProcessing#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM} value to the {@code sType} field. */
         public VkPhysicalDeviceImageProcessingPropertiesQCOM.Buffer sType$Default() { return sType(QCOMImageProcessing.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_PROPERTIES_QCOM); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceImageProcessingPropertiesQCOM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceImageProcessingPropertiesQCOM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceImageProcessingPropertiesQCOM.npNext(address(), value); return this; }
 
     }

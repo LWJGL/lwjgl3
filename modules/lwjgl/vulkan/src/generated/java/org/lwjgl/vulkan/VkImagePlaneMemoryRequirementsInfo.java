@@ -16,30 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying image plane for memory requirements.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the image’s {@code tiling} is {@link VK10#VK_IMAGE_TILING_LINEAR IMAGE_TILING_LINEAR} or {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}, then {@code planeAspect} <b>must</b> be a single valid <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#formats-planes-image-aspect">multi-planar aspect mask</a> bit</li>
- * <li>If the image’s {@code tiling} is {@link EXTImageDrmFormatModifier#VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT}, then {@code planeAspect} <b>must</b> be a single valid <em>memory plane</em> for the image (that is, {@code aspectMask} <b>must</b> specify a plane index that is less than the {@link VkDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifierPlaneCount} associated with the image’s {@code format} and {@link VkImageDrmFormatModifierPropertiesEXT}{@code ::drmFormatModifier})</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO}</li>
- * <li>{@code planeAspect} <b>must</b> be a valid {@code VkImageAspectFlagBits} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImagePlaneMemoryRequirementsInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImageAspectFlagBits {@link #planeAspect};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImageAspectFlagBits planeAspect;
+ * }}</pre>
  */
 public class VkImagePlaneMemoryRequirementsInfo extends Struct<VkImagePlaneMemoryRequirementsInfo> implements NativeResource {
 
@@ -92,23 +74,23 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct<VkImagePlaneMemor
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkImageAspectFlagBits} value specifying the aspect corresponding to the image plane to query. */
+    /** @return the value of the {@code planeAspect} field. */
     @NativeType("VkImageAspectFlagBits")
     public int planeAspect() { return nplaneAspect(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImagePlaneMemoryRequirementsInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO} value to the {@code sType} field. */
     public VkImagePlaneMemoryRequirementsInfo sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImagePlaneMemoryRequirementsInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #planeAspect} field. */
+    /** Sets the specified value to the {@code planeAspect} field. */
     public VkImagePlaneMemoryRequirementsInfo planeAspect(@NativeType("VkImageAspectFlagBits") int value) { nplaneAspect(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,23 +305,23 @@ public class VkImagePlaneMemoryRequirementsInfo extends Struct<VkImagePlaneMemor
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImagePlaneMemoryRequirementsInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImagePlaneMemoryRequirementsInfo.nsType(address()); }
-        /** @return the value of the {@link VkImagePlaneMemoryRequirementsInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImagePlaneMemoryRequirementsInfo.npNext(address()); }
-        /** @return the value of the {@link VkImagePlaneMemoryRequirementsInfo#planeAspect} field. */
+        /** @return the value of the {@code planeAspect} field. */
         @NativeType("VkImageAspectFlagBits")
         public int planeAspect() { return VkImagePlaneMemoryRequirementsInfo.nplaneAspect(address()); }
 
-        /** Sets the specified value to the {@link VkImagePlaneMemoryRequirementsInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImagePlaneMemoryRequirementsInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImagePlaneMemoryRequirementsInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO} value to the {@link VkImagePlaneMemoryRequirementsInfo#sType} field. */
+        /** Sets the {@link VK11#VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO} value to the {@code sType} field. */
         public VkImagePlaneMemoryRequirementsInfo.Buffer sType$Default() { return sType(VK11.VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO); }
-        /** Sets the specified value to the {@link VkImagePlaneMemoryRequirementsInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImagePlaneMemoryRequirementsInfo.Buffer pNext(@NativeType("void const *") long value) { VkImagePlaneMemoryRequirementsInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImagePlaneMemoryRequirementsInfo#planeAspect} field. */
+        /** Sets the specified value to the {@code planeAspect} field. */
         public VkImagePlaneMemoryRequirementsInfo.Buffer planeAspect(@NativeType("VkImageAspectFlagBits") int value) { VkImagePlaneMemoryRequirementsInfo.nplaneAspect(address(), value); return this; }
 
     }

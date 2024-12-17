@@ -17,29 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Virtual keyboard text context change info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAVirtualKeyboard XR_META_virtual_keyboard} extension <b>must</b> be enabled prior to using {@link XrVirtualKeyboardTextContextChangeInfoMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code textContext} <b>must</b> be a null-terminated UTF-8 string</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAVirtualKeyboard#xrChangeVirtualKeyboardTextContextMETA ChangeVirtualKeyboardTextContextMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrVirtualKeyboardTextContextChangeInfoMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     char const * {@link #textContext};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     char const * textContext;
+ * }}</pre>
  */
 public class XrVirtualKeyboardTextContextChangeInfoMETA extends Struct<XrVirtualKeyboardTextContextChangeInfoMETA> implements NativeResource {
 
@@ -92,26 +75,26 @@ public class XrVirtualKeyboardTextContextChangeInfoMETA extends Struct<XrVirtual
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a pointer to a {@code char} buffer, should contain prior input text context terminated with a null character. */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code textContext} field. */
     @NativeType("char const *")
     public ByteBuffer textContext() { return ntextContext(address()); }
-    /** a pointer to a {@code char} buffer, should contain prior input text context terminated with a null character. */
+    /** @return the null-terminated string pointed to by the {@code textContext} field. */
     @NativeType("char const *")
     public String textContextString() { return ntextContextString(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrVirtualKeyboardTextContextChangeInfoMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META} value to the {@link #type} field. */
+    /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META} value to the {@code type} field. */
     public XrVirtualKeyboardTextContextChangeInfoMETA type$Default() { return type(METAVirtualKeyboard.XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrVirtualKeyboardTextContextChangeInfoMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified encoded string to the {@link #textContext} field. */
+    /** Sets the address of the specified encoded string to the {@code textContext} field. */
     public XrVirtualKeyboardTextContextChangeInfoMETA textContext(@NativeType("char const *") ByteBuffer value) { ntextContext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -321,26 +304,26 @@ public class XrVirtualKeyboardTextContextChangeInfoMETA extends Struct<XrVirtual
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrVirtualKeyboardTextContextChangeInfoMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrVirtualKeyboardTextContextChangeInfoMETA.ntype(address()); }
-        /** @return the value of the {@link XrVirtualKeyboardTextContextChangeInfoMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrVirtualKeyboardTextContextChangeInfoMETA.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link XrVirtualKeyboardTextContextChangeInfoMETA#textContext} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code textContext} field. */
         @NativeType("char const *")
         public ByteBuffer textContext() { return XrVirtualKeyboardTextContextChangeInfoMETA.ntextContext(address()); }
-        /** @return the null-terminated string pointed to by the {@link XrVirtualKeyboardTextContextChangeInfoMETA#textContext} field. */
+        /** @return the null-terminated string pointed to by the {@code textContext} field. */
         @NativeType("char const *")
         public String textContextString() { return XrVirtualKeyboardTextContextChangeInfoMETA.ntextContextString(address()); }
 
-        /** Sets the specified value to the {@link XrVirtualKeyboardTextContextChangeInfoMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrVirtualKeyboardTextContextChangeInfoMETA.Buffer type(@NativeType("XrStructureType") int value) { XrVirtualKeyboardTextContextChangeInfoMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META} value to the {@link XrVirtualKeyboardTextContextChangeInfoMETA#type} field. */
+        /** Sets the {@link METAVirtualKeyboard#XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META} value to the {@code type} field. */
         public XrVirtualKeyboardTextContextChangeInfoMETA.Buffer type$Default() { return type(METAVirtualKeyboard.XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META); }
-        /** Sets the specified value to the {@link XrVirtualKeyboardTextContextChangeInfoMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrVirtualKeyboardTextContextChangeInfoMETA.Buffer next(@NativeType("void const *") long value) { XrVirtualKeyboardTextContextChangeInfoMETA.nnext(address(), value); return this; }
-        /** Sets the address of the specified encoded string to the {@link XrVirtualKeyboardTextContextChangeInfoMETA#textContext} field. */
+        /** Sets the address of the specified encoded string to the {@code textContext} field. */
         public XrVirtualKeyboardTextContextChangeInfoMETA.Buffer textContext(@NativeType("char const *") ByteBuffer value) { XrVirtualKeyboardTextContextChangeInfoMETA.ntextContext(address(), value); return this; }
 
     }

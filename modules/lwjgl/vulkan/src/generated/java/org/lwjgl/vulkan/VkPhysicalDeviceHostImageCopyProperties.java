@@ -19,39 +19,17 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * Structure enumerating image layouts supported by an implementation for host memory copies.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceHostImageCopyProperties} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <p>If {@code pCopyDstLayouts} is {@code NULL}, then the number of image layouts that are supported in {@link VkCopyMemoryToImageInfo}{@code ::dstImageLayout} and {@link VkCopyImageToImageInfo}{@code ::dstImageLayout} is returned in {@code copyDstLayoutCount}. Otherwise, {@code copyDstLayoutCount} <b>must</b> be set by the application to the number of elements in the {@code pCopyDstLayouts} array, and on return the variable is overwritten with the number of values actually written to {@code pCopyDstLayouts}. If the value of {@code copyDstLayoutCount} is less than the number of image layouts that are supported, at most {@code copyDstLayoutCount} values will be written to {@code pCopyDstLayouts}. The implementation <b>must</b> include the {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} image layout in {@code pCopyDstLayouts}.</p>
- * 
- * <p>If {@code pCopySrcLayouts} is {@code NULL}, then the number of image layouts that are supported in {@link VkCopyImageToMemoryInfo}{@code ::srcImageLayout} and {@link VkCopyImageToImageInfo}{@code ::srcImageLayout} is returned in {@code copySrcLayoutCount}. Otherwise, {@code copySrcLayoutCount} <b>must</b> be set by the application to the number of elements in the {@code pCopySrcLayouts} array, and on return the variable is overwritten with the number of values actually written to {@code pCopySrcLayouts}. If the value of {@code copySrcLayoutCount} is less than the number of image layouts that are supported, at most {@code copySrcLayoutCount} values will be written to {@code pCopySrcLayouts}. The implementation <b>must</b> include the {@link VK10#VK_IMAGE_LAYOUT_GENERAL IMAGE_LAYOUT_GENERAL} image layout in {@code pCopySrcLayouts}.</p>
- * 
- * <p>The {@code optimalTilingLayoutUUID} value can be used to ensure compatible data layouts when using the {@link VK14#VK_HOST_IMAGE_COPY_MEMCPY HOST_IMAGE_COPY_MEMCPY} flag in {@link VK14#vkCopyMemoryToImage CopyMemoryToImage} and {@link VK14#vkCopyImageToMemory CopyImageToMemory}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES}</li>
- * <li>If {@code copySrcLayoutCount} is not 0, and {@code pCopySrcLayouts} is not {@code NULL}, {@code pCopySrcLayouts} <b>must</b> be a valid pointer to an array of {@code copySrcLayoutCount} {@code VkImageLayout} values</li>
- * <li>If {@code copyDstLayoutCount} is not 0, and {@code pCopyDstLayouts} is not {@code NULL}, {@code pCopyDstLayouts} <b>must</b> be a valid pointer to an array of {@code copyDstLayoutCount} {@code VkImageLayout} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceHostImageCopyProperties {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint32_t {@link #copySrcLayoutCount};
- *     VkImageLayout * {@link #pCopySrcLayouts};
- *     uint32_t {@link #copyDstLayoutCount};
- *     VkImageLayout * {@link #pCopyDstLayouts};
- *     uint8_t {@link #optimalTilingLayoutUUID}[VK_UUID_SIZE];
- *     VkBool32 {@link #identicalMemoryTypeRequirements};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint32_t copySrcLayoutCount;
+ *     VkImageLayout * pCopySrcLayouts;
+ *     uint32_t copyDstLayoutCount;
+ *     VkImageLayout * pCopyDstLayouts;
+ *     uint8_t optimalTilingLayoutUUID[VK_UUID_SIZE];
+ *     VkBool32 identicalMemoryTypeRequirements;
+ * }}</pre>
  */
 public class VkPhysicalDeviceHostImageCopyProperties extends Struct<VkPhysicalDeviceHostImageCopyProperties> implements NativeResource {
 
@@ -119,53 +97,53 @@ public class VkPhysicalDeviceHostImageCopyProperties extends Struct<VkPhysicalDe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** an integer related to the number of image layouts for host copies from images available or queried, as described below. */
+    /** @return the value of the {@code copySrcLayoutCount} field. */
     @NativeType("uint32_t")
     public int copySrcLayoutCount() { return ncopySrcLayoutCount(address()); }
-    /** a pointer to an array of {@code VkImageLayout} in which supported image layouts for use with host copy operations from images are returned. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCopySrcLayouts} field. */
     @NativeType("VkImageLayout *")
     public @Nullable IntBuffer pCopySrcLayouts() { return npCopySrcLayouts(address()); }
-    /** an integer related to the number of image layouts for host copies to images available or queried, as described below. */
+    /** @return the value of the {@code copyDstLayoutCount} field. */
     @NativeType("uint32_t")
     public int copyDstLayoutCount() { return ncopyDstLayoutCount(address()); }
-    /** a pointer to an array of {@code VkImageLayout} in which supported image layouts for use with host copy operations to images are returned. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCopyDstLayouts} field. */
     @NativeType("VkImageLayout *")
     public @Nullable IntBuffer pCopyDstLayouts() { return npCopyDstLayouts(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the implementation’s swizzling layout of images created with {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. */
+    /** @return a {@link ByteBuffer} view of the {@code optimalTilingLayoutUUID} field. */
     @NativeType("uint8_t[VK_UUID_SIZE]")
     public ByteBuffer optimalTilingLayoutUUID() { return noptimalTilingLayoutUUID(address()); }
-    /** an array of {@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values representing a universally unique identifier for the implementation’s swizzling layout of images created with {@link VK10#VK_IMAGE_TILING_OPTIMAL IMAGE_TILING_OPTIMAL}. */
+    /** @return the value at the specified index of the {@code optimalTilingLayoutUUID} field. */
     @NativeType("uint8_t")
     public byte optimalTilingLayoutUUID(int index) { return noptimalTilingLayoutUUID(address(), index); }
-    /** indicates that specifying the {@link VK14#VK_IMAGE_USAGE_HOST_TRANSFER_BIT IMAGE_USAGE_HOST_TRANSFER_BIT} flag in {@link VkImageCreateInfo}{@code ::usage} does not affect the memory type requirements of the image. */
+    /** @return the value of the {@code identicalMemoryTypeRequirements} field. */
     @NativeType("VkBool32")
     public boolean identicalMemoryTypeRequirements() { return nidenticalMemoryTypeRequirements(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceHostImageCopyProperties sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES} value to the {@code sType} field. */
     public VkPhysicalDeviceHostImageCopyProperties sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceHostImageCopyProperties pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #copySrcLayoutCount} field. */
+    /** Sets the specified value to the {@code copySrcLayoutCount} field. */
     public VkPhysicalDeviceHostImageCopyProperties copySrcLayoutCount(@NativeType("uint32_t") int value) { ncopySrcLayoutCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pCopySrcLayouts} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pCopySrcLayouts} field. */
     public VkPhysicalDeviceHostImageCopyProperties pCopySrcLayouts(@Nullable @NativeType("VkImageLayout *") IntBuffer value) { npCopySrcLayouts(address(), value); return this; }
-    /** Sets the specified value to the {@link #copyDstLayoutCount} field. */
+    /** Sets the specified value to the {@code copyDstLayoutCount} field. */
     public VkPhysicalDeviceHostImageCopyProperties copyDstLayoutCount(@NativeType("uint32_t") int value) { ncopyDstLayoutCount(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pCopyDstLayouts} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pCopyDstLayouts} field. */
     public VkPhysicalDeviceHostImageCopyProperties pCopyDstLayouts(@Nullable @NativeType("VkImageLayout *") IntBuffer value) { npCopyDstLayouts(address(), value); return this; }
-    /** Copies the specified {@link ByteBuffer} to the {@link #optimalTilingLayoutUUID} field. */
+    /** Copies the specified {@link ByteBuffer} to the {@code optimalTilingLayoutUUID} field. */
     public VkPhysicalDeviceHostImageCopyProperties optimalTilingLayoutUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { noptimalTilingLayoutUUID(address(), value); return this; }
-    /** Sets the specified value at the specified index of the {@link #optimalTilingLayoutUUID} field. */
+    /** Sets the specified value at the specified index of the {@code optimalTilingLayoutUUID} field. */
     public VkPhysicalDeviceHostImageCopyProperties optimalTilingLayoutUUID(int index, @NativeType("uint8_t") byte value) { noptimalTilingLayoutUUID(address(), index, value); return this; }
-    /** Sets the specified value to the {@link #identicalMemoryTypeRequirements} field. */
+    /** Sets the specified value to the {@code identicalMemoryTypeRequirements} field. */
     public VkPhysicalDeviceHostImageCopyProperties identicalMemoryTypeRequirements(@NativeType("VkBool32") boolean value) { nidenticalMemoryTypeRequirements(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -402,53 +380,53 @@ public class VkPhysicalDeviceHostImageCopyProperties extends Struct<VkPhysicalDe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceHostImageCopyProperties#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceHostImageCopyProperties.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceHostImageCopyProperties#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceHostImageCopyProperties.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceHostImageCopyProperties#copySrcLayoutCount} field. */
+        /** @return the value of the {@code copySrcLayoutCount} field. */
         @NativeType("uint32_t")
         public int copySrcLayoutCount() { return VkPhysicalDeviceHostImageCopyProperties.ncopySrcLayoutCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPhysicalDeviceHostImageCopyProperties#pCopySrcLayouts} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCopySrcLayouts} field. */
         @NativeType("VkImageLayout *")
         public @Nullable IntBuffer pCopySrcLayouts() { return VkPhysicalDeviceHostImageCopyProperties.npCopySrcLayouts(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceHostImageCopyProperties#copyDstLayoutCount} field. */
+        /** @return the value of the {@code copyDstLayoutCount} field. */
         @NativeType("uint32_t")
         public int copyDstLayoutCount() { return VkPhysicalDeviceHostImageCopyProperties.ncopyDstLayoutCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkPhysicalDeviceHostImageCopyProperties#pCopyDstLayouts} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pCopyDstLayouts} field. */
         @NativeType("VkImageLayout *")
         public @Nullable IntBuffer pCopyDstLayouts() { return VkPhysicalDeviceHostImageCopyProperties.npCopyDstLayouts(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link VkPhysicalDeviceHostImageCopyProperties#optimalTilingLayoutUUID} field. */
+        /** @return a {@link ByteBuffer} view of the {@code optimalTilingLayoutUUID} field. */
         @NativeType("uint8_t[VK_UUID_SIZE]")
         public ByteBuffer optimalTilingLayoutUUID() { return VkPhysicalDeviceHostImageCopyProperties.noptimalTilingLayoutUUID(address()); }
-        /** @return the value at the specified index of the {@link VkPhysicalDeviceHostImageCopyProperties#optimalTilingLayoutUUID} field. */
+        /** @return the value at the specified index of the {@code optimalTilingLayoutUUID} field. */
         @NativeType("uint8_t")
         public byte optimalTilingLayoutUUID(int index) { return VkPhysicalDeviceHostImageCopyProperties.noptimalTilingLayoutUUID(address(), index); }
-        /** @return the value of the {@link VkPhysicalDeviceHostImageCopyProperties#identicalMemoryTypeRequirements} field. */
+        /** @return the value of the {@code identicalMemoryTypeRequirements} field. */
         @NativeType("VkBool32")
         public boolean identicalMemoryTypeRequirements() { return VkPhysicalDeviceHostImageCopyProperties.nidenticalMemoryTypeRequirements(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceHostImageCopyProperties#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceHostImageCopyProperties.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES} value to the {@link VkPhysicalDeviceHostImageCopyProperties#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES} value to the {@code sType} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_IMAGE_COPY_PROPERTIES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceHostImageCopyProperties#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceHostImageCopyProperties.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceHostImageCopyProperties#copySrcLayoutCount} field. */
+        /** Sets the specified value to the {@code copySrcLayoutCount} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer copySrcLayoutCount(@NativeType("uint32_t") int value) { VkPhysicalDeviceHostImageCopyProperties.ncopySrcLayoutCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkPhysicalDeviceHostImageCopyProperties#pCopySrcLayouts} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pCopySrcLayouts} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer pCopySrcLayouts(@Nullable @NativeType("VkImageLayout *") IntBuffer value) { VkPhysicalDeviceHostImageCopyProperties.npCopySrcLayouts(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceHostImageCopyProperties#copyDstLayoutCount} field. */
+        /** Sets the specified value to the {@code copyDstLayoutCount} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer copyDstLayoutCount(@NativeType("uint32_t") int value) { VkPhysicalDeviceHostImageCopyProperties.ncopyDstLayoutCount(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkPhysicalDeviceHostImageCopyProperties#pCopyDstLayouts} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pCopyDstLayouts} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer pCopyDstLayouts(@Nullable @NativeType("VkImageLayout *") IntBuffer value) { VkPhysicalDeviceHostImageCopyProperties.npCopyDstLayouts(address(), value); return this; }
-        /** Copies the specified {@link ByteBuffer} to the {@link VkPhysicalDeviceHostImageCopyProperties#optimalTilingLayoutUUID} field. */
+        /** Copies the specified {@link ByteBuffer} to the {@code optimalTilingLayoutUUID} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer optimalTilingLayoutUUID(@NativeType("uint8_t[VK_UUID_SIZE]") ByteBuffer value) { VkPhysicalDeviceHostImageCopyProperties.noptimalTilingLayoutUUID(address(), value); return this; }
-        /** Sets the specified value at the specified index of the {@link VkPhysicalDeviceHostImageCopyProperties#optimalTilingLayoutUUID} field. */
+        /** Sets the specified value at the specified index of the {@code optimalTilingLayoutUUID} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer optimalTilingLayoutUUID(int index, @NativeType("uint8_t") byte value) { VkPhysicalDeviceHostImageCopyProperties.noptimalTilingLayoutUUID(address(), index, value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceHostImageCopyProperties#identicalMemoryTypeRequirements} field. */
+        /** Sets the specified value to the {@code identicalMemoryTypeRequirements} field. */
         public VkPhysicalDeviceHostImageCopyProperties.Buffer identicalMemoryTypeRequirements(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceHostImageCopyProperties.nidenticalMemoryTypeRequirements(address(), value ? 1 : 0); return this; }
 
     }

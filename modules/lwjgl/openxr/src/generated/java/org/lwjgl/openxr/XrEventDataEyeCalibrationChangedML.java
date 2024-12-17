@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Event containing the latest eye calibration state.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLUserCalibration XR_ML_user_calibration} extension <b>must</b> be enabled prior to using {@link XrEventDataEyeCalibrationChangedML}</li>
- * <li>{@code type} <b>must</b> be {@link MLUserCalibration#XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLUserCalibration#xrEnableUserCalibrationEventsML EnableUserCalibrationEventsML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataEyeCalibrationChangedML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrEyeCalibrationStatusML {@link #status};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrEyeCalibrationStatusML status;
+ * }}</pre>
  */
 public class XrEventDataEyeCalibrationChangedML extends Struct<XrEventDataEyeCalibrationChangedML> implements NativeResource {
 
@@ -90,21 +74,21 @@ public class XrEventDataEyeCalibrationChangedML extends Struct<XrEventDataEyeCal
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrEyeCalibrationStatusML} eye calibration status. */
+    /** @return the value of the {@code status} field. */
     @NativeType("XrEyeCalibrationStatusML")
     public int status() { return nstatus(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataEyeCalibrationChangedML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLUserCalibration#XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLUserCalibration#XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML} value to the {@code type} field. */
     public XrEventDataEyeCalibrationChangedML type$Default() { return type(MLUserCalibration.XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataEyeCalibrationChangedML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -306,21 +290,21 @@ public class XrEventDataEyeCalibrationChangedML extends Struct<XrEventDataEyeCal
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataEyeCalibrationChangedML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataEyeCalibrationChangedML.ntype(address()); }
-        /** @return the value of the {@link XrEventDataEyeCalibrationChangedML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataEyeCalibrationChangedML.nnext(address()); }
-        /** @return the value of the {@link XrEventDataEyeCalibrationChangedML#status} field. */
+        /** @return the value of the {@code status} field. */
         @NativeType("XrEyeCalibrationStatusML")
         public int status() { return XrEventDataEyeCalibrationChangedML.nstatus(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataEyeCalibrationChangedML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataEyeCalibrationChangedML.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataEyeCalibrationChangedML.ntype(address(), value); return this; }
-        /** Sets the {@link MLUserCalibration#XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML} value to the {@link XrEventDataEyeCalibrationChangedML#type} field. */
+        /** Sets the {@link MLUserCalibration#XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML} value to the {@code type} field. */
         public XrEventDataEyeCalibrationChangedML.Buffer type$Default() { return type(MLUserCalibration.XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML); }
-        /** Sets the specified value to the {@link XrEventDataEyeCalibrationChangedML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataEyeCalibrationChangedML.Buffer next(@NativeType("void const *") long value) { XrEventDataEyeCalibrationChangedML.nnext(address(), value); return this; }
 
     }

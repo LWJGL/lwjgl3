@@ -17,46 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify parameters of a tag to attach to an object.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code tagName} parameter gives a name or identifier to the type of data being tagged. This can be used by debugging layers to easily filter for only data that can be used by that implementation.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code objectType} <b>must</b> not be {@link EXTDebugReport#VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT}</li>
- * <li>{@code object} <b>must</b> not be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>{@code object} <b>must</b> be a Vulkan object of the type associated with {@code objectType} as defined in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#debug-report-object-types">{@code VkDebugReportObjectTypeEXT} and Vulkan Handle Relationship</a></li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code objectType} <b>must</b> be a valid {@code VkDebugReportObjectTypeEXT} value</li>
- * <li>{@code pTag} <b>must</b> be a valid pointer to an array of {@code tagSize} bytes</li>
- * <li>{@code tagSize} <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDebugMarker#vkDebugMarkerSetObjectTagEXT DebugMarkerSetObjectTagEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDebugMarkerObjectTagInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDebugReportObjectTypeEXT {@link #objectType};
- *     uint64_t {@link #object};
- *     uint64_t {@link #tagName};
- *     size_t {@link #tagSize};
- *     void const * {@link #pTag};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDebugReportObjectTypeEXT objectType;
+ *     uint64_t object;
+ *     uint64_t tagName;
+ *     size_t tagSize;
+ *     void const * pTag;
+ * }}</pre>
  */
 public class VkDebugMarkerObjectTagInfoEXT extends Struct<VkDebugMarkerObjectTagInfoEXT> implements NativeResource {
 
@@ -121,41 +91,41 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct<VkDebugMarkerObjectTag
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkDebugReportObjectTypeEXT} specifying the type of the object to be named. */
+    /** @return the value of the {@code objectType} field. */
     @NativeType("VkDebugReportObjectTypeEXT")
     public int objectType() { return nobjectType(address()); }
-    /** the object to be tagged. */
+    /** @return the value of the {@code object} field. */
     @NativeType("uint64_t")
     public long object() { return nobject(address()); }
-    /** a numerical identifier of the tag. */
+    /** @return the value of the {@code tagName} field. */
     @NativeType("uint64_t")
     public long tagName() { return ntagName(address()); }
-    /** the number of bytes of data to attach to the object. */
+    /** @return the value of the {@code tagSize} field. */
     @NativeType("size_t")
     public long tagSize() { return ntagSize(address()); }
-    /** a pointer to an array of {@code tagSize} bytes containing the data to be associated with the object. */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pTag} field. */
     @NativeType("void const *")
     public ByteBuffer pTag() { return npTag(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDebugMarkerObjectTagInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT} value to the {@code sType} field. */
     public VkDebugMarkerObjectTagInfoEXT sType$Default() { return sType(EXTDebugMarker.VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDebugMarkerObjectTagInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #objectType} field. */
+    /** Sets the specified value to the {@code objectType} field. */
     public VkDebugMarkerObjectTagInfoEXT objectType(@NativeType("VkDebugReportObjectTypeEXT") int value) { nobjectType(address(), value); return this; }
-    /** Sets the specified value to the {@link #object} field. */
+    /** Sets the specified value to the {@code object} field. */
     public VkDebugMarkerObjectTagInfoEXT object(@NativeType("uint64_t") long value) { nobject(address(), value); return this; }
-    /** Sets the specified value to the {@link #tagName} field. */
+    /** Sets the specified value to the {@code tagName} field. */
     public VkDebugMarkerObjectTagInfoEXT tagName(@NativeType("uint64_t") long value) { ntagName(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pTag} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pTag} field. */
     public VkDebugMarkerObjectTagInfoEXT pTag(@NativeType("void const *") ByteBuffer value) { npTag(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -401,41 +371,41 @@ public class VkDebugMarkerObjectTagInfoEXT extends Struct<VkDebugMarkerObjectTag
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDebugMarkerObjectTagInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDebugMarkerObjectTagInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkDebugMarkerObjectTagInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDebugMarkerObjectTagInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkDebugMarkerObjectTagInfoEXT#objectType} field. */
+        /** @return the value of the {@code objectType} field. */
         @NativeType("VkDebugReportObjectTypeEXT")
         public int objectType() { return VkDebugMarkerObjectTagInfoEXT.nobjectType(address()); }
-        /** @return the value of the {@link VkDebugMarkerObjectTagInfoEXT#object} field. */
+        /** @return the value of the {@code object} field. */
         @NativeType("uint64_t")
         public long object() { return VkDebugMarkerObjectTagInfoEXT.nobject(address()); }
-        /** @return the value of the {@link VkDebugMarkerObjectTagInfoEXT#tagName} field. */
+        /** @return the value of the {@code tagName} field. */
         @NativeType("uint64_t")
         public long tagName() { return VkDebugMarkerObjectTagInfoEXT.ntagName(address()); }
-        /** @return the value of the {@link VkDebugMarkerObjectTagInfoEXT#tagSize} field. */
+        /** @return the value of the {@code tagSize} field. */
         @NativeType("size_t")
         public long tagSize() { return VkDebugMarkerObjectTagInfoEXT.ntagSize(address()); }
-        /** @return a {@link ByteBuffer} view of the data pointed to by the {@link VkDebugMarkerObjectTagInfoEXT#pTag} field. */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pTag} field. */
         @NativeType("void const *")
         public ByteBuffer pTag() { return VkDebugMarkerObjectTagInfoEXT.npTag(address()); }
 
-        /** Sets the specified value to the {@link VkDebugMarkerObjectTagInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkDebugMarkerObjectTagInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT} value to the {@link VkDebugMarkerObjectTagInfoEXT#sType} field. */
+        /** Sets the {@link EXTDebugMarker#VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT} value to the {@code sType} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer sType$Default() { return sType(EXTDebugMarker.VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT); }
-        /** Sets the specified value to the {@link VkDebugMarkerObjectTagInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkDebugMarkerObjectTagInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugMarkerObjectTagInfoEXT#objectType} field. */
+        /** Sets the specified value to the {@code objectType} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer objectType(@NativeType("VkDebugReportObjectTypeEXT") int value) { VkDebugMarkerObjectTagInfoEXT.nobjectType(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugMarkerObjectTagInfoEXT#object} field. */
+        /** Sets the specified value to the {@code object} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer object(@NativeType("uint64_t") long value) { VkDebugMarkerObjectTagInfoEXT.nobject(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDebugMarkerObjectTagInfoEXT#tagName} field. */
+        /** Sets the specified value to the {@code tagName} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer tagName(@NativeType("uint64_t") long value) { VkDebugMarkerObjectTagInfoEXT.ntagName(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkDebugMarkerObjectTagInfoEXT#pTag} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pTag} field. */
         public VkDebugMarkerObjectTagInfoEXT.Buffer pTag(@NativeType("void const *") ByteBuffer value) { VkDebugMarkerObjectTagInfoEXT.npTag(address(), value); return this; }
 
     }

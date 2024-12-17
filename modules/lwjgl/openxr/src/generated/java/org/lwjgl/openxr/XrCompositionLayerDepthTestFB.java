@@ -16,34 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * specifies depth test for composition layer.
- * 
- * <h5>Description</h5>
- * 
- * <p>To specify that a layer should be depth tested, a {@link XrCompositionLayerDepthTestFB} structure <b>must</b> be passed via the polymorphic {@link XrCompositionLayerBaseHeader} structure’s {@code next} parameter chain.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBCompositionLayerDepthTest XR_FB_composition_layer_depth_test} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerDepthTestFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code compareOp} <b>must</b> be a valid {@code XrCompareOpFB} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrCompositionLayerBaseHeader}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerDepthTestFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrBool32 {@link #depthMask};
- *     XrCompareOpFB {@link #compareOp};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrBool32 depthMask;
+ *     XrCompareOpFB compareOp;
+ * }}</pre>
  */
 public class XrCompositionLayerDepthTestFB extends Struct<XrCompositionLayerDepthTestFB> implements NativeResource {
 
@@ -99,28 +78,28 @@ public class XrCompositionLayerDepthTestFB extends Struct<XrCompositionLayerDept
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a boolean indicating whether writes to the composition depth buffer are enabled. */
+    /** @return the value of the {@code depthMask} field. */
     @NativeType("XrBool32")
     public boolean depthMask() { return ndepthMask(address()) != 0; }
-    /** an enum that indicates which compare operation is used in the depth test. */
+    /** @return the value of the {@code compareOp} field. */
     @NativeType("XrCompareOpFB")
     public int compareOp() { return ncompareOp(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerDepthTestFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB} value to the {@code type} field. */
     public XrCompositionLayerDepthTestFB type$Default() { return type(FBCompositionLayerDepthTest.XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerDepthTestFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #depthMask} field. */
+    /** Sets the specified value to the {@code depthMask} field. */
     public XrCompositionLayerDepthTestFB depthMask(@NativeType("XrBool32") boolean value) { ndepthMask(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #compareOp} field. */
+    /** Sets the specified value to the {@code compareOp} field. */
     public XrCompositionLayerDepthTestFB compareOp(@NativeType("XrCompareOpFB") int value) { ncompareOp(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,28 +301,28 @@ public class XrCompositionLayerDepthTestFB extends Struct<XrCompositionLayerDept
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerDepthTestFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerDepthTestFB.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthTestFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerDepthTestFB.nnext(address()); }
-        /** @return the value of the {@link XrCompositionLayerDepthTestFB#depthMask} field. */
+        /** @return the value of the {@code depthMask} field. */
         @NativeType("XrBool32")
         public boolean depthMask() { return XrCompositionLayerDepthTestFB.ndepthMask(address()) != 0; }
-        /** @return the value of the {@link XrCompositionLayerDepthTestFB#compareOp} field. */
+        /** @return the value of the {@code compareOp} field. */
         @NativeType("XrCompareOpFB")
         public int compareOp() { return XrCompositionLayerDepthTestFB.ncompareOp(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerDepthTestFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerDepthTestFB.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerDepthTestFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB} value to the {@link XrCompositionLayerDepthTestFB#type} field. */
+        /** Sets the {@link FBCompositionLayerDepthTest#XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB} value to the {@code type} field. */
         public XrCompositionLayerDepthTestFB.Buffer type$Default() { return type(FBCompositionLayerDepthTest.XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB); }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthTestFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerDepthTestFB.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerDepthTestFB.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthTestFB#depthMask} field. */
+        /** Sets the specified value to the {@code depthMask} field. */
         public XrCompositionLayerDepthTestFB.Buffer depthMask(@NativeType("XrBool32") boolean value) { XrCompositionLayerDepthTestFB.ndepthMask(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link XrCompositionLayerDepthTestFB#compareOp} field. */
+        /** Sets the specified value to the {@code compareOp} field. */
         public XrCompositionLayerDepthTestFB.Buffer compareOp(@NativeType("XrCompareOpFB") int value) { XrCompositionLayerDepthTestFB.ncompareOp(address(), value); return this; }
 
     }

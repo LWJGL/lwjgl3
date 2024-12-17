@@ -16,18 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Data type for holding variation data.
- * 
- * <p>Registered OpenType variation-axis tags are listed in
- * <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg">OpenType Axis Tag Registry</a>.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hb_variation_t {
- *     hb_tag_t {@link #tag};
- *     float {@link #value};
- * }</code></pre>
+ *     hb_tag_t tag;
+ *     float value;
+ * }}</pre>
  */
 public class hb_variation_t extends Struct<hb_variation_t> implements NativeResource {
 
@@ -77,15 +70,15 @@ public class hb_variation_t extends Struct<hb_variation_t> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code hb_tag_t} tag of the variation-axis name */
+    /** @return the value of the {@code tag} field. */
     @NativeType("hb_tag_t")
     public int tag() { return ntag(address()); }
-    /** the value of the variation axis */
+    /** @return the value of the {@code value} field. */
     public float value() { return nvalue(address()); }
 
-    /** Sets the specified value to the {@link #tag} field. */
+    /** Sets the specified value to the {@code tag} field. */
     public hb_variation_t tag(@NativeType("hb_tag_t") int value) { ntag(address(), value); return this; }
-    /** Sets the specified value to the {@link #value} field. */
+    /** Sets the specified value to the {@code value} field. */
     public hb_variation_t value(float value) { nvalue(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -275,15 +268,15 @@ public class hb_variation_t extends Struct<hb_variation_t> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link hb_variation_t#tag} field. */
+        /** @return the value of the {@code tag} field. */
         @NativeType("hb_tag_t")
         public int tag() { return hb_variation_t.ntag(address()); }
-        /** @return the value of the {@link hb_variation_t#value} field. */
+        /** @return the value of the {@code value} field. */
         public float value() { return hb_variation_t.nvalue(address()); }
 
-        /** Sets the specified value to the {@link hb_variation_t#tag} field. */
+        /** Sets the specified value to the {@code tag} field. */
         public hb_variation_t.Buffer tag(@NativeType("hb_tag_t") int value) { hb_variation_t.ntag(address(), value); return this; }
-        /** Sets the specified value to the {@link hb_variation_t#value} field. */
+        /** Sets the specified value to the {@code value} field. */
         public hb_variation_t.Buffer value(float value) { hb_variation_t.nvalue(address(), value); return this; }
 
     }

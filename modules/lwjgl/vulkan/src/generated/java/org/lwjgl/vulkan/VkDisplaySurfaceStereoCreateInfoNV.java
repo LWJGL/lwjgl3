@@ -16,23 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying stereo parameters of a newly created display plane surface object.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVDisplayStereo#VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV}</li>
- * <li>{@code stereoType} <b>must</b> be a valid {@code VkDisplaySurfaceStereoTypeNV} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDisplaySurfaceStereoCreateInfoNV {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDisplaySurfaceStereoTypeNV {@link #stereoType};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDisplaySurfaceStereoTypeNV stereoType;
+ * }}</pre>
  */
 public class VkDisplaySurfaceStereoCreateInfoNV extends Struct<VkDisplaySurfaceStereoCreateInfoNV> implements NativeResource {
 
@@ -85,23 +74,23 @@ public class VkDisplaySurfaceStereoCreateInfoNV extends Struct<VkDisplaySurfaceS
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkDisplaySurfaceStereoTypeNV} value specifying the type of 3D stereo presentation the display will be configured for. */
+    /** @return the value of the {@code stereoType} field. */
     @NativeType("VkDisplaySurfaceStereoTypeNV")
     public int stereoType() { return nstereoType(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkDisplaySurfaceStereoCreateInfoNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVDisplayStereo#VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVDisplayStereo#VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV} value to the {@code sType} field. */
     public VkDisplaySurfaceStereoCreateInfoNV sType$Default() { return sType(NVDisplayStereo.VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkDisplaySurfaceStereoCreateInfoNV pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #stereoType} field. */
+    /** Sets the specified value to the {@code stereoType} field. */
     public VkDisplaySurfaceStereoCreateInfoNV stereoType(@NativeType("VkDisplaySurfaceStereoTypeNV") int value) { nstereoType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -297,23 +286,23 @@ public class VkDisplaySurfaceStereoCreateInfoNV extends Struct<VkDisplaySurfaceS
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkDisplaySurfaceStereoCreateInfoNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkDisplaySurfaceStereoCreateInfoNV.nsType(address()); }
-        /** @return the value of the {@link VkDisplaySurfaceStereoCreateInfoNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkDisplaySurfaceStereoCreateInfoNV.npNext(address()); }
-        /** @return the value of the {@link VkDisplaySurfaceStereoCreateInfoNV#stereoType} field. */
+        /** @return the value of the {@code stereoType} field. */
         @NativeType("VkDisplaySurfaceStereoTypeNV")
         public int stereoType() { return VkDisplaySurfaceStereoCreateInfoNV.nstereoType(address()); }
 
-        /** Sets the specified value to the {@link VkDisplaySurfaceStereoCreateInfoNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkDisplaySurfaceStereoCreateInfoNV.Buffer sType(@NativeType("VkStructureType") int value) { VkDisplaySurfaceStereoCreateInfoNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVDisplayStereo#VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV} value to the {@link VkDisplaySurfaceStereoCreateInfoNV#sType} field. */
+        /** Sets the {@link NVDisplayStereo#VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV} value to the {@code sType} field. */
         public VkDisplaySurfaceStereoCreateInfoNV.Buffer sType$Default() { return sType(NVDisplayStereo.VK_STRUCTURE_TYPE_DISPLAY_SURFACE_STEREO_CREATE_INFO_NV); }
-        /** Sets the specified value to the {@link VkDisplaySurfaceStereoCreateInfoNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkDisplaySurfaceStereoCreateInfoNV.Buffer pNext(@NativeType("void const *") long value) { VkDisplaySurfaceStereoCreateInfoNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkDisplaySurfaceStereoCreateInfoNV#stereoType} field. */
+        /** Sets the specified value to the {@code stereoType} field. */
         public VkDisplaySurfaceStereoCreateInfoNV.Buffer stereoType(@NativeType("VkDisplaySurfaceStereoTypeNV") int value) { VkDisplaySurfaceStereoCreateInfoNV.nstereoType(address(), value); return this; }
 
     }

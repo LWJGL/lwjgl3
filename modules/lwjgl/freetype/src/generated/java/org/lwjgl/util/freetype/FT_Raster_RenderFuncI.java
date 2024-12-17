@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     FT_Raster raster,
- *     FT_Raster_Params const *params
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FT_Raster_RenderFunc} */
 @FunctionalInterface
 @NativeType("FT_Raster_RenderFunc")
 public interface FT_Raster_RenderFuncI extends CallbackI {
@@ -43,7 +35,7 @@ public interface FT_Raster_RenderFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /** Invoke a given raster to scan-convert a given glyph image into a target bitmap. */
+    /** {@code int (* FT_Raster_RenderFunc) (FT_Raster raster, FT_Raster_Params const * params)} */
     int invoke(@NativeType("FT_Raster") long raster, @NativeType("FT_Raster_Params const *") long params);
 
 }

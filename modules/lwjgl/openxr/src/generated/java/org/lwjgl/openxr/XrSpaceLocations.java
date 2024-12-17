@@ -17,34 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Returns an array of space locations.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSpaceLocations} structure contains an array of space locations in the member {@code locations}, to be used as output for {@link XR11#xrLocateSpaces LocateSpaces}. The application <b>must</b> allocate this array to be populated with the function output. The {@code locationCount} value <b>must</b> be the same as {@link XrSpacesLocateInfo}{@code ::spaceCount}, otherwise, the {@link XR11#xrLocateSpaces LocateSpaces} function <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR11#XR_TYPE_SPACE_LOCATIONS TYPE_SPACE_LOCATIONS}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSpaceVelocities}</li>
- * <li>{@code locations} <b>must</b> be a pointer to an array of {@code locationCount} {@link XrSpaceLocationData} structures</li>
- * <li>The {@code locationCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpaceLocationData}, {@link XR11#xrLocateSpaces LocateSpaces}, {@link KHRLocateSpaces#xrLocateSpacesKHR LocateSpacesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceLocations {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #locationCount};
- *     {@link XrSpaceLocationData XrSpaceLocationData} * {@link #locations};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t locationCount;
+ *     {@link XrSpaceLocationData XrSpaceLocationData} * locations;
+ * }}</pre>
  */
 public class XrSpaceLocations extends Struct<XrSpaceLocations> implements NativeResource {
 
@@ -100,30 +79,30 @@ public class XrSpaceLocations extends Struct<XrSpaceLocations> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain, such as {@link XrSpaceVelocities}. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} specifying the count of elements in the {@code locations} array. */
+    /** @return the value of the {@code locationCount} field. */
     @NativeType("uint32_t")
     public int locationCount() { return nlocationCount(address()); }
-    /** an array of {@link XrSpaceLocations} for the runtime to populate with the locations of the specified spaces in the {@link XrSpacesLocateInfo}{@code ::baseSpace} at the specified {@link XrSpacesLocateInfo}{@code ::time}. */
+    /** @return a {@link XrSpaceLocationData.Buffer} view of the struct array pointed to by the {@code locations} field. */
     @NativeType("XrSpaceLocationData *")
     public XrSpaceLocationData.Buffer locations() { return nlocations(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceLocations type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR11#XR_TYPE_SPACE_LOCATIONS TYPE_SPACE_LOCATIONS} value to the {@link #type} field. */
+    /** Sets the {@link XR11#XR_TYPE_SPACE_LOCATIONS TYPE_SPACE_LOCATIONS} value to the {@code type} field. */
     public XrSpaceLocations type$Default() { return type(XR11.XR_TYPE_SPACE_LOCATIONS); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceLocations next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrSpaceVelocities} value to the {@code next} chain. */
     public XrSpaceLocations next(XrSpaceVelocities value) { return this.next(value.next(this.next()).address()); }
     /** Prepends the specified {@link XrSpaceVelocitiesKHR} value to the {@code next} chain. */
     public XrSpaceLocations next(XrSpaceVelocitiesKHR value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the address of the specified {@link XrSpaceLocationData.Buffer} to the {@link #locations} field. */
+    /** Sets the address of the specified {@link XrSpaceLocationData.Buffer} to the {@code locations} field. */
     public XrSpaceLocations locations(@NativeType("XrSpaceLocationData *") XrSpaceLocationData.Buffer value) { nlocations(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -332,30 +311,30 @@ public class XrSpaceLocations extends Struct<XrSpaceLocations> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceLocations#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceLocations.ntype(address()); }
-        /** @return the value of the {@link XrSpaceLocations#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpaceLocations.nnext(address()); }
-        /** @return the value of the {@link XrSpaceLocations#locationCount} field. */
+        /** @return the value of the {@code locationCount} field. */
         @NativeType("uint32_t")
         public int locationCount() { return XrSpaceLocations.nlocationCount(address()); }
-        /** @return a {@link XrSpaceLocationData.Buffer} view of the struct array pointed to by the {@link XrSpaceLocations#locations} field. */
+        /** @return a {@link XrSpaceLocationData.Buffer} view of the struct array pointed to by the {@code locations} field. */
         @NativeType("XrSpaceLocationData *")
         public XrSpaceLocationData.Buffer locations() { return XrSpaceLocations.nlocations(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceLocations#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceLocations.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceLocations.ntype(address(), value); return this; }
-        /** Sets the {@link XR11#XR_TYPE_SPACE_LOCATIONS TYPE_SPACE_LOCATIONS} value to the {@link XrSpaceLocations#type} field. */
+        /** Sets the {@link XR11#XR_TYPE_SPACE_LOCATIONS TYPE_SPACE_LOCATIONS} value to the {@code type} field. */
         public XrSpaceLocations.Buffer type$Default() { return type(XR11.XR_TYPE_SPACE_LOCATIONS); }
-        /** Sets the specified value to the {@link XrSpaceLocations#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceLocations.Buffer next(@NativeType("void *") long value) { XrSpaceLocations.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrSpaceVelocities} value to the {@code next} chain. */
         public XrSpaceLocations.Buffer next(XrSpaceVelocities value) { return this.next(value.next(this.next()).address()); }
         /** Prepends the specified {@link XrSpaceVelocitiesKHR} value to the {@code next} chain. */
         public XrSpaceLocations.Buffer next(XrSpaceVelocitiesKHR value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the address of the specified {@link XrSpaceLocationData.Buffer} to the {@link XrSpaceLocations#locations} field. */
+        /** Sets the address of the specified {@link XrSpaceLocationData.Buffer} to the {@code locations} field. */
         public XrSpaceLocations.Buffer locations(@NativeType("XrSpaceLocationData *") XrSpaceLocationData.Buffer value) { XrSpaceLocations.nlocations(address(), value); return this; }
 
     }

@@ -12,21 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * KTX_error_code (*{@link #invoke}) (
- *     int miplevel,
- *     int face,
- *     int width,
- *     int height,
- *     int depth,
- *     ktx_uint64_t faceLodSize,
- *     void *pixels,
- *     void *userdata
- * )</code></pre>
- */
+/** Callback function: {@link #invoke PFNKTXITERCB} */
 @FunctionalInterface
 @NativeType("PFNKTXITERCB")
 public interface PFNKTXITERCBI extends CallbackI {
@@ -55,21 +41,7 @@ public interface PFNKTXITERCBI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * Signature of function called by the {@code ktxTexture_Iterate*} functions to receive image data.
-     * 
-     * <p>The function parameters are used to pass values which change for each image. Obtain values which are uniform across all images from the
-     * {@code ktxTexture} object.</p>
-     *
-     * @param miplevel    MIP level from 0 to the max level which is dependent on the texture size
-     * @param face        usually 0; for cube maps, one of the 6 cube faces in the order +X, -X, +Y, -Y, +Z, -Z, 0 to 5
-     * @param width       width of the image
-     * @param height      height of the image or, for 1D textures textures, 1
-     * @param depth       depth of the image or, for 1D &amp; 2D textures, 1
-     * @param faceLodSize number of bytes of data pointed at by {@code pixels}
-     * @param pixels      pointer to the image data
-     * @param userdata    pointer for the application to pass data to and from the callback function
-     */
+    /** {@code KTX_error_code (* PFNKTXITERCB) (int miplevel, int face, int width, int height, int depth, ktx_uint64_t faceLodSize, void * pixels, void * userdata)} */
     @NativeType("KTX_error_code") int invoke(int miplevel, int face, int width, int height, int depth, @NativeType("ktx_uint64_t") long faceLodSize, @NativeType("void *") long pixels, @NativeType("void *") long userdata);
 
 }

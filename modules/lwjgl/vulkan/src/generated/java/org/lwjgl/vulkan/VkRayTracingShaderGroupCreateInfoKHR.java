@@ -16,50 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying shaders in a shader group.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the pipeline is created with {@link KHRPipelineLibrary#VK_PIPELINE_CREATE_LIBRARY_BIT_KHR PIPELINE_CREATE_LIBRARY_BIT_KHR} and the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineLibraryGroupHandles">pipelineLibraryGroupHandles</a> feature is enabled, {@code pShaderGroupCaptureReplayHandle} is inherited by all pipelines which link against this pipeline and remains bitwise identical for any pipeline which references this pipeline library.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code type} is {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR} then {@code generalShader} <b>must</b> be a valid index into {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} referring to a shader of {@link KHRRayTracingPipeline#VK_SHADER_STAGE_RAYGEN_BIT_KHR SHADER_STAGE_RAYGEN_BIT_KHR}, {@link KHRRayTracingPipeline#VK_SHADER_STAGE_MISS_BIT_KHR SHADER_STAGE_MISS_BIT_KHR}, or {@link KHRRayTracingPipeline#VK_SHADER_STAGE_CALLABLE_BIT_KHR SHADER_STAGE_CALLABLE_BIT_KHR}</li>
- * <li>If {@code type} is {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR} then {@code closestHitShader}, {@code anyHitShader}, and {@code intersectionShader} <b>must</b> be {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR}</li>
- * <li>If {@code type} is {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR} then {@code intersectionShader} <b>must</b> be a valid index into {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} referring to a shader of {@link KHRRayTracingPipeline#VK_SHADER_STAGE_INTERSECTION_BIT_KHR SHADER_STAGE_INTERSECTION_BIT_KHR}</li>
- * <li>If {@code type} is {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR} then {@code intersectionShader} <b>must</b> be {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR}</li>
- * <li>{@code closestHitShader} <b>must</b> be either {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR} or a valid index into {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} referring to a shader of {@link KHRRayTracingPipeline#VK_SHADER_STAGE_CLOSEST_HIT_BIT_KHR SHADER_STAGE_CLOSEST_HIT_BIT_KHR}</li>
- * <li>{@code anyHitShader} <b>must</b> be either {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR} or a valid index into {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} referring to a shader of {@link KHRRayTracingPipeline#VK_SHADER_STAGE_ANY_HIT_BIT_KHR SHADER_STAGE_ANY_HIT_BIT_KHR}</li>
- * <li>If {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR}{@code ::rayTracingPipelineShaderGroupHandleCaptureReplayMixed} is {@link VK10#VK_FALSE FALSE} then {@code pShaderGroupCaptureReplayHandle} <b>must</b> not be provided if it has not been provided on a previous call to ray tracing pipeline creation</li>
- * <li>If {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR}{@code ::rayTracingPipelineShaderGroupHandleCaptureReplayMixed} is {@link VK10#VK_FALSE FALSE} then the caller <b>must</b> guarantee that no ray tracing pipeline creation commands with {@code pShaderGroupCaptureReplayHandle} provided execute simultaneously with ray tracing pipeline creation commands without {@code pShaderGroupCaptureReplayHandle} provided</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code type} <b>must</b> be a valid {@code VkRayTracingShaderGroupTypeKHR} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkRayTracingPipelineCreateInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRayTracingShaderGroupCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkRayTracingShaderGroupTypeKHR {@link #type};
- *     uint32_t {@link #generalShader};
- *     uint32_t {@link #closestHitShader};
- *     uint32_t {@link #anyHitShader};
- *     uint32_t {@link #intersectionShader};
- *     void const * {@link #pShaderGroupCaptureReplayHandle};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkRayTracingShaderGroupTypeKHR type;
+ *     uint32_t generalShader;
+ *     uint32_t closestHitShader;
+ *     uint32_t anyHitShader;
+ *     uint32_t intersectionShader;
+ *     void const * pShaderGroupCaptureReplayHandle;
+ * }}</pre>
  */
 public class VkRayTracingShaderGroupCreateInfoKHR extends Struct<VkRayTracingShaderGroupCreateInfoKHR> implements NativeResource {
 
@@ -127,48 +94,48 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct<VkRayTracingSha
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the type of hit group specified in this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("VkRayTracingShaderGroupTypeKHR")
     public int type() { return ntype(address()); }
-    /** the index of the ray generation, miss, or callable shader from {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} in the group if the shader group has {@code type} of {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR RAY_TRACING_SHADER_GROUP_TYPE_GENERAL_KHR}, and {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR} otherwise. */
+    /** @return the value of the {@code generalShader} field. */
     @NativeType("uint32_t")
     public int generalShader() { return ngeneralShader(address()); }
-    /** the optional index of the closest hit shader from {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} in the group if the shader group has {@code type} of {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR} or {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR}, and {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR} otherwise. */
+    /** @return the value of the {@code closestHitShader} field. */
     @NativeType("uint32_t")
     public int closestHitShader() { return nclosestHitShader(address()); }
-    /** the optional index of the any-hit shader from {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} in the group if the shader group has {@code type} of {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR RAY_TRACING_SHADER_GROUP_TYPE_TRIANGLES_HIT_GROUP_KHR} or {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR}, and {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR} otherwise. */
+    /** @return the value of the {@code anyHitShader} field. */
     @NativeType("uint32_t")
     public int anyHitShader() { return nanyHitShader(address()); }
-    /** the index of the intersection shader from {@link VkRayTracingPipelineCreateInfoKHR}{@code ::pStages} in the group if the shader group has {@code type} of {@link KHRRayTracingPipeline#VK_RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR RAY_TRACING_SHADER_GROUP_TYPE_PROCEDURAL_HIT_GROUP_KHR}, and {@link KHRRayTracingPipeline#VK_SHADER_UNUSED_KHR SHADER_UNUSED_KHR} otherwise. */
+    /** @return the value of the {@code intersectionShader} field. */
     @NativeType("uint32_t")
     public int intersectionShader() { return nintersectionShader(address()); }
-    /** {@code NULL} or a pointer to replay information for this shader group queried from {@link KHRRayTracingPipeline#vkGetRayTracingCaptureReplayShaderGroupHandlesKHR GetRayTracingCaptureReplayShaderGroupHandlesKHR}, as described in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#ray-tracing-capture-replay">Ray Tracing Capture Replay</a>. Ignored if {@link VkPhysicalDeviceRayTracingPipelineFeaturesKHR}{@code ::rayTracingPipelineShaderGroupHandleCaptureReplay} is {@link VK10#VK_FALSE FALSE}. */
+    /** @return the value of the {@code pShaderGroupCaptureReplayHandle} field. */
     @NativeType("void const *")
     public long pShaderGroupCaptureReplayHandle() { return npShaderGroupCaptureReplayHandle(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkRayTracingShaderGroupCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkRayTracingShaderGroupCreateInfoKHR sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkRayTracingShaderGroupCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public VkRayTracingShaderGroupCreateInfoKHR type(@NativeType("VkRayTracingShaderGroupTypeKHR") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #generalShader} field. */
+    /** Sets the specified value to the {@code generalShader} field. */
     public VkRayTracingShaderGroupCreateInfoKHR generalShader(@NativeType("uint32_t") int value) { ngeneralShader(address(), value); return this; }
-    /** Sets the specified value to the {@link #closestHitShader} field. */
+    /** Sets the specified value to the {@code closestHitShader} field. */
     public VkRayTracingShaderGroupCreateInfoKHR closestHitShader(@NativeType("uint32_t") int value) { nclosestHitShader(address(), value); return this; }
-    /** Sets the specified value to the {@link #anyHitShader} field. */
+    /** Sets the specified value to the {@code anyHitShader} field. */
     public VkRayTracingShaderGroupCreateInfoKHR anyHitShader(@NativeType("uint32_t") int value) { nanyHitShader(address(), value); return this; }
-    /** Sets the specified value to the {@link #intersectionShader} field. */
+    /** Sets the specified value to the {@code intersectionShader} field. */
     public VkRayTracingShaderGroupCreateInfoKHR intersectionShader(@NativeType("uint32_t") int value) { nintersectionShader(address(), value); return this; }
-    /** Sets the specified value to the {@link #pShaderGroupCaptureReplayHandle} field. */
+    /** Sets the specified value to the {@code pShaderGroupCaptureReplayHandle} field. */
     public VkRayTracingShaderGroupCreateInfoKHR pShaderGroupCaptureReplayHandle(@NativeType("void const *") long value) { npShaderGroupCaptureReplayHandle(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -394,48 +361,48 @@ public class VkRayTracingShaderGroupCreateInfoKHR extends Struct<VkRayTracingSha
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkRayTracingShaderGroupCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkRayTracingShaderGroupCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkRayTracingShaderGroupCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkRayTracingShaderGroupCreateInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkRayTracingShaderGroupCreateInfoKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("VkRayTracingShaderGroupTypeKHR")
         public int type() { return VkRayTracingShaderGroupCreateInfoKHR.ntype(address()); }
-        /** @return the value of the {@link VkRayTracingShaderGroupCreateInfoKHR#generalShader} field. */
+        /** @return the value of the {@code generalShader} field. */
         @NativeType("uint32_t")
         public int generalShader() { return VkRayTracingShaderGroupCreateInfoKHR.ngeneralShader(address()); }
-        /** @return the value of the {@link VkRayTracingShaderGroupCreateInfoKHR#closestHitShader} field. */
+        /** @return the value of the {@code closestHitShader} field. */
         @NativeType("uint32_t")
         public int closestHitShader() { return VkRayTracingShaderGroupCreateInfoKHR.nclosestHitShader(address()); }
-        /** @return the value of the {@link VkRayTracingShaderGroupCreateInfoKHR#anyHitShader} field. */
+        /** @return the value of the {@code anyHitShader} field. */
         @NativeType("uint32_t")
         public int anyHitShader() { return VkRayTracingShaderGroupCreateInfoKHR.nanyHitShader(address()); }
-        /** @return the value of the {@link VkRayTracingShaderGroupCreateInfoKHR#intersectionShader} field. */
+        /** @return the value of the {@code intersectionShader} field. */
         @NativeType("uint32_t")
         public int intersectionShader() { return VkRayTracingShaderGroupCreateInfoKHR.nintersectionShader(address()); }
-        /** @return the value of the {@link VkRayTracingShaderGroupCreateInfoKHR#pShaderGroupCaptureReplayHandle} field. */
+        /** @return the value of the {@code pShaderGroupCaptureReplayHandle} field. */
         @NativeType("void const *")
         public long pShaderGroupCaptureReplayHandle() { return VkRayTracingShaderGroupCreateInfoKHR.npShaderGroupCaptureReplayHandle(address()); }
 
-        /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkRayTracingShaderGroupCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR} value to the {@link VkRayTracingShaderGroupCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRRayTracingPipeline#VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer sType$Default() { return sType(KHRRayTracingPipeline.VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkRayTracingShaderGroupCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer type(@NativeType("VkRayTracingShaderGroupTypeKHR") int value) { VkRayTracingShaderGroupCreateInfoKHR.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#generalShader} field. */
+        /** Sets the specified value to the {@code generalShader} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer generalShader(@NativeType("uint32_t") int value) { VkRayTracingShaderGroupCreateInfoKHR.ngeneralShader(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#closestHitShader} field. */
+        /** Sets the specified value to the {@code closestHitShader} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer closestHitShader(@NativeType("uint32_t") int value) { VkRayTracingShaderGroupCreateInfoKHR.nclosestHitShader(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#anyHitShader} field. */
+        /** Sets the specified value to the {@code anyHitShader} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer anyHitShader(@NativeType("uint32_t") int value) { VkRayTracingShaderGroupCreateInfoKHR.nanyHitShader(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#intersectionShader} field. */
+        /** Sets the specified value to the {@code intersectionShader} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer intersectionShader(@NativeType("uint32_t") int value) { VkRayTracingShaderGroupCreateInfoKHR.nintersectionShader(address(), value); return this; }
-        /** Sets the specified value to the {@link VkRayTracingShaderGroupCreateInfoKHR#pShaderGroupCaptureReplayHandle} field. */
+        /** Sets the specified value to the {@code pShaderGroupCaptureReplayHandle} field. */
         public VkRayTracingShaderGroupCreateInfoKHR.Buffer pShaderGroupCaptureReplayHandle(@NativeType("void const *") long value) { VkRayTracingShaderGroupCreateInfoKHR.npShaderGroupCaptureReplayHandle(address(), value); return this; }
 
     }

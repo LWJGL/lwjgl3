@@ -19,28 +19,12 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.FBHandTrackingCapsules.*;
 
 /**
- * A list of capsules associated to hand joints.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBHandTrackingCapsules XR_FB_hand_tracking_capsules} extension <b>must</b> be enabled prior to using {@link XrHandTrackingCapsulesStateFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBHandTrackingCapsules#XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB TYPE_HAND_TRACKING_CAPSULES_STATE_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandCapsuleFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandTrackingCapsulesStateFB {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrHandCapsuleFB XrHandCapsuleFB} {@link #capsules}[XR_HAND_TRACKING_CAPSULE_COUNT_FB];
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrHandCapsuleFB XrHandCapsuleFB} capsules[XR_HAND_TRACKING_CAPSULE_COUNT_FB];
+ * }}</pre>
  */
 public class XrHandTrackingCapsulesStateFB extends Struct<XrHandTrackingCapsulesStateFB> implements NativeResource {
 
@@ -93,23 +77,23 @@ public class XrHandTrackingCapsulesStateFB extends Struct<XrHandTrackingCapsules
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an array of capsules. */
+    /** @return a {@link XrHandCapsuleFB}.Buffer view of the {@code capsules} field. */
     @NativeType("XrHandCapsuleFB[XR_HAND_TRACKING_CAPSULE_COUNT_FB]")
     public XrHandCapsuleFB.Buffer capsules() { return ncapsules(address()); }
-    /** an array of capsules. */
+    /** @return a {@link XrHandCapsuleFB} view of the struct at the specified index of the {@code capsules} field. */
     public XrHandCapsuleFB capsules(int index) { return ncapsules(address(), index); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHandTrackingCapsulesStateFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBHandTrackingCapsules#XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB TYPE_HAND_TRACKING_CAPSULES_STATE_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBHandTrackingCapsules#XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB TYPE_HAND_TRACKING_CAPSULES_STATE_FB} value to the {@code type} field. */
     public XrHandTrackingCapsulesStateFB type$Default() { return type(FBHandTrackingCapsules.XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHandTrackingCapsulesStateFB next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -305,23 +289,23 @@ public class XrHandTrackingCapsulesStateFB extends Struct<XrHandTrackingCapsules
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHandTrackingCapsulesStateFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandTrackingCapsulesStateFB.ntype(address()); }
-        /** @return the value of the {@link XrHandTrackingCapsulesStateFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrHandTrackingCapsulesStateFB.nnext(address()); }
-        /** @return a {@link XrHandCapsuleFB}.Buffer view of the {@link XrHandTrackingCapsulesStateFB#capsules} field. */
+        /** @return a {@link XrHandCapsuleFB}.Buffer view of the {@code capsules} field. */
         @NativeType("XrHandCapsuleFB[XR_HAND_TRACKING_CAPSULE_COUNT_FB]")
         public XrHandCapsuleFB.Buffer capsules() { return XrHandTrackingCapsulesStateFB.ncapsules(address()); }
-        /** @return a {@link XrHandCapsuleFB} view of the struct at the specified index of the {@link XrHandTrackingCapsulesStateFB#capsules} field. */
+        /** @return a {@link XrHandCapsuleFB} view of the struct at the specified index of the {@code capsules} field. */
         public XrHandCapsuleFB capsules(int index) { return XrHandTrackingCapsulesStateFB.ncapsules(address(), index); }
 
-        /** Sets the specified value to the {@link XrHandTrackingCapsulesStateFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHandTrackingCapsulesStateFB.Buffer type(@NativeType("XrStructureType") int value) { XrHandTrackingCapsulesStateFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBHandTrackingCapsules#XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB TYPE_HAND_TRACKING_CAPSULES_STATE_FB} value to the {@link XrHandTrackingCapsulesStateFB#type} field. */
+        /** Sets the {@link FBHandTrackingCapsules#XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB TYPE_HAND_TRACKING_CAPSULES_STATE_FB} value to the {@code type} field. */
         public XrHandTrackingCapsulesStateFB.Buffer type$Default() { return type(FBHandTrackingCapsules.XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB); }
-        /** Sets the specified value to the {@link XrHandTrackingCapsulesStateFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHandTrackingCapsulesStateFB.Buffer next(@NativeType("void *") long value) { XrHandTrackingCapsulesStateFB.nnext(address(), value); return this; }
 
     }

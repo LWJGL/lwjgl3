@@ -16,31 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information to create an eye gaze handle.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrEyeTrackerCreateInfoFB} structure describes the information to create an {@code XrEyeTrackerFB} handle.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBEyeTrackingSocial XR_FB_eye_tracking_social} extension <b>must</b> be enabled prior to using {@link XrEyeTrackerCreateInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBEyeTrackingSocial#XR_TYPE_EYE_TRACKER_CREATE_INFO_FB TYPE_EYE_TRACKER_CREATE_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link FBEyeTrackingSocial#xrCreateEyeTrackerFB CreateEyeTrackerFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEyeTrackerCreateInfoFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrEyeTrackerCreateInfoFB extends Struct<XrEyeTrackerCreateInfoFB> implements NativeResource {
 
@@ -90,18 +70,18 @@ public class XrEyeTrackerCreateInfoFB extends Struct<XrEyeTrackerCreateInfoFB> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEyeTrackerCreateInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBEyeTrackingSocial#XR_TYPE_EYE_TRACKER_CREATE_INFO_FB TYPE_EYE_TRACKER_CREATE_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBEyeTrackingSocial#XR_TYPE_EYE_TRACKER_CREATE_INFO_FB TYPE_EYE_TRACKER_CREATE_INFO_FB} value to the {@code type} field. */
     public XrEyeTrackerCreateInfoFB type$Default() { return type(FBEyeTrackingSocial.XR_TYPE_EYE_TRACKER_CREATE_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEyeTrackerCreateInfoFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -291,18 +271,18 @@ public class XrEyeTrackerCreateInfoFB extends Struct<XrEyeTrackerCreateInfoFB> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEyeTrackerCreateInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEyeTrackerCreateInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrEyeTrackerCreateInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEyeTrackerCreateInfoFB.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrEyeTrackerCreateInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEyeTrackerCreateInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrEyeTrackerCreateInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBEyeTrackingSocial#XR_TYPE_EYE_TRACKER_CREATE_INFO_FB TYPE_EYE_TRACKER_CREATE_INFO_FB} value to the {@link XrEyeTrackerCreateInfoFB#type} field. */
+        /** Sets the {@link FBEyeTrackingSocial#XR_TYPE_EYE_TRACKER_CREATE_INFO_FB TYPE_EYE_TRACKER_CREATE_INFO_FB} value to the {@code type} field. */
         public XrEyeTrackerCreateInfoFB.Buffer type$Default() { return type(FBEyeTrackingSocial.XR_TYPE_EYE_TRACKER_CREATE_INFO_FB); }
-        /** Sets the specified value to the {@link XrEyeTrackerCreateInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEyeTrackerCreateInfoFB.Buffer next(@NativeType("void const *") long value) { XrEyeTrackerCreateInfoFB.nnext(address(), value); return this; }
 
     }

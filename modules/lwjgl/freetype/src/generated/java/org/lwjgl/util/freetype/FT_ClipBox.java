@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A structure representing a {@code COLR} v1 {@code ClipBox} table.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_ClipBox {
  *     {@link FT_Vector FT_Vector} bottom_left;
  *     {@link FT_Vector FT_Vector} top_left;
  *     {@link FT_Vector FT_Vector} top_right;
  *     {@link FT_Vector FT_Vector} bottom_right;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_ClipBox extends Struct<FT_ClipBox> implements NativeResource {
 

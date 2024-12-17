@@ -16,34 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * advertisement complete event.
- * 
- * <h5>Description</h5>
- * 
- * <p>The runtime <b>must</b> queue exactly one {@link XrEventDataColocationAdvertisementCompleteMETA} event whenever an active colocation advertisement is stopped. This includes if the colocation advertisement is stopped due to an application calling {@link METAColocationDiscovery#xrStopColocationAdvertisementMETA StopColocationAdvertisementMETA}, or the runtime needs to stop the colocation advertisement for any reason. If the colocation advertisement is stopped due to an application calling {@link METAColocationDiscovery#xrStopColocationAdvertisementMETA StopColocationAdvertisementMETA}, the runtime <b>must</b> queue the {@link XrEventDataColocationAdvertisementCompleteMETA} event before queuing the corresponding {@link XrEventDataStopColocationAdvertisementCompleteMETA} event. When the {@code XrSession} is destroyed, the runtime <b>must</b> stop all active advertisements started from the same {@code XrSession}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using {@link XrEventDataColocationAdvertisementCompleteMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAColocationDiscovery#xrStartColocationAdvertisementMETA StartColocationAdvertisementMETA}, {@link METAColocationDiscovery#xrStopColocationAdvertisementMETA StopColocationAdvertisementMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataColocationAdvertisementCompleteMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrAsyncRequestIdFB {@link #advertisementRequestId};
- *     XrResult {@link #result};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrAsyncRequestIdFB advertisementRequestId;
+ *     XrResult result;
+ * }}</pre>
  */
 public class XrEventDataColocationAdvertisementCompleteMETA extends Struct<XrEventDataColocationAdvertisementCompleteMETA> implements NativeResource {
 
@@ -99,28 +78,28 @@ public class XrEventDataColocationAdvertisementCompleteMETA extends Struct<XrEve
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrAsyncRequestIdFB} specifying the original start advertisement async request id. The runtime <b>must</b> return a value which matches a previously returned {@code advertisementRequestId} value from an {@link METAColocationDiscovery#xrStartColocationAdvertisementMETA StartColocationAdvertisementMETA} request. */
+    /** @return the value of the {@code advertisementRequestId} field. */
     @NativeType("XrAsyncRequestIdFB")
     public long advertisementRequestId() { return nadvertisementRequestId(address()); }
-    /** an {@code XrResult} representing the advertisement process result. The valid {@code result} values are: {@link XR10#XR_SUCCESS SUCCESS}, {@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}, and {@link METAColocationDiscovery#XR_ERROR_COLOCATION_DISCOVERY_NO_DISCOVERY_METHOD_META ERROR_COLOCATION_DISCOVERY_NO_DISCOVERY_METHOD_META}. */
+    /** @return the value of the {@code result} field. */
     @NativeType("XrResult")
     public int result() { return nresult(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataColocationAdvertisementCompleteMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META} value to the {@link #type} field. */
+    /** Sets the {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META} value to the {@code type} field. */
     public XrEventDataColocationAdvertisementCompleteMETA type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataColocationAdvertisementCompleteMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #advertisementRequestId} field. */
+    /** Sets the specified value to the {@code advertisementRequestId} field. */
     public XrEventDataColocationAdvertisementCompleteMETA advertisementRequestId(@NativeType("XrAsyncRequestIdFB") long value) { nadvertisementRequestId(address(), value); return this; }
-    /** Sets the specified value to the {@link #result} field. */
+    /** Sets the specified value to the {@code result} field. */
     public XrEventDataColocationAdvertisementCompleteMETA result(@NativeType("XrResult") int value) { nresult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,28 +301,28 @@ public class XrEventDataColocationAdvertisementCompleteMETA extends Struct<XrEve
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataColocationAdvertisementCompleteMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataColocationAdvertisementCompleteMETA.ntype(address()); }
-        /** @return the value of the {@link XrEventDataColocationAdvertisementCompleteMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataColocationAdvertisementCompleteMETA.nnext(address()); }
-        /** @return the value of the {@link XrEventDataColocationAdvertisementCompleteMETA#advertisementRequestId} field. */
+        /** @return the value of the {@code advertisementRequestId} field. */
         @NativeType("XrAsyncRequestIdFB")
         public long advertisementRequestId() { return XrEventDataColocationAdvertisementCompleteMETA.nadvertisementRequestId(address()); }
-        /** @return the value of the {@link XrEventDataColocationAdvertisementCompleteMETA#result} field. */
+        /** @return the value of the {@code result} field. */
         @NativeType("XrResult")
         public int result() { return XrEventDataColocationAdvertisementCompleteMETA.nresult(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataColocationAdvertisementCompleteMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataColocationAdvertisementCompleteMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataColocationAdvertisementCompleteMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META} value to the {@link XrEventDataColocationAdvertisementCompleteMETA#type} field. */
+        /** Sets the {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META} value to the {@code type} field. */
         public XrEventDataColocationAdvertisementCompleteMETA.Buffer type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META); }
-        /** Sets the specified value to the {@link XrEventDataColocationAdvertisementCompleteMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataColocationAdvertisementCompleteMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataColocationAdvertisementCompleteMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataColocationAdvertisementCompleteMETA#advertisementRequestId} field. */
+        /** Sets the specified value to the {@code advertisementRequestId} field. */
         public XrEventDataColocationAdvertisementCompleteMETA.Buffer advertisementRequestId(@NativeType("XrAsyncRequestIdFB") long value) { XrEventDataColocationAdvertisementCompleteMETA.nadvertisementRequestId(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataColocationAdvertisementCompleteMETA#result} field. */
+        /** Sets the specified value to the {@code result} field. */
         public XrEventDataColocationAdvertisementCompleteMETA.Buffer result(@NativeType("XrResult") int value) { XrEventDataColocationAdvertisementCompleteMETA.nresult(address(), value); return this; }
 
     }

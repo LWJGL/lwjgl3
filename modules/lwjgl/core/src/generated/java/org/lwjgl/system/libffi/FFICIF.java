@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Contains information about a libffi call interface.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ffi_cif {
  *     ffi_abi abi;
  *     unsigned nargs;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link FFIType ffi_type} * rtype;
  *     unsigned bytes;
  *     unsigned flags;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct ffi_cif")
 public class FFICIF extends Struct<FFICIF> implements NativeResource {
@@ -94,11 +90,7 @@ public class FFICIF extends Struct<FFICIF> implements NativeResource {
     /** @return the value of the {@code nargs} field. */
     @NativeType("unsigned")
     public int nargs() { return nnargs(address()); }
-    /**
-     * @return a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field. */
     @NativeType("ffi_type **")
     public PointerBuffer arg_types(int capacity) { return narg_types(address(), capacity); }
     /** @return a {@link FFIType} view of the struct pointed to by the {@code rtype} field. */
@@ -284,11 +276,7 @@ public class FFICIF extends Struct<FFICIF> implements NativeResource {
         /** @return the value of the {@code nargs} field. */
         @NativeType("unsigned")
         public int nargs() { return FFICIF.nnargs(address()); }
-        /**
-         * @return a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link PointerBuffer} view of the data pointed to by the {@code arg_types} field. */
         @NativeType("ffi_type **")
         public PointerBuffer arg_types(int capacity) { return FFICIF.narg_types(address(), capacity); }
         /** @return a {@link FFIType} view of the struct pointed to by the {@code rtype} field. */

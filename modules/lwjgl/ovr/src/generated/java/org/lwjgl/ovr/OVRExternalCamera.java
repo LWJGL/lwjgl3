@@ -16,14 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrExternalCamera {
- *     char {@link #Name}[32];
+ *     char Name[32];
  *     {@link OVRCameraIntrinsics ovrCameraIntrinsics} Intrinsics;
  *     {@link OVRCameraExtrinsics ovrCameraExtrinsics} Extrinsics;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct ovrExternalCamera")
 public class OVRExternalCamera extends Struct<OVRExternalCamera> implements NativeResource {
@@ -77,10 +75,10 @@ public class OVRExternalCamera extends Struct<OVRExternalCamera> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** camera identifier: vid + pid + serial number etc. */
+    /** @return a {@link ByteBuffer} view of the {@code Name} field. */
     @NativeType("char[32]")
     public ByteBuffer Name() { return nName(address()); }
-    /** camera identifier: vid + pid + serial number etc. */
+    /** @return the null-terminated string stored in the {@code Name} field. */
     @NativeType("char[32]")
     public String NameString() { return nNameString(address()); }
     /** @return a {@link OVRCameraIntrinsics} view of the {@code Intrinsics} field. */
@@ -272,10 +270,10 @@ public class OVRExternalCamera extends Struct<OVRExternalCamera> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link ByteBuffer} view of the {@link OVRExternalCamera#Name} field. */
+        /** @return a {@link ByteBuffer} view of the {@code Name} field. */
         @NativeType("char[32]")
         public ByteBuffer Name() { return OVRExternalCamera.nName(address()); }
-        /** @return the null-terminated string stored in the {@link OVRExternalCamera#Name} field. */
+        /** @return the null-terminated string stored in the {@code Name} field. */
         @NativeType("char[32]")
         public String NameString() { return OVRExternalCamera.nNameString(address()); }
         /** @return a {@link OVRCameraIntrinsics} view of the {@code Intrinsics} field. */

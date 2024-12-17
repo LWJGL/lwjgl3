@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSparseImageFormatProperties2}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSparseImageFormatProperties2KHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     {@link VkSparseImageFormatProperties VkSparseImageFormatProperties} properties;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSparseImageFormatProperties2KHR extends VkSparseImageFormatProperties2 {
 

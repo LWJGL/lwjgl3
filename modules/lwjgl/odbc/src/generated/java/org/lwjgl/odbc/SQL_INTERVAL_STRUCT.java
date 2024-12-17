@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct SQL_INTERVAL_STRUCT {
  *     SQLINTERVAL interval_type;
  *     SQLSMALLINT interval_sign;
@@ -26,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *         {@link SQL_YEAR_MONTH_STRUCT SQL_YEAR_MONTH_STRUCT} year_month;
  *         {@link SQL_DAY_SECOND_STRUCT SQL_DAY_SECOND_STRUCT} day_second;
  *     } intval;
- * }</code></pre>
+ * }}</pre>
  */
 public class SQL_INTERVAL_STRUCT extends Struct<SQL_INTERVAL_STRUCT> implements NativeResource {
 

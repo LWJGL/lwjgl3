@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES {
  *     int bar;
  *     int beat;
@@ -26,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float tempo;
  *     int timesignatureupper;
  *     int timesignaturelower;
- * }</code></pre>
+ * }}</pre>
  */
 public class FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES extends Struct<FMOD_STUDIO_TIMELINE_BEAT_PROPERTIES> implements NativeResource {
 

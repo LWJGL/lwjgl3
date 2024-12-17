@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUctxCigParam {
  *     CUtensorMapDataType sharedDataType;
  *     void * sharedData;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUctxCigParam extends Struct<CUctxCigParam> implements NativeResource {
 

@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrExtent3Df}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrExtent3DfFB {
  *     float width;
  *     float height;
  *     float depth;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrExtent3DfFB extends XrExtent3Df {
 

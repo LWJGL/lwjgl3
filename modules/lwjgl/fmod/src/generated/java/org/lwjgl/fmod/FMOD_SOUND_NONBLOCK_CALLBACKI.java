@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     FMOD_SOUND *sound,
- *     FMOD_RESULT result
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_SOUND_NONBLOCK_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_SOUND_NONBLOCK_CALLBACK")
 public interface FMOD_SOUND_NONBLOCK_CALLBACKI extends CallbackI {
@@ -43,6 +35,7 @@ public interface FMOD_SOUND_NONBLOCK_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_SOUND_NONBLOCK_CALLBACK) (FMOD_SOUND * sound, FMOD_RESULT result)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("FMOD_SOUND *") long sound, @NativeType("FMOD_RESULT") int result);
 
 }

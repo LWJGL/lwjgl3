@@ -14,15 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ImuSample_t {
  *     double fSampleTime;
  *     {@link HmdVector3d HmdVector3d_t} vAccel;
  *     {@link HmdVector3d HmdVector3d_t} vGyro;
  *     uint32_t unOffScaleFlags;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct ImuSample_t")
 public class ImuSample extends Struct<ImuSample> {

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceDepthStencilResolveProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDepthStencilResolvePropertiesKHR {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkResolveModeFlags supportedStencilResolveModes;
  *     VkBool32 independentResolveNone;
  *     VkBool32 independentResolve;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceDepthStencilResolvePropertiesKHR extends VkPhysicalDeviceDepthStencilResolveProperties {
 

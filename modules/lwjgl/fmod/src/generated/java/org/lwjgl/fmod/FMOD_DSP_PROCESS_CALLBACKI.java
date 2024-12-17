@@ -12,19 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * FMOD_RESULT (*{@link #invoke}) (
- *     struct FMOD_DSP_STATE *dsp_state,
- *     unsigned int length,
- *     struct FMOD_DSP_BUFFER_ARRAY const *inbufferarray,
- *     struct FMOD_DSP_BUFFER_ARRAY *outbufferarray,
- *     FMOD_BOOL inputsidle,
- *     FMOD_DSP_PROCESS_OPERATION op
- * )</code></pre>
- */
+/** Callback function: {@link #invoke FMOD_DSP_PROCESS_CALLBACK} */
 @FunctionalInterface
 @NativeType("FMOD_DSP_PROCESS_CALLBACK")
 public interface FMOD_DSP_PROCESS_CALLBACKI extends CallbackI {
@@ -51,6 +39,7 @@ public interface FMOD_DSP_PROCESS_CALLBACKI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
+    /** {@code FMOD_RESULT (* FMOD_DSP_PROCESS_CALLBACK) (struct FMOD_DSP_STATE * dsp_state, unsigned int length, struct FMOD_DSP_BUFFER_ARRAY const * inbufferarray, struct FMOD_DSP_BUFFER_ARRAY * outbufferarray, FMOD_BOOL inputsidle, FMOD_DSP_PROCESS_OPERATION op)} */
     @NativeType("FMOD_RESULT") int invoke(@NativeType("struct FMOD_DSP_STATE *") long dsp_state, @NativeType("unsigned int") int length, @NativeType("struct FMOD_DSP_BUFFER_ARRAY const *") long inbufferarray, @NativeType("struct FMOD_DSP_BUFFER_ARRAY *") long outbufferarray, @NativeType("FMOD_BOOL") int inputsidle, @NativeType("FMOD_DSP_PROCESS_OPERATION") int op);
 
 }

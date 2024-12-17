@@ -16,64 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a video profile.
- * 
- * <h5>Description</h5>
- * 
- * <p>Video profiles are provided as input to video capability queries such as {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR} or {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR}, as well as when creating resources to be used by video coding operations such as images, buffers, query pools, and video sessions.</p>
- * 
- * <p>The full description of a video profile is specified by an instance of this structure, and the codec-specific and auxiliary structures provided in its {@code pNext} chain.</p>
- * 
- * <p>When this structure is specified as an input parameter to {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR}, or through the {@code pProfiles} member of a {@link VkVideoProfileListInfoKHR} structure in the {@code pNext} chain of the input parameter of a query command such as {@link KHRVideoQueue#vkGetPhysicalDeviceVideoFormatPropertiesKHR GetPhysicalDeviceVideoFormatPropertiesKHR} or {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}, the following error codes indicate specific causes of the failure of the query operation:</p>
- * 
- * <ul>
- * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR} specifies that the requested video picture layout (e.g. through the {@code pictureLayout} member of a {@link VkVideoDecodeH264ProfileInfoKHR} structure included in the {@code pNext} chain of {@link VkVideoProfileInfoKHR}) is not supported.</li>
- * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR} specifies that a video profile operation specified by {@code videoCodecOperation} is not supported.</li>
- * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR} specifies that video format parameters specified by {@code chromaSubsampling}, {@code lumaBitDepth}, or {@code chromaBitDepth} are not supported.</li>
- * <li>{@link KHRVideoQueue#VK_ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR} specifies that the codec-specific parameters corresponding to the video codec operation are not supported.</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code chromaSubsampling} <b>must</b> have a single bit set</li>
- * <li>{@code lumaBitDepth} <b>must</b> have a single bit set</li>
- * <li>If {@code chromaSubsampling} is not {@link KHRVideoQueue#VK_VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR}, then {@code chromaBitDepth} <b>must</b> have a single bit set</li>
- * <li>If {@code videoCodecOperation} is {@link KHRVideoDecodeH264#VK_VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H264_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoDecodeH264ProfileInfoKHR} structure</li>
- * <li>If {@code videoCodecOperation} is {@link KHRVideoDecodeH265#VK_VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_H265_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoDecodeH265ProfileInfoKHR} structure</li>
- * <li>If {@code videoCodecOperation} is {@link KHRVideoDecodeAV1#VK_VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_DECODE_AV1_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoDecodeAV1ProfileInfoKHR} structure</li>
- * <li>If {@code videoCodecOperation} is {@link KHRVideoEncodeH264#VK_VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H264_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeH264ProfileInfoKHR} structure</li>
- * <li>If {@code videoCodecOperation} is {@link KHRVideoEncodeH265#VK_VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_H265_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeH265ProfileInfoKHR} structure</li>
- * <li>If {@code videoCodecOperation} is {@link KHRVideoEncodeAV1#VK_VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR VIDEO_CODEC_OPERATION_ENCODE_AV1_BIT_KHR}, then the {@code pNext} chain <b>must</b> include a {@link VkVideoEncodeAV1ProfileInfoKHR} structure</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR}</li>
- * <li>{@code videoCodecOperation} <b>must</b> be a valid {@code VkVideoCodecOperationFlagBitsKHR} value</li>
- * <li>{@code chromaSubsampling} <b>must</b> be a valid combination of {@code VkVideoChromaSubsamplingFlagBitsKHR} values</li>
- * <li>{@code chromaSubsampling} <b>must</b> not be 0</li>
- * <li>{@code lumaBitDepth} <b>must</b> be a valid combination of {@code VkVideoComponentBitDepthFlagBitsKHR} values</li>
- * <li>{@code lumaBitDepth} <b>must</b> not be 0</li>
- * <li>{@code chromaBitDepth} <b>must</b> be a valid combination of {@code VkVideoComponentBitDepthFlagBitsKHR} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR}, {@link VkVideoProfileListInfoKHR}, {@link VkVideoSessionCreateInfoKHR}, {@link KHRVideoQueue#vkGetPhysicalDeviceVideoCapabilitiesKHR GetPhysicalDeviceVideoCapabilitiesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoProfileInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkVideoCodecOperationFlagBitsKHR {@link #videoCodecOperation};
- *     VkVideoChromaSubsamplingFlagsKHR {@link #chromaSubsampling};
- *     VkVideoComponentBitDepthFlagsKHR {@link #lumaBitDepth};
- *     VkVideoComponentBitDepthFlagsKHR {@link #chromaBitDepth};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkVideoCodecOperationFlagBitsKHR videoCodecOperation;
+ *     VkVideoChromaSubsamplingFlagsKHR chromaSubsampling;
+ *     VkVideoComponentBitDepthFlagsKHR lumaBitDepth;
+ *     VkVideoComponentBitDepthFlagsKHR chromaBitDepth;
+ * }}</pre>
  */
 public class VkVideoProfileInfoKHR extends Struct<VkVideoProfileInfoKHR> implements NativeResource {
 
@@ -135,30 +86,30 @@ public class VkVideoProfileInfoKHR extends Struct<VkVideoProfileInfoKHR> impleme
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkVideoCodecOperationFlagBitsKHR} value specifying a video codec operation. */
+    /** @return the value of the {@code videoCodecOperation} field. */
     @NativeType("VkVideoCodecOperationFlagBitsKHR")
     public int videoCodecOperation() { return nvideoCodecOperation(address()); }
-    /** a bitmask of {@code VkVideoChromaSubsamplingFlagBitsKHR} specifying video chroma subsampling information. */
+    /** @return the value of the {@code chromaSubsampling} field. */
     @NativeType("VkVideoChromaSubsamplingFlagsKHR")
     public int chromaSubsampling() { return nchromaSubsampling(address()); }
-    /** a bitmask of {@code VkVideoComponentBitDepthFlagBitsKHR} specifying video luma bit depth information. */
+    /** @return the value of the {@code lumaBitDepth} field. */
     @NativeType("VkVideoComponentBitDepthFlagsKHR")
     public int lumaBitDepth() { return nlumaBitDepth(address()); }
-    /** a bitmask of {@code VkVideoComponentBitDepthFlagBitsKHR} specifying video chroma bit depth information. */
+    /** @return the value of the {@code chromaBitDepth} field. */
     @NativeType("VkVideoComponentBitDepthFlagsKHR")
     public int chromaBitDepth() { return nchromaBitDepth(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkVideoProfileInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR} value to the {@code sType} field. */
     public VkVideoProfileInfoKHR sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkVideoProfileInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkVideoDecodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
     public VkVideoProfileInfoKHR pNext(VkVideoDecodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -176,13 +127,13 @@ public class VkVideoProfileInfoKHR extends Struct<VkVideoProfileInfoKHR> impleme
     public VkVideoProfileInfoKHR pNext(VkVideoEncodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkVideoEncodeUsageInfoKHR} value to the {@code pNext} chain. */
     public VkVideoProfileInfoKHR pNext(VkVideoEncodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #videoCodecOperation} field. */
+    /** Sets the specified value to the {@code videoCodecOperation} field. */
     public VkVideoProfileInfoKHR videoCodecOperation(@NativeType("VkVideoCodecOperationFlagBitsKHR") int value) { nvideoCodecOperation(address(), value); return this; }
-    /** Sets the specified value to the {@link #chromaSubsampling} field. */
+    /** Sets the specified value to the {@code chromaSubsampling} field. */
     public VkVideoProfileInfoKHR chromaSubsampling(@NativeType("VkVideoChromaSubsamplingFlagsKHR") int value) { nchromaSubsampling(address(), value); return this; }
-    /** Sets the specified value to the {@link #lumaBitDepth} field. */
+    /** Sets the specified value to the {@code lumaBitDepth} field. */
     public VkVideoProfileInfoKHR lumaBitDepth(@NativeType("VkVideoComponentBitDepthFlagsKHR") int value) { nlumaBitDepth(address(), value); return this; }
-    /** Sets the specified value to the {@link #chromaBitDepth} field. */
+    /** Sets the specified value to the {@code chromaBitDepth} field. */
     public VkVideoProfileInfoKHR chromaBitDepth(@NativeType("VkVideoComponentBitDepthFlagsKHR") int value) { nchromaBitDepth(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -396,30 +347,30 @@ public class VkVideoProfileInfoKHR extends Struct<VkVideoProfileInfoKHR> impleme
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoProfileInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkVideoProfileInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkVideoProfileInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkVideoProfileInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkVideoProfileInfoKHR#videoCodecOperation} field. */
+        /** @return the value of the {@code videoCodecOperation} field. */
         @NativeType("VkVideoCodecOperationFlagBitsKHR")
         public int videoCodecOperation() { return VkVideoProfileInfoKHR.nvideoCodecOperation(address()); }
-        /** @return the value of the {@link VkVideoProfileInfoKHR#chromaSubsampling} field. */
+        /** @return the value of the {@code chromaSubsampling} field. */
         @NativeType("VkVideoChromaSubsamplingFlagsKHR")
         public int chromaSubsampling() { return VkVideoProfileInfoKHR.nchromaSubsampling(address()); }
-        /** @return the value of the {@link VkVideoProfileInfoKHR#lumaBitDepth} field. */
+        /** @return the value of the {@code lumaBitDepth} field. */
         @NativeType("VkVideoComponentBitDepthFlagsKHR")
         public int lumaBitDepth() { return VkVideoProfileInfoKHR.nlumaBitDepth(address()); }
-        /** @return the value of the {@link VkVideoProfileInfoKHR#chromaBitDepth} field. */
+        /** @return the value of the {@code chromaBitDepth} field. */
         @NativeType("VkVideoComponentBitDepthFlagsKHR")
         public int chromaBitDepth() { return VkVideoProfileInfoKHR.nchromaBitDepth(address()); }
 
-        /** Sets the specified value to the {@link VkVideoProfileInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkVideoProfileInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkVideoProfileInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR} value to the {@link VkVideoProfileInfoKHR#sType} field. */
+        /** Sets the {@link KHRVideoQueue#VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR} value to the {@code sType} field. */
         public VkVideoProfileInfoKHR.Buffer sType$Default() { return sType(KHRVideoQueue.VK_STRUCTURE_TYPE_VIDEO_PROFILE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkVideoProfileInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkVideoProfileInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkVideoProfileInfoKHR.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkVideoDecodeAV1ProfileInfoKHR} value to the {@code pNext} chain. */
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoDecodeAV1ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -437,13 +388,13 @@ public class VkVideoProfileInfoKHR extends Struct<VkVideoProfileInfoKHR> impleme
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoEncodeH265ProfileInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkVideoEncodeUsageInfoKHR} value to the {@code pNext} chain. */
         public VkVideoProfileInfoKHR.Buffer pNext(VkVideoEncodeUsageInfoKHR value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkVideoProfileInfoKHR#videoCodecOperation} field. */
+        /** Sets the specified value to the {@code videoCodecOperation} field. */
         public VkVideoProfileInfoKHR.Buffer videoCodecOperation(@NativeType("VkVideoCodecOperationFlagBitsKHR") int value) { VkVideoProfileInfoKHR.nvideoCodecOperation(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoProfileInfoKHR#chromaSubsampling} field. */
+        /** Sets the specified value to the {@code chromaSubsampling} field. */
         public VkVideoProfileInfoKHR.Buffer chromaSubsampling(@NativeType("VkVideoChromaSubsamplingFlagsKHR") int value) { VkVideoProfileInfoKHR.nchromaSubsampling(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoProfileInfoKHR#lumaBitDepth} field. */
+        /** Sets the specified value to the {@code lumaBitDepth} field. */
         public VkVideoProfileInfoKHR.Buffer lumaBitDepth(@NativeType("VkVideoComponentBitDepthFlagsKHR") int value) { VkVideoProfileInfoKHR.nlumaBitDepth(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoProfileInfoKHR#chromaBitDepth} field. */
+        /** Sets the specified value to the {@code chromaBitDepth} field. */
         public VkVideoProfileInfoKHR.Buffer chromaBitDepth(@NativeType("VkVideoComponentBitDepthFlagsKHR") int value) { VkVideoProfileInfoKHR.nchromaBitDepth(address(), value); return this; }
 
     }

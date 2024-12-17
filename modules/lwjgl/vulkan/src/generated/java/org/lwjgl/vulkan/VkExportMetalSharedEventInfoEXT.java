@@ -17,27 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure that identifies a VkSemaphore or VkEvent object and corresponding Metal MTLSharedEvent object.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT}</li>
- * <li>If {@code semaphore} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code semaphore} <b>must</b> be a valid {@code VkSemaphore} handle</li>
- * <li>If {@code event} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code event} <b>must</b> be a valid {@code VkEvent} handle</li>
- * <li>Both of {@code event}, and {@code semaphore} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExportMetalSharedEventInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSemaphore {@link #semaphore};
- *     VkEvent {@link #event};
- *     MTLSharedEvent_id {@link #mtlSharedEvent};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSemaphore semaphore;
+ *     VkEvent event;
+ *     MTLSharedEvent_id mtlSharedEvent;
+ * }}</pre>
  */
 public class VkExportMetalSharedEventInfoEXT extends Struct<VkExportMetalSharedEventInfoEXT> implements NativeResource {
 
@@ -96,33 +83,33 @@ public class VkExportMetalSharedEventInfoEXT extends Struct<VkExportMetalSharedE
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a {@code VkSemaphore}. */
+    /** @return the value of the {@code semaphore} field. */
     @NativeType("VkSemaphore")
     public long semaphore() { return nsemaphore(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a {@code VkEvent}. */
+    /** @return the value of the {@code event} field. */
     @NativeType("VkEvent")
     public long event() { return nevent(address()); }
-    /** the Metal {@code id&lt;MTLSharedEvent&gt;} object underlying the {@code VkSemaphore} or {@code VkEvent} object in {@code semaphore} or {@code event}, respectively. The implementation will return the {@code MTLSharedEvent} in this member, or it will return {@code NULL} if no {@code MTLSharedEvent} could be found underlying the {@code VkSemaphore} or {@code VkEvent} object. */
+    /** @return the value of the {@code mtlSharedEvent} field. */
     @NativeType("MTLSharedEvent_id")
     public long mtlSharedEvent() { return nmtlSharedEvent(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkExportMetalSharedEventInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT} value to the {@code sType} field. */
     public VkExportMetalSharedEventInfoEXT sType$Default() { return sType(EXTMetalObjects.VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkExportMetalSharedEventInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #semaphore} field. */
+    /** Sets the specified value to the {@code semaphore} field. */
     public VkExportMetalSharedEventInfoEXT semaphore(@NativeType("VkSemaphore") long value) { nsemaphore(address(), value); return this; }
-    /** Sets the specified value to the {@link #event} field. */
+    /** Sets the specified value to the {@code event} field. */
     public VkExportMetalSharedEventInfoEXT event(@NativeType("VkEvent") long value) { nevent(address(), value); return this; }
-    /** Sets the specified value to the {@link #mtlSharedEvent} field. */
+    /** Sets the specified value to the {@code mtlSharedEvent} field. */
     public VkExportMetalSharedEventInfoEXT mtlSharedEvent(@NativeType("MTLSharedEvent_id") long value) { nmtlSharedEvent(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,33 +326,33 @@ public class VkExportMetalSharedEventInfoEXT extends Struct<VkExportMetalSharedE
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkExportMetalSharedEventInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExportMetalSharedEventInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkExportMetalSharedEventInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExportMetalSharedEventInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkExportMetalSharedEventInfoEXT#semaphore} field. */
+        /** @return the value of the {@code semaphore} field. */
         @NativeType("VkSemaphore")
         public long semaphore() { return VkExportMetalSharedEventInfoEXT.nsemaphore(address()); }
-        /** @return the value of the {@link VkExportMetalSharedEventInfoEXT#event} field. */
+        /** @return the value of the {@code event} field. */
         @NativeType("VkEvent")
         public long event() { return VkExportMetalSharedEventInfoEXT.nevent(address()); }
-        /** @return the value of the {@link VkExportMetalSharedEventInfoEXT#mtlSharedEvent} field. */
+        /** @return the value of the {@code mtlSharedEvent} field. */
         @NativeType("MTLSharedEvent_id")
         public long mtlSharedEvent() { return VkExportMetalSharedEventInfoEXT.nmtlSharedEvent(address()); }
 
-        /** Sets the specified value to the {@link VkExportMetalSharedEventInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkExportMetalSharedEventInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkExportMetalSharedEventInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT} value to the {@link VkExportMetalSharedEventInfoEXT#sType} field. */
+        /** Sets the {@link EXTMetalObjects#VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT} value to the {@code sType} field. */
         public VkExportMetalSharedEventInfoEXT.Buffer sType$Default() { return sType(EXTMetalObjects.VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT); }
-        /** Sets the specified value to the {@link VkExportMetalSharedEventInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkExportMetalSharedEventInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkExportMetalSharedEventInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExportMetalSharedEventInfoEXT#semaphore} field. */
+        /** Sets the specified value to the {@code semaphore} field. */
         public VkExportMetalSharedEventInfoEXT.Buffer semaphore(@NativeType("VkSemaphore") long value) { VkExportMetalSharedEventInfoEXT.nsemaphore(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExportMetalSharedEventInfoEXT#event} field. */
+        /** Sets the specified value to the {@code event} field. */
         public VkExportMetalSharedEventInfoEXT.Buffer event(@NativeType("VkEvent") long value) { VkExportMetalSharedEventInfoEXT.nevent(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExportMetalSharedEventInfoEXT#mtlSharedEvent} field. */
+        /** Sets the specified value to the {@code mtlSharedEvent} field. */
         public VkExportMetalSharedEventInfoEXT.Buffer mtlSharedEvent(@NativeType("MTLSharedEvent_id") long value) { VkExportMetalSharedEventInfoEXT.nmtlSharedEvent(address(), value); return this; }
 
     }

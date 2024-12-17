@@ -17,20 +17,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Error event.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XErrorEvent {
  *     int type;
- *     Display * {@link #display};
- *     XID {@link #resourceid};
- *     unsigned long {@link #serial};
- *     unsigned char {@link #error_code};
- *     unsigned char {@link #request_code};
- *     unsigned char {@link #minor_code};
- * }</code></pre>
+ *     Display * display;
+ *     XID resourceid;
+ *     unsigned long serial;
+ *     unsigned char error_code;
+ *     unsigned char request_code;
+ *     unsigned char minor_code;
+ * }}</pre>
  */
 public class XErrorEvent extends Struct<XErrorEvent> implements NativeResource {
 
@@ -97,38 +93,38 @@ public class XErrorEvent extends Struct<XErrorEvent> implements NativeResource {
 
     /** @return the value of the {@code type} field. */
     public int type() { return ntype(address()); }
-    /** display the event was read from */
+    /** @return the value of the {@code display} field. */
     @NativeType("Display *")
     public long display() { return ndisplay(address()); }
-    /** resource id */
+    /** @return the value of the {@code resourceid} field. */
     @NativeType("XID")
     public long resourceid() { return nresourceid(address()); }
-    /** serial number of failed request */
+    /** @return the value of the {@code serial} field. */
     @NativeType("unsigned long")
     public long serial() { return nserial(address()); }
-    /** error code of failed request */
+    /** @return the value of the {@code error_code} field. */
     @NativeType("unsigned char")
     public byte error_code() { return nerror_code(address()); }
-    /** major op-code of failed request */
+    /** @return the value of the {@code request_code} field. */
     @NativeType("unsigned char")
     public byte request_code() { return nrequest_code(address()); }
-    /** minor op-code of failed request */
+    /** @return the value of the {@code minor_code} field. */
     @NativeType("unsigned char")
     public byte minor_code() { return nminor_code(address()); }
 
     /** Sets the specified value to the {@code type} field. */
     public XErrorEvent type(int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #display} field. */
+    /** Sets the specified value to the {@code display} field. */
     public XErrorEvent display(@NativeType("Display *") long value) { ndisplay(address(), value); return this; }
-    /** Sets the specified value to the {@link #resourceid} field. */
+    /** Sets the specified value to the {@code resourceid} field. */
     public XErrorEvent resourceid(@NativeType("XID") long value) { nresourceid(address(), value); return this; }
-    /** Sets the specified value to the {@link #serial} field. */
+    /** Sets the specified value to the {@code serial} field. */
     public XErrorEvent serial(@NativeType("unsigned long") long value) { nserial(address(), value); return this; }
-    /** Sets the specified value to the {@link #error_code} field. */
+    /** Sets the specified value to the {@code error_code} field. */
     public XErrorEvent error_code(@NativeType("unsigned char") byte value) { nerror_code(address(), value); return this; }
-    /** Sets the specified value to the {@link #request_code} field. */
+    /** Sets the specified value to the {@code request_code} field. */
     public XErrorEvent request_code(@NativeType("unsigned char") byte value) { nrequest_code(address(), value); return this; }
-    /** Sets the specified value to the {@link #minor_code} field. */
+    /** Sets the specified value to the {@code minor_code} field. */
     public XErrorEvent minor_code(@NativeType("unsigned char") byte value) { nminor_code(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -378,38 +374,38 @@ public class XErrorEvent extends Struct<XErrorEvent> implements NativeResource {
 
         /** @return the value of the {@code type} field. */
         public int type() { return XErrorEvent.ntype(address()); }
-        /** @return the value of the {@link XErrorEvent#display} field. */
+        /** @return the value of the {@code display} field. */
         @NativeType("Display *")
         public long display() { return XErrorEvent.ndisplay(address()); }
-        /** @return the value of the {@link XErrorEvent#resourceid} field. */
+        /** @return the value of the {@code resourceid} field. */
         @NativeType("XID")
         public long resourceid() { return XErrorEvent.nresourceid(address()); }
-        /** @return the value of the {@link XErrorEvent#serial} field. */
+        /** @return the value of the {@code serial} field. */
         @NativeType("unsigned long")
         public long serial() { return XErrorEvent.nserial(address()); }
-        /** @return the value of the {@link XErrorEvent#error_code} field. */
+        /** @return the value of the {@code error_code} field. */
         @NativeType("unsigned char")
         public byte error_code() { return XErrorEvent.nerror_code(address()); }
-        /** @return the value of the {@link XErrorEvent#request_code} field. */
+        /** @return the value of the {@code request_code} field. */
         @NativeType("unsigned char")
         public byte request_code() { return XErrorEvent.nrequest_code(address()); }
-        /** @return the value of the {@link XErrorEvent#minor_code} field. */
+        /** @return the value of the {@code minor_code} field. */
         @NativeType("unsigned char")
         public byte minor_code() { return XErrorEvent.nminor_code(address()); }
 
         /** Sets the specified value to the {@code type} field. */
         public XErrorEvent.Buffer type(int value) { XErrorEvent.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XErrorEvent#display} field. */
+        /** Sets the specified value to the {@code display} field. */
         public XErrorEvent.Buffer display(@NativeType("Display *") long value) { XErrorEvent.ndisplay(address(), value); return this; }
-        /** Sets the specified value to the {@link XErrorEvent#resourceid} field. */
+        /** Sets the specified value to the {@code resourceid} field. */
         public XErrorEvent.Buffer resourceid(@NativeType("XID") long value) { XErrorEvent.nresourceid(address(), value); return this; }
-        /** Sets the specified value to the {@link XErrorEvent#serial} field. */
+        /** Sets the specified value to the {@code serial} field. */
         public XErrorEvent.Buffer serial(@NativeType("unsigned long") long value) { XErrorEvent.nserial(address(), value); return this; }
-        /** Sets the specified value to the {@link XErrorEvent#error_code} field. */
+        /** Sets the specified value to the {@code error_code} field. */
         public XErrorEvent.Buffer error_code(@NativeType("unsigned char") byte value) { XErrorEvent.nerror_code(address(), value); return this; }
-        /** Sets the specified value to the {@link XErrorEvent#request_code} field. */
+        /** Sets the specified value to the {@code request_code} field. */
         public XErrorEvent.Buffer request_code(@NativeType("unsigned char") byte value) { XErrorEvent.nrequest_code(address(), value); return this; }
-        /** Sets the specified value to the {@link XErrorEvent#minor_code} field. */
+        /** Sets the specified value to the {@code minor_code} field. */
         public XErrorEvent.Buffer minor_code(@NativeType("unsigned char") byte value) { XErrorEvent.nminor_code(address(), value); return this; }
 
     }

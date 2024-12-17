@@ -17,37 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing descriptor types that a given descriptor may mutate to.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code descriptorTypeCount} <b>must</b> not be 0 if the corresponding binding is of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> be a valid pointer to an array of {@code descriptorTypeCount} valid, unique {@code VkDescriptorType} values if the given binding is of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT} type</li>
- * <li>{@code descriptorTypeCount} <b>must</b> be 0 if the corresponding binding is not of {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> not contain {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> not contain {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> not contain {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC}</li>
- * <li>{@code pDescriptorTypes} <b>must</b> not contain {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>If {@code descriptorTypeCount} is not 0, {@code pDescriptorTypes} <b>must</b> be a valid pointer to an array of {@code descriptorTypeCount} valid {@code VkDescriptorType} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkMutableDescriptorTypeCreateInfoEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMutableDescriptorTypeListEXT {
- *     uint32_t {@link #descriptorTypeCount};
- *     VkDescriptorType const * {@link #pDescriptorTypes};
- * }</code></pre>
+ *     uint32_t descriptorTypeCount;
+ *     VkDescriptorType const * pDescriptorTypes;
+ * }}</pre>
  */
 public class VkMutableDescriptorTypeListEXT extends Struct<VkMutableDescriptorTypeListEXT> implements NativeResource {
 
@@ -97,14 +71,14 @@ public class VkMutableDescriptorTypeListEXT extends Struct<VkMutableDescriptorTy
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of elements in {@code pDescriptorTypes}. */
+    /** @return the value of the {@code descriptorTypeCount} field. */
     @NativeType("uint32_t")
     public int descriptorTypeCount() { return ndescriptorTypeCount(address()); }
-    /** {@code NULL} or a pointer to an array of {@code descriptorTypeCount} {@code VkDescriptorType} values defining which descriptor types a given binding may mutate to. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDescriptorTypes} field. */
     @NativeType("VkDescriptorType const *")
     public @Nullable IntBuffer pDescriptorTypes() { return npDescriptorTypes(address()); }
 
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #pDescriptorTypes} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code pDescriptorTypes} field. */
     public VkMutableDescriptorTypeListEXT pDescriptorTypes(@Nullable @NativeType("VkDescriptorType const *") IntBuffer value) { npDescriptorTypes(address(), value); return this; }
 
     /**
@@ -294,14 +268,14 @@ public class VkMutableDescriptorTypeListEXT extends Struct<VkMutableDescriptorTy
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMutableDescriptorTypeListEXT#descriptorTypeCount} field. */
+        /** @return the value of the {@code descriptorTypeCount} field. */
         @NativeType("uint32_t")
         public int descriptorTypeCount() { return VkMutableDescriptorTypeListEXT.ndescriptorTypeCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link VkMutableDescriptorTypeListEXT#pDescriptorTypes} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code pDescriptorTypes} field. */
         @NativeType("VkDescriptorType const *")
         public @Nullable IntBuffer pDescriptorTypes() { return VkMutableDescriptorTypeListEXT.npDescriptorTypes(address()); }
 
-        /** Sets the address of the specified {@link IntBuffer} to the {@link VkMutableDescriptorTypeListEXT#pDescriptorTypes} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code pDescriptorTypes} field. */
         public VkMutableDescriptorTypeListEXT.Buffer pDescriptorTypes(@Nullable @NativeType("VkDescriptorType const *") IntBuffer value) { VkMutableDescriptorTypeListEXT.npDescriptorTypes(address(), value); return this; }
 
     }

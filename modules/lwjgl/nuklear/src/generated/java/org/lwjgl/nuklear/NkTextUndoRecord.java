@@ -14,15 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_text_undo_record {
  *     int where;
  *     short insert_length;
  *     short delete_length;
  *     short char_storage;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_text_undo_record")
 public class NkTextUndoRecord extends Struct<NkTextUndoRecord> {

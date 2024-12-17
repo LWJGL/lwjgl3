@@ -15,7 +15,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Remotery profiling for OpenGL. */
 public class RemoteryMetal {
 
     static { LibRemotery.initialize(); }
@@ -26,8 +25,10 @@ public class RemoteryMetal {
 
     // --- [ rmt_BindMetal ] ---
 
+    /** {@code void rmt_BindMetal(id command_buffer)} */
     public static native void nrmt_BindMetal(long command_buffer);
 
+    /** {@code void rmt_BindMetal(id command_buffer)} */
     public static void rmt_BindMetal(@NativeType("id") long command_buffer) {
         if (CHECKS) {
             check(command_buffer);
@@ -37,12 +38,15 @@ public class RemoteryMetal {
 
     // --- [ rmt_UnbindMetal ] ---
 
+    /** {@code void rmt_UnbindMetal(void)} */
     public static native void rmt_UnbindMetal();
 
     // --- [ rmt_BeginMetalSample ] ---
 
+    /** {@code void rmt_BeginMetalSample(rmtPStr name, rmtU32 * hash_cache)} */
     public static native void nrmt_BeginMetalSample(long name, long hash_cache);
 
+    /** {@code void rmt_BeginMetalSample(rmtPStr name, rmtU32 * hash_cache)} */
     public static void rmt_BeginMetalSample(@NativeType("rmtPStr") ByteBuffer name, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkNT1(name);
@@ -51,6 +55,7 @@ public class RemoteryMetal {
         nrmt_BeginMetalSample(memAddress(name), memAddressSafe(hash_cache));
     }
 
+    /** {@code void rmt_BeginMetalSample(rmtPStr name, rmtU32 * hash_cache)} */
     public static void rmt_BeginMetalSample(@NativeType("rmtPStr") CharSequence name, @NativeType("rmtU32 *") @Nullable IntBuffer hash_cache) {
         if (CHECKS) {
             checkSafe(hash_cache, 1);
@@ -67,6 +72,7 @@ public class RemoteryMetal {
 
     // --- [ rmt_EndMetalSample ] ---
 
+    /** {@code void rmt_EndMetalSample(void)} */
     public static native void rmt_EndMetalSample();
 
 }

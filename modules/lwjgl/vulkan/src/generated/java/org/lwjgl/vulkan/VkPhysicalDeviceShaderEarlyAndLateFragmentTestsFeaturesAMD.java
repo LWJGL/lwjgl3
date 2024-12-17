@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether early and late fragment tests can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDShaderEarlyAndLateFragmentTests#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderEarlyAndLateFragmentTests};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderEarlyAndLateFragmentTests;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends Struct<VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether the implementation supports the {@code EarlyAndLateFragmentTestsAMD} {@code Execution} {@code Mode}. */
+    /** @return the value of the {@code shaderEarlyAndLateFragmentTests} field. */
     @NativeType("VkBool32")
     public boolean shaderEarlyAndLateFragmentTests() { return nshaderEarlyAndLateFragmentTests(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDShaderEarlyAndLateFragmentTests#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD} value to the {@link #sType} field. */
+    /** Sets the {@link AMDShaderEarlyAndLateFragmentTests#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD sType$Default() { return sType(AMDShaderEarlyAndLateFragmentTests.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderEarlyAndLateFragmentTests} field. */
+    /** Sets the specified value to the {@code shaderEarlyAndLateFragmentTests} field. */
     public VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD shaderEarlyAndLateFragmentTests(@NativeType("VkBool32") boolean value) { nshaderEarlyAndLateFragmentTests(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD extends 
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#shaderEarlyAndLateFragmentTests} field. */
+        /** @return the value of the {@code shaderEarlyAndLateFragmentTests} field. */
         @NativeType("VkBool32")
         public boolean shaderEarlyAndLateFragmentTests() { return VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.nshaderEarlyAndLateFragmentTests(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.nsType(address(), value); return this; }
-        /** Sets the {@link AMDShaderEarlyAndLateFragmentTests#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD} value to the {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#sType} field. */
+        /** Sets the {@link AMDShaderEarlyAndLateFragmentTests#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer sType$Default() { return sType(AMDShaderEarlyAndLateFragmentTests.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD#shaderEarlyAndLateFragmentTests} field. */
+        /** Sets the specified value to the {@code shaderEarlyAndLateFragmentTests} field. */
         public VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.Buffer shaderEarlyAndLateFragmentTests(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD.nshaderEarlyAndLateFragmentTests(address(), value ? 1 : 0); return this; }
 
     }

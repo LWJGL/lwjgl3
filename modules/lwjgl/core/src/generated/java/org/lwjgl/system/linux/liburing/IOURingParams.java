@@ -17,61 +17,19 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Passed in for {@link LibURing#io_uring_setup setup}. Copied back with updated info on success.
- * 
- * <p>The {@code flags}, {@code sq_thread_cpu}, and {@code sq_thread_idle} fields are used to configure the {@code io_uring} instance. If no {@code flags}
- * are specified, the {@code io_uring} instance is setup for interrupt driven I/O. I/O may be submitted using {@link LibURing#io_uring_enter enter} and can be reaped by polling the
- * completion queue.</p>
- * 
- * <p>The rest of the fields are filled in by the kernel, and provide the information necessary to memory map the submission queue, completion queue, and the
- * array of submission queue entries.</p>
- * 
- * <p>{@code sq_off} describes the offsets of various ring buffer fields. Taken together, {@code sq_entries} and {@code sq_off} provide all of the
- * information necessary for accessing the submission queue ring buffer and the submission queue entry array. The submission queue can be mapped with a
- * call like:</p>
- * 
- * <pre><code>
- * ptr = mmap(0, sq_off.array + sq_entries * sizeof(__u32),
- *            PROT_READ|PROT_WRITE, MAP_SHARED|MAP_POPULATE,
- *            ring_fd, IORING_OFF_SQ_RING);</code></pre>
- * 
- * <p>where {@code sq_off} is the {@code io_sqring_offsets} structure, and {@code ring_fd} is the file descriptor returned from {@link LibURing#io_uring_setup setup}. The addition of
- * {@code sq_off.array} to the length of the region accounts for the fact that the ring located at the end of the data structure. As an example, the ring
- * buffer head pointer can be accessed by adding {@code sq_off.head} to the address returned from {@code mmap(2)}:</p>
- * 
- * <pre><code>
- * head = ptr + sq_off.head;</code></pre>
- * 
- * <p>The array of submission queue entries is mapped with:</p>
- * 
- * <pre><code>
- * sqentries = mmap(0, sq_entries * sizeof(struct io_uring_sqe),
- *                  PROT_READ|PROT_WRITE, MAP_SHARED|MAP_POPULATE,
- *                  ring_fd, IORING_OFF_SQES);</code></pre>
- * 
- * <p>The completion queue is described by {@code cq_entries} and {@code cq_off}. The completion queue is simpler, since the entries are not separated from
- * the queue itself, and can be mapped with:</p>
- * 
- * <pre><code>
- * ptr = mmap(0, cq_off.cqes + cq_entries * sizeof(struct io_uring_cqe),        
- *            PROT_READ|PROT_WRITE, MAP_SHARED|MAP_POPULATE, ring_fd,
- *            IORING_OFF_CQ_RING);</code></pre>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct io_uring_params {
- *     __u32 {@link #sq_entries};
+ *     __u32 sq_entries;
  *     __u32 cq_entries;
- *     __u32 {@link #flags};
+ *     __u32 flags;
  *     __u32 sq_thread_cpu;
  *     __u32 sq_thread_idle;
- *     __u32 {@link #features};
+ *     __u32 features;
  *     __u32 wq_fd;
  *     __u32 resv[3];
- *     {@link IOSQRingOffsets struct io_sqring_offsets} {@link #sq_off};
+ *     {@link IOSQRingOffsets struct io_sqring_offsets} sq_off;
  *     {@link IOCQRingOffsets struct io_cqring_offsets} cq_off;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct io_uring_params")
 public class IOURingParams extends Struct<IOURingParams> implements NativeResource {
@@ -146,13 +104,13 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the number of submission queue entries allocated */
+    /** @return the value of the {@code sq_entries} field. */
     @NativeType("__u32")
     public int sq_entries() { return nsq_entries(address()); }
     /** @return the value of the {@code cq_entries} field. */
     @NativeType("__u32")
     public int cq_entries() { return ncq_entries(address()); }
-    /** one or more of:<br><table><tr><td>{@link LibIOURing#IORING_SETUP_IOPOLL SETUP_IOPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQPOLL SETUP_SQPOLL}</td><td>{@link LibIOURing#IORING_SETUP_SQ_AFF SETUP_SQ_AFF}</td><td>{@link LibIOURing#IORING_SETUP_CQSIZE SETUP_CQSIZE}</td><td>{@link LibIOURing#IORING_SETUP_CLAMP SETUP_CLAMP}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_ATTACH_WQ SETUP_ATTACH_WQ}</td><td>{@link LibIOURing#IORING_SETUP_R_DISABLED SETUP_R_DISABLED}</td><td>{@link LibIOURing#IORING_SETUP_SUBMIT_ALL SETUP_SUBMIT_ALL}</td><td>{@link LibIOURing#IORING_SETUP_COOP_TASKRUN SETUP_COOP_TASKRUN}</td><td>{@link LibIOURing#IORING_SETUP_TASKRUN_FLAG SETUP_TASKRUN_FLAG}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_SQE128 SETUP_SQE128}</td><td>{@link LibIOURing#IORING_SETUP_CQE32 SETUP_CQE32}</td><td>{@link LibIOURing#IORING_SETUP_SINGLE_ISSUER SETUP_SINGLE_ISSUER}</td><td>{@link LibIOURing#IORING_SETUP_DEFER_TASKRUN SETUP_DEFER_TASKRUN}</td><td>{@link LibIOURing#IORING_SETUP_NO_MMAP SETUP_NO_MMAP}</td></tr><tr><td>{@link LibIOURing#IORING_SETUP_REGISTERED_FD_ONLY SETUP_REGISTERED_FD_ONLY}</td><td>{@link LibIOURing#IORING_SETUP_NO_SQARRAY SETUP_NO_SQARRAY}</td></tr></table> */
+    /** @return the value of the {@code flags} field. */
     @NativeType("__u32")
     public int flags() { return nflags(address()); }
     /** @return the value of the {@code sq_thread_cpu} field. */
@@ -161,48 +119,36 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
     /** @return the value of the {@code sq_thread_idle} field. */
     @NativeType("__u32")
     public int sq_thread_idle() { return nsq_thread_idle(address()); }
-    /** filled in by the kernel, which specifies various features supported by current kernel version. One or more of:<br><table><tr><td>{@link LibIOURing#IORING_FEAT_SINGLE_MMAP FEAT_SINGLE_MMAP}</td><td>{@link LibIOURing#IORING_FEAT_NODROP FEAT_NODROP}</td><td>{@link LibIOURing#IORING_FEAT_SUBMIT_STABLE FEAT_SUBMIT_STABLE}</td><td>{@link LibIOURing#IORING_FEAT_RW_CUR_POS FEAT_RW_CUR_POS}</td><td>{@link LibIOURing#IORING_FEAT_CUR_PERSONALITY FEAT_CUR_PERSONALITY}</td></tr><tr><td>{@link LibIOURing#IORING_FEAT_FAST_POLL FEAT_FAST_POLL}</td><td>{@link LibIOURing#IORING_FEAT_POLL_32BITS FEAT_POLL_32BITS}</td><td>{@link LibIOURing#IORING_FEAT_SQPOLL_NONFIXED FEAT_SQPOLL_NONFIXED}</td><td>{@link LibIOURing#IORING_FEAT_EXT_ARG FEAT_EXT_ARG}</td><td>{@link LibIOURing#IORING_FEAT_NATIVE_WORKERS FEAT_NATIVE_WORKERS}</td></tr><tr><td>{@link LibIOURing#IORING_FEAT_RSRC_TAGS FEAT_RSRC_TAGS}</td><td>{@link LibIOURing#IORING_FEAT_CQE_SKIP FEAT_CQE_SKIP}</td><td>{@link LibIOURing#IORING_FEAT_LINKED_FILE FEAT_LINKED_FILE}</td><td>{@link LibIOURing#IORING_FEAT_REG_REG_RING FEAT_REG_REG_RING}</td><td>{@link LibIOURing#IORING_FEAT_RECVSEND_BUNDLE FEAT_RECVSEND_BUNDLE}</td></tr><tr><td>{@link LibIOURing#IORING_FEAT_MIN_TIMEOUT FEAT_MIN_TIMEOUT}</td></tr></table> */
+    /** @return the value of the {@code features} field. */
     @NativeType("__u32")
     public int features() { return nfeatures(address()); }
     /** @return the value of the {@code wq_fd} field. */
     @NativeType("__u32")
     public int wq_fd() { return nwq_fd(address()); }
-    /**
-     * The {@code flags} field is used by the kernel to communicate state information to the application. Currently, it is used to inform the application when
-     * a call to {@link LibURing#io_uring_enter enter} is necessary.
-     * 
-     * <p>The {@code dropped} member is incremented for each invalid submission queue entry encountered in the ring buffer.</p>
-     * 
-     * <p>The {@code head} and {@code tail} track the ring buffer state. The {@code tail} is incremented by the application when submitting new I/O, and the
-     * {@code head} is incremented by the kernel when the I/O has been successfully submitted. Determining the index of the {@code head} or {@code tail} into
-     * the ring is accomplished by applying a mask:</p>
-     * 
-     * <pre><code>
-     * index = tail &amp; ring_mask;</code></pre>
-     */
+    /** @return a {@link IOSQRingOffsets} view of the {@code sq_off} field. */
     @NativeType("struct io_sqring_offsets")
     public IOSQRingOffsets sq_off() { return nsq_off(address()); }
     /** @return a {@link IOCQRingOffsets} view of the {@code cq_off} field. */
     @NativeType("struct io_cqring_offsets")
     public IOCQRingOffsets cq_off() { return ncq_off(address()); }
 
-    /** Sets the specified value to the {@link #sq_entries} field. */
+    /** Sets the specified value to the {@code sq_entries} field. */
     public IOURingParams sq_entries(@NativeType("__u32") int value) { nsq_entries(address(), value); return this; }
     /** Sets the specified value to the {@code cq_entries} field. */
     public IOURingParams cq_entries(@NativeType("__u32") int value) { ncq_entries(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public IOURingParams flags(@NativeType("__u32") int value) { nflags(address(), value); return this; }
     /** Sets the specified value to the {@code sq_thread_cpu} field. */
     public IOURingParams sq_thread_cpu(@NativeType("__u32") int value) { nsq_thread_cpu(address(), value); return this; }
     /** Sets the specified value to the {@code sq_thread_idle} field. */
     public IOURingParams sq_thread_idle(@NativeType("__u32") int value) { nsq_thread_idle(address(), value); return this; }
-    /** Sets the specified value to the {@link #features} field. */
+    /** Sets the specified value to the {@code features} field. */
     public IOURingParams features(@NativeType("__u32") int value) { nfeatures(address(), value); return this; }
     /** Sets the specified value to the {@code wq_fd} field. */
     public IOURingParams wq_fd(@NativeType("__u32") int value) { nwq_fd(address(), value); return this; }
-    /** Copies the specified {@link IOSQRingOffsets} to the {@link #sq_off} field. */
+    /** Copies the specified {@link IOSQRingOffsets} to the {@code sq_off} field. */
     public IOURingParams sq_off(@NativeType("struct io_sqring_offsets") IOSQRingOffsets value) { nsq_off(address(), value); return this; }
-    /** Passes the {@link #sq_off} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code sq_off} field to the specified {@link java.util.function.Consumer Consumer}. */
     public IOURingParams sq_off(java.util.function.Consumer<IOSQRingOffsets> consumer) { consumer.accept(sq_off()); return this; }
     /** Copies the specified {@link IOCQRingOffsets} to the {@code cq_off} field. */
     public IOURingParams cq_off(@NativeType("struct io_cqring_offsets") IOCQRingOffsets value) { ncq_off(address(), value); return this; }
@@ -449,13 +395,13 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link IOURingParams#sq_entries} field. */
+        /** @return the value of the {@code sq_entries} field. */
         @NativeType("__u32")
         public int sq_entries() { return IOURingParams.nsq_entries(address()); }
         /** @return the value of the {@code cq_entries} field. */
         @NativeType("__u32")
         public int cq_entries() { return IOURingParams.ncq_entries(address()); }
-        /** @return the value of the {@link IOURingParams#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("__u32")
         public int flags() { return IOURingParams.nflags(address()); }
         /** @return the value of the {@code sq_thread_cpu} field. */
@@ -464,36 +410,36 @@ public class IOURingParams extends Struct<IOURingParams> implements NativeResour
         /** @return the value of the {@code sq_thread_idle} field. */
         @NativeType("__u32")
         public int sq_thread_idle() { return IOURingParams.nsq_thread_idle(address()); }
-        /** @return the value of the {@link IOURingParams#features} field. */
+        /** @return the value of the {@code features} field. */
         @NativeType("__u32")
         public int features() { return IOURingParams.nfeatures(address()); }
         /** @return the value of the {@code wq_fd} field. */
         @NativeType("__u32")
         public int wq_fd() { return IOURingParams.nwq_fd(address()); }
-        /** @return a {@link IOSQRingOffsets} view of the {@link IOURingParams#sq_off} field. */
+        /** @return a {@link IOSQRingOffsets} view of the {@code sq_off} field. */
         @NativeType("struct io_sqring_offsets")
         public IOSQRingOffsets sq_off() { return IOURingParams.nsq_off(address()); }
         /** @return a {@link IOCQRingOffsets} view of the {@code cq_off} field. */
         @NativeType("struct io_cqring_offsets")
         public IOCQRingOffsets cq_off() { return IOURingParams.ncq_off(address()); }
 
-        /** Sets the specified value to the {@link IOURingParams#sq_entries} field. */
+        /** Sets the specified value to the {@code sq_entries} field. */
         public IOURingParams.Buffer sq_entries(@NativeType("__u32") int value) { IOURingParams.nsq_entries(address(), value); return this; }
         /** Sets the specified value to the {@code cq_entries} field. */
         public IOURingParams.Buffer cq_entries(@NativeType("__u32") int value) { IOURingParams.ncq_entries(address(), value); return this; }
-        /** Sets the specified value to the {@link IOURingParams#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public IOURingParams.Buffer flags(@NativeType("__u32") int value) { IOURingParams.nflags(address(), value); return this; }
         /** Sets the specified value to the {@code sq_thread_cpu} field. */
         public IOURingParams.Buffer sq_thread_cpu(@NativeType("__u32") int value) { IOURingParams.nsq_thread_cpu(address(), value); return this; }
         /** Sets the specified value to the {@code sq_thread_idle} field. */
         public IOURingParams.Buffer sq_thread_idle(@NativeType("__u32") int value) { IOURingParams.nsq_thread_idle(address(), value); return this; }
-        /** Sets the specified value to the {@link IOURingParams#features} field. */
+        /** Sets the specified value to the {@code features} field. */
         public IOURingParams.Buffer features(@NativeType("__u32") int value) { IOURingParams.nfeatures(address(), value); return this; }
         /** Sets the specified value to the {@code wq_fd} field. */
         public IOURingParams.Buffer wq_fd(@NativeType("__u32") int value) { IOURingParams.nwq_fd(address(), value); return this; }
-        /** Copies the specified {@link IOSQRingOffsets} to the {@link IOURingParams#sq_off} field. */
+        /** Copies the specified {@link IOSQRingOffsets} to the {@code sq_off} field. */
         public IOURingParams.Buffer sq_off(@NativeType("struct io_sqring_offsets") IOSQRingOffsets value) { IOURingParams.nsq_off(address(), value); return this; }
-        /** Passes the {@link IOURingParams#sq_off} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code sq_off} field to the specified {@link java.util.function.Consumer Consumer}. */
         public IOURingParams.Buffer sq_off(java.util.function.Consumer<IOSQRingOffsets> consumer) { consumer.accept(sq_off()); return this; }
         /** Copies the specified {@link IOCQRingOffsets} to the {@code cq_off} field. */
         public IOURingParams.Buffer cq_off(@NativeType("struct io_cqring_offsets") IOCQRingOffsets value) { IOURingParams.ncq_off(address(), value); return this; }

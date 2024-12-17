@@ -14,16 +14,14 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct hwloc_topology_diff_obj_attr_s {
  *     hwloc_topology_diff_type_t type;
  *     {@link hwloc_topology_diff_u struct hwloc_topology_diff_u} * next;
  *     int obj_depth;
  *     unsigned int obj_index;
  *     {@link hwloc_topology_diff_obj_attr_u struct hwloc_topology_diff_obj_attr_u} diff;
- * }</code></pre>
+ * }}</pre>
  */
 public class hwloc_topology_diff_obj_attr_s extends Struct<hwloc_topology_diff_obj_attr_s> {
 

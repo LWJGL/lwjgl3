@@ -16,15 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Buffer region struct.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct cl_buffer_region {
- *     size_t {@link #origin};
- *     size_t {@link #size};
- * }</code></pre>
+ *     size_t origin;
+ *     size_t size;
+ * }}</pre>
  */
 @NativeType("struct cl_buffer_region")
 public class CLBufferRegion extends Struct<CLBufferRegion> implements NativeResource {
@@ -75,16 +71,16 @@ public class CLBufferRegion extends Struct<CLBufferRegion> implements NativeReso
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the region offset, in bytes */
+    /** @return the value of the {@code origin} field. */
     @NativeType("size_t")
     public long origin() { return norigin(address()); }
-    /** the region size, in bytes */
+    /** @return the value of the {@code size} field. */
     @NativeType("size_t")
     public long size() { return nsize(address()); }
 
-    /** Sets the specified value to the {@link #origin} field. */
+    /** Sets the specified value to the {@code origin} field. */
     public CLBufferRegion origin(@NativeType("size_t") long value) { norigin(address(), value); return this; }
-    /** Sets the specified value to the {@link #size} field. */
+    /** Sets the specified value to the {@code size} field. */
     public CLBufferRegion size(@NativeType("size_t") long value) { nsize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -293,16 +289,16 @@ public class CLBufferRegion extends Struct<CLBufferRegion> implements NativeReso
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link CLBufferRegion#origin} field. */
+        /** @return the value of the {@code origin} field. */
         @NativeType("size_t")
         public long origin() { return CLBufferRegion.norigin(address()); }
-        /** @return the value of the {@link CLBufferRegion#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("size_t")
         public long size() { return CLBufferRegion.nsize(address()); }
 
-        /** Sets the specified value to the {@link CLBufferRegion#origin} field. */
+        /** Sets the specified value to the {@code origin} field. */
         public CLBufferRegion.Buffer origin(@NativeType("size_t") long value) { CLBufferRegion.norigin(address(), value); return this; }
-        /** Sets the specified value to the {@link CLBufferRegion#size} field. */
+        /** Sets the specified value to the {@code size} field. */
         public CLBufferRegion.Buffer size(@NativeType("size_t") long value) { CLBufferRegion.nsize(address(), value); return this; }
 
     }

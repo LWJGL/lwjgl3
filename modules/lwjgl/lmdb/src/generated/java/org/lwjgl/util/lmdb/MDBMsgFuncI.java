@@ -12,17 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * A callback function used to print a message from the library.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * int (*{@link #invoke}) (
- *     char const *msg,
- *     void *ctx
- * )</code></pre>
- */
+/** Callback function: {@link #invoke MDB_msg_func *} */
 @FunctionalInterface
 @NativeType("MDB_msg_func *")
 public interface MDBMsgFuncI extends CallbackI {
@@ -45,14 +35,7 @@ public interface MDBMsgFuncI extends CallbackI {
         apiClosureRet(ret, __result);
     }
 
-    /**
-     * A callback function used to print a message from the library.
-     *
-     * @param msg the string to be printed
-     * @param ctx an arbitrary context pointer for the callback
-     *
-     * @return &lt; 0 on failure, &ge; 0 on success
-     */
+    /** {@code int (* MDB_msg_func *) (char const * msg, void * ctx)} */
     int invoke(@NativeType("char const *") long msg, @NativeType("void *") long ctx);
 
 }

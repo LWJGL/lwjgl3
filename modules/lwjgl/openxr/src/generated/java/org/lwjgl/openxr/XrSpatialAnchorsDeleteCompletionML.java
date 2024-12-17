@@ -16,49 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Completion structure to retrieve the result of the anchor deletion.
- * 
- * <h5>Future Return Codes</h5>
- * 
- * <p>{@code futureResult} values:</p>
- * 
- * <dl>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-successcodes">Success</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_SUCCESS SUCCESS}</li>
- * <li>{@link XR10#XR_SESSION_LOSS_PENDING SESSION_LOSS_PENDING}</li>
- * </ul></dd>
- * <dt><a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-errorcodes">Failure</a></dt>
- * <dd><ul>
- * <li>{@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}</li>
- * <li>{@link XR10#XR_ERROR_INSTANCE_LOST ERROR_INSTANCE_LOST}</li>
- * <li>{@link XR10#XR_ERROR_SESSION_LOST ERROR_SESSION_LOST}</li>
- * <li>{@link MLSpatialAnchorsStorage#XR_ERROR_SPATIAL_ANCHORS_ANCHOR_NOT_FOUND_ML ERROR_SPATIAL_ANCHORS_ANCHOR_NOT_FOUND_ML}</li>
- * <li>{@link MLSpatialAnchors#XR_ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML}</li>
- * </ul></dd>
- * </dl>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsDeleteCompletionML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a>. See also: {@link XrSpatialAnchorsDeleteCompletionDetailsML}</li>
- * <li>{@code futureResult} <b>must</b> be a valid {@code XrResult} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLSpatialAnchorsStorage#xrDeleteSpatialAnchorsAsyncML DeleteSpatialAnchorsAsyncML}, {@link MLSpatialAnchorsStorage#xrDeleteSpatialAnchorsCompleteML DeleteSpatialAnchorsCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsDeleteCompletionML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrResult {@link #futureResult};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrResult futureResult;
+ * }}</pre>
  */
 public class XrSpatialAnchorsDeleteCompletionML extends Struct<XrSpatialAnchorsDeleteCompletionML> implements NativeResource {
 
@@ -111,25 +74,25 @@ public class XrSpatialAnchorsDeleteCompletionML extends Struct<XrSpatialAnchorsD
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@code XrResult} of the asynchronous operation. */
+    /** @return the value of the {@code futureResult} field. */
     @NativeType("XrResult")
     public int futureResult() { return nfutureResult(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsDeleteCompletionML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML} value to the {@code type} field. */
     public XrSpatialAnchorsDeleteCompletionML type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsDeleteCompletionML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
     /** Prepends the specified {@link XrSpatialAnchorsDeleteCompletionDetailsML} value to the {@code next} chain. */
     public XrSpatialAnchorsDeleteCompletionML next(XrSpatialAnchorsDeleteCompletionDetailsML value) { return this.next(value.next(this.next()).address()); }
-    /** Sets the specified value to the {@link #futureResult} field. */
+    /** Sets the specified value to the {@code futureResult} field. */
     public XrSpatialAnchorsDeleteCompletionML futureResult(@NativeType("XrResult") int value) { nfutureResult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -335,25 +298,25 @@ public class XrSpatialAnchorsDeleteCompletionML extends Struct<XrSpatialAnchorsD
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsDeleteCompletionML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsDeleteCompletionML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsDeleteCompletionML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSpatialAnchorsDeleteCompletionML.nnext(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsDeleteCompletionML#futureResult} field. */
+        /** @return the value of the {@code futureResult} field. */
         @NativeType("XrResult")
         public int futureResult() { return XrSpatialAnchorsDeleteCompletionML.nfutureResult(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsDeleteCompletionML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsDeleteCompletionML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsDeleteCompletionML.ntype(address(), value); return this; }
-        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML} value to the {@link XrSpatialAnchorsDeleteCompletionML#type} field. */
+        /** Sets the {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML} value to the {@code type} field. */
         public XrSpatialAnchorsDeleteCompletionML.Buffer type$Default() { return type(MLSpatialAnchorsStorage.XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsDeleteCompletionML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsDeleteCompletionML.Buffer next(@NativeType("void *") long value) { XrSpatialAnchorsDeleteCompletionML.nnext(address(), value); return this; }
         /** Prepends the specified {@link XrSpatialAnchorsDeleteCompletionDetailsML} value to the {@code next} chain. */
         public XrSpatialAnchorsDeleteCompletionML.Buffer next(XrSpatialAnchorsDeleteCompletionDetailsML value) { return this.next(value.next(this.next()).address()); }
-        /** Sets the specified value to the {@link XrSpatialAnchorsDeleteCompletionML#futureResult} field. */
+        /** Sets the specified value to the {@code futureResult} field. */
         public XrSpatialAnchorsDeleteCompletionML.Buffer futureResult(@NativeType("XrResult") int value) { XrSpatialAnchorsDeleteCompletionML.nfutureResult(address(), value); return this; }
 
     }

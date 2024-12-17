@@ -17,43 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Returns the hand joint velocities.
- * 
- * <h5>Description</h5>
- * 
- * <p>The application <b>must</b> allocate the memory for the output array {@code jointVelocities} that can contain at least {@code jointCount} of {@link XrHandJointVelocityEXT}.</p>
- * 
- * <p>The application <b>must</b> input {@code jointCount} as described by the {@code XrHandJointSetEXT} when creating the {@code XrHandTrackerEXT}. Otherwise, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
- * 
- * <p>The runtime <b>must</b> update the {@code jointVelocities} array in the order so that the application can index elements using the corresponding hand joint enum (e.g. {@code XrHandJointEXT}) as described by the {@code XrHandJointSetEXT} when creating the {@code XrHandTrackerEXT}. For example, when the {@code XrHandTrackerEXT} is created with {@link EXTHandTracking#XR_HAND_JOINT_SET_DEFAULT_EXT HAND_JOINT_SET_DEFAULT_EXT}, the application <b>must</b> set the {@code jointCount} to {@link EXTHandTracking#XR_HAND_JOINT_COUNT_EXT HAND_JOINT_COUNT_EXT}, and the returned {@code jointVelocities} array <b>must</b> be ordered to be indexed by enum {@code XrHandJointEXT} enum.</p>
- * 
- * <p>If the returned {@link XrHandJointLocationsEXT}{@code ::isActive} is false, it indicates the hand tracker did not detect a hand input or the application lost input focus. In this case, the runtime <b>must</b> return all {@code jointVelocities} with neither {@link XR10#XR_SPACE_VELOCITY_LINEAR_VALID_BIT SPACE_VELOCITY_LINEAR_VALID_BIT} nor {@link XR10#XR_SPACE_VELOCITY_ANGULAR_VALID_BIT SPACE_VELOCITY_ANGULAR_VALID_BIT} set.</p>
- * 
- * <p>If an {@link XrHandJointVelocitiesEXT} structure is chained to {@link XrHandJointLocationsEXT}{@code ::next}, the returned {@link XrHandJointLocationsEXT}{@code ::isActive} is true, and the velocity is observed or can be calculated by the runtime, the runtime <b>must</b> fill in the linear velocity of each hand joint within the reference frame of {@link XrHandJointsLocateInfoEXT}{@code ::baseSpace} and set the {@link XR10#XR_SPACE_VELOCITY_LINEAR_VALID_BIT SPACE_VELOCITY_LINEAR_VALID_BIT}. Similarly, if an {@link XrHandJointVelocitiesEXT} structure is chained to {@link XrHandJointLocationsEXT}{@code ::next}, the returned {@link XrHandJointLocationsEXT}{@code ::isActive} is true, and the <em>angular velocity</em> is observed or can be calculated by the runtime, the runtime <b>must</b> fill in the angular velocity of each joint within the reference frame of {@link XrHandJointsLocateInfoEXT}{@code ::baseSpace} and set the {@link XR10#XR_SPACE_VELOCITY_ANGULAR_VALID_BIT SPACE_VELOCITY_ANGULAR_VALID_BIT}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTHandTracking XR_EXT_hand_tracking} extension <b>must</b> be enabled prior to using {@link XrHandJointVelocitiesEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTHandTracking#XR_TYPE_HAND_JOINT_VELOCITIES_EXT TYPE_HAND_JOINT_VELOCITIES_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code jointVelocities} <b>must</b> be a pointer to an array of {@code jointCount} {@link XrHandJointVelocityEXT} structures</li>
- * <li>The {@code jointCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandJointLocationsEXT}, {@link XrHandJointVelocityEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandJointVelocitiesEXT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #jointCount};
- *     {@link XrHandJointVelocityEXT XrHandJointVelocityEXT} * {@link #jointVelocities};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t jointCount;
+ *     {@link XrHandJointVelocityEXT XrHandJointVelocityEXT} * jointVelocities;
+ * }}</pre>
  */
 public class XrHandJointVelocitiesEXT extends Struct<XrHandJointVelocitiesEXT> implements NativeResource {
 
@@ -109,26 +79,26 @@ public class XrHandJointVelocitiesEXT extends Struct<XrHandJointVelocitiesEXT> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} describing the number of elements in {@code jointVelocities} array. */
+    /** @return the value of the {@code jointCount} field. */
     @NativeType("uint32_t")
     public int jointCount() { return njointCount(address()); }
-    /** an array of {@link XrHandJointVelocityEXT} receiving the returned hand joint velocities. */
+    /** @return a {@link XrHandJointVelocityEXT.Buffer} view of the struct array pointed to by the {@code jointVelocities} field. */
     @NativeType("XrHandJointVelocityEXT *")
     public XrHandJointVelocityEXT.Buffer jointVelocities() { return njointVelocities(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHandJointVelocitiesEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTHandTracking#XR_TYPE_HAND_JOINT_VELOCITIES_EXT TYPE_HAND_JOINT_VELOCITIES_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTHandTracking#XR_TYPE_HAND_JOINT_VELOCITIES_EXT TYPE_HAND_JOINT_VELOCITIES_EXT} value to the {@code type} field. */
     public XrHandJointVelocitiesEXT type$Default() { return type(EXTHandTracking.XR_TYPE_HAND_JOINT_VELOCITIES_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHandJointVelocitiesEXT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrHandJointVelocityEXT.Buffer} to the {@link #jointVelocities} field. */
+    /** Sets the address of the specified {@link XrHandJointVelocityEXT.Buffer} to the {@code jointVelocities} field. */
     public XrHandJointVelocitiesEXT jointVelocities(@NativeType("XrHandJointVelocityEXT *") XrHandJointVelocityEXT.Buffer value) { njointVelocities(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -337,26 +307,26 @@ public class XrHandJointVelocitiesEXT extends Struct<XrHandJointVelocitiesEXT> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHandJointVelocitiesEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandJointVelocitiesEXT.ntype(address()); }
-        /** @return the value of the {@link XrHandJointVelocitiesEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrHandJointVelocitiesEXT.nnext(address()); }
-        /** @return the value of the {@link XrHandJointVelocitiesEXT#jointCount} field. */
+        /** @return the value of the {@code jointCount} field. */
         @NativeType("uint32_t")
         public int jointCount() { return XrHandJointVelocitiesEXT.njointCount(address()); }
-        /** @return a {@link XrHandJointVelocityEXT.Buffer} view of the struct array pointed to by the {@link XrHandJointVelocitiesEXT#jointVelocities} field. */
+        /** @return a {@link XrHandJointVelocityEXT.Buffer} view of the struct array pointed to by the {@code jointVelocities} field. */
         @NativeType("XrHandJointVelocityEXT *")
         public XrHandJointVelocityEXT.Buffer jointVelocities() { return XrHandJointVelocitiesEXT.njointVelocities(address()); }
 
-        /** Sets the specified value to the {@link XrHandJointVelocitiesEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHandJointVelocitiesEXT.Buffer type(@NativeType("XrStructureType") int value) { XrHandJointVelocitiesEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTHandTracking#XR_TYPE_HAND_JOINT_VELOCITIES_EXT TYPE_HAND_JOINT_VELOCITIES_EXT} value to the {@link XrHandJointVelocitiesEXT#type} field. */
+        /** Sets the {@link EXTHandTracking#XR_TYPE_HAND_JOINT_VELOCITIES_EXT TYPE_HAND_JOINT_VELOCITIES_EXT} value to the {@code type} field. */
         public XrHandJointVelocitiesEXT.Buffer type$Default() { return type(EXTHandTracking.XR_TYPE_HAND_JOINT_VELOCITIES_EXT); }
-        /** Sets the specified value to the {@link XrHandJointVelocitiesEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHandJointVelocitiesEXT.Buffer next(@NativeType("void *") long value) { XrHandJointVelocitiesEXT.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrHandJointVelocityEXT.Buffer} to the {@link XrHandJointVelocitiesEXT#jointVelocities} field. */
+        /** Sets the address of the specified {@link XrHandJointVelocityEXT.Buffer} to the {@code jointVelocities} field. */
         public XrHandJointVelocitiesEXT.Buffer jointVelocities(@NativeType("XrHandJointVelocityEXT *") XrHandJointVelocityEXT.Buffer value) { XrHandJointVelocitiesEXT.njointVelocities(address(), value); return this; }
 
     }

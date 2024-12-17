@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPipelineVertexInputDivisorStateCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineVertexInputDivisorStateCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t vertexBindingDivisorCount;
  *     {@link VkVertexInputBindingDivisorDescription VkVertexInputBindingDivisorDescription} const * pVertexBindingDivisors;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPipelineVertexInputDivisorStateCreateInfoKHR extends VkPipelineVertexInputDivisorStateCreateInfo {
 

@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH265PictureInfoFlags {
  *     uint32_t is_reference : 1;
  *     uint32_t IrapPicFlag : 1;
@@ -30,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t short_term_ref_pic_set_sps_flag : 1;
  *     uint32_t slice_temporal_mvp_enabled_flag : 1;
  *     uint32_t reserved : 23;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH265PictureInfoFlags extends Struct<StdVideoEncodeH265PictureInfoFlags> implements NativeResource {
 

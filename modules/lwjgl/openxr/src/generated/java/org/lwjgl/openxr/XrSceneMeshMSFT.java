@@ -16,25 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Scene mesh.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSceneUnderstanding XR_MSFT_scene_understanding} extension <b>must</b> be enabled prior to using {@link XrSceneMeshMSFT}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSceneMeshesMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSceneMeshMSFT {
- *     uint64_t {@link #meshBufferId};
- *     XrBool32 {@link #supportsIndicesUint16};
- * }</code></pre>
+ *     uint64_t meshBufferId;
+ *     XrBool32 supportsIndicesUint16;
+ * }}</pre>
  */
 public class XrSceneMeshMSFT extends Struct<XrSceneMeshMSFT> implements NativeResource {
 
@@ -84,16 +70,16 @@ public class XrSceneMeshMSFT extends Struct<XrSceneMeshMSFT> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code uint64_t} identifier that specifies the scene mesh buffer. If {@code meshBufferId} is zero then this scene component does not have mesh data of corresponding {@code XrSceneComponentTypeMSFT} in {@link MSFTSceneUnderstanding#xrGetSceneComponentsMSFT GetSceneComponentsMSFT}{@code ::getInfo}. */
+    /** @return the value of the {@code meshBufferId} field. */
     @NativeType("uint64_t")
     public long meshBufferId() { return nmeshBufferId(address()); }
-    /** {@link XR10#XR_TRUE TRUE} if the mesh supports reading 16-bit unsigned indices. */
+    /** @return the value of the {@code supportsIndicesUint16} field. */
     @NativeType("XrBool32")
     public boolean supportsIndicesUint16() { return nsupportsIndicesUint16(address()) != 0; }
 
-    /** Sets the specified value to the {@link #meshBufferId} field. */
+    /** Sets the specified value to the {@code meshBufferId} field. */
     public XrSceneMeshMSFT meshBufferId(@NativeType("uint64_t") long value) { nmeshBufferId(address(), value); return this; }
-    /** Sets the specified value to the {@link #supportsIndicesUint16} field. */
+    /** Sets the specified value to the {@code supportsIndicesUint16} field. */
     public XrSceneMeshMSFT supportsIndicesUint16(@NativeType("XrBool32") boolean value) { nsupportsIndicesUint16(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -283,16 +269,16 @@ public class XrSceneMeshMSFT extends Struct<XrSceneMeshMSFT> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSceneMeshMSFT#meshBufferId} field. */
+        /** @return the value of the {@code meshBufferId} field. */
         @NativeType("uint64_t")
         public long meshBufferId() { return XrSceneMeshMSFT.nmeshBufferId(address()); }
-        /** @return the value of the {@link XrSceneMeshMSFT#supportsIndicesUint16} field. */
+        /** @return the value of the {@code supportsIndicesUint16} field. */
         @NativeType("XrBool32")
         public boolean supportsIndicesUint16() { return XrSceneMeshMSFT.nsupportsIndicesUint16(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrSceneMeshMSFT#meshBufferId} field. */
+        /** Sets the specified value to the {@code meshBufferId} field. */
         public XrSceneMeshMSFT.Buffer meshBufferId(@NativeType("uint64_t") long value) { XrSceneMeshMSFT.nmeshBufferId(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSceneMeshMSFT#supportsIndicesUint16} field. */
+        /** Sets the specified value to the {@code supportsIndicesUint16} field. */
         public XrSceneMeshMSFT.Buffer supportsIndicesUint16(@NativeType("XrBool32") boolean value) { XrSceneMeshMSFT.nsupportsIndicesUint16(address(), value ? 1 : 0); return this; }
 
     }

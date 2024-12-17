@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkSemaphoreSignalInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSemaphoreSignalInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkSemaphore semaphore;
  *     uint64_t value;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkSemaphoreSignalInfoKHR extends VkSemaphoreSignalInfo {
 

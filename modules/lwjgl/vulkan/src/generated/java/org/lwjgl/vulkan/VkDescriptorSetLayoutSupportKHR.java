@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDescriptorSetLayoutSupport}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDescriptorSetLayoutSupportKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 supported;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDescriptorSetLayoutSupportKHR extends VkDescriptorSetLayoutSupport {
 

@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * This structure models a BGRA color value of a {@code CPAL} palette entry.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Color {
  *     FT_Byte blue;
  *     FT_Byte green;
  *     FT_Byte red;
  *     FT_Byte alpha;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Color extends Struct<FT_Color> implements NativeResource {
 

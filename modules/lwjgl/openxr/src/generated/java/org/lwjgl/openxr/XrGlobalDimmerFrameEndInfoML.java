@@ -16,26 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Global Dimmer End Frame Information.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLGlobalDimmer XR_ML_global_dimmer} extension <b>must</b> be enabled prior to using {@link XrGlobalDimmerFrameEndInfoML}</li>
- * <li>{@code type} <b>must</b> be {@link MLGlobalDimmer#XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code flags} <b>must</b> be 0 or a valid combination of {@code XrGlobalDimmerFrameEndInfoFlagBitsML} values</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrGlobalDimmerFrameEndInfoML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     float {@link #dimmerValue};
- *     XrGlobalDimmerFrameEndInfoFlagsML {@link #flags};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     float dimmerValue;
+ *     XrGlobalDimmerFrameEndInfoFlagsML flags;
+ * }}</pre>
  */
 public class XrGlobalDimmerFrameEndInfoML extends Struct<XrGlobalDimmerFrameEndInfoML> implements NativeResource {
 
@@ -91,27 +78,27 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct<XrGlobalDimmerFrameEndI
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a value between 0.0 (transparent) and 1.0 (opaque). The runtime <b>may</b> adjust the dimmerValue used during composition at the runtime’s discretion. This <b>may</b> be done for user safety, display performance, or other reasons. Values outside of the range are silently clamped. */
+    /** @return the value of the {@code dimmerValue} field. */
     public float dimmerValue() { return ndimmerValue(address()); }
-    /** a bitmask of {@code XrGlobalDimmerFrameEndInfoFlagsML} */
+    /** @return the value of the {@code flags} field. */
     @NativeType("XrGlobalDimmerFrameEndInfoFlagsML")
     public long flags() { return nflags(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrGlobalDimmerFrameEndInfoML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLGlobalDimmer#XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLGlobalDimmer#XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML} value to the {@code type} field. */
     public XrGlobalDimmerFrameEndInfoML type$Default() { return type(MLGlobalDimmer.XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrGlobalDimmerFrameEndInfoML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #dimmerValue} field. */
+    /** Sets the specified value to the {@code dimmerValue} field. */
     public XrGlobalDimmerFrameEndInfoML dimmerValue(float value) { ndimmerValue(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public XrGlobalDimmerFrameEndInfoML flags(@NativeType("XrGlobalDimmerFrameEndInfoFlagsML") long value) { nflags(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -313,27 +300,27 @@ public class XrGlobalDimmerFrameEndInfoML extends Struct<XrGlobalDimmerFrameEndI
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrGlobalDimmerFrameEndInfoML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrGlobalDimmerFrameEndInfoML.ntype(address()); }
-        /** @return the value of the {@link XrGlobalDimmerFrameEndInfoML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrGlobalDimmerFrameEndInfoML.nnext(address()); }
-        /** @return the value of the {@link XrGlobalDimmerFrameEndInfoML#dimmerValue} field. */
+        /** @return the value of the {@code dimmerValue} field. */
         public float dimmerValue() { return XrGlobalDimmerFrameEndInfoML.ndimmerValue(address()); }
-        /** @return the value of the {@link XrGlobalDimmerFrameEndInfoML#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("XrGlobalDimmerFrameEndInfoFlagsML")
         public long flags() { return XrGlobalDimmerFrameEndInfoML.nflags(address()); }
 
-        /** Sets the specified value to the {@link XrGlobalDimmerFrameEndInfoML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrGlobalDimmerFrameEndInfoML.Buffer type(@NativeType("XrStructureType") int value) { XrGlobalDimmerFrameEndInfoML.ntype(address(), value); return this; }
-        /** Sets the {@link MLGlobalDimmer#XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML} value to the {@link XrGlobalDimmerFrameEndInfoML#type} field. */
+        /** Sets the {@link MLGlobalDimmer#XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML} value to the {@code type} field. */
         public XrGlobalDimmerFrameEndInfoML.Buffer type$Default() { return type(MLGlobalDimmer.XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML); }
-        /** Sets the specified value to the {@link XrGlobalDimmerFrameEndInfoML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrGlobalDimmerFrameEndInfoML.Buffer next(@NativeType("void const *") long value) { XrGlobalDimmerFrameEndInfoML.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGlobalDimmerFrameEndInfoML#dimmerValue} field. */
+        /** Sets the specified value to the {@code dimmerValue} field. */
         public XrGlobalDimmerFrameEndInfoML.Buffer dimmerValue(float value) { XrGlobalDimmerFrameEndInfoML.ndimmerValue(address(), value); return this; }
-        /** Sets the specified value to the {@link XrGlobalDimmerFrameEndInfoML#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public XrGlobalDimmerFrameEndInfoML.Buffer flags(@NativeType("XrGlobalDimmerFrameEndInfoFlagsML") long value) { XrGlobalDimmerFrameEndInfoML.nflags(address(), value); return this; }
 
     }

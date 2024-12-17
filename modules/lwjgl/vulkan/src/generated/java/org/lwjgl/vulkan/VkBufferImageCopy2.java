@@ -16,49 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying a buffer image copy operation.
- * 
- * <h5>Description</h5>
- * 
- * <p>This structure is functionally identical to {@link VkBufferImageCopy}, but adds {@code sType} and {@code pNext} parameters, allowing it to be more easily extended.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code bufferRowLength} <b>must</b> be 0, or greater than or equal to the {@code width} member of {@code imageExtent}</li>
- * <li>{@code bufferImageHeight} <b>must</b> be 0, or greater than or equal to the {@code height} member of {@code imageExtent}</li>
- * <li>The {@code aspectMask} member of {@code imageSubresource} <b>must</b> only have a single bit set</li>
- * <li>{@code imageExtent.width} <b>must</b> not be 0</li>
- * <li>{@code imageExtent.height} <b>must</b> not be 0</li>
- * <li>{@code imageExtent.depth} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK13#VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2 STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL} or a pointer to a valid instance of {@link VkCopyCommandTransformInfoQCOM}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>{@code imageSubresource} <b>must</b> be a valid {@link VkImageSubresourceLayers} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkCopyBufferToImageInfo2}, {@link VkCopyImageToBufferInfo2}, {@link VkExtent3D}, {@link VkImageSubresourceLayers}, {@link VkOffset3D}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkBufferImageCopy2 {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkDeviceSize {@link #bufferOffset};
- *     uint32_t {@link #bufferRowLength};
- *     uint32_t {@link #bufferImageHeight};
- *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} {@link #imageSubresource};
- *     {@link VkOffset3D VkOffset3D} {@link #imageOffset};
- *     {@link VkExtent3D VkExtent3D} {@link #imageExtent};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkDeviceSize bufferOffset;
+ *     uint32_t bufferRowLength;
+ *     uint32_t bufferImageHeight;
+ *     {@link VkImageSubresourceLayers VkImageSubresourceLayers} imageSubresource;
+ *     {@link VkOffset3D VkOffset3D} imageOffset;
+ *     {@link VkExtent3D VkExtent3D} imageExtent;
+ * }}</pre>
  */
 public class VkBufferImageCopy2 extends Struct<VkBufferImageCopy2> implements NativeResource {
 
@@ -126,53 +94,53 @@ public class VkBufferImageCopy2 extends Struct<VkBufferImageCopy2> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the offset in bytes from the start of the buffer object where the image data is copied from or to. */
+    /** @return the value of the {@code bufferOffset} field. */
     @NativeType("VkDeviceSize")
     public long bufferOffset() { return nbufferOffset(address()); }
-    /** {@code bufferRowLength} and {@code bufferImageHeight} specify in texels a subregion of a larger two- or three-dimensional image in buffer memory, and control the addressing calculations. If either of these values is zero, that aspect of the buffer memory is considered to be tightly packed according to the {@code imageExtent}. */
+    /** @return the value of the {@code bufferRowLength} field. */
     @NativeType("uint32_t")
     public int bufferRowLength() { return nbufferRowLength(address()); }
-    /** see {@code bufferRowLength} */
+    /** @return the value of the {@code bufferImageHeight} field. */
     @NativeType("uint32_t")
     public int bufferImageHeight() { return nbufferImageHeight(address()); }
-    /** a {@link VkImageSubresourceLayers} used to specify the specific image subresources of the image used for the source or destination image data. */
+    /** @return a {@link VkImageSubresourceLayers} view of the {@code imageSubresource} field. */
     public VkImageSubresourceLayers imageSubresource() { return nimageSubresource(address()); }
-    /** selects the initial {@code x}, {@code y}, {@code z} offsets in texels of the sub-region of the source or destination image data. */
+    /** @return a {@link VkOffset3D} view of the {@code imageOffset} field. */
     public VkOffset3D imageOffset() { return nimageOffset(address()); }
-    /** the size in texels of the image to copy in {@code width}, {@code height} and {@code depth}. */
+    /** @return a {@link VkExtent3D} view of the {@code imageExtent} field. */
     public VkExtent3D imageExtent() { return nimageExtent(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkBufferImageCopy2 sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2 STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2} value to the {@link #sType} field. */
+    /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2 STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2} value to the {@code sType} field. */
     public VkBufferImageCopy2 sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkBufferImageCopy2 pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
     public VkBufferImageCopy2 pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #bufferOffset} field. */
+    /** Sets the specified value to the {@code bufferOffset} field. */
     public VkBufferImageCopy2 bufferOffset(@NativeType("VkDeviceSize") long value) { nbufferOffset(address(), value); return this; }
-    /** Sets the specified value to the {@link #bufferRowLength} field. */
+    /** Sets the specified value to the {@code bufferRowLength} field. */
     public VkBufferImageCopy2 bufferRowLength(@NativeType("uint32_t") int value) { nbufferRowLength(address(), value); return this; }
-    /** Sets the specified value to the {@link #bufferImageHeight} field. */
+    /** Sets the specified value to the {@code bufferImageHeight} field. */
     public VkBufferImageCopy2 bufferImageHeight(@NativeType("uint32_t") int value) { nbufferImageHeight(address(), value); return this; }
-    /** Copies the specified {@link VkImageSubresourceLayers} to the {@link #imageSubresource} field. */
+    /** Copies the specified {@link VkImageSubresourceLayers} to the {@code imageSubresource} field. */
     public VkBufferImageCopy2 imageSubresource(VkImageSubresourceLayers value) { nimageSubresource(address(), value); return this; }
-    /** Passes the {@link #imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkBufferImageCopy2 imageSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(imageSubresource()); return this; }
-    /** Copies the specified {@link VkOffset3D} to the {@link #imageOffset} field. */
+    /** Copies the specified {@link VkOffset3D} to the {@code imageOffset} field. */
     public VkBufferImageCopy2 imageOffset(VkOffset3D value) { nimageOffset(address(), value); return this; }
-    /** Passes the {@link #imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkBufferImageCopy2 imageOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(imageOffset()); return this; }
-    /** Copies the specified {@link VkExtent3D} to the {@link #imageExtent} field. */
+    /** Copies the specified {@link VkExtent3D} to the {@code imageExtent} field. */
     public VkBufferImageCopy2 imageExtent(VkExtent3D value) { nimageExtent(address(), value); return this; }
-    /** Passes the {@link #imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
     public VkBufferImageCopy2 imageExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(imageExtent()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -398,53 +366,53 @@ public class VkBufferImageCopy2 extends Struct<VkBufferImageCopy2> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkBufferImageCopy2#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkBufferImageCopy2.nsType(address()); }
-        /** @return the value of the {@link VkBufferImageCopy2#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkBufferImageCopy2.npNext(address()); }
-        /** @return the value of the {@link VkBufferImageCopy2#bufferOffset} field. */
+        /** @return the value of the {@code bufferOffset} field. */
         @NativeType("VkDeviceSize")
         public long bufferOffset() { return VkBufferImageCopy2.nbufferOffset(address()); }
-        /** @return the value of the {@link VkBufferImageCopy2#bufferRowLength} field. */
+        /** @return the value of the {@code bufferRowLength} field. */
         @NativeType("uint32_t")
         public int bufferRowLength() { return VkBufferImageCopy2.nbufferRowLength(address()); }
-        /** @return the value of the {@link VkBufferImageCopy2#bufferImageHeight} field. */
+        /** @return the value of the {@code bufferImageHeight} field. */
         @NativeType("uint32_t")
         public int bufferImageHeight() { return VkBufferImageCopy2.nbufferImageHeight(address()); }
-        /** @return a {@link VkImageSubresourceLayers} view of the {@link VkBufferImageCopy2#imageSubresource} field. */
+        /** @return a {@link VkImageSubresourceLayers} view of the {@code imageSubresource} field. */
         public VkImageSubresourceLayers imageSubresource() { return VkBufferImageCopy2.nimageSubresource(address()); }
-        /** @return a {@link VkOffset3D} view of the {@link VkBufferImageCopy2#imageOffset} field. */
+        /** @return a {@link VkOffset3D} view of the {@code imageOffset} field. */
         public VkOffset3D imageOffset() { return VkBufferImageCopy2.nimageOffset(address()); }
-        /** @return a {@link VkExtent3D} view of the {@link VkBufferImageCopy2#imageExtent} field. */
+        /** @return a {@link VkExtent3D} view of the {@code imageExtent} field. */
         public VkExtent3D imageExtent() { return VkBufferImageCopy2.nimageExtent(address()); }
 
-        /** Sets the specified value to the {@link VkBufferImageCopy2#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkBufferImageCopy2.Buffer sType(@NativeType("VkStructureType") int value) { VkBufferImageCopy2.nsType(address(), value); return this; }
-        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2 STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2} value to the {@link VkBufferImageCopy2#sType} field. */
+        /** Sets the {@link VK13#VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2 STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2} value to the {@code sType} field. */
         public VkBufferImageCopy2.Buffer sType$Default() { return sType(VK13.VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2); }
-        /** Sets the specified value to the {@link VkBufferImageCopy2#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkBufferImageCopy2.Buffer pNext(@NativeType("void const *") long value) { VkBufferImageCopy2.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkCopyCommandTransformInfoQCOM} value to the {@code pNext} chain. */
         public VkBufferImageCopy2.Buffer pNext(VkCopyCommandTransformInfoQCOM value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkBufferImageCopy2#bufferOffset} field. */
+        /** Sets the specified value to the {@code bufferOffset} field. */
         public VkBufferImageCopy2.Buffer bufferOffset(@NativeType("VkDeviceSize") long value) { VkBufferImageCopy2.nbufferOffset(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferImageCopy2#bufferRowLength} field. */
+        /** Sets the specified value to the {@code bufferRowLength} field. */
         public VkBufferImageCopy2.Buffer bufferRowLength(@NativeType("uint32_t") int value) { VkBufferImageCopy2.nbufferRowLength(address(), value); return this; }
-        /** Sets the specified value to the {@link VkBufferImageCopy2#bufferImageHeight} field. */
+        /** Sets the specified value to the {@code bufferImageHeight} field. */
         public VkBufferImageCopy2.Buffer bufferImageHeight(@NativeType("uint32_t") int value) { VkBufferImageCopy2.nbufferImageHeight(address(), value); return this; }
-        /** Copies the specified {@link VkImageSubresourceLayers} to the {@link VkBufferImageCopy2#imageSubresource} field. */
+        /** Copies the specified {@link VkImageSubresourceLayers} to the {@code imageSubresource} field. */
         public VkBufferImageCopy2.Buffer imageSubresource(VkImageSubresourceLayers value) { VkBufferImageCopy2.nimageSubresource(address(), value); return this; }
-        /** Passes the {@link VkBufferImageCopy2#imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageSubresource} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkBufferImageCopy2.Buffer imageSubresource(java.util.function.Consumer<VkImageSubresourceLayers> consumer) { consumer.accept(imageSubresource()); return this; }
-        /** Copies the specified {@link VkOffset3D} to the {@link VkBufferImageCopy2#imageOffset} field. */
+        /** Copies the specified {@link VkOffset3D} to the {@code imageOffset} field. */
         public VkBufferImageCopy2.Buffer imageOffset(VkOffset3D value) { VkBufferImageCopy2.nimageOffset(address(), value); return this; }
-        /** Passes the {@link VkBufferImageCopy2#imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageOffset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkBufferImageCopy2.Buffer imageOffset(java.util.function.Consumer<VkOffset3D> consumer) { consumer.accept(imageOffset()); return this; }
-        /** Copies the specified {@link VkExtent3D} to the {@link VkBufferImageCopy2#imageExtent} field. */
+        /** Copies the specified {@link VkExtent3D} to the {@code imageExtent} field. */
         public VkBufferImageCopy2.Buffer imageExtent(VkExtent3D value) { VkBufferImageCopy2.nimageExtent(address(), value); return this; }
-        /** Passes the {@link VkBufferImageCopy2#imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code imageExtent} field to the specified {@link java.util.function.Consumer Consumer}. */
         public VkBufferImageCopy2.Buffer imageExtent(java.util.function.Consumer<VkExtent3D> consumer) { consumer.accept(imageExtent()); return this; }
 
     }

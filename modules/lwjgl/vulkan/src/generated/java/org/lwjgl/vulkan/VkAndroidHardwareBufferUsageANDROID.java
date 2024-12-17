@@ -16,31 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct containing Android hardware buffer usage flags.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@code androidHardwareBufferUsage} field <b>must</b> include Android hardware buffer usage flags listed in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#memory-external-android-hardware-buffer-usage">AHardwareBuffer Usage Equivalence</a> table when the corresponding Vulkan image usage or image creation flags are included in the {@code usage} or {@code flags} fields of {@link VkPhysicalDeviceImageFormatInfo2}. It <b>must</b> include at least one GPU usage flag ({@code AHARDWAREBUFFER_USAGE_GPU_*}), even if none of the corresponding Vulkan usages or flags are requested.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>Requiring at least one GPU usage flag ensures that Android hardware buffer memory will be allocated in a memory pool accessible to the Vulkan implementation, and that specializing the memory layout based on usage flags does not prevent it from being compatible with Vulkan. Implementations <b>may</b> avoid unnecessary restrictions caused by this requirement by using vendor usage flags to indicate that only the Vulkan uses indicated in {@link VkImageFormatProperties2} are required.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkAndroidHardwareBufferUsageANDROID {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint64_t {@link #androidHardwareBufferUsage};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint64_t androidHardwareBufferUsage;
+ * }}</pre>
  */
 public class VkAndroidHardwareBufferUsageANDROID extends Struct<VkAndroidHardwareBufferUsageANDROID> implements NativeResource {
 
@@ -93,21 +74,21 @@ public class VkAndroidHardwareBufferUsageANDROID extends Struct<VkAndroidHardwar
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** returns the Android hardware buffer usage flags. */
+    /** @return the value of the {@code androidHardwareBufferUsage} field. */
     @NativeType("uint64_t")
     public long androidHardwareBufferUsage() { return nandroidHardwareBufferUsage(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkAndroidHardwareBufferUsageANDROID sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID} value to the {@link #sType} field. */
+    /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID} value to the {@code sType} field. */
     public VkAndroidHardwareBufferUsageANDROID sType$Default() { return sType(ANDROIDExternalMemoryAndroidHardwareBuffer.VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkAndroidHardwareBufferUsageANDROID pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -299,21 +280,21 @@ public class VkAndroidHardwareBufferUsageANDROID extends Struct<VkAndroidHardwar
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkAndroidHardwareBufferUsageANDROID#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkAndroidHardwareBufferUsageANDROID.nsType(address()); }
-        /** @return the value of the {@link VkAndroidHardwareBufferUsageANDROID#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkAndroidHardwareBufferUsageANDROID.npNext(address()); }
-        /** @return the value of the {@link VkAndroidHardwareBufferUsageANDROID#androidHardwareBufferUsage} field. */
+        /** @return the value of the {@code androidHardwareBufferUsage} field. */
         @NativeType("uint64_t")
         public long androidHardwareBufferUsage() { return VkAndroidHardwareBufferUsageANDROID.nandroidHardwareBufferUsage(address()); }
 
-        /** Sets the specified value to the {@link VkAndroidHardwareBufferUsageANDROID#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkAndroidHardwareBufferUsageANDROID.Buffer sType(@NativeType("VkStructureType") int value) { VkAndroidHardwareBufferUsageANDROID.nsType(address(), value); return this; }
-        /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID} value to the {@link VkAndroidHardwareBufferUsageANDROID#sType} field. */
+        /** Sets the {@link ANDROIDExternalMemoryAndroidHardwareBuffer#VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID} value to the {@code sType} field. */
         public VkAndroidHardwareBufferUsageANDROID.Buffer sType$Default() { return sType(ANDROIDExternalMemoryAndroidHardwareBuffer.VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID); }
-        /** Sets the specified value to the {@link VkAndroidHardwareBufferUsageANDROID#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkAndroidHardwareBufferUsageANDROID.Buffer pNext(@NativeType("void *") long value) { VkAndroidHardwareBufferUsageANDROID.npNext(address(), value); return this; }
 
     }

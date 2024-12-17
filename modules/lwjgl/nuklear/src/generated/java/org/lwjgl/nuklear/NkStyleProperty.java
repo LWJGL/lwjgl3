@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_style_property {
  *     {@link NkStyleItem struct nk_style_item} normal;
  *     {@link NkStyleItem struct nk_style_item} hover;
@@ -27,8 +25,8 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkColor struct nk_color} label_normal;
  *     {@link NkColor struct nk_color} label_hover;
  *     {@link NkColor struct nk_color} label_active;
- *     enum nk_symbol_type {@link #sym_left};
- *     enum nk_symbol_type {@link #sym_right};
+ *     enum nk_symbol_type sym_left;
+ *     enum nk_symbol_type sym_right;
  *     float border;
  *     float rounding;
  *     {@link NkVec2 struct nk_vec2} padding;
@@ -40,7 +38,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link NkHandle nk_handle} userdata;
  *     {@link NkDrawBeginCallbackI nk_draw_begin} draw_begin;
  *     {@link NkDrawEndCallbackI nk_draw_end} draw_end;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_style_property")
 public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeResource {
@@ -166,10 +164,10 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     /** @return a {@link NkColor} view of the {@code label_active} field. */
     @NativeType("struct nk_color")
     public NkColor label_active() { return nlabel_active(address()); }
-    /** one of:<br><table><tr><td>{@link Nuklear#NK_SYMBOL_NONE SYMBOL_NONE}</td><td>{@link Nuklear#NK_SYMBOL_X SYMBOL_X}</td><td>{@link Nuklear#NK_SYMBOL_UNDERSCORE SYMBOL_UNDERSCORE}</td><td>{@link Nuklear#NK_SYMBOL_CIRCLE_SOLID SYMBOL_CIRCLE_SOLID}</td></tr><tr><td>{@link Nuklear#NK_SYMBOL_CIRCLE_OUTLINE SYMBOL_CIRCLE_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_RECT_SOLID SYMBOL_RECT_SOLID}</td><td>{@link Nuklear#NK_SYMBOL_RECT_OUTLINE SYMBOL_RECT_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_UP SYMBOL_TRIANGLE_UP}</td></tr><tr><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_DOWN SYMBOL_TRIANGLE_DOWN}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_LEFT SYMBOL_TRIANGLE_LEFT}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_RIGHT SYMBOL_TRIANGLE_RIGHT}</td><td>{@link Nuklear#NK_SYMBOL_PLUS SYMBOL_PLUS}</td></tr><tr><td>{@link Nuklear#NK_SYMBOL_MINUS SYMBOL_MINUS}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_UP_OUTLINE SYMBOL_TRIANGLE_UP_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_DOWN_OUTLINE SYMBOL_TRIANGLE_DOWN_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_LEFT_OUTLINE SYMBOL_TRIANGLE_LEFT_OUTLINE}</td></tr><tr><td>{@link Nuklear#NK_SYMBOL_TRIANGLE_RIGHT_OUTLINE SYMBOL_TRIANGLE_RIGHT_OUTLINE}</td><td>{@link Nuklear#NK_SYMBOL_MAX SYMBOL_MAX}</td></tr></table> */
+    /** @return the value of the {@code sym_left} field. */
     @NativeType("enum nk_symbol_type")
     public int sym_left() { return nsym_left(address()); }
-    /** see {@code sym_left} */
+    /** @return the value of the {@code sym_right} field. */
     @NativeType("enum nk_symbol_type")
     public int sym_right() { return nsym_right(address()); }
     /** @return the value of the {@code border} field. */
@@ -230,9 +228,9 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
     public NkStyleProperty label_active(@NativeType("struct nk_color") NkColor value) { nlabel_active(address(), value); return this; }
     /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkStyleProperty label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
-    /** Sets the specified value to the {@link #sym_left} field. */
+    /** Sets the specified value to the {@code sym_left} field. */
     public NkStyleProperty sym_left(@NativeType("enum nk_symbol_type") int value) { nsym_left(address(), value); return this; }
-    /** Sets the specified value to the {@link #sym_right} field. */
+    /** Sets the specified value to the {@code sym_right} field. */
     public NkStyleProperty sym_right(@NativeType("enum nk_symbol_type") int value) { nsym_right(address(), value); return this; }
     /** Sets the specified value to the {@code border} field. */
     public NkStyleProperty border(float value) { nborder(address(), value); return this; }
@@ -602,10 +600,10 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         /** @return a {@link NkColor} view of the {@code label_active} field. */
         @NativeType("struct nk_color")
         public NkColor label_active() { return NkStyleProperty.nlabel_active(address()); }
-        /** @return the value of the {@link NkStyleProperty#sym_left} field. */
+        /** @return the value of the {@code sym_left} field. */
         @NativeType("enum nk_symbol_type")
         public int sym_left() { return NkStyleProperty.nsym_left(address()); }
-        /** @return the value of the {@link NkStyleProperty#sym_right} field. */
+        /** @return the value of the {@code sym_right} field. */
         @NativeType("enum nk_symbol_type")
         public int sym_right() { return NkStyleProperty.nsym_right(address()); }
         /** @return the value of the {@code border} field. */
@@ -666,9 +664,9 @@ public class NkStyleProperty extends Struct<NkStyleProperty> implements NativeRe
         public NkStyleProperty.Buffer label_active(@NativeType("struct nk_color") NkColor value) { NkStyleProperty.nlabel_active(address(), value); return this; }
         /** Passes the {@code label_active} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkStyleProperty.Buffer label_active(java.util.function.Consumer<NkColor> consumer) { consumer.accept(label_active()); return this; }
-        /** Sets the specified value to the {@link NkStyleProperty#sym_left} field. */
+        /** Sets the specified value to the {@code sym_left} field. */
         public NkStyleProperty.Buffer sym_left(@NativeType("enum nk_symbol_type") int value) { NkStyleProperty.nsym_left(address(), value); return this; }
-        /** Sets the specified value to the {@link NkStyleProperty#sym_right} field. */
+        /** Sets the specified value to the {@code sym_right} field. */
         public NkStyleProperty.Buffer sym_right(@NativeType("enum nk_symbol_type") int value) { NkStyleProperty.nsym_right(address(), value); return this; }
         /** Sets the specified value to the {@code border} field. */
         public NkStyleProperty.Buffer border(float value) { NkStyleProperty.nborder(address(), value); return this; }

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkRenderingAreaInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkRenderingAreaInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkFormat const * pColorAttachmentFormats;
  *     VkFormat depthAttachmentFormat;
  *     VkFormat stencilAttachmentFormat;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkRenderingAreaInfoKHR extends VkRenderingAreaInfo {
 

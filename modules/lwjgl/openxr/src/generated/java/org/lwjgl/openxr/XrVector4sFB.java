@@ -16,36 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A four component short integer vector.
- * 
- * <h5>Member Descriptions</h5>
- * 
- * <ul>
- * <li>{@code x} is the {@code x} component of the vector.</li>
- * <li>{@code y} is the {@code y} component of the vector.</li>
- * <li>{@code z} is the {@code z} component of the vector.</li>
- * <li>{@code w} is the {@code w} component of the vector.</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBHandTrackingMesh XR_FB_hand_tracking_mesh} extension <b>must</b> be enabled prior to using {@link XrVector4sFB}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandTrackingMeshFB}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrVector4sFB {
  *     int16_t x;
  *     int16_t y;
  *     int16_t z;
  *     int16_t w;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrVector4sFB extends Struct<XrVector4sFB> implements NativeResource {
 

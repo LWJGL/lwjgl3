@@ -17,16 +17,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_user_font_glyph {
- *     {@link NkVec2 struct nk_vec2} {@link #uv}[2];
- *     {@link NkVec2 struct nk_vec2} {@link #offset};
- *     float {@link #width};
- *     float {@link #height};
- *     float {@link #xadvance};
- * }</code></pre>
+ *     {@link NkVec2 struct nk_vec2} uv[2];
+ *     {@link NkVec2 struct nk_vec2} offset;
+ *     float width;
+ *     float height;
+ *     float xadvance;
+ * }}</pre>
  */
 @NativeType("struct nk_user_font_glyph")
 public class NkUserFontGlyph extends Struct<NkUserFontGlyph> implements NativeResource {
@@ -86,39 +84,39 @@ public class NkUserFontGlyph extends Struct<NkUserFontGlyph> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** texture coordinates */
+    /** @return a {@link NkVec2}.Buffer view of the {@code uv} field. */
     @NativeType("struct nk_vec2[2]")
     public NkVec2.Buffer uv() { return nuv(address()); }
-    /** texture coordinates */
+    /** @return a {@link NkVec2} view of the struct at the specified index of the {@code uv} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 uv(int index) { return nuv(address(), index); }
-    /** offset between top left and glyph */
+    /** @return a {@link NkVec2} view of the {@code offset} field. */
     @NativeType("struct nk_vec2")
     public NkVec2 offset() { return noffset(address()); }
-    /** width of the glyph */
+    /** @return the value of the {@code width} field. */
     public float width() { return nwidth(address()); }
-    /** height of the glyph */
+    /** @return the value of the {@code height} field. */
     public float height() { return nheight(address()); }
-    /** offset to the next glyph */
+    /** @return the value of the {@code xadvance} field. */
     public float xadvance() { return nxadvance(address()); }
 
-    /** Copies the specified {@link NkVec2.Buffer} to the {@link #uv} field. */
+    /** Copies the specified {@link NkVec2.Buffer} to the {@code uv} field. */
     public NkUserFontGlyph uv(@NativeType("struct nk_vec2[2]") NkVec2.Buffer value) { nuv(address(), value); return this; }
-    /** Copies the specified {@link NkVec2} at the specified index of the {@link #uv} field. */
+    /** Copies the specified {@link NkVec2} at the specified index of the {@code uv} field. */
     public NkUserFontGlyph uv(int index, @NativeType("struct nk_vec2") NkVec2 value) { nuv(address(), index, value); return this; }
-    /** Passes the {@link #uv} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code uv} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkUserFontGlyph uv(java.util.function.Consumer<NkVec2.Buffer> consumer) { consumer.accept(uv()); return this; }
-    /** Passes the element at {@code index} of the {@link #uv} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the element at {@code index} of the {@code uv} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkUserFontGlyph uv(int index, java.util.function.Consumer<NkVec2> consumer) { consumer.accept(uv(index)); return this; }
-    /** Copies the specified {@link NkVec2} to the {@link #offset} field. */
+    /** Copies the specified {@link NkVec2} to the {@code offset} field. */
     public NkUserFontGlyph offset(@NativeType("struct nk_vec2") NkVec2 value) { noffset(address(), value); return this; }
-    /** Passes the {@link #offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
     public NkUserFontGlyph offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(offset()); return this; }
-    /** Sets the specified value to the {@link #width} field. */
+    /** Sets the specified value to the {@code width} field. */
     public NkUserFontGlyph width(float value) { nwidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #height} field. */
+    /** Sets the specified value to the {@code height} field. */
     public NkUserFontGlyph height(float value) { nheight(address(), value); return this; }
-    /** Sets the specified value to the {@link #xadvance} field. */
+    /** Sets the specified value to the {@code xadvance} field. */
     public NkUserFontGlyph xadvance(float value) { nxadvance(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -356,39 +354,39 @@ public class NkUserFontGlyph extends Struct<NkUserFontGlyph> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link NkVec2}.Buffer view of the {@link NkUserFontGlyph#uv} field. */
+        /** @return a {@link NkVec2}.Buffer view of the {@code uv} field. */
         @NativeType("struct nk_vec2[2]")
         public NkVec2.Buffer uv() { return NkUserFontGlyph.nuv(address()); }
-        /** @return a {@link NkVec2} view of the struct at the specified index of the {@link NkUserFontGlyph#uv} field. */
+        /** @return a {@link NkVec2} view of the struct at the specified index of the {@code uv} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 uv(int index) { return NkUserFontGlyph.nuv(address(), index); }
-        /** @return a {@link NkVec2} view of the {@link NkUserFontGlyph#offset} field. */
+        /** @return a {@link NkVec2} view of the {@code offset} field. */
         @NativeType("struct nk_vec2")
         public NkVec2 offset() { return NkUserFontGlyph.noffset(address()); }
-        /** @return the value of the {@link NkUserFontGlyph#width} field. */
+        /** @return the value of the {@code width} field. */
         public float width() { return NkUserFontGlyph.nwidth(address()); }
-        /** @return the value of the {@link NkUserFontGlyph#height} field. */
+        /** @return the value of the {@code height} field. */
         public float height() { return NkUserFontGlyph.nheight(address()); }
-        /** @return the value of the {@link NkUserFontGlyph#xadvance} field. */
+        /** @return the value of the {@code xadvance} field. */
         public float xadvance() { return NkUserFontGlyph.nxadvance(address()); }
 
-        /** Copies the specified {@link NkVec2.Buffer} to the {@link NkUserFontGlyph#uv} field. */
+        /** Copies the specified {@link NkVec2.Buffer} to the {@code uv} field. */
         public NkUserFontGlyph.Buffer uv(@NativeType("struct nk_vec2[2]") NkVec2.Buffer value) { NkUserFontGlyph.nuv(address(), value); return this; }
-        /** Copies the specified {@link NkVec2} at the specified index of the {@link NkUserFontGlyph#uv} field. */
+        /** Copies the specified {@link NkVec2} at the specified index of the {@code uv} field. */
         public NkUserFontGlyph.Buffer uv(int index, @NativeType("struct nk_vec2") NkVec2 value) { NkUserFontGlyph.nuv(address(), index, value); return this; }
-        /** Passes the {@link NkUserFontGlyph#uv} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code uv} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkUserFontGlyph.Buffer uv(java.util.function.Consumer<NkVec2.Buffer> consumer) { consumer.accept(uv()); return this; }
-        /** Passes the element at {@code index} of the {@link NkUserFontGlyph#uv} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the element at {@code index} of the {@code uv} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkUserFontGlyph.Buffer uv(int index, java.util.function.Consumer<NkVec2> consumer) { consumer.accept(uv(index)); return this; }
-        /** Copies the specified {@link NkVec2} to the {@link NkUserFontGlyph#offset} field. */
+        /** Copies the specified {@link NkVec2} to the {@code offset} field. */
         public NkUserFontGlyph.Buffer offset(@NativeType("struct nk_vec2") NkVec2 value) { NkUserFontGlyph.noffset(address(), value); return this; }
-        /** Passes the {@link NkUserFontGlyph#offset} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code offset} field to the specified {@link java.util.function.Consumer Consumer}. */
         public NkUserFontGlyph.Buffer offset(java.util.function.Consumer<NkVec2> consumer) { consumer.accept(offset()); return this; }
-        /** Sets the specified value to the {@link NkUserFontGlyph#width} field. */
+        /** Sets the specified value to the {@code width} field. */
         public NkUserFontGlyph.Buffer width(float value) { NkUserFontGlyph.nwidth(address(), value); return this; }
-        /** Sets the specified value to the {@link NkUserFontGlyph#height} field. */
+        /** Sets the specified value to the {@code height} field. */
         public NkUserFontGlyph.Buffer height(float value) { NkUserFontGlyph.nheight(address(), value); return this; }
-        /** Sets the specified value to the {@link NkUserFontGlyph#xadvance} field. */
+        /** Sets the specified value to the {@code xadvance} field. */
         public NkUserFontGlyph.Buffer xadvance(float value) { NkUserFontGlyph.nxadvance(address(), value); return this; }
 
     }

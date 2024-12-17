@@ -16,92 +16,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying parameters of a newly created execution graph pipeline.
- * 
- * <h5>Description</h5>
- * 
- * <p>The parameters {@code basePipelineHandle} and {@code basePipelineIndex} are described in more detail in <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-pipeline-derivatives">Pipeline Derivatives</a>.</p>
- * 
- * <p>Each shader stage provided when creating an execution graph pipeline (including those in libraries) is associated with a name and an index, determined by the inclusion or omission of a {@link VkPipelineShaderStageNodeCreateInfoAMDX} structure in its {@code pNext} chain. For any graphics pipeline libraries, only the name and index of the vertex or mesh shader stage is linked directly to the graph as a node - other shader stages in the pipeline will be executed after those shader stages as normal. Task shaders cannot be included in a graphics pipeline used for a draw node.</p>
- * 
- * <p>In addition to the shader name and index, an internal "node index" is also generated for each node, which can be queried with {@link AMDXShaderEnqueue#vkGetExecutionGraphPipelineNodeIndexAMDX GetExecutionGraphPipelineNodeIndexAMDX}, and is used exclusively for initial dispatch of an execution graph.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the {@code pNext} chain does not include a {@link VkPipelineCreateFlags2CreateInfo} structure, {@code flags} <b>must</b> be a valid combination of {@code VkPipelineCreateFlagBits} values</li>
- * <li>If {@code flags} contains the {@link VK10#VK_PIPELINE_CREATE_DERIVATIVE_BIT PIPELINE_CREATE_DERIVATIVE_BIT} flag, and {@code basePipelineIndex} is -1, {@code basePipelineHandle} <b>must</b> be a valid execution graph {@code VkPipeline} handle</li>
- * <li>If {@code flags} contains the {@link VK10#VK_PIPELINE_CREATE_DERIVATIVE_BIT PIPELINE_CREATE_DERIVATIVE_BIT} flag, and {@code basePipelineHandle} is {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code basePipelineIndex} <b>must</b> be a valid index into the calling command’s {@code pCreateInfos} parameter</li>
- * <li>If {@code flags} contains the {@link VK10#VK_PIPELINE_CREATE_DERIVATIVE_BIT PIPELINE_CREATE_DERIVATIVE_BIT} flag, {@code basePipelineIndex} <b>must</b> be -1 or {@code basePipelineHandle} <b>must</b> be {@link VK10#VK_NULL_HANDLE NULL_HANDLE}</li>
- * <li>If a push constant block is declared in a shader, a push constant range in {@code layout} <b>must</b> match the shader stage</li>
- * <li>If a push constant block is declared in a shader, the block must be contained inside the push constant range in {@code layout} that matches the stage</li>
- * <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources">resource variable</a> is declared in a shader, the corresponding descriptor set in {@code layout} <b>must</b> match the shader stage</li>
- * <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources">resource variable</a> is declared in a shader, and the descriptor type is not {@link EXTMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_EXT DESCRIPTOR_TYPE_MUTABLE_EXT}, the corresponding descriptor set in {@code layout} <b>must</b> match the descriptor type</li>
- * <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources">resource variable</a> is declared in a shader as an array, the corresponding descriptor set in {@code layout} <b>must</b> match the descriptor count</li>
- * <li>If a <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces-resources">resource variables</a> is declared in a shader as an array of descriptors, then the descriptor type of that variable <b>must</b> not be {@link VK13#VK_DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK DESCRIPTOR_TYPE_INLINE_UNIFORM_BLOCK}</li>
- * </ul>
- * 
- * <ul>
- * <li>{@code flags} <b>must</b> not include {@link KHRRayTracingPipeline#VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR PIPELINE_CREATE_RAY_TRACING_NO_NULL_ANY_HIT_SHADERS_BIT_KHR}</li>
- * <li>{@code flags} <b>must</b> not include {@link KHRRayTracingPipeline#VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR PIPELINE_CREATE_RAY_TRACING_NO_NULL_CLOSEST_HIT_SHADERS_BIT_KHR}</li>
- * <li>{@code flags} <b>must</b> not include {@link KHRRayTracingPipeline#VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR PIPELINE_CREATE_RAY_TRACING_NO_NULL_MISS_SHADERS_BIT_KHR}</li>
- * <li>{@code flags} <b>must</b> not include {@link KHRRayTracingPipeline#VK_PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR PIPELINE_CREATE_RAY_TRACING_NO_NULL_INTERSECTION_SHADERS_BIT_KHR}</li>
- * <li>{@code flags} <b>must</b> not include {@link KHRRayTracingPipeline#VK_PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR PIPELINE_CREATE_RAY_TRACING_SKIP_TRIANGLES_BIT_KHR}</li>
- * <li>{@code flags} <b>must</b> not include {@link KHRRayTracingPipeline#VK_PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR PIPELINE_CREATE_RAY_TRACING_SKIP_AABBS_BIT_KHR}</li>
- * <li>{@code flags} <b>must</b> not include {@link KHRRayTracingPipeline#VK_PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR PIPELINE_CREATE_RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR}</li>
- * <li>{@code flags} <b>must</b> not include {@link NVRayTracingMotionBlur#VK_PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV PIPELINE_CREATE_RAY_TRACING_ALLOW_MOTION_BIT_NV}</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-deviceGeneratedComputePipelines">{@link VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV}{@code ::deviceGeneratedComputePipelines}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link NVDeviceGeneratedCommands#VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV}</li>
- * <li>If {@code flags} includes {@link NVDeviceGeneratedCommands#VK_PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV PIPELINE_CREATE_INDIRECT_BINDABLE_BIT_NV}, then the {@code pNext} chain <b>must</b> include a pointer to a valid instance of {@link VkComputePipelineIndirectBufferInfoNV} specifying the address where the pipeline’s metadata will be saved</li>
- * <li>If {@code flags} includes {@link EXTDeviceGeneratedCommands#VK_PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT PIPELINE_CREATE_2_INDIRECT_BINDABLE_BIT_EXT}, then the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-deviceGeneratedCommands">{@link VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT}{@code ::deviceGeneratedCommands}</a> feature <b>must</b> be enabled</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-pipelineCreationCacheControl">{@code pipelineCreationCacheControl}</a> feature is not enabled, {@code flags} <b>must</b> not include {@link VK13#VK_PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT PIPELINE_CREATE_FAIL_ON_PIPELINE_COMPILE_REQUIRED_BIT} or {@link VK13#VK_PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT PIPELINE_CREATE_EARLY_RETURN_ON_FAILURE_BIT}</li>
- * <li>The {@code stage} member of any element of {@code pStages} <b>must</b> be {@link VK10#VK_SHADER_STAGE_COMPUTE_BIT SHADER_STAGE_COMPUTE_BIT}</li>
- * <li>The shader code for the entry point identified by each element of {@code pStages} and the rest of the state identified by this structure <b>must</b> adhere to the pipeline linking rules described in the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#interfaces">Shader Interfaces</a> chapter</li>
- * <li>{@code layout} <b>must</b> be <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#descriptorsets-pipelinelayout-consistency">consistent</a> with the layout of the shaders specified in {@code pStages}</li>
- * <li>If {@code pLibraryInfo} is not {@code NULL}, each element of its {@code pLibraries} member <b>must</b> have been created with a {@code layout} that is compatible with the {@code layout} in this pipeline</li>
- * <li>The number of resources in {@code layout} accessible to each shader stage that is used by the pipeline <b>must</b> be less than or equal to {@link VkPhysicalDeviceLimits}{@code ::maxPerStageResources}</li>
- * <li>If {@code pLibraryInfo} is not {@code NULL}, each element of {@code pLibraryInfo→pLibraries} <b>must</b> be either a compute pipeline, an execution graph pipeline, or a graphics pipeline</li>
- * <li>If {@code pLibraryInfo} is not {@code NULL}, each element of {@code pLibraryInfo→pLibraries} that is a compute pipeline or a graphics pipeline <b>must</b> have been created with {@link AMDXShaderEnqueue#VK_PIPELINE_CREATE_2_EXECUTION_GRAPH_BIT_AMDX PIPELINE_CREATE_2_EXECUTION_GRAPH_BIT_AMDX} set</li>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-shaderMeshEnqueue">{@code shaderMeshEnqueue}</a> feature is not enabled, and {@code pLibraryInfo→pLibraries} is not {@code NULL}, {@code pLibraryInfo→pLibraries} <b>must</b> not contain any graphics pipelines</li>
- * <li>Any element of {@code pLibraryInfo→pLibraries} identifying a graphics pipeline <b>must</b> have been created with <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#pipelines-graphics-subsets-complete">all possible state subsets</a></li>
- * <li>There <b>must</b> be no two nodes in the pipeline that share both the same shader name and index, as specified by {@link VkPipelineShaderStageNodeCreateInfoAMDX}</li>
- * <li>There <b>must</b> be no two nodes in the pipeline that share the same shader name and have input payload declarations with different sizes</li>
- * <li>There <b>must</b> be no two nodes in the pipeline that share the same name but have different execution models</li>
- * <li>There <b>must</b> be no two nodes in the pipeline that share the same name where one includes {@code CoalescedInputCountAMDX} and the other does not</li>
- * <li>There <b>must</b> be no two nodes in the pipeline that share the same name where one includes {@code StaticNumWorkgroupsAMDX} and the other does not</li>
- * <li>If an output payload declared in any shader in the pipeline has a {@code PayloadNodeNameAMDX} decoration with a {@code Node} {@code Name} that matches the shader name of any other node in the graph, the size of the output payload <b>must</b> match the size of the input payload in the matching node</li>
- * <li>If {@code flags} does not include {@link KHRPipelineLibrary#VK_PIPELINE_CREATE_LIBRARY_BIT_KHR PIPELINE_CREATE_LIBRARY_BIT_KHR}, and an output payload declared in any shader in the pipeline does not have a {@code PayloadNodeSparseArrayAMDX} decoration, there <b>must</b> be a node in the graph corresponding to every index from 0 to its {@code PayloadNodeArraySizeAMDX} decoration</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX}</li>
- * <li>Each {@code pNext} member of any structure (including this one) in the {@code pNext} chain <b>must</b> be either {@code NULL} or a pointer to a valid instance of {@link VkPipelineCompilerControlCreateInfoAMD} or {@link VkPipelineCreationFeedbackCreateInfo}</li>
- * <li>The {@code sType} value of each struct in the {@code pNext} chain <b>must</b> be unique</li>
- * <li>If {@code stageCount} is not 0, and {@code pStages} is not {@code NULL}, {@code pStages} <b>must</b> be a valid pointer to an array of {@code stageCount} valid {@link VkPipelineShaderStageCreateInfo} structures</li>
- * <li>If {@code pLibraryInfo} is not {@code NULL}, {@code pLibraryInfo} <b>must</b> be a valid pointer to a valid {@link VkPipelineLibraryCreateInfoKHR} structure</li>
- * <li>{@code layout} <b>must</b> be a valid {@code VkPipelineLayout} handle</li>
- * <li>Both of {@code basePipelineHandle}, and {@code layout} that are valid handles of non-ignored parameters <b>must</b> have been created, allocated, or retrieved from the same {@code VkDevice}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineLibraryCreateInfoKHR}, {@link VkPipelineShaderStageCreateInfo}, {@link AMDXShaderEnqueue#vkCreateExecutionGraphPipelinesAMDX CreateExecutionGraphPipelinesAMDX}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExecutionGraphPipelineCreateInfoAMDX {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkPipelineCreateFlags {@link #flags};
- *     uint32_t {@link #stageCount};
- *     {@link VkPipelineShaderStageCreateInfo VkPipelineShaderStageCreateInfo} const * {@link #pStages};
- *     {@link VkPipelineLibraryCreateInfoKHR VkPipelineLibraryCreateInfoKHR} const * {@link #pLibraryInfo};
- *     VkPipelineLayout {@link #layout};
- *     VkPipeline {@link #basePipelineHandle};
- *     int32_t {@link #basePipelineIndex};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkPipelineCreateFlags flags;
+ *     uint32_t stageCount;
+ *     {@link VkPipelineShaderStageCreateInfo VkPipelineShaderStageCreateInfo} const * pStages;
+ *     {@link VkPipelineLibraryCreateInfoKHR VkPipelineLibraryCreateInfoKHR} const * pLibraryInfo;
+ *     VkPipelineLayout layout;
+ *     VkPipeline basePipelineHandle;
+ *     int32_t basePipelineIndex;
+ * }}</pre>
  */
 public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGraphPipelineCreateInfoAMDX> implements NativeResource {
 
@@ -172,39 +98,39 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkPipelineCreateFlagBits} specifying how the pipeline will be generated. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkPipelineCreateFlags")
     public int flags() { return nflags(address()); }
-    /** the number of entries in the {@code pStages} array. */
+    /** @return the value of the {@code stageCount} field. */
     @NativeType("uint32_t")
     public int stageCount() { return nstageCount(address()); }
-    /** a pointer to an array of {@code stageCount} {@link VkPipelineShaderStageCreateInfo} structures describing the set of the shader stages to be included in the execution graph pipeline. */
+    /** @return a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@code pStages} field. */
     @NativeType("VkPipelineShaderStageCreateInfo const *")
     public VkPipelineShaderStageCreateInfo.@Nullable Buffer pStages() { return npStages(address()); }
-    /** a pointer to a {@link VkPipelineLibraryCreateInfoKHR} structure defining pipeline libraries to include. */
+    /** @return a {@link VkPipelineLibraryCreateInfoKHR} view of the struct pointed to by the {@code pLibraryInfo} field. */
     @NativeType("VkPipelineLibraryCreateInfoKHR const *")
     public @Nullable VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return npLibraryInfo(address()); }
-    /** the description of binding locations used by both the pipeline and descriptor sets used with the pipeline. */
+    /** @return the value of the {@code layout} field. */
     @NativeType("VkPipelineLayout")
     public long layout() { return nlayout(address()); }
-    /** a pipeline to derive from */
+    /** @return the value of the {@code basePipelineHandle} field. */
     @NativeType("VkPipeline")
     public long basePipelineHandle() { return nbasePipelineHandle(address()); }
-    /** an index into the {@code pCreateInfos} parameter to use as a pipeline to derive from */
+    /** @return the value of the {@code basePipelineIndex} field. */
     @NativeType("int32_t")
     public int basePipelineIndex() { return nbasePipelineIndex(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX} value to the {@link #sType} field. */
+    /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX} value to the {@code sType} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX sType$Default() { return sType(AMDXShaderEnqueue.VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
     /** Prepends the specified {@link VkPipelineCompilerControlCreateInfoAMD} value to the {@code pNext} chain. */
     public VkExecutionGraphPipelineCreateInfoAMDX pNext(VkPipelineCompilerControlCreateInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -212,19 +138,19 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
     public VkExecutionGraphPipelineCreateInfoAMDX pNext(VkPipelineCreationFeedbackCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
     /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfoEXT} value to the {@code pNext} chain. */
     public VkExecutionGraphPipelineCreateInfoAMDX pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX flags(@NativeType("VkPipelineCreateFlags") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #stageCount} field. */
+    /** Sets the specified value to the {@code stageCount} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX stageCount(@NativeType("uint32_t") int value) { nstageCount(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link #pStages} field. */
+    /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@code pStages} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX pStages(@NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.@Nullable Buffer value) { npStages(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@link #pLibraryInfo} field. */
+    /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@code pLibraryInfo} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX pLibraryInfo(@Nullable @NativeType("VkPipelineLibraryCreateInfoKHR const *") VkPipelineLibraryCreateInfoKHR value) { npLibraryInfo(address(), value); return this; }
-    /** Sets the specified value to the {@link #layout} field. */
+    /** Sets the specified value to the {@code layout} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX layout(@NativeType("VkPipelineLayout") long value) { nlayout(address(), value); return this; }
-    /** Sets the specified value to the {@link #basePipelineHandle} field. */
+    /** Sets the specified value to the {@code basePipelineHandle} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX basePipelineHandle(@NativeType("VkPipeline") long value) { nbasePipelineHandle(address(), value); return this; }
-    /** Sets the specified value to the {@link #basePipelineIndex} field. */
+    /** Sets the specified value to the {@code basePipelineIndex} field. */
     public VkExecutionGraphPipelineCreateInfoAMDX basePipelineIndex(@NativeType("int32_t") int value) { nbasePipelineIndex(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -468,39 +394,39 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkExecutionGraphPipelineCreateInfoAMDX#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkExecutionGraphPipelineCreateInfoAMDX.nsType(address()); }
-        /** @return the value of the {@link VkExecutionGraphPipelineCreateInfoAMDX#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkExecutionGraphPipelineCreateInfoAMDX.npNext(address()); }
-        /** @return the value of the {@link VkExecutionGraphPipelineCreateInfoAMDX#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkPipelineCreateFlags")
         public int flags() { return VkExecutionGraphPipelineCreateInfoAMDX.nflags(address()); }
-        /** @return the value of the {@link VkExecutionGraphPipelineCreateInfoAMDX#stageCount} field. */
+        /** @return the value of the {@code stageCount} field. */
         @NativeType("uint32_t")
         public int stageCount() { return VkExecutionGraphPipelineCreateInfoAMDX.nstageCount(address()); }
-        /** @return a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@link VkExecutionGraphPipelineCreateInfoAMDX#pStages} field. */
+        /** @return a {@link VkPipelineShaderStageCreateInfo.Buffer} view of the struct array pointed to by the {@code pStages} field. */
         @NativeType("VkPipelineShaderStageCreateInfo const *")
         public VkPipelineShaderStageCreateInfo.@Nullable Buffer pStages() { return VkExecutionGraphPipelineCreateInfoAMDX.npStages(address()); }
-        /** @return a {@link VkPipelineLibraryCreateInfoKHR} view of the struct pointed to by the {@link VkExecutionGraphPipelineCreateInfoAMDX#pLibraryInfo} field. */
+        /** @return a {@link VkPipelineLibraryCreateInfoKHR} view of the struct pointed to by the {@code pLibraryInfo} field. */
         @NativeType("VkPipelineLibraryCreateInfoKHR const *")
         public @Nullable VkPipelineLibraryCreateInfoKHR pLibraryInfo() { return VkExecutionGraphPipelineCreateInfoAMDX.npLibraryInfo(address()); }
-        /** @return the value of the {@link VkExecutionGraphPipelineCreateInfoAMDX#layout} field. */
+        /** @return the value of the {@code layout} field. */
         @NativeType("VkPipelineLayout")
         public long layout() { return VkExecutionGraphPipelineCreateInfoAMDX.nlayout(address()); }
-        /** @return the value of the {@link VkExecutionGraphPipelineCreateInfoAMDX#basePipelineHandle} field. */
+        /** @return the value of the {@code basePipelineHandle} field. */
         @NativeType("VkPipeline")
         public long basePipelineHandle() { return VkExecutionGraphPipelineCreateInfoAMDX.nbasePipelineHandle(address()); }
-        /** @return the value of the {@link VkExecutionGraphPipelineCreateInfoAMDX#basePipelineIndex} field. */
+        /** @return the value of the {@code basePipelineIndex} field. */
         @NativeType("int32_t")
         public int basePipelineIndex() { return VkExecutionGraphPipelineCreateInfoAMDX.nbasePipelineIndex(address()); }
 
-        /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer sType(@NativeType("VkStructureType") int value) { VkExecutionGraphPipelineCreateInfoAMDX.nsType(address(), value); return this; }
-        /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX} value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#sType} field. */
+        /** Sets the {@link AMDXShaderEnqueue#VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX} value to the {@code sType} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer sType$Default() { return sType(AMDXShaderEnqueue.VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX); }
-        /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pNext(@NativeType("void const *") long value) { VkExecutionGraphPipelineCreateInfoAMDX.npNext(address(), value); return this; }
         /** Prepends the specified {@link VkPipelineCompilerControlCreateInfoAMD} value to the {@code pNext} chain. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pNext(VkPipelineCompilerControlCreateInfoAMD value) { return this.pNext(value.pNext(this.pNext()).address()); }
@@ -508,19 +434,19 @@ public class VkExecutionGraphPipelineCreateInfoAMDX extends Struct<VkExecutionGr
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pNext(VkPipelineCreationFeedbackCreateInfo value) { return this.pNext(value.pNext(this.pNext()).address()); }
         /** Prepends the specified {@link VkPipelineCreationFeedbackCreateInfoEXT} value to the {@code pNext} chain. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pNext(VkPipelineCreationFeedbackCreateInfoEXT value) { return this.pNext(value.pNext(this.pNext()).address()); }
-        /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer flags(@NativeType("VkPipelineCreateFlags") int value) { VkExecutionGraphPipelineCreateInfoAMDX.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#stageCount} field. */
+        /** Sets the specified value to the {@code stageCount} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer stageCount(@NativeType("uint32_t") int value) { VkExecutionGraphPipelineCreateInfoAMDX.nstageCount(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@link VkExecutionGraphPipelineCreateInfoAMDX#pStages} field. */
+        /** Sets the address of the specified {@link VkPipelineShaderStageCreateInfo.Buffer} to the {@code pStages} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pStages(@NativeType("VkPipelineShaderStageCreateInfo const *") VkPipelineShaderStageCreateInfo.@Nullable Buffer value) { VkExecutionGraphPipelineCreateInfoAMDX.npStages(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@link VkExecutionGraphPipelineCreateInfoAMDX#pLibraryInfo} field. */
+        /** Sets the address of the specified {@link VkPipelineLibraryCreateInfoKHR} to the {@code pLibraryInfo} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer pLibraryInfo(@Nullable @NativeType("VkPipelineLibraryCreateInfoKHR const *") VkPipelineLibraryCreateInfoKHR value) { VkExecutionGraphPipelineCreateInfoAMDX.npLibraryInfo(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#layout} field. */
+        /** Sets the specified value to the {@code layout} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer layout(@NativeType("VkPipelineLayout") long value) { VkExecutionGraphPipelineCreateInfoAMDX.nlayout(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#basePipelineHandle} field. */
+        /** Sets the specified value to the {@code basePipelineHandle} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer basePipelineHandle(@NativeType("VkPipeline") long value) { VkExecutionGraphPipelineCreateInfoAMDX.nbasePipelineHandle(address(), value); return this; }
-        /** Sets the specified value to the {@link VkExecutionGraphPipelineCreateInfoAMDX#basePipelineIndex} field. */
+        /** Sets the specified value to the {@code basePipelineIndex} field. */
         public VkExecutionGraphPipelineCreateInfoAMDX.Buffer basePipelineIndex(@NativeType("int32_t") int value) { VkExecutionGraphPipelineCreateInfoAMDX.nbasePipelineIndex(address(), value); return this; }
 
     }

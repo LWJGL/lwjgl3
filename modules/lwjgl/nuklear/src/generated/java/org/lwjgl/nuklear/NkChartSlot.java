@@ -14,9 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_chart_slot {
  *     enum nk_chart_type type;
  *     {@link NkColor struct nk_color} color;
@@ -28,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     {@link NkVec2 struct nk_vec2} last;
  *     int index;
  *     nk_bool show_markers;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_chart_slot")
 public class NkChartSlot extends Struct<NkChartSlot> {

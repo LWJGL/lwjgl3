@@ -16,7 +16,6 @@ import static org.lwjgl.openvr.VR.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** The OpenVR function tables. */
 public final class OpenVR {
 
     public static @Nullable IVRSystem VRSystem;

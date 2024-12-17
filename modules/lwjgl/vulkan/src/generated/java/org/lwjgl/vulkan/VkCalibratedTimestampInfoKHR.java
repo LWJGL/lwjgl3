@@ -16,34 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the input parameters of a calibrated timestamp query.
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code timeDomain} <b>must</b> be one of the {@code VkTimeDomainKHR} values returned by {@link KHRCalibratedTimestamps#vkGetPhysicalDeviceCalibrateableTimeDomainsKHR GetPhysicalDeviceCalibrateableTimeDomainsKHR}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRCalibratedTimestamps#VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code timeDomain} <b>must</b> be a valid {@code VkTimeDomainKHR} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTCalibratedTimestamps#vkGetCalibratedTimestampsEXT GetCalibratedTimestampsEXT}, {@link KHRCalibratedTimestamps#vkGetCalibratedTimestampsKHR GetCalibratedTimestampsKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCalibratedTimestampInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkTimeDomainKHR {@link #timeDomain};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkTimeDomainKHR timeDomain;
+ * }}</pre>
  */
 public class VkCalibratedTimestampInfoKHR extends Struct<VkCalibratedTimestampInfoKHR> implements NativeResource {
 
@@ -96,23 +74,23 @@ public class VkCalibratedTimestampInfoKHR extends Struct<VkCalibratedTimestampIn
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkTimeDomainKHR} value specifying the time domain from which the calibrated timestamp value should be returned. */
+    /** @return the value of the {@code timeDomain} field. */
     @NativeType("VkTimeDomainKHR")
     public int timeDomain() { return ntimeDomain(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCalibratedTimestampInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRCalibratedTimestamps#VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRCalibratedTimestamps#VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR} value to the {@code sType} field. */
     public VkCalibratedTimestampInfoKHR sType$Default() { return sType(KHRCalibratedTimestamps.VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCalibratedTimestampInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #timeDomain} field. */
+    /** Sets the specified value to the {@code timeDomain} field. */
     public VkCalibratedTimestampInfoKHR timeDomain(@NativeType("VkTimeDomainKHR") int value) { ntimeDomain(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -308,23 +286,23 @@ public class VkCalibratedTimestampInfoKHR extends Struct<VkCalibratedTimestampIn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCalibratedTimestampInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCalibratedTimestampInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkCalibratedTimestampInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCalibratedTimestampInfoKHR.npNext(address()); }
-        /** @return the value of the {@link VkCalibratedTimestampInfoKHR#timeDomain} field. */
+        /** @return the value of the {@code timeDomain} field. */
         @NativeType("VkTimeDomainKHR")
         public int timeDomain() { return VkCalibratedTimestampInfoKHR.ntimeDomain(address()); }
 
-        /** Sets the specified value to the {@link VkCalibratedTimestampInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCalibratedTimestampInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkCalibratedTimestampInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRCalibratedTimestamps#VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR} value to the {@link VkCalibratedTimestampInfoKHR#sType} field. */
+        /** Sets the {@link KHRCalibratedTimestamps#VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR} value to the {@code sType} field. */
         public VkCalibratedTimestampInfoKHR.Buffer sType$Default() { return sType(KHRCalibratedTimestamps.VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR); }
-        /** Sets the specified value to the {@link VkCalibratedTimestampInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCalibratedTimestampInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkCalibratedTimestampInfoKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCalibratedTimestampInfoKHR#timeDomain} field. */
+        /** Sets the specified value to the {@code timeDomain} field. */
         public VkCalibratedTimestampInfoKHR.Buffer timeDomain(@NativeType("VkTimeDomainKHR") int value) { VkCalibratedTimestampInfoKHR.ntimeDomain(address(), value); return this; }
 
     }

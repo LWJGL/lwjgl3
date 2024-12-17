@@ -17,17 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkDeviceGroupDeviceCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkDeviceGroupDeviceCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     uint32_t physicalDeviceCount;
  *     VkPhysicalDevice const * pPhysicalDevices;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkDeviceGroupDeviceCreateInfoKHR extends VkDeviceGroupDeviceCreateInfo {
 

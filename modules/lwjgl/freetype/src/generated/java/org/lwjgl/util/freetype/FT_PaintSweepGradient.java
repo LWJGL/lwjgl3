@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure representing a {@code PaintSweepGradient} value of the {@code COLR} v1 extensions.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_PaintSweepGradient {
  *     {@link FT_ColorLine FT_ColorLine} colorline;
  *     {@link FT_Vector FT_Vector} center;
  *     FT_Fixed start_angle;
  *     FT_Fixed end_angle;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_PaintSweepGradient extends Struct<FT_PaintSweepGradient> {
 

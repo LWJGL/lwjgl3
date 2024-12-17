@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link XrColor3f}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrColor3fKHR {
  *     float r;
  *     float g;
  *     float b;
- * }</code></pre>
+ * }}</pre>
  */
 public class XrColor3fKHR extends XrColor3f {
 

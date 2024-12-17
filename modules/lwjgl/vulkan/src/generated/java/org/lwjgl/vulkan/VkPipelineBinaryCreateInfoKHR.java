@@ -16,54 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying where to retrieve data for pipeline binary creation.
- * 
- * <h5>Description</h5>
- * 
- * <p>When {@code pPipelineCreateInfo} is not {@code NULL}, an implementation will attempt to retrieve pipeline binary data from an internal cache external to the application if <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-pipelineBinaryInternalCache">{@code pipelineBinaryInternalCache}</a> is {@link VK10#VK_TRUE TRUE}. Applications <b>can</b> use this to determine if a pipeline <b>can</b> be created without compilation. If the implementation fails to create a pipeline binary due to missing an internal cache entry, {@link KHRPipelineBinary#VK_PIPELINE_BINARY_MISSING_KHR PIPELINE_BINARY_MISSING_KHR} is returned. If creation succeeds, the resulting binary <b>can</b> be used to create a pipeline. {@link KHRPipelineBinary#VK_PIPELINE_BINARY_MISSING_KHR PIPELINE_BINARY_MISSING_KHR} <b>may</b> be returned for any reason in this situation, even if creating a pipeline binary with the same parameters that succeeded earlier.</p>
- * 
- * <p>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-pipelineBinaryPrecompiledInternalCache">{@code pipelineBinaryPrecompiledInternalCache}</a> is {@link VK10#VK_TRUE TRUE}, the implementation <b>may</b> be able to create pipeline binaries even when {@code pPipelineCreateInfo} has not been used to create binaries before by the application.</p>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>On some platforms, internal pipeline caches may be pre-populated before running the application.</p>
- * </div>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code pipeline} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code pipeline} <b>must</b> have been created with {@link KHRPipelineBinary#VK_PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR PIPELINE_CREATE_2_CAPTURE_DATA_BIT_KHR}</li>
- * <li>If {@code pipeline} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@link KHRPipelineBinary#vkReleaseCapturedPipelineDataKHR ReleaseCapturedPipelineDataKHR} <b>must</b> not have been called on {@code pipeline} prior to this command</li>
- * <li>If <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#limits-pipelineBinaryInternalCache">{@code pipelineBinaryInternalCache}</a> is {@link VK10#VK_FALSE FALSE} pPipelineCreateInfo <b>must</b> be {@code NULL}</li>
- * <li>If {@code device} was created with {@link VkDevicePipelineBinaryInternalCacheControlKHR}{@code ::disableInternalCache} set to {@link VK10#VK_TRUE TRUE}, {@code pPipelineCreateInfo} <b>must</b> be {@code NULL}</li>
- * <li>One and only one of {@code pKeysAndDataInfo}, {@code pipeline}, or {@code pPipelineCreateInfo} <b>must</b> be non-{@code NULL}</li>
- * <li>If {@code pPipelineCreateInfo} is not {@code NULL}, the {@code pNext} chain of {@code pPipelineCreateInfo} <b>must</b> not set {@link VkPipelineBinaryInfoKHR}{@code ::binaryCount} to a value greater than 0</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>If {@code pKeysAndDataInfo} is not {@code NULL}, {@code pKeysAndDataInfo} <b>must</b> be a valid pointer to a valid {@link VkPipelineBinaryKeysAndDataKHR} structure</li>
- * <li>If {@code pipeline} is not {@link VK10#VK_NULL_HANDLE NULL_HANDLE}, {@code pipeline} <b>must</b> be a valid {@code VkPipeline} handle</li>
- * <li>If {@code pPipelineCreateInfo} is not {@code NULL}, {@code pPipelineCreateInfo} <b>must</b> be a valid pointer to a valid {@link VkPipelineCreateInfoKHR} structure</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPipelineBinaryKeysAndDataKHR}, {@link VkPipelineCreateInfoKHR}, {@link KHRPipelineBinary#vkCreatePipelineBinariesKHR CreatePipelineBinariesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPipelineBinaryCreateInfoKHR {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     {@link VkPipelineBinaryKeysAndDataKHR VkPipelineBinaryKeysAndDataKHR} const * {@link #pKeysAndDataInfo};
- *     VkPipeline {@link #pipeline};
- *     {@link VkPipelineCreateInfoKHR VkPipelineCreateInfoKHR} const * {@link #pPipelineCreateInfo};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     {@link VkPipelineBinaryKeysAndDataKHR VkPipelineBinaryKeysAndDataKHR} const * pKeysAndDataInfo;
+ *     VkPipeline pipeline;
+ *     {@link VkPipelineCreateInfoKHR VkPipelineCreateInfoKHR} const * pPipelineCreateInfo;
+ * }}</pre>
  */
 public class VkPipelineBinaryCreateInfoKHR extends Struct<VkPipelineBinaryCreateInfoKHR> implements NativeResource {
 
@@ -122,33 +82,33 @@ public class VkPipelineBinaryCreateInfoKHR extends Struct<VkPipelineBinaryCreate
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** {@code NULL} or a pointer to a {@link VkPipelineBinaryKeysAndDataKHR} structure that contains keys and data to create the pipeline binaries from. */
+    /** @return a {@link VkPipelineBinaryKeysAndDataKHR} view of the struct pointed to by the {@code pKeysAndDataInfo} field. */
     @NativeType("VkPipelineBinaryKeysAndDataKHR const *")
     public @Nullable VkPipelineBinaryKeysAndDataKHR pKeysAndDataInfo() { return npKeysAndDataInfo(address()); }
-    /** {@link VK10#VK_NULL_HANDLE NULL_HANDLE} or a {@code VkPipeline} that contains data to create the pipeline binaries from. */
+    /** @return the value of the {@code pipeline} field. */
     @NativeType("VkPipeline")
     public long pipeline() { return npipeline(address()); }
-    /** {@code NULL} or a pointer to a {@link VkPipelineCreateInfoKHR} structure with the pipeline creation info. This is used to probe the implementation’s internal cache for pipeline binaries. */
+    /** @return a {@link VkPipelineCreateInfoKHR} view of the struct pointed to by the {@code pPipelineCreateInfo} field. */
     @NativeType("VkPipelineCreateInfoKHR const *")
     public @Nullable VkPipelineCreateInfoKHR pPipelineCreateInfo() { return npPipelineCreateInfo(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPipelineBinaryCreateInfoKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR} value to the {@code sType} field. */
     public VkPipelineBinaryCreateInfoKHR sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPipelineBinaryCreateInfoKHR pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineBinaryKeysAndDataKHR} to the {@link #pKeysAndDataInfo} field. */
+    /** Sets the address of the specified {@link VkPipelineBinaryKeysAndDataKHR} to the {@code pKeysAndDataInfo} field. */
     public VkPipelineBinaryCreateInfoKHR pKeysAndDataInfo(@Nullable @NativeType("VkPipelineBinaryKeysAndDataKHR const *") VkPipelineBinaryKeysAndDataKHR value) { npKeysAndDataInfo(address(), value); return this; }
-    /** Sets the specified value to the {@link #pipeline} field. */
+    /** Sets the specified value to the {@code pipeline} field. */
     public VkPipelineBinaryCreateInfoKHR pipeline(@NativeType("VkPipeline") long value) { npipeline(address(), value); return this; }
-    /** Sets the address of the specified {@link VkPipelineCreateInfoKHR} to the {@link #pPipelineCreateInfo} field. */
+    /** Sets the address of the specified {@link VkPipelineCreateInfoKHR} to the {@code pPipelineCreateInfo} field. */
     public VkPipelineBinaryCreateInfoKHR pPipelineCreateInfo(@Nullable @NativeType("VkPipelineCreateInfoKHR const *") VkPipelineCreateInfoKHR value) { npPipelineCreateInfo(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -368,33 +328,33 @@ public class VkPipelineBinaryCreateInfoKHR extends Struct<VkPipelineBinaryCreate
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPipelineBinaryCreateInfoKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPipelineBinaryCreateInfoKHR.nsType(address()); }
-        /** @return the value of the {@link VkPipelineBinaryCreateInfoKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkPipelineBinaryCreateInfoKHR.npNext(address()); }
-        /** @return a {@link VkPipelineBinaryKeysAndDataKHR} view of the struct pointed to by the {@link VkPipelineBinaryCreateInfoKHR#pKeysAndDataInfo} field. */
+        /** @return a {@link VkPipelineBinaryKeysAndDataKHR} view of the struct pointed to by the {@code pKeysAndDataInfo} field. */
         @NativeType("VkPipelineBinaryKeysAndDataKHR const *")
         public @Nullable VkPipelineBinaryKeysAndDataKHR pKeysAndDataInfo() { return VkPipelineBinaryCreateInfoKHR.npKeysAndDataInfo(address()); }
-        /** @return the value of the {@link VkPipelineBinaryCreateInfoKHR#pipeline} field. */
+        /** @return the value of the {@code pipeline} field. */
         @NativeType("VkPipeline")
         public long pipeline() { return VkPipelineBinaryCreateInfoKHR.npipeline(address()); }
-        /** @return a {@link VkPipelineCreateInfoKHR} view of the struct pointed to by the {@link VkPipelineBinaryCreateInfoKHR#pPipelineCreateInfo} field. */
+        /** @return a {@link VkPipelineCreateInfoKHR} view of the struct pointed to by the {@code pPipelineCreateInfo} field. */
         @NativeType("VkPipelineCreateInfoKHR const *")
         public @Nullable VkPipelineCreateInfoKHR pPipelineCreateInfo() { return VkPipelineBinaryCreateInfoKHR.npPipelineCreateInfo(address()); }
 
-        /** Sets the specified value to the {@link VkPipelineBinaryCreateInfoKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPipelineBinaryCreateInfoKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPipelineBinaryCreateInfoKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR} value to the {@link VkPipelineBinaryCreateInfoKHR#sType} field. */
+        /** Sets the {@link KHRPipelineBinary#VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR} value to the {@code sType} field. */
         public VkPipelineBinaryCreateInfoKHR.Buffer sType$Default() { return sType(KHRPipelineBinary.VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR); }
-        /** Sets the specified value to the {@link VkPipelineBinaryCreateInfoKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPipelineBinaryCreateInfoKHR.Buffer pNext(@NativeType("void const *") long value) { VkPipelineBinaryCreateInfoKHR.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineBinaryKeysAndDataKHR} to the {@link VkPipelineBinaryCreateInfoKHR#pKeysAndDataInfo} field. */
+        /** Sets the address of the specified {@link VkPipelineBinaryKeysAndDataKHR} to the {@code pKeysAndDataInfo} field. */
         public VkPipelineBinaryCreateInfoKHR.Buffer pKeysAndDataInfo(@Nullable @NativeType("VkPipelineBinaryKeysAndDataKHR const *") VkPipelineBinaryKeysAndDataKHR value) { VkPipelineBinaryCreateInfoKHR.npKeysAndDataInfo(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPipelineBinaryCreateInfoKHR#pipeline} field. */
+        /** Sets the specified value to the {@code pipeline} field. */
         public VkPipelineBinaryCreateInfoKHR.Buffer pipeline(@NativeType("VkPipeline") long value) { VkPipelineBinaryCreateInfoKHR.npipeline(address(), value); return this; }
-        /** Sets the address of the specified {@link VkPipelineCreateInfoKHR} to the {@link VkPipelineBinaryCreateInfoKHR#pPipelineCreateInfo} field. */
+        /** Sets the address of the specified {@link VkPipelineCreateInfoKHR} to the {@code pPipelineCreateInfo} field. */
         public VkPipelineBinaryCreateInfoKHR.Buffer pPipelineCreateInfo(@Nullable @NativeType("VkPipelineCreateInfoKHR const *") VkPipelineCreateInfoKHR value) { VkPipelineBinaryCreateInfoKHR.npPipelineCreateInfo(address(), value); return this; }
 
     }

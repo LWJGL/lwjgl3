@@ -17,35 +17,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Micromap version information.
- * 
- * <h5>Description</h5>
- * 
- * <div style="margin-left: 26px; border-left: 1px solid gray; padding-left: 14px;"><h5>Note</h5>
- * 
- * <p>{@code pVersionData} is a <em>pointer</em> to an array of 2×{@link VK10#VK_UUID_SIZE UUID_SIZE} {@code uint8_t} values instead of two {@link VK10#VK_UUID_SIZE UUID_SIZE} arrays as the expected use case for this member is to be pointed at the header of a previously serialized micromap (via {@link EXTOpacityMicromap#vkCmdCopyMicromapToMemoryEXT CmdCopyMicromapToMemoryEXT} or {@link EXTOpacityMicromap#vkCopyMicromapToMemoryEXT CopyMicromapToMemoryEXT}) that is loaded in memory. Using arrays would necessitate extra memory copies of the UUIDs.</p>
- * </div>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * <li>{@code pVersionData} <b>must</b> be a valid pointer to an array of 2 &times; {@code VK_UUID_SIZE} {@code uint8_t} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTOpacityMicromap#vkGetDeviceMicromapCompatibilityEXT GetDeviceMicromapCompatibilityEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMicromapVersionInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint8_t const * {@link #pVersionData};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint8_t const * pVersionData;
+ * }}</pre>
  */
 public class VkMicromapVersionInfoEXT extends Struct<VkMicromapVersionInfoEXT> implements NativeResource {
 
@@ -98,27 +75,23 @@ public class VkMicromapVersionInfoEXT extends Struct<VkMicromapVersionInfoEXT> i
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /**
-     * @param capacity the number of elements in the returned buffer
-     *
-     * @return a pointer to the version header of a micromap as defined in {@link EXTOpacityMicromap#vkCmdCopyMicromapToMemoryEXT CmdCopyMicromapToMemoryEXT}
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pVersionData} field. */
     @NativeType("uint8_t const *")
     public ByteBuffer pVersionData(int capacity) { return npVersionData(address(), capacity); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMicromapVersionInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT} value to the {@code sType} field. */
     public VkMicromapVersionInfoEXT sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMicromapVersionInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the address of the specified {@link ByteBuffer} to the {@link #pVersionData} field. */
+    /** Sets the address of the specified {@link ByteBuffer} to the {@code pVersionData} field. */
     public VkMicromapVersionInfoEXT pVersionData(@NativeType("uint8_t const *") ByteBuffer value) { npVersionData(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -323,27 +296,23 @@ public class VkMicromapVersionInfoEXT extends Struct<VkMicromapVersionInfoEXT> i
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMicromapVersionInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMicromapVersionInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkMicromapVersionInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMicromapVersionInfoEXT.npNext(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@link VkMicromapVersionInfoEXT#pVersionData} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code pVersionData} field. */
         @NativeType("uint8_t const *")
         public ByteBuffer pVersionData(int capacity) { return VkMicromapVersionInfoEXT.npVersionData(address(), capacity); }
 
-        /** Sets the specified value to the {@link VkMicromapVersionInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMicromapVersionInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkMicromapVersionInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT} value to the {@link VkMicromapVersionInfoEXT#sType} field. */
+        /** Sets the {@link EXTOpacityMicromap#VK_STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT} value to the {@code sType} field. */
         public VkMicromapVersionInfoEXT.Buffer sType$Default() { return sType(EXTOpacityMicromap.VK_STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT); }
-        /** Sets the specified value to the {@link VkMicromapVersionInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMicromapVersionInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkMicromapVersionInfoEXT.npNext(address(), value); return this; }
-        /** Sets the address of the specified {@link ByteBuffer} to the {@link VkMicromapVersionInfoEXT#pVersionData} field. */
+        /** Sets the address of the specified {@link ByteBuffer} to the {@code pVersionData} field. */
         public VkMicromapVersionInfoEXT.Buffer pVersionData(@NativeType("uint8_t const *") ByteBuffer value) { VkMicromapVersionInfoEXT.npVersionData(address(), value); return this; }
 
     }

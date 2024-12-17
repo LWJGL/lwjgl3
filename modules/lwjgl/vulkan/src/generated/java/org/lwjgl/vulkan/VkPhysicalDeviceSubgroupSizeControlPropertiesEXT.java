@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceSubgroupSizeControlProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceSubgroupSizeControlPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -28,7 +24,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t maxSubgroupSize;
  *     uint32_t maxComputeWorkgroupSubgroups;
  *     VkShaderStageFlags requiredSubgroupSizeStages;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceSubgroupSizeControlPropertiesEXT extends VkPhysicalDeviceSubgroupSizeControlProperties {
 

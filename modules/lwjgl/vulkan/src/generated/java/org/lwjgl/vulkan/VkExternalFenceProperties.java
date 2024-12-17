@@ -16,33 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing supported external fence handle features.
- * 
- * <h5>Description</h5>
- * 
- * <p>If {@code handleType} is not supported by the implementation, then {@link VkExternalFenceProperties}{@code ::externalFenceFeatures} will be zero.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK11#VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES}</li>
- * <li>{@code pNext} <b>must</b> be {@code NULL}</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VK11#vkGetPhysicalDeviceExternalFenceProperties GetPhysicalDeviceExternalFenceProperties}, {@link KHRExternalFenceCapabilities#vkGetPhysicalDeviceExternalFencePropertiesKHR GetPhysicalDeviceExternalFencePropertiesKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkExternalFenceProperties {
  *     VkStructureType sType;
  *     void * pNext;
- *     VkExternalFenceHandleTypeFlags {@link #exportFromImportedHandleTypes};
- *     VkExternalFenceHandleTypeFlags {@link #compatibleHandleTypes};
- *     VkExternalFenceFeatureFlags {@link #externalFenceFeatures};
- * }</code></pre>
+ *     VkExternalFenceHandleTypeFlags exportFromImportedHandleTypes;
+ *     VkExternalFenceHandleTypeFlags compatibleHandleTypes;
+ *     VkExternalFenceFeatureFlags externalFenceFeatures;
+ * }}</pre>
  */
 public class VkExternalFenceProperties extends Struct<VkExternalFenceProperties> implements NativeResource {
 
@@ -107,13 +88,13 @@ public class VkExternalFenceProperties extends Struct<VkExternalFenceProperties>
     /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkExternalFenceHandleTypeFlagBits} indicating which types of imported handle {@code handleType} <b>can</b> be exported from. */
+    /** @return the value of the {@code exportFromImportedHandleTypes} field. */
     @NativeType("VkExternalFenceHandleTypeFlags")
     public int exportFromImportedHandleTypes() { return nexportFromImportedHandleTypes(address()); }
-    /** a bitmask of {@code VkExternalFenceHandleTypeFlagBits} specifying handle types which <b>can</b> be specified at the same time as {@code handleType} when creating a fence. */
+    /** @return the value of the {@code compatibleHandleTypes} field. */
     @NativeType("VkExternalFenceHandleTypeFlags")
     public int compatibleHandleTypes() { return ncompatibleHandleTypes(address()); }
-    /** a bitmask of {@code VkExternalFenceFeatureFlagBits} indicating the features of {@code handleType}. */
+    /** @return the value of the {@code externalFenceFeatures} field. */
     @NativeType("VkExternalFenceFeatureFlags")
     public int externalFenceFeatures() { return nexternalFenceFeatures(address()); }
 
@@ -342,13 +323,13 @@ public class VkExternalFenceProperties extends Struct<VkExternalFenceProperties>
         /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkExternalFenceProperties.npNext(address()); }
-        /** @return the value of the {@link VkExternalFenceProperties#exportFromImportedHandleTypes} field. */
+        /** @return the value of the {@code exportFromImportedHandleTypes} field. */
         @NativeType("VkExternalFenceHandleTypeFlags")
         public int exportFromImportedHandleTypes() { return VkExternalFenceProperties.nexportFromImportedHandleTypes(address()); }
-        /** @return the value of the {@link VkExternalFenceProperties#compatibleHandleTypes} field. */
+        /** @return the value of the {@code compatibleHandleTypes} field. */
         @NativeType("VkExternalFenceHandleTypeFlags")
         public int compatibleHandleTypes() { return VkExternalFenceProperties.ncompatibleHandleTypes(address()); }
-        /** @return the value of the {@link VkExternalFenceProperties#externalFenceFeatures} field. */
+        /** @return the value of the {@code externalFenceFeatures} field. */
         @NativeType("VkExternalFenceFeatureFlags")
         public int externalFenceFeatures() { return VkExternalFenceProperties.nexternalFenceFeatures(address()); }
 

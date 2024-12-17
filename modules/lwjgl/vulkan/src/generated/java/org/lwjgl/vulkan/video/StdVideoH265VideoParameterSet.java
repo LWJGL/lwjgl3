@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH265VideoParameterSet {
  *     {@link StdVideoH265VpsFlags StdVideoH265VpsFlags} flags;
  *     uint8_t vps_video_parameter_set_id;
@@ -33,7 +31,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     {@link StdVideoH265DecPicBufMgr StdVideoH265DecPicBufMgr} const * pDecPicBufMgr;
  *     {@link StdVideoH265HrdParameters StdVideoH265HrdParameters} const * pHrdParameters;
  *     {@link StdVideoH265ProfileTierLevel StdVideoH265ProfileTierLevel} const * pProfileTierLevel;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH265VideoParameterSet extends Struct<StdVideoH265VideoParameterSet> implements NativeResource {
 

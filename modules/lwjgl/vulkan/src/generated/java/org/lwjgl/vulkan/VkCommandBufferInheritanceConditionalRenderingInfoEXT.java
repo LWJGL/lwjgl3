@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying command buffer inheritance information.
- * 
- * <h5>Description</h5>
- * 
- * <p>If this structure is not present, the behavior is as if {@code conditionalRenderingEnable} is {@link VK10#VK_FALSE FALSE}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-inheritedConditionalRendering">{@code inheritedConditionalRendering}</a> feature is not enabled, {@code conditionalRenderingEnable} <b>must</b> be {@link VK10#VK_FALSE FALSE}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkCommandBufferInheritanceConditionalRenderingInfoEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #conditionalRenderingEnable};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 conditionalRenderingEnable;
+ * }}</pre>
  */
 public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struct<VkCommandBufferInheritanceConditionalRenderingInfoEXT> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether the command buffer <b>can</b> be executed while conditional rendering is active in the primary command buffer. If this is {@link VK10#VK_TRUE TRUE}, then this command buffer <b>can</b> be executed whether the primary command buffer has active conditional rendering or not. If this is {@link VK10#VK_FALSE FALSE}, then the primary command buffer <b>must</b> not have conditional rendering active. */
+    /** @return the value of the {@code conditionalRenderingEnable} field. */
     @NativeType("VkBool32")
     public boolean conditionalRenderingEnable() { return nconditionalRenderingEnable(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkCommandBufferInheritanceConditionalRenderingInfoEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT} value to the {@code sType} field. */
     public VkCommandBufferInheritanceConditionalRenderingInfoEXT sType$Default() { return sType(EXTConditionalRendering.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkCommandBufferInheritanceConditionalRenderingInfoEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #conditionalRenderingEnable} field. */
+    /** Sets the specified value to the {@code conditionalRenderingEnable} field. */
     public VkCommandBufferInheritanceConditionalRenderingInfoEXT conditionalRenderingEnable(@NativeType("VkBool32") boolean value) { nconditionalRenderingEnable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,23 +305,23 @@ public class VkCommandBufferInheritanceConditionalRenderingInfoEXT extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkCommandBufferInheritanceConditionalRenderingInfoEXT.nsType(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkCommandBufferInheritanceConditionalRenderingInfoEXT.npNext(address()); }
-        /** @return the value of the {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT#conditionalRenderingEnable} field. */
+        /** @return the value of the {@code conditionalRenderingEnable} field. */
         @NativeType("VkBool32")
         public boolean conditionalRenderingEnable() { return VkCommandBufferInheritanceConditionalRenderingInfoEXT.nconditionalRenderingEnable(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkCommandBufferInheritanceConditionalRenderingInfoEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT} value to the {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT#sType} field. */
+        /** Sets the {@link EXTConditionalRendering#VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT} value to the {@code sType} field. */
         public VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer sType$Default() { return sType(EXTConditionalRendering.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT); }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer pNext(@NativeType("void const *") long value) { VkCommandBufferInheritanceConditionalRenderingInfoEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkCommandBufferInheritanceConditionalRenderingInfoEXT#conditionalRenderingEnable} field. */
+        /** Sets the specified value to the {@code conditionalRenderingEnable} field. */
         public VkCommandBufferInheritanceConditionalRenderingInfoEXT.Buffer conditionalRenderingEnable(@NativeType("VkBool32") boolean value) { VkCommandBufferInheritanceConditionalRenderingInfoEXT.nconditionalRenderingEnable(address(), value ? 1 : 0); return this; }
 
     }

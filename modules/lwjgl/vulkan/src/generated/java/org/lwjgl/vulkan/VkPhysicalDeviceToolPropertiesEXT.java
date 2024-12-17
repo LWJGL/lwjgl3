@@ -18,11 +18,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.VK10.*;
 
 /**
- * See {@link VkPhysicalDeviceToolProperties}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceToolPropertiesEXT {
  *     VkStructureType sType;
  *     void * pNext;
@@ -31,7 +27,7 @@ import static org.lwjgl.vulkan.VK10.*;
  *     VkToolPurposeFlags purposes;
  *     char description[VK_MAX_DESCRIPTION_SIZE];
  *     char layer[VK_MAX_EXTENSION_NAME_SIZE];
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceToolPropertiesEXT extends VkPhysicalDeviceToolProperties {
 

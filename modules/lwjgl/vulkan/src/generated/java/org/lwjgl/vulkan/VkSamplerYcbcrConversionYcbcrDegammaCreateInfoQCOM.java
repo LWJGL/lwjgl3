@@ -16,23 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying Y′C<sub>B</sub>C<sub>R</sub> degamma parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link QCOMYcbcrDegamma#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #enableYDegamma};
- *     VkBool32 {@link #enableCbCrDegamma};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 enableYDegamma;
+ *     VkBool32 enableCbCrDegamma;
+ * }}</pre>
  */
 public class VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM extends Struct<VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM> implements NativeResource {
 
@@ -88,28 +78,28 @@ public class VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM extends Struct<V
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-ycbcr-degamma">sRGB to linear</a> conversion is enabled for the G component. */
+    /** @return the value of the {@code enableYDegamma} field. */
     @NativeType("VkBool32")
     public boolean enableYDegamma() { return nenableYDegamma(address()) != 0; }
-    /** indicates <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#textures-ycbcr-degamma">sRGB to linear</a> conversion is enabled for the R and B components. */
+    /** @return the value of the {@code enableCbCrDegamma} field. */
     @NativeType("VkBool32")
     public boolean enableCbCrDegamma() { return nenableCbCrDegamma(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link QCOMYcbcrDegamma#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM} value to the {@link #sType} field. */
+    /** Sets the {@link QCOMYcbcrDegamma#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM} value to the {@code sType} field. */
     public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM sType$Default() { return sType(QCOMYcbcrDegamma.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #enableYDegamma} field. */
+    /** Sets the specified value to the {@code enableYDegamma} field. */
     public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM enableYDegamma(@NativeType("VkBool32") boolean value) { nenableYDegamma(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #enableCbCrDegamma} field. */
+    /** Sets the specified value to the {@code enableCbCrDegamma} field. */
     public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM enableCbCrDegamma(@NativeType("VkBool32") boolean value) { nenableCbCrDegamma(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -311,28 +301,28 @@ public class VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM extends Struct<V
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.nsType(address()); }
-        /** @return the value of the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.npNext(address()); }
-        /** @return the value of the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#enableYDegamma} field. */
+        /** @return the value of the {@code enableYDegamma} field. */
         @NativeType("VkBool32")
         public boolean enableYDegamma() { return VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.nenableYDegamma(address()) != 0; }
-        /** @return the value of the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#enableCbCrDegamma} field. */
+        /** @return the value of the {@code enableCbCrDegamma} field. */
         @NativeType("VkBool32")
         public boolean enableCbCrDegamma() { return VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.nenableCbCrDegamma(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.nsType(address(), value); return this; }
-        /** Sets the {@link QCOMYcbcrDegamma#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM} value to the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#sType} field. */
+        /** Sets the {@link QCOMYcbcrDegamma#VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM} value to the {@code sType} field. */
         public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.Buffer sType$Default() { return sType(QCOMYcbcrDegamma.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM); }
-        /** Sets the specified value to the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.Buffer pNext(@NativeType("void *") long value) { VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#enableYDegamma} field. */
+        /** Sets the specified value to the {@code enableYDegamma} field. */
         public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.Buffer enableYDegamma(@NativeType("VkBool32") boolean value) { VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.nenableYDegamma(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM#enableCbCrDegamma} field. */
+        /** Sets the specified value to the {@code enableCbCrDegamma} field. */
         public VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.Buffer enableCbCrDegamma(@NativeType("VkBool32") boolean value) { VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM.nenableCbCrDegamma(address(), value ? 1 : 0); return this; }
 
     }

@@ -18,19 +18,12 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenCL/extensions/khr/cl_khr_egl_image.txt">khr_egl_image</a> extension.
- * 
- * <p>This extension provides a mechanism for creating derived resources, such as OpenCL image objects, from {@code EGLImages}.</p>
- */
 public class KHREGLImage {
 
-    /** Error Codes */
     public static final int
         CL_EGL_RESOURCE_NOT_ACQUIRED_KHR = -1092,
         CL_INVALID_EGL_OBJECT_KHR        = -1093;
 
-    /** Command types. */
     public static final int
         CL_COMMAND_ACQUIRE_EGL_OBJECTS_KHR = 0x202D,
         CL_COMMAND_RELEASE_EGL_OBJECTS_KHR = 0x202E;
@@ -41,7 +34,7 @@ public class KHREGLImage {
 
     // --- [ clCreateFromEGLImageKHR ] ---
 
-    /** Unsafe version of: {@link #clCreateFromEGLImageKHR CreateFromEGLImageKHR} */
+    /** {@code cl_mem clCreateFromEGLImageKHR(cl_context context, CLeglDisplayKHR display, CLeglImageKHR image, cl_mem_flags flags, cl_egl_image_properties_khr const * properties, cl_int * errcode_ret)} */
     public static long nclCreateFromEGLImageKHR(long context, long display, long image, long flags, long properties, long errcode_ret) {
         long __functionAddress = CL.getICD().clCreateFromEGLImageKHR;
         if (CHECKS) {
@@ -53,15 +46,7 @@ public class KHREGLImage {
         return callPPPJPPP(context, display, image, flags, properties, errcode_ret, __functionAddress);
     }
 
-    /**
-     * Creates an {@code EGLImage} target of type {@code cl_mem} from the {@code EGLImage} source provided as {@code image}.
-     *
-     * @param display     an {@code EGLDisplay}
-     * @param image       an {@code EGLImageKHR}
-     * @param flags       a bit-field that is used to specify usage information about the memory object being created
-     * @param properties  a list of property names and their corresponding values
-     * @param errcode_ret will return an appropriate error code. If {@code errcode_ret} is {@code NULL}, no error code is returned.
-     */
+    /** {@code cl_mem clCreateFromEGLImageKHR(cl_context context, CLeglDisplayKHR display, CLeglImageKHR image, cl_mem_flags flags, cl_egl_image_properties_khr const * properties, cl_int * errcode_ret)} */
     @NativeType("cl_mem")
     public static long clCreateFromEGLImageKHR(@NativeType("cl_context") long context, @NativeType("CLeglDisplayKHR") long display, @NativeType("CLeglImageKHR") long image, @NativeType("cl_mem_flags") long flags, @NativeType("cl_egl_image_properties_khr const *") @Nullable PointerBuffer properties, @NativeType("cl_int *") @Nullable IntBuffer errcode_ret) {
         if (CHECKS) {
@@ -73,12 +58,7 @@ public class KHREGLImage {
 
     // --- [ clEnqueueAcquireEGLObjectsKHR ] ---
 
-    /**
-     * Unsafe version of: {@link #clEnqueueAcquireEGLObjectsKHR EnqueueAcquireEGLObjectsKHR}
-     *
-     * @param num_objects             the number of memory objects to be acquired in {@code mem_objects}
-     * @param num_events_in_wait_list the number of events in {@code event_wait_list}
-     */
+    /** {@code cl_int clEnqueueAcquireEGLObjectsKHR(cl_command_queue command_queue, cl_uint num_objects, cl_mem const * mem_objects, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     public static int nclEnqueueAcquireEGLObjectsKHR(long command_queue, int num_objects, long mem_objects, int num_events_in_wait_list, long event_wait_list, long event) {
         long __functionAddress = CL.getICD().clEnqueueAcquireEGLObjectsKHR;
         if (CHECKS) {
@@ -88,20 +68,7 @@ public class KHREGLImage {
         return callPPPPI(command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
-    /**
-     * Acquires OpenCL memory objects that have been created from EGL resources. The EGL objects are acquired by the OpenCL context associated with
-     * {@code command_queue} and can therefore be used by all command-queues associated with the OpenCL context.
-     *
-     * @param command_queue   a valid command-queue
-     * @param mem_objects     a pointer to a list of OpenCL memory objects that were created from EGL resources, within the context associated with {@code command_queue}
-     * @param event_wait_list a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is {@code NULL}, then this particular command
-     *                        does not wait on any event to complete. The events specified in {@code event_wait_list} act as synchronization points. The context associated with events in
-     *                        {@code event_wait_list} and {@code command_queue} must be the same.
-     * @param event           Returns an event object that identifies this particular command and can be used to query or queue a wait for this particular command to complete.
-     *                        {@code event} can be {@code NULL} in which case it will not be possible for the application to query the status of this command or queue a wait for this command to
-     *                        complete. If the {@code event_wait_list} and the {@code event} arguments are not {@code NULL}, the event argument should not refer to an element of the
-     *                        {@code event_wait_list} array.
-     */
+    /** {@code cl_int clEnqueueAcquireEGLObjectsKHR(cl_command_queue command_queue, cl_uint num_objects, cl_mem const * mem_objects, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     @NativeType("cl_int")
     public static int clEnqueueAcquireEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
@@ -112,12 +79,7 @@ public class KHREGLImage {
 
     // --- [ clEnqueueReleaseEGLObjectsKHR ] ---
 
-    /**
-     * Unsafe version of: {@link #clEnqueueReleaseEGLObjectsKHR EnqueueReleaseEGLObjectsKHR}
-     *
-     * @param num_objects             the number of memory objects to be released in {@code mem_objects}
-     * @param num_events_in_wait_list the number of events in {@code event_wait_list}
-     */
+    /** {@code cl_int clEnqueueReleaseEGLObjectsKHR(cl_command_queue command_queue, cl_uint num_objects, cl_mem const * mem_objects, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     public static int nclEnqueueReleaseEGLObjectsKHR(long command_queue, int num_objects, long mem_objects, int num_events_in_wait_list, long event_wait_list, long event) {
         long __functionAddress = CL.getICD().clEnqueueReleaseEGLObjectsKHR;
         if (CHECKS) {
@@ -127,20 +89,7 @@ public class KHREGLImage {
         return callPPPPI(command_queue, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event, __functionAddress);
     }
 
-    /**
-     * Releases OpenCL memory objects that have been created from EGL resources. The EGL objects are released by the OpenCL context associated with
-     * {@code command_queue}.
-     *
-     * @param command_queue   a valid command-queue
-     * @param mem_objects     a pointer to a list of OpenCL memory objects that were created from EGL resources, within the context associated with {@code command_queue}
-     * @param event_wait_list a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is {@code NULL}, then this particular command
-     *                        does not wait on any event to complete. The events specified in {@code event_wait_list} act as synchronization points. The context associated with events in
-     *                        {@code event_wait_list} and {@code command_queue} must be the same.
-     * @param event           Returns an event object that identifies this particular command and can be used to query or queue a wait for this particular command to complete.
-     *                        {@code event} can be {@code NULL} in which case it will not be possible for the application to query the status of this command or queue a wait for this command to
-     *                        complete. If the {@code event_wait_list} and the {@code event} arguments are not {@code NULL}, the event argument should not refer to an element of the
-     *                        {@code event_wait_list} array.
-     */
+    /** {@code cl_int clEnqueueReleaseEGLObjectsKHR(cl_command_queue command_queue, cl_uint num_objects, cl_mem const * mem_objects, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     @NativeType("cl_int")
     public static int clEnqueueReleaseEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") PointerBuffer mem_objects, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
@@ -149,19 +98,7 @@ public class KHREGLImage {
         return nclEnqueueReleaseEGLObjectsKHR(command_queue, mem_objects.remaining(), memAddress(mem_objects), remainingSafe(event_wait_list), memAddressSafe(event_wait_list), memAddressSafe(event));
     }
 
-    /**
-     * Releases OpenCL memory objects that have been created from EGL resources. The EGL objects are released by the OpenCL context associated with
-     * {@code command_queue}.
-     *
-     * @param command_queue   a valid command-queue
-     * @param event_wait_list a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is {@code NULL}, then this particular command
-     *                        does not wait on any event to complete. The events specified in {@code event_wait_list} act as synchronization points. The context associated with events in
-     *                        {@code event_wait_list} and {@code command_queue} must be the same.
-     * @param event           Returns an event object that identifies this particular command and can be used to query or queue a wait for this particular command to complete.
-     *                        {@code event} can be {@code NULL} in which case it will not be possible for the application to query the status of this command or queue a wait for this command to
-     *                        complete. If the {@code event_wait_list} and the {@code event} arguments are not {@code NULL}, the event argument should not refer to an element of the
-     *                        {@code event_wait_list} array.
-     */
+    /** {@code cl_int clEnqueueReleaseEGLObjectsKHR(cl_command_queue command_queue, cl_uint num_objects, cl_mem const * mem_objects, cl_uint num_events_in_wait_list, cl_event const * event_wait_list, cl_event * event)} */
     @NativeType("cl_int")
     public static int clEnqueueReleaseEGLObjectsKHR(@NativeType("cl_command_queue") long command_queue, @NativeType("cl_mem const *") long mem_object, @NativeType("cl_event const *") @Nullable PointerBuffer event_wait_list, @NativeType("cl_event *") @Nullable PointerBuffer event) {
         if (CHECKS) {
@@ -176,7 +113,7 @@ public class KHREGLImage {
         }
     }
 
-    /** Array version of: {@link #clCreateFromEGLImageKHR CreateFromEGLImageKHR} */
+    /** {@code cl_mem clCreateFromEGLImageKHR(cl_context context, CLeglDisplayKHR display, CLeglImageKHR image, cl_mem_flags flags, cl_egl_image_properties_khr const * properties, cl_int * errcode_ret)} */
     @NativeType("cl_mem")
     public static long clCreateFromEGLImageKHR(@NativeType("cl_context") long context, @NativeType("CLeglDisplayKHR") long display, @NativeType("CLeglImageKHR") long image, @NativeType("cl_mem_flags") long flags, @NativeType("cl_egl_image_properties_khr const *") @Nullable PointerBuffer properties, @NativeType("cl_int *") int @Nullable [] errcode_ret) {
         long __functionAddress = CL.getICD().clCreateFromEGLImageKHR;

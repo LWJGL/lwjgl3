@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Maps to the sampler Y'CbCr conversion-related portions of {@code MSLConstexprSampler}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct spvc_msl_sampler_ycbcr_conversion {
  *     unsigned int planes;
  *     spvc_msl_format_resolution resolution;
@@ -32,7 +28,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     spvc_msl_sampler_ycbcr_model_conversion ycbcr_model;
  *     spvc_msl_sampler_ycbcr_range ycbcr_range;
  *     unsigned int bpc;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct spvc_msl_sampler_ycbcr_conversion")
 public class SpvcMslSamplerYcbcrConversion extends Struct<SpvcMslSamplerYcbcrConversion> implements NativeResource {

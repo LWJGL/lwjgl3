@@ -12,18 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * Instances of this interface may be passed to the {@code LogCallback} member of the {@link OVRInitParams} struct.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     uintptr_t userData,
- *     int level,
- *     char const *message
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ovrLogCallback} */
 @FunctionalInterface
 @NativeType("ovrLogCallback")
 public interface OVRLogCallbackI extends CallbackI {
@@ -46,13 +35,7 @@ public interface OVRLogCallbackI extends CallbackI {
         );
     }
 
-    /**
-     * The logging callback.
-     *
-     * @param userData an arbitrary value specified by the user of ovrInitParams
-     * @param level    one of the {@code ovrLogLevel} constants
-     * @param message  a UTF8-encoded null-terminated string
-     */
+    /** {@code void (* ovrLogCallback) (uintptr_t userData, int level, char const * message)} */
     void invoke(@NativeType("uintptr_t") long userData, int level, @NativeType("char const *") long message);
 
 }

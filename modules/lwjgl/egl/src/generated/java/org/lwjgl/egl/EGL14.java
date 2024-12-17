@@ -10,7 +10,6 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 
-/** The core EGL 1.4 functionality. */
 public class EGL14 extends EGL13 {
 
     public static final int
@@ -30,7 +29,7 @@ public class EGL14 extends EGL13 {
 
     // --- [ eglGetCurrentContext ] ---
 
-    /** <a href="https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglGetCurrentContext.xhtml">Reference Page</a> */
+    /** {@code EGLContext eglGetCurrentContext(void)} */
     @NativeType("EGLContext")
     public static long eglGetCurrentContext() {
         long __functionAddress = EGL.getCapabilities().eglGetCurrentContext;

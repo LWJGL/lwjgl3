@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * ALsizei (*{@link #invoke}) (
- *     ALvoid *userptr,
- *     ALvoid *sampledata,
- *     ALsizei numbytes
- * )</code></pre>
- */
+/** Callback function: {@link #invoke ALBUFFERCALLBACKTYPESOFT} */
 public abstract class SOFTCallbackBufferType extends Callback implements SOFTCallbackBufferTypeI {
 
     /**

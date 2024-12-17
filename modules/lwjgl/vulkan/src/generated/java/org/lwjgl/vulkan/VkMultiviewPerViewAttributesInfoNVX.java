@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying the multiview per-attribute properties.
- * 
- * <h5>Description</h5>
- * 
- * <p>When dynamic render pass instances are being used, instead of specifying {@link NVXMultiviewPerViewAttributes#VK_SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX SUBPASS_DESCRIPTION_PER_VIEW_ATTRIBUTES_BIT_NVX} or {@link NVXMultiviewPerViewAttributes#VK_SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX SUBPASS_DESCRIPTION_PER_VIEW_POSITION_X_ONLY_BIT_NVX} in the subpass description flags, the per-attribute properties of the render pass instance <b>must</b> be specified by the {@link VkMultiviewPerViewAttributesInfoNVX} structure Include the {@link VkMultiviewPerViewAttributesInfoNVX} structure in the {@code pNext} chain of {@link VkGraphicsPipelineCreateInfo} when creating a graphics pipeline for dynamic rendering, {@link VkRenderingInfo} when starting a dynamic render pass instance, and {@link VkCommandBufferInheritanceInfo} when specifying the dynamic render pass instance parameters for secondary command buffers.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMultiviewPerViewAttributesInfoNVX {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #perViewAttributes};
- *     VkBool32 {@link #perViewAttributesPositionXOnly};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 perViewAttributes;
+ *     VkBool32 perViewAttributesPositionXOnly;
+ * }}</pre>
  */
 public class VkMultiviewPerViewAttributesInfoNVX extends Struct<VkMultiviewPerViewAttributesInfoNVX> implements NativeResource {
 
@@ -92,28 +78,28 @@ public class VkMultiviewPerViewAttributesInfoNVX extends Struct<VkMultiviewPerVi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies that shaders compiled for this pipeline write the attributes for all views in a single invocation of each vertex processing stage. All pipelines executed within a render pass instance that includes this bit <b>must</b> write per-view attributes to the {@code *PerViewNV[]} shader outputs, in addition to the non-per-view (e.g. {@code Position}) outputs. */
+    /** @return the value of the {@code perViewAttributes} field. */
     @NativeType("VkBool32")
     public boolean perViewAttributes() { return nperViewAttributes(address()) != 0; }
-    /** specifies that shaders compiled for this pipeline use per-view positions which only differ in value in the x component. Per-view viewport mask <b>can</b> also be used. */
+    /** @return the value of the {@code perViewAttributesPositionXOnly} field. */
     @NativeType("VkBool32")
     public boolean perViewAttributesPositionXOnly() { return nperViewAttributesPositionXOnly(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkMultiviewPerViewAttributesInfoNVX sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX} value to the {@link #sType} field. */
+    /** Sets the {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX} value to the {@code sType} field. */
     public VkMultiviewPerViewAttributesInfoNVX sType$Default() { return sType(NVXMultiviewPerViewAttributes.VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkMultiviewPerViewAttributesInfoNVX pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #perViewAttributes} field. */
+    /** Sets the specified value to the {@code perViewAttributes} field. */
     public VkMultiviewPerViewAttributesInfoNVX perViewAttributes(@NativeType("VkBool32") boolean value) { nperViewAttributes(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #perViewAttributesPositionXOnly} field. */
+    /** Sets the specified value to the {@code perViewAttributesPositionXOnly} field. */
     public VkMultiviewPerViewAttributesInfoNVX perViewAttributesPositionXOnly(@NativeType("VkBool32") boolean value) { nperViewAttributesPositionXOnly(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,28 +301,28 @@ public class VkMultiviewPerViewAttributesInfoNVX extends Struct<VkMultiviewPerVi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMultiviewPerViewAttributesInfoNVX#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkMultiviewPerViewAttributesInfoNVX.nsType(address()); }
-        /** @return the value of the {@link VkMultiviewPerViewAttributesInfoNVX#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkMultiviewPerViewAttributesInfoNVX.npNext(address()); }
-        /** @return the value of the {@link VkMultiviewPerViewAttributesInfoNVX#perViewAttributes} field. */
+        /** @return the value of the {@code perViewAttributes} field. */
         @NativeType("VkBool32")
         public boolean perViewAttributes() { return VkMultiviewPerViewAttributesInfoNVX.nperViewAttributes(address()) != 0; }
-        /** @return the value of the {@link VkMultiviewPerViewAttributesInfoNVX#perViewAttributesPositionXOnly} field. */
+        /** @return the value of the {@code perViewAttributesPositionXOnly} field. */
         @NativeType("VkBool32")
         public boolean perViewAttributesPositionXOnly() { return VkMultiviewPerViewAttributesInfoNVX.nperViewAttributesPositionXOnly(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkMultiviewPerViewAttributesInfoNVX#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkMultiviewPerViewAttributesInfoNVX.Buffer sType(@NativeType("VkStructureType") int value) { VkMultiviewPerViewAttributesInfoNVX.nsType(address(), value); return this; }
-        /** Sets the {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX} value to the {@link VkMultiviewPerViewAttributesInfoNVX#sType} field. */
+        /** Sets the {@link NVXMultiviewPerViewAttributes#VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX} value to the {@code sType} field. */
         public VkMultiviewPerViewAttributesInfoNVX.Buffer sType$Default() { return sType(NVXMultiviewPerViewAttributes.VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX); }
-        /** Sets the specified value to the {@link VkMultiviewPerViewAttributesInfoNVX#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkMultiviewPerViewAttributesInfoNVX.Buffer pNext(@NativeType("void const *") long value) { VkMultiviewPerViewAttributesInfoNVX.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkMultiviewPerViewAttributesInfoNVX#perViewAttributes} field. */
+        /** Sets the specified value to the {@code perViewAttributes} field. */
         public VkMultiviewPerViewAttributesInfoNVX.Buffer perViewAttributes(@NativeType("VkBool32") boolean value) { VkMultiviewPerViewAttributesInfoNVX.nperViewAttributes(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkMultiviewPerViewAttributesInfoNVX#perViewAttributesPositionXOnly} field. */
+        /** Sets the specified value to the {@code perViewAttributesPositionXOnly} field. */
         public VkMultiviewPerViewAttributesInfoNVX.Buffer perViewAttributesPositionXOnly(@NativeType("VkBool32") boolean value) { VkMultiviewPerViewAttributesInfoNVX.nperViewAttributesPositionXOnly(address(), value ? 1 : 0); return this; }
 
     }

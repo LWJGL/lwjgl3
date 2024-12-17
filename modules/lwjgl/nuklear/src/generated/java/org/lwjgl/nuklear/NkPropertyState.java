@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.nuklear.Nuklear.NK_MAX_NUMBER_BUFFER;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct nk_property_state {
  *     int active;
  *     int prev;
@@ -32,7 +30,7 @@ import static org.lwjgl.nuklear.Nuklear.NK_MAX_NUMBER_BUFFER;
  *     unsigned int seq;
  *     unsigned int old;
  *     int state;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct nk_property_state")
 public class NkPropertyState extends Struct<NkPropertyState> {

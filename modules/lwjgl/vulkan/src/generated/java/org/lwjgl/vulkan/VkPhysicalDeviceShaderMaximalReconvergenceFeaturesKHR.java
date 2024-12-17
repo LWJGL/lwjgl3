@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing support for shader maximal reconvergence by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDevicePrivateDataFeaturesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDevicePrivateDataFeaturesEXT} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link KHRShaderMaximalReconvergence#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderMaximalReconvergence};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderMaximalReconvergence;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR extends Struct<VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR extends Struc
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether the implementation supports the shader execution mode {@code MaximallyReconvergesKHR} */
+    /** @return the value of the {@code shaderMaximalReconvergence} field. */
     @NativeType("VkBool32")
     public boolean shaderMaximalReconvergence() { return nshaderMaximalReconvergence(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link KHRShaderMaximalReconvergence#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR} value to the {@link #sType} field. */
+    /** Sets the {@link KHRShaderMaximalReconvergence#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR sType$Default() { return sType(KHRShaderMaximalReconvergence.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderMaximalReconvergence} field. */
+    /** Sets the specified value to the {@code shaderMaximalReconvergence} field. */
     public VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR shaderMaximalReconvergence(@NativeType("VkBool32") boolean value) { nshaderMaximalReconvergence(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR extends Struc
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR#shaderMaximalReconvergence} field. */
+        /** @return the value of the {@code shaderMaximalReconvergence} field. */
         @NativeType("VkBool32")
         public boolean shaderMaximalReconvergence() { return VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.nshaderMaximalReconvergence(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.nsType(address(), value); return this; }
-        /** Sets the {@link KHRShaderMaximalReconvergence#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR} value to the {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR#sType} field. */
+        /** Sets the {@link KHRShaderMaximalReconvergence#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.Buffer sType$Default() { return sType(KHRShaderMaximalReconvergence.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR#shaderMaximalReconvergence} field. */
+        /** Sets the specified value to the {@code shaderMaximalReconvergence} field. */
         public VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.Buffer shaderMaximalReconvergence(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR.nshaderMaximalReconvergence(address(), value ? 1 : 0); return this; }
 
     }

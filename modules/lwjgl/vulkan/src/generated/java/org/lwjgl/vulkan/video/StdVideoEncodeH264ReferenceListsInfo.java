@@ -19,9 +19,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoEncodeH264ReferenceListsInfo {
  *     {@link StdVideoEncodeH264ReferenceListsInfoFlags StdVideoEncodeH264ReferenceListsInfoFlags} flags;
  *     uint8_t num_ref_idx_l0_active_minus1;
@@ -35,7 +33,7 @@ import static org.lwjgl.vulkan.video.STDVulkanVideoCodecH264.*;
  *     {@link StdVideoEncodeH264RefListModEntry StdVideoEncodeH264RefListModEntry} const * pRefList0ModOperations;
  *     {@link StdVideoEncodeH264RefListModEntry StdVideoEncodeH264RefListModEntry} const * pRefList1ModOperations;
  *     {@link StdVideoEncodeH264RefPicMarkingEntry StdVideoEncodeH264RefPicMarkingEntry} const * pRefPicMarkingOperations;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoEncodeH264ReferenceListsInfo extends Struct<StdVideoEncodeH264ReferenceListsInfo> implements NativeResource {
 

@@ -16,35 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * defines color scale and bias for layer textures.
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrCompositionLayerColorScaleBiasKHR} contains the information needed to scale and bias the color of layer textures.</p>
- * 
- * <p>The {@link XrCompositionLayerColorScaleBiasKHR} structure <b>can</b> be applied by applications to composition layers by adding an instance of the struct to the {@link XrCompositionLayerBaseHeader}{@code ::next} list.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link KHRCompositionLayerColorScaleBias XR_KHR_composition_layer_color_scale_bias} extension <b>must</b> be enabled prior to using {@link XrCompositionLayerColorScaleBiasKHR}</li>
- * <li>{@code type} <b>must</b> be {@link KHRCompositionLayerColorScaleBias#XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrColor4f}, {@link XrCompositionLayerBaseHeader}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrCompositionLayerColorScaleBiasKHR {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     {@link XrColor4f XrColor4f} {@link #colorScale};
- *     {@link XrColor4f XrColor4f} {@link #colorBias};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     {@link XrColor4f XrColor4f} colorScale;
+ *     {@link XrColor4f XrColor4f} colorBias;
+ * }}</pre>
  */
 public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLayerColorScaleBiasKHR> implements NativeResource {
 
@@ -100,30 +78,30 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLay
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@link XrColor4f} which will modulate the color sourced from the images. */
+    /** @return a {@link XrColor4f} view of the {@code colorScale} field. */
     public XrColor4f colorScale() { return ncolorScale(address()); }
-    /** an {@link XrColor4f} which will offset the color sourced from the images. */
+    /** @return a {@link XrColor4f} view of the {@code colorBias} field. */
     public XrColor4f colorBias() { return ncolorBias(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrCompositionLayerColorScaleBiasKHR type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link KHRCompositionLayerColorScaleBias#XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR} value to the {@link #type} field. */
+    /** Sets the {@link KHRCompositionLayerColorScaleBias#XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR} value to the {@code type} field. */
     public XrCompositionLayerColorScaleBiasKHR type$Default() { return type(KHRCompositionLayerColorScaleBias.XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrCompositionLayerColorScaleBiasKHR next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrColor4f} to the {@link #colorScale} field. */
+    /** Copies the specified {@link XrColor4f} to the {@code colorScale} field. */
     public XrCompositionLayerColorScaleBiasKHR colorScale(XrColor4f value) { ncolorScale(address(), value); return this; }
-    /** Passes the {@link #colorScale} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code colorScale} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerColorScaleBiasKHR colorScale(java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(colorScale()); return this; }
-    /** Copies the specified {@link XrColor4f} to the {@link #colorBias} field. */
+    /** Copies the specified {@link XrColor4f} to the {@code colorBias} field. */
     public XrCompositionLayerColorScaleBiasKHR colorBias(XrColor4f value) { ncolorBias(address(), value); return this; }
-    /** Passes the {@link #colorBias} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code colorBias} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrCompositionLayerColorScaleBiasKHR colorBias(java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(colorBias()); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,30 +303,30 @@ public class XrCompositionLayerColorScaleBiasKHR extends Struct<XrCompositionLay
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrCompositionLayerColorScaleBiasKHR#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrCompositionLayerColorScaleBiasKHR.ntype(address()); }
-        /** @return the value of the {@link XrCompositionLayerColorScaleBiasKHR#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrCompositionLayerColorScaleBiasKHR.nnext(address()); }
-        /** @return a {@link XrColor4f} view of the {@link XrCompositionLayerColorScaleBiasKHR#colorScale} field. */
+        /** @return a {@link XrColor4f} view of the {@code colorScale} field. */
         public XrColor4f colorScale() { return XrCompositionLayerColorScaleBiasKHR.ncolorScale(address()); }
-        /** @return a {@link XrColor4f} view of the {@link XrCompositionLayerColorScaleBiasKHR#colorBias} field. */
+        /** @return a {@link XrColor4f} view of the {@code colorBias} field. */
         public XrColor4f colorBias() { return XrCompositionLayerColorScaleBiasKHR.ncolorBias(address()); }
 
-        /** Sets the specified value to the {@link XrCompositionLayerColorScaleBiasKHR#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrCompositionLayerColorScaleBiasKHR.Buffer type(@NativeType("XrStructureType") int value) { XrCompositionLayerColorScaleBiasKHR.ntype(address(), value); return this; }
-        /** Sets the {@link KHRCompositionLayerColorScaleBias#XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR} value to the {@link XrCompositionLayerColorScaleBiasKHR#type} field. */
+        /** Sets the {@link KHRCompositionLayerColorScaleBias#XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR} value to the {@code type} field. */
         public XrCompositionLayerColorScaleBiasKHR.Buffer type$Default() { return type(KHRCompositionLayerColorScaleBias.XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR); }
-        /** Sets the specified value to the {@link XrCompositionLayerColorScaleBiasKHR#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrCompositionLayerColorScaleBiasKHR.Buffer next(@NativeType("void const *") long value) { XrCompositionLayerColorScaleBiasKHR.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrColor4f} to the {@link XrCompositionLayerColorScaleBiasKHR#colorScale} field. */
+        /** Copies the specified {@link XrColor4f} to the {@code colorScale} field. */
         public XrCompositionLayerColorScaleBiasKHR.Buffer colorScale(XrColor4f value) { XrCompositionLayerColorScaleBiasKHR.ncolorScale(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerColorScaleBiasKHR#colorScale} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code colorScale} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerColorScaleBiasKHR.Buffer colorScale(java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(colorScale()); return this; }
-        /** Copies the specified {@link XrColor4f} to the {@link XrCompositionLayerColorScaleBiasKHR#colorBias} field. */
+        /** Copies the specified {@link XrColor4f} to the {@code colorBias} field. */
         public XrCompositionLayerColorScaleBiasKHR.Buffer colorBias(XrColor4f value) { XrCompositionLayerColorScaleBiasKHR.ncolorBias(address(), value); return this; }
-        /** Passes the {@link XrCompositionLayerColorScaleBiasKHR#colorBias} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code colorBias} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrCompositionLayerColorScaleBiasKHR.Buffer colorBias(java.util.function.Consumer<XrColor4f> consumer) { consumer.accept(colorBias()); return this; }
 
     }

@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether the command buffer inheritance feature is supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link NVCommandBufferInheritance#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceCommandBufferInheritanceFeaturesNV {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #commandBufferInheritance};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 commandBufferInheritance;
+ * }}</pre>
  */
 public class VkPhysicalDeviceCommandBufferInheritanceFeaturesNV extends Struct<VkPhysicalDeviceCommandBufferInheritanceFeaturesNV> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceCommandBufferInheritanceFeaturesNV extends Struct<V
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that command buffers executed in a queue inherit graphics and compute state from the previously executed command buffer in that queue. */
+    /** @return the value of the {@code commandBufferInheritance} field. */
     @NativeType("VkBool32")
     public boolean commandBufferInheritance() { return ncommandBufferInheritance(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceCommandBufferInheritanceFeaturesNV sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link NVCommandBufferInheritance#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV} value to the {@link #sType} field. */
+    /** Sets the {@link NVCommandBufferInheritance#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV} value to the {@code sType} field. */
     public VkPhysicalDeviceCommandBufferInheritanceFeaturesNV sType$Default() { return sType(NVCommandBufferInheritance.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceCommandBufferInheritanceFeaturesNV pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #commandBufferInheritance} field. */
+    /** Sets the specified value to the {@code commandBufferInheritance} field. */
     public VkPhysicalDeviceCommandBufferInheritanceFeaturesNV commandBufferInheritance(@NativeType("VkBool32") boolean value) { ncommandBufferInheritance(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceCommandBufferInheritanceFeaturesNV extends Struct<V
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV#commandBufferInheritance} field. */
+        /** @return the value of the {@code commandBufferInheritance} field. */
         @NativeType("VkBool32")
         public boolean commandBufferInheritance() { return VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.ncommandBufferInheritance(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.nsType(address(), value); return this; }
-        /** Sets the {@link NVCommandBufferInheritance#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV} value to the {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV#sType} field. */
+        /** Sets the {@link NVCommandBufferInheritance#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV} value to the {@code sType} field. */
         public VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.Buffer sType$Default() { return sType(NVCommandBufferInheritance.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceCommandBufferInheritanceFeaturesNV#commandBufferInheritance} field. */
+        /** Sets the specified value to the {@code commandBufferInheritance} field. */
         public VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.Buffer commandBufferInheritance(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceCommandBufferInheritanceFeaturesNV.ncommandBufferInheritance(address(), value ? 1 : 0); return this; }
 
     }

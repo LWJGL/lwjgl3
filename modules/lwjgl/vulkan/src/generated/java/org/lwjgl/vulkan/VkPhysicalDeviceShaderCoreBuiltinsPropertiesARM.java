@@ -16,28 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing shader core builtins properties supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ARMShaderCoreBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     uint64_t {@link #shaderCoreMask};
- *     uint32_t {@link #shaderCoreCount};
- *     uint32_t {@link #shaderWarpsPerCore};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     uint64_t shaderCoreMask;
+ *     uint32_t shaderCoreCount;
+ *     uint32_t shaderWarpsPerCore;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct<VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM> implements NativeResource {
 
@@ -96,27 +82,27 @@ public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct<VkPh
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** a bitfield where each bit set represents the presence of a shader core whose ID is the bit position. The highest ID for any shader core on the device is the position of the most significant bit set. */
+    /** @return the value of the {@code shaderCoreMask} field. */
     @NativeType("uint64_t")
     public long shaderCoreMask() { return nshaderCoreMask(address()); }
-    /** the number of shader cores on the device. */
+    /** @return the value of the {@code shaderCoreCount} field. */
     @NativeType("uint32_t")
     public int shaderCoreCount() { return nshaderCoreCount(address()); }
-    /** the maximum number of simultaneously executing warps on a shader core. */
+    /** @return the value of the {@code shaderWarpsPerCore} field. */
     @NativeType("uint32_t")
     public int shaderWarpsPerCore() { return nshaderWarpsPerCore(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ARMShaderCoreBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM} value to the {@link #sType} field. */
+    /** Sets the {@link ARMShaderCoreBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM sType$Default() { return sType(ARMShaderCoreBuiltins.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,27 +298,27 @@ public class VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM extends Struct<VkPh
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#shaderCoreMask} field. */
+        /** @return the value of the {@code shaderCoreMask} field. */
         @NativeType("uint64_t")
         public long shaderCoreMask() { return VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.nshaderCoreMask(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#shaderCoreCount} field. */
+        /** @return the value of the {@code shaderCoreCount} field. */
         @NativeType("uint32_t")
         public int shaderCoreCount() { return VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.nshaderCoreCount(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#shaderWarpsPerCore} field. */
+        /** @return the value of the {@code shaderWarpsPerCore} field. */
         @NativeType("uint32_t")
         public int shaderWarpsPerCore() { return VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.nshaderWarpsPerCore(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.nsType(address(), value); return this; }
-        /** Sets the {@link ARMShaderCoreBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM} value to the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#sType} field. */
+        /** Sets the {@link ARMShaderCoreBuiltins#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.Buffer sType$Default() { return sType(ARMShaderCoreBuiltins.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM.npNext(address(), value); return this; }
 
     }

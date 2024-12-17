@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH264SpsFlags {
  *     uint32_t constraint_set0_flag : 1;
  *     uint32_t constraint_set1_flag : 1;
@@ -36,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t frame_cropping_flag : 1;
  *     uint32_t seq_scaling_matrix_present_flag : 1;
  *     uint32_t vui_parameters_present_flag : 1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH264SpsFlags extends Struct<StdVideoH264SpsFlags> implements NativeResource {
 

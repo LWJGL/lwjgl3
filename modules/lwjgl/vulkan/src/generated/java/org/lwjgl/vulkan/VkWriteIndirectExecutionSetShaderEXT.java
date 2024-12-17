@@ -16,41 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct specifying shader object update information for an indirect execution set.
- * 
- * <h5>Description</h5>
- * 
- * <p>Shaders need not be stored in the Indirect Execution Set according to their stage. The only restriction for shader indices within a set is that the value of the index <b>must</b> be less than the maximum number of shaders in the set.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>{@code index} <b>must</b> be less than {@link VkIndirectExecutionSetShaderInfoEXT}{@code ::maxShaderCount}</li>
- * <li>{@code shader} <b>must</b> have been created with {@link EXTDeviceGeneratedCommands#VK_SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT SHADER_CREATE_INDIRECT_BINDABLE_BIT_EXT}</li>
- * <li>A shader created with the same {@code VkShaderStageFlagBits} <b>must</b> have been passed in the {@link VkIndirectExecutionSetShaderInfoEXT}{@code ::pInitialShaders} array</li>
- * <li>{@code index} <b>must</b> not be in use by submitted command buffers</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT}</li>
- * <li>{@code shader} <b>must</b> be a valid {@code VkShaderEXT} handle</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link EXTDeviceGeneratedCommands#vkUpdateIndirectExecutionSetShaderEXT UpdateIndirectExecutionSetShaderEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkWriteIndirectExecutionSetShaderEXT {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     uint32_t {@link #index};
- *     VkShaderEXT {@link #shader};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     uint32_t index;
+ *     VkShaderEXT shader;
+ * }}</pre>
  */
 public class VkWriteIndirectExecutionSetShaderEXT extends Struct<VkWriteIndirectExecutionSetShaderEXT> implements NativeResource {
 
@@ -106,28 +78,28 @@ public class VkWriteIndirectExecutionSetShaderEXT extends Struct<VkWriteIndirect
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** the element of the set to update */
+    /** @return the value of the {@code index} field. */
     @NativeType("uint32_t")
     public int index() { return nindex(address()); }
-    /** the shader to store in the indirect execution set */
+    /** @return the value of the {@code shader} field. */
     @NativeType("VkShaderEXT")
     public long shader() { return nshader(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkWriteIndirectExecutionSetShaderEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT} value to the {@code sType} field. */
     public VkWriteIndirectExecutionSetShaderEXT sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkWriteIndirectExecutionSetShaderEXT pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #index} field. */
+    /** Sets the specified value to the {@code index} field. */
     public VkWriteIndirectExecutionSetShaderEXT index(@NativeType("uint32_t") int value) { nindex(address(), value); return this; }
-    /** Sets the specified value to the {@link #shader} field. */
+    /** Sets the specified value to the {@code shader} field. */
     public VkWriteIndirectExecutionSetShaderEXT shader(@NativeType("VkShaderEXT") long value) { nshader(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,28 +301,28 @@ public class VkWriteIndirectExecutionSetShaderEXT extends Struct<VkWriteIndirect
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkWriteIndirectExecutionSetShaderEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkWriteIndirectExecutionSetShaderEXT.nsType(address()); }
-        /** @return the value of the {@link VkWriteIndirectExecutionSetShaderEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkWriteIndirectExecutionSetShaderEXT.npNext(address()); }
-        /** @return the value of the {@link VkWriteIndirectExecutionSetShaderEXT#index} field. */
+        /** @return the value of the {@code index} field. */
         @NativeType("uint32_t")
         public int index() { return VkWriteIndirectExecutionSetShaderEXT.nindex(address()); }
-        /** @return the value of the {@link VkWriteIndirectExecutionSetShaderEXT#shader} field. */
+        /** @return the value of the {@code shader} field. */
         @NativeType("VkShaderEXT")
         public long shader() { return VkWriteIndirectExecutionSetShaderEXT.nshader(address()); }
 
-        /** Sets the specified value to the {@link VkWriteIndirectExecutionSetShaderEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkWriteIndirectExecutionSetShaderEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkWriteIndirectExecutionSetShaderEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT} value to the {@link VkWriteIndirectExecutionSetShaderEXT#sType} field. */
+        /** Sets the {@link EXTDeviceGeneratedCommands#VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT} value to the {@code sType} field. */
         public VkWriteIndirectExecutionSetShaderEXT.Buffer sType$Default() { return sType(EXTDeviceGeneratedCommands.VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT); }
-        /** Sets the specified value to the {@link VkWriteIndirectExecutionSetShaderEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkWriteIndirectExecutionSetShaderEXT.Buffer pNext(@NativeType("void const *") long value) { VkWriteIndirectExecutionSetShaderEXT.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkWriteIndirectExecutionSetShaderEXT#index} field. */
+        /** Sets the specified value to the {@code index} field. */
         public VkWriteIndirectExecutionSetShaderEXT.Buffer index(@NativeType("uint32_t") int value) { VkWriteIndirectExecutionSetShaderEXT.nindex(address(), value); return this; }
-        /** Sets the specified value to the {@link VkWriteIndirectExecutionSetShaderEXT#shader} field. */
+        /** Sets the specified value to the {@code shader} field. */
         public VkWriteIndirectExecutionSetShaderEXT.Buffer shader(@NativeType("VkShaderEXT") long value) { VkWriteIndirectExecutionSetShaderEXT.nshader(address(), value); return this; }
 
     }

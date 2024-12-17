@@ -14,19 +14,15 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Data for {@code ppIncludedFile} callback.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CXIdxIncludedFileInfo {
- *     {@link CXIdxLoc CXIdxLoc} {@link #hashLoc};
- *     char const * {@link #filename};
- *     CXFile {@link #file};
+ *     {@link CXIdxLoc CXIdxLoc} hashLoc;
+ *     char const * filename;
+ *     CXFile file;
  *     int isImport;
  *     int isAngled;
- *     int {@link #isModuleImport};
- * }</code></pre>
+ *     int isModuleImport;
+ * }}</pre>
  */
 public class CXIdxIncludedFileInfo extends Struct<CXIdxIncludedFileInfo> {
 
@@ -88,15 +84,15 @@ public class CXIdxIncludedFileInfo extends Struct<CXIdxIncludedFileInfo> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** location of '\#' in the {@code #include/#import} directive */
+    /** @return a {@link CXIdxLoc} view of the {@code hashLoc} field. */
     public CXIdxLoc hashLoc() { return nhashLoc(address()); }
-    /** filename as written in the {@code #include/#import} directive */
+    /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code filename} field. */
     @NativeType("char const *")
     public ByteBuffer filename() { return nfilename(address()); }
-    /** filename as written in the {@code #include/#import} directive */
+    /** @return the null-terminated string pointed to by the {@code filename} field. */
     @NativeType("char const *")
     public String filenameString() { return nfilenameString(address()); }
-    /** the actual file that the {@code #include/#import} directive resolved to */
+    /** @return the value of the {@code file} field. */
     @NativeType("CXFile")
     public long file() { return nfile(address()); }
     /** @return the value of the {@code isImport} field. */
@@ -105,7 +101,7 @@ public class CXIdxIncludedFileInfo extends Struct<CXIdxIncludedFileInfo> {
     /** @return the value of the {@code isAngled} field. */
     @NativeType("int")
     public boolean isAngled() { return nisAngled(address()) != 0; }
-    /** non-zero if the directive was automatically turned into a module import */
+    /** @return the value of the {@code isModuleImport} field. */
     @NativeType("int")
     public boolean isModuleImport() { return nisModuleImport(address()) != 0; }
 
@@ -196,15 +192,15 @@ public class CXIdxIncludedFileInfo extends Struct<CXIdxIncludedFileInfo> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link CXIdxLoc} view of the {@link CXIdxIncludedFileInfo#hashLoc} field. */
+        /** @return a {@link CXIdxLoc} view of the {@code hashLoc} field. */
         public CXIdxLoc hashLoc() { return CXIdxIncludedFileInfo.nhashLoc(address()); }
-        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@link CXIdxIncludedFileInfo#filename} field. */
+        /** @return a {@link ByteBuffer} view of the null-terminated string pointed to by the {@code filename} field. */
         @NativeType("char const *")
         public ByteBuffer filename() { return CXIdxIncludedFileInfo.nfilename(address()); }
-        /** @return the null-terminated string pointed to by the {@link CXIdxIncludedFileInfo#filename} field. */
+        /** @return the null-terminated string pointed to by the {@code filename} field. */
         @NativeType("char const *")
         public String filenameString() { return CXIdxIncludedFileInfo.nfilenameString(address()); }
-        /** @return the value of the {@link CXIdxIncludedFileInfo#file} field. */
+        /** @return the value of the {@code file} field. */
         @NativeType("CXFile")
         public long file() { return CXIdxIncludedFileInfo.nfile(address()); }
         /** @return the value of the {@code isImport} field. */
@@ -213,7 +209,7 @@ public class CXIdxIncludedFileInfo extends Struct<CXIdxIncludedFileInfo> {
         /** @return the value of the {@code isAngled} field. */
         @NativeType("int")
         public boolean isAngled() { return CXIdxIncludedFileInfo.nisAngled(address()) != 0; }
-        /** @return the value of the {@link CXIdxIncludedFileInfo#isModuleImport} field. */
+        /** @return the value of the {@code isModuleImport} field. */
         @NativeType("int")
         public boolean isModuleImport() { return CXIdxIncludedFileInfo.nisModuleImport(address()) != 0; }
 

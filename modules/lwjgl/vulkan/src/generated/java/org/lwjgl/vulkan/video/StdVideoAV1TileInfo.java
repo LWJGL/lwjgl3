@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1TileInfo {
  *     {@link StdVideoAV1TileInfoFlag StdVideoAV1TileInfoFlag} flags;
  *     uint8_t TileCols;
@@ -31,7 +29,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint16_t const * pMiRowStarts;
  *     uint16_t const * pWidthInSbsMinus1;
  *     uint16_t const * pHeightInSbsMinus1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1TileInfo extends Struct<StdVideoAV1TileInfo> implements NativeResource {
 

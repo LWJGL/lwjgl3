@@ -16,28 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Marker state query parameters.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLMarkerUnderstanding XR_ML_marker_understanding} extension <b>must</b> be enabled prior to using {@link XrMarkerDetectorStateML}</li>
- * <li>{@code type} <b>must</b> be {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_STATE_ML TYPE_MARKER_DETECTOR_STATE_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLMarkerUnderstanding#xrGetMarkerDetectorStateML GetMarkerDetectorStateML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrMarkerDetectorStateML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrMarkerDetectorStatusML {@link #state};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrMarkerDetectorStatusML state;
+ * }}</pre>
  */
 public class XrMarkerDetectorStateML extends Struct<XrMarkerDetectorStateML> implements NativeResource {
 
@@ -90,21 +74,21 @@ public class XrMarkerDetectorStateML extends Struct<XrMarkerDetectorStateML> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the current state of the marker detector. */
+    /** @return the value of the {@code state} field. */
     @NativeType("XrMarkerDetectorStatusML")
     public int state() { return nstate(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrMarkerDetectorStateML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_STATE_ML TYPE_MARKER_DETECTOR_STATE_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_STATE_ML TYPE_MARKER_DETECTOR_STATE_ML} value to the {@code type} field. */
     public XrMarkerDetectorStateML type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_STATE_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrMarkerDetectorStateML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -296,21 +280,21 @@ public class XrMarkerDetectorStateML extends Struct<XrMarkerDetectorStateML> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrMarkerDetectorStateML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrMarkerDetectorStateML.ntype(address()); }
-        /** @return the value of the {@link XrMarkerDetectorStateML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrMarkerDetectorStateML.nnext(address()); }
-        /** @return the value of the {@link XrMarkerDetectorStateML#state} field. */
+        /** @return the value of the {@code state} field. */
         @NativeType("XrMarkerDetectorStatusML")
         public int state() { return XrMarkerDetectorStateML.nstate(address()); }
 
-        /** Sets the specified value to the {@link XrMarkerDetectorStateML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrMarkerDetectorStateML.Buffer type(@NativeType("XrStructureType") int value) { XrMarkerDetectorStateML.ntype(address(), value); return this; }
-        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_STATE_ML TYPE_MARKER_DETECTOR_STATE_ML} value to the {@link XrMarkerDetectorStateML#type} field. */
+        /** Sets the {@link MLMarkerUnderstanding#XR_TYPE_MARKER_DETECTOR_STATE_ML TYPE_MARKER_DETECTOR_STATE_ML} value to the {@code type} field. */
         public XrMarkerDetectorStateML.Buffer type$Default() { return type(MLMarkerUnderstanding.XR_TYPE_MARKER_DETECTOR_STATE_ML); }
-        /** Sets the specified value to the {@link XrMarkerDetectorStateML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrMarkerDetectorStateML.Buffer next(@NativeType("void *") long value) { XrMarkerDetectorStateML.nnext(address(), value); return this; }
 
     }

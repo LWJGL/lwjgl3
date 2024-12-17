@@ -16,34 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Colocation discovery stop complete event.
- * 
- * <h5>Description</h5>
- * 
- * <p>This event conveys the results of the asynchronous operation started by {@link METAColocationDiscovery#xrStopColocationDiscoveryMETA StopColocationDiscoveryMETA}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link METAColocationDiscovery XR_META_colocation_discovery} extension <b>must</b> be enabled prior to using {@link XrEventDataStopColocationDiscoveryCompleteMETA}</li>
- * <li>{@code type} <b>must</b> be {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code result} <b>must</b> be a valid {@code XrResult} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link METAColocationDiscovery#xrStopColocationDiscoveryMETA StopColocationDiscoveryMETA}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataStopColocationDiscoveryCompleteMETA {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrAsyncRequestIdFB {@link #requestId};
- *     XrResult {@link #result};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrAsyncRequestIdFB requestId;
+ *     XrResult result;
+ * }}</pre>
  */
 public class XrEventDataStopColocationDiscoveryCompleteMETA extends Struct<XrEventDataStopColocationDiscoveryCompleteMETA> implements NativeResource {
 
@@ -99,28 +78,28 @@ public class XrEventDataStopColocationDiscoveryCompleteMETA extends Struct<XrEve
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** an {@code XrAsyncRequestIdFB} that identifies which request this event is in response to. The runtime <b>must</b> ensure this value matches a {@code requestId} returned during an {@link METAColocationDiscovery#xrStopColocationDiscoveryMETA StopColocationDiscoveryMETA} call. */
+    /** @return the value of the {@code requestId} field. */
     @NativeType("XrAsyncRequestIdFB")
     public long requestId() { return nrequestId(address()); }
-    /** an {@code XrResult} representing the discovery process result. The valid {@code result} values are: {@link XR10#XR_SUCCESS SUCCESS} and {@link XR10#XR_ERROR_RUNTIME_FAILURE ERROR_RUNTIME_FAILURE}. If the application does not already have an active colocation discovery, the runtime <b>must</b> return {@link XR10#XR_SUCCESS SUCCESS}. */
+    /** @return the value of the {@code result} field. */
     @NativeType("XrResult")
     public int result() { return nresult(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataStopColocationDiscoveryCompleteMETA type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META} value to the {@link #type} field. */
+    /** Sets the {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META} value to the {@code type} field. */
     public XrEventDataStopColocationDiscoveryCompleteMETA type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataStopColocationDiscoveryCompleteMETA next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #requestId} field. */
+    /** Sets the specified value to the {@code requestId} field. */
     public XrEventDataStopColocationDiscoveryCompleteMETA requestId(@NativeType("XrAsyncRequestIdFB") long value) { nrequestId(address(), value); return this; }
-    /** Sets the specified value to the {@link #result} field. */
+    /** Sets the specified value to the {@code result} field. */
     public XrEventDataStopColocationDiscoveryCompleteMETA result(@NativeType("XrResult") int value) { nresult(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -322,28 +301,28 @@ public class XrEventDataStopColocationDiscoveryCompleteMETA extends Struct<XrEve
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataStopColocationDiscoveryCompleteMETA#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataStopColocationDiscoveryCompleteMETA.ntype(address()); }
-        /** @return the value of the {@link XrEventDataStopColocationDiscoveryCompleteMETA#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataStopColocationDiscoveryCompleteMETA.nnext(address()); }
-        /** @return the value of the {@link XrEventDataStopColocationDiscoveryCompleteMETA#requestId} field. */
+        /** @return the value of the {@code requestId} field. */
         @NativeType("XrAsyncRequestIdFB")
         public long requestId() { return XrEventDataStopColocationDiscoveryCompleteMETA.nrequestId(address()); }
-        /** @return the value of the {@link XrEventDataStopColocationDiscoveryCompleteMETA#result} field. */
+        /** @return the value of the {@code result} field. */
         @NativeType("XrResult")
         public int result() { return XrEventDataStopColocationDiscoveryCompleteMETA.nresult(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataStopColocationDiscoveryCompleteMETA#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataStopColocationDiscoveryCompleteMETA.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataStopColocationDiscoveryCompleteMETA.ntype(address(), value); return this; }
-        /** Sets the {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META} value to the {@link XrEventDataStopColocationDiscoveryCompleteMETA#type} field. */
+        /** Sets the {@link METAColocationDiscovery#XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META} value to the {@code type} field. */
         public XrEventDataStopColocationDiscoveryCompleteMETA.Buffer type$Default() { return type(METAColocationDiscovery.XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META); }
-        /** Sets the specified value to the {@link XrEventDataStopColocationDiscoveryCompleteMETA#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataStopColocationDiscoveryCompleteMETA.Buffer next(@NativeType("void const *") long value) { XrEventDataStopColocationDiscoveryCompleteMETA.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataStopColocationDiscoveryCompleteMETA#requestId} field. */
+        /** Sets the specified value to the {@code requestId} field. */
         public XrEventDataStopColocationDiscoveryCompleteMETA.Buffer requestId(@NativeType("XrAsyncRequestIdFB") long value) { XrEventDataStopColocationDiscoveryCompleteMETA.nrequestId(address(), value); return this; }
-        /** Sets the specified value to the {@link XrEventDataStopColocationDiscoveryCompleteMETA#result} field. */
+        /** Sets the specified value to the {@code result} field. */
         public XrEventDataStopColocationDiscoveryCompleteMETA.Buffer result(@NativeType("XrResult") int value) { XrEventDataStopColocationDiscoveryCompleteMETA.nresult(address(), value); return this; }
 
     }

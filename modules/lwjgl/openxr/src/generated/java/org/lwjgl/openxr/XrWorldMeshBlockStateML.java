@@ -16,33 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Mesh block detection info.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLWorldMeshDetection XR_ML_world_mesh_detection} extension <b>must</b> be enabled prior to using {@link XrWorldMeshBlockStateML}</li>
- * <li>{@code type} <b>must</b> be {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_STATE_ML TYPE_WORLD_MESH_BLOCK_STATE_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code status} <b>must</b> be a valid {@code XrWorldMeshBlockStatusML} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrExtent3DfEXT}, {@link XrPosef}, {@link XrUuidEXT}, {@link XrWorldMeshStateRequestCompletionML}, {@link MLWorldMeshDetection#xrRequestWorldMeshStateCompleteML RequestWorldMeshStateCompleteML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrWorldMeshBlockStateML {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     {@link XrUuidEXT XrUuidEXT} {@link #uuid};
- *     {@link XrPosef XrPosef} {@link #meshBoundingBoxCenter};
- *     {@link XrExtent3DfEXT XrExtent3DfEXT} {@link #meshBoundingBoxExtents};
- *     XrTime {@link #lastUpdateTime};
- *     XrWorldMeshBlockStatusML {@link #status};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     {@link XrUuidEXT XrUuidEXT} uuid;
+ *     {@link XrPosef XrPosef} meshBoundingBoxCenter;
+ *     {@link XrExtent3DfEXT XrExtent3DfEXT} meshBoundingBoxExtents;
+ *     XrTime lastUpdateTime;
+ *     XrWorldMeshBlockStatusML status;
+ * }}</pre>
  */
 public class XrWorldMeshBlockStateML extends Struct<XrWorldMeshBlockStateML> implements NativeResource {
 
@@ -107,46 +90,46 @@ public class XrWorldMeshBlockStateML extends Struct<XrWorldMeshBlockStateML> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the {@link XrUuidEXT} of the mesh block. */
+    /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
     public XrUuidEXT uuid() { return nuuid(address()); }
-    /** the {@link XrPosef} of the mesh’s bounding box center. */
+    /** @return a {@link XrPosef} view of the {@code meshBoundingBoxCenter} field. */
     public XrPosef meshBoundingBoxCenter() { return nmeshBoundingBoxCenter(address()); }
-    /** the {@link XrExtent3DfEXT} of the mesh’s bounding box. */
+    /** @return a {@link XrExtent3DfEXT} view of the {@code meshBoundingBoxExtents} field. */
     public XrExtent3DfEXT meshBoundingBoxExtents() { return nmeshBoundingBoxExtents(address()); }
-    /** the {@code XrTime} at which this mesh was last updated. */
+    /** @return the value of the {@code lastUpdateTime} field. */
     @NativeType("XrTime")
     public long lastUpdateTime() { return nlastUpdateTime(address()); }
-    /** an {@code XrWorldMeshBlockStatusML} indicating the status of the mesh block. */
+    /** @return the value of the {@code status} field. */
     @NativeType("XrWorldMeshBlockStatusML")
     public int status() { return nstatus(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrWorldMeshBlockStateML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_STATE_ML TYPE_WORLD_MESH_BLOCK_STATE_ML} value to the {@link #type} field. */
+    /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_STATE_ML TYPE_WORLD_MESH_BLOCK_STATE_ML} value to the {@code type} field. */
     public XrWorldMeshBlockStateML type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BLOCK_STATE_ML); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrWorldMeshBlockStateML next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Copies the specified {@link XrUuidEXT} to the {@link #uuid} field. */
+    /** Copies the specified {@link XrUuidEXT} to the {@code uuid} field. */
     public XrWorldMeshBlockStateML uuid(XrUuidEXT value) { nuuid(address(), value); return this; }
-    /** Passes the {@link #uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrWorldMeshBlockStateML uuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(uuid()); return this; }
-    /** Copies the specified {@link XrPosef} to the {@link #meshBoundingBoxCenter} field. */
+    /** Copies the specified {@link XrPosef} to the {@code meshBoundingBoxCenter} field. */
     public XrWorldMeshBlockStateML meshBoundingBoxCenter(XrPosef value) { nmeshBoundingBoxCenter(address(), value); return this; }
-    /** Passes the {@link #meshBoundingBoxCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code meshBoundingBoxCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrWorldMeshBlockStateML meshBoundingBoxCenter(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(meshBoundingBoxCenter()); return this; }
-    /** Copies the specified {@link XrExtent3DfEXT} to the {@link #meshBoundingBoxExtents} field. */
+    /** Copies the specified {@link XrExtent3DfEXT} to the {@code meshBoundingBoxExtents} field. */
     public XrWorldMeshBlockStateML meshBoundingBoxExtents(XrExtent3DfEXT value) { nmeshBoundingBoxExtents(address(), value); return this; }
-    /** Passes the {@link #meshBoundingBoxExtents} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code meshBoundingBoxExtents} field to the specified {@link java.util.function.Consumer Consumer}. */
     public XrWorldMeshBlockStateML meshBoundingBoxExtents(java.util.function.Consumer<XrExtent3DfEXT> consumer) { consumer.accept(meshBoundingBoxExtents()); return this; }
-    /** Sets the specified value to the {@link #lastUpdateTime} field. */
+    /** Sets the specified value to the {@code lastUpdateTime} field. */
     public XrWorldMeshBlockStateML lastUpdateTime(@NativeType("XrTime") long value) { nlastUpdateTime(address(), value); return this; }
-    /** Sets the specified value to the {@link #status} field. */
+    /** Sets the specified value to the {@code status} field. */
     public XrWorldMeshBlockStateML status(@NativeType("XrWorldMeshBlockStatusML") int value) { nstatus(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -366,46 +349,46 @@ public class XrWorldMeshBlockStateML extends Struct<XrWorldMeshBlockStateML> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrWorldMeshBlockStateML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrWorldMeshBlockStateML.ntype(address()); }
-        /** @return the value of the {@link XrWorldMeshBlockStateML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrWorldMeshBlockStateML.nnext(address()); }
-        /** @return a {@link XrUuidEXT} view of the {@link XrWorldMeshBlockStateML#uuid} field. */
+        /** @return a {@link XrUuidEXT} view of the {@code uuid} field. */
         public XrUuidEXT uuid() { return XrWorldMeshBlockStateML.nuuid(address()); }
-        /** @return a {@link XrPosef} view of the {@link XrWorldMeshBlockStateML#meshBoundingBoxCenter} field. */
+        /** @return a {@link XrPosef} view of the {@code meshBoundingBoxCenter} field. */
         public XrPosef meshBoundingBoxCenter() { return XrWorldMeshBlockStateML.nmeshBoundingBoxCenter(address()); }
-        /** @return a {@link XrExtent3DfEXT} view of the {@link XrWorldMeshBlockStateML#meshBoundingBoxExtents} field. */
+        /** @return a {@link XrExtent3DfEXT} view of the {@code meshBoundingBoxExtents} field. */
         public XrExtent3DfEXT meshBoundingBoxExtents() { return XrWorldMeshBlockStateML.nmeshBoundingBoxExtents(address()); }
-        /** @return the value of the {@link XrWorldMeshBlockStateML#lastUpdateTime} field. */
+        /** @return the value of the {@code lastUpdateTime} field. */
         @NativeType("XrTime")
         public long lastUpdateTime() { return XrWorldMeshBlockStateML.nlastUpdateTime(address()); }
-        /** @return the value of the {@link XrWorldMeshBlockStateML#status} field. */
+        /** @return the value of the {@code status} field. */
         @NativeType("XrWorldMeshBlockStatusML")
         public int status() { return XrWorldMeshBlockStateML.nstatus(address()); }
 
-        /** Sets the specified value to the {@link XrWorldMeshBlockStateML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrWorldMeshBlockStateML.Buffer type(@NativeType("XrStructureType") int value) { XrWorldMeshBlockStateML.ntype(address(), value); return this; }
-        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_STATE_ML TYPE_WORLD_MESH_BLOCK_STATE_ML} value to the {@link XrWorldMeshBlockStateML#type} field. */
+        /** Sets the {@link MLWorldMeshDetection#XR_TYPE_WORLD_MESH_BLOCK_STATE_ML TYPE_WORLD_MESH_BLOCK_STATE_ML} value to the {@code type} field. */
         public XrWorldMeshBlockStateML.Buffer type$Default() { return type(MLWorldMeshDetection.XR_TYPE_WORLD_MESH_BLOCK_STATE_ML); }
-        /** Sets the specified value to the {@link XrWorldMeshBlockStateML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrWorldMeshBlockStateML.Buffer next(@NativeType("void *") long value) { XrWorldMeshBlockStateML.nnext(address(), value); return this; }
-        /** Copies the specified {@link XrUuidEXT} to the {@link XrWorldMeshBlockStateML#uuid} field. */
+        /** Copies the specified {@link XrUuidEXT} to the {@code uuid} field. */
         public XrWorldMeshBlockStateML.Buffer uuid(XrUuidEXT value) { XrWorldMeshBlockStateML.nuuid(address(), value); return this; }
-        /** Passes the {@link XrWorldMeshBlockStateML#uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code uuid} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrWorldMeshBlockStateML.Buffer uuid(java.util.function.Consumer<XrUuidEXT> consumer) { consumer.accept(uuid()); return this; }
-        /** Copies the specified {@link XrPosef} to the {@link XrWorldMeshBlockStateML#meshBoundingBoxCenter} field. */
+        /** Copies the specified {@link XrPosef} to the {@code meshBoundingBoxCenter} field. */
         public XrWorldMeshBlockStateML.Buffer meshBoundingBoxCenter(XrPosef value) { XrWorldMeshBlockStateML.nmeshBoundingBoxCenter(address(), value); return this; }
-        /** Passes the {@link XrWorldMeshBlockStateML#meshBoundingBoxCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code meshBoundingBoxCenter} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrWorldMeshBlockStateML.Buffer meshBoundingBoxCenter(java.util.function.Consumer<XrPosef> consumer) { consumer.accept(meshBoundingBoxCenter()); return this; }
-        /** Copies the specified {@link XrExtent3DfEXT} to the {@link XrWorldMeshBlockStateML#meshBoundingBoxExtents} field. */
+        /** Copies the specified {@link XrExtent3DfEXT} to the {@code meshBoundingBoxExtents} field. */
         public XrWorldMeshBlockStateML.Buffer meshBoundingBoxExtents(XrExtent3DfEXT value) { XrWorldMeshBlockStateML.nmeshBoundingBoxExtents(address(), value); return this; }
-        /** Passes the {@link XrWorldMeshBlockStateML#meshBoundingBoxExtents} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code meshBoundingBoxExtents} field to the specified {@link java.util.function.Consumer Consumer}. */
         public XrWorldMeshBlockStateML.Buffer meshBoundingBoxExtents(java.util.function.Consumer<XrExtent3DfEXT> consumer) { consumer.accept(meshBoundingBoxExtents()); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshBlockStateML#lastUpdateTime} field. */
+        /** Sets the specified value to the {@code lastUpdateTime} field. */
         public XrWorldMeshBlockStateML.Buffer lastUpdateTime(@NativeType("XrTime") long value) { XrWorldMeshBlockStateML.nlastUpdateTime(address(), value); return this; }
-        /** Sets the specified value to the {@link XrWorldMeshBlockStateML#status} field. */
+        /** Sets the specified value to the {@code status} field. */
         public XrWorldMeshBlockStateML.Buffer status(@NativeType("XrWorldMeshBlockStatusML") int value) { XrWorldMeshBlockStateML.nstatus(address(), value); return this; }
 
     }

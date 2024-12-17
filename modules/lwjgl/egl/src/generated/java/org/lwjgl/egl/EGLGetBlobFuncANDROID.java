@@ -11,19 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link ANDROIDBlobCache#eglSetBlobCacheFuncsANDROID SetBlobCacheFuncsANDROID} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * EGLsizeiANDROID (*{@link #invoke}) (
- *     void const *key,
- *     EGLsizeiANDROID keySize,
- *     void *value,
- *     EGLsizeiANDROID valueSize
- * )</code></pre>
- */
+/** Callback function: {@link #invoke EGLGetBlobFuncANDROID} */
 public abstract class EGLGetBlobFuncANDROID extends Callback implements EGLGetBlobFuncANDROIDI {
 
     /**

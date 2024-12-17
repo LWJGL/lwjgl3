@@ -11,14 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     YGNodeConstRef node
- * )</code></pre>
- */
+/** Callback function: {@link #invoke YGDirtiedFunc} */
 public abstract class YGDirtiedFunc extends Callback implements YGDirtiedFuncI {
 
     /**

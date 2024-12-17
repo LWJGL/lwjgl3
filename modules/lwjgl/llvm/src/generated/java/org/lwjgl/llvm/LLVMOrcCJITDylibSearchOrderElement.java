@@ -17,15 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * An element type for a JITDylib search order.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct LLVMOrcCJITDylibSearchOrderElement {
  *     LLVMOrcJITDylibRef JD;
  *     LLVMOrcJITDylibLookupFlags JDLookupFlags;
- * }</code></pre>
+ * }}</pre>
  */
 public class LLVMOrcCJITDylibSearchOrderElement extends Struct<LLVMOrcCJITDylibSearchOrderElement> implements NativeResource {
 

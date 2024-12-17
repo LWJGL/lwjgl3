@@ -17,35 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Filters for entities with specific unique identifiers.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrSpaceUuidFilterInfoFB} structure is a filter an application <b>can</b> use to find {@code XrSpace} entities that match specified UUIDs, to include or exclude them from a query.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link FBSpatialEntityQuery XR_FB_spatial_entity_query} extension <b>must</b> be enabled prior to using {@link XrSpaceUuidFilterInfoFB}</li>
- * <li>{@code type} <b>must</b> be {@link FBSpatialEntityQuery#XR_TYPE_SPACE_UUID_FILTER_INFO_FB TYPE_SPACE_UUID_FILTER_INFO_FB}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code uuids} <b>must</b> be a pointer to an array of {@code uuidCount} {@link XrUuidEXT} structures</li>
- * <li>The {@code uuidCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSpaceFilterInfoBaseHeaderFB}, {@link XrSpaceQueryInfoFB}, {@link XrUuidEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpaceUuidFilterInfoFB {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #uuidCount};
- *     {@link XrUuidEXT XrUuidEXT} * {@link #uuids};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t uuidCount;
+ *     {@link XrUuidEXT XrUuidEXT} * uuids;
+ * }}</pre>
  */
 public class XrSpaceUuidFilterInfoFB extends Struct<XrSpaceUuidFilterInfoFB> implements NativeResource {
 
@@ -101,26 +79,26 @@ public class XrSpaceUuidFilterInfoFB extends Struct<XrSpaceUuidFilterInfoFB> imp
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of UUIDs to be matched. */
+    /** @return the value of the {@code uuidCount} field. */
     @NativeType("uint32_t")
     public int uuidCount() { return nuuidCount(address()); }
-    /** an array of {@link XrUuidEXT} that contains the UUIDs to be matched. */
+    /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
     @NativeType("XrUuidEXT *")
     public XrUuidEXT.Buffer uuids() { return nuuids(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpaceUuidFilterInfoFB type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link FBSpatialEntityQuery#XR_TYPE_SPACE_UUID_FILTER_INFO_FB TYPE_SPACE_UUID_FILTER_INFO_FB} value to the {@link #type} field. */
+    /** Sets the {@link FBSpatialEntityQuery#XR_TYPE_SPACE_UUID_FILTER_INFO_FB TYPE_SPACE_UUID_FILTER_INFO_FB} value to the {@code type} field. */
     public XrSpaceUuidFilterInfoFB type$Default() { return type(FBSpatialEntityQuery.XR_TYPE_SPACE_UUID_FILTER_INFO_FB); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpaceUuidFilterInfoFB next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link #uuids} field. */
+    /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
     public XrSpaceUuidFilterInfoFB uuids(@NativeType("XrUuidEXT *") XrUuidEXT.Buffer value) { nuuids(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -339,26 +317,26 @@ public class XrSpaceUuidFilterInfoFB extends Struct<XrSpaceUuidFilterInfoFB> imp
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpaceUuidFilterInfoFB#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpaceUuidFilterInfoFB.ntype(address()); }
-        /** @return the value of the {@link XrSpaceUuidFilterInfoFB#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpaceUuidFilterInfoFB.nnext(address()); }
-        /** @return the value of the {@link XrSpaceUuidFilterInfoFB#uuidCount} field. */
+        /** @return the value of the {@code uuidCount} field. */
         @NativeType("uint32_t")
         public int uuidCount() { return XrSpaceUuidFilterInfoFB.nuuidCount(address()); }
-        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@link XrSpaceUuidFilterInfoFB#uuids} field. */
+        /** @return a {@link XrUuidEXT.Buffer} view of the struct array pointed to by the {@code uuids} field. */
         @NativeType("XrUuidEXT *")
         public XrUuidEXT.Buffer uuids() { return XrSpaceUuidFilterInfoFB.nuuids(address()); }
 
-        /** Sets the specified value to the {@link XrSpaceUuidFilterInfoFB#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpaceUuidFilterInfoFB.Buffer type(@NativeType("XrStructureType") int value) { XrSpaceUuidFilterInfoFB.ntype(address(), value); return this; }
-        /** Sets the {@link FBSpatialEntityQuery#XR_TYPE_SPACE_UUID_FILTER_INFO_FB TYPE_SPACE_UUID_FILTER_INFO_FB} value to the {@link XrSpaceUuidFilterInfoFB#type} field. */
+        /** Sets the {@link FBSpatialEntityQuery#XR_TYPE_SPACE_UUID_FILTER_INFO_FB TYPE_SPACE_UUID_FILTER_INFO_FB} value to the {@code type} field. */
         public XrSpaceUuidFilterInfoFB.Buffer type$Default() { return type(FBSpatialEntityQuery.XR_TYPE_SPACE_UUID_FILTER_INFO_FB); }
-        /** Sets the specified value to the {@link XrSpaceUuidFilterInfoFB#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpaceUuidFilterInfoFB.Buffer next(@NativeType("void const *") long value) { XrSpaceUuidFilterInfoFB.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@link XrSpaceUuidFilterInfoFB#uuids} field. */
+        /** Sets the address of the specified {@link XrUuidEXT.Buffer} to the {@code uuids} field. */
         public XrSpaceUuidFilterInfoFB.Buffer uuids(@NativeType("XrUuidEXT *") XrUuidEXT.Buffer value) { XrSpaceUuidFilterInfoFB.nuuids(address(), value); return this; }
 
     }

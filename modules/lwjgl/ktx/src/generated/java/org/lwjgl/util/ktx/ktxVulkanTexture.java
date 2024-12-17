@@ -16,28 +16,22 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Struct for returning information about the Vulkan texture image created by the {@code ktxTexture_VkUpload*} functions.
- * 
- * <p>Creation of these objects is internal to the upload functions.</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ktxVulkanTexture {
- *     PFN_vkDestroyImage {@link #vkDestroyImage};
- *     PFN_vkFreeMemory {@link #vkFreeMemory};
- *     VkImage {@link #image};
- *     VkFormat {@link #imageFormat};
- *     VkImageLayout {@link #imageLayout};
- *     VkDeviceMemory {@link #deviceMemory};
- *     VkImageViewType {@link #viewType};
- *     uint32_t {@link #width};
- *     uint32_t {@link #height};
- *     uint32_t {@link #depth};
- *     uint32_t {@link #levelCount};
- *     uint32_t {@link #layerCount};
- *     uint64_t {@link #allocationId};
- * }</code></pre>
+ *     PFN_vkDestroyImage vkDestroyImage;
+ *     PFN_vkFreeMemory vkFreeMemory;
+ *     VkImage image;
+ *     VkFormat imageFormat;
+ *     VkImageLayout imageLayout;
+ *     VkDeviceMemory deviceMemory;
+ *     VkImageViewType viewType;
+ *     uint32_t width;
+ *     uint32_t height;
+ *     uint32_t depth;
+ *     uint32_t levelCount;
+ *     uint32_t layerCount;
+ *     uint64_t allocationId;
+ * }}</pre>
  */
 public class ktxVulkanTexture extends Struct<ktxVulkanTexture> implements NativeResource {
 
@@ -120,43 +114,43 @@ public class ktxVulkanTexture extends Struct<ktxVulkanTexture> implements Native
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** pointer to {@code vkDestroyImage} function */
+    /** @return the value of the {@code vkDestroyImage} field. */
     @NativeType("PFN_vkDestroyImage")
     public long vkDestroyImage() { return nvkDestroyImage(address()); }
-    /** pointer to {@code vkFreeMemory} function */
+    /** @return the value of the {@code vkFreeMemory} field. */
     @NativeType("PFN_vkFreeMemory")
     public long vkFreeMemory() { return nvkFreeMemory(address()); }
-    /** handle to the Vulkan image created by the loader */
+    /** @return the value of the {@code image} field. */
     @NativeType("VkImage")
     public long image() { return nimage(address()); }
-    /** format of the image data */
+    /** @return the value of the {@code imageFormat} field. */
     @NativeType("VkFormat")
     public int imageFormat() { return nimageFormat(address()); }
-    /** layout of the created image. Has the same value as {@code layout} parameter passed to the loader. */
+    /** @return the value of the {@code imageLayout} field. */
     @NativeType("VkImageLayout")
     public int imageLayout() { return nimageLayout(address()); }
-    /** the memory (sub)allocation for the image on the Vulkan device. Will not be used with suballocators. */
+    /** @return the value of the {@code deviceMemory} field. */
     @NativeType("VkDeviceMemory")
     public long deviceMemory() { return ndeviceMemory(address()); }
-    /** viewType corresponding to {@code image}. Reflects the dimensionality, cubeness and arrayness of the image. */
+    /** @return the value of the {@code viewType} field. */
     @NativeType("VkImageViewType")
     public int viewType() { return nviewType(address()); }
-    /** the width of the image */
+    /** @return the value of the {@code width} field. */
     @NativeType("uint32_t")
     public int width() { return nwidth(address()); }
-    /** the height of the image */
+    /** @return the value of the {@code height} field. */
     @NativeType("uint32_t")
     public int height() { return nheight(address()); }
-    /** the depth of the image */
+    /** @return the value of the {@code depth} field. */
     @NativeType("uint32_t")
     public int depth() { return ndepth(address()); }
-    /** the number of MIP levels in the image */
+    /** @return the value of the {@code levelCount} field. */
     @NativeType("uint32_t")
     public int levelCount() { return nlevelCount(address()); }
-    /** the number of array layers in the image */
+    /** @return the value of the {@code layerCount} field. */
     @NativeType("uint32_t")
     public int layerCount() { return nlayerCount(address()); }
-    /** an id referencing suballocation(s) */
+    /** @return the value of the {@code allocationId} field. */
     @NativeType("uint64_t")
     public long allocationId() { return nallocationId(address()); }
 
@@ -341,43 +335,43 @@ public class ktxVulkanTexture extends Struct<ktxVulkanTexture> implements Native
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link ktxVulkanTexture#vkDestroyImage} field. */
+        /** @return the value of the {@code vkDestroyImage} field. */
         @NativeType("PFN_vkDestroyImage")
         public long vkDestroyImage() { return ktxVulkanTexture.nvkDestroyImage(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#vkFreeMemory} field. */
+        /** @return the value of the {@code vkFreeMemory} field. */
         @NativeType("PFN_vkFreeMemory")
         public long vkFreeMemory() { return ktxVulkanTexture.nvkFreeMemory(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#image} field. */
+        /** @return the value of the {@code image} field. */
         @NativeType("VkImage")
         public long image() { return ktxVulkanTexture.nimage(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#imageFormat} field. */
+        /** @return the value of the {@code imageFormat} field. */
         @NativeType("VkFormat")
         public int imageFormat() { return ktxVulkanTexture.nimageFormat(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#imageLayout} field. */
+        /** @return the value of the {@code imageLayout} field. */
         @NativeType("VkImageLayout")
         public int imageLayout() { return ktxVulkanTexture.nimageLayout(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#deviceMemory} field. */
+        /** @return the value of the {@code deviceMemory} field. */
         @NativeType("VkDeviceMemory")
         public long deviceMemory() { return ktxVulkanTexture.ndeviceMemory(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#viewType} field. */
+        /** @return the value of the {@code viewType} field. */
         @NativeType("VkImageViewType")
         public int viewType() { return ktxVulkanTexture.nviewType(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#width} field. */
+        /** @return the value of the {@code width} field. */
         @NativeType("uint32_t")
         public int width() { return ktxVulkanTexture.nwidth(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#height} field. */
+        /** @return the value of the {@code height} field. */
         @NativeType("uint32_t")
         public int height() { return ktxVulkanTexture.nheight(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#depth} field. */
+        /** @return the value of the {@code depth} field. */
         @NativeType("uint32_t")
         public int depth() { return ktxVulkanTexture.ndepth(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#levelCount} field. */
+        /** @return the value of the {@code levelCount} field. */
         @NativeType("uint32_t")
         public int levelCount() { return ktxVulkanTexture.nlevelCount(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#layerCount} field. */
+        /** @return the value of the {@code layerCount} field. */
         @NativeType("uint32_t")
         public int layerCount() { return ktxVulkanTexture.nlayerCount(address()); }
-        /** @return the value of the {@link ktxVulkanTexture#allocationId} field. */
+        /** @return the value of the {@code allocationId} field. */
         @NativeType("uint64_t")
         public long allocationId() { return ktxVulkanTexture.nallocationId(address()); }
 

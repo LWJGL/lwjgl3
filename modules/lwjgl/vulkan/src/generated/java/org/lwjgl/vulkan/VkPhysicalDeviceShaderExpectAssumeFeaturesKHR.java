@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceShaderExpectAssumeFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderExpectAssumeFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 shaderExpectAssume;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderExpectAssumeFeaturesKHR extends VkPhysicalDeviceShaderExpectAssumeFeatures {
 

@@ -21,7 +21,7 @@ public class VRDebug {
 
     // --- [ VRDebug_EmitVrProfilerEvent ] ---
 
-    /** Unsafe version of: {@link #VRDebug_EmitVrProfilerEvent EmitVrProfilerEvent} */
+    /** {@code EVRDebugError VRDebug_EmitVrProfilerEvent(char * pchMessage)} */
     public static int nVRDebug_EmitVrProfilerEvent(long pchMessage) {
         long __functionAddress = OpenVR.VRDebug.EmitVrProfilerEvent;
         if (CHECKS) {
@@ -30,11 +30,7 @@ public class VRDebug {
         return callPI(pchMessage, __functionAddress);
     }
 
-    /**
-     * Creates a vr profiler discrete event (point).
-     * 
-     * <p>The event will be associated with the message provided in {@code pchMessage}, and the current time will be used as the event timestamp.</p>
-     */
+    /** {@code EVRDebugError VRDebug_EmitVrProfilerEvent(char * pchMessage)} */
     @NativeType("EVRDebugError")
     public static int VRDebug_EmitVrProfilerEvent(@NativeType("char *") ByteBuffer pchMessage) {
         if (CHECKS) {
@@ -45,7 +41,7 @@ public class VRDebug {
 
     // --- [ VRDebug_BeginVrProfilerEvent ] ---
 
-    /** Unsafe version of: {@link #VRDebug_BeginVrProfilerEvent BeginVrProfilerEvent} */
+    /** {@code EVRDebugError VRDebug_BeginVrProfilerEvent(VrProfilerEventHandle_t * pHandleOut)} */
     public static int nVRDebug_BeginVrProfilerEvent(long pHandleOut) {
         long __functionAddress = OpenVR.VRDebug.BeginVrProfilerEvent;
         if (CHECKS) {
@@ -54,12 +50,7 @@ public class VRDebug {
         return callPI(pHandleOut, __functionAddress);
     }
 
-    /**
-     * Creates an vr profiler duration event (line).
-     * 
-     * <p>The current time will be used as the timestamp for the start of the line. On success, {@code pHandleOut} will contain a handle valid for terminating
-     * this event.</p>
-     */
+    /** {@code EVRDebugError VRDebug_BeginVrProfilerEvent(VrProfilerEventHandle_t * pHandleOut)} */
     @NativeType("EVRDebugError")
     public static int VRDebug_BeginVrProfilerEvent(@NativeType("VrProfilerEventHandle_t *") LongBuffer pHandleOut) {
         if (CHECKS) {
@@ -70,7 +61,7 @@ public class VRDebug {
 
     // --- [ VRDebug_FinishVrProfilerEvent ] ---
 
-    /** Unsafe version of: {@link #VRDebug_FinishVrProfilerEvent FinishVrProfilerEvent} */
+    /** {@code EVRDebugError VRDebug_FinishVrProfilerEvent(VrProfilerEventHandle_t hHandle, char * pchMessage)} */
     public static int nVRDebug_FinishVrProfilerEvent(long hHandle, long pchMessage) {
         long __functionAddress = OpenVR.VRDebug.FinishVrProfilerEvent;
         if (CHECKS) {
@@ -79,12 +70,7 @@ public class VRDebug {
         return callJPI(hHandle, pchMessage, __functionAddress);
     }
 
-    /**
-     * Terminates a vr profiler event.
-     * 
-     * <p>The event associated with {@code hHandle} will be considered completed when this method is called. The current time will be used associated to the
-     * termination time of the event, and {@code pchMessage} will be used as the event title.</p>
-     */
+    /** {@code EVRDebugError VRDebug_FinishVrProfilerEvent(VrProfilerEventHandle_t hHandle, char * pchMessage)} */
     @NativeType("EVRDebugError")
     public static int VRDebug_FinishVrProfilerEvent(@NativeType("VrProfilerEventHandle_t") long hHandle, @NativeType("char *") ByteBuffer pchMessage) {
         if (CHECKS) {
@@ -95,7 +81,7 @@ public class VRDebug {
 
     // --- [ VRDebug_DriverDebugRequest ] ---
 
-    /** Unsafe version of: {@link #VRDebug_DriverDebugRequest DriverDebugRequest} */
+    /** {@code uint32_t VRDebug_DriverDebugRequest(TrackedDeviceIndex_t unDeviceIndex, char * pchRequest, char * pchResponseBuffer, uint32_t unResponseBufferSize)} */
     public static int nVRDebug_DriverDebugRequest(int unDeviceIndex, long pchRequest, long pchResponseBuffer, int unResponseBufferSize) {
         long __functionAddress = OpenVR.VRDebug.DriverDebugRequest;
         if (CHECKS) {
@@ -104,12 +90,7 @@ public class VRDebug {
         return callPPI(unDeviceIndex, pchRequest, pchResponseBuffer, unResponseBufferSize, __functionAddress);
     }
 
-    /**
-     * Sends a request to the driver for the specified device and returns the response.
-     * 
-     * <p>The maximum response size is 32k, but this method can be called with a smaller buffer. If the response exceeds the size of the buffer, it is truncated.
-     * The size of the response including its terminating null is returned.</p>
-     */
+    /** {@code uint32_t VRDebug_DriverDebugRequest(TrackedDeviceIndex_t unDeviceIndex, char * pchRequest, char * pchResponseBuffer, uint32_t unResponseBufferSize)} */
     @NativeType("uint32_t")
     public static int VRDebug_DriverDebugRequest(@NativeType("TrackedDeviceIndex_t") int unDeviceIndex, @NativeType("char *") ByteBuffer pchRequest, @NativeType("char *") ByteBuffer pchResponseBuffer) {
         if (CHECKS) {

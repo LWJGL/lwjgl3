@@ -16,19 +16,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct Compositor_StageRenderSettings {
- *     {@link HmdColor HmdColor_t} {@link #m_PrimaryColor};
+ *     {@link HmdColor HmdColor_t} m_PrimaryColor;
  *     {@link HmdColor HmdColor_t} m_SecondaryColor;
- *     float {@link #m_flVignetteInnerRadius};
+ *     float m_flVignetteInnerRadius;
  *     float m_flVignetteOuterRadius;
- *     float {@link #m_flFresnelStrength};
- *     bool {@link #m_bBackfaceCulling};
- *     bool {@link #m_bGreyscale};
- *     bool {@link #m_bWireframe};
- * }</code></pre>
+ *     float m_flFresnelStrength;
+ *     bool m_bBackfaceCulling;
+ *     bool m_bGreyscale;
+ *     bool m_bWireframe;
+ * }}</pre>
  */
 @NativeType("struct Compositor_StageRenderSettings")
 public class CompositorStageRenderSettings extends Struct<CompositorStageRenderSettings> implements NativeResource {
@@ -97,33 +95,25 @@ public class CompositorStageRenderSettings extends Struct<CompositorStageRenderS
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** Primary color is applied as a tint to (i.e. multiplied with) the model's texture. */
+    /** @return a {@link HmdColor} view of the {@code m_PrimaryColor} field. */
     @NativeType("HmdColor_t")
     public HmdColor m_PrimaryColor() { return nm_PrimaryColor(address()); }
     /** @return a {@link HmdColor} view of the {@code m_SecondaryColor} field. */
     @NativeType("HmdColor_t")
     public HmdColor m_SecondaryColor() { return nm_SecondaryColor(address()); }
-    /** Vignette radius is in meters and is used to fade to the specified secondary solid color over that 3D distance from the origin of the playspace. */
+    /** @return the value of the {@code m_flVignetteInnerRadius} field. */
     public float m_flVignetteInnerRadius() { return nm_flVignetteInnerRadius(address()); }
     /** @return the value of the {@code m_flVignetteOuterRadius} field. */
     public float m_flVignetteOuterRadius() { return nm_flVignetteOuterRadius(address()); }
-    /**
-     * Fades to the secondary color based on view incidence.
-     * 
-     * <p>This variable controls the linearity of the effect. It is mutually exclusive with vignette. Additionally, it treats the mesh as faceted.</p>
-     */
+    /** @return the value of the {@code m_flFresnelStrength} field. */
     public float m_flFresnelStrength() { return nm_flFresnelStrength(address()); }
-    /** Controls backface culling. */
+    /** @return the value of the {@code m_bBackfaceCulling} field. */
     @NativeType("bool")
     public boolean m_bBackfaceCulling() { return nm_bBackfaceCulling(address()); }
-    /**
-     * Converts the render model's texture to luma and applies to rgb equally.
-     * 
-     * <p>This is useful to combat compression artifacts that can occur on desaturated source material.</p>
-     */
+    /** @return the value of the {@code m_bGreyscale} field. */
     @NativeType("bool")
     public boolean m_bGreyscale() { return nm_bGreyscale(address()); }
-    /** Renders mesh as a wireframe. */
+    /** @return the value of the {@code m_bWireframe} field. */
     @NativeType("bool")
     public boolean m_bWireframe() { return nm_bWireframe(address()); }
 
@@ -298,25 +288,25 @@ public class CompositorStageRenderSettings extends Struct<CompositorStageRenderS
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link HmdColor} view of the {@link CompositorStageRenderSettings#m_PrimaryColor} field. */
+        /** @return a {@link HmdColor} view of the {@code m_PrimaryColor} field. */
         @NativeType("HmdColor_t")
         public HmdColor m_PrimaryColor() { return CompositorStageRenderSettings.nm_PrimaryColor(address()); }
         /** @return a {@link HmdColor} view of the {@code m_SecondaryColor} field. */
         @NativeType("HmdColor_t")
         public HmdColor m_SecondaryColor() { return CompositorStageRenderSettings.nm_SecondaryColor(address()); }
-        /** @return the value of the {@link CompositorStageRenderSettings#m_flVignetteInnerRadius} field. */
+        /** @return the value of the {@code m_flVignetteInnerRadius} field. */
         public float m_flVignetteInnerRadius() { return CompositorStageRenderSettings.nm_flVignetteInnerRadius(address()); }
         /** @return the value of the {@code m_flVignetteOuterRadius} field. */
         public float m_flVignetteOuterRadius() { return CompositorStageRenderSettings.nm_flVignetteOuterRadius(address()); }
-        /** @return the value of the {@link CompositorStageRenderSettings#m_flFresnelStrength} field. */
+        /** @return the value of the {@code m_flFresnelStrength} field. */
         public float m_flFresnelStrength() { return CompositorStageRenderSettings.nm_flFresnelStrength(address()); }
-        /** @return the value of the {@link CompositorStageRenderSettings#m_bBackfaceCulling} field. */
+        /** @return the value of the {@code m_bBackfaceCulling} field. */
         @NativeType("bool")
         public boolean m_bBackfaceCulling() { return CompositorStageRenderSettings.nm_bBackfaceCulling(address()); }
-        /** @return the value of the {@link CompositorStageRenderSettings#m_bGreyscale} field. */
+        /** @return the value of the {@code m_bGreyscale} field. */
         @NativeType("bool")
         public boolean m_bGreyscale() { return CompositorStageRenderSettings.nm_bGreyscale(address()); }
-        /** @return the value of the {@link CompositorStageRenderSettings#m_bWireframe} field. */
+        /** @return the value of the {@code m_bWireframe} field. */
         @NativeType("bool")
         public boolean m_bWireframe() { return CompositorStageRenderSettings.nm_bWireframe(address()); }
 

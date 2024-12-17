@@ -16,27 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing features supported by VK_KHR_shader_atomic_int64.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderAtomicInt64Features} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderAtomicInt64Features} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderAtomicInt64Features {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderBufferInt64Atomics};
- *     VkBool32 {@link #shaderSharedInt64Atomics};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderBufferInt64Atomics;
+ *     VkBool32 shaderSharedInt64Atomics;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderAtomicInt64Features extends Struct<VkPhysicalDeviceShaderAtomicInt64Features> implements NativeResource {
 
@@ -92,28 +78,28 @@ public class VkPhysicalDeviceShaderAtomicInt64Features extends Struct<VkPhysical
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on buffers. */
+    /** @return the value of the {@code shaderBufferInt64Atomics} field. */
     @NativeType("VkBool32")
     public boolean shaderBufferInt64Atomics() { return nshaderBufferInt64Atomics(address()) != 0; }
-    /** indicates whether shaders <b>can</b> perform 64-bit unsigned and signed integer atomic operations on shared and payload memory. */
+    /** @return the value of the {@code shaderSharedInt64Atomics} field. */
     @NativeType("VkBool32")
     public boolean shaderSharedInt64Atomics() { return nshaderSharedInt64Atomics(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderAtomicInt64Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderAtomicInt64Features sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderAtomicInt64Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderBufferInt64Atomics} field. */
+    /** Sets the specified value to the {@code shaderBufferInt64Atomics} field. */
     public VkPhysicalDeviceShaderAtomicInt64Features shaderBufferInt64Atomics(@NativeType("VkBool32") boolean value) { nshaderBufferInt64Atomics(address(), value ? 1 : 0); return this; }
-    /** Sets the specified value to the {@link #shaderSharedInt64Atomics} field. */
+    /** Sets the specified value to the {@code shaderSharedInt64Atomics} field. */
     public VkPhysicalDeviceShaderAtomicInt64Features shaderSharedInt64Atomics(@NativeType("VkBool32") boolean value) { nshaderSharedInt64Atomics(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -315,28 +301,28 @@ public class VkPhysicalDeviceShaderAtomicInt64Features extends Struct<VkPhysical
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicInt64Features#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderAtomicInt64Features.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicInt64Features#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderAtomicInt64Features.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicInt64Features#shaderBufferInt64Atomics} field. */
+        /** @return the value of the {@code shaderBufferInt64Atomics} field. */
         @NativeType("VkBool32")
         public boolean shaderBufferInt64Atomics() { return VkPhysicalDeviceShaderAtomicInt64Features.nshaderBufferInt64Atomics(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceShaderAtomicInt64Features#shaderSharedInt64Atomics} field. */
+        /** @return the value of the {@code shaderSharedInt64Atomics} field. */
         @NativeType("VkBool32")
         public boolean shaderSharedInt64Atomics() { return VkPhysicalDeviceShaderAtomicInt64Features.nshaderSharedInt64Atomics(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicInt64Features#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderAtomicInt64Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderAtomicInt64Features.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES} value to the {@link VkPhysicalDeviceShaderAtomicInt64Features#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderAtomicInt64Features.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicInt64Features#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderAtomicInt64Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderAtomicInt64Features.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicInt64Features#shaderBufferInt64Atomics} field. */
+        /** Sets the specified value to the {@code shaderBufferInt64Atomics} field. */
         public VkPhysicalDeviceShaderAtomicInt64Features.Buffer shaderBufferInt64Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicInt64Features.nshaderBufferInt64Atomics(address(), value ? 1 : 0); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderAtomicInt64Features#shaderSharedInt64Atomics} field. */
+        /** Sets the specified value to the {@code shaderSharedInt64Atomics} field. */
         public VkPhysicalDeviceShaderAtomicInt64Features.Buffer shaderSharedInt64Atomics(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderAtomicInt64Features.nshaderSharedInt64Atomics(address(), value ? 1 : 0); return this; }
 
     }

@@ -17,14 +17,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Allocator virtual table
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct bgfx_allocator_vtbl_t {
- *     void * (*{@link BGFXReallocCallbackI realloc}) (bgfx_allocator_interface_t *_this, void *_ptr, size_t _size, size_t _align, char *_file, uint32_t _line);
- * }</code></pre>
+ *     void * (* realloc) (bgfx_allocator_interface_t * _this, void * _ptr, size_t _size, size_t _align, char * _file, uint32_t _line);
+ * }}</pre>
  */
 @NativeType("struct bgfx_allocator_vtbl_t")
 public class BGFXAllocatorVtbl extends Struct<BGFXAllocatorVtbl> implements NativeResource {
@@ -72,11 +68,11 @@ public class BGFXAllocatorVtbl extends Struct<BGFXAllocatorVtbl> implements Nati
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the reallocation callback */
+    /** @return the value of the {@code realloc} field. */
     @NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)")
     public BGFXReallocCallback realloc() { return nrealloc(address()); }
 
-    /** Sets the specified value to the {@link #realloc} field. */
+    /** Sets the specified value to the {@code realloc} field. */
     public BGFXAllocatorVtbl realloc(@NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)") BGFXReallocCallbackI value) { nrealloc(address(), value); return this; }
 
     /**
@@ -279,11 +275,11 @@ public class BGFXAllocatorVtbl extends Struct<BGFXAllocatorVtbl> implements Nati
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link BGFXAllocatorVtbl#realloc} field. */
+        /** @return the value of the {@code realloc} field. */
         @NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)")
         public BGFXReallocCallback realloc() { return BGFXAllocatorVtbl.nrealloc(address()); }
 
-        /** Sets the specified value to the {@link BGFXAllocatorVtbl#realloc} field. */
+        /** Sets the specified value to the {@code realloc} field. */
         public BGFXAllocatorVtbl.Buffer realloc(@NativeType("void * (*) (bgfx_allocator_interface_t *, void *, size_t, size_t, char *, uint32_t)") BGFXReallocCallbackI value) { BGFXAllocatorVtbl.nrealloc(address(), value); return this; }
 
     }

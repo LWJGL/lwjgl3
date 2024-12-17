@@ -16,38 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify separate usage flags for the stencil aspect of a depth-stencil image.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkImageCreateInfo} includes a {@link VkImageStencilUsageCreateInfo} structure, then that structure includes the usage flags specific to the stencil aspect of the image for an image with a depth-stencil format.</p>
- * 
- * <p>This structure specifies image usages which only apply to the stencil aspect of a depth/stencil format image. When this structure is included in the {@code pNext} chain of {@link VkImageCreateInfo}, the stencil aspect of the image <b>must</b> only be used as specified by {@code stencilUsage}. When this structure is not included in the {@code pNext} chain of {@link VkImageCreateInfo}, the stencil aspect of an image <b>must</b> only be used as specified by {@link VkImageCreateInfo}{@code ::usage}. Use of other aspects of an image are unaffected by this structure.</p>
- * 
- * <p>This structure <b>can</b> also be included in the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2} to query additional capabilities specific to image creation parameter combinations including a separate set of usage flags for the stencil aspect of the image using {@link VK11#vkGetPhysicalDeviceImageFormatProperties2 GetPhysicalDeviceImageFormatProperties2}. When this structure is not included in the {@code pNext} chain of {@link VkPhysicalDeviceImageFormatInfo2} then the implicit value of {@code stencilUsage} matches that of {@link VkPhysicalDeviceImageFormatInfo2}{@code ::usage}.</p>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>If {@code stencilUsage} includes {@link VK10#VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT}, it <b>must</b> not include bits other than {@link VK10#VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT} or {@link VK10#VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT IMAGE_USAGE_INPUT_ATTACHMENT_BIT}</li>
- * </ul>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO}</li>
- * <li>{@code stencilUsage} <b>must</b> be a valid combination of {@code VkImageUsageFlagBits} values</li>
- * <li>{@code stencilUsage} <b>must</b> not be 0</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageStencilUsageCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkImageUsageFlags {@link #stencilUsage};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkImageUsageFlags stencilUsage;
+ * }}</pre>
  */
 public class VkImageStencilUsageCreateInfo extends Struct<VkImageStencilUsageCreateInfo> implements NativeResource {
 
@@ -100,23 +74,23 @@ public class VkImageStencilUsageCreateInfo extends Struct<VkImageStencilUsageCre
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a bitmask of {@code VkImageUsageFlagBits} describing the intended usage of the stencil aspect of the image. */
+    /** @return the value of the {@code stencilUsage} field. */
     @NativeType("VkImageUsageFlags")
     public int stencilUsage() { return nstencilUsage(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkImageStencilUsageCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO} value to the {@code sType} field. */
     public VkImageStencilUsageCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkImageStencilUsageCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #stencilUsage} field. */
+    /** Sets the specified value to the {@code stencilUsage} field. */
     public VkImageStencilUsageCreateInfo stencilUsage(@NativeType("VkImageUsageFlags") int value) { nstencilUsage(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -312,23 +286,23 @@ public class VkImageStencilUsageCreateInfo extends Struct<VkImageStencilUsageCre
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkImageStencilUsageCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkImageStencilUsageCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkImageStencilUsageCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkImageStencilUsageCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkImageStencilUsageCreateInfo#stencilUsage} field. */
+        /** @return the value of the {@code stencilUsage} field. */
         @NativeType("VkImageUsageFlags")
         public int stencilUsage() { return VkImageStencilUsageCreateInfo.nstencilUsage(address()); }
 
-        /** Sets the specified value to the {@link VkImageStencilUsageCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkImageStencilUsageCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkImageStencilUsageCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO} value to the {@link VkImageStencilUsageCreateInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO} value to the {@code sType} field. */
         public VkImageStencilUsageCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkImageStencilUsageCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkImageStencilUsageCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkImageStencilUsageCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkImageStencilUsageCreateInfo#stencilUsage} field. */
+        /** Sets the specified value to the {@code stencilUsage} field. */
         public VkImageStencilUsageCreateInfo.Buffer stencilUsage(@NativeType("VkImageUsageFlags") int value) { VkImageStencilUsageCreateInfo.nstencilUsage(address(), value); return this; }
 
     }

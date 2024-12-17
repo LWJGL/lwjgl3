@@ -17,35 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Extension structure to xrWaitFrame to return a list of secondary view configuration states.
- * 
- * <h5>Description</h5>
- * 
- * <p>The array size {@code viewConfigurationCount} in the {@link XrSecondaryViewConfigurationFrameStateMSFT} structure <b>must</b> be the same as the array size enabled through {@link XrSecondaryViewConfigurationSessionBeginInfoMSFT} when calling {@link XR10#xrBeginSession BeginSession} earlier, otherwise the runtime <b>must</b> return error {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using {@link XrSecondaryViewConfigurationFrameStateMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code viewConfigurationStates} <b>must</b> be a pointer to an array of {@code viewConfigurationCount} {@link XrSecondaryViewConfigurationStateMSFT} structures</li>
- * <li>The {@code viewConfigurationCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFrameState}, {@link XrSecondaryViewConfigurationStateMSFT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSecondaryViewConfigurationFrameStateMSFT {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     uint32_t {@link #viewConfigurationCount};
- *     {@link XrSecondaryViewConfigurationStateMSFT XrSecondaryViewConfigurationStateMSFT} * {@link #viewConfigurationStates};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     uint32_t viewConfigurationCount;
+ *     {@link XrSecondaryViewConfigurationStateMSFT XrSecondaryViewConfigurationStateMSFT} * viewConfigurationStates;
+ * }}</pre>
  */
 public class XrSecondaryViewConfigurationFrameStateMSFT extends Struct<XrSecondaryViewConfigurationFrameStateMSFT> implements NativeResource {
 
@@ -101,26 +79,26 @@ public class XrSecondaryViewConfigurationFrameStateMSFT extends Struct<XrSeconda
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** the number of elements in {@code viewConfigurationStates}. */
+    /** @return the value of the {@code viewConfigurationCount} field. */
     @NativeType("uint32_t")
     public int viewConfigurationCount() { return nviewConfigurationCount(address()); }
-    /** an array of {@link XrSecondaryViewConfigurationStateMSFT} structures. */
+    /** @return a {@link XrSecondaryViewConfigurationStateMSFT.Buffer} view of the struct array pointed to by the {@code viewConfigurationStates} field. */
     @NativeType("XrSecondaryViewConfigurationStateMSFT *")
     public XrSecondaryViewConfigurationStateMSFT.Buffer viewConfigurationStates() { return nviewConfigurationStates(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSecondaryViewConfigurationFrameStateMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT} value to the {@code type} field. */
     public XrSecondaryViewConfigurationFrameStateMSFT type$Default() { return type(MSFTSecondaryViewConfiguration.XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSecondaryViewConfigurationFrameStateMSFT next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrSecondaryViewConfigurationStateMSFT.Buffer} to the {@link #viewConfigurationStates} field. */
+    /** Sets the address of the specified {@link XrSecondaryViewConfigurationStateMSFT.Buffer} to the {@code viewConfigurationStates} field. */
     public XrSecondaryViewConfigurationFrameStateMSFT viewConfigurationStates(@NativeType("XrSecondaryViewConfigurationStateMSFT *") XrSecondaryViewConfigurationStateMSFT.Buffer value) { nviewConfigurationStates(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,26 +307,26 @@ public class XrSecondaryViewConfigurationFrameStateMSFT extends Struct<XrSeconda
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSecondaryViewConfigurationFrameStateMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSecondaryViewConfigurationFrameStateMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSecondaryViewConfigurationFrameStateMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrSecondaryViewConfigurationFrameStateMSFT.nnext(address()); }
-        /** @return the value of the {@link XrSecondaryViewConfigurationFrameStateMSFT#viewConfigurationCount} field. */
+        /** @return the value of the {@code viewConfigurationCount} field. */
         @NativeType("uint32_t")
         public int viewConfigurationCount() { return XrSecondaryViewConfigurationFrameStateMSFT.nviewConfigurationCount(address()); }
-        /** @return a {@link XrSecondaryViewConfigurationStateMSFT.Buffer} view of the struct array pointed to by the {@link XrSecondaryViewConfigurationFrameStateMSFT#viewConfigurationStates} field. */
+        /** @return a {@link XrSecondaryViewConfigurationStateMSFT.Buffer} view of the struct array pointed to by the {@code viewConfigurationStates} field. */
         @NativeType("XrSecondaryViewConfigurationStateMSFT *")
         public XrSecondaryViewConfigurationStateMSFT.Buffer viewConfigurationStates() { return XrSecondaryViewConfigurationFrameStateMSFT.nviewConfigurationStates(address()); }
 
-        /** Sets the specified value to the {@link XrSecondaryViewConfigurationFrameStateMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSecondaryViewConfigurationFrameStateMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSecondaryViewConfigurationFrameStateMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT} value to the {@link XrSecondaryViewConfigurationFrameStateMSFT#type} field. */
+        /** Sets the {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT} value to the {@code type} field. */
         public XrSecondaryViewConfigurationFrameStateMSFT.Buffer type$Default() { return type(MSFTSecondaryViewConfiguration.XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT); }
-        /** Sets the specified value to the {@link XrSecondaryViewConfigurationFrameStateMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSecondaryViewConfigurationFrameStateMSFT.Buffer next(@NativeType("void *") long value) { XrSecondaryViewConfigurationFrameStateMSFT.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrSecondaryViewConfigurationStateMSFT.Buffer} to the {@link XrSecondaryViewConfigurationFrameStateMSFT#viewConfigurationStates} field. */
+        /** Sets the address of the specified {@link XrSecondaryViewConfigurationStateMSFT.Buffer} to the {@code viewConfigurationStates} field. */
         public XrSecondaryViewConfigurationFrameStateMSFT.Buffer viewConfigurationStates(@NativeType("XrSecondaryViewConfigurationStateMSFT *") XrSecondaryViewConfigurationStateMSFT.Buffer value) { XrSecondaryViewConfigurationFrameStateMSFT.nviewConfigurationStates(address(), value); return this; }
 
     }

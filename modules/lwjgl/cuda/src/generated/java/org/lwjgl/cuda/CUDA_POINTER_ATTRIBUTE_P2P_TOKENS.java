@@ -16,13 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct CUDA_POINTER_ATTRIBUTE_P2P_TOKENS {
  *     unsigned long long p2pToken;
  *     unsigned int vaSpaceToken;
- * }</code></pre>
+ * }}</pre>
  */
 public class CUDA_POINTER_ATTRIBUTE_P2P_TOKENS extends Struct<CUDA_POINTER_ATTRIBUTE_P2P_TOKENS> implements NativeResource {
 

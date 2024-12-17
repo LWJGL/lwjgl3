@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing frame size values per AV1 prediction mode.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkVideoEncodeAV1RateControlLayerInfoKHR}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkVideoEncodeAV1FrameSizeKHR {
- *     uint32_t {@link #intraFrameSize};
- *     uint32_t {@link #predictiveFrameSize};
- *     uint32_t {@link #bipredictiveFrameSize};
- * }</code></pre>
+ *     uint32_t intraFrameSize;
+ *     uint32_t predictiveFrameSize;
+ *     uint32_t bipredictiveFrameSize;
+ * }}</pre>
  */
 public class VkVideoEncodeAV1FrameSizeKHR extends Struct<VkVideoEncodeAV1FrameSizeKHR> implements NativeResource {
 
@@ -82,21 +74,21 @@ public class VkVideoEncodeAV1FrameSizeKHR extends Struct<VkVideoEncodeAV1FrameSi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the size in bytes to be used for frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA_KHR}. */
+    /** @return the value of the {@code intraFrameSize} field. */
     @NativeType("uint32_t")
     public int intraFrameSize() { return nintraFrameSize(address()); }
-    /** the size in bytes to be used for frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE_KHR}. */
+    /** @return the value of the {@code predictiveFrameSize} field. */
     @NativeType("uint32_t")
     public int predictiveFrameSize() { return npredictiveFrameSize(address()); }
-    /** the size in bytes to be used for frames encoded with {@link KHRVideoEncodeAV1#VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE_KHR}. */
+    /** @return the value of the {@code bipredictiveFrameSize} field. */
     @NativeType("uint32_t")
     public int bipredictiveFrameSize() { return nbipredictiveFrameSize(address()); }
 
-    /** Sets the specified value to the {@link #intraFrameSize} field. */
+    /** Sets the specified value to the {@code intraFrameSize} field. */
     public VkVideoEncodeAV1FrameSizeKHR intraFrameSize(@NativeType("uint32_t") int value) { nintraFrameSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #predictiveFrameSize} field. */
+    /** Sets the specified value to the {@code predictiveFrameSize} field. */
     public VkVideoEncodeAV1FrameSizeKHR predictiveFrameSize(@NativeType("uint32_t") int value) { npredictiveFrameSize(address(), value); return this; }
-    /** Sets the specified value to the {@link #bipredictiveFrameSize} field. */
+    /** Sets the specified value to the {@code bipredictiveFrameSize} field. */
     public VkVideoEncodeAV1FrameSizeKHR bipredictiveFrameSize(@NativeType("uint32_t") int value) { nbipredictiveFrameSize(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,21 +284,21 @@ public class VkVideoEncodeAV1FrameSizeKHR extends Struct<VkVideoEncodeAV1FrameSi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkVideoEncodeAV1FrameSizeKHR#intraFrameSize} field. */
+        /** @return the value of the {@code intraFrameSize} field. */
         @NativeType("uint32_t")
         public int intraFrameSize() { return VkVideoEncodeAV1FrameSizeKHR.nintraFrameSize(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1FrameSizeKHR#predictiveFrameSize} field. */
+        /** @return the value of the {@code predictiveFrameSize} field. */
         @NativeType("uint32_t")
         public int predictiveFrameSize() { return VkVideoEncodeAV1FrameSizeKHR.npredictiveFrameSize(address()); }
-        /** @return the value of the {@link VkVideoEncodeAV1FrameSizeKHR#bipredictiveFrameSize} field. */
+        /** @return the value of the {@code bipredictiveFrameSize} field. */
         @NativeType("uint32_t")
         public int bipredictiveFrameSize() { return VkVideoEncodeAV1FrameSizeKHR.nbipredictiveFrameSize(address()); }
 
-        /** Sets the specified value to the {@link VkVideoEncodeAV1FrameSizeKHR#intraFrameSize} field. */
+        /** Sets the specified value to the {@code intraFrameSize} field. */
         public VkVideoEncodeAV1FrameSizeKHR.Buffer intraFrameSize(@NativeType("uint32_t") int value) { VkVideoEncodeAV1FrameSizeKHR.nintraFrameSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1FrameSizeKHR#predictiveFrameSize} field. */
+        /** Sets the specified value to the {@code predictiveFrameSize} field. */
         public VkVideoEncodeAV1FrameSizeKHR.Buffer predictiveFrameSize(@NativeType("uint32_t") int value) { VkVideoEncodeAV1FrameSizeKHR.npredictiveFrameSize(address(), value); return this; }
-        /** Sets the specified value to the {@link VkVideoEncodeAV1FrameSizeKHR#bipredictiveFrameSize} field. */
+        /** Sets the specified value to the {@code bipredictiveFrameSize} field. */
         public VkVideoEncodeAV1FrameSizeKHR.Buffer bipredictiveFrameSize(@NativeType("uint32_t") int value) { VkVideoEncodeAV1FrameSizeKHR.nbipredictiveFrameSize(address(), value); return this; }
 
     }

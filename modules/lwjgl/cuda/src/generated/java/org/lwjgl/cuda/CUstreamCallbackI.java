@@ -12,16 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     CUstream hStream,
- *     CUresult status,
- *     void *userData
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void (*) (CUstream, CUresult, void *)")
 public interface CUstreamCallbackI extends CallbackI {
@@ -44,7 +35,7 @@ public interface CUstreamCallbackI extends CallbackI {
         );
     }
 
-    /** CUDA stream callback. */
+    /** {@code void (*) (CUstream hStream, CUresult status, void * userData)} */
     void invoke(@NativeType("CUstream") long hStream, @NativeType("CUresult") int status, @NativeType("void *") long userData);
 
 }

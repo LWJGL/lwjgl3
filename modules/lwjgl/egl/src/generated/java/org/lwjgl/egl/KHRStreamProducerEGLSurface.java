@@ -15,14 +15,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/EGL/extensions/KHR/EGL_KHR_stream_producer_eglsurface.txt">KHR_stream_producer_eglsurface</a> extension.
- * 
- * <p>This extension allows an EGLSurface to be created as a producer of images to an EGLStream. Each call to eglSwapBuffers posts a new image frame into the
- * EGLStream.</p>
- * 
- * <p>Requires {@link EGL12 EGL 1.2}.</p>
- */
 public class KHRStreamProducerEGLSurface {
 
     public static final int EGL_STREAM_BIT_KHR = 0x800;
@@ -33,6 +25,7 @@ public class KHRStreamProducerEGLSurface {
 
     // --- [ eglCreateStreamProducerSurfaceKHR ] ---
 
+    /** {@code EGLSurface eglCreateStreamProducerSurfaceKHR(EGLDisplay dpy, EGLConfig config, EGLStreamKHR stream, EGLint const * attrib_list)} */
     public static long neglCreateStreamProducerSurfaceKHR(long dpy, long config, long stream, long attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateStreamProducerSurfaceKHR;
         if (CHECKS) {
@@ -44,6 +37,7 @@ public class KHRStreamProducerEGLSurface {
         return callPPPPP(dpy, config, stream, attrib_list, __functionAddress);
     }
 
+    /** {@code EGLSurface eglCreateStreamProducerSurfaceKHR(EGLDisplay dpy, EGLConfig config, EGLStreamKHR stream, EGLint const * attrib_list)} */
     @NativeType("EGLSurface")
     public static long eglCreateStreamProducerSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLint const *") @Nullable IntBuffer attrib_list) {
         if (CHECKS) {
@@ -52,7 +46,7 @@ public class KHRStreamProducerEGLSurface {
         return neglCreateStreamProducerSurfaceKHR(dpy, config, stream, memAddressSafe(attrib_list));
     }
 
-    /** Array version of: {@link #eglCreateStreamProducerSurfaceKHR CreateStreamProducerSurfaceKHR} */
+    /** {@code EGLSurface eglCreateStreamProducerSurfaceKHR(EGLDisplay dpy, EGLConfig config, EGLStreamKHR stream, EGLint const * attrib_list)} */
     @NativeType("EGLSurface")
     public static long eglCreateStreamProducerSurfaceKHR(@NativeType("EGLDisplay") long dpy, @NativeType("EGLConfig") long config, @NativeType("EGLStreamKHR") long stream, @NativeType("EGLint const *") int @Nullable [] attrib_list) {
         long __functionAddress = EGL.getCapabilities().eglCreateStreamProducerSurfaceKHR;

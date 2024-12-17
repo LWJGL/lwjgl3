@@ -16,7 +16,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Requires LLVM 9 or higher. */
 public class LLVMRemarks {
 
     /** Contains the function pointers loaded from {@code LLVMCore.getLibrary()}. */
@@ -56,21 +55,6 @@ public class LLVMRemarks {
 
     public static final int REMARKS_API_VERSION = 1;
 
-    /**
-     * The type of the emitted remark. ({@code enum LLVMRemarkType})
-     * 
-     * <h5>Enum values:</h5>
-     * 
-     * <ul>
-     * <li>{@link #LLVMRemarkTypeUnknown RemarkTypeUnknown}</li>
-     * <li>{@link #LLVMRemarkTypePassed RemarkTypePassed}</li>
-     * <li>{@link #LLVMRemarkTypeMissed RemarkTypeMissed}</li>
-     * <li>{@link #LLVMRemarkTypeAnalysis RemarkTypeAnalysis}</li>
-     * <li>{@link #LLVMRemarkTypeAnalysisFPCommute RemarkTypeAnalysisFPCommute}</li>
-     * <li>{@link #LLVMRemarkTypeAnalysisAliasing RemarkTypeAnalysisAliasing}</li>
-     * <li>{@link #LLVMRemarkTypeFailure RemarkTypeFailure}</li>
-     * </ul>
-     */
     public static final int
         LLVMRemarkTypeUnknown           = 0,
         LLVMRemarkTypePassed            = 1,
@@ -86,7 +70,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkStringGetData ] ---
 
-    /** Unsafe version of: {@link #LLVMRemarkStringGetData RemarkStringGetData} */
+    /** {@code char const * LLVMRemarkStringGetData(LLVMRemarkStringRef String)} */
     public static long nLLVMRemarkStringGetData(long String) {
         long __functionAddress = Functions.RemarkStringGetData;
         if (CHECKS) {
@@ -95,7 +79,7 @@ public class LLVMRemarks {
         return invokePP(String, __functionAddress);
     }
 
-    /** Returns the buffer holding the string. */
+    /** {@code char const * LLVMRemarkStringGetData(LLVMRemarkStringRef String)} */
     @NativeType("char const *")
     public static @Nullable String LLVMRemarkStringGetData(@NativeType("LLVMRemarkStringRef") long String) {
         long __result = nLLVMRemarkStringGetData(String);
@@ -104,7 +88,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkStringGetLen ] ---
 
-    /** Returns the size of the string. */
+    /** {@code uint32_t LLVMRemarkStringGetLen(LLVMRemarkStringRef String)} */
     @NativeType("uint32_t")
     public static int LLVMRemarkStringGetLen(@NativeType("LLVMRemarkStringRef") long String) {
         long __functionAddress = Functions.RemarkStringGetLen;
@@ -116,7 +100,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkDebugLocGetSourceFilePath ] ---
 
-    /** Return the path to the source file for a debug location. */
+    /** {@code LLVMRemarkStringRef LLVMRemarkDebugLocGetSourceFilePath(LLVMRemarkDebugLocRef DL)} */
     @NativeType("LLVMRemarkStringRef")
     public static long LLVMRemarkDebugLocGetSourceFilePath(@NativeType("LLVMRemarkDebugLocRef") long DL) {
         long __functionAddress = Functions.RemarkDebugLocGetSourceFilePath;
@@ -128,7 +112,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkDebugLocGetSourceLine ] ---
 
-    /** Return the line in the source file for a debug location. */
+    /** {@code uint32_t LLVMRemarkDebugLocGetSourceLine(LLVMRemarkDebugLocRef DL)} */
     @NativeType("uint32_t")
     public static int LLVMRemarkDebugLocGetSourceLine(@NativeType("LLVMRemarkDebugLocRef") long DL) {
         long __functionAddress = Functions.RemarkDebugLocGetSourceLine;
@@ -140,7 +124,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkDebugLocGetSourceColumn ] ---
 
-    /** Return the column in the source file for a debug location. */
+    /** {@code uint32_t LLVMRemarkDebugLocGetSourceColumn(LLVMRemarkDebugLocRef DL)} */
     @NativeType("uint32_t")
     public static int LLVMRemarkDebugLocGetSourceColumn(@NativeType("LLVMRemarkDebugLocRef") long DL) {
         long __functionAddress = Functions.RemarkDebugLocGetSourceColumn;
@@ -152,7 +136,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkArgGetKey ] ---
 
-    /** Returns the key of an argument. The key defines what the value is, and the same key can appear multiple times in the list of arguments. */
+    /** {@code LLVMRemarkStringRef LLVMRemarkArgGetKey(LLVMRemarkArgRef Arg)} */
     @NativeType("LLVMRemarkStringRef")
     public static long LLVMRemarkArgGetKey(@NativeType("LLVMRemarkArgRef") long Arg) {
         long __functionAddress = Functions.RemarkArgGetKey;
@@ -164,7 +148,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkArgGetValue ] ---
 
-    /** Returns the value of an argument. This is a string that can contain newlines. */
+    /** {@code LLVMRemarkStringRef LLVMRemarkArgGetValue(LLVMRemarkArgRef Arg)} */
     @NativeType("LLVMRemarkStringRef")
     public static long LLVMRemarkArgGetValue(@NativeType("LLVMRemarkArgRef") long Arg) {
         long __functionAddress = Functions.RemarkArgGetValue;
@@ -176,11 +160,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkArgGetDebugLoc ] ---
 
-    /**
-     * Returns the debug location that is attached to the value of this argument.
-     * 
-     * <p>If there is no debug location, the return value will be {@code NULL}.</p>
-     */
+    /** {@code LLVMRemarkDebugLocRef LLVMRemarkArgGetDebugLoc(LLVMRemarkArgRef Arg)} */
     @NativeType("LLVMRemarkDebugLocRef")
     public static long LLVMRemarkArgGetDebugLoc(@NativeType("LLVMRemarkArgRef") long Arg) {
         long __functionAddress = Functions.RemarkArgGetDebugLoc;
@@ -192,7 +172,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryDispose ] ---
 
-    /** Free the resources used by the remark entry. */
+    /** {@code void LLVMRemarkEntryDispose(LLVMRemarkEntryRef Remark)} */
     public static void LLVMRemarkEntryDispose(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryDispose;
         if (CHECKS) {
@@ -203,7 +183,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetType ] ---
 
-    /** The type of the remark. For example, it can allow users to only keep the missed optimizations from the compiler. */
+    /** {@code enum LLVMRemarkType LLVMRemarkEntryGetType(LLVMRemarkEntryRef Remark)} */
     @NativeType("enum LLVMRemarkType")
     public static int LLVMRemarkEntryGetType(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetType;
@@ -215,7 +195,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetPassName ] ---
 
-    /** Get the name of the pass that emitted this remark. */
+    /** {@code LLVMRemarkStringRef LLVMRemarkEntryGetPassName(LLVMRemarkEntryRef Remark)} */
     @NativeType("LLVMRemarkStringRef")
     public static long LLVMRemarkEntryGetPassName(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetPassName;
@@ -227,7 +207,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetRemarkName ] ---
 
-    /** Get an identifier of the remark. */
+    /** {@code LLVMRemarkStringRef LLVMRemarkEntryGetRemarkName(LLVMRemarkEntryRef Remark)} */
     @NativeType("LLVMRemarkStringRef")
     public static long LLVMRemarkEntryGetRemarkName(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetRemarkName;
@@ -239,7 +219,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetFunctionName ] ---
 
-    /** Get the name of the function being processed when the remark was emitted. */
+    /** {@code LLVMRemarkStringRef LLVMRemarkEntryGetFunctionName(LLVMRemarkEntryRef Remark)} */
     @NativeType("LLVMRemarkStringRef")
     public static long LLVMRemarkEntryGetFunctionName(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetFunctionName;
@@ -251,11 +231,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetDebugLoc ] ---
 
-    /**
-     * Returns the debug location that is attached to this remark.
-     * 
-     * <p>If there is no debug location, the return value will be {@code NULL}.</p>
-     */
+    /** {@code LLVMRemarkDebugLocRef LLVMRemarkEntryGetDebugLoc(LLVMRemarkEntryRef Remark)} */
     @NativeType("LLVMRemarkDebugLocRef")
     public static long LLVMRemarkEntryGetDebugLoc(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetDebugLoc;
@@ -267,11 +243,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetHotness ] ---
 
-    /**
-     * Return the hotness of the remark.
-     * 
-     * <p>A hotness of {@code 0} means this value is not set.</p>
-     */
+    /** {@code uint64_t LLVMRemarkEntryGetHotness(LLVMRemarkEntryRef Remark)} */
     @NativeType("uint64_t")
     public static long LLVMRemarkEntryGetHotness(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetHotness;
@@ -283,7 +255,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetNumArgs ] ---
 
-    /** The number of arguments the remark holds. */
+    /** {@code uint32_t LLVMRemarkEntryGetNumArgs(LLVMRemarkEntryRef Remark)} */
     @NativeType("uint32_t")
     public static int LLVMRemarkEntryGetNumArgs(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetNumArgs;
@@ -295,13 +267,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetFirstArg ] ---
 
-    /**
-     * Get a new iterator to iterate over a remark's argument.
-     * 
-     * <p>If there are no arguments in {@code Remark}, the return value will be {@code NULL}.</p>
-     * 
-     * <p>The lifetime of the returned value is bound to the lifetime of {@code Remark}.</p>
-     */
+    /** {@code LLVMRemarkArgRef LLVMRemarkEntryGetFirstArg(LLVMRemarkEntryRef Remark)} */
     @NativeType("LLVMRemarkArgRef")
     public static long LLVMRemarkEntryGetFirstArg(@NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetFirstArg;
@@ -313,13 +279,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkEntryGetNextArg ] ---
 
-    /**
-     * Get the next argument in {@code Remark} from the position of {@code It}.
-     * 
-     * <p>Returns {@code NULL} if there are no more arguments available.</p>
-     * 
-     * <p>The lifetime of the returned value is bound to the lifetime of {@code Remark}.</p>
-     */
+    /** {@code LLVMRemarkArgRef LLVMRemarkEntryGetNextArg(LLVMRemarkArgRef It, LLVMRemarkEntryRef Remark)} */
     @NativeType("LLVMRemarkArgRef")
     public static long LLVMRemarkEntryGetNextArg(@NativeType("LLVMRemarkArgRef") long It, @NativeType("LLVMRemarkEntryRef") long Remark) {
         long __functionAddress = Functions.RemarkEntryGetNextArg;
@@ -332,19 +292,13 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkParserCreateYAML ] ---
 
-    /** Unsafe version of: {@link #LLVMRemarkParserCreateYAML RemarkParserCreateYAML} */
+    /** {@code LLVMRemarkParserRef LLVMRemarkParserCreateYAML(void const * Buf, uint64_t Size)} */
     public static long nLLVMRemarkParserCreateYAML(long Buf, long Size) {
         long __functionAddress = Functions.RemarkParserCreateYAML;
         return invokePJP(Buf, Size, __functionAddress);
     }
 
-    /**
-     * Creates a remark parser that can be used to parse the buffer located in {@code Buf} of size {@code Size} bytes.
-     * 
-     * <p>{@code Buf} cannot be {@code NULL}.</p>
-     * 
-     * <p>This function should be paired with {@link #LLVMRemarkParserDispose RemarkParserDispose} to avoid leaking resources.</p>
-     */
+    /** {@code LLVMRemarkParserRef LLVMRemarkParserCreateYAML(void const * Buf, uint64_t Size)} */
     @NativeType("LLVMRemarkParserRef")
     public static long LLVMRemarkParserCreateYAML(@NativeType("void const *") ByteBuffer Buf) {
         return nLLVMRemarkParserCreateYAML(memAddress(Buf), Buf.remaining());
@@ -352,7 +306,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkParserCreateBitstream ] ---
 
-    /** Unsafe version of: {@link #LLVMRemarkParserCreateBitstream RemarkParserCreateBitstream} */
+    /** {@code LLVMRemarkParserRef LLVMRemarkParserCreateBitstream(void const * Buf, uint64_t Size)} */
     public static long nLLVMRemarkParserCreateBitstream(long Buf, long Size) {
         long __functionAddress = Functions.RemarkParserCreateBitstream;
         if (CHECKS) {
@@ -361,15 +315,7 @@ public class LLVMRemarks {
         return invokePJP(Buf, Size, __functionAddress);
     }
 
-    /**
-     * Creates a remark parser that can be used to parse the buffer located in {@code Buf} of size {@code Size} bytes.
-     * 
-     * <p>{@code Buf} cannot be {@code NULL}.</p>
-     * 
-     * <p>This function should be paired with {@link #LLVMRemarkParserDispose RemarkParserDispose} to avoid leaking resources.</p>
-     *
-     * @since 10
-     */
+    /** {@code LLVMRemarkParserRef LLVMRemarkParserCreateBitstream(void const * Buf, uint64_t Size)} */
     @NativeType("LLVMRemarkParserRef")
     public static long LLVMRemarkParserCreateBitstream(@NativeType("void const *") ByteBuffer Buf) {
         return nLLVMRemarkParserCreateBitstream(memAddress(Buf), Buf.remaining());
@@ -377,43 +323,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkParserGetNext ] ---
 
-    /**
-     * Returns the next remark in the file.
-     * 
-     * <p>The value pointed to by the return value needs to be disposed using a call to {@link #LLVMRemarkEntryDispose RemarkEntryDispose}.</p>
-     * 
-     * <p>All the entries in the returned value that are of {@code LLVMRemarkStringRef} type will become invalidated once a call to {@link #LLVMRemarkParserDispose RemarkParserDispose} is
-     * made.</p>
-     * 
-     * <p>If the parser reaches the end of the buffer, the return value will be {@code NULL}.</p>
-     * 
-     * <p>In the case of an error, the return value will be {@code NULL}, and:</p>
-     * 
-     * <ul>
-     * <li>{@link #LLVMRemarkParserHasError RemarkParserHasError} will return {@code 1}.</li>
-     * <li>{@link #LLVMRemarkParserGetErrorMessage RemarkParserGetErrorMessage} will return a descriptive error message.</li>
-     * </ul>
-     * 
-     * <p>An error may occur if:</p>
-     * 
-     * <ul>
-     * <li>An argument is invalid.</li>
-     * <li>There is a parsing error. This can occur on things like malformed YAML.</li>
-     * <li>There is a {@code Remark} semantic error. This can occur on well-formed files with missing or extra fields.</li>
-     * </ul>
-     * 
-     * <p>Here is a quick example of the usage:</p>
-     * 
-     * <pre><code>
-     * LLVMRemarkParserRef Parser = LLVMRemarkParserCreateYAML(Buf, Size);
-     * LLVMRemarkEntryRef Remark = NULL;
-     * while ((Remark = LLVMRemarkParserGetNext(Parser))) {
-     *     // use Remark
-     *     LLVMRemarkEntryDispose(Remark); // Release memory.
-     * }
-     * bool HasError = LLVMRemarkParserHasError(Parser);
-     * LLVMRemarkParserDispose(Parser);</code></pre>
-     */
+    /** {@code LLVMRemarkEntryRef LLVMRemarkParserGetNext(LLVMRemarkParserRef Parser)} */
     @NativeType("LLVMRemarkEntryRef")
     public static long LLVMRemarkParserGetNext(@NativeType("LLVMRemarkParserRef") long Parser) {
         long __functionAddress = Functions.RemarkParserGetNext;
@@ -425,7 +335,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkParserHasError ] ---
 
-    /** Returns {@code 1} if the parser encountered an error while parsing the buffer. */
+    /** {@code LLVMBool LLVMRemarkParserHasError(LLVMRemarkParserRef Parser)} */
     @NativeType("LLVMBool")
     public static boolean LLVMRemarkParserHasError(@NativeType("LLVMRemarkParserRef") long Parser) {
         long __functionAddress = Functions.RemarkParserHasError;
@@ -437,7 +347,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkParserGetErrorMessage ] ---
 
-    /** Unsafe version of: {@link #LLVMRemarkParserGetErrorMessage RemarkParserGetErrorMessage} */
+    /** {@code char const * LLVMRemarkParserGetErrorMessage(LLVMRemarkParserRef Parser)} */
     public static long nLLVMRemarkParserGetErrorMessage(long Parser) {
         long __functionAddress = Functions.RemarkParserGetErrorMessage;
         if (CHECKS) {
@@ -446,13 +356,7 @@ public class LLVMRemarks {
         return invokePP(Parser, __functionAddress);
     }
 
-    /**
-     * Returns a null-terminated string containing an error message.
-     * 
-     * <p>In case of no error, the result is {@code NULL}.</p>
-     * 
-     * <p>The memory of the string is bound to the lifetime of {@code Parser}. If {@link #LLVMRemarkParserDispose RemarkParserDispose} is called, the memory of the string will be released.</p>
-     */
+    /** {@code char const * LLVMRemarkParserGetErrorMessage(LLVMRemarkParserRef Parser)} */
     @NativeType("char const *")
     public static @Nullable String LLVMRemarkParserGetErrorMessage(@NativeType("LLVMRemarkParserRef") long Parser) {
         long __result = nLLVMRemarkParserGetErrorMessage(Parser);
@@ -461,7 +365,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkParserDispose ] ---
 
-    /** Releases all the resources used by {@code Parser}. */
+    /** {@code void LLVMRemarkParserDispose(LLVMRemarkParserRef Parser)} */
     public static void LLVMRemarkParserDispose(@NativeType("LLVMRemarkParserRef") long Parser) {
         long __functionAddress = Functions.RemarkParserDispose;
         if (CHECKS) {
@@ -472,7 +376,7 @@ public class LLVMRemarks {
 
     // --- [ LLVMRemarkVersion ] ---
 
-    /** Returns the version of the remarks library. */
+    /** {@code uint32_t LLVMRemarkVersion(void)} */
     @NativeType("uint32_t")
     public static int LLVMRemarkVersion() {
         long __functionAddress = Functions.RemarkVersion;

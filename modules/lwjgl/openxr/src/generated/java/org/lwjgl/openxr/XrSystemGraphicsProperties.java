@@ -16,20 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Graphics-related properties of a particular system.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSystemProperties}, {@link XrSystemTrackingProperties}, {@link XR10#xrGetSystem GetSystem}, {@link XR10#xrGetSystemProperties GetSystemProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSystemGraphicsProperties {
- *     uint32_t {@link #maxSwapchainImageHeight};
- *     uint32_t {@link #maxSwapchainImageWidth};
- *     uint32_t {@link #maxLayerCount};
- * }</code></pre>
+ *     uint32_t maxSwapchainImageHeight;
+ *     uint32_t maxSwapchainImageWidth;
+ *     uint32_t maxLayerCount;
+ * }}</pre>
  */
 public class XrSystemGraphicsProperties extends Struct<XrSystemGraphicsProperties> implements NativeResource {
 
@@ -82,21 +74,21 @@ public class XrSystemGraphicsProperties extends Struct<XrSystemGraphicsPropertie
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the maximum swapchain image pixel height supported by this system. */
+    /** @return the value of the {@code maxSwapchainImageHeight} field. */
     @NativeType("uint32_t")
     public int maxSwapchainImageHeight() { return nmaxSwapchainImageHeight(address()); }
-    /** the maximum swapchain image pixel width supported by this system. */
+    /** @return the value of the {@code maxSwapchainImageWidth} field. */
     @NativeType("uint32_t")
     public int maxSwapchainImageWidth() { return nmaxSwapchainImageWidth(address()); }
-    /** the maximum number of composition layers supported by this system. The runtime <b>must</b> support at least {@link XR10#XR_MIN_COMPOSITION_LAYERS_SUPPORTED MIN_COMPOSITION_LAYERS_SUPPORTED} layers. */
+    /** @return the value of the {@code maxLayerCount} field. */
     @NativeType("uint32_t")
     public int maxLayerCount() { return nmaxLayerCount(address()); }
 
-    /** Sets the specified value to the {@link #maxSwapchainImageHeight} field. */
+    /** Sets the specified value to the {@code maxSwapchainImageHeight} field. */
     public XrSystemGraphicsProperties maxSwapchainImageHeight(@NativeType("uint32_t") int value) { nmaxSwapchainImageHeight(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxSwapchainImageWidth} field. */
+    /** Sets the specified value to the {@code maxSwapchainImageWidth} field. */
     public XrSystemGraphicsProperties maxSwapchainImageWidth(@NativeType("uint32_t") int value) { nmaxSwapchainImageWidth(address(), value); return this; }
-    /** Sets the specified value to the {@link #maxLayerCount} field. */
+    /** Sets the specified value to the {@code maxLayerCount} field. */
     public XrSystemGraphicsProperties maxLayerCount(@NativeType("uint32_t") int value) { nmaxLayerCount(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -292,21 +284,21 @@ public class XrSystemGraphicsProperties extends Struct<XrSystemGraphicsPropertie
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSystemGraphicsProperties#maxSwapchainImageHeight} field. */
+        /** @return the value of the {@code maxSwapchainImageHeight} field. */
         @NativeType("uint32_t")
         public int maxSwapchainImageHeight() { return XrSystemGraphicsProperties.nmaxSwapchainImageHeight(address()); }
-        /** @return the value of the {@link XrSystemGraphicsProperties#maxSwapchainImageWidth} field. */
+        /** @return the value of the {@code maxSwapchainImageWidth} field. */
         @NativeType("uint32_t")
         public int maxSwapchainImageWidth() { return XrSystemGraphicsProperties.nmaxSwapchainImageWidth(address()); }
-        /** @return the value of the {@link XrSystemGraphicsProperties#maxLayerCount} field. */
+        /** @return the value of the {@code maxLayerCount} field. */
         @NativeType("uint32_t")
         public int maxLayerCount() { return XrSystemGraphicsProperties.nmaxLayerCount(address()); }
 
-        /** Sets the specified value to the {@link XrSystemGraphicsProperties#maxSwapchainImageHeight} field. */
+        /** Sets the specified value to the {@code maxSwapchainImageHeight} field. */
         public XrSystemGraphicsProperties.Buffer maxSwapchainImageHeight(@NativeType("uint32_t") int value) { XrSystemGraphicsProperties.nmaxSwapchainImageHeight(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemGraphicsProperties#maxSwapchainImageWidth} field. */
+        /** Sets the specified value to the {@code maxSwapchainImageWidth} field. */
         public XrSystemGraphicsProperties.Buffer maxSwapchainImageWidth(@NativeType("uint32_t") int value) { XrSystemGraphicsProperties.nmaxSwapchainImageWidth(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSystemGraphicsProperties#maxLayerCount} field. */
+        /** Sets the specified value to the {@code maxLayerCount} field. */
         public XrSystemGraphicsProperties.Buffer maxLayerCount(@NativeType("uint32_t") int value) { XrSystemGraphicsProperties.nmaxLayerCount(address(), value); return this; }
 
     }

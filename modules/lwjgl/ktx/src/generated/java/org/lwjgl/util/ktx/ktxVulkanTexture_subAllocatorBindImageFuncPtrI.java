@@ -12,15 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void * (*{@link #invoke}) (
- *     VkImage image,
- *     uint64_t allocId
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 @FunctionalInterface
 @NativeType("void * (*) (VkImage, uint64_t)")
 public interface ktxVulkanTexture_subAllocatorBindImageFuncPtrI extends CallbackI {
@@ -43,7 +35,7 @@ public interface ktxVulkanTexture_subAllocatorBindImageFuncPtrI extends Callback
         apiClosureRetP(ret, __result);
     }
 
-    /** The bind-image-to-suballocation(s) function. */
+    /** {@code void * (*) (VkImage image, uint64_t allocId)} */
     @NativeType("void *") long invoke(@NativeType("VkImage") long image, @NativeType("uint64_t") long allocId);
 
 }

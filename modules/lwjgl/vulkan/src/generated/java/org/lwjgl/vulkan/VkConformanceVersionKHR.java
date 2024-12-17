@@ -16,17 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkConformanceVersion}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkConformanceVersionKHR {
  *     uint8_t major;
  *     uint8_t minor;
  *     uint8_t subminor;
  *     uint8_t patch;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkConformanceVersionKHR extends VkConformanceVersion {
 

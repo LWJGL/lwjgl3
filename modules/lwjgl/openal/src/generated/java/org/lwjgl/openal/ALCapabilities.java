@@ -13,7 +13,6 @@ import java.util.function.IntFunction;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 
-/** Defines the capabilities of an OpenAL context. */
 public final class ALCapabilities {
 
     // AL10
@@ -344,99 +343,99 @@ public final class ALCapabilities {
         alSourcePlayAtTimevSOFT,
         alSourcePlayAtTimevDirectSOFT;
 
-    /** When true, {@link AL10} is supported. */
+    /** When true, {@code AL10} is supported. */
     public final boolean OpenAL10;
-    /** When true, {@link AL11} is supported. */
+    /** When true, {@code AL11} is supported. */
     public final boolean OpenAL11;
-    /** When true, {@link EXTAlaw} is supported. */
+    /** When true, {@code EXT_ALAW} is supported. */
     public final boolean AL_EXT_ALAW;
-    /** When true, {@link EXTBFormat} is supported. */
+    /** When true, {@code EXT_BFORMAT} is supported. */
     public final boolean AL_EXT_BFORMAT;
-    /** When true, {@link EXTDebug} is supported. */
+    /** When true, {@code EXT_debug} is supported. */
     public final boolean AL_EXT_debug;
-    /** When true, the {@link EXTDirectContext AL_EXT_direct_context} extension is supported. */
+    /** When true, {@code EXT_direct_context} is supported. */
     public final boolean AL_EXT_direct_context;
-    /** When true, {@link EXTDouble} is supported. */
+    /** When true, {@code EXT_DOUBLE} is supported. */
     public final boolean AL_EXT_DOUBLE;
-    /** When true, {@link EXTEfx} is supported. */
+    /** When true, {@code EXT_EFX} is supported. */
     public final boolean ALC_EXT_EFX;
-    /** When true, {@link EXTExponentDistance} is supported. */
+    /** When true, {@code EXT_EXPONENT_DISTANCE} is supported. */
     public final boolean AL_EXT_EXPONENT_DISTANCE;
-    /** When true, {@link EXTFloat32} is supported. */
+    /** When true, {@code EXT_FLOAT32} is supported. */
     public final boolean AL_EXT_FLOAT32;
-    /** When true, {@link EXTIma4} is supported. */
+    /** When true, {@code EXT_IMA4} is supported. */
     public final boolean AL_EXT_IMA4;
-    /** When true, {@link EXTLinearDistance} is supported. */
+    /** When true, {@code EXT_LINEAR_DISTANCE} is supported. */
     public final boolean AL_EXT_LINEAR_DISTANCE;
-    /** When true, {@link EXTMCFormats} is supported. */
+    /** When true, {@code EXT_MCFORMATS} is supported. */
     public final boolean AL_EXT_MCFORMATS;
-    /** When true, {@link EXTMulaw} is supported. */
+    /** When true, {@code EXT_MULAW} is supported. */
     public final boolean AL_EXT_MULAW;
-    /** When true, {@link EXTMulawBFormat} is supported. */
+    /** When true, {@code EXT_MULAW_BFORMAT} is supported. */
     public final boolean AL_EXT_MULAW_BFORMAT;
-    /** When true, {@link EXTMulawMCFormats} is supported. */
+    /** When true, {@code EXT_MULAW_MCFORMATS} is supported. */
     public final boolean AL_EXT_MULAW_MCFORMATS;
-    /** When true, {@link EXTOffset} is supported. */
+    /** When true, {@code EXT_OFFSET} is supported. */
     public final boolean AL_EXT_OFFSET;
-    /** When true, {@link EXTSourceDistanceModel} is supported. */
+    /** When true, {@code EXT_source_distance_model} is supported. */
     public final boolean AL_EXT_source_distance_model;
-    /** When true, {@link EXTSourceRadius} is supported. */
+    /** When true, {@code EXT_SOURCE_RADIUS} is supported. */
     public final boolean AL_EXT_SOURCE_RADIUS;
-    /** When true, {@link EXTStaticBuffer} is supported. */
+    /** When true, {@code EXT_STATIC_BUFFER} is supported. */
     public final boolean AL_EXT_STATIC_BUFFER;
-    /** When true, {@link EXTStereoAngles} is supported. */
+    /** When true, {@code EXT_STEREO_ANGLES} is supported. */
     public final boolean AL_EXT_STEREO_ANGLES;
-    /** When true, {@link EXTVorbis} is supported. */
+    /** When true, {@code EXT_vorbis} is supported. */
     public final boolean AL_EXT_vorbis;
-    /** When true, {@link LOKIIMAADPCM} is supported. */
+    /** When true, {@code LOKI_IMA_ADPCM} is supported. */
     public final boolean AL_LOKI_IMA_ADPCM;
-    /** When true, {@link LOKIQuadriphonic} is supported. */
+    /** When true, {@code LOKI_quadriphonic} is supported. */
     public final boolean AL_LOKI_quadriphonic;
-    /** When true, {@link LOKIWAVEFormat} is supported. */
+    /** When true, {@code LOKI_WAVE_format} is supported. */
     public final boolean AL_LOKI_WAVE_format;
-    /** When true, {@link SOFTBformatEx} is supported. */
+    /** When true, {@code SOFT_bformat_ex} is supported. */
     public final boolean AL_SOFT_bformat_ex;
-    /** When true, {@link SOFTBlockAlignment} is supported. */
+    /** When true, {@code SOFT_block_alignment} is supported. */
     public final boolean AL_SOFT_block_alignment;
-    /** When true, {@link SOFTBufferLengthQuery} is supported. */
+    /** When true, {@code SOFT_buffer_length_query} is supported. */
     public final boolean AL_SOFT_buffer_length_query;
-    /** When true, {@link SOFTBufferSamples} is supported. */
+    /** When true, {@code SOFT_buffer_samples} is supported. */
     public final boolean AL_SOFT_buffer_samples;
-    /** When true, {@link SOFTBufferSubData} is supported. */
+    /** When true, {@code SOFT_buffer_sub_data} is supported. */
     public final boolean AL_SOFT_buffer_sub_data;
-    /** When true, {@link SOFTCallbackBuffer} is supported. */
+    /** When true, {@code SOFT_callback_buffer} is supported. */
     public final boolean AL_SOFT_callback_buffer;
-    /** When true, {@link SOFTDeferredUpdates} is supported. */
+    /** When true, {@code SOFT_deferred_updates} is supported. */
     public final boolean AL_SOFT_deferred_updates;
-    /** When true, {@link SOFTDirectChannels} is supported. */
+    /** When true, {@code SOFT_direct_channels} is supported. */
     public final boolean AL_SOFT_direct_channels;
-    /** When true, {@link SOFTDirectChannelsRemix} is supported. */
+    /** When true, {@code SOFT_direct_channels_remix} is supported. */
     public final boolean AL_SOFT_direct_channels_remix;
-    /** When true, {@link SOFTEffectTarget} is supported. */
+    /** When true, {@code SOFT_effect_target} is supported. */
     public final boolean AL_SOFT_effect_target;
-    /** When true, {@link SOFTEvents} is supported. */
+    /** When true, {@code SOFT_events} is supported. */
     public final boolean AL_SOFT_events;
-    /** When true, {@link SOFTGainClampEx} is supported. */
+    /** When true, {@code SOFT_gain_clamp_ex} is supported. */
     public final boolean AL_SOFT_gain_clamp_ex;
-    /** When true, {@link SOFTLoopPoints} is supported. */
+    /** When true, {@code SOFT_loop_points} is supported. */
     public final boolean AL_SOFT_loop_points;
-    /** When true, {@link SOFTMSADPCM} is supported. */
+    /** When true, {@code SOFT_MSADPCM} is supported. */
     public final boolean AL_SOFT_MSADPCM;
-    /** When true, {@link SOFTSourceLatency} is supported. */
+    /** When true, {@code SOFT_source_latency} is supported. */
     public final boolean AL_SOFT_source_latency;
-    /** When true, {@link SOFTSourceLength} is supported. */
+    /** When true, {@code SOFT_source_length} is supported. */
     public final boolean AL_SOFT_source_length;
-    /** When true, {@link SOFTSourceResampler} is supported. */
+    /** When true, {@code SOFT_source_resampler} is supported. */
     public final boolean AL_SOFT_source_resampler;
-    /** When true, {@link SOFTSourceSpatialize} is supported. */
+    /** When true, {@code SOFT_source_spatialize} is supported. */
     public final boolean AL_SOFT_source_spatialize;
-    /** When true, {@link SOFTSourceStartDelay} is supported. */
+    /** When true, {@code SOFT_source_start_delay} is supported. */
     public final boolean AL_SOFT_source_start_delay;
-    /** When true, {@link SOFTUHJ} is supported. */
+    /** When true, {@code SOFT_UHJ} is supported. */
     public final boolean AL_SOFT_UHJ;
-    /** When true, {@link SOFTUHJEx} is supported. */
+    /** When true, {@code SOFT_UHJ_ex} is supported. */
     public final boolean AL_SOFT_UHJ_ex;
-    /** When true, {@link SOFTXHoldOnDisconnect} is supported. */
+    /** When true, {@code SOFTX_hold_on_disconnect} is supported. */
     public final boolean AL_SOFTX_hold_on_disconnect;
 
     /** Off-heap array of the above function addresses. */

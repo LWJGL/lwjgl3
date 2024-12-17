@@ -13,11 +13,6 @@ import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Native bindings to the <a href="https://www.khronos.org/registry/OpenGL/extensions/SGI/GLX_SGI_video_sync.txt">GLX_SGI_video_sync</a> extension.
- * 
- * <p>This extension provides a means for synchronization with the video frame rate of a monitor.</p>
- */
 public class GLXSGIVideoSync {
 
     protected GLXSGIVideoSync() {
@@ -26,7 +21,7 @@ public class GLXSGIVideoSync {
 
     // --- [ glXGetVideoSyncSGI ] ---
 
-    /** Unsafe version of: {@link #glXGetVideoSyncSGI GetVideoSyncSGI} */
+    /** {@code GLint glXGetVideoSyncSGI(unsigned int * count)} */
     public static int nglXGetVideoSyncSGI(long count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetVideoSyncSGI;
         if (CHECKS) {
@@ -35,11 +30,7 @@ public class GLXSGIVideoSync {
         return callPI(count, __functionAddress);
     }
 
-    /**
-     * Returns the value of the video sync counter in {@code count}. Zero is returned if the call is successful.
-     *
-     * @param count the video sync counter value
-     */
+    /** {@code GLint glXGetVideoSyncSGI(unsigned int * count)} */
     @NativeType("GLint")
     public static int glXGetVideoSyncSGI(@NativeType("unsigned int *") IntBuffer count) {
         if (CHECKS) {
@@ -50,7 +41,7 @@ public class GLXSGIVideoSync {
 
     // --- [ glXWaitVideoSyncSGI ] ---
 
-    /** Unsafe version of: {@link #glXWaitVideoSyncSGI WaitVideoSyncSGI} */
+    /** {@code GLint glXWaitVideoSyncSGI(int divisor, int remainder, unsigned int * count)} */
     public static int nglXWaitVideoSyncSGI(int divisor, int remainder, long count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXWaitVideoSyncSGI;
         if (CHECKS) {
@@ -59,19 +50,7 @@ public class GLXSGIVideoSync {
         return callPI(divisor, remainder, count, __functionAddress);
     }
 
-    /**
-     * Puts the calling process to sleep until
-     * 
-     * <p>{@code (C mod D) = R}</p>
-     * 
-     * <p>where {@code C} is the video sync counter, {@code D} is specified by the {@code divisor} parameter of {@code glXWaitVideoSyncSGI}, and {@code R} is
-     * specified by the {@code remainder} parameter of {@code glXWaitVideoSyncSGI}. {@code glXWaitVideoSyncSGI} returns the current video sync counter value in
-     * {@code count}. Zero is returned by {@code glXWaitVideoSyncSGI} if it is successful.</p>
-     *
-     * @param divisor   the divisor value
-     * @param remainder the remainder value
-     * @param count     the video sync counter value
-     */
+    /** {@code GLint glXWaitVideoSyncSGI(int divisor, int remainder, unsigned int * count)} */
     @NativeType("GLint")
     public static int glXWaitVideoSyncSGI(int divisor, int remainder, @NativeType("unsigned int *") IntBuffer count) {
         if (CHECKS) {
@@ -80,7 +59,7 @@ public class GLXSGIVideoSync {
         return nglXWaitVideoSyncSGI(divisor, remainder, memAddress(count));
     }
 
-    /** Array version of: {@link #glXGetVideoSyncSGI GetVideoSyncSGI} */
+    /** {@code GLint glXGetVideoSyncSGI(unsigned int * count)} */
     @NativeType("GLint")
     public static int glXGetVideoSyncSGI(@NativeType("unsigned int *") int[] count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXGetVideoSyncSGI;
@@ -91,7 +70,7 @@ public class GLXSGIVideoSync {
         return callPI(count, __functionAddress);
     }
 
-    /** Array version of: {@link #glXWaitVideoSyncSGI WaitVideoSyncSGI} */
+    /** {@code GLint glXWaitVideoSyncSGI(int divisor, int remainder, unsigned int * count)} */
     @NativeType("GLint")
     public static int glXWaitVideoSyncSGI(int divisor, int remainder, @NativeType("unsigned int *") int[] count) {
         long __functionAddress = GL.getCapabilitiesGLXClient().glXWaitVideoSyncSGI;

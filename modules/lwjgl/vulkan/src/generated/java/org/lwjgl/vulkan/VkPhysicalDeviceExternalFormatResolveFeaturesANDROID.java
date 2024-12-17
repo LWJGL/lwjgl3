@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing whether external format resolves are supported.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceExternalFormatResolveFeaturesANDROID {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #externalFormatResolve};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 externalFormatResolve;
+ * }}</pre>
  */
 public class VkPhysicalDeviceExternalFormatResolveFeaturesANDROID extends Struct<VkPhysicalDeviceExternalFormatResolveFeaturesANDROID> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceExternalFormatResolveFeaturesANDROID extends Struct
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether external format resolves are supported. */
+    /** @return the value of the {@code externalFormatResolve} field. */
     @NativeType("VkBool32")
     public boolean externalFormatResolve() { return nexternalFormatResolve(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceExternalFormatResolveFeaturesANDROID sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID} value to the {@link #sType} field. */
+    /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID} value to the {@code sType} field. */
     public VkPhysicalDeviceExternalFormatResolveFeaturesANDROID sType$Default() { return sType(ANDROIDExternalFormatResolve.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceExternalFormatResolveFeaturesANDROID pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #externalFormatResolve} field. */
+    /** Sets the specified value to the {@code externalFormatResolve} field. */
     public VkPhysicalDeviceExternalFormatResolveFeaturesANDROID externalFormatResolve(@NativeType("VkBool32") boolean value) { nexternalFormatResolve(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceExternalFormatResolveFeaturesANDROID extends Struct
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID#externalFormatResolve} field. */
+        /** @return the value of the {@code externalFormatResolve} field. */
         @NativeType("VkBool32")
         public boolean externalFormatResolve() { return VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.nexternalFormatResolve(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.nsType(address(), value); return this; }
-        /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID} value to the {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID#sType} field. */
+        /** Sets the {@link ANDROIDExternalFormatResolve#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID} value to the {@code sType} field. */
         public VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.Buffer sType$Default() { return sType(ANDROIDExternalFormatResolve.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceExternalFormatResolveFeaturesANDROID#externalFormatResolve} field. */
+        /** Sets the specified value to the {@code externalFormatResolve} field. */
         public VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.Buffer externalFormatResolve(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceExternalFormatResolveFeaturesANDROID.nexternalFormatResolve(address(), value ? 1 : 0); return this; }
 
     }

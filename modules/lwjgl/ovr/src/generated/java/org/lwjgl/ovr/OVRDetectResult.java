@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Return values for {@link OVRUtil#ovr_Detect _Detect}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrDetectResult {
- *     ovrBool {@link #IsOculusServiceRunning};
- *     ovrBool {@link #IsOculusHMDConnected};
+ *     ovrBool IsOculusServiceRunning;
+ *     ovrBool IsOculusHMDConnected;
  *     char[6];
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct ovrDetectResult")
 public class OVRDetectResult extends Struct<OVRDetectResult> implements NativeResource {
@@ -77,20 +73,10 @@ public class OVRDetectResult extends Struct<OVRDetectResult> implements NativeRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * is {@link OVR#ovrFalse False} when the Oculus Service is not running. This means that the Oculus Service is either uninstalled or stopped.
-     * {@code IsOculusHMDConnected} will be {@link OVR#ovrFalse False} in this case.
-     * 
-     * <p>is {@link OVR#ovrTrue True} when the Oculus Service is running. This means that the Oculus Service is installed and running. {@code IsOculusHMDConnected} will
-     * reflect the state of the HMD.</p>
-     */
+    /** @return the value of the {@code IsOculusServiceRunning} field. */
     @NativeType("ovrBool")
     public boolean IsOculusServiceRunning() { return nIsOculusServiceRunning(address()); }
-    /**
-     * is {@link OVR#ovrFalse False} when an Oculus HMD is not detected. If the Oculus Service is not running, this will be {@link OVR#ovrFalse False}.
-     * 
-     * <p>is {@link OVR#ovrTrue True} when an Oculus HMD is detected. This implies that the Oculus Service is also installed and running.</p>
-     */
+    /** @return the value of the {@code IsOculusHMDConnected} field. */
     @NativeType("ovrBool")
     public boolean IsOculusHMDConnected() { return nIsOculusHMDConnected(address()); }
 
@@ -272,10 +258,10 @@ public class OVRDetectResult extends Struct<OVRDetectResult> implements NativeRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRDetectResult#IsOculusServiceRunning} field. */
+        /** @return the value of the {@code IsOculusServiceRunning} field. */
         @NativeType("ovrBool")
         public boolean IsOculusServiceRunning() { return OVRDetectResult.nIsOculusServiceRunning(address()); }
-        /** @return the value of the {@link OVRDetectResult#IsOculusHMDConnected} field. */
+        /** @return the value of the {@code IsOculusHMDConnected} field. */
         @NativeType("ovrBool")
         public boolean IsOculusHMDConnected() { return OVRDetectResult.nIsOculusHMDConnected(address()); }
 

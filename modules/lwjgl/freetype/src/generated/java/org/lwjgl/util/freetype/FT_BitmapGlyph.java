@@ -14,17 +14,13 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A structure used for bitmap glyph images. This really is a 'sub-class' of {@link FT_Glyph}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_BitmapGlyphRec {
  *     {@link FT_Glyph FT_GlyphRec} root;
  *     FT_Int left;
  *     FT_Int top;
  *     {@link FT_Bitmap FT_Bitmap} bitmap;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct FT_BitmapGlyphRec")
 public class FT_BitmapGlyph extends Struct<FT_BitmapGlyph> {

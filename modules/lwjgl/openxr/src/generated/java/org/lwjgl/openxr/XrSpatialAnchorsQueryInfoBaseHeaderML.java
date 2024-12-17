@@ -16,27 +16,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Information used to query for anchors.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MLSpatialAnchorsStorage XR_ML_spatial_anchors_storage} extension <b>must</b> be enabled prior to using {@link XrSpatialAnchorsQueryInfoBaseHeaderML}</li>
- * <li>{@code type} <b>must</b> be {@link MLSpatialAnchorsStorage#XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link MLSpatialAnchorsStorage#xrQuerySpatialAnchorsAsyncML QuerySpatialAnchorsAsyncML}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSpatialAnchorsQueryInfoBaseHeaderML {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ * }}</pre>
  */
 public class XrSpatialAnchorsQueryInfoBaseHeaderML extends Struct<XrSpatialAnchorsQueryInfoBaseHeaderML> implements NativeResource {
 
@@ -86,16 +70,16 @@ public class XrSpatialAnchorsQueryInfoBaseHeaderML extends Struct<XrSpatialAncho
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSpatialAnchorsQueryInfoBaseHeaderML type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSpatialAnchorsQueryInfoBaseHeaderML next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -295,16 +279,16 @@ public class XrSpatialAnchorsQueryInfoBaseHeaderML extends Struct<XrSpatialAncho
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSpatialAnchorsQueryInfoBaseHeaderML#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSpatialAnchorsQueryInfoBaseHeaderML.ntype(address()); }
-        /** @return the value of the {@link XrSpatialAnchorsQueryInfoBaseHeaderML#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSpatialAnchorsQueryInfoBaseHeaderML.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrSpatialAnchorsQueryInfoBaseHeaderML#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSpatialAnchorsQueryInfoBaseHeaderML.Buffer type(@NativeType("XrStructureType") int value) { XrSpatialAnchorsQueryInfoBaseHeaderML.ntype(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSpatialAnchorsQueryInfoBaseHeaderML#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSpatialAnchorsQueryInfoBaseHeaderML.Buffer next(@NativeType("void const *") long value) { XrSpatialAnchorsQueryInfoBaseHeaderML.nnext(address(), value); return this; }
 
     }

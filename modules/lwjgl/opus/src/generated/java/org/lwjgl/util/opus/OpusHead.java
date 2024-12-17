@@ -17,23 +17,18 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Ogg Opus bitstream information. This contains the basic playback parameters for a stream, and corresponds to the initial ID header packet of an Ogg
- * Opus stream.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct OpusHead {
- *     int {@link #version};
- *     int {@link #channel_count};
- *     unsigned int {@link #pre_skip};
- *     opus_uint32 {@link #input_sample_rate};
- *     int {@link #output_gain};
- *     int {@link #mapping_family};
- *     int {@link #stream_count};
- *     int {@link #coupled_count};
- *     unsigned char {@link #mapping}[255];
- * }</code></pre>
+ *     int version;
+ *     int channel_count;
+ *     unsigned int pre_skip;
+ *     opus_uint32 input_sample_rate;
+ *     int output_gain;
+ *     int mapping_family;
+ *     int stream_count;
+ *     int coupled_count;
+ *     unsigned char mapping[255];
+ * }}</pre>
  */
 public class OpusHead extends Struct<OpusHead> implements NativeResource {
 
@@ -104,67 +99,28 @@ public class OpusHead extends Struct<OpusHead> implements NativeResource {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /**
-     * the Ogg Opus format version, in the range {@code 0...255}.
-     * 
-     * <p>The top 4 bits represent a "major" version, and the bottom four bits represent backwards-compatible "minor" revisions. The current specification
-     * describes version 1. This library will recognize versions up through 15 as backwards compatible with the current specification. An earlier draft of the
-     * specification described a version 0, but the only difference between version 1 and version 0 is that version 0 did not specify the semantics for
-     * handling the version field.</p>
-     */
+    /** @return the value of the {@code version} field. */
     public int version() { return nversion(address()); }
-    /** the number of channels, in the range {@code 1...255}. */
+    /** @return the value of the {@code channel_count} field. */
     public int channel_count() { return nchannel_count(address()); }
-    /** the number of samples that should be discarded from the beginning of the stream */
+    /** @return the value of the {@code pre_skip} field. */
     @NativeType("unsigned int")
     public int pre_skip() { return npre_skip(address()); }
-    /**
-     * the sampling rate of the original input.
-     * 
-     * <p>All Opus audio is coded at 48 kHz, and should also be decoded at 48 kHz for playback (unless the target hardware does not support this sampling rate).
-     * However, this field may be used to resample the audio back to the original sampling rate, for example, when saving the output to a file.</p>
-     */
+    /** @return the value of the {@code input_sample_rate} field. */
     @NativeType("opus_uint32")
     public int input_sample_rate() { return ninput_sample_rate(address()); }
-    /**
-     * the gain to apply to the decoded output, in dB, as a {@code Q8} value in the range {@code -32768...32767}.
-     * 
-     * <p>The libopusfile API will automatically apply this gain to the decoded output before returning it, scaling it by
-     * {@code pow(10,output_gain/(20.0*256))}. You can adjust this behavior with {@link OpusFile#op_set_gain_offset}.</p>
-     */
+    /** @return the value of the {@code output_gain} field. */
     public int output_gain() { return noutput_gain(address()); }
-    /**
-     * the channel mapping family, in the range {@code 0...255}.
-     * 
-     * <p>Channel mapping family 0 covers mono or stereo in a single stream. Channel mapping family 1 covers 1 to 8 channels in one or more streams, using the
-     * Vorbis speaker assignments. Channel mapping family 255 covers 1 to 255 channels in one or more streams, but without any defined speaker assignment.</p>
-     */
+    /** @return the value of the {@code mapping_family} field. */
     public int mapping_family() { return nmapping_family(address()); }
-    /** the number of Opus streams in each Ogg packet, in the range {@code 1...255}. */
+    /** @return the value of the {@code stream_count} field. */
     public int stream_count() { return nstream_count(address()); }
-    /**
-     * the number of coupled Opus streams in each Ogg packet, in the range {@code 0...127}.
-     * 
-     * <p>This must satisfy {@code 0 <= coupled_count <= stream_count} and {@code coupled_count + stream_count <= 255}. The coupled streams appear first, before
-     * all uncoupled streams, in an Ogg Opus packet.</p>
-     */
+    /** @return the value of the {@code coupled_count} field. */
     public int coupled_count() { return ncoupled_count(address()); }
-    /**
-     * the mapping from coded stream channels to output channels.
-     * 
-     * <p>Let {@code index=mapping[k]} be the value for channel {@code k}. If {@code index < 2*coupled_count}, then it refers to the left channel from stream
-     * {@code (index/2)} if even, and the right channel from stream {@code (index/2)} if odd. Otherwise, it refers to the output of the uncoupled stream
-     * {@code (index-coupled_count)}.</p>
-     */
+    /** @return a {@link ByteBuffer} view of the {@code mapping} field. */
     @NativeType("unsigned char[255]")
     public ByteBuffer mapping() { return nmapping(address()); }
-    /**
-     * the mapping from coded stream channels to output channels.
-     * 
-     * <p>Let {@code index=mapping[k]} be the value for channel {@code k}. If {@code index < 2*coupled_count}, then it refers to the left channel from stream
-     * {@code (index/2)} if even, and the right channel from stream {@code (index/2)} if odd. Otherwise, it refers to the output of the uncoupled stream
-     * {@code (index-coupled_count)}.</p>
-     */
+    /** @return the value at the specified index of the {@code mapping} field. */
     @NativeType("unsigned char")
     public byte mapping(int index) { return nmapping(address(), index); }
 
@@ -345,28 +301,28 @@ public class OpusHead extends Struct<OpusHead> implements NativeResource {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OpusHead#version} field. */
+        /** @return the value of the {@code version} field. */
         public int version() { return OpusHead.nversion(address()); }
-        /** @return the value of the {@link OpusHead#channel_count} field. */
+        /** @return the value of the {@code channel_count} field. */
         public int channel_count() { return OpusHead.nchannel_count(address()); }
-        /** @return the value of the {@link OpusHead#pre_skip} field. */
+        /** @return the value of the {@code pre_skip} field. */
         @NativeType("unsigned int")
         public int pre_skip() { return OpusHead.npre_skip(address()); }
-        /** @return the value of the {@link OpusHead#input_sample_rate} field. */
+        /** @return the value of the {@code input_sample_rate} field. */
         @NativeType("opus_uint32")
         public int input_sample_rate() { return OpusHead.ninput_sample_rate(address()); }
-        /** @return the value of the {@link OpusHead#output_gain} field. */
+        /** @return the value of the {@code output_gain} field. */
         public int output_gain() { return OpusHead.noutput_gain(address()); }
-        /** @return the value of the {@link OpusHead#mapping_family} field. */
+        /** @return the value of the {@code mapping_family} field. */
         public int mapping_family() { return OpusHead.nmapping_family(address()); }
-        /** @return the value of the {@link OpusHead#stream_count} field. */
+        /** @return the value of the {@code stream_count} field. */
         public int stream_count() { return OpusHead.nstream_count(address()); }
-        /** @return the value of the {@link OpusHead#coupled_count} field. */
+        /** @return the value of the {@code coupled_count} field. */
         public int coupled_count() { return OpusHead.ncoupled_count(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link OpusHead#mapping} field. */
+        /** @return a {@link ByteBuffer} view of the {@code mapping} field. */
         @NativeType("unsigned char[255]")
         public ByteBuffer mapping() { return OpusHead.nmapping(address()); }
-        /** @return the value at the specified index of the {@link OpusHead#mapping} field. */
+        /** @return the value at the specified index of the {@code mapping} field. */
         @NativeType("unsigned char")
         public byte mapping(int index) { return OpusHead.nmapping(address(), index); }
 

@@ -16,26 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing shader float controls 2 features that can be supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@link VkPhysicalDeviceShaderFloatControls2Features} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceFeatures2} structure passed to {@link VK11#vkGetPhysicalDeviceFeatures2 GetPhysicalDeviceFeatures2}, it is filled in to indicate whether each corresponding feature is supported. {@link VkPhysicalDeviceShaderFloatControls2Features} <b>can</b> also be used in the {@code pNext} chain of {@link VkDeviceCreateInfo} to selectively enable these features.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceShaderFloatControls2Features {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #shaderFloatControls2};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 shaderFloatControls2;
+ * }}</pre>
  */
 public class VkPhysicalDeviceShaderFloatControls2Features extends Struct<VkPhysicalDeviceShaderFloatControls2Features> implements NativeResource {
 
@@ -88,23 +74,23 @@ public class VkPhysicalDeviceShaderFloatControls2Features extends Struct<VkPhysi
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether shader modules <b>can</b> declare the {@code FloatControls2} capability. */
+    /** @return the value of the {@code shaderFloatControls2} field. */
     @NativeType("VkBool32")
     public boolean shaderFloatControls2() { return nshaderFloatControls2(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceShaderFloatControls2Features sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES} value to the {@link #sType} field. */
+    /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES} value to the {@code sType} field. */
     public VkPhysicalDeviceShaderFloatControls2Features sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceShaderFloatControls2Features pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #shaderFloatControls2} field. */
+    /** Sets the specified value to the {@code shaderFloatControls2} field. */
     public VkPhysicalDeviceShaderFloatControls2Features shaderFloatControls2(@NativeType("VkBool32") boolean value) { nshaderFloatControls2(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -300,23 +286,23 @@ public class VkPhysicalDeviceShaderFloatControls2Features extends Struct<VkPhysi
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceShaderFloatControls2Features#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceShaderFloatControls2Features.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderFloatControls2Features#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceShaderFloatControls2Features.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceShaderFloatControls2Features#shaderFloatControls2} field. */
+        /** @return the value of the {@code shaderFloatControls2} field. */
         @NativeType("VkBool32")
         public boolean shaderFloatControls2() { return VkPhysicalDeviceShaderFloatControls2Features.nshaderFloatControls2(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloatControls2Features#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceShaderFloatControls2Features.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceShaderFloatControls2Features.nsType(address(), value); return this; }
-        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES} value to the {@link VkPhysicalDeviceShaderFloatControls2Features#sType} field. */
+        /** Sets the {@link VK14#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES} value to the {@code sType} field. */
         public VkPhysicalDeviceShaderFloatControls2Features.Buffer sType$Default() { return sType(VK14.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloatControls2Features#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceShaderFloatControls2Features.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceShaderFloatControls2Features.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkPhysicalDeviceShaderFloatControls2Features#shaderFloatControls2} field. */
+        /** Sets the specified value to the {@code shaderFloatControls2} field. */
         public VkPhysicalDeviceShaderFloatControls2Features.Buffer shaderFloatControls2(@NativeType("VkBool32") boolean value) { VkPhysicalDeviceShaderFloatControls2Features.nshaderFloatControls2(address(), value ? 1 : 0); return this; }
 
     }

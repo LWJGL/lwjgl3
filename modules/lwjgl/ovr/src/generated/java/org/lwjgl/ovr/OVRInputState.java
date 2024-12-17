@@ -19,27 +19,22 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.ovr.OVR.ovrHand_Count;
 
 /**
- * Describes the complete controller input state, including Oculus Touch, and XBox gamepad. If multiple inputs are connected and used at the same time,
- * their inputs are combined.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ovrInputState {
- *     double {@link #TimeInSeconds};
- *     unsigned int {@link #Buttons};
- *     unsigned int {@link #Touches};
- *     float {@link #IndexTrigger}[ovrHand_Count];
- *     float {@link #HandTrigger}[ovrHand_Count];
- *     {@link OVRVector2f ovrVector2f} {@link #Thumbstick}[ovrHand_Count];
- *     ovrControllerType {@link #ControllerType};
- *     float {@link #IndexTriggerNoDeadzone}[ovrHand_Count];
- *     float {@link #HandTriggerNoDeadzone}[ovrHand_Count];
- *     {@link OVRVector2f ovrVector2f} {@link #ThumbstickNoDeadzone}[ovrHand_Count];
- *     float {@link #IndexTriggerRaw}[ovrHand_Count];
- *     float {@link #HandTriggerRaw}[ovrHand_Count];
- *     {@link OVRVector2f ovrVector2f} {@link #ThumbstickRaw}[ovrHand_Count];
- * }</code></pre>
+ *     double TimeInSeconds;
+ *     unsigned int Buttons;
+ *     unsigned int Touches;
+ *     float IndexTrigger[ovrHand_Count];
+ *     float HandTrigger[ovrHand_Count];
+ *     {@link OVRVector2f ovrVector2f} Thumbstick[ovrHand_Count];
+ *     ovrControllerType ControllerType;
+ *     float IndexTriggerNoDeadzone[ovrHand_Count];
+ *     float HandTriggerNoDeadzone[ovrHand_Count];
+ *     {@link OVRVector2f ovrVector2f} ThumbstickNoDeadzone[ovrHand_Count];
+ *     float IndexTriggerRaw[ovrHand_Count];
+ *     float HandTriggerRaw[ovrHand_Count];
+ *     {@link OVRVector2f ovrVector2f} ThumbstickRaw[ovrHand_Count];
+ * }}</pre>
  */
 @NativeType("struct ovrInputState")
 public class OVRInputState extends Struct<OVRInputState> implements NativeResource {
@@ -123,63 +118,63 @@ public class OVRInputState extends Struct<OVRInputState> implements NativeResour
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** system type when the controller state was last updated */
+    /** @return the value of the {@code TimeInSeconds} field. */
     public double TimeInSeconds() { return nTimeInSeconds(address()); }
-    /** values for buttons described by {@code ovrButton} */
+    /** @return the value of the {@code Buttons} field. */
     @NativeType("unsigned int")
     public int Buttons() { return nButtons(address()); }
-    /** touch values for buttons and sensors as described by {@code ovrTouch}. */
+    /** @return the value of the {@code Touches} field. */
     @NativeType("unsigned int")
     public int Touches() { return nTouches(address()); }
-    /** left and right finger trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range 0.0 to 1.0f. */
+    /** @return a {@link FloatBuffer} view of the {@code IndexTrigger} field. */
     @NativeType("float[ovrHand_Count]")
     public FloatBuffer IndexTrigger() { return nIndexTrigger(address()); }
-    /** left and right finger trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range 0.0 to 1.0f. */
+    /** @return the value at the specified index of the {@code IndexTrigger} field. */
     public float IndexTrigger(int index) { return nIndexTrigger(address(), index); }
-    /** left and right hand trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range 0.0 to 1.0f. */
+    /** @return a {@link FloatBuffer} view of the {@code HandTrigger} field. */
     @NativeType("float[ovrHand_Count]")
     public FloatBuffer HandTrigger() { return nHandTrigger(address()); }
-    /** left and right hand trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range 0.0 to 1.0f. */
+    /** @return the value at the specified index of the {@code HandTrigger} field. */
     public float HandTrigger(int index) { return nHandTrigger(address(), index); }
-    /** horizontal and vertical thumbstick axis values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range -1.0f to 1.0f. */
+    /** @return a {@link OVRVector2f}.Buffer view of the {@code Thumbstick} field. */
     @NativeType("ovrVector2f[ovrHand_Count]")
     public OVRVector2f.Buffer Thumbstick() { return nThumbstick(address()); }
-    /** horizontal and vertical thumbstick axis values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range -1.0f to 1.0f. */
+    /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@code Thumbstick} field. */
     @NativeType("ovrVector2f")
     public OVRVector2f Thumbstick(int index) { return nThumbstick(address(), index); }
-    /** The type of the controller this state is for. One of:<br><table><tr><td>{@link OVR#ovrControllerType_None ControllerType_None}</td><td>{@link OVR#ovrControllerType_LTouch ControllerType_LTouch}</td><td>{@link OVR#ovrControllerType_RTouch ControllerType_RTouch}</td></tr><tr><td>{@link OVR#ovrControllerType_Touch ControllerType_Touch}</td><td>{@link OVR#ovrControllerType_Remote ControllerType_Remote}</td><td>{@link OVR#ovrControllerType_XBox ControllerType_XBox}</td></tr><tr><td>{@link OVR#ovrControllerType_Object0 ControllerType_Object0}</td><td>{@link OVR#ovrControllerType_Object1 ControllerType_Object1}</td><td>{@link OVR#ovrControllerType_Object2 ControllerType_Object2}</td></tr><tr><td>{@link OVR#ovrControllerType_Object3 ControllerType_Object3}</td><td>{@link OVR#ovrControllerType_Active ControllerType_Active}</td></tr></table> */
+    /** @return the value of the {@code ControllerType} field. */
     @NativeType("ovrControllerType")
     public int ControllerType() { return nControllerType(address()); }
-    /** Left and right finger trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter. */
+    /** @return a {@link FloatBuffer} view of the {@code IndexTriggerNoDeadzone} field. */
     @NativeType("float[ovrHand_Count]")
     public FloatBuffer IndexTriggerNoDeadzone() { return nIndexTriggerNoDeadzone(address()); }
-    /** Left and right finger trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter. */
+    /** @return the value at the specified index of the {@code IndexTriggerNoDeadzone} field. */
     public float IndexTriggerNoDeadzone(int index) { return nIndexTriggerNoDeadzone(address(), index); }
-    /** Left and right hand trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter. */
+    /** @return a {@link FloatBuffer} view of the {@code HandTriggerNoDeadzone} field. */
     @NativeType("float[ovrHand_Count]")
     public FloatBuffer HandTriggerNoDeadzone() { return nHandTriggerNoDeadzone(address()); }
-    /** Left and right hand trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range 0.0 to 1.0f. Does not apply a deadzone. Only touch applies a filter. */
+    /** @return the value at the specified index of the {@code HandTriggerNoDeadzone} field. */
     public float HandTriggerNoDeadzone(int index) { return nHandTriggerNoDeadzone(address(), index); }
-    /** Horizontal and vertical thumbstick axis values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range -1.0f to 1.0f. Does not apply a deadzone or filter. */
+    /** @return a {@link OVRVector2f}.Buffer view of the {@code ThumbstickNoDeadzone} field. */
     @NativeType("ovrVector2f[ovrHand_Count]")
     public OVRVector2f.Buffer ThumbstickNoDeadzone() { return nThumbstickNoDeadzone(address()); }
-    /** Horizontal and vertical thumbstick axis values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range -1.0f to 1.0f. Does not apply a deadzone or filter. */
+    /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@code ThumbstickNoDeadzone} field. */
     @NativeType("ovrVector2f")
     public OVRVector2f ThumbstickNoDeadzone(int index) { return nThumbstickNoDeadzone(address(), index); }
-    /** Left and right finger trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in range 0.0 to 1.0f. No deadzone or filter. */
+    /** @return a {@link FloatBuffer} view of the {@code IndexTriggerRaw} field. */
     @NativeType("float[ovrHand_Count]")
     public FloatBuffer IndexTriggerRaw() { return nIndexTriggerRaw(address()); }
-    /** Left and right finger trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in range 0.0 to 1.0f. No deadzone or filter. */
+    /** @return the value at the specified index of the {@code IndexTriggerRaw} field. */
     public float IndexTriggerRaw(int index) { return nIndexTriggerRaw(address(), index); }
-    /** Left and right hand trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range 0.0 to 1.0f. No deadzone or filter. */
+    /** @return a {@link FloatBuffer} view of the {@code HandTriggerRaw} field. */
     @NativeType("float[ovrHand_Count]")
     public FloatBuffer HandTriggerRaw() { return nHandTriggerRaw(address()); }
-    /** Left and right hand trigger values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in the range 0.0 to 1.0f. No deadzone or filter. */
+    /** @return the value at the specified index of the {@code HandTriggerRaw} field. */
     public float HandTriggerRaw(int index) { return nHandTriggerRaw(address(), index); }
-    /** Horizontal and vertical thumbstick axis values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in range -1.0f to 1.0f. No deadzone or filter. */
+    /** @return a {@link OVRVector2f}.Buffer view of the {@code ThumbstickRaw} field. */
     @NativeType("ovrVector2f[ovrHand_Count]")
     public OVRVector2f.Buffer ThumbstickRaw() { return nThumbstickRaw(address()); }
-    /** Horizontal and vertical thumbstick axis values ({@link OVR#ovrHand_Left Hand_Left} and {@link OVR#ovrHand_Right Hand_Right}), in range -1.0f to 1.0f. No deadzone or filter. */
+    /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@code ThumbstickRaw} field. */
     @NativeType("ovrVector2f")
     public OVRVector2f ThumbstickRaw(int index) { return nThumbstickRaw(address(), index); }
 
@@ -419,63 +414,63 @@ public class OVRInputState extends Struct<OVRInputState> implements NativeResour
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link OVRInputState#TimeInSeconds} field. */
+        /** @return the value of the {@code TimeInSeconds} field. */
         public double TimeInSeconds() { return OVRInputState.nTimeInSeconds(address()); }
-        /** @return the value of the {@link OVRInputState#Buttons} field. */
+        /** @return the value of the {@code Buttons} field. */
         @NativeType("unsigned int")
         public int Buttons() { return OVRInputState.nButtons(address()); }
-        /** @return the value of the {@link OVRInputState#Touches} field. */
+        /** @return the value of the {@code Touches} field. */
         @NativeType("unsigned int")
         public int Touches() { return OVRInputState.nTouches(address()); }
-        /** @return a {@link FloatBuffer} view of the {@link OVRInputState#IndexTrigger} field. */
+        /** @return a {@link FloatBuffer} view of the {@code IndexTrigger} field. */
         @NativeType("float[ovrHand_Count]")
         public FloatBuffer IndexTrigger() { return OVRInputState.nIndexTrigger(address()); }
-        /** @return the value at the specified index of the {@link OVRInputState#IndexTrigger} field. */
+        /** @return the value at the specified index of the {@code IndexTrigger} field. */
         public float IndexTrigger(int index) { return OVRInputState.nIndexTrigger(address(), index); }
-        /** @return a {@link FloatBuffer} view of the {@link OVRInputState#HandTrigger} field. */
+        /** @return a {@link FloatBuffer} view of the {@code HandTrigger} field. */
         @NativeType("float[ovrHand_Count]")
         public FloatBuffer HandTrigger() { return OVRInputState.nHandTrigger(address()); }
-        /** @return the value at the specified index of the {@link OVRInputState#HandTrigger} field. */
+        /** @return the value at the specified index of the {@code HandTrigger} field. */
         public float HandTrigger(int index) { return OVRInputState.nHandTrigger(address(), index); }
-        /** @return a {@link OVRVector2f}.Buffer view of the {@link OVRInputState#Thumbstick} field. */
+        /** @return a {@link OVRVector2f}.Buffer view of the {@code Thumbstick} field. */
         @NativeType("ovrVector2f[ovrHand_Count]")
         public OVRVector2f.Buffer Thumbstick() { return OVRInputState.nThumbstick(address()); }
-        /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@link OVRInputState#Thumbstick} field. */
+        /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@code Thumbstick} field. */
         @NativeType("ovrVector2f")
         public OVRVector2f Thumbstick(int index) { return OVRInputState.nThumbstick(address(), index); }
-        /** @return the value of the {@link OVRInputState#ControllerType} field. */
+        /** @return the value of the {@code ControllerType} field. */
         @NativeType("ovrControllerType")
         public int ControllerType() { return OVRInputState.nControllerType(address()); }
-        /** @return a {@link FloatBuffer} view of the {@link OVRInputState#IndexTriggerNoDeadzone} field. */
+        /** @return a {@link FloatBuffer} view of the {@code IndexTriggerNoDeadzone} field. */
         @NativeType("float[ovrHand_Count]")
         public FloatBuffer IndexTriggerNoDeadzone() { return OVRInputState.nIndexTriggerNoDeadzone(address()); }
-        /** @return the value at the specified index of the {@link OVRInputState#IndexTriggerNoDeadzone} field. */
+        /** @return the value at the specified index of the {@code IndexTriggerNoDeadzone} field. */
         public float IndexTriggerNoDeadzone(int index) { return OVRInputState.nIndexTriggerNoDeadzone(address(), index); }
-        /** @return a {@link FloatBuffer} view of the {@link OVRInputState#HandTriggerNoDeadzone} field. */
+        /** @return a {@link FloatBuffer} view of the {@code HandTriggerNoDeadzone} field. */
         @NativeType("float[ovrHand_Count]")
         public FloatBuffer HandTriggerNoDeadzone() { return OVRInputState.nHandTriggerNoDeadzone(address()); }
-        /** @return the value at the specified index of the {@link OVRInputState#HandTriggerNoDeadzone} field. */
+        /** @return the value at the specified index of the {@code HandTriggerNoDeadzone} field. */
         public float HandTriggerNoDeadzone(int index) { return OVRInputState.nHandTriggerNoDeadzone(address(), index); }
-        /** @return a {@link OVRVector2f}.Buffer view of the {@link OVRInputState#ThumbstickNoDeadzone} field. */
+        /** @return a {@link OVRVector2f}.Buffer view of the {@code ThumbstickNoDeadzone} field. */
         @NativeType("ovrVector2f[ovrHand_Count]")
         public OVRVector2f.Buffer ThumbstickNoDeadzone() { return OVRInputState.nThumbstickNoDeadzone(address()); }
-        /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@link OVRInputState#ThumbstickNoDeadzone} field. */
+        /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@code ThumbstickNoDeadzone} field. */
         @NativeType("ovrVector2f")
         public OVRVector2f ThumbstickNoDeadzone(int index) { return OVRInputState.nThumbstickNoDeadzone(address(), index); }
-        /** @return a {@link FloatBuffer} view of the {@link OVRInputState#IndexTriggerRaw} field. */
+        /** @return a {@link FloatBuffer} view of the {@code IndexTriggerRaw} field. */
         @NativeType("float[ovrHand_Count]")
         public FloatBuffer IndexTriggerRaw() { return OVRInputState.nIndexTriggerRaw(address()); }
-        /** @return the value at the specified index of the {@link OVRInputState#IndexTriggerRaw} field. */
+        /** @return the value at the specified index of the {@code IndexTriggerRaw} field. */
         public float IndexTriggerRaw(int index) { return OVRInputState.nIndexTriggerRaw(address(), index); }
-        /** @return a {@link FloatBuffer} view of the {@link OVRInputState#HandTriggerRaw} field. */
+        /** @return a {@link FloatBuffer} view of the {@code HandTriggerRaw} field. */
         @NativeType("float[ovrHand_Count]")
         public FloatBuffer HandTriggerRaw() { return OVRInputState.nHandTriggerRaw(address()); }
-        /** @return the value at the specified index of the {@link OVRInputState#HandTriggerRaw} field. */
+        /** @return the value at the specified index of the {@code HandTriggerRaw} field. */
         public float HandTriggerRaw(int index) { return OVRInputState.nHandTriggerRaw(address(), index); }
-        /** @return a {@link OVRVector2f}.Buffer view of the {@link OVRInputState#ThumbstickRaw} field. */
+        /** @return a {@link OVRVector2f}.Buffer view of the {@code ThumbstickRaw} field. */
         @NativeType("ovrVector2f[ovrHand_Count]")
         public OVRVector2f.Buffer ThumbstickRaw() { return OVRInputState.nThumbstickRaw(address()); }
-        /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@link OVRInputState#ThumbstickRaw} field. */
+        /** @return a {@link OVRVector2f} view of the struct at the specified index of the {@code ThumbstickRaw} field. */
         @NativeType("ovrVector2f")
         public OVRVector2f ThumbstickRaw(int index) { return OVRInputState.nThumbstickRaw(address(), index); }
 

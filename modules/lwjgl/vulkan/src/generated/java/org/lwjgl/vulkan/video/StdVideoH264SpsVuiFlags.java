@@ -16,9 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoH264SpsVuiFlags {
  *     uint32_t aspect_ratio_info_present_flag : 1;
  *     uint32_t overscan_info_present_flag : 1;
@@ -32,7 +30,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     uint32_t bitstream_restriction_flag : 1;
  *     uint32_t nal_hrd_parameters_present_flag : 1;
  *     uint32_t vcl_hrd_parameters_present_flag : 1;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoH264SpsVuiFlags extends Struct<StdVideoH264SpsVuiFlags> implements NativeResource {
 

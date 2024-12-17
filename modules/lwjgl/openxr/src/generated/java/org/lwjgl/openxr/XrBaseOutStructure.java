@@ -17,23 +17,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Convenience type for iterating (mutable).
- * 
- * <h5>Description</h5>
- * 
- * <p>{@link XrBaseOutStructure} <b>can</b> be used to facilitate iterating through a structure pointer chain that returns data back to the application.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrBaseInStructure}, {@link XrBaseOutStructure}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrBaseOutStructure {
- *     XrStructureType {@link #type};
- *     {@link XrBaseOutStructure XrBaseOutStructure} * {@link #next};
- * }</code></pre>
+ *     XrStructureType type;
+ *     {@link XrBaseOutStructure XrBaseOutStructure} * next;
+ * }}</pre>
  */
 public class XrBaseOutStructure extends Struct<XrBaseOutStructure> implements NativeResource {
 
@@ -83,16 +71,16 @@ public class XrBaseOutStructure extends Struct<XrBaseOutStructure> implements Na
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. This base structure itself has no associated {@code XrStructureType} value. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return a {@link XrBaseOutStructure} view of the struct pointed to by the {@code next} field. */
     @NativeType("XrBaseOutStructure *")
     public XrBaseOutStructure next() { return nnext(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrBaseOutStructure type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the address of the specified {@link XrBaseOutStructure} to the {@link #next} field. */
+    /** Sets the address of the specified {@link XrBaseOutStructure} to the {@code next} field. */
     public XrBaseOutStructure next(@NativeType("XrBaseOutStructure *") XrBaseOutStructure value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -291,16 +279,16 @@ public class XrBaseOutStructure extends Struct<XrBaseOutStructure> implements Na
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrBaseOutStructure#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrBaseOutStructure.ntype(address()); }
-        /** @return a {@link XrBaseOutStructure} view of the struct pointed to by the {@link XrBaseOutStructure#next} field. */
+        /** @return a {@link XrBaseOutStructure} view of the struct pointed to by the {@code next} field. */
         @NativeType("XrBaseOutStructure *")
         public XrBaseOutStructure next() { return XrBaseOutStructure.nnext(address()); }
 
-        /** Sets the specified value to the {@link XrBaseOutStructure#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrBaseOutStructure.Buffer type(@NativeType("XrStructureType") int value) { XrBaseOutStructure.ntype(address(), value); return this; }
-        /** Sets the address of the specified {@link XrBaseOutStructure} to the {@link XrBaseOutStructure#next} field. */
+        /** Sets the address of the specified {@link XrBaseOutStructure} to the {@code next} field. */
         public XrBaseOutStructure.Buffer next(@NativeType("XrBaseOutStructure *") XrBaseOutStructure value) { XrBaseOutStructure.nnext(address(), value); return this; }
 
     }

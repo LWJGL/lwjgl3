@@ -14,11 +14,7 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Table of virtual {@code ktxTexture} methods.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct ktxTexture_vtbl {
  *     PFNKTEXDESTROY Destroy;
  *     PFNKTEXGETIMAGEOFFSET GetImageOffset;
@@ -34,7 +30,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  *     PFNKTEXWRITETONAMEDFILE WriteToNamedFile;
  *     PFNKTEXWRITETOMEMORY WriteToMemory;
  *     PFNKTEXWRITETOSTREAM WriteToStream;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct ktxTexture_vtbl")
 public class ktxTexture_vtbl extends Struct<ktxTexture_vtbl> {

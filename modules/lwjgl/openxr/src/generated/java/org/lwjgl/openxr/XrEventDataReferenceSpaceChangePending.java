@@ -16,37 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Notifies the application that a reference space is changing.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrEventDataReferenceSpaceChangePending} event is sent to the application to notify it that the origin (and perhaps the bounds) of a reference space is changing. This may occur due to the user recentering the space explicitly, or the runtime otherwise switching to a different space definition.</p>
- * 
- * <p>The reference space change <b>must</b> only take effect for {@link XR10#xrLocateSpace LocateSpace} or {@link XR10#xrLocateViews LocateViews} calls whose {@code XrTime} parameter is greater than or equal to the {@code changeTime} provided in that event. Runtimes <b>should</b> provide a {@code changeTime} to applications that allows for a deep render pipeline to present frames that are already in flight using the previous definition of the space. Runtimes <b>should</b> choose a {@code changeTime} that is midway between the {@link XrFrameState}{@code ::predictedDisplayTime} of future frames to avoid threshold issues with applications that calculate future frame times using {@link XrFrameState}{@code ::predictedDisplayPeriod}.</p>
- * 
- * <p>The {@code poseInPreviousSpace} provided here <b>must</b> only describe the change in the natural origin of the reference space and <b>must</b> not incorporate any origin offsets specified by the application during calls to {@link XR10#xrCreateReferenceSpace CreateReferenceSpace}. If the runtime does not know the location of the space’s new origin relative to its previous origin, {@code poseValid} <b>must</b> be false, and the position and orientation of {@code poseInPreviousSpace} are undefined. .Valid Usage (Implicit)</p>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrPosef}, {@link XR10#xrCreateReferenceSpace CreateReferenceSpace}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrEventDataReferenceSpaceChangePending {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrSession {@link #session};
- *     XrReferenceSpaceType {@link #referenceSpaceType};
- *     XrTime {@link #changeTime};
- *     XrBool32 {@link #poseValid};
- *     {@link XrPosef XrPosef} {@link #poseInPreviousSpace};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrSession session;
+ *     XrReferenceSpaceType referenceSpaceType;
+ *     XrTime changeTime;
+ *     XrBool32 poseValid;
+ *     {@link XrPosef XrPosef} poseInPreviousSpace;
+ * }}</pre>
  */
 public class XrEventDataReferenceSpaceChangePending extends Struct<XrEventDataReferenceSpaceChangePending> implements NativeResource {
 
@@ -111,32 +90,32 @@ public class XrEventDataReferenceSpaceChangePending extends Struct<XrEventDataRe
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the {@code XrSession} for which the reference space is changing. */
+    /** @return the value of the {@code session} field. */
     @NativeType("XrSession")
     public long session() { return nsession(address()); }
-    /** the {@code XrReferenceSpaceType} that is changing. */
+    /** @return the value of the {@code referenceSpaceType} field. */
     @NativeType("XrReferenceSpaceType")
     public int referenceSpaceType() { return nreferenceSpaceType(address()); }
-    /** the target {@code XrTime} after which {@link XR10#xrLocateSpace LocateSpace} or {@link XR10#xrLocateViews LocateViews} will return values that respect this change. */
+    /** @return the value of the {@code changeTime} field. */
     @NativeType("XrTime")
     public long changeTime() { return nchangeTime(address()); }
-    /** true if the runtime can determine the {@code poseInPreviousSpace} of the new space in the previous space before the change. */
+    /** @return the value of the {@code poseValid} field. */
     @NativeType("XrBool32")
     public boolean poseValid() { return nposeValid(address()) != 0; }
-    /** an {@link XrPosef} defining the position and orientation of the new reference space’s natural origin within the natural reference frame of its previous space. */
+    /** @return a {@link XrPosef} view of the {@code poseInPreviousSpace} field. */
     public XrPosef poseInPreviousSpace() { return nposeInPreviousSpace(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrEventDataReferenceSpaceChangePending type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING} value to the {@code type} field. */
     public XrEventDataReferenceSpaceChangePending type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrEventDataReferenceSpaceChangePending next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -346,32 +325,32 @@ public class XrEventDataReferenceSpaceChangePending extends Struct<XrEventDataRe
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrEventDataReferenceSpaceChangePending#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrEventDataReferenceSpaceChangePending.ntype(address()); }
-        /** @return the value of the {@link XrEventDataReferenceSpaceChangePending#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrEventDataReferenceSpaceChangePending.nnext(address()); }
-        /** @return the value of the {@link XrEventDataReferenceSpaceChangePending#session} field. */
+        /** @return the value of the {@code session} field. */
         @NativeType("XrSession")
         public long session() { return XrEventDataReferenceSpaceChangePending.nsession(address()); }
-        /** @return the value of the {@link XrEventDataReferenceSpaceChangePending#referenceSpaceType} field. */
+        /** @return the value of the {@code referenceSpaceType} field. */
         @NativeType("XrReferenceSpaceType")
         public int referenceSpaceType() { return XrEventDataReferenceSpaceChangePending.nreferenceSpaceType(address()); }
-        /** @return the value of the {@link XrEventDataReferenceSpaceChangePending#changeTime} field. */
+        /** @return the value of the {@code changeTime} field. */
         @NativeType("XrTime")
         public long changeTime() { return XrEventDataReferenceSpaceChangePending.nchangeTime(address()); }
-        /** @return the value of the {@link XrEventDataReferenceSpaceChangePending#poseValid} field. */
+        /** @return the value of the {@code poseValid} field. */
         @NativeType("XrBool32")
         public boolean poseValid() { return XrEventDataReferenceSpaceChangePending.nposeValid(address()) != 0; }
-        /** @return a {@link XrPosef} view of the {@link XrEventDataReferenceSpaceChangePending#poseInPreviousSpace} field. */
+        /** @return a {@link XrPosef} view of the {@code poseInPreviousSpace} field. */
         public XrPosef poseInPreviousSpace() { return XrEventDataReferenceSpaceChangePending.nposeInPreviousSpace(address()); }
 
-        /** Sets the specified value to the {@link XrEventDataReferenceSpaceChangePending#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrEventDataReferenceSpaceChangePending.Buffer type(@NativeType("XrStructureType") int value) { XrEventDataReferenceSpaceChangePending.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING} value to the {@link XrEventDataReferenceSpaceChangePending#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING} value to the {@code type} field. */
         public XrEventDataReferenceSpaceChangePending.Buffer type$Default() { return type(XR10.XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING); }
-        /** Sets the specified value to the {@link XrEventDataReferenceSpaceChangePending#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrEventDataReferenceSpaceChangePending.Buffer next(@NativeType("void const *") long value) { XrEventDataReferenceSpaceChangePending.nnext(address(), value); return this; }
 
     }

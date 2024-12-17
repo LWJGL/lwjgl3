@@ -16,32 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying display native HDR parameters of a newly created swapchain object.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkSwapchainCreateInfoKHR} does not include this structure, the default value for {@code localDimmingEnable} is {@link VK10#VK_TRUE TRUE}, meaning local dimming is initially enabled for the swapchain.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD}</li>
- * </ul>
- * 
- * <h5>Valid Usage</h5>
- * 
- * <ul>
- * <li>It is only valid to set {@code localDimmingEnable} to {@link VK10#VK_TRUE TRUE} if {@link VkDisplayNativeHdrSurfaceCapabilitiesAMD}{@code ::localDimmingSupport} is supported</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSwapchainDisplayNativeHdrCreateInfoAMD {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkBool32 {@link #localDimmingEnable};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkBool32 localDimmingEnable;
+ * }}</pre>
  */
 public class VkSwapchainDisplayNativeHdrCreateInfoAMD extends Struct<VkSwapchainDisplayNativeHdrCreateInfoAMD> implements NativeResource {
 
@@ -94,23 +74,23 @@ public class VkSwapchainDisplayNativeHdrCreateInfoAMD extends Struct<VkSwapchain
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** specifies whether local dimming is enabled for the swapchain. */
+    /** @return the value of the {@code localDimmingEnable} field. */
     @NativeType("VkBool32")
     public boolean localDimmingEnable() { return nlocalDimmingEnable(address()) != 0; }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSwapchainDisplayNativeHdrCreateInfoAMD sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD} value to the {@link #sType} field. */
+    /** Sets the {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD} value to the {@code sType} field. */
     public VkSwapchainDisplayNativeHdrCreateInfoAMD sType$Default() { return sType(AMDDisplayNativeHdr.VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSwapchainDisplayNativeHdrCreateInfoAMD pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #localDimmingEnable} field. */
+    /** Sets the specified value to the {@code localDimmingEnable} field. */
     public VkSwapchainDisplayNativeHdrCreateInfoAMD localDimmingEnable(@NativeType("VkBool32") boolean value) { nlocalDimmingEnable(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -325,23 +305,23 @@ public class VkSwapchainDisplayNativeHdrCreateInfoAMD extends Struct<VkSwapchain
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSwapchainDisplayNativeHdrCreateInfoAMD.nsType(address()); }
-        /** @return the value of the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSwapchainDisplayNativeHdrCreateInfoAMD.npNext(address()); }
-        /** @return the value of the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#localDimmingEnable} field. */
+        /** @return the value of the {@code localDimmingEnable} field. */
         @NativeType("VkBool32")
         public boolean localDimmingEnable() { return VkSwapchainDisplayNativeHdrCreateInfoAMD.nlocalDimmingEnable(address()) != 0; }
 
-        /** Sets the specified value to the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSwapchainDisplayNativeHdrCreateInfoAMD.Buffer sType(@NativeType("VkStructureType") int value) { VkSwapchainDisplayNativeHdrCreateInfoAMD.nsType(address(), value); return this; }
-        /** Sets the {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD} value to the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#sType} field. */
+        /** Sets the {@link AMDDisplayNativeHdr#VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD} value to the {@code sType} field. */
         public VkSwapchainDisplayNativeHdrCreateInfoAMD.Buffer sType$Default() { return sType(AMDDisplayNativeHdr.VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD); }
-        /** Sets the specified value to the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSwapchainDisplayNativeHdrCreateInfoAMD.Buffer pNext(@NativeType("void const *") long value) { VkSwapchainDisplayNativeHdrCreateInfoAMD.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSwapchainDisplayNativeHdrCreateInfoAMD#localDimmingEnable} field. */
+        /** Sets the specified value to the {@code localDimmingEnable} field. */
         public VkSwapchainDisplayNativeHdrCreateInfoAMD.Buffer localDimmingEnable(@NativeType("VkBool32") boolean value) { VkSwapchainDisplayNativeHdrCreateInfoAMD.nlocalDimmingEnable(address(), value ? 1 : 0); return this; }
 
     }

@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Represents a row-major 4x4 matrix, use this for homogeneous coordinates.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct aiMatrix4x4 {
  *     float a1;
  *     float a2;
@@ -38,7 +34,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     float d2;
  *     float d3;
  *     float d4;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct aiMatrix4x4")
 public class AIMatrix4x4 extends Struct<AIMatrix4x4> implements NativeResource {

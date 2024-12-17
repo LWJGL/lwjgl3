@@ -18,30 +18,15 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.openxr.XR10.*;
 
 /**
- * Structure specifying layer properties.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code type} <b>must</b> be {@link XR10#XR_TYPE_API_LAYER_PROPERTIES TYPE_API_LAYER_PROPERTIES}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XR10#xrEnumerateApiLayerProperties EnumerateApiLayerProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrApiLayerProperties {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     char {@link #layerName}[XR_MAX_API_LAYER_NAME_SIZE];
- *     XrVersion {@link #specVersion};
- *     uint32_t {@link #layerVersion};
- *     char {@link #description}[XR_MAX_API_LAYER_DESCRIPTION_SIZE];
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     char layerName[XR_MAX_API_LAYER_NAME_SIZE];
+ *     XrVersion specVersion;
+ *     uint32_t layerVersion;
+ *     char description[XR_MAX_API_LAYER_DESCRIPTION_SIZE];
+ * }}</pre>
  */
 public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implements NativeResource {
 
@@ -103,36 +88,36 @@ public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implement
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** a string specifying the name of the API layer. Use this name in the {@link XrInstanceCreateInfo}{@code ::enabledApiLayerNames} array to enable this API layer for an instance. */
+    /** @return a {@link ByteBuffer} view of the {@code layerName} field. */
     @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
     public ByteBuffer layerName() { return nlayerName(address()); }
-    /** a string specifying the name of the API layer. Use this name in the {@link XrInstanceCreateInfo}{@code ::enabledApiLayerNames} array to enable this API layer for an instance. */
+    /** @return the null-terminated string stored in the {@code layerName} field. */
     @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
     public String layerNameString() { return nlayerNameString(address()); }
-    /** the API version the API layer was written to, encoded as described in the <a href="https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html#fundamentals-api-version-numbers-and-semantics">API Version Numbers and Semantics</a> section. */
+    /** @return the value of the {@code specVersion} field. */
     @NativeType("XrVersion")
     public long specVersion() { return nspecVersion(address()); }
-    /** the version of this API layer. It is an integer, increasing with backward compatible changes. */
+    /** @return the value of the {@code layerVersion} field. */
     @NativeType("uint32_t")
     public int layerVersion() { return nlayerVersion(address()); }
-    /** a string providing additional details that <b>can</b> be used by the application to identify the API layer. */
+    /** @return a {@link ByteBuffer} view of the {@code description} field. */
     @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
     public ByteBuffer description() { return ndescription(address()); }
-    /** a string providing additional details that <b>can</b> be used by the application to identify the API layer. */
+    /** @return the null-terminated string stored in the {@code description} field. */
     @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
     public String descriptionString() { return ndescriptionString(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrApiLayerProperties type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link XR10#XR_TYPE_API_LAYER_PROPERTIES TYPE_API_LAYER_PROPERTIES} value to the {@link #type} field. */
+    /** Sets the {@link XR10#XR_TYPE_API_LAYER_PROPERTIES TYPE_API_LAYER_PROPERTIES} value to the {@code type} field. */
     public XrApiLayerProperties type$Default() { return type(XR10.XR_TYPE_API_LAYER_PROPERTIES); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrApiLayerProperties next(@NativeType("void *") long value) { nnext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,36 +319,36 @@ public class XrApiLayerProperties extends Struct<XrApiLayerProperties> implement
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrApiLayerProperties#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrApiLayerProperties.ntype(address()); }
-        /** @return the value of the {@link XrApiLayerProperties#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrApiLayerProperties.nnext(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrApiLayerProperties#layerName} field. */
+        /** @return a {@link ByteBuffer} view of the {@code layerName} field. */
         @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
         public ByteBuffer layerName() { return XrApiLayerProperties.nlayerName(address()); }
-        /** @return the null-terminated string stored in the {@link XrApiLayerProperties#layerName} field. */
+        /** @return the null-terminated string stored in the {@code layerName} field. */
         @NativeType("char[XR_MAX_API_LAYER_NAME_SIZE]")
         public String layerNameString() { return XrApiLayerProperties.nlayerNameString(address()); }
-        /** @return the value of the {@link XrApiLayerProperties#specVersion} field. */
+        /** @return the value of the {@code specVersion} field. */
         @NativeType("XrVersion")
         public long specVersion() { return XrApiLayerProperties.nspecVersion(address()); }
-        /** @return the value of the {@link XrApiLayerProperties#layerVersion} field. */
+        /** @return the value of the {@code layerVersion} field. */
         @NativeType("uint32_t")
         public int layerVersion() { return XrApiLayerProperties.nlayerVersion(address()); }
-        /** @return a {@link ByteBuffer} view of the {@link XrApiLayerProperties#description} field. */
+        /** @return a {@link ByteBuffer} view of the {@code description} field. */
         @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
         public ByteBuffer description() { return XrApiLayerProperties.ndescription(address()); }
-        /** @return the null-terminated string stored in the {@link XrApiLayerProperties#description} field. */
+        /** @return the null-terminated string stored in the {@code description} field. */
         @NativeType("char[XR_MAX_API_LAYER_DESCRIPTION_SIZE]")
         public String descriptionString() { return XrApiLayerProperties.ndescriptionString(address()); }
 
-        /** Sets the specified value to the {@link XrApiLayerProperties#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrApiLayerProperties.Buffer type(@NativeType("XrStructureType") int value) { XrApiLayerProperties.ntype(address(), value); return this; }
-        /** Sets the {@link XR10#XR_TYPE_API_LAYER_PROPERTIES TYPE_API_LAYER_PROPERTIES} value to the {@link XrApiLayerProperties#type} field. */
+        /** Sets the {@link XR10#XR_TYPE_API_LAYER_PROPERTIES TYPE_API_LAYER_PROPERTIES} value to the {@code type} field. */
         public XrApiLayerProperties.Buffer type$Default() { return type(XR10.XR_TYPE_API_LAYER_PROPERTIES); }
-        /** Sets the specified value to the {@link XrApiLayerProperties#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrApiLayerProperties.Buffer next(@NativeType("void *") long value) { XrApiLayerProperties.nnext(address(), value); return this; }
 
     }

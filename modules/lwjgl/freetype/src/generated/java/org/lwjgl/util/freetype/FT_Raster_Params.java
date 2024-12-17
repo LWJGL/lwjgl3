@@ -16,11 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * A structure to hold the parameters used by a raster's render function, passed as an argument to {@link FreeType#FT_Outline_Render Outline_Render}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FT_Raster_Params {
  *     {@link FT_Bitmap FT_Bitmap} const * target;
  *     void const * source;
@@ -31,7 +27,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     FT_Raster_BitTest_Func bit_set;
  *     void * user;
  *     {@link FT_BBox FT_BBox} clip_box;
- * }</code></pre>
+ * }}</pre>
  */
 public class FT_Raster_Params extends Struct<FT_Raster_Params> implements NativeResource {
 
@@ -105,11 +101,7 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
     /** @return a {@link FT_Bitmap} view of the struct pointed to by the {@code target} field. */
     @NativeType("FT_Bitmap const *")
     public @Nullable FT_Bitmap target() { return ntarget(address()); }
-    /**
-     * @return a {@link ByteBuffer} view of the data pointed to by the {@code source} field.
-     *
-     * @param capacity the number of elements in the returned buffer
-     */
+    /** @return a {@link ByteBuffer} view of the data pointed to by the {@code source} field. */
     @NativeType("void const *")
     public @Nullable ByteBuffer source(int capacity) { return nsource(address(), capacity); }
     /** @return the value of the {@code flags} field. */
@@ -357,11 +349,7 @@ public class FT_Raster_Params extends Struct<FT_Raster_Params> implements Native
         /** @return a {@link FT_Bitmap} view of the struct pointed to by the {@code target} field. */
         @NativeType("FT_Bitmap const *")
         public @Nullable FT_Bitmap target() { return FT_Raster_Params.ntarget(address()); }
-        /**
-         * @return a {@link ByteBuffer} view of the data pointed to by the {@code source} field.
-         *
-         * @param capacity the number of elements in the returned buffer
-         */
+        /** @return a {@link ByteBuffer} view of the data pointed to by the {@code source} field. */
         @NativeType("void const *")
         public @Nullable ByteBuffer source(int capacity) { return FT_Raster_Params.nsource(address(), capacity); }
         /** @return the value of the {@code flags} field. */

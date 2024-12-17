@@ -17,35 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Configuration for custom mode.
- * 
- * <h5>Description</h5>
- * 
- * <p>The application <b>must</b> chain an {@link XrFoveationCustomModeInfoHTC} structure to {@link XrFoveationApplyInfoHTC} to customize foveation if custom mode is set.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link HTCFoveation XR_HTC_foveation} extension <b>must</b> be enabled prior to using {@link XrFoveationCustomModeInfoHTC}</li>
- * <li>{@code type} <b>must</b> be {@link HTCFoveation#XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code configs} <b>must</b> be a pointer to an array of {@code configCount} valid {@link XrFoveationConfigurationHTC} structures</li>
- * <li>The {@code configCount} parameter <b>must</b> be greater than 0</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrFoveationConfigurationHTC}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFoveationCustomModeInfoHTC {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #configCount};
- *     {@link XrFoveationConfigurationHTC XrFoveationConfigurationHTC} const * {@link #configs};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t configCount;
+ *     {@link XrFoveationConfigurationHTC XrFoveationConfigurationHTC} const * configs;
+ * }}</pre>
  */
 public class XrFoveationCustomModeInfoHTC extends Struct<XrFoveationCustomModeInfoHTC> implements NativeResource {
 
@@ -101,26 +79,26 @@ public class XrFoveationCustomModeInfoHTC extends Struct<XrFoveationCustomModeIn
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** a {@code uint32_t} describing the count of elements in the {@code configs} array, which <b>must</b> be the number of views. */
+    /** @return the value of the {@code configCount} field. */
     @NativeType("uint32_t")
     public int configCount() { return nconfigCount(address()); }
-    /** an array of {@link XrFoveationConfigurationHTC} structure contains the custom foveation settings for the corresponding views. */
+    /** @return a {@link XrFoveationConfigurationHTC.Buffer} view of the struct array pointed to by the {@code configs} field. */
     @NativeType("XrFoveationConfigurationHTC const *")
     public XrFoveationConfigurationHTC.Buffer configs() { return nconfigs(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFoveationCustomModeInfoHTC type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link HTCFoveation#XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC} value to the {@link #type} field. */
+    /** Sets the {@link HTCFoveation#XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC} value to the {@code type} field. */
     public XrFoveationCustomModeInfoHTC type$Default() { return type(HTCFoveation.XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFoveationCustomModeInfoHTC next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link XrFoveationConfigurationHTC.Buffer} to the {@link #configs} field. */
+    /** Sets the address of the specified {@link XrFoveationConfigurationHTC.Buffer} to the {@code configs} field. */
     public XrFoveationCustomModeInfoHTC configs(@NativeType("XrFoveationConfigurationHTC const *") XrFoveationConfigurationHTC.Buffer value) { nconfigs(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -329,26 +307,26 @@ public class XrFoveationCustomModeInfoHTC extends Struct<XrFoveationCustomModeIn
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFoveationCustomModeInfoHTC#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFoveationCustomModeInfoHTC.ntype(address()); }
-        /** @return the value of the {@link XrFoveationCustomModeInfoHTC#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrFoveationCustomModeInfoHTC.nnext(address()); }
-        /** @return the value of the {@link XrFoveationCustomModeInfoHTC#configCount} field. */
+        /** @return the value of the {@code configCount} field. */
         @NativeType("uint32_t")
         public int configCount() { return XrFoveationCustomModeInfoHTC.nconfigCount(address()); }
-        /** @return a {@link XrFoveationConfigurationHTC.Buffer} view of the struct array pointed to by the {@link XrFoveationCustomModeInfoHTC#configs} field. */
+        /** @return a {@link XrFoveationConfigurationHTC.Buffer} view of the struct array pointed to by the {@code configs} field. */
         @NativeType("XrFoveationConfigurationHTC const *")
         public XrFoveationConfigurationHTC.Buffer configs() { return XrFoveationCustomModeInfoHTC.nconfigs(address()); }
 
-        /** Sets the specified value to the {@link XrFoveationCustomModeInfoHTC#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFoveationCustomModeInfoHTC.Buffer type(@NativeType("XrStructureType") int value) { XrFoveationCustomModeInfoHTC.ntype(address(), value); return this; }
-        /** Sets the {@link HTCFoveation#XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC} value to the {@link XrFoveationCustomModeInfoHTC#type} field. */
+        /** Sets the {@link HTCFoveation#XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC} value to the {@code type} field. */
         public XrFoveationCustomModeInfoHTC.Buffer type$Default() { return type(HTCFoveation.XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC); }
-        /** Sets the specified value to the {@link XrFoveationCustomModeInfoHTC#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFoveationCustomModeInfoHTC.Buffer next(@NativeType("void const *") long value) { XrFoveationCustomModeInfoHTC.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link XrFoveationConfigurationHTC.Buffer} to the {@link XrFoveationCustomModeInfoHTC#configs} field. */
+        /** Sets the address of the specified {@link XrFoveationConfigurationHTC.Buffer} to the {@code configs} field. */
         public XrFoveationCustomModeInfoHTC.Buffer configs(@NativeType("XrFoveationConfigurationHTC const *") XrFoveationConfigurationHTC.Buffer value) { XrFoveationCustomModeInfoHTC.nconfigs(address(), value); return this; }
 
     }

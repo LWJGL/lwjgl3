@@ -16,60 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Foveated view configuration views.
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link VARJOFoveatedRendering XR_VARJO_foveated_rendering} extension <b>must</b> be enabled prior to using {@link XrFoveatedViewConfigurationViewVARJO}</li>
- * <li>{@code type} <b>must</b> be {@link VARJOFoveatedRendering#XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * </ul>
- * 
- * <p>For example:</p>
- * 
- * <pre><code>
- * XrInstance instance; // previously populated
- * XrSystemId systemId; // previously populated
- * XrViewConfigurationType viewConfigType; // Select XR_VIEW_CONFIGURATION_TYPE_PRIMARY_QUAD_VARJO
- * 
- * XrSystemFoveatedRenderingPropertiesVARJO foveatedRenderingProperties{XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO};
- * XrSystemProperties systemProperties{XR_TYPE_SYSTEM_PROPERTIES, &amp;foveatedRenderingProperties};
- * CHK_XR(xrGetSystemProperties(instance, systemId, &amp;systemProperties));
- * 
- * uint32_t viewCount;
- * CHK_XR(xrEnumerateViewConfigurationViews(instance, systemId, viewConfigType, 0, &amp;viewCount, nullptr));
- * // Non-foveated rendering views dimensions
- * std::vector&lt;XrViewConfigurationView&gt; configViews(viewCount, {XR_TYPE_VIEW_CONFIGURATION_VIEW});
- * CHK_XR(xrEnumerateViewConfigurationViews(instance, systemId, viewConfigType, viewCount, &amp;viewCount, configViews.data()));
- * 
- * // Foveated rendering views dimensions
- * std::vector&lt;XrViewConfigurationView&gt; foveatedViews;
- * if (foveatedRenderingProperties.supportsFoveatedRendering &amp;&amp; viewConfigType == XR_VIEW_CONFIGURATION_TYPE_PRIMARY_QUAD_VARJO) {
- *   std::vector&lt;XrFoveatedViewConfigurationViewVARJO&gt; requestFoveatedConfig{4, {XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO, nullptr, XR_TRUE}};
- *   foveatedViews = std::vector&lt;XrViewConfigurationView&gt;{4, {XR_TYPE_VIEW_CONFIGURATION_VIEW}};
- *   for (size_t i = 0; i &lt; 4; i++) {
- *     foveatedViews[i].next = &amp;requestFoveatedConfig[i];
- *   }
- *   CHK_XR(xrEnumerateViewConfigurationViews(instance, systemId, viewConfigType, viewCount, &amp;viewCount, foveatedViews.data()));
- * }</code></pre>
- * 
- * <h5>Note</h5>
- * 
- * <p>Applications using this extension are encouraged to create two sets of swapchains or one big enough set of swapchains and two sets of viewports. One set will be used when rendering gaze is not available and other one will be used when foveated rendering and rendering gaze is available. Using foveated textures <b>may</b> not provide optimal visual quality when rendering gaze is not available.</p>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrViewConfigurationView}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrFoveatedViewConfigurationViewVARJO {
- *     XrStructureType {@link #type};
- *     void * {@link #next};
- *     XrBool32 {@link #foveatedRenderingActive};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void * next;
+ *     XrBool32 foveatedRenderingActive;
+ * }}</pre>
  */
 public class XrFoveatedViewConfigurationViewVARJO extends Struct<XrFoveatedViewConfigurationViewVARJO> implements NativeResource {
 
@@ -122,23 +74,23 @@ public class XrFoveatedViewConfigurationViewVARJO extends Struct<XrFoveatedViewC
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void *")
     public long next() { return nnext(address()); }
-    /** an {@code XrBool32}, indicating if the runtime should return foveated view configuration view. */
+    /** @return the value of the {@code foveatedRenderingActive} field. */
     @NativeType("XrBool32")
     public boolean foveatedRenderingActive() { return nfoveatedRenderingActive(address()) != 0; }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrFoveatedViewConfigurationViewVARJO type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO} value to the {@link #type} field. */
+    /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO} value to the {@code type} field. */
     public XrFoveatedViewConfigurationViewVARJO type$Default() { return type(VARJOFoveatedRendering.XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrFoveatedViewConfigurationViewVARJO next(@NativeType("void *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #foveatedRenderingActive} field. */
+    /** Sets the specified value to the {@code foveatedRenderingActive} field. */
     public XrFoveatedViewConfigurationViewVARJO foveatedRenderingActive(@NativeType("XrBool32") boolean value) { nfoveatedRenderingActive(address(), value ? 1 : 0); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,23 +286,23 @@ public class XrFoveatedViewConfigurationViewVARJO extends Struct<XrFoveatedViewC
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrFoveatedViewConfigurationViewVARJO#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrFoveatedViewConfigurationViewVARJO.ntype(address()); }
-        /** @return the value of the {@link XrFoveatedViewConfigurationViewVARJO#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void *")
         public long next() { return XrFoveatedViewConfigurationViewVARJO.nnext(address()); }
-        /** @return the value of the {@link XrFoveatedViewConfigurationViewVARJO#foveatedRenderingActive} field. */
+        /** @return the value of the {@code foveatedRenderingActive} field. */
         @NativeType("XrBool32")
         public boolean foveatedRenderingActive() { return XrFoveatedViewConfigurationViewVARJO.nfoveatedRenderingActive(address()) != 0; }
 
-        /** Sets the specified value to the {@link XrFoveatedViewConfigurationViewVARJO#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrFoveatedViewConfigurationViewVARJO.Buffer type(@NativeType("XrStructureType") int value) { XrFoveatedViewConfigurationViewVARJO.ntype(address(), value); return this; }
-        /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO} value to the {@link XrFoveatedViewConfigurationViewVARJO#type} field. */
+        /** Sets the {@link VARJOFoveatedRendering#XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO} value to the {@code type} field. */
         public XrFoveatedViewConfigurationViewVARJO.Buffer type$Default() { return type(VARJOFoveatedRendering.XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO); }
-        /** Sets the specified value to the {@link XrFoveatedViewConfigurationViewVARJO#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrFoveatedViewConfigurationViewVARJO.Buffer next(@NativeType("void *") long value) { XrFoveatedViewConfigurationViewVARJO.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrFoveatedViewConfigurationViewVARJO#foveatedRenderingActive} field. */
+        /** Sets the specified value to the {@code foveatedRenderingActive} field. */
         public XrFoveatedViewConfigurationViewVARJO.Buffer foveatedRenderingActive(@NativeType("XrBool32") boolean value) { XrFoveatedViewConfigurationViewVARJO.nfoveatedRenderingActive(address(), value ? 1 : 0); return this; }
 
     }

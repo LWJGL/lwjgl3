@@ -17,11 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPushDescriptorSetWithTemplateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPushDescriptorSetWithTemplateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
@@ -29,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     VkPipelineLayout layout;
  *     uint32_t set;
  *     void const * pData;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPushDescriptorSetWithTemplateInfoKHR extends VkPushDescriptorSetWithTemplateInfo {
 

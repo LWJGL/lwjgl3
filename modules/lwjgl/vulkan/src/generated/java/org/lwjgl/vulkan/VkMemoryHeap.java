@@ -14,19 +14,11 @@ import org.lwjgl.system.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Structure specifying a memory heap.
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link VkPhysicalDeviceMemoryProperties}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkMemoryHeap {
- *     VkDeviceSize {@link #size};
- *     VkMemoryHeapFlags {@link #flags};
- * }</code></pre>
+ *     VkDeviceSize size;
+ *     VkMemoryHeapFlags flags;
+ * }}</pre>
  */
 public class VkMemoryHeap extends Struct<VkMemoryHeap> {
 
@@ -76,10 +68,10 @@ public class VkMemoryHeap extends Struct<VkMemoryHeap> {
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the total memory size in bytes in the heap. */
+    /** @return the value of the {@code size} field. */
     @NativeType("VkDeviceSize")
     public long size() { return nsize(address()); }
-    /** a bitmask of {@code VkMemoryHeapFlagBits} specifying attribute flags for the heap. */
+    /** @return the value of the {@code flags} field. */
     @NativeType("VkMemoryHeapFlags")
     public int flags() { return nflags(address()); }
 
@@ -160,10 +152,10 @@ public class VkMemoryHeap extends Struct<VkMemoryHeap> {
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkMemoryHeap#size} field. */
+        /** @return the value of the {@code size} field. */
         @NativeType("VkDeviceSize")
         public long size() { return VkMemoryHeap.nsize(address()); }
-        /** @return the value of the {@link VkMemoryHeap#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("VkMemoryHeapFlags")
         public int flags() { return VkMemoryHeap.nflags(address()); }
 

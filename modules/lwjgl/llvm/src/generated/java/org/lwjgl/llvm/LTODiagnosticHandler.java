@@ -11,18 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * Instances of this class may be passed to the {@link LLVMLTO#lto_codegen_set_diagnostic_handler codegen_set_diagnostic_handler} method.
- * 
- * <h3>Type</h3>
- * 
- * <pre><code>
- * void (*{@link #invoke}) (
- *     lto_codegen_diagnostic_severity_t severity,
- *     char const *diag,
- *     void *ctxt
- * )</code></pre>
- */
+/** Callback function: {@link #invoke (* anonymous)} */
 public abstract class LTODiagnosticHandler extends Callback implements LTODiagnosticHandlerI {
 
     /**

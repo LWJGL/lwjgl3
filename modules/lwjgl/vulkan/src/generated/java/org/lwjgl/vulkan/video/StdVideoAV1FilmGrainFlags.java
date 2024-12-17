@@ -16,16 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct StdVideoAV1FilmGrainFlags {
  *     uint32_t chroma_scaling_from_luma : 1;
  *     uint32_t overlap_flag : 1;
  *     uint32_t clip_to_restricted_range : 1;
  *     uint32_t update_grain : 1;
  *     uint32_t reserved : 28;
- * }</code></pre>
+ * }}</pre>
  */
 public class StdVideoAV1FilmGrainFlags extends Struct<StdVideoAV1FilmGrainFlags> implements NativeResource {
 

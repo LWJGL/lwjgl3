@@ -16,18 +16,14 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkPhysicalDeviceMultiviewFeatures}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceMultiviewFeaturesKHR {
  *     VkStructureType sType;
  *     void * pNext;
  *     VkBool32 multiview;
  *     VkBool32 multiviewGeometryShader;
  *     VkBool32 multiviewTessellationShader;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkPhysicalDeviceMultiviewFeaturesKHR extends VkPhysicalDeviceMultiviewFeatures {
 

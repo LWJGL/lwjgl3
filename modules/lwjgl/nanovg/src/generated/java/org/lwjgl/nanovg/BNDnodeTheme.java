@@ -16,20 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Describes the theme used to draw nodes.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct BNDnodeTheme {
- *     {@link NVGColor NVGcolor} {@link #nodeSelectedColor};
- *     {@link NVGColor NVGcolor} {@link #wiresColor};
- *     {@link NVGColor NVGcolor} {@link #textSelectedColor};
- *     {@link NVGColor NVGcolor} {@link #activeNodeColor};
- *     {@link NVGColor NVGcolor} {@link #wireSelectColor};
- *     {@link NVGColor NVGcolor} {@link #nodeBackdropColor};
- *     int {@link #noodleCurving};
- * }</code></pre>
+ *     {@link NVGColor NVGcolor} nodeSelectedColor;
+ *     {@link NVGColor NVGcolor} wiresColor;
+ *     {@link NVGColor NVGcolor} textSelectedColor;
+ *     {@link NVGColor NVGcolor} activeNodeColor;
+ *     {@link NVGColor NVGcolor} wireSelectColor;
+ *     {@link NVGColor NVGcolor} nodeBackdropColor;
+ *     int noodleCurving;
+ * }}</pre>
  */
 public class BNDnodeTheme extends Struct<BNDnodeTheme> implements NativeResource {
 
@@ -94,52 +90,52 @@ public class BNDnodeTheme extends Struct<BNDnodeTheme> implements NativeResource
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** inner color of selected node (and downarrow) */
+    /** @return a {@link NVGColor} view of the {@code nodeSelectedColor} field. */
     @NativeType("NVGcolor")
     public NVGColor nodeSelectedColor() { return nnodeSelectedColor(address()); }
-    /** outline of wires */
+    /** @return a {@link NVGColor} view of the {@code wiresColor} field. */
     @NativeType("NVGcolor")
     public NVGColor wiresColor() { return nwiresColor(address()); }
-    /** color of text label when active */
+    /** @return a {@link NVGColor} view of the {@code textSelectedColor} field. */
     @NativeType("NVGcolor")
     public NVGColor textSelectedColor() { return ntextSelectedColor(address()); }
-    /** inner color of active node (and dragged wire) */
+    /** @return a {@link NVGColor} view of the {@code activeNodeColor} field. */
     @NativeType("NVGcolor")
     public NVGColor activeNodeColor() { return nactiveNodeColor(address()); }
-    /** color of selected wire */
+    /** @return a {@link NVGColor} view of the {@code wireSelectColor} field. */
     @NativeType("NVGcolor")
     public NVGColor wireSelectColor() { return nwireSelectColor(address()); }
-    /** color of background of node */
+    /** @return a {@link NVGColor} view of the {@code nodeBackdropColor} field. */
     @NativeType("NVGcolor")
     public NVGColor nodeBackdropColor() { return nnodeBackdropColor(address()); }
-    /** how much a noodle curves (0 to 10) */
+    /** @return the value of the {@code noodleCurving} field. */
     public int noodleCurving() { return nnoodleCurving(address()); }
 
-    /** Copies the specified {@link NVGColor} to the {@link #nodeSelectedColor} field. */
+    /** Copies the specified {@link NVGColor} to the {@code nodeSelectedColor} field. */
     public BNDnodeTheme nodeSelectedColor(@NativeType("NVGcolor") NVGColor value) { nnodeSelectedColor(address(), value); return this; }
-    /** Passes the {@link #nodeSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code nodeSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDnodeTheme nodeSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(nodeSelectedColor()); return this; }
-    /** Copies the specified {@link NVGColor} to the {@link #wiresColor} field. */
+    /** Copies the specified {@link NVGColor} to the {@code wiresColor} field. */
     public BNDnodeTheme wiresColor(@NativeType("NVGcolor") NVGColor value) { nwiresColor(address(), value); return this; }
-    /** Passes the {@link #wiresColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code wiresColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDnodeTheme wiresColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(wiresColor()); return this; }
-    /** Copies the specified {@link NVGColor} to the {@link #textSelectedColor} field. */
+    /** Copies the specified {@link NVGColor} to the {@code textSelectedColor} field. */
     public BNDnodeTheme textSelectedColor(@NativeType("NVGcolor") NVGColor value) { ntextSelectedColor(address(), value); return this; }
-    /** Passes the {@link #textSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code textSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDnodeTheme textSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textSelectedColor()); return this; }
-    /** Copies the specified {@link NVGColor} to the {@link #activeNodeColor} field. */
+    /** Copies the specified {@link NVGColor} to the {@code activeNodeColor} field. */
     public BNDnodeTheme activeNodeColor(@NativeType("NVGcolor") NVGColor value) { nactiveNodeColor(address(), value); return this; }
-    /** Passes the {@link #activeNodeColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code activeNodeColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDnodeTheme activeNodeColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(activeNodeColor()); return this; }
-    /** Copies the specified {@link NVGColor} to the {@link #wireSelectColor} field. */
+    /** Copies the specified {@link NVGColor} to the {@code wireSelectColor} field. */
     public BNDnodeTheme wireSelectColor(@NativeType("NVGcolor") NVGColor value) { nwireSelectColor(address(), value); return this; }
-    /** Passes the {@link #wireSelectColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code wireSelectColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDnodeTheme wireSelectColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(wireSelectColor()); return this; }
-    /** Copies the specified {@link NVGColor} to the {@link #nodeBackdropColor} field. */
+    /** Copies the specified {@link NVGColor} to the {@code nodeBackdropColor} field. */
     public BNDnodeTheme nodeBackdropColor(@NativeType("NVGcolor") NVGColor value) { nnodeBackdropColor(address(), value); return this; }
-    /** Passes the {@link #nodeBackdropColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+    /** Passes the {@code nodeBackdropColor} field to the specified {@link java.util.function.Consumer Consumer}. */
     public BNDnodeTheme nodeBackdropColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(nodeBackdropColor()); return this; }
-    /** Sets the specified value to the {@link #noodleCurving} field. */
+    /** Sets the specified value to the {@code noodleCurving} field. */
     public BNDnodeTheme noodleCurving(int value) { nnoodleCurving(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -378,52 +374,52 @@ public class BNDnodeTheme extends Struct<BNDnodeTheme> implements NativeResource
             return ELEMENT_FACTORY;
         }
 
-        /** @return a {@link NVGColor} view of the {@link BNDnodeTheme#nodeSelectedColor} field. */
+        /** @return a {@link NVGColor} view of the {@code nodeSelectedColor} field. */
         @NativeType("NVGcolor")
         public NVGColor nodeSelectedColor() { return BNDnodeTheme.nnodeSelectedColor(address()); }
-        /** @return a {@link NVGColor} view of the {@link BNDnodeTheme#wiresColor} field. */
+        /** @return a {@link NVGColor} view of the {@code wiresColor} field. */
         @NativeType("NVGcolor")
         public NVGColor wiresColor() { return BNDnodeTheme.nwiresColor(address()); }
-        /** @return a {@link NVGColor} view of the {@link BNDnodeTheme#textSelectedColor} field. */
+        /** @return a {@link NVGColor} view of the {@code textSelectedColor} field. */
         @NativeType("NVGcolor")
         public NVGColor textSelectedColor() { return BNDnodeTheme.ntextSelectedColor(address()); }
-        /** @return a {@link NVGColor} view of the {@link BNDnodeTheme#activeNodeColor} field. */
+        /** @return a {@link NVGColor} view of the {@code activeNodeColor} field. */
         @NativeType("NVGcolor")
         public NVGColor activeNodeColor() { return BNDnodeTheme.nactiveNodeColor(address()); }
-        /** @return a {@link NVGColor} view of the {@link BNDnodeTheme#wireSelectColor} field. */
+        /** @return a {@link NVGColor} view of the {@code wireSelectColor} field. */
         @NativeType("NVGcolor")
         public NVGColor wireSelectColor() { return BNDnodeTheme.nwireSelectColor(address()); }
-        /** @return a {@link NVGColor} view of the {@link BNDnodeTheme#nodeBackdropColor} field. */
+        /** @return a {@link NVGColor} view of the {@code nodeBackdropColor} field. */
         @NativeType("NVGcolor")
         public NVGColor nodeBackdropColor() { return BNDnodeTheme.nnodeBackdropColor(address()); }
-        /** @return the value of the {@link BNDnodeTheme#noodleCurving} field. */
+        /** @return the value of the {@code noodleCurving} field. */
         public int noodleCurving() { return BNDnodeTheme.nnoodleCurving(address()); }
 
-        /** Copies the specified {@link NVGColor} to the {@link BNDnodeTheme#nodeSelectedColor} field. */
+        /** Copies the specified {@link NVGColor} to the {@code nodeSelectedColor} field. */
         public BNDnodeTheme.Buffer nodeSelectedColor(@NativeType("NVGcolor") NVGColor value) { BNDnodeTheme.nnodeSelectedColor(address(), value); return this; }
-        /** Passes the {@link BNDnodeTheme#nodeSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code nodeSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDnodeTheme.Buffer nodeSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(nodeSelectedColor()); return this; }
-        /** Copies the specified {@link NVGColor} to the {@link BNDnodeTheme#wiresColor} field. */
+        /** Copies the specified {@link NVGColor} to the {@code wiresColor} field. */
         public BNDnodeTheme.Buffer wiresColor(@NativeType("NVGcolor") NVGColor value) { BNDnodeTheme.nwiresColor(address(), value); return this; }
-        /** Passes the {@link BNDnodeTheme#wiresColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code wiresColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDnodeTheme.Buffer wiresColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(wiresColor()); return this; }
-        /** Copies the specified {@link NVGColor} to the {@link BNDnodeTheme#textSelectedColor} field. */
+        /** Copies the specified {@link NVGColor} to the {@code textSelectedColor} field. */
         public BNDnodeTheme.Buffer textSelectedColor(@NativeType("NVGcolor") NVGColor value) { BNDnodeTheme.ntextSelectedColor(address(), value); return this; }
-        /** Passes the {@link BNDnodeTheme#textSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code textSelectedColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDnodeTheme.Buffer textSelectedColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(textSelectedColor()); return this; }
-        /** Copies the specified {@link NVGColor} to the {@link BNDnodeTheme#activeNodeColor} field. */
+        /** Copies the specified {@link NVGColor} to the {@code activeNodeColor} field. */
         public BNDnodeTheme.Buffer activeNodeColor(@NativeType("NVGcolor") NVGColor value) { BNDnodeTheme.nactiveNodeColor(address(), value); return this; }
-        /** Passes the {@link BNDnodeTheme#activeNodeColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code activeNodeColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDnodeTheme.Buffer activeNodeColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(activeNodeColor()); return this; }
-        /** Copies the specified {@link NVGColor} to the {@link BNDnodeTheme#wireSelectColor} field. */
+        /** Copies the specified {@link NVGColor} to the {@code wireSelectColor} field. */
         public BNDnodeTheme.Buffer wireSelectColor(@NativeType("NVGcolor") NVGColor value) { BNDnodeTheme.nwireSelectColor(address(), value); return this; }
-        /** Passes the {@link BNDnodeTheme#wireSelectColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code wireSelectColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDnodeTheme.Buffer wireSelectColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(wireSelectColor()); return this; }
-        /** Copies the specified {@link NVGColor} to the {@link BNDnodeTheme#nodeBackdropColor} field. */
+        /** Copies the specified {@link NVGColor} to the {@code nodeBackdropColor} field. */
         public BNDnodeTheme.Buffer nodeBackdropColor(@NativeType("NVGcolor") NVGColor value) { BNDnodeTheme.nnodeBackdropColor(address(), value); return this; }
-        /** Passes the {@link BNDnodeTheme#nodeBackdropColor} field to the specified {@link java.util.function.Consumer Consumer}. */
+        /** Passes the {@code nodeBackdropColor} field to the specified {@link java.util.function.Consumer Consumer}. */
         public BNDnodeTheme.Buffer nodeBackdropColor(java.util.function.Consumer<NVGColor> consumer) { consumer.accept(nodeBackdropColor()); return this; }
-        /** Sets the specified value to the {@link BNDnodeTheme#noodleCurving} field. */
+        /** Sets the specified value to the {@code noodleCurving} field. */
         public BNDnodeTheme.Buffer noodleCurving(int value) { BNDnodeTheme.nnoodleCurving(address(), value); return this; }
 
     }

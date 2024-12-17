@@ -16,62 +16,44 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure describing descriptor buffer properties supported by an implementation.
- * 
- * <h5>Description</h5>
- * 
- * <p>A descriptor binding with type {@link VALVEMutableDescriptorType#VK_DESCRIPTOR_TYPE_MUTABLE_VALVE DESCRIPTOR_TYPE_MUTABLE_VALVE} has a descriptor size which is implied by the descriptor types included in the {@link VkMutableDescriptorTypeCreateInfoVALVE}{@code ::pDescriptorTypes} list. The descriptor size is equal to the maximum size of any descriptor type included in the {@code pDescriptorTypes} list.</p>
- * 
- * <p>As there is no way to request robust and non-robust descriptors separately, or specify robust/non-robust descriptors in the set layout, if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is enabled then robust descriptors are always used.</p>
- * 
- * <p>If the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT} structure is included in the {@code pNext} chain of the {@link VkPhysicalDeviceProperties2} structure passed to {@link VK11#vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2}, it is filled in with each corresponding implementation-dependent property.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT}</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkPhysicalDeviceDescriptorBufferPropertiesEXT {
- *     VkStructureType {@link #sType};
- *     void * {@link #pNext};
- *     VkBool32 {@link #combinedImageSamplerDescriptorSingleArray};
- *     VkBool32 {@link #bufferlessPushDescriptors};
- *     VkBool32 {@link #allowSamplerImageViewPostSubmitCreation};
- *     VkDeviceSize {@link #descriptorBufferOffsetAlignment};
- *     uint32_t {@link #maxDescriptorBufferBindings};
- *     uint32_t {@link #maxResourceDescriptorBufferBindings};
- *     uint32_t {@link #maxSamplerDescriptorBufferBindings};
- *     uint32_t {@link #maxEmbeddedImmutableSamplerBindings};
- *     uint32_t {@link #maxEmbeddedImmutableSamplers};
- *     size_t {@link #bufferCaptureReplayDescriptorDataSize};
- *     size_t {@link #imageCaptureReplayDescriptorDataSize};
- *     size_t {@link #imageViewCaptureReplayDescriptorDataSize};
- *     size_t {@link #samplerCaptureReplayDescriptorDataSize};
- *     size_t {@link #accelerationStructureCaptureReplayDescriptorDataSize};
- *     size_t {@link #samplerDescriptorSize};
- *     size_t {@link #combinedImageSamplerDescriptorSize};
- *     size_t {@link #sampledImageDescriptorSize};
- *     size_t {@link #storageImageDescriptorSize};
- *     size_t {@link #uniformTexelBufferDescriptorSize};
- *     size_t {@link #robustUniformTexelBufferDescriptorSize};
- *     size_t {@link #storageTexelBufferDescriptorSize};
- *     size_t {@link #robustStorageTexelBufferDescriptorSize};
- *     size_t {@link #uniformBufferDescriptorSize};
- *     size_t {@link #robustUniformBufferDescriptorSize};
- *     size_t {@link #storageBufferDescriptorSize};
- *     size_t {@link #robustStorageBufferDescriptorSize};
- *     size_t {@link #inputAttachmentDescriptorSize};
- *     size_t {@link #accelerationStructureDescriptorSize};
- *     VkDeviceSize {@link #maxSamplerDescriptorBufferRange};
- *     VkDeviceSize {@link #maxResourceDescriptorBufferRange};
- *     VkDeviceSize {@link #samplerDescriptorBufferAddressSpaceSize};
- *     VkDeviceSize {@link #resourceDescriptorBufferAddressSpaceSize};
- *     VkDeviceSize {@link #descriptorBufferAddressSpaceSize};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void * pNext;
+ *     VkBool32 combinedImageSamplerDescriptorSingleArray;
+ *     VkBool32 bufferlessPushDescriptors;
+ *     VkBool32 allowSamplerImageViewPostSubmitCreation;
+ *     VkDeviceSize descriptorBufferOffsetAlignment;
+ *     uint32_t maxDescriptorBufferBindings;
+ *     uint32_t maxResourceDescriptorBufferBindings;
+ *     uint32_t maxSamplerDescriptorBufferBindings;
+ *     uint32_t maxEmbeddedImmutableSamplerBindings;
+ *     uint32_t maxEmbeddedImmutableSamplers;
+ *     size_t bufferCaptureReplayDescriptorDataSize;
+ *     size_t imageCaptureReplayDescriptorDataSize;
+ *     size_t imageViewCaptureReplayDescriptorDataSize;
+ *     size_t samplerCaptureReplayDescriptorDataSize;
+ *     size_t accelerationStructureCaptureReplayDescriptorDataSize;
+ *     size_t samplerDescriptorSize;
+ *     size_t combinedImageSamplerDescriptorSize;
+ *     size_t sampledImageDescriptorSize;
+ *     size_t storageImageDescriptorSize;
+ *     size_t uniformTexelBufferDescriptorSize;
+ *     size_t robustUniformTexelBufferDescriptorSize;
+ *     size_t storageTexelBufferDescriptorSize;
+ *     size_t robustStorageTexelBufferDescriptorSize;
+ *     size_t uniformBufferDescriptorSize;
+ *     size_t robustUniformBufferDescriptorSize;
+ *     size_t storageBufferDescriptorSize;
+ *     size_t robustStorageBufferDescriptorSize;
+ *     size_t inputAttachmentDescriptorSize;
+ *     size_t accelerationStructureDescriptorSize;
+ *     VkDeviceSize maxSamplerDescriptorBufferRange;
+ *     VkDeviceSize maxResourceDescriptorBufferRange;
+ *     VkDeviceSize samplerDescriptorBufferAddressSpaceSize;
+ *     VkDeviceSize resourceDescriptorBufferAddressSpaceSize;
+ *     VkDeviceSize descriptorBufferAddressSpaceSize;
+ * }}</pre>
  */
 public class VkPhysicalDeviceDescriptorBufferPropertiesEXT extends Struct<VkPhysicalDeviceDescriptorBufferPropertiesEXT> implements NativeResource {
 
@@ -220,117 +202,117 @@ public class VkPhysicalDeviceDescriptorBufferPropertiesEXT extends Struct<VkPhys
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void *")
     public long pNext() { return npNext(address()); }
-    /** indicates that the implementation does not require an array of {@code VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} descriptors to be written into a descriptor buffer as an array of image descriptors, immediately followed by an array of sampler descriptors. */
+    /** @return the value of the {@code combinedImageSamplerDescriptorSingleArray} field. */
     @NativeType("VkBool32")
     public boolean combinedImageSamplerDescriptorSingleArray() { return ncombinedImageSamplerDescriptorSingleArray(address()) != 0; }
-    /** indicates that the implementation does not require a buffer created with {@code VK_BUFFER_USAGE_PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT} to be bound when using push descriptors. */
+    /** @return the value of the {@code bufferlessPushDescriptors} field. */
     @NativeType("VkBool32")
     public boolean bufferlessPushDescriptors() { return nbufferlessPushDescriptors(address()) != 0; }
-    /** indicates that the implementation does not restrict when the {@code VkSampler} or {@code VkImageView} objects used to retrieve descriptor data <b>can</b> be created in relation to command buffer submission. If this value is {@link VK10#VK_FALSE FALSE}, then the application <b>must</b> create any {@code VkSampler} or {@code VkImageView} objects whose descriptor data is accessed during the execution of a command buffer, before the {@link VK10#vkQueueSubmit QueueSubmit} , or {@link VK13#vkQueueSubmit2 QueueSubmit2}, call that submits that command buffer. */
+    /** @return the value of the {@code allowSamplerImageViewPostSubmitCreation} field. */
     @NativeType("VkBool32")
     public boolean allowSamplerImageViewPostSubmitCreation() { return nallowSamplerImageViewPostSubmitCreation(address()) != 0; }
-    /** indicates the <b>required</b> alignment in bytes when setting offsets into the descriptor buffer. */
+    /** @return the value of the {@code descriptorBufferOffsetAlignment} field. */
     @NativeType("VkDeviceSize")
     public long descriptorBufferOffsetAlignment() { return ndescriptorBufferOffsetAlignment(address()); }
-    /** indicates the maximum number of descriptor buffer bindings. */
+    /** @return the value of the {@code maxDescriptorBufferBindings} field. */
     @NativeType("uint32_t")
     public int maxDescriptorBufferBindings() { return nmaxDescriptorBufferBindings(address()); }
-    /** indicates the maximum number of descriptor buffer bindings with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT} that <b>can</b> be used. */
+    /** @return the value of the {@code maxResourceDescriptorBufferBindings} field. */
     @NativeType("uint32_t")
     public int maxResourceDescriptorBufferBindings() { return nmaxResourceDescriptorBufferBindings(address()); }
-    /** indicates the maximum number of descriptor buffer bindings with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT} that <b>can</b> be used. */
+    /** @return the value of the {@code maxSamplerDescriptorBufferBindings} field. */
     @NativeType("uint32_t")
     public int maxSamplerDescriptorBufferBindings() { return nmaxSamplerDescriptorBufferBindings(address()); }
-    /** indicates the maximum number of embedded immutable sampler sets that <b>can</b> be bound. */
+    /** @return the value of the {@code maxEmbeddedImmutableSamplerBindings} field. */
     @NativeType("uint32_t")
     public int maxEmbeddedImmutableSamplerBindings() { return nmaxEmbeddedImmutableSamplerBindings(address()); }
-    /** indicates the maximum number of unique immutable samplers in descriptor set layouts created with {@link EXTDescriptorBuffer#VK_DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT DESCRIPTOR_SET_LAYOUT_CREATE_EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT}, and pipeline layouts created from them, which <b>can</b> simultaneously exist on a device. */
+    /** @return the value of the {@code maxEmbeddedImmutableSamplers} field. */
     @NativeType("uint32_t")
     public int maxEmbeddedImmutableSamplers() { return nmaxEmbeddedImmutableSamplers(address()); }
-    /** indicates the maximum size in bytes of the opaque data used for capture and replay with buffers. */
+    /** @return the value of the {@code bufferCaptureReplayDescriptorDataSize} field. */
     @NativeType("size_t")
     public long bufferCaptureReplayDescriptorDataSize() { return nbufferCaptureReplayDescriptorDataSize(address()); }
-    /** indicates the maximum size in bytes of the opaque data used for capture and replay with images. */
+    /** @return the value of the {@code imageCaptureReplayDescriptorDataSize} field. */
     @NativeType("size_t")
     public long imageCaptureReplayDescriptorDataSize() { return nimageCaptureReplayDescriptorDataSize(address()); }
-    /** indicates the maximum size in bytes of the opaque data used for capture and replay with image views. */
+    /** @return the value of the {@code imageViewCaptureReplayDescriptorDataSize} field. */
     @NativeType("size_t")
     public long imageViewCaptureReplayDescriptorDataSize() { return nimageViewCaptureReplayDescriptorDataSize(address()); }
-    /** indicates the maximum size in bytes of the opaque data used for capture and replay with samplers. */
+    /** @return the value of the {@code samplerCaptureReplayDescriptorDataSize} field. */
     @NativeType("size_t")
     public long samplerCaptureReplayDescriptorDataSize() { return nsamplerCaptureReplayDescriptorDataSize(address()); }
-    /** indicates the maximum size in bytes of the opaque data used for capture and replay with acceleration structures. */
+    /** @return the value of the {@code accelerationStructureCaptureReplayDescriptorDataSize} field. */
     @NativeType("size_t")
     public long accelerationStructureCaptureReplayDescriptorDataSize() { return naccelerationStructureCaptureReplayDescriptorDataSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLER DESCRIPTOR_TYPE_SAMPLER} descriptor. */
+    /** @return the value of the {@code samplerDescriptorSize} field. */
     @NativeType("size_t")
     public long samplerDescriptorSize() { return nsamplerDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER} descriptor. */
+    /** @return the value of the {@code combinedImageSamplerDescriptorSize} field. */
     @NativeType("size_t")
     public long combinedImageSamplerDescriptorSize() { return ncombinedImageSamplerDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE DESCRIPTOR_TYPE_SAMPLED_IMAGE} descriptor. */
+    /** @return the value of the {@code sampledImageDescriptorSize} field. */
     @NativeType("size_t")
     public long sampledImageDescriptorSize() { return nsampledImageDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_IMAGE DESCRIPTOR_TYPE_STORAGE_IMAGE} descriptor. */
+    /** @return the value of the {@code storageImageDescriptorSize} field. */
     @NativeType("size_t")
     public long storageImageDescriptorSize() { return nstorageImageDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} descriptor if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled. */
+    /** @return the value of the {@code uniformTexelBufferDescriptorSize} field. */
     @NativeType("size_t")
     public long uniformTexelBufferDescriptorSize() { return nuniformTexelBufferDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER} descriptor if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is enabled. */
+    /** @return the value of the {@code robustUniformTexelBufferDescriptorSize} field. */
     @NativeType("size_t")
     public long robustUniformTexelBufferDescriptorSize() { return nrobustUniformTexelBufferDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} descriptor if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is not enabled. */
+    /** @return the value of the {@code storageTexelBufferDescriptorSize} field. */
     @NativeType("size_t")
     public long storageTexelBufferDescriptorSize() { return nstorageTexelBufferDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER} descriptor if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is enabled. */
+    /** @return the value of the {@code robustStorageTexelBufferDescriptorSize} field. */
     @NativeType("size_t")
     public long robustStorageTexelBufferDescriptorSize() { return nrobustStorageTexelBufferDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} descriptor. */
+    /** @return the value of the {@code uniformBufferDescriptorSize} field. */
     @NativeType("size_t")
     public long uniformBufferDescriptorSize() { return nuniformBufferDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER DESCRIPTOR_TYPE_UNIFORM_BUFFER} descriptor if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is enabled. */
+    /** @return the value of the {@code robustUniformBufferDescriptorSize} field. */
     @NativeType("size_t")
     public long robustUniformBufferDescriptorSize() { return nrobustUniformBufferDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} descriptor. */
+    /** @return the value of the {@code storageBufferDescriptorSize} field. */
     @NativeType("size_t")
     public long storageBufferDescriptorSize() { return nstorageBufferDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_STORAGE_BUFFER DESCRIPTOR_TYPE_STORAGE_BUFFER} descriptor if the <a href="https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html#features-robustBufferAccess">{@code robustBufferAccess}</a> feature is enabled. */
+    /** @return the value of the {@code robustStorageBufferDescriptorSize} field. */
     @NativeType("size_t")
     public long robustStorageBufferDescriptorSize() { return nrobustStorageBufferDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link VK10#VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT DESCRIPTOR_TYPE_INPUT_ATTACHMENT} descriptor. */
+    /** @return the value of the {@code inputAttachmentDescriptorSize} field. */
     @NativeType("size_t")
     public long inputAttachmentDescriptorSize() { return ninputAttachmentDescriptorSize(address()); }
-    /** indicates the size in bytes of a {@link KHRAccelerationStructure#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR} or {@link NVRayTracing#VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_NV} descriptor. */
+    /** @return the value of the {@code accelerationStructureDescriptorSize} field. */
     @NativeType("size_t")
     public long accelerationStructureDescriptorSize() { return naccelerationStructureDescriptorSize(address()); }
-    /** indicates the maximum range in bytes from the address of a sampler descriptor buffer binding that is accessible to a shader. */
+    /** @return the value of the {@code maxSamplerDescriptorBufferRange} field. */
     @NativeType("VkDeviceSize")
     public long maxSamplerDescriptorBufferRange() { return nmaxSamplerDescriptorBufferRange(address()); }
-    /** indicates the maximum range in bytes from the address of a resource descriptor buffer binding that is accessible to a shader. */
+    /** @return the value of the {@code maxResourceDescriptorBufferRange} field. */
     @NativeType("VkDeviceSize")
     public long maxResourceDescriptorBufferRange() { return nmaxResourceDescriptorBufferRange(address()); }
-    /** indicates the total size in bytes of the address space available for descriptor buffers created with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT}. */
+    /** @return the value of the {@code samplerDescriptorBufferAddressSpaceSize} field. */
     @NativeType("VkDeviceSize")
     public long samplerDescriptorBufferAddressSpaceSize() { return nsamplerDescriptorBufferAddressSpaceSize(address()); }
-    /** indicates the total size in bytes of the address space available for descriptor buffers created with {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT}. */
+    /** @return the value of the {@code resourceDescriptorBufferAddressSpaceSize} field. */
     @NativeType("VkDeviceSize")
     public long resourceDescriptorBufferAddressSpaceSize() { return nresourceDescriptorBufferAddressSpaceSize(address()); }
-    /** indicates the total size in bytes of the address space available for descriptor buffers created with both {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT} and {@link EXTDescriptorBuffer#VK_BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT BUFFER_USAGE_RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT}. */
+    /** @return the value of the {@code descriptorBufferAddressSpaceSize} field. */
     @NativeType("VkDeviceSize")
     public long descriptorBufferAddressSpaceSize() { return ndescriptorBufferAddressSpaceSize(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorBufferPropertiesEXT sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT} value to the {@link #sType} field. */
+    /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT} value to the {@code sType} field. */
     public VkPhysicalDeviceDescriptorBufferPropertiesEXT sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkPhysicalDeviceDescriptorBufferPropertiesEXT pNext(@NativeType("void *") long value) { npNext(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -586,117 +568,117 @@ public class VkPhysicalDeviceDescriptorBufferPropertiesEXT extends Struct<VkPhys
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nsType(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void *")
         public long pNext() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.npNext(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#combinedImageSamplerDescriptorSingleArray} field. */
+        /** @return the value of the {@code combinedImageSamplerDescriptorSingleArray} field. */
         @NativeType("VkBool32")
         public boolean combinedImageSamplerDescriptorSingleArray() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.ncombinedImageSamplerDescriptorSingleArray(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#bufferlessPushDescriptors} field. */
+        /** @return the value of the {@code bufferlessPushDescriptors} field. */
         @NativeType("VkBool32")
         public boolean bufferlessPushDescriptors() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nbufferlessPushDescriptors(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#allowSamplerImageViewPostSubmitCreation} field. */
+        /** @return the value of the {@code allowSamplerImageViewPostSubmitCreation} field. */
         @NativeType("VkBool32")
         public boolean allowSamplerImageViewPostSubmitCreation() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nallowSamplerImageViewPostSubmitCreation(address()) != 0; }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#descriptorBufferOffsetAlignment} field. */
+        /** @return the value of the {@code descriptorBufferOffsetAlignment} field. */
         @NativeType("VkDeviceSize")
         public long descriptorBufferOffsetAlignment() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.ndescriptorBufferOffsetAlignment(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#maxDescriptorBufferBindings} field. */
+        /** @return the value of the {@code maxDescriptorBufferBindings} field. */
         @NativeType("uint32_t")
         public int maxDescriptorBufferBindings() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nmaxDescriptorBufferBindings(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#maxResourceDescriptorBufferBindings} field. */
+        /** @return the value of the {@code maxResourceDescriptorBufferBindings} field. */
         @NativeType("uint32_t")
         public int maxResourceDescriptorBufferBindings() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nmaxResourceDescriptorBufferBindings(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#maxSamplerDescriptorBufferBindings} field. */
+        /** @return the value of the {@code maxSamplerDescriptorBufferBindings} field. */
         @NativeType("uint32_t")
         public int maxSamplerDescriptorBufferBindings() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nmaxSamplerDescriptorBufferBindings(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#maxEmbeddedImmutableSamplerBindings} field. */
+        /** @return the value of the {@code maxEmbeddedImmutableSamplerBindings} field. */
         @NativeType("uint32_t")
         public int maxEmbeddedImmutableSamplerBindings() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nmaxEmbeddedImmutableSamplerBindings(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#maxEmbeddedImmutableSamplers} field. */
+        /** @return the value of the {@code maxEmbeddedImmutableSamplers} field. */
         @NativeType("uint32_t")
         public int maxEmbeddedImmutableSamplers() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nmaxEmbeddedImmutableSamplers(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#bufferCaptureReplayDescriptorDataSize} field. */
+        /** @return the value of the {@code bufferCaptureReplayDescriptorDataSize} field. */
         @NativeType("size_t")
         public long bufferCaptureReplayDescriptorDataSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nbufferCaptureReplayDescriptorDataSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#imageCaptureReplayDescriptorDataSize} field. */
+        /** @return the value of the {@code imageCaptureReplayDescriptorDataSize} field. */
         @NativeType("size_t")
         public long imageCaptureReplayDescriptorDataSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nimageCaptureReplayDescriptorDataSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#imageViewCaptureReplayDescriptorDataSize} field. */
+        /** @return the value of the {@code imageViewCaptureReplayDescriptorDataSize} field. */
         @NativeType("size_t")
         public long imageViewCaptureReplayDescriptorDataSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nimageViewCaptureReplayDescriptorDataSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#samplerCaptureReplayDescriptorDataSize} field. */
+        /** @return the value of the {@code samplerCaptureReplayDescriptorDataSize} field. */
         @NativeType("size_t")
         public long samplerCaptureReplayDescriptorDataSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nsamplerCaptureReplayDescriptorDataSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#accelerationStructureCaptureReplayDescriptorDataSize} field. */
+        /** @return the value of the {@code accelerationStructureCaptureReplayDescriptorDataSize} field. */
         @NativeType("size_t")
         public long accelerationStructureCaptureReplayDescriptorDataSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.naccelerationStructureCaptureReplayDescriptorDataSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#samplerDescriptorSize} field. */
+        /** @return the value of the {@code samplerDescriptorSize} field. */
         @NativeType("size_t")
         public long samplerDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nsamplerDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#combinedImageSamplerDescriptorSize} field. */
+        /** @return the value of the {@code combinedImageSamplerDescriptorSize} field. */
         @NativeType("size_t")
         public long combinedImageSamplerDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.ncombinedImageSamplerDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#sampledImageDescriptorSize} field. */
+        /** @return the value of the {@code sampledImageDescriptorSize} field. */
         @NativeType("size_t")
         public long sampledImageDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nsampledImageDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#storageImageDescriptorSize} field. */
+        /** @return the value of the {@code storageImageDescriptorSize} field. */
         @NativeType("size_t")
         public long storageImageDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nstorageImageDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#uniformTexelBufferDescriptorSize} field. */
+        /** @return the value of the {@code uniformTexelBufferDescriptorSize} field. */
         @NativeType("size_t")
         public long uniformTexelBufferDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nuniformTexelBufferDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#robustUniformTexelBufferDescriptorSize} field. */
+        /** @return the value of the {@code robustUniformTexelBufferDescriptorSize} field. */
         @NativeType("size_t")
         public long robustUniformTexelBufferDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nrobustUniformTexelBufferDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#storageTexelBufferDescriptorSize} field. */
+        /** @return the value of the {@code storageTexelBufferDescriptorSize} field. */
         @NativeType("size_t")
         public long storageTexelBufferDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nstorageTexelBufferDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#robustStorageTexelBufferDescriptorSize} field. */
+        /** @return the value of the {@code robustStorageTexelBufferDescriptorSize} field. */
         @NativeType("size_t")
         public long robustStorageTexelBufferDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nrobustStorageTexelBufferDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#uniformBufferDescriptorSize} field. */
+        /** @return the value of the {@code uniformBufferDescriptorSize} field. */
         @NativeType("size_t")
         public long uniformBufferDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nuniformBufferDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#robustUniformBufferDescriptorSize} field. */
+        /** @return the value of the {@code robustUniformBufferDescriptorSize} field. */
         @NativeType("size_t")
         public long robustUniformBufferDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nrobustUniformBufferDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#storageBufferDescriptorSize} field. */
+        /** @return the value of the {@code storageBufferDescriptorSize} field. */
         @NativeType("size_t")
         public long storageBufferDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nstorageBufferDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#robustStorageBufferDescriptorSize} field. */
+        /** @return the value of the {@code robustStorageBufferDescriptorSize} field. */
         @NativeType("size_t")
         public long robustStorageBufferDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nrobustStorageBufferDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#inputAttachmentDescriptorSize} field. */
+        /** @return the value of the {@code inputAttachmentDescriptorSize} field. */
         @NativeType("size_t")
         public long inputAttachmentDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.ninputAttachmentDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#accelerationStructureDescriptorSize} field. */
+        /** @return the value of the {@code accelerationStructureDescriptorSize} field. */
         @NativeType("size_t")
         public long accelerationStructureDescriptorSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.naccelerationStructureDescriptorSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#maxSamplerDescriptorBufferRange} field. */
+        /** @return the value of the {@code maxSamplerDescriptorBufferRange} field. */
         @NativeType("VkDeviceSize")
         public long maxSamplerDescriptorBufferRange() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nmaxSamplerDescriptorBufferRange(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#maxResourceDescriptorBufferRange} field. */
+        /** @return the value of the {@code maxResourceDescriptorBufferRange} field. */
         @NativeType("VkDeviceSize")
         public long maxResourceDescriptorBufferRange() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nmaxResourceDescriptorBufferRange(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#samplerDescriptorBufferAddressSpaceSize} field. */
+        /** @return the value of the {@code samplerDescriptorBufferAddressSpaceSize} field. */
         @NativeType("VkDeviceSize")
         public long samplerDescriptorBufferAddressSpaceSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nsamplerDescriptorBufferAddressSpaceSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#resourceDescriptorBufferAddressSpaceSize} field. */
+        /** @return the value of the {@code resourceDescriptorBufferAddressSpaceSize} field. */
         @NativeType("VkDeviceSize")
         public long resourceDescriptorBufferAddressSpaceSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.nresourceDescriptorBufferAddressSpaceSize(address()); }
-        /** @return the value of the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#descriptorBufferAddressSpaceSize} field. */
+        /** @return the value of the {@code descriptorBufferAddressSpaceSize} field. */
         @NativeType("VkDeviceSize")
         public long descriptorBufferAddressSpaceSize() { return VkPhysicalDeviceDescriptorBufferPropertiesEXT.ndescriptorBufferAddressSpaceSize(address()); }
 
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorBufferPropertiesEXT.Buffer sType(@NativeType("VkStructureType") int value) { VkPhysicalDeviceDescriptorBufferPropertiesEXT.nsType(address(), value); return this; }
-        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT} value to the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#sType} field. */
+        /** Sets the {@link EXTDescriptorBuffer#VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT} value to the {@code sType} field. */
         public VkPhysicalDeviceDescriptorBufferPropertiesEXT.Buffer sType$Default() { return sType(EXTDescriptorBuffer.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT); }
-        /** Sets the specified value to the {@link VkPhysicalDeviceDescriptorBufferPropertiesEXT#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkPhysicalDeviceDescriptorBufferPropertiesEXT.Buffer pNext(@NativeType("void *") long value) { VkPhysicalDeviceDescriptorBufferPropertiesEXT.npNext(address(), value); return this; }
 
     }

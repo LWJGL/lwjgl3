@@ -16,15 +16,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct FSBANK_PROGRESSITEM {
  *     int subSoundIndex;
  *     int threadIndex;
  *     FSBANK_STATE state;
  *     void const * stateData;
- * }</code></pre>
+ * }}</pre>
  */
 public class FSBANK_PROGRESSITEM extends Struct<FSBANK_PROGRESSITEM> implements NativeResource {
 

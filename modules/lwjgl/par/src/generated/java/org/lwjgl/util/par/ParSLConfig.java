@@ -16,20 +16,16 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Immutable configuration for a streamlines context.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct parsl_config {
  *     float thickness;
- *     uint32_t {@link #flags};
- *     int {@link #u_mode};
+ *     uint32_t flags;
+ *     int u_mode;
  *     float curves_max_flatness;
  *     float streamlines_seed_spacing;
  *     {@link ParSLViewport parsl_viewport} streamlines_seed_viewport;
  *     float miter_limit;
- * }</code></pre>
+ * }}</pre>
  */
 @NativeType("struct parsl_config")
 public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
@@ -97,10 +93,10 @@ public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
 
     /** @return the value of the {@code thickness} field. */
     public float thickness() { return nthickness(address()); }
-    /** one or more of:<br><table><tr><td>{@link ParStreamlines#PARSL_FLAG_WIREFRAME FLAG_WIREFRAME}</td><td>{@link ParStreamlines#PARSL_FLAG_ANNOTATIONS FLAG_ANNOTATIONS}</td><td>{@link ParStreamlines#PARSL_FLAG_SPINE_LENGTHS FLAG_SPINE_LENGTHS}</td><td>{@link ParStreamlines#PARSL_FLAG_RANDOM_OFFSETS FLAG_RANDOM_OFFSETS}</td></tr><tr><td>{@link ParStreamlines#PARSL_FLAG_CURVE_GUIPARSL_FLAG_DES FLAG_CURVE_GUIPARSL_FLAG_DES}</td></tr></table> */
+    /** @return the value of the {@code flags} field. */
     @NativeType("uint32_t")
     public int flags() { return nflags(address()); }
-    /** one of:<br><table><tr><td>{@link ParStreamlines#PAR_U_MODE_NORMALIZED_DISTANCE}</td><td>{@link ParStreamlines#PAR_U_MODE_DISTANCE}</td><td>{@link ParStreamlines#PAR_U_MODE_SEGMENT_INDEX}</td></tr><tr><td>{@link ParStreamlines#PAR_U_MODE_SEGMENT_FRACTION}</td></tr></table> */
+    /** @return the value of the {@code u_mode} field. */
     public int u_mode() { return nu_mode(address()); }
     /** @return the value of the {@code curves_max_flatness} field. */
     public float curves_max_flatness() { return ncurves_max_flatness(address()); }
@@ -114,9 +110,9 @@ public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
 
     /** Sets the specified value to the {@code thickness} field. */
     public ParSLConfig thickness(float value) { nthickness(address(), value); return this; }
-    /** Sets the specified value to the {@link #flags} field. */
+    /** Sets the specified value to the {@code flags} field. */
     public ParSLConfig flags(@NativeType("uint32_t") int value) { nflags(address(), value); return this; }
-    /** Sets the specified value to the {@link #u_mode} field. */
+    /** Sets the specified value to the {@code u_mode} field. */
     public ParSLConfig u_mode(int value) { nu_mode(address(), value); return this; }
     /** Sets the specified value to the {@code curves_max_flatness} field. */
     public ParSLConfig curves_max_flatness(float value) { ncurves_max_flatness(address(), value); return this; }
@@ -367,10 +363,10 @@ public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
 
         /** @return the value of the {@code thickness} field. */
         public float thickness() { return ParSLConfig.nthickness(address()); }
-        /** @return the value of the {@link ParSLConfig#flags} field. */
+        /** @return the value of the {@code flags} field. */
         @NativeType("uint32_t")
         public int flags() { return ParSLConfig.nflags(address()); }
-        /** @return the value of the {@link ParSLConfig#u_mode} field. */
+        /** @return the value of the {@code u_mode} field. */
         public int u_mode() { return ParSLConfig.nu_mode(address()); }
         /** @return the value of the {@code curves_max_flatness} field. */
         public float curves_max_flatness() { return ParSLConfig.ncurves_max_flatness(address()); }
@@ -384,9 +380,9 @@ public class ParSLConfig extends Struct<ParSLConfig> implements NativeResource {
 
         /** Sets the specified value to the {@code thickness} field. */
         public ParSLConfig.Buffer thickness(float value) { ParSLConfig.nthickness(address(), value); return this; }
-        /** Sets the specified value to the {@link ParSLConfig#flags} field. */
+        /** Sets the specified value to the {@code flags} field. */
         public ParSLConfig.Buffer flags(@NativeType("uint32_t") int value) { ParSLConfig.nflags(address(), value); return this; }
-        /** Sets the specified value to the {@link ParSLConfig#u_mode} field. */
+        /** Sets the specified value to the {@code u_mode} field. */
         public ParSLConfig.Buffer u_mode(int value) { ParSLConfig.nu_mode(address(), value); return this; }
         /** Sets the specified value to the {@code curves_max_flatness} field. */
         public ParSLConfig.Buffer curves_max_flatness(float value) { ParSLConfig.ncurves_max_flatness(address(), value); return this; }

@@ -17,38 +17,13 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Specify the data source to create the hand tracker.
- * 
- * <h5>Description</h5>
- * 
- * <p>The {@link XrHandTrackingDataSourceInfoEXT} is a structure that an application <b>can</b> chain to {@link XrHandTrackerCreateInfoEXT}{@code ::next} to specify the hand tracking data sources that the application accepts.</p>
- * 
- * <p>Because the hand tracking device <b>may</b> change during a running session, the runtime <b>may</b> return a valid {@code XrHandTrackerEXT} handle even if there is no currently active hand tracking device or the active device does not safisty any or all data sources requested by the applications’s call to {@link EXTHandTracking#xrCreateHandTrackerEXT CreateHandTrackerEXT}. The runtime <b>may</b> instead return {@link XR10#XR_ERROR_FEATURE_UNSUPPORTED ERROR_FEATURE_UNSUPPORTED} from {@link EXTHandTracking#xrCreateHandTrackerEXT CreateHandTrackerEXT}, if for example the runtime believes it will never be able to satisfy the request.</p>
- * 
- * <p>If any value in {@code requestedDataSources} is duplicated, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} from the call to {@link EXTHandTracking#xrCreateHandTrackerEXT CreateHandTrackerEXT}. If {@code requestedDataSourceCount} is 0, the runtime <b>must</b> return {@link XR10#XR_ERROR_VALIDATION_FAILURE ERROR_VALIDATION_FAILURE} from the call to {@link EXTHandTracking#xrCreateHandTrackerEXT CreateHandTrackerEXT}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link EXTHandTrackingDataSource XR_EXT_hand_tracking_data_source} extension <b>must</b> be enabled prior to using {@link XrHandTrackingDataSourceInfoEXT}</li>
- * <li>{@code type} <b>must</b> be {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>If {@code requestedDataSourceCount} is not 0, {@code requestedDataSources} <b>must</b> be a pointer to an array of {@code requestedDataSourceCount} {@code XrHandTrackingDataSourceEXT} values</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrHandTrackerCreateInfoEXT}, {@link EXTHandTracking#xrCreateHandTrackerEXT CreateHandTrackerEXT}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrHandTrackingDataSourceInfoEXT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     uint32_t {@link #requestedDataSourceCount};
- *     XrHandTrackingDataSourceEXT * {@link #requestedDataSources};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     uint32_t requestedDataSourceCount;
+ *     XrHandTrackingDataSourceEXT * requestedDataSources;
+ * }}</pre>
  */
 public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSourceInfoEXT> implements NativeResource {
 
@@ -104,26 +79,26 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the number of elements in the {@code requestedDataSources} array. */
+    /** @return the value of the {@code requestedDataSourceCount} field. */
     @NativeType("uint32_t")
     public int requestedDataSourceCount() { return nrequestedDataSourceCount(address()); }
-    /** an array of {@code XrHandTrackingDataSourceEXT} that the application accepts. */
+    /** @return a {@link IntBuffer} view of the data pointed to by the {@code requestedDataSources} field. */
     @NativeType("XrHandTrackingDataSourceEXT *")
     public @Nullable IntBuffer requestedDataSources() { return nrequestedDataSources(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrHandTrackingDataSourceInfoEXT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT} value to the {@link #type} field. */
+    /** Sets the {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT} value to the {@code type} field. */
     public XrHandTrackingDataSourceInfoEXT type$Default() { return type(EXTHandTrackingDataSource.XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrHandTrackingDataSourceInfoEXT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the address of the specified {@link IntBuffer} to the {@link #requestedDataSources} field. */
+    /** Sets the address of the specified {@link IntBuffer} to the {@code requestedDataSources} field. */
     public XrHandTrackingDataSourceInfoEXT requestedDataSources(@Nullable @NativeType("XrHandTrackingDataSourceEXT *") IntBuffer value) { nrequestedDataSources(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -334,26 +309,26 @@ public class XrHandTrackingDataSourceInfoEXT extends Struct<XrHandTrackingDataSo
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrHandTrackingDataSourceInfoEXT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrHandTrackingDataSourceInfoEXT.ntype(address()); }
-        /** @return the value of the {@link XrHandTrackingDataSourceInfoEXT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrHandTrackingDataSourceInfoEXT.nnext(address()); }
-        /** @return the value of the {@link XrHandTrackingDataSourceInfoEXT#requestedDataSourceCount} field. */
+        /** @return the value of the {@code requestedDataSourceCount} field. */
         @NativeType("uint32_t")
         public int requestedDataSourceCount() { return XrHandTrackingDataSourceInfoEXT.nrequestedDataSourceCount(address()); }
-        /** @return a {@link IntBuffer} view of the data pointed to by the {@link XrHandTrackingDataSourceInfoEXT#requestedDataSources} field. */
+        /** @return a {@link IntBuffer} view of the data pointed to by the {@code requestedDataSources} field. */
         @NativeType("XrHandTrackingDataSourceEXT *")
         public @Nullable IntBuffer requestedDataSources() { return XrHandTrackingDataSourceInfoEXT.nrequestedDataSources(address()); }
 
-        /** Sets the specified value to the {@link XrHandTrackingDataSourceInfoEXT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrHandTrackingDataSourceInfoEXT.Buffer type(@NativeType("XrStructureType") int value) { XrHandTrackingDataSourceInfoEXT.ntype(address(), value); return this; }
-        /** Sets the {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT} value to the {@link XrHandTrackingDataSourceInfoEXT#type} field. */
+        /** Sets the {@link EXTHandTrackingDataSource#XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT} value to the {@code type} field. */
         public XrHandTrackingDataSourceInfoEXT.Buffer type$Default() { return type(EXTHandTrackingDataSource.XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT); }
-        /** Sets the specified value to the {@link XrHandTrackingDataSourceInfoEXT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrHandTrackingDataSourceInfoEXT.Buffer next(@NativeType("void const *") long value) { XrHandTrackingDataSourceInfoEXT.nnext(address(), value); return this; }
-        /** Sets the address of the specified {@link IntBuffer} to the {@link XrHandTrackingDataSourceInfoEXT#requestedDataSources} field. */
+        /** Sets the address of the specified {@link IntBuffer} to the {@code requestedDataSources} field. */
         public XrHandTrackingDataSourceInfoEXT.Buffer requestedDataSources(@Nullable @NativeType("XrHandTrackingDataSourceEXT *") IntBuffer value) { XrHandTrackingDataSourceInfoEXT.nrequestedDataSources(address(), value); return this; }
 
     }

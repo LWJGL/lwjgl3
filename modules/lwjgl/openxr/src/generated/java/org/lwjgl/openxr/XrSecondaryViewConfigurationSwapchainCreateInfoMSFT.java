@@ -16,35 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Hint to runtime that the created swapchain image will be used for given secondary view configuration.
- * 
- * <h5>Description</h5>
- * 
- * <p>If this structure is not present in the {@link XrSwapchainCreateInfo} next chain when calling {@link XR10#xrCreateSwapchain CreateSwapchain}, the runtime <b>should</b> optimize the created swapchain for the primary view configuration of the session.</p>
- * 
- * <p>If the application submits a swapchain image created with one view configuration type to a composition layer for another view configuration, the runtime <b>may</b> need to copy the resource across view configurations. However, the runtime <b>must</b> correctly compose the image regardless which view configuration type was hinted when swapchain image was created.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>The {@link MSFTSecondaryViewConfiguration XR_MSFT_secondary_view_configuration} extension <b>must</b> be enabled prior to using {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT}</li>
- * <li>{@code type} <b>must</b> be {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT}</li>
- * <li>{@code next} <b>must</b> be {@code NULL} or a valid pointer to the <a href="https://registry.khronos.org/OpenXR/specs/1.0/html/xrspec.html#valid-usage-for-structure-pointer-chains">next structure in a structure chain</a></li>
- * <li>{@code viewConfigurationType} <b>must</b> be a valid {@code XrViewConfigurationType} value</li>
- * </ul>
- * 
- * <h5>See Also</h5>
- * 
- * <p>{@link XrSwapchainCreateInfo}</p>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct XrSecondaryViewConfigurationSwapchainCreateInfoMSFT {
- *     XrStructureType {@link #type};
- *     void const * {@link #next};
- *     XrViewConfigurationType {@link #viewConfigurationType};
- * }</code></pre>
+ *     XrStructureType type;
+ *     void const * next;
+ *     XrViewConfigurationType viewConfigurationType;
+ * }}</pre>
  */
 public class XrSecondaryViewConfigurationSwapchainCreateInfoMSFT extends Struct<XrSecondaryViewConfigurationSwapchainCreateInfoMSFT> implements NativeResource {
 
@@ -97,23 +74,23 @@ public class XrSecondaryViewConfigurationSwapchainCreateInfoMSFT extends Struct<
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** the {@code XrStructureType} of this structure. */
+    /** @return the value of the {@code type} field. */
     @NativeType("XrStructureType")
     public int type() { return ntype(address()); }
-    /** {@code NULL} or a pointer to the next structure in a structure chain. No such structures are defined in core OpenXR or this extension. */
+    /** @return the value of the {@code next} field. */
     @NativeType("void const *")
     public long next() { return nnext(address()); }
-    /** the secondary view configuration type the application is intending to use this swapchain for. */
+    /** @return the value of the {@code viewConfigurationType} field. */
     @NativeType("XrViewConfigurationType")
     public int viewConfigurationType() { return nviewConfigurationType(address()); }
 
-    /** Sets the specified value to the {@link #type} field. */
+    /** Sets the specified value to the {@code type} field. */
     public XrSecondaryViewConfigurationSwapchainCreateInfoMSFT type(@NativeType("XrStructureType") int value) { ntype(address(), value); return this; }
-    /** Sets the {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT} value to the {@link #type} field. */
+    /** Sets the {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT} value to the {@code type} field. */
     public XrSecondaryViewConfigurationSwapchainCreateInfoMSFT type$Default() { return type(MSFTSecondaryViewConfiguration.XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT); }
-    /** Sets the specified value to the {@link #next} field. */
+    /** Sets the specified value to the {@code next} field. */
     public XrSecondaryViewConfigurationSwapchainCreateInfoMSFT next(@NativeType("void const *") long value) { nnext(address(), value); return this; }
-    /** Sets the specified value to the {@link #viewConfigurationType} field. */
+    /** Sets the specified value to the {@code viewConfigurationType} field. */
     public XrSecondaryViewConfigurationSwapchainCreateInfoMSFT viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { nviewConfigurationType(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -309,23 +286,23 @@ public class XrSecondaryViewConfigurationSwapchainCreateInfoMSFT extends Struct<
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT#type} field. */
+        /** @return the value of the {@code type} field. */
         @NativeType("XrStructureType")
         public int type() { return XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.ntype(address()); }
-        /** @return the value of the {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT#next} field. */
+        /** @return the value of the {@code next} field. */
         @NativeType("void const *")
         public long next() { return XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.nnext(address()); }
-        /** @return the value of the {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT#viewConfigurationType} field. */
+        /** @return the value of the {@code viewConfigurationType} field. */
         @NativeType("XrViewConfigurationType")
         public int viewConfigurationType() { return XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.nviewConfigurationType(address()); }
 
-        /** Sets the specified value to the {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT#type} field. */
+        /** Sets the specified value to the {@code type} field. */
         public XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.Buffer type(@NativeType("XrStructureType") int value) { XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.ntype(address(), value); return this; }
-        /** Sets the {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT} value to the {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT#type} field. */
+        /** Sets the {@link MSFTSecondaryViewConfiguration#XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT} value to the {@code type} field. */
         public XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.Buffer type$Default() { return type(MSFTSecondaryViewConfiguration.XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT); }
-        /** Sets the specified value to the {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT#next} field. */
+        /** Sets the specified value to the {@code next} field. */
         public XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.Buffer next(@NativeType("void const *") long value) { XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.nnext(address(), value); return this; }
-        /** Sets the specified value to the {@link XrSecondaryViewConfigurationSwapchainCreateInfoMSFT#viewConfigurationType} field. */
+        /** Sets the specified value to the {@code viewConfigurationType} field. */
         public XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.Buffer viewConfigurationType(@NativeType("XrViewConfigurationType") int value) { XrSecondaryViewConfigurationSwapchainCreateInfoMSFT.nviewConfigurationType(address(), value); return this; }
 
     }

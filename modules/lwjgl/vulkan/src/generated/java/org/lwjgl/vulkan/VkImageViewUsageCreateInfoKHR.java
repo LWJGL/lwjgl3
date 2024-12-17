@@ -16,16 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * See {@link VkImageViewUsageCreateInfo}.
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkImageViewUsageCreateInfoKHR {
  *     VkStructureType sType;
  *     void const * pNext;
  *     VkImageUsageFlags usage;
- * }</code></pre>
+ * }}</pre>
  */
 public class VkImageViewUsageCreateInfoKHR extends VkImageViewUsageCreateInfo {
 

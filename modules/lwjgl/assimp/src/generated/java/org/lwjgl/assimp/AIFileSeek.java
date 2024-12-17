@@ -11,16 +11,7 @@ import org.lwjgl.system.*;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * <h3>Type</h3>
- * 
- * <pre><code>
- * aiReturn (*{@link #invoke}) (
- *     struct aiFile *pFile,
- *     size_t offset,
- *     aiOrigin origin
- * )</code></pre>
- */
+/** Callback function: {@link #invoke aiFileSeek} */
 public abstract class AIFileSeek extends Callback implements AIFileSeekI {
 
     /**

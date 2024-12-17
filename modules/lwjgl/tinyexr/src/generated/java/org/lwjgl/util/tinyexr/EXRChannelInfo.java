@@ -17,9 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct EXRChannelInfo {
  *     char name[256];
  *     int pixel_type;
@@ -27,7 +25,7 @@ import static org.lwjgl.system.MemoryStack.*;
  *     int y_sampling;
  *     unsigned char p_linear;
  *     char[3];
- * }</code></pre>
+ * }}</pre>
  */
 public class EXRChannelInfo extends Struct<EXRChannelInfo> implements NativeResource {
 

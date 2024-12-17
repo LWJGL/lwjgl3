@@ -16,29 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.MemoryStack.*;
 
 /**
- * Structure specifying sampler reduction mode.
- * 
- * <h5>Description</h5>
- * 
- * <p>If the {@code pNext} chain of {@link VkSamplerCreateInfo} includes a {@link VkSamplerReductionModeCreateInfo} structure, then that structure includes a mode controlling how texture filtering combines texel values.</p>
- * 
- * <p>If this structure is not present, {@code reductionMode} is considered to be {@link VK12#VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE}.</p>
- * 
- * <h5>Valid Usage (Implicit)</h5>
- * 
- * <ul>
- * <li>{@code sType} <b>must</b> be {@link VK12#VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO}</li>
- * <li>{@code reductionMode} <b>must</b> be a valid {@code VkSamplerReductionMode} value</li>
- * </ul>
- * 
- * <h3>Layout</h3>
- * 
- * <pre><code>
+ * <pre>{@code
  * struct VkSamplerReductionModeCreateInfo {
- *     VkStructureType {@link #sType};
- *     void const * {@link #pNext};
- *     VkSamplerReductionMode {@link #reductionMode};
- * }</code></pre>
+ *     VkStructureType sType;
+ *     void const * pNext;
+ *     VkSamplerReductionMode reductionMode;
+ * }}</pre>
  */
 public class VkSamplerReductionModeCreateInfo extends Struct<VkSamplerReductionModeCreateInfo> implements NativeResource {
 
@@ -91,23 +74,23 @@ public class VkSamplerReductionModeCreateInfo extends Struct<VkSamplerReductionM
     @Override
     public int sizeof() { return SIZEOF; }
 
-    /** a {@code VkStructureType} value identifying this structure. */
+    /** @return the value of the {@code sType} field. */
     @NativeType("VkStructureType")
     public int sType() { return nsType(address()); }
-    /** {@code NULL} or a pointer to a structure extending this structure. */
+    /** @return the value of the {@code pNext} field. */
     @NativeType("void const *")
     public long pNext() { return npNext(address()); }
-    /** a {@code VkSamplerReductionMode} value controlling how texture filtering combines texel values. */
+    /** @return the value of the {@code reductionMode} field. */
     @NativeType("VkSamplerReductionMode")
     public int reductionMode() { return nreductionMode(address()); }
 
-    /** Sets the specified value to the {@link #sType} field. */
+    /** Sets the specified value to the {@code sType} field. */
     public VkSamplerReductionModeCreateInfo sType(@NativeType("VkStructureType") int value) { nsType(address(), value); return this; }
-    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO} value to the {@link #sType} field. */
+    /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO} value to the {@code sType} field. */
     public VkSamplerReductionModeCreateInfo sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO); }
-    /** Sets the specified value to the {@link #pNext} field. */
+    /** Sets the specified value to the {@code pNext} field. */
     public VkSamplerReductionModeCreateInfo pNext(@NativeType("void const *") long value) { npNext(address(), value); return this; }
-    /** Sets the specified value to the {@link #reductionMode} field. */
+    /** Sets the specified value to the {@code reductionMode} field. */
     public VkSamplerReductionModeCreateInfo reductionMode(@NativeType("VkSamplerReductionMode") int value) { nreductionMode(address(), value); return this; }
 
     /** Initializes this struct with the specified values. */
@@ -303,23 +286,23 @@ public class VkSamplerReductionModeCreateInfo extends Struct<VkSamplerReductionM
             return ELEMENT_FACTORY;
         }
 
-        /** @return the value of the {@link VkSamplerReductionModeCreateInfo#sType} field. */
+        /** @return the value of the {@code sType} field. */
         @NativeType("VkStructureType")
         public int sType() { return VkSamplerReductionModeCreateInfo.nsType(address()); }
-        /** @return the value of the {@link VkSamplerReductionModeCreateInfo#pNext} field. */
+        /** @return the value of the {@code pNext} field. */
         @NativeType("void const *")
         public long pNext() { return VkSamplerReductionModeCreateInfo.npNext(address()); }
-        /** @return the value of the {@link VkSamplerReductionModeCreateInfo#reductionMode} field. */
+        /** @return the value of the {@code reductionMode} field. */
         @NativeType("VkSamplerReductionMode")
         public int reductionMode() { return VkSamplerReductionModeCreateInfo.nreductionMode(address()); }
 
-        /** Sets the specified value to the {@link VkSamplerReductionModeCreateInfo#sType} field. */
+        /** Sets the specified value to the {@code sType} field. */
         public VkSamplerReductionModeCreateInfo.Buffer sType(@NativeType("VkStructureType") int value) { VkSamplerReductionModeCreateInfo.nsType(address(), value); return this; }
-        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO} value to the {@link VkSamplerReductionModeCreateInfo#sType} field. */
+        /** Sets the {@link VK12#VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO} value to the {@code sType} field. */
         public VkSamplerReductionModeCreateInfo.Buffer sType$Default() { return sType(VK12.VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO); }
-        /** Sets the specified value to the {@link VkSamplerReductionModeCreateInfo#pNext} field. */
+        /** Sets the specified value to the {@code pNext} field. */
         public VkSamplerReductionModeCreateInfo.Buffer pNext(@NativeType("void const *") long value) { VkSamplerReductionModeCreateInfo.npNext(address(), value); return this; }
-        /** Sets the specified value to the {@link VkSamplerReductionModeCreateInfo#reductionMode} field. */
+        /** Sets the specified value to the {@code reductionMode} field. */
         public VkSamplerReductionModeCreateInfo.Buffer reductionMode(@NativeType("VkSamplerReductionMode") int value) { VkSamplerReductionModeCreateInfo.nreductionMode(address(), value); return this; }
 
     }
